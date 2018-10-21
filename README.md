@@ -1,5 +1,7 @@
 # Lumiary
 
+#### React SPA for Lumiere
+
 ####React/client source is at:
   src/client
 
