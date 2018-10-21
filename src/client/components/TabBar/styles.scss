@@ -1,0 +1,40 @@
+.tabBar {
+  margin-bottom: 40px;
+}
+
+:global {
+  .react-tabs {
+    .react-tabs__tab-list {
+      display: flex;
+      justify-content: space-evenly;
+      height: 48px;
+      align-items: center;
+      background-color: $color-neutral-charcoal;
+
+      .react-tabs__tab {
+        color: $color-neutral-medium-grey;
+        cursor:pointer;
+
+        &.react-tabs__tab--selected{
+          color: white;
+        }
+      }
+    }
+  }
+
+  .panel {
+    li.section {
+      //height: 200px;
+      border: 1px solid $color-neutral-sterling-grey;
+      border-top: none;
+      padding: 48px;
+      cursor: pointer;
+      min-height: 180px;
+      height: auto;
+
+      h3 {
+        color: $color-neutral-charcoal;
+      }
+    }
+  }
+}

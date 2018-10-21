@@ -1,0 +1,57 @@
+$large-grid: (
+  columns: 12,
+  gutter: 30px,
+  media: 1024px
+);
+
+$medium-grid: (
+  columns: 12,
+  gutter: 30px,
+  media: 768px
+);
+
+$xlarge-grid:(
+  columns: 12,
+  gutter: 30px,
+  media: 1440px
+);
+
+// breakpoint values (e.g. $breakpointxsmall) imported from webpack config file
+$xsmall-breakpoint: $breakpointxsmall;
+$small-breakpoint:  $breakpointsmall;
+$medium-breakpoint: $breakpointmedium;
+$large-breakpoint:  $breakpointlarge;
+$xlarge-breakpoint: $breakpointxlarge;
+$slarge-breakpoint: $breakpointslarge;
+
+$screen: "only screen";
+
+$landscape: "#{$screen} and (orientation: landscape)";
+$portrait: "#{$screen} and (orientation: portrait)";
+
+$xsmall-up:   "#{$screen} and (min-width: #{$xsmall-breakpoint}px)";
+$xsmall-only: "#{$screen} and (min-width: #{$xsmall-breakpoint}px) and (max-width: #{$small-breakpoint - 1}px)";
+
+$small-up:   "#{$screen} and (min-width: #{$small-breakpoint}px)";
+$small-only: "#{$screen} and (min-width: #{$small-breakpoint}px) and (max-width: #{$medium-breakpoint - 1}px)";
+
+$medium-below: "#{$screen} and (max-width: #{$medium-breakpoint - 1}px)";
+$medium-up:   "#{$screen} and (min-width: #{$medium-breakpoint}px)";
+$medium-only: "#{$screen} and (min-width: #{$medium-breakpoint}px) and (max-width: #{$large-breakpoint - 1}px)";
+
+$large-up:    "#{$screen} and (min-width: #{$large-breakpoint}px)";
+$large-only:  "#{$screen} and (min-width: #{$large-breakpoint}px) and (max-width: #{$xlarge-breakpoint - 1})";
+
+$xlarge-up:   "#{$screen} and (min-width: #{$xlarge-breakpoint}px)";
+$xlarge-only: "#{$screen} and (min-width: #{$xlarge-breakpoint}px) and (max-width: #{$slarge-breakpoint - 1})";
+
+$slarge-up:   "#{$screen} and (min-width: #{$slarge-breakpoint}px)";
+
+$retina: (
+ "#{$screen} and (-webkit-min-device-pixel-ratio: 2)",
+ "#{$screen} and (min--moz-device-pixel-ratio: 2)",
+ "#{$screen} and (-o-min-device-pixel-ratio: 2/1)",
+ "#{$screen} and (min-device-pixel-ratio: 2)",
+ "#{$screen} and (min-resolution: 192dpi)",
+ "#{$screen} and (min-resolution: 2dppx)"
+);

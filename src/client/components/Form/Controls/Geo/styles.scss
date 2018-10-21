@@ -1,0 +1,41 @@
+.geoWrapper {
+  position: relative;
+  input {
+    padding-right: 40px;
+  }
+}
+.geo {
+  display: block;
+  position: absolute;
+  right: 16px;
+  top: 5px;
+  bottom: 0;
+  height: 24px;
+  margin: auto;
+  cursor: pointer;
+
+  &:hover {
+    &:after {
+      color: $color-primary-electric-yellow;
+    }
+  }
+
+  &:after {
+    @include transition(0.2s linear);
+    font-family: $font-family-icons;
+    color: $color-neutral-sterling-grey;
+    content: "\E062";
+    font-size: 24px;
+    display: inline-block;
+  }
+}
+
+.creator {
+  .geo {
+    &:hover {
+      &:after {
+        color: $color-primary-electric-blue;
+      }
+    }
+  }
+}

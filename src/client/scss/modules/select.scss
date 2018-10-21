@@ -1,0 +1,52 @@
+.select {
+
+	&.is-focused{
+		.Select-control {
+
+			box-shadow: none;
+			border-color: $color-neutral-medium-grey;
+		}
+	}
+	.Select-control {
+		border-left: none;
+		border-right: none;
+		border-top: none;
+		border-radius: 0;
+		border-color: $color-neutral-medium-grey;
+
+		.select-icon {
+
+			&:before {
+				font-size: 10px;
+				font-family: $font-family-qf-icons;
+				color: $color-accent-mango;
+				content: "\e916";
+			}
+
+			&:hover {
+				&:before {
+					color: rgba($color-accent-mango, 0.8);
+				}
+			}
+		}
+
+		@at-root {
+			.filter-option {
+				font-weight: normal;
+				color: $color-neutral-charcoal;
+				font-size: 15px;
+
+				&.is-selected {
+					font-family: $font-family-sans-serif-bold;
+					background-color: $color-neutral-white;
+				}
+
+				&.is-focused {
+					//color: red;
+					font-weight: 300;
+					background-color: $color-neutral-pearl-grey;
+				}
+			}
+		}
+	}
+}

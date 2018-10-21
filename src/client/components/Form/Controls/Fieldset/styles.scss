@@ -1,0 +1,16 @@
+fieldset {
+  @include clearfix;
+
+  position: relative;
+  z-index: 100;
+
+
+  @media #{$large-up}{
+    max-width: 640px;
+    margin: 20px auto 0;
+  }
+}
+
+
+
+

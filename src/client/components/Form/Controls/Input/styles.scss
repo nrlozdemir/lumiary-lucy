@@ -1,0 +1,29 @@
+
+.error {
+  @include position(absolute, null 0 -15px null );
+  color: red;
+  text-align: right;
+  display: block;
+  font-size: 12px;
+  font-family: $font-family-sans-serif-bold;
+}
+
+.counter {
+  position: absolute;
+  right: 0;
+  bottom: -20px;
+  &.padded {
+    right: 0;
+    bottom: -16px;
+  }
+  color: $color-accent-purple;
+  font-size: 12px;
+}
+
+.withCounter {
+  .error {
+    right: 32px;
+  }
+}
+
+

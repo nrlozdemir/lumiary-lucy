@@ -1,0 +1,52 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.11
+        environment:
+          PORT: 9000
+          NODE_ENV: development
+          API_ROOT: https://api-local.quickframe.com:8080
+          API_VERSION: v1
+          MEDIA_URL: https://s3.amazonaws.com/quickframe-media-dev/
+          STATIC_URL: https://s3.amazonaws.com/quickframe-static-dev/
+          AWS_ACCESS_KEY_ID: AKIAIILRAYHRCIOFIR4Q
+          AWS_SECRET_ACCESS_KEY: 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
+          AWS_DEFAULT_REGION: us-east-1
+          BASENAME: /
+          REDIS_HOST: redis
+      - image: redis
+    steps:
+
+      - checkout
+
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - lum-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - lum-dependencies-
+
+      - run: npm install
+
+      - save_cache:
+          paths:
+            - node_modules
+          key: lum-dependencies-{{ checksum "package.json" }}
+
+      - run:
+          name: Setup Code Climate test-reporter
+          command: |
+            curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+            chmod +x ./cc-test-reporter
+
+      # run tests
+      - run: npm test
+
+      # Send test coverage to Code Climate
+      - run: ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $?
+
+      # stats for circleci
+      - store_test_results:
+          path: src/test-results
+

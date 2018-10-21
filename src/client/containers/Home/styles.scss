@@ -1,0 +1,7 @@
+//variable injected via webpack/config
+$s3_static: $staticUrl;
+
+.homepage {
+	opacity: 1;
+	transition: opacity 0.3s linear;
+}

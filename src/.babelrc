@@ -1,0 +1,21 @@
+{
+  "presets": ["env", "react", "stage-2"],
+  "plugins": [
+    "react-hot-loader/babel",
+    "syntax-dynamic-import",
+    "transform-object-rest-spread",
+    ["module-resolver", {
+      "root": "../",
+      "cwd": "babelrc",
+      "alias": {
+        "Components": "./client/components",
+        "Utils": "./client/utils",
+        "Scss": "./client/scss",
+        "Reducers": "./client/reducers",
+        "Sagas": "./client/sagas",
+        "Json": "./client/json"
+      }
+    }]
+
+  ]
+}

@@ -1,0 +1,38 @@
+.bannerContent {
+  background: $color-accent-purple;
+  color: $color-neutral-white;
+  text-align: center;
+  position: relative;
+  height: 48px;
+  line-height: 48px;
+  @include transition(0.3s height);
+}
+
+.bannerContent.hide {
+  height: 0;
+}
+
+.banner.bottom {
+  .bannerContent {
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    z-index: 9;
+  }
+}
+
+.closeButton {
+  position: absolute;
+  color: $color-neutral-white;
+  top: 0;
+  bottom: 0;
+  right: 24px;
+  margin: auto;
+  cursor: pointer;
+  &:after {
+    font-family: $font-family-qf-icons;
+    content: "\e928";
+    font-size: 14px;;
+  }
+}

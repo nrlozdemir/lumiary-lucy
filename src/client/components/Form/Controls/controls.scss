@@ -1,0 +1,43 @@
+
+
+input[type="color"], input[type="date"],
+input[type="datetime"], input[type="datetime-local"],
+input[type="email"], input[type="month"], input[type="number"],
+input[type="password"], input[type="tel"], input[type="text"],
+input[type="time"], input[type="url"], input[type="week"], input:not([type]),
+textarea  {
+  //@extend .input;
+
+  border-radius: 2px;
+  border: 1px solid $color-neutral-sterling-grey;
+
+  &:focus {
+    .invalid & {
+      border: none;
+    }
+    border: 1px solid $color-neutral-sterling-grey;
+  }
+
+  .homepage & {
+    color: white;
+    background-color: black;
+  }
+}
+
+
+
+.async-validating {
+  &:after {
+    font-family: $font-family-icons;
+    font-size: 25px;
+    content:"\e030";
+    display: inline-block;
+    color: $color-neutral-sterling-grey;
+    position: absolute;
+    right: 30px;
+    top: 60px;
+    @include animation(spin 1000ms infinite linear);
+  }
+}
+
+

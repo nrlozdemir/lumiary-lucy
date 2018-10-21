@@ -1,0 +1,64 @@
+:global {
+  input {
+    @include size(100% 60px);
+    @include padding(10px 20px);
+
+    caret-color: $color-neutral-medium-grey;
+    font-size: 16px;
+    color: $color-neutral-charcoal;
+    outline: none;
+    border: 1px solid $color-neutral-sterling-grey;
+    border-radius: 2px;
+
+    @include placeholder {
+      color: $color-neutral-sterling-grey;
+    }
+
+
+    .invalid & {
+      outline: 1px solid red;
+      border: none;
+    }
+
+    @media #{$medium-up} {
+      @include size(100% 56px);
+
+      font-size: 16px;
+      padding-left: 30px;
+      border-radius: 2px;
+      padding: 18px 24px;
+    }
+
+    &:focus {
+      border-color: $color-neutral-medium-grey;
+      color: $color-neutral-medium-grey;
+    }
+  }
+
+  .error {
+    @include position(relative, 3px null null null);
+
+    font-size: 10px;
+    color: red;
+    font-family: $font-family-sans-serif-bold;
+    text-align: right;
+    float: right;
+
+    @media #{$medium-up} {
+      font-size: 12px;
+    }
+  }
+
+  [type="password"] {
+    font: small-caption;
+    font-size: 15px;
+  }
+}
+
+.formContainer {
+  margin-top: 0px;
+}
+
+.padded {
+  @include padding(80px 80px 40px 80px);
+}

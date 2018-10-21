@@ -1,0 +1,16 @@
+
+form {
+  footer {
+    display: flex;
+    @include flex-direction(column);
+
+    &.center {
+      @include align-items(center);
+      @include justify-content(center);
+    }
+
+    clear: both;
+    height: auto;
+
+  }
+}

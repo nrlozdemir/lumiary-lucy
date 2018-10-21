@@ -1,0 +1,79 @@
+@import 'select.scss';
+@import 'radiobuttons.scss';
+@import 'checkboxgroup.scss';
+@import 'zones.scss';
+
+div.linkform {
+  div.textfield-list {
+    p {
+      @include padding(30px null null null);
+      text-align: center;
+      font-family: $font-family-sans-serif-bold;
+    }
+
+    .input-list-container {
+
+      ul {
+        @include grid-column(10);
+        @include grid-push(1);
+        padding-left: 0 !important;
+        max-height: 340px;
+        overflow-y: auto;
+        padding-right: 10px;
+
+
+        li {
+          position: relative;
+
+          .delete-button {
+            @include position(absolute, 50% 10px null null);
+
+            display: block;
+            @include size(20px);
+            background-color: $color-neutral-true-black;
+            border-radius: 100%;
+            text-decoration: none;
+            text-align: center;
+
+            &:after {
+              font-family: $font-family-icons;
+              content: '\e014';
+              color: white;
+            }
+
+            &:hover {
+              &:after {
+
+                color: $color-accent-mango;
+              }
+            }
+
+          }
+        }
+      }
+    }
+  }
+
+  .input-list-controls {
+    position: absolute;
+    width: 100%;
+    background-color: transparent;
+    height: 200px;
+    color: white;
+    text-align: center;
+
+    a.add-button{
+      @extend .yellow-button !optional;
+      margin-top: 30px !important;
+    }
+
+    .instructions {
+      font-size: 15px;
+      padding-top: 10px;
+      //margin-top: 10px;
+
+    }
+  }
+}
+
+

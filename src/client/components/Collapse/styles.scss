@@ -1,0 +1,59 @@
+.collapseWrapper {
+	.header {
+		padding: 18px 40px;
+		border: 1px solid $color-neutral-sterling-grey;
+    background-color: $color-neutral-pearl-grey;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+    align-items: center;
+		h2 {
+			color: $color-neutral-charcoal;
+			font-size: 16px;
+    }
+    .icon {
+      cursor: pointer;
+      position: absolute;
+      right: 16px;
+      top: 0;
+      bottom: 0;
+      margin: auto;
+      width: 16px;
+      height: 12px;
+      &:after {
+        font-family: $font-family-qf-icons;
+        content: "\e92a";
+        display: inline-block;
+        transition: transform 300ms;
+        transform: rotate(90deg);
+      }
+    }
+    .icon.closed {
+      &:after {
+        transform: rotate(270deg);
+      }
+    }
+  }
+
+  .contentInner {
+    border-bottom: 1px solid $color-neutral-sterling-grey;
+    border-left: 1px solid $color-neutral-sterling-grey;
+    border-right: 1px solid $color-neutral-sterling-grey;
+  }
+  .hasContentHeight {
+    overflow: hidden;
+    transition: max-height 0.35s ease-out;
+  }
+  .hasContentHeight.animatedContentHeight {
+    max-height: 500px !important;
+    transition: max-height 0.55s ease-in;
+  }
+  .showContentButton {
+    font-family: $font-family-sans-serif-bold;
+    color: $color-accent-mango;
+    text-align: center;
+    display: block;
+    margin: 32px auto;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,28 @@
+.breadcrumbs {
+	ul {
+		display: flex;
+		align-items: flex-start;
+		li {
+			font-size: 12px;
+			&:last-of-type {
+				padding: 0;
+			}
+			a {
+				color: $color-neutral-charcoal;
+				text-decoration: none;
+				display: flex;
+				align-items: center;
+				&:after {
+					font-family: 'Glyphicons Halflings';
+					content: "\e080";
+					font-size: 13px;
+					margin: 0 16px;
+				}
+				@include transition(0.2s linear);
+				&:hover {
+					opacity: .5;
+				}
+			}
+		}
+	}
+}

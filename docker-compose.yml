@@ -1,0 +1,42 @@
+version: "3.4"
+services:
+  node:
+    container_name: lumiary
+    build:
+      context: .
+      target: development
+
+    # command: [ "npm", "run", "vendor" ]
+
+    # Run tests:
+    # command: ["npm", "run", "test" ]
+    # command: ["npm", "run", "test:local" ]
+    # command: ["npm", "run", "test:watch" ]
+    # command: ["npm", "run", "test:coverage"]
+    # command: ["npm", "run", "test:snapshot"]
+
+    # Storybook:
+    # command: ["npm", "run", "storybook"]
+
+    ports:
+      - "9000:9000"
+      - "9090:9090"
+    volumes:
+      - .:/application
+      - /application/node_modules
+    environment:
+      - PORT=9000
+      - NODE_ENV=development
+      - API_ROOT=https://api-local.quickframe.com:8080
+      - API_VERSION=v1
+      - MEDIA_URL=https://s3.amazonaws.com/quickframe-media-dev/
+      - STATIC_URL=https://s3.amazonaws.com/quickframe-static-dev/
+      - AWS_ACCESS_KEY_ID=AKIAIILRAYHRCIOFIR4Q
+      - AWS_SECRET_ACCESS_KEY=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
+      - AWS_DEFAULT_REGION=us-east-1
+      - BASENAME=/
+      - REDIS_HOST=redis
+  redis:
+    image: redis
+    ports:
+      - "6381:6379"

@@ -1,0 +1,128 @@
+:global {
+  .ReactModal__Body--open {
+      overflow: hidden;
+  }
+}
+
+@mixin close-modal-button(
+    $color: $color-primary-electric-yellow,
+    $fontsize: 20px,
+    $left: -30px,
+    $top: 0px
+
+  ) {
+  display: block;
+  position: absolute;
+  left: $left;
+  top: $top;
+
+  // @media #{$large-up} {
+  //   left: 60px;
+  //   top: 30px;
+  // }
+
+  color: $color;
+  z-index: 1;
+  cursor: pointer;
+
+  &:after {
+    font-family: $font-family-qf-icons;
+    content: "\e928";
+    font-size: $fontsize;
+  }
+
+  &:hover {
+    text-decoration: none;
+    color: rgba($color, 0.5);
+  }
+}
+
+.modalOverlay {
+  @include grid-container;
+
+  @include position(fixed, 0 0 0 0);
+    background-color: $color-neutral-white;
+    z-index: 100;
+
+    .modalInnerContent {
+      @include position(absolute, 0px 0px 0px 0px);
+      border: 1px solid #ccc;
+      background-color: $color-neutral-white;
+      border-radius: 4px;
+      outline: none;
+      padding: 20px;
+  }
+}
+
+.smallModalOverlay {
+  @include position(fixed, 0px 0px 0px 0px);
+  background: rgba($color-neutral-true-black, 0.60);
+  z-index: 101;
+
+  :focus {
+    outline: none;
+  }
+
+  .smallModalInnerContent {
+    @include grid-container;
+    @include grid-column(10);
+
+    .smallModalClose {
+      @include close-modal-button($color-neutral-white, 20px, -30px, 2px);
+
+      .loginDialog & {
+        @include close-modal-button($color-neutral-white, 20px, 100px);
+      }
+    }
+
+    @include grid-push(1);
+    @include position(fixed, 10% null null null);
+    z-index: 101;
+
+  }
+}
+
+.fullscreenOverlay {
+  @include position(fixed, 0px 0px 0px 0px);
+  z-index: 100;
+
+  .smallModalInnerContent {
+    width: 100%;
+    margin: 0;
+    height: 100%;
+    top: 0;
+
+    .smallModalClose {
+      @include close-modal-button($color-neutral-true-black);
+    }
+  }
+}
+
+.scrollableModalContent {
+  height: 100%;
+  overflow-y: auto;
+
+  .scrollableModalBody {
+    @include grid-container;
+    height: 100%;
+    background-color: $color-neutral-white;
+
+    &.transparent{
+      background-color: rgba(black, 0);
+    }
+
+    border-radius: 2px;
+    padding-bottom: 40px;
+
+    &.descriptions, &.loginDialog {
+      padding-bottom: 0px;
+    }
+  }
+}
+
+.loginDialog {
+  background-color: white;
+  text-align: center;
+  //width: 500px;
+  margin: 0 auto;
+}

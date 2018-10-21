@@ -1,0 +1,35 @@
+html
+    head
+        != title
+        != meta
+        != link
+
+        //- Prevent flash of content on initial load by displaying a gif until the DOM has been loaded
+        style(type="text/css").
+            body {
+                opacity: 0;
+                background: center no-repeat url('https://s3.amazonaws.com/quickframe-static-dev/homepage/measure-wheel-qf.gif');
+            }
+        script(type="text/javascript").
+            document.addEventListener("DOMContentLoaded", function(event) {
+                document.body.style.opacity = 1;
+                document.body.style.background = 'none';
+            });
+
+        if ENV == 'production' || ENV == 'staging'
+            link(rel="stylesheet", href="bundle.min.css")
+
+        link(rel="stylesheet" type="text/css" charset="UTF-8" async="true" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css")
+        link(rel="stylesheet" type="text/css" async="true" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css")
+
+
+
+    body
+        #app!= content
+        script(type="text/javascript") window.__INITIAL_STATE__ = !{state}
+        if ENV == 'development'
+            script(type="text/javascript" src="/lib/library.dll.js")
+            script(type="text/javascript", src="https://blackstar-local.quickframe.com:4040/dist/bundle.js")
+        if ENV == 'production' || ENV == 'staging'
+            script(type="text/javascript" src="vendor.min.js")
+            script(type="text/javascript" src="bundle.min.js")

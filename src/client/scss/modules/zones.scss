@@ -1,0 +1,82 @@
+.zones {
+	@include grid-container;
+	@include grid-collapse;
+	margin-bottom: 40px;
+
+	.dropzone-container {
+		@include grid-column(5);
+		@include grid-push(1);
+
+		.dropzone-inner {
+			width: auto !important;
+			height: 180px !important;
+			border: 2px dotted $color-accent-mango !important;
+			display: flex;
+			flex-flow: column wrap;
+			align-items: center;
+			justify-content: center;
+
+			@include padding(null 20px null 20px);
+
+			.dropzone-prompt {
+				text-align: center;
+
+				&:after {
+					font-family: $font-family-icons;
+					content:"\2b";
+					color: $color-accent-mango;
+					font-size: 30px;
+				}
+			}
+
+			.dropzone-instructions {
+				color: $color-accent-mango;
+				p {
+					font-family: $font-family-sans-serif-bold;
+					font-size: 12px;
+					margin-bottom: 0;
+				}
+
+				span {
+					font-size: 10px;
+				}
+			}
+		}
+	}
+
+	//this is for the linkzone box, not the modal - see modals.scss
+	.linkzone-container {
+		@include grid-column(5);
+
+		&:hover {
+			cursor: pointer;
+		}
+
+		.linkzone-modal {
+			display: none;
+		}
+
+		.linkzone-inner {
+			height: 180px;
+			border: 2px solid $color-accent-mango;
+			display: flex;
+			flex-flow: column wrap;
+			align-items: center;
+			justify-content: center;
+
+			.linkzone-prompt {
+				color: $color-neutral-charcoal;
+				font-size: 35px;
+				font-family: $font-family-sans-serif-bold;
+			}
+
+			.linkzone-instructions {
+				color: $color-accent-mango;
+				font-size: 12px;
+				font-family: $font-family-sans-serif-bold;
+			}
+		}
+	}
+}
+
+

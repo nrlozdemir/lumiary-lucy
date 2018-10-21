@@ -1,0 +1,33 @@
+.addButton {
+  position: absolute;
+  right: 0;
+  bottom: 14px;
+  font-size: 36px;
+  color: $color-neutral-sterling-grey;
+  z-index: 1000;
+  @include transition(0.2s linear);
+
+  &:after {
+    content: '+';
+  }
+
+  &:hover {
+    color: $color-accent-mango;
+    text-decoration: none;
+    cursor: pointer;
+  }
+}
+
+.counter {
+  position: absolute;
+  right: 0;
+  bottom: -20px;
+  &.padded {
+    right: 0;
+    bottom: -20px;
+  }
+  color: $color-accent-purple;
+  font-size: 12px;
+}
+
+

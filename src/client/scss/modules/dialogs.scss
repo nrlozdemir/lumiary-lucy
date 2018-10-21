@@ -1,0 +1,236 @@
+.dialog {
+  position: relative;
+
+  .dialog-inner {
+    height: 100%;
+    min-height: 240px;
+    @include grid-container;
+
+    @media #{$medium-up} {
+      min-height: 400px;
+    }
+
+    header {
+      text-align: center;
+      height: 60px;
+      padding-top: 30px;
+
+      h3 {
+        margin-bottom: 10px;
+      }
+    }
+
+    //for UploadFiles.js component
+    ul.files-list {
+
+      @include grid-column(9);
+      @include grid-push(2);
+      max-height: 340px;
+      overflow-y: auto;
+
+      li {
+        margin-bottom: 30px;
+        padding: 0 20px;
+        width: 75%;
+
+        .label {
+          margin-bottom: 5px;
+          word-break: break-all;
+        }
+
+        .progress-container {
+          position: relative;
+          height: 5px;
+          width: 100%;
+          background-color: $color-neutral-true-black;
+          margin-bottom: 3px;
+
+          .progress {
+            transition: width .3s;
+            background-color: $color-primary-electric-blue;
+            height: 5px;
+          }
+
+          @include checkmark;
+
+          &.complete {
+            @include checkmark($color-neutral-true-black);
+          }
+
+
+          &:after {
+            top: -10px !important;
+          }
+        }
+
+        .percent {
+          text-align: right;
+          color: $color-neutral-medium-grey;
+          font-size: 12px;
+        }
+      }
+    }
+
+    //for upload/link descriptions
+    .description {
+      height: 100%;
+      min-height: 240px;
+      display: flex;
+
+      @media #{$medium-up} {
+        min-height: 400px;
+      }
+
+      .preview-pane {
+        background-color: $color-neutral-true-black;
+        width: 50%;
+        color: white;
+
+        header {
+          h3 {
+            color: white;
+          }
+        }
+
+        .preview-upload {
+          display: flex;
+          text-align: center;
+          align-items: center;
+          justify-content: center;
+          background-size: contain;
+          background-repeat: no-repeat;
+          background-position: center;
+          height: 100px;
+          width: auto;
+
+          @media #{$medium-up} {
+            height: 200px;
+          }
+        }
+      }
+
+      .description-pane {
+        width: 50%;
+
+        .description-form {
+          position: relative;
+          padding: 20px;
+
+          p {
+            font-size: 15px;
+            line-height: 2;
+            font-family: $font-family-sans-serif-bold;
+          }
+
+          span {
+            font-size: 12px;
+            left: 20px;
+            bottom: 0;
+          }
+        }
+      }
+    }
+  }
+
+  .dialog-controls {
+    position: absolute;
+    display: flex;
+    width: 100%;
+    background-color: transparent;
+    height: 200px;
+    color: white;
+    text-align: center;
+
+    button{
+      //TODO: blue or yellow context
+     @extend .blue-button !optional;
+
+      margin-top: 30px !important;
+    }
+
+  }
+}
+
+.react-confirm-alert-blur {
+  filter: url(#gaussian-blur);
+  @include filter(blur(2px));
+}
+
+.react-confirm-alert-overlay {
+  @include position( fixed, 0 0 0 0 );
+
+  z-index: 10000;
+  background: rgba($color-neutral-true-black, 0.8);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  @include animation(react-confirm-alert-fadeIn 0.2s 0.1s forwards);
+
+}
+
+.react-confirm-alert {
+  font-family: $font-family-sans-serif;
+
+  @include position( fixed, 10% null null null);
+  @include frame($color-primary-electric-blue);
+  @include grid-container;
+  @include grid-column(10);
+  height: 400px;
+  margin-left: 0;
+  background: $color-neutral-white;
+  border-radius: 4px;
+  color: $color-neutral-charcoal;
+}
+
+.react-confirm-alert {
+  > h1 {
+      margin-top: 0;
+  }
+
+  > h3 {
+      margin: 60px auto;
+      text-align: center;
+      max-width: 320px;
+      font-size: 16px;
+      line-height: 1.4;
+  }
+}
+
+.react-confirm-alert-button-group {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+
+   > button {
+    @extend .blue-button !optional;
+    outline: none;
+    background: #333;
+    border: none;
+    display: inline-block;
+    padding: 6px 18px;
+    color: #eee;
+    margin-right: 10px;
+    border-radius: 5px;
+    font-size: 12px;
+    cursor: pointer;
+  }
+}
+
+@include keyframes(react-confirm-alert-fadeIn) {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+
+.cancel-alert {
+  display: inline-block;
+    width: 100%;
+    text-decoration: underline;
+    text-align: center;
+    margin-top: 10px;
+}

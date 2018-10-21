@@ -1,0 +1,50 @@
+# annoyances
+**/.DS_Store/**
+.DS_Store
+
+# IDE
+*.komodoproject
+.komodotools
+
+
+# npm, node
+node_modules
+**/node_modules/**
+node_modules/*
+**/node_modules
+
+db_data/*
+
+.env
+
+*.csv
+*.dat
+*.iml
+*.log
+*.out
+*.pid
+*.seed
+*.sublime-*
+*.swo
+*.swp
+*.tgz
+*.xml
+.idea
+.project
+.strong-pm
+coverage
+npm-debug.log
+
+#src/server/ssl/*
+#!src/server/ssl/README.md
+
+src/webpack/local-stats.json
+
+src/build/*
+
+package-lock.json
+
+# tests
+.nyc_output
+#src/test-results/*.xml
+coverage

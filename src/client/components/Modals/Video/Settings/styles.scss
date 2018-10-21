@@ -1,0 +1,61 @@
+.modalOverlay {
+  @include grid-container;
+
+  @include position(fixed, 0 0 0 0);
+    background-color: $color-neutral-white;
+    z-index: 10000;
+
+    .modalInnerContent {
+    @include position(absolute, 0px 0px 0px 0px);
+      border: 1px solid #ccc;
+      background-color: $color-neutral-white;
+      border-radius: 4px;
+      outline: none;
+      padding: 20px;
+  }
+}
+
+.smallModalOverlay {
+  @include position(fixed, 0px 0px 0px 0px);
+  background: rgba($color-neutral-true-black, 0.85);
+  z-index: 101;
+
+  :focus {
+    outline: none;
+  }
+
+  .smallModalInnerContent {
+    @include grid-container;
+    @include grid-column(10);
+
+    @include grid-media($large-grid){
+      @include grid-column(6);
+      @include grid-push(3);
+    }
+
+
+     .smallModalClose {
+        @include close-modal-button($color-neutral-true-black);
+        left: 0;
+        top: -30px;
+        color: white;
+    }
+
+    @include grid-push(1);
+    @include position(fixed, 10% null null null);
+    z-index: 10001;
+
+  }
+}
+
+.scrollableModalContent {
+  height: 100%;
+
+  .scrollableModalBody {
+    @include grid-container;
+    height: 100%;
+    background-color: $color-neutral-white;
+    border-radius: 2px;
+    padding-bottom: 40px;
+  }
+}

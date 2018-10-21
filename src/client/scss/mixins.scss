@@ -1,0 +1,159 @@
+@mixin qf-button($color: $color-primary-electric-yellow, $width: 150px) {
+  font-size: 15px;
+  font-family: $font-family-sans-serif-bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  //margin: 0 auto;
+  width: $width;
+  height: 45px;
+  color: $color-neutral-charcoal;
+  background-color: $color;
+  text-align: center;
+  //@include padding(8px 20px 8px 20px);
+  text-decoration: none;
+  border: none;
+  outline: none;
+
+  &:hover {
+    color: rgba($color-neutral-charcoal, 0.8);
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  &.pending {
+    background-color: $color-neutral-sterling-grey;
+  }
+}
+
+@mixin transparent-border( $width: 5px ) {
+  border-left: $width solid transparent;
+    border-right: $width solid transparent;
+    border-bottom: $width solid transparent;
+}
+
+@mixin frame($color: $color-primary-electric-yellow, $fontsize: 12px, $size: 45px, $left: -30px, $top: -30px){
+  &:before {
+    content: '';
+    position: absolute;
+    display: block;
+    height: $size;
+    width: $size;
+    border-top: $fontsize solid $color;
+    border-left: $fontsize solid $color;
+    left: $left;
+    top: $top;
+    background-color: transparent;
+  }
+}
+
+@mixin triangle-top($size: 20px, $color: $color-neutral-white ) {
+  &:after {
+    content: '';
+    position: absolute;
+    border-right: $size solid transparent;
+    border-top: $size solid $color-neutral-white;
+    border-left: $size solid transparent;
+    z-index: 1;
+    top: 0;
+    margin-left: calc(50% - #{$size});
+  }
+}
+
+@mixin partial-underline($color: $color-primary-electric-yellow, $width: 45px, $height: 10px, $bottom: -10px ) {
+  &:after {
+    background: none repeat scroll 0 0 $color;
+      bottom: $bottom;
+      content: "";
+      display: block;
+      height: $height;
+      position: relative;
+      width: $width;
+  }
+}
+
+@mixin qf-module-border($margin: 0 ) {
+  margin-top: $margin;
+  border: 1px solid $color-neutral-sterling-grey;
+  border-radius: 2px;
+}
+
+@mixin qf-module-show-more {
+  display: block;
+  font-family: $font-family-sans-serif-bold;
+  font-size: 15px;
+  line-height: 60px;
+  text-align: center;
+  color: $color-neutral-medium-grey;
+  height: 60px;
+  background-color: $color-neutral-pearl-grey;
+  &:after {
+    content: attr(data-text);
+  }
+}
+
+@mixin qf-grey-circle {
+
+  &:before {
+    display: flex;
+    flex-direction: row;
+    content: '';
+    position: relative;
+    height: 30px;
+    width: 30px;
+    border-radius: 50%;
+    background-color: $color-neutral-medium-grey;
+    margin-right: 20px;
+  }
+}
+
+@mixin placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+@mixin checkmark($color: $color-neutral-sterling-grey) {
+  &:after {
+    font-family: $font-family-icons;
+    font-size: 15px;
+    content:"\e013";
+    display: inline-block;
+    color: $color;
+    position: absolute;
+    right: -20px;
+    top: 30px;
+
+    @media #{$medium-up} {
+      right: -50px;
+      top: 50px;
+      font-size: 25px;
+    }
+  }
+}
+
+
+@mixin scrollbars($display: block, $size: 0px, $foreground-color: red, $background-color: mix($foreground-color, white, 50%)) {
+  &::-webkit-scrollbar {
+      display: none;
+      width:  $size;
+      height: $size;
+  }
+
+  ::-webkit-scrollbar-thumb {
+      background: $foreground-color;
+  }
+
+  ::-webkit-scrollbar-track {
+      background: $background-color;
+  }
+
+  // For Internet Explorer
+  body {
+    scrollbar-face-color: $foreground-color;
+    scrollbar-track-color: $background-color;
+  }
+}
+
+

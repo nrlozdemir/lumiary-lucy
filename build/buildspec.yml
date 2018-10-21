@@ -1,0 +1,22 @@
+version: 0.2
+
+phases:
+  pre_build:
+    commands:
+      - echo Logging in to Amazon ECR...
+      - $(aws ecr get-login --region us-east-1 | sed -e 's/-e none//g')
+  build:
+    commands:
+      - echo Build started on `date`
+      - echo Building the Lumiary Docker image...
+      - docker build -t lumiary:stage .
+      - docker tag lumiary:stage $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lumiary:stage
+  post_build:
+    commands:
+      - echo Build completed on `date`
+      - echo Pushing the Docker image...
+      - docker push $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lumiary:stage
+      - echo Writing image definitions file...
+      - printf '[{"name":"Lumiary-container","imageUri":"%s"}]' $AWS_ACCOUNT_ID.dkr.ecr.us-east-1.amazonaws.com/lumiary:stage > imagedefinitions.json
+artifacts:
+  files: imagedefinitions.json
