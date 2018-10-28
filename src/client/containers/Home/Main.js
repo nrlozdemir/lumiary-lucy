@@ -17,7 +17,7 @@ import style from "./styles.scss";
 
 class HomePage extends React.Component {
 	render() {
-		return <div className={style.homepage}>Main</div>;
+		return <div className={style.main}>Main</div>;
 	}
 }
 
