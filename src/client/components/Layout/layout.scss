@@ -1,0 +1,20 @@
+$headerHeight: 40px;
+
+.headerSide {
+	height: $headerHeight;
+	margin: 0px;
+	width: 100%;
+}
+.aside {
+	overflow-y: scroll;
+	float: left;
+	width: 25%;
+	height: calc(100vh - #{$headerHeight});
+}
+
+.mainSide {
+	overflow-y: scroll;
+	float: left;
+	width: 75%;
+	height: calc(100vh - #{$headerHeight});
+}

@@ -7,23 +7,24 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 // import { actions } from "Reducers/home";
 
-// import { Link } from "react-router";
-
 // Styles
-import style from "./styles.scss";
-
+import style from "./style.scss";
 // Components
-// import Loading from "Components/Loading";
+// import Loading from "../Loading";
 
-class HomePage extends React.Component {
+class VideoList extends React.Component {
 	render() {
-		return <div className={style.homepage}>Main</div>;
+		return (
+			<div className={style.videoList}>
+				<div>VideoList</div>
+			</div>
+		);
 	}
 }
 
-HomePage.propTypes = {};
+VideoList.propTypes = {};
 
-HomePage.defaultProps = {};
+VideoList.defaultProps = {};
 
 const mapStateToProps = state => {
 	return {};
@@ -36,4 +37,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(HomePage);
+)(VideoList);

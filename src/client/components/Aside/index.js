@@ -1,28 +1,27 @@
 "use strict";
 
 import React from "react";
-import PropTypes from "prop-types";
-import ReactDOM from "react-dom";
+// import PropTypes from "prop-types";
+// import ReactDOM from "react-dom";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-import { actions } from "Reducers/home";
-
-import { Link } from "react-router";
+// import { actions } from "Reducers/home";
 
 // Styles
 
 // Components
-import Loading from "../Loading";
+// import Loading from "../Loading";
+import VideoList from "../VideoList";
 
-class LeftSide extends React.Component {
+class Aside extends React.Component {
 	render() {
-		return <div>LeftSide</div>;
+		return <VideoList />;
 	}
 }
 
-LeftSide.propTypes = {};
+Aside.propTypes = {};
 
-LeftSide.defaultProps = {};
+Aside.defaultProps = {};
 
 const mapStateToProps = state => {
 	return {};
@@ -35,4 +34,4 @@ const mapDispatchToProps = dispatch => ({
 export default connect(
 	mapStateToProps,
 	mapDispatchToProps
-)(LeftSide);
+)(Aside);
