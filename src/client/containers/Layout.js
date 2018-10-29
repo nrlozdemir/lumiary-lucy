@@ -5,7 +5,8 @@ import Helmet from "react-helmet";
 //import Script from 'react-load-script'
 import style from "../components/Layout/styles.scss";
 import layoutStyle from "../components/Layout/layout.scss";
-import { Footer, Header } from "../components/Layout";
+import helpers from "../utils/helpers.scss";
+import { Header } from "../components/Layout";
 import Aside from "../components/Aside";
 
 const Layout = ({ children, header, main, location: { pathname } }) => (
@@ -19,12 +20,15 @@ const Layout = ({ children, header, main, location: { pathname } }) => (
 		<div className={layoutStyle.headerSide}>
 			{pathname.match(/(signup|project(\/custom|\/menu))/) ? null : <Header />}
 		</div>
-		<div className={layoutStyle.aside}>
-			<Aside />
-		</div>
-		<div className={layoutStyle.mainSide}>
-			{children}
-			{main}
+		<div className={layoutStyle.bottomBorder} />
+		<div className={helpers.marginTop5}>
+			<div className={layoutStyle.aside}>
+				<Aside />
+			</div>
+			<div className={layoutStyle.mainSide}>
+				{children}
+				{main}
+			</div>
 		</div>
 		{/* pathname.match(/(signup|project(\/custom|\/menu))/) ? null : <Footer /> */}
 	</div>

@@ -8,10 +8,21 @@ import { connect } from "react-redux";
 
 // Style
 import style from "./styles.scss";
+import NavBar from "../../NavBar";
 
 class Header extends PureComponent {
 	render() {
-		return <div className={style.headerLayout}>Header</div>;
+		const items = ["quickview", "marketview", "library", "panoptic"];
+		return (
+			<React.Fragment>
+				<div className={style.navbar}>
+					<NavBar items={items} />
+				</div>
+				<div className={style.brandLogo}>
+					<div className={style.logo} />
+				</div>
+			</React.Fragment>
+		);
 	}
 }
 
