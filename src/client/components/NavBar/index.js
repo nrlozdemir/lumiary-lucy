@@ -19,7 +19,7 @@ const NavBar = props => {
 									className={style.linkElement}
 									key={idx}
 									onClick={() => handleClick(key)}
-									to={`${baseUrl}/${key}`}
+									to={`/${key}`}
 								>
 									<span>{label}</span>
 								</Link>

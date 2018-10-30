@@ -9,7 +9,7 @@ import helpers from "../utils/helpers.scss";
 import { Header } from "../components/Layout";
 import Aside from "../components/Aside";
 
-const Layout = ({ children, header, main, location: { pathname } }) => (
+const Layout = ({ children, main }) => (
 	<div style={style} className="layout">
 		<Helmet>
 			<meta
@@ -18,7 +18,7 @@ const Layout = ({ children, header, main, location: { pathname } }) => (
 			/>
 		</Helmet>
 		<div className={layoutStyle.headerSide}>
-			{pathname.match(/(signup|project(\/custom|\/menu))/) ? null : <Header />}
+			<Header />
 		</div>
 		<div className={layoutStyle.bottomBorder} />
 		<div className={helpers.marginTop5}>
@@ -30,12 +30,13 @@ const Layout = ({ children, header, main, location: { pathname } }) => (
 				{main}
 			</div>
 		</div>
-		{/* pathname.match(/(signup|project(\/custom|\/menu))/) ? null : <Footer /> */}
+		{/* <Footer /> */}
 	</div>
 );
 
 Layout.propTypes = {
-	children: PropTypes.object
+	children: PropTypes.object,
+	main: PropTypes.object
 };
 
 export default Layout;

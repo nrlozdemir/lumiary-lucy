@@ -6,14 +6,18 @@ $headerHeight: 85px;
 	width: 100%;
 }
 .aside {
-	overflow-y: scroll;
+	overflow-y: auto;
 	float: left;
 	width: 25%;
 	height: calc(100vh - #{$headerHeight + 8});
+	border-right: 2.5px solid $color-dark-three;
+}
+.aside::-webkit-scrollbar {
+	display: none;
 }
 
 .mainSide {
-	overflow-y: scroll;
+	overflow-y: auto;
 	float: left;
 	width: 75%;
 	height: calc(100vh - #{$headerHeight + 8});
