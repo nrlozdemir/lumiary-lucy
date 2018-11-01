@@ -6,11 +6,13 @@ import PropTypes from "prop-types";
 import VideoList from "../VideoList";
 import VideoListHeader from "../VideoListHeader";
 
+import styles from './styles.scss';
+
 class Aside extends React.Component {
 	render() {
 		const { router } = this.props;
 		return (
-			<div style={{ margin: "75px 75px" }}>
+			<div className={styles.aside}>
 				<VideoListHeader />
 				<br />
 				<VideoList router={router} />
