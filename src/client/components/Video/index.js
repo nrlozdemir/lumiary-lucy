@@ -46,23 +46,21 @@ class Video extends React.Component {
 					<img
 						className={cx(style.videoBackground, className)}
 						src={video.src}
-						onMouseOver={() => this.setInfoVisible()}
-						onMouseOut={() => this.setInfoUnvisible()}
+						// onMouseOver={() => this.setInfoVisible()}
+						// onMouseOut={() => this.setInfoUnvisible()}
 					/>
 				</div>
-				{this.state.showInfo ? (
-					<div className={style.infoContainer}>
-						<div className={style.videoImage}>
-							<img className={cx(style.videoBackground, className)} src={video.src} />
-							<br />
-							<p className={style.videoTitle}>Meet the Puppet</p>
-						</div>
-						<div className={style.publishDate}>
-							Pubslished on: <br />
-							03/12/2018
-						</div>
+				<div className={style.infoContainer}>
+					<div className={style.videoImage}>
+						<img className={cx(style.videoBackground, className)} src={video.src} />
+						<br />
+						<p className={style.videoTitle}>Meet the Puppet</p>
 					</div>
-				) : null}
+					<div className={style.publishDate}>
+						Pubslished on: <br />
+						03/12/2018
+					</div>
+				</div>
 			</div>
 		);
 	}
