@@ -6,10 +6,12 @@ import { connect } from "react-redux";
 import VideoList from "../VideoList";
 import VideoListHeader from "../VideoListHeader";
 
+import styles from './styles.scss';
+
 class Aside extends React.Component {
 	render() {
 		return (
-			<div style={{ margin: "75px 75px" }}>
+			<div className={styles.aside}>
 				<VideoListHeader />
 				<br />
 				<VideoList />
