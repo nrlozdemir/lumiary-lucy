@@ -159,12 +159,11 @@ body {
 
 @font-face {
 	font-family: "icomoon";
-	src: url("#{$s3_static}fonts/icomoon.eot?tzinal");
-	src: url("#{$s3_static}fonts/icomoon.eot?tzinal#iefix") format("embedded-opentype"),
-		url("#{$s3_static}fonts/icomoon.woff2?tzinal") format("woff2"),
-		url("#{$s3_static}fonts/icomoon.ttf?tzinal") format("truetype"),
-		url("#{$s3_static}fonts/icomoon.woff?tzinal") format("woff"),
-		url("#{$s3_static}fonts/icomoon.svg?tzinal#icomoon") format("svg");
+	src: url("./../../assets/icons/icomoon.eot") format("embedded-opentype"),
+		url("./../../assets/icons/icomoon.woff2") format("woff2"),
+		url("./../../assets/icons/icomoon.ttf") format("truetype"),
+		url("./../../assets/icons/icomoon.woff") format("woff"),
+		url("./../../assets/icons/icomoon.svg") format("svg");
 	font-weight: normal;
 	font-style: normal;
 }
@@ -186,6 +185,79 @@ body {
 }
 
 :global {
+	.qf-iconInformation:before {
+		content: "\e900";
+	}
+	.qf-iconFemale:before {
+		content: "\e901";
+	}
+	.qf-iconMale:before {
+		content: "\e902";
+	}
+	.qf-iconDrag:before {
+		content: "\e903";
+	}
+	.qf-iconDrag--Drop:before {
+		content: "\e904";
+	}
+	.qf-iconAdd:before {
+		content: "\e905";
+	}
+	.qf-iconFacebook:before {
+		content: "\e906";
+	}
+	.qf-iconPlay .path1:before {
+		content: "\e907";
+		color: rgb(255, 255, 255);
+	}
+	.qf-iconPlay .path2:before {
+		content: "\e908";
+		margin-left: -0.849609375em;
+		color: rgb(68, 68, 68);
+	}
+	.qf-iconPlay .path3:before {
+		content: "\e909";
+		margin-left: -0.849609375em;
+		color: rgb(255, 255, 255);
+	}
+	.qf-iconPlay .path4:before {
+		content: "\e90a";
+		margin-left: -0.849609375em;
+		color: rgb(68, 68, 68);
+	}
+	.qf-iconPlay .path5:before {
+		content: "\e90b";
+		margin-left: -0.849609375em;
+		color: rgb(255, 255, 255);
+	}
+	.qf-iconPlay .path6:before {
+		content: "\e90c";
+		margin-left: -0.849609375em;
+		color: rgb(68, 68, 68);
+	}
+	.qf-iconInstagram:before {
+		content: "\e90d";
+	}
+	.qf-iconSnapchat:before {
+		content: "\e90e";
+	}
+	.qf-iconTwitter:before {
+		content: "\e90f";
+	}
+	.qf-iconRight-Arrow:before {
+		content: "\e910";
+	}
+	.qf-iconLeft-Arrow:before {
+		content: "\e911";
+	}
+	.qf-iconPinterest:before {
+		content: "\e912";
+	}
+	.qf-iconYotube:before {
+		content: "\e913";
+	}
+
+	/////////////////////////////////////////////////////
 	.qf-icon-women-up-to-10:before {
 		content: "\e901";
 	}

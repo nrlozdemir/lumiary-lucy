@@ -1,10 +1,10 @@
 //@import 'main';
 .videoBackground {
-	margin-top: 32px;
 	width: 100%;
 }
 .video {
 	display: inline-flex;
+	margin-top: 32px;
 }
 .videoContainer {
 	position: relative;
@@ -18,4 +18,15 @@
 }
 
 .publishDate {
+}
+
+.videoIcon {
+	text-shadow: 0 0 6px $color-tealish;
+	font-size: 56px;
+	color: $color-pale-grey;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
 }
