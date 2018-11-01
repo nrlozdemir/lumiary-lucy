@@ -1,36 +1,28 @@
 "use strict";
 
 import React from "react";
-import { bindActionCreators } from "redux";
-import { connect } from "react-redux";
+import PropTypes from "prop-types";
+
 import VideoList from "../VideoList";
 import VideoListHeader from "../VideoListHeader";
 
 class Aside extends React.Component {
 	render() {
+		const { router } = this.props;
 		return (
 			<div style={{ margin: "75px 75px" }}>
 				<VideoListHeader />
 				<br />
-				<VideoList />
+				<VideoList router={router} />
 			</div>
 		);
 	}
 }
 
-Aside.propTypes = {};
+Aside.propTypes = {
+	router: PropTypes.object
+};
 
 Aside.defaultProps = {};
 
-const mapStateToProps = state => {
-	return {};
-};
-
-const mapDispatchToProps = dispatch => ({
-	...bindActionCreators({}, dispatch)
-});
-
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(Aside);
+export default Aside;

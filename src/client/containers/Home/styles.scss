@@ -3,4 +3,6 @@ $s3_static: $staticUrl;
 
 .main {
 	@include grid-column(12);
+	height: 100vh;
+	border: 3px dotted #eee;
 }
