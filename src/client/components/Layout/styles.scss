@@ -90,7 +90,6 @@
 		font-size: 100%;
 		font: inherit;
 		vertical-align: baseline;
-		background: $color-dark;
 	}
 
 	// HTML5 display-role reset for older browsers
@@ -149,6 +148,7 @@ html {
 
 body {
 	-webkit-overflow-scrolling: touch;
+	background: $color-dark;
 }
 
 @font-face {
