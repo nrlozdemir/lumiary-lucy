@@ -18,7 +18,12 @@ class HomePage extends React.Component {
 	render() {
 		const { connectDropTarget, hovered, src } = this.props;
 		return connectDropTarget(
-			<div className={style.main}>
+			<div
+				className={style.main}
+				style={
+					hovered ? { boxShadow: "inset 0px 0px 40px 10px rgba(93, 188,210, 0.5)" } : null
+				}
+			>
 				<div className={style.centeredArea}>
 					<span className={style.dropZoneIcon + " " + "qf-iconDrag--Drop"} />
 					<p className={style.dropZoneHeading}>Drag & Drop</p>
