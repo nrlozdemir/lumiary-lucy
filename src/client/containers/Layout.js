@@ -22,8 +22,8 @@ const Layout = ({ children, main, router }) => {
 			</Helmet>
 			<div className={layoutStyle.headerSide}>
 				<Header />
+				<div className={layoutStyle.bottomBorder} />
 			</div>
-			<div className={layoutStyle.bottomBorder} />
 			<div className={helpers.marginTop5}>
 				<div className={layoutStyle.aside}>
 					<Aside router={router} />
