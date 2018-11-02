@@ -135,7 +135,11 @@ module.exports = {
 									__dirname,
 									"../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss"
 								),
-								path.resolve(__dirname, "../../node_modules/bourbon-neat/core/_neat.scss")
+								path.resolve(
+									__dirname,
+									"../../node_modules/bourbon-neat/core/_neat.scss"
+								),
+								path.resolve(__dirname, "../client/scss/helpers.scss")
 							]
 						}
 					}

@@ -188,7 +188,8 @@ module.exports = {
 									path.resolve(
 										__dirname,
 										"../../node_modules/bourbon-neat/core/_neat.scss"
-									)
+									),
+									path.resolve(__dirname, "../client/scss/helpers.scss")
 								]
 							}
 						}
