@@ -7,7 +7,9 @@ const VideoListHeader = () => (
 	<React.Fragment>
 		<div className={style.container}>
 			<div className={style.header}>Videos</div>
-			<div className={style.addNewButton}>+</div>
+			<div className={style.addNewButton}>
+				<span className="qf-iconAdd" />
+			</div>
 		</div>
 	</React.Fragment>
 );

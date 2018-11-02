@@ -7,12 +7,14 @@ $headerHeight: 85px;
 }
 
 .aside {
-	// overflow-y: auto;
+	overflow-y: auto;
 	// overflow-x: visible;
 	float: left;
 	width: 25%;
 	height: calc(100vh - #{$headerHeight + 8});
 	border-right: 2.5px solid $color-dark-three;
+	// position: fixed;
+	// left: 0;
 }
 
 .aside::-webkit-scrollbar {
@@ -24,7 +26,8 @@ $headerHeight: 85px;
 	float: left;
 	width: 75%;
 	padding: 30px;
-	height: calc(100vh - #{$headerHeight + 8});
+	// height: calc(100vh - #{$headerHeight + 8});
+	height: auto;
 }
 
 .bottomBorder {

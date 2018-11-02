@@ -49,6 +49,7 @@ class Video extends React.Component {
 						// onMouseOver={() => this.setInfoVisible()}
 						// onMouseOut={() => this.setInfoUnvisible()}
 					/>
+					<span className={style.videoIcon + " " + "qf-iconDrag"} />
 				</div>
 				<div className={style.infoContainer}>
 					<div className={style.videoImage}>
