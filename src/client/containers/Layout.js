@@ -7,7 +7,7 @@ import { DragDropContext } from "react-dnd";
 //import Script from 'react-load-script'
 import style from "../components/Layout/styles.scss";
 import layoutStyle from "../components/Layout/layout.scss";
-import helpers from "../utils/helpers.scss";
+import helpers from "../scss/helpers.scss";
 import { Header } from "../components/Layout";
 import Aside from "../components/Aside";
 
