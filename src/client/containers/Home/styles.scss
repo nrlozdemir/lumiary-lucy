@@ -1,7 +1,32 @@
 //variable injected via webpack/config
 $s3_static: $staticUrl;
 
-.homepage {
-	opacity: 1;
-	transition: opacity 0.3s linear;
+.main {
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+	height: calc(100vh - 160px);
+	border: dashed 5px $color-pale-grey;
+	background-color: $color-charcoal-grey;
+	display: table;
+}
+
+.centeredArea {
+	color: $color-white;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+.dropZoneIcon {
+	font-size: 120px;
+}
+.dropZoneHeading {
+	padding-top: 51px;
+	font-family: $font-family-sans-serif;
+	font-size: 32px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
 }
