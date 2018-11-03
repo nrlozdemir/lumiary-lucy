@@ -1,0 +1,50 @@
+$headerHeight: 85px;
+
+.headerSide {
+	height: $headerHeight;
+	margin: 0px;
+	width: 100%;
+	position: fixed;
+	top: 0;
+	width: 100%;
+	z-index: 10;
+	height: $headerHeight;
+}
+
+.aside {
+	overflow-y: auto;
+	// overflow-x: visible;
+	float: left;
+	width: 25%;
+	height: calc(100vh - #{$headerHeight + 8});
+	border-right: 2.5px solid $color-dark-three;
+	position: fixed;
+	left: 0;
+	top: $headerHeight;
+}
+
+.aside::-webkit-scrollbar {
+	display: none;
+}
+
+.mainSide {
+	overflow-y: auto;
+	float: left;
+	width: 75%;
+	padding: 30px;
+	height: calc(100vh - #{$headerHeight + 8});
+	// height: auto;
+	position: fixed;
+	left: 25%;
+	top: $headerHeight;
+
+}
+
+.bottomBorder {
+	width: 100%;
+	height: 2.5px;
+	box-shadow: 0 0 3px 2px #21bcd5, inset 0 0 3px 1px #fcfbff;
+	background-color: #fcfbff;
+	position: absolute;
+	bottom: 0;
+}

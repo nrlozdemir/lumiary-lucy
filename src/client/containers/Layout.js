@@ -1,31 +1,47 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import Helmet from 'react-helmet';
+import React from "react";
+import PropTypes from "prop-types";
+import Helmet from "react-helmet";
+import HTML5Backend from "react-dnd-html5-backend";
+import { DragDropContext } from "react-dnd";
+
 //import Script from 'react-load-script'
-import style from 'Components/Layout/styles.scss'
-import { Footer, Header } from 'Components/Layout'
+import style from "../components/Layout/styles.scss";
+import layoutStyle from "../components/Layout/layout.scss";
+import helpers from "../scss/helpers.scss";
+import { Header } from "../components/Layout";
+import Aside from "../components/Aside";
 
-const Layout = ({ children, header, main, location: { pathname } }) => (
-  <div className="layout">
-    <Helmet>
-			<meta name="viewport" content="width=device-width,initial-scale=1,shrink-to-fit=no" />
-    </Helmet>
-
-    { pathname.match(/(signup|project(\/custom|\/menu))/) ? null :
-      <Header />
-    }
-
-    { children }
-    { main }
-
-    { pathname.match(/(signup|project(\/custom|\/menu))/) ? null :
-    	<Footer />
-    }
-  </div>
-)
+const Layout = ({ children, main, router }) => {
+	return (
+		<div style={style} className="layout">
+			<Helmet>
+				<meta
+					name="viewport"
+					content="width=device-width,initial-scale=1,shrink-to-fit=no"
+				/>
+			</Helmet>
+			<div className={layoutStyle.headerSide}>
+				<Header />
+				<div className={layoutStyle.bottomBorder} />
+			</div>
+			<div className={helpers.marginTop5}>
+				<div className={layoutStyle.aside}>
+					<Aside router={router} />
+				</div>
+				<div className={layoutStyle.mainSide}>
+					{children}
+					{main}
+				</div>
+			</div>
+			{/* <Footer /> */}
+		</div>
+	);
+};
 
 Layout.propTypes = {
-  children: PropTypes.object
-}
+	children: PropTypes.object,
+	main: PropTypes.object,
+	router: PropTypes.object
+};
 
-export default Layout
+export default DragDropContext(HTML5Backend)(Layout);

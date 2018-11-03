@@ -1,50 +1,40 @@
-'use strict'
+"use strict";
 
-import React from 'react'
-import PropTypes from 'prop-types'
-import ReactDOM from 'react-dom'
-import { bindActionCreators } from 'redux'
-import { connect } from 'react-redux'
-import { actions } from 'Reducers/home'
-
-import { Link } from 'react-router'
+import React from "react";
+import { DropTarget } from "react-dnd";
 
 // Styles
-import style from './styles.scss'
+import style from "./styles.scss";
 
-// Components
-import Loading from 'Components/Loading'
-
-
+const collect = (connect, monitor) => {
+	return {
+		connectDropTarget: connect.dropTarget(),
+		hovered: monitor.isOver(),
+		src: monitor.getItem()
+	};
+};
 
 class HomePage extends React.Component {
-
-
-
-  render() {
-
-    return (
-      <div className={ style.homepage }>
-        home
-      </div>
-    )
-  }
+	render() {
+		const { connectDropTarget, hovered, src } = this.props;
+		return connectDropTarget(
+			<div
+				className={style.main}
+				style={
+					hovered ? { boxShadow: "inset 0px 0px 40px 10px rgba(93, 188,210, 0.5)" } : null
+				}
+			>
+				<div className={style.centeredArea}>
+					<span className={style.dropZoneIcon + " " + "qf-iconDrag--Drop"} />
+					<p className={style.dropZoneHeading}>Drag & Drop</p>
+				</div>
+			</div>
+		);
+	}
 }
 
-HomePage.propTypes = {
-}
+HomePage.propTypes = {};
 
-HomePage.defaultProps = {
-}
+HomePage.defaultProps = {};
 
-const mapStateToProps = (state) => {
-  return {}
-}
-
-const mapDispatchToProps = (dispatch) => ({
-  ...bindActionCreators({}, dispatch)
-})
-
-export default connect(mapStateToProps, mapDispatchToProps)(HomePage)
-
-
+export default DropTarget("video", {}, collect)(HomePage);
