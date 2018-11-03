@@ -1,105 +1,84 @@
-.navigation {
-	margin: 16px 0;
-	.linkElement {
-		font-family: $font-family-sans-serif;
-		font-size: 20px;
-		font-weight: bold;
-		font-style: normal;
-		font-stretch: normal;
-		letter-spacing: normal;
-		text-decoration: none;
-		text-transform: uppercase;
-		margin: 0 10px;
-		color: #ffffff;
-		&:hover {
-			border-bottom: 2px solid #fff;
-		}
-		&:nth-child(1) {
-			margin-left: 0px;
-		}
-	}
-}
 .signupTopbar {
-	display: flex;
-	@include size(100% 80px);
+  display: flex;
+  @include size(100% 80px);
 
-	.leftnav {
-		position: relative;
-		display: flex;
-		flex-direction: column;
-		@include justify-content(center);
-		@include align-items(center);
-		@include size(48px 80px);
-		font-family: $font-family-sans-serif-bold;
-		background-color: $color-primary-electric-yellow;
-		cursor: pointer;
-		font-size: 12px;
-		font-weight: bold;
+  .leftnav {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    @include justify-content(center);
+    @include align-items(center);
+    @include size(48px 80px);
+    font-family: $font-family-sans-serif-bold;
+    background-color: $color-primary-electric-yellow;
+    cursor: pointer;
+    font-size: 12px;
+    font-weight: bold;
+    
+    @media #{$small-up} {
+      @include size(118px 80px);
+    }
 
-		@media #{$small-up} {
-			@include size(118px 80px);
-		}
+    @media #{$large-up} {
+      font-size: 16px;
+    }
 
-		@media #{$large-up} {
-			font-size: 16px;
-		}
+    &:before {
+      @include size(16px);
+      font-size: 16px;
+      margin-bottom: 8px;
+      font-family: $font-family-qf-icons;
+      content: "\e927";
 
-		&:before {
-			@include size(16px);
-			font-size: 16px;
-			margin-bottom: 8px;
-			font-family: $font-family-qf-icons;
-			content: "\e927";
+      @media #{$large-up} {
+        font-size: 24px;
+        @include size(20px 20px);
+      }
+    }
 
-			@media #{$large-up} {
-				font-size: 24px;
-				@include size(20px 20px);
-			}
-		}
+    // @include display(flex);
+    // @include flex-direction(row);
+    // @include flex-wrap(wrap);
+    // @include align-items(center);
+    // background-color: $color-neutral-true-black;
 
-		// @include display(flex);
-		// @include flex-direction(row);
-		// @include flex-wrap(wrap);
-		// @include align-items(center);
-		// background-color: $color-neutral-true-black;
+    a {
+      position: relative;
+      @include padding(null 10px);
+      @include flex(1);
+      color: $color-neutral-medium-grey;
+      font-size: 12px;
 
-		a {
-			position: relative;
-			@include padding(null 10px);
-			@include flex(1);
-			color: $color-neutral-medium-grey;
-			font-size: 12px;
+      @media #{$large-up} {
+        @include padding(null 20px);
+        font-size: 16px;
+        &:hover {
+          &:before {
+            color: rgba(black, 0.5);
+          }
+        }
+      }
+    }
+  }
 
-			@media #{$large-up} {
-				@include padding(null 20px);
-				font-size: 16px;
-				&:hover {
-					&:before {
-						color: rgba(black, 0.5);
-					}
-				}
-			}
-		}
-	}
+  .topBar {
+    height: 80px;
+    flex: 1;
 
-	.topBar {
-		height: 80px;
-		flex: 1;
+    .navlist {
+      display: flex;
+      @include flex-direction(row);
+      @include flex-wrap(wrap);
+      @include size(100% 100%);
+      @include align-items(center);
+      background-color: $color-neutral-true-black;
 
-		.navlist {
-			display: flex;
-			@include flex-direction(row);
-			@include flex-wrap(wrap);
-			@include size(100% 100%);
-			@include align-items(center);
-			background-color: $color-neutral-true-black;
-
-			a {
-				position: relative;
-				@include padding(null 10px);
-				@include flex(1);
-				color: $color-neutral-medium-grey;
-				font-size: 12px;
+      a {
+        position: relative;
+        @include padding(null 10px);
+        @include flex(1);
+        color: $color-neutral-medium-grey;
+        font-size: 12px;
 				text-decoration: none;
 				height: 100%;
 				display: flex;
@@ -107,108 +86,108 @@
 				justify-content: center;
 				align-items: center;
 
-				@media #{$large-up} {
-					@include padding(null 20px);
-					font-size: 16px;
-				}
+        @media #{$large-up} {
+          @include padding(null 20px);
+          font-size: 16px;
+        }
 
-				&:before {
-					display: flex;
-					@include flex-direction(column);
-					@include justify-content(center);
-					@include align-items(center);
-					@include size(16px 16px);
+        &:before {
+          display: flex;
+          @include flex-direction(column);
+          @include justify-content(center);
+          @include align-items(center);
+          @include size(16px 16px);
 
-					font-family: $font-family-qf-icons;
-					font-size: 16px;
-					content: "\e920";
-					margin: 0 auto;
+          font-family: $font-family-qf-icons;
+          font-size: 16px;
+          content: "\e920";
+          margin: 0 auto;
 
-					@media #{$large-up} {
-						font-size: 24px;
-						@include size(20px 20px);
-					}
-				}
+          @media #{$large-up} {
+            font-size: 24px;
+            @include size(20px 20px);
+          }
+        }
 
-				&.selected {
-					color: $color-neutral-white;
-				}
+        &.selected {
+          color: $color-neutral-white;
+        }
 
-				&.complete {
-					span {
-						color: $color-primary-electric-yellow;
-					}
+        &.complete {
+          span {
+            color: $color-primary-electric-yellow;
+          }
 
-					// &:hover {
-					//   cursor: pointer;
+          // &:hover {
+          //   cursor: pointer;
 
-					//   span {
-					//     @include transition(color $hover-transition ease);
-					//     color: $color-primary-electric-yellow;
-					//   }
+          //   span {
+          //     @include transition(color $hover-transition ease);
+          //     color: $color-primary-electric-yellow;
+          //   }
 
-					//   &:before {
-					//     @include transition(
-					//       background-color $hover-transition ease,
-					//       color $hover-transition ease
-					//     );
-					//     color: $color-primary-electric-yellow;
-					//   }
-					// }
+          //   &:before {
+          //     @include transition(
+          //       background-color $hover-transition ease,
+          //       color $hover-transition ease
+          //     );
+          //     color: $color-primary-electric-yellow;
+          //   }
+          // }
 
-					&:before {
-						content: "\e914";
-						color: $color-primary-electric-yellow;
-					}
-				}
+          &:before {
+            content: "\e914";
+            color: $color-primary-electric-yellow;
+          }
+        }
 
-				span {
-					@include display(inline-flex);
-					@include justify-content(center);
-					width: 100%;
-					display: inline-flex;
-					margin-top: 8px;
-					color: inherit;
-					font-size: 12px;
-					// pointer-events: none;
+        span {
+          @include display(inline-flex);
+          @include justify-content(center);
+          width: 100%;
+          display: inline-flex;
+          margin-top: 8px;
+          color: inherit;
+          font-size: 12px;
+          // pointer-events: none;
 
-					@media #{$large-up} {
-						font-size: 16px;
-					}
-				}
-			}
-		}
-	}
+          @media #{$large-up} {
+            font-size: 16px;
+          }
+        }
+      }
+    }
+  }
 }
 
 .signupTopbar.secondary {
-	.leftnav {
-		background-color: $color-primary-electric-blue;
-	}
-	.topBar {
-		.navlist {
-			background-color: $color-neutral-charcoal;
-			a {
-				&.complete {
-					span {
-						color: $color-primary-electric-blue;
-					}
+  .leftnav {
+    background-color: $color-primary-electric-blue;
+  }
+  .topBar {
+    .navlist {
+      background-color: $color-neutral-charcoal;
+      a {
+        &.complete {
+          span {
+            color: $color-primary-electric-blue;
+          }
 
-					// &:hover {
-					//   span {
-					//     color: $color-primary-electric-blue;
-					//   }
+          // &:hover {
+          //   span {
+          //     color: $color-primary-electric-blue;
+          //   }
 
-					//   &:before {
-					//     color: $color-primary-electric-blue;
-					//   }
-					// }
+          //   &:before {
+          //     color: $color-primary-electric-blue;
+          //   }
+          // }
 
-					&:before {
-						color: $color-primary-electric-blue;
-					}
-				}
-			}
-		}
-	}
+          &:before {
+            color: $color-primary-electric-blue;
+          }
+        }
+      }
+    }
+  }
 }

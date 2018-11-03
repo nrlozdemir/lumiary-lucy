@@ -6,16 +6,12 @@ exports['JWPlayer Component Rendering matches snapshot 1'] = {
   "children": [
     {
       "type": "div",
-      "props": {},
-      "children": [
-        {
-          "type": "div",
-          "props": {
-            "id": "test"
-          },
-          "children": null
+      "props": {
+        "dangerouslySetInnerHTML": {
+          "__html": "<div id=\"test\"></div>"
         }
-      ]
+      },
+      "children": null
     }
   ]
 }

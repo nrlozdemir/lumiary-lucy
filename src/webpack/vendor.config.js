@@ -1,69 +1,74 @@
-const path = require("path");
-const webpack = require("webpack");
+const path = require('path')
+const webpack = require('webpack')
 
 module.exports = {
-	context: process.cwd(),
+  context: process.cwd(),
 
-	resolve: {
-		extensions: [".js", ".jsx", ".json", ".less", ".css"],
-		modules: [__dirname, "node_modules"]
-	},
+  resolve: {
+    extensions: ['.js', '.jsx', '.json', '.less', '.css'],
+    modules: [__dirname, 'node_modules']
+  },
 
-	entry: {
-		library: [
-			"react",
-			"react-dom",
-			"react-loadable",
-			"react-masonry-component",
-			"react-slick",
-			"react-tabs",
-			"react-router",
-			"react-modal",
-			"react-dropzone-s3-uploader",
-			"react-jw-player",
-			"react-rangeslider",
-			"react-social-login",
-			"react-stay-scrolled",
-			"react-twitter-auth",
-			"react-dnd",
-			"react-dnd-html5-backend",
+  entry: {
+    library: [
+      'react',
+      'react-dom',
+      'react-loadable',
+      'react-masonry-component',
+      'react-slick',
+      'react-tabs',
+      'react-router',
+      'react-modal',
+      'react-dropzone-s3-uploader',
+      'react-jw-player',
+      'react-rangeslider',
+      'react-social-login',
+      'react-stay-scrolled',
+      'react-twitter-auth',
 
-			"redux",
-			"redux-form",
-			"redux-saga",
-			"redux-persist",
+      'redux',
+      'redux-form',
+      'redux-saga',
+      'redux-persist',
 
-			"reselect",
+      'reselect',
 
-			"qs",
-			"prop-types",
-			"bourbon",
-			"moment",
-			"node-neat",
-			"classnames",
+      'qs',
+      'prop-types',
+      'bourbon',
+      'moment',
+      'node-neat',
+      'classnames',
 
-			"slate",
-			"slate-react",
-			"history",
-			"jwt-decode",
-			"immutability-helper",
-			"immutable",
-			"isomorphic-fetch",
-			"lodash"
-		]
-	},
 
-	output: {
-		filename: "[name].dll.js",
-		path: path.resolve(__dirname, "../build/library"),
-		library: "[name]"
-	},
+      'slate',
+      'slate-react',
+      'history',
+      'jwt-decode',
+      'immutability-helper',
+      'immutable',
+      'isomorphic-fetch',
+      'lodash'
 
-	plugins: [
-		new webpack.DllPlugin({
-			context: __dirname,
-			name: "[name]",
-			path: path.join(__dirname, "..", "build/library/[name].json")
-		})
-	]
-};
+    ]
+
+  },
+
+  output: {
+    filename: '[name].dll.js',
+    path: path.resolve(__dirname, '../build/library'),
+    library: '[name]'
+  },
+
+  plugins: [
+
+   new webpack.DllPlugin({
+      context: __dirname,
+      name: '[name]',
+      path: path.join(__dirname, '..', 'build/library/[name].json')
+   }),
+
+  ]
+}
+
+
