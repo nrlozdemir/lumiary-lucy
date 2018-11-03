@@ -41,7 +41,7 @@ jobs:
             chmod +x ./cc-test-reporter
 
       # run tests
-      - run: npm run test:snapshot
+      - run: sudo npm run test:snapshot
       - run: npm test
 
       # Send test coverage to Code Climate
