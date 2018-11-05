@@ -1,38 +1,51 @@
 # Lumiary
 
-#### React SPA for Lumiere
+Lumiere webapp. 
 
-####React/client source is at:
-  src/client
+React/client source is in [src/client](src/client).
 
-####Hosts
-1. Run `sudo nano /etc/hosts` in Terminal/Iterm
-2. Add `127.0.0.1 lumiary-local.quickframe.com api-local.quickframe.com ` and save
+## Getting Started
 
-####Commitzen:
-  npm install commitizen -g
+Make sure you [set up your development environment](https://app.tettra.co/teams/quickframe/pages/setting-up-your-development-environment) first. 
 
-####Webpack:
-1. first run: compile dependencies bundle
-2. open `docker-compose.yml`
-3. line 8 should be uncommented and look like this:
-  `command: [ "npm", "run", "vendor" ]`
-  
-  note: `command` should line up with `build` key.
-4. run `docker-compose up` to build the bundle
-5. in docker-compose.yml, re-comment line 8
-  `# command: [ "npm", "run", "vendor" ]`
-6. run `docker-compose.yml` to run project
+Clone the project
+```
+git clone git@github.com:quickframe/lumiary.git
+cd lumiary
+```
 
-####Testing:
-1. Uncomment one of lines 12-16 in `docker-compose.yml` and save
-2. `command: ["npm", "run", "test:local"`
-3. `command: ["npm", "run", "test" ]`
-4. `command: ["npm", "run", "test:local" ]`
-5. `command: ["npm", "run", "test:watch" ]`
-6. `command: ["npm", "run", "test:coverage"]`
-7. `command: ["npm", "run", "test:snapshot"]`
-8. Re-comment and save before committing `docker-compose.yml`
+Install dev dependencies 
+```
+npm install --only=dev
+```
+
+Build the Webpack vendor bundle:
+
+* Open `docker-compose.yml`
+* Uncomment [this line](docker-compose.yml#L9) and save.
+* run `docker-compose build` to build the bundle.  
+* in `docker-compose.yml`, re-comment [that line from before](docker-compose.yml#L9) and save. 
+
+## Run the webapp
+
+Run with
+
+```
+docker-compose up
+```
+
+Navigate to https://lumiary-local.quickframe.com:4000.
+
+If you see the QF logo spinner, you're good to go!
+
+## Testing
+
+* Uncomment any of [these lines](docker-compose.yml#L12-L16) and save
+* Re-comment and save before committing `docker-compose.yml`
+
+
+
+
 
 
 
