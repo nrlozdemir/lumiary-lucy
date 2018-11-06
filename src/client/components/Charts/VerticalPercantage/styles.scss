@@ -1,0 +1,13 @@
+.leftSide {
+	.parallelogram {
+		transform: skew(40deg);
+		background: #2f2d3d;
+
+		margin-left: -22px;
+		box-shadow: 4px 0 2px 1px #cf9d34;
+	}
+	.square {
+		width: 50px;
+		background: #2f2d3d;
+	}
+}
