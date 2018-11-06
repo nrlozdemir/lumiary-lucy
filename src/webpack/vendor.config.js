@@ -49,7 +49,12 @@ module.exports = {
 			"immutability-helper",
 			"immutable",
 			"isomorphic-fetch",
-			"lodash"
+			"lodash",
+
+			"chart.js",
+			"react-chartjs-2",
+			"chartjs-plugin-annotation",
+			"chartjs-plugin-datalabels"
 		]
 	},
 
