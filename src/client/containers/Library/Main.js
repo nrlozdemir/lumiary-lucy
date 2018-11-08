@@ -33,35 +33,26 @@ class Library extends React.Component {
 						<Card
 							title="Lumiere Data"
 							customHeaderClass="bg-charcoal-grey border-bt-dark"
-							customBodyClass="bg-charcoal-grey"
+							customBodyClass="bg-charcoal-grey pl-25"
 						>
 							<div className="col-12 p-10">
-								<div className="col-4">
+								<div className="col1-3">
 									<BarChart
-										width="30"
-										height="50"
+										width="1"
+										height="2"
 										data={[92]}
+										avarage="50"
 										labels={["Kar"]}
 										isGradient
 										gradientColors={["#161620", "#2f2e3d"]}
 										options={{
-											responsive: true,
 											plugins: {
 												datalabels: {
 													display: false
 												}
 											},
-											annotation: {
-												annotations: [
-													{
-														type: "line",
-														mode: "horizontal",
-														scaleID: "y-axis-0",
-														value: 35,
-														borderColor: "#55bdd5",
-														borderWidth: 2
-													}
-												]
+											tooltips: {
+												enabled: false
 											},
 											legend: {
 												display: false
@@ -79,7 +70,98 @@ class Library extends React.Component {
 												],
 												xAxes: [
 													{
-														barThickness: 70,
+														barPercentage: 0.75,
+														gridLines: {
+															display: false
+														}
+													}
+												]
+											}
+										}}
+									/>
+								</div>
+								<div className="col1-3">
+									<BarChart
+										width="1"
+										height="2"
+										data={[76]}
+										avarage="75"
+										labels={["Kar"]}
+										isGradient
+										gradientColors={["#161620", "#2f2e3d"]}
+										options={{
+											plugins: {
+												datalabels: {
+													display: false
+												}
+											},
+
+											legend: {
+												display: false
+											},
+											scales: {
+												yAxes: [
+													{
+														display: false,
+														ticks: {
+															min: 0,
+															max: 100,
+															stepSize: 20
+														}
+													}
+												],
+												xAxes: [
+													{
+														barPercentage: 0.75,
+														gridLines: {
+															display: false
+														}
+													}
+												]
+											}
+										}}
+									/>
+								</div>
+								<div className="col1-3">
+									<BarChart
+										width="1"
+										height="2"
+										data={[45]}
+										avarage="60"
+										labels={["Kar"]}
+										isGradient
+										gradientColors={["#161620", "#2f2e3d"]}
+										options={{
+											plugins: {
+												datalabels: {
+													display: false
+												},
+												afterDraw: function(chart, options) {
+													console.log(chart, options);
+												}
+											},
+
+											legend: {
+												display: false
+											},
+											scales: {
+												yAxes: [
+													{
+														display: true,
+														position: "right",
+														gridLines: {
+															display: false
+														},
+														ticks: {
+															min: 0,
+															max: 100,
+															stepSize: 20
+														}
+													}
+												],
+												xAxes: [
+													{
+														barPercentage: 0.75,
 														gridLines: {
 															display: false
 														}
@@ -121,7 +203,8 @@ class Library extends React.Component {
 													dataArr.map(data => {
 														sum += data;
 													});
-													let percentage = ((value * 100) / sum).toFixed(2) + "%";
+													let percentage =
+														((value * 100) / sum).toFixed(2) + "%";
 													return percentage;
 												}
 											}
@@ -219,7 +302,9 @@ class Library extends React.Component {
 														min: 0,
 														max: this.max,
 														callback: function(value) {
-															return ((value / this.max) * 100).toFixed(0) + "%";
+															return (
+																((value / this.max) * 100).toFixed(0) + "%"
+															);
 														}
 													}
 												}
@@ -246,7 +331,9 @@ class Library extends React.Component {
 												},
 												// eslint-disable-next-line no-unused-vars
 												formatter: (value, ctx, i = 0) => {
-													const arr = ctx.dataset.data.filter(x => !Number.isNaN(x));
+													const arr = ctx.dataset.data.filter(
+														x => !Number.isNaN(x)
+													);
 													const val = arr[Math.floor((arr.length - 1) / 2)];
 													if (value === val) {
 														return "12%...";
