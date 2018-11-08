@@ -4,27 +4,32 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Bar } from "react-chartjs-2";
 import "chartjs-plugin-annotation";
-// import style from "./styles.scss";
+import style from "./styles.scss";
 
 class BarChart extends React.PureComponent {
 	render() {
 		const { width, height, legend, options } = this.props;
 		const dataCreator = canvas => {
 			const ctx = canvas.getContext("2d");
-			const gradient = ctx.createLinearGradient(10, 0, 0, 100);
+			const gradient = ctx.createLinearGradient(
+				30,
+				0,
+				0,
+				ctx.canvas.height + 30 - Math.max(...this.props.data)
+			);
+
 			if (this.props.isGradient) {
-				console.log(this.props.gradientColors);
 				this.props.gradientColors.forEach((color, i) => {
 					gradient.addColorStop(i, color);
 				});
 			}
 			return {
-				labels: this.props.labels,
+				labels: [],
 				datasets: [
 					{
 						backgroundColor: this.props.isGradient ? gradient : "#FFF",
 						borderColor: "rgba(255,99,132,0)",
-						borderWidth: 1,
+						borderWidth: 0,
 						hoverBackgroundColor: this.props.isGradient ? gradient : "#FFF",
 						hoverBorderColor: "rgba(255,99,132,0)",
 						data: this.props.data
@@ -32,19 +37,54 @@ class BarChart extends React.PureComponent {
 				]
 			};
 		};
+		const plugins = [
+			{
+				afterDraw: chartInstance => {
+					const ctx = chartInstance.chart.ctx;
+					const yAxis = chartInstance.chart.scales["y-axis-0"];
+					const avarageLineY =
+						yAxis.maxHeight / Math.max(...yAxis.ticksAsNumbers);
+					ctx.beginPath();
+					ctx.moveTo(
+						ctx.canvas.clientWidth - 111,
+						yAxis.maxHeight - avarageLineY * this.props.avarage
+					);
+					ctx.lineTo(
+						ctx.canvas.clientWidth - 47,
+						yAxis.maxHeight - avarageLineY * this.props.avarage
+					);
+					ctx.lineWidth = 2;
+					ctx.strokeStyle = "#55bdd5";
+					ctx.stroke();
+				}
+			}
+		];
+
 		return (
-			<Bar
-				data={dataCreator}
-				width={width}
-				height={height}
-				legend={legend}
-				options={options}
-			/>
+			<div className={style.barContainer}>
+				<Bar
+					data={dataCreator}
+					width={width}
+					height={height}
+					legend={legend}
+					plugins={plugins}
+					options={options}
+				/>
+				<div className={style.xAxis}>
+					<div className={style.line} />
+					{this.props.labels.map(label => (
+						<h3 className={style.label} key={label}>
+							{label}
+						</h3>
+					))}
+				</div>
+			</div>
 		);
 	}
 }
 
 BarChart.propTypes = {
+	barName: PropTypes.string,
 	width: PropTypes.string,
 	height: PropTypes.string,
 	legend: PropTypes.bool,
