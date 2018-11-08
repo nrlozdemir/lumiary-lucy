@@ -11,7 +11,7 @@ class CustomLineGradient extends React.PureComponent {
 			const ctx = canvas.getContext("2d");
 			const gradient = ctx.createLinearGradient(0, 0, 1375, 0);
 			// Mocks //
-			gradient.addColorStop(0, "yellow");
+			gradient.addColorStop(0, "green");
 			gradient.addColorStop(0.25, "white");
 			gradient.addColorStop(0.45, "black");
 			gradient.addColorStop(0.65, "orange");
@@ -70,6 +70,8 @@ class CustomLineGradient extends React.PureComponent {
 			{
 				afterDraw: chartInstance => {
 					const ctx = chartInstance.chart.ctx;
+					const otherDraws = chartInstance.chart.ctx;
+
 					ctx.beginPath();
 					ctx.moveTo(10, 30);
 					ctx.lineTo(ctx.canvas.clientWidth, 30);
@@ -118,8 +120,25 @@ class CustomLineGradient extends React.PureComponent {
 						"5:40",
 						"6"
 					];
+
+					otherDraws.font = "20px AnonymousProBold";
+					otherDraws.shadowColor = "black";
+					otherDraws.shadowBlur = 6;
+					otherDraws.shadowOffsetX = 2;
+					otherDraws.shadowOffsetY = 2;
+					otherDraws.fillText("Scene 1", 75, 185);
+					otherDraws.fillText("Scene 2", 600, 185);
+					otherDraws.fillText("Scene 3", 750, 185);
+					otherDraws.fillText("Scene 4", 1200, 185);
+
 					labels.forEach(label => {
-						ctx.fillText(label, i - 5, 10);
+						otherDraws.font = "14px AnonymousProBold";
+						otherDraws.shadowColor = "black";
+						otherDraws.shadowBlur = 0;
+						otherDraws.shadowOffsetX = 0;
+						otherDraws.shadowOffsetY = 0;
+
+						ctx.fillText(label, i - 5, 12);
 
 						ctx.beginPath();
 						ctx.moveTo(i, 70);
@@ -137,6 +156,34 @@ class CustomLineGradient extends React.PureComponent {
 						ctx.stroke();
 						i = i + 45;
 					});
+
+					ctx.beginPath();
+					ctx.moveTo(175, 30);
+					ctx.lineTo(175, 260);
+					ctx.lineWidth = 3;
+					ctx.strokeStyle = "#fff";
+					ctx.stroke();
+
+					ctx.beginPath();
+					ctx.moveTo(575, 30);
+					ctx.lineTo(575, 260);
+					ctx.lineWidth = 3;
+					ctx.strokeStyle = "#fff";
+					ctx.stroke();
+
+					ctx.beginPath();
+					ctx.moveTo(700, 30);
+					ctx.lineTo(700, 260);
+					ctx.lineWidth = 3;
+					ctx.strokeStyle = "#fff";
+					ctx.stroke();
+
+					ctx.beginPath();
+					ctx.moveTo(850, 30);
+					ctx.lineTo(850, 260);
+					ctx.lineWidth = 3;
+					ctx.strokeStyle = "#fff";
+					ctx.stroke();
 
 					ctx.beginPath();
 					ctx.moveTo(ctx.canvas.clientWidth, 70);
