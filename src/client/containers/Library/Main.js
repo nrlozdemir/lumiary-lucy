@@ -438,9 +438,9 @@ class Library extends React.Component {
 						<Card
 							title="Lumiere Data"
 							customHeaderClass="bg-tealish border-bt-dark"
-							customBodyClass="bg-charcoal-grey  color-white"
+							customBodyClass="bg-dark-three box-shadow-black-1 color-white"
 						>
-							<div className="col-12">
+							<div className="col-12 p-25">
 								<CustomLineGradient />
 							</div>
 						</Card>
