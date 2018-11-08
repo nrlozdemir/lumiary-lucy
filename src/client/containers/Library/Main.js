@@ -11,6 +11,7 @@ import Card from "../../components/Card";
 import VerticalPercentage from "../../components/Charts/VerticalPercantage";
 import BarChart from "../../components/Charts/BarChart";
 import { pieData, lineData, lineWithCustomLabel } from "./options";
+import CustomLineGradient from "../../components/Charts/CustomLineGradient";
 
 class Library extends React.Component {
 	render() {
@@ -24,8 +25,50 @@ class Library extends React.Component {
 							customHeaderClass="bg-charcoal-grey border-bt-dark"
 							customBodyClass="bg-charcoal-grey"
 						>
-							<div className="col-12 p-25">
-								<VerticalPercentage data={data} width="542" height="50" />
+							<div className="col-12">
+								<Line
+									data={lineData}
+									options={{
+										legend: false,
+										scales: {
+											xAxes: [
+												{
+													gridLines: {
+														color: "#000",
+														borderDash: [5, 10.15]
+													}
+												}
+											],
+											yAxes: [
+												{
+													id: "right-y-axis",
+													type: "linear",
+													position: "right",
+													gridLines: {
+														display: false
+													}
+												}
+											]
+										},
+										ticks: {
+											display: false
+										},
+										layout: {
+											padding: {
+												left: 50,
+												right: 50,
+												bottom: 50,
+												top: 50
+											}
+										},
+
+										plugins: {
+											datalabels: {
+												display: false
+											}
+										}
+									}}
+								/>{" "}
 							</div>
 						</Card>
 					</div>
@@ -140,7 +183,6 @@ class Library extends React.Component {
 													console.log(chart, options);
 												}
 											},
-
 											legend: {
 												display: false
 											},
@@ -211,6 +253,51 @@ class Library extends React.Component {
 										},
 										tooltips: {
 											enabled: false
+										}
+									}}
+								/>
+							</div>
+							<div className="col-7">
+								<Line
+									data={lineData}
+									options={{
+										legend: false,
+										scales: {
+											xAxes: [
+												{
+													gridLines: {
+														color: "#000",
+														borderDash: [5, 10.15]
+													}
+												}
+											],
+											yAxes: [
+												{
+													id: "right-y-axis",
+													type: "linear",
+													position: "right",
+													gridLines: {
+														display: false
+													}
+												}
+											]
+										},
+										ticks: {
+											display: false
+										},
+										layout: {
+											padding: {
+												left: 50,
+												right: 50,
+												bottom: 50,
+												top: 50
+											}
+										},
+
+										plugins: {
+											datalabels: {
+												display: false
+											}
 										}
 									}}
 								/>
@@ -344,6 +431,17 @@ class Library extends React.Component {
 										}
 									}}
 								/>
+							</div>
+						</Card>
+					</div>
+					<div className="col-12 mt-10">
+						<Card
+							title="Lumiere Data"
+							customHeaderClass="bg-tealish border-bt-dark"
+							customBodyClass="bg-charcoal-grey  color-white"
+						>
+							<div className="col-12">
+								<CustomLineGradient />
 							</div>
 						</Card>
 					</div>
