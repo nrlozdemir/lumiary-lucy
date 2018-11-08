@@ -46,11 +46,16 @@ class BarChart extends React.PureComponent {
 						yAxis.maxHeight / Math.max(...yAxis.ticksAsNumbers);
 					ctx.beginPath();
 					ctx.moveTo(
-						ctx.canvas.clientWidth - 111,
+						(chartInstance.chart.width -
+							chartInstance.chart.getDatasetMeta(0).data[0]._model.width) /
+							2,
 						yAxis.maxHeight - avarageLineY * this.props.avarage
 					);
 					ctx.lineTo(
-						ctx.canvas.clientWidth - 47,
+						(chartInstance.chart.width -
+							chartInstance.chart.getDatasetMeta(0).data[0]._model.width) /
+							2 +
+							chartInstance.chart.getDatasetMeta(0).data[0]._model.width,
 						yAxis.maxHeight - avarageLineY * this.props.avarage
 					);
 					ctx.lineWidth = 2;
