@@ -17,12 +17,12 @@ class BarChart extends React.PureComponent {
 				0,
 				ctx.canvas.height + 30 - Math.max(...this.props.data)
 			);
-
 			if (this.props.isGradient) {
 				this.props.gradientColors.forEach((color, i) => {
 					gradient.addColorStop(i, color);
 				});
 			}
+
 			return {
 				labels: [],
 				datasets: [
@@ -37,6 +37,7 @@ class BarChart extends React.PureComponent {
 				]
 			};
 		};
+
 		const plugins = [
 			{
 				afterDraw: chartInstance => {
@@ -61,6 +62,17 @@ class BarChart extends React.PureComponent {
 					ctx.lineWidth = 2;
 					ctx.strokeStyle = "#55bdd5";
 					ctx.stroke();
+
+					if (Array.isArray(this.props.yLabels) && this.props.yLabels) {
+						const labelOnY = yAxis.maxHeight / this.props.yLabels.length;
+						this.props.yLabels.forEach((label, i) => {
+							i = i + 1;
+							ctx.textAlign = "end";
+							ctx.fillStyle = "#FFF";
+							ctx.font = "14px Arial";
+							ctx.fillText(label, chartInstance.chart.width, i * labelOnY);
+						});
+					}
 				}
 			}
 		];
@@ -76,7 +88,13 @@ class BarChart extends React.PureComponent {
 					options={options}
 				/>
 				<div className={style.xAxis}>
-					<div className={style.line} />
+					<div
+						className={
+							Array.isArray(this.props.yLabels) && this.props.yLabels
+								? style.halfLine
+								: style.line
+						}
+					/>
 					{this.props.labels.map(label => (
 						<h3 className={style.label} key={label}>
 							{label}
@@ -97,7 +115,8 @@ BarChart.propTypes = {
 	data: PropTypes.array,
 	isGradient: PropTypes.bool,
 	gradientColors: PropTypes.array,
-	labels: PropTypes.array
+	labels: PropTypes.array,
+	yLabels: PropTypes.array
 };
 
 export default BarChart;
