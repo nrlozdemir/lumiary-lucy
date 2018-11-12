@@ -9,3 +9,10 @@
 	height: 400px;
 	background: white;
 }
+.labels {
+	p {
+		line-height: 1.6;
+		text-align: right;
+		color: $color-white;
+	}
+}

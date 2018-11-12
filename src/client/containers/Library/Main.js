@@ -25,7 +25,7 @@ class Library extends React.Component {
 							customHeaderClass="bg-charcoal-grey border-bt-dark"
 							customBodyClass="bg-charcoal-grey"
 						>
-							<div className="col-12">
+							<div className="col-12 ">
 								<Line
 									data={lineData}
 									options={{
@@ -74,18 +74,17 @@ class Library extends React.Component {
 					</div>
 					<div className="col-5 mt-10">
 						<Card
-							title="Lumiere Data"
-							customHeaderClass="bg-charcoal-grey border-bt-dark"
+							customHeaderClass="bg-charcoal-dark border-bt-dark"
 							customBodyClass="bg-charcoal-grey pl-25"
 						>
 							<div className="col-12 p-10">
-								<div className="col1-3">
+								<div className="col-1-3">
 									<BarChart
 										width="1"
 										height="2"
 										data={[92]}
 										avarage="50"
-										labels={["Kar"]}
+										labels={["Instagram"]}
 										isGradient
 										gradientColors={["#161620", "#2f2e3d"]}
 										options={{
@@ -123,16 +122,19 @@ class Library extends React.Component {
 										}}
 									/>
 								</div>
-								<div className="col1-3">
+								<div className="col-1-3">
 									<BarChart
 										width="1"
 										height="2"
 										data={[76]}
 										avarage="75"
-										labels={["Kar"]}
+										labels={["Facebook"]}
 										isGradient
 										gradientColors={["#161620", "#2f2e3d"]}
 										options={{
+											tooltips: {
+												enabled: false
+											},
 											plugins: {
 												datalabels: {
 													display: false
@@ -165,22 +167,34 @@ class Library extends React.Component {
 										}}
 									/>
 								</div>
-								<div className="col1-3">
+								<div className="col-1-3">
 									<BarChart
 										width="1"
 										height="2"
 										data={[45]}
 										avarage="60"
-										labels={["Kar"]}
+										labels={["Youtube"]}
+										yLabels={[
+											"1M",
+											"500K",
+											"250K",
+											"100K",
+											"50K",
+											"40K",
+											"20K",
+											"15K",
+											"10K",
+											"0"
+										]}
 										isGradient
 										gradientColors={["#161620", "#2f2e3d"]}
 										options={{
+											tooltips: {
+												enabled: false
+											},
 											plugins: {
 												datalabels: {
 													display: false
-												},
-												afterDraw: function(chart, options) {
-													console.log(chart, options);
 												}
 											},
 											legend: {
@@ -189,15 +203,14 @@ class Library extends React.Component {
 											scales: {
 												yAxes: [
 													{
-														display: true,
-														position: "right",
+														display: false,
 														gridLines: {
 															display: false
 														},
 														ticks: {
-															min: 0,
+															min: 10,
 															max: 100,
-															stepSize: 20
+															stepSize: 10
 														}
 													}
 												],
