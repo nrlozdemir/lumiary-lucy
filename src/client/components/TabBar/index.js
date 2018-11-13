@@ -34,19 +34,14 @@ const TabBar = ({
 	);
 };
 
-TabBar.defaultProps = {
-	onSelect: () => {},
-	className: ""
-};
-
 TabBar.propTypes = {
 	items: PropTypes.array,
 	selectedTabClassName: PropTypes.string,
 	selectedTabPanelClassName: PropTypes.string,
 	tablistClassName: PropTypes.string,
 	onSelect: PropTypes.func,
-	children: PropTypes.object,
-	className: PropTypes.object
+	children: PropTypes.array,
+	className: PropTypes.string
 };
 
 export default TabBar;
