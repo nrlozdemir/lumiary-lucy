@@ -1,40 +1,34 @@
-.tabBar {
-  margin-bottom: 40px;
-}
-
 :global {
-  .react-tabs {
-    .react-tabs__tab-list {
-      display: flex;
-      justify-content: space-evenly;
-      height: 48px;
-      align-items: center;
-      background-color: $color-neutral-charcoal;
+	.react-tabs {
+		.react-tabs__tab-list {
+			position: relative;
+			display: flex;
+			flex-wrap: wrap;
+			background-color: $color-dark;
+			color: $color-white;
+			font-family: $font-family-clanOTBook;
+			.react-tabs__tab {
+				flex: 1;
+				padding: 15px 0;
+				text-align: center;
+				cursor: pointer;
+			}
+		}
+	}
 
-      .react-tabs__tab {
-        color: $color-neutral-medium-grey;
-        cursor:pointer;
+	.panel {
+		li.section {
+			//height: 200px;
+			border: 1px solid $color-neutral-sterling-grey;
+			border-top: none;
+			padding: 48px;
+			cursor: pointer;
+			min-height: 180px;
+			height: auto;
 
-        &.react-tabs__tab--selected{
-          color: white;
-        }
-      }
-    }
-  }
-
-  .panel {
-    li.section {
-      //height: 200px;
-      border: 1px solid $color-neutral-sterling-grey;
-      border-top: none;
-      padding: 48px;
-      cursor: pointer;
-      min-height: 180px;
-      height: auto;
-
-      h3 {
-        color: $color-neutral-charcoal;
-      }
-    }
-  }
+			h3 {
+				color: $color-neutral-charcoal;
+			}
+		}
+	}
 }

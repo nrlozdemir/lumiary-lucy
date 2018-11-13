@@ -1,13 +1,10 @@
-.main {
-}
-
 .videoTabs {
-	background: white;
+	background: $color-white;
 	height: 400px;
 }
 .statistic {
 	height: 400px;
-	background: white;
+	background: $color-white;
 }
 .labels {
 	p {
@@ -15,4 +12,37 @@
 		text-align: right;
 		color: $color-white;
 	}
+}
+.selectedTabs {
+	background-color: $color-aqua-blue;
+	color: $color-black;
+}
+.selectedPanel {
+	padding: 0;
+	margin: 0;
+}
+.closeButton {
+	color: $color-white;
+	font-size: 20px;
+	font-family: $font-family-clanOTBook;
+	position: absolute;
+	margin-top: -47px;
+	margin-left: 1px;
+	padding: 15px;
+	background: $color-dark-three;
+	cursor: pointer;
+}
+.tablList {
+	border: 1px solid $color-aqua-blue;
+}
+.videoImage {
+	position: relative;
+}
+.videoIcon {
+	position: absolute;
+	z-index: 2;
+	left: 50%;
+	top: 50%;
+	font-size: 85px;
+	transform: translate(-50%, -50%);
 }

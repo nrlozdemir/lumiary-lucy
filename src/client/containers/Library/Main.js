@@ -1,6 +1,7 @@
 "use strict";
 
 import React from "react";
+import PropTypes from "prop-types";
 // Components
 import { Pie, Line } from "react-chartjs-2";
 import "chartjs-plugin-datalabels";
@@ -8,76 +9,66 @@ import "chartjs-plugin-datalabels";
 // Styles
 import style from "./styles.scss";
 import Card from "../../components/Card";
-import VerticalPercentage from "../../components/Charts/VerticalPercantage";
 import BarChart from "../../components/Charts/BarChart";
 import { pieData, lineData, lineWithCustomLabel } from "./options";
 import CustomLineGradient from "../../components/Charts/CustomLineGradient";
+import TabBar from "../../components/TabBar";
 
 class Library extends React.Component {
 	render() {
-		const data = { first: 10, second: 90 };
 		return (
 			<React.Fragment>
 				<div className={style.main}>
 					<div className="col-7 mt-10">
-						<Card
-							title="Lumiere Data"
-							customHeaderClass="bg-charcoal-grey border-bt-dark"
-							customBodyClass="bg-charcoal-grey"
-						>
-							<div className="col-12 ">
-								<Line
-									data={lineData}
-									options={{
-										legend: false,
-										scales: {
-											xAxes: [
-												{
-													gridLines: {
-														color: "#000",
-														borderDash: [5, 10.15]
-													}
-												}
-											],
-											yAxes: [
-												{
-													id: "right-y-axis",
-													type: "linear",
-													position: "right",
-													gridLines: {
-														display: false
-													}
-												}
-											]
-										},
-										ticks: {
-											display: false
-										},
-										layout: {
-											padding: {
-												left: 50,
-												right: 50,
-												bottom: 50,
-												top: 50
-											}
-										},
-
-										plugins: {
-											datalabels: {
-												display: false
-											}
-										}
-									}}
-								/>{" "}
-							</div>
+						<Card removeHeader customBodyClass="bg-charcoal-grey">
+							<TabBar
+								items={["Single View", "Compare Mode"]}
+								selectedTabClassName={style.selectedTabs}
+								selectedTabPanelClassName={style.selectedPanel}
+								tablistClassName={style.tablList}
+							>
+								<div>
+									<span
+										className={style.closeButton}
+										onClick={() => this.props.router.push(`/`)}
+									>
+										X
+									</span>
+									<div className={style.videoImage}>
+										<span className={style.videoIcon + " qf-iconPlay"}>
+											<span className="path1" />
+											<span className="path2" />
+											<span className="path3" />
+											<span className="path4" />
+											<span className="path5" />
+											<span className="path6" />
+										</span>
+										<img
+											style={{ width: "100%" }}
+											src="https://picsum.photos/1000/400/?random
+							"
+										/>
+									</div>
+								</div>
+								<div>
+									<span
+										className={style.closeButton}
+										onClick={() => this.props.router.push(`/`)}
+									>
+										X
+									</span>
+									<img
+										style={{ width: "100%" }}
+										src="https://picsum.photos/1000/400/
+							"
+									/>
+								</div>
+							</TabBar>
 						</Card>
 					</div>
 					<div className="col-5 mt-10">
-						<Card
-							customHeaderClass="bg-charcoal-dark border-bt-dark"
-							customBodyClass="bg-charcoal-grey pl-25"
-						>
-							<div className="col-12 p-10">
+						<Card removeHeader customBodyClass="bg-charcoal-grey pl-25">
+							<div className="col-12 ">
 								<div className="col-1-3">
 									<BarChart
 										width="1"
@@ -464,7 +455,7 @@ class Library extends React.Component {
 	}
 }
 
-Library.propTypes = {};
+Library.propTypes = { router: PropTypes.object };
 
 Library.defaultProps = {};
 
