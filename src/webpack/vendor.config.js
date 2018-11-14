@@ -27,6 +27,7 @@ module.exports = {
 			"react-twitter-auth",
 			"react-dnd",
 			"react-dnd-html5-backend",
+			"react-dnd-test-backend",
 
 			"redux",
 			"redux-form",
