@@ -13,13 +13,14 @@ import BarChart from "../../components/Charts/BarChart";
 import { pieData, lineData, lineWithCustomLabel } from "./options";
 import CustomLineGradient from "../../components/Charts/CustomLineGradient";
 import TabBar from "../../components/TabBar";
+import VideoBrief from "./Sections/videoBrief";
 
 class Library extends React.Component {
 	render() {
 		return (
 			<React.Fragment>
 				<div className={style.main}>
-					<div className="col-7 mt-10">
+					<div className="col-7">
 						<Card removeHeader customBodyClass="bg-charcoal-grey">
 							<TabBar
 								items={["Single View", "Compare Mode"]}
@@ -45,7 +46,7 @@ class Library extends React.Component {
 										</span>
 										<img
 											style={{ width: "100%" }}
-											src="https://picsum.photos/1000/400/?random
+											src="https://picsum.photos/1000/430/?random
 							"
 										/>
 									</div>
@@ -59,7 +60,7 @@ class Library extends React.Component {
 									</span>
 									<img
 										style={{ width: "100%" }}
-										src="https://picsum.photos/1000/400/
+										src="https://picsum.photos/1000/430/
 							"
 									/>
 								</div>
@@ -67,158 +68,7 @@ class Library extends React.Component {
 						</Card>
 					</div>
 					<div className="col-5 mt-10">
-						<Card removeHeader customBodyClass="bg-charcoal-grey pl-25">
-							<div className="col-12 ">
-								<div className="col-1-3">
-									<BarChart
-										width="1"
-										height="2"
-										data={[92]}
-										avarage="50"
-										labels={["Instagram"]}
-										isGradient
-										gradientColors={["#161620", "#2f2e3d"]}
-										options={{
-											plugins: {
-												datalabels: {
-													display: false
-												}
-											},
-											tooltips: {
-												enabled: false
-											},
-											legend: {
-												display: false
-											},
-											scales: {
-												yAxes: [
-													{
-														display: false,
-														ticks: {
-															min: 0,
-															max: 100,
-															stepSize: 20
-														}
-													}
-												],
-												xAxes: [
-													{
-														barPercentage: 0.75,
-														gridLines: {
-															display: false
-														}
-													}
-												]
-											}
-										}}
-									/>
-								</div>
-								<div className="col-1-3">
-									<BarChart
-										width="1"
-										height="2"
-										data={[76]}
-										avarage="75"
-										labels={["Facebook"]}
-										isGradient
-										gradientColors={["#161620", "#2f2e3d"]}
-										options={{
-											tooltips: {
-												enabled: false
-											},
-											plugins: {
-												datalabels: {
-													display: false
-												}
-											},
-
-											legend: {
-												display: false
-											},
-											scales: {
-												yAxes: [
-													{
-														display: false,
-														ticks: {
-															min: 0,
-															max: 100,
-															stepSize: 20
-														}
-													}
-												],
-												xAxes: [
-													{
-														barPercentage: 0.75,
-														gridLines: {
-															display: false
-														}
-													}
-												]
-											}
-										}}
-									/>
-								</div>
-								<div className="col-1-3">
-									<BarChart
-										width="1"
-										height="2"
-										data={[45]}
-										avarage="60"
-										labels={["Youtube"]}
-										yLabels={[
-											"1M",
-											"500K",
-											"250K",
-											"100K",
-											"50K",
-											"40K",
-											"20K",
-											"15K",
-											"10K",
-											"0"
-										]}
-										isGradient
-										gradientColors={["#161620", "#2f2e3d"]}
-										options={{
-											tooltips: {
-												enabled: false
-											},
-											plugins: {
-												datalabels: {
-													display: false
-												}
-											},
-											legend: {
-												display: false
-											},
-											scales: {
-												yAxes: [
-													{
-														display: false,
-														gridLines: {
-															display: false
-														},
-														ticks: {
-															min: 10,
-															max: 100,
-															stepSize: 10
-														}
-													}
-												],
-												xAxes: [
-													{
-														barPercentage: 0.75,
-														gridLines: {
-															display: false
-														}
-													}
-												]
-											}
-										}}
-									/>
-								</div>
-							</div>
-						</Card>
+						<VideoBrief />
 					</div>
 					<div className="col-12 mt-10">
 						<Card
