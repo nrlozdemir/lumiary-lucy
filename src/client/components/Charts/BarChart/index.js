@@ -22,7 +22,6 @@ class BarChart extends React.PureComponent {
 					gradient.addColorStop(i, color);
 				});
 			}
-
 			return {
 				labels: [],
 				datasets: [
@@ -37,7 +36,6 @@ class BarChart extends React.PureComponent {
 				]
 			};
 		};
-
 		const plugins = [
 			{
 				afterDraw: chartInstance => {
