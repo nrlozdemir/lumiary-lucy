@@ -46,13 +46,15 @@ class BarChart extends React.PureComponent {
 					ctx.beginPath();
 					ctx.moveTo(
 						(chartInstance.chart.width -
+							10 -
 							chartInstance.chart.getDatasetMeta(0).data[0]._model.width) /
 							2,
 						yAxis.maxHeight - avarageLineY * this.props.avarage
 					);
 					ctx.lineTo(
 						(chartInstance.chart.width -
-							chartInstance.chart.getDatasetMeta(0).data[0]._model.width) /
+							chartInstance.chart.getDatasetMeta(0).data[0]._model.width +
+							10) /
 							2 +
 							chartInstance.chart.getDatasetMeta(0).data[0]._model.width,
 						yAxis.maxHeight - avarageLineY * this.props.avarage
@@ -67,7 +69,7 @@ class BarChart extends React.PureComponent {
 							i = i + 1;
 							ctx.textAlign = "end";
 							ctx.fillStyle = "#FFF";
-							ctx.font = "14px Arial";
+							ctx.font = "500 11px ClanOT";
 							ctx.fillText(label, chartInstance.chart.width, i * labelOnY);
 						});
 					}
@@ -90,14 +92,20 @@ class BarChart extends React.PureComponent {
 						className={
 							Array.isArray(this.props.yLabels) && this.props.yLabels
 								? style.halfLine
-								: style.line
+								: style.fullLine
 						}
 					/>
-					{this.props.labels.map(label => (
-						<h3 className={style.label} key={label}>
-							{label}
-						</h3>
-					))}
+					{this.props.labels.map(label => {
+						let words = label.split(" ");
+						return (
+							<React.Fragment key={label}>
+								<h3 className={style.firstLabel} key={label}>
+									{words[0]}
+								</h3>
+								<h3 className={style.secondLabel}>{words[1]}</h3>
+							</React.Fragment>
+						);
+					})}
 				</div>
 			</div>
 		);
