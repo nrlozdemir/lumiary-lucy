@@ -36,7 +36,7 @@ const VideoBrief = () => (
 					<BarChart
 						width="2"
 						height="3"
-						data={[92]}
+						data={[30]}
 						avarage="50"
 						labels={["1M Views"]}
 						isGradient
@@ -60,7 +60,7 @@ const VideoBrief = () => (
 										ticks: {
 											min: 0,
 											max: 100,
-											stepSize: 20
+											stepSize: 10
 										}
 									}
 								],
@@ -105,7 +105,7 @@ const VideoBrief = () => (
 										ticks: {
 											min: 0,
 											max: 100,
-											stepSize: 20
+											stepSize: 10
 										}
 									}
 								],
@@ -162,7 +162,7 @@ const VideoBrief = () => (
 											display: false
 										},
 										ticks: {
-											min: 10,
+											min: 0,
 											max: 100,
 											stepSize: 10
 										}
