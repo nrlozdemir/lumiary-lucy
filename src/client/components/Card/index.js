@@ -12,13 +12,17 @@ class Card extends React.Component {
 			customHeaderClass,
 			customBodyClass,
 			title,
-			removeHeader
+			removeHeader,
+			headerIconRight,
+			headerIconLeft
 		} = this.props;
 		return (
 			<div className={styles.card}>
 				{!removeHeader ? (
 					<div className={styles.cardHeader + " " + customHeaderClass}>
+						{headerIconLeft ? <span className={headerIconLeft} /> : null}
 						{title}
+						{headerIconRight ? <span className={headerIconRight} /> : null}
 					</div>
 				) : null}
 				<div className={styles.cardBody + " " + customBodyClass}>
@@ -34,7 +38,9 @@ Card.propTypes = {
 	children: PropTypes.object,
 	customHeaderClass: PropTypes.string,
 	customBodyClass: PropTypes.string,
-	removeHeader: PropTypes.bool
+	removeHeader: PropTypes.bool,
+	headerIconRight: PropTypes.string,
+	headerIconLeft: PropTypes.string
 };
 
 Card.defaultProps = {};
