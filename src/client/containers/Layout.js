@@ -12,7 +12,7 @@ import { Header } from "../components/Layout";
 import Aside from "../components/Aside";
 
 const Layout = ({ children, main, router }) => {
-  const hasSidebar = main && main.props.route.sidebar || false
+  const hasSidebar = children && children.props.route.sidebar || false
 
   return (
     <div style={style} className="layout">

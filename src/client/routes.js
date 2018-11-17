@@ -9,7 +9,7 @@ import { loadState, saveState } from "./utils/persistence";
 //routes
 import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
-import Library from "./containers/Library/Main";
+import Library from "./containers/Library";
 import MarketView from "./containers/MarketView";
 import Panoptic from "./containers/Panoptic";
 
@@ -23,8 +23,7 @@ const requireAuth = (nextState, replace) => {
 const routes = (
 	<Route path={baseName} component={Layout}>
 		<IndexRoute getComponent={Home} />
-		<Route path="/library/" getComponent={Home} sidebar/>
-		<Route path="/library/video/:id" components={Library} sidebar/>
+		<Route path="library(/video/:id)" getComponent={Library} sidebar/>
 		<Route path="marketview(/:type)" getComponent={ MarketView }  />
 		<Route path="panoptic" getComponent={ Panoptic } />
 		<Route path="*" components={NotFound}/>
