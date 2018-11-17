@@ -1,11 +1,127 @@
-.main {
+%icons {
+	color: $color-white;
+	margin: 0 8px;
 }
 
-.videoTabs {
-	background: white;
-	height: 400px;
+%round {
+	width: 6px;
+	height: 6px;
+	display: inline-block;
+	margin: 0 10px;
+	border-radius: 6px;
 }
+.main {
+	margin: 45px 0;
+}
+
 .statistic {
 	height: 400px;
-	background: white;
+	background: $color-white;
+}
+.labels {
+	p {
+		line-height: 1.6;
+		text-align: right;
+		color: $color-white;
+	}
+}
+.selectedTabs {
+	background-color: $color-aqua-blue;
+	color: $color-black;
+}
+.selectedPanel {
+	padding: 0;
+	margin: 0;
+}
+.closeButton {
+	color: $color-white;
+	font-size: 20px;
+	font-family: $font-family-clanOTBook;
+	position: absolute;
+	margin-top: -47px;
+	margin-left: 1px;
+	padding: 15px;
+	background: $color-dark-three;
+	cursor: pointer;
+}
+.tablList {
+	border: 1px solid $color-aqua-blue;
+}
+.header {
+	font-size: 18px;
+	color: $color-white;
+	font-weight: bold;
+	font-family: $font-family-sans-serif;
+	margin-bottom: 45px;
+}
+.videoImage {
+	position: relative;
+}
+.videoTabs {
+	background: $color-white;
+	height: 400px;
+}
+.videoIcon {
+	position: absolute;
+	z-index: 2;
+	left: 50%;
+	top: 50%;
+	font-size: 85px;
+	transform: translate(-50%, -50%);
+}
+.videoBriefLegend {
+	font-size: 12px;
+	color: $color-white;
+	font-family: $font-family-clanOT;
+	margin: 13px;
+}
+.activeIcon {
+	@extend %icons;
+	opacity: 1;
+}
+.deactiveIcon {
+	@extend %icons;
+	opacity: 0.25;
+}
+
+.roundTealish {
+	@extend %round;
+	background: $color-tealish;
+}
+.roundGrey {
+	@extend %round;
+	border: solid 0.7px $color-black;
+	background-image: linear-gradient(to top, $color-charcoal-grey, $color-dark);
+}
+.roundWhite {
+	@extend %round;
+	width: 11px;
+	height: 11px;
+	border-radius: 11px;
+	background: $color-white;
+}
+
+.secondTitle {
+	width: 100%;
+	padding: 9px 0;
+	text-align: center;
+	color: $color-tealish;
+	font-size: 13px;
+	font-family: $font-family-clanOT;
+	border-bottom: 2px solid $color-tealish;
+}
+
+.videoBottomLegend {
+	text-align: center;
+	float: left;
+	font-size: 12px;
+	width: 100%;
+	color: $color-white;
+	font-family: $font-family-clanOT;
+	margin: 13px 0;
+}
+.avarageText {
+	font-family: $font-family-clanOT;
+	font-size: 12px;
+	color: $color-tealish;
 }

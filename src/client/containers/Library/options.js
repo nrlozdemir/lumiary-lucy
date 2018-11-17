@@ -212,4 +212,54 @@ const lineWithCustomLabel = {
 	]
 };
 
-export { lineData, lineWithCustomLabel, pieData };
+const videoTabsData = [
+	{
+		tabName: "Frames Per Second",
+		secondTitle: "24 FPS this video",
+		avarage: 82,
+		avarageTitle: "82 % Industry average",
+		value: 77,
+		legendTitle: "77% of your videos",
+		url: "frames-per-second"
+	},
+	{
+		tabName: "Duration",
+		secondTitle: "03:20” this video",
+		avarage: 74,
+		avarageTitle: "74 % Industry average",
+		avarageSecondTitle: "(3-5’ range)",
+		value: 54,
+		legendTitle: "54% of your videos",
+		legendSecondTitle: "(3-5’ range)",
+		url: "duration"
+	},
+	{
+		tabName: "Aspect Ratio",
+		secondTitle: "16:9 this video",
+		avarage: 77,
+		avarageTitle: "77 % Industry average",
+		value: 39,
+		legendTitle: "39% of your videos",
+		url: "aspect-ratio"
+	},
+	{
+		tabName: "Number of Frames",
+		secondTitle: "73829 frames",
+		avarage: 69,
+		avarageTitle: "69 % Industry average",
+		value: 18,
+		legendTitle: "18% of your videos",
+		url: "number-of-frames"
+	},
+	{
+		tabName: "Scenes",
+		secondTitle: "4 scenes this video",
+		avarage: 65,
+		avarageTitle: "65 % Industry average",
+		value: 6,
+		legendTitle: "6% of your videos",
+		url: "scenes"
+	}
+];
+
+export { lineData, lineWithCustomLabel, pieData, videoTabsData };
