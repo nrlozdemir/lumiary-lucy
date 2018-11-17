@@ -10,6 +10,7 @@ import { loadState, saveState } from "./utils/persistence";
 import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 import Library from "./containers/Library/Main";
+import MarketView from "./containers/MarketView";
 
 const requireAuth = (nextState, replace) => {
 	const state = loadState() || {};
@@ -22,6 +23,7 @@ const routes = (
 	<Route path={baseName} component={Layout}>
 		<IndexRoute getComponent={Home} />
 		<Route path="/library/video/:id" components={Library} />
+		<Route path="marketview(/:type)" getComponent={ MarketView } full />
 		<Route path="*" components={NotFound} />
 	</Route>
 );
