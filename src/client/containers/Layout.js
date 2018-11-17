@@ -12,36 +12,45 @@ import { Header } from "../components/Layout";
 import Aside from "../components/Aside";
 
 const Layout = ({ children, main, router }) => {
-	return (
-		<div style={style} className="layout">
-			<Helmet>
-				<meta
-					name="viewport"
-					content="width=device-width,initial-scale=1,shrink-to-fit=no"
-				/>
-			</Helmet>
-			<div className={layoutStyle.headerSide}>
-				<Header />
-				<div className={layoutStyle.bottomBorder} />
-			</div>
-			<div className={helpers.marginTop5}>
-				<div className={layoutStyle.aside}>
-					<Aside router={router} />
-				</div>
-				<div className={layoutStyle.mainSide}>
-					{children}
-					{main}
-				</div>
-			</div>
-			{/* <Footer /> */}
-		</div>
-	);
+  const hasSidebar = children && children.props.route.sidebar || false
+
+  return (
+    <div style={style} className="layout">
+      <Helmet>
+        <meta
+          name="viewport"
+          content="width=device-width,initial-scale=1,shrink-to-fit=no"
+        />
+      </Helmet>
+      <div className={layoutStyle.headerSide}>
+        <Header />
+      </div>
+      <div className={layoutStyle.bottomBorder} />
+      {
+        hasSidebar ?
+          <div className={helpers.marginTop5}>
+            <div className={layoutStyle.aside}>
+              <Aside router={router} />
+            </div>
+            <div className={layoutStyle.mainSide}>
+              {children}
+              {main}
+            </div>
+          </div> :
+          <div className={layoutStyle.fullWidth}>
+            {children}
+            {main}
+          </div>
+      }
+      {/* <Footer /> */}
+    </div>
+  );
 };
 
 Layout.propTypes = {
-	children: PropTypes.object,
-	main: PropTypes.object,
-	router: PropTypes.object
+  children: PropTypes.object,
+  main: PropTypes.object,
+  router: PropTypes.object
 };
 
 export default DragDropContext(HTML5Backend)(Layout);
