@@ -5,18 +5,22 @@ import PropTypes from "prop-types";
 import { Line } from "react-chartjs-2";
 import "chartjs-plugin-annotation";
 
-class CustomLineGradient extends React.PureComponent {
+class TimeLineChart extends React.PureComponent {
 	render() {
+		console.log(this.props);
 		const dataCreator = canvas => {
 			const ctx = canvas.getContext("2d");
-			const gradient = ctx.createLinearGradient(0, 0, 1375, 0);
+			let gradient;
 			// Mocks //
-			gradient.addColorStop(0, "green");
-			gradient.addColorStop(0.25, "white");
-			gradient.addColorStop(0.45, "black");
-			gradient.addColorStop(0.65, "orange");
-			gradient.addColorStop(0.75, "white");
-			gradient.addColorStop(1, "red");
+			if (this.props.isGradient) {
+				gradient = ctx.createLinearGradient(0, 0, 1375, 0);
+				gradient.addColorStop(0, "green");
+				gradient.addColorStop(0.25, "white");
+				gradient.addColorStop(0.45, "black");
+				gradient.addColorStop(0.65, "orange");
+				gradient.addColorStop(0.75, "white");
+				gradient.addColorStop(1, "red");
+			}
 			// Mocks //
 			return {
 				labels: [],
@@ -24,7 +28,9 @@ class CustomLineGradient extends React.PureComponent {
 					{
 						fill: true,
 						lineTension: 0.1,
-						backgroundColor: gradient,
+						backgroundColor: this.props.isGradient
+							? gradient
+							: this.props.backgroundColor,
 						borderColor: "rgba(75,192,192,0)",
 						borderCapStyle: "butt",
 						borderDash: [],
@@ -126,10 +132,10 @@ class CustomLineGradient extends React.PureComponent {
 					otherDraws.shadowBlur = 6;
 					otherDraws.shadowOffsetX = 2;
 					otherDraws.shadowOffsetY = 2;
-					otherDraws.fillText("Scene 1", 75, 185);
-					otherDraws.fillText("Scene 2", 600, 185);
-					otherDraws.fillText("Scene 3", 750, 185);
-					otherDraws.fillText("Scene 4", 1200, 185);
+					otherDraws.fillText("Scene 1", 75, 170);
+					otherDraws.fillText("Scene 2", 600, 170);
+					otherDraws.fillText("Scene 3", 750, 170);
+					otherDraws.fillText("Scene 4", 1000, 170);
 
 					labels.forEach(label => {
 						otherDraws.font = "14px AnonymousProBold";
@@ -252,7 +258,7 @@ class CustomLineGradient extends React.PureComponent {
 	}
 }
 
-CustomLineGradient.propTypes = {
+TimeLineChart.propTypes = {
 	barName: PropTypes.string,
 	width: PropTypes.string,
 	height: PropTypes.string,
@@ -261,7 +267,8 @@ CustomLineGradient.propTypes = {
 	data: PropTypes.array,
 	isGradient: PropTypes.bool,
 	gradientColors: PropTypes.array,
-	labels: PropTypes.array
+	labels: PropTypes.array,
+	backgroundColor: PropTypes.string
 };
 
-export default CustomLineGradient;
+export default TimeLineChart;

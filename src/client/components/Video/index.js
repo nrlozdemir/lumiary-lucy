@@ -26,34 +26,29 @@ const collect = (connect, monitor) => {
 };
 
 class Video extends React.Component {
-	constructor(props) {
-		super(props);
-		this.state = {
-			showInfo: false
-		};
-	}
-	setInfoVisible() {
-		this.setState({ showInfo: true });
-	}
-	setInfoUnvisible() {
-		this.setState({ showInfo: false });
-	}
 	render() {
-		const { isDragging, connectDragSource, children, className, video } = this.props;
+		const {
+			isDragging,
+			connectDragSource,
+			children,
+			className,
+			video
+		} = this.props;
 		return connectDragSource(
 			<div className={style.video}>
 				<div className={style.videoContainer}>
 					<img
 						className={cx(style.videoBackground, className)}
 						src={video.src}
-						// onMouseOver={() => this.setInfoVisible()}
-						// onMouseOut={() => this.setInfoUnvisible()}
 					/>
 					<span className={style.videoIcon + " " + "qf-iconDrag"} />
 				</div>
 				<div className={style.infoContainer}>
 					<div className={style.videoImage}>
-						<img className={cx(style.videoBackground, className)} src={video.src} />
+						<img
+							className={cx(style.videoBackground, className)}
+							src={video.src}
+						/>
 						<br />
 						<p className={style.videoTitle}>Meet the Puppet</p>
 					</div>

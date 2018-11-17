@@ -7,11 +7,27 @@ import styles from "./styles.scss";
 
 class Card extends React.Component {
 	render() {
-		const { children, customHeaderClass, customBodyClass, title } = this.props;
+		const {
+			children,
+			customHeaderClass,
+			customBodyClass,
+			title,
+			removeHeader,
+			headerIconRight,
+			headerIconLeft
+		} = this.props;
 		return (
 			<div className={styles.card}>
-				<div className={styles.cardHeader + " " + customHeaderClass}>{title}</div>
-				<div className={styles.cardBody + " " + customBodyClass}>{children}</div>
+				{!removeHeader ? (
+					<div className={styles.cardHeader + " " + customHeaderClass}>
+						{headerIconLeft ? <span className={headerIconLeft} /> : null}
+						{title}
+						{headerIconRight ? <span className={headerIconRight} /> : null}
+					</div>
+				) : null}
+				<div className={styles.cardBody + " " + customBodyClass}>
+					{children}
+				</div>
 			</div>
 		);
 	}
@@ -20,8 +36,11 @@ class Card extends React.Component {
 Card.propTypes = {
 	title: PropTypes.string,
 	children: PropTypes.object,
-	customHeaderStyle: PropTypes.string,
-	customBodyStyle: PropTypes.string
+	customHeaderClass: PropTypes.string,
+	customBodyClass: PropTypes.string,
+	removeHeader: PropTypes.bool,
+	headerIconRight: PropTypes.string,
+	headerIconLeft: PropTypes.string
 };
 
 Card.defaultProps = {};
