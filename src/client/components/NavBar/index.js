@@ -18,7 +18,7 @@ const NavBar = props => {
                 <Link
                   activeClassName={ style.active }
                   key={idx}
-                  to={`/${key}`}
+                  to={`/${key}/`}
                 >
                   <span>{label}</span>
                 </Link>

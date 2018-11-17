@@ -7,10 +7,11 @@ import { baseName } from "Utils/globals";
 import { loadState, saveState } from "./utils/persistence";
 
 //routes
-import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
-import Library from "./containers/Library/Main";
+import Library from "./containers/Library";
 import MarketView from "./containers/MarketView";
+import Panoptic from "./containers/Panoptic";
+import Quickview from "./containers/Quickview";
 
 const requireAuth = (nextState, replace) => {
 	const state = loadState() || {};
@@ -21,10 +22,12 @@ const requireAuth = (nextState, replace) => {
 
 const routes = (
 	<Route path={baseName} component={Layout}>
-		<IndexRoute getComponent={Home} />
-		<Route path="/library/video/:id" components={Library} />
-		<Route path="marketview(/:type)" getComponent={ MarketView } full />
-		<Route path="*" components={NotFound} />
+		<IndexRoute getComponent={Quickview} />
+		<Route path="library(/video/:id)" getComponent={Library} sidebar/>
+		<Route path="marketview(/:type)" getComponent={ MarketView }  />
+		<Route path="panoptic" getComponent={ Panoptic } />
+		<Route path="quickview" getComponent={ Quickview } />
+		<Route path="*" components={NotFound}/>
 	</Route>
 );
 

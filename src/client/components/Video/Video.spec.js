@@ -6,7 +6,7 @@ import TestBackend from "react-dnd-test-backend";
 import { DragDropContext } from "react-dnd";
 
 import Video from "./index";
-import Home from "./../../containers/Home/Main";
+import Home from "../../containers/Library/Home/Main";
 
 const identity = el => el;
 const videoName = "Video1";

@@ -5,23 +5,23 @@ export default function (location, cb) {
   switch (location.params.type) {
     case 'audience':
       return require.ensure([], (require) => {
-        cb(null, require('./Audience').default)
+        cb(null, require('./pages/Audience').default)
       })
     case 'competitor':
       return require.ensure([], (require) => {
-        cb(null, require('./Competitor').default)
+        cb(null, require('./pages/Competitor').default)
       })
     case 'time':
       return require.ensure([], (require) => {
-        cb(null, require('./Time').default)
+        cb(null, require('./pages/Time').default)
       })
     case 'use-case':
       return require.ensure([], (require) => {
-        cb(null, require('./UseCase').default)
+        cb(null, require('./pages/UseCase').default)
       })
     default:
       return require.ensure([], (require) => {
-        cb(null, require('./Platform').default)
+        cb(null, require('./pages/Platform').default)
       })
   }
 }
