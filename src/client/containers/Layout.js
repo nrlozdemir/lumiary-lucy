@@ -12,6 +12,8 @@ import { Header } from "../components/Layout";
 import Aside from "../components/Aside";
 
 const Layout = ({ children, main, router }) => {
+  const isFullLayout = children && children.props.route.full || false
+  
 	return (
 		<div style={style} className="layout">
 			<Helmet>
@@ -22,17 +24,24 @@ const Layout = ({ children, main, router }) => {
 			</Helmet>
 			<div className={layoutStyle.headerSide}>
 				<Header />
-				<div className={layoutStyle.bottomBorder} />
 			</div>
-			<div className={helpers.marginTop5}>
-				<div className={layoutStyle.aside}>
-					<Aside router={router} />
-				</div>
-				<div className={layoutStyle.mainSide}>
-					{children}
-					{main}
-				</div>
-			</div>
+      <div className={layoutStyle.bottomBorder} />
+			{
+				isFullLayout ?
+          <div className={layoutStyle.fullWidth}>
+            {children}
+            {main}
+          </div> :
+          <div className={helpers.marginTop5}>
+            <div className={layoutStyle.aside}>
+              <Aside router={router} />
+            </div>
+            <div className={layoutStyle.mainSide}>
+              {children}
+              {main}
+            </div>
+          </div>
+			}
 			{/* <Footer /> */}
 		</div>
 	);
