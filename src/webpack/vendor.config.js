@@ -52,6 +52,8 @@ module.exports = {
 			"isomorphic-fetch",
 			"lodash",
 
+		    "react-circular-progressbar",
+
 			"chart.js",
 			"react-chartjs-2",
 			"chartjs-plugin-annotation",
