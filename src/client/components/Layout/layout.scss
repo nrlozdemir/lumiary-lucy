@@ -4,10 +4,9 @@ $headerHeight: 83px;
 	height: $headerHeight;
 	width: 100%;
 	position: relative;
-	width: 100%;
-	max-width: 1280px;
 	margin: 0 auto;
 	line-height: $headerHeight;
+	display: flex;
 }
 
 .aside {
@@ -38,8 +37,7 @@ $headerHeight: 83px;
 
 .fullWidth {
 	width: 100%;
-	max-width: 1280px;
-    margin: 0 auto;
+  margin: 0 auto;
 }
 
 .bottomBorder {

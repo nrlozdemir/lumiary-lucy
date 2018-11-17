@@ -3,14 +3,15 @@ import { connect } from 'react-redux'
 import { bindActionCreators } from 'redux'
 import { actions } from 'Reducers/home'
 import { actions as marketActions } from 'Reducers/marketview'
-import SubNav from './views/subNav'
+import SubNav from '../views/subNav'
 // import PropTypes from 'prop-types'
 
-class MarketView extends Component {
+class Competitor extends Component {
   render() {
     return (
       <div>
         <SubNav/>
+        Competitor
       </div>
     )
   }
@@ -26,4 +27,4 @@ const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators(Object.assign({}, actions, marketActions), dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(MarketView)
+export default connect(mapStateToProps, mapDispatchToProps)(Competitor)

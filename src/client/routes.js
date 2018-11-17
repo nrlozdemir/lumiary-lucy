@@ -11,6 +11,7 @@ import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
 import Library from "./containers/Library/Main";
 import MarketView from "./containers/MarketView";
+import Panoptic from "./containers/Panoptic";
 
 const requireAuth = (nextState, replace) => {
 	const state = loadState() || {};
@@ -25,7 +26,8 @@ const routes = (
 		<Route path="/library/" getComponent={Home} />
 		<Route path="/library/video/:id" components={Library} />
 		<Route path="marketview(/:type)" getComponent={ MarketView } full />
-		<Route path="*" components={NotFound} />
+		<Route path="panoptic" getComponent={ Panoptic } full />
+		<Route path="*" components={NotFound} full/>
 	</Route>
 );
 

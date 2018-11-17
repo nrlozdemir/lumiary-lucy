@@ -9,8 +9,9 @@ $logo-background-size: 50px;
 	@include grid-column(11);
 }
 .brandLogo {
-	@include grid-column(1);
-	margin: 16px 0px;
+	margin-left: auto;
+  margin-top: 16px;
+  margin-right: 38px;
 }
 .logo {
 	border: 1px solid #21bcd5;

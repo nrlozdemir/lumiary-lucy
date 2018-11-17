@@ -6,12 +6,11 @@ import { actions as marketActions } from 'Reducers/marketview'
 import SubNav from '../views/subNav'
 // import PropTypes from 'prop-types'
 
-class Competitor extends Component {
+class MarketView extends Component {
   render() {
     return (
       <div>
         <SubNav/>
-        Competitor
       </div>
     )
   }
@@ -27,4 +26,4 @@ const mapDispatchToProps = (dispatch) => ({
   ...bindActionCreators(Object.assign({}, actions, marketActions), dispatch)
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(Competitor)
+export default connect(mapStateToProps, mapDispatchToProps)(MarketView)
