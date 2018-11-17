@@ -23,11 +23,11 @@ const requireAuth = (nextState, replace) => {
 const routes = (
 	<Route path={baseName} component={Layout}>
 		<IndexRoute getComponent={Home} />
-		<Route path="/library/" getComponent={Home} />
-		<Route path="/library/video/:id" components={Library} />
-		<Route path="marketview(/:type)" getComponent={ MarketView } full />
-		<Route path="panoptic" getComponent={ Panoptic } full />
-		<Route path="*" components={NotFound} full/>
+		<Route path="/library/" getComponent={Home} sidebar/>
+		<Route path="/library/video/:id" components={Library} sidebar/>
+		<Route path="marketview(/:type)" getComponent={ MarketView }  />
+		<Route path="panoptic" getComponent={ Panoptic } />
+		<Route path="*" components={NotFound}/>
 	</Route>
 );
 
