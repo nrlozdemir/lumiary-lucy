@@ -2,36 +2,32 @@
 
 import React from "react";
 import PropTypes from "prop-types";
-
+import { Link } from "react-router";
 import styles from "./styles.scss";
 
-class Card extends React.Component {
-	render() {
-		const {
-			children,
-			customHeaderClass,
-			customBodyClass,
-			title,
-			removeHeader,
-			headerIconRight,
-			headerIconLeft
-		} = this.props;
-		return (
-			<div className={styles.card}>
-				{!removeHeader ? (
-					<div className={styles.cardHeader + " " + customHeaderClass}>
-						{headerIconLeft ? <span className={headerIconLeft} /> : null}
-						{title}
-						{headerIconRight ? <span className={headerIconRight} /> : null}
-					</div>
-				) : null}
-				<div className={styles.cardBody + " " + customBodyClass}>
-					{children}
+const Card = ({
+	children,
+	customHeaderClass,
+	customBodyClass,
+	title,
+	removeHeader,
+	headerIconRight,
+	headerIconLeft,
+	link
+}) => {
+	return (
+		<div className={styles.card}>
+			{!removeHeader ? (
+				<div className={styles.cardHeader + " " + customHeaderClass}>
+					{headerIconLeft ? <span className={headerIconLeft} /> : null}
+					{link ? <Link to={link}>{title}</Link> : title}
+					{headerIconRight ? <span className={headerIconRight} /> : null}
 				</div>
-			</div>
-		);
-	}
-}
+			) : null}
+			<div className={styles.cardBody + " " + customBodyClass}>{children}</div>
+		</div>
+	);
+};
 
 Card.propTypes = {
 	title: PropTypes.string,
@@ -40,7 +36,8 @@ Card.propTypes = {
 	customBodyClass: PropTypes.string,
 	removeHeader: PropTypes.bool,
 	headerIconRight: PropTypes.string,
-	headerIconLeft: PropTypes.string
+	headerIconLeft: PropTypes.string,
+	link: PropTypes.string
 };
 
 Card.defaultProps = {};
