@@ -83,7 +83,7 @@ class Library extends React.Component {
 											<span className="path6" />
 										</span>
 										<img
-											style={{ width: "100%" }}
+											className="width-100"
 											src="https://picsum.photos/477/338/?random
 							"
 										/>
@@ -97,7 +97,7 @@ class Library extends React.Component {
 										X
 									</span>
 									<img
-										style={{ width: "100%" }}
+										className="width-100"
 										src="https://picsum.photos/477/338/
 							"
 									/>

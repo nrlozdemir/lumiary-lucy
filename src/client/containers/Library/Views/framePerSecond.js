@@ -212,7 +212,7 @@ const FramePerSecond = ({ location }) => {
 						</div>
 						<div>
 							<img
-								style={{ width: "100%" }}
+								className="width-100"
 								src="https://picsum.photos/1000/430/
 							"
 							/>

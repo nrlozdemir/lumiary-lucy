@@ -18,7 +18,7 @@ class VideoTabs extends React.Component {
 					>
 						<div>
 							<div className={style.secondTitle}>{video.secondTitle}</div>
-							<div style={{ width: "75%", marginTop: 20, float: "left" }}>
+							<div className={style.barChartPosition}>
 								<BarChart
 									width="3"
 									height="4"
@@ -83,15 +83,7 @@ class VideoTabs extends React.Component {
 									}}
 								/>
 							</div>
-							<div
-								style={{
-									float: "left",
-									width: "25%",
-									marginLeft: "-20px",
-									marginTop: "20px",
-									fontSize: 12
-								}}
-							>
+							<div className={style.avaragePosition}>
 								<p className={style.avarageText}>{video.avarageTitle}</p>
 								<p className={style.avarageSecondText}>
 									{video.avarageSecondTitle}
