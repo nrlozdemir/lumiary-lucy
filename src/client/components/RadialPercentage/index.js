@@ -12,11 +12,16 @@ class RadialPercentage extends Component {
 
 	render() {
 
-		const { width, height, color, percentage } = this.props;
+		const { width, height, color1, color2, percentage, fontsize } = this.props;
 
 		return (
-		    <div style={{ width: {width}, height: {width}, color: {color} }}>
-		      <SegmentedProgressbar percentage={percentage} />
+		    <div style={{ width: {width}, height: {height}, color: {color1} }}>
+		      <SegmentedProgressbar 
+		      	fontsize={fontsize} 
+		      	color1={color1} 
+		      	color2={color2} 
+		      	percentage={percentage} 
+		      />
 		    </div>
 		);
 	}
@@ -25,8 +30,10 @@ class RadialPercentage extends Component {
 RadialPercentage.propTypes = {
 	width: PropTypes.string,
 	height: PropTypes.string,
-	color: PropTypes.string,
-	percentage: PropTypes.string
+	color1: PropTypes.string,
+	color2: PropTypes.string,
+	percentage: PropTypes.string,
+	fontsize: PropTypes.string
 };
 
 export default RadialPercentage;

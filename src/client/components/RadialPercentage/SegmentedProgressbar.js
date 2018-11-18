@@ -57,24 +57,26 @@ function getRadialSeparators(numSeparators) {
 }
 
 function SegmentedProgressbar(props) {
+  const { color1, color2, percentage, fontsize } = props;
+
   return (
     <LayeredProgressbar
-      percentage={props.percentage}
+      percentage={percentage}
       strokeWidth={25}
       counterClockwise
       styles={{
         trail: { 
-          stroke: "#2f2e3d"
+          stroke: {color1}
         },
         path: {
-          stroke: "#21bcd5",
+          stroke: {color2},
           strokeLinecap: "butt"
         }
       }}
       renderOverlays={() =>
         getRadialSeparators(40).concat(
-          <div style={{ fontSize: 24, color: "#2f2e3d" }}>
-            {props.percentage}%
+          <div style={{ fontSize: {fontsize}, color: "#2f2e3d" }}>
+            {percentage}%
           </div>
         )
       }

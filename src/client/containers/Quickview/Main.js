@@ -18,17 +18,20 @@ class Quickview extends Component {
 		return (
 			<div className={style.main}>
 				<div className="col-8">
-					<div className="col-4">
+					<div style={{ color: '#fff' }} className={`col-4 bordered listBlockLeft`}>
 						testarea
 					</div>
-					<div className="col-4">
+					<div style={{ color: '#800', height: '135px' }} className={`col-4 bordered listBlockMid`}>
 						<RadialPercentage 
 							width="135px" 
 							height="135px" 
-							color="#434578" 
+							color1="#2f2e3d"
+							color2="#21bcd5"
+							percentage="16" 
+							fontsize="30"
 						/>
 					</div>
-					<div className="col-4">
+					<div className={`col-4 bordered listBlockRight`}>
 
 					</div>
 				</div>
@@ -40,12 +43,7 @@ class Quickview extends Component {
 	}
 }
 
-Quickview.propTypes = {
-	width: PropTypes.string,
-	height: PropTypes.string,
-	color: PropTypes.string,
-	percentage: PropTypes.string
-};
+Quickview.propTypes = {};
 Quickview.defaultProps = {};
 
 export default Quickview;
