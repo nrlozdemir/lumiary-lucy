@@ -1,6 +1,6 @@
 %icons {
 	color: $color-white;
-	margin: 0 8px;
+	margin: 0 4px;
 }
 
 %round {
@@ -33,14 +33,17 @@
 	padding: 0;
 	margin: 0;
 }
+.selectedTabForVideoTabs {
+	background-color: $color-charcoal-grey;
+}
 .closeButton {
 	color: $color-white;
-	font-size: 20px;
+	font-size: 13px;
 	font-family: $font-family-clanOTBook;
 	position: absolute;
-	margin-top: -47px;
+	margin-top: -33px;
 	margin-left: 1px;
-	padding: 15px;
+	padding: 10px 12px;
 	background: $color-dark-three;
 	cursor: pointer;
 }
@@ -95,6 +98,15 @@
 }
 .roundWhite {
 	@extend %round;
+	margin: 0px 5px 0px 0px;
+	width: 11px;
+	height: 11px;
+	border-radius: 11px;
+	background: $color-white;
+}
+
+.roundWhite {
+	@extend %round;
 	width: 11px;
 	height: 11px;
 	border-radius: 11px;
@@ -106,7 +118,7 @@
 	padding: 9px 0;
 	text-align: center;
 	color: $color-tealish;
-	font-size: 13px;
+	font-size: 12px;
 	font-family: $font-family-clanOT;
 	border-bottom: 2px solid $color-tealish;
 }
@@ -118,10 +130,84 @@
 	width: 100%;
 	color: $color-white;
 	font-family: $font-family-clanOT;
-	margin: 13px 0;
+	height: 40px;
 }
 .avarageText {
 	font-family: $font-family-clanOT;
 	font-size: 12px;
 	color: $color-tealish;
+}
+
+.title {
+	font-size: 15px;
+	font-family: $font-family-clanOT;
+	font-weight: bold;
+	text-align: center;
+	margin-top: 46px;
+}
+.body {
+	margin-top: 33px;
+}
+.boxes {
+	display: block;
+	max-width: 120px;
+	float: left;
+	margin-top: 30px;
+}
+.box {
+	width: 26px;
+	height: 20px;
+	box-shadow: 0 0 6px 0 $color-tealish, inset 0 0 6px 2px $color-tealish;
+	display: inline-block;
+	margin: 1px;
+}
+.selectedPanelForVideoTabs {
+	height: 310px;
+	background: $color-charcoal-grey;
+}
+.videoBriefLegendRight {
+	margin-top: 60px;
+	font-size: 12px;
+	color: $color-white;
+	font-family: $font-family-clanOT;
+	text-align: left;
+	li {
+		padding: 10px 0;
+	}
+}
+.videoBriefLegendBottom {
+	font-size: 12px;
+	margin: 10px 20px;
+	p {
+		width: 50%;
+		padding-top: 8px;
+		float: left;
+	}
+}
+.lineTopLabel {
+	font-family: $font-family-clanOT;
+	margin: 13px 0px;
+}
+
+.avarageSecondText {
+	font-size: 8px;
+	color: $color-tealish;
+	width: 60px;
+}
+
+.legendSecondTitle {
+	font-size: 8px;
+	color: $color-white;
+}
+.barChartPosition {
+	width: 75%;
+	margin-top: 20;
+	float: left;
+}
+.avaragePosition {
+	float: left;
+	width: 25%;
+	margin-left: -20px;
+	margin-top: 20px;
+	font-size: 12;
 }

@@ -5,9 +5,8 @@
 
 .video {
 	display: inline-flex;
-	margin-top: 32px;
 	position: relative;
-
+	margin: 16px 50px;
 	&:hover {
 		.infoContainer {
 			// display: block;
@@ -31,8 +30,8 @@
 	display: none;
 }
 
-.videoImage {}
-
+.videoImage {
+}
 
 .videoIcon {
 	text-shadow: 0 0 6px $color-tealish;
