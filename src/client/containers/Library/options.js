@@ -1,42 +1,31 @@
 const pieData = {
-	labels: ["Red", "Green", "Yellow"],
+	labels: ["Grey", "Tealish", "Hard Grey", "Hi"],
 	datasets: [
 		{
-			data: [300, 50, 100],
-			backgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"],
-			hoverBackgroundColor: ["#FF6384", "#36A2EB", "#FFCE56"]
+			data: [34, 50, 42, 25],
+			backgroundColor: ["#eaeaea", "#1fbad2", "#6c6c6c", "#18212f"],
+			hoverBackgroundColor: ["#eaeaea", "#1fbad2", "#6c6c6c", "#18212f"]
 		}
 	]
 };
 const lineData = {
 	labels: [
-		"1",
-		"2",
-		"3",
-		"4",
-		"5",
-		"6",
-		"7",
-		"8",
-		"9",
-		"10",
-		"10",
-		"12",
-		"13",
-		"14",
-		"15",
-		"16",
-		"17",
-		"18",
-		"19",
-		"20"
+		"1Q16",
+		"2Q16",
+		"3Q16",
+		"4Q16",
+		"5Q16",
+		"6Q16",
+		"7Q16",
+		"8Q16",
+		"9Q16"
 	],
 	datasets: [
 		{
 			label: "My First dataset",
 			fill: false,
 			lineTension: 0.4,
-			backgroundColor: "rgba(75,192,192,0.4)",
+			backgroundColor: "rgba(255,0,0,0.3)",
 			borderColor: "rgba(75,192,192,1)",
 			borderCapStyle: "butt",
 			borderDashOffset: 0.0,
@@ -51,34 +40,7 @@ const lineData = {
 			pointHoverBorderWidth: 2,
 			pointRadius: 1,
 			pointHitRadius: 20,
-			data: [
-				65,
-				59,
-				80,
-				81,
-				86,
-				35,
-				43,
-				59,
-				80,
-				81,
-				86,
-				35,
-				43,
-				15,
-				13,
-				34,
-				81,
-				56,
-				55,
-				40,
-				35,
-				43,
-				15,
-				29,
-				80,
-				81
-			]
+			data: [65, 59, 80, 81, 86, 35, 43, 59, 80, 81, 86]
 		}
 	]
 };

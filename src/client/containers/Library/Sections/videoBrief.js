@@ -21,7 +21,7 @@ const VideoBrief = () => (
 			</div>
 		</div>
 		<Card removeHeader customBodyClass="bg-charcoal-grey pl-25">
-			<div className="col-12 ">
+			<div className="m-10">
 				<div className="col-12">
 					<div className="float-right">
 						<p className={style.videoBriefLegend}>
@@ -34,8 +34,8 @@ const VideoBrief = () => (
 				</div>
 				<div className="col-1-3">
 					<BarChart
-						width="2"
-						height="3"
+						width="3"
+						height="4"
 						data={[30]}
 						avarage="50"
 						labels={["1M Views"]}
@@ -66,7 +66,8 @@ const VideoBrief = () => (
 								],
 								xAxes: [
 									{
-										barPercentage: 0.65,
+										barPercentage: 0.95,
+										categorySpacing: 0,
 										gridLines: {
 											display: false
 										}
@@ -78,14 +79,16 @@ const VideoBrief = () => (
 				</div>
 				<div className="col-1-3">
 					<BarChart
-						width="2"
-						height="3"
+						width="3"
+						height="4"
 						data={[76]}
 						avarage="75"
 						labels={["60k Likes"]}
 						isGradient
 						gradientColors={["#161620", "#2f2e3d"]}
 						options={{
+							responsive: true,
+							maintainAspectRatio: true,
 							tooltips: {
 								enabled: false
 							},
@@ -111,7 +114,8 @@ const VideoBrief = () => (
 								],
 								xAxes: [
 									{
-										barPercentage: 0.65,
+										barPercentage: 0.95,
+										categorySpacing: 0,
 										gridLines: {
 											display: false
 										}
@@ -123,23 +127,12 @@ const VideoBrief = () => (
 				</div>
 				<div className="col-1-3">
 					<BarChart
-						width="2"
-						height="3"
+						width="3"
+						height="4"
 						data={[45]}
 						avarage="60"
 						labels={["123K Shares"]}
-						yLabels={[
-							"1M",
-							"500K",
-							"250K",
-							"100K",
-							"50K",
-							"40K",
-							"20K",
-							"15K",
-							"10K",
-							"0"
-						]}
+						yLabels={["1M", "500K", "100K", "80K", "60K", "40K", "10K", "0"]}
 						isGradient
 						gradientColors={["#161620", "#2f2e3d"]}
 						options={{
@@ -161,6 +154,7 @@ const VideoBrief = () => (
 										gridLines: {
 											display: false
 										},
+
 										ticks: {
 											min: 0,
 											max: 100,
@@ -170,9 +164,9 @@ const VideoBrief = () => (
 								],
 								xAxes: [
 									{
-										barPercentage: 0.65,
+										barPercentage: 0.95,
 										gridLines: {
-											display: false
+											display: true
 										}
 									}
 								]

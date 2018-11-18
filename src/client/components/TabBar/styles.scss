@@ -6,10 +6,11 @@
 			flex-wrap: wrap;
 			background-color: $color-dark;
 			color: $color-white;
+			font-size: 14px;
 			font-family: $font-family-clanOTBook;
 			.react-tabs__tab {
 				flex: 1;
-				padding: 15px 0;
+				padding: 8px 0;
 				text-align: center;
 				cursor: pointer;
 			}
