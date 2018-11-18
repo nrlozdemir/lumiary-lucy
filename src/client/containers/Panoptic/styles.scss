@@ -1,0 +1,104 @@
+.chartPanel {
+	display: inline-block;
+	position: relative;
+	// width: 50%;
+	height: 45rem;
+	// background: red;
+}
+
+.resultsPanel {
+	display: inline-block;
+	position: relative;
+	// width: 25%;
+	height: 45rem;
+	background: grey;
+}
+
+.rightPanel {
+	display: inline-block;
+	position: relative;
+	// width: 25%;
+	height: 45rem;
+	background: pink;
+}
+
+
+
+
+.controlGroup {
+	display: block;
+	line-height: 34px;
+
+
+	.control {
+		// display: block;
+		position: relative;
+		padding-left: 39px;
+		margin-right: 18px;
+		cursor: pointer;
+		font-size: 14px;
+		letter-spacing: 0;
+		font-family: $font-family-clanOTBook;
+		color: white;
+		display: inline-block;
+	}
+
+	.control input {
+		position: absolute;
+		z-index: -1;
+		opacity: 0;
+	}
+
+	.controlIndicator {
+		position: absolute;
+		top: 2px;
+		left: 0;
+		height: 31px;
+		width: 31px;
+		background: #e6e6e6;
+	}
+
+	.control:hover input~.controlIndicator,
+	.control input:focus~.controlIndicator {
+		background: #ccc;
+	}
+
+	.control input:checked~.controlIndicator {
+		background: #2aa1c0;
+	}
+
+	.control:hover input:not([disabled]):checked~.controlIndicator,
+	.control input:checked:focus~.controlIndicator {
+		background: #0e647d;
+	}
+
+	.control input:disabled~.controlIndicator {
+		background: #e6e6e6;
+		opacity: 0.6;
+		pointer-events: none;
+	}
+
+	.controlIndicator:after {
+		content: '';
+		position: absolute;
+		display: none;
+	}
+
+	.control input:checked~.controlIndicator:after {
+		display: block;
+	}
+
+	.controlCheckbox .controlIndicator:after {
+		left: 8px;
+		top: 4px;
+		width: 3px;
+		height: 8px;
+		border: solid #fff;
+		border-width: 0 2px 2px 0;
+		transform: rotate(45deg);
+	}
+
+	.controlCheckbox input:disabled~.controlIndicator:after {
+		border-color: #7b7b7b;
+	}
+}
