@@ -1,23 +1,84 @@
+.panopticHero {
+	display: block;
+	position: relative;
+	padding-top: 60px;
+}
+
 .chartPanel {
 	display: inline-block;
 	position: relative;
-	// width: 50%;
 	height: 45rem;
-	// background: red;
+
+	figure {
+		display: block;
+		position: relative;
+		margin-top: 30px;
+
+		img {
+			margin-left: 20px;
+		}
+	}
 }
+
 
 .resultsPanel {
 	display: inline-block;
 	position: relative;
-	// width: 25%;
 	height: 45rem;
-	background: grey;
+	// background: grey;
+
+	.outerWrapFirst,
+	.outerWrapSecond,
+	.outerWrapThird,
+	.outerWrapFourth {
+		position: relative;
+		height: 40px;
+		width: 100%;
+		overflow: hidden;
+		border-left: 1px solid #1daac1;
+		margin-top: 8px;
+
+
+
+		.skewBarFirst,
+		.skewBarSecond,
+		.skewBarThird,
+		.skewBarFourth {
+			width: 300px;
+			position: absolute;
+			// left: -10%;
+			top: 0;
+			height: 40px;
+			display: block;
+			border: 1px solid #1daac1;
+			transform: skewX(150deg);
+			margin-bottom: 8px;
+		}
+
+		.skewBarFirst {
+			left: -10%;
+
+		}
+
+		.skewBarSecond {
+			left: -40%;
+
+		}
+
+		.skewBarThird {
+			left: -65%;
+
+		}
+
+		.skewBarFourth {
+			left: -80%;
+		}
+	}
 }
 
 .rightPanel {
 	display: inline-block;
 	position: relative;
-	// width: 25%;
 	height: 45rem;
 	background: pink;
 }
@@ -56,6 +117,10 @@
 		height: 31px;
 		width: 31px;
 		background: #e6e6e6;
+
+		&.first {
+			background: red;
+		}
 	}
 
 	.control:hover input~.controlIndicator,
@@ -100,5 +165,19 @@
 
 	.controlCheckbox input:disabled~.controlIndicator:after {
 		border-color: #7b7b7b;
+	}
+}
+
+
+
+
+
+
+.outerWrapFirst {
+	p {
+		position: absolute;
+		top: 0;
+		left: -10px;
+		z-index: 2;
 	}
 }

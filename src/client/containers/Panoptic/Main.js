@@ -10,12 +10,15 @@ class Panoptic extends Component {
   render() {
     return (
 			<div>
+
+			<div className={style.panopticHero}>
+
 					<div className={style.chartPanel + " col-6"}>
 
 						<div className={style.controlGroup}>
 							<label className={style.control + " controlCheckbox"}>2D Animation
 								<input type="checkbox" checked="checked"/>
-								<div className={style.controlIndicator + " first"}></div>
+								<div className={style.controlIndicator + " " + style.first}></div>
 							</label>
 
 							<label className={style.control + " controlCheckbox"}>Stop Motion
@@ -34,19 +37,39 @@ class Panoptic extends Component {
 							</label>
 						</div>
 
+						<figure className={style.chart}>
+							<img src={require('../../assets/group.png')} />
+					  </figure>
 					</div>
 
-					<figure>
-							<img src={require('../../assets/group.png')} />
-					</figure>
+
 
 					<div className={style.resultsPanel + " col-3"}>
-					tatatata
+
+							<div className={style.outerWrapFirst}>
+									<div className={style.skewBarFirst}>
+									</div>
+									<p>69%</p>
+							</div>
+							<div className={style.outerWrapSecond}>
+								<div className={style.skewBarSecond}>
+								</div>
+							</div>
+							<div className={style.outerWrapThird}>
+								<div className={style.skewBarThird}>
+								</div>
+							</div>
+							<div className={style.outerWrapFourth}>
+								<div className={style.skewBarFourth}>
+								</div>
+					    </div>
 
 					</div>
 					<div className={style.rightPanel + " col-3"}>
 					tatatatatata
 					</div>
+
+			 </div>
       </div>
 		)
 
