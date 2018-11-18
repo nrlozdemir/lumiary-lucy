@@ -41,6 +41,27 @@ const lineData = {
 			pointRadius: 1,
 			pointHitRadius: 20,
 			data: [65, 59, 80, 81, 86, 35, 43, 59, 80, 81, 86]
+		},
+		{
+			label: "second dataset	",
+			fill: false,
+			lineTension: 0.4,
+			backgroundColor: "rgba(255,0,0,0.3)",
+			borderColor: "rgba(255,255,255,1)",
+			borderCapStyle: "butt",
+			borderDashOffset: 0.0,
+			borderDash: [],
+			borderJoinStyle: "round",
+			pointBorderColor: "rgba(75,192,192,1)",
+			pointBackgroundColor: "#fff",
+			pointBorderWidth: 1,
+			pointHoverRadius: 5,
+			pointHoverBackgroundColor: "rgba(75,192,192,1)",
+			pointHoverBorderColor: "rgba(220,220,220,1)",
+			pointHoverBorderWidth: 2,
+			pointRadius: 1,
+			pointHitRadius: 20,
+			data: [65, 59, 21, 66, 44, 12, 23, 39, 80, 81, 86]
 		}
 	]
 };
