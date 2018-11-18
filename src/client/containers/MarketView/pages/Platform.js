@@ -27,7 +27,11 @@ class Platform extends Component {
 						</div>
 
 						<div className="col-1">
-							left
+							<span className={"qf-iconFacebook " + style.activeIcon} />
+							<span className={"qf-iconInstagram " + style.activeIcon} />
+							<span className={"qf-iconSnapchat " + style.deactiveIcon} />
+							<span className={"qf-iconTwitter " + style.deactiveIcon} />
+							<span className={"qf-iconYotube " + style.deactiveIcon} />
 						</div>
 
 						<div className="col-11 mt-10 pb-10">
