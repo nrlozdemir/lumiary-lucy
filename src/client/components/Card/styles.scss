@@ -7,11 +7,13 @@
 		font-weight: 500;
 		padding: 10px 0;
 		text-align: center;
+
 		span {
 			font-weight: 700;
 			margin: 0px 0px 0px 5px;
 			vertical-align: middle;
 		}
+
 		a {
 			text-decoration: none;
 			color: $color-dark-three;
@@ -20,8 +22,10 @@
 			font-stretch: normal;
 			line-height: normal;
 			letter-spacing: normal;
+			margin: 0 10px;
 		}
 	}
+
 	.cardBody {
 		width: 100%;
 		display: inline-block;

@@ -55,14 +55,16 @@ class LineChart extends React.PureComponent {
 
 		const {
 			width,
-			height
+			height,
+			options
 		} = this.props;
 
 		return (<div>
 			<Line
 			data={data}
 			width={width}
-			height={height} />
+			height={height}
+			options={options} />
 		</div>);
 	}
 }
@@ -70,7 +72,8 @@ class LineChart extends React.PureComponent {
 LineChart.propTypes = {
 	width: PropTypes.string,
 	height: PropTypes.string,
-	data: PropTypes.array
+	data: PropTypes.array,
+	options: PropTypes.object,
 };
 
 export default LineChart;
