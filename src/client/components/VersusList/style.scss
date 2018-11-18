@@ -1,0 +1,37 @@
+.versusVideo {
+	width: 291px;
+}
+.versusTitle, .versusTitleBold, .versusSubTitle {
+  height: 23px;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: var(--pale-grey);
+}
+.versusTitleBold {
+  font-family: ClanOT-News;
+}
+.versusTitle {
+  font-family: ClanOT;
+}
+.versusSubTitle {
+  font-family: ClanOT;
+  font-weight: bold;
+}
+.versusCategory {
+  height: 29px;
+  font-family: AnonymousPro;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: var(--pale-grey);
+}
+.cols-3in1 {
+	@include grid-column(3);
+}

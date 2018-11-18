@@ -4,98 +4,98 @@ import React, { Component } from 'react'
 
 import style from "./styles.scss";
 import PropTypes from "prop-types";
-import CircularProgressBar from "react-circular-progressbar";
-import StyledProgressbar from "../../components/RadialPercentage/StyledProgressbar";
-import SegmentedProgressbar from "../../components/RadialPercentage/SegmentedProgressbar";
-import RadialPercentage from "../../components/RadialPercentage";
 import VersusList from "../../components/VersusList";
 
 class Quickview extends Component {
 
 	render() {
-		const { width, height, color, percentage, router } = this.props;
-
 		const versus = [
 			{
+				key: 1,
 				title: "Duration",
 				vl: {
 					id: 1,
-					subtitle: "",
+					subtitle: "0:15\"",
 					src: "https://picsum.photos/300/200"
 				},
 				vr: {
 					id: 2,
-					subtitle: "",
+					subtitle: "3:30\"",
 					src: "https://picsum.photos/300/200"
 				},
 				diff: 45
 			},
 			{
+				key: 2,
 				title: "Scenes",
 				vl: {
 					id: 3,
-					subtitle: "",
+					subtitle: "3 Total",
 					src: "https://picsum.photos/300/200"
 				},
 				vr: {
 					id: 4,
-					subtitle: "",
+					subtitle: "8 Scenes",
 					src: "https://picsum.photos/300/200"
 				},
 				diff: 23
 			},
 			{
+				key: 3,
 				title: "Product",
 				vl: {
 					id: 5,
-					subtitle: "",
+					subtitle: "Appearing for 80% of video",
 					src: "https://picsum.photos/300/200"
 				},
 				vr: {
 					id: 6,
-					subtitle: "",
+					subtitle: "No apperance",
 					src: "https://picsum.photos/300/200"
 				},
 				diff: 76
 			},
 			{
+				key: 4,
 				title: "Color",
 				vl: {
 					id: 7,
-					subtitle: "",
+					subtitle: "Vibrant - Warm",
 					src: "https://picsum.photos/300/200"
 				},
 				vr: {
 					id: 8,
-					subtitle: "",
+					subtitle: "Cool - Dull",
 					src: "https://picsum.photos/300/200"
 				},
 				diff: 97
 			},
 			{
+				key: 5,
 				title: "Gender",
 				vl: {
 					id: 9,
-					subtitle: "",
+					subtitle: "Mostly Female",
 					src: "https://picsum.photos/300/200"
 				},
 				vr: {
 					id: 10,
-					subtitle: "",
+					subtitle: "Mostly Male",
 					src: "https://picsum.photos/300/200"
 				},
 				diff: 38
 			},
 			{
+				key: 6,
 				title: "FPS",
 				vl: {
 					id: 11,
-					subtitle: "",
+					subtitle: "240 FPS at 4K",
 					src: "https://picsum.photos/300/200"
 				},
 				vr: {
 					id: 12,
-					subtitle: "",
+					subtitle: "30 FPS at 1080p",
 					src: "https://picsum.photos/300/200"
 				},
 				diff: 67
@@ -105,7 +105,7 @@ class Quickview extends Component {
 		return (
 			<div className={style.main}>
 				<div className="col-8">
-					<VersusList router={router} videos={versus} />
+					<VersusList videos={versus} />
 				</div>
 				<div className="col-4">
 
