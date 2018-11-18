@@ -20,7 +20,6 @@
 	}
 }
 
-
 .resultsPanel {
 	display: inline-block;
 	position: relative;
@@ -37,8 +36,6 @@
 		overflow: hidden;
 		border-left: 1px solid #1daac1;
 		margin-top: 8px;
-
-
 
 		.skewBarFirst,
 		.skewBarSecond,
@@ -57,17 +54,14 @@
 
 		.skewBarFirst {
 			left: -10%;
-
 		}
 
 		.skewBarSecond {
 			left: -40%;
-
 		}
 
 		.skewBarThird {
 			left: -65%;
-
 		}
 
 		.skewBarFourth {
@@ -83,13 +77,9 @@
 	background: pink;
 }
 
-
-
-
 .controlGroup {
 	display: block;
 	line-height: 34px;
-
 
 	.control {
 		// display: block;
@@ -123,33 +113,33 @@
 		}
 	}
 
-	.control:hover input~.controlIndicator,
-	.control input:focus~.controlIndicator {
+	.control:hover input ~ .controlIndicator,
+	.control input:focus ~ .controlIndicator {
 		background: #ccc;
 	}
 
-	.control input:checked~.controlIndicator {
+	.control input:checked ~ .controlIndicator {
 		background: #2aa1c0;
 	}
 
-	.control:hover input:not([disabled]):checked~.controlIndicator,
-	.control input:checked:focus~.controlIndicator {
+	.control:hover input:not([disabled]):checked ~ .controlIndicator,
+	.control input:checked:focus ~ .controlIndicator {
 		background: #0e647d;
 	}
 
-	.control input:disabled~.controlIndicator {
+	.control input:disabled ~ .controlIndicator {
 		background: #e6e6e6;
 		opacity: 0.6;
 		pointer-events: none;
 	}
 
 	.controlIndicator:after {
-		content: '';
+		content: "";
 		position: absolute;
 		display: none;
 	}
 
-	.control input:checked~.controlIndicator:after {
+	.control input:checked ~ .controlIndicator:after {
 		display: block;
 	}
 
@@ -163,15 +153,10 @@
 		transform: rotate(45deg);
 	}
 
-	.controlCheckbox input:disabled~.controlIndicator:after {
+	.controlCheckbox input:disabled ~ .controlIndicator:after {
 		border-color: #7b7b7b;
 	}
 }
-
-
-
-
-
 
 .outerWrapFirst {
 	p {
@@ -180,4 +165,14 @@
 		left: -10px;
 		z-index: 2;
 	}
+}
+
+.buttonStyle {
+	background: transparent;
+	color: white;
+	border: 0;
+	font-size: 16px;
+	box-shadow: 0 0 4px 2px rgba(33, 188, 213, 0.5), inset 0 0 4px 2px #21bcd5;
+	padding: 16px 32px;
+	font-family: $font-family-clanOT;
 }
