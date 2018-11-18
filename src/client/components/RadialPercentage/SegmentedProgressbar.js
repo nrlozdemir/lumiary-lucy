@@ -25,7 +25,7 @@ function LayeredProgressbar(props) {
       }}
     >
       <div style={{ position: "absolute" }}>
-        <CircularProgressBar {...otherProps} />
+        <CircularProgressbar {...otherProps} />
       </div>
       {overlays.map((overlay, index) => (
         <div style={overlayStyles} key={index}>

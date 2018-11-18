@@ -4,9 +4,12 @@ import React, { Component } from 'react'
 
 import style from "./styles.scss";
 import PropTypes from "prop-types";
+import CircularProgressBar from "react-circular-progressbar";
+import StyledProgressbar from "../../components/RadialPercentage/StyledProgressbar";
+import SegmentedProgressbar from "../../components/RadialPercentage/SegmentedProgressbar";
 import RadialPercentage from "../../components/RadialPercentage";
 
-class Quickview extends React.PureComponent {
+class Quickview extends Component {
 
 	render() {
 		const items = ['Duration', 'Scenes', 'Product', 'Color', 'Gender', 'FPS'];
@@ -19,6 +22,11 @@ class Quickview extends React.PureComponent {
 						testarea
 					</div>
 					<div className="col-4">
+						<RadialPercentage 
+							width="135px" 
+							height="135px" 
+							color="#434578" 
+						/>
 					</div>
 					<div className="col-4">
 

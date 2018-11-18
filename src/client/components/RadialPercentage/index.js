@@ -1,22 +1,21 @@
 "use strict";
 
-import React from "react";
-import { render } from "react-dom";
+import React, { Component } from 'react'
 import PropTypes from "prop-types";
 import style from "./styles.scss";
 
-import CircularProgressbar from "react-circular-progressbar";
-import SegmentedProgressbar from "./SegmentedProgressbar";
+import CircularProgressBar from "react-circular-progressbar";
 import StyledProgressbar from "./StyledProgressbar";
+import SegmentedProgressbar from "./SegmentedProgressbar";
 
-class RadialPercentage extends React.PureComponent {
+class RadialPercentage extends Component {
 
 	render() {
 
 		const { width, height, color, percentage } = this.props;
 
 		return (
-		    <div style={{ width: "135px", height: "135px", color: "#2f2e3d" }}>
+		    <div style={{ width: {width}, height: {width}, color: {color} }}>
 		      <SegmentedProgressbar percentage={percentage} />
 		    </div>
 		);
