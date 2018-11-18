@@ -26,25 +26,32 @@ class Platform extends Component {
 							<LineChart height="40px" />
 						</div>
 
-						<Card
-							title="Lumiere Data"
-							customHeaderClass="bg-charcoal-grey border-bt-dark color-white"
-							customBodyClass="bg-charcoal-grey color-white"
-						>
-							<div className="col-12 mt-25">
-								<VideoTabs />
-							</div>
-							<div className="col-12 mt-25">
-								<div className="containerMargin">
-									<ColorTone />
+						<div className="col-1">
+							left
+						</div>
+
+						<div className="col-11 mt-10 pb-10">
+							<Card
+								title="Lumiere Data"
+								customHeaderClass="bg-charcoal-grey border-bt-dark color-white"
+								customBodyClass="bg-charcoal-grey color-white"
+							>
+								<div className="col-12 mt-25">
+									<VideoTabs />
 								</div>
-							</div>
-							<div className="col-12 mt-25 mb-25">
-								<div className="containerMargin">
-									<AgeRangeAndGender />
+								<div className="col-12 mt-25">
+									<div className="containerMargin">
+										<ColorTone />
+									</div>
 								</div>
-							</div>
-						</Card>
+								<div className="col-12 mt-25 mb-25">
+									<div className="containerMargin">
+										<AgeRangeAndGender />
+									</div>
+								</div>
+							</Card>
+						</div>
+
 					</div>
         </div>
       </div>
