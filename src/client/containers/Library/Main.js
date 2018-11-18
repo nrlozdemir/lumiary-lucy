@@ -11,15 +11,54 @@ import VideoBrief from "./Sections/videoBrief";
 import VideoTabs from "./Sections/videoTabs";
 import ColorTone from "./Sections/colorTone";
 import AgeRangeAndGender from "./Sections/ageRangeAndGender";
+import FramePerSecond from "./Views/framePerSecond";
+
 // Styles
 import style from "./styles.scss";
 
 class Library extends React.Component {
+	switchTabs(location) {
+		console.log(this.props);
+		switch (location) {
+			case "frames-per-second":
+				return (
+					<FramePerSecond
+						location={`/library/video/${this.props.routeParams.id}`}
+					/>
+				);
+			case "duration":
+				return <div>duration</div>;
+			case "aspect-ratio":
+				return <div>aspect-ratio</div>;
+			case "number-of-frames":
+				return <div>number-of-frames</div>;
+			case "scenes":
+				return <div>scenes</div>;
+			default:
+				return (
+					<div>
+						<div className="col-12 mt-25">
+							<VideoTabs location={this.props.location.pathname} />
+						</div>
+						<div className="col-12 mt-25">
+							<div className="containerMargin">
+								<ColorTone />
+							</div>
+						</div>
+						<div className="col-12 mt-25 mb-25">
+							<div className="containerMargin">
+								<AgeRangeAndGender />
+							</div>
+						</div>
+					</div>
+				);
+		}
+	}
 	render() {
 		return (
 			<React.Fragment>
 				<div className={style.main}>
-					<div className="col-7">
+					<div className="col-6">
 						<Card removeHeader customBodyClass="bg-charcoal-grey">
 							<TabBar
 								items={["Single View", "Compare Mode"]}
@@ -45,7 +84,7 @@ class Library extends React.Component {
 										</span>
 										<img
 											style={{ width: "100%" }}
-											src="https://picsum.photos/1000/430/?random
+											src="https://picsum.photos/477/338/?random
 							"
 										/>
 									</div>
@@ -59,14 +98,14 @@ class Library extends React.Component {
 									</span>
 									<img
 										style={{ width: "100%" }}
-										src="https://picsum.photos/1000/430/
+										src="https://picsum.photos/477/338/
 							"
 									/>
 								</div>
 							</TabBar>
 						</Card>
 					</div>
-					<div className="col-5 mt-10">
+					<div className="col-6 mt-10">
 						<VideoBrief />
 					</div>
 					<div className="col-12 mt-10 pb-10">
@@ -75,19 +114,7 @@ class Library extends React.Component {
 							customHeaderClass="bg-charcoal-grey border-bt-dark color-white"
 							customBodyClass="bg-charcoal-grey color-white"
 						>
-							<div className="col-12 mt-25">
-								<VideoTabs />
-							</div>
-							<div className="col-12 mt-25">
-								<div className="containerMargin">
-									<ColorTone />
-								</div>
-							</div>
-							<div className="col-12 mt-25 mb-25">
-								<div className="containerMargin">
-									<AgeRangeAndGender />
-								</div>
-							</div>
+							{this.switchTabs(this.props.params.tab)}
 						</Card>
 					</div>
 				</div>

@@ -15,7 +15,7 @@ $headerHeight: 85px;
 	overflow-y: auto;
 	// overflow-x: visible;
 	float: left;
-	width: 25%;
+	width: 21%;
 	height: calc(100vh - #{$headerHeight + 8});
 	border-right: 2.5px solid $color-dark-three;
 	position: fixed;
@@ -30,14 +30,13 @@ $headerHeight: 85px;
 .mainSide {
 	overflow-y: auto;
 	float: left;
-	width: 75%;
+	width: 79%;
 	padding: 30px;
 	height: calc(100vh - #{$headerHeight + 8});
 	// height: auto;
 	position: fixed;
-	left: 25%;
+	left: 21%;
 	top: $headerHeight;
-
 }
 
 .bottomBorder {

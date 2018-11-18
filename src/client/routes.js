@@ -9,7 +9,7 @@ import { loadState, saveState } from "./utils/persistence";
 //routes
 import Home from "./containers/Home";
 import NotFound from "./containers/NotFound";
-import Library from "./containers/Library/Main";
+import Library from "./containers/Library/";
 
 const requireAuth = (nextState, replace) => {
 	const state = loadState() || {};
@@ -21,7 +21,7 @@ const requireAuth = (nextState, replace) => {
 const routes = (
 	<Route path={baseName} component={Layout}>
 		<IndexRoute getComponent={Home} />
-		<Route path="/library/video/:id" components={Library} />
+		<Route path="/library/video/:id(/:tab)" getComponent={Library} />
 		<Route path="*" components={NotFound} />
 	</Route>
 );
