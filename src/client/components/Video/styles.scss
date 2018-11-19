@@ -7,9 +7,14 @@
 	display: inline-flex;
 	position: relative;
 	margin: 16px 50px;
+
 	&:hover {
 		.infoContainer {
 			// display: block;
+		}
+
+		.videoIcon {
+			opacity: 1;
 		}
 	}
 }
@@ -30,8 +35,7 @@
 	display: none;
 }
 
-.videoImage {
-}
+.videoImage {}
 
 .videoIcon {
 	text-shadow: 0 0 6px $color-tealish;
@@ -42,4 +46,5 @@
 	left: 50%;
 	transform: translate(-50%, -50%);
 	-ms-transform: translate(-50%, -50%);
+	opacity: 0;
 }
