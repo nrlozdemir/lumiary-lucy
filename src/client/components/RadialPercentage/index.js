@@ -15,7 +15,7 @@ class RadialPercentage extends Component {
 		const { width, height, color1, color2, percentage, fontsize } = this.props;
 
 		return (
-		    <div style={{ width: {width}, height: {height}, color: {color1} }}>
+		    <div className={style.CircularProgressbar}>
 		      <SegmentedProgressbar 
 		      	fontsize={fontsize} 
 		      	color1={color1} 

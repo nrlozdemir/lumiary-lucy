@@ -19,10 +19,11 @@ class VersusRow extends React.Component {
 		const video = this.props.video;
 		return (
 			<React.Fragment>
-				<div className={style.VersusCellLeft}>
+			<div className={style.versusRow}>
+				<div className={style.versusCellLeft}>
 					<Video key={video.vl.id} video={video.vl} />
 				</div>
-				<div className={style.VersusCellMid} style={{ height: "135px" }}>
+				<div className={style.versusCellMid} style={{ height: "135px" }}>
 					<RadialPercentage 
 						width="135px" 
 						height="135px" 
@@ -32,9 +33,15 @@ class VersusRow extends React.Component {
 						percentage={video.diff} 
 					/>
 				</div>
-				<div className={style.VersusCellRight}>
+				<div className={style.versusCellRight}>
 					<Video key={video.vr.id} video={video.vr} />
 				</div>
+			</div>
+			<div className={style.versusRow}>
+				<div className={style.versusSubTitle}>{video.vl.subtitle}</div>
+				<div className={style.versusCategory}>{video.title}</div>
+				<div className={style.versusSubTitle}>{video.vr.subtitle}</div>
+			</div>
 			</React.Fragment>
 		);
 	}
@@ -43,7 +50,6 @@ class VersusRow extends React.Component {
 VersusRow.propTypes = {
 	video: PropTypes.object
 };
-
 VersusRow.defaultProps = {};
 
 class VersusList extends React.Component {
@@ -51,7 +57,7 @@ class VersusList extends React.Component {
 		const { videos } = this.props;
 		return (
 			<React.Fragment>
-				<div>
+				<div className={style.versusRow}>
 					<div className={style.versusTitleBold}>Best Performing</div>
 					<div className={style.versusTitle}>% difference</div>
 					<div className={style.versusTitleBold}>Worst Performing</div>
@@ -59,11 +65,6 @@ class VersusList extends React.Component {
 				{videos.map(video => (
 					<React.Fragment key={video.key}>
 						<VersusRow key={video.key} video={video} />
-						<div className="">
-							<div className={style.versusSubTitle}>{video.vl.subtitle}</div>
-							<div className={style.versusCategory}>{video.title}</div>
-							<div className={style.versusSubTitle}>{video.vr.subtitle}</div>
-						</div>
 					</React.Fragment>
 				))}
 			</React.Fragment>
@@ -74,7 +75,6 @@ class VersusList extends React.Component {
 VersusList.propTypes = {
 	videos: PropTypes.array
 };
-
 VersusList.defaultProps = {};
 
 export default VersusList;
