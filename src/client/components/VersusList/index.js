@@ -4,6 +4,8 @@ import React from "react";
 import PropTypes from "prop-types";
 
 // Styles
+import helpers from "../../scss/helpers.scss";
+import variables from "../../scss/variables.scss";
 import style from "./style.scss";
 // Components
 import Video from "../Video";
@@ -14,13 +16,20 @@ class VersusList extends React.Component {
 		const { videos } = this.props;
 		return (
 			<React.Fragment>
-				<div className="">
-					<div className="col-md-5">Best Performing</div>
-					<div className="col-md-2">% difference</div>
-					<div className="col-md-5">Worst Performing</div>
+				<div>
+					<div className="VersusCellLeft">Best Performing</div>
+					<div className="VersusCellMid">% difference</div>
+					<div className="VersusCellRight">Worst Performing</div>
 				</div>
 				{videos.map(video => (
-					<VersusRow key={video.key} video={video} />
+					<React.Fragment key={video.key}>
+						<VersusRow key={video.key} video={video} />
+						<div className="">
+							<div className={style.versusSubTitle}>{video.vl.subtitle}</div>
+							<div className={style.versusCategory}>{video.title}</div>
+							<div className={style.versusSubTitle}>{video.vr.subtitle}</div>
+						</div>
+					</React.Fragment>
 				))}
 			</React.Fragment>
 		);

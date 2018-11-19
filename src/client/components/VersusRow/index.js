@@ -17,11 +17,10 @@ class VersusRow extends React.Component {
 		const video = this.props.video;
 		return (
 			<React.Fragment>
-			<div className="">
-				<div className={style.versusList}>
+				<div className={style.VersusCellLeft}>
 					<Video key={video.vl.id} video={video.vl} />
 				</div>
-				<div style={{ color: "#800", height: "135px" }} className={`col-4 bordered listBlockMid`}>
+				<div className={style.VersusCellMid} style={{ height: "135px" }}>
 					<RadialPercentage 
 						width="135px" 
 						height="135px" 
@@ -31,15 +30,9 @@ class VersusRow extends React.Component {
 						percentage={video.diff} 
 					/>
 				</div>
-				<div className={style.versusList}>
+				<div className={style.VersusCellRight}>
 					<Video key={video.vr.id} video={video.vr} />
 				</div>
-			</div>
-			<div className="">
-				<div className="col-md-5"></div>
-				<div className="col-md-2">{video.title}</div>
-				<div className="col-md-5"></div>
-			</div>
 			</React.Fragment>
 		);
 	}

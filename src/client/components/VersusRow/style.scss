@@ -2,7 +2,18 @@
 	position: relative;
 }
 .versusRow {
+  @include grid-column(12);
   height: 175px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   margin-bottom: 50px;
+}
+.versusCellLeft, .versusCellRight, .versusCellMid {
+	float:left;
+	clear:none;
+}
+.versusCellLeft, .versusCellRight {
+  @include grid-column(5);
+}
+.versusCellMid {
+  @include grid-column(2);	
 }

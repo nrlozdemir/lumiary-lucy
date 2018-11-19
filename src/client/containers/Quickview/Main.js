@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import style from "./styles.scss";
 import PropTypes from "prop-types";
 import VersusList from "../../components/VersusList";
+import Dropdown from "../../components/Dropdown";
 
 class Quickview extends Component {
 
@@ -103,14 +104,21 @@ class Quickview extends Component {
 		];
 
 		return (
-			<div className={style.main}>
-				<div className="col-8">
-					<VersusList videos={versus} />
-				</div>
-				<div className="col-4">
+			<React.Fragment>
+				<Dropdown>
+					<div className="child">test</div>
+				</Dropdown>
+				<div className={style.VersusList}>
+					<div className="col-8">
+						<VersusList videos={versus} />
+					</div>
+					<div className="col-4">
 
+					</div>
 				</div>
-			</div>
+				<div className={style.RankingsList}>
+				</div>
+			</React.Fragment>
 		);
 	}
 }
