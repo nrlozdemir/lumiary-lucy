@@ -191,8 +191,8 @@ class RankingsList extends React.Component {
 									))}
 								</Slider>
 							</div>
-							<div className={style.info_fb}>
-								{Object.keys(platform_item)}
+							<div className={style.infoBlock}>
+								{Object.values(platform_item.id)}
 							</div>
 						</React.Fragment>
 					))}
