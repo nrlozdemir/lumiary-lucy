@@ -53,7 +53,7 @@ class Video extends React.Component {
 						<p className={style.videoTitle}>Meet the Puppet</p>
 					</div>
 					<div className={style.publishDate}>
-						Pubslished on: <br />
+						Published on: <br />
 						03/12/2018
 					</div>
 				</div>
