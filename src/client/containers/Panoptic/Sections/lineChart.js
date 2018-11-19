@@ -84,7 +84,7 @@ const lineData = {
 			shadowOffsetY: 1,
 			shadowBlur: 15,
 			shadowColor: "#006c7a",
-			data: [-65, -59, 20, 30, -12, -25, -3, -69, -70, -11, 86]
+			data: [-65, -59, 20, 30, 0, -25, -3, -20, 0]
 		}
 	]
 };
@@ -158,7 +158,7 @@ const LineChart = () => (
 					}
 				},
 				tooltips: {
-					enabled: false
+					enabled: true
 				},
 				plugins: {
 					datalabels: {
