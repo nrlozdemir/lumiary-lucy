@@ -11,7 +11,6 @@ import Card from "Components/Card";
 import BarChart from "Components/Charts/BarChart";
 import TabShow from "../../Library/Views/tabShow";
 import { pieData, lineData } from "../../Library/options";
-import aspectRatioIcon from "../../../assets/videoTabsIcons/aspectRatioIcon.png";
 // import PropTypes from 'prop-types'
 
 const videoList = [
