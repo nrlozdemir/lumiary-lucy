@@ -11,7 +11,7 @@ import Card from "Components/Card";
 import BarChart from "Components/Charts/BarChart";
 import TabShow from "../../Library/Views/tabShow";
 import { pieData, lineData } from "../../Library/options";
-import aspectRatioIcon from "../../../assets/videoTabsIcons/aspectRatioIcon.png";
+import LineChart from "Components/Charts/LineChart";
 // import PropTypes from 'prop-types'
 
 const videoList = [
@@ -45,13 +45,40 @@ class Competitor extends Component {
       speed: 500,
       slidesToShow: 1,
       slidesToScroll: 1
-    };
+		};
+
+		const yLabels = {
+			0 : '1-2 Scenes', 2 : '3-5 Scenes', 4 : '6-10 Scenes', 6 : '10-20 Scenes'
+		};
     return (
       <div className={cx(style.marketView, style.competitor)}>
         <SubNav />
         <div className={style.container}>
+
+					<div className="mb-25">
+						<LineChart height="40px" options={{
+								legend: {
+									display: false
+								},
+								scales:{
+									xAxes: [{
+											display: false
+									}],
+									yAxes: [{
+										ticks: {
+												callback: function(value, index, values) {
+													// for a value (tick) equals to 8
+													return yLabels[value];
+													// 'junior-dev' will be returned instead and displayed on your chart
+												}
+										}
+									}]
+								}
+							}} />
+					</div>
+
           <div className="col-1">
-            left
+						&nbsp;
 					</div>
           <div className="col-11 mt-10 pb-10">
             <div className={style.upContainer}>

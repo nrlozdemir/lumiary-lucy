@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Card from "Components/Card";
 
 // Styles
 import style from "./styles.scss";
@@ -42,74 +43,259 @@ class Panoptic extends Component {
 					</div>
 
 					<div className={style.resultsPanel + " col-3"}>
-
-							<div className={style.wrapper}>
-										<h4 className={style.title}>Engagement Rate</h4>
-										<div className={style.outer}>
-												<div className={style.outerWrapFirst}>
-														<div className={style.skewBarFirst}>
-														</div>
-												</div>
-												<p>69%</p>
-										</div>
-
-										<div className={style.outer}>
-											<div className={style.outerWrapSecond}>
-												<div className={style.skewBarSecond}>
-												</div>
-											</div>
-											<p>21%</p>
-										</div>
-										<div className={style.outer}>
-											<div className={style.outerWrapThird}>
-												<div className={style.skewBarThird}>
-												</div>
-											</div>
-											<p>10%</p>
-										</div>
-
-										<div className={style.outer}>
-											<div className={style.outerWrapFourth}>
-												<div className={style.skewBarFourth}>
-												</div>
-											</div>
-											<p>1%</p>
-										</div>
+						<div className={style.wrapper}>
+							<h4 className={style.title}>Engagement Rate</h4>
+							<div className={style.outer}>
+								<div className={style.outerWrapFirst}>
+									<div className={style.skewBarFirst} />
+								</div>
+								<p>69%</p>
 							</div>
+
+							<div className={style.outer}>
+								<div className={style.outerWrapSecond}>
+									<div className={style.skewBarSecond} />
+								</div>
+								<p>21%</p>
+							</div>
+							<div className={style.outer}>
+								<div className={style.outerWrapThird}>
+									<div className={style.skewBarThird} />
+								</div>
+								<p>10%</p>
+							</div>
+
+							<div className={style.outer}>
+								<div className={style.outerWrapFourth}>
+									<div className={style.skewBarFourth} />
+								</div>
+								<p>1%</p>
+							</div>
+						</div>
 					</div>
 					<div className={style.rightPanel + " col-3"}>
-
-
-
-					          <div className={style.panelContents}>
-											<div className={style.listing}>
-														{/* {<div className={style.image} style={{ backgroundImage: `url(${bgImage})` }}>
-														</div>} */}
-															{/* <div className={style.bg} style={{ backgroundImage: `url('../../assets/group.png')` }}>
-													</div> */}
-													<figure className={style.coverImage}>
-															<img src={require('../../assets/panopticbg1.jpeg')} />
-													</figure>
-													<div className={style.details}>
-
-													</div>
+						<p className={style.panelHeading}>
+							High Impact Moments <span className={style.bottomBorder} />
+						</p>
+						<div className={style.panelContents}>
+							<div className={style.listing}>
+								<Card removeHeader>
+									<div className={style.card}>
+										<img
+											className={style.cardImage}
+											src="https://picsum.photos/200/115/"
+										/>
+										<div className={style.content}>
+											<div className="col-12">
+												<p className={style.cardHeader}>Steve Nash’s Godson…</p>
+											</div>
+											<div className="grid-container">
+												<div className="col-6">
+													<p className={style.cardDescription}>
+														Likes <br />
+														0:32
+													</p>
+												</div>
+												<div className="col-6">
+													<button className={style.rightButtonStyle}>
+														View
+													</button>
+												</div>
 											</div>
 										</div>
-
-
-
+									</div>
+								</Card>
+								<Card removeHeader>
+									<div className={style.card}>
+										<img
+											className={style.cardImage}
+											src="https://picsum.photos/200/115/"
+										/>
+										<div className={style.content}>
+											<div className="col-12">
+												<p className={style.cardHeader}>Steve Nash’s Godson…</p>
+											</div>
+											<div className="grid-container">
+												<div className="col-6">
+													<p className={style.cardDescription}>
+														Likes <br />
+														0:32
+													</p>
+												</div>
+												<div className="col-6">
+													<button className={style.rightButtonStyle}>
+														View
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</Card>
+								<Card removeHeader>
+									<div className={style.card}>
+										<img
+											className={style.cardImage}
+											src="https://picsum.photos/200/115/"
+										/>
+										<div className={style.content}>
+											<div className="col-12">
+												<p className={style.cardHeader}>Steve Nash’s Godson…</p>
+											</div>
+											<div className="grid-container">
+												<div className="col-6">
+													<p className={style.cardDescription}>
+														Likes <br />
+														0:32
+													</p>
+												</div>
+												<div className="col-6">
+													<button className={style.rightButtonStyle}>
+														View
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</Card>
+								<Card removeHeader>
+									<div className={style.card}>
+										<img
+											className={style.cardImage}
+											src="https://picsum.photos/200/115/"
+										/>
+										<div className={style.content}>
+											<div className="col-12">
+												<p className={style.cardHeader}>Steve Nash’s Godson…</p>
+											</div>
+											<div className="grid-container">
+												<div className="col-6">
+													<p className={style.cardDescription}>
+														Likes <br />
+														0:32
+													</p>
+												</div>
+												<div className="col-6">
+													<button className={style.rightButtonStyle}>
+														View
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</Card>
+								<Card removeHeader>
+									<div className={style.card}>
+										<img
+											className={style.cardImage}
+											src="https://picsum.photos/200/115/"
+										/>
+										<div className={style.content}>
+											<div className="col-12">
+												<p className={style.cardHeader}>Steve Nash’s Godson…</p>
+											</div>
+											<div className="grid-container">
+												<div className="col-6">
+													<p className={style.cardDescription}>
+														Likes <br />
+														0:32
+													</p>
+												</div>
+												<div className="col-6">
+													<button className={style.rightButtonStyle}>
+														View
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</Card>
+								<Card removeHeader>
+									<div className={style.card}>
+										<img
+											className={style.cardImage}
+											src="https://picsum.photos/200/115/"
+										/>
+										<div className={style.content}>
+											<div className="col-12">
+												<p className={style.cardHeader}>Steve Nash’s Godson…</p>
+											</div>
+											<div className="grid-container">
+												<div className="col-6">
+													<p className={style.cardDescription}>
+														Likes <br />
+														0:32
+													</p>
+												</div>
+												<div className="col-6">
+													<button className={style.rightButtonStyle}>
+														View
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</Card>
+								<Card removeHeader>
+									<div className={style.card}>
+										<img
+											className={style.cardImage}
+											src="https://picsum.photos/200/115/"
+										/>
+										<div className={style.content}>
+											<div className="col-12">
+												<p className={style.cardHeader}>Steve Nash’s Godson…</p>
+											</div>
+											<div className="grid-container">
+												<div className="col-6">
+													<p className={style.cardDescription}>
+														Likes <br />
+														0:32
+													</p>
+												</div>
+												<div className="col-6">
+													<button className={style.rightButtonStyle}>
+														View
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</Card>
+								<Card removeHeader>
+									<div className={style.card}>
+										<img
+											className={style.cardImage}
+											src="https://picsum.photos/200/115/"
+										/>
+										<div className={style.content}>
+											<div className="col-12">
+												<p className={style.cardHeader}>Steve Nash’s Godson…</p>
+											</div>
+											<div className="grid-container">
+												<div className="col-6">
+													<p className={style.cardDescription}>
+														Likes <br />
+														0:32
+													</p>
+												</div>
+												<div className="col-6">
+													<button className={style.rightButtonStyle}>
+														View
+													</button>
+												</div>
+											</div>
+										</div>
+									</div>
+								</Card>
+							</div>
+						</div>
 					</div>
-
-			 </div>
-
-			 <LineChart />
-      </div>
-		)
-
-  }
+				</div>
+				<LineChart />
+			</div>
+		);
+	}
 }
-
-
 
 // Panoptic.propTypes = {
 //   bgImage: PropTypes.string.isRequired

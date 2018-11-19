@@ -47,4 +47,6 @@ $headerHeight: 83px;
 	box-shadow: 0 0 3px 2px #21bcd5, inset 0 0 3px 1px #fcfbff;
 	background-color: #fcfbff;
 	bottom: 0;
+	z-index: 10;
+	position: relative;
 }
