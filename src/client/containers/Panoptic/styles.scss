@@ -50,22 +50,33 @@
 			border: 1px solid #1daac1;
 			transform: skewX(150deg);
 			margin-bottom: 8px;
+
+			// box-shadow: 3px 0 6px 0 #1daac1;
+			background-color: #22212f;
 		}
 
 		.skewBarFirst {
 			left: -10%;
+			box-shadow: 3px 0 6px 0 #1daac1;
+
+
 		}
 
 		.skewBarSecond {
 			left: -40%;
+			box-shadow: 3px 0 6px 0 #178da1;
+
 		}
 
 		.skewBarThird {
 			left: -65%;
+			box-shadow: 3px 0 6px 0 #136a78;
+
 		}
 
 		.skewBarFourth {
 			left: -80%;
+			box-shadow: 3px 0 6px 0 #0b424b;
 		}
 	}
 }
@@ -74,7 +85,7 @@
 	display: inline-block;
 	position: relative;
 	height: 45rem;
-	background: pink;
+	// background: pink;
 }
 
 .controlGroup {
@@ -113,21 +124,21 @@
 		}
 	}
 
-	.control:hover input ~ .controlIndicator,
-	.control input:focus ~ .controlIndicator {
+	.control:hover input~.controlIndicator,
+	.control input:focus~.controlIndicator {
 		background: #ccc;
 	}
 
-	.control input:checked ~ .controlIndicator {
+	.control input:checked~.controlIndicator {
 		background: #2aa1c0;
 	}
 
-	.control:hover input:not([disabled]):checked ~ .controlIndicator,
-	.control input:checked:focus ~ .controlIndicator {
+	.control:hover input:not([disabled]):checked~.controlIndicator,
+	.control input:checked:focus~.controlIndicator {
 		background: #0e647d;
 	}
 
-	.control input:disabled ~ .controlIndicator {
+	.control input:disabled~.controlIndicator {
 		background: #e6e6e6;
 		opacity: 0.6;
 		pointer-events: none;
@@ -139,7 +150,7 @@
 		display: none;
 	}
 
-	.control input:checked ~ .controlIndicator:after {
+	.control input:checked~.controlIndicator:after {
 		display: block;
 	}
 
@@ -153,17 +164,51 @@
 		transform: rotate(45deg);
 	}
 
-	.controlCheckbox input:disabled ~ .controlIndicator:after {
+	.controlCheckbox input:disabled~.controlIndicator:after {
 		border-color: #7b7b7b;
 	}
 }
 
-.outerWrapFirst {
+
+
+
+
+.outer {
+	position: relative;
+	display: block;
+
+	.outerWrapFirst {}
+
 	p {
 		position: absolute;
 		top: 0;
-		left: -10px;
+		left: -10%;
 		z-index: 2;
+		line-height: 40px;
+	}
+}
+
+.wrapper {
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+	width: 100%;
+
+	.title {
+		text-align: center;
+		margin-bottom: 50px;
+		display: block;
+	}
+}
+
+
+
+.panelContents {
+	.listing {
+		display: block;
+		position: relative;
+		width: 100%;
+		height: 200px;
 	}
 }
 

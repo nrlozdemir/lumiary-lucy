@@ -42,26 +42,78 @@ class Panoptic extends Component {
 					</div>
 
 					<div className={style.resultsPanel + " col-3"}>
-						<div className={style.outerWrapFirst}>
-							<div className={style.skewBarFirst} />
-							<p>69%</p>
-						</div>
-						<div className={style.outerWrapSecond}>
-							<div className={style.skewBarSecond} />
-						</div>
-						<div className={style.outerWrapThird}>
-							<div className={style.skewBarThird} />
-						</div>
-						<div className={style.outerWrapFourth}>
-							<div className={style.skewBarFourth} />
-						</div>
+
+							<div className={style.wrapper}>
+										<h4 className={style.title}>Engagement Rate</h4>
+										<div className={style.outer}>
+												<div className={style.outerWrapFirst}>
+														<div className={style.skewBarFirst}>
+														</div>
+												</div>
+												<p>69%</p>
+										</div>
+
+										<div className={style.outer}>
+											<div className={style.outerWrapSecond}>
+												<div className={style.skewBarSecond}>
+												</div>
+											</div>
+											<p>21%</p>
+										</div>
+										<div className={style.outer}>
+											<div className={style.outerWrapThird}>
+												<div className={style.skewBarThird}>
+												</div>
+											</div>
+											<p>10%</p>
+										</div>
+
+										<div className={style.outer}>
+											<div className={style.outerWrapFourth}>
+												<div className={style.skewBarFourth}>
+												</div>
+											</div>
+											<p>1%</p>
+										</div>
+							</div>
 					</div>
-					<div className={style.rightPanel + " col-3"}>tatatatatata</div>
-				</div>
-				<LineChart />
-			</div>
-		);
-	}
+					<div className={style.rightPanel + " col-3"}>
+
+
+
+					          <div className={style.panelContents}>
+											<div className={style.listing}>
+														{/* {<div className={style.image} style={{ backgroundImage: `url(${bgImage})` }}>
+														</div>} */}
+															{/* <div className={style.bg} style={{ backgroundImage: `url('../../assets/group.png')` }}>
+													</div> */}
+													<figure className={style.coverImage}>
+															<img src={require('../../assets/panopticbg1.jpeg')} />
+													</figure>
+													<div className={style.details}>
+
+													</div>
+											</div>
+										</div>
+
+
+
+					</div>
+
+			 </div>
+
+			 <LineChart />
+      </div>
+		)
+
+  }
 }
+
+
+
+// Panoptic.propTypes = {
+//   bgImage: PropTypes.string.isRequired
+
+// };
 
 export default Panoptic;

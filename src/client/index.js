@@ -15,6 +15,8 @@ import { loadState, saveState } from "./utils/persistence";
 import "./scss/app.scss";
 import "./scss/helpers.scss";
 
+
+
 if (typeof window === "undefined") {
 	global.window = new Object();
 }
