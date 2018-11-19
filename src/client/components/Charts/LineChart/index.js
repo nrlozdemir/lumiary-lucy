@@ -4,6 +4,7 @@ import {Line} from 'react-chartjs-2';
 
 
 class LineChart extends React.PureComponent {
+
 	render() {
 		const data = {
 			labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -27,7 +28,7 @@ class LineChart extends React.PureComponent {
 					pointHoverBorderWidth: 2,
 					pointRadius: 1,
 					pointHitRadius: 10,
-					data: [65, 59, 80, 81, 56, 55, 40]
+					data: [6, 0, 2, 4, 6, 0, 4, 2, 4]
 				},
 				{
 					label: 'Second Set',
@@ -48,7 +49,7 @@ class LineChart extends React.PureComponent {
 					pointHoverBorderWidth: 2,
 					pointRadius: 1,
 					pointHitRadius: 10,
-					data: [25, 5, 25, 40, 56, 55, 40]
+					data: [2, 4, 6, 0, 2, 4, 6, 0, 4]
 				}
 			]
 		};
