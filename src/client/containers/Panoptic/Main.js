@@ -75,7 +75,7 @@ class Panoptic extends Component {
 					</div>
 					<div className={style.rightPanel + " col-3"}>
 						<p className={style.panelHeading}>
-							Panel Height <span className={style.bottomBorder} />
+							High Impact Moments <span className={style.bottomBorder} />
 						</p>
 						<div className={style.panelContents}>
 							<div className={style.listing}>
