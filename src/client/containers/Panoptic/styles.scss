@@ -20,7 +20,6 @@
 	}
 }
 
-
 .resultsPanel {
 	display: inline-block;
 	position: relative;
@@ -37,8 +36,6 @@
 		overflow: hidden;
 		border-left: 1px solid #1daac1;
 		margin-top: 8px;
-
-
 
 		.skewBarFirst,
 		.skewBarSecond,
@@ -91,13 +88,9 @@
 	// background: pink;
 }
 
-
-
-
 .controlGroup {
 	display: block;
 	line-height: 34px;
-
 
 	.control {
 		// display: block;
@@ -152,7 +145,7 @@
 	}
 
 	.controlIndicator:after {
-		content: '';
+		content: "";
 		position: absolute;
 		display: none;
 	}
@@ -217,4 +210,14 @@
 		width: 100%;
 		height: 200px;
 	}
+}
+
+.buttonStyle {
+	background: transparent;
+	color: white;
+	border: 0;
+	font-size: 16px;
+	box-shadow: 0 0 4px 2px rgba(33, 188, 213, 0.5), inset 0 0 4px 2px #21bcd5;
+	padding: 16px 32px;
+	font-family: $font-family-clanOT;
 }
