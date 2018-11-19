@@ -79,6 +79,7 @@
 		"react": "^16.4.1",
 		"react-avatar-editor": "^11.0.4",
 		"react-chartjs-2": "^2.7.4",
+		"react-circular-progressbar": "1.0.0",
 		"react-confirm-alert": "github:quickframe/react-confirm-alert",
 		"react-dnd": "^5.0.0",
 		"react-dnd-html5-backend": "^5.0.1",

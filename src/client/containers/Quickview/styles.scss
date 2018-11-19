@@ -1,0 +1,43 @@
+$headerHeight: 83px;
+.main {
+	display: block;
+	margin: 0 auto;
+	width: 100%;
+	height: calc(100vh - 160px);
+	background-color: #22212f;
+	display: table;
+}
+.centeredArea {
+	color: $color-white;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+.listBlockLeft, .listBlockRight {
+	color: #ddd;
+}
+.listBlockMid {
+	width: 135px;
+	height: 135px;
+}
+.quickviewHeader {
+	
+}
+.quickviewContent {
+
+}
+.VersusList {
+	width: 60%;
+	height: calc(100vh - #{$headerHeight + 8});
+	left: 0;
+	top: $headerHeight;
+	float:left;
+}
+.RankingsList {
+	margin-left: 2%;
+	width: 34%;
+	height: calc(100vh - #{$headerHeight + 8});
+	left: 0;
+	top: $headerHeight;
+	float:left;
+}

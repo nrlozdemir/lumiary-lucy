@@ -1,0 +1,71 @@
+.versusVideo {
+	width: 291px;
+}
+.versusList {
+	position: relative;
+}
+.versusRow {
+  width: 757px;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+  background-color: #2f2e3d;
+  margin-bottom: 50px;
+  float: none;
+  clear: both;
+  margin-left:20px;
+}
+.versusCellLeft, .versusCellRight, .versusCellMid {
+	float:left;
+	clear:none;
+}
+.versusCellLeft, .versusCellRight {
+	width:290px;
+}
+.versusCellMid {
+	width:175px;
+	margin-top: 50px;
+}
+.versusTitle, .versusTitleBold, .versusSubTitle {
+  height: 23px;
+  font-size: 18px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: $color-pale-grey;
+  float:left;
+}
+.versusTitleBold {
+  font-family: $font-family-clanOTNews;
+  width:290px;
+  text-align: center;
+}
+.versusTitle {
+  font-family: $font-family-clanOT;
+  width:175px;
+  text-align: center;
+}
+.versusSubTitle {
+  width:290px;
+  font-family: $font-family-clanOT;
+  font-weight: bold;
+  text-align: center;
+  color: $color-pale-grey;
+  float:left;
+  margin-top: 12px;
+}
+.versusCategory {
+  height: 29px;
+  width:175px;
+  text-align: center;
+  font-family: $font-family-sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  color: $color-pale-grey;
+  float:left;
+  margin-top: 12px;
+}
