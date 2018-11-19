@@ -5,6 +5,7 @@ import React, { Component } from 'react'
 import style from "./styles.scss";
 import PropTypes from "prop-types";
 import VersusList from "../../components/VersusList";
+import RankingsList from "../../components/RankingsList";
 import Dropdown from "../../components/Dropdown";
 
 class Quickview extends Component {
@@ -24,7 +25,7 @@ class Quickview extends Component {
 					subtitle: "3:30\"",
 					src: "https://picsum.photos/300/200"
 				},
-				diff: 45
+				diff: "45"
 			},
 			{
 				key: 2,
@@ -39,7 +40,7 @@ class Quickview extends Component {
 					subtitle: "8 Scenes",
 					src: "https://picsum.photos/300/200"
 				},
-				diff: 23
+				diff: "23"
 			},
 			{
 				key: 3,
@@ -54,7 +55,7 @@ class Quickview extends Component {
 					subtitle: "No apperance",
 					src: "https://picsum.photos/300/200"
 				},
-				diff: 76
+				diff: "76"
 			},
 			{
 				key: 4,
@@ -69,7 +70,7 @@ class Quickview extends Component {
 					subtitle: "Cool - Dull",
 					src: "https://picsum.photos/300/200"
 				},
-				diff: 97
+				diff: "97"
 			},
 			{
 				key: 5,
@@ -84,7 +85,7 @@ class Quickview extends Component {
 					subtitle: "Mostly Male",
 					src: "https://picsum.photos/300/200"
 				},
-				diff: 38
+				diff: "38"
 			},
 			{
 				key: 6,
@@ -99,24 +100,24 @@ class Quickview extends Component {
 					subtitle: "30 FPS at 1080p",
 					src: "https://picsum.photos/300/200"
 				},
-				diff: 67
+				diff: "67"
 			},
 		];
 
 		return (
 			<React.Fragment>
-				<Dropdown>
-					<div className="child">test</div>
-				</Dropdown>
-				<div className={style.VersusList}>
-					<div className="col-8">
+				<div className={style.quickviewHeader}>
+					<Dropdown>
+						<div className="child">test</div>
+					</Dropdown>
+				</div>
+				<div className={style.quickviewContent}>
+					<div className={style.VersusList}>
 						<VersusList videos={versus} />
 					</div>
-					<div className="col-4">
-
+					<div className={style.RankingsList}>
+						<RankingsList />
 					</div>
-				</div>
-				<div className={style.RankingsList}>
 				</div>
 			</React.Fragment>
 		);

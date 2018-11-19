@@ -52,9 +52,9 @@ class VersusList extends React.Component {
 		return (
 			<React.Fragment>
 				<div>
-					<div className="VersusCellLeft">Best Performing</div>
-					<div className="VersusCellMid">% difference</div>
-					<div className="VersusCellRight">Worst Performing</div>
+					<div className={style.versusTitleBold}>Best Performing</div>
+					<div className={style.versusTitle}>% difference</div>
+					<div className={style.versusTitleBold}>Worst Performing</div>
 				</div>
 				{videos.map(video => (
 					<React.Fragment key={video.key}>
