@@ -4,7 +4,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import "chartjs-plugin-datalabels";
 
-// Components
+// Components //
 import VideoBrief from "./Sections/videoBrief";
 import Card from "../../components/Card";
 
