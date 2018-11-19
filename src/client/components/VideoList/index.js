@@ -8,18 +8,13 @@ import style from "./style.scss";
 // Components
 import Video from "../Video";
 
-class VideoList extends React.Component {
-	render() {
-		const { router, videos } = this.props;
-		return (
-			<div className={style.videoList}>
-				{videos.map(video => (
-					<Video key={video.id} video={video} router={router} />
-				))}
-			</div>
-		);
-	}
-}
+const VideoList = ({ router, videos }) => (
+	<div className={style.videoList}>
+		{videos.map(video => (
+			<Video key={video.id} video={video} router={router} />
+		))}
+	</div>
+);
 
 VideoList.propTypes = {
 	router: PropTypes.object,
