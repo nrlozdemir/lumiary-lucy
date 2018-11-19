@@ -8,8 +8,8 @@ import Slider from "react-slick";
 class RankingsList extends React.Component {
 	render() {
 
-		const slides = {
-			'facebook': [
+		const slides = [
+			{id: 'facebook', data: [
 				{
 					id: 1,
 					src: "https://picsum.photos/135/135?id=234624"
@@ -34,8 +34,8 @@ class RankingsList extends React.Component {
 					id: 6,
 					src: "https://picsum.photos/135/135?id=46383"
 				}
-			],
-			'instagram': [
+			]},
+			{id:'instagram', data:[
 				{
 					id: 1,
 					src: "https://picsum.photos/135/135?id=72354"
@@ -60,8 +60,8 @@ class RankingsList extends React.Component {
 					id: 6,
 					src: "https://picsum.photos/135/135?id=79563"
 				}
-			],
-			'snapchat': [
+			]},
+			{id:'snapchat', data:[
 				{
 					id: 1,
 					src: "https://picsum.photos/135/135?id=3434"
@@ -86,8 +86,8 @@ class RankingsList extends React.Component {
 					id: 6,
 					src: "https://picsum.photos/135/135?id=68"
 				}
-			],
-			'youtube': [
+			]},
+			{id:'youtube', data:[
 				{
 					id: 1,
 					src: "https://picsum.photos/135/135?id=579475"
@@ -112,8 +112,8 @@ class RankingsList extends React.Component {
 					id: 6,
 					src: "https://picsum.photos/135/135?id=45783"
 				}
-			],
-			'twitter': [
+			]},
+			{id:'twitter', data:[
 				{
 					id: 1,
 					src: "https://picsum.photos/135/135?id=435863"
@@ -138,8 +138,8 @@ class RankingsList extends React.Component {
 					id: 6,
 					src: "https://picsum.photos/135/135?id=897"
 				}
-			],
-			'pinterest': [
+			]},
+			{id:'pinterest', data:[
 				{
 					id: 1,
 					src: "https://picsum.photos/135/135?id=245"
@@ -164,63 +164,39 @@ class RankingsList extends React.Component {
 					id: 6,
 					src: "https://picsum.photos/135/135?id=789"
 				}
-			]
-		};
-		const slideKeys = Object.keys(slides);
-		var sectionSlide;
+			]}
+		];
 
 		return (
-			<React.Fragment>
 				<div className={style.container}>
 
 					<div className={style.header}>Platform Rankings</div><br />
 
-						<div className={style.rankList}>
-							<Slider
-								speed={90}
-								infinite={ true }
-								variableWidth={ true }
-								arrows={ false }
-								dots={ false }
-								draggable={ false }
-								centerMode={ true }
-							>
-								{slides.facebook.map(slide => (
-									<div className={style.sliderCell}>
-										<img src={slide.src} alt={slide.id} />
-									</div>
-								))}
-							</Slider>
-						</div>
-						<div className={style.info_fb}>
-							facebook
-						</div>
-
-
-						<div className={style.rankList}>
-							<Slider
-								speed={90}
-								infinite={ true }
-								variableWidth={ true }
-								arrows={ false }
-								dots={ false }
-								draggable={ false }
-								centerMode={ true }
-							>
-								{slides.twitter.map(slide => (
-									<div className={style.sliderCell}>
-										<img src={slide.src} alt={slide.id} />
-									</div>
-								))}
-							</Slider>
-						</div>
-						<div className={style.info}>
-							twitter
-						</div>
-
+					{slides.map((platform_item, platform_index) => (
+						<React.Fragment key={platform_index}>
+							<div className={style.rankList}>
+								<Slider
+									speed={90}
+									infinite={ true }
+									variableWidth={ true }
+									arrows={ false }
+									dots={ false }
+									draggable={ false }
+									centerMode={ true }
+								>
+									{Object.values(platform_item.data).map((slide_item, slide_index) => (
+										<div className={style.sliderCell}>
+											<img src={slide_item.src} alt={slide_item.id} />
+										</div>
+									))}
+								</Slider>
+							</div>
+							<div className={style.info_fb}>
+								{Object.keys(platform_item)}
+							</div>
+						</React.Fragment>
+					))}
 				</div>
-
-			</React.Fragment>
 		);
 	}
 };
