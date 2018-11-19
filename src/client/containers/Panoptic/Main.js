@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from "prop-types";
 
 
 // Styles
@@ -8,6 +9,8 @@ import style from './styles.scss'
 
 class Panoptic extends Component {
   render() {
+		// const { bgImage } = this.props;
+
     return (
 			<div>
 
@@ -46,39 +49,75 @@ class Panoptic extends Component {
 
 					<div className={style.resultsPanel + " col-3"}>
 
-							<div className={style.outerWrapFirst}>
-									<div className={style.skewBarFirst}>
-									</div>
-									<p>69%</p>
-							</div>
-							<div className={style.outerWrapSecond}>
-								<div className={style.skewBarSecond}>
-								</div>
-							</div>
-							<div className={style.outerWrapThird}>
-								<div className={style.skewBarThird}>
-								</div>
-							</div>
-							<div className={style.outerWrapFourth}>
-								<div className={style.skewBarFourth}>
-								</div>
-					    </div>
+							<div className={style.wrapper}>
+										<h4 className={style.title}>Engagement Rate</h4>
+										<div className={style.outer}>
+												<div className={style.outerWrapFirst}>
+														<div className={style.skewBarFirst}>
+														</div>
+												</div>
+												<p>69%</p>
+										</div>
 
+										<div className={style.outer}>
+											<div className={style.outerWrapSecond}>
+												<div className={style.skewBarSecond}>
+												</div>
+											</div>
+											<p>21%</p>
+										</div>
+										<div className={style.outer}>
+											<div className={style.outerWrapThird}>
+												<div className={style.skewBarThird}>
+												</div>
+											</div>
+											<p>10%</p>
+										</div>
+
+										<div className={style.outer}>
+											<div className={style.outerWrapFourth}>
+												<div className={style.skewBarFourth}>
+												</div>
+											</div>
+											<p>1%</p>
+										</div>
+							</div>
 					</div>
 					<div className={style.rightPanel + " col-3"}>
-					tatatatatata
+
+
+
+					          <div className={style.panelContents}>
+											<div className={style.listing}>
+														{/* {<div className={style.image} style={{ backgroundImage: `url(${bgImage})` }}>
+														</div>} */}
+															{/* <div className={style.bg} style={{ backgroundImage: `url('../../assets/group.png')` }}>
+													</div> */}
+													<figure className={style.coverImage}>
+															<img src={require('../../assets/panopticbg1.jpeg')} />
+													</figure>
+													<div className={style.details}>
+
+													</div>
+											</div>
+										</div>
+
+
+
 					</div>
 
 			 </div>
       </div>
 		)
 
-
-
-
-
-
   }
 }
+
+
+
+// Panoptic.propTypes = {
+//   bgImage: PropTypes.string.isRequired
+
+// };
 
 export default Panoptic
