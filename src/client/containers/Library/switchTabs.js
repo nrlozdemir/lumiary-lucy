@@ -5,12 +5,6 @@ import VideoTabs from "./Sections/videoTabs";
 import ColorTone from "./Sections/colorTone";
 import AgeRangeAndGender from "./Sections/ageRangeAndGender";
 
-import fpsIcon from "./../../assets/videoTabsIcons/fps.png";
-import durationIcon from "./../../assets/videoTabsIcons/duration.png";
-import scenesIcon from "./../../assets/videoTabsIcons/scenes.png";
-import aspectRatioIcon from "./../../assets/videoTabsIcons/aspectRatioIcon.png";
-import numberOfFramesIcon from "./../../assets/videoTabsIcons/numberoframes.png";
-
 // Styles
 import { pieData, lineData } from "./options";
 
@@ -21,7 +15,7 @@ export default function(location, routeParams, pathname) {
 				<TabShow
 					location={`/library/video/${routeParams}`}
 					title="Frame Per Second"
-					icon={fpsIcon}
+					icon={require("./../../assets/videoTabsIcons/fps.png")}
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -37,7 +31,7 @@ export default function(location, routeParams, pathname) {
 				<TabShow
 					location={`/library/video/${routeParams}`}
 					title="Duration"
-					icon={durationIcon}
+					icon={require("./../../assets/videoTabsIcons/duration.png")}
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -52,7 +46,7 @@ export default function(location, routeParams, pathname) {
 				<TabShow
 					location={`/library/video/${routeParams}`}
 					title="Aspect Ratio"
-					icon={aspectRatioIcon}
+					icon={require("./../../assets/videoTabsIcons/aspectRatioIcon.png")}
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -67,7 +61,7 @@ export default function(location, routeParams, pathname) {
 				<TabShow
 					location={`/library/video/${routeParams}`}
 					title="Number Of Frames"
-					icon={numberOfFramesIcon}
+					icon={require("./../../assets/videoTabsIcons/numberoframes.png")}
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -82,7 +76,7 @@ export default function(location, routeParams, pathname) {
 				<TabShow
 					location={`/library/video/${routeParams}`}
 					title="Scenes"
-					icon={scenesIcon}
+					icon={require("./../../assets/videoTabsIcons/scenes.png")}
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}

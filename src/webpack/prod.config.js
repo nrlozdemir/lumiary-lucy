@@ -199,7 +199,7 @@ module.exports = {
 				})
 			},
 			{
-				test: /\.(ttf|eot|woff|woff2||gif|svg|png)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+				test: /\.(ttf|eot|woff|woff2||gif|svg|png|jpeg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
 				use: [{ loader: "file-loader" }]
 			}
 		]
