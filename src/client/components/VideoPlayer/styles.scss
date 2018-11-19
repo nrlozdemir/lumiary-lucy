@@ -1,0 +1,14 @@
+.videoContainer {
+  position: relative
+
+  video {
+    width: 100%;
+  }
+
+  .videoIcon {
+    position: absolute;
+    top: 94px;
+    left: 200px;
+    font-size: 75px;
+  }
+}

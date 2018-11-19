@@ -53,7 +53,6 @@ describe("Banner Component", () => {
 			snapshot(testRenderer.toJSON());
 		});
 		it("Should be create video element", () => {
-			console.log();
 			expect(wrapper.find("div DragSource(Video)").length).toEqual(
 				mockProps.videos.length
 			);

@@ -148,7 +148,7 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.(ttf|eot|woff|woff2|gif|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+				test: /\.(ttf|eot|woff|woff2|gif|svg|png)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
 				exclude: [/\.js$/, /\.html$/, /\.json$/, /\.ejs$/, /\.pug$/, /node_modules/],
 				use: [{ loader: "file-loader" }]
 			}

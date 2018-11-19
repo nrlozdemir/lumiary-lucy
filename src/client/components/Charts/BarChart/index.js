@@ -57,11 +57,11 @@ class BarChart extends React.PureComponent {
 					let avarageLineStart = chartInstance.chart.config.options.scales
 						.yAxes[0].display
 						? 0
-						: 15;
+						: 5;
 					let avarageLineEnd = chartInstance.chart.config.options.scales
 						.yAxes[0].display
-						? 75
-						: 15;
+						? 30
+						: 5;
 					if (
 						Array.isArray(this.props.yLabels) &&
 						this.props.yLabels &&
@@ -82,9 +82,9 @@ class BarChart extends React.PureComponent {
 						ctx.strokeRect(
 							(chartInstance.chart.width -
 								chartInstance.chart.getDatasetMeta(0).data[0]._model.width +
-								13) /
+								5) /
 								2,
-							5,
+							3,
 							chartInstance.chart.getDatasetMeta(0).data[0]._model.width,
 							yAxis.height
 						);

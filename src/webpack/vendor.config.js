@@ -57,7 +57,8 @@ module.exports = {
 			"chart.js",
 			"react-chartjs-2",
 			"chartjs-plugin-annotation",
-			"chartjs-plugin-datalabels"
+			"chartjs-plugin-datalabels",
+			"chartjs-plugin-style"
 		]
 	},
 
