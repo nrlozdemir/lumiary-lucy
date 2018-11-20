@@ -111,6 +111,7 @@ class Quickview extends Component {
 						<div className="child">test</div>
 					</Dropdown>
 				</div>
+				<hr />
 				<div className={style.quickviewContent}>
 					<div className={style.VersusList}>
 						<VersusList videos={versus} />

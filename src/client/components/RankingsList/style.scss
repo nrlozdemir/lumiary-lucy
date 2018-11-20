@@ -1,5 +1,6 @@
 .header {
 	float: right;
+	margin-right:50px;
 	color: $color-white;
 	font-family: $font-family-sans-serif;
 	height: 29px;
@@ -10,6 +11,9 @@
 	line-height: normal;
 	letter-spacing: normal;
 	color: var(--pale-grey);
+}
+.container {
+	padding-top:18px;
 }
 .rankList {
 	vertical-align: top;

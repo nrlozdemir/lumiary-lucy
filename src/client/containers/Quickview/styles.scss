@@ -22,9 +22,15 @@ $headerHeight: 83px;
 }
 .quickviewHeader {
 	height: 75px;
+	width: 100%;
 }
 .quickviewContent {
-
+	padding-top:20px;
+}
+.quickviewContent hr {
+	border:2px solid #22212f;
+	padding-left:30px;
+	padding-right:30px;
 }
 .VersusList {
 	width: 60%;
