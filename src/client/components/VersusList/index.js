@@ -25,10 +25,6 @@ class VersusRow extends React.Component {
 				</div>
 				<div className={style.versusCellMid} style={{ backgroundColor: '#2f2e3c'}}>
 					<RadialPercentage 
-						width="135px" 
-						height="135px" 
-						color1="#2f2e3d"
-						color2="#21bcd5"
 						fontsize="30"
 						percentage={video.diff} 
 					/>
