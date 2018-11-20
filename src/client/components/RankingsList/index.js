@@ -2,6 +2,8 @@
 
 import React from "react";
 import style from "./style.scss";
+import variables from "../../scss/variables.scss";
+import mixins from "../../scss/mixins.scss";
 
 import Slider from "react-slick";
 import {FaFacebookSquare, FaTwitterSquare, FaInstagram, FaSnapchatGhost, FaYoutube, FaTwitter, FaPinterest} from 'react-icons/fa';
@@ -168,16 +170,26 @@ class RankingsList extends React.Component {
 			]}
 		];
 
-const renderIcon = (icon => {
-	switch (icon) {
-		case 'facebook': 	return <FaFacebookSquare />;
-		case 'instagram': 	return <FaInstagram />;
-		case 'snapchat': 	return <FaSnapchatGhost />;
-		case 'youtube': 	return <FaYoutube />;
-		case 'twitter': 	return <FaTwitterSquare />;
-		case 'pinterest': 	return <FaPinterest />;
-	}
-});
+		const renderIcon = (icon => {
+			switch (icon) {
+				case 'facebook': 	return <FaFacebookSquare />;
+				case 'instagram': 	return <FaInstagram />;
+				case 'snapchat': 	return <FaSnapchatGhost />;
+				case 'youtube': 	return <FaYoutube />;
+				case 'twitter': 	return <FaTwitterSquare />;
+				case 'pinterest': 	return <FaPinterest />;
+			}
+		});
+		const settings = {
+			arrows: false,
+			autoplay: true,
+			autoplaySpeed: 3000,
+			pauseOnHover: true,
+			infinite: true,
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			draggable: true
+		};
 
 		return (
 				<div className={style.container}>
@@ -189,15 +201,7 @@ const renderIcon = (icon => {
 					{slides.map((platform_item, platform_index) => (
 						<React.Fragment key={platform_index}>
 							<div className={style.rankList}>
-								<Slider
-									speed={90}
-									infinite={ true }
-									variableWidth={ true }
-									arrows={ false }
-									dots={ false }
-									draggable={ false }
-									centerMode={ true }
-								>
+								<Slider ref={slider => (this.slider = slider)} {...settings}>
 									{Object.values(platform_item.data).map((slide_item, slide_index) => (
 										<div className={style.sliderCell}>
 											<img src={slide_item.src} alt={slide_item.id} />
@@ -206,8 +210,11 @@ const renderIcon = (icon => {
 								</Slider>
 							</div>
 						    <div className={style.infoBlock}>
-						    <FaSnapchatGhost />{Object.values(platform_item.id)}<br /><br />
-							{renderIcon(Object.values(platform_item.id))}
+							    <div className={style.iconCircle}>
+									<FaSnapchatGhost />
+								</div>
+								<br /><br />{Object.values(platform_item.id)}
+								{renderIcon(Object.values(platform_item.id))}
 							</div>
 						</React.Fragment>
 					))}

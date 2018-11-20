@@ -1,6 +1,7 @@
 .header {
 	float: right;
 	margin-right:50px;
+	min-height: 170px;
 	color: $color-white;
 	font-family: $font-family-sans-serif;
 	height: 29px;
@@ -18,23 +19,30 @@
 .rankList {
 	vertical-align: top;
 	width:440px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+	background-color: #22212f;
 }
 .sliderCell {
 	width: 130px;
 	height: 130px;
 }
-.icon_fb {
-    font-family: $font-family-icons;
-    font-size: 15px;
-    content:"\e013";
-    display: inline-block;
-    color: #fff;
-    position: absolute;
-    right: -20px;
-    top: 30px;
-}
 .infoBlock {
-	height: 110px;
-	width:440px;
+	height: 140px;
+	width: 440px;
 	background-color: #2f2e3c;
+}
+.iconCircle {
+	position: relative;
+    border-radius: 50%;
+    background-color: $color-neutral-medium-grey;
+    margin-right: 20px;
+	width: 54px;
+	height: 54px;
+	margin-left:30px;
+	top: 20px;
+}
+.iconCircle svg {
+	width: 2.2em;
+	height: 2.2em;
+	margin:0.6em;	
 }

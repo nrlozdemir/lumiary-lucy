@@ -19,11 +19,11 @@ class VersusRow extends React.Component {
 		const video = this.props.video;
 		return (
 			<React.Fragment>
-			<div className={style.versusRow}>
+			<div className={style.versusRow} style={{ backgroundColor: '#22212f'}}>
 				<div className={style.versusCellLeft}>
 					<Video styleOverride={style.customVideo} key={video.vl.id} video={video.vl} />
 				</div>
-				<div className={style.versusCellMid} style={{ height: "135px" }}>
+				<div className={style.versusCellMid} style={{ backgroundColor: '#2f2e3c'}}>
 					<RadialPercentage 
 						width="135px" 
 						height="135px" 

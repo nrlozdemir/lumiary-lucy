@@ -3,10 +3,10 @@
 }
 .versusList {
 	position: relative;
+	background-color: #22212f;
 }
 .versusRow {
   width: 757px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
   background-color: #2f2e3c;
   margin-bottom: 50px;
   float: none;
@@ -24,8 +24,10 @@
 	width:290px;
 }
 .versusCellMid {
-	width:175px;
+	width: 175px;
+	height: 135px;
 	margin-top: 20px;
+	background-color: transparent !important;
 }
 .customVideo {
 	display: inline-flex;
@@ -44,18 +46,18 @@
   float:left;
 }
 .versusTitleBold {
-  font-family: $font-family-clanOTNews;
+  font-family: ClanOT-News;
   width:290px;
   text-align: center;
 }
 .versusTitle {
-  font-family: $font-family-clanOT;
+  font-family: ClanOT;
   width:175px;
   text-align: center;
 }
 .versusSubTitle {
   width:290px;
-  font-family: $font-family-clanOT;
+  font-family: ClanOT;
   font-weight: bold;
   text-align: center;
   color: $color-pale-grey;
