@@ -7,7 +7,7 @@
 .versusRow {
   width: 757px;
   box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  background-color: #2f2e3d;
+  background-color: #2f2e3c;
   margin-bottom: 50px;
   float: none;
   clear: both;
@@ -17,12 +17,20 @@
 	float:left;
 	clear:none;
 }
+.versusCellLeft .video, .versusCellRight .video, .versusCellMid .video {
+	margin:0;
+}
 .versusCellLeft, .versusCellRight {
 	width:290px;
 }
 .versusCellMid {
 	width:175px;
-	margin-top: 50px;
+	margin-top: 20px;
+}
+.customVideo {
+	display: inline-flex;
+	position: relative;
+	margin:0;
 }
 .versusTitle, .versusTitleBold, .versusSubTitle {
   height: 23px;

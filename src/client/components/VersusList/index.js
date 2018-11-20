@@ -21,7 +21,7 @@ class VersusRow extends React.Component {
 			<React.Fragment>
 			<div className={style.versusRow}>
 				<div className={style.versusCellLeft}>
-					<Video key={video.vl.id} video={video.vl} />
+					<Video styleOverride={style.customVideo} key={video.vl.id} video={video.vl} />
 				</div>
 				<div className={style.versusCellMid} style={{ height: "135px" }}>
 					<RadialPercentage 
@@ -34,7 +34,7 @@ class VersusRow extends React.Component {
 					/>
 				</div>
 				<div className={style.versusCellRight}>
-					<Video key={video.vr.id} video={video.vr} />
+					<Video styleOverride={style.customVideo} key={video.vr.id} video={video.vr} />
 				</div>
 			</div>
 			<div className={style.versusRow}>

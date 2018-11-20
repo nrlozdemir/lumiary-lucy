@@ -1,27 +1,25 @@
 .header {
 	float: right;
-	font-size: 18px;
 	color: $color-white;
 	font-family: $font-family-sans-serif;
+	height: 29px;
+	font-size: 24px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: var(--pale-grey);
 }
-
 .rankList {
 	vertical-align: top;
-<<<<<<< HEAD
 	width:440px;
-=======
-	border: 1px dashed #ccc;
-	width: 440px;
->>>>>>> origin/weekend-master
 }
-
 .sliderCell {
 	width: 130px;
 	height: 130px;
 }
-
-.info_fb {
-<<<<<<< HEAD
+.icon_fb {
     font-family: $font-family-icons;
     font-size: 15px;
     content:"\e013";
@@ -33,15 +31,6 @@
 }
 .infoBlock {
 	height: 110px;
+	width:440px;
+	background-color: #2f2e3c;
 }
-=======
-	font-family: $font-family-icons;
-	font-size: 15px;
-	content: "\e013";
-	display: inline-block;
-	color: #fff;
-	// position: absolute;
-	right: -20px;
-	top: 30px;
-}
->>>>>>> origin/weekend-master

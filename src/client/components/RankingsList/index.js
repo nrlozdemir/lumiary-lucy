@@ -4,6 +4,7 @@ import React from "react";
 import style from "./style.scss";
 
 import Slider from "react-slick";
+import {FaFacebookSquare, FaTwitterSquare, FaInstagram, FaSnapchatGhost, FaYoutube, FaTwitter, FaPinterest} from 'react-icons/fa';
 
 class RankingsList extends React.Component {
 	render() {
@@ -167,10 +168,23 @@ class RankingsList extends React.Component {
 			]}
 		];
 
+const renderIcon = (icon => {
+	switch (icon) {
+		case 'facebook': 	return <FaFacebookSquare />;
+		case 'instagram': 	return <FaInstagram />;
+		case 'snapchat': 	return <FaSnapchatGhost />;
+		case 'youtube': 	return <FaYoutube />;
+		case 'twitter': 	return <FaTwitterSquare />;
+		case 'pinterest': 	return <FaPinterest />;
+	}
+});
+
 		return (
 				<div className={style.container}>
 
-					<div className={style.header}>Platform Rankings</div><br />
+					<div className={style.header}>Platform Rankings</div>
+					<br />
+					<br />
 
 					{slides.map((platform_item, platform_index) => (
 						<React.Fragment key={platform_index}>
@@ -191,8 +205,9 @@ class RankingsList extends React.Component {
 									))}
 								</Slider>
 							</div>
-							<div className={style.infoBlock}>
-								{Object.values(platform_item.id)}
+						    <div className={style.infoBlock}>
+						    <FaSnapchatGhost />{Object.values(platform_item.id)}<br /><br />
+							{renderIcon(Object.values(platform_item.id))}
 							</div>
 						</React.Fragment>
 					))}
