@@ -16,7 +16,8 @@ const TabShow = ({
 	title,
 	isGenerateBox,
 	consequent,
-	littleConsequent
+	littleConsequent,
+	compareMode
 }) => {
 	const generateBox = () => {
 		let table = [];
@@ -35,35 +36,97 @@ const TabShow = ({
 			link={location}
 		>
 			<div className="grid-collapse">
-				<div className="col-4">
-					<div className={style.title}>
-						<span className="color-white">This</span>
-						<span className="color-tealish"> Video</span>
-					</div>
-					<div className="col-12">
-						<div className={style.body}>
-							{/* TODO: temporary solution */}
+				{compareMode ? (
+					<React.Fragment>
+						<div className="col-6">
+							<div className={style.title}>
+								<span className="color-white">This</span>
+								<span className="color-tealish"> Video</span>
+							</div>
+							<div className="col-12">
+								<div className={style.body}>
+									{/* TODO: temporary solution */}
 
-							{isGenerateBox ? (
-								<div className="grid-collapse">
-									<div className="col-6">
-										<div className={style.boxes}>{generateBox()}</div>
-									</div>
-									<div className="col-6">
-										<img src={icon} />
-									</div>
+									{isGenerateBox ? (
+										<div className="grid-collapse">
+											<div className="col-6">
+												<div className={style.boxes}>{generateBox()}</div>
+											</div>
+											<div className="col-6">
+												<img src={icon} />
+											</div>
+										</div>
+									) : (
+										<img
+											style={{ display: "block", margin: "0 auto" }}
+											src={icon}
+										/>
+									)}
 								</div>
-							) : (
-								<img
-									style={{ display: "block", margin: "0 auto" }}
-									src={icon}
-								/>
-							)}
+								<div className={style.title}>{consequent}</div>
+							</div>
 						</div>
-						<div className={style.title}>{consequent}</div>
+						<div className="col-6">
+							<div className={style.title}>
+								<span className="color-white">This</span>
+								<span className="color-tealish"> Video</span>
+							</div>
+							<div className="col-12">
+								<div className={style.body}>
+									{/* TODO: temporary solution */}
+
+									{isGenerateBox ? (
+										<div className="grid-collapse">
+											<div className="col-6">
+												<div className={style.boxes}>{generateBox()}</div>
+											</div>
+											<div className="col-6">
+												<img src={icon} />
+											</div>
+										</div>
+									) : (
+										<img
+											style={{ display: "block", margin: "0 auto" }}
+											src={icon}
+										/>
+									)}
+								</div>
+								<div className={style.title}>{consequent}</div>
+							</div>
+						</div>
+					</React.Fragment>
+				) : (
+					<div className="col-4">
+						<div className={style.title}>
+							<span className="color-white">This</span>
+							<span className="color-tealish"> Video</span>
+						</div>
+						<div className="col-12">
+							<div className={style.body}>
+								{/* TODO: temporary solution */}
+
+								{isGenerateBox ? (
+									<div className="grid-collapse">
+										<div className="col-6">
+											<div className={style.boxes}>{generateBox()}</div>
+										</div>
+										<div className="col-6">
+											<img src={icon} />
+										</div>
+									</div>
+								) : (
+									<img
+										style={{ display: "block", margin: "0 auto" }}
+										src={icon}
+									/>
+								)}
+							</div>
+							<div className={style.title}>{consequent}</div>
+						</div>
 					</div>
-				</div>
-				<div className="col-8">
+				)}
+
+				<div className={compareMode ? "col-12" : "col-8"}>
 					<TabBar
 						items={["General", "Most Views", "Most Comments", "Most Shares"]}
 						selectedTabClassName={style.selectedTabForVideoTabs}
@@ -143,7 +206,7 @@ const TabShow = ({
 								<div className={style.title}>{barTitle}</div>
 								<Bar
 									data={pieData}
-									width="3"
+									width={compareMode ? 5 : 3}
 									height="2"
 									options={{
 										responsive: true,

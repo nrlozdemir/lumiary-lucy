@@ -10,13 +10,36 @@ import Card from "../../components/Card";
 
 import switchTabs from "./switchTabs";
 import style from "./styles.scss";
+import CompareVideoBrief from "./Sections/Compare/compareVideoBrief";
 
-class Library extends React.PureComponent {
+class Library extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			compareMode: true
+		};
+	}
+	compareModeOn() {
+		this.setState({ compareMode: true });
+	}
+	compareModeOff() {
+		this.setState({ compareMode: false });
+	}
 	render() {
 		return (
 			<React.Fragment>
 				<div className={style.main}>
-					<VideoBrief />
+					{this.state.compareMode ? (
+						<CompareVideoBrief
+							compareModeOn={() => this.compareModeOn()}
+							compareModeOff={() => this.compareModeOff()}
+						/>
+					) : (
+						<VideoBrief
+							compareModeOn={() => this.compareModeOn()}
+							compareModeOff={() => this.compareModeOff()}
+						/>
+					)}
 				</div>
 				<div className="col-12 mt-10 pb-10">
 					<Card
@@ -27,7 +50,8 @@ class Library extends React.PureComponent {
 						{switchTabs(
 							this.props.params.tab,
 							this.props.routeParams.id,
-							this.props.location.pathname
+							this.props.location.pathname,
+							this.state.compareMode
 						)}
 					</Card>
 				</div>

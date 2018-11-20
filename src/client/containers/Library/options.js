@@ -8,6 +8,100 @@ const pieData = {
 		}
 	]
 };
+
+const barChart = [
+	{ data: [50], avarage: 60, label: ["1M Views"] },
+	{ data: [70], avarage: 30, label: ["60k Likes"] },
+	{
+		data: [60],
+		avarage: 70,
+		label: ["123K Shares"],
+		yLabels: ["1M", "500K", "100K", "80K", "60K", "40K", "10K", "0"]
+	}
+];
+const barChartCompare = [
+	{ data: [[40], [60]], avarage: 20, label: ["1M Views", "1m"] },
+	{ data: [[80], [70]], avarage: 80, label: ["60k Likes"] },
+	{
+		data: [[90], [60]],
+		avarage: 40,
+		label: ["123K Shares"],
+		yLabels: ["1M", "500K", "100K", "80K", "60K", "40K", "10K", "0"]
+	}
+];
+
+const videoTabsDataCompare = [
+	{
+		tabName: "Frames Per Second",
+		avarageTitle: "82 % Industry average",
+		url: "frames-per-second",
+		headingOne: "24 FPS",
+		headingTwo: "30 FPS",
+		dataOne: "77%",
+		dataTwo: "66%",
+		legendOne: "77% of your videos",
+		legendTwo: "66% of your videos",
+		left: "40%",
+		right: "40%",
+		difference: "11% diference"
+	},
+	{
+		tabName: "Number of Frames",
+		avarageTitle: "69 % Industry average",
+		url: "number-of-frames",
+		headingOne: "73829 frames",
+		headingTwo: "12921 frames",
+		dataOne: "18%",
+		dataTwo: "83%",
+		legendOne: "18% of your videos",
+		legendTwo: "83% of your videos",
+		left: "30%",
+		right: "30%",
+		difference: "65% diference"
+	},
+	{
+		tabName: "Scenes",
+		avarageTitle: "65 % Industry average",
+		url: "scenes",
+		headingOne: "4 scenes",
+		headingTwo: "5 scenes",
+		dataOne: "43%",
+		dataTwo: "90%",
+		legendOne: "43% of your videos",
+		legendTwo: "90% of your videos",
+		left: "40%",
+		right: "40%",
+		difference: "57% diference"
+	},
+	{
+		tabName: "Aspect Ratio",
+		avarageTitle: "61 % Industry average",
+		url: "aspect-ratio",
+		headingOne: "16:9",
+		headingTwo: "Other (330x250)",
+		dataOne: "75%",
+		dataTwo: "12%",
+		legendOne: "75% of your videos",
+		legendTwo: "12% of your videos",
+		left: "30%",
+		right: "30%",
+		difference: "63% diference"
+	},
+	{
+		tabName: "Duration",
+		avarageTitle: "61 % of Industry",
+		url: "duration",
+		headingOne: '03:20"',
+		headingTwo: "02:00”",
+		dataOne: "15%",
+		dataTwo: "51%",
+		legendOne: "15% of your videos",
+		legendTwo: "51% of your videos",
+		left: "28%",
+		right: "37.5%",
+		difference: "36% diference"
+	}
+];
 const lineData = {
 	labels: [
 		"1Q16",
@@ -245,4 +339,12 @@ const videoTabsData = [
 	}
 ];
 
-export { lineData, lineWithCustomLabel, pieData, videoTabsData };
+export {
+	lineData,
+	lineWithCustomLabel,
+	pieData,
+	videoTabsData,
+	barChart,
+	barChartCompare,
+	videoTabsDataCompare
+};

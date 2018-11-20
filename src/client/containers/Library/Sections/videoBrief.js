@@ -1,57 +1,46 @@
 import React from "react";
 import Card from "./../../../components/Card";
 import BarChart from "./../../../components/Charts/BarChart";
-import TabBar from "../../../components/TabBar";
-
+// import TabBar from "../../../components/TabBar";
 import style from "../styles.scss";
+import { barChart } from "./../options";
 
-const VideoBrief = () => (
+const VideoBrief = props => (
 	<React.Fragment>
 		<div className="col-6">
 			<Card removeHeader customBodyClass="bg-charcoal-grey">
-				<TabBar
-					items={["Single View", "Compare Mode"]}
-					selectedTabClassName={style.selectedTabs}
-					selectedTabPanelClassName={style.selectedPanel}
-					tablistClassName={style.tablList}
-				>
-					<div>
+				<div>
+					<div className={style.tab}>
+						<span className={style.closeButton}>X</span>
 						<span
-							className={style.closeButton}
-							onClick={() => this.props.router.push(`/`)}
+							onClick={() => props.compareModeOff()}
+							className={style.tabElementActive}
 						>
-							X
+							Single View
 						</span>
-						<div className={style.videoImage}>
-							<span className={style.videoIcon + " qf-iconPlay"}>
-								<span className="path1" />
-								<span className="path2" />
-								<span className="path3" />
-								<span className="path4" />
-								<span className="path5" />
-								<span className="path6" />
-							</span>
-							<img
-								className="width-100"
-								src="https://picsum.photos/477/338/?random
-		"
-							/>
-						</div>
-					</div>
-					<div>
 						<span
-							className={style.closeButton}
-							onClick={() => this.props.router.push(`/`)}
+							onClick={() => props.compareModeOn()}
+							className={style.tabElement}
 						>
-							X
+							Compare Mode
+						</span>
+					</div>
+					<div className={style.videoImage}>
+						<span className={style.videoIcon + " qf-iconPlay"}>
+							<span className="path1" />
+							<span className="path2" />
+							<span className="path3" />
+							<span className="path4" />
+							<span className="path5" />
+							<span className="path6" />
 						</span>
 						<img
 							className="width-100"
-							src="https://picsum.photos/477/338/
+							src="https://picsum.photos/477/338/?random
 		"
 						/>
 					</div>
-				</TabBar>
+				</div>
 			</Card>
 		</div>
 		<div className="col-6 mt-10">
@@ -82,151 +71,58 @@ const VideoBrief = () => (
 							</p>
 						</div>
 					</div>
-					<div className="col-1-3">
-						<BarChart
-							width="3"
-							height="4"
-							data={[30]}
-							avarage="50"
-							labels={["1M Views"]}
-							isGradient
-							gradientColors={["#161620", "#2f2e3d"]}
-							options={{
-								plugins: {
-									datalabels: {
+					{barChart.map(bar => (
+						<div className="col-1-3" key={bar.label[0]}>
+							<BarChart
+								width="3"
+								height="4"
+								data={bar.data}
+								avarage={bar.avarage}
+								labels={bar.label}
+								yLabels={bar.yLabels}
+								isGradient
+								gradientColors={["#161620", "#2f2e3d"]}
+								options={{
+									plugins: {
+										datalabels: {
+											display: false
+										}
+									},
+									tooltips: {
+										enabled: false
+									},
+									legend: {
 										display: false
+									},
+									scales: {
+										yAxes: [
+											{
+												display: false,
+												ticks: {
+													min: 0,
+													max: 100,
+													stepSize: 10
+												}
+											}
+										],
+										xAxes: [
+											{
+												barPercentage: 0.95,
+												categorySpacing: 0,
+												gridLines: {
+													display: false
+												}
+											}
+										]
 									}
-								},
-								tooltips: {
-									enabled: false
-								},
-								legend: {
-									display: false
-								},
-								scales: {
-									yAxes: [
-										{
-											display: false,
-											ticks: {
-												min: 0,
-												max: 100,
-												stepSize: 10
-											}
-										}
-									],
-									xAxes: [
-										{
-											barPercentage: 0.95,
-											categorySpacing: 0,
-											gridLines: {
-												display: false
-											}
-										}
-									]
-								}
-							}}
-						/>
-					</div>
-					<div className="col-1-3">
-						<BarChart
-							width="3"
-							height="4"
-							data={[76]}
-							avarage="75"
-							labels={["60k Likes"]}
-							isGradient
-							gradientColors={["#161620", "#2f2e3d"]}
-							options={{
-								responsive: true,
-								maintainAspectRatio: true,
-								tooltips: {
-									enabled: false
-								},
-								plugins: {
-									datalabels: {
-										display: false
-									}
-								},
-
-								legend: {
-									display: false
-								},
-								scales: {
-									yAxes: [
-										{
-											display: false,
-											ticks: {
-												min: 0,
-												max: 100,
-												stepSize: 10
-											}
-										}
-									],
-									xAxes: [
-										{
-											barPercentage: 0.95,
-											categorySpacing: 0,
-											gridLines: {
-												display: false
-											}
-										}
-									]
-								}
-							}}
-						/>
-					</div>
-					<div className="col-1-3">
-						<BarChart
-							width="3"
-							height="4"
-							data={[45]}
-							avarage="60"
-							labels={["123K Shares"]}
-							yLabels={["1M", "500K", "100K", "80K", "60K", "40K", "10K", "0"]}
-							isGradient
-							gradientColors={["#161620", "#2f2e3d"]}
-							options={{
-								tooltips: {
-									enabled: false
-								},
-								plugins: {
-									datalabels: {
-										display: false
-									}
-								},
-								legend: {
-									display: false
-								},
-								scales: {
-									yAxes: [
-										{
-											display: false,
-											gridLines: {
-												display: false
-											},
-
-											ticks: {
-												min: 0,
-												max: 100,
-												stepSize: 10
-											}
-										}
-									],
-									xAxes: [
-										{
-											barPercentage: 0.95,
-											gridLines: {
-												display: true
-											}
-										}
-									]
-								}
-							}}
-						/>
-					</div>
+								}}
+							/>
+						</div>
+					))}
 				</div>
 			</Card>
 		</div>
 	</React.Fragment>
 );
+
 export default VideoBrief;

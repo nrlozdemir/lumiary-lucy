@@ -7,8 +7,9 @@ import AgeRangeAndGender from "./Sections/ageRangeAndGender";
 
 // Styles
 import { pieData, lineData } from "./options";
+import CompareVideoTabs from "./Sections/Compare/compareVideoTabs";
 
-export default function(location, routeParams, pathname) {
+export default function(location, routeParams, pathname, compareMode) {
 	switch (location) {
 		case "frames-per-second":
 			return (
@@ -24,6 +25,7 @@ export default function(location, routeParams, pathname) {
 					isGenerateBox
 					consequent="24 FPS (Film Style)"
 					littleConsequent="24"
+					compareMode={compareMode}
 				/>
 			);
 		case "duration":
@@ -39,6 +41,7 @@ export default function(location, routeParams, pathname) {
 					lineData={lineData}
 					consequent="Long Form (3-5min)"
 					littleConsequent="Long Form"
+					compareMode={compareMode}
 				/>
 			);
 		case "aspect-ratio":
@@ -54,6 +57,7 @@ export default function(location, routeParams, pathname) {
 					lineData={lineData}
 					consequent="4 Scenes in total"
 					littleConsequent="16:9 (Widescreen)"
+					compareMode={compareMode}
 				/>
 			);
 		case "number-of-frames":
@@ -69,6 +73,7 @@ export default function(location, routeParams, pathname) {
 					lineData={lineData}
 					consequent="73829 frames in this video"
 					littleConsequent="Condensced (10:1 Frames to Time Ratio)"
+					compareMode={compareMode}
 				/>
 			);
 		case "scenes":
@@ -84,10 +89,15 @@ export default function(location, routeParams, pathname) {
 					lineData={lineData}
 					consequent="4 Scenes in total"
 					littleConsequent="3-4 Scenes"
+					compareMode={compareMode}
 				/>
 			);
 		default:
-			return (
+			return compareMode ? (
+				<div className="grid-collapse">
+					<CompareVideoTabs location={pathname} />
+				</div>
+			) : (
 				<div>
 					<div className="col-12 mt-25">
 						<VideoTabs location={pathname} />
