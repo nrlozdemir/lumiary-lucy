@@ -16,7 +16,7 @@ class Library extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			compareMode: true
+			compareMode: false
 		};
 	}
 	compareModeOn() {
