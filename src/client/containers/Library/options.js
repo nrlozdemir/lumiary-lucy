@@ -2,7 +2,12 @@ const pieData = {
 	labels: ["Grey", "Tealish", "Hard Grey", "Hi"],
 	datasets: [
 		{
-			data: [34, 50, 42, 25],
+			data: [
+				Math.floor(Math.random() * 101),
+				Math.floor(Math.random() * 101),
+				Math.floor(Math.random() * 101),
+				Math.floor(Math.random() * 101)
+			],
 			backgroundColor: ["#eaeaea", "#1fbad2", "#6c6c6c", "#18212f"],
 			hoverBackgroundColor: ["#eaeaea", "#1fbad2", "#6c6c6c", "#18212f"]
 		}
@@ -375,6 +380,45 @@ const videoTabsData = [
 	}
 ];
 
+const videoTabsDataBottom = [
+	{
+		tabName: "Frames Per Second",
+		avarageTitle: "60 FPS",
+		value: 19,
+		legendTitle: "19% of your videos",
+		url: "frames-per-second"
+	},
+	{
+		tabName: "Duration",
+		avarageTitle: "02:10”",
+		value: 4,
+		legendTitle: "4% of your videos",
+		legendSecondTitle: "(3-5’ range)",
+		url: "duration"
+	},
+	{
+		tabName: "Aspect Ratio",
+		avarageTitle: "10:9",
+		value: 32,
+		legendTitle: "32% of your videos",
+		url: "aspect-ratio"
+	},
+	{
+		tabName: "Number of Frames",
+		avarageTitle: "9321",
+		value: 50,
+		legendTitle: "50 % of your videos",
+		url: "number-of-frames"
+	},
+	{
+		tabName: "Scenes",
+		avarageTitle: "4 Total",
+		value: 78,
+		legendTitle: "78% of your videos",
+		url: "scenes"
+	}
+];
+
 export {
 	lineData,
 	lineWithCustomLabel,
@@ -382,5 +426,6 @@ export {
 	videoTabsData,
 	barChart,
 	barChartCompare,
-	videoTabsDataCompare
+	videoTabsDataCompare,
+	videoTabsDataBottom
 };

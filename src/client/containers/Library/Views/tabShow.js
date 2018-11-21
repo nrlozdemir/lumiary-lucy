@@ -18,7 +18,8 @@ const TabShow = ({
 	consequent,
 	littleConsequent,
 	compareMode,
-	iconTwo
+	iconTwo,
+	removeHeader
 }) => {
 	const generateBox = () => {
 		let table = [];
@@ -31,6 +32,7 @@ const TabShow = ({
 	return (
 		<Card
 			title={title}
+			removeHeader={removeHeader}
 			headerIconLeft="qf-iconLeft-Arrow"
 			customHeaderClass="bg-tealish border-bt-dark headerVideoTabs"
 			customBodyClass="bg-color-custom"
@@ -126,7 +128,6 @@ const TabShow = ({
 						</div>
 					</div>
 				)}
-
 				<div className={compareMode ? "col-12" : "col-8"}>
 					<TabBar
 						items={["General", "Most Views", "Most Comments", "Most Shares"]}
@@ -207,7 +208,7 @@ const TabShow = ({
 								<div className={style.title}>{barTitle}</div>
 								<Bar
 									data={pieData}
-									width={compareMode ? 5 : 3}
+									width={compareMode || removeHeader ? 5 : 3}
 									height="2"
 									options={{
 										responsive: true,
@@ -296,74 +297,78 @@ const TabShow = ({
 						</div>
 					</TabBar>
 				</div>
-				<div className="col-12 bg-charcoal-grey">
-					<div className="col-6">
-						<div className={style.lineTopLabel}>
-							<span className="color-white">Change over time for:</span>
-							<span className="color-tealish font-bold">
-								{littleConsequent}
-							</span>
+				{removeHeader ? null : (
+					<React.Fragment>
+						<div className="col-12 bg-charcoal-grey">
+							<div className="col-6">
+								<div className={style.lineTopLabel}>
+									<span className="color-white">Change over time for:</span>
+									<span className="color-tealish font-bold">
+										{littleConsequent}
+									</span>
+								</div>
+							</div>
+							<div className="col-6">
+								<div className="float-right">
+									<p className={style.videoBriefLegendBottom} />
+								</div>
+							</div>
 						</div>
-					</div>
-					<div className="col-6">
-						<div className="float-right">
-							<p className={style.videoBriefLegendBottom} />
-						</div>
-					</div>
-				</div>
-				<div className="col-12 bg-charcoal-grey">
-					<Line
-						data={lineData}
-						options={{
-							legend: {
-								display: false
-							},
-							scales: {
-								scaleLabel: { fontColor: "#fff", fontSize: "15" },
-								xAxes: [
-									{
-										gridLines: {
-											color: "#000",
-											borderDash: [5, 10.15]
-										}
-									}
-								],
-								yAxes: [
-									{
-										position: "right",
-										gridLines: {
-											display: false
-										},
-										ticks: {
-											min: 0,
-											max: 100,
-											callback: function(value) {
-												return ((value / 100) * 100).toFixed(0) + "%";
+						<div className="col-12 bg-charcoal-grey">
+							<Line
+								data={lineData}
+								options={{
+									legend: {
+										display: false
+									},
+									scales: {
+										scaleLabel: { fontColor: "#fff", fontSize: "15" },
+										xAxes: [
+											{
+												gridLines: {
+													color: "#000",
+													borderDash: [5, 10.15]
+												}
 											}
+										],
+										yAxes: [
+											{
+												position: "right",
+												gridLines: {
+													display: false
+												},
+												ticks: {
+													min: 0,
+													max: 100,
+													callback: function(value) {
+														return ((value / 100) * 100).toFixed(0) + "%";
+													}
+												}
+											}
+										]
+									},
+
+									layout: {
+										padding: {
+											left: 50,
+											right: 50,
+											bottom: 50,
+											top: 50
+										}
+									},
+									tooltips: {
+										enabled: false
+									},
+									plugins: {
+										datalabels: {
+											display: false
 										}
 									}
-								]
-							},
-
-							layout: {
-								padding: {
-									left: 50,
-									right: 50,
-									bottom: 50,
-									top: 50
-								}
-							},
-							tooltips: {
-								enabled: false
-							},
-							plugins: {
-								datalabels: {
-									display: false
-								}
-							}
-						}}
-					/>
-				</div>
+								}}
+							/>
+						</div>
+					</React.Fragment>
+				)}
 			</div>
 		</Card>
 	);
