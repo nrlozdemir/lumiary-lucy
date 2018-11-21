@@ -53,6 +53,7 @@ module.exports = {
 			"lodash",
 
 		    "react-circular-progressbar",
+			"react-icons",
 
 			"chart.js",
 			"react-chartjs-2",
