@@ -92,6 +92,22 @@ export default function(location, routeParams, pathname, compareMode) {
 					compareMode={compareMode}
 				/>
 			);
+		case "color-tone":
+			return (
+				<TabShow
+					location={`/library/video/${routeParams}`}
+					title="Color Tone"
+					icon={require("./../../assets/videoTabsIcons/scenes.png")}
+					pieData={pieData}
+					pieTitle="Library Data"
+					barData={pieData}
+					barTitle="Industry Data"
+					lineData={lineData}
+					consequent="Dull - Cool"
+					littleConsequent="Dull-Cool Vibrant-Cool"
+					compareMode={compareMode}
+				/>
+			);
 		default:
 			return compareMode ? (
 				<div className="grid-collapse">

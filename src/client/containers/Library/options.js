@@ -90,6 +90,9 @@ const videoTabsDataCompare = [
 	{
 		tabName: "Duration",
 		avarageTitle: "61 % of Industry",
+		averageDesc: "(3-5’ range)",
+		avarageTitleTwo: "76 % of Industry",
+		averageTwoDesc: "(1-2’ range)",
 		url: "duration",
 		headingOne: '03:20"',
 		headingTwo: "02:00”",
@@ -100,6 +103,39 @@ const videoTabsDataCompare = [
 		left: "28%",
 		right: "37.5%",
 		difference: "36% diference"
+	},
+	{
+		tabName: "Color Tone",
+		avarageTitleTwo: "50 % of Industry",
+		averageDesc: "Vibrant - Cool",
+		averageTwoDesc: "Dull - Cool",
+		avarageTitle: "32 % of Industry",
+		url: "color-tone",
+		headingOne: "Vibrant - Cool",
+		headingTwo: "Dull - Cool",
+		dataOne: "82%",
+		dataTwo: "5%",
+		legendOne: "82% of your videos",
+		legendTwo: "5% of your videos",
+		left: "18%",
+		right: "25%",
+		difference: "74% diference"
+	},
+	{
+		tabName: "Age Range & Gender",
+		avarageTitleTwo: "59 % of Industry",
+		averageDesc: "Mostly Young Males",
+		averageTwoDesc: "All Middle Aged Males",
+		avarageTitle: "29 % of Industry",
+		headingOne: "Mostly Young Males",
+		headingTwo: "All Middle Aged Males",
+		dataOne: "62%",
+		dataTwo: "25%",
+		legendOne: "62% of your videos",
+		legendTwo: "25% of your videos",
+		left: "30%",
+		right: "12.5%",
+		difference: "38% diference"
 	}
 ];
 const lineData = {

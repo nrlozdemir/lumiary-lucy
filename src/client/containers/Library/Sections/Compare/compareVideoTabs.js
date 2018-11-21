@@ -16,7 +16,7 @@ const CompareVideoTabs = ({ location }) => {
 					headerIconRight="qf-iconRight-Arrow"
 					customHeaderClass="bg-tealish border-bt-dark headerVideoTabs"
 					customBodyClass="bg-charcoal-grey pb-35"
-					link={location + "/" + video.url}
+					link={video.url ? location + "/" + video.url : null}
 				>
 					<div>
 						<div className="grid-container border-bt-tealish">
@@ -56,12 +56,33 @@ const CompareVideoTabs = ({ location }) => {
 						<div className="col-12">
 							<p className={style.differenceText}>{video.difference}</p>
 						</div>
-						<div
-							className={style.compareAvarageArea}
-							style={{ right: video.right, left: video.left }}
-						>
-							<p>{video.avarageTitle}</p>
-						</div>
+						{video.avarageTitleTwo ? (
+							<div
+								className={style.compareAvarageTwoArea}
+								style={{ right: video.right, left: video.left }}
+							>
+								<p>
+									{video.avarageTitle}
+									<span className={style.averageDescLeft}>
+										{video.averageDesc}
+									</span>
+								</p>
+								<p>
+									{video.avarageTitleTwo}
+									<span className={style.averageDescRight}>
+										{video.averageTwoDesc}
+									</span>
+								</p>
+							</div>
+						) : (
+							<div
+								className={style.compareAvarageArea}
+								style={{ right: video.right, left: video.left }}
+							>
+								<p>{video.avarageTitle}</p>
+								<p>{video.avarageTitleTwo}</p>
+							</div>
+						)}
 					</div>
 				</Card>
 			</div>
