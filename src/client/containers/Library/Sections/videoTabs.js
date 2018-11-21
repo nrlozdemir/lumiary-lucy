@@ -25,6 +25,7 @@ class VideoTabs extends React.Component {
 									data={[video.value]}
 									avarage={video.avarage}
 									barBorder
+									hasMoreDataset={false}
 									barBorderColor="#fff"
 									labels={[]}
 									yLabels={["100%", "75%", "50%", "25%", "0%"]}
