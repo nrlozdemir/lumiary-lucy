@@ -10,6 +10,14 @@
 	margin: 0 10px;
 	border-radius: 6px;
 }
+
+%tabElement {
+	flex: auto;
+	text-align: center;
+	padding: 8px 0;
+	cursor: pointer;
+}
+
 .main {
 	margin: 45px 0;
 }
@@ -40,9 +48,6 @@
 	color: $color-white;
 	font-size: 13px;
 	font-family: $font-family-clanOTBook;
-	position: absolute;
-	margin-top: -33px;
-	margin-left: 1px;
 	padding: 10px 12px;
 	background: $color-dark-three;
 	cursor: pointer;
@@ -204,4 +209,97 @@
 	width: 9px;
 	height: 9px;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.compareVideoHeadings {
+	text-align: center;
+	color: $color-tealish;
+	padding: 16px 0;
+	font-family: $font-family-clanOT;
+	font-weight: bold;
+	font-size: 12px;
+}
+
+.compareArea {
+	position: relative;
+	padding: 50px 0;
+}
+%compareAvaregeArea {
+	position: absolute;
+	font-size: 12px;
+	font-family: $font-family-clanOTBook;
+	top: 40%;
+	height: 90px;
+	border-top: 1px solid #00bdd6;
+}
+%compareAvaregeAreaText {
+	margin-top: -20px;
+	color: #00bdd6;
+	font-size: 12px;
+}
+
+.compareAvarageArea {
+	@extend %compareAvaregeArea;
+	border-left: 1px solid #00bdd6;
+	border-right: 1px solid #00bdd6;
+	p {
+		@extend %compareAvaregeAreaText;
+		text-align: center;
+	}
+}
+
+.compareAvarageTwoArea {
+	@extend %compareAvaregeArea;
+	p:first-child {
+		@extend %compareAvaregeAreaText;
+		text-align: left;
+	}
+
+	p:last-child {
+		@extend %compareAvaregeAreaText;
+		text-align: right;
+	}
+}
+
+%averageDesc {
+	color: white;
+	position: absolute;
+	top: 0;
+	font-size: 8px;
+}
+
+.averageDescLeft {
+	@extend %averageDesc;
+	left: 0;
+}
+
+.averageDescRight {
+	@extend %averageDesc;
+	right: 0;
+}
+
+.tab {
+	display: flex;
+	border: 1px solid #00c8d6;
+}
+.tabElement {
+	@extend %tabElement;
+	background-color: #22212f;
+}
+
+.tabElementActive {
+	@extend %tabElement;
+	background-color: #00c8d6;
+}
+.percentageLegend {
+	margin-top: 35px;
+	font-size: 12px;
+	font-family: $font-family-clanOTBook;
+}
+.differenceText {
+	font-family: $font-family-clanOT;
+	text-align: center;
+	font-size: 12px;
+	font-weight: bold;
+	color: $color-white;
 }

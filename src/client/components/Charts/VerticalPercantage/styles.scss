@@ -1,13 +1,27 @@
-.leftSide {
-	.parallelogram {
-		transform: skew(40deg);
-		background: #2f2d3d;
+.bar {
+	width: 100%;
+	border: 1px solid #eee;
+}
 
-		margin-left: -22px;
-		box-shadow: 4px 0 2px 1px #cf9d34;
+.labelPlace {
+	display: flex;
+	div:first-child {
+		flex: none;
+		text-align: left;
+		height: 25px;
+		border-right: 1px dashed;
+		margin-left: 0px;
 	}
-	.square {
-		width: 50px;
-		background: #2f2d3d;
+	div {
+		flex: auto;
+		text-align: right;
+		font-size: 10px;
+		height: 25px;
+		border-right: 1px dashed;
+		margin-left: 8px;
+		p {
+			margin-right: -8px;
+			background-color: $color-charcoal-grey;
+		}
 	}
 }

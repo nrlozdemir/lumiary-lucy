@@ -3,31 +3,30 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-// import style from "./styles.scss";
+import style from "./styles.scss";
 
-const VerticalPercentage = props => {
-	const { width, height, data } = props;
+const VerticalPercentage = ({ height, data, float, labels }) => {
+	const rotatedLabels = float === "left" ? labels : labels.reverse();
 	return (
-		<div style={{ width: width, height: height }}>
-			<div
-				style={{
-					width: (data.first * width) / 100,
-					height: height,
-					background: "#eee",
-					float: "left"
-				}}
-			>
-				1
+		<div style={{ height: height }}>
+			<div className={style.labelPlace}>
+				{rotatedLabels.map(label => (
+					<React.Fragment key={label}>
+						<div>
+							<p className={float}>{label}</p>
+						</div>
+					</React.Fragment>
+				))}
 			</div>
-			<div
-				style={{
-					width: (data.second * width) / 100,
-					height: height,
-					background: "#000",
-					float: "left"
-				}}
-			>
-				2
+			<div className={style.bar} style={{ height: height }}>
+				<div
+					style={{
+						width: data,
+						height: height - 2,
+						background: "#eee",
+						float: float
+					}}
+				/>
 			</div>
 		</div>
 	);
@@ -36,13 +35,17 @@ const VerticalPercentage = props => {
 VerticalPercentage.propTypes = {
 	width: PropTypes.number,
 	height: PropTypes.number,
-	data: PropTypes.array
+	data: PropTypes.array,
+	float: PropTypes.string,
+	labels: PropTypes.array
 };
 
 VerticalPercentage.defaultProps = {
 	width: PropTypes.number,
 	height: PropTypes.number,
-	data: PropTypes.array
+	data: PropTypes.array,
+	float: PropTypes.string,
+	labels: PropTypes.array
 };
 
 export default VerticalPercentage;

@@ -24,7 +24,7 @@ const routes = (
 	<Route path={baseName} component={Layout}>
 		<IndexRoute getComponent={Quickview} />
 		<Route path="library(/video/:id(/:tab))" getComponent={Library} sidebar />
-		<Route path="marketview(/:type)" getComponent={MarketView} />
+		<Route path="marketview(/:type(/:tab))" getComponent={MarketView} />
 		<Route path="panoptic" getComponent={Panoptic} />
 		<Route path="quickview" getComponent={Quickview} />
 		<Route path="*" components={NotFound} />
