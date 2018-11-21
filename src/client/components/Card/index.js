@@ -19,9 +19,11 @@ const Card = ({
 		<div className={styles.card}>
 			{!removeHeader ? (
 				<div className={styles.cardHeader + " " + customHeaderClass}>
-					{headerIconLeft ? <span className={headerIconLeft} /> : null}
+					{headerIconLeft && link ? <span className={headerIconLeft} /> : null}
 					{link ? <Link to={link}>{title}</Link> : title}
-					{headerIconRight ? <span className={headerIconRight} /> : null}
+					{headerIconRight && link ? (
+						<span className={headerIconRight} />
+					) : null}
 				</div>
 			) : null}
 			<div className={styles.cardBody + " " + customBodyClass}>{children}</div>
