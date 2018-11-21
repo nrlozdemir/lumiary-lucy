@@ -13,10 +13,16 @@ const Card = ({
 	removeHeader,
 	headerIconRight,
 	headerIconLeft,
-	link
+	link,
+	bottomTitle
 }) => {
 	return (
 		<div className={styles.card}>
+			{bottomTitle ? (
+				<div className={styles.cardBody + " " + customBodyClass}>
+					{children}
+				</div>
+			) : null}
 			{!removeHeader ? (
 				<div className={styles.cardHeader + " " + customHeaderClass}>
 					{headerIconLeft && link ? <span className={headerIconLeft} /> : null}
@@ -26,7 +32,11 @@ const Card = ({
 					) : null}
 				</div>
 			) : null}
-			<div className={styles.cardBody + " " + customBodyClass}>{children}</div>
+			{!bottomTitle ? (
+				<div className={styles.cardBody + " " + customBodyClass}>
+					{children}
+				</div>
+			) : null}
 		</div>
 	);
 };
