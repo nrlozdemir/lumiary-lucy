@@ -3,14 +3,31 @@
 		padding: 51px 49px 50px 46px;
 	}
 }
+.iconWrapper {
+	width: 80px;
+	height: 80px;
+	margin-top: 63px;
+	background-color: #383838;
+	border-radius: 80px;
+	display: table;
+}
+.icon {
+	font-size: 28px;
+	display: table-cell;
+	vertical-align: middle;
+	text-align: center;
+}
+.useCase {
+}
 
-.useCase {}
+.time {
+}
 
-.time {}
+.platform {
+}
 
-.platform {}
-
-.audience {}
+.audience {
+}
 
 .competitor {
 	.upContainer {
@@ -56,7 +73,6 @@
 	}
 }
 
-
 .videoContainer {
 	width: 468px;
 }
@@ -78,4 +94,19 @@
 	@extend %round;
 	border: solid 0.7px $color-black;
 	background-image: linear-gradient(to top, $color-charcoal-grey, $color-dark);
+}
+
+.tabWrapper {
+	display: flex;
+	padding-bottom: 20px;
+	border-bottom: 2px solid $color-dark;
+	padding-left: 40px;
+}
+
+.tab {
+	flex: auto;
+	font-family: $font-family-clanOT;
+	font-size: 15px;
+	color: $color-white;
+	text-decoration: none;
 }
