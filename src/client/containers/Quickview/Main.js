@@ -106,20 +106,6 @@ class Quickview extends Component {
 
 		return (
 			<React.Fragment>
-				<div className={style.quickviewHeader}>
-					<span className={style.quickviewHeader_cellLeft}>
-						Male / Female
-					</span>
-					<span className={style.quickviewHeader_cellMid}>
-						<Dropdown>
-							<div className="child">test</div>
-						</Dropdown>
-					</span>
-					<span className={style.quickviewHeader_cellRight}>
-						views
-					</span>
-				</div>
-				<hr />
 				<div className={style.quickviewContent}>
 					<div className={style.VersusList}>
 						<VersusList videos={versus} />
