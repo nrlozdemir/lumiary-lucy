@@ -3,15 +3,37 @@
 }
 .versusList {
 	position: relative;
-	background-color: #22212f;
+	background-color: $color-dark;
 }
 .versusRow {
-  width: 757px;
-  background-color: #2f2e3c;
-  margin-bottom: 50px;
-  float: none;
-  clear: both;
-  margin-left:20px;
+	width: 757px;
+	background-color: $color-charcoal-grey;
+	float: none;
+	clear: both;
+	margin-left:20px;
+}
+.versusTitle, .versusTitleBold, .versusSubTitle {
+	height: 23px;
+	font-size: 18px;
+	color: $color-pale-grey;
+}
+.versusTitle {
+	font-family: $font-family-clanOT;
+}
+.versusTitleBold {
+	font-family: $font-family-clanOTNews;
+}
+.versusSubTitle {
+	font-family: $font-family-clanOT;
+	font-weight: bold;
+	margin-top: 12px;
+}
+.versusCategory {
+	height: 29px;
+	font-family: $font-family-sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	margin-top: 12px;
 }
 .versusCellLeft, .versusCellRight, .versusCellMid {
 	float:left;
@@ -25,55 +47,14 @@
 }
 .versusCellMid {
 	width: 175px;
-	height: 175px;
+}
+.versusCellLeft h3, .versusCellMid h3, .versusCellRight h3 {
+	text-align: center;
+	width:100%;
+	background-color: $color-dark;
 }
 .customVideo {
 	display: inline-flex;
 	position: relative;
 	margin:0;
-}
-.versusTitle, .versusTitleBold, .versusSubTitle {
-  height: 23px;
-  font-size: 18px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: $color-pale-grey;
-  float:left;
-}
-.versusTitleBold {
-  font-family: ClanOT-News;
-  width:290px;
-  text-align: center;
-}
-.versusTitle {
-  font-family: ClanOT;
-  width:175px;
-  text-align: center;
-}
-.versusSubTitle {
-  width:290px;
-  font-family: ClanOT;
-  font-weight: bold;
-  text-align: center;
-  color: $color-pale-grey;
-  float:left;
-  margin-top: 12px;
-}
-.versusCategory {
-  height: 29px;
-  width:175px;
-  text-align: center;
-  font-family: $font-family-sans-serif;
-  font-size: 24px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: $color-pale-grey;
-  float:left;
-  margin-top: 12px;
 }
