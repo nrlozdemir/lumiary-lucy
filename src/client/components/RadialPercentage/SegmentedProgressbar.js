@@ -37,7 +37,7 @@ function LayeredProgressbar(props) {
 
 function RadialSeparator(props) {
   const smaller = (props.degrees < props.perc.percentage) ? true : false;
-  console.log(props.degrees + '...' + props.perc.percentage);
+//  console.log(props.degrees + '...' + props.perc.percentage);
   return  (
     <div
       style={{

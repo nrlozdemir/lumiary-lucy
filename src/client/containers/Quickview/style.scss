@@ -13,16 +13,30 @@ $headerHeight: 83px;
 	vertical-align: middle;
 	text-align: center;
 }
+.quickviewHeader {
+	height: 75px;
+	width: 100%;
+	float:left;
+	clear:none;
+}
+.quickviewHeader_cellLeft {
+	text-align:left;
+	width:33%;
+}
+.quickviewHeader_cellMid {
+	text-align:center;
+	width:33%;
+}
+.quickviewHeader_cellRight {
+	text-align:right;
+	width:33%;
+}
 .listBlockLeft, .listBlockRight {
 	color: #ddd;
 }
 .listBlockMid {
 	width: 135px;
 	height: 135px;
-}
-.quickviewHeader {
-	height: 75px;
-	width: 100%;
 }
 .quickviewContent {
 	padding-top:20px;

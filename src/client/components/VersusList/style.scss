@@ -1,5 +1,5 @@
 .versusVideo {
-	width: 291px;
+	width: 290px;
 }
 .versusList {
 	position: relative;
@@ -12,9 +12,13 @@
 	clear: both;
 	margin-left:20px;
 }
+.endOfRow {
+	height: 40px !important;
+}
 .versusTitle, .versusTitleBold, .versusSubTitle {
 	height: 23px;
 	font-size: 18px;
+	font-weight: normal;
 	color: $color-pale-grey;
 }
 .versusTitle {

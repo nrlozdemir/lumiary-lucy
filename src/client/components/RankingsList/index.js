@@ -169,7 +169,7 @@ class RankingsList extends React.Component {
 			]}
 		];
 
-		const renderIcon = (icon => {
+		const renderIcon = function(icon){
 			switch (icon) {
 				case 'facebook': 	return <FaFacebookSquare />;
 				case 'instagram': 	return <FaInstagram />;
@@ -178,10 +178,18 @@ class RankingsList extends React.Component {
 				case 'twitter': 	return <FaTwitterSquare />;
 				case 'pinterest': 	return <FaPinterest />;
 			}
+		};
+		const iconos = [];
+		slides.map((platform_item, platform_index) => {
+			iconos[platform_index] = renderIcon(Object.values(platform_item.id));
 		});
+		console.dir(iconos);
+
 		const settings = {
 			arrows: false,
 			autoplay: true,
+			dots: true,
+//			dotsClass: 'rankingsSliderDots',
 			autoplaySpeed: 3000,
 			pauseOnHover: true,
 			infinite: true,
@@ -189,11 +197,12 @@ class RankingsList extends React.Component {
 			slidesToScroll: 1,
 			draggable: true
 		};
-
 		return (
 			<React.Fragment>
 
 				<h2 className={style.rankingsHeader}>Platform Rankings</h2>
+				<br />
+				<br />
 
 					{slides.map((platform_item, platform_index) => (
 						<React.Fragment key={platform_index}>
@@ -207,10 +216,9 @@ class RankingsList extends React.Component {
 								</Slider>
 							    <div className={style.infoBlock}>
 								    <div className={style.iconCircle}>
-										<FaSnapchatGhost />
+									    <FaFacebookSquare />
+								    	{iconos[Object.values(platform_item.id)]}
 									</div>
-									<br /><br />{Object.values(platform_item.id)}
-									{renderIcon(Object.values(platform_item.id))}
 								</div>
 							</div>
 						</React.Fragment>

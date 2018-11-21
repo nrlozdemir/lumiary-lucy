@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 
-import style from "./styles.scss";
+import style from "./style.scss";
 import PropTypes from "prop-types";
 import VersusList from "../../components/VersusList";
 import RankingsList from "../../components/RankingsList";
@@ -107,9 +107,17 @@ class Quickview extends Component {
 		return (
 			<React.Fragment>
 				<div className={style.quickviewHeader}>
-					<Dropdown>
-						<div className="child">test</div>
-					</Dropdown>
+					<span className={style.quickviewHeader_cellLeft}>
+						Male / Female
+					</span>
+					<span className={style.quickviewHeader_cellMid}>
+						<Dropdown>
+							<div className="child">test</div>
+						</Dropdown>
+					</span>
+					<span className={style.quickviewHeader_cellRight}>
+						views
+					</span>
 				</div>
 				<hr />
 				<div className={style.quickviewContent}>
