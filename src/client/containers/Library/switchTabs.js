@@ -17,6 +17,7 @@ export default function(location, routeParams, pathname, compareMode) {
 					location={`/library/video/${routeParams}`}
 					title="Frame Per Second"
 					icon={require("./../../assets/videoTabsIcons/fps.png")}
+					iconTwo={require("./../../assets/videoTabsIcons/fps.png")}
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -34,6 +35,7 @@ export default function(location, routeParams, pathname, compareMode) {
 					location={`/library/video/${routeParams}`}
 					title="Duration"
 					icon={require("./../../assets/videoTabsIcons/duration.png")}
+					iconTwo={require("./../../assets/videoTabsIcons/durationTwo.png")}
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -50,6 +52,7 @@ export default function(location, routeParams, pathname, compareMode) {
 					location={`/library/video/${routeParams}`}
 					title="Aspect Ratio"
 					icon={require("./../../assets/videoTabsIcons/aspectRatioIcon.png")}
+					iconTwo={require("./../../assets/videoTabsIcons/aspectRatioIconTwo.png")}
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -66,6 +69,7 @@ export default function(location, routeParams, pathname, compareMode) {
 					location={`/library/video/${routeParams}`}
 					title="Number Of Frames"
 					icon={require("./../../assets/videoTabsIcons/numberoframes.png")}
+					iconTwo={require("./../../assets/videoTabsIcons/numberOfFramesTwo.png")}
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -82,6 +86,7 @@ export default function(location, routeParams, pathname, compareMode) {
 					location={`/library/video/${routeParams}`}
 					title="Scenes"
 					icon={require("./../../assets/videoTabsIcons/scenes.png")}
+					iconTwo={require("./../../assets/videoTabsIcons/scenesTwo.png")}
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -97,7 +102,8 @@ export default function(location, routeParams, pathname, compareMode) {
 				<TabShow
 					location={`/library/video/${routeParams}`}
 					title="Color Tone"
-					icon={require("./../../assets/videoTabsIcons/scenes.png")}
+					icon={require("./../../assets/videoTabsIcons/colorToneOne.png")}
+					iconTwo={require("./../../assets/videoTabsIcons/colorToneTwo.png")}
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}

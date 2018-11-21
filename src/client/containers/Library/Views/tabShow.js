@@ -17,7 +17,8 @@ const TabShow = ({
 	isGenerateBox,
 	consequent,
 	littleConsequent,
-	compareMode
+	compareMode,
+	iconTwo
 }) => {
 	const generateBox = () => {
 		let table = [];
@@ -81,13 +82,13 @@ const TabShow = ({
 												<div className={style.boxes}>{generateBox()}</div>
 											</div>
 											<div className="col-6">
-												<img src={icon} />
+												<img src={iconTwo} />
 											</div>
 										</div>
 									) : (
 										<img
 											style={{ display: "block", margin: "0 auto" }}
-											src={icon}
+											src={iconTwo}
 										/>
 									)}
 								</div>
