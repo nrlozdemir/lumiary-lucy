@@ -36,10 +36,12 @@ function LayeredProgressbar(props) {
 }
 
 function RadialSeparator(props) {
-  return (
+  const smaller = (props.degrees < props.perc.percentage) ? true : false;
+  console.log(props.degrees + '...' + props.perc.percentage);
+  return  (
     <div
       style={{
-        backgroundColor: "#21798b",
+        backgroundColor: smaller ? "#21798b" : "#153540",
         width: "2px",
         height: "100%",
         transform: `rotate(${props.degrees}deg)`
@@ -48,10 +50,10 @@ function RadialSeparator(props) {
   );
 }
 
-function getRadialSeparators(numSeparators) {
+function getRadialSeparators(numSeparators, perc) {
   const degrees = 360 / numSeparators;
   return _.range(numSeparators / 2).map(index => (
-    <RadialSeparator degrees={index * degrees} />
+    <RadialSeparator degrees={index * degrees} perc={perc} />
   ));
 }
 
@@ -64,7 +66,7 @@ function SegmentedProgressbar(props) {
       strokeWidth={25}
       counterClockwise
       renderOverlays={() =>
-        getRadialSeparators(40).concat(
+        getRadialSeparators(40, {percentage}).concat(
           <div className={style.circularBells} style={{ fontSize: {fontsize}, color: "#fff" }}>
             {percentage}%
           </div>

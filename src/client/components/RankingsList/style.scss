@@ -1,26 +1,29 @@
-.header {
-	float: right;
-	margin-right:50px;
-	min-height: 170px;
-	color: $color-white;
+.rankingsHeader {
+	width:440px;
 	font-family: $font-family-sans-serif;
-	height: 29px;
 	font-size: 24px;
 	font-weight: bold;
-	font-style: normal;
-	font-stretch: normal;
-	line-height: normal;
-	letter-spacing: normal;
-	color: var(--pale-grey);
+	text-align: right;
+	color: $color-white;
+	height: 29px;
+	float: right;
+	margin-right:50px;
+	margin-top: 0;
+	margin-bottom: 10px;
+}
+.killFloat {
+	float:none;
+	clear:both;
+	margin:0;
+	padding:0;
 }
 .container {
-	padding-top:18px;
 }
 .rankList {
 	vertical-align: top;
 	width:440px;
 	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-	background-color: #22212f;
+	background-color: $color-dark;
 }
 .sliderCell {
 	width: 130px;
@@ -29,12 +32,12 @@
 .infoBlock {
 	height: 140px;
 	width: 440px;
-	background-color: #2f2e3c;
+	background-color: $color-charcoal-grey;
 }
 .iconCircle {
 	position: relative;
     border-radius: 50%;
-    background-color: $color-neutral-medium-grey;
+    background-color: $color-dark-two;
     margin-right: 20px;
 	width: 54px;
 	height: 54px;
@@ -44,5 +47,6 @@
 .iconCircle svg {
 	width: 2.2em;
 	height: 2.2em;
-	margin:0.6em;	
+	margin:0.6em;
+	color: $color-white;	
 }

@@ -1,12 +1,11 @@
 "use strict";
 
 import React from "react";
-import style from "./style.scss";
-import variables from "../../scss/variables.scss";
-import mixins from "../../scss/mixins.scss";
 
 import Slider from "react-slick";
 import {FaFacebookSquare, FaTwitterSquare, FaInstagram, FaSnapchatGhost, FaYoutube, FaTwitter, FaPinterest} from 'react-icons/fa';
+
+import style from "./style.scss";
 
 class RankingsList extends React.Component {
 	render() {
@@ -192,11 +191,9 @@ class RankingsList extends React.Component {
 		};
 
 		return (
-				<div className={style.container}>
+			<React.Fragment>
 
-					<div className={style.header}>Platform Rankings</div>
-					<br />
-					<br />
+				<h2 className={style.rankingsHeader}>Platform Rankings</h2>
 
 					{slides.map((platform_item, platform_index) => (
 						<React.Fragment key={platform_index}>
@@ -208,17 +205,17 @@ class RankingsList extends React.Component {
 										</div>
 									))}
 								</Slider>
-							</div>
-						    <div className={style.infoBlock}>
-							    <div className={style.iconCircle}>
-									<FaSnapchatGhost />
+							    <div className={style.infoBlock}>
+								    <div className={style.iconCircle}>
+										<FaSnapchatGhost />
+									</div>
+									<br /><br />{Object.values(platform_item.id)}
+									{renderIcon(Object.values(platform_item.id))}
 								</div>
-								<br /><br />{Object.values(platform_item.id)}
-								{renderIcon(Object.values(platform_item.id))}
 							</div>
 						</React.Fragment>
 					))}
-				</div>
+			</React.Fragment>
 		);
 	}
 };
