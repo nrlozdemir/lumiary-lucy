@@ -3,8 +3,6 @@
 import React from "react";
 
 import Slider from "react-slick";
-import {FaFacebookSquare, FaTwitterSquare, FaInstagram, FaSnapchatGhost, FaYoutube, FaTwitter, FaPinterest} from 'react-icons/fa';
-
 import style from "./style.scss";
 
 class RankingsList extends React.Component {
@@ -169,22 +167,14 @@ class RankingsList extends React.Component {
 			]}
 		];
 
-		const renderIcon = function(icon){
-			switch (icon) {
-				case 'facebook': 	return <FaFacebookSquare />;
-				case 'instagram': 	return <FaInstagram />;
-				case 'snapchat': 	return <FaSnapchatGhost />;
-				case 'youtube': 	return <FaYoutube />;
-				case 'twitter': 	return <FaTwitterSquare />;
-				case 'pinterest': 	return <FaPinterest />;
-			}
+		const iconoclas = {
+			'facebook': 	"qf-iconFacebook",
+			'instagram': 	"qf-iconInstagram",
+			'snapchat': 	"qf-iconSnapchat",
+			'youtube': 		"qf-iconYotube",
+			'twitter': 		"qf-iconTwitter",
+			'pinterest': 	"qf-iconPinterest"
 		};
-		const iconos = [];
-		slides.map((platform_item, platform_index) => {
-			iconos[platform_index] = renderIcon(Object.values(platform_item.id));
-		});
-		console.dir(iconos);
-
 		const settings = {
 			arrows: false,
 			autoplay: true,
@@ -201,8 +191,6 @@ class RankingsList extends React.Component {
 			<React.Fragment>
 
 				<h2 className={style.rankingsHeader}>Platform Rankings</h2>
-				<br />
-				<br />
 
 					{slides.map((platform_item, platform_index) => (
 						<React.Fragment key={platform_index}>
@@ -216,8 +204,7 @@ class RankingsList extends React.Component {
 								</Slider>
 							    <div className={style.infoBlock}>
 								    <div className={style.iconCircle}>
-									    <FaFacebookSquare />
-								    	{iconos[Object.values(platform_item.id)]}
+								    	<div className={iconoclas[platform_item.id]} />
 									</div>
 								</div>
 							</div>

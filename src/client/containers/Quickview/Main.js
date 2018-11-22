@@ -2,11 +2,13 @@
 
 import React, { Component } from 'react'
 
+import variables from "../../scss/variables.scss";
 import style from "./style.scss";
 import PropTypes from "prop-types";
 import VersusList from "../../components/VersusList";
 import RankingsList from "../../components/RankingsList";
 import Dropdown from "../../components/Dropdown";
+import {AgeIcon, SexIcon} from "../../components/Form/Controls/Radio";
 
 class Quickview extends Component {
 
@@ -106,6 +108,31 @@ class Quickview extends Component {
 
 		return (
 			<React.Fragment>
+				<div className={style.quickviewHeader}>
+					<div className={style.quickviewHeader_cellLeft}>
+						<ul className={style.genderSelect}>
+							<li><i className="qf-iconMale"></i>Male</li>
+							<li><i className="qf-iconFemale"></i>Female</li>
+						</ul>
+					</div>
+					<div className={style.quickviewHeader_cellMid}>
+						<AgeIcon className={style.testere} />
+						<Dropdown 
+							className="kestere"
+							buttonLabel="Age Range"
+							buttonClassName=""
+							arrowClassName=""
+							arrow={true}
+						>
+							<div className="dd_child age-women-up-to-10">18-25</div>
+							<div className="dd_child age-women-11-17">26-35</div>
+							<div className="dd_child age-women-18-24">36-45</div>
+						</Dropdown>
+					</div>
+					<div className={style.quickviewHeader_cellRight}>
+						<span className="qf-iconLeft-Arrow"></span> views <span className="qf-iconRight-Arrow"></span>
+					</div>
+				</div>
 				<div className={style.quickviewContent}>
 					<div className={style.VersusList}>
 						<VersusList videos={versus} />

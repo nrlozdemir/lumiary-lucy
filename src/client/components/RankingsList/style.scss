@@ -46,9 +46,9 @@
 	margin-left:30px;
 	top: 20px;
 }
-.iconCircle svg {
-	width: 2.2em;
-	height: 2.2em;
-	margin:0.6em;
+.iconCircle>div {
+	font-size: 28px;
+	margin:12px;
+	padding-top:12px;
 	color: $color-white;	
 }

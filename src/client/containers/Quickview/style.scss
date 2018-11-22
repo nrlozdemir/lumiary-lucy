@@ -14,22 +14,72 @@ $headerHeight: 83px;
 	text-align: center;
 }
 .quickviewHeader {
-	height: 75px;
-	width: 100%;
-	float:left;
-	clear:none;
+	height: 125px;
+	width: 90%;
+	margin: 0 50px;
+}
+.quickviewHeader_cellLeft, .quickviewHeader_cellMid, .quickviewHeader_cellRight {
+  font-family: $font-family-clanOTNews;
+  font-size: 22px;
+  color: $color-pale-grey;
 }
 .quickviewHeader_cellLeft {
 	text-align:left;
 	width:33%;
+	float:left;
+	clear:none;
+	padding-top: 60px;
+}
+.qf-iconLeft-Arrow {
+	padding-right: 20px;
+	width:40px;
+}
+.qf-iconRight-Arrow {
+	padding-left: 20px;
+	width:40px;
+}
+.qf-iconMale, .qf-iconFemale {
+	width: 48px;
+	height: 48px;
+
+.genderSelect {
+  display:inline;
+  list-style: none;
+}
+.genderSelect li {
+  text-indent: 30px;
+  width: 106px;
+  float:left;
+  clear:none;
+  border-bottom: 3px solid transparent;
+}
+.genderSelect li i {
+	padding-left: 10px;
+}}
+.genderSelect li:hover {
+  border-bottom: 3px solid $color-tealish;
+}
+.male {
+  height: 30px;
+  color: $color-neutral-white;
+}
+.female {
+  height: 30px;
+  color: $color-neutral-white;
 }
 .quickviewHeader_cellMid {
 	text-align:center;
 	width:33%;
+	float:left;
+	clear:none;
+	padding-top: 60px;
 }
 .quickviewHeader_cellRight {
 	text-align:right;
 	width:33%;
+	float:left;
+	clear:none;
+	padding-top: 60px;
 }
 .listBlockLeft, .listBlockRight {
 	color: #ddd;
@@ -60,4 +110,11 @@ $headerHeight: 83px;
 	left: 0;
 	top: $headerHeight;
 	float:left;
+}
+.quickviewHeader_cellMid .dd_child {
+  height: 23px;
+  font-family: $font-family-clanOT;
+  font-size: 18px;
+  color: var(--pale-grey);
+
 }
