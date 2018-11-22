@@ -27,19 +27,35 @@ const CompareVideoBrief = props => {
 						<div className="grid-collapse mt-25">
 							<div className="col-6">
 								<div className={style.videoImage}>
-									<span className={style.videoIcon + " qf-iconPlay"}>
-										<span className="path1" />
-										<span className="path2" />
-										<span className="path3" />
-										<span className="path4" />
-										<span className="path5" />
-										<span className="path6" />
-									</span>
-									<img
-										className="width-100"
-										src="https://picsum.photos/477/338/?random
-"
-									/>
+									<div className={style.video}>
+										<div className={style.videoContainer}>
+											<div
+												key={props.video.id}
+												className={style.videoContainer}
+											>
+												<video id={props.video.id} width="100%">
+													<source src={props.video.video} type="video/mp4" />
+												</video>
+												<span
+													onClick={() => {
+														const video = document.getElementById(
+															props.video.id
+														);
+														if (video.paused) video.play();
+														else video.pause();
+													}}
+													className={style.videoIcon + " qf-iconPlay"}
+												>
+													<span className="path1" />
+													<span className="path2" />
+													<span className="path3" />
+													<span className="path4" />
+													<span className="path5" />
+													<span className="path6" />
+												</span>
+											</div>
+										</div>
+									</div>
 								</div>
 								<div className="col-12 grid-collapse mt-25">
 									<div className="col-6">
@@ -67,19 +83,35 @@ const CompareVideoBrief = props => {
 							</div>
 							<div className="col-6">
 								<div className={style.videoImage}>
-									<span className={style.videoIcon + " qf-iconPlay"}>
-										<span className="path1" />
-										<span className="path2" />
-										<span className="path3" />
-										<span className="path4" />
-										<span className="path5" />
-										<span className="path6" />
-									</span>
-									<img
-										className="width-100"
-										src="https://picsum.photos/477/338/?random
-"
-									/>
+									<div className={style.video}>
+										<div className={style.videoContainer}>
+											<div
+												key={props.video.id}
+												className={style.videoContainer}
+											>
+												<video id={props.video.id + "compare"} width="100%">
+													<source src={props.video.video} type="video/mp4" />
+												</video>
+												<span
+													onClick={() => {
+														const video = document.getElementById(
+															props.video.id + "compare"
+														);
+														if (video.paused) video.play();
+														else video.pause();
+													}}
+													className={style.videoIcon + " qf-iconPlay"}
+												>
+													<span className="path1" />
+													<span className="path2" />
+													<span className="path3" />
+													<span className="path4" />
+													<span className="path5" />
+													<span className="path6" />
+												</span>
+											</div>
+										</div>
+									</div>
 								</div>
 								<div className="col-12 grid-collapse mt-25">
 									<div className="col-6">
