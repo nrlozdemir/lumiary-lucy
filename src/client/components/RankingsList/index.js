@@ -1,15 +1,17 @@
 "use strict";
 
 import React from "react";
-import style from "./style.scss";
 
 import Slider from "react-slick";
+import {FaFacebookSquare, FaTwitterSquare, FaInstagram, FaSnapchatGhost, FaYoutube, FaTwitter, FaPinterest} from 'react-icons/fa';
+
+import style from "./style.scss";
 
 class RankingsList extends React.Component {
 	render() {
 
-		const slides = {
-			'facebook': [
+		const slides = [
+			{id: 'facebook', data: [
 				{
 					id: 1,
 					src: "https://picsum.photos/135/135?id=234624"
@@ -34,8 +36,8 @@ class RankingsList extends React.Component {
 					id: 6,
 					src: "https://picsum.photos/135/135?id=46383"
 				}
-			],
-			'instagram': [
+			]},
+			{id:'instagram', data:[
 				{
 					id: 1,
 					src: "https://picsum.photos/135/135?id=72354"
@@ -60,8 +62,8 @@ class RankingsList extends React.Component {
 					id: 6,
 					src: "https://picsum.photos/135/135?id=79563"
 				}
-			],
-			'snapchat': [
+			]},
+			{id:'snapchat', data:[
 				{
 					id: 1,
 					src: "https://picsum.photos/135/135?id=3434"
@@ -86,8 +88,8 @@ class RankingsList extends React.Component {
 					id: 6,
 					src: "https://picsum.photos/135/135?id=68"
 				}
-			],
-			'youtube': [
+			]},
+			{id:'youtube', data:[
 				{
 					id: 1,
 					src: "https://picsum.photos/135/135?id=579475"
@@ -112,8 +114,8 @@ class RankingsList extends React.Component {
 					id: 6,
 					src: "https://picsum.photos/135/135?id=45783"
 				}
-			],
-			'twitter': [
+			]},
+			{id:'twitter', data:[
 				{
 					id: 1,
 					src: "https://picsum.photos/135/135?id=435863"
@@ -138,8 +140,8 @@ class RankingsList extends React.Component {
 					id: 6,
 					src: "https://picsum.photos/135/135?id=897"
 				}
-			],
-			'pinterest': [
+			]},
+			{id:'pinterest', data:[
 				{
 					id: 1,
 					src: "https://picsum.photos/135/135?id=245"
@@ -164,62 +166,63 @@ class RankingsList extends React.Component {
 					id: 6,
 					src: "https://picsum.photos/135/135?id=789"
 				}
-			]
-		};
-		const slideKeys = Object.keys(slides);
-		var sectionSlide;
+			]}
+		];
 
+		const renderIcon = function(icon){
+			switch (icon) {
+				case 'facebook': 	return <FaFacebookSquare />;
+				case 'instagram': 	return <FaInstagram />;
+				case 'snapchat': 	return <FaSnapchatGhost />;
+				case 'youtube': 	return <FaYoutube />;
+				case 'twitter': 	return <FaTwitterSquare />;
+				case 'pinterest': 	return <FaPinterest />;
+			}
+		};
+		const iconos = [];
+		slides.map((platform_item, platform_index) => {
+			iconos[platform_index] = renderIcon(Object.values(platform_item.id));
+		});
+		console.dir(iconos);
+
+		const settings = {
+			arrows: false,
+			autoplay: true,
+			dots: true,
+//			dotsClass: 'rankingsSliderDots',
+			autoplaySpeed: 3000,
+			pauseOnHover: true,
+			infinite: true,
+			slidesToShow: 3,
+			slidesToScroll: 1,
+			draggable: true
+		};
 		return (
 			<React.Fragment>
-				<div className={style.container}>
 
-					<div className={style.header}>Platform Rankings</div><br />
+				<h2 className={style.rankingsHeader}>Platform Rankings</h2>
+				<br />
+				<br />
 
-						<div className={style.rankList}>
-							<Slider
-								speed={90}
-								infinite={ true }
-								variableWidth={ true }
-								arrows={ false }
-								dots={ false }
-								draggable={ false }
-								centerMode={ true }
-							>
-								{slides.facebook.map(slide => (
-									<div className={style.sliderCell}>
-										<img src={slide.src} alt={slide.id} />
+					{slides.map((platform_item, platform_index) => (
+						<React.Fragment key={platform_index}>
+							<div className={style.rankList}>
+								<Slider ref={slider => (this.slider = slider)} {...settings}>
+									{Object.values(platform_item.data).map((slide_item, slide_index) => (
+										<div className={style.sliderCell}>
+											<img src={slide_item.src} alt={slide_item.id} />
+										</div>
+									))}
+								</Slider>
+							    <div className={style.infoBlock}>
+								    <div className={style.iconCircle}>
+									    <FaFacebookSquare />
+								    	{iconos[Object.values(platform_item.id)]}
 									</div>
-								))}
-							</Slider>
-						</div>
-						<div className={style.info_fb}>
-							facebook
-						</div>
-
-
-						<div className={style.rankList}>
-							<Slider
-								speed={90}
-								infinite={ true }
-								variableWidth={ true }
-								arrows={ false }
-								dots={ false }
-								draggable={ false }
-								centerMode={ true }
-							>
-								{slides.twitter.map(slide => (
-									<div className={style.sliderCell}>
-										<img src={slide.src} alt={slide.id} />
-									</div>
-								))}
-							</Slider>
-						</div>
-						<div className={style.info}>
-							twitter
-						</div>
-
-				</div>
-
+								</div>
+							</div>
+						</React.Fragment>
+					))}
 			</React.Fragment>
 		);
 	}

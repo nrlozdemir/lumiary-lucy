@@ -13,6 +13,24 @@ $headerHeight: 83px;
 	vertical-align: middle;
 	text-align: center;
 }
+.quickviewHeader {
+	height: 75px;
+	width: 100%;
+	float:left;
+	clear:none;
+}
+.quickviewHeader_cellLeft {
+	text-align:left;
+	width:33%;
+}
+.quickviewHeader_cellMid {
+	text-align:center;
+	width:33%;
+}
+.quickviewHeader_cellRight {
+	text-align:right;
+	width:33%;
+}
 .listBlockLeft, .listBlockRight {
 	color: #ddd;
 }
@@ -20,11 +38,13 @@ $headerHeight: 83px;
 	width: 135px;
 	height: 135px;
 }
-.quickviewHeader {
-	
-}
 .quickviewContent {
-
+	padding-top:20px;
+}
+.quickviewContent hr {
+	border:2px solid #22212f;
+	padding-left:30px;
+	padding-right:30px;
 }
 .VersusList {
 	width: 60%;

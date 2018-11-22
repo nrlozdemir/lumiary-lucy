@@ -34,10 +34,11 @@ class Video extends React.Component {
 			connectDragSource,
 			children,
 			className,
-			video
+			video,
+			styleOverride
 		} = this.props;
 		return connectDragSource(
-			<div className={style.video}>
+			<div className={styleOverride ? styleOverride : style.video}>
 				<div className={style.videoContainer}>
 					<div key={video.id + "list"} className={style.videoContainer}>
 						<video id={video.id + "list"} width="100%">
