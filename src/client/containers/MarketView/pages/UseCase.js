@@ -16,7 +16,7 @@ import BarChart from "Components/Charts/BarChart";
 import VideoSlider from "Components/Sliders/VideoSlider";
 import Tabs from "./../views/tabs";
 import switchTabs from "../switchTab";
-import { videoTabsDataBottom } from "../../Library/options";
+import { videoTabsDataBottom, barChartCompare } from "../../Library/options";
 
 // import PropTypes from 'prop-types'
 
@@ -162,6 +162,94 @@ class UseCase extends Component {
 										</div>
 									</div>
 								</div>
+							</div>
+							<div className="col-12 mt-10">
+								<Card removeHeader customBodyClass="bg-charcoal-grey pl-25">
+									<div className="m-10">
+										<div className="col-12">
+											<div className="float-right">
+												<p className={style.videoBriefLegend}>
+													<span className={style.roundGrey} />
+													This Video
+													<span className={style.roundTealish} />
+													Your Average Video
+												</p>
+											</div>
+										</div>
+										{barChartCompare.map(bar => (
+											<div className="col-1-3" key={bar.label[0]}>
+												<BarChart
+													width="10"
+													height="6"
+													data={bar.data}
+													hasMoreDataset
+													labels={bar.label}
+													yLabels={bar.yLabels}
+													isGradient
+													gradientColors={[
+														["#161620", "#2f2e3d"],
+														["#fff", "#2f2e3d"]
+													]}
+													options={{
+														annotation: {
+															annotations: [
+																{
+																	id: "line",
+																	type: "line",
+																	mode: "horizontal",
+																	scaleID: "y-axis-0",
+																	value: bar.avarage,
+																	borderColor: "#55bdd5",
+																	borderWidth: 2
+																}
+															]
+														},
+														layout: {
+															padding: {
+																top: 0,
+																bottom: 0,
+																right: 75,
+																left: 75
+															}
+														},
+														plugins: {
+															datalabels: {
+																display: false
+															}
+														},
+														tooltips: {
+															enabled: false
+														},
+														legend: {
+															display: false
+														},
+														scales: {
+															yAxes: [
+																{
+																	display: false,
+																	ticks: {
+																		min: 0,
+																		max: 100,
+																		stepSize: 10
+																	}
+																}
+															],
+															xAxes: [
+																{
+																	barPercentage: 0.8,
+																	categorySpacing: 0,
+																	gridLines: {
+																		display: false
+																	}
+																}
+															]
+														}
+													}}
+												/>
+											</div>
+										))}
+									</div>
+								</Card>
 							</div>
 							<div className="col-12">
 								<Card
