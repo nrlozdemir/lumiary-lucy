@@ -2,7 +2,7 @@
 
 import React, { Component } from 'react'
 
-import style from "./styles.scss";
+import style from "./style.scss";
 import PropTypes from "prop-types";
 import VersusList from "../../components/VersusList";
 import RankingsList from "../../components/RankingsList";
@@ -106,11 +106,6 @@ class Quickview extends Component {
 
 		return (
 			<React.Fragment>
-				<div className={style.quickviewHeader}>
-					<Dropdown>
-						<div className="child">test</div>
-					</Dropdown>
-				</div>
 				<div className={style.quickviewContent}>
 					<div className={style.VersusList}>
 						<VersusList videos={versus} />

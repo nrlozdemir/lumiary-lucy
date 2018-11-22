@@ -1,71 +1,64 @@
 .versusVideo {
-	width: 291px;
+	width: 290px;
 }
 .versusList {
 	position: relative;
+	background-color: $color-dark;
 }
 .versusRow {
-  width: 757px;
-  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-  background-color: #2f2e3d;
-  margin-bottom: 50px;
-  float: none;
-  clear: both;
-  margin-left:20px;
+	width: 757px;
+	background-color: $color-charcoal-grey;
+	float: none;
+	clear: both;
+	margin-left:20px;
+}
+.endOfRow {
+	height: 40px !important;
+}
+.versusTitle, .versusTitleBold, .versusSubTitle {
+	height: 23px;
+	font-size: 18px;
+	font-weight: normal;
+	color: $color-pale-grey;
+}
+.versusTitle {
+	font-family: $font-family-clanOT;
+}
+.versusTitleBold {
+	font-family: $font-family-clanOTNews;
+}
+.versusSubTitle {
+	font-family: $font-family-clanOT;
+	font-weight: bold;
+	margin-top: 12px;
+}
+.versusCategory {
+	height: 29px;
+	font-family: $font-family-sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	margin-top: 12px;
 }
 .versusCellLeft, .versusCellRight, .versusCellMid {
 	float:left;
 	clear:none;
 }
+.versusCellLeft .video, .versusCellRight .video, .versusCellMid .video {
+	margin:0;
+}
 .versusCellLeft, .versusCellRight {
 	width:290px;
 }
 .versusCellMid {
-	width:175px;
-	margin-top: 50px;
+	width: 175px;
 }
-.versusTitle, .versusTitleBold, .versusSubTitle {
-  height: 23px;
-  font-size: 18px;
-  font-weight: normal;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: $color-pale-grey;
-  float:left;
+.versusCellLeft h3, .versusCellMid h3, .versusCellRight h3 {
+	text-align: center;
+	width:100%;
+	background-color: $color-dark;
 }
-.versusTitleBold {
-  font-family: $font-family-clanOTNews;
-  width:290px;
-  text-align: center;
-}
-.versusTitle {
-  font-family: $font-family-clanOT;
-  width:175px;
-  text-align: center;
-}
-.versusSubTitle {
-  width:290px;
-  font-family: $font-family-clanOT;
-  font-weight: bold;
-  text-align: center;
-  color: $color-pale-grey;
-  float:left;
-  margin-top: 12px;
-}
-.versusCategory {
-  height: 29px;
-  width:175px;
-  text-align: center;
-  font-family: $font-family-sans-serif;
-  font-size: 24px;
-  font-weight: bold;
-  font-style: normal;
-  font-stretch: normal;
-  line-height: normal;
-  letter-spacing: normal;
-  color: $color-pale-grey;
-  float:left;
-  margin-top: 12px;
+.customVideo {
+	display: inline-flex;
+	position: relative;
+	margin:0;
 }

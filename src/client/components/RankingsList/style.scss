@@ -1,28 +1,54 @@
-.header {
-	float: right;
-	font-size: 18px;
-	color: $color-white;
+.rankingsHeader {
+	width:440px;
 	font-family: $font-family-sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: right;
+	color: $color-white;
+	height: 29px;
+	float: right;
+	clear: both;
+	margin-right:50px;
 }
-
+.killFloat {
+	float:none;
+	clear:both;
+	margin:0;
+	padding:0;
+}
+.container {
+}
+.slick-dots {
+	bottom: -50px;
+}
 .rankList {
 	vertical-align: top;
-	border: 1px dashed #ccc;
-	width: 440px;
+	width:440px;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+	background-color: $color-dark;
 }
-
 .sliderCell {
 	width: 130px;
 	height: 130px;
 }
-
-.info_fb {
-	font-family: $font-family-icons;
-	font-size: 15px;
-	content: "\e013";
-	display: inline-block;
-	color: #fff;
-	// position: absolute;
-	right: -20px;
-	top: 30px;
+.infoBlock {
+	height: 140px;
+	width: 440px;
+	background-color: $color-charcoal-grey;
+}
+.iconCircle {
+	position: relative;
+    border-radius: 50%;
+    background-color: $color-dark-two;
+    margin-right: 20px;
+	width: 54px;
+	height: 54px;
+	margin-left:30px;
+	top: 20px;
+}
+.iconCircle svg {
+	width: 2.2em;
+	height: 2.2em;
+	margin:0.6em;
+	color: $color-white;	
 }
