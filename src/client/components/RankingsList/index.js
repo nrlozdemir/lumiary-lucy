@@ -191,25 +191,28 @@ class RankingsList extends React.Component {
 			<React.Fragment>
 
 				<h2 className={style.rankingsHeader}>Platform Rankings</h2>
+				<div className={style.killFloat}></div>
 
-					{slides.map((platform_item, platform_index) => (
-						<React.Fragment key={platform_index}>
-							<div className={style.rankList}>
-								<Slider ref={slider => (this.slider = slider)} {...settings}>
-									{Object.values(platform_item.data).map((slide_item, slide_index) => (
-										<div className={style.sliderCell}>
-											<img src={slide_item.src} alt={slide_item.id} />
-										</div>
-									))}
-								</Slider>
-							    <div className={style.infoBlock}>
-								    <div className={style.iconCircle}>
-								    	<div className={iconoclas[platform_item.id]} />
+				{slides.map((platform_item, platform_index) => (
+					<React.Fragment key={platform_index}>
+						<div className={style.rankList}>
+							<div className={style.versusShadowed}>
+							<Slider ref={slider => (this.slider = slider)} {...settings}>
+								{Object.values(platform_item.data).map((slide_item, slide_index) => (
+									<div className={style.sliderCell}>
+										<img src={slide_item.src} alt={slide_item.id} />
 									</div>
+								))}
+							</Slider>
+							</div>
+						    <div className={style.infoBlock}>
+							    <div className={style.iconCircle}>
+							    	<div className={iconoclas[platform_item.id]} />
 								</div>
 							</div>
-						</React.Fragment>
-					))}
+						</div>
+					</React.Fragment>
+				))}
 			</React.Fragment>
 		);
 	}

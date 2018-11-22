@@ -110,10 +110,8 @@ class Quickview extends Component {
 			<React.Fragment>
 				<div className={style.quickviewHeader}>
 					<div className={style.quickviewHeader_cellLeft}>
-						<ul className={style.genderSelect}>
-							<li><i className="qf-iconMale"></i>Male</li>
-							<li><i className="qf-iconFemale"></i>Female</li>
-						</ul>
+						<div className={style.genders}><i className="qf-iconMale"></i>Male</div>
+						<div className={style.genders}><i className="qf-iconFemale"></i>Female</div>
 					</div>
 					<div className={style.quickviewHeader_cellMid}>
 						<AgeIcon className={style.testere} />
@@ -132,6 +130,7 @@ class Quickview extends Component {
 					<div className={style.quickviewHeader_cellRight}>
 						<span className="qf-iconLeft-Arrow"></span> views <span className="qf-iconRight-Arrow"></span>
 					</div>
+					<hr />
 				</div>
 				<div className={style.quickviewContent}>
 					<div className={style.VersusList}>
