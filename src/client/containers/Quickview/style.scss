@@ -31,10 +31,10 @@ $headerHeight: 83px;
 		font-family: $font-family-clanOTNews;
 		font-size: 22px;
 		color: $color-pale-grey;
+		width:33%;
 	}
 	.quickviewHeader_cellLeft {
 		text-align:left;
-		width:33%;
 		float:left;
 		clear:none;
 		padding-top: 80px;
@@ -45,7 +45,7 @@ $headerHeight: 83px;
 		}
 	}
 	.quickviewHeader_cellRight {
-		padding-top: 80px;
+		padding-top: 90px;
 		padding-bottom: 5px;
 		span {
 
