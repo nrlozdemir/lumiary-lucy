@@ -419,6 +419,28 @@ const videoTabsDataBottom = [
 	}
 ];
 
+const videos = [
+	{
+		poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+		id: "lumascape4",
+		video: "//media.quickframe.com/video/video/13433.mp4"
+	},
+	{
+		poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+		id: "lumascape12",
+		video: "//media.quickframe.com/video/video/15991.mp4"
+	},
+	{
+		poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+		id: "lumascape1",
+		video: "//media.quickframe.com/video/video/7485.mp4"
+	},
+	{
+		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+		id: "kumascape3",
+		video: "//media.quickframe.com/video/video/6324.mp4"
+	}
+];
 export {
 	lineData,
 	lineWithCustomLabel,
@@ -427,5 +449,6 @@ export {
 	barChart,
 	barChartCompare,
 	videoTabsDataCompare,
-	videoTabsDataBottom
+	videoTabsDataBottom,
+	videos
 };

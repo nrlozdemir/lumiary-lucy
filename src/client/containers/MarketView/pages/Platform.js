@@ -92,7 +92,9 @@ class Platform extends Component {
 							<div className={style.iconWrapper}>
 								<span className={"qf-iconFacebook " + style.icon} />
 							</div>
-							<div className={style.iconWrapper}>
+							<div
+								className={style.iconWrapper + " " + style.iconWrapperActive}
+							>
 								<span className={"qf-iconInstagram " + style.icon} />
 							</div>
 							<div className={style.iconWrapper}>
