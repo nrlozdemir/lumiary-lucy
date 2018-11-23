@@ -293,7 +293,8 @@ class UseCase extends Component {
 											<br />
 											{switchTabs(
 												this.props.params.tab,
-												this.props.routeParams.id
+												this.props.routeParams.id,
+												true
 											)}
 										</div>
 									</div>
