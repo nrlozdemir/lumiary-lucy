@@ -89,11 +89,35 @@ class Audince extends Component {
 						</div>
 
 						<div className="col-1">
-							<div className={style.iconWrapper}>
-								<span className={"qf-iconFacebook " + style.icon} />
+							<div className={style.iconWrapperRectangle}>
+								<span className={"qf-iconMale " + style.icon} />
+								<p className={style.iconText}>Male</p>
 							</div>
-							<div className={style.iconWrapper}>
-								<span className={"qf-iconInstagram " + style.icon} />
+							<div className={style.iconWrapperRectangle + " " + style.active}>
+								<span className={"qf-iconFemale " + style.icon} />
+								<p className={style.iconText}>Female</p>
+							</div>
+							<div className={style.iconWrapperAudience}>
+								<p className={style.iconText}>13-18</p>
+							</div>
+							<div
+								className={
+									style.iconWrapperAudience + " " + style.iconWrapperActive
+								}
+							>
+								<p className={style.iconText}>18-21</p>
+							</div>
+							<div className={style.iconWrapperAudience}>
+								<p className={style.iconText}>21-28</p>
+							</div>
+							<div className={style.iconWrapperAudience}>
+								<p className={style.iconText}>28-35</p>
+							</div>
+							<div className={style.iconWrapperAudience}>
+								<p className={style.iconText}>35-42</p>
+							</div>
+							<div className={style.iconWrapperAudience}>
+								<p className={style.iconText}>42-65</p>
 							</div>
 						</div>
 
@@ -302,13 +326,13 @@ class Audince extends Component {
 									<div className="grid-collapse">
 										<div className="col-12 mt-25">
 											<div className={style.tabWrapper}>
-												<Link className={style.tab} to="/marketview/audince">
+												<Link className={style.tab} to="/marketview/audience">
 													All
 												</Link>
 												{videoTabsDataBottom.map(link => (
 													<Link
 														key={link.url}
-														to={"/marketview/audince/" + link.url}
+														to={"/marketview/audience/" + link.url}
 														className={style.tab}
 													>
 														{link.tabName}

@@ -89,19 +89,28 @@ class UseCase extends Component {
 						</div>
 
 						<div className="col-1">
-							<div className={style.iconWrapper}>
-								<span className={"qf-iconFacebook " + style.icon} />
+							<div
+								className={style.iconWrapper + " " + style.iconWrapperActive}
+							>
+								<p className={style.iconTextUseCase}>Education</p>
 							</div>
 							<div className={style.iconWrapper}>
-								<span className={"qf-iconInstagram " + style.icon} />
+								<p className={style.iconTextUseCase}>Direct Response</p>
+							</div>
+							<div className={style.iconWrapper}>
+								<p className={style.iconTextUseCase}>Awareness</p>
 							</div>
 						</div>
 						<div className="col-11 mt-10 pb-10">
 							<div className={style.upContainer + " mb-25"}>
 								<div className="col-6">
-									<div className="col-12">
-										<VideoSlider items={videoList} />
+									<div className={style.videoSliderHeader}>
+										<p>
+											<span className="qf-iconMale" />
+											<p>Male</p>
+										</p>
 									</div>
+									<VideoSlider items={videoList} />
 									<div className="col-12 grid-collapse mt-25">
 										<div className="col-6">
 											<h2 className={style.header}>Meet The Puppet</h2>
@@ -131,9 +140,13 @@ class UseCase extends Component {
 									</div>
 								</div>
 								<div className="col-6">
-									<div className="col-12">
-										<VideoSlider items={videoList} />
+									<div className={style.videoSliderHeader}>
+										<p>
+											<span className="qf-iconFemale" />
+											<p>Female</p>
+										</p>
 									</div>
+									<VideoSlider items={videoList} />
 									<div className="col-12 grid-collapse mt-25">
 										<div className="col-6">
 											<h2 className={style.header}>The QB advetures</h2>
@@ -163,7 +176,7 @@ class UseCase extends Component {
 									</div>
 								</div>
 							</div>
-							<div className="col-12 mt-10">
+							<div className="col-12 mt-50">
 								<Card removeHeader customBodyClass="bg-charcoal-grey pl-25">
 									<div className="m-10">
 										<div className="col-12">
@@ -176,11 +189,14 @@ class UseCase extends Component {
 												</p>
 											</div>
 										</div>
+										<br />
+										<br />
+										<br />
 										{barChartCompare.map(bar => (
 											<div className="col-1-3" key={bar.label[0]}>
 												<BarChart
 													width="10"
-													height="6"
+													height="8"
 													data={bar.data}
 													hasMoreDataset
 													labels={bar.label}
@@ -236,7 +252,7 @@ class UseCase extends Component {
 															],
 															xAxes: [
 																{
-																	barPercentage: 0.8,
+																	barPercentage: 0.7,
 																	categorySpacing: 0,
 																	gridLines: {
 																		display: false
@@ -250,6 +266,7 @@ class UseCase extends Component {
 										))}
 									</div>
 								</Card>
+								<br />
 							</div>
 							<div className="col-12">
 								<Card
@@ -260,13 +277,13 @@ class UseCase extends Component {
 									<div className="grid-collapse">
 										<div className="col-12 mt-25">
 											<div className={style.tabWrapper}>
-												<Link className={style.tab} to="/marketview/usecase">
+												<Link className={style.tab} to="/marketview/use-case">
 													All
 												</Link>
 												{videoTabsDataBottom.map(link => (
 													<Link
 														key={link.url}
-														to={"/marketview/usecase/" + link.url}
+														to={"/marketview/use-case/" + link.url}
 														className={style.tab}
 													>
 														{link.tabName}

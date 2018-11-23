@@ -89,11 +89,16 @@ class Competitor extends Component {
 						</div>
 
 						<div className="col-1">
-							<div className={style.iconWrapper}>
+							<div
+								className={style.iconWrapper + " " + style.iconWrapperActive}
+							>
 								<span className={"qf-iconFacebook " + style.icon} />
 							</div>
 							<div className={style.iconWrapper}>
 								<span className={"qf-iconInstagram " + style.icon} />
+							</div>
+							<div className={style.iconWrapperBottom}>
+								<span className={"qf-iconAdd " + style.icon} />
 							</div>
 						</div>
 

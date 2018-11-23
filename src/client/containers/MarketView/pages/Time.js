@@ -89,11 +89,28 @@ class Time extends Component {
 						</div>
 
 						<div className="col-1">
-							<div className={style.iconWrapper}>
-								<span className={"qf-iconFacebook " + style.icon} />
+							<div
+								className={style.iconWrapper + " " + style.iconWrapperActive}
+							>
+								<p className={style.iconTextUseCase}>Sunday</p>
 							</div>
 							<div className={style.iconWrapper}>
-								<span className={"qf-iconInstagram " + style.icon} />
+								<p className={style.iconTextUseCase}>Saturday</p>
+							</div>
+							<div className={style.iconWrapper}>
+								<p className={style.iconTextUseCase}>Friday</p>
+							</div>
+							<div className={style.iconWrapper}>
+								<p className={style.iconTextUseCase}>Thursday</p>
+							</div>
+							<div className={style.iconWrapper}>
+								<p className={style.iconTextUseCase}>Wednesday</p>
+							</div>
+							<div className={style.iconWrapper}>
+								<p className={style.iconTextUseCase}>Tuesday</p>
+							</div>
+							<div className={style.iconWrapper}>
+								<p className={style.iconTextUseCase}>Monday</p>
 							</div>
 						</div>
 
