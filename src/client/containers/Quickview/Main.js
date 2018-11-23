@@ -110,22 +110,14 @@ class Quickview extends Component {
 			<React.Fragment>
 				<div className={style.quickviewHeader}>
 					<div className={style.quickviewHeader_cellLeft}>
-						<div className={style.genders}><i className="qf-iconMale"></i>Male</div>
-						<div className={style.genders}><i className="qf-iconFemale"></i>Female</div>
+						<div className={style.genders}><icon className="qf-iconMale" /><span>Male</span></div>
+						<div className={style.genders}><icon className="qf-iconFemale" /><span>Female</span></div>
 					</div>
 					<div className={style.quickviewHeader_cellMid}>
-						<AgeIcon className={style.testere} />
-						<Dropdown 
-							className="kestere"
-							buttonLabel="Age Range"
-							buttonClassName=""
-							arrowClassName=""
-							arrow={true}
-						>
-							<div className="dd_child age-women-up-to-10">18-25</div>
-							<div className="dd_child age-women-11-17">26-35</div>
-							<div className="dd_child age-women-18-24">36-45</div>
-						</Dropdown>
+<ul className="radioButtonGroup">
+	<li className="age"><span className="age-both-up-to-10">up-to-10</span></li>
+	<li className="age"><span className="age-both-11-17">11-17</span></li>
+</ul>
 					</div>
 					<div className={style.quickviewHeader_cellRight}>
 						<span className="qf-iconLeft-Arrow"></span> views <span className="qf-iconRight-Arrow"></span>
