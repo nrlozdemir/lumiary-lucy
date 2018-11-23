@@ -114,10 +114,11 @@ class Quickview extends Component {
 						<div className={style.genders}><icon className="qf-iconFemale" /><span>Female</span></div>
 					</div>
 					<div className={style.quickviewHeader_cellMid}>
-<ul className="radioButtonGroup">
-	<li className="age"><span className="age-both-up-to-10">up-to-10</span></li>
-	<li className="age"><span className="age-both-11-17">11-17</span></li>
-</ul>
+					<table><tr>
+						<td><img src={require("./../../assets/crosshair.png")} /></td>
+						<td>Age range:</td>
+						<td>18-24</td>
+					</tr></table>
 					</div>
 					<div className={style.quickviewHeader_cellRight}>
 						<span className="qf-iconLeft-Arrow"></span> views <span className="qf-iconRight-Arrow"></span>

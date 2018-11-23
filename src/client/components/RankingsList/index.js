@@ -177,8 +177,8 @@ class RankingsList extends React.Component {
 		};
 		const settings = {
 			arrows: false,
-			autoplay: true,
-			dots: true,
+			autoplay: false,
+			dots: false,
 //			dotsClass: 'rankingsSliderDots',
 			autoplaySpeed: 3000,
 			pauseOnHover: true,
