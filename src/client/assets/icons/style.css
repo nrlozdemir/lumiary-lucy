@@ -1,0 +1,98 @@
+@font-face {
+  font-family: 'icomoon';
+  src:  url('fonts/icomoon.eot?1l6q1f');
+  src:  url('fonts/icomoon.eot?1l6q1f#iefix') format('embedded-opentype'),
+    url('fonts/icomoon.woff2?1l6q1f') format('woff2'),
+    url('fonts/icomoon.ttf?1l6q1f') format('truetype'),
+    url('fonts/icomoon.woff?1l6q1f') format('woff'),
+    url('fonts/icomoon.svg?1l6q1f#icomoon') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="qf-icon"], [class*=" qf-icon"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.qf-iconInformation:before {
+  content: "\e900";
+}
+.qf-iconFemale:before {
+  content: "\e901";
+}
+.qf-iconMale:before {
+  content: "\e902";
+}
+.qf-iconDrag:before {
+  content: "\e903";
+}
+.qf-iconDrag--Drop:before {
+  content: "\e904";
+}
+.qf-iconAdd:before {
+  content: "\e905";
+}
+.qf-iconFacebook:before {
+  content: "\e906";
+}
+.qf-iconPlay .path1:before {
+  content: "\e907";
+  color: rgb(255, 255, 255);
+}
+.qf-iconPlay .path2:before {
+  content: "\e908";
+  margin-left: -0.849609375em;
+  color: rgb(68, 68, 68);
+}
+.qf-iconPlay .path3:before {
+  content: "\e909";
+  margin-left: -0.849609375em;
+  color: rgb(255, 255, 255);
+}
+.qf-iconPlay .path4:before {
+  content: "\e90a";
+  margin-left: -0.849609375em;
+  color: rgb(68, 68, 68);
+}
+.qf-iconPlay .path5:before {
+  content: "\e90b";
+  margin-left: -0.849609375em;
+  color: rgb(255, 255, 255);
+}
+.qf-iconPlay .path6:before {
+  content: "\e90c";
+  margin-left: -0.849609375em;
+  color: rgb(68, 68, 68);
+}
+.qf-iconInstagram:before {
+  content: "\e90d";
+}
+.qf-iconSnapchat:before {
+  content: "\e90e";
+}
+.qf-iconTwitter:before {
+  content: "\e90f";
+}
+.qf-iconRight-Arrow:before {
+  content: "\e910";
+}
+.qf-iconLeft-Arrow:before {
+  content: "\e911";
+}
+.qf-iconPinterest:before {
+  content: "\e912";
+}
+.qf-iconYotube:before {
+  content: "\e913";
+}
