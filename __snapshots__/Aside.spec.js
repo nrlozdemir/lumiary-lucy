@@ -1,4 +1,4 @@
-exports['Banner Component Rendering matches snapshot 1'] = {
+exports['Aside Component Rendering matches snapshot 1'] = {
   "type": "div",
   "props": {},
   "children": [

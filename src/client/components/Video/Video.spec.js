@@ -5,7 +5,7 @@ import TestUtils from "react-dom/test-utils";
 import TestBackend from "react-dnd-test-backend";
 import { DragDropContext } from "react-dnd";
 
-import Video from "./index";
+import { VideoComponent } from "./index";
 import Home from "../../containers/Library/Home/Main";
 
 const identity = el => el;
@@ -15,6 +15,7 @@ const mockProps = {
 	name: videoName,
 	video: "https://picsum.photos/1000/400/?random",
 	connectDragSource: identity,
+	setVideoObject: identity,
 	router: {
 		push: identity
 	}
@@ -31,7 +32,7 @@ function wrapInTestContext(DecoratedComponent, props) {
 }
 
 function setup() {
-	const WrapedModule = wrapInTestContext(Video, mockProps);
+	const WrapedModule = wrapInTestContext(VideoComponent, mockProps);
 	return mount(<WrapedModule />);
 }
 
@@ -45,19 +46,22 @@ describe("Video Component", function() {
 		video = setup();
 		const Page = DragDropContext(TestBackend)(() => (
 			<div>
-				<Video {...mockProps} />
+				<VideoComponent {...mockProps} />
 				<Home {...mockPropsHome} />
 			</div>
 		));
 
 		page = TestUtils.renderIntoDocument(<Page />);
-		draggableVideo = TestUtils.findRenderedComponentWithType(page, Video);
+		draggableVideo = TestUtils.findRenderedComponentWithType(
+			page,
+			VideoComponent
+		);
 		dropArea = TestUtils.findRenderedComponentWithType(page, Home);
 		backend = page.getManager().getBackend();
 	});
 	describe("Rendering", function() {
 		it("It should render successfully", function() {
-			const component = video.find(Video).get(0);
+			const component = video.find(VideoComponent).get(0);
 			expect(component.props.name).toEqual(videoName);
 		});
 	});
