@@ -51,13 +51,15 @@ class Video extends React.Component {
 		);
 	}
 }
-const mapStateToProps = state => {};
+const mapStateToProps = state => {
+	return state;
+};
 
 const mapDispatchToProps = dispatch => ({
 	...bindActionCreators(libraryActions, dispatch)
 });
 
-const VideoComponent = DragSource("video", videoSource, collect)(Video);
+export const VideoComponent = DragSource("video", videoSource, collect)(Video);
 
 export default connect(
 	mapStateToProps,

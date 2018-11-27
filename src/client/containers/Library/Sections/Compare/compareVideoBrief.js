@@ -12,13 +12,13 @@ const CompareVideoBrief = props => {
 					<div>
 						<div className={style.tab}>
 							<span
-								onClick={() => props.compareModeOff()}
+								onClick={() => props.changeCompareMode(false)}
 								className={style.tabElement}
 							>
 								Single View
 							</span>
 							<span
-								onClick={() => props.compareModeOn()}
+								onClick={() => props.changeCompareMode(true)}
 								className={style.tabElementActive}
 							>
 								Compare Mode

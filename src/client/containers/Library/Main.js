@@ -20,39 +20,27 @@ class Library extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			video: null,
+			video: props.setVideoObject(videos.find(obj => obj.id == props.params.id))
+				.payload,
 			compareMode: false
 		};
 	}
-	static getDerivedStateFromProps(props, state) {
-		console.log(props, state);
-		return {
-			video: props.setVideoObject(videos.find(obj => obj.id == props.params.id))
-				.payload
-		};
-	}
 
-	compareModeOn() {
-		this.setState({ compareMode: true });
-	}
-	compareModeOff() {
-		this.setState({ compareMode: false });
+	changeCompareMode(val) {
+		this.setState({ compareMode: val });
 	}
 	render() {
-		console.log(this.state);
 		return (
 			<React.Fragment>
 				<div className={style.main}>
 					{this.state.compareMode ? (
 						<CompareVideoBrief
-							compareModeOn={() => this.compareModeOn()}
-							compareModeOff={() => this.compareModeOff()}
+							changeCompareMode={val => this.changeCompareMode(val)}
 							video={this.state.video}
 						/>
 					) : (
 						<VideoBrief
-							compareModeOn={() => this.compareModeOn()}
-							compareModeOff={() => this.compareModeOff()}
+							changeCompareMode={val => this.changeCompareMode(val)}
 							video={this.state.video}
 						/>
 					)}
@@ -84,7 +72,7 @@ Library.propTypes = {
 	video: PropTypes.object
 };
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => state;
 
 const mapDispatchToProps = dispatch => ({
 	...bindActionCreators(libraryActions, dispatch)
