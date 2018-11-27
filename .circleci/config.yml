@@ -25,6 +25,13 @@ jobs:
       - checkout
       - setup_remote_docker
 
+      # Download and cache dependencies
+      - restore_cache:
+          keys:
+          - lum-dependencies-{{ checksum "package.json" }}
+          # fallback to using the latest cache if no exact match is found
+          - lum-dependencies-
+
       - run: npm install
 
       - save_cache:
