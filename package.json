@@ -125,7 +125,6 @@
 		"babel-plugin-istanbul": "^5.0.1",
 		"chai": "^4.1.2",
 		"chai-http": "^3.0.0",
-		"changelog-generator": "0.0.4",
 		"compression-webpack-plugin": "^1.1.10",
 		"cz-conventional-changelog": "^2.1.0",
 		"enzyme": "^3.2.0",
