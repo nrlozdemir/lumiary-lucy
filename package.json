@@ -142,7 +142,6 @@
 		"mocha": "^3.1.2",
 		"mocha-junit-reporter": "^1.18.0",
 		"node-sass": "^4.7.2",
-		"nodemon": "^1.17.1",
 		"nyc": "^12.0.1",
 		"react-addons-test-utils": "^15.6.2",
 		"react-dnd-test-backend": "^6.0.0",
