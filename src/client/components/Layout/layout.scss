@@ -1,24 +1,21 @@
-$headerHeight: 85px;
+$headerHeight: 83px;
 
 .headerSide {
 	height: $headerHeight;
-	margin: 0px;
 	width: 100%;
-	position: fixed;
-	top: 0;
-	width: 100%;
-	z-index: 10;
-	height: $headerHeight;
+	position: relative;
+	margin: 0 auto;
+	line-height: $headerHeight;
+	display: flex;
 }
 
 .aside {
 	overflow-y: auto;
 	// overflow-x: visible;
 	float: left;
-	width: 25%;
+	width: 21%;
 	height: calc(100vh - #{$headerHeight + 8});
 	border-right: 2.5px solid $color-dark-three;
-	position: fixed;
 	left: 0;
 	top: $headerHeight;
 }
@@ -30,14 +27,18 @@ $headerHeight: 85px;
 .mainSide {
 	overflow-y: auto;
 	float: left;
-	width: 75%;
+	width: 79%;
 	padding: 30px;
 	height: calc(100vh - #{$headerHeight + 8});
 	// height: auto;
 	position: fixed;
-	left: 25%;
+	left: 21%;
 	top: $headerHeight;
+}
 
+.fullWidth {
+	width: 100%;
+	margin: 0 auto;
 }
 
 .bottomBorder {
@@ -45,6 +46,7 @@ $headerHeight: 85px;
 	height: 2.5px;
 	box-shadow: 0 0 3px 2px #21bcd5, inset 0 0 3px 1px #fcfbff;
 	background-color: #fcfbff;
-	position: absolute;
 	bottom: 0;
+	z-index: 10;
+	position: relative;
 }

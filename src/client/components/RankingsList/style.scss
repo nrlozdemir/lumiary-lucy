@@ -1,0 +1,56 @@
+.rankingsHeader {
+	width:440px;
+	font-family: $font-family-sans-serif;
+	font-size: 24px;
+	font-weight: bold;
+	text-align: right;
+	color: $color-white;
+	height: 29px;
+	float: right;
+	clear: both;
+	margin-right:50px;
+}
+.killFloat {
+	float:none;
+	clear:both;
+	margin:0;
+	padding:0;
+}
+.slick-list {
+    -webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
+    -moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
+    box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
+}
+.slick-dots {
+	bottom: -70px;
+}
+.rankList {
+	vertical-align: top;
+	width:440px;
+	background-color: $color-dark;
+}
+.sliderCell {
+	width: 130px;
+	height: 130px;
+}
+.infoBlock {
+	height: 140px;
+	width: 440px;
+	background-color: $color-charcoal-grey;
+}
+.iconCircle {
+	position: relative;
+    border-radius: 50%;
+    background-color: $color-dark-two;
+    margin-right: 20px;
+	width: 54px;
+	height: 54px;
+	margin-left:30px;
+	top: 20px;
+}
+.iconCircle>div {
+	font-size: 28px;
+	margin:12px;
+	padding-top:12px;
+	color: $color-white;	
+}

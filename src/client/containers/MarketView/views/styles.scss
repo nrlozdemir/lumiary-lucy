@@ -1,0 +1,20 @@
+.subNav {
+  height: 87px;
+  line-height: 87px;
+  padding: 0 137px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  border-bottom: 1px solid #979797;
+
+    a {
+      color: $color-pale-grey;
+      font-size: 18px;
+      text-decoration: none;
+      font-family: $font-family-sans-serif;
+
+      &.active {
+        font-weight: bold;
+      }
+    }
+}

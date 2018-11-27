@@ -16,10 +16,9 @@ const NavBar = props => {
             return (
               key != "undefined" && (
                 <Link
-                  className={style.linkElement}
+                  activeClassName={ style.active }
                   key={idx}
-                  onClick={() => handleClick(key)}
-                  to={`/${key}`}
+                  to={`/${key}/`}
                 >
                   <span>{label}</span>
                 </Link>

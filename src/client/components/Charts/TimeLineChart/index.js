@@ -5,18 +5,21 @@ import PropTypes from "prop-types";
 import { Line } from "react-chartjs-2";
 import "chartjs-plugin-annotation";
 
-class CustomLineGradient extends React.PureComponent {
+class TimeLineChart extends React.PureComponent {
 	render() {
 		const dataCreator = canvas => {
 			const ctx = canvas.getContext("2d");
-			const gradient = ctx.createLinearGradient(0, 0, 1375, 0);
+			let gradient;
 			// Mocks //
-			gradient.addColorStop(0, "green");
-			gradient.addColorStop(0.25, "white");
-			gradient.addColorStop(0.45, "black");
-			gradient.addColorStop(0.65, "orange");
-			gradient.addColorStop(0.75, "white");
-			gradient.addColorStop(1, "red");
+			if (this.props.isGradient) {
+				gradient = ctx.createLinearGradient(0, 0, canvas.width, 0);
+				gradient.addColorStop(0, "#a3a3a9");
+				gradient.addColorStop(0.2, "#ffffff");
+				gradient.addColorStop(0.55, "#11c7d8");
+				gradient.addColorStop(0.75, "#0a0a81");
+				gradient.addColorStop(0.9, "#f5cd00");
+				gradient.addColorStop(1, "#7ba376");
+			}
 			// Mocks //
 			return {
 				labels: [],
@@ -24,7 +27,9 @@ class CustomLineGradient extends React.PureComponent {
 					{
 						fill: true,
 						lineTension: 0.1,
-						backgroundColor: gradient,
+						backgroundColor: this.props.isGradient
+							? gradient
+							: this.props.backgroundColor,
 						borderColor: "rgba(75,192,192,0)",
 						borderCapStyle: "butt",
 						borderDash: [],
@@ -58,8 +63,6 @@ class CustomLineGradient extends React.PureComponent {
 							90,
 							90,
 							90,
-							90,
-							90,
 							90
 						]
 					}
@@ -71,7 +74,6 @@ class CustomLineGradient extends React.PureComponent {
 				afterDraw: chartInstance => {
 					const ctx = chartInstance.chart.ctx;
 					const otherDraws = chartInstance.chart.ctx;
-
 					ctx.beginPath();
 					ctx.moveTo(10, 30);
 					ctx.lineTo(ctx.canvas.clientWidth, 30);
@@ -106,81 +108,77 @@ class CustomLineGradient extends React.PureComponent {
 						"2:30",
 						"2:40",
 						"2:50",
-						"3",
-						"4",
-						"4:10",
-						"4:20",
-						"4:30",
-						"4:40",
-						"4:50",
-						"5",
-						"5:10",
-						"5:20",
-						"5:30",
-						"5:40",
-						"6"
+						"3"
 					];
-
-					otherDraws.font = "20px AnonymousProBold";
+					let avarage = chartInstance.chart.width / labels.length;
+					otherDraws.font = "12px ClanOT";
 					otherDraws.shadowColor = "black";
 					otherDraws.shadowBlur = 6;
 					otherDraws.shadowOffsetX = 2;
 					otherDraws.shadowOffsetY = 2;
-					otherDraws.fillText("Scene 1", 75, 185);
-					otherDraws.fillText("Scene 2", 600, 185);
-					otherDraws.fillText("Scene 3", 750, 185);
-					otherDraws.fillText("Scene 4", 1200, 185);
+					otherDraws.fillText(
+						"Scene 1",
+						avarage * 2,
+						(chartInstance.chart.height / 2) * 1.4
+					);
+					otherDraws.fillText(
+						"Scene 2",
+						avarage * 5,
+						(chartInstance.chart.height / 2) * 1.4
+					);
+					otherDraws.fillText(
+						"Scene 3",
+						avarage * 10,
+						(chartInstance.chart.height / 2) * 1.4
+					);
+					otherDraws.fillText(
+						"Scene 4",
+						avarage * 16,
+						(chartInstance.chart.height / 2) * 1.4
+					);
 
 					labels.forEach(label => {
-						otherDraws.font = "14px AnonymousProBold";
+						otherDraws.font = "10px AnonymousProBold";
 						otherDraws.shadowColor = "black";
 						otherDraws.shadowBlur = 0;
 						otherDraws.shadowOffsetX = 0;
 						otherDraws.shadowOffsetY = 0;
-
 						ctx.fillText(label, i - 5, 12);
-
 						ctx.beginPath();
 						ctx.moveTo(i, 70);
 						ctx.lineTo(i, 20);
 						ctx.stroke();
 
 						ctx.beginPath();
-						ctx.moveTo(i + 15, 60);
-						ctx.lineTo(i + 15, 30);
+						ctx.moveTo(i + avarage * 0.3, 60);
+						ctx.lineTo(i + avarage * 0.3, 30);
 						ctx.stroke();
 
 						ctx.beginPath();
-						ctx.moveTo(i + 30, 60);
-						ctx.lineTo(i + 30, 30);
+						ctx.moveTo(i + avarage * 0.7, 60);
+						ctx.lineTo(i + avarage * 0.7, 30);
 						ctx.stroke();
-						i = i + 45;
+
+						i = i + avarage;
 					});
 
 					ctx.beginPath();
-					ctx.moveTo(175, 30);
-					ctx.lineTo(175, 260);
+					ctx.moveTo(avarage * 4, 30);
+					ctx.lineTo(avarage * 4, 260);
 					ctx.lineWidth = 3;
 					ctx.strokeStyle = "#fff";
 					ctx.stroke();
 
 					ctx.beginPath();
-					ctx.moveTo(575, 30);
-					ctx.lineTo(575, 260);
+					ctx.moveTo(avarage * 7, 30);
+					ctx.lineTo(avarage * 7, 260);
 					ctx.lineWidth = 3;
 					ctx.strokeStyle = "#fff";
 					ctx.stroke();
 
 					ctx.beginPath();
-					ctx.moveTo(700, 30);
-					ctx.lineTo(700, 260);
-					ctx.lineWidth = 3;
-					ctx.strokeStyle = "#fff";
-					ctx.stroke();
-
-					ctx.beginPath();
-					ctx.moveTo(850, 30);
-					ctx.lineTo(850, 260);
+					ctx.moveTo(avarage * 12, 30);
+					ctx.lineTo(avarage * 12, 260);
 					ctx.lineWidth = 3;
 					ctx.strokeStyle = "#fff";
 					ctx.stroke();
@@ -252,7 +250,7 @@ class CustomLineGradient extends React.PureComponent {
 	}
 }
 
-CustomLineGradient.propTypes = {
+TimeLineChart.propTypes = {
 	barName: PropTypes.string,
 	width: PropTypes.string,
 	height: PropTypes.string,
@@ -261,7 +259,8 @@ CustomLineGradient.propTypes = {
 	data: PropTypes.array,
 	isGradient: PropTypes.bool,
 	gradientColors: PropTypes.array,
-	labels: PropTypes.array
+	labels: PropTypes.array,
+	backgroundColor: PropTypes.string
 };
 
-export default CustomLineGradient;
+export default TimeLineChart;

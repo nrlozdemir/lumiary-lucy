@@ -6,9 +6,11 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const neat = require("node-neat");
 const bourbon = require("bourbon");
 const sassVars = require("@epegzz/sass-vars-loader");
+
 const static_url = "//s3.amazonaws.com/quickframe-static-dev/";
 const media_url = "//s3.amazonaws.com/quickframe-media-dev/";
 const S3Plugin = require("webpack-s3-plugin");
+
 const s3_region = "us-east-1";
 const s3_bucket = "quickframe-static-dev";
 const s3_path = "bundles";
@@ -192,7 +194,7 @@ module.exports = {
 				})
 			},
 			{
-				test: /\.(ttf|eot|woff|woff2|gif|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+				test: /\.(ttf|eot|woff|woff2|gif|svg|png|jpeg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
 				use: [{ loader: "file-loader" }]
 			}
 		]

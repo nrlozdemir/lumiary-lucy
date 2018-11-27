@@ -1,0 +1,70 @@
+.versusVideo {
+  width: 290px;
+}
+.versusList {
+  position: relative;
+  background-color: $color-dark;
+}
+.versusRow {
+  width: 757px;
+  background-color: $color-charcoal-grey;
+  float: none;
+  clear: both;
+  margin-left:20px;
+}
+.versusShadowed {
+  height: 175px;
+  -webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
+  box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
+}
+.endOfRow {
+  height: 40px !important;
+}
+.versusTitle, .versusTitleBold, .versusSubTitle {
+  height: 23px;
+  font-size: 18px;
+  font-weight: normal;
+  color: $color-pale-grey;
+}
+.versusTitle {
+  font-family: $font-family-clanOT;
+}
+.versusTitleBold {
+  font-family: $font-family-clanOTNews;
+}
+.versusSubTitle {
+  font-family: $font-family-clanOT;
+  font-weight: bold;
+  margin-top: 12px;
+}
+.versusCategory {
+  height: 29px;
+  font-family: $font-family-sans-serif;
+  font-size: 24px;
+  font-weight: bold;
+  margin-top: 12px;
+}
+.versusCellLeft, .versusCellRight, .versusCellMid {
+  float:left;
+  clear:none;
+}
+.versusCellLeft .video, .versusCellRight .video, .versusCellMid .video {
+  margin:0;
+}
+.versusCellLeft, .versusCellRight {
+  width:290px;
+}
+.versusCellMid {
+  width: 175px;
+}
+.versusCellLeft h3, .versusCellMid h3, .versusCellRight h3 {
+  text-align: center;
+  width:100%;
+  background-color: $color-dark;
+}
+.customVideo {
+  display: inline-flex;
+  position: relative;
+  margin:0;
+}

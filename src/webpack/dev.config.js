@@ -3,8 +3,10 @@ const fs = require("fs");
 const webpack = require("webpack");
 const neat = require("node-neat");
 const bourbon = require("bourbon");
-const BundleAnalyzerPlugin = require("webpack-bundle-analyzer").BundleAnalyzerPlugin;
+const BundleAnalyzerPlugin = require("webpack-bundle-analyzer")
+	.BundleAnalyzerPlugin;
 const sassVars = require("@epegzz/sass-vars-loader");
+
 const static_url = "https://s3.amazonaws.com/quickframe-static-dev/";
 const media_url = "https://s3.amazonaws.com/quickframe-media-dev/";
 const breakpoints = {
@@ -77,7 +79,10 @@ module.exports = {
 				test: /\.jsx?$/,
 				//exclude: /node_modules/,
 				include: path.resolve(__dirname, "..", "client"),
-				use: [{ loader: "react-hot-loader/webpack" }, { loader: "babel-loader" }]
+				use: [
+					{ loader: "react-hot-loader/webpack" },
+					{ loader: "babel-loader" }
+				]
 			},
 			{
 				test: /\.(scss|css)$/,
@@ -148,8 +153,15 @@ module.exports = {
 				]
 			},
 			{
-				test: /\.(ttf|eot|woff|woff2|gif|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-				exclude: [/\.js$/, /\.html$/, /\.json$/, /\.ejs$/, /\.pug$/, /node_modules/],
+				test: /\.(ttf|eot|woff|woff2|gif|svg|png|jpeg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+				exclude: [
+					/\.js$/,
+					/\.html$/,
+					/\.json$/,
+					/\.ejs$/,
+					/\.pug$/,
+					/node_modules/
+				],
 				use: [{ loader: "file-loader" }]
 			}
 		]

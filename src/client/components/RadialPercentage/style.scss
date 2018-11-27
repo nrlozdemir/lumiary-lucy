@@ -1,0 +1,81 @@
+/*
+ * react-circular-progressbar styles
+ *
+ * All of the styles in this file are optional and configurable!
+ */
+.circus {
+
+}
+.circularBells {
+    position: relative;
+    border-radius: 50%;
+    background-color: #2f2e3c;
+    width: 64px;
+    height: 64px;
+    padding-top: 24px;
+    padding-left: 20px;
+}
+.xradialPercentage {
+  margin-top: 50px;
+}
+.CircularProgressbar {
+  /*
+   * This fixes an issue where the CircularProgressbar svg has
+   * 0 width inside a "display: flex" container, and thus not visible.
+   *
+   * If you're not using "display: flex", you can remove this style.
+   */
+  width: 100%;
+}
+
+.CircularProgressbar .CircularProgressbar-path {
+  stroke: #3e98c7;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.CircularProgressbar .CircularProgressbar-trail {
+  stroke: #d6d6d6;
+}
+
+.CircularProgressbar .CircularProgressbar-text {
+  fill: #3e98c7;
+  font-size: 20px;
+  dominant-baseline: middle;
+  text-anchor: middle;
+}
+
+.CircularProgressbar .CircularProgressbar-background {
+  fill: #d6d6d6;
+}
+
+/*
+ * Sample background styles. Use these with e.g.:
+ *
+ *   <CircularProgressbar
+ *     className="CircularProgressbar-inverted"
+ *     background
+ *     percentage={50}
+ *   />
+ */
+.CircularProgressbar.inverted .CircularProgressbar-background {
+  fill: #3e98c7;
+}
+
+.CircularProgressbar.inverted .CircularProgressbar-text {
+  fill: #fff;
+}
+
+.CircularProgressbar.inverted .CircularProgressbar-path {
+  stroke: #f00;
+}
+
+.CircularProgressbar.inverted .CircularProgressbar-trail {
+  stroke: transparent;
+}
+
+
+
+
+
+.CircularProgressbar-path       { stroke: red; }

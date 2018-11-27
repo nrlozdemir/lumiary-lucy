@@ -1,7 +1,8 @@
 import React from "react";
 import { DragSource } from "react-dnd";
-import cx from "classnames";
-
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { actions as libraryActions } from "Reducers/library";
 import style from "./styles.scss";
 
 const videoSource = {
@@ -13,6 +14,7 @@ const videoSource = {
 		if (!monitor.didDrop()) {
 			return;
 		}
+		props.setVideoObject(props.video);
 		return props.router.push(`/library/video/${props.video.id}`);
 	}
 };
@@ -32,34 +34,34 @@ class Video extends React.Component {
 			connectDragSource,
 			children,
 			className,
-			video
+			video,
+			styleOverride
 		} = this.props;
 		return connectDragSource(
-			<div className={style.video}>
+			<div className={styleOverride ? styleOverride : style.video}>
 				<div className={style.videoContainer}>
-					<img
-						className={cx(style.videoBackground, className)}
-						src={video.src}
-					/>
+					<div key={video.id + "list"} className={style.videoContainer}>
+						<video id={video.id + "list"} width="100%">
+							<source src={video.video} type="video/mp4" />
+						</video>
+					</div>
 					<span className={style.videoIcon + " " + "qf-iconDrag"} />
-				</div>
-				<div className={style.infoContainer}>
-					<div className={style.videoImage}>
-						<img
-							className={cx(style.videoBackground, className)}
-							src={video.src}
-						/>
-						<br />
-						<p className={style.videoTitle}>Meet the Puppet</p>
-					</div>
-					<div className={style.publishDate}>
-						Pubslished on: <br />
-						03/12/2018
-					</div>
 				</div>
 			</div>
 		);
 	}
 }
+const mapStateToProps = state => {
+	return state;
+};
 
-export default DragSource("video", videoSource, collect)(Video);
+const mapDispatchToProps = dispatch => ({
+	...bindActionCreators(libraryActions, dispatch)
+});
+
+export const VideoComponent = DragSource("video", videoSource, collect)(Video);
+
+export default connect(
+	mapStateToProps,
+	mapDispatchToProps
+)(VideoComponent);

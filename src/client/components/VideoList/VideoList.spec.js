@@ -4,6 +4,8 @@ import snapshot from "snap-shot-it";
 import { create } from "react-test-renderer";
 import expect from "expect";
 import VideoList from "./index";
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
 
 const mockProps = {
 	videos: [
@@ -41,19 +43,24 @@ const mockProps = {
 		}
 	]
 };
+const mockStore = configureStore();
 
-describe("Banner Component", () => {
+describe("VideoList Component", () => {
 	let wrapper;
+	const Comp = () => (
+		<Provider store={mockStore({})}>
+			<VideoList {...mockProps} />
+		</Provider>
+	);
 	beforeEach(() => {
-		wrapper = mount(<VideoList {...mockProps} />);
+		wrapper = mount(<Comp />);
 	});
 	describe("Rendering", () => {
 		it("matches snapshot", () => {
-			const testRenderer = create(<VideoList {...mockProps} />);
+			const testRenderer = create(<Comp />);
 			snapshot(testRenderer.toJSON());
 		});
 		it("Should be create video element", () => {
-			console.log();
 			expect(wrapper.find("div DragSource(Video)").length).toEqual(
 				mockProps.videos.length
 			);

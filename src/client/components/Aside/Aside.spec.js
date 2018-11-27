@@ -2,19 +2,27 @@ import React from "react";
 import { mount } from "enzyme";
 import snapshot from "snap-shot-it";
 import { create } from "react-test-renderer";
+import { Provider } from "react-redux";
+import configureStore from "redux-mock-store";
 import Aside from "./index";
 
 const mockProps = {
 	router: {}
 };
+const mockStore = configureStore();
 
-describe("Banner Component", () => {
+describe("Aside Component", () => {
+	const Comp = () => (
+		<Provider store={mockStore({})}>
+			<Aside {...mockProps} />
+		</Provider>
+	);
 	beforeEach(() => {
-		mount(<Aside {...mockProps} />);
+		mount(<Comp />);
 	});
 	describe("Rendering", () => {
 		it("matches snapshot", () => {
-			const testRenderer = create(<Aside {...mockProps} />);
+			const testRenderer = create(<Comp />);
 			snapshot(testRenderer.toJSON());
 		});
 	});
