@@ -15,10 +15,15 @@ jobs:
           AWS_DEFAULT_REGION: us-east-1
           BASENAME: /
           REDIS_HOST: redis
+          FEATURE_CONTACT: 1
+          FEATURE_EXPLORE: 1
+          FEATURE_LOGIN: 1
+          FEATURE_SIGNUP: 1
       - image: redis
     steps:
 
       - checkout
+      - setup_remote_docker
 
       # Download and cache dependencies
       - restore_cache:
@@ -46,6 +51,7 @@ jobs:
 
       # Send test coverage to Code Climate
       - run: ./cc-test-reporter after-build --coverage-input-type lcov --exit-code $?
+      - run: .circleci/deploy.sh
 
       # stats for circleci
       - store_test_results:
