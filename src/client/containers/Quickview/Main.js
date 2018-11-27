@@ -2,11 +2,13 @@
 
 import React, { Component } from 'react'
 
+import variables from "../../scss/variables.scss";
 import style from "./style.scss";
 import PropTypes from "prop-types";
 import VersusList from "../../components/VersusList";
 import RankingsList from "../../components/RankingsList";
 import Dropdown from "../../components/Dropdown";
+import {AgeIcon, SexIcon} from "../../components/Form/Controls/Radio";
 
 class Quickview extends Component {
 
@@ -106,6 +108,23 @@ class Quickview extends Component {
 
 		return (
 			<React.Fragment>
+				<div className={style.quickviewHeader}>
+					<div className={style.quickviewHeader_cellLeft}>
+						<div className={style.genders}><icon className="qf-iconMale" /><span>Male</span></div>
+						<div className={style.genders}><icon className="qf-iconFemale" /><span>Female</span></div>
+					</div>
+					<div className={style.quickviewHeader_cellMid}>
+					<table><tr>
+						<td><img src={require("./../../assets/crosshair.png")} /></td>
+						<td>Age range:</td>
+						<td>18-24</td>
+					</tr></table>
+					</div>
+					<div className={style.quickviewHeader_cellRight}>
+						<span className="qf-iconLeft-Arrow"></span> views <span className="qf-iconRight-Arrow"></span>
+					</div>
+					<hr />
+				</div>
 				<div className={style.quickviewContent}>
 					<div className={style.VersusList}>
 						<VersusList videos={versus} />

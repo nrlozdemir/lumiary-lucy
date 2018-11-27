@@ -20,6 +20,7 @@ class VersusRow extends React.Component {
 		return (
 			<React.Fragment>
 				<div className={style.versusRow} style={{ backgroundColor: '#22212f'}}>
+					<div className={style.versusShadowed}>
 					<div className={style.versusCellLeft}>
 						<Video styleOverride={style.customVideo} key={video.vl.id} video={video.vl} />
 					</div>
@@ -28,6 +29,7 @@ class VersusRow extends React.Component {
 					</div>
 					<div className={style.versusCellRight}>
 						<Video styleOverride={style.customVideo} key={video.vr.id} video={video.vr} />
+					</div>
 					</div>
 				</div>
 				<div className='versusRow endOfRow'>
