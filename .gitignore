@@ -44,8 +44,6 @@ src/webpack/local-stats.json
 
 src/build/*
 
-package-lock.json
-
 # tests
 .nyc_output
 #src/test-results/*.xml
