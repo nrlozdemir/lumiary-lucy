@@ -62,7 +62,7 @@ module.exports = {
 		new webpack.optimize.AggressiveMergingPlugin(),
 		new webpack.optimize.OccurrenceOrderPlugin(),
 		new UglifyJsPlugin({
-			test: /\.js(\?.*)?$/i,
+			test: /\.(js|jsx)$/i,
 			uglifyOptions: {
 				warnings: false, // Suppress uglification warnings
 				mangle: true,
