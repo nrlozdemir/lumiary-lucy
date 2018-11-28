@@ -165,22 +165,22 @@ class TimeLineChart extends React.PureComponent {
 					ctx.beginPath();
 					ctx.moveTo(avarage * 4, 30);
 					ctx.lineTo(avarage * 4, 260);
-					ctx.lineWidth = 3;
-					ctx.strokeStyle = "#fff";
+					ctx.lineWidth = 1;
+					ctx.strokeStyle = this.props.color;
 					ctx.stroke();
 
 					ctx.beginPath();
 					ctx.moveTo(avarage * 7, 30);
 					ctx.lineTo(avarage * 7, 260);
-					ctx.lineWidth = 3;
-					ctx.strokeStyle = "#fff";
+					ctx.lineWidth = 1;
+					ctx.strokeStyle = this.props.color;
 					ctx.stroke();
 
 					ctx.beginPath();
-					ctx.moveTo(avarage * 12, 30);
-					ctx.lineTo(avarage * 12, 260);
-					ctx.lineWidth = 3;
-					ctx.strokeStyle = "#fff";
+					ctx.moveTo(avarage * 19, 30);
+					ctx.lineTo(avarage * 19, 260);
+					ctx.lineWidth = 1;
+					ctx.strokeStyle = this.props.color;
 					ctx.stroke();
 
 					ctx.beginPath();
@@ -199,9 +199,6 @@ class TimeLineChart extends React.PureComponent {
 					height="100"
 					plugins={plugins}
 					options={{
-						layout: {
-							padding: 10
-						},
 						legend: {
 							display: false
 						},
@@ -229,7 +226,8 @@ class TimeLineChart extends React.PureComponent {
 									ticks: {
 										min: 0,
 										max: 120,
-										stepSize: 20
+										stepSize: 20,
+										barPercentage: 1
 									}
 								}
 							],

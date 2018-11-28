@@ -1,9 +1,19 @@
+.sliderWrapper {
+	border: 1px solid $color-tealish;
+	background-color: $color-charcoal-grey;
+}
 .word {
 	background: $color-dark-three;
-	border: 1px solid $color-tealish !important;
 	color: $color-tealish;
+	h2 {
+		text-align: center;
+		font-size: 12px;
+		border-bottom: 1px solid $color-tealish;
+		padding: 8px 0;
+	}
 	h3 {
 		font-size: 12px;
 		font-family: $font-family-clanOTBook;
+		border-top: 1px solid $color-tealish !important;
 	}
 }
