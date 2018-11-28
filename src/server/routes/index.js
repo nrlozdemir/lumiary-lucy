@@ -1,4 +1,6 @@
 import matchRoute from '../utils/match'
+import basicAuth from 'express-basic-auth'
+
 const cache = require('express-redis-cache')({
   host: process.env.REDIS_HOST
 })
@@ -12,6 +14,15 @@ module.exports = (app) => {
       return { status: 'upppp' }
     }
   }))
+
+  if (process.env.ENVIRONMENT === 'qa' || process.env.ENVIRONMENT === 'staging') {
+    app.use(basicAuth({
+        users: {
+            [process.env.BASIC_AUTH_USER]: process.env.BASIC_AUTH_PASSWORD,
+        },
+        challenge: true
+    }))
+  }
 
     //S3 Uploads
   app.use('/s3', require('react-dropzone-s3-uploader/s3router')({
