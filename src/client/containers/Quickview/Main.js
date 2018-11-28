@@ -115,7 +115,7 @@ class Quickview extends Component {
 					</div>
 					<div className={style.quickviewHeader_cellMid}>
 					<table><tr>
-						<td><img src={require("./../../assets/crosshair.png")} /></td>
+						<td><img src={`https://s3.amazonaws.com/quickframe-static/img/lumiere/crosshair.png`} /></td>
 						<td>Age range:</td>
 						<td>18-24</td>
 					</tr></table>
