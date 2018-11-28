@@ -9,7 +9,7 @@ const ColorTone = () => (
 		customBodyClass="bg-dark-three box-shadow-black-1 color-white"
 	>
 		<div className="col-12 p-25">
-			<TimeLineChart isGradient />
+			<TimeLineChart isGradient color="#fff" />
 		</div>
 	</Card>
 );
