@@ -3,6 +3,7 @@ const fs = require("fs");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const neat = require("node-neat");
 const bourbon = require("bourbon");
 const sassVars = require("@epegzz/sass-vars-loader");
@@ -45,10 +46,6 @@ module.exports = {
 				API_ROOT: JSON.stringify("https://api.qa.quickframe.com"),
 				API_VERSION: JSON.stringify("v1"),
                 BREAKPOINTS: breakpoints,
-                FEATURE_CONTACT: JSON.stringify(true),
-                FEATURE_EXPLORE: JSON.stringify(true),
-                FEATURE_LOGIN: 	JSON.stringify(true),
-                FEATURE_SIGNUP: JSON.stringify(true)
 			}
 		}),
 
@@ -64,23 +61,26 @@ module.exports = {
 		new webpack.optimize.ModuleConcatenationPlugin(),
 		new webpack.optimize.AggressiveMergingPlugin(),
 		new webpack.optimize.OccurrenceOrderPlugin(),
-		new webpack.optimize.UglifyJsPlugin({
-			mangle: true,
-			compress: {
+		new UglifyJsPlugin({
+			test: /\.js(\?.*)?$/i,
+			uglifyOptions: {
 				warnings: false, // Suppress uglification warnings
-				pure_getters: true,
-				screw_ie8: true,
-				conditionals: true,
-				unused: true,
-				comparisons: true,
-				sequences: true,
-				dead_code: true,
-				evaluate: true,
-				if_return: true,
-				join_vars: true
-			},
-			output: {
-				comments: false
+				mangle: true,
+				compress: {
+					pure_getters: true,
+					conditionals: true,
+					unused: true,
+					comparisons: true,
+					sequences: true,
+					dead_code: true,
+					evaluate: true,
+					if_return: true,
+					join_vars: true
+				},
+				ie8: false,
+				output: {
+					comments: false
+				},
 			},
 			exclude: [/\.min\.js$/gi] // skip pre-minified libs
 		}),
