@@ -51,7 +51,7 @@ module.exports = {
 
 		new webpack.optimize.CommonsChunkPlugin({
 			name: "vendor",
-			filename: "vendor.[chunkhash].js",
+			filename: "lumiere-vendor.[chunkhash].js",
 			children: false,
 			minChunks(module) {
 				return module.context && module.context.indexOf("node_modules") >= 0;
