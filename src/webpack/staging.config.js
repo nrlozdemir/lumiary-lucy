@@ -8,12 +8,12 @@ const neat = require("node-neat");
 const bourbon = require("bourbon");
 const sassVars = require("@epegzz/sass-vars-loader");
 
-const static_url = "//s3.amazonaws.com/quickframe-static-dev/";
-const media_url = "//s3.amazonaws.com/quickframe-media-dev/";
+const static_url = "//s3.amazonaws.com/quickframe-static-staging/";
+const media_url = "//s3.amazonaws.com/quickframe-media-staging/";
 const S3Plugin = require("webpack-s3-plugin");
 
 const s3_region = "us-east-1";
-const s3_bucket = "quickframe-static-dev";
+const s3_bucket = "quickframe-static-staging";
 const s3_path = "bundles";
 const breakpoints = {
 	xsmall: 320,
