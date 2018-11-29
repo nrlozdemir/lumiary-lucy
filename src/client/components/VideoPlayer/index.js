@@ -1,7 +1,9 @@
 import React from "react";
 import style from "./styles.scss";
+import { randomString } from "Utils/";
 
-const VideoPlayer = ({ data, videoId, fontSize }) => {
+const VideoPlayer = ({ data, fontSize }) => {
+	const videoId = randomString(5);
 	return (
 		<div className={style.videoContainer}>
 			<video className={style.video} id={videoId}>
