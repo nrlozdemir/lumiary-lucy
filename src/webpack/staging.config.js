@@ -31,7 +31,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, "..", "build"),
 		filename: "[name].[chunkhash].js",
-		publicPath: `${static_url}bundles/`
+		publicPath: `${static_url}lumiere-bundles/`
 	},
 
 	devtool: "source-map",
@@ -51,7 +51,7 @@ module.exports = {
 
 		new webpack.optimize.CommonsChunkPlugin({
 			name: "vendor",
-			filename: "lumiere-vendor.[chunkhash].js",
+			filename: "vendor.[chunkhash].js",
 			children: false,
 			minChunks(module) {
 				return module.context && module.context.indexOf("node_modules") >= 0;
@@ -112,15 +112,15 @@ module.exports = {
 					var htmlOutput = html
 						.replace(
 							"bundle.min.js",
-							`${static_url}bundles/${stats.assetsByChunkName.main[0]}`
+							`${static_url}lumiere-bundles/${stats.assetsByChunkName.main[0]}`
 						)
 						.replace(
 							"vendor.min.js",
-							`${static_url}bundles/${stats.assetsByChunkName.vendor}`
+							`${static_url}lumiere-bundles/${stats.assetsByChunkName.vendor}`
 						)
 						.replace(
 							"bundle.min.css",
-							`${static_url}bundles/${stats.assetsByChunkName.main[1]}`
+							`${static_url}lumiere-bundles/${stats.assetsByChunkName.main[1]}`
 						);
 
 					fs.writeFileSync(pug, htmlOutput);
