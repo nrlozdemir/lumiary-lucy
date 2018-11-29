@@ -5,6 +5,8 @@ const cache = require('express-redis-cache')({
   host: process.env.REDIS_HOST
 })
 
+cache.del('*', (error, numDeleted) => console.log(`Deleted ${numDeleted} cache entries.`)) // Force-clear cache on app startup
+
 module.exports = (app) => {
 
   // HEALTH
