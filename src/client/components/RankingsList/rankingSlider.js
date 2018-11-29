@@ -54,6 +54,11 @@ class RankingSlider extends React.Component {
 						</div>
 						<div className="col-9">
 							<div className={style.slidecontainer}>
+								<div className={style.bestToWorst}>
+									<div className={style.bestToWorstWord}>Best</div>
+									<div className={style.line} />
+									<div className={style.bestToWorstWord}>Worst</div>
+								</div>
 								<input
 									type="range"
 									min="1"

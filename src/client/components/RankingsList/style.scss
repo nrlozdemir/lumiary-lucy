@@ -5,11 +5,11 @@
 	text-align: right;
 	color: $color-white;
 	clear: both;
+	margin-top: 10px;
 }
 
 .rankList {
-	background-color: $color-charcoal-grey;
-	margin-bottom: 20px;
+	height: 230px;
 }
 .sliderCell {
 	div {
@@ -28,7 +28,7 @@
 }
 
 .infoBlock {
-	padding: 30px;
+	padding: 30px 10px;
 	background-color: $color-charcoal-grey;
 }
 
@@ -42,9 +42,12 @@
 	color: $color-white;
 }
 .versusShadowed {
+	position: relative;
+	z-index: 2;
 	display: flex;
 	flex-wrap: nowrap;
 	overflow-x: hidden;
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 }
 .slidecontainer {
 	width: 100%;
@@ -78,4 +81,17 @@
 	height: 25px;
 	background: #4caf50;
 	cursor: pointer;
+}
+.bestToWorst {
+	display: flex;
+	font-size: 14px;
+	font-family: $font-family-sans-serif;
+	.bestToWorstWord {
+		flex: 1;
+	}
+	.line {
+		flex: 5;
+		border-top: 1px dashed $color-pale-grey;
+		margin-top: 8px;
+	}
 }
