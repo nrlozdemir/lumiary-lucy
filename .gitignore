@@ -6,6 +6,8 @@
 *.komodoproject
 .komodotools
 
+# Built pug files
+src/server/views/index.pug
 
 # npm, node
 node_modules
@@ -41,8 +43,6 @@ npm-debug.log
 src/webpack/local-stats.json
 
 src/build/*
-
-package-lock.json
 
 # tests
 .nyc_output

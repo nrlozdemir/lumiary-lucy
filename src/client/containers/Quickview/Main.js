@@ -145,7 +145,9 @@ class Quickview extends Component {
 					<div className="col-6">
 						<div className={style.ageContainer}>
 							<div>
-								<img src={require("./../../assets/crosshair.png")} />
+								<img
+									src={`https://s3.amazonaws.com/quickframe-static/img/lumiere/crosshair.png`}
+								/>
 							</div>
 							<div className={style.ageRangeText}>Age Range:</div>
 							<div>

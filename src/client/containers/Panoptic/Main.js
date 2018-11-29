@@ -38,7 +38,7 @@ class Panoptic extends Component {
 						</div>
 
 						<figure className={style.chart}>
-							<img src={require("../../assets/group.png")} />
+							<img src="https://s3.amazonaws.com/quickframe-static-qa/img/lumiere/group.png" />
 						</figure>
 					</div>
 

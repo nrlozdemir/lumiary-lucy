@@ -37,3 +37,4 @@ COPY --from=releaseDependencies /application/node_modules /application/node_modu
 #RUN npm rebuild node-sass
 WORKDIR /application
 CMD [ "npm", "run", "start" ]
+EXPOSE 80

@@ -8,12 +8,12 @@ const neat = require("node-neat");
 const bourbon = require("bourbon");
 const sassVars = require("@epegzz/sass-vars-loader");
 
-const static_url = "//s3.amazonaws.com/quickframe-static/";
-const media_url = "//s3.amazonaws.com/quickframe-media/";
+const static_url = "//s3.amazonaws.com/quickframe-static-qa/";
+const media_url = "//s3.amazonaws.com/quickframe-media-qa/";
 const S3Plugin = require("webpack-s3-plugin");
 
 const s3_region = "us-east-1";
-const s3_bucket = "quickframe-static";
+const s3_bucket = "quickframe-static-qa";
 const s3_path = "bundles";
 const breakpoints = {
 	xsmall: 320,
@@ -43,9 +43,9 @@ module.exports = {
 				STATIC_URL: JSON.stringify(static_url),
 				MEDIA_URL: JSON.stringify(media_url),
 				BASENAME: JSON.stringify("/"),
-				API_ROOT: JSON.stringify("https://api-stage.quickframe.com"),
+				API_ROOT: JSON.stringify("https://api.qa.quickframe.com"),
 				API_VERSION: JSON.stringify("v1"),
-				BREAKPOINTS: breakpoints
+                BREAKPOINTS: breakpoints,
 			}
 		}),
 
@@ -100,16 +100,11 @@ module.exports = {
 			basePath: s3_path
 		}),
 
-		// https://s3.amazonaws.com/quickframe-static/bundles/vendor.8f8c6bc35e82bf656a0d.js
-		// https://s3.amazonaws.com/quickframe-static-dev/bundles/vendor.8f8c6bc35e82bf656a0d.js
-
 		function() {
 			this.plugin("done", statsData => {
 				const stats = statsData.toJson();
 				const tmpl = path.join(__dirname, "../server/views", "index.tmpl");
 				const pug = path.join(__dirname, "../server/views", "index.pug");
-
-				console.log(stats.assetsByChunkName);
 
 				if (!stats.errors.length) {
 					var html = fs.readFileSync(tmpl, "utf8");
@@ -203,7 +198,7 @@ module.exports = {
 				})
 			},
 			{
-				test: /\.(ttf|eot|woff|woff2||gif|svg|png|jpeg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
+				test: /\.(ttf|eot|woff|woff2|gif|svg|png|jpeg)(\?v=[0-9]\.[0-9]\.[0-9])?$/,
 				use: [{ loader: "file-loader" }]
 			}
 		]

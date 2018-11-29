@@ -51,7 +51,11 @@ module.exports = {
 				BASENAME: JSON.stringify("/"),
 				API_ROOT: JSON.stringify("https://api-local.quickframe.com:8080"),
 				API_VERSION: JSON.stringify("v1"),
-				BREAKPOINTS: breakpoints
+				BREAKPOINTS: breakpoints,
+				FEATURE_CONTACT: JSON.stringify(true),
+				FEATURE_EXPLORE: JSON.stringify(true),
+				FEATURE_LOGIN: 	JSON.stringify(true),
+				FEATURE_SIGNUP: JSON.stringify(true)
 			}
 		}),
 
@@ -65,12 +69,27 @@ module.exports = {
 		new webpack.DllReferencePlugin({
 			context: __dirname,
 			manifest: require("../build/library/library.json")
-		})
+		}),
 		// , new BundleAnalyzerPlugin({
 		//   analyzerMode: 'server',
 		//   generateStatsFile: true,
 		//   statsOptions: { source: false }
 		// })
+		function() {
+			this.plugin("done", (statsData) => {
+			  const stats = statsData.toJson()
+			  const tmpl = path.join(__dirname, '../server/views', 'index.tmpl')
+			  const pug = path.join(__dirname, '../server/views', 'index.pug')
+	  
+			  console.log(stats.assetsByChunkName)
+	  
+			  if (!stats.errors.length) {
+				var html = fs.readFileSync(tmpl, "utf8")
+	  
+				fs.createReadStream(tmpl).pipe(fs.createWriteStream(pug));
+			  }
+			})
+		}
 	],
 
 	module: {
