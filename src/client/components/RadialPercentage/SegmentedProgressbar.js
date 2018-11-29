@@ -24,10 +24,10 @@ class SegmentedProgressbar extends React.Component {
 		ctx.strokeStyle = "#fff";
 		ctx.lineWidth = 1;
 		ctx.stroke();
-		for (var value = 0; value <= 750; value += 25) {
-			var scaledValue = this.scaleIntoRange(0, 750, 0, 360, value);
-			var degrees = scaledValue - 90;
-			var shorterLine = (outerRadius - innerRadius) / 2;
+		for (let value = 0; value <= 750; value += 25) {
+			let scaledValue = this.scaleIntoRange(0, 750, 0, 360, value);
+			let degrees = scaledValue - 90;
+			let shorterLine = (outerRadius - innerRadius) / 2;
 			if (this.props.percentage * 10 > value) {
 				this.radiantLine(
 					cx,
@@ -61,12 +61,12 @@ class SegmentedProgressbar extends React.Component {
 		color
 	) {
 		const component = this.canvas;
-		var ctx = component.getContext("2d");
-		var radians = (degrees * Math.PI) / 180;
-		var innerX = centerX + innerRadius * Math.cos(radians);
-		var innerY = centerY + innerRadius * Math.sin(radians);
-		var outerX = centerX + outerRadius * Math.cos(radians);
-		var outerY = centerY + outerRadius * Math.sin(radians);
+		const ctx = component.getContext("2d");
+		const radians = (degrees * Math.PI) / 180;
+		const innerX = centerX + innerRadius * Math.cos(radians);
+		const innerY = centerY + innerRadius * Math.sin(radians);
+		const outerX = centerX + outerRadius * Math.cos(radians);
+		const outerY = centerY + outerRadius * Math.sin(radians);
 
 		ctx.beginPath();
 		ctx.moveTo(innerX, innerY);
@@ -77,7 +77,7 @@ class SegmentedProgressbar extends React.Component {
 	}
 
 	scaleIntoRange(minActual, maxActual, minRange, maxRange, value) {
-		var scaled =
+		const scaled =
 			((maxRange - minRange) * (value - minRange)) / (maxActual - minActual) +
 			minRange;
 		return scaled;
