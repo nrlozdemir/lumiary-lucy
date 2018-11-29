@@ -14,7 +14,7 @@ class SegmentedProgressbar extends React.Component {
 		var innerRadius = 30;
 		var outerRadius = 90;
 		const component = this.canvas;
-		var ctx = component.getContext("2d");
+		const ctx = component.getContext("2d");
 		ctx.beginPath();
 		ctx.arc(67, 67, 60, 0, 2 * Math.PI);
 		ctx.fillStyle = "#282333";
