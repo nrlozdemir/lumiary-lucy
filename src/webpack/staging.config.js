@@ -14,7 +14,7 @@ const S3Plugin = require("webpack-s3-plugin");
 
 const s3_region = "us-east-1";
 const s3_bucket = "quickframe-static-staging";
-const s3_path = "bundles";
+const s3_path = "bundles/lumiere";
 const breakpoints = {
 	xsmall: 320,
 	small: 414,
