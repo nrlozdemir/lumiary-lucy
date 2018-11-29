@@ -146,8 +146,8 @@ html {
 }
 
 body {
-	-webkit-overflow-scrolling: touch;
-	background: $color-dark;
+	-webkit-overflow-scrolling: touch !important;
+	background: $color-dark !important;
 }
 
 @font-face {
