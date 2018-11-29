@@ -31,7 +31,7 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, "..", "build"),
 		filename: "[name].[chunkhash].js",
-		publicPath: `${static_url}lumiere-bundles/`
+		publicPath: `${static_url}bundles/lumiere/`
 	},
 
 	devtool: "source-map",
@@ -112,15 +112,15 @@ module.exports = {
 					var htmlOutput = html
 						.replace(
 							"bundle.min.js",
-							`${static_url}lumiere-bundles/${stats.assetsByChunkName.main[0]}`
+							`${static_url}bundles/lumiere/${stats.assetsByChunkName.main[0]}`
 						)
 						.replace(
 							"vendor.min.js",
-							`${static_url}lumiere-bundles/${stats.assetsByChunkName.vendor}`
+							`${static_url}bundles/lumiere/${stats.assetsByChunkName.vendor}`
 						)
 						.replace(
 							"bundle.min.css",
-							`${static_url}lumiere-bundles/${stats.assetsByChunkName.main[1]}`
+							`${static_url}bundles/lumiere/${stats.assetsByChunkName.main[1]}`
 						);
 
 					fs.writeFileSync(pug, htmlOutput);
