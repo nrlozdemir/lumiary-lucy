@@ -1,5 +1,6 @@
 import React from "react";
 import style from "./style.scss";
+import PropTypes from "prop-types";
 import VideoPlayer from "../VideoPlayer";
 
 class RankingSlider extends React.Component {
@@ -24,12 +25,12 @@ class RankingSlider extends React.Component {
 	}
 	render() {
 		const iconoclas = {
-			facebook: "qf-iconFacebook",
-			instagram: "qf-iconInstagram",
-			snapchat: "qf-iconSnapchat",
-			youtube: "qf-iconYotube",
-			twitter: "qf-iconTwitter",
-			pinterest: "qf-iconPinterest"
+			facebook: "Facebook",
+			instagram: "Instagram",
+			snapchat: "Snapchat",
+			youtube: "Youtube",
+			twitter: "Twitter",
+			pinterest: "Pinterest"
 		};
 		const { platformItem } = this.props;
 		return (
@@ -76,5 +77,9 @@ class RankingSlider extends React.Component {
 		);
 	}
 }
+
+RankingSlider.propTypes = {
+	platformItem: PropTypes.object
+};
 
 export default RankingSlider;
