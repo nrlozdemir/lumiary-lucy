@@ -1,4 +1,4 @@
-const pieData = {
+const pieData = () => ({
 	labels: ["Grey", "Tealish", "Hard Grey", "Hi"],
 	datasets: [
 		{
@@ -12,7 +12,7 @@ const pieData = {
 			hoverBackgroundColor: ["#eaeaea", "#1fbad2", "#6c6c6c", "#18212f"]
 		}
 	]
-};
+});
 
 const barChart = [
 	{ data: [50], avarage: 60, label: ["1M Views"] },
