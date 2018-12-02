@@ -3,9 +3,10 @@ import { mount } from "enzyme";
 import snapshot from "snap-shot-it";
 import { create } from "react-test-renderer";
 import expect from "expect";
-import VideoList from "./index";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
+import { fromJS } from "immutable";
+import VideoList from "./index";
 
 const mockProps = {
 	videos: [
@@ -48,7 +49,7 @@ const mockStore = configureStore();
 describe("VideoList Component", () => {
 	let wrapper;
 	const Comp = () => (
-		<Provider store={mockStore({})}>
+		<Provider store={mockStore({ library: fromJS({ selectedVideos: [] }) })}>
 			<VideoList {...mockProps} />
 		</Provider>
 	);

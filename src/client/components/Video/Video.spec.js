@@ -16,6 +16,7 @@ const mockProps = {
 	video: "https://picsum.photos/1000/400/?random",
 	connectDragSource: identity,
 	setVideoObject: identity,
+	selectedVideos: [],
 	router: {
 		push: identity
 	}
