@@ -1,31 +1,38 @@
 "use strict";
 
-import React, { Component } from 'react'
+import React, { Component } from "react";
 
-import variables from "../../scss/variables.scss";
 import style from "./style.scss";
-import PropTypes from "prop-types";
 import VersusList from "../../components/VersusList";
 import RankingsList from "../../components/RankingsList";
-import Dropdown from "../../components/Dropdown";
-import {AgeIcon, SexIcon} from "../../components/Form/Controls/Radio";
+import Select from "./../../components/Form/Controls/Select/index";
 
 class Quickview extends Component {
-
+	constructor(props) {
+		super(props);
+		this.state = {
+			ageRange: { value: "18-24", label: "18-24" }
+		};
+	}
+	onChange(e) {
+		this.setState({ ageRange: e });
+	}
 	render() {
 		const versus = [
 			{
 				key: 1,
 				title: "Duration",
 				vl: {
-					id: 1,
-					subtitle: "0:15\"",
-					src: "https://picsum.photos/290/175?id=234624"
+					subtitle: '0:15"',
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascape4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
 				},
 				vr: {
-					id: 2,
-					subtitle: "3:30\"",
-					src: "https://picsum.photos/290/175?id=234352"
+					subtitle: '3:30"',
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape12",
+					video: "//media.quickframe.com/video/video/15991.mp4"
 				},
 				diff: "45"
 			},
@@ -33,14 +40,16 @@ class Quickview extends Component {
 				key: 2,
 				title: "Scenes",
 				vl: {
-					id: 3,
-					subtitle: "3 Total",
-					src: "https://picsum.photos/290/175?id=23683"
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascape3",
+					video: "//media.quickframe.com/video/video/6324.mp4",
+					subtitle: "3 Total"
 				},
 				vr: {
-					id: 4,
-					subtitle: "8 Scenes",
-					src: "https://picsum.photos/290/175?id=289624"
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascape1",
+					video: "//media.quickframe.com/video/video/7485.mp4",
+					subtitle: "8 Scenes"
 				},
 				diff: "23"
 			},
@@ -48,14 +57,16 @@ class Quickview extends Component {
 				key: 3,
 				title: "Product",
 				vl: {
-					id: 5,
-					subtitle: "Appearing for 80% of video",
-					src: "https://picsum.photos/290/175?id=896745"
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascape1",
+					video: "//media.quickframe.com/video/video/7485.mp4",
+					subtitle: "Appearing for 80% of video"
 				},
 				vr: {
-					id: 6,
 					subtitle: "No apperance",
-					src: "https://picsum.photos/290/175?id=768452"
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascape4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
 				},
 				diff: "76"
 			},
@@ -63,14 +74,16 @@ class Quickview extends Component {
 				key: 4,
 				title: "Color",
 				vl: {
-					id: 7,
 					subtitle: "Vibrant - Warm",
-					src: "https://picsum.photos/290/175?id=346259"
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape12",
+					video: "//media.quickframe.com/video/video/15991.mp4"
 				},
 				vr: {
-					id: 8,
 					subtitle: "Cool - Dull",
-					src: "https://picsum.photos/290/175?id=358679"
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascape1",
+					video: "//media.quickframe.com/video/video/7485.mp4"
 				},
 				diff: "97"
 			},
@@ -78,14 +91,16 @@ class Quickview extends Component {
 				key: 5,
 				title: "Gender",
 				vl: {
-					id: 9,
 					subtitle: "Mostly Female",
-					src: "https://picsum.photos/290/175?id=34951"
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape12",
+					video: "//media.quickframe.com/video/video/15991.mp4"
 				},
 				vr: {
-					id: 10,
 					subtitle: "Mostly Male",
-					src: "https://picsum.photos/290/175?id=657146"
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascape1",
+					video: "//media.quickframe.com/video/video/7485.mp4"
 				},
 				diff: "38"
 			},
@@ -93,43 +108,75 @@ class Quickview extends Component {
 				key: 6,
 				title: "FPS",
 				vl: {
-					id: 11,
 					subtitle: "240 FPS at 4K",
-					src: "https://picsum.photos/290/175?id=674659"
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape12",
+					video: "//media.quickframe.com/video/video/15991.mp4"
 				},
 				vr: {
-					id: 12,
 					subtitle: "30 FPS at 1080p",
-					src: "https://picsum.photos/290/175?id=123574"
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascape1",
+					video: "//media.quickframe.com/video/video/7485.mp4"
 				},
 				diff: "67"
-			},
+			}
 		];
 
 		return (
 			<React.Fragment>
-				<div className={style.quickviewHeader}>
-					<div className={style.quickviewHeader_cellLeft}>
-						<div className={style.genders}><icon className="qf-iconMale" /><span>Male</span></div>
-						<div className={style.genders}><icon className="qf-iconFemale" /><span>Female</span></div>
+				<div className="grid-container mt-50">
+					<div className="col-3">
+						<div className={style.genders}>
+							<div className={style.gender}>
+								<div>
+									<icon className="qf-iconMale" />
+									<span>Male</span>
+								</div>
+							</div>
+							<div className={style.gender}>
+								<div>
+									<icon className="qf-iconFemale" />
+									<span>Female</span>
+								</div>
+							</div>
+						</div>
 					</div>
-					<div className={style.quickviewHeader_cellMid}>
-					<table><tr>
-						<td><img src={`https://s3.amazonaws.com/quickframe-static/img/lumiere/crosshair.png`} /></td>
-						<td>Age range:</td>
-						<td>18-24</td>
-					</tr></table>
+					<div className="col-6">
+						<div className={style.ageContainer}>
+							<div>
+								<img
+									src={`https://s3.amazonaws.com/quickframe-static/img/lumiere/crosshair.png`}
+								/>
+							</div>
+							<div className={style.ageRangeText}>Age Range:</div>
+							<div>
+								<Select
+									className={style.ageRangeDropdownElement}
+									options={[
+										{ value: "18-24", label: "18-24" },
+										{ value: "24-30", label: "24-30" },
+										{ value: "30-43", label: "30-43" }
+									]}
+									onChange={e => this.onChange(e)}
+									value={this.state.ageRange}
+								/>
+							</div>
+						</div>
 					</div>
-					<div className={style.quickviewHeader_cellRight}>
-						<span className="qf-iconLeft-Arrow"></span> views <span className="qf-iconRight-Arrow"></span>
+					<div className="col-3">
+						<p className={style.viewContainer}>
+							<span className="qf-iconLeft-Arrow" />
+							<span> views</span>
+							<span className="qf-iconRight-Arrow" />
+						</p>
 					</div>
-					<hr />
 				</div>
-				<div className={style.quickviewContent}>
-					<div className={style.VersusList}>
+				<div className="grid-container">
+					<div className="col-8">
 						<VersusList videos={versus} />
 					</div>
-					<div className={style.RankingsList}>
+					<div className="col-4">
 						<RankingsList />
 					</div>
 				</div>

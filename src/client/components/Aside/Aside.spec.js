@@ -1,24 +1,27 @@
 import React from "react";
-import { mount } from "enzyme";
+import { shallow } from "enzyme";
 import snapshot from "snap-shot-it";
 import { create } from "react-test-renderer";
 import { Provider } from "react-redux";
 import configureStore from "redux-mock-store";
+import { fromJS } from "immutable";
+
 import Aside from "./index";
 
 const mockProps = {
-	router: {}
+	router: {},
+	selectedVideos: []
 };
 const mockStore = configureStore();
 
 describe("Aside Component", () => {
 	const Comp = () => (
-		<Provider store={mockStore({})}>
+		<Provider store={mockStore({ library: fromJS({ selectedVideos: [] }) })}>
 			<Aside {...mockProps} />
 		</Provider>
 	);
 	beforeEach(() => {
-		mount(<Comp />);
+		shallow(<Comp />);
 	});
 	describe("Rendering", () => {
 		it("matches snapshot", () => {

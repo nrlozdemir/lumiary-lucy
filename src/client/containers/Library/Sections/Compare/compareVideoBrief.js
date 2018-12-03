@@ -86,16 +86,22 @@ const CompareVideoBrief = props => {
 									<div className={style.video}>
 										<div className={style.videoContainer}>
 											<div
-												key={props.video.id}
+												key={props.compareWith.id}
 												className={style.videoContainer}
 											>
-												<video id={props.video.id + "compare"} width="100%">
-													<source src={props.video.video} type="video/mp4" />
+												<video
+													id={props.compareWith.id + "compare"}
+													width="100%"
+												>
+													<source
+														src={props.compareWith.video}
+														type="video/mp4"
+													/>
 												</video>
 												<span
 													onClick={() => {
 														const video = document.getElementById(
-															props.video.id + "compare"
+															props.compareWith.id + "compare"
 														);
 														if (video.paused) video.play();
 														else video.pause();

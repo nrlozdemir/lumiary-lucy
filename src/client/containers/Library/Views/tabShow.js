@@ -140,7 +140,7 @@ const TabShow = ({
 								<div className="grid-collapse">
 									<div className="col-8">
 										<Pie
-											data={pieData}
+											data={() => pieData()}
 											width="200"
 											height="200"
 											options={{
@@ -188,13 +188,13 @@ const TabShow = ({
 									</div>
 									<div className="col-4">
 										<ul className={style.videoBriefLegendRight}>
-											{pieData.labels.map((label, i) => (
+											{pieData().labels.map((label, i) => (
 												<li key={label}>
 													<span
 														className={style.legendRound}
 														style={{
-															backgroundColor:
-																pieData.datasets[0].backgroundColor[i]
+															backgroundColor: pieData().datasets[0]
+																.backgroundColor[i]
 														}}
 													/>
 													{label}
@@ -207,7 +207,7 @@ const TabShow = ({
 							<div className="col-6">
 								<div className={style.title}>{barTitle}</div>
 								<Bar
-									data={pieData}
+									data={() => pieData()}
 									width={compareMode || removeHeader ? 5 : 3}
 									height="2"
 									options={{
@@ -273,13 +273,13 @@ const TabShow = ({
 									}}
 								/>
 								<div className={style.videoBriefLegendBottom}>
-									{barData.labels.map((label, i) => (
+									{barData().labels.map((label, i) => (
 										<p key={label}>
 											<span
 												className={style.legendRound}
 												style={{
-													backgroundColor:
-														barData.datasets[0].backgroundColor[i]
+													backgroundColor: barData().datasets[0]
+														.backgroundColor[i]
 												}}
 											/>
 											{label}

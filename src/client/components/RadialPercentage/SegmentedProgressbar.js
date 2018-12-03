@@ -1,80 +1,103 @@
 import React from "react";
-import { render } from "react-dom";
-import _ from "lodash";
-import CircularProgressbar from "react-circular-progressbar";
 import style from "./style.scss";
 
-function LayeredProgressbar(props) {
-  const { renderOverlays, ...otherProps } = props;
-  const overlayStyles = {
-    position: "absolute",
-    height: "76%",
-    width: "76%",
-    margin: "12%",
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center"
-  };
-  const overlays = props.renderOverlays();
-  return (
-    <div style={{ position: "relative", width: "100%", height: "100%" }}>
-      <div style={{ position: "absolute" }}>
-        <CircularProgressbar 
-          className={style.inverted}
-          background
-          backgroundPadding={2}
-          {...otherProps} />
-      </div>
-      {overlays.map((overlay, index) => (
-        <div style={overlayStyles} key={index}>
-          {overlay}
-        </div>
-      ))}
-    </div>
-  );
-}
+class SegmentedProgressbar extends React.Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			canvas: this.canvas
+		};
+	}
+	componentDidMount() {
+		var cx = 67;
+		var cy = 67;
+		var innerRadius = 30;
+		var outerRadius = 90;
+		const component = this.canvas;
+		const ctx = component.getContext("2d");
+		ctx.beginPath();
+		ctx.arc(67, 67, 60, 0, 2 * Math.PI);
+		ctx.fillStyle = "#282333";
+		ctx.fill();
+		ctx.beginPath();
+		ctx.arc(67, 67, 61, 0, 2 * Math.PI);
+		ctx.strokeStyle = "#fff";
+		ctx.lineWidth = 1;
+		ctx.stroke();
+		for (let value = 0; value <= 750; value += 25) {
+			let scaledValue = this.scaleIntoRange(0, 750, 0, 360, value);
+			let degrees = scaledValue - 90;
+			let shorterLine = (outerRadius - innerRadius) / 2;
+			if (this.props.percentage * 10 > value) {
+				this.radiantLine(
+					cx,
+					cy,
+					innerRadius,
+					outerRadius - shorterLine,
+					degrees,
+					1.5,
+					"#21bcd5"
+				);
+			} else {
+				this.radiantLine(
+					cx,
+					cy,
+					innerRadius,
+					outerRadius - shorterLine,
+					degrees,
+					1.5,
+					"#21bcd569"
+				);
+			}
+		}
+	}
+	radiantLine(
+		centerX,
+		centerY,
+		innerRadius,
+		outerRadius,
+		degrees,
+		linewidth,
+		color
+	) {
+		const component = this.canvas;
+		const ctx = component.getContext("2d");
+		const radians = (degrees * Math.PI) / 180;
+		const innerX = centerX + innerRadius * Math.cos(radians);
+		const innerY = centerY + innerRadius * Math.sin(radians);
+		const outerX = centerX + outerRadius * Math.cos(radians);
+		const outerY = centerY + outerRadius * Math.sin(radians);
 
-function RadialSeparator(props) {
-  const smaller = (props.degrees < props.perc.percentage) ? true : false;
-//  console.log(props.degrees + '...' + props.perc.percentage);
-  return  (
-    <div
-      style={{
-        backgroundColor: smaller ? "#21798b" : "#153540",
-        width: "2px",
-        height: "100%",
-        transform: `rotate(${props.degrees}deg)`
-      }}
-    />
-  );
-}
+		ctx.beginPath();
+		ctx.moveTo(innerX, innerY);
+		ctx.lineTo(outerX, outerY);
+		ctx.strokeStyle = color;
+		ctx.lineWidth = linewidth;
+		ctx.stroke();
+	}
 
-function getRadialSeparators(numSeparators, perc) {
-  const degrees = 360 / numSeparators;
-  return _.range(numSeparators / 2).map(index => (
-    <RadialSeparator degrees={index * degrees} perc={perc} />
-  ));
-}
+	scaleIntoRange(minActual, maxActual, minRange, maxRange, value) {
+		const scaled =
+			((maxRange - minRange) * (value - minRange)) / (maxActual - minActual) +
+			minRange;
+		return scaled;
+	}
 
-function SegmentedProgressbar(props) {
-  const { color1, color2, percentage, fontsize, ...otherProps } = props;
-
-  return (
-    <LayeredProgressbar
-      percentage={percentage}
-      strokeWidth={25}
-      counterClockwise
-      renderOverlays={() =>
-        getRadialSeparators(40, {percentage}).concat(
-          <div className={style.circularBells} style={{ fontSize: {fontsize}, color: "#fff" }}>
-            {percentage}%
-          </div>
-        )
-      }
-      {...otherProps}
-    />
-  );
+	render() {
+		return (
+			<React.Fragment>
+				<canvas
+					className={style.canvas}
+					ref={c => {
+						this.canvas = c;
+					}}
+					width="134"
+					height="134"
+				/>
+				<p className={style.percentage}>{this.props.percentage}%</p>
+			</React.Fragment>
+		);
+	}
 }
 
 export default SegmentedProgressbar;
