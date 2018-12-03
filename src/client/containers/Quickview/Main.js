@@ -142,24 +142,12 @@ class Quickview extends Component {
 							</div>
 						</div>
 					</div>
-<<<<<<< HEAD
-					<div className={style.quickviewHeader_cellMid}>
-						<table>
-							<tr>
-								<td>
-									<img
-										src={`https://s3.amazonaws.com/quickframe-static/img/lumiere/crosshair.png`}
-									/>
-								</td>
-								<td>Age range:</td>
-								<td>18-24</td>
-							</tr>
-						</table>
-=======
 					<div className="col-6">
 						<div className={style.ageContainer}>
 							<div>
-								<img src={require("./../../assets/crosshair.png")} />
+								<img
+									src={`https://s3.amazonaws.com/quickframe-static/img/lumiere/crosshair.png`}
+								/>
 							</div>
 							<div className={style.ageRangeText}>Age Range:</div>
 							<div>
@@ -175,7 +163,6 @@ class Quickview extends Component {
 								/>
 							</div>
 						</div>
->>>>>>> feat: quickview page header side has done
 					</div>
 					<div className="col-3">
 						<p className={style.viewContainer}>
