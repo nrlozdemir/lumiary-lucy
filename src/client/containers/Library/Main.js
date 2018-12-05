@@ -22,9 +22,8 @@ class Library extends React.Component {
 		this.state = {
 			video: props.setVideoObject(videos.find(obj => obj.id == props.params.id))
 				.payload,
-			compareMode: props.location.query.compareWith
-				? videos.find(obj => obj.id == props.location.query.compareWith)
-				: false
+			compareMode: props.location.query.compareWith ? true : false,
+			compareWith: videos.find(obj => obj.id == props.location.query.compareWith)
 		};
 	}
 
@@ -43,7 +42,7 @@ class Library extends React.Component {
 						<CompareVideoBrief
 							changeCompareMode={val => this.changeCompareMode(val)}
 							video={this.state.video}
-							compareWith={this.state.compareMode}
+							compareWith={this.state.compareWith}
 						/>
 					) : (
 						<VideoBrief
@@ -81,11 +80,7 @@ Library.propTypes = {
 	resetCompareVideos: PropTypes.func
 };
 
-const mapStateToProps = state => {
-	return {
-		selectedVideos: state.library.toJS().compareVideos
-	};
-};
+const mapStateToProps = state => state
 
 const mapDispatchToProps = dispatch => ({
 	...bindActionCreators(libraryActions, dispatch)

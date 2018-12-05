@@ -6,6 +6,7 @@ import { bindActionCreators } from "redux";
 
 import { actions as libraryActions } from "Reducers/library";
 import style from "./styles.scss";
+import { getCompareVideos } from "../../selectors/library";
 
 const videoSource = {
 	beginDrag(props) {
@@ -76,7 +77,7 @@ class Video extends React.Component {
 }
 const mapStateToProps = state => {
 	return {
-		selectedVideos: state.library.toJS().compareVideos
+		selectedVideos: getCompareVideos(state)
 	};
 };
 
