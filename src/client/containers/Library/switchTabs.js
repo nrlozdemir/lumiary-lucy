@@ -135,14 +135,12 @@ export default function(location, routeParams, pathname, compareMode) {
 							<AgeRangeAndGender />
 						</div>
 					</div>
-					{/* 
-						Not Ready for production should be responsive
+
 					<div className="col-12 mt-25 mb-25">
 						<div className="containerMargin">
-							<ObjectTagging />
+							<ObjectTagging datas={[20, 25, 30, 25]} />
 						</div>
-					</div> 
-					*/}
+					</div>
 				</div>
 			);
 	}
