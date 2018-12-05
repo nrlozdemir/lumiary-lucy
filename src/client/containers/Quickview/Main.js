@@ -111,7 +111,7 @@ class Quickview extends Component {
 					subtitle: "240 FPS at 4K",
 					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
 					id: "lumascape12",
-					video: "//media.quickframe.com/video/video/15991.mp4"
+					video: "//media.quickframe.com/video/video/15200.mp4"
 				},
 				vr: {
 					subtitle: "30 FPS at 1080p",

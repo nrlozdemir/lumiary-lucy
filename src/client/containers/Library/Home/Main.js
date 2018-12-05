@@ -27,7 +27,7 @@ class HomePage extends React.Component {
 				}
 			>
 				<div className={style.centeredArea}>
-					<span className={style.dropZoneIcon + " " + "Drag--Drop"} />
+					<span className={style.dropZoneIcon + " " + "qf-iconDrag--Drop"} />
 					<p className={style.dropZoneHeading}>Drag &amp; Drop</p>
 				</div>
 			</div>

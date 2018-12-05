@@ -2,7 +2,7 @@ import React, { PureComponent } from "react";
 // import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-// import { browserHistory, Link } from "react-router";
+import { Link } from "react-router";
 // import cx from "classnames";
 // import { staticUrl, mediaUrl } from "Utils/globals";
 
@@ -19,7 +19,7 @@ class Header extends PureComponent {
 					<NavBar items={items} />
 				</div>
 				<div className={style.brandLogo}>
-					<div className={style.logo} />
+					<Link to="/library/"><div className={style.logo} /></Link>
 				</div>
 			</React.Fragment>
 		);

@@ -25,12 +25,12 @@ class RankingSlider extends React.Component {
 	}
 	render() {
 		const iconoclas = {
-			facebook: "Facebook",
-			instagram: "Instagram",
-			snapchat: "Snapchat",
-			youtube: "Youtube",
-			twitter: "Twitter",
-			pinterest: "Pinterest"
+			facebook: "qf-iconFacebook",
+			instagram: "qf-iconInstagram",
+			snapchat: "qf-iconSnapchat",
+			youtube: "qf-iconYotube",
+			twitter: "qf-iconTwitter",
+			pinterest: "qf-iconPinterest"
 		};
 		const { platformItem } = this.props;
 		return (
