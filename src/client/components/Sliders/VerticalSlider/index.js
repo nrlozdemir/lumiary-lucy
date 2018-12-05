@@ -21,6 +21,9 @@ export default class VerticalSlider extends Component {
 						left: 0
 					}}
 					onClick={onClick}
+
+
+					
 				/>
 			);
 		};
