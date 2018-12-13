@@ -61,26 +61,23 @@ module.exports = {
 		new webpack.optimize.ModuleConcatenationPlugin(),
 		new webpack.optimize.AggressiveMergingPlugin(),
 		new webpack.optimize.OccurrenceOrderPlugin(),
-		new UglifyJsPlugin({
-			test: /\.(js|jsx)$/i,
-			uglifyOptions: {
+		new webpack.optimize.UglifyJsPlugin({
+			mangle: true,
+			compress: {
 				warnings: false, // Suppress uglification warnings
-				mangle: true,
-				compress: {
-					pure_getters: true,
-					conditionals: true,
-					unused: true,
-					comparisons: true,
-					sequences: true,
-					dead_code: true,
-					evaluate: true,
-					if_return: true,
-					join_vars: true
+				pure_getters: true,
+				screw_ie8: true,
+				conditionals: true,
+				unused: true,
+				comparisons: true,
+				sequences: true,
+				dead_code: true,
+				evaluate: true,
+				if_return: true,
+				join_vars: true
 				},
-				ie8: false,
-				output: {
-					comments: false
-				},
+			output: {
+				comments: false,
 			},
 			exclude: [/\.min\.js$/gi] // skip pre-minified libs
 		}),
