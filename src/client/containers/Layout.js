@@ -1,7 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
-import HTML5Backend from "react-dnd-html5-backend";
+import HTML5Backend from "react-dnd-html5-backend/dist/ReactDnDHTML5Backend";
 import { DragDropContext } from "react-dnd";
 
 //import Script from 'react-load-script'
