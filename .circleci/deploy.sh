@@ -35,7 +35,7 @@ if [ $CIRCLE_BRANCH = "qa" ] || [ $CIRCLE_BRANCH = "staging" ]; then
         --memory 512
     echo Updating ECS service...
     aws ecs update-service --cluster lumiere-$CIRCLE_BRANCH --service lumiere --task-definition lumiere-$CIRCLE_BRANCH --force-new-deployment
-    sleep 10
+    sleep 30
     STATUS=$(aws ecs describe-services --cluster lumiere-$CIRCLE_BRANCH --service lumiere | jq '.services[0].events[0].message')
     while ! [[ "$STATUS" == *"(service lumiere) has reached a steady state."* ]]; do
         echo "ECS Task Status: $STATUS"
