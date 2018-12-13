@@ -8,9 +8,6 @@ dump.rdb
 *.komodoproject
 .komodotools
 
-# Built pug files
-src/server/views/index.pug
-
 # npm, node
 node_modules
 **/node_modules/**
