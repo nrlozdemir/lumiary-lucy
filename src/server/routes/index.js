@@ -36,13 +36,13 @@ module.exports = (app) => {
 
 
   //SSR
-  app.get('/*',
+  /*app.get('/*',
     cache.route({
-      prefix: 'blackstar'
+      prefix: 'lumiere'
     }),
     (req, res) => {
       matchRoute(req, res)
-  })
+  })*/
 
 }
 
