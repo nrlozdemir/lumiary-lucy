@@ -1,14 +1,22 @@
 .videoContainer {
-  position: relative
+	position: relative;
 
-  video {
-    width: 100%;
-  }
+	.video {
+		width: 100%;
+	}
 
-  .videoIcon {
-    position: absolute;
-    top: 94px;
-    left: 200px;
-    font-size: 75px;
-  }
+	.videoIcon {
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+		opacity: 0;
+	}
+
+	&:hover {
+		.videoIcon {
+			opacity: 1;
+		}
+	}
 }

@@ -10,9 +10,12 @@ export default function subNav() {
 			{items.map(item => {
 				const label = item.replace("-", " ");
 				return (
-					<Link key={item} to={`/marketview/${item}/`}>
-						{" "}
-						By {label}{" "}
+					<Link
+						activeClassName={style.active}
+						key={item}
+						to={`/marketview/${item}/`}
+					>
+						By {label}
 					</Link>
 				);
 			})}

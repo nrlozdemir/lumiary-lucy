@@ -1,70 +1,63 @@
-.versusVideo {
-  width: 290px;
+.versusContainer {
+	display: flex;
+	flex-flow: row wrap;
+	margin: 10px 0;
 }
-.versusList {
-  position: relative;
-  background-color: $color-dark;
+
+.versusShadow {
+	box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
 }
-.versusRow {
-  width: 757px;
-  background-color: $color-charcoal-grey;
-  float: none;
-  clear: both;
-  margin-left:20px;
+.versusVideoContainer {
+	flex: 2;
 }
-.versusShadowed {
-  height: 175px;
-  -webkit-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
-  -moz-box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
-  box-shadow: 3px 3px 3px 0px rgba(0,0,0,0.5);
-}
-.endOfRow {
-  height: 40px !important;
-}
-.versusTitle, .versusTitleBold, .versusSubTitle {
-  height: 23px;
-  font-size: 18px;
-  font-weight: normal;
-  color: $color-pale-grey;
-}
-.versusTitle {
-  font-family: $font-family-clanOT;
-}
-.versusTitleBold {
-  font-family: $font-family-clanOTNews;
+.versusMiddle {
+	flex: 1;
+	position: relative;
 }
 .versusSubTitle {
-  font-family: $font-family-clanOT;
-  font-weight: bold;
-  margin-top: 12px;
+	font-family: $font-family-clanOT;
+	text-align: center;
+	padding: 5px 0;
+	font-size: 14px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: $color-pale-grey;
 }
 .versusCategory {
-  height: 29px;
-  font-family: $font-family-sans-serif;
-  font-size: 24px;
-  font-weight: bold;
-  margin-top: 12px;
+	font-family: $font-family-sans-serif;
+	font-size: 20px;
+	font-weight: bold;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: $color-pale-grey;
+	text-align: center;
 }
-.versusCellLeft, .versusCellRight, .versusCellMid {
-  float:left;
-  clear:none;
+
+.versusTitleBold {
+	font-family: $font-family-clanOTNews;
+	font-size: 18px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: $color-pale-grey;
+	text-align: center;
 }
-.versusCellLeft .video, .versusCellRight .video, .versusCellMid .video {
-  margin:0;
-}
-.versusCellLeft, .versusCellRight {
-  width:290px;
-}
-.versusCellMid {
-  width: 175px;
-}
-.versusCellLeft h3, .versusCellMid h3, .versusCellRight h3 {
-  text-align: center;
-  width:100%;
-  background-color: $color-dark;
-}
-.customVideo {
-  display: inline-flex;
-  position: relative;
-  margin:0;
+
+.versusTitle {
+	font-family: $font-family-clanOTBook;
+	font-size: 18px;
+	font-weight: normal;
+	font-style: normal;
+	font-stretch: normal;
+	line-height: normal;
+	letter-spacing: normal;
+	color: $color-pale-grey;
+	text-align: center;
 }

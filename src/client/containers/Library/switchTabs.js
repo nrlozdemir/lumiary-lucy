@@ -8,6 +8,7 @@ import AgeRangeAndGender from "./Sections/ageRangeAndGender";
 // Styles
 import { pieData, lineData } from "./options";
 import CompareVideoTabs from "./Sections/Compare/compareVideoTabs";
+import ObjectTagging from "./Sections/objectTagging";
 
 export default function(location, routeParams, pathname, compareMode) {
 	switch (location) {
@@ -132,6 +133,12 @@ export default function(location, routeParams, pathname, compareMode) {
 					<div className="col-12 mt-25 mb-25">
 						<div className="containerMargin">
 							<AgeRangeAndGender />
+						</div>
+					</div>
+
+					<div className="col-12 mt-25 mb-25">
+						<div className="containerMargin">
+							<ObjectTagging datas={[20, 25, 30, 25]} />
 						</div>
 					</div>
 				</div>

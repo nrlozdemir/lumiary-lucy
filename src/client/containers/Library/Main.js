@@ -22,8 +22,13 @@ class Library extends React.Component {
 		this.state = {
 			video: props.setVideoObject(videos.find(obj => obj.id == props.params.id))
 				.payload,
-			compareMode: false
+			compareMode: props.location.query.compareWith ? true : false,
+			compareWith: videos.find(obj => obj.id == props.location.query.compareWith)
 		};
+	}
+
+	componentDidMount() {
+		this.props.resetCompareVideos();
 	}
 
 	changeCompareMode(val) {
@@ -37,6 +42,7 @@ class Library extends React.Component {
 						<CompareVideoBrief
 							changeCompareMode={val => this.changeCompareMode(val)}
 							video={this.state.video}
+							compareWith={this.state.compareWith}
 						/>
 					) : (
 						<VideoBrief
@@ -69,10 +75,12 @@ Library.propTypes = {
 	params: PropTypes.object,
 	location: PropTypes.object,
 	routeParams: PropTypes.object,
-	video: PropTypes.object
+	video: PropTypes.object,
+	setVideoObject: PropTypes.func,
+	resetCompareVideos: PropTypes.func
 };
 
-const mapStateToProps = state => state;
+const mapStateToProps = state => state
 
 const mapDispatchToProps = dispatch => ({
 	...bindActionCreators(libraryActions, dispatch)

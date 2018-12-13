@@ -1,6 +1,8 @@
 # annoyances
 **/.DS_Store/**
 .DS_Store
+package-lock.json
+dump.rdb
 
 # IDE
 *.komodoproject

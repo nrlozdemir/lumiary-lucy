@@ -9,7 +9,11 @@ const AgeRangeAndGender = () => (
 		customBodyClass="bg-dark-three box-shadow-black-1 color-white"
 	>
 		<div className="col-12 p-25">
-			<TimeLineChart backgroundColor="#2f2d3d" />
+			<TimeLineChart
+				backgroundColor="#2f2d3d"
+				color="#fff"
+				datas={[25, 50, 25]}
+			/>
 		</div>
 	</Card>
 );
