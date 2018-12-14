@@ -109,11 +109,11 @@ module.exports = {
 					var html = fs.readFileSync(tmpl, "utf8")
 
 					var htmlOutput = html.replace("bundle.min.js",
-						`${static_url}bundles/${stats.assetsByChunkName.main[0]}`
+						`${static_url}bundles/lumiere/${stats.assetsByChunkName.main[0]}`
 					).replace("vendor.min.js",
-						`${static_url}bundles/${stats.assetsByChunkName.vendor}`
+						`${static_url}bundles/lumiere/${stats.assetsByChunkName.vendor}`
 					).replace("bundle.min.css",
-						`${static_url}bundles/${stats.assetsByChunkName.main[1]}`
+						`${static_url}bundles/lumiere/${stats.assetsByChunkName.main[1]}`
 					)
 
 					fs.writeFileSync(
