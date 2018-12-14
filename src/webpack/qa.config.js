@@ -99,29 +99,29 @@ module.exports = {
 
 		function() {
 			this.plugin("done", statsData => {
-				const stats = statsData.toJson();
-				const tmpl = path.join(__dirname, "../server/views", "index.tmpl");
-				const pug = path.join(__dirname, "../server/views", "index.pug");
+				const stats = statsData.toJson()
+				const tmpl = path.join(__dirname, '../server/views', 'index.tmpl')
+				const pug = path.join(__dirname, '../server/views', 'index.pug')
+
+				console.log(stats.assetsByChunkName)
 
 				if (!stats.errors.length) {
-					var html = fs.readFileSync(tmpl, "utf8");
+					var html = fs.readFileSync(tmpl, "utf8")
 
-					var htmlOutput = html
-						.replace(
-							"bundle.min.js",
-							`${static_url}bundles/lumiere/${stats.assetsByChunkName.main[0]}`
-						)
-						.replace(
-							"vendor.min.js",
-							`${static_url}bundles/lumiere/${stats.assetsByChunkName.vendor}`
-						)
-						.replace(
-							"bundle.min.css",
-							`${static_url}bundles/lumiere/${stats.assetsByChunkName.main[1]}`
-						);
+					var htmlOutput = html.replace("bundle.min.js",
+						`${static_url}bundles/lumiere/${stats.assetsByChunkName.main[0]}`
+					).replace("vendor.min.js",
+						`${static_url}bundles/lumiere/${stats.assetsByChunkName.vendor}`
+					).replace("bundle.min.css",
+						`${static_url}bundles/lumiere/${stats.assetsByChunkName.main[1]}`
+					)
 
-					fs.writeFileSync(pug, htmlOutput);
+					fs.writeFileSync(
+						pug,
+						htmlOutput
+					)
 				}
+				else process.exit(1)
 			});
 		}
 	],
