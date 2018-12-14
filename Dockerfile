@@ -1,5 +1,5 @@
 # base
-FROM node:8.11.1 AS base
+FROM node:lts AS base
 WORKDIR /application
 COPY package*.json /application/
 
@@ -26,7 +26,7 @@ WORKDIR /application
 RUN npm install --loglevel=error --only=production
 
 # release
-FROM node:8.11.1-alpine as release
+FROM node:lts-alpine as release
 ARG NODE_ENV=production
 ENV NODE_ENV $NODE_ENV
 ARG PORT=8080
