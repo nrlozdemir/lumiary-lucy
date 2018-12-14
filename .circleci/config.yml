@@ -2,7 +2,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:8.11
+      - image: circleci/node:11
         environment:
           PORT: 9000
           NODE_ENV: development
