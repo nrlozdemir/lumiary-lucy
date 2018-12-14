@@ -32,9 +32,9 @@ ENV NODE_ENV $NODE_ENV
 ARG PORT=8080
 ENV PORT $PORT
 COPY . /application
+WORKDIR /application
 COPY --from=releaseDependencies /application/node_modules /application/node_modules
 # RUN npm install node-sass@latest
 #RUN npm rebuild node-sass
-WORKDIR /application
 CMD [ "npm", "run", "start" ]
 EXPOSE 80
