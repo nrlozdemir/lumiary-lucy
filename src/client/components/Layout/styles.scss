@@ -315,21 +315,21 @@ body {
 
 @font-face {
 	font-family: "AnonymousProBold";
-	src: url("#{$s3_static}fonts/circular/AnonymousProB.ttf");
+	src: url("#{$s3_static}fonts/AnonymousProB.ttf");
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: "AnonymousProBI";
-	src: url("#{$s3_static}fonts/circular/AnonymousProBI.ttf");
+	src: url("#{$s3_static}fonts/AnonymousProBI.ttf");
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: "AnonymousProI";
-	src: url("#{$s3_static}fonts/circular/AnonymousProI.ttf");
+	src: url("#{$s3_static}fonts/AnonymousProI.ttf");
 	font-weight: normal;
 	font-style: normal;
 }
@@ -337,21 +337,21 @@ body {
 // ClanOT
 @font-face {
 	font-family: "ClanOT";
-	src: url("./../../assets/fonts/ClanOT/ClanOT-Medium.ttf");
+	src: url("#{$s3_static}fonts/clanot/ClanOT-Medium.ttf");
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: "ClanOTBook";
-	src: url("./../../assets/fonts/ClanOT/ClanOT-Book.ttf");
+	src: url("#{$s3_static}fonts/clanot/ClanOT-Book.ttf");
 	font-weight: normal;
 	font-style: normal;
 }
 
 @font-face {
 	font-family: "ClanOTNews";
-	src: url("./../../assets/fonts/ClanOT/ClanOT-News.ttf");
+	src: url("#{$s3_static}fonts/clanot/ClanOT-News.ttf");
 	font-weight: normal;
 	font-style: normal;
 }
