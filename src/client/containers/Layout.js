@@ -52,4 +52,4 @@ Layout.propTypes = {
   router: PropTypes.object
 };
 
-export default DragDropContext(HTML5Backend)(Layout);
+export default DragDropContext(window.ReactDnDHTML5Backend)(Layout);
