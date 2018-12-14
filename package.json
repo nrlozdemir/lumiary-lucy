@@ -83,7 +83,6 @@
     "react-circular-progressbar": "1.0.0",
     "react-confirm-alert": "github:quickframe/react-confirm-alert",
     "react-dnd": "^5.0.0",
-    "react-dnd-html5-backend": "^5.0.1",
     "react-dom": "^16.2.0",
     "react-dropzone-s3-uploader": "^1.1.0",
     "react-helmet": "^5.2.0",
