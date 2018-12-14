@@ -51,7 +51,6 @@ class Platform extends Component {
 			4: "6-10 Scenes",
 			6: "10-20 Scenes"
 		};
-		console.log(this.props);
 
 		return (
 			<div className={cx(style.marketView, style.platform, style.competitor)}>
