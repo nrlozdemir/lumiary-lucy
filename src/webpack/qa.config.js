@@ -5,7 +5,7 @@ const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
 const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 const neat = require("node-neat");
-const bourbon = require("bourbon");
+const bourbon = require("bourbon-neat");
 const sassVars = require("@epegzz/sass-vars-loader");
 
 const static_url = "//s3.amazonaws.com/quickframe-static-qa/";
