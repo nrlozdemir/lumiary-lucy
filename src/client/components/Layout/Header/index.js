@@ -1,5 +1,5 @@
 import React, { PureComponent } from "react";
-// import PropTypes from "prop-types";
+import PropTypes from "prop-types";
 import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import { Link } from "react-router";
@@ -19,14 +19,18 @@ class Header extends PureComponent {
 					<NavBar items={items} />
 				</div>
 				<div className={style.brandLogo}>
-					<Link to="/library/"><div className={style.logo} /></Link>
+					<Link to="/library/">
+						<div className={style.logo} />
+					</Link>
 				</div>
 			</React.Fragment>
 		);
 	}
 }
 
-Header.propTypes = {};
+Header.propTypes = {
+	router: PropTypes.object
+};
 
 Header.defaultProps = {};
 
