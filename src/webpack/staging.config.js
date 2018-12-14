@@ -106,6 +106,8 @@ module.exports = {
 				const tmpl = path.join(__dirname, "../server/views", "index.tmpl");
 				const pug = path.join(__dirname, "../server/views", "index.pug");
 
+				console.log(stats.assetsByChunkName)
+
 				if (!stats.errors.length) {
 					var html = fs.readFileSync(tmpl, "utf8");
 
@@ -124,6 +126,9 @@ module.exports = {
 						);
 
 					fs.writeFileSync(pug, htmlOutput);
+				} else {
+					console.log(stats.errors)
+					throw new Error(stats.errors)
 				}
 			});
 		}
