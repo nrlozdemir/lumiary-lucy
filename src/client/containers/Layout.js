@@ -1,6 +1,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import Helmet from "react-helmet";
+import HTML5Backend from "react-dnd-html5-backend";
 import { DragDropContext } from "react-dnd";
 
 //import Script from 'react-load-script'
@@ -52,4 +53,4 @@ Layout.propTypes = {
   router: PropTypes.object
 };
 
-export default DragDropContext(window.ReactDnDHTML5Backend)(Layout);
+export default DragDropContext(HTML5Backend)(Layout);
