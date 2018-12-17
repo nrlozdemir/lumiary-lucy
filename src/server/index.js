@@ -7,15 +7,27 @@ import compression from 'compression'
 import { requestLogger, errorLogger } from '../services/logger'
 import bodyParser  from 'body-parser'
 import cors        from 'cors'
+import * as Sentry from '@sentry/node'
 
 const app = express()
 const PORT = process.env.PORT || 6000
+const mediaBucket = process.env.MEDIA_BUCKET || 'quickframe-media-dev'
 
 process.env.PWD = path.join(process.cwd(), 'src', 'server')
 
+if (process.env.NODE_ENV === 'production') {
+    Sentry.init({
+        dsn: 'https://9685ff9064ec4c7995ba01650d31d0eb@sentry.io/1334775',
+        environment: process.env.ENVIRONMENT,
+    })
+}
+
+if (process.env.NODE_ENV === 'production')
+  app.use(Sentry.Handlers.requestHandler())
+
 app.set('env', process.env.NODE_ENV || 'development')
 app.set('host', process.env.HOST)
-app.set('mediaUrl', process.env.MEDIA_URL || 'quickframe-media-dev')
+app.set('mediaUrl', `https://s3.amazonaws.com/${mediaBucket}`)
 app.set('s3bucket', 'quickframe-media-dev')
 app.set('views', path.join(__dirname, 'views'))
 app.set('view engine', 'pug')
@@ -56,6 +68,9 @@ app.use(errorLogger)
 // ROUTES
 // =============================================================================
 require('./routes')(app)
+
+if (process.env.NODE_ENV === 'production')
+  app.use(Sentry.Handlers.errorHandler())
 
 // SSL SERVER
 // =============================================================================

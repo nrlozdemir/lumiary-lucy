@@ -2,13 +2,6 @@
 
 echo "Branch: $CIRCLE_BRANCH"
 
-sudo apt-get -y update && \
-    sudo apt-get -y install apt-utils && \
-    sudo apt-get -y upgrade && \
-    sudo apt-get -y install python python-pip python-dev python-setuptools jq
-
-sudo pip install --upgrade awscli
-
 if [ $CIRCLE_BRANCH = "qa" ] || [ $CIRCLE_BRANCH = "staging" ]; then
     echo Building static files...
     npm run build:$CIRCLE_BRANCH
