@@ -13,14 +13,15 @@ class Quickview extends Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			ageRange: { value: "18-24", label: "18-24" },
-			gender: null,
-			versus: versus
+			ageRange: { value: "18-24", label: "18-24", name: "versus1" },
+			gender: "male"
 		};
 	}
+
 	onChange(field, e) {
 		this.setState({ [field]: e });
 	}
+
 	render() {
 		return (
 			<React.Fragment>
@@ -57,9 +58,9 @@ class Quickview extends Component {
 								<Select
 									className={style.ageRangeDropdownElement}
 									options={[
-										{ value: "18-24", label: "18-24" },
-										{ value: "24-30", label: "24-30" },
-										{ value: "30-43", label: "30-43" }
+										{ value: "18-24", label: "18-24", name: "versus1" },
+										{ value: "24-30", label: "24-30", name: "versus2" },
+										{ value: "30-43", label: "30-43", name: "versus3" }
 									]}
 									onChange={e => this.onChange("ageRange", e)}
 									value={this.state.ageRange}
@@ -77,7 +78,9 @@ class Quickview extends Component {
 				</div>
 				<div className="grid-container">
 					<div className="col-8">
-						<VersusList videos={shuffleArray(this.state.versus)} />
+						<VersusList
+							videos={versus[this.state.gender][this.state.ageRange.name]}
+						/>
 					</div>
 					<div className="col-4">
 						<RankingsList />
