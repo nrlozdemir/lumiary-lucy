@@ -4,6 +4,7 @@ import Card from "../../../components/Card";
 import TabBar from "../../../components/TabBar";
 
 import style from "./../styles.scss";
+import { staticUrl } from "../../../utils/globals";
 
 const TabShow = ({
 	location,
@@ -56,13 +57,13 @@ const TabShow = ({
 												<div className={style.boxes}>{generateBox()}</div>
 											</div>
 											<div className="col-6">
-												<img src={icon} />
+												<img src={staticUrl + icon} />
 											</div>
 										</div>
 									) : (
 										<img
 											style={{ display: "block", margin: "0 auto" }}
-											src={icon}
+											src={staticUrl + icon}
 										/>
 									)}
 								</div>
@@ -84,13 +85,13 @@ const TabShow = ({
 												<div className={style.boxes}>{generateBox()}</div>
 											</div>
 											<div className="col-6">
-												<img src={iconTwo} />
+												<img src={staticUrl + iconTwo} />
 											</div>
 										</div>
 									) : (
 										<img
 											style={{ display: "block", margin: "0 auto" }}
-											src={iconTwo}
+											src={staticUrl + iconTwo}
 										/>
 									)}
 								</div>
@@ -114,13 +115,13 @@ const TabShow = ({
 											<div className={style.boxes}>{generateBox()}</div>
 										</div>
 										<div className="col-6">
-											<img src={icon} />
+											<img src={staticUrl + icon} />
 										</div>
 									</div>
 								) : (
 									<img
 										style={{ display: "block", margin: "0 auto" }}
-										src={icon}
+										src={staticUrl + icon}
 									/>
 								)}
 							</div>
@@ -288,12 +289,467 @@ const TabShow = ({
 								</div>
 							</div>
 						</div>
-						<div>
-							<img
-								className="width-100"
-								src="https://picsum.photos/1000/430/
-							"
-							/>
+						<div className="grid-collapse">
+							<div className="col-6">
+								<div className={style.title}>{pieTitle}</div>
+								<div className="grid-collapse">
+									<div className="col-8">
+										<Pie
+											data={() => pieData()}
+											width="200"
+											height="200"
+											options={{
+												responsive: false,
+												legend: {
+													display: false
+												},
+												elements: {
+													arc: {
+														borderWidth: 0
+													}
+												},
+												layout: {
+													padding: {
+														left: 0,
+														right: 0,
+														top: 50,
+														bottom: 0
+													}
+												},
+												plugins: {
+													datalabels: {
+														color: "white",
+														font: {
+															weight: "bold",
+															size: "12"
+														},
+														formatter: (value, ctx) => {
+															let sum = 0;
+															let dataArr = ctx.chart.data.datasets[0].data;
+															dataArr.map(data => {
+																sum += data;
+															});
+															let percentage =
+																((value * 100) / sum).toFixed(2) + "%";
+															return percentage;
+														}
+													}
+												},
+												tooltips: {
+													enabled: false
+												}
+											}}
+										/>
+									</div>
+									<div className="col-4">
+										<ul className={style.videoBriefLegendRight}>
+											{pieData().labels.map((label, i) => (
+												<li key={label}>
+													<span
+														className={style.legendRound}
+														style={{
+															backgroundColor: pieData().datasets[0]
+																.backgroundColor[i]
+														}}
+													/>
+													{label}
+												</li>
+											))}
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div className="col-6">
+								<div className={style.title}>{barTitle}</div>
+								<Bar
+									data={() => pieData()}
+									width={compareMode || removeHeader ? 5 : 3}
+									height="2"
+									options={{
+										responsive: true,
+										plugins: {
+											datalabels: {
+												display: true,
+												anchor: "end",
+												align: "end",
+												color: "#1fbad2",
+												font: {
+													weight: "bold",
+													size: "12"
+												},
+												formatter: (value, ctx) => {
+													let sum = 0;
+													let dataArr = ctx.chart.data.datasets[0].data;
+													dataArr.map(data => {
+														sum += data;
+													});
+													let percentage =
+														((value * 100) / sum).toFixed(2) + "%";
+													return percentage;
+												}
+											}
+										},
+										tooltips: {
+											enabled: false
+										},
+										legend: {
+											display: false
+										},
+										layout: {
+											padding: {
+												left: 0,
+												right: 0,
+												top: 0,
+												bottom: 0
+											}
+										},
+										scales: {
+											yAxes: [
+												{
+													display: false,
+													ticks: {
+														min: 0,
+														max: 100,
+														stepSize: 10
+													}
+												}
+											],
+											xAxes: [
+												{
+													display: false,
+													categoryPercentage: 0.6,
+													barPercentage: 0.6,
+													gridLines: {
+														display: false
+													}
+												}
+											]
+										}
+									}}
+								/>
+								<div className={style.videoBriefLegendBottom}>
+									{barData().labels.map((label, i) => (
+										<p key={label}>
+											<span
+												className={style.legendRound}
+												style={{
+													backgroundColor: barData().datasets[0]
+														.backgroundColor[i]
+												}}
+											/>
+											{label}
+										</p>
+									))}
+								</div>
+							</div>
+						</div>
+						<div className="grid-collapse">
+							<div className="col-6">
+								<div className={style.title}>{pieTitle}</div>
+								<div className="grid-collapse">
+									<div className="col-8">
+										<Pie
+											data={() => pieData()}
+											width="200"
+											height="200"
+											options={{
+												responsive: false,
+												legend: {
+													display: false
+												},
+												elements: {
+													arc: {
+														borderWidth: 0
+													}
+												},
+												layout: {
+													padding: {
+														left: 0,
+														right: 0,
+														top: 50,
+														bottom: 0
+													}
+												},
+												plugins: {
+													datalabels: {
+														color: "white",
+														font: {
+															weight: "bold",
+															size: "12"
+														},
+														formatter: (value, ctx) => {
+															let sum = 0;
+															let dataArr = ctx.chart.data.datasets[0].data;
+															dataArr.map(data => {
+																sum += data;
+															});
+															let percentage =
+																((value * 100) / sum).toFixed(2) + "%";
+															return percentage;
+														}
+													}
+												},
+												tooltips: {
+													enabled: false
+												}
+											}}
+										/>
+									</div>
+									<div className="col-4">
+										<ul className={style.videoBriefLegendRight}>
+											{pieData().labels.map((label, i) => (
+												<li key={label}>
+													<span
+														className={style.legendRound}
+														style={{
+															backgroundColor: pieData().datasets[0]
+																.backgroundColor[i]
+														}}
+													/>
+													{label}
+												</li>
+											))}
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div className="col-6">
+								<div className={style.title}>{barTitle}</div>
+								<Bar
+									data={() => pieData()}
+									width={compareMode || removeHeader ? 5 : 3}
+									height="2"
+									options={{
+										responsive: true,
+										plugins: {
+											datalabels: {
+												display: true,
+												anchor: "end",
+												align: "end",
+												color: "#1fbad2",
+												font: {
+													weight: "bold",
+													size: "12"
+												},
+												formatter: (value, ctx) => {
+													let sum = 0;
+													let dataArr = ctx.chart.data.datasets[0].data;
+													dataArr.map(data => {
+														sum += data;
+													});
+													let percentage =
+														((value * 100) / sum).toFixed(2) + "%";
+													return percentage;
+												}
+											}
+										},
+										tooltips: {
+											enabled: false
+										},
+										legend: {
+											display: false
+										},
+										layout: {
+											padding: {
+												left: 0,
+												right: 0,
+												top: 0,
+												bottom: 0
+											}
+										},
+										scales: {
+											yAxes: [
+												{
+													display: false,
+													ticks: {
+														min: 0,
+														max: 100,
+														stepSize: 10
+													}
+												}
+											],
+											xAxes: [
+												{
+													display: false,
+													categoryPercentage: 0.6,
+													barPercentage: 0.6,
+													gridLines: {
+														display: false
+													}
+												}
+											]
+										}
+									}}
+								/>
+								<div className={style.videoBriefLegendBottom}>
+									{barData().labels.map((label, i) => (
+										<p key={label}>
+											<span
+												className={style.legendRound}
+												style={{
+													backgroundColor: barData().datasets[0]
+														.backgroundColor[i]
+												}}
+											/>
+											{label}
+										</p>
+									))}
+								</div>
+							</div>
+						</div>
+						<div className="grid-collapse">
+							<div className="col-6">
+								<div className={style.title}>{pieTitle}</div>
+								<div className="grid-collapse">
+									<div className="col-8">
+										<Pie
+											data={() => pieData()}
+											width="200"
+											height="200"
+											options={{
+												responsive: false,
+												legend: {
+													display: false
+												},
+												elements: {
+													arc: {
+														borderWidth: 0
+													}
+												},
+												layout: {
+													padding: {
+														left: 0,
+														right: 0,
+														top: 50,
+														bottom: 0
+													}
+												},
+												plugins: {
+													datalabels: {
+														color: "white",
+														font: {
+															weight: "bold",
+															size: "12"
+														},
+														formatter: (value, ctx) => {
+															let sum = 0;
+															let dataArr = ctx.chart.data.datasets[0].data;
+															dataArr.map(data => {
+																sum += data;
+															});
+															let percentage =
+																((value * 100) / sum).toFixed(2) + "%";
+															return percentage;
+														}
+													}
+												},
+												tooltips: {
+													enabled: false
+												}
+											}}
+										/>
+									</div>
+									<div className="col-4">
+										<ul className={style.videoBriefLegendRight}>
+											{pieData().labels.map((label, i) => (
+												<li key={label}>
+													<span
+														className={style.legendRound}
+														style={{
+															backgroundColor: pieData().datasets[0]
+																.backgroundColor[i]
+														}}
+													/>
+													{label}
+												</li>
+											))}
+										</ul>
+									</div>
+								</div>
+							</div>
+							<div className="col-6">
+								<div className={style.title}>{barTitle}</div>
+								<Bar
+									data={() => pieData()}
+									width={compareMode || removeHeader ? 5 : 3}
+									height="2"
+									options={{
+										responsive: true,
+										plugins: {
+											datalabels: {
+												display: true,
+												anchor: "end",
+												align: "end",
+												color: "#1fbad2",
+												font: {
+													weight: "bold",
+													size: "12"
+												},
+												formatter: (value, ctx) => {
+													let sum = 0;
+													let dataArr = ctx.chart.data.datasets[0].data;
+													dataArr.map(data => {
+														sum += data;
+													});
+													let percentage =
+														((value * 100) / sum).toFixed(2) + "%";
+													return percentage;
+												}
+											}
+										},
+										tooltips: {
+											enabled: false
+										},
+										legend: {
+											display: false
+										},
+										layout: {
+											padding: {
+												left: 0,
+												right: 0,
+												top: 0,
+												bottom: 0
+											}
+										},
+										scales: {
+											yAxes: [
+												{
+													display: false,
+													ticks: {
+														min: 0,
+														max: 100,
+														stepSize: 10
+													}
+												}
+											],
+											xAxes: [
+												{
+													display: false,
+													categoryPercentage: 0.6,
+													barPercentage: 0.6,
+													gridLines: {
+														display: false
+													}
+												}
+											]
+										}
+									}}
+								/>
+								<div className={style.videoBriefLegendBottom}>
+									{barData().labels.map((label, i) => (
+										<p key={label}>
+											<span
+												className={style.legendRound}
+												style={{
+													backgroundColor: barData().datasets[0]
+														.backgroundColor[i]
+												}}
+											/>
+											{label}
+										</p>
+									))}
+								</div>
+							</div>
 						</div>
 					</TabBar>
 				</div>

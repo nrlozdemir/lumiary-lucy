@@ -546,6 +546,1517 @@ const versus = [
 		diff: "67"
 	}
 ];
+
+const platformSocialMediaVideoList = {
+	"qf-iconFacebook": {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "24 FPS",
+				value: 40,
+				legendTitle: "40% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "00:10”",
+				value: 50,
+				legendTitle: "50% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "12:8",
+				value: 76,
+				legendTitle: "76% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 50,
+				legendTitle: "50 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 78,
+				legendTitle: "78% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	"qf-iconInstagram": {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "24 FPS",
+				value: 24,
+				legendTitle: "24% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "03:50”",
+				value: 97,
+				legendTitle: "97% of your videos",
+				legendSecondTitle: "(7-10’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 90,
+				legendTitle: "90% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "2356",
+				value: 85,
+				legendTitle: "85 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "10 Total",
+				value: 30,
+				legendTitle: "30% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			}
+		]
+	},
+	"qf-iconSnapchat": {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 19,
+				legendTitle: "19% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 4,
+				legendTitle: "4% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 32,
+				legendTitle: "32% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 50,
+				legendTitle: "50 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 78,
+				legendTitle: "78% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	"qf-iconTwitter": {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "10 FPS",
+				value: 22,
+				legendTitle: "22% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 92,
+				legendTitle: "92% of your videos",
+				legendSecondTitle: "(1-2’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "2:4",
+				value: 60,
+				legendTitle: "60% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "1252",
+				value: 20,
+				legendTitle: "20 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "41 Total",
+				value: 16,
+				legendTitle: "16% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			}
+		]
+	},
+	"qf-iconYotube": {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 34,
+				legendTitle: "34% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 40,
+				legendTitle: "40% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 56,
+				legendTitle: "56% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 71,
+				legendTitle: "71 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 65,
+				legendTitle: "65% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			}
+		]
+	},
+	Sunday: {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "24 FPS",
+				value: 40,
+				legendTitle: "40% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "00:10”",
+				value: 50,
+				legendTitle: "50% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "12:8",
+				value: 76,
+				legendTitle: "76% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 50,
+				legendTitle: "50 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 78,
+				legendTitle: "78% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	Saturday: {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "24 FPS",
+				value: 24,
+				legendTitle: "24% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "03:50”",
+				value: 97,
+				legendTitle: "97% of your videos",
+				legendSecondTitle: "(7-10’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 90,
+				legendTitle: "90% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "2356",
+				value: 85,
+				legendTitle: "85 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "10 Total",
+				value: 30,
+				legendTitle: "30% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			}
+		]
+	},
+	Friday: {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 19,
+				legendTitle: "19% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 4,
+				legendTitle: "4% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 32,
+				legendTitle: "32% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 50,
+				legendTitle: "50 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 78,
+				legendTitle: "78% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	Thursday: {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "10 FPS",
+				value: 22,
+				legendTitle: "22% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 92,
+				legendTitle: "92% of your videos",
+				legendSecondTitle: "(1-2’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "2:4",
+				value: 60,
+				legendTitle: "60% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "1252",
+				value: 20,
+				legendTitle: "20 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "41 Total",
+				value: 16,
+				legendTitle: "16% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			}
+		]
+	},
+	Wednesday: {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 34,
+				legendTitle: "34% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 40,
+				legendTitle: "40% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 56,
+				legendTitle: "56% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 71,
+				legendTitle: "71 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 65,
+				legendTitle: "65% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			}
+		]
+	},
+	Tuesday: {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "10 FPS",
+				value: 22,
+				legendTitle: "22% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 92,
+				legendTitle: "92% of your videos",
+				legendSecondTitle: "(1-2’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "2:4",
+				value: 60,
+				legendTitle: "60% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "1252",
+				value: 20,
+				legendTitle: "20 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "41 Total",
+				value: 16,
+				legendTitle: "16% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			}
+		]
+	},
+	Monday: {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 19,
+				legendTitle: "19% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 4,
+				legendTitle: "4% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 32,
+				legendTitle: "32% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 50,
+				legendTitle: "50 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 78,
+				legendTitle: "78% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	Education: {
+		name: "Education",
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 19,
+				legendTitle: "19% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 4,
+				legendTitle: "4% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 32,
+				legendTitle: "32% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 50,
+				legendTitle: "50 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 78,
+				legendTitle: "78% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	DirectResponse: {
+		name: "Direct Response",
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 89,
+				legendTitle: "89% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 24,
+				legendTitle: "24% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 52,
+				legendTitle: "52% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 25,
+				legendTitle: "25 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 14,
+				legendTitle: "14% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	Awareness: {
+		name: "Awareness",
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "30 FPS",
+				value: 42,
+				legendTitle: "42% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "10:10”",
+				value: 86,
+				legendTitle: "86% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "4:8",
+				value: 12,
+				legendTitle: "12% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "100",
+				value: 92,
+				legendTitle: "92 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "20 Total",
+				value: 30,
+				legendTitle: "30% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			}
+		]
+	},
+	one: {
+		name: "13-18",
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "10 FPS",
+				value: 22,
+				legendTitle: "22% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 92,
+				legendTitle: "92% of your videos",
+				legendSecondTitle: "(1-2’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "2:4",
+				value: 60,
+				legendTitle: "60% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "1252",
+				value: 20,
+				legendTitle: "20 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "41 Total",
+				value: 16,
+				legendTitle: "16% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			}
+		]
+	},
+	two: {
+		name: "18-21",
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 19,
+				legendTitle: "19% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 4,
+				legendTitle: "4% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 32,
+				legendTitle: "32% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 50,
+				legendTitle: "50 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 78,
+				legendTitle: "78% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	three: {
+		name: "21-23",
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 19,
+				legendTitle: "19% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 4,
+				legendTitle: "4% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 32,
+				legendTitle: "32% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 50,
+				legendTitle: "50 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 78,
+				legendTitle: "78% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	four: {
+		name: "23-28",
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 89,
+				legendTitle: "89% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 24,
+				legendTitle: "24% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 52,
+				legendTitle: "52% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 25,
+				legendTitle: "25 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 14,
+				legendTitle: "14% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	five: {
+		name: "28-31",
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "30 FPS",
+				value: 42,
+				legendTitle: "42% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "10:10”",
+				value: 86,
+				legendTitle: "86% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "4:8",
+				value: 12,
+				legendTitle: "12% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "100",
+				value: 92,
+				legendTitle: "92 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "20 Total",
+				value: 30,
+				legendTitle: "30% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			}
+		]
+	},
+	seven: {
+		name: "35-38",
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 19,
+				legendTitle: "19% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 4,
+				legendTitle: "4% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 32,
+				legendTitle: "32% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 50,
+				legendTitle: "50 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 78,
+				legendTitle: "78% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	six: {
+		name: "31-35",
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 89,
+				legendTitle: "89% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 24,
+				legendTitle: "24% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 52,
+				legendTitle: "52% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 25,
+				legendTitle: "25 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 14,
+				legendTitle: "14% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	Female: {
+		name: "35-38",
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 19,
+				legendTitle: "19% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 4,
+				legendTitle: "4% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 32,
+				legendTitle: "32% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 50,
+				legendTitle: "50 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 78,
+				legendTitle: "78% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	},
+	Male: {
+		videoTabsData: [
+			{
+				tabName: "Frames Per Second",
+				avarageTitle: "60 FPS",
+				value: 89,
+				legendTitle: "89% of your videos",
+				url: "frames-per-second"
+			},
+			{
+				tabName: "Duration",
+				avarageTitle: "02:10”",
+				value: 24,
+				legendTitle: "24% of your videos",
+				legendSecondTitle: "(3-5’ range)",
+				url: "duration"
+			},
+			{
+				tabName: "Aspect Ratio",
+				avarageTitle: "10:9",
+				value: 52,
+				legendTitle: "52% of your videos",
+				url: "aspect-ratio"
+			},
+			{
+				tabName: "Number of Frames",
+				avarageTitle: "9321",
+				value: 25,
+				legendTitle: "25 % of your videos",
+				url: "number-of-frames"
+			},
+			{
+				tabName: "Scenes",
+				avarageTitle: "4 Total",
+				value: 14,
+				legendTitle: "14% of your videos",
+				url: "scenes"
+			}
+		],
+		videoList: [
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+				id: "lumascape4",
+				video: "//media.quickframe.com/video/video/13433.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+				id: "lumascape12",
+				video: "//media.quickframe.com/video/video/15991.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+				id: "kumascape3",
+				video: "//media.quickframe.com/video/video/6324.mp4"
+			},
+			{
+				poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+				id: "lumascape1",
+				video: "//media.quickframe.com/video/video/7485.mp4"
+			}
+		]
+	}
+};
+
 export {
 	lineData,
 	lineWithCustomLabel,
@@ -556,5 +2067,6 @@ export {
 	videoTabsDataCompare,
 	videoTabsDataBottom,
 	videos,
-	versus
+	versus,
+	platformSocialMediaVideoList
 };
