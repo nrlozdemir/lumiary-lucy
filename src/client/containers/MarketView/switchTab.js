@@ -12,8 +12,8 @@ export default function(location, routeParams, useCase, selectedItem) {
 			return (
 				<TabShow
 					title="Frame Per Second"
-					icon="./../../assets/videoTabsIcons/fps.png"
-					iconTwo="./../../assets/videoTabsIcons/fps.png"
+					icon="lucy-assets/videoTabsIcons/fps.png"
+					iconTwo="lucy-assets/videoTabsIcons/fps.png"
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -30,8 +30,8 @@ export default function(location, routeParams, useCase, selectedItem) {
 			return (
 				<TabShow
 					title="Duration"
-					icon="./../../assets/videoTabsIcons/duration.png"
-					iconTwo="./../../assets/videoTabsIcons/durationTwo.png"
+					icon="lucy-assets/videoTabsIcons/duration.png"
+					iconTwo="lucy-assets/videoTabsIcons/durationTwo.png"
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -47,8 +47,8 @@ export default function(location, routeParams, useCase, selectedItem) {
 			return (
 				<TabShow
 					title="Aspect Ratio"
-					icon="./../../assets/videoTabsIcons/aspectRatioIcon.png"
-					iconTwo="./../../assets/videoTabsIcons/aspectRatioIconTwo.png"
+					icon="lucy-assets/videoTabsIcons/aspectRatioIcon.png"
+					iconTwo="lucy-assets/videoTabsIcons/aspectRatioIconTwo.png"
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -64,8 +64,8 @@ export default function(location, routeParams, useCase, selectedItem) {
 			return (
 				<TabShow
 					title="Number Of Frames"
-					icon="./../../assets/videoTabsIcons/numberoframes.png"
-					iconTwo="./../../assets/videoTabsIcons/numberOfFramesTwo.png"
+					icon="lucy-assets/videoTabsIcons/numberoframes.png"
+					iconTwo="lucy-assets/videoTabsIcons/numberOfFramesTwo.png"
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -81,8 +81,8 @@ export default function(location, routeParams, useCase, selectedItem) {
 			return (
 				<TabShow
 					title="Scenes"
-					icon="./../../assets/videoTabsIcons/scenes.png"
-					iconTwo="./../../assets/videoTabsIcons/scenesTwo.png"
+					icon="lucy-assets/videoTabsIcons/scenes.png"
+					iconTwo="lucy-assets/videoTabsIcons/scenesTwo.png"
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -98,8 +98,8 @@ export default function(location, routeParams, useCase, selectedItem) {
 			return (
 				<TabShow
 					title="Color Tone"
-					icon="./../../assets/videoTabsIcons/colorToneOne.png"
-					iconTwo="./../../assets/videoTabsIcons/colorToneTwo.png"
+					icon="lucy-assets/videoTabsIcons/colorToneOne.png"
+					iconTwo="lucy-assets/videoTabsIcons/colorToneTwo.png"
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
