@@ -439,6 +439,36 @@ const videos = [
 		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
 		id: "kumascape3",
 		video: "//media.quickframe.com/video/video/6324.mp4"
+	},
+	{
+		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+		id: "kumascape3",
+		video: "//media.quickframe.com/video/video/13430.mp4"
+	},
+	{
+		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+		id: "kumascape3",
+		video: "//media.quickframe.com/video/video/13432.mp4"
+	},
+	{
+		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+		id: "kumascape3",
+		video: "//media.quickframe.com/video/video/15998.mp4"
+	},
+	{
+		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+		id: "kumascape3",
+		video: "//media.quickframe.com/video/video/15992.mp4"
+	},
+	{
+		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+		id: "kumascape3",
+		video: "//media.quickframe.com/video/video/15993.mp4"
+	},
+	{
+		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+		id: "kumascape3",
+		video: "//media.quickframe.com/video/video/15995.mp4"
 	}
 ];
 

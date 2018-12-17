@@ -85,16 +85,17 @@ const CompareVideoBrief = props => {
 								<div className={style.videoImage}>
 									<div className={style.video}>
 										<div className={style.videoContainer}>
+												{/* Temporary solution */}
 											<div
-												key={props.compareWith.id}
+												key={props.compareWith ? props.compareWith.id : "default-video"}
 												className={style.videoContainer}
 											>
 												<video
-													id={props.compareWith.id + "compare"}
+													id={props.compareWith ? props.compareWith.id : "default-video"+ "compare"}
 													width="100%"
 												>
 													<source
-														src={props.compareWith.video}
+														src={props.compareWith ? props.compareWith.video : "//media.quickframe.com/video/video/16000.mp4"}
 														type="video/mp4"
 													/>
 												</video>
