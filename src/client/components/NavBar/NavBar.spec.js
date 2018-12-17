@@ -19,39 +19,20 @@ describe("NavBar Component", () => {
 
 	beforeEach(() => {
 		store = mockStore({});
-
-		wrapper = mount(
-			<Provider store={store}>
-				<NavBar
-					items={{}}
-					handleClick={() => {}}
-					selected={null}
-					cta={null}
-					baseUrl={null}
-				/>{" "}
-			</Provider>
-		);
-
-		wrapperInstance = wrapper.instance();
-
-		wrapper.findByRef = ref => {
-			const refNode = wrapper.ref(ref);
-			return wrapper.findWhere(node => {
-				return node.getDOMNode() === refNode;
-			});
-		};
 	});
 
 	describe("Rendering", () => {
 		it("matches snapshot", () => {
 			const testRenderer = create(
-				<NavBar
-					items={{}}
-					handleClick={() => {}}
-					selected={null}
-					cta={null}
-					baseUrl={null}
-				/>
+				<Provider store={store}>
+					<NavBar
+						items={{}}
+						handleClick={() => {}}
+						selected={null}
+						cta={null}
+						baseUrl={null}
+					/>
+				</Provider>
 			);
 			snapshot(testRenderer.toJSON());
 		});
