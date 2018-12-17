@@ -18,8 +18,11 @@ const NavBar = props => {
 								key != "undefined" && (
 									<Link
 										className={
-											props.app.locationCurrent.split("/")[1] ===
-												"marketview" && key === "marketview"
+											(props.app.locationCurrent.split("/")[1] ===
+												"marketview" &&
+												key === "marketview") ||
+											(props.app.locationCurrent.split("/")[1] === "library" &&
+												key === "library")
 												? style.active
 												: null
 										}
