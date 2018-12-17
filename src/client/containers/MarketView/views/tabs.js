@@ -2,11 +2,16 @@ import React from "react";
 import Card from "./../../../components/Card";
 import BarChart from "../../../components/Charts/BarChart";
 import style from "../../Library/styles.scss";
-import { videoTabsDataBottom } from "../../Library/options";
+import {
+	videoTabsDataBottom,
+	platformSocialMediaVideoList
+} from "../../Library/options";
 
 class Tabs extends React.Component {
 	render() {
-		return videoTabsDataBottom.map(video => (
+		const videodataSocial =
+			platformSocialMediaVideoList[this.props.selectedItem].videoTabsData;
+		return videodataSocial.map(video => (
 			<React.Fragment key={video.url}>
 				<div className="col-1-5">
 					<div className="mlr-10 pb-35">

@@ -16,35 +16,35 @@ import BarChart from "Components/Charts/BarChart";
 import VideoSlider from "Components/Sliders/VideoSlider";
 import Tabs from "./../views/tabs";
 import switchTabs from "../switchTab";
-import { videoTabsDataBottom } from "../../Library/options";
+import { platformSocialMediaVideoList } from "../../Library/options";
 
 // import PropTypes from 'prop-types'
 
-const videoList = [
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
-		id: "kumascape3",
-		video: "//media.quickframe.com/video/video/6324.mp4"
-	},
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
-		id: "lumascape4",
-		video: "//media.quickframe.com/video/video/13433.mp4"
-	},
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
-		id: "lumascape12",
-		video: "//media.quickframe.com/video/video/15991.mp4"
-	},
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
-		id: "lumascape1",
-		video: "//media.quickframe.com/video/video/7485.mp4"
-	}
-];
-
 class Time extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			selectedDay: "Sunday",
+			days: [
+				"Sunday",
+				"Saturday",
+				"Friday",
+				"Thursday",
+				"Wednesday",
+				"Tuesday",
+				"Monday"
+			]
+		};
+	}
+
+	changeSocialMedia(e) {
+		this.setState({ selectedDay: e });
+	}
 	render() {
+		const videoList =
+			platformSocialMediaVideoList[this.state.selectedDay].videoList;
+		const videodataSocial =
+			platformSocialMediaVideoList[this.state.selectedDay].videoTabsData;
 		const yLabels = {
 			0: "1-2 Scenes",
 			2: "3-5 Scenes",
@@ -88,29 +88,22 @@ class Time extends Component {
 						</div>
 
 						<div className="col-1">
-							<div
-								className={style.iconWrapper + " " + style.iconWrapperActive}
-							>
-								<p className={style.iconTextUseCase}>Sunday</p>
-							</div>
-							<div className={style.iconWrapper}>
-								<p className={style.iconTextUseCase}>Saturday</p>
-							</div>
-							<div className={style.iconWrapper}>
-								<p className={style.iconTextUseCase}>Friday</p>
-							</div>
-							<div className={style.iconWrapper}>
-								<p className={style.iconTextUseCase}>Thursday</p>
-							</div>
-							<div className={style.iconWrapper}>
-								<p className={style.iconTextUseCase}>Wednesday</p>
-							</div>
-							<div className={style.iconWrapper}>
-								<p className={style.iconTextUseCase}>Tuesday</p>
-							</div>
-							<div className={style.iconWrapper}>
-								<p className={style.iconTextUseCase}>Monday</p>
-							</div>
+							{this.state.days.map(day => (
+								<div
+									key={day}
+									onClick={() => this.changeSocialMedia(day)}
+									className={
+										style.iconWrapper +
+										` ${
+											day === this.state.selectedDay
+												? style.iconWrapperActive
+												: null
+										}`
+									}
+								>
+									<p className={style.iconTextUseCase}>{day}</p>
+								</div>
+							))}
 						</div>
 
 						<div className="col-11 mt-10 pb-10">
@@ -321,7 +314,7 @@ class Time extends Component {
 												<Link className={style.tab} to="/marketview/time">
 													All
 												</Link>
-												{videoTabsDataBottom.map(link => (
+												{videodataSocial.map(link => (
 													<Link
 														key={link.url}
 														to={"/marketview/time/" + link.url}
@@ -334,7 +327,9 @@ class Time extends Component {
 											<br />
 											{switchTabs(
 												this.props.params.tab,
-												this.props.routeParams.id
+												this.props.routeParams.id,
+												false,
+												this.state.selectedDay
 											)}
 										</div>
 									</div>

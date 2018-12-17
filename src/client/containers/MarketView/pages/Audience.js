@@ -16,42 +16,39 @@ import BarChart from "Components/Charts/BarChart";
 import VideoSlider from "Components/Sliders/VideoSlider";
 import Tabs from "./../views/tabs";
 import switchTabs from "../switchTab";
-import { videoTabsDataBottom } from "../../Library/options";
+import { platformSocialMediaVideoList } from "../../Library/options";
 
 // import PropTypes from 'prop-types'
 
-const videoList = [
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
-		id: "kumascape3",
-		video: "//media.quickframe.com/video/video/6324.mp4"
-	},
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
-		id: "lumascape4",
-		video: "//media.quickframe.com/video/video/13433.mp4"
-	},
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
-		id: "lumascape12",
-		video: "//media.quickframe.com/video/video/15991.mp4"
-	},
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
-		id: "lumascape1",
-		video: "//media.quickframe.com/video/video/7485.mp4"
-	}
-];
-
 class Audince extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			selectedAudince: "one",
+			selectedGender: "Male",
+			gender: ["Male", "Female"],
+			audinces: ["one", "two", "three", "four", "five", "six", "seven"]
+		};
+	}
+
+	changeSocialMedia(e) {
+		this.setState({ selectedAudince: e });
+	}
+
+	changeGender(e) {
+		this.setState({ selectedGender: e });
+	}
 	render() {
+		const videoList =
+			platformSocialMediaVideoList[this.state.selectedAudince].videoList;
+		const videodataSocial =
+			platformSocialMediaVideoList[this.state.selectedAudince].videoTabsData;
 		const yLabels = {
 			0: "1-2 Scenes",
 			2: "3-5 Scenes",
 			4: "6-10 Scenes",
 			6: "10-20 Scenes"
 		};
-
 		return (
 			<div className={cx(style.marketView, style.platform, style.competitor)}>
 				<SubNav />
@@ -88,36 +85,39 @@ class Audince extends Component {
 						</div>
 
 						<div className="col-1">
-							<div className={style.iconWrapperRectangle}>
-								<span className={"qf-iconMale " + style.icon} />
-								<p className={style.iconText}>Male</p>
-							</div>
-							<div className={style.iconWrapperRectangle + " " + style.active}>
-								<span className={"qf-iconFemale " + style.icon} />
-								<p className={style.iconText}>Female</p>
-							</div>
-							<div className={style.iconWrapperAudience}>
-								<p className={style.iconText}>13-18</p>
-							</div>
-							<div
-								className={
-									style.iconWrapperAudience + " " + style.iconWrapperActive
-								}
-							>
-								<p className={style.iconText}>18-21</p>
-							</div>
-							<div className={style.iconWrapperAudience}>
-								<p className={style.iconText}>21-28</p>
-							</div>
-							<div className={style.iconWrapperAudience}>
-								<p className={style.iconText}>28-35</p>
-							</div>
-							<div className={style.iconWrapperAudience}>
-								<p className={style.iconText}>35-42</p>
-							</div>
-							<div className={style.iconWrapperAudience}>
-								<p className={style.iconText}>42-65</p>
-							</div>
+							{this.state.gender.map(gender => (
+								<div
+									className={
+										style.iconWrapperRectangle +
+										` ${
+											gender === this.state.selectedGender ? style.active : null
+										}`
+									}
+									key={gender}
+									onClick={() => this.changeGender(gender)}
+								>
+									<span className={`qf-icon${gender} ` + style.icon} />
+									<p className={style.iconText}>{gender}</p>
+								</div>
+							))}
+							{this.state.audinces.map(audince => (
+								<div
+									key={audince}
+									onClick={() => this.changeSocialMedia(audince)}
+									className={
+										style.iconWrapperAudience +
+										` ${
+											audince === this.state.selectedAudince
+												? style.iconWrapperActive
+												: null
+										}`
+									}
+								>
+									<p className={style.iconTextUseCase}>
+										{platformSocialMediaVideoList[audince].name}
+									</p>
+								</div>
+							))}
 						</div>
 
 						<div className="col-11 mt-10 pb-10">
@@ -328,7 +328,7 @@ class Audince extends Component {
 												<Link className={style.tab} to="/marketview/audience">
 													All
 												</Link>
-												{videoTabsDataBottom.map(link => (
+												{videodataSocial.map(link => (
 													<Link
 														key={link.url}
 														to={"/marketview/audience/" + link.url}
@@ -341,7 +341,9 @@ class Audince extends Component {
 											<br />
 											{switchTabs(
 												this.props.params.tab,
-												this.props.routeParams.id
+												this.props.routeParams.id,
+												false,
+												this.state.selectedAudince
 											)}
 										</div>
 									</div>

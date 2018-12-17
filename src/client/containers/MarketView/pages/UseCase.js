@@ -16,35 +16,30 @@ import BarChart from "Components/Charts/BarChart";
 import VideoSlider from "Components/Sliders/VideoSlider";
 import Tabs from "./../views/tabs";
 import switchTabs from "../switchTab";
-import { videoTabsDataBottom, barChartCompare } from "../../Library/options";
+import {
+	platformSocialMediaVideoList,
+	barChartCompare
+} from "../../Library/options";
 
 // import PropTypes from 'prop-types'
 
-const videoList = [
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
-		id: "kumascape3",
-		video: "//media.quickframe.com/video/video/6324.mp4"
-	},
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
-		id: "lumascape4",
-		video: "//media.quickframe.com/video/video/13433.mp4"
-	},
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
-		id: "lumascape12",
-		video: "//media.quickframe.com/video/video/15991.mp4"
-	},
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
-		id: "lumascape1",
-		video: "//media.quickframe.com/video/video/7485.mp4"
-	}
-];
-
 class UseCase extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			selectedUseCase: "Education",
+			useCases: ["Education", "DirectResponse", "Awareness"]
+		};
+	}
+
+	changeSocialMedia(e) {
+		this.setState({ selectedUseCase: e });
+	}
 	render() {
+		const videoList =
+			platformSocialMediaVideoList[this.state.selectedUseCase].videoList;
+		const videodataSocial =
+			platformSocialMediaVideoList[this.state.selectedUseCase].videoTabsData;
 		const yLabels = {
 			0: "1-2 Scenes",
 			2: "3-5 Scenes",
@@ -88,17 +83,24 @@ class UseCase extends Component {
 						</div>
 
 						<div className="col-1">
-							<div
-								className={style.iconWrapper + " " + style.iconWrapperActive}
-							>
-								<p className={style.iconTextUseCase}>Education</p>
-							</div>
-							<div className={style.iconWrapper}>
-								<p className={style.iconTextUseCase}>Direct Response</p>
-							</div>
-							<div className={style.iconWrapper}>
-								<p className={style.iconTextUseCase}>Awareness</p>
-							</div>
+							{this.state.useCases.map(useCase => (
+								<div
+									key={useCase}
+									onClick={() => this.changeSocialMedia(useCase)}
+									className={
+										style.iconWrapper +
+										` ${
+											useCase === this.state.selectedUseCase
+												? style.iconWrapperActive
+												: null
+										}`
+									}
+								>
+									<p className={style.iconTextUseCase}>
+										{platformSocialMediaVideoList[useCase].name}
+									</p>
+								</div>
+							))}
 						</div>
 						<div className="col-11 mt-10 pb-10">
 							<div className={style.upContainer + " mb-25"}>
@@ -279,7 +281,7 @@ class UseCase extends Component {
 												<Link className={style.tab} to="/marketview/use-case">
 													All
 												</Link>
-												{videoTabsDataBottom.map(link => (
+												{videodataSocial.map(link => (
 													<Link
 														key={link.url}
 														to={"/marketview/use-case/" + link.url}
@@ -293,7 +295,8 @@ class UseCase extends Component {
 											{switchTabs(
 												this.props.params.tab,
 												this.props.routeParams.id,
-												true
+												true,
+												this.state.selectedUseCase
 											)}
 										</div>
 									</div>

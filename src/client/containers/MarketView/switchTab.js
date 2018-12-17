@@ -6,14 +6,14 @@ import Tabs from "./views/tabs";
 // Styles
 import { pieData, lineData } from "../Library/options";
 
-export default function(location, routeParams, useCase) {
+export default function(location, routeParams, useCase, selectedItem) {
 	switch (location) {
 		case "frames-per-second":
 			return (
 				<TabShow
 					title="Frame Per Second"
-					icon={require("./../../assets/videoTabsIcons/fps.png")}
-					iconTwo={require("./../../assets/videoTabsIcons/fps.png")}
+					icon="./../../assets/videoTabsIcons/fps.png"
+					iconTwo="./../../assets/videoTabsIcons/fps.png"
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -30,8 +30,8 @@ export default function(location, routeParams, useCase) {
 			return (
 				<TabShow
 					title="Duration"
-					icon={require("./../../assets/videoTabsIcons/duration.png")}
-					iconTwo={require("./../../assets/videoTabsIcons/durationTwo.png")}
+					icon="./../../assets/videoTabsIcons/duration.png"
+					iconTwo="./../../assets/videoTabsIcons/durationTwo.png"
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -47,8 +47,8 @@ export default function(location, routeParams, useCase) {
 			return (
 				<TabShow
 					title="Aspect Ratio"
-					icon={require("./../../assets/videoTabsIcons/aspectRatioIcon.png")}
-					iconTwo={require("./../../assets/videoTabsIcons/aspectRatioIconTwo.png")}
+					icon="./../../assets/videoTabsIcons/aspectRatioIcon.png"
+					iconTwo="./../../assets/videoTabsIcons/aspectRatioIconTwo.png"
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -64,8 +64,8 @@ export default function(location, routeParams, useCase) {
 			return (
 				<TabShow
 					title="Number Of Frames"
-					icon={require("./../../assets/videoTabsIcons/numberoframes.png")}
-					iconTwo={require("./../../assets/videoTabsIcons/numberOfFramesTwo.png")}
+					icon="./../../assets/videoTabsIcons/numberoframes.png"
+					iconTwo="./../../assets/videoTabsIcons/numberOfFramesTwo.png"
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -81,8 +81,8 @@ export default function(location, routeParams, useCase) {
 			return (
 				<TabShow
 					title="Scenes"
-					icon={require("./../../assets/videoTabsIcons/scenes.png")}
-					iconTwo={require("./../../assets/videoTabsIcons/scenesTwo.png")}
+					icon="./../../assets/videoTabsIcons/scenes.png"
+					iconTwo="./../../assets/videoTabsIcons/scenesTwo.png"
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -98,8 +98,8 @@ export default function(location, routeParams, useCase) {
 			return (
 				<TabShow
 					title="Color Tone"
-					icon={require("./../../assets/videoTabsIcons/colorToneOne.png")}
-					iconTwo={require("./../../assets/videoTabsIcons/colorToneTwo.png")}
+					icon="./../../assets/videoTabsIcons/colorToneOne.png"
+					iconTwo="./../../assets/videoTabsIcons/colorToneTwo.png"
 					pieData={pieData}
 					pieTitle="Library Data"
 					barData={pieData}
@@ -115,7 +115,7 @@ export default function(location, routeParams, useCase) {
 			return (
 				<div>
 					<div className="col-12 mt-25">
-						<Tabs />
+						<Tabs selectedItem={selectedItem} />
 					</div>
 				</div>
 			);

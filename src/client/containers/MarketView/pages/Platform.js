@@ -9,42 +9,38 @@ import cx from "classnames";
 import style from "../styles.scss";
 import LineChart from "./../../../components/Charts/LineChart";
 import Card from "../../../components/Card";
-import VideoTabs from "../../Library/Sections/videoTabs";
-import ColorTone from "../../Library/Sections/colorTone";
-import AgeRangeAndGender from "../../Library/Sections/ageRangeAndGender";
 import BarChart from "Components/Charts/BarChart";
 import VideoSlider from "Components/Sliders/VideoSlider";
-import Tabs from "./../views/tabs";
 import switchTabs from "../switchTab";
-import { videoTabsDataBottom } from "../../Library/options";
+import { platformSocialMediaVideoList } from "../../Library/options";
 
 // import PropTypes from 'prop-types'
 
-const videoList = [
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
-		id: "kumascape3",
-		video: "//media.quickframe.com/video/video/6324.mp4"
-	},
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
-		id: "lumascape4",
-		video: "//media.quickframe.com/video/video/13433.mp4"
-	},
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
-		id: "lumascape12",
-		video: "//media.quickframe.com/video/video/15991.mp4"
-	},
-	{
-		poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
-		id: "lumascape1",
-		video: "//media.quickframe.com/video/video/7485.mp4"
-	}
-];
-
 class Platform extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {
+			selectedSocialMedia: "qf-iconFacebook",
+			socialMedia: [
+				"qf-iconFacebook",
+				"qf-iconInstagram",
+				"qf-iconSnapchat",
+				"qf-iconTwitter",
+				"qf-iconYotube"
+			]
+		};
+	}
+
+	changeSocialMedia(e) {
+		this.setState({ selectedSocialMedia: e });
+	}
 	render() {
+		const videoList =
+			platformSocialMediaVideoList[this.state.selectedSocialMedia].videoList;
+		const videodataSocial =
+			platformSocialMediaVideoList[this.state.selectedSocialMedia]
+				.videoTabsData;
+
 		const yLabels = {
 			0: "1-2 Scenes",
 			2: "3-5 Scenes",
@@ -88,23 +84,22 @@ class Platform extends Component {
 						</div>
 
 						<div className="col-1">
-							<div className={style.iconWrapper}>
-								<span className={"qf-iconFacebook " + style.icon} />
-							</div>
-							<div
-								className={style.iconWrapper + " " + style.iconWrapperActive}
-							>
-								<span className={"qf-iconInstagram " + style.icon} />
-							</div>
-							<div className={style.iconWrapper}>
-								<span className={"qf-iconSnapchat " + style.icon} />
-							</div>
-							<div className={style.iconWrapper}>
-								<span className={"qf-iconTwitter " + style.icon} />
-							</div>
-							<div className={style.iconWrapper}>
-								<span className={"qf-iconYotube " + style.icon} />
-							</div>
+							{this.state.socialMedia.map(socialIcon => (
+								<div
+									key={socialIcon}
+									onClick={() => this.changeSocialMedia(socialIcon)}
+									className={
+										style.iconWrapper +
+										` ${
+											socialIcon === this.state.selectedSocialMedia
+												? style.iconWrapperActive
+												: null
+										}`
+									}
+								>
+									<span className={`${socialIcon} ` + style.icon} />
+								</div>
+							))}
 						</div>
 
 						<div className="col-11 mt-10 pb-10">
@@ -315,7 +310,7 @@ class Platform extends Component {
 												<Link className={style.tab} to="/marketview/platform">
 													All
 												</Link>
-												{videoTabsDataBottom.map(link => (
+												{videodataSocial.map(link => (
 													<Link
 														key={link.url}
 														to={"/marketview/platform/" + link.url}
@@ -328,7 +323,9 @@ class Platform extends Component {
 											<br />
 											{switchTabs(
 												this.props.params.tab,
-												this.props.routeParams.id
+												this.props.routeParams.id,
+												false,
+												this.state.selectedSocialMedia
 											)}
 										</div>
 									</div>
