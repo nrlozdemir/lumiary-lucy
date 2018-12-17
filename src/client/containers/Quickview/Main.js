@@ -6,7 +6,6 @@ import style from "./style.scss";
 import VersusList from "../../components/VersusList";
 import RankingsList from "../../components/RankingsList";
 import Select from "./../../components/Form/Controls/Select/index";
-import { shuffleArray } from "../../utils";
 import { versus } from "../Library/options";
 
 class Quickview extends Component {
@@ -14,7 +13,9 @@ class Quickview extends Component {
 		super(props);
 		this.state = {
 			ageRange: { value: "18-24", label: "18-24", name: "versus1" },
-			gender: "male"
+			gender: "male",
+			selectedView: "one",
+			views: ["one", "two"]
 		};
 	}
 
@@ -70,9 +71,15 @@ class Quickview extends Component {
 					</div>
 					<div className="col-3">
 						<p className={style.viewContainer}>
-							<span className="qf-iconLeft-Arrow" />
+							<span
+								className="qf-iconLeft-Arrow"
+								onClick={() => this.onChange("selectedView", "one")}
+							/>
 							<span> views</span>
-							<span className="qf-iconRight-Arrow" />
+							<span
+								className="qf-iconRight-Arrow"
+								onClick={() => this.onChange("selectedView", "two")}
+							/>
 						</p>
 					</div>
 				</div>
@@ -83,7 +90,7 @@ class Quickview extends Component {
 						/>
 					</div>
 					<div className="col-4">
-						<RankingsList />
+						<RankingsList selectedView={this.state.selectedView} />
 					</div>
 				</div>
 			</React.Fragment>

@@ -2582,7 +2582,561 @@ const platformSocialMediaVideoList = {
 		]
 	}
 };
+const viewsVideos = {
+	one: [
+		{
+			id: "facebook",
+			data: [
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascap546e1",
+					video: "//media.quickframe.com/video/video/7485.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascape984",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascap856e1",
+					video: "//media.quickframe.com/video/video/16000.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumasc14ape3",
+					video: "//media.quickframe.com/video/video/15992.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumasc6ape4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumasc64586ape12",
+					video: "//media.quickframe.com/video/video/13450.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumasca2354pe12",
+					video: "//media.quickframe.com/video/video/15991.mp4"
+				},
 
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascape3",
+					video: "//media.quickframe.com/video/video/6324.mp4"
+				}
+			]
+		},
+		{
+			id: "instagram",
+			data: [
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape11242",
+					video: "//media.quickframe.com/video/video/13450.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascape6344",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascape3123",
+					video: "//media.quickframe.com/video/video/6324.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascape351",
+					video: "//media.quickframe.com/video/video/7485.mp4"
+				},
+
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape15232",
+					video: "//media.quickframe.com/video/video/15991.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascape2344",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascape1231",
+					video: "//media.quickframe.com/video/video/16000.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascape3453",
+					video: "//media.quickframe.com/video/video/15992.mp4"
+				}
+			]
+		},
+		{
+			id: "snapchat",
+			data: [
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascape2341",
+					video: "//media.quickframe.com/video/video/7485.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascap456546e4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascap5345e12",
+					video: "//media.quickframe.com/video/video/13450.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascap234e12",
+					video: "//media.quickframe.com/video/video/15991.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascape763",
+					video: "//media.quickframe.com/video/video/6324.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascap47e4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumasca12356pe1",
+					video: "//media.quickframe.com/video/video/16000.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascap76586e3",
+					video: "//media.quickframe.com/video/video/15992.mp4"
+				}
+			]
+		},
+		{
+			id: "youtube",
+			data: [
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascap5345e4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascap123e1",
+					video: "//media.quickframe.com/video/video/16000.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascape3123",
+					video: "//media.quickframe.com/video/video/15992.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape123214",
+					video: "//media.quickframe.com/video/video/13450.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumasca346pe12",
+					video: "//media.quickframe.com/video/video/15991.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumasc123123ape3",
+					video: "//media.quickframe.com/video/video/6324.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumasc123123ape1",
+					video: "//media.quickframe.com/video/video/7485.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumasc124213ape4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				}
+			]
+		},
+		{
+			id: "twitter",
+			data: [
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lum4123ascape1",
+					video: "//media.quickframe.com/video/video/7485.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "luma12312scape4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascap123e1",
+					video: "//media.quickframe.com/video/video/16000.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascape1231234",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape11231232",
+					video: "//media.quickframe.com/video/video/13450.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape1324232",
+					video: "//media.quickframe.com/video/video/15991.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascap45e3",
+					video: "//media.quickframe.com/video/video/6324.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascap456e3",
+					video: "//media.quickframe.com/video/video/15992.mp4"
+				}
+			]
+		},
+		{
+			id: "pinterest",
+			data: [
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumasca235234pe4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumasc346345ape4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascap2452345e12",
+					video: "//media.quickframe.com/video/video/13450.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascape325453",
+					video: "//media.quickframe.com/video/video/6324.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascape12634645",
+					video: "//media.quickframe.com/video/video/7485.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascape162354",
+					video: "//media.quickframe.com/video/video/16000.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascape33425345",
+					video: "//media.quickframe.com/video/video/15992.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape124234",
+					video: "//media.quickframe.com/video/video/15991.mp4"
+				}
+			]
+		}
+	],
+	two: [
+		{
+			id: "facebook",
+			data: [
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascape41",
+					video: "//media.quickframe.com/video/video/16000.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumascape57",
+					video: "//media.quickframe.com/video/video/7485.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascape342",
+					video: "//media.quickframe.com/video/video/15992.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascape4354",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascape456344",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape16535462",
+					video: "//media.quickframe.com/video/video/13450.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape13655462",
+					video: "//media.quickframe.com/video/video/15991.mp4"
+				},
+
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascape33465546",
+					video: "//media.quickframe.com/video/video/6324.mp4"
+				}
+			]
+		},
+		{
+			id: "instagram",
+			data: [
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape12342",
+					video: "//media.quickframe.com/video/video/15991.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascap5324e4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumascap436546e4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumasca234235pe12",
+					video: "//media.quickframe.com/video/video/13450.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumasca234235pe3",
+					video: "//media.quickframe.com/video/video/6324.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumasca23423532pe1",
+					video: "//media.quickframe.com/video/video/7485.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumasc4235ape1",
+					video: "//media.quickframe.com/video/video/16000.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascape3",
+					video: "//media.quickframe.com/video/video/15992.mp4"
+				}
+			]
+		},
+		{
+			id: "snapchat",
+			data: [
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumasca234235pe12",
+					video: "//media.quickframe.com/video/video/13450.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumasc234235ape12",
+					video: "//media.quickframe.com/video/video/15991.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumasc234235324ape3",
+					video: "//media.quickframe.com/video/video/6324.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumasc234235ape1",
+					video: "//media.quickframe.com/video/video/7485.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumasc243423ape4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumas4234234cape4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumas234234cape1",
+					video: "//media.quickframe.com/video/video/16000.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumasc5234234ape3",
+					video: "//media.quickframe.com/video/video/15992.mp4"
+				}
+			]
+		},
+		{
+			id: "youtube",
+			data: [
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "luma234234scape12",
+					video: "//media.quickframe.com/video/video/13450.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumasca324234pe12",
+					video: "//media.quickframe.com/video/video/15991.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "4234324",
+					video: "//media.quickframe.com/video/video/6324.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumas324235cape4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumasc234325ape1",
+					video: "//media.quickframe.com/video/video/16000.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumas5234234cape3",
+					video: "//media.quickframe.com/video/video/15992.mp4"
+				},
+
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumasc234234ape1",
+					video: "//media.quickframe.com/video/video/7485.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumasc5234234ape4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				}
+			]
+		},
+		{
+			id: "twitter",
+			data: [
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumasca234235pe4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape2342352312",
+					video: "//media.quickframe.com/video/video/15991.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumasc154124ape3",
+					video: "//media.quickframe.com/video/video/6324.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumascap235324e3",
+					video: "//media.quickframe.com/video/video/15992.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumascape42342312",
+					video: "//media.quickframe.com/video/video/13450.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumasc345ape1",
+					video: "//media.quickframe.com/video/video/7485.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumasca345345pe4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumasca345435pe1",
+					video: "//media.quickframe.com/video/video/16000.mp4"
+				}
+			]
+		},
+		{
+			id: "pinterest",
+			data: [
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumas123123cape1",
+					video: "//media.quickframe.com/video/video/7485.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumasc345345ape3",
+					video: "//media.quickframe.com/video/video/15992.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumasc345346ape4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/4.jpg",
+					id: "lumas123cape4",
+					video: "//media.quickframe.com/video/video/13433.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumasc325234ape12",
+					video: "//media.quickframe.com/video/video/13450.mp4"
+				},
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
+					id: "kumas234234cape3",
+					video: "//media.quickframe.com/video/video/6324.mp4"
+				},
+
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/1.jpg",
+					id: "lumasc124123ape1",
+					video: "//media.quickframe.com/video/video/16000.mp4"
+				},
+
+				{
+					poster: "//static.quickframe.com/homepage/lumascape/12.jpg",
+					id: "lumasc123123pe12",
+					video: "//media.quickframe.com/video/video/15991.mp4"
+				}
+			]
+		}
+	]
+};
 export {
 	lineData,
 	lineWithCustomLabel,
@@ -2594,5 +3148,6 @@ export {
 	videoTabsDataBottom,
 	videos,
 	versus,
-	platformSocialMediaVideoList
+	platformSocialMediaVideoList,
+	viewsVideos
 };
