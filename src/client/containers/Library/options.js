@@ -442,32 +442,32 @@ const videos = [
 	},
 	{
 		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
-		id: "kumascape3",
+		id: "kumascape33",
 		video: "//media.quickframe.com/video/video/13430.mp4"
 	},
 	{
 		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
-		id: "kumascape3",
+		id: "kumascape3124",
 		video: "//media.quickframe.com/video/video/13432.mp4"
 	},
 	{
 		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
-		id: "kumascape3",
+		id: "kumascape35234",
 		video: "//media.quickframe.com/video/video/15998.mp4"
 	},
 	{
 		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
-		id: "kumascape3",
+		id: "kumascape1233",
 		video: "//media.quickframe.com/video/video/15992.mp4"
 	},
 	{
 		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
-		id: "kumascape3",
+		id: "kumascape4123",
 		video: "//media.quickframe.com/video/video/15993.mp4"
 	},
 	{
 		poster: "//static.quickframe.com/homepage/lumascape/3.jpg",
-		id: "kumascape3",
+		id: "kumascape12353",
 		video: "//media.quickframe.com/video/video/15995.mp4"
 	}
 ];
