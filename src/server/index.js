@@ -17,7 +17,7 @@ process.env.PWD = path.join(process.cwd(), 'src', 'server')
 
 if (process.env.NODE_ENV === 'production') {
     Sentry.init({
-        dsn: 'https://9685ff9064ec4c7995ba01650d31d0eb@sentry.io/1334775',
+        dsn: 'https://71e88d90e3b4440e87da3550dec33e52@sentry.io/1355450',
         environment: process.env.ENVIRONMENT,
     })
 }

@@ -59,7 +59,7 @@ class Root extends React.Component {
     requestConfig();
 
     //Sentry config
-    Sentry.init({ dsn: 'https://7c84f757a92c4dfda093a5245466f438@sentry.io/1283404' });
+    Sentry.init({ dsn: 'https://71e88d90e3b4440e87da3550dec33e52@sentry.io/1355450' });
   }
 
   componentDidCatch(error, errorInfo) {
