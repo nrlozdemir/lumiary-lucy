@@ -1,6 +1,6 @@
-# Lumiary
+# Lucy
 
-Lumiere webapp. 
+Lucy webapp. 
 
 React/client source is in [src/client](src/client).
 
