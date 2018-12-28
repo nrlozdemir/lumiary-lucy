@@ -10,8 +10,8 @@ Make sure you [set up your development environment](https://app.tettra.co/teams/
 
 Clone the project
 ```
-git clone git@github.com:quickframe/lumiary.git
-cd lumiary
+git clone git@github.com:quickframe/lucy.git
+cd lucy
 ```
 
 Install dev dependencies 
