@@ -1,7 +1,21 @@
-import { createSelector } from 'reselect'
+import { createSelector } from 'reselect';
 
+/**
+ * Direct selector to the library state domain
+ */
 
-const compareVideosSelector = state => state.library
+const selectLibraryDomain = state => state.Library
 
+/**
+ * Other specific selectors
+ */
 
-export const getCompareVideos = createSelector(compareVideosSelector, state => state.toJS().compareVideos) 
+/**
+ * Default selector used by Library
+ */
+
+const makeSelectLibrary = () =>
+  createSelector(selectLibraryDomain, substate => substate.toJS());
+
+export default makeSelectLibrary;
+export { selectLibraryDomain };

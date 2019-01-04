@@ -1,0 +1,55 @@
+.radioRow {
+	display: flex;
+	justify-content: space-between;
+
+	.radioContainer {
+		flex: 1;
+	}
+	.radioContainer input[type="radio"] {
+		display: none;
+		opacity: 0;
+	}
+
+	.colorCol {
+		position: relative;
+		cursor: pointer;
+		user-select: none;
+		width: 30px;
+		height: 56px;
+		display: inline-block;
+	}
+
+	.selected {
+		box-shadow: inset 0 0 10px 0 rgba(0, 0, 0, 0.5);
+	}
+}
+.label {
+	width: 100%;
+	background-color: $color-dark-five;
+	border: 1px solid $color-cool-grey;
+	display: block;
+	margin-bottom: 16px;
+	margin-top: -4px;
+	.colorRadius {
+		border-radius: 8px;
+		width: 12px;
+		height: 12px;
+		float: left;
+		margin: 14px;
+	}
+	.colorName {
+		color: $color-white;
+		font-size: 14px;
+		font-family: $font-family-ClanOTNews;
+		line-height: 40px;
+	}
+}
+
+.inputLabel {
+	color: $color-white;
+	font-family: $font-family-ClanOT;
+	font-weight: bold;
+	font-size: 12px;
+	display: block;
+	margin-bottom: 16px;
+}

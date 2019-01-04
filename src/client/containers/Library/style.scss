@@ -1,0 +1,89 @@
+.headerContainer {
+	display: flex;
+	margin-top: 72px;
+	div {
+		flex: 1;
+	}
+	&:last-child div {
+		flex: 1;
+		margin-right: auto;
+	}
+}
+body {
+	background-color: #583e7e;
+	color: #fff;
+}
+
+.sidebar {
+	-moz-transition: all 0.5s ease;
+	-o-transition: all 0.5s ease;
+	-webkit-transition: all 0.5s ease;
+	background: $color-dusk;
+	height: 100%;
+	position: fixed;
+	overflow-x: hidden;
+	overflow-y: auto;
+	transition: all 0.5s ease;
+	width: 0;
+	z-index: 1000;
+	right: 0;
+	top: 0;
+}
+
+.sidebarHeader {
+	background-color: $color-white;
+	position: relative;
+	width: 100%;
+	.text {
+		padding: 0 32px;
+		line-height: 80px;
+		font-family: $font-family-ClanOT;
+		font-weight: bold;
+		font-size: 14px;
+		span {
+			cursor: pointer;
+		}
+	}
+}
+
+.sidebarVisible {
+	width: 440px;
+}
+
+.overlay {
+	position: fixed;
+	display: none;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: rgba(0, 0, 0, 0.4);
+	z-index: 1;
+}
+
+.overlayShow {
+	display: block;
+}
+
+.inputArea {
+	display: block;
+}
+
+.cancel {
+	cursor: pointer;
+	margin: 32px 0;
+	font-family: $font-family-ClanOT;
+	font-size: 14px;
+	font-weight: bold;
+	color: $color-white;
+}
+
+.librarySearchInput {
+	//background: url('../../../assets/search.png');
+	background-position: 10px 10px;
+	background-repeat: no-repeat;
+	background-size: 17px 17px;
+	padding-left: 39px;
+}

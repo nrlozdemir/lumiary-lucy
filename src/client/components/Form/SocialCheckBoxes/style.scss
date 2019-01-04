@@ -1,0 +1,45 @@
+.SocialSelectBoxes {
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+
+	.socialCheckbox {
+		flex: 1;
+	}
+	.socialCheckbox input[type="checkbox"] {
+		display: none;
+		opacity: 0;
+	}
+
+	.labelSocial {
+		color: $color-dusk;
+		position: relative;
+		cursor: pointer;
+		user-select: none;
+		width: 52px;
+		height: 52px;
+		border-radius: 5px;
+		display: inline-block;
+		background-color: $color-dark-five;
+
+		&:before {
+			position: absolute;
+			left: 50%;
+			top: 50%;
+			transform: translate(-50%, -50%);
+			font-size: 24px;
+		}
+	}
+
+	.socialCheckbox input[type="checkbox"]:checked ~ label {
+		background-color: $color-white;
+	}
+}
+.label {
+	color: $color-white;
+	font-family: $font-family-ClanOT;
+	font-weight: bold;
+	font-size: 12px;
+	display: block;
+	margin-bottom: 16px;
+}

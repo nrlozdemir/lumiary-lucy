@@ -1,17 +1,6 @@
-import qs from 'qs'
-import { types } from 'Reducers/home'
-import { put, takeLatest } from 'redux-saga/effects'
+// import { take, call, put, select } from 'redux-saga/effects';
 
-function* home() {
-  try {
-
-  } catch (e) {
-
-  }
+// Individual exports for testing
+export default function* homeSaga() {
+	// See example in Containers/HomePage/saga.js
 }
-
-const homeSagas = [
-  //takeLatest(types.REQUEST_HOME, home)
-];
-
-export default homeSagas;

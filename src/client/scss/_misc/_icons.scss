@@ -1,0 +1,110 @@
+[class^="qf-icon"],
+[class*=" qf-icon"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: "icomoon" !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.qf-iconRight-Arrow:before {
+  content: "\e987";
+}
+
+.qf-iconLeft-Arrow:before {
+  content: "\e988";
+}
+
+.qf-iconFacebook:before {
+  content: "\e97d";
+}
+
+.qf-iconInstagram:before {
+  content: "\e984";
+}
+
+.qf-iconSnapchat:before {
+  content: "\e985";
+}
+
+.qf-iconTwitter:before {
+  content: "\e986";
+}
+
+.qf-iconPinterest:before {
+  content: "\e989";
+}
+
+.qf-iconYoutube:before {
+  content: "\e98a";
+}
+
+.qf-iconAdd:before {
+  content: "\e97c";
+}
+
+.qf-iconPlay .path1:before {
+  content: "\e97e";
+  color: rgb(255, 255, 255);
+}
+
+.qf-iconPlay .path2:before {
+  content: "\e97f";
+  margin-left: -0.849609375em;
+  color: rgb(68, 68, 68);
+}
+
+.qf-iconPlay .path3:before {
+  content: "\e980";
+  margin-left: -0.849609375em;
+  color: rgb(255, 255, 255);
+}
+
+.qf-iconPlay .path4:before {
+  content: "\e981";
+  margin-left: -0.849609375em;
+  color: rgb(68, 68, 68);
+}
+
+.qf-iconPlay .path5:before {
+  content: "\e982";
+  margin-left: -0.849609375em;
+  color: rgb(255, 255, 255);
+}
+
+.qf-iconPlay .path6:before {
+  content: "\e983";
+  margin-left: -0.849609375em;
+  color: rgb(68, 68, 68);
+}
+
+.qf-iconX:before {
+  content: "\e942";
+}
+
+.qf-iconInformation:before {
+  content: "\e977";
+}
+
+.qf-iconMale:before {
+  content: "\e979";
+}
+
+.qf-iconDrag:before {
+  content: "\e97a";
+}
+
+.qf-iconDrag--Drop:before {
+  content: "\e97b";
+}
+
+.qf-iconFemale:before {
+  content: "\e978";
+}

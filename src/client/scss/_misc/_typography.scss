@@ -1,0 +1,59 @@
+@mixin typeset($large-font-size, $large-line-height) {
+  font-size: $large-font-size + unquote("rem");
+  line-height: $large-line-height + unquote("rem");
+}
+
+@mixin letter-spacingset($letter-spacing) {
+  letter-spacing: $letter-spacing + unquote("rem");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.header-font {
+  font-weight: 700;
+  margin: 0;
+  padding: 0;
+}
+
+// usage
+// @include typeset( $large-font-size, $large-line-height);
+h1,
+.alpha {
+  @include typeset(3, 3.75);
+}
+h2,
+.beta {
+  @include typeset(1.5, 3);
+}
+h2,
+.gamma {
+  @include typeset(1.5, 3);
+}
+h3,
+.delta {
+  @include typeset(0.875, 1.625);
+}
+h4,
+.epsilon {
+  @include typeset(0.875, 1.625);
+}
+h5,
+.zeta {
+  @include typeset(0.75, 1.25);
+}
+p,
+.paragraph {
+  @include typeset(1.6, 1.8);
+  margin: 0;
+}
+.t-small {
+  @include typeset(1.4, 1.4);
+}
+.t-xs {
+  @include typeset(1.2, 1.2);
+  @include letter-spacingset(25);
+}

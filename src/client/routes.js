@@ -1,34 +1,58 @@
 import React from "react";
-import { IndexRoute, Route } from "react-router";
-import Layout from "./containers/Layout";
-import { baseName } from "Utils/globals";
+import { Route, Switch, withRouter } from "react-router-dom";
+// import PropTypes from "prop-types";
 
-//auth
-import { loadState, saveState } from "./utils/persistence";
+import Library from "Containers/Library";
+import Quickview from "Containers/Quickview";
+import Panoptic from "Containers/Panoptic";
+import Marketview from "Containers/Marketview";
+import NotFound from "Containers/NotFound";
+import Navbar from "Components/Navbar";
+import LibraryDetail from "Containers/LibraryDetail";
+import Layout from "Containers/Layout";
+import Compare from "Containers/Compare";
 
-//routes
-import NotFound from "./containers/NotFound";
-import Library from "./containers/Library";
-import MarketView from "./containers/MarketView";
-import Panoptic from "./containers/Panoptic";
-import Quickview from "./containers/Quickview";
-
-const requireAuth = (nextState, replace) => {
-	const state = loadState() || {};
-	if (state && state.auth && !state.auth.token) {
-		replace("/login");
+class Routes extends React.Component {
+	render() {
+		return (
+			<React.Fragment>
+				<Switch>
+					<Route
+						path="/library"
+						exact
+						render={props => <Layout {...props} component={Library} />}
+					/>
+					<Route
+						path="/library/:videoId/compare"
+						render={props => (
+							<Layout {...props} component={Compare} removeNavbar />
+						)}
+					/>
+					<Route
+						path="/library/:videoId"
+						render={props => (
+							<Layout {...props} component={LibraryDetail} removeNavbar />
+						)}
+					/>
+					<Route
+						path="/quickview"
+						render={props => <Layout {...props} component={Quickview} />}
+					/>
+					<Route
+						path="/panoptic"
+						render={props => <Layout {...props} component={Panoptic} />}
+					/>
+					<Route
+						path="/marketview"
+						render={props => <Layout {...props} component={Marketview} />}
+					/>
+					<Route component={NotFound} />
+				</Switch>
+			</React.Fragment>
+		);
 	}
-};
+}
 
-const routes = (
-	<Route path={baseName} component={Layout}>
-		<IndexRoute getComponent={Library} sidebar />
-		<Route path="library(/video/:id(/:tab))" getComponent={Library} sidebar />
-		<Route path="marketview(/:type(/:tab))" getComponent={MarketView} />
-		<Route path="panoptic" getComponent={Panoptic} />
-		<Route path="quickview" getComponent={Quickview} />
-		<Route path="*" components={NotFound} />
-	</Route>
-);
+Routes.propTypes = {};
 
-export default routes;
+export default withRouter(Routes);

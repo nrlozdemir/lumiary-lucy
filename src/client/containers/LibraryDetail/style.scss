@@ -1,0 +1,194 @@
+.header {
+	width: 100%;
+	background: $color-dark-grey-blue;
+	display: flex;
+	justify-content: space-between;
+	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+	div {
+		line-height: 80px;
+		font-size: 14px;
+		font-family: $font-family-ClanOT;
+		a {
+			color: $color-white;
+			text-decoration: none;
+			span {
+				background-color: $color-dark-five;
+				border-radius: 20px;
+				padding: 8px 11px;
+				border: 2px solid $color-cool-blue;
+				margin-right: 20px;
+			}
+		}
+	}
+}
+
+.chartHeader {
+	padding: 32px 20px;
+	font-size: 12px;
+	font-family: $font-family-ClanOTNews;
+
+	.socialIcons {
+		color: $color-white;
+		div {
+			span {
+				margin-right: 10px;
+			}
+		}
+	}
+
+	.legend {
+		div {
+			span {
+				width: 8px;
+				height: 8px;
+				display: inline-block;
+				margin-right: 5px;
+				border-radius: 10px;
+			}
+		}
+	}
+}
+
+.chartLabels {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px 50px;
+	.label {
+		text-align: center;
+		margin: 0 auto;
+	}
+}
+.radialChartsContainer {
+	.radialChart {
+		text-align: center;
+		width: calc(20% - 41px);
+		float: left;
+		margin: 30px 0;
+		padding: 0 20px;
+		border-left: 1px solid $color-dusk;
+		&:first-child {
+			border: none;
+		}
+		.doughnutChartContainer {
+			position: relative;
+			p {
+				font-family: $font-family-ClanOT;
+				font-weight: bold;
+				font-size: 18px;
+				position: absolute;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%, -50%);
+			}
+		}
+	}
+}
+
+.dot {
+	color: $color-white;
+	font-size: 14px;
+	margin-top: 14px;
+}
+.sliderContainer {
+	position: relative;
+	z-index: 2;
+	display: flex;
+	flex-wrap: nowrap;
+	overflow-x: hidden;
+	overflow-y: hidden;
+	height: 215px;
+
+	.image {
+		margin-top: 10px;
+		.originalImage {
+			padding: 5px 0px 5px 5px;
+			background-color: $color-dark-five;
+		}
+		.hover {
+			display: none;
+		}
+		&:hover {
+			.hover {
+				top: 10px;
+				display: block;
+				position: absolute;
+				transform: scale(1.2);
+				box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5);
+			}
+		}
+	}
+}
+.tabList {
+	background: $color-dusk;
+	margin: 0;
+	padding: 27px 23px;
+	color: $color-cool-grey;
+	font-family: $font-family-ClanOTNews;
+	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+	font-size: 14px;
+}
+
+.selectedTab {
+	background: transparent;
+	font-weight: bold;
+	color: $color-white;
+}
+.radarChartContainer {
+	margin: 0 auto;
+	padding-top: 35px;
+	background-color: $color-dark-grey-blue;
+	height: 303px;
+}
+.cancelButton {
+	float: right;
+	cursor: pointer;
+	background-color: #242b49;
+	border-radius: 20px;
+	padding: 8px;
+	border: 2px solid #51adc0;
+}
+.tabPanel {
+	background-color: $color-dark-grey-blue;
+	padding: 10px 30px;
+	height: 318px;
+	overflow-y: scroll;
+
+	.tabPanelItem {
+		background-color: $color-dark-five;
+		border: 1px solid $color-dusk;
+
+		div {
+			img {
+				vertical-align: middle;
+			}
+			.progressbarContainer {
+				padding: 0px 30px;
+				.barOptions {
+					display: flex;
+					justify-content: space-between;
+					font-family: $font-family-ClanOT;
+					font-weight: 500;
+					p {
+						font-size: 12px;
+						flex: 1;
+						&:first-child {
+							text-align: left;
+						}
+						&:last-child {
+							text-align: right;
+						}
+					}
+				}
+				.progressBar {
+					background-color: $color-white;
+					border-radius: 8px;
+				}
+				.percentage {
+					border-radius: 8px;
+					height: 8px;
+					background-color: $color-lighter-purple;
+				}
+			}
+		}
+	}
+}
