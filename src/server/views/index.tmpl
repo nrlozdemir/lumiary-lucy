@@ -24,7 +24,7 @@ html
 
     body
         #app!= content
-        script(type="text/javascript") window.__INITIAL_STATE__ = !{state}
+        script(type="text/javascript") window.__INITIAL_STATE__ = ""
         if ENV == 'development'
             script(type="text/javascript" src="/lib/library.dll.js")
             script(type="text/javascript", src="https://lumiary-local.quickframe.com:9090/dist/bundle.js")
