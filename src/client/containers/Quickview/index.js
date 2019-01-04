@@ -1,7 +1,45 @@
-if (typeof require.ensure !== 'function') require.ensure = (d, c) => c(require)
+/**
+  *
+  * Quickview
+  *
+*/
 
-export default function (location, cb) {
-  return require.ensure([], (require) => {
-    cb(null, require('./Main').default)
-  })
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
+import  makeSelectQuickview  from 'Selectors/Quickview.js'
+
+/* eslint-disable react/prefer-stateless-function */
+export class Quickview extends React.Component {
+  render() {
+    return (
+      <div>
+        Hello World
+      </div>
+    );
+  }
 }
+
+Quickview.propTypes = {
+  dispatch: PropTypes.func.isRequired,
+};
+
+const mapStateToProps = createStructuredSelector({
+  quickview: makeSelectQuickview(),
+});
+
+function mapDispatchToProps(dispatch) {
+  return {
+    dispatch,
+  };
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+);
+
+
+export default compose(withConnect)(Quickview);

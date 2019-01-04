@@ -1,50 +1,55 @@
+/**
+ *
+ * Navbar
+ *
+ */
+
 import React from "react";
-import { Link } from "react-router";
-// import PropTypes from "prop-types";
-import style from "./styles.scss";
-import { ucfirst } from "../../utils";
-import { connect } from "react-redux";
+import classnames from "classnames";
+import { NavLink } from "react-router-dom";
+import style from "./style.scss";
+// import PropTypes from 'prop-types';
 
-const NavBar = props => {
-	const { items, handleClick, baseUrl } = props;
-	return (
-		<div>
-			<nav className={style.navigation} role="navigation">
-				<div className={style.navlist}>
-					{items.length &&
-						items.map((key, idx) => {
-							const label = ucfirst(key);
-							return (
-								key != "undefined" && (
-									<Link
-										className={
-											(props.app.locationCurrent.split("/")[1] ===
-												"marketview" &&
-												key === "marketview") ||
-											(props.app.locationCurrent.split("/")[1] === "library" &&
-												key === "library")
-												? style.active
-												: null
-										}
-										activeClassName={style.active}
-										key={idx}
-										to={`/${key}/`}
-									>
-										<span>{label}</span>
-									</Link>
-								)
-							);
-						})}
-				</div>
-			</nav>
-		</div>
-	);
-};
+/* eslint-disable react/prefer-stateless-function */
+class Navbar extends React.Component {
+  render() {
+    const containerClass = classnames("bg-dark-grey-blue " + style.container);
+    const linksClass = classnames(style.links);
+    const logoClass = classnames("color-white " + style.logo);
+    const profileClass = classnames(style.profile);
+    const imageClass = classnames("circleImage " + style.profileImage);
 
-const mapStateToProps = state => state;
+    return (
+      <div className={containerClass}>
+        <div className={logoClass}>Lumiere</div>
+        <div className={linksClass}>
+          <NavLink to="/quickview" activeClassName={style.activeLink}>
+            QuickView
+          </NavLink>
+          <NavLink to="/library" activeClassName={style.activeLink}>
+            Library
+          </NavLink>
+          <NavLink to="/marketview" activeClassName={style.activeLink}>
+            Marketview
+          </NavLink>
+          <NavLink to="/panoptic" activeClassName={style.activeLink}>
+            Panoptic
+          </NavLink>
+          <NavLink to="/admin" activeClassName={style.activeLink}>
+            Admin
+          </NavLink>
+        </div>
+        <div className={profileClass}>
+          <div className="float-right">
+            <img src="https://picsum.photos/30" className={imageClass} />
+            <span>Bleacher Report</span>
+          </div>
+        </div>
+      </div>
+    );
+  }
+}
 
-const mapDispatchToProps = dispatch => ({});
-export default connect(
-	mapStateToProps,
-	mapDispatchToProps
-)(NavBar);
+Navbar.propTypes = {};
+
+export default Navbar;

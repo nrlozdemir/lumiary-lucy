@@ -1,21 +1,25 @@
 {
-  "presets": ["env", "react", "stage-2"],
-  "plugins": [
-    "react-hot-loader/babel",
-    "syntax-dynamic-import",
-    "transform-object-rest-spread",
-    ["module-resolver", {
-      "root": "../",
-      "cwd": "babelrc",
-      "alias": {
-        "Components": "./client/components",
-        "Utils": "./client/utils",
-        "Scss": "./client/scss",
-        "Reducers": "./client/reducers",
-        "Sagas": "./client/sagas",
-        "Json": "./client/json"
-      }
-    }]
-
-  ]
+	"presets": ["env", "react", "stage-2"],
+	"plugins": [
+		"react-hot-loader/babel",
+		"syntax-dynamic-import",
+		"transform-object-rest-spread",
+		[
+			"module-resolver",
+			{
+				"root": "../",
+				"cwd": "babelrc",
+				"alias": {
+					"Api": "./client/api",
+					"Components": "./client/components",
+					"Containers": "./client/containers",
+					"Selectors": "./client/selectors",
+					"Scss": "./client/scss",
+					"Reducers": "./client/reducers",
+					"Utils": "./client/utils",
+					"Sagas": "./client/sagas"
+				}
+			}
+		]
+	]
 }

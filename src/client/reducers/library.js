@@ -1,43 +1,42 @@
+/*
+ *
+ * Library reducer
+ *
+ */
+
 import { fromJS } from "immutable";
 
 export const types = {
-	SET_VIDEO_OBJECT: "LIBRARY/SET_VIDEO_OBJECT",
-	SET_COMPARE_VIDEO: "LIBRARY/SET_COMPARE_VIDEO",
-	RESET_COMPARE_VIDEOS: "LIBRARY/RESET_COMPARE_VIDEOS"
+  LOAD_VIDEOS: "Library/LOAD_VIDEOS",
+  LOAD_VIDEOS_SUCCESS: "Library/LOAD_VIDEOS_SUCCESS",
+  LOAD_VIDEOS_ERROR: "Library/LOAD_VIDEOS_ERROR"
 };
-
 export const actions = {
-	setVideoObject: payload => ({ type: types.SET_VIDEO_OBJECT, payload }),
-	setCompareVideo: payload => ({ type: types.SET_COMPARE_VIDEO, payload }),
-	resetCompareVideos: () => ({ type: types.RESET_COMPARE_VIDEOS })
+  loadVideos: () => ({ type: types.LOAD_VIDEOS }),
+  loadVideosSuccess: payload => ({ type: types.LOAD_VIDEOS_SUCCESS, payload }),
+  loadVideosError: error => ({ type: types.LOAD_VIDEOS, error })
 };
-
 export const initialState = fromJS({
-	video: null,
-	compareVideos: []
+  videos: [],
+  error: false,
+  loading: false
 });
 
-const reducer = (state = initialState, action) => {
-	switch (action.type) {
-		case types.SET_VIDEO_OBJECT:
-			return state.set("video", fromJS(action.payload));
-		case types.SET_COMPARE_VIDEO: {
-			const val = state.get("compareVideos").indexOf(action.payload);
-			if (val !== -1) {
-				return state.update("compareVideos", myList =>
-					myList.filter(element => element.id !== action.payload.id)
-				);
-			} else {
-				return state.update("compareVideos", myList =>
-					myList.push(action.payload)
-				);
-			}
-		}
-		case types.RESET_COMPARE_VIDEOS:
-			return state.set("compareVideos", fromJS([]));
-		default:
-			return state;
-	}
+const libraryReducer = (state = initialState, action) => {
+  switch (action.type) {
+    case types.LOAD_VIDEOS:
+      return state.set("loading", fromJS(true));
+    case types.LOAD_VIDEOS_SUCCESS:
+      return state
+        .set("videos", fromJS(action.payload))
+        .set("loading", fromJS(false));
+    case types.LOAD_VIDEOS_ERROR:
+      return state
+        .set("error", fromJS(action.error))
+        .set("loading", fromJS(false));
+    default:
+      return state;
+  }
 };
 
-export default reducer;
+export default libraryReducer;

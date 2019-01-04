@@ -1,0 +1,41 @@
+.sliderClass {
+	position: relative;
+	padding-bottom: 80px;
+	.arrowLeft {
+		position: absolute;
+		bottom: 20px;
+		left: 0;
+		cursor: pointer;
+		background-color: $color-dark-five;
+		border-radius: 20px;
+		padding: 8px 11px;
+		border: 2px solid $color-cool-blue;
+		margin-top: 30px;
+	}
+
+	.arrowRight {
+		position: absolute;
+		bottom: 20px;
+		right: 0;
+		cursor: pointer;
+		background-color: $color-dark-five;
+		border-radius: 20px;
+		padding: 8px 11px;
+		border: 2px solid $color-cool-blue;
+	}
+
+	.whichSlideText {
+		font-family: $font-family-ClanOT;
+		font-weight: bold;
+		font-size: 14px;
+		position: absolute;
+		bottom: 20px;
+		left: 50%;
+		transform: translate(-50%, 0);
+	}
+
+	.disable {
+		cursor: not-allowed;
+		opacity: 0.5;
+	}
+}

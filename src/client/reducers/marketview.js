@@ -1,26 +1,23 @@
-export const types = {
-  TEST: 'TEST'
+/*
+*
+* Marketview reducer
+*
+*/
+
+
+import { fromJS } from 'immutable';
+
+
+
+export const types = {};
+export const actions = {};
+export const initialState = fromJS({});
+
+const marketviewReducer = (state = initialState, action) => {
+switch (action.type) {
+default:
+return state;
+}
 }
 
-export const actions = {
-  // deleteNotification: (payload) => ({ type: types.DELETE_NOTIFICATION, payload }),
-}
-
-export const initialState = {
-  data: null,
-}
-
-const reducer = (state = initialState, action) => {
-  switch (action.type) {
-
-    case types.TEST:
-      return {
-        ...state,
-      }
-
-    default:
-      return state
-  }
-}
-
-export default reducer
+export default marketviewReducer;

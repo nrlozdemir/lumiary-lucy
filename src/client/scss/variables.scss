@@ -1,57 +1,47 @@
-$font-family-sans-serif: "AnonymousPro";
-$font-family-sans-serif-bold: "AnonymousProBold";
-$font-family-icons: "Glyphicons Halflings";
-$font-family-clanOT: "ClanOT";
-$font-family-clanOTNews: "ClanOTNews";
-$font-family-clanOTBook: "ClanOTBook";
+$font-family-primary: "Futura";
+$font-family-ClanOT: "ClanOT";
+$font-family-ClanOTBold: "ClanOTBold";
+$font-family-ClanOTNews: "ClanOTNews";
 
 $font-family-qf-icons: "icomoon";
 
-//variable injected via webpack/config
-$s3_static: $staticUrl;
+$s3_static: "https://s3.amazonaws.com/quickframe-static-dev/";
 
-$output-bourbon-deprecation-warnings: false;
-$hover-transition: 0.2s;
+// $color-white: #ffffff;
+// $color-tealish: #21bcd5;
+// $color-dark: #22212f;
+// $color-dark-two: #242331;
+// $color-charcoal-grey: #2f2e3d;
+// $color-black: #000000;
+// $color-aqua-blue: #00c8d6;
+// $color-dark-three: #161620;
+// $color-tealish-two: #1fbad2;
 
-//COLORS
-// PRIMARY
-$color-primary-electric-yellow: #fffa00;
-$color-primary-electric-blue: #58e7f2;
-$color-primary-amgreen: #21a368;
-$color-primary-electric-green: #31e05a;
+// New Colors v2
 
-// ACCENT
-$color-accent-mango: #fb952f;
-$color-accent-violet: #a190af;
-$color-accent-sunflower: #ffd800;
-$color-accent-seaform: #5cb3cf;
-$color-accent-cherry: #fb4a2f;
-$color-accent-purple: #72479d;
-
-// NEUTRAL
-$color-neutral-white: #ffffff;
-$color-neutral-pearl-grey: #f5f5f5;
-$color-neutral-sterling-grey: #d9d9d9;
-$color-neutral-medium-grey: #979797;
-$color-neutral-charcoal: #353535;
-$color-neutral-true-black: #000000;
-
-//SOCIAL
-$color-facebook-blue: #3a589a;
-$color-twitter-blue: #3f99ff;
-$color-google-red: #e9544f;
-$color-snapchat-yellow: #fffb00;
-$color-instagram-purple: #8a3ab9;
-
-//FORM:
-$color-form-error-red: #f34a35;
-
-$color-white: #ffffff;
-$color-tealish: #21bcd5;
-$color-dark: #22212f;
-$color-pale-grey: #fcfbff;
-$color-dark-two: #242331;
-$color-charcoal-grey: #2f2e3d;
-$color-black: #000000;
-$color-aqua-blue: #00c8d6;
-$color-dark-three: #161620;
+$colors: (
+	black: #000,
+	white: #fff,
+	dark-four: #171721,
+	pale-lavender: #fcfbff,
+	dusk: #5a6386,
+	dark-five: #242b49,
+	dark-grey-blue: #303a5d,
+	cool-grey: #acb0be,
+	cool-blue: #51adc0,
+	lighter-purple: #8567f0,
+	coral-pink: #ff556f,
+	dark-blue-grey: #202952
+);
+$color-black: #000;
+$color-white: #fff;
+$color-dark-four: #171721;
+$color-pale-lavender: #fcfbff;
+$color-dusk: #5a6386;
+$color-dark-five: #242b49;
+$color-dark-grey-blue: #303a5d;
+$color-cool-grey: #acb0be;
+$color-cool-blue: #51adc0;
+$color-lighter-purple: #8567f0;
+$color-coral-pink: #ff556f;
+$color-dark-blue-grey: #202952;

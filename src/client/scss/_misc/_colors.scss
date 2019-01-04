@@ -1,0 +1,9 @@
+/* For each key in the color map, create a class */
+@each $name, $value in $colors {
+  .bg-#{$name} {
+    background-color: $value;
+  }
+  .color-#{$name} {
+    color: $value;
+  }
+}

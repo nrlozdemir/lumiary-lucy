@@ -1,0 +1,29 @@
+.label {
+	display: block;
+	color: $color-white;
+	margin-bottom: 16px;
+}
+
+.input {
+	font-family: $font-family-ClanOTNews;
+	outline: 0;
+	border: 1px solid $color-dusk;
+	padding: 10px 20px;
+	background-color: $color-dark-five;
+	color: $color-dusk;
+	box-sizing: border-box;
+	&:focus {
+		border: 1px solid $color-white;
+		color: $color-white;
+	}
+}
+.typing {
+	border: 1px solid $color-white;
+	color: $color-white;
+}
+.error {
+	border: 1px solid $color-coral-pink;
+	.label {
+		color: $color-coral-pink;
+	}
+}

@@ -18,6 +18,7 @@ module.exports = {
 			"react-slick",
 			"react-tabs",
 			"react-router",
+			"react-router-dom",
 			"react-modal",
 			"react-dropzone-s3-uploader",
 			"react-jw-player",
@@ -52,7 +53,7 @@ module.exports = {
 			"isomorphic-fetch",
 			"lodash",
 
-		    "react-circular-progressbar",
+			"react-circular-progressbar",
 			"react-icons",
 
 			"chart.js",

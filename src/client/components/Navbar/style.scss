@@ -1,0 +1,49 @@
+.container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 23px 40px;
+	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+	font-family: $font-family-ClanOTNews;
+}
+
+.logo {
+	flex: 3;
+	font-size: 18px;
+}
+
+.links {
+	flex: 6;
+	text-align: center;
+
+	a {
+		padding: 0 36px;
+		color: $color-cool-grey;
+		font-size: 14px;
+		text-decoration: none;
+	}
+
+	.activeLink {
+		color: $color-white;
+		font-size: 14px;
+		font-family: $font-family-ClanOT;
+		font-weight: 500;
+	}
+}
+
+.profile {
+	flex: 3;
+	color: $color-white;
+	font-size: 14px;
+	font-family: $font-family-ClanOT;
+	font-weight: bold;
+
+	.profileImage {
+		border: 2px solid $color-white;
+		vertical-align: middle;
+	}
+
+	span {
+		padding-left: 16px;
+	}
+}
