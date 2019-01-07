@@ -3,7 +3,7 @@ const fs = require("fs");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const neat = require("node-neat");
 const bourbon = require("bourbon-neat");
 const sassVars = require("@epegzz/sass-vars-loader");
@@ -26,7 +26,7 @@ const breakpoints = {
 
 module.exports = {
 	context: __dirname,
-	entry: ["../client/index"],
+	entry: ["@babel/polyfill", "../client/index"],
 
 	output: {
 		path: path.resolve(__dirname, "..", "build"),
@@ -45,7 +45,7 @@ module.exports = {
 				BASENAME: JSON.stringify("/"),
 				API_ROOT: JSON.stringify("https://api.qa.quickframe.com"),
 				API_VERSION: JSON.stringify("v1"),
-                BREAKPOINTS: breakpoints,
+				BREAKPOINTS: breakpoints
 			}
 		}),
 
@@ -75,9 +75,9 @@ module.exports = {
 				evaluate: true,
 				if_return: true,
 				join_vars: true
-				},
+			},
 			output: {
-				comments: false,
+				comments: false
 			},
 			exclude: [/\.min\.js$/gi] // skip pre-minified libs
 		}),
@@ -99,31 +99,33 @@ module.exports = {
 
 		function() {
 			this.plugin("done", statsData => {
-				const stats = statsData.toJson()
-				const tmpl = path.join(__dirname, '../server/views', 'index.tmpl')
-				const pug = path.join(__dirname, '../server/views', 'index.pug')
+				const stats = statsData.toJson();
+				const tmpl = path.join(__dirname, "../server/views", "index.tmpl");
+				const pug = path.join(__dirname, "../server/views", "index.pug");
 
-				console.log(stats.assetsByChunkName)
+				console.log(stats.assetsByChunkName);
 
 				if (!stats.errors.length) {
-					var html = fs.readFileSync(tmpl, "utf8")
+					var html = fs.readFileSync(tmpl, "utf8");
 
-					var htmlOutput = html.replace("bundle.min.js",
-						`${static_url}bundles/lumiere/${stats.assetsByChunkName.main[0]}`
-					).replace("vendor.min.js",
-						`${static_url}bundles/lumiere/${stats.assetsByChunkName.vendor}`
-					).replace("bundle.min.css",
-						`${static_url}bundles/lumiere/${stats.assetsByChunkName.main[1]}`
-					)
+					var htmlOutput = html
+						.replace(
+							"bundle.min.js",
+							`${static_url}bundles/lumiere/${stats.assetsByChunkName.main[0]}`
+						)
+						.replace(
+							"vendor.min.js",
+							`${static_url}bundles/lumiere/${stats.assetsByChunkName.vendor}`
+						)
+						.replace(
+							"bundle.min.css",
+							`${static_url}bundles/lumiere/${stats.assetsByChunkName.main[1]}`
+						);
 
-					fs.writeFileSync(
-						pug,
-						htmlOutput
-					)
-				}
-				else {
-					console.log(stats.errors)
-					throw new Error(stats.errors)
+					fs.writeFileSync(pug, htmlOutput);
+				} else {
+					console.log(stats.errors);
+					throw new Error(stats.errors);
 				}
 			});
 		}

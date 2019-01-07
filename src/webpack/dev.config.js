@@ -21,6 +21,7 @@ const breakpoints = {
 module.exports = {
 	context: __dirname,
 	entry: [
+		"@babel/polyfill",
 		"react-hot-loader/patch",
 		"webpack-dev-server/client?https://lumiary-local.quickframe.com:9090",
 		"webpack/hot/only-dev-server",
@@ -159,7 +160,7 @@ module.exports = {
 						}
 					}
 
-					//{ loader: 'postcss-loader' }
+					//{ loader: "postcss-loader" }
 				]
 			},
 			{
