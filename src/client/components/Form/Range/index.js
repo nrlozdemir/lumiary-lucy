@@ -4,8 +4,6 @@ import classnames from "classnames";
 import PropTypes from "prop-types";
 import style from "./styles.scss";
 
-import "!style-loader!css-loader!rc-slider/assets/index.css";
-
 import Slider from "rc-slider";
 
 const RangeSlider = Slider.Range;
