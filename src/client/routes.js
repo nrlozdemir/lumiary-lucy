@@ -12,9 +12,6 @@ import Layout from "Containers/Layout";
 import Compare from "Containers/Compare";
 
 class Routes extends React.Component {
-	componentDidMount() {
-		console.log("dsfsdf");
-	}
 	render() {
 		return (
 			<Switch>
