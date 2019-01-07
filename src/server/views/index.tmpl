@@ -8,12 +8,11 @@ html
         style(type="text/css").
             body {
                 opacity: 0;
-                background: center no-repeat url('https://s3.amazonaws.com/quickframe-static-dev/homepage/measure-wheel-qf.gif');
+                background: #242b49;
             }
         script(type="text/javascript").
             document.addEventListener("DOMContentLoaded", function(event) {
                 document.body.style.opacity = 1;
-                document.body.style.background = 'none';
             });
 
         if ENV == 'production' || ENV == 'staging'
