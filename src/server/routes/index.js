@@ -1,11 +1,11 @@
 import basicAuth from "express-basic-auth";
 import React from "react";
-import ReactDOMServer from "react-dom/server";
+import { renderToString } from "react-dom/server";
 import { StaticRouter } from "react-router-dom";
 import Routes from "../../client/routes";
-import errMsg from "./../utils/error";
 import store from "../../client/configureStore";
 import { Provider } from "react-redux";
+import Helmet from "react-helmet";
 
 const cache = require("express-redis-cache")({
 	host: process.env.REDIS_HOST
@@ -41,17 +41,6 @@ module.exports = app => {
 		);
 	}
 
-	//S3 Uploads
-	app.use(
-		"/s3",
-		require("react-dropzone-s3-uploader/s3router")({
-			bucket: `${app.settings.s3bucket}/uploads`,
-			region: "us-east-1", // optional
-			headers: { "Access-Control-Allow-Origin": "*" }, // optional
-			ACL: "private" // this is the default - set to `public-read` to let anyone view uploads
-		})
-	);
-
 	app.get(
 		"/*",
 		cache.route({
@@ -59,19 +48,23 @@ module.exports = app => {
 		}),
 		(req, res) => {
 			const context = {};
+			const head = Helmet.rewind();
 
 			//render components
-			const app = ReactDOMServer.renderToString(
+			const reactDom = renderToString(
 				<Provider store={store}>
 					<StaticRouter location={req.url} context={context}>
 						<Routes />
 					</StaticRouter>
 				</Provider>
 			);
-
 			res.render("index", {
+				title: head.title.toString(),
+				meta: head.meta.toString(),
+				link: head.link.toString(),
+				ENV: process.env.NODE_ENV,
 				state: JSON.stringify(store.getState()),
-				content: app
+				content: reactDom
 			});
 		}
 	);
