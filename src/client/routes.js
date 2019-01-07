@@ -16,6 +16,11 @@ class Routes extends React.Component {
 		return (
 			<Switch>
 				<Route
+					path="/"
+					exact
+					render={props => <Layout {...props} component={Library} />}
+				/>
+				<Route
 					path="/library"
 					exact
 					render={props => <Layout {...props} component={Library} />}
