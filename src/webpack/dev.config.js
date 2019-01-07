@@ -54,7 +54,7 @@ module.exports = {
 				BREAKPOINTS: breakpoints,
 				FEATURE_CONTACT: JSON.stringify(true),
 				FEATURE_EXPLORE: JSON.stringify(true),
-				FEATURE_LOGIN: 	JSON.stringify(true),
+				FEATURE_LOGIN: JSON.stringify(true),
 				FEATURE_SIGNUP: JSON.stringify(true)
 			}
 		}),
@@ -76,19 +76,19 @@ module.exports = {
 		//   statsOptions: { source: false }
 		// })
 		function() {
-			this.plugin("done", (statsData) => {
-			  const stats = statsData.toJson()
-			  const tmpl = path.join(__dirname, '../server/views', 'index.tmpl')
-			  const pug = path.join(__dirname, '../server/views', 'index.pug')
-	  
-			  console.log(stats.assetsByChunkName)
-	  
-			  if (!stats.errors.length) {
-				var html = fs.readFileSync(tmpl, "utf8")
-	  
-				fs.createReadStream(tmpl).pipe(fs.createWriteStream(pug));
-			  }
-			})
+			this.plugin("done", statsData => {
+				const stats = statsData.toJson();
+				const tmpl = path.join(__dirname, "../server/views", "index.tmpl");
+				const pug = path.join(__dirname, "../server/views", "index.pug");
+
+				console.log(stats.assetsByChunkName);
+
+				if (!stats.errors.length) {
+					var html = fs.readFileSync(tmpl, "utf8");
+
+					fs.createReadStream(tmpl).pipe(fs.createWriteStream(pug));
+				}
+			});
 		}
 	],
 
@@ -153,17 +153,8 @@ module.exports = {
 						options: {
 							resources: [
 								path.resolve(__dirname, "../client/scss/variables.scss"),
-								path.resolve(__dirname, "../client/scss/breakpoints.scss"),
-								path.resolve(__dirname, "../client/scss/mixins.scss"),
-								path.resolve(
-									__dirname,
-									"../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss"
-								),
-								path.resolve(
-									__dirname,
-									"../../node_modules/bourbon-neat/core/_neat.scss"
-								),
-								path.resolve(__dirname, "../client/scss/helpers.scss")
+								path.resolve(__dirname, "../client/scss/fonts.scss"),
+								path.resolve(__dirname, "../client/scss/_misc/misc.scss")
 							]
 						}
 					}

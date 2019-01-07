@@ -1,5 +1,11 @@
-import matchRoute from "../utils/match";
 import basicAuth from "express-basic-auth";
+import React from "react";
+import ReactDOMServer from "react-dom/server";
+import { StaticRouter } from "react-router-dom";
+import Routes from "../../client/routes";
+import errMsg from "./../utils/error";
+import store from "../../client/configureStore";
+import { Provider } from "react-redux";
 
 const cache = require("express-redis-cache")({
 	host: process.env.REDIS_HOST
@@ -46,14 +52,27 @@ module.exports = app => {
 		})
 	);
 
-	//SSR
 	app.get(
 		"/*",
 		cache.route({
 			prefix: "lumiere"
 		}),
 		(req, res) => {
-			matchRoute(req, res);
+			const context = {};
+
+			//render components
+			const app = ReactDOMServer.renderToString(
+				<Provider store={store}>
+					<StaticRouter location={req.url} context={context}>
+						<Routes />
+					</StaticRouter>
+				</Provider>
+			);
+
+			res.render("index", {
+				state: JSON.stringify(store.getState()),
+				content: app
+			});
 		}
 	);
 };
