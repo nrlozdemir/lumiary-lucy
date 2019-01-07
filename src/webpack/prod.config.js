@@ -3,7 +3,7 @@ const fs = require("fs");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const neat = require("node-neat");
 const bourbon = require("bourbon");
 const sassVars = require("@epegzz/sass-vars-loader");
@@ -26,7 +26,7 @@ const breakpoints = {
 
 module.exports = {
 	context: __dirname,
-	entry: ["../client/index"],
+	entry: ["@babel/polyfill", "../client/index"],
 
 	output: {
 		path: path.resolve(__dirname, "..", "build"),
@@ -80,7 +80,7 @@ module.exports = {
 				ie8: false,
 				output: {
 					comments: false
-				},
+				}
 			},
 			exclude: [/\.min\.js$/gi] // skip pre-minified libs
 		}),

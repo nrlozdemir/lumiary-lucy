@@ -3,7 +3,7 @@ const fs = require("fs");
 const webpack = require("webpack");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const CompressionPlugin = require("compression-webpack-plugin");
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const UglifyJsPlugin = require("uglifyjs-webpack-plugin");
 const neat = require("node-neat");
 const bourbon = require("bourbon");
 const sassVars = require("@epegzz/sass-vars-loader");
@@ -26,7 +26,7 @@ const breakpoints = {
 
 module.exports = {
 	context: __dirname,
-	entry: ["../client/index"],
+	entry: ["@babel/polyfill", "../client/index"],
 
 	output: {
 		path: path.resolve(__dirname, "..", "build"),
@@ -80,7 +80,7 @@ module.exports = {
 				ie8: false,
 				output: {
 					comments: false
-				},
+				}
 			},
 			exclude: [/\.min\.js$/gi] // skip pre-minified libs
 		}),
@@ -106,7 +106,7 @@ module.exports = {
 				const tmpl = path.join(__dirname, "../server/views", "index.tmpl");
 				const pug = path.join(__dirname, "../server/views", "index.pug");
 
-				console.log(stats.assetsByChunkName)
+				console.log(stats.assetsByChunkName);
 
 				if (!stats.errors.length) {
 					var html = fs.readFileSync(tmpl, "utf8");
@@ -127,8 +127,8 @@ module.exports = {
 
 					fs.writeFileSync(pug, htmlOutput);
 				} else {
-					console.log(stats.errors)
-					throw new Error(stats.errors)
+					console.log(stats.errors);
+					throw new Error(stats.errors);
 				}
 			});
 		}

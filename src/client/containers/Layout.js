@@ -1,6 +1,5 @@
 import React from "react";
 import Navbar from "Components/Navbar/index";
-import "../scss/app.scss";
 const Layout = props => {
 	const Main = props.component;
 	const { removeNavbar } = props;
