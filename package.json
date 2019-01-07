@@ -171,9 +171,9 @@
 		"storybook-readme": "^3.3.0",
 		"webpack": "^3.11.0",
 		"webpack-bundle-analyzer": "^2.11.1",
-		"webpack-bundle-tracker": "^0.3.0",
-		"webpack-dev-server": "^3.1.14",
-		"webpack-s3-plugin": "^1.0.3"
+		"webpack-bundle-tracker": "^0.2.1",
+		"webpack-dev-server": "^2.9.4",
+		"webpack-s3-plugin": "1.0.0-rc.0"
 	},
 	"config": {
 		"commitizen": {
