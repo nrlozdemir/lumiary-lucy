@@ -1,4 +1,5 @@
 import React from "react";
+import { hot } from "react-hot-loader";
 import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 
@@ -15,4 +16,4 @@ const App = () => (
 	</Provider>
 );
 
-export default App;
+export default hot(module)(App);

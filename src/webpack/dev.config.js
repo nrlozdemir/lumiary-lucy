@@ -28,6 +28,10 @@ module.exports = {
 		"../client/index"
 	],
 
+	devServer: {
+		hot: true
+	},
+
 	stats: {
 		colors: true,
 		modules: true,
@@ -99,10 +103,11 @@ module.exports = {
 				test: /\.jsx?$/,
 				//exclude: /node_modules/,
 				include: path.resolve(__dirname, "..", "client"),
-				use: [
-					{ loader: "react-hot-loader/webpack" },
-					{ loader: "babel-loader" }
-				]
+				loader: require.resolve("babel-loader"),
+				options: {
+					cacheDirectory: true,
+					plugins: ["react-hot-loader/babel"]
+				}
 			},
 			{
 				test: /\.(scss|css)$/,
