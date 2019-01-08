@@ -7,7 +7,7 @@
 	"scripts": {
 		"vendor": "webpack --config src/webpack/vendor.config.js",
 		"start": "node src/index.js",
-		"local": "NODE_ENV=development node src/index.js",
+		"local": "NODE_ENV=development node src/index.js --hot",
 		"test": "NODE_ENV=test MOCHA_FILE=./src/test-results/mocha/test-results.xml nyc mocha --opts src/tests/mocha.opts --reporter mocha-junit-reporter",
 		"test:local": "NODE_ENV=test mocha --opts src/tests/mocha.opts",
 		"test:snapshot": "SNAPSHOT_UPDATE=1 mocha --opts src/tests/mocha.opts",
