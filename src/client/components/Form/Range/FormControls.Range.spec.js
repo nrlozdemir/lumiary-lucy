@@ -4,7 +4,7 @@ import expect from 'expect'
 import { stub, spy } from 'sinon'
 import snapshot from 'snap-shot-it'
 import { create } from 'react-test-renderer'
-import { Range } from 'Components/Form/Controls'
+import  Range  from './index'
 
 const mockProps = {
   input: {
