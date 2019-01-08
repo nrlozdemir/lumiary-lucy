@@ -29,7 +29,12 @@ module.exports = {
 	],
 
 	devServer: {
-		hot: true
+		hot: true,
+		historyApiFallback: true,
+		watchOptions: {
+			aggregateTimeout: 300,
+			poll: 1000
+		}
 	},
 
 	stats: {
