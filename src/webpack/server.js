@@ -13,11 +13,13 @@ new WebpackDevServer(webpack(config), {
 	cert: fs.readFileSync(
 		`${path.join(__dirname, "..", "server", "ssl")}/server.crt`
 	),
-	hot: true,
 	inline: true,
-	historyApiFallback: true,
 	port: 9090,
 	disableHostCheck: true,
+	watchOptions: {
+		aggregateTimeout: 300,
+		poll: 1000
+	},
 	headers: {
 		"Access-Control-Allow-Origin": "*"
 	}
