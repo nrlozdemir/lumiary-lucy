@@ -341,22 +341,23 @@ export class LibraryDetail extends React.Component {
 								))}
 							</div>
 						</div>
-						<div className="col-12 mt-16 mb-16">
+						<div className="col-12 mt-16 mb-16 library-detail-slider">
 							<Slider
 								step={null}
 								defaultValue={8}
 								onAfterChange={val => this.onChangeSlider(val)}
 								handleStyle={{
-									width: "40px",
-									height: "40px",
-									marginTop: "-12px"
+									width: "293px",
+                  height: "16px",
+                  borderRadius: "10px",
+                  marginTop: "0px"
 								}}
 								trackStyle={{
 									height: "16px",
 									backgroundColor: "transparent"
 								}}
-								min={8}
-								max={102}
+								min={-5}
+								max={114}
 								railStyle={{
 									height: "16px",
 									borderRadius: "10px",
