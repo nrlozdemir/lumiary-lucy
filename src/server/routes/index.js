@@ -58,6 +58,11 @@ module.exports = app => {
 					</StaticRouter>
 				</Provider>
 			);
+
+			if (context.status === 404) {
+				res.status(404);
+			}
+
 			res.render("index", {
 				title: head.title.toString(),
 				meta: head.meta.toString(),
