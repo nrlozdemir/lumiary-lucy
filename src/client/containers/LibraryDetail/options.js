@@ -207,3 +207,26 @@ export const sliderMarks = {
 	90: { label: <p className={style.dot}>0:80</p> },
 	100: { label: <p className={style.dot}>0:90</p> }
 };
+
+export const sliderWithThumbnails = [
+	{img: "https://picsum.photos/500/270?image=1", thumbnail: "https://picsum.photos/200/160?image=1"},
+	{img: "https://picsum.photos/500/270?image=2", thumbnail: "https://picsum.photos/40/160?image=2"},
+	{img: "https://picsum.photos/500/270?image=3", thumbnail: "https://picsum.photos/150/160?image=3"},
+	{img: "https://picsum.photos/500/270?image=4", thumbnail: "https://picsum.photos/240/160?image=4"},
+	{img: "https://picsum.photos/500/270?image=5", thumbnail: "https://picsum.photos/200/160?image=5"},
+	{img: "https://picsum.photos/500/270?image=6", thumbnail: "https://picsum.photos/250/160?image=6"},
+	{img: "https://picsum.photos/500/270?image=7", thumbnail: "https://picsum.photos/300/160?image=7"},
+	{img: "https://picsum.photos/500/270?image=8", thumbnail: "https://picsum.photos/110/160?image=8"},
+	{img: "https://picsum.photos/500/270?image=9", thumbnail: "https://picsum.photos/60/160?image=9"},
+	{img: "https://picsum.photos/500/270?image=10", thumbnail: "https://picsum.photos/160/160?image=10"},
+	{img: "https://picsum.photos/500/270?image=1", thumbnail: "https://picsum.photos/100/160?image=1"},
+	{img: "https://picsum.photos/500/270?image=2", thumbnail: "https://picsum.photos/20/160?image=2"},
+	{img: "https://picsum.photos/500/270?image=3", thumbnail: "https://picsum.photos/75/160?image=3"},
+	{img: "https://picsum.photos/500/270?image=4", thumbnail: "https://picsum.photos/120/160?image=4"},
+	{img: "https://picsum.photos/500/270?image=5", thumbnail: "https://picsum.photos/200/160?image=5"},
+	{img: "https://picsum.photos/500/270?image=6", thumbnail: "https://picsum.photos/250/160?image=6"},
+	{img: "https://picsum.photos/500/270?image=7", thumbnail: "https://picsum.photos/90/160?image=7"},
+	{img: "https://picsum.photos/500/270?image=8", thumbnail: "https://picsum.photos/110/160?image=8"},
+	{img: "https://picsum.photos/500/270?image=9", thumbnail: "https://picsum.photos/40/160?image=9"},
+	{img: "https://picsum.photos/500/270?image=10", thumbnail: "https://picsum.photos/60/160?image=10"},
+];
