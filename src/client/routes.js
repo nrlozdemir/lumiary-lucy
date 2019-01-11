@@ -55,7 +55,7 @@ class Routes extends React.Component {
 					path="/marketview"
 					render={props => <Layout {...props} component={Marketview} />}
 				/>
-				<Route component={NotFound} />
+				<Route path="*" component={NotFound} />
 			</Switch>
 		);
 	}
