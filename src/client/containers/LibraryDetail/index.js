@@ -196,7 +196,7 @@ export class LibraryDetail extends React.Component {
 				{this.state.selectedImage ? (
 					<div className="col-12 mt-48">
 						<div className="col-6-no-gutters bg-black">
-							<div className="mt-72 ml-48 mr-48">
+							<div className="mt-48 ml-48 mr-48">
 								<SingleItemSlider slideImages={sliderWithThumbnails}/>
 							</div>
 						</div>
