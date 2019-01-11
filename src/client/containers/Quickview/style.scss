@@ -1,0 +1,23 @@
+.headerContainer {
+	display: flex;
+	margin-top: 72px;
+	align-items: center;
+	> div {
+		flex: 1;
+	}
+	&:last-child div {
+		flex: 1;
+		margin-right: auto;
+	}
+}
+
+.quickCardTitle {
+	display: flex;
+	font-weight: normal;
+	justify-content: space-between;
+}
+
+.absoluteInlineDatepicker {
+	position: absolute;
+	right: 0;
+}

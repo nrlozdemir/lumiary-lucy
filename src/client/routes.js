@@ -4,6 +4,7 @@ import { Route, Switch, withRouter } from "react-router-dom";
 
 import Library from "Containers/Library";
 import Quickview from "Containers/Quickview";
+import QuickviewDetail from "Containers/QuickviewDetail";
 import Panoptic from "Containers/Panoptic";
 import Marketview from "Containers/Marketview";
 import NotFound from "Containers/NotFound";
@@ -38,9 +39,14 @@ class Routes extends React.Component {
 					)}
 				/>
 				<Route
+					path="/quickview/:id/:platform"
+					render={props => <Layout {...props} component={QuickviewDetail} />}
+				/>
+				<Route
 					path="/quickview"
 					render={props => <Layout {...props} component={Quickview} />}
 				/>
+
 				<Route
 					path="/panoptic"
 					render={props => <Layout {...props} component={Panoptic} />}
