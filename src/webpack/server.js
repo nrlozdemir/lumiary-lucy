@@ -13,6 +13,8 @@ new WebpackDevServer(webpack(config), {
 	cert: fs.readFileSync(
 		`${path.join(__dirname, "..", "server", "ssl")}/server.crt`
 	),
+	hot: true,
+	historyApiFallback: true,
 	inline: true,
 	port: 9090,
 	disableHostCheck: true,

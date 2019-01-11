@@ -79,7 +79,7 @@ export class Library extends React.Component {
 					</div>
 					<div className="grid-collapse mt-50">
 						{this.props.library.videos.map(video => (
-							<Link to={`/library/${video.id}`} key={video.id}>
+							<Link to={`/library/build-report/${video.id}`} key={video.id}>
 								<VideoCard video={video} />
 							</Link>
 						))}

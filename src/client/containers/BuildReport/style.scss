@@ -1,0 +1,113 @@
+.wrapper{
+	width: 100%;
+	height: 100vh;
+	display: flex;
+
+	.videoImg{
+		position: relative;
+		z-index: 0;
+		width: 100%;
+		height: 100%;
+		top: 50%;
+		left: 50%;
+		transform: translateX(-50%) translateY(-50%);
+	}
+
+	.overlay{
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100vh;
+		z-index: 1;
+		opacity: 0.8;
+	}
+
+	.buildInfo{
+		display: flex;
+		flex-direction: column;
+		width: 100%;
+		height: 100vh;
+		align-items: center;
+		justify-content: center;
+		position: absolute;
+		z-index: 2;
+	}
+
+	.buildInfoHeader{
+		font-size: 48px;
+		color: $color-white;
+		font-family: $font-family-primary;
+		text-align: center;
+		margin-bottom: 56px;
+	}
+
+	.loadingIcon{
+		width: 170px;
+		height: 170px;
+		border-radius: 100%;
+		background-color: #00d4ff;
+	}
+
+	.indicator{
+		fill: #242b49;
+		position: relative;
+		z-index: 2;
+	}
+
+	text{
+		fill: $color-white;
+		font-size: 64px;
+		font-family: $font-family-primary;
+	}
+
+	.service {
+		cursor: pointer;
+		transform-origin: 0 0 0;
+		.icon-wrapper {
+			transform-origin: 50% 50%;
+
+			& , & > * {
+				transition: 500ms;
+			}
+		}
+		circle {
+			fill: $color-cool-blue;
+			fill-opacity: 0.4;
+		}
+
+
+		&.active, &:hover {
+			.icon-wrapper {
+				transform: scale(1.15) translateY(-5px);
+
+				& , & > * {
+					transition: 500ms;
+				}
+				circle {
+					fill-opacity: 1;
+				}
+			}
+
+		}
+	}
+
+	.service.active{
+		circle{
+			fill-opacity: 1;
+		}
+	}
+
+	.backlink{
+		a{
+			font-size: 14px;
+			font-family: $font-family-ClanOT;
+			color: white;
+			text-decoration: none;
+			&:active, &:hover, &:focus, &:visited{
+				color: white;
+				text-decoration: none;
+			}
+		}
+	}
+}
