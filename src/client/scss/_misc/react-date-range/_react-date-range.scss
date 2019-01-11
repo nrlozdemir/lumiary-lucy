@@ -1,0 +1,90 @@
+@import "react-date-range/styles";
+@import "react-date-range/theme";
+
+.absoluteInlineDatepicker {
+	position: absolute;
+	right: 0;
+	top: 100%;
+	z-index: 3;
+
+	.rdrDateDisplayWrapper {
+		display: none;
+	}
+}
+
+.rdrMonthAndYearWrapper,
+.rdrMonth {
+	padding: 0;
+	background-color: $color-dusk;
+}
+
+.rdrMonthPicker {
+	margin: 0;
+}
+
+.rdrMonthAndYearPickers select {
+	color: $color-white;
+	font-size: 14px;
+	font-family: $font-family-ClanOT;
+	padding-right: 5px;
+	padding-left: 5px;
+	background: transparent;
+}
+
+.rdrMonth {
+	.rdrWeekDays {
+		background-color: $color-dark-five;
+		padding: 0 20px;
+
+		.rdrWeekDay {
+			color: $color-white;
+			font-size: 12px;
+			font-family: $font-family-ClanOTNews;
+			line-height: 50px;
+		}
+	}
+
+	.rdrDays {
+		padding: 10px 20px 20px;
+		.rdrDay {
+			line-height: 0;
+			height: auto;
+			&:before {
+				content: "";
+				padding-top: 100%;
+				display: block;
+			}
+		}
+
+		.rdrSelected,
+		.rdrInRange,
+		.rdrStartEdge,
+		.rdrEndEdge,
+		.rdrDayNumber {
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			border-radius: 0;
+		}
+
+		.rdrSelected,
+		.rdrInRange,
+		.rdrStartEdge,
+		.rdrEndEdge {
+			background: $color-cool-blue;
+			border-right: 1px solid $color-dusk;
+			border-bottom: 1px solid $color-dusk;
+		}
+
+		.rdrDayNumber span {
+			color: $color-white;
+			font-size: 12px;
+			font-family: $font-family-ClanOTBold;
+
+			&:after {
+				display: none;
+			}
+		}
+	}
+}

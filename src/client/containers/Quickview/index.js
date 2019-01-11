@@ -23,10 +23,12 @@ export class Quickview extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			selection: {
-				startDate: new Date(),
-				endDate: null,
-				key: "selection"
+			dateRange: {
+				selection: {
+					startDate: new Date(),
+					endDate: new Date(),
+					key: "selection"
+				}
 			}
 		};
 	}
@@ -34,8 +36,6 @@ export class Quickview extends React.Component {
 	handleChange = (selectedOption, name) => {
 		this.setState({ [name]: selectedOption });
 	};
-
-	onChangeDate = values => {};
 
 	render() {
 		const { selectViews, selectDate } = this.state;
@@ -85,13 +85,15 @@ export class Quickview extends React.Component {
 									{ value: "custom", label: "Custom" }
 								]}
 							/>
-							{/* <div className={style.absoluteInlineDatepicker}>
-								<DateRange
-									onChange={this.onChangeDate}
-									moveRangeOnFirstSelection={false}
-									ranges={[this.state.selection]}
-								/>
-							</div> */}
+							{selectDate && selectDate.value === "custom" && (
+								<div className="absoluteInlineDatepicker">
+									<DateRange
+										onChange={value => this.handleChange(value, "dateRange")}
+										moveRangeOnFirstSelection={false}
+										ranges={[this.state.dateRange.selection]}
+									/>
+								</div>
+							)}
 						</div>
 					</div>
 					<div className="grid-collapse mt-50">
