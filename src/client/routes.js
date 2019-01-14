@@ -13,52 +13,52 @@ import Layout from "Containers/Layout";
 import Compare from "Containers/Compare";
 
 class Routes extends React.Component {
-	render() {
-		return (
-			<Switch>
-				<Route
-					path="/"
-					exact
-					render={props => <Layout {...props} component={Library} />}
-				/>
-				<Route
-					path="/library"
-					exact
-					render={props => <Layout {...props} component={Library} />}
-				/>
-				<Route
-					path="/library/:videoId/compare"
-					render={props => (
-						<Layout {...props} component={Compare} removeNavbar />
-					)}
-				/>
-				<Route
-					path="/library/:videoId"
-					render={props => (
-						<Layout {...props} component={LibraryDetail} removeNavbar />
-					)}
-				/>
-				<Route
-					path="/quickview/:id/:platform"
-					render={props => <Layout {...props} component={QuickviewDetail} />}
-				/>
-				<Route
-					path="/quickview"
-					render={props => <Layout {...props} component={Quickview} />}
-				/>
+  render() {
+    return (
+      <Switch>
+        <Route
+          path="/"
+          exact
+          render={props => <Layout {...props} component={Library} />}
+        />
+        <Route
+          path="/library"
+          exact
+          render={props => <Layout {...props} component={Library} />}
+        />
+        <Route
+          path="/library/:videoId/compare"
+          render={props => (
+            <Layout {...props} component={Compare} removeNavbar />
+          )}
+        />
+        <Route
+          path="/library/:videoId"
+          render={props => (
+            <Layout {...props} component={LibraryDetail} removeNavbar />
+          )}
+        />
+        <Route
+          path="/quickview/:id/:platform"
+          render={props => <Layout {...props} component={QuickviewDetail} />}
+        />
+        <Route
+          path="/quickview"
+          render={props => <Layout {...props} component={Quickview} />}
+        />
 
-				<Route
-					path="/panoptic"
-					render={props => <Layout {...props} component={Panoptic} />}
-				/>
-				<Route
-					path="/marketview"
-					render={props => <Layout {...props} component={Marketview} />}
-				/>
-				<Route path="*" component={NotFound} />
-			</Switch>
-		);
-	}
+        <Route
+          path="/panoptic"
+          render={props => <Layout {...props} component={Panoptic} />}
+        />
+        <Route
+          path="/marketview"
+          render={props => <Layout {...props} component={Marketview} />}
+        />
+        <Route path="*" component={NotFound} />
+      </Switch>
+    );
+  }
 }
 
 Routes.propTypes = {};
