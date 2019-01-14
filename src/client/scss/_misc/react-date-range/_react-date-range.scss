@@ -7,6 +7,25 @@
 	top: 100%;
 	z-index: 3;
 
+	background-color: $color-dusk;
+
+	.inline-buttons {
+		display: flex;
+		justify-content: space-between;
+		padding: 0px 30px 30px;
+
+		div {
+			color: $color-cool-grey;
+			font-size: 14px;
+			font-family: $font-family-ClanOTNews;
+			cursor: pointer;
+
+			&:nth-child(2) {
+				font-family: $font-family-ClanOT;
+			}
+		}
+	}
+
 	.rdrDateDisplayWrapper {
 		display: none;
 	}

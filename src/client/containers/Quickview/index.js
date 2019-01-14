@@ -6,6 +6,7 @@
 
 import React from "react";
 import PropTypes from "prop-types";
+import moment from "moment";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
@@ -38,7 +39,11 @@ export class Quickview extends React.Component {
 	};
 
 	render() {
-		const { selectViews, selectDate } = this.state;
+		const {
+			selectViews,
+			selectDate,
+			dateRange: { selection: dateRange }
+		} = this.state;
 
 		return (
 			<React.Fragment>
@@ -90,8 +95,37 @@ export class Quickview extends React.Component {
 									<DateRange
 										onChange={value => this.handleChange(value, "dateRange")}
 										moveRangeOnFirstSelection={false}
-										ranges={[this.state.dateRange.selection]}
+										ranges={[dateRange]}
 									/>
+									<div className="inline-buttons">
+										<div
+											onClick={() =>
+												this.setState({
+													selectDate: null
+												})
+											}
+										>
+											Back
+										</div>
+										<div
+											onClick={() =>
+												this.setState({
+													selectDate: {
+														value:
+															moment(dateRange.startDate).format("DD/MM/YYYY") +
+															" - " +
+															moment(dateRange.endDate).format("DD/MM/YYYY"),
+														label:
+															moment(dateRange.startDate).format("DD/MM/YYYY") +
+															" - " +
+															moment(dateRange.endDate).format("DD/MM/YYYY")
+													}
+												})
+											}
+										>
+											Apply
+										</div>
+									</div>
 								</div>
 							)}
 						</div>
