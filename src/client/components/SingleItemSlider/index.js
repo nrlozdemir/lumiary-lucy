@@ -56,7 +56,8 @@ class SingleItemSlider extends React.Component {
             swipeToSlide={false}
             focusOnSelect={true}
             variableWidth={true}
-            infinite={false}
+            centerMode={true}
+            infinite={true}
             arrows={false}
             beforeChange={(current, next) => this.setState({ slideIndex: next })}
           >
