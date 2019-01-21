@@ -130,29 +130,24 @@ export const barDataOptions = {
 };
 export const doughnutData = [
 	{
-		title: "24fps",
-		secondTitle: "Frame Rate",
-		average: 72
+		title: "Frame Rate",
+		secondTitle: "24fps",
+		average: [30, 12, 6, 52]
 	},
 	{
-		title: "3:20",
-		secondTitle: "Duration",
-		average: 45
+		title: "Pacing",
+		secondTitle: "Fastest",
+		average: [12, 15, 15, 68]
 	},
 	{
-		title: "16:9",
-		secondTitle: "Aspect Ratio",
-		average: 23
+		title: "Shots",
+		secondTitle: "12 Shots",
+		average: [15, 22, 18, 45]
 	},
 	{
-		title: "12",
-		secondTitle: "Shots",
-		average: 82
-	},
-	{
-		title: "1080p",
-		secondTitle: "Resolution",
-		average: 32
+		title: "Format",
+		secondTitle: "Live Action",
+		average: [15, 17, 30, 48]
 	}
 ];
 

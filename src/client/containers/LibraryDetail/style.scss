@@ -22,6 +22,14 @@
 	}
 }
 
+.chartWrapper{
+	height: 100%;
+}
+
+.videoDetailHeader{
+	height: 392px;
+}
+
 .chartHeader {
 	padding: 32px 20px;
 	font-size: 12px;
@@ -61,24 +69,36 @@
 .radialChartsContainer {
 	.radialChart {
 		text-align: center;
-		width: calc(20% - 41px);
+		width: calc(25% - 41px);
 		float: left;
 		margin: 30px 0;
 		padding: 0 20px;
 		border-left: 1px solid $color-dusk;
+
+		.subtitle{
+			background-color: $color-dark-five;
+			padding: 8px 24px;
+			border-radius: 22px;
+			display: inline-flex;
+			margin-top: 24px;
+		}
+
 		&:first-child {
 			border: none;
 		}
 		.doughnutChartContainer {
 			position: relative;
+			margin-top: 40px;
 			p {
-				font-family: $font-family-ClanOT;
+				font-family: $font-family-ClanOTNews;
+				font-size: 14px;
+				width: 75%;
+				display: block;
+				margin: 0 auto;
+			}
+			.textBold{
+				font-family: $font-family-ClanOTBold;
 				font-weight: bold;
-				font-size: 18px;
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
 			}
 		}
 	}

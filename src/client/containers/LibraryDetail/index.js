@@ -10,23 +10,15 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
 import { Link } from "react-router-dom";
-import { Bar, Doughnut } from "react-chartjs-2";
+import { Bar, Doughnut, Radar } from "react-chartjs-2";
 import Slider from "rc-slider";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
 import style from "./style.scss";
 import makeSelectLibraryDetail from "Selectors/LibraryDetail.js";
 import SingleItemSlider from "Components/SingleItemSlider";
 import ProgressBar from "Components/ProgressBar";
-import { Radar } from "react-chartjs-2";
-import {
-	videoList,
-	slideImages,
-	barData,
-	barDataOptions,
-	doughnutData,
-	radarData,
-	sliderMarks
-} from "./options";
+import classnames from "classnames";
+import { barData, barDataOptions, doughnutData, radarData, slideImages, sliderMarks, videoList } from "./options";
 
 /* eslint-disable react/prefer-stateless-function */
 export class LibraryDetail extends React.Component {
@@ -50,6 +42,10 @@ export class LibraryDetail extends React.Component {
 
 	render() {
 		const { match } = this.props;
+		const videoDetailHeader = classnames(
+			style.videoDetailHeader,
+			"grid-container mr-20 ml-20 mt-72"
+		);
 		return (
 			<React.Fragment>
 				<div className={style.header}>
@@ -66,7 +62,7 @@ export class LibraryDetail extends React.Component {
 						</Link>
 					</div>
 				</div>
-				<div className="grid-container mr-20 ml-20 mt-72">
+				<div className={videoDetailHeader}>
 					<div className="col-6">
 						<img
 							src="https://picsum.photos/588/360?image=20"
@@ -74,7 +70,7 @@ export class LibraryDetail extends React.Component {
 						/>
 					</div>
 					<div className="col-6 bg-dark-grey-blue shadow-1">
-						<div>
+						<div className={style.chartWrapper}>
 							<div className={style.chartHeader}>
 								<div className="col-6-no-gutters">
 									<div className={style.socialIcons}>
@@ -154,13 +150,15 @@ export class LibraryDetail extends React.Component {
 								<h1 className="font-primary text-bold text-center">
 									{chart.title}
 								</h1>
-								<p className="color-cool-grey font-secondary-second font-size-12 display-block text-center pt-16 ">
-									{chart.secondTitle}
-								</p>
+								<div className={style.subtitle}>
+									<p className="font-secondary-second font-size-12 text-center">
+										{chart.secondTitle}
+									</p>
+								</div>
 								<div className={style.doughnutChartContainer}>
 									<Doughnut
 										options={{
-											cutoutPercentage: 85,
+											cutoutPercentage: 135,
 											tooltips: {
 												enabled: false
 											},
@@ -171,21 +169,22 @@ export class LibraryDetail extends React.Component {
 												padding: 40
 											}
 										}}
-										width={150}
-										height={150}
+										width={124}
+										height={124}
 										data={{
 											labels: ["Red", "Green"],
 											datasets: [
 												{
-													data: [chart.average, 100 - chart.average],
-													borderColor: "transparent",
-													backgroundColor: ["#ff556f", "#51adc0"],
-													hoverBackgroundColor: ["#ff556f", "#51adc0"]
+													data: [...chart.average],
+													borderColor: "#303a5d",
+													backgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#51adc0"],
+													hoverBackgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#51adc0"]
 												}
 											]
 										}}
 									/>
-									<p>{chart.average}%</p>
+									<p className="pt-32"><span className={style.textBold}>{chart.average[chart.average.length - 1]}%</span> of your library
+										is shot in <span className={style.textBold}>{chart.secondTitle}</span></p>
 								</div>
 							</div>
 						))}
