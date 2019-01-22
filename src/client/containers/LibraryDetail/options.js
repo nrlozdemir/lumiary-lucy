@@ -173,8 +173,6 @@ export const radarData = {
 			borderColor: "transparent",
 			pointBackgroundColor: "rgb(255, 85, 111,1)",
 			pointBorderColor: "transparent",
-			pointBorderColor: "transparent",
-			pointBorderColor: "transparent",
 			data: [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56]
 		},
 		{
@@ -182,8 +180,6 @@ export const radarData = {
 			backgroundColor: "rgba(81, 173, 192,0.6)",
 			borderColor: "transparent",
 			pointBackgroundColor: "rgba(81, 173, 192,1)",
-			pointBorderColor: "transparent",
-			pointBorderColor: "transparent",
 			pointBorderColor: "transparent",
 			data: [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56]
 		}

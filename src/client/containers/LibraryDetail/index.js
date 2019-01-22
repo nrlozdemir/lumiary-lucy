@@ -28,7 +28,8 @@ export class LibraryDetail extends React.Component {
 		this.state = {
 			selectedImage: null,
 			sliderVal: 0,
-			maxValue: 1000
+			maxValue: 1000,
+			isDoughnutVisible: true,
 		};
 	}
 	componentDidMount() {
@@ -40,8 +41,15 @@ export class LibraryDetail extends React.Component {
 		this.setState({ sliderVal: e }, this.slide.current.scrollTo(e * 5, 0));
 	}
 
+	changeVisibilityDoughnut(){
+		this.setState((prevState) => (
+			{isDoughnutVisible: !prevState.isDoughnutVisible}
+		));
+	}
+
 	render() {
 		const { match } = this.props;
+		const { isDoughnutVisible } = this.state;
 		const videoDetailHeader = classnames(
 			style.videoDetailHeader,
 			"grid-container mr-20 ml-20 mt-72"
@@ -145,8 +153,8 @@ export class LibraryDetail extends React.Component {
 				</div>
 				<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
 					<div className={style.radialChartsContainer}>
-						{doughnutData.map((chart, i) => (
-							<div className={style.radialChart} key={i}>
+						{isDoughnutVisible && doughnutData.map((chart, i) => (
+							<div key={i} className={style.radialChart} onClick={this.changeVisibilityDoughnut.bind(this)}>
 								<h1 className="font-primary text-bold text-center">
 									{chart.title}
 								</h1>
@@ -158,7 +166,7 @@ export class LibraryDetail extends React.Component {
 								<div className={style.doughnutChartContainer}>
 									<Doughnut
 										options={{
-											cutoutPercentage: 135,
+											cutoutPercentage: 120,
 											tooltips: {
 												enabled: false
 											},
@@ -187,7 +195,20 @@ export class LibraryDetail extends React.Component {
 										is shot in <span className={style.textBold}>{chart.secondTitle}</span></p>
 								</div>
 							</div>
-						))}
+						))
+						}
+						{
+							!isDoughnutVisible &&
+							<div className={style.radialChartsContainer}>
+									<div className={style.doughnutPanelTab}>
+										<div className={style.doughnutPanelHeader}>
+											<div onClick={this.changeVisibilityDoughnut.bind(this)}>
+												<i className="qf-iconX"></i>
+											</div>
+										</div>
+								</div>
+							</div>
+						}
 					</div>
 				</div>
 
