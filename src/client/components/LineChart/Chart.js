@@ -58,7 +58,8 @@ class LineChart extends React.PureComponent {
 							cornerRadius : 0,
 							callbacks: {
 								label: function(tooltipItem, data) {
-									return null;
+									const { datasetIndex, index } = tooltipItem;
+									return data.datasets[datasetIndex].data[index];
 								}
 							}
 						},
@@ -100,8 +101,8 @@ class LineChart extends React.PureComponent {
 }
 
 LineChart.propTypes = {
-	width: PropTypes.string,
-	height: PropTypes.string,
+	width: PropTypes.number,
+	height: PropTypes.number,
 	data: PropTypes.array,
 	options: PropTypes.object
 };

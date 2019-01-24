@@ -14,12 +14,14 @@ import { Link } from "react-router-dom";
 import { Bar, Doughnut, Radar } from "react-chartjs-2";
 import Slider from "rc-slider";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { reduxForm, Field } from 'redux-form';
 
 import style from "./style.scss";
 import makeSelectLibraryDetail from "Selectors/LibraryDetail.js";
 import SingleItemSlider from "Components/SingleItemSlider";
 import ProgressBar from "Components/ProgressBar";
 import PointerCard from 'Components/PointerCard';
+import Select from "Components/Form/Select";
 import LineChart from 'Components/LineChart/Chart';
 
 import {
@@ -222,14 +224,34 @@ export class LibraryDetail extends React.Component {
 											<i className="qf-iconX"></i>
 											<span className={style.panelTitle}>Frame Rate</span>
 										</div>
-										<div>
-											<p className={style.panelTitle}>24 Fps</p>
+										<div className={style.headerInfo}>
+											<div>
+												<p className={style.panelTitle}>24 Fps</p>
+											</div>
+											<div className={style.formWrapper}>
+												<form onSubmit={() => console.log("object")}>
+													<Field
+														component={Select}
+														options={selectOptions}
+														id="NumberOfScenes"
+														name="NumberOfScenes"
+														placeholder="Select One"
+														label="Number of Scenes"
+														className={style.formWrapper}
+													/>
+													<Field
+														component={Select}
+														options={selectOptions}
+														id="NumberOfScenes"
+														name="NumberOfScenes"
+														placeholder="Select One"
+														label="Number of Scenes"
+														className={style.formWrapper}
+													/>
+												</form>
+											</div>
 										</div>
-										<div>
-											<form onSubmit={() => console.log("object")}>
 
-											</form>
-										</div>
 									</div>
 									<div className={style.dataWrapper}>
 										<div className={style.panelChart}>
@@ -275,10 +297,9 @@ export class LibraryDetail extends React.Component {
 											<PointerCard
 												data={{
 													topTitle: "Based on Likes",
-													pointerData: 90,
+													pointerData: 140,
 													bottomText: 'of your library is shot in',
 													likes: 50,
-
 												}}
 											/>
 										</div>
@@ -328,6 +349,70 @@ export class LibraryDetail extends React.Component {
 											dataSet={lineChartData}
 											width={1070}
 											height={291}
+											options={{
+												tooltips: {
+													position: 'nearest',
+													backgroundColor: '#fff',
+													titleFontColor: '#242b49',
+													bodyFontColor: '#242b49',
+													footerFontColor: '#242b49',
+													xPadding: 10,
+													yPadding: 16,
+													cornerRadius : 3,
+													callbacks: {
+														title: function(tooltipItem, data) {
+															const { datasetIndex, index } = tooltipItem[0];
+															if( datasetIndex === 1){
+																return `${data.datasets[datasetIndex].data[index]}% of industry is shot in 24fps`;
+															}else{
+																return `${data.datasets[datasetIndex].data[index]}% of frames is shot in 24fps`;
+															}
+														},
+														label: function(tooltipItem, data) {
+															return null
+														}
+													}
+												},
+												scales: {
+													xAxes: [{
+														gridLines: {
+															display: true,
+															color: '#5a6386',
+															lineWidth: 0.7,
+															drawBorder: true,
+															drawTicks: false
+														},
+														ticks: {
+															fontColor: "#fff",
+															fontSize: 12,
+															stepSize: 1,
+															beginAtZero: true,
+															callback: function(value, index, values) {
+																return '    ' + value;
+															}
+														}
+													}],
+													yAxes: [{
+														gridLines: {
+															display: true,
+															color: '#5a6386',
+															lineWidth: 0.7,
+															drawBorder: true,
+															drawTicks: false
+														},
+														ticks: {
+															fontColor: "#fff",
+															fontSize: 12,
+															stepSize: 25,
+															beginAtZero: true,
+															marginRight: 16,
+															callback: function(value, index, values) {
+																return value + '%      '
+															}
+														}
+													}]
+												},
+											}}
 										/>
 									</div>
 								</div>
@@ -540,4 +625,6 @@ const withConnect = connect(
 	mapDispatchToProps
 );
 
-export default compose(withConnect)(LibraryDetail);
+export default compose(reduxForm({
+	form: 'libraryDetail'
+}),withConnect)(LibraryDetail);

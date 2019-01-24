@@ -12,10 +12,17 @@ const Index = ({ data }) => {
         {data.title}
       </h1>
       <p className="font-secondary-first font-size-14 text-bold">{data.basedOn}</p>
-      <div className={cn(style.pointerContainer, 'mt-48 mb-48')}>
+      <div className={cn(style.pointerContainer, 'mt-64 mb-64')}>
         <div className={style.pointerWrapper}>
           <span className="font-secondary-second font-size-12 color-cool-grey">Avg</span>
           <div className={style.pointerImages}>
+						<div className={style.svgWrapper}>
+							<span className={style.svgLineText}>{data.pointerData}K</span>
+							<svg height="12" width="55">
+								<line x1="11.5" y1="0.5" x2="55" y2="0.5" className={style.svgLine}/>
+								<line x1="0" y1="12" x2="12" y2="0" className={style.svgLine} />
+							</svg>
+						</div>
             <div className={style.rotator} style={{ transform: `rotate(${data.pointerData || 0}deg)` }}>
               <div className={style.pointer} />
             </div>

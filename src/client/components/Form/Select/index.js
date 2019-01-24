@@ -6,13 +6,13 @@ import style from "./styles.scss";
 
 const Select = props => {
 	console.log('Select Props', props);
-	const { className, id, options, placeholder, multiple } = props;
+	const { className ,id, options, placeholder, multiple, value } = props;
 	if (props.input) {
-		var {
+		const {
 			input: { name, onChange, value }
 		} = props;
 	} else {
-		var { name, onChange, value } = props;
+		const { name, onChange, value } = props;
 	}
 
 	const reduxFormOnChange = option => {
@@ -20,7 +20,7 @@ const Select = props => {
 	};
 
 	const selectClass = classNames(style.Select, {
-		[style.selected]: !!props.input.value
+		[style.selected]: !!props.input.value,
 	});
 	return (
 		<ReactSelect

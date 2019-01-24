@@ -207,25 +207,24 @@ export const selectOptions = [
 
 export const lineChartData =  {
 	labels: [
-		"Dec 1st",
-		"Dec 2nd",
-		"Dec 3rd",
-		"Dec 4th",
-		"Dec 5th",
-		"Dec 6th",
-		"Dec 7th"
+		"1/11/2019",
+		"1/12/2019",
+		"1/13/2019",
+		"1/14/2019",
+		"1/15/2019",
+		"1/16/2019",
+		"1/17/2019"
 	],
 	datasets: [{
 			fill: false,
 			lineTension: 0.1,
-			backgroundColor: "#20a20e",
-			borderColor: "#ff556f",
+			borderColor: "#51adc0",
 			borderCapStyle: "butt",
 			borderDash: [],
 			borderDashOffset: 0.0,
 			borderJoinStyle: "miter",
 			pointRadius: 5,
-			pointBackgroundColor: "#ff556f",
+			pointBackgroundColor: "#51adc0",
 			pointBorderColor: "#fff",
 			pointBorderWidth: 1,
 			pointHoverRadius: 5,
@@ -236,8 +235,30 @@ export const lineChartData =  {
 			shadowOffsetX: 1,
 			shadowOffsetY: 1,
 			shadowBlur: 5,
-			shadowColor: "#ff556f",
-			data: [0.5, 0.4, 0.7, 0.9, 0.1, 0.3, 0.7]
+			shadowColor: "#51adc0",
+			data: [30, 45, 32, 58, 71, 95, 22]
+		},{
+			fill: false,
+			lineTension: 0.1,
+			borderColor: "#8567f0",
+			borderCapStyle: "butt",
+			borderDash: [],
+			borderDashOffset: 0.0,
+			borderJoinStyle: "miter",
+			pointRadius: 5,
+			pointBackgroundColor: "#8567f0",
+			pointBorderColor: "#fff",
+			pointBorderWidth: 1,
+			pointHoverRadius: 5,
+			pointHoverBackgroundColor: "rgba(75,192,192,1)",
+			pointHoverBorderColor: "rgba(220,220,220,1)",
+			pointHoverBorderWidth: 2,
+			pointHitRadius: 10,
+			shadowOffsetX: 1,
+			shadowOffsetY: 1,
+			shadowBlur: 5,
+			shadowColor: "#8567f0",
+			data: [14, 10 , 70, 90, 45, 55, 50]
 		},
 	],
 	beforeDraw: function (chart, easing) {
