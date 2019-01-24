@@ -7,18 +7,32 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import classnames from "classnames";
 import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
 import { Link } from "react-router-dom";
 import { Bar, Doughnut, Radar } from "react-chartjs-2";
 import Slider from "rc-slider";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+
 import style from "./style.scss";
 import makeSelectLibraryDetail from "Selectors/LibraryDetail.js";
 import SingleItemSlider from "Components/SingleItemSlider";
 import ProgressBar from "Components/ProgressBar";
-import classnames from "classnames";
-import { barData, barDataOptions, doughnutData, radarData, slideImages, sliderMarks, videoList } from "./options";
+import PointerCard from 'Components/PointerCard';
+import LineChart from 'Components/LineChart/Chart';
+
+import {
+	barData,
+	barDataOptions,
+	doughnutData,
+	lineChartData,
+	radarData,
+	selectOptions,
+	slideImages,
+	sliderMarks,
+	videoList
+} from "./options";
 
 /* eslint-disable react/prefer-stateless-function */
 export class LibraryDetail extends React.Component {
@@ -49,6 +63,7 @@ export class LibraryDetail extends React.Component {
 
 	render() {
 		const { match } = this.props;
+		console.log('Library Detail Props', this.props);
 		const { isDoughnutVisible } = this.state;
 		const videoDetailHeader = classnames(
 			style.videoDetailHeader,
@@ -166,7 +181,8 @@ export class LibraryDetail extends React.Component {
 								<div className={style.doughnutChartContainer}>
 									<Doughnut
 										options={{
-											cutoutPercentage: 120,
+											responsive: false,
+											cutoutPercentage: 60,
 											tooltips: {
 												enabled: false
 											},
@@ -174,7 +190,7 @@ export class LibraryDetail extends React.Component {
 												display: false
 											},
 											layout: {
-												padding: 40
+												padding: 0
 											}
 										}}
 										width={124}
@@ -200,12 +216,120 @@ export class LibraryDetail extends React.Component {
 						{
 							!isDoughnutVisible &&
 							<div className={style.radialChartsContainer}>
-									<div className={style.doughnutPanelTab}>
-										<div className={style.doughnutPanelHeader}>
-											<div onClick={this.changeVisibilityDoughnut.bind(this)}>
-												<i className="qf-iconX"></i>
+								<div className={style.doughnutPanelTab}>
+									<div className={style.doughnutPanelHeader}>
+										<div onClick={this.changeVisibilityDoughnut.bind(this)}>
+											<i className="qf-iconX"></i>
+											<span className={style.panelTitle}>Frame Rate</span>
+										</div>
+										<div>
+											<p className={style.panelTitle}>24 Fps</p>
+										</div>
+										<div>
+											<form onSubmit={() => console.log("object")}>
+
+											</form>
+										</div>
+									</div>
+									<div className={style.dataWrapper}>
+										<div className={style.panelChart}>
+											<h1 className="font-primary text-bold text-center">
+												Library Data
+											</h1>
+											<div className={style.doughnutChartContainer}>
+												<Doughnut
+													options={{
+														responsive: false,
+														cutoutPercentage: 60,
+														tooltips: {
+															enabled: false
+														},
+														legend: {
+															display: false
+														},
+														layout: {
+															padding: 0
+														}
+													}}
+													width={180}
+													height={180}
+													data={{
+														labels: ["Red", "Green"],
+														datasets: [
+															{
+																data: [30, 12, 6, 52],
+																borderColor: "#303a5d",
+																backgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#51adc0"],
+																hoverBackgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#51adc0"]
+															}
+														]
+													}}
+												/>
+												<p className="pt-32">
+													<span className={style.duskRound}></span>
+													<span className={style.textBold}>{52}%</span> of your library
+													is shot in <span className={style.textBold}>24fps</span></p>
 											</div>
 										</div>
+										<div className={style.panelChart}>
+											<PointerCard
+												data={{
+													topTitle: "Based on Likes",
+													pointerData: 90,
+													bottomText: 'of your library is shot in',
+													likes: 50,
+
+												}}
+											/>
+										</div>
+										<div className={style.panelChart}>
+											<h1 className="font-primary text-bold text-center">
+												Industry Data
+											</h1>
+											<div className={style.doughnutChartContainer}>
+												<Doughnut
+													options={{
+														responsive: false,
+														cutoutPercentage: 60,
+														tooltips: {
+															enabled: false
+														},
+														legend: {
+															display: false
+														},
+														layout: {
+															padding: 0
+														}
+													}}
+													width={180}
+													height={180}
+													data={{
+														labels: ["Red", "Green"],
+														datasets: [
+															{
+																data: [30, 12, 6, 52],
+																borderColor: "#303a5d",
+																backgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#8567f0"],
+																hoverBackgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#8567f0"]
+															}
+														]
+													}}
+												/>
+												<p className="w-75 text-center pt-32">
+													<span className={style.redRound}></span>
+													<span className={style.textBold}>{52}%</span> of your library
+													is shot in <span className={style.textBold}>24fps</span></p>
+											</div>
+										</div>
+									</div>
+									<div className="w-100 pt-48 pb-48">
+										<LineChart
+											backgroundColor="#242b49"
+											dataSet={lineChartData}
+											width={1070}
+											height={291}
+										/>
+									</div>
 								</div>
 							</div>
 						}

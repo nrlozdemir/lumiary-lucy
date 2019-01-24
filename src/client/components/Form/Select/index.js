@@ -5,6 +5,7 @@ import ReactSelect from "react-select";
 import style from "./styles.scss";
 
 const Select = props => {
+	console.log('Select Props', props);
 	const { className, id, options, placeholder, multiple } = props;
 	if (props.input) {
 		var {

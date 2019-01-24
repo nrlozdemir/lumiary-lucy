@@ -72,6 +72,82 @@
 	color: $color-white;
 }
 
+.dataWrapper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	.panelChart {
+		transition: 500ms;
+		text-align: center;
+		flex: 1 auto;
+		margin: 30px 0;
+		padding: 0 20px;
+		border-left: 1px solid $color-dusk;
+		list-style: none;
+
+		.redRound{
+			background-color: $color-coral-pink;
+			width: 16px;
+			height: 16px;
+			display: inline-flex;
+			border-radius: 16px;
+			vertical-align: middle;
+			margin-right: 10px
+		}
+
+		.purpleRound{
+			background-color: $color-lighter-purple;
+			width: 16px;
+			height: 16px;
+			display: inline-flex;
+			border-radius: 16px;
+			vertical-align: middle;
+			margin-right: 10px
+		}
+
+		.duskRound{
+			background-color: $color-cool-blue;
+			width: 16px;
+			height: 16px;
+			display: inline-flex;
+			border-radius: 16px;
+			vertical-align: middle;
+			margin-right: 10px
+		}
+
+		h1{
+			font-size: 24px
+		}
+
+		&:first-child {
+			border: none;
+		}
+
+		.doughnutChartContainer {
+			position: relative;
+			margin-top: 40px;
+
+			canvas{
+				margin: 0 auto;
+			}
+
+			p {
+				font-family: $font-family-ClanOTNews;
+				font-size: 14px;
+				width: 75%;
+				display: block;
+				margin: 0 auto;
+			}
+
+			.textBold {
+				font-family: $font-family-ClanOTBold;
+				font-weight: bold;
+			}
+		}
+	}
+}
+
 .radialChartsContainer {
 	.doughnutTabs {
 		border:none;
@@ -79,6 +155,8 @@
 		margin-block-end: 0;
 		padding-inline-start: 0;
 	}
+
+
 	.radialChart {
 		transition: 500ms;
 		text-align: center;
@@ -88,7 +166,6 @@
 		padding: 0 20px;
 		border-left: 1px solid $color-dusk;
 		list-style: none;
-
 
 		.subtitle{
 			background-color: $color-dark-five;
@@ -115,9 +192,12 @@
 				font-family: $font-family-ClanOTBold;
 				font-weight: bold;
 			}
+			canvas{
+				margin: 0 auto;
+			}
 		}
 		&:hover{
-			transform: scale(1.15);
+			transform: scaleX(1.10) scaleY(1.22);
 			background-color: $color-dusk;
 		}
 
@@ -126,9 +206,8 @@
 		transition: 500ms;
 		text-align: center;
 		width: 100%;
-		float: left;
 		min-height: 400px;
-		background-color: $color-dark-five;
+		background-color: $color-dark-grey-blue;
 
 		.doughnutPanelHeader{
 			width: auto;
@@ -138,6 +217,8 @@
 			display: flex;
 			color: $color-white;
 			align-items: center;
+			justify-content: space-between;
+			box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
 
 			div{
 				i{
@@ -147,6 +228,11 @@
 					border: 2px solid #51adc0;
 					margin-right: 20px;
 				}
+			}
+			.panelTitle{
+				font-family: $font-family-ClanOTBold;
+				font-size: 14px;
+				color: $color-white;
 			}
 		}
 	}
