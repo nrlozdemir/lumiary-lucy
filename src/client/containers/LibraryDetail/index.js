@@ -14,19 +14,20 @@ import { Link } from "react-router-dom";
 import { Bar, Doughnut, Radar } from "react-chartjs-2";
 import Slider from "rc-slider";
 import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import { reduxForm, Field } from 'redux-form';
+import { Field, reduxForm } from "redux-form";
 
 import style from "./style.scss";
 import makeSelectLibraryDetail from "Selectors/LibraryDetail.js";
 import SingleItemSlider from "Components/SingleItemSlider";
 import ProgressBar from "Components/ProgressBar";
-import PointerCard from 'Components/PointerCard';
+import PointerCard from "Components/PointerCard";
 import Select from "Components/Form/Select";
-import LineChart from 'Components/LineChart/Chart';
+import LineChart from "Components/LineChart/Chart";
 
 import {
 	barData,
 	barDataOptions,
+	colorTempData,
 	doughnutData,
 	lineChartData,
 	radarData,
@@ -46,6 +47,7 @@ export class LibraryDetail extends React.Component {
 			sliderVal: 0,
 			maxValue: 1000,
 			isDoughnutVisible: true,
+			isColorTempVisible: true
 		};
 	}
 	componentDidMount() {
@@ -66,7 +68,7 @@ export class LibraryDetail extends React.Component {
 	render() {
 		const { match } = this.props;
 		console.log('Library Detail Props', this.props);
-		const { isDoughnutVisible } = this.state;
+		const { isDoughnutVisible, isColorTempVisible } = this.state;
 		const videoDetailHeader = classnames(
 			style.videoDetailHeader,
 			"grid-container mr-20 ml-20 mt-72"
@@ -168,6 +170,7 @@ export class LibraryDetail extends React.Component {
 						</div>
 					</div>
 				</div>
+
 				<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
 					<div className={style.radialChartsContainer}>
 						{isDoughnutVisible && doughnutData.map((chart, i) => (
@@ -420,6 +423,68 @@ export class LibraryDetail extends React.Component {
 						}
 					</div>
 				</div>
+
+				<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
+					<div className={style.radialChartsContainer}>
+						<div className={style.temperatureHeader}>
+							<div>
+								<h2>Color Temperature / Sentiment Comparison</h2>
+							</div>
+							<div className="d-flex align-items-center justify-space-between">
+								<div className="d-flex align-items-center mr-8">
+									<span className={style.redRound}></span>
+									<p>This Video</p>
+								</div>
+								<div className="d-flex align-items-center mr-8">
+									<span className={style.duskRound}></span>
+									<p>Library Average</p>
+								</div>
+								<div className="d-flex align-items-center mr-8">
+									<span className={style.purpleRound}></span>
+									<p>Industry</p>
+								</div>
+							</div>
+							<div className={style.inputWrapper}>
+								<form>
+									<Field
+										component={Select}
+										options={selectOptions}
+										id="NumberOfScenes"
+										name="NumberOfScenes"
+										placeholder="Select One"
+										label="Number of Scenes"
+										className={style.formWrapper}
+									/>
+								</form>
+							</div>
+						</div>
+						<div className={style.temperatureContentContainer}>
+							{isColorTempVisible && colorTempData.map((temp, i) => (
+								<div className={style.temperatureContentWrapper}>
+									<div className={style.temperatureContent}>
+										<p className={style.textTop}>Happy</p>
+										<p className={style.textRight}>Warm</p>
+										<p className={style.textBottom}>Sad</p>
+										<p className={style.textLeft}>Cool</p>
+										<div className={style.verticalLine}></div>
+										<div className={style.horizontalLine}></div>
+										{
+											temp.data.map((data, i) => (
+												<span key={i}
+															className={data.type === 'video' ? style.redRound : data.type === 'library' ? style.purpleRound : style.duskRound}
+															style={{transform: `translateX(${data.x * 2}%) translateY(${data.y * 2}%)`}}></span>
+											))
+										}
+									</div>
+
+								</div>
+							))
+							}
+						</div>
+
+					</div>
+				</div>
+
 
 				{this.state.selectedImage ? (
 					<div className="col-12 mt-48">

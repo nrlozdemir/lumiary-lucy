@@ -151,6 +151,30 @@ export const doughnutData = [
 	}
 ];
 
+export const colorTempData = [
+	{
+		data: [
+			{x: -50, y:82, type: 'video'},
+			{x: 50,y:-25, type: 'library'},
+			{x: 75, y: -30, type: 'industry'},
+		]
+	},
+	{
+		data: [
+			{x: -50, y:12, type: 'video'},
+			{x: 50,y:25, type: 'library'},
+			{x: 75, y: -30, type: 'industry'},
+		]
+	},
+	{
+		data: [
+			{x: -50, y:12, type: 'video'},
+			{x: 50,y:-75, type: 'library'},
+			{x: 75, y: -30, type: 'industry'},
+		]
+	}
+];
+
 export const radarData = {
 	labels: [
 		"#fff20d",
@@ -216,50 +240,50 @@ export const lineChartData =  {
 		"1/17/2019"
 	],
 	datasets: [{
-			fill: false,
-			lineTension: 0.1,
-			borderColor: "#51adc0",
-			borderCapStyle: "butt",
-			borderDash: [],
-			borderDashOffset: 0.0,
-			borderJoinStyle: "miter",
-			pointRadius: 5,
-			pointBackgroundColor: "#51adc0",
-			pointBorderColor: "#fff",
-			pointBorderWidth: 1,
-			pointHoverRadius: 5,
-			pointHoverBackgroundColor: "rgba(75,192,192,1)",
-			pointHoverBorderColor: "rgba(220,220,220,1)",
-			pointHoverBorderWidth: 2,
-			pointHitRadius: 10,
-			shadowOffsetX: 1,
-			shadowOffsetY: 1,
-			shadowBlur: 5,
-			shadowColor: "#51adc0",
-			data: [30, 45, 32, 58, 71, 95, 22]
-		},{
-			fill: false,
-			lineTension: 0.1,
-			borderColor: "#8567f0",
-			borderCapStyle: "butt",
-			borderDash: [],
-			borderDashOffset: 0.0,
-			borderJoinStyle: "miter",
-			pointRadius: 5,
-			pointBackgroundColor: "#8567f0",
-			pointBorderColor: "#fff",
-			pointBorderWidth: 1,
-			pointHoverRadius: 5,
-			pointHoverBackgroundColor: "rgba(75,192,192,1)",
-			pointHoverBorderColor: "rgba(220,220,220,1)",
-			pointHoverBorderWidth: 2,
-			pointHitRadius: 10,
-			shadowOffsetX: 1,
-			shadowOffsetY: 1,
-			shadowBlur: 5,
-			shadowColor: "#8567f0",
-			data: [14, 10 , 70, 90, 45, 55, 50]
-		},
+		fill: false,
+		lineTension: 0.1,
+		borderColor: "#51adc0",
+		borderCapStyle: "butt",
+		borderDash: [],
+		borderDashOffset: 0.0,
+		borderJoinStyle: "miter",
+		pointRadius: 5,
+		pointBackgroundColor: "#51adc0",
+		pointBorderColor: "#fff",
+		pointBorderWidth: 1,
+		pointHoverRadius: 5,
+		pointHoverBackgroundColor: "rgba(75,192,192,1)",
+		pointHoverBorderColor: "rgba(220,220,220,1)",
+		pointHoverBorderWidth: 2,
+		pointHitRadius: 10,
+		shadowOffsetX: 1,
+		shadowOffsetY: 1,
+		shadowBlur: 5,
+		shadowColor: "#51adc0",
+		data: [30, 45, 32, 58, 71, 95, 22]
+	},{
+		fill: false,
+		lineTension: 0.1,
+		borderColor: "#8567f0",
+		borderCapStyle: "butt",
+		borderDash: [],
+		borderDashOffset: 0.0,
+		borderJoinStyle: "miter",
+		pointRadius: 5,
+		pointBackgroundColor: "#8567f0",
+		pointBorderColor: "#fff",
+		pointBorderWidth: 1,
+		pointHoverRadius: 5,
+		pointHoverBackgroundColor: "rgba(75,192,192,1)",
+		pointHoverBorderColor: "rgba(220,220,220,1)",
+		pointHoverBorderWidth: 2,
+		pointHitRadius: 10,
+		shadowOffsetX: 1,
+		shadowOffsetY: 1,
+		shadowBlur: 5,
+		shadowColor: "#8567f0",
+		data: [14, 10 , 70, 90, 45, 55, 50]
+	},
 	],
 	beforeDraw: function (chart, easing) {
 		if (chart.config.options.chartArea && chart.config.options.chartArea.backgroundColor) {
