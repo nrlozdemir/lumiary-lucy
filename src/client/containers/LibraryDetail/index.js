@@ -25,8 +25,8 @@ import {
 	barDataOptions,
 	doughnutData,
 	radarData,
-  sliderMarks,
-  sliderWithThumbnails
+	sliderMarks,
+	sliderWithThumbnails
 } from "./options";
 
 /* eslint-disable react/prefer-stateless-function */
@@ -197,7 +197,7 @@ export class LibraryDetail extends React.Component {
 					<div className="col-12 mt-48">
 						<div className="col-6-no-gutters bg-black">
 							<div className="mt-48 ml-48 mr-48">
-								<SingleItemSlider slideImages={sliderWithThumbnails}/>
+								<SingleItemSlider slideImages={sliderWithThumbnails} />
 							</div>
 						</div>
 						<div className="col-6-no-gutters ">
