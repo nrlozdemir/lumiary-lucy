@@ -5,14 +5,13 @@ import ReactSelect from "react-select";
 import style from "./styles.scss";
 
 const Select = props => {
-	console.log('Select Props', props);
-	const { className ,id, options, placeholder, multiple, value } = props;
+	const { className, id, options, placeholder, multiple } = props;
 	if (props.input) {
-		const {
+		var {
 			input: { name, onChange, value }
 		} = props;
 	} else {
-		const { name, onChange, value } = props;
+		var { name, onChange, value } = props;
 	}
 
 	const reduxFormOnChange = option => {

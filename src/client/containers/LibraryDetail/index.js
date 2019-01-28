@@ -79,17 +79,18 @@ export class LibraryDetail extends React.Component {
 					<div className="ml-40">
 						<Link to="/library">
 							<span className="qf-iconLeft-Arrow" />
-							Back
+							Back to Library
 						</Link>
 					</div>
 					<div>Video Name</div>
 					<div className="mr-40">
-						<Link to={`/library/${match.params.videoId}/compare`}>
-							Compare mode
-						</Link>
+						Published Facebook
+						<span className={style.iconWrapper}>
+							<i className="qf-iconFacebook"></i>
+						</span>
 					</div>
 				</div>
-				<div className={videoDetailHeader}>
+				<div className="grid-container mr-20 ml-20 mt-72">
 					<div className="col-6">
 						<img
 							src="https://picsum.photos/588/360?image=20"
@@ -97,7 +98,6 @@ export class LibraryDetail extends React.Component {
 						/>
 					</div>
 					<div className="col-6 bg-dark-grey-blue shadow-1">
-						<div className={style.chartWrapper}>
 							<div className={style.chartHeader}>
 								<div className="col-6-no-gutters">
 									<div className={style.socialIcons}>
@@ -167,7 +167,6 @@ export class LibraryDetail extends React.Component {
 									</span>
 								</div>
 							</div>
-						</div>
 					</div>
 				</div>
 
@@ -293,7 +292,8 @@ export class LibraryDetail extends React.Component {
 												<p className="pt-32">
 													<span className={style.duskRound}></span>
 													<span className={style.textBold}>{52}%</span> of your library
-													is shot in <span className={style.textBold}>24fps</span></p>
+													is shot in <span className={style.textBold}>24fps</span>
+												</p>
 											</div>
 										</div>
 										<div className={style.panelChart}>
@@ -340,7 +340,7 @@ export class LibraryDetail extends React.Component {
 													}}
 												/>
 												<p className="w-75 text-center pt-32">
-													<span className={style.redRound}></span>
+													<span className={style.purpleRound}></span>
 													<span className={style.textBold}>{52}%</span> of your library
 													is shot in <span className={style.textBold}>24fps</span></p>
 											</div>

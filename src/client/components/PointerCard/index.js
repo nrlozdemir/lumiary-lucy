@@ -33,7 +33,11 @@ const Index = ({ data }) => {
         </div>
       </div>
       <div className={cn(style.radialChartRadius, "font-secondary-second font-size-12 text-center text-light")}>
-        <span>{data.bottomText}</span><span>{data.likes}</span>
+				<p className={style.infoText}>
+					<span className={style.redRound}></span>
+					<span className={style.textBold}>{52}%</span> of your library
+					is shot in <span className={style.textBold}>24fps</span>
+				</p>
       </div>
     </div>
   );
