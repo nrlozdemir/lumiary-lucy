@@ -1,0 +1,52 @@
+.compareSharesContainer {
+	padding: 50px 40px;
+	box-sizing: border-box;
+	font-family: $font-family-ClanOTNews;
+	background-color: $color-dark-grey-blue;
+}
+
+.componentTitle {
+	font-size: 18px;
+	font-family: $font-family-ClanOT;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.info {
+	border-right: 1px solid $color-dusk;
+	padding-right: 15px;
+	box-sizing: border-box;
+
+	&:last-child {
+		border-right: none;
+	}
+
+	.infoTitle {
+		padding: 8px 24px;
+		border-radius: 20px;
+		background-color: $color-dark-five;
+		font-family: $font-family-ClanOT;
+		font-size: 14px;
+		text-align: center;
+	}
+
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		text-align: center;
+
+		li {
+			margin-top: 24px;
+			font-size: 12px;
+			line-height: 20px;
+			span {
+				font-family: $font-family-ClanOT;
+			}
+		}
+	}
+}
+
+.radarComponent {
+	height: 300px;
+}
