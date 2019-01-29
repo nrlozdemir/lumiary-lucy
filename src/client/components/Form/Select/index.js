@@ -8,19 +8,20 @@ const Select = props => {
 	const { className, id, options, placeholder, multiple } = props;
 	if (props.input) {
 		var {
-			input: { name, onChange, value }
+			input: { name, onChange, value, customClass }
 		} = props;
 	} else {
-		var { name, onChange, value } = props;
+		var { name, onChange, value, customClass } = props;
 	}
 
 	const reduxFormOnChange = option => {
 		onChange(option);
 	};
 
-	const selectClass = classNames(style.Select, {
-		[style.selected]: !!props.input.value
+	const selectClass = classNames(`${customClass} ` + style.Select, {
+		[style.selected]: !!value
 	});
+
 	return (
 		<ReactSelect
 			id={id}
@@ -43,8 +44,13 @@ Select.propTypes = {
 	onChange: PropTypes.func,
 	multiple: PropTypes.bool,
 	placeholder: PropTypes.string,
+	customClass: PropTypes.string,
 	options: PropTypes.array.isRequired,
-	value: PropTypes.oneOfType([PropTypes.string, PropTypes.number])
+	value: PropTypes.oneOfType([
+		PropTypes.string,
+		PropTypes.number,
+		PropTypes.object
+	])
 };
 
 Select.defaultProps = {
@@ -52,6 +58,7 @@ Select.defaultProps = {
 	name: null,
 	onChange: null,
 	options: null,
+	customClass: null,
 	multiple: false,
 	value: "",
 	placeholder: "Select..."
