@@ -23,6 +23,7 @@ import ProgressBar from "Components/ProgressBar";
 import PointerCard from "Components/PointerCard";
 import Select from "Components/Form/Select";
 import LineChart from "Components/LineChart/Chart";
+import ColorTemperatureChart from "Components/ColorTemperatureChart";
 
 import {
 	barData,
@@ -459,26 +460,8 @@ export class LibraryDetail extends React.Component {
 							</div>
 						</div>
 						<div className={style.temperatureContentContainer}>
-							{isColorTempVisible && colorTempData.map((temp, i) => (
-								<div className={style.temperatureContentWrapper}>
-									<div className={style.temperatureContent}>
-										<p className={style.textTop}>Happy</p>
-										<p className={style.textRight}>Warm</p>
-										<p className={style.textBottom}>Sad</p>
-										<p className={style.textLeft}>Cool</p>
-										<div className={style.verticalLine}></div>
-										<div className={style.horizontalLine}></div>
-										{
-											temp.data.map((data, i) => (
-												<span key={i}
-															className={data.type === 'video' ? style.redRound : data.type === 'library' ? style.purpleRound : style.duskRound}
-															style={{transform: `translateX(${data.x * 2}%) translateY(${data.y * 2}%)`}}></span>
-											))
-										}
-									</div>
-
-								</div>
-							))
+							{
+								isColorTempVisible && colorTempData && <ColorTemperatureChart colorTempData={colorTempData} />
 							}
 						</div>
 

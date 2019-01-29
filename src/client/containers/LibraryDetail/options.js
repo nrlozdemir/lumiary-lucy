@@ -154,23 +154,23 @@ export const doughnutData = [
 export const colorTempData = [
 	{
 		data: [
-			{x: -50, y:82, type: 'video'},
-			{x: 50,y:-25, type: 'library'},
-			{x: 75, y: -30, type: 'industry'},
+			{x: -50, y:82, color: '#ff556f'},
+			{x: 50,y:-25, color: '#51adc0'},
+			{x: 75, y: -30, color: '#8567f0'},
 		]
 	},
 	{
 		data: [
-			{x: -50, y:12, type: 'video'},
-			{x: 50,y:25, type: 'library'},
-			{x: 75, y: -30, type: 'industry'},
+			{x: -50, y:12, color: '#ff556f'},
+			{x: 50,y:25, color: '#51adc0'},
+			{x: 75, y: -30, color: '#8567f0'},
 		]
 	},
 	{
 		data: [
-			{x: -50, y:12, type: 'video'},
-			{x: 50,y:-75, type: 'library'},
-			{x: 75, y: -30, type: 'industry'},
+			{x: -50, y:12, color: '#ff556f'},
+			{x: 50,y:-75, color: '#51adc0'},
+			{x: 75, y: -30, color: '#8567f0'},
 		]
 	}
 ];
