@@ -9,6 +9,7 @@ import Panoptic from "Containers/Panoptic";
 import Marketview from "Containers/Marketview";
 import NotFound from "Containers/NotFound";
 import LibraryDetail from "Containers/LibraryDetail";
+import BuildReport from "Containers/BuildReport";
 import Layout from "Containers/Layout";
 import Compare from "Containers/Compare";
 
@@ -32,6 +33,12 @@ class Routes extends React.Component {
             <Layout {...props} component={Compare} removeNavbar />
           )}
         />
+				<Route
+					path="/library/build-report/:videoId"
+					render={props => (
+						<Layout {...props} component={BuildReport} removeNavbar />
+					)}
+				/>
         <Route
           path="/library/:videoId"
           render={props => (

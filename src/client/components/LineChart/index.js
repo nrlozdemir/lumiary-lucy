@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import classnames from 'classnames';
 
 import Chart from './Chart';
-import ReactSelect from "react-select";
 import style from './style.scss';
 
 class LineChart extends Component {
