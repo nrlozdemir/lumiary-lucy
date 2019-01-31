@@ -34,7 +34,8 @@ import {
 	selectOptions,
 	slideImages,
 	sliderMarks,
-	videoList
+	videoList,
+	sliderWithThumbnails
 } from "./options";
 
 /* eslint-disable react/prefer-stateless-function */
@@ -489,8 +490,8 @@ export class LibraryDetail extends React.Component {
 				{this.state.selectedImage ? (
 					<div className="col-12 mt-48">
 						<div className="col-6-no-gutters bg-black">
-							<div className="mt-72 mb-72 ml-48 mr-48">
-								<SingleItemSlider slideImages={slideImages} />
+							<div className="mt-48 ml-48 mr-48">
+								<SingleItemSlider slideImages={sliderWithThumbnails} />
 							</div>
 						</div>
 						<div className="col-6-no-gutters ">
@@ -634,22 +635,23 @@ export class LibraryDetail extends React.Component {
 								))}
 							</div>
 						</div>
-						<div className="col-12 mt-16 mb-16">
+						<div className="col-12 mt-16 mb-16 library-detail-slider">
 							<Slider
 								step={null}
 								defaultValue={8}
 								onAfterChange={val => this.onChangeSlider(val)}
 								handleStyle={{
-									width: "40px",
-									height: "40px",
-									marginTop: "-12px"
+									width: "293px",
+                  height: "16px",
+                  borderRadius: "10px",
+                  marginTop: "0px"
 								}}
 								trackStyle={{
 									height: "16px",
 									backgroundColor: "transparent"
 								}}
-								min={8}
-								max={102}
+								min={-5}
+								max={114}
 								railStyle={{
 									height: "16px",
 									borderRadius: "10px",

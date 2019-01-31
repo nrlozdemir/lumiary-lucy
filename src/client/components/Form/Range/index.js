@@ -31,7 +31,7 @@ class Range extends Component {
 		const { value } = this.state;
 
 		return (
-			<div>
+			<div className="range-slider">
 				<RangeSlider
 					allowCross={false}
 					value={value}
