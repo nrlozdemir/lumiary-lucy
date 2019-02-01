@@ -8,6 +8,7 @@
 .componentTitle {
 	display: flex;
 	justify-content: space-between;
+	align-items: center;
 	font-size: 18px;
 	font-family: $font-family-ClanOT;
 	margin-bottom: 50px;
@@ -54,6 +55,15 @@
 		&:nth-child(5):before {
 			background-color: #3178b0;
 		}
+	}
+}
+
+.selects {
+	position: relative;
+	display: flex;
+	z-index: 12;
+	> div {
+		margin: 0 0 0 20px;
 	}
 }
 

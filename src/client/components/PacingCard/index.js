@@ -2,22 +2,55 @@ import React, { Component } from "react";
 import classnames from "classnames";
 import style from "./style.scss";
 import { HorizontalBar } from "react-chartjs-2";
+import Select from "Components/Form/Select";
 
 class PacingCard extends Component {
+	constructor(props) {
+		super(props);
+		this.state = {};
+	}
+
+	handleChange = (selectedOption, name) => {
+		this.setState({ [name]: selectedOption });
+	};
+
 	render() {
 		const { barData, barDataOptions } = this.props;
+		const { likes, date } = this.state;
 
 		const pacingCardContainer = classnames(
 			"shadow-1 col-12 mt-48 mb-48",
 			style.pacingCardContainer
 		);
 
-		console.log(barData, barDataOptions);
-
 		return (
 			<div className={pacingCardContainer}>
 				<div className={style.componentTitle}>
-					Dominant Color, Facebook & YouTube Shares
+					<span>Dominant Color, Facebook & YouTube Shares</span>
+					<div className={style.selects}>
+						<Select
+							name="likes"
+							customClass="custom-select"
+							placeholder="Select Views"
+							value={likes || ""}
+							onChange={option => this.handleChange(option, "likes")}
+							options={[
+								{ value: "Likes", label: "Likes" },
+								{ value: "Comments", label: "Comments" }
+							]}
+						/>
+						<Select
+							name="date"
+							customClass="custom-select"
+							placeholder="Select Views"
+							value={date || ""}
+							onChange={option => this.handleChange(option, "date")}
+							options={[
+								{ value: "Past Month", label: "Past Month" },
+								{ value: "Past Year", label: "Past Year" }
+							]}
+						/>
+					</div>
 				</div>
 				<div className="col-6">
 					<HorizontalBar
