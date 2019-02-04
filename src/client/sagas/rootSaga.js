@@ -4,5 +4,5 @@ import library from "./Library";
 import libraryDetail from "./LibraryDetail";
 
 export default function* rootSaga() {
-	yield all([...library, ...libraryDetail]);
+  yield all([...library, ...libraryDetail]);
 }
