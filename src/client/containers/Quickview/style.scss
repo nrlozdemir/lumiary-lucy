@@ -1,18 +1,154 @@
 .headerContainer {
-  display: flex;
-  margin-top: 72px;
-  align-items: center;
-  > div {
-    flex: 1;
-  }
-  &:last-child div {
-    flex: 1;
-    margin-right: auto;
-  }
+	display: flex;
+	margin-top: 72px;
+	align-items: center;
+	> div {
+		flex: 1;
+	}
+	&:last-child div {
+		flex: 1;
+		margin-right: auto;
+	}
 }
 
 .quickCardTitle {
-  display: flex;
-  font-weight: normal;
-  justify-content: space-between;
+	display: flex;
+	font-weight: normal;
+	justify-content: space-between;
+}
+
+.content {
+	float: left;
+	width: 100%;
+	margin-bottom: 70px;
+	.card {
+		position: relative;
+		padding: 64px 102px;
+		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+		background-color: $color-dark-grey-blue;
+	}
+
+	.items {
+		padding: 40px 56px 0;
+	}
+
+	.infoItem {
+		padding-bottom: 40px;
+		margin-bottom: 40px;
+		border-bottom: 1px solid $color-dusk;
+
+		&:last-child {
+			margin-bottom: 0;
+			padding-bottom: 0;
+			border-bottom: none;
+		}
+
+		> div {
+			text-align: center;
+
+			&:nth-child(1) {
+				color: $color-cool-grey;
+				font-size: 18px;
+				font-family: $font-family-ClanOTNews;
+				margin-bottom: 16px;
+			}
+			&:nth-child(2) {
+				color: $color-white;
+				font-size: 48px;
+				font-family: $font-family-primary;
+			}
+		}
+	}
+
+	.differenceCircle {
+		position: absolute;
+		right: -10px;
+		transform: translateX(50%);
+		margin-top: -90px;
+		z-index: 2;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		margin-bottom: 40px;
+
+		width: 100px;
+		height: 100px;
+		border-radius: 50%;
+		background-color: $color-dark-five;
+
+		color: $color-white;
+		font-size: 12px;
+		font-family: $font-family-ClanOTNews;
+
+		& > div > div {
+			font-size: 18px;
+			font-weight: 800;
+			margin-bottom: 4px;
+		}
+	}
+}
+
+.bar {
+	display: flex;
+	align-items: center;
+	height: 56px;
+	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+	background-color: $color-dusk;
+	color: $color-white;
+	font-family: $font-family-ClanOT;
+	font-size: 14px;
+	margin-left: 20px;
+	margin-right: 20px;
+	margin-bottom: 30px;
+
+	& > div  {
+		-ms-flex-preferred-size: 0;
+		flex-basis: 0;
+		-ms-flex-positive: 1;
+		flex-grow: 1;
+	}
+
+	.back {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		height: 100%;
+		min-width: 200px;
+		border-right: 1px solid $color-dark-grey-blue;
+		color: $color-white;
+		cursor: pointer;
+		text-decoration: none;
+
+		i {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			width: 32px;
+			height: 32px;
+			background-color: $color-dark-five;
+			border-radius: 50%;
+			margin-right: 16px;
+			border: 1px solid $color-cool-blue;
+			font-size: 14px;
+		}
+	}
+
+	.barList {
+		display: flex;
+		width: 100%;
+		justify-content: space-between;
+		padding: 0 90px;
+
+		a {
+			cursor: pointer;
+			color: $color-cool-grey;
+			font-family: $font-family-ClanOTNews;
+			text-decoration: none;
+		}
+
+		.active {
+			color: $color-white;
+			font-family: $font-family-ClanOT;
+		}
+	}
 }
