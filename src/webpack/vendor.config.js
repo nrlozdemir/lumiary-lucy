@@ -29,6 +29,7 @@ module.exports = {
 			"react-dnd",
 			"react-dnd-html5-backend",
 			"react-dnd-test-backend",
+			"react-date-range",
 
 			"redux",
 			"redux-form",

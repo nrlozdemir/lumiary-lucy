@@ -16,6 +16,8 @@ new WebpackDevServer(webpack(config), {
 	inline: true,
 	port: 9090,
 	disableHostCheck: true,
+	hot: true,
+	historyApiFallback: true,
 	watchOptions: {
 		aggregateTimeout: 300,
 		poll: 1000

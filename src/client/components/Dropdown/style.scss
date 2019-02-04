@@ -1,0 +1,38 @@
+
+.ddWrapper{
+	position: relative;
+	margin-right: 32px;
+
+
+	.ddHeader{
+
+		.ddHeaderTitle{
+			font-family: $font-family-ClanOTBold;
+			font-size: 18px;
+			line-height: normal;
+			text-decoration: underline;
+		}
+	}
+
+	.ddList{
+		position: absolute;
+		top: 16px;
+		left: 0;
+		z-index: 2;
+		width: 160px;
+		padding: 0;
+		list-style: none;
+		background-color: $color-dusk;
+
+		.ddListItem{
+			padding: 11px 16px;
+			font-family: $font-family-ClanOTNews;
+			font-size: 14px;
+		}
+		.ddListItem.active{
+			background-color: $color-white;
+			color: $color-dusk;
+		}
+	}
+}
+

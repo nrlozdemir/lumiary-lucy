@@ -11,13 +11,16 @@ import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
 import { Field, reduxForm } from 'redux-form';
 import { Bar, Doughnut } from 'react-chartjs-2';
+import classNames from 'classnames'
 
 import PanopticSummaryCard from "Components/PanopticSummaryCard";
 import LineChart from "Components/LineChart";
-import Select from "Components/Form/Select";
-import ColorTemperatureChart from "Components/ColorTemperatureChart";
-import Button from 'Components/Form/Button';
+import CompareShares from "Components/CompareShares";
+import Select from 'Components/Form/Select';
+import ColorTemperatureChart from 'Components/ColorTemperatureChart';
 import makeSelectPanoptic from "Selectors/Panoptic.js";
+import Button from "Components/Form/Button";
+import Dropdown from "Components/Dropdown";
 
 import dummySummary, {
 	colorTempData,
@@ -26,7 +29,9 @@ import dummySummary, {
 	doughnutData,
 	doughnutRoundData,
 	stackedChartData,
-	doughnutOptions, stackedChartOptions
+	doughnutOptions,
+	stackedChartOptions,
+	dropdownLists
 } from "./dummySummary";
 import style from "./style.scss";
 
@@ -135,8 +140,26 @@ export class Panoptic extends React.Component {
 				<div className="col-12 shadow-1 mt-72 mb-72 bg-dark-grey-blue">
 					<div className={style.radialChartsContainer}>
 						<div className={style.temperatureHeader}>
-							<div>
-								<h2>Color Temperature / Sentiment Comparison</h2>
+							<div className={style.dropDowns}>
+								<Dropdown
+									title="Duration"
+									listItems={dropdownLists.duration}
+								/>
+								<span>by</span>
+								<Dropdown
+									title="Views"
+									listItems={dropdownLists.views}
+								/>
+								<span>for</span>
+								<Dropdown
+									title="Facebook"
+									listItems={dropdownLists.socialMedia}
+								/>
+								<span>in</span>
+								<Dropdown
+									title="Past 24 Hours"
+									listItems={dropdownLists.dateRange}
+								/>
 							</div>
 							<div className={style.inputWrapper}>
 								<Button
@@ -263,6 +286,7 @@ export class Panoptic extends React.Component {
 						}
 					</div>
 				</div>
+				<CompareShares />
 			</React.Fragment>
 		);
 	}

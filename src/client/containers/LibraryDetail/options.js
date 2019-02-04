@@ -24,35 +24,59 @@ export const videoList = [
 export const slideImages = [
 	{
 		src: "https://picsum.photos/500/270?image=1",
-		options: [{ percentage: 40, accurate: 20, text: "Male" }, { percentage: 60, accurate: 60, text: "Laptop" }]
+		options: [
+			{ percentage: 40, accurate: 20, text: "Male" },
+			{ percentage: 60, accurate: 60, text: "Laptop" }
+		]
 	},
 	{
 		src: "https://picsum.photos/500/270?image=2",
-		options: [{ percentage: 30, accurate: 20, text: "Female" }, { percentage: 50, accurate: 20, text: "Cat" }]
+		options: [
+			{ percentage: 30, accurate: 20, text: "Female" },
+			{ percentage: 50, accurate: 20, text: "Cat" }
+		]
 	},
 	{
 		src: "https://picsum.photos/500/270?image=3",
-		options: [{ percentage: 40, accurate: 10, text: "Cart" }, { percentage: 16, accurate: 30, text: "Bag" }]
+		options: [
+			{ percentage: 40, accurate: 10, text: "Cart" },
+			{ percentage: 16, accurate: 30, text: "Bag" }
+		]
 	},
 	{
 		src: "https://picsum.photos/500/270?image=4",
-		options: [{ percentage: 34, accurate: 68, text: "Playstation" }, { percentage: 30, accurate: 20, text: "Mouse" }]
+		options: [
+			{ percentage: 34, accurate: 68, text: "Playstation" },
+			{ percentage: 30, accurate: 20, text: "Mouse" }
+		]
 	},
 	{
 		src: "https://picsum.photos/500/270?image=6",
-		options: [{ percentage: 40, accurate: 53, text: "Male" }, { percentage: 52, accurate: 30, text: "Sheep" }]
+		options: [
+			{ percentage: 40, accurate: 53, text: "Male" },
+			{ percentage: 52, accurate: 30, text: "Sheep" }
+		]
 	},
 	{
 		src: "https://picsum.photos/500/270?image=5",
-		options: [{ percentage: 42, accurate: 20, text: "Phone" }, { percentage: 78, accurate: 60, text: "Electronics" }]
+		options: [
+			{ percentage: 42, accurate: 20, text: "Phone" },
+			{ percentage: 78, accurate: 60, text: "Electronics" }
+		]
 	},
 	{
 		src: "https://picsum.photos/500/270?image=7",
-		options: [{ percentage: 40, accurate: 30, text: "Key" }, { percentage: 45, accurate: 42, text: "Press" }]
+		options: [
+			{ percentage: 40, accurate: 30, text: "Key" },
+			{ percentage: 45, accurate: 42, text: "Press" }
+		]
 	},
 	{
 		src: "https://picsum.photos/500/270?image=8",
-		options: [{ percentage: 31, accurate: 20, text: "Male" }, { percentage: 76, accurate: 54, text: "Laptop" }]
+		options: [
+			{ percentage: 31, accurate: 20, text: "Male" },
+			{ percentage: 76, accurate: 54, text: "Laptop" }
+		]
 	}
 ];
 
@@ -229,7 +253,7 @@ export const selectOptions = [
 	{ value: "vanilla", label: "Vanilla" }
 ];
 
-export const lineChartData =  {
+export const lineChartData = {
 	labels: [
 		"1/11/2019",
 		"1/12/2019",
@@ -239,61 +263,153 @@ export const lineChartData =  {
 		"1/16/2019",
 		"1/17/2019"
 	],
-	datasets: [{
-		fill: false,
-		lineTension: 0.1,
-		borderColor: "#51adc0",
-		borderCapStyle: "butt",
-		borderDash: [],
-		borderDashOffset: 0.0,
-		borderJoinStyle: "miter",
-		pointRadius: 5,
-		pointBackgroundColor: "#51adc0",
-		pointBorderColor: "#fff",
-		pointBorderWidth: 1,
-		pointHoverRadius: 5,
-		pointHoverBackgroundColor: "rgba(75,192,192,1)",
-		pointHoverBorderColor: "rgba(220,220,220,1)",
-		pointHoverBorderWidth: 2,
-		pointHitRadius: 10,
-		shadowOffsetX: 1,
-		shadowOffsetY: 1,
-		shadowBlur: 5,
-		shadowColor: "#51adc0",
-		data: [30, 45, 32, 58, 71, 95, 22]
-	},{
-		fill: false,
-		lineTension: 0.1,
-		borderColor: "#8567f0",
-		borderCapStyle: "butt",
-		borderDash: [],
-		borderDashOffset: 0.0,
-		borderJoinStyle: "miter",
-		pointRadius: 5,
-		pointBackgroundColor: "#8567f0",
-		pointBorderColor: "#fff",
-		pointBorderWidth: 1,
-		pointHoverRadius: 5,
-		pointHoverBackgroundColor: "rgba(75,192,192,1)",
-		pointHoverBorderColor: "rgba(220,220,220,1)",
-		pointHoverBorderWidth: 2,
-		pointHitRadius: 10,
-		shadowOffsetX: 1,
-		shadowOffsetY: 1,
-		shadowBlur: 5,
-		shadowColor: "#8567f0",
-		data: [14, 10 , 70, 90, 45, 55, 50]
-	},
+	datasets: [
+		{
+			fill: false,
+			lineTension: 0.1,
+			borderColor: "#51adc0",
+			borderCapStyle: "butt",
+			borderDash: [],
+			borderDashOffset: 0.0,
+			borderJoinStyle: "miter",
+			pointRadius: 5,
+			pointBackgroundColor: "#51adc0",
+			pointBorderColor: "#fff",
+			pointBorderWidth: 1,
+			pointHoverRadius: 5,
+			pointHoverBackgroundColor: "rgba(75,192,192,1)",
+			pointHoverBorderColor: "rgba(220,220,220,1)",
+			pointHoverBorderWidth: 2,
+			pointHitRadius: 10,
+			shadowOffsetX: 1,
+			shadowOffsetY: 1,
+			shadowBlur: 5,
+			shadowColor: "#51adc0",
+			data: [30, 45, 32, 58, 71, 95, 22]
+		},
+		{
+			fill: false,
+			lineTension: 0.1,
+			borderColor: "#8567f0",
+			borderCapStyle: "butt",
+			borderDash: [],
+			borderDashOffset: 0.0,
+			borderJoinStyle: "miter",
+			pointRadius: 5,
+			pointBackgroundColor: "#8567f0",
+			pointBorderColor: "#fff",
+			pointBorderWidth: 1,
+			pointHoverRadius: 5,
+			pointHoverBackgroundColor: "rgba(75,192,192,1)",
+			pointHoverBorderColor: "rgba(220,220,220,1)",
+			pointHoverBorderWidth: 2,
+			pointHitRadius: 10,
+			shadowOffsetX: 1,
+			shadowOffsetY: 1,
+			shadowBlur: 5,
+			shadowColor: "#8567f0",
+			data: [14, 10, 70, 90, 45, 55, 50]
+		}
 	],
-	beforeDraw: function (chart, easing) {
-		if (chart.config.options.chartArea && chart.config.options.chartArea.backgroundColor) {
+	beforeDraw: function(chart, easing) {
+		if (
+			chart.config.options.chartArea &&
+			chart.config.options.chartArea.backgroundColor
+		) {
 			const ctx = chart.chart.ctx;
 			const chartArea = chart.chartArea;
 
 			ctx.save();
 			ctx.fillStyle = chart.config.options.chartArea.backgroundColor;
-			ctx.fillRect(chartArea.left, chartArea.top, chartArea.right - chartArea.left, chartArea.bottom - chartArea.top);
+			ctx.fillRect(
+				chartArea.left,
+				chartArea.top,
+				chartArea.right - chartArea.left,
+				chartArea.bottom - chartArea.top
+			);
 			ctx.restore();
 		}
 	}
 };
+export const sliderWithThumbnails = [
+	{
+		img: "https://picsum.photos/500/270?image=1",
+		thumbnail: "https://picsum.photos/200/160?image=1"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=2",
+		thumbnail: "https://picsum.photos/40/160?image=2"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=3",
+		thumbnail: "https://picsum.photos/150/160?image=3"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=4",
+		thumbnail: "https://picsum.photos/240/160?image=4"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=5",
+		thumbnail: "https://picsum.photos/200/160?image=5"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=6",
+		thumbnail: "https://picsum.photos/250/160?image=6"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=7",
+		thumbnail: "https://picsum.photos/300/160?image=7"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=8",
+		thumbnail: "https://picsum.photos/110/160?image=8"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=9",
+		thumbnail: "https://picsum.photos/60/160?image=9"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=10",
+		thumbnail: "https://picsum.photos/160/160?image=10"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=1",
+		thumbnail: "https://picsum.photos/100/160?image=1"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=2",
+		thumbnail: "https://picsum.photos/20/160?image=2"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=3",
+		thumbnail: "https://picsum.photos/75/160?image=3"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=4",
+		thumbnail: "https://picsum.photos/120/160?image=4"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=5",
+		thumbnail: "https://picsum.photos/200/160?image=5"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=6",
+		thumbnail: "https://picsum.photos/250/160?image=6"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=7",
+		thumbnail: "https://picsum.photos/90/160?image=7"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=8",
+		thumbnail: "https://picsum.photos/110/160?image=8"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=9",
+		thumbnail: "https://picsum.photos/40/160?image=9"
+	},
+	{
+		img: "https://picsum.photos/500/270?image=10",
+		thumbnail: "https://picsum.photos/60/160?image=10"
+	}
+];

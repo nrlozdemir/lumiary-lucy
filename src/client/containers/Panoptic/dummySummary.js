@@ -2,9 +2,9 @@ import { Doughnut } from "react-chartjs-2";
 import React from "react";
 
 const dummySummary = [
-  { description: 'Video Views', title: '7.64m'},
-  { description: 'Engagement Rate', title: '53%'},
-  { description: 'Completion Rate', title: '29%'}
+	{ description: 'Video Views', title: '7.64m'},
+	{ description: 'Engagement Rate', title: '53%'},
+	{ description: 'Completion Rate', title: '29%'}
 ];
 
 export const selectOptions = [
@@ -149,6 +149,36 @@ export const stackedChartOptions = {
 			}
 		}]
 	}
+};
+
+export const dropdownLists = {
+	duration: [
+		{name: "0 - 15ms"},
+		{name: "15 - 30ms"},
+		{name: "30 - 45ms"},
+		{name: "45 - 60ms"},
+	],
+	views: [
+		{name: "Views"},
+		{name: "Likes"},
+		{name: "Shares"},
+		{name: "Comments"}
+	],
+	socialMedia: [
+		{name: "Facebook"},
+		{name: "Instagram"},
+		{name: "Twitter"},
+		{name: "Snapchat"},
+		{name: "Youtube"},
+		{name: "Pinterest"}
+	],
+	dateRange: [
+		{name: "Past 24 Hours"},
+		{name: "Past Week"},
+		{name: "Past Month"},
+		{name: "Past 3 Month"},
+		{name: "Custom"},
+	],
 };
 
 export default dummySummary;

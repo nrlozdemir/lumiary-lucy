@@ -4,4 +4,57 @@
 	body {
 		margin: 0;
 	}
+
+	.QuickviewVideoCard {
+		width: 100%;
+		max-width: 400px;
+		margin-bottom: 0 !important;
+	}
+
+	.dot-item {
+		display: inline-flex;
+		align-items: center;
+		margin-right: 30px;
+
+		color: $color-white;
+		font-size: 14px;
+		font-family: $font-family-ClanOTNews;
+
+		span {
+			width: 16px;
+			height: 16px;
+			display: inline-block;
+			margin-right: 8px;
+			border-radius: 50%;
+		}
+	}
+
+	.custom-select {
+		min-width: 140px;
+		max-width: 200px;
+		border-radius: 8px;
+		border: 1px solid $color-cool-grey;
+
+		> div,
+		> div > div,
+		[aria-hidden="true"] {
+			border-radius: 8px !important;
+		}
+	}
+
+	.headerRight {
+		position: relative;
+		display: flex;
+		justify-content: flex-end;
+		& > div {
+			-ms-flex-preferred-size: 0;
+			flex-basis: 0;
+			-ms-flex-positive: 1;
+			flex-grow: 1;
+		}
+
+		.custom-select {
+			margin-left: 30px;
+		}
+	}
 }
