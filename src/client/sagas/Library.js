@@ -1,8 +1,6 @@
-// import { take, call, put, select } from 'redux-saga/effects';
+import { takeLatest, call, put } from "redux-saga/effects";
 
-import { call, put, takeLatest, all } from "redux-saga/effects";
-import { types } from "Reducers/Library";
-import { actions } from "Reducers/Library";
+import { types, actions } from "Reducers/Library";
 
 export function* getVideos() {
 	try {
@@ -112,6 +110,7 @@ export function* getVideos() {
 		yield put(actions.loadVideosError(err));
 	}
 }
+
 export default function* librarySaga() {
 	yield takeLatest(types.LOAD_VIDEOS, getVideos);
 }
