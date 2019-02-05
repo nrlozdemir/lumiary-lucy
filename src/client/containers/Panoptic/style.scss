@@ -282,13 +282,13 @@
 		color: $color-white
 	}
 
-	.stackedChart{
-		background-color: $color-dark-five;
-		canvas{
-			background-color: $color-dark-five;
-		}
-	}
+}
 
+.stackedChart{
+	canvas{
+		margin: 0 auto;
+		background-color: $color-dark-five;
+	}
 }
 
 .stackedChartSideBar{
@@ -393,4 +393,52 @@
 	}
 }
 
+.dateRange{
+	top: 100%;
+	position: absolute;
+	right: auto;
+	margin-top: -50px;
+}
 
+.dateDropRange{
+	top: 20%;
+	position: absolute;
+	right: calc(50% - 14.5em);
+}
+
+.dropDateSelect{
+	width: 300px;
+	border: none;
+	outline: none;
+	background-color: transparent;
+
+	div{
+		background-color: transparent;
+	}
+}
+
+.dropDateSelect>div{
+	text-decoration: underline;
+	&:nth-child(3){
+		font-size: 14px !important;
+		background-color: $color-dark-five;
+		text-decoration: none;
+	}
+}
+
+.dropDateSelect>div>div{
+	outline: none;
+	font-family: $font-family-ClanOTBold;
+	font-size: 18px;
+	>div{
+		text-decoration: underline;
+	}
+	span{
+		visibility: hidden;
+		width: 0;
+	}
+	svg{
+		visibility: hidden;
+		width: 0;
+	}
+}

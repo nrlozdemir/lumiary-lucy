@@ -1,4 +1,3 @@
-import { Doughnut } from "react-chartjs-2";
 import React from "react";
 
 const dummySummary = [
@@ -80,6 +79,21 @@ export const doughnutOptions = {
 	},
 	layout: {
 		padding: 0
+	},
+	plugins: {
+		datalabels: {
+			formatter: (value, ctx) => {
+
+				let sum = 0;
+				let dataArr = ctx.chart.data.datasets[0].data;
+				dataArr.map(data => {
+					sum += data;
+				});
+				let percentage = ( value * 100 / sum ).toFixed(0) + "%";
+				return percentage;
+			},
+			color: '#fff',
+		}
 	}
 };
 
@@ -105,7 +119,26 @@ export const stackedChartData = {
 		data: [
 			21, 48, 12, 15
 		]
-	}]
+	}],
+	beforeDraw: function(chart, easing) {
+		if (
+			chart.config.options.chartArea &&
+			chart.config.options.chartArea.backgroundColor
+		) {
+			const ctx = chart.chart.ctx;
+			const chartArea = chart.chartArea;
+
+			ctx.save();
+			ctx.fillStyle = chart.config.options.chartArea.backgroundColor;
+			ctx.fillRect(
+				chartArea.left,
+				chartArea.top,
+				chartArea.right - chartArea.left,
+				chartArea.bottom - chartArea.top
+			);
+			ctx.restore();
+		}
+	}
 };
 
 export const stackedChartOptions = {
@@ -132,7 +165,7 @@ export const stackedChartOptions = {
 				stepSize: 1,
 				beginAtZero: true,
 				callback: function(value, index, values) {
-					return value + '%';
+					return value ;
 				}
 			}
 		}],
@@ -177,8 +210,15 @@ export const dropdownLists = {
 		{name: "Past Week"},
 		{name: "Past Month"},
 		{name: "Past 3 Month"},
-		{name: "Custom"},
 	],
 };
+
+export const dateSelectOptions = [
+	{ value: "Today", label: "Today" },
+	{ value: "Past Week", label: "Past Week" },
+	{ value: "Past Month", label: "Past Month" },
+	{ value: "Past 3 Months", label: "Past 3 Months" },
+	{ value: "custom", label: "Custom" }
+];
 
 export default dummySummary;

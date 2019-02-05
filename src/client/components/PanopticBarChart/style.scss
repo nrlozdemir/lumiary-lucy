@@ -1,0 +1,122 @@
+.panopticBarChart {
+  background-color: $color-dark-grey-blue;
+
+  .chartSection {
+    height: 310px;
+    margin-left: 28px;
+    margin-top: 5px;
+    position: relative;
+
+    &:after {
+      content: '';
+      background-color: $color-dusk;
+      height: 276px;
+      position: absolute;
+      width: 1px;
+      top: 1;
+      right: -26;
+    }
+  }
+  .chartSectionBadge {
+    display: block;
+    margin: 40px 0 56px 24px;
+    text-align: center;
+
+    span {
+      background-color: $color-dark-blue-grey;
+      border-radius: 50px;
+      font-family: $font-family-ClanOT;
+      font-size: 14px;
+      font-weight: bold;
+      padding: 8px 24px;
+    }
+  }
+
+  .barChartHeader {
+    div {
+      &:first-child {
+        margin-left: 0;
+      }
+
+      &:last-child {
+        float: right;
+      }
+    }
+    .title {
+      font-size: 18px;
+    }
+
+    .desc {
+      color: $color-cool-grey;
+      font-size: 12px;
+    }
+
+    .references {
+      .referenceItem {
+        display: inline-block;
+        font-size: 14px;
+        line-height: 1.8rem;
+        text-align: center;
+        span {
+          width: 16px;
+          height: 16px;
+          display: inline-block;
+          margin-bottom: -2px;
+          margin-right: 5px;
+          border-radius: 10px;
+        }
+      }
+      :nth-child(2) {
+        margin-left: 45px;
+      }
+    }
+
+    .headerRight {
+      float: right;
+
+      span {
+        margin-left: 20px;
+
+        &.strong {
+          font-size: 18px;
+          font-family: $font-family-ClanOT;
+          font-weight: bold;
+          text-decoration: underline;
+        }
+
+        &.light {
+          color: $color-cool-grey;
+          font-size: 14px;
+          font-family: $font-family-ClanOTNews;
+        }
+      }
+    }
+  }
+
+  .barChartContainer {
+    position: relative;
+  }
+
+  .barChartBackground {
+    background-color: $color-dark-five;
+    height: 274px;
+    position: absolute;
+    right: 0;
+    top: 7px;
+    width: calc(100% - 49px);
+  }
+
+  .wrapperBarChart {
+    height: 291px;
+    position: absolute;
+    width: 100%;
+    z-index: 2;
+  }
+
+  .groupChartsWrapper {
+    padding-left: 20px;
+    padding-right: 1px;
+    position: relative;
+    z-index: 3;
+  }
+}
