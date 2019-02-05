@@ -20,19 +20,6 @@ import PointerCard from "Components/PointerCard";
 import Select from "Components/Form/Select";
 import LineChart from "Components/LineChart/Chart";
 
-import {
-	barData,
-	barDataOptions,
-	colorTempData,
-	doughnutData,
-	lineChartData,
-	radarData,
-	selectOptions,
-	slideImages,
-	videoList,
-	sliderWithThumbnails
-} from "./options";
-
 /* eslint-disable react/prefer-stateless-function */
 export class LibraryDetail extends React.Component {
 	constructor(props) {
