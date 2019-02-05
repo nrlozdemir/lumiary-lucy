@@ -13,8 +13,11 @@ import { compose } from "redux";
 import PanopticSummaryCard from "Components/PanopticSummaryCard";
 import LineChart from "Components/LineChart";
 import CompareShares from "Components/CompareShares";
+import PacingCard from "Components/PacingCard";
 import makeSelectPanoptic from "Selectors/Panoptic.js";
 import dummySummary from "./dummySummary";
+
+import { barData, barDataOptions } from "./options";
 
 /* eslint-disable react/prefer-stateless-function */
 export class Panoptic extends React.Component {
@@ -36,6 +39,7 @@ export class Panoptic extends React.Component {
 					{this.renderDummySummary()}
 				</div>
 				<LineChart />
+				<PacingCard barData={barData} barDataOptions={barDataOptions} />
 				<CompareShares />
 			</React.Fragment>
 		);
