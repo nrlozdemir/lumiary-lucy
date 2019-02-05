@@ -1,0 +1,46 @@
+.service {
+	cursor: pointer;
+	transform-origin: 0 0 0;
+	.icon-wrapper {
+		transform-origin: 50% 50%;
+
+		& , & > * {
+			transition: 500ms;
+		}
+	}
+	circle {
+		fill: $color-cool-blue;
+		fill-opacity: 0.4;
+	}
+
+
+	&.active, &:hover {
+		.icon-wrapper {
+			transform: scale(1.15) translateY(-5px);
+
+			& , & > * {
+				transition: 500ms;
+			}
+			circle {
+				fill-opacity: 1;
+			}
+		}
+	}
+}
+
+.serviceWrapper{
+	width: 100%;
+	height: 100%;
+}
+
+.service.active{
+	circle{
+		fill-opacity: 1;
+	}
+}
+
+text{
+	fill: $color-white;
+	font-size: 64px;
+	font-family: $font-family-primary;
+}

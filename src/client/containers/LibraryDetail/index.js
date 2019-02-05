@@ -7,25 +7,35 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
+import classnames from "classnames";
 import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
 import { Link } from "react-router-dom";
-import { Bar, Doughnut } from "react-chartjs-2";
+import { Bar, Doughnut, Radar } from "react-chartjs-2";
 import Slider from "rc-slider";
-import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
+import { Field, reduxForm } from "redux-form";
+
 import style from "./style.scss";
 import makeSelectLibraryDetail from "Selectors/LibraryDetail.js";
 import SingleItemSlider from "Components/SingleItemSlider";
 import ProgressBar from "Components/ProgressBar";
-import { Radar } from "react-chartjs-2";
+import PointerCard from "Components/PointerCard";
+import Select from "Components/Form/Select";
+import LineChart from "Components/LineChart/Chart";
+
 import {
-	videoList,
-	slideImages,
 	barData,
 	barDataOptions,
+	colorTempData,
 	doughnutData,
+	lineChartData,
 	radarData,
-	sliderMarks
+	selectOptions,
+	slideImages,
+	sliderMarks,
+	videoList,
+	sliderWithThumbnails
 } from "./options";
 
 /* eslint-disable react/prefer-stateless-function */
@@ -36,7 +46,9 @@ export class LibraryDetail extends React.Component {
 		this.state = {
 			selectedImage: null,
 			sliderVal: 0,
-			maxValue: 1000
+			maxValue: 1000,
+			isDoughnutVisible: true,
+			isColorTempVisible: true
 		};
 	}
 	componentDidMount() {
@@ -48,22 +60,35 @@ export class LibraryDetail extends React.Component {
 		this.setState({ sliderVal: e }, this.slide.current.scrollTo(e * 5, 0));
 	}
 
+	changeVisibilityDoughnut(){
+		this.setState((prevState) => (
+			{isDoughnutVisible: !prevState.isDoughnutVisible}
+		));
+	}
+
 	render() {
 		const { match } = this.props;
+		console.log('Library Detail Props', this.props);
+		const { isDoughnutVisible, isColorTempVisible } = this.state;
+		const videoDetailHeader = classnames(
+			style.videoDetailHeader,
+			"grid-container mr-20 ml-20 mt-72"
+		);
 		return (
 			<React.Fragment>
 				<div className={style.header}>
 					<div className="ml-40">
 						<Link to="/library">
 							<span className="qf-iconLeft-Arrow" />
-							Back
+							Back to Library
 						</Link>
 					</div>
 					<div>Video Name</div>
 					<div className="mr-40">
-						<Link to={`/library/${match.params.videoId}/compare`}>
-							Compare mode
-						</Link>
+						Published Facebook
+						<span className={style.iconWrapper}>
+							<i className="qf-iconFacebook"></i>
+						</span>
 					</div>
 				</div>
 				<div className="grid-container mr-20 ml-20 mt-72">
@@ -74,7 +99,6 @@ export class LibraryDetail extends React.Component {
 						/>
 					</div>
 					<div className="col-6 bg-dark-grey-blue shadow-1">
-						<div>
 							<div className={style.chartHeader}>
 								<div className="col-6-no-gutters">
 									<div className={style.socialIcons}>
@@ -144,23 +168,26 @@ export class LibraryDetail extends React.Component {
 									</span>
 								</div>
 							</div>
-						</div>
 					</div>
 				</div>
+
 				<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
 					<div className={style.radialChartsContainer}>
-						{doughnutData.map((chart, i) => (
-							<div className={style.radialChart} key={i}>
+						{isDoughnutVisible && doughnutData.map((chart, i) => (
+							<div key={i} className={style.radialChart} onClick={this.changeVisibilityDoughnut.bind(this)}>
 								<h1 className="font-primary text-bold text-center">
 									{chart.title}
 								</h1>
-								<p className="color-cool-grey font-secondary-second font-size-12 display-block text-center pt-16 ">
-									{chart.secondTitle}
-								</p>
+								<div className={style.subtitle}>
+									<p className="font-secondary-second font-size-12 text-center">
+										{chart.secondTitle}
+									</p>
+								</div>
 								<div className={style.doughnutChartContainer}>
 									<Doughnut
 										options={{
-											cutoutPercentage: 85,
+											responsive: false,
+											cutoutPercentage: 60,
 											tooltips: {
 												enabled: false
 											},
@@ -168,35 +195,303 @@ export class LibraryDetail extends React.Component {
 												display: false
 											},
 											layout: {
-												padding: 40
+												padding: 0
 											}
 										}}
-										width={150}
-										height={150}
+										width={124}
+										height={124}
 										data={{
 											labels: ["Red", "Green"],
 											datasets: [
 												{
-													data: [chart.average, 100 - chart.average],
-													borderColor: "transparent",
-													backgroundColor: ["#ff556f", "#51adc0"],
-													hoverBackgroundColor: ["#ff556f", "#51adc0"]
+													data: [...chart.average],
+													borderColor: "#303a5d",
+													backgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#51adc0"],
+													hoverBackgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#51adc0"]
 												}
 											]
 										}}
 									/>
-									<p>{chart.average}%</p>
+									<p className="pt-32"><span className={style.textBold}>{chart.average[chart.average.length - 1]}%</span> of your library
+										is shot in <span className={style.textBold}>{chart.secondTitle}</span></p>
 								</div>
 							</div>
-						))}
+						))
+						}
+						{
+							!isDoughnutVisible &&
+							<div className={style.radialChartsContainer}>
+								<div className={style.doughnutPanelTab}>
+									<div className={style.doughnutPanelHeader}>
+										<div onClick={this.changeVisibilityDoughnut.bind(this)}>
+											<i className="qf-iconX"></i>
+											<span className={style.panelTitle}>Frame Rate</span>
+										</div>
+										<div className={style.headerInfo}>
+											<div>
+												<p className={style.panelTitle}>24 Fps</p>
+											</div>
+											<div className={style.formWrapper}>
+												<form onSubmit={() => console.log("object")}>
+													<Field
+														component={Select}
+														options={selectOptions}
+														id="NumberOfScenes"
+														name="NumberOfScenes"
+														placeholder="Select One"
+														label="Number of Scenes"
+														className={style.formWrapper}
+													/>
+													<Field
+														component={Select}
+														options={selectOptions}
+														id="NumberOfScenes"
+														name="NumberOfScenes"
+														placeholder="Select One"
+														label="Number of Scenes"
+														className={style.formWrapper}
+													/>
+												</form>
+											</div>
+										</div>
+
+									</div>
+									<div className={style.dataWrapper}>
+										<div className={style.panelChart}>
+											<h1 className="font-primary text-bold text-center">
+												Library Data
+											</h1>
+											<div className={style.doughnutChartContainer}>
+												<Doughnut
+													options={{
+														responsive: false,
+														cutoutPercentage: 60,
+														tooltips: {
+															enabled: false
+														},
+														legend: {
+															display: false
+														},
+														layout: {
+															padding: 0
+														}
+													}}
+													width={180}
+													height={180}
+													data={{
+														labels: ["Red", "Green"],
+														datasets: [
+															{
+																data: [30, 12, 6, 52],
+																borderColor: "#303a5d",
+																backgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#51adc0"],
+																hoverBackgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#51adc0"]
+															}
+														]
+													}}
+												/>
+												<p className="pt-32">
+													<span className={style.duskRound}></span>
+													<span className={style.textBold}>{52}%</span> of your library
+													is shot in <span className={style.textBold}>24fps</span>
+												</p>
+											</div>
+										</div>
+										<div className={style.panelChart}>
+											<PointerCard
+												data={{
+													topTitle: "Based on Likes",
+													pointerData: 140,
+													bottomText: 'of your library is shot in',
+													likes: 50,
+												}}
+											/>
+										</div>
+										<div className={style.panelChart}>
+											<h1 className="font-primary text-bold text-center">
+												Industry Data
+											</h1>
+											<div className={style.doughnutChartContainer}>
+												<Doughnut
+													options={{
+														responsive: false,
+														cutoutPercentage: 60,
+														tooltips: {
+															enabled: false
+														},
+														legend: {
+															display: false
+														},
+														layout: {
+															padding: 0
+														}
+													}}
+													width={180}
+													height={180}
+													data={{
+														labels: ["Red", "Green"],
+														datasets: [
+															{
+																data: [30, 12, 6, 52],
+																borderColor: "#303a5d",
+																backgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#8567f0"],
+																hoverBackgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#8567f0"]
+															}
+														]
+													}}
+												/>
+												<p className="w-75 text-center pt-32">
+													<span className={style.purpleRound}></span>
+													<span className={style.textBold}>{52}%</span> of your library
+													is shot in <span className={style.textBold}>24fps</span></p>
+											</div>
+										</div>
+									</div>
+									<div className="w-100 pt-48 pb-48">
+										<LineChart
+											backgroundColor="#242b49"
+											dataSet={lineChartData}
+											width={1070}
+											height={291}
+											options={{
+												tooltips: {
+													position: 'nearest',
+													backgroundColor: '#fff',
+													titleFontColor: '#242b49',
+													bodyFontColor: '#242b49',
+													footerFontColor: '#242b49',
+													xPadding: 10,
+													yPadding: 16,
+													cornerRadius : 3,
+													callbacks: {
+														title: function(tooltipItem, data) {
+															const { datasetIndex, index } = tooltipItem[0];
+															if( datasetIndex === 1){
+																return `${data.datasets[datasetIndex].data[index]}% of industry is shot in 24fps`;
+															}else{
+																return `${data.datasets[datasetIndex].data[index]}% of frames is shot in 24fps`;
+															}
+														},
+														label: function(tooltipItem, data) {
+															return null
+														}
+													}
+												},
+												scales: {
+													xAxes: [{
+														gridLines: {
+															display: true,
+															color: '#5a6386',
+															lineWidth: 0.7,
+															drawBorder: true,
+															drawTicks: false
+														},
+														ticks: {
+															fontColor: "#fff",
+															fontSize: 12,
+															stepSize: 1,
+															beginAtZero: true,
+															callback: function(value, index, values) {
+																return '    ' + value;
+															}
+														}
+													}],
+													yAxes: [{
+														gridLines: {
+															display: true,
+															color: '#5a6386',
+															lineWidth: 0.7,
+															drawBorder: true,
+															drawTicks: false
+														},
+														ticks: {
+															fontColor: "#fff",
+															fontSize: 12,
+															stepSize: 25,
+															beginAtZero: true,
+															marginRight: 16,
+															callback: function(value, index, values) {
+																return value + '%      '
+															}
+														}
+													}]
+												},
+											}}
+										/>
+									</div>
+								</div>
+							</div>
+						}
 					</div>
 				</div>
+
+				<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
+					<div className={style.radialChartsContainer}>
+						<div className={style.temperatureHeader}>
+							<div>
+								<h2>Color Temperature / Sentiment Comparison</h2>
+							</div>
+							<div className="d-flex align-items-center justify-space-between">
+								<div className="d-flex align-items-center mr-8">
+									<span className={style.redRound}></span>
+									<p>This Video</p>
+								</div>
+								<div className="d-flex align-items-center mr-8">
+									<span className={style.duskRound}></span>
+									<p>Library Average</p>
+								</div>
+								<div className="d-flex align-items-center mr-8">
+									<span className={style.purpleRound}></span>
+									<p>Industry</p>
+								</div>
+							</div>
+							<div className={style.inputWrapper}>
+								<form>
+									<Field
+										component={Select}
+										options={selectOptions}
+										id="NumberOfScenes"
+										name="NumberOfScenes"
+										placeholder="Select One"
+										label="Number of Scenes"
+										className={style.formWrapper}
+									/>
+								</form>
+							</div>
+						</div>
+						<div className={style.temperatureContentContainer}>
+							{isColorTempVisible && colorTempData.map((temp, i) => (
+								<div className={style.temperatureContentWrapper}>
+									<div className={style.temperatureContent}>
+										<p className={style.textTop}>Happy</p>
+										<p className={style.textRight}>Warm</p>
+										<p className={style.textBottom}>Sad</p>
+										<p className={style.textLeft}>Cool</p>
+										<div className={style.verticalLine}></div>
+										<div className={style.horizontalLine}></div>
+										{
+											temp.data.map((data, i) => (
+												<span key={i}
+															className={data.type === 'video' ? style.redRound : data.type === 'library' ? style.purpleRound : style.duskRound}
+															style={{transform: `translateX(${data.x * 2}%) translateY(${data.y * 2}%)`}}></span>
+											))
+										}
+									</div>
+
+								</div>
+							))
+							}
+						</div>
+
+					</div>
+				</div>
+
 
 				{this.state.selectedImage ? (
 					<div className="col-12 mt-48">
 						<div className="col-6-no-gutters bg-black">
-							<div className="mt-72 mb-72 ml-48 mr-48">
-								<SingleItemSlider slideImages={slideImages} />
+							<div className="mt-48 ml-48 mr-48">
+								<SingleItemSlider slideImages={sliderWithThumbnails} />
 							</div>
 						</div>
 						<div className="col-6-no-gutters ">
@@ -340,22 +635,23 @@ export class LibraryDetail extends React.Component {
 								))}
 							</div>
 						</div>
-						<div className="col-12 mt-16 mb-16">
+						<div className="col-12 mt-16 mb-16 library-detail-slider">
 							<Slider
 								step={null}
 								defaultValue={8}
 								onAfterChange={val => this.onChangeSlider(val)}
 								handleStyle={{
-									width: "40px",
-									height: "40px",
-									marginTop: "-12px"
+									width: "293px",
+                  height: "16px",
+                  borderRadius: "10px",
+                  marginTop: "0px"
 								}}
 								trackStyle={{
 									height: "16px",
 									backgroundColor: "transparent"
 								}}
-								min={8}
-								max={102}
+								min={-5}
+								max={114}
 								railStyle={{
 									height: "16px",
 									borderRadius: "10px",
@@ -396,4 +692,6 @@ const withConnect = connect(
 	mapDispatchToProps
 );
 
-export default compose(withConnect)(LibraryDetail);
+export default compose(reduxForm({
+	form: 'libraryDetail'
+}),withConnect)(LibraryDetail);

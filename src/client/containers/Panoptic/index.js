@@ -13,6 +13,7 @@ import { compose } from "redux";
 import PanopticSummaryCard from "Components/PanopticSummaryCard";
 import LineChart from "Components/LineChart";
 import PanopticBarChart from 'Components/PanopticBarChart';
+import CompareShares from "Components/CompareShares";
 import makeSelectPanoptic from "Selectors/Panoptic.js";
 import dummySummary from "./dummySummary";
 
@@ -37,6 +38,7 @@ export class Panoptic extends React.Component {
 				</div>
 				<LineChart />
         <PanopticBarChart />
+				<CompareShares />
 			</React.Fragment>
 		);
 	}
