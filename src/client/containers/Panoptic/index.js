@@ -12,6 +12,7 @@ import { compose } from "redux";
 
 import PanopticSummaryCard from "Components/PanopticSummaryCard";
 import LineChart from "Components/LineChart";
+import PanopticBarChart from 'Components/PanopticBarChart';
 import makeSelectPanoptic from "Selectors/Panoptic.js";
 import dummySummary from "./dummySummary";
 
@@ -35,6 +36,7 @@ export class Panoptic extends React.Component {
 					{this.renderDummySummary()}
 				</div>
 				<LineChart />
+        <PanopticBarChart />
 			</React.Fragment>
 		);
 	}
