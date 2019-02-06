@@ -89,22 +89,22 @@ class PacingCard extends Component {
 						<div className={style.stadiumCharts} title="Percentage of Library">
 							<div className={style.stadiumChart} data="20" title="80% Data">
 								<svg xmlns="http://www.w3.org/2000/svg">
-									<rect className={style.bar} fill="none" />
+									<rect className={style.bar} fill="none" rx="1" />
 								</svg>
 							</div>
 							<div className={style.stadiumChart} data="50" title="50% Data">
 								<svg xmlns="http://www.w3.org/2000/svg">
-									<rect className={style.bar} fill="none" />
+									<rect className={style.bar} fill="none" rx="1" />
 								</svg>
 							</div>
 							<div className={style.stadiumChart} data="45" title="55% Data">
 								<svg xmlns="http://www.w3.org/2000/svg">
-									<rect className={style.bar} fill="none" />
+									<rect className={style.bar} fill="none" rx="1" />
 								</svg>
 							</div>
 							<div className={style.stadiumChart} data="40" title="60% Data">
 								<svg xmlns="http://www.w3.org/2000/svg">
-									<rect className={style.bar} fill="none" />
+									<rect className={style.bar} fill="none" rx="1" />
 								</svg>
 							</div>
 						</div>
