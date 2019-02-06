@@ -9,10 +9,11 @@ import PropTypes from "prop-types";
 import moment from "moment";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { compose } from "redux";
+import { compose, bindActionCreators } from "redux";
 import { DateRange } from "react-date-range";
 import { Route, Switch } from "react-router-dom";
 
+import { actions } from "Reducers/Quickview";
 import makeSelectQuickview from "Selectors/Quickview.js";
 
 import Select from "Components/Form/Select";
@@ -35,9 +36,10 @@ export class Quickview extends React.Component {
 		};
 	}
 
-	handleChange = (selectedOption, name) => {
-		this.setState({ [name]: selectedOption });
-	};
+	componentDidMount() {
+		const { getQuickviewItemsRequest } = this.props;
+		getQuickviewItemsRequest();
+	}
 
 	render() {
 		const {
@@ -45,6 +47,11 @@ export class Quickview extends React.Component {
 			selectDate,
 			dateRange: { selection: dateRange }
 		} = this.state;
+
+		const {
+			quickview: { quickviewItems: quickviewItems }
+		} = this.props;
+
 		return (
 			<React.Fragment>
 				<div className="grid-container col-12">
@@ -131,7 +138,11 @@ export class Quickview extends React.Component {
 						</div>
 					</div>
 					<Switch>
-						<Route path="/quickview" exact component={Main} />
+						<Route
+							path="/quickview"
+							exact
+							render={() => <Main quickviewItems={quickviewItems} />}
+						/>
 						<Route path="/quickview/:id/:platform" component={Detail} />
 					</Switch>
 				</div>
@@ -148,11 +159,7 @@ const mapStateToProps = createStructuredSelector({
 	quickview: makeSelectQuickview()
 });
 
-function mapDispatchToProps(dispatch) {
-	return {
-		dispatch
-	};
-}
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 const withConnect = connect(
 	mapStateToProps,

@@ -9,9 +9,9 @@ import { NavLink, Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { compose } from "redux";
-
-import makeSelectQuickviewDetail from "Selectors/QuickviewDetail.js";
+import { compose, bindActionCreators } from "redux";
+import { actions } from "Reducers/Quickview";
+import makeSelectQuickview from "Selectors/Quickview.js";
 import { toSlug } from "Utils/index";
 import VideoCard from "Components/VideoCard";
 import style from "./../style.scss";
@@ -20,120 +20,42 @@ export class Detail extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			quickviewId: null,
+			selectedQuickviewId: null,
 			platforms: [
-				"All Platforms",
-				"Facebook",
-				"Instagram",
-				"Twitter",
-				"Snapchat",
-				"YouTube",
-				"Pinterest"
-			],
-			dummy: [
-				{
-					video: {
-						video: {
-							title: "2,387,931 Views",
-							thumbnailUrl: "https://picsum.photos/282/154?image=18",
-							socialIcon: "instagram"
-						},
-						options: {
-							size: "none",
-							presentationCard: true,
-							barColor: "cool-blue"
-						}
-					},
-					infos: [
-						{
-							title: "title",
-							value: "value",
-							difference: 60
-						},
-						{
-							title: "title",
-							value: "value",
-							difference: 60
-						},
-						{
-							title: "title",
-							value: "value",
-							difference: 60
-						},
-						{
-							title: "title",
-							value: "value",
-							difference: 60
-						},
-						{
-							title: "title",
-							value: "value"
-						},
-						{
-							title: "title",
-							value: "value"
-						},
-						{
-							title: "title",
-							value: "value"
-						}
-					]
-				},
-				{
-					video: {
-						video: {
-							title: "516 Views",
-							thumbnailUrl: "https://picsum.photos/282/154?image=19",
-							socialIcon: "instagram"
-						},
-						options: {
-							size: "none",
-							presentationCard: true,
-							barColor: "coral-pink"
-						}
-					},
-					infos: [
-						{
-							title: "title",
-							value: "value"
-						},
-						{
-							title: "title",
-							value: "value"
-						},
-						{
-							title: "title",
-							value: "value"
-						},
-						{
-							title: "title",
-							value: "value"
-						},
-						{
-							title: "title",
-							value: "value"
-						},
-						{
-							title: "title",
-							value: "value"
-						},
-						{
-							title: "title",
-							value: "value"
-						}
-					]
-				}
+				"all platforms",
+				"facebook",
+				"instagram",
+				"twitter",
+				"snapchat",
+				"youtube",
+				"pinterest"
 			]
 		};
 	}
 
 	componentDidMount() {
-		this.setState({ quickviewId: this.props.match.params.id });
+		this.setState({ selectedQuickviewId: this.props.match.params.id });
+		this.props.getQuickviewPlatformSelectedRequest(this.props.match.params.id);
+	}
+
+	componentDidUpdate(prevProps) {
+		const { match: prevMatch } = prevProps;
+		const { match, getQuickviewPlatformSelectedRequest } = this.props;
+
+		if (prevMatch.params.id !== match.params.id) {
+			this.setState({ selectedQuickviewId: match.params.id });
+			getQuickviewPlatformSelectedRequest(match.params.id);
+		}
 	}
 
 	render() {
-		const { quickviewId, platforms, dummy } = this.state;
-
+		const { platforms, selectedQuickviewId } = this.state;
+		const {
+			quickview: {
+				selectedPlatform: { id, platformsValues }
+			}
+		} = this.props;
+		console.log(this.props);
 		return (
 			<React.Fragment>
 				<div className="grid-container col-12">
@@ -147,15 +69,15 @@ export class Detail extends React.Component {
 									<NavLink
 										key={index}
 										activeClassName={style.active}
-										to={`/quickview/${quickviewId}/${toSlug(platform)}`}
+										to={`/quickview/${selectedQuickviewId}/${toSlug(platform)}`}
 									>
-										{platform.charAt(0).toUpperCase() + platform.slice(1)}
+										{platform}
 									</NavLink>
 								))}
 							</div>
 						</div>
 						<div className={style.content}>
-							{dummy.map((el, i) => (
+							{platformsValues.map((el, i) => (
 								<div key={i} className="col-6">
 									<div className={style.card}>
 										<VideoCard {...el.video} />
@@ -192,14 +114,10 @@ Detail.propTypes = {
 };
 
 const mapStateToProps = createStructuredSelector({
-	quickviewDetail: makeSelectQuickviewDetail()
+	quickview: makeSelectQuickview()
 });
 
-function mapDispatchToProps(dispatch) {
-	return {
-		dispatch
-	};
-}
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 const withConnect = connect(
 	mapStateToProps,
