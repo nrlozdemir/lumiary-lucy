@@ -22,4 +22,15 @@ function socialIconSelector(key) {
 	return socialIcons[key];
 }
 
-export { randomKey, socialIconSelector };
+function chartCombineDataset(data, options, globalOptions) {
+	return {
+		...data,
+		...globalOptions,
+		datasets: data.datasets.map((dataset, index) => ({
+			...dataset,
+			...options[index]
+		}))
+	};
+}
+
+export { randomKey, socialIconSelector, chartCombineDataset };
