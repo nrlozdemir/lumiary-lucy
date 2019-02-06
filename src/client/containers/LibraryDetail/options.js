@@ -234,19 +234,6 @@ export const radarData = {
 	]
 };
 
-export const sliderMarks = {
-	10: { label: <p className={style.dot}>0:00</p> },
-	20: { label: <p className={style.dot}>0:10</p> },
-	30: { label: <p className={style.dot}>0:20</p> },
-	40: { label: <p className={style.dot}>0:30</p> },
-	50: { label: <p className={style.dot}>0:40</p> },
-	60: { label: <p className={style.dot}>0:50</p> },
-	70: { label: <p className={style.dot}>0:60</p> },
-	80: { label: <p className={style.dot}>0:70</p> },
-	90: { label: <p className={style.dot}>0:80</p> },
-	100: { label: <p className={style.dot}>0:90</p> }
-};
-
 export const selectOptions = [
 	{ value: "chocolate", label: "Chocolate" },
 	{ value: "strawberry", label: "Strawberry" },
