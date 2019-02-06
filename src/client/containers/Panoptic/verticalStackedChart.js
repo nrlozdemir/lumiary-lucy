@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { DateRange } from "react-date-range";
 import classnames from "classnames";
 import { Bar, Doughnut } from "react-chartjs-2";
@@ -6,18 +6,19 @@ import moment from "moment";
 import { Field } from "redux-form";
 import "chartjs-plugin-datalabels";
 
-import Dropdown from 'Components/Dropdown';
-import Select from 'Components/Form/Select';
-import Button from 'Components/Form/Button';
+import Dropdown from "Components/Dropdown";
+import Select from "Components/Form/Select";
+import Button from "Components/Form/Button";
 
 import {
-dateSelectOptions,
-doughnutData,
-doughnutOptions,
-doughnutRoundData,
-dropdownLists, selectOptions,
-stackedChartData,
-stackedChartOptions
+	dateSelectOptions,
+	doughnutData,
+	doughnutOptions,
+	doughnutRoundData,
+	dropdownLists,
+	selectOptions,
+	stackedChartData,
+	stackedChartOptions
 } from "./dummySummary";
 import style from "./style.scss";
 
