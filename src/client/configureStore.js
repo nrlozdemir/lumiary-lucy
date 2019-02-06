@@ -9,12 +9,16 @@ import history from "./history";
 const composeEnhancers =
 	process.env.NODE_ENV === "production"
 		? compose
-		: window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
+		: typeof window === "object" && window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__
 		? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__({})
 		: compose;
 
 const sagaMiddleware = createSagaMiddleware({
-	sagaMonitor: window["__SAGA_MONITOR_EXTENSION__"]
+	...(typeof window === "object" && process.env.NODE_ENV !== "production"
+		? {
+				sagaMonitor: window["__SAGA_MONITOR_EXTENSION__"]
+		  }
+		: {})
 });
 
 const store = function configureStore() {
