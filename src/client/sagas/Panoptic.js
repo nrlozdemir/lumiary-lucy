@@ -8,7 +8,7 @@ export function* getData() {
 		};
 		yield put(actions.getDataSuccess(data));
 	}catch (err){
-		yield put(actions.getDataError(e))
+		yield put(actions.getDataError(err))
 	}
 }
 
