@@ -4,5 +4,5 @@ import libraryDetail from "./LibraryDetail";
 import quickview from "./Quickview";
 
 export default function* rootSaga() {
-	yield all([...library, ...libraryDetail, ...quickview]);
+  yield all([...library, ...libraryDetail, ...quickview]);
 }

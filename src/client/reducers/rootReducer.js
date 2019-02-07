@@ -9,14 +9,14 @@ import LibraryDetail from "./LibraryDetail";
 import app from "./app";
 
 const rootReducer = history =>
-	combineReducers({
-		app,
-		Library,
-		Quickview,
-		Marketview,
-		Panoptic,
-		LibraryDetail,
-		form: formReducer
-	});
+  combineReducers({
+    app,
+    Library,
+    Quickview,
+    Marketview,
+    Panoptic,
+    LibraryDetail,
+    form: formReducer
+  });
 
 export default rootReducer;
