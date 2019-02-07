@@ -17,11 +17,11 @@ import Select from 'Components/Form/Select';
 import ColorTemperatureChart from 'Components/ColorTemperatureChart';
 import PacingCard from "Components/PacingCard";
 import makeSelectPanoptic from "Selectors/Panoptic.js";
+import { actions } from 'Reducers/Panoptic';
 
 import VerticalStackedChart from "./verticalStackedChart";
 
 import {
-colorTempData,
 selectOptions,
 platforms,
 } from "./dummySummary";
@@ -60,7 +60,11 @@ export class Panoptic extends React.Component {
     }
   }
 
-  handleChange = (selectedOption, name) => {
+  componentDidMount() {
+  	this.props.getData()
+	}
+
+	handleChange = (selectedOption, name) => {
     this.setState({ [name]: selectedOption });
   };
 
@@ -69,6 +73,10 @@ export class Panoptic extends React.Component {
       isColorTempVisible,
       isVerticalStackedChartVisible,
     } = this.state;
+
+    const { panoptic: { data: { colorTempData } } } = this.props;
+
+    console.log("Panoptic props", this.props);
     return (
       <React.Fragment>
         <PanopticBarChart />
@@ -160,7 +168,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch
+    getData: () => dispatch(actions.getData())
   };
 }
 
