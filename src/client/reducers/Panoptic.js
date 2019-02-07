@@ -7,9 +7,9 @@
 import { fromJS } from 'immutable';
 
 export const types = {
-	GET_DATA: "Panoptic/GET_VIDEO_RELEASES",
-	GET_DATA_SUCCESS: "Panoptic/GET_VIDEO_RELEASES_SUCCESS",
-	GET_DATA_ERROR: "Panoptic/GET_VIDEO_RELEASES_ERROR",
+	GET_DATA: "Panoptic/GET_DATA",
+	GET_DATA_SUCCESS: "Panoptic/GET_DATA_SUCCESS",
+	GET_DATA_ERROR: "Panoptic/GET_DATA_ERROR",
 };
 
 export const actions = {
