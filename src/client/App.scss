@@ -5,6 +5,41 @@
 		margin: 0;
 	}
 
+	.marketViewSlickSlider {
+		//max-width: 1024px;
+		margin: 0 auto;
+		///border: 1px solid;
+		position: relative;
+
+		.slick-slide {
+			transform: scale(1);
+			//opacity: .5;
+			transition: 0.3s ease-in-out all;
+		}
+		.slick-slide.slick-center {
+			opacity: 1;
+			transform: scale(1.08);
+		}
+
+		.switch {
+			background: #000;
+		}
+
+		.img-box {
+			padding: 0;
+			img {
+				width: 100%;
+			}
+		}
+
+		article {
+			border: 1px solid;
+			float: left;
+			margin: 50px 45px;
+			font-size: 0.8vw;
+		}
+	}
+
 	.QuickviewVideoCard {
 		width: 100%;
 		max-width: 400px;
