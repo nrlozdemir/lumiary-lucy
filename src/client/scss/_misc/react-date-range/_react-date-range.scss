@@ -2,108 +2,112 @@
 @import "react-date-range/theme";
 
 .absoluteInlineDatepicker {
-  position: absolute;
-  right: 0;
-  top: 100%;
-  z-index: 3;
+	position: absolute;
+	right: 0;
+	top: 100%;
+	z-index: 3;
 
-  background-color: $color-dusk;
+	background-color: $color-dusk;
 
-  .inline-buttons {
-    display: flex;
-    justify-content: space-between;
-    padding: 0px 30px 30px;
+	.inline-buttons {
+		display: flex;
+		justify-content: space-between;
+		padding: 0px 30px 30px;
 
-    div {
-      color: $color-cool-grey;
-      font-size: 14px;
-      font-family: $font-family-ClanOTNews;
-      cursor: pointer;
+		div {
+			color: $color-cool-grey;
+			font-size: 14px;
+			font-family: $font-family-ClanOTNews;
+			cursor: pointer;
 
-      &:nth-child(2) {
-        font-family: $font-family-ClanOT;
-      }
-    }
-  }
+			&:nth-child(2) {
+				font-family: $font-family-ClanOT;
+			}
+		}
+	}
 
-  .rdrDateDisplayWrapper {
-    display: none;
-  }
+	.rdrDateDisplayWrapper {
+		display: none;
+	}
 }
 
 .rdrMonthAndYearWrapper,
 .rdrMonth {
-  padding: 0;
-  background-color: $color-dusk;
+	padding: 0;
+	background-color: $color-dusk;
 }
 
 .rdrMonthPicker {
-  margin: 0;
+	margin: 0;
 }
 
 .rdrMonthAndYearPickers select {
-  color: $color-white;
-  font-size: 14px;
-  font-family: $font-family-ClanOT;
-  padding-right: 5px;
-  padding-left: 5px;
-  background: transparent;
+	color: $color-white;
+	font-size: 14px;
+	font-family: $font-family-ClanOT;
+	padding-right: 5px;
+	padding-left: 5px;
+	background: transparent;
+
+	option {
+		color: $color-dark-five;
+	}
 }
 
 .rdrMonth {
-  .rdrWeekDays {
-    background-color: $color-dark-five;
-    padding: 0 20px;
+	.rdrWeekDays {
+		background-color: $color-dark-five;
+		padding: 0 20px;
 
-    .rdrWeekDay {
-      color: $color-white;
-      font-size: 12px;
-      font-family: $font-family-ClanOTNews;
-      line-height: 50px;
-    }
-  }
+		.rdrWeekDay {
+			color: $color-white;
+			font-size: 12px;
+			font-family: $font-family-ClanOTNews;
+			line-height: 50px;
+		}
+	}
 
-  .rdrDays {
-    padding: 10px 20px 20px;
-    .rdrDay {
-      line-height: 0;
-      height: auto;
-      &:before {
-        content: "";
-        padding-top: 100%;
-        display: block;
-      }
-    }
+	.rdrDays {
+		padding: 10px 20px 20px;
+		.rdrDay {
+			line-height: 0;
+			height: auto;
+			&:before {
+				content: "";
+				padding-top: 100%;
+				display: block;
+			}
+		}
 
-    .rdrSelected,
-    .rdrInRange,
-    .rdrStartEdge,
-    .rdrEndEdge,
-    .rdrDayNumber {
-      top: 0;
-      bottom: 0;
-      left: 0;
-      right: 0;
-      border-radius: 0;
-    }
+		.rdrSelected,
+		.rdrInRange,
+		.rdrStartEdge,
+		.rdrEndEdge,
+		.rdrDayNumber {
+			top: 0;
+			bottom: 0;
+			left: 0;
+			right: 0;
+			border-radius: 0;
+		}
 
-    .rdrSelected,
-    .rdrInRange,
-    .rdrStartEdge,
-    .rdrEndEdge {
-      background: $color-cool-blue;
-      border-right: 1px solid $color-dusk;
-      border-bottom: 1px solid $color-dusk;
-    }
+		.rdrSelected,
+		.rdrInRange,
+		.rdrStartEdge,
+		.rdrEndEdge {
+			background: $color-cool-blue;
+			border-right: 1px solid $color-dusk;
+			border-bottom: 1px solid $color-dusk;
+		}
 
-    .rdrDayNumber span {
-      color: $color-white;
-      font-size: 12px;
-      font-family: $font-family-ClanOTBold;
+		.rdrDayNumber span {
+			color: $color-white;
+			font-size: 12px;
+			font-family: $font-family-ClanOTBold;
 
-      &:after {
-        display: none;
-      }
-    }
-  }
+			&:after {
+				display: none;
+			}
+		}
+	}
 }

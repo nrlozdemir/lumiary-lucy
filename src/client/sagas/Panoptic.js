@@ -1,6 +1,6 @@
 import { call, put, takeLatest, all } from "redux-saga/effects";
 import { actions, types } from "Reducers/Panoptic";
-import { getPanopticData } from "Api/Panoptic";
+import { getPanopticData } from "Api/panoptic";
 
 function* getData() {
 	try{
@@ -11,6 +11,4 @@ function* getData() {
 	}
 }
 
-export default function* panopticSaga() {
-	yield takeLatest(types.GET_DATA, getData)
-}
+export default [takeLatest(types.GET_DATA, getData)];

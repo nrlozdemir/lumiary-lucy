@@ -1,7 +1,9 @@
-import { all, fork } from "redux-saga/effects";
+import { all } from "redux-saga/effects";
+
 import library from "./Library";
 import panoptic from "./Panoptic";
+import libraryDetail from "./LibraryDetail";
 
 export default function* rootSaga() {
-	yield all([fork(library), fork(panoptic)]);
+  yield all([...library, ...libraryDetail, ...panoptic]);
 }
