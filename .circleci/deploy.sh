@@ -23,7 +23,7 @@ fi
 
 echo "Branch: $CIRCLE_BRANCH"
 
-if [ $CIRCLE_BRANCH = "qa" ] || [ $CIRCLE_BRANCH = "staging" ] || $CIRCLE_BRANCH = "prod" ]; then
+if [ $CIRCLE_BRANCH = "qa" ] || [ $CIRCLE_BRANCH = "staging" ] || [ $CIRCLE_BRANCH = "prod" ]; then
     echo Building static files...
     npm run build:$CIRCLE_BRANCH
     echo Logging in to Amazon ECR...
