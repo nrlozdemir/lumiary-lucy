@@ -328,7 +328,10 @@ export class LibraryDetail extends React.Component {
 												cutoutPercentage: 60,
 												tooltips: {
 													enabled: false
-												},
+                        },
+                        plugins: {
+                          datalabels: false
+                        },
 												legend: {
 													display: false
 												},

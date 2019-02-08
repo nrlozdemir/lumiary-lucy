@@ -1,6 +1,6 @@
 import React from "react";
 
-const dummySummary = [
+const summaryData = [
   { description: 'Video Views', title: '7.64m'},
   { description: 'Engagement Rate', title: '53%'},
   { description: 'Completion Rate', title: '29%'}
@@ -20,20 +20,6 @@ export const platforms = [
   {name: 'Snapchat', color: '#acb0be'},
   {name: 'Youtube', color: '#ffffff'},
   {name: 'Pinterest', color: '#242b49'},
-];
-
-export const doughnutData =
-  {
-    title: "Frame Rate",
-    secondTitle: "24fps",
-    average: [30, 12, 6, 52]
-  };
-
-export const doughnutRoundData = [
-  {data: '0-15 seconds', color: '#51adc0'},
-  {data: '15-30 seconds', color: '#8567f0'},
-  {data: '30-45 seconds', color: '#ff556f'},
-  {data: '45-60 seconds', color: '#acb0be'},
 ];
 
 export const doughnutOptions = {
@@ -61,50 +47,6 @@ export const doughnutOptions = {
         return percentage;
       },
       color: '#fff',
-    }
-  }
-};
-
-export const stackedChartData = {
-  labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-  datasets: [{
-    backgroundColor: '#ff556f',
-    data: [
-      25, 10, 14, 51
-    ]
-  }, {
-    backgroundColor: '#8567f0',
-    data: [
-      12, 24, 56, 9
-    ]
-  }, {
-    backgroundColor: '#acb0be',
-    data: [
-      42, 18, 18, 25
-    ]
-  },{
-    backgroundColor: '#51adc0',
-    data: [
-      21, 48, 12, 15
-    ]
-  }],
-  beforeDraw: function(chart, easing) {
-    if (
-      chart.config.options.chartArea &&
-      chart.config.options.chartArea.backgroundColor
-    ) {
-      const ctx = chart.chart.ctx;
-      const chartArea = chart.chartArea;
-
-      ctx.save();
-      ctx.fillStyle = chart.config.options.chartArea.backgroundColor;
-      ctx.fillRect(
-        chartArea.left,
-        chartArea.top,
-        chartArea.right - chartArea.left,
-        chartArea.bottom - chartArea.top
-      );
-      ctx.restore();
     }
   }
 };
@@ -189,4 +131,4 @@ export const dateSelectOptions = [
   { value: "custom", label: "Custom" }
 ];
 
-export default dummySummary;
+export default summaryData;

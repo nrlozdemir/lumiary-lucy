@@ -5,6 +5,9 @@ export const barDataOptions = {
   legend: {
     display: false
   },
+  plugins: {
+    datalabels: false
+  },
   layout: {
     padding: {
       left: 35,

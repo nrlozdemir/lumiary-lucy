@@ -3,15 +3,14 @@ import { Radar } from "react-chartjs-2";
 import classnames from "classnames";
 import style from "./style.scss";
 
-import { radarData } from "./options";
-
 class CompareShares extends Component {
 	render() {
 		const compareSharesContainer = classnames(
 			"shadow-1 col-12 mt-48 mb-48",
 			style.compareSharesContainer
 		);
-
+    
+    const { radarData } = this.props;
 		const info = classnames("col-6", style.info);
 		const radarComponent = classnames("col-4", style.radarComponent);
 
@@ -35,7 +34,9 @@ class CompareShares extends Component {
 								mode: "point",
 								bodyFontColor: "#000"
 							},
-
+              plugins: {
+                datalabels: false
+              },
 							scale: {
 								gridLines: {
 									display: true,
@@ -123,7 +124,9 @@ class CompareShares extends Component {
 								mode: "point",
 								bodyFontColor: "#000"
 							},
-
+              plugins: {
+                datalabels: false
+              },
 							scale: {
 								gridLines: {
 									display: true,

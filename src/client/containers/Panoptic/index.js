@@ -24,9 +24,9 @@ import VerticalStackedChart from "./verticalStackedChart";
 import {
 selectOptions,
 platforms,
-} from "./dummySummary";
+} from "./summaryData";
 import style from "./style.scss";
-import { barData, barDataOptions } from "./options";
+import { barDataOptions } from "./options";
 
 
 /* eslint-disable react/prefer-stateless-function */
@@ -74,12 +74,20 @@ export class Panoptic extends React.Component {
       isVerticalStackedChartVisible,
     } = this.state;
 
-    const { panoptic: { data: { colorTempData } } } = this.props;
+    const { panoptic: { data: { 
+      colorTempData, 
+      videoReleasesData, 
+      verticalStackedChartData,
+      pacingChartData,
+      compareSharesData
+    } 
+    }} = this.props;
 
-    console.log("Panoptic props", this.props);
     return (
       <React.Fragment>
-        <PanopticBarChart />
+        {videoReleasesData && (
+          <PanopticBarChart data={videoReleasesData}/>
+        )}
         <div className="col-12 shadow-1 mt-72 bg-dark-grey-blue">
           <div className={style.radialChartsContainer}>
             <div className={style.temperatureHeader}>
@@ -147,12 +155,16 @@ export class Panoptic extends React.Component {
           </div>
         </div>
         {
-          isVerticalStackedChartVisible && (
-            <VerticalStackedChart />
+          isVerticalStackedChartVisible && verticalStackedChartData && (
+            <VerticalStackedChart data={verticalStackedChartData}/>
           )
         }
-        <PacingCard barData={barData} barDataOptions={barDataOptions} />
-        <CompareShares />
+        {pacingChartData && (
+          <PacingCard barData={pacingChartData} barDataOptions={barDataOptions} />
+        )}
+        {compareSharesData && (
+          <CompareShares radarData={compareSharesData}/>
+        )}
       </React.Fragment>
     );
   }
