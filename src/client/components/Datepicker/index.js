@@ -77,7 +77,7 @@ class Datepicker extends React.Component {
 				/>
 				<div className="inline-buttons">
 					<div onClick={() => back()}>Back</div>
-					<div onClick={() => apply()}>Apply</div>
+					<div onClick={() => apply(dateRange)}>Apply</div>
 				</div>
 			</div>
 		) : (
