@@ -34,7 +34,7 @@ export class BuildReport extends React.Component {
 				this.setState(prevState => {
 					return {percentage: prevState.percentage + 1}
 				});
-			}, 100);
+			}, 50);
 			this.setState({
 				timerRef
 			})
