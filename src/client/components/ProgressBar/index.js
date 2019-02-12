@@ -11,7 +11,7 @@ import style from "./style.scss";
 /* eslint-disable react/prefer-stateless-function */
 const ProgressBar = ({ customBarClass, customPercentageClass, width }) => {
 	const barClass = classnames(style.progressBar, customBarClass);
-	const percentageClass = classnames(style.percentage, customPercentageClass);
+	const percentageClass = classnames( customPercentageClass);
 	return (
 		<div className={barClass}>
 			<div className={percentageClass} style={{ width: `${width}%` }} />
