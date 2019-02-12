@@ -4,37 +4,38 @@
   *
 */
 
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
-import { compose } from 'redux';
+import { compose, bindActionCreators } from 'redux';
 import  makeSelectMarketview  from 'Selectors/Marketview.js'
+import { actions } from 'Reducers/Marketview';
+
+import TopVideosChart from 'Components/Charts/MarketView/TopVideos';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Marketview extends React.Component {
+  componentDidMount() {
+    this.props.getCompetitorTopVideosRequest();
+  }
   render() {
+    const { marketview: { competitorTopVideos } } = this.props;
     return (
-      <div>
-        Hello World
-      </div>
+      <Fragment>
+        {competitorTopVideos && <TopVideosChart chartData={competitorTopVideos}/>}
+      </Fragment>
     );
   }
 }
 
-Marketview.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-};
+Marketview.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
   marketview: makeSelectMarketview(),
 });
 
-function mapDispatchToProps(dispatch) {
-  return {
-    dispatch,
-  };
-}
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 const withConnect = connect(
   mapStateToProps,
