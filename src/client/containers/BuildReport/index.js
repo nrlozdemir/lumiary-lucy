@@ -34,7 +34,7 @@ export class BuildReport extends React.Component {
 				this.setState(prevState => {
 					return {percentage: prevState.percentage + 1}
 				});
-			}, 100);
+			}, 10);
 			this.setState({
 				timerRef
 			})
@@ -45,7 +45,7 @@ export class BuildReport extends React.Component {
 	render() {
 		const { percentage, timerRef } = this.state;
 		const { match: { params: { videoId } } } = this.props;
-		if(percentage > 2 ){
+		if(percentage > 99 ){
 			clearInterval(timerRef);
 			return <Redirect to={`/library/${videoId}`} />
 		}
