@@ -5,5 +5,5 @@ import libraryDetail from './LibraryDetail';
 import marketview from './Marketview';
 
 export default function* rootSaga() {
-	yield all([...library, ...libraryDetail, ...marketview]);
+  yield all([...library, ...libraryDetail, ...marketview]);
 }
