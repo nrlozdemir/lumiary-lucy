@@ -19,7 +19,7 @@ class PacingCard extends Component {
 		const { likes, date } = this.state;
 
 		const pacingCardContainer = classnames(
-			"shadow-1 col-12 mt-48 mb-48",
+			"shadow-1 col-12 mt-72",
 			style.pacingCardContainer
 		);
 

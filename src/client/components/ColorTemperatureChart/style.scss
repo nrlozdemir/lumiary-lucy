@@ -1,0 +1,99 @@
+
+.temperatureContentWrapper{
+	position: relative;
+	width: calc(33.33% - 41px);
+	border-left: 1px solid $color-dusk;
+	padding: 20px;
+
+	&:first-child{
+		border: none;
+	}
+
+	.textTop{
+		font-size: 14px;
+		font-family: $font-family-ClanOTBold;
+		position: absolute;
+		top: -40px;
+		left: calc(50% - 22.5px);
+	}
+
+	.textRight{
+		font-size: 14px;
+		font-family: $font-family-ClanOTNews;
+		color: $color-cool-grey;
+		position: absolute;
+		top: calc(50% - 14px);
+		right: -50px;
+	}
+
+	.textBottom{
+		font-size: 14px;
+		font-family: $font-family-ClanOTBold;
+		position: absolute;
+		bottom: -40px;
+		left: calc(50% - 12px)
+	}
+
+	.textLeft{
+		font-size: 14px;
+		font-family: $font-family-ClanOTNews;
+		color: $color-cool-grey;
+		position: absolute;
+		top: calc(50% - 14px);
+		left: -40px;
+	}
+
+	.horizontalLine{
+		width: 204px;
+		height: 4px;
+		background-color: $color-dark-five;
+		position: absolute;
+		top: calc(50% - 2px);
+	}
+
+	.verticalLine{
+		width: 4px;
+		height: 204px;
+		background-color: $color-dark-five;
+		position: absolute;
+		top: 0;
+		left: calc(50% - 2px);
+	}
+
+	.temperatureContent{
+		display: block;
+		margin: 0 auto;
+		width: 204px;
+		height: 204px;
+		background-color: $color-dusk;
+		border-radius: 100%;
+		box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+		position: relative;
+
+		.round{
+			width: 40px;
+			height: 40px;
+			border-radius: 100%;
+			position: absolute;
+			top: calc(50% - 20px);
+			left: calc(50% - 20px);
+			border: 1px solid $color-dark-five;
+			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+		}
+	}
+}
+
+.borderless{
+	border: none;
+}
+
+.verticalTextLeft{
+	writing-mode: vertical-lr;
+	text-orientation: mixed;
+	transform: rotateZ(180deg)
+}
+
+.verticalTextRight{
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
+}

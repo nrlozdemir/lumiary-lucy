@@ -7,7 +7,7 @@ import { barChartData, options, wrapperBarOptions } from './dummyData';
 
 class PanopticBarChart extends Component {
   render() {
-    const barChartContainer = cx('shadow-1 col-12 mt-72 mb-72', style.panopticBarChart);
+    const barChartContainer = cx('shadow-1 col-12 mt-72', style.panopticBarChart);
     const barChartHeaderClass = cx('col-12 mt-24 mb-24', style.barChartHeader);
     const barContainerClass = cx('col-12', style.barChartContainer);
     const chartSectionClass = cx('col-3', style.chartSection);
