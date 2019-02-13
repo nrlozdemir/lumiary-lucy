@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
-import cx from 'classnames';
-import { Bar } from 'react-chartjs-2';
+import React, { Component } from 'react'
+import cx from 'classnames'
+import { Bar } from 'react-chartjs-2'
 
-import Select from "Components/Form/Select";
-import style from './style.scss';
-import { chartOptions } from './options';
+import Select from "Components/Form/Select"
+import style from './style.scss'
+import { chartOptions } from './options'
 
-const barChartContainer = cx('shadow-1 col-12 mt-72 mb-72', style.marketViewTopVideos);
-const barChartHeaderClass = cx('col-12 mt-48 mb-48', style.barChartHeader);
-const headerTitleClass = cx('font-secondary-first text-bold', style.title);
-const selectClasses = cx('custom-select', style.selectStyles);
-const referencesClass = cx('font-secondary-second', style.references);
-const barChartClass = cx('col-12', style.barChartContainer);
+const barChartContainer = cx('shadow-1 col-12 mt-72 mb-72', style.marketViewTopVideos)
+const barChartHeaderClass = cx('col-12 mt-48 mb-48', style.barChartHeader)
+const headerTitleClass = cx('font-secondary-first text-bold', style.title)
+const selectClasses = cx('custom-select', style.selectStyles)
+const referencesClass = cx('font-secondary-second', style.references)
+const barChartClass = cx('col-12', style.barChartContainer)
 
 class TopVideosChart extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {}
   }
 
   handleChange = (selectedOption, name) => {
-		this.setState({ [name]: selectedOption });
-  };
+		this.setState({ [name]: selectedOption })
+  }
   
   render() {
-    const { resolution, views, time } = this.state;
-    const { chartData } = this.props;
+    const { resolution, views, time } = this.state
+    const { chartData } = this.props
     return (
       <div className={barChartContainer}>
         <div className={barChartHeaderClass}>
@@ -116,8 +116,8 @@ class TopVideosChart extends Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default TopVideosChart;
+export default TopVideosChart

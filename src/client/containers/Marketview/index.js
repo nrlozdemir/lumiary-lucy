@@ -10,7 +10,7 @@ import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose, bindActionCreators } from 'redux';
 import  makeSelectMarketview  from 'Selectors/Marketview.js'
-import { actions } from 'Reducers/Marketview';
+import { actions } from 'Reducers/marketview';
 
 import TopVideosChart from 'Components/Charts/MarketView/TopVideos';
 
@@ -25,7 +25,7 @@ export class Marketview extends React.Component {
       <Fragment>
         {competitorTopVideos && <TopVideosChart chartData={competitorTopVideos}/>}
       </Fragment>
-    );
+    )
   }
 }
 

@@ -1,11 +1,15 @@
 import { takeLatest, call, put } from 'redux-saga/effects';
 
-import { types, actions } from 'Reducers/Marketview';
-import { getCompetitorTopVideos } from 'Api/Marketview';
+import { types, actions } from 'Reducers/marketview';
+import marketviewCompetitorTopVideosData from 'Api/mocks/marketviewCompetitorTopVideosMock.json';
+
+function getCompetitorTopVideosApi() {
+  return marketviewCompetitorTopVideosData;
+}
 
 function* getCompetitorTopVideosMarketview() {
   try{
-    const payload = yield call(getCompetitorTopVideos);
+    const payload = yield call(getCompetitorTopVideosApi);
     yield put(actions.getCompetitorTopVideosSuccess(payload));
   }catch(e) {
     yield put(actions.getCompetitorTopVideosFailure({ e }));

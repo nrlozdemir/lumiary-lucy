@@ -28,14 +28,20 @@ export const actions = {
   }),
 };
 export const initialState = fromJS({
-  competitorTopVideos: null
+  competitorTopVideos: null,
+  loading: false,
+  error: null
 });
 
 const marketviewReducer = (state = initialState, action) => {
 switch (action.type) {
+  case types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_REQUEST:
+    return state.set('loading', fromJS(true));
+    
   case types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_SUCCESS:
     return state
-    .set('competitorTopVideos', fromJS(action.payload))
+      .set('competitorTopVideos', fromJS(action.payload))
+      .set('loading', fromJS(false));
 
   case types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_FAILURE:
     return state.set('error', fromJS(action.error)).set('loading', fromJS(false));
