@@ -29,6 +29,11 @@
 	.rdrDateDisplayWrapper {
 		display: none;
 	}
+
+	&.align-left {
+		left: 0;
+		right: auto;
+	}
 }
 
 .rdrMonthAndYearWrapper,
