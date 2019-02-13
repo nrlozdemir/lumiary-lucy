@@ -20,6 +20,7 @@ import ProgressBar from "Components/ProgressBar";
 import PointerCard from "Components/PointerCard";
 import Select from "Components/Form/Select";
 import LineChart from "Components/LineChart/Chart";
+import ColorTemperatureChart from "Components/ColorTemperatureChart";
 
 import { barDataOptions, selectOptions } from "./options";
 
@@ -303,377 +304,302 @@ export class LibraryDetail extends React.Component {
 					</div>
 				</div>
 
-				<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
-					<div className={style.radialChartsContainer}>
-						{isDoughnutVisible &&
-							doughnutData.map((chart, i) => (
-								<div
-									key={i}
-									className={style.radialChart}
-									onClick={this.changeVisibilityDoughnut.bind(this)}
-								>
-									<h1 className="font-primary text-bold text-center">
-										{chart.title}
-									</h1>
-									<div className={style.subtitle}>
-										<p className="font-secondary-second font-size-12 text-center">
-											{chart.secondTitle}
-										</p>
-									</div>
-									<div className={style.doughnutChartContainer}>
-										<Doughnut
-											options={{
-												responsive: false,
-												cutoutPercentage: 60,
-												tooltips: {
-													enabled: false
-												},
-												legend: {
-													display: false
-												},
-												layout: {
-													padding: 0
-												}
-											}}
-											width={124}
-											height={124}
-											data={{
-												labels: ["Red", "Green"],
-												datasets: [
-													{
-														data: [...chart.average],
-														borderColor: "#303a5d",
-														backgroundColor: [
-															"#ffffff",
-															"#ffffff",
-															"#ffffff",
-															"#51adc0"
-														],
-														hoverBackgroundColor: [
-															"#ffffff",
-															"#ffffff",
-															"#ffffff",
-															"#51adc0"
-														]
-													}
-												]
-											}}
-										/>
-										<p className="pt-32">
-											<span className={style.textBold}>
-												{chart.average[chart.average.length - 1]}%
-											</span>{" "}
-											of your library is shot in{" "}
-											<span className={style.textBold}>
-												{chart.secondTitle}
-											</span>
-										</p>
-									</div>
-								</div>
-							))}
-						{!isDoughnutVisible && (
-							<div className={style.radialChartsContainer}>
-								<div className={style.doughnutPanelTab}>
-									<div className={style.doughnutPanelHeader}>
-										<div onClick={this.changeVisibilityDoughnut.bind(this)}>
-											<i className="qf-iconX" />
-											<span className={style.panelTitle}>Frame Rate</span>
-										</div>
-										<div className={style.headerInfo}>
-											<div>
-												<p className={style.panelTitle}>24 Fps</p>
-											</div>
-											<div className={style.formWrapper}>
-												<form onSubmit={() => console.log("object")}>
-													<Field
-														component={Select}
-														options={selectOptions}
-														id="NumberOfScenes"
-														name="NumberOfScenes"
-														placeholder="Select One"
-														label="Number of Scenes"
-														className={style.formWrapper}
-													/>
-													<Field
-														component={Select}
-														options={selectOptions}
-														id="NumberOfScenes"
-														name="NumberOfScenes"
-														placeholder="Select One"
-														label="Number of Scenes"
-														className={style.formWrapper}
-													/>
-												</form>
-											</div>
-										</div>
-									</div>
-									<div className={style.dataWrapper}>
-										<div className={style.panelChart}>
-											<h1 className="font-primary text-bold text-center">
-												Library Data
-											</h1>
-											<div className={style.doughnutChartContainer}>
-												<Doughnut
-													options={{
-														responsive: false,
-														cutoutPercentage: 60,
-														tooltips: {
-															enabled: false
-														},
-														legend: {
-															display: false
-														},
-														layout: {
-															padding: 0
-														}
-													}}
-													width={180}
-													height={180}
-													data={{
-														labels: ["Red", "Green"],
-														datasets: [
-															{
-																data: [30, 12, 6, 52],
-																borderColor: "#303a5d",
-																backgroundColor: [
-																	"#ffffff",
-																	"#ffffff",
-																	"#ffffff",
-																	"#51adc0"
-																],
-																hoverBackgroundColor: [
-																	"#ffffff",
-																	"#ffffff",
-																	"#ffffff",
-																	"#51adc0"
-																]
-															}
-														]
-													}}
-												/>
-												<p className="pt-32">
-													<span className={style.duskRound} />
-													<span className={style.textBold}>{52}%</span> of your
-													library is shot in{" "}
-													<span className={style.textBold}>24fps</span>
-												</p>
-											</div>
-										</div>
-										<div className={style.panelChart}>
-											<PointerCard
-												data={{
-													topTitle: "Based on Likes",
-													pointerData: 140,
-													bottomText: "of your library is shot in",
-													likes: 50
-												}}
-											/>
-										</div>
-										<div className={style.panelChart}>
-											<h1 className="font-primary text-bold text-center">
-												Industry Data
-											</h1>
-											<div className={style.doughnutChartContainer}>
-												<Doughnut
-													options={{
-														responsive: false,
-														cutoutPercentage: 60,
-														tooltips: {
-															enabled: false
-														},
-														legend: {
-															display: false
-														},
-														layout: {
-															padding: 0
-														}
-													}}
-													width={180}
-													height={180}
-													data={{
-														labels: ["Red", "Green"],
-														datasets: [
-															{
-																data: [30, 12, 6, 52],
-																borderColor: "#303a5d",
-																backgroundColor: [
-																	"#ffffff",
-																	"#ffffff",
-																	"#ffffff",
-																	"#8567f0"
-																],
-																hoverBackgroundColor: [
-																	"#ffffff",
-																	"#ffffff",
-																	"#ffffff",
-																	"#8567f0"
-																]
-															}
-														]
-													}}
-												/>
-												<p className="w-75 text-center pt-32">
-													<span className={style.purpleRound} />
-													<span className={style.textBold}>{52}%</span> of your
-													library is shot in{" "}
-													<span className={style.textBold}>24fps</span>
-												</p>
-											</div>
-										</div>
-									</div>
-									<div className="w-100 pt-48 pb-48">
-										<LineChart
-											backgroundColor="#242b49"
-											dataSet={lineChartData}
-											width={1070}
-											height={291}
-											options={{
-												tooltips: {
-													position: "nearest",
-													backgroundColor: "#fff",
-													titleFontColor: "#242b49",
-													bodyFontColor: "#242b49",
-													footerFontColor: "#242b49",
-													xPadding: 10,
-													yPadding: 16,
-													cornerRadius: 3,
-													callbacks: {
-														title: function(tooltipItem, data) {
-															const { datasetIndex, index } = tooltipItem[0];
-															if (datasetIndex === 1) {
-																return `${
-																	data.datasets[datasetIndex].data[index]
-																}% of industry is shot in 24fps`;
-															} else {
-																return `${
-																	data.datasets[datasetIndex].data[index]
-																}% of frames is shot in 24fps`;
-															}
-														},
-														label: function(tooltipItem, data) {
-															return null;
-														}
-													}
-												},
-												scales: {
-													xAxes: [
-														{
-															gridLines: {
-																display: true,
-																color: "#5a6386",
-																lineWidth: 0.7,
-																drawBorder: true,
-																drawTicks: false
-															},
-															ticks: {
-																fontColor: "#fff",
-																fontSize: 12,
-																stepSize: 1,
-																beginAtZero: true,
-																callback: function(value, index, values) {
-																	return "    " + value;
-																}
-															}
-														}
-													],
-													yAxes: [
-														{
-															gridLines: {
-																display: true,
-																color: "#5a6386",
-																lineWidth: 0.7,
-																drawBorder: true,
-																drawTicks: false
-															},
-															ticks: {
-																fontColor: "#fff",
-																fontSize: 12,
-																stepSize: 25,
-																beginAtZero: true,
-																marginRight: 16,
-																callback: function(value, index, values) {
-																	return value + "%      ";
-																}
-															}
-														}
-													]
-												}
-											}}
-										/>
-									</div>
-								</div>
-							</div>
-						)}
-					</div>
-				</div>
+        <div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
+          <div className={style.radialChartsContainer}>
+            {isDoughnutVisible && doughnutData.map((chart, i) => (
+              <div key={i} className={style.radialChart} onClick={this.changeVisibilityDoughnut.bind(this)}>
+                <h1 className="font-primary text-bold text-center">
+                  {chart.title}
+                </h1>
+                <div className={style.subtitle}>
+                  <p className="font-secondary-second font-size-12 text-center">
+                    {chart.secondTitle}
+                  </p>
+                </div>
+                <div className={style.doughnutChartContainer}>
+                  <Doughnut
+                    options={{
+                      responsive: false,
+                      cutoutPercentage: 60,
+                      tooltips: {
+                        enabled: false
+                      },
+                      legend: {
+                        display: false
+                      },
+                      layout: {
+                        padding: 0
+                      }
+                    }}
+                    width={124}
+                    height={124}
+                    data={{
+                      labels: ["Red", "Green"],
+                      datasets: [
+                        {
+                          data: [...chart.average],
+                          borderColor: "#303a5d",
+                          backgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#51adc0"],
+                          hoverBackgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#51adc0"]
+                        }
+                      ]
+                    }}
+                  />
+                  <p className="pt-32"><span className={style.textBold}>{chart.average[chart.average.length - 1]}%</span> of your library
+                    is shot in <span className={style.textBold}>{chart.secondTitle}</span></p>
+                </div>
+              </div>
+            ))
+            }
+            {
+              !isDoughnutVisible &&
+              <div className={style.radialChartsContainer}>
+                <div className={style.doughnutPanelTab}>
+                  <div className={style.doughnutPanelHeader}>
+                    <div onClick={this.changeVisibilityDoughnut.bind(this)}>
+                      <i className="qf-iconX"></i>
+                      <span className={style.panelTitle}>Frame Rate</span>
+                    </div>
+                    <div className={style.headerInfo}>
+                      <div>
+                        <p className={style.panelTitle}>24 Fps</p>
+                      </div>
+                      <div className={style.formWrapper}>
+                        <form onSubmit={() => console.log("object")}>
+                          <Field
+                            component={Select}
+                            options={selectOptions}
+                            id="NumberOfScenes"
+                            name="NumberOfScenes"
+                            placeholder="Select One"
+                            label="Number of Scenes"
+                            className={style.formWrapper}
+                          />
+                          <Field
+                            component={Select}
+                            options={selectOptions}
+                            id="NumberOfScenes"
+                            name="NumberOfScenes"
+                            placeholder="Select One"
+                            label="Number of Scenes"
+                            className={style.formWrapper}
+                          />
+                        </form>
+                      </div>
+                    </div>
 
-				<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
-					<div className={style.radialChartsContainer}>
-						<div className={style.temperatureHeader}>
-							<div>
-								<h2>Color Temperature / Sentiment Comparison</h2>
-							</div>
-							<div className="d-flex align-items-center justify-space-between">
-								<div className="d-flex align-items-center mr-8">
-									<span className={style.redRound} />
-									<p>This Video</p>
-								</div>
-								<div className="d-flex align-items-center mr-8">
-									<span className={style.duskRound} />
-									<p>Library Average</p>
-								</div>
-								<div className="d-flex align-items-center mr-8">
-									<span className={style.purpleRound} />
-									<p>Industry</p>
-								</div>
-							</div>
-							<div className={style.inputWrapper}>
-								<form>
-									<Field
-										component={Select}
-										options={selectOptions}
-										id="NumberOfScenes"
-										name="NumberOfScenes"
-										placeholder="Select One"
-										label="Number of Scenes"
-										className={style.formWrapper}
-									/>
-								</form>
-							</div>
-						</div>
-						<div className={style.temperatureContentContainer}>
-							{isColorTempVisible &&
-								colorTempData.map((temp, i) => (
-									<div className={style.temperatureContentWrapper}>
-										<div className={style.temperatureContent}>
-											<p className={style.textTop}>Happy</p>
-											<p className={style.textRight}>Warm</p>
-											<p className={style.textBottom}>Sad</p>
-											<p className={style.textLeft}>Cool</p>
-											<div className={style.verticalLine} />
-											<div className={style.horizontalLine} />
-											{temp.data.map((data, i) => (
-												<span
-													key={i}
-													className={
-														data.type === "video"
-															? style.redRound
-															: data.type === "library"
-															? style.purpleRound
-															: style.duskRound
-													}
-													style={{
-														transform: `translateX(${data.x *
-															2}%) translateY(${data.y * 2}%)`
-													}}
-												/>
-											))}
-										</div>
-									</div>
-								))}
-						</div>
-					</div>
-				</div>
+                  </div>
+                  <div className={style.dataWrapper}>
+                    <div className={style.panelChart}>
+                      <h1 className="font-primary text-bold text-center">
+                        Library Data
+                      </h1>
+                      <div className={style.doughnutChartContainer}>
+                        <Doughnut
+                          options={{
+                            responsive: false,
+                            cutoutPercentage: 60,
+                            tooltips: {
+                              enabled: false
+                            },
+                            legend: {
+                              display: false
+                            },
+                            layout: {
+                              padding: 0
+                            }
+                          }}
+                          width={180}
+                          height={180}
+                          data={{
+                            labels: ["Red", "Green"],
+                            datasets: [
+                              {
+                                data: [30, 12, 6, 52],
+                                borderColor: "#303a5d",
+                                backgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#51adc0"],
+                                hoverBackgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#51adc0"]
+                              }
+                            ]
+                          }}
+                        />
+                        <p className="pt-32">
+                          <span className={style.duskRound}></span>
+                          <span className={style.textBold}>{52}%</span> of your library
+                          is shot in <span className={style.textBold}>24fps</span>
+                        </p>
+                      </div>
+                    </div>
+                    <div className={style.panelChart}>
+                      <PointerCard
+                        data={{
+                          topTitle: "Based on Likes",
+                          pointerData: 140,
+                          bottomText: 'of your library is shot in',
+                          likes: 50,
+                        }}
+                      />
+                    </div>
+                    <div className={style.panelChart}>
+                      <h1 className="font-primary text-bold text-center">
+                        Industry Data
+                      </h1>
+                      <div className={style.doughnutChartContainer}>
+                        <Doughnut
+                          options={{
+                            responsive: false,
+                            cutoutPercentage: 60,
+                            tooltips: {
+                              enabled: false
+                            },
+                            legend: {
+                              display: false
+                            },
+                            layout: {
+                              padding: 0
+                            }
+                          }}
+                          width={180}
+                          height={180}
+                          data={{
+                            labels: ["Red", "Green"],
+                            datasets: [
+                              {
+                                data: [30, 12, 6, 52],
+                                borderColor: "#303a5d",
+                                backgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#8567f0"],
+                                hoverBackgroundColor: ["#ffffff", "#ffffff", "#ffffff", "#8567f0"]
+                              }
+                            ]
+                          }}
+                        />
+                        <p className="w-75 text-center pt-32">
+                          <span className={style.purpleRound}></span>
+                          <span className={style.textBold}>{52}%</span> of your library
+                          is shot in <span className={style.textBold}>24fps</span></p>
+                      </div>
+                    </div>
+                  </div>
+                  <div className="w-100 pt-48 pb-48">
+                    <LineChart
+                      backgroundColor="#242b49"
+                      dataSet={lineChartData}
+                      width={1070}
+                      height={291}
+                      options={{
+                        tooltips: {
+                          position: 'nearest',
+                          backgroundColor: '#fff',
+                          titleFontColor: '#242b49',
+                          bodyFontColor: '#242b49',
+                          footerFontColor: '#242b49',
+                          xPadding: 10,
+                          yPadding: 16,
+                          cornerRadius : 3,
+                          callbacks: {
+                            title: function(tooltipItem, data) {
+                              const { datasetIndex, index } = tooltipItem[0];
+                              if( datasetIndex === 1){
+                                return `${data.datasets[datasetIndex].data[index]}% of industry is shot in 24fps`;
+                              }else{
+                                return `${data.datasets[datasetIndex].data[index]}% of frames is shot in 24fps`;
+                              }
+                            },
+                            label: function(tooltipItem, data) {
+                              return null
+                            }
+                          }
+                        },
+                        scales: {
+                          xAxes: [{
+                            gridLines: {
+                              display: true,
+                              color: '#5a6386',
+                              lineWidth: 0.7,
+                              drawBorder: true,
+                              drawTicks: false
+                            },
+                            ticks: {
+                              fontColor: "#fff",
+                              fontSize: 12,
+                              stepSize: 1,
+                              beginAtZero: true,
+                              callback: function(value, index, values) {
+                                return '    ' + value;
+                              }
+                            }
+                          }],
+                          yAxes: [{
+                            gridLines: {
+                              display: true,
+                              color: '#5a6386',
+                              lineWidth: 0.7,
+                              drawBorder: true,
+                              drawTicks: false
+                            },
+                            ticks: {
+                              fontColor: "#fff",
+                              fontSize: 12,
+                              stepSize: 25,
+                              beginAtZero: true,
+                              marginRight: 16,
+                              callback: function(value, index, values) {
+                                return value + '%      '
+                              }
+                            }
+                          }]
+                        },
+                      }}
+                    />
+                  </div>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
+        <div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
+          <div className={style.radialChartsContainer}>
+            <div className={style.temperatureHeader}>
+              <div>
+                <h2>Color Temperature / Sentiment Comparison</h2>
+              </div>
+              <div className="d-flex align-items-center justify-space-between">
+                <div className="d-flex align-items-center mr-8">
+                  <span className={style.redRound}></span>
+                  <p>This Video</p>
+                </div>
+                <div className="d-flex align-items-center mr-8">
+                  <span className={style.duskRound}></span>
+                  <p>Library Average</p>
+                </div>
+                <div className="d-flex align-items-center mr-8">
+                  <span className={style.purpleRound}></span>
+                  <p>Industry</p>
+                </div>
+              </div>
+              <div className={style.inputWrapper}>
+                <form>
+                  <Field
+                    component={Select}
+                    options={selectOptions}
+                    id="NumberOfScenes"
+                    name="NumberOfScenes"
+                    placeholder="Select One"
+                    label="Number of Scenes"
+                    className={style.formWrapper}
+                  />
+                </form>
+              </div>
+            </div>
+            <div className={style.temperatureContentContainer}>
+              {
+                isColorTempVisible && colorTempData && <ColorTemperatureChart colorTempData={colorTempData} />
+              }
+            </div>
+
+          </div>
+        </div>
 
 				{this.state.selectedImage ? (
 					<div className="col-12 mt-48">

@@ -36,6 +36,9 @@ export const barDataOptions = {
   legend: {
     display: false
   },
+	plugins:{
+  	datalabels: false
+	},
   scales: {
     yAxes: [
       {
