@@ -10,23 +10,22 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import classNames from "classnames";
 import { compose } from "redux";
-import { Route, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
+import style from "./style.scss";
 
 import makeSelectLibrary from "Selectors/Library.js";
 import { actions } from "Reducers/Library";
-import Button from "Components/Form/Button/index.js";
-import Input from "Components/Form/Input/index.js";
-
-import style from "./style.scss";
-import VideoCard from "Components/VideoCard/index.js";
+import VideoCard from "Components/VideoCard";
+import LibraryHeader from 'Components/LibraryHeader'
 import Sidebar from "./sidebar.js";
+import VideoCardList from "../../components/VideoCardList";
+
 
 /* eslint-disable react/prefer-stateless-function */
 export class Library extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			textVal: "",
 			sidebarVisible: false
 		};
 	}
@@ -39,12 +38,7 @@ export class Library extends React.Component {
 		this.setState({ sidebarVisible: e });
 	}
 
-	onChange(e) {
-		this.setState({ textVal: e.target.value });
-	}
-
 	render() {
-		console.log(this.state);
 		const sideBarClass = classNames(style.overlay, {
 			[style.overlayShow]: this.state.sidebarVisible
 		});
@@ -54,35 +48,13 @@ export class Library extends React.Component {
 		return (
 			<React.Fragment>
 				<div className="grid-container col-12">
-					<div className={style.headerContainer}>
-						<div>
-							<Input
-								placeholder="Search a video…"
-								onChange={e => this.onChange(e)}
-								value={this.state.textVal}
-								customClass={style.librarySearchInput}
-							/>
-						</div>
-						<div>
-							<h1 className="alpha color-white text-center font-primary text-bold">
-								Library
-							</h1>
-						</div>
-						<div>
-							<Button
-								onClick={() => this.setSidebarVisible(true)}
-								customClass="float-right font-secondary-first text-bold"
-								buttonText="Filter Videos"
-								iconRight="qf-iconAdd"
-							/>
-						</div>
-					</div>
+					<LibraryHeader
+						setSidebarVisible={this.setSidebarVisible.bind(this)}
+					/>
 					<div className="grid-collapse mt-50">
-						{this.props.library.videos.map(video => (
-							<Link to={`/library/build-report/${video.id}`} key={video.id}>
-								<VideoCard video={video} />
-							</Link>
-						))}
+						<VideoCardList
+							data={this.props.library.videos}
+						/>
 					</div>
 				</div>
 				<div
