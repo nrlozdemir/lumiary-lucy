@@ -5,27 +5,136 @@
 		margin: 0;
 	}
 
-	.QuickviewVideoCard {
-		width: 100%;
-		max-width: 400px;
-		margin-bottom: 0 !important;
-	}
+	.marketViewSlickSlider {
+		.item {
+			position: relative;
+			opacity: .2;
+			img {
+				margin-top: 35px;
+				height: 240;
+			}
+			p {
+				font-family: $font-family-ClanOT;
+				font-size: 14px;
+				position: absolute;
+				bottom: 0;
+				background: rgba($color: $color-dark-grey-blue, $alpha: .6);
+				width: 100%;
+				line-height: 52px;
+				.icon {
+					span {
+						background: $color-white;
+						width: 20px;
+						height: 20px;
+						border-radius: 50%;
+						text-align: center;
+						line-height: 20px;
+						vertical-align: middle;
+						padding: 4px;
+						font-size: 14px;
+						margin: 0 15px;
+						color: $color-dark-five;
+					}
+				}
+				.secondTitle {
+					float: right;
+					margin-right: 15px;
+				}
+			}
+		}
 
-	.dot-item {
-		display: inline-flex;
-		align-items: center;
-		margin-right: 30px;
+		.slick-prev {
+			width: 40px;
+			height: 40px;
+			display: block;
+			background: white;
+			border-radius: 20px;
+			left: 15%;
+			top: 35%;
+			z-index: 11;
+			&::before {
+				font-family: $font-family-qf-icons;
+				content: "\e988";
+				color: black;
+				line-height: 40px;
+				margin-left: 15px;
+			}
+		}
 
-		color: $color-white;
-		font-size: 14px;
-		font-family: $font-family-ClanOTNews;
+		.slick-next {
+			width: 40px;
+			height: 40px;
+			display: block;
+			background: white;
+			border-radius: 20px;
+			right: 15%;
+			top: 35%;
+			&::before {
+				content: "\e987";
+				font-family: $font-family-qf-icons;
+				color: black;
+				line-height: 40px;
+				margin-left: 15px;
+			}
+		}
 
-		span {
-			width: 16px;
-			height: 16px;
-			display: inline-block;
-			margin-right: 8px;
-			border-radius: 50%;
+		.slick-slide {
+			padding: 0 20px;
+		}
+		.slick-current {
+			.item {
+				opacity: 1;
+			}
+			img {
+				margin-top: 0px;
+				height: 310px;
+				box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+			}
+		}
+		.slick-thumb {
+			z-index: 10;
+			top: 320px;
+			.slick-active {
+				opacity: 1;
+				font-weight: bold;
+			}
+			li {
+				width: 100px;
+				margin: 0 14px;
+				opacity: 0.2;
+				a {
+					img {
+						width: 100%;
+						position: relative;
+					}
+					p {
+						white-space: nowrap;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						font-size: 14px;
+						font-family: $font-family-ClanOTNews;
+						text-align: left;
+						.icon {
+							span {
+								background: $color-white;
+								width: 16px;
+								height: 16px;
+								border-radius: 50%;
+								text-align: center;
+								line-height: 16px;
+								vertical-align: middle;
+								padding: 4px;
+								font-size: 8px;
+								margin-right: 10px;
+								color: $color-dark-five;
+							}
+						}
+					}
+				}
+			}
+			li:last-child {
+				display: none;
+			}
 		}
 	}
 
