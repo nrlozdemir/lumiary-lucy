@@ -7,14 +7,14 @@ then
     export MEMORY=2048
 fi
 
- if  [ $CIRCLE_BRANCH = "staging" ];
+if  [ $CIRCLE_BRANCH = "staging" ];
 then
     export TASK_COUNT=1;
     export CPU=1024
     export MEMORY=2048
 fi
 
- if  [ $CIRCLE_BRANCH = "prod" ];
+if  [ $CIRCLE_BRANCH = "prod" ];
 then
     export TASK_COUNT=2;
     export CPU=1024
