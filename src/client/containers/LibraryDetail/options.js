@@ -5,9 +5,6 @@ export const barDataOptions = {
   legend: {
     display: false
   },
-  plugins: {
-    datalabels: false
-  },
   layout: {
     padding: {
       left: 35,
@@ -51,7 +48,7 @@ export const barDataOptions = {
 };
 
 export const selectOptions = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" }
+	{ value: "chocolate", label: "Chocolate" },
+	{ value: "strawberry", label: "Strawberry" },
+	{ value: "vanilla", label: "Vanilla" }
 ];
