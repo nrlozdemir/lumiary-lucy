@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import PropTypes from "prop-types"
 import cx from 'classnames'
 import Select from "Components/Form/Select"
 import ProgressBar from 'Components/ProgressBar'
@@ -74,6 +75,10 @@ class TopSimilarProperties extends Component {
       </div>
     )
   }
+}
+
+TopSimilarProperties.propTypes = {
+	data: PropTypes.array
 }
 
 export default TopSimilarProperties
