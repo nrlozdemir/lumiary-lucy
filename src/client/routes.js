@@ -6,6 +6,7 @@ import Library from "Containers/Library";
 import Quickview from "Containers/Quickview";
 import Panoptic from "Containers/Panoptic";
 import Marketview from "Containers/Marketview";
+import MarketviewDetail from 'Containers/Marketview/Detail';
 import NotFound from "Containers/NotFound";
 import LibraryDetail from "Containers/LibraryDetail";
 import BuildReport from "Containers/BuildReport";
@@ -61,6 +62,11 @@ class Routes extends React.Component {
           path="/marketview"
 					exact
           render={props => <Layout {...props} component={Marketview} />}
+        />
+        <Route
+          path="/marketview/detail"
+					exact
+          render={props => <Layout {...props} component={MarketviewDetail} />}
         />
         <Route path="*" component={NotFound} />
       </Switch>

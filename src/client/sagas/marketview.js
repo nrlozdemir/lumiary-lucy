@@ -2,8 +2,13 @@ import { takeLatest, call, put } from 'redux-saga/effects';
 import axios from 'axios';
 
 import { types, actions } from 'Reducers/marketview';
-import { getCompetitorVideos } from 'Api/Marketview';
+import marketviewCompetitorVideosData from 'Api/mocks/marketviewCompetitorVideos.json';
 import marketviewCompetitorTopVideosData from 'Api/mocks/marketviewCompetitorTopVideosMock.json';
+
+function getCompetitorVideosApi() {
+  return axios('/')
+  .then(res => marketviewCompetitorVideosData);
+}
 
 function getCompetitorTopVideosApi() {
   //this will use ajax function in utils/api when real data is provided
@@ -13,7 +18,7 @@ function getCompetitorTopVideosApi() {
 
 function* getCompetitorVideosMarketview() {
   try {
-    const payload = yield call(getCompetitorVideos);
+    const payload = yield call(getCompetitorVideosApi);
     yield put(actions.getCompetitorVideosSuccess(payload));
   } catch (error) {
     yield put(actions.getCompetitorVideosFailure({ error }));
