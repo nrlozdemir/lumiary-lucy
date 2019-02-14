@@ -12,6 +12,13 @@
 		margin-bottom: 10px;
 	}
 
+	.marketViewCardSubTitle {
+		font-family: $font-family-primary;
+		font-size: 24px;
+		text-align: center;
+		margin-top: 30px;
+	}
+
 	.marketViewCardLink {
 		display: flex;
 		align-items: center;
@@ -93,6 +100,7 @@
 .colors {
 	display: flex;
 	justify-content: center;
+	margin-bottom: 21px;
 
 	span {
 		width: 24px;
@@ -172,13 +180,258 @@
 
 	&.colorListHorizontal {
 		flex-direction: row-reverse;
+		padding-left: 0;
 
 		.colorListItem {
 			margin: 0 15px;
+		}
+	}
+
+	&.colorListSmall {
+		justify-content: center;
+		padding-left: 0;
+		margin: 30px -45px;
+
+		.colorListItem {
+			font-size: 10px;
+			margin: 0 4px;
+		}
+
+		&:before {
+			width: 7px;
+			height: 7px;
+			margin-right: 2.5px;
 		}
 	}
 }
 
 .doughnutChart {
 	position: relative;
+}
+
+.hoverImage {
+	position: relative;
+	width: 100%;
+	height: 140px;
+
+	img {
+		position: absolute;
+		top: 0;
+		left: 50%;
+		transform: translateX(-50%);
+		transition: 300ms;
+		opacity: 1;
+		box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.5);
+
+		&:nth-child(2) {
+			opacity: 0;
+		}
+	}
+
+	&:hover {
+		img {
+			&:nth-child(1) {
+				opacity: 0;
+			}
+			&:nth-child(2) {
+				opacity: 1;
+			}
+		}
+	}
+}
+
+.formatItems {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 30px;
+	margin-bottom: 25px;
+
+	.formatItem {
+		&:nth-child(1) {
+			.formatItemIcon span {
+				background-color: $color-cool-blue;
+			}
+		}
+		&:nth-child(2) {
+			.formatItemIcon span {
+				background-color: $color-lighter-purple;
+			}
+		}
+		&:nth-child(3) {
+			.formatItemIcon span {
+				background-color: $color-coral-pink;
+			}
+		}
+		&:nth-child(4) {
+			.formatItemIcon span {
+				background-color: $color-cool-grey;
+			}
+		}
+
+		.formatItemIcon {
+			display: flex;
+			justify-content: center;
+			span {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+				width: 65px;
+				height: 65px;
+				border-radius: 50%;
+				background-color: #000;
+				color: #fff;
+				font-size: 30px;
+				box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+			}
+		}
+		.formatItemText {
+			margin-top: 20px;
+			span {
+				display: block;
+				text-align: center;
+				&:nth-child(1) {
+					font-family: $font-family-primary;
+					font-size: 18px;
+				}
+				&:nth-child(2) {
+					font-family: $font-family-ClanOT;
+					font-size: 10px;
+				}
+				&:nth-child(3) {
+					font-family: $font-family-ClanOTNews;
+					font-size: 8px;
+				}
+			}
+		}
+	}
+}
+
+.bubbleChart {
+	position: relative;
+	height: 280px;
+	margin-bottom: 60px;
+
+	.bubbleChartItem {
+		position: absolute;
+		top: 50%;
+		left: 54%;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		width: 136px;
+		height: 136px;
+		border-radius: 50%;
+		border-width: 4px;
+		border-style: solid;
+		background: $color-dark-five;
+		transition: 300ms;
+
+		&:nth-child(1) {
+			transform: translate(-120px, -100px);
+		}
+
+		&:nth-child(2) {
+			width: 113px;
+			height: 113px;
+			transform: translate(15px, -140px);
+		}
+
+		&:nth-child(3) {
+			width: 101px;
+			height: 101px;
+			transform: translate(8px, -19px);
+		}
+
+		&:nth-child(4) {
+			width: 86px;
+			height: 86px;
+			transform: translate(-71px, 42px);
+		}
+
+		&:nth-child(5) {
+			width: 101px;
+			height: 101px;
+			transform: translate(-180px, 18px);
+		}
+
+		.bubbleChartIcon {
+			display: flex;
+			justify-content: center;
+			align-items: center;
+			width: 32px;
+			height: 32px;
+			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+			background-color: #fff;
+			border-radius: 50%;
+			color: $color-dark-five;
+		}
+
+		.bubbleChartTooltip {
+			overflow: hidden;
+			height: 0;
+			opacity: 0;
+			position: absolute;
+			bottom: 80%;
+			padding: 0;
+			z-index: 2;
+
+			transition: opacity 300ms;
+
+			&:before {
+				content: "";
+				position: absolute;
+				top: 0;
+				left: 0;
+				width: 100%;
+				height: calc(100% - 8px);
+				background-color: #fff;
+				box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+				border-radius: 4px;
+			}
+
+			&:after {
+				content: "";
+				width: 10px;
+				height: 10px;
+				background-color: #fff;
+				border-radius: 1px;
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				transform: translate(-50%, -140%) rotate(45deg);
+				box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.5);
+			}
+
+			span {
+				position: relative;
+				z-index: 2;
+				display: block;
+				font-size: 12px;
+				color: $color-dark-five;
+				line-height: 20px;
+				font-family: $font-family-ClanOT;
+				text-align: center;
+				white-space: nowrap;
+
+				&:last-child {
+					&:before {
+						content: "";
+						width: 100%;
+						height: 10px;
+						background-color: #fff;
+						position: absolute;
+						bottom: -20%;
+					}
+				}
+			}
+		}
+
+		&:hover {
+			.bubbleChartTooltip {
+				height: auto;
+				opacity: 1;
+				padding: 8px 12px 12px;
+			}
+		}
+	}
 }

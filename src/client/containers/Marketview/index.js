@@ -1,22 +1,17 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { compose } from "redux";
-import classnames from "classnames";
-import makeSelectMarketview from "Selectors/Marketview.js";
-import { Bar, Doughnut } from "react-chartjs-2";
+import React from 'react';
+import PropTypes from 'prop-types';
+import { connect } from 'react-redux';
+import { createStructuredSelector } from 'reselect';
+import { compose } from 'redux';
+import classnames from 'classnames';
+import makeSelectMarketview from 'Selectors/Marketview.js';
+import { Bar, Doughnut, Pie } from 'react-chartjs-2';
 
-import style from "./style.scss";
+import style from './style.scss';
 
-import Select from "Components/Form/Select";
+import Select from 'Components/Form/Select';
 
-import {
-	barData,
-	barDataOptions,
-	barDurationData,
-	barDurationOptions
-} from "./options";
+import { barData, barDataOptions, barDurationData, barDurationOptions } from './options';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Marketview extends React.Component {
@@ -24,77 +19,49 @@ export class Marketview extends React.Component {
 		super(props);
 		this.state = {
 			bubbleChartOptions: [
+				'#cc2226',
+				'#dd501d',
+				'#eb7919',
+				'#f8b90b',
+				'#fff20d',
+				'#aac923',
+				'#13862b',
+				'#229a78',
+				'#3178b0',
+				'#79609b',
+				'#923683',
+				'#b83057'
+			],
+			bubbleChartData: [
 				{
-					id: 1,
-					color: "#cc2226",
-					title: "Social 1",
-					icon: "<span>1</span>"
+					name: 'Facebook',
+					value: 124034,
+					icon: <span className="qf-iconFacebook" />,
+					color: '#fff20d'
 				},
 				{
-					id: 2,
-					color: "#dd501d",
-					title: "Social 2",
-					icon: "<span>2</span>"
+					name: 'Instagram',
+					value: 75424,
+					icon: <span className="qf-iconInstagram" />,
+					color: '#cc2226'
 				},
 				{
-					id: 3,
-					color: "#eb7919",
-					title: "Social 3",
-					icon: "<span>3</span>"
+					name: 'Twitter',
+					value: 63424,
+					icon: <span className="qf-iconTwitter" />,
+					color: '#13862b'
 				},
 				{
-					id: 4,
-					color: "#f8b90b",
-					title: "Social 4",
-					icon: "<span>4</span>"
+					name: 'Pinterest',
+					value: 34543,
+					icon: <span className="qf-iconYoutube" />,
+					color: '#923683'
 				},
 				{
-					id: 5,
-					color: "#fff20d",
-					title: "Social 5",
-					icon: "<span>5</span>"
-				},
-				{
-					id: 6,
-					color: "#aac923",
-					title: "Social 6",
-					icon: "<span>6</span>"
-				},
-				{
-					id: 7,
-					color: "#13862b",
-					title: "Social 7",
-					icon: "<span>7</span>"
-				},
-				{
-					id: 8,
-					color: "#229a78",
-					title: "Social 8",
-					icon: "<span>8</span>"
-				},
-				{
-					id: 9,
-					color: "#3178b0",
-					title: "Social 9",
-					icon: "<span>9</span>"
-				},
-				{
-					id: 10,
-					color: "#79609b",
-					title: "Social 10",
-					icon: "<span>10</span>"
-				},
-				{
-					id: 11,
-					color: "#923683",
-					title: "Social 11",
-					icon: "<span>11</span>"
-				},
-				{
-					id: 12,
-					color: "#b83057",
-					title: "Social 12",
-					icon: "<span>12</span>"
+					name: 'Youtube',
+					value: 65463,
+					icon: <span className="qf-iconPinterest" />,
+					color: '#3178b0'
 				}
 			]
 		};
@@ -105,13 +72,10 @@ export class Marketview extends React.Component {
 	};
 
 	render() {
-		const { bubbleChartOptions } = this.state;
+		const { bubbleChartOptions, bubbleChartData } = this.state;
 		const { views, platforms, date } = this.state;
 
-		const cardContainer = classnames(
-			"shadow-1 col-12-gutter-20 mb-48",
-			style.cardContainer
-		);
+		const cardContainer = classnames('shadow-1 col-12-gutter-20 mb-48', style.cardContainer);
 
 		return (
 			<div className="grid-container col-12">
@@ -130,22 +94,38 @@ export class Marketview extends React.Component {
 					<div className="col-4 mb-48">
 						<div className={style.marketViewCard}>
 							<div className={style.marketViewCardTitle}>Color</div>
-							<div className={style.marketViewCardDescription}>
-								Top Performing Platform
-							</div>
+							<div className={style.marketViewCardDescription}>Top Performing Platform</div>
 							<div className={style.marketViewCardDate}>
 								<span>Past 3 Months</span>
 							</div>
 
+							<div className={style.bubbleChart}>
+								{bubbleChartData.map((item, i) => (
+									<div key={i} className={style.bubbleChartItem}>
+										<style>
+											{`.${style.bubbleChartItem}:nth-child(${i + 1}){
+												border-color: ${item.color};
+											}.${style.bubbleChartItem}:nth-child(${i + 1}):hover{
+												background-color: ${item.color};
+											}`}
+										</style>
+										<div className={style.bubbleChartIcon}>{item.icon}</div>
+										<div className={style.bubbleChartTooltip}>
+											<span>{item.name}</span>
+											<span>{item.value} Likes</span>
+										</div>
+									</div>
+								))}
+							</div>
+
 							<div className={style.colors}>
-								{bubbleChartOptions.map((social, i) => (
-									<span key={i} style={{ backgroundColor: social.color }} />
+								{bubbleChartOptions.map((color, i) => (
+									<span key={i} style={{ backgroundColor: color }} />
 								))}
 							</div>
 
 							<div className={style.marketViewCardDescription}>
-								Based on the number of likes for competitors across all
-								platforms
+								Based on the number of likes for competitors across all platforms
 							</div>
 							<a href="#" className={style.marketViewCardLink}>
 								View Platform Metrics <span className="qf-iconRight-Arrow" />
@@ -156,16 +136,55 @@ export class Marketview extends React.Component {
 					<div className="col-4 mb-48">
 						<div className={style.marketViewCard}>
 							<div className={style.marketViewCardTitle}>Pacing</div>
-							<div className={style.marketViewCardDescription}>
-								Top Competitor Similarities
-							</div>
+							<div className={style.marketViewCardDescription}>Top Competitor Similarities</div>
 							<div className={style.marketViewCardDate}>
 								<span>Past Month</span>
 							</div>
 
+							<Pie
+								height={220}
+								options={{
+									responsive: true,
+									legend: {
+										display: false
+									},
+									layout: {
+										padding: 0
+									}
+								}}
+								data={{
+									labels: [ 'Barstool Sports', 'SB Nation', 'ESPN', 'Scout Media', 'Fansided' ],
+									datasets: [
+										{
+											data: [ 50, 20, 15, 10, 5 ],
+											borderColor: '#303a5d',
+											backgroundColor: [ '#51adc0', '#8567f0', '#ff556f', '#acb0be', '#5a6386' ],
+											hoverBackgroundColor: [
+												'#51adc0',
+												'#8567f0',
+												'#ff556f',
+												'#acb0be',
+												'#5a6386'
+											]
+										}
+									]
+								}}
+							/>
+
+							<div className={style.marketViewCardSubTitle}>Medium Paced</div>
+
+							<div
+								className={classnames(style.colorListSmall, style.colorListHorizontal, style.colorList)}
+							>
+								<div className={style.colorListItem}>Barstool Sports</div>
+								<div className={style.colorListItem}>SB Nation</div>
+								<div className={style.colorListItem}>ESPN</div>
+								<div className={style.colorListItem}>Scout Media</div>
+								<div className={style.colorListItem}>Fansided</div>
+							</div>
+
 							<div className={style.marketViewCardDescription}>
-								Based on the number of likes for competitors across all
-								platforms
+								Based on the number of likes for competitors across all platforms
 							</div>
 							<a href="#" className={style.marketViewCardLink}>
 								View Competitor Metrics <span className="qf-iconRight-Arrow" />
@@ -176,16 +195,66 @@ export class Marketview extends React.Component {
 					<div className="col-4 mb-48">
 						<div className={style.marketViewCard}>
 							<div className={style.marketViewCardTitle}>Format</div>
-							<div className={style.marketViewCardDescription}>
-								Performance Over Time
-							</div>
+							<div className={style.marketViewCardDescription}>Performance Over Time</div>
 							<div className={style.marketViewCardDate}>
 								<span>On Mondays</span>
 							</div>
 
+							<div className={style.hoverImage}>
+								<img src="https://picsum.photos/250/140?image=10" alt="" />
+								<img src="https://picsum.photos/250/140?image=11" alt="" />
+							</div>
+
+							<div className={style.marketViewCardSubTitle}>Stop Motion</div>
+
+							<div className={style.formatItems}>
+								<div className={style.formatItem}>
+									<div className={style.formatItemIcon}>
+										<span className="qf-iconRight-Arrow" />
+									</div>
+									<div className={style.formatItemText}>
+										<span>36</span>
+										<span>Stop Motion</span>
+										<span>categories</span>
+									</div>
+								</div>
+
+								<div className={style.formatItem}>
+									<div className={style.formatItemIcon}>
+										<span className="qf-iconRight-Arrow" />
+									</div>
+									<div className={style.formatItemText}>
+										<span>12</span>
+										<span>Animation</span>
+										<span>categories</span>
+									</div>
+								</div>
+
+								<div className={style.formatItem}>
+									<div className={style.formatItemIcon}>
+										<span className="qf-iconRight-Arrow" />
+									</div>
+									<div className={style.formatItemText}>
+										<span>28</span>
+										<span>Live Action</span>
+										<span>categories</span>
+									</div>
+								</div>
+
+								<div className={style.formatItem}>
+									<div className={style.formatItemIcon}>
+										<span className="qf-iconRight-Arrow" />
+									</div>
+									<div className={style.formatItemText}>
+										<span>10</span>
+										<span>Cinemagraph</span>
+										<span>categories</span>
+									</div>
+								</div>
+							</div>
+
 							<div className={style.marketViewCardDescription}>
-								Based on the number of likes for competitors across all
-								platforms
+								Based on the number of likes for competitors across all platforms
 							</div>
 							<a href="#" className={style.marketViewCardLink}>
 								View Time Metrics <span className="qf-iconRight-Arrow" />
@@ -203,30 +272,30 @@ export class Marketview extends React.Component {
 									name="views"
 									customClass="custom-select"
 									placeholder="Select Views"
-									value={views || ""}
-									onChange={option => this.handleChange(option, "views")}
+									value={views || ''}
+									onChange={(option) => this.handleChange(option, 'views')}
 									options={[
-										{ value: "Views", label: "Views" },
-										{ value: "Comments", label: "Comments" }
+										{ value: 'Views', label: 'Views' },
+										{ value: 'Comments', label: 'Comments' }
 									]}
 								/>
 								<Select
 									name="platforms"
 									customClass="custom-select"
 									placeholder="Select Platforms"
-									value={platforms || ""}
-									onChange={option => this.handleChange(option, "platforms")}
-									options={[{ value: "All Platforms", label: "All Platforms" }]}
+									value={platforms || ''}
+									onChange={(option) => this.handleChange(option, 'platforms')}
+									options={[ { value: 'All Platforms', label: 'All Platforms' } ]}
 								/>
 								<Select
 									name="date"
 									customClass="custom-select"
 									placeholder="Select Date"
-									value={date || ""}
-									onChange={option => this.handleChange(option, "date")}
+									value={date || ''}
+									onChange={(option) => this.handleChange(option, 'date')}
 									options={[
-										{ value: "Past Month", label: "Past Month" },
-										{ value: "Past Year", label: "Past Year" }
+										{ value: 'Past Month', label: 'Past Month' },
+										{ value: 'Past Year', label: 'Past Year' }
 									]}
 								/>
 							</div>
@@ -238,20 +307,17 @@ export class Marketview extends React.Component {
 										labels: barData.labels,
 										datasets: barData.datasets.map((data, index) => {
 											const indexValues = data.data.map((v, i) => {
-												return barData.datasets.map(d => d.data[i]);
+												return barData.datasets.map((d) => d.data[i]);
 											});
 
 											return {
 												...data,
 												data: data.data.map((value, i) => {
 													const totalValue = indexValues[i].reduce(
-														(accumulator, currentValue) =>
-															accumulator + currentValue
+														(accumulator, currentValue) => accumulator + currentValue
 													);
 
-													return parseFloat(
-														(value / (totalValue / 100)).toFixed(2)
-													);
+													return parseFloat((value / (totalValue / 100)).toFixed(2));
 												})
 											};
 										})
@@ -285,29 +351,29 @@ export class Marketview extends React.Component {
 											height={300}
 											data={{
 												labels: [
-													"Barstool Sports",
-													"SB Nation",
-													"ESPN",
-													"Scout Media",
-													"Fansided"
+													'Barstool Sports',
+													'SB Nation',
+													'ESPN',
+													'Scout Media',
+													'Fansided'
 												],
 												datasets: [
 													{
-														data: [50, 20, 15, 10, 5],
-														borderColor: "#303a5d",
+														data: [ 50, 20, 15, 10, 5 ],
+														borderColor: '#303a5d',
 														backgroundColor: [
-															"#51adc0",
-															"#8567f0",
-															"#ff556f",
-															"#acb0be",
-															"#5a6386"
+															'#51adc0',
+															'#8567f0',
+															'#ff556f',
+															'#acb0be',
+															'#5a6386'
 														],
 														hoverBackgroundColor: [
-															"#51adc0",
-															"#8567f0",
-															"#ff556f",
-															"#acb0be",
-															"#5a6386"
+															'#51adc0',
+															'#8567f0',
+															'#ff556f',
+															'#acb0be',
+															'#5a6386'
 														]
 													}
 												]
@@ -329,12 +395,7 @@ export class Marketview extends React.Component {
 					<div className={cardContainer}>
 						<div className={style.cardTitle}>
 							<span>Total Competitor Views By Duration</span>
-							<div
-								className={classnames(
-									style.colorListHorizontal,
-									style.colorList
-								)}
-							>
+							<div className={classnames(style.colorListHorizontal, style.colorList)}>
 								<div className={style.colorListItem}>Barstool Sports</div>
 								<div className={style.colorListItem}>SB Nation</div>
 								<div className={style.colorListItem}>ESPN</div>
@@ -342,12 +403,7 @@ export class Marketview extends React.Component {
 								<div className={style.colorListItem}>Fansided</div>
 							</div>
 						</div>
-						<Bar
-							data={barDurationData}
-							width={500}
-							options={barDurationOptions}
-							height={100}
-						/>
+						<Bar data={barDurationData} width={500} options={barDurationOptions} height={100} />
 					</div>
 				</div>
 			</div>
@@ -369,9 +425,6 @@ function mapDispatchToProps(dispatch) {
 	};
 }
 
-const withConnect = connect(
-	mapStateToProps,
-	mapDispatchToProps
-);
+const withConnect = connect(mapStateToProps, mapDispatchToProps);
 
 export default compose(withConnect)(Marketview);
