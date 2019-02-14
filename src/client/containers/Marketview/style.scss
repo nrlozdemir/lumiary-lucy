@@ -1,0 +1,184 @@
+.marketViewCard {
+	position: relative;
+	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+	background-color: $color-dark-grey-blue;
+	padding: 40px 50px 106px;
+	font-family: $font-family-ClanOTNews;
+
+	.marketViewCardTitle {
+		font-family: $font-family-primary;
+		font-size: 40px;
+		text-align: center;
+		margin-bottom: 10px;
+	}
+
+	.marketViewCardLink {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		font-family: $font-family-ClanOT;
+		position: absolute;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		height: 56px;
+		background-color: $color-dusk;
+		color: white;
+		text-decoration: none;
+		transition: 300ms;
+
+		span {
+			margin-left: 10px;
+			width: 24px;
+			height: 24px;
+			border-radius: 50%;
+			border: 1px solid $color-cool-blue;
+			background-color: $color-dark-grey-blue;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			font-size: 12px;
+		}
+
+		&:hover {
+			background-color: white;
+			color: $color-dark-five;
+			span {
+				border-color: $color-dark-five;
+				background-color: white;
+			}
+		}
+	}
+
+	.marketViewCardDescription {
+		font-size: 14px;
+		line-height: 26px;
+		text-align: center;
+	}
+
+	.marketViewCardDate {
+		margin-top: 30px;
+		display: flex;
+		justify-content: center;
+		margin-bottom: 40px;
+		span {
+			display: flex;
+			align-items: center;
+
+			font-size: 14px;
+			height: 34px;
+			border-radius: 17px;
+			background-color: $color-dark-five;
+			padding: 0 30px;
+		}
+	}
+}
+
+.alignTabs {
+	width: 100%;
+	height: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.tab {
+		font-family: $font-family-ClanOTNews;
+		font-size: 14px;
+		margin: 0 35px;
+		text-decoration: none;
+		color: white;
+	}
+}
+
+.colors {
+	display: flex;
+	justify-content: center;
+
+	span {
+		width: 24px;
+		height: 24px;
+		flex: 0 0 24px;
+		cursor: pointer;
+	}
+}
+
+.cardContainer {
+	padding: 50px 40px;
+	box-sizing: border-box;
+	font-family: $font-family-ClanOTNews;
+	background-color: $color-dark-grey-blue;
+}
+
+.cardTitle {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 18px;
+	font-family: $font-family-ClanOT;
+	margin-bottom: 50px;
+}
+
+.selects {
+	position: relative;
+	display: flex;
+	z-index: 12;
+	> div {
+		margin: 0 0 0 20px;
+	}
+}
+
+.colorList {
+	display: flex;
+	flex-direction: column-reverse;
+	padding-left: 40px;
+
+	.colorListItem {
+		display: flex;
+		align-items: center;
+		margin: 25px 0;
+		font-size: 14px;
+		font-family: $font-family-ClanOTNews;
+
+		&:before {
+			content: "";
+			display: inline-block;
+			width: 16px;
+			height: 16px;
+			border-radius: 50%;
+			background-color: black;
+			margin-right: 5px;
+		}
+
+		&:nth-child(1):before {
+			background-color: #51adc0;
+		}
+
+		&:nth-child(2):before {
+			background-color: #8567f0;
+		}
+
+		&:nth-child(3):before {
+			background-color: #ff556f;
+		}
+
+		&:nth-child(4):before {
+			background-color: #acb0be;
+		}
+
+		&:nth-child(5):before {
+			background-color: #5a6386;
+		}
+	}
+
+	&.colorListHorizontal {
+		flex-direction: row-reverse;
+
+		.colorListItem {
+			margin: 0 15px;
+		}
+	}
+}
+
+.doughnutChart {
+	position: relative;
+}
