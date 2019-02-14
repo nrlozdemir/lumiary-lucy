@@ -1,7 +1,7 @@
 import { takeLatest, call, put } from "redux-saga/effects";
 
 import { types, actions } from "Reducers/Quickview";
-import { getQuickviewItems, getQuickviewPlatformSelected } from "Api/Quickview";
+import { getQuickviewItems, getQuickviewPlatformSelected } from "Api/quickview";
 
 function* getQuickviewItemsSaga() {
   try {

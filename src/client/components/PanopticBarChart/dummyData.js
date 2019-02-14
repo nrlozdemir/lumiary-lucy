@@ -68,6 +68,9 @@ export const options = {
       }
     }
   },
+	plugins:{
+  	datalabels: false
+	},
   scales: {
     xAxes: [{
       barThickness: 10,
