@@ -17,7 +17,7 @@ import {
   dropdownLists,
   selectOptions,
   stackedChartOptions
-} from "./dummySummary"
+} from "./summaryData"
 import style from "./style.scss"
 
 class VerticalStackedChart extends Component{

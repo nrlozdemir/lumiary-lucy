@@ -4,51 +4,50 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import classNames from "classnames";
-import { compose } from "redux";
-import { Route, Link } from "react-router-dom";
+import React from "react"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { createStructuredSelector } from "reselect"
+import classNames from "classnames"
+import { compose } from "redux"
+import { Route, Link } from "react-router-dom"
 
-import makeSelectLibrary from "Selectors/Library.js";
-import { actions } from "Reducers/Library";
-import Button from "Components/Form/Button/index.js";
-import Input from "Components/Form/Input/index.js";
+import { actions, makeSelectLibrary } from "Reducers/library"
+import Button from "Components/Form/Button/index.js"
+import Input from "Components/Form/Input/index.js"
 
-import style from "./style.scss";
-import VideoCard from "Components/VideoCard/index.js";
-import Sidebar from "./sidebar.js";
+import style from "./style.scss"
+import VideoCard from "Components/VideoCard/index.js"
+import Sidebar from "./sidebar.js"
 
 /* eslint-disable react/prefer-stateless-function */
 export class Library extends React.Component {
 	constructor(props) {
-		super(props);
+		super(props)
 		this.state = {
 			textVal: "",
 			sidebarVisible: false
-		};
+		}
 	}
 
 	componentDidMount() {
-		this.props.getVideos();
+		this.props.getVideos()
 	}
 
 	setSidebarVisible(e) {
-		this.setState({ sidebarVisible: e });
+		this.setState({ sidebarVisible: e })
 	}
 
 	onChange(e) {
-		this.setState({ textVal: e.target.value });
+		this.setState({ textVal: e.target.value })
 	}
 
 	render() {
 		const sideBarClass = classNames(style.overlay, {
 			[style.overlayShow]: this.state.sidebarVisible
-		});
+		})
 		if (this.props.library.loading) {
-			return <p>Loading</p>;
+			return <p>Loading</p>
 		}
 		return (
 			<React.Fragment>
@@ -93,7 +92,7 @@ export class Library extends React.Component {
 					setSidebarVisible={e => this.setSidebarVisible(e)}
 				/>
 			</React.Fragment>
-		);
+		)
 	}
 }
 
@@ -101,21 +100,21 @@ Library.propTypes = {
 	library: PropTypes.object,
 	getVideos: PropTypes.func,
 	dispatch: PropTypes.func
-};
+}
 
 const mapStateToProps = createStructuredSelector({
 	library: makeSelectLibrary()
-});
+})
 
 function mapDispatchToProps(dispatch) {
 	return {
 		getVideos: () => dispatch(actions.loadVideos())
-	};
+	}
 }
 
 const withConnect = connect(
 	mapStateToProps,
 	mapDispatchToProps
-);
+)
 
-export default compose(withConnect)(Library);
+export default compose(withConnect)(Library)
