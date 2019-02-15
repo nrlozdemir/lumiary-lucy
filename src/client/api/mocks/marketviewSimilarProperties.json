@@ -1,0 +1,68 @@
+[
+  {
+    "title": "Duration",
+    "description": "0-15s",
+    "data": [
+      {
+        "leftTitle": "0-15s",
+        "value": "85"
+      },
+      {
+        "leftTitle": "16-30s",
+        "value": "6"
+      },
+      {
+        "leftTitle": "31-60s",
+        "value": "5"
+      },
+      {
+        "leftTitle": "60+s",
+        "value": "4"
+      }
+    ]
+  },
+  {
+    "title": "Pacing",
+    "description": "Fast",
+    "data": [
+      {
+        "leftTitle": "Fast",
+        "value": "65"
+      },
+      {
+        "leftTitle": "Medium",
+        "value": "15"
+      },
+      {
+        "leftTitle": "Slow",
+        "value": "12"
+      },
+      {
+        "leftTitle": "Slowest",
+        "value": "8"
+      }
+    ]
+  },
+  {
+    "title": "Dominant Color",
+    "description": "Blue",
+    "data": [
+      {
+        "leftTitle": "Blue",
+        "value": "42"
+      },
+      {
+        "leftTitle": "Yellow",
+        "value": "28"
+      },
+      {
+        "leftTitle": "Green",
+        "value": "25"
+      },
+      {
+        "leftTitle": "Red",
+        "value": "5"
+      }
+    ]
+  }
+]

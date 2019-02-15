@@ -44,7 +44,6 @@ export class Library extends React.Component {
 	}
 
 	render() {
-		console.log(this.state);
 		const sideBarClass = classNames(style.overlay, {
 			[style.overlayShow]: this.state.sidebarVisible
 		});

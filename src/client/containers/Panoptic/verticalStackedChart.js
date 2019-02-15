@@ -13,12 +13,9 @@ import Button from "Components/Form/Button"
 
 import {
   dateSelectOptions,
-  doughnutData,
   doughnutOptions,
-  doughnutRoundData,
   dropdownLists,
   selectOptions,
-  stackedChartData,
   stackedChartOptions
 } from "./dummySummary"
 import style from "./style.scss"
@@ -67,6 +64,7 @@ class VerticalStackedChart extends Component{
 	}
 
   render(){
+    const { doughnutData, stackedChartData, doughnutRoundData } = this.props.data;
     const {
       dateRange: { selection: dateRange },
       startDateRange: { selection: startDateRange },

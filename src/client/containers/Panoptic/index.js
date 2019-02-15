@@ -17,16 +17,16 @@ import Select from 'Components/Form/Select';
 import ColorTemperatureChart from 'Components/ColorTemperatureChart';
 import PacingCard from "Components/PacingCard";
 import makeSelectPanoptic from "Selectors/Panoptic.js";
+import { actions } from 'Reducers/Panoptic';
 
 import VerticalStackedChart from "./verticalStackedChart";
 
 import {
-colorTempData,
 selectOptions,
 platforms,
-} from "./dummySummary";
+} from "./summaryData";
 import style from "./style.scss";
-import { barData, barDataOptions } from "./options";
+import { barDataOptions } from "./options";
 
 
 /* eslint-disable react/prefer-stateless-function */
@@ -60,7 +60,11 @@ export class Panoptic extends React.Component {
     }
   }
 
-  handleChange = (selectedOption, name) => {
+  componentDidMount() {
+  	this.props.getData()
+	}
+
+	handleChange = (selectedOption, name) => {
     this.setState({ [name]: selectedOption });
   };
 
@@ -69,9 +73,21 @@ export class Panoptic extends React.Component {
       isColorTempVisible,
       isVerticalStackedChartVisible,
     } = this.state;
+
+    const { panoptic: { data: { 
+      colorTempData, 
+      videoReleasesData, 
+      verticalStackedChartData,
+      pacingChartData,
+      compareSharesData
+    } 
+    }} = this.props;
+
     return (
       <React.Fragment>
-        <PanopticBarChart />
+        {videoReleasesData && (
+          <PanopticBarChart data={videoReleasesData}/>
+        )}
         <div className="col-12 shadow-1 mt-72 bg-dark-grey-blue">
           <div className={style.radialChartsContainer}>
             <div className={style.temperatureHeader}>
@@ -139,12 +155,16 @@ export class Panoptic extends React.Component {
           </div>
         </div>
         {
-          isVerticalStackedChartVisible && (
-            <VerticalStackedChart />
+          isVerticalStackedChartVisible && verticalStackedChartData && (
+            <VerticalStackedChart data={verticalStackedChartData}/>
           )
         }
-        <PacingCard barData={barData} barDataOptions={barDataOptions} />
-        <CompareShares />
+        {pacingChartData && (
+          <PacingCard barData={pacingChartData} barDataOptions={barDataOptions} />
+        )}
+        {compareSharesData && (
+          <CompareShares radarData={compareSharesData}/>
+        )}
       </React.Fragment>
     );
   }
@@ -160,7 +180,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    dispatch
+    getData: () => dispatch(actions.getData())
   };
 }
 
