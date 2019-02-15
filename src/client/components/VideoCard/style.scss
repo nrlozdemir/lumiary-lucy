@@ -105,14 +105,14 @@
 	.iconWrapper {
 		height: 24px;
 		width: 24px;
-		background-color: $color-white;
+		background-color: $color-dark-five;
 		border-radius: 100%;
 		display: flex;
 		align-items: center;
 		justify-content: center;
 	}
 	.iconClass {
-		font-size: 12px;
-		color: $color-dark-five;
+		font-size: 24px;
+		color: $color-white;
 	}
 }
