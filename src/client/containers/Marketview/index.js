@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import { compose } from 'redux';
@@ -80,15 +81,15 @@ export class Marketview extends React.Component {
 		return (
 			<div className="grid-container col-12">
 				<div className={style.alignTabs}>
-					<a href="#" className={style.tab}>
+					<Link to="/marketview/platform" className={style.tab}>
 						Platform
-					</a>
-					<a href="#" className={style.tab}>
+					</Link>
+					<Link to="/marketview/competitor" className={style.tab}>
 						Competitor
-					</a>
-					<a href="#" className={style.tab}>
+					</Link>
+					<Link to="/marketview/time" className={style.tab}>
 						Time
-					</a>
+					</Link>
 				</div>
 				<div className="grid-collapse">
 					<div className="col-4 mb-48">
@@ -127,9 +128,9 @@ export class Marketview extends React.Component {
 							<div className={style.marketViewCardDescription}>
 								Based on the number of likes for competitors across all platforms
 							</div>
-							<a href="#" className={style.marketViewCardLink}>
+							<Link to="/marketview/competitor" className={style.marketViewCardLink}>
 								View Platform Metrics <span className="qf-iconRight-Arrow" />
-							</a>
+							</Link>
 						</div>
 					</div>
 
@@ -186,9 +187,9 @@ export class Marketview extends React.Component {
 							<div className={style.marketViewCardDescription}>
 								Based on the number of likes for competitors across all platforms
 							</div>
-							<a href="#" className={style.marketViewCardLink}>
+							<Link to="/marketview/platform" className={style.marketViewCardLink}>
 								View Competitor Metrics <span className="qf-iconRight-Arrow" />
-							</a>
+							</Link>
 						</div>
 					</div>
 
@@ -256,9 +257,9 @@ export class Marketview extends React.Component {
 							<div className={style.marketViewCardDescription}>
 								Based on the number of likes for competitors across all platforms
 							</div>
-							<a href="#" className={style.marketViewCardLink}>
+							<Link to="/marketview/time" className={style.marketViewCardLink}>
 								View Time Metrics <span className="qf-iconRight-Arrow" />
-							</a>
+							</Link>
 						</div>
 					</div>
 				</div>
