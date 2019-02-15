@@ -15,6 +15,7 @@ import { actions } from 'Reducers/marketview'
 import TopVideosChart from 'Components/Charts/MarketView/TopVideos'
 import ProgressBar from 'Components/ProgressBar'
 import MarketViewSlider from 'Components/Sliders/Marketview'
+import TopSimilarProperties from 'Components/TopSimilarProperties'
 
 import style from './style.scss'
 
@@ -23,6 +24,7 @@ export class Marketview extends React.Component {
   componentDidMount() {
     this.props.getCompetitorTopVideosRequest()
     this.props.getCompetitorVideosRequest()
+    this.props.getSimilarPropertiesRequest()
   }
 
   changeSelectedVideo(video) {
@@ -30,7 +32,7 @@ export class Marketview extends React.Component {
   }
 
   render() {
-    const { marketview: { competitorTopVideos } } = this.props
+    const { marketview: { competitorTopVideos, similarProperties } } = this.props
 
     if (!this.props.marketview.selectedVideo || this.props.marketview.loading) {
       return <div>Loading</div>
@@ -67,6 +69,7 @@ export class Marketview extends React.Component {
           </div>
         </div>
         {competitorTopVideos && <TopVideosChart chartData={competitorTopVideos}/>}
+        {similarProperties && <TopSimilarProperties data={similarProperties}/>}
       </React.Fragment>
     )
   }

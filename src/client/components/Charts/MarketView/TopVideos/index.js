@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import cx from 'classnames'
 import { Bar } from 'react-chartjs-2'
+import { randomKey } from 'Utils/index'
 
 import Select from "Components/Form/Select"
 import style from './style.scss'
@@ -21,8 +22,12 @@ class TopVideosChart extends Component {
 
   handleChange = (selectedOption, name) => {
 		this.setState({ [name]: selectedOption })
-  }
-  
+	}
+
+	datasetKeyProvider() {
+		return randomKey(5)
+	}
+
   render() {
     const { resolution, views, time } = this.state
     const { chartData } = this.props
@@ -79,7 +84,8 @@ class TopVideosChart extends Component {
           <Bar
             height={80}
             backgroundColor="#242b49"
-            data={chartData}
+						data={chartData}
+						datasetKeyProvider={this.datasetKeyProvider}
             options={{
               ...chartOptions,
               chartArea: {
