@@ -1,7 +1,7 @@
 import { all } from 'redux-saga/effects';
 
-import library from "./Library";
-import libraryDetail from "./LibraryDetail";
+import library from "./library";
+import libraryDetail from "./libraryDetail";
 import quickview from "./Quickview";
 import marketview from './marketview';
 
