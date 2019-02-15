@@ -1,30 +1,28 @@
-import React, { Component } from "react";
-import { DateRange } from "react-date-range";
-import classnames from "classnames";
-import { Bar, Doughnut } from "react-chartjs-2";
-import moment from "moment";
-import { Field } from "redux-form";
-import "chartjs-plugin-datalabels";
+import React, { Component } from "react"
+import { DateRange } from "react-date-range"
+import classnames from "classnames"
+import { Bar, Doughnut } from "react-chartjs-2"
+import moment from "moment"
+import { Field } from "redux-form"
+import "chartjs-plugin-datalabels"
+import { randomKey } from 'Utils/index'
 
-import Dropdown from "Components/Dropdown";
-import Select from "Components/Form/Select";
-import Button from "Components/Form/Button";
+import Dropdown from "Components/Dropdown"
+import Select from "Components/Form/Select"
+import Button from "Components/Form/Button"
 
 import {
   dateSelectOptions,
-  doughnutData,
   doughnutOptions,
-  doughnutRoundData,
   dropdownLists,
   selectOptions,
-  stackedChartData,
   stackedChartOptions
-} from "./dummySummary";
-import style from "./style.scss";
+} from "./summaryData"
+import style from "./style.scss"
 
 class VerticalStackedChart extends Component{
   constructor(props){
-    super(props);
+    super(props)
     this.state = {
       isStackedChartSidebarVisible: false,
       dateRange: {
@@ -52,16 +50,21 @@ class VerticalStackedChart extends Component{
   }
 
   handleChange = (selectedOption, name) => {
-    this.setState({ [name]: selectedOption });
-  };
+    this.setState({ [name]: selectedOption })
+  }
 
   setSidebarVisible(type){
     this.setState({
       isStackedChartSidebarVisible: type
     })
-  }
+	}
+
+	datasetKeyProvider() {
+		return randomKey(5)
+	}
 
   render(){
+    const { doughnutData, stackedChartData, doughnutRoundData } = this.props.data;
     const {
       dateRange: { selection: dateRange },
       startDateRange: { selection: startDateRange },
@@ -70,7 +73,7 @@ class VerticalStackedChart extends Component{
       endDate,
       startDate,
       isStackedChartSidebarVisible,
-    } = this.state;
+    } = this.state
     return (
       <div className="col-12 shadow-1 mt-72 bg-dark-grey-blue">
         <div className={style.radialChartsContainer}>
@@ -141,7 +144,8 @@ class VerticalStackedChart extends Component{
                 width={550}
                 height={300}
                 backgroundColor="#242b49"
-                data={stackedChartData}
+								data={stackedChartData}
+								datasetKeyProvider={this.datasetKeyProvider}
                 options={{
                   ...stackedChartOptions,
                   chartArea: {
@@ -304,4 +308,4 @@ class VerticalStackedChart extends Component{
   }
 }
 
-export default VerticalStackedChart;
+export default VerticalStackedChart

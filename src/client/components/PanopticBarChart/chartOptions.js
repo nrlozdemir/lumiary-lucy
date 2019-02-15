@@ -1,43 +1,3 @@
-export const barChartData = {
-  labels: [
-    "S",
-    "M",
-    "T",
-    "W",
-    "T",
-    "F",
-    "S"
-  ],
-  datasets: [
-    {
-      label: 'Dataset 1',
-      display: false,
-      backgroundColor: "#51adc0",
-      data: [
-        45000,
-        55000,
-        55000,
-        70000,
-        55000,
-        45000,
-        55000
-      ]
-    }, {
-      label: 'Dataset 2',
-      backgroundColor: "#ff556f",
-      data: [
-        -45000,
-        -50000,
-        -30000,
-        -55000,
-        -70000,
-        -55000,
-        -30000
-      ]
-    }
-  ]
-}
-
 export const options = {
   responsive: true,
   maintainAspectRatio: false,
@@ -106,6 +66,9 @@ export const wrapperBarOptions = {
   },
   legend: {
     display: false
+  },
+  plugins: {
+    datalabels: false
   },
   scales: {
     xAxes: [{
