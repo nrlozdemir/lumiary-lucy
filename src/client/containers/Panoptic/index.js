@@ -127,7 +127,7 @@ export class Panoptic extends React.Component {
                 />
               }
             </div>
-            <div className="d-flex align-items-center justify-content-center ph-48">
+            <div className={style.infoWrapperContainer}>
               <div className={style.infoWrapper}>
                 <span className={style.infoText}>Views</span>
               </div>
@@ -145,7 +145,7 @@ export class Panoptic extends React.Component {
             <div className="d-flex align-items-center justify-content-center ph-48 mv-48">
               {
                 platforms && platforms.map((platform, index) => (
-                  <div key={index} className="d-flex align-items-center mr-8">
+                  <div key={index} className="d-flex align-items-center mr-32">
                     <span className={style.round} style={{ backgroundColor: `${platform.color}` }}></span>
                     <p className={style.platformName}>{platform.name}</p>
                   </div>

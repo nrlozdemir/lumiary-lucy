@@ -602,7 +602,7 @@ export class LibraryDetail extends React.Component {
         </div>
 
 				{this.state.selectedImage ? (
-					<div className="col-12 mt-48">
+					<div className="col-12 mt-48 mb-48">
 						<div className="col-6-no-gutters bg-black">
 							<div className="mt-48 ml-48 mr-48">
 								<SingleItemSlider slideImages={sliderWithThumbnails} />
@@ -731,7 +731,7 @@ export class LibraryDetail extends React.Component {
 						</div>
 					</div>
 				) : (
-					<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue pb-32">
+					<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue pb-32 mb-48">
 						<div className="col-12">
 							<h2 className="font-secondary-first text-center pt-48 pb-48 font-size-18">
 								Shot by Shot
