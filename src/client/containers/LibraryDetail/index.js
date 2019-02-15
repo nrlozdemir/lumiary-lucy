@@ -26,283 +26,283 @@ import { barDataOptions, selectOptions } from "./options";
 
 /* eslint-disable react/prefer-stateless-function */
 export class LibraryDetail extends React.Component {
-	constructor(props) {
-		super(props);
-		this.slide = React.createRef();
-		this.state = {
-			selectedImage: null,
-			sliderVal: 0,
-			maxValue: 1000,
-			isDoughnutVisible: true,
-			isColorTempVisible: true,
-			barData_DatasetOptions: [
-				{
-					label: "first",
-					backgroundColor: "#ff556f",
-					borderColor: "#ff556f",
-					borderWidth: 1,
-					hoverBackgroundColor: "#ff556f",
-					hoverBorderColor: "#ff556f"
-				},
-				{
-					label: "second",
-					backgroundColor: "#51adc0",
-					borderColor: "#51adc0",
-					borderWidth: 1,
-					hoverBackgroundColor: "#51adc0",
-					hoverBorderColor: "#51adc0"
-				}
-			],
-			radarData_DatasetOptions: [
-				{
-					label: "My First dataset",
-					backgroundColor: "rgba(255, 85, 111,0.6)",
-					borderColor: "transparent",
-					pointBackgroundColor: "rgb(255, 85, 111,1)",
-					pointBorderColor: "transparent"
-				},
-				{
-					label: "My Second dataset",
-					backgroundColor: "rgba(81, 173, 192,0.6)",
-					borderColor: "transparent",
-					pointBackgroundColor: "rgba(81, 173, 192,1)",
-					pointBorderColor: "transparent"
-				}
-			],
-			lineChartData_DatasetOptions: [
-				{
-					fill: false,
-					lineTension: 0.1,
-					borderColor: "#51adc0",
-					borderCapStyle: "butt",
-					borderDash: [],
-					borderDashOffset: 0.0,
-					borderJoinStyle: "miter",
-					pointRadius: 5,
-					pointBackgroundColor: "#51adc0",
-					pointBorderColor: "#fff",
-					pointBorderWidth: 1,
-					pointHoverRadius: 5,
-					pointHoverBackgroundColor: "rgba(75,192,192,1)",
-					pointHoverBorderColor: "rgba(220,220,220,1)",
-					pointHoverBorderWidth: 2,
-					pointHitRadius: 10,
-					shadowOffsetX: 1,
-					shadowOffsetY: 1,
-					shadowBlur: 5,
-					shadowColor: "#51adc0"
-				},
-				{
-					fill: false,
-					lineTension: 0.1,
-					borderColor: "#8567f0",
-					borderCapStyle: "butt",
-					borderDash: [],
-					borderDashOffset: 0.0,
-					borderJoinStyle: "miter",
-					pointRadius: 5,
-					pointBackgroundColor: "#8567f0",
-					pointBorderColor: "#fff",
-					pointBorderWidth: 1,
-					pointHoverRadius: 5,
-					pointHoverBackgroundColor: "rgba(75,192,192,1)",
-					pointHoverBorderColor: "rgba(220,220,220,1)",
-					pointHoverBorderWidth: 2,
-					pointHitRadius: 10,
-					shadowOffsetX: 1,
-					shadowOffsetY: 1,
-					shadowBlur: 5,
-					shadowColor: "#8567f0"
-				}
-			]
-		};
-	}
+  constructor(props) {
+    super(props);
+    this.slide = React.createRef();
+    this.state = {
+      selectedImage: null,
+      sliderVal: 0,
+      maxValue: 1000,
+      isDoughnutVisible: true,
+      isColorTempVisible: true,
+      barData_DatasetOptions: [
+        {
+          label: "first",
+          backgroundColor: "#ff556f",
+          borderColor: "#ff556f",
+          borderWidth: 1,
+          hoverBackgroundColor: "#ff556f",
+          hoverBorderColor: "#ff556f"
+        },
+        {
+          label: "second",
+          backgroundColor: "#51adc0",
+          borderColor: "#51adc0",
+          borderWidth: 1,
+          hoverBackgroundColor: "#51adc0",
+          hoverBorderColor: "#51adc0"
+        }
+      ],
+      radarData_DatasetOptions: [
+        {
+          label: "My First dataset",
+          backgroundColor: "rgba(255, 85, 111,0.6)",
+          borderColor: "transparent",
+          pointBackgroundColor: "rgb(255, 85, 111,1)",
+          pointBorderColor: "transparent"
+        },
+        {
+          label: "My Second dataset",
+          backgroundColor: "rgba(81, 173, 192,0.6)",
+          borderColor: "transparent",
+          pointBackgroundColor: "rgba(81, 173, 192,1)",
+          pointBorderColor: "transparent"
+        }
+      ],
+      lineChartData_DatasetOptions: [
+        {
+          fill: false,
+          lineTension: 0.1,
+          borderColor: "#51adc0",
+          borderCapStyle: "butt",
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: "miter",
+          pointRadius: 5,
+          pointBackgroundColor: "#51adc0",
+          pointBorderColor: "#fff",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(75,192,192,1)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 2,
+          pointHitRadius: 10,
+          shadowOffsetX: 1,
+          shadowOffsetY: 1,
+          shadowBlur: 5,
+          shadowColor: "#51adc0"
+        },
+        {
+          fill: false,
+          lineTension: 0.1,
+          borderColor: "#8567f0",
+          borderCapStyle: "butt",
+          borderDash: [],
+          borderDashOffset: 0.0,
+          borderJoinStyle: "miter",
+          pointRadius: 5,
+          pointBackgroundColor: "#8567f0",
+          pointBorderColor: "#fff",
+          pointBorderWidth: 1,
+          pointHoverRadius: 5,
+          pointHoverBackgroundColor: "rgba(75,192,192,1)",
+          pointHoverBorderColor: "rgba(220,220,220,1)",
+          pointHoverBorderWidth: 2,
+          pointHitRadius: 10,
+          shadowOffsetX: 1,
+          shadowOffsetY: 1,
+          shadowBlur: 5,
+          shadowColor: "#8567f0"
+        }
+      ]
+    };
+  }
 
-	componentDidMount() {
-		const { getLibraryDetailRequest, match } = this.props;
+  componentDidMount() {
+    const { getLibraryDetailRequest, match } = this.props;
 
-		if (match.params.videoId) {
-			getLibraryDetailRequest(match.params.videoId);
-		}
-	}
+    if (match.params.videoId) {
+      getLibraryDetailRequest(match.params.videoId);
+    }
+  }
 
-	componentDidUpdate(prevProps) {
-		const { match: prevMatch } = prevProps;
-		const { match, getLibraryDetailRequest } = this.props;
+  componentDidUpdate(prevProps) {
+    const { match: prevMatch } = prevProps;
+    const { match, getLibraryDetailRequest } = this.props;
 
-		if (prevMatch.params.videoId !== match.params.videoId) {
-			getLibraryDetailRequest(match.params.videoId);
-		}
-	}
+    if (prevMatch.params.videoId !== match.params.videoId) {
+      getLibraryDetailRequest(match.params.videoId);
+    }
+  }
 
-	onChangeSlider(e) {
-		this.setState({ sliderVal: e }, this.slide.current.scrollTo(e * 5, 0));
-	}
+  onChangeSlider(e) {
+    this.setState({ sliderVal: e }, this.slide.current.scrollTo(e * 5, 0));
+  }
 
-	changeVisibilityDoughnut() {
-		this.setState(prevState => ({
-			isDoughnutVisible: !prevState.isDoughnutVisible
-		}));
-	}
+  changeVisibilityDoughnut() {
+    this.setState(prevState => ({
+      isDoughnutVisible: !prevState.isDoughnutVisible
+    }));
+  }
 
-	render() {
-		const {
-			match,
-			libraryDetail: { libraryDetail }
-		} = this.props;
+  render() {
+    const {
+      match,
+      libraryDetail: { libraryDetail }
+    } = this.props;
 
-		if (!libraryDetail) return false;
+    if (!libraryDetail) return false;
 
-		let {
-			videoList,
-			slideImages,
-			barData,
-			colorTempData,
-			doughnutData,
-			lineChartData,
-			radarData,
-			sliderWithThumbnails
-		} = libraryDetail;
+    let {
+      videoList,
+      slideImages,
+      barData,
+      colorTempData,
+      doughnutData,
+      lineChartData,
+      radarData,
+      sliderWithThumbnails
+    } = libraryDetail;
 
-		const {
-			isDoughnutVisible,
-			isColorTempVisible,
-			barData_DatasetOptions,
-			radarData_DatasetOptions,
-			lineChartData_DatasetOptions
-		} = this.state;
+    const {
+      isDoughnutVisible,
+      isColorTempVisible,
+      barData_DatasetOptions,
+      radarData_DatasetOptions,
+      lineChartData_DatasetOptions
+    } = this.state;
 
-		barData = chartCombineDataset(barData, barData_DatasetOptions);
+    barData = chartCombineDataset(barData, barData_DatasetOptions);
 
-		radarData = chartCombineDataset(radarData, radarData_DatasetOptions);
+    radarData = chartCombineDataset(radarData, radarData_DatasetOptions);
 
-		lineChartData = chartCombineDataset(
-			lineChartData,
-			lineChartData_DatasetOptions,
-			{
-				beforeDraw: function(chart, easing) {
-					if (
-						chart.config.options.chartArea &&
-						chart.config.options.chartArea.backgroundColor
-					) {
-						const ctx = chart.chart.ctx;
-						const chartArea = chart.chartArea;
+    lineChartData = chartCombineDataset(
+      lineChartData,
+      lineChartData_DatasetOptions,
+      {
+        beforeDraw: function(chart, easing) {
+          if (
+            chart.config.options.chartArea &&
+            chart.config.options.chartArea.backgroundColor
+          ) {
+            const ctx = chart.chart.ctx;
+            const chartArea = chart.chartArea;
 
-						ctx.save();
-						ctx.fillStyle = chart.config.options.chartArea.backgroundColor;
-						ctx.fillRect(
-							chartArea.left,
-							chartArea.top,
-							chartArea.right - chartArea.left,
-							chartArea.bottom - chartArea.top
-						);
-						ctx.restore();
-					}
-				}
-			}
-		);
+            ctx.save();
+            ctx.fillStyle = chart.config.options.chartArea.backgroundColor;
+            ctx.fillRect(
+              chartArea.left,
+              chartArea.top,
+              chartArea.right - chartArea.left,
+              chartArea.bottom - chartArea.top
+            );
+            ctx.restore();
+          }
+        }
+      }
+    );
 
-		const videoDetailHeader = classnames(
-			style.videoDetailHeader,
-			"grid-container mr-20 ml-20 mt-72"
-		);
+    const videoDetailHeader = classnames(
+      style.videoDetailHeader,
+      "grid-container mr-20 ml-20 mt-72"
+    );
 
-		return (
-			<React.Fragment>
-				<div className={style.header}>
-					<div className="ml-40">
-						<Link to="/library">
-							<span className="qf-iconLeft-Arrow" />
-							Back to Library
-						</Link>
-					</div>
-					<div>Video Name</div>
-					<div className="mr-40">
-						Published Facebook
-						<span className={style.iconWrapper}>
-							<i className="qf-iconFacebook" />
-						</span>
-					</div>
-				</div>
-				<div className="grid-container mr-20 ml-20 mt-72">
-					<div className="col-6">
-						<img
-							src="https://picsum.photos/588/360?image=20"
-							className="img-responsive  shadow-1"
-						/>
-					</div>
-					<div className="col-6 bg-dark-grey-blue shadow-1">
-						<div className={style.chartHeader}>
-							<div className="col-6-no-gutters">
-								<div className={style.socialIcons}>
-									<div className="col-4">Published</div>
-									<div className="col-8">
-										<span className="qf-iconFacebook" />
-										<span className="qf-iconInstagram" />
-										<span className="qf-iconSnapchat" />
-										<span className="qf-iconTwitter" />
-										<span className="qf-iconYoutube" />
-										<span className="qf-iconPinterest" />
-									</div>
-								</div>
-							</div>
-							<div className="col-6">
-								<div className={style.legend}>
-									<div className="col-6-no-gutters">
-										<div className="float-right mr-16">
-											<span className="bg-coral-pink" />
-											This video
-										</div>
-									</div>
-									<div className="col-6-no-gutters">
-										<span className="bg-cool-blue" />
-										Average Video
-									</div>
-								</div>
-							</div>
-						</div>
-						<Bar
-							data={barData}
-							width={500}
-							options={barDataOptions}
-							height={185}
-						/>
-						<div className={style.chartLabels}>
-							<div className={style.label}>
-								<span className="font-primary text-bold font-size-24 display-block">
-									827.8k
-								</span>
-								<span className="color-cool-grey font-secondary-second font-size-12 display-block">
-									BlaBla
-								</span>
-							</div>
-							<div className={style.label}>
-								<span className="font-primary text-bold font-size-24 display-block">
-									481.7k
-								</span>
-								<span className="color-cool-grey font-secondary-second font-size-12 display-block">
-									BlaBla
-								</span>
-							</div>
-							<div className={style.label}>
-								<span className="font-primary text-bold font-size-24 display-block">
-									265.2k
-								</span>
-								<span className="color-cool-grey font-secondary-second font-size-12 display-block">
-									BlaBla
-								</span>
-							</div>
-							<div className={style.label}>
-								<span className="font-primary text-bold font-size-24 display-block">
-									126.3k
-								</span>
-								<span className="color-cool-grey font-secondary-second font-size-12 display-block">
-									BlaBla
-								</span>
-							</div>
-						</div>
-					</div>
-				</div>
+    return (
+      <React.Fragment>
+        <div className={style.header}>
+          <div className="ml-40">
+            <Link to="/library">
+              <span className="qf-iconLeft-Arrow" />
+              Back to Library
+            </Link>
+          </div>
+          <div>Video Name</div>
+          <div className="mr-40">
+            Published Facebook
+            <span className={style.iconWrapper}>
+              <i className="qf-iconFacebook" />
+            </span>
+          </div>
+        </div>
+        <div className="grid-container mr-20 ml-20 mt-72">
+          <div className="col-6">
+            <img
+              src="https://picsum.photos/588/360?image=20"
+              className="img-responsive  shadow-1"
+            />
+          </div>
+          <div className="col-6 bg-dark-grey-blue shadow-1">
+            <div className={style.chartHeader}>
+              <div className="col-6-no-gutters">
+                <div className={style.socialIcons}>
+                  <div className="col-4">Published</div>
+                  <div className="col-8">
+                    <span className="qf-iconFacebook" />
+                    <span className="qf-iconInstagram" />
+                    <span className="qf-iconSnapchat" />
+                    <span className="qf-iconTwitter" />
+                    <span className="qf-iconYoutube" />
+                    <span className="qf-iconPinterest" />
+                  </div>
+                </div>
+              </div>
+              <div className="col-6">
+                <div className={style.legend}>
+                  <div className="col-6-no-gutters">
+                    <div className="float-right mr-16">
+                      <span className="bg-coral-pink" />
+                      This video
+                    </div>
+                  </div>
+                  <div className="col-6-no-gutters">
+                    <span className="bg-cool-blue" />
+                    Average Video
+                  </div>
+                </div>
+              </div>
+            </div>
+            <Bar
+              data={barData}
+              width={500}
+              options={barDataOptions}
+              height={185}
+            />
+            <div className={style.chartLabels}>
+              <div className={style.label}>
+                <span className="font-primary text-bold font-size-24 display-block">
+                  827.8k
+                </span>
+                <span className="color-cool-grey font-secondary-second font-size-12 display-block">
+                  BlaBla
+                </span>
+              </div>
+              <div className={style.label}>
+                <span className="font-primary text-bold font-size-24 display-block">
+                  481.7k
+                </span>
+                <span className="color-cool-grey font-secondary-second font-size-12 display-block">
+                  BlaBla
+                </span>
+              </div>
+              <div className={style.label}>
+                <span className="font-primary text-bold font-size-24 display-block">
+                  265.2k
+                </span>
+                <span className="color-cool-grey font-secondary-second font-size-12 display-block">
+                  BlaBla
+                </span>
+              </div>
+              <div className={style.label}>
+                <span className="font-primary text-bold font-size-24 display-block">
+                  126.3k
+                </span>
+                <span className="color-cool-grey font-secondary-second font-size-12 display-block">
+                  BlaBla
+                </span>
+              </div>
+            </div>
+          </div>
+        </div>
 
         <div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
           <div className={style.radialChartsContainer}>
@@ -602,7 +602,7 @@ export class LibraryDetail extends React.Component {
         </div>
 
 				{this.state.selectedImage ? (
-					<div className="col-12 mt-48">
+					<div className="col-12 mt-48 mb-48">
 						<div className="col-6-no-gutters bg-black">
 							<div className="mt-48 ml-48 mr-48">
 								<SingleItemSlider slideImages={sliderWithThumbnails} />
@@ -731,7 +731,7 @@ export class LibraryDetail extends React.Component {
 						</div>
 					</div>
 				) : (
-					<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue pb-32">
+					<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue pb-32 mb-48">
 						<div className="col-12">
 							<h2 className="font-secondary-first text-center pt-48 pb-48 font-size-18">
 								Shot by Shot

@@ -1,0 +1,78 @@
+.similarPropertiesContainer {
+  background-color: $color-dark-grey-blue;
+
+  .header {
+    .title {
+      font-size: 18px;
+    }
+  }
+
+  .selects {
+    display: flex;
+    float: right;
+    position: relative;
+    z-index: 12;
+    > div {
+      margin: 0 0 0 20px;
+    }
+
+    .selectStyles {
+      border: 1px solid $color-dusk;
+    }
+  }
+
+  .section {
+    border-left: 1px solid $color-dusk;
+    padding: 0 30px 0 40px;
+    .sectionTitle {
+      font-size: 40px;
+      font-weight: bold;
+    }
+
+    .sectionBadge {
+      margin: 32px 0;
+      span {
+        background-color: $color-dark-five;
+        border-radius: 50px;
+        font-size: 14px;
+        padding: 8px 24px;
+      }
+    }
+
+    &.no_border {
+      border-left: 1px solid transparent;
+    }
+  }
+
+  .progressBarArea {
+    margin-top: 24px;
+    .progressBar {
+      background-color: $color-dusk;
+      border-radius: 10px;
+    }
+    .percentageBlue {
+      border-radius: 10px;
+      height: 10px;
+      background-color: $color-cool-blue;
+      -webkit-transition: width .5s, height .5s;
+      transition: width .5s, height .5s;
+    }
+    .progressText {
+      color: $color-white;
+      font-size: 14px;
+      font-family: $font-family-ClanOTNews;
+      .leftTitle {
+        float: left;
+      }
+  
+      .rightTitle {
+        float: right;
+      }
+      &::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+    }
+  }
+} 
