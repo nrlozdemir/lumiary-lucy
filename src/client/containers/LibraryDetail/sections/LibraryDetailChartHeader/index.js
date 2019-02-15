@@ -4,7 +4,6 @@ import { Bar } from "react-chartjs-2";
 import style from "./style.scss";
 import { barDataOptions } from "./options";
 
-
 const LibraryDetailChartHeader = ({barData}) => {
 	return (
 		<div className="grid-container mr-20 ml-20 mt-72">

@@ -1,24 +1,29 @@
-import React from 'react';
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs";
-import { Radar } from "react-chartjs-2";
-import Slider from "rc-slider";
+import React from 'react'
+import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
+import Slider from "rc-slider"
 
-import style from "./style.scss";
+import style from "./style.scss"
 
-import SingleItemSlider from "Components/SingleItemSlider";
-import ProgressBar from "Components/ProgressBar";
+import SingleItemSlider from "Components/SingleItemSlider"
+import ProgressBar from "Components/ProgressBar"
+import RadarChart from "Components/Charts/LibraryDetail/RadarChart"
 
 class LibraryDetailShotByShot extends React.Component {
 	constructor(props){
-		super(props);
+		super(props)
 		this.state = {
 			selectedImage: null,
+			sliderVal: 0,
 		}
 	}
 
+	onChangeSlider(e) {
+		this.setState({ sliderVal: e }, this.slide.current.scrollTo(e * 5, 0))
+	}
+
 	render() {
-		const { sliderWithThumbnails, slideImages, radarData, videoList } = this.props;
-		const { selectedImage } = this.state;
+		const { sliderWithThumbnails, slideImages, radarData, videoList } = this.props
+		const { selectedImage } = this.state
 		return (
 			<div>
 				{selectedImage ? (
@@ -104,46 +109,8 @@ class LibraryDetailShotByShot extends React.Component {
 								</TabPanel>
 								<TabPanel>
 									<div className={style.radarChartContainer}>
-										<Radar
+										<RadarChart
 											data={radarData}
-											options={{
-												legend: {
-													display: false
-												},
-												tooltips: {
-													backgroundColor: "#fff",
-													cornerRadius: 0,
-													titleFontColor: "#000",
-													mode: "point",
-													bodyFontColor: "#000"
-												},
-												layout: {
-													padding: {
-														left: 35,
-														right: 50,
-														top: 0,
-														bottom: 0
-													}
-												},
-
-												scale: {
-													gridLines: {
-														display: true,
-														lineWidth: 10
-													},
-													pointLabels: {
-														callback: function(value, index, values) {
-															return "●";
-														},
-														fontSize: 30,
-														fontColor: radarData.labels.map(lbl => lbl)
-													},
-													ticks: {
-														display: false,
-														maxTicksLimit: 5
-													}
-												}
-											}}
 										/>
 									</div>
 								</TabPanel>
@@ -218,4 +185,4 @@ class LibraryDetailShotByShot extends React.Component {
 	}
 }
 
-export default LibraryDetailShotByShot;
+export default LibraryDetailShotByShot

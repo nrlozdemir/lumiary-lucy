@@ -2,25 +2,23 @@ import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
-import { bindActionCreators } from "redux";
-import { compose } from "redux";
+import { bindActionCreators, compose } from "redux";
 import { reduxForm } from "redux-form";
 
 import { chartCombineDataset } from "Utils";
-import { actions } from "Reducers/LibraryDetail";
-import makeSelectLibraryDetail from "Selectors/LibraryDetail.js";
+import { actions, makeSelectLibraryDetail } from "Reducers/libraryDetail";
 
-import LibraryDetailHeader from "Components/LibraryDetailHeader";
-import LibraryDetailChartHeader from "Components/LibraryDetailChartHeader";
-import LibraryDetailDoughnutChart from "Components/LibraryDetailDoughnutChart";
-import LibraryDetailColorTemperature from "Components/LibraryDetailColorTemperature";
-import LibraryDetailShotByShot from "Components/LibraryDetailShotByShot";
+import LibraryDetailHeader from "./sections/LibraryDetailHeader";
+import LibraryDetailChartHeader from "./sections/LibraryDetailChartHeader";
+import LibraryDetailDoughnutChart from "./sections/LibraryDetailDoughnutChart";
+import LibraryDetailColorTemperature from "./sections/LibraryDetailColorTemperature";
+import LibraryDetailShotByShot from "./sections/LibraryDetailShotByShot";
 
 /* eslint-disable react/prefer-stateless-function */
 export class LibraryDetail extends React.Component {
 	constructor(props) {
-		super(props);
-		this.slide = React.createRef();
+		super(props)
+		this.slide = React.createRef()
 		this.state = {
 			sliderVal: 0,
 			maxValue: 1000,
@@ -104,37 +102,37 @@ export class LibraryDetail extends React.Component {
 					shadowColor: "#8567f0"
 				}
 			]
-		};
+		}
 	}
 
 	componentDidMount() {
-		const { getLibraryDetailRequest, match } = this.props;
+		const { getLibraryDetailRequest, match } = this.props
 
 		if (match.params.videoId) {
-			getLibraryDetailRequest(match.params.videoId);
+			getLibraryDetailRequest(match.params.videoId)
 		}
 	}
 
 	componentDidUpdate(prevProps) {
-		const { match: prevMatch } = prevProps;
-		const { match, getLibraryDetailRequest } = this.props;
+		const { match: prevMatch } = prevProps
+		const { match, getLibraryDetailRequest } = this.props
 
 		if (prevMatch.params.videoId !== match.params.videoId) {
-			getLibraryDetailRequest(match.params.videoId);
+			getLibraryDetailRequest(match.params.videoId)
 		}
 	}
 
 	onChangeSlider(e) {
-		this.setState({ sliderVal: e }, this.slide.current.scrollTo(e * 5, 0));
+		this.setState({ sliderVal: e }, this.slide.current.scrollTo(e * 5, 0))
 	}
 
 
 	render() {
 		const {
 			libraryDetail: { libraryDetail }
-		} = this.props;
+		} = this.props
 
-		if (!libraryDetail) return false;
+		if (!libraryDetail) return false
 
 		let {
 			videoList,
@@ -145,7 +143,7 @@ export class LibraryDetail extends React.Component {
 			lineChartData,
 			radarData,
 			sliderWithThumbnails
-		} = libraryDetail;
+		} = libraryDetail
 
 		const {
 			isDoughnutVisible,
@@ -153,11 +151,11 @@ export class LibraryDetail extends React.Component {
 			barData_DatasetOptions,
 			radarData_DatasetOptions,
 			lineChartData_DatasetOptions
-		} = this.state;
+		} = this.state
 
-		barData = chartCombineDataset(barData, barData_DatasetOptions);
+		barData = chartCombineDataset(barData, barData_DatasetOptions)
 
-		radarData = chartCombineDataset(radarData, radarData_DatasetOptions);
+		radarData = chartCombineDataset(radarData, radarData_DatasetOptions)
 
 		lineChartData = chartCombineDataset(
 			lineChartData,
@@ -168,22 +166,22 @@ export class LibraryDetail extends React.Component {
 						chart.config.options.chartArea &&
 						chart.config.options.chartArea.backgroundColor
 					) {
-						const ctx = chart.chart.ctx;
-						const chartArea = chart.chartArea;
+						const ctx = chart.chart.ctx
+						const chartArea = chart.chartArea
 
-						ctx.save();
-						ctx.fillStyle = chart.config.options.chartArea.backgroundColor;
+						ctx.save()
+						ctx.fillStyle = chart.config.options.chartArea.backgroundColor
 						ctx.fillRect(
 							chartArea.left,
 							chartArea.top,
 							chartArea.right - chartArea.left,
 							chartArea.bottom - chartArea.top
-						);
-						ctx.restore();
+						)
+						ctx.restore()
 					}
 				}
 			}
-		);
+		)
 
 		return (
 			<React.Fragment>
@@ -208,29 +206,29 @@ export class LibraryDetail extends React.Component {
 					videoList={videoList}
 				/>
 			</React.Fragment>
-		);
+		)
 	}
 }
 
 LibraryDetail.propTypes = {
 	libraryDetail: PropTypes.object,
 	getLibraryDetailRequest: PropTypes.func.isRequired
-};
+}
 
 const mapStateToProps = createStructuredSelector({
 	libraryDetail: makeSelectLibraryDetail()
-});
+})
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
 	mapStateToProps,
 	mapDispatchToProps
-);
+)
 
 export default compose(
 	reduxForm({
 		form: "libraryDetail"
 	}),
 	withConnect
-)(LibraryDetail);
+)(LibraryDetail)

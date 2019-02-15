@@ -27,10 +27,11 @@
 		text-align: center;
 		width: calc(25% - 41px);
 		float: left;
-		margin: 30px 0;
-		padding: 0 20px;
+		padding: 30px 20px;
 		border-left: 1px solid $color-dusk;
 		list-style: none;
+		position: relative;
+		cursor: pointer;
 
 		.subtitle{
 			background-color: $color-dark-five;
@@ -38,8 +39,11 @@
 			border-radius: 22px;
 			display: inline-flex;
 			margin-top: 24px;
+			position: relative;
 		}
-
+		h1 {
+			position: relative;
+		}
 		&:first-child {
 			border: none;
 		}
@@ -62,8 +66,18 @@
 			}
 		}
 		&:hover{
-			transform: scaleX(1.10) scaleY(1.22);
-			background-color: $color-dusk;
+			// transform: scaleX(1.10) scaleY(1.22);
+			&:before {
+				content: '';
+				position: absolute;
+				left: -10px;
+				right: -10px;
+				top: -10px;
+				bottom: -10px;
+				height: calc(100% + 20px);
+				width: calc(100% + 20px);
+				background-color: $color-dusk;
+			}
 		}
 
 	}
@@ -254,17 +268,24 @@
 	}
 }
 
-.infoWrapper{
-	width: calc(25% - 12px);
+.infoWrapperContainer {
+	padding: 0 20px;
 	display: flex;
 	align-items: center;
 	justify-content: center;
+	.infoWrapper{
+		width: calc(33.33% - 41px);
+		padding: 0 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
 
-	.infoText{
-		padding: 8px 24px;
-		background-color: $color-dark-five;
-		color: $color-white;
-		border-radius: 24px;
+		.infoText{
+			padding: 8px 24px;
+			background-color: $color-dark-five;
+			color: $color-white;
+			border-radius: 24px;
+		}
 	}
 }
 

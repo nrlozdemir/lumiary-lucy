@@ -1,12 +1,12 @@
-import React from 'react';
-import { Doughnut } from "react-chartjs-2";
-import { Field } from "redux-form";
+import React from 'react'
+import { Field } from "redux-form"
 
 import style from './style.scss';
-import { selectOptions, lineChartOptions, doughnutOptions} from './options';
-import Select from "Components/Form/Select";
-import LineChart from "Components/LineChart/Chart";
-import PointerCard from "Components/PointerCard";
+import { selectOptions, lineChartOptions, doughnutOptions} from './options'
+import Select from "Components/Form/Select"
+import LineChart from "Components/LineChart/Chart"
+import PointerCard from "Components/PointerCard"
+import DoughnutChart from 'Components/Charts/LibraryDetail/Doughnut'
 
 class LibraryDetailDoughnutChart extends React.Component{
 	constructor(props){
@@ -44,31 +44,8 @@ class LibraryDetailDoughnutChart extends React.Component{
 								</p>
 							</div>
 							<div className={style.doughnutChartContainer}>
-								<Doughnut
-									options={doughnutOptions}
-									width={124}
-									height={124}
-									data={{
-										labels: ["Red", "Green"],
-										datasets: [
-											{
-												data: [...chart.average],
-												borderColor: "#303a5d",
-												backgroundColor: [
-													"#ffffff",
-													"#ffffff",
-													"#ffffff",
-													"#51adc0"
-												],
-												hoverBackgroundColor: [
-													"#ffffff",
-													"#ffffff",
-													"#ffffff",
-													"#51adc0"
-												]
-											}
-										]
-									}}
+								<DoughnutChart
+									data={chart.average}
 								/>
 								<p className="pt-32">
 											<span className={style.textBold}>
@@ -124,31 +101,8 @@ class LibraryDetailDoughnutChart extends React.Component{
 											Library Data
 										</h1>
 										<div className={style.doughnutChartContainer}>
-											<Doughnut
-												options={doughnutOptions}
-												width={180}
-												height={180}
-												data={{
-													labels: ["Red", "Green"],
-													datasets: [
-														{
-															data: [30, 12, 6, 52],
-															borderColor: "#303a5d",
-															backgroundColor: [
-																"#ffffff",
-																"#ffffff",
-																"#ffffff",
-																"#51adc0"
-															],
-															hoverBackgroundColor: [
-																"#ffffff",
-																"#ffffff",
-																"#ffffff",
-																"#51adc0"
-															]
-														}
-													]
-												}}
+											<DoughnutChart
+												data={[[30, 12, 6, 52]]}
 											/>
 											<p className="pt-32">
 												<span className={style.duskRound} />
@@ -173,31 +127,8 @@ class LibraryDetailDoughnutChart extends React.Component{
 											Industry Data
 										</h1>
 										<div className={style.doughnutChartContainer}>
-											<Doughnut
-												options={doughnutOptions}
-												width={180}
-												height={180}
-												data={{
-													labels: ["Red", "Green"],
-													datasets: [
-														{
-															data: [30, 12, 6, 52],
-															borderColor: "#303a5d",
-															backgroundColor: [
-																"#ffffff",
-																"#ffffff",
-																"#ffffff",
-																"#8567f0"
-															],
-															hoverBackgroundColor: [
-																"#ffffff",
-																"#ffffff",
-																"#ffffff",
-																"#8567f0"
-															]
-														}
-													]
-												}}
+											<DoughnutChart
+												data={[30, 12, 6, 52]}
 											/>
 											<p className="w-75 text-center pt-32">
 												<span className={style.purpleRound} />

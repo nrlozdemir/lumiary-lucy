@@ -1,4 +1,5 @@
 import { fromJS } from "immutable";
+import { createSelector } from 'reselect';
 
 export const types = {
   GET_LIBRARY_DETAIL_REQUEST: "LibraryDetail/GET_LIBRARY_DETAIL_REQUEST",
@@ -41,5 +42,10 @@ const libraryDetailReducer = (state = initialState, action) => {
       return state;
   }
 };
+
+export const selectLibraryDetailDomain = state => state.LibraryDetail;
+
+export const makeSelectLibraryDetail = () =>
+  createSelector(selectLibraryDetailDomain, substate => substate.toJS());
 
 export default libraryDetailReducer;
