@@ -1,22 +1,38 @@
-import { takeLatest, call, put } from "redux-saga/effects";
+import { takeLatest, call, put } from "redux-saga/effects"
+import axios from 'axios'
 
-import { types, actions } from "Reducers/Quickview";
-import { getQuickviewItems, getQuickviewPlatformSelected } from "Api/quickview";
+import { types, actions } from "Reducers/quickview"
+
+//mocks
+import quickviewItemsData from 'Api/mocks/quickviewItemsMock.json'
+import quickviewPlatdormSelectedData from 'Api/mocks/quickviewPlatformSelectedMock.json'
+
+function getQuickviewItemsApi() {
+  //this will use ajax function in utils/api when real data is provided
+  return axios.get('/')
+  .then(res => quickviewItemsData)
+}
+
+function getQuickviewPlatformSelectedApi() {
+  //this will use ajax function in utils/api when real data is provided
+  return axios.get('/')
+  .then(res => quickviewPlatdormSelectedData)
+}
 
 function* getQuickviewItemsSaga() {
   try {
-    const payload = yield call(getQuickviewItems);
-    yield put(actions.getQuickviewItemsSuccess(payload));
+    const payload = yield call(getQuickviewItemsApi)
+    yield put(actions.getQuickviewItemsSuccess(payload))
   } catch (error) {
-    yield put(actions.getQuickviewItemsFailure({ error }));
+    yield put(actions.getQuickviewItemsFailure({ error }))
   }
 }
 function* getQuickviewSelectedPlatformSaga(id) {
   try {
-    const payload = yield call(getQuickviewPlatformSelected, { id });
-    yield put(actions.getQuickviewPlatformSelectedSuccess(payload));
+    const payload = yield call(getQuickviewPlatformSelectedApi, { id })
+    yield put(actions.getQuickviewPlatformSelectedSuccess(payload))
   } catch (error) {
-    yield put(actions.getQuickviewPlatformSelectedFailure({ error }));
+    yield put(actions.getQuickviewPlatformSelectedFailure({ error }))
   }
 }
 
@@ -26,4 +42,4 @@ export default [
     types.GET_QUICKVIEW_PLATFORM_SELECTED_REQUEST,
     getQuickviewSelectedPlatformSaga
   )
-];
+]

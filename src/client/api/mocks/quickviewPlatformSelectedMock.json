@@ -1,0 +1,94 @@
+[
+	{
+		"video": {
+			"video": {
+				"title": "2,387,931 Views",
+				"thumbnailUrl": "https://picsum.photos/282/154?image=18",
+				"socialIcon": "instagram"
+			},
+			"options": {
+				"size": "none",
+				"presentationCard": true,
+				"barColor": "cool-blue"
+			}
+		},
+		"infos": [
+			{
+				"title": "title",
+				"value": "value",
+				"difference": 60
+			},
+			{
+				"title": "title",
+				"value": "value",
+				"difference": 60
+			},
+			{
+				"title": "title",
+				"value": "value",
+				"difference": 60
+			},
+			{
+				"title": "title",
+				"value": "value",
+				"difference": 60
+			},
+			{
+				"title": "title",
+				"value": "value"
+			},
+			{
+				"title": "title",
+				"value": "value"
+			},
+			{
+				"title": "title",
+				"value": "value"
+			}
+		]
+	},
+	{
+		"video": {
+			"video": {
+				"title": "516 Views",
+				"thumbnailUrl": "https://picsum.photos/282/154?image=19",
+				"socialIcon": "instagram"
+			},
+			"options": {
+				"size": "none",
+				"presentationCard": true,
+				"barColor": "coral-pink"
+			}
+		},
+		"infos": [
+			{
+				"title": "title",
+				"value": "value"
+			},
+			{
+				"title": "title",
+				"value": "value"
+			},
+			{
+				"title": "title",
+				"value": "value"
+			},
+			{
+				"title": "title",
+				"value": "value"
+			},
+			{
+				"title": "title",
+				"value": "value"
+			},
+			{
+				"title": "title",
+				"value": "value"
+			},
+			{
+				"title": "title",
+				"value": "value"
+			}
+		]
+	}
+]
