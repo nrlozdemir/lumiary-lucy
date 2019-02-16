@@ -4,19 +4,18 @@
  *
  */
 
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import  makeSelectMarketview  from 'Selectors/Marketview.js'
-import { actions } from 'Reducers/marketview'
+import React, { Fragment } from "react"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { createStructuredSelector } from "reselect"
+import { compose, bindActionCreators } from "redux"
+import { actions, makeSelectMarketview } from "Reducers/marketview"
 
-import TopVideosChart from 'Components/Charts/MarketView/TopVideos'
-import ProgressBar from 'Components/ProgressBar'
-import MarketViewSlider from 'Components/Sliders/Marketview'
+import TopVideosChart from "Components/Charts/MarketView/TopVideos"
+import ProgressBar from "Components/ProgressBar"
+import MarketViewSlider from "Components/Sliders/Marketview"
 
-import style from './style.scss'
+import style from "./style.scss"
 
 /* eslint-disable react/prefer-stateless-function */
 export class Detail extends React.Component {
@@ -30,7 +29,9 @@ export class Detail extends React.Component {
   }
 
   render() {
-    const { marketview: { competitorTopVideos } } = this.props
+    const {
+      marketview: { competitorTopVideos }
+    } = this.props
 
     if (!this.props.marketview.selectedVideo || this.props.marketview.loading) {
       return <div>Loading</div>
@@ -52,12 +53,16 @@ export class Detail extends React.Component {
                     <p className={style.title}>{value.title}</p>
                     <p className={style.progressText}>
                       <span className={style.leftTitle}>{value.leftTitle}</span>
-                      <span className={style.rightTitle}>{value.rightTitle}</span>
+                      <span className={style.rightTitle}>
+                        {value.rightTitle}
+                      </span>
                     </p>
                     <ProgressBar
                       width={value.value}
                       customBarClass={style.progressBar}
-                      customPercentageClass={i % 2 ? style.percentageRed : style.percentageBlue}
+                      customPercentageClass={
+                        i % 2 ? style.percentageRed : style.percentageBlue
+                      }
                     />
                   </div>
                 ))}
@@ -66,7 +71,9 @@ export class Detail extends React.Component {
             ))}
           </div>
         </div>
-        {competitorTopVideos && <TopVideosChart chartData={competitorTopVideos}/>}
+        {competitorTopVideos && (
+          <TopVideosChart chartData={competitorTopVideos} />
+        )}
       </React.Fragment>
     )
   }
@@ -80,6 +87,9 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps)
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
 
 export default compose(withConnect)(Detail)
