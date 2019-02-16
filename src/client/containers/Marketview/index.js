@@ -4,13 +4,12 @@
  *
  */
 
-import React, { Fragment } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { compose, bindActionCreators } from "redux";
-import makeSelectMarketview from "Reducers/marketview.js";
-import { actions } from "Reducers/marketview";
+import { actions, makeSelectMarketview } from "Reducers/marketview";
 
 import TopVideosChart from "Components/Charts/MarketView/TopVideos";
 import ProgressBar from "Components/ProgressBar";
