@@ -4,21 +4,20 @@
  *
  */
 
-import React from "react";
-import { NavLink, Link } from "react-router-dom";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { compose, bindActionCreators } from "redux";
-import { actions } from "Reducers/Quickview";
-import makeSelectQuickview from "Selectors/Quickview.js";
-import { toSlug } from "Utils/index";
-import VideoCard from "Components/VideoCard";
-import style from "./../style.scss";
+import React from "react"
+import { NavLink, Link } from "react-router-dom"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { createStructuredSelector } from "reselect"
+import { compose, bindActionCreators } from "redux"
+import { actions, makeSelectQuickview } from "Reducers/quickview"
+import { toSlug } from "Utils/index"
+import VideoCard from "Components/VideoCard"
+import style from "./../style.scss"
 
 export class Detail extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       selectedQuickviewId: null,
       platforms: [
@@ -30,32 +29,32 @@ export class Detail extends React.Component {
         "youtube",
         "pinterest"
       ]
-    };
+    }
   }
 
   componentDidMount() {
-    this.setState({ selectedQuickviewId: this.props.match.params.id });
-    this.props.getQuickviewPlatformSelectedRequest(this.props.match.params.id);
+    this.setState({ selectedQuickviewId: this.props.match.params.id })
+    this.props.getQuickviewPlatformSelectedRequest(this.props.match.params.id)
   }
 
   componentDidUpdate(prevProps) {
-    const { match: prevMatch } = prevProps;
-    const { match, getQuickviewPlatformSelectedRequest } = this.props;
+    const { match: prevMatch } = prevProps
+    const { match, getQuickviewPlatformSelectedRequest } = this.props
 
     if (prevMatch.params.id !== match.params.id) {
-      this.setState({ selectedQuickviewId: match.params.id });
-      getQuickviewPlatformSelectedRequest(match.params.id);
+      this.setState({ selectedQuickviewId: match.params.id })
+      getQuickviewPlatformSelectedRequest(match.params.id)
     }
   }
 
   render() {
-    const { platforms, selectedQuickviewId } = this.state;
+    const { platforms, selectedQuickviewId } = this.state
     const {
       quickview: {
         selectedPlatform: { id, platformsValues }
       }
-    } = this.props;
-    console.log(this.props);
+    } = this.props
+    console.log(this.props)
     return (
       <React.Fragment>
         <div className="grid-container col-12">
@@ -104,24 +103,24 @@ export class Detail extends React.Component {
           </div>
         </div>
       </React.Fragment>
-    );
+    )
   }
 }
 
 Detail.propTypes = {
   dispatch: PropTypes.func.isRequired,
   match: PropTypes.object
-};
+}
 
 const mapStateToProps = createStructuredSelector({
   quickview: makeSelectQuickview()
-});
+})
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps
-);
+)
 
-export default compose(withConnect)(Detail);
+export default compose(withConnect)(Detail)
