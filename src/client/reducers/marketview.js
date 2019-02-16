@@ -6,6 +6,7 @@
 
 
 import { fromJS } from 'immutable';
+import { createSelector } from 'reselect';
 
 
 
@@ -106,5 +107,10 @@ switch (action.type) {
     return state;
 }
 }
+
+export const selectMarketviewDomain = state => state.Marketview
+
+export const makeSelectMarketview = () =>
+  createSelector(selectMarketviewDomain, substate => substate.toJS());
 
 export default marketviewReducer;
