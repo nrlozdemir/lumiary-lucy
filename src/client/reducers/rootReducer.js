@@ -1,11 +1,11 @@
 import { combineReducers } from "redux";
 import { reducer as formReducer } from "redux-form";
 
-import Library from "./Library";
-import Quickview from "./Quickview";
+import Library from "./library";
+import Quickview from "./quickview";
 import Marketview from "./marketview";
-import Panoptic from "./Panoptic";
-import LibraryDetail from "./LibraryDetail";
+import Panoptic from "./panoptic";
+import LibraryDetail from "./libraryDetail";
 import app from "./app";
 
 const rootReducer = history =>

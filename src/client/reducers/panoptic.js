@@ -5,6 +5,7 @@
 */
 
 import { fromJS } from 'immutable';
+import { createSelector } from 'reselect';
 
 export const types = {
 	GET_DATA: "Panoptic/GET_DATA",
@@ -27,18 +28,26 @@ export const initialState = fromJS({
 const panopticReducer = (state = initialState, action) => {
 	switch (action.type) {
 		case types.GET_DATA:
-			return state.set("loading", fromJS(true));
+      return state.set("loading", fromJS(true));
+      
 		case types.GET_DATA_SUCCESS:
 			return state
 				.set("data", fromJS(action.payload))
-				.set("loading", fromJS(false));
+        .set("loading", fromJS(false));
+        
 		case types.GET_DATA_ERROR:
 			return state
 				.set("error", fromJS(action.error))
-				.set("loading", fromJS(false));
+        .set("loading", fromJS(false));
+        
 		default:
 			return state;
 	}
 };
+
+export const selectPanopticDomain = state => state.Panoptic
+
+export const makeSelectPanoptic = () =>
+  createSelector(selectPanopticDomain, substate => substate.toJS());
 
 export default panopticReducer;

@@ -1,8 +1,8 @@
 import { all } from 'redux-saga/effects';
 
-import library from "./Library";
-import panoptic from "./Panoptic";
-import libraryDetail from "./LibraryDetail";
+import library from "./library";
+import libraryDetail from "./libraryDetail";
+import panoptic from "./panoptic";
 import quickview from "./Quickview";
 import marketview from './marketview';
 

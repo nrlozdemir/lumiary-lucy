@@ -12,8 +12,7 @@ import { createStructuredSelector } from "reselect";
 import { compose, bindActionCreators } from "redux";
 import { Route, Switch } from "react-router-dom";
 
-import { actions } from "Reducers/Quickview";
-import makeSelectQuickview from "Selectors/Quickview.js";
+import { actions, makeSelectQuickview } from "Reducers/quickview";
 
 import Select from "Components/Form/Select";
 import Datepicker from "Components/Datepicker";
