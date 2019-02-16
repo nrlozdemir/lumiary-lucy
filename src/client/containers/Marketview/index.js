@@ -4,32 +4,38 @@
  *
  */
 
-import React from 'react';
-import { compose, bindActionCreators } from 'redux';
-import PropTypes from 'prop-types';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
-import { actions } from 'Reducers/Marketview';
+import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose, bindActionCreators } from 'redux'
+import  makeSelectMarketview  from 'Selectors/Marketview.js'
+import { actions } from 'Reducers/marketview'
 
-import ProgressBar from 'Components/ProgressBar';
-import makeSelectMarketview from 'Selectors/Marketview.js';
-import MarketViewSlider from 'Components/Sliders/Marketview';
+import TopVideosChart from 'Components/Charts/MarketView/TopVideos'
+import ProgressBar from 'Components/ProgressBar'
+import MarketViewSlider from 'Components/Sliders/Marketview'
+import TopSimilarProperties from 'Components/TopSimilarProperties'
 
-import style from './style.scss';
+import style from './style.scss'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Marketview extends React.Component {
   componentDidMount() {
-    this.props.getCompetitorVideosRequest();
+    this.props.getCompetitorTopVideosRequest()
+    this.props.getCompetitorVideosRequest()
+    this.props.getSimilarPropertiesRequest()
   }
 
   changeSelectedVideo(video) {
-    this.props.setSelectedVideo(video);
+    this.props.setSelectedVideo(video)
   }
 
   render() {
+    const { marketview: { competitorTopVideos, similarProperties } } = this.props
+
     if (!this.props.marketview.selectedVideo || this.props.marketview.loading) {
-      return <div>Loading</div>;
+      return <div>Loading</div>
     }
 
     return (
@@ -62,19 +68,21 @@ export class Marketview extends React.Component {
             ))}
           </div>
         </div>
+        {competitorTopVideos && <TopVideosChart chartData={competitorTopVideos}/>}
+        {similarProperties && <TopSimilarProperties data={similarProperties}/>}
       </React.Fragment>
-    );
+    )
   }
 }
 
-Marketview.propTypes = {};
+Marketview.propTypes = {}
 
 const mapStateToProps = createStructuredSelector({
   marketview: makeSelectMarketview()
-});
+})
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
-const withConnect = connect(mapStateToProps, mapDispatchToProps);
+const withConnect = connect(mapStateToProps, mapDispatchToProps)
 
-export default compose(withConnect)(Marketview);
+export default compose(withConnect)(Marketview)
