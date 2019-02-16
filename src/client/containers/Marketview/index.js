@@ -82,17 +82,17 @@ export class Marketview extends React.Component {
 	}
 }
 
-Marketview.propTypes = {}
+Marketview.propTypes = {};
 
 const mapStateToProps = createStructuredSelector({
 	marketview: makeSelectMarketview()
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
 
 const withConnect = connect(
 	mapStateToProps,
 	mapDispatchToProps
 )
 
-export default compose(withConnect)(Marketview)
+export default compose(withConnect)(Marketview);
