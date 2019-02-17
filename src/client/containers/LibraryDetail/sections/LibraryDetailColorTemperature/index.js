@@ -7,7 +7,6 @@ import { selectOptions } from "./options";
 import Select from 'Components/Form/Select'
 import ColorTemperatureChart from 'Components/ColorTemperatureChart'
 
-
 const LibraryDetailColorTemperature = ({colorTempData}) => {
 	return(
 		<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">

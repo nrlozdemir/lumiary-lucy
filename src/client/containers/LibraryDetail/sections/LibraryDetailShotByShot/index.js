@@ -14,6 +14,7 @@ class LibraryDetailShotByShot extends React.Component {
 		this.state = {
 			selectedImage: null,
 			sliderVal: 0,
+			maxValue: 1000,
 		}
 	}
 

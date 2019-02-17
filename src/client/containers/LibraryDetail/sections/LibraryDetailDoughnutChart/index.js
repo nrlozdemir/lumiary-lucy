@@ -1,8 +1,10 @@
 import React from 'react'
-import { Field } from "redux-form"
+import { Field, reduxForm } from "redux-form"
+import { compose } from 'redux'
 
-import style from './style.scss';
-import { selectOptions, lineChartOptions, doughnutOptions} from './options'
+import style from './style.scss'
+import { selectOptions, lineChartOptions } from './options'
+
 import Select from "Components/Form/Select"
 import LineChart from "Components/LineChart/Chart"
 import PointerCard from "Components/PointerCard"
@@ -10,7 +12,7 @@ import DoughnutChart from 'Components/Charts/LibraryDetail/Doughnut'
 
 class LibraryDetailDoughnutChart extends React.Component{
 	constructor(props){
-		super(props);
+		super(props)
 		this.state = {
 			isDoughnutVisible: true
 		}
@@ -19,12 +21,14 @@ class LibraryDetailDoughnutChart extends React.Component{
 	changeVisibilityDoughnut() {
 		this.setState(prevState => ({
 			isDoughnutVisible: !prevState.isDoughnutVisible
-		}));
+		}))
 	}
 
 	render(){
-		const { isDoughnutVisible } = this.state;
-		const { doughnutData, lineChartData } = this.props;
+		const { isDoughnutVisible } = this.state
+		const { doughnutData, lineChartData } = this.props
+		console.log('Props', this.props)
+		console.log('State', this.state)
 		return (
 			<div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
 				<div className={style.radialChartsContainer}>
@@ -45,7 +49,7 @@ class LibraryDetailDoughnutChart extends React.Component{
 							</div>
 							<div className={style.doughnutChartContainer}>
 								<DoughnutChart
-									data={chart.average}
+									doughnutData={chart.average}
 								/>
 								<p className="pt-32">
 											<span className={style.textBold}>
@@ -155,6 +159,8 @@ class LibraryDetailDoughnutChart extends React.Component{
 			</div>
 		)
 	}
-};
+}
 
-export default LibraryDetailDoughnutChart;
+export default compose(reduxForm({
+	form: 'libraryDetailDoughnutChart'
+}))(LibraryDetailDoughnutChart)

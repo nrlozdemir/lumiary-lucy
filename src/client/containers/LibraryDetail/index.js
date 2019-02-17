@@ -122,11 +122,6 @@ export class LibraryDetail extends React.Component {
 		}
 	}
 
-	onChangeSlider(e) {
-		this.setState({ sliderVal: e }, this.slide.current.scrollTo(e * 5, 0))
-	}
-
-
 	render() {
 		const {
 			libraryDetail: { libraryDetail }
@@ -146,8 +141,6 @@ export class LibraryDetail extends React.Component {
 		} = libraryDetail
 
 		const {
-			isDoughnutVisible,
-			isColorTempVisible,
 			barData_DatasetOptions,
 			radarData_DatasetOptions,
 			lineChartData_DatasetOptions
