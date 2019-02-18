@@ -27,13 +27,11 @@ class LibraryDetailDoughnutChart extends React.Component{
   render(){
     const { isDoughnutVisible } = this.state
     const { doughnutData, lineChartData } = this.props
-    console.log('Props', this.props)
-    console.log('State', this.state)
     return (
       <div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
         <div className={style.radialChartsContainer}>
           {isDoughnutVisible &&
-          doughnutData.map((chart, i) => (
+          doughnutData && doughnutData.map((chart, i) => (
             <div
               key={i}
               className={style.radialChart}
@@ -52,13 +50,13 @@ class LibraryDetailDoughnutChart extends React.Component{
                   doughnutData={chart.average}
                 />
                 <p className="pt-32">
-                      <span className={style.textBold}>
-                        {chart.average[chart.average.length - 1]}%
-                      </span>{" "}
-                  of your library is shot in{" "}
-                  <span className={style.textBold}>
-                        {chart.secondTitle}
-                      </span>
+									<span className={style.textBold}>
+										{chart.average[chart.average.length - 1]}%
+									</span>
+								of your library is shot in
+								<span className={style.textBold}>
+									{chart.secondTitle}
+								</span>
                 </p>
               </div>
             </div>
@@ -106,12 +104,12 @@ class LibraryDetailDoughnutChart extends React.Component{
                     </h1>
                     <div className={style.doughnutChartContainer}>
                       <DoughnutChart
-                        data={[[30, 12, 6, 52]]}
+                        doughnutData={[30, 12, 6, 52]}
                       />
                       <p className="pt-32">
                         <span className={style.duskRound} />
                         <span className={style.textBold}>{52}%</span> of your
-                        library is shot in{" "}
+                        library is shot in
                         <span className={style.textBold}>24fps</span>
                       </p>
                     </div>
@@ -132,12 +130,12 @@ class LibraryDetailDoughnutChart extends React.Component{
                     </h1>
                     <div className={style.doughnutChartContainer}>
                       <DoughnutChart
-                        data={[30, 12, 6, 52]}
+                        doughnutData={[30, 12, 6, 52]}
                       />
                       <p className="w-75 text-center pt-32">
                         <span className={style.purpleRound} />
                         <span className={style.textBold}>{52}%</span> of your
-                        library is shot in{" "}
+                        library is shot in
                         <span className={style.textBold}>24fps</span>
                       </p>
                     </div>
