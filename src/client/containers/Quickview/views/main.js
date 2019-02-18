@@ -4,12 +4,12 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
+import React from "react"
+import PropTypes from "prop-types"
 
-import VideoCard from "Components/VideoCard";
-import QuickviewCard from "Components/QuickviewCard";
-import style from "./../style.scss";
+import VideoCard from "Components/VideoCard"
+import QuickviewCard from "Components/QuickviewCard"
+import style from "./../style.scss"
 
 const Main = props => (
   <React.Fragment>
@@ -47,7 +47,7 @@ const Main = props => (
       </div>
     </div>
   </React.Fragment>
-);
+)
 
 Main.propTypes = {
   id: PropTypes.number,
@@ -55,6 +55,6 @@ Main.propTypes = {
   cardName: PropTypes.string,
   difference: PropTypes.number,
   videos: PropTypes.array
-};
+}
 
-export default Main;
+export default Main
