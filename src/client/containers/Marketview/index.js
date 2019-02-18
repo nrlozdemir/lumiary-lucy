@@ -16,54 +16,54 @@ import TotalCompetitorViewsChart from 'Components/TotalCompetitorViewsChart';
 
 /* eslint-disable react/prefer-stateless-function */
 export class Marketview extends React.Component {
-	render() {
-		return (
-			<div className="grid-container col-12">
-				<div className={style.alignTabs}>
-					<Link to="/marketview/platform" className={style.tab}>
-						Platform
+  render() {
+    return (
+      <div className="grid-container col-12">
+        <div className={style.alignTabs}>
+          <Link to="/marketview/platform" className={style.tab}>
+            Platform
           </Link>
-					<Link to="/marketview/competitor" className={style.tab}>
-						Competitor
+          <Link to="/marketview/competitor" className={style.tab}>
+            Competitor
           </Link>
-					<Link to="/marketview/time" className={style.tab}>
-						Time
+          <Link to="/marketview/time" className={style.tab}>
+            Time
           </Link>
-				</div>
-				<div className="grid-collapse">
-					<div className="col-4 mb-48">
-						<ColorCard />
-					</div>
+        </div>
+        <div className="grid-collapse">
+          <div className="col-4 mb-48">
+            <ColorCard />
+          </div>
 
-					<div className="col-4 mb-48">
-						<PacingCard />
-					</div>
+          <div className="col-4 mb-48">
+            <PacingCard />
+          </div>
 
-					<div className="col-4 mb-48">
-						<FormatCard />
-					</div>
-				</div>
+          <div className="col-4 mb-48">
+            <FormatCard />
+          </div>
+        </div>
 
-				<div className="grid-collapse">
-					<TotalViewsChart />
-					<TotalCompetitorViewsChart />
-				</div>
-			</div>
-		);
-	}
+        <div className="grid-collapse">
+          <TotalViewsChart />
+          <TotalCompetitorViewsChart />
+        </div>
+      </div>
+    );
+  }
 }
 
 Marketview.propTypes = {}
 
 const mapStateToProps = createStructuredSelector({
-	marketview: makeSelectMarketview()
+  marketview: makeSelectMarketview()
 })
 
 const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )
 
 export default compose(withConnect)(Marketview)

@@ -21,8 +21,8 @@ import { actions, makeSelectPanoptic } from 'Reducers/panoptic'
 import VerticalStackedChart from "./verticalStackedChart"
 
 import {
-	selectOptions,
-	platforms,
+  selectOptions,
+  platforms,
 } from "./summaryData"
 import style from "./style.scss"
 import { barDataOptions } from "./options"
@@ -30,164 +30,164 @@ import { barDataOptions } from "./options"
 
 /* eslint-disable react/prefer-stateless-function */
 export class Panoptic extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			isColorTempVisible: true,
-			isVerticalStackedChartVisible: true,
-			dateRange: {
-				selection: {
-					startDate: new Date(),
-					endDate: new Date(),
-					key: "selection"
-				}
-			},
-			startDateRange: {
-				selection: {
-					startDate: new Date(),
-					endDate: new Date(),
-					key: "selection"
-				}
-			},
-			endDateRange: {
-				selection: {
-					startDate: new Date(),
-					endDate: new Date(),
-					key: "selection"
-				}
-			},
-		}
-	}
+  constructor(props) {
+    super(props)
+    this.state = {
+      isColorTempVisible: true,
+      isVerticalStackedChartVisible: true,
+      dateRange: {
+        selection: {
+          startDate: new Date(),
+          endDate: new Date(),
+          key: "selection"
+        }
+      },
+      startDateRange: {
+        selection: {
+          startDate: new Date(),
+          endDate: new Date(),
+          key: "selection"
+        }
+      },
+      endDateRange: {
+        selection: {
+          startDate: new Date(),
+          endDate: new Date(),
+          key: "selection"
+        }
+      },
+    }
+  }
 
-	componentDidMount() {
-		this.props.getData()
-	}
+  componentDidMount() {
+    this.props.getData()
+  }
 
-	handleChange = (selectedOption, name) => {
-		this.setState({ [name]: selectedOption })
-	}
+  handleChange = (selectedOption, name) => {
+    this.setState({ [name]: selectedOption })
+  }
 
-	render() {
-		const {
-			isColorTempVisible,
-			isVerticalStackedChartVisible,
-		} = this.state
+  render() {
+    const {
+      isColorTempVisible,
+      isVerticalStackedChartVisible,
+    } = this.state
 
-		const { panoptic: { data: {
-			colorTempData,
-			videoReleasesData,
-			verticalStackedChartData,
-			pacingChartData,
-			compareSharesData
-		}
-		} } = this.props
+    const { panoptic: { data: {
+      colorTempData,
+      videoReleasesData,
+      verticalStackedChartData,
+      pacingChartData,
+      compareSharesData
+    }
+    } } = this.props
 
-		return (
-			<React.Fragment>
-				{videoReleasesData && (
-					<PanopticBarChart data={videoReleasesData} />
-				)}
-				<div className="col-12 shadow-1 mt-72 bg-dark-grey-blue">
-					<div className={style.radialChartsContainer}>
-						<div className={style.temperatureHeader}>
-							<div>
-								<h2>Color Temperature / Sentiment Comparison</h2>
-							</div>
-							<div className={style.inputWrapper}>
-								<form className={style.form}>
-									<Field
-										component={Select}
-										options={selectOptions}
-										id="NumberOfScenes"
-										name="NumberOfScenes"
-										placeholder="Select One"
-										label="Number of Scenes"
-										className={style.formWrapper}
-									/>
-									<Field
-										component={Select}
-										options={selectOptions}
-										id="NumberOfScenes"
-										name="NumberOfScenes"
-										placeholder="Select One"
-										label="Number of Scenes"
-										className={style.formWrapper}
-									/>
-								</form>
-							</div>
-						</div>
-						<div className={style.temperatureContentContainer}>
-							{
-								isColorTempVisible && colorTempData &&
-								<ColorTemperatureChart
-									borderLess
-									verticalText
-									colorTempData={colorTempData}
-								/>
-							}
-						</div>
-						<div className={style.infoWrapperContainer}>
-							<div className={style.infoWrapper}>
-								<span className={style.infoText}>Views</span>
-							</div>
-							<div className={style.infoWrapper}>
-								<span className={style.infoText}>Likes</span>
-							</div>
-							<div className={style.infoWrapper}>
-								<span className={style.infoText}>Comment</span>
-							</div>
-							<div className={style.infoWrapper}>
-								<span className={style.infoText}>Shares</span>
-							</div>
+    return (
+      <React.Fragment>
+        {videoReleasesData && (
+          <PanopticBarChart data={videoReleasesData} />
+        )}
+        <div className="col-12 shadow-1 mt-72 bg-dark-grey-blue">
+          <div className={style.radialChartsContainer}>
+            <div className={style.temperatureHeader}>
+              <div>
+                <h2>Color Temperature / Sentiment Comparison</h2>
+              </div>
+              <div className={style.inputWrapper}>
+                <form className={style.form}>
+                  <Field
+                    component={Select}
+                    options={selectOptions}
+                    id="NumberOfScenes"
+                    name="NumberOfScenes"
+                    placeholder="Select One"
+                    label="Number of Scenes"
+                    className={style.formWrapper}
+                  />
+                  <Field
+                    component={Select}
+                    options={selectOptions}
+                    id="NumberOfScenes"
+                    name="NumberOfScenes"
+                    placeholder="Select One"
+                    label="Number of Scenes"
+                    className={style.formWrapper}
+                  />
+                </form>
+              </div>
+            </div>
+            <div className={style.temperatureContentContainer}>
+              {
+                isColorTempVisible && colorTempData &&
+                <ColorTemperatureChart
+                  borderLess
+                  verticalText
+                  colorTempData={colorTempData}
+                />
+              }
+            </div>
+            <div className={style.infoWrapperContainer}>
+              <div className={style.infoWrapper}>
+                <span className={style.infoText}>Views</span>
+              </div>
+              <div className={style.infoWrapper}>
+                <span className={style.infoText}>Likes</span>
+              </div>
+              <div className={style.infoWrapper}>
+                <span className={style.infoText}>Comment</span>
+              </div>
+              <div className={style.infoWrapper}>
+                <span className={style.infoText}>Shares</span>
+              </div>
 
-						</div>
-						<div className="d-flex align-items-center justify-content-center ph-48 mv-48">
-							{
-								platforms && platforms.map((platform, index) => (
-									<div key={index} className="d-flex align-items-center mr-32">
-										<span className={style.round} style={{ backgroundColor: `${platform.color}` }}></span>
-										<p className={style.platformName}>{platform.name}</p>
-									</div>
-								))
-							}
-						</div>
-					</div>
-				</div>
-				{
-					isVerticalStackedChartVisible && verticalStackedChartData && (
-						<VerticalStackedChart data={verticalStackedChartData} />
-					)
-				}
-				{pacingChartData && (
-					<PacingCard barData={pacingChartData} barDataOptions={barDataOptions} />
-				)}
-				{compareSharesData && (
-					<CompareShares radarData={compareSharesData} />
-				)}
-			</React.Fragment>
-		)
-	}
+            </div>
+            <div className="d-flex align-items-center justify-content-center ph-48 mv-48">
+              {
+                platforms && platforms.map((platform, index) => (
+                  <div key={index} className="d-flex align-items-center mr-32">
+                    <span className={style.round} style={{ backgroundColor: `${platform.color}` }}></span>
+                    <p className={style.platformName}>{platform.name}</p>
+                  </div>
+                ))
+              }
+            </div>
+          </div>
+        </div>
+        {
+          isVerticalStackedChartVisible && verticalStackedChartData && (
+            <VerticalStackedChart data={verticalStackedChartData} />
+          )
+        }
+        {pacingChartData && (
+          <PacingCard barData={pacingChartData} barDataOptions={barDataOptions} />
+        )}
+        {compareSharesData && (
+          <CompareShares radarData={compareSharesData} />
+        )}
+      </React.Fragment>
+    )
+  }
 }
 
 Panoptic.propTypes = {
-	dispatch: PropTypes.func.isRequired
+  dispatch: PropTypes.func.isRequired
 }
 
 const mapStateToProps = createStructuredSelector({
-	panoptic: makeSelectPanoptic()
+  panoptic: makeSelectPanoptic()
 })
 
 function mapDispatchToProps(dispatch) {
-	return {
-		getData: () => dispatch(actions.getData())
-	}
+  return {
+    getData: () => dispatch(actions.getData())
+  }
 }
 
 const withConnect = connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )
 
 export default compose(reduxForm({
-	form: 'panoptic'
+  form: 'panoptic'
 }), withConnect)(Panoptic)
