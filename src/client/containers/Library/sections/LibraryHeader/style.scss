@@ -1,0 +1,18 @@
+.headerContainer {
+	display: flex;
+	margin-top: 72px;
+	div {
+		flex: 1;
+	}
+	&:last-child div {
+		flex: 1;
+		margin-right: auto;
+	}
+	.librarySearchInput {
+		background: url("../../../../../assets/search.png");
+		background-position: 10px 10px;
+		background-repeat: no-repeat;
+		background-size: 17px 17px;
+		padding-left: 39px;
+	}
+}
