@@ -4,44 +4,44 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import moment from "moment";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { compose, bindActionCreators } from "redux";
-import { Route, Switch } from "react-router-dom";
+import React from "react"
+import PropTypes from "prop-types"
+import moment from "moment"
+import { connect } from "react-redux"
+import { createStructuredSelector } from "reselect"
+import { compose, bindActionCreators } from "redux"
+import { Route, Switch } from "react-router-dom"
 
-import { actions, makeSelectQuickview } from "Reducers/quickview";
+import { actions, makeSelectQuickview } from "Reducers/quickview"
 
-import Select from "Components/Form/Select";
-import Datepicker from "Components/Datepicker";
+import Select from "Components/Form/Select"
+import Datepicker from "Components/Datepicker"
 
-import style from "./style.scss";
-import Main from "./views/main";
-import Detail from "./views/detail";
+import style from "./style.scss"
+import Main from "./views/main"
+import Detail from "./views/detail"
 
 export class Quickview extends React.Component {
 	constructor(props) {
-		super(props);
-		this.state = {};
+		super(props)
+		this.state = {}
 	}
 
 	componentDidMount() {
-		const { getQuickviewItemsRequest } = this.props;
-		getQuickviewItemsRequest();
+		const { getQuickviewItemsRequest } = this.props
+		getQuickviewItemsRequest()
 	}
 
 	handleChange = (selectedOption, name) => {
-		this.setState({ [name]: selectedOption });
-	};
+		this.setState({ [name]: selectedOption })
+	}
 
 	render() {
-		const { selectViews, selectDate } = this.state;
+		const { selectViews, selectDate } = this.state
 
 		const {
 			quickview: { quickviewItems: quickviewItems }
-		} = this.props;
+		} = this.props
 
 		return (
 			<React.Fragment>
@@ -124,23 +124,23 @@ export class Quickview extends React.Component {
 					</Switch>
 				</div>
 			</React.Fragment>
-		);
+		)
 	}
 }
 
 Quickview.propTypes = {
 	dispatch: PropTypes.func
-};
+}
 
 const mapStateToProps = createStructuredSelector({
 	quickview: makeSelectQuickview()
-});
+})
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch);
+const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
 	mapStateToProps,
 	mapDispatchToProps
-);
+)
 
-export default compose(withConnect)(Quickview);
+export default compose(withConnect)(Quickview)
