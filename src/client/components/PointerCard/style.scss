@@ -23,9 +23,10 @@
 		}
 	}
 	.pointerContainer {
+		padding-top: 40px;
 		.pointerWrapper {
 			width: 180px;
-			margin: 0 auto;
+			margin: 35px auto;
 			.svgWrapper{
 				display: flex;
 				flex-direction: column;

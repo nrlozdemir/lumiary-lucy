@@ -38,7 +38,6 @@ const Sidebar = props => {
 						<Select
 							id="OrderedBy"
 							name="OrderedBy"
-							customClass={style.customSidebarInput}
 							placeholder="Select One"
 							options={brandOptions}
 							label="Ordered By"
