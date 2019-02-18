@@ -43,7 +43,7 @@ const libraryDetailReducer = (state = initialState, action) => {
   }
 };
 
-export const selectLibraryDetailDomain = state => state.LibraryDetail
+export const selectLibraryDetailDomain = state => state.LibraryDetail;
 
 export const makeSelectLibraryDetail = () =>
   createSelector(selectLibraryDetailDomain, substate => substate.toJS());
