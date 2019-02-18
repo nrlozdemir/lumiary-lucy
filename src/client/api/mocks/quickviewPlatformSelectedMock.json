@@ -14,36 +14,45 @@
 		},
 		"infos": [
 			{
-				"title": "title",
-				"value": "value",
-				"difference": 60
+				"title": "Duration",
+				"value": "0:25s",
+				"difference": 85
 			},
 			{
-				"title": "title",
-				"value": "value",
-				"difference": 60
+				"title": "Dominant Color",
+				"value": "Blue",
+				"difference": 67
 			},
 			{
-				"title": "title",
-				"value": "value",
-				"difference": 60
+				"title": "Pace",
+				"value": "Fast",
+				"difference": 50
 			},
 			{
-				"title": "title",
-				"value": "value",
-				"difference": 60
+				"title": "Predominant Talent Age",
+				"value": "14",
+				"difference": 45
 			},
 			{
-				"title": "title",
-				"value": "value"
+				"title": "Predominant Talent Gender",
+				"value": "Male",
+				"difference": 40
 			},
 			{
-				"title": "title",
-				"value": "value"
+				"title": "Aspect Ratio",
+				"value": "16:9"
 			},
 			{
-				"title": "title",
-				"value": "value"
+				"title": "Resolution",
+				"value": "1080p"
+			},
+			{
+				"title": "Frame Rate",
+				"value": "24fps"
+			},
+			{
+				"title": "Format",
+				"value": "Slow Motion"
 			}
 		]
 	},
@@ -62,32 +71,40 @@
 		},
 		"infos": [
 			{
-				"title": "title",
-				"value": "value"
+				"title": "Duration",
+				"value": "3:15s"
 			},
 			{
-				"title": "title",
-				"value": "value"
+				"title": "Dominant Color",
+				"value": "Green"
 			},
 			{
-				"title": "title",
-				"value": "value"
+				"title": "Pace",
+				"value": "Slow"
 			},
 			{
-				"title": "title",
-				"value": "value"
+				"title": "Predominant Talent Age",
+				"value": "20"
 			},
 			{
-				"title": "title",
-				"value": "value"
+				"title": "Predominant Talent Gender",
+				"value": "Female"
 			},
 			{
-				"title": "title",
-				"value": "value"
+				"title": "Aspect Ratio",
+				"value": "1:1"
 			},
 			{
-				"title": "title",
-				"value": "value"
+				"title": "Resolution",
+				"value": "720p"
+			},
+			{
+				"title": "Frame Rate",
+				"value": "30fps"
+			},
+			{
+				"title": "Format",
+				"value": "Live Action"
 			}
 		]
 	}

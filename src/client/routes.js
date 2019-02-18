@@ -54,6 +54,10 @@ class Routes extends React.Component {
           render={props => <Layout {...props} component={Quickview} />}
         />
         <Route
+          path="/quickview/:id/:platform"
+          render={props => <Layout {...props} component={Quickview} />}
+        />
+        <Route
           path="/panoptic"
           exact
           render={props => <Layout {...props} component={Panoptic} />}
