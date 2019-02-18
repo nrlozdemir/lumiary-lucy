@@ -77,6 +77,10 @@ $custom-col-12: (
 	columns: 12,
 	gutter: 40px
 );
+$custom-col-12-gutter-20: (
+	columns: 12,
+	gutter: 20px
+);
 $custom-col-5: (
 	columns: 12,
 	gutter: 0px
@@ -138,4 +142,7 @@ $custom-col-7: (
 }
 .col-12 {
 	@include grid-column(12, $custom-col-12);
+}
+.col-12-gutter-20 {
+	@include grid-column(12, $custom-col-12-gutter-20);
 }
