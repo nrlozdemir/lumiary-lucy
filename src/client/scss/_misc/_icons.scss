@@ -23,27 +23,28 @@
 }
 
 .qf-iconFacebook:before {
-  content: "\e97d";
+  content: "\e91f";
 }
 
 .qf-iconInstagram:before {
-  content: "\e984";
+  content: "\e91e";
 }
 
 .qf-iconSnapchat:before {
-  content: "\e985";
+  /*not supported - showing fb icon instead*/
+  content: "\e91f";
 }
 
 .qf-iconTwitter:before {
-  content: "\e986";
+  content: "\e91d";
 }
 
 .qf-iconPinterest:before {
-  content: "\e989";
+  content: "\e91b";
 }
 
 .qf-iconYoutube:before {
-  content: "\e98a";
+  content: "\e91c";
 }
 
 .qf-iconAdd:before {
@@ -107,4 +108,20 @@
 
 .qf-iconFemale:before {
   content: "\e978";
+}
+
+.qf-stopmotion:before {
+  content: "\e925";
+}
+
+.qf-animation:before {
+  content: "\e926";
+}
+
+.qf-cinemagraph:before {
+  content: "\e927";
+}
+
+.qf-liveaction:before {
+  content: "\e928";
 }

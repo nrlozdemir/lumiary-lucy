@@ -23,7 +23,7 @@ class ColorCard extends Component {
 				<div className={style.formatItems}>
 					<div className={style.formatItem}>
 						<div className={style.formatItemIcon}>
-							<span className="qf-iconRight-Arrow" />
+							<span className="qf-stopmotion" />
 						</div>
 						<div className={style.formatItemText}>
 							<span>36</span>
@@ -34,7 +34,7 @@ class ColorCard extends Component {
 
 					<div className={style.formatItem}>
 						<div className={style.formatItemIcon}>
-							<span className="qf-iconRight-Arrow" />
+							<span className="qf-animation" />
 						</div>
 						<div className={style.formatItemText}>
 							<span>12</span>
@@ -45,7 +45,7 @@ class ColorCard extends Component {
 
 					<div className={style.formatItem}>
 						<div className={style.formatItemIcon}>
-							<span className="qf-iconRight-Arrow" />
+							<span className="qf-cinemagraph" />
 						</div>
 						<div className={style.formatItemText}>
 							<span>28</span>
@@ -56,7 +56,7 @@ class ColorCard extends Component {
 
 					<div className={style.formatItem}>
 						<div className={style.formatItemIcon}>
-							<span className="qf-iconRight-Arrow" />
+							<span className="qf-liveaction" />
 						</div>
 						<div className={style.formatItemText}>
 							<span>10</span>

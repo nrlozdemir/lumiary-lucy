@@ -5,7 +5,8 @@
 	position: absolute;
 	right: 0;
 	top: 100%;
-	z-index: 3;
+	z-index: 15;
+	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
 
 	background-color: $color-dusk;
 
@@ -28,6 +29,11 @@
 
 	.rdrDateDisplayWrapper {
 		display: none;
+	}
+
+	&.align-left {
+		left: 0;
+		right: auto;
 	}
 }
 

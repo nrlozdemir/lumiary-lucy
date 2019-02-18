@@ -22,18 +22,21 @@ class ColorCard extends Component {
 						legend: {
 							display: false
 						},
+						plugins: {
+							datalabels: false
+						},
 						layout: {
 							padding: 0
 						}
 					}}
 					data={{
-						labels: [ 'Barstool Sports', 'SB Nation', 'ESPN', 'Scout Media', 'Fansided' ],
+						labels: ['Barstool Sports', 'SB Nation', 'ESPN', 'Scout Media', 'Fansided'],
 						datasets: [
 							{
-								data: [ 50, 20, 15, 10, 5 ],
+								data: [50, 20, 15, 10, 5],
 								borderColor: '#303a5d',
-								backgroundColor: [ '#51adc0', '#8567f0', '#ff556f', '#acb0be', '#5a6386' ],
-								hoverBackgroundColor: [ '#51adc0', '#8567f0', '#ff556f', '#acb0be', '#5a6386' ]
+								backgroundColor: ['#51adc0', '#8567f0', '#ff556f', '#acb0be', '#5a6386'],
+								hoverBackgroundColor: ['#51adc0', '#8567f0', '#ff556f', '#acb0be', '#5a6386']
 							}
 						]
 					}}

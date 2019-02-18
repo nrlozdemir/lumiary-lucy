@@ -8,10 +8,10 @@ import { barDurationData, barDurationOptions } from './options';
 
 class TotalCompetitorViewsChart extends Component {
 	render() {
-		const cardContainer = classnames('shadow-1 col-12-gutter-20 mb-48', style.cardContainer);
+		const chartContainer = classnames('shadow-1 col-12-gutter-20 mb-48', style.chartContainer);
 
 		return (
-			<div className={cardContainer}>
+			<div className={chartContainer}>
 				<div className={style.cardTitle}>
 					<span>Total Competitor Views By Duration</span>
 					<div className={classnames(style.colorListHorizontal, style.colorList)}>
