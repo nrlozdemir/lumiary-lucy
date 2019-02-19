@@ -18,10 +18,10 @@ const ColorTemperatureChart = ({colorTempData, borderLess, verticalText}) =>
     colorTempData && colorTempData.map((temp, index) => (
         <div key={index} className={wrapper}>
           <div className={style.temperatureContent}>
-            <p className={style.textTop}>Happy</p>
-            <p className={rightText}>Warm</p>
-            <p className={style.textBottom}>Sad</p>
-            <p className={leftText}>Cool</p>
+            <p className={style.textTop}>{temp.topText ? temp.topText : "Happy"}</p>
+            <p className={rightText}>{temp.topText ? temp.rightText : "Warm"}</p>
+            <p className={style.textBottom}>{temp.topText ? temp.bottomText : "Sad"}</p>
+            <p className={leftText}>{temp.topText ? temp.leftText : "Cool"}</p>
             <div className={style.verticalLine}></div>
             <div className={style.horizontalLine}></div>
             {

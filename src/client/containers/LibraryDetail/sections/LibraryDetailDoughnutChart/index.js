@@ -141,7 +141,7 @@ class LibraryDetailDoughnutChart extends React.Component{
                     </div>
                   </div>
                 </div>
-                <div className="w-100 pt-48 pb-48">
+                <div className="w-100 mt-48 mb-48">
                   <LineChart
                     backgroundColor="#242b49"
                     dataSet={lineChartData}

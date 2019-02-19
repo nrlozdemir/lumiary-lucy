@@ -16,15 +16,15 @@ const LibraryDetailColorTemperature = ({colorTempData}) => {
             <h2>Color Temperature / Sentiment Comparison</h2>
           </div>
           <div className="d-flex align-items-center justify-space-between">
-            <div className="d-flex align-items-center mr-8">
+            <div className="d-flex align-items-center mr-32">
               <span className={style.redRound}></span>
               <p>This Video</p>
             </div>
-            <div className="d-flex align-items-center mr-8">
+            <div className="d-flex align-items-center mr-32">
               <span className={style.duskRound}></span>
               <p>Library Average</p>
             </div>
-            <div className="d-flex align-items-center mr-8">
+            <div className="d-flex align-items-center mr-32">
               <span className={style.purpleRound}></span>
               <p>Industry</p>
             </div>
