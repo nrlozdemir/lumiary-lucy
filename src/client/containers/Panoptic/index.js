@@ -4,35 +4,34 @@
  *
  */
 
-import React from "react";
-import PropTypes from "prop-types";
-import { connect } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { compose } from "redux";
-import { Field, reduxForm } from 'redux-form';
+import React from "react"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { createStructuredSelector } from "reselect"
+import { compose } from "redux"
+import { Field, reduxForm } from 'redux-form'
 
-import PanopticBarChart from 'Components/PanopticBarChart';
-import CompareShares from "Components/CompareShares";
-import Select from 'Components/Form/Select';
-import ColorTemperatureChart from 'Components/ColorTemperatureChart';
-import PacingCard from "Components/PacingCard";
-import makeSelectPanoptic from "Selectors/Panoptic.js";
-import { actions } from 'Reducers/Panoptic';
+import PanopticBarChart from 'Components/PanopticBarChart'
+import CompareShares from "Components/CompareShares"
+import Select from 'Components/Form/Select'
+import ColorTemperatureChart from 'Components/ColorTemperatureChart'
+import PacingCard from "Components/PacingCard"
+import { actions, makeSelectPanoptic } from 'Reducers/panoptic'
 
-import VerticalStackedChart from "./verticalStackedChart";
+import VerticalStackedChart from "./verticalStackedChart"
 
 import {
-selectOptions,
-platforms,
-} from "./summaryData";
-import style from "./style.scss";
-import { barDataOptions } from "./options";
+  selectOptions,
+  platforms,
+} from "./summaryData"
+import style from "./style.scss"
+import { barDataOptions } from "./options"
 
 
 /* eslint-disable react/prefer-stateless-function */
 export class Panoptic extends React.Component {
-  constructor(props){
-    super(props);
+  constructor(props) {
+    super(props)
     this.state = {
       isColorTempVisible: true,
       isVerticalStackedChartVisible: true,
@@ -61,32 +60,32 @@ export class Panoptic extends React.Component {
   }
 
   componentDidMount() {
-  	this.props.getData()
-	}
+    this.props.getData()
+  }
 
-	handleChange = (selectedOption, name) => {
-    this.setState({ [name]: selectedOption });
-  };
+  handleChange = (selectedOption, name) => {
+    this.setState({ [name]: selectedOption })
+  }
 
   render() {
     const {
       isColorTempVisible,
       isVerticalStackedChartVisible,
-    } = this.state;
+    } = this.state
 
-    const { panoptic: { data: { 
-      colorTempData, 
-      videoReleasesData, 
+    const { panoptic: { data: {
+      colorTempData,
+      videoReleasesData,
       verticalStackedChartData,
       pacingChartData,
       compareSharesData
-    } 
-    }} = this.props;
+    }
+    } } = this.props
 
     return (
       <React.Fragment>
         {videoReleasesData && (
-          <PanopticBarChart data={videoReleasesData}/>
+          <PanopticBarChart data={videoReleasesData} />
         )}
         <div className="col-12 shadow-1 mt-72 bg-dark-grey-blue">
           <div className={style.radialChartsContainer}>
@@ -156,39 +155,39 @@ export class Panoptic extends React.Component {
         </div>
         {
           isVerticalStackedChartVisible && verticalStackedChartData && (
-            <VerticalStackedChart data={verticalStackedChartData}/>
+            <VerticalStackedChart data={verticalStackedChartData} />
           )
         }
         {pacingChartData && (
           <PacingCard barData={pacingChartData} barDataOptions={barDataOptions} />
         )}
         {compareSharesData && (
-          <CompareShares radarData={compareSharesData}/>
+          <CompareShares radarData={compareSharesData} />
         )}
       </React.Fragment>
-    );
+    )
   }
 }
 
 Panoptic.propTypes = {
   dispatch: PropTypes.func.isRequired
-};
+}
 
 const mapStateToProps = createStructuredSelector({
   panoptic: makeSelectPanoptic()
-});
+})
 
 function mapDispatchToProps(dispatch) {
   return {
     getData: () => dispatch(actions.getData())
-  };
+  }
 }
 
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps
-);
+)
 
 export default compose(reduxForm({
   form: 'panoptic'
-}),withConnect)(Panoptic);
+}), withConnect)(Panoptic)

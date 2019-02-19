@@ -11,6 +11,23 @@
   }
 }
 
+.dotItem {
+	display: inline-flex;
+	align-items: center;
+	margin-right: 30px;
+	color: $color-white;
+	font-size: 14px;
+	font-family: $font-family-ClanOTNews;
+
+	span {
+		width: 16px;
+		height: 16px;
+		display: inline-block;
+		margin-right: 8px;
+		border-radius: 50%;
+	}
+}
+
 .quickCardTitle {
   display: flex;
   font-weight: normal;

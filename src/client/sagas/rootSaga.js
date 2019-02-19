@@ -1,9 +1,9 @@
 import { all } from 'redux-saga/effects';
 
-import library from "./Library";
-import panoptic from "./Panoptic";
-import libraryDetail from "./LibraryDetail";
-import quickview from "./Quickview";
+import library from "./library";
+import libraryDetail from "./libraryDetail";
+import panoptic from "./panoptic";
+import quickview from "./quickview";
 import marketview from './marketview';
 
 export default function* rootSaga() {

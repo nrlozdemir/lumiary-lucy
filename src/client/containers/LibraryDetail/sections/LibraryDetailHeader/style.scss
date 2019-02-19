@@ -1,0 +1,39 @@
+.header {
+  width: 100%;
+  background: $color-dark-grey-blue;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+  div {
+    line-height: 80px;
+    font-size: 14px;
+    font-family: $font-family-ClanOT;
+    a {
+      color: $color-white;
+      text-decoration: none;
+      span {
+        background-color: $color-dark-five;
+        border-radius: 20px;
+        padding: 8px 11px;
+        border: 2px solid $color-cool-blue;
+        margin-right: 20px;
+      }
+    }
+  }
+  .iconWrapper{
+    height: 24px;
+    width: 24px;
+    background-color: #fff;
+    border-radius: 100%;
+    margin-left: 24px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+
+    i{
+      color: $color-dark-five;
+      font-size: 16px;
+      padding-left: 0;
+    }
+  }
+}

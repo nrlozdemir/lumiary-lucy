@@ -10,7 +10,7 @@ import { connect } from "react-redux";
 import { createStructuredSelector } from "reselect";
 import { compose } from "redux";
 import style from "./style.scss";
-import makeSelectLibraryDetail from "Selectors/LibraryDetail.js";
+import { makeSelectLibraryDetail } from "Reducers/libraryDetail";
 import { Link, Redirect } from "react-router-dom";
 
 import SvgLoading from 'Components/SvgLoading';

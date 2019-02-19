@@ -1,32 +1,22 @@
-.headerContainer {
-	display: flex;
-	margin-top: 72px;
-	div {
-		flex: 1;
-	}
-	&:last-child div {
-		flex: 1;
-		margin-right: auto;
-	}
-}
 
 body {
 	color: #fff;
 }
 
 .sidebar {
-	-moz-transition: all 0.5s ease;
-	-o-transition: all 0.5s ease;
-	-webkit-transition: all 0.5s ease;
+	-moz-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	-webkit-transition: all 0.4s ease;
+	transition: all 0.4s ease;
 	background: $color-dusk;
+	box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.5);
 	height: 100%;
 	position: fixed;
 	overflow-x: hidden;
 	overflow-y: auto;
-	transition: all 0.5s ease;
-	width: 0;
+	width: 440px;
 	z-index: 1000;
-	right: 0;
+	right: -442px; // 2px for shadow
 	top: 0;
 }
 
@@ -47,7 +37,7 @@ body {
 }
 
 .sidebarVisible {
-	width: 440px;
+	right: 0;
 }
 
 .overlay {
@@ -59,7 +49,7 @@ body {
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: rgba(0, 0, 0, 0.4);
+	background-color: rgba($color-dark-five, .4);
 	z-index: 1;
 }
 
@@ -78,12 +68,4 @@ body {
 	font-size: 14px;
 	font-weight: bold;
 	color: $color-white;
-}
-
-.librarySearchInput {
-	background: url("../../../assets/search.png");
-	background-position: 10px 10px;
-	background-repeat: no-repeat;
-	background-size: 17px 17px;
-	padding-left: 39px;
 }
