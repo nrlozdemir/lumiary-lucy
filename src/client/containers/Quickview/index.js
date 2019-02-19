@@ -18,8 +18,17 @@ import Select from "Components/Form/Select"
 import Datepicker from "Components/Datepicker"
 
 import style from "./style.scss"
-import Main from "./views/main"
-import Detail from "./views/detail"
+
+import RouterLoading from "Components/RouterLoading"
+import DynamicImport from "Containers/DynamicImport"
+
+const Detail = (props) => (
+  <DynamicImport removeNavbar load={() => import('./views/detail')}>
+    {(Component) => Component === null
+      ? <RouterLoading/>
+      : <Component {...props} />}
+  </DynamicImport>
+)
 
 export class Quickview extends React.Component {
 	constructor(props) {
@@ -42,6 +51,14 @@ export class Quickview extends React.Component {
 		const {
 			quickview: { quickviewItems: quickviewItems }
 		} = this.props
+
+		const Main = (props) => (
+			<DynamicImport removeNavbar load={() => import('./views/main')}>
+				{(Component) => Component === null
+					? <RouterLoading/>
+					: <Component {...props} quickviewItems={quickviewItems} />}
+			</DynamicImport>
+		)
 
 		return (
 			<React.Fragment>
@@ -118,9 +135,12 @@ export class Quickview extends React.Component {
 						<Route
 							path="/quickview"
 							exact
-							render={() => <Main quickviewItems={quickviewItems} />}
+							component={Main}
 						/>
-						<Route path="/quickview/:id/:platform" component={Detail} />
+						<Route
+							path="/quickview/:id/:platform"
+							component={Detail}
+						/>
 					</Switch>
 				</div>
 			</React.Fragment>
