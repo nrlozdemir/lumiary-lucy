@@ -5,14 +5,18 @@ import cn from 'classnames';
 const Index = ({ data }) => {
   return (
     <div className={style.radialChart}>
-      <div className={cn(style.radialChartRadius, "font-secondary-second font-size-14 text-center text-light")}>
-        <span className={style.topTitle}>{data.topTitle}</span>
-      </div>
-      <h1 className="font-primary text-bold text-center mt-16 mb-16">
-        {data.title}
-      </h1>
+      {style.topTitle &&
+				<div className={cn(style.radialChartRadius, "font-secondary-second font-size-14 text-center text-light")}>
+					<span className={style.topTitle}>{data.topTitle}</span>
+				</div>
+			}
+			{data.title &&
+				<h1 className="font-primary text-bold text-center mt-16 mb-16">
+					{data.title}
+				</h1>
+			}
       <p className="font-secondary-first font-size-14 text-bold">{data.basedOn}</p>
-      <div className={cn(style.pointerContainer, 'mt-64 mb-64')}>
+      <div className={style.pointerContainer}>
         <div className={style.pointerWrapper}>
           <span className="font-secondary-second font-size-12 color-cool-grey">Avg</span>
           <div className={style.pointerImages}>

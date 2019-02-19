@@ -5,14 +5,18 @@ import ReactSelect from "react-select";
 import style from "./styles.scss";
 
 const Select = props => {
-	const { className, id, options, placeholder, multiple } = props;
-	if (props.input) {
-		var {
-			input: { name, onChange, value, customClass }
-		} = props;
-	} else {
-		var { name, onChange, value, customClass } = props;
-	}
+	const { className, id, options, placeholder, multiple, customClass } = props;
+
+	let args = props.input ? props.input : props
+	let { name, onChange, value } = args
+
+	// if (props.input) {
+	// 	var {
+	// 		input: { name, onChange, value, customClass }
+	// 	} = props;
+	// } else {
+	// 	var { name, onChange, value, customClass } = props;
+	// }
 
 	const reduxFormOnChange = option => {
 		onChange(option);

@@ -17,24 +17,24 @@
 
 .dataWrapper {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  align-items: flex-start;
+	justify-content: space-between;
+	margin-top: 56px;
 
   .panelChart {
     transition: 500ms;
     text-align: center;
-    flex: 1 auto;
-    margin: 30px 0;
+    flex: 1;
     padding: 0 20px;
-    border-left: 1px solid $color-dusk;
     list-style: none;
 
     h1{
       font-size: 24px
     }
 
-    &:first-child {
-      border: none;
+    &:nth-child(2) {
+      border-left: 1px solid $color-dusk;
+      border-right: 1px solid $color-dusk;
     }
 
     .doughnutChartContainer {
@@ -42,13 +42,15 @@
       margin-top: 40px;
 
       canvas{
-        margin: 0 auto;
+				margin: 0 auto;
+				width: 180px !important;
+				height: 180px !important;
       }
 
       p {
         font-family: $font-family-ClanOTNews;
         font-size: 14px;
-        width: 75%;
+        width: 50%;
         display: block;
         margin: 0 auto;
       }
