@@ -1,26 +1,24 @@
 import React, { Component } from "react"
 import { DateRange } from "react-date-range"
 import classnames from "classnames"
-import { Bar, Doughnut } from "react-chartjs-2"
 import moment from "moment"
 import { Field } from "redux-form"
 import "chartjs-plugin-datalabels"
-import { randomKey } from 'Utils/index'
+
+import style from "../../style.scss"
+import {
+	dateSelectOptions,
+	dropdownLists,
+	selectOptions,
+} from "./options"
 
 import Dropdown from "Components/Dropdown"
 import Select from "Components/Form/Select"
 import Button from "Components/Form/Button"
+import DoughnutChart from "Components/Charts/Panoptic/DoughnutChart";
+import VerticalStackedBarChart from "Components/Charts/Panoptic/VerticalStackedBarChart";
 
-import {
-  dateSelectOptions,
-  doughnutOptions,
-  dropdownLists,
-  selectOptions,
-  stackedChartOptions
-} from "./summaryData"
-import style from "./style.scss"
-
-class VerticalStackedChart extends Component{
+class PanopticFilteringSection extends Component{
   constructor(props){
     super(props)
     this.state = {
@@ -64,7 +62,7 @@ class VerticalStackedChart extends Component{
 	}
 
   render(){
-    const { doughnutData, stackedChartData, doughnutRoundData } = this.props.data;
+    const { data: { doughnutData, stackedChartData, doughnutRoundData } } = this.props;
     const {
       dateRange: { selection: dateRange },
       startDateRange: { selection: startDateRange },
@@ -111,22 +109,7 @@ class VerticalStackedChart extends Component{
           <div className="d-flex align-items-center justify-space-between ph-48">
             <div className={style.radialAndStackChartWrapper}>
               <div>
-                <Doughnut
-                  options={doughnutOptions}
-                  width={270}
-                  height={270}
-                  data={{
-                    labels: [...doughnutData.average],
-                    datasets: [
-                      {
-                        data: [...doughnutData.average],
-                        borderColor: "#303a5d",
-                        backgroundColor: ["#acb0be", "#8567f0", "#ff556f", "#51adc0"],
-                        hoverBackgroundColor: ["#acb0be", "#8567f0", "#ff556f", "#51adc0"]
-                      }
-                    ]
-                  }}
-                />
+                <DoughnutChart data={doughnutData.average}/>
               </div>
               <div>
                 {
@@ -140,22 +123,7 @@ class VerticalStackedChart extends Component{
               </div>
             </div>
             <div className={style.stackedChart}>
-              <Bar
-                width={550}
-                height={300}
-                backgroundColor="#242b49"
-								data={stackedChartData}
-								datasetKeyProvider={this.datasetKeyProvider}
-                options={{
-                  ...stackedChartOptions,
-                  chartArea: {
-                    backgroundColor: '#fff',
-                  },
-                  plugins: {
-                    datalabels: false
-                  }
-                }}
-              />
+							<VerticalStackedBarChart data={stackedChartData}/>
             </div>
           </div>
           {
@@ -308,4 +276,4 @@ class VerticalStackedChart extends Component{
   }
 }
 
-export default VerticalStackedChart
+export default PanopticFilteringSection
