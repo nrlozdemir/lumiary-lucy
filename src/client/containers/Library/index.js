@@ -16,6 +16,7 @@ import { actions, makeSelectLibrary } from "Reducers/library"
 import VideoCardList from "Components/VideoCardList"
 import LibraryHeader from './sections/LibraryHeader'
 import Sidebar from "./sidebar.js"
+import RouterLoading from "Components/RouterLoading"
 
 /* eslint-disable react/prefer-stateless-function */
 export class Library extends React.Component {
@@ -38,8 +39,8 @@ export class Library extends React.Component {
 		const sideBarClass = classNames(style.overlay, {
 			[style.overlayShow]: this.state.sidebarVisible
 		})
-		if (this.props.library.loading) {
-			return <p>Loading</p>
+		if (!this.props.library.videos || this.props.library.loading) {
+			return <RouterLoading/>
 		}
 		return (
 			<React.Fragment>
