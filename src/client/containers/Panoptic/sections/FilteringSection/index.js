@@ -5,11 +5,11 @@ import moment from "moment"
 import { Field } from "redux-form"
 import "chartjs-plugin-datalabels"
 
-import style from "../../style.scss"
+import style from "./style.scss"
 import {
-	dateSelectOptions,
-	dropdownLists,
-	selectOptions,
+  dateSelectOptions,
+  dropdownLists,
+  selectOptions,
 } from "./options"
 
 import Dropdown from "Components/Dropdown"
@@ -55,11 +55,11 @@ class PanopticFilteringSection extends Component{
     this.setState({
       isStackedChartSidebarVisible: type
     })
-	}
+  }
 
-	datasetKeyProvider() {
-		return randomKey(5)
-	}
+  datasetKeyProvider() {
+    return randomKey(5)
+  }
 
   render(){
     const { data: { doughnutData, stackedChartData, doughnutRoundData } } = this.props;
@@ -123,7 +123,7 @@ class PanopticFilteringSection extends Component{
               </div>
             </div>
             <div className={style.stackedChart}>
-							<VerticalStackedBarChart data={stackedChartData}/>
+              <VerticalStackedBarChart data={stackedChartData}/>
             </div>
           </div>
           {

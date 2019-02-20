@@ -1,7 +1,14 @@
-export const selectOptions = [
-	{ value: "chocolate", label: "Chocolate" },
-	{ value: "strawberry", label: "Strawberry" },
-	{ value: "vanilla", label: "Vanilla" }
+export const selectOneOptions = [
+	{ value: "happysad", label: "Happy/Sad" },
+	{ value: "energeticcalm", label: "Energetic/Calm" },
+	{ value: "syntheticnatural", label: "Sythentic/Natural" }
+];
+
+export const selectTwoOptions = [
+	{ value: "past24", label: "Past 24 Hours" },
+	{ value: "pastweek", label: "Past Week" },
+	{ value: "pastmonth", label: "Past Month" },
+	{ value: "past3month", label: "Past 3 Months" },
 ];
 
 export const platforms = [
