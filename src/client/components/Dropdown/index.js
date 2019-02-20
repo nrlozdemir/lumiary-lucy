@@ -1,12 +1,7 @@
 import React, { Component } from 'react';
 import classnames from 'classnames';
-import { DateRange } from 'react-date-range';
-import moment from "moment";
 
 import style from './style.scss';
-import { dateSelectOptions } from "../../containers/Panoptic/summaryData";
-import { Field } from "redux-form";
-import Select from 'Components/Form/Select'
 
 class Dropdown extends Component{
   constructor(props){
