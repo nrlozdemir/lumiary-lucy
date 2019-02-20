@@ -28,7 +28,7 @@ class ColorCard extends Component {
 						<div className={style.formatItemText}>
 							<span>36</span>
 							<span>Stop Motion</span>
-							<span>categories</span>
+							<span>Categories</span>
 						</div>
 					</div>
 
@@ -39,7 +39,7 @@ class ColorCard extends Component {
 						<div className={style.formatItemText}>
 							<span>12</span>
 							<span>Animation</span>
-							<span>categories</span>
+							<span>Categories</span>
 						</div>
 					</div>
 
@@ -50,7 +50,7 @@ class ColorCard extends Component {
 						<div className={style.formatItemText}>
 							<span>28</span>
 							<span>Live Action</span>
-							<span>categories</span>
+							<span>Categories</span>
 						</div>
 					</div>
 
