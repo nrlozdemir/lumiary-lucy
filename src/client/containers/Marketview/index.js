@@ -9,8 +9,24 @@ import { actions, makeSelectMarketview } from "Reducers/marketview"
 import style from './style.scss'
 import classnames from "classnames"
 
-import Main from './views/main'
-import Detail from './views/detail'
+import RouterLoading from "Components/RouterLoading"
+import DynamicImport from "Containers/DynamicImport"
+
+const Detail = (props) => (
+  <DynamicImport removeNavbar load={() => import('./views/detail')}>
+    {(Component) => Component === null
+      ? <RouterLoading/>
+      : <Component {...props} />}
+  </DynamicImport>
+)
+
+const Main = (props) => (
+	<DynamicImport removeNavbar load={() => import('./views/main')}>
+		{(Component) => Component === null
+			? <RouterLoading/>
+			: <Component {...props} />}
+	</DynamicImport>
+)
 
 /* eslint-disable react/prefer-stateless-function */
 export class Marketview extends React.Component {
@@ -34,9 +50,12 @@ export class Marketview extends React.Component {
 					<Route
 						path="/marketview"
 						exact
-						render={() => <Main />}
+						component={Main}
 					/>
-					<Route path="/marketview/:detail" component={Detail} />
+					<Route
+						path="/marketview/:detail"
+						component={Detail}
+					/>
 				</Switch>
 
       </div>
