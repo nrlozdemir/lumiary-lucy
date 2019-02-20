@@ -35,7 +35,7 @@ class SingleItemSlider extends React.Component {
 	}
 	render() {
 		return (
-			<div className={style.sliderClass}>
+			<div className={cn(style.sliderClass, "libraryDetailSingleItemSlider")}>
 				<Slider
 					asNavFor={this.state.nav2}
 					ref={slider => (this.slider1 = slider)}
@@ -83,9 +83,12 @@ class SingleItemSlider extends React.Component {
 						onChange={val => this.onScrollChange(val)}
 						max={this.props.slideImages.length}
 						handleStyle={{
+              backgroundColor: "white",
+              borderRadius: '50%',
 							width: "16px",
 							height: "16px",
-							marginTop: "-6px"
+              marginTop: "-6px",
+              position: 'absolute'
 						}}
 						trackStyle={{
 							height: "16px",
