@@ -59,7 +59,7 @@ const routes = [
 	{
 		path: "/marketview/:detail",
 		exact: true,
-		component: "Marketview/Detail"
+		component: "Marketview"
   },
 	{
 		path: "*",
