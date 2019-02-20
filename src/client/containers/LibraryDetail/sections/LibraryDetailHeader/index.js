@@ -1,5 +1,5 @@
-import React from 'react';
-import { Link } from "react-router-dom";
+import React from 'react'
+import { Link } from 'react-router-dom'
 
 import style from './style.scss'
 
@@ -7,18 +7,20 @@ const LibraryDetailHeader = ({ videoName, publishedPlatform }) => (
   <div className={style.header}>
     <div className="ml-40">
       <Link to="/library">
-        <span className="qf-iconLeft-Arrow" />
-        Back to Library
+        <span className="icon-Left-Arrow-Circle">
+          <span className="path1" />
+          <span className="path2" />
+          <span className="path3" />
+        </span>
+        <span className={style.text}>Back to Library</span>
       </Link>
     </div>
     <div>{videoName}</div>
-    <div className="mr-40">
+    <div className={style.iconWrapper}>
       Published on {publishedPlatform}
-      <span className={style.iconWrapper}>
-        <i className="qf-iconFacebook" />
-      </span>
+      <span className="icon-Facebook-Bubble" />
     </div>
   </div>
-);
+)
 
-export default LibraryDetailHeader;
+export default LibraryDetailHeader

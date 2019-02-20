@@ -1,15 +1,15 @@
 import React from 'react'
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import Slider from "rc-slider"
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
+import Slider from 'rc-slider'
 
-import style from "./style.scss"
+import style from './style.scss'
 
-import SingleItemSlider from "Components/SingleItemSlider"
-import ProgressBar from "Components/ProgressBar"
-import RadarChart from "Components/Charts/LibraryDetail/RadarChart"
+import SingleItemSlider from 'Components/SingleItemSlider'
+import ProgressBar from 'Components/ProgressBar'
+import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
 
 class LibraryDetailShotByShot extends React.Component {
-  constructor(props){
+  constructor(props) {
     super(props)
     this.state = {
       selectedImage: null,
@@ -23,7 +23,12 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   render() {
-    const { sliderWithThumbnails, slideImages, radarData, videoList } = this.props
+    const {
+      sliderWithThumbnails,
+      slideImages,
+      radarData,
+      videoList,
+    } = this.props
     const { selectedImage } = this.state
     return (
       <div>
@@ -40,16 +45,22 @@ class LibraryDetailShotByShot extends React.Component {
                   <Tab selectedClassName={style.selectedTab}>Demographics</Tab>
                   <Tab selectedClassName={style.selectedTab}>Objects</Tab>
                   <Tab selectedClassName={style.selectedTab}>Color</Tab>
-                  <span
-                    className={style.cancelButton + " qf-iconX"}
-                    onClick={() => this.setState({ selectedImage: false })}
-                  />
+                  <div className={style.cancelButton}>
+                    <span
+                      className="icon-X-Circle"
+                      onClick={() => this.setState({ selectedImage: false })}
+                    >
+                      <span className="path1" />
+                      <span className="path2" />
+                      <span className="path3" />
+                    </span>
+                  </div>
                 </TabList>
                 <TabPanel>
                   <div className={style.tabPanel}>
                     {slideImages.map((image, i) => (
                       <div
-                        className={style.tabPanelItem + " grid-container mt-16"}
+                        className={style.tabPanelItem + ' grid-container mt-16'}
                         key={i}
                       >
                         <div className="col-5-no-gutters">
@@ -82,7 +93,7 @@ class LibraryDetailShotByShot extends React.Component {
                 <TabPanel>
                   <div className={style.tabPanel}>
                     <div
-                      className={style.tabPanelItem + " grid-container mt-16"}
+                      className={style.tabPanelItem + ' grid-container mt-16'}
                     >
                       <div className="col-5-no-gutters">
                         <img
@@ -110,9 +121,7 @@ class LibraryDetailShotByShot extends React.Component {
                 </TabPanel>
                 <TabPanel>
                   <div className={style.radarChartContainer}>
-                    <RadarChart
-                      data={radarData}
-                    />
+                    <RadarChart data={radarData} />
                   </div>
                 </TabPanel>
               </Tabs>
@@ -141,29 +150,29 @@ class LibraryDetailShotByShot extends React.Component {
               <Slider
                 step={null}
                 defaultValue={8}
-                onAfterChange={val => this.onChangeSlider(val)}
+                onAfterChange={(val) => this.onChangeSlider(val)}
                 handleStyle={{
-                  width: "293px",
-                  height: "16px",
-                  borderRadius: "10px",
-                  marginTop: "0px"
+                  width: '293px',
+                  height: '16px',
+                  borderRadius: '10px',
+                  marginTop: '0px',
                 }}
                 trackStyle={{
-                  height: "16px",
-                  backgroundColor: "transparent"
+                  height: '16px',
+                  backgroundColor: 'transparent',
                 }}
                 min={-5}
                 max={114}
                 railStyle={{
-                  height: "16px",
-                  borderRadius: "10px",
-                  backgroundColor: "#242b49"
+                  height: '16px',
+                  borderRadius: '10px',
+                  backgroundColor: '#242b49',
                 }}
                 dotStyle={{
-                  width: "1px",
-                  height: "16px",
+                  width: '1px',
+                  height: '16px',
                   border: 0,
-                  top: "0px"
+                  top: '0px',
                 }}
                 marks={{
                   10: { label: <p className={style.dot}>0:00</p> },
@@ -175,7 +184,7 @@ class LibraryDetailShotByShot extends React.Component {
                   70: { label: <p className={style.dot}>0:60</p> },
                   80: { label: <p className={style.dot}>0:70</p> },
                   90: { label: <p className={style.dot}>0:80</p> },
-                  100: { label: <p className={style.dot}>0:90</p> }
+                  100: { label: <p className={style.dot}>0:90</p> },
                 }}
               />
             </div>
