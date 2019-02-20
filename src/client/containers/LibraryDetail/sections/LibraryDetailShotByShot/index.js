@@ -2,6 +2,7 @@ import React from 'react'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import Slider from 'rc-slider'
 
+
 import style from './style.scss'
 
 import SingleItemSlider from 'Components/SingleItemSlider'
@@ -16,6 +17,7 @@ class LibraryDetailShotByShot extends React.Component {
       sliderVal: 0,
       maxValue: 1000,
     }
+    this.slide = React.createRef();
   }
 
   onChangeSlider(e) {
@@ -30,10 +32,11 @@ class LibraryDetailShotByShot extends React.Component {
       videoList,
     } = this.props
     const { selectedImage } = this.state
+    const sliderTabContainer = cn('col-12 mt-48 mb-48', style.sliderTabContainer )
     return (
       <div>
         {selectedImage ? (
-          <div className="col-12 mt-48 mb-48">
+          <div className={sliderTabContainer}>
             <div className="col-6-no-gutters bg-black">
               <div className="mt-48 ml-48 mr-48">
                 <SingleItemSlider slideImages={sliderWithThumbnails} />
