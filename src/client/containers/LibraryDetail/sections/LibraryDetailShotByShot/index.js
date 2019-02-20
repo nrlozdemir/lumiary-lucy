@@ -16,6 +16,7 @@ class LibraryDetailShotByShot extends React.Component {
       sliderVal: 0,
       maxValue: 1000,
     }
+    this.slide = React.createRef();
   }
 
   onChangeSlider(e) {
