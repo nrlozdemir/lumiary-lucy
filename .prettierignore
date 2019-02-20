@@ -1,0 +1,13 @@
+.circleci
+.nyc_output
+.storybook
+__snapshots__
+build
+coverage
+node_modules
+src/build
+src/test-results
+stories
+storybook-static
+testcafe
+
