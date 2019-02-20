@@ -1,12 +1,7 @@
 import React from 'react'
-<<<<<<< HEAD
+import cn from 'classnames'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import Slider from 'rc-slider'
-=======
-import { Tab, TabList, TabPanel, Tabs } from "react-tabs"
-import Slider from "rc-slider"
-import cn from 'classnames'
->>>>>>> dev
 
 import style from './style.scss'
 
@@ -22,7 +17,7 @@ class LibraryDetailShotByShot extends React.Component {
       sliderVal: 0,
       maxValue: 1000,
     }
-    this.slide = React.createRef();
+    this.slide = React.createRef()
   }
 
   onChangeSlider(e) {
@@ -37,7 +32,10 @@ class LibraryDetailShotByShot extends React.Component {
       videoList,
     } = this.props
     const { selectedImage } = this.state
-    const sliderTabContainer = cn('col-12 mt-48 mb-48', style.sliderTabContainer )
+    const sliderTabContainer = cn(
+      'col-12 mt-48 mb-48',
+      style.sliderTabContainer
+    )
     return (
       <div>
         {selectedImage ? (
