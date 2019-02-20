@@ -15,6 +15,7 @@ import TopVideosChart from "Components/Charts/MarketView/TopVideos"
 import ProgressBar from "Components/ProgressBar"
 import MarketViewSlider from "Components/Sliders/Marketview"
 import TopSimilarProperties from "Components/TopSimilarProperties"
+import RouterLoading from "Components/RouterLoading"
 
 import style from "./style.scss"
 
@@ -36,7 +37,7 @@ export class Detail extends React.Component {
     } = this.props
 
     if (!this.props.marketview.selectedVideo || this.props.marketview.loading) {
-      return <div>Loading</div>
+      return <RouterLoading/>
     }
 
     return (

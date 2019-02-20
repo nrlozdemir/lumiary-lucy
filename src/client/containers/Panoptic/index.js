@@ -23,7 +23,7 @@ import VerticalStackedChart from "./verticalStackedChart"
 import {
   selectOptions,
   platforms,
-} from "./summaryData"
+} from "./summaryData.js"
 import style from "./style.scss"
 import { barDataOptions } from "./options"
 
