@@ -65,11 +65,11 @@ export class Quickview extends React.Component {
 				<div className="grid-container col-12">
 					<div className={style.headerContainer}>
 						<div>
-							<span className="dot-item">
+							<span className={style.dotItem}>
 								<span className="bg-cool-blue" />
 								Best Videos
 							</span>
-							<span className="dot-item">
+							<span className={style.dotItem}>
 								<span className="bg-coral-pink" />
 								Worst Videos
 							</span>
