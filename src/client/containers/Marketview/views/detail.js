@@ -1,6 +1,6 @@
 /**
  *
- * Marketview
+ * Marketview Detail
  *
  */
 
@@ -15,8 +15,9 @@ import TopVideosChart from "Components/Charts/MarketView/TopVideos"
 import ProgressBar from "Components/ProgressBar"
 import MarketViewSlider from "Components/Sliders/Marketview"
 import TopSimilarProperties from "Components/TopSimilarProperties"
+import RouterLoading from "Components/RouterLoading"
 
-import style from "./style.scss"
+import style from "../style.scss"
 
 /* eslint-disable react/prefer-stateless-function */
 export class Detail extends React.Component {
@@ -36,12 +37,12 @@ export class Detail extends React.Component {
     } = this.props
 
     if (!this.props.marketview.selectedVideo || this.props.marketview.loading) {
-      return <div>Loading</div>
+      return <RouterLoading/>
     }
 
     return (
       <React.Fragment>
-        <div className="col-12 bg-dark-grey-blue mt-50">
+        <div className="bg-dark-grey-blue">
           <MarketViewSlider
             items={this.props.marketview.videos}
             changeVideo={video => this.changeSelectedVideo(video)}
