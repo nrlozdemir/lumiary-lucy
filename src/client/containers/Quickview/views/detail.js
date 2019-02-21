@@ -56,11 +56,18 @@ export class Detail extends React.Component {
     console.log(this.props)
     return (
       <React.Fragment>
-        <div className="grid-container col-12">
+        <div className="grid-container">
           <div className="grid-collapse mt-50">
             <div className={style.bar}>
               <Link className={style.back} to="/quickview">
-                <i className="icon-Left-Arrow-Circle" /> Overview
+                <div className={style.iconWrapper}>
+                  <span className="icon-X-Circle">
+                    <span className="path1" />
+                    <span className="path2" />
+                    <span className="path3" />
+                  </span>
+                </div>
+                Overview
               </Link>
               <div className={style.barList}>
                 {platforms.map((platform, index) => (

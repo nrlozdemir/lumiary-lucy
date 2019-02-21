@@ -4,25 +4,25 @@
  *
  */
 
-import React from "react"
-import PropTypes from "prop-types"
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import VideoCard from "Components/VideoCard"
-import QuickviewCard from "Components/QuickviewCard"
-import style from "./../style.scss"
+import VideoCard from 'Components/VideoCard'
+import QuickviewCard from 'Components/QuickviewCard'
+import style from './../style.scss'
 
-const Main = props => (
+const Main = (props) => (
   <React.Fragment>
-    <div className="grid-container col-12">
+    <div className="grid-container">
       <div className="grid-collapse mt-50">
-        {props.quickviewItems.map(item => (
+        {props.quickviewItems.map((item) => (
           <QuickviewCard
             key={item.id}
             cardName={item.cardName}
             difference={item.difference}
             differenceType={item.differenceType}
             detailsLink={`/quickview/${item.id}/${item.defaultSection}`}
-            cards={item.videos.map(video => (
+            cards={item.videos.map((video) => (
               <VideoCard
                 video={{
                   title: (
@@ -32,13 +32,13 @@ const Main = props => (
                     </div>
                   ),
                   thumbnailUrl: video.thumbnailUrl,
-                  socialIcon: video.socialIcon
+                  socialIcon: video.socialIcon,
                 }}
                 options={{
-                  size: "none",
+                  size: 'none',
                   presentationCard: true,
                   barColor: video.barColor,
-                  customClass: "QuickviewVideoCard"
+                  customClass: 'QuickviewVideoCard',
                 }}
               />
             ))}
@@ -54,7 +54,7 @@ Main.propTypes = {
   defaultSection: PropTypes.string,
   cardName: PropTypes.string,
   difference: PropTypes.number,
-  videos: PropTypes.array
+  videos: PropTypes.array,
 }
 
 export default Main
