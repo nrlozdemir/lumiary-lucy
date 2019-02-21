@@ -1,0 +1,21 @@
+.ReactModalPortal {
+  font-family: $font-family-ClanOT;
+  .ReactModal__Overlay {
+    overflow-y: auto;
+  }
+  .ReactModal__Content {
+    top: 50% !important;
+    left: 50% !important;
+    right: auto !important;
+    bottom: auto !important;
+    margin-bottom: 50px;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+    border: none !important;
+    padding: 0 !important;
+    width: 100%;
+    border-radius: 0 !important;
+    overflow-y: auto;
+  }
+}
