@@ -3,22 +3,28 @@
 
 	body {
 		margin: 0;
+		color: $color-white;
 	}
 
 	.marketViewSlickSlider {
 		.item {
 			position: relative;
 			opacity: .2;
+			margin: 49px 0;
+			height: 248;
+			&:focus {
+				outline: none;
+			}
 			img {
-				margin-top: 35px;
-				height: 240;
+				width: 100%;
+				height: 100%;
 			}
 			p {
 				font-family: $font-family-ClanOT;
 				font-size: 14px;
 				position: absolute;
 				bottom: 0;
-				background: rgba($color: $color-dark-grey-blue, $alpha: .6);
+				background: rgba($color: $color-dark-grey-blue, $alpha: .8);
 				width: 100%;
 				line-height: 52px;
 				.icon {
@@ -83,17 +89,18 @@
 		}
 		.slick-current {
 			.item {
+				// transition: all .2s ease;
 				opacity: 1;
+				margin: 0px;
+				height: 346px;
 			}
 			img {
-				margin-top: 0px;
-				height: 310px;
 				box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
 			}
 		}
 		.slick-thumb {
 			z-index: 10;
-			top: 320px;
+			top: 390px;
 			.slick-active {
 				opacity: 1;
 				font-weight: bold;
@@ -173,5 +180,5 @@
 		left: 50%;
 		transform: translate(-50%, -50%);
 	}
-	
+
 }

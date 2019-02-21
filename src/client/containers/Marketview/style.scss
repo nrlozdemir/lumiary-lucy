@@ -3,8 +3,11 @@
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   background-color: $color-dark-grey-blue;
   padding: 40px 50px 106px;
-  font-family: $font-family-ClanOTNews;
-
+	font-family: $font-family-ClanOTNews;
+	min-height: 705px;
+	&:last-child {
+		padding: 40px 20px 106px;
+	}
   .marketViewCardTitle {
     font-family: $font-family-primary;
     font-size: 40px;
@@ -33,35 +36,32 @@
     color: white;
     text-decoration: none;
     transition: 300ms;
-
-    span {
+    .icon {
       margin-left: 10px;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      border: 1px solid $color-cool-blue;
-      background-color: $color-dark-grey-blue;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 12px;
+      span {
+        font-size: 20px;
+      }
     }
-
     &:hover {
       background-color: white;
       color: $color-dark-five;
-      span {
-        border-color: $color-dark-five;
-        background-color: white;
-      }
     }
   }
 
   .marketViewCardDescription {
     font-size: 14px;
     line-height: 26px;
-    text-align: center;
-  }
+		text-align: center;
+		width: 70%;
+    margin: 35px auto 0 auto;
+	}
+
+	.pieChartContainer {
+		margin-top: 60px;
+		canvas {
+			margin: 0 auto;
+		}
+	}
 
   .marketViewCardDate {
     margin-top: 30px;
@@ -93,8 +93,18 @@
     font-size: 14px;
     margin: 0 35px;
     text-decoration: none;
-    color: white;
+		color: white;
+		position: relative;
   }
+}
+
+.activeLink:before {
+	content: ' ';
+	width: 100%;
+	height: 4px;
+	position: absolute;
+	top: -8px;
+	background-color: $color-cool-blue
 }
 
 .colors {
@@ -148,7 +158,7 @@
     font-family: $font-family-ClanOTNews;
 
     &:before {
-      content: "";
+      content: '';
       display: inline-block;
       width: 16px;
       height: 16px;
@@ -179,7 +189,7 @@
   }
 
   &.colorListHorizontal {
-    flex-direction: row-reverse;
+    flex-direction: row;
     padding-left: 0;
 
     .colorListItem {
@@ -193,8 +203,8 @@
     margin: 30px -45px;
 
     .colorListItem {
-      font-size: 10px;
-      margin: 0 4px;
+      font-size: 12px;
+      margin-right: 12px;
     }
 
     &:before {
@@ -291,15 +301,15 @@
         text-align: center;
         &:nth-child(1) {
           font-family: $font-family-primary;
-          font-size: 18px;
+          font-size: 24px;
         }
         &:nth-child(2) {
           font-family: $font-family-ClanOT;
-          font-size: 10px;
+          font-size: 12px;
         }
         &:nth-child(3) {
           font-family: $font-family-ClanOTNews;
-          font-size: 8px;
+          font-size: 10px;
         }
       }
     }
@@ -355,15 +365,7 @@
     }
 
     .bubbleChartIcon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 32px;
-      height: 32px;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-      background-color: #fff;
-      border-radius: 50%;
-      color: $color-dark-five;
+      font-size: 30px;
     }
 
     .bubbleChartTooltip {
@@ -378,7 +380,7 @@
       transition: opacity 300ms;
 
       &:before {
-        content: "";
+        content: '';
         position: absolute;
         top: 0;
         left: 0;
@@ -390,7 +392,7 @@
       }
 
       &:after {
-        content: "";
+        content: '';
         width: 10px;
         height: 10px;
         background-color: #fff;
@@ -415,7 +417,7 @@
 
         &:last-child {
           &:before {
-            content: "";
+            content: '';
             width: 100%;
             height: 10px;
             background-color: #fff;
@@ -438,8 +440,8 @@
 
 .cardContainer {
   @include grid-container;
-  margin: 0 57px;
-  padding-bottom: 50px;
+  margin: 56px;
+  // padding-bottom: 50px;
   .card {
     @include grid-column(4);
     border: 1px solid $color-dusk;
@@ -467,15 +469,15 @@
         border-radius: 10px;
         height: 10px;
         background-color: $color-cool-blue;
-        -webkit-transition: width .5s, height .5s;
-        transition: width .5s, height .5s;
+        -webkit-transition: width 0.5s, height 0.5s;
+        transition: width 0.5s, height 0.5s;
       }
       .percentageRed {
         border-radius: 10px;
         height: 10px;
         background-color: $color-coral-pink;
-        -webkit-transition: width .5s, height .5s;
-        transition: width .5s, height .5s;
+        -webkit-transition: width 0.5s, height 0.5s;
+        transition: width 0.5s, height 0.5s;
       }
       .progressText {
         color: $color-white;
@@ -489,7 +491,7 @@
           float: right;
         }
         &::after {
-          content: "";
+          content: '';
           clear: both;
           display: table;
         }

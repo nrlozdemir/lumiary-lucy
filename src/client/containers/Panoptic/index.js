@@ -81,7 +81,6 @@ export class Panoptic extends React.Component {
         {
           verticalStackedChartData &&
           <FilteringSection data={verticalStackedChartData} />
-
         }
         {
           pacingChartData &&
