@@ -10,12 +10,20 @@ import { createSelector } from 'reselect';
 export const types = {
   LOAD_VIDEOS: "Library/LOAD_VIDEOS",
   LOAD_VIDEOS_SUCCESS: "Library/LOAD_VIDEOS_SUCCESS",
-  LOAD_VIDEOS_ERROR: "Library/LOAD_VIDEOS_ERROR"
+  LOAD_VIDEOS_ERROR: "Library/LOAD_VIDEOS_ERROR",
+
+	FILTER_VIDEOS: "Library/FILTER_VIDEOS",
+	FILTER_VIDEOS_SUCCESS: "Library/FILTER_VIDEOS_SUCCESS",
+	FILTER_VIDEOS_ERROR: "Library/FILTER_VIDEOS_ERROR"
 };
 export const actions = {
   loadVideos: () => ({ type: types.LOAD_VIDEOS }),
   loadVideosSuccess: payload => ({ type: types.LOAD_VIDEOS_SUCCESS, payload }),
-  loadVideosError: error => ({ type: types.LOAD_VIDEOS, error })
+  loadVideosError: error => ({ type: types.LOAD_VIDEOS, error }),
+
+	filterVideos: filterText => ({ type: types.FILTER_VIDEOS, filterText}),
+	filterVideosSuccess: payload => ({ type: types.FILTER_VIDEOS_SUCCESS, payload }),
+	filterVideosError: error => ({ type: types.FILTER_VIDEOS_ERROR, error})
 };
 export const initialState = fromJS({
   videos: [],
@@ -37,7 +45,19 @@ const libraryReducer = (state = initialState, action) => {
       return state
         .set("error", fromJS(action.error))
         .set("loading", fromJS(false));
-        
+
+		case types.FILTER_VIDEOS:
+			return state.set("loading", fromJS(true));
+
+		case types.FILTER_VIDEOS_SUCCESS:
+			return state
+				.set("videos", fromJS(action.payload))
+				.set("loading", fromJS(false));
+
+		case types.FILTER_VIDEOS_ERROR:
+			return state
+				.set("error", fromJS(action.error))
+				.set("loading", fromJS(false));
     default:
       return state;
   }

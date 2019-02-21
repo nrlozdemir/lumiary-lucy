@@ -5,9 +5,9 @@ import { types, actions } from "Reducers/library";
 import libraryMockData from 'Api/mocks/libraryMock.json';
 
 function getLibraryApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/')
-  .then(res => libraryMockData)
+	//this will use ajax function in utils/api when real data is provided
+	return axios.get('/')
+		.then(res => libraryMockData)
 }
 
 function* getVideos() {
@@ -19,4 +19,23 @@ function* getVideos() {
 	}
 }
 
-export default [takeLatest(types.LOAD_VIDEOS, getVideos)];
+function* getFilteredVideos({ filterText }) {
+	try {
+		let payload = yield call(getLibraryApi);
+		if(filterText.length && payload){
+			payload = payload.filter(item => {
+				return item.title.includes(filterText);
+			});
+			yield put(actions.filterVideosSuccess(payload))
+		} else{
+			yield put(actions.filterVideosSuccess(payload))
+		}
+	} catch (err) {
+		yield put(actions.filterVideosError(err))
+	}
+}
+
+export default [
+	takeLatest(types.LOAD_VIDEOS, getVideos),
+	takeLatest(types.FILTER_VIDEOS, getFilteredVideos)
+];
