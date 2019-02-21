@@ -1,123 +1,123 @@
-import React from "react";
-import { connect } from "react-redux";
-import { compose } from "redux";
-import { Link } from "react-router-dom";
-import { Doughnut } from "react-chartjs-2";
+import React from 'react'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { Link } from 'react-router-dom'
+import { Doughnut } from 'react-chartjs-2'
 
-import VideoCard from "Components/VideoCard/index.js";
+import VideoCard from 'Components/VideoCard/index.js'
 
-import style from "./style.scss";
+import style from './style.scss'
 
 class Compare extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       compareItems: [
         [
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
-          }
+            title: 'title',
+            value: 'value',
+          },
         ],
         [
           {
-            title: "title",
-            value: "value",
-            chartValue: 60
+            title: 'title',
+            value: 'value',
+            chartValue: 60,
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
-          }
+            title: 'title',
+            value: 'value',
+          },
         ],
         [
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value",
-            chartValue: 30
+            title: 'title',
+            value: 'value',
+            chartValue: 30,
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
+            title: 'title',
+            value: 'value',
           },
           {
-            title: "title",
-            value: "value"
-          }
-        ]
-      ]
-    };
+            title: 'title',
+            value: 'value',
+          },
+        ],
+      ],
+    }
   }
 
   render() {
-    const { match } = this.props;
-    const { compareItems } = this.state;
+    const { match } = this.props
+    const { compareItems } = this.state
     return (
       <React.Fragment>
         <div className={style.header}>
           <div className="ml-40">
             <Link to={`/library/${match.params.videoId}`}>
-              <span className="qf-iconLeft-Arrow" />
+              <span className="icon-Left-Arrow-Circle" />
               Back To Video
             </Link>
           </div>
@@ -133,12 +133,12 @@ class Compare extends React.Component {
                   <span>664,501k Likes</span>
                 </div>
               ),
-              thumbnailUrl: "https://picsum.photos/282/154?image=19"
+              thumbnailUrl: 'https://picsum.photos/282/154?image=19',
             }}
             options={{
               size: 4,
               presentationCard: true,
-              barColor: "cool-blue"
+              barColor: 'cool-blue',
             }}
           />
           <VideoCard
@@ -149,12 +149,12 @@ class Compare extends React.Component {
                   <span>481,797k Likes</span>
                 </div>
               ),
-              thumbnailUrl: "https://picsum.photos/282/154?image=20"
+              thumbnailUrl: 'https://picsum.photos/282/154?image=20',
             }}
             options={{
               size: 4,
               presentationCard: true,
-              barColor: "coral-pink"
+              barColor: 'coral-pink',
             }}
           />
           <VideoCard
@@ -165,12 +165,12 @@ class Compare extends React.Component {
                   <span>863,102k Likes</span>
                 </div>
               ),
-              thumbnailUrl: "https://picsum.photos/282/154?image=21"
+              thumbnailUrl: 'https://picsum.photos/282/154?image=21',
             }}
             options={{
               size: 4,
               presentationCard: true,
-              barColor: "lighter-purple"
+              barColor: 'lighter-purple',
             }}
           />
           {compareItems.map((compareItem, index) => (
@@ -186,24 +186,24 @@ class Compare extends React.Component {
                           options={{
                             cutoutPercentage: 85,
                             tooltips: {
-                              enabled: false
+                              enabled: false,
                             },
                             legend: {
-                              display: false
-                            }
+                              display: false,
+                            },
                           }}
                           width={100}
                           height={100}
                           data={{
-                            labels: ["Red", "Green"],
+                            labels: ['Red', 'Green'],
                             datasets: [
                               {
                                 data: [item.chartValue, 100 - item.chartValue],
-                                borderColor: "transparent",
-                                backgroundColor: ["#ff556f", "#51adc0"],
-                                hoverBackgroundColor: ["#ff556f", "#51adc0"]
-                              }
-                            ]
+                                borderColor: 'transparent',
+                                backgroundColor: ['#ff556f', '#51adc0'],
+                                hoverBackgroundColor: ['#ff556f', '#51adc0'],
+                              },
+                            ],
                           }}
                         />
                         <div>
@@ -219,13 +219,13 @@ class Compare extends React.Component {
           ))}
         </div>
       </React.Fragment>
-    );
+    )
   }
 }
 
 const withConnect = connect(
   null,
   null
-);
+)
 
-export default compose(withConnect)(Compare);
+export default compose(withConnect)(Compare)
