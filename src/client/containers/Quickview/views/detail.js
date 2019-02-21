@@ -4,16 +4,16 @@
  *
  */
 
-import React from "react"
-import { NavLink, Link } from "react-router-dom"
-import PropTypes from "prop-types"
-import { connect } from "react-redux"
-import { createStructuredSelector } from "reselect"
-import { compose, bindActionCreators } from "redux"
-import { actions, makeSelectQuickview } from "Reducers/quickview"
-import { toSlug } from "Utils/index"
-import VideoCard from "Components/VideoCard"
-import style from "./../style.scss"
+import React from 'react'
+import { NavLink, Link } from 'react-router-dom'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose, bindActionCreators } from 'redux'
+import { actions, makeSelectQuickview } from 'Reducers/quickview'
+import { toSlug } from 'Utils/index'
+import VideoCard from 'Components/VideoCard'
+import style from './../style.scss'
 
 export class Detail extends React.Component {
   constructor(props) {
@@ -21,14 +21,13 @@ export class Detail extends React.Component {
     this.state = {
       selectedQuickviewId: null,
       platforms: [
-        "all platforms",
-        "facebook",
-        "instagram",
-        "twitter",
-        "snapchat",
-        "youtube",
-        "pinterest"
-      ]
+        'all platforms',
+        'facebook',
+        'instagram',
+        'twitter',
+        'youtube',
+        'pinterest',
+      ],
     }
   }
 
@@ -51,17 +50,24 @@ export class Detail extends React.Component {
     const { platforms, selectedQuickviewId } = this.state
     const {
       quickview: {
-        selectedPlatform: { id, platformsValues }
-      }
+        selectedPlatform: { id, platformsValues },
+      },
     } = this.props
     console.log(this.props)
     return (
       <React.Fragment>
-        <div className="grid-container col-12">
+        <div className="grid-container">
           <div className="grid-collapse mt-50">
             <div className={style.bar}>
               <Link className={style.back} to="/quickview">
-                <i className="qf-iconLeft-Arrow" /> Overview
+                <div className={style.iconWrapper}>
+                  <span className="icon-X-Circle">
+                    <span className="path1" />
+                    <span className="path2" />
+                    <span className="path3" />
+                  </span>
+                </div>
+                Overview
               </Link>
               <div className={style.barList}>
                 {platforms.map((platform, index) => (
@@ -109,14 +115,14 @@ export class Detail extends React.Component {
 
 Detail.propTypes = {
   dispatch: PropTypes.func.isRequired,
-  match: PropTypes.object
+  match: PropTypes.object,
 }
 
 const mapStateToProps = createStructuredSelector({
-  quickview: makeSelectQuickview()
+  quickview: makeSelectQuickview(),
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
   mapStateToProps,
