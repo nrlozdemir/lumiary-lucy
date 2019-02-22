@@ -1,6 +1,7 @@
-import React, { Component } from 'react'
-import classnames from 'classnames'
-import style from './style.scss'
+import React, { Component } from 'react';
+import classnames from 'classnames';
+
+import style from './style.scss';
 
 class Dropdown extends Component {
   constructor(props) {

@@ -49,31 +49,31 @@
       background: white;
       border-radius: 20px;
       left: 15%;
-      top: 35%;
+      top: 18%;
       z-index: 11;
       &::before {
         font-family: $font-family-qf-icons;
-        content: '\e988';
+        content: '\e921';
         color: black;
         line-height: 40px;
-        margin-left: 15px;
+        margin-left: 10px;
       }
     }
 
     .slick-next {
       width: 40px;
-      height: 40px;
-      display: block;
-      background: white;
-      border-radius: 20px;
-      right: 15%;
-      top: 35%;
+			height: 40px;
+			display: block;
+			background: white;
+			border-radius: 20px;
+			right: 15%;
+			top: 18%;
       &::before {
-        content: '\e987';
+        content: '\e922';
+				color: $color-black;
         font-family: $font-family-qf-icons;
-        color: black;
         line-height: 40px;
-        margin-left: 15px;
+        margin-left: 10px;
       }
     }
 
