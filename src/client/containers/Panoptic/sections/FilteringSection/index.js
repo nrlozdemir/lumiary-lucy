@@ -131,7 +131,11 @@ class PanopticFilteringSection extends Component{
             <div className={style.stackedChartSideBar}>
               <div className={style.stackedChartSideBarContent}>
                 <div className={style.closeIconWrapper}>
-                  <i className="qf-iconX" onClick={() => this.setSidebarVisible(false)}></i>
+									<span className="icon-X-Circle" onClick={() => this.setSidebarVisible(false)}>
+										<span className="path1" />
+										<span className="path2" />
+										<span className="path3" />
+									</span>
                 </div>
                 <div className={style.filterAreaWrapper}>
                   <div className="pb-40">
