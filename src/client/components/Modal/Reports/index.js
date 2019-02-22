@@ -30,7 +30,7 @@ const ReportsModal = ({
       isOpen={isOpen}
       style={customStyles}
       onAfterOpen={onAfterOpen}
-      onRequestClose={onRequestClose}
+      onRequestClose={() => onRequestClose()}
       ariaHideApp={false}
       shouldCloseOnEsc={shouldCloseOnEsc}
       shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
@@ -53,7 +53,6 @@ const ReportsModal = ({
 }
 
 ReportsModal.defaultProps = {
-  isOpen: false,
   ariaHideApp: true,
   title: 'Custom Modal',
   isClosable: false,

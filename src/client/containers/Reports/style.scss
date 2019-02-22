@@ -1,3 +1,7 @@
+.reportsContainer {
+  font-family: $font-family-ClanOT;
+}
+
 .formArea {
   .selectionArea {
     margin-bottom: 40px;
@@ -27,6 +31,7 @@
     text-decoration: none;
     opacity: 0.5;
     cursor: disabled;
+    border: none;
     &.active {
       opacity: 1;
     }
