@@ -1,0 +1,29 @@
+.pacingCardContainer {
+  padding: 50px 40px;
+  box-sizing: border-box;
+  font-family: $font-family-ClanOTNews;
+  background-color: $color-dark-grey-blue;
+}
+
+.componentTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 18px;
+  font-family: $font-family-ClanOT;
+  margin-bottom: 50px;
+}
+
+.selects {
+  position: relative;
+  display: flex;
+  z-index: 12;
+  > div {
+    margin: 0 0 0 20px;
+  }
+}
+
+$line-size: 20;
+$min-width: 210;
+$min-height: 80;
+

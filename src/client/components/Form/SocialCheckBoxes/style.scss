@@ -33,6 +33,10 @@
 
 	.socialCheckbox input[type="checkbox"]:checked ~ label {
 		background-color: $color-white;
+		&:before{
+			color: $color-dusk !important;
+		}
+
 	}
 }
 .label {
