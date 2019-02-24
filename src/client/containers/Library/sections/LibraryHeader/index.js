@@ -22,7 +22,6 @@ class LibraryHeader extends React.Component {
 
   render() {
     const { setSidebarVisible } = this.props
-    console.log(this.props);
     return (
       <div className={style.headerContainer}>
         <div>
