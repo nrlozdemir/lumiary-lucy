@@ -69,7 +69,6 @@ const ReportsForm = ({}) => {
             id="title"
             name="title"
             placeholder="Enter title name"
-            label="Date Range"
           />
         </div>
         <button className={style.selectionLink} type="submit" disabled={true}>

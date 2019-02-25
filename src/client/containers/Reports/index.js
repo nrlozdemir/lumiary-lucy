@@ -73,7 +73,7 @@ class Reports extends Component {
     return (
       <div className="grid-container col-12 mr-40 ml-40 mt-72 mb-72">
         <div className={style.reportsContainer}>
-          {/* <button onClick={() => this.openModal()}>Open modal</button> */}
+          <button onClick={() => this.openModal()}>Open modal</button>
           <ReportsModal
             width={440}
             isOpen={modalIsOpen}
@@ -159,11 +159,13 @@ class Reports extends Component {
                 showPagination={false}
                 defaultPageSize={4}
                 multiSort={true}
+                resizable={false}
                 sortable={true}
                 columns={[
                   {
                     Header: 'Title',
                     accessor: 'title',
+                    width: 420,
                   },
                   {
                     Header: 'Category',

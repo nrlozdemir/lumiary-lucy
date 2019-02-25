@@ -16,9 +16,18 @@
   display: flex;
   align-items: center;
   box-shadow: none;
+  &:nth-last-child(2) {
+    .rt-resizable-header-content {
+      text-decoration: underline;
+    }
+  }
+}
+.ReactTable .rt-thead .rt-resizable-header:last-child {
+  visibility: collapse;
 }
 .ReactTable .rt-thead .rt-th.-sort-asc,
 .ReactTable .rt-thead .rt-td.-sort-asc {
+  box-shadow: none;
   &:after {
     margin-left: 8px;
     font-family: $font-family-qf-icons;
