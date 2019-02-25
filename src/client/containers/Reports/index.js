@@ -1,12 +1,17 @@
 import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose } from 'redux'
+import { actions, makeSelectReports } from 'Reducers/reports'
 
 import style from './style.scss'
 import { selectOptions } from './options'
-
 import Select from 'Components/Form/Select'
 
 import ReportsModal from 'Components/Modal/reports'
 import ReportsForm from 'Components/PagesForm/Reports'
+import RouterLoading from 'Components/RouterLoading'
 
 import ReactTable from 'react-table'
 
@@ -15,39 +20,11 @@ class Reports extends Component {
     super(props)
     this.state = {
       modalIsOpen: false,
-      data: [
-        {
-          title: 'Show this report to Steve on Monday',
-          category: 'Brands Insights',
-          platform: 'Facebook',
-          date: '2/11/19',
-        },
-        {
-          title: 'Bleacher Report VS ESPN comparison',
-          category: 'Compare Brands',
-          platform: 'Instagram',
-          date: '2/10/19',
-        },
-        {
-          title: 'Fansided vs Scoutmedia on Facebook',
-          category: 'Compare Brands',
-          platform: 'Twitter',
-          date: '2/8/19',
-        },
-        {
-          title: 'Videos with baseball pitchers losing control',
-          category: 'Predefined Reports',
-          platform: 'Facebook',
-          date: '2/4/19',
-        },
-        {
-          title: 'Bleacher Report performance on Instagram',
-          category: 'Brands Insights',
-          platform: 'Facebook',
-          date: '2/1/19',
-        },
-      ],
     }
+  }
+
+  componentWillMount() {
+    this.props.getReports()
   }
 
   openModal() {
@@ -67,8 +44,12 @@ class Reports extends Component {
   }
 
   render() {
-    const { modalIsOpen, data } = this.state
-    console.log('modalIsOpen', modalIsOpen)
+    const { modalIsOpen } = this.state
+    const {
+      reports: { reports, loading, error },
+    } = this.props
+
+    console.log('reports', reports)
 
     return (
       <div className="grid-container col-12 mr-40 ml-40 mt-72 mb-72">
@@ -153,45 +134,49 @@ class Reports extends Component {
                 />
               </div>
             </div>
-            <div className={style.reportsTableBody}>
-              <ReactTable
-                data={data}
-                showPagination={false}
-                defaultPageSize={4}
-                multiSort={true}
-                resizable={false}
-                sortable={true}
-                columns={[
-                  {
-                    Header: 'Title',
-                    accessor: 'title',
-                    width: 420,
-                  },
-                  {
-                    Header: 'Category',
-                    accessor: 'category',
-                  },
-                  {
-                    Header: 'Platform',
-                    accessor: 'platform',
-                  },
-                  {
-                    Header: 'Date',
-                    accessor: 'date',
-                  },
-                  {
-                    Header: null,
-                    width: 65,
-                    Cell: ({ viewIndex }) => (
-                      <span
-                        className={style.deleteIcon}
-                        onClick={() => this.editRow({ viewIndex })}
-                      />
-                    ),
-                  },
-                ]}
-              />
-            </div>
+            {loading ? (
+              <RouterLoading />
+            ) : (
+              <div className={style.reportsTableBody}>
+                <ReactTable
+                  data={reports}
+                  showPagination={false}
+                  defaultPageSize={4}
+                  multiSort={true}
+                  resizable={false}
+                  sortable={true}
+                  columns={[
+                    {
+                      Header: 'Title',
+                      accessor: 'title',
+                      width: 420,
+                    },
+                    {
+                      Header: 'Category',
+                      accessor: 'category',
+                    },
+                    {
+                      Header: 'Platform',
+                      accessor: 'platform',
+                    },
+                    {
+                      Header: 'Date',
+                      accessor: 'date',
+                    },
+                    {
+                      Header: null,
+                      width: 65,
+                      Cell: ({ viewIndex }) => (
+                        <span
+                          className={style.deleteIcon}
+                          onClick={() => this.editRow({ viewIndex })}
+                        />
+                      ),
+                    },
+                  ]}
+                />
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -199,4 +184,25 @@ class Reports extends Component {
   }
 }
 
-export default Reports
+Reports.propTypes = {
+  reports: PropTypes.object,
+  getReports: PropTypes.func,
+  dispatch: PropTypes.func,
+}
+
+const mapStateToProps = createStructuredSelector({
+  reports: makeSelectReports(),
+})
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getReports: () => dispatch(actions.loadReports()),
+  }
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(Reports)
