@@ -14,6 +14,8 @@ import ReportsModal from 'Components/Modal/reports'
 import ReportsForm from 'Components/PagesForm/Reports'
 import RouterLoading from 'Components/RouterLoading'
 
+import ReportCards from './section/reportCards'
+
 import ReactTable from 'react-table'
 
 class Reports extends Component {
@@ -57,7 +59,9 @@ class Reports extends Component {
     return (
       <div className="grid-container col-12 mr-40 ml-40 mt-72 mb-72">
         <div className={style.reportsContainer}>
-          <button onClick={() => this.openModal()}>Open modal</button>
+          <div className="mb-16">
+            <Button buttonText="Open modal" onClick={() => this.openModal()} />
+          </div>
           <ReportsModal
             width={440}
             isOpen={modalIsOpen}
@@ -66,63 +70,13 @@ class Reports extends Component {
             onRequestClose={() => this.closeModal()}
             isClosable={true}
             shouldCloseOnEsc={true}
-            shouldCloseOnOverlayClick={false}
+            shouldCloseOnOverlayClick={true}
             title="Brand Insights"
           >
             <ReportsForm />
           </ReportsModal>
 
-          <div className={style.reportsCardContainer}>
-            <div className={style.reportsCard}>
-              <p className={style.cardTitle}>Brand Insights</p>
-              <div className={style.cardIcons}>
-                <img
-                  src="https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/brand-insights-icon.svg"
-                  alt="brand-insights"
-                />
-              </div>
-              <p className={style.cardDescription}>
-                Get helpful, detailed engagement metrics about competitor brands
-              </p>
-            </div>
-            <div className={style.reportsCard}>
-              <p className={style.cardTitle}>Compare Brands</p>
-              <div className={style.cardIcons}>
-                <img
-                  src="https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/compare-brands-icon.svg"
-                  alt="compare-brands"
-                />
-              </div>
-              <p className={style.cardDescription}>
-                Compare two brands to learn what’s driving their performance
-              </p>
-            </div>
-            <div className={style.reportsCard}>
-              <p className={style.cardTitle}>Properties</p>
-              <div className={style.cardIcons}>
-                <img
-                  src="https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/properties-icon.svg"
-                  alt="properties"
-                />
-              </div>
-              <p className={style.cardDescription}>
-                View detailed, comparative data of video attributes across
-                brands
-              </p>
-            </div>
-            <div className={style.reportsCard}>
-              <p className={style.cardTitle}>Predefined Reports</p>
-              <div className={style.cardIcons}>
-                <img
-                  src="https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/predefined-reports-icon.svg"
-                  alt="predefined-reports"
-                />
-              </div>
-              <p className={style.cardDescription}>
-                Access unique, relevant and invaluable customized data
-              </p>
-            </div>
-          </div>
+          <ReportCards />
 
           <div className={style.reportsTableContainer}>
             <div className={style.reportsTableHeader}>
@@ -132,7 +86,7 @@ class Reports extends Component {
                   options={selectOptions}
                   id="SelectReports"
                   name="SelectReports"
-                  placeholder="Select One"
+                  placeholder="All Reports"
                   label="Select a report"
                 />
               </div>
@@ -152,7 +106,6 @@ class Reports extends Component {
                     {
                       Header: 'Title',
                       accessor: 'title',
-                      width: 420,
                     },
                     {
                       Header: 'Category',
@@ -170,14 +123,29 @@ class Reports extends Component {
                       Header: null,
                       width: 65,
                       Cell: ({ original: { id } }) => (
-                        <span
-                          className={style.deleteIcon}
-                          onClick={() => this.deleteReportAction(id)}
-                        />
+                        <div className={style.deleteWrapper}>
+                          <label className={style.deleteIcon} htmlFor={id}>
+                            <input type="checkbox" id={id} name={id} />
+                            <div>
+                              <span
+                                className={style.deleteText}
+                                onClick={(e) => {
+                                  e.stopPropagation()
+                                  this.deleteReportAction(id)
+                                }}
+                              >
+                                Delete Report
+                              </span>
+                              <label htmlFor={id}>cancel</label>
+                            </div>
+                          </label>
+                        </div>
                       ),
                     },
                   ]}
                 />
+
+                {/* onClick={() => this.deleteReportAction(id)} */}
 
                 <div className={style.reportsTableFooter}>
                   <Button

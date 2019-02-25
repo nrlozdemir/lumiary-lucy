@@ -6,6 +6,26 @@
 .ReactTable .rt-th,
 .ReactTable .rt-td {
   padding: 24px 40px;
+  overflow: initial;
+  position: relative;
+}
+.ReactTable .rt-thead.-header {
+  box-shadow: none;
+}
+.ReactTable .rt-th,
+.ReactTable .rt-td {
+  &:nth-child(1) {
+    flex: 1 1 42% !important;
+  }
+  &:nth-child(2) {
+    flex: 1 1 25% !important;
+  }
+  &:nth-child(3) {
+    flex: 1 1 15% !important;
+  }
+  &:nth-child(4) {
+    flex: 1 1 15% !important;
+  }
 }
 .ReactTable .rt-thead .rt-th,
 .ReactTable .rt-thead .rt-td {
@@ -65,7 +85,11 @@
     }
   }
 }
+.ReactTable .rt-table {
+  overflow: initial;
+}
 .ReactTable .rt-tbody {
+  overflow: initial;
   border: 1px solid $color-dusk;
   background-color: $color-dark-five;
 }

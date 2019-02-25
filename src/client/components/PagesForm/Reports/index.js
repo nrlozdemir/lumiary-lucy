@@ -35,7 +35,7 @@ const ReportsForm = ({}) => {
             options={selectOptionsSocial}
             id="social"
             name="social"
-            placeholder="Select One"
+            placeholder="Social Platform"
             label="Social Platform"
           />
         </div>

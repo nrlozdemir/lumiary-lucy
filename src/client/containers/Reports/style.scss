@@ -1,55 +1,61 @@
 .reportsContainer {
   font-family: $font-family-ClanOT;
 
-  .reportsCardContainer {
-    display: flex;
-
-    .reportsCard {
-      width: 0;
-      flex: 1 1 0;
-      border-radius: 8px;
-      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-      background-color: $color-dark-grey-blue;
-      border: 1px solid $color-dusk;
-      padding: 48px 30px 34px;
-      margin: 0 12px;
-
-      &:first-child {
-        margin-left: 0;
+  .deleteWrapper {
+    position: relative;
+    div {
+      background-color: #fff;
+      color: #000;
+      text-align: center;
+      border-radius: 6px;
+      width: 115px;
+      height: 78px;
+      box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.5);
+      padding: 5px 0;
+      position: absolute;
+      z-index: 100;
+      top: -60px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 0.2s;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      span {
+        color: #d0506c;
+        margin-bottom: 8px;
+        cursor: pointer;
+        font-family: $font-family-ClanOTBold;
+        &:hover {
+          text-decoration: underline;
+        }
       }
-      &:last-child {
-        margin-right: 0;
-      }
-
-      .cardIcons {
-        display: flex;
-        justify-content: center;
-        margin: 32px 0;
-      }
-
-      .cardTitle {
-        color: $color-white;
-        text-align: center;
-        font-size: 18px;
-      }
-
-      .cardDescription {
-        font-family: $font-family-ClanOTNews;
-        font-size: 12px;
-        font-weight: normal;
-        font-style: normal;
-        font-stretch: normal;
-        line-height: 1.67;
-        letter-spacing: normal;
-        text-align: center;
-        max-width: 220px;
-        margin: 0 auto;
+      label {
+        color: $color-dusk;
       }
     }
-  }
+    div::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -10px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: white transparent transparent transparent;
+    }
+    input {
+      display: none;
+    }
+    input:checked + div {
+      display: flex;
+      opacity: 1;
+    }
 
-  .deleteIcon {
-    &::before {
+    .deleteIcon::after {
       content: '\e91a';
       font-family: $font-family-qf-icons;
       color: $color-white;
