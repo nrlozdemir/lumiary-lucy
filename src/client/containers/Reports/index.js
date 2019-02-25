@@ -40,12 +40,11 @@ class Reports extends Component {
     this.setState({ modalIsOpen: false })
   }
 
-  deleteReport(value) {
-    console.log('delete a report, index:', value.viewIndex)
+  deleteReportAction(id) {
+    this.props.deleteReport(id)
   }
 
-  loadMore(value) {
-    console.log('load more', value)
+  loadMore() {
     this.props.getMoreReports()
   }
 
@@ -54,8 +53,6 @@ class Reports extends Component {
     const {
       reports: { reports, loading, error },
     } = this.props
-
-    console.log('reports', reports)
 
     return (
       <div className="grid-container col-12 mr-40 ml-40 mt-72 mb-72">
@@ -172,10 +169,10 @@ class Reports extends Component {
                     {
                       Header: null,
                       width: 65,
-                      Cell: ({ viewIndex }) => (
+                      Cell: ({ original: { id } }) => (
                         <span
                           className={style.deleteIcon}
-                          onClick={() => this.deleteReport({ viewIndex })}
+                          onClick={() => this.deleteReportAction(id)}
                         />
                       ),
                     },
@@ -184,7 +181,7 @@ class Reports extends Component {
 
                 <div className={style.reportsTableFooter}>
                   <Button
-                    onClick={() => this.loadMore(true)}
+                    onClick={() => this.loadMore()}
                     customClass="font-secondary-first text-bold"
                     buttonText="Load More"
                   />
@@ -212,6 +209,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getReports: () => dispatch(actions.loadReports()),
     getMoreReports: () => dispatch(actions.loadMoreReports()),
+    deleteReport: (id) => dispatch(actions.loadDeleteReport(id)),
   }
 }
 
