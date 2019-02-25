@@ -79,7 +79,15 @@
       }
     }
     .reportsTableBody {
-      padding: 34px 40px;
+      padding: 34px 40px 0;
+      display: flex;
+      flex-direction: column;
+
+      .reportsTableFooter {
+        margin: 48px 0;
+        display: flex;
+        justify-content: center;
+      }
     }
   }
 }

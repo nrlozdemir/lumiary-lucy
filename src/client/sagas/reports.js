@@ -18,4 +18,16 @@ function* getReports() {
   }
 }
 
-export default [takeLatest(types.LOAD_REPORTS, getReports)]
+function* getMoreReports() {
+  try {
+    const payload = yield call(getReportsApi)
+    yield put(actions.loadMoreReportsSuccess(payload))
+  } catch (err) {
+    yield put(actions.loadMoreReportsError(err))
+  }
+}
+
+export default [
+  takeLatest(types.LOAD_REPORTS, getReports),
+  takeLatest(types.LOAD_MORE_REPORTS, getMoreReports),
+]

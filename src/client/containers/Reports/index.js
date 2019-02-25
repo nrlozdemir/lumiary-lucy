@@ -8,6 +8,7 @@ import { actions, makeSelectReports } from 'Reducers/reports'
 import style from './style.scss'
 import { selectOptions } from './options'
 import Select from 'Components/Form/Select'
+import Button from 'Components/Form/Button'
 
 import ReportsModal from 'Components/Modal/reports'
 import ReportsForm from 'Components/PagesForm/Reports'
@@ -39,8 +40,13 @@ class Reports extends Component {
     this.setState({ modalIsOpen: false })
   }
 
-  editRow(value) {
-    console.log(value.viewIndex)
+  deleteReport(value) {
+    console.log('delete a report, index:', value.viewIndex)
+  }
+
+  loadMore(value) {
+    console.log('load more', value)
+    this.props.getMoreReports()
   }
 
   render() {
@@ -141,7 +147,7 @@ class Reports extends Component {
                 <ReactTable
                   data={reports}
                   showPagination={false}
-                  defaultPageSize={4}
+                  defaultPageSize={reports.length > 5 ? reports.length : 5}
                   multiSort={true}
                   resizable={false}
                   sortable={true}
@@ -169,12 +175,20 @@ class Reports extends Component {
                       Cell: ({ viewIndex }) => (
                         <span
                           className={style.deleteIcon}
-                          onClick={() => this.editRow({ viewIndex })}
+                          onClick={() => this.deleteReport({ viewIndex })}
                         />
                       ),
                     },
                   ]}
                 />
+
+                <div className={style.reportsTableFooter}>
+                  <Button
+                    onClick={() => this.loadMore(true)}
+                    customClass="font-secondary-first text-bold"
+                    buttonText="Load More"
+                  />
+                </div>
               </div>
             )}
           </div>
@@ -197,6 +211,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     getReports: () => dispatch(actions.loadReports()),
+    getMoreReports: () => dispatch(actions.loadMoreReports()),
   }
 }
 

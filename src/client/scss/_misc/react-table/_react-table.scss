@@ -22,7 +22,12 @@
     }
   }
 }
-.ReactTable .rt-thead .rt-resizable-header:last-child {
+.ReactTable .rt-tbody .rt-td:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ReactTable .rt-thead .rt-th:last-child {
   visibility: collapse;
 }
 .ReactTable .rt-thead .rt-th.-sort-asc,
