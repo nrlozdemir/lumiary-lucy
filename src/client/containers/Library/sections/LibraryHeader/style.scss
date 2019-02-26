@@ -8,11 +8,14 @@
 		flex: 1;
 		margin-right: auto;
 	}
-	.librarySearchInput {
-		background: url("../../../../../assets/search.png");
-		background-position: 10px 10px;
-		background-repeat: no-repeat;
-		background-size: 17px 17px;
-		padding-left: 39px;
+	.filterSelect {
+		>div {
+			background: $color-dark-five url("../../../../../assets/search.png") no-repeat 10px 10px;
+			background-size: 17px 17px;
+			padding-left: 39px;
+			border: 1px solid $color-white;
+			width: 280px;
+			border-radius: 0;
+		}
 	}
 }

@@ -1,40 +1,53 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm } from 'redux-form'
+import { createStructuredSelector } from "reselect";
 
 import style from './style.scss'
-import { actions } from 'Reducers/library'
 
+import { actions, makeSelectLibrary } from 'Reducers/library'
+import AsyncSearch from 'Components/Form/AsyncSearch'
 import Button from 'Components/Form/Button'
-import Input from 'Components/Form/Input'
 
 class LibraryDetail extends React.Component {
 	constructor(props) {
 		super(props)
+
+		this.state = {
+			selectValue: ''
+		}
+
 	}
 
-	async onChangeText(e) {
-		console.log('Event ', e.currentTarget);
-		const { getFilteredVideos } = this.props
-		await getFilteredVideos(e.target.value)
+	async onLoadOptions(inputValue, callback) {
+		console.log('Event ', inputValue)
+		try {
+			const { getFilteredTitles, library } = this.props
+			await getFilteredTitles(inputValue)
+			if(library.filteredTextList.length){
+				console.log("data", library.filteredTextList);
+				callback(library.filteredTextList)
+			}
+		}catch (e) {
+			console.log('error', e)
+		}
 	}
 
 	render() {
-		const { setSidebarVisible } = this.props
+		const { setSidebarVisible, library } = this.props
 		console.log(this.props);
 		return (
 			<div className={style.headerContainer}>
 				<div>
-					<form onSubmit={(e) => this.onChangeText(e)}>
 					<Field
 						name="libraryFilterInput"
-						component={Input}
-						onChange={e => this.onChangeText(e)}
-						customClass={style.librarySearchInput}
+						component={AsyncSearch}
+						loadOptions={this.onLoadOptions.bind(this)}
+						onChange={(e) => console.log(e)}
 						placeholder="Search a video…"
+						customClass={style.filterSelect}
 					/>
-					</form>
 				</div>
 				<div>
 					<h1 className="alpha color-white text-center font-primary text-bold">
@@ -54,11 +67,14 @@ class LibraryDetail extends React.Component {
 	}
 }
 
-const mapStateToProps = state => state;
+const mapStateToProps = createStructuredSelector({
+	library: makeSelectLibrary()
+});
 
 const mapDispatchToProps = dispatch => {
 	return {
-		getFilteredVideos: filterText => dispatch(actions.filterVideos(filterText))
+		getFilteredVideos: filterText => dispatch(actions.filterVideos(filterText)),
+		getFilteredTitles: filterText => dispatch(actions.filterTextList(filterText))
 	}
 }
 

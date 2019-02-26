@@ -35,7 +35,23 @@ function* getFilteredVideos({ filterText }) {
 	}
 }
 
+function* getFilteredTitles({ filterText }) {
+	try {
+		let payload = yield call(getLibraryApi);
+		if(filterText.length && payload){
+			payload = payload.filter(item => {
+				return item.title.includes(filterText);
+			}).map(item => item.title);
+			console.log('Payload', payload)
+			yield put(actions.filterTextListSuccess(payload))
+		}
+	} catch (err) {
+		yield put(actions.filterTextListError(err))
+	}
+}
+
 export default [
 	takeLatest(types.LOAD_VIDEOS, getVideos),
-	takeLatest(types.FILTER_VIDEOS, getFilteredVideos)
+	takeLatest(types.FILTER_VIDEOS, getFilteredVideos),
+	takeLatest(types.FILTER_TEXT_LIST, getFilteredTitles)
 ];

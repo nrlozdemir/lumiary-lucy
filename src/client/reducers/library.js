@@ -14,7 +14,11 @@ export const types = {
 
 	FILTER_VIDEOS: "Library/FILTER_VIDEOS",
 	FILTER_VIDEOS_SUCCESS: "Library/FILTER_VIDEOS_SUCCESS",
-	FILTER_VIDEOS_ERROR: "Library/FILTER_VIDEOS_ERROR"
+	FILTER_VIDEOS_ERROR: "Library/FILTER_VIDEOS_ERROR",
+
+	FILTER_TEXT_LIST: "Library/FILTER_VIDEOS",
+	FILTER_TEXT_LIST_SUCCESS: "Library/FILTER_VIDEOS_SUCCESS",
+	FILTER_TEXT_LIST_ERROR: "Library/FILTER_VIDEOS_ERROR",
 };
 export const actions = {
   loadVideos: () => ({ type: types.LOAD_VIDEOS }),
@@ -23,10 +27,15 @@ export const actions = {
 
 	filterVideos: filterText => ({ type: types.FILTER_VIDEOS, filterText}),
 	filterVideosSuccess: payload => ({ type: types.FILTER_VIDEOS_SUCCESS, payload }),
-	filterVideosError: error => ({ type: types.FILTER_VIDEOS_ERROR, error})
+	filterVideosError: error => ({ type: types.FILTER_VIDEOS_ERROR, error}),
+
+	filterTextList: filterText => ({ type: types.FILTER_TEXT_LIST, filterText}),
+	filterTextListSuccess: payload => ({ type: types.FILTER_TEXT_LIST_SUCCESS, payload }),
+	filterTextListError: error => ({ type: types.FILTER_TEXT_LIST_ERROR, error})
 };
 export const initialState = fromJS({
   videos: [],
+	filteredTextList: [],
   error: false,
   loading: false
 });
@@ -58,6 +67,21 @@ const libraryReducer = (state = initialState, action) => {
 			return state
 				.set("error", fromJS(action.error))
 				.set("loading", fromJS(false));
+
+		case types.FILTER_TEXT_LIST:
+			return state;
+
+		case types.FILTER_TEXT_LIST_SUCCESS:
+			return state
+				.set("videos").fromJS(state.videos)
+				.set("filteredTextList", fromJS(action.payload))
+				.set("loading", fromJS(false));
+
+		case types.FILTER_TEXT_LIST_ERROR:
+			return state
+				.set("error", fromJS(action.error))
+				.set("loading", fromJS(false));
+
     default:
       return state;
   }
