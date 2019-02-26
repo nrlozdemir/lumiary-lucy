@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
-// import classnames from 'classnames'
 import style from './style.scss'
 
 const ReportsModal = ({
