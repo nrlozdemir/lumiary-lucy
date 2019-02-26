@@ -1,0 +1,98 @@
+.ReactTable {
+  border: none;
+  font-family: $font-family-ClanOTNews;
+  font-size: 14px;
+}
+.ReactTable .rt-th,
+.ReactTable .rt-td {
+  padding: 24px 40px;
+  overflow: initial;
+  position: relative;
+}
+.ReactTable .rt-thead.-header {
+  box-shadow: none;
+}
+.ReactTable .rt-th,
+.ReactTable .rt-td {
+  &:nth-child(1) {
+    flex: 1 1 42% !important;
+  }
+  &:nth-child(2) {
+    flex: 1 1 25% !important;
+  }
+  &:nth-child(3) {
+    flex: 1 1 15% !important;
+  }
+  &:nth-child(4) {
+    flex: 1 1 15% !important;
+  }
+}
+.ReactTable .rt-thead .rt-th,
+.ReactTable .rt-thead .rt-td {
+  padding: 24px 40px;
+  text-align: left;
+  line-height: normal;
+  position: relative;
+  display: flex;
+  align-items: center;
+  box-shadow: none;
+  &:nth-last-child(2) {
+    .rt-resizable-header-content {
+      text-decoration: underline;
+    }
+  }
+}
+.ReactTable .rt-tbody .rt-td:last-child {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.ReactTable .rt-thead .rt-th:last-child {
+  visibility: collapse;
+}
+.ReactTable .rt-thead .rt-th.-sort-asc,
+.ReactTable .rt-thead .rt-td.-sort-asc {
+  box-shadow: none;
+  &:after {
+    margin-left: 8px;
+    font-family: $font-family-qf-icons;
+    content: '\e916';
+    display: inline-block;
+    -webkit-transform: rotate(180deg);
+    -moz-transform: rotate(180deg);
+    -o-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+  }
+}
+.ReactTable .rt-thead .rt-th.-sort-desc,
+.ReactTable .rt-thead .rt-td.-sort-desc {
+  box-shadow: none;
+  &:after {
+    margin-left: 8px;
+    font-family: $font-family-qf-icons;
+    content: '\e916';
+  }
+}
+.ReactTable .rt-thead .rt-th,
+.ReactTable .rt-thead .rt-td {
+  &:not(.-sort-desc),
+  &:not(.-sort-asc) {
+    &:after {
+      margin-left: 8px;
+      font-family: $font-family-qf-icons;
+      content: '\e916';
+    }
+  }
+}
+.ReactTable .rt-table {
+  overflow: initial;
+}
+.ReactTable .rt-tbody {
+  overflow: initial;
+  border: 1px solid $color-dusk;
+  background-color: $color-dark-five;
+}
+.ReactTable .rt-tbody .rt-tr-group {
+  border-bottom: solid 1px $color-dusk;
+}
