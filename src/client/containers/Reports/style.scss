@@ -3,6 +3,7 @@
 
   .deleteWrapper {
     position: relative;
+    outline: 0;
     div {
       background-color: #fff;
       color: #000;
@@ -18,7 +19,7 @@
       left: 50%;
       transform: translate(-50%, -50%);
       opacity: 0;
-      transition: opacity 0.2s;
+      transition: opacity 1s;
       display: none;
       flex-direction: column;
       align-items: center;
@@ -33,7 +34,8 @@
           text-decoration: underline;
         }
       }
-      label {
+      a {
+        cursor: pointer;
         color: $color-dusk;
       }
     }
@@ -47,15 +49,11 @@
       border-style: solid;
       border-color: white transparent transparent transparent;
     }
-    input {
-      display: none;
-    }
-    input:checked + div {
+    &:focus div {
       display: flex;
       opacity: 1;
     }
-
-    .deleteIcon::after {
+    &:after {
       content: '\e91a';
       font-family: $font-family-qf-icons;
       color: $color-white;

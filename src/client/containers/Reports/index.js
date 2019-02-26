@@ -123,22 +123,18 @@ class Reports extends Component {
                       Header: null,
                       width: 65,
                       Cell: ({ original: { id } }) => (
-                        <div className={style.deleteWrapper}>
-                          <label className={style.deleteIcon} htmlFor={id}>
-                            <input type="checkbox" id={id} name={id} />
-                            <div>
-                              <span
-                                className={style.deleteText}
-                                onClick={(e) => {
-                                  e.stopPropagation()
-                                  this.deleteReportAction(id)
-                                }}
-                              >
-                                Delete Report
-                              </span>
-                              <label htmlFor={id}>cancel</label>
-                            </div>
-                          </label>
+                        <div className={style.deleteWrapper} tabIndex="1">
+                          <div className={style.deleteIcon}>
+                            <span
+                              className={style.deleteText}
+                              onClick={(e) => {
+                                this.deleteReportAction(id)
+                              }}
+                            >
+                              Delete Report
+                            </span>
+                            <a tabIndex="2">cancel</a>
+                          </div>
                         </div>
                       ),
                     },
