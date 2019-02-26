@@ -97,11 +97,13 @@ class Reports extends Component {
               <div className={style.reportsTableBody}>
                 <ReactTable
                   data={reports}
+                  noDataText="No reports data"
                   showPagination={false}
-                  defaultPageSize={reports.length > 5 ? reports.length : 5}
                   multiSort={true}
                   resizable={false}
                   sortable={true}
+                  minRows={4}
+                  pageSize={reports.length}
                   columns={[
                     {
                       Header: 'Title',
