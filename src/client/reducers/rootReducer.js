@@ -1,14 +1,15 @@
-import { combineReducers } from "redux";
-import { reducer as formReducer } from "redux-form";
+import { combineReducers } from 'redux'
+import { reducer as formReducer } from 'redux-form'
 
-import Library from "./library";
-import Quickview from "./quickview";
-import Marketview from "./marketview";
-import Panoptic from "./panoptic";
-import LibraryDetail from "./libraryDetail";
-import app from "./app";
+import Library from './library'
+import Quickview from './quickview'
+import Marketview from './marketview'
+import Panoptic from './panoptic'
+import LibraryDetail from './libraryDetail'
+import Reports from './reports'
+import app from './app'
 
-const rootReducer = history =>
+const rootReducer = (history) =>
   combineReducers({
     app,
     Library,
@@ -16,7 +17,8 @@ const rootReducer = history =>
     Marketview,
     Panoptic,
     LibraryDetail,
-    form: formReducer
-  });
+    Reports,
+    form: formReducer,
+  })
 
-export default rootReducer;
+export default rootReducer

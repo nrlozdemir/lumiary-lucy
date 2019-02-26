@@ -1,0 +1,32 @@
+[
+  {
+    "title": "Show this report to Steve on Monday",
+    "category": "Brands Insights",
+    "platform": "Facebook",
+    "date": "2/11/19"
+  },
+  {
+    "title": "Bleacher Report VS ESPN comparison",
+    "category": "Compare Brands",
+    "platform": "Instagram",
+    "date": "2/10/19"
+  },
+  {
+    "title": "Fansided vs Scoutmedia on Facebook",
+    "category": "Compare Brands",
+    "platform": "Twitter",
+    "date": "2/8/19"
+  },
+  {
+    "title": "Videos with baseball pitchers losing control",
+    "category": "Predefined Reports",
+    "platform": "Facebook",
+    "date": "2/4/19"
+  },
+  {
+    "title": "Bleacher Report performance on Instagram",
+    "category": "Brands Insights",
+    "platform": "Facebook",
+    "date": "2/1/19"
+  }
+]

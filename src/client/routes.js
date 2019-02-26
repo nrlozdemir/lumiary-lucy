@@ -58,6 +58,11 @@ const routes = [
     component: 'Marketview',
   },
   {
+    path: '/reports',
+    exact: true,
+    component: 'Reports',
+  },
+  {
     path: '*',
     component: 'NotFound',
   },
