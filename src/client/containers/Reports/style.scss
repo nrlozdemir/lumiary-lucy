@@ -1,0 +1,97 @@
+.reportsContainer {
+  font-family: $font-family-ClanOT;
+
+  .deleteWrapper {
+    position: relative;
+    outline: 0;
+    div {
+      background-color: #fff;
+      color: #000;
+      text-align: center;
+      border-radius: 6px;
+      width: 115px;
+      height: 78px;
+      box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.5);
+      padding: 5px 0;
+      position: absolute;
+      z-index: 100;
+      top: -60px;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0;
+      transition: opacity 1s;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      span {
+        color: #d0506c;
+        margin-bottom: 8px;
+        cursor: pointer;
+        font-family: $font-family-ClanOTBold;
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+      a {
+        cursor: pointer;
+        color: $color-dusk;
+      }
+    }
+    div::after {
+      content: '';
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-left: -10px;
+      border-width: 10px;
+      border-style: solid;
+      border-color: white transparent transparent transparent;
+    }
+    &:focus div {
+      display: flex;
+      opacity: 1;
+    }
+    &:after {
+      content: '\e91a';
+      font-family: $font-family-qf-icons;
+      color: $color-white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+  }
+
+  .reportsTableContainer {
+    margin-top: 72px;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+    background-color: $color-dark-grey-blue;
+    .reportsTableHeader {
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+      background-color: $color-dusk;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      p {
+        font-size: 14px;
+        font-weight: bold;
+      }
+      .inputWrapper {
+        width: 200px;
+      }
+    }
+    .reportsTableBody {
+      padding: 34px 40px 0;
+      display: flex;
+      flex-direction: column;
+
+      .reportsTableFooter {
+        margin: 48px 0;
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+}

@@ -4,20 +4,20 @@
  *
  */
 
-import React from "react";
-import classnames from "classnames";
-import { NavLink } from "react-router-dom";
-import style from "./style.scss";
+import React from 'react'
+import classnames from 'classnames'
+import { NavLink } from 'react-router-dom'
+import style from './style.scss'
 // import PropTypes from 'prop-types';
 
 /* eslint-disable react/prefer-stateless-function */
 class Navbar extends React.Component {
   render() {
-    const containerClass = classnames("bg-dark-grey-blue " + style.container);
-    const linksClass = classnames(style.links);
-    const logoClass = classnames("color-white " + style.logo);
-    const profileClass = classnames(style.profile);
-    const imageClass = classnames("circleImage " + style.profileImage);
+    const containerClass = classnames('bg-dark-grey-blue ' + style.container)
+    const linksClass = classnames(style.links)
+    const logoClass = classnames('color-white ' + style.logo)
+    const profileClass = classnames(style.profile)
+    const imageClass = classnames('circleImage ' + style.profileImage)
 
     return (
       <div className={containerClass}>
@@ -35,8 +35,8 @@ class Navbar extends React.Component {
           <NavLink to="/panoptic" activeClassName={style.activeLink}>
             Panoptic
           </NavLink>
-          <NavLink to="/admin" activeClassName={style.activeLink}>
-            Admin
+          <NavLink to="/reports" activeClassName={style.activeLink}>
+            Reports
           </NavLink>
         </div>
         <div className={profileClass}>
@@ -46,10 +46,10 @@ class Navbar extends React.Component {
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-Navbar.propTypes = {};
+Navbar.propTypes = {}
 
-export default Navbar;
+export default Navbar

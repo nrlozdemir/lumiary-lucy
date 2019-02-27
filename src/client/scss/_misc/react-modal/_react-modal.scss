@@ -1,0 +1,32 @@
+.ReactModalPortal {
+  font-family: $font-family-ClanOT;
+  .ReactModal__Overlay {
+    overflow-y: auto;
+    opacity: 0;
+    transition: opacity 300ms ease-in-out;
+  }
+  .ReactModal__Overlay--after-open {
+    opacity: 1;
+  }
+
+  .ReactModal__Overlay--before-close {
+    opacity: 0;
+  }
+  .ReactModal__Content {
+    // top: 50% !important;
+    // left: 50% !important;
+    // right: auto !important;
+    // bottom: auto !important;
+    // margin-bottom: 50px;
+    // margin-right: -50%;
+    // transform: translate(-50%, -50%);
+    margin: 50px auto;
+    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+    border: none !important;
+    padding: 0 !important;
+    width: 100%;
+    border-radius: 0 !important;
+    overflow-y: auto;
+    position: relative !important;
+  }
+}
