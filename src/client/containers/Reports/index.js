@@ -10,7 +10,7 @@ import { selectOptions } from './options'
 import Select from 'Components/Form/Select'
 import Button from 'Components/Form/Button'
 
-import ReportsModal from 'Components/Modal/reports'
+import ReportsModal from 'Components/Modal/Reports'
 import ReportsForm from 'Components/PagesForm/Reports'
 import RouterLoading from 'Components/RouterLoading'
 
