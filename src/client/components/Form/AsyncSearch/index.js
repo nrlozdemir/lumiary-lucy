@@ -7,7 +7,9 @@ import { initialOptions } from "./options";
 import style from "./styles.scss"
 
 const AsyncSearch = props => {
-	const { id, options, placeholder, multiple, customClass, loadOptions } = props
+	const { id, options, placeholder, multiple, customClass, loadOptions, input } = props
+
+	console.log("AsyncSearch", props);
 
 	let args = props.input ? props.input : props
 	let { name, onChange, value } = args
@@ -20,19 +22,51 @@ const AsyncSearch = props => {
 		[style.selected]: !!value
 	})
 
+	const customStyles = {
+		menu: (provided, state) => ({
+			...provided,
+			color: state.isSelected || state.isFocused ? '#5a6386' : '#ffffff',
+			backgroundColor:'#5a6386',
+			borderRadius: 0,
+			marginLeft: '-40px',
+		}),
+		menuList: (provided, state) => ({
+			...provided,
+			backgroundColor: '#5a6386',
+			color: state.isSelected || state.isFocused ? '#5a6386' : '#242b49',
+		}),
+		option: (provided, state) => ({
+			...provided,
+			backgroundColor: state.isSelected || state.isFocused ? '#ffffff' : '#5a6386',
+			color: state.isSelected || state.isFocused ? '#5a6386' : '#ffffff',
+			cursor: state.isDisabled ? 'not-allowed' : 'default',
+		}),
+		control: (provided, state) => ({
+			...provided,
+			backgroundColor: '#242b49',
+			color: state.isSelected || state.isFocused ? '#5a6386' : '#ffffff',
+		}),
+		noOptionsMessage: (provided, state) => ({ ...provided, backgroundColor: '#5a6386', color: '#ffffff' }),
+		input: (provided, state) => ({ ...provided, color: '#ffffff' }),
+		placeholder: (provided, state) => ({ ...provided, color: '#ffffff' })
+	}
+
 	return (
 		<Async
 			id={id}
-			className={selectClass}
 			clearable={false}
 			name={name}
 			loadOptions={loadOptions}
+			className={selectClass}
 			onChange={!!props.input ? reduxFormOnChange : onChange}
+			cacheOptions
+			defaultOptions
 			options={options || initialOptions}
 			searchable={false}
 			placeholder={placeholder}
 			multi={multiple}
-			{...(value ? { value } : { value: null })}
+			styles={customStyles}
+			{...input}
 		/>
 	)
 }

@@ -3,21 +3,17 @@
 	font-size: 14px;
 	margin: 10px 0;
 	div {
-		color: $color-white;
-		background-color: $color-dark-five;
+		background-image: none;
 		border-radius: 8px;
 		border: 0;
+	}
+	&:nth-last-child(2){
+		background-color: $color-dusk;
 	}
 	span{
 		visibility: hidden;
 	}
 	svg{
 		visibility: hidden;
-	}
-}
-
-.selected {
-	div {
-		color: $color-white;
 	}
 }

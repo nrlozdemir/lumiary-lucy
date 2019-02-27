@@ -9,7 +9,8 @@
 		margin-right: auto;
 	}
 	.filterSelect {
-		>div {
+		&:first-child {
+			outline: none;
 			background: $color-dark-five url("../../../../../assets/search.png") no-repeat 10px 10px;
 			background-size: 17px 17px;
 			padding-left: 39px;
@@ -17,5 +18,12 @@
 			width: 280px;
 			border-radius: 0;
 		}
+		>div{
+			border-radius: 0;
+		}
+		p{
+			border-radius: 0;
+		}
+		div{border-radius: 0}
 	}
 }

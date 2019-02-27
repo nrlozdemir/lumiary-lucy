@@ -41,7 +41,7 @@ function* getFilteredTitles({ filterText }) {
 		if(filterText.length && payload){
 			payload = payload.filter(item => {
 				return item.title.includes(filterText);
-			}).map(item => item.title);
+			}).map(item => {return {label: item.title, value:item.id}});
 			console.log('Payload', payload)
 			yield put(actions.filterTextListSuccess(payload))
 		}

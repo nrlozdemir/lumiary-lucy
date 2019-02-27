@@ -15,18 +15,16 @@ class LibraryDetail extends React.Component {
 		super(props)
 
 		this.state = {
-			selectValue: ''
+			inputValue: ''
 		}
 
 	}
 
 	async onLoadOptions(inputValue, callback) {
-		console.log('Event ', inputValue)
 		try {
 			const { getFilteredTitles, library } = this.props
 			await getFilteredTitles(inputValue)
 			if(library.filteredTextList.length){
-				console.log("data", library.filteredTextList);
 				callback(library.filteredTextList)
 			}
 		}catch (e) {
@@ -35,7 +33,7 @@ class LibraryDetail extends React.Component {
 	}
 
 	render() {
-		const { setSidebarVisible, library } = this.props
+		const { setSidebarVisible } = this.props
 		console.log(this.props);
 		return (
 			<div className={style.headerContainer}>
@@ -44,7 +42,7 @@ class LibraryDetail extends React.Component {
 						name="libraryFilterInput"
 						component={AsyncSearch}
 						loadOptions={this.onLoadOptions.bind(this)}
-						onChange={(e) => console.log(e)}
+						onChange={(e) => console.log("onChange", e)}
 						placeholder="Search a video…"
 						customClass={style.filterSelect}
 					/>
