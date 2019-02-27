@@ -1,0 +1,30 @@
+.modalHeader {
+  display: flex;
+  align-items: center;
+  padding: 24px 32px;
+  color: $color-black;
+  background-color: $color-white;
+  justify-content: space-between;
+
+  .headerTitle {
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    color: $color-dark-blue-grey;
+  }
+  .iconWrapper {
+    cursor: pointer;
+    span {
+      font-size: 24px;
+    }
+  }
+}
+
+.modalContainer {
+  position: relative;
+  padding: 56px;
+  font-size: 12px;
+}

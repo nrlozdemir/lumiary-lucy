@@ -7,7 +7,10 @@ const RadarChart = ({data}) => (
 		options={{
 			legend: {
 				display: false
-			},
+      },
+      plugins: {
+        datalabels: false
+      },
 			tooltips: {
 				backgroundColor: "#fff",
 				cornerRadius: 0,
@@ -34,7 +37,7 @@ const RadarChart = ({data}) => (
 						return "●";
 					},
 					fontSize: 30,
-					fontColor: radarData.labels.map(lbl => lbl)
+					fontColor: data.labels.map(lbl => lbl)
 				},
 				ticks: {
 					display: false,

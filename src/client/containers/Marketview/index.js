@@ -1,18 +1,32 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import { Link } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { createStructuredSelector } from 'reselect';
+import React from 'react'
+import PropTypes from 'prop-types'
+import { NavLink, Route, Switch } from "react-router-dom"
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from "redux"
 import { actions, makeSelectMarketview } from "Reducers/marketview"
 
-import style from './style.scss';
+import style from './style.scss'
+import classnames from "classnames"
 
-import ColorCard from 'Components/MarketviewCards/color';
-import FormatCard from 'Components/MarketviewCards/format';
-import PacingCard from 'Components/MarketviewCards/pacing';
-import TotalViewsChart from 'Components/TotalViewsChart';
-import TotalCompetitorViewsChart from 'Components/TotalCompetitorViewsChart';
+import RouterLoading from "Components/RouterLoading"
+import DynamicImport from "Containers/DynamicImport"
+
+const Detail = (props) => (
+  <DynamicImport removeNavbar load={() => import('./views/detail')}>
+    {(Component) => Component === null
+      ? <RouterLoading/>
+      : <Component {...props} />}
+  </DynamicImport>
+)
+
+const Main = (props) => (
+	<DynamicImport removeNavbar load={() => import('./views/main')}>
+		{(Component) => Component === null
+			? <RouterLoading/>
+			: <Component {...props} />}
+	</DynamicImport>
+)
 
 /* eslint-disable react/prefer-stateless-function */
 export class Marketview extends React.Component {
@@ -20,36 +34,32 @@ export class Marketview extends React.Component {
     return (
       <div className="grid-container col-12">
         <div className={style.alignTabs}>
-          <Link to="/marketview/platform" className={style.tab}>
+          <NavLink to="/marketview/platform" className={style.tab} activeClassName={classnames(style.tab, style.activeLink)}>
             Platform
-          </Link>
-          <Link to="/marketview/competitor" className={style.tab}>
+          </NavLink>
+          <NavLink to="/marketview/competitor" className={style.tab} activeClassName={style.activeLink}>
             Competitor
-          </Link>
-          <Link to="/marketview/time" className={style.tab}>
+          </NavLink>
+					<NavLink to="/marketview/time" className={style.tab}
+					 activeClassName={style.activeLink}>
             Time
-          </Link>
-        </div>
-        <div className="grid-collapse">
-          <div className="col-4 mb-48">
-            <ColorCard />
-          </div>
-
-          <div className="col-4 mb-48">
-            <PacingCard />
-          </div>
-
-          <div className="col-4 mb-48">
-            <FormatCard />
-          </div>
+          </NavLink>
         </div>
 
-        <div className="grid-collapse">
-          <TotalViewsChart />
-          <TotalCompetitorViewsChart />
-        </div>
+				<Switch>
+					<Route
+						path="/marketview"
+						exact
+						component={Main}
+					/>
+					<Route
+						path="/marketview/:detail"
+						component={Detail}
+					/>
+				</Switch>
+
       </div>
-    );
+    )
   }
 }
 
