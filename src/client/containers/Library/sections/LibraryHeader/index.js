@@ -10,15 +10,10 @@ import { actions, makeSelectLibrary } from 'Reducers/library'
 import AsyncSearch from 'Components/Form/AsyncSearch'
 import Button from 'Components/Form/Button'
 
-class LibraryDetail extends React.Component {
-	constructor(props) {
-		super(props)
-
-		this.state = {
-			inputValue: ''
-		}
-
-	}
+class LibraryHeader extends React.Component {
+  constructor(props) {
+    super(props)
+  }
 
 	async onLoadOptions(inputValue, callback) {
 		try {
@@ -34,7 +29,6 @@ class LibraryDetail extends React.Component {
 
 	render() {
 		const { setSidebarVisible } = this.props
-		console.log(this.props);
 		return (
 			<div className={style.headerContainer}>
 				<div>
@@ -85,4 +79,4 @@ export default compose(
 	reduxForm({
 		form: 'LibraryHeaderForm'
 	}),
-	withConnect)(LibraryDetail)
+	withConnect)(LibraryHeader)
