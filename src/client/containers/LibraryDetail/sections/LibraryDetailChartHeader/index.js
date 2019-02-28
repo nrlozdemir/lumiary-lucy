@@ -3,6 +3,7 @@ import { Bar } from 'react-chartjs-2'
 
 import style from './style.scss'
 import { barDataOptions } from './options'
+import Video from '../VideoComponent'
 
 const LibraryDetailChartHeader = ({ barData }) => (
   <div className="grid-container mr-20 ml-20 mt-72">
@@ -11,9 +12,10 @@ const LibraryDetailChartHeader = ({ barData }) => (
         src="https://picsum.photos/588/360?image=20"
         className="img-responsive shadow-1"
       /> */}
-			<video className="img-responsive shadow-1">
+			{/* <video className="img-responsive shadow-1">
 				<source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4"></source>
-			</video>
+			</video> */}
+      <Video />
     </div>
     <div className="col-6 bg-dark-grey-blue shadow-1">
       <div className={style.chartHeader}>
