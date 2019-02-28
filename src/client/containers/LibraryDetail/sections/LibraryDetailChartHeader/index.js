@@ -7,10 +7,13 @@ import { barDataOptions } from './options'
 const LibraryDetailChartHeader = ({ barData }) => (
   <div className="grid-container mr-20 ml-20 mt-72">
     <div className="col-6">
-      <img
+      {/* <img
         src="https://picsum.photos/588/360?image=20"
         className="img-responsive shadow-1"
-      />
+      /> */}
+			<video className="img-responsive shadow-1">
+				<source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4"></source>
+			</video>
     </div>
     <div className="col-6 bg-dark-grey-blue shadow-1">
       <div className={style.chartHeader}>

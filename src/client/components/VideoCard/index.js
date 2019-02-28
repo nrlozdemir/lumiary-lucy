@@ -24,10 +24,19 @@ const VideoCard = ({ video, options = options || {} }) => {
 		style.iconClass
 	);
 
+	const videoEl = React.createRef();
+
 	return (
-		<div key={video.id} className={cardContainerClass}>
+		<div
+			key={video.id}
+			className={cardContainerClass}
+			onMouseEnter={() => videoEl.current && videoEl.current.play()}
+			onMouseLeave={() => videoEl.current && videoEl.current.pause()}>
 			<div className={style.cardImage}>
-				<img className="img-responsive" src={video.thumbnailUrl} />
+			<video className="img-responsive" ref={videoEl} muted>
+				<source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4"></source>
+			</video>
+				{/* <img className="img-responsive" src={video.thumbnailUrl} /> */}
 				<div className={style.overlay} />
 			</div>
 			<div className={style.cardBody}>
