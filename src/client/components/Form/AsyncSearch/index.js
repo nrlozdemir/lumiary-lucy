@@ -3,13 +3,10 @@ import PropTypes from "prop-types"
 import classNames from "classnames"
 import Async from 'react-select/lib/Async'
 
-import { initialOptions } from "./options";
 import style from "./styles.scss"
 
 const AsyncSearch = props => {
-	const { id, options, placeholder, multiple, customClass, loadOptions, input } = props
-
-	console.log("AsyncSearch", props);
+	const { id, options, placeholder, multiple, customClass, loadOptions, input, onInputChange } = props
 
 	let args = props.input ? props.input : props
 	let { name, onChange, value } = args
@@ -57,11 +54,12 @@ const AsyncSearch = props => {
 			clearable={false}
 			name={name}
 			loadOptions={loadOptions}
+			onInputChange={onInputChange}
 			className={selectClass}
 			onChange={!!props.input ? reduxFormOnChange : onChange}
 			cacheOptions
 			defaultOptions
-			options={options || initialOptions}
+			options={options}
 			searchable={false}
 			placeholder={placeholder}
 			multi={multiple}

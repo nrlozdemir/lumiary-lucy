@@ -5,18 +5,13 @@
  */
 
 import React from "react"
-import PropTypes from "prop-types"
-import { connect } from "react-redux"
-import { createStructuredSelector } from "reselect"
 import classNames from "classnames"
-import { compose } from "redux"
 import style from "./style.scss"
 
 import { actions, makeSelectLibrary } from "Reducers/library"
-import VideoCardList from "Components/VideoCardList"
 import LibraryHeader from './sections/LibraryHeader'
 import Sidebar from "./sidebar.js"
-import RouterLoading from "Components/RouterLoading"
+import VideoSection from './sections/VideoSection'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Library extends React.Component {
@@ -27,10 +22,6 @@ export class Library extends React.Component {
 		}
 	}
 
-	componentDidMount() {
-		this.props.getVideos()
-	}
-
 	setSidebarVisible(e) {
 		this.setState({ sidebarVisible: e })
 	}
@@ -39,20 +30,13 @@ export class Library extends React.Component {
 		const sideBarClass = classNames(style.overlay, {
 			[style.overlayShow]: this.state.sidebarVisible
 		})
-		if (!this.props.library.videos || this.props.library.loading) {
-			return <RouterLoading/>
-		}
 		return (
 			<React.Fragment>
 				<div className="grid-container col-12">
 					<LibraryHeader
 						setSidebarVisible={this.setSidebarVisible.bind(this)}
 					/>
-					<div className="grid-collapse mt-50">
-						<VideoCardList
-							data={this.props.library.videos}
-						/>
-					</div>
+					<VideoSection />
 				</div>
 				<div
 					className={sideBarClass}
@@ -67,25 +51,4 @@ export class Library extends React.Component {
 	}
 }
 
-Library.propTypes = {
-	library: PropTypes.object,
-	getVideos: PropTypes.func,
-	dispatch: PropTypes.func
-}
-
-const mapStateToProps = createStructuredSelector({
-	library: makeSelectLibrary()
-})
-
-function mapDispatchToProps(dispatch) {
-	return {
-		getVideos: () => dispatch(actions.loadVideos())
-	}
-}
-
-const withConnect = connect(
-	mapStateToProps,
-	mapDispatchToProps
-)
-
-export default compose(withConnect)(Library)
+export default Library

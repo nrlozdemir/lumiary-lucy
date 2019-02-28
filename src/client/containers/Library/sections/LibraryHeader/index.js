@@ -19,11 +19,18 @@ class LibraryHeader extends React.Component {
 		try {
 			const { getFilteredTitles, library } = this.props
 			await getFilteredTitles(inputValue)
-			if(library.filteredTextList.length){
+			if(library.filteredTextList && library.filteredTextList.length > 0){
 				callback(library.filteredTextList)
 			}
 		}catch (e) {
 			console.log('error', e)
+		}
+	}
+
+	async onChangeText(textValue) {
+  	const { getFilteredVideos } = this.props
+  	if(textValue.length > 0){
+  		await getFilteredVideos(textValue)
 		}
 	}
 
@@ -36,7 +43,7 @@ class LibraryHeader extends React.Component {
 						name="libraryFilterInput"
 						component={AsyncSearch}
 						loadOptions={this.onLoadOptions.bind(this)}
-						onChange={(e) => console.log("onChange", e)}
+						onInputChange={this.onChangeText.bind(this)}
 						placeholder="Search a video…"
 						customClass={style.filterSelect}
 					/>
