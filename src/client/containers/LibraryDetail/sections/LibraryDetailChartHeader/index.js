@@ -5,17 +5,10 @@ import style from './style.scss'
 import { barDataOptions } from './options'
 import Video from '../VideoComponent'
 
-const LibraryDetailChartHeader = ({ barData }) => (
-  <div className="grid-container mr-20 ml-20 mt-72">
-    <div className="col-6">
-      {/* <img
-        src="https://picsum.photos/588/360?image=20"
-        className="img-responsive shadow-1"
-      /> */}
-			{/* <video className="img-responsive shadow-1">
-				<source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4"></source>
-			</video> */}
-      <Video />
+const LibraryDetailChartHeader = ({ barData, videoUrl }) => (
+  <div className="grid-container mr-20 ml-20 mt-72" style={{display: 'flex'}}>
+    <div className="col-6" style={{position: 'relative'}}>
+      <Video src={videoUrl} />
     </div>
     <div className="col-6 bg-dark-grey-blue shadow-1">
       <div className={style.chartHeader}>
@@ -53,7 +46,7 @@ const LibraryDetailChartHeader = ({ barData }) => (
             827.8k
           </span>
           <span className="color-cool-grey font-secondary-second font-size-12 display-block">
-            BlaBla
+            Views
           </span>
         </div>
         <div className={style.label}>
@@ -61,7 +54,7 @@ const LibraryDetailChartHeader = ({ barData }) => (
             481.7k
           </span>
           <span className="color-cool-grey font-secondary-second font-size-12 display-block">
-            BlaBla
+            Likes
           </span>
         </div>
         <div className={style.label}>
@@ -69,7 +62,7 @@ const LibraryDetailChartHeader = ({ barData }) => (
             265.2k
           </span>
           <span className="color-cool-grey font-secondary-second font-size-12 display-block">
-            BlaBla
+            Comments
           </span>
         </div>
         <div className={style.label}>
@@ -77,7 +70,7 @@ const LibraryDetailChartHeader = ({ barData }) => (
             126.3k
           </span>
           <span className="color-cool-grey font-secondary-second font-size-12 display-block">
-            BlaBla
+            Shares
           </span>
         </div>
       </div>

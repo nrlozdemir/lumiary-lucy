@@ -33,10 +33,9 @@ const VideoCard = ({ video, options = options || {} }) => {
 			onMouseEnter={() => videoEl.current && videoEl.current.play()}
 			onMouseLeave={() => videoEl.current && videoEl.current.pause()}>
 			<div className={style.cardImage}>
-			<video className="img-responsive" ref={videoEl} muted>
-				<source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4"></source>
-			</video>
-				{/* <img className="img-responsive" src={video.thumbnailUrl} /> */}
+				<video className="img-responsive" ref={videoEl} muted>
+					<source src={video.videoUrl}></source>
+				</video>
 				<div className={style.overlay} />
 			</div>
 			<div className={style.cardBody}>

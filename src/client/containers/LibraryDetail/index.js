@@ -7,6 +7,7 @@ import { reduxForm } from "redux-form";
 
 import { chartCombineDataset } from "Utils";
 import { actions, makeSelectLibraryDetail } from "Reducers/libraryDetail";
+import { actions as libraryActions, makeSelectLibrary } from "Reducers/library";
 
 import LibraryDetailHeader from "./sections/LibraryDetailHeader";
 import LibraryDetailChartHeader from "./sections/LibraryDetailChartHeader";
@@ -106,7 +107,9 @@ export class LibraryDetail extends React.Component {
 	}
 
 	componentDidMount() {
-		const { getLibraryDetailRequest, match } = this.props
+		const { getLibraryDetailRequest, match, getVideos } = this.props
+
+		getVideos();
 
 		if (match.params.videoId) {
 			getLibraryDetailRequest(match.params.videoId)
@@ -124,8 +127,12 @@ export class LibraryDetail extends React.Component {
 
 	render() {
 		const {
-			libraryDetail: { libraryDetail }
+			libraryDetail: { libraryDetail },
+			library: {videos},
+			match: {params: {videoId}}
 		} = this.props
+
+		const { videoUrl } = videos.find(({id}) => id == videoId) || {}
 
 		if (!libraryDetail) return false
 
@@ -184,6 +191,7 @@ export class LibraryDetail extends React.Component {
 				/>
 				<LibraryDetailChartHeader
 					barData={barData}
+					videoUrl={videoUrl}
 				/>
 				<LibraryDetailDoughnutChart
 					doughnutData={doughnutData}
@@ -209,10 +217,16 @@ LibraryDetail.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
-	libraryDetail: makeSelectLibraryDetail()
+	libraryDetail: makeSelectLibraryDetail(),
+	library: makeSelectLibrary()
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
+function mapDispatchToProps(dispatch) {
+	return {
+		getVideos: () => dispatch(libraryActions.loadVideos()),
+		getLibraryDetailRequest: id => dispatch(actions.getLibraryDetailRequest(id))
+	}
+}
 
 const withConnect = connect(
 	mapStateToProps,

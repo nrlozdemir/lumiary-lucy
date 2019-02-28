@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import classnames from "classnames"
+import styles from './style.scss'
 
 class Video extends Component {
   componentDidMount() {
@@ -41,11 +43,15 @@ class Video extends Component {
   }
 
   render() {
+		const { src, poster = '', style, className } = this.props;
+		const classes = classnames('video-wrapper', className, styles.container);
+
     return (
-      <div className="video-wrapper">
+      <div className={classes} style={{...style}}>
         <video
-          src="http://techslides.com/demos/sample-videos/small.mp4"
-          poster="https://picsum.photos/670/396?image=20"
+					className={styles.video}
+          src={src}
+          poster={poster}
         />
       </div>
     )
