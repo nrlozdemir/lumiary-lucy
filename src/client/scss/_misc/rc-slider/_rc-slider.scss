@@ -28,6 +28,11 @@
 	background-color: #abe2fb;
 }
 .range-slider {
+
+	font-family: $font-family-ClanOT;
+	.ticks{
+		font-size: 12px;
+	}
   .rc-slider-handle {
     position: absolute;
     margin-left: -7px;

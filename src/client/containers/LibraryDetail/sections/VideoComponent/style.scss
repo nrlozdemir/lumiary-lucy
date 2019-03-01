@@ -1,0 +1,17 @@
+%absolute {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+}
+
+.container {
+	@extend %absolute;
+	overflow: hidden;
+}
+
+.video {
+	@extend %absolute;
+	background: black;
+}
