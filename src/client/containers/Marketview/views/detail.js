@@ -4,20 +4,20 @@
  *
  */
 
-import React, { Fragment } from "react"
-import PropTypes from "prop-types"
-import { connect } from "react-redux"
-import { createStructuredSelector } from "reselect"
-import { compose, bindActionCreators } from "redux"
-import { actions, makeSelectMarketview } from "Reducers/marketview"
+import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose, bindActionCreators } from 'redux'
+import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
-import TopVideosChart from "Components/Charts/MarketView/TopVideos"
-import ProgressBar from "Components/ProgressBar"
-import MarketViewSlider from "Components/Sliders/Marketview"
-import TopSimilarProperties from "Components/TopSimilarProperties"
-import RouterLoading from "Components/RouterLoading"
+import TopVideosChart from 'Components/Charts/MarketView/TopVideos'
+import ProgressBar from 'Components/ProgressBar'
+import MarketViewSlider from 'Components/Sliders/Marketview'
+import TopSimilarProperties from 'Components/TopSimilarProperties'
+import RouterLoading from 'Components/RouterLoading'
 
-import style from "../style.scss"
+import style from '../style.scss'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Detail extends React.Component {
@@ -33,19 +33,19 @@ export class Detail extends React.Component {
 
   render() {
     const {
-      marketview: { competitorTopVideos, similarProperties }
+      marketview: { competitorTopVideos, similarProperties },
     } = this.props
 
     if (!this.props.marketview.selectedVideo || this.props.marketview.loading) {
-      return <RouterLoading/>
+      return <RouterLoading />
     }
 
     return (
       <React.Fragment>
-        <div className="bg-dark-grey-blue">
+        <div className="d-flex flex-column bg-dark-grey-blue shadow-1">
           <MarketViewSlider
             items={this.props.marketview.videos}
-            changeVideo={video => this.changeSelectedVideo(video)}
+            changeVideo={(video) => this.changeSelectedVideo(video)}
           />
           <div className={style.cardContainer}>
             {this.props.marketview.selectedVideo.options.map((card, index) => (
@@ -86,10 +86,10 @@ export class Detail extends React.Component {
 Detail.propTypes = {}
 
 const mapStateToProps = createStructuredSelector({
-  marketview: makeSelectMarketview()
+  marketview: makeSelectMarketview(),
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
   mapStateToProps,
