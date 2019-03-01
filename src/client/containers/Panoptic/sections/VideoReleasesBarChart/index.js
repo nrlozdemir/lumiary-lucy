@@ -1,20 +1,23 @@
-import React, { Component } from 'react';
-import { Bar } from "react-chartjs-2";
-import cx from 'classnames';
-import style from './style.scss';
+import React, { Component } from 'react'
+import { Bar } from 'react-chartjs-2'
+import cx from 'classnames'
+import style from './style.scss'
 
-import { options, wrapperBarOptions } from './chartOptions';
+import { options, wrapperBarOptions } from './chartOptions'
 
 class PanopticBarChart extends Component {
   render() {
-    const barChartContainer = cx('shadow-1 col-12 mt-72', style.panopticBarChart);
-    const barChartHeaderClass = cx('col-12 mt-24 mb-24', style.barChartHeader);
-    const barContainerClass = cx('col-12', style.barChartContainer);
-    const chartSectionClass = cx('col-3', style.chartSection);
-    const headerTitleClass = cx('font-secondary-first text-bold', style.title);
-    const headerDescClass = cx('font-secondary-second', style.desc);
-    const referencesClass = cx('font-secondary-second', style.references);
-    const { data } = this.props;
+    const barChartContainer = cx(
+      'shadow-1 col-12 mt-72',
+      style.panopticBarChart
+    )
+    const barChartHeaderClass = cx('col-12 mt-24 mb-24', style.barChartHeader)
+    const barContainerClass = cx('col-12', style.barChartContainer)
+    const chartSectionClass = cx('col-3', style.chartSection)
+    const headerTitleClass = cx('font-secondary-first text-bold', style.title)
+    const headerDescClass = cx('font-secondary-second', style.desc)
+    const referencesClass = cx('font-secondary-second', style.references)
+    const { data } = this.props
     return (
       <div className={barChartContainer}>
         <div className={barChartHeaderClass}>
@@ -40,21 +43,21 @@ class PanopticBarChart extends Component {
               <span className={style.light}>for</span>
               <span className={style.strong}>Facebook</span>
               <span className={style.light}>in</span>
-              <span className={style.strong}>Past Mont</span>
-              <div className="clearFix"></div>
+              <span className={style.strong}>Past Month</span>
+              <div className="clearFix" />
             </div>
           </div>
         </div>
         {/* bar charts */}
         <div className={barContainerClass}>
           <div className={style.wrapperBarChart}>
-            <Bar data={data} options={wrapperBarOptions}/>
+            <Bar data={data} options={wrapperBarOptions} />
           </div>
-          <div className={style.barChartBackground}></div>
+          <div className={style.barChartBackground} />
           <div className={style.groupChartsWrapper}>
             <div className="col-3">
               <div className={style.chartSection}>
-                <Bar data={data} options={options}/>
+                <Bar data={data} options={options} />
               </div>
               <div className={style.chartSectionBadge}>
                 <span>Live Action</span>
@@ -62,7 +65,7 @@ class PanopticBarChart extends Component {
             </div>
             <div className="col-3">
               <div className={style.chartSection}>
-                <Bar data={data} options={options}/>
+                <Bar data={data} options={options} />
               </div>
               <div className={style.chartSectionBadge}>
                 <span>Stop Motion</span>
@@ -70,7 +73,7 @@ class PanopticBarChart extends Component {
             </div>
             <div className="col-3">
               <div className={style.chartSection}>
-                <Bar data={data} options={options}/>
+                <Bar data={data} options={options} />
               </div>
               <div className={style.chartSectionBadge}>
                 <span>Cinemagraph</span>
@@ -78,7 +81,7 @@ class PanopticBarChart extends Component {
             </div>
             <div className="col-3">
               <div className={style.chartSection}>
-                <Bar data={data} options={options}/>
+                <Bar data={data} options={options} />
               </div>
               <div className={style.chartSectionBadge}>
                 <span>Stop Motion</span>
@@ -88,8 +91,8 @@ class PanopticBarChart extends Component {
         </div>
         {/* bar charts */}
       </div>
-    );
+    )
   }
 }
 
-export default PanopticBarChart;
+export default PanopticBarChart
