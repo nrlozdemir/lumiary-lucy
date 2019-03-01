@@ -63,11 +63,11 @@ class Range extends Component {
 					}}
 					onChange={this.onSliderChange.bind(this)}
 				/>
-				<div className="d-flex align-items-center justify-space-between mt-24">
+				<div className="d-flex align-items-center justify-space-between mt-24 ticks">
 					<span>0-15s</span>
 					<span>15-30s</span>
-					<span>30-45s</span>
-					<span>45-60s</span>
+					<span>30-60s</span>
+					<span>60s+</span>
 				</div>
 			</div>
 		);
