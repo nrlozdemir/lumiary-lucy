@@ -130,7 +130,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                       Industry Data
                     </h1>
                     <div className={style.doughnutChartContainer}>
-                      <DoughnutChart doughnutData={[30, 12, 6, 52]} />
+                      <DoughnutChart doughnutData={[30, 12, 6, 52]} color="#8567f0" />
                       <p className="w-75 text-center pt-32">
                         <span className={style.purpleRound} />
                         <span className={style.textBold}>{52}%</span> of your
