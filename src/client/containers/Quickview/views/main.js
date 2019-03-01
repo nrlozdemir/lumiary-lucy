@@ -31,7 +31,7 @@ const Main = (props) => (
                       <span>{video.viewCount} Views</span>
                     </div>
                   ),
-                  thumbnailUrl: video.thumbnailUrl,
+                  videoUrl: video.videoUrl,
                   socialIcon: video.socialIcon,
                 }}
                 options={{
