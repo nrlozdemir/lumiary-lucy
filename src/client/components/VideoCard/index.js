@@ -11,7 +11,7 @@ import style from "./style.scss";
 import { socialIconSelector } from "../../utils";
 /* eslint-disable react/prefer-stateless-function */
 const VideoCard = ({ video, options = options || {}, muted = true }) => {
-	console.log(video)
+	// console.log(video)
 	const cardContainerClass = classnames(style.cardContainer, {
 		["bg-dusk"]: !options.barColor,
 		["col-3"]: !options.size,
