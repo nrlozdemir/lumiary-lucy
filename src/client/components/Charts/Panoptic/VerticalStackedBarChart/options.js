@@ -15,6 +15,7 @@ export const stackedChartOptions = {
 	responsive: true,
 	scales: {
 		xAxes: [{
+      barThickness: 56,
 			stacked: true,
 			ticks: {
 				fontColor: "#fff",
