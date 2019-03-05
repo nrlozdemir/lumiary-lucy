@@ -1,25 +1,28 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import { Doughnut, Bar } from 'react-chartjs-2';
+import React, { Component } from 'react'
+import classnames from 'classnames'
+import { Doughnut, Bar } from 'react-chartjs-2'
 
-import Select from 'Components/Form/Select';
-import style from 'Containers/Marketview/style.scss';
+import Select from 'Components/Form/Select'
+import style from 'Containers/Marketview/style.scss'
 
-import { barData, barDataOptions } from './options';
+import { barData, barDataOptions } from './options'
 
 class TotalViewsChart extends Component {
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
 
   handleChange = (selectedOption, name) => {
-    this.setState({ [name]: selectedOption });
-  };
+    this.setState({ [name]: selectedOption })
+  }
 
   render() {
-    const { views, platforms, date } = this.state;
-    const chartContainer = classnames('shadow-1 col-12-gutter-20 mb-48', style.chartContainer);
+    const { views, platforms, date } = this.state
+    const chartContainer = classnames(
+      'shadow-1 col-12-gutter-20 mb-48',
+      style.chartContainer
+    )
 
     return (
       <div className={chartContainer}>
@@ -32,7 +35,10 @@ class TotalViewsChart extends Component {
               placeholder="Select Views"
               value={views || ''}
               onChange={(option) => this.handleChange(option, 'views')}
-              options={[{ value: 'Views', label: 'Views' }, { value: 'Comments', label: 'Comments' }]}
+              options={[
+                { value: 'Views', label: 'Views' },
+                { value: 'Comments', label: 'Comments' },
+              ]}
             />
             <Select
               name="platforms"
@@ -50,7 +56,7 @@ class TotalViewsChart extends Component {
               onChange={(option) => this.handleChange(option, 'date')}
               options={[
                 { value: 'Past Month', label: 'Past Month' },
-                { value: 'Past Year', label: 'Past Year' }
+                { value: 'Past Year', label: 'Past Year' },
               ]}
             />
           </div>
@@ -62,20 +68,21 @@ class TotalViewsChart extends Component {
                 labels: barData.labels,
                 datasets: barData.datasets.map((data, index) => {
                   const indexValues = data.data.map((v, i) => {
-                    return barData.datasets.map((d) => d.data[i]);
-                  });
+                    return barData.datasets.map((d) => d.data[i])
+                  })
 
                   return {
                     ...data,
                     data: data.data.map((value, i) => {
                       const totalValue = indexValues[i].reduce(
-                        (accumulator, currentValue) => accumulator + currentValue
-                      );
+                        (accumulator, currentValue) =>
+                          accumulator + currentValue
+                      )
 
-                      return parseFloat((value / (totalValue / 100)).toFixed(2));
-                    })
-                  };
-                })
+                      return parseFloat((value / (totalValue / 100)).toFixed(2))
+                    }),
+                  }
+                }),
               }}
               width={500}
               options={barDataOptions}
@@ -96,19 +103,25 @@ class TotalViewsChart extends Component {
                   options={{
                     responsive: false,
                     legend: {
-                      display: false
+                      display: false,
                     },
                     plugins: {
-                      datalabels: false
+                      datalabels: false,
                     },
                     layout: {
-                      padding: 0
-                    }
+                      padding: 0,
+                    },
                   }}
                   width={300}
                   height={300}
                   data={{
-                    labels: ['Barstool Sports', 'SB Nation', 'ESPN', 'Scout Media', 'Fansided'],
+                    labels: [
+                      'Barstool Sports',
+                      'SB Nation',
+                      'ESPN',
+                      'Scout Media',
+                      'Fansided',
+                    ],
                     datasets: [
                       {
                         data: [50, 20, 15, 10, 5],
@@ -118,33 +131,27 @@ class TotalViewsChart extends Component {
                           '#8567f0',
                           '#ff556f',
                           '#acb0be',
-                          '#5a6386'
+                          '#5a6386',
                         ],
                         hoverBackgroundColor: [
                           '#51adc0',
                           '#8567f0',
                           '#ff556f',
                           '#acb0be',
-                          '#5a6386'
-                        ]
-                      }
-                    ]
+                          '#5a6386',
+                        ],
+                      },
+                    ],
                   }}
                 />
-                <div className="poa-middle text-center">
-                  Past Month
-                  <br />
-                  Combinded
-                  <br />
-                  Views
-                </div>
+                <div className="poa-middle text-center">Total Percentage</div>
               </div>
             </div>
           </div>
         </div>
       </div>
-    );
+    )
   }
 }
 
-export default TotalViewsChart;
+export default TotalViewsChart
