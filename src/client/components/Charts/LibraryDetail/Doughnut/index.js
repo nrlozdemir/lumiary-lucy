@@ -3,7 +3,7 @@ import { Doughnut } from "react-chartjs-2"
 
 import { doughnutOptions } from "./options"
 
-const DoughnutChart = ({doughnutData}) => (
+const DoughnutChart = ({doughnutData, color}) => (
 	<Doughnut
 		options={doughnutOptions}
 		width={124}
@@ -18,13 +18,13 @@ const DoughnutChart = ({doughnutData}) => (
 						"#ffffff",
 						"#ffffff",
 						"#ffffff",
-						"#51adc0"
+						color ? color : "#51adc0"
 					],
 					hoverBackgroundColor: [
 						"#ffffff",
 						"#ffffff",
 						"#ffffff",
-						"#51adc0"
+						color ? color : "#51adc0"
 					]
 				}
 			]

@@ -1,26 +1,26 @@
-import React from "react"
-import classnames from "classnames"
+import React from 'react'
+import classnames from 'classnames'
 
-import style from "./style.scss"
+import style from './style.scss'
 
-import RadarChart from "Components/Charts/Panoptic/RadarChart"
+import RadarChart from 'Components/Charts/Panoptic/RadarChart'
 
 const CompareShares = ({ radarData }) => {
   const compareSharesContainer = classnames(
-    "shadow-1 col-12 mt-48 mb-48",
+    'shadow-1 col-12 mt-48 mb-48',
     style.compareSharesContainer
-  );
+  )
 
-  const info = classnames("col-6", style.info);
-  const radarComponent = classnames("col-4", style.radarComponent);
+  const info = classnames('col-6', style.info)
+  const radarComponent = classnames('col-4', style.radarComponent)
 
   return (
     <div className={compareSharesContainer}>
       <div className={style.componentTitle}>
-        Dominant Color, Facebook & YouTube Shares
+        Pacing For Each Format by Performance
       </div>
       <div className={radarComponent}>
-        <RadarChart data={radarData}/>
+        <RadarChart data={radarData} />
       </div>
       <div className="col-4">
         <div className={info}>
@@ -75,11 +75,10 @@ const CompareShares = ({ radarData }) => {
         </div>
       </div>
       <div className={radarComponent}>
-        <RadarChart data={radarData}/>
+        <RadarChart data={radarData} />
       </div>
     </div>
   )
 }
-
 
 export default CompareShares

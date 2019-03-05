@@ -4,17 +4,19 @@
  *
  */
 
-import React, { Fragment } from "react"
-import PropTypes from "prop-types"
-import { connect } from "react-redux"
-import { createStructuredSelector } from "reselect"
-import { compose, bindActionCreators } from "redux"
-import { actions, makeSelectMarketview } from "Reducers/marketview"
+import React, { Fragment } from 'react'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose, bindActionCreators } from 'redux'
+import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
 import Slider from 'Containers/Marketview/sections/detail/Slider'
 import TopVideosCard from "Containers/Marketview/sections/detail/TopVideosCard"
 import TopSimilarProperties from "Containers/Marketview/sections/detail/TopSimilarProperties"
 import RouterLoading from "Components/RouterLoading"
+
+import style from '../style.scss'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Detail extends React.Component {
@@ -53,10 +55,10 @@ export class Detail extends React.Component {
 Detail.propTypes = {}
 
 const mapStateToProps = createStructuredSelector({
-  marketview: makeSelectMarketview()
+  marketview: makeSelectMarketview(),
 })
 
-const mapDispatchToProps = dispatch => bindActionCreators(actions, dispatch)
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
   mapStateToProps,

@@ -15,8 +15,8 @@ const TopVideosChart = ({ chartData, datasetKeyProvider }) => {
                 backgroundColor: '#fff',
               },
               plugins: {
-                datalabels: false
-              }
+                datalabels: false,
+              },
             }}
           />
     )

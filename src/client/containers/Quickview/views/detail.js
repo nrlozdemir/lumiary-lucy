@@ -85,7 +85,7 @@ export class Detail extends React.Component {
               {platformsValues.map((el, i) => (
                 <div key={i} className="col-6">
                   <div className={style.card}>
-                    <VideoCard {...el.video} />
+                    <VideoCard {...el.video} muted={false} />
                     <div className={style.items}>
                       {el.infos.map((item, index) => (
                         <div key={index} className={style.infoItem}>
