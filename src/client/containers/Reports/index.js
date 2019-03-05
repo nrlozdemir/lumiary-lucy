@@ -135,7 +135,7 @@ class Reports extends Component {
                             >
                               Delete Report
                             </span>
-                            <a tabIndex="2">cancel</a>
+                            <a tabIndex="2">Cancel</a>
                           </div>
                         </div>
                       ),
