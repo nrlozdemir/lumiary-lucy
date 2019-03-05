@@ -19,7 +19,7 @@ export const options = {
     callbacks: {
       title: function (tooltipItem, data) {
         if (tooltipItem[0].yLabel < 0) {
-          return `${Math.abs(tooltipItem[0].yLabel / 10000)} Videos`;
+          return `${Math.abs(tooltipItem[0].yLabel / 10000)}k Videos`;
         }
         return `${tooltipItem[0].yLabel / 1000}k Likes`;
       },
@@ -94,7 +94,7 @@ export const wrapperBarOptions = {
         padding: 15,
         callback: function(value, index, values) {
             if(value<0) {
-              return value / 10000;
+              return `${Math.abs(value / 10000)}k`;
             }
             return `${values[index] / 1000}k`;
         }

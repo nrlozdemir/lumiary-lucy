@@ -29,7 +29,7 @@ class PacingCard extends Component {
     return (
       <div className={pacingCardContainer}>
         <div className={style.componentTitle}>
-          <span>Dominant Color, Facebook & YouTube Shares</span>
+          <span className={style.title}>Pacing For Each Format by Performance</span>
           <div className={style.selects}>
             <Select
               name="likes"
