@@ -3,6 +3,21 @@ import { Link } from 'react-router-dom'
 
 import style from './style.scss'
 
+const getSocialMediaContent = (publishedPlatform) => {
+  switch(publishedPlatform) {
+    case 'twitter':
+      return { name: 'Twitter',className: 'icon-Twitter-Bubble'}
+    case 'instagram':
+      return { name: 'Instagram',className: 'icon-Instagram-Bubble'}
+    case 'pinterest':
+      return { name: 'Pinterest',className: 'icon-Pinterest-Bubble'}
+    case 'youtube':
+      return { name: 'Youtube',className: 'icon-Youtube-Bubble'}
+    default:
+      return { name: 'Facebook',className: 'icon-Facebook-Bubble'}
+  }
+}
+
 const LibraryDetailHeader = ({ videoName, publishedPlatform }) => (
   <div className={style.header}>
     <div className="ml-40">
@@ -17,8 +32,8 @@ const LibraryDetailHeader = ({ videoName, publishedPlatform }) => (
     </div>
     <div>{videoName}</div>
     <div className={style.iconWrapper}>
-      Published on {publishedPlatform}
-      <span className="icon-Facebook-Bubble" />
+      Published on {getSocialMediaContent(publishedPlatform).name}
+      <span className={getSocialMediaContent(publishedPlatform).className}/>
     </div>
   </div>
 )

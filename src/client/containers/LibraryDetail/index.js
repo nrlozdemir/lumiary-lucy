@@ -78,7 +78,7 @@ export class LibraryDetail extends React.Component {
 			match: {params: {videoId}}
     } = this.props
 
-		const { videoUrl } = videos.find(({id}) => id == videoId) || {}
+		const { videoUrl, title, socialIcon } = videos.find(({id}) => id == videoId) || {}
 
     let barData = null
     let lineChartDataCombined = null
@@ -122,8 +122,8 @@ export class LibraryDetail extends React.Component {
 		return (
 			<React.Fragment>
 				<LibraryDetailHeader
-					videoName="My Awesome Video"
-					publishedPlatform="Facebook"
+					videoName={title}
+					publishedPlatform={socialIcon}
 				/>
 				{barData && <LibraryDetailChartHeader
 					barData={barData}
