@@ -41,7 +41,6 @@ export class LibraryDetail extends React.Component {
 		getVideos()
 
 		if (match.params.videoId) {
-      getLibraryDetailRequest(match.params.videoId),
       getBarChartRequest(match.params.videoId),
       getDoughnutChartRequest(match.params.videoId)
       getColorTempRequest(match.params.videoId)
@@ -51,17 +50,25 @@ export class LibraryDetail extends React.Component {
 
 	componentDidUpdate(prevProps) {
 		const { match: prevMatch } = prevProps
-		const { match, getLibraryDetailRequest } = this.props
+		const { 
+      match,
+      getBarChartRequest,
+      getDoughnutChartRequest,
+      getColorTempRequest,
+      getShotByShotRequest
+    } = this.props
 
 		if (prevMatch.params.videoId !== match.params.videoId) {
-			getLibraryDetailRequest(match.params.videoId)
+      getBarChartRequest(match.params.videoId),
+      getDoughnutChartRequest(match.params.videoId)
+      getColorTempRequest(match.params.videoId)
+      getShotByShotRequest(match.params.videoId)
 		}
 	}
 
 	render() {
 		const {
 			libraryDetail: { 
-        libraryDetail,
         barChartData,
         doughnutLineChartData,
         colorTempData,
@@ -72,8 +79,6 @@ export class LibraryDetail extends React.Component {
     } = this.props
 
 		const { videoUrl } = videos.find(({id}) => id == videoId) || {}
-
-		if (!libraryDetail) return false
 
     let barData = null
     let lineChartDataCombined = null
@@ -144,8 +149,14 @@ export class LibraryDetail extends React.Component {
 }
 
 LibraryDetail.propTypes = {
-	libraryDetail: PropTypes.object,
-	getLibraryDetailRequest: PropTypes.func.isRequired
+  barChartData: PropTypes.object,
+  doughnutLineChartData: PropTypes.object,
+  colorTempData: PropTypes.object,
+  shotByShotData: PropTypes.object,
+  getBarChartRequest: PropTypes.func.isRequired,
+  getDoughnutChartRequest: PropTypes.func.isRequired,
+  getColorTempRequest: PropTypes.func.isRequired,
+  getShotByShotRequest: PropTypes.func.isRequired
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -156,7 +167,6 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
 	return {
 		getVideos: () => dispatch(libraryActions.loadVideos()),
-		getLibraryDetailRequest: id => dispatch(actions.getLibraryDetailRequest(id)),
     getBarChartRequest: id => dispatch(actions.getBarChartRequest(id)),
     getDoughnutChartRequest: id => dispatch(actions.getDoughnutChartRequest(id)),
     getColorTempRequest: id => dispatch(actions.getColorTempRequest(id)),
