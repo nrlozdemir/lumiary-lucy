@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import { Doughnut, Bar } from 'react-chartjs-2'
 
-import Select from 'Components/Form/Select'
+import SelectFilters from 'Components/SelectFilters'
 import style from 'Containers/Marketview/style.scss'
 
 import { barData, barDataOptions } from './options'
@@ -13,12 +13,14 @@ class TotalViewsChart extends Component {
     this.state = {}
   }
 
-  handleChange = (selectedOption, name) => {
-    this.setState({ [name]: selectedOption })
+  handleSelectFilters = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
   }
 
   render() {
-    const { views, platforms, date } = this.state
+    const { selectLikes, selectPlatforms, selectDate } = this.state
     const chartContainer = classnames(
       'shadow-1 col-12-gutter-20 mb-48',
       style.chartContainer
@@ -29,35 +31,14 @@ class TotalViewsChart extends Component {
         <div className={style.cardTitle}>
           <span>Total Views For All Platforms In The Past Month</span>
           <div className={style.selects}>
-            <Select
-              name="views"
-              customClass="custom-select"
-              placeholder="Select Views"
-              value={views || ''}
-              onChange={(option) => this.handleChange(option, 'views')}
-              options={[
-                { value: 'Views', label: 'Views' },
-                { value: 'Comments', label: 'Comments' },
-              ]}
-            />
-            <Select
-              name="platforms"
-              customClass="custom-select"
-              placeholder="Select Platforms"
-              value={platforms || ''}
-              onChange={(option) => this.handleChange(option, 'platforms')}
-              options={[{ value: 'All Platforms', label: 'All Platforms' }]}
-            />
-            <Select
-              name="date"
-              customClass="custom-select"
-              placeholder="Select Date"
-              value={date || ''}
-              onChange={(option) => this.handleChange(option, 'date')}
-              options={[
-                { value: 'Past Month', label: 'Past Month' },
-                { value: 'Past Year', label: 'Past Year' },
-              ]}
+            <SelectFilters
+              handleSelectFilters={this.handleSelectFilters}
+              selectLikes={selectLikes}
+              selectPlatforms={selectPlatforms}
+              selectDate={selectDate}
+              selectLikesShow={true}
+              selectPlatformsShow={true}
+              selectDateShow={true}
             />
           </div>
         </div>

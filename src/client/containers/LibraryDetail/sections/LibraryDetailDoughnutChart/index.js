@@ -5,7 +5,7 @@ import { compose } from 'redux'
 import style from './style.scss'
 import { selectOptions, lineChartOptions } from './options'
 
-import Select from 'Components/Form/Select'
+import SelectFilters from 'Components/SelectFilters'
 import LineChart from 'Components/LineChart/Chart'
 import PointerCard from 'Components/PointerCard'
 import DoughnutChart from 'Components/Charts/LibraryDetail/Doughnut'
@@ -24,8 +24,14 @@ class LibraryDetailDoughnutChart extends React.Component {
     }))
   }
 
+  handleSelectFilters = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
+  }
+
   render() {
-    const { isDoughnutVisible } = this.state
+    const { isDoughnutVisible, selectDate, selectLikes } = this.state
     const { doughnutData, lineChartData } = this.props
     return (
       <div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
@@ -77,26 +83,14 @@ class LibraryDetailDoughnutChart extends React.Component {
                       <p className={style.panelTitle}>24 Fps</p>
                     </div>
                     <div className={style.formWrapper}>
-                      <form onSubmit={() => console.log('object')}>
-                        <Field
-                          component={Select}
-                          options={selectOptions}
-                          id="NumberOfScenes"
-                          name="NumberOfScenes"
-                          placeholder="Select One"
-                          label="Number of Scenes"
-                          className={style.formWrapper}
-                        />
-                        <Field
-                          component={Select}
-                          options={selectOptions}
-                          id="NumberOfScenes"
-                          name="NumberOfScenes"
-                          placeholder="Select One"
-                          label="Number of Scenes"
-                          className={style.formWrapper}
-                        />
-                      </form>
+                      <SelectFilters
+                        handleSelectFilters={this.handleSelectFilters}
+                        selectClasses="custom-select"
+                        selectDate={selectDate}
+                        selectDateShow={true}
+                        selectLikes={selectLikes}
+                        selectLikesShow={true}
+                      />
                     </div>
                   </div>
                 </div>

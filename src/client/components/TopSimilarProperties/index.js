@@ -1,13 +1,13 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-import Select from 'Components/Form/Select'
+import SelectFilters from 'Components/SelectFilters'
 import ProgressBar from 'Components/ProgressBar'
 
 import style from './style.scss'
 
 const similarPropertiesContainer = cx(
-  'd-flex flex-column shadow-1 mb-72 pt-48 pb-48',
+  'shadow-1 col-12 mb-72 pt-48 pb-48',
   style.similarPropertiesContainer
 )
 const headerClass = cx('col-12 mb-48', style.header)
@@ -22,33 +22,30 @@ class TopSimilarProperties extends Component {
     this.state = {}
   }
 
-  handleChange = (selectedOption, name) => {
-    this.setState({ [name]: selectedOption })
+  handleSelectFilters = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
   }
 
   render() {
-    const { time } = this.state
+    const { selectDate } = this.state
     const { data } = this.props
     return (
       <div className={similarPropertiesContainer}>
         <div className={headerClass}>
           <div className="col-4 text-bold">
             <p className={headerTitleClass}>
-              Top Similar Properties Of Top Videos
+              Top Videos Over Time By Competitor
             </p>
           </div>
           <div className="col-8">
             <div className={style.selects}>
-              <Select
-                name="date"
-                customClass={selectClasses}
-                placeholder="Time"
-                value={time || ''}
-                onChange={(option) => this.handleChange(option, 'time')}
-                options={[
-                  { value: 'Past Month', label: 'Past Month' },
-                  { value: 'Past Year', label: 'Past Year' },
-                ]}
+              <SelectFilters
+                handleSelectFilters={this.handleSelectFilters}
+                selectClasses={selectClasses}
+                selectDate={selectDate}
+                selectDateShow={true}
               />
             </div>
             <div className="clearFix" />
