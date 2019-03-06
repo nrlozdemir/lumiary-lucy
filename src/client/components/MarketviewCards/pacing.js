@@ -56,15 +56,12 @@ class ColorCard extends Component {
           <div className={style.colorListItem}>Slow</div>
           <div className={style.colorListItem}>Medium</div>
           <div className={style.colorListItem}>Fast</div>
-          {/* <div className={style.colorListItem}>Barstool Sports</div> */}
-          {/* <div className={style.colorListItem}>SB Nation</div> */}
-          {/* <div className={style.colorListItem}>ESPN</div> */}
-          {/* <div className={style.colorListItem}>Scout Media</div> */}
-          {/* <div className={style.colorListItem}>Fansided</div> */}
         </div>
 
         <div className={style.marketViewCardDescription}>
-          Based on the number of likes for competitors across all platforms
+          <span>
+            Based on the number of likes for competitors across all platforms
+          </span>
         </div>
         <Link to="/marketview/platform" className={style.marketViewCardLink}>
           View Competitor Metrics

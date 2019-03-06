@@ -89,14 +89,22 @@ class ColorCard extends Component {
 
         <div className={style.colors}>
           {bubbleChartOptions.map((color, i) => {
-            const network = bubbleChartData.find(data => data.color === color);
+            const network = bubbleChartData.find((data) => data.color === color)
 
-            return (<span key={i} style={{ backgroundColor: color }} className={network && style.hasTriangle} />)
+            return (
+              <span
+                key={i}
+                style={{ backgroundColor: color }}
+                className={network && style.hasTriangle}
+              />
+            )
           })}
         </div>
 
         <div className={style.marketViewCardDescription}>
-          Based on the number of likes for competitors across all platforms
+          <span>
+            Based on the number of likes for competitors across all platforms
+          </span>
         </div>
         <Link to="/marketview/competitor" className={style.marketViewCardLink}>
           View Platform Metrics
