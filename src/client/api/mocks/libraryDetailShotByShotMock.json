@@ -19,7 +19,6 @@
     "https://picsum.photos/40/160?image=17",
     "https://picsum.photos/20/160?image=18"
   ],
-
   "slideImages": [
     {
       "src": "https://picsum.photos/500/270?image=1",
@@ -78,70 +77,6 @@
       ]
     }
   ],
-
-  "barData": {
-    "labels": ["January", "February", "March", "Bla"],
-    "datasets": [
-      {
-        "data": [54, 90, 80, 40]
-      },
-      {
-        "data": [65, 59, 30, 90]
-      }
-    ]
-  },
-
-  "doughnutData": [
-    {
-      "title": "Frame Rate",
-      "secondTitle": "24fps",
-      "average": [30, 12, 6, 52]
-    },
-    {
-      "title": "Pacing",
-      "secondTitle": "Fastest",
-      "average": [12, 15, 15, 68]
-    },
-    {
-      "title": "Shots",
-      "secondTitle": "12 Shots",
-      "average": [15, 22, 18, 45]
-    },
-    {
-      "title": "Format",
-      "secondTitle": "Live Action",
-      "average": [15, 17, 30, 48]
-    }
-  ],
-
-  "colorTempData": [
-    {
-      "data": [
-        { "x": -50, "y": 82, "type": "video", "color": "#ff556f" },
-        { "x": 50, "y": -25, "type": "library", "color": "#51adc0" },
-        { "x": 75, "y": -30, "type": "industry", "color": "#8567f0"}
-			]
-    },
-    {
-      "data": [
-        { "x": -50, "y": 12, "type": "video", "color": "#ff556f" },
-        { "x": 50, "y": 25, "type": "library", "color": "#51adc0" },
-        { "x": 75, "y": -30, "type": "industry", "color": "#8567f0" }
-			],
-			"topText": "Energetic",
-			"bottomText": "Calm"
-    },
-    {
-      "data": [
-        { "x": -50, "y": 12, "type": "video", "color": "#ff556f" },
-        { "x": 50, "y": -75, "type": "library", "color": "#51adc0" },
-        { "x": 75, "y": -30, "type": "industry", "color": "#8567f0" }
-      ],
-			"topText": "Natural",
-			"bottomText": "Synthetic"
-    }
-  ],
-
   "radarData": {
     "labels": [
       "#fff20d",
@@ -166,27 +101,6 @@
       }
     ]
   },
-
-  "lineChartData": {
-    "labels": [
-      "1/11/2019",
-      "1/12/2019",
-      "1/13/2019",
-      "1/14/2019",
-      "1/15/2019",
-      "1/16/2019",
-      "1/17/2019"
-    ],
-    "datasets": [
-      {
-        "data": [30, 45, 32, 58, 71, 95, 22]
-      },
-      {
-        "data": [14, 10, 70, 90, 45, 55, 50]
-      }
-    ]
-  },
-
   "sliderWithThumbnails": [
     {
       "img": "https://picsum.photos/500/270?image=1",

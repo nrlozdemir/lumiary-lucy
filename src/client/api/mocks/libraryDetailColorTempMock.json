@@ -1,0 +1,29 @@
+{
+  "colorTempData": [
+    {
+      "data": [
+        { "x": -50, "y": 82, "type": "video", "color": "#ff556f" },
+        { "x": 50, "y": -25, "type": "library", "color": "#51adc0" },
+        { "x": 75, "y": -30, "type": "industry", "color": "#8567f0"}
+			]
+    },
+    {
+      "data": [
+        { "x": -50, "y": 12, "type": "video", "color": "#ff556f" },
+        { "x": 50, "y": 25, "type": "library", "color": "#51adc0" },
+        { "x": 75, "y": -30, "type": "industry", "color": "#8567f0" }
+			],
+			"topText": "Energetic",
+			"bottomText": "Calm"
+    },
+    {
+      "data": [
+        { "x": -50, "y": 12, "type": "video", "color": "#ff556f" },
+        { "x": 50, "y": -75, "type": "library", "color": "#51adc0" },
+        { "x": 75, "y": -30, "type": "industry", "color": "#8567f0" }
+      ],
+			"topText": "Natural",
+			"bottomText": "Synthetic"
+    }
+  ]
+}

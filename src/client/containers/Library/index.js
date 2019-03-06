@@ -35,6 +35,10 @@ export class Library extends React.Component {
 		this.setState({ sidebarVisible: e })
 	}
 
+	handleSubmit(e) {
+		this.props.changeFilter(e);
+	}
+
 	render() {
 		const sideBarClass = classNames(style.overlay, {
 			[style.overlayShow]: this.state.sidebarVisible
@@ -61,6 +65,7 @@ export class Library extends React.Component {
 				<Sidebar
 					sidebarVisible={this.state.sidebarVisible}
 					setSidebarVisible={e => this.setSidebarVisible(e)}
+					onSubmit={e => this.handleSubmit(e)}
 				/>
 			</React.Fragment>
 		)
@@ -70,6 +75,7 @@ export class Library extends React.Component {
 Library.propTypes = {
 	library: PropTypes.object,
 	getVideos: PropTypes.func,
+	changeFilter: PropTypes.func,
 	dispatch: PropTypes.func
 }
 
@@ -79,7 +85,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
 	return {
-		getVideos: () => dispatch(actions.loadVideos())
+		getVideos: () => dispatch(actions.loadVideos()),
+		changeFilter: e => dispatch(actions.changeFilter(e))
 	}
 }
 

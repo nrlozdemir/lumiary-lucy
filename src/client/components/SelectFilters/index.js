@@ -19,8 +19,8 @@ class SelectFilters extends Component {
       selectResolutionShow,
       selectLikesShow,
       selectPlatformsShow,
-      selectNumberOfScenesShow,
       selectWarmColorShow,
+      selectDurationShow,
 
       // States for input values
       selectViews,
@@ -29,25 +29,24 @@ class SelectFilters extends Component {
       selectResolution,
       selectLikes,
       selectPlatforms,
-      selectNumberOfScenes,
       selectWarmColor,
+      selectDuration,
     } = this.props
 
     return (
       <React.Fragment>
-        {selectNumberOfScenesShow && (
+        {selectDurationShow && (
           <Select
-            name="selectNumberOfScenes"
+            name="selectDuration"
             customClass={selectClasses || 'custom-select'}
-            placeholder="Select One"
-            value={selectNumberOfScenes || ''}
-            onChange={(option) =>
-              this.handleChange(option, 'selectNumberOfScenes')
-            }
+            placeholder="Select Duration"
+            value={selectDuration || ''}
+            onChange={(option) => this.handleChange(option, 'selectDuration')}
             options={[
-              { value: 'chocolate', label: 'Chocolate' },
-              { value: 'strawberry', label: 'Strawberry' },
-              { value: 'vanilla', label: 'Vanilla' },
+              { value: '0-15', label: '0-15 sec' },
+              { value: '16-30', label: '16-30 sec' },
+              { value: '31-60', label: '31-60 sec' },
+              { value: '61', label: '61+' },
             ]}
           />
         )}

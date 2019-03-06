@@ -64,6 +64,7 @@
   h2 {
     font-family: $font-family-ClanOTBold;
     font-size: 18px;
+    font-weight: bold;
   }
 
   .inputWrapper {
@@ -111,7 +112,11 @@
     justify-content: center;
 
     .infoText {
+      font-family: $font-family-ClanOT;
+      font-size: 14px;
+      font-weight: bold;
       padding: 8px 24px;
+      font-family: $font-family-ClanOT;
       background-color: $color-dark-five;
       color: $color-white;
       border-radius: 24px;

@@ -18,15 +18,17 @@ class Range extends Component {
 	}
 
 	onSliderChange(value) {
-		console.log(value);
+		const {input: {onChange = () => {}}} = this.props;
+
 		this.setState({
 			value
 		});
+
+		onChange(value);
 	}
 
 	render() {
-		const { className, input, minValue, maxValue } = this.props;
-		const { onChange } = input;
+		const { className, input: {onChange}, minValue, maxValue } = this.props;
 
 		const { value } = this.state;
 

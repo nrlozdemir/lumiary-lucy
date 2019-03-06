@@ -125,13 +125,7 @@ class TotalViewsChart extends Component {
                     ],
                   }}
                 />
-                <div className="poa-middle text-center">
-                  Past Month
-                  <br />
-                  Combinded
-                  <br />
-                  Views
-                </div>
+                <div className="poa-middle text-center">Total Percentage</div>
               </div>
             </div>
           </div>
