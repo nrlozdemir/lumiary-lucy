@@ -24,6 +24,7 @@
 		"id": 1,
 		"defaultSection": "Instagram",
 		"cardName": "Instagram",
+		"social": "instagram",
 		"difference": 33,
 		"differenceType": "SFX",
 		"videos": [
@@ -45,6 +46,7 @@
 		"id": 4,
 		"defaultSection": "Facebook",
 		"cardName": "Facebook",
+		"social": "facebook",
 		"difference": 25,
 		"differenceType": "Timelapse",
 		"videos": [

@@ -69,6 +69,7 @@ export const barDurationOptions = {
 					zeroLineColor: '#5a6386'
 				},
 				ticks: {
+					stepSize: 5,
 					beginAtZero: true,
 					fontColor: 'white'
 				}

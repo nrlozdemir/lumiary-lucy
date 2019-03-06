@@ -1,0 +1,25 @@
+.similarPropertiesContainer {
+  background-color: $color-dark-grey-blue;
+
+  .header {
+    .title {
+      font-size: 18px;
+    }
+  }
+
+  .selects {
+    display: flex;
+    float: right;
+    position: relative;
+    z-index: 12;
+    > div {
+      margin: 0 0 0 20px;
+    }
+
+    .selectStyles {
+      border: 1px solid $color-dusk;
+    }
+  }
+}
+
+

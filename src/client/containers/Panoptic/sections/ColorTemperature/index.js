@@ -16,7 +16,7 @@ const PanopticColorTemperature = ({
     <div className={style.radialChartsContainer}>
       <div className={style.temperatureHeader}>
         <div>
-          <h2>Color Temperature / Sentiment Comparison</h2>
+          <h2 className="font-secondary-first">Color Temperature / Sentiment Comparison</h2>
         </div>
         <div className={style.inputWrapper}>
           <form className={style.form}>

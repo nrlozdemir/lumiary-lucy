@@ -1,14 +1,13 @@
-import React, { Component } from 'react';
-import classnames from 'classnames';
-import { Bar } from 'react-chartjs-2';
+import React, { Component } from 'react'
+import classnames from 'classnames'
 
-import style from 'Containers/Marketview/style.scss';
+import TotalCompetitorViewsChart from 'Components/Charts/MarketView/TotalCompetitorViewsChart'
+import style from 'Containers/Marketview/style.scss'
 
-import { barDurationData, barDurationOptions } from './options';
-
-class TotalCompetitorViewsChart extends Component {
+class TotalCompetitorViewsCard extends Component {
 	render() {
-		const chartContainer = classnames('shadow-1 col-12-gutter-20 mb-48', style.chartContainer);
+    const { totalCompetitorViewsData } = this.props
+		const chartContainer = classnames('shadow-1 col-12-gutter-20 mb-48', style.chartContainer)
 
 		return (
 			<div className={chartContainer}>
@@ -22,10 +21,10 @@ class TotalCompetitorViewsChart extends Component {
 						<div className={style.colorListItem}>Fansided</div>
 					</div>
 				</div>
-				<Bar data={barDurationData} width={500} options={barDurationOptions} height={100} />
+				<TotalCompetitorViewsChart barDurationData={totalCompetitorViewsData}/>
 			</div>
-		);
+		)
 	}
 }
 
-export default TotalCompetitorViewsChart;
+export default TotalCompetitorViewsCard

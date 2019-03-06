@@ -477,6 +477,10 @@
 }
 .ReactTable .rt-thead .rt-th.-sort-asc,
 .ReactTable .rt-thead .rt-td.-sort-asc {
+  div {
+    border-bottom: 1px solid $color-white;
+    line-height: 1.5;
+  }
   box-shadow: none;
   &:after {
     margin-left: 8px;
@@ -492,6 +496,10 @@
 }
 .ReactTable .rt-thead .rt-th.-sort-desc,
 .ReactTable .rt-thead .rt-td.-sort-desc {
+  div {
+    border-bottom: 1px solid $color-white;
+    line-height: 1.5;
+  }
   box-shadow: none;
   &:after {
     margin-left: 8px;

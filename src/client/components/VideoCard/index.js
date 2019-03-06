@@ -40,10 +40,10 @@ const VideoCard = ({ video, options = options || {}, muted = true }) => {
 			</div>
 			<div className={style.cardBody}>
 				<div className={style.bodyHeader}>
+					<span className={style.title}>{video.title}</span>
 					<span className={style.iconWrapper}>
 						<i className={iconClass} />
 					</span>
-					<span className={style.title}>{video.title}</span>
 				</div>
 			</div>
 		</div>

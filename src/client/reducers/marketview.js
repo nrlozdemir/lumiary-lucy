@@ -27,7 +27,37 @@ export const types = {
 	GET_MARKETVIEW_SIMILAR_PROPERTIES_SUCCESS:
 		"Marketview/GET_MARKETVIEW_SIMILAR_PROPERTIES_SUCCESS",
 	GET_MARKETVIEW_SIMILAR_PROPERTIES_FAILURE:
-		"Marketview/GET_MARKETVIEW_SIMILAR_PROPERTIES_FAILURE"
+    "Marketview/GET_MARKETVIEW_SIMILAR_PROPERTIES_FAILURE",
+  GET_MARKETVIEW_BUBLECHART_REQUEST:
+    "Marketview/GET_MARKETVIEW_BUBLECHART_REQUEST",
+  GET_MARKETVIEW_BUBLECHART_SUCCESS:
+    "Marketview/GET_MARKETVIEW_BUBLECHART_SUCCESS",
+  GET_MARKETVIEW_BUBLECHART_FAILURE:
+    "Marketview/GET_MARKETVIEW_BUBLECHART_FAILURE",
+  GET_MARKETVIEW_PACINGCHART_REQUEST:
+    "Marketview/GET_MARKETVIEW_PACINGCHART_REQUEST",
+  GET_MARKETVIEW_PACINGCHART_SUCCESS:
+    "Marketview/GET_MARKETVIEW_PACINGCHART_SUCCESS",
+  GET_MARKETVIEW_PACINGCHART_FAILURE:
+    "Marketview/GET_MARKETVIEW_PACINGCHART_FAILURE",
+  GET_MARKETVIEW_FORMATCHART_REQUEST:
+    "Marketview/GET_MARKETVIEW_FORMATCHART_REQUEST",
+  GET_MARKETVIEW_FORMATCHART_SUCCESS:
+    "Marketview/GET_MARKETVIEW_FORMATCHART_SUCCESS",
+  GET_MARKETVIEW_FORMATCHART_FAILURE:
+    "Marketview/GET_MARKETVIEW_FORMATCHART_FAILURE",
+  GET_MARKETVIEW_TOTALVIEWS_REQUEST:
+    "Marketview/GET_MARKETVIEW_TOTALVIEWS_REQUEST",
+  GET_MARKETVIEW_TOTALVIEWS_SUCCESS:
+    "Marketview/GET_MARKETVIEW_TOTALVIEWS_SUCCESS",
+  GET_MARKETVIEW_TOTALVIEWS_FAILURE:
+    "Marketview/GET_MARKETVIEW_TOTALVIEWS_FAILURE",
+  GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST:
+    "Marketview/GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST",
+  GET_MARKETVIEW_TOTALCOMPETITORVIEWS_SUCCESS:
+    "Marketview/GET_MARKETVIEW_TOTALCOMPETITORVIEWS_SUCCESS",
+  GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE:
+    "Marketview/GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE",
 };
 export const actions = {
 	getCompetitorVideosRequest: () => ({
@@ -66,13 +96,73 @@ export const actions = {
 	getSimilarPropertiesFailure: error => ({
 		type: types.GET_MARKETVIEW_SIMILAR_PROPERTIES_FAILURE,
 		error
-	})
+  }),
+  getBubleChartRequest: () => ({
+    type: types.GET_MARKETVIEW_BUBLECHART_REQUEST
+  }),
+  getBubleChartSuccess: payload => ({
+		type: types.GET_MARKETVIEW_BUBLECHART_SUCCESS,
+		payload
+  }),
+  getBubleChartFailure: error => ({
+		type: types.GET_MARKETVIEW_BUBLECHART_FAILURE,
+		error
+  }),
+  getPacingChartRequest: () => ({
+    type: types.GET_MARKETVIEW_PACINGCHART_REQUEST
+  }),
+  getPacingChartSuccess: payload => ({
+		type: types.GET_MARKETVIEW_PACINGCHART_SUCCESS,
+		payload
+  }),
+  getPacingChartFailure: error => ({
+		type: types.GET_MARKETVIEW_PACINGCHART_FAILURE,
+		error
+  }),
+  getFormatChartRequest: () => ({
+    type: types.GET_MARKETVIEW_FORMATCHART_REQUEST
+  }),
+  getFormatChartSuccess: payload => ({
+		type: types.GET_MARKETVIEW_FORMATCHART_SUCCESS,
+		payload
+  }),
+  getFormatChartFailure: error => ({
+		type: types.GET_MARKETVIEW_FORMATCHART_FAILURE,
+		error
+  }),
+  getTotalViewsRequest: () => ({
+    type: types.GET_MARKETVIEW_TOTALVIEWS_REQUEST
+  }),
+  getTotalViewsSuccess: payload => ({
+		type: types.GET_MARKETVIEW_TOTALVIEWS_SUCCESS,
+		payload
+  }),
+  getTotalViewsFailure: error => ({
+		type: types.GET_MARKETVIEW_TOTALVIEWS_FAILURE,
+		error
+  }),
+  getTotalCompetitorViewsRequest: () => ({
+    type: types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST
+  }),
+  getTotalCompetitorViewsSuccess: payload => ({
+		type: types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_SUCCESS,
+		payload
+  }),
+  getTotalCompetitorViewsFailure: error => ({
+		type: types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE,
+		error
+  }),
 };
 export const initialState = fromJS({
 	competitorTopVideos: null,
 	videos: null,
 	selectedVideo: null,
-	similarProperties: null,
+  similarProperties: null,
+  bubleChartData: null,
+  pacingChartData: null,
+  formatChartData: null,
+  totalViewsData: null,
+  totalCompetitorViewsData: null,
 	error: false,
 	loading: false
 });
@@ -113,6 +203,61 @@ const marketviewReducer = (state = initialState, action) => {
 				.set("similarProperties", fromJS(action.payload))
 				.set("loading", fromJS(false));
 		case types.GET_MARKETVIEW_SIMILAR_PROPERTIES_FAILURE:
+			return state
+				.set("error", fromJS(action.error))
+        .set("loading", fromJS(false));
+        
+		case types.GET_MARKETVIEW_BUBLECHART_REQUEST:
+			return state.set("loading", fromJS(true));
+		case types.GET_MARKETVIEW_BUBLECHART_SUCCESS:
+			return state
+				.set("bubleChartData", fromJS(action.payload))
+				.set("loading", fromJS(false));
+		case types.GET_MARKETVIEW_BUBLECHART_FAILURE:
+			return state
+				.set("error", fromJS(action.error))
+				.set("loading", fromJS(false));
+        
+		case types.GET_MARKETVIEW_PACINGCHART_REQUEST:
+			return state.set("loading", fromJS(true));
+		case types.GET_MARKETVIEW_PACINGCHART_SUCCESS:
+			return state
+				.set("pacingChartData", fromJS(action.payload))
+				.set("loading", fromJS(false));
+		case types.GET_MARKETVIEW_PACINGCHART_FAILURE:
+			return state
+				.set("error", fromJS(action.error))
+				.set("loading", fromJS(false));
+        
+		case types.GET_MARKETVIEW_FORMATCHART_REQUEST:
+			return state.set("loading", fromJS(true));
+		case types.GET_MARKETVIEW_FORMATCHART_SUCCESS:
+			return state
+				.set("formatChartData", fromJS(action.payload))
+				.set("loading", fromJS(false));
+		case types.GET_MARKETVIEW_FORMATCHART_FAILURE:
+			return state
+				.set("error", fromJS(action.error))
+				.set("loading", fromJS(false));
+        
+		case types.GET_MARKETVIEW_TOTALVIEWS_REQUEST:
+			return state.set("loading", fromJS(true));
+		case types.GET_MARKETVIEW_TOTALVIEWS_SUCCESS:
+			return state
+				.set("totalViewsData", fromJS(action.payload))
+				.set("loading", fromJS(false));
+		case types.GET_MARKETVIEW_TOTALVIEWS_FAILURE:
+			return state
+				.set("error", fromJS(action.error))
+        .set("loading", fromJS(false));
+        
+		case types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST:
+			return state.set("loading", fromJS(true));
+		case types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_SUCCESS:
+			return state
+				.set("totalCompetitorViewsData", fromJS(action.payload))
+				.set("loading", fromJS(false));
+		case types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE:
 			return state
 				.set("error", fromJS(action.error))
 				.set("loading", fromJS(false));

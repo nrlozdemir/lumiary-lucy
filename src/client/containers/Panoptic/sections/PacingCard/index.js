@@ -21,7 +21,7 @@ const PacingCard = ({
   return (
     <div className={pacingCardContainer}>
       <div className={style.componentTitle}>
-        <span>Dominant Color, Facebook & YouTube Shares</span>
+        <span>Pacing For Each Format by Performance</span>
         <div className={style.selects}>
           <SelectFilters
             handleSelectFilters={handleSelectFilters}
