@@ -1,7 +1,8 @@
-import { takeLatest, call, put } from "redux-saga/effects";
+import { takeLatest, call, put, select } from "redux-saga/effects";
 import axios from 'axios';
 
-import { types, actions } from "Reducers/library";
+import { types, actions, makeSelectVideoFilters } from "Reducers/library";
+import { sortVideos } from "Utils/sort-videos";
 import libraryMockData from 'Api/mocks/libraryMock.json';
 
 function getLibraryApi() {
@@ -19,4 +20,16 @@ function* getVideos() {
 	}
 }
 
-export default [takeLatest(types.LOAD_VIDEOS, getVideos)];
+function* changeFilter() {
+	try {
+		const payload = yield call(getLibraryApi);
+		const filter = yield select(makeSelectVideoFilters());
+		const sorted = sortVideos(payload, filter);
+
+		yield put(actions.loadVideosSuccess(sorted));
+	} catch (err) {
+		yield put(actions.loadVideosError(err));
+	}
+}
+
+export default [takeLatest(types.LOAD_VIDEOS, getVideos), takeLatest(types.CHANGE_FILTER, changeFilter)];

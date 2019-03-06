@@ -36,7 +36,7 @@ export class Library extends React.Component {
 	}
 
 	handleSubmit(e) {
-		this.props.changeFilter(e)
+		this.props.changeFilter(e);
 	}
 
 	render() {
@@ -54,7 +54,7 @@ export class Library extends React.Component {
 					/>
 					<div className="grid-collapse mt-50">
 						<VideoCardList
-							data={this.props.library.sortedVideos}
+							data={this.props.library.videos}
 						/>
 					</div>
 				</div>
