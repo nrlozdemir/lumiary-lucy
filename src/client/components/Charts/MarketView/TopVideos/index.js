@@ -3,12 +3,12 @@ import cx from 'classnames'
 import { Bar } from 'react-chartjs-2'
 import { randomKey } from 'Utils/index'
 
-import Select from 'Components/Form/Select'
+import SelectFilters from 'Components/SelectFilters'
 import style from './style.scss'
 import { chartOptions } from './options'
 
 const barChartContainer = cx(
-  'd-flex flex-column shadow-1 mt-72 mb-72',
+  'shadow-1 col-12 mt-72 mb-72',
   style.marketViewTopVideos
 )
 const barChartHeaderClass = cx('col-12 mt-48 mb-48', style.barChartHeader)
@@ -23,61 +23,38 @@ class TopVideosChart extends Component {
     this.state = {}
   }
 
-  handleChange = (selectedOption, name) => {
-    this.setState({ [name]: selectedOption })
-  }
-
   datasetKeyProvider() {
     return randomKey(5)
   }
 
+  handleSelectFilters = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
+  }
+
   render() {
-    const { resolution, views, time } = this.state
+    const { selectDate, selectPercent, selectResolution } = this.state
     const { chartData } = this.props
     return (
       <div className={barChartContainer}>
         <div className={barChartHeaderClass}>
           <div className="col-4 text-bold">
-            <p className={headerTitleClass}>Top Videos Over Time By Platform</p>
+            <p className={headerTitleClass}>
+              Top Videos Over Time By Competitor
+            </p>
           </div>
           <div className="col-8">
             <div className={style.selects}>
-              <Select
-                name="likes"
-                customClass={selectClasses}
-                placeholder="Resolution"
-                value={resolution || ''}
-                onChange={(option) => this.handleChange(option, 'resolution')}
-                options={[
-                  { value: '360', label: '360' },
-                  { value: '480', label: '480' },
-                  { value: '720p', label: '720p' },
-                  { value: '1080p', label: '1080p' },
-                ]}
-              />
-              <Select
-                name="date"
-                customClass={selectClasses}
-                placeholder="Views"
-                value={views || ''}
-                onChange={(option) => this.handleChange(option, 'views')}
-                options={[
-                  { value: '25', label: '%25' },
-                  { value: '50', label: '%50' },
-                  { value: '75', label: '%75' },
-                  { value: '100', label: '%100' },
-                ]}
-              />
-              <Select
-                name="date"
-                customClass={selectClasses}
-                placeholder="Time"
-                value={time || ''}
-                onChange={(option) => this.handleChange(option, 'time')}
-                options={[
-                  { value: 'Past Month', label: 'Past Month' },
-                  { value: 'Past Year', label: 'Past Year' },
-                ]}
+              <SelectFilters
+                handleSelectFilters={this.handleSelectFilters}
+                selectClasses={selectClasses}
+                selectResolution={selectResolution}
+                selectDate={selectDate}
+                selectPercent={selectPercent}
+                selectPercentShow={true}
+                selectResolutionShow={true}
+                selectDateShow={true}
               />
             </div>
             <div className="clearFix" />

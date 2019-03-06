@@ -1,26 +1,27 @@
-.temperatureHeader{
+.temperatureHeader {
   display: flex;
   width: calc(100% - 80px);
   padding: 48px 40px 20px;
   justify-content: space-between;
   align-items: center;
 
-  p{
+  p {
     font-size: 14px;
     font-family: $font-family-ClanOTNews;
   }
 
-  h2{
+  h2 {
     font-family: $font-family-ClanOTBold;
     font-size: 18px;
   }
 
-  .inputWrapper{
+  .inputWrapper {
+    position: relative;
     width: 200px;
   }
 }
 
-.temperatureContentContainer{
+.temperatureContentContainer {
   width: calc(100% - 40px);
   padding: 56px 20px;
   display: flex;
@@ -28,20 +29,20 @@
   align-items: center;
   justify-content: space-between;
 
-  &:first-child{
+  &:first-child {
     border: none;
   }
 
-  .temperatureContentWrapper{
+  .temperatureContentWrapper {
     position: relative;
     width: calc(33.33% - 41px);
     border-left: 1px solid $color-dusk;
     padding: 20px;
-    &:first-child{
+    &:first-child {
       border: none;
     }
 
-    .textTop{
+    .textTop {
       font-size: 14px;
       font-family: $font-family-ClanOTBold;
       position: absolute;
@@ -49,7 +50,7 @@
       left: calc(50% - 22.5px);
     }
 
-    .textRight{
+    .textRight {
       font-size: 14px;
       font-family: $font-family-ClanOTNews;
       color: $color-cool-grey;
@@ -58,15 +59,15 @@
       right: -50px;
     }
 
-    .textBottom{
+    .textBottom {
       font-size: 14px;
       font-family: $font-family-ClanOTBold;
       position: absolute;
       bottom: -40px;
-      left: calc(50% - 12px)
+      left: calc(50% - 12px);
     }
 
-    .textLeft{
+    .textLeft {
       font-size: 14px;
       font-family: $font-family-ClanOTNews;
       color: $color-cool-grey;
@@ -75,7 +76,7 @@
       left: -40px;
     }
 
-    .horizontalLine{
+    .horizontalLine {
       width: 204px;
       height: 4px;
       background-color: $color-dark-five;
@@ -83,7 +84,7 @@
       top: calc(50% - 2px);
     }
 
-    .verticalLine{
+    .verticalLine {
       width: 4px;
       height: 204px;
       background-color: $color-dark-five;
@@ -92,7 +93,7 @@
       left: calc(50% - 2px);
     }
 
-    .temperatureContent{
+    .temperatureContent {
       display: block;
       margin: 0 auto;
       width: 204px;
@@ -102,7 +103,7 @@
       box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
       position: relative;
 
-      .redRound{
+      .redRound {
         width: 40px;
         height: 40px;
         position: absolute;
@@ -112,7 +113,7 @@
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
       }
 
-      .purpleRound{
+      .purpleRound {
         width: 40px;
         height: 40px;
         position: absolute;
@@ -122,7 +123,7 @@
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
       }
 
-      .duskRound{
+      .duskRound {
         width: 40px;
         height: 40px;
         position: absolute;
@@ -137,12 +138,11 @@
 
 .radialChartsContainer {
   .doughnutTabs {
-    border:none;
+    border: none;
     margin-block-start: 0;
     margin-block-end: 0;
     padding-inline-start: 0;
   }
-
 
   .radialChart {
     transition: 500ms;
@@ -154,7 +154,7 @@
     border-left: 1px solid $color-dusk;
     list-style: none;
 
-    .subtitle{
+    .subtitle {
       background-color: $color-dark-five;
       padding: 8px 24px;
       border-radius: 22px;
@@ -175,28 +175,27 @@
         display: block;
         margin: 0 auto;
       }
-      .textBold{
+      .textBold {
         font-family: $font-family-ClanOTBold;
         font-weight: bold;
       }
-      canvas{
+      canvas {
         margin: 0 auto;
       }
     }
-    &:hover{
-      transform: scaleX(1.10) scaleY(1.22);
+    &:hover {
+      transform: scaleX(1.1) scaleY(1.22);
       background-color: $color-dusk;
     }
-
   }
-  .doughnutPanelTab{
+  .doughnutPanelTab {
     transition: 500ms;
     text-align: center;
     width: 100%;
     min-height: 400px;
     background-color: $color-dark-grey-blue;
 
-    .doughnutPanelHeader{
+    .doughnutPanelHeader {
       width: auto;
       height: 40px;
       padding: 12px 40px;
@@ -207,8 +206,8 @@
       justify-content: space-between;
       box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
 
-      div{
-        i{
+      div {
+        i {
           background-color: #242b49;
           border-radius: 20px;
           padding: 8px;
@@ -216,7 +215,7 @@
           margin-right: 20px;
         }
       }
-      .panelTitle{
+      .panelTitle {
         font-family: $font-family-ClanOTBold;
         font-size: 14px;
         color: $color-white;
@@ -225,59 +224,59 @@
   }
 }
 
-.redRound{
+.redRound {
   background-color: $color-coral-pink;
   width: 16px;
   height: 16px;
   display: inline-flex;
   border-radius: 100%;
   vertical-align: middle;
-  margin-right: 10px
+  margin-right: 10px;
 }
 
-.purpleRound{
+.purpleRound {
   background-color: $color-lighter-purple;
   width: 16px;
   height: 16px;
   display: inline-flex;
   border-radius: 100%;
   vertical-align: middle;
-  margin-right: 10px
+  margin-right: 10px;
 }
 
-.duskRound{
+.duskRound {
   background-color: $color-cool-blue;
   width: 16px;
   height: 16px;
   display: inline-flex;
   border-radius: 100%;
   vertical-align: middle;
-  margin-right: 10px
+  margin-right: 10px;
 }
 
-.temperatureHeader{
+.temperatureHeader {
   display: flex;
   width: calc(100% - 80px);
   padding: 48px 40px 20px;
   justify-content: space-between;
   align-items: center;
 
-  p{
+  p {
     font-size: 14px;
     font-family: $font-family-ClanOTNews;
   }
 
-  h2{
+  h2 {
     font-family: $font-family-ClanOTBold;
     font-size: 18px;
   }
 
-  .inputWrapper{
+  .inputWrapper {
     width: 200px;
   }
 }
 
-.temperatureContentContainer{
+.temperatureContentContainer {
   width: calc(100% - 40px);
   padding: 56px 20px;
   display: flex;
@@ -285,20 +284,20 @@
   align-items: center;
   justify-content: space-between;
 
-  &:first-child{
+  &:first-child {
     border: none;
   }
 
-  .temperatureContentWrapper{
+  .temperatureContentWrapper {
     position: relative;
     width: calc(33.33% - 41px);
     border-left: 1px solid $color-dusk;
     padding: 20px;
-    &:first-child{
+    &:first-child {
       border: none;
     }
 
-    .textTop{
+    .textTop {
       font-size: 14px;
       font-family: $font-family-ClanOTBold;
       position: absolute;
@@ -306,7 +305,7 @@
       left: calc(50% - 22.5px);
     }
 
-    .textRight{
+    .textRight {
       font-size: 14px;
       font-family: $font-family-ClanOTNews;
       color: $color-cool-grey;
@@ -315,15 +314,15 @@
       right: -50px;
     }
 
-    .textBottom{
+    .textBottom {
       font-size: 14px;
       font-family: $font-family-ClanOTBold;
       position: absolute;
       bottom: -40px;
-      left: calc(50% - 12px)
+      left: calc(50% - 12px);
     }
 
-    .textLeft{
+    .textLeft {
       font-size: 14px;
       font-family: $font-family-ClanOTNews;
       color: $color-cool-grey;
@@ -332,7 +331,7 @@
       left: -40px;
     }
 
-    .horizontalLine{
+    .horizontalLine {
       width: 204px;
       height: 4px;
       background-color: $color-dark-five;
@@ -340,7 +339,7 @@
       top: calc(50% - 2px);
     }
 
-    .verticalLine{
+    .verticalLine {
       width: 4px;
       height: 204px;
       background-color: $color-dark-five;
@@ -349,7 +348,7 @@
       left: calc(50% - 2px);
     }
 
-    .temperatureContent{
+    .temperatureContent {
       display: block;
       margin: 0 auto;
       width: 204px;
@@ -359,7 +358,7 @@
       box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
       position: relative;
 
-      .redRound{
+      .redRound {
         width: 40px;
         height: 40px;
         position: absolute;
@@ -369,7 +368,7 @@
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
       }
 
-      .purpleRound{
+      .purpleRound {
         width: 40px;
         height: 40px;
         position: absolute;
@@ -379,7 +378,7 @@
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
       }
 
-      .duskRound{
+      .duskRound {
         width: 40px;
         height: 40px;
         position: absolute;
@@ -389,8 +388,5 @@
         box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
       }
     }
-
   }
-
 }
-

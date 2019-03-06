@@ -130,8 +130,8 @@ LibraryDetail.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
-	libraryDetail: makeSelectLibraryDetail(),
-	library: makeSelectLibrary()
+  libraryDetail: makeSelectLibraryDetail(),
+  library: makeSelectLibrary(),
 })
 
 function mapDispatchToProps(dispatch) {
@@ -145,13 +145,13 @@ function mapDispatchToProps(dispatch) {
 }
 
 const withConnect = connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )
 
 export default compose(
-	reduxForm({
-		form: "libraryDetail"
-	}),
-	withConnect
+  reduxForm({
+    form: 'libraryDetail',
+  }),
+  withConnect
 )(LibraryDetail)

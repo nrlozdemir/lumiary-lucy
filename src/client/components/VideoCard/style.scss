@@ -4,7 +4,12 @@
 	border: 1px solid $color-dark-grey-blue;
 	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
 	transition: box-shadow 0.3s ease-in-out;
-	position: relative;
+  position: relative;
+  
+  @include grid-media($small-grid) {
+    margin-top: 20px;
+    @include grid-column(12);
+  }
 
 	&:hover {
 		box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5);

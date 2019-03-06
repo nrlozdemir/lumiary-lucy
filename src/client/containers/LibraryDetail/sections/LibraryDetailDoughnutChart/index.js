@@ -6,7 +6,7 @@ import { chartCombineDataset } from "Utils"
 import style from './style.scss'
 import { selectOptions, lineChartOptions, lineChartData_DatasetOptions } from './options'
 
-import Select from 'Components/Form/Select'
+import SelectFilters from 'Components/SelectFilters'
 import LineChart from 'Components/LineChart/Chart'
 import PointerCard from 'Components/PointerCard'
 import DoughnutChart from 'Components/Charts/LibraryDetail/Doughnut'
@@ -51,8 +51,14 @@ class LibraryDetailDoughnutChart extends React.Component {
     this.setState(prevState => ({ selectedCard }))
   }
 
+  handleSelectFilters = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
+  }
+
   render() {
-    const { selectedCard } = this.state
+    const { isDoughnutVisible, selectDate, selectLikes, selectedCard } = this.state
     const { doughnutData, lineChartData } = this.props
     let selectedCardData = null
     if (!!selectedCard || selectedCard === 0) {
@@ -108,26 +114,14 @@ class LibraryDetailDoughnutChart extends React.Component {
                       <p className={style.panelTitle}>24 Fps</p>
                     </div>
                     <div className={style.formWrapper}>
-                      <form onSubmit={() => console.log('object')}>
-                        <Field
-                          component={Select}
-                          options={selectOptions}
-                          id="NumberOfScenes"
-                          name="NumberOfScenes"
-                          placeholder="Select One"
-                          label="Number of Scenes"
-                          className={style.formWrapper}
-                        />
-                        <Field
-                          component={Select}
-                          options={selectOptions}
-                          id="NumberOfScenes"
-                          name="NumberOfScenes"
-                          placeholder="Select One"
-                          label="Number of Scenes"
-                          className={style.formWrapper}
-                        />
-                      </form>
+                      <SelectFilters
+                        handleSelectFilters={this.handleSelectFilters}
+                        selectClasses="custom-select"
+                        selectDate={selectDate}
+                        selectDateShow={true}
+                        selectLikes={selectLikes}
+                        selectLikesShow={true}
+                      />
                     </div>
                   </div>
                 </div>
