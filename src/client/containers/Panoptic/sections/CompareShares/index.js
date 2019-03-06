@@ -62,6 +62,11 @@ const CompareShares = ({ radarData, handleSelectFilters, selectDate }) => {
             ))}
           </div>
         </div>
+        <div className={style.progressCountArea}>
+          <span className={style.progressCount}>1</span>
+          <span className={style.progressCount}>2</span>
+          <span className={style.progressCount}>3</span>
+        </div>
         <div className={style.radarComponent}>
           <p className={style.radarTitle}>{radarData[1].type}</p>
           <div className={style.radarComponentContainer}>
