@@ -1,14 +1,18 @@
-import React from 'react';
-import { Field } from "redux-form";
+import React from 'react'
+import { Field } from 'redux-form'
 
-import style from "./style.scss";
-import { selectOptions } from "./options";
+import style from './style.scss'
+import { selectOptions } from './options'
 
-import Select from 'Components/Form/Select'
+import SelectFilters from 'Components/SelectFilters'
 import ColorTemperatureChart from 'Components/ColorTemperatureChart'
 
-const LibraryDetailColorTemperature = ({colorTempData}) => {
-  return(
+const LibraryDetailColorTemperature = ({
+  colorTempData,
+  handleSelectFilters,
+  selectDate,
+}) => {
+  return (
     <div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
       <div className={style.radialChartsContainer}>
         <div className={style.temperatureHeader}>
@@ -17,42 +21,35 @@ const LibraryDetailColorTemperature = ({colorTempData}) => {
           </div>
           <div className="d-flex align-items-center justify-space-between">
             <div className="d-flex align-items-center mr-32">
-              <span className={style.redRound}></span>
+              <span className={style.redRound} />
               <p>This Video</p>
             </div>
             <div className="d-flex align-items-center mr-32">
-              <span className={style.duskRound}></span>
+              <span className={style.duskRound} />
               <p>Library Average</p>
             </div>
             <div className="d-flex align-items-center mr-32">
-              <span className={style.purpleRound}></span>
+              <span className={style.purpleRound} />
               <p>Industry</p>
             </div>
           </div>
           <div className={style.inputWrapper}>
-            <form>
-              <Field
-                component={Select}
-                options={selectOptions}
-                id="NumberOfScenes"
-                name="NumberOfScenes"
-                placeholder="Select One"
-                label="Number of Scenes"
-                className={style.formWrapper}
-              />
-            </form>
+            <SelectFilters
+              handleSelectFilters={handleSelectFilters}
+              selectClasses="custom-select"
+              selectDate={selectDate}
+              selectDateShow={true}
+            />
           </div>
         </div>
         <div className={style.temperatureContentContainer}>
-          {
-            colorTempData && <ColorTemperatureChart colorTempData={colorTempData} />
-          }
+          {colorTempData && (
+            <ColorTemperatureChart colorTempData={colorTempData} />
+          )}
         </div>
-
       </div>
     </div>
   )
-};
+}
 
-export default LibraryDetailColorTemperature;
-
+export default LibraryDetailColorTemperature
