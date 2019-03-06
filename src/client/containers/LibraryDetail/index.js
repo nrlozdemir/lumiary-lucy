@@ -1,216 +1,132 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { bindActionCreators, compose } from 'redux'
-import { reduxForm } from 'redux-form'
+import React from "react"
+import PropTypes from "prop-types"
+import { connect } from "react-redux"
+import { createStructuredSelector } from "reselect"
+import { bindActionCreators, compose } from "redux"
+import { reduxForm } from "redux-form"
 
-import { chartCombineDataset } from 'Utils'
-import { actions, makeSelectLibraryDetail } from 'Reducers/libraryDetail'
-import { actions as libraryActions, makeSelectLibrary } from 'Reducers/library'
+import { chartCombineDataset } from "Utils"
+import { actions, makeSelectLibraryDetail } from "Reducers/libraryDetail"
+import { actions as libraryActions, makeSelectLibrary } from "Reducers/library"
 
-import LibraryDetailHeader from './sections/LibraryDetailHeader'
-import LibraryDetailChartHeader from './sections/LibraryDetailChartHeader'
-import LibraryDetailDoughnutChart from './sections/LibraryDetailDoughnutChart'
-import LibraryDetailColorTemperature from './sections/LibraryDetailColorTemperature'
-import LibraryDetailShotByShot from './sections/LibraryDetailShotByShot'
+import { barData_DatasetOptions, radarData_DatasetOptions, lineChartData_DatasetOptions } from './options'
+import LibraryDetailHeader from "./sections/LibraryDetailHeader"
+import LibraryDetailChartHeader from "./sections/LibraryDetailChartHeader"
+import LibraryDetailDoughnutChart from "./sections/LibraryDetailDoughnutChart"
+import LibraryDetailColorTemperature from "./sections/LibraryDetailColorTemperature"
+import LibraryDetailShotByShot from "./sections/LibraryDetailShotByShot"
 
 /* eslint-disable react/prefer-stateless-function */
 export class LibraryDetail extends React.Component {
-  constructor(props) {
-    super(props)
-    this.slide = React.createRef()
-    this.state = {
-      sliderVal: 0,
-      maxValue: 1000,
-      barData_DatasetOptions: [
-        {
-          label: 'first',
-          backgroundColor: '#ff556f',
-          borderColor: '#ff556f',
-          borderWidth: 1,
-          hoverBackgroundColor: '#ff556f',
-          hoverBorderColor: '#ff556f',
-        },
-        {
-          label: 'second',
-          backgroundColor: '#51adc0',
-          borderColor: '#51adc0',
-          borderWidth: 1,
-          hoverBackgroundColor: '#51adc0',
-          hoverBorderColor: '#51adc0',
-        },
-      ],
-      radarData_DatasetOptions: [
-        {
-          label: 'My First dataset',
-          backgroundColor: 'rgba(255, 85, 111,0.6)',
-          borderColor: 'transparent',
-          pointBackgroundColor: 'rgb(255, 85, 111,1)',
-          pointBorderColor: 'transparent',
-        },
-        {
-          label: 'My Second dataset',
-          backgroundColor: 'rgba(81, 173, 192,0.6)',
-          borderColor: 'transparent',
-          pointBackgroundColor: 'rgba(81, 173, 192,1)',
-          pointBorderColor: 'transparent',
-        },
-      ],
-      lineChartData_DatasetOptions: [
-        {
-          fill: false,
-          lineTension: 0.1,
-          borderColor: '#51adc0',
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointRadius: 5,
-          pointBackgroundColor: '#51adc0',
-          pointBorderColor: '#fff',
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
-          pointHoverBorderWidth: 2,
-          pointHitRadius: 10,
-          shadowOffsetX: 1,
-          shadowOffsetY: 1,
-          shadowBlur: 5,
-          shadowColor: '#51adc0',
-        },
-        {
-          fill: false,
-          lineTension: 0.1,
-          borderColor: '#8567f0',
-          borderCapStyle: 'butt',
-          borderDash: [],
-          borderDashOffset: 0.0,
-          borderJoinStyle: 'miter',
-          pointRadius: 5,
-          pointBackgroundColor: '#8567f0',
-          pointBorderColor: '#fff',
-          pointBorderWidth: 1,
-          pointHoverRadius: 5,
-          pointHoverBackgroundColor: 'rgba(75,192,192,1)',
-          pointHoverBorderColor: 'rgba(220,220,220,1)',
-          pointHoverBorderWidth: 2,
-          pointHitRadius: 10,
-          shadowOffsetX: 1,
-          shadowOffsetY: 1,
-          shadowBlur: 5,
-          shadowColor: '#8567f0',
-        },
-      ],
-    }
-  }
+	constructor(props) {
+		super(props)
+		this.slide = React.createRef()
+		this.state = {
+			sliderVal: 0,
+			maxValue: 1000
+		}
+	}
 
-  componentDidMount() {
-    const { getLibraryDetailRequest, match, getVideos } = this.props
-
-    getVideos()
-
-    if (match.params.videoId) {
-      getLibraryDetailRequest(match.params.videoId)
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { match: prevMatch } = prevProps
-    const { match, getLibraryDetailRequest } = this.props
-
-    if (prevMatch.params.videoId !== match.params.videoId) {
-      getLibraryDetailRequest(match.params.videoId)
-    }
-  }
-
-  render() {
-    const {
-      libraryDetail: { libraryDetail },
-      library: { videos },
-      match: {
-        params: { videoId },
-      },
+	componentDidMount() {
+		const { 
+      match, 
+      getVideos,
+      getBarChartRequest,
+      getDoughnutChartRequest,
+      getColorTempRequest,
+      getShotByShotRequest  
     } = this.props
 
-    const { videoUrl } = videos.find(({ id }) => id == videoId) || {}
+		getVideos()
 
-    if (!libraryDetail) return false
+		if (match.params.videoId) {
+      getBarChartRequest(match.params.videoId),
+      getDoughnutChartRequest(match.params.videoId)
+      getColorTempRequest(match.params.videoId)
+      getShotByShotRequest(match.params.videoId)
+		}
+	}
 
-    let {
-      videoList,
-      slideImages,
-      barData,
-      colorTempData,
-      doughnutData,
-      lineChartData,
-      radarData,
-      sliderWithThumbnails,
-    } = libraryDetail
+	componentDidUpdate(prevProps) {
+		const { match: prevMatch } = prevProps
+		const { 
+      match,
+      getBarChartRequest,
+      getDoughnutChartRequest,
+      getColorTempRequest,
+      getShotByShotRequest
+    } = this.props
 
-    const {
-      barData_DatasetOptions,
-      radarData_DatasetOptions,
-      lineChartData_DatasetOptions,
-    } = this.state
+		if (prevMatch.params.videoId !== match.params.videoId) {
+      getBarChartRequest(match.params.videoId),
+      getDoughnutChartRequest(match.params.videoId)
+      getColorTempRequest(match.params.videoId)
+      getShotByShotRequest(match.params.videoId)
+		}
+	}
 
-    barData = chartCombineDataset(barData, barData_DatasetOptions)
+	render() {
+		const {
+			libraryDetail: { 
+        barChartData,
+        doughnutLineChartData,
+        colorTempData,
+        shotByShotData
+      },
+			library: {videos},
+			match: {params: {videoId}}
+    } = this.props
 
-    radarData = chartCombineDataset(radarData, radarData_DatasetOptions)
+		const { videoUrl, title, socialIcon } = videos.find(({id}) => id == videoId) || {}
 
-    lineChartData = chartCombineDataset(
-      lineChartData,
-      lineChartData_DatasetOptions,
-      {
-        beforeDraw: function(chart, easing) {
-          if (
-            chart.config.options.chartArea &&
-            chart.config.options.chartArea.backgroundColor
-          ) {
-            const ctx = chart.chart.ctx
-            const chartArea = chart.chartArea
+    let barData = null
+    let lineChartDataCombined = null
+    let radarDataCombined = null
 
-            ctx.save()
-            ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-            ctx.fillRect(
-              chartArea.left,
-              chartArea.top,
-              chartArea.right - chartArea.left,
-              chartArea.bottom - chartArea.top
-            )
-            ctx.restore()
-          }
-        },
-      }
-    )
+    if (barChartData) {
+      barData = chartCombineDataset(barChartData, barData_DatasetOptions)
+    }
+    if(shotByShotData) {
+      radarDataCombined = chartCombineDataset(shotByShotData.radarData, radarData_DatasetOptions)
+    }
 
-    return (
-      <React.Fragment>
-        <LibraryDetailHeader
-          videoName="My Awesome Video"
-          publishedPlatform="Facebook"
-        />
-        <LibraryDetailChartHeader barData={barData} videoUrl={videoUrl} />
-        <LibraryDetailDoughnutChart
-          doughnutData={doughnutData}
-          lineChartData={lineChartData}
-        />
-        <LibraryDetailColorTemperature colorTempData={colorTempData} />
-        <LibraryDetailShotByShot
-          sliderWithThumbnails={sliderWithThumbnails}
-          slideImages={slideImages}
-          radarData={radarData}
-          videoList={videoList}
-        />
-      </React.Fragment>
-    )
-  }
+		return (
+			<React.Fragment>
+				<LibraryDetailHeader
+					videoName={title}
+					publishedPlatform={socialIcon}
+				/>
+				{barData && <LibraryDetailChartHeader
+					barData={barData}
+					videoUrl={videoUrl}
+				/>}
+        {doughnutLineChartData && doughnutLineChartData.doughnutData && <LibraryDetailDoughnutChart
+					doughnutData={doughnutLineChartData.doughnutData}
+				/>}
+				<LibraryDetailColorTemperature
+					colorTempData={colorTempData}
+				/>
+        {shotByShotData && <LibraryDetailShotByShot
+					sliderWithThumbnails={shotByShotData.sliderWithThumbnails}
+					slideImages={shotByShotData.slideImages}
+					radarData={radarDataCombined}
+					videoList={shotByShotData.videoList}
+				/>
+        }
+			</React.Fragment>
+		)
+	}
 }
 
 LibraryDetail.propTypes = {
-  libraryDetail: PropTypes.object,
-  getLibraryDetailRequest: PropTypes.func.isRequired,
+  barChartData: PropTypes.object,
+  doughnutLineChartData: PropTypes.object,
+  colorTempData: PropTypes.object,
+  shotByShotData: PropTypes.object,
+  getBarChartRequest: PropTypes.func.isRequired,
+  getDoughnutChartRequest: PropTypes.func.isRequired,
+  getColorTempRequest: PropTypes.func.isRequired,
+  getShotByShotRequest: PropTypes.func.isRequired
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -219,11 +135,13 @@ const mapStateToProps = createStructuredSelector({
 })
 
 function mapDispatchToProps(dispatch) {
-  return {
-    getVideos: () => dispatch(libraryActions.loadVideos()),
-    getLibraryDetailRequest: (id) =>
-      dispatch(actions.getLibraryDetailRequest(id)),
-  }
+	return {
+		getVideos: () => dispatch(libraryActions.loadVideos()),
+    getBarChartRequest: id => dispatch(actions.getBarChartRequest(id)),
+    getDoughnutChartRequest: id => dispatch(actions.getDoughnutChartRequest(id)),
+    getColorTempRequest: id => dispatch(actions.getColorTempRequest(id)),
+    getShotByShotRequest: id => dispatch(actions.getShotByShotRequest(id)),
+	}
 }
 
 const withConnect = connect(
