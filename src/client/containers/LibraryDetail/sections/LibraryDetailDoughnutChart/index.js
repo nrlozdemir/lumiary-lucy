@@ -57,6 +57,12 @@ class LibraryDetailDoughnutChart extends React.Component {
     })
   }
 
+  handleSelectFilters = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
+  }
+
   render() {
     const { isDoughnutVisible, selectDate, selectLikes, selectedCard } = this.state
     const { doughnutData, lineChartData } = this.props

@@ -127,6 +127,7 @@ LibraryDetail.propTypes = {
   getDoughnutChartRequest: PropTypes.func.isRequired,
   getColorTempRequest: PropTypes.func.isRequired,
   getShotByShotRequest: PropTypes.func.isRequired
+
 }
 
 const mapStateToProps = createStructuredSelector({
