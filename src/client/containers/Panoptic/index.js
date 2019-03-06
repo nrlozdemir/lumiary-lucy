@@ -74,7 +74,13 @@ export class Panoptic extends React.Component {
             selectLikes={selectLikes}
           />
         )}
-        {compareSharesData && <CompareShares radarData={compareSharesData} />}
+        {compareSharesData && (
+          <CompareShares
+            selectDate={selectDate}
+            radarData={compareSharesData}
+            handleSelectFilters={this.handleSelectFilters}
+          />
+        )}
       </React.Fragment>
     )
   }
