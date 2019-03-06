@@ -17,7 +17,7 @@ const CompareShares = ({ radarData }) => {
   return (
     <div className={compareSharesContainer}>
       <div className={style.componentTitle}>
-        Pacing For Each Format by Performance
+        Dominant Color On Facebook and YouTube By Shares
       </div>
       <div className={radarComponent}>
         <RadarChart data={radarData} />

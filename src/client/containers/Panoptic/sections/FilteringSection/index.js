@@ -76,26 +76,8 @@ class PanopticFilteringSection extends Component{
       <div className="col-12 shadow-1 mt-72 bg-dark-grey-blue">
         <div className={style.radialChartsContainer}>
           <div className={style.temperatureHeader}>
-            <div className={style.dropDowns}>
-              <Dropdown
-                title="Duration"
-                listItems={dropdownLists.duration}
-              />
-              <span>by</span>
-              <Dropdown
-                title="Views"
-                listItems={dropdownLists.views}
-              />
-              <span>for</span>
-              <Dropdown
-                title="Facebook"
-                listItems={dropdownLists.socialMedia}
-              />
-              <span>in</span>
-              <Dropdown
-                title="Today"
-                listItems={dropdownLists.dateRange}
-              />
+            <div className={style.headerTitle}>
+              <h2>Engagement By Property Over Time</h2>
             </div>
             <div className={style.inputWrapper}>
               <Button
@@ -111,10 +93,10 @@ class PanopticFilteringSection extends Component{
               <div>
                 <DoughnutChart data={doughnutData.average}/>
               </div>
-              <div>
+              <div className="mb-24">
                 {
                   doughnutRoundData && doughnutRoundData.map((roundData, index) => (
-                    <div className="d-flex align-items-center pv-8" key={index}>
+                    <div className="d-flex align-items-center pv-8 mt-24" key={index}>
                       <span className={style.round} style={{backgroundColor: `${roundData.color}`}}></span>
                       <span className={style.secondsText}>{roundData.data}</span>
                     </div>

@@ -12,32 +12,18 @@ class PanopticBarChart extends Component {
       style.panopticBarChart
     )
     const barChartHeaderClass = cx('col-12 mt-24 mb-24', style.barChartHeader)
+    const barChartFooterClass = cx('col-12 mb-24', style.barChartFooter)
     const barContainerClass = cx('col-12', style.barChartContainer)
-    const chartSectionClass = cx('col-3', style.chartSection)
     const headerTitleClass = cx('font-secondary-first text-bold', style.title)
-    const headerDescClass = cx('font-secondary-second', style.desc)
     const referencesClass = cx('font-secondary-second', style.references)
     const { data } = this.props
     return (
       <div className={barChartContainer}>
         <div className={barChartHeaderClass}>
-          <div className="col-4 text-bold">
-            <p className={headerTitleClass}>Video Releases vs Performance</p>
-            <p className={headerDescClass}>Aggregated by Day of the Week</p>
+          <div className="col-6 text-bold">
+            <p className={headerTitleClass}>Video Releases vs Engagement</p>
           </div>
-          <div className="col-3">
-            <div className={referencesClass}>
-              <div className={style.referenceItem}>
-                <span className="bg-cool-blue" />
-                Likes
-              </div>
-              <div className={style.referenceItem}>
-                <span className="bg-coral-pink" />
-                Videos Released
-              </div>
-            </div>
-          </div>
-          <div className="col-5">
+          <div className="col-6">
             <div className={style.headerRight}>
               <span className={style.strong}>Likes</span>
               <span className={style.light}>for</span>
@@ -90,6 +76,18 @@ class PanopticBarChart extends Component {
           </div>
         </div>
         {/* bar charts */}
+        <div className={barChartFooterClass}>
+          <div className={referencesClass}>
+            <div className={style.referenceItem}>
+              <span className="bg-cool-blue" />
+              Likes
+            </div>
+            <div className={style.referenceItem}>
+              <span className="bg-coral-pink" />
+              Videos Released
+            </div>
+          </div>
+        </div>
       </div>
     )
   }

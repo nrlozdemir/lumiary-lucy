@@ -2,15 +2,13 @@
   position: relative;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   background-color: $color-dark-grey-blue;
-  padding: 40px 50px 106px;
-	font-family: $font-family-ClanOTNews;
-	min-height: 705px;
-	&:last-child {
-		padding: 40px 20px 106px;
-	}
+  padding: 40px 20px;
+  font-family: $font-family-ClanOTNews;
+  height: 705px;
+
   .marketViewCardTitle {
     font-family: $font-family-primary;
-    font-size: 40px;
+    font-size: 32px;
     text-align: center;
     margin-bottom: 10px;
   }
@@ -51,17 +49,25 @@
   .marketViewCardDescription {
     font-size: 14px;
     line-height: 26px;
-		text-align: center;
-		width: 70%;
-    margin: 35px auto 0 auto;
-	}
+    text-align: center;
+    width: 70%;
+    margin: 0 auto;
+    span {
+      position: absolute;
+      bottom: 100px;
+      left: 20px;
+      right: 20px;
+    }
+  }
 
-	.pieChartContainer {
-		margin-top: 60px;
-		canvas {
-			margin: 0 auto;
-		}
-	}
+  .pieChartContainer {
+    margin-top: 60px;
+    canvas {
+      width: 216px !important;
+      height: 216px !important;
+      margin: 0 auto;
+    }
+  }
 
   .marketViewCardDate {
     margin-top: 30px;
@@ -75,7 +81,8 @@
       font-size: 14px;
       height: 34px;
       border-radius: 17px;
-      background-color: $color-dark-five;
+      background-color: $color-dusk;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
       padding: 0 30px;
     }
   }
@@ -93,18 +100,18 @@
     font-size: 14px;
     margin: 0 35px;
     text-decoration: none;
-		color: white;
-		position: relative;
+    color: white;
+    position: relative;
   }
 }
 
 .activeLink:before {
-	content: ' ';
-	width: 100%;
-	height: 4px;
-	position: absolute;
-	top: -8px;
-	background-color: $color-cool-blue
+  content: ' ';
+  width: 100%;
+  height: 4px;
+  position: absolute;
+  top: -8px;
+  background-color: $color-cool-blue;
 }
 
 .colors {
@@ -113,10 +120,27 @@
   margin-bottom: 21px;
 
   span {
+    display: inline-block;
     width: 24px;
     height: 24px;
     flex: 0 0 24px;
     cursor: pointer;
+    position: relative;
+
+    &.hasTriangle {
+      &:before {
+        content: '';
+        display: block;
+        position: absolute;
+        top: -20px;
+        left: 6px;
+        width: 0;
+        height: 0;
+        border-style: solid;
+        border-width: 12px 6px 0 6px;
+        border-color: #ffffff transparent transparent transparent;
+      }
+    }
   }
 }
 
@@ -200,7 +224,7 @@
   &.colorListSmall {
     justify-content: center;
     padding-left: 0;
-    margin: 30px -45px;
+    margin: 50px -45px;
 
     .colorListItem {
       font-size: 12px;
