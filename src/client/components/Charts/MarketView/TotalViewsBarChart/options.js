@@ -29,6 +29,7 @@ export const barDataOptions = {
           zeroLineColor: '#5a6386'
         },
         ticks: {
+          stepSize: 25,
           beginAtZero: true,
           fontColor: 'white',
           min: 0,

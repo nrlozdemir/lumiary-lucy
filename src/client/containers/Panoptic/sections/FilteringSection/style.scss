@@ -360,51 +360,12 @@
 	width: calc(50% - 12px);
 }
 
-.dropDowns{
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-
-	span{
-		margin-right: 32px;
-		color: $color-cool-grey;
-		font-size: 14px;
-		font-family: $font-family-ClanOTNews;
-	}
-
-	.ddWrapper{
-		position: relative;
-		margin-right: 32px;
-
-
-		.ddHeader{
-			.ddHeaderTitle{
-				font-family: $font-family-ClanOTBold;
-				font-size: 18px;
-				line-height: normal;
-				text-decoration: underline;
-			}
-		}
-
-		.ddList{
-			position: absolute;
-			top: 16px;
-			left: 0;
-			z-index: 2;
-			width: 160px;
-			padding: 0;
-			list-style: none;
-			background-color: $color-dusk;
-
-			.ddListItem{
-				padding: 11px 16px;
-			}
-			.ddListItem.active{
-				background-color: $color-white;
-				color: $color-dusk;
-			}
-		}
-	}
+.headerTitle{
+  h2{
+    font-family: $font-family-ClanOT;
+    font-size: 18px;
+    font-weight: bold;
+  }
 }
 
 .dateRange{

@@ -30,8 +30,14 @@
         margin-bottom: 8px;
         cursor: pointer;
         font-family: $font-family-ClanOTBold;
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 1.2;
+        border-bottom: 1px solid transparent;
+
         &:hover {
-          text-decoration: underline;
+          border-bottom: 1px solid #d0506c;
+          line-height: 1.2;
         }
       }
       a {

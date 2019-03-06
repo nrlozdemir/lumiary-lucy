@@ -10,7 +10,7 @@ const StadiumChart = () => (
 			<div className={style.colorListItem}>Slow</div>
 			<div className={style.colorListItem}>Slowest</div>
 		</div>
-		<div className={style.stadiumCharts} title="Percentage of Library">
+		<div className={style.stadiumCharts} title="Total Percentage">
 			<div className={style.stadiumChart} data="20" title="80% Data">
 				<svg xmlns="http://www.w3.org/2000/svg">
 					<rect className={style.bar} fill="none" rx="1" />

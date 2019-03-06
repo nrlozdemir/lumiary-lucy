@@ -22,6 +22,7 @@ const Main = (props) => (
             difference={item.difference}
             differenceType={item.differenceType}
             detailsLink={`/quickview/${item.id}/${item.defaultSection}`}
+            social={item.social}
             cards={item.videos.map((video) => (
               <VideoCard
                 video={{

@@ -23,7 +23,7 @@
     text-align: center;
 
     span {
-      background-color: $color-dark-blue-grey;
+      background-color: $color-dusk;
       border-radius: 50px;
       font-family: $font-family-ClanOT;
       font-size: 14px;
@@ -45,32 +45,6 @@
     .title {
       font-size: 18px;
     }
-
-    .desc {
-      color: $color-cool-grey;
-      font-size: 12px;
-    }
-
-    .references {
-      .referenceItem {
-        display: inline-block;
-        font-size: 14px;
-        line-height: 1.8rem;
-        text-align: center;
-        span {
-          width: 16px;
-          height: 16px;
-          display: inline-block;
-          margin-bottom: -2px;
-          margin-right: 5px;
-          border-radius: 10px;
-        }
-      }
-      :nth-child(2) {
-        margin-left: 45px;
-      }
-    }
-
     .headerRight {
       float: right;
 
@@ -89,6 +63,30 @@
           font-size: 14px;
           font-family: $font-family-ClanOTNews;
         }
+      }
+    }
+  }
+
+  .barChartFooter {
+    .references {
+      display: table;
+      margin: 0 auto;
+      .referenceItem {
+        display: inline-block;
+        font-size: 14px;
+        line-height: 1.8rem;
+        text-align: center;
+        span {
+          width: 16px;
+          height: 16px;
+          display: inline-block;
+          margin-bottom: -2px;
+          margin-right: 5px;
+          border-radius: 10px;
+        }
+      }
+      :nth-child(2) {
+        margin-left: 45px;
       }
     }
   }

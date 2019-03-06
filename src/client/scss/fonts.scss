@@ -1,44 +1,44 @@
 @font-face {
-	font-family: "Glyphicons Halflings";
-	font-weight: normal;
-	src: url("https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/fonts/glyphicons-halflings-regular.woff2");
+  font-family: 'Glyphicons Halflings';
+  font-weight: normal;
+  src: url('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/fonts/glyphicons-halflings-regular.woff2');
 }
 
 @font-face {
-	font-family: "ClanOT";
-	src: url("https://s3.amazonaws.com/quickframe-static-dev/fonts/clanot/ClanOT-Medium.ttf");
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'ClanOT';
+  src: url('https://s3.amazonaws.com/quickframe-static-dev/fonts/clanot/ClanOT-Medium.ttf');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: "ClanOTBold";
-	src: url("https://s3.amazonaws.com/quickframe-static-dev/fonts/clanot/ClanOT-Book.ttf");
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'ClanOTBold';
+  src: url('https://s3.amazonaws.com/quickframe-static-dev/fonts/clanot/ClanOT-Medium.ttf');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: "ClanOTNews";
-	src: url("https://s3.amazonaws.com/quickframe-static-dev/fonts/clanot/ClanOT-News.ttf");
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'ClanOTNews';
+  src: url('https://s3.amazonaws.com/quickframe-static-dev/fonts/clanot/ClanOT-News.ttf');
+  font-weight: normal;
+  font-style: normal;
 }
 
 @font-face {
-	font-family: "Futura";
-	src: url("https://s3.amazonaws.com/quickframe-static-dev/fonts/futura/Futura-CondensedExtraBold.eot");
-	src: url("https://s3.amazonaws.com/quickframe-static-dev/fonts/futura/Futura-CondensedExtraBold.eot?#iefix")
-			format("embedded-opentype"),
-		url("https://s3.amazonaws.com/quickframe-static-dev/fonts/futura/Futura-CondensedExtraBold.woff2")
-			format("woff2"),
-		url("https://s3.amazonaws.com/quickframe-static-dev/fonts/futura/Futura-CondensedExtraBold.woff")
-			format("woff"),
-		url("
-      https://s3.amazonaws.com/quickframe-static-dev/fonts/futura/Futura-CondensedExtraBold.ttf")
-			format("truetype"),
-		url("https://s3.amazonaws.com/quickframe-static-dev/fonts/futura/Futura-CondensedExtraBold.svg")
-			format("svg");
-	font-weight: 800;
-	font-style: normal;
+  font-family: 'Futura';
+  src: url('https://s3.amazonaws.com/quickframe-static-dev/fonts/futura/Futura-CondensedExtraBold.eot');
+  src: url('https://s3.amazonaws.com/quickframe-static-dev/fonts/futura/Futura-CondensedExtraBold.eot?#iefix')
+      format('embedded-opentype'),
+    url('https://s3.amazonaws.com/quickframe-static-dev/fonts/futura/Futura-CondensedExtraBold.woff2')
+      format('woff2'),
+    url('https://s3.amazonaws.com/quickframe-static-dev/fonts/futura/Futura-CondensedExtraBold.woff')
+      format('woff'),
+    url('
+      https://s3.amazonaws.com/quickframe-static-dev/fonts/futura/Futura-CondensedExtraBold.ttf')
+      format('truetype'),
+    url('https://s3.amazonaws.com/quickframe-static-dev/fonts/futura/Futura-CondensedExtraBold.svg')
+      format('svg');
+  font-weight: 800;
+  font-style: normal;
 }
