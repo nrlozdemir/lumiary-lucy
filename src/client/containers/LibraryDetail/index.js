@@ -31,7 +31,6 @@ export class LibraryDetail extends React.Component {
 		const { 
       match, 
       getVideos,
-      getLibraryDetailRequest,
       getBarChartRequest,
       getDoughnutChartRequest,
       getColorTempRequest,
@@ -90,34 +89,6 @@ export class LibraryDetail extends React.Component {
     if(shotByShotData) {
       radarDataCombined = chartCombineDataset(shotByShotData.radarData, radarData_DatasetOptions)
     }
-    if (doughnutLineChartData && doughnutLineChartData.lineChartData) {
-      const { lineChartData } = doughnutLineChartData
-      lineChartDataCombined = chartCombineDataset(
-        lineChartData,
-        lineChartData_DatasetOptions,
-        {
-          beforeDraw: function(chart, easing) {
-            if (
-              chart.config.options.chartArea &&
-              chart.config.options.chartArea.backgroundColor
-            ) {
-              const ctx = chart.chart.ctx
-              const chartArea = chart.chartArea
-  
-              ctx.save()
-              ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-              ctx.fillRect(
-                chartArea.left,
-                chartArea.top,
-                chartArea.right - chartArea.left,
-                chartArea.bottom - chartArea.top
-              )
-              ctx.restore()
-            }
-          }
-        }
-      )
-    }
 
 		return (
 			<React.Fragment>
@@ -131,7 +102,6 @@ export class LibraryDetail extends React.Component {
 				/>}
         {doughnutLineChartData && doughnutLineChartData.doughnutData && <LibraryDetailDoughnutChart
 					doughnutData={doughnutLineChartData.doughnutData}
-					lineChartData={lineChartDataCombined}
 				/>}
 				<LibraryDetailColorTemperature
 					colorTempData={colorTempData}
