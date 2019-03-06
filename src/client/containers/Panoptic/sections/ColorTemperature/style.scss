@@ -1,4 +1,4 @@
-.round{
+.round {
   width: 16px;
   height: 16px;
   border-radius: 100%;
@@ -7,7 +7,7 @@
   box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
 }
 
-.platformName{
+.platformName {
   font-family: $font-family-ClanOTNews;
   font-size: 14px;
 }
@@ -15,12 +15,11 @@
 .radialChartsContainer {
   position: relative;
   .doughnutTabs {
-    border:none;
+    border: none;
     margin-block-start: 0;
     margin-block-end: 0;
     padding-inline-start: 0;
   }
-
 
   .radialChart {
     transition: 500ms;
@@ -33,7 +32,7 @@
     position: relative;
     cursor: pointer;
 
-    .subtitle{
+    .subtitle {
       background-color: $color-dark-five;
       padding: 8px 24px;
       border-radius: 22px;
@@ -47,31 +46,32 @@
     &:first-child {
       border: none;
     }
-
   }
 }
 
-.temperatureHeader{
+.temperatureHeader {
   display: flex;
   width: calc(100% - 80px);
   padding: 48px 40px 20px;
   justify-content: space-between;
   align-items: center;
 
-  p{
+  p {
     font-size: 14px;
     font-family: $font-family-ClanOTNews;
   }
 
-  h2{
+  h2 {
     font-family: $font-family-ClanOTBold;
     font-size: 18px;
+    font-weight: bold;
   }
 
-  .inputWrapper{
-    width: 344px;
+  .inputWrapper {
+    width: 360px;
+    position: relative;
 
-    form{
+    form {
       width: 100%;
       display: flex;
       align-items: center;
@@ -82,11 +82,11 @@
   }
 }
 
-.inputWrapper>form>div{
-  width: calc(50% - 8px)
+.inputWrapper > form > div {
+  width: calc(50% - 8px);
 }
 
-.temperatureContentContainer{
+.temperatureContentContainer {
   width: calc(100% - 40px);
   padding: 56px 20px;
   display: flex;
@@ -94,10 +94,9 @@
   align-items: center;
   justify-content: space-between;
 
-  &:first-child{
+  &:first-child {
     border: none;
   }
-
 }
 
 .infoWrapperContainer {
@@ -105,15 +104,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  .infoWrapper{
+  .infoWrapper {
     width: calc(33.33% - 41px);
     padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: center;
 
-    .infoText{
+    .infoText {
+      font-family: $font-family-ClanOT;
+      font-size: 14px;
+      font-weight: bold;
       padding: 8px 24px;
+      font-family: $font-family-ClanOT;
       background-color: $color-dark-five;
       color: $color-white;
       border-radius: 24px;

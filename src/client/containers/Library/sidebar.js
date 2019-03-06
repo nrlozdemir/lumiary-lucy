@@ -12,7 +12,7 @@ import ColorRadioBoxes from 'Components/Form/ColorRadioBoxes/index'
 import Range from 'Components/Form/Range'
 
 const Sidebar = (props) => {
-  const { reset } = props
+  const { reset, handleSubmit } = props
   const sidebarClass = classnames(style.sidebar, {
     [style.sidebarVisible]: props.sidebarVisible,
   })
@@ -68,7 +68,7 @@ const Sidebar = (props) => {
   }
 
   return (
-    <form onSubmit={() => console.log('object')}>
+    <form onSubmit={handleSubmit}>
       <div className={sidebarClass}>
         <div className={style.sidebarHeader}>
           <p className={style.text}>
