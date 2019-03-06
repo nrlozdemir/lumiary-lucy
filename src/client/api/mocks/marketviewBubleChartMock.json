@@ -1,0 +1,32 @@
+[
+  {
+    "name": "Facebook",
+    "value": 124034,
+    "iconClass": "icon-Facebook-Bubble",
+    "color": "#fff20d"
+  },
+  {
+    "name": "Instagram",
+    "value": 75424,
+    "iconClass": "icon-Instagram-Bubble",
+    "color": "#cc2226"
+  },
+  {
+    "name": "Twitter",
+    "value": 63424,
+    "iconClass": "icon-Twitter-Bubble",
+    "color": "#13862b"
+  },
+  {
+    "name": "Pinterest",
+    "value": 34543,
+    "iconClass": "icon-YouTube-Bubble",
+    "color": "#923683"
+  },
+  {
+    "name": "Youtube",
+    "value": 65463,
+    "iconClass": "icon-Pinterest-Bubble",
+    "color": "#3178b0"
+  }
+]
