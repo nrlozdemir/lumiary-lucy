@@ -5,10 +5,10 @@ import style from './style.scss'
 import { barDataOptions } from './options'
 import Video from '../VideoComponent'
 
-const LibraryDetailChartHeader = ({ barData, videoUrl }) => (
-  <div className="grid-container mr-20 ml-20 mt-72" style={{display: 'flex'}}>
-    <div className="col-6" style={{position: 'relative'}}>
-      <Video src={videoUrl} />
+const LibraryDetailChartHeader = ({ barData, videoUrl, title, socialIcon }) => (
+  <div className="grid-container mr-20 ml-20 mt-72" style={{ display: 'flex' }}>
+    <div className="col-6" style={{ position: 'relative' }}>
+      <Video src={videoUrl} title={title} socialIcon={socialIcon} />
     </div>
     <div className="col-6 bg-dark-grey-blue shadow-1">
       <div className={style.chartHeader}>
