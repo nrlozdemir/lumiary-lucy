@@ -16,6 +16,11 @@ const routes = [
     component: 'Library',
   },
   {
+    path: '/audience',
+    exact: true,
+    component: 'Audience',
+  },
+  {
     path: '/library/:videoId/compare',
     exact: true,
     removeNavbar: true,

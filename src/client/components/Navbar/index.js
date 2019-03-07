@@ -24,6 +24,9 @@ class Navbar extends React.Component {
           <Link to="/">Lumiere</Link>
         </div>
         <div className={linksClass}>
+          <NavLink to="/audience" activeClassName={style.activeLink}>
+            Audience
+          </NavLink>
           <NavLink to="/quickview" activeClassName={style.activeLink}>
             QuickView
           </NavLink>
