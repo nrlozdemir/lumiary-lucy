@@ -34,7 +34,7 @@ const ColorTemperatureChart = ({ colorTempData, borderLess, verticalText }) => {
 					</div>
 				</div>
 				<p>
-					Lorem, ipsum dolor sit amet consectetur adipisicing elit. Nisi voluptas, eveniet, quod et debitis modi fuga!
+					This is a blurb that will explain <br /> what this graph is showing
 				</p>
 			</div>
 		))
