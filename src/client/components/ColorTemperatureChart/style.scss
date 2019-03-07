@@ -1,13 +1,24 @@
 
-.temperatureContentWrapper{
+.colWrapper{
 	position: relative;
-	width: calc(33.33% - 41px);
-	border-left: 1px solid $color-dusk;
-	padding: 20px;
+	width: 33.33%;
 
-	&:first-child{
+	> p{
+		font-size: 14px;
+		font-family: $font-family-ClanOTNews;
+		line-height: 26px;
+		margin-top: 50px;
+		text-align: center;
+		padding: 0 50px;
+	}
+
+	&:first-child .temperatureContentWrapper{
 		border: none;
 	}
+}
+.temperatureContentWrapper{
+	padding: 20px;
+	border-left: 1px solid $color-dusk;
 
 	.textTop{
 		font-size: 14px;
@@ -15,7 +26,8 @@
     font-weight: bold;
 		position: absolute;
 		top: -40px;
-		left: calc(50% - 22.5px);
+		left: 50%;
+		transform: translateX(-50%);
 	}
 
 	.textRight{
@@ -32,7 +44,8 @@
 		font-family: $font-family-ClanOTBold;
 		position: absolute;
 		bottom: -40px;
-		left: calc(50% - 12px)
+		left: 50%;
+		transform: translateX(-50%);
 	}
 
 	.textLeft{
