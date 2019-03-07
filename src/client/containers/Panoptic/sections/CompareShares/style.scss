@@ -72,6 +72,11 @@
           .progressText {
             .leftTitle {
               float: right;
+              flex-direction: row-reverse;
+              .dot {
+                margin: 0;
+                margin-left: 10px;
+              }
             }
 
             .rightTitle {
@@ -116,6 +121,7 @@
             letter-spacing: normal;
             display: flex;
             align-items: center;
+            flex-direction: row;
             .dot {
               width: 16px;
               height: 16px;

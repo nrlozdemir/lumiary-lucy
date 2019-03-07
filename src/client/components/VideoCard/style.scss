@@ -1,136 +1,138 @@
-
 .cardContainer {
-	margin-bottom: 40px;
-	border: 1px solid $color-dark-grey-blue;
-	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-	transition: box-shadow 0.3s ease-in-out;
+  margin-bottom: 40px;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+  transition: box-shadow 0.3s ease-in-out;
   position: relative;
-  
+
   @include grid-media($small-grid) {
     margin-top: 20px;
     @include grid-column(12);
   }
 
-	&:hover {
-		box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5);
-		.cardImage {
-			&:after {
-				opacity: 1;
-			}
-		}
-	}
+  &:hover {
+    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5);
+    .cardImage {
+      &:after {
+        opacity: 1;
+      }
+    }
+  }
 
-	.cardImage {
-		position: relative;
-		width: 100%;
-		height: 0;
-		padding-top: 100% / 16 * 9;
-		overflow: hidden;
+  .cardImage {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100% / 16 * 9;
+    overflow: hidden;
+    border: 1px solid $color-dusk;
+    box-sizing: border-box;
 
-		video {
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
-			object-fit: cover;
-		}
+    video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+    }
 
-		&:after {
-			content: "\A";
-			position: absolute;
-			width: 100%;
-			height: 100%;
-			top: 0;
-			left: 0;
-			background: rgba(0, 0, 0, 0.4);
-			opacity: 0;
-			transition: all 0.3s;
-			-webkit-transition: all 0.3s;
-		}
-	}
-	.cardBody {
-		position: relative;
-		.bodyHeader {
-			display: flex;
-			align-items: center;
-			padding: 0 12px;
-			.title {
-				flex: 9;
-				font-family: $font-family-ClanOT;
-				font-weight: bold;
-				white-space: nowrap;
-				overflow: hidden;
-				text-overflow: ellipsis;
-				color: $color-white;
-				font-size: 12px;
-				font-weight: bold;
-				line-height: 50px;
-				padding: 0 16px;
-				text-transform: capitalize;
-			}
-			.dropdownButton {
-				flex: 1;
-				cursor: pointer;
-			}
-			.dropdownButton:after {
-				color: $color-dark-grey-blue;
-				content: "\2807";
-				font-size: 20px;
-				line-height: 50px;
-			}
-		}
-		.dropdownList {
-			display: none;
-			position: absolute;
-			z-index: 5;
-			background-color: $color-white;
-			box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-			right: 20px;
-			top: 35px;
-			padding: 10px 20px;
+    &:after {
+      content: '\A';
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      background: rgba(0, 0, 0, 0.4);
+      opacity: 0;
+      transition: all 0.3s;
+      -webkit-transition: all 0.3s;
+    }
+  }
+  .cardBody {
+    position: relative;
+    .bodyHeader {
+      display: flex;
+      align-items: center;
+      padding: 0 12px;
+      .title {
+        flex: 9;
+        font-family: $font-family-ClanOTBold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        color: $color-white;
+        font-size: 14px;
+        line-height: 50px;
+        padding-right: 5px;
+        text-transform: capitalize;
+      }
+      .dropdownButton {
+        flex: 1;
+        cursor: pointer;
+      }
+      .dropdownButton:after {
+        color: $color-dark-grey-blue;
+        content: '\2807';
+        font-size: 20px;
+        line-height: 50px;
+      }
+    }
+    .dropdownList {
+      display: none;
+      position: absolute;
+      z-index: 5;
+      background-color: $color-white;
+      box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+      right: 20px;
+      top: 35px;
+      padding: 10px 20px;
 
-			p {
-				cursor: pointer;
-				font-family: $font-family-ClanOT;
-				font-size: 12px;
-			}
-		}
-		.dropdownListDelete {
-			background-color: $color-coral-pink;
-			p {
-				color: $color-white;
-			}
-			span {
-				cursor: pointer;
-				position: absolute;
-				right: 5px;
-				top: 5px;
-				font-size: 8px;
-			}
-		}
-	}
-	.dropdownOverlay {
-		display: none;
-		position: absolute;
-		width: 100%;
-		top: 0;
-		height: 100%;
-		right: 0;
-		z-index: 3;
-	}
-	.iconWrapper {
-		height: 24px;
-		width: 24px;
-		background-color: $color-dark-five;
-		border-radius: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin-right: 12px;
-	}
-	.iconClass {
-		font-size: 24px;
-		color: $color-white;
-	}
+      p {
+        cursor: pointer;
+        font-family: $font-family-ClanOT;
+        font-size: 12px;
+      }
+    }
+    .dropdownListDelete {
+      background-color: $color-coral-pink;
+      p {
+        color: $color-white;
+      }
+      span {
+        cursor: pointer;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        font-size: 8px;
+      }
+    }
+  }
+  .dropdownOverlay {
+    display: none;
+    position: absolute;
+    width: 100%;
+    top: 0;
+    height: 100%;
+    right: 0;
+    z-index: 3;
+  }
+  .iconWrapper {
+    height: 24px;
+    width: 24px;
+    background-color: $color-dark-five;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 12px;
+  }
+  .iconClass {
+    font-size: 24px;
+    color: $color-white;
+  }
 }

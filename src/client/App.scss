@@ -139,10 +139,11 @@
   }
 
   .custom-select {
-    min-width: 170px;
-    max-width: 230px;
+    width: 170px;
+    // max-width: 230px;
     border-radius: 8px;
-    border: 1px solid $color-cool-grey;
+    border: 1px solid $color-dusk;
+    background-color: $color-dark-five;
 
     > div,
     > div > div,

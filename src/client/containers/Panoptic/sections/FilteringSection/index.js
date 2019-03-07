@@ -18,41 +18,12 @@ import VerticalStackedBarChart from 'Components/Charts/Panoptic/VerticalStackedB
 class PanopticFilteringSection extends Component {
   constructor(props) {
     super(props)
-    this.state = {
-      isStackedChartSidebarVisible: false,
-      dateRange: {
-        selection: {
-          startDate: new Date(),
-          endDate: new Date(),
-          key: 'selection',
-        },
-      },
-      startDateRange: {
-        selection: {
-          startDate: new Date(),
-          endDate: new Date(),
-          key: 'selection',
-        },
-      },
-      endDateRange: {
-        selection: {
-          startDate: new Date(),
-          endDate: new Date(),
-          key: 'selection',
-        },
-      },
-    }
+    this.state = {}
   }
 
   handleSelectFilters = (name, value) => {
     this.setState({
       [name]: value,
-    })
-  }
-
-  setSidebarVisible(type) {
-    this.setState({
-      isStackedChartSidebarVisible: type,
     })
   }
 
@@ -65,16 +36,10 @@ class PanopticFilteringSection extends Component {
       data: { doughnutData, stackedChartData, doughnutRoundData },
     } = this.props
     const {
-      dateRange: { selection: dateRange },
-      startDateRange: { selection: startDateRange },
-      endDateRange: { selection: endDateRange },
       selectDate,
       selectDuration,
       selectLikes,
       selectPlatforms,
-      endDate,
-      startDate,
-      isStackedChartSidebarVisible,
     } = this.state
     return (
       <div className="col-12 shadow-1 mt-72 bg-dark-grey-blue">
@@ -131,174 +96,6 @@ class PanopticFilteringSection extends Component {
               <VerticalStackedBarChart data={stackedChartData} />
             </div>
           </div>
-          {isStackedChartSidebarVisible && (
-            <div className={style.stackedChartSideBar}>
-              <div className={style.stackedChartSideBarContent}>
-                <div className={style.closeIconWrapper}>
-                  <span
-                    className="icon-X-Circle"
-                    onClick={() => this.setSidebarVisible(false)}
-                  >
-                    <span className="path1" />
-                    <span className="path2" />
-                    <span className="path3" />
-                  </span>
-                </div>
-                <div className={style.filterAreaWrapper}>
-                  <div className="pb-40">
-                    <p className={style.label}>Video Format</p>
-                    <Field
-                      component={Select}
-                      options={selectOptions}
-                      id="NumberOfScenes"
-                      name="NumberOfScenes"
-                      placeholder="Select One"
-                      label="Number of Scenes"
-                      className={style.formWrapper}
-                    />
-                  </div>
-                  <div className="pb-40">
-                    <p className={style.label}>Age Audience</p>
-                    <Field
-                      component={Select}
-                      options={selectOptions}
-                      id="NumberOfScenes"
-                      name="NumberOfScenes"
-                      placeholder="Select One"
-                      label="Number of Scenes"
-                    />
-                  </div>
-                  <div className="pb-40">
-                    <p className={style.label}>Gender Audience</p>
-                    <Field
-                      component={Select}
-                      options={selectOptions}
-                      id="NumberOfScenes"
-                      name="NumberOfScenes"
-                      placeholder="Select One"
-                      label="Number of Scenes"
-                    />
-                  </div>
-                  <div className={style.dividedSelects}>
-                    <div>
-                      <p className={style.label}>Start Date</p>
-                      <Field
-                        component={Select}
-                        options={dateSelectOptions}
-                        name="startDate"
-                        placeholder="Select One"
-                        label="Number of Scenes"
-                        onChange={(option) =>
-                          this.handleChange(option, 'startDate')
-                        }
-                        value={startDate || ''}
-                      />
-                      {startDate && startDate.value === 'custom' && (
-                        <div
-                          className={classnames(
-                            style.dateRange,
-                            'absoluteInlineDatepicker'
-                          )}
-                        >
-                          <DateRange
-                            onChange={(value) =>
-                              this.handleChange(value, 'startDateRange')
-                            }
-                            moveRangeOnFirstSelection={false}
-                            ranges={[startDateRange]}
-                            className="dateRangeWrapper"
-                          />
-                          <div className="inline-buttons">
-                            <div
-                              onClick={() =>
-                                this.setState({
-                                  startDate: null,
-                                })
-                              }
-                            >
-                              Back
-                            </div>
-                            <div
-                              onClick={() =>
-                                this.setState({
-                                  startDate: {
-                                    value: moment(
-                                      startDateRange.startDate
-                                    ).format('DD/MM/YYYY'),
-                                    label: moment(
-                                      startDateRange.startDate
-                                    ).format('DD/MM/YYYY'),
-                                  },
-                                })
-                              }
-                            >
-                              Apply
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                    <div>
-                      <p className={style.label}>End Date</p>
-                      <Field
-                        component={Select}
-                        options={dateSelectOptions}
-                        name="endDate"
-                        onChange={(option) =>
-                          this.handleChange(option, 'endDate')
-                        }
-                        value={endDate || ''}
-                      />
-                      {endDate && endDate.value === 'custom' && (
-                        <div
-                          className={classnames(
-                            style.dateRange,
-                            'absoluteInlineDatepicker'
-                          )}
-                        >
-                          <DateRange
-                            onChange={(value) =>
-                              this.handleChange(value, 'endDateRange')
-                            }
-                            moveRangeOnFirstSelection={false}
-                            ranges={[endDateRange]}
-                            className="dateRangeWrapper"
-                          />
-                          <div className="inline-buttons">
-                            <div
-                              onClick={() =>
-                                this.setState({
-                                  endDate: null,
-                                })
-                              }
-                            >
-                              Back
-                            </div>
-                            <div
-                              onClick={() =>
-                                this.setState({
-                                  endDate: {
-                                    value: moment(endDateRange.endDate).format(
-                                      'DD/MM/YYYY'
-                                    ),
-                                    label: moment(endDateRange.endDate).format(
-                                      'DD/MM/YYYY'
-                                    ),
-                                  },
-                                })
-                              }
-                            >
-                              Apply
-                            </div>
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
         </div>
       </div>
     )
