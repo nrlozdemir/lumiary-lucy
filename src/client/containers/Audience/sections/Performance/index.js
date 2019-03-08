@@ -85,67 +85,82 @@ export class Performance extends React.Component {
   updateSlider() {
     const randomOne = [
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'youtube',
       },
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'facebook',
       },
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'twitter',
       },
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'pinterest',
       },
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'instagram',
       },
     ]
     const randomTwo = [
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'youtube',
       },
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'facebook',
       },
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'twitter',
       },
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'pinterest',
       },
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'instagram',
       },
     ]
     const randomTree = [
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'youtube',
       },
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'facebook',
       },
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'twitter',
       },
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'pinterest',
       },
       {
-        value: Math.floor(Math.random() * 101),
+				value: Math.max(Math.floor(Math.random() * 30), 15),
+				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
         visual: 'instagram',
       },
     ]
@@ -239,7 +254,7 @@ export class Performance extends React.Component {
         <div className={'col-12'}>
           <div className={'col-4'}>
             <div className={style.bubbleCont}>
-              <BubbleChart size={[800, 600]} fromPercentages={true}>
+              <BubbleChart size={[800, 600]} fromPercentages={true} options={{toolTipWidth: 200, toolTipHeight: 75}}>
                 {bubblesMales.map((bubble, i) => (
                   <Bubble
                     key={'bubble-' + i}
@@ -256,6 +271,10 @@ export class Performance extends React.Component {
                         }
                       />
                     </Visual>
+										<ToolTip>
+											<div className={style.bubbleTooltip}>{bubble.visual}</div>
+											<div className={style.bubbleTooltip}>{bubble.toolTip}</div>
+										</ToolTip>
                   </Bubble>
                 ))}
               </BubbleChart>
@@ -266,7 +285,7 @@ export class Performance extends React.Component {
           </div>
           <div className={'col-4'}>
             <div className={style.bubbleCont}>
-              <BubbleChart size={[800, 600]} fromPercentages={true}>
+              <BubbleChart size={[800, 600]} fromPercentages={true} options={{toolTipWidth: 200, toolTipHeight: 75}}>
                 {bubblesFemales.map((bubble, i) => (
                   <Bubble
                     key={'bubble-' + i}
@@ -283,6 +302,10 @@ export class Performance extends React.Component {
                         }
                       />
                     </Visual>
+										<ToolTip>
+											<div className={style.bubbleTooltip}>{bubble.visual}</div>
+											<div className={style.bubbleTooltip}>{bubble.toolTip}</div>
+										</ToolTip>
                   </Bubble>
                 ))}
               </BubbleChart>
@@ -293,7 +316,7 @@ export class Performance extends React.Component {
           </div>
           <div className={'col-4'}>
             <div className={style.bubbleCont}>
-              <BubbleChart size={[800, 600]} fromPercentages={true}>
+              <BubbleChart size={[800, 600]} fromPercentages={true} options={{toolTipWidth: 200, toolTipHeight: 75}}>
                 {bubblesBoth.map((bubble, i) => (
                   <Bubble
                     key={'bubble-' + i}
@@ -310,6 +333,10 @@ export class Performance extends React.Component {
                         }
                       />
                     </Visual>
+										<ToolTip>
+											<div className={style.bubbleTooltip}>{bubble.visual}</div>
+											<div className={style.bubbleTooltip}>{bubble.toolTip}</div>
+										</ToolTip>
                   </Bubble>
                 ))}
               </BubbleChart>
@@ -320,25 +347,6 @@ export class Performance extends React.Component {
           </div>
         </div>
         <div className="col-12" style={{ paddingBottom: 40 }}>
-          {/* <Range
-						allowCross={false}
-						value={[min, max]}
-						dots={true}
-						step={5}
-						// marks={(new Array(11).fill(null).reduce((prev, next, i) => ({...prev, [i * 10]: i * 10}), {}))}
-						// onChange={([min, max]) => (console.log(min, max), this.setState({slider: [min, max]}))}
-						onChange={this.updateSlider.bind(this)}
-						trackStyle={[
-							{
-								height: 14,
-								backgroundColor: "#acb0be"
-							},
-							{
-								height: 14,
-								backgroundColor: "#acb0be"
-							}
-						]}
-					/> */}
           <Range
             customClass={'customRangeSlider'}
             minValue={0}
