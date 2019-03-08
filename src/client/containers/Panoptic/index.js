@@ -37,7 +37,12 @@ export class Panoptic extends React.Component {
   }
 
   render() {
-    const { selectWarmColor, selectLikes, selectDate } = this.state
+    const {
+      selectWarmColor,
+      selectLikes,
+      selectDate,
+      selectPlatforms,
+    } = this.state
     const {
       panoptic: {
         data: {
@@ -53,7 +58,13 @@ export class Panoptic extends React.Component {
     return (
       <React.Fragment>
         {videoReleasesData && (
-          <VideoReleasesBarChart data={videoReleasesData} />
+          <VideoReleasesBarChart
+            data={videoReleasesData}
+            handleSelectFilters={this.handleSelectFilters}
+            selectLikes={selectLikes}
+            selectPlatforms={selectPlatforms}
+            selectDate={selectDate}
+          />
         )}
         {colorTempData && (
           <ColorTemperature

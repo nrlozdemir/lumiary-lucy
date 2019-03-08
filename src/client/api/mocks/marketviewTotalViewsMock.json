@@ -18,8 +18,8 @@
       },
       {
         "label": "ESPN",
-        "backgroundColor": "#ff556f",
-        "borderColor": "#ff556f",
+        "backgroundColor": "#D0506C",
+        "borderColor": "#D0506C",
         "borderWidth": 1,
         "data": [4, 5, 4, 2]
       },
@@ -48,14 +48,14 @@
         "backgroundColor": [
           "#51adc0",
           "#8567f0",
-          "#ff556f",
+          "#D0506C",
           "#acb0be",
           "#5a6386"
         ],
         "hoverBackgroundColor": [
           "#51adc0",
           "#8567f0",
-          "#ff556f",
+          "#D0506C",
           "#acb0be",
           "#5a6386"
         ]

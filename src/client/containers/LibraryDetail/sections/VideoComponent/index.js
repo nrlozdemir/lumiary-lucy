@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import classnames from "classnames"
+import classnames from 'classnames'
 import styles from './style.scss'
-import { socialIconSelector } from "Utils";
+import { socialIconSelector } from 'Utils'
 
 class Video extends Component {
   componentDidMount() {
@@ -9,7 +9,7 @@ class Video extends Component {
       videoWrapper = document.getElementsByClassName('video-wrapper')[0],
       video = document.getElementsByTagName('video')[0],
       videoMethods = {
-        renderVideoPlayButton: function () {
+        renderVideoPlayButton: function() {
           if (videoWrapper.contains(video)) {
             this.formatVideoPlayButton()
             video.classList.add('has-media-controls-hidden')
@@ -20,7 +20,7 @@ class Video extends Component {
           }
         },
 
-        formatVideoPlayButton: function () {
+        formatVideoPlayButton: function() {
           videoWrapper.insertAdjacentHTML(
             'beforeend',
             '\
@@ -32,11 +32,21 @@ class Video extends Component {
           )
         },
 
-        hideVideoPlayButton: function () {
+        hideVideoPlayButton: function() {
+          if (
+            Object.values(videoPlayButton.classList).indexOf('is-hidden') > -1
+          ) {
+            videoPlayButton.setAttribute(
+              'class',
+              'video-overlay-play-button is-visible'
+            )
+            return video.pause()
+          }
           video.play()
-          videoPlayButton.classList.add('is-hidden')
-          video.classList.remove('has-media-controls-hidden')
-          //video.setAttribute('controls', 'controls')
+          videoPlayButton.setAttribute(
+            'class',
+            'video-overlay-play-button is-hidden'
+          )
         },
       }
 
@@ -44,21 +54,19 @@ class Video extends Component {
   }
 
   render() {
-    const { src, poster = '', title, socialIcon, style, className } = this.props;
-    const classes = classnames('video-wrapper', className, styles.container);
+    const { src, poster = '', title, socialIcon, style, className } = this.props
+    const classes = classnames('video-wrapper', className, styles.container)
 
     const iconClass = classnames(
-      socialIconSelector(socialIcon) + " " + styles.icon
-    );
+      socialIconSelector(socialIcon) + ' ' + styles.icon
+    )
 
     return (
       <div className={classes} style={{ ...style }}>
-        <video
-          className={styles.video}
-          src={src}
-          poster={poster}
-        />
-        <div className={styles.bar}><span className={iconClass} /> {title}</div>
+        <video className={styles.video} src={src} poster={poster} />
+        <div className={styles.bar}>
+          <span className={iconClass} /> {title}
+        </div>
       </div>
     )
   }

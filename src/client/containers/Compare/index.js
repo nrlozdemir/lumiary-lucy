@@ -200,8 +200,8 @@ class Compare extends React.Component {
                               {
                                 data: [item.chartValue, 100 - item.chartValue],
                                 borderColor: 'transparent',
-                                backgroundColor: ['#ff556f', '#51adc0'],
-                                hoverBackgroundColor: ['#ff556f', '#51adc0'],
+                                backgroundColor: ['#D0506C', '#51adc0'],
+                                hoverBackgroundColor: ['#D0506C', '#51adc0'],
                               },
                             ],
                           }}
