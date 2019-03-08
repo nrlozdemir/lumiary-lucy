@@ -35,7 +35,7 @@ class TopSimilarProperties extends Component {
           <div className={headerClass}>
             <div className="col-4 text-bold">
               <p className={headerTitleClass}>
-                Top Videos Over Time By Competitor
+                Top Similar Properties Of Top Videos
               </p>
             </div>
             <div className="col-8">
