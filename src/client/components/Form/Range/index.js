@@ -8,6 +8,34 @@ import Slider from "rc-slider";
 
 const RangeSlider = Slider.Range;
 
+const defaultHandleStyle = [
+	{
+		width: "32px",
+		height: "32px",
+		marginTop: "-8px",
+		borderColor: "#fff"
+	},
+	{
+		width: "32px",
+		height: "32px",
+		marginTop: "-8px",
+		borderColor: "#fff"
+	}
+];
+
+const defaultTrackStyle = [
+	{
+		height: "16px",
+		backgroundColor: "#51adc0"
+	}
+];
+
+const defaultRailStyle = {
+	height: "16px",
+	borderRadius: "8px",
+	backgroundColor: "#242b49"
+};
+
 class Range extends Component {
 	constructor(props) {
 		super(props);
@@ -28,7 +56,7 @@ class Range extends Component {
 	}
 
 	render() {
-		const { className, input: {onChange}, minValue, maxValue } = this.props;
+		const { className, input: {onChange}, minValue, maxValue, handleStyle = defaultHandleStyle, trackStyle = defaultTrackStyle, railStyle = defaultRailStyle } = this.props;
 
 		const { value } = this.state;
 
@@ -38,31 +66,9 @@ class Range extends Component {
 					allowCross={false}
 					value={value}
 					defaultValue={value}
-					handleStyle={[
-						{
-							width: "32px",
-							height: "32px",
-							marginTop: "-8px",
-							borderColor: "#fff"
-						},
-						{
-							width: "32px",
-							height: "32px",
-							marginTop: "-8px",
-							borderColor: "#fff"
-						}
-					]}
-					trackStyle={[
-						{
-							height: "16px",
-							backgroundColor: "#51adc0"
-						}
-					]}
-					railStyle={{
-						height: "16px",
-						borderRadius: "8px",
-						backgroundColor: "#242b49"
-					}}
+					handleStyle={handleStyle}
+					trackStyle={trackStyle}
+					railStyle={railStyle}
 					onChange={this.onSliderChange.bind(this)}
 				/>
 				<div className="d-flex align-items-center justify-space-between mt-24 ticks">
