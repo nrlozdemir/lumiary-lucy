@@ -9,7 +9,7 @@ class Video extends Component {
       videoWrapper = document.getElementsByClassName('video-wrapper')[0],
       video = document.getElementsByTagName('video')[0],
       videoMethods = {
-        renderVideoPlayButton: function() {
+        renderVideoPlayButton: function () {
           if (videoWrapper.contains(video)) {
             this.formatVideoPlayButton()
             video.classList.add('has-media-controls-hidden')
@@ -20,7 +20,7 @@ class Video extends Component {
           }
         },
 
-        formatVideoPlayButton: function() {
+        formatVideoPlayButton: function () {
           videoWrapper.insertAdjacentHTML(
             'beforeend',
             '\
@@ -31,7 +31,6 @@ class Video extends Component {
             '
           )
         },
-
         hideVideoPlayButton: function() {
           if (
             Object.values(videoPlayButton.classList).indexOf('is-hidden') > -1
