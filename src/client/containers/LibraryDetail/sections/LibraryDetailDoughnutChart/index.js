@@ -131,13 +131,11 @@ class LibraryDetailDoughnutChart extends React.Component {
                         <span className="path2" />
                         <span className="path3" />
                       </span>
-                      <p className={style.iconTitle}>Frame Rate</p>
+                      <p className={style.iconTitle}>Frame Rate - 24 Fps</p>
                     </div>
                   </div>
                   <div className={style.headerInfo}>
-                    <div>
-                      <p className={style.panelTitle}>24 Fps</p>
-                    </div>
+                    <div></div>
                     <div className={style.formWrapper}>
                       <SelectFilters
                         handleSelectFilters={this.handleSelectFilters}
