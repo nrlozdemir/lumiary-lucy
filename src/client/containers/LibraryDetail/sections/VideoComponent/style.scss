@@ -16,22 +16,23 @@
   background: black;
 }
 
-.bar{
+.bar {
   position: absolute;
   bottom: 0;
   left: 0;
   right: 0;
   height: 50px;
-  background-color: #303a5d;
-  opacity: .8;
+  background-color: rgba($color-dark-grey-blue, 0.8);
   z-index: 2;
   display: flex;
   align-items: center;
   padding: 0 24px;
-  font-family: $font-family-ClanOT;
+  font-family: $font-family-ClanOTNews;
+  color: #ffffff;
+  font-size: 14px;
 }
 
-.icon{
+.icon {
   font-size: 24px;
   margin-right: 10px;
 }
