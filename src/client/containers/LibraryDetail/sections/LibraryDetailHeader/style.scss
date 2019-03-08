@@ -1,13 +1,15 @@
 .header {
-  width: 100%;
   background: $color-dark-grey-blue;
   display: flex;
   justify-content: space-between;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+  padding: 23px 40px;
+  font-family: $font-family-ClanOT;
+
   div {
-    line-height: 80px;
+    display: flex;
+    align-items: center;
     font-size: 14px;
-    font-family: $font-family-ClanOT;
     a {
       color: $color-white;
       text-decoration: none;
@@ -15,7 +17,7 @@
       align-items: center;
       justify-content: center;
       .text {
-        margin-left: 20px;
+        margin-left: 16px;
         font-size: 14px;
       }
       span {
@@ -23,16 +25,18 @@
       }
     }
   }
-  .iconWrapper {
-    margin-right: 40px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
+}
 
-    span {
-      color: $color-dark-five;
-      font-size: 30px;
-      margin-left: 27px;
-    }
+.profile {
+  justify-content: flex-end;
+  color: $color-white;
+  font-size: 14px;
+  font-family: $font-family-ClanOT;
+  font-weight: bold;
+
+  .profileImage {
+    border: 2px solid $color-white;
+    vertical-align: middle;
+    margin-right: 16px;
   }
 }
