@@ -236,29 +236,23 @@ export const DominantColor = props => {
 					<Select
 						name="views"
 						customClass="custom-select"
-						placeholder="Select Views"
-						// value={views || ''}
-						value={''}
-						onChange={(option) => this.handleChange(option, 'views')}
-						options={[{ value: 'Views', label: 'Views' }, { value: 'Comments', label: 'Comments' }]}
+						placeholder="Facebook"
+						onChange={console.log}
+						options={[{ value: 'Facebook', label: 'Facebook' }]}
 					/>
 					<Select
 						name="platforms"
 						customClass="custom-select"
-						placeholder="Select Platforms"
-						// value={platforms || ''}
-						value={''}
-						onChange={(option) => this.handleChange(option, 'platforms')}
-						options={[{ value: 'All Platforms', label: 'All Platforms' }]}
+						placeholder="Shares"
+						onChange={console.log}
+						options={[{ value: 'Shares', label: 'Shares' }]}
 					/>
 					<Select
 						name="platforms"
 						customClass="custom-select"
-						placeholder="Select Platforms"
-						// value={platforms || ''}
-						value={''}
-						onChange={(option) => this.handleChange(option, 'platforms')}
-						options={[{ value: 'All Platforms', label: 'All Platforms' }]}
+						placeholder="Past Month"
+						onChange={console.log}
+						options={[{ value: 'Past Month', label: 'Past Month' }]}
 					/>
 				</div>
 			</div>

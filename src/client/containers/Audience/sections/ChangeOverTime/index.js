@@ -54,34 +54,38 @@ function combineChartData(chartData) {
 export const ChangeOverTime = props => (
 	<div className="grid-container mr-20 ml-20 mt-72 bg-dark-grey-blue shadow-1">
 		<div className={style.cardTitle + ' col-12'}>
-			<span>Dominant Color Performance By Gender</span>
+			<span>Change Over Time By Property</span>
+      <div className={"d-flex align-items-center justify-space-between " + style.headerLabel}>
+        <div className="d-flex align-items-center mr-32">
+          <span className={style.redRound} />
+          <p>Male</p>
+        </div>
+        <div className="d-flex align-items-center mr-32">
+          <span className={style.duskRound} />
+          <p>Female</p>
+        </div>
+      </div>
 			<div className={style.selects}>
 				<Select
 					name="views"
 					customClass="custom-select"
-					placeholder="Select Views"
-					// value={views || ''}
-					value={''}
-					onChange={(option) => this.handleChange(option, 'views')}
-					options={[{ value: 'Views', label: 'Views' }, { value: 'Comments', label: 'Comments' }]}
+					placeholder="Pacing - Slow"
+					onChange={console.log}
+					options={[{ value: 'Pacing - Slow', label: 'Pacing - Slow' }]}
 				/>
 				<Select
 					name="platforms"
 					customClass="custom-select"
-					placeholder="Select Platforms"
-					// value={platforms || ''}
-					value={''}
-					onChange={(option) => this.handleChange(option, 'platforms')}
-					options={[{ value: 'All Platforms', label: 'All Platforms' }]}
+					placeholder="Likes"
+					onChange={console.log}
+					options={[{ value: 'Likes', label: 'Likes' }]}
 				/>
 				<Select
 					name="platforms"
 					customClass="custom-select"
-					placeholder="Select Platforms"
-					// value={platforms || ''}
-					value={''}
-					onChange={(option) => this.handleChange(option, 'platforms')}
-					options={[{ value: 'All Platforms', label: 'All Platforms' }]}
+					placeholder="Past Month"
+					onChange={console.log}
+					options={[{ value: 'Past Month', label: 'Past Month' }]}
 				/>
 			</div>
 		</div>

@@ -231,10 +231,9 @@ export class Performance extends React.Component {
             <Select
               name="views"
               customClass="custom-select"
-              placeholder="Select Views"
-              // value={views || ''}
-              value={''}
-              onChange={(option) => this.handleChange(option, 'views')}
+              placeholder="Views"
+              value={'Views'}
+              onChange={console.log}
               options={[
                 { value: 'Views', label: 'Views' },
                 { value: 'Comments', label: 'Comments' },
@@ -243,11 +242,10 @@ export class Performance extends React.Component {
             <Select
               name="platforms"
               customClass="custom-select"
-              placeholder="Select Platforms"
-              // value={platforms || ''}
-              value={''}
-              onChange={(option) => this.handleChange(option, 'platforms')}
-              options={[{ value: 'All Platforms', label: 'All Platforms' }]}
+              placeholder="Last Month"
+              value={'Last Month'}
+              onChange={console.log}
+              options={[{ value: 'Last Month', label: 'Last Month' }]}
             />
           </div>
         </div>

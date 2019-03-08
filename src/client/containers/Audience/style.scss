@@ -74,6 +74,14 @@
 		padding: 0 30px;
 	}
 }
+
+.headerLabel {
+	p {
+		font-size: 14px;
+		font-family: $font-family-ClanOTNews;
+	}
+}
+
 .temperatureHeader {
 	display: flex;
 	width: calc(100% - 80px);
