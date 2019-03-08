@@ -18,6 +18,7 @@ const routes = [
   {
     path: '/audience',
     exact: true,
+    removeNavbar: true,
     component: 'Audience',
   },
   {

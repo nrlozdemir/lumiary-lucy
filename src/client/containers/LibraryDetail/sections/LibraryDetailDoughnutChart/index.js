@@ -31,7 +31,7 @@ class LibraryDetailDoughnutChart extends React.Component {
             ) {
               const ctx = chart.chart.ctx
               const chartArea = chart.chartArea
-  
+
               ctx.save()
               ctx.fillStyle = chart.config.options.chartArea.backgroundColor
               ctx.fillRect(
@@ -68,7 +68,7 @@ class LibraryDetailDoughnutChart extends React.Component {
     const { doughnutData, lineChartData } = this.props
     let selectedCardData = null
     if (!!selectedCard || selectedCard === 0) {
-      selectedCardData=doughnutData.find((item, i) => i === selectedCard)
+      selectedCardData = doughnutData.find((item, i) => i === selectedCard)
     }
     return (
       <div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
@@ -141,7 +141,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                       <p className="pt-32">
                         <span className={style.duskRound} />
                         <span className={style.textBold}>{selectedCardData.libraryFpsData.percentage}%</span> of your
-                        library is shot in 
+                        library is shot in
                         <span className={style.textBold}> {selectedCardData.libraryFpsData.fps}fps</span>
                       </p>
                     </div>
@@ -165,7 +165,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                       <p className="w-75 text-center pt-32">
                         <span className={style.purpleRound} />
                         <span className={style.textBold}>{selectedCardData.industryFpsData.percentage}%</span> of your
-                        library is shot in 
+                        library is shot in
                         <span className={style.textBold}> {selectedCardData.industryFpsData.fps}fps</span>
                       </p>
                     </div>
