@@ -1,0 +1,124 @@
+.cardTitle {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	font-size: 18px;
+	font-family: $font-family-ClanOT;
+	margin-bottom: 40px;
+	margin-top: 40px;
+}
+
+.selects {
+	position: relative;
+	display: flex;
+	z-index: 12;
+
+	> div {
+		margin: 0 0 0 20px;
+	}
+}
+
+.bubbleCont {
+	div:first-child > & {
+		border-right: 1px solid $color-dusk;
+	}
+
+	div:last-child > & {
+		border-left: 1px solid $color-dusk;
+	}
+}
+
+.bubbleVisual {
+	position: relative;
+
+	&:before {
+		display: inline-flex;
+		position: absolute;
+		width: 100%;
+		height: 100%;
+		justify-content: center;
+		align-items: center;
+		font-size: 50px;
+	}
+}
+
+.bubbleTooltip {
+	font-family: $font-family-ClanOT;
+	text-align: center;
+	font-size: 18px;
+	line-height: 28px;
+	color: black;
+	font-weight: bold;
+
+	&:first-child {
+		text-transform: capitalize;
+	}
+}
+
+.label {
+	margin-top: 30px;
+	display: flex;
+	justify-content: center;
+	margin-bottom: 40px;
+	font-family: $font-family-ClanOT;
+	font-weight: bold;
+
+	span {
+		display: flex;
+		align-items: center;
+		font-size: 14px;
+		height: 34px;
+		border-radius: 17px;
+		background-color: $color-dusk;
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+		padding: 0 30px;
+	}
+}
+
+.headerLabel {
+	p {
+		font-size: 14px;
+		font-family: $font-family-ClanOTNews;
+	}
+}
+
+.temperatureHeader {
+	display: flex;
+	width: calc(100% - 80px);
+	padding: 48px 0;
+	justify-content: space-between;
+	align-items: center;
+
+	p {
+		font-size: 14px;
+		font-family: $font-family-ClanOTNews;
+	}
+
+	h2 {
+		font-family: $font-family-ClanOTBold;
+		font-size: 18px;
+	}
+
+	.inputWrapper {
+		width: 200px;
+	}
+}
+.redRound {
+	background-color: $color-coral-pink;
+	width: 16px;
+	height: 16px;
+	display: inline-flex;
+	border-radius: 100%;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+
+.duskRound {
+	background-color: $color-cool-blue;
+	width: 16px;
+	height: 16px;
+	display: inline-flex;
+	border-radius: 100%;
+	vertical-align: middle;
+	margin-right: 10px;
+}

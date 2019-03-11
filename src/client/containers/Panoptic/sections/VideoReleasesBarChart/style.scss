@@ -24,45 +24,27 @@
 
     span {
       background-color: $color-dusk;
-      border-radius: 50px;
+      border-radius: 17px;
       font-family: $font-family-ClanOT;
       font-size: 14px;
       font-weight: bold;
       padding: 8px 24px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
     }
   }
 
   .barChartHeader {
-    div {
-      &:first-child {
-        margin-left: 0;
-      }
-
-      &:last-child {
-        float: right;
-      }
-    }
     .title {
       font-size: 18px;
     }
-    .headerRight {
+    .selects {
+      display: flex;
       float: right;
-
-      span {
-        margin-left: 20px;
-
-        &.strong {
-          font-size: 18px;
-          font-family: $font-family-ClanOT;
-          font-weight: bold;
-          text-decoration: underline;
-        }
-
-        &.light {
-          color: $color-cool-grey;
-          font-size: 14px;
-          font-family: $font-family-ClanOTNews;
-        }
+      position: relative;
+      z-index: 12;
+      > div {
+        text-align: left;
+        margin: 0 0 0 24px;
       }
     }
   }

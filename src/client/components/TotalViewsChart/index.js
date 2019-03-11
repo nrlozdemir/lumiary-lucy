@@ -110,14 +110,14 @@ class TotalViewsChart extends Component {
                         backgroundColor: [
                           '#51adc0',
                           '#8567f0',
-                          '#ff556f',
+                          '#D0506C',
                           '#acb0be',
                           '#5a6386',
                         ],
                         hoverBackgroundColor: [
                           '#51adc0',
                           '#8567f0',
-                          '#ff556f',
+                          '#D0506C',
                           '#acb0be',
                           '#5a6386',
                         ],

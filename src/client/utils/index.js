@@ -10,7 +10,8 @@ function randomKey(char) {
 }
 
 function socialIconSelector(key) {
-  const keyToLowerCase = key.toLowerCase();
+  if (!key) return
+  const keyToLowerCase = key.toLowerCase()
   const socialIcons = {
     facebook: 'icon-Facebook-Bubble',
     twitter: 'icon-Twitter-Bubble',

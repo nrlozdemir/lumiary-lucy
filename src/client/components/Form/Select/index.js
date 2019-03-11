@@ -1,71 +1,94 @@
-import React from "react";
-import PropTypes from "prop-types";
-import classNames from "classnames";
-import ReactSelect from "react-select";
-import style from "./styles.scss";
+import React from 'react'
+import PropTypes from 'prop-types'
+import classNames from 'classnames'
+import ReactSelect from 'react-select'
+import style from './styles.scss'
 
-const Select = props => {
-	const { className, id, options, placeholder, multiple, customClass } = props;
+const Select = (props) => {
+  const { className, id, options, placeholder, multiple, customClass } = props
 
-	let args = props.input ? props.input : props
-	let { name, onChange, value } = args
+  let args = props.input ? props.input : props
+  let { name, onChange, value } = args
 
-	// if (props.input) {
-	// 	var {
-	// 		input: { name, onChange, value, customClass }
-	// 	} = props;
-	// } else {
-	// 	var { name, onChange, value, customClass } = props;
-	// }
+  // if (props.input) {
+  // 	var {
+  // 		input: { name, onChange, value, customClass }
+  // 	} = props;
+  // } else {
+  // 	var { name, onChange, value, customClass } = props;
+  // }
 
-	const reduxFormOnChange = option => {
-		onChange(option);
-	};
+  const reduxFormOnChange = (option) => {
+    onChange(option)
+  }
 
-	const selectClass = classNames(`${customClass} ` + style.Select, {
-		[style.selected]: !!value
-	});
+  const selectClass = classNames(`${customClass} ` + style.Select, {
+    [style.selected]: !!value,
+  })
+  const DropdownIndicator = (props) => {
+    return (
+      <div className={style.DropdownIndicator}>
+        {props.selectProps.menuIsOpen ? (
+          <span
+            className="icon-Arrow-Down"
+            style={{ transform: 'rotate(180deg)' }}
+          >
+            <span className="path1" />
+            <span className="path2" />
+            <span className="path3" />
+          </span>
+        ) : (
+          <span className="icon-Arrow-Down">
+            <span className="path1" />
+            <span className="path2" />
+            <span className="path3" />
+          </span>
+        )}
+      </div>
+    )
+  }
 
-	return (
-		<ReactSelect
-			id={id}
-			className={selectClass}
-			clearable={false}
-			name={name}
-			onChange={!!props.input ? reduxFormOnChange : onChange}
-			options={options}
-			searchable={false}
-			placeholder={placeholder}
-			multi={multiple}
-			{...(value ? { value } : { value: null })}
-		/>
-	);
-};
+  return (
+    <ReactSelect
+      components={{ DropdownIndicator }}
+      id={id}
+      className={selectClass}
+      clearable={false}
+      name={name}
+      onChange={!!props.input ? reduxFormOnChange : onChange}
+      options={options}
+      searchable={false}
+      placeholder={placeholder}
+      multi={multiple}
+      {...(value ? { value } : { value: null })}
+    />
+  )
+}
 
 Select.propTypes = {
-	input: PropTypes.object,
-	name: PropTypes.string,
-	onChange: PropTypes.func,
-	multiple: PropTypes.bool,
-	placeholder: PropTypes.string,
-	customClass: PropTypes.string,
-	options: PropTypes.array.isRequired,
-	value: PropTypes.oneOfType([
-		PropTypes.string,
-		PropTypes.number,
-		PropTypes.object
-	])
-};
+  input: PropTypes.object,
+  name: PropTypes.string,
+  onChange: PropTypes.func,
+  multiple: PropTypes.bool,
+  placeholder: PropTypes.string,
+  customClass: PropTypes.string,
+  options: PropTypes.array.isRequired,
+  value: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.number,
+    PropTypes.object,
+  ]),
+}
 
 Select.defaultProps = {
-	input: null,
-	name: null,
-	onChange: null,
-	options: null,
-	customClass: null,
-	multiple: false,
-	value: "",
-	placeholder: "Select..."
-};
+  input: null,
+  name: null,
+  onChange: null,
+  options: null,
+  customClass: null,
+  multiple: false,
+  value: '',
+  placeholder: 'Select...',
+}
 
-export default Select;
+export default Select

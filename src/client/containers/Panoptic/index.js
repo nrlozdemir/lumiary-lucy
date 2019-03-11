@@ -7,11 +7,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { NavLink } from "react-router-dom"
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { reduxForm } from 'redux-form'
 
 import { actions, makeSelectPanoptic } from 'Reducers/panoptic'
+import style from './style.scss';
 
 import VideoReleasesBarChart from './sections/VideoReleasesBarChart'
 import ColorTemperature from './sections/ColorTemperature'
@@ -37,7 +39,12 @@ export class Panoptic extends React.Component {
   }
 
   render() {
-    const { selectWarmColor, selectLikes, selectDate } = this.state
+    const {
+      selectWarmColor,
+      selectLikes,
+      selectDate,
+      selectPlatforms,
+    } = this.state
     const {
       panoptic: {
         data: {
@@ -52,8 +59,21 @@ export class Panoptic extends React.Component {
 
     return (
       <React.Fragment>
+				<div className="grid-container col-12">
+					<div className={style.alignTabs}>
+						<NavLink to="/audience" className={style.tab} activeClassName={style.activeLink}>
+							Audience
+						</NavLink>
+					</div>
+				</div>
         {videoReleasesData && (
-          <VideoReleasesBarChart data={videoReleasesData} />
+          <VideoReleasesBarChart
+            data={videoReleasesData}
+            handleSelectFilters={this.handleSelectFilters}
+            selectLikes={selectLikes}
+            selectPlatforms={selectPlatforms}
+            selectDate={selectDate}
+          />
         )}
         {colorTempData && (
           <ColorTemperature

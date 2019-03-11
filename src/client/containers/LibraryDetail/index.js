@@ -40,8 +40,8 @@ export class LibraryDetail extends React.Component {
     getVideos()
 
     if (match.params.videoId) {
-      getBarChartRequest(match.params.videoId),
-        getDoughnutChartRequest(match.params.videoId)
+      getBarChartRequest(match.params.videoId)
+      getDoughnutChartRequest(match.params.videoId)
       getColorTempRequest(match.params.videoId)
       getShotByShotRequest(match.params.videoId)
     }
