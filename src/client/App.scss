@@ -157,10 +157,11 @@
   }
 
   .custom-select {
-    min-width: 170px;
-    max-width: 230px;
+    width: 170px;
+    // max-width: 230px;
     border-radius: 8px;
     border: 1px solid $color-dusk;
+    background-color: $color-dark-five;
 
     > div,
     > div > div,
@@ -228,6 +229,9 @@
   }
 
   .video-overlay-play-button.is-hidden {
-    display: none;
+    opacity: 0;
+  }
+  .video-overlay-play-button.is-visible {
+    opacity: 1;
   }
 }

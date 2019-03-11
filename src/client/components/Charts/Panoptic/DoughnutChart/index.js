@@ -14,8 +14,8 @@ const DoughnutChart = ({ data }) => (
 				{
 					data: [...data],
 					borderColor: "#303a5d",
-					backgroundColor: ["#acb0be", "#8567f0", "#ff556f", "#51adc0"],
-					hoverBackgroundColor: ["#acb0be", "#8567f0", "#ff556f", "#51adc0"]
+					backgroundColor: ["#acb0be", "#8567f0", "#D0506C", "#51adc0"],
+					hoverBackgroundColor: ["#acb0be", "#8567f0", "#D0506C", "#51adc0"]
 				}
 			]
 		}}

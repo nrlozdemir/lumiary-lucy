@@ -35,6 +35,23 @@ class SelectFilters extends Component {
 
     return (
       <React.Fragment>
+        {selectResolutionShow && (
+          <Select
+            name="selectResolution"
+            customClass={selectClasses || 'custom-select'}
+            placeholder="Resolution"
+            value={selectResolution || ''}
+            onChange={(option) => this.handleChange(option, 'selectResolution')}
+            options={[
+              { value: 'resolution', label: 'Resolution' },
+              { value: 'aspect-ratio', label: 'Aspect Ratio' },
+              { value: 'frame-rate', label: 'Frame Rate' },
+              { value: 'duration', label: 'Duration' },
+              { value: 'pacing', label: 'Pacing' },
+              { value: 'dominant-color', label: 'Dominant Color' },
+            ]}
+          />
+        )}
         {selectDurationShow && (
           <Select
             name="selectDuration"
@@ -108,21 +125,6 @@ class SelectFilters extends Component {
               { value: '480', label: '480' },
               { value: '720p', label: '720p' },
               { value: '1080p', label: '1080p' },
-            ]}
-          />
-        )}
-        {selectResolutionShow && (
-          <Select
-            name="selectResolution"
-            customClass={selectClasses || 'custom-select'}
-            placeholder="Views"
-            value={selectResolution || ''}
-            onChange={(option) => this.handleChange(option, 'selectResolution')}
-            options={[
-              { value: '25', label: '%25' },
-              { value: '50', label: '%50' },
-              { value: '75', label: '%75' },
-              { value: '100', label: '%100' },
             ]}
           />
         )}
