@@ -6,7 +6,7 @@ import SelectFilters from 'Components/SelectFilters'
 
 import { options, wrapperBarOptions } from './chartOptions'
 
-const barChartContainer = cx('shadow-1 col-12 mt-72', style.panopticBarChart)
+const barChartContainer = cx('shadow-1 col-12', style.panopticBarChart)
 const barChartHeaderClass = cx('col-12 mt-24 mb-24', style.barChartHeader)
 const barChartFooterClass = cx('col-12 mb-56', style.barChartFooter)
 const barContainerClass = cx('col-12', style.barChartContainer)
