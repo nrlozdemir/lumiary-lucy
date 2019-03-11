@@ -456,3 +456,29 @@
 		width: 0;
 	}
 }
+
+.alignTabs {
+	width: 100%;
+	height: 70px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.tab {
+		font-family: $font-family-ClanOTNews;
+		font-size: 14px;
+		margin: 0 35px;
+		text-decoration: none;
+		color: white;
+		position: relative;
+	}
+}
+
+.activeLink:before {
+	content: ' ';
+	width: 100%;
+	height: 4px;
+	position: absolute;
+	top: -8px;
+	background-color: $color-cool-blue;
+}

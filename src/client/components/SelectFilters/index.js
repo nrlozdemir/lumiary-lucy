@@ -5,8 +5,9 @@ import Datepicker from 'Components/Datepicker'
 
 class SelectFilters extends Component {
   handleChange = (selectedOption, name) => {
-    this.props.onChange && this.props.onChange(name, selectedOption)
-    this.props.handleSelectFilters(name, selectedOption)
+		const {onChange = () => {}, handleSelectFilters = () => {}} = this.props;
+    onChange(name, selectedOption)
+    handleSelectFilters(name, selectedOption)
   }
 
   render() {

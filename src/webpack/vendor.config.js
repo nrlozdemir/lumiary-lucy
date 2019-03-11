@@ -53,10 +53,11 @@ module.exports = {
       'immutability-helper',
       'immutable',
       'isomorphic-fetch',
-      'lodash',
+			'lodash',
 
       'react-circular-progressbar',
-      'react-icons',
+			'react-icons',
+			'@saypr/bubble-chart',
 
       'chart.js',
       'react-chartjs-2',
