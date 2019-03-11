@@ -62,6 +62,9 @@ class Reports extends Component {
           <div className="mb-16">
             <Button buttonText="Open modal" onClick={() => this.openModal()} />
           </div>
+          <div className="mb-16">
+            <Button to="/reports/generated" buttonText="Go gerenerated page" />
+          </div>
           <ReportsModal
             width={440}
             isOpen={modalIsOpen}

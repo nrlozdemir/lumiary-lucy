@@ -1,0 +1,102 @@
+.generatedBarChart {
+	width: 100%;
+	display: inline-block;
+	background-color: $color-dark-grey-blue;
+
+	.chartSection {
+		height: 310px;
+		margin-left: 28px;
+		margin-top: 5px;
+		position: relative;
+
+		&:after {
+			content: '';
+			background-color: $color-dusk;
+			height: 276px;
+			position: absolute;
+			width: 1px;
+			top: 1;
+			right: -26;
+		}
+	}
+	.chartSectionBadge {
+		display: block;
+		margin: 40px 0 56px 24px;
+		text-align: center;
+
+		span {
+			background-color: $color-dusk;
+			border-radius: 17px;
+			font-family: $font-family-ClanOT;
+			font-size: 14px;
+			font-weight: bold;
+			padding: 8px 24px;
+			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+		}
+	}
+
+	.barChartHeader {
+		padding: 48px 40px;
+		margin: 0;
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		.title {
+			font-size: 18px;
+		}
+		.selects {
+			display: flex;
+			float: right;
+			position: relative;
+			z-index: 12;
+			p {
+				font-family: $font-family-ClanOTNews;
+				font-size: 14px;
+				display: flex;
+				align-items: center;
+				margin-left: 8px;
+			}
+			.blueDot,
+			.redDot {
+				width: 16px;
+				height: 16px;
+				margin-right: 8px;
+				display: inline-block;
+				border-radius: 50%;
+			}
+			.blueDot {
+				background-color: $color-cool-blue;
+			}
+			.redDot {
+				background-color: #d0506c;
+			}
+		}
+	}
+
+	.barChartContainer {
+		position: relative;
+	}
+
+	.barChartBackground {
+		background-color: $color-dark-five;
+		height: 274px;
+		position: absolute;
+		right: 0;
+		top: 7px;
+		width: calc(100% - 49px);
+	}
+
+	.wrapperBarChart {
+		height: 291px;
+		position: absolute;
+		width: 100%;
+		z-index: 2;
+	}
+
+	.groupChartsWrapper {
+		padding-left: 20px;
+		padding-right: 1px;
+		position: relative;
+		z-index: 3;
+	}
+}
