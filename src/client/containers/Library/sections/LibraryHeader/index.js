@@ -1,7 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { compose } from 'redux'
-import { Field, reduxForm } from 'redux-form'
+import { bindActionCreators, compose } from "redux"
 import { createStructuredSelector } from "reselect";
 
 import style from './style.scss'
@@ -9,81 +8,86 @@ import style from './style.scss'
 import { actions, makeSelectLibrary } from 'Reducers/library'
 import AsyncSearch from 'Components/Form/AsyncSearch'
 import Button from 'Components/Form/Button'
+import { searchTermInText } from 'Utils'
 
 class LibraryHeader extends React.Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      AsyncSearchValue: ""
+    }
   }
 
-	async onLoadOptions(inputValue, callback) {
-		try {
-			const { getFilteredTitles, library } = this.props
-			await getFilteredTitles(inputValue)
-			if(library.filteredTextList && library.filteredTextList.length > 0){
-				callback(library.filteredTextList)
-			}
-		}catch (e) {
-			console.log('error', e)
-		}
-	}
+  async onLoadOptions(inputValue, callback) {
+    try {
+      const { library } = this.props
+      if (library.videos && library.videos.length > 0 && inputValue) {
+        callback(
+          library.videos
+            .filter(({ title }) => searchTermInText(title, inputValue, true))
+            .map(({ id, title }) => ({ value: String(id), label: title }))
+        )
+      }
+    } catch (e) {
+      console.log('error', e)
+    }
+  }
 
-	async onChangeText(textValue) {
-  	const { getFilteredVideos } = this.props
-  	if(textValue.length > 0){
-  		await getFilteredVideos(textValue)
-		}
-	}
+  render() {
+    const { setSidebarVisible, changeFilter, library: { filters } } = this.props
+    const { AsyncSearchValue } = this.state
 
-	render() {
-		const { setSidebarVisible } = this.props
-		return (
-			<div className={style.headerContainer}>
-				<div>
-					<Field
-						name="libraryFilterInput"
-						component={AsyncSearch}
-						loadOptions={this.onLoadOptions.bind(this)}
-						onInputChange={this.onChangeText.bind(this)}
-						placeholder="Search a video…"
-						customClass={style.filterSelect}
-					/>
-				</div>
-				<div>
-					<h1 className="alpha color-white text-center font-primary text-bold">
-						Library
-					</h1>
-				</div>
-				<div>
-					<Button
-						onClick={() => setSidebarVisible(true)}
-						customClass="float-right font-secondary-first text-bold"
-						buttonText="Filter Videos"
-						iconRight="icon-Filter"
-					/>
-				</div>
-			</div>
-		)
-	}
+    return (
+      <div className={style.headerContainer}>
+        <div>
+          <AsyncSearch
+            name="libraryFilterInput"
+            loadOptions={this.onLoadOptions.bind(this)}
+            placeholder="Search a video…"
+            customClass={style.filterSelect}
+            value={AsyncSearchValue}
+            onChange={async (option) => {
+              await changeFilter({
+                ...filters,
+                Search: {
+                  value: option ? option.label : option,
+                  new: option ? option.__isNew__ || false : false
+                }
+              })
+              this.setState({
+                AsyncSearchValue: option
+              })
+            }}
+          />
+        </div>
+        <div>
+          <h1 className="alpha color-white text-center font-primary text-bold">
+            Library
+          </h1>
+        </div>
+        <div>
+          <Button
+            onClick={() => setSidebarVisible(true)}
+            customClass="float-right font-secondary-first text-bold"
+            buttonText="Filter Videos"
+            iconRight="icon-Filter"
+          />
+        </div>
+      </div>
+    )
+  }
 }
 
 const mapStateToProps = createStructuredSelector({
-	library: makeSelectLibrary()
+  library: makeSelectLibrary()
 });
 
-const mapDispatchToProps = dispatch => {
-	return {
-		getFilteredVideos: filterText => dispatch(actions.filterVideos(filterText)),
-		getFilteredTitles: filterText => dispatch(actions.filterTextList(filterText))
-	}
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
-	mapStateToProps,
-	mapDispatchToProps
-);
+  mapStateToProps,
+  mapDispatchToProps
+)
 
-export default compose(
-	reduxForm({
-		form: 'LibraryHeaderForm'
-	}),
-	withConnect)(LibraryHeader)
+export default compose(withConnect)(LibraryHeader)

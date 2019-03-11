@@ -1,29 +1,29 @@
 .headerContainer {
-	display: flex;
-	margin-top: 72px;
-	div {
-		flex: 1;
-	}
-	&:last-child div {
-		flex: 1;
-		margin-right: auto;
-	}
-	.filterSelect {
-		&:first-child {
-			outline: none;
-			background: $color-dark-five url("../../../../../assets/search.png") no-repeat 10px 10px;
-			background-size: 17px 17px;
-			padding-left: 39px;
-			border: 1px solid $color-white;
-			width: 280px;
-			border-radius: 0;
-		}
-		>div{
-			border-radius: 0;
-		}
-		p{
-			border-radius: 0;
-		}
-		div{border-radius: 0}
-	}
+  display: flex;
+  margin-top: 72px;
+  > div {
+    flex: 1;
+  }
+  &:last-child > div {
+    flex: 1;
+    margin-right: auto;
+  }
+  .filterSelect {
+    &:first-child {
+      outline: none;
+      background: $color-dark-five url("../../../../../assets/search.png") no-repeat 10px 10px;
+      background-size: 17px 17px;
+      padding-left: 39px;
+      border: 1px solid $color-white;
+      width: 280px;
+      border-radius: 0;
+    }
+    >div{
+      border-radius: 0;
+    }
+    p{
+      border-radius: 0;
+    }
+    div{border-radius: 0}
+  }
 }
