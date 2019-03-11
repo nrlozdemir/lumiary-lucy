@@ -69,7 +69,5 @@ export function sortVideos(videos, filters) {
     newVideos = newVideos.filter(({ title }) => searchTermInText(title, Search.value, Search.new));
   }
 
-  console.log(newVideos)
-
   return newVideos;
 }
