@@ -1,10 +1,11 @@
 import React from 'react'
+import classnames from 'classnames';
 
 import style from 'Containers/Audience/style.scss';
+import sectionStyle from "./style.scss";
 
 import { ColorTemperature as Chart } from 'Components/ColorTemperatureChart/ColorTemperature'
 import SelectFilters from 'Components/SelectFilters'
-import Select from 'Components/Form/Select';
 
 const colorTempData = [
 	{
@@ -19,6 +20,10 @@ const colorTempData = [
 	},
 	{
 		"text": "This is a blurb that will explain what this graph is showing",
+		"topText": "Energetic",
+		"bottomText": "Calm",
+		"rightText": "Warm",
+		"leftText": "Cool",
 		"data": [
 			{ "x": -50, "y": 12, "color": "#ff556f" },
 			{ "x": 50, "y": 25, "color": "#51adc0" },
@@ -27,6 +32,10 @@ const colorTempData = [
 	},
 	{
 		"text": "This is a blurb that will explain what this graph is showing",
+		"topText": "Natural",
+		"bottomText": "Synthetic",
+		"rightText": "Warm",
+		"leftText": "Cool",
 		"data": [
 			{ "x": -50, "y": 12, "color": "#ff556f" },
 			{ "x": 50, "y": -75, "color": "#51adc0" },
@@ -68,9 +77,9 @@ export class ColorTemperature extends React.Component {
 				<div className="col-12" style={{display: 'flex', padding: "40px 0"}}>
 					{
 						colorTempData.map((temp, index) => (
-							<div className="col-4" key={"temp-chart-" + index}>
+							<div className={classnames("col-4", sectionStyle.chartWrapper)} key={"temp-chart-" + index}>
 								<Chart temp={temp} />
-								<div style={{marginTop: 60}}>{temp.text}</div>
+								<div className={sectionStyle.chartInfo}>{temp.text}</div>
 							</div>
 						))
 					}

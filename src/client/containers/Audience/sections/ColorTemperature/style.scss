@@ -7,6 +7,31 @@
 	box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
 }
 
+.chartWrapper {
+	position: relative;
+
+	> .chartInfo {
+		font-family: $font-family-ClanOTNews;
+		font-size: 14px;
+		line-height: 1.86;
+		text-align: center;
+		color: $color-white;
+		margin-top: 80px;
+		padding: 0 80px
+	}
+
+	&:not(:last-child):after {
+		content: "";
+		display: block;
+		position: absolute;
+		width: 1px;
+		height: 204px;
+		right: -10px;
+		top: 0;
+		background-color: $color-dusk;
+	}
+}
+
 .platformName {
 	font-family: $font-family-ClanOTNews;
 	font-size: 14px;
