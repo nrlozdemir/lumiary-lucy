@@ -255,7 +255,7 @@ export class DominantColor extends React.Component {
 					<div className={style.label}>
 						<span>Male</span>
 					</div>
-					<div style={{padding: "0 40px"}}>
+					<div style={{padding: "0 8vw"}}>
 						<RadarChart data={chartData[0].datas} />
 					</div>
 				</div>
@@ -263,18 +263,18 @@ export class DominantColor extends React.Component {
 					<div className={style.label}>
 						<span>Female</span>
 					</div>
-					<div style={{padding: "0 40px"}}>
+					<div style={{padding: "0 8vw"}}>
 						<RadarChart data={chartData[1].datas} />
 					</div>
 				</div>
-				<div className={"col-12 " + sectionStyle.progressContainer}>
-					<Progress progress={chartData[0].progress} />
+				<div className={"col-12 mt-32 " + sectionStyle.progressContainer}>
+					<Progress progress={chartData[0].progress} reverse={true} />
 					<div className={sectionStyle.progressCountArea}>
 						<span className={sectionStyle.progressCount}>1</span>
 						<span className={sectionStyle.progressCount}>2</span>
 						<span className={sectionStyle.progressCount}>3</span>
 					</div>
-					<Progress progress={chartData[1].progress} reverse={true} />
+					<Progress progress={chartData[1].progress} />
 				</div>
 			</div>
 		);

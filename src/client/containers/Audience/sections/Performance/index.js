@@ -242,7 +242,7 @@ export class Performance extends React.Component {
                   <Bubble
                     key={'bubble-' + i}
                     radius={bubble.value}
-                    fill="#303a5d"
+                    fill="#242b49"
                     stroke="#d0506c"
                   >
                     <Visual>
@@ -273,7 +273,7 @@ export class Performance extends React.Component {
                   <Bubble
                     key={'bubble-' + i}
                     radius={bubble.value}
-                    fill="#303a5d"
+                    fill="#242b49"
                     stroke="#51adc0"
                   >
                     <Visual>
@@ -304,7 +304,7 @@ export class Performance extends React.Component {
                   <Bubble
                     key={'bubble-' + i}
                     radius={bubble.value}
-                    fill="#303a5d"
+                    fill="#242b49"
                     stroke="#8567f0"
                   >
                     <Visual>
