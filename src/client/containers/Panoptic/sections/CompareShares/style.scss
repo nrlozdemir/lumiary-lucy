@@ -1,204 +1,210 @@
 .compareSharesContainer {
-  padding: 50px 40px;
-  box-sizing: border-box;
-  font-family: $font-family-ClanOTNews;
-  background-color: $color-dark-grey-blue;
+	padding: 50px 40px;
+	box-sizing: border-box;
+	font-family: $font-family-ClanOTNews;
+	background-color: $color-dark-grey-blue;
 }
 
 .componentTitle {
-  display: flex;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  h2 {
-    font-family: $font-family-ClanOTBold;
-    font-size: 18px;
-  }
-  margin-bottom: 50px;
-  .inputWrapper {
-    width: 360px;
-    position: relative;
+	display: flex;
+	width: 100%;
+	justify-content: space-between;
+	align-items: center;
+	h2 {
+		font-family: $font-family-ClanOTBold;
+		font-size: 18px;
+	}
+	margin-bottom: 50px;
+	.inputWrapper {
+		width: 360px;
+		position: relative;
 
-    form {
-      width: 100%;
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      flex-direction: row;
-      margin: 0;
-    }
-  }
+		form {
+			width: 100%;
+			display: flex;
+			align-items: center;
+			justify-content: flex-end;
+			flex-direction: row;
+			margin: 0;
+		}
+	}
 }
 
 .radarChartComparison {
-  display: flex;
-  justify-content: center;
-  .radarComponent {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-    .radarTitle {
-      border-radius: 17px;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-      background-color: $color-dusk;
-      font-size: 14px;
-      font-family: $font-family-ClanOTBold;
-      padding: 8px 24px;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: center;
-    }
-    .radarComponentContainer {
-      margin-top: 72px;
-      position: relative;
-      max-height: 420px;
-      max-width: 420px;
-      width: 100%;
-      height: 100%;
-    }
-    .progressBarArea {
-      max-width: 420px;
-      width: 100%;
-      margin-top: 95px;
-      .progressBarInner {
-        margin-bottom: 60px;
-        width: 100%;
-        position: relative;
-        &.reverse {
-          .progressText {
-            .leftTitle {
-              float: right;
-            }
+	display: flex;
+	justify-content: center;
+	.radarComponent {
+		flex: 1;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		width: 100%;
+		.radarTitle {
+			border-radius: 17px;
+			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+			background-color: $color-dusk;
+			font-size: 14px;
+			font-family: $font-family-ClanOTBold;
+			padding: 8px 24px;
+			font-style: normal;
+			font-stretch: normal;
+			line-height: normal;
+			letter-spacing: normal;
+			text-align: center;
+		}
+		.radarComponentContainer {
+			margin-top: 72px;
+			position: relative;
+			max-height: 420px;
+			max-width: 420px;
+			width: 100%;
+			height: 100%;
+		}
+		.progressBarArea {
+			max-width: 420px;
+			width: 100%;
+			margin-top: 95px;
+			.progressBarInner {
+				margin-bottom: 60px;
+				width: 100%;
+				position: relative;
+				&.reverse {
+					.progressText {
+						.leftTitle {
+							float: right;
+							flex-direction: row-reverse;
+							.dot {
+								margin: 0;
+								margin-left: 10px;
+							}
+						}
 
-            .rightTitle {
-              float: left;
-            }
-            span {
-              &:first-child {
-                text-align: right;
-              }
-            }
-          }
-          .progressBar {
-            display: flow-root;
-          }
-          .percentageBlue {
-            float: right;
-          }
-        }
-        .progressBar {
-          background-color: $color-dark-five;
-          border-radius: 10px;
-          margin-top: 10px;
-        }
-        .percentageBlue {
-          border-radius: 10px;
-          height: 10px;
-          background-color: $color-dusk;
-          -webkit-transition: width 0.5s, height 0.5s;
-          transition: width 0.5s, height 0.5s;
-        }
-        .progressText {
-          color: $color-white;
-          font-size: 14px;
-          font-family: $font-family-ClanOTNews;
-          .leftTitle {
-            float: left;
-            font-size: 14px;
-            font-weight: bold;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: normal;
-            letter-spacing: normal;
-            display: flex;
-            align-items: center;
-            .dot {
-              width: 16px;
-              height: 16px;
-              margin-right: 10px;
-              border-radius: 50%;
-            }
-          }
+						.rightTitle {
+							float: left;
+						}
+						span {
+							&:first-child {
+								text-align: right;
+							}
+						}
+					}
+					.progressBar {
+						display: flow-root;
+					}
+					.percentageBlue {
+						float: right;
+					}
+				}
+				.progressBar {
+					background-color: $color-dark-five;
+					border-radius: 10px;
+					margin-top: 10px;
+				}
+				.percentageBlue {
+					border-radius: 10px;
+					height: 10px;
+					background-color: $color-dusk;
+					-webkit-transition: width 0.5s, height 0.5s;
+					transition: width 0.5s, height 0.5s;
+				}
+				.progressText {
+					color: $color-white;
+					font-size: 14px;
+					font-family: $font-family-ClanOTNews;
+					.leftTitle {
+						float: left;
+						font-size: 14px;
+						font-weight: bold;
+						font-style: normal;
+						font-stretch: normal;
+						line-height: normal;
+						letter-spacing: normal;
+						display: flex;
+						align-items: center;
+						flex-direction: row;
+						.dot {
+							width: 16px;
+							height: 16px;
+							margin-right: 10px;
+							border-radius: 50%;
+						}
+					}
 
-          .rightTitle {
-            float: right;
-            font-size: 12px;
-            font-weight: normal;
-            font-style: normal;
-            font-stretch: normal;
-            line-height: normal;
-            letter-spacing: normal;
-          }
-          &::after {
-            content: '';
-            clear: both;
-            display: table;
-          }
-        }
-      }
-    }
-  }
-  .progressCountArea {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    .progressCount {
-      font-family: ClanOT;
-      font-size: 14px;
-      font-weight: bold;
-      font-style: normal;
-      font-stretch: normal;
-      line-height: normal;
-      letter-spacing: normal;
-      text-align: center;
-      color: #ffffff;
-      border: 1px solid $color-cool-grey;
-      border-radius: 50%;
-      width: 40px;
-      height: 40px;
-      line-height: 40px;
-      text-align: center;
-      display: block;
-      margin-bottom: 56px;
-    }
-  }
+					.rightTitle {
+						float: right;
+						font-size: 12px;
+						font-weight: normal;
+						font-style: normal;
+						font-stretch: normal;
+						line-height: normal;
+						letter-spacing: normal;
+					}
+					&::after {
+						content: '';
+						clear: both;
+						display: table;
+					}
+				}
+			}
+		}
+	}
+	.progressCountArea {
+		display: flex;
+		flex-direction: column;
+		justify-content: flex-end;
+		.progressCount {
+			font-family: ClanOT;
+			font-size: 14px;
+			font-weight: bold;
+			font-style: normal;
+			font-stretch: normal;
+			line-height: normal;
+			letter-spacing: normal;
+			text-align: center;
+			color: #ffffff;
+			border: 1px solid $color-cool-grey;
+			border-radius: 50%;
+			width: 40px;
+			height: 40px;
+			line-height: 40px;
+			text-align: center;
+			display: block;
+			margin-bottom: 56px;
+		}
+	}
 }
 
 .info {
-  border-right: 1px solid $color-dusk;
-  padding-right: 15px;
-  box-sizing: border-box;
+	border-right: 1px solid $color-dusk;
+	padding-right: 15px;
+	box-sizing: border-box;
 
-  &:last-child {
-    border-right: none;
-  }
+	&:last-child {
+		border-right: none;
+	}
 
-  .infoTitle {
-    padding: 8px 24px;
-    border-radius: 20px;
-    background-color: $color-dark-five;
-    font-family: $font-family-ClanOT;
-    font-size: 14px;
-    text-align: center;
-  }
+	.infoTitle {
+		padding: 8px 24px;
+		border-radius: 20px;
+		background-color: $color-dark-five;
+		font-family: $font-family-ClanOT;
+		font-size: 14px;
+		text-align: center;
+	}
 
-  ul {
-    margin: 0;
-    padding: 0;
-    list-style-type: none;
-    text-align: center;
+	ul {
+		margin: 0;
+		padding: 0;
+		list-style-type: none;
+		text-align: center;
 
-    li {
-      margin-top: 24px;
-      font-size: 12px;
-      line-height: 20px;
-      span {
-        font-family: $font-family-ClanOT;
-      }
-    }
-  }
+		li {
+			margin-top: 24px;
+			font-size: 12px;
+			line-height: 20px;
+			span {
+				font-family: $font-family-ClanOT;
+			}
+		}
+	}
 }

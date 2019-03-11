@@ -2,7 +2,7 @@
   "colorTempData": [
     {
       "data": [
-        { "x": -50, "y": 82, "color": "#ff556f" },
+        { "x": -50, "y": 82, "color": "#D0506C" },
         { "x": 50, "y": -25, "color": "#51adc0" },
         { "x": 75, "y": -30, "color": "#8567f0" },
         { "x": 60, "y": 30, "color": "#ffffff" },
@@ -11,21 +11,21 @@
     },
     {
       "data": [
-        { "x": -50, "y": 12, "color": "#ff556f" },
+        { "x": -50, "y": 12, "color": "#D0506C" },
         { "x": 50, "y": 25, "color": "#51adc0" },
         { "x": 75, "y": -30, "color": "#8567f0" }
       ]
     },
     {
       "data": [
-        { "x": -50, "y": 12, "color": "#ff556f" },
+        { "x": -50, "y": 12, "color": "#D0506C" },
         { "x": 50, "y": -75, "color": "#51adc0" },
         { "x": 75, "y": -30, "color": "#8567f0" }
       ]
     },
     {
       "data": [
-        { "x": -50, "y": 12, "color": "#ff556f" },
+        { "x": -50, "y": 12, "color": "#D0506C" },
         { "x": 50, "y": -75, "color": "#51adc0" },
         { "x": 75, "y": -30, "color": "#8567f0" }
       ]
@@ -42,7 +42,7 @@
       },
       {
         "label": "Dataset 2",
-        "backgroundColor": "#ff556f",
+        "backgroundColor": "#D0506C",
         "data": [-45000, -50000, -30000, -55000, -70000, -55000, -30000]
       }
     ]
@@ -57,7 +57,7 @@
       "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
       "datasets": [
         {
-          "backgroundColor": "#ff556f",
+          "backgroundColor": "#D0506C",
           "data": [25, 10, 14, 51]
         },
         {
@@ -77,7 +77,7 @@
     "doughnutRoundData": [
       { "data": "0-15 seconds", "color": "#51adc0" },
       { "data": "15-30 seconds", "color": "#8567f0" },
-      { "data": "30-45 seconds", "color": "#ff556f" },
+      { "data": "30-45 seconds", "color": "#D0506C" },
       { "data": "45-60 seconds", "color": "#acb0be" }
     ]
   },
@@ -100,8 +100,8 @@
       },
       {
         "label": "Medium",
-        "backgroundColor": "#ff556f",
-        "borderColor": "#ff556f",
+        "backgroundColor": "#D0506C",
+        "borderColor": "#D0506C",
         "borderWidth": 1,
         "data": [4, 5, 4, 2]
       },

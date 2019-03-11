@@ -18,38 +18,38 @@ import LibraryDetailShotByShot from "./sections/LibraryDetailShotByShot"
 
 /* eslint-disable react/prefer-stateless-function */
 export class LibraryDetail extends React.Component {
-	constructor(props) {
-		super(props)
-		this.slide = React.createRef()
-		this.state = {
-			sliderVal: 0,
-			maxValue: 1000
-		}
-	}
+  constructor(props) {
+    super(props)
+    this.slide = React.createRef()
+    this.state = {
+      sliderVal: 0,
+      maxValue: 1000
+    }
+  }
 
-	componentDidMount() {
-		const { 
-      match, 
+  componentDidMount() {
+    const {
+      match,
       getVideos,
       getBarChartRequest,
       getDoughnutChartRequest,
       getColorTempRequest,
-      getShotByShotRequest  
+      getShotByShotRequest
     } = this.props
 
-		getVideos()
+    getVideos()
 
-		if (match.params.videoId) {
-      getBarChartRequest(match.params.videoId),
+    if (match.params.videoId) {
+      getBarChartRequest(match.params.videoId)
       getDoughnutChartRequest(match.params.videoId)
       getColorTempRequest(match.params.videoId)
       getShotByShotRequest(match.params.videoId)
-		}
-	}
+    }
+  }
 
-	componentDidUpdate(prevProps) {
-		const { match: prevMatch } = prevProps
-		const { 
+  componentDidUpdate(prevProps) {
+    const { match: prevMatch } = prevProps
+    const {
       match,
       getBarChartRequest,
       getDoughnutChartRequest,
@@ -57,27 +57,27 @@ export class LibraryDetail extends React.Component {
       getShotByShotRequest
     } = this.props
 
-		if (prevMatch.params.videoId !== match.params.videoId) {
+    if (prevMatch.params.videoId !== match.params.videoId) {
       getBarChartRequest(match.params.videoId),
-      getDoughnutChartRequest(match.params.videoId)
+        getDoughnutChartRequest(match.params.videoId)
       getColorTempRequest(match.params.videoId)
       getShotByShotRequest(match.params.videoId)
-		}
-	}
+    }
+  }
 
-	render() {
-		const {
-			libraryDetail: { 
+  render() {
+    const {
+      libraryDetail: {
         barChartData,
         doughnutLineChartData,
         colorTempData,
         shotByShotData
       },
-			library: {videos},
-			match: {params: {videoId}}
+      library: { videos },
+      match: { params: { videoId } }
     } = this.props
 
-		const { videoUrl, title, socialIcon } = videos.find(({id}) => id == videoId) || {}
+    const { videoUrl, title, socialIcon } = videos.find(({ id }) => id == videoId) || {}
 
     let barData = null
     let lineChartDataCombined = null
@@ -86,36 +86,38 @@ export class LibraryDetail extends React.Component {
     if (barChartData) {
       barData = chartCombineDataset(barChartData, barData_DatasetOptions)
     }
-    if(shotByShotData) {
+    if (shotByShotData) {
       radarDataCombined = chartCombineDataset(shotByShotData.radarData, radarData_DatasetOptions)
     }
 
-		return (
-			<React.Fragment>
-				<LibraryDetailHeader
-					videoName={title}
-					publishedPlatform={socialIcon}
-				/>
-				{barData && <LibraryDetailChartHeader
-					barData={barData}
-					videoUrl={videoUrl}
-				/>}
+    return (
+      <React.Fragment>
+        <LibraryDetailHeader
+          videoName={title}
+          publishedPlatform={socialIcon}
+        />
+        {barData && <LibraryDetailChartHeader
+          barData={barData}
+          videoUrl={videoUrl}
+          title={title}
+          socialIcon={socialIcon}
+        />}
         {doughnutLineChartData && doughnutLineChartData.doughnutData && <LibraryDetailDoughnutChart
-					doughnutData={doughnutLineChartData.doughnutData}
-				/>}
-				<LibraryDetailColorTemperature
-					colorTempData={colorTempData}
-				/>
+          doughnutData={doughnutLineChartData.doughnutData}
+        />}
+        <LibraryDetailColorTemperature
+          colorTempData={colorTempData}
+        />
         {shotByShotData && <LibraryDetailShotByShot
-					sliderWithThumbnails={shotByShotData.sliderWithThumbnails}
-					slideImages={shotByShotData.slideImages}
-					radarData={radarDataCombined}
-					videoList={shotByShotData.videoList}
-				/>
+          sliderWithThumbnails={shotByShotData.sliderWithThumbnails}
+          slideImages={shotByShotData.slideImages}
+          radarData={radarDataCombined}
+          videoList={shotByShotData.videoList}
+        />
         }
-			</React.Fragment>
-		)
-	}
+      </React.Fragment>
+    )
+  }
 }
 
 LibraryDetail.propTypes = {
@@ -136,13 +138,13 @@ const mapStateToProps = createStructuredSelector({
 })
 
 function mapDispatchToProps(dispatch) {
-	return {
-		getVideos: () => dispatch(libraryActions.loadVideos()),
+  return {
+    getVideos: () => dispatch(libraryActions.loadVideos()),
     getBarChartRequest: id => dispatch(actions.getBarChartRequest(id)),
     getDoughnutChartRequest: id => dispatch(actions.getDoughnutChartRequest(id)),
     getColorTempRequest: id => dispatch(actions.getColorTempRequest(id)),
     getShotByShotRequest: id => dispatch(actions.getShotByShotRequest(id)),
-	}
+  }
 }
 
 const withConnect = connect(

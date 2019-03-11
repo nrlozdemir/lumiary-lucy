@@ -56,11 +56,11 @@ export const selectOptions = [
 export const barData_DatasetOptions = [
   {
     label: "first",
-    backgroundColor: "#ff556f",
-    borderColor: "#ff556f",
+    backgroundColor: "#D0506C",
+    borderColor: "#D0506C",
     borderWidth: 1,
-    hoverBackgroundColor: "#ff556f",
-    hoverBorderColor: "#ff556f"
+    hoverBackgroundColor: "#D0506C",
+    hoverBorderColor: "#D0506C"
   },
   {
     label: "second",
