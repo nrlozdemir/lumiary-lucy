@@ -1,10 +1,8 @@
 import React from 'react'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
-// import { Range } from "rc-slider";
 
-import Select from 'Components/Form/Select'
 import Range from 'Components/Form/Range'
-
+import SelectFilters from "Components/SelectFilters";
 import style from 'Containers/Audience/style.scss'
 import { socialIconSelector } from 'Utils'
 
@@ -12,7 +10,9 @@ export class Performance extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      slider: [0, 100],
+			slider: [0, 100],
+			selectViews: '',
+			selectDate: '',
       bubblesMales: [
         {
           value: 30,
@@ -176,7 +176,9 @@ export class Performance extends React.Component {
       slider: [min, max],
       bubblesBoth,
       bubblesFemales,
-      bubblesMales,
+			bubblesMales,
+			selectViews,
+			selectDate
     } = this.state
     console.log(this.state)
     const handleStyle = [
@@ -228,25 +230,8 @@ export class Performance extends React.Component {
         <div className={style.cardTitle + ' col-12'}>
           <span>Performance By Age, Gender and Date</span>
           <div className={style.selects}>
-            <Select
-              name="views"
-              customClass="custom-select"
-              placeholder="Views"
-              value={'Views'}
-              onChange={console.log}
-              options={[
-                { value: 'Views', label: 'Views' },
-                { value: 'Comments', label: 'Comments' },
-              ]}
-            />
-            <Select
-              name="platforms"
-              customClass="custom-select"
-              placeholder="Last Month"
-              value={'Last Month'}
-              onChange={console.log}
-              options={[{ value: 'Last Month', label: 'Last Month' }]}
-            />
+						<SelectFilters selectViewsShow={true} selectViews={selectViews} />
+            <SelectFilters selectDateShow={true} selectDate={selectDate} />
           </div>
         </div>
         <div className={'col-12'}>

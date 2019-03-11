@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Select from 'Components/Form/Select';
+import SelectFilters from 'Components/SelectFilters';
 import RadarChart from 'Components/Charts/Panoptic/RadarChart'
 import style from 'Containers/Audience/style.scss';
 import sectionStyle from './style.scss';
@@ -227,60 +227,56 @@ const chartData = [
 	}
 ];
 
-export const DominantColor = props => {
-	return (
-		<div className="grid-container mr-20 ml-20 mt-72 bg-dark-grey-blue shadow-1">
-			<div className={style.cardTitle + ' col-12'}>
-				<span>Dominant Color Performance By Gender</span>
-				<div className={style.selects}>
-					<Select
-						name="views"
-						customClass="custom-select"
-						placeholder="Facebook"
-						onChange={console.log}
-						options={[{ value: 'Facebook', label: 'Facebook' }]}
-					/>
-					<Select
-						name="platforms"
-						customClass="custom-select"
-						placeholder="Shares"
-						onChange={console.log}
-						options={[{ value: 'Shares', label: 'Shares' }]}
-					/>
-					<Select
-						name="platforms"
-						customClass="custom-select"
-						placeholder="Past Month"
-						onChange={console.log}
-						options={[{ value: 'Past Month', label: 'Past Month' }]}
-					/>
+export class DominantColor extends React.Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			selectPlatforms: '',
+			selectLikes: '',
+			selectDate: ''
+		};
+	}
+
+	render() {
+		const { selectLikes, selectPlatforms, selectDate } = this.state;
+
+		return (
+			<div className="grid-container mr-20 ml-20 mt-72 bg-dark-grey-blue shadow-1">
+				<div className={style.cardTitle + ' col-12'}>
+					<span>Dominant Color Performance By Gender</span>
+					<div className={style.selects}>
+						<SelectFilters selectPlatformsShow={true} selectPlatforms={selectPlatforms} />
+						<SelectFilters selectLikesShow={true} selectLikes={selectLikes} />
+						<SelectFilters selectDateShow={true} selectDate={selectDate} />
+					</div>
+				</div>
+				<div className="col-6">
+					<div className={style.label}>
+						<span>Male</span>
+					</div>
+					<div style={{padding: "0 40px"}}>
+						<RadarChart data={chartData[0].datas} />
+					</div>
+				</div>
+				<div className="col-6">
+					<div className={style.label}>
+						<span>Female</span>
+					</div>
+					<div style={{padding: "0 40px"}}>
+						<RadarChart data={chartData[1].datas} />
+					</div>
+				</div>
+				<div className={"col-12 " + sectionStyle.progressContainer}>
+					<Progress progress={chartData[0].progress} />
+					<div className={sectionStyle.progressCountArea}>
+						<span className={sectionStyle.progressCount}>1</span>
+						<span className={sectionStyle.progressCount}>2</span>
+						<span className={sectionStyle.progressCount}>3</span>
+					</div>
+					<Progress progress={chartData[1].progress} reverse={true} />
 				</div>
 			</div>
-			<div className="col-6">
-				<div className={style.label}>
-					<span>Male</span>
-				</div>
-				<div style={{padding: "0 40px"}}>
-					<RadarChart data={chartData[0].datas} />
-				</div>
-			</div>
-			<div className="col-6">
-				<div className={style.label}>
-					<span>Female</span>
-				</div>
-				<div style={{padding: "0 40px"}}>
-					<RadarChart data={chartData[1].datas} />
-				</div>
-			</div>
-			<div className={"col-12 " + sectionStyle.progressContainer}>
-				<Progress progress={chartData[0].progress} />
-        <div className={sectionStyle.progressCountArea}>
-          <span className={sectionStyle.progressCount}>1</span>
-          <span className={sectionStyle.progressCount}>2</span>
-          <span className={sectionStyle.progressCount}>3</span>
-        </div>
-				<Progress progress={chartData[1].progress} reverse={true} />
-			</div>
-		</div>
-	)
-};
+		);
+	}
+}
