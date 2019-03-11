@@ -1,24 +1,28 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
+import classnames from 'classnames'
 
 import style from './style.scss'
 
-const LibraryDetailHeader = ({ videoName, publishedPlatform }) => (
+const profileClass = classnames(style.profile)
+const imageClass = classnames('circleImage ' + style.profileImage)
+
+const LibraryDetailHeader = () => (
   <div className={style.header}>
-    <div className="ml-40">
+    <div className="">
       <Link to="/library">
         <span className="icon-Left-Arrow-Circle">
           <span className="path1" />
           <span className="path2" />
           <span className="path3" />
         </span>
-        <span className={style.text}>Back to Library</span>
+        <span className={style.text}>Back To Overview</span>
       </Link>
     </div>
-    <div>{videoName}</div>
-    <div className={style.iconWrapper}>
-      Published on {publishedPlatform}
-      <span className="icon-Facebook-Bubble" />
+    <div>Library</div>
+    <div className={style.profile}>
+      <img src="https://picsum.photos/30" className={imageClass} />
+      <span>Bleacher Report</span>
     </div>
   </div>
 )

@@ -1,0 +1,42 @@
+%absolute {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.container {
+  @extend %absolute;
+  // overflow: hidden;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+  border: 1px solid $color-dusk;
+  box-sizing: border-box;
+}
+
+.video {
+  @extend %absolute;
+  background: black;
+}
+
+.bar {
+  position: absolute;
+  bottom: -1px; // -1px for container border
+  left: -1px; // -1px for container border
+  right: -1px; // -1px for container border
+  height: 50px;
+  background-color: rgba($color-dark-grey-blue, 0.8);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  padding: 0 24px;
+  font-family: $font-family-ClanOT;
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 14px;
+}
+
+.icon {
+  font-size: 24px;
+  margin-right: 10px;
+}

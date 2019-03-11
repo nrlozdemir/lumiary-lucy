@@ -12,6 +12,12 @@
   font-size: 18px;
   font-family: $font-family-ClanOT;
   margin-bottom: 50px;
+
+  .title {
+    font-family: $font-family-ClanOT;
+    font-size: 18px;
+    font-weight: bold;
+  }
 }
 
 .selects {
@@ -19,11 +25,10 @@
   display: flex;
   z-index: 12;
   > div {
-    margin: 0 0 0 20px;
+    margin: 0 0 0 24px;
   }
 }
 
 $line-size: 20;
 $min-width: 210;
 $min-height: 80;
-

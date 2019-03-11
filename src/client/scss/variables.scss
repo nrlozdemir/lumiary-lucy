@@ -30,7 +30,7 @@ $colors: (
 	cool-grey: #acb0be,
 	cool-blue: #51adc0,
 	lighter-purple: #8567f0,
-	coral-pink: #ff556f,
+	coral-pink: #D0506C,
 	dark-blue-grey: #202952
 );
 $color-black: #000;
@@ -43,5 +43,66 @@ $color-dark-grey-blue: #303a5d;
 $color-cool-grey: #acb0be;
 $color-cool-blue: #51adc0;
 $color-lighter-purple: #8567f0;
-$color-coral-pink: #ff556f;
+$color-coral-pink: #D0506C;
 $color-dark-blue-grey: #202952;
+
+//these values comes from webpack
+$xsmall-breakpoint: 320;
+$small-breakpoint:  414;
+$medium-breakpoint: 768;
+$large-breakpoint:  1024;
+$xlarge-breakpoint: 1280;
+$slarge-breakpoint: 1440;
+
+//media-screens
+$screen: "only screen";
+
+$xsmall-below: "#{$screen} and (max-device-width: #{$xsmall-breakpoint - 1}px)";
+$xsmall-up:   "#{$screen} and (min-device-width: #{$xsmall-breakpoint}px)";
+$xsmall-only: "#{$screen} and (min-device-width: #{$xsmall-breakpoint}px) and (max-width: #{$small-breakpoint - 1}px)";
+
+$small-below: "#{$screen} and (max-device-width: #{$small-breakpoint - 1}px)";
+$small-up:   "#{$screen} and (min-device-width: #{$small-breakpoint}px)";
+$small-only: "#{$screen} and (min-device-width: #{$small-breakpoint}px) and (max-device-width: #{$medium-breakpoint - 1}px)";
+
+$medium-below: "#{$screen} and (max-device-width: #{$medium-breakpoint - 1}px)";
+$medium-up:   "#{$screen} and (min-device-width: #{$medium-breakpoint}px)";
+$medium-only: "#{$screen} and (min-device-width: #{$medium-breakpoint}px) and (max-width: #{$large-breakpoint - 1}px)";
+
+$large-below: "#{$screen} and (max-device-width: #{$large-breakpoint - 1}px)";
+$large-up:    "#{$screen} and (min-device-width: #{$large-breakpoint}px)";
+$large-only:  "#{$screen} and (min-device-width: #{$large-breakpoint}px) and (max-width: #{$xlarge-breakpoint - 1})";
+
+$xlarge-below: "#{$screen} and (max-device-width: #{$xlarge-breakpoint - 1}px)";
+$xlarge-up:   "#{$screen} and (min-device-width: #{$xlarge-breakpoint}px)";
+$xlarge-only: "#{$screen} and (min-device-width: #{$xlarge-breakpoint}px) and (max-width: #{$slarge-breakpoint - 1})";
+
+$slarge-below: "#{$screen} and (max-device-width: #{$slarge-breakpoint - 1}px)";
+$slarge-up:   "#{$screen} and (min-device-width: #{$slarge-breakpoint}px)";
+
+//Grid breakpoints
+$xsmall-grid: (
+  columns: 12,
+  gutter: 20px,
+  media: $small-below
+);
+$small-grid: (
+  columns: 12,
+  gutter: 20px,
+  media: $medium-below
+);
+$medium-grid: (
+  columns: 12,
+  gutter: 20px,
+  media: $large-below
+);
+$large-grid: (
+  columns: 12,
+  gutter: 20px,
+  media: $xlarge-below
+);
+$xlarge-grid:(
+  columns: 12,
+  gutter: 20px,
+  media: $slarge-below
+);

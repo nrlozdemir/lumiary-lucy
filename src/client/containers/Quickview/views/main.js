@@ -22,6 +22,7 @@ const Main = (props) => (
             difference={item.difference}
             differenceType={item.differenceType}
             detailsLink={`/quickview/${item.id}/${item.defaultSection}`}
+            social={item.social}
             cards={item.videos.map((video) => (
               <VideoCard
                 video={{
@@ -31,7 +32,7 @@ const Main = (props) => (
                       <span>{video.viewCount} Views</span>
                     </div>
                   ),
-                  thumbnailUrl: video.thumbnailUrl,
+                  videoUrl: video.videoUrl,
                   socialIcon: video.socialIcon,
                 }}
                 options={{

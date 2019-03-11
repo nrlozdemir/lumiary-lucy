@@ -23,35 +23,36 @@
     text-align: center;
 
     span {
-      background-color: $color-dark-blue-grey;
-      border-radius: 50px;
+      background-color: $color-dusk;
+      border-radius: 17px;
       font-family: $font-family-ClanOT;
       font-size: 14px;
       font-weight: bold;
       padding: 8px 24px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
     }
   }
 
   .barChartHeader {
-    div {
-      &:first-child {
-        margin-left: 0;
-      }
-
-      &:last-child {
-        float: right;
-      }
-    }
     .title {
       font-size: 18px;
     }
-
-    .desc {
-      color: $color-cool-grey;
-      font-size: 12px;
+    .selects {
+      display: flex;
+      float: right;
+      position: relative;
+      z-index: 12;
+      > div {
+        text-align: left;
+        margin: 0 0 0 24px;
+      }
     }
+  }
 
+  .barChartFooter {
     .references {
+      display: table;
+      margin: 0 auto;
       .referenceItem {
         display: inline-block;
         font-size: 14px;
@@ -68,27 +69,6 @@
       }
       :nth-child(2) {
         margin-left: 45px;
-      }
-    }
-
-    .headerRight {
-      float: right;
-
-      span {
-        margin-left: 20px;
-
-        &.strong {
-          font-size: 18px;
-          font-family: $font-family-ClanOT;
-          font-weight: bold;
-          text-decoration: underline;
-        }
-
-        &.light {
-          color: $color-cool-grey;
-          font-size: 14px;
-          font-family: $font-family-ClanOTNews;
-        }
       }
     }
   }

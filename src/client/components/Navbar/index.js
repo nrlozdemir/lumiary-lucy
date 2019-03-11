@@ -6,7 +6,7 @@
 
 import React from 'react'
 import classnames from 'classnames'
-import { NavLink } from 'react-router-dom'
+import { Link, NavLink } from 'react-router-dom'
 import style from './style.scss'
 // import PropTypes from 'prop-types';
 
@@ -15,13 +15,14 @@ class Navbar extends React.Component {
   render() {
     const containerClass = classnames('bg-dark-grey-blue ' + style.container)
     const linksClass = classnames(style.links)
-    const logoClass = classnames('color-white ' + style.logo)
     const profileClass = classnames(style.profile)
     const imageClass = classnames('circleImage ' + style.profileImage)
 
     return (
       <div className={containerClass}>
-        <div className={logoClass}>Lumiere</div>
+        <div className={style.logo}>
+          <Link to="/">Lumiere</Link>
+        </div>
         <div className={linksClass}>
           <NavLink to="/quickview" activeClassName={style.activeLink}>
             QuickView

@@ -1,11 +1,36 @@
 :global {
   @import './scss/_misc/misc';
 
+  .customRangeSlider {
+    margin-bottom: 40px;
+    .rc-slider-step {
+      span:first-child {
+        display: none;
+      }
+      span:last-child {
+        display: none;
+      }
+    }
+    .rc-slider-mark {
+      margin-top: 15px;
+      span {
+        color: white !important;
+      }
+    }
+  }
+
   body {
     margin: 0;
     color: $color-white;
   }
 
+  .ReactModal__Body--open {
+    overflow: hidden;
+  }
+
+  .QuickviewVideoCard {
+    width: 384px;
+  }
   .marketViewSlickSlider {
     .item {
       position: relative;
@@ -62,15 +87,15 @@
 
     .slick-next {
       width: 40px;
-			height: 40px;
-			display: block;
-			background: white;
-			border-radius: 20px;
-			right: 15%;
-			top: 18%;
+      height: 40px;
+      display: block;
+      background: white;
+      border-radius: 20px;
+      right: 15%;
+      top: 18%;
       &::before {
         content: '\e922';
-				color: $color-black;
+        color: $color-black;
         font-family: $font-family-qf-icons;
         line-height: 40px;
         margin-left: 10px;
@@ -132,10 +157,11 @@
   }
 
   .custom-select {
-    min-width: 170px;
-    max-width: 230px;
+    width: 170px;
+    // max-width: 230px;
     border-radius: 8px;
-    border: 1px solid $color-cool-grey;
+    border: 1px solid $color-dusk;
+    background-color: $color-dark-five;
 
     > div,
     > div > div,
@@ -165,5 +191,47 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    font-size: 12px;
+    font-weight: bold;
+    font-family: $font-family-ClanOT;
+  }
+
+  .video-wrapper {
+    position: relative;
+  }
+
+  .video-wrapper > video {
+    width: 100%;
+    vertical-align: middle;
+  }
+
+  .video-wrapper > video.has-media-controls-hidden::-webkit-media-controls {
+    display: none;
+  }
+
+  .video-overlay-play-button {
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    padding: 10px calc(50% - 50px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    opacity: 0.95;
+    cursor: pointer;
+    background-image: linear-gradient(transparent, #000);
+    transition: opacity 150ms;
+  }
+
+  .video-overlay-play-button:hover {
+    opacity: 1;
+  }
+
+  .video-overlay-play-button.is-hidden {
+    opacity: 0;
+  }
+  .video-overlay-play-button.is-visible {
+    opacity: 1;
   }
 }

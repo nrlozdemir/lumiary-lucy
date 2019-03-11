@@ -17,8 +17,8 @@ export const barDurationData = {
 		},
 		{
 			label: 'ESPN',
-			backgroundColor: '#ff556f',
-			borderColor: '#ff556f',
+			backgroundColor: '#D0506C',
+			borderColor: '#D0506C',
 			borderWidth: 1,
 			data: [4, 5, 4, 2]
 		},
@@ -69,6 +69,7 @@ export const barDurationOptions = {
 					zeroLineColor: '#5a6386'
 				},
 				ticks: {
+					stepSize: 5,
 					beginAtZero: true,
 					fontColor: 'white'
 				}

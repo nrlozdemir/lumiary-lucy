@@ -2,71 +2,48 @@
   "colorTempData": [
     {
       "data": [
-        {"x": -50, "y":82, "color": "#ff556f"},
-        {"x": 50, "y":-25, "color": "#51adc0"},
-        {"x": 75, "y": -30, "color": "#8567f0"},
-        {"x": 60, "y": 30, "color": "#ffffff"},
-        {"x": -12, "y": -30, "color": "#242b49"}
+        { "x": -50, "y": 82, "color": "#D0506C" },
+        { "x": 50, "y": -25, "color": "#51adc0" },
+        { "x": 75, "y": -30, "color": "#8567f0" },
+        { "x": 60, "y": 30, "color": "#ffffff" },
+        { "x": -12, "y": -30, "color": "#242b49" }
       ]
     },
     {
       "data": [
-        {"x": -50, "y":12, "color": "#ff556f"},
-        {"x": 50, "y":25, "color": "#51adc0"},
-        {"x": 75, "y": -30, "color": "#8567f0"}
+        { "x": -50, "y": 12, "color": "#D0506C" },
+        { "x": 50, "y": 25, "color": "#51adc0" },
+        { "x": 75, "y": -30, "color": "#8567f0" }
       ]
     },
     {
       "data": [
-        {"x": -50, "y":12, "color": "#ff556f"},
-        {"x": 50, "y":-75, "color": "#51adc0"},
-        {"x": 75, "y": -30, "color": "#8567f0"}
+        { "x": -50, "y": 12, "color": "#D0506C" },
+        { "x": 50, "y": -75, "color": "#51adc0" },
+        { "x": 75, "y": -30, "color": "#8567f0" }
       ]
     },
     {
       "data": [
-        {"x": -50, "y":12, "color": "#ff556f"},
-        {"x": 50, "y":-75, "color": "#51adc0"},
-        {"x": 75, "y": -30, "color": "#8567f0"}
+        { "x": -50, "y": 12, "color": "#D0506C" },
+        { "x": 50, "y": -75, "color": "#51adc0" },
+        { "x": 75, "y": -30, "color": "#8567f0" }
       ]
     }
   ],
   "videoReleasesData": {
-    "labels": [
-      "S",
-      "M",
-      "T",
-      "W",
-      "T",
-      "F",
-      "S"
-    ],
+    "labels": ["S", "M", "T", "W", "T", "F", "S"],
     "datasets": [
       {
         "label": "Dataset 1",
         "display": false,
         "backgroundColor": "#51adc0",
-        "data": [
-          45000,
-          55000,
-          55000,
-          70000,
-          55000,
-          45000,
-          55000
-        ]
-      }, {
+        "data": [45000, 55000, 55000, 70000, 55000, 45000, 55000]
+      },
+      {
         "label": "Dataset 2",
-        "backgroundColor": "#ff556f",
-        "data": [
-          -45000,
-          -50000,
-          -30000,
-          -55000,
-          -70000,
-          -55000,
-          -30000
-        ]
+        "backgroundColor": "#D0506C",
+        "data": [-45000, -50000, -30000, -55000, -70000, -55000, -30000]
       }
     ]
   },
@@ -78,33 +55,30 @@
     },
     "stackedChartData": {
       "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
-      "datasets": [{
-        "backgroundColor": "#ff556f",
-        "data": [
-          25, 10, 14, 51
-        ]
-      }, {
-        "backgroundColor": "#8567f0",
-        "data": [
-          12, 24, 56, 9
-        ]
-      }, {
-        "backgroundColor": "#acb0be",
-        "data": [
-          42, 18, 18, 25
-        ]
-      },{
-        "backgroundColor": "#51adc0",
-        "data": [
-          21, 48, 12, 15
-        ]
-      }]
+      "datasets": [
+        {
+          "backgroundColor": "#D0506C",
+          "data": [25, 10, 14, 51]
+        },
+        {
+          "backgroundColor": "#8567f0",
+          "data": [12, 24, 56, 9]
+        },
+        {
+          "backgroundColor": "#acb0be",
+          "data": [42, 18, 18, 25]
+        },
+        {
+          "backgroundColor": "#51adc0",
+          "data": [21, 48, 12, 15]
+        }
+      ]
     },
     "doughnutRoundData": [
-      {"data": "0-15 seconds", "color": "#51adc0"},
-      {"data": "15-30 seconds", "color": "#8567f0"},
-      {"data": "30-45 seconds", "color": "#ff556f"},
-      {"data": "45-60 seconds", "color": "#acb0be"}
+      { "data": "0-15 seconds", "color": "#51adc0" },
+      { "data": "15-30 seconds", "color": "#8567f0" },
+      { "data": "30-45 seconds", "color": "#D0506C" },
+      { "data": "45-60 seconds", "color": "#acb0be" }
     ]
   },
   "pacingChartData": {
@@ -126,8 +100,8 @@
       },
       {
         "label": "Medium",
-        "backgroundColor": "#ff556f",
-        "borderColor": "#ff556f",
+        "backgroundColor": "#D0506C",
+        "borderColor": "#D0506C",
         "borderWidth": 1,
         "data": [4, 5, 4, 2]
       },
@@ -140,38 +114,224 @@
       }
     ]
   },
-  "compareSharesData": {
-    "labels": [
-      "#fff20d",
-      "#f8b90b",
-      "#eb7919",
-      "#dd501d",
-      "#cc2226",
-      "#b83057",
-      "#923683",
-      "#79609b",
-      "#3178b0",
-      "#229a78",
-      "#13862b",
-      "#aac923"
-    ],
-    "datasets": [
-      {
-        "label": "My First dataset",
-        "backgroundColor": "rgba(255, 85, 111,0.6)",
-        "borderColor": "transparent",
-        "pointBackgroundColor": "rgb(255, 85, 111,1)",
-        "pointBorderColor": "transparent",
-        "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56]
+  "compareSharesData": [
+    {
+      "type": "Facebook",
+      "datas": {
+        "labels": [
+          {
+            "color": "#cc2226",
+            "count": "96.7",
+            "name": "Red",
+            "selected": true
+          },
+          {
+            "color": "#dd501d",
+            "count": "25.7",
+            "name": "Red-Orange",
+            "selected": false
+          },
+          {
+            "color": "#eb7919",
+            "count": "50.1",
+            "name": "Orange",
+            "selected": false
+          },
+          {
+            "color": "#f8b90b",
+            "count": "15.7",
+            "name": "Yellow-Orange",
+            "selected": false
+          },
+          {
+            "color": "#fff20d",
+            "count": "55.6",
+            "name": "Yellow",
+            "selected": true
+          },
+          {
+            "color": "#aac923",
+            "count": "15.2",
+            "name": "Yellow-Green",
+            "selected": false
+          },
+          {
+            "color": "#13862b",
+            "count": "48.1",
+            "name": "Green",
+            "selected": false
+          },
+          {
+            "color": "#229a78",
+            "count": "25",
+            "name": "Blue-Green",
+            "selected": false
+          },
+          {
+            "color": "#3178b0",
+            "count": "100",
+            "name": "Blue",
+            "selected": true
+          },
+          {
+            "color": "#79609b",
+            "count": "40.4",
+            "name": "Blue-Purple",
+            "selected": false
+          },
+          {
+            "color": "#923683",
+            "count": "18.1",
+            "name": "Purple",
+            "selected": false
+          },
+          {
+            "color": "#b83057",
+            "count": "25.7",
+            "name": "Red-Purple",
+            "selected": false
+          }
+        ],
+        "datasets": [
+          {
+            "label": "Facebook",
+            "backgroundColor": "rgba(255, 255, 255, 0.3)",
+            "borderColor": "transparent",
+            "pointBackgroundColor": "#ffffff",
+            "pointBorderColor": "#ffffff",
+            "data": [75, 25, 50, 15, 55, 15, 48, 25, 100, 40, 18, 25]
+          }
+        ]
       },
-      {
-        "label": "My Second dataset",
-        "backgroundColor": "rgba(81, 173, 192,0.6)",
-        "borderColor": "transparent",
-        "pointBackgroundColor": "rgba(81, 173, 192,1)",
-        "pointBorderColor": "transparent",
-        "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56]
-      }
-    ]
-  }
+      "progress": [
+        {
+          "leftTitle": "Blue",
+          "color": "#3178b0",
+          "rightTitle": "91.6k Shares",
+          "value": 60
+        },
+        {
+          "leftTitle": "Red",
+          "color": "#cc2226",
+          "rightTitle": "64.3k Shares",
+          "value": 45
+        },
+        {
+          "leftTitle": "Yellow",
+          "color": "#fff20d",
+          "rightTitle": "54.8k Shares",
+          "value": 30
+        }
+      ]
+    },
+    {
+      "type": "YouTube",
+      "datas": {
+        "labels": [
+          {
+            "color": "#cc2226",
+            "count": "96.7",
+            "name": "Red",
+            "selected": false
+          },
+          {
+            "color": "#dd501d",
+            "count": "25.7",
+            "name": "Red-Orange",
+            "selected": true
+          },
+          {
+            "color": "#eb7919",
+            "count": "50.1",
+            "name": "Orange",
+            "selected": false
+          },
+          {
+            "color": "#f8b90b",
+            "count": "15.7",
+            "name": "Yellow-Orange",
+            "selected": true
+          },
+          {
+            "color": "#fff20d",
+            "count": "55.6",
+            "name": "Yellow",
+            "selected": false
+          },
+          {
+            "color": "#aac923",
+            "count": "15.2",
+            "name": "Yellow-Green",
+            "selected": false
+          },
+          {
+            "color": "#13862b",
+            "count": "48.1",
+            "name": "Green",
+            "selected": true
+          },
+          {
+            "color": "#229a78",
+            "count": "25",
+            "name": "Blue-Green",
+            "selected": false
+          },
+          {
+            "color": "#3178b0",
+            "count": "100",
+            "name": "Blue",
+            "selected": false
+          },
+          {
+            "color": "#79609b",
+            "count": "40.4",
+            "name": "Blue-Purple",
+            "selected": false
+          },
+          {
+            "color": "#923683",
+            "count": "18.1",
+            "name": "Purple",
+            "selected": false
+          },
+          {
+            "color": "#b83057",
+            "count": "25.7",
+            "name": "Red-Purple",
+            "selected": false
+          }
+        ],
+        "datasets": [
+          {
+            "label": "YouTube",
+            "backgroundColor": "rgba(255, 255, 255, 0.3)",
+            "borderColor": "transparent",
+            "pointBackgroundColor": "#ffffff",
+            "pointBorderColor": "#ffffff",
+            "data": [30, 100, 25, 70, 22, 26, 55, 15, 48, 25, 30, 50]
+          }
+        ]
+      },
+      "progress": [
+        {
+          "leftTitle": "Orange",
+          "color": "#dd501d",
+          "rightTitle": "98.1k Shares",
+          "value": 80
+        },
+        {
+          "leftTitle": "Yellow - Orange",
+          "color": "#f8b90b",
+          "rightTitle": "75.3k Shares",
+          "value": 65
+        },
+        {
+          "leftTitle": "Green",
+          "color": "#13862b",
+          "rightTitle": "66.8k Shares",
+          "value": 45
+        }
+      ]
+    }
+  ]
 }

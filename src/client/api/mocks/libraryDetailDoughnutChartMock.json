@@ -1,0 +1,84 @@
+{
+  "doughnutData": [
+    {
+      "title": "Frame Rate",
+      "secondTitle": "24fps",
+      "average": [30, 12, 6, 52],
+      "libraryData": [15, 30, 5, 50],
+      "industryData": [45, 15, 25, 15],
+      "libraryFpsData": { "percentage": "52", "fps": "24" },
+      "industryFpsData": { "percentage": "36", "fps": "45" },
+      "lineChartData": {
+        "labels": ["S", "M", "T", "W", "T", "F", "S"],
+        "datasets": [
+          {
+            "data": [40, 55, 43, 69, 81, 95, 12]
+          },
+          {
+            "data": [14, 5, 65, 85, 40, 50, 45]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Pacing",
+      "secondTitle": "Fastest",
+      "average": [12, 15, 15, 68],
+      "libraryData": [3, 10, 27, 60],
+      "industryData": [15, 22, 18, 45],
+      "libraryFpsData": { "percentage": "40", "fps": "39" },
+      "industryFpsData": { "percentage": "60", "fps": "47" },
+      "lineChartData": {
+        "labels": ["S", "M", "T", "W", "T", "F", "S"],
+        "datasets": [
+          {
+            "data": [10, 20, 32, 48, 60, 95, 22]
+          },
+          {
+            "data": [10, 90, 20, 80, 30, 70, 40]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Shots",
+      "secondTitle": "12 Shots",
+      "average": [15, 22, 18, 45],
+      "libraryData": [45, 15, 25, 15],
+      "industryData": [15, 30, 5, 50],
+      "libraryFpsData": { "percentage": "44", "fps": "55" },
+      "industryFpsData": { "percentage": "72", "fps": "29" },
+      "lineChartData": {
+        "labels": ["S", "M", "T", "W", "T", "F", "S"],
+        "datasets": [
+          {
+            "data": [30, 45, 32, 58, 71, 95, 22]
+          },
+          {
+            "data": [14, 10, 70, 90, 45, 55, 50]
+          }
+        ]
+      }
+    },
+    {
+      "title": "Format",
+      "secondTitle": "Live Action",
+      "average": [15, 17, 30, 48],
+      "libraryData": [15, 22, 18, 45],
+      "industryData": [3, 10, 27, 60],
+      "libraryFpsData": { "percentage": "64", "fps": "44" },
+      "industryFpsData": { "percentage": "55", "fps": "56" },
+      "lineChartData": {
+        "labels": ["S", "M", "T", "W", "T", "F", "S"],
+        "datasets": [
+          {
+            "data": [15, 45, 5, 58, 41, 55, 72]
+          },
+          {
+            "data": [14, 10, 40, 20, 45, 95, 30]
+          }
+        ]
+      }
+    }
+  ]
+}

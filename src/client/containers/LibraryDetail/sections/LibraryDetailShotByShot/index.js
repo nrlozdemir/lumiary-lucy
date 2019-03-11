@@ -134,11 +134,9 @@ class LibraryDetailShotByShot extends React.Component {
             </div>
           </div>
         ) : (
-          <div className="col-12 shadow-1 mt-48 mb-48 bg-dark-grey-blue pb-32">
+          <div className="col-12 shadow-1 mt-48 mb-48 bg-dark-grey-blue">
             <div className="col-12">
-              <h2 className="font-secondary-first text-center pt-48 pb-48 font-size-18">
-                Shot by Shot
-              </h2>
+              <h2 className={style.sliderHeader}>Shot by Shot</h2>
               <div className={style.sliderContainer} ref={this.slide}>
                 {videoList.map((video, i) => (
                   <div

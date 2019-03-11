@@ -17,7 +17,8 @@ export const barChartOptions = {
 				ticks: {
 					fontColor: "white"
 				},
-				stacked: true
+        stacked: true,
+        barThickness: 40
 			}
 		],
 		xAxes: [
