@@ -49,7 +49,6 @@ const AsyncSearch = props => {
       loadOptions={loadOptions}
       className={selectClass}
       onChange={onChange}
-      cacheOptions
       defaultOptions
       options={options}
       placeholder={placeholder}
@@ -57,6 +56,7 @@ const AsyncSearch = props => {
       styles={customStyles}
       value={value}
       isClearable={true}
+      formatCreateLabel={(input) => `Search: "${input}"`}
     />
   )
 }

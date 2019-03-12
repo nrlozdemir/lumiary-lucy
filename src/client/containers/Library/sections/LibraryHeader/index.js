@@ -15,16 +15,26 @@ class LibraryHeader extends React.Component {
     super(props)
 
     this.state = {
-      AsyncSearchValue: ""
+      AsyncSearchValue: "",
+      videos: this.props.library.vidoes,
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.library.videos !== this.props.library.videos) {
+      this.setState({
+        videos: this.props.library.videos
+      })
     }
   }
 
   async onLoadOptions(inputValue, callback) {
     try {
-      const { library } = this.props
-      if (library.videos && library.videos.length > 0 && inputValue) {
+      const { videos } = this.state
+      if (videos && videos.length > 0 && inputValue) {
+        console.log(videos)
         callback(
-          library.videos
+          videos
             .filter(({ title }) => searchTermInText(title, inputValue, true))
             .map(({ id, title }) => ({ value: String(id), label: title }))
         )
@@ -34,8 +44,21 @@ class LibraryHeader extends React.Component {
     }
   }
 
+  async onChangeSearch(option, changeFilter, filters) {
+    await changeFilter({
+      ...filters,
+      Search: {
+        value: option ? option.label : option,
+        new: option ? option.__isNew__ || false : false
+      }
+    })
+    this.setState({
+      AsyncSearchValue: option
+    })
+  }
+
   render() {
-    const { setSidebarVisible, changeFilter, library: { filters } } = this.props
+    const { setSidebarVisible, changeFilter, library: { filters, videos } } = this.props
     const { AsyncSearchValue } = this.state
 
     return (
@@ -47,18 +70,7 @@ class LibraryHeader extends React.Component {
             placeholder="Search a video…"
             customClass={style.filterSelect}
             value={AsyncSearchValue}
-            onChange={async (option) => {
-              await changeFilter({
-                ...filters,
-                Search: {
-                  value: option ? option.label : option,
-                  new: option ? option.__isNew__ || false : false
-                }
-              })
-              this.setState({
-                AsyncSearchValue: option
-              })
-            }}
+            onChange={(option) => this.onChangeSearch(option, changeFilter, filters)}
           />
         </div>
         <div>
