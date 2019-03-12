@@ -32,7 +32,6 @@ class LibraryHeader extends React.Component {
     try {
       const { videos } = this.state
       if (videos && videos.length > 0 && inputValue) {
-        console.log(videos)
         callback(
           videos
             .filter(({ title }) => searchTermInText(title, inputValue, true))
