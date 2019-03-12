@@ -5,7 +5,7 @@ const Switch = () => {
   return (
     <div className={style.switchContainer}>
       <input id="switch-shadow" className={style.switch} type="checkbox" />
-      <label for="switch-shadow" />
+      <label htmlFor="switch-shadow" />
     </div>
   )
 }

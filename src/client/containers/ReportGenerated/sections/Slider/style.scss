@@ -1,92 +1,92 @@
 .cardHeader {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 48px 40px;
-	p {
-		font-family: $font-family-ClanOT;
-		font-size: 18px;
-	}
-	.switchInner {
-		display: flex;
-		align-items: center;
-		font-family: $font-family-ClanOT;
-		font-size: 14px;
-		span {
-			padding: 16px;
-		}
-	}
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 48px 40px;
+  p {
+    font-family: $font-family-ClanOT;
+    font-size: 18px;
+  }
+  .switchInner {
+    display: flex;
+    align-items: center;
+    font-family: $font-family-ClanOT;
+    font-size: 14px;
+    span {
+      padding: 16px;
+    }
+  }
 }
 
 .cardContainer {
-	@include grid-container;
-	margin: 56px 56px 70px;
-	padding-bottom: 50px;
-	.card {
-		@include grid-column(4);
-		border: 1px solid $color-dusk;
-		background-color: $color-dark-five;
-		.marketCardHeader {
-			padding-top: 48px;
-			text-align: center;
-			font-family: $font-family-primary;
-			font-size: 32px;
-			color: $color-white;
-		}
-		.progressArea {
-			margin: 20px 48px;
-			.title {
-				text-align: center;
-				font-family: $font-family-ClanOTNews;
-				font-size: 14px;
-				padding: 20px 0;
-			}
-			.progressBar {
-				background-color: $color-dusk;
-				border-radius: 10px;
-			}
-			.percentageBlue {
-				border-radius: 10px;
-				height: 10px;
-				background-color: $color-cool-blue;
-				-webkit-transition: width 0.5s, height 0.5s;
-				transition: width 0.5s, height 0.5s;
-			}
-			.percentageRed {
-				border-radius: 10px;
-				height: 10px;
-				background-color: $color-coral-pink;
-				-webkit-transition: width 0.5s, height 0.5s;
-				transition: width 0.5s, height 0.5s;
-			}
-			.progressText {
-				color: $color-white;
-				font-size: 14px;
-				font-family: $font-family-ClanOTNews;
-				.leftTitle {
-					float: left;
-				}
+  @include grid-container;
+  margin: 56px 56px 70px;
+  padding-bottom: 50px;
+  .card {
+    @include grid-column(4);
+    border: 1px solid $color-dusk;
+    background-color: $color-dark-five;
+    .marketCardHeader {
+      padding-top: 48px;
+      text-align: center;
+      font-family: $font-family-primary;
+      font-size: 32px;
+      color: $color-white;
+    }
+    .progressArea {
+      margin: 20px 48px;
+      .title {
+        text-align: center;
+        font-family: $font-family-ClanOTNews;
+        font-size: 14px;
+        padding: 20px 0;
+      }
+      .progressBar {
+        background-color: $color-dusk;
+        border-radius: 10px;
+      }
+      .percentageBlue {
+        border-radius: 10px;
+        height: 10px;
+        background-color: $color-cool-blue;
+        -webkit-transition: width 0.5s, height 0.5s;
+        transition: width 0.5s, height 0.5s;
+      }
+      .percentageRed {
+        border-radius: 10px;
+        height: 10px;
+        background-color: $color-coral-pink;
+        -webkit-transition: width 0.5s, height 0.5s;
+        transition: width 0.5s, height 0.5s;
+      }
+      .progressText {
+        color: $color-white;
+        font-size: 14px;
+        font-family: $font-family-ClanOTNews;
+        .leftTitle {
+          float: left;
+        }
 
-				.rightTitle {
-					float: right;
-				}
-				&::after {
-					content: '';
-					clear: both;
-					display: table;
-				}
-			}
-		}
-	}
-	.cardDescription {
-		margin: 0 48px 48px 48px;
-		font-family: $font-family-ClanOTNews;
-		font-size: 14px;
-		display: -webkit-box;
-		-webkit-line-clamp: 3;
-		-webkit-box-orient: vertical;
-		overflow: hidden;
-		max-height: 85px;
-		height: 100%;
-	}
+        .rightTitle {
+          float: right;
+        }
+        &::after {
+          content: '';
+          clear: both;
+          display: table;
+        }
+      }
+    }
+  }
+  .cardDescription {
+    margin: 0 48px 48px 48px;
+    font-family: $font-family-ClanOTNews;
+    font-size: 14px;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    max-height: 85px;
+    height: 100%;
+  }
 }

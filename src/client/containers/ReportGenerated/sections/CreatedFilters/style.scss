@@ -1,32 +1,32 @@
 .filtersArea {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	flex-wrap: wrap;
-	margin: -12px;
-	.filtersAreaItem {
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		border-radius: 8px;
-		border: 1px solid $color-dusk;
-		background-color: $color-dusk;
-		padding: 12px 24px;
-		flex: 1 1 24px;
-		margin: 12px;
-		p {
-			font-family: $font-family-ClanOTNews;
-			font-size: 12px;
-		}
-		span {
-			border-radius: 8px;
-			background-color: #303a5d;
-			font-family: $font-family-ClanOT;
-			font-size: 14px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
-			padding: 11px 24px;
-		}
-	}
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  margin: -12px;
+  .filtersAreaItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: 8px;
+    border: 1px solid $color-dusk;
+    background-color: $color-dusk;
+    padding: 12px 24px;
+    flex: 1 1 24px;
+    margin: 12px;
+    p {
+      font-family: $font-family-ClanOTNews;
+      font-size: 12px;
+    }
+    span {
+      border-radius: 8px;
+      background-color: #303a5d;
+      font-family: $font-family-ClanOT;
+      font-size: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 11px 24px;
+    }
+  }
 }
