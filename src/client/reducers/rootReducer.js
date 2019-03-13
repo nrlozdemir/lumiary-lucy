@@ -7,6 +7,7 @@ import Marketview from './marketview'
 import Panoptic from './panoptic'
 import LibraryDetail from './libraryDetail'
 import Reports from './reports'
+import GeneratedReport from './generatedReport'
 import app from './app'
 
 const rootReducer = (history) =>
@@ -18,6 +19,7 @@ const rootReducer = (history) =>
     Panoptic,
     LibraryDetail,
     Reports,
+    GeneratedReport,
     form: formReducer,
   })
 
