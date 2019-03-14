@@ -69,6 +69,12 @@ const routes = [
     component: 'Reports',
   },
   {
+    path: '/reports/generated',
+    exact: true,
+    removeNavbar: true,
+    component: 'ReportGenerated',
+  },
+  {
     path: '*',
     component: 'NotFound',
   },

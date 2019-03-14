@@ -11,13 +11,15 @@ export const types = {
   LOAD_VIDEOS: "Library/LOAD_VIDEOS",
   LOAD_VIDEOS_SUCCESS: "Library/LOAD_VIDEOS_SUCCESS",
   LOAD_VIDEOS_ERROR: "Library/LOAD_VIDEOS_ERROR",
+
   CHANGE_FILTER: "Library/CHANGE_FILTER"
 };
 export const actions = {
   loadVideos: () => ({ type: types.LOAD_VIDEOS }),
   loadVideosSuccess: payload => ({ type: types.LOAD_VIDEOS_SUCCESS, payload }),
   loadVideosError: error => ({ type: types.LOAD_VIDEOS, error }),
-  changeFilter: payload => ({type: types.CHANGE_FILTER, payload})
+
+  changeFilter: payload => ({ type: types.CHANGE_FILTER, payload })
 };
 
 export const initialState = fromJS({
@@ -57,7 +59,7 @@ export const selectLibraryDomain = state => state.Library
 export const makeSelectLibrary = () =>
   createSelector(selectLibraryDomain, substate => substate.toJS());
 
-export const makeSelectVideoFilters = () => 
+export const makeSelectVideoFilters = () =>
   createSelector(selectLibraryDomain, state => state.toJS().filters);
 
 export default libraryReducer;

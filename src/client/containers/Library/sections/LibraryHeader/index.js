@@ -1,32 +1,75 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { bindActionCreators, compose } from "redux"
+import { createStructuredSelector } from "reselect";
+
 import style from './style.scss'
 
+import { actions, makeSelectLibrary } from 'Reducers/library'
+import AsyncSearch from 'Components/Form/AsyncSearch'
 import Button from 'Components/Form/Button'
-import Input from 'Components/Form/Input'
+import { searchTermInText } from 'Utils'
 
-class LibraryDetail extends React.Component {
+class LibraryHeader extends React.Component {
   constructor(props) {
     super(props)
+
     this.state = {
-      textVal: '',
+      AsyncSearchValue: "",
+      videos: this.props.library.vidoes,
     }
   }
 
-  onChange(e) {
-    this.setState({ textVal: e.target.value })
+  componentDidUpdate(prevProps) {
+    if (prevProps.library.videos !== this.props.library.videos) {
+      this.setState({
+        videos: this.props.library.videos
+      })
+    }
+  }
+
+  async onLoadOptions(inputValue, callback) {
+    try {
+      const { videos } = this.state
+      if (videos && videos.length > 0 && inputValue) {
+        callback(
+          videos
+            .filter(({ title }) => searchTermInText(title, inputValue, true))
+            .map(({ id, title }) => ({ value: String(id), label: title }))
+        )
+      }
+    } catch (e) {
+      console.log('error', e)
+    }
+  }
+
+  async onChangeSearch(option, changeFilter, filters) {
+    await changeFilter({
+      ...filters,
+      Search: {
+        value: option ? option.label : option,
+        new: option ? option.__isNew__ || false : false
+      }
+    })
+    this.setState({
+      AsyncSearchValue: option
+    })
   }
 
   render() {
-    const { textVal } = this.state
-    const { setSidebarVisible } = this.props
+    const { setSidebarVisible, changeFilter, library: { filters, videos } } = this.props
+    const { AsyncSearchValue } = this.state
+
     return (
       <div className={style.headerContainer}>
         <div>
-          <Input
+          <AsyncSearch
+            name="libraryFilterInput"
+            loadOptions={this.onLoadOptions.bind(this)}
             placeholder="Search a video…"
-            onChange={(e) => this.onChange(e)}
-            value={textVal}
-            customClass={style.librarySearchInput}
+            customClass={style.filterSelect}
+            value={AsyncSearchValue}
+            onChange={(option) => this.onChangeSearch(option, changeFilter, filters)}
           />
         </div>
         <div>
@@ -47,4 +90,15 @@ class LibraryDetail extends React.Component {
   }
 }
 
-export default LibraryDetail
+const mapStateToProps = createStructuredSelector({
+  library: makeSelectLibrary()
+});
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(LibraryHeader)

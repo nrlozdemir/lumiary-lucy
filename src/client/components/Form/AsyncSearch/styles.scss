@@ -1,0 +1,25 @@
+.Select {
+  font-family: $font-family-ClanOTNews;
+  font-size: 14px;
+  margin: 10px 0;
+  div {
+    background-image: none;
+    border-radius: 8px;
+    border: none !important;
+    box-shadow: none !important;
+
+    > div:nth-child(2) > div:nth-child(2),
+    > div:nth-child(2) > div:nth-child(3){
+      display: none;
+    }
+  }
+  &:nth-last-child(2){
+    background-color: $color-dusk;
+  }
+  span{
+    visibility: hidden;
+  }
+  svg:nth-child(2){
+    visibility: hidden;
+  }
+}
