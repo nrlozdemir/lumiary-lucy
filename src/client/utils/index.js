@@ -52,4 +52,19 @@ function chartCombineDataset(data, options, globalOptions) {
   }
 }
 
-export { randomKey, socialIconSelector, toSlug, chartCombineDataset }
+function searchTermInText(text, term, New) {
+  const splitWords = term.split(" ");
+  let bool = false;
+
+  if (New) {
+    splitWords.forEach(word => {
+      if ((String(text).toLowerCase()).indexOf(String(word).toLowerCase()) > -1) bool = true
+    });
+  } else {
+    if (text === term) bool = true
+  }
+
+  return bool
+}
+
+export { randomKey, searchTermInText, socialIconSelector, toSlug, chartCombineDataset }
