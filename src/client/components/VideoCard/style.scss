@@ -1,19 +1,72 @@
 .cardContainer {
-  margin-bottom: 40px;
+  margin: 10px 10px 40px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-  transition: box-shadow 0.3s ease-in-out;
+  // transition: all 0.4s ease-in-out;
   position: relative;
+  box-sizing: content-box;
+  clear: both;
+  width: calc(25% - 20px);
+  display: flex;
+  flex-direction: column;
 
   @include grid-media($small-grid) {
     margin-top: 20px;
     @include grid-column(12);
   }
 
+  .progressBar {
+    height: 4px;
+    background: #fff;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    z-index: 10;
+    transition: width 0.4s ease-in-out;
+    opacity: 0;
+    box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.5);
+  }
+
+  .hidden {
+    z-index: 1 !important;
+  }
+
+  .show {
+    z-index: 1 !important;
+  }
+  .cardInner {
+    transition: all 0.4s ease-in-out;
+  }
   &:hover {
-    box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5);
+    .progressBar {
+      opacity: 1;
+    }
+    .cardInner {
+      position: absolute;
+      left: -35px;
+      right: -35px;
+      bottom: -15px;
+      top: -15px;
+      width: calc(100% + 70px);
+      height: calc(100% + 38px);
+      z-index: 10;
+      box-shadow: 0 10px 20px 0 #000;
+      // transform: scale(1.2);
+    }
+    .cardHandle {
+      position: relative;
+      display: block;
+    }
     .cardImage {
       &:after {
         opacity: 1;
+      }
+    }
+    .cardBody {
+      .cardLink {
+        display: flex;
+      }
+      .cardInfo {
+        display: none;
       }
     }
   }
@@ -27,6 +80,13 @@
     border: 1px solid $color-dusk;
     box-sizing: border-box;
 
+    canvas {
+      z-index: 3;
+    }
+    video {
+      z-index: -1;
+    }
+    canvas,
     video {
       position: absolute;
       width: 100%;
@@ -34,6 +94,7 @@
       top: 0;
       left: 0;
       object-fit: cover;
+      // transition: opacity 0.3s ease-in-out;
     }
 
     &:after {
@@ -45,12 +106,41 @@
       left: 0;
       background: rgba(0, 0, 0, 0.4);
       opacity: 0;
-      transition: all 0.3s;
-      -webkit-transition: all 0.3s;
+      // transition: all 0.3s;
+      // -webkit-transition: all 0.3s;
     }
   }
   .cardBody {
     position: relative;
+    .cardInfo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 50px;
+    }
+    .cardLink {
+      display: none;
+      align-items: center;
+      justify-content: center;
+      height: 50px;
+      width: 100%;
+      span {
+        font-size: 20px;
+      }
+      a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: ClanOT;
+        font-size: 14px;
+        color: #ffffff;
+        text-decoration: none;
+      }
+      .icon {
+        margin-left: 8px;
+      }
+    }
     .bodyHeader {
       display: flex;
       align-items: center;
