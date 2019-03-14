@@ -35,7 +35,7 @@
   "homepage": "https://github.com/quickframe/lumiary#readme",
   "dependencies": {
     "@babel/polyfill": "^7.0.0",
-    "@saypr/bubble-chart": "^0.2.1",
+    "@saypr/bubble-chart": "^0.2.3",
     "@sentry/browser": "^4.0.5",
     "@sentry/node": "^4.4.2",
     "axios": "^0.18.0",
