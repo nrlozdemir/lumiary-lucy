@@ -69,3 +69,15 @@ export function ajax({ method, params, token, url }) {
 			return err.response;
 		});
 }
+
+export function findIdDetail(data, detailId, detailName) {
+	const currentId = data.filter(({ id }) => id == detailId);
+
+	console.log(currentId)
+
+	if (currentId && currentId.length) {
+		return currentId[0][detailName];
+	}
+
+	return {};
+}

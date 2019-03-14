@@ -77,7 +77,7 @@ module.exports = {
       children: true,
       minChunks: 3,
     }),
-    new CaseSensitivePathsPlugin({ debug: true }),
+    //new CaseSensitivePathsPlugin({ debug: true }),
     new webpack.DllReferencePlugin({
       context: __dirname,
       manifest: require('../build/library/library.json'),
