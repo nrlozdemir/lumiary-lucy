@@ -1,0 +1,62 @@
+.marketViewTopVideos {
+  background-color: $color-dark-grey-blue;
+
+  .barChartHeader {
+    .title {
+      font-size: 18px;
+    }
+  }
+
+  .selects {
+    display: flex;
+    float: right;
+    position: relative;
+    z-index: 12;
+    > div {
+      margin: 0 0 0 24px;
+    }
+
+    .selectStyles {
+      border: 1px solid $color-dusk;
+    }
+  }
+
+  .barChartContainer {
+    position: relative;
+    z-index: 1;
+
+    &:before {
+      content: '';
+      background-color: $color-dark-five;
+      border-right: 1px solid $color-dusk;
+      height: calc(100% - 40px);
+      width: calc(100% - 62px);
+      position: absolute;
+      left: 53px;
+      top: 7px;
+      z-index: -1;
+    }
+  }
+
+  .references {
+    display: table;
+    margin: 48px auto;
+    .referenceItem {
+      display: inline-block;
+      font-size: 14px;
+      line-height: 1.8rem;
+      text-align: center;
+      span {
+        width: 16px;
+        height: 16px;
+        display: inline-block;
+        margin-bottom: -2px;
+        margin-right: 5px;
+        border-radius: 10px;
+      }
+    }
+    :not(:first-child) {
+      margin-left: 45px;
+    }
+  }
+}

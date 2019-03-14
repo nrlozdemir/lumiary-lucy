@@ -6,6 +6,7 @@ import panoptic from './panoptic'
 import quickview from './quickview'
 import marketview from './marketview'
 import reports from './reports'
+import generatedReport from './generatedReport'
 
 export default function* rootSaga() {
   yield all([
@@ -15,5 +16,6 @@ export default function* rootSaga() {
     ...panoptic,
     ...marketview,
     ...reports,
+    ...generatedReport,
   ])
 }

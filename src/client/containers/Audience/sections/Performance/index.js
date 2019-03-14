@@ -2,7 +2,7 @@ import React from 'react'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
 
 import Range from 'Components/Form/Range'
-import SelectFilters from "Components/SelectFilters";
+import SelectFilters from 'Components/SelectFilters'
 import style from 'Containers/Audience/style.scss'
 import { socialIconSelector } from 'Utils'
 
@@ -10,73 +10,148 @@ export class Performance extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-			slider: [0, 100],
-			selectViews: '',
-			selectDate: '',
+      slider: [0, 100],
+      selectViews: '',
+      selectDate: '',
       bubblesMales: [
         {
           value: 30,
           visual: 'youtube',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
         {
           value: 25,
           visual: 'facebook',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
         {
           value: 20,
           visual: 'twitter',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
         {
           value: 15,
           visual: 'pinterest',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
         {
           value: 10,
           visual: 'instagram',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
       ],
       bubblesFemales: [
         {
           value: 20,
           visual: 'youtube',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
         {
           value: 35,
           visual: 'facebook',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
         {
           value: 20,
           visual: 'twitter',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
         {
           value: 15,
           visual: 'pinterest',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
         {
           value: 10,
           visual: 'instagram',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
       ],
       bubblesBoth: [
         {
           value: 20,
           visual: 'youtube',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
         {
           value: 25,
           visual: 'facebook',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
         {
           value: 20,
           visual: 'twitter',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
         {
           value: 15,
           visual: 'pinterest',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
         {
           value: 20,
           visual: 'instagram',
+          toolTip:
+            Math.round(Math.random() * 1000) +
+            '.' +
+            Math.ceil(Math.random() * 9) +
+            'k views',
         },
       ],
     }
@@ -85,82 +160,142 @@ export class Performance extends React.Component {
   updateSlider() {
     const randomOne = [
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'youtube',
       },
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'facebook',
       },
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'twitter',
       },
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'pinterest',
       },
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'instagram',
       },
     ]
     const randomTwo = [
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'youtube',
       },
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'facebook',
       },
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'twitter',
       },
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'pinterest',
       },
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'instagram',
       },
     ]
     const randomTree = [
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'youtube',
       },
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'facebook',
       },
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'twitter',
       },
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'pinterest',
       },
       {
-				value: Math.max(Math.floor(Math.random() * 30), 15),
-				toolTip: Math.round(Math.random() * 1000) + '.' + Math.ceil(Math.random() * 9) + 'k views',
+        value: Math.max(Math.floor(Math.random() * 30), 15),
+        toolTip:
+          Math.round(Math.random() * 1000) +
+          '.' +
+          Math.ceil(Math.random() * 9) +
+          'k views',
         visual: 'instagram',
       },
     ]
@@ -176,9 +311,9 @@ export class Performance extends React.Component {
       slider: [min, max],
       bubblesBoth,
       bubblesFemales,
-			bubblesMales,
-			selectViews,
-			selectDate
+      bubblesMales,
+      selectViews,
+      selectDate,
     } = this.state
     console.log(this.state)
     const handleStyle = [
@@ -230,14 +365,18 @@ export class Performance extends React.Component {
         <div className={style.cardTitle + ' col-12'}>
           <span>Performance By Age, Gender and Date</span>
           <div className={style.selects}>
-						<SelectFilters selectViewsShow={true} selectViews={selectViews} />
+            <SelectFilters selectViewsShow={true} selectViews={selectViews} />
             <SelectFilters selectDateShow={true} selectDate={selectDate} />
           </div>
         </div>
         <div className={'col-12'}>
           <div className={'col-4'}>
             <div className={style.bubbleCont}>
-              <BubbleChart size={[800, 600]} fromPercentages={true} options={{toolTipWidth: 200, toolTipHeight: 75}}>
+              <BubbleChart
+                size={[800, 600]}
+                fromPercentages={true}
+                options={{ toolTipWidth: 200, toolTipHeight: 75 }}
+              >
                 {bubblesMales.map((bubble, i) => (
                   <Bubble
                     key={'bubble-' + i}
@@ -254,10 +393,12 @@ export class Performance extends React.Component {
                         }
                       />
                     </Visual>
-										<ToolTip>
-											<div className={style.bubbleTooltip}>{bubble.visual}</div>
-											<div className={style.bubbleTooltip}>{bubble.toolTip}</div>
-										</ToolTip>
+                    <ToolTip>
+                      <div className={style.bubbleTooltip}>{bubble.visual}</div>
+                      <div className={style.bubbleTooltip}>
+                        {bubble.toolTip}
+                      </div>
+                    </ToolTip>
                   </Bubble>
                 ))}
               </BubbleChart>
@@ -268,7 +409,11 @@ export class Performance extends React.Component {
           </div>
           <div className={'col-4'}>
             <div className={style.bubbleCont}>
-              <BubbleChart size={[800, 600]} fromPercentages={true} options={{toolTipWidth: 200, toolTipHeight: 75}}>
+              <BubbleChart
+                size={[800, 600]}
+                fromPercentages={true}
+                options={{ toolTipWidth: 200, toolTipHeight: 75 }}
+              >
                 {bubblesFemales.map((bubble, i) => (
                   <Bubble
                     key={'bubble-' + i}
@@ -285,10 +430,12 @@ export class Performance extends React.Component {
                         }
                       />
                     </Visual>
-										<ToolTip>
-											<div className={style.bubbleTooltip}>{bubble.visual}</div>
-											<div className={style.bubbleTooltip}>{bubble.toolTip}</div>
-										</ToolTip>
+                    <ToolTip>
+                      <div className={style.bubbleTooltip}>{bubble.visual}</div>
+                      <div className={style.bubbleTooltip}>
+                        {bubble.toolTip}
+                      </div>
+                    </ToolTip>
                   </Bubble>
                 ))}
               </BubbleChart>
@@ -299,7 +446,11 @@ export class Performance extends React.Component {
           </div>
           <div className={'col-4'}>
             <div className={style.bubbleCont}>
-              <BubbleChart size={[800, 600]} fromPercentages={true} options={{toolTipWidth: 200, toolTipHeight: 75}}>
+              <BubbleChart
+                size={[800, 600]}
+                fromPercentages={true}
+                options={{ toolTipWidth: 200, toolTipHeight: 75 }}
+              >
                 {bubblesBoth.map((bubble, i) => (
                   <Bubble
                     key={'bubble-' + i}
@@ -316,10 +467,12 @@ export class Performance extends React.Component {
                         }
                       />
                     </Visual>
-										<ToolTip>
-											<div className={style.bubbleTooltip}>{bubble.visual}</div>
-											<div className={style.bubbleTooltip}>{bubble.toolTip}</div>
-										</ToolTip>
+                    <ToolTip>
+                      <div className={style.bubbleTooltip}>{bubble.visual}</div>
+                      <div className={style.bubbleTooltip}>
+                        {bubble.toolTip}
+                      </div>
+                    </ToolTip>
                   </Bubble>
                 ))}
               </BubbleChart>
