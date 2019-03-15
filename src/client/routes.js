@@ -61,6 +61,7 @@ const routes = [
   {
     path: '/marketview/:detail',
     exact: true,
+    removeNavbar: true,
     component: 'Marketview',
   },
   {
@@ -93,8 +94,8 @@ const RouteWithSubRoutes = (route) => (
           Component === null ? (
             <RouterLoading />
           ) : (
-            <Component {...props} match={props.match} />
-          )
+              <Component {...props} match={props.match} />
+            )
         }
       </DynamicImport>
     )}

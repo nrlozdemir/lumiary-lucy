@@ -37,12 +37,12 @@ export class Detail extends React.Component {
     } = this.props
 
     if (!marketview.selectedVideo || marketview.loading) {
-      return <RouterLoading/>
+      return <RouterLoading />
     }
 
     return (
       <React.Fragment>
-        <Slider data={marketview} changeSelectedVideo={this.changeSelectedVideo}/>
+        <Slider data={marketview} changeSelectedVideo={this.changeSelectedVideo} />
         {competitorTopVideos && (
           <TopVideosCard chartData={competitorTopVideos} />
         )}
