@@ -18,16 +18,7 @@ class VideoSection extends React.Component {
       return <RouterLoading />
     }
     return (
-      <div
-        className="mt-50"
-        style={{
-          marginBottom: '50px',
-          display: 'flex',
-          flexWrap: 'wrap',
-          width: '100%',
-          justifyContent: 'space-between',
-        }}
-      >
+      <div className="mt-50 d-flex flex-grap justify-space-between">
         <VideoCardList data={this.props.library.videos} />
       </div>
     )
