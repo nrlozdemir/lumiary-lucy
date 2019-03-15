@@ -17,11 +17,8 @@ const Detail = (props) => (
   <DynamicImport removeNavbar load={() => import('./views/detail')}>
     {(Component) => Component === null
       ? <RouterLoading />
-      : (
-        <React.Fragment>
-          <Component {...props} />
-        </React.Fragment>
-      )}
+      : <Component {...props} />
+    }
   </DynamicImport>
 )
 
@@ -37,7 +34,6 @@ const Main = (props) => (
 export class Marketview extends React.Component {
   render() {
     const { match } = this.props;
-    console.log(match)
     return (
       <React.Fragment>
         {match.params.detail && (
