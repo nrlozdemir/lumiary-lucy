@@ -17,6 +17,25 @@ import TopVideosCard from 'Containers/Marketview/sections/detail/TopVideosCard'
 import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
 import RouterLoading from 'Components/RouterLoading'
 
+const topVideosReferences = [
+  {
+    className: 'bg-cool-blue',
+    text: 'Fast',
+  },
+  {
+    className: 'bg-lighter-purple',
+    text: 'Medium',
+  },
+  {
+    className: 'bg-coral-pink',
+    text: 'Slow',
+  },
+  {
+    className: 'bg-cool-grey',
+    text: 'Slowest',
+  },
+]
+
 /* eslint-disable react/prefer-stateless-function */
 export class Time extends React.Component {
   constructor(props) {
@@ -63,11 +82,19 @@ export class Time extends React.Component {
           data={marketview}
           changeSelectedVideo={this.changeSelectedVideo}
           className="mt-48"
+          title={`Top Performing ${activeDay
+            .charAt(0)
+            .toUpperCase()}${activeDay.slice(1)} Videos`}
         />
-        {competitorTopVideos && (
-          <TopVideosCard chartData={competitorTopVideos} />
-        )}
         {similarProperties && <TopSimilarProperties data={similarProperties} />}
+        {competitorTopVideos && (
+          <TopVideosCard
+            chartData={competitorTopVideos}
+            title="Top Performing Property Across All Days Of The Week"
+            selects={['Resolution']}
+            references={topVideosReferences}
+          />
+        )}
       </React.Fragment>
     )
   }

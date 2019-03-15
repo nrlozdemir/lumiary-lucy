@@ -12,9 +12,9 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
 import Slider from 'Containers/Marketview/sections/detail/Slider'
-import TopVideosCard from "Containers/Marketview/sections/detail/TopVideosCard"
-import TopSimilarProperties from "Containers/Marketview/sections/detail/TopSimilarProperties"
-import RouterLoading from "Components/RouterLoading"
+import TopVideosCard from 'Containers/Marketview/sections/detail/TopVideosCard'
+import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
+import RouterLoading from 'Components/RouterLoading'
 
 import style from '../style.scss'
 
@@ -33,16 +33,20 @@ export class Competitor extends React.Component {
   render() {
     const {
       marketview,
-      marketview: { competitorTopVideos, similarProperties }
+      marketview: { competitorTopVideos, similarProperties },
     } = this.props
 
     if (!marketview.selectedVideo || marketview.loading) {
-      return <RouterLoading/>
+      return <RouterLoading />
     }
 
     return (
       <React.Fragment>
-        <Slider data={marketview} changeSelectedVideo={this.changeSelectedVideo}/>
+        <Slider
+          data={marketview}
+          changeSelectedVideo={this.changeSelectedVideo}
+          title="Top Performing Competitor Videos"
+        />
         {competitorTopVideos && (
           <TopVideosCard chartData={competitorTopVideos} />
         )}

@@ -12,11 +12,34 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
 import Slider from 'Containers/Marketview/sections/detail/Slider'
-import TopVideosCard from "Containers/Marketview/sections/detail/TopVideosCard"
-import TopSimilarProperties from "Containers/Marketview/sections/detail/TopSimilarProperties"
-import RouterLoading from "Components/RouterLoading"
+import TopVideosCard from 'Containers/Marketview/sections/detail/TopVideosCard'
+import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
+import RouterLoading from 'Components/RouterLoading'
 
 import style from '../style.scss'
+
+const topVideosReferences = [
+  {
+    className: 'bg-cool-blue',
+    text: 'Facebook',
+  },
+  {
+    className: 'bg-lighter-purple',
+    text: 'Instagram',
+  },
+  {
+    className: 'bg-coral-pink',
+    text: 'Twitter',
+  },
+  {
+    className: 'bg-cool-grey',
+    text: 'Youtube',
+  },
+  {
+    className: 'bg-dusk"',
+    text: 'Pinterest',
+  },
+]
 
 /* eslint-disable react/prefer-stateless-function */
 export class Platform extends React.Component {
@@ -33,18 +56,25 @@ export class Platform extends React.Component {
   render() {
     const {
       marketview,
-      marketview: { competitorTopVideos, similarProperties }
+      marketview: { competitorTopVideos, similarProperties },
     } = this.props
 
     if (!marketview.selectedVideo || marketview.loading) {
-      return <RouterLoading/>
+      return <RouterLoading />
     }
 
     return (
       <React.Fragment>
-        <Slider data={marketview} changeSelectedVideo={this.changeSelectedVideo}/>
+        <Slider
+          data={marketview}
+          changeSelectedVideo={this.changeSelectedVideo}
+        />
         {competitorTopVideos && (
-          <TopVideosCard chartData={competitorTopVideos} />
+          <TopVideosCard
+            chartData={competitorTopVideos}
+            title="Top Videos Over Time By Platform"
+            references={topVideosReferences}
+          />
         )}
         {similarProperties && <TopSimilarProperties data={similarProperties} />}
       </React.Fragment>
