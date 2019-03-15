@@ -31,14 +31,17 @@ const random = file => {
   let data = file;
 
   data = data.replace(/"rN#(.*),(.*)#"/g, ($0, $1, $2) => {
+    // $1 = min, $2 = max
     return randomNumber(parseInt($1), parseInt($2));
   })
 
   data = data.replace(/"rNA#(.*),(.*),(.*)#"/g, ($0, $1, $2, $3) => {
+    // $1 = length, $2 = min, $3 = max
     return JSON.stringify(randomNumberArray(parseInt($1), parseInt($2), parseInt($3)));
   })
 
   data = data.replace(/"rP#(.*)#"/g, ($0, $1) => {
+    // $1 = length
     return JSON.stringify(randomPercentage(parseInt($1)));
   })
 
@@ -50,6 +53,8 @@ const random = file => {
 }
 
 const createMock = async (req, res) => {
+  
+  // Get Files
   let {
     libraryMock,
     libraryDetailColorTempMock: ColorTempMock,
@@ -64,6 +69,7 @@ const createMock = async (req, res) => {
     "libraryDetailShotByShotMock",
   ])
 
+  // Create mock json
   const mock = JSON.parse(libraryMock).map(library => ({
     ...library,
     ColorTempMock: JSON.parse(random(ColorTempMock)),
@@ -72,6 +78,7 @@ const createMock = async (req, res) => {
     ShotByShotMock: JSON.parse(random(ShotByShotMock))
   }))
 
+  // Create mock.json file
   fs.writeFile(path.join(root, `${mocks}/mock.json`), JSON.stringify(mock), (err) => {
     if (err) console.log(err)
   });
