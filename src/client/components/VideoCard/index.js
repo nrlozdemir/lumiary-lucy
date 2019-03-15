@@ -142,18 +142,19 @@ export class VideoCard extends Component {
                 </span>
                 <span className={style.title}>{video.title}</span>
               </div>
-              <div className={style.cardLink}>
-                <Link to={`/library/build-report/${video.id}`}>
-                  View Video Report
-                  <div className={style.icon}>
-                    <span className="icon-Right-Arrow-Circle">
-                      <span className="path1" />
-                      <span className="path2" />
-                      <span className="path3" />
-                    </span>
-                  </div>
-                </Link>
-              </div>
+              <Link
+                to={`/library/build-report/${video.id}`}
+                className={style.cardLink}
+              >
+                View Video Report
+                <div className={style.icon}>
+                  <span className="icon-Right-Arrow-Circle">
+                    <span className="path1" />
+                    <span className="path2" />
+                    <span className="path3" />
+                  </span>
+                </div>
+              </Link>
             </div>
           </div>
         </div>

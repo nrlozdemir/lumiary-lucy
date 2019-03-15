@@ -1,7 +1,6 @@
 .cardContainer {
   margin: 10px 10px 40px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-  // transition: all 0.4s ease-in-out;
   position: relative;
   box-sizing: content-box;
   clear: both;
@@ -125,17 +124,12 @@
       justify-content: center;
       height: 50px;
       width: 100%;
+      font-family: ClanOT;
+      font-size: 14px;
+      color: #ffffff;
+      text-decoration: none;
       span {
         font-size: 20px;
-      }
-      a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-family: ClanOT;
-        font-size: 14px;
-        color: #ffffff;
-        text-decoration: none;
       }
       .icon {
         margin-left: 8px;
