@@ -16,6 +16,29 @@ const selectClasses = cx('custom-select', style.selectStyles)
 const referencesClass = cx('font-secondary-second', style.references)
 const barChartClass = cx('col-12', style.barChartContainer)
 
+const defaultReferences = [
+  {
+    className: 'bg-cool-blue',
+    text: 'Barstool Sports',
+  },
+  {
+    className: 'bg-lighter-purple',
+    text: 'SB Nation',
+  },
+  {
+    className: 'bg-coral-pink',
+    text: 'ESPN',
+  },
+  {
+    className: 'bg-cool-grey',
+    text: 'Scout Media',
+  },
+  {
+    className: 'bg-dusk"',
+    text: 'Fansided',
+  },
+]
+
 class TopVideosCard extends Component {
   constructor(props) {
     super(props)
@@ -32,29 +55,40 @@ class TopVideosCard extends Component {
     return randomKey(5)
   }
 
+  generateSelectProps(selects) {
+    const props = {}
+
+    for (const item of selects) {
+      props[`select${item}`] = this.state[item]
+      props[`select${item}Show`] = true
+    }
+
+    return props
+  }
+
   render() {
-    const { selectResolution, selectLikes, selectDate } = this.state
-    const { chartData } = this.props
+    const {
+      chartData,
+      title = 'Top Videos Over Time By Competitor',
+      references = defaultReferences,
+      selects = ['Resolution', 'Likes', 'Date'],
+    } = this.props
+
+    const selectProps = this.generateSelectProps(selects);
+
     return (
       <div className="grid-collapse">
         <div className={barChartContainer}>
           <div className={barChartHeaderClass}>
             <div className="col-4 text-bold">
-              <p className={headerTitleClass}>
-                Top Videos Over Time By Competitor
-              </p>
+              <p className={headerTitleClass}>{title}</p>
             </div>
             <div className="col-8">
               <div className={style.selects}>
                 <SelectFilters
                   handleSelectFilters={this.handleSelectFilters}
                   selectClasses={selectClasses}
-                  selectResolution={selectResolution}
-                  selectLikes={selectLikes}
-                  selectDate={selectDate}
-                  selectResolutionShow={true}
-                  selectLikesShow={true}
-                  selectDateShow={true}
+                  {...selectProps}
                 />
               </div>
               <div className="clearFix" />
@@ -68,26 +102,12 @@ class TopVideosCard extends Component {
           </div>
           <div className="col-12">
             <div className={referencesClass}>
-              <div className={style.referenceItem}>
-                <span className="bg-cool-blue" />
-                Barstool Sports
-              </div>
-              <div className={style.referenceItem}>
-                <span className="bg-lighter-purple" />
-                SB Nation
-              </div>
-              <div className={style.referenceItem}>
-                <span className="bg-coral-pink" />
-                ESPN
-              </div>
-              <div className={style.referenceItem}>
-                <span className="bg-cool-grey" />
-                Scout Media
-              </div>
-              <div className={style.referenceItem}>
-                <span className="bg-dusk" />
-                Fansided
-              </div>
+              {references.map((ref) => (
+                <div className={style.referenceItem}>
+                  <span className={ref.className} />
+                  {ref.text}
+                </div>
+              ))}
             </div>
           </div>
         </div>
