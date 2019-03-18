@@ -12,7 +12,7 @@ import {
 
 import SelectFilters from 'Components/SelectFilters'
 import LineChart from 'Components/LineChart/Chart'
-import PointerCard from 'Components/PointerCard'
+import PointerCard from 'Components/PointerCardNew'
 import DoughnutChart from 'Components/Charts/LibraryDetail/Doughnut'
 
 class LibraryDetailDoughnutChart extends React.Component {
@@ -135,7 +135,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                     </div>
                   </div>
                   <div className={style.headerInfo}>
-                    <div></div>
+                    <div />
                     <div className={style.formWrapper}>
                       <SelectFilters
                         handleSelectFilters={this.handleSelectFilters}
@@ -174,9 +174,11 @@ class LibraryDetailDoughnutChart extends React.Component {
                     <PointerCard
                       data={{
                         topTitle: 'Based on Likes',
-                        pointerData: 140,
+                        pointerData: 120,
                         bottomText: 'of your library is shot in',
-                        likes: 50,
+                        avg: 103,
+                        percent: 16,
+                        fps: 24,
                       }}
                     />
                   </div>
