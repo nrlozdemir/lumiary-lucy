@@ -1,11 +1,11 @@
-* @voravor @alfonsogoberjr @jpraccio0722
+* @voravor @jpraccio0722 @jazzyguo
 
-/src/client/ @voravor @alfonsogoberjr @jpraccio0722 @musdy @yasardemirkent
+/src/client/ @voravor @jpraccio0722 @musdy @yasardemirkent @jazzyguo
 
-/Dockerfile @voravor @alfonsogoberjr @jpraccio0722
+/Dockerfile @voravor @jpraccio0722
 
-/package.json @voravor @alfonsogoberjr @jpraccio0722
+/package.json @voravor @jpraccio0722
 
-/.circleci/* @voravor @alfonsogoberjr @jpraccio0722
+/.circleci/* @voravor @jpraccio0722
 
-/CODEOWNERS @voravor @alfonsogoberjr @jpraccio0722
+/CODEOWNERS @voravor @jpraccio0722
