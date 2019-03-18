@@ -77,9 +77,16 @@
           left: calc(50% - 3px);
           height: 76px;
           width: 6px;
-          background: #d0506c;
+          // background: #d0506c;
           transform-origin: calc(0% + 3px) 100%;
           transform: rotate(-90deg);
+          .pointerArrow {
+            width: 26px;
+            height: 86px;
+            position: absolute;
+            left: calc(50% - 12px);
+            bottom: -10px;
+          }
           &.left .pointerTextInner {
             transform: rotate(90deg);
             transform-origin: bottom right;

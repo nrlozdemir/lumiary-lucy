@@ -16,7 +16,7 @@ class PointerCard extends React.Component {
           clearInterval(this.interval)
         }
       })
-    }, 6)
+    }, 8)
   }
   componentWillUnmount() {
     clearInterval(this.interval)
@@ -56,10 +56,10 @@ class PointerCard extends React.Component {
                   id="path-1"
                 />
                 <filter
-                  x="-3.9%"
-                  y="-5.4%"
-                  width="107.8%"
-                  height="115.2%"
+                  x="-6.7%"
+                  y="-13.0%"
+                  width="113.3%"
+                  height="126.1%"
                   filterUnits="objectBoundingBox"
                   id="filter-2"
                 >
@@ -75,10 +75,15 @@ class PointerCard extends React.Component {
                     result="shadowBlurOuter1"
                   />
                   <feColorMatrix
-                    values="0 0 0 0 0.141176471   0 0 0 0 0.168627451   0 0 0 0 0.28627451  0 0 0 1 0"
+                    values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.5 0"
                     type="matrix"
                     in="shadowBlurOuter1"
+                    result="shadowMatrixOuter1"
                   />
+                  <feMerge>
+                    <feMergeNode in="shadowMatrixOuter1" />
+                    <feMergeNode in="SourceGraphic" />
+                  </feMerge>
                 </filter>
               </defs>
               <g
@@ -105,7 +110,7 @@ class PointerCard extends React.Component {
                           xlinkHref="#path-1"
                         />
                         <use
-                          fill="#5A6386"
+                          fill="#596189"
                           fillRule="evenodd"
                           xlinkHref="#path-1"
                         />
@@ -130,6 +135,63 @@ class PointerCard extends React.Component {
                   transform: `rotate(${pointerData - 90 || 0}deg)`,
                 }}
               >
+                <svg
+                  className={style.pointerArrow}
+                  width="26px"
+                  height="86px"
+                  viewBox="0 0 158 676"
+                  version="1.1"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <defs>
+                    <path
+                      d="M10.9528705,575.512194 L79,1 L147.047121,575.51212 C148.32366,580.799395 149,586.320714 149,592 C149,630.659932 117.659932,662 79,662 C40.3400675,662 9,630.659932 9,592 C9,586.320716 9.67633976,580.7994 10.9528685,575.512202 Z M65.8654047,554.229443 C45.6928768,561.37291 35.0657736,583.488847 42.242621,603.755639 C49.3860878,623.928167 71.5962891,634.52189 91.768817,627.378423 C111.941345,620.234956 122.535068,598.024755 115.391601,577.852227 C108.248134,557.679699 86.0379327,547.085977 65.8654047,554.229443 Z"
+                      id="arrow-path-1"
+                    />
+                    <filter
+                      x="-9.6%"
+                      y="-1.6%"
+                      width="119.3%"
+                      height="104.1%"
+                      filterUnits="objectBoundingBox"
+                      id="arrow-filter-2"
+                    >
+                      <feOffset
+                        dx="0"
+                        dy="3"
+                        in="SourceAlpha"
+                        result="shadowOffsetOuter1"
+                      />
+                      <feGaussianBlur
+                        stdDeviation="4"
+                        in="shadowOffsetOuter1"
+                        result="shadowBlurOuter1"
+                      />
+                      <feColorMatrix
+                        values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 1 0"
+                        type="matrix"
+                        in="shadowBlurOuter1"
+                      />
+                    </filter>
+                  </defs>
+                  <g
+                    id="Page-1"
+                    stroke="none"
+                    strokeWidth="1"
+                    fill="none"
+                    fillRule="evenodd"
+                  >
+                    <g id="Triangle-2" fillRule="nonzero">
+                      <use
+                        fill="black"
+                        fillOpacity="1"
+                        filter="url(#arrow-filter-2)"
+                        xlinkHref="#arrow-path-1"
+                      />
+                      <use fill="#e0436a" xlinkHref="#arrow-path-1" />
+                    </g>
+                  </g>
+                </svg>
                 <div className={style.pointerText}>
                   <div
                     className={style.pointerTextInner}
