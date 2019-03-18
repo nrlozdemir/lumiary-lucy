@@ -40,10 +40,10 @@ export class LibraryDetail extends React.Component {
     getVideos()
 
     if (match.params.videoId) {
-      getBarChartRequest(match.params.videoId)
-      getDoughnutChartRequest(match.params.videoId)
-      getColorTempRequest(match.params.videoId)
-      getShotByShotRequest(match.params.videoId)
+      getBarChartRequest({ LibraryDetailId: match.params.videoId })
+      getDoughnutChartRequest({ LibraryDetailId: match.params.videoId })
+      getColorTempRequest({ LibraryDetailId: match.params.videoId })
+      getShotByShotRequest({ LibraryDetailId: match.params.videoId })
     }
   }
 
@@ -58,10 +58,10 @@ export class LibraryDetail extends React.Component {
     } = this.props
 
     if (prevMatch.params.videoId !== match.params.videoId) {
-      getBarChartRequest(match.params.videoId),
-        getDoughnutChartRequest(match.params.videoId)
-      getColorTempRequest(match.params.videoId)
-      getShotByShotRequest(match.params.videoId)
+      getBarChartRequest({ LibraryDetailId: match.params.videoId })
+      getDoughnutChartRequest({ LibraryDetailId: match.params.videoId })
+      getColorTempRequest({ LibraryDetailId: match.params.videoId })
+      getShotByShotRequest({ LibraryDetailId: match.params.videoId })
     }
   }
 

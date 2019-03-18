@@ -87,7 +87,7 @@ module.exports = {
     //   generateStatsFile: true,
     //   statsOptions: { source: false }
     // })
-    function() {
+    function () {
       this.plugin('done', (statsData) => {
         const stats = statsData.toJson()
         const tmpl = path.join(__dirname, '../server/views', 'index.tmpl')
