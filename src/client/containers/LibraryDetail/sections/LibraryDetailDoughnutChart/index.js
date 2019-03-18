@@ -12,7 +12,7 @@ import {
 
 import SelectFilters from 'Components/SelectFilters'
 import LineChart from 'Components/LineChart/Chart'
-import PointerCard from 'Components/PointerCardNew'
+import PointerCard from 'Components/PointerCard'
 import DoughnutChart from 'Components/Charts/LibraryDetail/Doughnut'
 
 class LibraryDetailDoughnutChart extends React.Component {
