@@ -22,102 +22,102 @@ import RouterLoading from 'Components/RouterLoading'
 import DynamicImport from 'Containers/DynamicImport'
 
 const Detail = (props) => (
-  <DynamicImport removeNavbar load={() => import('./views/detail')}>
-    {(Component) =>
-      Component === null ? <RouterLoading /> : <Component {...props} />
-    }
-  </DynamicImport>
+	<DynamicImport match={props.match} load={() => import('./views/detail')}>
+		{(Component) =>
+			Component === null ? <RouterLoading /> : <Component {...props} />
+		}
+	</DynamicImport>
 )
 
 export class Quickview extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
+	constructor(props) {
+		super(props)
+		this.state = {}
+	}
 
-  componentDidMount() {
-    const { getQuickviewItemsRequest } = this.props
-    getQuickviewItemsRequest()
-  }
+	componentDidMount() {
+		const { getQuickviewItemsRequest } = this.props
+		getQuickviewItemsRequest()
+	}
 
-  handleSelectFilters = (name, value) => {
-    this.setState({
-      [name]: value,
-    })
-  }
+	handleSelectFilters = (name, value) => {
+		this.setState({
+			[name]: value,
+		})
+	}
 
-  render() {
-    const { selectLikes, selectDate } = this.state
+	render() {
+		const { selectLikes, selectDate } = this.state
 
-    const {
-      quickview: { quickviewItems: quickviewItems },
-    } = this.props
+		const {
+			quickview: { quickviewItems: quickviewItems },
+		} = this.props
 
-    const Main = (props) => (
-      <DynamicImport removeNavbar load={() => import('./views/main')}>
-        {(Component) =>
-          Component === null ? (
-            <RouterLoading />
-          ) : (
-            <Component {...props} quickviewItems={quickviewItems} />
-          )
-        }
-      </DynamicImport>
-    )
+		const Main = (props) => (
+			<DynamicImport match={props.match} load={() => import('./views/main')}>
+				{(Component) =>
+					Component === null ? (
+						<RouterLoading />
+					) : (
+							<Component match={props.match} {...props} quickviewItems={quickviewItems} />
+						)
+				}
+			</DynamicImport>
+		)
 
-    return (
-      <React.Fragment>
-        <div className="grid-container col-12">
-          <div className={style.headerContainer}>
-            <div>
-              <span className={style.dotItem}>
-                <span className="bg-cool-blue" />
-                Best Videos
+		return (
+			<React.Fragment>
+				<div className="grid-container col-12">
+					<div className={style.headerContainer}>
+						<div>
+							<span className={style.dotItem}>
+								<span className="bg-cool-blue" />
+								Best Videos
               </span>
-              <span className={style.dotItem}>
-                <span className="bg-coral-pink" />
-                Worst Videos
+							<span className={style.dotItem}>
+								<span className="bg-coral-pink" />
+								Worst Videos
               </span>
-            </div>
-            <div>
-              <h1 className="alpha color-white text-center font-primary text-bold">
-                Quickview
+						</div>
+						<div>
+							<h1 className="alpha color-white text-center font-primary text-bold">
+								Quickview
               </h1>
-            </div>
-            <div className="headerRight">
-              <SelectFilters
-                handleSelectFilters={this.handleSelectFilters}
-                selectClasses="custom-select"
-                selectDate={selectDate}
-                selectDateShow={true}
-                selectLikes={selectLikes}
-                selectLikesShow={true}
-              />
-            </div>
-          </div>
-          <Switch>
-            <Route path="/quickview" exact component={Main} />
-            <Route path="/quickview/:id/:platform" component={Detail} />
-          </Switch>
-        </div>
-      </React.Fragment>
-    )
-  }
+						</div>
+						<div className="headerRight">
+							<SelectFilters
+								handleSelectFilters={this.handleSelectFilters}
+								selectClasses="custom-select"
+								selectDate={selectDate}
+								selectDateShow={true}
+								selectLikes={selectLikes}
+								selectLikesShow={true}
+							/>
+						</div>
+					</div>
+					<Switch>
+						<Route path="/quickview" exact component={Main} />
+						<Route path="/quickview/:id/:platform" component={Detail} />
+					</Switch>
+				</div>
+			</React.Fragment>
+		)
+	}
 }
 
 Quickview.propTypes = {
-  dispatch: PropTypes.func,
+	dispatch: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
-  quickview: makeSelectQuickview(),
+	quickview: makeSelectQuickview(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
+	mapStateToProps,
+	mapDispatchToProps
 )
 
 export default compose(withConnect)(Quickview)
