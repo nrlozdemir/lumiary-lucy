@@ -22,7 +22,7 @@ import RouterLoading from 'Components/RouterLoading'
 import DynamicImport from 'Containers/DynamicImport'
 
 const Detail = (props) => (
-	<DynamicImport match={props.match} load={() => import('./views/detail')}>
+	<DynamicImport match={props.match} removeNavbar load={() => import('./views/detail')}>
 		{(Component) =>
 			Component === null ? <RouterLoading /> : <Component {...props} />
 		}
@@ -54,7 +54,7 @@ export class Quickview extends React.Component {
 		} = this.props
 
 		const Main = (props) => (
-			<DynamicImport match={props.match} load={() => import('./views/main')}>
+			<DynamicImport match={props.match} removeNavbar load={() => import('./views/main')}>
 				{(Component) =>
 					Component === null ? (
 						<RouterLoading />
