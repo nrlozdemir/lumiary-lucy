@@ -1,6 +1,7 @@
 {
 	"colorTempData": [
 		{
+			"text": "This is a blurb that will explain what this graph is showing",
 			"data": [
 				{
 					"x": "rN#-100, 100#",
@@ -20,9 +21,14 @@
 					"type": "industry",
 					"color": "#8567f0"
 				}
-			]
+			],
+			"topText": "Happy",
+			"bottomText": "Sad",
+			"leftText": "Cool",
+			"rightText": "Warm"
 		},
 		{
+			"text": "This is a blurb that will explain what this graph is showing",
 			"data": [
 				{
 					"x": "rN#-100, 100#",
@@ -44,9 +50,12 @@
 				}
 			],
 			"topText": "Energetic",
-			"bottomText": "Calm"
+			"bottomText": "Calm",
+			"leftText": "Cool",
+			"rightText": "Warm"
 		},
 		{
+			"text": "This is a blurb that will explain what this graph is showing",
 			"data": [
 				{
 					"x": "rN#-100, 100#",
@@ -68,7 +77,9 @@
 				}
 			],
 			"topText": "Natural",
-			"bottomText": "Synthetic"
+			"bottomText": "Synthetic",
+			"leftText": "Cool",
+			"rightText": "Warm"
 		}
 	]
 }
