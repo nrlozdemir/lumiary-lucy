@@ -10,6 +10,8 @@ import marketviewPacingChartData from 'Api/mocks/marketviewPacingChartMock.json'
 import marketviewFormatChartData from 'Api/mocks/marketviewFormatChartMock.json';
 import marketviewTotalViewsData from 'Api/mocks/marketviewTotalViewsMock.json';
 import marketviewTotalCompetitorViewsData from 'Api/mocks/marketviewTotalCompetitorViewsMock.json';
+import marketviewTopPerformingProperties from "Api/mocks/marketviewPlatformTopPerformingProperty.json";
+import marketviewTopPerformingPropertiesCompetitors from "Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json";
 
 function getCompetitorVideosApi() {
   return axios('/')
@@ -56,6 +58,18 @@ function getTotalCompetitorViewsApi() {
   //this will use ajax function in utils/api when real data is provided
   return axios.get('/')
   .then(res => marketviewTotalCompetitorViewsData)
+}
+
+function getGetTopPerformingPropertiesApi() {
+  //this will use ajax function in utils/api when real data is provided
+  return axios.get('/')
+  .then(res => marketviewTopPerformingProperties)
+}
+
+function getGetTopPerformingPropertiesByCompetitorsApi() {
+  //this will use ajax function in utils/api when real data is provided
+  return axios.get('/')
+  .then(res => marketviewTopPerformingPropertiesCompetitors)
 }
 
 function* getCompetitorVideosMarketview() {
@@ -130,6 +144,24 @@ function* getTotalCompetitorViewsData() {
   }
 }
 
+function* getTopPerformingPropertiesData() {
+  try {
+    const payload = yield call(getGetTopPerformingPropertiesApi);
+    yield put(actions.getTopPerformingPropertiesSuccess(payload));
+  } catch (error) {
+    yield put(actions.getTopPerformingPropertiesFailure(error));
+  }
+}
+
+function* getTopPerformingPropertiesByCompetitorsData() {
+  try {
+    const payload = yield call(getGetTopPerformingPropertiesByCompetitorsApi);
+    yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess(payload));
+  } catch (error) {
+    yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error));
+  }
+}
+
 export default [
   takeLatest(types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_REQUEST, getCompetitorTopVideosMarketview),
   takeLatest(types.GET_MARKETVIEW_COMPETITOR_VIDEOS_REQUEST, getCompetitorVideosMarketview),
@@ -139,4 +171,6 @@ export default [
   takeLatest(types.GET_MARKETVIEW_FORMATCHART_REQUEST, getFormatChartData),
   takeLatest(types.GET_MARKETVIEW_TOTALVIEWS_REQUEST, getTotalViewsData),
   takeLatest(types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST, getTotalCompetitorViewsData),
+  takeLatest(types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_REQUEST, getTopPerformingPropertiesData),
+  takeLatest(types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_REQUEST, getTopPerformingPropertiesByCompetitorsData),
 ];

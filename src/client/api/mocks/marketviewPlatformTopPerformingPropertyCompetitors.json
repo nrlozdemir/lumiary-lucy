@@ -1,0 +1,33 @@
+{
+	"labels": ["Barstool Sports", "SB Nation", "ESPN", "Scout Media", "Fansided"],
+	"datasets": [
+		{
+			"label": "Fast",
+			"backgroundColor": "#51adc0",
+			"borderColor": "#51adc0",
+			"borderWidth": 1,
+			"data": [1000000, 300000, 500000, 100000, 500000]
+		},
+		{
+			"label": "Medium",
+			"backgroundColor": "#8567f0",
+			"borderColor": "#8567f0",
+			"borderWidth": 1,
+			"data": [1200000, 1300000, 200000, 500000, 300000]
+		},
+		{
+			"label": "Slow",
+			"backgroundColor": "#D0506C",
+			"borderColor": "#D0506C",
+			"borderWidth": 1,
+			"data": [400000, 500000, 400000, 200000, 800000]
+		},
+		{
+			"label": "Slowest",
+			"backgroundColor": "#acb0be",
+			"borderColor": "#acb0be",
+			"borderWidth": 1,
+			"data": [900000, 800000, 100000, 400000, 200000]
+		}
+	]
+}
