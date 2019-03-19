@@ -49,7 +49,8 @@ export class Time extends React.Component {
   componentDidMount() {
     this.props.getCompetitorTopVideosRequest()
     this.props.getCompetitorVideosRequest()
-    this.props.getSimilarPropertiesRequest()
+		this.props.getSimilarPropertiesRequest()
+ 		this.props.getMarketviewDetailTimeRequest()
   }
 
   changeSelectedVideo = (video) => {
@@ -63,12 +64,13 @@ export class Time extends React.Component {
   render() {
     const {
       marketview,
-      marketview: { competitorTopVideos, similarProperties },
+      marketview: { marketviewDetailTime, competitorTopVideos },
     } = this.props
+		const { activeDay } = this.state
 
-    const { activeDay } = this.state
-
-    if (!marketview.selectedVideo || marketview.loading) {
+		const selectedDayData = marketviewDetailTime && marketviewDetailTime[activeDay]
+console.log(selectedDayData)
+    if (!marketview.selectedVideo || marketview.loading || !marketviewDetailTime) {
       return <RouterLoading />
     }
 
@@ -86,8 +88,8 @@ export class Time extends React.Component {
             .charAt(0)
             .toUpperCase()}${activeDay.slice(1)} Videos`}
         />
-        {similarProperties && <TopSimilarProperties data={similarProperties} />}
-        {competitorTopVideos && (
+        {selectedDayData && selectedDayData.SimilarProperties && <TopSimilarProperties data={selectedDayData.SimilarProperties} />}
+        {competitorTopVideos && competitorTopVideos && (
           <TopVideosCard
             chartData={competitorTopVideos}
             title="Top Performing Property Across All Days Of The Week"
