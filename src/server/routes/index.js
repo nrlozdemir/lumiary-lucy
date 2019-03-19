@@ -28,7 +28,7 @@ module.exports = app => {
 	);
 
 	// Create Mock
-	app.get('/createMock', require('./createMock'));
+	app.get('/createLibraryMock', require('./createMock').createLibraryMock);
 
 	if (
 		process.env.ENVIRONMENT === "qa" ||
