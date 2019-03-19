@@ -16,7 +16,9 @@ const PanopticColorTemperature = ({
     <div className={style.radialChartsContainer}>
       <div className={style.temperatureHeader}>
         <div>
-          <h2 className="font-secondary-first">Color Temperature / Sentiment Comparison</h2>
+          <h2 className="font-secondary-first">
+            Color Temperature / Sentiment Comparison
+          </h2>
         </div>
         <div className={style.inputWrapper}>
           <form className={style.form}>
@@ -42,16 +44,24 @@ const PanopticColorTemperature = ({
       </div>
       <div className={style.infoWrapperContainer}>
         <div className={style.infoWrapper}>
-          <span className={style.infoText}>Views</span>
+          <div className={style.infoHandle}>
+            <span className={style.infoText}>Views</span>
+          </div>
         </div>
         <div className={style.infoWrapper}>
-          <span className={style.infoText}>Likes</span>
+          <div className={style.infoHandle}>
+            <span className={style.infoText}>Likes</span>
+          </div>
         </div>
         <div className={style.infoWrapper}>
-          <span className={style.infoText}>Comment</span>
+          <div className={style.infoHandle}>
+            <span className={style.infoText}>Comment</span>
+          </div>
         </div>
         <div className={style.infoWrapper}>
-          <span className={style.infoText}>Shares</span>
+          <div className={style.infoHandle}>
+            <span className={style.infoText}>Shares</span>
+          </div>
         </div>
       </div>
       <div className="d-flex align-items-center justify-content-center ph-48 mv-48">
