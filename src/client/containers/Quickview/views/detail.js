@@ -12,7 +12,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectQuickview } from 'Reducers/quickview'
 import { toSlug } from 'Utils/index'
-import VideoCard from 'Components/VideoCard'
+import SingleVideoCard from 'Components/SingleVideoCard'
 import style from './../style.scss'
 
 export class Detail extends React.Component {
@@ -53,7 +53,6 @@ export class Detail extends React.Component {
         selectedPlatform: { id, platformsValues },
       },
     } = this.props
-    console.log(this.props)
     return (
       <React.Fragment>
         <div className="grid-container">
@@ -85,7 +84,7 @@ export class Detail extends React.Component {
               {platformsValues.map((el, i) => (
                 <div key={i} className="col-6">
                   <div className={style.card}>
-                    <VideoCard {...el.video} muted={false} />
+                    <SingleVideoCard {...el.video} muted={false} />
                     <div className={style.items}>
                       {el.infos.map((item, index) => (
                         <div key={index} className={style.infoItem}>

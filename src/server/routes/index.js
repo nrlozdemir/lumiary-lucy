@@ -21,11 +21,14 @@ module.exports = app => {
 	app.use(
 		"/healthcheck",
 		require("express-healthcheck")({
-			healthy: function() {
+			healthy: function () {
 				return { status: "upppp" };
 			}
 		})
 	);
+
+	// Create Mock
+	app.get('/createMock', require('./createMock'));
 
 	if (
 		process.env.ENVIRONMENT === "qa" ||
