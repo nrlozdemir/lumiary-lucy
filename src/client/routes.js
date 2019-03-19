@@ -16,27 +16,18 @@ const routes = [
     component: 'Library',
   },
   {
-    path: '/audience',
-    exact: true,
-    removeNavbar: true,
-    component: 'Audience',
-  },
-  {
     path: '/library/:videoId/compare',
     exact: true,
-    removeNavbar: true,
     component: 'Compare',
   },
   {
     path: '/library/build-report/:videoId',
     exact: true,
-    removeNavbar: true,
     component: 'BuildReport',
   },
   {
     path: '/library/:videoId',
     exact: true,
-    removeNavbar: true,
     component: 'LibraryDetail',
   },
   {
@@ -52,6 +43,11 @@ const routes = [
     path: '/panoptic',
     exact: true,
     component: 'Panoptic',
+  },
+  {
+    path: '/panoptic/:detail',
+    exact: true,
+    component: 'Audience',
   },
   {
     path: '/marketview',
@@ -71,7 +67,6 @@ const routes = [
   {
     path: '/reports/generated',
     exact: true,
-    removeNavbar: true,
     component: 'ReportGenerated',
   },
   {
@@ -86,15 +81,15 @@ const RouteWithSubRoutes = (route) => (
     exact={route.exact}
     component={(props) => (
       <DynamicImport
-        removeNavbar={route.removeNavbar}
         load={() => import(`./containers/${route.component}`)}
+        match={props.match}
       >
         {(Component) =>
           Component === null ? (
             <RouterLoading />
           ) : (
-            <Component {...props} match={props.match} />
-          )
+              <Component {...props} match={props.match} />
+            )
         }
       </DynamicImport>
     )}
