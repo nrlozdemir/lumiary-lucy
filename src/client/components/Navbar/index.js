@@ -44,8 +44,6 @@ class Navbar extends React.Component {
 			library: { videos },
 		} = this.props;
 
-		console.log(match)
-
 		return (
 			<React.Fragment>
 				{Object.keys(match.params).length ? (
