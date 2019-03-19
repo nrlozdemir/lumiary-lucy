@@ -80,10 +80,10 @@ class TopVideosCard extends Component {
       <div className="grid-collapse">
         <div className={barChartContainer}>
           <div className={barChartHeaderClass}>
-            <div className="col-4 text-bold">
+            <div className="col-6 text-bold">
               <p className={headerTitleClass}>{title}</p>
             </div>
-            <div className="col-8">
+            <div className="col-6">
               <div className={style.selects}>
                 <SelectFilters
                   handleSelectFilters={this.handleSelectFilters}
