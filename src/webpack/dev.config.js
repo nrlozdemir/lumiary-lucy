@@ -77,7 +77,7 @@ module.exports = {
       children: true,
       minChunks: 3,
     }),
-    new CaseSensitivePathsPlugin({ debug: true }),
+    new CaseSensitivePathsPlugin(),
     new webpack.DllReferencePlugin({
       context: __dirname,
       manifest: require('../build/library/library.json'),
@@ -87,7 +87,7 @@ module.exports = {
     //   generateStatsFile: true,
     //   statsOptions: { source: false }
     // })
-    function () {
+    function() {
       this.plugin('done', (statsData) => {
         const stats = statsData.toJson()
         const tmpl = path.join(__dirname, '../server/views', 'index.tmpl')
