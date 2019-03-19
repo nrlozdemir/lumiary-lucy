@@ -13,7 +13,7 @@ import RouterLoading from 'Components/RouterLoading'
 import DynamicImport from 'Containers/DynamicImport'
 
 const subPage = (page) => (props) => (
-  <DynamicImport removeNavbar load={() => import('./views/' + page)}>
+  <DynamicImport match={props.match} removeNavbar load={() => import('./views/' + page)}>
     {(Component) =>
       Component === null ? <RouterLoading /> : <Component {...props} />
     }
@@ -60,6 +60,7 @@ export class Marketview extends React.Component {
           <Route path="/marketview/competitor" exact component={Competitor} />
           <Route path="/marketview/time" exact component={Time} />
         </Switch>
+
       </div>
     )
   }

@@ -5,8 +5,14 @@
  */
 
 import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
+import { createStructuredSelector } from "reselect"
+import DetailHeader from './DetailHeader';
+import { makeSelectLibrary } from "Reducers/library"
+
 import style from './style.scss'
 // import PropTypes from 'prop-types';
 
@@ -51,6 +57,9 @@ class Navbar extends React.Component {
   }
 }
 
-Navbar.propTypes = {}
+const withConnect = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)
 
-export default Navbar
+export default compose(withConnect)(Navbar)
