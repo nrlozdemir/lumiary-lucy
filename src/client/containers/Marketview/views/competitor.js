@@ -21,9 +21,9 @@ import style from '../style.scss'
 /* eslint-disable react/prefer-stateless-function */
 export class Competitor extends React.Component {
   componentDidMount() {
-    this.props.getCompetitorTopVideosRequest()
-    this.props.getCompetitorVideosRequest()
-    this.props.getSimilarPropertiesRequest()
+    this.props.getCompetitorTopVideosRequest();
+    this.props.getCompetitorVideosRequest();
+    this.props.getSimilarPropertiesRequest();
   }
 
   changeSelectedVideo = (video) => {
