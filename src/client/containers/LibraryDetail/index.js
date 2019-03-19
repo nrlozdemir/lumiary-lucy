@@ -10,7 +10,6 @@ import { actions, makeSelectLibraryDetail } from "Reducers/libraryDetail"
 import { actions as libraryActions, makeSelectLibrary } from "Reducers/library"
 
 import { barData_DatasetOptions, radarData_DatasetOptions, lineChartData_DatasetOptions } from './options'
-import LibraryDetailHeader from "./sections/LibraryDetailHeader"
 import LibraryDetailChartHeader from "./sections/LibraryDetailChartHeader"
 import LibraryDetailDoughnutChart from "./sections/LibraryDetailDoughnutChart"
 import LibraryDetailColorTemperature from "./sections/LibraryDetailColorTemperature"
@@ -40,10 +39,10 @@ export class LibraryDetail extends React.Component {
     getVideos()
 
     if (match.params.videoId) {
-      getBarChartRequest(match.params.videoId)
-      getDoughnutChartRequest(match.params.videoId)
-      getColorTempRequest(match.params.videoId)
-      getShotByShotRequest(match.params.videoId)
+      getBarChartRequest({ LibraryDetailId: match.params.videoId });
+      getDoughnutChartRequest({ LibraryDetailId: match.params.videoId });
+      getColorTempRequest({ LibraryDetailId: match.params.videoId });
+      getShotByShotRequest({ LibraryDetailId: match.params.videoId });
     }
   }
 
@@ -58,10 +57,10 @@ export class LibraryDetail extends React.Component {
     } = this.props
 
     if (prevMatch.params.videoId !== match.params.videoId) {
-      getBarChartRequest(match.params.videoId),
-        getDoughnutChartRequest(match.params.videoId)
-      getColorTempRequest(match.params.videoId)
-      getShotByShotRequest(match.params.videoId)
+      getBarChartRequest({ LibraryDetailId: match.params.videoId });
+      getDoughnutChartRequest({ LibraryDetailId: match.params.videoId });
+      getColorTempRequest({ LibraryDetailId: match.params.videoId });
+      getShotByShotRequest({ LibraryDetailId: match.params.videoId });
     }
   }
 
@@ -92,10 +91,6 @@ export class LibraryDetail extends React.Component {
 
     return (
       <React.Fragment>
-        <LibraryDetailHeader
-          videoName={title}
-          publishedPlatform={socialIcon}
-        />
         {barData && <LibraryDetailChartHeader
           barData={barData}
           videoUrl={videoUrl}

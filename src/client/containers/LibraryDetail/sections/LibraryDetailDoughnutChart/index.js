@@ -135,7 +135,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                     </div>
                   </div>
                   <div className={style.headerInfo}>
-                    <div></div>
+                    <div />
                     <div className={style.formWrapper}>
                       <SelectFilters
                         handleSelectFilters={this.handleSelectFilters}
@@ -176,7 +176,9 @@ class LibraryDetailDoughnutChart extends React.Component {
                         topTitle: 'Based on Likes',
                         pointerData: 140,
                         bottomText: 'of your library is shot in',
-                        likes: 50,
+                        avg: 103,
+                        percent: 16,
+                        fps: 24,
                       }}
                     />
                   </div>

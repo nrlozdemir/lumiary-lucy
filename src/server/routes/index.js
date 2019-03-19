@@ -8,69 +8,73 @@ import { Provider } from "react-redux";
 import Helmet from "react-helmet";
 
 const cache = require("express-redis-cache")({
-	host: process.env.REDIS_HOST
+  host: process.env.REDIS_HOST
 });
 
 cache.del("*", (error, numDeleted) =>
-	console.log(`Deleted ${numDeleted} cache entries.`)
+  console.log(`Deleted ${numDeleted} cache entries.`)
 ); // Force-clear cache on app startup
 
 module.exports = app => {
-	// HEALTH
-	// =============================================================================
-	app.use(
-		"/healthcheck",
-		require("express-healthcheck")({
-			healthy: function() {
-				return { status: "upppp" };
-			}
-		})
-	);
+  // HEALTH
+  // =============================================================================
+  app.use(
+    "/healthcheck",
+    require("express-healthcheck")({
+      healthy: function () {
+        return { status: "upppp" };
+      }
+    })
+  );
 
-	if (
-		process.env.ENVIRONMENT === "qa" ||
-		process.env.ENVIRONMENT === "staging"
-	) {
-		app.use(
-			basicAuth({
-				users: {
-					[process.env.BASIC_AUTH_USER]: process.env.BASIC_AUTH_PASSWORD
-				},
-				challenge: true
-			})
-		);
-	}
+  // Create Mock
+  app.get('/createLibraryMock', require('./createMock').createLibraryMock);
+  app.get('/createMarketviewTimeMock', require('./createMock').createMarketviewTimeMock);
 
-	app.get(
-		"/*",
-		cache.route({
-			prefix: "lumiere"
-		}),
-		(req, res) => {
-			const context = {};
-			const head = Helmet.rewind();
+  if (
+    process.env.ENVIRONMENT === "qa" ||
+    process.env.ENVIRONMENT === "staging"
+  ) {
+    app.use(
+      basicAuth({
+        users: {
+          [process.env.BASIC_AUTH_USER]: process.env.BASIC_AUTH_PASSWORD
+        },
+        challenge: true
+      })
+    );
+  }
 
-			//render components
-			const reactDom = renderToString(
-				<Provider store={store}>
-					<StaticRouter location={req.url} context={context}>
-						<Routes />
-					</StaticRouter>
-				</Provider>
-			);
+  app.get(
+    "/*",
+    cache.route({
+      prefix: "lumiere"
+    }),
+    (req, res) => {
+      const context = {};
+      const head = Helmet.rewind();
 
-			if (context.status === 404) {
-				res.status(404);
-			}
+      //render components
+      const reactDom = renderToString(
+        <Provider store={store}>
+          <StaticRouter location={req.url} context={context}>
+            <Routes />
+          </StaticRouter>
+        </Provider>
+      );
 
-			res.render("index", {
-				title: head.title.toString(),
-				meta: head.meta.toString(),
-				link: head.link.toString(),
-				ENV: process.env.NODE_ENV,
-				state: JSON.stringify(store.getState()),
-				content: reactDom
-			});
-		}
-	);
+      if (context.status === 404) {
+        res.status(404);
+      }
+
+      res.render("index", {
+        title: head.title.toString(),
+        meta: head.meta.toString(),
+        link: head.link.toString(),
+        ENV: process.env.NODE_ENV,
+        state: JSON.stringify(store.getState()),
+        content: reactDom
+      });
+    }
+  );
 };

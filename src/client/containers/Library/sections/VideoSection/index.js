@@ -1,40 +1,38 @@
 import React from 'react'
-import { connect } from "react-redux"
-import { compose } from "redux"
-import { createStructuredSelector } from "reselect"
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+import { createStructuredSelector } from 'reselect'
 
-import { actions, makeSelectLibrary } from "Reducers/library"
+import { actions, makeSelectLibrary } from 'Reducers/library'
+import style from '../../style.scss'
 
-import VideoCardList from "Components/VideoCardList"
-import RouterLoading from "Components/RouterLoading"
+import VideoCardList from 'Components/VideoCardList'
+import RouterLoading from 'Components/RouterLoading'
 
-class VideoSection  extends React.Component {
-
+class VideoSection extends React.Component {
   componentDidMount() {
     this.props.getVideos()
   }
 
-  render(){
+  render() {
     if (!this.props.library.videos || this.props.library.loading) {
-      return <RouterLoading/>
+      return <RouterLoading />
     }
     return (
-      <div className="grid-collapse mt-50">
-        <VideoCardList
-          data={this.props.library.videos}
-        />
+      <div className={style.videoContainer}>
+        <VideoCardList data={this.props.library.videos} />
       </div>
     )
   }
 }
 
 const mapStateToProps = createStructuredSelector({
-  library: makeSelectLibrary()
+  library: makeSelectLibrary(),
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    getVideos: () => dispatch(actions.loadVideos())
+    getVideos: () => dispatch(actions.loadVideos()),
   }
 }
 

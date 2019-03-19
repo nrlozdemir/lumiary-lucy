@@ -7,7 +7,7 @@ import TopSimilarPropertiesItem from 'Components/TopSimilarPropertiesItem'
 import style from './style.scss'
 
 const similarPropertiesContainer = cx(
-  'shadow-1 col-12-gutter-20 mb-72 pt-48 pb-48',
+  'shadow-1 col-12-gutter-20 mb-48 pt-48 pb-48',
   style.similarPropertiesContainer
 )
 const headerClass = cx('col-12 mb-48', style.header)

@@ -28,7 +28,7 @@ const RadarChart = ({ data }) => (
           label: function(tooltipItem, data) {
             return (
               data['datasets'][0]['data'][tooltipItem['index']] +
-              '% :' +
+              '% ' +
               data.labels[tooltipItem['index']].name
             )
           },

@@ -22,17 +22,17 @@
 
   a {
     margin: 0 36px;
-    color: $color-cool-grey;
+    color: $color-white;
     font-size: 14px;
     text-decoration: none;
     position: relative;
+    font-family: $font-family-ClanOTNews;
   }
 
   .activeLink {
     color: $color-white;
     font-size: 14px;
-    font-family: $font-family-ClanOT;
-    font-weight: 500;
+    font-family: $font-family-ClanOTBold;
 
     &:before {
       content: '';

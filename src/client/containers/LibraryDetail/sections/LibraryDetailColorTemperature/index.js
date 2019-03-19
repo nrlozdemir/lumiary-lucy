@@ -1,11 +1,10 @@
 import React from 'react'
-import { Field } from 'redux-form'
+import classnames from 'classnames'
 
 import style from './style.scss'
-import { selectOptions } from './options'
 
 import SelectFilters from 'Components/SelectFilters'
-import ColorTemperatureChart from 'Components/ColorTemperatureChart'
+import { ColorTemperature as Chart } from 'Components/ColorTemperatureChart/ColorTemperature'
 
 const LibraryDetailColorTemperature = ({
   colorTempData,
@@ -43,9 +42,14 @@ const LibraryDetailColorTemperature = ({
           </div>
         </div>
         <div className={style.temperatureContentContainer}>
-          {colorTempData && (
-            <ColorTemperatureChart colorTempData={colorTempData} />
-          )}
+          {(colorTempData || []).map((temp, index) => (
+            <div
+              className={classnames('col-4', style.chartWrapper)}
+              key={'temp-chart-' + index}>
+              <Chart temp={temp} />
+              <div className={style.chartInfo}>{temp.text}</div>
+            </div>
+          ))}
         </div>
       </div>
     </div>

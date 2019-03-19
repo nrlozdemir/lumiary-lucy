@@ -31,7 +31,6 @@
         cursor: pointer;
         font-family: $font-family-ClanOTBold;
         font-size: 12px;
-        font-weight: bold;
         line-height: 1.2;
         border-bottom: 1px solid transparent;
 
@@ -82,7 +81,7 @@
 
       p {
         font-size: 14px;
-        font-weight: bold;
+        font-family: $font-family-ClanOTBold;
       }
       .inputWrapper {
         width: 200px;

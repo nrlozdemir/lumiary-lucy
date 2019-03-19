@@ -7,7 +7,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 
-import VideoCard from 'Components/VideoCard'
+import SingleVideoCard from 'Components/SingleVideoCard'
 import QuickviewCard from 'Components/QuickviewCard'
 import style from './../style.scss'
 
@@ -24,7 +24,7 @@ const Main = (props) => (
             detailsLink={`/quickview/${item.id}/${item.defaultSection}`}
             social={item.social}
             cards={item.videos.map((video) => (
-              <VideoCard
+              <SingleVideoCard
                 video={{
                   title: (
                     <div className={style.quickCardTitle}>

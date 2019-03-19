@@ -155,7 +155,8 @@
   align-items: center;
   font-size: 18px;
   font-family: $font-family-ClanOT;
-  margin-bottom: 50px;
+	margin-bottom: 50px;
+	float: none;
 }
 
 .selects {
@@ -288,7 +289,7 @@
       color: $color-white;
     }
     .progressArea {
-      margin: 20px 48px;
+      margin: 20px 48px 32px;
       .title {
         text-align: center;
         font-family: $font-family-ClanOTNews;
@@ -451,4 +452,8 @@
       }
     }
   }
+}
+
+.detailTopPerformingPropertyContainer {
+	padding-top: 20px;
 }

@@ -1,25 +1,27 @@
 .header {
+  width: 100%;
   background: $color-dark-grey-blue;
   display: flex;
   justify-content: space-between;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-  padding: 23px 40px;
-  font-family: $font-family-ClanOT;
 
   div {
-    display: flex;
-    align-items: center;
+    line-height: 80px;
     font-size: 14px;
+    font-family: $font-family-ClanOT;
+
     a {
       color: $color-white;
       text-decoration: none;
       display: inline-flex;
       align-items: center;
       justify-content: center;
+
       .text {
-        margin-left: 16px;
+        margin-left: 20px;
         font-size: 14px;
       }
+
       span {
         font-size: 30px;
       }
@@ -28,7 +30,6 @@
 }
 
 .profile {
-  justify-content: flex-end;
   color: $color-white;
   font-size: 14px;
   font-family: $font-family-ClanOT;
@@ -37,6 +38,10 @@
   .profileImage {
     border: 2px solid $color-white;
     vertical-align: middle;
-    margin-right: 16px;
+  }
+
+  span {
+    padding-left: 16px;
   }
 }
+
