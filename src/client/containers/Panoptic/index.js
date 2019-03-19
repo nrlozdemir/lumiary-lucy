@@ -59,13 +59,13 @@ export class Panoptic extends React.Component {
 
     return (
       <React.Fragment>
-				<div className="grid-container col-12">
-					<div className={style.alignTabs}>
-						<NavLink to="/audience" className={style.tab} activeClassName={style.activeLink}>
-							Audience
-						</NavLink>
-					</div>
-				</div>
+        <div className="grid-container col-12">
+          <div className={style.alignTabs}>
+            <NavLink to="/panoptic/audience" className={style.tab} activeClassName={style.activeLink}>
+              Audience
+            </NavLink>
+          </div>
+        </div>
         {videoReleasesData && (
           <VideoReleasesBarChart
             data={videoReleasesData}
