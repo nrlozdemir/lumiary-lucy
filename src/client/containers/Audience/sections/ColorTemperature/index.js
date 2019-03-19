@@ -13,9 +13,6 @@ const colorTempData = [
 		"data": [
 			{ "x": -50, "y": 82, "color": "#ff556f" },
 			{ "x": 50, "y": -25, "color": "#51adc0" },
-			{ "x": 75, "y": -30, "color": "#8567f0" },
-			{ "x": 60, "y": 30, "color": "#ffffff" },
-			{ "x": -12, "y": -30, "color": "#242b49",  }
 		]
 	},
 	{
@@ -27,7 +24,6 @@ const colorTempData = [
 		"data": [
 			{ "x": -50, "y": 12, "color": "#ff556f" },
 			{ "x": 50, "y": 25, "color": "#51adc0" },
-			{ "x": 75, "y": -30, "color": "#8567f0" }
 		]
 	},
 	{
@@ -39,7 +35,6 @@ const colorTempData = [
 		"data": [
 			{ "x": -50, "y": 12, "color": "#ff556f" },
 			{ "x": 50, "y": -75, "color": "#51adc0" },
-			{ "x": 75, "y": -30, "color": "#8567f0" }
 		]
 	}
 ];
@@ -51,6 +46,12 @@ export class ColorTemperature extends React.Component {
 		this.state = {
 			selectDate: ''
 		}
+	}
+
+	handleSelectFilters = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
 	}
 
 	render() {
@@ -71,7 +72,7 @@ export class ColorTemperature extends React.Component {
 						</div>
 					</div>
 					<div className={style.selects}>
-						<SelectFilters selectDateShow={true} selectDate={selectDate} />
+						<SelectFilters selectDateShow selectDate={selectDate} handleSelectFilters={this.handleSelectFilters}/>
 					</div>
 				</div>
 				<div className="col-12" style={{display: 'flex', padding: "40px 0"}}>
