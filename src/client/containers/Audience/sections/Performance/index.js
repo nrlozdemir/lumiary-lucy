@@ -306,16 +306,22 @@ export class Performance extends React.Component {
     })
   }
 
+  handleSelectFilters = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
+  }
+
   render() {
     const {
       slider: [min, max],
       bubblesBoth,
       bubblesFemales,
       bubblesMales,
-      selectViews,
+      selectLikes,
       selectDate,
     } = this.state
-    console.log(this.state)
+
     const handleStyle = [
       {
         width: '10px',
@@ -365,8 +371,13 @@ export class Performance extends React.Component {
         <div className={style.cardTitle + ' col-12'}>
           <span>Performance By Age, Gender and Date</span>
           <div className={style.selects}>
-            <SelectFilters selectViewsShow={true} selectViews={selectViews} />
-            <SelectFilters selectDateShow={true} selectDate={selectDate} />
+            <SelectFilters
+              selectLikesShow
+              selectDateShow
+              selectDate={selectDate}
+              selectLikes={selectLikes}
+              handleSelectFilters={this.handleSelectFilters}
+            />
           </div>
         </div>
         <div className={'col-12'}>
