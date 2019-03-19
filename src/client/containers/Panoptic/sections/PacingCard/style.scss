@@ -5,6 +5,19 @@
   background-color: $color-dark-grey-blue;
 }
 
+.pacingCardInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .pacingCardInnerItem {
+    flex: 1;
+    &:last-child() {
+      display: flex;
+      align-items: center;
+    }
+  }
+}
+
 .componentTitle {
   display: flex;
   justify-content: space-between;
