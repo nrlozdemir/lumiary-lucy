@@ -83,13 +83,16 @@
       border-radius: 20px;
       left: 15%;
       top: 35%;
-      z-index: 11;
+			z-index: 11;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
       &::before {
         font-family: $font-family-qf-icons;
-        content: '\e921';
+        content: '\E988';
         color: black;
         line-height: 40px;
-        margin-left: 10px;
       }
     }
 
@@ -100,13 +103,16 @@
       background: white;
       border-radius: 20px;
       right: 15%;
-      top: 35%;
+			top: 35%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
       &::before {
-        content: '\e922';
+        content: '\E987';
         color: $color-black;
         font-family: $font-family-qf-icons;
         line-height: 40px;
-        margin-left: 10px;
       }
     }
 
