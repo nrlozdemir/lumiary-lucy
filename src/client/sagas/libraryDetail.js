@@ -2,7 +2,7 @@ import { takeLatest, call, put } from "redux-saga/effects";
 import axios from 'axios';
 
 import { types, actions } from "Reducers/libraryDetail";
-import mock from 'Api/mocks/mock.json';
+import mock from 'Api/mocks/libraryMock.json';
 import { findIdDetail } from 'Utils/api'
 
 function getBarChartApi({ LibraryDetailId }) {

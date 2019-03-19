@@ -3,7 +3,7 @@ import axios from 'axios';
 
 import { types, actions, makeSelectVideoFilters } from "Reducers/library";
 import { sortVideos } from "Utils/sort-videos";
-import libraryMockData from 'Api/mocks/mock.json';
+import libraryMockData from 'Api/mocks/libraryMock.json';
 
 function getLibraryApi() {
 	//this will use ajax function in utils/api when real data is provided
