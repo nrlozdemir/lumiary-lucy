@@ -1,59 +1,11 @@
-const fs = require('fs');
-const _ = require('lodash');
+import fs from "fs";
+import path from "path";
+import { readFiles, random } from "../utils/createMock";
 
-const path = require('path');
 const root = path.dirname(require.main.filename);
 const mocks = 'client/api/mocks';
 
-const readFiles = filenames => {
-  return filenames.reduce((object, filename) => {
-    object[filename] = fs.readFileSync(path.join(root, `${mocks}/${filename}.json`), 'utf8');
-    return object;
-  }, {});
-}
-
-const randomNumber = (min, max) => {
-  return Math.floor(Math.random() * (max - min + 1) + min);
-}
-
-const randomNumberArray = (lenght, min, max) => {
-  return [...Array(lenght)].map(() => randomNumber(min, max));
-}
-
-const randomPercentage = (lenght) => {
-  const numbers = randomNumberArray(lenght, 0, 100);
-  const total = numbers.reduce((total, value) => total + value)
-
-  return numbers.map(value => Number(((value / total) * 100).toFixed(2)));
-}
-
-const random = file => {
-  let data = file;
-
-  data = data.replace(/"rN#(.*),(.*)#"/g, ($0, $1, $2) => {
-    // $1 = min, $2 = max
-    return randomNumber(parseInt($1), parseInt($2));
-  })
-
-  data = data.replace(/"rNA#(.*),(.*),(.*)#"/g, ($0, $1, $2, $3) => {
-    // $1 = length, $2 = min, $3 = max
-    return JSON.stringify(randomNumberArray(parseInt($1), parseInt($2), parseInt($3)));
-  })
-
-  data = data.replace(/"rP#(.*)#"/g, ($0, $1) => {
-    // $1 = length
-    return JSON.stringify(randomPercentage(parseInt($1)));
-  })
-
-  data = data.replace(/image=(.*)"/g, ($0, $1) => {
-    return 'image=' + randomNumber(1, 100) + '"';
-  })
-
-  return data;
-}
-
-const createMock = async (req, res) => {
-  
+const createLibraryMock = async (req, res) => {
   // Get Files
   let {
     libraryMock,
@@ -67,7 +19,7 @@ const createMock = async (req, res) => {
     "libraryDetailDoughnutChartMock",
     "libraryDetailHeaderBarChartMock",
     "libraryDetailShotByShotMock",
-  ])
+  ], "library", root)
 
   // Create mock json
   const mock = JSON.parse(libraryMock).map(library => ({
@@ -78,12 +30,55 @@ const createMock = async (req, res) => {
     ShotByShotMock: JSON.parse(random(ShotByShotMock))
   }))
 
-  // Create mock.json file
-  fs.writeFile(path.join(root, `${mocks}/mock.json`), JSON.stringify(mock), (err) => {
+  // Create libraryMock.json file
+  fs.writeFile(path.join(root, `${mocks}/libraryMock.json`), JSON.stringify(mock), (err) => {
     if (err) console.log(err)
   });
 
   res.redirect('../')
 }
 
-module.exports = createMock;
+const createMarketviewTimeMock = async (req, res) => {
+  const days = [
+    'sunday',
+    'monday',
+    'tuesday',
+    'wednesday',
+    'thursday',
+    'friday',
+    'saturday'
+  ]
+
+  // Get Files
+  let {
+    marketviewCompetitorTopVideosMock: CompetitorTopVideos,
+    marketviewCompetitorVideos: CompetitorVideos,
+    marketviewSimilarProperties: SimilarProperties,
+  } = readFiles([
+    "marketviewCompetitorTopVideosMock",
+    "marketviewCompetitorVideos",
+    "marketviewSimilarProperties"
+  ], "marketview", root)
+
+  // Create mock json
+  const mock = days.reduce((object, days) => {
+    object[days] = {
+      CompetitorTopVideos: JSON.parse(random(CompetitorTopVideos)),
+      CompetitorVideos: JSON.parse(random(CompetitorVideos)),
+      SimilarProperties: JSON.parse(random(SimilarProperties)),
+    }
+    return object;
+  }, {});
+
+  // Create marketviewTimeMock.json file
+  fs.writeFile(path.join(root, `${mocks}/marketviewTimeMock.json`), JSON.stringify(mock), (err) => {
+    if (err) console.log(err)
+  });
+
+  res.redirect('../')
+}
+
+module.exports = {
+  createLibraryMock,
+  createMarketviewTimeMock
+};

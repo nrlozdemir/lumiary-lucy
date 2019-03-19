@@ -59,7 +59,7 @@ class TopVideosCard extends Component {
     const props = {}
 
     for (const item of selects) {
-      props[`select${item}`] = this.state[item]
+      props[`select${item}`] = this.state[`select${item}`]
       props[`select${item}Show`] = true
     }
 
@@ -80,10 +80,10 @@ class TopVideosCard extends Component {
       <div className="grid-collapse">
         <div className={barChartContainer}>
           <div className={barChartHeaderClass}>
-            <div className="col-4 text-bold">
+            <div className="col-6 text-bold">
               <p className={headerTitleClass}>{title}</p>
             </div>
-            <div className="col-8">
+            <div className="col-6">
               <div className={style.selects}>
                 <SelectFilters
                   handleSelectFilters={this.handleSelectFilters}

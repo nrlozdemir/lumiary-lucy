@@ -238,6 +238,11 @@ export class DominantColor extends React.Component {
 		};
 	}
 
+	handleSelectFilters = (name, value) => {
+    this.setState({
+      [name]: value,
+    })
+  }
 	render() {
 		const { selectLikes, selectPlatforms, selectDate } = this.state;
 
@@ -246,9 +251,15 @@ export class DominantColor extends React.Component {
 				<div className={style.cardTitle + ' col-12'}>
 					<span>Dominant Color Performance By Gender</span>
 					<div className={style.selects}>
-						<SelectFilters selectPlatformsShow={true} selectPlatforms={selectPlatforms} />
-						<SelectFilters selectLikesShow={true} selectLikes={selectLikes} />
-						<SelectFilters selectDateShow={true} selectDate={selectDate} />
+						<SelectFilters
+							selectPlatformsShow
+							selectLikesShow
+							handleSelectFilters={this.handleSelectFilters}
+							selectDateShow
+							selectPlatforms={selectPlatforms}
+							selectLikes={selectLikes}
+							selectDate={selectDate}
+						/>
 					</div>
 				</div>
 				<div className="col-6">

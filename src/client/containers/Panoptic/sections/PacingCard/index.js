@@ -33,11 +33,13 @@ const PacingCard = ({
           />
         </div>
       </div>
-      <div className="col-6">
-        <HorizontalStackedBarChart barData={barData} />
-      </div>
-      <div className="col-6">
-        <StadiumChart />
+      <div className={style.pacingCardInner}>
+        <div className={style.pacingCardInnerItem}>
+          <HorizontalStackedBarChart barData={barData} />
+        </div>
+        <div className={style.pacingCardInnerItem}>
+          <StadiumChart />
+        </div>
       </div>
     </div>
   )
