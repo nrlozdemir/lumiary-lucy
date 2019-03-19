@@ -509,6 +509,8 @@
 }
 .ReactTable .rt-thead .rt-th,
 .ReactTable .rt-thead .rt-td {
+  font-family: $font-family-ClanOTNews;
+  font-size: 12px;
   &:not(.-sort-desc),
   &:not(.-sort-asc) {
     &:after {

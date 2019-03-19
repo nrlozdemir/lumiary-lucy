@@ -4,6 +4,7 @@ import { compose } from 'redux'
 import { createStructuredSelector } from 'reselect'
 
 import { actions, makeSelectLibrary } from 'Reducers/library'
+import style from '../../style.scss'
 
 import VideoCardList from 'Components/VideoCardList'
 import RouterLoading from 'Components/RouterLoading'
@@ -18,7 +19,7 @@ class VideoSection extends React.Component {
       return <RouterLoading />
     }
     return (
-      <div className="mt-50 d-flex flex-grap justify-space-between">
+      <div className={style.videoContainer}>
         <VideoCardList data={this.props.library.videos} />
       </div>
     )
