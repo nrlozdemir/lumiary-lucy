@@ -59,7 +59,7 @@ class TopVideosCard extends Component {
     const props = {}
 
     for (const item of selects) {
-      props[`select${item}`] = this.state[item]
+      props[`select${item}`] = this.state[`select${item}`]
       props[`select${item}Show`] = true
     }
 
