@@ -20,53 +20,53 @@ import style from '../style.scss'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Competitor extends React.Component {
-	componentDidMount() {
-		this.props.getCompetitorTopVideosRequest();
-		this.props.getCompetitorVideosRequest();
-		this.props.getSimilarPropertiesRequest();
-	}
+  componentDidMount() {
+    this.props.getCompetitorTopVideosRequest();
+    this.props.getCompetitorVideosRequest();
+    this.props.getSimilarPropertiesRequest();
+  }
 
-	changeSelectedVideo = (video) => {
-		this.props.setSelectedVideo(video)
-	}
+  changeSelectedVideo = (video) => {
+    this.props.setSelectedVideo(video)
+  }
 
-	render() {
-		const {
-			marketview,
-			marketview: { competitorTopVideos, similarProperties },
-		} = this.props
+  render() {
+    const {
+      marketview,
+      marketview: { competitorTopVideos, similarProperties },
+    } = this.props
 
-		if (!marketview.selectedVideo || marketview.loading) {
-			return <RouterLoading />
-		}
+    if (!marketview.selectedVideo || marketview.loading) {
+      return <RouterLoading />
+    }
 
-		return (
-			<React.Fragment>
-				<Slider
-					data={marketview}
-					changeSelectedVideo={this.changeSelectedVideo}
-					title="Top Performing Competitor Videos"
-				/>
-				{competitorTopVideos && (
-					<TopVideosCard chartData={competitorTopVideos} />
-				)}
-				{similarProperties && <TopSimilarProperties data={similarProperties} />}
-			</React.Fragment>
-		)
-	}
+    return (
+      <React.Fragment>
+        <Slider
+          data={marketview}
+          changeSelectedVideo={this.changeSelectedVideo}
+          title="Top Performing Competitor Videos"
+        />
+        {competitorTopVideos && (
+          <TopVideosCard chartData={competitorTopVideos} />
+        )}
+        {similarProperties && <TopSimilarProperties data={similarProperties} />}
+      </React.Fragment>
+    )
+  }
 }
 
 Competitor.propTypes = {}
 
 const mapStateToProps = createStructuredSelector({
-	marketview: makeSelectMarketview(),
+  marketview: makeSelectMarketview(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )
 
 export default compose(withConnect)(Competitor)
