@@ -10,7 +10,7 @@ const barChartContainer = cx('shadow-1 col-12', style.panopticBarChart)
 const barChartHeaderClass = cx('col-12 mt-24 mb-24', style.barChartHeader)
 const barChartFooterClass = cx('col-12 mb-56', style.barChartFooter)
 const barContainerClass = cx('col-12', style.barChartContainer)
-const headerTitleClass = cx('font-secondary-first text-bold', style.title)
+const headerTitleClass = cx('font-secondary-second', style.title)
 const referencesClass = cx('font-secondary-second', style.references)
 
 const PanopticBarChart = ({
