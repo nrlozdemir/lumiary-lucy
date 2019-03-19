@@ -8,72 +8,73 @@ import { Provider } from "react-redux";
 import Helmet from "react-helmet";
 
 const cache = require("express-redis-cache")({
-	host: process.env.REDIS_HOST
+  host: process.env.REDIS_HOST
 });
 
 cache.del("*", (error, numDeleted) =>
-	console.log(`Deleted ${numDeleted} cache entries.`)
+  console.log(`Deleted ${numDeleted} cache entries.`)
 ); // Force-clear cache on app startup
 
 module.exports = app => {
-	// HEALTH
-	// =============================================================================
-	app.use(
-		"/healthcheck",
-		require("express-healthcheck")({
-			healthy: function () {
-				return { status: "upppp" };
-			}
-		})
-	);
+  // HEALTH
+  // =============================================================================
+  app.use(
+    "/healthcheck",
+    require("express-healthcheck")({
+      healthy: function () {
+        return { status: "upppp" };
+      }
+    })
+  );
 
-	// Create Mock
-	app.get('/createMock', require('./createMock'));
+  // Create Mock
+  app.get('/createLibraryMock', require('./createMock').createLibraryMock);
+  app.get('/createMarketviewTimeMock', require('./createMock').createMarketviewTimeMock);
 
-	if (
-		process.env.ENVIRONMENT === "qa" ||
-		process.env.ENVIRONMENT === "staging"
-	) {
-		app.use(
-			basicAuth({
-				users: {
-					[process.env.BASIC_AUTH_USER]: process.env.BASIC_AUTH_PASSWORD
-				},
-				challenge: true
-			})
-		);
-	}
+  if (
+    process.env.ENVIRONMENT === "qa" ||
+    process.env.ENVIRONMENT === "staging"
+  ) {
+    app.use(
+      basicAuth({
+        users: {
+          [process.env.BASIC_AUTH_USER]: process.env.BASIC_AUTH_PASSWORD
+        },
+        challenge: true
+      })
+    );
+  }
 
-	app.get(
-		"/*",
-		cache.route({
-			prefix: "lumiere"
-		}),
-		(req, res) => {
-			const context = {};
-			const head = Helmet.rewind();
+  app.get(
+    "/*",
+    cache.route({
+      prefix: "lumiere"
+    }),
+    (req, res) => {
+      const context = {};
+      const head = Helmet.rewind();
 
-			//render components
-			const reactDom = renderToString(
-				<Provider store={store}>
-					<StaticRouter location={req.url} context={context}>
-						<Routes />
-					</StaticRouter>
-				</Provider>
-			);
+      //render components
+      const reactDom = renderToString(
+        <Provider store={store}>
+          <StaticRouter location={req.url} context={context}>
+            <Routes />
+          </StaticRouter>
+        </Provider>
+      );
 
-			if (context.status === 404) {
-				res.status(404);
-			}
+      if (context.status === 404) {
+        res.status(404);
+      }
 
-			res.render("index", {
-				title: head.title.toString(),
-				meta: head.meta.toString(),
-				link: head.link.toString(),
-				ENV: process.env.NODE_ENV,
-				state: JSON.stringify(store.getState()),
-				content: reactDom
-			});
-		}
-	);
+      res.render("index", {
+        title: head.title.toString(),
+        meta: head.meta.toString(),
+        link: head.link.toString(),
+        ENV: process.env.NODE_ENV,
+        state: JSON.stringify(store.getState()),
+        content: reactDom
+      });
+    }
+  );
 };
