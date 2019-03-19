@@ -57,7 +57,13 @@ export const types = {
   GET_MARKETVIEW_TOTALCOMPETITORVIEWS_SUCCESS:
     "Marketview/GET_MARKETVIEW_TOTALCOMPETITORVIEWS_SUCCESS",
   GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE:
-    "Marketview/GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE",
+		"Marketview/GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE",
+	GET_MARKETVIEW_DETAIL_TIME_REQUEST:
+    "Marketview/GET_MARKETVIEW_DETAIL_TIME_REQUEST",
+  GET_MARKETVIEW_DETAIL_TIME_SUCCESS:
+    "Marketview/GET_MARKETVIEW_DETAIL_TIME_SUCCESS",
+  GET_MARKETVIEW_DETAIL_TIME_FAILURE:
+		"Marketview/GET_MARKETVIEW_DETAIL_TIME_FAILURE",
 };
 export const actions = {
 	getCompetitorVideosRequest: () => ({
@@ -151,7 +157,18 @@ export const actions = {
   getTotalCompetitorViewsFailure: error => ({
 		type: types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE,
 		error
-  }),
+	}),
+	getMarketviewDetailTimeRequest: () => ({
+		type: types.GET_MARKETVIEW_DETAIL_TIME_REQUEST,
+	}),
+	getMarketviewDetailTimeSuccess: payload => ({
+		type: types.GET_MARKETVIEW_DETAIL_TIME_SUCCESS,
+		payload
+	}),
+	getMarketviewDetailTimeFailure: error => ({
+		type: types.GET_MARKETVIEW_DETAIL_TIME_FAILURE,
+		error
+	}),
 };
 export const initialState = fromJS({
 	competitorTopVideos: null,
@@ -162,7 +179,8 @@ export const initialState = fromJS({
   pacingChartData: null,
   formatChartData: null,
   totalViewsData: null,
-  totalCompetitorViewsData: null,
+	totalCompetitorViewsData: null,
+	marketviewDetailTime: null,
 	error: false,
 	loading: false
 });
@@ -206,7 +224,7 @@ const marketviewReducer = (state = initialState, action) => {
 			return state
 				.set("error", fromJS(action.error))
         .set("loading", fromJS(false));
-        
+
 		case types.GET_MARKETVIEW_BUBLECHART_REQUEST:
 			return state.set("loading", fromJS(true));
 		case types.GET_MARKETVIEW_BUBLECHART_SUCCESS:
@@ -217,7 +235,7 @@ const marketviewReducer = (state = initialState, action) => {
 			return state
 				.set("error", fromJS(action.error))
 				.set("loading", fromJS(false));
-        
+
 		case types.GET_MARKETVIEW_PACINGCHART_REQUEST:
 			return state.set("loading", fromJS(true));
 		case types.GET_MARKETVIEW_PACINGCHART_SUCCESS:
@@ -228,7 +246,7 @@ const marketviewReducer = (state = initialState, action) => {
 			return state
 				.set("error", fromJS(action.error))
 				.set("loading", fromJS(false));
-        
+
 		case types.GET_MARKETVIEW_FORMATCHART_REQUEST:
 			return state.set("loading", fromJS(true));
 		case types.GET_MARKETVIEW_FORMATCHART_SUCCESS:
@@ -239,7 +257,7 @@ const marketviewReducer = (state = initialState, action) => {
 			return state
 				.set("error", fromJS(action.error))
 				.set("loading", fromJS(false));
-        
+
 		case types.GET_MARKETVIEW_TOTALVIEWS_REQUEST:
 			return state.set("loading", fromJS(true));
 		case types.GET_MARKETVIEW_TOTALVIEWS_SUCCESS:
@@ -250,7 +268,7 @@ const marketviewReducer = (state = initialState, action) => {
 			return state
 				.set("error", fromJS(action.error))
         .set("loading", fromJS(false));
-        
+
 		case types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST:
 			return state.set("loading", fromJS(true));
 		case types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_SUCCESS:
@@ -258,6 +276,17 @@ const marketviewReducer = (state = initialState, action) => {
 				.set("totalCompetitorViewsData", fromJS(action.payload))
 				.set("loading", fromJS(false));
 		case types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE:
+			return state
+				.set("error", fromJS(action.error))
+				.set("loading", fromJS(false));
+
+		case types.GET_MARKETVIEW_DETAIL_TIME_REQUEST:
+			return state.set("loading", fromJS(true))
+		case types.GET_MARKETVIEW_DETAIL_TIME_SUCCESS:
+			return state
+				.set("marketviewDetailTime", fromJS(action.payload))
+				.set("loading", fromJS(false));
+		case types.GET_MARKETVIEW_DETAIL_TIME_FAILURE:
 			return state
 				.set("error", fromJS(action.error))
 				.set("loading", fromJS(false));

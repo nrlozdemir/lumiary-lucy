@@ -10,7 +10,7 @@ import marketviewPacingChartData from 'Api/mocks/marketviewPacingChartMock.json'
 import marketviewFormatChartData from 'Api/mocks/marketviewFormatChartMock.json';
 import marketviewTotalViewsData from 'Api/mocks/marketviewTotalViewsMock.json';
 import marketviewTotalCompetitorViewsData from 'Api/mocks/marketviewTotalCompetitorViewsMock.json';
-
+import marketviewTimeMockData from 'Api/mocks/marketviewTimeMock.json'
 function getCompetitorVideosApi() {
   return axios('/')
   .then(res => marketviewCompetitorVideosData);
@@ -56,6 +56,12 @@ function getTotalCompetitorViewsApi() {
   //this will use ajax function in utils/api when real data is provided
   return axios.get('/')
   .then(res => marketviewTotalCompetitorViewsData)
+}
+
+function getMarketviewDaysApi() {
+  //this will use ajax function in utils/api when real data is provided
+  return axios.get('/')
+  .then(res => marketviewTimeMockData)
 }
 
 function* getCompetitorVideosMarketview() {
@@ -130,6 +136,15 @@ function* getTotalCompetitorViewsData() {
   }
 }
 
+function* getmarketviewTimeMockData() {
+  try {
+    const payload = yield call(getMarketviewDaysApi);
+    yield put(actions.getMarketviewDetailTimeSuccess(payload));
+  } catch (error) {
+    yield put(actions.getMarketviewDetailTimeFailure(error));
+  }
+}
+
 export default [
   takeLatest(types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_REQUEST, getCompetitorTopVideosMarketview),
   takeLatest(types.GET_MARKETVIEW_COMPETITOR_VIDEOS_REQUEST, getCompetitorVideosMarketview),
@@ -138,5 +153,6 @@ export default [
   takeLatest(types.GET_MARKETVIEW_PACINGCHART_REQUEST, getPacingChartData),
   takeLatest(types.GET_MARKETVIEW_FORMATCHART_REQUEST, getFormatChartData),
   takeLatest(types.GET_MARKETVIEW_TOTALVIEWS_REQUEST, getTotalViewsData),
-  takeLatest(types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST, getTotalCompetitorViewsData),
+	takeLatest(types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST, getTotalCompetitorViewsData),
+	takeLatest(types.GET_MARKETVIEW_DETAIL_TIME_REQUEST, getmarketviewTimeMockData),
 ];
