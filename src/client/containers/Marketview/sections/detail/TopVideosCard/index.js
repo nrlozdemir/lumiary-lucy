@@ -102,8 +102,8 @@ class TopVideosCard extends Component {
           </div>
           <div className="col-12">
             <div className={referencesClass}>
-              {references.map((ref) => (
-                <div className={style.referenceItem}>
+              {references.map((ref, index) => (
+                <div className={style.referenceItem} key={index}>
                   <span className={ref.className} />
                   {ref.text}
                 </div>

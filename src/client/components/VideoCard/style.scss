@@ -2,6 +2,7 @@
   margin: 10px 10px 40px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   position: relative;
+
   box-sizing: content-box;
   clear: both;
   width: calc(25% - 20px);
@@ -20,40 +21,72 @@
     bottom: 0;
     left: 0;
     z-index: 10;
-    transition: width 0.4s ease-in-out;
+    transition: width 0.3s ease-in-out;
     opacity: 0;
     box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.5);
   }
-
+  .opacityNone {
+    opacity: 0;
+  }
+  .opacityShow {
+    opacity: 1;
+  }
   .hidden {
     z-index: 1 !important;
   }
-
   .show {
     z-index: 1 !important;
   }
   .cardInner {
-    transition: all 0.4s ease-in-out;
+    transition: all 0.3s ease-in-out;
   }
-  &:hover {
+  .cardHandle {
+    position: relative;
+    display: block;
+  }
+  &.hoverReady:hover {
+    z-index: 10;
     .progressBar {
       opacity: 1;
     }
+    @-webkit-keyframes run {
+      0% {
+        width: 100%;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        top: 0;
+        height: 120px;
+      }
+      100% {
+        left: -35px;
+        right: -35px;
+        bottom: -19px;
+        top: -19px;
+        width: calc(100% + 70px);
+        box-shadow: 0 10px 20px 0 #000;
+      }
+    }
     .cardInner {
+      // transform: scale(1.2);
+      -webkit-animation: ease-in-out;
+      -webkit-animation-name: run;
+      -webkit-animation-duration: 0.4s;
       position: absolute;
       left: -35px;
       right: -35px;
-      bottom: -15px;
-      top: -15px;
+      bottom: -19px;
+      top: -19px;
       width: calc(100% + 70px);
       height: calc(100% + 38px);
-      z-index: 10;
       box-shadow: 0 10px 20px 0 #000;
-      // transform: scale(1.2);
-    }
-    .cardHandle {
-      position: relative;
-      display: block;
+      .cardLink {
+        // transform: scale(0.8);
+      }
+      video {
+        object-fit: cover;
+        // transform: scale(1);
+      }
     }
     .cardImage {
       &:after {
@@ -84,6 +117,10 @@
     }
     video {
       z-index: -1;
+      // transform: scale(1.2);
+    }
+    canvas {
+      object-fit: cover;
     }
     canvas,
     video {
@@ -92,7 +129,6 @@
       height: 100%;
       top: 0;
       left: 0;
-      object-fit: cover;
       // transition: opacity 0.3s ease-in-out;
     }
 

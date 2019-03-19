@@ -3,27 +3,47 @@
   margin-top: 72px;
   > div {
     flex: 1;
-  }
-  &:last-child > div {
-    flex: 1;
-    margin-right: auto;
+    display: flex;
+    align-items: center;
+    &:last-child {
+      justify-content: flex-end;
+    }
+    &:nth-child(2) {
+      justify-content: center;
+    }
   }
   .filterSelect {
     &:first-child {
       outline: none;
-      background: $color-dark-five url("../../../../../assets/search.png") no-repeat 10px 10px;
-      background-size: 17px 17px;
       padding-left: 39px;
-      border: 1px solid $color-white;
+      border: 1px solid $color-dusk;
       width: 280px;
       border-radius: 0;
+      input::placeholder {
+        font-family: ClanOT-News;
+        font-size: 14px;
+        color: $color-dusk !important;
+      }
+      &::before {
+        font-family: $font-family-qf-icons;
+        content: '\e986';
+        width: 20px;
+        height: 20px;
+        position: absolute;
+        left: 14px;
+        font-size: 18px;
+        top: 10px;
+      }
     }
-    >div{
+    > div {
+      border-radius: 0;
+      z-index: 20;
+    }
+    p {
       border-radius: 0;
     }
-    p{
+    div {
       border-radius: 0;
     }
-    div{border-radius: 0}
   }
 }
