@@ -34,6 +34,8 @@
     width: 384px;
   }
   .marketViewSlickSlider {
+    max-height: 100%;
+
     .item {
       position: relative;
       opacity: 0.2;
@@ -80,14 +82,17 @@
       background: white;
       border-radius: 20px;
       left: 15%;
-      top: 18%;
-      z-index: 11;
+      top: 35%;
+			z-index: 11;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
       &::before {
         font-family: $font-family-qf-icons;
-        content: '\e921';
+        content: '\E988';
         color: black;
         line-height: 40px;
-        margin-left: 10px;
       }
     }
 
@@ -98,13 +103,16 @@
       background: white;
       border-radius: 20px;
       right: 15%;
-      top: 18%;
+			top: 35%;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+
       &::before {
-        content: '\e922';
+        content: '\E987';
         color: $color-black;
         font-family: $font-family-qf-icons;
         line-height: 40px;
-        margin-left: 10px;
       }
     }
 
@@ -133,6 +141,8 @@
         width: 100px;
         margin: 0 14px;
         opacity: 0.2;
+        transition: all 0.3s ease;
+
         a {
           img {
             width: 100%;
