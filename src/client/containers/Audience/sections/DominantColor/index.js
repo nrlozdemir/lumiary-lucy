@@ -251,15 +251,15 @@ export class DominantColor extends React.Component {
 				<div className={style.cardTitle + ' col-12'}>
 					<span>Dominant Color Performance By Gender</span>
 					<div className={style.selects}>
-						<SelectFilters selectPlatformsShow
-						 selectLikesShow
-
-						 handleSelectFilters={this.handleSelectFilters}
-
+						<SelectFilters
+							selectPlatformsShow
+							selectLikesShow
+							handleSelectFilters={this.handleSelectFilters}
 							selectDateShow
 							selectPlatforms={selectPlatforms}
-						selectLikes={selectLikes}
-						selectDate={selectDate} />
+							selectLikes={selectLikes}
+							selectDate={selectDate}
+						/>
 					</div>
 				</div>
 				<div className="col-6">
