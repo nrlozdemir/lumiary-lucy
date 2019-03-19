@@ -1,5 +1,8 @@
-body {
-  color: #fff;
+.videoContainer {
+  margin: 50px -10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }
 
 .sidebar {

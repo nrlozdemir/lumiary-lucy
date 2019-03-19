@@ -11,9 +11,11 @@ import style from './style.scss'
 import { socialIconSelector } from '../../utils'
 import { Link } from 'react-router-dom'
 export class VideoCard extends Component {
+  _isMounted = false
   constructor(props) {
     super(props)
     this.state = {
+      hoverReady: false,
       firstLoad: true,
       showVideo: false,
       width: 0,
@@ -24,35 +26,56 @@ export class VideoCard extends Component {
   }
 
   grabFrame = () => {
-    return this.state.ctx.drawImage(
-      this.video,
-      -60,
-      -60,
-      this.video.clientWidth + 60,
-      this.video.clientHeight + 60
-    )
-  }
-
-  componentDidMount() {
+    var wrh = this.video.videoWidth / this.video.videoHeight
+    var newWidth = this.canvas.width
+    var newHeight = newWidth / wrh
+    newWidth = newHeight * wrh
+    this.state.ctx.drawImage(this.video, 0, 0, newWidth, newHeight)
     this.setState({
-      ctx: this.canvas.getContext('2d'),
+      hoverReady: true,
     })
   }
 
-  componentDidUpdate() {
-    if (this.video && this.state.firstLoad) {
-      const _this = this
-      this.video.addEventListener('loadeddata', function() {
-        _this.grabFrame()
-      })
+  componentDidMount() {
+    this._isMounted = true
+    if (this._isMounted) {
       this.setState({
-        firstLoad: false,
+        ctx: this.canvas.getContext('2d'),
       })
     }
   }
 
+  componentDidUpdate() {
+    if (this._isMounted) {
+      if (this.video && this.state.firstLoad) {
+        const _this = this
+        this.video.addEventListener('loadeddata', function() {
+          _this.grabFrame()
+          this.addEventListener(
+            'timeupdate',
+            function(e) {
+              _this.setState({
+                width: this.currentTime,
+              })
+            },
+            false
+          )
+        })
+        this.setState({
+          firstLoad: false,
+        })
+      }
+    }
+  }
+
+  componentWillUnmount() {
+    this.video.removeEventListener('timeupdate', null)
+    this.video.removeEventListener('loadeddata', null)
+    this._isMounted = false
+  }
+
   pausedFunction = () => {
-    this.grabFrame()
+    // this.grabFrame()
     this.video.pause()
     this.video.removeEventListener('timeupdate', null)
     this.setState({
@@ -62,6 +85,7 @@ export class VideoCard extends Component {
   }
 
   playedFunction = () => {
+    if (!this.state.hoverReady) return
     this.video.play()
     const _this = this
     this.setState({
@@ -69,26 +93,21 @@ export class VideoCard extends Component {
       startProgress: true,
       duration: this.video.duration,
     })
-    this.video.addEventListener(
-      'timeupdate',
-      function(e) {
-        _this.setState({
-          width: this.currentTime,
-        })
-      },
-      false
-    )
   }
 
   render() {
     const { video, options = options || {}, muted = true } = this.props
-    const cardContainerClass = classnames(style.cardContainer, {
-      ['bg-dusk']: !options.barColor,
-      // ['col-3']: !options.size,
-      // [`col-${options.size}`]: options.size,
-      [`bg-${options.barColor}`]: options.barColor,
-      [options.customClass]: options.customClass,
-    })
+    const cardContainerClass = classnames(
+      style.cardContainer,
+      {
+        ['bg-dusk']: !options.barColor,
+        // ['col-3']: !options.size,
+        // [`col-${options.size}`]: options.size,
+        [`bg-${options.barColor}`]: options.barColor,
+        [options.customClass]: options.customClass,
+      },
+      this.state.hoverReady && style.hoverReady
+    )
 
     const iconClass = classnames(
       socialIconSelector(video.socialIcon),
@@ -106,7 +125,12 @@ export class VideoCard extends Component {
           className={style.cardInner}
           ref={(cardInner) => (this.cardInner = cardInner)}
         >
-          <div className={style.cardImage}>
+          <div
+            className={classnames(
+              style.cardImage,
+              !this.state.hoverReady ? style.opacityNone : style.opacityShow
+            )}
+          >
             <canvas
               className={classnames(
                 'img-responsive',
@@ -134,6 +158,7 @@ export class VideoCard extends Component {
               />
             )}
           </div>
+
           <div className={classnames('bg-dusk', style.cardBody)}>
             <div className={style.bodyHeader}>
               <div className={style.cardInfo}>
