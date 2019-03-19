@@ -4,18 +4,19 @@ export const lineChartOptions = {
     datalabels: false
   },
   tooltips: {
-    position: 'nearest',
+		xAlign: 'center',
+		yAlign: 'bottom',
     backgroundColor: '#fff',
     titleFontColor: '#242b49',
     bodyFontColor: '#242b49',
     footerFontColor: '#242b49',
-    xPadding: 10,
-    yPadding: 16,
-    cornerRadius: 3,
+    xPadding: 14,
+    yPadding: 14,
+    cornerRadius: 10,
     callbacks: {
       title: function(tooltipItem, data) {
 				const { datasetIndex, index } = tooltipItem[0];
-				return data.datasets[datasetIndex].data[index] + ' likes';
+				return data.datasets[datasetIndex].data[index] + ' Likes';
       },
       label: function(tooltipItem, data) {
         return null
@@ -35,7 +36,8 @@ export const lineChartOptions = {
         fontColor: "#fff",
         fontSize: 12,
         stepSize: 1,
-        beginAtZero: true,
+				beginAtZero: true,
+				padding: 20,
         callback: function(value, index, values) {
           return '    ' + value;
         }
@@ -54,7 +56,8 @@ export const lineChartOptions = {
 				fontSize: 12,
 				max: 1000000,
         stepSize: 250000,
-        beginAtZero: true,
+				beginAtZero: true,
+				padding: 20,
         marginRight: 16,
         callback: function(value, index, values) {
 					return value < 1000
