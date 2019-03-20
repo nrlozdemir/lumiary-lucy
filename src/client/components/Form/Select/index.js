@@ -48,21 +48,6 @@ const Select = (props) => {
     )
   }
 
-  const dot = (color = '#ccc') => ({
-    alignItems: 'center',
-    display: 'flex',
-
-    ':before': {
-      backgroundColor: color,
-      borderRadius: 10,
-      content: '" "',
-      display: 'block',
-      marginRight: 8,
-      height: 10,
-      width: 10,
-    },
-  })
-
   const colourStyles = {
     control: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
