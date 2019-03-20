@@ -83,16 +83,20 @@
       border-radius: 20px;
       left: 15%;
       top: 35%;
-			z-index: 11;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+      z-index: 11;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &::before {
         font-family: $font-family-qf-icons;
         content: '\E988';
         color: black;
         line-height: 40px;
+      }
+
+      &:hover {
+        background: #fff;
       }
     }
 
@@ -103,16 +107,20 @@
       background: white;
       border-radius: 20px;
       right: 15%;
-			top: 35%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+      top: 35%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &::before {
         content: '\E987';
         color: $color-black;
         font-family: $font-family-qf-icons;
         line-height: 40px;
+      }
+
+      &:hover {
+        background: #fff;
       }
     }
 
