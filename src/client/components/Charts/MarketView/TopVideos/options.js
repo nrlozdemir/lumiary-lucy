@@ -25,9 +25,9 @@ export const chartOptions = {
         fontSize: 12,
         stepSize: 1,
         beginAtZero: true,
-        padding:15, 
-        callback: function(value, index, values) {
-          return value ;
+        padding: 15,
+        callback: function (value, index, values) {
+          return value;
         }
       },
       barThickness: 56
@@ -45,7 +45,8 @@ export const chartOptions = {
         stepSize: 25,
         beginAtZero: true,
         padding: 15,
-        callback: function(value, index, values) {
+        max: 100,
+        callback: function (value, index, values) {
           return value + '%';
         }
       }

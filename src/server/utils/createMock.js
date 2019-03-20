@@ -14,12 +14,12 @@ const randomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-const randomNumberArray = (lenght, min, max) => {
-  return [...Array(lenght)].map(() => randomNumber(min, max));
+const randomNumberArray = (length, min, max) => {
+  return [...Array(length)].map(() => randomNumber(min, max));
 }
 
-const randomPercentage = (lenght) => {
-  const numbers = randomNumberArray(lenght, 0, 100);
+const randomPercentage = (length) => {
+  const numbers = randomNumberArray(length, 0, 100);
   const total = numbers.reduce((total, value) => total + value)
 
   return numbers.map(value => Number(((value / total) * 100).toFixed(2)));
@@ -46,6 +46,21 @@ const randomSimilarPropertiesArray = (leftTitles) => {
     "leftTitle": leftTitles[index],
     "value": value
   }));
+}
+
+const randomCompetitiorArray = (backgroundColors) => {
+  const percentages = backgroundColors.map(() => randomPercentage(backgroundColors.length))
+  return backgroundColors.map((color, index) => {
+    let currentVal = [];
+    percentages.map((val) => {
+      currentVal.push(val[index])
+    })
+
+    return {
+      backgroundColor: '#' + color,
+      data: currentVal
+    }
+  })
 }
 
 const random = file => {
@@ -83,6 +98,12 @@ const random = file => {
     const leftTitles = $1.replace(/'/g, '"');
     return JSON.stringify(randomSimilarPropertiesArray(JSON.parse(leftTitles)));
   })
+
+  data = data.replace(/"rCTV#(.*)#"/g, ($0, $1) => {
+    const backgroundColors = $1.replace(/'/g, '"');
+    return JSON.stringify(randomCompetitiorArray(JSON.parse(backgroundColors)));
+  })
+
 
   return data;
 }
