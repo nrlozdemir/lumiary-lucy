@@ -14,11 +14,13 @@ const PacingCard = ({ barData }) => {
       <div className={style.componentTitle}>
         <span>Pacing For Each Format by Performance</span>
       </div>
-      <div className="col-6">
-        <HorizontalStackedBarChart barData={barData} />
-      </div>
-      <div className="col-6">
-        <StadiumChart />
+      <div className={style.pacingCardInner}>
+        <div className={style.pacingCardInnerItem}>
+          <HorizontalStackedBarChart barData={barData} />
+        </div>
+        <div className={style.pacingCardInnerItem}>
+          <StadiumChart />
+        </div>
       </div>
     </div>
   )

@@ -25,17 +25,15 @@ const GeneratedReportBarChart = ({
         <div className="text-bold">
           <p className={headerTitleClass}>Video Releases vs Engagement</p>
         </div>
-        <div>
-          <div className={style.selects}>
-            <p>
-              <span className={style.blueDot} />
-              Likes
-            </p>
-            <p>
-              <span className={style.redDot} />
-              Video Releases
-            </p>
-          </div>
+        <div className={style.selects}>
+          <p>
+            <span className={style.blueDot} />
+            Likes
+          </p>
+          <p>
+            <span className={style.redDot} />
+            Video Releases
+          </p>
         </div>
       </div>
       {/* bar charts */}

@@ -26,7 +26,7 @@ const GeneratedReportViewSlider = (props) => {
     className: 'marketViewSlickSlider',
     infinite: false,
     slidesToShow: 3,
-    speed: 0,
+    speed: 300,
     centerMode: true,
     centerPadding: '0',
     dots: true,
