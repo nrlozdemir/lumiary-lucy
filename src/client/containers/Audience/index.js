@@ -7,6 +7,7 @@ import { Performance } from './sections/Performance'
 import { DominantColor } from './sections/DominantColor'
 import { ColorTemperature } from './sections/ColorTemperature'
 import { ChangeOverTime } from './sections/ChangeOverTime'
+import AgeSlider from './sections/AgeSlider'
 import GenderSection from './sections/Gender'
 
 export class Audience extends React.Component {
@@ -15,6 +16,7 @@ export class Audience extends React.Component {
 		return (
 			<React.Fragment>
 				<Performance />
+				<AgeSlider />
 				<GenderSection />
 				<ColorTemperature />
 				<ChangeOverTime />
