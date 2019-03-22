@@ -22,50 +22,62 @@ const PrevArrow = (props) => {
 class AudienceSlider extends React.Component {
 	constructor(props) {
 		super(props)
-		this.state = {}
+		this.state = {
+			refSlider: null,
+			refThumb: null
+		}
+	}
+
+	componentDidMount() {
+		this.setState({
+			refSlider: this.refSlider,
+			refThumb: this.refThumb
+		});
 	}
 
 	render() {
-		const { items } = props;
+		const { items, changeVideo } = this.props;
+		const { refSlider, refThumb } = this.state;
 
 		const settings = {
 			className: 'audienceSlickSlider',
 			infinite: false,
+			arrows: false,
 			slidesToShow: 3,
 			slidesToScroll: 1,
-			arrows: false,
 			speed: 300,
-			centerMode: true,
-			centerPadding: '0',
 			dots: false,
 			variableWidth: true,
 			variableHeight: true,
 			swipeToSlide: false,
-			asNavFor: this.thumb,
-			afterChange: currentSlide => props.changeVideo(items[currentSlide])
+			focusOnSelect: true,
+			afterChange: currentSlide => changeVideo(items[currentSlide]),
+			centerMode: true,
+			centerPadding: "0",
 		};
 
 		const thumbSettings = {
 			className: 'audienceThumbSlickSlider',
 			infinite: false,
+			arrows: true,
 			slidesToShow: 9,
 			slidesToScroll: 1,
-			arrows: false,
 			speed: 300,
-			centerMode: true,
-			centerPadding: '0',
-			variableWidth: true,
-			variableHeight: true,
-			swipeToSlide: false,
+			swipeToSlide: true,
 			nextArrow: <NextArrow />,
 			prevArrow: <PrevArrow />,
-			asNavFor: this.slider,
-			afterChange: currentSlide => props.changeVideo(items[currentSlide])
+			focusOnSelect: true,
+			centerMode: true,
+			centerPadding: "0",
 		};
 
 		return (
-			<div className={style.section}>
-				<Slider ref={slider => (this.slider = slider)} {...settings}>
+			<div className={style.section} >
+				<Slider
+					asNavFor={refThumb}
+					ref={slider => (this.refSlider = slider)}
+					{...settings}
+				>
 					{items.map((item, i) => (
 						<div className="item" key={i}>
 							<img src={item.image} />
@@ -79,10 +91,14 @@ class AudienceSlider extends React.Component {
 						</div>
 					))}
 				</Slider>
-				<Slider ref={thumb => (this.thumb = thumb)} {...thumbSettings}>
+				<Slider
+					asNavFor={refSlider}
+					ref={slider => (this.refThumb = slider)}
+					{...thumbSettings}
+				>
 					{items.map((item, i) => (
 						<div className="item" key={i}>
-							{item.title}
+							{item.age}
 						</div>
 					))}
 				</Slider>
