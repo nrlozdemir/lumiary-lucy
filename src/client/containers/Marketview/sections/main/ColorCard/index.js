@@ -79,7 +79,7 @@ class ColorCard extends Component {
               <div className={style.bubbleChartIcon}>{item.icon}</div>
               <div className={style.bubbleChartTooltip}>
                 <span>{item.name}</span>
-                <span>{item.value} Likes</span>
+                <span>{item.value} Shares</span>
               </div>
             </div>
           ))}
@@ -98,7 +98,7 @@ class ColorCard extends Component {
         </div>
         <div className={style.marketViewCardDescription}>
           <span>
-            Based on the number of likes for competitors across all platforms
+            Based on the number of shares for competitors across all platforms
           </span>
         </div>
         <Link to="/marketview/competitor" className={style.marketViewCardLink}>

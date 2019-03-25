@@ -41,7 +41,7 @@ class ColorCard extends Component {
         </div>
 
         <div className={style.marketViewCardDescription}>
-          Based on the number of likes for competitors across all platforms
+          Based on the number of shares for competitors across all platforms
         </div>
         <Link to="/marketview/time" className={style.marketViewCardLink}>
           View Time Metrics
