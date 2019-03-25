@@ -19,7 +19,21 @@
   width: 424px;
   z-index: 1000;
   right: -426px; // 2px for shadow
-  top: 0;
+	top: 0;
+
+	&.fixed{
+		overflow: hidden;
+	}
+}
+
+.sidebarMain{
+	position: relative;
+	height: 100%;
+	width: 100%;
+
+	&.fixed{
+		display: flex;
+	}
 }
 
 .sidebarHeader {
@@ -36,10 +50,26 @@
       cursor: pointer;
     }
   }
+
+	&.fixed{
+		position: absolute;
+		left: 0px;
+		top: 0px;
+		z-index: 11;
+	}
 }
 
 .sidebarVisible {
   right: 0;
+}
+
+.sidebarContent{
+	&.fixed{
+		width: 100%;
+		height: calc(100% - 80px);
+		overflow-x: hidden;
+		overflow-y: auto;
+	}
 }
 
 .overlay {
