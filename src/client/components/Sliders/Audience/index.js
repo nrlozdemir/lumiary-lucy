@@ -36,24 +36,37 @@ class AudienceSlider extends React.Component {
       speed: 300,
       autoplay: false,
       keyboard: false,
+      slideToClickedSlide: true,
       thumbs: {
         swiper: refThumb
+      },
+      on: {
+        slideChange: () => {
+          refThumb.slideTo(this.refSlider.activeIndex, 300);
+          changeVideo(items[this.refSlider.activeIndex]);
+        }
       }
       //afterChange: currentSlide => changeVideo(items[currentSlide]),
     };
 
     const thumbSettings = {
       slidesPerView: 9,
-      freeMode: true,
+      centeredSlides: true,
       watchSlidesVisibility: true,
       watchSlidesProgress: true,
+      on: {
+        slideChange: () => {
+          this.refSlider.slideTo(this.refThumb.activeIndex, 300)
+          changeVideo(items[this.refThumb.activeIndex]);
+        }
+      }
     };
 
     return (
       <div className={style.section} >
         {refThumb && (
           <div className="audienceSlider">
-            <Swiper {...settings}>
+            <Swiper ref={node => node && (this.refSlider = node.swiper)} {...settings}>
               {items.map((item, i) => (
                 <div className="item" key={i}>
                   <img src={item.image} />
