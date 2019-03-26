@@ -173,7 +173,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                   <div className={style.panelChart}>
                     <PointerCard
                       data={{
-                        topTitle: 'Based on Likes',
+                        topTitle: 'Based on Shares',
                         pointerData: 140,
                         bottomText: 'of your library is shot in',
                         avg: 103,

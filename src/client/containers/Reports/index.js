@@ -59,12 +59,6 @@ class Reports extends Component {
     return (
       <div className="grid-container col-12 mr-40 ml-40 mt-72 mb-72">
         <div className={style.reportsContainer}>
-          <div className="mb-16">
-            <Button buttonText="Open modal" onClick={() => this.openModal()} />
-          </div>
-          <div className="mb-16">
-            <Button to="/reports/generated" buttonText="Go gerenerated page" />
-          </div>
           <ReportsModal
             width={440}
             isOpen={modalIsOpen}
