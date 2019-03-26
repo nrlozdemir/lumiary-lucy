@@ -46,7 +46,6 @@ class AudienceSlider extends React.Component {
           changeVideo(items[this.refSlider.activeIndex]);
         }
       }
-      //afterChange: currentSlide => changeVideo(items[currentSlide]),
     };
 
     const thumbSettings = {
