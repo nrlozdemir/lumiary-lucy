@@ -53,9 +53,9 @@
         font-family: $font-family-ClanOT;
         font-size: 14px;
         position: absolute;
-        bottom: -1px;
-        left: -1px;
-        right: -1px;
+        bottom: 0;
+        left: 0;
+        right: 0;
         box-sizing: border-box;
         background: rgba($color: $color-dark-grey-blue, $alpha: 0.8);
         width: 100%;
@@ -83,16 +83,20 @@
       border-radius: 20px;
       left: 15%;
       top: 35%;
-			z-index: 11;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+      z-index: 11;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &::before {
         font-family: $font-family-qf-icons;
         content: '\E988';
         color: black;
         line-height: 40px;
+      }
+
+      &:hover {
+        background: #fff;
       }
     }
 
@@ -103,16 +107,20 @@
       background: white;
       border-radius: 20px;
       right: 15%;
-			top: 35%;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+      top: 35%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
       &::before {
         content: '\E987';
         color: $color-black;
         font-family: $font-family-qf-icons;
         line-height: 40px;
+      }
+
+      &:hover {
+        background: #fff;
       }
     }
 
@@ -175,15 +183,15 @@
   .custom-select {
     width: 170px;
     // max-width: 230px;
-    border-radius: 8px;
-    border: 1px solid $color-dusk;
-    background-color: $color-dark-five;
+    // border-radius: 8px;
+    // border: 1px solid $color-dusk;
+    // background-color: $color-dark-five;
 
-    > div,
-    > div > div,
-    [aria-hidden='true'] {
-      border-radius: 8px !important;
-    }
+    // > div,
+    // > div > div,
+    // [aria-hidden='true'] {
+    //   border-radius: 8px !important;
+    // }
   }
 
   .headerRight {

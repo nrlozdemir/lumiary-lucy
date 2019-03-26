@@ -48,20 +48,22 @@ export class Competitor extends React.Component {
     const {
       marketview,
       marketview: {
+        selectedVideo,
         competitorTopVideos,
         similarProperties,
         topPerformingPropertiesByCompetitorsData,
       },
     } = this.props
 
-    if (!marketview.selectedVideo || marketview.loading) {
+    if (!selectedVideo || marketview.loading) {
       return <RouterLoading />
     }
 
     return (
       <React.Fragment>
         <Slider
-          data={marketview}
+          data={marketview.videos}
+          selectedVideo={selectedVideo}
           changeSelectedVideo={this.changeSelectedVideo}
           title="Top Performing Competitor Videos"
         />

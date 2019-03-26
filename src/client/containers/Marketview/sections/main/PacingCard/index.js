@@ -17,7 +17,7 @@ class ColorCard extends Component {
         <div className={style.marketViewCardDate}>
           <span>Past Month</span>
         </div>
-        <PacingPieChart data={pacingChartData}/>
+        <PacingPieChart data={pacingChartData} />
         <div className={style.marketViewCardSubTitle}>Medium Paced</div>
         <div
           className={classnames(
@@ -34,7 +34,7 @@ class ColorCard extends Component {
 
         <div className={style.marketViewCardDescription}>
           <span>
-            Based on the number of likes for competitors across all platforms
+            Based on the number of shares for competitors across all platforms
           </span>
         </div>
         <Link to="/marketview/platform" className={style.marketViewCardLink}>

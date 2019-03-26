@@ -3,8 +3,6 @@
   height: 16px;
   border-radius: 100%;
   margin-right: 5px;
-  border: 1px solid $color-dark-five;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
 }
 
 .platformName {
@@ -19,7 +17,7 @@
   background-color: $color-dark-grey-blue;
   display: inline-block;
   width: 100%;
-  margin-bottom: 72px;
+  // margin-bottom: 72px;
   .doughnutTabs {
     border: none;
     margin-block-start: 0;
@@ -112,20 +110,29 @@
   align-items: center;
   justify-content: center;
   .infoWrapper {
-    width: calc(33.33% - 41px);
+    width: 100%;
     padding: 0 20px;
     display: flex;
     align-items: center;
     justify-content: center;
-
-    .infoText {
-      background-color: $color-dusk;
-      border-radius: 17px;
-      font-family: $font-family-ClanOT;
-      font-size: 14px;
-      font-weight: bold;
-      padding: 8px 24px;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    flex: 1;
+    .infoHandle {
+      max-width: 204px;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      .infoText {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: $color-dusk;
+        border-radius: 17px;
+        font-family: $font-family-ClanOT;
+        font-size: 14px;
+        font-weight: bold;
+        padding: 8px 24px;
+        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+      }
     }
   }
 }

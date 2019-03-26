@@ -49,8 +49,8 @@ export class Time extends React.Component {
   componentDidMount() {
     this.props.getCompetitorTopVideosRequest()
     this.props.getCompetitorVideosRequest()
-		this.props.getSimilarPropertiesRequest()
- 		this.props.getMarketviewDetailTimeRequest()
+    this.props.getSimilarPropertiesRequest()
+    this.props.getMarketviewDetailTimeRequest()
   }
 
   changeSelectedVideo = (video) => {
@@ -64,13 +64,12 @@ export class Time extends React.Component {
   render() {
     const {
       marketview,
-      marketview: { marketviewDetailTime, competitorTopVideos },
+      marketview: { selectedVideo, marketviewDetailTime, competitorTopVideos },
     } = this.props
-		const { activeDay } = this.state
+    const { activeDay } = this.state
 
-		const selectedDayData = marketviewDetailTime && marketviewDetailTime[activeDay]
-console.log(selectedDayData)
-    if (!marketview.selectedVideo || marketview.loading || !marketviewDetailTime) {
+    const selectedDayData = marketviewDetailTime && marketviewDetailTime[activeDay]
+    if (!selectedVideo || marketview.loading || !marketviewDetailTime) {
       return <RouterLoading />
     }
 
@@ -80,18 +79,23 @@ console.log(selectedDayData)
           onDayChange={(day) => this.changeActiveDay(day)}
           activeDay={activeDay}
         />
-        <Slider
-          data={marketview}
-          changeSelectedVideo={this.changeSelectedVideo}
-          className="mt-48"
-          title={`Top Performing ${activeDay
-            .charAt(0)
-            .toUpperCase()}${activeDay.slice(1)} Videos`}
-        />
-        {selectedDayData && selectedDayData.SimilarProperties && <TopSimilarProperties data={selectedDayData.SimilarProperties} />}
-        {competitorTopVideos && competitorTopVideos && (
+        {selectedDayData && selectedDayData.CompetitorVideos && (
+          <Slider
+            data={selectedDayData.CompetitorVideos}
+            selectedVideo={selectedVideo}
+            changeSelectedVideo={this.changeSelectedVideo}
+            className="mt-48"
+            title={`Top Performing ${activeDay
+              .charAt(0)
+              .toUpperCase()}${activeDay.slice(1)} Videos`}
+          />
+        )}
+        {selectedDayData && selectedDayData.SimilarProperties && (
+          <TopSimilarProperties data={selectedDayData.SimilarProperties} />
+        )}
+        {selectedDayData && selectedDayData.CompetitorTopVideos && (
           <TopVideosCard
-            chartData={competitorTopVideos}
+            chartData={selectedDayData.CompetitorTopVideos}
             title="Top Performing Property Across All Days Of The Week"
             selects={['Resolution']}
             references={topVideosReferences}

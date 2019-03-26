@@ -1,11 +1,24 @@
 .pacingCardContainer {
-  padding: 50px 40px;
+  padding: 48px 40px;
   box-sizing: border-box;
   font-family: $font-family-ClanOTNews;
   background-color: $color-dark-grey-blue;
   display: inline-block;
   width: 100%;
   margin-bottom: 72px;
+}
+
+.pacingCardInner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .pacingCardInnerItem {
+    flex: 1;
+    &:last-child() {
+      display: flex;
+      align-items: center;
+    }
+  }
 }
 
 .componentTitle {

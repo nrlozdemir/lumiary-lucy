@@ -71,20 +71,22 @@ export class Platform extends React.Component {
     const {
       marketview,
       marketview: {
+        selectedVideo,
         competitorTopVideos,
         similarProperties,
         topPerformingPropertiesData,
       },
     } = this.props
 
-    if (!marketview.selectedVideo || marketview.loading) {
+    if (!selectedVideo || marketview.loading) {
       return <RouterLoading />
     }
 
     return (
       <React.Fragment>
         <Slider
-          data={marketview}
+          data={marketview.videos}
+          selectedVideo={selectedVideo}
           changeSelectedVideo={this.changeSelectedVideo}
         />
         {competitorTopVideos && (

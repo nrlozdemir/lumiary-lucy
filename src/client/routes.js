@@ -67,6 +67,7 @@ const routes = [
   {
     path: '/reports/generated',
     exact: true,
+    removeNavbar: true,
     component: 'ReportGenerated',
   },
   {
@@ -81,6 +82,7 @@ const RouteWithSubRoutes = (route) => (
     exact={route.exact}
     component={(props) => (
       <DynamicImport
+        removeNavbar={route.removeNavbar}
         load={() => import(`./containers/${route.component}`)}
         match={props.match}
       >
@@ -88,8 +90,8 @@ const RouteWithSubRoutes = (route) => (
           Component === null ? (
             <RouterLoading />
           ) : (
-              <Component {...props} match={props.match} />
-            )
+            <Component {...props} match={props.match} />
+          )
         }
       </DynamicImport>
     )}

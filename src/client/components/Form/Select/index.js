@@ -48,6 +48,49 @@ const Select = (props) => {
     )
   }
 
+  const colourStyles = {
+    control: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      return {
+        ...styles,
+        background: '#242b49',
+        border: '1px solid #acb0be !important',
+        borderRadius: '8px',
+        boxShadow: 'none !important',
+        '&:hover': {
+          border: '1px solid #acb0be !important',
+        },
+      }
+    },
+    input: (styles) => ({
+      ...styles,
+      color: '#ffffff',
+    }),
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      return {
+        ...styles,
+        height: '40px',
+        lineHeight: '27px',
+        backgroundColor: isFocused ? '#ffffff' : '#5a6386',
+        color: isFocused ? '#5a6386' : '#ffffff',
+        cursor: 'pointer',
+        border: 'none',
+      }
+    },
+    placeholder: (styles) => ({
+      ...styles,
+      color: '#ffffff',
+    }),
+    menu: (base) => ({
+      ...base,
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.5)',
+      borderRadius: 0,
+    }),
+    menuList: (base) => ({
+      ...base,
+      padding: 0,
+    }),
+  }
+
   return (
     <ReactSelect
       components={{ DropdownIndicator }}
@@ -60,6 +103,7 @@ const Select = (props) => {
       searchable={false}
       placeholder={placeholder}
       multi={multiple}
+      styles={colourStyles}
       {...(value ? { value } : { value: null })}
     />
   )

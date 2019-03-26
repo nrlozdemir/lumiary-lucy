@@ -26,6 +26,7 @@ export default class Slider extends React.Component {
     const { selectLikes, selectPlatforms, selectDate } = this.state
     const {
       data,
+      selectedVideo,
       changeSelectedVideo,
       className,
       title = 'Top Performing Videos By Platform',
@@ -50,11 +51,11 @@ export default class Slider extends React.Component {
           </div>
         </div>
         <MarketViewSlider
-          items={data.videos}
+          items={data}
           changeVideo={(video) => changeSelectedVideo(video)}
         />
         <div className={style.cardContainer}>
-          {data.selectedVideo.options.map((card, index) => (
+          {selectedVideo.options.map((card, index) => (
             <div className={style.card} key={index}>
               <p className={style.marketCardHeader}>{card.name}</p>
               {card.compareValues.map((value, i) => (

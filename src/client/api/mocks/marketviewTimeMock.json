@@ -1,1 +1,2600 @@
-{"sunday":{"CompetitorTopVideos":{"labels":["360","480","720p","1080p","4k"],"datasets":[{"backgroundColor":"#51adc0","data":[10,82,86,28,63]},{"backgroundColor":"#8567f0","data":[50,38,48,57,11]},{"backgroundColor":"#D0506C","data":[79,82,38,82,53]},{"backgroundColor":"#acb0be","data":[47,66,36,10,19]},{"backgroundColor":"#5a6386","data":[39,90,78,3,14]}]},"CompetitorVideos":[{"image":"https://picsum.photos/600/300?image=49","socialMedia":"pinterest","title":"ESN","secondTitle":"217208 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=53","socialMedia":"twitter","title":"Barstool Media","secondTitle":"294 Shares","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"27%","value":27},{"title":"Industry","leftTitle":"15-45s","rightTitle":"55%","value":55}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"40%","value":40},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"89%","value":89},{"title":"Industry","leftTitle":"Animation","rightTitle":"45%","value":45}]}]},{"image":"https://picsum.photos/600/300?image=68","socialMedia":"pinterest","title":"SB Nation","secondTitle":"4440 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"66%","value":66},{"title":"Industry","leftTitle":"15-45s","rightTitle":"25%","value":25}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"92%","value":92},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"41%","value":41},{"title":"Industry","leftTitle":"Animation","rightTitle":"75%","value":75}]}]},{"image":"https://picsum.photos/600/300?image=7","socialMedia":"pinterest","title":"Scout Media","secondTitle":"58515 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"15-45s","rightTitle":"21%","value":21}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=100","socialMedia":"pinterest","title":"Fansided","secondTitle":"228 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"61%","value":61},{"title":"Industry","leftTitle":"Medium","rightTitle":"32%","value":32}]},{"name":"Format","description":"On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"11%","value":11},{"title":"Industry","leftTitle":"Animation","rightTitle":"16%","value":16}]}]}],"SimilarProperties":[{"title":"Duration","description":"0-15s","data":[{"leftTitle":"0-15s","value":19.21},{"leftTitle":"16-30s","value":44.37},{"leftTitle":"31-60s","value":16.56},{"leftTitle":"60+s","value":19.87}]},{"title":"Pacing","description":"Fast","data":[{"leftTitle":"Fast","value":51.45},{"leftTitle":"Medium","value":44.51},{"leftTitle":"Slow","value":2.31},{"leftTitle":"Slowest","value":1.73}]},{"title":"Dominant Color","description":"Blue","data":[{"leftTitle":"Blue","value":34.55},{"leftTitle":"Yellow","value":26.7},{"leftTitle":"Green","value":11.52},{"leftTitle":"Red","value":27.23}]}]},"monday":{"CompetitorTopVideos":{"labels":["360","480","720p","1080p","4k"],"datasets":[{"backgroundColor":"#51adc0","data":[58,69,60,48,3]},{"backgroundColor":"#8567f0","data":[68,43,33,25,89]},{"backgroundColor":"#D0506C","data":[69,46,51,86,6]},{"backgroundColor":"#acb0be","data":[22,6,72,26,12]},{"backgroundColor":"#5a6386","data":[76,47,19,9,83]}]},"CompetitorVideos":[{"image":"https://picsum.photos/600/300?image=65","socialMedia":"pinterest","title":"ESN","secondTitle":"290761 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=45","socialMedia":"twitter","title":"Barstool Media","secondTitle":"226 Shares","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"27%","value":27},{"title":"Industry","leftTitle":"15-45s","rightTitle":"55%","value":55}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"40%","value":40},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"89%","value":89},{"title":"Industry","leftTitle":"Animation","rightTitle":"45%","value":45}]}]},{"image":"https://picsum.photos/600/300?image=70","socialMedia":"twitter","title":"SB Nation","secondTitle":"3138 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"66%","value":66},{"title":"Industry","leftTitle":"15-45s","rightTitle":"25%","value":25}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"92%","value":92},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"41%","value":41},{"title":"Industry","leftTitle":"Animation","rightTitle":"75%","value":75}]}]},{"image":"https://picsum.photos/600/300?image=40","socialMedia":"pinterest","title":"Scout Media","secondTitle":"158558 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"15-45s","rightTitle":"21%","value":21}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=69","socialMedia":"instagram","title":"Fansided","secondTitle":"293 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"61%","value":61},{"title":"Industry","leftTitle":"Medium","rightTitle":"32%","value":32}]},{"name":"Format","description":"On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"11%","value":11},{"title":"Industry","leftTitle":"Animation","rightTitle":"16%","value":16}]}]}],"SimilarProperties":[{"title":"Duration","description":"0-15s","data":[{"leftTitle":"0-15s","value":31.47},{"leftTitle":"16-30s","value":10.36},{"leftTitle":"31-60s","value":21.51},{"leftTitle":"60+s","value":36.65}]},{"title":"Pacing","description":"Fast","data":[{"leftTitle":"Fast","value":44.05},{"leftTitle":"Medium","value":21.59},{"leftTitle":"Slow","value":25.99},{"leftTitle":"Slowest","value":8.37}]},{"title":"Dominant Color","description":"Blue","data":[{"leftTitle":"Blue","value":31.72},{"leftTitle":"Yellow","value":27.24},{"leftTitle":"Green","value":23.88},{"leftTitle":"Red","value":17.16}]}]},"tuesday":{"CompetitorTopVideos":{"labels":["360","480","720p","1080p","4k"],"datasets":[{"backgroundColor":"#51adc0","data":[96,74,36,34,13]},{"backgroundColor":"#8567f0","data":[19,82,91,67,96]},{"backgroundColor":"#D0506C","data":[65,71,75,57,85]},{"backgroundColor":"#acb0be","data":[72,32,47,58,75]},{"backgroundColor":"#5a6386","data":[39,43,17,45,29]}]},"CompetitorVideos":[{"image":"https://picsum.photos/600/300?image=86","socialMedia":"twitter","title":"ESN","secondTitle":"393858 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=48","socialMedia":"youtube","title":"Barstool Media","secondTitle":"184 Shares","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"27%","value":27},{"title":"Industry","leftTitle":"15-45s","rightTitle":"55%","value":55}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"40%","value":40},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"89%","value":89},{"title":"Industry","leftTitle":"Animation","rightTitle":"45%","value":45}]}]},{"image":"https://picsum.photos/600/300?image=92","socialMedia":"pinterest","title":"SB Nation","secondTitle":"2746 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"66%","value":66},{"title":"Industry","leftTitle":"15-45s","rightTitle":"25%","value":25}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"92%","value":92},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"41%","value":41},{"title":"Industry","leftTitle":"Animation","rightTitle":"75%","value":75}]}]},{"image":"https://picsum.photos/600/300?image=35","socialMedia":"twitter","title":"Scout Media","secondTitle":"47091 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"15-45s","rightTitle":"21%","value":21}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=58","socialMedia":"twitter","title":"Fansided","secondTitle":"146 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"61%","value":61},{"title":"Industry","leftTitle":"Medium","rightTitle":"32%","value":32}]},{"name":"Format","description":"On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"11%","value":11},{"title":"Industry","leftTitle":"Animation","rightTitle":"16%","value":16}]}]}],"SimilarProperties":[{"title":"Duration","description":"0-15s","data":[{"leftTitle":"0-15s","value":33.48},{"leftTitle":"16-30s","value":22.17},{"leftTitle":"31-60s","value":4.78},{"leftTitle":"60+s","value":39.57}]},{"title":"Pacing","description":"Fast","data":[{"leftTitle":"Fast","value":22.49},{"leftTitle":"Medium","value":14.2},{"leftTitle":"Slow","value":56.8},{"leftTitle":"Slowest","value":6.51}]},{"title":"Dominant Color","description":"Blue","data":[{"leftTitle":"Blue","value":28.38},{"leftTitle":"Yellow","value":19.14},{"leftTitle":"Green","value":26.73},{"leftTitle":"Red","value":25.74}]}]},"wednesday":{"CompetitorTopVideos":{"labels":["360","480","720p","1080p","4k"],"datasets":[{"backgroundColor":"#51adc0","data":[20,40,2,85,86]},{"backgroundColor":"#8567f0","data":[86,23,96,86,92]},{"backgroundColor":"#D0506C","data":[44,21,45,57,15]},{"backgroundColor":"#acb0be","data":[18,2,30,30,13]},{"backgroundColor":"#5a6386","data":[5,12,28,31,77]}]},"CompetitorVideos":[{"image":"https://picsum.photos/600/300?image=47","socialMedia":"pinterest","title":"ESN","secondTitle":"338475 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=95","socialMedia":"facebook","title":"Barstool Media","secondTitle":"294 Shares","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"27%","value":27},{"title":"Industry","leftTitle":"15-45s","rightTitle":"55%","value":55}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"40%","value":40},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"89%","value":89},{"title":"Industry","leftTitle":"Animation","rightTitle":"45%","value":45}]}]},{"image":"https://picsum.photos/600/300?image=64","socialMedia":"twitter","title":"SB Nation","secondTitle":"4635 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"66%","value":66},{"title":"Industry","leftTitle":"15-45s","rightTitle":"25%","value":25}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"92%","value":92},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"41%","value":41},{"title":"Industry","leftTitle":"Animation","rightTitle":"75%","value":75}]}]},{"image":"https://picsum.photos/600/300?image=66","socialMedia":"twitter","title":"Scout Media","secondTitle":"170697 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"15-45s","rightTitle":"21%","value":21}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=31","socialMedia":"twitter","title":"Fansided","secondTitle":"217 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"61%","value":61},{"title":"Industry","leftTitle":"Medium","rightTitle":"32%","value":32}]},{"name":"Format","description":"On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"11%","value":11},{"title":"Industry","leftTitle":"Animation","rightTitle":"16%","value":16}]}]}],"SimilarProperties":[{"title":"Duration","description":"0-15s","data":[{"leftTitle":"0-15s","value":38.13},{"leftTitle":"16-30s","value":35.63},{"leftTitle":"31-60s","value":3.13},{"leftTitle":"60+s","value":23.13}]},{"title":"Pacing","description":"Fast","data":[{"leftTitle":"Fast","value":46.23},{"leftTitle":"Medium","value":2.83},{"leftTitle":"Slow","value":30.66},{"leftTitle":"Slowest","value":20.28}]},{"title":"Dominant Color","description":"Blue","data":[{"leftTitle":"Blue","value":5.26},{"leftTitle":"Yellow","value":32.63},{"leftTitle":"Green","value":58.95},{"leftTitle":"Red","value":3.16}]}]},"thursday":{"CompetitorTopVideos":{"labels":["360","480","720p","1080p","4k"],"datasets":[{"backgroundColor":"#51adc0","data":[72,61,93,23,41]},{"backgroundColor":"#8567f0","data":[82,38,19,63,14]},{"backgroundColor":"#D0506C","data":[56,50,43,84,18]},{"backgroundColor":"#acb0be","data":[54,81,92,58,99]},{"backgroundColor":"#5a6386","data":[3,79,89,84,84]}]},"CompetitorVideos":[{"image":"https://picsum.photos/600/300?image=28","socialMedia":"facebook","title":"ESN","secondTitle":"228900 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=61","socialMedia":"youtube","title":"Barstool Media","secondTitle":"441 Shares","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"27%","value":27},{"title":"Industry","leftTitle":"15-45s","rightTitle":"55%","value":55}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"40%","value":40},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"89%","value":89},{"title":"Industry","leftTitle":"Animation","rightTitle":"45%","value":45}]}]},{"image":"https://picsum.photos/600/300?image=56","socialMedia":"twitter","title":"SB Nation","secondTitle":"3203 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"66%","value":66},{"title":"Industry","leftTitle":"15-45s","rightTitle":"25%","value":25}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"92%","value":92},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"41%","value":41},{"title":"Industry","leftTitle":"Animation","rightTitle":"75%","value":75}]}]},{"image":"https://picsum.photos/600/300?image=92","socialMedia":"instagram","title":"Scout Media","secondTitle":"63493 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"15-45s","rightTitle":"21%","value":21}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=47","socialMedia":"twitter","title":"Fansided","secondTitle":"154 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"61%","value":61},{"title":"Industry","leftTitle":"Medium","rightTitle":"32%","value":32}]},{"name":"Format","description":"On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"11%","value":11},{"title":"Industry","leftTitle":"Animation","rightTitle":"16%","value":16}]}]}],"SimilarProperties":[{"title":"Duration","description":"0-15s","data":[{"leftTitle":"0-15s","value":11.69},{"leftTitle":"16-30s","value":37.66},{"leftTitle":"31-60s","value":41.99},{"leftTitle":"60+s","value":8.66}]},{"title":"Pacing","description":"Fast","data":[{"leftTitle":"Fast","value":45.18},{"leftTitle":"Medium","value":0.51},{"leftTitle":"Slow","value":27.92},{"leftTitle":"Slowest","value":26.4}]},{"title":"Dominant Color","description":"Blue","data":[{"leftTitle":"Blue","value":42.98},{"leftTitle":"Yellow","value":5.26},{"leftTitle":"Green","value":36.84},{"leftTitle":"Red","value":14.91}]}]},"friday":{"CompetitorTopVideos":{"labels":["360","480","720p","1080p","4k"],"datasets":[{"backgroundColor":"#51adc0","data":[36,35,16,36,30]},{"backgroundColor":"#8567f0","data":[46,78,65,35,42]},{"backgroundColor":"#D0506C","data":[41,36,60,41,82]},{"backgroundColor":"#acb0be","data":[85,79,24,21,39]},{"backgroundColor":"#5a6386","data":[54,29,53,65,33]}]},"CompetitorVideos":[{"image":"https://picsum.photos/600/300?image=65","socialMedia":"youtube","title":"ESN","secondTitle":"264860 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=65","socialMedia":"pinterest","title":"Barstool Media","secondTitle":"133 Shares","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"27%","value":27},{"title":"Industry","leftTitle":"15-45s","rightTitle":"55%","value":55}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"40%","value":40},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"89%","value":89},{"title":"Industry","leftTitle":"Animation","rightTitle":"45%","value":45}]}]},{"image":"https://picsum.photos/600/300?image=34","socialMedia":"twitter","title":"SB Nation","secondTitle":"3682 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"66%","value":66},{"title":"Industry","leftTitle":"15-45s","rightTitle":"25%","value":25}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"92%","value":92},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"41%","value":41},{"title":"Industry","leftTitle":"Animation","rightTitle":"75%","value":75}]}]},{"image":"https://picsum.photos/600/300?image=53","socialMedia":"instagram","title":"Scout Media","secondTitle":"160644 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"15-45s","rightTitle":"21%","value":21}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=2","socialMedia":"pinterest","title":"Fansided","secondTitle":"474 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"61%","value":61},{"title":"Industry","leftTitle":"Medium","rightTitle":"32%","value":32}]},{"name":"Format","description":"On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"11%","value":11},{"title":"Industry","leftTitle":"Animation","rightTitle":"16%","value":16}]}]}],"SimilarProperties":[{"title":"Duration","description":"0-15s","data":[{"leftTitle":"0-15s","value":15.6},{"leftTitle":"16-30s","value":27.06},{"leftTitle":"31-60s","value":15.6},{"leftTitle":"60+s","value":41.74}]},{"title":"Pacing","description":"Fast","data":[{"leftTitle":"Fast","value":26.9},{"leftTitle":"Medium","value":22.07},{"leftTitle":"Slow","value":34.48},{"leftTitle":"Slowest","value":16.55}]},{"title":"Dominant Color","description":"Blue","data":[{"leftTitle":"Blue","value":13.02},{"leftTitle":"Yellow","value":46.35},{"leftTitle":"Green","value":19.79},{"leftTitle":"Red","value":20.83}]}]},"saturday":{"CompetitorTopVideos":{"labels":["360","480","720p","1080p","4k"],"datasets":[{"backgroundColor":"#51adc0","data":[9,49,27,47,94]},{"backgroundColor":"#8567f0","data":[61,97,71,50,19]},{"backgroundColor":"#D0506C","data":[62,62,43,21,66]},{"backgroundColor":"#acb0be","data":[51,55,61,79,48]},{"backgroundColor":"#5a6386","data":[31,7,62,72,99]}]},"CompetitorVideos":[{"image":"https://picsum.photos/600/300?image=59","socialMedia":"facebook","title":"ESN","secondTitle":"281821 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=57","socialMedia":"youtube","title":"Barstool Media","secondTitle":"424 Shares","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"27%","value":27},{"title":"Industry","leftTitle":"15-45s","rightTitle":"55%","value":55}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"40%","value":40},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"89%","value":89},{"title":"Industry","leftTitle":"Animation","rightTitle":"45%","value":45}]}]},{"image":"https://picsum.photos/600/300?image=81","socialMedia":"youtube","title":"SB Nation","secondTitle":"2607 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"66%","value":66},{"title":"Industry","leftTitle":"15-45s","rightTitle":"25%","value":25}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"92%","value":92},{"title":"Industry","leftTitle":"Medium","rightTitle":"11%","value":11}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"41%","value":41},{"title":"Industry","leftTitle":"Animation","rightTitle":"75%","value":75}]}]},{"image":"https://picsum.photos/600/300?image=16","socialMedia":"youtube","title":"Scout Media","secondTitle":"44097 Likes","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"15-45s","rightTitle":"21%","value":21}]},{"name":"Pacing","description":"On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"25%","value":25},{"title":"Industry","leftTitle":"Medium","rightTitle":"38%","value":38}]},{"name":"Format","description":"On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"51%","value":51},{"title":"Industry","leftTitle":"Animation","rightTitle":"15%","value":15}]}]},{"image":"https://picsum.photos/600/300?image=12","socialMedia":"twitter","title":"Fansided","secondTitle":"227 Comment","options":[{"name":"Duration","description":"On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s","compareValues":[{"title":"This Video","leftTitle":"0-15s","rightTitle":"17%","value":17},{"title":"Industry","leftTitle":"15-45s","rightTitle":"82%","value":82}]},{"name":"Pacing","description":"On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.","compareValues":[{"title":"This Video","leftTitle":"Fast","rightTitle":"61%","value":61},{"title":"Industry","leftTitle":"Medium","rightTitle":"32%","value":32}]},{"name":"Format","description":"On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation","compareValues":[{"title":"This Video","leftTitle":"Stop Motion","rightTitle":"11%","value":11},{"title":"Industry","leftTitle":"Animation","rightTitle":"16%","value":16}]}]}],"SimilarProperties":[{"title":"Duration","description":"0-15s","data":[{"leftTitle":"0-15s","value":2.53},{"leftTitle":"16-30s","value":13.29},{"leftTitle":"31-60s","value":24.05},{"leftTitle":"60+s","value":60.13}]},{"title":"Pacing","description":"Fast","data":[{"leftTitle":"Fast","value":5.18},{"leftTitle":"Medium","value":50.78},{"leftTitle":"Slow","value":9.84},{"leftTitle":"Slowest","value":34.2}]},{"title":"Dominant Color","description":"Blue","data":[{"leftTitle":"Blue","value":38.86},{"leftTitle":"Yellow","value":28.38},{"leftTitle":"Green","value":30.13},{"leftTitle":"Red","value":2.62}]}]}}
+{
+  "sunday": {
+    "CompetitorTopVideos": {
+      "labels": ["360", "480", "720p", "1080p", "4k"],
+      "datasets": [
+        {
+          "backgroundColor": "#51adc0",
+          "data": [5.06, 20.26, 20.86, 16.44, 5.02]
+        },
+        {
+          "backgroundColor": "#8567f0",
+          "data": [39.66, 25.19, 22.66, 7.56, 30.12]
+        },
+        {
+          "backgroundColor": "#D0506C",
+          "data": [4.22, 9.35, 28.42, 40, 28.96]
+        },
+        {
+          "backgroundColor": "#acb0be",
+          "data": [38.82, 25.45, 24.46, 4.89, 31.66]
+        },
+        {
+          "backgroundColor": "#5a6386",
+          "data": [12.24, 19.74, 3.6, 31.11, 4.25]
+        }
+      ]
+    },
+    "CompetitorVideos": [
+      {
+        "image": "https://picsum.photos/600/300?image=48",
+        "socialMedia": "facebook",
+        "title": "ESN",
+        "secondTitle": "261068 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=50",
+        "socialMedia": "pinterest",
+        "title": "Barstool Media",
+        "secondTitle": "395 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "27%",
+                "value": 27
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "55%",
+                "value": 55
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "40%",
+                "value": 40
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "89%",
+                "value": 89
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "45%",
+                "value": 45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=1",
+        "socialMedia": "twitter",
+        "title": "SB Nation",
+        "secondTitle": "4564 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "66%",
+                "value": 66
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "25%",
+                "value": 25
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "92%",
+                "value": 92
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "41%",
+                "value": 41
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "75%",
+                "value": 75
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=39",
+        "socialMedia": "instagram",
+        "title": "Scout Media",
+        "secondTitle": "112758 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "21%",
+                "value": 21
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=95",
+        "socialMedia": "twitter",
+        "title": "Fansided",
+        "secondTitle": "170 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "61%",
+                "value": 61
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "32%",
+                "value": 32
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "11%",
+                "value": 11
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "16%",
+                "value": 16
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "SimilarProperties": [
+      {
+        "title": "Duration",
+        "description": "0-15s",
+        "data": [
+          { "leftTitle": "0-15s", "value": 23.91 },
+          { "leftTitle": "16-30s", "value": 11.41 },
+          { "leftTitle": "31-60s", "value": 21.74 },
+          { "leftTitle": "60+s", "value": 42.93 }
+        ]
+      },
+      {
+        "title": "Pacing",
+        "description": "Fast",
+        "data": [
+          { "leftTitle": "Fast", "value": 5.6 },
+          { "leftTitle": "Medium", "value": 31.47 },
+          { "leftTitle": "Slow", "value": 22.84 },
+          { "leftTitle": "Slowest", "value": 40.09 }
+        ]
+      },
+      {
+        "title": "Dominant Color",
+        "description": "Blue",
+        "data": [
+          { "leftTitle": "Blue", "value": 63.48 },
+          { "leftTitle": "Yellow", "value": 1.74 },
+          { "leftTitle": "Green", "value": 7.83 },
+          { "leftTitle": "Red", "value": 26.96 }
+        ]
+      }
+    ]
+  },
+  "monday": {
+    "CompetitorTopVideos": {
+      "labels": ["360", "480", "720p", "1080p", "4k"],
+      "datasets": [
+        {
+          "backgroundColor": "#51adc0",
+          "data": [49.5, 35.74, 22.79, 7.24, 5.37]
+        },
+        {
+          "backgroundColor": "#8567f0",
+          "data": [18.32, 10.04, 26.78, 24.79, 35.12]
+        },
+        {
+          "backgroundColor": "#D0506C",
+          "data": [1.49, 3.61, 11.97, 26.18, 10.33]
+        },
+        {
+          "backgroundColor": "#acb0be",
+          "data": [29.21, 26.51, 28.21, 22.56, 21.9]
+        },
+        {
+          "backgroundColor": "#5a6386",
+          "data": [1.49, 24.1, 10.26, 19.22, 27.27]
+        }
+      ]
+    },
+    "CompetitorVideos": [
+      {
+        "image": "https://picsum.photos/600/300?image=40",
+        "socialMedia": "twitter",
+        "title": "ESN",
+        "secondTitle": "348454 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=35",
+        "socialMedia": "youtube",
+        "title": "Barstool Media",
+        "secondTitle": "261 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "27%",
+                "value": 27
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "55%",
+                "value": 55
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "40%",
+                "value": 40
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "89%",
+                "value": 89
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "45%",
+                "value": 45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=58",
+        "socialMedia": "facebook",
+        "title": "SB Nation",
+        "secondTitle": "2505 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "66%",
+                "value": 66
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "25%",
+                "value": 25
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "92%",
+                "value": 92
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "41%",
+                "value": 41
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "75%",
+                "value": 75
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=79",
+        "socialMedia": "youtube",
+        "title": "Scout Media",
+        "secondTitle": "46867 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "21%",
+                "value": 21
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=44",
+        "socialMedia": "facebook",
+        "title": "Fansided",
+        "secondTitle": "402 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "61%",
+                "value": 61
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "32%",
+                "value": 32
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "11%",
+                "value": 11
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "16%",
+                "value": 16
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "SimilarProperties": [
+      {
+        "title": "Duration",
+        "description": "0-15s",
+        "data": [
+          { "leftTitle": "0-15s", "value": 45.45 },
+          { "leftTitle": "16-30s", "value": 20.71 },
+          { "leftTitle": "31-60s", "value": 16.67 },
+          { "leftTitle": "60+s", "value": 17.17 }
+        ]
+      },
+      {
+        "title": "Pacing",
+        "description": "Fast",
+        "data": [
+          { "leftTitle": "Fast", "value": 18.03 },
+          { "leftTitle": "Medium", "value": 23.47 },
+          { "leftTitle": "Slow", "value": 33.33 },
+          { "leftTitle": "Slowest", "value": 25.17 }
+        ]
+      },
+      {
+        "title": "Dominant Color",
+        "description": "Blue",
+        "data": [
+          { "leftTitle": "Blue", "value": 52.43 },
+          { "leftTitle": "Yellow", "value": 25.95 },
+          { "leftTitle": "Green", "value": 8.11 },
+          { "leftTitle": "Red", "value": 13.51 }
+        ]
+      }
+    ]
+  },
+  "tuesday": {
+    "CompetitorTopVideos": {
+      "labels": ["360", "480", "720p", "1080p", "4k"],
+      "datasets": [
+        {
+          "backgroundColor": "#51adc0",
+          "data": [2.82, 1.79, 27.78, 9.28, 15.41]
+        },
+        {
+          "backgroundColor": "#8567f0",
+          "data": [15.99, 24.55, 24.75, 27, 31.9]
+        },
+        {
+          "backgroundColor": "#D0506C",
+          "data": [21.94, 13.39, 9.09, 10.13, 6.09]
+        },
+        {
+          "backgroundColor": "#acb0be",
+          "data": [30.09, 16.96, 12.63, 17.72, 17.92]
+        },
+        {
+          "backgroundColor": "#5a6386",
+          "data": [29.15, 43.3, 25.76, 35.86, 28.67]
+        }
+      ]
+    },
+    "CompetitorVideos": [
+      {
+        "image": "https://picsum.photos/600/300?image=27",
+        "socialMedia": "twitter",
+        "title": "ESN",
+        "secondTitle": "364320 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=61",
+        "socialMedia": "instagram",
+        "title": "Barstool Media",
+        "secondTitle": "300 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "27%",
+                "value": 27
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "55%",
+                "value": 55
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "40%",
+                "value": 40
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "89%",
+                "value": 89
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "45%",
+                "value": 45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=4",
+        "socialMedia": "instagram",
+        "title": "SB Nation",
+        "secondTitle": "2033 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "66%",
+                "value": 66
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "25%",
+                "value": 25
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "92%",
+                "value": 92
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "41%",
+                "value": 41
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "75%",
+                "value": 75
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=74",
+        "socialMedia": "facebook",
+        "title": "Scout Media",
+        "secondTitle": "111555 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "21%",
+                "value": 21
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=98",
+        "socialMedia": "twitter",
+        "title": "Fansided",
+        "secondTitle": "344 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "61%",
+                "value": 61
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "32%",
+                "value": 32
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "11%",
+                "value": 11
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "16%",
+                "value": 16
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "SimilarProperties": [
+      {
+        "title": "Duration",
+        "description": "0-15s",
+        "data": [
+          { "leftTitle": "0-15s", "value": 30.43 },
+          { "leftTitle": "16-30s", "value": 24.46 },
+          { "leftTitle": "31-60s", "value": 5.98 },
+          { "leftTitle": "60+s", "value": 39.13 }
+        ]
+      },
+      {
+        "title": "Pacing",
+        "description": "Fast",
+        "data": [
+          { "leftTitle": "Fast", "value": 35.66 },
+          { "leftTitle": "Medium", "value": 12.02 },
+          { "leftTitle": "Slow", "value": 32.95 },
+          { "leftTitle": "Slowest", "value": 19.38 }
+        ]
+      },
+      {
+        "title": "Dominant Color",
+        "description": "Blue",
+        "data": [
+          { "leftTitle": "Blue", "value": 35.91 },
+          { "leftTitle": "Yellow", "value": 14.09 },
+          { "leftTitle": "Green", "value": 6.82 },
+          { "leftTitle": "Red", "value": 43.18 }
+        ]
+      }
+    ]
+  },
+  "wednesday": {
+    "CompetitorTopVideos": {
+      "labels": ["360", "480", "720p", "1080p", "4k"],
+      "datasets": [
+        {
+          "backgroundColor": "#51adc0",
+          "data": [32.41, 26.97, 15.43, 5.76, 33.22]
+        },
+        {
+          "backgroundColor": "#8567f0",
+          "data": [23.32, 16.29, 28.09, 23.05, 5.76]
+        },
+        {
+          "backgroundColor": "#D0506C",
+          "data": [5.14, 20.79, 11.11, 15.25, 32.2]
+        },
+        {
+          "backgroundColor": "#acb0be",
+          "data": [14.23, 1.69, 15.12, 26.78, 0]
+        },
+        {
+          "backgroundColor": "#5a6386",
+          "data": [24.9, 34.27, 30.25, 29.15, 28.81]
+        }
+      ]
+    },
+    "CompetitorVideos": [
+      {
+        "image": "https://picsum.photos/600/300?image=29",
+        "socialMedia": "facebook",
+        "title": "ESN",
+        "secondTitle": "329121 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=100",
+        "socialMedia": "facebook",
+        "title": "Barstool Media",
+        "secondTitle": "307 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "27%",
+                "value": 27
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "55%",
+                "value": 55
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "40%",
+                "value": 40
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "89%",
+                "value": 89
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "45%",
+                "value": 45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=23",
+        "socialMedia": "twitter",
+        "title": "SB Nation",
+        "secondTitle": "2091 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "66%",
+                "value": 66
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "25%",
+                "value": 25
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "92%",
+                "value": 92
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "41%",
+                "value": 41
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "75%",
+                "value": 75
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=62",
+        "socialMedia": "twitter",
+        "title": "Scout Media",
+        "secondTitle": "68934 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "21%",
+                "value": 21
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=54",
+        "socialMedia": "twitter",
+        "title": "Fansided",
+        "secondTitle": "306 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "61%",
+                "value": 61
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "32%",
+                "value": 32
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "11%",
+                "value": 11
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "16%",
+                "value": 16
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "SimilarProperties": [
+      {
+        "title": "Duration",
+        "description": "0-15s",
+        "data": [
+          { "leftTitle": "0-15s", "value": 39.13 },
+          { "leftTitle": "16-30s", "value": 3.91 },
+          { "leftTitle": "31-60s", "value": 35.22 },
+          { "leftTitle": "60+s", "value": 21.74 }
+        ]
+      },
+      {
+        "title": "Pacing",
+        "description": "Fast",
+        "data": [
+          { "leftTitle": "Fast", "value": 4.72 },
+          { "leftTitle": "Medium", "value": 17.32 },
+          { "leftTitle": "Slow", "value": 29.13 },
+          { "leftTitle": "Slowest", "value": 48.82 }
+        ]
+      },
+      {
+        "title": "Dominant Color",
+        "description": "Blue",
+        "data": [
+          { "leftTitle": "Blue", "value": 40.28 },
+          { "leftTitle": "Yellow", "value": 10.19 },
+          { "leftTitle": "Green", "value": 37.96 },
+          { "leftTitle": "Red", "value": 11.57 }
+        ]
+      }
+    ]
+  },
+  "thursday": {
+    "CompetitorTopVideos": {
+      "labels": ["360", "480", "720p", "1080p", "4k"],
+      "datasets": [
+        {
+          "backgroundColor": "#51adc0",
+          "data": [11.8, 22.62, 19.74, 35.82, 17.87]
+        },
+        {
+          "backgroundColor": "#8567f0",
+          "data": [26.71, 21.08, 38.16, 18.91, 6.81]
+        },
+        {
+          "backgroundColor": "#D0506C",
+          "data": [12.11, 19.02, 34.65, 4.48, 23.83]
+        },
+        {
+          "backgroundColor": "#acb0be",
+          "data": [26.71, 14.14, 0.44, 15.92, 32.77]
+        },
+        {
+          "backgroundColor": "#5a6386",
+          "data": [22.67, 23.14, 7.02, 24.88, 18.72]
+        }
+      ]
+    },
+    "CompetitorVideos": [
+      {
+        "image": "https://picsum.photos/600/300?image=52",
+        "socialMedia": "facebook",
+        "title": "ESN",
+        "secondTitle": "239363 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=20",
+        "socialMedia": "pinterest",
+        "title": "Barstool Media",
+        "secondTitle": "113 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "27%",
+                "value": 27
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "55%",
+                "value": 55
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "40%",
+                "value": 40
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "89%",
+                "value": 89
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "45%",
+                "value": 45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=40",
+        "socialMedia": "facebook",
+        "title": "SB Nation",
+        "secondTitle": "3516 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "66%",
+                "value": 66
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "25%",
+                "value": 25
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "92%",
+                "value": 92
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "41%",
+                "value": 41
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "75%",
+                "value": 75
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=65",
+        "socialMedia": "facebook",
+        "title": "Scout Media",
+        "secondTitle": "151629 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "21%",
+                "value": 21
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=44",
+        "socialMedia": "twitter",
+        "title": "Fansided",
+        "secondTitle": "373 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "61%",
+                "value": 61
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "32%",
+                "value": 32
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "11%",
+                "value": 11
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "16%",
+                "value": 16
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "SimilarProperties": [
+      {
+        "title": "Duration",
+        "description": "0-15s",
+        "data": [
+          { "leftTitle": "0-15s", "value": 32.52 },
+          { "leftTitle": "16-30s", "value": 17.48 },
+          { "leftTitle": "31-60s", "value": 6.31 },
+          { "leftTitle": "60+s", "value": 43.69 }
+        ]
+      },
+      {
+        "title": "Pacing",
+        "description": "Fast",
+        "data": [
+          { "leftTitle": "Fast", "value": 16.91 },
+          { "leftTitle": "Medium", "value": 24.64 },
+          { "leftTitle": "Slow", "value": 30.92 },
+          { "leftTitle": "Slowest", "value": 27.54 }
+        ]
+      },
+      {
+        "title": "Dominant Color",
+        "description": "Blue",
+        "data": [
+          { "leftTitle": "Blue", "value": 14.09 },
+          { "leftTitle": "Yellow", "value": 25.91 },
+          { "leftTitle": "Green", "value": 38.64 },
+          { "leftTitle": "Red", "value": 21.36 }
+        ]
+      }
+    ]
+  },
+  "friday": {
+    "CompetitorTopVideos": {
+      "labels": ["360", "480", "720p", "1080p", "4k"],
+      "datasets": [
+        {
+          "backgroundColor": "#51adc0",
+          "data": [29.61, 34.66, 6.45, 10.86, 4.36]
+        },
+        {
+          "backgroundColor": "#8567f0",
+          "data": [5.14, 17.93, 20.97, 17.65, 30.18]
+        },
+        {
+          "backgroundColor": "#D0506C",
+          "data": [13.9, 1.99, 33.06, 25.79, 26.55]
+        },
+        {
+          "backgroundColor": "#acb0be",
+          "data": [26.89, 7.97, 3.23, 9.5, 30.18]
+        },
+        {
+          "backgroundColor": "#5a6386",
+          "data": [24.47, 37.45, 36.29, 36.2, 8.73]
+        }
+      ]
+    },
+    "CompetitorVideos": [
+      {
+        "image": "https://picsum.photos/600/300?image=27",
+        "socialMedia": "pinterest",
+        "title": "ESN",
+        "secondTitle": "339657 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=46",
+        "socialMedia": "youtube",
+        "title": "Barstool Media",
+        "secondTitle": "222 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "27%",
+                "value": 27
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "55%",
+                "value": 55
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "40%",
+                "value": 40
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "89%",
+                "value": 89
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "45%",
+                "value": 45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=52",
+        "socialMedia": "twitter",
+        "title": "SB Nation",
+        "secondTitle": "4199 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "66%",
+                "value": 66
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "25%",
+                "value": 25
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "92%",
+                "value": 92
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "41%",
+                "value": 41
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "75%",
+                "value": 75
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=17",
+        "socialMedia": "instagram",
+        "title": "Scout Media",
+        "secondTitle": "110060 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "21%",
+                "value": 21
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=62",
+        "socialMedia": "instagram",
+        "title": "Fansided",
+        "secondTitle": "392 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "61%",
+                "value": 61
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "32%",
+                "value": 32
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "11%",
+                "value": 11
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "16%",
+                "value": 16
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "SimilarProperties": [
+      {
+        "title": "Duration",
+        "description": "0-15s",
+        "data": [
+          { "leftTitle": "0-15s", "value": 39.13 },
+          { "leftTitle": "16-30s", "value": 15.65 },
+          { "leftTitle": "31-60s", "value": 10 },
+          { "leftTitle": "60+s", "value": 35.22 }
+        ]
+      },
+      {
+        "title": "Pacing",
+        "description": "Fast",
+        "data": [
+          { "leftTitle": "Fast", "value": 32.22 },
+          { "leftTitle": "Medium", "value": 23.89 },
+          { "leftTitle": "Slow", "value": 23.89 },
+          { "leftTitle": "Slowest", "value": 20 }
+        ]
+      },
+      {
+        "title": "Dominant Color",
+        "description": "Blue",
+        "data": [
+          { "leftTitle": "Blue", "value": 49.49 },
+          { "leftTitle": "Yellow", "value": 20.71 },
+          { "leftTitle": "Green", "value": 18.18 },
+          { "leftTitle": "Red", "value": 11.62 }
+        ]
+      }
+    ]
+  },
+  "saturday": {
+    "CompetitorTopVideos": {
+      "labels": ["360", "480", "720p", "1080p", "4k"],
+      "datasets": [
+        {
+          "backgroundColor": "#51adc0",
+          "data": [32.18, 37.5, 16.3, 22.02, 16.03]
+        },
+        {
+          "backgroundColor": "#8567f0",
+          "data": [13.15, 4.35, 22.59, 6.86, 5.57]
+        },
+        {
+          "backgroundColor": "#D0506C",
+          "data": [13.15, 3.26, 24.44, 7.58, 27.18]
+        },
+        {
+          "backgroundColor": "#acb0be",
+          "data": [20.42, 19.02, 36.67, 31.05, 27.53]
+        },
+        {
+          "backgroundColor": "#5a6386",
+          "data": [21.11, 35.87, 0, 32.49, 23.69]
+        }
+      ]
+    },
+    "CompetitorVideos": [
+      {
+        "image": "https://picsum.photos/600/300?image=43",
+        "socialMedia": "youtube",
+        "title": "ESN",
+        "secondTitle": "287227 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=94",
+        "socialMedia": "pinterest",
+        "title": "Barstool Media",
+        "secondTitle": "486 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "27%",
+                "value": 27
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "55%",
+                "value": 55
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "40%",
+                "value": 40
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "89%",
+                "value": 89
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "45%",
+                "value": 45
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=43",
+        "socialMedia": "pinterest",
+        "title": "SB Nation",
+        "secondTitle": "4132 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "66%",
+                "value": 66
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "25%",
+                "value": 25
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "92%",
+                "value": 92
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "11%",
+                "value": 11
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "41%",
+                "value": 41
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "75%",
+                "value": 75
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=76",
+        "socialMedia": "twitter",
+        "title": "Scout Media",
+        "secondTitle": "86817 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "21%",
+                "value": 21
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 25% of videos are Fast Paced while 38% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "25%",
+                "value": 25
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "38%",
+                "value": 38
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 51% of videos are Stop Motion while 15% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "51%",
+                "value": 51
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "15%",
+                "value": 15
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "image": "https://picsum.photos/600/300?image=63",
+        "socialMedia": "youtube",
+        "title": "Fansided",
+        "secondTitle": "156 Shares",
+        "options": [
+          {
+            "name": "Duration",
+            "description": "On Facebook, 27% of videos are 0-16s while 46% of industry videos are 16-30s",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "0-15s",
+                "rightTitle": "17%",
+                "value": 17
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "15-45s",
+                "rightTitle": "82%",
+                "value": 82
+              }
+            ]
+          },
+          {
+            "name": "Pacing",
+            "description": "On Facebook, 61% of videos are Fast Paced while 32% of industry videos are Medium Paced.",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Fast",
+                "rightTitle": "61%",
+                "value": 61
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Medium",
+                "rightTitle": "32%",
+                "value": 32
+              }
+            ]
+          },
+          {
+            "name": "Format",
+            "description": "On Facebook, 11% of videos are Stop Motion while 16% of industry videos are Animation",
+            "compareValues": [
+              {
+                "title": "This Video",
+                "leftTitle": "Stop Motion",
+                "rightTitle": "11%",
+                "value": 11
+              },
+              {
+                "title": "Industry",
+                "leftTitle": "Animation",
+                "rightTitle": "16%",
+                "value": 16
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "SimilarProperties": [
+      {
+        "title": "Duration",
+        "description": "0-15s",
+        "data": [
+          { "leftTitle": "0-15s", "value": 41.98 },
+          { "leftTitle": "16-30s", "value": 0 },
+          { "leftTitle": "31-60s", "value": 9.26 },
+          { "leftTitle": "60+s", "value": 48.77 }
+        ]
+      },
+      {
+        "title": "Pacing",
+        "description": "Fast",
+        "data": [
+          { "leftTitle": "Fast", "value": 18.95 },
+          { "leftTitle": "Medium", "value": 24.74 },
+          { "leftTitle": "Slow", "value": 49.47 },
+          { "leftTitle": "Slowest", "value": 6.84 }
+        ]
+      },
+      {
+        "title": "Dominant Color",
+        "description": "Blue",
+        "data": [
+          { "leftTitle": "Blue", "value": 34.08 },
+          { "leftTitle": "Yellow", "value": 30.17 },
+          { "leftTitle": "Green", "value": 14.53 },
+          { "leftTitle": "Red", "value": 21.23 }
+        ]
+      }
+    ]
+  }
+}
+

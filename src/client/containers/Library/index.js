@@ -22,7 +22,8 @@ export class Library extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      sidebarVisible: false
+			sidebarVisible: false,
+			fixedHeader: true
     }
   }
 
@@ -55,7 +56,8 @@ export class Library extends React.Component {
           onClick={() => this.setSidebarVisible(false)}
         />
         <Sidebar
-          sidebarVisible={this.state.sidebarVisible}
+					sidebarVisible={this.state.sidebarVisible}
+					fixedHeader={this.state.fixedHeader}
           setSidebarVisible={e => this.setSidebarVisible(e)}
           onSubmit={e => this.handleSubmit(e)}
         />

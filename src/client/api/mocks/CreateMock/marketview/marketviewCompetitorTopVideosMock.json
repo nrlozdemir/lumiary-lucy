@@ -6,26 +6,5 @@
     "1080p",
     "4k"
   ],
-  "datasets": [
-    {
-      "backgroundColor": "#51adc0",
-      "data": "rNA#5, 0, 100#"
-    },
-    {
-      "backgroundColor": "#8567f0",
-      "data": "rNA#5, 0, 100#"
-    },
-    {
-      "backgroundColor": "#D0506C",
-      "data": "rNA#5, 0, 100#"
-    },
-    {
-      "backgroundColor": "#acb0be",
-      "data": "rNA#5, 0, 100#"
-    },
-    {
-      "backgroundColor": "#5a6386",
-      "data": "rNA#5, 0, 100#"
-    }
-  ]
+  "datasets": "rCTV#['51adc0','8567f0','D0506C','acb0be','5a6386']#"
 }

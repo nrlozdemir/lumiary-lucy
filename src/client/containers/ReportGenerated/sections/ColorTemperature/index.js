@@ -41,16 +41,24 @@ const GeneratedReportColorTemperature = ({
     </div>
     <div className={style.infoWrapperContainer}>
       <div className={style.infoWrapper}>
-        <span className={style.infoText}>Views</span>
+        <div className={style.infoHandle}>
+          <span className={style.infoText}>Views</span>
+        </div>
       </div>
       <div className={style.infoWrapper}>
-        <span className={style.infoText}>Likes</span>
+        <div className={style.infoHandle}>
+          <span className={style.infoText}>Likes</span>
+        </div>
       </div>
       <div className={style.infoWrapper}>
-        <span className={style.infoText}>Comment</span>
+        <div className={style.infoHandle}>
+          <span className={style.infoText}>Comment</span>
+        </div>
       </div>
       <div className={style.infoWrapper}>
-        <span className={style.infoText}>Shares</span>
+        <div className={style.infoHandle}>
+          <span className={style.infoText}>Shares</span>
+        </div>
       </div>
     </div>
     <div className="d-flex align-items-center justify-content-center ph-48 mv-48">
