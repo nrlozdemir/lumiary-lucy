@@ -1,4 +1,8 @@
 import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { makeSelectPanoptic } from 'Reducers/panoptic'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
 
 import Range from 'Components/Form/Range'
@@ -6,155 +10,27 @@ import SelectFilters from 'Components/SelectFilters'
 import style from 'Containers/Audience/style.scss'
 import { socialIconSelector } from 'Utils'
 
-export class Performance extends React.Component {
+class Performance extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       slider: [0, 100],
       selectViews: '',
       selectDate: '',
-      bubblesMales: [
-        {
-          value: 30,
-          visual: 'youtube',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-        {
-          value: 25,
-          visual: 'facebook',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-        {
-          value: 20,
-          visual: 'twitter',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-        {
-          value: 15,
-          visual: 'pinterest',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-        {
-          value: 10,
-          visual: 'instagram',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-      ],
-      bubblesFemales: [
-        {
-          value: 20,
-          visual: 'youtube',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-        {
-          value: 35,
-          visual: 'facebook',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-        {
-          value: 20,
-          visual: 'twitter',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-        {
-          value: 15,
-          visual: 'pinterest',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-        {
-          value: 10,
-          visual: 'instagram',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-      ],
-      bubblesBoth: [
-        {
-          value: 20,
-          visual: 'youtube',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-        {
-          value: 25,
-          visual: 'facebook',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-        {
-          value: 20,
-          visual: 'twitter',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-        {
-          value: 15,
-          visual: 'pinterest',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-        {
-          value: 20,
-          visual: 'instagram',
-          toolTip:
-            Math.round(Math.random() * 1000) +
-            '.' +
-            Math.ceil(Math.random() * 9) +
-            'k views',
-        },
-      ],
+      bubblesMales: null,
+      bubblesFemales: null,
+      bubblesBoth: null
     }
+  }
+
+  componentDidMount() {
+    const { panoptic: { audienceData: { performance } } } = this.props;
+
+    this.setState({
+      bubblesMales: performance.bubblesMales,
+      bubblesFemales: performance.bubblesFemales,
+      bubblesBoth: performance.bubblesBoth,
+    })
   }
 
   updateSlider() {
@@ -321,6 +197,8 @@ export class Performance extends React.Component {
       selectLikes,
       selectDate,
     } = this.state
+
+    if (!bubblesBoth && !bubblesFemales && !bubblesMales) return false
 
     const handleStyle = [
       {
@@ -527,3 +405,14 @@ export class Performance extends React.Component {
     )
   }
 }
+
+const mapStateToProps = createStructuredSelector({
+  panoptic: makeSelectPanoptic(),
+})
+
+const withConnect = connect(
+  mapStateToProps,
+  null
+)
+
+export default compose(withConnect)(Performance)
