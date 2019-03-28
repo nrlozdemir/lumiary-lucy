@@ -66,6 +66,7 @@ export class VideoCard extends PureComponent {
 
   render() {
     const { video, options = options || {}, muted = true } = this.props
+    const { itCanPlay } = this.state
     const cardContainerClass = classnames(
       style.cardContainer,
       {
@@ -82,7 +83,6 @@ export class VideoCard extends PureComponent {
       socialIconSelector(video.socialIcon),
       style.iconClass
     )
-    // return console.log(video)
     return (
       <div className={style.cardContainer}>
         <div
@@ -90,9 +90,15 @@ export class VideoCard extends PureComponent {
           onMouseEnter={() => this.videoMouseEnterPlay()}
           onMouseLeave={() => this.videoMouseLeavePlay()}
         >
-          {video.videoUrl && this.state.itCanPlay ? (
+          {video.videoUrl && itCanPlay ? (
             <div className={style.videoInner}>
-              <video ref={this.video} loop muted poster={video.poster}>
+              <video
+                ref={this.video}
+                loop
+                muted
+                poster={video.poster}
+                controls={false}
+              >
                 <source src={video.videoUrl} type="video/mp4" />
               </video>
               <span
