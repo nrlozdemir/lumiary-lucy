@@ -362,83 +362,68 @@
   "performance": {
     "bubblesMales": [
       {
-        "value": 30,
         "visual": "youtube",
-        "toolTip": "33. 8k views"
+        "toolTip": 33000
       },
       {
-        "value": 25,
         "visual": "facebook",
-        "toolTip": "548. 7k views"
+        "toolTip": 540000
       },
       {
-        "value": 20,
         "visual": "twitter",
-        "toolTip": "845. 8k views"
+        "toolTip": 845000
       },
       {
-        "value": 15,
         "visual": "pinterest",
-        "toolTip": "481. 8k views"
+        "toolTip": 480000
       },
       {
-        "value": 10,
         "visual": "instagram",
-        "toolTip": "296. 5k views"
+        "toolTip": 296000
       }
     ],
     "bubblesFemales": [
       {
-        "value": 20,
         "visual": "youtube",
-        "toolTip": "714. 1k views"
+        "toolTip": 715000
       },
       {
-        "value": 35,
         "visual": "facebook",
-        "toolTip": "733. 6k views"
+        "toolTip": 744000
       },
       {
-        "value": 20,
         "visual": "twitter",
-        "toolTip": "230. 5k views"
+        "toolTip": 230000
       },
       {
-        "value": 15,
         "visual": "pinterest",
-        "toolTip": "970. 8k views"
+        "toolTip": 970000
       },
       {
-        "value": 10,
         "visual": "instagram",
-        "toolTip": "472. 6k views"
+        "toolTip": 472000
       }
     ],
     "bubblesBoth": [
       {
-        "value": 20,
         "visual": "youtube",
-        "toolTip": "828. 9k views"
+        "toolTip": 828000
       },
       {
-        "value": 25,
         "visual": "facebook",
-        "toolTip": "881. 2k views"
+        "toolTip": 881000
       },
       {
-        "value": 20,
         "visual": "twitter",
-        "toolTip": "438. 2k views"
+        "toolTip": 438000
       },
       {
-        "value": 15,
         "visual": "pinterest",
-        "toolTip": "659. 2k views"
+        "toolTip": 659000
       },
       {
-        "value": 20,
         "visual": "instagram",
-        "toolTip": "679. 9k views"
+        "toolTip": 679000
       }
     ]
   }

@@ -15,6 +15,10 @@ export const types = {
   GET_AUDIENCE_DATA: "Panoptic/GET_AUDIENCE_DATA",
   GET_AUDIENCE_DATA_SUCCESS: "Panoptic/GET_AUDIENCE_DATA_SUCCESS",
   GET_AUDIENCE_DATA_ERROR: "Panoptic/GET_AUDIENCE_DATA_ERROR",
+
+  UPDATE_AUDIENCE_PERFORMANCE: "Panoptic/UPDATE_AUDIENCE_PERFORMANCE",
+  UPDATE_AUDIENCE_PERFORMANCE_SUCCESS: "Panoptic/UPDATE_AUDIENCE_PERFORMANCE_SUCCESS",
+  UPDATE_AUDIENCE_PERFORMANCE_ERROR: "Panoptic/UPDATE_AUDIENCE_PERFORMANCE_ERROR",
 };
 
 export const actions = {
@@ -25,6 +29,10 @@ export const actions = {
   getAudienceData: () => ({ type: types.GET_AUDIENCE_DATA }),
   getAudienceDataSuccess: payload => ({ type: types.GET_AUDIENCE_DATA_SUCCESS, payload }),
   getAudienceDataError: error => ({ type: types.GET_AUDIENCE_DATA_ERROR, error }),
+
+  updateAudiencePerformance: payload => ({ type: types.UPDATE_AUDIENCE_PERFORMANCE, payload }),
+  updateAudiencePerformanceSuccess: payload => ({ type: types.UPDATE_AUDIENCE_PERFORMANCE_SUCCESS, payload }),
+  updateAudiencePerformanceError: error => ({ type: types.UPDATE_AUDIENCE_PERFORMANCE_ERROR, error }),
 };
 
 export const initialState = fromJS({
@@ -58,6 +66,19 @@ const panopticReducer = (state = initialState, action) => {
         .set("loading", fromJS(false));
 
     case types.GET_AUDIENCE_DATA_ERROR:
+      return state
+        .set("error", fromJS(action.error))
+        .set("loading", fromJS(false));
+
+    case types.UPDATE_AUDIENCE_PERFORMANCE:
+      return state.set("loading", fromJS(true));
+
+    case types.UPDATE_AUDIENCE_PERFORMANCE_SUCCESS:
+      return state
+        .mergeIn(["audienceData", "performance"], fromJS(action.payload))
+        .set("loading", fromJS(false));
+
+    case types.UPDATE_AUDIENCE_PERFORMANCE_ERROR:
       return state
         .set("error", fromJS(action.error))
         .set("loading", fromJS(false));
