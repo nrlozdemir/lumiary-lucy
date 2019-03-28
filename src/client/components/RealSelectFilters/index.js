@@ -15,6 +15,19 @@ import { createStructuredSelector } from 'reselect'
 import { actions, makeSelectSelectFilters } from "Reducers/selectFilters"
 
 
+/**
+ * Represents a Select Filters.
+ * @constructor
+ * @param {selectKey} selectKey - The Uniqe Key of the Select.
+ * @param {placeHolder} placeHolder - The Placeholder of the Select.
+ * @param {selectClasses} selectClasses - The Custom Class of the Select.
+ * @param {type} type - The type of the Select.
+ * (Types are:  engagement, platform, aspectRatio, resolution,
+ * 		frameRate, duration, pacing, videoFormat, videoProperty,
+ * 		audienceAge, audienceGender, talentAge, talentGender,
+ * 		colorTempature, timeRange
+ * )
+ */
 class RealSelectFilters extends React.Component {
 
   onChange = (val) => {
