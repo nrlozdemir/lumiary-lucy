@@ -10,7 +10,8 @@ import { createSelector } from 'reselect';
 
 export const types = {
 	CHANGE_FILTER: "SELECT_FILTER/CHANGE_FILTER",
-	REMOVE_FILTER: "SELECT_FILTER/REMOVE_FILTER"
+	REMOVE_FILTER: "SELECT_FILTER/REMOVE_FILTER",
+	REMOVE_ALL_FILTER: "SELECT_FILTER/REMOVE_ALL_FILTER"
 
 };
 export const actions = {
@@ -18,8 +19,12 @@ export const actions = {
     type: types.CHANGE_FILTER,
     payload,
 	}),
-	removeFilter: () => ({
+	removeFilter: (payload) => ({
 		type: types.REMOVE_FILTER,
+		payload,
+	}),
+	removeAllFilters: () => ({
+		type: types.REMOVE_ALL_FILTER,
 	})
 };
 
@@ -116,6 +121,13 @@ export const initialState = fromJS({
 			{ value: 'cool-warm', label: 'Cool / Warm' },
 			{ value: 'natural-saynthetic', label: 'Natural / Saynthetic' },
 		],
+		timeRange: [
+			{ value: 'Today', label: 'Today' },
+			{ value: 'Past Week', label: 'Past Week' },
+			{ value: 'Past Month', label: 'Past Month' },
+			{ value: 'Past 3 Months', label: 'Past 3 Months' },
+			{ value: 'custom', label: 'Custom' },
+		]
 	},
 	values: {},
 });
@@ -125,6 +137,8 @@ const selectFiltersReducer = (state = initialState, action) => {
 		case types.CHANGE_FILTER:
 			return state.mergeIn(['values'], fromJS(action.payload))
 		case types.REMOVE_FILTER:
+			return state.deleteIn(['values', fromJS(action.payload)])
+		case types.REMOVE_ALL_FILTER:
 			return state.set('values', fromJS({}))
     default:
       return state;
