@@ -1,0 +1,49 @@
+.moduleContainer {
+  background-color: $color-dark-grey-blue;
+  font-family: $font-family-ClanOT;
+  margin-top: 35px;
+  margin-bottom: 35px;
+
+  .moduleContainerHeader {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 40px;
+    font-size: 18px;
+    font-family: $font-family-ClanOTBold;
+    line-height: 42px;
+    > div {
+      flex: 1;
+    }
+    .headerTitle {
+      display: flex;
+      flex-direction: column;
+      h1,
+      h2 {
+        line-height: initial;
+      }
+      h1 {
+        font-size: 18px;
+      }
+      h2 {
+        font-size: 16px;
+      }
+    }
+    .headerLegend {
+    }
+    .headerFilters {
+      display: flex;
+      float: right;
+      position: relative;
+      z-index: 12;
+      > div {
+        text-align: left;
+        margin: 0 0 0 24px;
+      }
+    }
+  }
+
+  .moduleContainerBody {
+    padding: 40px;
+  }
+}

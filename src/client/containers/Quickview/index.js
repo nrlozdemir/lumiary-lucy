@@ -18,10 +18,14 @@ import style from './style.scss'
 
 import RouterLoading from 'Components/RouterLoading'
 import DynamicImport from 'Containers/DynamicImport'
-import RealSelectFilters from '../../components/RealSelectFilters';
+import RealSelectFilters from 'Components/RealSelectFilters'
 
 const Detail = (props) => (
-  <DynamicImport match={props.match} removeNavbar load={() => import('./views/detail')}>
+  <DynamicImport
+    match={props.match}
+    removeNavbar
+    load={() => import('./views/detail')}
+  >
     {(Component) =>
       Component === null ? <RouterLoading /> : <Component {...props} />
     }
@@ -53,13 +57,21 @@ export class Quickview extends React.Component {
     } = this.props
 
     const Main = (props) => (
-      <DynamicImport match={props.match} removeNavbar load={() => import('./views/main')}>
+      <DynamicImport
+        match={props.match}
+        removeNavbar
+        load={() => import('./views/main')}
+      >
         {(Component) =>
           Component === null ? (
             <RouterLoading />
           ) : (
-              <Component match={props.match} {...props} quickviewItems={quickviewItems} />
-            )
+            <Component
+              match={props.match}
+              {...props}
+              quickviewItems={quickviewItems}
+            />
+          )
         }
       </DynamicImport>
     )
@@ -84,9 +96,16 @@ export class Quickview extends React.Component {
               </h1>
             </div>
             <div className="headerRight">
-							<RealSelectFilters type='aspectRatio' selectKey='fd' placeHolder='Select Aspect Ratio'/>
-							<RealSelectFilters type='timeRange' selectKey='vali' placeHolder='Select Audience Gender'/>
-
+              <RealSelectFilters
+                type="aspectRatio"
+                selectKey="fd"
+                placeHolder="Select Aspect Ratio"
+              />
+              <RealSelectFilters
+                type="timeRange"
+                selectKey="vali"
+                placeHolder="Select Audience Gender"
+              />
             </div>
           </div>
           <Switch>
