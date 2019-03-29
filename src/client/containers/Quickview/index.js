@@ -96,16 +96,7 @@ export class Quickview extends React.Component {
               </h1>
             </div>
             <div className="headerRight">
-              <RealSelectFilters
-                type="aspectRatio"
-                selectKey="fd"
-                placeHolder="Select Aspect Ratio"
-              />
-              <RealSelectFilters
-                type="timeRange"
-                selectKey="vali"
-                placeHolder="Select Audience Gender"
-              />
+
             </div>
           </div>
           <Switch>
