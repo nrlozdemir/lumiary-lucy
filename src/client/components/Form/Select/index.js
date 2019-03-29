@@ -30,7 +30,7 @@ const Select = (props) => {
       <div className={style.DropdownIndicator}>
         {props.selectProps.menuIsOpen ? (
           <span
-            className="icon-Arrow-Down"
+            className="icon-Arrow-Down indicator-up"
             style={{ transform: 'rotate(180deg)' }}
           >
             <span className="path1" />
@@ -38,7 +38,7 @@ const Select = (props) => {
             <span className="path3" />
           </span>
         ) : (
-          <span className="icon-Arrow-Down">
+          <span className="icon-Arrow-Down indicator-down">
             <span className="path1" />
             <span className="path2" />
             <span className="path3" />
@@ -78,7 +78,7 @@ const Select = (props) => {
     },
     placeholder: (styles) => ({
       ...styles,
-      color: '#ffffff',
+      color: '#5a6386',
     }),
     menu: (base) => ({
       ...base,

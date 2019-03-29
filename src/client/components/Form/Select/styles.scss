@@ -38,3 +38,18 @@
     color: $color-white;
   }
 }
+
+:global{
+	.selected .icon-Arrow-Down{
+    color: $color-white;
+	}
+	.icon-Arrow-Down{
+		&.indicator-down::before{
+			color: $color-dusk;
+		}
+
+		&.indicator-up::before{
+			color: $color-white;
+		}
+	}
+}
