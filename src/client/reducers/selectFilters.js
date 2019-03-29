@@ -133,8 +133,14 @@ export const initialState = fromJS({
 
 const selectFiltersReducer = (state = initialState, action) => {
   switch (action.type) {
-    case types.CHANGE_FILTER:
-      return state.mergeIn(['values'], fromJS(action.payload))
+    case types.CHANGE_FILTER: {
+      console.log('ACTION: ', action.payload)
+      return state.mergeIn(
+        ['values', Object.keys(action.payload)],
+        fromJS(action.payload)
+      )
+    }
+
     case types.REMOVE_FILTER:
       return state.deleteIn(['values', fromJS(action.payload)])
     case types.REMOVE_ALL_FILTER:

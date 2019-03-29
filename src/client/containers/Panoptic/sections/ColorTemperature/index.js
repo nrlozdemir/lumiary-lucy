@@ -10,6 +10,7 @@ import Module from 'Components/Module'
 
 const PanopticColorTemperature = ({ colorTempData, callBack }) => (
   <Module
+    moduleKey="ali"
     title="Video Releases vs Engagement"
     action={callBack}
     filters={[

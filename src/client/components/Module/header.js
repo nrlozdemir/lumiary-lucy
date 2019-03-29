@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import RealSelectFilters from 'Components/RealSelectFilters'
 import style from './style.scss'
 
-const HeaderModule = ({ key, title, subTitle, legend, filters }) => {
+const HeaderModule = ({ key, title, subTitle, legend, filters, moduleKey }) => {
   return (
     <React.Fragment>
       <div className={style.headerTitle}>
@@ -17,6 +17,7 @@ const HeaderModule = ({ key, title, subTitle, legend, filters }) => {
             <RealSelectFilters
               key={index}
               type={filter.type}
+              moduleKey={moduleKey}
               selectKey={filter.selectKey}
               placeHolder={filter.placeHolder}
             />

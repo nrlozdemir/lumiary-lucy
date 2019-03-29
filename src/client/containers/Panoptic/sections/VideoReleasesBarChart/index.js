@@ -64,6 +64,7 @@ const PanopticBarChart = ({ data, callBack }) => {
 
   return (
     <Module
+      moduleKey="veli"
       title="Video Releases vs Engagement"
       action={callBack}
       filters={[
