@@ -24,5 +24,10 @@ export const doughnutOptions = {
 			},
 			color: '#fff',
 		}
+	},
+	elements: {
+		arc: {
+			borderWidth: 5
+		}
 	}
 };
