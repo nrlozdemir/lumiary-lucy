@@ -1,5 +1,4 @@
 .cardContainer {
-  margin-bottom: 40px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   transition: box-shadow 0.3s ease-in-out;
   position: relative;
@@ -18,15 +17,25 @@
     }
   }
 
-  .cardImage {
-    position: relative;
+  .blurredImage {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    top: 0;
     width: 100%;
     height: 0;
     padding-top: 100% / 16 * 9;
     overflow: hidden;
-    border: 1px solid $color-dusk;
-    box-sizing: border-box;
+  }
 
+  .videoInner {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 0;
+    padding-top: 100% / 16 * 9;
+    overflow: hidden;
     video {
       position: absolute;
       width: 100%;
@@ -35,6 +44,17 @@
       left: 0;
       object-fit: cover;
     }
+  }
+
+  .cardImage {
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100% / 16 * 9;
+    overflow: hidden;
+    border: 1px solid $color-dusk;
+    border-bottom: none;
+    box-sizing: border-box;
 
     &:after {
       content: '\A';

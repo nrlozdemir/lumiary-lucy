@@ -14,6 +14,27 @@
     @include grid-column(12);
   }
 
+  .cardInner {
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    position: relative;
+    video {
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+  }
+
+  .blurredImage {
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    position: relative;
+    width: 100%;
+    height: 0;
+    padding-top: 100% / 16 * 9;
+    overflow: hidden;
+  }
+
   .progressBar {
     height: 4px;
     background: #fff;
@@ -25,26 +46,22 @@
     opacity: 0;
     box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.5);
   }
-  .opacityNone {
-    opacity: 0;
-  }
-  .opacityShow {
-    opacity: 1;
-  }
-  .hidden {
-    z-index: 1 !important;
-  }
-  .show {
-    z-index: 1 !important;
-  }
-  .cardInner {
-    transition: all 0.3s ease-in-out;
-  }
-  .cardHandle {
+  .videoInner {
     position: relative;
-    display: block;
+    width: 100%;
+    height: 0;
+    padding-top: 100% / 16 * 9;
+    overflow: hidden;
+    video {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      object-fit: cover;
+    }
   }
-  &.hoverReady:hover {
+  &:hover {
     z-index: 10;
     .progressBar {
       opacity: 1;
@@ -88,11 +105,6 @@
         // transform: scale(1);
       }
     }
-    .cardImage {
-      &:after {
-        opacity: 1;
-      }
-    }
     .cardBody {
       .cardLink {
         display: flex;
@@ -100,49 +112,6 @@
       .cardInfo {
         display: none;
       }
-    }
-  }
-
-  .cardImage {
-    position: relative;
-    width: 100%;
-    height: 0;
-    padding-top: 100% / 16 * 9;
-    overflow: hidden;
-    border: 1px solid $color-dusk;
-    box-sizing: border-box;
-
-    canvas {
-      z-index: 3;
-    }
-    video {
-      z-index: -1;
-      // transform: scale(1.2);
-    }
-    canvas {
-      object-fit: cover;
-    }
-    canvas,
-    video {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      // transition: opacity 0.3s ease-in-out;
-    }
-
-    &:after {
-      content: '\A';
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      top: 0;
-      left: 0;
-      background: rgba(0, 0, 0, 0.4);
-      opacity: 0;
-      // transition: all 0.3s;
-      // -webkit-transition: all 0.3s;
     }
   }
   .cardBody {

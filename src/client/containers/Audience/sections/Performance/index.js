@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import { actions, makeSelectPanoptic } from 'Reducers/panoptic'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
 
-import Range from 'Components/Form/Range'
+import RangeWithBadge from 'Components/Form/RangeWithBadge'
 import SelectFilters from 'Components/SelectFilters'
 import style from 'Containers/Audience/style.scss'
 import { socialIconSelector } from 'Utils'
@@ -77,7 +77,11 @@ class Performance extends React.Component {
         borderColor: ' #ffffff transparent transparent transparent',
         borderRadius: 0,
         backgroundColor: 'transparent',
-        boxShadow: 'none',
+				boxShadow: 'none',
+				filter: 'drop-shadow(0px 2px 4px 2px #000)',
+				'-webkit-filter': 'drop-shadow(0px 2px 4px 2px #000)',
+				'-moz-filter': 'drop-shadow(0px 2px 4px 2px #000)',
+				'-o-filter': 'drop-shadow(0px 2px 4px 2px #000)'
       },
       {
         width: '10px',
@@ -87,7 +91,11 @@ class Performance extends React.Component {
         borderColor: '#ffffff transparent transparent transparent',
         backgroundColor: 'transparent',
         borderRadius: 0,
-        boxShadow: 'none',
+				boxShadow: 'none',
+				filter: 'drop-shadow(0px 2px 4px 2px #000)',
+				'-webkit-filter': 'drop-shadow(0px 2px 4px 2px #000)',
+				'-moz-filter': 'drop-shadow(0px 2px 4px 2px #000)',
+				'-o-filter': 'drop-shadow(0px 2px 4px 2px #000)',
         marginLeft: '-12px',
       },
     ]
@@ -109,7 +117,8 @@ class Performance extends React.Component {
       height: '16px',
       backgroundColor: '#acb0be',
       top: 0,
-      marginLeft: 0,
+			marginLeft: 0,
+			display: 'none'
     }
 
     return (
@@ -240,7 +249,7 @@ class Performance extends React.Component {
           </div>
         </div>
         <div className="col-12" style={{ paddingBottom: 40 }}>
-          <Range
+          <RangeWithBadge
             customClass={'customRangeSlider'}
             minValue={0}
             maxValue={100}
@@ -249,22 +258,28 @@ class Performance extends React.Component {
             trackStyle={trackStyle}
             railStyle={railStyle}
             min={0}
-            max={100}
+						max={100}
+						tipProps={{
+							visible: true,
+							overlayClassName: 'customTooltip',
+							overlayStyle: { background: 'none', border: 'none', boxShadow: 'none' },
+							arrowContent: ''
+						}}
             dotStyle={dotStyle}
-            step={10}
+            step={1}
             dots={true}
             marks={{
-              0: 0,
-              10: 10,
-              20: 20,
-              30: 30,
-              40: 40,
-              50: 50,
-              60: 60,
-              70: 70,
-              80: 80,
-              90: 90,
-              100: 100,
+							0: <div className="custom-dot">0</div>,
+              10: <div className="custom-dot">10</div>,
+              20: <div className="custom-dot">20</div>,
+              30: <div className="custom-dot">30</div>,
+              40: <div className="custom-dot">40</div>,
+              50: <div className="custom-dot">50</div>,
+              60: <div className="custom-dot">60</div>,
+              70: <div className="custom-dot">70</div>,
+              80: <div className="custom-dot">80</div>,
+              90: <div className="custom-dot">90</div>,
+              100: <div className="custom-dot">100</div>,
             }}
             customTicksUnvisible
           />

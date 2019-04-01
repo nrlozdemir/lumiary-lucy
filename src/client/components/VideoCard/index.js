@@ -4,99 +4,69 @@
  *
  */
 
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import style from './style.scss'
 import { socialIconSelector } from '../../utils'
 import { Link } from 'react-router-dom'
-export class VideoCard extends Component {
-  _isMounted = false
+let hoverInReady
+
+export class VideoCard extends PureComponent {
   constructor(props) {
     super(props)
+    this.video = React.createRef()
     this.state = {
-      hoverReady: false,
-      firstLoad: true,
-      showVideo: false,
       width: 0,
-      startProgress: false,
       duration: 0,
-      ctx: undefined,
-    }
-  }
-
-  grabFrame = () => {
-    var wrh = this.video.videoWidth / this.video.videoHeight
-    var newWidth = this.canvas.width
-    var newHeight = newWidth / wrh
-    newWidth = newHeight * wrh
-    this.state.ctx.drawImage(this.video, 0, 0, newWidth, newHeight)
-    this.setState({
-      hoverReady: true,
-    })
-  }
-
-  componentDidMount() {
-    this._isMounted = true
-    if (this._isMounted) {
-      this.setState({
-        ctx: this.canvas.getContext('2d'),
-      })
-    }
-  }
-
-  componentDidUpdate() {
-    if (this._isMounted) {
-      if (this.video && this.state.firstLoad) {
-        const _this = this
-        this.video.addEventListener('loadeddata', function() {
-          _this.grabFrame()
-          this.addEventListener(
-            'timeupdate',
-            function(e) {
-              _this.setState({
-                width: this.currentTime,
-              })
-            },
-            false
-          )
-        })
-        this.setState({
-          firstLoad: false,
-        })
-      }
+      itCanPlay: false,
     }
   }
 
   componentWillUnmount() {
-    this.video.removeEventListener('timeupdate', null)
-    this.video.removeEventListener('loadeddata', null)
-    this._isMounted = false
+    if (this.video && this.video.current) {
+      this.video.current.removeEventListener('timeupdate', null)
+    }
   }
 
-  pausedFunction = () => {
-    // this.grabFrame()
-    this.video.pause()
-    this.video.removeEventListener('timeupdate', null)
-    this.setState({
-      startProgress: false,
-      showVideo: false,
-    })
-  }
-
-  playedFunction = () => {
-    if (!this.state.hoverReady) return
-    this.video.play()
+  videoMouseEnterPlay = () => {
     const _this = this
+    hoverInReady = setTimeout(() => {
+      this.setState(
+        {
+          itCanPlay: true,
+        },
+        () => {
+          this.video.current.play()
+          this.video.current.addEventListener(
+            'timeupdate',
+            function() {
+              if (_this.state.itCanPlay) {
+                _this.setState({
+                  duration: this.duration,
+                  width: this.currentTime,
+                })
+              }
+            },
+            false
+          )
+        }
+      )
+    }, 400)
+  }
+
+  videoMouseLeavePlay = () => {
+    clearInterval(hoverInReady)
     this.setState({
-      showVideo: true,
-      startProgress: true,
-      duration: this.video.duration,
+      width: 0,
+      duration: 0,
+      itCanPlay: false,
     })
   }
 
   render() {
     const { video, options = options || {}, muted = true } = this.props
+    const { itCanPlay } = this.state
     const cardContainerClass = classnames(
       style.cardContainer,
       {
@@ -113,51 +83,37 @@ export class VideoCard extends Component {
       socialIconSelector(video.socialIcon),
       style.iconClass
     )
-
     return (
-      <div
-        key={video.id}
-        className={cardContainerClass}
-        onMouseEnter={() => this.playedFunction()}
-        onMouseLeave={() => this.pausedFunction()}
-      >
+      <div className={style.cardContainer}>
         <div
           className={style.cardInner}
-          ref={(cardInner) => (this.cardInner = cardInner)}
+          onMouseEnter={() => this.videoMouseEnterPlay()}
+          onMouseLeave={() => this.videoMouseLeavePlay()}
         >
-          <div
-            className={classnames(
-              style.cardImage,
-              !this.state.hoverReady ? style.opacityNone : style.opacityShow
-            )}
-          >
-            <canvas
-              className={classnames(
-                'img-responsive',
-                this.state.showVideo && style.hidden
-              )}
-              ref={(canvas) => (this.canvas = canvas)}
-            />
-            <video
-              className={classnames(
-                'img-responsive',
-                !this.state.showVideo ? style.hidden : style.show
-              )}
-              muted={muted}
-              ref={(video) => (this.video = video)}
-            >
-              <source src={video.videoUrl} type="video/mp4" />
-            </video>
-
-            {this.state.startProgress && (
+          {video.videoUrl && itCanPlay ? (
+            <div className={style.videoInner}>
+              <video
+                ref={this.video}
+                loop
+                muted
+                poster={video.poster}
+                controls={false}
+              >
+                <source src={video.videoUrl} type="video/mp4" />
+              </video>
               <span
                 className={style.progressBar}
                 style={{
                   width: `${(this.state.width * 100) / this.state.duration}%`,
                 }}
               />
-            )}
-          </div>
+            </div>
+          ) : (
+            <div
+              className={style.blurredImage}
+              style={{ backgroundImage: `url(${video.poster})` }}
+            />
+          )}
 
           <div className={classnames('bg-dusk', style.cardBody)}>
             <div className={style.bodyHeader}>
