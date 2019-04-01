@@ -1,6 +1,6 @@
 export const doughnutOptions = {
 	responsive: true,
-	cutoutPercentage: 60,
+	cutoutPercentage: 55,
 	tooltips: {
 		enabled: false
 	},
