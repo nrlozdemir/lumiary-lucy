@@ -27,7 +27,8 @@ export const doughnutOptions = {
 	},
 	elements: {
 		arc: {
-			borderWidth: 5
+			borderWidth: 5,
+			hoverBorderColor: "#303a5d"
 		}
 	}
 };
