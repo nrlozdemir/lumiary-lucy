@@ -2,6 +2,17 @@ import React from 'react'
 
 import style from "./style.scss"
 
+const lineSize = parseInt(style.lineSize)
+const minHeight = parseInt(style.minHeight)
+const minWidth = parseInt(style.minWidth)
+
+let stats = [
+  {value: '20'},
+  {value: '50'},
+  {value: '45'},
+  {value: '40'}
+]
+
 const StadiumChart = () => (
 	<div className="d-flex justify-space-between align-items-center">
 		<div className={style.colorList}>
@@ -10,27 +21,23 @@ const StadiumChart = () => (
 			<div className={style.colorListItem}>Slow</div>
 			<div className={style.colorListItem}>Slowest</div>
 		</div>
-		<div className={style.stadiumCharts} title="Total Percentage">
-			<div className={style.stadiumChart} data="20" title="80% Data">
-				<svg xmlns="http://www.w3.org/2000/svg">
-					<rect className={style.bar} fill="none" rx="1" />
-				</svg>
-			</div>
-			<div className={style.stadiumChart} data="50" title="50% Data">
-				<svg xmlns="http://www.w3.org/2000/svg">
-					<rect className={style.bar} fill="none" rx="1" />
-				</svg>
-			</div>
-			<div className={style.stadiumChart} data="45" title="55% Data">
-				<svg xmlns="http://www.w3.org/2000/svg">
-					<rect className={style.bar} fill="none" rx="1" />
-				</svg>
-			</div>
-			<div className={style.stadiumChart} data="40" title="60% Data">
-				<svg xmlns="http://www.w3.org/2000/svg">
-					<rect className={style.bar} fill="none" rx="1" />
-				</svg>
-			</div>
+		<div className={style.stadiumCharts} data-title="Total Percentage">
+		{stats.map((stat, index) => {
+      return(
+        <div key={index} className={style.stadiumChart} data={stat.value}>
+          <div className={style.tick} style={{left: (lineSize * (index))}}>{[100 - stat.value, '% Slowest'].join('')}</div>
+				  <svg xmlns="http://www.w3.org/2000/svg">
+            <rect className={style.bar} fill="none"
+              rx={(lineSize * (index + 2))}
+              x={(lineSize / 2)}
+              y={(lineSize / 2)}
+              width={minWidth + (lineSize * (index * 2))}
+              height={minHeight + (lineSize * (index * 2))}
+            />
+				  </svg>
+			  </div>
+      )
+    })}
 		</div>
 	</div>
 )

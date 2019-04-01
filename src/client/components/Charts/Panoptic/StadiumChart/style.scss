@@ -1,3 +1,13 @@
+$line-size: 40;
+$min-width: 420;
+$min-height: 160;
+
+:export {
+  lineSize: $line-size;
+  minWidth: $min-width;
+  minHeight: $min-height;
+}
+
 .colorList {
   display: flex;
   flex-direction: column-reverse;
@@ -42,17 +52,13 @@
   }
 }
 
-$line-size: 20;
-$min-width: 210;
-$min-height: 80;
-
 .stadiumCharts {
   position: relative;
   width: #{$min-width + ($line-size * 9)}px;
   height: #{$min-height + ($line-size * 9)}px;
 
   &:before {
-    content: attr(title);
+    content: attr(data-title);
     width: #{$min-width - $line-size}px;
     height: #{$min-height - $line-size}px;
     position: absolute;
@@ -79,6 +85,40 @@ $min-height: 80;
     margin: #{$line-size / 2}px;
     border-radius: 1000px;
 
+    .tick{
+      position: absolute;
+      top: -20px;
+      transform: translate(-50%, -50%);
+      padding: 6px 12px;
+      box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.5);
+      color: #23294c;
+      background-color: #fff;
+      border-radius: 10px;
+      pointer-events: none;
+      opacity: 0;
+      z-index: 3;
+      font-size: 12px;
+
+      &:after {
+        content: '';
+        position: absolute;
+        right: -5px;
+        top: calc(50% - 6px);
+        z-index: 1;
+        width: 0;
+        height: 0;
+        border-top: 6px solid transparent;
+        border-bottom: 6px solid transparent;
+        border-left: 6px solid #fff;
+      }
+    }
+
+    &:hover {
+      .tick{
+        opacity: 1;
+      }
+    }
+
     &:before {
       content: '';
       position: absolute;
@@ -89,23 +129,6 @@ $min-height: 80;
       border: 1px solid #5a6386;
       border-radius: 1000px;
       background-color: #242b49;
-    }
-
-    &:after {
-      content: attr(title);
-      position: absolute;
-      top: -10px;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      padding: 12px;
-
-      box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.5);
-      color: #23294c;
-      background-color: white;
-      border-radius: 10px;
-      pointer-events: none;
-      opacity: 0;
-      z-index: 3;
     }
 
     &:nth-child(1) {
