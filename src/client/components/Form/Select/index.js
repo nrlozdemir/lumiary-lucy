@@ -26,7 +26,6 @@ const Select = (props) => {
     [style.selected]: !!value,
   })
   const DropdownIndicator = (props) => {
-    console.log('props', props)
     const menuIsOpenClass = classNames('icon-Arrow-Down', style.iconIndicator, {
       [style.active]: props.hasValue,
       [style.focus]: props.selectProps.menuIsOpen,
