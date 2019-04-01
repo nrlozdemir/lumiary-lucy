@@ -31,6 +31,7 @@ module.exports = {
       'react-dnd-html5-backend',
       'react-dnd-test-backend',
       'react-date-range',
+      'react-id-swiper',
 
       'redux',
       'redux-form',
@@ -53,11 +54,12 @@ module.exports = {
       'immutability-helper',
       'immutable',
       'isomorphic-fetch',
-			'lodash',
+      'lodash',
+      'swiper',
 
       'react-circular-progressbar',
-			'react-icons',
-			'@saypr/bubble-chart',
+      'react-icons',
+      '@saypr/bubble-chart',
 
       'chart.js',
       'react-chartjs-2',
