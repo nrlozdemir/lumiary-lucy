@@ -49,55 +49,55 @@
       }
     }
   }
+}
 
-  .barChartFooter {
-    .references {
-      display: table;
-      margin: 0 auto;
-      .referenceItem {
+.barChartFooter {
+  .references {
+    display: table;
+    margin: 0 auto;
+    .referenceItem {
+      display: inline-block;
+      font-size: 14px;
+      line-height: 1.8rem;
+      text-align: center;
+      span {
+        width: 16px;
+        height: 16px;
         display: inline-block;
-        font-size: 14px;
-        line-height: 1.8rem;
-        text-align: center;
-        span {
-          width: 16px;
-          height: 16px;
-          display: inline-block;
-          margin-bottom: -2px;
-          margin-right: 5px;
-          border-radius: 10px;
-        }
-      }
-      :nth-child(2) {
-        margin-left: 45px;
+        margin-bottom: -2px;
+        margin-right: 5px;
+        border-radius: 10px;
       }
     }
+    :nth-child(2) {
+      margin-left: 45px;
+    }
   }
+}
 
-  .barChartContainer {
-    position: relative;
-  }
+.barChartContainer {
+  position: relative;
+}
 
-  .barChartBackground {
-    background-color: $color-dark-five;
-    height: 274px;
-    position: absolute;
-    right: 0;
-    top: 7px;
-    width: calc(100% - 49px);
-  }
+.barChartBackground {
+  background-color: $color-dark-five;
+  height: 274px;
+  position: absolute;
+  right: 0;
+  top: 7px;
+  width: calc(100% - 49px);
+}
 
-  .wrapperBarChart {
-    height: 291px;
-    position: absolute;
-    width: 100%;
-    z-index: 2;
-  }
+.wrapperBarChart {
+  height: 291px;
+  position: absolute;
+  width: 100%;
+  z-index: 2;
+}
 
-  .groupChartsWrapper {
-    padding-left: 20px;
-    padding-right: 1px;
-    position: relative;
-    z-index: 3;
-  }
+.groupChartsWrapper {
+  padding-left: 20px;
+  padding-right: 1px;
+  position: relative;
+  z-index: 3;
 }

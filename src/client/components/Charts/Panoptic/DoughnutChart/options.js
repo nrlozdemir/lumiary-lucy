@@ -1,6 +1,6 @@
 export const doughnutOptions = {
 	responsive: true,
-	cutoutPercentage: 60,
+	cutoutPercentage: 55,
 	tooltips: {
 		enabled: false
 	},
@@ -23,6 +23,12 @@ export const doughnutOptions = {
 				return percentage;
 			},
 			color: '#fff',
+		}
+	},
+	elements: {
+		arc: {
+			borderWidth: 5,
+			hoverBorderColor: "#303a5d"
 		}
 	}
 };

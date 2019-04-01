@@ -1,11 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { NavLink, Route, Switch } from 'react-router-dom'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectMarketview } from 'Reducers/marketview'
-
 import style from './style.scss'
 import classnames from 'classnames'
 
@@ -13,7 +8,11 @@ import RouterLoading from 'Components/RouterLoading'
 import DynamicImport from 'Containers/DynamicImport'
 
 const subPage = (page) => (props) => (
-  <DynamicImport match={props.match} removeNavbar load={() => import('./views/' + page)}>
+  <DynamicImport
+    match={props.match}
+    removeNavbar
+    load={() => import('./views/' + page)}
+  >
     {(Component) =>
       Component === null ? <RouterLoading /> : <Component {...props} />
     }
@@ -60,23 +59,9 @@ export class Marketview extends React.Component {
           <Route path="/marketview/competitor" exact component={Competitor} />
           <Route path="/marketview/time" exact component={Time} />
         </Switch>
-
       </div>
     )
   }
 }
 
-Marketview.propTypes = {}
-
-const mapStateToProps = createStructuredSelector({
-  marketview: makeSelectMarketview(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(Marketview)
+export default Marketview

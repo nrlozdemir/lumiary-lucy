@@ -1,11 +1,12 @@
 import { takeLatest, call, put } from 'redux-saga/effects'
 import axios from 'axios'
+import _ from 'lodash'
 
 import { types, actions } from 'Reducers/marketview'
 import marketviewCompetitorVideosData from 'Api/mocks/marketviewCompetitorVideos.json'
 import marketviewCompetitorTopVideosData from 'Api/mocks/marketviewCompetitorTopVideosMock.json'
 import marketviewSimilarPropertiesData from 'Api/mocks/marketviewSimilarProperties.json'
-import marketviewBubleChartData from 'Api/mocks/marketviewBubleChartMock.json'
+import marketviewBubbleChartData from 'Api/mocks/marketviewBubbleChartMock.json'
 import marketviewPacingChartData from 'Api/mocks/marketviewPacingChartMock.json'
 import marketviewFormatChartData from 'Api/mocks/marketviewFormatChartMock.json'
 import marketviewTotalViewsData from 'Api/mocks/marketviewTotalViewsMock.json'
@@ -28,9 +29,9 @@ function getSimilarPropertiesApi() {
   return axios.get('/').then((res) => marketviewSimilarPropertiesData)
 }
 
-function getBubleChartApi() {
+function getBubbleChartApi() {
   //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewBubleChartData)
+  return axios.get('/').then((res) => marketviewBubbleChartData)
 }
 
 function getPacingChartApi() {
@@ -97,9 +98,10 @@ function* getSimilarProperties() {
   }
 }
 
-function* getBubleChartData() {
+function* getBubbleChartData() {
   try {
-    const payload = yield call(getBubleChartApi)
+    const payload = yield call(getBubbleChartApi)
+    console.log('payload', payload)
     yield put(actions.getBubleChartSuccess(payload))
   } catch (error) {
     yield put(actions.getBubleChartFailure(error))
@@ -124,11 +126,17 @@ function* getFormatChartData() {
   }
 }
 
-function* getTotalViewsData() {
+function* getTotalViewsData(data) {
   try {
     const payload = yield call(getTotalViewsApi)
+    const shuffleBarData = _.shuffle(payload.barData.datasets)
+    const shuffleDoughnutData = _.shuffle(payload.doughnutData.datasets[0].data)
+    payload.barData.datasets = shuffleBarData
+    payload.doughnutData.datasets[0].data = shuffleDoughnutData
+
     yield put(actions.getTotalViewsSuccess(payload))
   } catch (error) {
+    console.log('error', error)
     yield put(actions.getTotalViewsFailure(error))
   }
 }
@@ -182,7 +190,7 @@ export default [
     types.GET_MARKETVIEW_SIMILAR_PROPERTIES_REQUEST,
     getSimilarProperties
   ),
-  takeLatest(types.GET_MARKETVIEW_BUBLECHART_REQUEST, getBubleChartData),
+  takeLatest(types.GET_MARKETVIEW_BUBBLECHART_REQUEST, getBubbleChartData),
   takeLatest(types.GET_MARKETVIEW_PACINGCHART_REQUEST, getPacingChartData),
   takeLatest(types.GET_MARKETVIEW_FORMATCHART_REQUEST, getFormatChartData),
   takeLatest(types.GET_MARKETVIEW_TOTALVIEWS_REQUEST, getTotalViewsData),

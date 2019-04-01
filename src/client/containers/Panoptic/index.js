@@ -7,13 +7,13 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { NavLink } from "react-router-dom"
+import { NavLink } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { reduxForm } from 'redux-form'
 
 import { actions, makeSelectPanoptic } from 'Reducers/panoptic'
-import style from './style.scss';
+import style from './style.scss'
 
 import VideoReleasesBarChart from './sections/VideoReleasesBarChart'
 import ColorTemperature from './sections/ColorTemperature'
@@ -61,7 +61,11 @@ export class Panoptic extends React.Component {
       <React.Fragment>
         <div className="grid-container col-12">
           <div className={style.alignTabs}>
-            <NavLink to="/panoptic/audience" className={style.tab} activeClassName={style.activeLink}>
+            <NavLink
+              to="/panoptic/audience"
+              className={style.tab}
+              activeClassName={style.activeLink}
+            >
               Audience
             </NavLink>
           </div>
