@@ -28,12 +28,12 @@ export const types = {
     'Marketview/GET_MARKETVIEW_SIMILAR_PROPERTIES_SUCCESS',
   GET_MARKETVIEW_SIMILAR_PROPERTIES_FAILURE:
     'Marketview/GET_MARKETVIEW_SIMILAR_PROPERTIES_FAILURE',
-  GET_MARKETVIEW_BUBLECHART_REQUEST:
-    'Marketview/GET_MARKETVIEW_BUBLECHART_REQUEST',
-  GET_MARKETVIEW_BUBLECHART_SUCCESS:
-    'Marketview/GET_MARKETVIEW_BUBLECHART_SUCCESS',
-  GET_MARKETVIEW_BUBLECHART_FAILURE:
-    'Marketview/GET_MARKETVIEW_BUBLECHART_FAILURE',
+  GET_MARKETVIEW_BUBBLECHART_REQUEST:
+    'Marketview/GET_MARKETVIEW_BUBBLECHART_REQUEST',
+  GET_MARKETVIEW_BUBBLECHART_SUCCESS:
+    'Marketview/GET_MARKETVIEW_BUBBLECHART_SUCCESS',
+  GET_MARKETVIEW_BUBBLECHART_FAILURE:
+    'Marketview/GET_MARKETVIEW_BUBBLECHART_FAILURE',
   GET_MARKETVIEW_PACINGCHART_REQUEST:
     'Marketview/GET_MARKETVIEW_PACINGCHART_REQUEST',
   GET_MARKETVIEW_PACINGCHART_SUCCESS:
@@ -117,15 +117,15 @@ export const actions = {
     type: types.GET_MARKETVIEW_SIMILAR_PROPERTIES_FAILURE,
     error,
   }),
-  getBubleChartRequest: () => ({
-    type: types.GET_MARKETVIEW_BUBLECHART_REQUEST,
+  getBubbleChartRequest: () => ({
+    type: types.GET_MARKETVIEW_BUBBLECHART_REQUEST,
   }),
   getBubleChartSuccess: (payload) => ({
-    type: types.GET_MARKETVIEW_BUBLECHART_SUCCESS,
+    type: types.GET_MARKETVIEW_BUBBLECHART_SUCCESS,
     payload,
   }),
   getBubleChartFailure: (error) => ({
-    type: types.GET_MARKETVIEW_BUBLECHART_FAILURE,
+    type: types.GET_MARKETVIEW_BUBBLECHART_FAILURE,
     error,
   }),
   getPacingChartRequest: () => ({
@@ -150,8 +150,10 @@ export const actions = {
     type: types.GET_MARKETVIEW_FORMATCHART_FAILURE,
     error,
   }),
-  getTotalViewsRequest: () => ({
+  getTotalViewsRequest: (payload, moduleKey) => ({
     type: types.GET_MARKETVIEW_TOTALVIEWS_REQUEST,
+    payload,
+    moduleKey,
   }),
   getTotalViewsSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_TOTALVIEWS_SUCCESS,
@@ -211,11 +213,11 @@ export const initialState = fromJS({
   videos: null,
   selectedVideo: null,
   similarProperties: null,
-  bubleChartData: null,
-  pacingChartData: null,
-  formatChartData: null,
-  totalViewsData: null,
-  totalCompetitorViewsData: null,
+  bubbleChartData: [],
+  pacingChartData: {},
+  formatChartData: [],
+  totalViewsData: {},
+  totalCompetitorViewsData: {},
   marketviewDetailTime: null,
   error: false,
   loading: false,
@@ -252,13 +254,13 @@ const marketviewReducer = (state = initialState, action) => {
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))
 
-    case types.GET_MARKETVIEW_BUBLECHART_REQUEST:
+    case types.GET_MARKETVIEW_BUBBLECHART_REQUEST:
       return state.set('loading', fromJS(true))
-    case types.GET_MARKETVIEW_BUBLECHART_SUCCESS:
+    case types.GET_MARKETVIEW_BUBBLECHART_SUCCESS:
       return state
-        .set('bubleChartData', fromJS(action.payload))
+        .set('bubbleChartData', fromJS(action.payload))
         .set('loading', fromJS(false))
-    case types.GET_MARKETVIEW_BUBLECHART_FAILURE:
+    case types.GET_MARKETVIEW_BUBBLECHART_FAILURE:
       return state
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))
@@ -345,11 +347,50 @@ const marketviewReducer = (state = initialState, action) => {
   }
 }
 
+const selectMarketviewBubbleChartDomain = (state) =>
+  state.Marketview.get('bubbleChartData')
+
+const selectMarketviewFormatCardDomain = (state) =>
+  state.Marketview.get('formatChartData')
+
+const selectMarketviewPacingChartDomain = (state) =>
+  state.Marketview.get('pacingChartData')
+
+const selectMarketviewTotalViewDomain = (state) =>
+  state.Marketview.get('totalViewsData')
+
+const selectMarketviewtotalCompetitorViewDomain = (state) =>
+  state.Marketview.get('totalCompetitorViewsData')
+
 export const selectMarketviewDomain = (state) => state.Marketview
 
-export const makeSelectMarketview = () =>
+export const makeSelectMarketviewBubbleChart = () =>
   createSelector(
-    selectMarketviewDomain,
+    selectMarketviewBubbleChartDomain,
+    (substate) => substate.toJS()
+  )
+
+export const makeSelectMarketviewFormatCard = () =>
+  createSelector(
+    selectMarketviewFormatCardDomain,
+    (substate) => substate.toJS()
+  )
+
+export const makeSelectMarketviewPacingChart = () =>
+  createSelector(
+    selectMarketviewPacingChartDomain,
+    (substate) => substate.toJS()
+  )
+
+export const makeSelectMarketviewTotalView = () =>
+  createSelector(
+    selectMarketviewTotalViewDomain,
+    (substate) => substate.toJS()
+  )
+
+export const makeSelectMarketviewCompetitorView = () =>
+  createSelector(
+    selectMarketviewtotalCompetitorViewDomain,
     (substate) => substate.toJS()
   )
 

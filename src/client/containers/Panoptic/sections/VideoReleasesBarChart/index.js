@@ -13,12 +13,34 @@ const barContainerClass = cx('col-12', style.barChartContainer)
 const headerTitleClass = cx('font-secondary-second', style.title)
 const referencesClass = cx('font-secondary-second', style.references)
 
-import Module from 'Components/Module'
-
-const PanopticBarChart = ({ data, callBack }) => {
-  // console.log('callBack', callBack)
-  const Chart = () => {
-    return (
+const PanopticBarChart = ({
+  data,
+  selectLikes,
+  selectPlatforms,
+  selectDate,
+  handleSelectFilters,
+}) => {
+  return (
+    <div className={barChartContainer}>
+      <div className={barChartHeaderClass}>
+        <div className="col-6 text-bold">
+          <p className={headerTitleClass}>Video Releases vs Engagement</p>
+        </div>
+        <div className="col-6">
+          <div className={style.selects}>
+            <SelectFilters
+              handleSelectFilters={handleSelectFilters}
+              selectDate={selectDate}
+              selectDateShow={true}
+              selectLikes={selectLikes}
+              selectLikesShow={true}
+              selectPlatforms={selectPlatforms}
+              selectPlatformsShow={true}
+            />
+          </div>
+        </div>
+      </div>
+      {/* bar charts */}
       <div className={barContainerClass}>
         <div className={style.wrapperBarChart}>
           <Bar data={data} options={wrapperBarOptions} />
@@ -59,25 +81,20 @@ const PanopticBarChart = ({ data, callBack }) => {
           </div>
         </div>
       </div>
-    )
-  }
-
-  return (
-    <Module
-      moduleKey="veli"
-      title="Video Releases vs Engagement"
-      action={callBack}
-      filters={[
-        { type: 'timeRange', selectKey: 'sda', placeHolder: 'place holder' },
-        {
-          type: 'aspectRatio',
-          selectKey: 'dsadw',
-          placeHolder: 'place holder',
-        },
-      ]}
-    >
-      VIDEO
-    </Module>
+      {/* bar charts */}
+      <div className={barChartFooterClass}>
+        <div className={referencesClass}>
+          <div className={style.referenceItem}>
+            <span className="bg-cool-blue" />
+            Likes
+          </div>
+          <div className={style.referenceItem}>
+            <span className="bg-coral-pink" />
+            Videos Released
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
 

@@ -22,10 +22,9 @@ import { actions, makeSelectSelectFilters } from 'Reducers/selectFilters'
  * )
  */
 class RealSelectFilters extends React.Component {
-
-	componentDidMount(){
-		this.onChange(undefined)
-	}
+  componentDidMount() {
+    this.onChange(undefined)
+  }
 
   onChange = (val) => {
     const { selectKey, type, moduleKey } = this.props
@@ -46,7 +45,7 @@ class RealSelectFilters extends React.Component {
   }
 
   componentWillUnmount() {
-    // this.props.removeAllFilters()
+    this.props.removeAllFilters()
   }
 
   render() {
@@ -55,11 +54,11 @@ class RealSelectFilters extends React.Component {
       selectFilters: { options, values },
       selectClasses,
       selectKey,
-			placeHolder,
-			moduleKey
-		} = this.props
-		console.log(values)
-    const selectedOption = values && values[moduleKey] && values[moduleKey][selectKey]
+      placeHolder,
+      moduleKey,
+    } = this.props
+    const selectedOption =
+      values && values[moduleKey] && values[moduleKey][selectKey]
     return (
       <React.Fragment>
         <Select
@@ -71,7 +70,8 @@ class RealSelectFilters extends React.Component {
           options={options[type]}
         />
         {type === 'timeRange' &&
-          selectedOption && selectedOption.value &&
+          selectedOption &&
+          selectedOption.value &&
           selectedOption.value.value === 'custom' && (
             <Datepicker
               type={'range'}

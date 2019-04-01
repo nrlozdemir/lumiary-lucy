@@ -6,24 +6,78 @@ import { platforms, selectOneOptions, selectTwoOptions } from './options'
 import ColorTemperatureChart from 'Components/ColorTemperatureChart'
 import SelectFilters from 'Components/SelectFilters'
 
-import Module from 'Components/Module'
-
-const PanopticColorTemperature = ({ colorTempData, callBack }) => (
-  <Module
-    moduleKey="ali"
-    title="Video Releases vs Engagement"
-    action={callBack}
-    filters={[
-      { type: 'timeRange', selectKey: 'color1', placeHolder: 'place holder' },
-      {
-        type: 'aspectRatio',
-        selectKey: 'color2',
-        placeHolder: 'place holder',
-      },
-    ]}
-  >
-    COLOR
-  </Module>
+const PanopticColorTemperature = ({
+  colorTempData,
+  handleSelectFilters,
+  selectWarmColor,
+  selectDate,
+}) => (
+  <div className="col-12 shadow-1 mt-72 bg-dark-grey-blue">
+    <div className={style.radialChartsContainer}>
+      <div className={style.temperatureHeader}>
+        <div>
+          <h2 className="font-secondary-first">
+            Color Temperature / Sentiment Comparison
+          </h2>
+        </div>
+        <div className={style.inputWrapper}>
+          <form className={style.form}>
+            <SelectFilters
+              handleSelectFilters={handleSelectFilters}
+              selectClasses="custom-select"
+              selectDate={selectDate}
+              selectWarmColor={selectWarmColor}
+              selectWarmColorShow={true}
+              selectDateShow={true}
+            />
+          </form>
+        </div>
+      </div>
+      <div className={style.temperatureContentContainer}>
+        {colorTempData && (
+          <ColorTemperatureChart
+            borderLess
+            verticalText
+            colorTempData={colorTempData}
+          />
+        )}
+      </div>
+      <div className={style.infoWrapperContainer}>
+        <div className={style.infoWrapper}>
+          <div className={style.infoHandle}>
+            <span className={style.infoText}>Views</span>
+          </div>
+        </div>
+        <div className={style.infoWrapper}>
+          <div className={style.infoHandle}>
+            <span className={style.infoText}>Likes</span>
+          </div>
+        </div>
+        <div className={style.infoWrapper}>
+          <div className={style.infoHandle}>
+            <span className={style.infoText}>Comment</span>
+          </div>
+        </div>
+        <div className={style.infoWrapper}>
+          <div className={style.infoHandle}>
+            <span className={style.infoText}>Shares</span>
+          </div>
+        </div>
+      </div>
+      <div className="d-flex align-items-center justify-content-center ph-48 mv-48">
+        {platforms &&
+          platforms.map((platform, index) => (
+            <div key={index} className="d-flex align-items-center mr-32">
+              <span
+                className={style.round}
+                style={{ backgroundColor: `${platform.color}` }}
+              />
+              <p className={style.platformName}>{platform.name}</p>
+            </div>
+          ))}
+      </div>
+    </div>
+  </div>
 )
 
 export default PanopticColorTemperature

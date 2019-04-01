@@ -10,73 +10,36 @@ import FormatCard from 'Containers/Marketview/sections/main/FormatCard'
 import TotalViewsCard from 'Containers/Marketview/sections/main/TotalViewsCard'
 import TotalCompetitorViewsCard from 'Containers/Marketview/sections/main/TotalCompetitorViewsCard'
 
-class Main extends Component {
-  componentDidMount() {
-    this.props.getBubleChartRequest()
-    this.props.getPacingChartRequest()
-    this.props.getFormatChartRequest()
-    this.props.getTotalViewsRequest()
-    this.props.getTotalCompetitorViewsRequest()
-  }
-  render() {
-    const {
-      marketview: {
-        bubleChartData,
-        pacingChartData,
-        formatChartData,
-        totalViewsData,
-        totalCompetitorViewsData,
-      },
-    } = this.props
-    return (
-      <React.Fragment>
-        <div className="grid-collapse">
-          <div className="col-4 mb-48">
-            {bubleChartData && <ColorCard bubleChartData={bubleChartData} />}
-          </div>
-
-          <div className="col-4 mb-48">
-            {pacingChartData && (
-              <PacingCard pacingChartData={pacingChartData} />
-            )}
-          </div>
-
-          <div className="col-4 mb-48">
-            {formatChartData && (
-              <FormatCard formatChartData={formatChartData} />
-            )}
-          </div>
+const Main = () => {
+  return (
+    <React.Fragment>
+      <div className="grid-collapse">
+        <div className="col-4 mb-48">
+          <ColorCard />
         </div>
-
-        <div className="grid-collapse">
-          {totalViewsData && <TotalViewsCard totalViewsData={totalViewsData} />}
-          {totalCompetitorViewsData && (
-            <TotalCompetitorViewsCard
-              totalCompetitorViewsData={totalCompetitorViewsData}
-              titleLabels={[
-                'Barstool Sports',
-                'SB Nation',
-                'ESPN',
-                'Scout Media',
-                'Fansided',
-              ]}
-            />
-          )}
+        <div className="col-4 mb-48">
+          <PacingCard />
         </div>
-      </React.Fragment>
-    )
-  }
+        <div className="col-4 mb-48">
+          <FormatCard />
+        </div>
+      </div>
+
+      <div className="grid-collapse">
+        <TotalViewsCard />
+
+        <TotalCompetitorViewsCard
+          titleLabels={[
+            'Barstool Sports',
+            'SB Nation',
+            'ESPN',
+            'Scout Media',
+            'Fansided',
+          ]}
+        />
+      </div>
+    </React.Fragment>
+  )
 }
 
-const mapStateToProps = createStructuredSelector({
-  marketview: makeSelectMarketview(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(Main)
+export default Main

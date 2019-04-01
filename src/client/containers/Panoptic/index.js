@@ -38,10 +38,6 @@ export class Panoptic extends React.Component {
     })
   }
 
-  callBack = (data) => {
-    console.log('DATA ###: ', data)
-  }
-
   render() {
     const {
       selectWarmColor,
@@ -77,13 +73,18 @@ export class Panoptic extends React.Component {
         {videoReleasesData && (
           <VideoReleasesBarChart
             data={videoReleasesData}
-            callBack={this.callBack}
+            handleSelectFilters={this.handleSelectFilters}
+            selectLikes={selectLikes}
+            selectPlatforms={selectPlatforms}
+            selectDate={selectDate}
           />
         )}
         {colorTempData && (
           <ColorTemperature
             colorTempData={colorTempData}
-            callBack={this.callBack}
+            handleSelectFilters={this.handleSelectFilters}
+            selectWarmColor={selectWarmColor}
+            selectDate={selectDate}
           />
         )}
         {verticalStackedChartData && (

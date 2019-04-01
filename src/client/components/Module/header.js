@@ -10,7 +10,7 @@ const HeaderModule = ({ key, title, subTitle, legend, filters, moduleKey }) => {
         <h1>{title}</h1>
         {/* <h2>{subTitle}</h2> */}
       </div>
-      <div className={style.headerLegend}>{legend}</div>
+      {legend && <div className={style.headerLegend}>{legend}</div>}
       <div className={style.headerFilters}>
         {filters.map((filter, index) => {
           return (

@@ -33,7 +33,7 @@
     }
     .headerFilters {
       display: flex;
-      float: right;
+      justify-content: flex-end;
       position: relative;
       z-index: 12;
       > div {
@@ -44,6 +44,7 @@
   }
 
   .moduleContainerBody {
+    display: flex;
     padding: 40px;
   }
 }

@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
+
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose, bindActionCreators } from 'redux'
+import { actions, makeSelectMarketviewBubbleChart } from 'Reducers/marketview'
 import { Link } from 'react-router-dom'
+
 import style from 'Containers/Marketview/style.scss'
 class ColorCard extends Component {
   constructor(props) {
@@ -19,42 +25,17 @@ class ColorCard extends Component {
         '#923683',
         '#b83057',
       ],
-      bubbleChartData: [
-        {
-          name: 'Facebook',
-          value: 124034,
-          icon: <span className="icon-Facebook-Bubble" />,
-          color: '#fff20d',
-        },
-        {
-          name: 'Instagram',
-          value: 75424,
-          icon: <span className="icon-Instagram-Bubble" />,
-          color: '#cc2226',
-        },
-        {
-          name: 'Twitter',
-          value: 63424,
-          icon: <span className="icon-Twitter-Bubble" />,
-          color: '#13862b',
-        },
-        {
-          name: 'Pinterest',
-          value: 34543,
-          icon: <span className="icon-YouTube-Bubble" />,
-          color: '#923683',
-        },
-        {
-          name: 'Youtube',
-          value: 65463,
-          icon: <span className="icon-Pinterest-Bubble" />,
-          color: '#3178b0',
-        },
-      ],
     }
   }
+
+  componentDidMount() {
+    this.props.getBubbleChartRequest()
+  }
+
   render() {
-    const { bubbleChartOptions, bubbleChartData } = this.state
+    const { bubbleChartOptions } = this.state
+    const { bubbleChartData } = this.props
+    console.log('bubbleChartData', bubbleChartData)
     return (
       <div className={style.marketViewCard}>
         <div className={style.marketViewCardTitle}>Color</div>
@@ -65,24 +46,29 @@ class ColorCard extends Component {
           <span>Past 3 Months</span>
         </div>
         <div className={style.bubbleChart}>
-          {bubbleChartData.map((item, i) => (
-            <div key={i} className={style.bubbleChartItem}>
-              <style>
-                {`.${style.bubbleChartItem}:nth-child(${i + 1}){
+          {bubbleChartData.length > 0 &&
+            bubbleChartData.map((item, i) => (
+              <div key={i} className={style.bubbleChartItem}>
+                <style>
+                  {`.${style.bubbleChartItem}:nth-child(${i + 1}){
                                                 border-color: ${item.color};
                                             }.${
                                               style.bubbleChartItem
                                             }:nth-child(${i + 1}):hover{
                                                 background-color: ${item.color};
                                             }`}
-              </style>
-              <div className={style.bubbleChartIcon}>{item.icon}</div>
-              <div className={style.bubbleChartTooltip}>
-                <span>{item.name}</span>
-                <span>{item.value} Shares</span>
+                </style>
+                <div
+                  className={`${style.bubbleChartIcon} icon-${
+                    item.icon
+                  }-Bubble`}
+                />
+                <div className={style.bubbleChartTooltip}>
+                  <span>{item.name}</span>
+                  <span>{item.value} Likes</span>
+                </div>
               </div>
-            </div>
-          ))}
+            ))}
         </div>
         <div className={style.colors}>
           {bubbleChartOptions.map((color, i) => {
@@ -115,4 +101,16 @@ class ColorCard extends Component {
     )
   }
 }
-export default ColorCard
+
+const mapStateToProps = createStructuredSelector({
+  bubbleChartData: makeSelectMarketviewBubbleChart(),
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(ColorCard)
