@@ -1,73 +1,133 @@
 [
-  {
-    "id": 3,
-    "defaultSection": "all-platforms",
-    "cardName": "All Platforms",
-    "difference": 65,
-    "differenceType": "Audio",
-    "videos": [
-      {
-        "title": "5-30s",
-        "socialIcon": "instagram",
-        "barColor": "cool-blue",
-        "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/12-years-ago-today-Kobe-dropped-81.mp4",
-        "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/12-years-ago-today-Kobe-dropped-81.jpg"
-      },
-      {
-        "title": "Fast",
-        "socialIcon": "facebook",
-        "barColor": "coral-pink",
-        "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/13-Year-Old-Jaden-Newman.mp4",
-        "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/13-Year-Old-Jaden-Newman.jpg"
-      }
-    ]
-  },
-  {
-    "id": 1,
-    "defaultSection": "Instagram",
-    "cardName": "Instagram",
-    "social": "instagram",
-    "difference": 33,
-    "differenceType": "SFX",
-    "videos": [
-      {
-        "title": "Hard",
-        "socialIcon": "instagram",
-        "barColor": "cool-blue",
-        "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/21-years-later-the-Pats-and-Jaguars-meet-again.mp4",
-        "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/21-years-later-the-Pats-and-Jaguars-meet-again.jpg"
-      },
-      {
-        "title": "Soft",
-        "socialIcon": "facebook",
-        "barColor": "coral-pink",
-        "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Andre-Drummond-All-Star.mp4",
-        "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Andre-Drummond-All-Star.jpg"
-      }
-    ]
-  },
-  {
-    "id": 4,
-    "defaultSection": "Facebook",
-    "cardName": "Facebook",
-    "social": "facebook",
-    "difference": 25,
-    "differenceType": "Timelapse",
-    "videos": [
-      {
-        "title": "Good",
-        "socialIcon": "twitter",
-        "barColor": "cool-blue",
-        "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anthony-Davis-Finishes-with-43-Points.mp4",
-        "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anthony-Davis-Finishes-with-43-Points.jpg"
-      },
-      {
-        "title": "Bad",
-        "socialIcon": "pinterest",
-        "barColor": "coral-pink",
-        "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anything-can-happen.mp4",
-        "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anything-can-happen.jpg"
-      }
-    ]
-  }
+	{
+		"id": 3,
+		"defaultSection": "all-platforms",
+		"cardName": "All Platforms",
+		"difference": 65,
+		"differenceType": "Audio",
+		"videos": [
+			{
+				"title": "5-30s",
+				"socialIcon": "instagram",
+				"barColor": "cool-blue",
+				"videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/12-years-ago-today-Kobe-dropped-81.mp4"
+			},
+			{
+				"title": "Fast",
+				"socialIcon": "facebook",
+				"barColor": "coral-pink",
+				"videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/13-Year-Old-Jaden-Newman.mp4"
+			}
+		]
+	},
+	{
+		"id": 1,
+		"defaultSection": "Instagram",
+		"cardName": "Instagram",
+		"social": "instagram",
+		"difference": 33,
+		"differenceType": "SFX",
+		"videos": [
+			{
+				"title": "Hard",
+				"socialIcon": "instagram",
+				"barColor": "cool-blue",
+				"videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/21-years-later-the-Pats-and-Jaguars-meet-again.mp4"
+			},
+			{
+				"title": "Soft",
+				"socialIcon": "facebook",
+				"barColor": "coral-pink",
+				"videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Andre-Drummond-All-Star.mp4"
+			}
+		]
+	},
+	{
+		"id": 4,
+		"defaultSection": "Facebook",
+		"cardName": "Facebook",
+		"social": "facebook",
+		"difference": 25,
+		"differenceType": "Timelapse",
+		"videos": [
+			{
+				"title": "Good",
+				"socialIcon": "twitter",
+				"barColor": "cool-blue",
+				"videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anthony-Davis-Finishes-with-43-Points.mp4"
+			},
+			{
+				"title": "Bad",
+				"socialIcon": "pinterest",
+				"barColor": "coral-pink",
+				"videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anything-can-happen.mp4"
+			}
+		]
+	},
+	{
+		"id": 5,
+		"defaultSection": "Twitter",
+		"cardName": "Twitter",
+		"social": "twitter",
+		"difference": 68,
+		"differenceType": "Color",
+		"videos": [
+			{
+				"title": "Color",
+				"socialIcon": "pinterest",
+				"barColor": "cool-blue",
+				"videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Draymond-not-holding-back-on-the-ref.mp4"
+			},
+			{
+				"title": "Bad",
+				"socialIcon": "instagram",
+				"barColor": "coral-pink",
+				"videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Georgetown-Commit-Mac-McClung.mp4"
+			}
+		]
+	},
+	{
+		"id": 2,
+		"defaultSection": "Youtube",
+		"cardName": "Youtube",
+		"social": "youtube",
+		"difference": 88,
+		"differenceType": "Duration",
+		"videos": [
+			{
+				"title": "Fast",
+				"socialIcon": "instagram",
+				"barColor": "cool-blue",
+				"videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/21-years-later-the-Pats-and-Jaguars-meet-again.mp4"
+			},
+			{
+				"title": "Slow",
+				"socialIcon": "pinterest",
+				"barColor": "coral-pink",
+				"videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Appreciate-the-greatness-of-the-Pats.mp4"
+			}
+		]
+	},
+	{
+		"id": 6,
+		"defaultSection": "Pinterest",
+		"cardName": "Pinterest",
+		"social": "pinterest",
+		"difference": 62,
+		"differenceType": "Pace",
+		"videos": [
+			{
+				"title": "Slowest",
+				"socialIcon": "twitter",
+				"barColor": "cool-blue",
+				"videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Down-goes-Brown.mp4"
+			},
+			{
+				"title": "Medium",
+				"socialIcon": "youtube",
+				"barColor": "coral-pink",
+				"videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Handles-and-triple-threat-moves.mp4"
+			}
+		]
+	}
 ]
