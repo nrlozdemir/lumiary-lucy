@@ -1,17 +1,9 @@
 import React, { Component } from 'react'
-import { DateRange } from 'react-date-range'
 import classnames from 'classnames'
-import moment from 'moment'
-import { Field } from 'redux-form'
 import 'chartjs-plugin-datalabels'
 import SelectFilters from 'Components/SelectFilters'
-
 import style from './style.scss'
-import { dateSelectOptions, dropdownLists, selectOptions } from './options'
 
-import Dropdown from 'Components/Dropdown'
-import Select from 'Components/Form/Select'
-import Button from 'Components/Form/Button'
 import DoughnutChart from 'Components/Charts/Panoptic/DoughnutChart'
 import VerticalStackedBarChart from 'Components/Charts/Panoptic/VerticalStackedBarChart'
 

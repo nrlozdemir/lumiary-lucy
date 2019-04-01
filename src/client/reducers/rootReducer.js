@@ -9,6 +9,8 @@ import LibraryDetail from './libraryDetail'
 import Reports from './reports'
 import GeneratedReport from './generatedReport'
 import app from './app'
+import SelectFilters from './selectFilters'
+
 
 const rootReducer = (history) =>
   combineReducers({
@@ -20,7 +22,8 @@ const rootReducer = (history) =>
     LibraryDetail,
     Reports,
     GeneratedReport,
-    form: formReducer,
+		form: formReducer,
+		SelectFilters
   })
 
 export default rootReducer

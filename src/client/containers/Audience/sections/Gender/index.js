@@ -1,30 +1,16 @@
 import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { makeSelectPanoptic } from 'Reducers/panoptic'
 import { HorizontalBar } from 'react-chartjs-2'
 
 import style from '../../style.scss'
 import SelectFilters from 'Components/SelectFilters'
 
-const data = {
-  labels: ['Slowest', 'Slow', 'Medium', 'Fast'],
-  datasets: [
-    {
-      label: 'Dataset 1',
-      backgroundColor: '#d0506c',
-      borderColor: '#d0506c',
-      borderWidth: 1,
-      data: [-20, -30, -25, -13],
-    },
-    {
-      label: 'Dataset 2',
-      backgroundColor: '#51adc0',
-      borderColor: '#51adc0',
-      data: [50, 80, 60, 50],
-    },
-  ],
-}
 const plugins = [
   {
-    beforeDraw: function(chart, easing) {
+    beforeDraw: function (chart, easing) {
       if (
         chart.config.options.chartArea &&
         chart.config.options.chartArea.backgroundColor
@@ -46,7 +32,7 @@ const plugins = [
   },
 ]
 
-export default class GenderSection extends React.Component {
+class GenderSection extends React.Component {
   constructor(props) {
     super(props)
 
@@ -65,6 +51,7 @@ export default class GenderSection extends React.Component {
 
   render() {
     const { selectResolution, selectLikes, selectDate } = this.state
+    const { panoptic: { audienceData: { genderData } } } = this.props;
 
     return (
       <div className="grid-container mr-20 ml-20 mt-72 bg-dark-grey-blue shadow-1">
@@ -98,13 +85,13 @@ export default class GenderSection extends React.Component {
           <HorizontalBar
             width={4}
             height={1}
-            data={data}
+            data={genderData}
             plugins={plugins}
             options={{
-							plugins: {
-								datalabels: false
-							},
-							legend: {
+              plugins: {
+                datalabels: false
+              },
+              legend: {
                 display: false,
               },
               chartArea: {
@@ -145,7 +132,7 @@ export default class GenderSection extends React.Component {
                       stepSize: 50,
                       min: -100,
                       max: 100,
-                      callback: function(value) {
+                      callback: function (value) {
                         return Math.abs(value) + '%'
                       },
                     },
@@ -160,3 +147,14 @@ export default class GenderSection extends React.Component {
     )
   }
 }
+
+const mapStateToProps = createStructuredSelector({
+  panoptic: makeSelectPanoptic(),
+})
+
+const withConnect = connect(
+  mapStateToProps,
+  null
+)
+
+export default compose(withConnect)(GenderSection)

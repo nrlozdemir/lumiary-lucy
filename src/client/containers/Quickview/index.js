@@ -14,15 +14,18 @@ import { Route, Switch } from 'react-router-dom'
 
 import { actions, makeSelectQuickview } from 'Reducers/quickview'
 
-import SelectFilters from 'Components/SelectFilters'
-
 import style from './style.scss'
 
 import RouterLoading from 'Components/RouterLoading'
 import DynamicImport from 'Containers/DynamicImport'
+import RealSelectFilters from 'Components/RealSelectFilters'
 
 const Detail = (props) => (
-  <DynamicImport match={props.match} removeNavbar load={() => import('./views/detail')}>
+  <DynamicImport
+    match={props.match}
+    removeNavbar
+    load={() => import('./views/detail')}
+  >
     {(Component) =>
       Component === null ? <RouterLoading /> : <Component {...props} />
     }
@@ -54,13 +57,21 @@ export class Quickview extends React.Component {
     } = this.props
 
     const Main = (props) => (
-      <DynamicImport match={props.match} removeNavbar load={() => import('./views/main')}>
+      <DynamicImport
+        match={props.match}
+        removeNavbar
+        load={() => import('./views/main')}
+      >
         {(Component) =>
           Component === null ? (
             <RouterLoading />
           ) : (
-              <Component match={props.match} {...props} quickviewItems={quickviewItems} />
-            )
+            <Component
+              match={props.match}
+              {...props}
+              quickviewItems={quickviewItems}
+            />
+          )
         }
       </DynamicImport>
     )
@@ -85,14 +96,7 @@ export class Quickview extends React.Component {
               </h1>
             </div>
             <div className="headerRight">
-              <SelectFilters
-                handleSelectFilters={this.handleSelectFilters}
-                selectClasses="custom-select"
-                selectDate={selectDate}
-                selectDateShow={true}
-                selectLikes={selectLikes}
-                selectLikesShow={true}
-              />
+
             </div>
           </div>
           <Switch>

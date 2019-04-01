@@ -1,11 +1,20 @@
 import React, { Component } from 'react'
-
 import { Link } from 'react-router-dom'
+
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose, bindActionCreators } from 'redux'
+import { actions, makeSelectMarketviewPacingChart } from 'Reducers/marketview'
+
 import style from 'Containers/Marketview/style.scss'
 import PacingPieChart from 'Components/Charts/MarketView/PacingPieChart'
 import classnames from 'classnames'
 
-class ColorCard extends Component {
+class PacingCard extends Component {
+  componentDidMount() {
+    this.props.getPacingChartRequest()
+  }
+
   render() {
     const { pacingChartData } = this.props
     return (
@@ -52,4 +61,15 @@ class ColorCard extends Component {
   }
 }
 
-export default ColorCard
+const mapStateToProps = createStructuredSelector({
+  pacingChartData: makeSelectMarketviewPacingChart(),
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(PacingCard)

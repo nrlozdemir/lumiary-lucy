@@ -2,31 +2,31 @@
   {
     "name": "Facebook",
     "value": 124034,
-    "iconClass": "icon-Facebook-Bubble",
+    "icon": "Facebook",
     "color": "#fff20d"
   },
   {
     "name": "Instagram",
     "value": 75424,
-    "iconClass": "icon-Instagram-Bubble",
+    "icon": "Instagram",
     "color": "#cc2226"
   },
   {
     "name": "Twitter",
     "value": 63424,
-    "iconClass": "icon-Twitter-Bubble",
+    "icon": "Twitter",
     "color": "#13862b"
   },
   {
     "name": "Pinterest",
     "value": 34543,
-    "iconClass": "icon-YouTube-Bubble",
+    "icon": "YouTube",
     "color": "#923683"
   },
   {
     "name": "Youtube",
     "value": 65463,
-    "iconClass": "icon-Pinterest-Bubble",
+    "icon": "Pinterest",
     "color": "#3178b0"
   }
 ]

@@ -13,7 +13,6 @@ import Range from 'Components/Form/Range'
 
 const Sidebar = (props) => {
 	const { reset, handleSubmit } = props
-	console.log(props);
   const sidebarClass = classnames(style.sidebar, {
 		[style.sidebarVisible]: props.sidebarVisible,
 		[style.fixed] : props.fixedHeader
@@ -118,7 +117,7 @@ const Sidebar = (props) => {
 									name="AgeRange"
 									placeholder="Select One"
 									options={selectOptions.audienceAge}
-									label="Age Range"
+									label="Audience Age"
 								/>
 							</div>
 							<div className="w-50 ml-0 pl-8">
@@ -127,7 +126,7 @@ const Sidebar = (props) => {
 									name="Gender"
 									placeholder="Select One"
 									options={selectOptions.audienceGender}
-									label="Gender"
+									label="Audience Gender"
 								/>
 							</div>
 						</div>
@@ -167,7 +166,7 @@ const Sidebar = (props) => {
 								name="FramesPerSecond"
 								placeholder="Select One"
 								options={selectOptions.frameRate}
-								label="Frames Per Second"
+								label="Frame Rate"
 							/>
 						</div>
 						<div className="w-100 mt-48">
@@ -185,13 +184,13 @@ const Sidebar = (props) => {
 								name="Pacing"
 								placeholder="Select One"
 								options={selectOptions.pacing}
-								label="Number of Scenes"
+								label="Pacing"
 							/>
 						</div>
 						<div className="w-100 d-flex align-items-center justify-content-center">
 							<Button
-								onClick={() => console.log('qwerf')}
-								customClass="mt-48"
+								customClass={classnames('mt-48', style.sidebarApplyButton)
+								}
 								buttonText="Apply Filters"
 							/>
 						</div>

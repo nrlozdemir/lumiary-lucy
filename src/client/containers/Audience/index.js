@@ -1,38 +1,54 @@
 import React from 'react'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { defaults } from 'react-chartjs-2'
-import { Performance } from './sections/Performance'
-import { DominantColor } from './sections/DominantColor'
-import { ColorTemperature } from './sections/ColorTemperature'
-import { ChangeOverTime } from './sections/ChangeOverTime'
+import Performance from './sections/Performance'
+import DominantColor from './sections/DominantColor'
+import ColorTemperature from './sections/ColorTemperature'
+import ChangeOverTime from './sections/ChangeOverTime'
 import GenderSection from './sections/Gender'
+import RouterLoading from 'Components/RouterLoading'
 
-export class Audience extends React.Component {
-	render() {
-		defaults.global.defaultFontFamily = 'ClanOT'
-		return (
-			<React.Fragment>
-				<Performance />
-				<GenderSection />
-				<ColorTemperature />
-				<ChangeOverTime />
-				<DominantColor />
-			</React.Fragment>
-		)
-	}
+import { actions, makeSelectPanoptic } from 'Reducers/panoptic'
+
+class Audience extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {}
+  }
+
+  componentDidMount() {
+    this.props.getAudienceData();
+  }
+
+  render() {
+    const { panoptic: { audienceData } } = this.props;
+
+    if (!audienceData) return (<RouterLoading />)
+
+    defaults.global.defaultFontFamily = 'ClanOT'
+    return (
+      <React.Fragment>
+        <Performance />
+        <GenderSection />
+        <ColorTemperature />
+        <ChangeOverTime />
+        <DominantColor />
+      </React.Fragment>
+    )
+  }
 }
 
-const mapStateToProps = createStructuredSelector({})
+const mapStateToProps = createStructuredSelector({
+  panoptic: makeSelectPanoptic(),
+})
 
-function mapDispatchToProps(dispatch) {
-	return {}
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
-	mapStateToProps,
-	mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )
 
 export default compose(withConnect)(Audience)

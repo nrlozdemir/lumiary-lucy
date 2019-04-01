@@ -58,19 +58,47 @@
       "datasets": [
         {
           "backgroundColor": "#D0506C",
-          "data": [25, 10, 14, 51]
+          "data": [25, 10, 14, 51],
+					"borderColor": "#242b49",
+					"borderWidth": {
+						"top": 3,
+						"right": 0,
+						"bottom": 0,
+						"left": 0
+				 	}
         },
         {
           "backgroundColor": "#8567f0",
-          "data": [12, 24, 56, 9]
+					"data": [12, 24, 56, 9],
+					"borderColor": "#242b49",
+					"borderWidth": {
+						"top": 3,
+						"right": 0,
+						"bottom": 0,
+						"left": 0
+				 	}
         },
         {
           "backgroundColor": "#acb0be",
-          "data": [42, 18, 18, 25]
+					"data": [42, 18, 18, 25],
+					"borderColor": "#242b49",
+					"borderWidth": {
+						"top": 3,
+						"right": 0,
+						"bottom": 0,
+						"left": 0
+				 	}
         },
         {
           "backgroundColor": "#51adc0",
-          "data": [21, 48, 12, 15]
+					"data": [21, 48, 12, 15],
+					"borderColor": "#242b49",
+					"borderWidth": {
+						"top": 0,
+						"right": 0,
+						"bottom": 0,
+						"left": 0
+				 	}
         }
       ]
     },

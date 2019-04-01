@@ -34,7 +34,24 @@
 }
 
 .selected {
-  div {
+  // div {
+  //   color: $color-white;
+  // }
+}
+
+.iconIndicator {
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -ms-transition: -ms-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  &:before {
+    color: $color-dusk;
+  }
+}
+.active {
+  &:before {
     color: $color-white;
   }
+}
+.focus {
+  transform: rotate(180deg);
 }

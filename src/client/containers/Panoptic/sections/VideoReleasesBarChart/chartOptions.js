@@ -59,7 +59,7 @@ export const options = {
 }
 
 export const wrapperBarOptions = {
-  responsive: true, 
+  responsive: true,
   maintainAspectRatio: false,
   layout: {
     padding: 0,
@@ -84,7 +84,7 @@ export const wrapperBarOptions = {
       gridLines: {
         display: true,
         color: '#5a6386',
-        zeroLineColor: '#5a6386',
+        zeroLineColor: '#ffffff',
         drawTicks: false
       },
       ticks: {

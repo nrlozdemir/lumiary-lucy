@@ -24,8 +24,16 @@ export const stackedChartOptions = {
 				beginAtZero: true,
 				callback: function(value, index, values) {
 					return value ;
-				}
-			}
+				},
+				marginRight: 16
+			},
+			gridLines: {
+        display: false,
+				color: '#5a6386',
+				lineWidth: 1,
+				drawBorder: true,
+				drawTicks: true
+      }
 		}],
 		yAxes: [{
 			stacked: true,
@@ -36,12 +44,20 @@ export const stackedChartOptions = {
 				beginAtZero: true,
 				callback: function(value, index, values) {
 					return value + '%';
-				}
+				},
+				padding: 20
+			},
+			gridLines: {
+				display: true,
+				color: '#5a6386',
+				lineWidth: 1,
+				drawBorder: true,
+				drawTicks: false
 			}
 		}]
 	},
 	chartArea: {
-		backgroundColor: '#fff',
+		backgroundColor: '#242b49',
 	},
 	plugins: {
 		datalabels: false
