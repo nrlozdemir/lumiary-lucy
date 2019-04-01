@@ -364,6 +364,12 @@ const selectMarketviewtotalCompetitorViewDomain = (state) =>
 
 export const selectMarketviewDomain = (state) => state.Marketview
 
+export const makeSelectMarketview = () =>
+  createSelector(
+    selectMarketviewDomain,
+    (substate) => substate.toJS()
+  )
+
 export const makeSelectMarketviewBubbleChart = () =>
   createSelector(
     selectMarketviewBubbleChartDomain,

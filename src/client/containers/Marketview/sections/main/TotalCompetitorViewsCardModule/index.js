@@ -1,6 +1,14 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose, bindActionCreators } from 'redux'
+import {
+  actions,
+  makeSelectMarketviewCompetitorView,
+} from 'Reducers/marketview'
+
 import SelectFilters from 'Components/SelectFilters'
 import TotalCompetitorViewsChart from 'Components/Charts/MarketView/TotalCompetitorViewsChart'
 import style from 'Containers/Marketview/style.scss'
@@ -12,6 +20,10 @@ class TotalCompetitorViewsCard extends Component {
   constructor(props) {
     super(props)
     this.state = {}
+  }
+
+  componentDidMount() {
+    this.props.getTotalCompetitorViewsRequest()
   }
 
   generateSelectProps(selects) {
@@ -26,6 +38,7 @@ class TotalCompetitorViewsCard extends Component {
   }
 
   render() {
+    // console.log('Competitor', this.props.totalCompetitorViewsData)
     const {
       containerClass = '',
       totalCompetitorViewsData,
@@ -70,12 +83,14 @@ class TotalCompetitorViewsCard extends Component {
             </div>
           )}
         </div>
-        <TotalCompetitorViewsChart
-          barDurationData={totalCompetitorViewsData}
-          tickOptions={tickOptions}
-          width={width}
-          height={height}
-        />
+        {totalCompetitorViewsData && (
+          <TotalCompetitorViewsChart
+            barDurationData={totalCompetitorViewsData}
+            tickOptions={tickOptions}
+            width={width}
+            height={height}
+          />
+        )}
         <div className="col-12 d-flex justify-content-center mt-48 align-items-center">
           {footerLabels && (
             <div
@@ -94,4 +109,15 @@ class TotalCompetitorViewsCard extends Component {
   }
 }
 
-export default TotalCompetitorViewsCard
+const mapStateToProps = createStructuredSelector({
+  totalCompetitorViewsData: makeSelectMarketviewCompetitorView(),
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(TotalCompetitorViewsCard)

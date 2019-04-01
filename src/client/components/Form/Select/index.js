@@ -26,16 +26,18 @@ const Select = (props) => {
     [style.selected]: !!value,
   })
   const DropdownIndicator = (props) => {
-		const menuIsOpenClass = classNames('icon-Arrow-Down', style.iconIndicator ,{
-			[style.active]: props.selectProps.menuIsOpen,
-		})
+    console.log('props', props)
+    const menuIsOpenClass = classNames('icon-Arrow-Down', style.iconIndicator, {
+      [style.active]: props.hasValue,
+      [style.focus]: props.selectProps.menuIsOpen,
+    })
     return (
       <div className={style.DropdownIndicator}>
-				<span className={menuIsOpenClass}>
-					<span className="path1" />
-					<span className="path2" />
-					<span className="path3" />
-				</span>
+        <span className={menuIsOpenClass}>
+          <span className="path1" />
+          <span className="path2" />
+          <span className="path3" />
+        </span>
       </div>
     )
   }
@@ -45,32 +47,45 @@ const Select = (props) => {
       return {
         ...styles,
         background: '#242b49',
-        border: '1px solid #acb0be !important',
+        borderColor: isSelected ? '#acb0be' : isFocused ? '#acb0be' : '#5a6386',
         borderRadius: '8px',
-        boxShadow: 'none !important',
+        borderWidth: '1px',
+        boxShadow: 'rgba(0, 0, 0, 0.5)',
         '&:hover': {
-          border: '1px solid #acb0be !important',
+          borderColor: 'none',
         },
       }
     },
-    input: (styles) => ({
-      ...styles,
-      color: '#ffffff',
-    }),
+    input: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      return {
+        ...styles,
+        color: '#ffffff',
+      }
+    },
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
         height: '40px',
         lineHeight: '27px',
-        backgroundColor: isFocused ? '#ffffff' : '#5a6386',
-        color: isFocused ? '#5a6386' : '#ffffff',
+        backgroundColor: isSelected
+          ? '#242b49'
+          : isFocused
+          ? '#ffffff'
+          : '#5a6386',
+        color: isSelected ? '#ffffff' : isFocused ? '#5a6386' : '#ffffff',
         cursor: 'pointer',
         border: 'none',
       }
     },
-    placeholder: (styles) => ({
+    placeholder: (styles, { data, isDisabled, isFocused, isSelected }) => {
+      return {
+        ...styles,
+        color: isFocused ? '#ffffff' : isSelected ? '#ffffff' : '#5a6386',
+      }
+    },
+    singleValue: (styles) => ({
       ...styles,
-      color: '#5a6386',
+      color: '#ffffff',
     }),
     menu: (base) => ({
       ...base,

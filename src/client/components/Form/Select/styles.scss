@@ -34,19 +34,24 @@
 }
 
 .selected {
-  div {
-    color: $color-white;
-  }
+  // div {
+  //   color: $color-white;
+  // }
 }
 
 .iconIndicator {
-	color: $color-white;
-	-webkit-transition: -webkit-transform .8s ease-in-out;
-	-ms-transition: -ms-transform .8s ease-in-out;
-	transition: transform .8s ease-in-out;
+  -webkit-transition: -webkit-transform 0.3s ease-in-out;
+  -ms-transition: -ms-transform 0.3s ease-in-out;
+  transition: transform 0.3s ease-in-out;
+  &:before {
+    color: $color-dusk;
+  }
 }
 .active {
-	color: $color-dusk;
-	transform: rotate(180deg);
+  &:before {
+    color: $color-white;
+  }
 }
-
+.focus {
+  transform: rotate(180deg);
+}

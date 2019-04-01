@@ -8,7 +8,7 @@ import ColorCard from 'Containers/Marketview/sections/main/ColorCard'
 import PacingCard from 'Containers/Marketview/sections/main/PacingCard'
 import FormatCard from 'Containers/Marketview/sections/main/FormatCard'
 import TotalViewsCard from 'Containers/Marketview/sections/main/TotalViewsCard'
-import TotalCompetitorViewsCard from 'Containers/Marketview/sections/main/TotalCompetitorViewsCard'
+import TotalCompetitorViewsCard from 'Containers/Marketview/sections/main/TotalCompetitorViewsCardModule'
 
 const Main = () => {
   return (
