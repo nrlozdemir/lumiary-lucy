@@ -3,7 +3,7 @@ import style from './style.scss';
 import { socialIconSelector } from 'Utils/';
 
 import Swiper from 'react-id-swiper';
-import { Navigation } from 'swiper/dist/js/swiper.esm'
+import SwiperJS from 'swiper/dist/js/swiper.js'
 
 
 class AudienceSlider extends React.Component {
@@ -25,7 +25,7 @@ class AudienceSlider extends React.Component {
     const { refThumb } = this.state;
 
     const settings = {
-      modules: [Navigation],
+      modules: [SwiperJS.Navigation],
       navigation: {
         nextEl: '.swiper-button-next',
         prevEl: '.swiper-button-prev'
