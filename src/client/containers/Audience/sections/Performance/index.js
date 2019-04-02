@@ -79,9 +79,9 @@ class Performance extends React.Component {
         backgroundColor: 'transparent',
 				boxShadow: 'none',
 				filter: 'drop-shadow(0px 2px 4px 2px #000)',
-				'-webkit-filter': 'drop-shadow(0px 2px 4px 2px #000)',
-				'-moz-filter': 'drop-shadow(0px 2px 4px 2px #000)',
-				'-o-filter': 'drop-shadow(0px 2px 4px 2px #000)'
+				WebkitFilter: 'drop-shadow(0px 2px 4px 2px #000)',
+				MozFilter: 'drop-shadow(0px 2px 4px 2px #000)',
+				OFilter: 'drop-shadow(0px 2px 4px 2px #000)'
       },
       {
         width: '10px',
@@ -93,9 +93,9 @@ class Performance extends React.Component {
         borderRadius: 0,
 				boxShadow: 'none',
 				filter: 'drop-shadow(0px 2px 4px 2px #000)',
-				'-webkit-filter': 'drop-shadow(0px 2px 4px 2px #000)',
-				'-moz-filter': 'drop-shadow(0px 2px 4px 2px #000)',
-				'-o-filter': 'drop-shadow(0px 2px 4px 2px #000)',
+				WebkitFilter: 'drop-shadow(0px 2px 4px 2px #000)',
+				MozFilter: 'drop-shadow(0px 2px 4px 2px #000)',
+				OFilter: 'drop-shadow(0px 2px 4px 2px #000)',
         marginLeft: '-12px',
       },
     ]
