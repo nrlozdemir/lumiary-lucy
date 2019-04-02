@@ -8,6 +8,7 @@ import DominantColor from './sections/DominantColor'
 import ColorTemperature from './sections/ColorTemperature'
 import ChangeOverTime from './sections/ChangeOverTime'
 import GenderSection from './sections/Gender'
+import AgeSlider from './sections/AgeSlider'
 import RouterLoading from 'Components/RouterLoading'
 
 import { actions, makeSelectPanoptic } from 'Reducers/panoptic'
@@ -31,6 +32,7 @@ class Audience extends React.Component {
     return (
       <React.Fragment>
         <Performance />
+        <AgeSlider />
         <GenderSection />
         <ColorTemperature />
         <ChangeOverTime />
