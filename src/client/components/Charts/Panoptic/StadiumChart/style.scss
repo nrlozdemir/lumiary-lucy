@@ -226,7 +226,7 @@ $min-height: 160;
     }
 
     svg {
-      width: calc(100% + #{$line-size * 2px});
+      width: calc(100% + #{$line-size * 1px});
       height: calc(100% + #{$line-size * 1px});
       margin: -#{$line-size}px;
       position: relative;
@@ -240,8 +240,8 @@ $min-height: 160;
       stroke-width: $line-size;
       stroke-dasharray: 300%;
       stroke-dashoffset: 300%;
-      width: calc(100% - #{$line-size * 2px});
-      height: calc(100% - #{$line-size * 2px});
+      width: calc(100% - #{$line-size * 1px});
+      height: calc(100% - #{$line-size * 1px});
       x: $line-size / 2;
       y: $line-size / 2;
     }
