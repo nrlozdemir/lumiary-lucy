@@ -96,7 +96,6 @@ $min-height: 160;
       border-radius: 10px;
       pointer-events: none;
       opacity: 0;
-      z-index: 3;
       font-size: 12px;
 
       &:after {
@@ -110,12 +109,6 @@ $min-height: 160;
         border-top: 6px solid transparent;
         border-bottom: 6px solid transparent;
         border-left: 6px solid #fff;
-      }
-    }
-
-    &:hover {
-      .tick{
-        opacity: 1;
       }
     }
 
@@ -139,6 +132,15 @@ $min-height: 160;
         stroke: #acb0be;
         rx: #{($min-height / 2) + ($line-size * 0)};
       }
+
+      &:hover {
+        .tick{
+          top: #{($line-size / 2) + ($line-size * 3)}px;
+          opacity: 1;
+          z-index: 20;
+          left: #{$line-size  * 2}px;
+        }
+      }
     }
 
     &:nth-child(2) {
@@ -148,6 +150,15 @@ $min-height: 160;
       .bar {
         stroke: #d0506c;
         rx: #{($min-height / 2) + ($line-size * 1)};
+      }
+
+      &:hover {
+        .tick{
+          top: #{($line-size / 2) + ($line-size * 5)}px;
+          opacity: 1;
+          z-index: 20;
+          left: #{$line-size  * 3}px;
+        }
       }
     }
 
@@ -159,6 +170,15 @@ $min-height: 160;
         stroke: #8567f0;
         rx: #{($min-height / 2) + ($line-size * 2)};
       }
+
+      &:hover {
+        .tick{
+          top: #{($line-size / 2) + ($line-size * 7)}px;
+          opacity: 1;
+          z-index: 20;
+          left: #{$line-size  * 4}px;
+        }
+      }
     }
 
     &:nth-child(4) {
@@ -168,6 +188,15 @@ $min-height: 160;
       .bar {
         stroke: #51adc0;
         rx: #{($min-height / 2) + ($line-size * 3)};
+      }
+
+      &:hover {
+        .tick{
+          top: #{($line-size / 2) + ($line-size * 9)}px;
+          opacity: 1;
+          z-index: 20;
+          left: #{$line-size  * 5}px;
+        }
       }
     }
 
@@ -179,6 +208,15 @@ $min-height: 160;
         stroke: #3178b0;
         rx: #{($min-height / 2) + ($line-size * 4)};
       }
+
+      &:hover {
+        .tick{
+          top: #{($line-size * 23/2)}px;
+          opacity: 1;
+          z-index: 20;
+          left: #{$line-size  * 6}px;
+        }
+      }
     }
 
     &:hover {
@@ -189,7 +227,7 @@ $min-height: 160;
 
     svg {
       width: calc(100% + #{$line-size * 2px});
-      height: calc(100% + #{$line-size * 2px});
+      height: calc(100% + #{$line-size * 1px});
       margin: -#{$line-size}px;
       position: relative;
       z-index: 2;
