@@ -25,7 +25,7 @@ const StadiumChart = () => (
 		{stats.map((stat, index) => {
       return(
         <div key={index} className={style.stadiumChart} data={stat.value}>
-          <div className={style.tick} style={{left: (lineSize * (index))}}>{[100 - stat.value, '% Slowest'].join('')}</div>
+          <div className={style.tick}>{[100 - stat.value, '% Slowest'].join('')}</div>
 				  <svg xmlns="http://www.w3.org/2000/svg">
             <rect className={style.bar} fill="none"
               rx={(lineSize * (index + 2))}
