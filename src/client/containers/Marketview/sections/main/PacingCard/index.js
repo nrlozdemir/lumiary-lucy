@@ -20,14 +20,14 @@ class PacingCard extends Component {
     return (
       <div className={style.marketViewCard}>
         <div className={style.marketViewCardTitle}>Pacing</div>
-        <div className={style.marketViewCardDescription}>
+        <div className={style.marketViewCardSubTitle}>
           Top Competitor Similarities
         </div>
         <div className={style.marketViewCardDate}>
           <span>Past Month</span>
         </div>
         <PacingPieChart data={pacingChartData} />
-        <div className={style.marketViewCardSubTitle}>Medium Paced</div>
+        <div className={style.marketViewCardChartTitle}>Medium Paced</div>
         <div
           className={classnames(
             style.colorListSmall,
@@ -42,9 +42,7 @@ class PacingCard extends Component {
         </div>
 
         <div className={style.marketViewCardDescription}>
-          <span>
-            Based on the number of shares for competitors across all platforms
-          </span>
+          Based on the number of shares for competitors across all platforms
         </div>
         <Link to="/marketview/platform" className={style.marketViewCardLink}>
           View Competitor Metrics

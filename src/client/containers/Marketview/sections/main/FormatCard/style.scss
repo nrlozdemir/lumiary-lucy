@@ -1,8 +1,8 @@
 .formatItems {
   display: flex;
   justify-content: space-between;
-  margin-top: 30px;
-  margin-bottom: 25px;
+  margin-top: 32px;
+  margin-bottom: 30px;
 
   .formatItem {
     &:nth-child(1) {
@@ -50,14 +50,16 @@
         &:nth-child(1) {
           font-family: $font-family-primary;
           font-size: 24px;
+          margin-bottom: 6px;
         }
         &:nth-child(2) {
-          font-family: $font-family-ClanOT;
+          font-family: $font-family-ClanOTBold;
           font-size: 12px;
+          margin-bottom: 4px;
         }
         &:nth-child(3) {
           font-family: $font-family-ClanOTNews;
-          font-size: 10px;
+          font-size: 12px;
         }
       }
     }

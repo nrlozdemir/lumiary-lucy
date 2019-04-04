@@ -28,7 +28,10 @@ export class Module extends React.Component {
   }
 
   render() {
-    const moduleContainer = cx('shadow-1 col-12', style.moduleContainer)
+    const moduleContainer = cx(
+      'shadow-1 col-12-gutter-20',
+      style.moduleContainer
+    )
     const { children, title, subTitle, legend, filters } = this.props
     return (
       <div className={moduleContainer}>

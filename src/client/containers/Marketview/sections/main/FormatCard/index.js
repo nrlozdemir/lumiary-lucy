@@ -18,7 +18,7 @@ class FormatCard extends Component {
     return (
       <div className={style.marketViewCard}>
         <div className={style.marketViewCardTitle}>Format</div>
-        <div className={style.marketViewCardDescription}>
+        <div className={style.marketViewCardSubTitle}>
           Performance Over Time
         </div>
         <div className={style.marketViewCardDate}>
@@ -32,7 +32,7 @@ class FormatCard extends Component {
             ))}
         </div>
 
-        <div className={style.marketViewCardSubTitle}>Stop Motion</div>
+        <div className={style.marketViewCardChartTitle}>Stop Motion</div>
 
         <div className={formatStyles.formatItems}>
           {formatChartData.data &&
@@ -44,7 +44,7 @@ class FormatCard extends Component {
                 <div className={formatStyles.formatItemText}>
                   <span>{item.count}</span>
                   <span>{item.name}</span>
-                  <span>categories</span>
+                  <span>Categories</span>
                 </div>
               </div>
             ))}
