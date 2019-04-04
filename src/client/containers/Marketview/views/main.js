@@ -9,20 +9,15 @@ import PacingCard from 'Containers/Marketview/sections/main/PacingCard'
 import FormatCard from 'Containers/Marketview/sections/main/FormatCard'
 import TotalViewsCard from 'Containers/Marketview/sections/main/TotalViewsCard'
 import TotalCompetitorViewsCard from 'Containers/Marketview/sections/main/TotalCompetitorViewsCardModule'
+import style from '../style.scss'
 
 const Main = () => {
   return (
     <React.Fragment>
-      <div className="grid-collapse">
-        <div className="col-4 mb-48">
-          <ColorCard />
-        </div>
-        <div className="col-4 mb-48">
-          <PacingCard />
-        </div>
-        <div className="col-4 mb-48">
-          <FormatCard />
-        </div>
+      <div className={style.mainCardContainer}>
+        <ColorCard />
+        <PacingCard />
+        <FormatCard />
       </div>
 
       <div className="grid-collapse">

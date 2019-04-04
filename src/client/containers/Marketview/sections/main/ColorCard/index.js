@@ -5,6 +5,8 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewBubbleChart } from 'Reducers/marketview'
 import { Link } from 'react-router-dom'
+import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
+import { socialIconSelector } from 'Utils'
 
 import style from 'Containers/Marketview/style.scss'
 class ColorCard extends Component {
@@ -39,36 +41,45 @@ class ColorCard extends Component {
     return (
       <div className={style.marketViewCard}>
         <div className={style.marketViewCardTitle}>Color</div>
-        <div className={style.marketViewCardDescription}>
+        <div className={style.marketViewCardSubTitle}>
           Top Performing Platform
         </div>
         <div className={style.marketViewCardDate}>
           <span>Past 3 Months</span>
         </div>
         <div className={style.bubbleChart}>
-          {bubbleChartData.length > 0 &&
-            bubbleChartData.map((item, i) => (
-              <div key={i} className={style.bubbleChartItem}>
-                <style>
-                  {`.${style.bubbleChartItem}:nth-child(${i + 1}){
-                                                border-color: ${item.color};
-                                            }.${
-                                              style.bubbleChartItem
-                                            }:nth-child(${i + 1}):hover{
-                                                background-color: ${item.color};
-                                            }`}
-                </style>
-                <div
-                  className={`${style.bubbleChartIcon} icon-${
-                    item.icon
-                  }-Bubble`}
-                />
-                <div className={style.bubbleChartTooltip}>
-                  <span>{item.name}</span>
-                  <span>{item.value} Likes</span>
-                </div>
-              </div>
-            ))}
+          {bubbleChartData.length > 0 && (
+            <BubbleChart
+              size={[800, 600]}
+              fromPercentages={true}
+              options={{ toolTipWidth: 200, toolTipHeight: 75 }}
+            >
+              {bubbleChartData.map((bubble, i) => (
+                <Bubble
+                  key={'bubble-' + i}
+                  radius={(parseInt(bubble.value) / 100) * 0.0015 + 15}
+                  fill="#242b49"
+                  stroke={bubble.color}
+                >
+                  <Visual>
+                    <span
+                      className={
+                        socialIconSelector(bubble.icon) +
+                        ' ' +
+                        style.bubbleVisual
+                      }
+                    />
+                  </Visual>
+                  <ToolTip>
+                    <div className={style.bubbleTooltip}>{bubble.name}</div>
+                    <div className={style.bubbleTooltip}>
+                      {bubble.value / 1000}k views
+                    </div>
+                  </ToolTip>
+                </Bubble>
+              ))}
+            </BubbleChart>
+          )}
         </div>
         <div className={style.colors}>
           {bubbleChartOptions.map((color, i) => {
@@ -83,9 +94,7 @@ class ColorCard extends Component {
           })}
         </div>
         <div className={style.marketViewCardDescription}>
-          <span>
-            Based on the number of shares for competitors across all platforms
-          </span>
+          Based on the number of shares for competitors across all platforms
         </div>
         <Link to="/marketview/competitor" className={style.marketViewCardLink}>
           View Platform Metrics

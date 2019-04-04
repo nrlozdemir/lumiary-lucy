@@ -84,15 +84,17 @@ class TotalCompetitorViewsCard extends Component {
           )}
         </div>
         {totalCompetitorViewsData && (
-          <TotalCompetitorViewsChart
-            barDurationData={totalCompetitorViewsData}
-            tickOptions={tickOptions}
-            width={width}
-            height={height}
-          />
+          <div className="col-12 d-flex">
+            <TotalCompetitorViewsChart
+              barDurationData={totalCompetitorViewsData}
+              tickOptions={tickOptions}
+              width={width}
+              height={height}
+            />
+          </div>
         )}
-        <div className="col-12 d-flex justify-content-center mt-48 align-items-center">
-          {footerLabels && (
+        {footerLabels && (
+          <div className="col-12 d-flex justify-content-center mt-48 align-items-center">
             <div
               className={classnames(style.colorListHorizontal, style.colorList)}
             >
@@ -102,8 +104,8 @@ class TotalCompetitorViewsCard extends Component {
                 </div>
               ))}
             </div>
-          )}
-        </div>
+          </div>
+        )}
       </div>
     )
   }
