@@ -142,17 +142,12 @@ class PanopticBarChart extends React.Component {
               </div>
             </div>
           </div>
-
-          <div className={barChartFooterClass}>
-            <div className={referencesClass}>
-              <div className={style.referenceItem}>
-                <span className="bg-cool-blue" />
-                Likes
-              </div>
-              <div className={style.referenceItem}>
-                <span className="bg-coral-pink" />
-                Videos Released
-              </div>
+          <div className="col-3">
+            <div className={style.chartSection}>
+              <Bar data={data} options={options} />
+            </div>
+            <div className={style.chartSectionBadge}>
+              <span>Animation</span>
             </div>
           </div>
         </div>
