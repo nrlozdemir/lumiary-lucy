@@ -1,27 +1,12 @@
 {
   "lineChartData": {
-    "labels": [
-      "week 1",
-      "week 2",
-      "week 3",
-      "week 4"
-    ],
+    "labels": ["week 1", "week 2", "week 3", "week 4"],
     "datasets": [
       {
-        "data": [
-          275000,
-          280000,
-          285000,
-          670000
-        ]
+        "data": [275000, 280000, 285000, 670000]
       },
       {
-        "data": [
-          400000,
-          200000,
-          600000,
-          550000
-        ]
+        "data": [400000, 200000, 600000, 550000]
       }
     ]
   },
@@ -165,20 +150,7 @@
             "borderColor": "transparent",
             "pointBackgroundColor": "#ffffff",
             "pointBorderColor": "#ffffff",
-            "data": [
-              75,
-              25,
-              50,
-              15,
-              55,
-              15,
-              48,
-              25,
-              100,
-              40,
-              18,
-              25
-            ]
+            "data": [75, 25, 50, 15, 55, 15, 48, 25, 100, 40, 18, 25]
           }
         ]
       },
@@ -287,20 +259,7 @@
             "borderColor": "transparent",
             "pointBackgroundColor": "#ffffff",
             "pointBorderColor": "#ffffff",
-            "data": [
-              30,
-              100,
-              25,
-              70,
-              22,
-              26,
-              55,
-              15,
-              48,
-              25,
-              30,
-              50
-            ]
+            "data": [30, 100, 25, 70, 22, 26, 55, 15, 48, 25, 30, 50]
           }
         ]
       },
@@ -327,35 +286,20 @@
     }
   ],
   "genderData": {
-    "labels": [
-      "Slowest",
-      "Slow",
-      "Medium",
-      "Fast"
-    ],
+    "labels": ["Slowest", "Slow", "Medium", "Fast"],
     "datasets": [
       {
         "label": "Dataset 1",
         "backgroundColor": "#d0506c",
         "borderColor": "#d0506c",
         "borderWidth": 1,
-        "data": [
-          -20,
-          -30,
-          -25,
-          -13
-        ]
+        "data": [-20, -30, -25, -13]
       },
       {
         "label": "Dataset 2",
         "backgroundColor": "#51adc0",
         "borderColor": "#51adc0",
-        "data": [
-          50,
-          80,
-          60,
-          50
-        ]
+        "data": [50, 80, 60, 50]
       }
     ]
   },
@@ -426,5 +370,98 @@
         "toolTip": 679000
       }
     ]
-  }
+  },
+  "ageSlider": [
+    {
+      "image": "https://picsum.photos/600/300?image=5",
+      "socialMedia": "facebook",
+      "title": "ESN",
+      "secondTitle": "425,512 Likes",
+      "age": 28
+    },
+    {
+      "image": "https://picsum.photos/600/300?image=10",
+      "socialMedia": "instagram",
+      "title": "Barstool Media",
+      "secondTitle": "425 Shares",
+      "age": 29
+    },
+    {
+      "image": "https://picsum.photos/600/300?image=15",
+      "socialMedia": "facebook",
+      "title": "SB Nation",
+      "secondTitle": "4,512 Comments",
+      "age": 30
+    },
+    {
+      "image": "https://picsum.photos/600/300?image=18",
+      "socialMedia": "twitter",
+      "title": "Scout Media",
+      "secondTitle": "23,431 Likes",
+      "age": 31
+    },
+    {
+      "image": "https://picsum.photos/600/300?image=20",
+      "socialMedia": "facebook",
+      "title": "Fansided",
+      "secondTitle": "142 Comments",
+      "age": 32
+    },
+    {
+      "image": "https://picsum.photos/600/300?image=22",
+      "socialMedia": "facebook",
+      "title": "Fansided",
+      "secondTitle": "142 Comments",
+      "age": 33
+    },
+    {
+      "image": "https://picsum.photos/600/300?image=24",
+      "socialMedia": "facebook",
+      "title": "Fansided",
+      "secondTitle": "142 Comments",
+      "age": 34
+    },
+    {
+      "image": "https://picsum.photos/600/300?image=26",
+      "socialMedia": "facebook",
+      "title": "Fansided",
+      "secondTitle": "142 Comments",
+      "age": 35
+    },
+    {
+      "image": "https://picsum.photos/600/300?image=28",
+      "socialMedia": "facebook",
+      "title": "Fansided",
+      "secondTitle": "142 Comments",
+      "age": 36
+    },
+    {
+      "image": "https://picsum.photos/600/300?image=30",
+      "socialMedia": "facebook",
+      "title": "Fansided",
+      "secondTitle": "142 Comments",
+      "age": 37
+    },
+    {
+      "image": "https://picsum.photos/600/300?image=31",
+      "socialMedia": "facebook",
+      "title": "Fansided",
+      "secondTitle": "142 Comments",
+      "age": 38
+    },
+    {
+      "image": "https://picsum.photos/600/300?image=32",
+      "socialMedia": "facebook",
+      "title": "Fansided",
+      "secondTitle": "142 Comments",
+      "age": 39
+    },
+    {
+      "image": "https://picsum.photos/600/300?image=33",
+      "socialMedia": "facebook",
+      "title": "Fansided",
+      "secondTitle": "142 Comments",
+      "age": 40
+    }
+  ]
 }

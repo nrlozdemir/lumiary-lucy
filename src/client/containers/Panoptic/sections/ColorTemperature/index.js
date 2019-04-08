@@ -13,11 +13,7 @@ import Module from 'Components/Module'
 
 class PanopticColorTemperature extends React.Component {
   callBack = (data, moduleKey) => {
-    console.log('@@@', data)
-    if (moduleKey === 'Panoptic/ColorTemperature') {
-      this.props.getColorTemperatureData(data)
-      // console.log('===> DATA: ', data, 'MODULE_KEY: ', moduleKey)
-    }
+    this.props.getColorTemperatureData(data)
   }
   render() {
     const {

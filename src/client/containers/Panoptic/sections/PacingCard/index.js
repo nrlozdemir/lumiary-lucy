@@ -21,10 +21,7 @@ const pacingCardContainer = classnames(
 
 class PacingCard extends React.Component {
   callBack = (data, moduleKey) => {
-    if (moduleKey === 'Panoptic/PacingCard') {
-      this.props.getPacingCardData(data)
-      // console.log('===> DATA: ', data, 'MODULE_KEY: ', moduleKey)
-    }
+    this.props.getPacingCardData(data)
   }
   render() {
     const {

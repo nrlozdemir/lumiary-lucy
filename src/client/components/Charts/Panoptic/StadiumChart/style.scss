@@ -1,6 +1,6 @@
-$line-size: 40;
-$min-width: 420;
-$min-height: 160;
+$line-size: 24;
+$min-width: 280;
+$min-height: 110;
 
 :export {
   lineSize: $line-size;
@@ -52,6 +52,13 @@ $min-height: 160;
   }
 }
 
+.stadiumContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
 .stadiumCharts {
   position: relative;
   width: #{$min-width + ($line-size * 9)}px;
@@ -85,7 +92,7 @@ $min-height: 160;
     margin: #{$line-size / 2}px;
     border-radius: 1000px;
 
-    .tooltip{
+    .tooltip {
       position: absolute;
       top: -20px;
       transform: translate(-50%, -50%);
@@ -134,11 +141,11 @@ $min-height: 160;
       }
 
       &:hover {
-        .tooltip{
+        .tooltip {
           top: #{($line-size / 2) + ($line-size * 3)}px;
           opacity: 1;
           z-index: 20;
-          left: #{$line-size  * 2}px;
+          left: #{$line-size * 2}px;
         }
       }
     }
@@ -153,11 +160,11 @@ $min-height: 160;
       }
 
       &:hover {
-        .tooltip{
+        .tooltip {
           top: #{($line-size / 2) + ($line-size * 5)}px;
           opacity: 1;
           z-index: 20;
-          left: #{$line-size  * 3}px;
+          left: #{$line-size * 3}px;
         }
       }
     }
@@ -172,11 +179,11 @@ $min-height: 160;
       }
 
       &:hover {
-        .tooltip{
+        .tooltip {
           top: #{($line-size / 2) + ($line-size * 7)}px;
           opacity: 1;
           z-index: 20;
-          left: #{$line-size  * 4}px;
+          left: #{$line-size * 4}px;
         }
       }
     }
@@ -191,11 +198,11 @@ $min-height: 160;
       }
 
       &:hover {
-        .tooltip{
+        .tooltip {
           top: #{($line-size / 2) + ($line-size * 9)}px;
           opacity: 1;
           z-index: 20;
-          left: #{$line-size  * 5}px;
+          left: #{$line-size * 5}px;
         }
       }
     }
@@ -210,11 +217,11 @@ $min-height: 160;
       }
 
       &:hover {
-        .tooltip{
+        .tooltip {
           top: #{($line-size * 23/2)}px;
           opacity: 1;
           z-index: 20;
-          left: #{$line-size  * 6}px;
+          left: #{$line-size * 6}px;
         }
       }
     }
