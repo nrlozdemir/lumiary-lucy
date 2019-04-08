@@ -14,17 +14,12 @@ import Module from 'Components/Module'
 
 class CompareShares extends React.Component {
   callBack = (data, moduleKey) => {
-    console.log('@@@', data)
-    if (moduleKey === 'Panoptic/compareShares') {
-      this.props.getCompareSharesData(data)
-      // console.log('===> DATA: ', data, 'MODULE_KEY: ', moduleKey)
-    }
+    this.props.getCompareSharesData(data)
   }
   render() {
     const {
       compareSharesData: { data, loading, error },
     } = this.props
-    console.log('@@@@', data)
     return (
       <Module
         moduleKey={'Panoptic/compareShares'}

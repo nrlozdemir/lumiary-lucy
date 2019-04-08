@@ -88,7 +88,6 @@ function* getCompareSharesData() {
   try {
     const payload = yield call(getPanopticDataApi)
     const shuffleData = payload.compareSharesData
-    console.log('shuffleData', shuffleData)
     shuffleData[0].datas.datasets[0].data = _.shuffle(
       shuffleData[0].datas.datasets[0].data
     )
@@ -99,6 +98,86 @@ function* getCompareSharesData() {
     yield put(actions.getCompareSharesDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getCompareSharesDataError(err))
+  }
+}
+
+function* getAudiencePerformanceData() {
+  try {
+    const payload = yield call(getAudienceDataApi)
+    const shuffleData = payload.performance
+    shuffleData.bubblesBoth = _.shuffle(shuffleData.bubblesBoth)
+    shuffleData.bubblesFemales = _.shuffle(shuffleData.bubblesFemales)
+    shuffleData.bubblesMales = _.shuffle(shuffleData.bubblesMales)
+    yield put(actions.getAudiencePerformanceDataSuccess(shuffleData))
+  } catch (err) {
+    yield put(actions.getAudiencePerformanceDataError(err))
+  }
+}
+
+function* getAudienceAgeSliderData() {
+  try {
+    const payload = yield call(getAudienceDataApi)
+    const shuffleData = payload.ageSlider
+    yield put(actions.getAudienceAgeSliderDataSuccess(_.shuffle(shuffleData)))
+  } catch (err) {
+    yield put(actions.getAudienceAgeSliderDataError(err))
+  }
+}
+
+function* getAudienceGenderData() {
+  try {
+    const payload = yield call(getAudienceDataApi)
+    const shuffleData = payload.genderData
+    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
+    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
+    yield put(actions.getAudienceGenderDataSuccess(shuffleData))
+  } catch (err) {
+    yield put(actions.getAudienceGenderDataError(err))
+  }
+}
+
+function* getAudienceColorTemperatureData() {
+  try {
+    const payload = yield call(getAudienceDataApi)
+    let shuffleData = payload.colorTempData
+    shuffleData = shuffleData.map((data) => {
+      data.data.map((item) => {
+        item.x = _.random(-50, 50)
+        item.y = _.random(-50, 50)
+      })
+      return data
+    })
+    yield put(actions.getAudienceColorTemperatureDataSuccess(shuffleData))
+  } catch (err) {
+    yield put(actions.getAudienceColorTemperatureDataError(err))
+  }
+}
+
+function* getAudienceChangeOverTimeData() {
+  try {
+    const payload = yield call(getAudienceDataApi)
+    let shuffleData = payload.lineChartData
+    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
+    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
+    yield put(actions.getAudienceChangeOverTimeDataSuccess(shuffleData))
+  } catch (err) {
+    yield put(actions.getAudienceChangeOverTimeDataError(err))
+  }
+}
+
+function* getAudienceDominantColorData() {
+  try {
+    const payload = yield call(getAudienceDataApi)
+    let shuffleData = payload.chartData
+    shuffleData[0].datas.datasets[0].data = _.shuffle(
+      shuffleData[0].datas.datasets[0].data
+    )
+    shuffleData[1].datas.datasets[0].data = _.shuffle(
+      shuffleData[1].datas.datasets[0].data
+    )
+    yield put(actions.getAudienceDominantColorDataSuccess(shuffleData))
+  } catch (err) {
+    yield put(actions.getAudienceDominantColorDataError(err))
   }
 }
 
@@ -136,6 +215,23 @@ export default [
   takeLatest(types.GET_FILTERING_SECTION_DATA, getFilteringSectionData),
   takeLatest(types.GET_PACING_CARD_DATA, getPacingCardData),
   takeLatest(types.GET_COMPARE_SHARES_DATA, getCompareSharesData),
+
+  takeLatest(types.GET_AUDIENCE_PERFORMANCE_DATA, getAudiencePerformanceData),
+  takeLatest(types.GET_AUDIENCE_AGE_SLIDER_DATA, getAudienceAgeSliderData),
+  takeLatest(types.GET_AUDIENCE_GENDER_DATA, getAudienceGenderData),
+  takeLatest(
+    types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA,
+    getAudienceColorTemperatureData
+  ),
+  takeLatest(
+    types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA,
+    getAudienceChangeOverTimeData
+  ),
+  takeLatest(
+    types.GET_AUDIENCE_DOMINANT_COLOR_DATA,
+    getAudienceDominantColorData
+  ),
+
   takeLatest(types.GET_AUDIENCE_DATA, getAudienceData),
   takeLatest(types.UPDATE_AUDIENCE_PERFORMANCE, updateAudiencePerformance),
 ]

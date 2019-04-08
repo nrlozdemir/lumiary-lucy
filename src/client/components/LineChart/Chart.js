@@ -1,12 +1,17 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { Line } from 'react-chartjs-2'
+import { randomKey } from 'Utils/index'
 
 import style from './style.scss'
 import data from './dummyChartData'
-import 'chartjs-plugin-style'
+// Bar chart crash while this line allow, i will found a solution for this case
+// import 'chartjs-plugin-style'
 
 class LineChart extends React.PureComponent {
+  datasetKeyProvider() {
+    return randomKey(5)
+  }
   render() {
     const { width, height, backgroundColor, dataSet, options } = this.props
     const plugins = [
@@ -39,6 +44,7 @@ class LineChart extends React.PureComponent {
           width={width}
           height={height}
           plugins={plugins}
+          datasetKeyProvider={this.datasetKeyProvider}
           options={{
             responsive: false,
             chartArea: {

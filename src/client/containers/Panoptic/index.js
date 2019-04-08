@@ -36,61 +36,11 @@ const Panoptic = () => {
           </NavLink>
         </div>
       </div>
-
       <VideoReleasesBarChart />
       <ColorTemperature />
       <FilteringSection />
       <PacingCard />
       <CompareShares />
-
-      {/*
-      <div className="grid-container col-12">
-        <div className={style.alignTabs}>
-          <NavLink
-            to="/panoptic/audience"
-            className={style.tab}
-            activeClassName={style.activeLink}
-          >
-            Audience
-          </NavLink>
-        </div>
-      </div>
-      {videoReleasesData && (
-        <VideoReleasesBarChart
-          data={videoReleasesData}
-          handleSelectFilters={this.handleSelectFilters}
-          selectLikes={selectLikes}
-          selectPlatforms={selectPlatforms}
-          selectDate={selectDate}
-        />
-      )}
-      {colorTempData && (
-        <ColorTemperature
-          colorTempData={colorTempData}
-          handleSelectFilters={this.handleSelectFilters}
-          selectWarmColor={selectWarmColor}
-          selectDate={selectDate}
-        />
-      )}
-      {verticalStackedChartData && (
-        <FilteringSection data={verticalStackedChartData} />
-      )}
-      {pacingChartData && (
-        <PacingCard
-          handleSelectFilters={this.handleSelectFilters}
-          barData={pacingChartData}
-          selectDate={selectDate}
-          selectLikes={selectLikes}
-        />
-      )}
-      {compareSharesData && (
-        <CompareShares
-          selectDate={selectDate}
-          radarData={compareSharesData}
-          handleSelectFilters={this.handleSelectFilters}
-        />
-      )}
-      */}
     </React.Fragment>
   )
 }

@@ -18,11 +18,7 @@ import Module from 'Components/Module'
 
 class PanopticFilteringSection extends Component {
   callBack = (data, moduleKey) => {
-    console.log('@@@', data)
-    if (moduleKey === 'Panoptic/FilteringSection') {
-      this.props.getFilteringSectionData(data)
-      // console.log('===> DATA: ', data, 'MODULE_KEY: ', moduleKey)
-    }
+    this.props.getFilteringSectionData(data)
   }
 
   render() {
@@ -89,7 +85,9 @@ class PanopticFilteringSection extends Component {
             </div>
           </div>
           <div className={style.stackedChart}>
-            <VerticalStackedBarChart data={stackedChartData} />
+            {stackedChartData && (
+              <VerticalStackedBarChart data={stackedChartData} />
+            )}
           </div>
         </div>
       </Module>
