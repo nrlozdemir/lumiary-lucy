@@ -22,116 +22,27 @@ import PacingCard from './sections/PacingCard'
 import CompareShares from './sections/CompareShares'
 
 /* eslint-disable react/prefer-stateless-function */
-export class Panoptic extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
-
-  componentDidMount() {
-    this.props.getData()
-  }
-
-  handleSelectFilters = (name, value) => {
-    this.setState({
-      [name]: value,
-    })
-  }
-
-  render() {
-    const {
-      selectWarmColor,
-      selectLikes,
-      selectDate,
-      selectPlatforms,
-    } = this.state
-    const {
-      panoptic: {
-        data: {
-          colorTempData,
-          videoReleasesData,
-          verticalStackedChartData,
-          pacingChartData,
-          compareSharesData,
-        },
-      },
-    } = this.props
-
-    return (
-      <React.Fragment>
-        <div className="grid-container col-12">
-          <div className={style.alignTabs}>
-            <NavLink
-              to="/panoptic/audience"
-              className={style.tab}
-              activeClassName={style.activeLink}
-            >
-              Audience
-            </NavLink>
-          </div>
+const Panoptic = () => {
+  return (
+    <React.Fragment>
+      <div className="grid-container col-12">
+        <div className={style.alignTabs}>
+          <NavLink
+            to="/panoptic/audience"
+            className={style.tab}
+            activeClassName={style.activeLink}
+          >
+            Audience
+          </NavLink>
         </div>
-        {videoReleasesData && (
-          <VideoReleasesBarChart
-            data={videoReleasesData}
-            handleSelectFilters={this.handleSelectFilters}
-            selectLikes={selectLikes}
-            selectPlatforms={selectPlatforms}
-            selectDate={selectDate}
-          />
-        )}
-        {colorTempData && (
-          <ColorTemperature
-            colorTempData={colorTempData}
-            handleSelectFilters={this.handleSelectFilters}
-            selectWarmColor={selectWarmColor}
-            selectDate={selectDate}
-          />
-        )}
-        {verticalStackedChartData && (
-          <FilteringSection data={verticalStackedChartData} />
-        )}
-        {pacingChartData && (
-          <PacingCard
-            handleSelectFilters={this.handleSelectFilters}
-            barData={pacingChartData}
-            selectDate={selectDate}
-            selectLikes={selectLikes}
-          />
-        )}
-        {compareSharesData && (
-          <CompareShares
-            selectDate={selectDate}
-            radarData={compareSharesData}
-            handleSelectFilters={this.handleSelectFilters}
-          />
-        )}
-      </React.Fragment>
-    )
-  }
+      </div>
+      <VideoReleasesBarChart />
+      <ColorTemperature />
+      <FilteringSection />
+      <PacingCard />
+      <CompareShares />
+    </React.Fragment>
+  )
 }
 
-Panoptic.propTypes = {
-  dispatch: PropTypes.func.isRequired,
-}
-
-const mapStateToProps = createStructuredSelector({
-  panoptic: makeSelectPanoptic(),
-})
-
-function mapDispatchToProps(dispatch) {
-  return {
-    getData: () => dispatch(actions.getData()),
-  }
-}
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(
-  reduxForm({
-    form: 'panoptic',
-  }),
-  withConnect
-)(Panoptic)
+export default Panoptic

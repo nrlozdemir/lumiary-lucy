@@ -1,74 +1,89 @@
 import React from 'react'
-import classnames from 'classnames';
-import { compose } from 'redux'
+
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { makeSelectPanoptic } from 'Reducers/panoptic'
+import { compose, bindActionCreators } from 'redux'
+import { actions, makeSelectAudienceColorTemperature } from 'Reducers/panoptic'
 
-import style from 'Containers/Audience/style.scss';
-import sectionStyle from "./style.scss";
+import classnames from 'classnames'
+import style from 'Containers/Audience/style.scss'
+import sectionStyle from './style.scss'
 
 import { ColorTemperature as Chart } from 'Components/ColorTemperatureChart/ColorTemperature'
-import SelectFilters from 'Components/SelectFilters'
+import Module from 'Components/Module'
+
 class ColorTemperature extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {
-      selectDate: ''
-    }
+  callBack = (data, moduleKey) => {
+    this.props.getAudienceColorTemperatureData(data)
   }
-
-  handleSelectFilters = (name, value) => {
-    this.setState({
-      [name]: value,
-    })
-  }
-
   render() {
-    const { selectDate } = this.state;
-    const { panoptic: { audienceData: { colorTempData } } } = this.props;
-
+    const {
+      audienceColorTemperatureData: { data, loading, error },
+    } = this.props
     return (
-      <div className="grid-container mr-20 ml-20 mt-72 bg-dark-grey-blue shadow-1">
-        <div className={style.cardTitle + ' col-12'}>
-          <span>Color Temperature / Sentiment Comparison</span>
-          <div className={"d-flex align-items-center justify-space-between " + style.headerLabel}>
-            <div className="d-flex align-items-center mr-32">
-              <span className={style.redRound} />
-              <p>Male</p>
-            </div>
-            <div className="d-flex align-items-center mr-32">
-              <span className={style.duskRound} />
-              <p>Female</p>
-            </div>
-          </div>
-          <div className={style.selects}>
-            <SelectFilters selectDateShow selectDate={selectDate} handleSelectFilters={this.handleSelectFilters} />
-          </div>
-        </div>
-        <div className="col-12" style={{ display: 'flex', padding: "40px 0" }}>
-          {
-            colorTempData.map((temp, index) => (
-              <div className={classnames("col-4", sectionStyle.chartWrapper)} key={"temp-chart-" + index}>
-                <Chart temp={temp} />
-                <div className={sectionStyle.chartInfo}>{temp.text}</div>
+      <Module
+        moduleKey={'Audience/ColorTemperature'}
+        title="Color Temperature / Sentiment Comparison"
+        action={this.callBack}
+        legend={
+          <div className={style.headerLabel}>
+            <div
+              className={
+                'd-flex align-items-center justify-content-center ' +
+                style.headerLabel
+              }
+            >
+              <div className="d-flex align-items-center mr-32">
+                <span className={style.redRound} />
+                <p>Male</p>
               </div>
-            ))
-          }
+              <div className="d-flex align-items-center mr-32">
+                <span className={style.duskRound} />
+                <p>Female</p>
+              </div>
+            </div>
+          </div>
+        }
+        filters={[
+          {
+            type: 'timeRange',
+            selectKey: 'ACT-wds',
+            placeHolder: 'Date',
+          },
+        ]}
+      >
+        <div className={style.audienceContainer}>
+          <div
+            className="col-12"
+            style={{ display: 'flex', padding: '40px 0' }}
+          >
+            {data &&
+              data.length > 0 &&
+              data.map((temp, index) => (
+                <div
+                  className={classnames('col-4', sectionStyle.chartWrapper)}
+                  key={'temp-chart-' + index}
+                >
+                  <Chart temp={temp} />
+                  <div className={sectionStyle.chartInfo}>{temp.text}</div>
+                </div>
+              ))}
+          </div>
         </div>
-      </div>
-    );
+      </Module>
+    )
   }
 }
 
 const mapStateToProps = createStructuredSelector({
-  panoptic: makeSelectPanoptic(),
+  audienceColorTemperatureData: makeSelectAudienceColorTemperature(),
 })
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
   mapStateToProps,
-  null
+  mapDispatchToProps
 )
 
 export default compose(withConnect)(ColorTemperature)

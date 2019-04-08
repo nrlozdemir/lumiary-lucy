@@ -8,10 +8,11 @@
 .pacingCardInner {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
+  width: 100%;
   .pacingCardInnerItem {
-    flex: 1;
-    &:last-child() {
+    &:last-child {
+      flex: 1;
       display: flex;
       align-items: center;
     }

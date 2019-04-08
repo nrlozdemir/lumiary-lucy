@@ -1,3 +1,10 @@
+.filteringSectionContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .lables {
   padding: 24px 0;
 }
@@ -304,7 +311,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 60px 0 80px 0;
+  // padding: 60px 0 80px 0;
   width: 40%;
 
   .secondsText {
@@ -315,7 +322,7 @@
 }
 
 .stackedChart {
-	margin-top: -20px;
+  margin-top: -20px;
   canvas {
     margin: 0 auto;
   }
