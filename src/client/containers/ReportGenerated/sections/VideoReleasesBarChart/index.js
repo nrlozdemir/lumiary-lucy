@@ -72,7 +72,7 @@ const GeneratedReportBarChart = ({
               <Bar data={data} options={options} />
             </div>
             <div className={style.chartSectionBadge}>
-              <span>Stop Motion</span>
+              <span>Animation</span>
             </div>
           </div>
         </div>
