@@ -49,7 +49,7 @@ const HorizontalStackedBarChart = ({ barData }) => (
       }),
     }}
     width={500}
-    height={300}
+    height={340}
     options={barChartOptions}
     plugins={plugins}
   />
