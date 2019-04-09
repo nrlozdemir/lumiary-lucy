@@ -14,14 +14,217 @@ class LibraryDetailShotByShot extends React.Component {
     super(props)
     this.state = {
       selectedImage: null,
-      sliderVal: 0,
       maxValue: 1000,
+      sliderValue: 0,
+      videoDuration: 185,
+      sliderDisabled: false,
+      sliderHandleStyle: {
+        width: '92px',
+        height: '16px',
+        borderRadius: '10px',
+        marginLeft: '0px',
+        marginTop: '0px',
+      },
+      scenes: [
+        {
+          sceneURL: "https://picsum.photos/160/160?image=76",
+          duration: 160,
+          sceneSecond: 70
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=29",
+          duration: 60,
+          sceneSecond: 90
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=71",
+          duration: 240,
+          sceneSecond: 40
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=81",
+          duration: 150,
+          sceneSecond: 59
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=9",
+          duration: 230,
+          sceneSecond: 45
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=89",
+          duration: 200,
+          sceneSecond: 56
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=43",
+          duration: 140,
+          sceneSecond: 64
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=35",
+          duration: 160,
+          sceneSecond: 38
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=41",
+          duration: 90,
+          sceneSecond: 42
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=25",
+          duration: 70,
+          sceneSecond: 58
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=34",
+          duration: 60,
+          sceneSecond: 72
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=43",
+          duration: 72,
+          sceneSecond: 60
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=37",
+          duration: 190,
+          sceneSecond: 70
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=11",
+          duration: 130,
+          sceneSecond: 70
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=89",
+          duration: 160,
+          sceneSecond: 54
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=52",
+          duration: 90,
+          sceneSecond: 80
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=69",
+          duration: 70,
+          sceneSecond: 62
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=28",
+          duration: 150,
+          sceneSecond: 90
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=47",
+          duration: 130,
+          sceneSecond: 72
+        },
+        {
+          sceneURL: "https://picsum.photos/160/160?image=151",
+          duration: 180,
+          sceneSecond: 66
+        }
+      ]
     }
     this.slide = React.createRef()
   }
 
   onChangeSlider(e) {
     this.setState({ sliderVal: e }, this.slide.current.scrollTo(e * 5, 0))
+  }
+
+  handleClick(i, second){
+    this.setState({
+      selectedImage: i,
+      sliderValue: second
+    })
+  }
+
+  onChangeSlider(e) {
+    this.setState({ sliderValue: e }, this.slide.current.scrollTo(e * 5, 0))
+
+    e = parseInt(e);
+
+    if(e === 100){
+      this.setState({
+        sliderHandleStyle: {
+          ...this.state.sliderHandleStyle,
+          marginLeft: parseInt(this.state.sliderGrabberWidth * -1) + 'px',
+          width: this.state.sliderGrabberWidth
+        },
+        sliderDisabled: true,
+      }, () => {
+        this.setState({
+          sliderDisabled: false,
+          sliderValue: 100
+        });
+      });
+    }
+    else if(e === 0){
+      this.setState({
+        sliderHandleStyle: {
+          ...this.state.sliderHandleStyle,
+          marginLeft: '0px',
+          width: (this.state.sliderGrabberWidth - 3) + 'px'
+        }
+      });
+    }
+    else if(e !== 100 && e !== 0){
+      this.setState({
+        sliderHandleStyle: {
+          ...this.state.sliderHandleStyle,
+          marginLeft: parseInt((this.state.sliderGrabberWidth / 2) * -1) + 'px',
+          width: this.state.sliderGrabberWidth
+        }
+      });
+    }
+  }
+
+  componentDidMount(){
+    let totalWidth = 0
+    let totalDuration = 0
+    let durations = []
+    const minShotWidth = 24
+    const maxShotWidth = 148
+    //const viewportSize = 1120
+
+    const rcSliderWidth = parseInt(document.getElementsByClassName('rc-slider')[0].clientWidth);
+    const rcGrabberWidth = parseInt(rcSliderWidth / 10) - 1;
+    this.setState({
+      sliderWidth: rcSliderWidth,
+      sliderGrabberWidth: rcGrabberWidth,
+      sliderHandleStyle: {
+        ...this.state.sliderHandleStyle,
+        width: (rcGrabberWidth - 3) + 'px',
+        marginLeft: '0px'
+      }
+    })
+
+    this.state.scenes.map((element, index) => {
+      durations.push(element.duration);
+      return totalDuration += element.duration
+    })
+
+    const minShotDuration = Math.min(...durations)
+    const maxShotDuration = Math.max(...durations)
+    const shotDurationDifference = Math.ceil(maxShotDuration - minShotDuration)
+    const shotDurationWidthDifference = Math.ceil(maxShotWidth - minShotWidth)
+    const anySecondWidth = (shotDurationWidthDifference / shotDurationDifference)
+
+    let tempState = {}
+    let shotWidth = 0
+
+    this.state.scenes.map((element, index) => {
+      tempState = this.state
+      shotWidth = Math.floor(((tempState.scenes[index].duration - minShotDuration) * anySecondWidth) + minShotWidth)
+      tempState.scenes[index].width = shotWidth
+      totalWidth += shotWidth
+      tempState.sliderTotalWidth = totalWidth
+
+      this.setState(tempState)
+    })
   }
 
   render() {
@@ -138,57 +341,58 @@ class LibraryDetailShotByShot extends React.Component {
             <div className="col-12">
               <h2 className={style.sliderHeader}>Shot by Shot</h2>
               <div className={style.sliderContainer} ref={this.slide}>
-                {videoList.map((video, i) => (
+                {this.state.scenes.map((scene, i) => (
                   <div
                     className={style.image}
-                    onClick={() => this.setState({ selectedImage: i })}
+                    onClick={ () => { this.handleClick(i, scene.sceneSecond) } }
                     key={i}
                   >
-                    <img src={video} className={style.originalImage} />
-                    <img src={video} className={style.hover} />
+                    <div style={{width: scene.width + 'px'}} className={style.setCenter}>
+                      <img src={scene.sceneURL} className={style.originalImage} />
+                    </div>
+                    <img src={scene.sceneURL} className={style.hover} />
                   </div>
                 ))}
               </div>
             </div>
             <div className="col-12 mt-16 mb-16 library-detail-slider">
               <Slider
-                step={null}
-                defaultValue={8}
-                onAfterChange={(val) => this.onChangeSlider(val)}
-                handleStyle={{
-                  width: '293px',
-                  height: '16px',
-                  borderRadius: '10px',
-                  marginTop: '0px',
-                }}
+                step={10}
+                defaultValue={0}
+                value={this.state.sliderValue}
+                onChange={(val) => this.onChangeSlider(val)}
+                handleStyle={this.state.sliderHandleStyle}
                 trackStyle={{
                   height: '16px',
                   backgroundColor: 'transparent',
                 }}
-                min={-5}
-                max={114}
+                min={0}
+                max={100}
                 railStyle={{
                   height: '16px',
                   borderRadius: '10px',
                   backgroundColor: '#242b49',
                 }}
                 dotStyle={{
-                  width: '1px',
+                  width: '0px',
                   height: '16px',
                   border: 0,
                   top: '0px',
                 }}
+                disabled={this.state.sliderDisabled}
                 marks={{
-                  10: { label: <p className={style.dot}>0:00</p> },
-                  20: { label: <p className={style.dot}>0:10</p> },
-                  30: { label: <p className={style.dot}>0:20</p> },
-                  40: { label: <p className={style.dot}>0:30</p> },
-                  50: { label: <p className={style.dot}>0:40</p> },
-                  60: { label: <p className={style.dot}>0:50</p> },
-                  70: { label: <p className={style.dot}>0:60</p> },
-                  80: { label: <p className={style.dot}>0:70</p> },
-                  90: { label: <p className={style.dot}>0:80</p> },
-                  100: { label: <p className={style.dot}>0:90</p> },
+                  0: {style: {transform: "translateX(0%)"}, label: <p className="customDot">0:00:00</p>},
+                  10: {label: <p className="customDot">0:00:18</p>},
+                  20: {label: <p className="customDot">0:00:37</p>},
+                  30: {label: <p className="customDot">0:00:56</p>},
+                  40: {label: <p className="customDot">0:01:14</p>},
+                  50: {label: <p className="customDot">0:01:33</p>},
+                  60: {label: <p className="customDot">0:01:51</p>},
+                  70: {label: <p className="customDot">0:02:10</p>},
+                  80: {label: <p className="customDot">0:02:28</p>},
+                  90: {label: <p className="customDot">0:02:47</p>},
+                  100: {style: {transform: "translateX(-100%)"}, label: <p className="customDot">0:03:05</p>
+                  }
                 }}
               />
             </div>
