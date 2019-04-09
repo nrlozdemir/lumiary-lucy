@@ -13,7 +13,7 @@ export const barChartOptions = {
       {
         display: true,
         gridLines: {
-          display: true,
+          display: false,
           color: '#5a6386',
           zeroLineColor: '#5a6386',
           drawTicks: false,

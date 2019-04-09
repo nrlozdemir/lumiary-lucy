@@ -24,6 +24,19 @@ const plugins = [
         )
         ctx.restore()
       }
+      let configX = chart.config.options.scales.xAxes
+      //Save the rendering context state
+      ctx.save()
+      ctx.strokeStyle = configX[0].gridLines.color
+      ctx.lineWidth = configX[0].gridLines.lineWidth
+
+      ctx.beginPath()
+      ctx.moveTo(chart.chartArea.right, chart.chartArea.top)
+      ctx.lineTo(chart.chartArea.right, chart.chartArea.bottom)
+      ctx.stroke()
+
+      //Restore the rendering context state
+      ctx.restore()
     },
   },
 ]
