@@ -29,7 +29,7 @@ export class Module extends React.Component {
 
   render() {
     const moduleContainer = cx(
-      'shadow-1 col-12-gutter-20',
+      'shadow-1 grid-container col-12',
       style.moduleContainer
     )
     const { children, title, subTitle, legend, filters } = this.props

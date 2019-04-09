@@ -20,6 +20,8 @@ export const barChartOptions = {
         },
         ticks: {
           fontColor: 'white',
+          fontFamily: 'ClanOTNews',
+          fontSize: 12,
           padding: 15,
         },
         barThickness: 30,
@@ -38,9 +40,12 @@ export const barChartOptions = {
         ticks: {
           beginAtZero: true,
           fontColor: 'white',
+          fontFamily: 'ClanOTNews',
+          fontSize: 12,
           padding: 15,
           min: 0,
           max: 100, // Your absolute max value
+          stepSize: 25,
           callback: function(value) {
             return ((value / 100) * 100).toFixed(0) + '%' // convert it to percentage
           },

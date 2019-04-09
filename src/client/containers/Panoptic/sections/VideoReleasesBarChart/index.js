@@ -64,14 +64,14 @@ class PanopticBarChart extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'platform',
-            selectKey: 'PVR-asd',
-            placeHolder: 'Platform',
-          },
-          {
             type: 'engagement',
             selectKey: 'PVR-sad',
             placeHolder: 'Engagement',
+          },
+          {
+            type: 'platform',
+            selectKey: 'PVR-asd',
+            placeHolder: 'Platform',
           },
           {
             type: 'timeRange',
@@ -90,7 +90,6 @@ class PanopticBarChart extends React.Component {
                 plugins={plugins}
               />
             </div>
-
             <div className={style.groupChartsWrapper}>
               <div className="col-3">
                 <div className={style.chartSection}>
@@ -130,24 +129,12 @@ class PanopticBarChart extends React.Component {
               </div>
               <div className="col-3">
                 <div className={style.chartSection}>
-                  <Bar
-                    data={data}
-                    options={options}
-                    datasetKeyProvider={this.datasetKeyProvider}
-                  />
+                  <Bar data={data} options={options} />
                 </div>
                 <div className={style.chartSectionBadge}>
-                  <span>Stop Motion</span>
+                  <span>Animation</span>
                 </div>
               </div>
-            </div>
-          </div>
-          <div className="col-3">
-            <div className={style.chartSection}>
-              <Bar data={data} options={options} />
-            </div>
-            <div className={style.chartSectionBadge}>
-              <span>Animation</span>
             </div>
           </div>
         </div>
