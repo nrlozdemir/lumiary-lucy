@@ -168,7 +168,7 @@ function* getAudienceChangeOverTimeData() {
 function* getAudienceContentVitalityScoreData() {
   try {
     const payload = yield call(getAudienceDataApi)
-    let shuffleData = payload.lineChartData
+    let shuffleData = payload.lineStackedChartData
     shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
     shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
     yield put(actions.getAudienceContentVitalityScoreDataSuccess(shuffleData))
