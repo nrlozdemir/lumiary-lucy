@@ -68,7 +68,7 @@ class ContentVitalityScore extends React.Component {
         ]}
       >
         {data && data.datasets && (
-          <div data-vertical-title="Number Of Videos" className={chartStyle.audienceContainer}>
+          <div data-vertical-title="Number Of Videos" className={chartStyle.vitalityContainer}>
 						<LineChart
 							backgroundColor="#242b49"
 							dataSet={() => combineChartData(data)}
