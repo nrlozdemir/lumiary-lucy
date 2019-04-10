@@ -15,6 +15,7 @@ import { reduxForm } from 'redux-form'
 import { actions, makeSelectPanoptic } from 'Reducers/panoptic'
 import style from './style.scss'
 
+import PercentageBarGraph from 'Components/PercentageBarGraph'
 import VideoReleasesBarChart from './sections/VideoReleasesBarChart'
 import ColorTemperature from './sections/ColorTemperature'
 import FilteringSection from './sections/FilteringSection'
@@ -25,7 +26,8 @@ import CompareShares from './sections/CompareShares'
 export class Panoptic extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+    }
   }
 
   componentDidMount() {
@@ -57,6 +59,14 @@ export class Panoptic extends React.Component {
       },
     } = this.props
 
+    /* <div className="col-4">
+          <PercentageBarGraph
+            id={"percentageContainer-1"}
+            percentage={76.8}
+            color='#d0506c'
+          />
+        </div> */
+
     return (
       <React.Fragment>
         <div className="grid-container col-12">
@@ -65,6 +75,9 @@ export class Panoptic extends React.Component {
               to="/panoptic/audience"
               className={style.tab}
               activeClassName={style.activeLink}
+              onMouseEnter={this.hover}
+              onMouseLeave={this.blur}
+
             >
               Audience
             </NavLink>
