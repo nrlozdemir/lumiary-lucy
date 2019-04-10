@@ -32,6 +32,9 @@ export const lineChartOptions = {
 				beginAtZero: true,
 				padding: 20,
         callback: function(value, index, values) {
+					if(value == 100){
+						return value + '     '
+					}
           return value
         }
       }
@@ -54,7 +57,10 @@ export const lineChartOptions = {
 				padding: 20,
         marginRight: 16,
         callback: function(value, index, values) {
-					if(value == 0 || value == 250){
+					if(value == 0){
+						return value + '  '
+					}
+					if(value == 250){
 						return value
 					}
 					else{
