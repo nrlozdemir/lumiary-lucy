@@ -94,22 +94,4 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-{
-  /*<div className="grid-container mr-20 ml-20 mt-72 bg-dark-grey-blue shadow-1">
-  <div className={style.cardTitle + ' col-12'}>
-    <span>Change Over Time By Property</span>
-
-    <div className={style.selects}>
-      <SelectFilters selectViewsShow={true} selectViews={selectViews} />
-      <SelectFilters selectPlatformsShow={true} selectPlatforms={selectPlatforms} />
-      <SelectFilters selectDateShow={true} selectDate={selectDate} />
-    </div>
-  </div>
-  <div className="col-12">
-
-  </div>
-</div>
-*/
-}
-
 export default compose(withConnect)(ContentVitalityScore)
