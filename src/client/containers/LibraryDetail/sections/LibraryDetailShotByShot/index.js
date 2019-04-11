@@ -24,20 +24,20 @@ class LibraryDetailShotByShot extends React.Component {
         borderRadius: '10px',
         marginLeft: '0px',
         marginTop: '0px',
-			},
-			sliderMarks: {
-				0: "0:02:22",
-				10: "0:01:18",
-				20: "0:00:37",
-				30: "0:00:56",
-				40: "0:01:14",
-				50: "0:00:33",
-				60: "0:01:51",
-				70: "0:00:10",
-				80: "0:02:50",
-				90: "0:01:47",
-				100: "0:01:24"
-			},
+      },
+      sliderMarks: {
+        0: "0:02:22",
+        10: "0:01:18",
+        20: "0:00:37",
+        30: "0:00:56",
+        40: "0:01:14",
+        50: "0:00:33",
+        60: "0:01:51",
+        70: "0:00:10",
+        80: "0:02:50",
+        90: "0:01:47",
+        100: "0:01:24"
+      },
       scenes: [
         {
           sceneURL: "https://picsum.photos/160/160?image=76",
@@ -83,8 +83,8 @@ class LibraryDetailShotByShot extends React.Component {
           sceneURL: "https://picsum.photos/160/160?image=28",
           duration: 120,
           sceneSecond: 90
-				},
-				{
+        },
+        {
           sceneURL: "https://picsum.photos/160/160?image=76",
           duration: 80,
           sceneSecond: 70
@@ -138,8 +138,8 @@ class LibraryDetailShotByShot extends React.Component {
           sceneURL: "https://picsum.photos/160/160?image=151",
           duration: 180,
           sceneSecond: 66
-				},
-				{
+        },
+        {
           sceneURL: "https://picsum.photos/160/160?image=76",
           duration: 160,
           sceneSecond: 70
@@ -183,8 +183,8 @@ class LibraryDetailShotByShot extends React.Component {
           sceneURL: "https://picsum.photos/160/160?image=28",
           duration: 120,
           sceneSecond: 90
-				},
-				{
+        },
+        {
           sceneURL: "https://picsum.photos/160/160?image=76",
           duration: 80,
           sceneSecond: 70
@@ -252,69 +252,69 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   onChangeSlider(e) {
-		e = parseInt(e)
+    e = parseInt(e)
 
-		let scrollTo = ((e - (this.state.sliderHandleRightStep / 2)) * this.state.sliderStepWidth) * -1
+    let scrollTo = ((e - (this.state.sliderHandleRightStep / 2)) * this.state.sliderStepWidth) * -1
 
-		if(scrollTo > 0){
-			scrollTo = 0
-		}
-		if((scrollTo * -1) + this.state.sliderViewportSize >= this.state.sliderTotalWidth){
-			scrollTo = (this.state.sliderTotalWidth - this.state.sliderViewportSize) * -1
-		}
+    if(scrollTo > 0){
+      scrollTo = 0
+    }
+    if((scrollTo * -1) + this.state.sliderViewportSize >= this.state.sliderTotalWidth){
+      scrollTo = (this.state.sliderTotalWidth - this.state.sliderViewportSize) * -1
+    }
 
-		this.setState({
-			sliderValue: e,
-			sliderLeftPosition: scrollTo
-		})
+    this.setState({
+      sliderValue: e,
+      sliderLeftPosition: scrollTo
+    })
 
-		let sliderValue;
+    let sliderValue;
 
-		//calculate left margin if needed
-		let leftMargin = 0
+    //calculate left margin if needed
+    let leftMargin = 0
 
-		if(e === 100){
-			leftMargin = Math.round(this.state.sliderGrabberWidth)
+    if(e === 100){
+      leftMargin = Math.round(this.state.sliderGrabberWidth)
 
-			this.setState({
-				sliderValue: 100,
-				sliderHandleStyle: {
+      this.setState({
+        sliderValue: 100,
+        sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
-					marginLeft: `-${leftMargin}px`
+          marginLeft: `-${leftMargin}px`
         }
       })
-		}
-		else if(e + (this.state.sliderHandleRightStep / 2) > 100){
-			sliderValue = Math.round(100 - (this.state.sliderHandleRightStep / 2))
-			leftMargin = Math.round(((this.state.sliderViewportSize - (sliderValue * this.state.sliderViewportStepWidth)) * 2) - this.state.sliderGrabberWidth)
+    }
+    else if(e + (this.state.sliderHandleRightStep / 2) > 100){
+      sliderValue = Math.round(100 - (this.state.sliderHandleRightStep / 2))
+      leftMargin = Math.round(((this.state.sliderViewportSize - (sliderValue * this.state.sliderViewportStepWidth)) * 2) - this.state.sliderGrabberWidth)
 
-			if(leftMargin < 0){
-				leftMargin = (this.state.sliderGrabberWidth / 2)
-			}
-			else{
-				leftMargin = (this.state.sliderGrabberWidth / 2) + leftMargin
-			}
-			leftMargin = leftMargin.toFixed(0)
+      if(leftMargin < 0){
+        leftMargin = (this.state.sliderGrabberWidth / 2)
+      }
+      else{
+        leftMargin = (this.state.sliderGrabberWidth / 2) + leftMargin
+      }
+      leftMargin = leftMargin.toFixed(0)
 
-			this.setState({
-				sliderValue: sliderValue,
-				sliderHandleStyle: {
+      this.setState({
+        sliderValue: sliderValue,
+        sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
-					marginLeft: `-${leftMargin}px`
+          marginLeft: `-${leftMargin}px`
         }
       })
-		}
+    }
     else if(0 >= Math.round(this.state.sliderHandleRightStep) * 2){
-			this.setState({
+      this.setState({
         sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
           marginLeft: '0px'
         },
-				sliderValue: this.state.sliderHandleRightStep
+        sliderValue: this.state.sliderHandleRightStep
       });
-		}
+    }
     else if(e === 0){
-			this.setState({
+      this.setState({
         sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
           marginLeft: '2px'
@@ -326,7 +326,7 @@ class LibraryDetailShotByShot extends React.Component {
           sliderValue:0
         });
       });
-		}
+    }
     else if(e !== 100 && e !== 0){
       this.setState({
         sliderHandleStyle: {
@@ -367,58 +367,58 @@ class LibraryDetailShotByShot extends React.Component {
       tempState.sliderTotalWidth = totalWidth
 
       this.setState(tempState)
-		})
+    })
 
-		//rcSliderWidth = parseInt(document.getElementsByClassName('rc-slider')[0].clientWidth); //calculate viewport for resposive
-		const sliderViewportStepWidth = viewportSize / 100
-		const sliderStepWidth = totalWidth / 100
-		let rcGrabberWidth = (viewportSize / (totalWidth / viewportSize))
-		if(rcGrabberWidth > viewportSize){
-			rcGrabberWidth = viewportSize
-		}
-		const sliderHandleRightStep = 100 - ((viewportSize - rcGrabberWidth) / sliderViewportStepWidth).toFixed(2)
+    //rcSliderWidth = parseInt(document.getElementsByClassName('rc-slider')[0].clientWidth); //calculate viewport for resposive
+    const sliderViewportStepWidth = viewportSize / 100
+    const sliderStepWidth = totalWidth / 100
+    let rcGrabberWidth = (viewportSize / (totalWidth / viewportSize))
+    if(rcGrabberWidth > viewportSize){
+      rcGrabberWidth = viewportSize
+    }
+    const sliderHandleRightStep = 100 - ((viewportSize - rcGrabberWidth) / sliderViewportStepWidth).toFixed(2)
 
-		//rebuild custom-marks
-		let sliderMarks = this.state.sliderMarks
-		let sliderMarksToState = {}
-		Object.entries(sliderMarks).forEach(mark => {
+    //rebuild custom-marks
+    let sliderMarks = this.state.sliderMarks
+    let sliderMarksToState = {}
+    Object.entries(sliderMarks).forEach(mark => {
 
-			mark[0] = parseInt(mark[0]);
-			if(mark[0] === 0){
-				sliderMarksToState[mark[0]] = {
-					style: {transform: "translateX(0%)"},
-					label: <p className="customDot">{mark[1]}</p>
-				}
-			}
-			else if(mark[0] === 100){
-				sliderMarksToState[mark[0]] = {
-					style: {transform: "translateX(-100%)"},
-					label: <p className="customDot">{mark[1]}</p>
-				}
-			}
-			else{
-				sliderMarksToState[mark[0]] = {
-					label: <p className="customDot">{mark[1]}</p>
-				}
-			}
-		})
+      mark[0] = parseInt(mark[0]);
+      if(mark[0] === 0){
+        sliderMarksToState[mark[0]] = {
+          style: {transform: "translateX(0%)"},
+          label: <p className="customDot">{mark[1]}</p>
+        }
+      }
+      else if(mark[0] === 100){
+        sliderMarksToState[mark[0]] = {
+          style: {transform: "translateX(-100%)"},
+          label: <p className="customDot">{mark[1]}</p>
+        }
+      }
+      else{
+        sliderMarksToState[mark[0]] = {
+          label: <p className="customDot">{mark[1]}</p>
+        }
+      }
+    })
 
     this.setState({
-			sliderViewportSize: viewportSize,
-			sliderHandleRightStep: sliderHandleRightStep,
-			sliderTotalWidth: totalWidth,
-			sliderWidth: viewportSize,
-			sliderMarks: sliderMarksToState,
-			sliderLeftPosition: '0px',
-			sliderGrabberWidth: rcGrabberWidth,
-			sliderViewportStepWidth: sliderViewportStepWidth,
-			sliderStepWidth: sliderStepWidth,
+      sliderViewportSize: viewportSize,
+      sliderHandleRightStep: sliderHandleRightStep,
+      sliderTotalWidth: totalWidth,
+      sliderWidth: viewportSize,
+      sliderMarks: sliderMarksToState,
+      sliderLeftPosition: '0px',
+      sliderGrabberWidth: rcGrabberWidth,
+      sliderViewportStepWidth: sliderViewportStepWidth,
+      sliderStepWidth: sliderStepWidth,
       sliderHandleStyle: {
         ...this.state.sliderHandleStyle,
         width: (rcGrabberWidth - 3) + 'px',
         marginLeft: '0px'
       }
-		})
+    })
   }
 
   render() {
@@ -535,51 +535,51 @@ class LibraryDetailShotByShot extends React.Component {
             <div className="col-12">
               <h2 className={style.sliderHeader}>Shot by Shot</h2>
               <div className={style.sliderContainer} ref={this.slide}>
-								<div className={style.sliderWrapper} style={{left: this.state.sliderLeftPosition, width: this.state.sliderTotalWidth}}>
-									{this.state.scenes.map((scene, i) => (
-										<div
-											className={style.image}
-											onClick={ () => { this.handleClick(i, scene.sceneSecond) } }
-											key={i}
-										>
-											<div style={{width: `${scene.width}px`}} className={style.setCenter}>
-												<div className={style.originalImage} style={{width: `${scene.width}px`, backgroundImage: `url(${scene.sceneURL})`}}></div>
-											</div>
-											<img src={scene.sceneURL} className={style.hover} />
-										</div>
-									))}
-								</div>
+                <div className={style.sliderWrapper} style={{left: this.state.sliderLeftPosition, width: this.state.sliderTotalWidth}}>
+                  {this.state.scenes.map((scene, i) => (
+                    <div
+                      className={style.image}
+                      onClick={ () => { this.handleClick(i, scene.sceneSecond) } }
+                      key={i}
+                    >
+                      <div style={{width: `${scene.width}px`}} className={style.setCenter}>
+                        <div className={style.originalImage} style={{width: `${scene.width}px`, backgroundImage: `url(${scene.sceneURL})`}}></div>
+                      </div>
+                      <img src={scene.sceneURL} className={style.hover} />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
             <div className="col-12 mt-16 mb-16 library-detail-slider">
               <div className="library-shotbyshot">
-								<Slider
-									step={1}
-									defaultValue={0}
-									value={this.state.sliderValue}
-									onChange={(val) => this.onChangeSlider(val)}
-									handleStyle={this.state.sliderHandleStyle}
-									trackStyle={{
-										height: '16px',
-										backgroundColor: 'transparent',
-									}}
-									min={0}
-									max={100}
-									railStyle={{
-										height: '16px',
-										borderRadius: '10px',
-										backgroundColor: '#242b49',
-									}}
-									dotStyle={{
-										width: '0px',
-										height: '16px',
-										border: 0,
-										top: '0px',
-									}}
-									disabled={this.state.sliderDisabled}
-									marks={this.state.sliderMarks}
-								/>
-							</div>
+                <Slider
+                  step={1}
+                  defaultValue={0}
+                  value={this.state.sliderValue}
+                  onChange={(val) => this.onChangeSlider(val)}
+                  handleStyle={this.state.sliderHandleStyle}
+                  trackStyle={{
+                    height: '16px',
+                    backgroundColor: 'transparent',
+                  }}
+                  min={0}
+                  max={100}
+                  railStyle={{
+                    height: '16px',
+                    borderRadius: '10px',
+                    backgroundColor: '#242b49',
+                  }}
+                  dotStyle={{
+                    width: '0px',
+                    height: '16px',
+                    border: 0,
+                    top: '0px',
+                  }}
+                  disabled={this.state.sliderDisabled}
+                  marks={this.state.sliderMarks}
+                />
+              </div>
             </div>
           </div>
         )}
