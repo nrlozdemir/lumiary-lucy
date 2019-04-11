@@ -192,44 +192,44 @@ class LibraryDetailShotByShot extends React.Component {
     this.slide = React.createRef()
   }
 
-	secondToTime(timeInSeconds) {
+  secondToTime(timeInSeconds) {
     let pad = (num, size) => {return ('000' + num).slice(size * -1)},
 
-		time = parseFloat(timeInSeconds).toFixed(3),
+    time = parseFloat(timeInSeconds).toFixed(3),
     hours = Math.floor(time / 60 / 60),
     minutes = Math.floor(time / 60) % 60,
     seconds = Math.floor(time - minutes * 60),
     milliseconds = time.slice(-3)
 
     return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2) // + ',' + pad(milliseconds, 3)
-	}
+  }
 
-	timeToSeconds(timeString) {
-		let splittedTimeString = timeString.split(':')
-		let seconds = 0
-		let minutes = 1
+  timeToSeconds(timeString) {
+    let splittedTimeString = timeString.split(':')
+    let seconds = 0
+    let minutes = 1
 
     while (splittedTimeString.length > 0) {
-			seconds += minutes * parseInt(splittedTimeString.pop(), 10)
-			minutes *= 60
+      seconds += minutes * parseInt(splittedTimeString.pop(), 10)
+      minutes *= 60
     }
 
     return seconds
-	}
+  }
 
   handleClick(i){
-		/*
-		let totalWidthToShot = 0
+    /*
+    let totalWidthToShot = 0
 
-		for(let index in this.state.scenes){
-			if(index > i){
-				break
-			}
-			totalWidthToShot += this.timeToSeconds(this.state.scenes[index].duration) * this.state.sliderShotSecondWidth
-		}
+    for(let index in this.state.scenes){
+      if(index > i){
+        break
+      }
+      totalWidthToShot += this.timeToSeconds(this.state.scenes[index].duration) * this.state.sliderShotSecondWidth
+    }
 
-		const findDifference = totalWidthToShot - this.state.sliderGrabberWidth
-		*/
+    const findDifference = totalWidthToShot - this.state.sliderGrabberWidth
+    */
 
     this.setState({
       selectedImage: i
@@ -237,7 +237,7 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   onChangeSlider(e) {
-		let sliderValue
+    let sliderValue
     let leftMargin = 0 //calculate left margin if needed
 
     e = parseInt(e)
@@ -318,25 +318,25 @@ class LibraryDetailShotByShot extends React.Component {
         }
       })
     }
-	}
+  }
 
   componentDidMount(){
     const minShotWidth = 24
     const maxShotWidth = 148
-		const viewportSize = 1120
-		const tickCount = 11
+    const viewportSize = 1120
+    const tickCount = 11
     let totalWidth = 5 // with first item left margin
-		let sliderMarks = []
+    let sliderMarks = []
 
-		const durations = this.state.scenes.map(element => this.timeToSeconds(element.duration))
-		const totalDuration = this.state.scenes.reduce((prev, next) => prev + this.timeToSeconds(next.duration), 0)
-		const dividedDuration = Math.round(totalDuration / (tickCount - 1))
+    const durations = this.state.scenes.map(element => this.timeToSeconds(element.duration))
+    const totalDuration = this.state.scenes.reduce((prev, next) => prev + this.timeToSeconds(next.duration), 0)
+    const dividedDuration = Math.round(totalDuration / (tickCount - 1))
 
-		sliderMarks.push(this.secondToTime(0))
-		for(let i = 1; i < tickCount - 1; i++){
-			sliderMarks.push(this.secondToTime(dividedDuration * i))
-		}
-		sliderMarks.push(this.secondToTime(totalDuration))
+    sliderMarks.push(this.secondToTime(0))
+    for(let i = 1; i < tickCount - 1; i++){
+      sliderMarks.push(this.secondToTime(dividedDuration * i))
+    }
+    sliderMarks.push(this.secondToTime(totalDuration))
 
     const minShotDuration = Math.min(...durations)
     const maxShotDuration = Math.max(...durations)
@@ -368,8 +368,8 @@ class LibraryDetailShotByShot extends React.Component {
 
     //rebuild custom-marks
     let sliderMarksToState = {}
-		sliderMarks.map((element, index) => {
-			index = parseInt(index * 10)
+    sliderMarks.map((element, index) => {
+      index = parseInt(index * 10)
       if(index === 0){
         sliderMarksToState[index] = {
           style: {transform: "translateX(0%)"},
@@ -387,11 +387,11 @@ class LibraryDetailShotByShot extends React.Component {
           label: <p className="customDot">{element}</p>
         }
       }
-		})
+    })
 
     this.setState({
-			sliderViewportSize: viewportSize,
-			sliderShotSecondWidth: anySecondWidth,
+      sliderViewportSize: viewportSize,
+      sliderShotSecondWidth: anySecondWidth,
       sliderHandleRightStep: sliderHandleRightStep,
       sliderTotalWidth: totalWidth,
       sliderWidth: viewportSize,
