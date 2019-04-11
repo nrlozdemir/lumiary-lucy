@@ -268,27 +268,27 @@
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
-		user-select: none;
-		margin-top: 8px;
-		cursor: pointer;
+    user-select: none;
+    margin-top: 8px;
+    cursor: pointer;
 
     .originalImage {
       background-repeat: no-repeat;
       background-position: center center;
       height: 160px;
-			border-top: 5px solid $color-dark-five;
-			border-bottom: 5px solid $color-dark-five;
+      border-top: 5px solid $color-dark-five;
+      border-bottom: 5px solid $color-dark-five;
     }
     .setCenter{
       display: block;
-			border-right: 5px solid $color-dark-five;
-			&:first-child{
-				border-left: 5px solid $color-dark-five;
-				border-right: none;
-			}
-			&:last-child{
-				border-right: 5px solid $color-dark-five;
-			}
+      border-right: 5px solid $color-dark-five;
+      &:first-child{
+        border-left: 5px solid $color-dark-five;
+        border-right: none;
+      }
+      &:last-child{
+        border-right: 5px solid $color-dark-five;
+      }
     }
     .hover {
       display: none;
