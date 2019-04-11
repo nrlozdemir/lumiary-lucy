@@ -25,233 +25,221 @@ class LibraryDetailShotByShot extends React.Component {
         marginLeft: '0px',
         marginTop: '0px',
       },
-      sliderMarks: {
-        0: "0:02:22",
-        10: "0:01:18",
-        20: "0:00:37",
-        30: "0:00:56",
-        40: "0:01:14",
-        50: "0:00:33",
-        60: "0:01:51",
-        70: "0:00:10",
-        80: "0:02:50",
-        90: "0:01:47",
-        100: "0:01:24"
-      },
       scenes: [
         {
-          sceneURL: "https://picsum.photos/160/160?image=76",
-          duration: 160,
-          sceneSecond: 70
+          sceneURL: "https://picsum.photos/238/160?image=76",
+          duration: "00:02:40",
+          sceneSecond: "00:01:10",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=29",
-          duration: 60,
-          sceneSecond: 90
+          sceneURL: "https://picsum.photos/238/160?image=29",
+          duration: "00:01:00",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=71",
-          duration: 240,
-          sceneSecond: 40
+          sceneURL: "https://picsum.photos/238/160?image=71",
+          duration: "00:04:00",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=37",
-          duration: 190,
-          sceneSecond: 70
+          sceneURL: "https://picsum.photos/238/160?image=37",
+          duration: "00:03:10",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=11",
-          duration: 130,
-          sceneSecond: 70
+          sceneURL: "https://picsum.photos/238/160?image=11",
+          duration: "00:02:10",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=89",
-          duration: 160,
-          sceneSecond: 54
+          sceneURL: "https://picsum.photos/238/160?image=89",
+          duration: "00:02:40",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=52",
-          duration: 90,
-          sceneSecond: 80
+          sceneURL: "https://picsum.photos/238/160?image=52",
+          duration: "00:01:30",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=69",
-          duration: 70,
-          sceneSecond: 62
+          sceneURL: "https://picsum.photos/238/160?image=69",
+          duration: "00:01:10",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=28",
-          duration: 120,
-          sceneSecond: 90
+          sceneURL: "https://picsum.photos/238/160?image=28",
+          duration: "00:02:00",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=76",
-          duration: 80,
-          sceneSecond: 70
+          sceneURL: "https://picsum.photos/238/160?image=76",
+          duration: "00:01:20",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=29",
-          duration: 60,
-          sceneSecond: 90
+          sceneURL: "https://picsum.photos/238/160?image=29",
+          duration: "00:01:00",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=71",
-          duration: 200,
-          sceneSecond: 40
+          sceneURL: "https://picsum.photos/238/160?image=71",
+          duration: "00:03:20",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=81",
-          duration: 150,
-          sceneSecond: 59
+          sceneURL: "https://picsum.photos/238/160?image=81",
+          duration: "00:02:30",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=9",
-          duration: 200,
-          sceneSecond: 45
+          sceneURL: "https://picsum.photos/238/160?image=9",
+          duration: "00:03:20",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=89",
-          duration: 200,
-          sceneSecond: 56
+          sceneURL: "https://picsum.photos/238/160?image=89",
+          duration: "00:03:20",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=43",
-          duration: 140,
-          sceneSecond: 64
+          sceneURL: "https://picsum.photos/238/160?image=43",
+          duration: "00:02:20",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=35",
-          duration: 160,
-          sceneSecond: 38
+          sceneURL: "https://picsum.photos/238/160?image=35",
+          duration: "00:02:40",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=41",
-          duration: 90,
-          sceneSecond: 42
+          sceneURL: "https://picsum.photos/238/160?image=41",
+          duration: "00:01:30",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=47",
-          duration: 130,
-          sceneSecond: 72
+          sceneURL: "https://picsum.photos/238/160?image=47",
+          duration: "00:02:10",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=151",
-          duration: 180,
-          sceneSecond: 66
+          sceneURL: "https://picsum.photos/238/160?image=151",
+          duration: "00:03:00",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=76",
-          duration: 160,
-          sceneSecond: 70
+          sceneURL: "https://picsum.photos/238/160?image=76",
+          duration: "00:02:40",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=29",
-          duration: 60,
-          sceneSecond: 90
+          sceneURL: "https://picsum.photos/238/160?image=29",
+          duration: "00:01:00",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=71",
-          duration: 240,
-          sceneSecond: 40
+          sceneURL: "https://picsum.photos/238/160?image=71",
+          duration: "00:04:00",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=37",
-          duration: 190,
-          sceneSecond: 70
+          sceneURL: "https://picsum.photos/238/160?image=37",
+          duration: "00:03:10",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=11",
-          duration: 130,
-          sceneSecond: 70
+          sceneURL: "https://picsum.photos/238/160?image=11",
+          duration: "00:02:10",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=89",
-          duration: 160,
-          sceneSecond: 54
+          sceneURL: "https://picsum.photos/238/160?image=89",
+          duration: "00:02:40",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=52",
-          duration: 90,
-          sceneSecond: 80
+          sceneURL: "https://picsum.photos/238/160?image=52",
+          duration: "00:01:30",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=69",
-          duration: 70,
-          sceneSecond: 62
+          sceneURL: "https://picsum.photos/238/160?image=69",
+          duration: "00:01:10",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=28",
-          duration: 120,
-          sceneSecond: 90
+          sceneURL: "https://picsum.photos/238/160?image=28",
+          duration: "00:02:00",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=76",
-          duration: 80,
-          sceneSecond: 70
+          sceneURL: "https://picsum.photos/238/160?image=76",
+          duration: "00:01:20",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=29",
-          duration: 60,
-          sceneSecond: 90
+          sceneURL: "https://picsum.photos/238/160?image=29",
+          duration: "00:01:00",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=71",
-          duration: 200,
-          sceneSecond: 40
+          sceneURL: "https://picsum.photos/238/160?image=71",
+          duration: "00:03:20",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=81",
-          duration: 150,
-          sceneSecond: 59
+          sceneURL: "https://picsum.photos/238/160?image=81",
+          duration: "00:02:30",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=9",
-          duration: 200,
-          sceneSecond: 45
+          sceneURL: "https://picsum.photos/238/160?image=9",
+          duration: "00:03:20",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=89",
-          duration: 200,
-          sceneSecond: 56
+          sceneURL: "https://picsum.photos/238/160?image=89",
+          duration: "00:03:20",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=43",
-          duration: 140,
-          sceneSecond: 64
+          sceneURL: "https://picsum.photos/238/160?image=43",
+          duration: "00:02:20",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=35",
-          duration: 160,
-          sceneSecond: 38
+          sceneURL: "https://picsum.photos/238/160?image=35",
+          duration: "00:02:40",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=41",
-          duration: 90,
-          sceneSecond: 42
+          sceneURL: "https://picsum.photos/238/160?image=41",
+          duration: "00:01:30",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=47",
-          duration: 130,
-          sceneSecond: 72
+          sceneURL: "https://picsum.photos/238/160?image=47",
+          duration: "00:02:10",
         },
         {
-          sceneURL: "https://picsum.photos/160/160?image=151",
-          duration: 180,
-          sceneSecond: 66
+          sceneURL: "https://picsum.photos/238/160?image=151",
+          duration: "00:03:00",
         }
       ]
     }
     this.slide = React.createRef()
   }
 
-  handleClick(i, second){
+	secondToTime(timeInSeconds) {
+    let pad = (num, size) => {return ('000' + num).slice(size * -1)},
+
+		time = parseFloat(timeInSeconds).toFixed(3),
+    hours = Math.floor(time / 60 / 60),
+    minutes = Math.floor(time / 60) % 60,
+    seconds = Math.floor(time - minutes * 60),
+    milliseconds = time.slice(-3)
+
+    return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2) // + ',' + pad(milliseconds, 3)
+	}
+
+	timeToSeconds(timeString) {
+		let splittedTimeString = timeString.split(':')
+		let seconds = 0
+		let minutes = 1
+
+    while (splittedTimeString.length > 0) {
+			seconds += minutes * parseInt(splittedTimeString.pop(), 10)
+			minutes *= 60
+    }
+
+    return seconds
+	}
+
+  handleClick(i){
+		/*
+		let totalWidthToShot = 0
+
+		for(let index in this.state.scenes){
+			if(index > i){
+				break
+			}
+			totalWidthToShot += this.timeToSeconds(this.state.scenes[index].duration) * this.state.sliderShotSecondWidth
+		}
+
+		const findDifference = totalWidthToShot - this.state.sliderGrabberWidth
+		*/
+
     this.setState({
-      selectedImage: i,
-      sliderValue: second
+      selectedImage: i
     })
   }
 
   onChangeSlider(e) {
+		let sliderValue
+    let leftMargin = 0 //calculate left margin if needed
+
     e = parseInt(e)
 
     let scrollTo = ((e - (this.state.sliderHandleRightStep / 2)) * this.state.sliderStepWidth) * -1
@@ -267,11 +255,6 @@ class LibraryDetailShotByShot extends React.Component {
       sliderValue: e,
       sliderLeftPosition: scrollTo
     })
-
-    let sliderValue;
-
-    //calculate left margin if needed
-		let leftMargin = 0
 
     if(e === 100){
       leftMargin = Math.round(this.state.sliderGrabberWidth)
@@ -305,14 +288,13 @@ class LibraryDetailShotByShot extends React.Component {
       })
     }
     else if(e - (Math.round(this.state.sliderHandleRightStep) / 2) < 1){
-			console.log("in");
       this.setState({
         sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
           marginLeft: '0px'
         },
         sliderValue: 0
-      });
+      })
     }
     else if(e === 0){
       this.setState({
@@ -325,8 +307,8 @@ class LibraryDetailShotByShot extends React.Component {
         this.setState({
           sliderDisabled: false,
           sliderValue:0
-        });
-      });
+        })
+      })
     }
     else if(e !== 100 && e !== 0){
       this.setState({
@@ -334,22 +316,27 @@ class LibraryDetailShotByShot extends React.Component {
           ...this.state.sliderHandleStyle,
           marginLeft: parseInt((this.state.sliderGrabberWidth / 2) * -1) + 'px'
         }
-      });
+      })
     }
-  }
+	}
 
   componentDidMount(){
     const minShotWidth = 24
     const maxShotWidth = 148
-    const viewportSize = 1120
+		const viewportSize = 1120
+		const tickCount = 11
     let totalWidth = 5 // with first item left margin
-    let totalDuration = 0
-    let durations = []
+		let sliderMarks = []
 
-    this.state.scenes.map((element, index) => {
-      durations.push(element.duration);
-      return totalDuration += element.duration
-    })
+		const durations = this.state.scenes.map(element => this.timeToSeconds(element.duration))
+		const totalDuration = this.state.scenes.reduce((prev, next) => prev + this.timeToSeconds(next.duration), 0)
+		const dividedDuration = Math.round(totalDuration / (tickCount - 1))
+
+		sliderMarks.push(this.secondToTime(0))
+		for(let i = 1; i < tickCount - 1; i++){
+			sliderMarks.push(this.secondToTime(dividedDuration * i))
+		}
+		sliderMarks.push(this.secondToTime(totalDuration))
 
     const minShotDuration = Math.min(...durations)
     const maxShotDuration = Math.max(...durations)
@@ -362,7 +349,7 @@ class LibraryDetailShotByShot extends React.Component {
 
     this.state.scenes.map((element, index) => {
       tempState = this.state
-      shotWidth = Math.floor(((tempState.scenes[index].duration - minShotDuration) * anySecondWidth) + minShotWidth)
+      shotWidth = Math.floor(((this.timeToSeconds(tempState.scenes[index].duration) - minShotDuration) * anySecondWidth) + minShotWidth)
       tempState.scenes[index].width = shotWidth
       totalWidth += shotWidth + 5 // add all right margins
       tempState.sliderTotalWidth = totalWidth
@@ -370,7 +357,7 @@ class LibraryDetailShotByShot extends React.Component {
       this.setState(tempState)
     })
 
-    //rcSliderWidth = parseInt(document.getElementsByClassName('rc-slider')[0].clientWidth); //calculate viewport for resposive
+    //rcSliderWidth = parseInt(document.getElementsByClassName('rc-slider')[0].clientWidth) //calculate viewport for resposive
     const sliderViewportStepWidth = viewportSize / 100
     const sliderStepWidth = totalWidth / 100
     let rcGrabberWidth = (viewportSize / (totalWidth / viewportSize))
@@ -380,32 +367,31 @@ class LibraryDetailShotByShot extends React.Component {
     const sliderHandleRightStep = 100 - ((viewportSize - rcGrabberWidth) / sliderViewportStepWidth).toFixed(2)
 
     //rebuild custom-marks
-    let sliderMarks = this.state.sliderMarks
     let sliderMarksToState = {}
-    Object.entries(sliderMarks).forEach(mark => {
-
-      mark[0] = parseInt(mark[0]);
-      if(mark[0] === 0){
-        sliderMarksToState[mark[0]] = {
+		sliderMarks.map((element, index) => {
+			index = parseInt(index * 10)
+      if(index === 0){
+        sliderMarksToState[index] = {
           style: {transform: "translateX(0%)"},
-          label: <p className="customDot">{mark[1]}</p>
+          label: <p className="customDot">{element}</p>
         }
       }
-      else if(mark[0] === 100){
-        sliderMarksToState[mark[0]] = {
+      else if(index === 100){
+        sliderMarksToState[index] = {
           style: {transform: "translateX(-100%)"},
-          label: <p className="customDot">{mark[1]}</p>
+          label: <p className="customDot">{element}</p>
         }
       }
       else{
-        sliderMarksToState[mark[0]] = {
-          label: <p className="customDot">{mark[1]}</p>
+        sliderMarksToState[index] = {
+          label: <p className="customDot">{element}</p>
         }
       }
-    })
+		})
 
     this.setState({
-      sliderViewportSize: viewportSize,
+			sliderViewportSize: viewportSize,
+			sliderShotSecondWidth: anySecondWidth,
       sliderHandleRightStep: sliderHandleRightStep,
       sliderTotalWidth: totalWidth,
       sliderWidth: viewportSize,
@@ -540,13 +526,13 @@ class LibraryDetailShotByShot extends React.Component {
                   {this.state.scenes.map((scene, i) => (
                     <div
                       className={style.image}
-                      onClick={ () => { this.handleClick(i, scene.sceneSecond) } }
                       key={i}
                     >
                       <div style={{width: `${scene.width}px`}} className={style.setCenter}>
                         <div className={style.originalImage} style={{width: `${scene.width}px`, backgroundImage: `url(${scene.sceneURL})`}}></div>
                       </div>
-                      <img src={scene.sceneURL} className={style.hover} />
+                      <img src={scene.sceneURL} className={style.hover}
+                      onClick={ () => { this.handleClick(i) } } />
                     </div>
                   ))}
                 </div>
