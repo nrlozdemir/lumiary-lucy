@@ -271,7 +271,7 @@ class LibraryDetailShotByShot extends React.Component {
     let sliderValue;
 
     //calculate left margin if needed
-    let leftMargin = 0
+		let leftMargin = 0
 
     if(e === 100){
       leftMargin = Math.round(this.state.sliderGrabberWidth)
@@ -304,13 +304,14 @@ class LibraryDetailShotByShot extends React.Component {
         }
       })
     }
-    else if(0 >= Math.round(this.state.sliderHandleRightStep) * 2){
+    else if(e - (Math.round(this.state.sliderHandleRightStep) / 2) < 1){
+			console.log("in");
       this.setState({
         sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
           marginLeft: '0px'
         },
-        sliderValue: this.state.sliderHandleRightStep
+        sliderValue: 0
       });
     }
     else if(e === 0){
