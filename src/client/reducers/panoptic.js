@@ -69,6 +69,13 @@ export const types = {
   GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR:
     'Panoptic/GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR',
 
+  GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA:
+    'Panoptic/GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA',
+  GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS:
+    'Panoptic/GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS',
+  GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR:
+    'Panoptic/GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR',
+
   GET_AUDIENCE_DOMINANT_COLOR_DATA: 'Panoptic/GET_AUDIENCE_DOMINANT_COLOR_DATA',
   GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS:
     'Panoptic/GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS',
@@ -226,6 +233,18 @@ export const actions = {
     error,
   }),
 
+  getAudienceContentVitalityScoreData: () => ({
+    type: types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA,
+  }),
+  getAudienceContentVitalityScoreDataSuccess: (payload) => ({
+    type: types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS,
+    payload,
+  }),
+  getAudienceContentVitalityScoreDataError: (error) => ({
+    type: types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR,
+    error,
+  }),
+
   getAudienceDominantColorData: () => ({
     type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA,
   }),
@@ -310,6 +329,11 @@ export const initialState = fromJS({
     error: null,
   },
   audienceChangeOverTimeData: {
+    data: [],
+    loading: false,
+    error: null,
+  },
+  audienceContentVitalityScoreData: {
     data: [],
     loading: false,
     error: null,
@@ -507,7 +531,23 @@ const panopticReducer = (state = initialState, action) => {
     case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR:
       return state
         .setIn(['audienceChangeOverTimeData', 'error'], fromJS(action.error))
-        .setIn(['audienceChangeOverTimeData', 'loading'], fromJS(false))
+				.setIn(['audienceChangeOverTimeData', 'loading'], fromJS(false))
+
+		case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA:
+      return state.setIn(
+        ['audienceContentVitalityScoreData', 'loading'],
+        fromJS(true)
+      )
+
+    case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS:
+      return state
+        .setIn(['audienceContentVitalityScoreData', 'data'], fromJS(action.payload))
+        .setIn(['audienceContentVitalityScoreData', 'loading'], fromJS(false))
+
+    case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR:
+      return state
+        .setIn(['audienceContentVitalityScoreData', 'error'], fromJS(action.error))
+        .setIn(['audienceContentVitalityScoreData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_DOMINANT_COLOR_DATA:
       return state.setIn(['audienceDominantColorData', 'loading'], fromJS(true))
@@ -622,6 +662,15 @@ const selectAudienceChangeOverTimeDomain = (state) =>
 export const makeSelectAudienceChangeOverTime = () =>
   createSelector(
     selectAudienceChangeOverTimeDomain,
+    (substate) => substate.toJS()
+  )
+
+const selectAudienceContentVitalityScoreDomain = (state) =>
+  state.Panoptic.get('audienceContentVitalityScoreData')
+
+export const makeSelectAudienceContentVitalityScore = () =>
+  createSelector(
+    selectAudienceContentVitalityScoreDomain,
     (substate) => substate.toJS()
   )
 

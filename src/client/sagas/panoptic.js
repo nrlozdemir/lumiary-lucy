@@ -165,6 +165,18 @@ function* getAudienceChangeOverTimeData() {
   }
 }
 
+function* getAudienceContentVitalityScoreData() {
+  try {
+    const payload = yield call(getAudienceDataApi)
+    let shuffleData = payload.lineStackedChartData
+    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
+    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
+    yield put(actions.getAudienceContentVitalityScoreDataSuccess(shuffleData))
+  } catch (err) {
+    yield put(actions.getAudienceContentVitalityScoreDataError(err))
+  }
+}
+
 function* getAudienceDominantColorData() {
   try {
     const payload = yield call(getAudienceDataApi)
@@ -226,6 +238,10 @@ export default [
   takeLatest(
     types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA,
     getAudienceChangeOverTimeData
+  ),
+  takeLatest(
+    types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA,
+    getAudienceContentVitalityScoreData
   ),
   takeLatest(
     types.GET_AUDIENCE_DOMINANT_COLOR_DATA,
