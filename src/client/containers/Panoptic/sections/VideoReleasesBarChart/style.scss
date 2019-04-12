@@ -1,5 +1,6 @@
 .panopticBarChart {
   background-color: $color-dark-grey-blue;
+  position: relative;
 
   .chartSection {
     height: 310px;
@@ -77,15 +78,6 @@
 
 .barChartContainer {
   position: relative;
-}
-
-.barChartBackground {
-  background-color: $color-dark-five;
-  height: 274px;
-  position: absolute;
-  right: 0;
-  top: 7px;
-  width: calc(100% - 49px);
 }
 
 .wrapperBarChart {

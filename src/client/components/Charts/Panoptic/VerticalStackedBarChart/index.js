@@ -1,9 +1,8 @@
 import React from 'react'
-import { Bar } from "react-chartjs-2";
+import { Bar } from 'react-chartjs-2'
 import { randomKey } from 'Utils/index'
 
-
-import { stackedChartOptions } from "./options";
+import { stackedChartOptions } from './options'
 
 const plugins = [
   {
@@ -25,32 +24,44 @@ const plugins = [
         )
         ctx.restore()
       }
+      let configX = chart.config.options.scales.xAxes
+      //Save the rendering context state
+      ctx.save()
+      ctx.strokeStyle = configX[0].gridLines.color
+      ctx.lineWidth = configX[0].gridLines.lineWidth
+
+      ctx.beginPath()
+      ctx.moveTo(chart.chartArea.right, chart.chartArea.top)
+      ctx.lineTo(chart.chartArea.right, chart.chartArea.bottom)
+      ctx.stroke()
+
+      //Restore the rendering context state
+      ctx.restore()
     },
   },
 ]
 
-class VerticalStackedBarChart extends React.PureComponent{
+class VerticalStackedBarChart extends React.Component {
+  datasetKeyProvider() {
+    return randomKey(5)
+  }
 
-	datasetKeyProvider() {
-		return randomKey(5)
-	}
-
-	render (){
-		const { data } = this.props;
-		return (
-			<Bar
-				width={550}
-				height={300}
-				backgroundColor="#242b49"
-				data={data}
-				datasetKeyProvider={this.datasetKeyProvider}
-				options={{
-					...stackedChartOptions,
-				}}
-				plugins={plugins}
-			/>
-		)
-	}
+  render() {
+    const { data } = this.props
+    return (
+      <Bar
+        width={590}
+        height={360}
+        backgroundColor="#242b49"
+        data={data}
+        datasetKeyProvider={this.datasetKeyProvider}
+        options={{
+          ...stackedChartOptions,
+        }}
+        plugins={plugins}
+      />
+    )
+  }
 }
 
 export default VerticalStackedBarChart
