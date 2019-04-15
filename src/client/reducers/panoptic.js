@@ -362,10 +362,10 @@ export const initialState = fromJS({
     loading: false,
     error: null,
 	},
-	flipCardsData: {
-		data: {},
-		loading: false,
-		error: null,
+  flipCardsData: {
+    data: {},
+    loading: false,
+    error: null,
 	},
   audienceData: null,
   loading: false,
