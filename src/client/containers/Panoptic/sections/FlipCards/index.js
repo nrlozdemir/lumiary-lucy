@@ -28,10 +28,10 @@ class PanopticFlipCards extends React.Component {
       data: { views, likes, comments, shares },
       loading,
       error,
-		} = this.props.flipCardsData
+    } = this.props.flipCardsData
 
     return (
-      <div className="col-12-gutter-20">
+      <div className="grid-container col-12">
         <div className={styles.flipWrapper}>
           {views && (
             <FlipCard
