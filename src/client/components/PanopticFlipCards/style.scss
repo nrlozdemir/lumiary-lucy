@@ -1,8 +1,8 @@
-$arrowWidth : 10px;
-$arrowHeight : 14px;
-$arrowBackground : #fff;
+$arrowWidth: 10px;
+$arrowHeight: 14px;
+$arrowBackground: #fff;
 
-@mixin arrowBody($width, $height, $top ,$left){
+@mixin arrowBody($width, $height, $top, $left) {
   border: none;
   background-color: $arrowBackground;
   height: $height;
@@ -11,19 +11,20 @@ $arrowBackground : #fff;
   left: $left;
 }
 
-@mixin arrowStyle($width, $height, $top, $left, $way){
+@mixin arrowStyle($width, $height, $top, $left, $way) {
   left: $left;
   top: $top;
   border-width: $height $width;
   border-#{$way}-color: $arrowBackground;
 }
 
-.flipContainer{
+.flipContainer {
   perspective: 0;
   transform: perspective(1000px);
   transform-style: preserve-3d;
 
-  .front, .back{
+  .front,
+  .back {
     background: $color-dark-grey-blue;
     width: 100%;
     height: calc(100%);
@@ -32,20 +33,24 @@ $arrowBackground : #fff;
   }
 }
 
-.flipContainer:hover .back, .flipContainer.hover .back{
+.flipContainer:hover .back,
+.flipContainer.hover .back {
   transform: rotateY(0deg);
 }
 
-.flipContainer:hover .front, .flipContainer.hover .front{
+.flipContainer:hover .front,
+.flipContainer.hover .front {
   transform: rotateY(180deg);
 }
 
-.flipContainer, .front, .back{
+.flipContainer,
+.front,
+.back {
   width: calc(25% - 40px);
   height: 134px;
 }
 
-.flipper{
+.flipper {
   transition: 0.6s;
   transform: perspective(1000px);
   transform-style: preserve-3d;
@@ -54,7 +59,8 @@ $arrowBackground : #fff;
   height: 100%;
 }
 
-.front, .back{
+.front,
+.back {
   backface-visibility: hidden;
   transition: 0.6s;
   transform-style: preserve-3d;
@@ -64,12 +70,12 @@ $arrowBackground : #fff;
   left: 0;
 }
 
-.front{
+.front {
   transform: rotateY(0deg);
   z-index: 2;
 }
 
-.back{
+.back {
   transform: rotateY(-180deg);
   width: 240px;
   height: 52px;
@@ -78,7 +84,8 @@ $arrowBackground : #fff;
   justify-content: center;
 }
 
-.back .text, .front .text{
+.back .text,
+.front .text {
   font-family: $font-family-ClanOTNews;
   font-size: 14px;
   font-weight: normal;
@@ -91,19 +98,19 @@ $arrowBackground : #fff;
   margin: 0px 20px;
 }
 
-.stats{
+.stats {
   margin: 30px 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  .content{
+  .content {
     display: flex;
     align-items: flex-start;
     flex-direction: column;
     width: 40%;
 
-    .headline{
+    .headline {
       width: 100%;
       overflow: hidden;
       font-family: $font-family-ClanOT;
@@ -113,7 +120,7 @@ $arrowBackground : #fff;
       margin: 0px 0px 0px 0px;
     }
 
-    .changes{
+    .changes {
       width: 100%;
       display: flex;
       justify-content: flex-start;
@@ -121,7 +128,7 @@ $arrowBackground : #fff;
       flex-direction: row;
       margin-top: 16px;
 
-      .circle{
+      .circle {
         display: flex;
         justify-content: center;
         align-items: center;
@@ -131,8 +138,8 @@ $arrowBackground : #fff;
         width: 24px;
         height: 24px;
 
-        &:before{
-          content: "";
+        &:before {
+          content: '';
           position: absolute;
           left: 0px;
           top: 0px;
@@ -143,7 +150,7 @@ $arrowBackground : #fff;
         }
       }
 
-      .label{
+      .label {
         font-family: $font-family-ClanOT;
         color: $color-white;
         margin: 0px 0px 0px 10px;
@@ -153,7 +160,7 @@ $arrowBackground : #fff;
     }
   }
 
-  .bars{
+  .bars {
     display: flex;
     justify-content: space-around;
     align-items: flex-end;
@@ -163,14 +170,14 @@ $arrowBackground : #fff;
     width: 50%;
     margin-top: -20px;
 
-    .barStyle{
+    .barStyle {
       height: 33px;
       box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
       background-color: $color-dusk;
       text-align: center;
       position: relative;
 
-      &:after{
+      &:after {
         content: attr(data-label);
         width: 12px;
         overflow: hidden;
@@ -184,11 +191,11 @@ $arrowBackground : #fff;
         letter-spacing: normal;
         color: $color-white;
         opacity: 0.5;
-        font-family: $font-family-ClanOTNews
+        font-family: $font-family-ClanOTNews;
       }
 
-      &.barSelectedStyle{
-        &:after{
+      &.barSelectedStyle {
+        &:after {
           opacity: 1;
           font-weight: bold;
         }
@@ -196,51 +203,51 @@ $arrowBackground : #fff;
     }
   }
 
-  &.increase{
-    .circle{
-      &:before{
+  &.increase {
+    .circle {
+      &:before {
         background-color: $color-cool-blue;
       }
     }
 
-    .bars{
-      .barStyle{
-        &.barSelectedStyle{
+    .bars {
+      .barStyle {
+        &.barSelectedStyle {
           background-color: $color-cool-blue;
         }
       }
     }
   }
 
-  &.decrease{
-    .circle{
-      &:before{
-        background: $color-coral-pink
+  &.decrease {
+    .circle {
+      &:before {
+        background: $color-coral-pink;
       }
     }
 
-    .bars{
-      .barStyle{
-        &.barSelectedStyle{
+    .bars {
+      .barStyle {
+        &.barSelectedStyle {
           background-color: $color-coral-pink;
         }
       }
     }
   }
 
-  &.noChange{
-    .circle{
-      &:before{
-        background: $color-dusk
+  &.noChange {
+    .circle {
+      &:before {
+        background: $color-dusk;
       }
     }
-    .content .changes .label{
+    .content .changes .label {
       color: $color-dusk;
     }
 
-    .bars{
-      .barStyle{
-        &.barSelectedStyle{
+    .bars {
+      .barStyle {
+        &.barSelectedStyle {
           background-color: $color-dusk;
         }
       }
@@ -248,37 +255,55 @@ $arrowBackground : #fff;
   }
 }
 
-.arrow{
+.arrow {
   width: $arrowWidth;
   height: $arrowHeight;
   position: relative;
   display: inline-block;
 
   &:before,
-  &:after{
+  &:after {
     content: '';
     border-color: transparent;
     border-style: solid;
     position: absolute;
   }
 
-  &.arrowUp{
-    &:before{ @include arrowBody(30%, 50%, 50%, 50% - 30%/2); box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);  }
-    &:after{ @include arrowStyle($arrowWidth/2, $arrowHeight/2, -50%, 0, bottom); }
+  &.arrowUp {
+    &:before {
+      @include arrowBody(30%, 50%, 50%, 50% - 30%/2);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    }
+    &:after {
+      @include arrowStyle($arrowWidth/2, $arrowHeight/2, -50%, 0, bottom);
+    }
   }
 
-  &.arrowDown{
-    &:before{ @include arrowBody(30%, 50%, 0, 50% - 30%/2); box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5); }
-    &:after{ @include arrowStyle($arrowWidth/2, $arrowHeight/2, 50%, 0, top);  }
+  &.arrowDown {
+    &:before {
+      @include arrowBody(30%, 50%, 0, 50% - 30%/2);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    }
+    &:after {
+      @include arrowStyle($arrowWidth/2, $arrowHeight/2, 50%, 0, top);
+    }
   }
 
-  &.arrowLeft{
-    &:before{ @include arrowBody(50%, 30%, 50% - 30%/2, 50%); }
-    &:after{ @include arrowStyle($arrowWidth/2, $arrowHeight/2, 0, -50%, right); }
+  &.arrowLeft {
+    &:before {
+      @include arrowBody(50%, 30%, 50% - 30%/2, 50%);
+    }
+    &:after {
+      @include arrowStyle($arrowWidth/2, $arrowHeight/2, 0, -50%, right);
+    }
   }
 
-  &.arrowRight{
-    &:before{ @include arrowBody(50%, 30%, 50% - 30%/2, 0); }
-    &:after{ @include arrowStyle($arrowWidth/2, $arrowHeight/2, 0, 50%, left); }
+  &.arrowRight {
+    &:before {
+      @include arrowBody(50%, 30%, 50% - 30%/2, 0);
+    }
+    &:after {
+      @include arrowStyle($arrowWidth/2, $arrowHeight/2, 0, 50%, left);
+    }
   }
 }
