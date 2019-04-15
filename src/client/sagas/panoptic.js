@@ -222,9 +222,9 @@ function* updateAudiencePerformance({ payload: { min, max } }) {
 
 function* getFlipCardsData() {
   try {
-    const payload = yield call(getPanopticDataApi.flipCardsData)
-		console.log(payload);
-    yield put(actions.getFlipCardsDataSuccess(payload))
+    const payload = yield call(getPanopticDataApi)
+    console.log(payload)
+    yield put(actions.getFlipCardsDataSuccess(payload.flipCardsData))
   } catch (err) {
     yield put(actions.getFlipCardsDataError(err))
   }
