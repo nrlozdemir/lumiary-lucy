@@ -93,17 +93,6 @@ const shadeHexColor = (color, percent) => {
   )
 }
 
-const injectStyle = (style) => {
-  const styleElement = document.createElement('style')
-  let styleSheet = null
-
-  document.head.appendChild(styleElement)
-
-  styleSheet = styleElement.sheet
-
-  styleSheet.insertRule(style, styleSheet.cssRules.length)
-}
-
 export {
   randomKey,
   searchTermInText,
@@ -111,5 +100,4 @@ export {
   toSlug,
   chartCombineDataset,
   shadeHexColor,
-  injectStyle,
 }
