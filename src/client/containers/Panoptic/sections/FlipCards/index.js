@@ -11,8 +11,8 @@ const selected = days[new Date().getDay()]
 const selectedPrev = days[new Date().getDay() - 1]
 
 class PanopticFlipCards extends React.Component {
-	constructor(props) {
-		super(props);
+  constructor(props) {
+    super(props);
 
     this.state = {
       "views": {
@@ -168,44 +168,41 @@ class PanopticFlipCards extends React.Component {
         ]
       }
     }
-	}
+  }
 
-	render() {
+  render() {
 
-		console.log("***");
-		console.log(this.props);
-
-		return (
-			<div className="col-12-gutter-20">
-				<div className={styles.flipWrapper}>
-					<FlipCard
-						title="Views"
-						data={this.state.views}
-						selected={selected}
-						selectedPrev={selectedPrev}
-					/>
-					<FlipCard
-						title="Likes"
-						data={this.state.likes}
-						selected={selected}
-						selectedPrev={selectedPrev}
-					/>
-					<FlipCard
-						title="Comments"
-						data={this.state.comments}
-						selected={selected}
-						selectedPrev={selectedPrev}
-					/>
-					<FlipCard
-						title="Shares"
-						data={this.state.shares}
-						selected={selected}
-						selectedPrev={selectedPrev}
-					/>
-				</div>
-			</div>
-		);
-	}
+    return (
+      <div className="col-12-gutter-20">
+        <div className={styles.flipWrapper}>
+          <FlipCard
+            title="Views"
+            data={this.state.views}
+            selected={selected}
+            selectedPrev={selectedPrev}
+          />
+          <FlipCard
+            title="Likes"
+            data={this.state.likes}
+            selected={selected}
+            selectedPrev={selectedPrev}
+          />
+          <FlipCard
+            title="Comments"
+            data={this.state.comments}
+            selected={selected}
+            selectedPrev={selectedPrev}
+          />
+          <FlipCard
+            title="Shares"
+            data={this.state.shares}
+            selected={selected}
+            selectedPrev={selectedPrev}
+          />
+        </div>
+      </div>
+    );
+  }
 }
 
 const mapStateToProps = createStructuredSelector({
