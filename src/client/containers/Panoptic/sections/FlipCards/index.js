@@ -24,12 +24,12 @@ class PanopticFlipCards extends React.Component {
   }
 
   render() {
-    console.log('###', this.props.flipCardsData)
     const {
       data: { views, likes, comments, shares },
       loading,
       error,
-    } = this.props.flipCardsData
+		} = this.props.flipCardsData
+
     return (
       <div className="col-12-gutter-20">
         <div className={styles.flipWrapper}>
