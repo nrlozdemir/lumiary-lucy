@@ -1,7 +1,9 @@
-.stadiumChart rect {
+.stadiumChart {
   transition: stroke 0.3s ease-in-out;
-  &:hover {
-    cursor: pointer;
+  rect {
+    &:hover {
+      cursor: pointer;
+    }
   }
 }
 

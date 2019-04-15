@@ -61,9 +61,9 @@ class StadiumChart extends React.Component {
   }
 
   componentWillUnmount() {
-    this.stadium.current.removeEventListener('mouseover', null)
-    this.currentBar.current.removeEventListener('mousemove', null)
-    this.currentBar.current.removeEventListener('mouseout', null)
+    // this.stadium.current.removeEventListener('mouseover', null)
+    // this.currentBar.current.removeEventListener('mousemove', null)
+    // this.currentBar.current.removeEventListener('mouseout', null)
   }
 
   render() {
@@ -72,7 +72,7 @@ class StadiumChart extends React.Component {
     let stadiumText = 'Total Percentage'
     let angleColor = '#242B49'
     let barStroke = '#5A6386'
-    let barFill = '#303A5D'
+    let barFill = '#242b49'
 
     let animationSpeed = 1
     let borderWidth = 26
@@ -81,6 +81,10 @@ class StadiumChart extends React.Component {
     let infoSpaceW = 210
     let infoSpaceH = 80
     let l = this.props.data.length
+
+    let total = 0
+    let value = 0
+    console.log(value, total)
 
     let infoSpaceWBorder = infoSpaceW + 2 * border
     let infoSpaceHBorder = infoSpaceH + 2 * border
@@ -118,11 +122,11 @@ class StadiumChart extends React.Component {
 
               // rounded rectagle's perimeter is {p = 2 * [ a + b - r * ( 4 - π ) ]}
               // r = h / 2
-              let total = 2 * (w + h - (h / 2) * (4 - Math.PI))
-              let value = (total * item.value) / 100
+              total = 2 * (w + h - (h / 2) * (4 - Math.PI))
+              value = (total * item.value) / 100
 
-              let angelWidth = w + borderWidth + angelBorder
-              let angelHeight = h + borderWidth + angelBorder
+              let angelWidth = w + borderWidth + angelBorder - 2 * border
+              let angelHeight = h + borderWidth + angelBorder - 2 * border
 
               let angelTotal =
                 2 *
@@ -183,22 +187,28 @@ class StadiumChart extends React.Component {
                     id="ANGEL"
                     strokeDasharray={`${angelValue} ${angelTotal}`}
                     style={{
-                      WebkitAnimation: `stadium-angel-${index}-animation ${animationSpeed}s linear`,
+                      WebkitAnimation: `stadium-${index}-animation ${animationSpeed}s linear`,
                     }}
                     stroke={angleColor}
                     strokeWidth={angelBorder}
                     x={
-                      x + index * borderWidth - (borderWidth + angelBorder) / 2
+                      x +
+                      index * borderWidth -
+                      (borderWidth + border) / 2 -
+                      angelBorder / 2
                     }
                     y={
-                      y + index * borderWidth - (borderWidth + angelBorder) / 2
+                      y +
+                      index * borderWidth -
+                      (borderWidth + border) / 2 -
+                      angelBorder / 2
                     }
-                    width={angelWidth}
-                    height={angelHeight}
-                    rx={(h + borderWidth + angelBorder) / 2}
+                    width={w + borderWidth + border + angelBorder / 2}
+                    height={h + borderWidth + border + angelBorder / 2}
+                    rx={(h + borderWidth + border) / 2}
                   />
 
-                  {l - 1 === index ? (
+                  {l - 1 === index && stadiumText ? (
                     <React.Fragment>
                       <rect
                         id="Rectangle"

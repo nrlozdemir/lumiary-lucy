@@ -25,7 +25,11 @@ class PacingCard extends React.Component {
   }
   render() {
     const {
-      pacingChartData: { data, loading, error },
+      pacingChartData: {
+        data: { horizontalStackedBarData, stadiumData },
+        loading,
+        error,
+      },
     } = this.props
     return (
       <Module
@@ -47,19 +51,12 @@ class PacingCard extends React.Component {
       >
         <div className={style.pacingCardInner}>
           <div className={style.pacingCardInnerItem}>
-            {data && data.datasets && (
-              <HorizontalStackedBarChart barData={data} />
+            {horizontalStackedBarData && (
+              <HorizontalStackedBarChart barData={horizontalStackedBarData} />
             )}
           </div>
           <div className={style.pacingCardInnerItem}>
-            <StadiumChart
-              data={[
-                { value: 90, color: '#51ADC0', title: 'Slowest' },
-                { value: 90, color: '#8567F0', title: 'Slow' },
-                { value: 50, color: '#D0506C', title: 'Medium' },
-                { value: 100, color: '#ACB0BE', title: 'Fast' },
-              ]}
-            />
+            {stadiumData && <StadiumChart data={stadiumData} />}
           </div>
         </div>
       </Module>
