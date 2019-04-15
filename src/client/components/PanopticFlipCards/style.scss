@@ -156,7 +156,7 @@ $arrowBackground : #fff;
   .bars{
     display: flex;
     justify-content: space-around;
-    align-items: end;
+    align-items: flex-end;
     white-space: pre-line;
     height: 46px;
     flex-direction: row;
