@@ -2,11 +2,7 @@ import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import { barDurationOptions } from './options'
 
-const TotalCompetitorViewsChart = ({
-  barDurationData,
-  height = 290,
-  width = 200,
-}) => {
+const TotalCompetitorViewsChart = ({ barDurationData, height, width }) => {
   const plugins = [
     {
       beforeDraw: function(chart, easing) {
@@ -52,7 +48,8 @@ const TotalCompetitorViewsChart = ({
   return (
     <Bar
       data={barDurationData}
-      height={290}
+      height={height}
+      width={width}
       options={{ ...barDurationOptions }}
       plugins={plugins}
     />

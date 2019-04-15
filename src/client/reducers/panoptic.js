@@ -15,7 +15,6 @@ export const types = {
   GET_VIDEO_RELEASES_DATA: 'Panoptic/GET_VIDEO_RELEASES_DATA',
   GET_VIDEO_RELEASES_DATA_SUCCESS: 'Panoptic/GET_VIDEO_RELEASES_DATA_SUCCESS',
   GET_VIDEO_RELEASES_DATA_ERROR: 'Panoptic/GET_VIDEO_RELEASES_DATA_ERROR',
-  RESET_VIDEO_RELEASES_DATA: 'Panoptic/RESET_VIDEO_RELEASES_DATA',
 
   GET_COLOR_TEMPERATURE_DATA: 'Panoptic/GET_COLOR_TEMPERATURE_DATA',
   GET_COLOR_TEMPERATURE_DATA_SUCCESS:
@@ -107,10 +106,6 @@ export const actions = {
   getVideoReleasesDataError: (error) => ({
     type: types.GET_VIDEO_RELEASES_DATA_ERROR,
     error,
-  }),
-
-  resetVideoReleasesData: () => ({
-    type: types.RESET_VIDEO_RELEASES_DATA,
   }),
 
   getColorTemperatureData: (data) => {
@@ -284,7 +279,7 @@ export const actions = {
 export const initialState = fromJS({
   data: {},
   videoReleasesData: {
-    data: { datasets: [], labels: [] },
+    data: {},
     loading: false,
     error: null,
   },
@@ -375,15 +370,6 @@ const panopticReducer = (state = initialState, action) => {
       return state
         .setIn(['videoReleasesData', 'error'], fromJS(action.error))
         .setIn(['videoReleasesData', 'loading'], fromJS(false))
-
-    case types.RESET_VIDEO_RELEASES_DATA:
-      return state.setIn(
-        ['videoReleasesData', 'data'],
-        fromJS({
-          datasets: [],
-          labels: [],
-        })
-      )
 
     case types.GET_COLOR_TEMPERATURE_DATA:
       return state.setIn(['colorTempData', 'loading'], fromJS(true))
@@ -531,9 +517,9 @@ const panopticReducer = (state = initialState, action) => {
     case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR:
       return state
         .setIn(['audienceChangeOverTimeData', 'error'], fromJS(action.error))
-				.setIn(['audienceChangeOverTimeData', 'loading'], fromJS(false))
+        .setIn(['audienceChangeOverTimeData', 'loading'], fromJS(false))
 
-		case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA:
+    case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA:
       return state.setIn(
         ['audienceContentVitalityScoreData', 'loading'],
         fromJS(true)
@@ -541,12 +527,18 @@ const panopticReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS:
       return state
-        .setIn(['audienceContentVitalityScoreData', 'data'], fromJS(action.payload))
+        .setIn(
+          ['audienceContentVitalityScoreData', 'data'],
+          fromJS(action.payload)
+        )
         .setIn(['audienceContentVitalityScoreData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR:
       return state
-        .setIn(['audienceContentVitalityScoreData', 'error'], fromJS(action.error))
+        .setIn(
+          ['audienceContentVitalityScoreData', 'error'],
+          fromJS(action.error)
+        )
         .setIn(['audienceContentVitalityScoreData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_DOMINANT_COLOR_DATA:

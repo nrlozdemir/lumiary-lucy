@@ -156,7 +156,7 @@ class Stadium extends React.Component {
                     data-title={item.title}
                     stroke={item.color}
                     style={{
-                      transition: `all ${animationSpeed}s linear`,
+                      transition: `stroke-dasharray ${animationSpeed}s linear`,
                       strokeWidth: borderWidth,
                       strokeDasharray: `${value} ${total}`,
                     }}
@@ -171,7 +171,7 @@ class Stadium extends React.Component {
                     id="ANGEL"
                     stroke={angleColor}
                     style={{
-                      transition: `all ${animationSpeed}s linear`,
+                      transition: `stroke-dasharray ${animationSpeed}s linear`,
                       strokeWidth: angelBorder,
                       strokeDasharray: `${angelValue} ${angelTotal}`,
                     }}

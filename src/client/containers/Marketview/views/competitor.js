@@ -80,7 +80,7 @@ export class Competitor extends React.Component {
               }
               tickOptions={chartTickOptions}
               title="Top Performing Property Across All Competitors"
-              height={100}
+              height={80}
               selects={['Resolution']}
               footerLabels={['Fast', 'Medium', 'Slow', 'Slowest']}
             />
