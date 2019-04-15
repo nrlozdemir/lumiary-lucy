@@ -220,6 +220,16 @@ function* updateAudiencePerformance({ payload: { min, max } }) {
   }
 }
 
+function* getFlipCardsData() {
+  try {
+    const payload = yield call(getPanopticDataApi.flipCardsData)
+		console.log(payload);
+    yield put(actions.getFlipCardsDataSuccess(payload))
+  } catch (err) {
+    yield put(actions.getFlipCardsDataError(err))
+  }
+}
+
 export default [
   takeLatest(types.GET_DATA, getData),
   takeLatest(types.GET_VIDEO_RELEASES_DATA, getVideoReleasesData),
@@ -250,4 +260,5 @@ export default [
 
   takeLatest(types.GET_AUDIENCE_DATA, getAudienceData),
   takeLatest(types.UPDATE_AUDIENCE_PERFORMANCE, updateAudiencePerformance),
+  takeLatest(types.GET_FLIPCARDS_DATA, getFlipCardsData),
 ]
