@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectQuickview } from 'Reducers/quickview'
-import { toSlug } from 'Utils/index'
+import { toSlug, socialIconSelector } from 'Utils/index'
 import SingleVideoCard from 'Components/SingleVideoCard'
 import style from './../style.scss'
 
@@ -65,7 +65,7 @@ export class Detail extends React.Component {
                     activeClassName={style.active}
                     to={`/quickview/${selectedQuickviewId}/${toSlug(platform)}`}
                   >
-                    {platform}
+										{index === 0 ? (platform) : (<i className={socialIconSelector(platform)}></i>)}
                   </NavLink>
                 ))}
               </div>

@@ -164,11 +164,21 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+
+			&:hover, &:active{
+				color: $color-white;
+				background-color: $color-dusk;
+			}
+
+			i{
+				font-size: 30px;
+			}
     }
 
     .active {
       color: $color-white;
       font-family: $font-family-ClanOT;
+			background-color: $color-dark-five;
     }
   }
 }
