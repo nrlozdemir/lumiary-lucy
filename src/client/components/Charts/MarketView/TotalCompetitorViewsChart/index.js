@@ -5,8 +5,25 @@ import { barDurationOptions } from './options'
 const TotalCompetitorViewsChart = ({
   barDurationData,
   height = 290,
-  width = 200,
+	width = 200,
+	tickOptions = {},
 }) => {
+  const chartOptions = {
+    ...barDurationOptions,
+    scales: {
+      ...barDurationOptions.scales,
+      yAxes: [
+        {
+          ...barDurationOptions.scales.yAxes[0],
+          ticks: {
+            ...barDurationOptions.scales.yAxes[0].ticks,
+            ...tickOptions,
+					},
+				}
+			]
+		}
+	};
+
   const plugins = [
     {
       beforeDraw: function(chart, easing) {
@@ -48,12 +65,14 @@ const TotalCompetitorViewsChart = ({
         ctx.restore()
       },
     },
-  ]
+	]
+
   return (
     <Bar
       data={barDurationData}
-      height={290}
-      options={{ ...barDurationOptions }}
+			height={height}
+			width={width}
+      options={{ ...chartOptions }}
       plugins={plugins}
     />
   )
