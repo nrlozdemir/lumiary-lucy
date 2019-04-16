@@ -109,8 +109,6 @@
   display: flex;
   align-items: center;
   height: 56px;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-  background-color: $color-dusk;
   color: $color-white;
   font-family: $font-family-ClanOT;
   font-size: 14px;
@@ -148,14 +146,24 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding: 0 90px;
 
     a {
       cursor: pointer;
+			min-height: 56px;
+			min-width: 164px;
       color: $color-cool-grey;
-      font-family: $font-family-ClanOTNews;
+      font-family: $font-family-ClanOT;
+			text-align: center;
       text-decoration: none;
-      text-transform: capitalize;
+			text-transform: capitalize;
+			border: 1px solid $color-dusk;
+			background-color: $color-dark-five;
+			font-size: 14px;
+			font-weight: bold;
+			border-radius: 8px;
+			display: flex;
+			align-items: center;
+			justify-content: center;
     }
 
     .active {

@@ -58,16 +58,6 @@ export class Detail extends React.Component {
         <div className="grid-container">
           <div className="grid-collapse mt-50">
             <div className={style.bar}>
-              <Link className={style.back} to="/quickview">
-                <div className={style.iconWrapper}>
-                  <span className="icon-X-Circle">
-                    <span className="path1" />
-                    <span className="path2" />
-                    <span className="path3" />
-                  </span>
-                </div>
-                Overview
-              </Link>
               <div className={style.barList}>
                 {platforms.map((platform, index) => (
                   <NavLink
