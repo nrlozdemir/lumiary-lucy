@@ -11,18 +11,44 @@ import Select from 'Components/Form/Select'
 import Button from 'Components/Form/Button'
 
 import ReportsModal from 'Components/Modal/Reports'
-import ReportsForm from 'Components/PagesForm/Reports'
+import ReportsForm from 'Components/PagesForm/Reports/BrandInsight'
 import RouterLoading from 'Components/RouterLoading'
 
 import ReportCards from './section/reportCards'
 
 import ReactTable from 'react-table'
+import CompareBrand from '../../components/PagesForm/Reports/CompareBrand'
 
 class Reports extends Component {
   constructor(props) {
     super(props)
     this.state = {
       modalIsOpen: false,
+      selectedReportCardKey: null,
+      reportCards: [
+        {
+          key: 'brand-insights',
+          icon:
+            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/brand-insights-icon.svg',
+          title: 'Brand Insights',
+          text:
+            'Get helpful, detailed engagement metrics about competitor brands',
+        },
+        {
+          key: 'compare-brands',
+          icon:
+            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/compare-brands-icon.svg',
+          title: 'Compare Brands',
+          text: 'Compare two brands to learn what’s driving their performance',
+        },
+        {
+          key: 'predefined-reports',
+          icon:
+            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/predefined-reports-icon.svg',
+          title: 'Predefined Reports',
+          text: 'Access unique, relevant and invaluable customized data',
+        },
+      ],
     }
   }
 
@@ -30,8 +56,8 @@ class Reports extends Component {
     this.props.getReports()
   }
 
-  openModal() {
-    this.setState({ modalIsOpen: true })
+  openModal = (value) => {
+    this.setState({ modalIsOpen: true, selectedReportCardKey: value })
   }
 
   afterOpenModal() {
@@ -50,12 +76,30 @@ class Reports extends Component {
     this.props.getMoreReports()
   }
 
+  renderModalInside = () => {
+    const { selectedReportCardKey } = this.state
+
+    switch (selectedReportCardKey && selectedReportCardKey.key) {
+      case 'brand-insights':
+        return <ReportsForm />
+
+      case 'compare-brands':
+        return <CompareBrand />
+
+      case 'predefined-reports':
+        return <div>veli</div>
+
+      default:
+        return null
+    }
+  }
+
   render() {
-    const { modalIsOpen } = this.state
+    const { modalIsOpen, reportCards, selectedReportCardKey } = this.state
+
     const {
       reports: { reports, loading, error },
     } = this.props
-
     return (
       <div className="grid-container col-12 mr-40 ml-40 mt-72 mb-72">
         <div className={style.reportsContainer}>
@@ -68,12 +112,11 @@ class Reports extends Component {
             isClosable={true}
             shouldCloseOnEsc={true}
             shouldCloseOnOverlayClick={true}
-            title="Brand Insights"
+            title={selectedReportCardKey && selectedReportCardKey.title}
           >
-            <ReportsForm />
+            {this.renderModalInside()}
           </ReportsModal>
-
-          <ReportCards />
+          <ReportCards reportCards={reportCards} openModal={this.openModal} />
 
           <div className={style.reportsTableContainer}>
             <div className={style.reportsTableHeader}>
