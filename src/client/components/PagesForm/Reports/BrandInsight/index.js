@@ -4,14 +4,14 @@ import Select from 'Components/Form/Select'
 import Input from 'Components/Form/Input'
 import { compose } from 'redux'
 
-import style from './style.scss'
+import style from '../style.scss'
 
 import {
   selectOptionsBrand,
   selectOptionsSocial,
   selectOptionsEngagement,
   selectOptionsDateRange,
-} from './options'
+} from '../options'
 
 const ReportsForm = ({}) => {
   return (
