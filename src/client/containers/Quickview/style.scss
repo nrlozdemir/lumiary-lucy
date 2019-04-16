@@ -37,8 +37,7 @@
 .cardWrapper{
 	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
 	background-color: $color-dark-grey-blue;
-	margin-left: 20px;
-	margin-right: 20px;
+	margin: 0px 20px 72px;
 	width: calc(100% - 40);
 	display: flex;
 }
@@ -64,15 +63,22 @@
 .content {
   float: left;
   width: 100%;
-	margin-bottom: 70px;
 
 	.cardBlock{
 		padding-left: 0px;
 		margin-left: 0px;
 
 		&:first-child{
-			padding-left: 140px;
-			width: calc(50% - 141px); // itemWrapper:first-child border-right is 1px
+			padding-left: 60px;
+			width: calc(50% - 61px); // itemWrapper:first-child border-right is 1px
+
+			.video{
+				margin-right: 60px;
+			}
+
+			.infoItem {
+				margin-right: 60px;
+			}
 
 			.itemWrapper{
 				&:after{
@@ -87,14 +93,22 @@
 			}
 		}
 		&:last-child{
-			padding-right: 140px;
-			width: calc(50% - 140px);
+			padding-right: 60px;
+			width: calc(50% - 60px);
+
+			.video{
+				margin-left: 60px;
+			}
+
+			.infoItem {
+				margin-left: 60px;
+			}
 		}
 	}
 
   .card {
     position: relative;
-    padding: 64px 0px;
+    padding: 64px 0px 0px;
 	}
 
   .items {
@@ -108,6 +122,10 @@
 			display: flex;
 			align-items: center;
 			justify-content: center;
+
+			&:last-child{
+				border-bottom: none;
+			}
 		}
 
 		.infoItem {

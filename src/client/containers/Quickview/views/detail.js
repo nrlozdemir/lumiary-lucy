@@ -79,7 +79,9 @@ export class Detail extends React.Component {
 								{platformsValues.map((el, i) => (
 									<div key={i} className={classnames("col-6", style.cardBlock)}>
 										<div className={style.card}>
-											<SingleVideoCard {...el.video} muted={false} />
+											<div className={style.video}>
+												<SingleVideoCard {...el.video} muted={false} />
+											</div>
 											<div className={style.items}>
 												{el.infos.map((item, index) => (
 													<div className={style.itemWrapper}>
