@@ -7,12 +7,14 @@
 import React from 'react'
 import { NavLink, Link } from 'react-router-dom'
 import PropTypes from 'prop-types'
+import classnames from "classnames";
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectQuickview } from 'Reducers/quickview'
 import { toSlug, socialIconSelector } from 'Utils/index'
 import SingleVideoCard from 'Components/SingleVideoCard'
+import ProgressBar from 'Components/ProgressBar'
 import style from './../style.scss'
 
 export class Detail extends React.Component {
@@ -52,7 +54,9 @@ export class Detail extends React.Component {
       quickview: {
         selectedPlatform: { id, platformsValues },
       },
-    } = this.props
+		} = this.props
+
+		console.log(platformsValues);
     return (
       <React.Fragment>
         <div className="grid-container">
@@ -70,31 +74,37 @@ export class Detail extends React.Component {
                 ))}
               </div>
             </div>
-            <div className={style.content}>
-              {platformsValues.map((el, i) => (
-                <div key={i} className="col-6">
-                  <div className={style.card}>
-                    <SingleVideoCard {...el.video} muted={false} />
-                    <div className={style.items}>
-                      {el.infos.map((item, index) => (
-                        <div key={index} className={style.infoItem}>
-                          <div>{item.title}</div>
-                          <div>{item.value}</div>
-                          {item.difference && (
-                            <div className={style.differenceCircle}>
-                              <div>
-                                <div>{item.difference}%</div>
-                                Difference
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
+						<div className={style.cardWrapper}>
+							<div className={style.content}>
+								{platformsValues.map((el, i) => (
+									<div key={i} className={classnames("col-6", style.cardBlock)}>
+										<div className={style.card}>
+											<SingleVideoCard {...el.video} muted={false} />
+											<div className={style.items}>
+												{el.infos.map((item, index) => (
+													<div className={style.itemWrapper}>
+														<div key={index} className={style.infoItem}>
+															<p className={classnames('font-secondary-second', style.sectionBadge)}>
+																<span>{item.title}</span>
+															</p>
+															<div className={style.itemValue}>{item.value}</div>
+															<ProgressBar
+																width="25"
+																customBarClass={style.progressBar}
+																customPercentageClass={style.percentageBlue}
+															/>
+															<p className={style.infoText}>
+																%40 of best performing industry videos area 0:25 sec in length
+															</p>
+														</div>
+													</div>
+												))}
+											</div>
+										</div>
+									</div>
+								))}
+							</div>
+						</div>
           </div>
         </div>
       </React.Fragment>
