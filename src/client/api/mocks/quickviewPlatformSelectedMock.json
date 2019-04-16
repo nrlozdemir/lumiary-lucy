@@ -16,44 +16,57 @@
     "infos": [
       {
         "title": "Duration",
-        "value": "0:25s",
-        "difference": 85
+        "value": "0:25",
+				"percentage": 85,
+				"text": "{value} of best performing industry videos are {percentage} sec in length"
+      },
+      {
+        "title": "Pacing",
+        "value": "Fast",
+        "percentage": 67,
+				"text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+      },
+      {
+        "title": "Format",
+        "value": "Stop Motion",
+        "percentage": 28,
+				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
       },
       {
         "title": "Dominant Color",
         "value": "Blue",
-        "difference": 67
-      },
-      {
-        "title": "Pace",
-        "value": "Fast",
-        "difference": 50
+        "percentage": 3,
+				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
       },
       {
         "title": "Predominant Talent Age",
-        "value": "14",
-        "difference": 45
+        "value": "32",
+        "percentage": 66,
+				"text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
       },
       {
         "title": "Predominant Talent Gender",
         "value": "Male",
-        "difference": 40
+        "percentage": 33,
+				"text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
       },
       {
         "title": "Aspect Ratio",
-        "value": "16:9"
+        "value": "16:9",
+        "percentage": 85,
+				"text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
       },
       {
         "title": "Resolution",
-        "value": "1080p"
+        "value": "1080p",
+        "percentage": 69,
+				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
       },
       {
         "title": "Frame Rate",
-        "value": "24fps"
-      },
-      {
-        "title": "Format",
-        "value": "Slow Motion"
+        "value": "24fps",
+        "percentage": 92,
+				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
       }
     ]
   },
@@ -74,39 +87,57 @@
     "infos": [
       {
         "title": "Duration",
-        "value": "3:15s"
+        "value": "3:15",
+				"percentage": 17,
+				"text": "{value} of best performing industry videos are {percentage} sec in length"
       },
       {
-        "title": "Dominant Color",
-        "value": "Green"
-      },
-      {
-        "title": "Pace",
-        "value": "Slow"
-      },
-      {
-        "title": "Predominant Talent Age",
-        "value": "20"
-      },
-      {
-        "title": "Predominant Talent Gender",
-        "value": "Female"
-      },
-      {
-        "title": "Aspect Ratio",
-        "value": "1:1"
-      },
-      {
-        "title": "Resolution",
-        "value": "720p"
-      },
-      {
-        "title": "Frame Rate",
-        "value": "30fps"
+        "title": "Pacing",
+        "value": "Medium",
+        "percentage": 27,
+				"text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
       },
       {
         "title": "Format",
-        "value": "Live Action"
+        "value": "Live Action",
+        "percentage": 9,
+				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+      },
+      {
+        "title": "Dominant Color",
+        "value": "Green",
+        "percentage": 4,
+				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+      },
+      {
+        "title": "Predominant Talent Age",
+        "value": "20",
+        "percentage": 49,
+				"text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+      },
+      {
+        "title": "Predominant Talent Gender",
+        "value": "Female",
+        "percentage": 56,
+				"text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+      },
+      {
+        "title": "Aspect Ratio",
+        "value": "1:1",
+        "percentage": 13,
+				"text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+      },
+      {
+        "title": "Resolution",
+        "value": "720p",
+        "percentage": 64,
+				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+      },
+      {
+        "title": "Frame Rate",
+        "value": "30fps",
+        "percentage": 12,
+				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
       }
     ]
   }

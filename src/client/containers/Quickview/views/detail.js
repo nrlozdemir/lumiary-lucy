@@ -46,7 +46,15 @@ export class Detail extends React.Component {
       this.setState({ selectedQuickviewId: match.params.id })
       getQuickviewPlatformSelectedRequest(match.params.id)
     }
-  }
+	}
+
+	textEdit(text, item){
+		text = text.replace('{value}', item.value)
+		text = text.replace('{title}', item.title)
+		text = text.replace('{percentage}', item.percentage)
+
+		return text;
+	}
 
   render() {
     const { platforms, selectedQuickviewId } = this.state
@@ -57,6 +65,7 @@ export class Detail extends React.Component {
 		} = this.props
 
 		console.log(platformsValues);
+
     return (
       <React.Fragment>
         <div className="grid-container">
@@ -89,14 +98,16 @@ export class Detail extends React.Component {
 															<p className={classnames('font-secondary-second', style.sectionBadge)}>
 																<span>{item.title}</span>
 															</p>
-															<div className={style.itemValue}>{item.value}</div>
+															<div className={style.itemValue} data-id={i}>{item.value}</div>
 															<ProgressBar
-																width="25"
+																width={item.percentage}
 																customBarClass={style.progressBar}
-																customPercentageClass={style.percentageBlue}
+																customPercentageClass={classnames(style.percentageBlue, {
+																	[style.percentagePink]: (i == 1)
+																})}
 															/>
 															<p className={style.infoText}>
-																%40 of best performing industry videos area 0:25 sec in length
+																{this.textEdit(item.text, item)}
 															</p>
 														</div>
 													</div>
@@ -115,7 +126,7 @@ export class Detail extends React.Component {
 }
 
 Detail.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+  //dispatch: PropTypes.func.isRequired,
   match: PropTypes.object,
 }
 

@@ -177,6 +177,9 @@
 				-webkit-transition: width .5s, height .5s;
 				transition: width .5s, height .5s;
 			}
+			.percentagePink {
+				background-color: $color-coral-pink;
+			}
 			.progressText {
 				color: $color-white;
 				font-size: 14px;
