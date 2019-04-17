@@ -27,12 +27,11 @@ function* getQuickviewItemsSaga() {
     yield put(actions.getQuickviewItemsFailure({ error }))
   }
 }
-function* getQuickviewSelectedPlatformSaga(id) {
+function* getQuickviewSelectedPlatformSaga(platform) {
   try {
-    const payload = yield call(getQuickviewPlatformSelectedApi, { id })
+		const payload = yield call(getQuickviewPlatformSelectedApi, { platform })
     yield put(actions.getQuickviewPlatformSelectedSuccess({
-			id: id,
-			platformsValues: payload
+			platformsValues: payload[platform.payload]
 		}))
   } catch (error) {
     yield put(actions.getQuickviewPlatformSelectedFailure({ error }))
