@@ -115,7 +115,13 @@ export class Detail extends React.Component {
                 {platformsValues.map((el, i) => (
                   <div key={i} className={classnames("col-6", style.cardBlock)}>
                     <div className={style.card}>
-											<h1>{i == 0 ? "Best Performing Videos" : "Underperforming Videos"}</h1>
+											<h1>
+												{i == 0
+												? "Best Performing Videos"
+												: "Underperforming Videos"}
+												<i className="icon icon-Information"></i>
+											</h1>
+
                       <div className={style.video}>
                         <SingleVideoCard {...el.video} muted={false} />
                       </div>
