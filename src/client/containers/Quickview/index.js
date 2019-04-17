@@ -23,7 +23,6 @@ import RealSelectFilters from 'Components/RealSelectFilters'
 const Detail = (props) => (
   <DynamicImport
     match={props.match}
-    removeNavbar
     load={() => import('./views/detail')}
   >
     {(Component) =>
@@ -79,26 +78,6 @@ export class Quickview extends React.Component {
     return (
       <React.Fragment>
         <div className="grid-container col-12">
-          <div className={style.headerContainer}>
-            <div>
-              <span className={style.dotItem}>
-                <span className="bg-cool-blue" />
-                Best Videos
-              </span>
-              <span className={style.dotItem}>
-                <span className="bg-coral-pink" />
-                Worst Videos
-              </span>
-            </div>
-            <div>
-              <h1 className="alpha color-white text-center font-primary text-bold">
-                Quickview
-              </h1>
-            </div>
-            <div className="headerRight">
-
-            </div>
-          </div>
           <Switch>
             <Route path="/quickview" exact component={Main} />
             <Route path="/quickview/:id/:platform" component={Detail} />
