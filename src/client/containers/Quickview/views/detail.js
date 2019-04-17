@@ -91,8 +91,6 @@ export class Detail extends React.Component {
       },
 		} = this.props
 
-		console.log(this.props);
-
     return (
       <React.Fragment>
         <div className="grid-container">
