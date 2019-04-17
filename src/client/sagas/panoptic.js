@@ -117,8 +117,8 @@ function* getAudiencePerformanceData() {
 function* getAudienceAgeSliderData() {
   try {
     const payload = yield call(getAudienceDataApi)
-    const shuffleData = payload.ageSlider
-    yield put(actions.getAudienceAgeSliderDataSuccess(_.shuffle(shuffleData)))
+    const data = payload.ageSlider
+    yield put(actions.getAudienceAgeSliderDataSuccess(data))
   } catch (err) {
     yield put(actions.getAudienceAgeSliderDataError(err))
   }
