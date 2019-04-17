@@ -108,25 +108,25 @@
 
   .card {
     position: relative;
-		padding: 64px 0px 0px;
+    padding: 64px 0px 0px;
 
-		h1{
-			color: $color-white;
-			font-family: $font-family-ClanOT;
-			font-size: 18px;
-			font-weight: bold;
-			font-style: normal;
-			font-stretch: normal;
-			line-height: normal;
-			letter-spacing: normal;
-			margin: 0px 60px 48px 0px;
-			text-align: center;
+    h1{
+      color: $color-white;
+      font-family: $font-family-ClanOT;
+      font-size: 18px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      margin: 0px 60px 48px 0px;
+      text-align: center;
 
-			i{
-				margin-left: 8px;
-				font-size: 20px;
-			}
-		}
+      i{
+        margin-left: 8px;
+        font-size: 20px;
+      }
+    }
   }
 
   .items {
@@ -344,8 +344,8 @@
     }
 
     .active {
-			color: $color-white;
-			background-color: $color-dusk;
+      color: $color-white;
+      background-color: $color-dusk;
     }
   }
 }
