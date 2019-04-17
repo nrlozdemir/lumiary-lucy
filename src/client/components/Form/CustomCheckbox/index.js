@@ -10,7 +10,7 @@ const canSelect = (fields) => {
   const selectedFields = fields.names.filter(
     (field) => fields[field].input.value === true
   )
-  return selectedFields.length == 2 ? true : false
+  return selectedFields.length == fields.canSelect
 }
 
 const SelectBox = (props) => {

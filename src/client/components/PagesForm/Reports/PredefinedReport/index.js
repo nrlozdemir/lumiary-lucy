@@ -15,12 +15,13 @@ const PredefinedReport = (props) => {
     <form onSubmit={() => console.log('object')}>
       <div className={style.formArea}>
         <div className={style.formGroup}>
-          <p className={style.label}> Choose 2 Brands</p>
+          <p className={style.label}> Show me..</p>
           <Fields
             names={getBrandKeysFromObject()}
             component={SelectBox}
             type="checkbox"
             options={selectPredefinedBrands}
+            canSelect={1}
           />
         </div>
 
