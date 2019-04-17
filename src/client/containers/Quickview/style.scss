@@ -183,12 +183,11 @@
 				background-color: $color-coral-pink;
 			}
 			.progressText {
+				width: 250px;
 				color: $color-white;
 				font-size: 14px;
 				font-family: $font-family-ClanOTNews;
-				.leftTitle {
-					float: left;
-				}
+				margin-bottom: 4px;
 
 				.rightTitle {
 					float: right;
