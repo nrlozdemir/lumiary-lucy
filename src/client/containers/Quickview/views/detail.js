@@ -126,6 +126,9 @@ export class Detail extends React.Component {
 																<span>{item.title}</span>
 															</p>
 															<div className={style.itemValue} data-id={i}>{item.value}</div>
+															<div className={style.progressText}>
+																<span className={style.rightTitle}>{item.percentage}%</span>
+															</div>
 															<ProgressBar
 																width={item.percentage}
 																customBarClass={style.progressBar}
