@@ -122,6 +122,11 @@ const routes = [
     }
   },
   {
+    path: '/reports/:id',
+    exact: true,
+    component: 'Reports',
+  },
+  {
     path: '/reports/generated',
     exact: true,
     removeNavbar: true,

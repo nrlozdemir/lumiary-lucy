@@ -3,221 +3,21 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
-import { actions, makeSelectReports } from 'Reducers/reports'
+import ContentVitalityScore from '../section/ContentVitalityScore';
 
-import style from './style.scss'
-import { selectOptions } from './options'
-import Select from 'Components/Form/Select'
-import Button from 'Components/Form/Button'
-
-import ReportsModal from 'Components/Modal/Reports'
-import ReportsForm from 'Components/PagesForm/Reports/BrandInsight'
-import RouterLoading from 'Components/RouterLoading'
-
-import ReportCards from './section/reportCards'
-
-import ReactTable from 'react-table'
-import CompareBrand from '../../components/PagesForm/Reports/CompareBrand'
-import PredefinedReport from '../../components/PagesForm/Reports/PredefinedReport'
-
-class Reports extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      modalIsOpen: false,
-      selectedReportCardKey: null,
-      reportCards: [
-        {
-          key: 'brand-insights',
-          icon:
-            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/brand-insights-icon.svg',
-          title: 'Brand Insights',
-          text:
-            'Get helpful, detailed engagement metrics about competitor brands',
-        },
-        {
-          key: 'compare-brands',
-          icon:
-            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/compare-brands-icon.svg',
-          title: 'Compare Brands',
-          text: 'Compare two brands to learn what’s driving their performance',
-        },
-        {
-          key: 'predefined-reports',
-          icon:
-            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/predefined-reports-icon.svg',
-          title: 'Predefined Reports',
-          text: 'Access unique, relevant and invaluable customized data',
-        },
-      ],
-    }
-  }
-
-  componentWillMount() {
-    this.props.getReports()
-  }
-
-  openModal = (value) => {
-    this.setState({ modalIsOpen: true, selectedReportCardKey: value })
-  }
-
-  afterOpenModal() {
-    // references are now sync'd and can be accessed.
-  }
-
-  closeModal() {
-    this.setState({ modalIsOpen: false })
-  }
-
-  deleteReportAction(id) {
-    this.props.deleteReport(id)
-  }
-
-  loadMore() {
-    this.props.getMoreReports()
-  }
-
-  renderModalInside = () => {
-    const { selectedReportCardKey } = this.state
-
-    switch (selectedReportCardKey && selectedReportCardKey.key) {
-      case 'brand-insights':
-        return <ReportsForm />
-
-      case 'compare-brands':
-        return <CompareBrand />
-
-      case 'predefined-reports':
-        return <PredefinedReport />
-
-      default:
-        return null
-    }
-  }
-
+class CompareBrand extends Component {
   render() {
-    const { modalIsOpen, reportCards, selectedReportCardKey } = this.state
-
-    const {
-      reports: { reports, loading, error },
-    } = this.props
-    return (
-      <div className="grid-container col-12 mr-40 ml-40 mt-72 mb-72">
-        <div className={style.reportsContainer}>
-          <ReportsModal
-            width={440}
-            isOpen={modalIsOpen}
-            closeTimeoutMS={300}
-            onAfterOpen={() => this.afterOpenModal()}
-            onRequestClose={() => this.closeModal()}
-            isClosable={true}
-            shouldCloseOnEsc={true}
-            shouldCloseOnOverlayClick={true}
-            title={selectedReportCardKey && selectedReportCardKey.title}
-          >
-            {this.renderModalInside()}
-          </ReportsModal>
-          <ReportCards reportCards={reportCards} openModal={this.openModal} />
-
-          <div className={style.reportsTableContainer}>
-            <div className={style.reportsTableHeader}>
-              <p>Saved Reports</p>
-              <div className={style.inputWrapper}>
-                <Select
-                  options={selectOptions}
-                  id="SelectReports"
-                  name="SelectReports"
-                  placeholder="All Reports"
-                  label="Select a report"
-                />
-              </div>
-            </div>
-            {loading ? (
-              <RouterLoading />
-            ) : (
-              <div className={style.reportsTableBody}>
-                <ReactTable
-                  data={reports}
-                  noDataText="No reports data"
-                  showPagination={false}
-                  multiSort={true}
-                  resizable={false}
-                  sortable={true}
-                  minRows={4}
-                  pageSize={reports.length}
-                  columns={[
-                    {
-                      Header: 'Title',
-                      accessor: 'title',
-                    },
-                    {
-                      Header: 'Category',
-                      accessor: 'category',
-                    },
-                    {
-                      Header: 'Platform',
-                      accessor: 'platform',
-                    },
-                    {
-                      Header: 'Date',
-                      accessor: 'date',
-                    },
-                    {
-                      Header: null,
-                      width: 65,
-                      Cell: ({ original: { id } }) => (
-                        <div className={style.deleteWrapper} tabIndex="1">
-                          <div className={style.deleteIcon}>
-                            <span
-                              className={style.deleteText}
-                              onClick={(e) => {
-                                this.deleteReportAction(id)
-                              }}
-                            >
-                              Delete Report
-                            </span>
-                            <a tabIndex="2">Cancel</a>
-                          </div>
-                        </div>
-                      ),
-                    },
-                  ]}
-                />
-
-                {/* onClick={() => this.deleteReportAction(id)} */}
-
-                <div className={style.reportsTableFooter}>
-                  <Button
-                    onClick={() => this.loadMore()}
-                    customClass="font-secondary-first text-bold"
-                    buttonText="Load More"
-                  />
-                </div>
-              </div>
-            )}
-          </div>
-        </div>
-      </div>
-    )
+    return <div>			<ContentVitalityScore />
+		</div>
   }
 }
 
-Reports.propTypes = {
-  reports: PropTypes.object,
-  getReports: PropTypes.func,
-  dispatch: PropTypes.func,
-}
+CompareBrand.propTypes = {}
 
-const mapStateToProps = createStructuredSelector({
-  reports: makeSelectReports(),
-})
+const mapStateToProps = createStructuredSelector({})
 
 function mapDispatchToProps(dispatch) {
-  return {
-    getReports: () => dispatch(actions.loadReports()),
-    getMoreReports: () => dispatch(actions.loadMoreReports()),
-    deleteReport: (id) => dispatch(actions.loadDeleteReport(id)),
-  }
+  return {}
 }
 
 const withConnect = connect(
@@ -225,4 +25,4 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(Reports)
+export default compose(withConnect)(CompareBrand)
