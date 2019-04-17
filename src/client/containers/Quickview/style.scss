@@ -2,9 +2,11 @@
   display: flex;
   margin-top: 72px;
   align-items: center;
+
   > div {
     flex: 1;
   }
+
   &:last-child div {
     flex: 1;
     margin-right: auto;
@@ -35,192 +37,195 @@
 }
 
 .cardWrapper{
-	box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
-	background-color: $color-dark-grey-blue;
-	margin: 0px 20px 72px;
-	width: calc(100% - 40);
-	display: flex;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+  background-color: $color-dark-grey-blue;
+  margin: 0px 20px 72px;
+  width: calc(100% - 40);
+  display: flex;
 }
 
 .sectionBadge {
-	margin: 0px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	span {
-		font-weight: bold;
-		background-color: $color-dusk;
-		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-		border-radius: 50px;
-		font-size: 14px;
-		padding: 8px 24px;
-	}
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    font-weight: bold;
+    background-color: $color-dusk;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    font-size: 14px;
+    padding: 8px 24px;
+  }
 }
-
-
-
 
 .content {
   float: left;
   width: 100%;
 
-	.cardBlock{
-		padding-left: 0px;
-		margin-left: 0px;
+  .cardBlock{
+    padding-left: 0px;
+    margin-left: 0px;
 
-		&:first-child{
-			padding-left: 60px;
-			width: calc(50% - 61px); // itemWrapper:first-child border-right is 1px
+    &:first-child{
+      padding-left: 60px;
+      width: calc(50% - 61px); // itemWrapper:first-child border-right is 1px
 
-			.video{
-				margin-right: 60px;
-			}
+      .video{
+        margin-right: 60px;
+      }
 
-			.infoItem {
-				margin-right: 60px;
-			}
+      .infoItem {
+        margin-right: 60px;
+      }
 
-			.itemWrapper{
-				&:after{
-					content: "";
-					position: absolute;
-					right: 0px;
-					top: 25%;
-					width: 1px;
-					height: 50%;
-					background-color: $color-dusk;
-				}
-			}
-		}
-		&:last-child{
-			padding-right: 60px;
-			width: calc(50% - 60px);
+      .itemWrapper{
+        &:after{
+          content: "";
+          position: absolute;
+          right: 0px;
+          top: 25%;
+          width: 1px;
+          height: 50%;
+          background-color: $color-dusk;
+        }
+      }
+    }
+    &:last-child{
+      padding-right: 60px;
+      width: calc(50% - 60px);
 
-			.video{
-				margin-left: 60px;
-			}
+      .video{
+        margin-left: 60px;
+      }
 
-			.infoItem {
-				margin-left: 60px;
-			}
-		}
-	}
+      .infoItem {
+        margin-left: 60px;
+      }
+    }
+  }
 
   .card {
     position: relative;
     padding: 64px 0px 0px;
-	}
+  }
 
   .items {
-		padding: 40px 0px 0px;
+    padding: 40px 0px 0px;
 
-		.itemWrapper{
-			padding: 72px 0px;
-			width: 100%;
-			border-bottom: 1px solid $color-dusk;
-			position: relative;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+    .itemWrapper{
+      padding: 72px 0px;
+      width: 100%;
+      border-bottom: 1px solid $color-dusk;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-			&:last-child{
-				border-bottom: none;
-			}
-		}
+      &:last-child{
+        border-bottom: none;
+      }
+    }
 
-		.infoItem {
-			width: 100%;
-			padding-bottom: 40px;
-			margin-bottom: 40px;
-			display: flex;
-			flex-direction: column;
-			align-items: center;
-			justify-content: center;
+    .infoItem {
+      width: 100%;
+      padding-bottom: 40px;
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-			.itemValue{
-				margin: 32px 0px 38px;
-				color: $color-white;
-				font-family: $font-family-primary;
-				font-size: 32px;
-				font-weight: 800;
-				font-style: normal;
-				font-stretch: condensed;
-				line-height: normal;
-				letter-spacing: normal;
-			}
+      .itemValue{
+        margin: 32px 0px 38px;
+        color: $color-white;
+        font-family: $font-family-primary;
+        font-size: 32px;
+        font-weight: 800;
+        font-style: normal;
+        font-stretch: condensed;
+        line-height: normal;
+        letter-spacing: normal;
+      }
 
-			.infoText{
-				margin: 32px 0px 0px 0px;
-				font-family: $font-family-ClanOTNews;
-				color: $color-white;
-				font-size: 14px;
-				line-height: 1.86;
-				font-weight: bold;
-				font-weight: normal;
-				font-style: normal;
-				font-stretch: normal;
-				letter-spacing: normal;
-				text-align: center;
-				max-height: 60px;
-				width: 300px;
-				overflow: hidden;
-			}
+      .infoText{
+        margin: 32px 0px 0px 0px;
+        font-family: $font-family-ClanOTNews;
+        color: $color-white;
+        font-size: 14px;
+        line-height: 1.86;
+        font-weight: bold;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        text-align: center;
+        max-height: 60px;
+        width: 300px;
+        overflow: hidden;
+      }
 
-			.progressBar {
-				width: 250px;
-				margin-left: 0px;
-				background-color: $color-dark-five;
-				border-radius: 10px;
-			}
-			.percentageBlue {
-				border-radius: 10px;
-				height: 10px;
-				background-color: $color-cool-blue;
-				-webkit-transition: width .5s, height .5s;
-				transition: width .5s, height .5s;
-			}
-			.percentagePink {
-				background-color: $color-coral-pink;
-			}
-			.progressText {
-				width: 250px;
-				color: $color-white;
-				font-size: 14px;
-				font-family: $font-family-ClanOTNews;
-				margin-bottom: 4px;
+      .progressBar {
+        width: 250px;
+        margin-left: 0px;
+        background-color: $color-dark-five;
+        border-radius: 10px;
+      }
 
-				.rightTitle {
-					float: right;
-				}
-				&::after {
-					content: "";
-					clear: both;
-					display: table;
-				}
-			}
+      .percentageBlue {
+        border-radius: 10px;
+        height: 10px;
+        background-color: $color-cool-blue;
+        -webkit-transition: width .5s, height .5s;
+        transition: width .5s, height .5s;
+      }
 
-			&:last-child {
-				margin-bottom: 0;
-				padding-bottom: 0;
-				border-bottom: none;
-			}
+      .percentagePink {
+        background-color: $color-coral-pink;
+      }
 
-			> div {
-				text-align: center;
+      .progressText {
+        width: 250px;
+        color: $color-white;
+        font-size: 14px;
+        font-family: $font-family-ClanOTNews;
+        margin-bottom: 4px;
 
-				&:nth-child(1) {
-					color: $color-cool-grey;
-					font-size: 18px;
-					font-family: $font-family-ClanOTNews;
-					margin-bottom: 16px;
-				}
-				&:nth-child(2) {
-					color: $color-white;
-					font-size: 48px;
-					font-family: $font-family-primary;
-				}
-			}
-		}
+        .rightTitle {
+          float: right;
+        }
+
+        &::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      > div {
+        text-align: center;
+
+        &:nth-child(1) {
+          color: $color-cool-grey;
+          font-size: 18px;
+          font-family: $font-family-ClanOTNews;
+          margin-bottom: 16px;
+        }
+
+        &:nth-child(2) {
+          color: $color-white;
+          font-size: 48px;
+          font-family: $font-family-primary;
+        }
+      }
+    }
   }
 
   .differenceCircle {
@@ -233,12 +238,10 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 40px;
-
     width: 100px;
     height: 100px;
     border-radius: 50%;
     background-color: $color-dark-five;
-
     color: $color-white;
     font-size: 12px;
     font-family: $font-family-ClanOTNews;
@@ -282,6 +285,7 @@
 
     .iconWrapper {
       margin-right: 16px;
+
       span {
         font-size: 30px;
       }
@@ -295,36 +299,36 @@
 
     a {
       cursor: pointer;
-			min-height: 56px;
-			min-width: 164px;
+      min-height: 56px;
+      min-width: 164px;
       color: $color-cool-grey;
       font-family: $font-family-ClanOT;
-			text-align: center;
+      text-align: center;
       text-decoration: none;
-			text-transform: capitalize;
-			border: 1px solid $color-dusk;
-			background-color: $color-dark-five;
-			font-size: 14px;
-			font-weight: bold;
-			border-radius: 8px;
-			display: flex;
-			align-items: center;
-			justify-content: center;
+      text-transform: capitalize;
+      border: 1px solid $color-dusk;
+      background-color: $color-dark-five;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-			&:hover, &:active{
-				color: $color-white;
-				background-color: $color-dusk;
-			}
+      &:hover, &:active{
+        color: $color-white;
+        background-color: $color-dusk;
+      }
 
-			i{
-				font-size: 30px;
-			}
+      i{
+        font-size: 30px;
+      }
     }
 
     .active {
       color: $color-white;
       font-family: $font-family-ClanOT;
-			background-color: $color-dark-five;
+      background-color: $color-dark-five;
     }
   }
 }
