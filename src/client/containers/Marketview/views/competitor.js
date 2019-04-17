@@ -20,7 +20,9 @@ import RouterLoading from 'Components/RouterLoading'
 import style from '../style.scss'
 
 const chartTickOptions = {
-  stepSize: 250000,
+	stepSize: 250000,
+	min: 0,
+	max: 1000000,
   callback(value) {
     if (value < 1000) {
       return value
