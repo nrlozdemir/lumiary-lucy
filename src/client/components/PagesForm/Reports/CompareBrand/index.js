@@ -5,8 +5,7 @@ import Input from 'Components/Form/Input'
 import { compose } from 'redux'
 import style from '../style.scss'
 import { selectOptionsBrand } from '../options'
-
-const required = (value) => (value ? undefined : 'Required')
+import { required } from 'Utils/validate'
 
 const getBrandKeysFromObject = () => {
   return selectOptionsBrand.map((item) => item.value)
@@ -46,10 +45,6 @@ const selectBox = (props) => {
   })
 }
 
-const inputField = ({ input }) => {
-  return <input {...input} />
-}
-
 const CompareBrand = (props) => {
   console.log(props)
   return (
@@ -67,8 +62,7 @@ const CompareBrand = (props) => {
         <div className={style.formGroup}>
           <p className={style.label}>Title</p>
           <Field
-            customClass={style.input}
-            component={inputField}
+            component={Input}
             id="title"
             name="title"
             placeholder="Show this to steve…"
@@ -76,7 +70,7 @@ const CompareBrand = (props) => {
           />
         </div>
         <button
-          className={style.selectionLink}
+          className={cx(style.selectionLink, { [style.active]: props.valid })}
           type="submit"
           disabled={!props.valid}
         >
