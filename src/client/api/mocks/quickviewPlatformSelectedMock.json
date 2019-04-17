@@ -1,144 +1,866 @@
-[
-  {
-    "video": {
+{
+  "all-platforms": [
+    {
       "video": {
-        "title": "2,387,931 Views",
-        "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anything-can-happen.mp4",
-        "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anything-can-happen.jpg",
-        "socialIcon": "instagram"
+        "video": {
+          "title": "2,387,931 Views",
+          "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anything-can-happen.mp4",
+          "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anything-can-happen.jpg",
+          "socialIcon": "instagram"
+        },
+        "options": {
+          "size": "none",
+          "presentationCard": true,
+          "barColor": "cool-blue"
+        }
       },
-      "options": {
-        "size": "none",
-        "presentationCard": true,
-        "barColor": "cool-blue"
-      }
+      "infos": [
+        {
+          "title": "Duration",
+          "value": "0:25",
+          "percentage": 85,
+          "text": "{value} of best performing industry videos are {percentage} sec in length"
+        },
+        {
+          "title": "Pacing",
+          "value": "Fast",
+          "percentage": 67,
+          "text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+        },
+        {
+          "title": "Format",
+          "value": "Stop Motion",
+          "percentage": 28,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Dominant Color",
+          "value": "Blue",
+          "percentage": 3,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Age",
+          "value": "32",
+          "percentage": 66,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Gender",
+          "value": "Male",
+          "percentage": 33,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Aspect Ratio",
+          "value": "16:9",
+          "percentage": 85,
+          "text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Resolution",
+          "value": "1080p",
+          "percentage": 69,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Frame Rate",
+          "value": "24fps",
+          "percentage": 92,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        }
+      ]
     },
-    "infos": [
-      {
-        "title": "Duration",
-        "value": "0:25",
-				"percentage": 85,
-				"text": "{value} of best performing industry videos are {percentage} sec in length"
-      },
-      {
-        "title": "Pacing",
-        "value": "Fast",
-        "percentage": 67,
-				"text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
-      },
-      {
-        "title": "Format",
-        "value": "Stop Motion",
-        "percentage": 28,
-				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
-      },
-      {
-        "title": "Dominant Color",
-        "value": "Blue",
-        "percentage": 3,
-				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
-      },
-      {
-        "title": "Predominant Talent Age",
-        "value": "32",
-        "percentage": 66,
-				"text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
-      },
-      {
-        "title": "Predominant Talent Gender",
-        "value": "Male",
-        "percentage": 33,
-				"text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
-      },
-      {
-        "title": "Aspect Ratio",
-        "value": "16:9",
-        "percentage": 85,
-				"text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
-      },
-      {
-        "title": "Resolution",
-        "value": "1080p",
-        "percentage": 69,
-				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
-      },
-      {
-        "title": "Frame Rate",
-        "value": "24fps",
-        "percentage": 92,
-				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
-      }
-    ]
-  },
-  {
-    "video": {
+    {
       "video": {
-        "title": "516 Views",
-        "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anthony-Davis-Finishes-with-43-Points.mp4",
-        "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anthony-Davis-Finishes-with-43-Points.jpg",
-        "socialIcon": "instagram"
+        "video": {
+          "title": "516 Views",
+          "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anthony-Davis-Finishes-with-43-Points.mp4",
+          "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anthony-Davis-Finishes-with-43-Points.jpg",
+          "socialIcon": "instagram"
+        },
+        "options": {
+          "size": "none",
+          "presentationCard": true,
+          "barColor": "coral-pink"
+        }
       },
-      "options": {
-        "size": "none",
-        "presentationCard": true,
-        "barColor": "coral-pink"
-      }
+      "infos": [
+        {
+          "title": "Duration",
+          "value": "3:15",
+          "percentage": 17,
+          "text": "{value} of best performing industry videos are {percentage} sec in length"
+        },
+        {
+          "title": "Pacing",
+          "value": "Medium",
+          "percentage": 27,
+          "text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+        },
+        {
+          "title": "Format",
+          "value": "Live Action",
+          "percentage": 9,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Dominant Color",
+          "value": "Green",
+          "percentage": 4,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Age",
+          "value": "20",
+          "percentage": 49,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Gender",
+          "value": "Female",
+          "percentage": 56,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Aspect Ratio",
+          "value": "1:1",
+          "percentage": 13,
+          "text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Resolution",
+          "value": "720p",
+          "percentage": 64,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Frame Rate",
+          "value": "30fps",
+          "percentage": 12,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        }
+      ]
+    }
+  ],
+  "facebook": [
+    {
+      "video": {
+        "video": {
+          "title": "1,137,931 Views",
+          "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Deandre-Ayton-Knows.mp4",
+          "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Deandre-Ayton-Knows.jpg",
+          "socialIcon": "facebook"
+        },
+        "options": {
+          "size": "none",
+          "presentationCard": true,
+          "barColor": "cool-blue"
+        }
+      },
+      "infos": [
+        {
+          "title": "Duration",
+          "value": "0:15",
+          "percentage": 75,
+          "text": "{value} of best performing industry videos are {percentage} sec in length"
+        },
+        {
+          "title": "Pacing",
+          "value": "Fast",
+          "percentage": 25,
+          "text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+        },
+        {
+          "title": "Format",
+          "value": "Stop Motion",
+          "percentage": 13,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Dominant Color",
+          "value": "Blue",
+          "percentage": 23,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Age",
+          "value": "32",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Gender",
+          "value": "Male",
+          "percentage": 23,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Aspect Ratio",
+          "value": "16:9",
+          "percentage": 75,
+          "text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Resolution",
+          "value": "1080p",
+          "percentage": 19,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Frame Rate",
+          "value": "24fps",
+          "percentage": 92,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        }
+      ]
     },
-    "infos": [
-      {
-        "title": "Duration",
-        "value": "3:15",
-				"percentage": 17,
-				"text": "{value} of best performing industry videos are {percentage} sec in length"
+    {
+      "video": {
+        "video": {
+          "title": "12,516 Views",
+          "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/12-years-ago-today-Kobe-dropped-81.mp4",
+          "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/12-years-ago-today-Kobe-dropped-81.jpg",
+          "socialIcon": "facebook"
+        },
+        "options": {
+          "size": "none",
+          "presentationCard": true,
+          "barColor": "coral-pink"
+        }
       },
-      {
-        "title": "Pacing",
-        "value": "Medium",
-        "percentage": 27,
-				"text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+      "infos": [
+        {
+          "title": "Duration",
+          "value": "2:15",
+          "percentage": 17,
+          "text": "{value} of best performing industry videos are {percentage} sec in length"
+        },
+        {
+          "title": "Pacing",
+          "value": "Medium",
+          "percentage": 17,
+          "text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+        },
+        {
+          "title": "Format",
+          "value": "Live Action",
+          "percentage": 19,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Dominant Color",
+          "value": "Green",
+          "percentage": 14,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Age",
+          "value": "20",
+          "percentage": 69,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Gender",
+          "value": "Female",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Aspect Ratio",
+          "value": "1:1",
+          "percentage": 33,
+          "text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Resolution",
+          "value": "720p",
+          "percentage": 42,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Frame Rate",
+          "value": "30fps",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        }
+      ]
+    }
+  ],
+  "instagram": [
+    {
+      "video": {
+        "video": {
+          "title": "105,931 Views",
+          "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Appreciate-the-greatness-of-the-Pats.mp4",
+          "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Appreciate-the-greatness-of-the-Pats.jpg",
+          "socialIcon": "instagram"
+        },
+        "options": {
+          "size": "none",
+          "presentationCard": true,
+          "barColor": "cool-blue"
+        }
       },
-      {
-        "title": "Format",
-        "value": "Live Action",
-        "percentage": 9,
-				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+      "infos": [
+        {
+          "title": "Duration",
+          "value": "0:15",
+          "percentage": 75,
+          "text": "{value} of best performing industry videos are {percentage} sec in length"
+        },
+        {
+          "title": "Pacing",
+          "value": "Fast",
+          "percentage": 25,
+          "text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+        },
+        {
+          "title": "Format",
+          "value": "Stop Motion",
+          "percentage": 13,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Dominant Color",
+          "value": "Blue",
+          "percentage": 23,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Age",
+          "value": "32",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Gender",
+          "value": "Male",
+          "percentage": 23,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Aspect Ratio",
+          "value": "16:9",
+          "percentage": 75,
+          "text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Resolution",
+          "value": "1080p",
+          "percentage": 19,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Frame Rate",
+          "value": "24fps",
+          "percentage": 92,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        }
+      ]
+    },
+    {
+      "video": {
+        "video": {
+          "title": "2516 Views",
+          "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Draymond-not-holding-back-on-the-ref.mp4",
+          "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Draymond-not-holding-back-on-the-ref.jpg",
+          "socialIcon": "instagram"
+        },
+        "options": {
+          "size": "none",
+          "presentationCard": true,
+          "barColor": "coral-pink"
+        }
       },
-      {
-        "title": "Dominant Color",
-        "value": "Green",
-        "percentage": 4,
-				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+      "infos": [
+        {
+          "title": "Duration",
+          "value": "2:15",
+          "percentage": 17,
+          "text": "{value} of best performing industry videos are {percentage} sec in length"
+        },
+        {
+          "title": "Pacing",
+          "value": "Medium",
+          "percentage": 17,
+          "text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+        },
+        {
+          "title": "Format",
+          "value": "Live Action",
+          "percentage": 19,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Dominant Color",
+          "value": "Green",
+          "percentage": 14,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Age",
+          "value": "20",
+          "percentage": 69,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Gender",
+          "value": "Female",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Aspect Ratio",
+          "value": "1:1",
+          "percentage": 33,
+          "text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Resolution",
+          "value": "720p",
+          "percentage": 42,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Frame Rate",
+          "value": "30fps",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        }
+      ]
+    }
+  ],
+  "twitter": [
+    {
+      "video": {
+        "video": {
+          "title": "250,931 Views",
+          "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anthony-Davis-Finishes-with-43-Points.mp4",
+          "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anthony-Davis-Finishes-with-43-Points.jpg",
+          "socialIcon": "twitter"
+        },
+        "options": {
+          "size": "none",
+          "presentationCard": true,
+          "barColor": "cool-blue"
+        }
       },
-      {
-        "title": "Predominant Talent Age",
-        "value": "20",
-        "percentage": 49,
-				"text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+      "infos": [
+        {
+          "title": "Duration",
+          "value": "0:15",
+          "percentage": 75,
+          "text": "{value} of best performing industry videos are {percentage} sec in length"
+        },
+        {
+          "title": "Pacing",
+          "value": "Fast",
+          "percentage": 25,
+          "text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+        },
+        {
+          "title": "Format",
+          "value": "Stop Motion",
+          "percentage": 13,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Dominant Color",
+          "value": "Blue",
+          "percentage": 23,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Age",
+          "value": "32",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Gender",
+          "value": "Male",
+          "percentage": 23,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Aspect Ratio",
+          "value": "16:9",
+          "percentage": 75,
+          "text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Resolution",
+          "value": "1080p",
+          "percentage": 19,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Frame Rate",
+          "value": "24fps",
+          "percentage": 92,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        }
+      ]
+    },
+    {
+      "video": {
+        "video": {
+          "title": "2516 Views",
+          "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anything-can-happen.mp4",
+          "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anything-can-happen.jpg",
+          "socialIcon": "twitter"
+        },
+        "options": {
+          "size": "none",
+          "presentationCard": true,
+          "barColor": "coral-pink"
+        }
       },
-      {
-        "title": "Predominant Talent Gender",
-        "value": "Female",
-        "percentage": 56,
-				"text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+      "infos": [
+        {
+          "title": "Duration",
+          "value": "2:15",
+          "percentage": 17,
+          "text": "{value} of best performing industry videos are {percentage} sec in length"
+        },
+        {
+          "title": "Pacing",
+          "value": "Medium",
+          "percentage": 17,
+          "text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+        },
+        {
+          "title": "Format",
+          "value": "Live Action",
+          "percentage": 19,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Dominant Color",
+          "value": "Green",
+          "percentage": 14,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Age",
+          "value": "20",
+          "percentage": 69,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Gender",
+          "value": "Female",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Aspect Ratio",
+          "value": "1:1",
+          "percentage": 33,
+          "text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Resolution",
+          "value": "720p",
+          "percentage": 42,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Frame Rate",
+          "value": "30fps",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        }
+      ]
+    }
+  ],
+  "youtube": [
+    {
+      "video": {
+        "video": {
+          "title": "1,137,931 Views",
+          "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Down-goes-Brown.mp4",
+          "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Down-goes-Brown.mp4",
+          "socialIcon": "instagram"
+        },
+        "options": {
+          "size": "none",
+          "presentationCard": true,
+          "barColor": "cool-blue"
+        }
       },
-      {
-        "title": "Aspect Ratio",
-        "value": "1:1",
-        "percentage": 13,
-				"text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+      "infos": [
+        {
+          "title": "Duration",
+          "value": "0:15",
+          "percentage": 75,
+          "text": "{value} of best performing industry videos are {percentage} sec in length"
+        },
+        {
+          "title": "Pacing",
+          "value": "Fast",
+          "percentage": 25,
+          "text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+        },
+        {
+          "title": "Format",
+          "value": "Stop Motion",
+          "percentage": 13,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Dominant Color",
+          "value": "Blue",
+          "percentage": 23,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Age",
+          "value": "32",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Gender",
+          "value": "Male",
+          "percentage": 23,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Aspect Ratio",
+          "value": "16:9",
+          "percentage": 75,
+          "text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Resolution",
+          "value": "1080p",
+          "percentage": 19,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Frame Rate",
+          "value": "24fps",
+          "percentage": 92,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        }
+      ]
+    },
+    {
+      "video": {
+        "video": {
+          "title": "2516 Views",
+          "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Draymond-not-holding-back-on-the-ref.mp4",
+          "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Draymond-not-holding-back-on-the-ref.jpg",
+          "socialIcon": "instagram"
+        },
+        "options": {
+          "size": "none",
+          "presentationCard": true,
+          "barColor": "coral-pink"
+        }
       },
-      {
-        "title": "Resolution",
-        "value": "720p",
-        "percentage": 64,
-				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+      "infos": [
+        {
+          "title": "Duration",
+          "value": "2:15",
+          "percentage": 17,
+          "text": "{value} of best performing industry videos are {percentage} sec in length"
+        },
+        {
+          "title": "Pacing",
+          "value": "Medium",
+          "percentage": 17,
+          "text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+        },
+        {
+          "title": "Format",
+          "value": "Live Action",
+          "percentage": 19,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Dominant Color",
+          "value": "Green",
+          "percentage": 14,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Age",
+          "value": "20",
+          "percentage": 69,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Gender",
+          "value": "Female",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Aspect Ratio",
+          "value": "1:1",
+          "percentage": 33,
+          "text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Resolution",
+          "value": "720p",
+          "percentage": 42,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Frame Rate",
+          "value": "30fps",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        }
+      ]
+    }
+  ],
+  "pinterest": [
+    {
+      "video": {
+        "video": {
+          "title": "1,137,931 Views",
+          "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Georgetown-Commit-Mac-McClung.mp4",
+          "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Georgetown-Commit-Mac-McClung.jpg",
+          "socialIcon": "instagram"
+        },
+        "options": {
+          "size": "none",
+          "presentationCard": true,
+          "barColor": "cool-blue"
+        }
       },
-      {
-        "title": "Frame Rate",
-        "value": "30fps",
-        "percentage": 12,
-				"text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
-      }
-    ]
-  }
-]
+      "infos": [
+        {
+          "title": "Duration",
+          "value": "0:15",
+          "percentage": 75,
+          "text": "{value} of best performing industry videos are {percentage} sec in length"
+        },
+        {
+          "title": "Pacing",
+          "value": "Fast",
+          "percentage": 25,
+          "text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+        },
+        {
+          "title": "Format",
+          "value": "Stop Motion",
+          "percentage": 13,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Dominant Color",
+          "value": "Blue",
+          "percentage": 23,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Age",
+          "value": "32",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Gender",
+          "value": "Male",
+          "percentage": 23,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Aspect Ratio",
+          "value": "16:9",
+          "percentage": 75,
+          "text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Resolution",
+          "value": "1080p",
+          "percentage": 19,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Frame Rate",
+          "value": "24fps",
+          "percentage": 92,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        }
+      ]
+    },
+    {
+      "video": {
+        "video": {
+          "title": "2516 Views",
+          "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Handles-and-triple-threat-moves.mp4",
+          "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Handles-and-triple-threat-moves.jpg",
+          "socialIcon": "instagram"
+        },
+        "options": {
+          "size": "none",
+          "presentationCard": true,
+          "barColor": "coral-pink"
+        }
+      },
+      "infos": [
+        {
+          "title": "Duration",
+          "value": "2:15",
+          "percentage": 17,
+          "text": "{value} of best performing industry videos are {percentage} sec in length"
+        },
+        {
+          "title": "Pacing",
+          "value": "Medium",
+          "percentage": 17,
+          "text": "{percentage} of best performing industry videos have <b>{value} {title}</b>"
+        },
+        {
+          "title": "Format",
+          "value": "Live Action",
+          "percentage": 19,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Dominant Color",
+          "value": "Green",
+          "percentage": 14,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Age",
+          "value": "20",
+          "percentage": 69,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Predominant Talent Gender",
+          "value": "Female",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos are <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Aspect Ratio",
+          "value": "1:1",
+          "percentage": 33,
+          "text": "{percentage} of best performing industry videos have an <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Resolution",
+          "value": "720p",
+          "percentage": 42,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        },
+        {
+          "title": "Frame Rate",
+          "value": "30fps",
+          "percentage": 16,
+          "text": "{percentage} of best performing industry videos have a <b>{title}</b> of <b>{value}</b>"
+        }
+      ]
+    }
+  ]
+}
