@@ -30,9 +30,9 @@ const Main = (props) => (
             Quickview
           </h1>
         </div>
-      <div className="headerRight">
+        <div className="headerRight">
 
-      </div>
+        </div>
       </div>
       <div className="grid-collapse mt-50">
         {props.quickviewItems.map((item) => (

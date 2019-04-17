@@ -89,7 +89,7 @@ export class Detail extends React.Component {
       quickview: {
         selectedPlatform: { platformsValues },
       },
-		} = this.props
+    } = this.props
 
     return (
       <React.Fragment>
@@ -103,9 +103,9 @@ export class Detail extends React.Component {
                     activeClassName={style.active}
                     to={`/quickview/${toSlug(platform)}`}
                   >
-										{index === 0
-										? (platform.replace('-', ' '))
-										: (<i className={socialIconSelector(platform)}></i>)}
+                    {index === 0
+                    ? (platform.replace('-', ' '))
+                    : (<i className={socialIconSelector(platform)}></i>)}
                   </NavLink>
                 ))}
               </div>
