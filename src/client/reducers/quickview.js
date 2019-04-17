@@ -72,7 +72,7 @@ const quickviewReducer = (state = initialState, action) => {
       return state.set("loading", fromJS(true))
     case types.GET_QUICKVIEW_PLATFORM_SELECTED_SUCCESS:
       return state
-        .setIn(["selectedPlatform", "id"], fromJS(action.payload.id))
+        .setIn(["selectedPlatform", "platform"], fromJS(action.payload.platform))
         .setIn(
           ["selectedPlatform", "platformsValues"],
           fromJS(action.payload.platformsValues)
