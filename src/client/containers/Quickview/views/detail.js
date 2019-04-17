@@ -23,7 +23,7 @@ export class Detail extends React.Component {
     this.state = {
       selectedQuickviewId: null,
       platforms: [
-        'all platforms',
+        'all-platforms',
         'facebook',
         'instagram',
         'twitter',
@@ -34,17 +34,15 @@ export class Detail extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({ selectedQuickviewId: this.props.match.params.id })
-    this.props.getQuickviewPlatformSelectedRequest(this.props.match.params.id)
+    this.props.getQuickviewPlatformSelectedRequest(this.props.match.params.platform)
   }
 
   componentDidUpdate(prevProps) {
     const { match: prevMatch } = prevProps
     const { match, getQuickviewPlatformSelectedRequest } = this.props
 
-    if (prevMatch.params.id !== match.params.id) {
-      this.setState({ selectedQuickviewId: match.params.id })
-      getQuickviewPlatformSelectedRequest(match.params.id)
+    if (prevMatch.params.platform !== match.params.platform) {
+      getQuickviewPlatformSelectedRequest(match.params.platform)
     }
   }
 
@@ -86,12 +84,14 @@ export class Detail extends React.Component {
   }
 
   render() {
-    const { platforms, selectedQuickviewId } = this.state
+    const { platforms } = this.state
     const {
       quickview: {
-        selectedPlatform: { id, platformsValues },
+        selectedPlatform: { platformsValues },
       },
-    } = this.props
+		} = this.props
+
+		console.log(this.props);
 
     return (
       <React.Fragment>
@@ -103,9 +103,11 @@ export class Detail extends React.Component {
                   <NavLink
                     key={index}
                     activeClassName={style.active}
-                    to={`/quickview/${selectedQuickviewId}/${toSlug(platform)}`}
+                    to={`/quickview/${toSlug(platform)}`}
                   >
-                    {index === 0 ? (platform) : (<i className={socialIconSelector(platform)}></i>)}
+										{index === 0
+										? (platform.replace('-', ' '))
+										: (<i className={socialIconSelector(platform)}></i>)}
                   </NavLink>
                 ))}
               </div>
@@ -120,8 +122,8 @@ export class Detail extends React.Component {
                       </div>
                       <div className={style.items}>
                         {el.infos.map((item, index) => (
-                          <div className={style.itemWrapper}>
-                            <div key={index} className={style.infoItem}>
+                          <div key={index} className={style.itemWrapper}>
+                            <div className={style.infoItem}>
                               <p className={classnames('font-secondary-second', style.sectionBadge)}>
                                 <span>{item.title}</span>
                               </p>
