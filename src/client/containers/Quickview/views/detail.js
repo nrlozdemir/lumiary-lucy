@@ -116,10 +116,10 @@ export class Detail extends React.Component {
                   <div key={i} className={classnames("col-6", style.cardBlock)}>
                     <div className={style.card}>
                       <h1>
-                      	{i == 0
-                        	? "Best Performing Videos"
-													: "Underperforming Videos"
-												}
+                        {i == 0
+                          ? "Best Performing Videos"
+                          : "Underperforming Videos"
+                        }
                         <i className="icon icon-Information"></i>
                       </h1>
 
