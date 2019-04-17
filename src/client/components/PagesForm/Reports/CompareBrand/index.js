@@ -23,6 +23,7 @@ const CompareBrand = (props) => {
             component={SelectBox}
             type="checkbox"
             options={selectOptionsBrand}
+            canSelect={2}
           />
         </div>
 
