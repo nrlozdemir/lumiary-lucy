@@ -18,6 +18,7 @@ import ReportCards from './section/reportCards'
 
 import ReactTable from 'react-table'
 import CompareBrand from '../../components/PagesForm/Reports/CompareBrand'
+import PredefinedReport from '../../components/PagesForm/Reports/PredefinedReport'
 
 class Reports extends Component {
   constructor(props) {
@@ -87,7 +88,7 @@ class Reports extends Component {
         return <CompareBrand />
 
       case 'predefined-reports':
-        return <div>veli</div>
+        return <PredefinedReport />
 
       default:
         return null

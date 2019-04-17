@@ -1,18 +1,16 @@
 import React from 'react'
-import { Field, reduxForm, Fields } from 'redux-form'
+import { reduxForm, Fields } from 'redux-form'
 import cx from 'classnames'
-import Input from 'Components/Form/Input'
 import { compose } from 'redux'
 import style from '../style.scss'
-import { selectOptionsBrand } from '../options'
-import { required } from 'Utils/validate'
+import { selectPredefinedBrands } from '../options'
 import SelectBox from '../../../Form/CustomCheckbox'
 
 const getBrandKeysFromObject = () => {
-  return selectOptionsBrand.map((item) => item.value)
+  return selectPredefinedBrands.map((item) => item.value)
 }
 
-const CompareBrand = (props) => {
+const PredefinedReport = (props) => {
   return (
     <form onSubmit={() => console.log('object')}>
       <div className={style.formArea}>
@@ -22,20 +20,10 @@ const CompareBrand = (props) => {
             names={getBrandKeysFromObject()}
             component={SelectBox}
             type="checkbox"
-            options={selectOptionsBrand}
+            options={selectPredefinedBrands}
           />
         </div>
 
-        <div className={style.formGroup}>
-          <p className={style.label}>Title</p>
-          <Field
-            component={Input}
-            id="title"
-            name="title"
-            placeholder="Show this to steve…"
-            validate={[required]}
-          />
-        </div>
         <button
           className={cx(style.selectionLink, { [style.active]: props.valid })}
           type="submit"
@@ -57,6 +45,6 @@ const CompareBrand = (props) => {
 
 export default compose(
   reduxForm({
-    form: 'CompareBrand',
+    form: 'PredefinedReport',
   })
-)(CompareBrand)
+)(PredefinedReport)
