@@ -83,7 +83,7 @@ class Reports extends Component {
 
     switch (selectedReportCardKey && selectedReportCardKey.key) {
       case 'brand-insights':
-        return <ReportsForm />
+        return <ReportsForm handleSubmitFunc={this.props.brandInsightFormSubmit} />
 
       case 'compare-brands':
         return <CompareBrand />
@@ -217,7 +217,8 @@ function mapDispatchToProps(dispatch) {
   return {
     getReports: () => dispatch(actions.loadReports()),
     getMoreReports: () => dispatch(actions.loadMoreReports()),
-    deleteReport: (id) => dispatch(actions.loadDeleteReport(id)),
+		deleteReport: (id) => dispatch(actions.loadDeleteReport(id)),
+		brandInsightFormSubmit: (values) => dispatch(actions.brandInsightFormSubmit(values))
   }
 }
 

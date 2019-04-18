@@ -4,7 +4,7 @@
  *
  */
 
-import { fromJS, toJS } from 'immutable'
+import { fromJS } from 'immutable'
 import { createSelector } from 'reselect'
 
 export const types = {
@@ -16,9 +16,13 @@ export const types = {
   LOAD_MORE_REPORTS_SUCCESS: 'Reports/LOAD_MORE_REPORTS_SUCCESS',
   LOAD_MORE_REPORTS_ERROR: 'Reports/LOAD_MORE_REPORTS_ERROR',
 
-  DELETE_REPORT: 'Reports/LOAD_MORE_REPORT',
-  DELETE_REPORT_SUCCESS: 'Reports/LOAD_MORE_REPORT_SUCCESS',
-  DELETE_REPORT_ERROR: 'Reports/LOAD_MORE_REPORT_ERROR',
+  DELETE_REPORT: 'Reports/DELETE_REPORT',
+  DELETE_REPORT_SUCCESS: 'Reports/DELETE_REPORT_SUCCESS',
+  DELETE_REPORT_ERROR: 'Reports/DELETE_REPORT_ERROR',
+
+  BRAND_INSIGHT_REQUEST: 'Reports/BRAND_INSIGHT_REQUEST',
+  BRAND_INSIGHT_REQUEST_SUCCESS: 'Reports/BRAND_INSIGHT_REQUEST_SUCCESS',
+  BRAND_INSIGHT_REQUEST_ERROR: 'Reports/BRAND_INSIGHT_REQUEST_ERROR',
 }
 export const actions = {
   // LOAD REPORTS
@@ -47,11 +51,26 @@ export const actions = {
     type: types.DELETE_REPORT_ERROR,
     error,
   }),
+
+  // SUBMIT NEW BRAND INSIGHT
+  brandInsightFormSubmit: (values) => ({
+    type: types.BRAND_INSIGHT_REQUEST,
+    payload: values,
+  }),
+  brandInsightFormSubmitSuccess: (payload) => ({
+    type: types.BRAND_INSIGHT_REQUEST_SUCCESS,
+    payload,
+  }),
+  brandInsightFormSubmitError: (error) => ({
+    type: types.BRAND_INSIGHT_REQUEST_ERROR,
+    error,
+  }),
 }
 export const initialState = fromJS({
   reports: [],
   error: false,
   loading: false,
+  brandInsightValues: null,
 })
 
 const reportsReducer = (state = initialState, action) => {
@@ -111,6 +130,20 @@ const reportsReducer = (state = initialState, action) => {
         .set('loading', fromJS(false))
     /** END delete a report */
 
+    /** START submit brand insight form */
+    case types.BRAND_INSIGHT_REQUEST:
+      return state.set('loading', fromJS(true))
+
+    case types.BRAND_INSIGHT_REQUEST_SUCCESS: {
+      return state
+        .set('brandInsightValues', fromJS(action.payload))
+        .set('loading', fromJS(false))
+    }
+    case types.BRAND_INSIGHT_REQUEST_ERROR:
+      return state
+        .set('error', fromJS(action.error))
+        .set('loading', fromJS(false))
+    /** END submit brand insight form */
     default:
       return state
   }

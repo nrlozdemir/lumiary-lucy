@@ -6,4 +6,4 @@ if (typeof document !== "undefined") {
 	history = createBrowserHistory();
 }
 
-export default history;
+export default createBrowserHistory()

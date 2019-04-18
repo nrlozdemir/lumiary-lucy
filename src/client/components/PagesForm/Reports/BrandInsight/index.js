@@ -16,8 +16,9 @@ import {
 } from '../options'
 
 const ReportsForm = (props) => {
+	console.log(props)
   return (
-    <form onSubmit={() => console.log('object')}>
+    <form onSubmit={props.handleSubmit(props.handleSubmitFunc)}>
       <div className={style.formArea}>
         <div className={style.selectionArea}>
           <p className={style.label}>Choose a Brand</p>
