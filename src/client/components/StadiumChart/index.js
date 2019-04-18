@@ -18,37 +18,38 @@ class Stadium extends React.Component {
   }
 
   componentDidMount() {
+    let color, id
     this.stadium.current.addEventListener('mouseover', (event) => {
       let value = event.target.dataset.value
       let title = event.target.dataset.title
-      let color =
+      id = event.target.id
+      color =
         event.target.attributes['stroke'] &&
         event.target.attributes['stroke'].value
-      this.currentBar = event.target
-      if (value && title && this.currentBar && color) {
-        this.currentBar.addEventListener('mousemove', (a) => {
-          a.stopPropagation()
-          this.tooltip.current.style.top =
-            a.pageY - this.tooltip.current.clientHeight - 20 + 'px'
-          this.tooltip.current.style.left =
-            a.pageX - this.tooltip.current.clientWidth / 2 + 'px'
 
-          this.currentBar.attributes['stroke'].value = shadeHexColor(
-            color,
-            0.12
-          )
-        })
-
-        this.currentBar.addEventListener('mouseout', () => {
-          this.tooltip.current.innerHTML = ''
-          this.tooltip.current.style.display = 'none'
-          this.currentBar.attributes['stroke'].value = color
-          color = null
-        })
-
+      if (value && title && id === 'BAR') {
         this.tooltip.current.innerText = value + '% ' + title
         this.tooltip.current.style.display = 'block'
       }
+    })
+
+    this.stadium.current.addEventListener('mousemove', (event) => {
+      this.tooltip.current.style.top =
+        event.pageY - this.tooltip.current.clientHeight - 20 + 'px'
+      this.tooltip.current.style.left =
+        event.pageX - this.tooltip.current.clientWidth / 2 + 'px'
+      if (event.target.attributes['stroke'] && id === 'BAR') {
+        event.target.attributes['stroke'].value = shadeHexColor(color, 0.12)
+      }
+    })
+
+    this.stadium.current.addEventListener('mouseout', (event) => {
+      this.tooltip.current.innerHTML = ''
+      this.tooltip.current.style.display = 'none'
+      if (event.target.attributes['stroke']) {
+        event.target.attributes['stroke'].value = color
+      }
+      color = null
     })
 
     const { width, height } = this.text.current.getBoundingClientRect()
@@ -61,9 +62,9 @@ class Stadium extends React.Component {
   }
 
   componentWillUnmount() {
-    // this.stadium.current.removeEventListener('mouseover', null)
-    // this.currentBar.current.removeEventListener('mousemove', null)
-    // this.currentBar.current.removeEventListener('mouseout', null)
+    this.stadium.current.removeEventListener('mouseover', null)
+    this.stadium.current.removeEventListener('mousemove', null)
+    this.stadium.current.removeEventListener('mouseout', null)
   }
 
   render() {
@@ -82,6 +83,7 @@ class Stadium extends React.Component {
       infoSpaceH,
       data,
     } = this.props
+    // angelBorder = 4
 
     let l = data.length
 
@@ -124,19 +126,29 @@ class Stadium extends React.Component {
               let total = 2 * (w + h - (h / 2) * (4 - Math.PI))
               let value = (total * item.value) / 100
 
-              let angelWidth = w + borderWidth + angelBorder - 2 * border
-              let angelHeight = h + borderWidth + angelBorder - 2 * border
+              let angelWidth = w + borderWidth + angelBorder
+              let angelHeight = h + borderWidth + angelBorder
 
               let angelTotal =
                 2 *
                 (angelWidth + angelHeight - (angelHeight / 2) * (4 - Math.PI))
-              let angelValue = (angelTotal * item.value) / 100
-
+              let angelValue = (angelTotal * value) / total - item.value / 10
               let legendPos =
                 x + index * borderWidth + (borderWidth + border) / 2
 
               return (
                 <React.Fragment key={`rect-${index}`}>
+                  <defs>
+                    <rect
+                      id={`path-${index}`}
+                      x={x + index * borderWidth}
+                      y={y + index * borderWidth}
+                      width={w}
+                      height={h}
+                      rx={h / 2}
+                    />
+                  </defs>
+
                   {/**/}
                   <rect
                     id="BORDER"
@@ -168,28 +180,22 @@ class Stadium extends React.Component {
                   />
 
                   <rect
-                    id="ANGEL"
+                    id="ANGLE"
                     stroke={angleColor}
+                    strokeWidth={angelBorder}
                     style={{
                       transition: `stroke-dasharray ${animationSpeed}s linear`,
-                      strokeWidth: angelBorder,
-                      strokeDasharray: `${angelValue} ${angelTotal}`,
+                      strokeDasharray: `${angelValue} ${total}`,
                     }}
                     x={
-                      x +
-                      index * borderWidth -
-                      (borderWidth + border) / 2 -
-                      angelBorder / 2
+                      x + index * borderWidth - (borderWidth + angelBorder) / 2
                     }
                     y={
-                      y +
-                      index * borderWidth -
-                      (borderWidth + border) / 2 -
-                      angelBorder / 2
+                      y + index * borderWidth - (borderWidth + angelBorder) / 2
                     }
-                    width={w + borderWidth + border + angelBorder / 2}
-                    height={h + borderWidth + border + angelBorder / 2}
-                    rx={(h + borderWidth + border) / 2}
+                    width={w + borderWidth + angelBorder}
+                    height={h + borderWidth + angelBorder}
+                    rx={(h + borderWidth + angelBorder) / 2}
                   />
 
                   {l - 1 === index && stadiumText ? (
