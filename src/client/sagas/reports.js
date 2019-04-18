@@ -38,10 +38,11 @@ function* getMoreReports() {
 
 function* brandInsightSubmit(values) {
   console.log(values)
+  const id = `${randomKey(4)}-${randomKey(4)}-${randomKey(4)}-${randomKey(4)}`
   try {
     const payload = yield call(getGeneratedReportApi)
     yield put(actions.brandInsightFormSubmitSuccess(payload))
-    yield put(push('/reports/asdas'))
+    yield put(push(`/reports/${id}`))
   } catch (err) {
     yield put(actions.brandInsightFormSubmitError(err))
   }

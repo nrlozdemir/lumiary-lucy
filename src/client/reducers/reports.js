@@ -23,6 +23,14 @@ export const types = {
   BRAND_INSIGHT_REQUEST: 'Reports/BRAND_INSIGHT_REQUEST',
   BRAND_INSIGHT_REQUEST_SUCCESS: 'Reports/BRAND_INSIGHT_REQUEST_SUCCESS',
   BRAND_INSIGHT_REQUEST_ERROR: 'Reports/BRAND_INSIGHT_REQUEST_ERROR',
+
+  COMPARE_BRAND_REQUEST: 'Reports/COMPARE_BRAND_REQUEST',
+  COMPARE_BRAND_REQUEST_SUCCESS: 'Reports/COMPARE_BRAND_REQUEST_SUCCESS',
+  COMPARE_BRAND_REQUEST_ERROR: 'Reports/COMPARE_BRAND_REQUEST_ERROR',
+
+  PREDEFINED_BRAND_REQUEST: 'Reports/PREDEFINED_BRAND_REQUEST',
+  PREDEFINED_BRAND_REQUEST_SUCCESS: 'Reports/PREDEFINED_BRAND_REQUEST_SUCCESS',
+  PREDEFINED_BRAND_REQUEST_ERROR: 'Reports/PREDEFINED_BRAND_REQUEST_ERROR',
 }
 export const actions = {
   // LOAD REPORTS
@@ -63,6 +71,30 @@ export const actions = {
   }),
   brandInsightFormSubmitError: (error) => ({
     type: types.BRAND_INSIGHT_REQUEST_ERROR,
+    error,
+  }),
+  compareBrandFormSubmit: (values) => ({
+    type: types.COMPARE_BRAND_REQUEST,
+    payload: values,
+  }),
+  compareBrandFormSubmitSuccess: (payload) => ({
+    type: types.COMPARE_BRAND_REQUEST_SUCCESS,
+    payload,
+  }),
+  compareBrandFormSubmitError: (error) => ({
+    type: types.COMPARE_BRAND_REQUEST_ERROR,
+    error,
+  }),
+  predefinedReportFormSubmit: (values) => ({
+    type: types.PREDEFINED_REPORT_REQUEST,
+    payload: values,
+  }),
+  predefinedReportFormSubmitSuccess: (payload) => ({
+    type: types.PREDEFINED_REPORT_REQUEST_SUCCESS,
+    payload,
+  }),
+  predefinedReportFormSubmitError: (error) => ({
+    type: types.PREDEFINED_REPORT_REQUEST_ERROR,
     error,
   }),
 }
@@ -140,6 +172,36 @@ const reportsReducer = (state = initialState, action) => {
         .set('loading', fromJS(false))
     }
     case types.BRAND_INSIGHT_REQUEST_ERROR:
+      return state
+        .set('error', fromJS(action.error))
+        .set('loading', fromJS(false))
+    /** END submit brand insight form */
+
+    /** START submit brand insight form */
+    case types.COMPARE_BRAND_REQUEST:
+      return state.set('loading', fromJS(true))
+
+    case types.COMPARE_BRAND_REQUEST_SUCCESS: {
+      return state
+        .set('comparebrandValues', fromJS(action.payload))
+        .set('loading', fromJS(false))
+    }
+    case types.COMPARE_BRAND_REQUEST_ERROR:
+      return state
+        .set('error', fromJS(action.error))
+        .set('loading', fromJS(false))
+    /** END submit brand insight form */
+
+    /** START submit brand insight form */
+    case types.PREDEFINED_REPORT_REQUEST:
+      return state.set('loading', fromJS(true))
+
+    case types.PREDEFINED_REPORT_REQUEST_SUCCESS: {
+      return state
+        .set('predefinedReportValues', fromJS(action.payload))
+        .set('loading', fromJS(false))
+    }
+    case types.PREDEFINED_REPORT_REQUEST_ERROR:
       return state
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))

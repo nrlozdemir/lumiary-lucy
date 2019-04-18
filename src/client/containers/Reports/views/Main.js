@@ -86,10 +86,10 @@ class Reports extends Component {
         return <ReportsForm handleSubmitFunc={this.props.brandInsightFormSubmit} />
 
       case 'compare-brands':
-        return <CompareBrand />
+        return <CompareBrand handleSubmitFunc={this.props.compareBrandFormSubmit} />
 
       case 'predefined-reports':
-        return <PredefinedReport />
+        return <PredefinedReport handleSubmitFunc={this.props.predefinedBrandFormSubmit} />
 
       default:
         return null
@@ -218,7 +218,9 @@ function mapDispatchToProps(dispatch) {
     getReports: () => dispatch(actions.loadReports()),
     getMoreReports: () => dispatch(actions.loadMoreReports()),
 		deleteReport: (id) => dispatch(actions.loadDeleteReport(id)),
-		brandInsightFormSubmit: (values) => dispatch(actions.brandInsightFormSubmit(values))
+		brandInsightFormSubmit: (values) => dispatch(actions.brandInsightFormSubmit(values)),
+		compareBrandFormSubmit: (values) => dispatch(actions.compareBrandFormSubmit(values)),
+		predefinedBrandFormSubmit: (values) => dispatch(actions.predefinedBrandFormSubmit(values))
   }
 }
 
