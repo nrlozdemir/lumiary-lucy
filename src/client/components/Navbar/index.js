@@ -45,9 +45,13 @@ class Navbar extends React.Component {
       library: { videos },
     } = this.props
 
-    return (
+		// temporary solution for quickview
+
+		const isQuickview = match.url.split('/')[1] === 'quickview'
+
+		return (
       <React.Fragment>
-        {Object.keys(match.params).length ? (
+        {Object.keys(match.params).length && !isQuickview ? (
           <DetailHeader data={this.detailStates(match, videos)} />
         ) : (
           <div className={containerClass}>
