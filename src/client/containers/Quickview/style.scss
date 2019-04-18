@@ -2,9 +2,11 @@
   display: flex;
   margin-top: 72px;
   align-items: center;
+
   > div {
     flex: 1;
   }
+
   &:last-child div {
     flex: 1;
     margin-right: auto;
@@ -34,45 +36,212 @@
   justify-content: space-between;
 }
 
+.cardWrapper{
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
+  background-color: $color-dark-grey-blue;
+  margin: 0px 20px 72px;
+  width: calc(100% - 40);
+  display: flex;
+}
+
+.sectionBadge {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    font-weight: bold;
+    background-color: $color-dusk;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    font-size: 14px;
+    padding: 8px 24px;
+  }
+}
+
 .content {
   float: left;
   width: 100%;
-  margin-bottom: 70px;
+
+  .cardBlock{
+    padding-left: 0px;
+    margin-left: 0px;
+
+    &:first-child{
+      padding-left: 60px;
+      width: calc(50% - 61px); // itemWrapper:first-child border-right is 1px
+
+      .video{
+        margin-right: 60px;
+      }
+
+      .infoItem {
+        margin-right: 60px;
+      }
+
+      .itemWrapper{
+        &:after{
+          content: "";
+          position: absolute;
+          right: 0px;
+          top: 25%;
+          width: 1px;
+          height: 50%;
+          background-color: $color-dusk;
+        }
+      }
+    }
+    &:last-child{
+      padding-right: 60px;
+      width: calc(50% - 60px);
+
+      .video{
+        margin-left: 60px;
+      }
+
+      .infoItem {
+        margin-left: 60px;
+      }
+    }
+  }
+
   .card {
     position: relative;
-    padding: 64px 102px;
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
-    background-color: $color-dark-grey-blue;
+    padding: 64px 0px 0px;
+
+    h1{
+      color: $color-white;
+      font-family: $font-family-ClanOT;
+      font-size: 18px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      margin: 0px 60px 48px 0px;
+      text-align: center;
+
+      i{
+        margin-left: 8px;
+        font-size: 20px;
+      }
+    }
   }
 
   .items {
-    padding: 40px 56px 0;
-  }
+    padding: 40px 0px 0px;
 
-  .infoItem {
-    padding-bottom: 40px;
-    margin-bottom: 40px;
-    border-bottom: 1px solid $color-dusk;
+    .itemWrapper{
+      padding: 72px 0px;
+      width: 100%;
+      border-bottom: 1px solid $color-dusk;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
 
-    &:last-child {
-      margin-bottom: 0;
-      padding-bottom: 0;
-      border-bottom: none;
+      &:last-child{
+        border-bottom: none;
+      }
     }
 
-    > div {
-      text-align: center;
+    .infoItem {
+      width: 100%;
+      padding-bottom: 40px;
+      margin-bottom: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
 
-      &:nth-child(1) {
-        color: $color-cool-grey;
-        font-size: 18px;
-        font-family: $font-family-ClanOTNews;
-        margin-bottom: 16px;
-      }
-      &:nth-child(2) {
+      .itemValue{
+        margin: 32px 0px 38px;
         color: $color-white;
-        font-size: 48px;
         font-family: $font-family-primary;
+        font-size: 32px;
+        font-weight: 800;
+        font-style: normal;
+        font-stretch: condensed;
+        line-height: normal;
+        letter-spacing: normal;
+      }
+
+      .infoText{
+        margin: 32px 0px 0px 0px;
+        font-family: $font-family-ClanOTNews;
+        color: $color-white;
+        font-size: 14px;
+        line-height: 1.86;
+        font-weight: bold;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        letter-spacing: normal;
+        text-align: center;
+        max-height: 60px;
+        width: 300px;
+        overflow: hidden;
+      }
+
+      .progressBar {
+        width: 250px;
+        margin-left: 0px;
+        background-color: $color-dark-five;
+        border-radius: 10px;
+      }
+
+      .percentageBlue {
+        border-radius: 10px;
+        height: 10px;
+        background-color: $color-cool-blue;
+        -webkit-transition: width .5s, height .5s;
+        transition: width .5s, height .5s;
+      }
+
+      .percentagePink {
+        background-color: $color-coral-pink;
+      }
+
+      .progressText {
+        width: 250px;
+        color: $color-white;
+        font-size: 14px;
+        font-family: $font-family-ClanOTNews;
+        margin-bottom: 4px;
+
+        .rightTitle {
+          float: right;
+        }
+
+        &::after {
+          content: "";
+          clear: both;
+          display: table;
+        }
+      }
+
+      &:last-child {
+        margin-bottom: 0;
+        padding-bottom: 0;
+        border-bottom: none;
+      }
+
+      > div {
+        text-align: center;
+
+        &:nth-child(1) {
+          color: $color-cool-grey;
+          font-size: 18px;
+          font-family: $font-family-ClanOTNews;
+          margin-bottom: 16px;
+        }
+
+        &:nth-child(2) {
+          color: $color-white;
+          font-size: 48px;
+          font-family: $font-family-primary;
+        }
       }
     }
   }
@@ -87,12 +256,10 @@
     justify-content: center;
     align-items: center;
     margin-bottom: 40px;
-
     width: 100px;
     height: 100px;
     border-radius: 50%;
     background-color: $color-dark-five;
-
     color: $color-white;
     font-size: 12px;
     font-family: $font-family-ClanOTNews;
@@ -109,14 +276,12 @@
   display: flex;
   align-items: center;
   height: 56px;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-  background-color: $color-dusk;
   color: $color-white;
   font-family: $font-family-ClanOT;
   font-size: 14px;
   margin-left: 20px;
   margin-right: 20px;
-  margin-bottom: 30px;
+  margin-bottom: 48px;
 
   & > div  {
     -ms-flex-preferred-size: 0;
@@ -138,6 +303,7 @@
 
     .iconWrapper {
       margin-right: 16px;
+
       span {
         font-size: 30px;
       }
@@ -148,19 +314,38 @@
     display: flex;
     width: 100%;
     justify-content: space-between;
-    padding: 0 90px;
 
     a {
       cursor: pointer;
+      min-height: 56px;
+      min-width: 164px;
       color: $color-cool-grey;
-      font-family: $font-family-ClanOTNews;
+      font-family: $font-family-ClanOT;
+      text-align: center;
       text-decoration: none;
       text-transform: capitalize;
+      border: 1px solid $color-dusk;
+      background-color: $color-dark-five;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover, &:active{
+        color: $color-white;
+        background-color: $color-dusk;
+      }
+
+      i{
+        font-size: 30px;
+      }
     }
 
     .active {
       color: $color-white;
-      font-family: $font-family-ClanOT;
+      background-color: $color-dusk;
     }
   }
 }
