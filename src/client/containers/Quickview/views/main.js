@@ -33,11 +33,11 @@ export class Main extends React.Component {
   }
 
   componentDidMount() {
-		if(typeof this.props.match.params.platform === "undefined") {
-			this.props.getQuickviewItemsRequest("all-platforms")
-		} else {
-			this.props.getQuickviewItemsRequest(this.props.match.params.platform)
-		}
+    if(typeof this.props.match.params.platform === "undefined") {
+      this.props.getQuickviewItemsRequest("all-platforms")
+    } else {
+      this.props.getQuickviewItemsRequest(this.props.match.params.platform)
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -45,11 +45,11 @@ export class Main extends React.Component {
     const { match, getQuickviewItemsRequest } = this.props
 
     if (prevMatch.params.platform !== match.params.platform) {
-			if(typeof match.params.platform === "undefined") {
-				getQuickviewItemsRequest("all-platforms")
-			} else {
-				getQuickviewItemsRequest(match.params.platform)
-			}
+      if(typeof match.params.platform === "undefined") {
+        getQuickviewItemsRequest("all-platforms")
+      } else {
+        getQuickviewItemsRequest(match.params.platform)
+      }
     }
   }
 
