@@ -113,7 +113,6 @@ const routes = [
   },
   {
     path: '/reports',
-    exact: true,
     component: 'Reports',
     navigation: {
       level: 1,
@@ -123,12 +122,10 @@ const routes = [
   },
   {
     path: '/reports/:id',
-    exact: true,
     component: 'Reports',
   },
   {
-    path: '/reports/generated',
-    exact: true,
+    path: '/reports/generated/:id',
     removeNavbar: true,
     component: 'ReportGenerated',
   },

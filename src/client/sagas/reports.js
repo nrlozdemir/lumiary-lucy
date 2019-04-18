@@ -1,9 +1,15 @@
 import { takeLatest, call, put } from 'redux-saga/effects'
 import axios from 'axios'
-
+import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
 import reportsMockData from 'Api/mocks/reportsMock.json'
 import { randomKey } from 'Utils/index'
+import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
+
+function getGeneratedReportApi() {
+  //this will use ajax function in utils/api when real data is provided
+  return axios.get('/').then((res) => generatedReportMockData)
+}
 
 function getReportsApi() {
   //this will use ajax function in utils/api when real data is provided
@@ -30,6 +36,17 @@ function* getMoreReports() {
   }
 }
 
+function* brandInsightSubmit(values) {
+  console.log(values)
+  try {
+    const payload = yield call(getGeneratedReportApi)
+    yield put(actions.brandInsightFormSubmitSuccess(payload))
+    yield put(push('/reports/asdas'))
+  } catch (err) {
+    yield put(actions.brandInsightFormSubmitError(err))
+  }
+}
+
 function* deleteReport(data) {
   yield put(actions.loadDeleteReportSuccess(data.payload))
   // try {
@@ -42,5 +59,6 @@ function* deleteReport(data) {
 export default [
   takeLatest(types.LOAD_REPORTS, getReports),
   takeLatest(types.LOAD_MORE_REPORTS, getMoreReports),
+  takeLatest(types.BRAND_INSIGHT_REQUEST, brandInsightSubmit),
   takeLatest(types.DELETE_REPORT, deleteReport),
 ]
