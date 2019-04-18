@@ -14,7 +14,7 @@ const getBrandKeysFromObject = () => {
 
 const CompareBrand = (props) => {
   return (
-    <form onSubmit={() => console.log('object')}>
+    <form onSubmit={props.handleSubmit(props.handleSubmitFunc)}>
       <div className={style.formArea}>
         <div className={style.formGroup}>
           <p className={style.label}> Choose 2 Brands</p>
