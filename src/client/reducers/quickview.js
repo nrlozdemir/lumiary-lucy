@@ -10,18 +10,13 @@ import { createSelector } from 'reselect'
 export const types = {
   GET_QUICKVIEW_ITEMS_REQUEST: "Quickview/GET_QUICKVIEW_ITEMS_REQUEST",
   GET_QUICKVIEW_ITEMS_SUCCESS: "Quickview/GET_QUICKVIEW_ITEMS_SUCCESS",
-  GET_QUICKVIEW_ITEMS_FAILURE: "Quickview/GET_QUICKVIEW_ITEMS_FAILURE",
-  GET_QUICKVIEW_PLATFORM_SELECTED_REQUEST:
-    "Quickview/GET_QUICKVIEW_PLATFORM_SELECTED_REQUEST",
-  GET_QUICKVIEW_PLATFORM_SELECTED_SUCCESS:
-    "Quickview/GET_QUICKVIEW_PLATFORM_SELECTED_SUCCESS",
-  GET_QUICKVIEW_PLATFORM_SELECTED_FAILURE:
-    "Quickview/GET_QUICKVIEW_PLATFORM_SELECTED_FAILURE"
+  GET_QUICKVIEW_ITEMS_FAILURE: "Quickview/GET_QUICKVIEW_ITEMS_FAILURE"
 }
 
 export const actions = {
-  getQuickviewItemsRequest: () => ({
-    type: types.GET_QUICKVIEW_ITEMS_REQUEST
+  getQuickviewItemsRequest: payload => ({
+    type: types.GET_QUICKVIEW_ITEMS_REQUEST,
+    payload
   }),
   getQuickviewItemsSuccess: payload => ({
     type: types.GET_QUICKVIEW_ITEMS_SUCCESS,
@@ -29,18 +24,6 @@ export const actions = {
   }),
   getQuickviewItemsFailure: error => ({
     type: types.GET_QUICKVIEW_ITEMS_FAILURE,
-    error
-  }),
-  getQuickviewPlatformSelectedRequest: payload => ({
-    type: types.GET_QUICKVIEW_PLATFORM_SELECTED_REQUEST,
-    payload
-  }),
-  getQuickviewPlatformSelectedSuccess: payload => ({
-    type: types.GET_QUICKVIEW_PLATFORM_SELECTED_SUCCESS,
-    payload
-  }),
-  getQuickviewPlatformSelectedFailure: error => ({
-    type: types.GET_QUICKVIEW_PLATFORM_SELECTED_FAILURE,
     error
   })
 }
@@ -61,24 +44,13 @@ const quickviewReducer = (state = initialState, action) => {
       return state.set("loading", fromJS(true))
     case types.GET_QUICKVIEW_ITEMS_SUCCESS:
       return state
-        .set("quickviewItems", fromJS(action.payload))
-        .set("loading", fromJS(false))
-    case types.GET_QUICKVIEW_ITEMS_FAILURE:
-      return state
-        .set("error", fromJS(action.error))
-        .set("loading", fromJS(false))
-
-    case types.GET_QUICKVIEW_PLATFORM_SELECTED_REQUEST:
-      return state.set("loading", fromJS(true))
-    case types.GET_QUICKVIEW_PLATFORM_SELECTED_SUCCESS:
-      return state
         .setIn(["selectedPlatform", "platform"], fromJS(action.payload.platform))
         .setIn(
           ["selectedPlatform", "platformsValues"],
           fromJS(action.payload.platformsValues)
         )
         .set("loading", fromJS(false))
-    case types.GET_QUICKVIEW_PLATFORM_SELECTED_FAILURE:
+    case types.GET_QUICKVIEW_ITEMS_FAILURE:
       return state
         .set("error", fromJS(action.error))
         .set("loading", fromJS(false))
