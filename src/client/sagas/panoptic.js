@@ -117,7 +117,11 @@ function* getAudiencePerformanceData() {
 function* getAudienceAgeSliderData() {
   try {
     const payload = yield call(getAudienceDataApi)
-    const data = payload.ageSlider
+    const randomImage = (image) => {
+      return image.replace(/image=(\d+)/g, 'image=' + Math.floor(Math.random(1) * Math.floor(30)))
+    }
+		const data = payload.ageSlider
+		data.map(element => element.image = randomImage(element.image))
     yield put(actions.getAudienceAgeSliderDataSuccess(data))
   } catch (err) {
     yield put(actions.getAudienceAgeSliderDataError(err))
