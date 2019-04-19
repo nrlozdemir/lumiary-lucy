@@ -45,7 +45,7 @@ const routes = [
     component: 'Panoptic',
   },
   {
-    path: '/panoptic/:detail',
+    path: '/audience',
     exact: true,
     component: 'Audience',
   },
