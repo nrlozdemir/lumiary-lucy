@@ -121,7 +121,7 @@ const routes = [
     }
   },
   {
-    path: '/reports/:id',
+    path: '/reports/:type/:id',
     component: 'Reports',
   },
   {
