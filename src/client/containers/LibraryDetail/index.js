@@ -9,7 +9,7 @@ import { chartCombineDataset } from "Utils"
 import { actions, makeSelectLibraryDetail } from "Reducers/libraryDetail"
 import { actions as libraryActions, makeSelectLibrary } from "Reducers/library"
 
-import { barData_DatasetOptions, radarData_DatasetOptions, lineChartData_DatasetOptions } from './options'
+import { radarData_DatasetOptions, lineChartData_DatasetOptions } from './options'
 import LibraryDetailChartHeader from "./sections/LibraryDetailChartHeader"
 import LibraryDetailDoughnutChart from "./sections/LibraryDetailDoughnutChart"
 import LibraryDetailColorTemperature from "./sections/LibraryDetailColorTemperature"
