@@ -13,7 +13,6 @@ import history from './history'
 const App = () => (
 	<Provider store={store}>
 	    <ConnectedRouter history={history}>
-
 			<Routes />
 		</ConnectedRouter>
 

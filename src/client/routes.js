@@ -64,7 +64,7 @@ const routes = [
     component: 'Reports',
   },
   {
-    path: '/reports/:id',
+    path: '/reports/:type/:id',
     component: 'Reports',
   },
   {
