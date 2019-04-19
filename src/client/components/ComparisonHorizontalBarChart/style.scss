@@ -1,0 +1,24 @@
+.container {
+  display: flex;
+  padding: 8px 40px 40px;
+  justify-content: space-between;
+
+  .legends {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-bottom: 32px;
+    margin-right: -40px;
+    .legend {
+      border-radius: 17px;
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+      background-color: $color-dusk;
+      color: #ffffff;
+      font-family: $font-family-ClanOTBold;
+      font-size: 14px;
+      padding: 8px 28px;
+      margin: 15px 0;
+      text-align: center;
+    }
+  }
+}

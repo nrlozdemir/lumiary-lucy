@@ -3,12 +3,17 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
-import ContentVitalityScore from '../section/ContentVitalityScore';
+import ContentVitalityScore from '../section/ContentVitalityScore'
+import VideoComparison from '../section/VideoComparison'
 
 class CompareBrand extends Component {
   render() {
-    return <div>			<ContentVitalityScore />
-		</div>
+    return (
+      <div>
+        <ContentVitalityScore />
+        <VideoComparison />
+      </div>
+    )
   }
 }
 
