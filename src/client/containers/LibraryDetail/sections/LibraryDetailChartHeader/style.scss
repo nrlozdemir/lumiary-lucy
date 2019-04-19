@@ -2,7 +2,7 @@
   height: 100%;
 }
 
-.videoWrapper{
+.videoWrapper {
   position: relative;
   flex: 1 1 auto;
 }
@@ -17,33 +17,33 @@
   align-items: center;
   flex-direction: column;
 
-  .videoStat{
+  .videoStat {
     border-radius: 8px;
     min-height: 100px;
     width: 100%;
     flex-direction: row;
     margin-bottom: 24px;
-		display: flex;
-		justify-content: center;
-		align-items: center;
-		flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
     .progressBar {
       width: 250px;
       margin-left: 0px;
       background-color: $color-dark-five;
-			border-radius: 10px;
-			position: relative;
+      border-radius: 10px;
+      position: relative;
 
-			&:before{
-				content: "";
-				position: absolute;
-				width: 4px;
-				height: 100%;
-				top: 0px;
-				left: calc(50% - 2px);
-				background: $color-white;
-			}
+      &:before {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 100%;
+        top: 0px;
+        left: calc(50% - 2px);
+        background: $color-white;
+      }
     }
 
     .percentageBlue {
@@ -66,26 +66,26 @@
       margin-bottom: 12px;
 
       .leftTitle {
-				font-family: $font-family-ClanOT;
-				font-size: 14px;
-				font-weight: bold;
-				font-style: normal;
-				font-stretch: normal;
-				line-height: normal;
-				letter-spacing: normal;
-				color: $color-white;
+        font-family: $font-family-ClanOT;
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $color-white;
         float: left;
       }
 
       .rightTitle {
-				font-family: $font-family-primary;
-				font-size: 18px;
-				font-weight: 800;
-				font-style: normal;
-				font-stretch: condensed;
-				line-height: normal;
-				letter-spacing: normal;
-				color: $color-white;
+        font-family: $font-family-primary;
+        font-size: 18px;
+        font-weight: 800;
+        font-style: normal;
+        font-stretch: condensed;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $color-white;
         float: right;
       }
 
@@ -94,22 +94,22 @@
         clear: both;
         display: table;
       }
-		}
+    }
 
-		.averageText{
+    .averageText {
       font-family: $font-family-ClanOTNews;
-			font-size: 12px;
-			font-weight: normal;
-			font-style: normal;
-			font-stretch: normal;
-			line-height: normal;
-			letter-spacing: normal;
-			text-align: center;
-			color: $color-white;
-			margin-top: 8px;
-		}
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: $color-white;
+      margin-top: 8px;
+    }
 
-    &:last-child{
+    &:last-child {
       margin-bottom: 0px
     }
   }

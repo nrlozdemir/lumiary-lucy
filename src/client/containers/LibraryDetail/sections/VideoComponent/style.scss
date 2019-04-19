@@ -8,7 +8,7 @@
 
 .container {
   @extend %absolute;
-	height: 472px;
+  height: 472px;
   overflow: hidden;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   border: 1px solid $color-dusk;
@@ -17,7 +17,7 @@
 
 .video {
   @extend %absolute;
-	height: 472px;
+  height: 472px;
   background: black;
 }
 .bar {
