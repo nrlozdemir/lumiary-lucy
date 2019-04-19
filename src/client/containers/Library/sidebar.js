@@ -137,6 +137,7 @@ const Sidebar = (props) => {
 								component={Range}
 								minValue={0}
 								maxValue={60}
+								customClass={style.sidebarDurationRange}
 							/>
 						</div>
 						<div className="w-100 mt-48">
