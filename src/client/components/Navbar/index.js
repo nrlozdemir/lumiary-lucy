@@ -62,6 +62,9 @@ class Navbar extends React.Component {
               <NavLink to="/panoptic" activeClassName={style.activeLink}>
                 Panoptic
               </NavLink>
+              <NavLink to="/audience" activeClassName={style.activeLink}>
+                Audience
+              </NavLink>
               <NavLink to="/library" activeClassName={style.activeLink}>
                 Library
               </NavLink>
