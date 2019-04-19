@@ -2,6 +2,123 @@
   height: 100%;
 }
 
+.containerClass {
+	display: flex;
+}
+
+.videoWrapper {
+  position: relative;
+  flex: 1 1 auto;
+}
+
+.videoStatsWrapper{
+  width: 320px;
+  flex: 0 0 auto;
+  margin-left: 40px;
+  margin-right: 20px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-direction: column;
+
+  .videoStat {
+    border-radius: 8px;
+    min-height: 100px;
+    width: 100%;
+    flex-direction: row;
+    margin-bottom: 24px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .progressBar {
+      width: 250px;
+      margin-left: 0px;
+      background-color: $color-dark-five;
+      border-radius: 10px;
+      position: relative;
+
+      &:before {
+        content: "";
+        position: absolute;
+        width: 4px;
+        height: 100%;
+        top: 0px;
+        left: calc(50% - 2px);
+        background: $color-white;
+      }
+    }
+
+    .percentageBlue {
+      border-radius: 10px;
+      height: 10px;
+      background-color: $color-cool-blue;
+      -webkit-transition: width .5s, height .5s;
+      transition: width .5s, height .5s;
+    }
+
+    .percentagePink {
+      background-color: $color-coral-pink;
+    }
+
+    .progressText {
+      width: 250px;
+      color: $color-white;
+      font-size: 14px;
+      font-family: $font-family-ClanOTNews;
+      margin-bottom: 12px;
+
+      .leftTitle {
+        font-family: $font-family-ClanOT;
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $color-white;
+        float: left;
+      }
+
+      .rightTitle {
+        font-family: $font-family-primary;
+        font-size: 18px;
+        font-weight: 800;
+        font-style: normal;
+        font-stretch: condensed;
+        line-height: normal;
+        letter-spacing: normal;
+        color: $color-white;
+        float: right;
+      }
+
+      &::after {
+        content: "";
+        clear: both;
+        display: table;
+      }
+    }
+
+    .averageText {
+      font-family: $font-family-ClanOTNews;
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: $color-white;
+      margin-top: 8px;
+    }
+
+    &:last-child {
+      margin-bottom: 0px
+    }
+  }
+}
+
 .videoDetailHeader {
   height: 392px;
 }
