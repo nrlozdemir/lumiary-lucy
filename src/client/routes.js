@@ -121,13 +121,14 @@ const routes = [
     }
   },
   {
-    path: '/reports/:type/:id',
+		path: '/reports/:type/:id',
+		removeNavbar: true,
     component: 'Reports',
   },
   {
-    path: '/reports/generated/:id',
+    path: '/reports/brand-insight',
     removeNavbar: true,
-    component: 'ReportGenerated',
+    component: 'Reports',
   },
   {
     path: '*',

@@ -42,7 +42,7 @@ function* brandInsightSubmit(values) {
   try {
     const payload = yield call(getGeneratedReportApi)
     yield put(actions.brandInsightFormSubmitSuccess(payload))
-    if (payload) yield put(push(`/reports/generated/${id}`))
+    yield put(push(`/reports/brand-insight/${id}`))
   } catch (err) {
     yield put(actions.brandInsightFormSubmitError(err))
   }
@@ -54,7 +54,7 @@ function* compareBrandSubmit(values) {
   try {
     const payload = yield call(getGeneratedReportApi)
     yield put(actions.compareBrandFormSubmitSuccess(payload))
-    yield put(push(`/reports/compare-brand/${id}`))
+    yield put(push(`/reports/${id}`))
   } catch (err) {
     yield put(actions.compareBrandFormSubmitError(err))
   }
@@ -66,7 +66,7 @@ function* predefinedReportSubmit(values) {
   try {
     const payload = yield call(getGeneratedReportApi)
     yield put(actions.predefinedReportFormSubmitSuccess(payload))
-    yield put(push(`/reports/predefined-report/${id}`))
+    yield put(push(`/reports/${id}`))
   } catch (err) {
     yield put(actions.predefinedReportFormSubmitError(err))
   }
