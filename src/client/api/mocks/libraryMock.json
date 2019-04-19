@@ -128,10 +128,28 @@
         }
       ]
     },
-    "HeaderBarChartMock": {
-      "labels": ["Views", "Likes", "Comments", "Shares"],
-      "datasets": [{ "data": [39, 20, 20, 9] }, { "data": [40, 58, 2, 76] }]
-    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "174.1",
+        "percentage": "52"
+      },
+      {
+        "title": "Likes",
+        "score": "152.8",
+        "percentage": "42"
+      },
+      {
+        "title": "Comments",
+        "score": "186.4",
+        "percentage": "13"
+      },
+      {
+        "title": "Shares",
+        "score": "103.4",
+        "percentage": "28"
+      }
+    ],
     "ShotByShotMock": {
       "videoList": [
         "https://picsum.photos/100/160?image=28",
@@ -444,10 +462,28 @@
         }
       ]
     },
-    "HeaderBarChartMock": {
-      "labels": ["Views", "Likes", "Comments", "Shares"],
-      "datasets": [{ "data": [66, 69, 7, 93] }, { "data": [41, 13, 4, 46] }]
-    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "274.1",
+        "percentage": "14"
+      },
+      {
+        "title": "Likes",
+        "score": "252.8",
+        "percentage": "72"
+      },
+      {
+        "title": "Comments",
+        "score": "286.4",
+        "percentage": "56"
+      },
+      {
+        "title": "Shares",
+        "score": "203.4",
+        "percentage": "28"
+      }
+    ],
     "ShotByShotMock": {
       "videoList": [
         "https://picsum.photos/100/160?image=28",
@@ -760,10 +796,28 @@
         }
       ]
     },
-    "HeaderBarChartMock": {
-      "labels": ["Views", "Likes", "Comments", "Shares"],
-      "datasets": [{ "data": [47, 65, 63, 30] }, { "data": [60, 95, 25, 39] }]
-    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "374.1",
+        "percentage": "64"
+      },
+      {
+        "title": "Likes",
+        "score": "352.8",
+        "percentage": "22"
+      },
+      {
+        "title": "Comments",
+        "score": "386.4",
+        "percentage": "6"
+      },
+      {
+        "title": "Shares",
+        "score": "303.4",
+        "percentage": "28"
+      }
+    ],
     "ShotByShotMock": {
       "videoList": [
         "https://picsum.photos/100/160?image=79",
@@ -1076,10 +1130,28 @@
         }
       ]
     },
-    "HeaderBarChartMock": {
-      "labels": ["Views", "Likes", "Comments", "Shares"],
-      "datasets": [{ "data": [74, 57, 66, 52] }, { "data": [94, 90, 12, 45] }]
-    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "474.1",
+        "percentage": "99"
+      },
+      {
+        "title": "Likes",
+        "score": "452.8",
+        "percentage": "42"
+      },
+      {
+        "title": "Comments",
+        "score": "486.4",
+        "percentage": "77"
+      },
+      {
+        "title": "Shares",
+        "score": "403.4",
+        "percentage": "28"
+      }
+    ],
     "ShotByShotMock": {
       "videoList": [
         "https://picsum.photos/100/160?image=64",
@@ -1392,10 +1464,28 @@
         }
       ]
     },
-    "HeaderBarChartMock": {
-      "labels": ["Views", "Likes", "Comments", "Shares"],
-      "datasets": [{ "data": [14, 29, 21, 4] }, { "data": [47, 93, 82, 2] }]
-    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "574.1",
+        "percentage": "34"
+      },
+      {
+        "title": "Likes",
+        "score": "552.8",
+        "percentage": "36"
+      },
+      {
+        "title": "Comments",
+        "score": "586.4",
+        "percentage": "88"
+      },
+      {
+        "title": "Shares",
+        "score": "503.4",
+        "percentage": "66"
+      }
+    ],
     "ShotByShotMock": {
       "videoList": [
         "https://picsum.photos/100/160?image=61",
@@ -1708,10 +1798,28 @@
         }
       ]
     },
-    "HeaderBarChartMock": {
-      "labels": ["Views", "Likes", "Comments", "Shares"],
-      "datasets": [{ "data": [70, 77, 31, 11] }, { "data": [20, 31, 16, 91] }]
-    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "874.1",
+        "percentage": "12"
+      },
+      {
+        "title": "Likes",
+        "score": "352.8",
+        "percentage": "42"
+      },
+      {
+        "title": "Comments",
+        "score": "186.4",
+        "percentage": "99"
+      },
+      {
+        "title": "Shares",
+        "score": "103.4",
+        "percentage": "99"
+      }
+    ],
     "ShotByShotMock": {
       "videoList": [
         "https://picsum.photos/100/160?image=19",
@@ -2024,10 +2132,28 @@
         }
       ]
     },
-    "HeaderBarChartMock": {
-      "labels": ["Views", "Likes", "Comments", "Shares"],
-      "datasets": [{ "data": [26, 12, 14, 20] }, { "data": [87, 94, 78, 63] }]
-    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "674.1",
+        "percentage": "15"
+      },
+      {
+        "title": "Likes",
+        "score": "652.8",
+        "percentage": "30"
+      },
+      {
+        "title": "Comments",
+        "score": "686.4",
+        "percentage": "75"
+      },
+      {
+        "title": "Shares",
+        "score": "603.4",
+        "percentage": "90"
+      }
+    ],
     "ShotByShotMock": {
       "videoList": [
         "https://picsum.photos/100/160?image=81",
@@ -2340,10 +2466,28 @@
         }
       ]
     },
-    "HeaderBarChartMock": {
-      "labels": ["Views", "Likes", "Comments", "Shares"],
-      "datasets": [{ "data": [61, 71, 41, 25] }, { "data": [74, 9, 90, 87] }]
-    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "814.1",
+        "percentage": "14"
+      },
+      {
+        "title": "Likes",
+        "score": "312.8",
+        "percentage": "18"
+      },
+      {
+        "title": "Comments",
+        "score": "116.4",
+        "percentage": "16"
+      },
+      {
+        "title": "Shares",
+        "score": "113.4",
+        "percentage": "12"
+      }
+    ],
     "ShotByShotMock": {
       "videoList": [
         "https://picsum.photos/100/160?image=31",
@@ -2656,10 +2800,28 @@
         }
       ]
     },
-    "HeaderBarChartMock": {
-      "labels": ["Views", "Likes", "Comments", "Shares"],
-      "datasets": [{ "data": [11, 10, 12, 91] }, { "data": [83, 43, 92, 2] }]
-    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "74.1",
+        "percentage": "64"
+      },
+      {
+        "title": "Likes",
+        "score": "52.8",
+        "percentage": "42"
+      },
+      {
+        "title": "Comments",
+        "score": "16.4",
+        "percentage": "56"
+      },
+      {
+        "title": "Shares",
+        "score": "31.4",
+        "percentage": "28"
+      }
+    ],
     "ShotByShotMock": {
       "videoList": [
         "https://picsum.photos/100/160?image=64",
@@ -2972,10 +3134,28 @@
         }
       ]
     },
-    "HeaderBarChartMock": {
-      "labels": ["Views", "Likes", "Comments", "Shares"],
-      "datasets": [{ "data": [31, 53, 28, 57] }, { "data": [18, 81, 11, 4] }]
-    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "14.1",
+        "percentage": "74"
+      },
+      {
+        "title": "Likes",
+        "score": "22.8",
+        "percentage": "72"
+      },
+      {
+        "title": "Comments",
+        "score": "16.4",
+        "percentage": "76"
+      },
+      {
+        "title": "Shares",
+        "score": "3.4",
+        "percentage": "78"
+      }
+    ],
     "ShotByShotMock": {
       "videoList": [
         "https://picsum.photos/100/160?image=22",
@@ -3288,10 +3468,28 @@
         }
       ]
     },
-    "HeaderBarChartMock": {
-      "labels": ["Views", "Likes", "Comments", "Shares"],
-      "datasets": [{ "data": [78, 76, 50, 14] }, { "data": [83, 55, 24, 56] }]
-    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "64.1",
+        "percentage": "50"
+      },
+      {
+        "title": "Likes",
+        "score": "152.8",
+        "percentage": "50"
+      },
+      {
+        "title": "Comments",
+        "score": "86.4",
+        "percentage": "50"
+      },
+      {
+        "title": "Shares",
+        "score": "12.4",
+        "percentage": "50"
+      }
+    ],
     "ShotByShotMock": {
       "videoList": [
         "https://picsum.photos/100/160?image=79",
@@ -3604,10 +3802,28 @@
         }
       ]
     },
-    "HeaderBarChartMock": {
-      "labels": ["Views", "Likes", "Comments", "Shares"],
-      "datasets": [{ "data": [67, 60, 6, 21] }, { "data": [20, 54, 73, 99] }]
-    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "10.1",
+        "percentage": "1"
+      },
+      {
+        "title": "Likes",
+        "score": "32.8",
+        "percentage": "10"
+      },
+      {
+        "title": "Comments",
+        "score": "16.4",
+        "percentage": "20"
+      },
+      {
+        "title": "Shares",
+        "score": "20.4",
+        "percentage": "30"
+      }
+    ],
     "ShotByShotMock": {
       "videoList": [
         "https://picsum.photos/100/160?image=11",

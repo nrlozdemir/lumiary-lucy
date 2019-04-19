@@ -44,12 +44,12 @@ class AgeSlider extends React.Component {
         filters={[
           {
             type: 'engagement',
-            selectKey: 'AAS-asd',
+            selectKey: 'engagementOption',
             placeHolder: 'Engagement',
           },
           {
             type: 'timeRange',
-            selectKey: 'AAS-wds',
+            selectKey: 'timeRangeOption',
             placeHolder: 'Date',
           },
         ]}
