@@ -18,7 +18,7 @@ const libraryDetailCard = (data, index) => {
       width={data.percentage}
       customBarClass={style.progressBar}
       customPercentageClass={classnames(style.percentageBlue, {
-        [style.percentagePink]: (parseInt(data.percentage) > 50) ? false : true
+        [style.percentagePink]: !(parseInt(data.percentage) > 50)
       })}
     />
     <p className={style.averageText}>Avg</p>
@@ -26,7 +26,7 @@ const libraryDetailCard = (data, index) => {
 }
 
 const LibraryDetailChartHeader = ({ barChartData, videoUrl, title, socialIcon }) => (
-  <div className="grid-container mr-20 ml-20 mt-72" style={{ display: 'flex' }}>
+  <div className={classnames("grid-container mr-20 ml-20 mt-72", style.containerClass)}>
     <div className={classnames(
       "col-6",
       style.videoWrapper)
