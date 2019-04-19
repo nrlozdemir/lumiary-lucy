@@ -78,21 +78,17 @@ export class LibraryDetail extends React.Component {
 
     const { videoUrl, title, socialIcon } = videos.find(({ id }) => id == videoId) || {}
 
-    let barData = null
     let lineChartDataCombined = null
     let radarDataCombined = null
 
-    if (barChartData) {
-      barData = chartCombineDataset(barChartData, barData_DatasetOptions)
-    }
     if (shotByShotData) {
       radarDataCombined = chartCombineDataset(shotByShotData.radarData, radarData_DatasetOptions)
     }
 
     return (
       <React.Fragment>
-        {barData && <LibraryDetailChartHeader
-          barData={barData}
+        {barChartData && <LibraryDetailChartHeader
+          barChartData={barChartData}
           videoUrl={videoUrl}
           title={title}
           socialIcon={socialIcon}
