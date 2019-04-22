@@ -50,6 +50,11 @@ const routes = [
     component: 'Audience',
   },
   {
+    path: '/audience',
+    exact: true,
+    component: 'Audience',
+  },
+  {
     path: '/marketview',
     exact: true,
     component: 'Marketview',
