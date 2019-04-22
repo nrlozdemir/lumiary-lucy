@@ -55,7 +55,12 @@
   .activeLink {
     color: $color-white;
     font-size: 14px;
-    font-family: $font-family-ClanOTBold;
+		font-family: $font-family-ClanOTBold;
+
+		&:hover{
+			font-family: $font-family-ClanOTBold;
+			font-weight: normal;
+		}
 
     &:before {
       content: '';
@@ -66,6 +71,7 @@
       background-color: $color-cool-blue;
     }
 	}
+
 	a:hover{
 		@extend .activeLink;
 		font-family: $font-family-ClanOTNews;
