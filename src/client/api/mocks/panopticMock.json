@@ -369,5 +369,159 @@
         }
       ]
     }
-  ]
+  ],
+  "flipCardsData": {
+    "views": {
+      "bar": {
+        "width": 8,
+        "maxHeight": 36,
+        "labelCharLength": 1,
+        "zeroFill": 1
+      },
+      "stat": [
+        {
+          "score": 20,
+          "label": "Sunday"
+        },
+        {
+          "score": 50,
+          "label": "Monday"
+        },
+        {
+          "score": 80,
+          "label": "Tuesday"
+        },
+        {
+          "score": 40,
+          "label": "Wednesday"
+        },
+        {
+          "score": 70,
+          "label": "Thursday"
+        },
+        {
+          "score": 50,
+          "label": "Friday"
+        },
+        {
+          "score": 30,
+          "label": "Saturday"
+        }
+      ]
+    },
+    "likes": {
+      "bar": {
+        "width": 8,
+        "maxHeight": 36,
+        "labelCharLength": 1,
+        "zeroFill": 1
+      },
+      "stat": [
+        {
+          "score": 80,
+          "label": "Sunday"
+        },
+        {
+          "score": 60,
+          "label": "Monday"
+        },
+        {
+          "score": 50,
+          "label": "Tuesday"
+        },
+        {
+          "score": 26,
+          "label": "Wednesday"
+        },
+        {
+          "score": 60,
+          "label": "Thursday"
+        },
+        {
+          "score": 48,
+          "label": "Friday"
+        },
+        {
+          "score": 54,
+          "label": "Saturday"
+        }
+      ]
+    },
+    "comments": {
+      "bar": {
+        "width": 8,
+        "maxHeight": 36,
+        "labelCharLength": 1,
+        "zeroFill": 1
+      },
+      "stat": [
+        {
+          "score": 24,
+          "label": "Sunday"
+        },
+        {
+          "score": 48,
+          "label": "Monday"
+        },
+        {
+          "score": 60,
+          "label": "Tuesday"
+        },
+        {
+          "score": 74,
+          "label": "Wednesday"
+        },
+        {
+          "score": 26,
+          "label": "Thursday"
+        },
+        {
+          "score": 48,
+          "label": "Friday"
+        },
+        {
+          "score": 54,
+          "label": "Saturday"
+        }
+      ]
+    },
+    "shares": {
+      "bar": {
+        "width": 8,
+        "maxHeight": 36,
+        "labelCharLength": 1,
+        "zeroFill": 1
+      },
+      "stat": [
+        {
+          "score": 40,
+          "label": "Sunday"
+        },
+        {
+          "score": 10,
+          "label": "Monday"
+        },
+        {
+          "score": 20,
+          "label": "Tuesday"
+        },
+        {
+          "score": 40,
+          "label": "Wednesday"
+        },
+        {
+          "score": 60,
+          "label": "Thursday"
+        },
+        {
+          "score": 80,
+          "label": "Friday"
+        },
+        {
+          "score": 100,
+          "label": "Saturday"
+        }
+      ]
+    }
+  }
 }

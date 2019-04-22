@@ -2,7 +2,28 @@ import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import { barDurationOptions } from './options'
 
-const TotalCompetitorViewsChart = ({ barDurationData, height, width }) => {
+const TotalCompetitorViewsChart = ({
+  barDurationData,
+  height = 290,
+	width = 200,
+	tickOptions = {},
+}) => {
+  const chartOptions = {
+    ...barDurationOptions,
+    scales: {
+      ...barDurationOptions.scales,
+      yAxes: [
+        {
+          ...barDurationOptions.scales.yAxes[0],
+          ticks: {
+            ...barDurationOptions.scales.yAxes[0].ticks,
+            ...tickOptions,
+					},
+				}
+			]
+		}
+	};
+
   const plugins = [
     {
       beforeDraw: function(chart, easing) {
@@ -44,13 +65,14 @@ const TotalCompetitorViewsChart = ({ barDurationData, height, width }) => {
         ctx.restore()
       },
     },
-  ]
+	]
+
   return (
     <Bar
       data={barDurationData}
-      height={height}
-      width={width}
-      options={{ ...barDurationOptions }}
+			height={height}
+			width={width}
+      options={{ ...chartOptions }}
       plugins={plugins}
     />
   )
