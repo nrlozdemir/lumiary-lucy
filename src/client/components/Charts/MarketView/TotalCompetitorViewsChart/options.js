@@ -1,6 +1,6 @@
 export const barDurationOptions = {
   responsive: true,
-  maintainAspectRatio: false,
+
   legend: {
     display: false,
   },

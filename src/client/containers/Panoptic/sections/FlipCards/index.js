@@ -16,7 +16,7 @@ const days = [
   'Saturday',
 ]
 const selected = days[new Date().getDay()]
-const selectedPrev = days[new Date().getDay() - 1]
+const selectedPrev = days[(day => new Date(day.setDate(day.getDate()-1)).getDay())(new Date)]
 
 class PanopticFlipCards extends React.Component {
   componentDidMount() {

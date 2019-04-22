@@ -19,7 +19,14 @@ const PacingCard = ({ barData }) => {
           <HorizontalStackedBarChart barData={barData} />
         </div>
         <div className={style.pacingCardInnerItem}>
-          <StadiumChart />
+          <StadiumChart
+            data={[
+              { value: 90, color: '#51ADC0', title: 'Slowest' },
+              { value: 90, color: '#8567F0', title: 'Slow' },
+              { value: 50, color: '#D0506C', title: 'Medium' },
+              { value: 100, color: '#ACB0BE', title: 'Fast' },
+            ]}
+          />
         </div>
       </div>
     </div>
