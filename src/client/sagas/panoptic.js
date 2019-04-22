@@ -77,7 +77,13 @@ function* getPacingCardData() {
   try {
     const payload = yield call(getPanopticDataApi)
     const shuffleData = payload.pacingChartData
-    shuffleData.datasets = _.shuffle(shuffleData.datasets)
+    shuffleData.horizontalStackedBarData.datasets = _.shuffle(
+      shuffleData.horizontalStackedBarData.datasets
+    )
+
+    shuffleData.stadiumData.map((item) => {
+      item.value = _.random(40, 90)
+    })
     yield put(actions.getPacingCardDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getPacingCardDataError(err))
