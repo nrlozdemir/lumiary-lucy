@@ -104,20 +104,15 @@ const Marketview = () => (<React.Fragment>
 </React.Fragment>)
 
 const VideoTitle = (props) => {
-
 	const {
 		match,
 		library: { videos },
 	} = props
 
 	if(videos && match){
-		console.log(videos)
-		console.log(match)
-		console.log(Object.values(match.params)[0])
-		//const video = videos.find(({ id }) => id == Object.values(match.params)[0]) || {}
-		//title = video.title
-		//{capitalizeFirstLetter(title)}
-		return (<div></div>)
+		const video = videos.find(({ id }) => id == Object.values(match.params)[0]) || {}
+		const title = video.title
+		return (<div>{title && capitalizeFirstLetter(title)}</div>)
 	}
 }
 
