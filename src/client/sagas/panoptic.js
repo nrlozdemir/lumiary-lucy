@@ -77,7 +77,13 @@ function* getPacingCardData() {
   try {
     const payload = yield call(getPanopticDataApi)
     const shuffleData = payload.pacingChartData
-    shuffleData.datasets = _.shuffle(shuffleData.datasets)
+    shuffleData.horizontalStackedBarData.datasets = _.shuffle(
+      shuffleData.horizontalStackedBarData.datasets
+    )
+
+    shuffleData.stadiumData.map((item) => {
+      item.value = _.random(40, 90)
+    })
     yield put(actions.getPacingCardDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getPacingCardDataError(err))
@@ -117,8 +123,12 @@ function* getAudiencePerformanceData() {
 function* getAudienceAgeSliderData() {
   try {
     const payload = yield call(getAudienceDataApi)
-    const shuffleData = payload.ageSlider
-    yield put(actions.getAudienceAgeSliderDataSuccess(_.shuffle(shuffleData)))
+    const randomImage = (image) => {
+      return image.replace(/image=(\d+)/g, 'image=' + Math.floor(Math.random(1) * Math.floor(30)))
+    }
+		const data = payload.ageSlider
+		data.map(element => element.image = randomImage(element.image))
+    yield put(actions.getAudienceAgeSliderDataSuccess(data))
   } catch (err) {
     yield put(actions.getAudienceAgeSliderDataError(err))
   }
