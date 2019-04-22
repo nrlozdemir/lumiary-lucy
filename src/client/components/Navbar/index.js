@@ -53,26 +53,22 @@ const Logo = () => (
   </div>
 )
 
-const Default = () => (<React.Fragment>
-  <NavLink to="/panoptic" activeClassName={style.activeLink}>
-    Panoptic
-  </NavLink>
-  <NavLink to="/audience" activeClassName={style.activeLink}>
-    Audience
-  </NavLink>
-  <NavLink to="/library" activeClassName={style.activeLink}>
-    Library
-  </NavLink>
-  <NavLink to="/marketview" activeClassName={style.activeLink}>
-    Marketview
-  </NavLink>
-  <NavLink to="/quickview" activeClassName={style.activeLink}>
-    QuickView
-  </NavLink>
-  <NavLink to="/reports" activeClassName={style.activeLink}>
-    Reports
-  </NavLink>
-</React.Fragment>)
+const Default = (props) => {
+
+	const nav = Object.values(props)
+		.filter((r) => r.navigation && r.navigation.level == 1 && r.navigation.order > 0)
+		.sort((a, b) => (a.navigation.order > b.navigation.order)
+			? 1
+			: ((b.navigation.order > a.navigation.order) ? -1 : 0))
+
+  return (
+    nav.map((el, i) => (
+			<NavLink key={i} to={el.path} activeClassName={style.activeLink}>
+				{el.navigation.title}
+			</NavLink>
+		))
+  )
+}
 
 const SelectedNavLink = (props) => {
   return(<React.Fragment>{capitalizeFirstLetter(props[2])}</React.Fragment>)
@@ -116,7 +112,8 @@ const VideoTitle = (props) => {
 }
 
 const Selector = (props) => {
-  const url = props.match.url.split('/')
+	const url = props.match.url.split('/')
+	const navigation = props.routeConfig
 
   switch (url[1]) {
     case ("marketview"):
@@ -141,14 +138,14 @@ const Selector = (props) => {
       else {
         return {
           "leftSide": <Logo />,
-          "navigation": <Default />
+          "navigation": <Default {...navigation} />
         }
       }
       break;
     default:
       return {
         "leftSide": <Logo />,
-        "navigation": <Default />
+        "navigation": <Default {...navigation} />
       }
       break;
   }
@@ -175,27 +172,8 @@ const Template = (props) => {
 
 /* eslint-disable react/prefer-stateless-function */
 class Navbar extends React.Component {
-  detailStates(match, videos) {
-    const basePath = match.path.split('/')[1]
-    let title = null
-
-    if (basePath === 'library') {
-      const video =
-        videos.find(({ id }) => id == Object.values(match.params)[0]) || {}
-      title = video.title
-    }
-
-    return {
-      basePath,
-      title,
-      url: '/' + basePath,
-    }
-  }
 
   render() {
-
-		console.log(this.props)
-
     return (
       <React.Fragment>
         <Template {...this.props} />
