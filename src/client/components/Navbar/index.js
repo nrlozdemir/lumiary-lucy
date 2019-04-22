@@ -10,7 +10,6 @@ import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
-import DetailHeader from './DetailHeader'
 import { makeSelectLibrary } from 'Reducers/library'
 
 import style from './style.scss'
@@ -194,6 +193,8 @@ class Navbar extends React.Component {
   }
 
   render() {
+
+		console.log(this.props)
 
     return (
       <React.Fragment>
