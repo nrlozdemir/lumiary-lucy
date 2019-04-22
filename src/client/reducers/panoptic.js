@@ -87,6 +87,10 @@ export const types = {
     'Panoptic/UPDATE_AUDIENCE_PERFORMANCE_SUCCESS',
   UPDATE_AUDIENCE_PERFORMANCE_ERROR:
     'Panoptic/UPDATE_AUDIENCE_PERFORMANCE_ERROR',
+
+  GET_FLIPCARDS_DATA: 'Panoptic/GET_FLIPCARDS_DATA',
+  GET_FLIPCARDS_DATA_SUCCESS: 'Panoptic/GET_FLIPCARDS_DATA_SUCCESS',
+  GET_FLIPCARDS_DATA_ERROR: 'Panoptic/GET_FLIPCARDS_DATA_ERROR',
 }
 
 export const actions = {
@@ -279,6 +283,21 @@ export const actions = {
     type: types.UPDATE_AUDIENCE_PERFORMANCE_ERROR,
     error,
   }),
+
+  getFlipCardsData: (data) => {
+    return {
+      type: types.GET_FLIPCARDS_DATA,
+      data,
+    }
+  },
+  getFlipCardsDataSuccess: (payload) => ({
+    type: types.GET_FLIPCARDS_DATA_SUCCESS,
+    payload,
+  }),
+  getFlipCardsDataError: (error) => ({
+    type: types.GET_FLIPCARDS_DATA_ERROR,
+    error,
+  }),
 }
 
 export const initialState = fromJS({
@@ -342,7 +361,12 @@ export const initialState = fromJS({
     data: {},
     loading: false,
     error: null,
-  },
+	},
+  flipCardsData: {
+    data: {},
+    loading: false,
+    error: null,
+	},
   audienceData: null,
   loading: false,
   error: false,
@@ -562,6 +586,19 @@ const panopticReducer = (state = initialState, action) => {
         .setIn(['audienceDominantColorData', 'error'], fromJS(action.error))
         .setIn(['audienceDominantColorData', 'loading'], fromJS(false))
 
+    case types.GET_FLIPCARDS_DATA:
+      return state.setIn(['flipCardsData', 'loading'], fromJS(true))
+
+    case types.GET_FLIPCARDS_DATA_SUCCESS:
+      return state
+        .setIn(['flipCardsData', 'data'], fromJS(action.payload))
+        .setIn(['flipCardsData', 'loading'], fromJS(false))
+
+    case types.GET_FLIPCARDS_DATA_ERROR:
+      return state
+        .setIn(['flipCardsData', 'error'], fromJS(action.error))
+        .setIn(['flipCardsData', 'loading'], fromJS(false))
+
     default:
       return state
   }
@@ -680,6 +717,15 @@ const selectAudienceDominantColorDomain = (state) =>
 export const makeSelectAudienceDominantColor = () =>
   createSelector(
     selectAudienceDominantColorDomain,
+    (substate) => substate.toJS()
+	)
+
+const selectFlipCardsDomain = (state) =>
+ state.Panoptic.get('flipCardsData')
+
+export const makeSelectFlipCards = () =>
+  createSelector(
+    selectFlipCardsDomain,
     (substate) => substate.toJS()
   )
 

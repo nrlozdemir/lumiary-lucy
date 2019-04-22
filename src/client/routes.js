@@ -36,7 +36,7 @@ const routes = [
     component: 'Quickview',
   },
   {
-    path: '/quickview/:id/:platform',
+    path: '/quickview/:platform',
     component: 'Quickview',
   },
   {
