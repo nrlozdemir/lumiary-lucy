@@ -16,6 +16,29 @@
   }
 }
 
+.backTo {
+  flex: 3;
+	font-size: 14px;
+	font-family: $font-family-ClanOT;
+
+	a {
+		color: $color-white;
+		text-decoration: none;
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+
+		.text {
+			margin-left: 20px;
+			font-size: 14px;
+		}
+
+		span {
+			font-size: 30px;
+		}
+	}
+}
+
 .links {
   flex: 6;
   text-align: center;
