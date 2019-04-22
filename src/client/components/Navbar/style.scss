@@ -50,7 +50,7 @@
     text-decoration: none;
     position: relative;
     font-family: $font-family-ClanOTNews;
-  }
+	}
 
   .activeLink {
     color: $color-white;
@@ -65,7 +65,12 @@
       bottom: -30px;
       background-color: $color-cool-blue;
     }
-  }
+	}
+	a:hover{
+		@extend .activeLink;
+		font-family: $font-family-ClanOTNews;
+		font-weight: normal;
+	}
 }
 
 .profile {
