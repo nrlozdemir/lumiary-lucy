@@ -17,7 +17,7 @@ import style from './style.scss'
 // import PropTypes from 'prop-types';
 
 function capitalizeFirstLetter(string) {
-	return string.charAt(0).toUpperCase() + string.slice(1);
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 const containerClass = classnames('bg-dark-grey-blue ' + style.container)
@@ -27,29 +27,29 @@ const imageClass = classnames('circleImage ' + style.profileImage)
 
 
 const BackTo = (props) => {
-	let link, title = ""
-	if(typeof(props) != "undefined" && props[1] != null){
-		title = props[1]
-		link = "/" + props[1]
-	}
-	else{
-		title = "overview"
-		link = "/"
-	}
-	return (<div className={style.backTo}>
-		<Link to={link}>
-			<span className="icon-Left-Arrow-Circle">
-				<span className="path1" />
-				<span className="path2" />
-				<span className="path3" />
-			</span>
-			<span className={style.text}>Back to {capitalizeFirstLetter(title)}</span>
-		</Link>
-	</div>)
+  let link, title = ""
+  if(typeof(props) != "undefined" && props[1] != null){
+    title = props[1]
+    link = "/" + props[1]
+  }
+  else{
+    title = "overview"
+    link = "/"
+  }
+  return (<div className={style.backTo}>
+    <Link to={link}>
+      <span className="icon-Left-Arrow-Circle">
+        <span className="path1" />
+        <span className="path2" />
+        <span className="path3" />
+      </span>
+      <span className={style.text}>Back to {capitalizeFirstLetter(title)}</span>
+    </Link>
+  </div>)
 }
 
 const Logo = () => (
-	<div className={style.logo}>
+  <div className={style.logo}>
     <Link to="/">Lumiere</Link>
   </div>
 )
@@ -76,7 +76,7 @@ const Default = () => (<React.Fragment>
 </React.Fragment>)
 
 const SelectedNavLink = (props) => {
-	return(<React.Fragment>{capitalizeFirstLetter(props[2])}</React.Fragment>)
+  return(<React.Fragment>{capitalizeFirstLetter(props[2])}</React.Fragment>)
 }
 
 const Marketview = () => (<React.Fragment>
@@ -104,74 +104,74 @@ const Marketview = () => (<React.Fragment>
 </React.Fragment>)
 
 const VideoTitle = (props) => {
-	const {
-		match,
-		library: { videos },
-	} = props
+  const {
+    match,
+    library: { videos },
+  } = props
 
-	if(videos && match){
-		const video = videos.find(({ id }) => id == Object.values(match.params)[0]) || {}
-		const title = video.title
-		return (<div>{title && capitalizeFirstLetter(title)}</div>)
-	}
+  if(videos && match){
+    const video = videos.find(({ id }) => id == Object.values(match.params)[0]) || {}
+    const title = video.title
+    return (<div>{title && capitalizeFirstLetter(title)}</div>)
+  }
 }
 
 const Selector = (props) => {
-	const url = props.match.url.split('/')
+  const url = props.match.url.split('/')
 
   switch (url[1]) {
     case ("marketview"):
-			if(url[2]) {
-				return {
-					"leftSide": <BackTo {...url} />,
-					"navigation": <SelectedNavLink {...url} />
-				}
-			}
+      if(url[2]) {
+        return {
+          "leftSide": <BackTo {...url} />,
+          "navigation": <SelectedNavLink {...url} />
+        }
+      }
       return {
-				"leftSide": <BackTo />,
-				"navigation": <Marketview />
-			}
+        "leftSide": <BackTo />,
+        "navigation": <Marketview />
+      }
       break;
-		case ("library"):
-			if(url[2] && url[2].match(/(\d+)/gm)) {
-				return {
-					"leftSide": <BackTo {...url} />,
-					"navigation": <VideoTitle {...props} />
-				}
-			}
-			else {
-				return {
-					"leftSide": <Logo />,
-					"navigation": <Default />
-				}
-			}
-			break;
+    case ("library"):
+      if(url[2] && url[2].match(/(\d+)/gm)) {
+        return {
+          "leftSide": <BackTo {...url} />,
+          "navigation": <VideoTitle {...props} />
+        }
+      }
+      else {
+        return {
+          "leftSide": <Logo />,
+          "navigation": <Default />
+        }
+      }
+      break;
     default:
-			return {
-				"leftSide": <Logo />,
-				"navigation": <Default />
-			}
+      return {
+        "leftSide": <Logo />,
+        "navigation": <Default />
+      }
       break;
   }
 }
 
 const Template = (props) => {
-	const templateSelector = Selector(props)
+  const templateSelector = Selector(props)
 
-	return (
-		<div className={containerClass}>
-			{templateSelector["leftSide"]}
-			<div className={linksClass}>
-				{templateSelector["navigation"]}
-			</div>
-			<div className={profileClass}>
-				<div className="float-right">
-					<img src="https://picsum.photos/30" className={imageClass} />
-					<span>Bleacher Report</span>
-				</div>
-			</div>
-		</div>
-	)
+  return (
+    <div className={containerClass}>
+      {templateSelector["leftSide"]}
+      <div className={linksClass}>
+        {templateSelector["navigation"]}
+      </div>
+      <div className={profileClass}>
+        <div className="float-right">
+          <img src="https://picsum.photos/30" className={imageClass} />
+          <span>Bleacher Report</span>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 /* eslint-disable react/prefer-stateless-function */

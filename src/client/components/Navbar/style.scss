@@ -18,25 +18,25 @@
 
 .backTo {
   flex: 3;
-	font-size: 14px;
-	font-family: $font-family-ClanOT;
+  font-size: 14px;
+  font-family: $font-family-ClanOT;
 
-	a {
-		color: $color-white;
-		text-decoration: none;
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
+  a {
+    color: $color-white;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 
-		.text {
-			margin-left: 20px;
-			font-size: 14px;
-		}
+    .text {
+      margin-left: 20px;
+      font-size: 14px;
+    }
 
-		span {
-			font-size: 30px;
-		}
-	}
+    span {
+      font-size: 30px;
+    }
+  }
 }
 
 .links {
@@ -50,17 +50,17 @@
     text-decoration: none;
     position: relative;
     font-family: $font-family-ClanOTNews;
-	}
+  }
 
   .activeLink {
     color: $color-white;
     font-size: 14px;
-		font-family: $font-family-ClanOTBold;
+    font-family: $font-family-ClanOTBold;
 
-		&:hover{
-			font-family: $font-family-ClanOTBold;
-			font-weight: normal;
-		}
+    &:hover{
+      font-family: $font-family-ClanOTBold;
+      font-weight: normal;
+    }
 
     &:before {
       content: '';
@@ -70,13 +70,13 @@
       bottom: -30px;
       background-color: $color-cool-blue;
     }
-	}
+  }
 
-	a:hover{
-		@extend .activeLink;
-		font-family: $font-family-ClanOTNews;
-		font-weight: normal;
-	}
+  a:hover{
+    @extend .activeLink;
+    font-family: $font-family-ClanOTNews;
+    font-weight: normal;
+  }
 }
 
 .profile {
