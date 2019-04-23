@@ -37,7 +37,7 @@ class TotalCompetitorViewsCard extends Component {
       selects,
     } = this.props
     const chartContainer = classnames(
-      'shadow-1 col-12-gutter-20 mb-48',
+      'shadow-1 col-12 mb-48',
       style.chartContainer,
       containerClass
     )
