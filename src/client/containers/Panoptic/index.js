@@ -28,13 +28,7 @@ const Panoptic = () => {
     <React.Fragment>
       <div className="grid-container col-12">
         <div className={style.alignTabs}>
-          <NavLink
-            to="/panoptic/audience"
-            className={style.tab}
-            activeClassName={style.activeLink}
-          >
-            Audience
-          </NavLink>
+
         </div>
       </div>
       <FlipCards />
