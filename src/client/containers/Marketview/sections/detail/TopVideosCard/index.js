@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import cx from 'classnames'
 import { randomKey } from 'Utils/index'
 
-import TopVideosChart from 'Components/Charts/MarketView/TopVideos'
+import StackedBarChart from 'Components/Charts/StackedBarChart'
 import SelectFilters from 'Components/SelectFilters'
 import style from './style.scss'
 
@@ -14,8 +14,6 @@ const barChartHeaderClass = cx('col-12 mt-48 mb-48', style.barChartHeader)
 const headerTitleClass = cx('font-secondary-first text-bold', style.title)
 const selectClasses = cx('custom-select', style.selectStyles)
 const referencesClass = cx('font-secondary-second', style.references)
-const barChartClass = cx('col-12', style.barChartContainer)
-
 const defaultReferences = [
   {
     className: 'bg-cool-blue',
@@ -71,7 +69,8 @@ class TopVideosCard extends Component {
       chartData,
       title = 'Top Videos Over Time By Competitor',
       references = defaultReferences,
-      selects = ['Resolution', 'Likes', 'Date'],
+			selects = ['Resolution', 'Likes', 'Date'],
+			height
     } = this.props
 
     const selectProps = this.generateSelectProps(selects);
@@ -94,9 +93,10 @@ class TopVideosCard extends Component {
               <div className="clearFix" />
             </div>
           </div>
-          <div className={barChartClass}>
-            <TopVideosChart
-              chartData={chartData}
+          <div className='col-12'>
+            <StackedBarChart
+							barData={chartData}
+							height={height}
               datasetKeyProvider={this.datasetKeyProvider}
             />
           </div>

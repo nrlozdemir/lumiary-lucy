@@ -95,7 +95,8 @@ export class Platform extends React.Component {
           <TopVideosCard
             chartData={competitorTopVideos}
             title="Top Videos Over Time By Platform"
-            references={topVideosReferences}
+						references={topVideosReferences}
+						height={150}
           />
         )}
         {similarProperties && <TopSimilarProperties data={similarProperties} />}
@@ -106,7 +107,7 @@ export class Platform extends React.Component {
               totalCompetitorViewsData={topPerformingPropertiesData}
               tickOptions={chartTickOptions}
               title="Top Performing Property Across All Platforms"
-              height={100}
+              height={50}
               selects={['Resolution', 'Likes']}
               footerLabels={['Fast', 'Medium', 'Slow', 'Slowest']}
             />
