@@ -1,314 +1,314 @@
 {
-	"videoList": [
-		"https://picsum.photos/100/160?image=1",
-		"https://picsum.photos/20/160?image=2",
-		"https://picsum.photos/75/160?image=3",
-		"https://picsum.photos/120/160?image=4",
-		"https://picsum.photos/200/160?image=5",
-		"https://picsum.photos/250/160?image=6",
-		"https://picsum.photos/90/160?image=7",
-		"https://picsum.photos/110/160?image=8",
-		"https://picsum.photos/40/160?image=9",
-		"https://picsum.photos/60/160?image=10",
-		"https://picsum.photos/90/160?image=11",
-		"https://picsum.photos/120/160?image=12",
-		"https://picsum.photos/160/160?image=13",
-		"https://picsum.photos/200/160?image=14",
-		"https://picsum.photos/129/160?image=15",
-		"https://picsum.photos/210/160?image=16",
-		"https://picsum.photos/40/160?image=17",
-		"https://picsum.photos/20/160?image=18"
-	],
-	"slideImages": [
-		{
-			"src": "https://picsum.photos/500/270?image=1",
-			"options": [
-				{
-					"percentage": 40,
-					"accurate": 20,
-					"text": "Male"
-				},
-				{
-					"percentage": 60,
-					"accurate": 60,
-					"text": "Laptop"
-				}
-			]
-		},
-		{
-			"src": "https://picsum.photos/500/270?image=2",
-			"options": [
-				{
-					"percentage": 30,
-					"accurate": 20,
-					"text": "Female"
-				},
-				{
-					"percentage": 50,
-					"accurate": 20,
-					"text": "Cat"
-				}
-			]
-		},
-		{
-			"src": "https://picsum.photos/500/270?image=3",
-			"options": [
-				{
-					"percentage": 40,
-					"accurate": 10,
-					"text": "Cart"
-				},
-				{
-					"percentage": 16,
-					"accurate": 30,
-					"text": "Bag"
-				}
-			]
-		},
-		{
-			"src": "https://picsum.photos/500/270?image=4",
-			"options": [
-				{
-					"percentage": 34,
-					"accurate": 68,
-					"text": "Playstation"
-				},
-				{
-					"percentage": 30,
-					"accurate": 20,
-					"text": "Mouse"
-				}
-			]
-		},
-		{
-			"src": "https://picsum.photos/500/270?image=6",
-			"options": [
-				{
-					"percentage": 40,
-					"accurate": 53,
-					"text": "Male"
-				},
-				{
-					"percentage": 52,
-					"accurate": 30,
-					"text": "Sheep"
-				}
-			]
-		},
-		{
-			"src": "https://picsum.photos/500/270?image=5",
-			"options": [
-				{
-					"percentage": 42,
-					"accurate": 20,
-					"text": "Phone"
-				},
-				{
-					"percentage": 78,
-					"accurate": 60,
-					"text": "Electronics"
-				}
-			]
-		},
-		{
-			"src": "https://picsum.photos/500/270?image=7",
-			"options": [
-				{
-					"percentage": 40,
-					"accurate": 30,
-					"text": "Key"
-				},
-				{
-					"percentage": 45,
-					"accurate": 42,
-					"text": "Press"
-				}
-			]
-		},
-		{
-			"src": "https://picsum.photos/500/270?image=8",
-			"options": [
-				{
-					"percentage": 31,
-					"accurate": 20,
-					"text": "Male"
-				},
-				{
-					"percentage": 76,
-					"accurate": 54,
-					"text": "Laptop"
-				}
-			]
-		}
-	],
-	"radarData": {
-		"labels": [
-			"#fff20d",
-			"#f8b90b",
-			"#eb7919",
-			"#dd501d",
-			"#cc2226",
-			"#b83057",
-			"#923683",
-			"#79609b",
-			"#3178b0",
-			"#229a78",
-			"#13862b",
-			"#aac923"
-		],
-		"datasets": [
-			{
-				"data": [
-					65,
-					59,
-					34,
-					81,
-					56,
-					40,
-					65,
-					59,
-					34,
-					81,
-					56
-				]
-			},
-			{
-				"data": [
-					28,
-					48,
-					40,
-					19,
-					96,
-					74,
-					65,
-					59,
-					34,
-					81,
-					56
-				]
-			}
-		]
-	},
-	"sliderWithThumbnails": [
-		{
-			"img": "https://picsum.photos/500/270?image=1",
-			"thumbnail": "https://picsum.photos/200/160?image=1",
-			"sceneURL": "https://picsum.photos/238/160?image=1",
-			"duration": "00:00:10"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=2",
-			"thumbnail": "https://picsum.photos/40/160?image=2",
-			"sceneURL": "https://picsum.photos/238/160?image=2",
-			"duration": "00:00:20"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=3",
-			"thumbnail": "https://picsum.photos/150/160?image=3",
-			"sceneURL": "https://picsum.photos/238/160?image=3",
-			"duration": "00:00:30"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=4",
-			"thumbnail": "https://picsum.photos/240/160?image=4",
-			"sceneURL": "https://picsum.photos/238/160?image=4",
-			"duration": "00:00:40"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=5",
-			"thumbnail": "https://picsum.photos/200/160?image=5",
-			"sceneURL": "https://picsum.photos/238/160?image=5",
-			"duration": "00:00:50"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=6",
-			"thumbnail": "https://picsum.photos/250/160?image=6",
-			"sceneURL": "https://picsum.photos/238/160?image=6",
-			"duration": "00:01:00"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=7",
-			"thumbnail": "https://picsum.photos/300/160?image=7",
-			"sceneURL": "https://picsum.photos/238/160?image=7",
-			"duration": "00:01:10"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=8",
-			"thumbnail": "https://picsum.photos/110/160?image=8",
-			"sceneURL": "https://picsum.photos/238/160?image=8",
-			"duration": "00:01:20"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=9",
-			"thumbnail": "https://picsum.photos/60/160?image=9",
-			"sceneURL": "https://picsum.photos/238/160?image=9",
-			"duration": "00:01:30"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=10",
-			"thumbnail": "https://picsum.photos/160/160?image=10",
-			"sceneURL": "https://picsum.photos/238/160?image=10",
-			"duration": "00:01:40"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=11",
-			"thumbnail": "https://picsum.photos/100/160?image=11",
-			"sceneURL": "https://picsum.photos/238/160?image=11",
-			"duration": "00:01:50"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=12",
-			"thumbnail": "https://picsum.photos/20/160?image=12",
-			"sceneURL": "https://picsum.photos/238/160?image=12",
-			"duration": "00:02:00"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=13",
-			"thumbnail": "https://picsum.photos/75/160?image=13",
-			"sceneURL": "https://picsum.photos/238/160?image=13",
-			"duration": "00:02:10"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=14",
-			"thumbnail": "https://picsum.photos/120/160?image=14",
-			"sceneURL": "https://picsum.photos/238/160?image=14",
-			"duration": "00:02:20"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=15",
-			"thumbnail": "https://picsum.photos/200/160?image=15",
-			"sceneURL": "https://picsum.photos/238/160?image=15",
-			"duration": "00:02:30"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=16",
-			"thumbnail": "https://picsum.photos/250/160?image=16",
-			"sceneURL": "https://picsum.photos/238/160?image=16",
-			"duration": "00:02:40"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=17",
-			"thumbnail": "https://picsum.photos/90/160?image=17",
-			"sceneURL": "https://picsum.photos/238/160?image=17",
-			"duration": "00:02:50"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=18",
-			"thumbnail": "https://picsum.photos/110/160?image=18",
-			"sceneURL": "https://picsum.photos/238/160?image=18",
-			"duration": "00:03:00"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=19",
-			"thumbnail": "https://picsum.photos/40/160?image=19",
-			"sceneURL": "https://picsum.photos/238/160?image=19",
-			"duration": "00:03:10"
-		},
-		{
-			"img": "https://picsum.photos/500/270?image=20",
-			"thumbnail": "https://picsum.photos/60/160?image=20",
-			"sceneURL": "https://picsum.photos/238/160?image=20",
-			"duration": "00:03:20"
-		}
-	]
+  "videoList": [
+    "https://picsum.photos/100/160?image=1",
+    "https://picsum.photos/20/160?image=2",
+    "https://picsum.photos/75/160?image=3",
+    "https://picsum.photos/120/160?image=4",
+    "https://picsum.photos/200/160?image=5",
+    "https://picsum.photos/250/160?image=6",
+    "https://picsum.photos/90/160?image=7",
+    "https://picsum.photos/110/160?image=8",
+    "https://picsum.photos/40/160?image=9",
+    "https://picsum.photos/60/160?image=10",
+    "https://picsum.photos/90/160?image=11",
+    "https://picsum.photos/120/160?image=12",
+    "https://picsum.photos/160/160?image=13",
+    "https://picsum.photos/200/160?image=14",
+    "https://picsum.photos/129/160?image=15",
+    "https://picsum.photos/210/160?image=16",
+    "https://picsum.photos/40/160?image=17",
+    "https://picsum.photos/20/160?image=18"
+  ],
+  "slideImages": [
+    {
+      "src": "https://picsum.photos/500/270?image=1",
+      "options": [
+        {
+          "percentage": 40,
+          "accurate": 20,
+          "text": "Male"
+        },
+        {
+          "percentage": 60,
+          "accurate": 60,
+          "text": "Laptop"
+        }
+      ]
+    },
+    {
+      "src": "https://picsum.photos/500/270?image=2",
+      "options": [
+        {
+          "percentage": 30,
+          "accurate": 20,
+          "text": "Female"
+        },
+        {
+          "percentage": 50,
+          "accurate": 20,
+          "text": "Cat"
+        }
+      ]
+    },
+    {
+      "src": "https://picsum.photos/500/270?image=3",
+      "options": [
+        {
+          "percentage": 40,
+          "accurate": 10,
+          "text": "Cart"
+        },
+        {
+          "percentage": 16,
+          "accurate": 30,
+          "text": "Bag"
+        }
+      ]
+    },
+    {
+      "src": "https://picsum.photos/500/270?image=4",
+      "options": [
+        {
+          "percentage": 34,
+          "accurate": 68,
+          "text": "Playstation"
+        },
+        {
+          "percentage": 30,
+          "accurate": 20,
+          "text": "Mouse"
+        }
+      ]
+    },
+    {
+      "src": "https://picsum.photos/500/270?image=6",
+      "options": [
+        {
+          "percentage": 40,
+          "accurate": 53,
+          "text": "Male"
+        },
+        {
+          "percentage": 52,
+          "accurate": 30,
+          "text": "Sheep"
+        }
+      ]
+    },
+    {
+      "src": "https://picsum.photos/500/270?image=5",
+      "options": [
+        {
+          "percentage": 42,
+          "accurate": 20,
+          "text": "Phone"
+        },
+        {
+          "percentage": 78,
+          "accurate": 60,
+          "text": "Electronics"
+        }
+      ]
+    },
+    {
+      "src": "https://picsum.photos/500/270?image=7",
+      "options": [
+        {
+          "percentage": 40,
+          "accurate": 30,
+          "text": "Key"
+        },
+        {
+          "percentage": 45,
+          "accurate": 42,
+          "text": "Press"
+        }
+      ]
+    },
+    {
+      "src": "https://picsum.photos/500/270?image=8",
+      "options": [
+        {
+          "percentage": 31,
+          "accurate": 20,
+          "text": "Male"
+        },
+        {
+          "percentage": 76,
+          "accurate": 54,
+          "text": "Laptop"
+        }
+      ]
+    }
+  ],
+  "radarData": {
+    "labels": [
+      "#fff20d",
+      "#f8b90b",
+      "#eb7919",
+      "#dd501d",
+      "#cc2226",
+      "#b83057",
+      "#923683",
+      "#79609b",
+      "#3178b0",
+      "#229a78",
+      "#13862b",
+      "#aac923"
+    ],
+    "datasets": [
+      {
+        "data": [
+          65,
+          59,
+          34,
+          81,
+          56,
+          40,
+          65,
+          59,
+          34,
+          81,
+          56
+        ]
+      },
+      {
+        "data": [
+          28,
+          48,
+          40,
+          19,
+          96,
+          74,
+          65,
+          59,
+          34,
+          81,
+          56
+        ]
+      }
+    ]
+  },
+  "sliderWithThumbnails": [
+    {
+      "img": "https://picsum.photos/500/270?image=1",
+      "thumbnail": "https://picsum.photos/200/160?image=1",
+      "sceneURL": "https://picsum.photos/238/160?image=1",
+      "duration": "00:00:10"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=2",
+      "thumbnail": "https://picsum.photos/40/160?image=2",
+      "sceneURL": "https://picsum.photos/238/160?image=2",
+      "duration": "00:00:20"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=3",
+      "thumbnail": "https://picsum.photos/150/160?image=3",
+      "sceneURL": "https://picsum.photos/238/160?image=3",
+      "duration": "00:00:30"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=4",
+      "thumbnail": "https://picsum.photos/240/160?image=4",
+      "sceneURL": "https://picsum.photos/238/160?image=4",
+      "duration": "00:00:40"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=5",
+      "thumbnail": "https://picsum.photos/200/160?image=5",
+      "sceneURL": "https://picsum.photos/238/160?image=5",
+      "duration": "00:00:50"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=6",
+      "thumbnail": "https://picsum.photos/250/160?image=6",
+      "sceneURL": "https://picsum.photos/238/160?image=6",
+      "duration": "00:01:00"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=7",
+      "thumbnail": "https://picsum.photos/300/160?image=7",
+      "sceneURL": "https://picsum.photos/238/160?image=7",
+      "duration": "00:01:10"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=8",
+      "thumbnail": "https://picsum.photos/110/160?image=8",
+      "sceneURL": "https://picsum.photos/238/160?image=8",
+      "duration": "00:01:20"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=9",
+      "thumbnail": "https://picsum.photos/60/160?image=9",
+      "sceneURL": "https://picsum.photos/238/160?image=9",
+      "duration": "00:01:30"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=10",
+      "thumbnail": "https://picsum.photos/160/160?image=10",
+      "sceneURL": "https://picsum.photos/238/160?image=10",
+      "duration": "00:01:40"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=11",
+      "thumbnail": "https://picsum.photos/100/160?image=11",
+      "sceneURL": "https://picsum.photos/238/160?image=11",
+      "duration": "00:01:50"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=12",
+      "thumbnail": "https://picsum.photos/20/160?image=12",
+      "sceneURL": "https://picsum.photos/238/160?image=12",
+      "duration": "00:02:00"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=13",
+      "thumbnail": "https://picsum.photos/75/160?image=13",
+      "sceneURL": "https://picsum.photos/238/160?image=13",
+      "duration": "00:02:10"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=14",
+      "thumbnail": "https://picsum.photos/120/160?image=14",
+      "sceneURL": "https://picsum.photos/238/160?image=14",
+      "duration": "00:02:20"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=15",
+      "thumbnail": "https://picsum.photos/200/160?image=15",
+      "sceneURL": "https://picsum.photos/238/160?image=15",
+      "duration": "00:02:30"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=16",
+      "thumbnail": "https://picsum.photos/250/160?image=16",
+      "sceneURL": "https://picsum.photos/238/160?image=16",
+      "duration": "00:02:40"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=17",
+      "thumbnail": "https://picsum.photos/90/160?image=17",
+      "sceneURL": "https://picsum.photos/238/160?image=17",
+      "duration": "00:02:50"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=18",
+      "thumbnail": "https://picsum.photos/110/160?image=18",
+      "sceneURL": "https://picsum.photos/238/160?image=18",
+      "duration": "00:03:00"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=19",
+      "thumbnail": "https://picsum.photos/40/160?image=19",
+      "sceneURL": "https://picsum.photos/238/160?image=19",
+      "duration": "00:03:10"
+    },
+    {
+      "img": "https://picsum.photos/500/270?image=20",
+      "thumbnail": "https://picsum.photos/60/160?image=20",
+      "sceneURL": "https://picsum.photos/238/160?image=20",
+      "duration": "00:03:20"
+    }
+  ]
 }
