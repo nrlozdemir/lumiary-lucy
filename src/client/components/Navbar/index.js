@@ -54,51 +54,25 @@ const Logo = () => (
 )
 
 const Default = (props) => {
-
-	const nav = Object.values(props)
-		.filter((r) => r.navigation && r.navigation.level == 1 && r.navigation.order > 0)
-		.sort((a, b) => (a.navigation.order > b.navigation.order)
-			? 1
-			: ((b.navigation.order > a.navigation.order) ? -1 : 0))
-
   return (
-    nav.map((el, i) => (
-			<NavLink key={i} to={el.path} activeClassName={style.activeLink}>
-				{el.navigation.title}
-			</NavLink>
-		))
+    Object.values(props)
+    .filter((r) => r.navigation && r.navigation.level == 1 && r.navigation.order > 0)
+    .sort((a, b) => (a.navigation.order > b.navigation.order)
+      ? 1
+      : ((b.navigation.order > a.navigation.order) ? -1 : 0))
+    .map((el, i) => (
+      <NavLink key={i} to={el.path} activeClassName={style.activeLink}>
+        {el.navigation.title}
+      </NavLink>
+    ))
   )
 }
 
 const SelectedNavLink = (props) => {
-  return(<React.Fragment>{capitalizeFirstLetter(props[2])}</React.Fragment>)
+  return(<React.Fragment>{capitalizeFirstLetter(props.title)}</React.Fragment>)
 }
 
-const Marketview = () => (<React.Fragment>
-  <NavLink
-    to="/marketview/platform"
-    className={style.tab}
-    activeClassName={classnames(style.tab, style.activeLink)}
-  >
-    Platform
-  </NavLink>
-  <NavLink
-    to="/marketview/competitor"
-    className={style.tab}
-    activeClassName={style.activeLink}
-  >
-    Competitor
-  </NavLink>
-  <NavLink
-    to="/marketview/time"
-    className={style.tab}
-    activeClassName={style.activeLink}
-  >
-    Time
-  </NavLink>
-</React.Fragment>)
-
-const VideoTitle = (props) => {
+const NavTitle = (props) => {
   const {
     match,
     library: { videos },
@@ -111,43 +85,63 @@ const VideoTitle = (props) => {
   }
 }
 
-const Selector = (props) => {
-	const url = props.match.url.split('/')
-	const navigation = props.routeConfig
+const SubNavigation = (props) => {
+  return (
+    Object.values(props)
+    .filter((r) => r.navigation && r.navigation.level == 2 && r.navigation.order > 0)
+    .sort((a, b) => (a.navigation.order > b.navigation.order)
+      ? 1
+      : ((b.navigation.order > a.navigation.order) ? -1 : 0))
+    .map((el, i) => (
+      <NavLink
+        key={i}
+        to={el.path}
+        className={style.tab}
+        activeClassName={classnames(style.tab, style.activeLink)}
+      >{el.navigation.title}
+      </NavLink>
+    ))
+  )
+}
 
-  switch (url[1]) {
-    case ("marketview"):
-      if(url[2]) {
-        return {
-          "leftSide": <BackTo {...url} />,
-          "navigation": <SelectedNavLink {...url} />
-        }
-      }
-      return {
-        "leftSide": <BackTo />,
-        "navigation": <Marketview />
-      }
-      break;
-    case ("library"):
-      if(url[2] && url[2].match(/(\d+)/gm)) {
-        return {
-          "leftSide": <BackTo {...url} />,
-          "navigation": <VideoTitle {...props} />
-        }
-      }
-      else {
-        return {
-          "leftSide": <Logo />,
-          "navigation": <Default {...navigation} />
-        }
-      }
-      break;
-    default:
-      return {
-        "leftSide": <Logo />,
-        "navigation": <Default {...navigation} />
-      }
-      break;
+const Selector = (props) => {
+  const url = props.match.url.split('/')
+  const navigation = props.routeConfig
+
+  const navigationSubRoutes = Object.values(navigation)
+    .filter((r) => r.path.replace('/', '') == url[1])
+    .filter((r) => r.navigation
+      && r.navigation.level == 1
+      && r.navigation.order > 0
+      && r.routes
+      && r.routes.length > 0)
+
+  const navigationSubRoutesMatch = navigationSubRoutes
+    && navigationSubRoutes[0]
+    && navigationSubRoutes[0].routes
+    .map((el, i) => el)
+    .filter((r) => r.path == url.join("/"))
+
+  if(navigationSubRoutesMatch && navigationSubRoutesMatch.length > 0) {
+    return {
+      "leftSide": <BackTo {...url} />,
+      "navigation": <SelectedNavLink title={navigationSubRoutesMatch[0].navigation.title} />
+    }
+  } else if(navigationSubRoutes && navigationSubRoutes.length > 0) {
+    return {
+      "leftSide": <BackTo />,
+      "navigation": <SubNavigation {...navigationSubRoutes[0].routes} />
+    }
+  } else if (url[1] == "library" && url[2] && url[2].match(/(\d+)/gm)) {
+    return {
+      "leftSide": <BackTo {...url} />,
+      "navigation": <NavTitle {...props} />
+    }
+  } else {
+    return {
+      "leftSide": <Logo />,
+      "navigation": <Default {...navigation} />
+    }
   }
 }
 
