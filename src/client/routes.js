@@ -21,11 +21,6 @@ const routes = [
     }
   },
   {
-    path: '/library/:videoId/compare',
-    exact: true,
-    component: 'Compare',
-  },
-  {
     path: '/library/build-report/:videoId',
     exact: true,
     component: 'BuildReport',
