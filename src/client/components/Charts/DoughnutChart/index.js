@@ -15,12 +15,9 @@ const defaultProps = {
 	tooltip: false,
 	legend: false,
 	layoutPadding: 0,
-	fillText: '',
 	fillTextColor: '#fff',
-	fillTextFont: '14px ClanOTBold',
-	fillTextX: 0,
-	fillTextY: 0,
-	fillTextMaxWidth: 0
+	fillTextFontSize: '14px',
+	fillTextFontFamily: 'ClanOTBold'
 }
 export default class DoughnutChart extends React.Component {
 	constructor(props) {
@@ -32,11 +29,11 @@ export default class DoughnutChart extends React.Component {
 		const { width, height, data,
 			responsive, legend, tooltip,
 			layoutPadding,
-			fillTextColor, fillTextFont, fillText, fillTextX, fillTextY, fillTextMaxWidth,
+			fillTextColor, fillTextFontSize, fillTextFontFamily, fillText, fillTextX, fillTextY, fillTextMaxWidth,
 			labelsPosition, labelsClasName, labelsData } = this.props
 		let plugins = []
 
-		console.log(this.props.options)
+		console.log(this.props)
 
 		if(fillText) {
 			plugins.push({
@@ -45,12 +42,18 @@ export default class DoughnutChart extends React.Component {
 					const { top, bottom, left, right } = chart.chartArea
 					ctx.save()
 					ctx.fillStyle = fillTextColor
-					ctx.font = fillTextFont
+					ctx.font = (fillTextFontSize + ' ' + fillTextFontFamily)
 					ctx.fillText(
 						fillText,
-						(fillTextX && fillTextX > 0) ? fillTextX : ((bottom - top) / 2 - 55),
-						(fillTextY && fillTextY > 0) ? fillTextY : ((right - left) / 2 + 4),
-						(fillTextMaxWidth && fillTextMaxWidth > 0) ? fillTextMaxWidth : (right - left)
+						(fillTextX && fillTextX > 0)
+							? fillTextX
+							: ((bottom - top) / 2 - 55),
+						(fillTextY && fillTextY > 0)
+							? fillTextY
+							: ((right - left) / 2 + 4),
+						(fillTextMaxWidth && fillTextMaxWidth > 0)
+							? fillTextMaxWidth
+							: (right - left)
 					)
 					ctx.restore()
 				},
