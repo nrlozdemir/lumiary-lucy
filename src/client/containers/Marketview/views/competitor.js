@@ -20,9 +20,9 @@ import RouterLoading from 'Components/RouterLoading'
 import style from '../style.scss'
 
 const chartTickOptions = {
-	stepSize: 250000,
-	min: 0,
-	max: 1000000,
+  stepSize: 250000,
+  min: 0,
+  max: 1000000,
   callback(value) {
     if (value < 1000) {
       return value
@@ -70,9 +70,9 @@ export class Competitor extends React.Component {
           title="Top Performing Competitor Videos"
         />
         {competitorTopVideos && (
-					<TopVideosCard
+          <TopVideosCard
             chartData={competitorTopVideos}
-						height={150}
+            height={150}
           />
         )}
         {similarProperties && <TopSimilarProperties data={similarProperties} />}

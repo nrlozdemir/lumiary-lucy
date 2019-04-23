@@ -99,8 +99,8 @@ export class Time extends React.Component {
             chartData={selectedDayData.CompetitorTopVideos}
             title="Top Performing Property Across All Days Of The Week"
             selects={['Resolution']}
-						references={topVideosReferences}
-						height={150}
+            references={topVideosReferences}
+            height={150}
           />
         )}
       </React.Fragment>

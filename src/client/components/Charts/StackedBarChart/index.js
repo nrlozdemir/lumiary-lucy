@@ -2,10 +2,11 @@ import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import { barDataOptions } from './options'
 
-const StackedBarChart = ({ barData,
-  height = 300,
-	width = 500,
-}) => {
+const StackedBarChart = ({
+    barData,
+    height = 300,
+    width = 500,
+  }) => {
   const plugins = [
     {
       beforeDraw: function(chart, easing) {

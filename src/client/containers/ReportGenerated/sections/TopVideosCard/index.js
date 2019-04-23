@@ -47,7 +47,7 @@ const TopVideosCard = ({
         </div>
         <div className='col-12'>
           <StackedBarChart
-						height={200}
+            height={200}
             barData={chartData}
             datasetKeyProvider={datasetKeyProvider()}
           />

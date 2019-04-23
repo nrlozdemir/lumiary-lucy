@@ -43,9 +43,9 @@ const topVideosReferences = [
 ]
 
 const chartTickOptions = {
-	stepSize: 250000,
-	min: 0,
-	max: 1000000,
+  stepSize: 250000,
+  min: 0,
+  max: 1000000,
   callback(value) {
     if (value < 1000) {
       return value
@@ -95,8 +95,8 @@ export class Platform extends React.Component {
           <TopVideosCard
             chartData={competitorTopVideos}
             title="Top Videos Over Time By Platform"
-						references={topVideosReferences}
-						height={150}
+            references={topVideosReferences}
+            height={150}
           />
         )}
         {similarProperties && <TopSimilarProperties data={similarProperties} />}

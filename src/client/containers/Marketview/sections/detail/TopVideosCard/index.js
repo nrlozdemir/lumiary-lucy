@@ -69,8 +69,8 @@ class TopVideosCard extends Component {
       chartData,
       title = 'Top Videos Over Time By Competitor',
       references = defaultReferences,
-			selects = ['Resolution', 'Likes', 'Date'],
-			height
+      selects = ['Resolution', 'Likes', 'Date'],
+      height
     } = this.props
 
     const selectProps = this.generateSelectProps(selects);
@@ -95,8 +95,8 @@ class TopVideosCard extends Component {
           </div>
           <div className='col-12'>
             <StackedBarChart
-							barData={chartData}
-							height={height}
+              barData={chartData}
+              height={height}
               datasetKeyProvider={this.datasetKeyProvider}
             />
           </div>
