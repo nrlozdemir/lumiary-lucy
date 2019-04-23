@@ -23,6 +23,13 @@ class SingleItemSlider extends React.Component {
 		};
 	}
 	componentDidMount() {
+		const { selectedImage } = this.props;
+
+		if (selectedImage) {
+			this.slider1.slickGoTo(selectedImage);
+			this.slider2.slickGoTo(selectedImage);
+		}
+
 		this.setState({
 			nav1: this.slider1,
 			nav2: this.slider2
@@ -83,12 +90,12 @@ class SingleItemSlider extends React.Component {
 						onChange={val => this.onScrollChange(val)}
 						max={this.props.slideImages.length}
 						handleStyle={{
-              backgroundColor: "white",
-              borderRadius: '50%',
+							backgroundColor: "white",
+							borderRadius: '50%',
 							width: "16px",
 							height: "16px",
-              marginTop: "-6px",
-              position: 'absolute'
+							marginTop: "-6px",
+							position: 'absolute'
 						}}
 						trackStyle={{
 							height: "16px",
