@@ -11,8 +11,10 @@ import 'chartjs-plugin-datalabels'
 import SelectFilters from 'Components/SelectFilters'
 import style from './style.scss'
 
-import DoughnutChart from 'Components/Charts/Panoptic/DoughnutChart'
+//import DoughnutChart from 'Components/Charts/Panoptic/DoughnutChart'
 import VerticalStackedBarChart from 'Components/Charts/Panoptic/VerticalStackedBarChart'
+
+import DoughnutChart from 'Components/Charts/DoughnutChart'
 
 import Module from 'Components/Module'
 
@@ -59,30 +61,19 @@ class PanopticFilteringSection extends Component {
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
-            <div>
-              {doughnutData && doughnutData.average && (
-                <DoughnutChart data={doughnutData.average} />
-              )}
-            </div>
-            <div>
-              {doughnutRoundData &&
-                doughnutRoundData.map((roundData, index) => (
-                  <div
-                    className={classnames(
-                      'd-flex',
-                      'align-items-center',
-                      style.lables
-                    )}
-                    key={index}
-                  >
-                    <span
-                      className={style.round}
-                      style={{ backgroundColor: `${roundData.color}` }}
-                    />
-                    <span className={style.secondsText}>{roundData.data}</span>
-                  </div>
-                ))}
-            </div>
+						<div>
+							{doughnutData && doughnutData.average && (
+								<DoughnutChart
+									width={270}
+									height={270}
+									data={doughnutData.average}
+									fillText="Total Percentage"
+									labelsPosition="right"
+									labelsClassName="customClass"
+									labelsData={doughnutRoundData}
+								/>
+							)}
+						</div>
           </div>
           <div className={style.stackedChart}>
             {stackedChartData && (
