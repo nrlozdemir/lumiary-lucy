@@ -70,7 +70,10 @@ export class Competitor extends React.Component {
           title="Top Performing Competitor Videos"
         />
         {competitorTopVideos && (
-          <TopVideosCard chartData={competitorTopVideos} />
+					<TopVideosCard
+            chartData={competitorTopVideos}
+						height={150}
+          />
         )}
         {similarProperties && <TopSimilarProperties data={similarProperties} />}
         {topPerformingPropertiesByCompetitorsData && (
@@ -82,7 +85,7 @@ export class Competitor extends React.Component {
               }
               tickOptions={chartTickOptions}
               title="Top Performing Property Across All Competitors"
-              height={80}
+              height={50}
               selects={['Resolution']}
               footerLabels={['Fast', 'Medium', 'Slow', 'Slowest']}
             />

@@ -8,11 +8,10 @@ import { actions, makeSelectPanopticFilteringSection } from 'Reducers/panoptic'
 
 import classnames from 'classnames'
 import 'chartjs-plugin-datalabels'
-import SelectFilters from 'Components/SelectFilters'
 import style from './style.scss'
 
 import DoughnutChart from 'Components/Charts/Panoptic/DoughnutChart'
-import VerticalStackedBarChart from 'Components/Charts/Panoptic/VerticalStackedBarChart'
+import StackedBarChart from 'Components/Charts/StackedBarChart'
 
 import Module from 'Components/Module'
 
@@ -86,7 +85,7 @@ class PanopticFilteringSection extends Component {
           </div>
           <div className={style.stackedChart}>
             {stackedChartData && (
-              <VerticalStackedBarChart data={stackedChartData} />
+              <StackedBarChart barData={stackedChartData} />
             )}
           </div>
         </div>

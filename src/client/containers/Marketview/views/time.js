@@ -92,13 +92,15 @@ export class Time extends React.Component {
         )}
         {selectedDayData && selectedDayData.SimilarProperties && (
           <TopSimilarProperties data={selectedDayData.SimilarProperties} />
+
         )}
         {selectedDayData && selectedDayData.CompetitorTopVideos && (
           <TopVideosCard
             chartData={selectedDayData.CompetitorTopVideos}
             title="Top Performing Property Across All Days Of The Week"
             selects={['Resolution']}
-            references={topVideosReferences}
+						references={topVideosReferences}
+						height={150}
           />
         )}
       </React.Fragment>
