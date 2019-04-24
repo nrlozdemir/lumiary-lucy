@@ -220,10 +220,15 @@
     }
   }
 
+  &.floatRight {
+    float: right;
+    .colorListItem {
+      margin: 0 0 0 30px;
+    }
+  }
   &.colorListHorizontal {
     flex-direction: row;
     padding-left: 0;
-
     .colorListItem {
       margin: 0 15px;
     }

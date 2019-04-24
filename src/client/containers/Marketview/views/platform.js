@@ -14,7 +14,7 @@ import { actions, makeSelectMarketview } from 'Reducers/marketview'
 import Slider from 'Containers/Marketview/sections/detail/Slider'
 import TopVideosCard from 'Containers/Marketview/sections/detail/TopVideosCard'
 import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
-import TotalCompetitorViewsCard from 'Containers/Marketview/sections/main/TotalCompetitorViewsCard'
+import TotalCompetitorViews from 'Containers/Marketview/sections/main/TotalCompetitorViews'
 import RouterLoading from 'Components/RouterLoading'
 
 import style from '../style.scss'
@@ -102,7 +102,7 @@ export class Platform extends React.Component {
         {similarProperties && <TopSimilarProperties data={similarProperties} />}
         {topPerformingPropertiesData && (
           <div className="grid-collapse">
-            <TotalCompetitorViewsCard
+            <TotalCompetitorViews
               containerClass={style.detailTopPerformingPropertyContainer}
               totalCompetitorViewsData={topPerformingPropertiesData}
               tickOptions={chartTickOptions}

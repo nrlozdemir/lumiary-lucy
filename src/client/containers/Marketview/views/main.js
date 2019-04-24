@@ -8,7 +8,7 @@ import ColorCard from 'Containers/Marketview/sections/main/ColorCard'
 import PacingCard from 'Containers/Marketview/sections/main/PacingCard'
 import FormatCard from 'Containers/Marketview/sections/main/FormatCard'
 import TotalViewsCard from 'Containers/Marketview/sections/main/TotalViewsCard'
-import TotalCompetitorViewsCard from 'Containers/Marketview/sections/main/TotalCompetitorViewsCardModule'
+import TotalCompetitorViews from 'Containers/Marketview/sections/main/TotalCompetitorViews'
 import style from '../style.scss'
 
 const Main = () => {
@@ -23,7 +23,7 @@ const Main = () => {
       <div className="grid-collapse">
         <TotalViewsCard />
 
-        <TotalCompetitorViewsCard
+        <TotalCompetitorViews
           height={55}
           titleLabels={[
             'Barstool Sports',

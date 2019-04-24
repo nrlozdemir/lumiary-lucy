@@ -9,16 +9,11 @@ import {
   makeSelectMarketviewCompetitorView,
 } from 'Reducers/marketview'
 
-import SelectFilters from 'Components/SelectFilters'
-import TotalCompetitorViewsChart from 'Components/Charts/MarketView/TotalCompetitorViewsChart'
+import BarChart from 'Components/Charts/BarChart'
 import style from 'Containers/Marketview/style.scss'
-import componentStyle from './style.scss'
-
-const selectClasses = classnames('custom-select', style.selectStyles)
+import Module from 'Components/Module'
 
 class TotalCompetitorViewsCard extends Component {
-
-
   componentDidMount() {
     this.props.getTotalCompetitorViewsRequest()
   }
@@ -28,12 +23,14 @@ class TotalCompetitorViewsCard extends Component {
     const {
       containerClass = '',
       totalCompetitorViewsData,
+      totalCompetitorViewsValues,
       tickOptions,
       title = 'Total Competitor Views By Duration',
       titleLabels,
       footerLabels,
       width,
       height,
+      filters,
       selects,
     } = this.props
     const chartContainer = classnames(
@@ -43,12 +40,18 @@ class TotalCompetitorViewsCard extends Component {
     )
 
     return (
-      <div className={chartContainer}>
-        <div className={style.cardTitle}>
-          <span>{title}</span>
-          {titleLabels && (
+      <Module
+        moduleKey={'Panoptic/ColorTemperature'}
+        title={title}
+        filters={filters}
+        legend={
+          titleLabels && (
             <div
-              className={classnames(style.colorListHorizontal, style.colorList)}
+              className={classnames(
+                style.colorListHorizontal,
+                style.colorList,
+                style.floatRight
+              )}
             >
               {titleLabels.map((title, index) => (
                 <div key={index} className={style.colorListItem}>
@@ -56,33 +59,29 @@ class TotalCompetitorViewsCard extends Component {
                 </div>
               ))}
             </div>
-          )}
-
-        </div>
+          )
+        }
+      >
         {totalCompetitorViewsData && (
-          <div className="col-12 d-flex">
-            <TotalCompetitorViewsChart
-              barDurationData={totalCompetitorViewsData}
-              tickOptions={tickOptions}
-              width={width}
-              height={height}
-            />
-          </div>
+          <BarChart
+            barDurationData={totalCompetitorViewsData}
+            tickOptions={tickOptions}
+            width={width}
+            height={height}
+          />
         )}
         {footerLabels && (
-          <div className="col-12 d-flex justify-content-center mt-48 align-items-center">
-            <div
-              className={classnames(style.colorListHorizontal, style.colorList)}
-            >
-              {footerLabels.map((title, index) => (
-                <div key={index} className={style.colorListItem}>
-                  {title}
-                </div>
-              ))}
-            </div>
+          <div
+            className={classnames(style.colorListHorizontal, style.colorList)}
+          >
+            {footerLabels.map((title, index) => (
+              <div key={index} className={style.colorListItem}>
+                {title}
+              </div>
+            ))}
           </div>
         )}
-      </div>
+      </Module>
     )
   }
 }

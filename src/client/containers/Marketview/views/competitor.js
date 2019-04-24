@@ -14,7 +14,7 @@ import { actions, makeSelectMarketview } from 'Reducers/marketview'
 import Slider from 'Containers/Marketview/sections/detail/Slider'
 import TopVideosCard from 'Containers/Marketview/sections/detail/TopVideosCard'
 import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
-import TotalCompetitorViewsCard from 'Containers/Marketview/sections/main/TotalCompetitorViewsCard'
+import TotalCompetitorViews from 'Containers/Marketview/sections/main/TotalCompetitorViews'
 import RouterLoading from 'Components/RouterLoading'
 
 import style from '../style.scss'
@@ -56,7 +56,7 @@ export class Competitor extends React.Component {
         topPerformingPropertiesByCompetitorsData,
       },
     } = this.props
-
+    console.log(selectedVideo)
     if (!selectedVideo || marketview.loading) {
       return <RouterLoading />
     }
@@ -90,7 +90,6 @@ export class Competitor extends React.Component {
               footerLabels={['Fast', 'Medium', 'Slow', 'Slowest']}
             />
           </div>
-        )}
       </React.Fragment>
     )
   }

@@ -2,7 +2,7 @@ import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import { barDurationOptions } from './options'
 
-const TotalCompetitorViewsChart = ({
+const BarChart = ({
   barDurationData,
   height = 290,
 	width = 200,
@@ -78,4 +78,4 @@ const TotalCompetitorViewsChart = ({
   )
 }
 
-export default TotalCompetitorViewsChart
+export default BarChart
