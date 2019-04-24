@@ -52,10 +52,7 @@ function* getFilteringSectionData() {
 
     const shuffleData = {
       doughnutData: {
-        ...payload.verticalStackedChartData.doughnutData,
-        average: _.shuffle(
-          payload.verticalStackedChartData.doughnutData.average
-        ),
+        ...payload.verticalStackedChartData.doughnutData
       },
       stackedChartData: {
         ...payload.verticalStackedChartData.stackedChartData,
