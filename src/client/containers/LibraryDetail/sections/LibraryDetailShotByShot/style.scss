@@ -237,11 +237,27 @@
   padding: 56px 0 48px;
   line-height: 21px;
   text-align: center;
-  font-family: $font-family-ClanOT;
+	font-family: $font-family-ClanOT;
+	font-size: 18px;
+}
+
+.sliderWrapper{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  width: 100%;
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  height: 186px;
 }
 
 .sliderContainer {
   position: relative;
+  width: 1120px;
+  height: 186px;
+  margin: 0px auto;
   z-index: 2;
   display: flex;
   flex-wrap: nowrap;
@@ -250,10 +266,30 @@
   // height: 215px;
 
   .image {
-    margin-top: 10px;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    margin-top: 8px;
+    cursor: pointer;
+
     .originalImage {
-      padding: 5px 0px 5px 5px;
-      background-color: $color-dark-five;
+      background-repeat: no-repeat;
+      background-position: center center;
+      height: 160px;
+      border-top: 5px solid $color-dark-five;
+      border-bottom: 5px solid $color-dark-five;
+    }
+    .setCenter{
+      display: block;
+      border-right: 5px solid $color-dark-five;
+      &:first-child{
+        border-left: 5px solid $color-dark-five;
+        border-right: none;
+      }
+      &:last-child{
+        border-right: 5px solid $color-dark-five;
+      }
     }
     .hover {
       display: none;
@@ -264,7 +300,7 @@
         display: block;
         position: absolute;
         transform: scale(1.2);
-        box-shadow: 0 10px 20px 0 rgba(0, 0, 0, 0.5);
+        box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.2);
       }
     }
   }

@@ -5,8 +5,7 @@ import SelectFilters from 'Components/SelectFilters'
 
 import style from './style.scss'
 import DoughnutChart from 'Components/Charts/Panoptic/DoughnutChart'
-import TotalViewsBarChart from 'Components/Charts/MarketView/TotalViewsBarChart'
-import VerticalStackedBarChart from 'Components/Charts/Panoptic/VerticalStackedBarChart'
+import StackedBarChart from 'Components/Charts/StackedBarChart'
 
 const GeneratedReportFilteringSection = ({
   data: { doughnutData, stackedChartData, doughnutRoundData },
@@ -55,8 +54,8 @@ const GeneratedReportFilteringSection = ({
               ))}
           </div>
         </div>
-        <div className={style.stackedChart}>
-          <VerticalStackedBarChart data={stackedChartData} />
+        <div>
+          <StackedBarChart barData={stackedChartData} />
         </div>
       </div>
     </div>

@@ -12,29 +12,15 @@ import {
 import SelectFilters from 'Components/SelectFilters'
 import TotalCompetitorViewsChart from 'Components/Charts/MarketView/TotalCompetitorViewsChart'
 import style from 'Containers/Marketview/style.scss'
-import componentStyle from 'Containers/Marketview/sections/main/TotalCompetitorViewsCard/style.scss'
+import componentStyle from './style.scss'
 
 const selectClasses = classnames('custom-select', style.selectStyles)
 
 class TotalCompetitorViewsCard extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
+
 
   componentDidMount() {
     this.props.getTotalCompetitorViewsRequest()
-  }
-
-  generateSelectProps(selects) {
-    const props = {}
-
-    for (const item of selects) {
-      props[`select${item}`] = this.state[item]
-      props[`select${item}Show`] = true
-    }
-
-    return props
   }
 
   render() {
@@ -51,12 +37,10 @@ class TotalCompetitorViewsCard extends Component {
       selects,
     } = this.props
     const chartContainer = classnames(
-      'shadow-1 col-12-gutter-20 mb-48',
+      'shadow-1 col-12 mb-48',
       style.chartContainer,
       containerClass
     )
-
-    const selectProps = this.generateSelectProps(selects || [])
 
     return (
       <div className={chartContainer}>
@@ -73,15 +57,7 @@ class TotalCompetitorViewsCard extends Component {
               ))}
             </div>
           )}
-          {selects && (
-            <div className={componentStyle.selectContainer}>
-              <SelectFilters
-                handleSelectFilters={this.handleSelectFilters}
-                selectClasses={selectClasses}
-                {...selectProps}
-              />
-            </div>
-          )}
+
         </div>
         {totalCompetitorViewsData && (
           <div className="col-12 d-flex">

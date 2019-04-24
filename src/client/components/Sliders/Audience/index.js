@@ -86,9 +86,11 @@ class AudienceSlider extends React.Component {
           <Swiper ref={node => node && (this.refThumb = node.swiper)} {...thumbSettings}>
             {items.map((item, i) => (
               <div className="item" key={i}>
-                <span>
-                  {item.age}
-                </span>
+                <p>
+									<span>
+										{item.age}
+									</span>
+								</p>
               </div>
             ))}
           </Swiper>

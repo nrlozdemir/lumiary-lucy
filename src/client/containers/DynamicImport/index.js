@@ -21,11 +21,11 @@ class DynamicImport extends Component {
     this._isMounted = false
   }
   render() {
-    const { removeNavbar, children, match } = this.props;
+    const { removeNavbar, children, match, routeConfig } = this.props;
     const { component } = this.state;
     return (
       <React.Fragment>
-        {!removeNavbar ? <Navbar match={match} /> : null}
+        {!removeNavbar ? <Navbar match={match} routeConfig={routeConfig} /> : null}
         {children(component)}
       </React.Fragment>
     )

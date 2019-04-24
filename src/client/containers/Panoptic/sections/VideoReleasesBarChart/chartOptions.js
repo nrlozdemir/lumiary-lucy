@@ -5,7 +5,7 @@ export const options = {
     padding: 0,
   },
   legend: {
-    display: false
+    display: false,
   },
   tooltips: {
     position: 'nearest',
@@ -17,45 +17,50 @@ export const options = {
     xPadding: 30,
     yPadding: 15,
     callbacks: {
-      title: function (tooltipItem, data) {
+      title: function(tooltipItem, data) {
         if (tooltipItem[0].yLabel < 0) {
-          return `${Math.abs(tooltipItem[0].yLabel / 10000)}k Videos`;
+          return `${Math.abs(tooltipItem[0].yLabel / 10000)}k Videos`
         }
-        return `${tooltipItem[0].yLabel / 1000}k Likes`;
+        return `${tooltipItem[0].yLabel / 1000}k Likes`
       },
-      label: function () {
-        return null;
-      }
-    }
+      label: function() {
+        return null
+      },
+    },
   },
-	plugins:{
-  	datalabels: false
-	},
+  plugins: {
+    datalabels: false,
+  },
   scales: {
-    xAxes: [{
-      barThickness: 10,
-      stacked: true,
-      gridLines: {
-        display: false,
-        tickMarkLength: 15
+    xAxes: [
+      {
+        barThickness: 10,
+        stacked: true,
+        gridLines: {
+          display: false,
+          tickMarkLength: 15,
+        },
+        ticks: {
+          fontColor: 'white',
+        },
       },
-      ticks: {
-        fontColor: 'white'
-      }
-    }],
-    yAxes: [{
-      stacked: false,
-      display: false,
-      gridLines: {
+    ],
+    labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+    yAxes: [
+      {
+        stacked: false,
         display: false,
-        tickMarkLength: 0
+        gridLines: {
+          display: false,
+          tickMarkLength: 0,
+        },
+        ticks: {
+          display: false,
+          stepSize: 50000,
+        },
       },
-      ticks: {
-        display: false,
-        stepSize: 50000
-      }
-    }]
-  }
+    ],
+  },
 }
 
 export const wrapperBarOptions = {
@@ -65,40 +70,47 @@ export const wrapperBarOptions = {
     padding: 0,
   },
   legend: {
-    display: false
+    display: false,
   },
   plugins: {
-    datalabels: false
+    datalabels: false,
+  },
+  chartArea: {
+    backgroundColor: '#242b49',
   },
   scales: {
-    xAxes: [{
-      barThickness: 0,
-      gridLines: {
-        display: false,
+    xAxes: [
+      {
+        barThickness: 0,
+        gridLines: {
+          display: false,
+        },
+        ticks: {
+          display: false,
+        },
       },
-      ticks: {
-        display: false
-    }
-    }],
-    yAxes: [{
-      gridLines: {
-        display: true,
-        color: '#5a6386',
-        zeroLineColor: '#ffffff',
-        drawTicks: false
-      },
-      ticks: {
-        fontColor: 'white',
-        display: true,
-        stepSize: 50000,
-        padding: 15,
-        callback: function(value, index, values) {
-            if(value<0) {
-              return `${Math.abs(value / 10000)}k`;
+    ],
+    yAxes: [
+      {
+        gridLines: {
+          display: true,
+          color: '#5a6386',
+          zeroLineColor: '#ffffff',
+          drawTicks: false,
+        },
+        ticks: {
+          fontColor: 'white',
+          display: true,
+          stepSize: 50000,
+          padding: 15,
+          callback: function(value, index, values) {
+            if (value < 0) {
+              return `${Math.abs(value / 10000)}k`
             }
-            return `${values[index] / 1000}k`;
-        }
-      }
-  }]
-  }
+            return `${values[index] / 1000}k`
+          },
+        },
+      },
+    ],
+  },
 }

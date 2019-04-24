@@ -12,6 +12,9 @@ import HeaderModule from './header'
 export class Module extends React.Component {
   constructor(props) {
     super(props)
+    this.state = {
+      infoShow: false,
+    }
   }
   componentDidUpdate(prevProps) {
     if (
@@ -27,16 +30,27 @@ export class Module extends React.Component {
     }
   }
 
+  changeInfoStatus = () => {
+    this.setState({
+      infoShow: !this.state.infoShow,
+    })
+  }
+
   render() {
     const moduleContainer = cx(
-      'shadow-1 col-12-gutter-20',
+      'shadow-1 grid-container col-12',
       style.moduleContainer
     )
     const { children, title, subTitle, legend, filters } = this.props
+    const { infoShow } = this.state
     return (
       <div className={moduleContainer}>
         <div className={style.moduleContainerHeader}>
-          <HeaderModule {...this.props} />
+          <HeaderModule
+            {...this.props}
+            changeInfoStatus={this.changeInfoStatus}
+            infoShow={infoShow}
+          />
         </div>
         <div className={style.moduleContainerBody}>{children}</div>
       </div>

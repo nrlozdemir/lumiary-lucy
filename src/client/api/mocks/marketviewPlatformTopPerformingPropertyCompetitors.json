@@ -6,14 +6,14 @@
 			"backgroundColor": "#51adc0",
 			"borderColor": "#51adc0",
 			"borderWidth": 1,
-			"data": [1000000, 300000, 500000, 100000, 500000]
+			"data": [350000, 300000, 500000, 100000, 500000]
 		},
 		{
 			"label": "Medium",
 			"backgroundColor": "#8567f0",
 			"borderColor": "#8567f0",
 			"borderWidth": 1,
-			"data": [1200000, 1300000, 200000, 500000, 300000]
+			"data": [750000, 800000, 200000, 500000, 300000]
 		},
 		{
 			"label": "Slow",

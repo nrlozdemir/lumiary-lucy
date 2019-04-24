@@ -2,7 +2,11 @@ import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import { barDataOptions } from './options'
 
-const TotalViewsBarChart = ({ barData }) => {
+const StackedBarChart = ({
+    barData,
+    height = 300,
+    width = 500,
+  }) => {
   const plugins = [
     {
       beforeDraw: function(chart, easing) {
@@ -26,14 +30,8 @@ const TotalViewsBarChart = ({ barData }) => {
         let configX = chart.config.options.scales.xAxes
         //Save the rendering context state
         ctx.save()
-        ctx.strokeStyle =
-          configX[0].gridLines.color ||
-          Chart.defaults.bar.scales.xAxes[0].gridLines.color ||
-          '#5a6386'
-        ctx.lineWidth =
-          configX[0].gridLines.lineWidth ||
-          Chart.defaults.bar.scales.xAxes[0].gridLines.lineWidth ||
-          1
+        ctx.strokeStyle = configX[0].gridLines.color
+        ctx.lineWidth = configX[0].gridLines.lineWidth
 
         ctx.beginPath()
         ctx.moveTo(chart.chartArea.right, chart.chartArea.top)
@@ -65,12 +63,12 @@ const TotalViewsBarChart = ({ barData }) => {
           }
         }),
       }}
-      width={500}
+      width={width}
       options={{ ...barDataOptions }}
       plugins={plugins}
-      height={300}
+      height={height}
     />
   )
 }
 
-export default TotalViewsBarChart
+export default StackedBarChart

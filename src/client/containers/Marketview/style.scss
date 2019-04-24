@@ -1,7 +1,7 @@
 .mainCardContainer {
   display: flex;
   justify-content: space-between;
-  margin: 0 -12px;
+  padding: 0 8px;
 }
 
 .marketViewCard {
@@ -151,6 +151,7 @@
 }
 
 .chartContainer {
+  position: relative;
   padding: 48px 40px;
   box-sizing: border-box;
   font-family: $font-family-ClanOTNews;
@@ -387,5 +388,6 @@
 }
 
 .detailTopPerformingPropertyContainer {
+  position: relative;
   padding-top: 20px;
 }

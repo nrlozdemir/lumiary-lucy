@@ -7,16 +7,15 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewTotalView } from 'Reducers/marketview'
 
-import TotalViewsBarChart from 'Components/Charts/MarketView/TotalViewsBarChart'
+import StackedBarChart from 'Components/Charts/StackedBarChart'
 import TotalViewsDoughnutChart from 'Components/Charts/MarketView/TotalViewsDoughnutChart'
-import SelectFilters from 'Components/SelectFilters'
 import style from 'Containers/Marketview/style.scss'
 
 import Module from 'Components/Module'
 
 class TotalViewsChart extends React.Component {
   callBack = (data, moduleKey) => {
-    if (moduleKey === 'TotalViewsBarChart') {
+    if (moduleKey === 'StackedBarChart') {
       this.props.getTotalViewsRequest(data, moduleKey)
       // console.log('===> DATA: ', data, 'MODULE_KEY: ', moduleKey)
     }
@@ -37,7 +36,7 @@ class TotalViewsChart extends React.Component {
 
     return (
       <Module
-        moduleKey={'TotalViewsBarChart'}
+        moduleKey={'StackedBarChart'}
         title="Total Views For All Platforms In The Past Month"
         action={this.callBack}
         filters={[
@@ -60,7 +59,7 @@ class TotalViewsChart extends React.Component {
       >
         <div className="grid-collapse">
           <div className="col-6">
-            {barData && <TotalViewsBarChart barData={barData} />}
+            {barData && <StackedBarChart barData={barData} />}
           </div>
           <div className="col-6">
             {doughnutData && (
