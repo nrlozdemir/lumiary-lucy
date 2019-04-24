@@ -11,10 +11,8 @@ import 'chartjs-plugin-datalabels'
 import SelectFilters from 'Components/SelectFilters'
 import style from './style.scss'
 
-//import DoughnutChart from 'Components/Charts/Panoptic/DoughnutChart'
-import VerticalStackedBarChart from 'Components/Charts/Panoptic/VerticalStackedBarChart'
-
 import DoughnutChart from 'Components/Charts/DoughnutChart'
+import VerticalStackedBarChart from 'Components/Charts/Panoptic/VerticalStackedBarChart'
 
 import Module from 'Components/Module'
 
@@ -61,19 +59,23 @@ class PanopticFilteringSection extends Component {
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
-						<div>
-							{doughnutData && doughnutData.average && (
-								<DoughnutChart
-									width={270}
-									height={270}
-									data={doughnutData.average}
-									fillText="Total Percentage"
-									labelsPosition="right"
-									labelsClassName="customClass"
-									labelsData={doughnutRoundData}
-								/>
-							)}
-						</div>
+						{doughnutData && doughnutData.average && (
+							<DoughnutChart
+								wrapperClassName={style.doughnutWithLabelsContainer}
+								chartClassName="customChartClass"
+								width={270}
+								height={270}
+								data={doughnutData.average}
+								datasetsBackgroundColor={["#acb0be", "#8567f0", "#D0506C", "#51adc0"]}
+								datasetsHoverBackgroundColor={["#acb0be", "#8567f0", "#D0506C", "#51adc0"]}
+								fillText="Total Percentage"
+								dataLabelFunction="insertAfter"
+								dataLabelInsert="%"
+								labelsPosition="right"
+								labelsClassName="customLabelClass"
+								labelsData={doughnutRoundData}
+							/>
+						)}
           </div>
           <div className={style.stackedChart}>
             {stackedChartData && (
