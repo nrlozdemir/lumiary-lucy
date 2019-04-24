@@ -19,9 +19,6 @@ const defaultProps = {
   legend: false,
 	layoutPadding: 0,
 
-	datasetsBackgroundColor: [],
-	datasetsHoverBackgroundColor: [],
-
 	datasetsBorderWidth: 5,
 	datasetsBorderColor: "#303a5d",
 	datasetsHoverBorderColor: "#303a5d",
@@ -66,10 +63,10 @@ export default class DoughnutChart extends React.Component {
   }
 
   render() {
+		console.log(this.props)
     const {
 			wrapperClassName, chartClassName, labelsClassName,
 			width, height, data,
-			datasetsBackgroundColor, datasetsHoverBackgroundColor,
 			datasetsBorderWidth, datasetsBorderColor, datasetsHoverBorderColor,
       responsive, legend, tooltip,
 			layoutPadding,
@@ -99,9 +96,17 @@ export default class DoughnutChart extends React.Component {
           const { top, bottom, left, right } = chart.chartArea
           ctx.save()
           ctx.fillStyle = fillTextColor
-          ctx.font = (fillTextFontSize + " " + fillTextFontFamily)
+					ctx.font = (fillTextFontSize + " " + fillTextFontFamily)
+
+					let customFillText
+					if(Array.isArray(customFillText)) {
+						customFillText = fillText.join("\n")
+					} else {
+						customFillText = fillText
+					}
+
           ctx.fillText(
-            fillText,
+            customFillText,
             (fillTextX && fillTextX > 0)
               ? fillTextX
               : ((bottom - top) / 2 - 55),
@@ -121,24 +126,27 @@ export default class DoughnutChart extends React.Component {
       <React.Fragment>
         <div className={wrapperClassName}>
 					<div className={chartClassName}>
-						<Doughnut
+					{data &&
+						(<Doughnut
 							width={width}
 							height={height}
-							data={{
-								labels: [...data],
-								datasets: [
-									{
-										data: [...data],
-										borderColor: datasetsBorderColor,
-										backgroundColor: datasetsBackgroundColor,
-										hoverBackgroundColor: datasetsHoverBackgroundColor,
-									},
-								],
-							}}
+							data={
+								{
+									datasets: [
+										{
+											labels: data.datasets[0].data,
+											label: data.datasets[0].data,
+											data: data.datasets[0].data,
+											backgroundColor: data.datasets[0].backgroundColor,
+											borderColor: datasetsBorderColor,
+											hoverBackgroundColor: data.datasets[0].hoverBackgroundColor,
+										}
+									]
+								}
+							}
 							plugins={plugins}
 							options={{
 								responsive: responsive,
-								cutoutPercentage: 55,
 								tooltips: {
 									enabled: tooltip,
 									titleFontFamily: tooltipFontFamily,
@@ -186,7 +194,7 @@ export default class DoughnutChart extends React.Component {
 									}
 								}
 							}}
-						/>
+						/>)}
 					</div>
 					{labelsData &&
 						(<div className={labelsClassName}>
