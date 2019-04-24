@@ -43,7 +43,15 @@
       float: left;
       height: 40px;
       display: flex;
-      align-items: flex-end;
+			align-items: flex-end;
+
+			svg{
+				position: absolute;
+				z-index: 2;
+				left: 0;
+				top: -1px;
+				transform: scaleY(-1);
+			}
 
       &:before{
         content: "CV Score";
@@ -75,8 +83,7 @@
         position: relative;
         float: left;
         width: 3px;
-        min-height: 11px;
-        height: 11px;
+        height: 100%;
         margin: 0 .5px;
 
         transition: 500ms;
@@ -94,37 +101,10 @@
         @for $i from 1 through 29 {
           &[data-index="#{$i}"]{
             @if $i > 15 {
-              height: #{(30 - (($i * 2) - 30)) + 11}px;
-
-              &:before{
-                content: "";
-                position: absolute;
-                top: -1px;
-                left: -1.5px;
-                border: 1px solid transparent;
-                border-right: 5px solid #303a5d;
-                border-bottom-width: 2px;
-                z-index: 2;
-              }
-
               &:after{
                 opacity: #{($i / 15) - 1};
               }
-
             } @else if $i < 15 {
-              height: #{($i * 2) + 11}px;
-
-              &:before{
-                content: "";
-                position: absolute;
-                top: -1px;
-                left: -1.5px;
-                border: 1px solid transparent;
-                border-left: 5px solid #303a5d;
-                border-bottom-width: 2px;
-                z-index: 2;
-              }
-
               &:after{
                 opacity: #{1 - ($i / 15)};
               }
@@ -134,7 +114,6 @@
         }
 
         &[data-index="15"]{
-          height: calc(100% - 1px);
           &:after{
             opacity: 0;
           }
