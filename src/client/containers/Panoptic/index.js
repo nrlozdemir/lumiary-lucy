@@ -15,7 +15,6 @@ import { reduxForm } from 'redux-form'
 import { actions, makeSelectPanoptic } from 'Reducers/panoptic'
 import style from './style.scss'
 
-import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import VideoReleasesBarChart from './sections/VideoReleasesBarChart'
 import ColorTemperature from './sections/ColorTemperature'
 import FilteringSection from './sections/FilteringSection'
