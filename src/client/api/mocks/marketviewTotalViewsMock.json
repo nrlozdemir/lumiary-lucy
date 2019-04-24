@@ -66,16 +66,30 @@
   },
   "doughnutData": {
     "labels": [
-      "Barstool Sports",
-      "SB Nation",
-      "ESPN",
-      "Scout Media",
-      "Fansided"
-    ],
+			{
+				"color": "#51adc0",
+				"data": "Barstool Sports"
+			},
+			{
+				"color": "#8567f0",
+				"data": "SB Nation"
+			},
+			{
+				"color": "#d0506c",
+				"data": "ESPN"
+			},
+			{
+				"color": "#acb0be",
+				"data": "Scout Media"
+			},
+			{
+				"color": "#5a6386",
+				"data": "Fansided"
+			}
+		],
     "datasets": [
       {
         "data": [50, 20, 15, 10, 5],
-        "borderColor": "#303a5d",
         "backgroundColor": [
           "#51adc0",
           "#8567f0",
