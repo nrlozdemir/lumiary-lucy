@@ -130,13 +130,11 @@ function* getTotalViewsData(data) {
   try {
     const payload = yield call(getTotalViewsApi)
     const shuffleBarData = _.shuffle(payload.barData.datasets)
-    const shuffleDoughnutData = _.shuffle(payload.doughnutData.datasets[0].data)
+    const shuffleDoughnutData = payload.doughnutData.datasets.data
     payload.barData.datasets = shuffleBarData
-    payload.doughnutData.datasets[0].data = shuffleDoughnutData
 
     yield put(actions.getTotalViewsSuccess(payload))
   } catch (error) {
-    console.log('error', error)
     yield put(actions.getTotalViewsFailure(error))
   }
 }
