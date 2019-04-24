@@ -18,6 +18,11 @@
 ///   }
 
 @mixin grid-container($grid: $neat-grid) {
+	max-width: $max-grid-size;
+	margin-left: auto !important;
+	margin-right: auto !important;
+	float: none !important;
+
   @if $grid != $neat-grid {
     @warn "`grid-container` does not use grid properties. " +
           "Custom grids do not need to be passed in to this mixin.";
