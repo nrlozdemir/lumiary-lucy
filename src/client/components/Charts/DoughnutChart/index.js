@@ -132,9 +132,9 @@ export default class DoughnutChart extends React.Component {
 							height={height}
 							data={
 								{
+									labels: data.datasets[0].data,
 									datasets: [
 										{
-											labels: data.datasets[0].data,
 											data: data.datasets[0].data,
 											backgroundColor: data.datasets[0].backgroundColor,
 											borderColor: datasetsBorderColor,
