@@ -2,7 +2,11 @@ import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import { barDataOptions } from './options'
 
-const TotalViewsBarChart = ({ barData }) => {
+const StackedBarChart = ({
+    barData,
+    height = 300,
+    width = 500,
+  }) => {
   const plugins = [
     {
       beforeDraw: function(chart, easing) {
@@ -59,12 +63,12 @@ const TotalViewsBarChart = ({ barData }) => {
           }
         }),
       }}
-      width={500}
+      width={width}
       options={{ ...barDataOptions }}
       plugins={plugins}
-      height={300}
+      height={height}
     />
   )
 }
 
-export default TotalViewsBarChart
+export default StackedBarChart

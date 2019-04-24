@@ -30,27 +30,7 @@ export class Marketview extends React.Component {
     return (
       <div className="grid-container col-12">
         <div className={style.alignTabs}>
-          <NavLink
-            to="/marketview/platform"
-            className={style.tab}
-            activeClassName={classnames(style.tab, style.activeLink)}
-          >
-            Platform
-          </NavLink>
-          <NavLink
-            to="/marketview/competitor"
-            className={style.tab}
-            activeClassName={style.activeLink}
-          >
-            Competitor
-          </NavLink>
-          <NavLink
-            to="/marketview/time"
-            className={style.tab}
-            activeClassName={style.activeLink}
-          >
-            Time
-          </NavLink>
+
         </div>
 
         <Switch>

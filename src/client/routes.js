@@ -14,11 +14,11 @@ const routes = [
     path: '/library',
     exact: true,
     component: 'Library',
-  },
-  {
-    path: '/library/:videoId/compare',
-    exact: true,
-    component: 'Compare',
+    navigation: {
+      level: 1,
+      order: 3,
+      title: 'Library'
+    }
   },
   {
     path: '/library/build-report/:videoId',
@@ -34,6 +34,11 @@ const routes = [
     path: '/quickview',
     exact: true,
     component: 'Quickview',
+    navigation: {
+      level: 1,
+      order: 5,
+      title: 'Quickview'
+    }
   },
   {
     path: '/quickview/:platform',
@@ -43,16 +48,63 @@ const routes = [
     path: '/panoptic',
     exact: true,
     component: 'Panoptic',
+    navigation: {
+      level: 1,
+      order: 1,
+      title: 'Panoptic'
+    }
   },
   {
-    path: '/panoptic/:detail',
+    path: '/audience',
     exact: true,
     component: 'Audience',
+    navigation: {
+      level: 1,
+      order: 2,
+      title: 'Audience'
+    }
   },
   {
     path: '/marketview',
     exact: true,
     component: 'Marketview',
+    navigation: {
+      level: 1,
+      order: 4,
+      title: 'Marketview'
+    },
+    routes: [
+      {
+        path: '/marketview/platform',
+        exact: true,
+        component: 'Marketview',
+        navigation: {
+          level: 2,
+          order: 1,
+          title: 'Platform'
+        }
+      },
+      {
+        path: '/marketview/competitor',
+        exact: true,
+        component: 'Marketview',
+        navigation: {
+          level: 2,
+          order: 2,
+          title: 'Competitor'
+        }
+      },
+      {
+        path: '/marketview/time',
+        exact: true,
+        component: 'Marketview',
+        navigation: {
+          level: 2,
+          order: 3,
+          title: 'Time'
+        }
+      }
+    ]
   },
   {
     path: '/marketview/:detail',
@@ -63,6 +115,11 @@ const routes = [
     path: '/reports',
     exact: true,
     component: 'Reports',
+    navigation: {
+      level: 1,
+      order: 6,
+      title: 'Reports'
+    }
   },
   {
     path: '/reports/generated',
@@ -85,6 +142,7 @@ const RouteWithSubRoutes = (route) => (
         removeNavbar={route.removeNavbar}
         load={() => import(`./containers/${route.component}`)}
         match={props.match}
+        routeConfig={routes}
       >
         {(Component) =>
           Component === null ? (
