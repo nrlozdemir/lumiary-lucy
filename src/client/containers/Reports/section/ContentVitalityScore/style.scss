@@ -1,21 +1,20 @@
 .vitalityContainer {
-	width: 100%;
-	position: relative;
+  width: 100%;
+  position: relative;
 }
 
-.vitalityContainer::before{
-	content: attr(data-vertical-title);
-	position: absolute;
-	z-index: 200;
-	left: 14px;
-	top: calc(50% + 50px);
-	transform: rotate(-90deg);
-	transform-origin: top left;
-	font-family: $font-family-ClanOT;
-	color: #fff;
-	font-size: 14px;
-	text-transform: uppercase;
-	height: 20px;
-	width: 150px;
+.vitalityContainer::before {
+  content: attr(data-vertical-title);
+  position: absolute;
+  z-index: 200;
+  left: 14px;
+  top: calc(50% + 50px);
+  transform: rotate(-90deg);
+  transform-origin: top left;
+  font-family: $font-family-ClanOT;
+  color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  height: 20px;
+  width: 150px;
 }
-

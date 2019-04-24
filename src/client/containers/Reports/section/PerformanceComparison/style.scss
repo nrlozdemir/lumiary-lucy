@@ -1,10 +1,17 @@
-.videoComparisonContainer {
-  background-color: $color-dark-grey-blue;
-  font-family: $font-family-ClanOT;
-  margin-top: 35px;
-  margin-bottom: 35px;
+.container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   position: relative;
-  overflow: hidden;
+}
+
+.chartContainer {
+  flex: 1;
+  &:last-child {
+    flex: initial;
+    margin-left: 56px;
+  }
 }
 
 .headerLabel {

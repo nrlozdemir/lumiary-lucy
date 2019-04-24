@@ -3,7 +3,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectAudienceContentVitalityScore } from 'Reducers/panoptic'
+import {
+  actions,
+  makeSelectReportsContentVitalityScore,
+} from 'Reducers/reports'
 
 import chartStyle from './style.scss'
 import LineChart from 'Components/LineChart/Chart'
@@ -33,49 +36,52 @@ function combineChartData(chartData) {
         )
         ctx.restore()
       }
-		}
+    },
   })
 }
 
 class ContentVitalityScore extends React.Component {
   callBack = (data, moduleKey) => {
-    this.props.getAudienceContentVitalityScoreData(data)
+    this.props.getContentVitalityScoreData(data)
   }
 
   render() {
     // const { selectViews, selectPlatforms, selectDate } = this.state;
     const {
-      audienceContentVitalityScoreData: { data, loading, error },
+      contentVitalityScoreData: { data, loading, error },
     } = this.props
 
     return (
       <Module
-        moduleKey={'Audience/ContentVitalityScore'}
+        moduleKey={'Reports/ContentVitalityScore'}
         title="Content Vitality Score Based On Audience"
         action={this.callBack}
         filters={[
           {
             type: 'platform',
-            selectKey: 'ACOT-ads',
+            selectKey: 'RCVS-ads',
             placeHolder: 'Platforms',
           },
           {
             type: 'timeRange',
-            selectKey: 'ACOT-wds',
+            selectKey: 'RCVS-wds',
             placeHolder: 'Date',
           },
         ]}
       >
         {data && data.datasets && (
-          <div data-vertical-title="Number Of Videos" className={chartStyle.vitalityContainer}>
-						<LineChart
-							backgroundColor="#242b49"
-							dataSet={() => combineChartData(data)}
-							width={1070}
-							height={291}
-							options={lineChartOptions}
-						/>
-					</div>
+          <div
+            data-vertical-title="Number Of Videos"
+            className={chartStyle.vitalityContainer}
+          >
+            <LineChart
+              backgroundColor="#242b49"
+              dataSet={() => combineChartData(data)}
+              width={1070}
+              height={291}
+              options={lineChartOptions}
+            />
+          </div>
         )}
       </Module>
     )
@@ -83,7 +89,7 @@ class ContentVitalityScore extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  audienceContentVitalityScoreData: makeSelectAudienceContentVitalityScore(),
+  contentVitalityScoreData: makeSelectReportsContentVitalityScore(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)

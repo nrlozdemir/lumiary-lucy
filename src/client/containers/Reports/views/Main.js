@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectReports } from 'Reducers/reports'
 
 import style from '../style.scss'
@@ -55,7 +55,7 @@ class Reports extends Component {
   }
 
   componentWillMount() {
-    this.props.getReports()
+    this.props.loadReports()
   }
 
   openModal = (value) => {
@@ -71,11 +71,11 @@ class Reports extends Component {
   }
 
   deleteReportAction(id) {
-    this.props.deleteReport(id)
+    this.props.loadDeleteReport(id)
   }
 
   loadMore() {
-    this.props.getMoreReports()
+    this.props.loadMoreReports()
   }
 
   renderModalInside = () => {
@@ -83,13 +83,21 @@ class Reports extends Component {
 
     switch (selectedReportCardKey && selectedReportCardKey.key) {
       case 'brand-insights':
-        return <ReportsForm handleSubmitFunc={this.props.brandInsightFormSubmit} />
+        return (
+          <ReportsForm handleSubmitFunc={this.props.brandInsightFormSubmit} />
+        )
 
       case 'compare-brands':
-        return <CompareBrand handleSubmitFunc={this.props.compareBrandFormSubmit} />
+        return (
+          <CompareBrand handleSubmitFunc={this.props.compareBrandFormSubmit} />
+        )
 
       case 'predefined-reports':
-        return <PredefinedReport handleSubmitFunc={this.props.predefinedBrandFormSubmit} />
+        return (
+          <PredefinedReport
+            handleSubmitFunc={this.props.predefinedBrandFormSubmit}
+          />
+        )
 
       default:
         return null
@@ -100,7 +108,7 @@ class Reports extends Component {
     const { modalIsOpen, reportCards, selectedReportCardKey } = this.state
 
     const {
-      reports: { reports, loading, error },
+      reports: { data, loading, error },
     } = this.props
     return (
       <div className="grid-container col-12 mr-40 ml-40 mt-72 mb-72">
@@ -138,14 +146,14 @@ class Reports extends Component {
             ) : (
               <div className={style.reportsTableBody}>
                 <ReactTable
-                  data={reports}
+                  data={data}
                   noDataText="No reports data"
                   showPagination={false}
                   multiSort={true}
                   resizable={false}
                   sortable={true}
                   minRows={4}
-                  pageSize={reports.length}
+                  pageSize={data.length}
                   columns={[
                     {
                       Header: 'Title',
@@ -203,26 +211,22 @@ class Reports extends Component {
   }
 }
 
-Reports.propTypes = {
-  reports: PropTypes.object,
-  getReports: PropTypes.func,
-  dispatch: PropTypes.func,
-}
-
 const mapStateToProps = createStructuredSelector({
   reports: makeSelectReports(),
 })
 
-function mapDispatchToProps(dispatch) {
-  return {
-    getReports: () => dispatch(actions.loadReports()),
-    getMoreReports: () => dispatch(actions.loadMoreReports()),
-		deleteReport: (id) => dispatch(actions.loadDeleteReport(id)),
-		brandInsightFormSubmit: (values) => dispatch(actions.brandInsightFormSubmit(values)),
-		compareBrandFormSubmit: (values) => dispatch(actions.compareBrandFormSubmit(values)),
-		predefinedBrandFormSubmit: (values) => dispatch(actions.predefinedBrandFormSubmit(values))
-  }
-}
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+// function mapDispatchToProps(dispatch) {
+//   return {
+//     getReports: () => dispatch(actions.loadReports()),
+//     getMoreReports: () => dispatch(actions.loadMoreReports()),
+// 		deleteReport: (id) => dispatch(actions.loadDeleteReport(id)),
+// 		brandInsightFormSubmit: (values) => dispatch(actions.brandInsightFormSubmit(values)),
+// 		compareBrandFormSubmit: (values) => dispatch(actions.compareBrandFormSubmit(values)),
+// 		predefinedBrandFormSubmit: (values) => dispatch(actions.predefinedBrandFormSubmit(values))
+//   }
+// }
 
 const withConnect = connect(
   mapStateToProps,

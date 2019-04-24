@@ -4,8 +4,12 @@ import style from './style.scss'
 const ReportsCards = ({ openModal, reportCards }) => {
   return (
     <div className={style.reportsCardContainer}>
-      {reportCards.map((card) => (
-        <div className={style.reportsCard} onClick={() => openModal(card)}>
+      {reportCards.map((card, index) => (
+        <div
+          className={style.reportsCard}
+          onClick={() => openModal(card)}
+          key={`reportsCard-${index}`}
+        >
           <p className={style.cardTitle}>{card.title}</p>
           <div className={style.cardIcons}>
             <img src={card.icon} alt={card.key} />

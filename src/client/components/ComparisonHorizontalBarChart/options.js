@@ -5,7 +5,20 @@ export const barChartOptions = {
     display: false,
   },
   plugins: {
-    datalabels: false,
+    datalabels: {
+      formatter: (value, ctx) => {
+        let sum = 0;
+        let dataArr = ctx.chart.data.datasets[0].data;
+        dataArr.map(data => {
+          sum += data;
+        });
+        let percentage = ( value * 100 / sum ).toFixed(0) + "%";
+        return percentage;
+      },
+      anchor: 'start',
+      align: 'left',
+      color: '#fff',
+    },
   },
   chartArea: {
     backgroundColor: '#242b49',
@@ -58,7 +71,7 @@ export const barChartOptions = {
   },
 }
 
-export const leftPlugins = [
+export const plugins = [
   {
     beforeDraw: function(chart, easing) {
       let ctx = chart.chart.ctx
@@ -91,79 +104,6 @@ export const leftPlugins = [
 
       //Restore the rendering context state
       ctx.restore()
-    },
-    afterDraw: function(chart) {
-      let ctx = chart.chart.ctx
-      ctx.font = '12px ClanOTBold'
-      ctx.fillStyle = '#ffffff'
-      ctx.textAlign = 'center'
-      ctx.textBaseline = 'left bottom'
-
-      chart.chart.config.data.datasets.forEach(function(dataset) {
-        const dataArray = dataset.data
-        dataset._meta[0].data.forEach(function(bar, index) {
-          ctx.fillText(
-            dataArray[index] + '%',
-            bar._view.x - 15,
-            bar._view.y + 5
-          )
-        })
-      })
-    },
-  },
-]
-
-export const rightPlugins = [
-  {
-    beforeDraw: function(chart, easing) {
-      let ctx = chart.chart.ctx
-      let chartArea = chart.chartArea
-      if (
-        chart.config.options.chartArea &&
-        chart.config.options.chartArea.backgroundColor
-      ) {
-        ctx.save()
-        ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-        ctx.fillRect(
-          chartArea.left,
-          chartArea.top,
-          chartArea.right - chartArea.left,
-          chartArea.bottom - chartArea.top
-        )
-        ctx.restore()
-      }
-
-      let configX = chart.config.options.scales.xAxes
-      //Save the rendering context state
-      ctx.save()
-      ctx.strokeStyle = configX[0].gridLines.color
-      ctx.lineWidth = configX[0].gridLines.lineWidth
-
-      ctx.beginPath()
-      ctx.moveTo(chart.chartArea.left, chart.chartArea.top)
-      ctx.lineTo(chart.chartArea.right, chart.chartArea.top)
-      ctx.stroke()
-
-      //Restore the rendering context state
-      ctx.restore()
-    },
-    afterDraw: function(chart) {
-      let ctx = chart.chart.ctx
-      ctx.font = '12px ClanOTBold'
-      ctx.fillStyle = '#ffffff'
-      ctx.textAlign = 'center'
-      ctx.textBaseline = 'left bottom'
-
-      chart.chart.config.data.datasets.forEach(function(dataset) {
-        const dataArray = dataset.data
-        dataset._meta[1].data.forEach(function(bar, index) {
-          ctx.fillText(
-            dataArray[index] + '%',
-            bar._view.x + 15,
-            bar._view.y + 5
-          )
-        })
-      })
     },
   },
 ]

@@ -1,10 +1,8 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose } from 'redux'
 import ContentVitalityScore from '../section/ContentVitalityScore'
 import VideoComparison from '../section/VideoComparison'
+import PerformanceComparison from '../section/PerformanceComparison'
+import ColorComparison from '../section/ColorComparison'
 
 class CompareBrand extends Component {
   render() {
@@ -12,22 +10,11 @@ class CompareBrand extends Component {
       <div>
         <ContentVitalityScore />
         <VideoComparison />
+        <PerformanceComparison />
+        <ColorComparison />
       </div>
     )
   }
 }
 
-CompareBrand.propTypes = {}
-
-const mapStateToProps = createStructuredSelector({})
-
-function mapDispatchToProps(dispatch) {
-  return {}
-}
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(CompareBrand)
+export default CompareBrand

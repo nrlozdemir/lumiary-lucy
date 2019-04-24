@@ -31,7 +31,30 @@ export const types = {
   PREDEFINED_BRAND_REQUEST: 'Reports/PREDEFINED_BRAND_REQUEST',
   PREDEFINED_BRAND_REQUEST_SUCCESS: 'Reports/PREDEFINED_BRAND_REQUEST_SUCCESS',
   PREDEFINED_BRAND_REQUEST_ERROR: 'Reports/PREDEFINED_BRAND_REQUEST_ERROR',
+
+  GET_CONTENT_VITALITY_SCORE_DATA: 'Reports/GET_CONTENT_VITALITY_SCORE_DATA',
+  GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS:
+    'Reports/GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS',
+  GET_CONTENT_VITALITY_SCORE_DATA_ERROR:
+    'Reports/GET_CONTENT_VITALITY_SCORE_DATA_ERROR',
+
+  LOAD_VIDEO_COMPARISON_DATA: 'Reports/LOAD_VIDEO_COMPARISON_DATA',
+  LOAD_VIDEO_COMPARISON_DATA_SUCCESS:
+    'Reports/LOAD_VIDEO_COMPARISON_DATA_SUCCESS',
+  LOAD_VIDEO_COMPARISON_DATA_ERROR: 'Reports/LOAD_VIDEO_COMPARISON_DATA_ERROR',
+
+  LOAD_PERFORMANCE_COMPARISON_DATA: 'Reports/LOAD_PERFORMANCE_COMPARISON_DATA',
+  LOAD_PERFORMANCE_COMPARISON_DATA_SUCCESS:
+    'Reports/LOAD_PERFORMANCE_COMPARISON_DATA_SUCCESS',
+  LOAD_PERFORMANCE_COMPARISON_DATA_ERROR:
+    'Reports/LOAD_PERFORMANCE_COMPARISON_DATA_ERROR',
+
+  LOAD_COLOR_COMPARISON_DATA: 'Reports/LOAD_COLOR_COMPARISON_DATA',
+  LOAD_COLOR_COMPARISON_DATA_SUCCESS:
+    'Reports/LOAD_COLOR_COMPARISON_DATA_SUCCESS',
+  LOAD_COLOR_COMPARISON_DATA_ERROR: 'Reports/LOAD_COLOR_COMPARISON_DATA_ERROR',
 }
+
 export const actions = {
   // LOAD REPORTS
   loadReports: () => ({ type: types.LOAD_REPORTS }),
@@ -97,125 +120,316 @@ export const actions = {
     type: types.PREDEFINED_REPORT_REQUEST_ERROR,
     error,
   }),
+
+  getContentVitalityScoreData: () => ({
+    type: types.GET_CONTENT_VITALITY_SCORE_DATA,
+  }),
+  getContentVitalityScoreDataSuccess: (payload) => ({
+    type: types.GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS,
+    payload,
+  }),
+  getContentVitalityScoreDataError: (error) => ({
+    type: types.GET_CONTENT_VITALITY_SCORE_DATA_ERROR,
+    error,
+  }),
+
+  getVideoComparisonData: () => ({
+    type: types.LOAD_VIDEO_COMPARISON_DATA,
+  }),
+  getVideoComparisonDataSuccess: (payload) => ({
+    type: types.LOAD_VIDEO_COMPARISON_DATA_SUCCESS,
+    payload,
+  }),
+  getVideoComparisonDataError: (error) => ({
+    type: types.LOAD_VIDEO_COMPARISON_DATA_ERROR,
+    error,
+  }),
+
+  getPerformanceComparisonData: () => ({
+    type: types.LOAD_PERFORMANCE_COMPARISON_DATA,
+  }),
+  getPerformanceComparisonDataSuccess: (payload) => ({
+    type: types.LOAD_PERFORMANCE_COMPARISON_DATA_SUCCESS,
+    payload,
+  }),
+  getPerformanceComparisonDataError: (error) => ({
+    type: types.LOAD_PERFORMANCE_COMPARISON_DATA_ERROR,
+    error,
+  }),
+
+  getColorComparisonData: () => ({
+    type: types.LOAD_COLOR_COMPARISON_DATA,
+  }),
+  getColorComparisonDataSuccess: (payload) => ({
+    type: types.LOAD_COLOR_COMPARISON_DATA_SUCCESS,
+    payload,
+  }),
+  getColorComparisonDataError: (error) => ({
+    type: types.LOAD_COLOR_COMPARISON_DATA_ERROR,
+    error,
+  }),
 }
 export const initialState = fromJS({
-  reports: [],
-  error: false,
-  loading: false,
-  brandInsightValues: null,
+  reports: {
+    data: [],
+    error: false,
+    loading: false,
+  },
+  brandInsightValues: {
+    data: [],
+    error: false,
+    loading: false,
+  },
+  contentVitalityScoreData: {
+    data: [],
+    error: false,
+    loading: false,
+  },
+  comparebrandValues: {
+    data: [],
+    error: false,
+    loading: false,
+  },
+  predefinedReportValues: {
+    data: [],
+    error: false,
+    loading: false,
+  },
+  videoComparisonData: {
+    data: [],
+    error: false,
+    loading: false,
+  },
+  performanceComparisonData: {
+    data: {},
+    error: false,
+    loading: false,
+  },
+  colorComparisonData: {
+    data: [],
+    error: false,
+    loading: false,
+  },
 })
 
 const reportsReducer = (state = initialState, action) => {
   switch (action.type) {
     /** START load reports */
     case types.LOAD_REPORTS:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['reports', 'loading'], fromJS(true))
 
     case types.LOAD_REPORTS_SUCCESS:
       return state
-        .set('reports', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(['reports', 'data'], fromJS(action.payload))
+        .setIn(['reports', 'loading'], fromJS(false))
 
     case types.LOAD_REPORTS_ERROR:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['reports', 'error'], fromJS(action.error))
+        .setIn(['reports', 'loading'], fromJS(false))
     /** END load reports */
 
     /** START load more reports */
     case types.LOAD_MORE_REPORTS:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['reports', 'loading'], fromJS(true))
 
     case types.LOAD_MORE_REPORTS_SUCCESS:
       return state
-        .set(
-          'reports',
-          fromJS(state.get('reports').concat(fromJS(action.payload)))
+        .setIn(
+          ['reports', 'data'],
+          fromJS(
+            state.getIn(['reports', 'data']).concat(fromJS(action.payload))
+          )
         )
-        .set('loading', fromJS(false))
+        .setIn(['reports', 'loading'], fromJS(false))
 
     case types.LOAD_MORE_REPORTS_ERROR:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['reports', 'error'], fromJS(action.error))
+        .setIn(['reports', 'loading'], fromJS(false))
     /** END load more reports */
 
     /** START delete a report */
     case types.DELETE_REPORT:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['reports', 'loading'], fromJS(true))
 
     case types.DELETE_REPORT_SUCCESS: {
       return state
-        .set(
-          'reports',
+        .setIn(
+          ['reports', 'data'],
           fromJS(
             state
-              .get('reports')
+              .getIn(['reports', 'data'])
               .filter((item) => item.toJS().id !== action.payload)
           )
         )
-        .set('loading', fromJS(false))
+        .setIn(['reports', 'loading'], fromJS(false))
     }
     case types.DELETE_REPORT_ERROR:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['reports', 'error'], fromJS(action.error))
+        .setIn(['reports', 'loading'], fromJS(false))
     /** END delete a report */
 
     /** START submit brand insight form */
     case types.BRAND_INSIGHT_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['brandInsightValues', 'loading'], fromJS(true))
 
     case types.BRAND_INSIGHT_REQUEST_SUCCESS: {
       return state
-        .set('brandInsightValues', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(['brandInsightValues', 'data'], fromJS(action.payload))
+        .setIn(['brandInsightValues', 'loading'], fromJS(false))
     }
     case types.BRAND_INSIGHT_REQUEST_ERROR:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['brandInsightValues', 'error'], fromJS(action.error))
+        .setIn(['brandInsightValues', 'loading'], fromJS(false))
     /** END submit brand insight form */
 
     /** START submit brand insight form */
     case types.COMPARE_BRAND_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['comparebrandValues', 'loading'], fromJS(true))
 
     case types.COMPARE_BRAND_REQUEST_SUCCESS: {
       return state
-        .set('comparebrandValues', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(['comparebrandValues', 'data'], fromJS(action.payload))
+        .setIn(['comparebrandValues', 'loading'], fromJS(false))
     }
     case types.COMPARE_BRAND_REQUEST_ERROR:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['comparebrandValues', 'error'], fromJS(action.error))
+        .setIn(['comparebrandValues', 'loading'], fromJS(false))
     /** END submit brand insight form */
 
     /** START submit brand insight form */
     case types.PREDEFINED_REPORT_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['predefinedReportValues', 'loading'], fromJS(true))
 
     case types.PREDEFINED_REPORT_REQUEST_SUCCESS: {
       return state
-        .set('predefinedReportValues', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(['predefinedReportValues', 'data'], fromJS(action.payload))
+        .setIn(['predefinedReportValues', 'loading'], fromJS(false))
     }
     case types.PREDEFINED_REPORT_REQUEST_ERROR:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['predefinedReportValues', 'error'], fromJS(action.error))
+        .setIn(['predefinedReportValues', 'loading'], fromJS(false))
     /** END submit brand insight form */
+
+    /** START video comparison data */
+    case types.LOAD_VIDEO_COMPARISON_DATA:
+      return state.setIn(['videoComparisonData', 'loading'], fromJS(true))
+
+    case types.LOAD_VIDEO_COMPARISON_DATA_SUCCESS: {
+      return state
+        .setIn(['videoComparisonData', 'data'], fromJS(action.payload))
+        .setIn(['videoComparisonData', 'loading'], fromJS(false))
+    }
+    case types.LOAD_VIDEO_COMPARISON_DATA_ERROR:
+      return state
+        .setIn(['videoComparisonData', 'error'], fromJS(action.error))
+        .setIn(['videoComparisonData', 'loading'], fromJS(false))
+    /** END video comparison data */
+
+    /** START content vitality score data */
+    case types.GET_CONTENT_VITALITY_SCORE_DATA:
+      return state.setIn(['contentVitalityScoreData', 'loading'], fromJS(true))
+
+    case types.GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS: {
+      return state
+        .setIn(['contentVitalityScoreData', 'data'], fromJS(action.payload))
+        .setIn(['contentVitalityScoreData', 'loading'], fromJS(false))
+    }
+    case types.GET_CONTENT_VITALITY_SCORE_DATA_ERROR:
+      return state
+        .setIn(['contentVitalityScoreData', 'error'], fromJS(action.error))
+        .setIn(['contentVitalityScoreData', 'loading'], fromJS(false))
+    /** END content vitality score data */
+
+    /** START load performance comparison data */
+    case types.LOAD_PERFORMANCE_COMPARISON_DATA:
+      return state.setIn(['performanceComparisonData', 'loading'], fromJS(true))
+
+    case types.LOAD_PERFORMANCE_COMPARISON_DATA_SUCCESS: {
+      return state
+        .setIn(['performanceComparisonData', 'data'], fromJS(action.payload))
+        .setIn(['performanceComparisonData', 'loading'], fromJS(false))
+    }
+    case types.LOAD_PERFORMANCE_COMPARISON_DATA_ERROR:
+      return state
+        .setIn(['performanceComparisonData', 'error'], fromJS(action.error))
+        .setIn(['performanceComparisonData', 'loading'], fromJS(false))
+    /** END load performance comparison data */
+
+    /** START load color comparison data */
+    case types.LOAD_COLOR_COMPARISON_DATA:
+      return state.setIn(['colorComparisonData', 'loading'], fromJS(true))
+
+    case types.LOAD_COLOR_COMPARISON_DATA_SUCCESS: {
+      return state
+        .setIn(['colorComparisonData', 'data'], fromJS(action.payload))
+        .setIn(['colorComparisonData', 'loading'], fromJS(false))
+    }
+    case types.LOAD_COLOR_COMPARISON_DATA_ERROR:
+      return state
+        .setIn(['colorComparisonData', 'error'], fromJS(action.error))
+        .setIn(['colorComparisonData', 'loading'], fromJS(false))
+    /** END load color comparison data */
+
     default:
       return state
   }
 }
 
-export const selectReports = (state) => state.Reports
+// export const selectReports = (state) => state.Reports
+//
+// export const makeSelectReports = () =>
+//   createSelector(
+//     selectReports,
+//     (substate) => substate.toJS()
+//   )
+
+const selectReportsDomain = (state) => state.Reports.get('reports')
 
 export const makeSelectReports = () =>
   createSelector(
-    selectReports,
+    selectReportsDomain,
+    (substate) => substate.toJS()
+  )
+
+const selectReportsVideoComparisonDomain = (state) =>
+  state.Reports.get('videoComparisonData')
+
+export const makeSelectReportsVideoComparison = () =>
+  createSelector(
+    selectReportsVideoComparisonDomain,
+    (substate) => substate.toJS()
+  )
+
+const selectReportsContentVitalityScoreDomain = (state) =>
+  state.Reports.get('contentVitalityScoreData')
+
+export const makeSelectReportsContentVitalityScore = () =>
+  createSelector(
+    selectReportsContentVitalityScoreDomain,
+    (substate) => substate.toJS()
+  )
+
+const selectReportsPerformanceComparisonDomain = (state) =>
+  state.Reports.get('performanceComparisonData')
+
+export const makeSelectReportsPerformanceComparison = () =>
+  createSelector(
+    selectReportsPerformanceComparisonDomain,
+    (substate) => substate.toJS()
+  )
+
+const selectReportsColorComparisonDomain = (state) =>
+  state.Reports.get('colorComparisonData')
+
+export const makeSelectReportsColorComparison = () =>
+  createSelector(
+    selectReportsColorComparisonDomain,
     (substate) => substate.toJS()
   )
 
