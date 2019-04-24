@@ -312,14 +312,7 @@
   align-items: center;
   justify-content: space-between;
   // padding: 60px 0 80px 0;
-	width: 40%;
-
-	.doughnutWithLabelsContainer{
-		display: flex;
-		align-items: center;
-		justify-content: space-between;
-		width: 100%;
-	}
+  width: 40%;
 
   .secondsText {
     font-size: 14px;
@@ -330,7 +323,7 @@
 
 .stackedChart {
   position: relative;
-  margin-top: -20px;
+  margin-top: 0;
   canvas {
     margin: 0 auto;
   }

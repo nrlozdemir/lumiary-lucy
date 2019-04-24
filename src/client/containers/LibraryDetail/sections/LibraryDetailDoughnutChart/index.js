@@ -13,7 +13,7 @@ import {
 import SelectFilters from 'Components/SelectFilters'
 import LineChart from 'Components/LineChart/Chart'
 import PointerCard from 'Components/PointerCard'
-import DoughnutChart from 'Components/Charts/LibraryDetail/Doughnut'
+import DoughnutChart from 'Components/Charts/DoughnutChart'
 
 class LibraryDetailDoughnutChart extends React.Component {
   constructor(props) {
@@ -91,7 +91,32 @@ class LibraryDetailDoughnutChart extends React.Component {
                     </p>
                   </div>
                   <div className={style.doughnutChartContainer}>
-                    <DoughnutChart doughnutData={chart.average} />
+                    <DoughnutChart
+                      width={150}
+                      height={150}
+                      cutoutPercentage={50}
+                      data={{
+                        labels: ['Red', 'Green', 'Blue', 'Yellow'],
+                        datasets: [
+                          {
+                            data: [...chart.average],
+                            borderColor: '#303a5d',
+                            backgroundColor: [
+                              '#ffffff',
+                              '#ffffff',
+                              '#ffffff',
+                              '#51adc0',
+                            ],
+                            hoverBackgroundColor: [
+                              '#ffffff',
+                              '#ffffff',
+                              '#ffffff',
+                              '#51adc0',
+                            ],
+                          },
+                        ],
+                      }}
+                    />
                     <p>
                       <span className={style.textBold}>
                         {chart.average[chart.average.length - 1]}%{' '}
@@ -155,7 +180,30 @@ class LibraryDetailDoughnutChart extends React.Component {
                     </h1>
                     <div className={style.doughnutChartContainer}>
                       <DoughnutChart
-                        doughnutData={selectedCardData.libraryData}
+                        width={180}
+                        height={180}
+                        cutoutPercentage={50}
+                        data={{
+                          labels: ['Red', 'Green', 'Blue', 'Yellow'],
+                          datasets: [
+                            {
+                              data: [...selectedCardData.libraryData],
+                              borderColor: '#303a5d',
+                              backgroundColor: [
+                                '#ffffff',
+                                '#ffffff',
+                                '#ffffff',
+                                '#51adc0',
+                              ],
+                              hoverBackgroundColor: [
+                                '#ffffff',
+                                '#ffffff',
+                                '#ffffff',
+                                '#51adc0',
+                              ],
+                            },
+                          ],
+                        }}
                       />
                       <p className="pt-32">
                         <span className={style.duskRound} />
@@ -190,6 +238,30 @@ class LibraryDetailDoughnutChart extends React.Component {
                       <DoughnutChart
                         doughnutData={selectedCardData.industryData}
                         color="#8567f0"
+                        width={180}
+                        height={180}
+                        cutoutPercentage={50}
+                        data={{
+                          labels: ['Red', 'Green', 'Blue', 'Yellow'],
+                          datasets: [
+                            {
+                              data: [...selectedCardData.libraryData],
+                              borderColor: '#303a5d',
+                              backgroundColor: [
+                                '#ffffff',
+                                '#ffffff',
+                                '#ffffff',
+                                '#51adc0',
+                              ],
+                              hoverBackgroundColor: [
+                                '#ffffff',
+                                '#ffffff',
+                                '#ffffff',
+                                '#51adc0',
+                              ],
+                            },
+                          ],
+                        }}
                       />
                       <p className="w-75 text-center pt-32">
                         <span className={style.purpleRound} />

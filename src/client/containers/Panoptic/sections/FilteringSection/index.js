@@ -23,7 +23,7 @@ class PanopticFilteringSection extends Component {
   render() {
     const {
       filteringSectionData: {
-        data: { doughnutData, stackedChartData, doughnutRoundData },
+        data: { doughnutData, stackedChartData },
         loading,
         error,
       },
@@ -60,17 +60,21 @@ class PanopticFilteringSection extends Component {
           <div className={style.radialAndStackChartWrapper}>
             {doughnutData && (
               <DoughnutChart
-                wrapperClassName={style.doughnutWithLabelsContainer}
-                chartClassName="customChartClass"
-                width={270}
-                height={270}
+                width={150}
+                height={150}
                 data={doughnutData}
                 fillText="Total Percentage"
+                cutoutPercentage={58}
                 dataLabelFunction="insertAfter"
                 dataLabelInsert="%"
-                labelsPosition="right"
                 labelsClassName="customLabelClass"
-                labelsData={doughnutData.labels}
+                labelPositionRight
+                labelsData={[
+                  { data: '0-15 seconds', color: '#51adc0' },
+                  { data: '15-30 seconds', color: '#8567f0' },
+                  { data: '30-45 seconds', color: '#D0506C' },
+                  { data: '45-60 seconds', color: '#acb0be' },
+                ]}
               />
             )}
           </div>

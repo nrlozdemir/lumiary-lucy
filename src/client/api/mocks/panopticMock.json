@@ -50,24 +50,24 @@
   "verticalStackedChartData": {
     "doughnutData": {
       "labels": [
-				{ "data": "0-15 seconds", "color": "#51adc0" },
-				{ "data": "15-30 seconds", "color": "#8567f0" },
-				{ "data": "30-45 seconds", "color": "#D0506C" },
-				{ "data": "45-60 seconds", "color": "#acb0be" }
-			],
-			"datasets": [
-				{
-					"data": [42, 24, 16, 18],
-					"backgroundColor": ["#acb0be", "#8567f0", "#D0506C", "#51adc0"],
-					"hoverBackgroundColor": ["#acb0be", "#8567f0", "#D0506C", "#51adc0"]
-				}
-			]
+        "0-15 seconds",
+        "15-30 seconds",
+        "30-45 seconds",
+        "45-60 seconds"
+      ],
+      "datasets": [
+        {
+          "data": [42, 24, 16, 18],
+          "backgroundColor": ["#acb0be", "#8567f0", "#D0506C", "#51adc0"],
+          "hoverBackgroundColor": ["#acb0be", "#8567f0", "#D0506C", "#51adc0"]
+        }
+      ]
     },
     "stackedChartData": {
       "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
       "datasets": [
         {
-          "label": "Barstool Sports",
+          "label": "0-15 seconds",
           "backgroundColor": "#51adc0",
           "borderColor": ["#242b49", "#242b49", "#242b49", "#242b49"],
           "borderWidth": {
@@ -79,7 +79,7 @@
           "data": [10, 3, 5, 1]
         },
         {
-          "label": "SB Nation",
+          "label": "15-30 seconds",
           "backgroundColor": "#8567f0",
           "borderColor": ["#242b49", "#242b49", "#242b49", "#242b49"],
           "borderWidth": {
@@ -91,7 +91,7 @@
           "data": [12, 13, 2, 5]
         },
         {
-          "label": "ESPN",
+          "label": "30-45 seconds",
           "backgroundColor": "#D0506C",
           "borderColor": ["#242b49", "#242b49", "#242b49", "#242b49"],
           "borderWidth": {
@@ -103,20 +103,8 @@
           "data": [4, 5, 4, 2]
         },
         {
-          "label": "Scout Media",
+          "label": "45-60 seconds",
           "backgroundColor": "#acb0be",
-          "borderColor": ["#242b49", "#242b49", "#242b49", "#242b49"],
-          "borderWidth": {
-            "top": 2,
-            "right": 0,
-            "bottom": 0,
-            "left": 0
-          },
-          "data": [9, 8, 1, 4]
-        },
-        {
-          "label": "Fansided",
-          "backgroundColor": "#5a6386",
           "borderColor": ["#242b49", "#242b49", "#242b49", "#242b49"],
           "borderWidth": {
             "top": 2,
@@ -127,13 +115,7 @@
           "data": [9, 8, 1, 4]
         }
       ]
-    },
-    "doughnutRoundData": [
-      { "data": "0-15 seconds", "color": "#51adc0" },
-      { "data": "15-30 seconds", "color": "#8567f0" },
-      { "data": "30-45 seconds", "color": "#D0506C" },
-      { "data": "45-60 seconds", "color": "#acb0be" }
-    ]
+    }
   },
   "pacingChartData": {
     "stadiumData": [
