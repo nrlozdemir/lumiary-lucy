@@ -11,7 +11,7 @@
     text-align: center;
     font-family: $font-family-primary;
     font-size: 32px;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
   }
 
   .percentageGraph{
@@ -43,15 +43,15 @@
       float: left;
       height: 40px;
       display: flex;
-			align-items: flex-end;
+      align-items: flex-end;
 
-			svg{
-				position: absolute;
-				z-index: 2;
-				left: 0;
-				top: -1px;
-				transform: scaleY(-1);
-			}
+      svg{
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        top: -1px;
+        transform: scaleY(-1);
+      }
 
       &:before{
         content: "CV Score";

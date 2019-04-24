@@ -13,18 +13,14 @@ class SvgChart extends React.Component {
 				yMax: 40,
 				line: {
 					smoothing: 0.25,
-					flattening: 2
+					flattening: .5
 				}
 			},
 			dataset: {
 				colors: {
 					path: "#303a5d"
 				},
-				values: [
-					[0, 30],
-					[this.props.value, 0],
-					[100, 30]
-				]
+				values: []
 			},
 			lib: {
 				map(value, inMin, inMax, outMin, outMax) {
@@ -43,6 +39,44 @@ class SvgChart extends React.Component {
 				w: 250,
 				h: 40
 			}
+		}
+	}
+
+	componentDidMount() {
+		const min = this.props.value - 20 < 0 ? 0 : this.props.value - 20;
+		const max = this.props.value + 20 > 100 ? 100 : this.props.value + 20;
+
+		this.setState({
+			dataset: {
+				...this.state.dataset,
+				values: [
+					[0, 35],
+					[min, 30],
+					[this.props.value, 0],
+					[max, 30],
+					[100, 35]
+				]
+			}
+		})
+	}
+
+	componentDidUpdate(prevProps) {
+		if (prevProps.value !== this.props.value) {
+			const min = this.props.value - 20 < 0 ? 0 : this.props.value - 20;
+			const max = this.props.value + 20 > 100 ? 100 : this.props.value + 20;
+
+			this.setState({
+				dataset: {
+					...this.state.dataset,
+					values: [
+						[0, 35],
+						[min, 30],
+						[this.props.value, 0],
+						[max, 30],
+						[100, 35]
+					]
+				}
+			})
 		}
 	}
 
