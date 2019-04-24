@@ -59,21 +59,19 @@ class PanopticFilteringSection extends Component {
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
-						{doughnutData && doughnutData.average && (
+						{doughnutData && (
 							<DoughnutChart
 								wrapperClassName={style.doughnutWithLabelsContainer}
 								chartClassName="customChartClass"
 								width={270}
 								height={270}
-								data={doughnutData.average}
-								datasetsBackgroundColor={["#acb0be", "#8567f0", "#D0506C", "#51adc0"]}
-								datasetsHoverBackgroundColor={["#acb0be", "#8567f0", "#D0506C", "#51adc0"]}
+								data={doughnutData}
 								fillText="Total Percentage"
 								dataLabelFunction="insertAfter"
 								dataLabelInsert="%"
 								labelsPosition="right"
 								labelsClassName="customLabelClass"
-								labelsData={doughnutRoundData}
+								labelsData={doughnutData.labels}
 							/>
 						)}
           </div>
