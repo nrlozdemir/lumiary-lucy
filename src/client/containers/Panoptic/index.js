@@ -25,21 +25,21 @@ import FlipCards from './sections/FlipCards'
 
 /* eslint-disable react/prefer-stateless-function */
 const Panoptic = () => {
-	return (
-		<React.Fragment>
-			<div className="grid-container col-12">
-				<div className={style.alignTabs}>
+  return (
+    <React.Fragment>
+      <div className="grid-container col-12">
+        <div className={style.alignTabs}>
 
-				</div>
-			</div>
-			<FlipCards />
-			<VideoReleasesBarChart />
-			<ColorTemperature />
-			<FilteringSection />
-			<PacingCard />
-			<CompareShares />
-		</React.Fragment>
-	)
+        </div>
+      </div>
+      <FlipCards />
+      <VideoReleasesBarChart />
+      <ColorTemperature />
+      <FilteringSection />
+      <PacingCard />
+      <CompareShares />
+    </React.Fragment>
+  )
 }
 
 export default Panoptic
