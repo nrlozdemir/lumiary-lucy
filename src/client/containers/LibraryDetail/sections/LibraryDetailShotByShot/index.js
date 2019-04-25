@@ -417,7 +417,7 @@ class LibraryDetailShotByShot extends React.Component {
     } = this.props
     const { selectedImage } = this.state
     const sliderTabContainer = cn(
-      'col-12 mt-48 mb-48',
+      'grid-container col-12 mt-48 mb-48',
       style.sliderTabContainer
     )
     return (
@@ -518,7 +518,7 @@ class LibraryDetailShotByShot extends React.Component {
             </div>
           </div>
         ) : (
-          <div className="col-12 shadow-1 mt-48 mb-48 bg-dark-grey-blue">
+          <div className="grid-container col-12 shadow-1 mt-48 mb-48 bg-dark-grey-blue">
             <div className="col-12">
               <h2 className={style.sliderHeader}>Shot by Shot</h2>
               <div className={style.sliderContainer} ref={this.slide}>

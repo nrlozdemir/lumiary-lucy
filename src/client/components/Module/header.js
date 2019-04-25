@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import RealSelectFilters from 'Components/RealSelectFilters'
+import ModuleSelectFilters from 'Components/ModuleSelectFilters'
 import style from './style.scss'
 import ToolTip from 'Components/ToolTip'
 
@@ -37,12 +37,13 @@ const HeaderModule = ({
         <div className={style.headerFilters}>
           {filters.map((filter, index) => {
             return (
-              <RealSelectFilters
+              <ModuleSelectFilters
                 key={index}
                 type={filter.type}
                 moduleKey={moduleKey}
                 selectKey={filter.selectKey}
                 placeHolder={filter.placeHolder}
+                defaultValue={filter.defaultValue}
               />
             )
           })}
