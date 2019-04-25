@@ -28,19 +28,19 @@ const imageClass = classnames('circleImage ' + style.profileImage)
 const BackTo = (props) => {
   let link, title = ""
 
-	if(typeof(props) != "undefined" && props[1] != null){
+  if(typeof(props) != "undefined" && props[1] != null){
     title = props[1]
     link = "/" + props[1]
   }
   else{
     title = "overview"
     link = "/"
-	}
-	title = "Back to " + capitalizeFirstLetter(title)
+  }
+  title = "Back to " + capitalizeFirstLetter(title)
 
-	if(props && props.title){
-		title = capitalizeFirstLetter(props.title)
-	}
+  if(props && props.title){
+    title = capitalizeFirstLetter(props.title)
+  }
 
   return (<div className={style.backTo}>
     <Link to={link}>
@@ -113,13 +113,13 @@ const SubNavigation = (props) => {
 
 const Selector = (props) => {
   const url = props && props.match.url.split('/')
-	const navigation = props && props.routeConfig
+  const navigation = props && props.routeConfig
 
-	const navigationPathMatch = Object.values(navigation)
-		.filter((r) => r.path == props.match.path
-			&& r.navigation
-			&& r.navigation.type
-			&& r.navigation.type == 'makeTitle')
+  const navigationPathMatch = Object.values(navigation)
+    .filter((r) => r.path == props.match.path
+      && r.navigation
+      && r.navigation.type
+      && r.navigation.type == 'makeTitle')
 
   const navigationSubRoutes = Object.values(navigation)
     .filter((r) => r.path.replace('/', '') == url[1])
@@ -135,17 +135,17 @@ const Selector = (props) => {
     .map((el, i) => el)
     .filter((r) => r.path == url.join("/"))
 
-	if(navigationPathMatch && navigationPathMatch.length > 0) {
-		const from = navigationPathMatch[0].navigation.from
-		let title = navigationPathMatch[0].navigation.title
-		let backToTitle
+  if(navigationPathMatch && navigationPathMatch.length > 0) {
+    const from = navigationPathMatch[0].navigation.from
+    let title = navigationPathMatch[0].navigation.title
+    let backToTitle
 
-		if(from !== null) {
-			title = props.match.params[from].replace("-", " ")
-		}
-		if(navigationPathMatch[0].navigation.backToTitle) {
-			backToTitle = navigationPathMatch[0].navigation.backToTitle
-		}
+    if(from !== null) {
+      title = props.match.params[from].replace("-", " ")
+    }
+    if(navigationPathMatch[0].navigation.backToTitle) {
+      backToTitle = navigationPathMatch[0].navigation.backToTitle
+    }
 
     return {
       "leftSide": <BackTo {...url} title={backToTitle} />,

@@ -113,7 +113,7 @@ const routes = [
   },
   {
     path: '/reports',
-		exact: true,
+    exact: true,
     component: 'Reports',
     navigation: {
       level: 1,
@@ -122,19 +122,19 @@ const routes = [
     }
   },
   {
-		path: '/reports/:type/:id',
-		exact: true,
-		component: 'Reports',
+    path: '/reports/:type/:id',
+    exact: true,
+    component: 'Reports',
     navigation: {
-			type: 'makeTitle',
-			from: 'type', // [type, id or (bool) null]
-			title: 'Reports Brand Insight',
-			backToTitle: 'Generate New Report'
+      type: 'makeTitle',
+      from: 'type', // [type, id or (bool) null]
+      title: 'Reports Brand Insight',
+      backToTitle: 'Generate New Report'
     }
   },
   {
     path: '/reports/brand-insight',
-		exact: true,
+    exact: true,
     component: 'Reports',
   },
   {
