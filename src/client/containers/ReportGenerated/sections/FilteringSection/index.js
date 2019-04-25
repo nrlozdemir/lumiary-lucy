@@ -32,7 +32,7 @@ const GeneratedReportFilteringSection = ({
       <div className="d-flex align-items-center justify-space-between ph-48 pb-48">
         <div className={style.radialAndStackChartWrapper}>
           <div>
-						<DoughnutChart
+            <DoughnutChart
                 width={270}
                 height={270}
                 data={doughnutData}
