@@ -41,7 +41,11 @@
 
 .links {
   flex: 6;
-  text-align: center;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
 
   a {
     margin: 0 36px;
@@ -106,5 +110,7 @@
   width: 200px;
   display: inline-flex;
   justify-content: center;
-  align-items: center;
+	align-items: center;
+	position: absolute;
+	right: -140px;
 }

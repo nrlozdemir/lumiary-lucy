@@ -78,7 +78,7 @@ const Default = (props) => {
 
 const SelectedNavLink = (props) => {
   return (<React.Fragment>
-		{capitalizeFirstLetter(props.title)}
+		<div>{capitalizeFirstLetter(props.title)}</div>
 		{props.load &&
 			<div className={style.switchInner}>
 				<span>Save Report</span>
