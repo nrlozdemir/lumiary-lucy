@@ -20,47 +20,38 @@ class TopSimilarProperties extends Component {
     this.state = {}
   }
 
-  handleSelectFilters = (name, value) => {
-    this.setState({
-      [name]: value,
-    })
-  }
-
   render() {
     const { selectDate } = this.state
     const { data } = this.props
     return (
-      <div className="grid-collapse">
-        <div className={similarPropertiesContainer}>
-          <div className={headerClass}>
-            <div className="col-4 text-bold">
-              <p className={headerTitleClass}>
-                Top Similar Properties Of Top Videos
-              </p>
+      <Module
+        moduleKey={'Panoptic/ColorTemperature'}
+        title={title}
+        filters={filters}
+        legend={
+          titleLabels && (
+            <div
+              className={classnames(
+                style.colorListHorizontal,
+                style.colorList,
+                style.floatRight
+              )}
+            >
+              {titleLabels.map((title, index) => (
+                <div key={index} className={style.colorListItem}>
+                  {title}
+                </div>
+              ))}
             </div>
-            <div className="col-8">
-              <div className={style.selects}>
-                <SelectFilters
-                  selectClasses={selectClasses}
-                  handleSelectFilters={this.handleSelectFilters}
-                  selectDate={selectDate}
-                  selectDateShow={true}
-                />
-              </div>
-              <div className="clearFix" />
-            </div>
-          </div>
-          <div className="col-12">
-            {data.map((sectionItem, i) => (
-              <TopSimilarPropertiesItem
-                key={i}
-                sectionItem={sectionItem}
-                i={i}
-              />
-            ))}
-          </div>
+          )
+        }
+      >
+        <div className="col-12">
+          {data.map((sectionItem, i) => (
+            <TopSimilarPropertiesItem key={i} sectionItem={sectionItem} i={i} />
+          ))}
         </div>
-      </div>
+      </Module>
     )
   }
 }

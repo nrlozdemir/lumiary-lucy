@@ -5,7 +5,7 @@ import BarChart from 'Components/Charts/BarChart'
 import Module from 'Components/Module'
 import style from './style.scss'
 
-const TotalCompetitorViewsCard = ({
+const BarChartModule = ({
   barData,
   tickOptions,
   title,
@@ -63,4 +63,4 @@ const TotalCompetitorViewsCard = ({
   )
 }
 
-export default TotalCompetitorViewsCard
+export default BarChartModule

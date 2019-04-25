@@ -71,8 +71,8 @@ export class Competitor extends React.Component {
           changeSelectedVideo={this.changeSelectedVideo}
           title="Top Performing Competitor Videos"
         />
-        <TopVideosCard chartData={competitorTopVideos} height={150} />
-        <TopSimilarProperties data={similarProperties} />
+        {/* <TopVideosCard chartData={competitorTopVideos} height={150} />*/}
+        {/* <TopSimilarProperties data={similarProperties} /> */}
         <div className="grid-collapse">
           <BarChartModule
             moduleKey={randomKey(10)}
@@ -81,7 +81,7 @@ export class Competitor extends React.Component {
             tickOptions={chartTickOptions}
             title="Top Performing Property Across All Competitors"
             height={50}
-            action={(e) => this.getTopPerformingPropertiesByCompetitors(e)}
+            action={() => this.getTopPerformingPropertiesByCompetitors()}
             filters={[
               {
                 type: 'engagement',
