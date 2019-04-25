@@ -122,14 +122,38 @@ const routes = [
     }
   },
   {
-    path: '/reports/:type/:id',
+    path: '/reports/brand-insight/:id',
     exact: true,
     component: 'Reports',
     navigation: {
       type: 'makeTitle',
       loadComponent: true,
-      from: 'type', // [type, id or (bool) null]
-      title: 'Reports Brand Insight',
+      from: null,
+      title: 'Brand Insights Report',
+      backToTitle: 'Generate New Report'
+    }
+  },
+  {
+    path: '/reports/compare-brands/:id',
+    exact: true,
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
+      loadComponent: true,
+      from: null,
+      title: 'Compare Brands Report',
+      backToTitle: 'Generate New Report'
+    }
+  },
+  {
+    path: '/reports/predefined-reports/:id',
+    exact: true,
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
+      loadComponent: true,
+      from: null,
+      title: 'Predefined Reports',
       backToTitle: 'Generate New Report'
     }
   },
