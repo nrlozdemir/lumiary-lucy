@@ -127,6 +127,7 @@ const routes = [
     component: 'Reports',
     navigation: {
       type: 'makeTitle',
+      loadComponent: true,
       from: 'type', // [type, id or (bool) null]
       title: 'Reports Brand Insight',
       backToTitle: 'Generate New Report'

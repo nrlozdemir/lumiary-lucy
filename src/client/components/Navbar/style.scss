@@ -95,3 +95,16 @@
     padding-left: 16px;
   }
 }
+
+.switchInner {
+  font-family: $font-family-ClanOT;
+  font-size: 14px;
+  span {
+    padding: 16px;
+  }
+
+  width: 200px;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+}

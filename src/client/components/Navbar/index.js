@@ -4,13 +4,14 @@
  *
  */
 
-import React from 'react'
+import React, { lazy, Suspense } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { makeSelectLibrary } from 'Reducers/library'
+const Switch = lazy(() => import('Components/Form/Switch'))
 
 import style from './style.scss'
 // import PropTypes from 'prop-types';
@@ -76,7 +77,15 @@ const Default = (props) => {
 }
 
 const SelectedNavLink = (props) => {
-  return(<React.Fragment>{capitalizeFirstLetter(props.title)}</React.Fragment>)
+  return (<React.Fragment>
+  {capitalizeFirstLetter(props.title)}
+  {props.load && <Suspense fallback={''}>
+    <div className={style.switchInner}>
+      <span>Save Report</span>
+      <Switch />
+    </div>
+  </Suspense>}
+  </React.Fragment>)
 }
 
 const NavTitle = (props) => {
@@ -137,6 +146,7 @@ const Selector = (props) => {
 
   if(navigationPathMatch && navigationPathMatch.length > 0) {
     const from = navigationPathMatch[0].navigation.from
+    const loadComponent = navigationPathMatch[0].navigation.loadComponent
     let title = navigationPathMatch[0].navigation.title
     let backToTitle
 
@@ -149,7 +159,7 @@ const Selector = (props) => {
 
     return {
       "leftSide": <BackTo {...url} title={backToTitle} />,
-      "navigation": <SelectedNavLink title={title} />
+      "navigation": <SelectedNavLink title={title} load={loadComponent}  />
     }
   } else if(navigationSubRoutesMatch && navigationSubRoutesMatch.length > 0) {
     return {
