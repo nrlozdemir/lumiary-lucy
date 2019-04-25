@@ -14,10 +14,11 @@ import { actions, makeSelectMarketview } from 'Reducers/marketview'
 import Slider from 'Containers/Marketview/sections/detail/Slider'
 import TopVideosCard from 'Containers/Marketview/sections/detail/TopVideosCard'
 import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
-import TotalCompetitorViews from 'Containers/Marketview/sections/main/TotalCompetitorViews'
+import BarChartModule from 'Components/Modules/BarChartModule'
 import RouterLoading from 'Components/RouterLoading'
 
 import style from '../style.scss'
+import { randomKey } from '../../../utils'
 
 const chartTickOptions = {
   stepSize: 250000,
@@ -40,6 +41,10 @@ export class Competitor extends React.Component {
     this.props.getCompetitorVideosRequest()
     this.props.getSimilarPropertiesRequest()
     this.props.getTopPerformingPropertiesByCompetitorsRequest()
+  }
+
+  getTopPerformingPropertiesByCompetitors = (data) => {
+    this.props.getTopPerformingPropertiesByCompetitorsRequest(data)
   }
 
   changeSelectedVideo = (video) => {
@@ -70,26 +75,28 @@ export class Competitor extends React.Component {
           title="Top Performing Competitor Videos"
         />
         {competitorTopVideos && (
-          <TopVideosCard
-            chartData={competitorTopVideos}
-            height={150}
-          />
+          <TopVideosCard chartData={competitorTopVideos} height={150} />
         )}
         {similarProperties && <TopSimilarProperties data={similarProperties} />}
-        {topPerformingPropertiesByCompetitorsData && (
-          <div className="grid-collapse">
-            <TotalCompetitorViewsCard
-              containerClass={style.detailTopPerformingPropertyContainer}
-              totalCompetitorViewsData={
-                topPerformingPropertiesByCompetitorsData
-              }
-              tickOptions={chartTickOptions}
-              title="Top Performing Property Across All Competitors"
-              height={50}
-              selects={['Resolution']}
-              footerLabels={['Fast', 'Medium', 'Slow', 'Slowest']}
-            />
-          </div>
+        <div className="grid-collapse">
+          <BarChartModule
+            moduleKey={randomKey(10)}
+            containerClass={style.detailTopPerformingPropertyContainer}
+            barData={topPerformingPropertiesByCompetitorsData}
+            tickOptions={chartTickOptions}
+            title="Top Performing Property Across All Competitors"
+            height={50}
+            action={(e) => this.getTopPerformingPropertiesByCompetitors(e)}
+            filters={[
+              {
+                type: 'engagement',
+                selectKey: randomKey(10),
+                placeHolder: 'Engagement',
+              },
+            ]}
+            footerLabels={['Fast', 'Medium', 'Slow', 'Slowest']}
+          />
+        </div>
       </React.Fragment>
     )
   }

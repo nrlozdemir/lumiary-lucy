@@ -16,12 +16,6 @@ export default class Slider extends React.Component {
     }
   }
 
-  handleSelectFilters = (name, value) => {
-    this.setState({
-      [name]: value,
-    })
-  }
-
   render() {
     const { selectLikes, selectPlatforms, selectDate } = this.state
     const {
@@ -38,22 +32,9 @@ export default class Slider extends React.Component {
       <div className={containerClasses}>
         <div className={titleClasses} style={{ marginBottom: 0 }}>
           <span>{title}</span>
-          <div className={style.selects}>
-            <SelectFilters
-              handleSelectFilters={this.handleSelectFilters}
-              selectPlatformsShow={true}
-              selectPlatforms={selectPlatforms}
-              selectLikesShow={true}
-              selectLikes={selectLikes}
-              selectDateShow={true}
-              selectDate={selectDate}
-            />
-          </div>
+          <div className={style.selects} />
         </div>
-        <MarketViewSlider
-          items={data}
-          changeVideo={(video) => changeSelectedVideo(video)}
-        />
+        <MarketViewSlider items={data} changeVideo={changeSelectedVideo} />
         <div className={style.cardContainer}>
           {selectedVideo.options.map((card, index) => (
             <div className={style.card} key={index}>

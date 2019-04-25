@@ -18,6 +18,7 @@ export class Module extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if (
+      this.props.action &&
       !_.isEqual(
         prevProps.selectFilters.values[prevProps.moduleKey],
         this.props.selectFilters.values[this.props.moduleKey]
