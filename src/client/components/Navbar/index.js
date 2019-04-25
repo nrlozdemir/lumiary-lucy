@@ -11,7 +11,7 @@ import classnames from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { makeSelectLibrary } from 'Reducers/library'
-const Switch = lazy(() => import('Components/Form/Switch'))
+import Switch from 'Components/Form/Switch'
 
 import style from './style.scss'
 // import PropTypes from 'prop-types';
@@ -78,13 +78,13 @@ const Default = (props) => {
 
 const SelectedNavLink = (props) => {
   return (<React.Fragment>
-  {capitalizeFirstLetter(props.title)}
-  {props.load && <Suspense fallback={''}>
-    <div className={style.switchInner}>
-      <span>Save Report</span>
-      <Switch />
-    </div>
-  </Suspense>}
+		{capitalizeFirstLetter(props.title)}
+		{props.load &&
+			<div className={style.switchInner}>
+				<span>Save Report</span>
+				<Switch />
+			</div>
+		}
   </React.Fragment>)
 }
 
