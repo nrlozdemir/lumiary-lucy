@@ -37,7 +37,6 @@ function* getMoreReports() {
 }
 
 function* brandInsightSubmit(values) {
-  console.log(values)
   const id = `${randomKey(4)}-${randomKey(4)}-${randomKey(4)}-${randomKey(4)}`
   try {
     const payload = yield call(getGeneratedReportApi)
@@ -49,24 +48,22 @@ function* brandInsightSubmit(values) {
 }
 
 function* compareBrandSubmit(values) {
-  console.log(values)
   const id = `${randomKey(4)}-${randomKey(4)}-${randomKey(4)}-${randomKey(4)}`
   try {
     const payload = yield call(getGeneratedReportApi)
     yield put(actions.compareBrandFormSubmitSuccess(payload))
-    yield put(push(`/reports/${id}`))
+    yield put(push(`/reports/compare-brands/${id}`))
   } catch (err) {
     yield put(actions.compareBrandFormSubmitError(err))
   }
 }
 
 function* predefinedReportSubmit(values) {
-  console.log(values)
   const id = `${randomKey(4)}-${randomKey(4)}-${randomKey(4)}-${randomKey(4)}`
   try {
     const payload = yield call(getGeneratedReportApi)
     yield put(actions.predefinedReportFormSubmitSuccess(payload))
-    yield put(push(`/reports/${id}`))
+    yield put(push(`/reports/predefined-reports/${id}`))
   } catch (err) {
     yield put(actions.predefinedReportFormSubmitError(err))
   }
@@ -145,7 +142,7 @@ export default [
   takeLatest(types.LOAD_MORE_REPORTS, getMoreReports),
   takeLatest(types.BRAND_INSIGHT_REQUEST, brandInsightSubmit),
   takeLatest(types.COMPARE_BRAND_REQUEST, compareBrandSubmit),
-  takeLatest(types.PREDEFINED_BRAND_REQUEST, predefinedReportSubmit),
+  takeLatest(types.PREDEFINED_REPORT_REQUEST, predefinedReportSubmit),
   takeLatest(types.DELETE_REPORT, deleteReport),
   takeLatest(
     types.GET_CONTENT_VITALITY_SCORE_DATA,

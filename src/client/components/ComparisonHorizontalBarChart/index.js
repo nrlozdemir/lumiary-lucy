@@ -5,7 +5,6 @@ import style from './style.scss'
 import 'chartjs-plugin-datalabels'
 
 const ComparisonHorizontalBarChart = ({ data }) => {
-  console.log('data', data)
   const reverseBarChartOptions = JSON.parse(JSON.stringify(barChartOptions))
   reverseBarChartOptions.scales.xAxes[0].ticks = {
     ...reverseBarChartOptions.scales.xAxes[0].ticks,

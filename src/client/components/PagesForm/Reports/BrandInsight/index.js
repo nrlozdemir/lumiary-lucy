@@ -16,7 +16,6 @@ import {
 } from '../options'
 
 const ReportsForm = (props) => {
-	console.log(props)
   return (
     <form onSubmit={props.handleSubmit(props.handleSubmitFunc)}>
       <div className={style.formArea}>

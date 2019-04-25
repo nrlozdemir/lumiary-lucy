@@ -85,7 +85,6 @@ class PerformanceComparison extends React.Component {
     const {
       performanceComparisonData: { data, loading, error },
     } = this.props
-    console.log('###', this.props)
     return (
       <Module
         moduleKey={'Reports/PerformanceComparison'}

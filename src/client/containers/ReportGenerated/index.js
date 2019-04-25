@@ -64,7 +64,7 @@ class ReportGenerated extends Component {
     }
     return (
       <React.Fragment>
-        <ReportsHeader />
+        {/*<ReportsHeader />*/}
         <div className={style.ReportsGeneratedContainer}>
           <CreatedFilters />
           {topPerformingVideos && (

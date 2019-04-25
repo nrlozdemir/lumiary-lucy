@@ -95,7 +95,7 @@ class Reports extends Component {
       case 'predefined-reports':
         return (
           <PredefinedReport
-            handleSubmitFunc={this.props.predefinedBrandFormSubmit}
+            handleSubmitFunc={this.props.predefinedReportFormSubmit}
           />
         )
 
