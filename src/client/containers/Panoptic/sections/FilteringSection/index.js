@@ -60,14 +60,13 @@ class PanopticFilteringSection extends Component {
           <div className={style.radialAndStackChartWrapper}>
             {doughnutData && (
               <DoughnutChart
-                width={150}
-                height={150}
+                width={270}
+                height={270}
                 data={doughnutData}
-                fillText="Total Percentage"
                 cutoutPercentage={58}
+                fillText="Total Percentage"
                 dataLabelFunction="insertAfter"
                 dataLabelInsert="%"
-                labelsClassName="customLabelClass"
                 labelPositionRight
                 labelsData={[
                   { data: '0-15 seconds', color: '#51adc0' },

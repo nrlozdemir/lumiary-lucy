@@ -9,6 +9,7 @@ import { actions, makeSelectMarketviewTotalView } from 'Reducers/marketview'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import style from './style.scss'
+import 'chartjs-plugin-datalabels'
 import Module from 'Components/Module'
 
 class TotalViewsChart extends React.Component {

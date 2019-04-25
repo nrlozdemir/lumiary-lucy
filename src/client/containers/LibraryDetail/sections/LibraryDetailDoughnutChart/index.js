@@ -94,6 +94,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                     <DoughnutChart
                       width={150}
                       height={150}
+											displayDataLabels={false}
                       cutoutPercentage={50}
                       data={{
                         labels: ['Red', 'Green', 'Blue', 'Yellow'],
@@ -181,7 +182,8 @@ class LibraryDetailDoughnutChart extends React.Component {
                     <div className={style.doughnutChartContainer}>
                       <DoughnutChart
                         width={180}
-                        height={180}
+												height={180}
+												displayDataLabels={false}
                         cutoutPercentage={50}
                         data={{
                           labels: ['Red', 'Green', 'Blue', 'Yellow'],
@@ -240,6 +242,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                         color="#8567f0"
                         width={180}
                         height={180}
+												displayDataLabels={false}
                         cutoutPercentage={50}
                         data={{
                           labels: ['Red', 'Green', 'Blue', 'Yellow'],

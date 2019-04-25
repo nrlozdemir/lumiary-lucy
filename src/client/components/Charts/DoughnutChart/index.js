@@ -1,19 +1,12 @@
 import React, { lazy, Suspense } from 'react'
-import { Doughnut, defaults } from 'react-chartjs-2'
+import { Doughnut } from 'react-chartjs-2'
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import style from './style.scss'
 
 const Labels = lazy(() => import('Components/Charts/Labels'))
 
 const propTypes = {}
 const defaultProps = {
-  wrapperClassName: 'doughnut-wrapper',
-  chartClassName: 'doughnut-chart',
-  labelsClassName: 'doughnut-labels',
-
-  responsive: true,
-  tooltip: false,
   legend: false,
   layoutPadding: 0,
 
@@ -25,31 +18,32 @@ const defaultProps = {
   defaultFontSize: '14',
   defaultFontWeight: '700',
 
-  fillTextColor: '#fff',
+  fillTextColor: '#ffffff',
   fillTextFontFamily: 'ClanOTBold',
   fillTextFontSize: '14px',
 
-  dataLabelColor: '#fff',
+  displayDataLabels: true,
+  dataLabelColor: '#ffffff',
   dataLabelFontFamily: 'ClanOTBold',
   dataLabelFontSize: 14,
   dataLabelFontWeight: 'normal',
 
-  legendLabelsFontColor: '#fff',
+  legendLabelsFontColor: '#ffffff',
   legendLabelsFontFamily: 'ClanOTBold',
   legendLabelsFontSize: 12,
 
   tooltipFontFamily: 'ClanOTBold',
   tooltipFontSize: 12,
   tooltipFontStyle: 'normal',
-  tooltipFontColor: '#fff',
+  tooltipFontColor: '#ffffff',
   tooltipSpacing: 2,
 }
 
 const dataLabelPlugins = (value, func, item) => {
   if (func == 'insertAfter') {
-    return value + '' + item
+    return (value + '' + item)
   } else if (func == 'insertBefore') {
-    return item + '' + value
+    return (item + '' + value)
   }
   return value
 }
@@ -62,18 +56,13 @@ export default class DoughnutChart extends React.Component {
 
   render() {
     const {
-      wrapperClassName,
-      chartClassName,
-      labelsClassName,
       width,
       height,
       data,
       datasetsBorderWidth,
       datasetsBorderColor,
       datasetsHoverBorderColor,
-      responsive,
       legend,
-      tooltip,
       layoutPadding,
       fillTextColor,
       fillTextFontSize,
@@ -82,6 +71,7 @@ export default class DoughnutChart extends React.Component {
       fillTextX,
       fillTextY,
       fillTextMaxWidth,
+      displayDataLabels,
       dataLabelFunction,
       dataLabelInsert,
       dataLabelColor,
@@ -92,6 +82,7 @@ export default class DoughnutChart extends React.Component {
       legendLabelsFontSize,
       legendLabelsFontFamily,
       labelsData,
+      labelPositionBottom,
       labelPositionRight,
       labelPositionLeft,
       cutoutPercentage,
@@ -104,22 +95,21 @@ export default class DoughnutChart extends React.Component {
         beforeDraw: function(chart) {
           const ctx = chart.chart.ctx
           const { top, bottom, left, right } = chart.chartArea
+          const customFillText = fillText.replace(/^\s+|\s+$/g, '')
+
           ctx.save()
           ctx.fillStyle = fillTextColor
           ctx.font = fillTextFontSize + ' ' + fillTextFontFamily
 
-          let customFillText
-          if (Array.isArray(customFillText)) {
-            customFillText = fillText.join('\n')
-          } else {
-            customFillText = fillText
-          }
-
           ctx.fillText(
             customFillText,
-            fillTextX && fillTextX > 0 ? fillTextX : (bottom - top) / 2 - 55,
-            fillTextY && fillTextY > 0 ? fillTextY : (right - left) / 2 + 4,
-            fillTextMaxWidth && fillTextMaxWidth > 0
+            (fillTextX && fillTextX > 0)
+              ? fillTextX
+              : (bottom - top) / 2 - 55,
+            (fillTextY && fillTextY > 0)
+              ? fillTextY
+              : (right - left) / 2 + 4,
+            (fillTextMaxWidth && fillTextMaxWidth > 0)
               ? fillTextMaxWidth
               : right - left
           )
@@ -127,7 +117,7 @@ export default class DoughnutChart extends React.Component {
         },
       })
     }
-    console.log(cutoutPercentage)
+
     return (
       <React.Fragment>
         <div className={style.doughnutContainer}>
@@ -150,14 +140,12 @@ export default class DoughnutChart extends React.Component {
                       data: data.datasets[0].data,
                       backgroundColor: data.datasets[0].backgroundColor,
                       borderColor: datasetsBorderColor,
-                      hoverBackgroundColor:
-                        data.datasets[0].hoverBackgroundColor,
+                      hoverBackgroundColor: data.datasets[0].hoverBackgroundColor,
                     },
                   ],
                 }}
                 plugins={plugins}
                 options={{
-                  cutoutPercentage: cutoutPercentage,
                   responsive: false,
                   tooltips: {
                     enabled: true,
@@ -168,13 +156,14 @@ export default class DoughnutChart extends React.Component {
                       fontColor: legendLabelsFontColor,
                       fontSize: legendLabelsFontSize,
                       fontFamily: legendLabelsFontFamily,
-                    },
+                    }
                   },
                   layout: {
                     padding: layoutPadding,
                   },
                   plugins: {
                     datalabels: {
+                      display: displayDataLabels,
                       formatter: (value) => {
                         if (dataLabelFunction) {
                           return dataLabelPlugins(
@@ -190,15 +179,16 @@ export default class DoughnutChart extends React.Component {
                         family: dataLabelFontFamily,
                         weight: dataLabelFontWeight,
                         size: dataLabelFontSize,
-                      },
-                    },
+                      }
+                    }
                   },
                   elements: {
                     arc: {
                       borderWidth: datasetsBorderWidth,
                       hoverBorderColor: datasetsHoverBorderColor,
-                    },
+                    }
                   },
+                  cutoutPercentage: cutoutPercentage
                 }}
               />
             )}
@@ -211,6 +201,13 @@ export default class DoughnutChart extends React.Component {
             </div>
           )}
         </div>
+        {labelPositionBottom && labelsData && (
+          <div className={style.labelContainer}>
+            <Suspense fallback={''}>
+              <Labels data={labelsData} />
+            </Suspense>
+          </div>
+        )}
       </React.Fragment>
     )
   }
