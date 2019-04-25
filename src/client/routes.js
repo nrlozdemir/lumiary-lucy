@@ -113,6 +113,7 @@ const routes = [
   },
   {
     path: '/reports',
+		exact: true,
     component: 'Reports',
     navigation: {
       level: 1,
@@ -122,12 +123,18 @@ const routes = [
   },
   {
 		path: '/reports/:type/:id',
-		removeNavbar: true,
-    component: 'Reports',
+		exact: true,
+		component: 'Reports',
+    navigation: {
+			type: 'makeTitle',
+			from: 'type', // [type, id or (bool) null]
+			title: 'Reports Brand Insight',
+			backToTitle: 'Generate New Report'
+    }
   },
   {
     path: '/reports/brand-insight',
-    removeNavbar: true,
+		exact: true,
     component: 'Reports',
   },
   {
