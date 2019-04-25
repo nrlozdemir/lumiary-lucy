@@ -48,6 +48,7 @@ export class Competitor extends React.Component {
   }
 
   changeSelectedVideo = (video) => {
+    console.log(video)
     this.props.setSelectedVideo(video)
   }
 
@@ -61,10 +62,6 @@ export class Competitor extends React.Component {
         topPerformingPropertiesByCompetitorsData,
       },
     } = this.props
-    console.log(selectedVideo)
-    if (!selectedVideo || marketview.loading) {
-      return <RouterLoading />
-    }
 
     return (
       <React.Fragment>
@@ -74,10 +71,8 @@ export class Competitor extends React.Component {
           changeSelectedVideo={this.changeSelectedVideo}
           title="Top Performing Competitor Videos"
         />
-        {competitorTopVideos && (
-          <TopVideosCard chartData={competitorTopVideos} height={150} />
-        )}
-        {similarProperties && <TopSimilarProperties data={similarProperties} />}
+        <TopVideosCard chartData={competitorTopVideos} height={150} />
+        <TopSimilarProperties data={similarProperties} />
         <div className="grid-collapse">
           <BarChartModule
             moduleKey={randomKey(10)}
