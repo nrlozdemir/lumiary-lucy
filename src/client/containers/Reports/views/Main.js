@@ -11,13 +11,13 @@ import Select from 'Components/Form/Select'
 import Button from 'Components/Form/Button'
 
 import ReportsModal from 'Components/Modal/Reports'
-import ReportsForm from 'Components/PagesForm/Reports/BrandInsight'
-import CompareBrand from 'Components/PagesForm/Reports/CompareBrand'
-import PredefinedReport from 'Components/PagesForm/Reports/PredefinedReport'
+import ReportsForm from 'Components/PageForms/Reports/BrandInsight'
+import CompareBrand from 'Components/PageForms/Reports/CompareBrand'
+import PredefinedReport from 'Components/PageForms/Reports/PredefinedReport'
 
 import RouterLoading from 'Components/RouterLoading'
 
-import ReportCards from '../section/reportCards'
+import ReportCards from '../section/ReportCards'
 
 import ReactTable from 'react-table'
 

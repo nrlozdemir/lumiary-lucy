@@ -10,6 +10,12 @@ const canSelect = (fields) => {
   const selectedFields = fields.names.filter(
     (field) => fields[field].input.value === true
   )
+  if (selectedFields.length < fields.canSelect) {
+    fields.checkboxValidation(false)
+  } else {
+    fields.checkboxValidation(true)
+  }
+
   return selectedFields.length == fields.canSelect
 }
 
