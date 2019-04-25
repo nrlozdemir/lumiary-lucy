@@ -145,8 +145,7 @@ const Selector = (props) => {
     .filter((r) => r.path == url.join("/"))
 
   if(navigationPathMatch && navigationPathMatch.length > 0) {
-    const from = navigationPathMatch[0].navigation.from
-    const loadComponent = navigationPathMatch[0].navigation.loadComponent
+		const { from, loadComponent } = navigationPathMatch[0].navigation
     let title = navigationPathMatch[0].navigation.title
     let backToTitle
 
