@@ -69,3 +69,29 @@
     padding: 8px 40px 40px;
   }
 }
+
+.references {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .referenceItem {
+    display: flex;
+    padding-bottom: 40px;
+    font-size: 14px;
+    line-height: 1.8rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    span {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      margin-bottom: -2px;
+      margin-right: 5px;
+      border-radius: 10px;
+    }
+  }
+  :not(:first-child) {
+    margin-left: 45px;
+  }
+}

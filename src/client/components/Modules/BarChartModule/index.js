@@ -10,20 +10,20 @@ const BarChartModule = ({
   tickOptions,
   title,
   titleLabels,
-  footerLabels,
   width,
   height,
   filters,
   action,
   moduleKey,
+  references,
 }) => {
-  console.log(action)
   return (
     <Module
       moduleKey={moduleKey}
       title={title}
       filters={filters}
       action={action}
+      references={references}
       legend={
         titleLabels && (
           <div
@@ -42,23 +42,16 @@ const BarChartModule = ({
         )
       }
     >
-      {barData && (
-        <BarChart
-          barDurationData={barData}
-          tickOptions={tickOptions}
-          width={width}
-          height={height}
-        />
-      )}
-      {footerLabels && (
-        <div className={classnames(style.colorListHorizontal, style.colorList)}>
-          {footerLabels.map((title, index) => (
-            <div key={index} className={style.colorListItem}>
-              {title}
-            </div>
-          ))}
-        </div>
-      )}
+      <div className="col-12-no-gutter">
+        {barData && (
+          <BarChart
+            barDurationData={barData}
+            tickOptions={tickOptions}
+            width={width}
+            height={height}
+          />
+        )}
+      </div>
     </Module>
   )
 }

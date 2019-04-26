@@ -12,6 +12,7 @@ import PacingCard from 'Containers/Marketview/sections/main/PacingCard'
 import FormatCard from 'Containers/Marketview/sections/main/FormatCard'
 import TotalViewsCard from 'Containers/Marketview/sections/main/TotalViewsCard'
 import BarChartModule from 'Components/Modules/BarChartModule'
+
 import style from '../style.scss'
 import { randomKey } from '../../../utils'
 
@@ -21,7 +22,6 @@ class Main extends Component {
   }
 
   render() {
-    console.log(this.props)
     return (
       <React.Fragment>
         <div className={style.mainCardContainer}>

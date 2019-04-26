@@ -12,9 +12,10 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
 import Slider from 'Containers/Marketview/sections/detail/Slider'
-import TopVideosCard from 'Containers/Marketview/sections/detail/TopVideosCard'
-import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
+import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
 import BarChartModule from 'Components/Modules/BarChartModule'
+import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
+
 import RouterLoading from 'Components/RouterLoading'
 
 import style from '../style.scss'
@@ -38,17 +39,21 @@ const chartTickOptions = {
 export class Competitor extends React.Component {
   componentDidMount() {
     this.props.getCompetitorTopVideosRequest()
-    this.props.getCompetitorVideosRequest()
-    this.props.getSimilarPropertiesRequest()
-    this.props.getTopPerformingPropertiesByCompetitorsRequest()
+  }
+
+  getSimilarProperties = (data) => {
+    this.props.getSimilarPropertiesRequest(data)
   }
 
   getTopPerformingPropertiesByCompetitors = (data) => {
     this.props.getTopPerformingPropertiesByCompetitorsRequest(data)
   }
 
+  getCompetitorVideos = (data) => {
+    this.props.getCompetitorVideosRequest(data)
+  }
+
   changeSelectedVideo = (video) => {
-    console.log(video)
     this.props.setSelectedVideo(video)
   }
 
@@ -65,31 +70,95 @@ export class Competitor extends React.Component {
 
     return (
       <React.Fragment>
-        <Slider
-          data={marketview.videos}
-          selectedVideo={selectedVideo}
-          changeSelectedVideo={this.changeSelectedVideo}
-          title="Top Performing Competitor Videos"
-        />
-        {/* <TopVideosCard chartData={competitorTopVideos} height={150} />*/}
-        {/* <TopSimilarProperties data={similarProperties} /> */}
         <div className="grid-collapse">
+          <Slider
+            data={marketview.videos}
+            selectedVideo={selectedVideo}
+            changeSelectedVideo={this.changeSelectedVideo}
+            title="Top Performing Competitor Videos"
+          />
+          <TopVideosCardModule
+            chartData={competitorTopVideos}
+            height={150}
+            moduleKey="MarketView/TopVideosCardModule"
+            title="Top Videos Over Time By Competitor"
+            action={this.getCompetitorVideos}
+            filters={[
+              {
+                type: 'platform',
+                selectKey: 'asdadasdasdasd',
+                placeHolder: 'Engagement',
+              },
+            ]}
+            references={[
+              {
+                className: 'bg-cool-blue',
+                text: 'Barstool Sports',
+              },
+              {
+                className: 'bg-lighter-purple',
+                text: 'SB Nation',
+              },
+              {
+                className: 'bg-coral-pink',
+                text: 'ESPN',
+              },
+              {
+                className: 'bg-cool-grey',
+                text: 'Scout Media',
+              },
+              {
+                className: 'bg-dusk"',
+                text: 'Fansided',
+              },
+            ]}
+          />
+          <TopSimilarPropertiesModule
+            moduleKey="MarketView/TopSimilarPropertiesModule"
+            data={similarProperties}
+            title="Top Performing Property Across All Competitors"
+            action={this.getSimilarProperties}
+            filters={[
+              {
+                type: 'engagement',
+                selectKey: 'asdadasdasdasdasdasdasd',
+                placeHolder: 'Engagement',
+              },
+            ]}
+          />
           <BarChartModule
-            moduleKey={randomKey(10)}
+            moduleKey="MarketView/topPerformingPropertiesByCompetitors"
             containerClass={style.detailTopPerformingPropertyContainer}
             barData={topPerformingPropertiesByCompetitorsData}
             tickOptions={chartTickOptions}
             title="Top Performing Property Across All Competitors"
             height={50}
-            action={() => this.getTopPerformingPropertiesByCompetitors()}
+            action={this.getTopPerformingPropertiesByCompetitors}
             filters={[
               {
                 type: 'engagement',
-                selectKey: randomKey(10),
+                selectKey: 'asdadasdasdasdasdasdasd',
                 placeHolder: 'Engagement',
               },
             ]}
-            footerLabels={['Fast', 'Medium', 'Slow', 'Slowest']}
+            references={[
+              {
+                className: 'bg-cool-blue',
+                text: 'Fast',
+              },
+              {
+                className: 'bg-lighter-purple',
+                text: 'Medium',
+              },
+              {
+                className: 'bg-coral-pink',
+                text: 'Slow',
+              },
+              {
+                className: 'bg-cool-grey',
+                text: 'Slowest',
+              },
+            ]}
           />
         </div>
       </React.Fragment>

@@ -13,8 +13,8 @@ import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
 import Slider from 'Containers/Marketview/sections/detail/Slider'
 import DaySelection from 'Containers/Marketview/sections/detail/DaySelection'
-import TopVideosCard from 'Containers/Marketview/sections/detail/TopVideosCard'
-import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
+// import TopVideosCard from 'Containers/Marketview/sections/detail/TopVideosCard'
+// import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
 import RouterLoading from 'Components/RouterLoading'
 
 const topVideosReferences = [
@@ -68,14 +68,15 @@ export class Time extends React.Component {
     } = this.props
     const { activeDay } = this.state
 
-    const selectedDayData = marketviewDetailTime && marketviewDetailTime[activeDay]
+    const selectedDayData =
+      marketviewDetailTime && marketviewDetailTime[activeDay]
     if (!selectedVideo || marketview.loading || !marketviewDetailTime) {
       return <RouterLoading />
     }
 
     return (
       <React.Fragment>
-        <DaySelection
+        {/* <DaySelection
           onDayChange={(day) => this.changeActiveDay(day)}
           activeDay={activeDay}
         />
@@ -83,7 +84,7 @@ export class Time extends React.Component {
           <Slider
             data={selectedDayData.CompetitorVideos}
             selectedVideo={selectedVideo}
-            changeSelectedVideo={this.changeSelectedVideo}
+            changeSelectedVideos={this.changeSelectedVideo}
             className="mt-48"
             title={`Top Performing ${activeDay
               .charAt(0)
@@ -102,7 +103,7 @@ export class Time extends React.Component {
             references={topVideosReferences}
             height={150}
           />
-        )}
+        )} */}
       </React.Fragment>
     )
   }

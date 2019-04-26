@@ -12,10 +12,10 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
 import Slider from 'Containers/Marketview/sections/detail/Slider'
-import TopVideosCard from 'Containers/Marketview/sections/detail/TopVideosCard'
-import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
-import TotalCompetitorViews from 'Containers/Marketview/sections/main/TotalCompetitorViews'
+// import TopVideosCard from 'Containers/Marketview/sections/detail/TopVideosCard'
+// import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
 import RouterLoading from 'Components/RouterLoading'
+import BarChartModule from 'Components/Modules/BarChartModule'
 
 import style from '../style.scss'
 
@@ -91,28 +91,28 @@ export class Platform extends React.Component {
           selectedVideo={selectedVideo}
           changeSelectedVideo={this.changeSelectedVideo}
         />
-        {competitorTopVideos && (
+        {/* {competitorTopVideos && (
           <TopVideosCard
             chartData={competitorTopVideos}
             title="Top Videos Over Time By Platform"
             references={topVideosReferences}
             height={150}
           />
-        )}
+        )} */}
         {similarProperties && <TopSimilarProperties data={similarProperties} />}
-        {topPerformingPropertiesData && (
-          <div className="grid-collapse">
-            <TotalCompetitorViews
-              containerClass={style.detailTopPerformingPropertyContainer}
-              totalCompetitorViewsData={topPerformingPropertiesData}
-              tickOptions={chartTickOptions}
-              title="Top Performing Property Across All Platforms"
-              height={50}
-              selects={['Resolution', 'Likes']}
-              footerLabels={['Fast', 'Medium', 'Slow', 'Slowest']}
-            />
-          </div>
-        )}
+        {/* {topPerformingPropertiesData && (
+          // <div className="grid-collapse">
+          //   <TotalCompetitorViews
+          //     containerClass={style.detailTopPerformingPropertyContainer}
+          //     totalCompetitorViewsData={topPerformingPropertiesData}
+          //     tickOptions={chartTickOptions}
+          //     title="Top Performing Property Across All Platforms"
+          //     height={50}
+          //     selects={['Resolution', 'Likes']}
+          //     footerLabels={['Fast', 'Medium', 'Slow', 'Slowest']}
+          //   />
+          // </div>
+        )} */}
       </React.Fragment>
     )
   }

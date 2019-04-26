@@ -18,6 +18,7 @@ export class Module extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if (
+      this.props.action &&
       !_.isEqual(
         prevProps.selectFilters.values[prevProps.moduleKey],
         this.props.selectFilters.values[this.props.moduleKey]
@@ -41,8 +42,18 @@ export class Module extends React.Component {
       'shadow-1 grid-container col-12',
       style.moduleContainer
     )
-    const { children, title, subTitle, legend, filters } = this.props
+    const referencesClass = cx('font-secondary-second', style.references)
+
+    const {
+      children,
+      title,
+      subTitle,
+      legend,
+      filters,
+      references,
+    } = this.props
     const { infoShow } = this.state
+    console.log(filters)
     return (
       <div className={moduleContainer}>
         <div className={style.moduleContainerHeader}>
@@ -53,6 +64,16 @@ export class Module extends React.Component {
           />
         </div>
         <div className={style.moduleContainerBody}>{children}</div>
+        {references && (
+          <div className={referencesClass}>
+            {references.map((ref, index) => (
+              <div className={style.referenceItem} key={index}>
+                <span className={ref.className} />
+                {ref.text}
+              </div>
+            ))}
+          </div>
+        )}
       </div>
     )
   }
