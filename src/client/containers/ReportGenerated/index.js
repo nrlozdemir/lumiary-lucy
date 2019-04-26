@@ -8,7 +8,7 @@ import style from './style.scss'
 import ReportsHeader from './sections/ReportsHeader'
 import CreatedFilters from './sections/CreatedFilters'
 import Slider from './sections/Slider'
-import VideoReleasesBarChart from './sections/VideoReleasesBarChart'
+import VideoReleasesBarChart from 'Components/Modules/VideoReleasesBarChart'
 import TopVideosCard from './sections/TopVideosCard'
 import PacingCard from './sections/PacingCard'
 import FilteringSection from './sections/FilteringSection'
@@ -75,7 +75,7 @@ class ReportGenerated extends Component {
             />
           )}
           {videoReleasesData && (
-            <VideoReleasesBarChart data={videoReleasesData} />
+            <VideoReleasesBarChart reportData={videoReleasesData} />
           )}
           {topVideosOverTime && (
             <TopVideosCard

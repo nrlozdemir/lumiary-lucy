@@ -22,7 +22,7 @@ import Module from 'Components/Module'
 
 const plugins = [
   {
-    beforeDraw: function(chart, easing) {
+    beforeDraw: function (chart, easing) {
       if (
         chart.config.options.chartArea &&
         chart.config.options.chartArea.backgroundColor
@@ -44,7 +44,7 @@ const plugins = [
   },
 ]
 
-class PanopticBarChart extends React.Component {
+class VideoReleasesBarChart extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getVideoReleasesData(data)
   }
@@ -56,14 +56,17 @@ class PanopticBarChart extends React.Component {
   render() {
     const {
       videoReleasesData: { data, loading, error },
+      reportData
     } = this.props
+
+    console.log(reportData)
     return (
       <Module
         moduleKey={'Panoptic/VideoReleasesBarChart'}
         title="Video Releases vs Engagement"
         action={this.callBack}
         filters={[
-          {
+          ...(!reportData ? [{
             type: 'engagement',
             selectKey: 'PVR-sad',
             placeHolder: 'Engagement',
@@ -77,14 +80,29 @@ class PanopticBarChart extends React.Component {
             type: 'timeRange',
             selectKey: 'PVR-wds',
             placeHolder: 'Date',
-          },
+          }] : [])
+
         ]}
+        legend={
+          reportData && (
+            <div className='d-flex align-items-center justify-content-end'>
+              <div className="d-flex align-items-center mr-32">
+                <span className="blueDot" />
+                <p>Likes</p>
+              </div>
+              <div className="d-flex align-items-center mr-32">
+                <span className="redDot" />
+                <p>Video Releases</p>
+              </div>
+            </div>
+          )
+        }
       >
         <div className={barChartContainer}>
           <div className={barContainerClass}>
             <div className={style.wrapperBarChart}>
               <Bar
-                data={data}
+                data={reportData || data}
                 options={wrapperBarOptions}
                 datasetKeyProvider={this.datasetKeyProvider}
                 plugins={plugins}
@@ -94,7 +112,7 @@ class PanopticBarChart extends React.Component {
               <div className="col-3">
                 <div className={style.chartSection}>
                   <Bar
-                    data={data}
+                    data={reportData || data}
                     options={options}
                     datasetKeyProvider={this.datasetKeyProvider}
                   />
@@ -106,7 +124,7 @@ class PanopticBarChart extends React.Component {
               <div className="col-3">
                 <div className={style.chartSection}>
                   <Bar
-                    data={data}
+                    data={reportData || data}
                     options={options}
                     datasetKeyProvider={this.datasetKeyProvider}
                   />
@@ -118,7 +136,7 @@ class PanopticBarChart extends React.Component {
               <div className="col-3">
                 <div className={style.chartSection}>
                   <Bar
-                    data={data}
+                    data={reportData || data}
                     options={options}
                     datasetKeyProvider={this.datasetKeyProvider}
                   />
@@ -129,7 +147,7 @@ class PanopticBarChart extends React.Component {
               </div>
               <div className="col-3">
                 <div className={style.chartSection}>
-                  <Bar data={data} options={options} />
+                  <Bar data={reportData || data} options={options} />
                 </div>
                 <div className={style.chartSectionBadge}>
                   <span>Animation</span>
@@ -154,4 +172,4 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(PanopticBarChart)
+export default compose(withConnect)(VideoReleasesBarChart)

@@ -15,7 +15,7 @@ import { reduxForm } from 'redux-form'
 import { actions, makeSelectPanoptic } from 'Reducers/panoptic'
 import style from './style.scss'
 
-import VideoReleasesBarChart from './sections/VideoReleasesBarChart'
+import VideoReleasesBarChart from 'Components/Modules/VideoReleasesBarChart'
 import ColorTemperature from './sections/ColorTemperature'
 import FilteringSection from './sections/FilteringSection'
 import PacingCard from './sections/PacingCard'

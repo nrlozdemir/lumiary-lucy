@@ -50,8 +50,7 @@
         font-size: 16px;
       }
     }
-    .headerLegend {
-    }
+
     .headerFilters {
       display: flex;
       justify-content: flex-end;
@@ -60,6 +59,26 @@
       > div {
         text-align: left;
         margin: 0 0 0 24px;
+      }
+    }
+
+    .headerLegend {
+      p{
+        font-size: 14px;
+        line-height: 1.8rem;
+      }
+      [class*="Dot"]{
+        width: 16px;
+        height: 16px;
+        margin-right: 8px;
+        display: inline-block;
+        border-radius: 50%;
+      }
+      [class*="blueDot"] {
+        background-color: $color-cool-blue;
+      }
+      [class*="redDot"] {
+        background-color: #d0506c;
       }
     }
   }

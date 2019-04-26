@@ -17,13 +17,13 @@ export const options = {
     xPadding: 30,
     yPadding: 15,
     callbacks: {
-      title: function(tooltipItem, data) {
+      title: function (tooltipItem, data) {
         if (tooltipItem[0].yLabel < 0) {
           return `${Math.abs(tooltipItem[0].yLabel / 10000)}k Videos`
         }
         return `${tooltipItem[0].yLabel / 1000}k Likes`
       },
-      label: function() {
+      label: function () {
         return null
       },
     },
@@ -103,7 +103,7 @@ export const wrapperBarOptions = {
           display: true,
           stepSize: 50000,
           padding: 15,
-          callback: function(value, index, values) {
+          callback: function (value, index, values) {
             if (value < 0) {
               return `${Math.abs(value / 10000)}k`
             }
