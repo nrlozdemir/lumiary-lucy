@@ -93,11 +93,16 @@ const shadeHexColor = (color, percent) => {
   )
 }
 
+const capitalizeFirstLetter = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
 export {
   randomKey,
   searchTermInText,
   socialIconSelector,
   toSlug,
   chartCombineDataset,
-  shadeHexColor,
+	shadeHexColor,
+	capitalizeFirstLetter
 }
