@@ -4,7 +4,6 @@ import style from './style.scss'
 import { socialIconSelector } from 'Utils/'
 
 const GeneratedReportViewSlider = (props) => {
-  console.log('props', props)
 
   const NextArrow = (props) => {
     const { className, style, onClick } = props

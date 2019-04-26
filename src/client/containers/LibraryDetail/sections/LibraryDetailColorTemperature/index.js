@@ -12,7 +12,7 @@ const LibraryDetailColorTemperature = ({
   selectDate,
 }) => {
   return (
-    <div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
+    <div className="grid-container col-12 shadow-1 mt-48 bg-dark-grey-blue">
       <div className={style.radialChartsContainer}>
         <div className={style.temperatureHeader}>
           <div>
