@@ -11,13 +11,10 @@ import classnames from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { makeSelectLibrary } from 'Reducers/library'
+import { capitalizeFirstLetter } from 'Utils/index'
 
 import style from './style.scss'
 // import PropTypes from 'prop-types';
-
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
 
 const containerClass = classnames('bg-dark-grey-blue ' + style.container)
 const linksClass = classnames(style.links)
@@ -166,7 +163,6 @@ const Template = (props) => {
 
 /* eslint-disable react/prefer-stateless-function */
 class Navbar extends React.Component {
-
   render() {
     return (
       <React.Fragment>
