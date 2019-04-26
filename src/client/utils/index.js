@@ -103,6 +103,6 @@ export {
   socialIconSelector,
   toSlug,
   chartCombineDataset,
-	shadeHexColor,
-	capitalizeFirstLetter
+  shadeHexColor,
+  capitalizeFirstLetter
 }

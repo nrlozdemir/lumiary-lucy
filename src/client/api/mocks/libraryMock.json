@@ -133,25 +133,25 @@
         "title": "Views",
         "value": "174.1",
         "percentage": "52",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
         "value": "152.8",
         "percentage": "42",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
         "value": "186.4",
         "percentage": "13",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
         "value": "103.4",
         "percentage": "28",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -470,26 +470,26 @@
       {
         "title": "views",
         "value": "274.1",
-				"percentage": "14",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "percentage": "14",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "likes",
         "value": "252.8",
         "percentage": "72",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "comments",
         "value": "286.4",
         "percentage": "56",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "shares",
         "value": "203.4",
         "percentage": "28",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -809,25 +809,25 @@
         "title": "Views",
         "value": "374.1",
         "percentage": "64",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
         "value": "352.8",
         "percentage": "22",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
         "value": "386.4",
         "percentage": "6",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
         "value": "303.4",
         "percentage": "28",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -1147,25 +1147,25 @@
         "title": "Views",
         "value": "474.1",
         "percentage": "99",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
         "value": "452.8",
         "percentage": "42",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
         "value": "486.4",
         "percentage": "77",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
         "value": "403.4",
         "percentage": "28",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -1485,25 +1485,25 @@
         "title": "Views",
         "value": "574.1",
         "percentage": "34",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
         "value": "552.8",
         "percentage": "36",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
         "value": "586.4",
         "percentage": "88",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
         "value": "503.4",
         "percentage": "66",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -1823,25 +1823,25 @@
         "title": "Views",
         "value": "874.1",
         "percentage": "12",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
         "value": "352.8",
         "percentage": "42",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
         "value": "186.4",
         "percentage": "99",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
         "value": "103.4",
         "percentage": "99",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -2161,25 +2161,25 @@
         "title": "Views",
         "value": "674.1",
         "percentage": "15",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
         "value": "652.8",
         "percentage": "30",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
         "value": "686.4",
         "percentage": "75",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
         "value": "603.4",
         "percentage": "90",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -2499,25 +2499,25 @@
         "title": "Views",
         "value": "814.1",
         "percentage": "14",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
         "value": "312.8",
         "percentage": "18",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
         "value": "116.4",
         "percentage": "16",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
         "value": "113.4",
         "percentage": "12",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -2837,25 +2837,25 @@
         "title": "Views",
         "value": "74.1",
         "percentage": "64",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
         "value": "52.8",
         "percentage": "42",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
         "value": "16.4",
         "percentage": "56",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
         "value": "31.4",
         "percentage": "28",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -3175,25 +3175,25 @@
         "title": "Views",
         "value": "14.1",
         "percentage": "74",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
         "value": "22.8",
         "percentage": "72",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
         "value": "16.4",
         "percentage": "76",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
         "value": "3.4",
         "percentage": "78",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -3513,25 +3513,25 @@
         "title": "Views",
         "value": "64.1",
         "percentage": "50",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
         "value": "152.8",
         "percentage": "50",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
         "value": "86.4",
         "percentage": "50",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
         "value": "12.4",
         "percentage": "50",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -3851,25 +3851,25 @@
         "title": "Views",
         "value": "10.1",
         "percentage": "1",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
         "value": "32.8",
         "percentage": "10",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
         "value": "16.4",
         "percentage": "20",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
         "value": "20.4",
         "percentage": "30",
-				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {

@@ -8,7 +8,7 @@ import { capitalizeFirstLetter } from 'Utils/index'
 import { textEdit } from 'Utils/text'
 
 const Front = (props) => {
-	const { data } = props
+  const { data } = props
   return (<div className={classnames(
     "bg-dark-grey-blue",
     "shadow-1",
@@ -30,43 +30,43 @@ const Front = (props) => {
 }
 
 const Back = (props) => {
-	const {
-		data: { text }
-	} = props
+  const {
+    data: { text }
+  } = props
 
-	return (
-		<p className={style.backText}>
-			{textEdit(text, props.data)}
-		</p>
-	)
+  return (
+    <p className={style.backText}>
+      {textEdit(text, props.data)}
+    </p>
+  )
 }
 
 const LibraryDetailChartHeader = ({ barChartData, videoUrl, title, socialIcon }) => (
-	<div className="grid-container col-12 mt-48">
-		<div className={classnames("mt-72", style.containerClass)}>
-			<div className={classnames(
-				"col-6",
-				style.videoWrapper)
-			}>
-				<Video src={videoUrl} title={title} socialIcon={socialIcon} />
-			</div>
-			<div className={classnames(
-				"col-6",
-				style.videoStatsWrapper)}
-			>
-				{barChartData.map(
-					(element, i) => {
-						return (
-							<FlipCard key={i} width={320} height={100}>
-								<Front data={element} />
-								<Back data={element} />
-							</FlipCard>
-						)
-					}
-				)}
-			</div>
-		</div>
-	</div>
+  <div className="grid-container col-12 mt-48">
+    <div className={classnames("mt-72", style.containerClass)}>
+      <div className={classnames(
+        "col-6",
+        style.videoWrapper)
+      }>
+        <Video src={videoUrl} title={title} socialIcon={socialIcon} />
+      </div>
+      <div className={classnames(
+        "col-6",
+        style.videoStatsWrapper)}
+      >
+        {barChartData.map(
+          (element, i) => {
+            return (
+              <FlipCard key={i} width={320} height={100}>
+                <Front data={element} />
+                <Back data={element} />
+              </FlipCard>
+            )
+          }
+        )}
+      </div>
+    </div>
+  </div>
 )
 
 export default LibraryDetailChartHeader

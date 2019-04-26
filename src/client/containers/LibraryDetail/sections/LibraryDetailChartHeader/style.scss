@@ -3,7 +3,7 @@
 }
 
 .containerClass {
-	display: flex;
+  display: flex;
 }
 
 .videoWrapper {
@@ -13,8 +13,8 @@
 }
 
 .videoStatsWrapper{
-	width: 320px;
-	height: 472px;
+  width: 320px;
+  height: 472px;
   flex: 0 0 auto;
   margin-left: 40px;
   margin-right: 0px;
@@ -611,7 +611,7 @@
 }
 
 .backText{
-	font-family: $font-family-ClanOTNews;
+  font-family: $font-family-ClanOTNews;
   font-size: 14px;
   font-weight: normal;
   font-style: normal;
