@@ -1,21 +1,7 @@
-$arrowWidth: 10px;
-$arrowHeight: 14px;
-$arrowBackground: #fff;
-
-@mixin arrowBody($width, $height, $top, $left) {
-  border: none;
-  background-color: $arrowBackground;
-  height: $height;
-  width: $width;
-  top: $top;
-  left: $left;
-}
-
-@mixin arrowStyle($width, $height, $top, $left, $way) {
-  left: $left;
-  top: $top;
-  border-width: $height $width;
-  border-#{$way}-color: $arrowBackground;
+.flipWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
 }
 
 .flipContainer {
@@ -84,8 +70,8 @@ $arrowBackground: #fff;
   justify-content: center;
 }
 
-.back .text,
-.front .text {
+.backText,
+.frontText {
   font-family: $font-family-ClanOTNews;
   font-size: 14px;
   font-weight: normal;
@@ -253,6 +239,26 @@ $arrowBackground: #fff;
       }
     }
   }
+}
+
+$arrowWidth: 10px;
+$arrowHeight: 14px;
+$arrowBackground: #fff;
+
+@mixin arrowBody($width, $height, $top, $left) {
+  border: none;
+  background-color: $arrowBackground;
+  height: $height;
+  width: $width;
+  top: $top;
+  left: $left;
+}
+
+@mixin arrowStyle($width, $height, $top, $left, $way) {
+  left: $left;
+  top: $top;
+  border-width: $height $width;
+  border-#{$way}-color: $arrowBackground;
 }
 
 .arrow {

@@ -388,12 +388,6 @@
   ],
   "flipCardsData": {
     "views": {
-      "bar": {
-        "width": 8,
-        "maxHeight": 36,
-        "labelCharLength": 1,
-        "zeroFill": 1
-      },
       "stat": [
         {
           "score": 20,
@@ -426,12 +420,6 @@
       ]
     },
     "likes": {
-      "bar": {
-        "width": 8,
-        "maxHeight": 36,
-        "labelCharLength": 1,
-        "zeroFill": 1
-      },
       "stat": [
         {
           "score": 80,
@@ -464,12 +452,6 @@
       ]
     },
     "comments": {
-      "bar": {
-        "width": 8,
-        "maxHeight": 36,
-        "labelCharLength": 1,
-        "zeroFill": 1
-      },
       "stat": [
         {
           "score": 24,
@@ -502,12 +484,6 @@
       ]
     },
     "shares": {
-      "bar": {
-        "width": 8,
-        "maxHeight": 36,
-        "labelCharLength": 1,
-        "zeroFill": 1
-      },
       "stat": [
         {
           "score": 40,
