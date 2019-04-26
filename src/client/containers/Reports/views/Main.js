@@ -17,7 +17,7 @@ import PredefinedReport from 'Components/PageForms/Reports/PredefinedReport'
 
 import RouterLoading from 'Components/RouterLoading'
 
-import ReportCards from '../section/ReportCards'
+import ReportCards from '../section/ReportCardsModule'
 
 import ReactTable from 'react-table'
 
@@ -27,7 +27,7 @@ class Reports extends Component {
     this.state = {
       modalIsOpen: false,
       selectedReportCardKey: null,
-      reportCards: [
+      reportCardsData: [
         {
           key: 'brand-insights',
           icon:
@@ -105,7 +105,7 @@ class Reports extends Component {
   }
 
   render() {
-    const { modalIsOpen, reportCards, selectedReportCardKey } = this.state
+    const { modalIsOpen, reportCardsData, selectedReportCardKey } = this.state
 
     const {
       reports: { data, loading, error },
@@ -126,7 +126,10 @@ class Reports extends Component {
           >
             {this.renderModalInside()}
           </ReportsModal>
-          <ReportCards reportCards={reportCards} openModal={this.openModal} />
+          <ReportCards
+            reportCardsData={reportCardsData}
+            openModal={this.openModal}
+          />
 
           <div className={style.reportsTableContainer}>
             <div className={style.reportsTableHeader}>
