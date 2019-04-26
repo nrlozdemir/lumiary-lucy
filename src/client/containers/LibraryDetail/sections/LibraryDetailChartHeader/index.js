@@ -34,9 +34,6 @@ const Back = (props) => {
 		data: { text }
 	} = props
 
-	console.log(text)
-	console.log(props.data)
-
 	return (
 		<p className={style.backText}>
 			{textEdit(text, props.data)}
