@@ -71,14 +71,13 @@ function parseData(vars){
 
 const Front = (props) => {
 	const { title } = props
-	const { statClassName, statArrowClassName, statDifferenceValue, selected } = parseData(props)
-
-	const barDefaultOptions = {
-		width: 8,
-		maxHeight: 36,
-		labelCharLength: 1,
-		zeroFill: 1
-	}
+	const {
+		statClassName,
+		statArrowClassName,
+		statDifferenceValue,
+		selected,
+		statDifference
+	} = parseData(props)
 
 	return (<div className={statClassName}>
 		<div className={styles.content}>
@@ -90,15 +89,11 @@ const Front = (props) => {
 				<p className={styles.label}>{statDifferenceValue}</p>
 			</div>
 		</div>
-		<div className={styles.bars}>
-			<PureBarChart
-				data={props.data}
-				selected={selected}
-				barStyle={styles.barStyle}
-				barSelectedStyle={styles.barSelectedStyle}
-				options={barDefaultOptions}
-			/>
-		</div>
+		<PureBarChart
+			data={props.data}
+			selected={selected}
+			difference={statDifference}
+		/>
 	</div>)
 }
 
@@ -122,35 +117,25 @@ class Cards extends React.Component {
     return (
       <div className="grid-container col-12">
         <div className={styles.flipWrapper}>
-          {views && (
-						<FlipCard
-							containerClassName={classnames(styles.flipContainer, 'col-3 ml-0')}
-							flipperClassName={styles.flipper}
-							frontClassName={styles.front}
-							backClassName={styles.back}
-						>
-							<Front data={views} title="Views" />
-							<Back data={views} title="Views" />
-						</FlipCard>
-          )}
-          {likes && (
-            <FlipCard>
-							<Front data={likes} title="Likes" />
-							<Back data={likes} title="Likes" />
-						</FlipCard>
-          )}
-          {comments && (
-            <FlipCard>
-							<Front data={comments} title="Comments" />
-							<Back data={comments} title="Comments" />
-						</FlipCard>
-          )}
-          {shares && (
-            <FlipCard>
-							<Front data={shares} title="Shares" />
-							<Back data={shares} title="Shares" />
-						</FlipCard>
-          )}
+          <FlipCard>
+						{views && <Front data={views} title="Views" />}
+						{views && <Back data={views} title="Views" />}
+					</FlipCard>
+
+          <FlipCard>
+						{likes && <Front data={likes} title="Likes" />}
+						{likes && <Back data={likes} title="Likes" />}
+					</FlipCard>
+
+          <FlipCard>
+						{comments && <Front data={comments} title="Comments" />}
+						{comments && <Back data={comments} title="Comments" />}
+					</FlipCard>
+
+					<FlipCard>
+						{shares && <Front data={shares} title="Shares" />}
+						{shares && <Back data={shares} title="Shares" />}
+					</FlipCard>
         </div>
       </div>
     )
