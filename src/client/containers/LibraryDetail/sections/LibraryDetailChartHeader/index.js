@@ -4,47 +4,8 @@ import style from './style.scss'
 import Video from '../VideoComponent'
 import FlipCard from 'Components/FlipCard'
 import ProgressBar from 'Components/ProgressBar'
-
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
-function replaceBoldElement(text) {
-	const regex = new RegExp(/<b>(.*?)<\/b>/g)
-
-	if( ! regex.test(text)){
-		return text
-	}
-
-	const matched = text.match(regex)
-
-	const values = matched.map(val => val.replace(/<\/?b>/g, ''))
-	if ( ! values.length){
-		return text
-	}
-
-	return (<React.Fragment>
-		{text.split(regex).reduce((prev, current, i) => {
-			if( ! i) {
-				return [current]
-			}
-			return prev.concat(
-				values.includes(current)
-				? <strong key={i + current}>{current}</strong>
-				: current
-			);
-		}, [])}
-	</React.Fragment>)
-}
-
-function textEdit(text, item) {
-	text = text.replace('{score}', item.score)
-	text = text.replace('{title}', item.title)
-	text = text.replace('{percentage}', item.percentage)
-	text = replaceBoldElement(text)
-
-	return text
-}
+import { capitalizeFirstLetter } from 'Utils/index'
+import { textEdit } from 'Utils/text'
 
 const Front = (props) => {
 	const { data } = props
@@ -55,7 +16,7 @@ const Front = (props) => {
   >
     <div className={style.progressText}>
       <span className={style.leftTitle}>{capitalizeFirstLetter(data.title)}</span>
-      <span className={style.rightTitle}>{data.score}k</span>
+      <span className={style.rightTitle}>{data.value}k</span>
     </div>
     <ProgressBar
       width={data.percentage}
@@ -70,13 +31,15 @@ const Front = (props) => {
 
 const Back = (props) => {
 	const {
-		data,
 		data: { text }
 	} = props
 
+	console.log(text)
+	console.log(props.data)
+
 	return (
 		<p className={style.backText}>
-			{textEdit(text, data)}
+			{textEdit(text, props.data)}
 		</p>
 	)
 }
