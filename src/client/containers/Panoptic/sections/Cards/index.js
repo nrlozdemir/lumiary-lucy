@@ -21,9 +21,7 @@ const days = [
 function appendDays(data){
   let extendScores = []
   data.map((el, i) => {
-    if( ! el.label){
-      extendScores.push({ label: days[i], score: el })
-    }
+    extendScores.push({ label: days[i], score: el })
   })
   return extendScores
 }
@@ -31,7 +29,6 @@ function appendDays(data){
 function parseData(props){
   const { data, title } = props
   const stats = appendDays(data)
-  console.log(stats)
   const selected = days[new Date().getDay()]
   const selectedPrev = days[
     (day => new Date(day.setDate(day.getDate()-1)).getDay())
