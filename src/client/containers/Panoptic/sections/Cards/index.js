@@ -9,29 +9,29 @@ import CustomBarChart from 'Components/Charts/CustomBarChart'
 import styles from './style.scss'
 
 const days = [
-	'Sunday',
-	'Monday',
-	'Tuesday',
-	'Wednesday',
-	'Thursday',
-	'Friday',
-	'Saturday',
+  'Sunday',
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
 ]
 
 function appendDays(data){
-	let extendScores = []
-	data.map((el, i) => {
-		if( ! el.label){
-			extendScores.push({ label: days[i], score: el })
-		}
-	})
-	return extendScores
+  let extendScores = []
+  data.map((el, i) => {
+    if( ! el.label){
+      extendScores.push({ label: days[i], score: el })
+    }
+  })
+  return extendScores
 }
 
 function parseData(props){
-	const { data, title } = props
-	const stats = appendDays(data)
-	console.log(stats)
+  const { data, title } = props
+  const stats = appendDays(data)
+  console.log(stats)
   const selected = days[new Date().getDay()]
   const selectedPrev = days[
     (day => new Date(day.setDate(day.getDate()-1)).getDay())
@@ -82,7 +82,7 @@ function parseData(props){
 
 const Front = (props) => {
   const { title, data } = props
-	const stats = appendDays(data)
+  const stats = appendDays(data)
   const {
     statClassName,
     statArrowClassName,

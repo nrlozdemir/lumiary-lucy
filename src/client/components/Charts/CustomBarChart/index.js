@@ -4,7 +4,7 @@ import styles from './style.scss'
 
 /*
 Example Usage:
-<CustomBarChart
+<PureBarChart
   data={[
     {"score": 25,	"label": "Sunday"},
     {"score": 48, "label": "Monday"},
