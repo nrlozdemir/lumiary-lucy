@@ -13,12 +13,13 @@
 }
 
 .videoStatsWrapper{
-  width: 320px;
+	width: 320px;
+	height: 472px;
   flex: 0 0 auto;
   margin-left: 40px;
   margin-right: 0px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
 
@@ -51,16 +52,16 @@
       }
     }
 
-    .percentageBlue {
+    .percentageIncrease {
       border-radius: 10px;
       height: 10px;
-      background-color: $color-cool-blue;
+      background-color: #2fd7c4;
       -webkit-transition: width .5s, height .5s;
       transition: width .5s, height .5s;
     }
 
-    .percentagePink {
-      background-color: $color-coral-pink;
+    .percentageDecrease {
+      background-color: #5292e5;
     }
 
     .progressText {
@@ -607,4 +608,17 @@
       }
     }
   }
+}
+
+.backText{
+	font-family: $font-family-ClanOTNews;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  line-height: 1.86;
+  text-align: center;
+  color: $color-white;
+  margin: 0px 20px;
 }

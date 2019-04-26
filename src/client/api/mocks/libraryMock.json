@@ -464,24 +464,28 @@
     },
     "HeaderBarChartMock": [
       {
-        "title": "Views",
+        "title": "views",
         "score": "274.1",
-        "percentage": "14"
+				"percentage": "14",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
-        "title": "Likes",
+        "title": "likes",
         "score": "252.8",
-        "percentage": "72"
+        "percentage": "72",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
-        "title": "Comments",
+        "title": "comments",
         "score": "286.4",
-        "percentage": "56"
+        "percentage": "56",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
-        "title": "Shares",
+        "title": "shares",
         "score": "203.4",
-        "percentage": "28"
+        "percentage": "28",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
