@@ -3,13 +3,15 @@
  * Navbar
  *
  */
-import React from 'react'
+
+import React, { lazy, Suspense } from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { makeSelectLibrary } from 'Reducers/library'
+import Switch from 'Components/Form/Switch'
 
 import style from './style.scss'
 // import PropTypes from 'prop-types';
@@ -26,6 +28,7 @@ const imageClass = classnames('circleImage ' + style.profileImage)
 
 const BackTo = (props) => {
   let link, title = ""
+
   if(typeof(props) != "undefined" && props[1] != null){
     title = props[1]
     link = "/" + props[1]
@@ -34,6 +37,12 @@ const BackTo = (props) => {
     title = "overview"
     link = "/"
   }
+  title = "Back to " + capitalizeFirstLetter(title)
+
+  if(props && props.title){
+    title = capitalizeFirstLetter(props.title)
+  }
+
   return (<div className={style.backTo}>
     <Link to={link}>
       <span className="icon-Left-Arrow-Circle">
@@ -41,7 +50,7 @@ const BackTo = (props) => {
         <span className="path2" />
         <span className="path3" />
       </span>
-      <span className={style.text}>Back to {capitalizeFirstLetter(title)}</span>
+      <span className={style.text}>{title}</span>
     </Link>
   </div>)
 }
@@ -68,7 +77,15 @@ const Default = (props) => {
 }
 
 const SelectedNavLink = (props) => {
-  return(<React.Fragment>{capitalizeFirstLetter(props.title)}</React.Fragment>)
+  return (<React.Fragment>
+		<div>{capitalizeFirstLetter(props.title)}</div>
+		{props.load &&
+			<div className={style.switchInner}>
+				<span>Save Report</span>
+				<Switch />
+			</div>
+		}
+  </React.Fragment>)
 }
 
 const NavTitle = (props) => {
@@ -104,8 +121,14 @@ const SubNavigation = (props) => {
 }
 
 const Selector = (props) => {
-  const url = props.match.url.split('/')
-  const navigation = props.routeConfig
+  const url = props && props.match.url.split('/')
+  const navigation = props && props.routeConfig
+
+  const navigationPathMatch = Object.values(navigation)
+    .filter((r) => r.path == props.match.path
+      && r.navigation
+      && r.navigation.type
+      && r.navigation.type == 'makeTitle')
 
   const navigationSubRoutes = Object.values(navigation)
     .filter((r) => r.path.replace('/', '') == url[1])
@@ -121,7 +144,23 @@ const Selector = (props) => {
     .map((el, i) => el)
     .filter((r) => r.path == url.join("/"))
 
-  if(navigationSubRoutesMatch && navigationSubRoutesMatch.length > 0) {
+  if(navigationPathMatch && navigationPathMatch.length > 0) {
+		const { from, loadComponent } = navigationPathMatch[0].navigation
+    let title = navigationPathMatch[0].navigation.title
+    let backToTitle
+
+    if(from !== null) {
+      title = props.match.params[from].replace("-", " ")
+    }
+    if(navigationPathMatch[0].navigation.backToTitle) {
+      backToTitle = navigationPathMatch[0].navigation.backToTitle
+    }
+
+    return {
+      "leftSide": <BackTo {...url} title={backToTitle} />,
+      "navigation": <SelectedNavLink title={title} load={loadComponent}  />
+    }
+  } else if(navigationSubRoutesMatch && navigationSubRoutesMatch.length > 0) {
     return {
       "leftSide": <BackTo {...url} />,
       "navigation": <SelectedNavLink title={navigationSubRoutesMatch[0].navigation.title} />
