@@ -10,7 +10,11 @@
     border: 1px solid $color-dusk;
     padding: 48px 30px 34px;
     margin: 0 12px;
+    cursor: pointer;
 
+    &:hover {
+      background-color: $color-dusk;
+    }
     &:first-child {
       margin-left: 0;
     }

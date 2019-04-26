@@ -20,6 +20,7 @@ module.exports = {
       'react-tabs',
       'react-router',
       'react-router-dom',
+      'connected-react-router',
       'react-modal',
       'react-dropzone-s3-uploader',
       'react-jw-player',
