@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux'
 import { reducer as formReducer } from 'redux-form'
+import { connectRouter } from 'connected-react-router'
 
 import Library from './library'
 import Quickview from './quickview'
@@ -11,9 +12,9 @@ import GeneratedReport from './generatedReport'
 import app from './app'
 import SelectFilters from './selectFilters'
 
-
 const rootReducer = (history) =>
   combineReducers({
+    router: connectRouter(history),
     app,
     Library,
     Quickview,
@@ -22,8 +23,8 @@ const rootReducer = (history) =>
     LibraryDetail,
     Reports,
     GeneratedReport,
-		form: formReducer,
-		SelectFilters
+    form: formReducer,
+    SelectFilters,
   })
 
 export default rootReducer

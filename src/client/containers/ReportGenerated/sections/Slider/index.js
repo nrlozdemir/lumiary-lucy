@@ -1,7 +1,6 @@
 import React from 'react'
 import ProgressBar from 'Components/ProgressBar'
 import GeneratedReportViewSlider from 'Components/Sliders/ReportGenerated'
-import Switch from 'Components/Form/Switch'
 
 import style from './style.scss'
 
@@ -10,10 +9,6 @@ const Slider = ({ data, changeSelectedVideo, selectedVideo }) => {
     <div className="bg-dark-grey-blue mt-32">
       <div className={style.cardHeader}>
         <p>Top Performing Videos</p>
-        <div className={style.switchInner}>
-          <span>Save Report</span>
-          <Switch />
-        </div>
       </div>
       <GeneratedReportViewSlider
         items={data}

@@ -122,10 +122,45 @@ const routes = [
     }
   },
   {
-    path: '/reports/generated',
+    path: '/reports/brand-insight/:id',
     exact: true,
-    removeNavbar: true,
-    component: 'ReportGenerated',
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
+      loadComponent: true,
+      from: null,
+      title: 'Brand Insights Report',
+      backToTitle: 'Generate New Report'
+    }
+  },
+  {
+    path: '/reports/compare-brands/:id',
+    exact: true,
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
+      loadComponent: true,
+      from: null,
+      title: 'Compare Brands Report',
+      backToTitle: 'Generate New Report'
+    }
+  },
+  {
+    path: '/reports/predefined-reports/:id',
+    exact: true,
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
+      loadComponent: true,
+      from: null,
+      title: 'Predefined Reports',
+      backToTitle: 'Generate New Report'
+    }
+  },
+  {
+    path: '/reports/brand-insight',
+    exact: true,
+    component: 'Reports',
   },
   {
     path: '*',

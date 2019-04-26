@@ -3,7 +3,7 @@
   font-family: $font-family-ClanOT;
   margin-top: 35px;
   margin-bottom: 35px;
-  position: relative;
+  // position: relative;
   // overflow: hidden;
 
   .moduleContainerHeader {
@@ -14,12 +14,10 @@
     font-size: 18px;
     font-family: $font-family-ClanOTBold;
     line-height: 42px;
-    > div {
-      flex: 1;
-    }
     .headerTitle {
       display: flex;
       align-items: center;
+      flex: 1;
       // flex-direction: column;
 
       .moduleInfo {
@@ -50,7 +48,6 @@
         font-size: 16px;
       }
     }
-
     .headerFilters {
       display: flex;
       justify-content: flex-end;
@@ -63,6 +60,7 @@
     }
 
     .headerLegend {
+      flex: 1;
       p{
         font-size: 14px;
         line-height: 1.8rem;
