@@ -7,7 +7,7 @@ const VideoCardList = ({ data }) => {
   return (
     data &&
     data.map((item, index) => (
-      <VideoCard video={item} key={`videolist-${index}`} />
+      <VideoCard video={item} key={`videolist-${index}`} id={`videolist-${index}`}/>
     ))
   )
 }
