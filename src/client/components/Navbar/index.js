@@ -3,7 +3,6 @@
  * Navbar
  *
  */
-
 import React from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
@@ -19,8 +18,7 @@ function capitalizeFirstLetter(string) {
   return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
-const containerClass = classnames('bg-dark-grey-blue ' + style.container)
-const gridContainerClass = classnames('grid-container ' + style.gridContainer)
+const containerClass = classnames('grid-container bg-dark-grey-blue ' + style.container)
 const linksClass = classnames(style.links)
 const profileClass = classnames(style.profile)
 const imageClass = classnames('circleImage ' + style.profileImage)
@@ -151,16 +149,14 @@ const Template = (props) => {
 
   return (
     <div className={containerClass}>
-			<div className={gridContainerClass}>
-				{templateSelector["leftSide"]}
-				<div className={linksClass}>
-					{templateSelector["navigation"]}
-				</div>
-				<div className={profileClass}>
-					<div className="float-right">
-						<img src="https://picsum.photos/30" className={imageClass} />
-						<span>Bleacher Report</span>
-					</div>
+			{templateSelector["leftSide"]}
+			<div className={linksClass}>
+				{templateSelector["navigation"]}
+			</div>
+			<div className={profileClass}>
+				<div className="float-right">
+					<img src="https://picsum.photos/30" className={imageClass} />
+					<span>Bleacher Report</span>
 				</div>
 			</div>
     </div>
