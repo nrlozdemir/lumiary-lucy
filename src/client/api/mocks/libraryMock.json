@@ -131,23 +131,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "174.1",
-        "percentage": "52"
+        "value": "174.1",
+        "percentage": "52",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "152.8",
-        "percentage": "42"
+        "value": "152.8",
+        "percentage": "42",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "186.4",
-        "percentage": "13"
+        "value": "186.4",
+        "percentage": "13",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "103.4",
-        "percentage": "28"
+        "value": "103.4",
+        "percentage": "28",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -465,25 +469,25 @@
     "HeaderBarChartMock": [
       {
         "title": "views",
-        "score": "274.1",
+        "value": "274.1",
 				"percentage": "14",
 				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "likes",
-        "score": "252.8",
+        "value": "252.8",
         "percentage": "72",
 				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "comments",
-        "score": "286.4",
+        "value": "286.4",
         "percentage": "56",
 				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "shares",
-        "score": "203.4",
+        "value": "203.4",
         "percentage": "28",
 				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
@@ -803,23 +807,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "374.1",
-        "percentage": "64"
+        "value": "374.1",
+        "percentage": "64",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "352.8",
-        "percentage": "22"
+        "value": "352.8",
+        "percentage": "22",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "386.4",
-        "percentage": "6"
+        "value": "386.4",
+        "percentage": "6",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "303.4",
-        "percentage": "28"
+        "value": "303.4",
+        "percentage": "28",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -1137,23 +1145,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "474.1",
-        "percentage": "99"
+        "value": "474.1",
+        "percentage": "99",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "452.8",
-        "percentage": "42"
+        "value": "452.8",
+        "percentage": "42",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "486.4",
-        "percentage": "77"
+        "value": "486.4",
+        "percentage": "77",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "403.4",
-        "percentage": "28"
+        "value": "403.4",
+        "percentage": "28",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -1471,23 +1483,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "574.1",
-        "percentage": "34"
+        "value": "574.1",
+        "percentage": "34",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "552.8",
-        "percentage": "36"
+        "value": "552.8",
+        "percentage": "36",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "586.4",
-        "percentage": "88"
+        "value": "586.4",
+        "percentage": "88",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "503.4",
-        "percentage": "66"
+        "value": "503.4",
+        "percentage": "66",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -1805,23 +1821,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "874.1",
-        "percentage": "12"
+        "value": "874.1",
+        "percentage": "12",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "352.8",
-        "percentage": "42"
+        "value": "352.8",
+        "percentage": "42",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "186.4",
-        "percentage": "99"
+        "value": "186.4",
+        "percentage": "99",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "103.4",
-        "percentage": "99"
+        "value": "103.4",
+        "percentage": "99",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -2139,23 +2159,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "674.1",
-        "percentage": "15"
+        "value": "674.1",
+        "percentage": "15",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "652.8",
-        "percentage": "30"
+        "value": "652.8",
+        "percentage": "30",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "686.4",
-        "percentage": "75"
+        "value": "686.4",
+        "percentage": "75",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "603.4",
-        "percentage": "90"
+        "value": "603.4",
+        "percentage": "90",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -2473,23 +2497,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "814.1",
-        "percentage": "14"
+        "value": "814.1",
+        "percentage": "14",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "312.8",
-        "percentage": "18"
+        "value": "312.8",
+        "percentage": "18",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "116.4",
-        "percentage": "16"
+        "value": "116.4",
+        "percentage": "16",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "113.4",
-        "percentage": "12"
+        "value": "113.4",
+        "percentage": "12",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -2807,23 +2835,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "74.1",
-        "percentage": "64"
+        "value": "74.1",
+        "percentage": "64",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "52.8",
-        "percentage": "42"
+        "value": "52.8",
+        "percentage": "42",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "16.4",
-        "percentage": "56"
+        "value": "16.4",
+        "percentage": "56",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "31.4",
-        "percentage": "28"
+        "value": "31.4",
+        "percentage": "28",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -3141,23 +3173,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "14.1",
-        "percentage": "74"
+        "value": "14.1",
+        "percentage": "74",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "22.8",
-        "percentage": "72"
+        "value": "22.8",
+        "percentage": "72",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "16.4",
-        "percentage": "76"
+        "value": "16.4",
+        "percentage": "76",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "3.4",
-        "percentage": "78"
+        "value": "3.4",
+        "percentage": "78",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -3475,23 +3511,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "64.1",
-        "percentage": "50"
+        "value": "64.1",
+        "percentage": "50",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "152.8",
-        "percentage": "50"
+        "value": "152.8",
+        "percentage": "50",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "86.4",
-        "percentage": "50"
+        "value": "86.4",
+        "percentage": "50",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "12.4",
-        "percentage": "50"
+        "value": "12.4",
+        "percentage": "50",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -3809,23 +3849,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "10.1",
-        "percentage": "1"
+        "value": "10.1",
+        "percentage": "1",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "32.8",
-        "percentage": "10"
+        "value": "32.8",
+        "percentage": "10",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "16.4",
-        "percentage": "20"
+        "value": "16.4",
+        "percentage": "20",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "20.4",
-        "percentage": "30"
+        "value": "20.4",
+        "percentage": "30",
+				"text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
