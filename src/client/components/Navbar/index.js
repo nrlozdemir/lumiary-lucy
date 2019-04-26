@@ -11,24 +11,12 @@ import classnames from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { makeSelectLibrary } from 'Reducers/library'
-<<<<<<< HEAD
-import { capitalizeFirstLetter } from 'Utils/index'
-=======
 import Switch from 'Components/Form/Switch'
->>>>>>> dev
-
+import { capitalizeFirstLetter } from 'Utils/index'
 import style from './style.scss'
 // import PropTypes from 'prop-types';
 
-<<<<<<< HEAD
-const containerClass = classnames('bg-dark-grey-blue ' + style.container)
-=======
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
-
 const containerClass = classnames('grid-container bg-dark-grey-blue ' + style.container)
->>>>>>> dev
 const linksClass = classnames(style.links)
 const profileClass = classnames(style.profile)
 const imageClass = classnames('circleImage ' + style.profileImage)
