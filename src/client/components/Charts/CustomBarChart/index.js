@@ -4,7 +4,7 @@ import styles from './style.scss'
 
 /*
 Example Usage:
-<PureBarChart
+<CustomBarChart
   data={[
     {"score": 25,	"label": "Sunday"},
     {"score": 48, "label": "Monday"},
@@ -33,7 +33,7 @@ const defaultProps = {
   }
 }
 
-export default class index extends React.Component {
+export default class CustomBarChart extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -76,4 +76,4 @@ export default class index extends React.Component {
   }
 }
 
- index.defaultProps = defaultProps
+CustomBarChart.defaultProps = defaultProps

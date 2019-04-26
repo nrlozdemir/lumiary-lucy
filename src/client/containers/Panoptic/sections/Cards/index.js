@@ -5,7 +5,7 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectFlipCards } from 'Reducers/panoptic'
 import classnames from 'classnames'
 import FlipCard from 'Components/FlipCard'
-import PureBarChart from 'Components/Charts/Panoptic/PureBarChart'
+import CustomBarChart from 'Components/Charts/CustomBarChart'
 import styles from './style.scss'
 
 const days = [
@@ -101,7 +101,7 @@ const Front = (props) => {
         <p className={styles.label}>{statDifferenceValue}</p>
       </div>
     </div>
-    <PureBarChart
+    <CustomBarChart
       data={stats}
       selected={selected}
       difference={statDifference}
