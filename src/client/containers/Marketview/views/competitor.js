@@ -19,7 +19,6 @@ import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
 import RouterLoading from 'Components/RouterLoading'
 
 import style from '../style.scss'
-import { randomKey } from '../../../utils'
 
 const chartTickOptions = {
   stepSize: 250000,
@@ -67,7 +66,6 @@ export class Competitor extends React.Component {
         topPerformingPropertiesByCompetitorsData,
       },
     } = this.props
-
     return (
       <React.Fragment>
         <div className="grid-collapse">
@@ -85,9 +83,19 @@ export class Competitor extends React.Component {
             action={this.getCompetitorVideos}
             filters={[
               {
-                type: 'platform',
-                selectKey: 'asdadasdasdasd',
-                placeHolder: 'Engagement',
+                type: 'videoProperty',
+                selectKey: 'videoProperty',
+                placeHolder: 'videoProperty',
+              },
+              {
+                type: 'engagement',
+                selectKey: 'engagement',
+                placeHolder: 'engagement',
+              },
+              {
+                type: 'timeRange',
+                selectKey: 'timeRange',
+                placeHolder: 'timeRange',
               },
             ]}
             references={[
@@ -120,9 +128,9 @@ export class Competitor extends React.Component {
             action={this.getSimilarProperties}
             filters={[
               {
-                type: 'engagement',
-                selectKey: 'asdadasdasdasdasdasdasd',
-                placeHolder: 'Engagement',
+                type: 'timeRange',
+                selectKey: 'timeRange',
+                placeHolder: 'timeRange',
               },
             ]}
           />
@@ -136,9 +144,9 @@ export class Competitor extends React.Component {
             action={this.getTopPerformingPropertiesByCompetitors}
             filters={[
               {
-                type: 'engagement',
-                selectKey: 'asdadasdasdasdasdasdasd',
-                placeHolder: 'Engagement',
+                type: 'videoProperty',
+                selectKey: 'videoProperty',
+                placeHolder: 'videoProperty',
               },
             ]}
             references={[

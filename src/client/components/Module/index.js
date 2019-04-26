@@ -38,12 +38,6 @@ export class Module extends React.Component {
   }
 
   render() {
-    const moduleContainer = cx(
-      'shadow-1 grid-container col-12',
-      style.moduleContainer
-    )
-    const referencesClass = cx('font-secondary-second', style.references)
-
     const {
       children,
       title,
@@ -51,9 +45,16 @@ export class Module extends React.Component {
       legend,
       filters,
       references,
+      customModuleContainer,
     } = this.props
     const { infoShow } = this.state
-    console.log(filters)
+    const moduleContainer = cx(
+      'shadow-1 grid-container col-12',
+      style.moduleContainer,
+      customModuleContainer
+    )
+    const referencesClass = cx('font-secondary-second', style.references)
+
     return (
       <div className={moduleContainer}>
         <div className={style.moduleContainerHeader}>

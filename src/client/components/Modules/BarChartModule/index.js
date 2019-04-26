@@ -10,13 +10,14 @@ const BarChartModule = ({
   tickOptions,
   title,
   titleLabels,
+  references,
   width,
   height,
   filters,
   action,
   moduleKey,
-  references,
 }) => {
+  console.log(action)
   return (
     <Module
       moduleKey={moduleKey}
@@ -42,16 +43,14 @@ const BarChartModule = ({
         )
       }
     >
-      <div className="col-12-no-gutter">
-        {barData && (
-          <BarChart
-            barDurationData={barData}
-            tickOptions={tickOptions}
-            width={width}
-            height={height}
-          />
-        )}
-      </div>
+      {barData && (
+        <BarChart
+          barDurationData={barData}
+          tickOptions={tickOptions}
+          width={width}
+          height={height}
+        />
+      )}
     </Module>
   )
 }

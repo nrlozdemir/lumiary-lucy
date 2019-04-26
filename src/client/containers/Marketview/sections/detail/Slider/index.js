@@ -5,6 +5,7 @@ import MarketViewSlider from 'Components/Sliders/Marketview'
 import SelectFilters from 'Components/SelectFilters'
 
 import style from 'Containers/Marketview/style.scss'
+import { Module } from '../../../../../components/Module'
 
 export default class Slider extends React.Component {
   constructor(props) {
@@ -17,25 +18,14 @@ export default class Slider extends React.Component {
   }
 
   render() {
-    const { selectLikes, selectPlatforms, selectDate } = this.state
-    const {
-      data,
-      selectedVideo,
-      changeSelectedVideo,
-      className,
-      title = 'Top Performing Videos By Platform',
-    } = this.props
-    const containerClasses = classnames('bg-dark-grey-blue', className)
-    const titleClasses = classnames(style.cardTitle, 'col-12', 'pt-32')
+    const { data, selectedVideo, changeSelectedVideo } = this.props
 
     return (
-      <div className={containerClasses}>
-        <div className={titleClasses} style={{ marginBottom: 0 }}>
-          <span>{title}</span>
-          <div className={style.selects} />
+      <Module customModuleContainer={style.sliderModuleContainer}>
+        <div className="col-12-no-gutter">
+          <MarketViewSlider items={data} changeVideo={changeSelectedVideo} />
         </div>
-        <MarketViewSlider items={data} changeVideo={changeSelectedVideo} />
-        <div className={style.cardContainer}>
+        <div className="col-12-no-gutter">
           {selectedVideo &&
             selectedVideo.options.map((card, index) => (
               <div className={style.card} key={index}>
@@ -62,7 +52,7 @@ export default class Slider extends React.Component {
               </div>
             ))}
         </div>
-      </div>
+      </Module>
     )
   }
 }

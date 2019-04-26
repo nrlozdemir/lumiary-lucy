@@ -92,6 +92,7 @@ function* getCompetitorTopVideosMarketview() {
 function* getSimilarProperties() {
   try {
     const payload = yield call(getSimilarPropertiesApi)
+    console.log(payload)
     yield put(actions.getSimilarPropertiesSuccess(payload))
   } catch (error) {
     yield put(actions.getSimilarPropertiesFailure(error))
