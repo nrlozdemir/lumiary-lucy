@@ -26,22 +26,24 @@ const libraryDetailCard = (data, index) => {
 }
 
 const LibraryDetailChartHeader = ({ barChartData, videoUrl, title, socialIcon }) => (
-  <div className={classnames("grid-container mr-20 ml-20 mt-72", style.containerClass)}>
-    <div className={classnames(
-      "col-6",
-      style.videoWrapper)
-    }>
-      <Video src={videoUrl} title={title} socialIcon={socialIcon} />
-    </div>
-    <div className={classnames(
-      "col-6",
-      style.videoStatsWrapper)}
-    >
-      {barChartData.map(
-        (data, index) => libraryDetailCard(data, index))
-      }
-    </div>
-  </div>
+	<div className="grid-container col-12 mt-48">
+		<div className={classnames("mt-72", style.containerClass)}>
+			<div className={classnames(
+				"col-6",
+				style.videoWrapper)
+			}>
+				<Video src={videoUrl} title={title} socialIcon={socialIcon} />
+			</div>
+			<div className={classnames(
+				"col-6",
+				style.videoStatsWrapper)}
+			>
+				{barChartData.map(
+					(data, index) => libraryDetailCard(data, index))
+				}
+			</div>
+		</div>
+	</div>
 )
 
 export default LibraryDetailChartHeader

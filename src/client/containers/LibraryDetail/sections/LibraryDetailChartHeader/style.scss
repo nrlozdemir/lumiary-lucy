@@ -9,13 +9,14 @@
 .videoWrapper {
   position: relative;
   flex: 1 1 auto;
+  margin-left: 0px;
 }
 
 .videoStatsWrapper{
   width: 320px;
   flex: 0 0 auto;
   margin-left: 40px;
-  margin-right: 20px;
+  margin-right: 0px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
