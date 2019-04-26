@@ -25,8 +25,8 @@ const defaultProps = {
 
 export default class FlipCard extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
+    this.state = {}
   }
 
   render() {
@@ -53,10 +53,10 @@ export default class FlipCard extends React.Component {
           </div>
         </div>
       </React.Fragment>
-    );
+    )
   }
 }
 
-FlipCard.defaultProps = defaultProps;
+FlipCard.defaultProps = defaultProps
 
 

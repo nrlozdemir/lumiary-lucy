@@ -5,7 +5,7 @@ import styles from './style.scss'
 /*
 Example Usage:
 <PureBarChart
-  data={{stat: [
+  data={[
     {"score": 25,	"label": "Sunday"},
     {"score": 48, "label": "Monday"},
     {"score": 36, "label": "Tuesday"},
@@ -13,7 +13,7 @@ Example Usage:
     {"score": 88, "label": "Thursday"},
     {"score": 26, "label": "Friday"},
     {"score": 72, "label": "Saturday"}
-  ]}}
+  ]}
   selected="Sunday"
   difference={-20} />
 
@@ -35,15 +35,14 @@ const defaultProps = {
 
 export default class index extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {};
+    super(props)
   }
 
   render() {
     const {
+      data,
       options,
       selected,
-      data : { stat },
       barsWrapperStyle,
       barStyle,
       barSelectedStyle,
@@ -55,7 +54,7 @@ export default class index extends React.Component {
     return (
       <React.Fragment>
         <div className={barsWrapperStyle}>
-          {stat && stat.map((element, index) => {
+          {data && data.map((element, index) => {
             const elementScore = (zeroFill > 0 && element.score === 0)
               ? (element.score + zeroFill)
               : element.score
@@ -73,8 +72,8 @@ export default class index extends React.Component {
           })}
         </div>
       </React.Fragment>
-    );
+    )
   }
 }
 
- index.defaultProps = defaultProps;
+ index.defaultProps = defaultProps

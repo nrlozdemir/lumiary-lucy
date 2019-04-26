@@ -8,29 +8,40 @@ import FlipCard from 'Components/FlipCard'
 import PureBarChart from 'Components/Charts/Panoptic/PureBarChart'
 import styles from './style.scss'
 
-function parseData(vars){
-  const days = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ]
+const days = [
+	'Sunday',
+	'Monday',
+	'Tuesday',
+	'Wednesday',
+	'Thursday',
+	'Friday',
+	'Saturday',
+]
 
-  const { stat } = vars.data
-  const { title } = vars
+function appendDays(data){
+	let extendScores = []
+	data.map((el, i) => {
+		if( ! el.label){
+			extendScores.push({ label: days[i], score: el })
+		}
+	})
+	return extendScores
+}
+
+function parseData(props){
+	const { data, title } = props
+	const stats = appendDays(data)
+	console.log(stats)
   const selected = days[new Date().getDay()]
   const selectedPrev = days[
     (day => new Date(day.setDate(day.getDate()-1)).getDay())
     (new Date)
   ]
-  const statSelected = Object.values(stat).filter(
-    (word) => word.label === selected
+  const statSelected = Object.values(stats).filter(
+    (day) => stats && day.label === selected
   )
-  const statSelectedPrev = Object.values(stat).filter(
-    (word) => word.label === selectedPrev
+  const statSelectedPrev = Object.values(stats).filter(
+    (day) => stats && day.label === selectedPrev
   )
   const todayScore = statSelected[0].score
   const previousDayScore = statSelectedPrev[0].score
@@ -70,7 +81,8 @@ function parseData(vars){
 }
 
 const Front = (props) => {
-  const { title } = props
+  const { title, data } = props
+	const stats = appendDays(data)
   const {
     statClassName,
     statArrowClassName,
@@ -90,7 +102,7 @@ const Front = (props) => {
       </div>
     </div>
     <PureBarChart
-      data={props.data}
+      data={stats}
       selected={selected}
       difference={statDifference}
     />
