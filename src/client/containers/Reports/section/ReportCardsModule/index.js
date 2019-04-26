@@ -1,10 +1,10 @@
 import React from 'react'
 import style from './style.scss'
 
-const ReportsCards = ({ openModal, reportCards }) => {
+const ReportsCards = ({ openModal, reportCardsData }) => {
   return (
     <div className={style.reportsCardContainer}>
-      {reportCards.map((card, index) => (
+      {reportCardsData.map((card, index) => (
         <div
           className={style.reportsCard}
           onClick={() => openModal(card)}
