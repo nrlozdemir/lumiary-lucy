@@ -31,12 +31,6 @@ const defaultProps = {
   legendLabelsFontColor: '#ffffff',
   legendLabelsFontFamily: 'ClanOTBold',
   legendLabelsFontSize: 12,
-
-  tooltipFontFamily: 'ClanOTBold',
-  tooltipFontSize: 12,
-  tooltipFontStyle: 'normal',
-  tooltipFontColor: '#ffffff',
-  tooltipSpacing: 2,
 }
 
 const dataLabelPlugins = (value, func, item) => {
