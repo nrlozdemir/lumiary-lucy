@@ -59,7 +59,7 @@
     "chartjs-plugin-style": "^0.3.2",
     "classnames": "^2.2.5",
     "compression": "^1.7.2",
-    "connected-react-router": "^6.0.0",
+    "connected-react-router": "^6.1.0",
     "cors": "^2.8.4",
     "css-loader": "^0.28.10",
     "express": "^4.14.1",
