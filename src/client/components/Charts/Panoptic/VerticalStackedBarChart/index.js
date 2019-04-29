@@ -47,11 +47,11 @@ class VerticalStackedBarChart extends React.Component {
   }
 
   render() {
-    const { data } = this.props
+    const { data, width = 590, height = 360, plugin } = this.props
     return (
       <Bar
-        width={590}
-        height={360}
+        width={width}
+        height={height}
         backgroundColor="#242b49"
         data={data}
         datasetKeyProvider={this.datasetKeyProvider}

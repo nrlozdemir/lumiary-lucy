@@ -5,61 +5,26 @@
       {
         "label": "Barstool Sports",
         "backgroundColor": "#51adc0",
-        "borderColor": ["#242b49", "#242b49", "#242b49", "#242b49"],
-        "borderWidth": {
-          "top": 2,
-          "right": 0,
-          "bottom": 0,
-          "left": 0
-        },
         "data": [10, 3, 5, 1]
       },
       {
         "label": "SB Nation",
         "backgroundColor": "#8567f0",
-        "borderColor": ["#242b49", "#242b49", "#242b49", "#242b49"],
-        "borderWidth": {
-          "top": 2,
-          "right": 0,
-          "bottom": 0,
-          "left": 0
-        },
         "data": [12, 13, 2, 5]
       },
       {
         "label": "ESPN",
         "backgroundColor": "#D0506C",
-        "borderColor": ["#242b49", "#242b49", "#242b49", "#242b49"],
-        "borderWidth": {
-          "top": 2,
-          "right": 0,
-          "bottom": 0,
-          "left": 0
-        },
         "data": [4, 5, 4, 2]
       },
       {
         "label": "Scout Media",
         "backgroundColor": "#acb0be",
-        "borderColor": ["#242b49", "#242b49", "#242b49", "#242b49"],
-        "borderWidth": {
-          "top": 2,
-          "right": 0,
-          "bottom": 0,
-          "left": 0
-        },
         "data": [9, 8, 1, 4]
       },
       {
         "label": "Fansided",
         "backgroundColor": "#5a6386",
-        "borderColor": ["#242b49", "#242b49", "#242b49", "#242b49"],
-        "borderWidth": {
-          "top": 2,
-          "right": 0,
-          "bottom": 0,
-          "left": 0
-        },
         "data": [9, 8, 1, 4]
       }
     ]

@@ -129,6 +129,23 @@ export const initialState = fromJS({
     ],
   },
   values: {},
+  defaults: {
+    engagement: 'Views',
+    platform: 'All Platforms',
+    aspectRatio: '16:9',
+    resolution: '4K',
+    frameRate: '24',
+    duration: '0-15',
+    pacing: 'fast',
+    videoFormat: 'liveAction',
+    videoProperty: 'aspect-ratio',
+    audienceAge: '10-',
+    audienceGender: 'male',
+    talentAge: '10-',
+    talentGender: 'male',
+    colorTempature: 'happy-sad',
+    timeRange: 'Today',
+  },
 })
 
 const selectFiltersReducer = (state = initialState, action) => {

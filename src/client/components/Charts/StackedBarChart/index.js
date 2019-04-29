@@ -2,7 +2,11 @@ import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import { barDataOptions } from './options'
 
-const TotalViewsBarChart = ({ barData }) => {
+const StackedBarChart = ({
+    barData,
+    height = 300,
+    width = 500,
+  }) => {
   const plugins = [
     {
       beforeDraw: function(chart, easing) {
@@ -38,7 +42,7 @@ const TotalViewsBarChart = ({ barData }) => {
         ctx.restore()
       },
     },
-  ]
+	]
   return (
     <Bar
       data={{
@@ -46,7 +50,7 @@ const TotalViewsBarChart = ({ barData }) => {
         datasets: barData.datasets.map((data, index) => {
           const indexValues = data.data.map((v, i) => {
             return barData.datasets.map((d) => d.data[i])
-          })
+					})
           return {
             ...data,
             data: data.data.map((value, i) => {
@@ -59,12 +63,12 @@ const TotalViewsBarChart = ({ barData }) => {
           }
         }),
       }}
-      width={500}
+      width={width}
       options={{ ...barDataOptions }}
       plugins={plugins}
-      height={300}
+      height={height}
     />
   )
 }
 
-export default TotalViewsBarChart
+export default StackedBarChart
