@@ -1,0 +1,35 @@
+.videoComparisonContainer {
+  background-color: $color-dark-grey-blue;
+  font-family: $font-family-ClanOT;
+  margin-top: 35px;
+  margin-bottom: 35px;
+  position: relative;
+  overflow: hidden;
+}
+
+.headerLabel {
+  p {
+    font-size: 14px;
+    font-family: $font-family-ClanOTNews;
+  }
+}
+
+.redRound {
+  background-color: $color-coral-pink;
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  border-radius: 100%;
+  vertical-align: middle;
+  margin-right: 10px;
+}
+
+.duskRound {
+  background-color: $color-cool-blue;
+  width: 16px;
+  height: 16px;
+  display: inline-flex;
+  border-radius: 100%;
+  vertical-align: middle;
+  margin-right: 10px;
+}
