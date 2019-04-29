@@ -121,7 +121,7 @@ export class Main extends React.Component {
                 {platformsValues.map((el, i) => (
                   <div key={i} className={classnames("col-6", style.cardBlock)}>
                     <div className={style.card}>
-                      <h1>
+                      <h1 className={classnames({[style.rightVideoTitle]: i !== 0})}>
                         {i == 0
                           ? "Best Performing Videos"
                           : "Underperforming Videos"
