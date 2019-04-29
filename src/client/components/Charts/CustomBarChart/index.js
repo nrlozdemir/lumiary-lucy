@@ -49,7 +49,10 @@ export default class CustomBarChart extends React.Component {
       difference
     } = this.props
     const zeroFill = parseInt(options.zeroFill)
-    const aspectRatio = (options.maxHeight / 100).toFixed(2)
+		const statMax = Object.values(data).reduce((prev, next) => {
+			return (prev.score < next.score) ? next : prev
+		})
+		const aspectRatio = statMax && (options.maxHeight / statMax.score).toFixed(2)
 
     return (
       <React.Fragment>
