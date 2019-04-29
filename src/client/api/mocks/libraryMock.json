@@ -20,6 +20,7 @@
     "frameRate": 24,
     "resolution": "720p",
     "pacing": "Slow",
+    "cvScore": 88.5,
     "ColorTempMock": {
       "colorTempData": [
         {
@@ -358,6 +359,7 @@
     "frameRate": 30,
     "resolution": "720p",
     "pacing": "Slow",
+    "cvScore": 67.1,
     "ColorTempMock": {
       "colorTempData": [
         {
@@ -696,6 +698,7 @@
     "frameRate": 24,
     "resolution": "720p",
     "pacing": "Fast",
+    "cvScore": 93.8,
     "ColorTempMock": {
       "colorTempData": [
         {
@@ -1034,6 +1037,7 @@
     "frameRate": 24,
     "resolution": "4K",
     "pacing": "Medium",
+    "cvScore": 42.0,
     "ColorTempMock": {
       "colorTempData": [
         {
@@ -1372,6 +1376,7 @@
     "frameRate": 30,
     "resolution": "1080p",
     "pacing": "Medium",
+    "cvScore": 65.3,
     "ColorTempMock": {
       "colorTempData": [
         {
@@ -1710,6 +1715,7 @@
     "frameRate": 50,
     "resolution": "4K",
     "pacing": "Medium",
+    "cvScore": 84.6,
     "ColorTempMock": {
       "colorTempData": [
         {
@@ -2048,6 +2054,7 @@
     "frameRate": 24,
     "resolution": "1080p",
     "pacing": "Slow",
+    "cvScore": 23.7,
     "ColorTempMock": {
       "colorTempData": [
         {
@@ -2386,6 +2393,7 @@
     "frameRate": 30,
     "resolution": "480p",
     "pacing": "Fast",
+    "cvScore": 99.3,
     "ColorTempMock": {
       "colorTempData": [
         {
@@ -2724,6 +2732,7 @@
     "frameRate": 30,
     "resolution": "1080p",
     "pacing": "Fast",
+    "cvScore": 13.2,
     "ColorTempMock": {
       "colorTempData": [
         {
@@ -3062,6 +3071,7 @@
     "frameRate": 30,
     "resolution": "1080p",
     "pacing": "Slow",
+    "cvScore": 61.9,
     "ColorTempMock": {
       "colorTempData": [
         {
@@ -3400,6 +3410,7 @@
     "frameRate": 24,
     "resolution": "480p",
     "pacing": "Medium",
+    "cvScore": 87.5,
     "ColorTempMock": {
       "colorTempData": [
         {
@@ -3738,6 +3749,7 @@
     "frameRate": 50,
     "resolution": "360p",
     "pacing": "Fast",
+    "cvScore": 92.0,
     "ColorTempMock": {
       "colorTempData": [
         {
