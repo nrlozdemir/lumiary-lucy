@@ -49,13 +49,22 @@ function* getColorTemperatureData() {
 function* getFilteringSectionData() {
   try {
     const payload = yield call(getPanopticDataApi)
-
     const shuffleData = {
       doughnutData: {
-        ...payload.verticalStackedChartData.doughnutData,
-        average: _.shuffle(
-          payload.verticalStackedChartData.doughnutData.average
-        ),
+        labels: payload.verticalStackedChartData.doughnutData.labels,
+        datasets: [
+          {
+            backgroundColor:
+              payload.verticalStackedChartData.doughnutData.datasets[0]
+                .backgroundColor,
+            data: _.shuffle(
+              payload.verticalStackedChartData.doughnutData.datasets[0].data
+            ),
+            hoverBackgroundColor:
+              payload.verticalStackedChartData.doughnutData.datasets[0]
+                .hoverBackgroundColor,
+          },
+        ],
       },
       stackedChartData: {
         ...payload.verticalStackedChartData.stackedChartData,
@@ -63,9 +72,6 @@ function* getFilteringSectionData() {
           payload.verticalStackedChartData.stackedChartData.datasets
         ),
       },
-      doughnutRoundData: _.shuffle(
-        payload.verticalStackedChartData.doughnutRoundData
-      ),
     }
     yield put(actions.getFilteringSectionDataSuccess(shuffleData))
   } catch (err) {
@@ -124,10 +130,13 @@ function* getAudienceAgeSliderData() {
   try {
     const payload = yield call(getAudienceDataApi)
     const randomImage = (image) => {
-      return image.replace(/image=(\d+)/g, 'image=' + Math.floor(Math.random(1) * Math.floor(30)))
+      return image.replace(
+        /image=(\d+)/g,
+        'image=' + Math.floor(Math.random(1) * Math.floor(30))
+      )
     }
-		const data = payload.ageSlider
-		data.map(element => element.image = randomImage(element.image))
+    const data = payload.ageSlider
+    data.map((element) => (element.image = randomImage(element.image)))
     yield put(actions.getAudienceAgeSliderDataSuccess(data))
   } catch (err) {
     yield put(actions.getAudienceAgeSliderDataError(err))
