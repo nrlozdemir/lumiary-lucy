@@ -426,9 +426,19 @@
 	},
 	"verticalStackedChartData": {
     "doughnutData": {
-      "title": "Frame Rate",
-      "secondTitle": "24fps",
-      "average": [30, 12, 6, 52]
+      "labels": [
+        "0-15 seconds",
+        "15-30 seconds",
+        "30-45 seconds",
+        "45-60 seconds"
+      ],
+      "datasets": [
+        {
+          "data": [42, 24, 16, 18],
+          "backgroundColor": ["#acb0be", "#8567f0", "#D0506C", "#51adc0"],
+          "hoverBackgroundColor": ["#acb0be", "#8567f0", "#D0506C", "#51adc0"]
+        }
+      ]
     },
     "stackedChartData": {
       "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
