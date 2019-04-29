@@ -27,9 +27,18 @@
 	left: -1px; // -1px for container border
 	right: -1px; // -1px for container border
 	height: 52px;
-	background-color: rgba($color-dark-grey-blue, 0.8);
+  // background-color: rgba($color-dark-grey-blue, 0.8);
+  background-color: $color-dark-grey-blue;
+  opacity: .8;
 	z-index: 11;
 	padding: 0 24px;
+}
+
+.percentageWrapper {
+  opacity: .8;
+  position: absolute;
+  right: 80px;
+  top: 15px;
 }
 
 .bar {

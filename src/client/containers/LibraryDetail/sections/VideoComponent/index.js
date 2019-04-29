@@ -16,7 +16,7 @@ class Video extends Component {
       videoPlayButton
 
     let videoMethods = {
-      renderVideoPlayButton: function() {
+      renderVideoPlayButton: function () {
         if (videoWrapper.contains(video)) {
           this.formatVideoPlayButton()
           videoPlayButton = videoWrapper.getElementsByClassName(
@@ -26,7 +26,7 @@ class Video extends Component {
         }
       },
 
-      formatVideoPlayButton: function() {
+      formatVideoPlayButton: function () {
         videoWrapper.insertAdjacentHTML(
           'beforeend',
           '\
@@ -38,7 +38,7 @@ class Video extends Component {
         )
       },
 
-      hideVideoPlayButton: function() {
+      hideVideoPlayButton: function () {
         if (
           Object.values(videoPlayButton.classList).indexOf('is-hidden') > -1
         ) {
@@ -68,7 +68,7 @@ class Video extends Component {
 
   render() {
     const { src, poster = '', title, socialIcon, style, className, cvScore, id } = this.props
-		const classes = classnames('video-wrapper', className, styles.container)
+    const classes = classnames('video-wrapper', className, styles.container)
     const iconClass = classnames(
       socialIconSelector(socialIcon) + ' ' + styles.icon
     )
@@ -83,33 +83,34 @@ class Video extends Component {
           controls={false}
           poster={poster}
         />
-        <div className={styles.barOpacity}></div>
-				<div className={styles.bar}>
-					<div className={styles.barTitle}>
-						<span className={iconClass} />
-						{title}
-					</div>
-					<div className={styles.barChart}>
-						<div className={styles.barChartInfo}>
-							<div className={styles.percentageWrapper}>
-								<PercentageBarGraph
-									backgroundColor='rgba(48, 58, 93, 0.8)'
-									customClass={styles.libraryPercentageGraph}
-									id={`videolist-${id}`}
-									percentage={cvScore}
-									disableLabels={true}
-									color='#2fd7c4'
-									lineCount={30}
-									height={19}
-									width={67}
-									xSmall
-								/>
-							</div>
-							<span>{cvScore}</span>
-						</div>
-					</div>
+        <div className={styles.barOpacity}>
+          <div className={styles.percentageWrapper}>
+            <PercentageBarGraph
+              backgroundColor='#303a5d'
+              customClass={styles.libraryPercentageGraph}
+              id={`videolist-${id}`}
+              percentage={cvScore}
+              disableLabels={true}
+              color='#2fd7c4'
+              lineCount={30}
+              height={19}
+              width={67}
+              xSmall
+            />
+          </div>
+        </div>
+        <div className={styles.bar}>
+          <div className={styles.barTitle}>
+            <span className={iconClass} />
+            {title}
+          </div>
+          <div className={styles.barChart}>
+            <div className={styles.barChartInfo}>
+              <span>{cvScore}</span>
+            </div>
+          </div>
 
-				</div>
+        </div>
       </div>
     )
   }
