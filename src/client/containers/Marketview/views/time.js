@@ -68,7 +68,8 @@ export class Time extends React.Component {
     } = this.props
     const { activeDay } = this.state
 
-    const selectedDayData = marketviewDetailTime && marketviewDetailTime[activeDay]
+		const selectedDayData = marketviewDetailTime && marketviewDetailTime[activeDay]
+		console.log(marketviewDetailTime)
     if (!selectedVideo || marketview.loading || !marketviewDetailTime) {
       return <RouterLoading />
     }
