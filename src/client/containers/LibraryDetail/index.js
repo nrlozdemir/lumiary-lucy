@@ -70,15 +70,14 @@ export class LibraryDetail extends React.Component {
         barChartData,
         doughnutLineChartData,
         colorTempData,
-        shotByShotData
+				shotByShotData
       },
       library: { videos },
       match: { params: { videoId } }
     } = this.props
 
-    const { videoUrl, title, socialIcon } = videos.find(({ id }) => id == videoId) || {}
+		const { videoUrl, title, socialIcon, cvScore, id } = videos.find(({ id }) => id == videoId) || {}
 
-    let lineChartDataCombined = null
     let radarDataCombined = null
 
     if (shotByShotData) {
@@ -87,11 +86,13 @@ export class LibraryDetail extends React.Component {
 
     return (
       <React.Fragment>
-        {barChartData && <LibraryDetailChartHeader
+        {barChartData && cvScore && <LibraryDetailChartHeader
           barChartData={barChartData}
           videoUrl={videoUrl}
           title={title}
-          socialIcon={socialIcon}
+					socialIcon={socialIcon}
+					cvScore={cvScore}
+					id={id}
         />}
         {doughnutLineChartData && doughnutLineChartData.doughnutData && <LibraryDetailDoughnutChart
           doughnutData={doughnutLineChartData.doughnutData}

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import classnames from 'classnames'
 import styles from './style.scss'
 import { socialIconSelector } from 'Utils'
+import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 
 class Video extends Component {
   constructor(props) {
@@ -66,9 +67,8 @@ class Video extends Component {
   }
 
   render() {
-    const { src, poster = '', title, socialIcon, style, className } = this.props
-    const classes = classnames('video-wrapper', className, styles.container)
-
+    const { src, poster = '', title, socialIcon, style, className, cvScore, id } = this.props
+		const classes = classnames('video-wrapper', className, styles.container)
     const iconClass = classnames(
       socialIconSelector(socialIcon) + ' ' + styles.icon
     )
@@ -83,9 +83,33 @@ class Video extends Component {
           controls={false}
           poster={poster}
         />
-        <div className={styles.bar}>
-          <span className={iconClass} /> {title}
-        </div>
+        <div className={styles.barOpacity}></div>
+				<div className={styles.bar}>
+					<div className={styles.barTitle}>
+						<span className={iconClass} />
+						{title}
+					</div>
+					<div className={styles.barChart}>
+						<div className={styles.barChartInfo}>
+							<div className={styles.percentageWrapper}>
+								<PercentageBarGraph
+									backgroundColor='rgba(48, 58, 93, 0.8)'
+									customClass={styles.libraryPercentageGraph}
+									id={`videolist-${id}`}
+									percentage={cvScore}
+									disableLabels={true}
+									color='#2fd7c4'
+									lineCount={30}
+									height={19}
+									width={67}
+									xSmall
+								/>
+							</div>
+							<span>{cvScore}</span>
+						</div>
+					</div>
+
+				</div>
       </div>
     )
   }

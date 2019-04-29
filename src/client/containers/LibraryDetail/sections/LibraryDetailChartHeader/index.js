@@ -41,32 +41,34 @@ const Back = (props) => {
   )
 }
 
-const LibraryDetailChartHeader = ({ barChartData, videoUrl, title, socialIcon }) => (
-  <div className="grid-container col-12 mt-48">
-    <div className={classnames("mt-72", style.containerClass)}>
-      <div className={classnames(
-        "col-6",
-        style.videoWrapper)
-      }>
-        <Video src={videoUrl} title={title} socialIcon={socialIcon} />
-      </div>
-      <div className={classnames(
-        "col-6",
-        style.videoStatsWrapper)}
-      >
-        {barChartData.map(
-          (element, i) => {
-            return (
-              <FlipCard key={i} width={320} height={100}>
-                <Front data={element} />
-                <Back data={element} />
-              </FlipCard>
-            )
-          }
-        )}
-      </div>
-    </div>
-  </div>
-)
+const LibraryDetailChartHeader = ({ barChartData, videoUrl, title, socialIcon, cvScore, id }) => {
+	return (
+		<div className="grid-container col-12 mt-48">
+			<div className={classnames("mt-72", style.containerClass)}>
+				<div className={classnames(
+					"col-6",
+					style.videoWrapper)
+				}>
+					<Video src={videoUrl} title={title} socialIcon={socialIcon} cvScore={cvScore} id={id} />
+				</div>
+				<div className={classnames(
+					"col-6",
+					style.videoStatsWrapper)}
+				>
+					{barChartData.map(
+						(element, i) => {
+							return (
+								<FlipCard key={i} width={320} height={100}>
+									<Front data={element} />
+									<Back data={element} />
+								</FlipCard>
+							)
+						}
+					)}
+				</div>
+			</div>
+		</div>
+	)
+}
 
 export default LibraryDetailChartHeader

@@ -84,7 +84,7 @@ export class VideoCard extends PureComponent {
     const iconClass = classnames(
       socialIconSelector(video.socialIcon),
       style.iconClass
-    )
+		)
     return (
       <div className={style.cardContainer}>
         <div
