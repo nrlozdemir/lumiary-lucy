@@ -26,8 +26,7 @@ export class Main extends React.Component {
         'facebook',
         'instagram',
         'twitter',
-        'youtube',
-        'pinterest',
+        'youtube'
       ],
     }
   }
