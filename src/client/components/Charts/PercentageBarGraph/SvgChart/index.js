@@ -10,7 +10,7 @@ class SvgChart extends React.Component {
 				xMin: 0,
 				xMax: 100,
 				yMin: 0,
-				yMax: 40,
+				yMax: this.props.height,
 				line: {
 					smoothing: 0.25,
 					flattening: .5
@@ -18,7 +18,7 @@ class SvgChart extends React.Component {
 			},
 			dataset: {
 				colors: {
-					path: "#303a5d"
+					path: this.props.backgroundColor || "#303a5d"
 				},
 				values: []
 			},
@@ -36,13 +36,13 @@ class SvgChart extends React.Component {
 				}
 			},
 			svg: {
-				w: 250,
-				h: 40
+				w: this.props.width,
+				h: this.props.height
 			}
 		}
-	}
-
-	componentDidMount() {
+  }
+  
+  calculateDataSet() {
 		const min = this.props.value - 20 < 0 ? 0 : this.props.value - 20;
 		const max = this.props.value + 20 > 100 ? 100 : this.props.value + 20;
 
@@ -50,33 +50,23 @@ class SvgChart extends React.Component {
 			dataset: {
 				...this.state.dataset,
 				values: [
-					[0, 35],
-					[min, 30],
+					[0, this.props.height - 5],
+					[min, this.props.height - 10],
 					[this.props.value, 0],
-					[max, 30],
-					[100, 35]
+					[max, this.props.height - 10],
+					[100, this.props.height - 5]
 				]
 			}
 		})
+  }
+
+	componentDidMount() {
+    this.calculateDataSet()
 	}
 
 	componentDidUpdate(prevProps) {
 		if (prevProps.value !== this.props.value) {
-			const min = this.props.value - 20 < 0 ? 0 : this.props.value - 20;
-			const max = this.props.value + 20 > 100 ? 100 : this.props.value + 20;
-
-			this.setState({
-				dataset: {
-					...this.state.dataset,
-					values: [
-						[0, 35],
-						[min, 30],
-						[this.props.value, 0],
-						[max, 30],
-						[100, 35]
-					]
-				}
-			})
+      this.calculateDataSet()
 		}
 	}
 

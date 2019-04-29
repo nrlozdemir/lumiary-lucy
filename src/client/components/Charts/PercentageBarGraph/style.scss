@@ -37,6 +37,11 @@
       font-family: $font-family-ClanOTBold;
       font-size: 12px;
     }
+    &.noLabel {
+      &:before, &:after {
+        content: '';
+      }
+    }
 
     .percentageGraphWrapper{
       position: relative;
@@ -51,6 +56,17 @@
         left: 0;
         top: -1px;
         transform: scaleY(-1);
+      }
+
+      &.noLabel {
+        &:before {
+          content: ''
+        }
+
+        &:after {
+          height: 105%;
+          width: 1.5px;
+        }
       }
 
       &:before{
@@ -85,8 +101,11 @@
         width: 3px;
         height: 100%;
         margin: 0 .5px;
-
         transition: 500ms;
+
+        &.percentageGraphXSmall {
+          width: 1px;
+        }
 
         &:after{
           content: "";
@@ -120,5 +139,12 @@
         }
       }
     }
+  }
+}
+
+.libraryPercentageGraph {
+  .percentageContainer {
+    color: yellow;
+    background-color: #fff !important;
   }
 }
