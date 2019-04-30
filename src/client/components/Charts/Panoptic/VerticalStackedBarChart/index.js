@@ -52,7 +52,7 @@ class VerticalStackedBarChart extends React.Component {
       <Bar
         width={width}
         height={height}
-        backgroundColor="#242b49"
+        backgroundColor="#21243B"
         data={data}
         datasetKeyProvider={this.datasetKeyProvider}
         options={{

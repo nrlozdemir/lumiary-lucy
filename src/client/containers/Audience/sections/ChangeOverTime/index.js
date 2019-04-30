@@ -91,7 +91,7 @@ class ChangeOverTime extends React.Component {
         {data && data.datasets && (
           <div className={style.audienceContainer}>
             <LineChart
-              backgroundColor="#242b49"
+              backgroundColor="#21243B"
               dataSet={() => combineChartData(data)}
               width={1070}
               height={291}

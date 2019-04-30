@@ -3,22 +3,22 @@ export const barDurationData = {
 	datasets: [
 		{
 			label: 'Barstool Sports',
-			backgroundColor: '#51adc0',
-			borderColor: '#51adc0',
+			backgroundColor: '#2FD7C4',
+			borderColor: '#2FD7C4',
 			borderWidth: 1,
 			data: [10, 3, 5, 1]
 		},
 		{
 			label: 'SB Nation',
-			backgroundColor: '#8567f0',
-			borderColor: '#8567f0',
+			backgroundColor: '#8562F3',
+			borderColor: '#8562F3',
 			borderWidth: 1,
 			data: [12, 13, 2, 5]
 		},
 		{
 			label: 'ESPN',
-			backgroundColor: '#D0506C',
-			borderColor: '#D0506C',
+			backgroundColor: '#5292E5',
+			borderColor: '#5292E5',
 			borderWidth: 1,
 			data: [4, 5, 4, 2]
 		},
@@ -31,8 +31,8 @@ export const barDurationData = {
 		},
 		{
 			label: 'Fansided',
-			backgroundColor: '#5a6386',
-			borderColor: '#5a6386',
+			backgroundColor: '#545B79',
+			borderColor: '#545B79',
 			borderWidth: 1,
 			data: [9, 8, 1, 4]
 		}
@@ -52,8 +52,8 @@ export const barDurationOptions = {
 				display: true,
 				gridLines: {
 					display: true,
-					color: '#5a6386',
-					zeroLineColor: '#5a6386'
+					color: '#545B79',
+					zeroLineColor: '#545B79'
 				},
 				ticks: {
 					fontColor: 'white'
@@ -65,8 +65,8 @@ export const barDurationOptions = {
 				display: true,
 				gridLines: {
 					display: true,
-					color: '#5a6386',
-					zeroLineColor: '#5a6386'
+					color: '#545B79',
+					zeroLineColor: '#545B79'
 				},
 				ticks: {
 					stepSize: 5,

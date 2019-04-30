@@ -42,9 +42,9 @@ const GeneratedReportFilteringSection = ({
                 dataLabelInsert="%"
                 labelPositionRight
                 labelsData={[
-                  { data: '0-15 seconds', color: '#51adc0' },
-                  { data: '15-30 seconds', color: '#8567f0' },
-                  { data: '30-45 seconds', color: '#D0506C' },
+                  { data: '0-15 seconds', color: '#2FD7C4' },
+                  { data: '15-30 seconds', color: '#8562F3' },
+                  { data: '30-45 seconds', color: '#5292E5' },
                   { data: '45-60 seconds', color: '#acb0be' },
                 ]}
               />

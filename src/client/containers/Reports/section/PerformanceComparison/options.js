@@ -31,15 +31,15 @@ export const doughnutOptions = {
   elements: {
     arc: {
       borderWidth: 5,
-      borderColor: '#303a5d',
+      borderColor: '#373F5B',
     },
   },
 }
 
 export const stackedChartOptions = {
-  titleFontColor: '#242b49',
-  bodyFontColor: '#242b49',
-  footerFontColor: '#242b49',
+  titleFontColor: '#21243B',
+  bodyFontColor: '#21243B',
+  footerFontColor: '#21243B',
   title: {
     display: true,
   },
@@ -68,7 +68,7 @@ export const stackedChartOptions = {
         },
         gridLines: {
           display: false,
-          color: '#5a6386',
+          color: '#545B79',
           lineWidth: 1,
           drawBorder: true,
           drawTicks: true,
@@ -90,7 +90,7 @@ export const stackedChartOptions = {
         },
         gridLines: {
           display: true,
-          color: '#5a6386',
+          color: '#545B79',
           lineWidth: 1,
           drawBorder: true,
           drawTicks: false,
@@ -99,7 +99,7 @@ export const stackedChartOptions = {
     ],
   },
   chartArea: {
-    backgroundColor: '#242b49',
+    backgroundColor: '#21243B',
   },
   plugins: {
     datalabels: {

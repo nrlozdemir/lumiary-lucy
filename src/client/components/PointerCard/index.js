@@ -117,7 +117,7 @@ class PointerCard extends React.Component {
                       </g>
                       <polygon
                         id="Path"
-                        fill="#51ADC0"
+                        fill="#2FD7C4"
                         points="86 0 94 0 94 39 86 39"
                       />
                     </g>
