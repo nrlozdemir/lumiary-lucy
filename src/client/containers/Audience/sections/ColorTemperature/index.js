@@ -7,12 +7,11 @@ import { actions, makeSelectAudienceColorTemperature } from 'Reducers/panoptic'
 
 import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
 
-import classnames from 'classnames'
 import style from 'Containers/Audience/style.scss'
 import chartStyle from './style.scss'
 
 class ColorTemperature extends React.Component {
-	callBack = (data, moduleKey) => {
+	callBack = (data) => {
 		this.props.getAudienceColorTemperatureData(data)
 	}
 

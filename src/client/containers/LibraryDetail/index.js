@@ -98,6 +98,7 @@ export class LibraryDetail extends React.Component {
           doughnutData={doughnutLineChartData.doughnutData}
         />}
         <LibraryDetailColorTemperature
+        	libraryDetailId={videoId}
           colorTempData={colorTempData}
         />
         {shotByShotData && <LibraryDetailShotByShot

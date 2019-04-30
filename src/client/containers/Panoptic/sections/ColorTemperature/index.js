@@ -5,15 +5,16 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticColorTemperature } from 'Reducers/panoptic'
 
-import style from './style.scss'
 import { platforms, selectOneOptions, selectTwoOptions } from './options'
-
 import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
 
+import style from './style.scss'
+
 class PanopticColorTemperature extends React.Component {
-	callBack = (data, moduleKey) => {
+	callBack = (data) => {
 		this.props.getColorTemperatureData(data)
 	}
+
 	render() {
 		const {
 			colorTemperatureData: { data, loading, error },
