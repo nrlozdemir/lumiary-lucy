@@ -322,12 +322,23 @@
 		}
 
     .item {
-      width: 50%;
+      width: 634px;
       position: relative;
       opacity: 0.2;
       margin: 49px 0;
       height: 248px;
-      border: 1px solid $color-dusk;
+			border: 1px solid $color-dusk;
+
+			.percentageWrapper {
+				opacity: 0.8;
+				position: absolute;
+				right: 80px;
+				top: 17px;
+			}
+
+			.libraryPercentageGraph {
+				opacity: 0.8;
+			}
 
       &:focus {
         outline: none;
