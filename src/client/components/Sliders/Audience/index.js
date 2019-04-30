@@ -68,8 +68,8 @@ class AudienceSlider extends React.Component {
           <div className="audienceSlider">
             <Swiper ref={node => node && (this.refSlider = node.swiper)} {...settings}>
               {items.map((item, i) => (
-								<div className="item">
-									<AssetLayer key={i}
+								<div className="item" key={i}>
+									<AssetLayer
 										containerNoBorder
 										leftSocialIcon={item.socialMedia}
 										centerText={item.secondTitle}

@@ -35,7 +35,8 @@
         "image": "https://picsum.photos/600/300?image=48",
         "socialMedia": "facebook",
         "title": "ESN",
-        "secondTitle": "261068 Shares",
+				"secondTitle": "261068 Shares",
+				"cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -98,6 +99,7 @@
         "socialMedia": "pinterest",
         "title": "Barstool Media",
         "secondTitle": "395 Shares",
+				"cvScore": 56.1,
         "options": [
           {
             "name": "Duration",
@@ -160,6 +162,7 @@
         "socialMedia": "twitter",
         "title": "SB Nation",
         "secondTitle": "4564 Shares",
+				"cvScore": 76.1,
         "options": [
           {
             "name": "Duration",
@@ -222,6 +225,7 @@
         "socialMedia": "instagram",
         "title": "Scout Media",
         "secondTitle": "112758 Shares",
+				"cvScore": 45.1,
         "options": [
           {
             "name": "Duration",
@@ -284,6 +288,7 @@
         "socialMedia": "twitter",
         "title": "Fansided",
         "secondTitle": "170 Shares",
+				"cvScore": 86.1,
         "options": [
           {
             "name": "Duration",
@@ -412,6 +417,7 @@
         "socialMedia": "twitter",
         "title": "ESN",
         "secondTitle": "348454 Shares",
+				"cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -474,6 +480,7 @@
         "socialMedia": "youtube",
         "title": "Barstool Media",
         "secondTitle": "261 Shares",
+				"cvScore": 86.1,
         "options": [
           {
             "name": "Duration",
@@ -536,6 +543,7 @@
         "socialMedia": "facebook",
         "title": "SB Nation",
         "secondTitle": "2505 Shares",
+				"cvScore": 45.1,
         "options": [
           {
             "name": "Duration",
@@ -598,6 +606,7 @@
         "socialMedia": "youtube",
         "title": "Scout Media",
         "secondTitle": "46867 Shares",
+				"cvScore": 56.1,
         "options": [
           {
             "name": "Duration",
@@ -660,6 +669,7 @@
         "socialMedia": "facebook",
         "title": "Fansided",
         "secondTitle": "402 Shares",
+				"cvScore": 66.1,
         "options": [
           {
             "name": "Duration",
@@ -788,6 +798,7 @@
         "socialMedia": "twitter",
         "title": "ESN",
         "secondTitle": "364320 Shares",
+				"cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -850,6 +861,7 @@
         "socialMedia": "instagram",
         "title": "Barstool Media",
         "secondTitle": "300 Shares",
+				"cvScore": 86.1,
         "options": [
           {
             "name": "Duration",
@@ -912,6 +924,7 @@
         "socialMedia": "instagram",
         "title": "SB Nation",
         "secondTitle": "2033 Shares",
+				"cvScore": 76.1,
         "options": [
           {
             "name": "Duration",
@@ -974,6 +987,7 @@
         "socialMedia": "facebook",
         "title": "Scout Media",
         "secondTitle": "111555 Shares",
+				"cvScore": 56.1,
         "options": [
           {
             "name": "Duration",
@@ -1036,6 +1050,7 @@
         "socialMedia": "twitter",
         "title": "Fansided",
         "secondTitle": "344 Shares",
+				"cvScore": 77.1,
         "options": [
           {
             "name": "Duration",
@@ -1164,6 +1179,7 @@
         "socialMedia": "facebook",
         "title": "ESN",
         "secondTitle": "329121 Shares",
+				"cvScore": 66.1,
         "options": [
           {
             "name": "Duration",
@@ -1226,6 +1242,7 @@
         "socialMedia": "facebook",
         "title": "Barstool Media",
         "secondTitle": "307 Shares",
+				"cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -1288,6 +1305,7 @@
         "socialMedia": "twitter",
         "title": "SB Nation",
         "secondTitle": "2091 Shares",
+				"cvScore": 76.1,
         "options": [
           {
             "name": "Duration",
@@ -1350,6 +1368,7 @@
         "socialMedia": "twitter",
         "title": "Scout Media",
         "secondTitle": "68934 Shares",
+				"cvScore": 55.1,
         "options": [
           {
             "name": "Duration",
@@ -1412,6 +1431,7 @@
         "socialMedia": "twitter",
         "title": "Fansided",
         "secondTitle": "306 Shares",
+				"cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -1540,6 +1560,7 @@
         "socialMedia": "facebook",
         "title": "ESN",
         "secondTitle": "239363 Shares",
+				"cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -1602,6 +1623,7 @@
         "socialMedia": "pinterest",
         "title": "Barstool Media",
         "secondTitle": "113 Shares",
+				"cvScore": 66.1,
         "options": [
           {
             "name": "Duration",
@@ -1664,6 +1686,7 @@
         "socialMedia": "facebook",
         "title": "SB Nation",
         "secondTitle": "3516 Shares",
+				"cvScore": 54.1,
         "options": [
           {
             "name": "Duration",
@@ -1726,6 +1749,7 @@
         "socialMedia": "facebook",
         "title": "Scout Media",
         "secondTitle": "151629 Shares",
+				"cvScore": 56.1,
         "options": [
           {
             "name": "Duration",
@@ -1788,6 +1812,7 @@
         "socialMedia": "twitter",
         "title": "Fansided",
         "secondTitle": "373 Shares",
+				"cvScore": 55.1,
         "options": [
           {
             "name": "Duration",
@@ -1916,6 +1941,7 @@
         "socialMedia": "pinterest",
         "title": "ESN",
         "secondTitle": "339657 Shares",
+				"cvScore": 56.1,
         "options": [
           {
             "name": "Duration",
@@ -1978,6 +2004,7 @@
         "socialMedia": "youtube",
         "title": "Barstool Media",
         "secondTitle": "222 Shares",
+				"cvScore": 66.1,
         "options": [
           {
             "name": "Duration",
@@ -2040,6 +2067,7 @@
         "socialMedia": "twitter",
         "title": "SB Nation",
         "secondTitle": "4199 Shares",
+				"cvScore": 54.1,
         "options": [
           {
             "name": "Duration",
@@ -2102,6 +2130,7 @@
         "socialMedia": "instagram",
         "title": "Scout Media",
         "secondTitle": "110060 Shares",
+				"cvScore": 76.1,
         "options": [
           {
             "name": "Duration",
@@ -2164,6 +2193,7 @@
         "socialMedia": "instagram",
         "title": "Fansided",
         "secondTitle": "392 Shares",
+				"cvScore": 66.1,
         "options": [
           {
             "name": "Duration",
@@ -2292,6 +2322,7 @@
         "socialMedia": "youtube",
         "title": "ESN",
         "secondTitle": "287227 Shares",
+				"cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -2354,6 +2385,7 @@
         "socialMedia": "pinterest",
         "title": "Barstool Media",
         "secondTitle": "486 Shares",
+				"cvScore": 66.1,
         "options": [
           {
             "name": "Duration",
@@ -2416,6 +2448,7 @@
         "socialMedia": "pinterest",
         "title": "SB Nation",
         "secondTitle": "4132 Shares",
+				"cvScore": 76.1,
         "options": [
           {
             "name": "Duration",
@@ -2478,6 +2511,7 @@
         "socialMedia": "twitter",
         "title": "Scout Media",
         "secondTitle": "86817 Shares",
+				"cvScore": 44.1,
         "options": [
           {
             "name": "Duration",
@@ -2540,6 +2574,7 @@
         "socialMedia": "youtube",
         "title": "Fansided",
         "secondTitle": "156 Shares",
+				"cvScore": 61.1,
         "options": [
           {
             "name": "Duration",
