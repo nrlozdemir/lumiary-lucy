@@ -10,6 +10,8 @@ import PropTypes from 'prop-types'
 import style from './style.scss'
 import { socialIconSelector } from '../../utils'
 import { Link } from 'react-router-dom'
+
+import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 let hoverInReady
 
 export class VideoCard extends PureComponent {
@@ -65,7 +67,7 @@ export class VideoCard extends PureComponent {
   }
 
   render() {
-    const { video, options = options || {}, muted = true } = this.props
+    const { video, options = options || {}, muted = true, id } = this.props
     const { itCanPlay } = this.state
     const cardContainerClass = classnames(
       style.cardContainer,
@@ -90,6 +92,23 @@ export class VideoCard extends PureComponent {
           onMouseEnter={() => this.videoMouseEnterPlay()}
           onMouseLeave={() => this.videoMouseLeavePlay()}
         >
+        {video.cvScore && (<div className={style.cardCornerInfo}>
+            <span>{video.cvScore}</span>
+            <div className={style.percentageWrapper}>
+              <PercentageBarGraph
+                backgroundColor='#21243b'
+                customClass={style.libraryPercentageGraph}
+                id={id}
+                percentage={video.cvScore}
+                disableLabels={true}
+                color='#2fd7c4'
+                lineCount={30}
+                height={15}
+                width={45}
+                xSmall
+              />
+            </div>
+          </div>)}
           {video.videoUrl && itCanPlay ? (
             <div className={style.videoInner}>
               <video

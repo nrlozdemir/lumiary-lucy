@@ -4,7 +4,7 @@ import 'chartjs-plugin-datalabels'
 import SelectFilters from 'Components/SelectFilters'
 
 import style from './style.scss'
-import DoughnutChart from 'Components/Charts/Panoptic/DoughnutChart'
+import DoughnutChart from 'Components/Charts/DoughnutChart'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 
 const GeneratedReportFilteringSection = ({
@@ -32,26 +32,22 @@ const GeneratedReportFilteringSection = ({
       <div className="d-flex align-items-center justify-space-between ph-48 pb-48">
         <div className={style.radialAndStackChartWrapper}>
           <div>
-            <DoughnutChart data={doughnutData.average} />
-          </div>
-          <div>
-            {doughnutRoundData &&
-              doughnutRoundData.map((roundData, index) => (
-                <div
-                  className={classnames(
-                    'd-flex',
-                    'align-items-center',
-                    style.lables
-                  )}
-                  key={index}
-                >
-                  <span
-                    className={style.round}
-                    style={{ backgroundColor: `${roundData.color}` }}
-                  />
-                  <span className={style.secondsText}>{roundData.data}</span>
-                </div>
-              ))}
+            <DoughnutChart
+                width={270}
+                height={270}
+                data={doughnutData}
+                cutoutPercentage={58}
+                fillText="Total Percentage"
+                dataLabelFunction="insertAfter"
+                dataLabelInsert="%"
+                labelPositionRight
+                labelsData={[
+                  { data: '0-15 seconds', color: '#51adc0' },
+                  { data: '15-30 seconds', color: '#8567f0' },
+                  { data: '30-45 seconds', color: '#D0506C' },
+                  { data: '45-60 seconds', color: '#acb0be' },
+                ]}
+              />
           </div>
         </div>
         <div>

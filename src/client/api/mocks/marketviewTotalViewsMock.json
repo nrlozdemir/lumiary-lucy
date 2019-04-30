@@ -40,7 +40,6 @@
     "datasets": [
       {
         "data": [50, 20, 15, 10, 5],
-        "borderColor": "#303a5d",
         "backgroundColor": [
           "#51adc0",
           "#8567f0",
