@@ -84,13 +84,6 @@
         {
           "label": "45-60 seconds",
           "backgroundColor": "#acb0be",
-          "borderColor": ["#21243B", "#21243B", "#21243B", "#21243B"],
-          "borderWidth": {
-            "top": 2,
-            "right": 0,
-            "bottom": 0,
-            "left": 0
-          },
           "data": [9, 8, 1, 4]
         }
       ]
