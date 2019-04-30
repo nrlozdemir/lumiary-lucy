@@ -4,6 +4,7 @@ import { socialIconSelector } from 'Utils'
 import styles from './style.scss'
 
 const defaultProps = {
+	containerNoBorder: false,
 	containerClassName: classnames(styles.container, 'col-3 ml-0'),
   contentClassName: styles.content,
   barOpacityClassName: styles.barOpacity,
@@ -41,7 +42,9 @@ export default class AssetLayer extends React.Component {
 			contentClassName,
 			barOpacityClassName,
 			leftSocialIcon,
+			centerText,
 			title,
+			containerNoBorder,
 			rightValue,
       barClassName,
       children,
@@ -56,7 +59,11 @@ export default class AssetLayer extends React.Component {
 
     return (
       <React.Fragment>
-				<div className={containerClassName} style={{width: width, height: height}}>
+				<div className={classnames(
+					containerClassName, {
+						[styles.noBorder]: containerNoBorder
+					}
+				)} style={{width: width, height: height}}>
 					<div className={contentClassName}>
 						{children && children[0]}
 					</div>
@@ -68,6 +75,7 @@ export default class AssetLayer extends React.Component {
 							{socialIcon && <span className={socialIcon} />}
 							{title}
 						</div>
+						{centerText && <div className={styles.centerText}>{centerText}</div>}
 						{rightValue && <div className={styles.barChart}>
 							<div className={styles.barChartInfo}>
 								<span>{rightValue}</span>
