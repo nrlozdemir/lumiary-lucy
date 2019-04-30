@@ -36,11 +36,14 @@
 		z-index: 11;
 		padding: 0 24px;
 
-		.percentageWrapper {
-			opacity: .8;
+		&>div{
 			position: absolute;
-			right: 80px;
+			right: 24px;
 			top: 15px;
+			font-family: $font-family-ClanOT;
+			font-weight: bold;
+			color: #ffffff;
+			font-size: 12px;
 		}
 	}
 	.bar{
@@ -88,7 +91,6 @@
 	span {
 		font-family: $font-family-primary;
 		font-size: 24px;
-		font-weight: bold;
 		font-weight: 800;
 		font-style: normal;
 		font-stretch: condensed;
@@ -97,12 +99,3 @@
 		text-align: right;
 	}
 }
-
-.libraryPercentageGraph {
-	opacity: 0.8;
-	.percentageContainer {
-		color: yellow;
-		background-color: #fff !important;
-	}
-}
-

@@ -1,5 +1,6 @@
 import React from 'react'
 import classnames from 'classnames'
+import { socialIconSelector } from 'Utils'
 import styles from './style.scss'
 
 const defaultProps = {
@@ -39,14 +40,19 @@ export default class AssetLayer extends React.Component {
       containerClassName,
 			contentClassName,
 			barOpacityClassName,
-			socialIconClass,
+			leftSocialIcon,
 			title,
-			rightScore,
+			rightValue,
       barClassName,
       children,
       width,
       height
 		} = this.props
+
+		const socialIcon = classnames(
+			socialIconSelector(leftSocialIcon),
+			styles.icon
+		)
 
     return (
       <React.Fragment>
@@ -58,9 +64,15 @@ export default class AssetLayer extends React.Component {
 						{children && children[1]}
 					</div>
 					<div className={barClassName}>
-						<span className={socialIconClass} />
-						{title}
-						{rightScore}
+						<div className={styles.barTitle}>
+							{socialIcon && <span className={socialIcon} />}
+							{title}
+						</div>
+						{rightValue && <div className={styles.barChart}>
+							<div className={styles.barChartInfo}>
+								<span>{rightValue}</span>
+							</div>
+						</div>}
 					</div>
 				</div>
 

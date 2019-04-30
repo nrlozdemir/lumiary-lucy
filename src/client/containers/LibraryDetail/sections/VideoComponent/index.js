@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import styles from './style.scss'
-import { socialIconSelector } from 'Utils'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 
@@ -68,41 +67,23 @@ class Video extends Component {
   }
 
   render() {
-    const { src, poster = '', title, socialIcon, style, className, cvScore, id } = this.props
-    const classes = classnames('video-wrapper', className, styles.container)
-    const iconClass = classnames(
-      socialIconSelector(socialIcon) + ' ' + styles.icon
-		)
-		//ref={this.video}
+		console.log(this.props)
+		const {
+			src,
+			poster = '',
+			title,
+			socialIcon,
+			cvScore,
+			id
+		} = this.props
 
     return (
 			<React.Fragment>
 				<AssetLayer
-					socialIconClass={iconClass}
+					leftSocialIcon={socialIcon}
 					title={title}
-					rightScore={cvScore}
+					rightValue={cvScore}
 				>
-					<video
-						className={styles.video}
-						src={src}
-						muted
-						controls={false}
-						poster={poster}
-					/>
-					<PercentageBarGraph
-						backgroundColor='#303a5d'
-						customClass={styles.libraryPercentageGraph}
-						id={`videolist-${id}`}
-						percentage={cvScore}
-						disableLabels={true}
-						color='#2fd7c4'
-						lineCount={30}
-						height={19}
-						width={67}
-						xSmall
-					/>
-				</AssetLayer>
-				<div className={classes} style={{ margin: "530px 0px 30px 0px"}}>
 					<video
 						ref={this.video}
 						className={styles.video}
@@ -111,35 +92,21 @@ class Video extends Component {
 						controls={false}
 						poster={poster}
 					/>
-					<div className={styles.barOpacity}>
-						<div className={styles.percentageWrapper}>
-							<PercentageBarGraph
-								backgroundColor='#303a5d'
-								customClass={styles.libraryPercentageGraph}
-								id={`videolist-${id}`}
-								percentage={cvScore}
-								disableLabels={true}
-								color='#2fd7c4'
-								lineCount={30}
-								height={19}
-								width={67}
-								xSmall
-							/>
-						</div>
+					<div className={styles.percentageWrapper} style={{right: '80px'}}>
+						<PercentageBarGraph
+							backgroundColor='#303a5d'
+							customClass={styles.libraryPercentageGraph}
+							id={`videolist-${id}`}
+							percentage={cvScore}
+							disableLabels={true}
+							color='#2fd7c4'
+							lineCount={30}
+							height={19}
+							width={67}
+							xSmall
+						/>
 					</div>
-					<div className={styles.bar}>
-						<div className={styles.barTitle}>
-							<span className={iconClass} />
-							{title}
-						</div>
-						<div className={styles.barChart}>
-							<div className={styles.barChartInfo}>
-								<span>{cvScore}</span>
-							</div>
-						</div>
-
-					</div>
-				</div>
+				</AssetLayer>
 			</React.Fragment>
     )
   }
