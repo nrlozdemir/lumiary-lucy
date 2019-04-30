@@ -5,11 +5,11 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceColorTemperature } from 'Reducers/panoptic'
 
-import ColorTemperatureModule from 'Components/Modules/RadarChartModule'
+import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
 
 import classnames from 'classnames'
 import style from 'Containers/Audience/style.scss'
-import sectionStyle from './style.scss'
+import chartStyle from './style.scss'
 
 class ColorTemperature extends React.Component {
 	callBack = (data, moduleKey) => {
@@ -24,6 +24,7 @@ class ColorTemperature extends React.Component {
 		return (
 			<ColorTemperatureModule
 				moduleKey="Audience/ColorTemperature"
+				extraClasses={chartStyle.colorChartWrapper}
 				data={data}
 				title="Color Temperature / Sentiment Comparison"
 				action={this.callBack}

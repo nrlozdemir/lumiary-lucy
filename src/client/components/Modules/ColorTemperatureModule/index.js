@@ -2,8 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Module from 'Components/Module'
-import { ColorTemperature as Chart } from 'Components/ColorTemperatureChart/ColorTemperature'
+import ColorTemperatureChart from 'Components/ColorTemperatureChart'
 
+import cx from 'classnames'
 import style from './styles.scss'
 
 const ColorTemperatureModule = ({
@@ -13,7 +14,15 @@ const ColorTemperatureModule = ({
 	action,
 	filters,
 	legend,
+	labels,
+	borderLess,
+	verticalText,
+	infoLabels,
+	children,
+	extraClasses,
+	chartWrapperClass,
 }) => {
+	console.log(data)
 	return (
 		<Module
 			moduleKey={moduleKey}
@@ -22,23 +31,45 @@ const ColorTemperatureModule = ({
 			legend={legend}
 			filters={filters}
 		>
-			<div className={style.audienceContainer}>
-				<div className="col-12" style={{ display: 'flex', padding: '40px 0' }}>
-					{data &&
-						data.length > 0 &&
-						data.map((temp, index) => (
+			<div className={style.colorChartContainer}>
+				<div
+					className={cx(extraClasses, style.colorChartContent)}
+				>
+					{!!data && !!data.length && (
+						<ColorTemperatureChart
+							chartWrapperClass={chartWrapperClass}
+							infoLabels={infoLabels}
+							colorTempData={data}
+							borderLess={borderLess}
+							verticalText={verticalText}
+						/>
+					)}
+				</div>
+				{!!infoLabels && !!infoLabels.length && (
+					<div className={style.infoWrapperContainer}>
+						{infoLabels.map((info, idx) => (
 							<div
-								className={classnames('col-4', style.chartWrapper)}
-								key={'temp-chart-' + index}
+								className={style.infoWrapper}
+								key={`colorChart-infoText_${idx}`}
 							>
-								<Chart temp={temp} />
-								<div className={style.chartInfo}>{temp.text}</div>
+								<div className={style.infoHandle}>
+									<span className={style.infoText}>{info}</span>
+								</div>
 							</div>
 						))}
-				</div>
+					</div>
+				)}
+				{children}
 			</div>
 		</Module>
 	)
+}
+
+ColorTemperatureModule.defaultProps = {
+	data: [],
+	infoLabels: [],
+	borderLess: false,
+	verticalText: false,
 }
 
 ColorTemperatureModule.propTypes = {
@@ -48,6 +79,10 @@ ColorTemperatureModule.propTypes = {
 	subTitle: PropTypes.string,
 	legend: PropTypes.object,
 	filters: PropTypes.array,
+	borderLess: PropTypes.bool,
+	verticalText: PropTypes.bool,
+	infoLabels: PropTypes.array,
+	wrapperClasses: PropTypes.string,
 }
 
 export default ColorTemperatureModule
