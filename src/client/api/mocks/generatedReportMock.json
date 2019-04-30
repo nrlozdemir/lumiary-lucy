@@ -5,6 +5,7 @@
 			"socialMedia": "facebook",
 			"title": "ESN",
 			"secondTitle": "425,512 Likes",
+			"cvScore": 67.1,
 			"options": [
 				{
 					"name": "Duration",
@@ -67,6 +68,7 @@
 			"socialMedia": "instagram",
 			"title": "Barstool Media",
 			"secondTitle": "425 Shares",
+			"cvScore": 76.1,
 			"options": [
 				{
 					"name": "Duration",
@@ -129,6 +131,7 @@
 			"socialMedia": "facebook",
 			"title": "SB Nation",
 			"secondTitle": "4,512 Comment",
+			"cvScore": 54.1,
 			"options": [
 				{
 					"name": "Duration",
@@ -191,6 +194,7 @@
 			"socialMedia": "twitter",
 			"title": "Scout Media",
 			"secondTitle": "23,431 Likes",
+			"cvScore": 46.1,
 			"options": [
 				{
 					"name": "Duration",
@@ -253,6 +257,7 @@
 			"socialMedia": "facebook",
 			"title": "Fansided",
 			"secondTitle": "142 Comment",
+			"cvScore": 88.1,
 			"options": [
 				{
 					"name": "Duration",
