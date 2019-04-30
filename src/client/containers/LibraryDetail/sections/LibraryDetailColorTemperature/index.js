@@ -29,24 +29,11 @@ class LibraryDetailColorTemperature extends React.Component {
 				data={data}
 				title="Color Temperature / Sentiment Comparison"
 				action={this.callBack}
-				legend={
-					<div className={style.temperatureHeader}>
-						<div className="d-flex align-items-center justify-space-between">
-							<div className="d-flex align-items-center mr-32">
-								<span className={style.redRound} />
-								<p>This Video</p>
-							</div>
-							<div className="d-flex align-items-center mr-32">
-								<span className={style.duskRound} />
-								<p>Library Average</p>
-							</div>
-							<div className="d-flex align-items-center mr-32">
-								<span className={style.purpleRound} />
-								<p>Industry</p>
-							</div>
-						</div>
-					</div>
-				}
+				legend={[
+					{ label: 'This Video', color: 'redRound' },
+					{ label: 'Library Average', color: 'duskRound' },
+					{ label: 'Industry', color: 'purpleRound' },
+				]}
 				filters={[
 					{
 						type: 'timeRange',

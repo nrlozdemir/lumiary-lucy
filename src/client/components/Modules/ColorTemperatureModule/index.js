@@ -7,6 +7,28 @@ import ColorTemperatureChart from 'Components/ColorTemperatureChart'
 import cx from 'classnames'
 import style from './styles.scss'
 
+const Legend = ({ legend }) => {
+	if (!legend.length) {
+		return null
+	}
+
+	return (
+		<div className={style.headerLabel}>
+			<div className={'d-flex align-items-center justify-content-center'}>
+				{legend.map((item, idx) => (
+					<div
+						className="d-flex align-items-center mr-32"
+						key={`colorTempLegend_${idx}`}
+					>
+						<span className={cx(style.legendLabel, style[item.color])} />
+						<p>{item.label}</p>
+					</div>
+				))}
+			</div>
+		</div>
+	)
+}
+
 const ColorTemperatureModule = ({
 	data,
 	moduleKey,
@@ -22,19 +44,16 @@ const ColorTemperatureModule = ({
 	extraClasses,
 	chartWrapperClass,
 }) => {
-	console.log(data)
 	return (
 		<Module
 			moduleKey={moduleKey}
 			title={title}
 			action={action}
-			legend={legend}
+			legend={<Legend legend={legend} />}
 			filters={filters}
 		>
 			<div className={style.colorChartContainer}>
-				<div
-					className={cx(extraClasses, style.colorChartContent)}
-				>
+				<div className={cx(extraClasses, style.colorChartContent)}>
 					{!!data && !!data.length && (
 						<ColorTemperatureChart
 							chartWrapperClass={chartWrapperClass}
@@ -68,6 +87,7 @@ const ColorTemperatureModule = ({
 ColorTemperatureModule.defaultProps = {
 	data: [],
 	infoLabels: [],
+	legend: [],
 	borderLess: false,
 	verticalText: false,
 }
@@ -82,6 +102,7 @@ ColorTemperatureModule.propTypes = {
 	borderLess: PropTypes.bool,
 	verticalText: PropTypes.bool,
 	infoLabels: PropTypes.array,
+	legend: PropTypes.array,
 	wrapperClasses: PropTypes.string,
 }
 

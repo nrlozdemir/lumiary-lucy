@@ -27,25 +27,10 @@ class ColorTemperature extends React.Component {
 				data={data}
 				title="Color Temperature / Sentiment Comparison"
 				action={this.callBack}
-				legend={
-					<div className={style.headerLabel}>
-						<div
-							className={
-								'd-flex align-items-center justify-content-center ' +
-								style.headerLabel
-							}
-						>
-							<div className="d-flex align-items-center mr-32">
-								<span className={style.redRound} />
-								<p>Male</p>
-							</div>
-							<div className="d-flex align-items-center mr-32">
-								<span className={style.duskRound} />
-								<p>Female</p>
-							</div>
-						</div>
-					</div>
-				}
+				legend={[
+					{ label: 'Male', color: 'redRound' },
+					{ label: 'Female', color: 'purpleRound' },
+				]}
 				filters={[
 					{
 						type: 'timeRange',
