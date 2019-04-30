@@ -58,7 +58,7 @@ class ColorCard extends Component {
                 <Bubble
                   key={'bubble-' + i}
                   radius={(parseInt(bubble.value) / 100) * 0.0015 + 15}
-                  fill="#242b49"
+                  fill="#21243B"
                   stroke={bubble.color}
                 >
                   <Visual>
