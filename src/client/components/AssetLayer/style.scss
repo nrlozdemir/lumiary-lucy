@@ -87,6 +87,9 @@
 			letter-spacing: normal;
 			text-align: right;
 			color: $color-white;
+			width: calc(100% - 48px);
+			text-align: center;
+			position: absolute;
 		}
 	}
 }
