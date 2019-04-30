@@ -39,7 +39,8 @@
     .item {
       position: relative;
       opacity: 0.2;
-      margin: 49px 0;
+			margin: 49px 0;
+			width: 634px;
       height: 248;
       border: 1px solid $color-dusk;
       &:focus {
@@ -132,6 +133,7 @@
         // transition: all .2s ease;
         opacity: 1;
         margin: 0px;
+				width: 634px;
         height: 346px;
       }
       img {
