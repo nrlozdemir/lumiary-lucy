@@ -10,7 +10,7 @@ import classnames from 'classnames'
 import 'chartjs-plugin-datalabels'
 import style from './style.scss'
 
-import DoughnutChart from 'Components/Charts/Panoptic/DoughnutChart'
+import DoughnutChart from 'Components/Charts/DoughnutChart'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 
 import Module from 'Components/Module'
@@ -23,7 +23,7 @@ class PanopticFilteringSection extends Component {
   render() {
     const {
       filteringSectionData: {
-        data: { doughnutData, stackedChartData, doughnutRoundData },
+        data: { doughnutData, stackedChartData },
         loading,
         error,
       },
@@ -58,35 +58,27 @@ class PanopticFilteringSection extends Component {
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
-            <div>
-              {doughnutData && doughnutData.average && (
-                <DoughnutChart data={doughnutData.average} />
-              )}
-            </div>
-            <div>
-              {doughnutRoundData &&
-                doughnutRoundData.map((roundData, index) => (
-                  <div
-                    className={classnames(
-                      'd-flex',
-                      'align-items-center',
-                      style.lables
-                    )}
-                    key={index}
-                  >
-                    <span
-                      className={style.round}
-                      style={{ backgroundColor: `${roundData.color}` }}
-                    />
-                    <span className={style.secondsText}>{roundData.data}</span>
-                  </div>
-                ))}
-            </div>
+            {doughnutData && (
+              <DoughnutChart
+                width={270}
+                height={270}
+                data={doughnutData}
+                cutoutPercentage={58}
+                fillText="Total Percentage"
+                dataLabelFunction="insertAfter"
+                dataLabelInsert="%"
+                labelPositionRight
+                labelsData={[
+                  { data: '0-15 seconds', color: '#2FD7C4' },
+                  { data: '15-30 seconds', color: '#8562F3' },
+                  { data: '30-45 seconds', color: '#5292E5' },
+                  { data: '45-60 seconds', color: '#acb0be' },
+                ]}
+              />
+            )}
           </div>
           <div className={style.stackedChart}>
-            {stackedChartData && (
-              <StackedBarChart barData={stackedChartData} />
-            )}
+            {stackedChartData && <StackedBarChart barData={stackedChartData} />}
           </div>
         </div>
       </Module>

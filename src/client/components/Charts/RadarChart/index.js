@@ -1,15 +1,56 @@
 import React from 'react'
 import { Radar } from 'react-chartjs-2'
 
-import { radarChartOptions } from './options'
+const plugins = [
+  {
+    beforeDraw: function(chart, easing) {
+      let ctx = chart.chart.ctx
+      let chartArea = chart.chartArea
+      chart.config.data.datasets.forEach(function(dataset, i) {
+        const meta = chart.controller.getDatasetMeta(i)
+        meta.data.forEach(function(bar, index) {
+          ctx.beginPath()
+          const color = chart.config.data.labels[index].color
+          const selected = chart.config.data.labels[index].selected
+          const pointLabelPosition = bar._scale.getPointPosition(
+            index,
+            bar._scale.getDistanceFromCenterForValue(bar._scale.max) +
+              (selected ? 31 : 25)
+          )
+          // draw a circle at that point
+          ctx.beginPath()
+          ctx.arc(
+            pointLabelPosition.x,
+            pointLabelPosition.y,
+            selected ? 12 : 6,
+            0,
+            2 * Math.PI,
+            false
+          )
+          ctx.fillStyle = color
+          ctx.fill()
+          if (selected) {
+            ctx.stroke()
+            // ctx.shadowColor = 'black'
+            // ctx.shadowBlur = 0
+            // ctx.shadowOffsetX = 0
+            // ctx.shadowOffsetY = 8
+          }
+        })
+      })
+    },
+  },
+]
 
-const RadarChart = ({ data }) => (
+const RadarChart = ({ data, width=430, height=430 }) => (
   <Radar
     data={data}
-    width={420}
-    height={420}
-    responsive={true}
+    width={width}
+    height={height}
+    plugins={plugins}
     options={{
+      responsive: false,
+      maintainAspectRatio: false,
       legend: {
         display: false,
       },
@@ -44,14 +85,13 @@ const RadarChart = ({ data }) => (
         gridLines: {
           lineWidth: 19,
           zeroLineColor: '#FFF',
+          color: '#21243b',
         },
         pointLabels: {
-          fontColor: data.labels.map((lbl) => lbl.color),
           callback: function(value, index, values) {
-            if (value.selected) return ' ● '
-            return ' • '
+            return ''
           },
-          fontSize: 54,
+          lineHeight: 4,
         },
         ticks: {
           callback: function(value) {

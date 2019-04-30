@@ -25,9 +25,9 @@ const StadiumChart = ({ data }) => {
       <Stadium
         data={data}
         stadiumText={'Total Percentage'}
-        angleColor={'#242B49'}
-        barStroke={'#5A6386'}
-        barFill={'#242b49'}
+        angleColor={'#21243B'}
+        barStroke={'#545B79'}
+        barFill={'#21243B'}
         animationSpeed={1}
         borderWidth={26}
         border={1}

@@ -317,12 +317,12 @@
       {
         "label": "Dataset 1",
         "display": false,
-        "backgroundColor": "#51adc0",
+        "backgroundColor": "#2FD7C4",
         "data": [45000, 55000, 55000, 70000, 55000, 45000, 55000]
       },
       {
         "label": "Dataset 2",
-        "backgroundColor": "#D0506C",
+        "backgroundColor": "#5292E5",
         "data": [-45000, -50000, -30000, -55000, -70000, -55000, -30000]
       }
     ]
@@ -332,8 +332,8 @@
 		"datasets": [
 			{
 			"label": "Facebook",
-			"backgroundColor": "#D0506C",
-			"borderColor": ["#242b49", "#242b49", "#242b49", "#242b49","#242b49"],
+			"backgroundColor": "#5292E5",
+			"borderColor": ["#21243B", "#21243B", "#21243B", "#21243B","#21243B"],
 			"borderWidth": {
 				"top": 2,
 				"right": 0,
@@ -344,8 +344,8 @@
 		},
 		{
 			"label": "Instagram",
-			"backgroundColor": "#8567f0",
-			"borderColor": ["#242b49", "#242b49", "#242b49", "#242b49","#242b49"],
+			"backgroundColor": "#8562F3",
+			"borderColor": ["#21243B", "#21243B", "#21243B", "#21243B","#21243B"],
 			"borderWidth": {
 				"top": 2,
 				"right": 0,
@@ -357,7 +357,7 @@
 		{
 			"label": "Twitter",
 			"backgroundColor": "#acb0be",
-			"borderColor": ["#242b49", "#242b49", "#242b49", "#242b49","#242b49"],
+			"borderColor": ["#21243B", "#21243B", "#21243B", "#21243B","#21243B"],
 			"borderWidth": {
 				"top": 2,
 				"right": 0,
@@ -368,8 +368,8 @@
 		},
 		{
 			"label": "YouTube",
-			"backgroundColor": "#51adc0",
-			"borderColor": ["#242b49", "#242b49", "#242b49", "#242b49","#242b49"],
+			"backgroundColor": "#2FD7C4",
+			"borderColor": ["#21243B", "#21243B", "#21243B", "#21243B","#21243B"],
 			"borderWidth": {
 				"top": 2,
 				"right": 0,
@@ -380,8 +380,8 @@
 		},
 		{
 			"label": "Pinterest",
-			"backgroundColor": "#5a6386",
-			"borderColor": ["#242b49", "#242b49", "#242b49", "#242b49","#242b49"],
+			"backgroundColor": "#545B79",
+			"borderColor": ["#21243B", "#21243B", "#21243B", "#21243B","#21243B"],
 			"borderWidth": {
 				"top": 2,
 				"right": 0,
@@ -396,22 +396,22 @@
     "datasets": [
       {
         "label": "Slowest",
-        "backgroundColor": "#51adc0",
-        "borderColor": "#51adc0",
+        "backgroundColor": "#2FD7C4",
+        "borderColor": "#2FD7C4",
         "borderWidth": 1,
         "data": [10, 3, 5, 1]
       },
       {
         "label": "Slow",
-        "backgroundColor": "#8567f0",
-        "borderColor": "#8567f0",
+        "backgroundColor": "#8562F3",
+        "borderColor": "#8562F3",
         "borderWidth": 1,
         "data": [12, 13, 2, 5]
       },
       {
         "label": "Medium",
-        "backgroundColor": "#D0506C",
-        "borderColor": "#D0506C",
+        "backgroundColor": "#5292E5",
+        "borderColor": "#5292E5",
         "borderWidth": 1,
         "data": [4, 5, 4, 2]
       },
@@ -426,21 +426,31 @@
 	},
 	"verticalStackedChartData": {
     "doughnutData": {
-      "title": "Frame Rate",
-      "secondTitle": "24fps",
-      "average": [30, 12, 6, 52]
+      "labels": [
+        "0-15 seconds",
+        "15-30 seconds",
+        "30-45 seconds",
+        "45-60 seconds"
+      ],
+      "datasets": [
+        {
+          "data": [42, 24, 16, 18],
+          "backgroundColor": ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"],
+          "hoverBackgroundColor": ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"]
+        }
+      ]
     },
     "stackedChartData": {
       "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
       "datasets": [
         {
 					"label": "0-15 seconds",
-					"backgroundColor": "#D0506C",
+					"backgroundColor": "#5292E5",
           "data": [25, 10, 14, 51]
         },
         {
 					"label": "15-30 seconds",
-					"backgroundColor": "#8567f0",
+					"backgroundColor": "#8562F3",
           "data": [12, 24, 56, 9]
         },
         {
@@ -450,47 +460,47 @@
         },
         {
 					"label": "60+ seconds",
-					"backgroundColor": "#51adc0",
+					"backgroundColor": "#2FD7C4",
           "data": [21, 48, 12, 15]
         }
       ]
     },
     "doughnutRoundData": [
-      { "data": "0-15 seconds", "color": "#51adc0" },
-      { "data": "15-30 seconds", "color": "#8567f0" },
-      { "data": "30-45 seconds", "color": "#D0506C" },
+      { "data": "0-15 seconds", "color": "#2FD7C4" },
+      { "data": "15-30 seconds", "color": "#8562F3" },
+      { "data": "30-45 seconds", "color": "#5292E5" },
       { "data": "45-60 seconds", "color": "#acb0be" }
     ]
 	},
 	"colorTempData": [
     {
       "data": [
-        { "x": -50, "y": 82, "color": "#D0506C" },
-        { "x": 50, "y": -25, "color": "#51adc0" },
-        { "x": 75, "y": -30, "color": "#8567f0" },
+        { "x": -50, "y": 82, "color": "#5292E5" },
+        { "x": 50, "y": -25, "color": "#2FD7C4" },
+        { "x": 75, "y": -30, "color": "#8562F3" },
         { "x": 60, "y": 30, "color": "#ffffff" },
-        { "x": -12, "y": -30, "color": "#242b49" }
+        { "x": -12, "y": -30, "color": "#21243B" }
       ]
     },
     {
       "data": [
-        { "x": -50, "y": 12, "color": "#D0506C" },
-        { "x": 50, "y": 25, "color": "#51adc0" },
-        { "x": 75, "y": -30, "color": "#8567f0" }
+        { "x": -50, "y": 12, "color": "#5292E5" },
+        { "x": 50, "y": 25, "color": "#2FD7C4" },
+        { "x": 75, "y": -30, "color": "#8562F3" }
       ]
     },
     {
       "data": [
-        { "x": -50, "y": 12, "color": "#D0506C" },
-        { "x": 50, "y": -75, "color": "#51adc0" },
-        { "x": 75, "y": -30, "color": "#8567f0" }
+        { "x": -50, "y": 12, "color": "#5292E5" },
+        { "x": 50, "y": -75, "color": "#2FD7C4" },
+        { "x": 75, "y": -30, "color": "#8562F3" }
       ]
     },
     {
       "data": [
-        { "x": -50, "y": 12, "color": "#D0506C" },
-        { "x": 50, "y": -75, "color": "#51adc0" },
-        { "x": 75, "y": -30, "color": "#8567f0" }
+        { "x": -50, "y": 12, "color": "#5292E5" },
+        { "x": 50, "y": -75, "color": "#2FD7C4" },
+        { "x": 75, "y": -30, "color": "#8562F3" }
       ]
     }
   ]
