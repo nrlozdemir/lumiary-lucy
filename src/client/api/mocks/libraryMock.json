@@ -1,0 +1,4022 @@
+[
+  {
+    "albumId": 1,
+    "id": 1,
+    "title": "12 years ago today, Kobe dropped 81",
+    "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/12-years-ago-today-Kobe-dropped-81.mp4",
+    "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/12-years-ago-today-Kobe-dropped-81.jpg",
+    "date": "12/10/2016",
+    "socialIcon": "facebook",
+    "viewCount": 7883,
+    "likeCount": 3917,
+    "shareCount": 1304,
+    "commentCount": 7386,
+    "ageRange": "11-17",
+    "gender": "male",
+    "duration": 84,
+    "dominantColor": "#3178b0",
+    "format": "stopMotion",
+    "aspectRatio": "1:1",
+    "frameRate": 24,
+    "resolution": "720p",
+    "pacing": "Slow",
+    "cvScore": 88.5,
+    "ColorTempMock": {
+      "colorTempData": [
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 100, "y": -29, "type": "video", "color": "#5292E5" },
+            { "x": -82, "y": -11, "type": "library", "color": "#2FD7C4" },
+            { "x": -89, "y": -15, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Happy",
+          "bottomText": "Sad",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -86, "y": -76, "type": "video", "color": "#5292E5" },
+            { "x": 29, "y": 30, "type": "library", "color": "#2FD7C4" },
+            { "x": 45, "y": 49, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Energetic",
+          "bottomText": "Calm",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -29, "y": 44, "type": "video", "color": "#5292E5" },
+            { "x": -45, "y": -24, "type": "library", "color": "#2FD7C4" },
+            { "x": -92, "y": 97, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Natural",
+          "bottomText": "Synthetic",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        }
+      ]
+    },
+    "DoughnutChartMock": {
+      "doughnutData": [
+        {
+          "title": "Frame Rate",
+          "secondTitle": "24fps",
+          "average": [45.92, 33.67, 14.8, 5.61],
+          "libraryData": [58, 10.67, 14.67, 16.67],
+          "industryData": [42.72, 14.08, 5.16, 38.03],
+          "libraryFpsData": { "percentage": "52", "fps": "24" },
+          "industryFpsData": { "percentage": "36", "fps": "45" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [50, 86, 17, 89, 15, 94, 34] },
+              { "data": [29, 43, 61, 83, 40, 67, 78] }
+            ]
+          }
+        },
+        {
+          "title": "Pacing",
+          "secondTitle": "Fastest",
+          "average": [16.24, 19.66, 37.61, 26.5],
+          "libraryData": [17.54, 38.6, 13.16, 30.7],
+          "industryData": [20.71, 17.68, 39.39, 22.22],
+          "libraryFpsData": { "percentage": "40", "fps": "39" },
+          "industryFpsData": { "percentage": "60", "fps": "47" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [17, 81, 17, 52, 26, 25, 17] },
+              { "data": [76, 41, 33, 65, 54, 84, 72] }
+            ]
+          }
+        },
+        {
+          "title": "Shots",
+          "secondTitle": "12 Shots",
+          "average": [0, 19.52, 45.71, 34.76],
+          "libraryData": [30.24, 5.24, 26.61, 37.9],
+          "industryData": [7.62, 39.05, 40.95, 12.38],
+          "libraryFpsData": { "percentage": "44", "fps": "55" },
+          "industryFpsData": { "percentage": "72", "fps": "29" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [65, 81, 20, 95, 43, 27, 17] },
+              { "data": [85, 11, 40, 59, 45, 34, 95] }
+            ]
+          }
+        },
+        {
+          "title": "Format",
+          "secondTitle": "Live Action",
+          "average": [2.22, 8.89, 28.89, 60],
+          "libraryData": [20, 20.98, 46.34, 12.68],
+          "industryData": [40.2, 18.63, 37.25, 3.92],
+          "libraryFpsData": { "percentage": "64", "fps": "44" },
+          "industryFpsData": { "percentage": "55", "fps": "56" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [22, 33, 46, 100, 2, 40, 14] },
+              { "data": [13, 69, 64, 15, 30, 44, 92] }
+            ]
+          }
+        }
+      ]
+    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "174.1",
+        "percentage": "52"
+      },
+      {
+        "title": "Likes",
+        "score": "152.8",
+        "percentage": "42.0"
+      },
+      {
+        "title": "Comments",
+        "score": "186.4",
+        "percentage": "13"
+      },
+      {
+        "title": "Shares",
+        "score": "103.4",
+        "percentage": "28"
+      }
+    ],
+    "ShotByShotMock": {
+      "videoList": [
+        "https://picsum.photos/100/160?image=28",
+        "https://picsum.photos/20/160?image=69",
+        "https://picsum.photos/75/160?image=76",
+        "https://picsum.photos/120/160?image=29",
+        "https://picsum.photos/200/160?image=71",
+        "https://picsum.photos/250/160?image=81",
+        "https://picsum.photos/90/160?image=9",
+        "https://picsum.photos/110/160?image=89",
+        "https://picsum.photos/40/160?image=43",
+        "https://picsum.photos/60/160?image=35",
+        "https://picsum.photos/90/160?image=35",
+        "https://picsum.photos/120/160?image=25",
+        "https://picsum.photos/160/160?image=34",
+        "https://picsum.photos/200/160?image=43",
+        "https://picsum.photos/129/160?image=37",
+        "https://picsum.photos/210/160?image=69",
+        "https://picsum.photos/40/160?image=89",
+        "https://picsum.photos/20/160?image=52"
+      ],
+      "slideImages": [
+        {
+          "src": "https://picsum.photos/500/270?image=26",
+          "options": [
+            { "percentage": 40, "accurate": 20, "text": "Male" },
+            { "percentage": 60, "accurate": 60, "text": "Laptop" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=34",
+          "options": [
+            { "percentage": 30, "accurate": 20, "text": "Female" },
+            { "percentage": 50, "accurate": 20, "text": "Cat" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=44",
+          "options": [
+            { "percentage": 40, "accurate": 10, "text": "Cart" },
+            { "percentage": 16, "accurate": 30, "text": "Bag" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=57",
+          "options": [
+            { "percentage": 34, "accurate": 68, "text": "Playstation" },
+            { "percentage": 30, "accurate": 20, "text": "Mouse" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=35",
+          "options": [
+            { "percentage": 40, "accurate": 53, "text": "Male" },
+            { "percentage": 52, "accurate": 30, "text": "Sheep" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=8",
+          "options": [
+            { "percentage": 42, "accurate": 20, "text": "Phone" },
+            { "percentage": 78, "accurate": 60, "text": "Electronics" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=95",
+          "options": [
+            { "percentage": 40, "accurate": 30, "text": "Key" },
+            { "percentage": 45, "accurate": 42, "text": "Press" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=56",
+          "options": [
+            { "percentage": 31, "accurate": 20, "text": "Male" },
+            { "percentage": 76, "accurate": 54, "text": "Laptop" }
+          ]
+        }
+      ],
+      "radarData": {
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        "datasets": [
+          { "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56] },
+          { "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56] }
+        ]
+      },
+      "sliderWithThumbnails": [
+        {
+          "img": "https://picsum.photos/500/270?image=3",
+          "thumbnail": "https://picsum.photos/200/160?image=41"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=55",
+          "thumbnail": "https://picsum.photos/40/160?image=64"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=42",
+          "thumbnail": "https://picsum.photos/150/160?image=62"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=79",
+          "thumbnail": "https://picsum.photos/240/160?image=57"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=19",
+          "thumbnail": "https://picsum.photos/200/160?image=15"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=72",
+          "thumbnail": "https://picsum.photos/250/160?image=15"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=61",
+          "thumbnail": "https://picsum.photos/300/160?image=64"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=44",
+          "thumbnail": "https://picsum.photos/110/160?image=40"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=76",
+          "thumbnail": "https://picsum.photos/60/160?image=53"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=85",
+          "thumbnail": "https://picsum.photos/160/160?image=53"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=54",
+          "thumbnail": "https://picsum.photos/100/160?image=27"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=51",
+          "thumbnail": "https://picsum.photos/20/160?image=13"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=48",
+          "thumbnail": "https://picsum.photos/75/160?image=100"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=73",
+          "thumbnail": "https://picsum.photos/120/160?image=62"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=7",
+          "thumbnail": "https://picsum.photos/200/160?image=88"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=82",
+          "thumbnail": "https://picsum.photos/250/160?image=76"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=60",
+          "thumbnail": "https://picsum.photos/90/160?image=93"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=39",
+          "thumbnail": "https://picsum.photos/110/160?image=20"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=56",
+          "thumbnail": "https://picsum.photos/40/160?image=6"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=33",
+          "thumbnail": "https://picsum.photos/60/160?image=24"
+        }
+      ]
+    }
+  },
+  {
+    "albumId": 1,
+    "id": 2,
+    "title": "13-Year-Old Jaden Newman",
+    "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/13-Year-Old-Jaden-Newman.mp4",
+    "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/13-Year-Old-Jaden-Newman.jpg",
+    "date": "20/05/2018",
+    "socialIcon": "instagram",
+    "viewCount": 2393,
+    "likeCount": 1586,
+    "shareCount": 1578,
+    "commentCount": 1886,
+    "ageRange": "21-24",
+    "gender": "female",
+    "duration": 5,
+    "dominantColor": "#eb7919",
+    "format": "cinemagraph",
+    "aspectRatio": "16:9",
+    "frameRate": 30,
+    "resolution": "720p",
+    "pacing": "Slow",
+    "cvScore": 67.1,
+    "ColorTempMock": {
+      "colorTempData": [
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -4, "y": 37, "type": "video", "color": "#5292E5" },
+            { "x": -94, "y": -96, "type": "library", "color": "#2FD7C4" },
+            { "x": 32, "y": 67, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Happy",
+          "bottomText": "Sad",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -68, "y": 36, "type": "video", "color": "#5292E5" },
+            { "x": 53, "y": -18, "type": "library", "color": "#2FD7C4" },
+            { "x": 54, "y": 62, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Energetic",
+          "bottomText": "Calm",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 27, "y": -43, "type": "video", "color": "#5292E5" },
+            { "x": 84, "y": -69, "type": "library", "color": "#2FD7C4" },
+            { "x": 11, "y": -42, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Natural",
+          "bottomText": "Synthetic",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        }
+      ]
+    },
+    "DoughnutChartMock": {
+      "doughnutData": [
+        {
+          "title": "Frame Rate",
+          "secondTitle": "24fps",
+          "average": [28.71, 2.48, 29.7, 39.11],
+          "libraryData": [18.69, 40.4, 4.04, 36.87],
+          "industryData": [44.84, 16.14, 16.14, 22.87],
+          "libraryFpsData": { "percentage": "52", "fps": "24" },
+          "industryFpsData": { "percentage": "36", "fps": "45" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [57, 24, 56, 90, 30, 67, 77] },
+              { "data": [86, 64, 92, 91, 55, 11, 3] }
+            ]
+          }
+        },
+        {
+          "title": "Pacing",
+          "secondTitle": "Fastest",
+          "average": [19.3, 62.28, 13.16, 5.26],
+          "libraryData": [20.1, 15.31, 19.62, 44.98],
+          "industryData": [16.05, 28.4, 46.91, 8.64],
+          "libraryFpsData": { "percentage": "40", "fps": "39" },
+          "industryFpsData": { "percentage": "60", "fps": "47" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [27, 70, 1, 41, 98, 9, 50] },
+              { "data": [100, 70, 38, 79, 28, 70, 18] }
+            ]
+          }
+        },
+        {
+          "title": "Shots",
+          "secondTitle": "12 Shots",
+          "average": [12.2, 36.1, 35.61, 16.1],
+          "libraryData": [32.28, 6.96, 36.71, 24.05],
+          "industryData": [25.17, 30, 18.28, 26.55],
+          "libraryFpsData": { "percentage": "44", "fps": "55" },
+          "industryFpsData": { "percentage": "72", "fps": "29" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [85, 11, 54, 46, 57, 55, 36] },
+              { "data": [0, 39, 4, 20, 71, 68, 24] }
+            ]
+          }
+        },
+        {
+          "title": "Format",
+          "secondTitle": "Live Action",
+          "average": [14.57, 16.08, 20.6, 48.74],
+          "libraryData": [27.76, 22.43, 18.63, 31.18],
+          "industryData": [39.7, 8.54, 7.04, 44.72],
+          "libraryFpsData": { "percentage": "64", "fps": "44" },
+          "industryFpsData": { "percentage": "55", "fps": "56" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [96, 50, 39, 73, 94, 63, 44] },
+              { "data": [28, 54, 90, 9, 73, 69, 19] }
+            ]
+          }
+        }
+      ]
+    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "274.1",
+        "percentage": "14"
+      },
+      {
+        "title": "Likes",
+        "score": "252.8",
+        "percentage": "72"
+      },
+      {
+        "title": "Comments",
+        "score": "286.4",
+        "percentage": "56"
+      },
+      {
+        "title": "Shares",
+        "score": "203.4",
+        "percentage": "28"
+      }
+    ],
+    "ShotByShotMock": {
+      "videoList": [
+        "https://picsum.photos/100/160?image=28",
+        "https://picsum.photos/20/160?image=91",
+        "https://picsum.photos/75/160?image=9",
+        "https://picsum.photos/120/160?image=21",
+        "https://picsum.photos/200/160?image=68",
+        "https://picsum.photos/250/160?image=81",
+        "https://picsum.photos/90/160?image=23",
+        "https://picsum.photos/110/160?image=7",
+        "https://picsum.photos/40/160?image=37",
+        "https://picsum.photos/60/160?image=19",
+        "https://picsum.photos/90/160?image=23",
+        "https://picsum.photos/120/160?image=2",
+        "https://picsum.photos/160/160?image=4",
+        "https://picsum.photos/200/160?image=28",
+        "https://picsum.photos/129/160?image=57",
+        "https://picsum.photos/210/160?image=100",
+        "https://picsum.photos/40/160?image=1",
+        "https://picsum.photos/20/160?image=9"
+      ],
+      "slideImages": [
+        {
+          "src": "https://picsum.photos/500/270?image=49",
+          "options": [
+            { "percentage": 40, "accurate": 20, "text": "Male" },
+            { "percentage": 60, "accurate": 60, "text": "Laptop" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=35",
+          "options": [
+            { "percentage": 30, "accurate": 20, "text": "Female" },
+            { "percentage": 50, "accurate": 20, "text": "Cat" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=57",
+          "options": [
+            { "percentage": 40, "accurate": 10, "text": "Cart" },
+            { "percentage": 16, "accurate": 30, "text": "Bag" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=8",
+          "options": [
+            { "percentage": 34, "accurate": 68, "text": "Playstation" },
+            { "percentage": 30, "accurate": 20, "text": "Mouse" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=15",
+          "options": [
+            { "percentage": 40, "accurate": 53, "text": "Male" },
+            { "percentage": 52, "accurate": 30, "text": "Sheep" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=81",
+          "options": [
+            { "percentage": 42, "accurate": 20, "text": "Phone" },
+            { "percentage": 78, "accurate": 60, "text": "Electronics" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=25",
+          "options": [
+            { "percentage": 40, "accurate": 30, "text": "Key" },
+            { "percentage": 45, "accurate": 42, "text": "Press" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=21",
+          "options": [
+            { "percentage": 31, "accurate": 20, "text": "Male" },
+            { "percentage": 76, "accurate": 54, "text": "Laptop" }
+          ]
+        }
+      ],
+      "radarData": {
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        "datasets": [
+          { "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56] },
+          { "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56] }
+        ]
+      },
+      "sliderWithThumbnails": [
+        {
+          "img": "https://picsum.photos/500/270?image=99",
+          "thumbnail": "https://picsum.photos/200/160?image=81"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=54",
+          "thumbnail": "https://picsum.photos/40/160?image=27"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=5",
+          "thumbnail": "https://picsum.photos/150/160?image=71"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=84",
+          "thumbnail": "https://picsum.photos/240/160?image=64"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=58",
+          "thumbnail": "https://picsum.photos/200/160?image=14"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=55",
+          "thumbnail": "https://picsum.photos/250/160?image=100"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=61",
+          "thumbnail": "https://picsum.photos/300/160?image=40"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=15",
+          "thumbnail": "https://picsum.photos/110/160?image=11"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=92",
+          "thumbnail": "https://picsum.photos/60/160?image=41"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=5",
+          "thumbnail": "https://picsum.photos/160/160?image=44"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=80",
+          "thumbnail": "https://picsum.photos/100/160?image=70"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=32",
+          "thumbnail": "https://picsum.photos/20/160?image=61"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=38",
+          "thumbnail": "https://picsum.photos/75/160?image=70"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=22",
+          "thumbnail": "https://picsum.photos/120/160?image=9"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=41",
+          "thumbnail": "https://picsum.photos/200/160?image=29"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=17",
+          "thumbnail": "https://picsum.photos/250/160?image=79"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=15",
+          "thumbnail": "https://picsum.photos/90/160?image=30"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=25",
+          "thumbnail": "https://picsum.photos/110/160?image=99"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=21",
+          "thumbnail": "https://picsum.photos/40/160?image=57"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=50",
+          "thumbnail": "https://picsum.photos/60/160?image=44"
+        }
+      ]
+    }
+  },
+  {
+    "albumId": 1,
+    "id": 3,
+    "title": "21 years later, the Pats and Jaguars meet again",
+    "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/21-years-later-the-Pats-and-Jaguars-meet-again.mp4",
+    "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/21-years-later-the-Pats-and-Jaguars-meet-again.jpg",
+    "date": "26/05/2014",
+    "socialIcon": "twitter",
+    "viewCount": 4627,
+    "likeCount": 8568,
+    "shareCount": 9286,
+    "commentCount": 9939,
+    "ageRange": "21-24",
+    "gender": "female",
+    "duration": 27,
+    "dominantColor": "#dd501d",
+    "format": "stopMotion",
+    "aspectRatio": "4:3",
+    "frameRate": 24,
+    "resolution": "720p",
+    "pacing": "Fast",
+    "cvScore": 93.8,
+    "ColorTempMock": {
+      "colorTempData": [
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 5, "y": -3, "type": "video", "color": "#5292E5" },
+            { "x": -87, "y": 5, "type": "library", "color": "#2FD7C4" },
+            { "x": 80, "y": 50, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Happy",
+          "bottomText": "Sad",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 36, "y": -4, "type": "video", "color": "#5292E5" },
+            { "x": 48, "y": 18, "type": "library", "color": "#2FD7C4" },
+            { "x": -47, "y": 13, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Energetic",
+          "bottomText": "Calm",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -15, "y": 14, "type": "video", "color": "#5292E5" },
+            { "x": -95, "y": 35, "type": "library", "color": "#2FD7C4" },
+            { "x": -89, "y": 10, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Natural",
+          "bottomText": "Synthetic",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        }
+      ]
+    },
+    "DoughnutChartMock": {
+      "doughnutData": [
+        {
+          "title": "Frame Rate",
+          "secondTitle": "24fps",
+          "average": [30, 17.5, 38.33, 14.17],
+          "libraryData": [1.04, 11.98, 36.98, 50],
+          "industryData": [43.92, 5.82, 3.7, 46.56],
+          "libraryFpsData": { "percentage": "52", "fps": "24" },
+          "industryFpsData": { "percentage": "36", "fps": "45" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [55, 58, 96, 90, 94, 13, 36] },
+              { "data": [28, 80, 26, 98, 41, 49, 92] }
+            ]
+          }
+        },
+        {
+          "title": "Pacing",
+          "secondTitle": "Fastest",
+          "average": [26.01, 26.88, 22.25, 24.86],
+          "libraryData": [34.73, 30.15, 16.03, 19.08],
+          "industryData": [60.2, 19.39, 6.12, 14.29],
+          "libraryFpsData": { "percentage": "40", "fps": "39" },
+          "industryFpsData": { "percentage": "60", "fps": "47" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [85, 24, 18, 10, 51, 34, 100] },
+              { "data": [75, 20, 5, 0, 93, 65, 13] }
+            ]
+          }
+        },
+        {
+          "title": "Shots",
+          "secondTitle": "12 Shots",
+          "average": [39.44, 8.76, 26.69, 25.1],
+          "libraryData": [0, 43.42, 47.37, 9.21],
+          "industryData": [28.57, 32.23, 10.3, 28.9],
+          "libraryFpsData": { "percentage": "44", "fps": "55" },
+          "industryFpsData": { "percentage": "72", "fps": "29" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [80, 17, 94, 49, 9, 90, 2] },
+              { "data": [56, 60, 11, 40, 89, 27, 29] }
+            ]
+          }
+        },
+        {
+          "title": "Format",
+          "secondTitle": "Live Action",
+          "average": [6.19, 6.7, 39.69, 47.42],
+          "libraryData": [39.57, 29.57, 16.96, 13.91],
+          "industryData": [15.79, 20.1, 41.63, 22.49],
+          "libraryFpsData": { "percentage": "64", "fps": "44" },
+          "industryFpsData": { "percentage": "55", "fps": "56" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [60, 4, 66, 29, 23, 47, 18] },
+              { "data": [91, 12, 40, 14, 4, 18, 44] }
+            ]
+          }
+        }
+      ]
+    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "374.1",
+        "percentage": "64"
+      },
+      {
+        "title": "Likes",
+        "score": "352.8",
+        "percentage": "22"
+      },
+      {
+        "title": "Comments",
+        "score": "386.4",
+        "percentage": "6"
+      },
+      {
+        "title": "Shares",
+        "score": "303.4",
+        "percentage": "28"
+      }
+    ],
+    "ShotByShotMock": {
+      "videoList": [
+        "https://picsum.photos/100/160?image=79",
+        "https://picsum.photos/20/160?image=30",
+        "https://picsum.photos/75/160?image=10",
+        "https://picsum.photos/120/160?image=29",
+        "https://picsum.photos/200/160?image=71",
+        "https://picsum.photos/250/160?image=4",
+        "https://picsum.photos/90/160?image=29",
+        "https://picsum.photos/110/160?image=42",
+        "https://picsum.photos/40/160?image=23",
+        "https://picsum.photos/60/160?image=8",
+        "https://picsum.photos/90/160?image=38",
+        "https://picsum.photos/120/160?image=26",
+        "https://picsum.photos/160/160?image=38",
+        "https://picsum.photos/200/160?image=44",
+        "https://picsum.photos/129/160?image=48",
+        "https://picsum.photos/210/160?image=5",
+        "https://picsum.photos/40/160?image=79",
+        "https://picsum.photos/20/160?image=49"
+      ],
+      "slideImages": [
+        {
+          "src": "https://picsum.photos/500/270?image=47",
+          "options": [
+            { "percentage": 40, "accurate": 20, "text": "Male" },
+            { "percentage": 60, "accurate": 60, "text": "Laptop" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=45",
+          "options": [
+            { "percentage": 30, "accurate": 20, "text": "Female" },
+            { "percentage": 50, "accurate": 20, "text": "Cat" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=33",
+          "options": [
+            { "percentage": 40, "accurate": 10, "text": "Cart" },
+            { "percentage": 16, "accurate": 30, "text": "Bag" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=88",
+          "options": [
+            { "percentage": 34, "accurate": 68, "text": "Playstation" },
+            { "percentage": 30, "accurate": 20, "text": "Mouse" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=31",
+          "options": [
+            { "percentage": 40, "accurate": 53, "text": "Male" },
+            { "percentage": 52, "accurate": 30, "text": "Sheep" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=44",
+          "options": [
+            { "percentage": 42, "accurate": 20, "text": "Phone" },
+            { "percentage": 78, "accurate": 60, "text": "Electronics" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=89",
+          "options": [
+            { "percentage": 40, "accurate": 30, "text": "Key" },
+            { "percentage": 45, "accurate": 42, "text": "Press" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=20",
+          "options": [
+            { "percentage": 31, "accurate": 20, "text": "Male" },
+            { "percentage": 76, "accurate": 54, "text": "Laptop" }
+          ]
+        }
+      ],
+      "radarData": {
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        "datasets": [
+          { "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56] },
+          { "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56] }
+        ]
+      },
+      "sliderWithThumbnails": [
+        {
+          "img": "https://picsum.photos/500/270?image=3",
+          "thumbnail": "https://picsum.photos/200/160?image=16"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=16",
+          "thumbnail": "https://picsum.photos/40/160?image=20"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=18",
+          "thumbnail": "https://picsum.photos/150/160?image=18"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=55",
+          "thumbnail": "https://picsum.photos/240/160?image=18"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=72",
+          "thumbnail": "https://picsum.photos/200/160?image=17"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=52",
+          "thumbnail": "https://picsum.photos/250/160?image=17"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=89",
+          "thumbnail": "https://picsum.photos/300/160?image=64"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=6",
+          "thumbnail": "https://picsum.photos/110/160?image=3"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=21",
+          "thumbnail": "https://picsum.photos/60/160?image=11"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=56",
+          "thumbnail": "https://picsum.photos/160/160?image=70"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=57",
+          "thumbnail": "https://picsum.photos/100/160?image=56"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=39",
+          "thumbnail": "https://picsum.photos/20/160?image=39"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=21",
+          "thumbnail": "https://picsum.photos/75/160?image=59"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=33",
+          "thumbnail": "https://picsum.photos/120/160?image=39"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=87",
+          "thumbnail": "https://picsum.photos/200/160?image=71"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=35",
+          "thumbnail": "https://picsum.photos/250/160?image=35"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=38",
+          "thumbnail": "https://picsum.photos/90/160?image=77"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=25",
+          "thumbnail": "https://picsum.photos/110/160?image=4"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=98",
+          "thumbnail": "https://picsum.photos/40/160?image=77"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=96",
+          "thumbnail": "https://picsum.photos/60/160?image=5"
+        }
+      ]
+    }
+  },
+  {
+    "albumId": 1,
+    "id": 4,
+    "title": "Andre Drummond All Star ",
+    "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Andre-Drummond-All-Star.mp4",
+    "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Andre-Drummond-All-Star.jpg",
+    "date": "21/04/2016",
+    "socialIcon": "pinterest",
+    "viewCount": 6814,
+    "likeCount": 1675,
+    "shareCount": 6315,
+    "commentCount": 2120,
+    "ageRange": "25-34",
+    "gender": "male",
+    "duration": 71,
+    "dominantColor": "#79609b",
+    "format": "animation",
+    "aspectRatio": "9:16",
+    "frameRate": 24,
+    "resolution": "4K",
+    "pacing": "Medium",
+    "cvScore": 42.0,
+    "ColorTempMock": {
+      "colorTempData": [
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -29, "y": 94, "type": "video", "color": "#5292E5" },
+            { "x": 75, "y": 6, "type": "library", "color": "#2FD7C4" },
+            { "x": -83, "y": 70, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Happy",
+          "bottomText": "Sad",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -4, "y": -37, "type": "video", "color": "#5292E5" },
+            { "x": 9, "y": 18, "type": "library", "color": "#2FD7C4" },
+            { "x": 56, "y": 19, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Energetic",
+          "bottomText": "Calm",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -59, "y": -27, "type": "video", "color": "#5292E5" },
+            { "x": -82, "y": -44, "type": "library", "color": "#2FD7C4" },
+            { "x": -8, "y": -30, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Natural",
+          "bottomText": "Synthetic",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        }
+      ]
+    },
+    "DoughnutChartMock": {
+      "doughnutData": [
+        {
+          "title": "Frame Rate",
+          "secondTitle": "24fps",
+          "average": [16.15, 21.74, 39.75, 22.36],
+          "libraryData": [16.48, 19.32, 20.45, 43.75],
+          "industryData": [31.13, 2.83, 38.68, 27.36],
+          "libraryFpsData": { "percentage": "52", "fps": "24" },
+          "industryFpsData": { "percentage": "36", "fps": "45" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [53, 96, 52, 31, 99, 78, 52] },
+              { "data": [60, 55, 35, 35, 22, 3, 97] }
+            ]
+          }
+        },
+        {
+          "title": "Pacing",
+          "secondTitle": "Fastest",
+          "average": [29.05, 15.71, 12.86, 42.38],
+          "libraryData": [36.57, 3.43, 18.86, 41.14],
+          "industryData": [30.07, 29.41, 9.8, 30.72],
+          "libraryFpsData": { "percentage": "40", "fps": "39" },
+          "industryFpsData": { "percentage": "60", "fps": "47" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [86, 63, 56, 79, 2, 14, 100] },
+              { "data": [75, 67, 52, 1, 61, 10, 81] }
+            ]
+          }
+        },
+        {
+          "title": "Shots",
+          "secondTitle": "12 Shots",
+          "average": [16.67, 20.72, 39.19, 23.42],
+          "libraryData": [23.08, 48.25, 11.19, 17.48],
+          "industryData": [23.12, 26.01, 46.82, 4.05],
+          "libraryFpsData": { "percentage": "44", "fps": "55" },
+          "industryFpsData": { "percentage": "72", "fps": "29" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [28, 7, 24, 18, 79, 61, 95] },
+              { "data": [31, 9, 85, 35, 43, 90, 12] }
+            ]
+          }
+        },
+        {
+          "title": "Format",
+          "secondTitle": "Live Action",
+          "average": [18.6, 35.47, 44.19, 1.74],
+          "libraryData": [54.86, 2.29, 20, 22.86],
+          "industryData": [21.7, 27.23, 12.77, 38.3],
+          "libraryFpsData": { "percentage": "64", "fps": "44" },
+          "industryFpsData": { "percentage": "55", "fps": "56" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [76, 56, 77, 84, 11, 1, 27] },
+              { "data": [83, 42, 34, 45, 67, 39, 30] }
+            ]
+          }
+        }
+      ]
+    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "474.1",
+        "percentage": "99"
+      },
+      {
+        "title": "Likes",
+        "score": "452.8",
+        "percentage": "42"
+      },
+      {
+        "title": "Comments",
+        "score": "486.4",
+        "percentage": "77"
+      },
+      {
+        "title": "Shares",
+        "score": "403.4",
+        "percentage": "28"
+      }
+    ],
+    "ShotByShotMock": {
+      "videoList": [
+        "https://picsum.photos/100/160?image=64",
+        "https://picsum.photos/20/160?image=58",
+        "https://picsum.photos/75/160?image=79",
+        "https://picsum.photos/120/160?image=46",
+        "https://picsum.photos/200/160?image=52",
+        "https://picsum.photos/250/160?image=85",
+        "https://picsum.photos/90/160?image=93",
+        "https://picsum.photos/110/160?image=83",
+        "https://picsum.photos/40/160?image=30",
+        "https://picsum.photos/60/160?image=71",
+        "https://picsum.photos/90/160?image=71",
+        "https://picsum.photos/120/160?image=96",
+        "https://picsum.photos/160/160?image=29",
+        "https://picsum.photos/200/160?image=67",
+        "https://picsum.photos/129/160?image=44",
+        "https://picsum.photos/210/160?image=60",
+        "https://picsum.photos/40/160?image=19",
+        "https://picsum.photos/20/160?image=93"
+      ],
+      "slideImages": [
+        {
+          "src": "https://picsum.photos/500/270?image=84",
+          "options": [
+            { "percentage": 40, "accurate": 20, "text": "Male" },
+            { "percentage": 60, "accurate": 60, "text": "Laptop" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=31",
+          "options": [
+            { "percentage": 30, "accurate": 20, "text": "Female" },
+            { "percentage": 50, "accurate": 20, "text": "Cat" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=46",
+          "options": [
+            { "percentage": 40, "accurate": 10, "text": "Cart" },
+            { "percentage": 16, "accurate": 30, "text": "Bag" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=80",
+          "options": [
+            { "percentage": 34, "accurate": 68, "text": "Playstation" },
+            { "percentage": 30, "accurate": 20, "text": "Mouse" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=3",
+          "options": [
+            { "percentage": 40, "accurate": 53, "text": "Male" },
+            { "percentage": 52, "accurate": 30, "text": "Sheep" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=37",
+          "options": [
+            { "percentage": 42, "accurate": 20, "text": "Phone" },
+            { "percentage": 78, "accurate": 60, "text": "Electronics" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=47",
+          "options": [
+            { "percentage": 40, "accurate": 30, "text": "Key" },
+            { "percentage": 45, "accurate": 42, "text": "Press" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=5",
+          "options": [
+            { "percentage": 31, "accurate": 20, "text": "Male" },
+            { "percentage": 76, "accurate": 54, "text": "Laptop" }
+          ]
+        }
+      ],
+      "radarData": {
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        "datasets": [
+          { "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56] },
+          { "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56] }
+        ]
+      },
+      "sliderWithThumbnails": [
+        {
+          "img": "https://picsum.photos/500/270?image=9",
+          "thumbnail": "https://picsum.photos/200/160?image=32"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=47",
+          "thumbnail": "https://picsum.photos/40/160?image=9"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=12",
+          "thumbnail": "https://picsum.photos/150/160?image=10"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=61",
+          "thumbnail": "https://picsum.photos/240/160?image=10"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=38",
+          "thumbnail": "https://picsum.photos/200/160?image=21"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=88",
+          "thumbnail": "https://picsum.photos/250/160?image=35"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=75",
+          "thumbnail": "https://picsum.photos/300/160?image=90"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=43",
+          "thumbnail": "https://picsum.photos/110/160?image=32"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=16",
+          "thumbnail": "https://picsum.photos/60/160?image=66"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=11",
+          "thumbnail": "https://picsum.photos/160/160?image=8"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=23",
+          "thumbnail": "https://picsum.photos/100/160?image=90"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=3",
+          "thumbnail": "https://picsum.photos/20/160?image=88"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=38",
+          "thumbnail": "https://picsum.photos/75/160?image=39"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=95",
+          "thumbnail": "https://picsum.photos/120/160?image=24"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=100",
+          "thumbnail": "https://picsum.photos/200/160?image=23"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=69",
+          "thumbnail": "https://picsum.photos/250/160?image=11"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=72",
+          "thumbnail": "https://picsum.photos/90/160?image=37"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=9",
+          "thumbnail": "https://picsum.photos/110/160?image=28"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=48",
+          "thumbnail": "https://picsum.photos/40/160?image=63"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=68",
+          "thumbnail": "https://picsum.photos/60/160?image=85"
+        }
+      ]
+    }
+  },
+  {
+    "albumId": 1,
+    "id": 5,
+    "title": "Anthony Davis Finishes with 43 Points",
+    "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anthony-Davis-Finishes-with-43-Points.mp4",
+    "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anthony-Davis-Finishes-with-43-Points.jpg",
+    "date": "15/01/2015",
+    "socialIcon": "instagram",
+    "viewCount": 7036,
+    "likeCount": 9616,
+    "shareCount": 5790,
+    "commentCount": 9380,
+    "ageRange": "11-17",
+    "gender": "male",
+    "duration": 24,
+    "dominantColor": "#3178b0",
+    "format": "cinemagraph",
+    "aspectRatio": "1:1",
+    "frameRate": 30,
+    "resolution": "1080p",
+    "pacing": "Medium",
+    "cvScore": 65.3,
+    "ColorTempMock": {
+      "colorTempData": [
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -37, "y": 9, "type": "video", "color": "#5292E5" },
+            { "x": -53, "y": -68, "type": "library", "color": "#2FD7C4" },
+            { "x": 16, "y": -3, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Happy",
+          "bottomText": "Sad",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 51, "y": 84, "type": "video", "color": "#5292E5" },
+            { "x": -39, "y": -58, "type": "library", "color": "#2FD7C4" },
+            { "x": 63, "y": 13, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Energetic",
+          "bottomText": "Calm",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -63, "y": -72, "type": "video", "color": "#5292E5" },
+            { "x": 21, "y": -95, "type": "library", "color": "#2FD7C4" },
+            { "x": -90, "y": 34, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Natural",
+          "bottomText": "Synthetic",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        }
+      ]
+    },
+    "DoughnutChartMock": {
+      "doughnutData": [
+        {
+          "title": "Frame Rate",
+          "secondTitle": "24fps",
+          "average": [35.61, 5.3, 22.73, 36.36],
+          "libraryData": [3.42, 28.52, 36.5, 31.56],
+          "industryData": [3.03, 17.17, 63.64, 16.16],
+          "libraryFpsData": { "percentage": "52", "fps": "24" },
+          "industryFpsData": { "percentage": "36", "fps": "45" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [52, 61, 79, 21, 43, 86, 25] },
+              { "data": [36, 2, 88, 1, 53, 94, 85] }
+            ]
+          }
+        },
+        {
+          "title": "Pacing",
+          "secondTitle": "Fastest",
+          "average": [18.14, 31.16, 13.95, 36.74],
+          "libraryData": [33.5, 18.5, 45.5, 2.5],
+          "industryData": [10.73, 34.15, 35.61, 19.51],
+          "libraryFpsData": { "percentage": "40", "fps": "39" },
+          "industryFpsData": { "percentage": "60", "fps": "47" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [48, 57, 94, 89, 88, 46, 34] },
+              { "data": [37, 88, 88, 61, 20, 61, 2] }
+            ]
+          }
+        },
+        {
+          "title": "Shots",
+          "secondTitle": "12 Shots",
+          "average": [29.73, 34.36, 3.86, 32.05],
+          "libraryData": [32.09, 31.16, 22.79, 13.95],
+          "industryData": [21.49, 62.81, 4.96, 10.74],
+          "libraryFpsData": { "percentage": "44", "fps": "55" },
+          "industryFpsData": { "percentage": "72", "fps": "29" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [14, 21, 53, 45, 61, 4, 68] },
+              { "data": [31, 93, 70, 91, 17, 70, 8] }
+            ]
+          }
+        },
+        {
+          "title": "Format",
+          "secondTitle": "Live Action",
+          "average": [41.77, 32.91, 19.41, 5.91],
+          "libraryData": [26.99, 25.66, 17.26, 30.09],
+          "industryData": [14.51, 18.43, 29.41, 37.65],
+          "libraryFpsData": { "percentage": "64", "fps": "44" },
+          "industryFpsData": { "percentage": "55", "fps": "56" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [61, 14, 51, 93, 30, 92, 33] },
+              { "data": [32, 20, 37, 8, 82, 95, 68] }
+            ]
+          }
+        }
+      ]
+    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "574.1",
+        "percentage": "34"
+      },
+      {
+        "title": "Likes",
+        "score": "552.8",
+        "percentage": "36"
+      },
+      {
+        "title": "Comments",
+        "score": "586.4",
+        "percentage": "88"
+      },
+      {
+        "title": "Shares",
+        "score": "503.4",
+        "percentage": "66"
+      }
+    ],
+    "ShotByShotMock": {
+      "videoList": [
+        "https://picsum.photos/100/160?image=61",
+        "https://picsum.photos/20/160?image=48",
+        "https://picsum.photos/75/160?image=12",
+        "https://picsum.photos/120/160?image=96",
+        "https://picsum.photos/200/160?image=30",
+        "https://picsum.photos/250/160?image=32",
+        "https://picsum.photos/90/160?image=16",
+        "https://picsum.photos/110/160?image=53",
+        "https://picsum.photos/40/160?image=95",
+        "https://picsum.photos/60/160?image=34",
+        "https://picsum.photos/90/160?image=11",
+        "https://picsum.photos/120/160?image=92",
+        "https://picsum.photos/160/160?image=14",
+        "https://picsum.photos/200/160?image=85",
+        "https://picsum.photos/129/160?image=56",
+        "https://picsum.photos/210/160?image=76",
+        "https://picsum.photos/40/160?image=63",
+        "https://picsum.photos/20/160?image=54"
+      ],
+      "slideImages": [
+        {
+          "src": "https://picsum.photos/500/270?image=90",
+          "options": [
+            { "percentage": 40, "accurate": 20, "text": "Male" },
+            { "percentage": 60, "accurate": 60, "text": "Laptop" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=87",
+          "options": [
+            { "percentage": 30, "accurate": 20, "text": "Female" },
+            { "percentage": 50, "accurate": 20, "text": "Cat" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=88",
+          "options": [
+            { "percentage": 40, "accurate": 10, "text": "Cart" },
+            { "percentage": 16, "accurate": 30, "text": "Bag" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=68",
+          "options": [
+            { "percentage": 34, "accurate": 68, "text": "Playstation" },
+            { "percentage": 30, "accurate": 20, "text": "Mouse" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=44",
+          "options": [
+            { "percentage": 40, "accurate": 53, "text": "Male" },
+            { "percentage": 52, "accurate": 30, "text": "Sheep" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=27",
+          "options": [
+            { "percentage": 42, "accurate": 20, "text": "Phone" },
+            { "percentage": 78, "accurate": 60, "text": "Electronics" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=41",
+          "options": [
+            { "percentage": 40, "accurate": 30, "text": "Key" },
+            { "percentage": 45, "accurate": 42, "text": "Press" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=59",
+          "options": [
+            { "percentage": 31, "accurate": 20, "text": "Male" },
+            { "percentage": 76, "accurate": 54, "text": "Laptop" }
+          ]
+        }
+      ],
+      "radarData": {
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        "datasets": [
+          { "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56] },
+          { "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56] }
+        ]
+      },
+      "sliderWithThumbnails": [
+        {
+          "img": "https://picsum.photos/500/270?image=17",
+          "thumbnail": "https://picsum.photos/200/160?image=31"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=68",
+          "thumbnail": "https://picsum.photos/40/160?image=61"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=40",
+          "thumbnail": "https://picsum.photos/150/160?image=67"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=6",
+          "thumbnail": "https://picsum.photos/240/160?image=44"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=6",
+          "thumbnail": "https://picsum.photos/200/160?image=33"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=85",
+          "thumbnail": "https://picsum.photos/250/160?image=59"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=93",
+          "thumbnail": "https://picsum.photos/300/160?image=4"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=44",
+          "thumbnail": "https://picsum.photos/110/160?image=17"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=82",
+          "thumbnail": "https://picsum.photos/60/160?image=15"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=67",
+          "thumbnail": "https://picsum.photos/160/160?image=57"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=32",
+          "thumbnail": "https://picsum.photos/100/160?image=3"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=59",
+          "thumbnail": "https://picsum.photos/20/160?image=19"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=76",
+          "thumbnail": "https://picsum.photos/75/160?image=93"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=91",
+          "thumbnail": "https://picsum.photos/120/160?image=53"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=53",
+          "thumbnail": "https://picsum.photos/200/160?image=44"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=62",
+          "thumbnail": "https://picsum.photos/250/160?image=59"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=21",
+          "thumbnail": "https://picsum.photos/90/160?image=98"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=35",
+          "thumbnail": "https://picsum.photos/110/160?image=38"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=56",
+          "thumbnail": "https://picsum.photos/40/160?image=100"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=27",
+          "thumbnail": "https://picsum.photos/60/160?image=38"
+        }
+      ]
+    }
+  },
+  {
+    "albumId": 1,
+    "id": 6,
+    "title": "Anything can happen",
+    "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anything-can-happen.mp4",
+    "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anything-can-happen.jpg",
+    "date": "10/06/2018",
+    "socialIcon": "facebook",
+    "viewCount": 2823,
+    "likeCount": 5975,
+    "shareCount": 8690,
+    "commentCount": 5654,
+    "ageRange": "65+",
+    "gender": "male",
+    "duration": 47,
+    "dominantColor": "#229a78",
+    "format": "animation",
+    "aspectRatio": "4:3",
+    "frameRate": 50,
+    "resolution": "4K",
+    "pacing": "Medium",
+    "cvScore": 84.6,
+    "ColorTempMock": {
+      "colorTempData": [
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 38, "y": 78, "type": "video", "color": "#5292E5" },
+            { "x": -7, "y": 20, "type": "library", "color": "#2FD7C4" },
+            { "x": -54, "y": 86, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Happy",
+          "bottomText": "Sad",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 78, "y": -16, "type": "video", "color": "#5292E5" },
+            { "x": -55, "y": -21, "type": "library", "color": "#2FD7C4" },
+            { "x": 71, "y": 79, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Energetic",
+          "bottomText": "Calm",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -38, "y": -73, "type": "video", "color": "#5292E5" },
+            { "x": -22, "y": 69, "type": "library", "color": "#2FD7C4" },
+            { "x": -58, "y": -2, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Natural",
+          "bottomText": "Synthetic",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        }
+      ]
+    },
+    "DoughnutChartMock": {
+      "doughnutData": [
+        {
+          "title": "Frame Rate",
+          "secondTitle": "24fps",
+          "average": [42.62, 14.21, 6.01, 37.16],
+          "libraryData": [30.06, 29.48, 6.36, 34.1],
+          "industryData": [7.93, 3.05, 57.32, 31.71],
+          "libraryFpsData": { "percentage": "52", "fps": "24" },
+          "industryFpsData": { "percentage": "36", "fps": "45" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [6, 2, 23, 98, 88, 15, 75] },
+              { "data": [33, 58, 47, 37, 30, 12, 59] }
+            ]
+          }
+        },
+        {
+          "title": "Pacing",
+          "secondTitle": "Fastest",
+          "average": [55.75, 10.34, 13.22, 20.69],
+          "libraryData": [24.8, 39.2, 32.8, 3.2],
+          "industryData": [53.26, 7.61, 19.02, 20.11],
+          "libraryFpsData": { "percentage": "40", "fps": "39" },
+          "industryFpsData": { "percentage": "60", "fps": "47" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [58, 100, 28, 13, 1, 51, 94] },
+              { "data": [44, 13, 31, 34, 51, 62, 74] }
+            ]
+          }
+        },
+        {
+          "title": "Shots",
+          "secondTitle": "12 Shots",
+          "average": [11.26, 52.32, 12.58, 23.84],
+          "libraryData": [34.26, 23.9, 20.72, 21.12],
+          "industryData": [44.75, 6.85, 15.07, 33.33],
+          "libraryFpsData": { "percentage": "44", "fps": "55" },
+          "industryFpsData": { "percentage": "72", "fps": "29" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [77, 86, 39, 98, 2, 59, 76] },
+              { "data": [28, 92, 21, 55, 99, 87, 92] }
+            ]
+          }
+        },
+        {
+          "title": "Format",
+          "secondTitle": "Live Action",
+          "average": [22.81, 28.14, 28.14, 20.91],
+          "libraryData": [38.46, 2.02, 29.96, 29.55],
+          "industryData": [26.41, 43.29, 24.24, 6.06],
+          "libraryFpsData": { "percentage": "64", "fps": "44" },
+          "industryFpsData": { "percentage": "55", "fps": "56" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [14, 53, 15, 86, 21, 71, 67] },
+              { "data": [95, 78, 93, 90, 40, 66, 55] }
+            ]
+          }
+        }
+      ]
+    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "874.1",
+        "percentage": "12"
+      },
+      {
+        "title": "Likes",
+        "score": "352.8",
+        "percentage": "42"
+      },
+      {
+        "title": "Comments",
+        "score": "186.4",
+        "percentage": "99"
+      },
+      {
+        "title": "Shares",
+        "score": "103.4",
+        "percentage": "99"
+      }
+    ],
+    "ShotByShotMock": {
+      "videoList": [
+        "https://picsum.photos/100/160?image=19",
+        "https://picsum.photos/20/160?image=26",
+        "https://picsum.photos/75/160?image=72",
+        "https://picsum.photos/120/160?image=80",
+        "https://picsum.photos/200/160?image=27",
+        "https://picsum.photos/250/160?image=82",
+        "https://picsum.photos/90/160?image=96",
+        "https://picsum.photos/110/160?image=73",
+        "https://picsum.photos/40/160?image=23",
+        "https://picsum.photos/60/160?image=4",
+        "https://picsum.photos/90/160?image=88",
+        "https://picsum.photos/120/160?image=91",
+        "https://picsum.photos/160/160?image=25",
+        "https://picsum.photos/200/160?image=50",
+        "https://picsum.photos/129/160?image=76",
+        "https://picsum.photos/210/160?image=29",
+        "https://picsum.photos/40/160?image=82",
+        "https://picsum.photos/20/160?image=63"
+      ],
+      "slideImages": [
+        {
+          "src": "https://picsum.photos/500/270?image=98",
+          "options": [
+            { "percentage": 40, "accurate": 20, "text": "Male" },
+            { "percentage": 60, "accurate": 60, "text": "Laptop" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=98",
+          "options": [
+            { "percentage": 30, "accurate": 20, "text": "Female" },
+            { "percentage": 50, "accurate": 20, "text": "Cat" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=33",
+          "options": [
+            { "percentage": 40, "accurate": 10, "text": "Cart" },
+            { "percentage": 16, "accurate": 30, "text": "Bag" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=1",
+          "options": [
+            { "percentage": 34, "accurate": 68, "text": "Playstation" },
+            { "percentage": 30, "accurate": 20, "text": "Mouse" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=42",
+          "options": [
+            { "percentage": 40, "accurate": 53, "text": "Male" },
+            { "percentage": 52, "accurate": 30, "text": "Sheep" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=70",
+          "options": [
+            { "percentage": 42, "accurate": 20, "text": "Phone" },
+            { "percentage": 78, "accurate": 60, "text": "Electronics" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=48",
+          "options": [
+            { "percentage": 40, "accurate": 30, "text": "Key" },
+            { "percentage": 45, "accurate": 42, "text": "Press" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=12",
+          "options": [
+            { "percentage": 31, "accurate": 20, "text": "Male" },
+            { "percentage": 76, "accurate": 54, "text": "Laptop" }
+          ]
+        }
+      ],
+      "radarData": {
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        "datasets": [
+          { "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56] },
+          { "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56] }
+        ]
+      },
+      "sliderWithThumbnails": [
+        {
+          "img": "https://picsum.photos/500/270?image=36",
+          "thumbnail": "https://picsum.photos/200/160?image=13"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=60",
+          "thumbnail": "https://picsum.photos/40/160?image=3"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=68",
+          "thumbnail": "https://picsum.photos/150/160?image=11"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=38",
+          "thumbnail": "https://picsum.photos/240/160?image=27"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=13",
+          "thumbnail": "https://picsum.photos/200/160?image=74"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=22",
+          "thumbnail": "https://picsum.photos/250/160?image=50"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=37",
+          "thumbnail": "https://picsum.photos/300/160?image=77"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=18",
+          "thumbnail": "https://picsum.photos/110/160?image=45"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=95",
+          "thumbnail": "https://picsum.photos/60/160?image=63"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=18",
+          "thumbnail": "https://picsum.photos/160/160?image=47"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=85",
+          "thumbnail": "https://picsum.photos/100/160?image=91"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=87",
+          "thumbnail": "https://picsum.photos/20/160?image=34"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=41",
+          "thumbnail": "https://picsum.photos/75/160?image=64"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=5",
+          "thumbnail": "https://picsum.photos/120/160?image=72"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=99",
+          "thumbnail": "https://picsum.photos/200/160?image=73"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=77",
+          "thumbnail": "https://picsum.photos/250/160?image=29"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=29",
+          "thumbnail": "https://picsum.photos/90/160?image=44"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=22",
+          "thumbnail": "https://picsum.photos/110/160?image=11"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=25",
+          "thumbnail": "https://picsum.photos/40/160?image=35"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=14",
+          "thumbnail": "https://picsum.photos/60/160?image=19"
+        }
+      ]
+    }
+  },
+  {
+    "albumId": 1,
+    "id": 7,
+    "title": "Appreciate the greatness of the Pats",
+    "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Appreciate-the-greatness-of-the-Pats.mp4",
+    "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Appreciate-the-greatness-of-the-Pats.jpg",
+    "date": "20/09/2013",
+    "socialIcon": "twitter",
+    "viewCount": 8126,
+    "likeCount": 9851,
+    "shareCount": 6210,
+    "commentCount": 2416,
+    "ageRange": "21-24",
+    "gender": "female",
+    "duration": 48,
+    "dominantColor": "#79609b",
+    "format": "liveAction",
+    "aspectRatio": "1:1",
+    "frameRate": 24,
+    "resolution": "1080p",
+    "pacing": "Slow",
+    "cvScore": 23.7,
+    "ColorTempMock": {
+      "colorTempData": [
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -73, "y": 62, "type": "video", "color": "#5292E5" },
+            { "x": -12, "y": -47, "type": "library", "color": "#2FD7C4" },
+            { "x": 13, "y": 77, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Happy",
+          "bottomText": "Sad",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -46, "y": 13, "type": "video", "color": "#5292E5" },
+            { "x": -46, "y": -86, "type": "library", "color": "#2FD7C4" },
+            { "x": 10, "y": 49, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Energetic",
+          "bottomText": "Calm",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -81, "y": 9, "type": "video", "color": "#5292E5" },
+            { "x": -5, "y": 52, "type": "library", "color": "#2FD7C4" },
+            { "x": -48, "y": -45, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Natural",
+          "bottomText": "Synthetic",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        }
+      ]
+    },
+    "DoughnutChartMock": {
+      "doughnutData": [
+        {
+          "title": "Frame Rate",
+          "secondTitle": "24fps",
+          "average": [32.92, 20, 28.75, 18.33],
+          "libraryData": [11.76, 51.34, 3.74, 33.16],
+          "industryData": [17.15, 15.06, 27.62, 40.17],
+          "libraryFpsData": { "percentage": "52", "fps": "24" },
+          "industryFpsData": { "percentage": "36", "fps": "45" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [41, 69, 69, 20, 40, 0, 94] },
+              { "data": [21, 8, 79, 10, 85, 55, 44] }
+            ]
+          }
+        },
+        {
+          "title": "Pacing",
+          "secondTitle": "Fastest",
+          "average": [8.3, 40.66, 39, 12.03],
+          "libraryData": [47.69, 12.82, 24.1, 15.38],
+          "industryData": [50, 3.38, 43.24, 3.38],
+          "libraryFpsData": { "percentage": "40", "fps": "39" },
+          "industryFpsData": { "percentage": "60", "fps": "47" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [63, 80, 38, 84, 71, 53, 38] },
+              { "data": [73, 8, 86, 63, 98, 69, 61] }
+            ]
+          }
+        },
+        {
+          "title": "Shots",
+          "secondTitle": "12 Shots",
+          "average": [25, 19.44, 51.11, 4.44],
+          "libraryData": [8.04, 10.55, 48.74, 32.66],
+          "industryData": [47.09, 27.51, 2.65, 22.75],
+          "libraryFpsData": { "percentage": "44", "fps": "55" },
+          "industryFpsData": { "percentage": "72", "fps": "29" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [20, 26, 5, 50, 33, 6, 59] },
+              { "data": [50, 25, 8, 73, 49, 13, 45] }
+            ]
+          }
+        },
+        {
+          "title": "Format",
+          "secondTitle": "Live Action",
+          "average": [2.53, 42.41, 25.95, 29.11],
+          "libraryData": [13.57, 36.68, 27.64, 22.11],
+          "industryData": [39.19, 31.98, 8.56, 20.27],
+          "libraryFpsData": { "percentage": "64", "fps": "44" },
+          "industryFpsData": { "percentage": "55", "fps": "56" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [8, 82, 29, 40, 46, 24, 41] },
+              { "data": [27, 30, 55, 83, 28, 78, 12] }
+            ]
+          }
+        }
+      ]
+    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "674.1",
+        "percentage": "15"
+      },
+      {
+        "title": "Likes",
+        "score": "652.8",
+        "percentage": "30"
+      },
+      {
+        "title": "Comments",
+        "score": "686.4",
+        "percentage": "75"
+      },
+      {
+        "title": "Shares",
+        "score": "603.4",
+        "percentage": "90"
+      }
+    ],
+    "ShotByShotMock": {
+      "videoList": [
+        "https://picsum.photos/100/160?image=81",
+        "https://picsum.photos/20/160?image=97",
+        "https://picsum.photos/75/160?image=24",
+        "https://picsum.photos/120/160?image=97",
+        "https://picsum.photos/200/160?image=69",
+        "https://picsum.photos/250/160?image=56",
+        "https://picsum.photos/90/160?image=29",
+        "https://picsum.photos/110/160?image=90",
+        "https://picsum.photos/40/160?image=43",
+        "https://picsum.photos/60/160?image=13",
+        "https://picsum.photos/90/160?image=96",
+        "https://picsum.photos/120/160?image=95",
+        "https://picsum.photos/160/160?image=4",
+        "https://picsum.photos/200/160?image=90",
+        "https://picsum.photos/129/160?image=99",
+        "https://picsum.photos/210/160?image=27",
+        "https://picsum.photos/40/160?image=27",
+        "https://picsum.photos/20/160?image=78"
+      ],
+      "slideImages": [
+        {
+          "src": "https://picsum.photos/500/270?image=30",
+          "options": [
+            { "percentage": 40, "accurate": 20, "text": "Male" },
+            { "percentage": 60, "accurate": 60, "text": "Laptop" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=54",
+          "options": [
+            { "percentage": 30, "accurate": 20, "text": "Female" },
+            { "percentage": 50, "accurate": 20, "text": "Cat" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=66",
+          "options": [
+            { "percentage": 40, "accurate": 10, "text": "Cart" },
+            { "percentage": 16, "accurate": 30, "text": "Bag" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=58",
+          "options": [
+            { "percentage": 34, "accurate": 68, "text": "Playstation" },
+            { "percentage": 30, "accurate": 20, "text": "Mouse" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=7",
+          "options": [
+            { "percentage": 40, "accurate": 53, "text": "Male" },
+            { "percentage": 52, "accurate": 30, "text": "Sheep" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=15",
+          "options": [
+            { "percentage": 42, "accurate": 20, "text": "Phone" },
+            { "percentage": 78, "accurate": 60, "text": "Electronics" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=12",
+          "options": [
+            { "percentage": 40, "accurate": 30, "text": "Key" },
+            { "percentage": 45, "accurate": 42, "text": "Press" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=61",
+          "options": [
+            { "percentage": 31, "accurate": 20, "text": "Male" },
+            { "percentage": 76, "accurate": 54, "text": "Laptop" }
+          ]
+        }
+      ],
+      "radarData": {
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        "datasets": [
+          { "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56] },
+          { "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56] }
+        ]
+      },
+      "sliderWithThumbnails": [
+        {
+          "img": "https://picsum.photos/500/270?image=43",
+          "thumbnail": "https://picsum.photos/200/160?image=30"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=40",
+          "thumbnail": "https://picsum.photos/40/160?image=55"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=27",
+          "thumbnail": "https://picsum.photos/150/160?image=18"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=1",
+          "thumbnail": "https://picsum.photos/240/160?image=82"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=62",
+          "thumbnail": "https://picsum.photos/200/160?image=81"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=60",
+          "thumbnail": "https://picsum.photos/250/160?image=89"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=42",
+          "thumbnail": "https://picsum.photos/300/160?image=59"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=87",
+          "thumbnail": "https://picsum.photos/110/160?image=56"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=72",
+          "thumbnail": "https://picsum.photos/60/160?image=74"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=42",
+          "thumbnail": "https://picsum.photos/160/160?image=93"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=84",
+          "thumbnail": "https://picsum.photos/100/160?image=1"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=71",
+          "thumbnail": "https://picsum.photos/20/160?image=75"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=12",
+          "thumbnail": "https://picsum.photos/75/160?image=75"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=52",
+          "thumbnail": "https://picsum.photos/120/160?image=39"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=75",
+          "thumbnail": "https://picsum.photos/200/160?image=34"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=51",
+          "thumbnail": "https://picsum.photos/250/160?image=40"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=67",
+          "thumbnail": "https://picsum.photos/90/160?image=73"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=51",
+          "thumbnail": "https://picsum.photos/110/160?image=58"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=20",
+          "thumbnail": "https://picsum.photos/40/160?image=87"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=56",
+          "thumbnail": "https://picsum.photos/60/160?image=61"
+        }
+      ]
+    }
+  },
+  {
+    "albumId": 1,
+    "id": 8,
+    "title": "Deandre Ayton Knows",
+    "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Deandre-Ayton-Knows.mp4",
+    "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Deandre-Ayton-Knows.jpg",
+    "date": "05/05/2015",
+    "socialIcon": "youtube",
+    "viewCount": 9758,
+    "likeCount": 7863,
+    "shareCount": 5101,
+    "commentCount": 7284,
+    "ageRange": "65+",
+    "gender": "female",
+    "duration": 38,
+    "dominantColor": "#b83057",
+    "format": "cinemagraph",
+    "aspectRatio": "4:3",
+    "frameRate": 30,
+    "resolution": "480p",
+    "pacing": "Fast",
+    "cvScore": 99.3,
+    "ColorTempMock": {
+      "colorTempData": [
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -18, "y": 9, "type": "video", "color": "#5292E5" },
+            { "x": -44, "y": 46, "type": "library", "color": "#2FD7C4" },
+            { "x": -85, "y": -24, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Happy",
+          "bottomText": "Sad",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 2, "y": -84, "type": "video", "color": "#5292E5" },
+            { "x": 61, "y": 99, "type": "library", "color": "#2FD7C4" },
+            { "x": -56, "y": 38, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Energetic",
+          "bottomText": "Calm",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 13, "y": 87, "type": "video", "color": "#5292E5" },
+            { "x": 72, "y": -53, "type": "library", "color": "#2FD7C4" },
+            { "x": -8, "y": 1, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Natural",
+          "bottomText": "Synthetic",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        }
+      ]
+    },
+    "DoughnutChartMock": {
+      "doughnutData": [
+        {
+          "title": "Frame Rate",
+          "secondTitle": "24fps",
+          "average": [18.75, 19.53, 24.22, 37.5],
+          "libraryData": [17.2, 14.65, 52.23, 15.92],
+          "industryData": [30.85, 26.1, 33.22, 9.83],
+          "libraryFpsData": { "percentage": "52", "fps": "24" },
+          "industryFpsData": { "percentage": "36", "fps": "45" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [99, 58, 47, 66, 93, 53, 43] },
+              { "data": [24, 5, 55, 49, 24, 17, 28] }
+            ]
+          }
+        },
+        {
+          "title": "Pacing",
+          "secondTitle": "Fastest",
+          "average": [19.32, 21.59, 47.73, 11.36],
+          "libraryData": [35.44, 38.83, 9.22, 16.5],
+          "industryData": [41.98, 14.5, 11.45, 32.06],
+          "libraryFpsData": { "percentage": "40", "fps": "39" },
+          "industryFpsData": { "percentage": "60", "fps": "47" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [51, 76, 41, 26, 95, 1, 26] },
+              { "data": [69, 35, 8, 57, 46, 24, 81] }
+            ]
+          }
+        },
+        {
+          "title": "Shots",
+          "secondTitle": "12 Shots",
+          "average": [2.79, 42.79, 15.35, 39.07],
+          "libraryData": [23.74, 32.32, 43.43, 0.51],
+          "industryData": [14.62, 22.26, 31.23, 31.89],
+          "libraryFpsData": { "percentage": "44", "fps": "55" },
+          "industryFpsData": { "percentage": "72", "fps": "29" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [49, 61, 39, 51, 34, 73, 91] },
+              { "data": [22, 0, 93, 72, 77, 69, 85] }
+            ]
+          }
+        },
+        {
+          "title": "Format",
+          "secondTitle": "Live Action",
+          "average": [42.6, 21.52, 5.83, 30.04],
+          "libraryData": [17.11, 46.71, 1.97, 34.21],
+          "industryData": [3.8, 46.84, 39.24, 10.13],
+          "libraryFpsData": { "percentage": "64", "fps": "44" },
+          "industryFpsData": { "percentage": "55", "fps": "56" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [78, 91, 91, 70, 13, 64, 48] },
+              { "data": [96, 2, 93, 14, 62, 68, 90] }
+            ]
+          }
+        }
+      ]
+    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "814.1",
+        "percentage": "14"
+      },
+      {
+        "title": "Likes",
+        "score": "312.8",
+        "percentage": "18"
+      },
+      {
+        "title": "Comments",
+        "score": "116.4",
+        "percentage": "16"
+      },
+      {
+        "title": "Shares",
+        "score": "113.4",
+        "percentage": "12"
+      }
+    ],
+    "ShotByShotMock": {
+      "videoList": [
+        "https://picsum.photos/100/160?image=31",
+        "https://picsum.photos/20/160?image=41",
+        "https://picsum.photos/75/160?image=30",
+        "https://picsum.photos/120/160?image=67",
+        "https://picsum.photos/200/160?image=92",
+        "https://picsum.photos/250/160?image=46",
+        "https://picsum.photos/90/160?image=89",
+        "https://picsum.photos/110/160?image=40",
+        "https://picsum.photos/40/160?image=27",
+        "https://picsum.photos/60/160?image=82",
+        "https://picsum.photos/90/160?image=3",
+        "https://picsum.photos/120/160?image=94",
+        "https://picsum.photos/160/160?image=75",
+        "https://picsum.photos/200/160?image=40",
+        "https://picsum.photos/129/160?image=69",
+        "https://picsum.photos/210/160?image=70",
+        "https://picsum.photos/40/160?image=7",
+        "https://picsum.photos/20/160?image=4"
+      ],
+      "slideImages": [
+        {
+          "src": "https://picsum.photos/500/270?image=55",
+          "options": [
+            { "percentage": 40, "accurate": 20, "text": "Male" },
+            { "percentage": 60, "accurate": 60, "text": "Laptop" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=69",
+          "options": [
+            { "percentage": 30, "accurate": 20, "text": "Female" },
+            { "percentage": 50, "accurate": 20, "text": "Cat" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=38",
+          "options": [
+            { "percentage": 40, "accurate": 10, "text": "Cart" },
+            { "percentage": 16, "accurate": 30, "text": "Bag" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=48",
+          "options": [
+            { "percentage": 34, "accurate": 68, "text": "Playstation" },
+            { "percentage": 30, "accurate": 20, "text": "Mouse" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=42",
+          "options": [
+            { "percentage": 40, "accurate": 53, "text": "Male" },
+            { "percentage": 52, "accurate": 30, "text": "Sheep" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=21",
+          "options": [
+            { "percentage": 42, "accurate": 20, "text": "Phone" },
+            { "percentage": 78, "accurate": 60, "text": "Electronics" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=85",
+          "options": [
+            { "percentage": 40, "accurate": 30, "text": "Key" },
+            { "percentage": 45, "accurate": 42, "text": "Press" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=13",
+          "options": [
+            { "percentage": 31, "accurate": 20, "text": "Male" },
+            { "percentage": 76, "accurate": 54, "text": "Laptop" }
+          ]
+        }
+      ],
+      "radarData": {
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        "datasets": [
+          { "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56] },
+          { "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56] }
+        ]
+      },
+      "sliderWithThumbnails": [
+        {
+          "img": "https://picsum.photos/500/270?image=3",
+          "thumbnail": "https://picsum.photos/200/160?image=2"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=47",
+          "thumbnail": "https://picsum.photos/40/160?image=37"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=35",
+          "thumbnail": "https://picsum.photos/150/160?image=67"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=17",
+          "thumbnail": "https://picsum.photos/240/160?image=93"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=91",
+          "thumbnail": "https://picsum.photos/200/160?image=74"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=49",
+          "thumbnail": "https://picsum.photos/250/160?image=62"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=40",
+          "thumbnail": "https://picsum.photos/300/160?image=37"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=94",
+          "thumbnail": "https://picsum.photos/110/160?image=89"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=61",
+          "thumbnail": "https://picsum.photos/60/160?image=36"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=90",
+          "thumbnail": "https://picsum.photos/160/160?image=42"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=38",
+          "thumbnail": "https://picsum.photos/100/160?image=82"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=63",
+          "thumbnail": "https://picsum.photos/20/160?image=47"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=24",
+          "thumbnail": "https://picsum.photos/75/160?image=30"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=32",
+          "thumbnail": "https://picsum.photos/120/160?image=25"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=90",
+          "thumbnail": "https://picsum.photos/200/160?image=85"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=59",
+          "thumbnail": "https://picsum.photos/250/160?image=20"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=39",
+          "thumbnail": "https://picsum.photos/90/160?image=28"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=87",
+          "thumbnail": "https://picsum.photos/110/160?image=32"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=32",
+          "thumbnail": "https://picsum.photos/40/160?image=18"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=98",
+          "thumbnail": "https://picsum.photos/60/160?image=53"
+        }
+      ]
+    }
+  },
+  {
+    "albumId": 1,
+    "id": 9,
+    "title": "Down goes Brown",
+    "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Down-goes-Brown.mp4",
+    "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Down-goes-Brown.jpg",
+    "date": "11/05/2005",
+    "socialIcon": "twitter",
+    "viewCount": 7082,
+    "likeCount": 8398,
+    "shareCount": 4717,
+    "commentCount": 9846,
+    "ageRange": "11-17",
+    "gender": "male",
+    "duration": 67,
+    "dominantColor": "#13862b",
+    "format": "cinemagraph",
+    "aspectRatio": "4:3",
+    "frameRate": 30,
+    "resolution": "1080p",
+    "pacing": "Fast",
+    "cvScore": 13.2,
+    "ColorTempMock": {
+      "colorTempData": [
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -11, "y": -36, "type": "video", "color": "#5292E5" },
+            { "x": 71, "y": -18, "type": "library", "color": "#2FD7C4" },
+            { "x": 57, "y": -79, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Happy",
+          "bottomText": "Sad",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 96, "y": 94, "type": "video", "color": "#5292E5" },
+            { "x": 81, "y": 61, "type": "library", "color": "#2FD7C4" },
+            { "x": 23, "y": -42, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Energetic",
+          "bottomText": "Calm",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -84, "y": -27, "type": "video", "color": "#5292E5" },
+            { "x": -52, "y": -91, "type": "library", "color": "#2FD7C4" },
+            { "x": -41, "y": 9, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Natural",
+          "bottomText": "Synthetic",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        }
+      ]
+    },
+    "DoughnutChartMock": {
+      "doughnutData": [
+        {
+          "title": "Frame Rate",
+          "secondTitle": "24fps",
+          "average": [53.11, 10.73, 12.43, 23.73],
+          "libraryData": [7.47, 45.4, 17.24, 29.89],
+          "industryData": [34.16, 7, 23.05, 35.8],
+          "libraryFpsData": { "percentage": "52", "fps": "24" },
+          "industryFpsData": { "percentage": "36", "fps": "45" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [71, 64, 21, 62, 6, 0, 22] },
+              { "data": [91, 88, 32, 98, 5, 46, 58] }
+            ]
+          }
+        },
+        {
+          "title": "Pacing",
+          "secondTitle": "Fastest",
+          "average": [21.8, 22.56, 8.27, 47.37],
+          "libraryData": [12.83, 18.11, 35.09, 33.96],
+          "industryData": [0, 36.43, 47.14, 16.43],
+          "libraryFpsData": { "percentage": "40", "fps": "39" },
+          "industryFpsData": { "percentage": "60", "fps": "47" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [83, 2, 67, 97, 66, 26, 82] },
+              { "data": [71, 93, 40, 61, 47, 37, 19] }
+            ]
+          }
+        },
+        {
+          "title": "Shots",
+          "secondTitle": "12 Shots",
+          "average": [42.02, 3.19, 19.15, 35.64],
+          "libraryData": [15.1, 40, 5.71, 39.18],
+          "industryData": [5.6, 46.4, 44, 4],
+          "libraryFpsData": { "percentage": "44", "fps": "55" },
+          "industryFpsData": { "percentage": "72", "fps": "29" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [7, 57, 98, 76, 6, 57, 72] },
+              { "data": [38, 93, 31, 90, 15, 31, 84] }
+            ]
+          }
+        },
+        {
+          "title": "Format",
+          "secondTitle": "Live Action",
+          "average": [51.3, 19.13, 20, 9.57],
+          "libraryData": [16.89, 39.86, 28.38, 14.86],
+          "industryData": [24.69, 24.07, 20.99, 30.25],
+          "libraryFpsData": { "percentage": "64", "fps": "44" },
+          "industryFpsData": { "percentage": "55", "fps": "56" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [68, 77, 65, 64, 46, 75, 35] },
+              { "data": [65, 88, 53, 92, 62, 21, 22] }
+            ]
+          }
+        }
+      ]
+    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "74.1",
+        "percentage": "64"
+      },
+      {
+        "title": "Likes",
+        "score": "52.8",
+        "percentage": "42"
+      },
+      {
+        "title": "Comments",
+        "score": "16.4",
+        "percentage": "56"
+      },
+      {
+        "title": "Shares",
+        "score": "31.4",
+        "percentage": "28"
+      }
+    ],
+    "ShotByShotMock": {
+      "videoList": [
+        "https://picsum.photos/100/160?image=64",
+        "https://picsum.photos/20/160?image=63",
+        "https://picsum.photos/75/160?image=48",
+        "https://picsum.photos/120/160?image=40",
+        "https://picsum.photos/200/160?image=8",
+        "https://picsum.photos/250/160?image=18",
+        "https://picsum.photos/90/160?image=50",
+        "https://picsum.photos/110/160?image=21",
+        "https://picsum.photos/40/160?image=80",
+        "https://picsum.photos/60/160?image=61",
+        "https://picsum.photos/90/160?image=15",
+        "https://picsum.photos/120/160?image=27",
+        "https://picsum.photos/160/160?image=81",
+        "https://picsum.photos/200/160?image=80",
+        "https://picsum.photos/129/160?image=44",
+        "https://picsum.photos/210/160?image=26",
+        "https://picsum.photos/40/160?image=28",
+        "https://picsum.photos/20/160?image=15"
+      ],
+      "slideImages": [
+        {
+          "src": "https://picsum.photos/500/270?image=52",
+          "options": [
+            { "percentage": 40, "accurate": 20, "text": "Male" },
+            { "percentage": 60, "accurate": 60, "text": "Laptop" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=14",
+          "options": [
+            { "percentage": 30, "accurate": 20, "text": "Female" },
+            { "percentage": 50, "accurate": 20, "text": "Cat" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=93",
+          "options": [
+            { "percentage": 40, "accurate": 10, "text": "Cart" },
+            { "percentage": 16, "accurate": 30, "text": "Bag" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=3",
+          "options": [
+            { "percentage": 34, "accurate": 68, "text": "Playstation" },
+            { "percentage": 30, "accurate": 20, "text": "Mouse" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=32",
+          "options": [
+            { "percentage": 40, "accurate": 53, "text": "Male" },
+            { "percentage": 52, "accurate": 30, "text": "Sheep" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=16",
+          "options": [
+            { "percentage": 42, "accurate": 20, "text": "Phone" },
+            { "percentage": 78, "accurate": 60, "text": "Electronics" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=37",
+          "options": [
+            { "percentage": 40, "accurate": 30, "text": "Key" },
+            { "percentage": 45, "accurate": 42, "text": "Press" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=97",
+          "options": [
+            { "percentage": 31, "accurate": 20, "text": "Male" },
+            { "percentage": 76, "accurate": 54, "text": "Laptop" }
+          ]
+        }
+      ],
+      "radarData": {
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        "datasets": [
+          { "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56] },
+          { "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56] }
+        ]
+      },
+      "sliderWithThumbnails": [
+        {
+          "img": "https://picsum.photos/500/270?image=90",
+          "thumbnail": "https://picsum.photos/200/160?image=57"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=94",
+          "thumbnail": "https://picsum.photos/40/160?image=23"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=92",
+          "thumbnail": "https://picsum.photos/150/160?image=21"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=67",
+          "thumbnail": "https://picsum.photos/240/160?image=61"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=32",
+          "thumbnail": "https://picsum.photos/200/160?image=99"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=28",
+          "thumbnail": "https://picsum.photos/250/160?image=88"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=15",
+          "thumbnail": "https://picsum.photos/300/160?image=26"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=97",
+          "thumbnail": "https://picsum.photos/110/160?image=63"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=66",
+          "thumbnail": "https://picsum.photos/60/160?image=4"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=90",
+          "thumbnail": "https://picsum.photos/160/160?image=55"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=74",
+          "thumbnail": "https://picsum.photos/100/160?image=30"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=59",
+          "thumbnail": "https://picsum.photos/20/160?image=82"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=100",
+          "thumbnail": "https://picsum.photos/75/160?image=25"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=76",
+          "thumbnail": "https://picsum.photos/120/160?image=39"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=93",
+          "thumbnail": "https://picsum.photos/200/160?image=10"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=88",
+          "thumbnail": "https://picsum.photos/250/160?image=37"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=49",
+          "thumbnail": "https://picsum.photos/90/160?image=87"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=53",
+          "thumbnail": "https://picsum.photos/110/160?image=35"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=57",
+          "thumbnail": "https://picsum.photos/40/160?image=76"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=1",
+          "thumbnail": "https://picsum.photos/60/160?image=54"
+        }
+      ]
+    }
+  },
+  {
+    "albumId": 1,
+    "id": 10,
+    "title": "Draymond not holding back on the ref",
+    "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Draymond-not-holding-back-on-the-ref.mp4",
+    "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Draymond-not-holding-back-on-the-ref.jpg",
+    "date": "12/12/2012",
+    "socialIcon": "facebook",
+    "viewCount": 1030,
+    "likeCount": 2802,
+    "shareCount": 6891,
+    "commentCount": 1561,
+    "ageRange": "25-34",
+    "gender": "female",
+    "duration": 44,
+    "dominantColor": "#13862b",
+    "format": "liveAction",
+    "aspectRatio": "9:16",
+    "frameRate": 30,
+    "resolution": "1080p",
+    "pacing": "Slow",
+    "cvScore": 61.9,
+    "ColorTempMock": {
+      "colorTempData": [
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 26, "y": 68, "type": "video", "color": "#5292E5" },
+            { "x": -92, "y": -81, "type": "library", "color": "#2FD7C4" },
+            { "x": 4, "y": -3, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Happy",
+          "bottomText": "Sad",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 59, "y": 88, "type": "video", "color": "#5292E5" },
+            { "x": 56, "y": 9, "type": "library", "color": "#2FD7C4" },
+            { "x": -50, "y": 71, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Energetic",
+          "bottomText": "Calm",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 13, "y": -75, "type": "video", "color": "#5292E5" },
+            { "x": 11, "y": -74, "type": "library", "color": "#2FD7C4" },
+            { "x": 33, "y": 32, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Natural",
+          "bottomText": "Synthetic",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        }
+      ]
+    },
+    "DoughnutChartMock": {
+      "doughnutData": [
+        {
+          "title": "Frame Rate",
+          "secondTitle": "24fps",
+          "average": [38.12, 31.19, 24.75, 5.94],
+          "libraryData": [39.71, 32.35, 0, 27.94],
+          "industryData": [20.93, 33.22, 14.29, 31.56],
+          "libraryFpsData": { "percentage": "52", "fps": "24" },
+          "industryFpsData": { "percentage": "36", "fps": "45" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [48, 91, 50, 3, 16, 7, 43] },
+              { "data": [85, 43, 47, 51, 50, 10, 17] }
+            ]
+          }
+        },
+        {
+          "title": "Pacing",
+          "secondTitle": "Fastest",
+          "average": [16.61, 30.85, 32.88, 19.66],
+          "libraryData": [4.44, 26.67, 21.11, 47.78],
+          "industryData": [10.11, 12.23, 48.94, 28.72],
+          "libraryFpsData": { "percentage": "40", "fps": "39" },
+          "industryFpsData": { "percentage": "60", "fps": "47" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [46, 52, 55, 3, 68, 71, 34] },
+              { "data": [58, 41, 32, 92, 73, 66, 18] }
+            ]
+          }
+        },
+        {
+          "title": "Shots",
+          "secondTitle": "12 Shots",
+          "average": [31.16, 11.06, 30.65, 27.14],
+          "libraryData": [4.61, 59.87, 8.55, 26.97],
+          "industryData": [18.84, 56.52, 1.45, 23.19],
+          "libraryFpsData": { "percentage": "44", "fps": "55" },
+          "industryFpsData": { "percentage": "72", "fps": "29" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [7, 90, 42, 99, 40, 59, 41] },
+              { "data": [14, 10, 93, 97, 89, 75, 85] }
+            ]
+          }
+        },
+        {
+          "title": "Format",
+          "secondTitle": "Live Action",
+          "average": [34.76, 3.74, 29.41, 32.09],
+          "libraryData": [34.78, 11.11, 18.36, 35.75],
+          "industryData": [8.86, 23.42, 43.04, 24.68],
+          "libraryFpsData": { "percentage": "64", "fps": "44" },
+          "industryFpsData": { "percentage": "55", "fps": "56" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [86, 26, 9, 87, 89, 46, 83] },
+              { "data": [5, 88, 97, 2, 0, 98, 91] }
+            ]
+          }
+        }
+      ]
+    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "14.1",
+        "percentage": "74"
+      },
+      {
+        "title": "Likes",
+        "score": "22.8",
+        "percentage": "72"
+      },
+      {
+        "title": "Comments",
+        "score": "16.4",
+        "percentage": "76"
+      },
+      {
+        "title": "Shares",
+        "score": "3.4",
+        "percentage": "78"
+      }
+    ],
+    "ShotByShotMock": {
+      "videoList": [
+        "https://picsum.photos/100/160?image=22",
+        "https://picsum.photos/20/160?image=73",
+        "https://picsum.photos/75/160?image=64",
+        "https://picsum.photos/120/160?image=79",
+        "https://picsum.photos/200/160?image=6",
+        "https://picsum.photos/250/160?image=63",
+        "https://picsum.photos/90/160?image=100",
+        "https://picsum.photos/110/160?image=99",
+        "https://picsum.photos/40/160?image=97",
+        "https://picsum.photos/60/160?image=51",
+        "https://picsum.photos/90/160?image=10",
+        "https://picsum.photos/120/160?image=90",
+        "https://picsum.photos/160/160?image=36",
+        "https://picsum.photos/200/160?image=39",
+        "https://picsum.photos/129/160?image=81",
+        "https://picsum.photos/210/160?image=60",
+        "https://picsum.photos/40/160?image=77",
+        "https://picsum.photos/20/160?image=88"
+      ],
+      "slideImages": [
+        {
+          "src": "https://picsum.photos/500/270?image=19",
+          "options": [
+            { "percentage": 40, "accurate": 20, "text": "Male" },
+            { "percentage": 60, "accurate": 60, "text": "Laptop" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=77",
+          "options": [
+            { "percentage": 30, "accurate": 20, "text": "Female" },
+            { "percentage": 50, "accurate": 20, "text": "Cat" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=42",
+          "options": [
+            { "percentage": 40, "accurate": 10, "text": "Cart" },
+            { "percentage": 16, "accurate": 30, "text": "Bag" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=33",
+          "options": [
+            { "percentage": 34, "accurate": 68, "text": "Playstation" },
+            { "percentage": 30, "accurate": 20, "text": "Mouse" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=56",
+          "options": [
+            { "percentage": 40, "accurate": 53, "text": "Male" },
+            { "percentage": 52, "accurate": 30, "text": "Sheep" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=58",
+          "options": [
+            { "percentage": 42, "accurate": 20, "text": "Phone" },
+            { "percentage": 78, "accurate": 60, "text": "Electronics" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=41",
+          "options": [
+            { "percentage": 40, "accurate": 30, "text": "Key" },
+            { "percentage": 45, "accurate": 42, "text": "Press" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=42",
+          "options": [
+            { "percentage": 31, "accurate": 20, "text": "Male" },
+            { "percentage": 76, "accurate": 54, "text": "Laptop" }
+          ]
+        }
+      ],
+      "radarData": {
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        "datasets": [
+          { "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56] },
+          { "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56] }
+        ]
+      },
+      "sliderWithThumbnails": [
+        {
+          "img": "https://picsum.photos/500/270?image=43",
+          "thumbnail": "https://picsum.photos/200/160?image=24"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=23",
+          "thumbnail": "https://picsum.photos/40/160?image=71"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=11",
+          "thumbnail": "https://picsum.photos/150/160?image=76"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=59",
+          "thumbnail": "https://picsum.photos/240/160?image=11"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=46",
+          "thumbnail": "https://picsum.photos/200/160?image=68"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=20",
+          "thumbnail": "https://picsum.photos/250/160?image=92"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=55",
+          "thumbnail": "https://picsum.photos/300/160?image=8"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=19",
+          "thumbnail": "https://picsum.photos/110/160?image=90"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=34",
+          "thumbnail": "https://picsum.photos/60/160?image=20"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=9",
+          "thumbnail": "https://picsum.photos/160/160?image=65"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=10",
+          "thumbnail": "https://picsum.photos/100/160?image=94"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=78",
+          "thumbnail": "https://picsum.photos/20/160?image=6"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=14",
+          "thumbnail": "https://picsum.photos/75/160?image=78"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=52",
+          "thumbnail": "https://picsum.photos/120/160?image=12"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=77",
+          "thumbnail": "https://picsum.photos/200/160?image=85"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=24",
+          "thumbnail": "https://picsum.photos/250/160?image=81"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=33",
+          "thumbnail": "https://picsum.photos/90/160?image=45"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=38",
+          "thumbnail": "https://picsum.photos/110/160?image=52"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=8",
+          "thumbnail": "https://picsum.photos/40/160?image=6"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=90",
+          "thumbnail": "https://picsum.photos/60/160?image=7"
+        }
+      ]
+    }
+  },
+  {
+    "albumId": 1,
+    "id": 11,
+    "title": "Georgetown Commit Mac McClung",
+    "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Georgetown-Commit-Mac-McClung.mp4",
+    "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Georgetown-Commit-Mac-McClung.jpg",
+    "date": "19/10/2012",
+    "socialIcon": "pinterest",
+    "viewCount": 7824,
+    "likeCount": 6374,
+    "shareCount": 6936,
+    "commentCount": 8656,
+    "ageRange": "21-24",
+    "gender": "male",
+    "duration": 2,
+    "dominantColor": "#79609b",
+    "format": "cinemagraph",
+    "aspectRatio": "16:9",
+    "frameRate": 24,
+    "resolution": "480p",
+    "pacing": "Medium",
+    "cvScore": 87.5,
+    "ColorTempMock": {
+      "colorTempData": [
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 44, "y": 65, "type": "video", "color": "#5292E5" },
+            { "x": 76, "y": 20, "type": "library", "color": "#2FD7C4" },
+            { "x": 31, "y": 77, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Happy",
+          "bottomText": "Sad",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -68, "y": 29, "type": "video", "color": "#5292E5" },
+            { "x": -53, "y": 71, "type": "library", "color": "#2FD7C4" },
+            { "x": -14, "y": 39, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Energetic",
+          "bottomText": "Calm",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 74, "y": 96, "type": "video", "color": "#5292E5" },
+            { "x": -56, "y": 86, "type": "library", "color": "#2FD7C4" },
+            { "x": 60, "y": -38, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Natural",
+          "bottomText": "Synthetic",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        }
+      ]
+    },
+    "DoughnutChartMock": {
+      "doughnutData": [
+        {
+          "title": "Frame Rate",
+          "secondTitle": "24fps",
+          "average": [9.66, 30.67, 24.79, 34.87],
+          "libraryData": [19.87, 33.33, 35.26, 11.54],
+          "industryData": [50.51, 32.83, 0, 16.67],
+          "libraryFpsData": { "percentage": "52", "fps": "24" },
+          "industryFpsData": { "percentage": "36", "fps": "45" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [4, 36, 43, 57, 49, 0, 97] },
+              { "data": [83, 73, 40, 91, 25, 36, 22] }
+            ]
+          }
+        },
+        {
+          "title": "Pacing",
+          "secondTitle": "Fastest",
+          "average": [37.23, 38.96, 11.26, 12.55],
+          "libraryData": [5.48, 8.9, 34.25, 51.37],
+          "industryData": [28.19, 0.44, 33.48, 37.89],
+          "libraryFpsData": { "percentage": "40", "fps": "39" },
+          "industryFpsData": { "percentage": "60", "fps": "47" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [63, 5, 64, 32, 33, 4, 75] },
+              { "data": [42, 35, 83, 72, 96, 88, 73] }
+            ]
+          }
+        },
+        {
+          "title": "Shots",
+          "secondTitle": "12 Shots",
+          "average": [5.26, 1.75, 50, 42.98],
+          "libraryData": [1.14, 20.45, 31.25, 47.16],
+          "industryData": [37.88, 45.96, 1.01, 15.15],
+          "libraryFpsData": { "percentage": "44", "fps": "55" },
+          "industryFpsData": { "percentage": "72", "fps": "29" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [98, 44, 34, 23, 72, 24, 51] },
+              { "data": [62, 75, 95, 9, 38, 32, 28] }
+            ]
+          }
+        },
+        {
+          "title": "Format",
+          "secondTitle": "Live Action",
+          "average": [15.56, 25.56, 35.93, 22.96],
+          "libraryData": [14.29, 16.81, 29.41, 39.5],
+          "industryData": [13.93, 5.74, 43.44, 36.89],
+          "libraryFpsData": { "percentage": "64", "fps": "44" },
+          "industryFpsData": { "percentage": "55", "fps": "56" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [11, 96, 98, 35, 50, 73, 21] },
+              { "data": [39, 100, 18, 35, 62, 2, 55] }
+            ]
+          }
+        }
+      ]
+    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "64.1",
+        "percentage": "50"
+      },
+      {
+        "title": "Likes",
+        "score": "152.8",
+        "percentage": "50"
+      },
+      {
+        "title": "Comments",
+        "score": "86.4",
+        "percentage": "50"
+      },
+      {
+        "title": "Shares",
+        "score": "12.4",
+        "percentage": "50"
+      }
+    ],
+    "ShotByShotMock": {
+      "videoList": [
+        "https://picsum.photos/100/160?image=79",
+        "https://picsum.photos/20/160?image=27",
+        "https://picsum.photos/75/160?image=83",
+        "https://picsum.photos/120/160?image=20",
+        "https://picsum.photos/200/160?image=18",
+        "https://picsum.photos/250/160?image=75",
+        "https://picsum.photos/90/160?image=44",
+        "https://picsum.photos/110/160?image=95",
+        "https://picsum.photos/40/160?image=17",
+        "https://picsum.photos/60/160?image=2",
+        "https://picsum.photos/90/160?image=37",
+        "https://picsum.photos/120/160?image=3",
+        "https://picsum.photos/160/160?image=64",
+        "https://picsum.photos/200/160?image=99",
+        "https://picsum.photos/129/160?image=21",
+        "https://picsum.photos/210/160?image=16",
+        "https://picsum.photos/40/160?image=62",
+        "https://picsum.photos/20/160?image=81"
+      ],
+      "slideImages": [
+        {
+          "src": "https://picsum.photos/500/270?image=53",
+          "options": [
+            { "percentage": 40, "accurate": 20, "text": "Male" },
+            { "percentage": 60, "accurate": 60, "text": "Laptop" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=38",
+          "options": [
+            { "percentage": 30, "accurate": 20, "text": "Female" },
+            { "percentage": 50, "accurate": 20, "text": "Cat" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=75",
+          "options": [
+            { "percentage": 40, "accurate": 10, "text": "Cart" },
+            { "percentage": 16, "accurate": 30, "text": "Bag" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=78",
+          "options": [
+            { "percentage": 34, "accurate": 68, "text": "Playstation" },
+            { "percentage": 30, "accurate": 20, "text": "Mouse" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=49",
+          "options": [
+            { "percentage": 40, "accurate": 53, "text": "Male" },
+            { "percentage": 52, "accurate": 30, "text": "Sheep" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=12",
+          "options": [
+            { "percentage": 42, "accurate": 20, "text": "Phone" },
+            { "percentage": 78, "accurate": 60, "text": "Electronics" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=17",
+          "options": [
+            { "percentage": 40, "accurate": 30, "text": "Key" },
+            { "percentage": 45, "accurate": 42, "text": "Press" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=29",
+          "options": [
+            { "percentage": 31, "accurate": 20, "text": "Male" },
+            { "percentage": 76, "accurate": 54, "text": "Laptop" }
+          ]
+        }
+      ],
+      "radarData": {
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        "datasets": [
+          { "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56] },
+          { "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56] }
+        ]
+      },
+      "sliderWithThumbnails": [
+        {
+          "img": "https://picsum.photos/500/270?image=73",
+          "thumbnail": "https://picsum.photos/200/160?image=96"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=26",
+          "thumbnail": "https://picsum.photos/40/160?image=80"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=84",
+          "thumbnail": "https://picsum.photos/150/160?image=99"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=6",
+          "thumbnail": "https://picsum.photos/240/160?image=36"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=75",
+          "thumbnail": "https://picsum.photos/200/160?image=66"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=33",
+          "thumbnail": "https://picsum.photos/250/160?image=27"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=5",
+          "thumbnail": "https://picsum.photos/300/160?image=18"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=46",
+          "thumbnail": "https://picsum.photos/110/160?image=49"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=60",
+          "thumbnail": "https://picsum.photos/60/160?image=39"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=42",
+          "thumbnail": "https://picsum.photos/160/160?image=78"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=15",
+          "thumbnail": "https://picsum.photos/100/160?image=24"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=84",
+          "thumbnail": "https://picsum.photos/20/160?image=15"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=79",
+          "thumbnail": "https://picsum.photos/75/160?image=78"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=11",
+          "thumbnail": "https://picsum.photos/120/160?image=72"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=26",
+          "thumbnail": "https://picsum.photos/200/160?image=31"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=19",
+          "thumbnail": "https://picsum.photos/250/160?image=60"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=45",
+          "thumbnail": "https://picsum.photos/90/160?image=44"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=95",
+          "thumbnail": "https://picsum.photos/110/160?image=57"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=19",
+          "thumbnail": "https://picsum.photos/40/160?image=10"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=60",
+          "thumbnail": "https://picsum.photos/60/160?image=16"
+        }
+      ]
+    }
+  },
+  {
+    "albumId": 1,
+    "id": 12,
+    "title": "Handles and triple threat moves",
+    "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Handles-and-triple-threat-moves.mp4",
+    "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Handles-and-triple-threat-moves.jpg",
+    "date": "20/05/2018",
+    "socialIcon": "facebook",
+    "viewCount": 2090,
+    "likeCount": 1880,
+    "shareCount": 4836,
+    "commentCount": 6886,
+    "ageRange": "18-20",
+    "gender": "female",
+    "duration": 45,
+    "dominantColor": "#79609b",
+    "format": "animation",
+    "aspectRatio": "4:3",
+    "frameRate": 50,
+    "resolution": "360p",
+    "pacing": "Fast",
+    "cvScore": 92.0,
+    "ColorTempMock": {
+      "colorTempData": [
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": -46, "y": 10, "type": "video", "color": "#5292E5" },
+            { "x": -28, "y": 57, "type": "library", "color": "#2FD7C4" },
+            { "x": 25, "y": 90, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Happy",
+          "bottomText": "Sad",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 38, "y": 96, "type": "video", "color": "#5292E5" },
+            { "x": 91, "y": -81, "type": "library", "color": "#2FD7C4" },
+            { "x": -49, "y": 67, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Energetic",
+          "bottomText": "Calm",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        },
+        {
+          "text": "This is a blurb that will explain what this graph is showing",
+          "data": [
+            { "x": 50, "y": -36, "type": "video", "color": "#5292E5" },
+            { "x": 29, "y": 15, "type": "library", "color": "#2FD7C4" },
+            { "x": 56, "y": -15, "type": "industry", "color": "#8562F3" }
+          ],
+          "topText": "Natural",
+          "bottomText": "Synthetic",
+          "leftText": "Cool",
+          "rightText": "Warm"
+        }
+      ]
+    },
+    "DoughnutChartMock": {
+      "doughnutData": [
+        {
+          "title": "Frame Rate",
+          "secondTitle": "24fps",
+          "average": [20.95, 18.92, 30.41, 29.73],
+          "libraryData": [18.91, 34.55, 21.82, 24.73],
+          "industryData": [34.87, 26.89, 21.43, 16.81],
+          "libraryFpsData": { "percentage": "52", "fps": "24" },
+          "industryFpsData": { "percentage": "36", "fps": "45" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [2, 94, 6, 80, 61, 37, 23] },
+              { "data": [67, 89, 20, 79, 74, 1, 17] }
+            ]
+          }
+        },
+        {
+          "title": "Pacing",
+          "secondTitle": "Fastest",
+          "average": [27.52, 20.64, 14.68, 37.16],
+          "libraryData": [27.07, 4.8, 43.23, 24.89],
+          "industryData": [0, 30.26, 61.84, 7.89],
+          "libraryFpsData": { "percentage": "40", "fps": "39" },
+          "industryFpsData": { "percentage": "60", "fps": "47" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [32, 3, 50, 78, 27, 3, 54] },
+              { "data": [35, 71, 18, 82, 23, 19, 63] }
+            ]
+          }
+        },
+        {
+          "title": "Shots",
+          "secondTitle": "12 Shots",
+          "average": [42.39, 26.63, 9.24, 21.74],
+          "libraryData": [32.1, 9.88, 11.73, 46.3],
+          "industryData": [5.19, 22.73, 38.96, 33.12],
+          "libraryFpsData": { "percentage": "44", "fps": "55" },
+          "industryFpsData": { "percentage": "72", "fps": "29" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [77, 13, 97, 59, 78, 93, 55] },
+              { "data": [91, 60, 80, 27, 78, 2, 23] }
+            ]
+          }
+        },
+        {
+          "title": "Format",
+          "secondTitle": "Live Action",
+          "average": [24.28, 54.34, 0.58, 20.81],
+          "libraryData": [25.95, 38.17, 6.11, 29.77],
+          "industryData": [10, 58.33, 30.83, 0.83],
+          "libraryFpsData": { "percentage": "64", "fps": "44" },
+          "industryFpsData": { "percentage": "55", "fps": "56" },
+          "lineChartData": {
+            "labels": ["S", "M", "T", "W", "T", "F", "S"],
+            "datasets": [
+              { "data": [33, 78, 90, 20, 63, 24, 49] },
+              { "data": [44, 24, 42, 53, 33, 0, 4] }
+            ]
+          }
+        }
+      ]
+    },
+    "HeaderBarChartMock": [
+      {
+        "title": "Views",
+        "score": "10.1",
+        "percentage": "1"
+      },
+      {
+        "title": "Likes",
+        "score": "32.8",
+        "percentage": "10"
+      },
+      {
+        "title": "Comments",
+        "score": "16.4",
+        "percentage": "20"
+      },
+      {
+        "title": "Shares",
+        "score": "20.4",
+        "percentage": "30"
+      }
+    ],
+    "ShotByShotMock": {
+      "videoList": [
+        "https://picsum.photos/100/160?image=11",
+        "https://picsum.photos/20/160?image=26",
+        "https://picsum.photos/75/160?image=80",
+        "https://picsum.photos/120/160?image=73",
+        "https://picsum.photos/200/160?image=20",
+        "https://picsum.photos/250/160?image=72",
+        "https://picsum.photos/90/160?image=39",
+        "https://picsum.photos/110/160?image=82",
+        "https://picsum.photos/40/160?image=4",
+        "https://picsum.photos/60/160?image=17",
+        "https://picsum.photos/90/160?image=60",
+        "https://picsum.photos/120/160?image=29",
+        "https://picsum.photos/160/160?image=77",
+        "https://picsum.photos/200/160?image=85",
+        "https://picsum.photos/129/160?image=71",
+        "https://picsum.photos/210/160?image=69",
+        "https://picsum.photos/40/160?image=40",
+        "https://picsum.photos/20/160?image=38"
+      ],
+      "slideImages": [
+        {
+          "src": "https://picsum.photos/500/270?image=50",
+          "options": [
+            { "percentage": 40, "accurate": 20, "text": "Male" },
+            { "percentage": 60, "accurate": 60, "text": "Laptop" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=33",
+          "options": [
+            { "percentage": 30, "accurate": 20, "text": "Female" },
+            { "percentage": 50, "accurate": 20, "text": "Cat" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=46",
+          "options": [
+            { "percentage": 40, "accurate": 10, "text": "Cart" },
+            { "percentage": 16, "accurate": 30, "text": "Bag" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=73",
+          "options": [
+            { "percentage": 34, "accurate": 68, "text": "Playstation" },
+            { "percentage": 30, "accurate": 20, "text": "Mouse" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=33",
+          "options": [
+            { "percentage": 40, "accurate": 53, "text": "Male" },
+            { "percentage": 52, "accurate": 30, "text": "Sheep" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=38",
+          "options": [
+            { "percentage": 42, "accurate": 20, "text": "Phone" },
+            { "percentage": 78, "accurate": 60, "text": "Electronics" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=25",
+          "options": [
+            { "percentage": 40, "accurate": 30, "text": "Key" },
+            { "percentage": 45, "accurate": 42, "text": "Press" }
+          ]
+        },
+        {
+          "src": "https://picsum.photos/500/270?image=63",
+          "options": [
+            { "percentage": 31, "accurate": 20, "text": "Male" },
+            { "percentage": 76, "accurate": 54, "text": "Laptop" }
+          ]
+        }
+      ],
+      "radarData": {
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        "datasets": [
+          { "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56] },
+          { "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56] }
+        ]
+      },
+      "sliderWithThumbnails": [
+        {
+          "img": "https://picsum.photos/500/270?image=90",
+          "thumbnail": "https://picsum.photos/200/160?image=59"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=50",
+          "thumbnail": "https://picsum.photos/40/160?image=3"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=65",
+          "thumbnail": "https://picsum.photos/150/160?image=32"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=62",
+          "thumbnail": "https://picsum.photos/240/160?image=32"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=51",
+          "thumbnail": "https://picsum.photos/200/160?image=54"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=39",
+          "thumbnail": "https://picsum.photos/250/160?image=53"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=4",
+          "thumbnail": "https://picsum.photos/300/160?image=33"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=37",
+          "thumbnail": "https://picsum.photos/110/160?image=75"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=89",
+          "thumbnail": "https://picsum.photos/60/160?image=22"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=19",
+          "thumbnail": "https://picsum.photos/160/160?image=48"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=90",
+          "thumbnail": "https://picsum.photos/100/160?image=3"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=10",
+          "thumbnail": "https://picsum.photos/20/160?image=16"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=58",
+          "thumbnail": "https://picsum.photos/75/160?image=9"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=38",
+          "thumbnail": "https://picsum.photos/120/160?image=12"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=96",
+          "thumbnail": "https://picsum.photos/200/160?image=17"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=80",
+          "thumbnail": "https://picsum.photos/250/160?image=89"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=37",
+          "thumbnail": "https://picsum.photos/90/160?image=28"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=85",
+          "thumbnail": "https://picsum.photos/110/160?image=70"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=81",
+          "thumbnail": "https://picsum.photos/40/160?image=23"
+        },
+        {
+          "img": "https://picsum.photos/500/270?image=16",
+          "thumbnail": "https://picsum.photos/60/160?image=88"
+        }
+      ]
+    }
+  }
+]
