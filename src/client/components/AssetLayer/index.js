@@ -37,8 +37,11 @@ export default class AssetLayer extends React.Component {
   render() {
 		const {
       containerClassName,
-      contentClassName,
-      barOpacityClassName,
+			contentClassName,
+			barOpacityClassName,
+			socialIconClass,
+			title,
+			rightScore,
       barClassName,
       children,
       width,
@@ -55,7 +58,9 @@ export default class AssetLayer extends React.Component {
 						{children && children[1]}
 					</div>
 					<div className={barClassName}>
-						{children && children[2]}
+						<span className={socialIconClass} />
+						{title}
+						{rightScore}
 					</div>
 				</div>
 

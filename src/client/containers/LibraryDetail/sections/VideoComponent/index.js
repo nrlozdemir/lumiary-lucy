@@ -77,7 +77,11 @@ class Video extends Component {
 
     return (
 			<React.Fragment>
-				<AssetLayer>
+				<AssetLayer
+					socialIconClass={iconClass}
+					title={title}
+					rightScore={cvScore}
+				>
 					<video
 						className={styles.video}
 						src={src}
@@ -98,7 +102,7 @@ class Video extends Component {
 						xSmall
 					/>
 				</AssetLayer>
-				<div className={classes} style={{ ...style }}>
+				<div className={classes} style={{ margin: "530px 0px 30px 0px"}}>
 					<video
 						ref={this.video}
 						className={styles.video}
