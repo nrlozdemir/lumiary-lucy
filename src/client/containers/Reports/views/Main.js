@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
+import moment from 'moment'
 import { actions, makeSelectReports } from 'Reducers/reports'
 
 import style from '../style.scss'
@@ -173,6 +174,11 @@ class Reports extends Component {
                     {
                       Header: 'Date',
                       accessor: 'date',
+                      sortMethod: (a, b) => {
+                        const valueOfA = moment(a, "D/M/YY").valueOf()
+                        const valueOfB = moment(b, "D/M/YY").valueOf()
+                        return valueOfA - valueOfB
+                      }
                     },
                     {
                       Header: null,
