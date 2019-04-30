@@ -3,8 +3,8 @@
     "image": "https://picsum.photos/600/300?image=1",
     "socialMedia": "facebook",
     "title": "ESN",
-		"secondTitle": "425,512 Shares",
-		"cvScore": 67.1,
+    "secondTitle": "425,512 Shares",
+    "cvScore": 67.1,
     "options": [
       {
         "name": "Duration",
@@ -67,7 +67,7 @@
     "socialMedia": "instagram",
     "title": "Barstool Media",
     "secondTitle": "425 Shares",
-		"cvScore": 76.1,
+    "cvScore": 76.1,
     "options": [
       {
         "name": "Duration",
@@ -130,7 +130,7 @@
     "socialMedia": "facebook",
     "title": "SB Nation",
     "secondTitle": "4,512 Shares",
-		"cvScore": 87.1,
+    "cvScore": 87.1,
     "options": [
       {
         "name": "Duration",
@@ -193,7 +193,7 @@
     "socialMedia": "twitter",
     "title": "Scout Media",
     "secondTitle": "23,431 Shares",
-		"cvScore": 56.1,
+    "cvScore": 56.1,
     "options": [
       {
         "name": "Duration",
@@ -256,7 +256,7 @@
     "socialMedia": "facebook",
     "title": "Fansided",
     "secondTitle": "142 Shares",
-		"cvScore": 54.1,
+    "cvScore": 54.1,
     "options": [
       {
         "name": "Duration",

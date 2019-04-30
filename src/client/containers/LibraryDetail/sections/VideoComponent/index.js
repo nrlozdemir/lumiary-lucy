@@ -67,46 +67,46 @@ class Video extends Component {
   }
 
   render() {
-		const {
-			src,
-			poster = "",
-			title,
-			socialIcon,
-			cvScore,
-			id
-		} = this.props
+    const {
+      src,
+      poster = "",
+      title,
+      socialIcon,
+      cvScore,
+      id
+    } = this.props
 
     return (
-			<React.Fragment>
-				<AssetLayer
-					leftSocialIcon={socialIcon}
-					title={title}
-					rightValue={cvScore}
-				>
-					<video
-						ref={this.video}
-						className={styles.video}
-						src={src}
-						muted
-						controls={false}
-						poster={poster}
-					/>
-					<div className={styles.percentageWrapper} style={{right: "80px"}}>
-						<PercentageBarGraph
-							backgroundColor="#303a5d"
-							customClass={styles.libraryPercentageGraph}
-							id={`videolist-${id}`}
-							percentage={cvScore}
-							disableLabels={true}
-							color="#2fd7c4"
-							lineCount={30}
-							height={19}
-							width={67}
-							xSmall
-						/>
-					</div>
-				</AssetLayer>
-			</React.Fragment>
+      <React.Fragment>
+        <AssetLayer
+          leftSocialIcon={socialIcon}
+          title={title}
+          rightValue={cvScore}
+        >
+          <video
+            ref={this.video}
+            className={styles.video}
+            src={src}
+            muted
+            controls={false}
+            poster={poster}
+          />
+          <div className={styles.percentageWrapper} style={{right: "80px"}}>
+            <PercentageBarGraph
+              backgroundColor="#303a5d"
+              customClass={styles.libraryPercentageGraph}
+              id={`videolist-${id}`}
+              percentage={cvScore}
+              disableLabels={true}
+              color="#2fd7c4"
+              lineCount={30}
+              height={19}
+              width={67}
+              xSmall
+            />
+          </div>
+        </AssetLayer>
+      </React.Fragment>
     )
   }
 }

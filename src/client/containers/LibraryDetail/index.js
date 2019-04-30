@@ -70,13 +70,13 @@ export class LibraryDetail extends React.Component {
         barChartData,
         doughnutLineChartData,
         colorTempData,
-				shotByShotData
+        shotByShotData
       },
       library: { videos },
       match: { params: { videoId } }
     } = this.props
 
-		const { videoUrl, title, socialIcon, cvScore, id } = videos.find(({ id }) => id == videoId) || {}
+    const { videoUrl, title, socialIcon, cvScore, id } = videos.find(({ id }) => id == videoId) || {}
 
     let radarDataCombined = null
 
@@ -90,9 +90,9 @@ export class LibraryDetail extends React.Component {
           barChartData={barChartData}
           videoUrl={videoUrl}
           title={title}
-					socialIcon={socialIcon}
-					cvScore={cvScore}
-					id={id}
+          socialIcon={socialIcon}
+          cvScore={cvScore}
+          id={id}
         />}
         {doughnutLineChartData && doughnutLineChartData.doughnutData && <LibraryDetailDoughnutChart
           doughnutData={doughnutLineChartData.doughnutData}

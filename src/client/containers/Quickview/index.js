@@ -86,79 +86,79 @@ export class Main extends React.Component {
               <div className={style.content}>
                 {platformsValues && platformsValues.map((el, i) => {
 
-									const { cvScore, socialIcon, title, videoUrl, poster } = el.video
+                  const { cvScore, socialIcon, title, videoUrl, poster } = el.video
 
-									return(
-										<div key={i} className={classnames("col-6", style.cardBlock)}>
-											<div className={style.card}>
-												<h1 className={classnames(
-													{ [style.rightVideoTitle]: i === 1 }
-													)}>
-													{i == 0
-														? "Best Performing Videos"
-														: "Underperforming Videos"
-													}
-													<i className="icon icon-Information"></i>
-												</h1>
-												<div className={classnames(
-													style.assetContainer,
-													{ [style.right]: i === 1 }
-													)}>
-													<AssetLayer
-														leftSocialIcon={socialIcon}
-														title={title}
-														rightValue={cvScore}
-														width={510}
-														height={286}
-													>
-														<div className={style.video}>
-															<SingleVideoCard {...el} muted={false} options={{size: "auto"}} />
-														</div>
-														<div className={style.percentageWrapper} style={{right: "80px"}}>
-															<PercentageBarGraph
-																backgroundColor="#303a5d"
-																customClass={style.libraryPercentageGraph}
-																id={`videolist-${i}`}
-																percentage={cvScore}
-																disableLabels={true}
-																color={i === 0 ? "#2fd7c4" : "#5292e5"}
-																lineCount={30}
-																height={19}
-																width={67}
-																xSmall
-															/>
-														</div>
-													</AssetLayer>
-												</div>
-												<div className={style.items}>
-													{el.infos.map((item, index) => (
-														<div key={index} className={style.itemWrapper}>
-															<div className={style.infoItem}>
-																<p className={classnames('font-secondary-second', style.sectionBadge)}>
-																	<span>{item.title}</span>
-																</p>
-																<div className={style.itemValue} data-id={i}>{item.value}</div>
-																<div className={style.progressText}>
-																	<span className={style.rightTitle}>{item.percentage}%</span>
-																</div>
-																<ProgressBar
-																	width={item.percentage}
-																	customBarClass={style.progressBar}
-																	customPercentageClass={classnames(style.percentageBlue, {
-																		[style.percentagePink]: (i == 1)
-																	})}
-																/>
-																<p className={style.infoText}>
-																	{textEdit(item.text, item)}
-																</p>
-															</div>
-														</div>
-													))}
-												</div>
-											</div>
-										</div>
-									)
-								})}
+                  return(
+                    <div key={i} className={classnames("col-6", style.cardBlock)}>
+                      <div className={style.card}>
+                        <h1 className={classnames(
+                          { [style.rightVideoTitle]: i === 1 }
+                          )}>
+                          {i == 0
+                            ? "Best Performing Videos"
+                            : "Underperforming Videos"
+                          }
+                          <i className="icon icon-Information"></i>
+                        </h1>
+                        <div className={classnames(
+                          style.assetContainer,
+                          { [style.right]: i === 1 }
+                          )}>
+                          <AssetLayer
+                            leftSocialIcon={socialIcon}
+                            title={title}
+                            rightValue={cvScore}
+                            width={510}
+                            height={286}
+                          >
+                            <div className={style.video}>
+                              <SingleVideoCard {...el} muted={false} options={{size: "auto"}} />
+                            </div>
+                            <div className={style.percentageWrapper} style={{right: "80px"}}>
+                              <PercentageBarGraph
+                                backgroundColor="#303a5d"
+                                customClass={style.libraryPercentageGraph}
+                                id={`videolist-${i}`}
+                                percentage={cvScore}
+                                disableLabels={true}
+                                color={i === 0 ? "#2fd7c4" : "#5292e5"}
+                                lineCount={30}
+                                height={19}
+                                width={67}
+                                xSmall
+                              />
+                            </div>
+                          </AssetLayer>
+                        </div>
+                        <div className={style.items}>
+                          {el.infos.map((item, index) => (
+                            <div key={index} className={style.itemWrapper}>
+                              <div className={style.infoItem}>
+                                <p className={classnames('font-secondary-second', style.sectionBadge)}>
+                                  <span>{item.title}</span>
+                                </p>
+                                <div className={style.itemValue} data-id={i}>{item.value}</div>
+                                <div className={style.progressText}>
+                                  <span className={style.rightTitle}>{item.percentage}%</span>
+                                </div>
+                                <ProgressBar
+                                  width={item.percentage}
+                                  customBarClass={style.progressBar}
+                                  customPercentageClass={classnames(style.percentageBlue, {
+                                    [style.percentagePink]: (i == 1)
+                                  })}
+                                />
+                                <p className={style.infoText}>
+                                  {textEdit(item.text, item)}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+                  )
+                })}
               </div>
             </div>
           </div>

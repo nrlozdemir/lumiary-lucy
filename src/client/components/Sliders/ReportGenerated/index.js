@@ -65,33 +65,33 @@ const GeneratedReportViewSlider = (props) => {
     <div className={style.section}>
       <Slider {...settings}>
         {props.items.map((item, i) => (
-					<div className="item" key={i}>
-						<AssetLayer
-							containerNoBorder
-							leftSocialIcon={item.socialMedia}
-							centerText={item.secondTitle}
-							title={item.title}
-							width={634}
-							height="100%"
-							rightValue={item.cvScore}
-						>
-							<img src={item.image} />
-							<div className={style.percentageWrapper} style={{right: "80px"}}>
-								<PercentageBarGraph
-									backgroundColor="#303a5d"
-									customClass={style.libraryPercentageGraph}
-									id={`videolist-${i}`}
-									percentage={item.cvScore}
-									disableLabels={true}
-									color={"#2fd7c4"}
-									lineCount={30}
-									height={19}
-									width={67}
-									xSmall
-								/>
-							</div>
-						</AssetLayer>
-					</div>
+          <div className="item" key={i}>
+            <AssetLayer
+              containerNoBorder
+              leftSocialIcon={item.socialMedia}
+              centerText={item.secondTitle}
+              title={item.title}
+              width={634}
+              height="100%"
+              rightValue={item.cvScore}
+            >
+              <img src={item.image} />
+              <div className={style.percentageWrapper} style={{right: "80px"}}>
+                <PercentageBarGraph
+                  backgroundColor="#303a5d"
+                  customClass={style.libraryPercentageGraph}
+                  id={`videolist-${i}`}
+                  percentage={item.cvScore}
+                  disableLabels={true}
+                  color={"#2fd7c4"}
+                  lineCount={30}
+                  height={19}
+                  width={67}
+                  xSmall
+                />
+              </div>
+            </AssetLayer>
+          </div>
         ))}
         <div />
         <div />
