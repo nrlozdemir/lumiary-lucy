@@ -21,24 +21,30 @@ import FilteringSection from './sections/FilteringSection'
 import PacingCard from './sections/PacingCard'
 import CompareShares from './sections/CompareShares'
 import FlipCards from './sections/FlipCards'
+import LineAndDoughnutChartModule from 'Components/Modules/LineAndDoughnutChartModule'
 
 /* eslint-disable react/prefer-stateless-function */
-const Panoptic = () => {
-  return (
-    <React.Fragment>
-      <div className="grid-container col-12">
-        <div className={style.alignTabs}>
-
+class Panoptic extends React.Component {
+  render() {
+    return (
+      <React.Fragment>
+        <div className="grid-container col-12">
+          <div className={style.alignTabs} />
         </div>
-      </div>
-      <FlipCards />
-      <VideoReleasesBarChart />
-      <ColorTemperature />
-      <FilteringSection />
-      <PacingCard />
-      <CompareShares />
-    </React.Fragment>
-  )
+        <FlipCards />
+        <LineAndDoughnutChartModule
+          moduleKey="Panoptic/Top-Performing-Formats-This-Week-By-CV-Score"
+          title="Top Performing Formats This Week By CV Score"
+          action={() => {}}
+        />
+        <VideoReleasesBarChart />
+        <ColorTemperature />
+        <FilteringSection />
+        <PacingCard />
+        <CompareShares />
+      </React.Fragment>
+    )
+  }
 }
 
 export default Panoptic

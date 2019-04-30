@@ -17,16 +17,18 @@ export class Module extends React.Component {
     }
   }
   componentDidUpdate(prevProps) {
-    if (
-      !_.isEqual(
-        prevProps.selectFilters.values[prevProps.moduleKey],
-        this.props.selectFilters.values[this.props.moduleKey]
-      )
-    ) {
-      this.props.action(
-        this.props.selectFilters.values[this.props.moduleKey],
-        this.props.moduleKey
-      )
+    if (this.props.selectFilters) {
+      if (
+        !_.isEqual(
+          prevProps.selectFilters.values[prevProps.moduleKey],
+          this.props.selectFilters.values[this.props.moduleKey]
+        )
+      ) {
+        this.props.action(
+          this.props.selectFilters.values[this.props.moduleKey],
+          this.props.moduleKey
+        )
+      }
     }
   }
 
