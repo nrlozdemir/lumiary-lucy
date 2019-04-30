@@ -1,7 +1,8 @@
 import React from 'react';
 import style from './style.scss';
+import AssetLayer from 'Components/AssetLayer'
+import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import { socialIconSelector } from 'Utils/';
-
 import Swiper from 'react-id-swiper';
 import SwiperJS from 'swiper/dist/js/swiper.js'
 
@@ -62,21 +63,38 @@ class AudienceSlider extends React.Component {
     };
 
     return (
-      <div className={style.section} >
+			<div className={style.section} >
         {refThumb && (
           <div className="audienceSlider">
             <Swiper ref={node => node && (this.refSlider = node.swiper)} {...settings}>
               {items.map((item, i) => (
-                <div className="item" key={i}>
-                  <img src={item.image} />
-                  <p>
-                    <span className="icon">
-                      <span className={socialIconSelector(item.socialMedia)} />
-                    </span>
-                    {item.title}
-                    <span className="secondTitle">{item.secondTitle}</span>
-                  </p>
-                </div>
+								<div className="item">
+									<AssetLayer key={i}
+										containerNoBorder
+										leftSocialIcon={item.socialMedia}
+										centerText={item.secondTitle}
+										title={item.title}
+										width={634}
+										height="100%"
+										rightValue={item.cvScore}
+									>
+										<img src={item.image} />
+										<div className={style.percentageWrapper} style={{right: "80px"}}>
+											<PercentageBarGraph
+												backgroundColor="#303a5d"
+												customClass={style.libraryPercentageGraph}
+												id={`videolist-${i}`}
+												percentage={item.cvScore}
+												disableLabels={true}
+												color={"#2fd7c4"}
+												lineCount={30}
+												height={19}
+												width={67}
+												xSmall
+											/>
+										</div>
+									</AssetLayer>
+								</div>
               ))}
             </Swiper>
           </div>
