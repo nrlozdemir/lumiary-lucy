@@ -15,28 +15,28 @@ const AsyncSearch = props => {
   const customStyles = {
     menu: (provided, state) => ({
       ...provided,
-      color: state.isSelected || state.isFocused ? '#5a6386' : '#ffffff',
-      backgroundColor: '#5a6386',
+      color: state.isSelected || state.isFocused ? '#545B79' : '#ffffff',
+      backgroundColor: '#545B79',
       borderRadius: 0,
       marginLeft: '-40px',
     }),
     menuList: (provided, state) => ({
       ...provided,
-      backgroundColor: '#5a6386',
-      color: state.isSelected || state.isFocused ? '#5a6386' : '#242b49',
+      backgroundColor: '#545B79',
+      color: state.isSelected || state.isFocused ? '#545B79' : '#21243B',
     }),
     option: (provided, state) => ({
       ...provided,
-      backgroundColor: state.isSelected || state.isFocused ? '#ffffff' : '#5a6386',
-      color: state.isSelected || state.isFocused ? '#5a6386' : '#ffffff',
+      backgroundColor: state.isSelected || state.isFocused ? '#ffffff' : '#545B79',
+      color: state.isSelected || state.isFocused ? '#545B79' : '#ffffff',
       cursor: state.isDisabled ? 'not-allowed' : 'default',
     }),
     control: (provided, state) => ({
       ...provided,
-      backgroundColor: '#242b49',
-      color: state.isSelected || state.isFocused ? '#5a6386' : '#ffffff',
+      backgroundColor: '#21243B',
+      color: state.isSelected || state.isFocused ? '#545B79' : '#ffffff',
     }),
-    noOptionsMessage: (provided, state) => ({ ...provided, backgroundColor: '#5a6386', color: '#ffffff' }),
+    noOptionsMessage: (provided, state) => ({ ...provided, backgroundColor: '#545B79', color: '#ffffff' }),
     input: (provided, state) => ({ ...provided, color: '#ffffff' }),
     singleValue: (provided, state) => ({ ...provided, color: '#ffffff' }),
     placeholder: (provided, state) => ({ ...provided, color: '#ffffff' })

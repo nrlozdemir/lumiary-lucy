@@ -36,7 +36,7 @@
         {
           "x": 50,
           "y": -25,
-          "color": "#51adc0"
+          "color": "#2FD7C4"
         }
       ]
     },
@@ -55,7 +55,7 @@
         {
           "x": 50,
           "y": 25,
-          "color": "#51adc0"
+          "color": "#2FD7C4"
         }
       ]
     },
@@ -74,7 +74,7 @@
         {
           "x": 50,
           "y": -75,
-          "color": "#51adc0"
+          "color": "#2FD7C4"
         }
       ]
     }
@@ -304,15 +304,15 @@
     "datasets": [
       {
         "label": "Dataset 1",
-        "backgroundColor": "#d0506c",
-        "borderColor": "#d0506c",
+        "backgroundColor": "#5292E5",
+        "borderColor": "#5292E5",
         "borderWidth": 1,
         "data": [-20, -30, -25, -13]
       },
       {
         "label": "Dataset 2",
-        "backgroundColor": "#51adc0",
-        "borderColor": "#51adc0",
+        "backgroundColor": "#2FD7C4",
+        "borderColor": "#2FD7C4",
         "data": [50, 80, 60, 50]
       }
     ]

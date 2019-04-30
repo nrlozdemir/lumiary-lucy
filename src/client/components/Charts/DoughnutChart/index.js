@@ -11,8 +11,8 @@ const defaultProps = {
   layoutPadding: 0,
 
   datasetsBorderWidth: 5,
-  datasetsBorderColor: '#303a5d',
-  datasetsHoverBorderColor: '#303a5d',
+  datasetsBorderColor: '#373F5B',
+  datasetsHoverBorderColor: '#373F5B',
 
   defaultFontFamily: 'ClanOTBold',
   defaultFontSize: '14',
@@ -35,9 +35,9 @@ const defaultProps = {
 
 const dataLabelPlugins = (value, func, item) => {
   if (func == 'insertAfter') {
-    return (value + '' + item)
+    return value + '' + item
   } else if (func == 'insertBefore') {
-    return (item + '' + value)
+    return item + '' + value
   }
   return value
 }
@@ -97,13 +97,9 @@ export default class DoughnutChart extends React.Component {
 
           ctx.fillText(
             customFillText,
-            (fillTextX && fillTextX > 0)
-              ? fillTextX
-              : (bottom - top) / 2 - 55,
-            (fillTextY && fillTextY > 0)
-              ? fillTextY
-              : (right - left) / 2 + 4,
-            (fillTextMaxWidth && fillTextMaxWidth > 0)
+            fillTextX && fillTextX > 0 ? fillTextX : (bottom - top) / 2 - 55,
+            fillTextY && fillTextY > 0 ? fillTextY : (right - left) / 2 + 4,
+            fillTextMaxWidth && fillTextMaxWidth > 0
               ? fillTextMaxWidth
               : right - left
           )
@@ -134,7 +130,8 @@ export default class DoughnutChart extends React.Component {
                       data: data.datasets[0].data,
                       backgroundColor: data.datasets[0].backgroundColor,
                       borderColor: datasetsBorderColor,
-                      hoverBackgroundColor: data.datasets[0].hoverBackgroundColor,
+                      hoverBackgroundColor:
+                        data.datasets[0].hoverBackgroundColor,
                     },
                   ],
                 }}
@@ -150,7 +147,7 @@ export default class DoughnutChart extends React.Component {
                       fontColor: legendLabelsFontColor,
                       fontSize: legendLabelsFontSize,
                       fontFamily: legendLabelsFontFamily,
-                    }
+                    },
                   },
                   layout: {
                     padding: layoutPadding,
@@ -173,16 +170,16 @@ export default class DoughnutChart extends React.Component {
                         family: dataLabelFontFamily,
                         weight: dataLabelFontWeight,
                         size: dataLabelFontSize,
-                      }
-                    }
+                      },
+                    },
                   },
                   elements: {
                     arc: {
                       borderWidth: datasetsBorderWidth,
                       hoverBorderColor: datasetsHoverBorderColor,
-                    }
+                    },
                   },
-                  cutoutPercentage: cutoutPercentage
+                  cutoutPercentage: cutoutPercentage,
                 }}
               />
             )}

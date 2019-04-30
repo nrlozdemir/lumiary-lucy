@@ -97,7 +97,7 @@ class SingleItemSlider extends React.Component {
 						railStyle={{
 							height: "5px",
 							borderRadius: "10px",
-							backgroundColor: "#242b49"
+							backgroundColor: "#21243B"
 						}}
 						dotStyle={{
 							width: "0px",

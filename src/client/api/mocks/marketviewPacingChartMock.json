@@ -3,8 +3,8 @@
   "datasets": [
     {
       "data": [70, 15, 10, 5],
-      "borderColor": "#303a5d",
-      "backgroundColor": ["#51adc0", "#8567f0", "#d0506c", "#acb0be"]
+      "borderColor": "#373F5B",
+      "backgroundColor": ["#2FD7C4", "#8562F3", "#5292E5", "#acb0be"]
     }
   ]
 }
