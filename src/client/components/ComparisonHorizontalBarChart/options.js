@@ -21,7 +21,7 @@ export const barChartOptions = {
     },
   },
   chartArea: {
-    backgroundColor: '#242b49',
+    backgroundColor: '#21243B',
   },
   tooltips: {
     enabled: false,
@@ -31,8 +31,8 @@ export const barChartOptions = {
       {
         display: true,
         gridLines: {
-          color: '#5a6386',
-          zeroLineColor: '#5a6386',
+          color: '#545B79',
+          zeroLineColor: '#545B79',
           drawTicks: false,
         },
         ticks: {

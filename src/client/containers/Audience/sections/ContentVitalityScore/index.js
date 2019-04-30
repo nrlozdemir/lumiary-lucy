@@ -77,7 +77,7 @@ class ContentVitalityScore extends React.Component {
           <div className="col-12">
             <div data-vertical-title="Number Of Videos" className={chartStyle.vitalityContainer}>
               <LineChart
-                backgroundColor="#242b49"
+                backgroundColor="#21243B"
                 dataSet={() => combineChartData(data)}
                 width={1070}
                 height={291}
@@ -89,21 +89,21 @@ class ContentVitalityScore extends React.Component {
                 <PercentageBarGraph
                   id={"percentageContainer-1"}
                   percentage={33.4}
-                  color='#d0506c'
+                  color='#5292E5'
                 />
               </div>
               <div className={percentageCol} data-title="Your Library">
                 <PercentageBarGraph
                   id={"percentageContainer-2"}
                   percentage={40.1}
-                  color='#8567f0'
+                  color='#8562F3'
                 />
               </div>
               <div className={percentageCol} data-title="Female Audience">
                 <PercentageBarGraph
                   id={"percentageContainer-3"}
                   percentage={46.8}
-                  color='#51adc0'
+                  color='#2FD7C4'
                 />
               </div>
             </div>

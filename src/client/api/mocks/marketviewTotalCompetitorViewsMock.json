@@ -3,22 +3,22 @@
   "datasets": [
     {
       "label": "Barstool Sports",
-      "backgroundColor": "#51adc0",
-      "borderColor": "#51adc0",
+      "backgroundColor": "#2FD7C4",
+      "borderColor": "#2FD7C4",
       "borderWidth": 1,
       "data": [17, 4, 14, 9]
     },
     {
       "label": "SB Nation",
-      "backgroundColor": "#8567f0",
-      "borderColor": "#8567f0",
+      "backgroundColor": "#8562F3",
+      "borderColor": "#8562F3",
       "borderWidth": 1,
       "data": [12, 13, 19, 5]
     },
     {
       "label": "ESPN",
-      "backgroundColor": "#D0506C",
-      "borderColor": "#D0506C",
+      "backgroundColor": "#5292E5",
+      "borderColor": "#5292E5",
       "borderWidth": 1,
       "data": [9, 5, 4, 17]
     },
@@ -31,8 +31,8 @@
     },
     {
       "label": "Fansided",
-      "backgroundColor": "#5a6386",
-      "borderColor": "#5a6386",
+      "backgroundColor": "#545B79",
+      "borderColor": "#545B79",
       "borderWidth": 1,
       "data": [9, 8, 17, 11]
     }
