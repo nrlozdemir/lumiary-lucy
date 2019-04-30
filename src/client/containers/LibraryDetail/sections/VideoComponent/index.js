@@ -67,7 +67,6 @@ class Video extends Component {
   }
 
   render() {
-		console.log(this.props)
 		const {
 			src,
 			poster = '',
