@@ -7,7 +7,7 @@ const TopVideosChart = ({ chartData }) => {
   return (
     <Bar
       height={80}
-      backgroundColor="#242b49"
+      backgroundColor="#21243B"
       data={chartData}
       datasetKeyProvider={() => randomKey(5)}
       options={{

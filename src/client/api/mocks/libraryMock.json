@@ -26,9 +26,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 100, "y": -29, "type": "video", "color": "#D0506C" },
-            { "x": -82, "y": -11, "type": "library", "color": "#51adc0" },
-            { "x": -89, "y": -15, "type": "industry", "color": "#8567f0" }
+            { "x": 100, "y": -29, "type": "video", "color": "#5292E5" },
+            { "x": -82, "y": -11, "type": "library", "color": "#2FD7C4" },
+            { "x": -89, "y": -15, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -38,9 +38,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -86, "y": -76, "type": "video", "color": "#D0506C" },
-            { "x": 29, "y": 30, "type": "library", "color": "#51adc0" },
-            { "x": 45, "y": 49, "type": "industry", "color": "#8567f0" }
+            { "x": -86, "y": -76, "type": "video", "color": "#5292E5" },
+            { "x": 29, "y": 30, "type": "library", "color": "#2FD7C4" },
+            { "x": 45, "y": 49, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -50,9 +50,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -29, "y": 44, "type": "video", "color": "#D0506C" },
-            { "x": -45, "y": -24, "type": "library", "color": "#51adc0" },
-            { "x": -92, "y": 97, "type": "industry", "color": "#8567f0" }
+            { "x": -29, "y": 44, "type": "video", "color": "#5292E5" },
+            { "x": -45, "y": -24, "type": "library", "color": "#2FD7C4" },
+            { "x": -92, "y": 97, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -361,9 +361,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -4, "y": 37, "type": "video", "color": "#D0506C" },
-            { "x": -94, "y": -96, "type": "library", "color": "#51adc0" },
-            { "x": 32, "y": 67, "type": "industry", "color": "#8567f0" }
+            { "x": -4, "y": 37, "type": "video", "color": "#5292E5" },
+            { "x": -94, "y": -96, "type": "library", "color": "#2FD7C4" },
+            { "x": 32, "y": 67, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -373,9 +373,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -68, "y": 36, "type": "video", "color": "#D0506C" },
-            { "x": 53, "y": -18, "type": "library", "color": "#51adc0" },
-            { "x": 54, "y": 62, "type": "industry", "color": "#8567f0" }
+            { "x": -68, "y": 36, "type": "video", "color": "#5292E5" },
+            { "x": 53, "y": -18, "type": "library", "color": "#2FD7C4" },
+            { "x": 54, "y": 62, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -385,9 +385,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 27, "y": -43, "type": "video", "color": "#D0506C" },
-            { "x": 84, "y": -69, "type": "library", "color": "#51adc0" },
-            { "x": 11, "y": -42, "type": "industry", "color": "#8567f0" }
+            { "x": 27, "y": -43, "type": "video", "color": "#5292E5" },
+            { "x": 84, "y": -69, "type": "library", "color": "#2FD7C4" },
+            { "x": 11, "y": -42, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -696,9 +696,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 5, "y": -3, "type": "video", "color": "#D0506C" },
-            { "x": -87, "y": 5, "type": "library", "color": "#51adc0" },
-            { "x": 80, "y": 50, "type": "industry", "color": "#8567f0" }
+            { "x": 5, "y": -3, "type": "video", "color": "#5292E5" },
+            { "x": -87, "y": 5, "type": "library", "color": "#2FD7C4" },
+            { "x": 80, "y": 50, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -708,9 +708,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 36, "y": -4, "type": "video", "color": "#D0506C" },
-            { "x": 48, "y": 18, "type": "library", "color": "#51adc0" },
-            { "x": -47, "y": 13, "type": "industry", "color": "#8567f0" }
+            { "x": 36, "y": -4, "type": "video", "color": "#5292E5" },
+            { "x": 48, "y": 18, "type": "library", "color": "#2FD7C4" },
+            { "x": -47, "y": 13, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -720,9 +720,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -15, "y": 14, "type": "video", "color": "#D0506C" },
-            { "x": -95, "y": 35, "type": "library", "color": "#51adc0" },
-            { "x": -89, "y": 10, "type": "industry", "color": "#8567f0" }
+            { "x": -15, "y": 14, "type": "video", "color": "#5292E5" },
+            { "x": -95, "y": 35, "type": "library", "color": "#2FD7C4" },
+            { "x": -89, "y": 10, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -1031,9 +1031,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -29, "y": 94, "type": "video", "color": "#D0506C" },
-            { "x": 75, "y": 6, "type": "library", "color": "#51adc0" },
-            { "x": -83, "y": 70, "type": "industry", "color": "#8567f0" }
+            { "x": -29, "y": 94, "type": "video", "color": "#5292E5" },
+            { "x": 75, "y": 6, "type": "library", "color": "#2FD7C4" },
+            { "x": -83, "y": 70, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -1043,9 +1043,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -4, "y": -37, "type": "video", "color": "#D0506C" },
-            { "x": 9, "y": 18, "type": "library", "color": "#51adc0" },
-            { "x": 56, "y": 19, "type": "industry", "color": "#8567f0" }
+            { "x": -4, "y": -37, "type": "video", "color": "#5292E5" },
+            { "x": 9, "y": 18, "type": "library", "color": "#2FD7C4" },
+            { "x": 56, "y": 19, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -1055,9 +1055,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -59, "y": -27, "type": "video", "color": "#D0506C" },
-            { "x": -82, "y": -44, "type": "library", "color": "#51adc0" },
-            { "x": -8, "y": -30, "type": "industry", "color": "#8567f0" }
+            { "x": -59, "y": -27, "type": "video", "color": "#5292E5" },
+            { "x": -82, "y": -44, "type": "library", "color": "#2FD7C4" },
+            { "x": -8, "y": -30, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -1366,9 +1366,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -37, "y": 9, "type": "video", "color": "#D0506C" },
-            { "x": -53, "y": -68, "type": "library", "color": "#51adc0" },
-            { "x": 16, "y": -3, "type": "industry", "color": "#8567f0" }
+            { "x": -37, "y": 9, "type": "video", "color": "#5292E5" },
+            { "x": -53, "y": -68, "type": "library", "color": "#2FD7C4" },
+            { "x": 16, "y": -3, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -1378,9 +1378,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 51, "y": 84, "type": "video", "color": "#D0506C" },
-            { "x": -39, "y": -58, "type": "library", "color": "#51adc0" },
-            { "x": 63, "y": 13, "type": "industry", "color": "#8567f0" }
+            { "x": 51, "y": 84, "type": "video", "color": "#5292E5" },
+            { "x": -39, "y": -58, "type": "library", "color": "#2FD7C4" },
+            { "x": 63, "y": 13, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -1390,9 +1390,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -63, "y": -72, "type": "video", "color": "#D0506C" },
-            { "x": 21, "y": -95, "type": "library", "color": "#51adc0" },
-            { "x": -90, "y": 34, "type": "industry", "color": "#8567f0" }
+            { "x": -63, "y": -72, "type": "video", "color": "#5292E5" },
+            { "x": 21, "y": -95, "type": "library", "color": "#2FD7C4" },
+            { "x": -90, "y": 34, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -1701,9 +1701,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 38, "y": 78, "type": "video", "color": "#D0506C" },
-            { "x": -7, "y": 20, "type": "library", "color": "#51adc0" },
-            { "x": -54, "y": 86, "type": "industry", "color": "#8567f0" }
+            { "x": 38, "y": 78, "type": "video", "color": "#5292E5" },
+            { "x": -7, "y": 20, "type": "library", "color": "#2FD7C4" },
+            { "x": -54, "y": 86, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -1713,9 +1713,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 78, "y": -16, "type": "video", "color": "#D0506C" },
-            { "x": -55, "y": -21, "type": "library", "color": "#51adc0" },
-            { "x": 71, "y": 79, "type": "industry", "color": "#8567f0" }
+            { "x": 78, "y": -16, "type": "video", "color": "#5292E5" },
+            { "x": -55, "y": -21, "type": "library", "color": "#2FD7C4" },
+            { "x": 71, "y": 79, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -1725,9 +1725,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -38, "y": -73, "type": "video", "color": "#D0506C" },
-            { "x": -22, "y": 69, "type": "library", "color": "#51adc0" },
-            { "x": -58, "y": -2, "type": "industry", "color": "#8567f0" }
+            { "x": -38, "y": -73, "type": "video", "color": "#5292E5" },
+            { "x": -22, "y": 69, "type": "library", "color": "#2FD7C4" },
+            { "x": -58, "y": -2, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -2036,9 +2036,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -73, "y": 62, "type": "video", "color": "#D0506C" },
-            { "x": -12, "y": -47, "type": "library", "color": "#51adc0" },
-            { "x": 13, "y": 77, "type": "industry", "color": "#8567f0" }
+            { "x": -73, "y": 62, "type": "video", "color": "#5292E5" },
+            { "x": -12, "y": -47, "type": "library", "color": "#2FD7C4" },
+            { "x": 13, "y": 77, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -2048,9 +2048,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -46, "y": 13, "type": "video", "color": "#D0506C" },
-            { "x": -46, "y": -86, "type": "library", "color": "#51adc0" },
-            { "x": 10, "y": 49, "type": "industry", "color": "#8567f0" }
+            { "x": -46, "y": 13, "type": "video", "color": "#5292E5" },
+            { "x": -46, "y": -86, "type": "library", "color": "#2FD7C4" },
+            { "x": 10, "y": 49, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -2060,9 +2060,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -81, "y": 9, "type": "video", "color": "#D0506C" },
-            { "x": -5, "y": 52, "type": "library", "color": "#51adc0" },
-            { "x": -48, "y": -45, "type": "industry", "color": "#8567f0" }
+            { "x": -81, "y": 9, "type": "video", "color": "#5292E5" },
+            { "x": -5, "y": 52, "type": "library", "color": "#2FD7C4" },
+            { "x": -48, "y": -45, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -2371,9 +2371,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -18, "y": 9, "type": "video", "color": "#D0506C" },
-            { "x": -44, "y": 46, "type": "library", "color": "#51adc0" },
-            { "x": -85, "y": -24, "type": "industry", "color": "#8567f0" }
+            { "x": -18, "y": 9, "type": "video", "color": "#5292E5" },
+            { "x": -44, "y": 46, "type": "library", "color": "#2FD7C4" },
+            { "x": -85, "y": -24, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -2383,9 +2383,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 2, "y": -84, "type": "video", "color": "#D0506C" },
-            { "x": 61, "y": 99, "type": "library", "color": "#51adc0" },
-            { "x": -56, "y": 38, "type": "industry", "color": "#8567f0" }
+            { "x": 2, "y": -84, "type": "video", "color": "#5292E5" },
+            { "x": 61, "y": 99, "type": "library", "color": "#2FD7C4" },
+            { "x": -56, "y": 38, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -2395,9 +2395,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 13, "y": 87, "type": "video", "color": "#D0506C" },
-            { "x": 72, "y": -53, "type": "library", "color": "#51adc0" },
-            { "x": -8, "y": 1, "type": "industry", "color": "#8567f0" }
+            { "x": 13, "y": 87, "type": "video", "color": "#5292E5" },
+            { "x": 72, "y": -53, "type": "library", "color": "#2FD7C4" },
+            { "x": -8, "y": 1, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -2706,9 +2706,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -11, "y": -36, "type": "video", "color": "#D0506C" },
-            { "x": 71, "y": -18, "type": "library", "color": "#51adc0" },
-            { "x": 57, "y": -79, "type": "industry", "color": "#8567f0" }
+            { "x": -11, "y": -36, "type": "video", "color": "#5292E5" },
+            { "x": 71, "y": -18, "type": "library", "color": "#2FD7C4" },
+            { "x": 57, "y": -79, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -2718,9 +2718,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 96, "y": 94, "type": "video", "color": "#D0506C" },
-            { "x": 81, "y": 61, "type": "library", "color": "#51adc0" },
-            { "x": 23, "y": -42, "type": "industry", "color": "#8567f0" }
+            { "x": 96, "y": 94, "type": "video", "color": "#5292E5" },
+            { "x": 81, "y": 61, "type": "library", "color": "#2FD7C4" },
+            { "x": 23, "y": -42, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -2730,9 +2730,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -84, "y": -27, "type": "video", "color": "#D0506C" },
-            { "x": -52, "y": -91, "type": "library", "color": "#51adc0" },
-            { "x": -41, "y": 9, "type": "industry", "color": "#8567f0" }
+            { "x": -84, "y": -27, "type": "video", "color": "#5292E5" },
+            { "x": -52, "y": -91, "type": "library", "color": "#2FD7C4" },
+            { "x": -41, "y": 9, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -3041,9 +3041,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 26, "y": 68, "type": "video", "color": "#D0506C" },
-            { "x": -92, "y": -81, "type": "library", "color": "#51adc0" },
-            { "x": 4, "y": -3, "type": "industry", "color": "#8567f0" }
+            { "x": 26, "y": 68, "type": "video", "color": "#5292E5" },
+            { "x": -92, "y": -81, "type": "library", "color": "#2FD7C4" },
+            { "x": 4, "y": -3, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -3053,9 +3053,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 59, "y": 88, "type": "video", "color": "#D0506C" },
-            { "x": 56, "y": 9, "type": "library", "color": "#51adc0" },
-            { "x": -50, "y": 71, "type": "industry", "color": "#8567f0" }
+            { "x": 59, "y": 88, "type": "video", "color": "#5292E5" },
+            { "x": 56, "y": 9, "type": "library", "color": "#2FD7C4" },
+            { "x": -50, "y": 71, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -3065,9 +3065,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 13, "y": -75, "type": "video", "color": "#D0506C" },
-            { "x": 11, "y": -74, "type": "library", "color": "#51adc0" },
-            { "x": 33, "y": 32, "type": "industry", "color": "#8567f0" }
+            { "x": 13, "y": -75, "type": "video", "color": "#5292E5" },
+            { "x": 11, "y": -74, "type": "library", "color": "#2FD7C4" },
+            { "x": 33, "y": 32, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -3376,9 +3376,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 44, "y": 65, "type": "video", "color": "#D0506C" },
-            { "x": 76, "y": 20, "type": "library", "color": "#51adc0" },
-            { "x": 31, "y": 77, "type": "industry", "color": "#8567f0" }
+            { "x": 44, "y": 65, "type": "video", "color": "#5292E5" },
+            { "x": 76, "y": 20, "type": "library", "color": "#2FD7C4" },
+            { "x": 31, "y": 77, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -3388,9 +3388,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -68, "y": 29, "type": "video", "color": "#D0506C" },
-            { "x": -53, "y": 71, "type": "library", "color": "#51adc0" },
-            { "x": -14, "y": 39, "type": "industry", "color": "#8567f0" }
+            { "x": -68, "y": 29, "type": "video", "color": "#5292E5" },
+            { "x": -53, "y": 71, "type": "library", "color": "#2FD7C4" },
+            { "x": -14, "y": 39, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -3400,9 +3400,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 74, "y": 96, "type": "video", "color": "#D0506C" },
-            { "x": -56, "y": 86, "type": "library", "color": "#51adc0" },
-            { "x": 60, "y": -38, "type": "industry", "color": "#8567f0" }
+            { "x": 74, "y": 96, "type": "video", "color": "#5292E5" },
+            { "x": -56, "y": 86, "type": "library", "color": "#2FD7C4" },
+            { "x": 60, "y": -38, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -3711,9 +3711,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -46, "y": 10, "type": "video", "color": "#D0506C" },
-            { "x": -28, "y": 57, "type": "library", "color": "#51adc0" },
-            { "x": 25, "y": 90, "type": "industry", "color": "#8567f0" }
+            { "x": -46, "y": 10, "type": "video", "color": "#5292E5" },
+            { "x": -28, "y": 57, "type": "library", "color": "#2FD7C4" },
+            { "x": 25, "y": 90, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -3723,9 +3723,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 38, "y": 96, "type": "video", "color": "#D0506C" },
-            { "x": 91, "y": -81, "type": "library", "color": "#51adc0" },
-            { "x": -49, "y": 67, "type": "industry", "color": "#8567f0" }
+            { "x": 38, "y": 96, "type": "video", "color": "#5292E5" },
+            { "x": 91, "y": -81, "type": "library", "color": "#2FD7C4" },
+            { "x": -49, "y": 67, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -3735,9 +3735,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 50, "y": -36, "type": "video", "color": "#D0506C" },
-            { "x": 29, "y": 15, "type": "library", "color": "#51adc0" },
-            { "x": 56, "y": -15, "type": "industry", "color": "#8567f0" }
+            { "x": 50, "y": -36, "type": "video", "color": "#5292E5" },
+            { "x": 29, "y": 15, "type": "library", "color": "#2FD7C4" },
+            { "x": 56, "y": -15, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",

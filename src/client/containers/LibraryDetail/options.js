@@ -20,8 +20,8 @@ export const barDataOptions = {
         gridLines: {
           display: true,
           drawBorder: false,
-          color: "#5a6386",
-          zeroLineColor: "#5a6386"
+          color: "#545B79",
+          zeroLineColor: "#545B79"
         },
         ticks: {
           min: 0,
@@ -56,19 +56,19 @@ export const selectOptions = [
 export const barData_DatasetOptions = [
   {
     label: "first",
-    backgroundColor: "#D0506C",
-    borderColor: "#D0506C",
+    backgroundColor: "#5292E5",
+    borderColor: "#5292E5",
     borderWidth: 1,
-    hoverBackgroundColor: "#D0506C",
-    hoverBorderColor: "#D0506C"
+    hoverBackgroundColor: "#5292E5",
+    hoverBorderColor: "#5292E5"
   },
   {
     label: "second",
-    backgroundColor: "#51adc0",
-    borderColor: "#51adc0",
+    backgroundColor: "#2FD7C4",
+    borderColor: "#2FD7C4",
     borderWidth: 1,
-    hoverBackgroundColor: "#51adc0",
-    hoverBorderColor: "#51adc0"
+    hoverBackgroundColor: "#2FD7C4",
+    hoverBorderColor: "#2FD7C4"
   }
 ];
 
