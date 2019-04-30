@@ -69,7 +69,7 @@ class Video extends Component {
   render() {
 		const {
 			src,
-			poster = '',
+			poster = "",
 			title,
 			socialIcon,
 			cvScore,
@@ -91,14 +91,14 @@ class Video extends Component {
 						controls={false}
 						poster={poster}
 					/>
-					<div className={styles.percentageWrapper} style={{right: '80px'}}>
+					<div className={styles.percentageWrapper} style={{right: "80px"}}>
 						<PercentageBarGraph
-							backgroundColor='#303a5d'
+							backgroundColor="#303a5d"
 							customClass={styles.libraryPercentageGraph}
 							id={`videolist-${id}`}
 							percentage={cvScore}
 							disableLabels={true}
-							color='#2fd7c4'
+							color="#2fd7c4"
 							lineCount={30}
 							height={19}
 							width={67}

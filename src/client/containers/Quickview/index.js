@@ -67,8 +67,8 @@ export class Main extends React.Component {
       <React.Fragment>
         <div className="grid-container col-12">
           <div className="grid-collapse mt-50">
-            <div className={style.bar}>
-              <div className={style.barList}>
+            <div className={style.navigation}>
+              <div className={style.navItem}>
                 {platforms.map((platform, index) => (
                   <NavLink
                     key={index}
@@ -114,14 +114,14 @@ export class Main extends React.Component {
 														<div className={style.video}>
 															<SingleVideoCard {...el} muted={false} options={{size: "auto"}} />
 														</div>
-														<div className={style.percentageWrapper} style={{right: '80px'}}>
+														<div className={style.percentageWrapper} style={{right: "80px"}}>
 															<PercentageBarGraph
-																backgroundColor='#303a5d'
+																backgroundColor="#303a5d"
 																customClass={style.libraryPercentageGraph}
 																id={`videolist-${i}`}
 																percentage={cvScore}
 																disableLabels={true}
-																color='#2fd7c4'
+																color={i === 0 ? "#2fd7c4" : "#5292e5"}
 																lineCount={30}
 																height={19}
 																width={67}
