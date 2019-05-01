@@ -3,6 +3,13 @@
   position: relative;
 }
 
+.headerLabel {	
+  p {	
+    font-size: 14px;	
+    font-family: $font-family-ClanOTNews;	
+  }	
+}
+
 .cardTitle {
   display: flex;
   justify-content: space-between;
