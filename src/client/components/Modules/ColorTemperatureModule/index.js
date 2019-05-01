@@ -7,7 +7,7 @@ import ColorTemperatureChart from 'Components/ColorTemperatureChart'
 import cx from 'classnames'
 import style from './styles.scss'
 
-const Legend = ({ legend }) => {
+const renderLegend = (legend) => {
 	if (!legend.length) {
 		return null
 	}
@@ -53,7 +53,7 @@ const ColorTemperatureModule = ({
 			moduleKey={moduleKey}
 			title={title}
 			action={action}
-			legend={<Legend legend={legend} />}
+			legend={renderLegend(legend)}
 			filters={filters}
 		>
 			<div className={style.colorChartContainer}>
