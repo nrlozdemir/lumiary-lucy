@@ -20,7 +20,7 @@ import ColorTemperature from './sections/ColorTemperature'
 import FilteringSection from './sections/FilteringSection'
 import PacingCard from './sections/PacingCard'
 import CompareShares from './sections/CompareShares'
-import FlipCards from './sections/FlipCards'
+import Cards from './sections/Cards'
 
 /* eslint-disable react/prefer-stateless-function */
 const Panoptic = () => {
@@ -31,7 +31,7 @@ const Panoptic = () => {
 
         </div>
       </div>
-      <FlipCards />
+      <Cards />
       <VideoReleasesBarChart />
       <ColorTemperature />
       <FilteringSection />
