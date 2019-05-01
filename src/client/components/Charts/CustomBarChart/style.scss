@@ -1,0 +1,54 @@
+.bars {
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  white-space: pre-line;
+  height: 46px;
+  flex-direction: row;
+  width: 50%;
+  margin-top: -20px;
+
+  .barStyle {
+    height: 33px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    background-color: $color-dusk;
+    text-align: center;
+    position: relative;
+
+    &:after {
+      content: attr(data-label);
+      width: 12px;
+      overflow: hidden;
+      position: absolute;
+      top: calc(100% + 8px);
+      left: -2px;
+      font-size: 12px;
+      font-weight: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      color: $color-white;
+      opacity: 0.5;
+      font-family: $font-family-ClanOTNews;
+    }
+
+    &.barSelectedStyle {
+      &:after {
+        opacity: 1;
+        font-weight: bold;
+      }
+
+      &.increase {
+        background-color: $color-cool-blue;
+      }
+
+      &.noChange {
+        background-color: $color-dusk;
+      }
+
+      &.decrease {
+        background-color: $color-coral-pink;
+      }
+    }
+  }
+}

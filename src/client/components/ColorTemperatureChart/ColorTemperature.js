@@ -14,7 +14,7 @@ const findNewCoordinates = (x,y) => {
   return {newX, newY}
 }
 
-export const ColorTemperature = ({ temp, verticalText, showDescription }) => {
+export const ColorTemperature = ({ temp, verticalText }) => {
   const leftText = classnames(style.textLeft, {
     [style.verticalTextLeft]: verticalText,
   })
@@ -22,7 +22,6 @@ export const ColorTemperature = ({ temp, verticalText, showDescription }) => {
   const rightText = classnames(style.textRight, {
     [style.verticalTextRight]: verticalText,
   })
-
 
   return (
     <div className={style.temperatureContent}>
@@ -56,11 +55,6 @@ export const ColorTemperature = ({ temp, verticalText, showDescription }) => {
           }}
         />
       )})}
-      {showDescription && (
-        <p>
-          This is a blurb that will explain <br /> what this graph is showing
-        </p>
-      )}
     </div>
   )
 }
