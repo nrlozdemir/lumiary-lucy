@@ -43,20 +43,8 @@ class PanopticColorTemperature extends React.Component {
 						placeHolder: 'Date',
 					},
 				]}
-			>
-				<div className="d-flex align-items-center justify-content-center ph-48 mv-48">
-					{platforms &&
-						platforms.map((platform, index) => (
-							<div key={index} className="d-flex align-items-center mr-32">
-								<span
-									className={style.round}
-									style={{ backgroundColor: `${platform.color}` }}
-								/>
-								<p className={style.platformName}>{platform.name}</p>
-							</div>
-						))}
-				</div>
-			</ColorTemperatureModule>
+				platforms={platforms}
+			/>
 		)
 	}
 }

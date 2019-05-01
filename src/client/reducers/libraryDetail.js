@@ -106,7 +106,6 @@ const libraryDetailReducer = (state = initialState, action) => {
       return state.setIn(['colorTempData', 'loading'], fromJS(true))
       
 		case types.GET_COLOR_TEMP_SUCCESS:
-		console.log(action)
       return state
         .setIn(['colorTempData', 'data'], fromJS(action.payload))
         .setIn(['colorTempData', 'loading'], fromJS(false))

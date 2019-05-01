@@ -78,3 +78,19 @@
 		}
 	}
 }
+
+.round {
+	width: 16px;
+	height: 16px;
+	border-radius: 100%;
+	margin-right: 5px;
+}
+
+.platformName {
+	font-family: $font-family-ClanOTNews;
+	font-size: 14px;
+}
+
+.moduleBody {
+	padding: 8px 0 40px !important;
+}

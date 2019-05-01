@@ -46,7 +46,7 @@
 	font-family: $font-family-ClanOT;
 	font-weight: bold;
 	position: absolute;
-	top: -40px;
+	top: -35px;
 	left: 50%;
 	transform: translateX(-50%);
 }
@@ -56,14 +56,14 @@
 	color: $color-cool-grey;
 	position: absolute;
 	top: calc(50% - 14px);
-	right: -50px;
+	right: -35px;
 }
 
 .textBottom {
 	font-size: 14px;
 	font-family: $font-family-ClanOTBold;
 	position: absolute;
-	bottom: -40px;
+	bottom: -35px;
 	left: 50%;
 	transform: translateX(-50%);
 }
@@ -74,7 +74,7 @@
 	color: $color-cool-grey;
 	position: absolute;
 	top: calc(50% - 14px);
-	left: -40px;
+	left: -35px;
 }
 
 .horizontalLine {

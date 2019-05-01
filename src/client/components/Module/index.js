@@ -37,12 +37,24 @@ export class Module extends React.Component {
 	}
 
 	render() {
+		const {
+			children,
+			title,
+			subTitle,
+			legend,
+			filters,
+			bodyClass,
+			containerClass,
+		} = this.props
+
+		const { infoShow } = this.state
+
 		const moduleContainer = cx(
 			'shadow-1 grid-container col-12',
-			style.moduleContainer
+			style.moduleContainer,
+			containerClass,
 		)
-		const { children, title, subTitle, legend, filters } = this.props
-		const { infoShow } = this.state
+
 		return (
 			<div className={moduleContainer}>
 				<div className={style.moduleContainerHeader}>
@@ -52,7 +64,7 @@ export class Module extends React.Component {
 						infoShow={infoShow}
 					/>
 				</div>
-				<div className={style.moduleContainerBody}>{children}</div>
+				<div className={cx(style.moduleContainerBody, bodyClass)}>{children}</div>
 			</div>
 		)
 	}
@@ -68,6 +80,8 @@ Module.defaultProps = {
 
 Module.propTypes = {
 	action: PropTypes.func.isRequired,
+	bodyClass: PropTypes.string,
+	containerClass: PropTypes.string
 }
 
 export default connect(

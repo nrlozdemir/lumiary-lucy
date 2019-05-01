@@ -42,10 +42,14 @@ const ColorTemperatureModule = ({
 	infoLabels,
 	children,
 	extraClasses,
+	platforms,
+	moduleClass,
 	chartWrapperClass,
 }) => {
 	return (
 		<Module
+			containerClass={moduleClass}
+			bodyClass={style.moduleBody}
 			moduleKey={moduleKey}
 			title={title}
 			action={action}
@@ -78,7 +82,19 @@ const ColorTemperatureModule = ({
 						))}
 					</div>
 				)}
-				{children}
+				{!!platforms && !!platforms.length && (
+					<div className="d-flex align-items-center justify-content-center ph-48 mv-48">
+						{platforms.map((platform, index) => (
+							<div key={index} className="d-flex align-items-center mr-32">
+								<span
+									className={style.round}
+									style={{ backgroundColor: `${platform.color}` }}
+								/>
+								<p className={style.platformName}>{platform.name}</p>
+							</div>
+						))}
+					</div>
+				)}
 			</div>
 		</Module>
 	)
@@ -104,6 +120,7 @@ ColorTemperatureModule.propTypes = {
 	infoLabels: PropTypes.array,
 	legend: PropTypes.array,
 	wrapperClasses: PropTypes.string,
+	platforms: PropTypes.array,
 }
 
 export default ColorTemperatureModule
