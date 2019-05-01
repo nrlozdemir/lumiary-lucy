@@ -1,7 +1,7 @@
 .container {
   padding: 23px 40px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-	font-family: $font-family-ClanOTNews;
+  font-family: $font-family-ClanOTNews;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -41,11 +41,11 @@
 
 .links {
   flex: 6;
-	text-align: center;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	position: relative;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
 
   a {
     margin: 0 36px;
@@ -110,7 +110,7 @@
   width: 200px;
   display: inline-flex;
   justify-content: center;
-	align-items: center;
-	position: absolute;
-	right: -140px;
+  align-items: center;
+  position: absolute;
+  right: -140px;
 }

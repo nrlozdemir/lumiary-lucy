@@ -3,6 +3,13 @@
   position: relative;
 }
 
+.headerLabel {	
+  p {	
+    font-size: 14px;	
+    font-family: $font-family-ClanOTNews;	
+  }	
+}
+
 .cardTitle {
   display: flex;
   justify-content: space-between;
@@ -80,34 +87,6 @@
   }
 }
 
-.headerLabel {
-  p {
-    font-size: 14px;
-    font-family: $font-family-ClanOTNews;
-  }
-}
-
-.temperatureHeader {
-  display: flex;
-  width: calc(100% - 80px);
-  padding: 48px 0;
-  justify-content: space-between;
-  align-items: center;
-
-  p {
-    font-size: 14px;
-    font-family: $font-family-ClanOTNews;
-  }
-
-  h2 {
-    font-family: $font-family-ClanOTBold;
-    font-size: 18px;
-  }
-
-  .inputWrapper {
-    width: 200px;
-  }
-}
 .redRound {
   background-color: $color-coral-pink;
   width: 16px;
