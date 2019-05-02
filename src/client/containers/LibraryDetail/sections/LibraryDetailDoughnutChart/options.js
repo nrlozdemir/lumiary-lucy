@@ -112,9 +112,3 @@ export const lineChartData_DatasetOptions = [
     shadowColor: "#8562F3"
   }
 ];
-
-export const selectOptions = [
-  { value: "chocolate", label: "Chocolate" },
-  { value: "strawberry", label: "Strawberry" },
-  { value: "vanilla", label: "Vanilla" }
-];
