@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticVideoReleases } from 'Reducers/panoptic'
 
-import ModuleVideoReleasesBarChart from 'Components/Modules/VideoReleasesBarChart'
+import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
 
 class VideoReleasesBarChart extends Component {
   callBack = (data, moduleKey) => {
@@ -17,26 +17,26 @@ class VideoReleasesBarChart extends Component {
     } = this.props
 
     return (
-      <ModuleVideoReleasesBarChart
+      <VideoReleasesBarChartModule
         data={data}
-        moduleKey={'Panoptic/VideoReleasesBarChart'}
+        moduleKey={'Panoptic/VideoReleasesBarChartModule'}
         title="Video Releases vs Engagement"
         action={this.callBack}
-        filters={[{
-          type: 'engagement',
-          selectKey: 'PVR-sad',
-          placeHolder: 'Engagement',
-        },
-        {
-          type: 'platform',
-          selectKey: 'PVR-asd',
-          placeHolder: 'Platform',
-        },
-        {
-          type: 'timeRange',
-          selectKey: 'PVR-wds',
-          placeHolder: 'Date',
-        }]}
+        filters={[
+          {
+            type: 'platform',
+            selectKey: 'PVR-asd',
+            placeHolder: 'Platform',
+          },
+          {
+            type: 'timeRange',
+            selectKey: 'PVR-wds',
+            placeHolder: 'Date',
+          }]}
+        legend={[
+          { label: 'Videos', color: 'blueDot' },
+          { label: 'Engagement', color: 'coralPinkDot' },
+        ]}
       />
     )
   }

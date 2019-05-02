@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import ModuleVideoReleasesBarChart from 'Components/Modules/VideoReleasesBarChart'
+import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
 
 class VideoReleasesBarChart extends Component {
   callBack = (data, moduleKey) => {
@@ -13,23 +13,16 @@ class VideoReleasesBarChart extends Component {
     } = this.props
 
     return (
-      <ModuleVideoReleasesBarChart
+      <VideoReleasesBarChartModule
         data={data}
-        moduleKey={'ReportGenerated/VideoReleasesBarChart'}
+        moduleKey={'ReportGenerated/VideoReleasesBarChartModule'}
         title="Video Releases vs Engagement"
         action={this.callBack}
-        legend={(
-          <div className='d-flex align-items-center justify-content-end'>
-            <div className="d-flex align-items-center mr-32">
-              <span className="blueDot" />
-              <p>Likes</p>
-            </div>
-            <div className="d-flex align-items-center mr-32">
-              <span className="redDot" />
-              <p>Video Releases</p>
-            </div>
-          </div>
-        )}
+        legend={[
+          { label: 'Videos', color: 'blueDot' },
+          { label: 'Engagement', color: 'coralPinkDot' },
+        ]}
+        legendEnd={true}
       />
     )
   }
