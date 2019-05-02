@@ -24,8 +24,8 @@ export const barDataOptions = {
         gridLines: {
           display: true,
           drawBorder: false,
-          color: "#5a6386",
-          zeroLineColor: "#5a6386"
+          color: "#545B79",
+          zeroLineColor: "#545B79"
         },
         ticks: {
           min: 0,

@@ -67,15 +67,15 @@ class TotalViewsChart extends React.Component {
                 labelPositionLeft
                 labelsData={[
                   {
-                    color: '#51adc0',
+                    color: '#2FD7C4',
                     data: 'Barstool Sports',
                   },
                   {
-                    color: '#8567f0',
+                    color: '#8562F3',
                     data: 'SB Nation',
                   },
                   {
-                    color: '#d0506c',
+                    color: '#5292E5',
                     data: 'ESPN',
                   },
                   {
@@ -83,7 +83,7 @@ class TotalViewsChart extends React.Component {
                     data: 'Scout Media',
                   },
                   {
-                    color: '#5a6386',
+                    color: '#545B79',
                     data: 'Fansided',
                   },
                 ]}

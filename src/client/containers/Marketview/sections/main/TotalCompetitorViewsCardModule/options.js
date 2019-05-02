@@ -11,8 +11,8 @@ export const barDurationOptions = {
         display: true,
         gridLines: {
           display: true,
-          color: '#5a6386',
-          zeroLineColor: '#5a6386',
+          color: '#545B79',
+          zeroLineColor: '#545B79',
         },
         ticks: {
           fontColor: 'white',
@@ -24,8 +24,8 @@ export const barDurationOptions = {
         display: true,
         gridLines: {
           display: true,
-          color: '#5a6386',
-          zeroLineColor: '#5a6386',
+          color: '#545B79',
+          zeroLineColor: '#545B79',
         },
         ticks: {
           beginAtZero: true,

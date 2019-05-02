@@ -1,39 +1,81 @@
-.headerContainer {
+
+
+.navigation {
   display: flex;
-  margin-top: 72px;
   align-items: center;
-
-  > div {
-    flex: 1;
-  }
-
-  &:last-child div {
-    flex: 1;
-    margin-right: auto;
-  }
-}
-
-.dotItem {
-  display: inline-flex;
-  align-items: center;
-  margin-right: 30px;
+  height: 56px;
   color: $color-white;
+  font-family: $font-family-ClanOT;
   font-size: 14px;
-  font-family: $font-family-ClanOTNews;
+  margin-left: 20px;
+  margin-right: 20px;
+  margin-bottom: 48px;
 
-  span {
-    width: 16px;
-    height: 16px;
-    display: inline-block;
-    margin-right: 8px;
-    border-radius: 50%;
+  & > div  {
+    -ms-flex-preferred-size: 0;
+    flex-basis: 0;
+    -ms-flex-positive: 1;
+    flex-grow: 1;
   }
-}
 
-.quickCardTitle {
-  display: flex;
-  font-weight: normal;
-  justify-content: space-between;
+  .back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    min-width: 200px;
+    border-right: 1px solid $color-dark-grey-blue;
+    color: $color-white;
+    cursor: pointer;
+    text-decoration: none;
+
+    .iconWrapper {
+      margin-right: 16px;
+
+      span {
+        font-size: 30px;
+      }
+    }
+  }
+
+  .navItem {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+
+    a {
+      cursor: pointer;
+      min-height: 56px;
+      min-width: 164px;
+      color: $color-cool-grey;
+      font-family: $font-family-ClanOT;
+      text-align: center;
+      text-decoration: none;
+      text-transform: capitalize;
+      border: 1px solid $color-dusk;
+      background-color: $color-dark-five;
+      font-size: 14px;
+      font-weight: bold;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      &:hover, &:active{
+        color: $color-white;
+        background-color: $color-dusk;
+      }
+
+      i{
+        font-size: 30px;
+      }
+    }
+
+    .active {
+      color: $color-white;
+      background-color: $color-dusk;
+    }
+  }
 }
 
 .cardWrapper{
@@ -77,7 +119,7 @@
       }
 
       .infoItem {
-        margin-right: 60px;
+        margin-right: 30px;
       }
 
       .itemWrapper{
@@ -97,11 +139,11 @@
       width: calc(50% - 60px);
 
       .video{
-        margin-left: 60px;
+        margin-left: 0px;
       }
 
       .infoItem {
-        margin-left: 60px;
+        margin-left: 30px;
       }
     }
   }
@@ -277,80 +319,25 @@
   }
 }
 
-.bar {
-  display: flex;
-  align-items: center;
-  height: 56px;
-  color: $color-white;
-  font-family: $font-family-ClanOT;
-  font-size: 14px;
-  margin-left: 20px;
-  margin-right: 20px;
-  margin-bottom: 48px;
-
-  & > div  {
-    -ms-flex-preferred-size: 0;
-    flex-basis: 0;
-    -ms-flex-positive: 1;
-    flex-grow: 1;
+.assetContainer{
+  &.right {
+    margin-left: 30px;
   }
+}
 
-  .back {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height: 100%;
-    min-width: 200px;
-    border-right: 1px solid $color-dark-grey-blue;
-    color: $color-white;
-    cursor: pointer;
-    text-decoration: none;
+.video {
+  width: 100%;
+  height: 100%;
+  background: black;
+}
 
-    .iconWrapper {
-      margin-right: 16px;
+.percentageWrapper {
+  opacity: 0.8;
+  position: absolute;
+  right: 80px;
+  top: 17px;
+}
 
-      span {
-        font-size: 30px;
-      }
-    }
-  }
-
-  .barList {
-    display: flex;
-    width: 100%;
-    justify-content: space-between;
-
-    a {
-      cursor: pointer;
-      min-height: 56px;
-      min-width: 164px;
-      color: $color-cool-grey;
-      font-family: $font-family-ClanOT;
-      text-align: center;
-      text-decoration: none;
-      text-transform: capitalize;
-      border: 1px solid $color-dusk;
-      background-color: $color-dark-five;
-      font-size: 14px;
-      font-weight: bold;
-      border-radius: 8px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-
-      &:hover, &:active{
-        color: $color-white;
-        background-color: $color-dusk;
-      }
-
-      i{
-        font-size: 30px;
-      }
-    }
-
-    .active {
-      color: $color-white;
-      background-color: $color-dusk;
-    }
-  }
+.libraryPercentageGraph {
+  opacity: 0.8;
 }

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import styles from './style.scss'
-import { socialIconSelector } from 'Utils'
+import AssetLayer from 'Components/AssetLayer'
+import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 
 class Video extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class Video extends Component {
       videoPlayButton
 
     let videoMethods = {
-      renderVideoPlayButton: function() {
+      renderVideoPlayButton: function () {
         if (videoWrapper.contains(video)) {
           this.formatVideoPlayButton()
           videoPlayButton = videoWrapper.getElementsByClassName(
@@ -25,7 +26,7 @@ class Video extends Component {
         }
       },
 
-      formatVideoPlayButton: function() {
+      formatVideoPlayButton: function () {
         videoWrapper.insertAdjacentHTML(
           'beforeend',
           '\
@@ -37,7 +38,7 @@ class Video extends Component {
         )
       },
 
-      hideVideoPlayButton: function() {
+      hideVideoPlayButton: function () {
         if (
           Object.values(videoPlayButton.classList).indexOf('is-hidden') > -1
         ) {
@@ -66,27 +67,46 @@ class Video extends Component {
   }
 
   render() {
-    const { src, poster = '', title, socialIcon, style, className } = this.props
-    const classes = classnames('video-wrapper', className, styles.container)
-
-    const iconClass = classnames(
-      socialIconSelector(socialIcon) + ' ' + styles.icon
-    )
+    const {
+      src,
+      poster = "",
+      title,
+      socialIcon,
+      cvScore,
+      id
+    } = this.props
 
     return (
-      <div className={classes} style={{ ...style }}>
-        <video
-          ref={this.video}
-          className={styles.video}
-          src={src}
-          muted
-          controls={false}
-          poster={poster}
-        />
-        <div className={styles.bar}>
-          <span className={iconClass} /> {title}
-        </div>
-      </div>
+      <React.Fragment>
+        <AssetLayer
+          leftSocialIcon={socialIcon}
+          title={title}
+          rightValue={cvScore}
+        >
+          <video
+            ref={this.video}
+            className={styles.video}
+            src={src}
+            muted
+            controls={false}
+            poster={poster}
+          />
+          <div className={styles.percentageWrapper} style={{right: "80px"}}>
+            <PercentageBarGraph
+              backgroundColor="#303a5d"
+              customClass={styles.libraryPercentageGraph}
+              id={`videolist-${id}`}
+              percentage={cvScore}
+              disableLabels={true}
+              color="#2fd7c4"
+              lineCount={30}
+              height={19}
+              width={67}
+              xSmall
+            />
+          </div>
+        </AssetLayer>
+      </React.Fragment>
     )
   }
 }

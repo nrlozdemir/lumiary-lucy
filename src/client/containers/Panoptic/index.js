@@ -20,8 +20,8 @@ import ColorTemperature from './sections/ColorTemperature'
 import FilteringSection from './sections/FilteringSection'
 import PacingCard from './sections/PacingCard'
 import CompareShares from './sections/CompareShares'
-import FlipCards from './sections/FlipCards'
 import LineAndDoughnutChartModule from 'Components/Modules/LineAndDoughnutChartModule'
+import Cards from './sections/Cards'
 
 /* eslint-disable react/prefer-stateless-function */
 class Panoptic extends React.Component {
@@ -31,7 +31,8 @@ class Panoptic extends React.Component {
         <div className="grid-container col-12">
           <div className={style.alignTabs} />
         </div>
-        <FlipCards />
+
+        <Cards />
         <LineAndDoughnutChartModule
           moduleKey="Panoptic/Top-Performing-Formats-This-Week-By-CV-Score"
           title="Top Performing Formats This Week By CV Score"
