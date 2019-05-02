@@ -6,7 +6,7 @@ import PercentageBarGraph from '../../Charts/PercentageBarGraph'
 import LineChart from '../../LineChart/Chart'
 import DoughnutChart from '../../Charts/DoughnutChart'
 
-const LineAndDoughnutChartModule = ({ moduleKey, title, action, filters }) => {
+const LineAndDoughnutChartModule = ({ moduleKey, title, action }) => {
   const percentageCol = cx('col-4', style.percentageCol)
   return (
     <Module
@@ -24,11 +24,55 @@ const LineAndDoughnutChartModule = ({ moduleKey, title, action, filters }) => {
     >
       <div className="grid-collapse">
         <div className="col-12">
-          <div className="col-7">
-            <LineChart />
+          <div className="col-8">
+            <LineChart
+              dataSet={{
+                labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
+                datasets: [
+                  { data: [50, 86, 17, 89, 15, 94, 34] },
+                  { data: [29, 43, 61, 83, 40, 67, 78] },
+                ],
+              }}
+            />
           </div>
-          <div className="col-5">
-            <DoughnutChart />
+          <div className="col-4 d-flex align-items-center justify-content-center">
+            <DoughnutChart
+              width={270}
+              height={270}
+              cutoutPercentage={58}
+              fillText="Total Percentage"
+              dataLabelFunction="insertAfter"
+              dataLabelInsert="%"
+              labelPositionRight
+              data={{
+                labels: [
+                  'Live Action',
+                  'Cinemagraph',
+                  'Stop Motion',
+                  'Animation',
+                  'Animation 2',
+                ],
+                datasets: [
+                  {
+                    data: [5, 15, 25, 10, 45],
+                    backgroundColor: [
+                      '#5292e5',
+                      '#545b79',
+                      '#acb0be',
+                      '#2fd7c4',
+                      '#8562f3',
+                    ],
+                    hoverBackgroundColor: [
+                      '#5292e5',
+                      '#545b79',
+                      '#acb0be',
+                      '#2fd7c4',
+                      '#8562f3',
+                    ],
+                  },
+                ],
+              }}
+            />
           </div>
         </div>
         <div className="col-12">
