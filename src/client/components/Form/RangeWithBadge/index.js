@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import classnames from 'classnames'
-import PropTypes from 'prop-types'
-import style from './styles.scss'
+//import style from './styles.scss'
 import Slider, { createSliderWithTooltip } from 'rc-slider';
 
 const RangeSlider = createSliderWithTooltip(Slider.Range)
