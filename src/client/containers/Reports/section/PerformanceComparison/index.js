@@ -8,13 +8,14 @@ import {
   makeSelectReportsPerformanceComparison,
 } from 'Reducers/reports'
 
-import cx from 'classnames'
+//import cx from 'classnames'
 import style from './style.scss'
 
-import ComparisonHorizontalBarChart from 'Components/ComparisonHorizontalBarChart'
+//import ComparisonHorizontalBarChart from 'Components/ComparisonHorizontalBarChart'
+import { Bar } from 'react-chartjs-2'
+import DoughnutChart from 'Components/Charts/DoughnutChart'
 import 'chartjs-plugin-datalabels'
-import { Bar, Doughnut } from 'react-chartjs-2'
-import { doughnutOptions, stackedChartOptions } from './options'
+import { stackedChartOptions } from './options'
 import { randomKey } from 'Utils/index'
 import Module from 'Components/Module'
 
@@ -139,12 +140,14 @@ class PerformanceComparison extends React.Component {
           )}
           {data && data.doughnutData && (
             <div className={style.chartContainer}>
-              <Doughnut
-                options={doughnutOptions}
+              <DoughnutChart
                 width={280}
                 height={280}
                 data={data.doughnutData}
-                plugins={plugins}
+                cutoutPercentage={58}
+                fillText="Total Percentage"
+                dataLabelFunction="insertAfter"
+                dataLabelInsert="%"
               />
             </div>
           )}
