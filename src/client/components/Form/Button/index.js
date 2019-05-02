@@ -1,14 +1,9 @@
-/**
- *
- * Button
- *
- */
-
 import React from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import classnames from "classnames";
 import style from "./style.scss";
+
 /* eslint-disable react/prefer-stateless-function */
 const Button = props => {
 	const buttonClass = classnames({
