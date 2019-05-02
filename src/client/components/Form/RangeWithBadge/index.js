@@ -68,9 +68,9 @@ class RangeWithBadge extends Component {
       max,
       step,
       dots,
-			marks,
-			tipProps,
-			handleLabel,
+      marks,
+      tipProps,
+      handleLabel,
       customClass,
     } = this.props
 
@@ -79,8 +79,8 @@ class RangeWithBadge extends Component {
     return (
       <div className="range-slider">
         <RangeSlider
-					overlayClassName='customOverlay'
-					overlayStyle='font-size:15px'
+          overlayClassName='customOverlay'
+          overlayStyle='font-size:15px'
           className={customClass}
           allowCross={false}
           value={value}
@@ -93,9 +93,9 @@ class RangeWithBadge extends Component {
           min={min}
           max={max}
           step={step}
-					dots={dots}
-					tipProps={tipProps}
-					handleLabel={handleLabel}
+          dots={dots}
+          tipProps={tipProps}
+          handleLabel={handleLabel}
           marks={marks}
         />
       </div>
