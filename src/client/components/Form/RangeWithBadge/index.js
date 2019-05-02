@@ -82,7 +82,7 @@ class RangeWithBadge extends Component {
     return (
       <div className="range-slider">
         <RangeSlider
-					overlayClassName='overlayBBB'
+					overlayClassName='customOverlay'
 					overlayStyle='font-size:15px'
           className={customClass}
           allowCross={false}
