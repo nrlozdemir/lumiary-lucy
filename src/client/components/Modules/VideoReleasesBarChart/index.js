@@ -4,19 +4,10 @@ import cx from 'classnames'
 import style from './style.scss'
 import { randomKey } from 'Utils/index'
 
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectPanopticVideoReleases } from 'Reducers/panoptic'
-
 import { options, wrapperBarOptions } from './chartOptions'
 
-const barChartContainer = cx('col-12', style.panopticBarChart)
-const barChartHeaderClass = cx('col-12 mt-24 mb-24', style.barChartHeader)
-const barChartFooterClass = cx('col-12 mb-56', style.barChartFooter)
-const barContainerClass = cx('col-12', style.barChartContainer)
-const headerTitleClass = cx('font-secondary-second', style.title)
-const referencesClass = cx('font-secondary-second', style.references)
+const barChartContainer = cx(style.panopticBarChart)
+const barContainerClass = cx(style.barChartContainer)
 
 import Module from 'Components/Module'
 
@@ -44,65 +35,34 @@ const plugins = [
   },
 ]
 
-class VideoReleasesBarChart extends React.Component {
-  callBack = (data, moduleKey) => {
-    this.props.getVideoReleasesData(data)
-  }
-
+class VideoReleasesBarChart extends Component {
   datasetKeyProvider() {
     return randomKey(5)
   }
 
   render() {
     const {
-      videoReleasesData: { data, loading, error },
-      reportData
+      data,
+      moduleKey,
+      title,
+      action,
+      filters,
+      legend
     } = this.props
 
-    console.log(reportData)
     return (
       <Module
-        moduleKey={'Panoptic/VideoReleasesBarChart'}
-        title="Video Releases vs Engagement"
-        action={this.callBack}
-        filters={[
-          ...(!reportData ? [{
-            type: 'engagement',
-            selectKey: 'PVR-sad',
-            placeHolder: 'Engagement',
-          },
-          {
-            type: 'platform',
-            selectKey: 'PVR-asd',
-            placeHolder: 'Platform',
-          },
-          {
-            type: 'timeRange',
-            selectKey: 'PVR-wds',
-            placeHolder: 'Date',
-          }] : [])
-
-        ]}
-        legend={
-          reportData && (
-            <div className='d-flex align-items-center justify-content-end'>
-              <div className="d-flex align-items-center mr-32">
-                <span className="blueDot" />
-                <p>Likes</p>
-              </div>
-              <div className="d-flex align-items-center mr-32">
-                <span className="redDot" />
-                <p>Video Releases</p>
-              </div>
-            </div>
-          )
-        }
+        moduleKey={moduleKey}
+        title={title}
+        action={action}
+        filters={filters || []}
+        legend={legend}
       >
         <div className={barChartContainer}>
           <div className={barContainerClass}>
             <div className={style.wrapperBarChart}>
               <Bar
-                data={reportData || data}
+                data={data}
                 options={wrapperBarOptions}
                 datasetKeyProvider={this.datasetKeyProvider}
                 plugins={plugins}
@@ -112,7 +72,7 @@ class VideoReleasesBarChart extends React.Component {
               <div className="col-3">
                 <div className={style.chartSection}>
                   <Bar
-                    data={reportData || data}
+                    data={data}
                     options={options}
                     datasetKeyProvider={this.datasetKeyProvider}
                   />
@@ -124,7 +84,7 @@ class VideoReleasesBarChart extends React.Component {
               <div className="col-3">
                 <div className={style.chartSection}>
                   <Bar
-                    data={reportData || data}
+                    data={data}
                     options={options}
                     datasetKeyProvider={this.datasetKeyProvider}
                   />
@@ -136,7 +96,7 @@ class VideoReleasesBarChart extends React.Component {
               <div className="col-3">
                 <div className={style.chartSection}>
                   <Bar
-                    data={reportData || data}
+                    data={data}
                     options={options}
                     datasetKeyProvider={this.datasetKeyProvider}
                   />
@@ -147,7 +107,7 @@ class VideoReleasesBarChart extends React.Component {
               </div>
               <div className="col-3">
                 <div className={style.chartSection}>
-                  <Bar data={reportData || data} options={options} />
+                  <Bar data={data} options={options} />
                 </div>
                 <div className={style.chartSectionBadge}>
                   <span>Animation</span>
@@ -161,15 +121,4 @@ class VideoReleasesBarChart extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  videoReleasesData: makeSelectPanopticVideoReleases(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(VideoReleasesBarChart)
+export default VideoReleasesBarChart;
