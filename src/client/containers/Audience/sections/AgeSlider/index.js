@@ -1,17 +1,11 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceAgeSlider } from 'Reducers/panoptic'
-
-import AudienceSlider from 'Components/Sliders/Audience'
-import SelectFilters from 'Components/SelectFilters'
-
-import classnames from 'classnames'
-import style from 'Containers/Audience/style.scss'
-
 import Module from 'Components/Module'
+import AudienceSlider from 'Components/Sliders/Audience'
+import style from 'Containers/Audience/style.scss'
 
 class AgeSlider extends React.Component {
   constructor(props) {

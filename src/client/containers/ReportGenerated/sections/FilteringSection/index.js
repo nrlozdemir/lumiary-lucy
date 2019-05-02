@@ -1,11 +1,10 @@
 import React from 'react'
-import classnames from 'classnames'
+//import classnames from 'classnames'
 import 'chartjs-plugin-datalabels'
 import SelectFilters from 'Components/SelectFilters'
-
-import style from './style.scss'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
+import style from './style.scss'
 
 const GeneratedReportFilteringSection = ({
   data: { doughnutData, stackedChartData, doughnutRoundData },

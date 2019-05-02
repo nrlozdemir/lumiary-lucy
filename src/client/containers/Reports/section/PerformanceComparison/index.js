@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
@@ -7,17 +6,15 @@ import {
   actions,
   makeSelectReportsPerformanceComparison,
 } from 'Reducers/reports'
-
 //import cx from 'classnames'
-import style from './style.scss'
-
 //import ComparisonHorizontalBarChart from 'Components/ComparisonHorizontalBarChart'
+import Module from 'Components/Module'
 import { Bar } from 'react-chartjs-2'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import 'chartjs-plugin-datalabels'
 import { stackedChartOptions } from './options'
 import { randomKey } from 'Utils/index'
-import Module from 'Components/Module'
+import style from './style.scss'
 
 const barPlugins = [
   {
