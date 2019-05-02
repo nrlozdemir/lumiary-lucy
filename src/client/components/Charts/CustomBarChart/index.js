@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import styles from './style.scss'
+import { withTheme } from 'ThemeContext/withTheme'
 
 /*
 Example Usage:
@@ -24,16 +25,16 @@ const defaultProps = {
   barsWrapperStyle: styles.bars,
   barStyle: styles.barStyle,
   barSelectedStyle: styles.barSelectedStyle,
-  selected: "Sunday",
+  selected: 'Sunday',
   options: {
     width: 8,
     maxHeight: 36,
     labelCharLength: 1,
-    zeroFill: 1
-  }
+    zeroFill: 1,
+  },
 }
 
-export default class CustomBarChart extends React.Component {
+class CustomBarChart extends React.Component {
   constructor(props) {
     super(props)
   }
@@ -46,33 +47,47 @@ export default class CustomBarChart extends React.Component {
       barsWrapperStyle,
       barStyle,
       barSelectedStyle,
-      difference
+      difference,
     } = this.props
     const zeroFill = parseInt(options.zeroFill)
     const statMax = Object.values(data).reduce((prev, next) => {
-      return (prev.score < next.score) ? next : prev
+      return prev.score < next.score ? next : prev
     })
-    const aspectRatio = statMax && (options.maxHeight / statMax.score).toFixed(2)
+    const aspectRatio =
+      statMax && (options.maxHeight / statMax.score).toFixed(2)
+
+    const { textColor, duskBackground } = this.props.themeContext.colors
 
     return (
       <React.Fragment>
         <div className={barsWrapperStyle}>
-          {data && data.map((element, index) => {
-            const elementScore = (zeroFill > 0 && element.score === 0)
-              ? (element.score + zeroFill)
-              : element.score
-            return <div
-              key={index}
-              data-label={element.label.substring(0, options.labelCharLength)}
-              className={classnames(barStyle, {
-                [barSelectedStyle]: (element.label === selected),
-                [styles.increase]: (difference > 0),
-                [styles.decrease]: (difference < 0),
-                [styles.noChange]: (difference === 0)
-              })}
-              style={{height: Math.ceil(elementScore * aspectRatio), width: options.width}}>
-            </div>
-          })}
+          {data &&
+            data.map((element, index) => {
+              const elementScore =
+                zeroFill > 0 && element.score === 0
+                  ? element.score + zeroFill
+                  : element.score
+              return (
+                <div
+                  key={index}
+                  data-label={element.label.substring(
+                    0,
+                    options.labelCharLength
+                  )}
+                  className={classnames(barStyle, {
+                    [barSelectedStyle]: element.label === selected,
+                    [styles.increase]: difference > 0,
+                    [styles.decrease]: difference < 0,
+                    [styles.noChange]: difference === 0,
+                  })}
+                  style={{
+                    height: Math.ceil(elementScore * aspectRatio),
+                    width: options.width,
+                    background: duskBackground,
+                  }}
+                />
+              )
+            })}
         </div>
       </React.Fragment>
     )
@@ -80,3 +95,5 @@ export default class CustomBarChart extends React.Component {
 }
 
 CustomBarChart.defaultProps = defaultProps
+
+export default withTheme(CustomBarChart)

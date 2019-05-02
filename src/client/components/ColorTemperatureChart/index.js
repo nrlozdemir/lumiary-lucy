@@ -8,6 +8,7 @@ const ColorTemperatureChart = ({
 	borderLess,
 	verticalText,
 	chartWrapperClass,
+	context
 }) => {
 	const colSpan =
 		(!!colorTempData && !!colorTempData.length && 12 / colorTempData.length) ||

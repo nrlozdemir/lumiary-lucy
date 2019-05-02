@@ -5,7 +5,15 @@ import ReactSelect from 'react-select'
 import style from './styles.scss'
 
 const Select = (props) => {
-  const { className, id, options, placeholder, multiple, customClass } = props
+  const {
+    className,
+    id,
+    options,
+    placeholder,
+    multiple,
+    customClass,
+    themes,
+  } = props
 
   let args = props.input ? props.input : props
   let { name, onChange, value } = args
@@ -32,7 +40,7 @@ const Select = (props) => {
     })
     return (
       <div className={style.DropdownIndicator}>
-        <span className={menuIsOpenClass}>
+        <span className={menuIsOpenClass} style={{ color: themes.textColor }}>
           <span className="path1" />
           <span className="path2" />
           <span className="path3" />
@@ -45,8 +53,12 @@ const Select = (props) => {
     control: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
-        background: '#21243B',
-        borderColor: isSelected ? '#acb0be' : isFocused ? '#acb0be' : '#545B79',
+        background: themes.selectBackground,
+        borderColor: isSelected
+          ? '#acb0be'
+          : isFocused
+          ? '#acb0be'
+          : themes.selectBorder,
         borderRadius: '8px',
         borderWidth: '1px',
         boxShadow: 'rgba(0, 0, 0, 0.5)',
@@ -58,7 +70,7 @@ const Select = (props) => {
     input: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
-        color: '#ffffff',
+        color: themes.textColor,
       }
     },
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -71,7 +83,11 @@ const Select = (props) => {
           : isFocused
           ? '#ffffff'
           : '#545B79',
-        color: isSelected ? '#ffffff' : isFocused ? '#545B79' : '#ffffff',
+        color: isSelected
+          ? themes.textColor
+          : isFocused
+          ? '#545B79'
+          : themes.textColor,
         cursor: 'pointer',
         border: 'none',
       }
@@ -79,12 +95,16 @@ const Select = (props) => {
     placeholder: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
-        color: isFocused ? '#ffffff' : isSelected ? '#ffffff' : '#545B79',
+        color: isFocused
+          ? themes.textColor
+          : isSelected
+          ? themes.textColor
+          : '#545B79',
       }
     },
     singleValue: (styles) => ({
       ...styles,
-      color: '#ffffff',
+      color: themes.textColor,
     }),
     menu: (base) => ({
       ...base,
