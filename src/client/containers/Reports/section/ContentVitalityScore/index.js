@@ -75,7 +75,7 @@ class ContentVitalityScore extends React.Component {
             className={chartStyle.vitalityContainer}
           >
             <LineChart
-              backgroundColor="#242b49"
+              backgroundColor="#21243B"
               dataSet={() => combineChartData(data)}
               width={1070}
               height={291}

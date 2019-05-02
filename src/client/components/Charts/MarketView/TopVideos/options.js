@@ -4,9 +4,9 @@ export const chartOptions = {
   },
   tooltips: {
     backgroundColor: '#fff',
-    titleFontColor: '#242b49',
-    bodyFontColor: '#242b49',
-    footerFontColor: '#242b49',
+    titleFontColor: '#21243B',
+    bodyFontColor: '#21243B',
+    footerFontColor: '#21243B',
     mode: 'index',
     intersect: false,
     xPadding: 10,
@@ -16,7 +16,7 @@ export const chartOptions = {
     xAxes: [{
       stacked: true,
       gridLines: {
-        color: '#5a6386',
+        color: '#545B79',
         display: true,
         drawTicks: false
       },
@@ -35,7 +35,7 @@ export const chartOptions = {
     yAxes: [{
       stacked: true,
       gridLines: {
-        color: '#5a6386',
+        color: '#545B79',
         display: true,
         drawTicks: false
       },

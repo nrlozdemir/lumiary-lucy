@@ -20,14 +20,15 @@
     "frameRate": 24,
     "resolution": "720p",
     "pacing": "Slow",
+    "cvScore": 88.5,
     "ColorTempMock": {
       "colorTempData": [
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 100, "y": -29, "type": "video", "color": "#D0506C" },
-            { "x": -82, "y": -11, "type": "library", "color": "#51adc0" },
-            { "x": -89, "y": -15, "type": "industry", "color": "#8567f0" }
+            { "x": 100, "y": -29, "type": "video", "color": "#5292E5" },
+            { "x": -82, "y": -11, "type": "library", "color": "#2FD7C4" },
+            { "x": -89, "y": -15, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -37,9 +38,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -86, "y": -76, "type": "video", "color": "#D0506C" },
-            { "x": 29, "y": 30, "type": "library", "color": "#51adc0" },
-            { "x": 45, "y": 49, "type": "industry", "color": "#8567f0" }
+            { "x": -86, "y": -76, "type": "video", "color": "#5292E5" },
+            { "x": 29, "y": 30, "type": "library", "color": "#2FD7C4" },
+            { "x": 45, "y": 49, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -49,9 +50,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -29, "y": 44, "type": "video", "color": "#D0506C" },
-            { "x": -45, "y": -24, "type": "library", "color": "#51adc0" },
-            { "x": -92, "y": 97, "type": "industry", "color": "#8567f0" }
+            { "x": -29, "y": 44, "type": "video", "color": "#5292E5" },
+            { "x": -45, "y": -24, "type": "library", "color": "#2FD7C4" },
+            { "x": -92, "y": 97, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -131,23 +132,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "174.1",
-        "percentage": "52"
+        "value": "174.1",
+        "percentage": "52",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "152.8",
-        "percentage": "42"
+        "value": "152.8",
+        "percentage": "42",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "186.4",
-        "percentage": "13"
+        "value": "186.4",
+        "percentage": "13",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "103.4",
-        "percentage": "28"
+        "value": "103.4",
+        "percentage": "28",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -354,14 +359,15 @@
     "frameRate": 30,
     "resolution": "720p",
     "pacing": "Slow",
+    "cvScore": 67.1,
     "ColorTempMock": {
       "colorTempData": [
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -4, "y": 37, "type": "video", "color": "#D0506C" },
-            { "x": -94, "y": -96, "type": "library", "color": "#51adc0" },
-            { "x": 32, "y": 67, "type": "industry", "color": "#8567f0" }
+            { "x": -4, "y": 37, "type": "video", "color": "#5292E5" },
+            { "x": -94, "y": -96, "type": "library", "color": "#2FD7C4" },
+            { "x": 32, "y": 67, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -371,9 +377,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -68, "y": 36, "type": "video", "color": "#D0506C" },
-            { "x": 53, "y": -18, "type": "library", "color": "#51adc0" },
-            { "x": 54, "y": 62, "type": "industry", "color": "#8567f0" }
+            { "x": -68, "y": 36, "type": "video", "color": "#5292E5" },
+            { "x": 53, "y": -18, "type": "library", "color": "#2FD7C4" },
+            { "x": 54, "y": 62, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -383,9 +389,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 27, "y": -43, "type": "video", "color": "#D0506C" },
-            { "x": 84, "y": -69, "type": "library", "color": "#51adc0" },
-            { "x": 11, "y": -42, "type": "industry", "color": "#8567f0" }
+            { "x": 27, "y": -43, "type": "video", "color": "#5292E5" },
+            { "x": 84, "y": -69, "type": "library", "color": "#2FD7C4" },
+            { "x": 11, "y": -42, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -464,24 +470,28 @@
     },
     "HeaderBarChartMock": [
       {
-        "title": "Views",
-        "score": "274.1",
-        "percentage": "14"
+        "title": "views",
+        "value": "274.1",
+        "percentage": "14",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
-        "title": "Likes",
-        "score": "252.8",
-        "percentage": "72"
+        "title": "likes",
+        "value": "252.8",
+        "percentage": "72",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
-        "title": "Comments",
-        "score": "286.4",
-        "percentage": "56"
+        "title": "comments",
+        "value": "286.4",
+        "percentage": "56",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
-        "title": "Shares",
-        "score": "203.4",
-        "percentage": "28"
+        "title": "shares",
+        "value": "203.4",
+        "percentage": "28",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -688,14 +698,15 @@
     "frameRate": 24,
     "resolution": "720p",
     "pacing": "Fast",
+    "cvScore": 93.8,
     "ColorTempMock": {
       "colorTempData": [
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 5, "y": -3, "type": "video", "color": "#D0506C" },
-            { "x": -87, "y": 5, "type": "library", "color": "#51adc0" },
-            { "x": 80, "y": 50, "type": "industry", "color": "#8567f0" }
+            { "x": 5, "y": -3, "type": "video", "color": "#5292E5" },
+            { "x": -87, "y": 5, "type": "library", "color": "#2FD7C4" },
+            { "x": 80, "y": 50, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -705,9 +716,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 36, "y": -4, "type": "video", "color": "#D0506C" },
-            { "x": 48, "y": 18, "type": "library", "color": "#51adc0" },
-            { "x": -47, "y": 13, "type": "industry", "color": "#8567f0" }
+            { "x": 36, "y": -4, "type": "video", "color": "#5292E5" },
+            { "x": 48, "y": 18, "type": "library", "color": "#2FD7C4" },
+            { "x": -47, "y": 13, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -717,9 +728,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -15, "y": 14, "type": "video", "color": "#D0506C" },
-            { "x": -95, "y": 35, "type": "library", "color": "#51adc0" },
-            { "x": -89, "y": 10, "type": "industry", "color": "#8567f0" }
+            { "x": -15, "y": 14, "type": "video", "color": "#5292E5" },
+            { "x": -95, "y": 35, "type": "library", "color": "#2FD7C4" },
+            { "x": -89, "y": 10, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -799,23 +810,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "374.1",
-        "percentage": "64"
+        "value": "374.1",
+        "percentage": "64",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "352.8",
-        "percentage": "22"
+        "value": "352.8",
+        "percentage": "22",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "386.4",
-        "percentage": "6"
+        "value": "386.4",
+        "percentage": "6",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "303.4",
-        "percentage": "28"
+        "value": "303.4",
+        "percentage": "28",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -1022,14 +1037,15 @@
     "frameRate": 24,
     "resolution": "4K",
     "pacing": "Medium",
+    "cvScore": 42.0,
     "ColorTempMock": {
       "colorTempData": [
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -29, "y": 94, "type": "video", "color": "#D0506C" },
-            { "x": 75, "y": 6, "type": "library", "color": "#51adc0" },
-            { "x": -83, "y": 70, "type": "industry", "color": "#8567f0" }
+            { "x": -29, "y": 94, "type": "video", "color": "#5292E5" },
+            { "x": 75, "y": 6, "type": "library", "color": "#2FD7C4" },
+            { "x": -83, "y": 70, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -1039,9 +1055,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -4, "y": -37, "type": "video", "color": "#D0506C" },
-            { "x": 9, "y": 18, "type": "library", "color": "#51adc0" },
-            { "x": 56, "y": 19, "type": "industry", "color": "#8567f0" }
+            { "x": -4, "y": -37, "type": "video", "color": "#5292E5" },
+            { "x": 9, "y": 18, "type": "library", "color": "#2FD7C4" },
+            { "x": 56, "y": 19, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -1051,9 +1067,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -59, "y": -27, "type": "video", "color": "#D0506C" },
-            { "x": -82, "y": -44, "type": "library", "color": "#51adc0" },
-            { "x": -8, "y": -30, "type": "industry", "color": "#8567f0" }
+            { "x": -59, "y": -27, "type": "video", "color": "#5292E5" },
+            { "x": -82, "y": -44, "type": "library", "color": "#2FD7C4" },
+            { "x": -8, "y": -30, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -1133,23 +1149,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "474.1",
-        "percentage": "99"
+        "value": "474.1",
+        "percentage": "99",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "452.8",
-        "percentage": "42"
+        "value": "452.8",
+        "percentage": "42",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "486.4",
-        "percentage": "77"
+        "value": "486.4",
+        "percentage": "77",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "403.4",
-        "percentage": "28"
+        "value": "403.4",
+        "percentage": "28",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -1356,14 +1376,15 @@
     "frameRate": 30,
     "resolution": "1080p",
     "pacing": "Medium",
+    "cvScore": 65.3,
     "ColorTempMock": {
       "colorTempData": [
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -37, "y": 9, "type": "video", "color": "#D0506C" },
-            { "x": -53, "y": -68, "type": "library", "color": "#51adc0" },
-            { "x": 16, "y": -3, "type": "industry", "color": "#8567f0" }
+            { "x": -37, "y": 9, "type": "video", "color": "#5292E5" },
+            { "x": -53, "y": -68, "type": "library", "color": "#2FD7C4" },
+            { "x": 16, "y": -3, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -1373,9 +1394,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 51, "y": 84, "type": "video", "color": "#D0506C" },
-            { "x": -39, "y": -58, "type": "library", "color": "#51adc0" },
-            { "x": 63, "y": 13, "type": "industry", "color": "#8567f0" }
+            { "x": 51, "y": 84, "type": "video", "color": "#5292E5" },
+            { "x": -39, "y": -58, "type": "library", "color": "#2FD7C4" },
+            { "x": 63, "y": 13, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -1385,9 +1406,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -63, "y": -72, "type": "video", "color": "#D0506C" },
-            { "x": 21, "y": -95, "type": "library", "color": "#51adc0" },
-            { "x": -90, "y": 34, "type": "industry", "color": "#8567f0" }
+            { "x": -63, "y": -72, "type": "video", "color": "#5292E5" },
+            { "x": 21, "y": -95, "type": "library", "color": "#2FD7C4" },
+            { "x": -90, "y": 34, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -1467,23 +1488,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "574.1",
-        "percentage": "34"
+        "value": "574.1",
+        "percentage": "34",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "552.8",
-        "percentage": "36"
+        "value": "552.8",
+        "percentage": "36",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "586.4",
-        "percentage": "88"
+        "value": "586.4",
+        "percentage": "88",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "503.4",
-        "percentage": "66"
+        "value": "503.4",
+        "percentage": "66",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -1690,14 +1715,15 @@
     "frameRate": 50,
     "resolution": "4K",
     "pacing": "Medium",
+    "cvScore": 84.6,
     "ColorTempMock": {
       "colorTempData": [
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 38, "y": 78, "type": "video", "color": "#D0506C" },
-            { "x": -7, "y": 20, "type": "library", "color": "#51adc0" },
-            { "x": -54, "y": 86, "type": "industry", "color": "#8567f0" }
+            { "x": 38, "y": 78, "type": "video", "color": "#5292E5" },
+            { "x": -7, "y": 20, "type": "library", "color": "#2FD7C4" },
+            { "x": -54, "y": 86, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -1707,9 +1733,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 78, "y": -16, "type": "video", "color": "#D0506C" },
-            { "x": -55, "y": -21, "type": "library", "color": "#51adc0" },
-            { "x": 71, "y": 79, "type": "industry", "color": "#8567f0" }
+            { "x": 78, "y": -16, "type": "video", "color": "#5292E5" },
+            { "x": -55, "y": -21, "type": "library", "color": "#2FD7C4" },
+            { "x": 71, "y": 79, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -1719,9 +1745,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -38, "y": -73, "type": "video", "color": "#D0506C" },
-            { "x": -22, "y": 69, "type": "library", "color": "#51adc0" },
-            { "x": -58, "y": -2, "type": "industry", "color": "#8567f0" }
+            { "x": -38, "y": -73, "type": "video", "color": "#5292E5" },
+            { "x": -22, "y": 69, "type": "library", "color": "#2FD7C4" },
+            { "x": -58, "y": -2, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -1801,23 +1827,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "874.1",
-        "percentage": "12"
+        "value": "874.1",
+        "percentage": "12",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "352.8",
-        "percentage": "42"
+        "value": "352.8",
+        "percentage": "42",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "186.4",
-        "percentage": "99"
+        "value": "186.4",
+        "percentage": "99",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "103.4",
-        "percentage": "99"
+        "value": "103.4",
+        "percentage": "99",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -2024,14 +2054,15 @@
     "frameRate": 24,
     "resolution": "1080p",
     "pacing": "Slow",
+    "cvScore": 23.7,
     "ColorTempMock": {
       "colorTempData": [
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -73, "y": 62, "type": "video", "color": "#D0506C" },
-            { "x": -12, "y": -47, "type": "library", "color": "#51adc0" },
-            { "x": 13, "y": 77, "type": "industry", "color": "#8567f0" }
+            { "x": -73, "y": 62, "type": "video", "color": "#5292E5" },
+            { "x": -12, "y": -47, "type": "library", "color": "#2FD7C4" },
+            { "x": 13, "y": 77, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -2041,9 +2072,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -46, "y": 13, "type": "video", "color": "#D0506C" },
-            { "x": -46, "y": -86, "type": "library", "color": "#51adc0" },
-            { "x": 10, "y": 49, "type": "industry", "color": "#8567f0" }
+            { "x": -46, "y": 13, "type": "video", "color": "#5292E5" },
+            { "x": -46, "y": -86, "type": "library", "color": "#2FD7C4" },
+            { "x": 10, "y": 49, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -2053,9 +2084,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -81, "y": 9, "type": "video", "color": "#D0506C" },
-            { "x": -5, "y": 52, "type": "library", "color": "#51adc0" },
-            { "x": -48, "y": -45, "type": "industry", "color": "#8567f0" }
+            { "x": -81, "y": 9, "type": "video", "color": "#5292E5" },
+            { "x": -5, "y": 52, "type": "library", "color": "#2FD7C4" },
+            { "x": -48, "y": -45, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -2135,23 +2166,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "674.1",
-        "percentage": "15"
+        "value": "674.1",
+        "percentage": "15",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "652.8",
-        "percentage": "30"
+        "value": "652.8",
+        "percentage": "30",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "686.4",
-        "percentage": "75"
+        "value": "686.4",
+        "percentage": "75",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "603.4",
-        "percentage": "90"
+        "value": "603.4",
+        "percentage": "90",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -2358,14 +2393,15 @@
     "frameRate": 30,
     "resolution": "480p",
     "pacing": "Fast",
+    "cvScore": 99.3,
     "ColorTempMock": {
       "colorTempData": [
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -18, "y": 9, "type": "video", "color": "#D0506C" },
-            { "x": -44, "y": 46, "type": "library", "color": "#51adc0" },
-            { "x": -85, "y": -24, "type": "industry", "color": "#8567f0" }
+            { "x": -18, "y": 9, "type": "video", "color": "#5292E5" },
+            { "x": -44, "y": 46, "type": "library", "color": "#2FD7C4" },
+            { "x": -85, "y": -24, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -2375,9 +2411,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 2, "y": -84, "type": "video", "color": "#D0506C" },
-            { "x": 61, "y": 99, "type": "library", "color": "#51adc0" },
-            { "x": -56, "y": 38, "type": "industry", "color": "#8567f0" }
+            { "x": 2, "y": -84, "type": "video", "color": "#5292E5" },
+            { "x": 61, "y": 99, "type": "library", "color": "#2FD7C4" },
+            { "x": -56, "y": 38, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -2387,9 +2423,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 13, "y": 87, "type": "video", "color": "#D0506C" },
-            { "x": 72, "y": -53, "type": "library", "color": "#51adc0" },
-            { "x": -8, "y": 1, "type": "industry", "color": "#8567f0" }
+            { "x": 13, "y": 87, "type": "video", "color": "#5292E5" },
+            { "x": 72, "y": -53, "type": "library", "color": "#2FD7C4" },
+            { "x": -8, "y": 1, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -2469,23 +2505,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "814.1",
-        "percentage": "14"
+        "value": "814.1",
+        "percentage": "14",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "312.8",
-        "percentage": "18"
+        "value": "312.8",
+        "percentage": "18",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "116.4",
-        "percentage": "16"
+        "value": "116.4",
+        "percentage": "16",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "113.4",
-        "percentage": "12"
+        "value": "113.4",
+        "percentage": "12",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -2692,14 +2732,15 @@
     "frameRate": 30,
     "resolution": "1080p",
     "pacing": "Fast",
+    "cvScore": 13.2,
     "ColorTempMock": {
       "colorTempData": [
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -11, "y": -36, "type": "video", "color": "#D0506C" },
-            { "x": 71, "y": -18, "type": "library", "color": "#51adc0" },
-            { "x": 57, "y": -79, "type": "industry", "color": "#8567f0" }
+            { "x": -11, "y": -36, "type": "video", "color": "#5292E5" },
+            { "x": 71, "y": -18, "type": "library", "color": "#2FD7C4" },
+            { "x": 57, "y": -79, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -2709,9 +2750,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 96, "y": 94, "type": "video", "color": "#D0506C" },
-            { "x": 81, "y": 61, "type": "library", "color": "#51adc0" },
-            { "x": 23, "y": -42, "type": "industry", "color": "#8567f0" }
+            { "x": 96, "y": 94, "type": "video", "color": "#5292E5" },
+            { "x": 81, "y": 61, "type": "library", "color": "#2FD7C4" },
+            { "x": 23, "y": -42, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -2721,9 +2762,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -84, "y": -27, "type": "video", "color": "#D0506C" },
-            { "x": -52, "y": -91, "type": "library", "color": "#51adc0" },
-            { "x": -41, "y": 9, "type": "industry", "color": "#8567f0" }
+            { "x": -84, "y": -27, "type": "video", "color": "#5292E5" },
+            { "x": -52, "y": -91, "type": "library", "color": "#2FD7C4" },
+            { "x": -41, "y": 9, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -2803,23 +2844,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "74.1",
-        "percentage": "64"
+        "value": "74.1",
+        "percentage": "64",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "52.8",
-        "percentage": "42"
+        "value": "52.8",
+        "percentage": "42",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "16.4",
-        "percentage": "56"
+        "value": "16.4",
+        "percentage": "56",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "31.4",
-        "percentage": "28"
+        "value": "31.4",
+        "percentage": "28",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -3026,14 +3071,15 @@
     "frameRate": 30,
     "resolution": "1080p",
     "pacing": "Slow",
+    "cvScore": 61.9,
     "ColorTempMock": {
       "colorTempData": [
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 26, "y": 68, "type": "video", "color": "#D0506C" },
-            { "x": -92, "y": -81, "type": "library", "color": "#51adc0" },
-            { "x": 4, "y": -3, "type": "industry", "color": "#8567f0" }
+            { "x": 26, "y": 68, "type": "video", "color": "#5292E5" },
+            { "x": -92, "y": -81, "type": "library", "color": "#2FD7C4" },
+            { "x": 4, "y": -3, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -3043,9 +3089,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 59, "y": 88, "type": "video", "color": "#D0506C" },
-            { "x": 56, "y": 9, "type": "library", "color": "#51adc0" },
-            { "x": -50, "y": 71, "type": "industry", "color": "#8567f0" }
+            { "x": 59, "y": 88, "type": "video", "color": "#5292E5" },
+            { "x": 56, "y": 9, "type": "library", "color": "#2FD7C4" },
+            { "x": -50, "y": 71, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -3055,9 +3101,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 13, "y": -75, "type": "video", "color": "#D0506C" },
-            { "x": 11, "y": -74, "type": "library", "color": "#51adc0" },
-            { "x": 33, "y": 32, "type": "industry", "color": "#8567f0" }
+            { "x": 13, "y": -75, "type": "video", "color": "#5292E5" },
+            { "x": 11, "y": -74, "type": "library", "color": "#2FD7C4" },
+            { "x": 33, "y": 32, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -3137,23 +3183,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "14.1",
-        "percentage": "74"
+        "value": "14.1",
+        "percentage": "74",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "22.8",
-        "percentage": "72"
+        "value": "22.8",
+        "percentage": "72",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "16.4",
-        "percentage": "76"
+        "value": "16.4",
+        "percentage": "76",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "3.4",
-        "percentage": "78"
+        "value": "3.4",
+        "percentage": "78",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -3360,14 +3410,15 @@
     "frameRate": 24,
     "resolution": "480p",
     "pacing": "Medium",
+    "cvScore": 87.5,
     "ColorTempMock": {
       "colorTempData": [
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 44, "y": 65, "type": "video", "color": "#D0506C" },
-            { "x": 76, "y": 20, "type": "library", "color": "#51adc0" },
-            { "x": 31, "y": 77, "type": "industry", "color": "#8567f0" }
+            { "x": 44, "y": 65, "type": "video", "color": "#5292E5" },
+            { "x": 76, "y": 20, "type": "library", "color": "#2FD7C4" },
+            { "x": 31, "y": 77, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -3377,9 +3428,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -68, "y": 29, "type": "video", "color": "#D0506C" },
-            { "x": -53, "y": 71, "type": "library", "color": "#51adc0" },
-            { "x": -14, "y": 39, "type": "industry", "color": "#8567f0" }
+            { "x": -68, "y": 29, "type": "video", "color": "#5292E5" },
+            { "x": -53, "y": 71, "type": "library", "color": "#2FD7C4" },
+            { "x": -14, "y": 39, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -3389,9 +3440,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 74, "y": 96, "type": "video", "color": "#D0506C" },
-            { "x": -56, "y": 86, "type": "library", "color": "#51adc0" },
-            { "x": 60, "y": -38, "type": "industry", "color": "#8567f0" }
+            { "x": 74, "y": 96, "type": "video", "color": "#5292E5" },
+            { "x": -56, "y": 86, "type": "library", "color": "#2FD7C4" },
+            { "x": 60, "y": -38, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -3471,23 +3522,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "64.1",
-        "percentage": "50"
+        "value": "64.1",
+        "percentage": "50",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "152.8",
-        "percentage": "50"
+        "value": "152.8",
+        "percentage": "50",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "86.4",
-        "percentage": "50"
+        "value": "86.4",
+        "percentage": "50",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "12.4",
-        "percentage": "50"
+        "value": "12.4",
+        "percentage": "50",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {
@@ -3694,14 +3749,15 @@
     "frameRate": 50,
     "resolution": "360p",
     "pacing": "Fast",
+    "cvScore": 92.0,
     "ColorTempMock": {
       "colorTempData": [
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": -46, "y": 10, "type": "video", "color": "#D0506C" },
-            { "x": -28, "y": 57, "type": "library", "color": "#51adc0" },
-            { "x": 25, "y": 90, "type": "industry", "color": "#8567f0" }
+            { "x": -46, "y": 10, "type": "video", "color": "#5292E5" },
+            { "x": -28, "y": 57, "type": "library", "color": "#2FD7C4" },
+            { "x": 25, "y": 90, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Happy",
           "bottomText": "Sad",
@@ -3711,9 +3767,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 38, "y": 96, "type": "video", "color": "#D0506C" },
-            { "x": 91, "y": -81, "type": "library", "color": "#51adc0" },
-            { "x": -49, "y": 67, "type": "industry", "color": "#8567f0" }
+            { "x": 38, "y": 96, "type": "video", "color": "#5292E5" },
+            { "x": 91, "y": -81, "type": "library", "color": "#2FD7C4" },
+            { "x": -49, "y": 67, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Energetic",
           "bottomText": "Calm",
@@ -3723,9 +3779,9 @@
         {
           "text": "This is a blurb that will explain what this graph is showing",
           "data": [
-            { "x": 50, "y": -36, "type": "video", "color": "#D0506C" },
-            { "x": 29, "y": 15, "type": "library", "color": "#51adc0" },
-            { "x": 56, "y": -15, "type": "industry", "color": "#8567f0" }
+            { "x": 50, "y": -36, "type": "video", "color": "#5292E5" },
+            { "x": 29, "y": 15, "type": "library", "color": "#2FD7C4" },
+            { "x": 56, "y": -15, "type": "industry", "color": "#8562F3" }
           ],
           "topText": "Natural",
           "bottomText": "Synthetic",
@@ -3805,23 +3861,27 @@
     "HeaderBarChartMock": [
       {
         "title": "Views",
-        "score": "10.1",
-        "percentage": "1"
+        "value": "10.1",
+        "percentage": "1",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Likes",
-        "score": "32.8",
-        "percentage": "10"
+        "value": "32.8",
+        "percentage": "10",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Comments",
-        "score": "16.4",
-        "percentage": "20"
+        "value": "16.4",
+        "percentage": "20",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       },
       {
         "title": "Shares",
-        "score": "20.4",
-        "percentage": "30"
+        "value": "20.4",
+        "percentage": "30",
+        "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
       }
     ],
     "ShotByShotMock": {

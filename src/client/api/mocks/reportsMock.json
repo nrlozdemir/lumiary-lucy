@@ -50,7 +50,7 @@
       "labels": ["", "", "", ""],
       "datasets": [
         {
-          "backgroundColor": "#d0506c",
+          "backgroundColor": "#5292E5",
           "data": [10, 55, 5, 30]
         }
       ]
@@ -59,7 +59,7 @@
       "labels": ["", "", "", ""],
       "datasets": [
         {
-          "backgroundColor": "#51adc0",
+          "backgroundColor": "#2FD7C4",
           "data": [12, 19, 5, 64]
         }
       ]
@@ -71,7 +71,7 @@
       "datasets": [
         {
           "data": [33, 77],
-          "backgroundColor": ["#d0506c", "#51adc0"]
+          "backgroundColor": ["#5292E5", "#2FD7C4"]
         }
       ]
     },
@@ -79,11 +79,11 @@
       "labels": ["Slowest", "Slow", "Medium", "Fast"],
       "datasets": [
         {
-          "backgroundColor": "#D0506C",
+          "backgroundColor": "#5292E5",
           "data": [75, 40, 35, 80]
         },
         {
-          "backgroundColor": "#51adc0",
+          "backgroundColor": "#2FD7C4",
           "data": [25, 60, 65, 20]
         }
       ]

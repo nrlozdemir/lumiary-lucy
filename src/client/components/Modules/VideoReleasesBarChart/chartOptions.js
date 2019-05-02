@@ -10,10 +10,10 @@ export const options = {
   tooltips: {
     position: 'nearest',
     backgroundColor: '#fff',
-    titleFontColor: '#242b49',
+    titleFontColor: '#21243B',
     titleMarginBottom: 0,
-    bodyFontColor: '#242b49',
-    footerFontColor: '#242b49',
+    bodyFontColor: '#21243B',
+    footerFontColor: '#21243B',
     xPadding: 30,
     yPadding: 15,
     callbacks: {
@@ -76,7 +76,7 @@ export const wrapperBarOptions = {
     datalabels: false,
   },
   chartArea: {
-    backgroundColor: '#242b49',
+    backgroundColor: '#21243B',
   },
   scales: {
     xAxes: [
@@ -94,7 +94,7 @@ export const wrapperBarOptions = {
       {
         gridLines: {
           display: true,
-          color: '#5a6386',
+          color: '#545B79',
           zeroLineColor: '#ffffff',
           drawTicks: false,
         },

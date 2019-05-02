@@ -12,13 +12,9 @@ import { Link, NavLink } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 import { makeSelectLibrary } from 'Reducers/library'
 import Switch from 'Components/Form/Switch'
-
+import { capitalizeFirstLetter } from 'Utils/index'
 import style from './style.scss'
 // import PropTypes from 'prop-types';
-
-function capitalizeFirstLetter(string) {
-  return string.charAt(0).toUpperCase() + string.slice(1);
-}
 
 const containerClass = classnames('grid-container bg-dark-grey-blue ' + style.container)
 const linksClass = classnames(style.links)
@@ -78,13 +74,13 @@ const Default = (props) => {
 
 const SelectedNavLink = (props) => {
   return (<React.Fragment>
-		<div>{capitalizeFirstLetter(props.title)}</div>
-		{props.load &&
-			<div className={style.switchInner}>
-				<span>Save Report</span>
-				<Switch />
-			</div>
-		}
+    <div>{capitalizeFirstLetter(props.title)}</div>
+    {props.load &&
+      <div className={style.switchInner}>
+        <span>Save Report</span>
+        <Switch />
+      </div>
+    }
   </React.Fragment>)
 }
 
@@ -145,7 +141,7 @@ const Selector = (props) => {
     .filter((r) => r.path == url.join("/"))
 
   if(navigationPathMatch && navigationPathMatch.length > 0) {
-		const { from, loadComponent } = navigationPathMatch[0].navigation
+    const { from, loadComponent } = navigationPathMatch[0].navigation
     let title = navigationPathMatch[0].navigation.title
     let backToTitle
 
@@ -188,23 +184,22 @@ const Template = (props) => {
 
   return (
     <div className={containerClass}>
-			{templateSelector["leftSide"]}
-			<div className={linksClass}>
-				{templateSelector["navigation"]}
-			</div>
-			<div className={profileClass}>
-				<div className="float-right">
-					<img src="https://picsum.photos/30" className={imageClass} />
-					<span>Bleacher Report</span>
-				</div>
-			</div>
+      {templateSelector["leftSide"]}
+      <div className={linksClass}>
+        {templateSelector["navigation"]}
+      </div>
+      <div className={profileClass}>
+        <div className="float-right">
+          <img src="https://picsum.photos/id/836/30/30" className={imageClass} />
+          <span>Bleacher Report</span>
+        </div>
+      </div>
     </div>
   )
 }
 
 /* eslint-disable react/prefer-stateless-function */
 class Navbar extends React.Component {
-
   render() {
     return (
       <React.Fragment>

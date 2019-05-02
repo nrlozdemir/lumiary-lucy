@@ -7,9 +7,9 @@ export const lineChartOptions = {
 		xAlign: 'center',
 		yAlign: 'bottom',
     backgroundColor: '#fff',
-    titleFontColor: '#242b49',
-    bodyFontColor: '#242b49',
-    footerFontColor: '#242b49',
+    titleFontColor: '#21243B',
+    bodyFontColor: '#21243B',
+    footerFontColor: '#21243B',
     xPadding: 14,
     yPadding: 14,
     cornerRadius: 10,
@@ -27,7 +27,7 @@ export const lineChartOptions = {
     xAxes: [{
       gridLines: {
         display: true,
-        color: '#5a6386',
+        color: '#545B79',
         lineWidth: 0.7,
         drawBorder: true,
         drawTicks: false
@@ -46,7 +46,7 @@ export const lineChartOptions = {
     yAxes: [{
       gridLines: {
         display: true,
-        color: '#5a6386',
+        color: '#545B79',
         lineWidth: 0.7,
         drawBorder: true,
         drawTicks: false
@@ -75,13 +75,13 @@ export const lineChartData_DatasetOptions = [
   {
     fill: false,
     lineTension: 0.1,
-    borderColor: "#51adc0",
+    borderColor: "#2FD7C4",
     borderCapStyle: "butt",
     borderDash: [],
     borderDashOffset: 0.0,
     borderJoinStyle: "miter",
     pointRadius: 5,
-    pointBackgroundColor: "#51adc0",
+    pointBackgroundColor: "#2FD7C4",
     pointBorderColor: "#fff",
     pointBorderWidth: 1,
     pointHoverRadius: 5,
@@ -92,18 +92,18 @@ export const lineChartData_DatasetOptions = [
     shadowOffsetX: 1,
     shadowOffsetY: 1,
     shadowBlur: 5,
-    shadowColor: "#51adc0"
+    shadowColor: "#2FD7C4"
   },
   {
     fill: false,
     lineTension: 0.1,
-    borderColor: "#8567f0",
+    borderColor: "#8562F3",
     borderCapStyle: "butt",
     borderDash: [],
     borderDashOffset: 0.0,
     borderJoinStyle: "miter",
     pointRadius: 5,
-    pointBackgroundColor: "#8567f0",
+    pointBackgroundColor: "#8562F3",
     pointBorderColor: "#fff",
     pointBorderWidth: 1,
     pointHoverRadius: 5,
@@ -114,7 +114,7 @@ export const lineChartData_DatasetOptions = [
     shadowOffsetX: 1,
     shadowOffsetY: 1,
     shadowBlur: 5,
-    shadowColor: "#8567f0"
+    shadowColor: "#8562F3"
   }
 ];
 

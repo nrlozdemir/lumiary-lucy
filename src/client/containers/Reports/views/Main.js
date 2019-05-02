@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
+import moment from 'moment'
 import { actions, makeSelectReports } from 'Reducers/reports'
 
 import style from '../style.scss'
@@ -17,7 +18,7 @@ import PredefinedReport from 'Components/PageForms/Reports/PredefinedReport'
 
 import RouterLoading from 'Components/RouterLoading'
 
-import ReportCards from '../section/ReportCards'
+import ReportCards from '../section/ReportCardsModule'
 
 import ReactTable from 'react-table'
 
@@ -27,7 +28,7 @@ class Reports extends Component {
     this.state = {
       modalIsOpen: false,
       selectedReportCardKey: null,
-      reportCards: [
+      reportCardsData: [
         {
           key: 'brand-insights',
           icon:
@@ -105,7 +106,7 @@ class Reports extends Component {
   }
 
   render() {
-    const { modalIsOpen, reportCards, selectedReportCardKey } = this.state
+    const { modalIsOpen, reportCardsData, selectedReportCardKey } = this.state
 
     const {
       reports: { data, loading, error },
@@ -126,7 +127,10 @@ class Reports extends Component {
           >
             {this.renderModalInside()}
           </ReportsModal>
-          <ReportCards reportCards={reportCards} openModal={this.openModal} />
+          <ReportCards
+            reportCardsData={reportCardsData}
+            openModal={this.openModal}
+          />
 
           <div className={style.reportsTableContainer}>
             <div className={style.reportsTableHeader}>
@@ -170,6 +174,11 @@ class Reports extends Component {
                     {
                       Header: 'Date',
                       accessor: 'date',
+                      sortMethod: (a, b) => {
+                        const valueOfA = moment(a, "D/M/YY").valueOf()
+                        const valueOfB = moment(b, "D/M/YY").valueOf()
+                        return valueOfA - valueOfB
+                      }
                     },
                     {
                       Header: null,
