@@ -6,7 +6,15 @@ import style from './styles.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 
 const Select = (props) => {
-  const { className, id, options, placeholder, multiple, customClass } = props
+  const {
+    className,
+    id,
+    options,
+    placeholder,
+    multiple,
+    customClass,
+    themes,
+  } = props
 
   const themes = props.themeContext.colors
 

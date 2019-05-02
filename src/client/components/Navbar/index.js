@@ -225,6 +225,7 @@ const Template = (props) => {
             className={imageClass}
           />
           <Switch switchOn={switchOn} controlSwitch={controlSwitch} />
+          <span style={{ color: textColor }}>Bleacher Report</span>
         </div>
       </div>
     </div>
