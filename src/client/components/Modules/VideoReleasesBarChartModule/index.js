@@ -7,6 +7,8 @@ import { randomKey } from 'Utils'
 
 import { options, wrapperBarOptions } from './chartOptions'
 
+import Legend from 'Components/Legend'
+
 const barChartContainer = cx(style.panopticBarChart)
 const barContainerClass = cx(style.barChartContainer)
 
@@ -45,13 +47,11 @@ const renderLegend = (legend, legendEnd) => {
     <div className={style.headerLabel}>
       <div className={`d-flex align-items-center ${legendEnd ? 'justify-content-end' : 'justify-content-center'}`}>
         {legend.map((item, idx) => (
-          <div
-            className="d-flex align-items-center mr-32"
-            key={`colorTempLegend_${idx}`}
-          >
-            <span className={item.color} />
-            <p>{item.label}</p>
-          </div>
+          <Legend
+            key={`BarChartLegend_${idx}`}
+            color={item.color}
+            label={item.label}
+          />
         ))}
       </div>
     </div>
@@ -154,7 +154,6 @@ VideoReleasesBarChartModule.propTypes = {
   data: PropTypes.any.isRequired,
   moduleKey: PropTypes.string.isRequired,
   title: PropTypes.string,
-  action: PropTypes.function,
   filters: PropTypes.array,
   legend: PropTypes.array,
   legendEnd: PropTypes.bool

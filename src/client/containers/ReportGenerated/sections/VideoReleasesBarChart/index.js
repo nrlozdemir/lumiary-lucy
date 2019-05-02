@@ -19,8 +19,8 @@ class VideoReleasesBarChart extends Component {
         title="Video Releases vs Engagement"
         action={this.callBack}
         legend={[
-          { label: 'Videos', color: 'blueDot' },
-          { label: 'Engagement', color: 'coralPinkDot' },
+          { label: 'Videos', color: 'cool-blue' },
+          { label: 'Engagement', color: 'coral-pink' },
         ]}
         legendEnd={true}
       />
