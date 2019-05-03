@@ -1,5 +1,6 @@
 import React from 'react'
 import { Radar } from 'react-chartjs-2'
+import { withTheme } from 'ThemeContext/withTheme'
 
 const plugins = [
   {
@@ -42,77 +43,81 @@ const plugins = [
   },
 ]
 
-const RadarChart = ({ data, width = 430, height = 430 }) => (
-  <Radar
-    data={data}
-    width={width}
-    height={height}
-    plugins={plugins}
-    options={{
-      responsive: false,
-      maintainAspectRatio: false,
-      legend: {
-        display: false,
-      },
-      layout: {
-        padding: 30
-      },
-      tooltips: {
-        backgroundColor: '#fff',
-        cornerRadius: 6,
-        titleFontColor: '#000',
-        mode: 'point',
-        titleFontFamily: 'ClanOTBold',
-        bodyFontColor: '#000',
-        yAlign: 'bottom',
-        xAlign: 'center',
-        displayColors: false,
-        callbacks: {
-          title: () => '',
-          label: function (tooltipItem, data) {
-            return (
-              data['datasets'][0]['data'][tooltipItem['index']] +
-              '% ' +
-              data.labels[tooltipItem['index']].name
-            )
+const RadarChart = (props) => {
+  const { data, width = 430, height = 430 } = props
+  const themes = props.themeContext.colors
+  return (
+    <Radar
+      data={data}
+      width={width}
+      height={height}
+      plugins={plugins}
+      options={{
+        responsive: false,
+        maintainAspectRatio: false,
+        legend: {
+          display: false,
+        },
+        layout: {
+          padding: 30
+        },
+        tooltips: {
+          backgroundColor: '#fff',
+          cornerRadius: 6,
+          titleFontColor: '#000',
+          mode: 'point',
+          titleFontFamily: 'ClanOTBold',
+          bodyFontColor: '#000',
+          yAlign: 'bottom',
+          xAlign: 'center',
+          displayColors: false,
+          callbacks: {
+            title: () => '',
+            label: function(tooltipItem, data) {
+              return (
+                data['datasets'][0]['data'][tooltipItem['index']] +
+                '% ' +
+                data.labels[tooltipItem['index']].name
+              )
+            },
+            afterLabel: function(tooltipItem, data) {
+              return data.labels[tooltipItem['index']].count + 'k Shares'
+            },
           },
-          afterLabel: function (tooltipItem, data) {
-            return data.labels[tooltipItem['index']].count + 'k Shares'
+        },
+        plugins: {
+          datalabels: false,
+        },
+        scale: {
+          gridLines: {
+            lineWidth: 19,
+            zeroLineColor: '#FFF',
+            color: themes.bodyBackground,
+          },
+          pointLabels: {
+            callback: function(value, index, values) {
+              return ''
+            },
+            lineHeight: 4,
+          },
+          ticks: {
+            callback: function(value) {
+              return value + 'k'
+            },
+            backdropColor: 'transparent',
+            fontSize: 10,
+            display: true,
+            maxTicksLimit: 5,
+            beginAtZero: true,
+            stepSize: 25,
+          },
+          angleLines: {
+            color: '#3D4665',
           },
         },
-      },
-      plugins: {
-        datalabels: false,
-      },
-      scale: {
-        gridLines: {
-          lineWidth: 19,
-          zeroLineColor: '#FFF',
-          color: '#21243b',
-        },
-        pointLabels: {
-          callback: function (value, index, values) {
-            return ''
-          },
-          lineHeight: 4,
-        },
-        ticks: {
-          callback: function (value) {
-            return value + 'k'
-          },
-          backdropColor: 'transparent',
-          fontSize: 10,
-          display: true,
-          maxTicksLimit: 5,
-          beginAtZero: true,
-          stepSize: 25,
-        },
-        angleLines: {
-          color: '#3D4665',
-        },
-      },
-    }}
-  />
-)
+      }}
+    />
+  )
+}
 
-export default RadarChart
+export default withTheme(RadarChart)

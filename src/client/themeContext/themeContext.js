@@ -5,6 +5,7 @@ export const ThemeContext = React.createContext(
   {
     themeContext: {
       colors: {},
+      status: 'dark',
       setColor: () => {},
     },
   }

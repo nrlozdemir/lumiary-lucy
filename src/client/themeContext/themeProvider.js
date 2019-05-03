@@ -14,7 +14,7 @@ class ThemeProvider extends React.Component {
 
   setColor = (name) => {
     console.log(name)
-    this.setState({ colors: themes[name] })
+    this.setState({ colors: themes[name], status: name })
   }
 
   componentDidMount() {}

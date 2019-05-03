@@ -49,14 +49,16 @@ const BackTo = (props) => {
   )
 }
 
-const Logo = ({themes}) => (
+const Logo = ({ themes }) => (
   <div className={style.logo}>
-    <Link to="/" style={{color: themes.textColor}}>Lumiere</Link>
+    <Link to="/" style={{ color: themes.textColor }}>
+      Lumiere
+    </Link>
   </div>
 )
 
 const Default = (props) => {
-  const {textColor, moduleBackground} = props.themes
+  const { textColor, moduleBackground } = props.themes
   return Object.values(props)
     .filter(
       (r) => r.navigation && r.navigation.level == 1 && r.navigation.order > 0
@@ -69,7 +71,12 @@ const Default = (props) => {
         : 0
     )
     .map((el, i) => (
-      <NavLink key={i} to={el.path} activeClassName={style.activeLink} style={{color: textColor}}>
+      <NavLink
+        key={i}
+        to={el.path}
+        activeClassName={style.activeLink}
+        style={{ color: textColor }}
+      >
         {el.navigation.title}
       </NavLink>
     ))
@@ -104,7 +111,7 @@ const NavTitle = (props) => {
 }
 
 const SubNavigation = (props) => {
-  const {textColor, moduleBackground} = props.themes
+  const { textColor, moduleBackground } = props.themes
   return Object.values(props)
     .filter(
       (r) => r.navigation && r.navigation.level == 2 && r.navigation.order > 0
@@ -121,7 +128,7 @@ const SubNavigation = (props) => {
         key={i}
         to={el.path}
         className={style.tab}
-        style={{color: textColor}}
+        style={{ color: textColor }}
         activeClassName={classnames(style.tab, style.activeLink)}
       >
         {el.navigation.title}
@@ -194,18 +201,20 @@ const Selector = (props) => {
     }
   } else {
     return {
-      leftSide: <Logo themes={props.themes}/>,
-      navigation: <Default {...navigation} themes={props.themes}/>,
+      leftSide: <Logo themes={props.themes} />,
+      navigation: <Default {...navigation} themes={props.themes} />,
     }
   }
 }
 
 const Template = (props) => {
   const templateSelector = Selector(props)
-  const {textColor, moduleBackground} = props.themes
+  const { textColor, moduleBackground } = props.themes
+  const { switchOn, controlSwitch } = props
   return (
-    <div className={containerClass}
-      style={{color: textColor, background: moduleBackground}}
+    <div
+      className={containerClass}
+      style={{ color: textColor, background: moduleBackground }}
     >
       {templateSelector['leftSide']}
       <div className={linksClass}>{templateSelector['navigation']}</div>
@@ -215,7 +224,7 @@ const Template = (props) => {
             src="https://picsum.photos/id/836/30/30"
             className={imageClass}
           />
-          <span style={{color: textColor}}>Bleacher Report</span>
+          <Switch switchOn={switchOn} controlSwitch={controlSwitch} />
         </div>
       </div>
     </div>
@@ -224,16 +233,35 @@ const Template = (props) => {
 
 /* eslint-disable react/prefer-stateless-function */
 class Navbar extends React.Component {
+  constructor() {
+    super()
+    this.state = {
+      switchOn: false,
+    }
+  }
+
+  controlSwitch = () => {
+    this.setState(
+      {
+        switchOn: !this.state.switchOn,
+      },
+      () => {
+        console.log('switchOn', this.state.switchOn)
+        this.props.themeContext.setColor(this.state.switchOn ? 'light' : 'dark')
+      }
+    )
+  }
+
   render() {
+    console.log('STATE', this.state.switchOn)
     return (
       <React.Fragment>
-        <button onClick={() => this.props.themeContext.setColor('dark')}>
-          Dark
-        </button>
-        <button onClick={() => this.props.themeContext.setColor('light')}>
-          Light
-        </button>
-        <Template {...this.props} themes={this.props.themeContext.colors}/>
+        <Template
+          {...this.props}
+          themes={this.props.themeContext.colors}
+          switchOn={this.state.switchOn}
+          controlSwitch={this.controlSwitch}
+        />
       </React.Fragment>
     )
   }

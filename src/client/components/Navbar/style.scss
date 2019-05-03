@@ -5,6 +5,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
 }
 
 .logo {
@@ -61,7 +66,7 @@
     font-size: 14px;
     font-family: $font-family-ClanOTBold;
 
-    &:hover{
+    &:hover {
       font-family: $font-family-ClanOTBold;
       font-weight: normal;
     }
@@ -76,7 +81,7 @@
     }
   }
 
-  a:hover{
+  a:hover {
     @extend .activeLink;
     font-family: $font-family-ClanOTNews;
     font-weight: normal;
@@ -84,6 +89,7 @@
 }
 
 .profile {
+  position: relative;
   flex: 3;
   color: $color-white;
   font-size: 14px;
@@ -113,4 +119,16 @@
   align-items: center;
   position: absolute;
   right: -140px;
+}
+
+.dropdown {
+  position: absolute;
+  left: 0;
+  z-index: 10;
+  transform: translate(0, 10px);
+  width: 206px;
+  height: 201px;
+  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+  border: solid 1px #545b79;
+  background-color: #545b79;
 }

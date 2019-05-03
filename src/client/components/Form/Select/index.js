@@ -3,17 +3,12 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import ReactSelect from 'react-select'
 import style from './styles.scss'
+import { withTheme } from 'ThemeContext/withTheme'
 
 const Select = (props) => {
-  const {
-    className,
-    id,
-    options,
-    placeholder,
-    multiple,
-    customClass,
-    themes,
-  } = props
+  const { className, id, options, placeholder, multiple, customClass } = props
+
+  const themes = props.themeContext.colors
 
   let args = props.input ? props.input : props
   let { name, onChange, value } = args
@@ -161,4 +156,4 @@ Select.defaultProps = {
   placeholder: 'Select...',
 }
 
-export default Select
+export default withTheme(Select)

@@ -8,7 +8,7 @@ import _ from 'lodash'
 import cx from 'classnames'
 import style from './style.scss'
 import HeaderModule from './header'
-import { withTheme } from 'ThemeContext/withTheme'
+import { ThemeContext } from 'ThemeContext/themeContext'
 
 export class Module extends React.Component {
   constructor(props) {
@@ -51,29 +51,38 @@ export class Module extends React.Component {
     const { infoShow } = this.state
 
     const moduleContainer = cx(
-      'shadow-1 grid-container col-12',
+      'grid-container col-12',
       style.moduleContainer,
       containerClass
     )
-    const themes = this.props.themeContext.colors
 
     return (
-      <div
-        className={moduleContainer}
-        style={{ background: themes.moduleBackground, color: themes.textColor }}
-      >
-        <div className={style.moduleContainerHeader}>
-          <HeaderModule
-            {...this.props}
-            changeInfoStatus={this.changeInfoStatus}
-            infoShow={infoShow}
-            themes={themes}
-          />
-        </div>
-        <div className={cx(style.moduleContainerBody, bodyClass)}>
-          {children}
-        </div>
-      </div>
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => {
+          return (
+            <div
+              className={moduleContainer}
+              style={{
+                background: colors.moduleBackground,
+                color: colors.textColor,
+                boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
+              }}
+            >
+              <div className={style.moduleContainerHeader}>
+                <HeaderModule
+                  {...this.props}
+                  changeInfoStatus={this.changeInfoStatus}
+                  infoShow={infoShow}
+                  themes={colors}
+                />
+              </div>
+              <div className={cx(style.moduleContainerBody, bodyClass)}>
+                {children}
+              </div>
+            </div>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 }
@@ -92,9 +101,7 @@ Module.propTypes = {
   containerClass: PropTypes.string,
 }
 
-export default withTheme(
-  connect(
-    mapStateToProps,
-    {}
-  )(Module)
-)
+export default connect(
+  mapStateToProps,
+  {}
+)(Module)
