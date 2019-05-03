@@ -20,7 +20,7 @@
     .headerTitle {
       display: flex;
       align-items: center;
-      flex: 1;
+      flex: auto;
       // flex-direction: column;
 
       .moduleInfo {
@@ -52,7 +52,7 @@
       }
     }
     .headerLegend {
-      flex: 1;
+      flex: auto;
     }
     .headerFilters {
       display: flex;

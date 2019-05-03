@@ -14,14 +14,6 @@ const MarketViewSlider = (props) => {
     return <div className={className} onClick={onClick} />
   }
 
-  const NextArrow = (props) => {
-    const { className, style, onClick } = props
-    if (props.currentSlide + 4 >= props.slideCount) {
-      return null
-    }
-    return <div className={className} onClick={onClick} />
-  }
-
   const PrevArrow = (props) => {
     const { className, style, onClick } = props
     if (props.currentSlide == 0) {

@@ -69,12 +69,12 @@ export class Competitor extends React.Component {
     return (
       <React.Fragment>
         <div className="grid-collapse">
-          <Slider
+          {/* <Slider
             data={marketview.videos}
             selectedVideo={selectedVideo}
             changeSelectedVideo={this.changeSelectedVideo}
             title="Top Performing Competitor Videos"
-          />
+          /> */}
           <TopVideosCardModule
             chartData={competitorTopVideos}
             height={150}
