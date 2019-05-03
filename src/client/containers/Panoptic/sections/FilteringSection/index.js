@@ -30,7 +30,7 @@ class PanopticFilteringSection extends Component {
         action={this.callBack}
         filters={[
           {
-            type: 'duration',
+            type: 'videoProperty',
             selectKey: 'PFS-dsad',
             placeHolder: 'Duration',
           },
