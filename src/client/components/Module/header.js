@@ -33,7 +33,7 @@ const HeaderModule = ({
         </span>
       </div>
       {!!legend && <div className={style.headerLegend}>{legend}</div>}
-      {filters && (
+      {filters && filters.length && (
         <div className={style.headerFilters}>
           {filters.map((filter, index) => {
             return (

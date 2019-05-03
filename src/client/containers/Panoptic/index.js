@@ -20,12 +20,13 @@ import ColorTemperature from './sections/ColorTemperature'
 import FilteringSection from './sections/FilteringSection'
 import PacingCard from './sections/PacingCard'
 import CompareShares from './sections/CompareShares'
-import LineAndDoughnutChartModule from 'Components/Modules/LineAndDoughnutChartModule'
 import Cards from './sections/Cards'
+import TopPerformingFormat from './sections/TopPerformingFormat'
 
 /* eslint-disable react/prefer-stateless-function */
 class Panoptic extends React.Component {
   render() {
+    console.log('a')
     return (
       <React.Fragment>
         <div className="grid-container col-12">
@@ -33,11 +34,7 @@ class Panoptic extends React.Component {
         </div>
 
         <Cards />
-        <LineAndDoughnutChartModule
-          moduleKey="Panoptic/Top-Performing-Formats-This-Week-By-CV-Score"
-          title="Top Performing Formats This Week By CV Score"
-          action={() => {}}
-        />
+        <TopPerformingFormat />
         <VideoReleasesBarChart />
         <ColorTemperature />
         <FilteringSection />

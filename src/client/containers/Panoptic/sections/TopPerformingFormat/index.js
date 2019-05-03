@@ -4,34 +4,73 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceDominantColor } from 'Reducers/panoptic'
+import { chartCombineDataset } from 'Utils'
 
 import LineAndDoughnutChartModule from 'Components/Modules/LineAndDoughnutChartModule'
+import { lineChartData_DatasetOptions, lineChartOptions } from './options'
 
 class TopPerformingFormat extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getAudienceDominantColorData(data)
   }
 
+  combineChartData = (lineData) => {
+    return chartCombineDataset(lineData, lineChartData_DatasetOptions, {
+      beforeDraw: function(chart, easing) {
+        if (
+          chart.config.options.chartArea &&
+          chart.config.options.chartArea.backgroundColor
+        ) {
+          const ctx = chart.chart.ctx
+          const chartArea = chart.chartArea
+
+          ctx.save()
+          ctx.fillStyle = chart.config.options.chartArea.backgroundColor
+          ctx.fillRect(
+            chartArea.left,
+            chartArea.top,
+            chartArea.right - chartArea.left,
+            chartArea.bottom - chartArea.top
+          )
+          ctx.restore()
+        }
+      },
+    })
+  }
+
   render() {
-    const {
-      audienceDominantColorData: { data, loading, error },
-    } = this.props
+    const lineData = {
+      labels: [
+        'Sunday',
+        'Monday',
+        'Tuesday',
+        'Wednesday',
+        'Thursday',
+        'Friday',
+        'Saturday',
+      ],
+      datasets: [
+        { data: [10, 15, 17, 20, 17, 26, 28, 100] },
+        { data: [20, 25, 22, 27, 32, 30, 35, 100] },
+        { data: [30, 35, 50, 45, 40, 42, 48, 100] },
+        { data: [55, 60, 61, 65, 60, 62, 67, 100] },
+        { data: [82, 85, 78, 75, 80, 85, 90, 100] },
+      ],
+    }
 
     return (
       <LineAndDoughnutChartModule
         moduleKey="Panoptic/Top-Performing-Formats-This-Week-By-CV-Score"
         title="Top Performing Formats This Week By CV Score"
         action={() => {}}
+        lineChartData={this.combineChartData(lineData)}
+        lineChartOptions={lineChartOptions}
         filters={[
           {
             type: 'platform',
-            selectKey: 'ACOT-ads',
+            selectKey: 'platform',
             placeHolder: 'Platforms',
-          },
-          {
-            type: 'timeRange',
-            selectKey: 'ACOT-wds',
-            placeHolder: 'Date',
+            defaultValue: 'facebook',
           },
         ]}
       />
