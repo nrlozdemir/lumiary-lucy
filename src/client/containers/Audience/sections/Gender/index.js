@@ -48,7 +48,7 @@ class GenderSection extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'resolution',
+            type: 'videoProperty',
             selectKey: 'AG-asd',
             placeHolder: 'Resolution',
           },
