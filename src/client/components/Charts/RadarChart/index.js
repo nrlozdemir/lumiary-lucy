@@ -3,19 +3,19 @@ import { Radar } from 'react-chartjs-2'
 
 const plugins = [
   {
-    beforeDraw: function(chart, easing) {
+    beforeDraw: function (chart, easing) {
       let ctx = chart.chart.ctx
       let chartArea = chart.chartArea
-      chart.config.data.datasets.forEach(function(dataset, i) {
+      chart.config.data.datasets.forEach(function (dataset, i) {
         const meta = chart.controller.getDatasetMeta(i)
-        meta.data.forEach(function(bar, index) {
+        meta.data.forEach(function (bar, index) {
           ctx.beginPath()
           const color = chart.config.data.labels[index].color
           const selected = chart.config.data.labels[index].selected
           const pointLabelPosition = bar._scale.getPointPosition(
             index,
             bar._scale.getDistanceFromCenterForValue(bar._scale.max) +
-              (selected ? 31 : 25)
+            (selected ? 31 : 25)
           )
           // draw a circle at that point
           ctx.beginPath()
@@ -42,7 +42,7 @@ const plugins = [
   },
 ]
 
-const RadarChart = ({ data, width=430, height=430 }) => (
+const RadarChart = ({ data, width = 430, height = 430 }) => (
   <Radar
     data={data}
     width={width}
@@ -53,6 +53,9 @@ const RadarChart = ({ data, width=430, height=430 }) => (
       maintainAspectRatio: false,
       legend: {
         display: false,
+      },
+      layout: {
+        padding: 30
       },
       tooltips: {
         backgroundColor: '#fff',
@@ -66,14 +69,14 @@ const RadarChart = ({ data, width=430, height=430 }) => (
         displayColors: false,
         callbacks: {
           title: () => '',
-          label: function(tooltipItem, data) {
+          label: function (tooltipItem, data) {
             return (
               data['datasets'][0]['data'][tooltipItem['index']] +
               '% ' +
               data.labels[tooltipItem['index']].name
             )
           },
-          afterLabel: function(tooltipItem, data) {
+          afterLabel: function (tooltipItem, data) {
             return data.labels[tooltipItem['index']].count + 'k Shares'
           },
         },
@@ -88,13 +91,13 @@ const RadarChart = ({ data, width=430, height=430 }) => (
           color: '#21243b',
         },
         pointLabels: {
-          callback: function(value, index, values) {
+          callback: function (value, index, values) {
             return ''
           },
           lineHeight: 4,
         },
         ticks: {
-          callback: function(value) {
+          callback: function (value) {
             return value + 'k'
           },
           backdropColor: 'transparent',
