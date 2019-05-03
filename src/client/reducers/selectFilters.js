@@ -85,6 +85,8 @@ export const initialState = fromJS({
       { value: 'frame-rate', label: 'Frame Rate' },
       { value: 'duration', label: 'Duration' },
       { value: 'pacing', label: 'Pacing' },
+      { value: 'number-of-shots', label: 'Number Of Shots'},
+      { value: 'dominant-color', label: 'Dominant Color'}
     ],
     audienceAge: [
       { value: '10-', label: '10 and under' },
