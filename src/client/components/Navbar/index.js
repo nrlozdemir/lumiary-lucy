@@ -226,6 +226,7 @@ const Template = (props) => {
           />
           <Switch switchOn={switchOn} controlSwitch={controlSwitch} />
           <span style={{ color: textColor }}>Bleacher Report</span>
+          <Switch switchOn={switchOn} controlSwitch={controlSwitch} />
         </div>
       </div>
     </div>

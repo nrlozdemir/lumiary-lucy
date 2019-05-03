@@ -4,19 +4,19 @@ import { withTheme } from 'ThemeContext/withTheme'
 
 const plugins = [
   {
-    beforeDraw: function (chart, easing) {
+    beforeDraw: function(chart, easing) {
       let ctx = chart.chart.ctx
       let chartArea = chart.chartArea
-      chart.config.data.datasets.forEach(function (dataset, i) {
+      chart.config.data.datasets.forEach(function(dataset, i) {
         const meta = chart.controller.getDatasetMeta(i)
-        meta.data.forEach(function (bar, index) {
+        meta.data.forEach(function(bar, index) {
           ctx.beginPath()
           const color = chart.config.data.labels[index].color
           const selected = chart.config.data.labels[index].selected
           const pointLabelPosition = bar._scale.getPointPosition(
             index,
             bar._scale.getDistanceFromCenterForValue(bar._scale.max) +
-            (selected ? 31 : 25)
+              (selected ? 31 : 25)
           )
           // draw a circle at that point
           ctx.beginPath()

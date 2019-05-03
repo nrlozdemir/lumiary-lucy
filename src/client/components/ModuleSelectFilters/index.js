@@ -82,7 +82,6 @@ class ModuleSelectFilters extends React.Component {
           value={value}
           onChange={(option) => this.onChange(option)}
           options={options[type]}
-          themes={themes}
         />
         {type === 'timeRange' &&
           selectedOption &&
