@@ -1,10 +1,4 @@
-/**
- *
- * Navbar
- *
- */
-
-import React, { lazy, Suspense } from 'react'
+import React from 'react'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
@@ -14,7 +8,6 @@ import { makeSelectLibrary } from 'Reducers/library'
 import Switch from 'Components/Form/Switch'
 import { capitalizeFirstLetter } from 'Utils/index'
 import style from './style.scss'
-// import PropTypes from 'prop-types';
 
 const containerClass = classnames('grid-container bg-dark-grey-blue ' + style.container)
 const linksClass = classnames(style.links)

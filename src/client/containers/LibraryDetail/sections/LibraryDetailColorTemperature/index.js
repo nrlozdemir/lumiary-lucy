@@ -7,11 +7,8 @@ import {
 	actions,
 	makeSelectLibraryDetailColorTemperature,
 } from 'Reducers/libraryDetail'
-
 import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
-
-import style from './style.scss'
-
+//import style from './style.scss'
 class LibraryDetailColorTemperature extends React.Component {
 	callBack = (data) => {
 		const { getColorTempRequest, libraryDetailId } = this.props

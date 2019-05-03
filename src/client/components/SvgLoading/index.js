@@ -1,16 +1,8 @@
-/**
- *
- * SvgLoading
- *
- */
-
-import React from 'react'
-import style from './style.scss'
-import classNames from 'classnames'
-// import PropTypes from 'prop-types';
+import React from "react";
+import style from "./style.scss";
+import classNames from "classnames";
 
 /* eslint-disable react/prefer-stateless-function */
-
 class SvgLoading extends React.Component {
   render() {
     const { percentage, r, R, pointCount } = this.props

@@ -1,10 +1,8 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceDominantColor } from 'Reducers/panoptic'
-
 import RadarChartModule from 'Components/Modules/RadarChartModule'
 
 class DominantColor extends React.Component {

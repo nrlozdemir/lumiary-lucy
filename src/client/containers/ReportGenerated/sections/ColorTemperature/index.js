@@ -1,12 +1,6 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectPanopticColorTemperature } from 'Reducers/generatedReport'
-
-import { platforms, selectOneOptions, selectTwoOptions } from './options'
+import { platforms } from './options'
 import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
-
 import style from './style.scss'
 
 class BrandInsightsColorTemperature extends React.Component {

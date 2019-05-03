@@ -1,8 +1,8 @@
 import React from 'react'
 import cx from 'classnames'
 import ProgressBar from 'Components/ProgressBar'
-
 import style from './style.scss'
+
 const sectionTitleClass = cx('font-primary', style.sectionTitle)
 const sectionBadgeStyle = cx('font-secondary-second', style.sectionBadge)
 

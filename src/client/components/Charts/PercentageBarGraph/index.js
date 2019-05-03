@@ -1,7 +1,6 @@
 import React from 'react'
 import style from './style.scss'
 import classnames from 'classnames'
-
 import SvgChart from './SvgChart'
 
 const PercentageBarGraph = ({ percentage, disableLabels = false, color, id, lineCount = 60, width = 250, height = 40, xSmall, backgroundColor }) => {

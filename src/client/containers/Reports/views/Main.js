@@ -1,26 +1,20 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import moment from 'moment'
 import { actions, makeSelectReports } from 'Reducers/reports'
-
-import style from '../style.scss'
-import { selectOptions } from '../options'
 import Select from 'Components/Form/Select'
 import Button from 'Components/Form/Button'
-
 import ReportsModal from 'Components/Modal/Reports'
 import ReportsForm from 'Components/PageForms/Reports/BrandInsight'
 import CompareBrand from 'Components/PageForms/Reports/CompareBrand'
 import PredefinedReport from 'Components/PageForms/Reports/PredefinedReport'
-
 import RouterLoading from 'Components/RouterLoading'
-
 import ReportCards from '../section/ReportCardsModule'
-
 import ReactTable from 'react-table'
+import { selectOptions } from '../options'
+import style from '../style.scss'
 
 class Reports extends Component {
   constructor(props) {
