@@ -5,6 +5,7 @@ import style from './style.scss'
 import PercentageBarGraph from '../../Charts/PercentageBarGraph'
 import LineChart from '../../LineChart/Chart'
 import DoughnutChart from '../../Charts/DoughnutChart'
+import { Bar } from 'react-chartjs-2'
 
 class LineAndDoughnutChartModule extends React.Component {
   render() {
@@ -17,7 +18,29 @@ class LineAndDoughnutChartModule extends React.Component {
       lineChartOptions,
       filters,
     } = this.props
-    console.log(this.props)
+    const plugins = [
+      {
+        beforeDraw: function(chart, easing) {
+          if (
+            chart.config.options.chartArea &&
+            chart.config.options.chartArea.backgroundColor
+          ) {
+            var ctx = chart.chart.ctx
+            var chartArea = chart.chartArea
+
+            ctx.save()
+            ctx.fillStyle = chart.config.options.chartArea.backgroundColor
+            ctx.fillRect(
+              chartArea.left + 56,
+              chartArea.top,
+              chartArea.right - chartArea.left - 112,
+              chartArea.bottom - chartArea.top
+            )
+            ctx.restore()
+          }
+        },
+      },
+    ]
     return (
       <Module
         moduleKey={moduleKey}
@@ -28,12 +51,21 @@ class LineAndDoughnutChartModule extends React.Component {
         <div className="grid-collapse">
           <div className="col-12-no-gutters">
             <div className="col-8-no-gutters">
-              <LineChart
-                dataSet={lineChartData}
-                width={740}
+              <Bar
+                data={lineChartData}
+                width={800}
                 height={291}
-                options={lineChartOptions}
-                backgroundColor="#21243b"
+                plugins={plugins}
+                options={{
+                  responsive: false,
+                  chartArea: {
+                    backgroundColor: '#21243c',
+                  },
+                  legend: {
+                    display: false,
+                  },
+                  ...lineChartOptions,
+                }}
               />
             </div>
             <div className="col-4-no-gutters d-flex align-items-center justify-content-center">

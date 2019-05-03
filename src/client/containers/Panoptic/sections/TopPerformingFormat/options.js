@@ -10,17 +10,21 @@ export const lineChartOptions = {
       {
         gridLines: {
           display: true,
-          color: '#545B79',
+          color: '#373f5b',
+          offsetGridLines: false,
+
           lineWidth: 0.7,
-          drawBorder: true,
+          drawBorder: false,
           drawTicks: false,
         },
+        barPercentage: 0.05,
+
         ticks: {
           fontColor: '#fff',
           fontSize: 12,
           stepSize: 1,
           padding: 15,
-          beginAtZero: true,
+          beginAtZero: false,
           callback: function(value, index, values) {
             return value
           },
@@ -29,20 +33,21 @@ export const lineChartOptions = {
     ],
     yAxes: [
       {
-        padding: 20,
         gridLines: {
           display: true,
-          color: '#545B79',
+          color: '#373f5b',
           lineWidth: 0.7,
           drawBorder: true,
           drawTicks: false,
+          zeroLineColor: 'transparent',
         },
         ticks: {
           fontColor: '#fff',
           fontSize: 12,
           stepSize: 25,
-          padding: 15,
           beginAtZero: true,
+          padding: -35,
+
           callback: function(value, index, values) {
             if (value === 0 || value === 100) {
               return value
@@ -189,8 +194,7 @@ export const lineChartData_DatasetOptions = [
   {
     type: 'bar',
     label: 'Dataset 2',
-    backgroundColor: '#000',
-    data: [0, 0, 0, 100, 0, 0],
+    backgroundColor: '#fff',
     borderColor: 'white',
     borderWidth: 2,
   },
