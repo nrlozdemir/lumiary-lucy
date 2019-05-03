@@ -101,10 +101,10 @@
 
 			div{
 				i{
-					background-color: #242b49;
+					background-color: #21243B;
 					border-radius: 20px;
 					padding: 8px;
-					border: 2px solid #51adc0;
+					border: 2px solid #2FD7C4;
 					margin-right: 20px;
 				}
 			}
@@ -117,176 +117,8 @@
 	}
 }
 
-.temperatureHeader{
-	display: flex;
-	width: calc(100% - 80px);
-	padding: 48px 40px 20px;
-	justify-content: space-between;
-	align-items: center;
-
-	p{
-		font-size: 14px;
-		font-family: $font-family-ClanOTNews;
-	}
-
-	h2{
-		font-family: $font-family-ClanOTBold;
-		font-size: 18px;
-	}
-
-	.inputWrapper{
-		width: 344px;
-
-		form{
-			width: 100%;
-			display: flex;
-			align-items: center;
-			justify-content: space-between;
-			flex-direction: row;
-			margin: 0;
-		}
-	}
-}
-
 .inputWrapper>form>div{
 	width: calc(50% - 8px)
-}
-
-.temperatureContentContainer{
-	width: calc(100% - 40px);
-	padding: 56px 20px;
-	display: flex;
-	flex-direction: row;
-	align-items: center;
-	justify-content: space-between;
-
-	&:first-child{
-		border: none;
-	}
-
-	.temperatureContentWrapper{
-		position: relative;
-		width: calc(33.33% - 41px);
-		border-left: 1px solid $color-dusk;
-		padding: 20px;
-		&:first-child{
-			border: none;
-		}
-
-		.textTop{
-			font-size: 14px;
-			font-family: $font-family-ClanOTBold;
-			position: absolute;
-			top: -40px;
-			left: calc(50% - 22.5px);
-		}
-
-		.textRight{
-			font-size: 14px;
-			font-family: $font-family-ClanOTNews;
-			color: $color-cool-grey;
-			position: absolute;
-			top: calc(50% - 14px);
-			right: -50px;
-		}
-
-		.textBottom{
-			font-size: 14px;
-			font-family: $font-family-ClanOTBold;
-			position: absolute;
-			bottom: -40px;
-			left: calc(50% - 12px)
-		}
-
-		.textLeft{
-			font-size: 14px;
-			font-family: $font-family-ClanOTNews;
-			color: $color-cool-grey;
-			position: absolute;
-			top: calc(50% - 14px);
-			left: -40px;
-		}
-
-		.horizontalLine{
-			width: 204px;
-			height: 4px;
-			background-color: $color-dark-five;
-			position: absolute;
-			top: calc(50% - 2px);
-		}
-
-		.verticalLine{
-			width: 4px;
-			height: 204px;
-			background-color: $color-dark-five;
-			position: absolute;
-			top: 0;
-			left: calc(50% - 2px);
-		}
-
-		.temperatureContent{
-			display: block;
-			margin: 0 auto;
-			width: 204px;
-			height: 204px;
-			background-color: $color-dusk;
-			border-radius: 100%;
-			box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-			position: relative;
-
-			.redRound{
-				width: 40px;
-				height: 40px;
-				position: absolute;
-				top: calc(50% - 20px);
-				left: calc(50% - 20px);
-				border: 1px solid $color-dark-five;
-				box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-			}
-
-			.purpleRound{
-				width: 40px;
-				height: 40px;
-				position: absolute;
-				top: calc(50% - 20px);
-				left: calc(50% - 20px);
-				border: 1px solid $color-dark-five;
-				box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-			}
-
-			.duskRound{
-				width: 40px;
-				height: 40px;
-				position: absolute;
-				top: calc(50% - 20px);
-				left: calc(50% - 20px);
-				border: 1px solid $color-dark-five;
-				box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-			}
-		}
-
-	}
-}
-
-.infoWrapperContainer {
-	padding: 0 20px;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	.infoWrapper{
-		width: calc(33.33% - 41px);
-		padding: 0 20px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-
-		.infoText{
-			padding: 8px 24px;
-			background-color: $color-dark-five;
-			color: $color-white;
-			border-radius: 24px;
-		}
-	}
 }
 
 .radialAndStackChartWrapper{

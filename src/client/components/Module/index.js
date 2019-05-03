@@ -84,8 +84,14 @@ const mapStateToProps = createStructuredSelector({
   selectFilters: makeSelectSelectFilters(),
 })
 
+Module.defaultProps = {
+  action: () => {},
+}
+
 Module.propTypes = {
   action: PropTypes.func.isRequired,
+  bodyClass: PropTypes.string,
+  containerClass: PropTypes.string,
 }
 
 export default connect(

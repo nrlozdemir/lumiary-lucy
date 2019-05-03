@@ -50,7 +50,7 @@ const BarChart = ({
         ctx.strokeStyle =
           configX[0].gridLines.color ||
           Chart.defaults.bar.scales.xAxes[0].gridLines.color ||
-          '#5a6386'
+          '#545B79'
         ctx.lineWidth =
           configX[0].gridLines.lineWidth ||
           Chart.defaults.bar.scales.xAxes[0].gridLines.lineWidth ||

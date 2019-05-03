@@ -137,7 +137,6 @@ function* getTotalViewsData(data) {
 
     yield put(actions.getTotalViewsSuccess(payload))
   } catch (error) {
-    console.log('error', error)
     yield put(actions.getTotalViewsFailure(error))
   }
 }

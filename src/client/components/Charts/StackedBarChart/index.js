@@ -42,7 +42,7 @@ const StackedBarChart = ({
         ctx.restore()
       },
     },
-  ]
+	]
   return (
     <Bar
       data={{
@@ -50,7 +50,7 @@ const StackedBarChart = ({
         datasets: barData.datasets.map((data, index) => {
           const indexValues = data.data.map((v, i) => {
             return barData.datasets.map((d) => d.data[i])
-          })
+					})
           return {
             ...data,
             data: data.data.map((value, i) => {

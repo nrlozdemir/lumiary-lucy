@@ -32,7 +32,7 @@ const HeaderModule = ({
           </ToolTip>
         </span>
       </div>
-      {legend && <div className={style.headerLegend}>{legend}</div>}
+      {!!legend && <div className={style.headerLegend}>{legend}</div>}
       {filters && (
         <div className={style.headerFilters}>
           {filters.map((filter, index) => {

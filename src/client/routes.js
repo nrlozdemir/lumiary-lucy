@@ -31,7 +31,7 @@ const routes = [
     component: 'LibraryDetail',
   },
   {
-    path: '/quickview',
+    path: '/quickview/all-platforms',
     exact: true,
     component: 'Quickview',
     navigation: {
@@ -72,39 +72,7 @@ const routes = [
       level: 1,
       order: 4,
       title: 'Marketview'
-    },
-    routes: [
-      {
-        path: '/marketview/platform',
-        exact: true,
-        component: 'Marketview',
-        navigation: {
-          level: 2,
-          order: 1,
-          title: 'Platform'
-        }
-      },
-      {
-        path: '/marketview/competitor',
-        exact: true,
-        component: 'Marketview',
-        navigation: {
-          level: 2,
-          order: 2,
-          title: 'Competitor'
-        }
-      },
-      {
-        path: '/marketview/time',
-        exact: true,
-        component: 'Marketview',
-        navigation: {
-          level: 2,
-          order: 3,
-          title: 'Time'
-        }
-      }
-    ]
+    }
   },
   {
     path: '/marketview/:detail',
@@ -122,10 +90,45 @@ const routes = [
     }
   },
   {
-    path: '/reports/generated',
+    path: '/reports/brand-insight/:id',
     exact: true,
-    removeNavbar: true,
-    component: 'ReportGenerated',
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
+      loadComponent: true,
+      from: null,
+      title: 'Brand Insights Report',
+      backToTitle: 'Generate New Report'
+    }
+  },
+  {
+    path: '/reports/compare-brands/:id',
+    exact: true,
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
+      loadComponent: true,
+      from: null,
+      title: 'Compare Brands Report',
+      backToTitle: 'Generate New Report'
+    }
+  },
+  {
+    path: '/reports/predefined-reports/:id',
+    exact: true,
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
+      loadComponent: true,
+      from: null,
+      title: 'Predefined Reports',
+      backToTitle: 'Generate New Report'
+    }
+  },
+  {
+    path: '/reports/brand-insight',
+    exact: true,
+    component: 'Reports',
   },
   {
     path: '*',

@@ -1,10 +1,11 @@
 import React from 'react'
 import Slider from 'react-slick'
+import AssetLayer from 'Components/AssetLayer'
+import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import style from './style.scss'
 import { socialIconSelector } from 'Utils/'
 
 const GeneratedReportViewSlider = (props) => {
-  console.log('props', props)
 
   const NextArrow = (props) => {
     const { className, style, onClick } = props
@@ -65,14 +66,31 @@ const GeneratedReportViewSlider = (props) => {
       <Slider {...settings}>
         {props.items.map((item, i) => (
           <div className="item" key={i}>
-            <img src={item.image} />
-            <p>
-              <span className="icon">
-                <span className={socialIconSelector(item.socialMedia)} />
-              </span>
-              {item.title}
-              <span className="secondTitle">{item.secondTitle}</span>
-            </p>
+            <AssetLayer
+              containerNoBorder
+              leftSocialIcon={item.socialMedia}
+              centerText={item.secondTitle}
+              title={item.title}
+              width={634}
+              height="100%"
+              rightValue={item.cvScore}
+            >
+              <img src={item.image} />
+              <div className={style.percentageWrapper} style={{right: "80px"}}>
+                <PercentageBarGraph
+                  backgroundColor="#303a5d"
+                  customClass={style.libraryPercentageGraph}
+                  id={`videolist-${i}`}
+                  percentage={item.cvScore}
+                  disableLabels={true}
+                  color={"#2fd7c4"}
+                  lineCount={30}
+                  height={19}
+                  width={67}
+                  xSmall
+                />
+              </div>
+            </AssetLayer>
           </div>
         ))}
         <div />
