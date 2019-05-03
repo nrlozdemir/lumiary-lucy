@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import classnames from 'classnames'
 import styles from './style.scss'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'

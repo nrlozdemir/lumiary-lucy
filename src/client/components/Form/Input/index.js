@@ -1,13 +1,8 @@
-/**
- *
- * Input
- *
- */
-
 import React from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import style from './style.scss'
+
 /* eslint-disable react/prefer-stateless-function */
 const Input = ({ error, value, label, placeholder, customClass, input }) => {
   const cx = classnames(

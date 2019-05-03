@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Line } from 'react-chartjs-2'
 import { randomKey } from 'Utils/index'
-
 import style from './style.scss'
 import data from './dummyChartData'
+
 // Bar chart crash while this line allow, i will found a solution for this case
 // import 'chartjs-plugin-style'
 

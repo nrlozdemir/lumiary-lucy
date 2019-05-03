@@ -1,19 +1,13 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { compose } from 'redux'
-
 import { chartCombineDataset } from 'Utils'
-import style from './style.scss'
-import {
-  selectOptions,
-  lineChartOptions,
-  lineChartData_DatasetOptions,
-} from './options'
-
+import { lineChartOptions, lineChartData_DatasetOptions } from './options'
 import SelectFilters from 'Components/SelectFilters'
 import LineChart from 'Components/LineChart/Chart'
 import PointerCard from 'Components/PointerCard'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
+import style from './style.scss'
 
 class LibraryDetailDoughnutChart extends React.Component {
   constructor(props) {

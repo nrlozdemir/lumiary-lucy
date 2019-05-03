@@ -1,24 +1,17 @@
-import React, { Component } from 'react'
-import { Bar } from 'react-chartjs-2'
-import cx from 'classnames'
-import style from './style.scss'
-import { randomKey } from 'Utils/index'
-
+import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticVideoReleases } from 'Reducers/panoptic'
-
+import Module from 'Components/Module'
+import { Bar } from 'react-chartjs-2'
+import cx from 'classnames'
+import { randomKey } from 'Utils/index'
 import { options, wrapperBarOptions } from './chartOptions'
+import style from './style.scss'
 
 const barChartContainer = cx('col-12', style.panopticBarChart)
-const barChartHeaderClass = cx('col-12 mt-24 mb-24', style.barChartHeader)
-const barChartFooterClass = cx('col-12 mb-56', style.barChartFooter)
 const barContainerClass = cx('col-12', style.barChartContainer)
-const headerTitleClass = cx('font-secondary-second', style.title)
-const referencesClass = cx('font-secondary-second', style.references)
-
-import Module from 'Components/Module'
 
 const plugins = [
   {
