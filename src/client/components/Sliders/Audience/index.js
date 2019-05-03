@@ -79,7 +79,7 @@ class AudienceSlider extends React.Component {
                     <img src={item.image} />
                     <div className={style.percentageWrapper} style={{right: "80px"}}>
                       <PercentageBarGraph
-                        backgroundColor="#303a5d"
+                        backgroundColor="#373f5b"
                         customClass={style.libraryPercentageGraph}
                         id={`videolist-${i}`}
                         percentage={item.cvScore}
