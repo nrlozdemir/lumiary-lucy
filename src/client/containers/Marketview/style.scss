@@ -320,3 +320,8 @@
 .sliderModuleContainer {
   display: flex;
 }
+
+.sliderModuleContainer,
+.sliderModuleContainerBody {
+	flex-direction: column;
+}

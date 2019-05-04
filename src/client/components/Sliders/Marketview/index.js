@@ -24,8 +24,8 @@ const MarketViewSlider = (props) => {
 
   const settings = {
     className: 'marketViewSlickSlider',
-    infinite: false,
-    slidesToShow: 3,
+    infinite: true,
+    // slidesToShow: 3,
     speed: 300,
     centerMode: true,
     centerPadding: '0',
@@ -95,9 +95,6 @@ const MarketViewSlider = (props) => {
             </AssetLayer>
           </div>
         ))}
-        <div />
-        <div />
-        <div />
       </Slider>
     </div>
   )

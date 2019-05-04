@@ -16,6 +16,7 @@ import Slider from 'Containers/Marketview/sections/detail/Slider'
 // import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
 import RouterLoading from 'Components/RouterLoading'
 import BarChartModule from 'Components/Modules/BarChartModule'
+import { randomKey } from '../../../utils'
 
 import style from '../style.scss'
 
@@ -91,6 +92,25 @@ export class Platform extends React.Component {
           selectedVideo={selectedVideo}
           changeSelectedVideo={this.changeSelectedVideo}
         />
+				<BarChartModule
+					moduleKey={randomKey(10)}
+					barData={topPerformingPropertiesData}
+					title="Top Performing Property Across All Platforms"
+					height={55}
+					tickOptions={chartTickOptions}
+					filters={[
+						{
+							type: 'engagement',
+							selectKey: 'mwplt-engagement',
+							placeHolder: 'Engagement',
+						},
+						{
+							type: 'pacing',
+							selectKey: 'mwplt-pacing',
+							placeHolder: 'Pacing',
+						},
+					]}
+				/>
         {/* {competitorTopVideos && (
           <TopVideosCard
             chartData={competitorTopVideos}
@@ -99,7 +119,7 @@ export class Platform extends React.Component {
             height={150}
           />
         )} */}
-        {similarProperties && <TopSimilarProperties data={similarProperties} />}
+        {/* {similarProperties && <TopSimilarProperties data={similarProperties} />} */}
         {/* {topPerformingPropertiesData && (
           // <div className="grid-collapse">
           //   <TotalCompetitorViews

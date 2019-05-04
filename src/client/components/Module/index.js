@@ -18,8 +18,10 @@ export class Module extends React.Component {
   }
   componentDidUpdate(prevProps) {
     if (
-      this.props.action &&
-      !_.isEqual(
+			this.props.action
+			&& prevProps.selectFilters
+			&& this.props.selectFilters
+      && !_.isEqual(
         prevProps.selectFilters.values[prevProps.moduleKey],
         this.props.selectFilters.values[this.props.moduleKey]
       )
@@ -45,7 +47,8 @@ export class Module extends React.Component {
       legend,
       filters,
       references,
-      customModuleContainer,
+			customModuleContainer,
+			customModuleContainerBody
     } = this.props
     const { infoShow } = this.state
     const moduleContainer = cx(
@@ -53,7 +56,8 @@ export class Module extends React.Component {
       style.moduleContainer,
       customModuleContainer
     )
-    const referencesClass = cx('font-secondary-second', style.references)
+		const referencesClass = cx('font-secondary-second', style.references)
+		const moduleContainerBody = cx(style.moduleContainerBody, customModuleContainerBody);
 
     return (
       <div className={moduleContainer}>
@@ -64,7 +68,7 @@ export class Module extends React.Component {
             infoShow={infoShow}
           />
         </div>
-        <div className={style.moduleContainerBody}>{children}</div>
+        <div className={moduleContainerBody}>{children}</div>
         {references && (
           <div className={referencesClass}>
             {references.map((ref, index) => (

@@ -21,11 +21,26 @@ export default class Slider extends React.Component {
     const { data, selectedVideo, changeSelectedVideo } = this.props
 
     return (
-      <Module customModuleContainer={style.sliderModuleContainer}>
+			<Module
+				customModuleContainer={style.sliderModuleContainer}
+				customModuleContainerBody={style.sliderModuleContainerBody}
+				title="Top Performing Videos By Platform"
+				filters={[
+					{
+						type: 'engagement',
+						selectKey: 'Mwplt-engagement',
+						placeHolder: 'Engagement',
+					},
+					{
+						type: 'timeRange',
+						selectKey: 'Mwplt-date',
+						placeHolder: 'Date',
+					},
+				]}>
         <div className="col-12-no-gutter">
           <MarketViewSlider items={data} changeVideo={changeSelectedVideo} />
         </div>
-        <div className="col-12-no-gutter">
+        <div className="col-12-no-gutter mt-56">
           {selectedVideo &&
             selectedVideo.options.map((card, index) => (
               <div className={style.card} key={index}>
