@@ -10,8 +10,6 @@ const Select = (props) => {
 
   const themes = props.themeContext.colors
 
-  const themes = props.themeContext.colors
-
   let args = props.input ? props.input : props
   let { name, onChange, value } = args
 
