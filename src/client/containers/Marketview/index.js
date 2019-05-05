@@ -29,9 +29,9 @@ export class Marketview extends React.Component {
   render() {
     return (
       <div className="grid-container col-12">
-        <div className={style.alignTabs}>
+        {/* <div className={style.alignTabs}>
 
-        </div>
+        </div> */}
 
         <Switch>
           <Route path="/marketview" exact component={Main} />

@@ -18,13 +18,13 @@ export default class Slider extends React.Component {
   }
 
   render() {
-    const { data, selectedVideo, changeSelectedVideo } = this.props
+    const { data, selectedVideo, changeSelectedVideo, title } = this.props
 
     return (
 			<Module
 				customModuleContainer={style.sliderModuleContainer}
 				customModuleContainerBody={style.sliderModuleContainerBody}
-				title="Top Performing Videos By Platform"
+				title={title}
 				filters={[
 					{
 						type: 'engagement',

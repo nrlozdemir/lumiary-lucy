@@ -4,8 +4,7 @@
  *
  */
 
-import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
+import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
@@ -15,8 +14,6 @@ import Slider from 'Containers/Marketview/sections/detail/Slider'
 import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
 import BarChartModule from 'Components/Modules/BarChartModule'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
-
-import RouterLoading from 'Components/RouterLoading'
 
 import style from '../style.scss'
 
@@ -69,12 +66,12 @@ export class Competitor extends React.Component {
     return (
       <React.Fragment>
         <div className="grid-collapse">
-          {/* <Slider
-            data={marketview.videos}
-            selectedVideo={selectedVideo}
-            changeSelectedVideo={this.changeSelectedVideo}
-            title="Top Performing Competitor Videos"
-          /> */}
+					<Slider
+						data={marketview.videos || []}
+						selectedVideo={selectedVideo}
+						changeSelectedVideo={this.changeSelectedVideo}
+						title="Top Performing Competitor Videos"
+					/>
           <TopVideosCardModule
             chartData={competitorTopVideos}
             height={150}
