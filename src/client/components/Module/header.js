@@ -23,10 +23,6 @@ const HeaderModule = ({
         {/* <h2>{subTitle}</h2> */}
         <span
           className={style.moduleInfo}
-          style={{
-            color: themes.textColor,
-            borderColor: themes.textColor,
-          }}
           onMouseEnter={() => changeInfoStatus()}
           onMouseLeave={() => changeInfoStatus()}
         >
@@ -38,21 +34,24 @@ const HeaderModule = ({
         </span>
       </div>
       {!!legend && <div className={style.headerLegend}>{legend}</div>}
-      <div className={style.headerFilters}>
-        {filters.map((filter, index) => {
-          return (
-            <ModuleSelectFilters
-              key={index}
-              type={filter.type}
-              moduleKey={moduleKey}
-              selectKey={filter.selectKey}
-              placeHolder={filter.placeHolder}
-              defaultValue={filter.defaultValue}
-              themes={themes}
-            />
-          )
-        })}
-      </div>
+      {filters && filters.length ? (
+        <div className={style.headerFilters}>
+          {filters.map((filter, index) => {
+            return (
+              <ModuleSelectFilters
+                key={index}
+                type={filter.type}
+                moduleKey={moduleKey}
+                selectKey={filter.selectKey}
+                placeHolder={filter.placeHolder}
+                defaultValue={filter.defaultValue}
+              />
+            )
+          })}
+        </div>
+      ) : (
+        ''
+      )}
     </React.Fragment>
   )
 }
