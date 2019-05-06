@@ -9,36 +9,9 @@ import {
 } from 'Reducers/reports'
 
 import chartStyle from './style.scss'
-import LineChart from 'Components/LineChart/Chart'
-
-import { lineChartOptions, lineChartData_DatasetOptions } from './options'
-import { chartCombineDataset } from 'Utils'
+import LineChart from 'Components/Charts/LineChart'
 
 import Module from 'Components/Module'
-
-function combineChartData(chartData) {
-  return chartCombineDataset(chartData, lineChartData_DatasetOptions, {
-    beforeDraw: function(chart, easing) {
-      if (
-        chart.config.options.chartArea &&
-        chart.config.options.chartArea.backgroundColor
-      ) {
-        const ctx = chart.chart.ctx
-        const chartArea = chart.chartArea
-
-        ctx.save()
-        ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-        ctx.fillRect(
-          chartArea.left,
-          chartArea.top,
-          chartArea.right - chartArea.left,
-          chartArea.bottom - chartArea.top
-        )
-        ctx.restore()
-      }
-    },
-  })
-}
 
 class ContentVitalityScore extends React.Component {
   callBack = (data, moduleKey) => {
@@ -75,12 +48,34 @@ class ContentVitalityScore extends React.Component {
             className={chartStyle.vitalityContainer}
           >
             <LineChart
-              backgroundColor="#21243B"
-              dataSet={() => combineChartData(data)}
-              width={1070}
-              height={291}
-              options={lineChartOptions}
-            />
+								chartType="lineStackedArea"
+                width={1144}
+								height={291}
+                backgroundColor="#21243B"
+								dataSet={data}
+								removeTooltip
+								removePointRadius
+								xAxesFlatten
+								flattenFirstSpace={1}
+								flattenLastSpace={5}
+								options={{
+									scales:{
+										yAxes: [{
+											ticks: {
+												callback: function(value, index, values) {
+													if(value === 0) {
+														return value + ' '
+													} else if(value === 250) {
+														return value
+													} else {
+														return ''
+													}
+												}
+											}
+										}]
+									}
+								}}
+              />
           </div>
         )}
       </Module>
