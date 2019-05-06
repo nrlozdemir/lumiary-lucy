@@ -32,7 +32,7 @@ class PanopticFilteringSection extends Component {
           {
             type: 'videoProperty',
             selectKey: 'PFS-dsad',
-            placeHolder: 'Duration',
+            placeHolder: 'videoProperty',
           },
           {
             type: 'engagement',
