@@ -8,7 +8,6 @@ import {
 } from 'Reducers/reports'
 import Module from 'Components/Module'
 import LineChart from 'Components/Charts/LineChart'
-import Module from 'Components/Module'
 import chartStyle from './style.scss'
 
 class ContentVitalityScore extends React.Component {
