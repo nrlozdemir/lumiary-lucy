@@ -249,41 +249,41 @@ class LibraryDetailDoughnutChart extends React.Component {
                   </div>
                 </div>
                 <div className={style.lineChartWrapper}>
-									<div className="mt-48 mb-48">
-										{selectedCardData && (
-											<LineChart
-												width={1090}
-												height={292}
-												backgroundColor="#21243B"
-												dataSet={selectedCardData.lineChartData}
-												xAxesFlatten
-												yAxesPercentage
-												xAxesStepSize={1}
-												yAxesStepSize={25}
-												options={{
-													tooltips: {
-														xPadding: 10,
-														yPadding: 16,
-														cornerRadius: 3,
-														callbacks: {
-															title: function(tooltipItem, data) {
-																const { datasetIndex, index } = tooltipItem[0];
-																if (datasetIndex === 1) {
-																	return `${data.datasets[datasetIndex].data[index]}% of industry is shot in 24fps`;
-																} else {
-																	return `${data.datasets[datasetIndex].data[index]}% of frames is shot in 24fps`;
-																}
-															},
-															label: function(tooltipItem, data) {
-																return null
-															}
-														}
-													}
-												}}
-											/>
-										)}
-									</div>
-								</div>
+                  <div className="mt-48 mb-48">
+                    {selectedCardData && (
+                      <LineChart
+                        width={1090}
+                        height={292}
+                        backgroundColor="#21243B"
+                        dataSet={selectedCardData.lineChartData}
+                        xAxesFlatten
+                        yAxesPercentage
+                        xAxesStepSize={1}
+                        yAxesStepSize={25}
+                        options={{
+                          tooltips: {
+                            xPadding: 10,
+                            yPadding: 16,
+                            cornerRadius: 3,
+                            callbacks: {
+                              title: function(tooltipItem, data) {
+                                const { datasetIndex, index } = tooltipItem[0];
+                                if (datasetIndex === 1) {
+                                  return `${data.datasets[datasetIndex].data[index]}% of industry is shot in 24fps`;
+                                } else {
+                                  return `${data.datasets[datasetIndex].data[index]}% of frames is shot in 24fps`;
+                                }
+                              },
+                              label: function(tooltipItem, data) {
+                                return null
+                              }
+                            }
+                          }
+                        }}
+                      />
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           ) : (

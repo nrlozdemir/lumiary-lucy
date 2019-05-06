@@ -64,15 +64,15 @@ class ChangeOverTime extends React.Component {
         {data && data.datasets && (
           <div className={style.audienceContainer}>
             <LineChart
-							width={1162}
-							height={292}
+              width={1162}
+              height={292}
               backgroundColor="#21243B"
               dataSet={data}
-							xAxesFlatten
-							yAxesAbbreviate
-							customTooltipText="Likes"
-							yAxesStepSize={250000}
-							yAxesMax={1000000}
+              xAxesFlatten
+              yAxesAbbreviate
+              customTooltipText="Likes"
+              yAxesStepSize={250000}
+              yAxesMax={1000000}
             />
           </div>
         )}

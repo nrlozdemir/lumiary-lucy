@@ -49,33 +49,33 @@ class ContentVitalityScore extends React.Component {
           <div className="w-100">
             <div data-vertical-title="Number Of Videos" className={chartStyle.vitalityContainer}>
               <LineChart
-								chartType="lineStackedArea"
+                chartType="lineStackedArea"
                 width={1140}
-								height={291}
+                height={291}
                 backgroundColor="#21243B"
-								dataSet={data}
-								removeTooltip
-								removePointRadius
-								xAxesFlatten
-								flattenFirstSpace={1}
-								flattenLastSpace={5}
-								options={{
-									scales:{
-										yAxes: [{
-											ticks: {
-												callback: function(value, index, values) {
-													if(value === 0) {
-														return value + ' '
-													} else if(value === 250) {
-														return value
-													} else {
-														return ''
-													}
-												}
-											}
-										}]
-									}
-								}}
+                dataSet={data}
+                removeTooltip
+                removePointRadius
+                xAxesFlatten
+                flattenFirstSpace={1}
+                flattenLastSpace={5}
+                options={{
+                  scales:{
+                    yAxes: [{
+                      ticks: {
+                        callback: function(value, index, values) {
+                          if(value === 0) {
+                            return value + ' '
+                          } else if(value === 250) {
+                            return value
+                          } else {
+                            return ''
+                          }
+                        }
+                      }
+                    }]
+                  }
+                }}
               />
             </div>
             <div className="row">

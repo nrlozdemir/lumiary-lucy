@@ -1,18 +1,18 @@
 export const lineStackedAreaOptions = [
   {
-		fill: true,
-		borderColor: "transparent",
-		backgroundColor: "rgba(220, 118, 149, 0.6)"
+    fill: true,
+    borderColor: "transparent",
+    backgroundColor: "rgba(220, 118, 149, 0.6)"
   },
   {
-		fill: true,
-		borderColor: "transparent",
-		backgroundColor: "rgba(163, 137, 255, 0.6)"
+    fill: true,
+    borderColor: "transparent",
+    backgroundColor: "rgba(163, 137, 255, 0.6)"
   },
   {
-		fill: true,
-		borderColor: "transparent",
-		backgroundColor: "rgba(126, 206, 218, 0.6)"
+    fill: true,
+    borderColor: "transparent",
+    backgroundColor: "rgba(126, 206, 218, 0.6)"
   }
 ]
 
