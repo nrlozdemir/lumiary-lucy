@@ -54,14 +54,16 @@ const SingleVideoCard = ({ video, options = options || {}, muted = true }) => {
           </div>
         )}
       </div>
-      {options.footer && <div className={style.cardBody}>
-        <div className={style.bodyHeader}>
-          <span className={style.title}>{video.title}</span>
-          <span className={style.iconWrapper}>
-            <i className={iconClass} />
-          </span>
+      {options.footer && (
+        <div className={style.cardBody}>
+          <div className={style.bodyHeader}>
+            <span className={style.title}>{video.title}</span>
+            <span className={style.iconWrapper}>
+              <i className={iconClass} />
+            </span>
+          </div>
         </div>
-      </div>}
+      )}
     </div>
   )
 }

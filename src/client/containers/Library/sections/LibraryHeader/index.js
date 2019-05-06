@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
-import { bindActionCreators, compose } from "redux"
-import { createStructuredSelector } from "reselect";
+import { bindActionCreators, compose } from 'redux'
+import { createStructuredSelector } from 'reselect'
 import { actions, makeSelectLibrary } from 'Reducers/library'
 import AsyncSearch from 'Components/Form/AsyncSearch'
 import Button from 'Components/Form/Button'
@@ -13,7 +13,7 @@ class LibraryHeader extends React.Component {
     super(props)
 
     this.state = {
-      AsyncSearchValue: "",
+      AsyncSearchValue: '',
       videos: this.props.library.vidoes,
     }
   }
@@ -21,7 +21,7 @@ class LibraryHeader extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.library.videos !== this.props.library.videos) {
       this.setState({
-        videos: this.props.library.videos
+        videos: this.props.library.videos,
       })
     }
   }
@@ -46,16 +46,20 @@ class LibraryHeader extends React.Component {
       ...filters,
       Search: {
         value: option ? option.label : option,
-        new: option ? option.__isNew__ || false : false
-      }
+        new: option ? option.__isNew__ || false : false,
+      },
     })
     this.setState({
-      AsyncSearchValue: option
+      AsyncSearchValue: option,
     })
   }
 
   render() {
-    const { setSidebarVisible, changeFilter, library: { filters, videos } } = this.props
+    const {
+      setSidebarVisible,
+      changeFilter,
+      library: { filters, videos },
+    } = this.props
     const { AsyncSearchValue } = this.state
 
     return (
@@ -67,13 +71,13 @@ class LibraryHeader extends React.Component {
             placeholder="Search a video…"
             customClass={style.filterSelect}
             value={AsyncSearchValue}
-            onChange={(option) => this.onChangeSearch(option, changeFilter, filters)}
+            onChange={(option) =>
+              this.onChangeSearch(option, changeFilter, filters)
+            }
           />
         </div>
         <div>
-          <h1 className="alpha color-white text-center font-primary text-bold">
-            Library
-          </h1>
+          <h1 className="alpha text-center font-primary text-bold">Library</h1>
         </div>
         <div>
           <Button
@@ -89,8 +93,8 @@ class LibraryHeader extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  library: makeSelectLibrary()
-});
+  library: makeSelectLibrary(),
+})
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 

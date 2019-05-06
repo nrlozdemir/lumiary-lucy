@@ -28,7 +28,7 @@ export const barDataOptions = {
           drawBorder: true,
           drawTicks: true,
           offsetGridLines: true,
-          zeroLineColor: '#545B79',
+          zeroLineColor: 'red',
         },
       },
     ],

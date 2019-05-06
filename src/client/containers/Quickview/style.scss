@@ -1,10 +1,8 @@
-
-
 .navigation {
   display: flex;
   align-items: center;
   height: 56px;
-  color: $color-white;
+  // color: $color-white;
   font-family: $font-family-ClanOT;
   font-size: 14px;
   margin-left: 20px;
@@ -47,7 +45,7 @@
       cursor: pointer;
       min-height: 56px;
       min-width: 164px;
-      color: $color-cool-grey;
+      // color: $color-cool-grey;
       font-family: $font-family-ClanOT;
       text-align: center;
       text-decoration: none;
@@ -61,12 +59,13 @@
       align-items: center;
       justify-content: center;
 
-      &:hover, &:active{
+      &:hover,
+      &:active {
         color: $color-white;
         background-color: $color-dusk;
       }
 
-      i{
+      i {
         font-size: 30px;
       }
     }
@@ -78,7 +77,7 @@
   }
 }
 
-.cardWrapper{
+.cardWrapper {
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.4);
   background-color: $color-dark-grey-blue;
   margin: 0px 20px 72px;
@@ -98,7 +97,8 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
     border-radius: 50px;
     font-size: 14px;
-    padding: 8px 24px;
+    padding: 10px 24px;
+    line-height: 14px;
   }
 }
 
@@ -106,15 +106,15 @@
   float: left;
   width: 100%;
 
-  .cardBlock{
+  .cardBlock {
     padding-left: 0px;
     margin-left: 0px;
 
-    &:first-child{
+    &:first-child {
       padding-left: 60px;
       width: calc(50% - 61px); // itemWrapper:first-child border-right is 1px
 
-      .video{
+      .video {
         margin-right: 60px;
       }
 
@@ -122,9 +122,9 @@
         margin-right: 30px;
       }
 
-      .itemWrapper{
-        &:after{
-          content: "";
+      .itemWrapper {
+        &:after {
+          content: '';
           position: absolute;
           right: 0px;
           top: 25%;
@@ -134,11 +134,11 @@
         }
       }
     }
-    &:last-child{
+    &:last-child {
       padding-right: 60px;
       width: calc(50% - 60px);
 
-      .video{
+      .video {
         margin-left: 0px;
       }
 
@@ -152,8 +152,8 @@
     position: relative;
     padding: 64px 0px 0px;
 
-    h1{
-      color: $color-white;
+    h1 {
+      // color: $color-white;
       font-family: $font-family-ClanOT;
       font-size: 18px;
       font-weight: bold;
@@ -164,7 +164,7 @@
       margin: 0px 60px 48px 0px;
       text-align: center;
 
-      i{
+      i {
         margin-left: 8px;
         font-size: 20px;
       }
@@ -179,7 +179,7 @@
   .items {
     padding: 40px 0px 0px;
 
-    .itemWrapper{
+    .itemWrapper {
       padding: 72px 0px;
       width: 100%;
       border-bottom: 1px solid $color-dusk;
@@ -188,7 +188,7 @@
       align-items: center;
       justify-content: center;
 
-      &:last-child{
+      &:last-child {
         border-bottom: none;
       }
     }
@@ -202,9 +202,9 @@
       align-items: center;
       justify-content: center;
 
-      .itemValue{
+      .itemValue {
         margin: 32px 0px 38px;
-        color: $color-white;
+        // color: $color-white;
         font-family: $font-family-primary;
         font-size: 32px;
         font-weight: 800;
@@ -214,10 +214,10 @@
         letter-spacing: normal;
       }
 
-      .infoText{
+      .infoText {
         margin: 32px 0px 0px 0px;
         font-family: $font-family-ClanOTNews;
-        color: $color-white;
+        // color: $color-white;
         font-size: 14px;
         line-height: 1.86;
         font-weight: bold;
@@ -242,8 +242,8 @@
         border-radius: 10px;
         height: 10px;
         background-color: $color-cool-blue;
-        -webkit-transition: width .5s, height .5s;
-        transition: width .5s, height .5s;
+        -webkit-transition: width 0.5s, height 0.5s;
+        transition: width 0.5s, height 0.5s;
       }
 
       .percentagePink {
@@ -252,7 +252,7 @@
 
       .progressText {
         width: 250px;
-        color: $color-white;
+        // color: $color-white;
         font-size: 14px;
         font-family: $font-family-ClanOTNews;
         margin-bottom: 4px;
@@ -262,7 +262,7 @@
         }
 
         &::after {
-          content: "";
+          content: '';
           clear: both;
           display: table;
         }
@@ -285,7 +285,7 @@
         }
 
         &:nth-child(2) {
-          color: $color-white;
+          // color: $color-white;
           font-size: 32px;
           font-family: $font-family-primary;
         }
@@ -307,7 +307,7 @@
     height: 100px;
     border-radius: 50%;
     background-color: $color-dark-five;
-    color: $color-white;
+    // color: $color-white;
     font-size: 12px;
     font-family: $font-family-ClanOTNews;
 
@@ -319,7 +319,7 @@
   }
 }
 
-.assetContainer{
+.assetContainer {
   &.right {
     margin-left: 30px;
   }

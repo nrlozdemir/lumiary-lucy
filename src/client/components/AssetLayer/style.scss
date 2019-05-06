@@ -1,6 +1,3 @@
-
-
-
 %absolute {
   position: absolute;
   top: 0;
@@ -9,7 +6,7 @@
   height: 100%;
 }
 
-.container{
+.container {
   position: relative;
   width: 100%;
   height: 472px;
@@ -18,39 +15,39 @@
   border: 1px solid $color-dusk;
   box-sizing: border-box;
 
-  &.noBorder{
+  &.noBorder {
     border: none;
   }
 
-  .content{
+  .content {
     .video {
       @extend %absolute;
       height: 472px;
       background: black;
     }
   }
-  .barOpacity{
+  .barOpacity {
     position: absolute;
     bottom: -1px;
     left: -1px;
     right: -1px;
     height: 52px;
     background-color: $color-dark-grey-blue;
-    opacity: .8;
+    opacity: 0.8;
     z-index: 11;
     padding: 0 24px;
 
-    &>div{
+    & > div {
       position: absolute;
       right: 24px;
       top: 15px;
       font-family: $font-family-ClanOT;
       font-weight: bold;
-      color: #ffffff;
+      // color: #ffffff;
       font-size: 12px;
     }
   }
-  .bar{
+  .bar {
     position: absolute;
     bottom: -1px;
     left: -1px;
@@ -64,20 +61,20 @@
     padding: 0 24px;
     font-family: $font-family-ClanOT;
     font-weight: bold;
-    color: #ffffff;
+    // color: #ffffff;
     font-size: 14px;
 
-    .barTitle{
+    .barTitle {
       display: flex;
       align-items: center;
       justify-content: flex-start;
     }
 
-    .barChart{
-      float:right;
+    .barChart {
+      float: right;
     }
 
-    .centerText{
+    .centerText {
       font-family: $font-family-ClanOTNews;
       font-size: 14px;
       font-weight: normal;
@@ -86,7 +83,7 @@
       line-height: normal;
       letter-spacing: normal;
       text-align: right;
-      color: $color-white;
+      // color: $color-white;
       width: calc(100% - 48px);
       text-align: center;
       position: absolute;
@@ -102,7 +99,7 @@
 .barChartInfo {
   background-color: transparent;
   border: none;
-  color: $color-white;
+  // color: $color-white;
   display: flex;
   align-items: center;
   justify-content: center;

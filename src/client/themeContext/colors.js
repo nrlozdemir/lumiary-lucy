@@ -33,6 +33,12 @@ const dark = {
   chartStadiumBarBorder: '#545b79',
   chartStadiumCenterBackground: '#373f5b',
   // chart values
+
+  // tabs values
+  tabBackground: '#21243b',
+  tabActiveBackground: '#545b79',
+  tabBorder: '#545b79',
+  // tabs values
 }
 
 const light = {
@@ -70,6 +76,12 @@ const light = {
   chartStadiumBarBorder: '#c6c9d7',
   chartStadiumCenterBackground: '#f3f6f9',
   // chart values
+
+  // tabs values
+  tabBackground: '#e8ecf0',
+  tabActiveBackground: '#ffffff',
+  tabBorder: '#c6c9d7',
+  // tabs values
 }
 
 const themes = {
