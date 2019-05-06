@@ -2,9 +2,20 @@ export const lineChartOptions = {
   plugins: {
     datalabels: false,
   },
+  responsive: true,
+  chartArea: {
+    backgroundColor: '#21243c',
+  },
+  legend: {
+    display: false,
+  },
+
+  events: ['click'],
   tooltips: {
+    intersect: false,
     enabled: false,
   },
+
   scales: {
     xAxes: [
       {
@@ -12,7 +23,6 @@ export const lineChartOptions = {
           display: true,
           color: '#373f5b',
           offsetGridLines: false,
-
           lineWidth: 0.7,
           drawBorder: false,
           drawTicks: false,
@@ -20,6 +30,7 @@ export const lineChartOptions = {
         barPercentage: 0.05,
 
         ticks: {
+          display: true,
           fontColor: '#fff',
           fontSize: 12,
           stepSize: 1,
@@ -46,7 +57,7 @@ export const lineChartOptions = {
           fontSize: 12,
           stepSize: 25,
           beginAtZero: true,
-          padding: -35,
+          padding: 15,
 
           callback: function(value, index, values) {
             if (value === 0 || value === 100) {
@@ -168,7 +179,6 @@ export const lineChartData_DatasetOptions = [
   {
     fill: false,
     label: 'Dataset 6',
-
     type: 'line',
     lineTension: 0.1,
     borderColor: '#545b79',
@@ -190,12 +200,5 @@ export const lineChartData_DatasetOptions = [
     shadowOffsetY: 1,
     shadowBlur: 5,
     shadowColor: '#545b79',
-  },
-  {
-    type: 'bar',
-    label: 'Dataset 2',
-    backgroundColor: '#fff',
-    borderColor: 'white',
-    borderWidth: 2,
   },
 ]

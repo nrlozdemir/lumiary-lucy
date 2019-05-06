@@ -5,7 +5,7 @@ import style from './style.scss'
 import PercentageBarGraph from '../../Charts/PercentageBarGraph'
 import LineChart from '../../LineChart/Chart'
 import DoughnutChart from '../../Charts/DoughnutChart'
-import { Bar } from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2'
 
 class LineAndDoughnutChartModule extends React.Component {
   render() {
@@ -17,6 +17,7 @@ class LineAndDoughnutChartModule extends React.Component {
       lineChartData,
       lineChartOptions,
       filters,
+      customCallbackFunc,
     } = this.props
     const plugins = [
       {
@@ -31,11 +32,31 @@ class LineAndDoughnutChartModule extends React.Component {
             ctx.save()
             ctx.fillStyle = chart.config.options.chartArea.backgroundColor
             ctx.fillRect(
-              chartArea.left + 56,
+              chartArea.left,
               chartArea.top,
-              chartArea.right - chartArea.left - 112,
+              chartArea.right - chartArea.left,
               chartArea.bottom - chartArea.top
             )
+            ctx.restore()
+          }
+        },
+        beforeDatasetsDraw: function(chart) {
+          if (chart.tooltip._active && chart.tooltip._active.length) {
+            var activePoint = chart.tooltip._active[0],
+              ctx = chart.ctx,
+              x = activePoint.tooltipPosition().x,
+              topY = chart.scales['y-axis-0'].top,
+              bottomY = chart.scales['y-axis-0'].bottom
+            // chart.config.options.customCallbackFunc()
+            // draw line
+            console.log(activePoint)
+            ctx.save()
+            ctx.beginPath()
+            ctx.moveTo(x, topY)
+            ctx.lineTo(x, bottomY)
+            ctx.lineWidth = 5
+            ctx.strokeStyle = '#fff'
+            ctx.stroke()
             ctx.restore()
           }
         },
@@ -51,20 +72,14 @@ class LineAndDoughnutChartModule extends React.Component {
         <div className="grid-collapse">
           <div className="col-12-no-gutters">
             <div className="col-8-no-gutters">
-              <Bar
+              <Line
                 data={lineChartData}
-                width={800}
+                width={760}
                 height={291}
                 plugins={plugins}
                 options={{
-                  responsive: false,
-                  chartArea: {
-                    backgroundColor: '#21243c',
-                  },
-                  legend: {
-                    display: false,
-                  },
                   ...lineChartOptions,
+                  customCallbackFunc: customCallbackFunc,
                 }}
               />
             </div>

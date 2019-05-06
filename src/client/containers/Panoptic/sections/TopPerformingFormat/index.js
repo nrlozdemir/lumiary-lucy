@@ -14,6 +14,8 @@ class TopPerformingFormat extends React.Component {
     this.props.getAudienceDominantColorData(data)
   }
 
+  customCallbackFunc = () => console.log('oldu')
+
   combineChartData = (lineData) => {
     return chartCombineDataset(lineData, lineChartData_DatasetOptions, {
       beforeDraw: function(chart, easing) {
@@ -55,7 +57,6 @@ class TopPerformingFormat extends React.Component {
         { data: [30, 35, 50, 45, 40, 42, 48] },
         { data: [55, 60, 61, 65, 60, 62, 67] },
         { data: [82, 85, 78, 75, 80, 85, 90] },
-        { data: [0, 0, 0, 0, 100, 0, 0] },
       ],
     }
 
@@ -66,6 +67,7 @@ class TopPerformingFormat extends React.Component {
         action={() => {}}
         lineChartData={this.combineChartData(lineData)}
         lineChartOptions={lineChartOptions}
+        customCallbackFunc={this.customCallbackFunc}
         filters={[
           {
             type: 'platform',
