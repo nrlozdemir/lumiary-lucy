@@ -37,9 +37,11 @@ class LineChart extends React.PureComponent {
         },
       },
     ]
+    console.log(dataSet)
     return (
       <div className={style.lineChartWrapper}>
         <Line
+          type="bar"
           data={dataSet || data}
           width={width}
           height={height}
