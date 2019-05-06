@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import classnames from 'classnames'
-import PropTypes from 'prop-types'
-import style from './styles.scss'
-
+//import classnames from 'classnames'
+//import style from './styles.scss'
 import Slider from 'rc-slider'
 
 const RangeSlider = Slider.Range
@@ -26,14 +23,14 @@ const defaultHandleStyle = [
 const defaultTrackStyle = [
   {
     height: '16px',
-    backgroundColor: '#51adc0',
+    backgroundColor: '#2FD7C4',
   },
 ]
 
 const defaultRailStyle = {
   height: '16px',
   borderRadius: '8px',
-  backgroundColor: '#242b49',
+  backgroundColor: '#21243B',
 }
 
 class Range extends Component {

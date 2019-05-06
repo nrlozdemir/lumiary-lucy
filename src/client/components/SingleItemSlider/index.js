@@ -1,18 +1,10 @@
-/**
- *
- * SingleItemSlider
- *
- */
-
 import React from "react";
 import cn from "classnames";
 import Slider from "react-slick";
 import ScrollSlider from "rc-slider";
 import style from "./style.scss";
-// import PropTypes from 'prop-types';
 
 /* eslint-disable react/prefer-stateless-function */
-
 class SingleItemSlider extends React.Component {
 	constructor(props) {
 		super(props);
@@ -97,7 +89,7 @@ class SingleItemSlider extends React.Component {
 						railStyle={{
 							height: "5px",
 							borderRadius: "10px",
-							backgroundColor: "#242b49"
+							backgroundColor: "#21243B"
 						}}
 						dotStyle={{
 							width: "0px",

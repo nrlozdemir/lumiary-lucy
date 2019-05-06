@@ -1,14 +1,11 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectReportsColorComparison } from 'Reducers/reports'
-
-import classnames from 'classnames'
-import style from './style.scss'
-
+//import classnames from 'classnames'
 import RadarChartModule from 'Components/Modules/RadarChartModule'
+//import style from './style.scss'
 
 class ColorComparison extends React.Component {
   callBack = (data, moduleKey) => {
@@ -18,11 +15,10 @@ class ColorComparison extends React.Component {
     const {
       colorComparisonData: { data, loading, error },
     } = this.props
-    console.log('data', data)
     return (
       <RadarChartModule
-        leftTitle={data && data[0].type}
-        rightTitle={data && data[1].type}
+        leftTitle={data && data.length > 0 && data[0].type}
+        rightTitle={data && data.length > 0 && data[1].type}
         data={data}
         moduleKey={'Reports/ColorComparison'}
         title="Video Library Color Comparison"

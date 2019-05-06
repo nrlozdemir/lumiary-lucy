@@ -18,7 +18,7 @@ export const lineChartOptions = {
     xAxes: [{
       gridLines: {
         display: true,
-        color: '#5a6386',
+        color: '#545B79',
         lineWidth: 0.7,
         drawBorder: false,
 				beginAtZero: true,
@@ -42,7 +42,7 @@ export const lineChartOptions = {
     yAxes: [{
       gridLines: {
         display: true,
-        color: '#5a6386',
+        color: '#545B79',
         lineWidth: 0.7,
         drawBorder: false,
         drawTicks: false

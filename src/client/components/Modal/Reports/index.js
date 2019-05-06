@@ -16,7 +16,7 @@ const ReportsModal = ({
 }) => {
   const customStyles = {
     content: {
-      backgroundColor: '#303a5d',
+      backgroundColor: '#373F5B',
       maxWidth: width,
     },
     overlay: {

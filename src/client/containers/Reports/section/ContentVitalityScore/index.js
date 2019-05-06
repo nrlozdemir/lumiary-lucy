@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
@@ -7,14 +6,11 @@ import {
   actions,
   makeSelectReportsContentVitalityScore,
 } from 'Reducers/reports'
-
-import chartStyle from './style.scss'
+import Module from 'Components/Module'
 import LineChart from 'Components/LineChart/Chart'
-
 import { lineChartOptions, lineChartData_DatasetOptions } from './options'
 import { chartCombineDataset } from 'Utils'
-
-import Module from 'Components/Module'
+import chartStyle from './style.scss'
 
 function combineChartData(chartData) {
   return chartCombineDataset(chartData, lineChartData_DatasetOptions, {
@@ -75,7 +71,7 @@ class ContentVitalityScore extends React.Component {
             className={chartStyle.vitalityContainer}
           >
             <LineChart
-              backgroundColor="#242b49"
+              backgroundColor="#21243B"
               dataSet={() => combineChartData(data)}
               width={1070}
               height={291}

@@ -1,19 +1,13 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { compose } from 'redux'
-
 import { chartCombineDataset } from 'Utils'
-import style from './style.scss'
-import {
-  selectOptions,
-  lineChartOptions,
-  lineChartData_DatasetOptions,
-} from './options'
-
+import { lineChartOptions, lineChartData_DatasetOptions } from './options'
 import SelectFilters from 'Components/SelectFilters'
 import LineChart from 'Components/LineChart/Chart'
 import PointerCard from 'Components/PointerCard'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
+import style from './style.scss'
 
 class LibraryDetailDoughnutChart extends React.Component {
   constructor(props) {
@@ -101,18 +95,18 @@ class LibraryDetailDoughnutChart extends React.Component {
                         datasets: [
                           {
                             data: [...chart.average],
-                            borderColor: '#303a5d',
+                            borderColor: '#373F5B',
                             backgroundColor: [
                               '#ffffff',
                               '#ffffff',
                               '#ffffff',
-                              '#51adc0',
+                              '#2FD7C4',
                             ],
                             hoverBackgroundColor: [
                               '#ffffff',
                               '#ffffff',
                               '#ffffff',
-                              '#51adc0',
+                              '#2FD7C4',
                             ],
                           },
                         ],
@@ -190,18 +184,18 @@ class LibraryDetailDoughnutChart extends React.Component {
                           datasets: [
                             {
                               data: [...selectedCardData.libraryData],
-                              borderColor: '#303a5d',
+                              borderColor: '#373F5B',
                               backgroundColor: [
                                 '#ffffff',
                                 '#ffffff',
                                 '#ffffff',
-                                '#51adc0',
+                                '#2FD7C4',
                               ],
                               hoverBackgroundColor: [
                                 '#ffffff',
                                 '#ffffff',
                                 '#ffffff',
-                                '#51adc0',
+                                '#2FD7C4',
                               ],
                             },
                           ],
@@ -239,7 +233,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                     <div className={style.doughnutChartContainer}>
                       <DoughnutChart
                         doughnutData={selectedCardData.industryData}
-                        color="#8567f0"
+                        color="#8562F3"
                         width={180}
                         height={180}
                         displayDataLabels={false}
@@ -249,18 +243,18 @@ class LibraryDetailDoughnutChart extends React.Component {
                           datasets: [
                             {
                               data: [...selectedCardData.libraryData],
-                              borderColor: '#303a5d',
+                              borderColor: '#373F5B',
                               backgroundColor: [
                                 '#ffffff',
                                 '#ffffff',
                                 '#ffffff',
-                                '#51adc0',
+                                '#2FD7C4',
                               ],
                               hoverBackgroundColor: [
                                 '#ffffff',
                                 '#ffffff',
                                 '#ffffff',
-                                '#51adc0',
+                                '#2FD7C4',
                               ],
                             },
                           ],
@@ -283,7 +277,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                 <div className="w-100 mt-48 mb-48">
                   {selectedCardData && (
                     <LineChart
-                      backgroundColor="#242b49"
+                      backgroundColor="#21243B"
                       dataSet={() =>
                         this.combineChartData(selectedCardData.lineChartData)
                       }

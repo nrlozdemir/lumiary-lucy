@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
@@ -7,16 +6,15 @@ import {
   actions,
   makeSelectReportsPerformanceComparison,
 } from 'Reducers/reports'
-
-import cx from 'classnames'
-import style from './style.scss'
-
-import ComparisonHorizontalBarChart from 'Components/ComparisonHorizontalBarChart'
-import 'chartjs-plugin-datalabels'
-import { Bar, Doughnut } from 'react-chartjs-2'
-import { doughnutOptions, stackedChartOptions } from './options'
-import { randomKey } from 'Utils/index'
+//import cx from 'classnames'
+//import ComparisonHorizontalBarChart from 'Components/ComparisonHorizontalBarChart'
 import Module from 'Components/Module'
+import { Bar } from 'react-chartjs-2'
+import DoughnutChart from 'Components/Charts/DoughnutChart'
+import 'chartjs-plugin-datalabels'
+import { stackedChartOptions } from './options'
+import { randomKey } from 'Utils/index'
+import style from './style.scss'
 
 const barPlugins = [
   {
@@ -139,12 +137,14 @@ class PerformanceComparison extends React.Component {
           )}
           {data && data.doughnutData && (
             <div className={style.chartContainer}>
-              <Doughnut
-                options={doughnutOptions}
+              <DoughnutChart
                 width={280}
                 height={280}
                 data={data.doughnutData}
-                plugins={plugins}
+                cutoutPercentage={58}
+                fillText="Total Percentage"
+                dataLabelFunction="insertAfter"
+                dataLabelInsert="%"
               />
             </div>
           )}

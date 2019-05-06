@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
+//import PropTypes from "prop-types";
 import moment from "moment";
 import { DateRange, Calendar } from "react-date-range";
 import classnames from "classnames";
-
 import style from "./style.scss";
 
 class Datepicker extends React.Component {

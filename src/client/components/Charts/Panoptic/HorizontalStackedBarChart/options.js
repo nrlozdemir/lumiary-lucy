@@ -6,7 +6,7 @@ export const barChartOptions = {
     datalabels: false,
   },
   chartArea: {
-    backgroundColor: '#242b49',
+    backgroundColor: '#21243B',
   },
   scales: {
     yAxes: [
@@ -14,8 +14,8 @@ export const barChartOptions = {
         display: true,
         gridLines: {
           display: false,
-          color: '#5a6386',
-          zeroLineColor: '#5a6386',
+          color: '#545B79',
+          zeroLineColor: '#545B79',
           drawTicks: false,
         },
         ticks: {
@@ -33,8 +33,8 @@ export const barChartOptions = {
         display: true,
         gridLines: {
           display: true,
-          color: '#5a6386',
-          zeroLineColor: '#5a6386',
+          color: '#545B79',
+          zeroLineColor: '#545B79',
           drawTicks: false,
         },
         ticks: {

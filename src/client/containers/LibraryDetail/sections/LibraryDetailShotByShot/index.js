@@ -2,12 +2,10 @@ import React from 'react'
 import cn from 'classnames'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import Slider from 'rc-slider'
-
-import style from './style.scss'
-
 import SingleItemSlider from 'Components/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
 import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
+import style from './style.scss'
 
 class LibraryDetailShotByShot extends React.Component {
   constructor(props) {
@@ -555,7 +553,7 @@ class LibraryDetailShotByShot extends React.Component {
                   railStyle={{
                     height: '16px',
                     borderRadius: '10px',
-                    backgroundColor: '#242b49',
+                    backgroundColor: '#21243B',
                   }}
                   dotStyle={{
                     width: '0px',

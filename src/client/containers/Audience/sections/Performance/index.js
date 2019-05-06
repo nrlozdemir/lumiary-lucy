@@ -1,19 +1,16 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudiencePerformance } from 'Reducers/panoptic'
-
+import Module from 'Components/Module'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
 import RangeWithBadge from 'Components/Form/RangeWithBadge'
-import SelectFilters from 'Components/SelectFilters'
-import style from 'Containers/Audience/style.scss'
 import classnames from 'classnames'
 import { socialIconSelector } from 'Utils'
 import _ from 'lodash'
+import style from 'Containers/Audience/style.scss'
 
-import Module from 'Components/Module'
 
 class Performance extends React.Component {
   constructor(props) {
@@ -85,7 +82,7 @@ class Performance extends React.Component {
     const railStyle = {
       height: '16px',
       borderRadius: '8px',
-      backgroundColor: '#242b49',
+      backgroundColor: '#21243B',
     }
 
     const dotStyle = {
@@ -135,8 +132,8 @@ class Performance extends React.Component {
                       <Bubble
                         key={'bubble-' + i}
                         radius={(parseInt(bubble.toolTip) / 100) * 0.0015 + 10}
-                        fill="#242b49"
-                        stroke="#d0506c"
+                        fill="#21243B"
+                        stroke="#5292E5"
                       >
                         <Visual>
                           <span
@@ -174,8 +171,8 @@ class Performance extends React.Component {
                       <Bubble
                         key={'bubble-' + i}
                         radius={(parseInt(bubble.toolTip) / 100) * 0.0015 + 10}
-                        fill="#242b49"
-                        stroke="#51adc0"
+                        fill="#21243B"
+                        stroke="#2FD7C4"
                       >
                         <Visual>
                           <span
@@ -213,8 +210,8 @@ class Performance extends React.Component {
                       <Bubble
                         key={'bubble-' + i}
                         radius={(parseInt(bubble.toolTip) / 100) * 0.0015 + 10}
-                        fill="#242b49"
-                        stroke="#8567f0"
+                        fill="#21243B"
+                        stroke="#8562F3"
                       >
                         <Visual>
                           <span

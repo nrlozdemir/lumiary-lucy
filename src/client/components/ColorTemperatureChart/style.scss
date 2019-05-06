@@ -1,113 +1,141 @@
 .colWrapper {
-  position: relative;
-  width: 33.33%;
+	position: relative;
+	width: 33.33%;
 
-  > p {
-    font-size: 14px;
-    font-family: $font-family-ClanOTNews;
-    line-height: 26px;
-    margin-top: 50px;
-    text-align: center;
-    padding: 0 50px;
-  }
+	> p {
+		font-size: 14px;
+		font-family: $font-family-ClanOTNews;
+		line-height: 26px;
+		margin-top: 50px;
+		text-align: center;
+		padding: 0 50px;
+	}
 
-  &:first-child .temperatureContentWrapper {
-    border: none;
-  }
+	&:first-child .temperatureContentWrapper {
+		border: none;
+	}
 }
 
 .temperatureContentWrapper {
-  padding: 20px;
-  border-left: 1px solid $color-dusk;
+	position: relative;
+
+	> .chartInfo {
+		font-family: $font-family-ClanOTNews;
+		font-size: 14px;
+		line-height: 1.86;
+		text-align: center;
+		color: $color-white;
+		margin-top: 80px;
+		padding: 0 80px;
+	}
+
+	&:not(:last-child):after {
+		content: '';
+		display: block;
+		position: absolute;
+		width: 1px;
+		height: 204px;
+		right: -10px;
+		top: 0;
+		background-color: $color-dusk;
+	}
 }
 
 .textTop {
-  font-size: 14px;
-  font-family: $font-family-ClanOT;
-  font-weight: bold;
-  position: absolute;
-  top: -40px;
-  left: 50%;
-  transform: translateX(-50%);
-}
-.textRight {
-  font-size: 14px;
-  font-family: $font-family-ClanOTNews;
-  color: $color-cool-grey;
-  position: absolute;
-  top: calc(50% - 14px);
-  right: -50px;
+	font-size: 14px;
+	position: absolute;
+	width: max-content;
+	left: 0;
+	right: 0;
+	margin: auto;
+	font-weight: bold;
+	font-family: $font-family-ClanOT;
+	top: -40px;
 }
 
 .textBottom {
-  font-size: 14px;
-  font-family: $font-family-ClanOTBold;
-  position: absolute;
-  bottom: -40px;
-  left: 50%;
-  transform: translateX(-50%);
+	@extend .textTop;
+	font-family: $font-family-ClanOTBold;
+	top: unset;
+	bottom: -40px;
+}
+
+.textRight {
+	font-size: 14px;
+	color: $color-cool-grey;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	height: max-content;
+	margin: auto;
+	right: -10px;
+	font-family: $font-family-ClanOTNews;
+	transform: translateX(100%);
 }
 
 .textLeft {
-  font-size: 14px;
-  font-family: $font-family-ClanOTNews;
-  color: $color-cool-grey;
-  position: absolute;
-  top: calc(50% - 14px);
-  left: -40px;
+	@extend .textRight;
+	font-family: $font-family-ClanOTNews;
+	left: -10px;
+	right: unset;
+	transform: translateX(-100%);
 }
 
 .horizontalLine {
-  width: 204px;
-  height: 4px;
-  background-color: $color-dark-five;
-  position: absolute;
-  top: calc(50% - 2px);
+	width: 204px;
+	height: 4px;
+	background-color: $color-dark-five;
+	position: absolute;
+	top: calc(50% - 2px);
 }
 
 .verticalLine {
-  width: 4px;
-  height: 204px;
-  background-color: $color-dark-five;
-  position: absolute;
-  top: 0;
-  left: calc(50% - 2px);
+	width: 4px;
+	height: 204px;
+	background-color: $color-dark-five;
+	position: absolute;
+	top: 0;
+	left: calc(50% - 2px);
 }
 
 .temperatureContent {
-  display: block;
-  margin: 0 auto;
-  width: 204px;
-  height: 204px;
-  background-color: $color-dusk;
-  border-radius: 100%;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.5);
-  position: relative;
+	display: block;
+	margin: 0 auto;
+	width: 204px;
+	height: 204px;
+	background-color: $color-dusk;
+	border-radius: 100%;
+	box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.5);
+	position: relative;
 
-  .round {
-    width: 40px;
-    height: 40px;
-    border-radius: 100%;
-    position: absolute;
-    top: calc(50% - 20px);
-    left: calc(50% - 20px);
-    border: 1px solid $color-dark-five;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-    transition: transform 1s ease-in-out;
-  }
+	.round {
+		width: 40px;
+		height: 40px;
+		border-radius: 100%;
+		position: absolute;
+		top: calc(50% - 20px);
+		left: calc(50% - 20px);
+		border: 1px solid $color-dark-five;
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+		transition: transform 1s ease-in-out;
+	}
 }
 
 .borderless {
-  border: none;
+	border: none;
+
+	&:after {
+		opacity: 0;
+	}
 }
 
 .verticalTextLeft {
-  writing-mode: vertical-lr;
-  text-orientation: mixed;
-  transform: rotateZ(180deg);
+	writing-mode: vertical-lr;
+	text-orientation: mixed;
+	transform: rotateZ(180deg) translateX(100%);
 }
 
 .verticalTextRight {
-  writing-mode: vertical-rl;
-  text-orientation: mixed;
+	writing-mode: vertical-rl;
+	text-orientation: mixed;
 }

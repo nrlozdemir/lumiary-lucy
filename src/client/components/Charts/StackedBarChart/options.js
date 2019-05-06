@@ -23,12 +23,12 @@ export const barDataOptions = {
         },
         gridLines: {
           display: false,
-          color: '#5a6386',
+          color: '#545B79',
           lineWidth: 1,
           drawBorder: true,
           drawTicks: true,
           offsetGridLines: true,
-          zeroLineColor: '#5a6386',
+          zeroLineColor: '#545B79',
         },
       },
     ],
@@ -51,7 +51,7 @@ export const barDataOptions = {
         },
         gridLines: {
           display: true,
-          color: '#5a6386',
+          color: '#545B79',
           lineWidth: 1,
           drawBorder: true,
           drawTicks: false,
@@ -60,6 +60,6 @@ export const barDataOptions = {
     ],
   },
   chartArea: {
-    backgroundColor: '#242b49',
+    backgroundColor: '#21243B',
   },
 }

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { NavLink, Route, Switch } from 'react-router-dom'
+import { Route, Switch } from 'react-router-dom'
 import Main from './views/Main'
 import CompareBrand from './views/CompareBrand'
 import ReportGenerated from '../ReportGenerated'

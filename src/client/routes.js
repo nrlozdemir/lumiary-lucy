@@ -31,7 +31,7 @@ const routes = [
     component: 'LibraryDetail',
   },
   {
-    path: '/quickview',
+    path: '/quickview/all-platforms',
     exact: true,
     component: 'Quickview',
     navigation: {
@@ -72,39 +72,7 @@ const routes = [
       level: 1,
       order: 4,
       title: 'Marketview'
-    },
-    routes: [
-      {
-        path: '/marketview/platform',
-        exact: true,
-        component: 'Marketview',
-        navigation: {
-          level: 2,
-          order: 1,
-          title: 'Platform'
-        }
-      },
-      {
-        path: '/marketview/competitor',
-        exact: true,
-        component: 'Marketview',
-        navigation: {
-          level: 2,
-          order: 2,
-          title: 'Competitor'
-        }
-      },
-      {
-        path: '/marketview/time',
-        exact: true,
-        component: 'Marketview',
-        navigation: {
-          level: 2,
-          order: 3,
-          title: 'Time'
-        }
-      }
-    ]
+    }
   },
   {
     path: '/marketview/:detail',

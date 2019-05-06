@@ -45,8 +45,8 @@ const Select = (props) => {
     control: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
-        background: '#242b49',
-        borderColor: isSelected ? '#acb0be' : isFocused ? '#acb0be' : '#5a6386',
+        background: '#21243B',
+        borderColor: isSelected ? '#acb0be' : isFocused ? '#acb0be' : '#545B79',
         borderRadius: '8px',
         borderWidth: '1px',
         boxShadow: 'rgba(0, 0, 0, 0.5)',
@@ -67,11 +67,11 @@ const Select = (props) => {
         height: '40px',
         lineHeight: '27px',
         backgroundColor: isSelected
-          ? '#242b49'
+          ? '#21243B'
           : isFocused
           ? '#ffffff'
-          : '#5a6386',
-        color: isSelected ? '#ffffff' : isFocused ? '#5a6386' : '#ffffff',
+          : '#545B79',
+        color: isSelected ? '#ffffff' : isFocused ? '#545B79' : '#ffffff',
         cursor: 'pointer',
         border: 'none',
       }
@@ -79,7 +79,7 @@ const Select = (props) => {
     placeholder: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
-        color: isFocused ? '#ffffff' : isSelected ? '#ffffff' : '#5a6386',
+        color: isFocused ? '#ffffff' : isSelected ? '#ffffff' : '#545B79',
       }
     },
     singleValue: (styles) => ({

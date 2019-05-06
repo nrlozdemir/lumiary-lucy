@@ -1,45 +1,7 @@
-export const doughnutOptions = {
-  responsive: false,
-  cutoutPercentage: 55,
-  tooltips: {
-    enabled: false,
-  },
-  legend: {
-    display: false,
-  },
-  layout: {
-    padding: 0,
-  },
-  plugins: {
-    datalabels: {
-      formatter: (value, ctx) => {
-        let sum = 0
-        let dataArr = ctx.chart.data.datasets[0].data
-        dataArr.map((data) => {
-          sum += data
-        })
-        let percentage = ((value * 100) / sum).toFixed(0) + '%'
-        return percentage
-      },
-      font: {
-        size: 14,
-        family: 'ClanOTBold',
-      },
-      color: '#fff',
-    },
-  },
-  elements: {
-    arc: {
-      borderWidth: 5,
-      borderColor: '#303a5d',
-    },
-  },
-}
-
 export const stackedChartOptions = {
-  titleFontColor: '#242b49',
-  bodyFontColor: '#242b49',
-  footerFontColor: '#242b49',
+  titleFontColor: '#21243B',
+  bodyFontColor: '#21243B',
+  footerFontColor: '#21243B',
   title: {
     display: true,
   },
@@ -68,7 +30,7 @@ export const stackedChartOptions = {
         },
         gridLines: {
           display: false,
-          color: '#5a6386',
+          color: '#545B79',
           lineWidth: 1,
           drawBorder: true,
           drawTicks: true,
@@ -90,7 +52,7 @@ export const stackedChartOptions = {
         },
         gridLines: {
           display: true,
-          color: '#5a6386',
+          color: '#545B79',
           lineWidth: 1,
           drawBorder: true,
           drawTicks: false,
@@ -99,7 +61,7 @@ export const stackedChartOptions = {
     ],
   },
   chartArea: {
-    backgroundColor: '#242b49',
+    backgroundColor: '#21243B',
   },
   plugins: {
     datalabels: {

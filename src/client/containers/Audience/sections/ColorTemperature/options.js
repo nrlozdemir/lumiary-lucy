@@ -12,10 +12,10 @@ export const selectTwoOptions = [
 ];
 
 export const platforms = [
-  {name: 'Facebook', color: '#51adc0'},
+  {name: 'Facebook', color: '#2FD7C4'},
   {name: 'Instagram', color: '#ff556f'},
-  {name: 'Twitter', color: '#8567f0'},
+  {name: 'Twitter', color: '#8562F3'},
   {name: 'Snapchat', color: '#acb0be'},
   {name: 'Youtube', color: '#ffffff'},
-  {name: 'Pinterest', color: '#242b49'},
+  {name: 'Pinterest', color: '#21243B'},
 ];
