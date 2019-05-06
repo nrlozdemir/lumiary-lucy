@@ -23,57 +23,121 @@
     {
       "src": "https://picsum.photos/500/270?image=1",
       "options": [
-        { "percentage": 40, "accurate": 20, "text": "Male" },
-        { "percentage": 60, "accurate": 60, "text": "Laptop" }
+        {
+          "percentage": 40,
+          "accurate": 20,
+          "text": "Male"
+        },
+        {
+          "percentage": 60,
+          "accurate": 60,
+          "text": "Laptop"
+        }
       ]
     },
     {
       "src": "https://picsum.photos/500/270?image=2",
       "options": [
-        { "percentage": 30, "accurate": 20, "text": "Female" },
-        { "percentage": 50, "accurate": 20, "text": "Cat" }
+        {
+          "percentage": 30,
+          "accurate": 20,
+          "text": "Female"
+        },
+        {
+          "percentage": 50,
+          "accurate": 20,
+          "text": "Cat"
+        }
       ]
     },
     {
       "src": "https://picsum.photos/500/270?image=3",
       "options": [
-        { "percentage": 40, "accurate": 10, "text": "Cart" },
-        { "percentage": 16, "accurate": 30, "text": "Bag" }
+        {
+          "percentage": 40,
+          "accurate": 10,
+          "text": "Cart"
+        },
+        {
+          "percentage": 16,
+          "accurate": 30,
+          "text": "Bag"
+        }
       ]
     },
     {
       "src": "https://picsum.photos/500/270?image=4",
       "options": [
-        { "percentage": 34, "accurate": 68, "text": "Playstation" },
-        { "percentage": 30, "accurate": 20, "text": "Mouse" }
+        {
+          "percentage": 34,
+          "accurate": 68,
+          "text": "Playstation"
+        },
+        {
+          "percentage": 30,
+          "accurate": 20,
+          "text": "Mouse"
+        }
       ]
     },
     {
       "src": "https://picsum.photos/500/270?image=6",
       "options": [
-        { "percentage": 40, "accurate": 53, "text": "Male" },
-        { "percentage": 52, "accurate": 30, "text": "Sheep" }
+        {
+          "percentage": 40,
+          "accurate": 53,
+          "text": "Male"
+        },
+        {
+          "percentage": 52,
+          "accurate": 30,
+          "text": "Sheep"
+        }
       ]
     },
     {
       "src": "https://picsum.photos/500/270?image=5",
       "options": [
-        { "percentage": 42, "accurate": 20, "text": "Phone" },
-        { "percentage": 78, "accurate": 60, "text": "Electronics" }
+        {
+          "percentage": 42,
+          "accurate": 20,
+          "text": "Phone"
+        },
+        {
+          "percentage": 78,
+          "accurate": 60,
+          "text": "Electronics"
+        }
       ]
     },
     {
       "src": "https://picsum.photos/500/270?image=7",
       "options": [
-        { "percentage": 40, "accurate": 30, "text": "Key" },
-        { "percentage": 45, "accurate": 42, "text": "Press" }
+        {
+          "percentage": 40,
+          "accurate": 30,
+          "text": "Key"
+        },
+        {
+          "percentage": 45,
+          "accurate": 42,
+          "text": "Press"
+        }
       ]
     },
     {
       "src": "https://picsum.photos/500/270?image=8",
       "options": [
-        { "percentage": 31, "accurate": 20, "text": "Male" },
-        { "percentage": 76, "accurate": 54, "text": "Laptop" }
+        {
+          "percentage": 31,
+          "accurate": 20,
+          "text": "Male"
+        },
+        {
+          "percentage": 76,
+          "accurate": 54,
+          "text": "Laptop"
+        }
       ]
     }
   ],
@@ -94,10 +158,34 @@
     ],
     "datasets": [
       {
-        "data": [65, 59, 34, 81, 56, 40, 65, 59, 34, 81, 56]
+        "data": [
+          65,
+          59,
+          34,
+          81,
+          56,
+          40,
+          65,
+          59,
+          34,
+          81,
+          56
+        ]
       },
       {
-        "data": [28, 48, 40, 19, 96, 74, 65, 59, 34, 81, 56]
+        "data": [
+          28,
+          48,
+          40,
+          19,
+          96,
+          74,
+          65,
+          59,
+          34,
+          81,
+          56
+        ]
       }
     ]
   },
