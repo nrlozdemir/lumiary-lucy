@@ -17,13 +17,13 @@ export const options = {
     xPadding: 30,
     yPadding: 15,
     callbacks: {
-      title: function (tooltipItem, data) {
+      title: function(tooltipItem, data) {
         if (tooltipItem[0].yLabel < 0) {
           return `${Math.abs(tooltipItem[0].yLabel / 1000)}k Engagement`
         }
         return `${Math.abs(tooltipItem[0].yLabel / 10000)} Videos`
       },
-      label: function () {
+      label: function() {
         return null
       },
     },
@@ -75,9 +75,7 @@ export const wrapperBarOptions = (data) => ({
   plugins: {
     datalabels: false,
   },
-  chartArea: {
-    backgroundColor: '#21243B',
-  },
+
   scales: {
     xAxes: [
       {
@@ -103,7 +101,7 @@ export const wrapperBarOptions = (data) => ({
           display: true,
           stepSize: 50000,
           padding: 15,
-          callback: function (value, index, values) {
+          callback: function(value, index, values) {
             if (value == 0) {
               return 0
             }
@@ -115,5 +113,5 @@ export const wrapperBarOptions = (data) => ({
         },
       },
     ],
-  }
+  },
 })

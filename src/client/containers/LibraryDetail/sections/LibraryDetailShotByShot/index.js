@@ -2,7 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import Slider from 'rc-slider'
-import SingleItemSlider from 'Components/SingleItemSlider'
+import SingleItemSlider from 'Components/Sliders/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
 import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
 import style from './style.scss'
@@ -25,179 +25,180 @@ class LibraryDetailShotByShot extends React.Component {
       },
       scenes: [
         {
-          sceneURL: "https://picsum.photos/238/160?image=76",
-          duration: "00:02:40",
-          sceneSecond: "00:01:10",
+          sceneURL: 'https://picsum.photos/238/160?image=76',
+          duration: '00:02:40',
+          sceneSecond: '00:01:10',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=29",
-          duration: "00:01:00",
+          sceneURL: 'https://picsum.photos/238/160?image=29',
+          duration: '00:01:00',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=71",
-          duration: "00:04:00",
+          sceneURL: 'https://picsum.photos/238/160?image=71',
+          duration: '00:04:00',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=37",
-          duration: "00:03:10",
+          sceneURL: 'https://picsum.photos/238/160?image=37',
+          duration: '00:03:10',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=11",
-          duration: "00:02:10",
+          sceneURL: 'https://picsum.photos/238/160?image=11',
+          duration: '00:02:10',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=89",
-          duration: "00:02:40",
+          sceneURL: 'https://picsum.photos/238/160?image=89',
+          duration: '00:02:40',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=52",
-          duration: "00:01:30",
+          sceneURL: 'https://picsum.photos/238/160?image=52',
+          duration: '00:01:30',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=69",
-          duration: "00:01:10",
+          sceneURL: 'https://picsum.photos/238/160?image=69',
+          duration: '00:01:10',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=28",
-          duration: "00:02:00",
+          sceneURL: 'https://picsum.photos/238/160?image=28',
+          duration: '00:02:00',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=76",
-          duration: "00:01:20",
+          sceneURL: 'https://picsum.photos/238/160?image=76',
+          duration: '00:01:20',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=29",
-          duration: "00:01:00",
+          sceneURL: 'https://picsum.photos/238/160?image=29',
+          duration: '00:01:00',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=71",
-          duration: "00:03:20",
+          sceneURL: 'https://picsum.photos/238/160?image=71',
+          duration: '00:03:20',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=81",
-          duration: "00:02:30",
+          sceneURL: 'https://picsum.photos/238/160?image=81',
+          duration: '00:02:30',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=9",
-          duration: "00:03:20",
+          sceneURL: 'https://picsum.photos/238/160?image=9',
+          duration: '00:03:20',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=89",
-          duration: "00:03:20",
+          sceneURL: 'https://picsum.photos/238/160?image=89',
+          duration: '00:03:20',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=43",
-          duration: "00:02:20",
+          sceneURL: 'https://picsum.photos/238/160?image=43',
+          duration: '00:02:20',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=35",
-          duration: "00:02:40",
+          sceneURL: 'https://picsum.photos/238/160?image=35',
+          duration: '00:02:40',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=41",
-          duration: "00:01:30",
+          sceneURL: 'https://picsum.photos/238/160?image=41',
+          duration: '00:01:30',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=47",
-          duration: "00:02:10",
+          sceneURL: 'https://picsum.photos/238/160?image=47',
+          duration: '00:02:10',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=151",
-          duration: "00:03:00",
+          sceneURL: 'https://picsum.photos/238/160?image=151',
+          duration: '00:03:00',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=76",
-          duration: "00:02:40",
+          sceneURL: 'https://picsum.photos/238/160?image=76',
+          duration: '00:02:40',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=29",
-          duration: "00:01:00",
+          sceneURL: 'https://picsum.photos/238/160?image=29',
+          duration: '00:01:00',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=71",
-          duration: "00:04:00",
+          sceneURL: 'https://picsum.photos/238/160?image=71',
+          duration: '00:04:00',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=37",
-          duration: "00:03:10",
+          sceneURL: 'https://picsum.photos/238/160?image=37',
+          duration: '00:03:10',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=11",
-          duration: "00:02:10",
+          sceneURL: 'https://picsum.photos/238/160?image=11',
+          duration: '00:02:10',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=89",
-          duration: "00:02:40",
+          sceneURL: 'https://picsum.photos/238/160?image=89',
+          duration: '00:02:40',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=52",
-          duration: "00:01:30",
+          sceneURL: 'https://picsum.photos/238/160?image=52',
+          duration: '00:01:30',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=69",
-          duration: "00:01:10",
+          sceneURL: 'https://picsum.photos/238/160?image=69',
+          duration: '00:01:10',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=28",
-          duration: "00:02:00",
+          sceneURL: 'https://picsum.photos/238/160?image=28',
+          duration: '00:02:00',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=76",
-          duration: "00:01:20",
+          sceneURL: 'https://picsum.photos/238/160?image=76',
+          duration: '00:01:20',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=29",
-          duration: "00:01:00",
+          sceneURL: 'https://picsum.photos/238/160?image=29',
+          duration: '00:01:00',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=71",
-          duration: "00:03:20",
+          sceneURL: 'https://picsum.photos/238/160?image=71',
+          duration: '00:03:20',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=81",
-          duration: "00:02:30",
+          sceneURL: 'https://picsum.photos/238/160?image=81',
+          duration: '00:02:30',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=9",
-          duration: "00:03:20",
+          sceneURL: 'https://picsum.photos/238/160?image=9',
+          duration: '00:03:20',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=89",
-          duration: "00:03:20",
+          sceneURL: 'https://picsum.photos/238/160?image=89',
+          duration: '00:03:20',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=43",
-          duration: "00:02:20",
+          sceneURL: 'https://picsum.photos/238/160?image=43',
+          duration: '00:02:20',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=35",
-          duration: "00:02:40",
+          sceneURL: 'https://picsum.photos/238/160?image=35',
+          duration: '00:02:40',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=41",
-          duration: "00:01:30",
+          sceneURL: 'https://picsum.photos/238/160?image=41',
+          duration: '00:01:30',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=47",
-          duration: "00:02:10",
+          sceneURL: 'https://picsum.photos/238/160?image=47',
+          duration: '00:02:10',
         },
         {
-          sceneURL: "https://picsum.photos/238/160?image=151",
-          duration: "00:03:00",
-        }
-      ]
+          sceneURL: 'https://picsum.photos/238/160?image=151',
+          duration: '00:03:00',
+        },
+      ],
     }
     this.slide = React.createRef()
   }
 
   secondToTime(timeInSeconds) {
-    let pad = (num, size) => {return ('000' + num).slice(size * -1)},
-
-    time = parseFloat(timeInSeconds).toFixed(3),
-    hours = Math.floor(time / 60 / 60),
-    minutes = Math.floor(time / 60) % 60,
-    seconds = Math.floor(time - minutes * 60),
-    milliseconds = time.slice(-3)
+    let pad = (num, size) => {
+        return ('000' + num).slice(size * -1)
+      },
+      time = parseFloat(timeInSeconds).toFixed(3),
+      hours = Math.floor(time / 60 / 60),
+      minutes = Math.floor(time / 60) % 60,
+      seconds = Math.floor(time - minutes * 60),
+      milliseconds = time.slice(-3)
 
     return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2) // + ',' + pad(milliseconds, 3)
   }
@@ -215,7 +216,7 @@ class LibraryDetailShotByShot extends React.Component {
     return seconds
   }
 
-  handleClick(i){
+  handleClick(i) {
     /*
     let totalWidthToShot = 0
 
@@ -230,7 +231,7 @@ class LibraryDetailShotByShot extends React.Component {
     */
 
     this.setState({
-      selectedImage: i
+      selectedImage: i,
     })
   }
 
@@ -240,40 +241,50 @@ class LibraryDetailShotByShot extends React.Component {
 
     e = parseInt(e)
 
-    let scrollTo = ((e - (this.state.sliderHandleRightStep / 2)) * this.state.sliderStepWidth) * -1
+    let scrollTo =
+      (e - this.state.sliderHandleRightStep / 2) *
+      this.state.sliderStepWidth *
+      -1
 
-    if(scrollTo > 0){
+    if (scrollTo > 0) {
       scrollTo = 0
     }
-    if((scrollTo * -1) + this.state.sliderViewportSize >= this.state.sliderTotalWidth){
-      scrollTo = (this.state.sliderTotalWidth - this.state.sliderViewportSize) * -1
+    if (
+      scrollTo * -1 + this.state.sliderViewportSize >=
+      this.state.sliderTotalWidth
+    ) {
+      scrollTo =
+        (this.state.sliderTotalWidth - this.state.sliderViewportSize) * -1
     }
 
     this.setState({
       sliderValue: e,
-      sliderLeftPosition: scrollTo
+      sliderLeftPosition: scrollTo,
     })
 
-    if(e === 100){
+    if (e === 100) {
       leftMargin = Math.round(this.state.sliderGrabberWidth)
 
       this.setState({
         sliderValue: 100,
         sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
-          marginLeft: `-${leftMargin}px`
-        }
+          marginLeft: `-${leftMargin}px`,
+        },
       })
-    }
-    else if(e + (this.state.sliderHandleRightStep / 2) > 100){
-      sliderValue = Math.round(100 - (this.state.sliderHandleRightStep / 2))
-      leftMargin = Math.round(((this.state.sliderViewportSize - (sliderValue * this.state.sliderViewportStepWidth)) * 2) - this.state.sliderGrabberWidth)
+    } else if (e + this.state.sliderHandleRightStep / 2 > 100) {
+      sliderValue = Math.round(100 - this.state.sliderHandleRightStep / 2)
+      leftMargin = Math.round(
+        (this.state.sliderViewportSize -
+          sliderValue * this.state.sliderViewportStepWidth) *
+          2 -
+          this.state.sliderGrabberWidth
+      )
 
-      if(leftMargin < 0){
-        leftMargin = (this.state.sliderGrabberWidth / 2)
-      }
-      else{
-        leftMargin = (this.state.sliderGrabberWidth / 2) + leftMargin
+      if (leftMargin < 0) {
+        leftMargin = this.state.sliderGrabberWidth / 2
+      } else {
+        leftMargin = this.state.sliderGrabberWidth / 2 + leftMargin
       }
       leftMargin = leftMargin.toFixed(0)
 
@@ -281,44 +292,44 @@ class LibraryDetailShotByShot extends React.Component {
         sliderValue: sliderValue,
         sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
-          marginLeft: `-${leftMargin}px`
-        }
-      })
-    }
-    else if(e - (Math.round(this.state.sliderHandleRightStep) / 2) < 1){
-      this.setState({
-        sliderHandleStyle: {
-          ...this.state.sliderHandleStyle,
-          marginLeft: '0px'
+          marginLeft: `-${leftMargin}px`,
         },
-        sliderValue: 0
       })
-    }
-    else if(e === 0){
+    } else if (e - Math.round(this.state.sliderHandleRightStep) / 2 < 1) {
       this.setState({
         sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
-          marginLeft: '2px'
+          marginLeft: '0px',
         },
-        sliderDisabled: true,
-      }, () => {
-        this.setState({
-          sliderDisabled: false,
-          sliderValue:0
-        })
+        sliderValue: 0,
       })
-    }
-    else if(e !== 100 && e !== 0){
+    } else if (e === 0) {
+      this.setState(
+        {
+          sliderHandleStyle: {
+            ...this.state.sliderHandleStyle,
+            marginLeft: '2px',
+          },
+          sliderDisabled: true,
+        },
+        () => {
+          this.setState({
+            sliderDisabled: false,
+            sliderValue: 0,
+          })
+        }
+      )
+    } else if (e !== 100 && e !== 0) {
       this.setState({
         sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
-          marginLeft: parseInt((this.state.sliderGrabberWidth / 2) * -1) + 'px'
-        }
+          marginLeft: parseInt((this.state.sliderGrabberWidth / 2) * -1) + 'px',
+        },
       })
     }
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const minShotWidth = 24
     const maxShotWidth = 148
     const viewportSize = 1120
@@ -326,12 +337,17 @@ class LibraryDetailShotByShot extends React.Component {
     let totalWidth = 5 // with first item left margin
     let sliderMarks = []
 
-    const durations = this.state.scenes.map(element => this.timeToSeconds(element.duration))
-    const totalDuration = this.state.scenes.reduce((prev, next) => prev + this.timeToSeconds(next.duration), 0)
+    const durations = this.state.scenes.map((element) =>
+      this.timeToSeconds(element.duration)
+    )
+    const totalDuration = this.state.scenes.reduce(
+      (prev, next) => prev + this.timeToSeconds(next.duration),
+      0
+    )
     const dividedDuration = Math.round(totalDuration / (tickCount - 1))
 
     sliderMarks.push(this.secondToTime(0))
-    for(let i = 1; i < tickCount - 1; i++){
+    for (let i = 1; i < tickCount - 1; i++) {
       sliderMarks.push(this.secondToTime(dividedDuration * i))
     }
     sliderMarks.push(this.secondToTime(totalDuration))
@@ -340,14 +356,21 @@ class LibraryDetailShotByShot extends React.Component {
     const maxShotDuration = Math.max(...durations)
     const shotDurationDifference = Math.ceil(maxShotDuration - minShotDuration)
     const shotDurationWidthDifference = Math.ceil(maxShotWidth - minShotWidth)
-    const anySecondWidth = (shotDurationWidthDifference / shotDurationDifference).toFixed(2)
+    const anySecondWidth = (
+      shotDurationWidthDifference / shotDurationDifference
+    ).toFixed(2)
 
     let tempState = {}
     let shotWidth = 0
 
     this.state.scenes.map((element, index) => {
       tempState = this.state
-      shotWidth = Math.floor(((this.timeToSeconds(tempState.scenes[index].duration) - minShotDuration) * anySecondWidth) + minShotWidth)
+      shotWidth = Math.floor(
+        (this.timeToSeconds(tempState.scenes[index].duration) -
+          minShotDuration) *
+          anySecondWidth +
+          minShotWidth
+      )
       tempState.scenes[index].width = shotWidth
       totalWidth += shotWidth + 5 // add all right margins
       tempState.sliderTotalWidth = totalWidth
@@ -358,31 +381,31 @@ class LibraryDetailShotByShot extends React.Component {
     //rcSliderWidth = parseInt(document.getElementsByClassName('rc-slider')[0].clientWidth) //calculate viewport for resposive
     const sliderViewportStepWidth = viewportSize / 100
     const sliderStepWidth = totalWidth / 100
-    let rcGrabberWidth = (viewportSize / (totalWidth / viewportSize))
-    if(rcGrabberWidth > viewportSize){
+    let rcGrabberWidth = viewportSize / (totalWidth / viewportSize)
+    if (rcGrabberWidth > viewportSize) {
       rcGrabberWidth = viewportSize
     }
-    const sliderHandleRightStep = 100 - ((viewportSize - rcGrabberWidth) / sliderViewportStepWidth).toFixed(2)
+    const sliderHandleRightStep =
+      100 -
+      ((viewportSize - rcGrabberWidth) / sliderViewportStepWidth).toFixed(2)
 
     //rebuild custom-marks
     let sliderMarksToState = {}
     sliderMarks.map((element, index) => {
       index = parseInt(index * 10)
-      if(index === 0){
+      if (index === 0) {
         sliderMarksToState[index] = {
-          style: {transform: "translateX(0%)"},
-          label: <p className="customDot">{element}</p>
+          style: { transform: 'translateX(0%)' },
+          label: <p className="customDot">{element}</p>,
         }
-      }
-      else if(index === 100){
+      } else if (index === 100) {
         sliderMarksToState[index] = {
-          style: {transform: "translateX(-100%)"},
-          label: <p className="customDot">{element}</p>
+          style: { transform: 'translateX(-100%)' },
+          label: <p className="customDot">{element}</p>,
         }
-      }
-      else{
+      } else {
         sliderMarksToState[index] = {
-          label: <p className="customDot">{element}</p>
+          label: <p className="customDot">{element}</p>,
         }
       }
     })
@@ -400,9 +423,9 @@ class LibraryDetailShotByShot extends React.Component {
       sliderStepWidth: sliderStepWidth,
       sliderHandleStyle: {
         ...this.state.sliderHandleStyle,
-        width: (rcGrabberWidth - 3) + 'px',
-        marginLeft: '0px'
-      }
+        width: rcGrabberWidth - 3 + 'px',
+        marginLeft: '0px',
+      },
     })
   }
 
@@ -520,17 +543,34 @@ class LibraryDetailShotByShot extends React.Component {
             <div className="col-12">
               <h2 className={style.sliderHeader}>Shot by Shot</h2>
               <div className={style.sliderContainer} ref={this.slide}>
-                <div className={style.sliderWrapper} style={{left: this.state.sliderLeftPosition, width: this.state.sliderTotalWidth}}>
+                <div
+                  className={style.sliderWrapper}
+                  style={{
+                    left: this.state.sliderLeftPosition,
+                    width: this.state.sliderTotalWidth,
+                  }}
+                >
                   {this.state.scenes.map((scene, i) => (
-                    <div
-                      className={style.image}
-                      key={i}
-                    >
-                      <div style={{width: `${scene.width}px`}} className={style.setCenter}>
-                        <div className={style.originalImage} style={{width: `${scene.width}px`, backgroundImage: `url(${scene.sceneURL})`}}></div>
+                    <div className={style.image} key={i}>
+                      <div
+                        style={{ width: `${scene.width}px` }}
+                        className={style.setCenter}
+                      >
+                        <div
+                          className={style.originalImage}
+                          style={{
+                            width: `${scene.width}px`,
+                            backgroundImage: `url(${scene.sceneURL})`,
+                          }}
+                        />
                       </div>
-                      <img src={scene.sceneURL} className={style.hover}
-                      onClick={ () => { this.handleClick(i) } } />
+                      <img
+                        src={scene.sceneURL}
+                        className={style.hover}
+                        onClick={() => {
+                          this.handleClick(i)
+                        }}
+                      />
                     </div>
                   ))}
                 </div>
