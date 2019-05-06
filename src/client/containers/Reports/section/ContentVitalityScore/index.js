@@ -60,7 +60,7 @@ class ContentVitalityScore extends React.Component {
                   yAxes: [{
                     ticks: {
                       callback: function(value, index, values) {
-                      	if(value === 0) {
+                        if(value === 0) {
                           return value + ' '
                         } else if(value === 250) {
                           return value
