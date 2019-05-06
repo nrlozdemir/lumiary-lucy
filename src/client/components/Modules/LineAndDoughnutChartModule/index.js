@@ -49,7 +49,6 @@ class LineAndDoughnutChartModule extends React.Component {
               bottomY = chart.scales['y-axis-0'].bottom
             // chart.config.options.customCallbackFunc()
             // draw line
-            console.log(activePoint)
             ctx.save()
             ctx.beginPath()
             ctx.moveTo(x, topY)

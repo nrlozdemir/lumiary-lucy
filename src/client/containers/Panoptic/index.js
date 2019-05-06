@@ -11,7 +11,6 @@ import style from './style.scss'
 /* eslint-disable react/prefer-stateless-function */
 class Panoptic extends React.Component {
   render() {
-    console.log('a')
     return (
       <React.Fragment>
         <div className="grid-container col-12">
