@@ -1,15 +1,12 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectReportsVideoComparison } from 'Reducers/reports'
-
-import cx from 'classnames'
-import style from './style.scss'
-
-import ComparisonHorizontalBarChart from 'Components/ComparisonHorizontalBarChart'
 import Module from 'Components/Module'
+//import cx from 'classnames'
+import ComparisonHorizontalBarChart from 'Components/ComparisonHorizontalBarChart'
+import style from './style.scss'
 
 class VideoComparison extends React.Component {
   callBack = (data, moduleKey) => {

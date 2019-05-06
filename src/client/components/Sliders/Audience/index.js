@@ -2,10 +2,8 @@ import React from 'react';
 import style from './style.scss';
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
-import { socialIconSelector } from 'Utils/';
 import Swiper from 'react-id-swiper';
 import SwiperJS from 'swiper/dist/js/swiper.js'
-
 
 class AudienceSlider extends React.Component {
   constructor(props) {
@@ -81,7 +79,7 @@ class AudienceSlider extends React.Component {
                     <img src={item.image} />
                     <div className={style.percentageWrapper} style={{right: "80px"}}>
                       <PercentageBarGraph
-                        backgroundColor="#303a5d"
+                        backgroundColor="#373f5b"
                         customClass={style.libraryPercentageGraph}
                         id={`videolist-${i}`}
                         percentage={item.cvScore}

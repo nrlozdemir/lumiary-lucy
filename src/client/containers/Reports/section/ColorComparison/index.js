@@ -1,14 +1,11 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectReportsColorComparison } from 'Reducers/reports'
-
-import classnames from 'classnames'
-import style from './style.scss'
-
+//import classnames from 'classnames'
 import RadarChartModule from 'Components/Modules/RadarChartModule'
+//import style from './style.scss'
 
 class ColorComparison extends React.Component {
   callBack = (data, moduleKey) => {

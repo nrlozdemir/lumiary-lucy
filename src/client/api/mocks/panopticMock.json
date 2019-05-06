@@ -2,48 +2,128 @@
   "colorTempData": [
     {
       "data": [
-        { "x": -50, "y": 82, "color": "#5292E5" },
-        { "x": 50, "y": -25, "color": "#2FD7C4" },
-        { "x": 75, "y": -30, "color": "#8562F3" },
-        { "x": 60, "y": 30, "color": "#ffffff" },
-        { "x": -12, "y": -30, "color": "#21243B" }
+        {
+          "x": -50,
+          "y": 82,
+          "color": "#5292E5"
+        },
+        {
+          "x": 50,
+          "y": -25,
+          "color": "#2FD7C4"
+        },
+        {
+          "x": 75,
+          "y": -30,
+          "color": "#8562F3"
+        },
+        {
+          "x": 60,
+          "y": 30,
+          "color": "#ffffff"
+        },
+        {
+          "x": -12,
+          "y": -30,
+          "color": "#21243B"
+        }
       ]
     },
     {
       "data": [
-        { "x": -50, "y": 12, "color": "#5292E5" },
-        { "x": 50, "y": 25, "color": "#2FD7C4" },
-        { "x": 75, "y": -30, "color": "#8562F3" }
+        {
+          "x": -50,
+          "y": 12,
+          "color": "#5292E5"
+        },
+        {
+          "x": 50,
+          "y": 25,
+          "color": "#2FD7C4"
+        },
+        {
+          "x": 75,
+          "y": -30,
+          "color": "#8562F3"
+        }
       ]
     },
     {
       "data": [
-        { "x": -50, "y": 12, "color": "#5292E5" },
-        { "x": 50, "y": -75, "color": "#2FD7C4" },
-        { "x": 75, "y": -30, "color": "#8562F3" }
+        {
+          "x": -50,
+          "y": 12,
+          "color": "#5292E5"
+        },
+        {
+          "x": 50,
+          "y": -75,
+          "color": "#2FD7C4"
+        },
+        {
+          "x": 75,
+          "y": -30,
+          "color": "#8562F3"
+        }
       ]
     },
     {
       "data": [
-        { "x": -50, "y": 12, "color": "#5292E5" },
-        { "x": 50, "y": -75, "color": "#2FD7C4" },
-        { "x": 75, "y": -30, "color": "#8562F3" }
+        {
+          "x": -50,
+          "y": 12,
+          "color": "#5292E5"
+        },
+        {
+          "x": 50,
+          "y": -75,
+          "color": "#2FD7C4"
+        },
+        {
+          "x": 75,
+          "y": -30,
+          "color": "#8562F3"
+        }
       ]
     }
   ],
   "videoReleasesData": {
-    "labels": ["S", "M", "T", "W", "T", "F", "S"],
+    "labels": [
+      "S",
+      "M",
+      "T",
+      "W",
+      "T",
+      "F",
+      "S"
+    ],
     "datasets": [
       {
-        "label": "Dataset 1",
-        "display": false,
+        "label": "Videos",
         "backgroundColor": "#2FD7C4",
-        "data": [45000, 55000, 55000, 70000, 55000, 45000, 55000]
+        "display": false,
+        "data": [
+          10000,
+          51000,
+          15000,
+          60000,
+          80000,
+          12000,
+          42000
+        ]
       },
       {
-        "label": "Dataset 2",
+        "label": "Engagement",
         "backgroundColor": "#5292E5",
-        "data": [-45000, -50000, -30000, -55000, -70000, -55000, -30000]
+        "data": [
+          -45000,
+          -55000,
+          -55000,
+          -70000,
+          -55000,
+          -45000,
+          -55000
+        ]
       }
     ]
   },
@@ -57,75 +137,156 @@
       ],
       "datasets": [
         {
-          "data": [42, 24, 16, 18],
-          "backgroundColor": ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"],
-          "hoverBackgroundColor": ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"]
+          "data": [
+            42,
+            24,
+            16,
+            18
+          ],
+          "backgroundColor": [
+            "#acb0be",
+            "#8562F3",
+            "#5292E5",
+            "#2FD7C4"
+          ],
+          "hoverBackgroundColor": [
+            "#acb0be",
+            "#8562F3",
+            "#5292E5",
+            "#2FD7C4"
+          ]
         }
       ]
     },
     "stackedChartData": {
-      "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
+      "labels": [
+        "Week 1",
+        "Week 2",
+        "Week 3",
+        "Week 4"
+      ],
       "datasets": [
         {
           "label": "0-15 seconds",
           "backgroundColor": "#2FD7C4",
-          "data": [20, 3, 5, 1]
+          "data": [
+            20,
+            3,
+            5,
+            1
+          ]
         },
         {
           "label": "15-30 seconds",
           "backgroundColor": "#8562F3",
-          "data": [20, 13, 2, 5]
+          "data": [
+            20,
+            13,
+            2,
+            5
+          ]
         },
         {
           "label": "30-45 seconds",
           "backgroundColor": "#5292E5",
-          "data": [20, 5, 4, 2]
+          "data": [
+            20,
+            5,
+            4,
+            2
+          ]
         },
         {
           "label": "45-60 seconds",
           "backgroundColor": "#acb0be",
-          "data": [9, 8, 1, 4]
+          "data": [
+            9,
+            8,
+            1,
+            4
+          ]
         }
       ]
     }
   },
   "pacingChartData": {
     "stadiumData": [
-      { "value": 90, "color": "#2FD7C4", "title": "Slowest" },
-      { "value": 70, "color": "#8562F3", "title": "Slow" },
-      { "value": 50, "color": "#5292E5", "title": "Medium" },
-      { "value": 40, "color": "#ACB0BE", "title": "Fast" }
+      {
+        "value": 90,
+        "color": "#2FD7C4",
+        "title": "Slowest"
+      },
+      {
+        "value": 70,
+        "color": "#8562F3",
+        "title": "Slow"
+      },
+      {
+        "value": 50,
+        "color": "#5292E5",
+        "title": "Medium"
+      },
+      {
+        "value": 40,
+        "color": "#ACB0BE",
+        "title": "Fast"
+      }
     ],
     "horizontalStackedBarData": {
-      "labels": ["Live Action", "Stop Motion", "Cinemagraph", "Animation"],
+      "labels": [
+        "Live Action",
+        "Stop Motion",
+        "Cinemagraph",
+        "Animation"
+      ],
       "datasets": [
         {
           "label": "Slowest",
           "backgroundColor": "#2FD7C4",
           "borderColor": "#2FD7C4",
           "borderWidth": 1,
-          "data": [10, 3, 5, 1]
+          "data": [
+            10,
+            3,
+            5,
+            1
+          ]
         },
         {
           "label": "Slow",
           "backgroundColor": "#8562F3",
           "borderColor": "#8562F3",
           "borderWidth": 1,
-          "data": [12, 13, 2, 5]
+          "data": [
+            12,
+            13,
+            2,
+            5
+          ]
         },
         {
           "label": "Medium",
           "backgroundColor": "#5292E5",
           "borderColor": "#5292E5",
           "borderWidth": 1,
-          "data": [4, 5, 4, 2]
+          "data": [
+            4,
+            5,
+            4,
+            2
+          ]
         },
         {
           "label": "Fast",
           "backgroundColor": "#acb0be",
           "borderColor": "#acb0be",
           "borderWidth": 1,
-          "data": [9, 8, 1, 4]
+          "data": [
+            9,
+            8,
+            1,
+            4
+          ]
         }
       ]
     }
@@ -215,7 +376,20 @@
             "borderColor": "transparent",
             "pointBackgroundColor": "#ffffff",
             "pointBorderColor": "#ffffff",
-            "data": [75, 25, 50, 15, 55, 15, 48, 25, 100, 40, 18, 25]
+            "data": [
+              75,
+              25,
+              50,
+              15,
+              55,
+              15,
+              48,
+              25,
+              100,
+              40,
+              18,
+              25
+            ]
           }
         ]
       },
@@ -324,7 +498,20 @@
             "borderColor": "transparent",
             "pointBackgroundColor": "#ffffff",
             "pointBorderColor": "#ffffff",
-            "data": [30, 100, 25, 70, 22, 26, 55, 15, 48, 25, 30, 50]
+            "data": [
+              30,
+              100,
+              25,
+              70,
+              22,
+              26,
+              55,
+              15,
+              48,
+              25,
+              30,
+              50
+            ]
           }
         ]
       },
@@ -351,9 +538,41 @@
     }
   ],
   "flipCardsData": {
-    "views": [70, 50, 64, 22, 46, 24, 76],
-    "likes": [32, 60, 20, 42, 10, 66, 30],
-    "comments": [24, 42, 66, 42, 58, 24, 50],
-    "shares": [100, 106, 100, 106, 60, 80, 240]
+    "views": [
+      70,
+      50,
+      64,
+      22,
+      46,
+      24,
+      76
+    ],
+    "likes": [
+      32,
+      60,
+      20,
+      42,
+      10,
+      66,
+      30
+    ],
+    "comments": [
+      24,
+      42,
+      66,
+      42,
+      58,
+      24,
+      50
+    ],
+    "shares": [
+      100,
+      106,
+      100,
+      106,
+      60,
+      80,
+      240
+    ]
   }
 }

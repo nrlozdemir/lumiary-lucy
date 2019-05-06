@@ -1,7 +1,6 @@
 import React from 'react'
 import ProgressBar from 'Components/ProgressBar'
 import GeneratedReportViewSlider from 'Components/Sliders/ReportGenerated'
-
 import style from './style.scss'
 
 const Slider = ({ data, changeSelectedVideo, selectedVideo }) => {

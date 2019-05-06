@@ -81,10 +81,11 @@ export const initialState = fromJS({
     ],
     videoProperty: [
       { value: 'aspect-ratio', label: 'Aspect Ratio' },
-      { value: 'resolution', label: 'Resolution' },
-      { value: 'frame-rate', label: 'Frame Rate' },
       { value: 'duration', label: 'Duration' },
+      { value: 'format', label: 'Format' },
+      { value: 'frame-rate', label: 'Frame Rate' },
       { value: 'pacing', label: 'Pacing' },
+      { value: 'resolution', label: 'Resolution' }
     ],
     audienceAge: [
       { value: '10-', label: '10 and under' },

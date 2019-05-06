@@ -1,9 +1,3 @@
-/**
- *
- * ColorRadioBoxes
- *
- */
-
 import React from "react";
 import style from "./style.scss";
 // import PropTypes from 'prop-types';

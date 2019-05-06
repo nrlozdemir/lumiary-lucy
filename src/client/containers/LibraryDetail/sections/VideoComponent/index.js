@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import classnames from 'classnames'
 import styles from './style.scss'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
@@ -93,7 +92,7 @@ class Video extends Component {
           />
           <div className={styles.percentageWrapper} style={{right: "80px"}}>
             <PercentageBarGraph
-              backgroundColor="#303a5d"
+              backgroundColor="#373f5b"
               customClass={styles.libraryPercentageGraph}
               id={`videolist-${id}`}
               percentage={cvScore}

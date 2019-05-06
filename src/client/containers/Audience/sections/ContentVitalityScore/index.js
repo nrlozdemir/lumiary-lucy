@@ -1,21 +1,15 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceContentVitalityScore } from 'Reducers/panoptic'
-
+import Module from 'Components/Module'
 import cx from 'classnames'
-
-import style from 'Containers/Audience/style.scss'
-import chartStyle from './style.scss'
 import LineChart from 'Components/LineChart/Chart'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
-
 import { lineChartOptions, lineChartData_DatasetOptions } from './options'
 import { chartCombineDataset } from 'Utils'
-
-import Module from 'Components/Module'
+import chartStyle from './style.scss'
 
 function combineChartData(chartData) {
   return chartCombineDataset(chartData, lineChartData_DatasetOptions, {

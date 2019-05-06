@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import cx from 'classnames'
 import SelectFilters from 'Components/SelectFilters'
 import ProgressBar from 'Components/ProgressBar'
-
 import style from './style.scss'
 
 const similarPropertiesContainer = cx(

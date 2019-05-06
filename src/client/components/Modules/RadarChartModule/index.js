@@ -38,8 +38,7 @@ const RadarChartModule = ({
 							<span>{leftTitle}</span>
 						</div>
 						<p>
-							Top {!!data[0] && !!data[0].progress && data[0].progress.length}
-							Dominant Colors
+							Top {!!data[0] && !!data[0].progress && data[0].progress.length} Dominant Colors
 						</p>
 						<div className={style.label}>
 							<span>{rightTitle}</span>
