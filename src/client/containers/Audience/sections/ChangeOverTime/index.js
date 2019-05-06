@@ -1,17 +1,13 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceChangeOverTime } from 'Reducers/panoptic'
-
-import style from 'Containers/Audience/style.scss'
+import Module from 'Components/Module'
 import LineChart from 'Components/LineChart/Chart'
-
 import { lineChartOptions, lineChartData_DatasetOptions } from './options'
 import { chartCombineDataset } from 'Utils'
-
-import Module from 'Components/Module'
+import style from 'Containers/Audience/style.scss'
 
 function combineChartData(chartData) {
   return chartCombineDataset(chartData, lineChartData_DatasetOptions, {

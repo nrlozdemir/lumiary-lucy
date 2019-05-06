@@ -1,6 +1,6 @@
 import React, { lazy, Suspense } from 'react'
 import { Doughnut } from 'react-chartjs-2'
-import classnames from 'classnames'
+//import classnames from 'classnames'
 import style from './style.scss'
 
 const Labels = lazy(() => import('Components/Charts/Labels'))

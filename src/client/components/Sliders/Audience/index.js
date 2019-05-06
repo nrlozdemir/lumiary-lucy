@@ -2,10 +2,8 @@ import React from 'react';
 import style from './style.scss';
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
-import { socialIconSelector } from 'Utils/';
 import Swiper from 'react-id-swiper';
 import SwiperJS from 'swiper/dist/js/swiper.js'
-
 
 class AudienceSlider extends React.Component {
   constructor(props) {
