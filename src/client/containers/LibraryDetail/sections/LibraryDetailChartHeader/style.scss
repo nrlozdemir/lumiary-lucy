@@ -3,21 +3,23 @@
 }
 
 .containerClass {
-	display: flex;
+  display: flex;
 }
 
 .videoWrapper {
   position: relative;
   flex: 1 1 auto;
+  margin-left: 0px;
 }
 
 .videoStatsWrapper{
   width: 320px;
+  height: 472px;
   flex: 0 0 auto;
   margin-left: 40px;
-  margin-right: 20px;
+  margin-right: 0px;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: center;
   flex-direction: column;
 
@@ -50,16 +52,16 @@
       }
     }
 
-    .percentageBlue {
+    .percentageIncrease {
       border-radius: 10px;
       height: 10px;
-      background-color: $color-cool-blue;
+      background-color: #2fd7c4;
       -webkit-transition: width .5s, height .5s;
       transition: width .5s, height .5s;
     }
 
-    .percentagePink {
-      background-color: $color-coral-pink;
+    .percentageDecrease {
+      background-color: #5292e5;
     }
 
     .progressText {
@@ -292,10 +294,10 @@
 
       div {
         i {
-          background-color: #242b49;
+          background-color: #21243B;
           border-radius: 20px;
           padding: 8px;
-          border: 2px solid #51adc0;
+          border: 2px solid #2FD7C4;
           margin-right: 20px;
         }
       }
@@ -367,10 +369,10 @@
 .cancelButton {
   float: right;
   cursor: pointer;
-  background-color: #242b49;
+  background-color: #21243B;
   border-radius: 20px;
   padding: 8px;
-  border: 2px solid #51adc0;
+  border: 2px solid #2FD7C4;
 }
 .tabPanel {
   background-color: $color-dark-grey-blue;
@@ -606,4 +608,17 @@
       }
     }
   }
+}
+
+.backText{
+  font-family: $font-family-ClanOTNews;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  line-height: 1.86;
+  text-align: center;
+  color: $color-white;
+  margin: 0px 20px;
 }

@@ -14,11 +14,11 @@ const routes = [
     path: '/library',
     exact: true,
     component: 'Library',
-  },
-  {
-    path: '/library/:videoId/compare',
-    exact: true,
-    component: 'Compare',
+    navigation: {
+      level: 1,
+      order: 3,
+      title: 'Library'
+    }
   },
   {
     path: '/library/build-report/:videoId',
@@ -31,9 +31,14 @@ const routes = [
     component: 'LibraryDetail',
   },
   {
-    path: '/quickview',
+    path: '/quickview/all-platforms',
     exact: true,
     component: 'Quickview',
+    navigation: {
+      level: 1,
+      order: 5,
+      title: 'Quickview'
+    }
   },
   {
     path: '/quickview/:platform',
@@ -43,16 +48,31 @@ const routes = [
     path: '/panoptic',
     exact: true,
     component: 'Panoptic',
+    navigation: {
+      level: 1,
+      order: 1,
+      title: 'Panoptic'
+    }
   },
   {
-    path: '/panoptic/:detail',
+    path: '/audience',
     exact: true,
     component: 'Audience',
+    navigation: {
+      level: 1,
+      order: 2,
+      title: 'Audience'
+    }
   },
   {
     path: '/marketview',
     exact: true,
     component: 'Marketview',
+    navigation: {
+      level: 1,
+      order: 4,
+      title: 'Marketview'
+    }
   },
   {
     path: '/marketview/:detail',
@@ -63,12 +83,52 @@ const routes = [
     path: '/reports',
     exact: true,
     component: 'Reports',
+    navigation: {
+      level: 1,
+      order: 6,
+      title: 'Reports'
+    }
   },
   {
-    path: '/reports/generated',
+    path: '/reports/brand-insight/:id',
     exact: true,
-    removeNavbar: true,
-    component: 'ReportGenerated',
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
+      loadComponent: true,
+      from: null,
+      title: 'Brand Insights Report',
+      backToTitle: 'Generate New Report'
+    }
+  },
+  {
+    path: '/reports/compare-brands/:id',
+    exact: true,
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
+      loadComponent: true,
+      from: null,
+      title: 'Compare Brands Report',
+      backToTitle: 'Generate New Report'
+    }
+  },
+  {
+    path: '/reports/predefined-reports/:id',
+    exact: true,
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
+      loadComponent: true,
+      from: null,
+      title: 'Predefined Reports',
+      backToTitle: 'Generate New Report'
+    }
+  },
+  {
+    path: '/reports/brand-insight',
+    exact: true,
+    component: 'Reports',
   },
   {
     path: '*',
@@ -85,6 +145,7 @@ const RouteWithSubRoutes = (route) => (
         removeNavbar={route.removeNavbar}
         load={() => import(`./containers/${route.component}`)}
         match={props.match}
+        routeConfig={routes}
       >
         {(Component) =>
           Component === null ? (

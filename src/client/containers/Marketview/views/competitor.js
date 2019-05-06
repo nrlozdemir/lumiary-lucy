@@ -20,9 +20,9 @@ import RouterLoading from 'Components/RouterLoading'
 import style from '../style.scss'
 
 const chartTickOptions = {
-	stepSize: 250000,
-	min: 0,
-	max: 1000000,
+  stepSize: 250000,
+  min: 0,
+  max: 1000000,
   callback(value) {
     if (value < 1000) {
       return value
@@ -70,7 +70,10 @@ export class Competitor extends React.Component {
           title="Top Performing Competitor Videos"
         />
         {competitorTopVideos && (
-          <TopVideosCard chartData={competitorTopVideos} />
+          <TopVideosCard
+            chartData={competitorTopVideos}
+            height={150}
+          />
         )}
         {similarProperties && <TopSimilarProperties data={similarProperties} />}
         {topPerformingPropertiesByCompetitorsData && (
@@ -82,7 +85,7 @@ export class Competitor extends React.Component {
               }
               tickOptions={chartTickOptions}
               title="Top Performing Property Across All Competitors"
-              height={100}
+              height={50}
               selects={['Resolution']}
               footerLabels={['Fast', 'Medium', 'Slow', 'Slowest']}
             />

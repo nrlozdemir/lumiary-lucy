@@ -24,6 +24,7 @@ const Main = () => {
         <TotalViewsCard />
 
         <TotalCompetitorViewsCard
+          height={55}
           titleLabels={[
             'Barstool Sports',
             'SB Nation',

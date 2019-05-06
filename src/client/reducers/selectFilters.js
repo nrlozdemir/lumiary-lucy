@@ -81,10 +81,11 @@ export const initialState = fromJS({
     ],
     videoProperty: [
       { value: 'aspect-ratio', label: 'Aspect Ratio' },
-      { value: 'resolution', label: 'Resolution' },
-      { value: 'frame-rate', label: 'Frame Rate' },
       { value: 'duration', label: 'Duration' },
+      { value: 'format', label: 'Format' },
+      { value: 'frame-rate', label: 'Frame Rate' },
       { value: 'pacing', label: 'Pacing' },
+      { value: 'resolution', label: 'Resolution' }
     ],
     audienceAge: [
       { value: '10-', label: '10 and under' },
@@ -129,6 +130,23 @@ export const initialState = fromJS({
     ],
   },
   values: {},
+  defaults: {
+    engagement: 'Views',
+    platform: 'All Platforms',
+    aspectRatio: '16:9',
+    resolution: '4K',
+    frameRate: '24',
+    duration: '0-15',
+    pacing: 'fast',
+    videoFormat: 'liveAction',
+    videoProperty: 'aspect-ratio',
+    audienceAge: '10-',
+    audienceGender: 'male',
+    talentAge: '10-',
+    talentGender: 'male',
+    colorTempature: 'happy-sad',
+    timeRange: 'Today',
+  },
 })
 
 const selectFiltersReducer = (state = initialState, action) => {

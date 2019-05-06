@@ -1,7 +1,7 @@
 .mainCardContainer {
   display: flex;
   justify-content: space-between;
-  margin: 0 -12px;
+  padding: 0 8px;
 }
 
 .marketViewCard {
@@ -151,6 +151,7 @@
 }
 
 .chartContainer {
+  position: relative;
   padding: 48px 40px;
   box-sizing: border-box;
   font-family: $font-family-ClanOTNews;
@@ -199,15 +200,15 @@
     }
 
     &:nth-child(1):before {
-      background-color: #51adc0;
+      background-color: #2FD7C4;
     }
 
     &:nth-child(2):before {
-      background-color: #8567f0;
+      background-color: #8562F3;
     }
 
     &:nth-child(3):before {
-      background-color: #d0506c;
+      background-color: #5292E5;
     }
 
     &:nth-child(4):before {
@@ -215,7 +216,7 @@
     }
 
     &:nth-child(5):before {
-      background-color: #5a6386;
+      background-color: #545B79;
     }
   }
 
@@ -387,5 +388,6 @@
 }
 
 .detailTopPerformingPropertyContainer {
+  position: relative;
   padding-top: 20px;
 }

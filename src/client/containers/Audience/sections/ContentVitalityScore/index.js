@@ -1,22 +1,19 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceContentVitalityScore } from 'Reducers/panoptic'
-
-import style from 'Containers/Audience/style.scss'
-import chartStyle from './style.scss'
+import Module from 'Components/Module'
+import cx from 'classnames'
 import LineChart from 'Components/LineChart/Chart'
-
+import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import { lineChartOptions, lineChartData_DatasetOptions } from './options'
 import { chartCombineDataset } from 'Utils'
-
-import Module from 'Components/Module'
+import chartStyle from './style.scss'
 
 function combineChartData(chartData) {
   return chartCombineDataset(chartData, lineChartData_DatasetOptions, {
-    beforeDraw: function(chart, easing) {
+    beforeDraw: function (chart, easing) {
       if (
         chart.config.options.chartArea &&
         chart.config.options.chartArea.backgroundColor
@@ -34,7 +31,7 @@ function combineChartData(chartData) {
         )
         ctx.restore()
       }
-		}
+    }
   })
 }
 
@@ -43,11 +40,14 @@ class ContentVitalityScore extends React.Component {
     this.props.getAudienceContentVitalityScoreData(data)
   }
 
+
   render() {
     // const { selectViews, selectPlatforms, selectDate } = this.state;
     const {
       audienceContentVitalityScoreData: { data, loading, error },
     } = this.props
+
+    const percentageCol = cx('col-4', chartStyle.percentageCol)
 
     return (
       <Module
@@ -68,15 +68,40 @@ class ContentVitalityScore extends React.Component {
         ]}
       >
         {data && data.datasets && (
-          <div data-vertical-title="Number Of Videos" className={chartStyle.vitalityContainer}>
-						<LineChart
-							backgroundColor="#242b49"
-							dataSet={() => combineChartData(data)}
-							width={1070}
-							height={291}
-							options={lineChartOptions}
-						/>
-					</div>
+          <div className="col-12">
+            <div data-vertical-title="Number Of Videos" className={chartStyle.vitalityContainer}>
+              <LineChart
+                backgroundColor="#21243B"
+                dataSet={() => combineChartData(data)}
+                width={1070}
+                height={291}
+                options={lineChartOptions}
+              />
+            </div>
+            <div className="row">
+              <div className={percentageCol} data-title="Male Audience">
+                <PercentageBarGraph
+                  id={"percentageContainer-1"}
+                  percentage={33.4}
+                  color='#5292E5'
+                />
+              </div>
+              <div className={percentageCol} data-title="Your Library">
+                <PercentageBarGraph
+                  id={"percentageContainer-2"}
+                  percentage={40.1}
+                  color='#8562F3'
+                />
+              </div>
+              <div className={percentageCol} data-title="Female Audience">
+                <PercentageBarGraph
+                  id={"percentageContainer-3"}
+                  percentage={46.8}
+                  color='#2FD7C4'
+                />
+              </div>
+            </div>
+          </div>
         )}
       </Module>
     )

@@ -1,9 +1,19 @@
 import React from 'react'
 import classnames from 'classnames'
-
 import style from './style.scss'
 
-export const ColorTemperature = ({ temp, verticalText, showDescription }) => {
+const findNewCoordinates = (x,y) => {
+  //pushes the dot into the circle
+  let newX = x
+  let newY = y
+  while(Math.pow(newX, 2) + Math.pow(newY, 2) >= 10000) {
+  x < 0 ? ++newX : --newX
+  y < 0 ? ++newY : --newY
+  }
+  return {newX, newY}
+}
+
+export const ColorTemperature = ({ temp, verticalText }) => {
   const leftText = classnames(style.textLeft, {
     [style.verticalTextLeft]: verticalText,
   })
@@ -22,21 +32,28 @@ export const ColorTemperature = ({ temp, verticalText, showDescription }) => {
       <p className={leftText}>{temp.topText ? temp.leftText : 'Cool'}</p>
       <div className={style.verticalLine} />
       <div className={style.horizontalLine} />
-      {temp.data.map((data, i) => (
+      {temp.data.map((data, i) => {
+          let x = data.x
+          let y = data.y
+          //calculate if the coordinate is outside of the circle
+          //if not, push it back into the circle
+          //100000 is; multiplication of radius (100px in this case) with itself
+          const isInside=Math.pow(x, 2) + Math.pow(y, 2) <= 10000
+          if(!isInside) {
+            const newCoordinates = findNewCoordinates(x, y)
+            x = newCoordinates.newX
+            y = newCoordinates.newY
+          }
+        return (
         <span
           key={i}
           className={style.round}
           style={{
-            transform: `translateX(${data.x * 2}%) translateY(${data.y * 2}%)`,
+            transform: `translateX(${x * 2}%) translateY(${y * 2}%)`,
             backgroundColor: `${data.color}`,
           }}
         />
-      ))}
-      {showDescription && (
-        <p>
-          This is a blurb that will explain <br /> what this graph is showing
-        </p>
-      )}
+      )})}
     </div>
   )
 }

@@ -3,6 +3,64 @@ import moment from 'moment'
 import Select from 'Components/Form/Select'
 import Datepicker from 'Components/Datepicker'
 
+const LIKES_OPTIONS = [
+	{ value: 'Views', label: 'Views' },
+	{ value: 'Likes', label: 'Likes' },
+	{ value: 'Shares', label: 'Shares' },
+	{ value: 'Comments', label: 'Comments' },
+];
+
+const RESOLUTION_OPTIONS = [
+	{ value: 'resolution', label: 'Resolution' },
+	{ value: 'aspect-ratio', label: 'Aspect Ratio' },
+	{ value: 'frame-rate', label: 'Frame Rate' },
+	{ value: 'duration', label: 'Duration' },
+	{ value: 'pacing', label: 'Pacing' },
+	{ value: 'dominant-color', label: 'Dominant Color' },
+];
+
+const DURATION_OPTIONS = [
+	{ value: '0-15', label: '0-15 sec' },
+	{ value: '16-30', label: '16-30 sec' },
+	{ value: '31-60', label: '31-60 sec' },
+	{ value: '61', label: '61+' },
+];
+
+const WARM_COLOR_OPTIONS = [
+	{ value: 'happy-sad', label: 'Happy / Sad' },
+	{ value: 'energetic-calm', label: 'Energetic / Calm' },
+	{ value: 'saynthetic-natural', label: 'Saynthetic / Natural' },
+];
+
+const PLATFORM_OPTIONS = [
+	{ value: 'All Platforms', label: 'All Platforms' },
+	{ value: 'facebook', label: 'Facebook' },
+	{ value: 'twitter', label: 'Twitter' },
+	{ value: 'instagram', label: 'Instagram' },
+	{ value: 'youtube', label: 'YouTube' },
+	{ value: 'pinterest', label: 'Pinterest' },
+];
+
+const PERCENT_OPTIONS = [
+	{ value: '360', label: '360' },
+	{ value: '480', label: '480' },
+	{ value: '720p', label: '720p' },
+	{ value: '1080p', label: '1080p' },
+];
+
+const VIEW_OPTIONS = [
+	{ value: 'Card', label: 'Card' },
+	{ value: 'Table', label: 'Table' },
+];
+
+const DATE_OPTIONS = [
+	{ value: 'Today', label: 'Today' },
+	{ value: 'Past Week', label: 'Past Week' },
+	{ value: 'Past Month', label: 'Past Month' },
+	{ value: 'Past 3 Months', label: 'Past 3 Months' },
+	{ value: 'custom', label: 'Custom' },
+];
+
 class SelectFilters extends Component {
   handleChange = (selectedOption, name) => {
 		const {onChange = () => {}, handleSelectFilters = () => {}} = this.props;
@@ -31,7 +89,17 @@ class SelectFilters extends Component {
       selectLikes,
       selectPlatforms,
       selectWarmColor,
-      selectDuration,
+			selectDuration,
+			defaults: {
+				resolution = 'resolution',
+				duration = '0-15',
+				warmColor = 'happy-sad',
+				likes = 'Views',
+				platforms = 'All Platforms',
+				percent = '360',
+				views = 'Card',
+				date = 'Today'
+			} = {}
     } = this.props
 
     return (
@@ -41,16 +109,9 @@ class SelectFilters extends Component {
             name="selectResolution"
             customClass={selectClasses || 'custom-select'}
             placeholder="Resolution"
-            value={selectResolution || ''}
+            value={selectResolution || RESOLUTION_OPTIONS.find(({value}) => value === resolution)}
             onChange={(option) => this.handleChange(option, 'selectResolution')}
-            options={[
-              { value: 'resolution', label: 'Resolution' },
-              { value: 'aspect-ratio', label: 'Aspect Ratio' },
-              { value: 'frame-rate', label: 'Frame Rate' },
-              { value: 'duration', label: 'Duration' },
-              { value: 'pacing', label: 'Pacing' },
-              { value: 'dominant-color', label: 'Dominant Color' },
-            ]}
+            options={RESOLUTION_OPTIONS}
           />
         )}
         {selectDurationShow && (
@@ -58,14 +119,9 @@ class SelectFilters extends Component {
             name="selectDuration"
             customClass={selectClasses || 'custom-select'}
             placeholder="Select Duration"
-            value={selectDuration || ''}
+            value={selectDuration || DURATION_OPTIONS.find(({value}) => value === duration)}
             onChange={(option) => this.handleChange(option, 'selectDuration')}
-            options={[
-              { value: '0-15', label: '0-15 sec' },
-              { value: '16-30', label: '16-30 sec' },
-              { value: '31-60', label: '31-60 sec' },
-              { value: '61', label: '61+' },
-            ]}
+            options={DURATION_OPTIONS}
           />
         )}
         {selectWarmColorShow && (
@@ -73,13 +129,9 @@ class SelectFilters extends Component {
             name="selectWarmColor"
             customClass={selectClasses || 'custom-select'}
             placeholder="Select One"
-            value={selectWarmColor || ''}
+            value={selectWarmColor || WARM_COLOR_OPTIONS.find(({value}) => value === warmColor)}
             onChange={(option) => this.handleChange(option, 'selectWarmColor')}
-            options={[
-              { value: 'happy-sad', label: 'Happy / Sad' },
-              { value: 'energetic-calm', label: 'Energetic / Calm' },
-              { value: 'saynthetic-natural', label: 'Saynthetic / Natural' },
-            ]}
+            options={WARM_COLOR_OPTIONS}
           />
         )}
         {selectLikesShow && (
@@ -87,14 +139,9 @@ class SelectFilters extends Component {
             name="selectLikes"
             customClass={selectClasses || 'custom-select'}
             placeholder="Select Views"
-            value={selectLikes || ''}
+            value={selectLikes || LIKES_OPTIONS.find(({value}) => value === likes)}
             onChange={(option) => this.handleChange(option, 'selectLikes')}
-            options={[
-              { value: 'Views', label: 'Views' },
-              { value: 'Likes', label: 'Likes' },
-              { value: 'Shares', label: 'Shares' },
-              { value: 'Comments', label: 'Comments' },
-            ]}
+            options={LIKES_OPTIONS}
           />
         )}
         {selectPlatformsShow && (
@@ -102,16 +149,9 @@ class SelectFilters extends Component {
             name="selectPlatforms"
             customClass={selectClasses || 'custom-select'}
             placeholder="Select Platforms"
-            value={selectPlatforms || ''}
+            value={selectPlatforms || PLATFORM_OPTIONS.find(({value}) => value === platforms)}
             onChange={(option) => this.handleChange(option, 'selectPlatforms')}
-            options={[
-              { value: 'All Platforms', label: 'All Platforms' },
-              { value: 'facebook', label: 'Facebook' },
-              { value: 'twitter', label: 'Twitter' },
-              { value: 'instagram', label: 'Instagram' },
-              { value: 'youtube', label: 'YouTube' },
-              { value: 'pinterest', label: 'Pinterest' },
-            ]}
+            options={PLATFORM_OPTIONS}
           />
         )}
         {selectPercentShow && (
@@ -119,14 +159,9 @@ class SelectFilters extends Component {
             name="selectPercent"
             customClass={selectClasses || 'custom-select'}
             placeholder="Resolution"
-            value={selectPercent || ''}
+            value={selectPercent || PERCENT_OPTIONS.find(({value}) => value === percent)}
             onChange={(option) => this.handleChange(option, 'selectPercent')}
-            options={[
-              { value: '360', label: '360' },
-              { value: '480', label: '480' },
-              { value: '720p', label: '720p' },
-              { value: '1080p', label: '1080p' },
-            ]}
+            options={PERCENT_OPTIONS}
           />
         )}
         {selectViewsShow && (
@@ -134,12 +169,9 @@ class SelectFilters extends Component {
             name="selectViews"
             customClass={selectClasses || 'custom-select'}
             placeholder="Select Views"
-            value={selectViews || ''}
+            value={selectViews || VIEW_OPTIONS.find(({value}) => value === views)}
             onChange={(option) => this.handleChange(option, 'selectViews')}
-            options={[
-              { value: 'Card', label: 'Card' },
-              { value: 'Table', label: 'Table' },
-            ]}
+            options={VIEW_OPTIONS}
           />
         )}
         {selectDateShow && (
@@ -148,15 +180,9 @@ class SelectFilters extends Component {
               name="selectDate"
               customClass={selectClasses || 'custom-select'}
               placeholder="Select Date"
-              value={selectDate || ''}
+              value={selectDate || DATE_OPTIONS.find(({value}) => value === date)}
               onChange={(option) => this.handleChange(option, 'selectDate')}
-              options={[
-                { value: 'Today', label: 'Today' },
-                { value: 'Past Week', label: 'Past Week' },
-                { value: 'Past Month', label: 'Past Month' },
-                { value: 'Past 3 Months', label: 'Past 3 Months' },
-                { value: 'custom', label: 'Custom' },
-              ]}
+              options={[...DATE_OPTIONS]}
             />
             {selectDate && selectDate.value === 'custom' && (
               <Datepicker

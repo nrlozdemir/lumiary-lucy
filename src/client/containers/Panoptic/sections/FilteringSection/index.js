@@ -1,20 +1,14 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticFilteringSection } from 'Reducers/panoptic'
-
-import classnames from 'classnames'
-import 'chartjs-plugin-datalabels'
-import SelectFilters from 'Components/SelectFilters'
-import style from './style.scss'
-
-import DoughnutChart from 'Components/Charts/Panoptic/DoughnutChart'
-import VerticalStackedBarChart from 'Components/Charts/Panoptic/VerticalStackedBarChart'
-
 import Module from 'Components/Module'
+//import classnames from 'classnames'
+import 'chartjs-plugin-datalabels'
+import DoughnutChart from 'Components/Charts/DoughnutChart'
+import StackedBarChart from 'Components/Charts/StackedBarChart'
+import style from './style.scss'
 
 class PanopticFilteringSection extends Component {
   callBack = (data, moduleKey) => {
@@ -24,7 +18,7 @@ class PanopticFilteringSection extends Component {
   render() {
     const {
       filteringSectionData: {
-        data: { doughnutData, stackedChartData, doughnutRoundData },
+        data: { doughnutData, stackedChartData },
         loading,
         error,
       },
@@ -36,7 +30,7 @@ class PanopticFilteringSection extends Component {
         action={this.callBack}
         filters={[
           {
-            type: 'duration',
+            type: 'videoProperty',
             selectKey: 'PFS-dsad',
             placeHolder: 'Duration',
           },
@@ -59,35 +53,27 @@ class PanopticFilteringSection extends Component {
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
-            <div>
-              {doughnutData && doughnutData.average && (
-                <DoughnutChart data={doughnutData.average} />
-              )}
-            </div>
-            <div>
-              {doughnutRoundData &&
-                doughnutRoundData.map((roundData, index) => (
-                  <div
-                    className={classnames(
-                      'd-flex',
-                      'align-items-center',
-                      style.lables
-                    )}
-                    key={index}
-                  >
-                    <span
-                      className={style.round}
-                      style={{ backgroundColor: `${roundData.color}` }}
-                    />
-                    <span className={style.secondsText}>{roundData.data}</span>
-                  </div>
-                ))}
-            </div>
+            {doughnutData && (
+              <DoughnutChart
+                width={270}
+                height={270}
+                data={doughnutData}
+                cutoutPercentage={58}
+                fillText="Total Percentage"
+                dataLabelFunction="insertAfter"
+                dataLabelInsert="%"
+                labelPositionRight
+                labelsData={[
+                  { data: '0-15 seconds', color: '#2FD7C4' },
+                  { data: '15-30 seconds', color: '#8562F3' },
+                  { data: '30-45 seconds', color: '#5292E5' },
+                  { data: '45-60 seconds', color: '#acb0be' },
+                ]}
+              />
+            )}
           </div>
           <div className={style.stackedChart}>
-            {stackedChartData && (
-              <VerticalStackedBarChart data={stackedChartData} />
-            )}
+            {stackedChartData && <StackedBarChart barData={stackedChartData} />}
           </div>
         </div>
       </Module>

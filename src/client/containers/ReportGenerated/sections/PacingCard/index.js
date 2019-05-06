@@ -1,10 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
-
-import style from './style.scss'
-
 import HorizontalStackedBarChart from 'Components/Charts/Panoptic/HorizontalStackedBarChart'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
+import style from './style.scss'
 
 const pacingCardContainer = classnames('shadow-1', style.pacingCardContainer)
 
@@ -19,7 +17,14 @@ const PacingCard = ({ barData }) => {
           <HorizontalStackedBarChart barData={barData} />
         </div>
         <div className={style.pacingCardInnerItem}>
-          <StadiumChart />
+          <StadiumChart
+            data={[
+              { value: 90, color: '#2FD7C4', title: 'Slowest' },
+              { value: 90, color: '#8562F3', title: 'Slow' },
+              { value: 50, color: '#5292E5', title: 'Medium' },
+              { value: 100, color: '#ACB0BE', title: 'Fast' },
+            ]}
+          />
         </div>
       </div>
     </div>

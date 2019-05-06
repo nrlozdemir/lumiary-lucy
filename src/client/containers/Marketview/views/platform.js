@@ -43,9 +43,9 @@ const topVideosReferences = [
 ]
 
 const chartTickOptions = {
-	stepSize: 250000,
-	min: 0,
-	max: 1000000,
+  stepSize: 250000,
+  min: 0,
+  max: 1000000,
   callback(value) {
     if (value < 1000) {
       return value
@@ -96,6 +96,7 @@ export class Platform extends React.Component {
             chartData={competitorTopVideos}
             title="Top Videos Over Time By Platform"
             references={topVideosReferences}
+            height={150}
           />
         )}
         {similarProperties && <TopSimilarProperties data={similarProperties} />}
@@ -106,7 +107,7 @@ export class Platform extends React.Component {
               totalCompetitorViewsData={topPerformingPropertiesData}
               tickOptions={chartTickOptions}
               title="Top Performing Property Across All Platforms"
-              height={100}
+              height={50}
               selects={['Resolution', 'Likes']}
               footerLabels={['Fast', 'Medium', 'Slow', 'Slowest']}
             />

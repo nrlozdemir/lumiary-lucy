@@ -68,7 +68,8 @@ export class Time extends React.Component {
     } = this.props
     const { activeDay } = this.state
 
-    const selectedDayData = marketviewDetailTime && marketviewDetailTime[activeDay]
+		const selectedDayData = marketviewDetailTime && marketviewDetailTime[activeDay]
+		console.log(marketviewDetailTime)
     if (!selectedVideo || marketview.loading || !marketviewDetailTime) {
       return <RouterLoading />
     }
@@ -92,6 +93,7 @@ export class Time extends React.Component {
         )}
         {selectedDayData && selectedDayData.SimilarProperties && (
           <TopSimilarProperties data={selectedDayData.SimilarProperties} />
+
         )}
         {selectedDayData && selectedDayData.CompetitorTopVideos && (
           <TopVideosCard
@@ -99,6 +101,7 @@ export class Time extends React.Component {
             title="Top Performing Property Across All Days Of The Week"
             selects={['Resolution']}
             references={topVideosReferences}
+            height={150}
           />
         )}
       </React.Fragment>

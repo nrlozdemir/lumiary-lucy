@@ -9,7 +9,7 @@ import { chartCombineDataset } from "Utils"
 import { actions, makeSelectLibraryDetail } from "Reducers/libraryDetail"
 import { actions as libraryActions, makeSelectLibrary } from "Reducers/library"
 
-import { radarData_DatasetOptions, lineChartData_DatasetOptions } from './options'
+import { radarData_DatasetOptions } from './options'
 import LibraryDetailChartHeader from "./sections/LibraryDetailChartHeader"
 import LibraryDetailDoughnutChart from "./sections/LibraryDetailDoughnutChart"
 import LibraryDetailColorTemperature from "./sections/LibraryDetailColorTemperature"
@@ -76,9 +76,8 @@ export class LibraryDetail extends React.Component {
       match: { params: { videoId } }
     } = this.props
 
-    const { videoUrl, title, socialIcon } = videos.find(({ id }) => id == videoId) || {}
+    const { videoUrl, title, socialIcon, cvScore, id } = videos.find(({ id }) => id == videoId) || {}
 
-    let lineChartDataCombined = null
     let radarDataCombined = null
 
     if (shotByShotData) {
@@ -87,16 +86,19 @@ export class LibraryDetail extends React.Component {
 
     return (
       <React.Fragment>
-        {barChartData && <LibraryDetailChartHeader
+        {barChartData && cvScore && <LibraryDetailChartHeader
           barChartData={barChartData}
           videoUrl={videoUrl}
           title={title}
           socialIcon={socialIcon}
+          cvScore={cvScore}
+          id={id}
         />}
         {doughnutLineChartData && doughnutLineChartData.doughnutData && <LibraryDetailDoughnutChart
           doughnutData={doughnutLineChartData.doughnutData}
         />}
         <LibraryDetailColorTemperature
+        	libraryDetailId={videoId}
           colorTempData={colorTempData}
         />
         {shotByShotData && <LibraryDetailShotByShot

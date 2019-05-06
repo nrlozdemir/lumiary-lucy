@@ -1,6 +1,6 @@
 export const barDurationOptions = {
   responsive: true,
-  maintainAspectRatio: false,
+
   legend: {
     display: false,
   },
@@ -21,12 +21,12 @@ export const barDurationOptions = {
         },
         gridLines: {
           display: true,
-          color: '#5a6386',
+          color: '#545B79',
           lineWidth: 1,
           drawBorder: true,
           drawTicks: false,
           offsetGridLines: true,
-          zeroLineColor: '#5a6386',
+          zeroLineColor: '#545B79',
           tickMarkLength: 10,
         },
       },
@@ -48,7 +48,7 @@ export const barDurationOptions = {
         },
         gridLines: {
           display: true,
-          color: '#5a6386',
+          color: '#545B79',
           lineWidth: 1,
           drawBorder: true,
           drawTicks: false,
@@ -57,6 +57,6 @@ export const barDurationOptions = {
     ],
   },
   chartArea: {
-    backgroundColor: '#242b49',
+    backgroundColor: '#21243B',
   },
 }

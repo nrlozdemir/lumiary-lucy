@@ -1,59 +1,63 @@
 import React from 'react'
-import classnames from 'classnames'
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose, bindActionCreators } from 'redux'
+import {
+	actions,
+	makeSelectLibraryDetailColorTemperature,
+} from 'Reducers/libraryDetail'
+import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
+//import style from './style.scss'
+class LibraryDetailColorTemperature extends React.Component {
+	callBack = (data) => {
+		const { getColorTempRequest, libraryDetailId } = this.props
+		getColorTempRequest({ LibraryDetailId: libraryDetailId })
+	}
 
-import style from './style.scss'
+	render() {
+		const {
+			libraryDetailColorTemperatureData: { data, loading, error },
+		} = this.props
 
-import SelectFilters from 'Components/SelectFilters'
-import { ColorTemperature as Chart } from 'Components/ColorTemperatureChart/ColorTemperature'
-
-const LibraryDetailColorTemperature = ({
-  colorTempData,
-  handleSelectFilters,
-  selectDate,
-}) => {
-  return (
-    <div className="col-12 shadow-1 mt-48 bg-dark-grey-blue">
-      <div className={style.radialChartsContainer}>
-        <div className={style.temperatureHeader}>
-          <div>
-            <h2>Color Temperature / Sentiment Comparison</h2>
-          </div>
-          <div className="d-flex align-items-center justify-space-between">
-            <div className="d-flex align-items-center mr-32">
-              <span className={style.redRound} />
-              <p>This Video</p>
-            </div>
-            <div className="d-flex align-items-center mr-32">
-              <span className={style.duskRound} />
-              <p>Library Average</p>
-            </div>
-            <div className="d-flex align-items-center mr-32">
-              <span className={style.purpleRound} />
-              <p>Industry</p>
-            </div>
-          </div>
-          <div className={style.inputWrapper}>
-            <SelectFilters
-              handleSelectFilters={handleSelectFilters}
-              selectClasses="custom-select"
-              selectDate={selectDate}
-              selectDateShow={true}
-            />
-          </div>
-        </div>
-        <div className={style.temperatureContentContainer}>
-          {(colorTempData || []).map((temp, index) => (
-            <div
-              className={classnames('col-4', style.chartWrapper)}
-              key={'temp-chart-' + index}>
-              <Chart temp={temp} />
-              <div className={style.chartInfo}>{temp.text}</div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </div>
-  )
+		return (
+			<ColorTemperatureModule
+				moduleKey="LibraryDetail/ColorTemperature"
+				data={data}
+				title="Color Temperature / Sentiment Comparison"
+				action={this.callBack}
+				legend={[
+					{ label: 'This Video', color: 'redRound' },
+					{ label: 'Library Average', color: 'duskRound' },
+					{ label: 'Industry', color: 'purpleRound' },
+				]}
+				filters={[
+					{
+						type: 'timeRange',
+						selectKey: 'ACT-wds',
+						placeHolder: 'Date',
+					},
+				]}
+			/>
+		)
+	}
 }
 
-export default LibraryDetailColorTemperature
+const mapStateToProps = createStructuredSelector({
+	libraryDetailColorTemperatureData: makeSelectLibraryDetailColorTemperature(),
+})
+
+const mapDispatchToProps = (dispatch) => ({
+	getColorTempRequest: (id) => dispatch(actions.getColorTempRequest(id)),
+})
+
+const withConnect = connect(
+	mapStateToProps,
+	mapDispatchToProps
+)
+
+LibraryDetailColorTemperature.propTypes = {
+	libraryDetailId: PropTypes.string,
+}
+
+export default compose(withConnect)(LibraryDetailColorTemperature)

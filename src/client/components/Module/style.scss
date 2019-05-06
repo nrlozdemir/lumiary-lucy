@@ -3,8 +3,8 @@
   font-family: $font-family-ClanOT;
   margin-top: 35px;
   margin-bottom: 35px;
-  position: relative;
-  overflow: hidden;
+  // position: relative;
+  // overflow: hidden;
 
   .moduleContainerHeader {
     display: flex;
@@ -14,12 +14,29 @@
     font-size: 18px;
     font-family: $font-family-ClanOTBold;
     line-height: 42px;
-    > div {
-      flex: 1;
-    }
     .headerTitle {
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      flex: 1;
+      // flex-direction: column;
+
+      .moduleInfo {
+        color: #ffffff;
+        border-radius: 50%;
+        border: 2px solid #ffffff;
+        width: 20px;
+        height: 20px;
+        position: relative;
+        margin-left: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 14px;
+        cursor: pointer;
+        box-sizing: border-box;
+        margin-top: 2px;
+      }
+
       h1,
       h2 {
         line-height: initial;
@@ -31,8 +48,6 @@
         font-size: 16px;
       }
     }
-    .headerLegend {
-    }
     .headerFilters {
       display: flex;
       justify-content: flex-end;
@@ -41,6 +56,14 @@
       > div {
         text-align: left;
         margin: 0 0 0 24px;
+      }
+    }
+
+    .headerLegend {
+      flex: 1;
+      p{
+        font-size: 14px;
+        line-height: 1.8rem;
       }
     }
   }

@@ -2,9 +2,9 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { Line } from 'react-chartjs-2'
 import { randomKey } from 'Utils/index'
-
 import style from './style.scss'
 import data from './dummyChartData'
+
 // Bar chart crash while this line allow, i will found a solution for this case
 // import 'chartjs-plugin-style'
 
@@ -56,9 +56,9 @@ class LineChart extends React.PureComponent {
             tooltips: {
               position: 'nearest',
               backgroundColor: '#fff',
-              titleFontColor: '#242b49',
-              bodyFontColor: '#242b49',
-              footerFontColor: '#242b49',
+              titleFontColor: '#21243B',
+              bodyFontColor: '#21243B',
+              footerFontColor: '#21243B',
               xPadding: 10,
               yPadding: 16,
               cornerRadius: 0,
@@ -74,7 +74,7 @@ class LineChart extends React.PureComponent {
                 {
                   gridLines: {
                     display: true,
-                    color: '#5a6386',
+                    color: '#545B79',
                     lineWidth: 0.7,
                     drawBorder: true,
                     drawTicks: false,
@@ -91,7 +91,7 @@ class LineChart extends React.PureComponent {
                 {
                   gridLines: {
                     display: true,
-                    color: '#5a6386',
+                    color: '#545B79',
                     lineWidth: 0.7,
                     drawBorder: true,
                     drawTicks: false,

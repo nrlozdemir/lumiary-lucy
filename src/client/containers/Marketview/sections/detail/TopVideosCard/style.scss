@@ -18,23 +18,6 @@
     }
   }
 
-  .barChartContainer {
-    position: relative;
-    z-index: 1;
-
-    &:before {
-      content: '';
-      background-color: $color-dark-five;
-      border-right: 1px solid $color-dusk;
-      height: calc(100% - 40px);
-      width: calc(100% - 62px);
-      position: absolute;
-      left: 53px;
-      top: 7px;
-      z-index: -1;
-    }
-  }
-
   .references {
     display: table;
     margin: 48px auto;

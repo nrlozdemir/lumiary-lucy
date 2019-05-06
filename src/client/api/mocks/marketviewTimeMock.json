@@ -4,23 +4,28 @@
       "labels": ["360", "480", "720p", "1080p", "4k"],
       "datasets": [
         {
-          "backgroundColor": "#51adc0",
+					"label": "First",
+					"backgroundColor": "#2FD7C4",
           "data": [5.06, 20.26, 20.86, 16.44, 5.02]
         },
         {
-          "backgroundColor": "#8567f0",
+					"label": "Second",
+					"backgroundColor": "#8562F3",
           "data": [39.66, 25.19, 22.66, 7.56, 30.12]
         },
         {
-          "backgroundColor": "#D0506C",
+					"label": "Third",
+					"backgroundColor": "#5292E5",
           "data": [4.22, 9.35, 28.42, 40, 28.96]
         },
         {
+          "label": "Four",
           "backgroundColor": "#acb0be",
           "data": [38.82, 25.45, 24.46, 4.89, 31.66]
         },
         {
-          "backgroundColor": "#5a6386",
+					"label": "Five",
+					"backgroundColor": "#545B79",
           "data": [12.24, 19.74, 3.6, 31.11, 4.25]
         }
       ]
@@ -31,6 +36,7 @@
         "socialMedia": "facebook",
         "title": "ESN",
         "secondTitle": "261068 Shares",
+        "cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -93,6 +99,7 @@
         "socialMedia": "pinterest",
         "title": "Barstool Media",
         "secondTitle": "395 Shares",
+        "cvScore": 56.1,
         "options": [
           {
             "name": "Duration",
@@ -155,6 +162,7 @@
         "socialMedia": "twitter",
         "title": "SB Nation",
         "secondTitle": "4564 Shares",
+        "cvScore": 76.1,
         "options": [
           {
             "name": "Duration",
@@ -217,6 +225,7 @@
         "socialMedia": "instagram",
         "title": "Scout Media",
         "secondTitle": "112758 Shares",
+        "cvScore": 45.1,
         "options": [
           {
             "name": "Duration",
@@ -279,6 +288,7 @@
         "socialMedia": "twitter",
         "title": "Fansided",
         "secondTitle": "170 Shares",
+        "cvScore": 86.1,
         "options": [
           {
             "name": "Duration",
@@ -375,23 +385,28 @@
       "labels": ["360", "480", "720p", "1080p", "4k"],
       "datasets": [
         {
-          "backgroundColor": "#51adc0",
+					"label": "First",
+					"backgroundColor": "#2FD7C4",
           "data": [49.5, 35.74, 22.79, 7.24, 5.37]
         },
         {
-          "backgroundColor": "#8567f0",
+					"label": "Second",
+					"backgroundColor": "#8562F3",
           "data": [18.32, 10.04, 26.78, 24.79, 35.12]
         },
         {
-          "backgroundColor": "#D0506C",
+					"label": "Third",
+					"backgroundColor": "#5292E5",
           "data": [1.49, 3.61, 11.97, 26.18, 10.33]
         },
         {
+          "label": "Four",
           "backgroundColor": "#acb0be",
           "data": [29.21, 26.51, 28.21, 22.56, 21.9]
         },
         {
-          "backgroundColor": "#5a6386",
+					"label": "Five",
+					"backgroundColor": "#545B79",
           "data": [1.49, 24.1, 10.26, 19.22, 27.27]
         }
       ]
@@ -402,6 +417,7 @@
         "socialMedia": "twitter",
         "title": "ESN",
         "secondTitle": "348454 Shares",
+        "cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -464,6 +480,7 @@
         "socialMedia": "youtube",
         "title": "Barstool Media",
         "secondTitle": "261 Shares",
+        "cvScore": 86.1,
         "options": [
           {
             "name": "Duration",
@@ -526,6 +543,7 @@
         "socialMedia": "facebook",
         "title": "SB Nation",
         "secondTitle": "2505 Shares",
+        "cvScore": 45.1,
         "options": [
           {
             "name": "Duration",
@@ -588,6 +606,7 @@
         "socialMedia": "youtube",
         "title": "Scout Media",
         "secondTitle": "46867 Shares",
+        "cvScore": 56.1,
         "options": [
           {
             "name": "Duration",
@@ -650,6 +669,7 @@
         "socialMedia": "facebook",
         "title": "Fansided",
         "secondTitle": "402 Shares",
+        "cvScore": 66.1,
         "options": [
           {
             "name": "Duration",
@@ -746,23 +766,28 @@
       "labels": ["360", "480", "720p", "1080p", "4k"],
       "datasets": [
         {
-          "backgroundColor": "#51adc0",
+					"label": "First",
+					"backgroundColor": "#2FD7C4",
           "data": [2.82, 1.79, 27.78, 9.28, 15.41]
         },
         {
-          "backgroundColor": "#8567f0",
+					"label": "Second",
+					"backgroundColor": "#8562F3",
           "data": [15.99, 24.55, 24.75, 27, 31.9]
         },
         {
-          "backgroundColor": "#D0506C",
+					"label": "Third",
+					"backgroundColor": "#5292E5",
           "data": [21.94, 13.39, 9.09, 10.13, 6.09]
         },
         {
+          "label": "Four",
           "backgroundColor": "#acb0be",
           "data": [30.09, 16.96, 12.63, 17.72, 17.92]
         },
         {
-          "backgroundColor": "#5a6386",
+					"label": "Five",
+					"backgroundColor": "#545B79",
           "data": [29.15, 43.3, 25.76, 35.86, 28.67]
         }
       ]
@@ -773,6 +798,7 @@
         "socialMedia": "twitter",
         "title": "ESN",
         "secondTitle": "364320 Shares",
+        "cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -835,6 +861,7 @@
         "socialMedia": "instagram",
         "title": "Barstool Media",
         "secondTitle": "300 Shares",
+        "cvScore": 86.1,
         "options": [
           {
             "name": "Duration",
@@ -897,6 +924,7 @@
         "socialMedia": "instagram",
         "title": "SB Nation",
         "secondTitle": "2033 Shares",
+        "cvScore": 76.1,
         "options": [
           {
             "name": "Duration",
@@ -959,6 +987,7 @@
         "socialMedia": "facebook",
         "title": "Scout Media",
         "secondTitle": "111555 Shares",
+        "cvScore": 56.1,
         "options": [
           {
             "name": "Duration",
@@ -1021,6 +1050,7 @@
         "socialMedia": "twitter",
         "title": "Fansided",
         "secondTitle": "344 Shares",
+        "cvScore": 77.1,
         "options": [
           {
             "name": "Duration",
@@ -1117,23 +1147,28 @@
       "labels": ["360", "480", "720p", "1080p", "4k"],
       "datasets": [
         {
-          "backgroundColor": "#51adc0",
+					"label": "First",
+					"backgroundColor": "#2FD7C4",
           "data": [32.41, 26.97, 15.43, 5.76, 33.22]
         },
         {
-          "backgroundColor": "#8567f0",
+					"label": "Second",
+					"backgroundColor": "#8562F3",
           "data": [23.32, 16.29, 28.09, 23.05, 5.76]
         },
         {
-          "backgroundColor": "#D0506C",
+					"label": "Third",
+					"backgroundColor": "#5292E5",
           "data": [5.14, 20.79, 11.11, 15.25, 32.2]
         },
         {
+          "label": "Four",
           "backgroundColor": "#acb0be",
           "data": [14.23, 1.69, 15.12, 26.78, 0]
         },
         {
-          "backgroundColor": "#5a6386",
+					"label": "Five",
+					"backgroundColor": "#545B79",
           "data": [24.9, 34.27, 30.25, 29.15, 28.81]
         }
       ]
@@ -1144,6 +1179,7 @@
         "socialMedia": "facebook",
         "title": "ESN",
         "secondTitle": "329121 Shares",
+        "cvScore": 66.1,
         "options": [
           {
             "name": "Duration",
@@ -1206,6 +1242,7 @@
         "socialMedia": "facebook",
         "title": "Barstool Media",
         "secondTitle": "307 Shares",
+        "cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -1268,6 +1305,7 @@
         "socialMedia": "twitter",
         "title": "SB Nation",
         "secondTitle": "2091 Shares",
+        "cvScore": 76.1,
         "options": [
           {
             "name": "Duration",
@@ -1330,6 +1368,7 @@
         "socialMedia": "twitter",
         "title": "Scout Media",
         "secondTitle": "68934 Shares",
+        "cvScore": 55.1,
         "options": [
           {
             "name": "Duration",
@@ -1392,6 +1431,7 @@
         "socialMedia": "twitter",
         "title": "Fansided",
         "secondTitle": "306 Shares",
+        "cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -1488,23 +1528,28 @@
       "labels": ["360", "480", "720p", "1080p", "4k"],
       "datasets": [
         {
-          "backgroundColor": "#51adc0",
+					"label": "First",
+					"backgroundColor": "#2FD7C4",
           "data": [11.8, 22.62, 19.74, 35.82, 17.87]
         },
         {
-          "backgroundColor": "#8567f0",
+					"label": "Second",
+					"backgroundColor": "#8562F3",
           "data": [26.71, 21.08, 38.16, 18.91, 6.81]
         },
         {
-          "backgroundColor": "#D0506C",
+					"label": "Third",
+					"backgroundColor": "#5292E5",
           "data": [12.11, 19.02, 34.65, 4.48, 23.83]
         },
         {
+          "label": "Four",
           "backgroundColor": "#acb0be",
           "data": [26.71, 14.14, 0.44, 15.92, 32.77]
         },
         {
-          "backgroundColor": "#5a6386",
+					"label": "Five",
+					"backgroundColor": "#545B79",
           "data": [22.67, 23.14, 7.02, 24.88, 18.72]
         }
       ]
@@ -1515,6 +1560,7 @@
         "socialMedia": "facebook",
         "title": "ESN",
         "secondTitle": "239363 Shares",
+        "cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -1577,6 +1623,7 @@
         "socialMedia": "pinterest",
         "title": "Barstool Media",
         "secondTitle": "113 Shares",
+        "cvScore": 66.1,
         "options": [
           {
             "name": "Duration",
@@ -1639,6 +1686,7 @@
         "socialMedia": "facebook",
         "title": "SB Nation",
         "secondTitle": "3516 Shares",
+        "cvScore": 54.1,
         "options": [
           {
             "name": "Duration",
@@ -1701,6 +1749,7 @@
         "socialMedia": "facebook",
         "title": "Scout Media",
         "secondTitle": "151629 Shares",
+        "cvScore": 56.1,
         "options": [
           {
             "name": "Duration",
@@ -1763,6 +1812,7 @@
         "socialMedia": "twitter",
         "title": "Fansided",
         "secondTitle": "373 Shares",
+        "cvScore": 55.1,
         "options": [
           {
             "name": "Duration",
@@ -1859,23 +1909,28 @@
       "labels": ["360", "480", "720p", "1080p", "4k"],
       "datasets": [
         {
-          "backgroundColor": "#51adc0",
+					"label": "First",
+					"backgroundColor": "#2FD7C4",
           "data": [29.61, 34.66, 6.45, 10.86, 4.36]
         },
         {
-          "backgroundColor": "#8567f0",
+					"label": "Second",
+					"backgroundColor": "#8562F3",
           "data": [5.14, 17.93, 20.97, 17.65, 30.18]
         },
         {
-          "backgroundColor": "#D0506C",
+					"label": "Third",
+					"backgroundColor": "#5292E5",
           "data": [13.9, 1.99, 33.06, 25.79, 26.55]
         },
         {
+          "label": "Four",
           "backgroundColor": "#acb0be",
           "data": [26.89, 7.97, 3.23, 9.5, 30.18]
         },
         {
-          "backgroundColor": "#5a6386",
+					"label": "Five",
+					"backgroundColor": "#545B79",
           "data": [24.47, 37.45, 36.29, 36.2, 8.73]
         }
       ]
@@ -1886,6 +1941,7 @@
         "socialMedia": "pinterest",
         "title": "ESN",
         "secondTitle": "339657 Shares",
+        "cvScore": 56.1,
         "options": [
           {
             "name": "Duration",
@@ -1948,6 +2004,7 @@
         "socialMedia": "youtube",
         "title": "Barstool Media",
         "secondTitle": "222 Shares",
+        "cvScore": 66.1,
         "options": [
           {
             "name": "Duration",
@@ -2010,6 +2067,7 @@
         "socialMedia": "twitter",
         "title": "SB Nation",
         "secondTitle": "4199 Shares",
+        "cvScore": 54.1,
         "options": [
           {
             "name": "Duration",
@@ -2072,6 +2130,7 @@
         "socialMedia": "instagram",
         "title": "Scout Media",
         "secondTitle": "110060 Shares",
+        "cvScore": 76.1,
         "options": [
           {
             "name": "Duration",
@@ -2134,6 +2193,7 @@
         "socialMedia": "instagram",
         "title": "Fansided",
         "secondTitle": "392 Shares",
+        "cvScore": 66.1,
         "options": [
           {
             "name": "Duration",
@@ -2230,23 +2290,28 @@
       "labels": ["360", "480", "720p", "1080p", "4k"],
       "datasets": [
         {
-          "backgroundColor": "#51adc0",
+					"label": "First",
+					"backgroundColor": "#2FD7C4",
           "data": [32.18, 37.5, 16.3, 22.02, 16.03]
         },
         {
-          "backgroundColor": "#8567f0",
+					"label": "Second",
+					"backgroundColor": "#8562F3",
           "data": [13.15, 4.35, 22.59, 6.86, 5.57]
         },
         {
-          "backgroundColor": "#D0506C",
+					"label": "Third",
+					"backgroundColor": "#5292E5",
           "data": [13.15, 3.26, 24.44, 7.58, 27.18]
         },
         {
+          "label": "Four",
           "backgroundColor": "#acb0be",
           "data": [20.42, 19.02, 36.67, 31.05, 27.53]
         },
         {
-          "backgroundColor": "#5a6386",
+					"label": "Five",
+					"backgroundColor": "#545B79",
           "data": [21.11, 35.87, 0, 32.49, 23.69]
         }
       ]
@@ -2257,6 +2322,7 @@
         "socialMedia": "youtube",
         "title": "ESN",
         "secondTitle": "287227 Shares",
+        "cvScore": 67.1,
         "options": [
           {
             "name": "Duration",
@@ -2319,6 +2385,7 @@
         "socialMedia": "pinterest",
         "title": "Barstool Media",
         "secondTitle": "486 Shares",
+        "cvScore": 66.1,
         "options": [
           {
             "name": "Duration",
@@ -2381,6 +2448,7 @@
         "socialMedia": "pinterest",
         "title": "SB Nation",
         "secondTitle": "4132 Shares",
+        "cvScore": 76.1,
         "options": [
           {
             "name": "Duration",
@@ -2443,6 +2511,7 @@
         "socialMedia": "twitter",
         "title": "Scout Media",
         "secondTitle": "86817 Shares",
+        "cvScore": 44.1,
         "options": [
           {
             "name": "Duration",
@@ -2505,6 +2574,7 @@
         "socialMedia": "youtube",
         "title": "Fansided",
         "secondTitle": "156 Shares",
+        "cvScore": 61.1,
         "options": [
           {
             "name": "Duration",

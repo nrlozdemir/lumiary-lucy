@@ -10,49 +10,81 @@ import style from './style.scss'
 import HeaderModule from './header'
 
 export class Module extends React.Component {
-  constructor(props) {
-    super(props)
-  }
-  componentDidUpdate(prevProps) {
-    if (
-      !_.isEqual(
-        prevProps.selectFilters.values[prevProps.moduleKey],
-        this.props.selectFilters.values[this.props.moduleKey]
-      )
-    ) {
-      this.props.action(
-        this.props.selectFilters.values[this.props.moduleKey],
-        this.props.moduleKey
-      )
-    }
-  }
+	constructor(props) {
+		super(props)
+		this.state = {
+			infoShow: false,
+		}
+	}
+	componentDidUpdate(prevProps) {
+		if (
+			!_.isEqual(
+				prevProps.selectFilters.values[prevProps.moduleKey],
+				this.props.selectFilters.values[this.props.moduleKey]
+			)
+		) {
+			this.props.action(
+				this.props.selectFilters.values[this.props.moduleKey],
+				this.props.moduleKey
+			)
+		}
+	}
 
-  render() {
-    const moduleContainer = cx(
-      'shadow-1 grid-container col-12',
-      style.moduleContainer
-    )
-    const { children, title, subTitle, legend, filters } = this.props
-    return (
-      <div className={moduleContainer}>
-        <div className={style.moduleContainerHeader}>
-          <HeaderModule {...this.props} />
-        </div>
-        <div className={style.moduleContainerBody}>{children}</div>
-      </div>
-    )
-  }
+	changeInfoStatus = () => {
+		this.setState({
+			infoShow: !this.state.infoShow,
+		})
+	}
+
+	render() {
+		const {
+			children,
+			title,
+			subTitle,
+			legend,
+			filters,
+			bodyClass,
+			containerClass,
+		} = this.props
+
+		const { infoShow } = this.state
+
+		const moduleContainer = cx(
+			'shadow-1 grid-container col-12',
+			style.moduleContainer,
+			containerClass,
+		)
+
+		return (
+			<div className={moduleContainer}>
+				<div className={style.moduleContainerHeader}>
+					<HeaderModule
+						{...this.props}
+						changeInfoStatus={this.changeInfoStatus}
+						infoShow={infoShow}
+					/>
+				</div>
+				<div className={cx(style.moduleContainerBody, bodyClass)}>{children}</div>
+			</div>
+		)
+	}
 }
 
 const mapStateToProps = createStructuredSelector({
-  selectFilters: makeSelectSelectFilters(),
+	selectFilters: makeSelectSelectFilters(),
 })
 
+Module.defaultProps = {
+	action: () => {},
+}
+
 Module.propTypes = {
-  action: PropTypes.func.isRequired,
+	action: PropTypes.func.isRequired,
+	bodyClass: PropTypes.string,
+	containerClass: PropTypes.string
 }
 
 export default connect(
-  mapStateToProps,
-  {}
+	mapStateToProps,
+	{}
 )(Module)
