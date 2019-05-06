@@ -2,12 +2,10 @@ import React from 'react'
 import cn from 'classnames'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import Slider from 'rc-slider'
-
-import style from './style.scss'
-
 import SingleItemSlider from 'Components/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
 import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
+import style from './style.scss'
 
 class LibraryDetailShotByShot extends React.Component {
   constructor(props) {

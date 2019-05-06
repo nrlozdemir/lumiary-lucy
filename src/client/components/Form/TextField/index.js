@@ -1,8 +1,6 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import cx from 'classnames'
 import { Field } from 'redux-form'
-
 import style from './styles.scss'
 
 const TextField = (props) => {

@@ -1,10 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
-
-import style from './style.scss'
-
 import HorizontalStackedBarChart from 'Components/Charts/Panoptic/HorizontalStackedBarChart'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
+import style from './style.scss'
 
 const pacingCardContainer = classnames('shadow-1', style.pacingCardContainer)
 

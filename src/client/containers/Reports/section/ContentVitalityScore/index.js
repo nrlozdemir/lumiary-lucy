@@ -1,5 +1,4 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
@@ -7,11 +6,10 @@ import {
   actions,
   makeSelectReportsContentVitalityScore,
 } from 'Reducers/reports'
-
-import chartStyle from './style.scss'
-import LineChart from 'Components/Charts/LineChart'
-
 import Module from 'Components/Module'
+import LineChart from 'Components/Charts/LineChart'
+import Module from 'Components/Module'
+import chartStyle from './style.scss'
 
 class ContentVitalityScore extends React.Component {
   callBack = (data, moduleKey) => {

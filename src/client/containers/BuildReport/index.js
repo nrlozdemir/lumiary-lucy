@@ -1,19 +1,12 @@
-/**
- *
- * LibraryDetail
- *
- */
-
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
-import style from './style.scss'
 import { makeSelectLibraryDetail } from 'Reducers/libraryDetail'
 import { Link, Redirect } from 'react-router-dom'
-
 import SvgLoading from 'Components/SvgLoading'
+import style from './style.scss'
 
 /* eslint-disable react/prefer-stateless-function */
 export class BuildReport extends React.Component {

@@ -1,23 +1,18 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceContentVitalityScore } from 'Reducers/panoptic'
-
+import Module from 'Components/Module'
 import cx from 'classnames'
-
-import chartStyle from './style.scss'
 import LineChart from 'Components/Charts/LineChart'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
-
-import Module from 'Components/Module'
+import chartStyle from './style.scss'
 
 class ContentVitalityScore extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getAudienceContentVitalityScoreData(data)
   }
-
 
   render() {
     // const { selectViews, selectPlatforms, selectDate } = this.state;

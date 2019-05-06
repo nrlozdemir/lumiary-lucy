@@ -2,14 +2,12 @@ import React from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
-
-import style from './style.scss'
-
 import Select from 'Components/Form/SelectField'
 import Button from 'Components/Form/Button'
 import SocialCheckBoxes from 'Components/Form/SocialCheckBoxes/'
 import ColorRadioBoxes from 'Components/Form/ColorRadioBoxes/index'
 import Range from 'Components/Form/Range'
+import style from './style.scss'
 
 const Sidebar = (props) => {
 	const { reset, handleSubmit } = props
@@ -29,7 +27,8 @@ const Sidebar = (props) => {
 		{
 			[style.fixed]: props.fixedHeader,
 			'mt-80': props.fixedHeader
-		})
+		}
+	)
 
   const selectOptions = {
     orderByOptions: [

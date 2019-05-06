@@ -1,17 +1,10 @@
-/**
- *
- * VideoCard
- *
- */
-
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
-import PropTypes from 'prop-types'
 import style from './style.scss'
 import { socialIconSelector } from '../../utils'
 import { Link } from 'react-router-dom'
-
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
+
 let hoverInReady
 
 export class VideoCard extends PureComponent {

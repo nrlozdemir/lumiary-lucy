@@ -1,14 +1,11 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceChangeOverTime } from 'Reducers/panoptic'
-
-import style from 'Containers/Audience/style.scss'
-import LineChart from 'Components/Charts/LineChart'
-
 import Module from 'Components/Module'
+import LineChart from 'Components/Charts/LineChart'
+import style from 'Containers/Audience/style.scss'
 
 class ChangeOverTime extends React.Component {
   callBack = (data, moduleKey) => {

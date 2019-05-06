@@ -1,10 +1,10 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { compose } from 'redux'
 import SelectFilters from 'Components/SelectFilters'
+import LineChart from 'Components/Charts/LineChart'
 import PointerCard from 'Components/PointerCard'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
-import LineChart from 'Components/Charts/LineChart'
 import style from './style.scss'
 
 class LibraryDetailDoughnutChart extends React.Component {

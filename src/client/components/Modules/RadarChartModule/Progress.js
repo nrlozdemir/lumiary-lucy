@@ -1,6 +1,5 @@
 import React from 'react';
 import classnames from 'classnames'
-
 import ProgressBar from 'Components/ProgressBar'
 import style from './style.scss';
 
