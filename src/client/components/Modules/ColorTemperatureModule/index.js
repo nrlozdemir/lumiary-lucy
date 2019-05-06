@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 
 import Module from 'Components/Module'
 import ColorTemperatureChart from 'Components/ColorTemperatureChart'
+import Legend from 'Components/Legend'
 
 import cx from 'classnames'
 import style from './styles.scss'
@@ -16,13 +17,11 @@ const renderLegend = (legend) => {
 		<div className={style.headerLabel}>
 			<div className={'d-flex align-items-center justify-content-center'}>
 				{legend.map((item, idx) => (
-					<div
-						className="d-flex align-items-center mr-32"
+					<Legend
 						key={`colorTempLegend_${idx}`}
-					>
-						<span className={cx(style.legendLabel, style[item.color])} />
-						<p>{item.label}</p>
-					</div>
+						color={item.color}
+						label={item.label}
+					/>
 				))}
 			</div>
 		</div>
