@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectAudienceColorTemperature } from 'Reducers/panoptic'
+import { actions, makeSelectAudienceColorTemperature } from 'Reducers/audience'
 import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
 import chartStyle from './style.scss'
 
