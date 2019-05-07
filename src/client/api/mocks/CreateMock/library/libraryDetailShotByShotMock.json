@@ -192,83 +192,123 @@
   "sliderWithThumbnails": [
     {
       "img": "https://picsum.photos/500/270?image=1",
-      "thumbnail": "https://picsum.photos/200/160?image=1"
+      "thumbnail": "https://picsum.photos/200/160?image=1",
+      "sceneURL": "https://picsum.photos/238/160?image=1",
+      "duration": "00:00:10"
     },
     {
       "img": "https://picsum.photos/500/270?image=2",
-      "thumbnail": "https://picsum.photos/40/160?image=2"
+      "thumbnail": "https://picsum.photos/40/160?image=2",
+      "sceneURL": "https://picsum.photos/238/160?image=2",
+      "duration": "00:00:20"
     },
     {
       "img": "https://picsum.photos/500/270?image=3",
-      "thumbnail": "https://picsum.photos/150/160?image=3"
+      "thumbnail": "https://picsum.photos/150/160?image=3",
+      "sceneURL": "https://picsum.photos/238/160?image=3",
+      "duration": "00:00:30"
     },
     {
       "img": "https://picsum.photos/500/270?image=4",
-      "thumbnail": "https://picsum.photos/240/160?image=4"
+      "thumbnail": "https://picsum.photos/240/160?image=4",
+      "sceneURL": "https://picsum.photos/238/160?image=4",
+      "duration": "00:00:40"
     },
     {
       "img": "https://picsum.photos/500/270?image=5",
-      "thumbnail": "https://picsum.photos/200/160?image=5"
+      "thumbnail": "https://picsum.photos/200/160?image=5",
+      "sceneURL": "https://picsum.photos/238/160?image=5",
+      "duration": "00:00:50"
     },
     {
       "img": "https://picsum.photos/500/270?image=6",
-      "thumbnail": "https://picsum.photos/250/160?image=6"
+      "thumbnail": "https://picsum.photos/250/160?image=6",
+      "sceneURL": "https://picsum.photos/238/160?image=6",
+      "duration": "00:01:00"
     },
     {
       "img": "https://picsum.photos/500/270?image=7",
-      "thumbnail": "https://picsum.photos/300/160?image=7"
+      "thumbnail": "https://picsum.photos/300/160?image=7",
+      "sceneURL": "https://picsum.photos/238/160?image=7",
+      "duration": "00:01:10"
     },
     {
       "img": "https://picsum.photos/500/270?image=8",
-      "thumbnail": "https://picsum.photos/110/160?image=8"
+      "thumbnail": "https://picsum.photos/110/160?image=8",
+      "sceneURL": "https://picsum.photos/238/160?image=8",
+      "duration": "00:01:20"
     },
     {
       "img": "https://picsum.photos/500/270?image=9",
-      "thumbnail": "https://picsum.photos/60/160?image=9"
+      "thumbnail": "https://picsum.photos/60/160?image=9",
+      "sceneURL": "https://picsum.photos/238/160?image=9",
+      "duration": "00:01:30"
     },
     {
       "img": "https://picsum.photos/500/270?image=10",
-      "thumbnail": "https://picsum.photos/160/160?image=10"
+      "thumbnail": "https://picsum.photos/160/160?image=10",
+      "sceneURL": "https://picsum.photos/238/160?image=10",
+      "duration": "00:01:40"
     },
     {
-      "img": "https://picsum.photos/500/270?image=1",
-      "thumbnail": "https://picsum.photos/100/160?image=1"
+      "img": "https://picsum.photos/500/270?image=11",
+      "thumbnail": "https://picsum.photos/100/160?image=11",
+      "sceneURL": "https://picsum.photos/238/160?image=11",
+      "duration": "00:01:50"
     },
     {
-      "img": "https://picsum.photos/500/270?image=2",
-      "thumbnail": "https://picsum.photos/20/160?image=2"
+      "img": "https://picsum.photos/500/270?image=12",
+      "thumbnail": "https://picsum.photos/20/160?image=12",
+      "sceneURL": "https://picsum.photos/238/160?image=12",
+      "duration": "00:02:00"
     },
     {
-      "img": "https://picsum.photos/500/270?image=3",
-      "thumbnail": "https://picsum.photos/75/160?image=3"
+      "img": "https://picsum.photos/500/270?image=13",
+      "thumbnail": "https://picsum.photos/75/160?image=13",
+      "sceneURL": "https://picsum.photos/238/160?image=13",
+      "duration": "00:02:10"
     },
     {
-      "img": "https://picsum.photos/500/270?image=4",
-      "thumbnail": "https://picsum.photos/120/160?image=4"
+      "img": "https://picsum.photos/500/270?image=14",
+      "thumbnail": "https://picsum.photos/120/160?image=14",
+      "sceneURL": "https://picsum.photos/238/160?image=14",
+      "duration": "00:02:20"
     },
     {
-      "img": "https://picsum.photos/500/270?image=5",
-      "thumbnail": "https://picsum.photos/200/160?image=5"
+      "img": "https://picsum.photos/500/270?image=15",
+      "thumbnail": "https://picsum.photos/200/160?image=15",
+      "sceneURL": "https://picsum.photos/238/160?image=15",
+      "duration": "00:02:30"
     },
     {
-      "img": "https://picsum.photos/500/270?image=6",
-      "thumbnail": "https://picsum.photos/250/160?image=6"
+      "img": "https://picsum.photos/500/270?image=16",
+      "thumbnail": "https://picsum.photos/250/160?image=16",
+      "sceneURL": "https://picsum.photos/238/160?image=16",
+      "duration": "00:02:40"
     },
     {
-      "img": "https://picsum.photos/500/270?image=7",
-      "thumbnail": "https://picsum.photos/90/160?image=7"
+      "img": "https://picsum.photos/500/270?image=17",
+      "thumbnail": "https://picsum.photos/90/160?image=17",
+      "sceneURL": "https://picsum.photos/238/160?image=17",
+      "duration": "00:02:50"
     },
     {
-      "img": "https://picsum.photos/500/270?image=8",
-      "thumbnail": "https://picsum.photos/110/160?image=8"
+      "img": "https://picsum.photos/500/270?image=18",
+      "thumbnail": "https://picsum.photos/110/160?image=18",
+      "sceneURL": "https://picsum.photos/238/160?image=18",
+      "duration": "00:03:00"
     },
     {
-      "img": "https://picsum.photos/500/270?image=9",
-      "thumbnail": "https://picsum.photos/40/160?image=9"
+      "img": "https://picsum.photos/500/270?image=19",
+      "thumbnail": "https://picsum.photos/40/160?image=19",
+      "sceneURL": "https://picsum.photos/238/160?image=19",
+      "duration": "00:03:10"
     },
     {
-      "img": "https://picsum.photos/500/270?image=10",
-      "thumbnail": "https://picsum.photos/60/160?image=10"
+      "img": "https://picsum.photos/500/270?image=20",
+      "thumbnail": "https://picsum.photos/60/160?image=20",
+      "sceneURL": "https://picsum.photos/238/160?image=20",
+      "duration": "00:03:20"
     }
   ]
 }

@@ -104,5 +104,5 @@ export {
   toSlug,
   chartCombineDataset,
   shadeHexColor,
-  capitalizeFirstLetter
+  capitalizeFirstLetter,
 }
