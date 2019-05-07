@@ -1,85 +1,52 @@
 {
-	"colorTempData": [
-		{
-			"text": "This is a blurb that will explain what this graph is showing",
-			"data": [
-				{
-					"x": "rN#-100, 100#",
-					"y": "rN#-100, 100#",
-					"type": "video",
-					"color": "#5292E5"
-				},
-				{
-					"x": "rN#-100, 100#",
-					"y": "rN#-100, 100#",
-					"type": "library",
-					"color": "#2FD7C4"
-				},
-				{
-					"x": "rN#-100, 100#",
-					"y": "rN#-100, 100#",
-					"type": "industry",
-					"color": "#8562F3"
-				}
-			],
-			"topText": "Happy",
-			"bottomText": "Sad",
-			"leftText": "Cool",
-			"rightText": "Warm"
-		},
-		{
-			"text": "This is a blurb that will explain what this graph is showing",
-			"data": [
-				{
-					"x": "rN#-100, 100#",
-					"y": "rN#-100, 100#",
-					"type": "video",
-					"color": "#5292E5"
-				},
-				{
-					"x": "rN#-100, 100#",
-					"y": "rN#-100, 100#",
-					"type": "library",
-					"color": "#2FD7C4"
-				},
-				{
-					"x": "rN#-100, 100#",
-					"y": "rN#-100, 100#",
-					"type": "industry",
-					"color": "#8562F3"
-				}
-			],
-			"topText": "Energetic",
-			"bottomText": "Calm",
-			"leftText": "Cool",
-			"rightText": "Warm"
-		},
-		{
-			"text": "This is a blurb that will explain what this graph is showing",
-			"data": [
-				{
-					"x": "rN#-100, 100#",
-					"y": "rN#-100, 100#",
-					"type": "video",
-					"color": "#5292E5"
-				},
-				{
-					"x": "rN#-100, 100#",
-					"y": "rN#-100, 100#",
-					"type": "library",
-					"color": "#2FD7C4"
-				},
-				{
-					"x": "rN#-100, 100#",
-					"y": "rN#-100, 100#",
-					"type": "industry",
-					"color": "#8562F3"
-				}
-			],
-			"topText": "Natural",
-			"bottomText": "Synthetic",
-			"leftText": "Cool",
-			"rightText": "Warm"
-		}
-	]
+  "colorTempData": [
+    {
+      "data": [
+        {
+          "x": "rN#-100, 100#",
+          "y": "rN#-100, 100#"
+        },
+        {
+          "x": "rN#-100, 100#",
+          "y": "rN#-100, 100#"
+        },
+        {
+          "x": "rN#-100, 100#",
+          "y": "rN#-100, 100#"
+        }
+      ]
+    },
+    {
+      "data": [
+        {
+          "x": "rN#-100, 100#",
+          "y": "rN#-100, 100#"
+        },
+        {
+          "x": "rN#-100, 100#",
+          "y": "rN#-100, 100#"
+        },
+        {
+          "x": "rN#-100, 100#",
+          "y": "rN#-100, 100#"
+        }
+      ]
+    },
+    {
+      "data": [
+        {
+          "x": "rN#-100, 100#",
+          "y": "rN#-100, 100#"
+        },
+        {
+          "x": "rN#-100, 100#",
+          "y": "rN#-100, 100#"
+        },
+        {
+          "x": "rN#-100, 100#",
+          "y": "rN#-100, 100#"
+        }
+      ]
+    }
+  ]
 }

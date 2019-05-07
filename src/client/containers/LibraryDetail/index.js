@@ -81,7 +81,23 @@ export class LibraryDetail extends React.Component {
     let radarDataCombined = null
 
     if (shotByShotData) {
-      radarDataCombined = chartCombineDataset(shotByShotData.radarData, radarData_DatasetOptions)
+      radarDataCombined = chartCombineDataset({
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        ...shotByShotData.radarData
+      }, radarData_DatasetOptions)
     }
 
     return (
@@ -98,7 +114,7 @@ export class LibraryDetail extends React.Component {
           doughnutData={doughnutLineChartData.doughnutData}
         />}
         <LibraryDetailColorTemperature
-        	libraryDetailId={videoId}
+          libraryDetailId={videoId}
           colorTempData={colorTempData}
         />
         {shotByShotData && <LibraryDetailShotByShot
