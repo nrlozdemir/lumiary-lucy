@@ -25,11 +25,11 @@ export const ColorTemperature = ({ temp, verticalText }) => {
   return (
     <div className={style.temperatureContent}>
       <p className={style.textTop}>{temp.topText ? temp.topText : 'Happy'}</p>
-      <p className={rightText}>{temp.topText ? temp.rightText : 'Warm'}</p>
+      <p className={rightText}>Warm</p>
       <p className={style.textBottom}>
         {temp.topText ? temp.bottomText : 'Sad'}
       </p>
-      <p className={leftText}>{temp.topText ? temp.leftText : 'Cool'}</p>
+      <p className={leftText}>Cool</p>
       <div className={style.verticalLine} />
       <div className={style.horizontalLine} />
       {temp.data.map((data, i) => {
