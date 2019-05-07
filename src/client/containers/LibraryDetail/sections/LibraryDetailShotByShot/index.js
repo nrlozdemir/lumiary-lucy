@@ -23,169 +23,7 @@ class LibraryDetailShotByShot extends React.Component {
         marginLeft: '0px',
         marginTop: '0px',
       },
-      scenes: [
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=76',
-          duration: '00:02:40',
-          sceneSecond: '00:01:10',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=29',
-          duration: '00:01:00',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=71',
-          duration: '00:04:00',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=37',
-          duration: '00:03:10',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=11',
-          duration: '00:02:10',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=89',
-          duration: '00:02:40',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=52',
-          duration: '00:01:30',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=69',
-          duration: '00:01:10',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=28',
-          duration: '00:02:00',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=76',
-          duration: '00:01:20',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=29',
-          duration: '00:01:00',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=71',
-          duration: '00:03:20',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=81',
-          duration: '00:02:30',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=9',
-          duration: '00:03:20',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=89',
-          duration: '00:03:20',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=43',
-          duration: '00:02:20',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=35',
-          duration: '00:02:40',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=41',
-          duration: '00:01:30',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=47',
-          duration: '00:02:10',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=151',
-          duration: '00:03:00',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=76',
-          duration: '00:02:40',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=29',
-          duration: '00:01:00',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=71',
-          duration: '00:04:00',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=37',
-          duration: '00:03:10',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=11',
-          duration: '00:02:10',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=89',
-          duration: '00:02:40',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=52',
-          duration: '00:01:30',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=69',
-          duration: '00:01:10',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=28',
-          duration: '00:02:00',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=76',
-          duration: '00:01:20',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=29',
-          duration: '00:01:00',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=71',
-          duration: '00:03:20',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=81',
-          duration: '00:02:30',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=9',
-          duration: '00:03:20',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=89',
-          duration: '00:03:20',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=43',
-          duration: '00:02:20',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=35',
-          duration: '00:02:40',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=41',
-          duration: '00:01:30',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=47',
-          duration: '00:02:10',
-        },
-        {
-          sceneURL: 'https://picsum.photos/238/160?image=151',
-          duration: '00:03:00',
-        },
-      ],
+      scenes: this.props.sliderWithThumbnails || [],
     }
     this.slide = React.createRef()
   }
@@ -301,7 +139,6 @@ class LibraryDetailShotByShot extends React.Component {
           ...this.state.sliderHandleStyle,
           marginLeft: '0px',
         },
-        sliderValue: 0,
       })
     } else if (e === 0) {
       this.setState(
@@ -430,24 +267,23 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   render() {
-    const {
-      sliderWithThumbnails,
-      slideImages,
-      radarData,
-      videoList,
-    } = this.props
+    const { sliderWithThumbnails, slideImages, radarData } = this.props
     const { selectedImage } = this.state
     const sliderTabContainer = cn(
       'grid-container col-12 mt-48 mb-48',
       style.sliderTabContainer
     )
+
     return (
       <div>
         {selectedImage ? (
           <div className={sliderTabContainer}>
             <div className="col-6-no-gutters bg-black">
               <div className="mt-48 ml-48 mr-48">
-                <SingleItemSlider slideImages={sliderWithThumbnails} />
+                <SingleItemSlider
+                  slideImages={sliderWithThumbnails}
+                  selectedImage={selectedImage}
+                />
               </div>
             </div>
             <div className="col-6-no-gutters ">
@@ -539,7 +375,7 @@ class LibraryDetailShotByShot extends React.Component {
             </div>
           </div>
         ) : (
-          <div className="grid-container col-12 shadow-1 mt-48 mb-48 bg-dark-grey-blue">
+          <div className="col-12 shadow-1 mt-48 mb-48 bg-dark-grey-blue">
             <div className="col-12">
               <h2 className={style.sliderHeader}>Shot by Shot</h2>
               <div className={style.sliderContainer} ref={this.slide}>

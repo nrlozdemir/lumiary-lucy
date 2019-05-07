@@ -34,7 +34,7 @@ const HeaderModule = ({
         </span>
       </div>
       {!!legend && <div className={style.headerLegend}>{legend}</div>}
-      {filters && filters.length ? (
+      {filters && filters.length && (
         <div className={style.headerFilters}>
           {filters.map((filter, index) => {
             return (
@@ -49,8 +49,6 @@ const HeaderModule = ({
             )
           })}
         </div>
-      ) : (
-        ''
       )}
     </React.Fragment>
   )

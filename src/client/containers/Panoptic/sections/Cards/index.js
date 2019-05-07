@@ -18,7 +18,7 @@ const days = [
   'Saturday',
 ]
 
-function appendDays(data){
+function appendDays(data) {
   let extendScores = []
   data.map((el, i) => {
     extendScores.push({ label: days[i], score: el })
@@ -26,14 +26,14 @@ function appendDays(data){
   return extendScores
 }
 
-function parseData(props){
+function parseData(props) {
   const { data, title } = props
   const stats = appendDays(data)
   const selected = days[new Date().getDay()]
-  const selectedPrev = days[
-    (day => new Date(day.setDate(day.getDate()-1)).getDay())
-    (new Date)
-  ]
+  const selectedPrev =
+    days[
+      ((day) => new Date(day.setDate(day.getDate() - 1)).getDay())(new Date())
+    ]
   const statSelected = Object.values(stats).filter(
     (day) => stats && day.label === selected
   )
@@ -43,9 +43,8 @@ function parseData(props){
   const todayScore = statSelected[0].score
   const previousDayScore = statSelectedPrev[0].score
   const statDifference = todayScore - previousDayScore
-  const statDifferenceValue = (statDifference < 0
-    ? statDifference * -1
-    : statDifference) + '%'
+  const statDifferenceValue =
+    (statDifference < 0 ? statDifference * -1 : statDifference) + '%'
 
   let statArrowClassName, statClassName, backText
 
@@ -56,15 +55,11 @@ function parseData(props){
   } else if (statDifference > 0) {
     statArrowClassName = classnames(styles.arrow, styles.arrowUp)
     statClassName = classnames(styles.stats, styles.increase)
-    backText = `${title} increased today from yesterday, from ${
-      previousDayScore
-    }k to ${todayScore}k`
+    backText = `${title} increased today from yesterday, from ${previousDayScore}k to ${todayScore}k`
   } else if (statDifference < 0) {
     statArrowClassName = classnames(styles.arrow, styles.arrowDown)
     statClassName = classnames(styles.stats, styles.decrease)
-    backText = `${title} decreased today from yesterday, from ${
-      previousDayScore
-    }k to ${todayScore}k`
+    backText = `${title} decreased today from yesterday, from ${previousDayScore}k to ${todayScore}k`
   }
 
   return {
@@ -73,7 +68,7 @@ function parseData(props){
     statDifferenceValue,
     selected,
     statDifference,
-    backText
+    backText,
   }
 }
 
@@ -85,30 +80,32 @@ const Front = (props) => {
     statArrowClassName,
     statDifferenceValue,
     selected,
-    statDifference
+    statDifference,
   } = parseData(props)
 
-  return (<div className={statClassName}>
-    <div className={styles.content}>
-      <p className={styles.headline}>{title}</p>
-      <div className={styles.changes}>
-        <div className={styles.circle}>
-          <i className={statArrowClassName} />
+  return (
+    <div className={statClassName}>
+      <div className={styles.content}>
+        <p className={styles.headline}>{title}</p>
+        <div className={styles.changes}>
+          <div className={styles.circle}>
+            <i className={statArrowClassName} />
+          </div>
+          <p className={styles.label}>{statDifferenceValue}</p>
         </div>
-        <p className={styles.label}>{statDifferenceValue}</p>
       </div>
+      <CustomBarChart
+        data={stats}
+        selected={selected}
+        difference={statDifference}
+      />
     </div>
-    <CustomBarChart
-      data={stats}
-      selected={selected}
-      difference={statDifference}
-    />
-  </div>)
+  )
 }
 
 const Back = (props) => {
   const { backText } = parseData(props)
-  return (<p className={styles.backText}>{backText}</p>)
+  return <p className={styles.backText}>{backText}</p>
 }
 
 class Cards extends React.Component {
