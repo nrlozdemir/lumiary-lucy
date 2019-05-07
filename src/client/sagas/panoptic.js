@@ -7,7 +7,6 @@ import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 
 import { ajax } from 'Utils/api'
-import { chartColors } from 'Utils/globals'
 
 import _ from 'lodash'
 
@@ -100,11 +99,17 @@ function getPacingCardDataApi(vals) {
 
 function* getPacingCardData({ data }) {
 	try {
-		const { 'PCT-asd': metricOption, 'PCT-wds': dateOption } = data
+		const { 'PCT-asd': metricOption = {}, 'PCT-wds': dateOption = {} } = data
+		const { value: dateOptionValue } = dateOption
 
 		const dateRange =
-			(!!dateOption && !!dateOption.value && dateOption.value.value) ||
+			(!!dateOptionValue &&
+				dateOptionValue.value &&
+				(!!dateOptionValue.value.startDate
+					? [dateOptionValue.value.startDate, dateOptionValue.value.endDate]
+					: dateOptionValue.value)) ||
 			'24hours'
+
 		const metric =
 			(!!metricOption && !!metricOption.value && metricOption.value.value) ||
 			'views'
@@ -117,8 +122,6 @@ function* getPacingCardData({ data }) {
 			dateBucket: 'none',
 		}
 
-		console.log('pacing card options ===', options)
-
 		const stadiumData = yield call(getPacingCardDataApi, {
 			...options,
 			display: 'percentage',
@@ -126,7 +129,6 @@ function* getPacingCardData({ data }) {
 
 		const horizontalStackedBarData = yield call(getPacingCardDataApi, {
 			...options,
-			property: ['pacing'],
 			proportionOf: 'format',
 		})
 
@@ -144,18 +146,10 @@ function* getPacingCardData({ data }) {
 				data: { pacing: barChartPacing },
 			} = horizontalStackedBarData
 
-			const stadiumChartData = Object.keys(stadiumPacing).map((key, idx) => ({
-				title: key,
-				value: stadiumPacing[key] || 0,
-				color: chartColors[idx],
-			}))
-
-			console.log('stadium chart data ===', stadiumChartData)
-
 			yield put(
 				actions.getPacingCardDataSuccess({
-					stadiumData: stadiumChartData,
-					//horizontalStackedBarData: {}
+					stadiumData: stadiumPacing,
+					horizontalStackedBarData: barChartPacing,
 				})
 			)
 		} else {
