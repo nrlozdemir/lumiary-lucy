@@ -32,6 +32,14 @@ export const types = {
   GET_AUDIENCE_COLOR_TEMPERATURE_DATA: 'Audience/GET_AUDIENCE_COLOR_TEMPERATURE_DATA',
   GET_AUDIENCE_COLOR_TEMPERATURE_DATA_SUCCESS: 'Audience/GET_AUDIENCE_COLOR_TEMPERATURE_DATA_SUCCESS',
   GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR: 'Audience/GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR',
+
+  GET_AUDIENCE_CHANGE_OVER_TIME_DATA: 'Audience/GET_AUDIENCE_CHANGE_OVER_TIME_DATA',
+  GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS: 'Audience/GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS',
+  GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR: 'Audience/GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR',
+
+  GET_AUDIENCE_DOMINANT_COLOR_DATA: 'Audience/GET_AUDIENCE_DOMINANT_COLOR_DATA',
+  GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS: 'Audience/GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS',
+  GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR: 'Audience/GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR',
 }
 
 export const actions = {
@@ -107,6 +115,30 @@ export const actions = {
     type: types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR,
     error,
   }),
+
+  getAudienceChangeOverTimeData: () => ({
+    type: types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA,
+  }),
+  getAudienceChangeOverTimeDataSuccess: (payload) => ({
+    type: types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS,
+    payload,
+  }),
+  getAudienceChangeOverTimeDataError: (error) => ({
+    type: types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR,
+    error,
+  }),
+
+  getAudienceDominantColorData: () => ({
+    type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA,
+  }),
+  getAudienceDominantColorDataSuccess: (payload) => ({
+    type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS,
+    payload,
+  }),
+  getAudienceDominantColorDataError: (error) => ({
+    type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR,
+    error,
+  }),
 }
 
 export const initialState = fromJS({
@@ -136,6 +168,16 @@ export const initialState = fromJS({
     loading: false,
     error: null,
   },
+  audienceChangeOverTimeData: {
+    data: [],
+    loading: false,
+    error: null,
+  },
+  audienceDominantColorData: {
+    data: {},
+    loading: false,
+    error: null,
+	},
   loading: false,
   error: false,
 })
@@ -301,6 +343,64 @@ const audienceReducer = (state = initialState, action) => {
 					fromJS(false)
 				)
 
+		case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA:
+			return state
+				.setIn(
+        	['audienceChangeOverTimeData', 'loading'],
+        	fromJS(true)
+      	)
+
+    case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS:
+      return state
+				.setIn(
+					['audienceChangeOverTimeData', 'data'],
+					fromJS(action.payload)
+				)
+        .setIn(
+					['audienceChangeOverTimeData', 'loading'],
+					fromJS(false)
+				)
+
+    case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR:
+      return state
+        .setIn(
+					['audienceChangeOverTimeData', 'error'],
+					fromJS(action.error)
+				)
+        .setIn(
+					['audienceChangeOverTimeData', 'loading'],
+					fromJS(false)
+				)
+
+    case types.GET_AUDIENCE_DOMINANT_COLOR_DATA:
+			return state
+				.setIn(
+					['audienceDominantColorData', 'loading'],
+					fromJS(true)
+				)
+
+    case types.GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS:
+      return state
+        .setIn(
+					['audienceDominantColorData', 'data'],
+					fromJS(action.payload)
+				)
+        .setIn(
+					['audienceDominantColorData', 'loading'],
+					fromJS(false)
+				)
+
+    case types.GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR:
+      return state
+        .setIn(
+					['audienceDominantColorData', 'error'],
+					fromJS(action.error)
+				)
+        .setIn(
+					['audienceDominantColorData', 'loading'],
+					fromJS(false)
+				)
+
     default:
       return state
   }
@@ -353,5 +453,22 @@ export const makeSelectAudienceColorTemperature = () =>
 		(substate) => substate.toJS()
 	)
 
+const selectAudienceChangeOverTimeDomain = (state) =>
+  state.Audience.get('audienceChangeOverTimeData')
+
+export const makeSelectAudienceChangeOverTime = () =>
+  createSelector(
+    selectAudienceChangeOverTimeDomain,
+    (substate) => substate.toJS()
+  )
+
+const selectAudienceDominantColorDomain = (state) =>
+  state.Audience.get('audienceDominantColorData')
+
+export const makeSelectAudienceDominantColor = () =>
+  createSelector(
+    selectAudienceDominantColorDomain,
+    (substate) => substate.toJS()
+	)
 
 export default audienceReducer

@@ -96,6 +96,34 @@ function* getAudienceColorTemperatureData() {
   }
 }
 
+function* getAudienceChangeOverTimeData() {
+  try {
+    const payload = yield call(getAudienceDataApi)
+    let shuffleData = payload.lineChartData
+    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
+    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
+    yield put(actions.getAudienceChangeOverTimeDataSuccess(shuffleData))
+  } catch (err) {
+    yield put(actions.getAudienceChangeOverTimeDataError(err))
+  }
+}
+
+function* getAudienceDominantColorData() {
+  try {
+    const payload = yield call(getAudienceDataApi)
+    let shuffleData = payload.chartData
+    shuffleData[0].datas.datasets[0].data = _.shuffle(
+      shuffleData[0].datas.datasets[0].data
+    )
+    shuffleData[1].datas.datasets[0].data = _.shuffle(
+      shuffleData[1].datas.datasets[0].data
+    )
+    yield put(actions.getAudienceDominantColorDataSuccess(shuffleData))
+  } catch (err) {
+    yield put(actions.getAudienceDominantColorDataError(err))
+  }
+}
+
 export default [
   takeLatest(
     types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA,
@@ -106,4 +134,6 @@ export default [
   takeLatest(types.GET_AUDIENCE_AGE_SLIDER_DATA, getAudienceAgeSliderData),
 	takeLatest(types.GET_AUDIENCE_GENDER_DATA, getAudienceGenderData),
 	takeLatest(types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA, getAudienceColorTemperatureData),
+	takeLatest(types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA, getAudienceChangeOverTimeData),
+  takeLatest(types.GET_AUDIENCE_DOMINANT_COLOR_DATA, getAudienceDominantColorData),
 ]
