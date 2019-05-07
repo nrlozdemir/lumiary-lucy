@@ -71,6 +71,9 @@
 	right: -10px;
 	font-family: $font-family-ClanOTNews;
 	transform: translateX(100%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .textLeft {
@@ -79,6 +82,9 @@
 	left: -10px;
 	right: unset;
 	transform: translateX(-100%);
+	display: flex;
+	justify-content: center;
+	align-items: center;
 }
 
 .horizontalLine {
