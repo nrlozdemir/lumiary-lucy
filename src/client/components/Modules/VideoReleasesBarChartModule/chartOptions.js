@@ -105,10 +105,13 @@ export const wrapperBarOptions = {
             if (value == 0) {
               return 0
             }
+            const val = Math.abs(value / 1000)
+            const val2 = values[index] / 10000
+
             if (value < 0) {
-              return `${Math.abs(value / 1000)}k`
+              return val === 100 ? `${val}k` : ''
             }
-            return `${values[index] / 10000}v`
+            return val2 === 10 ? `${val2}v` : ''
           },
         },
       },
