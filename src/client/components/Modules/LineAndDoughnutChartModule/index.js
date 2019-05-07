@@ -3,7 +3,6 @@ import cx from 'classnames'
 import { Module } from 'Components/Module'
 import style from './style.scss'
 import PercentageBarGraph from '../../Charts/PercentageBarGraph'
-import LineChart from '../../LineChart/Chart'
 import DoughnutChart from '../../Charts/DoughnutChart'
 import { Line } from 'react-chartjs-2'
 
@@ -21,7 +20,7 @@ class LineAndDoughnutChartModule extends React.Component {
     } = this.props
     const plugins = [
       {
-        beforeDraw: function(chart, easing) {
+        beforeDraw: function (chart, easing) {
           if (
             chart.config.options.chartArea &&
             chart.config.options.chartArea.backgroundColor
@@ -40,7 +39,7 @@ class LineAndDoughnutChartModule extends React.Component {
             ctx.restore()
           }
         },
-        beforeDatasetsDraw: function(chart) {
+        beforeDatasetsDraw: function (chart) {
           if (chart.tooltip._active && chart.tooltip._active.length) {
             var activePoint = chart.tooltip._active[0],
               ctx = chart.ctx,

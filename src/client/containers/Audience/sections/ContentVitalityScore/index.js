@@ -5,41 +5,14 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceContentVitalityScore } from 'Reducers/panoptic'
 import Module from 'Components/Module'
 import cx from 'classnames'
-import LineChart from 'Components/LineChart/Chart'
+import LineChart from 'Components/Charts/LineChart'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
-import { lineChartOptions, lineChartData_DatasetOptions } from './options'
-import { chartCombineDataset } from 'Utils'
 import chartStyle from './style.scss'
-
-function combineChartData(chartData) {
-  return chartCombineDataset(chartData, lineChartData_DatasetOptions, {
-    beforeDraw: function (chart, easing) {
-      if (
-        chart.config.options.chartArea &&
-        chart.config.options.chartArea.backgroundColor
-      ) {
-        const ctx = chart.chart.ctx
-        const chartArea = chart.chartArea
-
-        ctx.save()
-        ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-        ctx.fillRect(
-          chartArea.left,
-          chartArea.top,
-          chartArea.right - chartArea.left,
-          chartArea.bottom - chartArea.top
-        )
-        ctx.restore()
-      }
-    }
-  })
-}
 
 class ContentVitalityScore extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getAudienceContentVitalityScoreData(data)
   }
-
 
   render() {
     // const { selectViews, selectPlatforms, selectDate } = this.state;
@@ -68,14 +41,36 @@ class ContentVitalityScore extends React.Component {
         ]}
       >
         {data && data.datasets && (
-          <div className="col-12">
+          <div className="w-100">
             <div data-vertical-title="Number Of Videos" className={chartStyle.vitalityContainer}>
               <LineChart
-                backgroundColor="#21243B"
-                dataSet={() => combineChartData(data)}
-                width={1070}
+                chartType="lineStackedArea"
+                width={1140}
                 height={291}
-                options={lineChartOptions}
+                backgroundColor="#21243B"
+                dataSet={data}
+                removeTooltip
+                removePointRadius
+                xAxesFlatten
+                flattenFirstSpace={1}
+                flattenLastSpace={5}
+                options={{
+                  scales:{
+                    yAxes: [{
+                      ticks: {
+                        callback: function(value, index, values) {
+                          if(value === 0) {
+                            return value + ' '
+                          } else if(value === 250) {
+                            return value
+                          } else {
+                            return ''
+                          }
+                        }
+                      }
+                    }]
+                  }
+                }}
               />
             </div>
             <div className="row">
