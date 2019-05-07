@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 
 import Module from 'Components/Module'
-import ColorTemperatureChart from 'Components/ColorTemperatureChart'
+import ColorTemperatureChart from 'Components/Charts/ColorTemperatureChart'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import Legend from 'Components/Legend'
 

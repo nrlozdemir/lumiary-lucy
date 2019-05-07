@@ -63,7 +63,7 @@ export const options = {
   },
 }
 
-export const wrapperBarOptions = (data) => ({
+export const wrapperBarOptions = {
   responsive: true,
   maintainAspectRatio: false,
   layout: {
@@ -114,4 +114,4 @@ export const wrapperBarOptions = (data) => ({
       },
     ],
   },
-})
+}

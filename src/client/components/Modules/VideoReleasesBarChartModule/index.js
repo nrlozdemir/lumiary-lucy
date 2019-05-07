@@ -102,9 +102,38 @@ const VideoReleasesBarChartModule = ({
                 <Bar
                   data={data}
                   options={{
-                    ...wrapperBarOptions(data),
+                    ...wrapperBarOptions,
                     chartArea: {
                       backgroundColor: colors.chartBackground,
+                    },
+                    scales: {
+                      xAxes: [
+                        {
+                          ...wrapperBarOptions.scales.xAxes[0],
+                          ticks: {
+                            ...wrapperBarOptions.scales.xAxes[0].ticks,
+                            fontColor: colors.labelColor,
+                          },
+                          gridLines: {
+                            ...wrapperBarOptions.scales.xAxes[0].gridLines,
+                            color: colors.chartStadiumBarBorder,
+                          },
+                        },
+                      ],
+                      yAxes: [
+                        {
+                          ...wrapperBarOptions.scales.yAxes[0],
+                          ticks: {
+                            ...wrapperBarOptions.scales.yAxes[0].ticks,
+                            fontColor: colors.labelColor,
+                          },
+                          gridLines: {
+                            ...wrapperBarOptions.scales.yAxes[0].gridLines,
+                            color: colors.chartStadiumBarBorder,
+                            zeroLineColor: colors.chartStadiumBarBorder,
+                          },
+                        },
+                      ],
                     },
                   }}
                   datasetKeyProvider={datasetKeyProvider}
