@@ -59,7 +59,15 @@ export class Time extends React.Component {
 
   changeActiveDay(day) {
     this.setState({ activeDay: day })
-  }
+	}
+
+	getSimilarProperties = data => {
+		this.props.getSimilarPropertiesRequest(data);
+	}
+
+	getCompetitorTopVideos = data => {
+		this.props.getMarketviewDetailTimeRequest(data);
+	}
 
   render() {
     const {
@@ -70,9 +78,6 @@ export class Time extends React.Component {
 
     const selectedDayData =
       marketviewDetailTime && marketviewDetailTime[activeDay]
-    if (!selectedVideo || marketview.loading || !marketviewDetailTime) {
-      return <RouterLoading />
-    }
 
     return (
       <React.Fragment>
@@ -81,7 +86,7 @@ export class Time extends React.Component {
           activeDay={activeDay}
         />
 				<Slider
-					data={selectedDayData.CompetitorVideos || []}
+					data={selectedDayData && selectedDayData.CompetitorVideos || []}
 					selectedVideo={selectedVideo}
 					changeSelectedVideo={this.changeSelectedVideo}
 					title={`Top Performing ${activeDay
@@ -90,7 +95,7 @@ export class Time extends React.Component {
 				/>
 				<TopSimilarPropertiesModule
 					moduleKey="MarketView/TopSimilarPropertiesModule"
-					data={selectedDayData.SimilarProperties}
+					data={selectedDayData && selectedDayData.SimilarProperties || null}
 					title="Top Similar Properties Of Top Videos"
 					action={this.getSimilarProperties}
 					filters={[
@@ -102,11 +107,11 @@ export class Time extends React.Component {
 					]}
 				/>
 				<TopVideosCardModule
-					chartData={selectedDayData.CompetitorTopVideos}
+					chartData={selectedDayData && selectedDayData.CompetitorTopVideos || null}
 					height={150}
 					moduleKey="MarketView/TopVideosCardModule"
 					title="Top Performing Property Across All Days Of The Week"
-					action={this.getCompetitorVideos}
+					action={this.getCompetitorTopVideos}
 					filters={[
 						{
 							type: 'videoProperty',

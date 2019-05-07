@@ -17,7 +17,6 @@ const BarChartModule = ({
   action,
   moduleKey,
 }) => {
-  console.log(action)
   return (
     <Module
       moduleKey={moduleKey}
