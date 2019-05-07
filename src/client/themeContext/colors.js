@@ -59,12 +59,26 @@ const dark = {
   // custom selectbox values
 
   // input values
-  inputBackground: '#373f5b',
-  inputBorder: '#545b79',
-  inputActiveBorder: '#acb0be',
-  inputColor: '#ffffff',
-  inputPlaceholderColor: '#545b79',
+  inputControlBackground: '#21243B',
+  inputControlBorder: '#acb0be',
+  inputControlSelectedBorder: '#545b79',
+  inputColor: '#545B79',
+  inputActiveColor: '#ffffff',
+  inputOptionBackground: '#545B79',
+  inputOptionFocusBackground: '#21243B',
+  inputOptionSelectedBackground: '#ffffff',
   // input values
+
+  // table values
+  tableHeaderBackground: '#545b79',
+  tableBodyBackground: '#373f5b',
+  tableBackground: '#21243b',
+  tableBorder: '#545b79',
+  tableShadow: 'rgba(0, 0, 0, 0.5)',
+  tablePopoverBackground: '#ffffff',
+  tablePopoverDeleteColor: '#2fd7c4',
+  tablePopoverColor: '#545b79',
+  // table values
 }
 
 const light = {
@@ -128,12 +142,26 @@ const light = {
   // custom selectbox values
 
   // input values
-  inputBackground: '#f3f6f9',
-  inputBorder: '#c6c9d7',
-  inputActiveBorder: '#acb0be',
-  inputColor: '#505050',
-  inputPlaceholderColor: '#c6c9d7',
+  inputControlBackground: '#e8ecf0',
+  inputControlBorder: '#acb0be',
+  inputControlSelectedBorder: '#c6c9d7',
+  inputColor: '#c6c9d7',
+  inputActiveColor: '#505050',
+  inputOptionBackground: '#ffffff',
+  inputOptionFocusBackground: '#e8ecf0',
+  inputOptionSelectedBackground: '#505050',
   // input values
+
+  // table values
+  tableHeaderBackground: '#ffffff',
+  tableBodyBackground: '#f3f6f9',
+  tableBackground: '#e8ecf0',
+  tableBorder: '#c6c9d7',
+  tableShadow: '#bebebe',
+  tablePopoverBackground: '#505050',
+  tablePopoverDeleteColor: '#2fd7c4',
+  tablePopoverColor: '#ffffff',
+  // table values
 }
 
 const themes = {

@@ -9,6 +9,7 @@ const Select = (props) => {
   const { className, id, options, placeholder, multiple, customClass } = props
 
   const themes = props.themeContext.colors
+  console.log('themes', themes)
 
   let args = props.input ? props.input : props
   let { name, onChange, value } = args
@@ -35,7 +36,7 @@ const Select = (props) => {
     })
     return (
       <div className={style.DropdownIndicator}>
-        <span className={menuIsOpenClass} style={{ color: themes.textColor }}>
+        <span className={menuIsOpenClass}>
           <span className="path1" />
           <span className="path2" />
           <span className="path3" />
@@ -48,12 +49,12 @@ const Select = (props) => {
     control: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
-        background: themes.selectBackground,
+        background: themes.inputControlBackground,
         borderColor: isSelected
-          ? '#acb0be'
+          ? themes.inputControlBorder
           : isFocused
-          ? '#acb0be'
-          : themes.selectBorder,
+          ? themes.inputControlBorder
+          : themes.inputControlSelectedBorder,
         borderRadius: '8px',
         borderWidth: '1px',
         boxShadow: 'rgba(0, 0, 0, 0.5)',
@@ -65,7 +66,11 @@ const Select = (props) => {
     input: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
-        color: themes.textColor,
+        color: isSelected
+          ? themes.inputColor
+          : isFocused
+          ? themes.inputActiveColor
+          : themes.inputColor,
       }
     },
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -74,15 +79,15 @@ const Select = (props) => {
         height: '40px',
         lineHeight: '27px',
         backgroundColor: isSelected
-          ? '#21243B'
+          ? themes.inputOptionSelectedBackground
           : isFocused
-          ? '#ffffff'
-          : '#545B79',
+          ? themes.inputOptionFocusBackground
+          : themes.inputOptionBackground,
         color: isSelected
-          ? themes.textColor
+          ? themes.inputColor
           : isFocused
-          ? '#545B79'
-          : themes.textColor,
+          ? themes.inputActiveColor
+          : themes.inputActiveColor,
         cursor: 'pointer',
         border: 'none',
       }
@@ -91,15 +96,15 @@ const Select = (props) => {
       return {
         ...styles,
         color: isFocused
-          ? themes.textColor
+          ? themes.inputColor
           : isSelected
-          ? themes.textColor
-          : '#545B79',
+          ? themes.inputColor
+          : themes.inputActiveColor,
       }
     },
     singleValue: (styles) => ({
       ...styles,
-      color: themes.textColor,
+      color: themes.inputActiveColor,
     }),
     menu: (base) => ({
       ...base,
