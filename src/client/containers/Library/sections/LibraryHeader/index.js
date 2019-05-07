@@ -2,13 +2,11 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from "redux"
 import { createStructuredSelector } from "reselect";
-
-import style from './style.scss'
-
 import { actions, makeSelectLibrary } from 'Reducers/library'
 import AsyncSearch from 'Components/Form/AsyncSearch'
 import Button from 'Components/Form/Button'
 import { searchTermInText } from 'Utils'
+import style from './style.scss'
 
 class LibraryHeader extends React.Component {
   constructor(props) {

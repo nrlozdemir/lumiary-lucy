@@ -51,34 +51,6 @@
 	}
 }
 
-.headerLabel {
-	p {
-		font-size: 14px;
-		font-family: $font-family-ClanOTNews;
-	}
-
-	.legendLabel {
-		width: 16px;
-		height: 16px;
-		display: inline-flex;
-		border-radius: 100%;
-		vertical-align: middle;
-		margin-right: 10px;
-
-		&.redRound {
-			background-color: $color-coral-pink;
-		}
-
-		&.purpleRound {
-			background-color: $color-lighter-purple;
-		}
-
-		&.duskRound {
-			background-color: $color-cool-blue;
-		}
-	}
-}
-
 .round {
 	width: 16px;
 	height: 16px;

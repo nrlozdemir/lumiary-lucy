@@ -2,11 +2,8 @@ import React from "react";
 import PropTypes from "prop-types";
 import cx from "classnames";
 import { Field } from "redux-form";
-
-import style from "./styles.scss";
-
-// Components
 import Select from "../Select";
+import style from "./styles.scss";
 
 const SelectField = props => {
 	const { className, id, label, name, validate, ...rest } = props;

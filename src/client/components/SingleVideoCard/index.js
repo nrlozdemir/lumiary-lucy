@@ -1,16 +1,10 @@
-/**
- *
- * SingleVideoCard
- *
- */
-
-import React, { PureComponent } from 'react'
+import React from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import style from './style.scss'
-import { socialIconSelector, randomKey } from '../../utils'
-/* eslint-disable react/prefer-stateless-function */
+import { socialIconSelector } from '../../utils'
 
+/* eslint-disable react/prefer-stateless-function */
 const SingleVideoCard = ({ video, options = options || {}, muted = true }) => {
   const handleMouseOverPlay = () => {
     videoRef.current.play()

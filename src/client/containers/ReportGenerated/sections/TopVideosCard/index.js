@@ -1,7 +1,6 @@
 import React from 'react'
 import cx from 'classnames'
 import { randomKey } from 'Utils/index'
-
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 import SelectFilters from 'Components/SelectFilters'
 import style from './style.scss'

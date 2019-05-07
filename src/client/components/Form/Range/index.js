@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import classnames from 'classnames'
-import PropTypes from 'prop-types'
-import style from './styles.scss'
-
+//import classnames from 'classnames'
+//import style from './styles.scss'
 import Slider from 'rc-slider'
 
 const RangeSlider = Slider.Range

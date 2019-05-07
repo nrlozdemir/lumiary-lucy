@@ -2,12 +2,10 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { createStructuredSelector } from 'reselect'
-
 import { actions, makeSelectLibrary } from 'Reducers/library'
-import style from '../../style.scss'
-
 import VideoCardList from 'Components/VideoCardList'
 import RouterLoading from 'Components/RouterLoading'
+import style from '../../style.scss'
 
 class VideoSection extends React.Component {
   componentDidMount() {

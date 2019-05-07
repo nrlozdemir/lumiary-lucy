@@ -1,19 +1,11 @@
 import React from 'react'
-import { Field, reduxForm } from 'redux-form'
+import { reduxForm } from 'redux-form'
 import { compose } from 'redux'
-
-import { chartCombineDataset } from 'Utils'
-import style from './style.scss'
-import {
-  selectOptions,
-  lineChartOptions,
-  lineChartData_DatasetOptions,
-} from './options'
-
 import SelectFilters from 'Components/SelectFilters'
-import LineChart from 'Components/LineChart/Chart'
+import LineChart from 'Components/Charts/LineChart'
 import PointerCard from 'Components/PointerCard'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
+import style from './style.scss'
 
 class LibraryDetailDoughnutChart extends React.Component {
   constructor(props) {
@@ -21,30 +13,6 @@ class LibraryDetailDoughnutChart extends React.Component {
     this.state = {
       selectedCard: false,
     }
-  }
-
-  combineChartData(chartData) {
-    return chartCombineDataset(chartData, lineChartData_DatasetOptions, {
-      beforeDraw: function(chart, easing) {
-        if (
-          chart.config.options.chartArea &&
-          chart.config.options.chartArea.backgroundColor
-        ) {
-          const ctx = chart.chart.ctx
-          const chartArea = chart.chartArea
-
-          ctx.save()
-          ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-          ctx.fillRect(
-            chartArea.left,
-            chartArea.top,
-            chartArea.right - chartArea.left,
-            chartArea.bottom - chartArea.top
-          )
-          ctx.restore()
-        }
-      },
-    })
   }
 
   changeVisibilityDoughnut(selectedCard = false) {
@@ -280,18 +248,41 @@ class LibraryDetailDoughnutChart extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className="w-100 mt-48 mb-48">
-                  {selectedCardData && (
-                    <LineChart
-                      backgroundColor="#21243B"
-                      dataSet={() =>
-                        this.combineChartData(selectedCardData.lineChartData)
-                      }
-                      width={1070}
-                      height={291}
-                      options={lineChartOptions}
-                    />
-                  )}
+                <div className={style.lineChartWrapper}>
+                  <div className="mt-48 mb-48">
+                    {selectedCardData && (
+                      <LineChart
+                        width={1090}
+                        height={292}
+                        backgroundColor="#21243B"
+                        dataSet={selectedCardData.lineChartData}
+                        xAxesFlatten
+                        yAxesPercentage
+                        xAxesStepSize={1}
+                        yAxesStepSize={25}
+                        options={{
+                          tooltips: {
+                            xPadding: 10,
+                            yPadding: 16,
+                            cornerRadius: 3,
+                            callbacks: {
+                              title: function(tooltipItem, data) {
+                                const { datasetIndex, index } = tooltipItem[0];
+                                if (datasetIndex === 1) {
+                                  return `${data.datasets[datasetIndex].data[index]}% of industry is shot in 24fps`;
+                                } else {
+                                  return `${data.datasets[datasetIndex].data[index]}% of frames is shot in 24fps`;
+                                }
+                              },
+                              label: function(tooltipItem, data) {
+                                return null
+                              }
+                            }
+                          }
+                        }}
+                      />
+                    )}
+                  </div>
                 </div>
               </div>
             </div>
