@@ -8,6 +8,7 @@ const ColorTemperatureChart = ({
   borderLess,
   verticalText,
   chartWrapperClass,
+  noStaticTexts
 }) => {
 
   const dataColors = [{
@@ -19,9 +20,13 @@ const ColorTemperatureChart = ({
   }, {
     "type": "industry",
     "color": "#8562F3"
+  }, {
+    "color": "#ffffff"
+  }, {
+    "color": "#21243B"
   }]
 
-  const staticTexts = [{
+  const staticTexts = !!noStaticTexts && [{
     "text": "This is a blurb that will explain what this graph is showing",
     "topText": "Happy",
     "bottomText": "Sad",
@@ -58,7 +63,7 @@ const ColorTemperatureChart = ({
       <div key={index} className={chartWrapper}>
         <ColorTemperature
           temp={{
-            ...staticTexts[index],
+            ...(!!noStaticTexts ? staticTexts[index] : {}),
             data: temp.data.map((item, index) => ({
               ...item,
               ...dataColors[index]
@@ -66,7 +71,7 @@ const ColorTemperatureChart = ({
           }}
           verticalText={verticalText}
         />
-        {staticTexts[index].text && <div className={style.chartInfo}>{staticTexts[index].text}</div>}
+        {!!noStaticTexts && staticTexts[index].text && <div className={style.chartInfo}>{staticTexts[index].text}</div>}
       </div>
     ))
   )
