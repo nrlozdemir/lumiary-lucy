@@ -5,6 +5,17 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceDominantColor } from 'Reducers/audience'
 import RadarChartModule from 'Components/Modules/RadarChartModule'
 
+const addComma = (number) => {
+	number = parseInt(number)
+  if (number >= 1e3) {
+    const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
+    const unitname = ["k", "m", "B", "T"][Math.floor(unit / 3) - 1]
+    return ((number / ('1e' + unit)).toFixed(0) + unitname)
+  }
+
+  return number
+}
+
 const strToColor = (str) => {
 	str = str.toLowerCase().replace(/\s/g, "")
 
@@ -55,6 +66,7 @@ class DominantColor extends React.Component {
 				//progress
 				dataRow.progress.map((progressRow, p) => {
 					radarData[d].progress[p].color = strToColor(progressRow.leftTitle)
+					radarData[d].progress[p].rightTitle = addComma(progressRow.rightTitle) + " Shares"
 				})
 			})
 		}

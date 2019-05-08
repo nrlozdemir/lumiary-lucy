@@ -146,17 +146,17 @@
       "progress": [
         {
           "leftTitle": "Blue",
-          "rightTitle": "91.6k Shares",
+          "rightTitle": 91600,
           "value": 60
         },
         {
           "leftTitle": "Red",
-          "rightTitle": "64.3k Shares",
+          "rightTitle": 64300,
           "value": 45
         },
         {
           "leftTitle": "Yellow",
-          "rightTitle": "54.8k Shares",
+          "rightTitle": 54800,
           "value": 30
         }
       ]
@@ -236,36 +236,28 @@
       "progress": [
         {
           "leftTitle": "Orange",
-          "rightTitle": "98.1k Shares",
+          "rightTitle": 98100,
           "value": 80
         },
         {
           "leftTitle": "Yellow - Orange",
-          "rightTitle": "75.3k Shares",
+          "rightTitle": 75300,
           "value": 65
         },
         {
           "leftTitle": "Green",
-          "rightTitle": "66.8k Shares",
+          "rightTitle": 66800,
           "value": 45
         }
       ]
     }
   ],
   "genderData": {
-    "labels": ["Slowest", "Slow", "Medium", "Fast"],
     "datasets": [
       {
-        "label": "Dataset 1",
-        "backgroundColor": "#5292E5",
-        "borderColor": "#5292E5",
-        "borderWidth": 1,
         "data": [-20, -30, -25, -13]
       },
       {
-        "label": "Dataset 2",
-        "backgroundColor": "#2FD7C4",
-        "borderColor": "#2FD7C4",
         "data": [50, 80, 60, 50]
       }
     ]
