@@ -42,7 +42,7 @@ export const options = {
         },
         ticks: {
 					fontSize: 12,
-          fontColor: 'white',
+          fontColor: '#fff',
 					fontFamily: "ClanOTNews",
         },
       },
@@ -59,6 +59,7 @@ export const options = {
         ticks: {
           display: false,
           stepSize: 50000,
+          fontColor: '#fff',
 					fontFamily: "ClanOTNews",
 					fontSize: 12,
         },
@@ -91,6 +92,7 @@ export const wrapperBarOptions = (data) => ({
         },
         ticks: {
           display: false,
+          fontColor: '#fff',
 					fontFamily: "ClanOTNews",
 					fontSize: 12,
         },
@@ -106,7 +108,7 @@ export const wrapperBarOptions = (data) => ({
         },
         ticks: {
           display: true,
-          fontColor: 'white',
+          fontColor: '#fff',
 					fontFamily: "ClanOTNews",
 					fontSize: 12,
           stepSize: 50000,
