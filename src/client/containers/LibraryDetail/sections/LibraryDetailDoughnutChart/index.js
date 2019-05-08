@@ -255,7 +255,10 @@ class LibraryDetailDoughnutChart extends React.Component {
                         width={1090}
                         height={292}
                         backgroundColor="#21243B"
-                        dataSet={selectedCardData.lineChartData}
+                        dataSet={{
+                          "labels": ["S", "M", "T", "W", "T", "F", "S"],
+                          "datasets": selectedCardData.lineChartData
+                        }}
                         xAxesFlatten
                         yAxesPercentage
                         xAxesStepSize={1}
@@ -266,7 +269,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                             yPadding: 16,
                             cornerRadius: 3,
                             callbacks: {
-                              title: function(tooltipItem, data) {
+                              title: function (tooltipItem, data) {
                                 const { datasetIndex, index } = tooltipItem[0];
                                 if (datasetIndex === 1) {
                                   return `${data.datasets[datasetIndex].data[index]}% of industry is shot in 24fps`;
@@ -274,7 +277,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                                   return `${data.datasets[datasetIndex].data[index]}% of frames is shot in 24fps`;
                                 }
                               },
-                              label: function(tooltipItem, data) {
+                              label: function (tooltipItem, data) {
                                 return null
                               }
                             }
@@ -287,8 +290,8 @@ class LibraryDetailDoughnutChart extends React.Component {
               </div>
             </div>
           ) : (
-            undefined
-          )}
+              undefined
+            )}
         </div>
       </div>
     )
