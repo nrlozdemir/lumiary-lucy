@@ -47,16 +47,12 @@
   "videoComparisonData": [
     {
       "datasets": [
-        {
-          "data": [10, 55, 5, 30]
-        }
+        { "data": [10, 55, 5, 30] }
       ]
     },
     {
       "datasets": [
-        {
-          "data": [12, 19, 5, 64]
-        }
+        { "data": [12, 19, 5, 64] }
       ]
     }
   ],
