@@ -4,7 +4,10 @@ const dark = {
   moduleBackground: '#373f5b',
   moduleShadow: 'rgba(0, 0, 0, 0.5)',
   duskBackground: '#545b79',
+  searchColor: '#21243B',
+  placeholderColor: '#ffffff',
   textColor: '#ffffff',
+  searchOptionsColor: '#545b79',
   // global values
 
   // selectbox
@@ -39,6 +42,17 @@ const dark = {
   tabActiveBackground: '#545b79',
   tabBorder: '#545b79',
   // tabs values
+
+  // Video Card
+  videoCardBackground: '#545b79',
+  videoCardIcon: '#ffffff',
+  videoRightPercentageBackground: 'rgb(33, 36, 59, 0.8)',
+
+  // Sidebar
+  filterHeader: '#ffffff',
+  socialCheckboxBackground: '#21243b',
+  socialColor: '#545b79',
+  socialActiveBackground: '#ffffff',
 }
 
 const light = {
@@ -48,6 +62,10 @@ const light = {
   moduleShadow: '#bebebe',
   duskBackground: '#ffffff',
   textColor: '#505050',
+  searchColor: '#e8ecf0',
+  placeholderColor: '#c6c9d7',
+  searchOptionsColor: '#ffffff',
+
   // global values
 
   // selectbox
@@ -82,6 +100,17 @@ const light = {
   tabActiveBackground: '#ffffff',
   tabBorder: '#c6c9d7',
   // tabs values
+
+  // Video Card
+  videoCardBackground: '#ffffff',
+  videoCardIcon: '#505050',
+  videoRightPercentageBackground: 'rgba(255, 255, 255, 0.8)',
+
+  // Sidebar
+  filterHeader: '#e8ecf0',
+  socialCheckboxBackground: '#e8ecf0',
+  socialColor: '#c6c9d7',
+  socialActiveBackground: '#505050',
 }
 
 const themes = {

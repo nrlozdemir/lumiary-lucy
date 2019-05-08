@@ -7,6 +7,7 @@ import AsyncSearch from 'Components/Form/AsyncSearch'
 import Button from 'Components/Form/Button'
 import { searchTermInText } from 'Utils'
 import style from './style.scss'
+import { withTheme } from 'ThemeContext/withTheme'
 
 class LibraryHeader extends React.Component {
   constructor(props) {
@@ -59,9 +60,9 @@ class LibraryHeader extends React.Component {
       setSidebarVisible,
       changeFilter,
       library: { filters, videos },
+      themeContext: { colors },
     } = this.props
     const { AsyncSearchValue } = this.state
-
     return (
       <div className={style.headerContainer}>
         <div>
@@ -77,7 +78,12 @@ class LibraryHeader extends React.Component {
           />
         </div>
         <div>
-          <h1 className="alpha text-center font-primary text-bold">Library</h1>
+          <h1
+            className="alpha text-center font-primary text-bold"
+            style={{ color: colors.labelColor }}
+          >
+            Library
+          </h1>
         </div>
         <div>
           <Button
@@ -103,4 +109,7 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(LibraryHeader)
+export default compose(
+  withConnect,
+  withTheme
+)(LibraryHeader)

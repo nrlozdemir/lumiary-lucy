@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 //import classnames from 'classnames'
 //import style from './styles.scss'
 import Slider from 'rc-slider'
+import { withTheme } from 'ThemeContext/withTheme'
 
 const RangeSlider = Slider.Range
 
@@ -106,4 +107,4 @@ class Range extends Component {
   }
 }
 
-export default Range
+export default withTheme(Range)
