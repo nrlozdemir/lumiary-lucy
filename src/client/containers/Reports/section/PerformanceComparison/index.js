@@ -114,7 +114,10 @@ class PerformanceComparison extends React.Component {
               <Bar
                 width={720}
                 height={340}
-                data={data.stackedChartData}
+                data={{
+									labels: ["Slowest", "Slow", "Medium", "Fast"],
+									datasets: data.stackedChartData.datasets
+								}}
                 datasetKeyProvider={this.datasetKeyProvider}
                 options={{
                   ...stackedChartOptions,

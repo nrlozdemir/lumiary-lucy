@@ -69,7 +69,6 @@
       ]
     },
     "stackedChartData": {
-      "labels": ["Slowest", "Slow", "Medium", "Fast"],
       "datasets": [
         {
           "backgroundColor": "#5292E5",
