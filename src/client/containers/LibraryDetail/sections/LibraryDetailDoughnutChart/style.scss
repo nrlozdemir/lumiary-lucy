@@ -8,6 +8,13 @@
   }
 }
 
+.lineChartWrapper{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .selectedRadialTab {
   background: transparent;
   color: $color-white;

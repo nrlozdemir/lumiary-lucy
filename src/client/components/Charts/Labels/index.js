@@ -1,5 +1,5 @@
 import React from "react"
-import PropTypes from "prop-types"
+//import PropTypes from "prop-types"
 import classnames from "classnames"
 import style from "./style.scss"
 
@@ -13,7 +13,7 @@ export default class Labels extends React.Component {
   }
 
   render() {
-    const {data} = this.props
+    const { data } = this.props
 
     return (
       <React.Fragment>
@@ -22,7 +22,7 @@ export default class Labels extends React.Component {
             className={classnames(
               "d-flex",
               "align-items-center",
-              style.lables
+              style.labels
             )}
             key={index}
           >

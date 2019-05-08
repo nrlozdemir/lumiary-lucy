@@ -1,14 +1,11 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceGender } from 'Reducers/panoptic'
-
+import Module from 'Components/Module'
 import { HorizontalBar } from 'react-chartjs-2'
 import style from '../../style.scss'
-
-import Module from 'Components/Module'
 
 const plugins = [
   {
@@ -51,13 +48,13 @@ class GenderSection extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'resolution',
+            type: 'videoProperty',
             selectKey: 'AG-asd',
             placeHolder: 'Resolution',
           },
           {
             type: 'engagement',
-            selectKey: 'AG-asd',
+            selectKey: 'AG-ads',
             placeHolder: 'Engagement',
           },
           {

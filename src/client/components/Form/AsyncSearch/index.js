@@ -2,7 +2,6 @@ import React from "react"
 import PropTypes from "prop-types"
 import classNames from "classnames"
 import AsyncCreatable from 'react-select/lib/AsyncCreatable'
-
 import style from "./styles.scss"
 
 const AsyncSearch = props => {

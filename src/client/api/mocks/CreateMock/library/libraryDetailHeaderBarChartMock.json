@@ -1,16 +1,1 @@
-{
-	"labels": [
-		"Views",
-		"Likes",
-		"Comments",
-		"Shares"
-	],
-	"datasets": [
-		{
-			"data": "rNA#4, 0, 100#"
-		},
-		{
-			"data": "rNA#4, 0, 100#"
-		}
-	]
-}
+"rCHB#['Views','Likes','Comments','Shares']#"

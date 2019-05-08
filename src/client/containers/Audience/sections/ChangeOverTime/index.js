@@ -1,41 +1,11 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceChangeOverTime } from 'Reducers/panoptic'
-
-import style from 'Containers/Audience/style.scss'
-import LineChart from 'Components/LineChart/Chart'
-
-import { lineChartOptions, lineChartData_DatasetOptions } from './options'
-import { chartCombineDataset } from 'Utils'
-
 import Module from 'Components/Module'
-
-function combineChartData(chartData) {
-  return chartCombineDataset(chartData, lineChartData_DatasetOptions, {
-    beforeDraw: function(chart, easing) {
-      if (
-        chart.config.options.chartArea &&
-        chart.config.options.chartArea.backgroundColor
-      ) {
-        const ctx = chart.chart.ctx
-        const chartArea = chart.chartArea
-
-        ctx.save()
-        ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-        ctx.fillRect(
-          chartArea.left,
-          chartArea.top,
-          chartArea.right - chartArea.left,
-          chartArea.bottom - chartArea.top
-        )
-        ctx.restore()
-      }
-    },
-  })
-}
+import LineChart from 'Components/Charts/LineChart'
+import style from 'Containers/Audience/style.scss'
 
 class ChangeOverTime extends React.Component {
   callBack = (data, moduleKey) => {
@@ -91,11 +61,15 @@ class ChangeOverTime extends React.Component {
         {data && data.datasets && (
           <div className={style.audienceContainer}>
             <LineChart
+              width={1162}
+              height={292}
               backgroundColor="#21243B"
-              dataSet={() => combineChartData(data)}
-              width={1070}
-              height={291}
-              options={lineChartOptions}
+              dataSet={data}
+              xAxesFlatten
+              yAxesAbbreviate
+              customTooltipText="Likes"
+              yAxesStepSize={250000}
+              yAxesMax={1000000}
             />
           </div>
         )}
@@ -114,23 +88,5 @@ const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps
 )
-
-{
-  /*<div className="grid-container mr-20 ml-20 mt-72 bg-dark-grey-blue shadow-1">
-  <div className={style.cardTitle + ' col-12'}>
-    <span>Change Over Time By Property</span>
-
-    <div className={style.selects}>
-      <SelectFilters selectViewsShow={true} selectViews={selectViews} />
-      <SelectFilters selectPlatformsShow={true} selectPlatforms={selectPlatforms} />
-      <SelectFilters selectDateShow={true} selectDate={selectDate} />
-    </div>
-  </div>
-  <div className="col-12">
-
-  </div>
-</div>
-*/
-}
 
 export default compose(withConnect)(ChangeOverTime)

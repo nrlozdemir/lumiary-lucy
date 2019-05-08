@@ -1,21 +1,14 @@
-/**
- *
- * Library
- *
- */
-
 import React from "react"
 import classNames from "classnames"
 import PropTypes from "prop-types";
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import style from "./style.scss"
-
 import { actions, makeSelectLibrary } from "Reducers/library"
 import LibraryHeader from './sections/LibraryHeader'
 import Sidebar from "./sidebar.js"
 import VideoSection from './sections/VideoSection'
+import style from "./style.scss"
 
 /* eslint-disable react/prefer-stateless-function */
 export class Library extends React.Component {

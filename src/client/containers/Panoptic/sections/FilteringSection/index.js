@@ -1,19 +1,14 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticFilteringSection } from 'Reducers/panoptic'
-
-import classnames from 'classnames'
+import Module from 'Components/Module'
+//import classnames from 'classnames'
 import 'chartjs-plugin-datalabels'
-import style from './style.scss'
-
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
-
-import Module from 'Components/Module'
+import style from './style.scss'
 
 class PanopticFilteringSection extends Component {
   callBack = (data, moduleKey) => {
@@ -35,9 +30,9 @@ class PanopticFilteringSection extends Component {
         action={this.callBack}
         filters={[
           {
-            type: 'duration',
+            type: 'videoProperty',
             selectKey: 'PFS-dsad',
-            placeHolder: 'Duration',
+            placeHolder: 'videoProperty',
           },
           {
             type: 'engagement',

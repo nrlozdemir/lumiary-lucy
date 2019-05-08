@@ -1,5 +1,4 @@
 import React from 'react'
-
 import SvgChartLine from './line'
 
 class SvgChart extends React.Component {

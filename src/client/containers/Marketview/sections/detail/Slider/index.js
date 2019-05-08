@@ -22,8 +22,8 @@ export default class Slider extends React.Component {
 
     return (
 			<Module
-				customModuleContainer={style.sliderModuleContainer}
-				customModuleContainerBody={style.sliderModuleContainerBody}
+				containerClass={style.sliderModuleContainer}
+				bodyClass={style.sliderModuleContainerBody}
 				moduleKey={moduleKey}
 				title={title}
 				filters={[
@@ -38,10 +38,10 @@ export default class Slider extends React.Component {
 						placeHolder: 'Date',
 					},
 				]}>
-        <div className="col-12-no-gutter">
+        <div className="col-12-no-gutters">
           <MarketViewSlider items={data} changeVideo={changeSelectedVideo} />
         </div>
-        <div className="col-12-no-gutter mt-56">
+        <div className="col-12-no-gutters mt-56">
           {selectedVideo &&
             selectedVideo.options.map((card, index) => (
               <div className={style.card} key={index}>

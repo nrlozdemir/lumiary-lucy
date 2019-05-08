@@ -26,7 +26,7 @@ const TopVideosCard = (props) => {
       moduleKey={moduleKey}
       action={action}
     >
-      <div className="col-12-no-gutter">
+      <div className="col-12-no-gutters">
         <StackedBarChart barData={chartData} height={height} />
       </div>
     </Module>

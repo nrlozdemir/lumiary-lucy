@@ -1,14 +1,6 @@
-/**
- *
- * SocialSelectBoxes
- *
- */
-
 import React from 'react'
 import classnames from 'classnames'
 import { Field } from 'redux-form'
-
-// import PropTypes from 'prop-types';
 import style from './style.scss'
 
 /* eslint-disable react/prefer-stateless-function */

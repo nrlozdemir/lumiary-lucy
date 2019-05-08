@@ -64,6 +64,14 @@
         margin: 0 0 0 24px;
       }
     }
+
+    .headerLegend {
+      flex: 1;
+      p{
+        font-size: 14px;
+        line-height: 1.8rem;
+      }
+    }
   }
 
   .moduleContainerBody {

@@ -14,7 +14,7 @@ const TopSimilarProperties = (props) => {
       moduleKey={moduleKey}
       action={action}
     >
-      <div className="col-12-no-gutter">
+      <div className="col-12-no-gutters">
         {data &&
           data.map((sectionItem, i) => (
             <TopSimilarPropertiesItem key={i} sectionItem={sectionItem} i={i} />

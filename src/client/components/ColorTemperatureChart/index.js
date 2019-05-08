@@ -1,6 +1,5 @@
 import React from 'react'
 import cx from 'classnames'
-
 import style from './style.scss'
 import { ColorTemperature } from './ColorTemperature'
 

@@ -15,7 +15,8 @@ export class Module extends React.Component {
     this.state = {
       infoShow: false,
     }
-  }
+	}
+
   componentDidUpdate(prevProps) {
     if (
 			this.props.action
@@ -42,22 +43,20 @@ export class Module extends React.Component {
   render() {
     const {
       children,
-      title,
-      subTitle,
-      legend,
-      filters,
       references,
-			customModuleContainer,
-			customModuleContainerBody
-    } = this.props
-    const { infoShow } = this.state
+      bodyClass,
+      containerClass,
+		} = this.props;
+		const { infoShow } = this.state;
+
     const moduleContainer = cx(
       'shadow-1 grid-container col-12',
       style.moduleContainer,
-      customModuleContainer
-    )
+      containerClass
+		);
+
 		const referencesClass = cx('font-secondary-second', style.references)
-		const moduleContainerBody = cx(style.moduleContainerBody, customModuleContainerBody);
+		const moduleContainerBody = cx(style.moduleContainerBody, bodyClass);
 
     return (
       <div className={moduleContainer}>

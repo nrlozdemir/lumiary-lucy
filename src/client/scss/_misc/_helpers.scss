@@ -89,7 +89,8 @@ $custom-col-7: (
   columns: 12,
   gutter: 0px,
 );
-$custom-col-12-no-gutter: (
+
+$no-gutters: (
   columns: 12,
   gutter: 0px,
 );
@@ -151,6 +152,12 @@ $custom-col-12-no-gutter: (
   @include grid-column(12, $custom-col-12-gutter-20);
 }
 
-.col-12-no-gutter {
-  @include grid-column(12, $custom-col-12-no-gutter);
+.col-12-no-gutters {
+  @include grid-column(12, $no-gutters);
+}
+.col-8-no-gutters {
+  @include grid-column(8, $no-gutters);
+}
+.col-4-no-gutters {
+  @include grid-column(4, $no-gutters);
 }

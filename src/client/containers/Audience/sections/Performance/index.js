@@ -1,19 +1,16 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudiencePerformance } from 'Reducers/panoptic'
-
+import Module from 'Components/Module'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
 import RangeWithBadge from 'Components/Form/RangeWithBadge'
-import SelectFilters from 'Components/SelectFilters'
-import style from 'Containers/Audience/style.scss'
 import classnames from 'classnames'
 import { socialIconSelector } from 'Utils'
 import _ from 'lodash'
+import style from 'Containers/Audience/style.scss'
 
-import Module from 'Components/Module'
 
 class Performance extends React.Component {
   constructor(props) {

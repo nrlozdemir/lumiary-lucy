@@ -17,13 +17,13 @@ export const options = {
     xPadding: 30,
     yPadding: 15,
     callbacks: {
-      title: function(tooltipItem, data) {
+      title: function (tooltipItem, data) {
         if (tooltipItem[0].yLabel < 0) {
-          return `${Math.abs(tooltipItem[0].yLabel / 10000)}k Videos`
+          return `${Math.abs(tooltipItem[0].yLabel / 1000)}k Engagement`
         }
-        return `${tooltipItem[0].yLabel / 1000}k Likes`
+        return `${Math.abs(tooltipItem[0].yLabel / 10000)} Videos`
       },
-      label: function() {
+      label: function () {
         return null
       },
     },
@@ -45,6 +45,7 @@ export const options = {
         },
       },
     ],
+    labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
     yAxes: [
       {
         stacked: false,
@@ -62,7 +63,7 @@ export const options = {
   },
 }
 
-export const wrapperBarOptions = {
+export const wrapperBarOptions = (data) => ({
   responsive: true,
   maintainAspectRatio: false,
   layout: {
@@ -73,6 +74,9 @@ export const wrapperBarOptions = {
   },
   plugins: {
     datalabels: false,
+  },
+  chartArea: {
+    backgroundColor: '#21243B',
   },
   scales: {
     xAxes: [
@@ -91,7 +95,7 @@ export const wrapperBarOptions = {
         gridLines: {
           display: true,
           color: '#545B79',
-          zeroLineColor: '#545B79',
+          zeroLineColor: '#ffffff',
           drawTicks: false,
         },
         ticks: {
@@ -99,14 +103,17 @@ export const wrapperBarOptions = {
           display: true,
           stepSize: 50000,
           padding: 15,
-          callback: function(value, index, values) {
-            if (value < 0) {
-              return `${Math.abs(value / 10000)}k`
+          callback: function (value, index, values) {
+            if (value == 0) {
+              return 0
             }
-            return `${values[index] / 1000}k`
+            if (value < 0) {
+              return `${Math.abs(value / 1000)}k`
+            }
+            return `${values[index] / 10000}v`
           },
         },
       },
     ],
-  },
-}
+  }
+})
