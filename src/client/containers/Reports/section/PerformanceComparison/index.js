@@ -69,7 +69,16 @@ class PerformanceComparison extends React.Component {
 		if (data && data.doughnutData) {
 			doughnutData = data.doughnutData
       doughnutData.datasets[0].backgroundColor = ["#5292E5", "#2FD7C4"]
-    }
+		}
+
+		let stackedChartData
+		if (data && data.stackedChartData) {
+			stackedChartData = data.stackedChartData
+			// "backgroundColor": "#5292E5",
+			// "backgroundColor": "#2FD7C4",
+      stackedChartData.datasets[0].backgroundColor = "#5292E5"
+      stackedChartData.datasets[1].backgroundColor = "#2FD7C4"
+		}
 
     return (
       <Module

@@ -70,14 +70,8 @@
     },
     "stackedChartData": {
       "datasets": [
-        {
-          "backgroundColor": "#5292E5",
-          "data": [75, 40, 35, 80]
-        },
-        {
-          "backgroundColor": "#2FD7C4",
-          "data": [25, 60, 65, 20]
-        }
+        { "data": [75, 40, 35, 80] },
+        { "data": [25, 60, 65, 20] }
       ]
     }
   },
