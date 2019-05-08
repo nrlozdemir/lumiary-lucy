@@ -8,7 +8,11 @@ const ComparisonHorizontalBarChart = ({ data }) => {
   const reverseBarChartOptions = JSON.parse(JSON.stringify(barChartOptions))
   reverseBarChartOptions.scales.xAxes[0].ticks = {
     ...reverseBarChartOptions.scales.xAxes[0].ticks,
-    reverse: false,
+		reverse: false,
+		callback: function(value) {
+			if (value === 0) return 0
+			return value + '%'
+		}
   }
   reverseBarChartOptions.plugins.datalabels = {
     ...reverseBarChartOptions.plugins.datalabels,
@@ -24,7 +28,7 @@ const ComparisonHorizontalBarChart = ({ data }) => {
       let percentage = ((value * 100) / sum).toFixed(0) + '%'
       return percentage
     },
-  }
+	}
 
   return (
     <div className={style.container}>
