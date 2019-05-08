@@ -4,6 +4,7 @@ import { Line } from 'react-chartjs-2'
 import { randomKey } from 'Utils/index'
 import style from './style.scss'
 import data from './dummyChartData'
+import { ThemeContext } from 'ThemeContext/themeContext'
 
 // Bar chart crash while this line allow, i will found a solution for this case
 // import 'chartjs-plugin-style'
@@ -37,77 +38,85 @@ class LineChart extends React.PureComponent {
         },
       },
     ]
-    console.log(dataSet)
     return (
-      <div className={style.lineChartWrapper}>
-        <Line
-          type="bar"
-          data={dataSet || data}
-          width={width}
-          height={height}
-          plugins={plugins}
-          datasetKeyProvider={this.datasetKeyProvider}
-          options={{
-            responsive: false,
-            chartArea: {
-              backgroundColor: backgroundColor || 'transparent',
-            },
-            legend: {
-              display: false,
-            },
-            tooltips: {
-              position: 'nearest',
-              backgroundColor: '#fff',
-              titleFontColor: '#21243B',
-              bodyFontColor: '#21243B',
-              footerFontColor: '#21243B',
-              xPadding: 10,
-              yPadding: 16,
-              cornerRadius: 0,
-              callbacks: {
-                label: function(tooltipItem, data) {
-                  const { datasetIndex, index } = tooltipItem
-                  return data.datasets[datasetIndex].data[index]
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <Line
+            key={Math.random()}
+            type="bar"
+            data={dataSet || data}
+            width={width}
+            height={height}
+            plugins={plugins}
+            datasetKeyProvider={this.datasetKeyProvider}
+            options={{
+              ...options,
+              responsive: false,
+              chartArea: {
+                backgroundColor: colors.chartBackground,
+              },
+              legend: {
+                display: false,
+              },
+              tooltips: {
+                ...options.tooltips,
+                position: 'nearest',
+                backgroundColor: '#fff',
+                titleFontColor: '#21243B',
+                bodyFontColor: '#21243B',
+                footerFontColor: '#21243B',
+                xPadding: 10,
+                yPadding: 16,
+                cornerRadius: 0,
+                callbacks: {
+                  label: function(tooltipItem, data) {
+                    const { datasetIndex, index } = tooltipItem
+                    return data.datasets[datasetIndex].data[index]
+                  },
                 },
               },
-            },
-            scales: {
-              xAxes: [
-                {
-                  gridLines: {
-                    display: true,
-                    color: '#545B79',
-                    lineWidth: 0.7,
-                    drawBorder: true,
-                    drawTicks: false,
+              scales: {
+                xAxes: [
+                  {
+                    gridLines: {
+                      ...options.scales.xAxes[0].gridLines,
+                      display: true,
+                      color: colors.chartStadiumBarBorder,
+                      lineWidth: 0.7,
+                      drawBorder: true,
+                      drawTicks: false,
+                    },
+                    ticks: {
+                      ...options.scales.xAxes[0].ticks,
+                      fontColor: colors.textColor,
+                      fontSize: 12,
+                      stepSize: 1,
+                      beginAtZero: true,
+                    },
                   },
-                  ticks: {
-                    fontColor: '#fff',
-                    fontSize: 12,
-                    stepSize: 1,
-                    beginAtZero: true,
+                ],
+                yAxes: [
+                  {
+                    gridLines: {
+                      ...options.scales.yAxes[0].gridLines,
+                      display: true,
+                      color: colors.chartStadiumBarBorder,
+                      fontColor: colors.textColor,
+                      lineWidth: 0.7,
+                      drawBorder: true,
+                      drawTicks: false,
+                    },
+                    ticks: {
+                      ...options.scales.yAxes[0].ticks,
+                      fontColor: colors.textColor,
+                    },
                   },
-                },
-              ],
-              yAxes: [
-                {
-                  gridLines: {
-                    display: true,
-                    color: '#545B79',
-                    lineWidth: 0.7,
-                    drawBorder: true,
-                    drawTicks: false,
-                  },
-                  ticks: {
-                    display: false,
-                  },
-                },
-              ],
-            },
-            ...options,
-          }}
-        />
-      </div>
+                ],
+              },
+            }}
+          />
+        )}
+      </ThemeContext.Consumer>
     )
   }
 }

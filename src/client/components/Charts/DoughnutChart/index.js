@@ -75,6 +75,7 @@ const DoughnutChart = (props) => {
     labelPositionRight,
     labelPositionLeft,
     cutoutPercentage,
+    customStyle,
   } = props
 
   const themes = props.themeContext.colors
@@ -107,7 +108,7 @@ const DoughnutChart = (props) => {
 
   return (
     <React.Fragment>
-      <div className={style.doughnutContainer}>
+      <div className={style.doughnutContainer} style={customStyle}>
         {labelPositionLeft && labelsData && (
           <div className={style.labelContainer}>
             <Labels data={labelsData} />

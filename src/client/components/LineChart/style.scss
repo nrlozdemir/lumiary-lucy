@@ -1,7 +1,7 @@
 .lineChartContainer {
   background-color: $color-dark-grey-blue;
 
-  .lineChartHeader{
+  .lineChartHeader {
     .title {
       font-family: $font-family-ClanOTBold;
       font-size: 18px;
@@ -21,10 +21,4 @@
       }
     }
   }
-}
-
-.lineChartWrapper{
-	canvas{
-		margin: 0 auto;
-	}
 }

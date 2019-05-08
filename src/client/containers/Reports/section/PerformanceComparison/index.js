@@ -8,83 +8,22 @@ import {
 } from 'Reducers/reports'
 //import cx from 'classnames'
 //import ComparisonHorizontalBarChart from 'Components/ComparisonHorizontalBarChart'
-import Module from 'Components/Module'
-import { Bar } from 'react-chartjs-2'
-import DoughnutChart from 'Components/Charts/DoughnutChart'
-import 'chartjs-plugin-datalabels'
+import BarAndDoughnutChartModule from 'Components/Modules/BarAndDoughnutChartModule'
+
 import { stackedChartOptions } from './options'
-import { randomKey } from 'Utils/index'
 import style from './style.scss'
-
-const barPlugins = [
-  {
-    beforeDraw: function(chart, easing) {
-      if (
-        chart.config.options.chartArea &&
-        chart.config.options.chartArea.backgroundColor
-      ) {
-        var ctx = chart.chart.ctx
-        var chartArea = chart.chartArea
-
-        ctx.save()
-        ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-        ctx.fillRect(
-          chartArea.left,
-          chartArea.top,
-          chartArea.right - chartArea.left,
-          chartArea.bottom - chartArea.top
-        )
-        ctx.restore()
-      }
-      let configX = chart.config.options.scales.xAxes
-      //Save the rendering context state
-      ctx.save()
-      ctx.strokeStyle = configX[0].gridLines.color
-      ctx.lineWidth = configX[0].gridLines.lineWidth
-
-      ctx.beginPath()
-      ctx.moveTo(chart.chartArea.right, chart.chartArea.top)
-      ctx.lineTo(chart.chartArea.right, chart.chartArea.bottom)
-      ctx.stroke()
-
-      //Restore the rendering context state
-      ctx.restore()
-    },
-  },
-]
-
-const plugins = [
-  {
-    beforeDraw: function(chart) {
-      const ctx = chart.chart.ctx
-      const { top, bottom, left, right } = chart.chartArea
-      ctx.save()
-      ctx.fillStyle = '#FFFFFF'
-      ctx.font = '14px ClanOTBold'
-      ctx.fillText(
-        'Total Percentage',
-        (bottom - top) / 2 - 55,
-        (right - left) / 2 + 4,
-        right - left
-      )
-      ctx.restore()
-    },
-  },
-]
 
 class PerformanceComparison extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getPerformanceComparisonData(data)
-  }
-  datasetKeyProvider() {
-    return randomKey(5)
   }
   render() {
     const {
       performanceComparisonData: { data, loading, error },
     } = this.props
     return (
-      <Module
+      <BarAndDoughnutChartModule
+        data={data}
         moduleKey={'Reports/PerformanceComparison'}
         title="Property Performance Comparison"
         action={this.callBack}
@@ -119,37 +58,26 @@ class PerformanceComparison extends React.Component {
             </div>
           </div>
         }
-      >
-        <div className={style.container}>
-          {data && data.stackedChartData && (
-            <div className={style.chartContainer}>
-              <Bar
-                width={720}
-                height={340}
-                data={data.stackedChartData}
-                datasetKeyProvider={this.datasetKeyProvider}
-                options={{
-                  ...stackedChartOptions,
-                }}
-                plugins={barPlugins}
-              />
-            </div>
-          )}
-          {data && data.doughnutData && (
-            <div className={style.chartContainer}>
-              <DoughnutChart
-                width={280}
-                height={280}
-                data={data.doughnutData}
-                cutoutPercentage={58}
-                fillText="Total Percentage"
-                dataLabelFunction="insertAfter"
-                dataLabelInsert="%"
-              />
-            </div>
-          )}
-        </div>
-      </Module>
+        reverse={false}
+        barCustoms={{
+          width: 720,
+          height: 340,
+          cutoutPercentage: 58,
+          fillText: 'Total Percentage',
+          dataLabelFunction: 'insertAfter',
+          dataLabelInsert: '%',
+          options: stackedChartOptions,
+        }}
+        doughnutCustoms={{
+          width: 280,
+          height: 280,
+          cutoutPercentage: 58,
+          fillText: 'Total Percentage',
+          dataLabelFunction: 'insertAfter',
+          dataLabelInsert: '%',
+          options: stackedChartOptions,
+        }}
+      />
     )
   }
 }

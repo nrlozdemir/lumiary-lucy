@@ -6,35 +6,8 @@ import {
   actions,
   makeSelectReportsContentVitalityScore,
 } from 'Reducers/reports'
-import Module from 'Components/Module'
-import LineChart from 'Components/LineChart/Chart'
-import { lineChartOptions, lineChartData_DatasetOptions } from './options'
-import { chartCombineDataset } from 'Utils'
-import chartStyle from './style.scss'
 
-function combineChartData(chartData) {
-  return chartCombineDataset(chartData, lineChartData_DatasetOptions, {
-    beforeDraw: function(chart, easing) {
-      if (
-        chart.config.options.chartArea &&
-        chart.config.options.chartArea.backgroundColor
-      ) {
-        const ctx = chart.chart.ctx
-        const chartArea = chart.chartArea
-
-        ctx.save()
-        ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-        ctx.fillRect(
-          chartArea.left,
-          chartArea.top,
-          chartArea.right - chartArea.left,
-          chartArea.bottom - chartArea.top
-        )
-        ctx.restore()
-      }
-    },
-  })
-}
+import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'
 
 class ContentVitalityScore extends React.Component {
   callBack = (data, moduleKey) => {
@@ -42,13 +15,13 @@ class ContentVitalityScore extends React.Component {
   }
 
   render() {
-    // const { selectViews, selectPlatforms, selectDate } = this.state;
     const {
       contentVitalityScoreData: { data, loading, error },
     } = this.props
 
     return (
-      <Module
+      <ContentVitalityScoreModule
+        data={data}
         moduleKey={'Reports/ContentVitalityScore'}
         title="Content Vitality Score Based On Audience"
         action={this.callBack}
@@ -64,22 +37,7 @@ class ContentVitalityScore extends React.Component {
             placeHolder: 'Date',
           },
         ]}
-      >
-        {data && data.datasets && (
-          <div
-            data-vertical-title="Number Of Videos"
-            className={chartStyle.vitalityContainer}
-          >
-            <LineChart
-              backgroundColor="#21243B"
-              dataSet={() => combineChartData(data)}
-              width={1070}
-              height={291}
-              options={lineChartOptions}
-            />
-          </div>
-        )}
-      </Module>
+      />
     )
   }
 }

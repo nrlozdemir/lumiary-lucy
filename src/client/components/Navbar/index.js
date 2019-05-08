@@ -89,7 +89,7 @@ const SelectedNavLink = (props) => {
       {props.load && (
         <div className={style.switchInner}>
           <span>Save Report</span>
-          <Switch />
+          {/*<Switch />*/}
         </div>
       )}
     </React.Fragment>
