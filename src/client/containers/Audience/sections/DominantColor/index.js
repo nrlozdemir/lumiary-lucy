@@ -5,6 +5,27 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceDominantColor } from 'Reducers/audience'
 import RadarChartModule from 'Components/Modules/RadarChartModule'
 
+const strToColor = (str) => {
+	str = str.toLowerCase().replace(/\s/g, "")
+
+	const color = {
+		"red": "#cc2226",
+		"red-orange": "#dd501d",
+		"orange": "#dd501d", //#eb7919
+		"yellow-orange": "#f8b90b",
+		"yellow": "#fff20d",
+		"yellow-green": "#aac923",
+		"green": "#13862b",
+		"blue-green": "#229a78",
+		"blue": "#3178b0",
+		"blue-purple": "#79609b",
+		"purple": "#923683",
+		"red-purple": "#b83057"
+	}
+
+	return color[str]
+}
+
 class DominantColor extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getAudienceDominantColorData(data)
@@ -13,11 +34,34 @@ class DominantColor extends React.Component {
   render() {
     const {
       audienceDominantColorData: { data, loading, error },
-    } = this.props
+		} = this.props
+
+		let radarData = []
+
+		if(data && radarData) {
+			radarData = data
+			Object.values(data).map((dataRow, d) => {
+				//labels
+				dataRow.datas.labels.map((datalabelRow, l) => {
+					radarData[d].datas.labels[l].color = strToColor(datalabelRow.name)
+				})
+				//datasets
+				dataRow.datas.datasets.map((datasetRow, r) => {
+					radarData[d].datas.datasets[r].backgroundColor = "rgba(255, 255, 255, 0.3)"
+					radarData[d].datas.datasets[r].borderColor = "transparent"
+					radarData[d].datas.datasets[r].pointBackgroundColor = "#ffffff"
+					radarData[d].datas.datasets[r].pointBorderColor = "#ffffff"
+				})
+				//progress
+				dataRow.progress.map((progressRow, p) => {
+					radarData[d].progress[p].color = strToColor(progressRow.leftTitle)
+				})
+			})
+		}
 
     return (
       <RadarChartModule
-        data={data}
+        data={radarData}
         leftTitle="Male"
         rightTitle="Female"
         moduleKey={'Audience/DominantColor'}
