@@ -18,12 +18,13 @@ export default class Slider extends React.Component {
   }
 
   render() {
-    const { data, selectedVideo, changeSelectedVideo, title } = this.props
+    const { data, selectedVideo, changeSelectedVideo, title, moduleKey } = this.props
 
     return (
 			<Module
 				customModuleContainer={style.sliderModuleContainer}
 				customModuleContainerBody={style.sliderModuleContainerBody}
+				moduleKey={moduleKey}
 				title={title}
 				filters={[
 					{

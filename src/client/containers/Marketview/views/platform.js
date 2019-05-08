@@ -77,6 +77,7 @@ export class Platform extends React.Component {
           selectedVideo={selectedVideo}
 					changeSelectedVideo={this.changeSelectedVideo}
 					title="Top Performing Videos By Platform"
+					moduleKey="MarketView/Platform/Slider"
         />
 				<TopVideosCardModule
 					chartData={competitorTopVideos}
