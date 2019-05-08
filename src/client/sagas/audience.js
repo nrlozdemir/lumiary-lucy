@@ -22,7 +22,7 @@ function* getAudienceContentVitalityScoreData() {
     let shuffleData = payload.lineStackedChartData
     shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
     shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-		yield put(actions.getAudienceContentVitalityScoreDataSuccess(shuffleData))
+    yield put(actions.getAudienceContentVitalityScoreDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getAudienceContentVitalityScoreDataError(err))
   }
@@ -132,8 +132,8 @@ export default [
   takeLatest(types.GET_AUDIENCE_PERFORMANCE_DATA, getAudiencePerformanceData),
   takeLatest(types.UPDATE_AUDIENCE_PERFORMANCE, updateAudiencePerformance),
   takeLatest(types.GET_AUDIENCE_AGE_SLIDER_DATA, getAudienceAgeSliderData),
-	takeLatest(types.GET_AUDIENCE_GENDER_DATA, getAudienceGenderData),
-	takeLatest(types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA, getAudienceColorTemperatureData),
-	takeLatest(types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA, getAudienceChangeOverTimeData),
+  takeLatest(types.GET_AUDIENCE_GENDER_DATA, getAudienceGenderData),
+  takeLatest(types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA, getAudienceColorTemperatureData),
+  takeLatest(types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA, getAudienceChangeOverTimeData),
   takeLatest(types.GET_AUDIENCE_DOMINANT_COLOR_DATA, getAudienceDominantColorData),
 ]

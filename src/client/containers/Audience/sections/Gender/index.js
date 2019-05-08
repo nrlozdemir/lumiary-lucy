@@ -41,22 +41,22 @@ class GenderSection extends React.Component {
       audienceGenderData: { data, loading, error },
     } = this.props
 
-		let genderData = []
+    let genderData = []
 
-		if(data && data.datasets && genderData) {
-			genderData = data
-			data.datasets.map((el, i) => {
-				genderData.datasets[i].borderWidth = 1
-				genderData.datasets[i].label = "Dataset 1"
-				genderData.datasets[i].borderColor = "#5292E5"
-				genderData.datasets[i].backgroundColor = "#5292E5"
-				if(i === 1) {
-					genderData.datasets[i].label = "Dataset 2"
-					genderData.datasets[i].borderColor = "#2FD7C4"
-					genderData.datasets[i].backgroundColor = "#2FD7C4"
-				}
-			})
-		}
+    if(data && data.datasets && genderData) {
+      genderData = data
+      data.datasets.map((el, i) => {
+        genderData.datasets[i].borderWidth = 1
+        genderData.datasets[i].label = "Dataset 1"
+        genderData.datasets[i].borderColor = "#5292E5"
+        genderData.datasets[i].backgroundColor = "#5292E5"
+        if(i === 1) {
+          genderData.datasets[i].label = "Dataset 2"
+          genderData.datasets[i].borderColor = "#2FD7C4"
+          genderData.datasets[i].backgroundColor = "#2FD7C4"
+        }
+      })
+    }
 
     return (
       <Module
@@ -105,9 +105,9 @@ class GenderSection extends React.Component {
                 width={4}
                 height={1}
                 data={{
-									labels: ["Slowest", "Slow", "Medium", "Fast"],
-									datasets: data.datasets
-								}}
+                  labels: ["Slowest", "Slow", "Medium", "Fast"],
+                  datasets: data.datasets
+                }}
                 plugins={plugins}
                 options={{
                   plugins: {
