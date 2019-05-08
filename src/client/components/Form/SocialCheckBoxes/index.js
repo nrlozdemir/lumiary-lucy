@@ -24,7 +24,6 @@ class SocialSelectBoxes extends React.Component {
                 type="checkbox"
                 colors={this.props.colors}
                 component={(props) => {
-                  console.log(props)
                   return (
                     <React.Fragment>
                       <input

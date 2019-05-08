@@ -90,7 +90,6 @@ class ModuleSelectFilters extends React.Component {
             <Datepicker
               type={'range'}
               apply={(value) => {
-                console.log(value)
                 const val = {
                   value: {
                     startDate: value.startDate,

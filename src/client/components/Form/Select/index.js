@@ -9,7 +9,6 @@ const Select = (props) => {
   const { className, id, options, placeholder, multiple, customClass } = props
 
   const themes = props.themeContext.colors
-  console.log('themes', themes)
 
   let args = props.input ? props.input : props
   let { name, onChange, value } = args

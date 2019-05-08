@@ -47,13 +47,16 @@ const dark = {
   // Video Card
   videoCardBackground: '#545b79',
   videoCardIcon: '#ffffff',
-  videoRightPercentageBackground: 'rgb(33, 36, 59, 0.8)',
+  videoRightPercentageBackground: 'rgb(33, 36, 59, 0.4)',
 
   // Sidebar
   filterHeader: '#ffffff',
   socialCheckboxBackground: '#21243b',
   socialColor: '#545b79',
   socialActiveBackground: '#ffffff',
+  rangeSliderTick: '#ffffff',
+  trackColor: '#21243b',
+
   // modal values
   modalBackground: '#373f5b',
   modalHeaderBackground: '#ffffff',
@@ -144,13 +147,16 @@ const light = {
   // Video Card
   videoCardBackground: '#ffffff',
   videoCardIcon: '#505050',
-  videoRightPercentageBackground: 'rgba(255, 255, 255, 0.8)',
+  videoRightPercentageBackground: 'rgba(255, 255, 255, 0.4)',
 
   // Sidebar
   filterHeader: '#e8ecf0',
   socialCheckboxBackground: '#e8ecf0',
   socialColor: '#c6c9d7',
   socialActiveBackground: '#505050',
+  rangeSliderTick: '#505050',
+  trackColor: '#e8ecf0',
+
   // modal values
   modalBackground: '#f3f6f9',
   modalHeaderBackground: '#505050',

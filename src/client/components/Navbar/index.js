@@ -247,7 +247,6 @@ class Navbar extends React.Component {
         switchOn: !this.state.switchOn,
       },
       () => {
-        console.log('switchOn', this.state.switchOn)
         this.props.themeContext.setColor(this.state.switchOn ? 'light' : 'dark')
       }
     )

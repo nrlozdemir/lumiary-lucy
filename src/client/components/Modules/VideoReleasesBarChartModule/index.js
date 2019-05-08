@@ -79,7 +79,6 @@ const VideoReleasesBarChartModule = (props) => {
   } = props
 
   if (!data && !data.length) return false
-  console.log(props)
   const barChartOptions = {
     ...options,
     scales: {
