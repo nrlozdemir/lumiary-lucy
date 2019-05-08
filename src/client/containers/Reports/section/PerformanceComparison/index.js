@@ -53,25 +53,6 @@ const barPlugins = [
   },
 ]
 
-const plugins = [
-  {
-    beforeDraw: function(chart) {
-      const ctx = chart.chart.ctx
-      const { top, bottom, left, right } = chart.chartArea
-      ctx.save()
-      ctx.fillStyle = '#FFFFFF'
-      ctx.font = '14px ClanOTBold'
-      ctx.fillText(
-        'Total Percentage',
-        (bottom - top) / 2 - 55,
-        (right - left) / 2 + 4,
-        right - left
-      )
-      ctx.restore()
-    },
-  },
-]
-
 class PerformanceComparison extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getPerformanceComparisonData(data)
