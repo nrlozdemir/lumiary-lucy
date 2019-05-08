@@ -46,7 +46,6 @@
   },
   "videoComparisonData": [
     {
-      "labels": ["", "", "", ""],
       "datasets": [
         {
           "backgroundColor": "#5292E5",
@@ -55,7 +54,6 @@
       ]
     },
     {
-      "labels": ["", "", "", ""],
       "datasets": [
         {
           "backgroundColor": "#2FD7C4",

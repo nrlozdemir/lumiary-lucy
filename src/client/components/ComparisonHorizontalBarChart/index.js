@@ -33,7 +33,10 @@ const ComparisonHorizontalBarChart = ({ data }) => {
   return (
     <div className={style.container}>
       <HorizontalBar
-        data={data[0]}
+        data={{
+					labels: ["", "", "", ""],
+					datasets: data[0].datasets
+				}}
         width={460}
         height={291}
         plugins={plugins}
@@ -48,7 +51,10 @@ const ComparisonHorizontalBarChart = ({ data }) => {
       </div>
 
       <HorizontalBar
-        data={data[1]}
+        data={{
+					labels: ["", "", "", ""],
+					datasets: data[1].datasets
+				}}
         width={460}
         height={291}
         plugins={plugins}
