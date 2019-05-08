@@ -47,22 +47,24 @@
   "videoComparisonData": [
     {
       "datasets": [
-        { "data": [10, 55, 5, 30] }
+        {
+					"data": [10, 55, 5, 30]
+				}
       ]
     },
     {
       "datasets": [
-        { "data": [12, 19, 5, 64] }
+        {
+					"data": [12, 19, 5, 64]
+				}
       ]
     }
   ],
   "performanceComparisonData": {
     "doughnutData": {
-      "labels": ["Red", "Green"],
       "datasets": [
         {
-          "data": [33, 77],
-          "backgroundColor": ["#5292E5", "#2FD7C4"]
+          "data": [33, 77]
         }
       ]
     },

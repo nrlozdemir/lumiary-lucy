@@ -82,7 +82,14 @@ class PerformanceComparison extends React.Component {
   render() {
     const {
       performanceComparisonData: { data, loading, error },
-    } = this.props
+		} = this.props
+
+		let doughnutData
+		if (data && data.doughnutData) {
+			doughnutData = data.doughnutData
+      doughnutData.datasets[0].backgroundColor = ["#5292E5", "#2FD7C4"]
+    }
+
     return (
       <Module
         moduleKey={'Reports/PerformanceComparison'}
@@ -135,12 +142,15 @@ class PerformanceComparison extends React.Component {
               />
             </div>
           )}
-          {data && data.doughnutData && (
+          {data && data.doughnutData && doughnutData.datasets && (
             <div className={style.chartContainer}>
               <DoughnutChart
                 width={280}
                 height={280}
-                data={data.doughnutData}
+                data={{
+									labels: ["Red", "Green"],
+									datasets: doughnutData.datasets
+								}}
                 cutoutPercentage={58}
                 fillText="Total Percentage"
                 dataLabelFunction="insertAfter"
