@@ -50,7 +50,7 @@ export const ColorTemperature = ({ temp, verticalText }) => {
           className={style.round}
           style={{
             transform: `translateX(${x * 2}%) translateY(${y * 2}%)`,
-            backgroundColor: `${data.color}`,
+            backgroundColor: `${(i === 0) ? "#ff556f" : "#2FD7C4"}`,
           }}
         />
       )})}
