@@ -146,84 +146,52 @@
   "pacingChartData": {
     "stadiumData": [
       {
-        "value": 90,
-        "color": "#2FD7C4",
-        "title": "Slowest"
+        "value": 90
       },
       {
-        "value": 70,
-        "color": "#8562F3",
-        "title": "Slow"
+        "value": 70
       },
       {
-        "value": 50,
-        "color": "#5292E5",
-        "title": "Medium"
+        "value": 50
       },
       {
-        "value": 40,
-        "color": "#ACB0BE",
-        "title": "Fast"
+        "value": 40
       }
     ],
-    "horizontalStackedBarData": {
-      "labels": [
-        "Live Action",
-        "Stop Motion",
-        "Cinemagraph",
-        "Animation"
-      ],
-      "datasets": [
-        {
-          "label": "Slowest",
-          "backgroundColor": "#2FD7C4",
-          "borderColor": "#2FD7C4",
-          "borderWidth": 1,
-          "data": [
-            10,
-            3,
-            5,
-            1
-          ]
-        },
-        {
-          "label": "Slow",
-          "backgroundColor": "#8562F3",
-          "borderColor": "#8562F3",
-          "borderWidth": 1,
-          "data": [
-            12,
-            13,
-            2,
-            5
-          ]
-        },
-        {
-          "label": "Medium",
-          "backgroundColor": "#5292E5",
-          "borderColor": "#5292E5",
-          "borderWidth": 1,
-          "data": [
-            4,
-            5,
-            4,
-            2
-          ]
-        },
-        {
-          "label": "Fast",
-          "backgroundColor": "#acb0be",
-          "borderColor": "#acb0be",
-          "borderWidth": 1,
-          "data": [
-            9,
-            8,
-            1,
-            4
-          ]
-        }
-      ]
-    }
+    "horizontalStackedBarData": [
+      {
+        "data": [
+          10,
+          3,
+          5,
+          1
+        ]
+      },
+      {
+        "data": [
+          12,
+          13,
+          2,
+          5
+        ]
+      },
+      {
+        "data": [
+          4,
+          5,
+          4,
+          2
+        ]
+      },
+      {
+        "data": [
+          9,
+          8,
+          1,
+          4
+        ]
+      }
+    ]
   },
   "compareSharesData": [
     {

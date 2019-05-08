@@ -54,15 +54,7 @@ function* getFilteringSectionData() {
 function* getPacingCardData() {
   try {
     const payload = yield call(getPanopticDataApi)
-    const shuffleData = payload.pacingChartData
-    shuffleData.horizontalStackedBarData.datasets = _.shuffle(
-      shuffleData.horizontalStackedBarData.datasets
-    )
-
-    shuffleData.stadiumData.map((item) => {
-      item.value = _.random(40, 90)
-    })
-    yield put(actions.getPacingCardDataSuccess(shuffleData))
+    yield put(actions.getPacingCardDataSuccess(payload.pacingChartData))
   } catch (err) {
     yield put(actions.getPacingCardDataError(err))
   }
