@@ -34,8 +34,8 @@ const chartTickOptions = {
 /* eslint-disable react/prefer-stateless-function */
 export class Competitor extends React.Component {
   componentDidMount() {
-		this.props.getCompetitorTopVideosRequest()
-		this.props.getCompetitorVideosRequest()
+    this.props.getCompetitorTopVideosRequest()
+    this.props.getCompetitorVideosRequest()
   }
 
   getSimilarProperties = (data) => {
@@ -48,11 +48,11 @@ export class Competitor extends React.Component {
 
   getCompetitorVideos = (data) => {
     this.props.getCompetitorVideosRequest(data)
-	}
+  }
 
-	getCompetitorTopVideos = data => {
-		this.props.getCompetitorTopVideosRequest(data);
-	}
+  getCompetitorTopVideos = (data) => {
+    this.props.getCompetitorTopVideosRequest(data)
+  }
 
   changeSelectedVideo = (video) => {
     this.props.setSelectedVideo(video)
@@ -71,12 +71,12 @@ export class Competitor extends React.Component {
     return (
       <React.Fragment>
         <div className="grid-collapse">
-					<Slider
-						data={marketview.videos || []}
-						selectedVideo={selectedVideo}
-						changeSelectedVideo={this.changeSelectedVideo}
-						title="Top Performing Competitor Videos"
-					/>
+          <Slider
+            data={marketview.videos || []}
+            selectedVideo={selectedVideo}
+            changeSelectedVideo={this.changeSelectedVideo}
+            title="Top Performing Competitor Videos"
+          />
           <TopVideosCardModule
             chartData={competitorTopVideos}
             height={150}

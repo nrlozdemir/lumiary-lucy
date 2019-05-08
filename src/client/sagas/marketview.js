@@ -82,11 +82,11 @@ function* getCompetitorVideosMarketview() {
 
 function* getCompetitorTopVideosMarketview() {
   try {
-		const payload = yield call(getCompetitorTopVideosApi)
+    const payload = yield call(getCompetitorTopVideosApi)
 
-		for (const set of payload.datasets) {
-			set.data = _.shuffle(set.data);
-		}
+    for (const set of payload.datasets) {
+      set.data = _.shuffle(set.data)
+    }
 
     yield put(actions.getCompetitorTopVideosSuccess(payload))
   } catch (e) {
@@ -146,11 +146,11 @@ function* getTotalViewsData(data) {
 
 function* getTotalCompetitorViewsData() {
   try {
-		const payload = yield call(getTotalCompetitorViewsApi)
+    const payload = yield call(getTotalCompetitorViewsApi)
 
-		for (const set of payload.datasets) {
-			set.data = _.shuffle(set.data);
-		}
+    for (const set of payload.datasets) {
+      set.data = _.shuffle(set.data)
+    }
 
     yield put(actions.getTotalCompetitorViewsSuccess(payload))
   } catch (error) {
@@ -160,15 +160,15 @@ function* getTotalCompetitorViewsData() {
 
 function* getmarketviewTimeMockData() {
   try {
-		const payload = yield call(getMarketviewDaysApi)
+    const payload = yield call(getMarketviewDaysApi)
 
-		for (const day in payload) {
-			for (const set of payload[day].CompetitorTopVideos.datasets) {
-				set.data = _.shuffle(set.data);
-			}
+    for (const day in payload) {
+      for (const set of payload[day].CompetitorTopVideos.datasets) {
+        set.data = _.shuffle(set.data)
+      }
 
-			payload[day].CompetitorVideos = _.shuffle(payload[day].CompetitorVideos);
-		}
+      payload[day].CompetitorVideos = _.shuffle(payload[day].CompetitorVideos)
+    }
 
     yield put(actions.getMarketviewDetailTimeSuccess(payload))
   } catch (error) {
@@ -178,11 +178,11 @@ function* getmarketviewTimeMockData() {
 
 function* getTopPerformingPropertiesData() {
   try {
-		const payload = yield call(getGetTopPerformingPropertiesApi)
+    const payload = yield call(getGetTopPerformingPropertiesApi)
 
-		for (const set of payload.datasets) {
-			set.data = _.shuffle(set.data);
-		}
+    for (const set of payload.datasets) {
+      set.data = _.shuffle(set.data)
+    }
 
     yield put(actions.getTopPerformingPropertiesSuccess(payload))
   } catch (error) {
@@ -192,11 +192,11 @@ function* getTopPerformingPropertiesData() {
 
 function* getTopPerformingPropertiesByCompetitorsData() {
   try {
-		const payload = yield call(getGetTopPerformingPropertiesByCompetitorsApi)
+    const payload = yield call(getGetTopPerformingPropertiesByCompetitorsApi)
 
-		for (const set of payload.datasets) {
-			set.data = _.shuffle(set.data);
-		}
+    for (const set of payload.datasets) {
+      set.data = _.shuffle(set.data)
+    }
 
     yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess(payload))
   } catch (error) {

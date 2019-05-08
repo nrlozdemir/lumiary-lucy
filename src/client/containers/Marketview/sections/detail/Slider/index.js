@@ -1,11 +1,9 @@
 import React from 'react'
-import classnames from 'classnames'
 import ProgressBar from 'Components/ProgressBar'
 import MarketViewSlider from 'Components/Sliders/Marketview'
-import SelectFilters from 'Components/SelectFilters'
 
 import style from 'Containers/Marketview/style.scss'
-import { Module } from '../../../../../components/Module'
+import { Module } from 'Components/Module'
 
 export default class Slider extends React.Component {
   constructor(props) {
@@ -18,26 +16,33 @@ export default class Slider extends React.Component {
   }
 
   render() {
-    const { data, selectedVideo, changeSelectedVideo, title, moduleKey } = this.props
+    const {
+      data,
+      selectedVideo,
+      changeSelectedVideo,
+      title,
+      moduleKey,
+    } = this.props
 
     return (
-			<Module
-				containerClass={style.sliderModuleContainer}
-				bodyClass={style.sliderModuleContainerBody}
-				moduleKey={moduleKey}
-				title={title}
-				filters={[
-					{
-						type: 'engagement',
-						selectKey: 'Mwplt-engagement',
-						placeHolder: 'Engagement',
-					},
-					{
-						type: 'timeRange',
-						selectKey: 'Mwplt-date',
-						placeHolder: 'Date',
-					},
-				]}>
+      <Module
+        containerClass={style.sliderModuleContainer}
+        bodyClass={style.sliderModuleContainerBody}
+        moduleKey={moduleKey}
+        title={title}
+        filters={[
+          {
+            type: 'engagement',
+            selectKey: 'Mwplt-engagement',
+            placeHolder: 'Engagement',
+          },
+          {
+            type: 'timeRange',
+            selectKey: 'Mwplt-date',
+            placeHolder: 'Date',
+          },
+        ]}
+      >
         <div className="col-12-no-gutters">
           <MarketViewSlider items={data} changeVideo={changeSelectedVideo} />
         </div>
