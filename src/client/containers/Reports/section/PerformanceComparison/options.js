@@ -19,7 +19,8 @@ export const stackedChartOptions = {
         barThickness: 56,
         stacked: true,
         ticks: {
-          fontColor: '#fff',
+					fontColor: '#fff',
+					fontFamily: 'ClanOTNews',
           fontSize: 12,
           stepSize: 1,
           beginAtZero: true,
@@ -42,6 +43,7 @@ export const stackedChartOptions = {
         stacked: true,
         ticks: {
           fontColor: '#fff',
+					fontFamily: 'ClanOTNews',
           fontSize: 12,
           stepSize: 25,
           beginAtZero: true,
