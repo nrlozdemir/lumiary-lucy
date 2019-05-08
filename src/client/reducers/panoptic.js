@@ -90,6 +90,10 @@ export const types = {
   GET_FLIPCARDS_DATA: 'Panoptic/GET_FLIPCARDS_DATA',
   GET_FLIPCARDS_DATA_SUCCESS: 'Panoptic/GET_FLIPCARDS_DATA_SUCCESS',
   GET_FLIPCARDS_DATA_ERROR: 'Panoptic/GET_FLIPCARDS_DATA_ERROR',
+
+  GET_TOP_PERFORMING_FORMAT_DATA: 'Panoptic/GET_TOP_PERFORMING_FORMAT_DATA',
+  GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS: 'Panoptic/GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS',
+  GET_TOP_PERFORMING_FORMAT_DATA_ERROR: 'Panoptic/GET_TOP_PERFORMING_FORMAT_DATA_ERROR',
 }
 
 export const actions = {
@@ -293,6 +297,21 @@ export const actions = {
     type: types.GET_FLIPCARDS_DATA_ERROR,
     error,
   }),
+
+  getTopPerformingFormatData: (data) => {
+    return {
+      type: types.GET_TOP_PERFORMING_FORMAT_DATA,
+      data,
+    }
+  },
+  getTopPerformingFormatDataSuccess: (payload) => ({
+    type: types.GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS,
+    payload,
+  }),
+  getTopPerformingFormatDataError: (error) => ({
+    type: types.GET_TOP_PERFORMING_FORMAT_DATA_ERROR,
+    error,
+  })
 }
 
 export const initialState = fromJS({
@@ -356,12 +375,17 @@ export const initialState = fromJS({
     data: {},
     loading: false,
     error: null,
-	},
+  },
   flipCardsData: {
     data: {},
     loading: false,
     error: null,
-	},
+  },
+  topPerformingFormatData: {
+    data: [],
+    loading: false,
+    error: null,
+  },
   audienceData: null,
   loading: false,
   error: false,
@@ -591,6 +615,19 @@ const panopticReducer = (state = initialState, action) => {
         .setIn(['flipCardsData', 'error'], fromJS(action.error))
         .setIn(['flipCardsData', 'loading'], fromJS(false))
 
+    case types.GET_TOP_PERFORMING_FORMAT_DATA:
+      return state.setIn(['topPerformingFormatData', 'loading'], fromJS(true))
+
+    case types.GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS:
+      return state
+        .setIn(['topPerformingFormatData', 'data'], fromJS(action.payload))
+        .setIn(['topPerformingFormatData', 'loading'], fromJS(false))
+
+    case types.GET_TOP_PERFORMING_FORMAT_DATA_ERROR:
+      return state
+        .setIn(['topPerformingFormatData', 'error'], fromJS(action.error))
+        .setIn(['topPerformingFormatData', 'loading'], fromJS(false))
+
     default:
       return state
   }
@@ -710,14 +747,23 @@ export const makeSelectAudienceDominantColor = () =>
   createSelector(
     selectAudienceDominantColorDomain,
     (substate) => substate.toJS()
-	)
+  )
 
 const selectFlipCardsDomain = (state) =>
- state.Panoptic.get('flipCardsData')
+  state.Panoptic.get('flipCardsData')
 
 export const makeSelectFlipCards = () =>
   createSelector(
     selectFlipCardsDomain,
+    (substate) => substate.toJS()
+  )
+
+const selectTopPerformingFormatDomain = (state) =>
+  state.Panoptic.get('topPerformingFormatData')
+
+export const makeSelectTopPerformingFormat = () =>
+  createSelector(
+    selectTopPerformingFormatDomain,
     (substate) => substate.toJS()
   )
 

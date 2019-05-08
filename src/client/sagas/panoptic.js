@@ -190,7 +190,7 @@ function* getAudienceContentVitalityScoreData() {
     let shuffleData = payload.lineStackedChartData
     shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
     shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-		yield put(actions.getAudienceContentVitalityScoreDataSuccess(shuffleData))
+    yield put(actions.getAudienceContentVitalityScoreDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getAudienceContentVitalityScoreDataError(err))
   }
@@ -248,6 +248,15 @@ function* getFlipCardsData() {
   }
 }
 
+function* getTopPerformingFormatData() {
+  try {
+    const payload = yield call(getPanopticDataApi)
+    yield put(actions.getTopPerformingFormatDataSuccess(payload.topPerformingFormatData))
+  } catch (err) {
+    yield put(actions.getTopPerformingFormatDataError(err))
+  }
+}
+
 export default [
   takeLatest(types.GET_DATA, getData),
   takeLatest(types.GET_VIDEO_RELEASES_DATA, getVideoReleasesData),
@@ -279,4 +288,5 @@ export default [
   takeLatest(types.GET_AUDIENCE_DATA, getAudienceData),
   takeLatest(types.UPDATE_AUDIENCE_PERFORMANCE, updateAudiencePerformance),
   takeLatest(types.GET_FLIPCARDS_DATA, getFlipCardsData),
+  takeLatest(types.GET_TOP_PERFORMING_FORMAT_DATA, getTopPerformingFormatData),
 ]
