@@ -48,7 +48,6 @@
     {
       "datasets": [
         {
-          "backgroundColor": "#5292E5",
           "data": [10, 55, 5, 30]
         }
       ]
@@ -56,7 +55,6 @@
     {
       "datasets": [
         {
-          "backgroundColor": "#2FD7C4",
           "data": [12, 19, 5, 64]
         }
       ]
