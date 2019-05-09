@@ -110,8 +110,6 @@ function* getPacingCardData({ data }) {
 					: dateOptionValue.value)) ||
 			'24hours'
 			
-		console.log(dateRange)
-
 		const metric =
 			(!!metricOption && !!metricOption.value && metricOption.value.value) ||
 			'views'

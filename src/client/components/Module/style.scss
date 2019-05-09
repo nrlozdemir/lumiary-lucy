@@ -75,8 +75,13 @@
   }
 
   .moduleContainerBody {
+  	position: relative;
     display: flex;
     padding: 8px 40px 40px;
+
+    &--empty {
+    	opacity: .25;
+    }
   }
 }
 
@@ -104,4 +109,20 @@
   :not(:first-child) {
     margin-left: 45px;
   }
+}
+
+.moduleEmpty {
+	opacity: 1 !important;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+	font-size: 24px;
+  font-weight: bold;
 }

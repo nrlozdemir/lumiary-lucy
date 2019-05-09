@@ -28,6 +28,17 @@ class PacingCard extends React.Component {
 				error,
 			},
 		} = this.props
+
+		const isEmpty =
+			!!horizontalStackedBarData &&
+			!!stadiumData &&
+			horizontalStackedBarData.datasets.every((dataset) =>
+				dataset.data.every((data) => data === 0)
+			) &&
+			stadiumData.every((data) => data.value === 0)
+
+		console.log('is pacing card empty', isEmpty)
+
 		return (
 			<Module
 				moduleKey={'Panoptic/PacingCard'}
@@ -45,6 +56,7 @@ class PacingCard extends React.Component {
 						placeHolder: 'Date',
 					},
 				]}
+				isEmpty={isEmpty}
 			>
 				<div className={style.pacingCardInner}>
 					<div className={style.pacingCardInnerItem}>
