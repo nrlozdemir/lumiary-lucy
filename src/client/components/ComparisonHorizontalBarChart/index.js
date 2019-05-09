@@ -30,22 +30,10 @@ const ComparisonHorizontalBarChart = ({ data }) => {
     },
 	}
 
-	Object.values(data).map((dataRow, d) => {
-		dataRow.datasets.map((datasetRow, r) => {
-			data[d].datasets[r].backgroundColor = "#5292E5"
-			if(d % 2) {
-				data[d].datasets[r].backgroundColor = "#2FD7C4"
-			}
-		})
-	})
-
   return (
     <div className={style.container}>
       <HorizontalBar
-        data={{
-					labels: ["", "", "", ""],
-					datasets: data[0].datasets
-				}}
+				data={data[0]}
         width={460}
         height={291}
         plugins={plugins}
@@ -60,10 +48,7 @@ const ComparisonHorizontalBarChart = ({ data }) => {
       </div>
 
       <HorizontalBar
-        data={{
-					labels: ["", "", "", ""],
-					datasets: data[1].datasets
-				}}
+				data={data[1]}
         width={460}
         height={291}
         plugins={plugins}
