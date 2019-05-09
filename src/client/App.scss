@@ -196,7 +196,7 @@
       color: $color-dusk;
       font-family: $font-family-primary;
       font-size: 40px;
-      padding: 2px 20px;
+      padding: 2px 15px;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -215,7 +215,6 @@
         border-radius: 8px;
         box-shadow: 0;
         background-color: transparent;
-        border: 0px solid $color-dusk;
         box-sizing: border-box;
         padding-bottom: 20px;
         display: flex;
@@ -235,7 +234,6 @@
           font-stretch: condensed;
           line-height: normal;
           letter-spacing: normal;
-          color: $color-white;
         }
 
         &:before {
@@ -253,7 +251,6 @@
         &:after {
           content: 'Age';
           font-size: 12px;
-          color: #fff;
           position: absolute;
           width: 100%;
           text-align: center;
@@ -292,10 +289,8 @@
 
       &.swiper-slide-thumb-active {
         opacity: 1;
-        color: #fff;
         p {
           box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-          background-color: $color-dark-five;
           border-width: 1px;
 
           span {
@@ -313,8 +308,8 @@
     }
   }
 
-	.audienceSlider,
-	.marketViewSlider {
+  .audienceSlider,
+  .marketViewSlider {
     height: 366px;
 
     .swiper-container {
@@ -433,7 +428,7 @@
       transform: translateY(-50%);
 
       &::before {
-        content: '\E987';
+        content: '\e915';
         color: $color-black;
         font-family: $font-family-qf-icons;
         line-height: 40px;
@@ -443,20 +438,20 @@
         background: #fff;
       }
     }
-	}
+  }
 
-	.marketViewSlider {
-		.swiper-button-prev,
-		.swiper-button-next {
-			width: 32px;
-			height: 32px;
-			top: 35%;
-		}
+  .marketViewSlider {
+    .swiper-button-prev,
+    .swiper-button-next {
+      width: 32px;
+      height: 32px;
+      top: 35%;
+    }
 
-		.active {
-			opacity: 1;
-		}
-	}
+    .active {
+      opacity: 1;
+    }
+  }
 
   .custom-select {
     width: 170px;

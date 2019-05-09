@@ -9,6 +9,7 @@ const dark = {
   placeholderColor: '#ffffff',
   textColor: '#ffffff',
   searchOptionsColor: '#545b79',
+  ageSliderBorder: '#545b79',
   // global values
 
   // selectbox
@@ -113,6 +114,7 @@ const light = {
   searchColor: '#e8ecf0',
   placeholderColor: '#c6c9d7',
   searchOptionsColor: '#ffffff',
+  ageSliderBorder: 'transparent',
 
   // global values
 
