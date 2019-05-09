@@ -109,6 +109,8 @@ function* getPacingCardData({ data }) {
 					? [dateOptionValue.value.startDate, dateOptionValue.value.endDate]
 					: dateOptionValue.value)) ||
 			'24hours'
+			
+		console.log(dateRange)
 
 		const metric =
 			(!!metricOption && !!metricOption.value && metricOption.value.value) ||
@@ -120,12 +122,10 @@ function* getPacingCardData({ data }) {
 			platform: 'all',
 			property: ['pacing'],
 			dateBucket: 'none',
+			display: 'percentage',
 		}
 
-		const stadiumData = yield call(getPacingCardDataApi, {
-			...options,
-			display: 'percentage',
-		})
+		const stadiumData = yield call(getPacingCardDataApi, options)
 
 		const horizontalStackedBarData = yield call(getPacingCardDataApi, {
 			...options,
