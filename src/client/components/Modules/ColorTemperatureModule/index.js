@@ -107,7 +107,7 @@ ColorTemperatureModule.defaultProps = {
   legend: [],
   borderLess: false,
   verticalText: false,
-  noStaticTexts: true
+  noStaticTexts: false
 }
 
 ColorTemperatureModule.propTypes = {

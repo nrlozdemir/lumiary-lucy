@@ -63,7 +63,7 @@ const ColorTemperatureChart = ({
       <div key={index} className={chartWrapper}>
         <ColorTemperature
           temp={{
-            ...(!noStaticTexts ? staticTexts[index] : {}),
+            ...(!!noStaticTexts ? staticTexts[index] : {}),
             data: temp.data.map((item, index) => ({
               ...item,
               ...dataColors[index]
@@ -71,7 +71,7 @@ const ColorTemperatureChart = ({
           }}
           verticalText={verticalText}
         />
-        {!noStaticTexts && staticTexts[index].text && <div className={style.chartInfo}>{staticTexts[index].text}</div>}
+        {!!noStaticTexts && staticTexts[index].text && <div className={style.chartInfo}>{staticTexts[index].text}</div>}
       </div>
     ))
   )
