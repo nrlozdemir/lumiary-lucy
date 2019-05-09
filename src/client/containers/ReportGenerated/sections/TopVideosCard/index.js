@@ -26,7 +26,7 @@ const TopVideosCard = ({
 
 	let stackedChartData = chartData
 	const labels = ["Facebook", "Instagram", "Twitter", "YouTube", "Pinterest"]
-	const backgroundColors = ["#5292E5", "#8562F3", "#acb0be", "#2FD7C4", "#545B79"]
+	const backgroundColors = ["#2FD7C4", "#8562F3", "#5292E5", "#acb0be", "#545B79"]
 
 	stackedChartData.labels = ["360p", "480p", "720p", "1080p", "4k"]
 	stackedChartData.datasets.map((el, i) => {
@@ -77,7 +77,7 @@ const TopVideosCard = ({
               Twitter
             </div>
             <div className={style.referenceItem}>
-              <span className="bg-cool-grey" />
+              <span className="bg-cool-grey" style={{backgroundColor: "#acb0be"}} />
               YouTube
             </div>
             <div className={style.referenceItem}>
