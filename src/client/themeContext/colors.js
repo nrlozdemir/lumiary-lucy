@@ -95,6 +95,11 @@ const dark = {
   tablePopoverDeleteColor: '#2fd7c4',
   tablePopoverColor: '#545b79',
   // table values
+
+  // tooltip values
+  tooltipTextColor: '#373f5b',
+  tooltipBackground: '#ffffff',
+  // tooltip values
 }
 
 const light = {
@@ -195,6 +200,11 @@ const light = {
   tablePopoverDeleteColor: '#2fd7c4',
   tablePopoverColor: '#ffffff',
   // table values
+
+  // tooltip values
+  tooltipTextColor: '#f3f6f9',
+  tooltipBackground: '#505050',
+  // tooltip values
 }
 
 const themes = {
