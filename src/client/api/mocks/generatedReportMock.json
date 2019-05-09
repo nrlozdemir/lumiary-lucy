@@ -363,17 +363,9 @@
   },
   "verticalStackedChartData": {
     "doughnutData": {
-      "labels": [
-        "0-15 seconds",
-        "15-30 seconds",
-        "30-45 seconds",
-        "45-60 seconds"
-      ],
       "datasets": [
         {
-          "data": [42, 24, 16, 18],
-          "backgroundColor": ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"],
-          "hoverBackgroundColor": ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"]
+          "data": [42, 24, 16, 18]
         }
       ]
     },

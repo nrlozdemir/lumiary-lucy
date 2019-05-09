@@ -7,7 +7,7 @@ import StackedBarChart from 'Components/Charts/StackedBarChart'
 import style from './style.scss'
 
 const GeneratedReportFilteringSection = ({
-  data: { doughnutData, stackedChartData, doughnutRoundData },
+  data: { doughnutData, stackedChartData },
   selectDuration,
   handleSelectFilters,
 }) => {
@@ -34,7 +34,21 @@ const GeneratedReportFilteringSection = ({
             <DoughnutChart
                 width={270}
                 height={270}
-                data={doughnutData}
+                data={{
+									labels: [
+										"0-15 seconds",
+										"15-30 seconds",
+										"30-45 seconds",
+										"45-60 seconds"
+									],
+									datasets: [
+										{
+											data: doughnutData.datasets[0].data,
+											backgroundColor: ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"],
+											hoverBackgroundColor: ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"]
+										}
+									]
+								}}
                 cutoutPercentage={58}
                 fillText="Total Percentage"
                 dataLabelFunction="insertAfter"
