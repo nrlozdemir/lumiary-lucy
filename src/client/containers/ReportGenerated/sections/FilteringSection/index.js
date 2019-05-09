@@ -32,35 +32,35 @@ const GeneratedReportFilteringSection = ({
         <div className={style.radialAndStackChartWrapper}>
           <div>
             <DoughnutChart
-                width={270}
-                height={270}
-                data={{
-									labels: [
-										"0-15 seconds",
-										"15-30 seconds",
-										"30-45 seconds",
-										"45-60 seconds"
-									],
-									datasets: [
-										{
-											data: doughnutData.datasets[0].data,
-											backgroundColor: ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"],
-											hoverBackgroundColor: ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"]
-										}
-									]
-								}}
-                cutoutPercentage={58}
-                fillText="Total Percentage"
-                dataLabelFunction="insertAfter"
-                dataLabelInsert="%"
-                labelPositionRight
-                labelsData={[
-                  { data: '0-15 seconds', color: '#2FD7C4' },
-                  { data: '15-30 seconds', color: '#8562F3' },
-                  { data: '30-45 seconds', color: '#5292E5' },
-                  { data: '45-60 seconds', color: '#acb0be' },
-                ]}
-              />
+              width={270}
+              height={270}
+              data={{
+								labels: [
+									"0-15 seconds",
+									"15-30 seconds",
+									"30-45 seconds",
+									"45-60 seconds"
+								],
+								datasets: [
+									{
+										data: doughnutData.datasets[0].data,
+										backgroundColor: ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"],
+										hoverBackgroundColor: ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"]
+									}
+								]
+							}}
+              cutoutPercentage={58}
+              fillText="Total Percentage"
+              dataLabelFunction="insertAfter"
+              dataLabelInsert="%"
+              labelPositionRight
+              labelsData={[
+                { data: '0-15 seconds', color: '#2FD7C4' },
+                { data: '15-30 seconds', color: '#8562F3' },
+                { data: '30-45 seconds', color: '#5292E5' },
+                { data: '45-60 seconds', color: '#acb0be' },
+              ]}
+            />
           </div>
         </div>
         <div>
