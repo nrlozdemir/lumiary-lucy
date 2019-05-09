@@ -7,6 +7,7 @@ import { actions, makeSelectMarketviewBubbleChart } from 'Reducers/marketview'
 import { Link } from 'react-router-dom'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
 import { socialIconSelector } from 'Utils'
+import { ThemeContext } from 'ThemeContext/themeContext'
 
 import style from 'Containers/Marketview/style.scss'
 class ColorCard extends Component {
@@ -37,76 +38,105 @@ class ColorCard extends Component {
   render() {
     const { bubbleChartOptions } = this.state
     const { bubbleChartData } = this.props
-    console.log('bubbleChartData', bubbleChartData)
     return (
-      <div className={style.marketViewCard}>
-        <div className={style.marketViewCardTitle}>Color</div>
-        <div className={style.marketViewCardSubTitle}>
-          Top Performing Platform
-        </div>
-        <div className={style.marketViewCardDate}>
-          <span>Past 3 Months</span>
-        </div>
-        <div className={style.bubbleChart}>
-          {bubbleChartData.length > 0 && (
-            <BubbleChart
-              size={[800, 600]}
-              fromPercentages={true}
-              options={{ toolTipWidth: 200, toolTipHeight: 75 }}
-            >
-              {bubbleChartData.map((bubble, i) => (
-                <Bubble
-                  key={'bubble-' + i}
-                  radius={(parseInt(bubble.value) / 100) * 0.0015 + 15}
-                  fill="#21243B"
-                  stroke={bubble.color}
-                >
-                  <Visual>
-                    <span
-                      className={
-                        socialIconSelector(bubble.icon) +
-                        ' ' +
-                        style.bubbleVisual
-                      }
-                    />
-                  </Visual>
-                  <ToolTip>
-                    <div className={style.bubbleTooltip}>{bubble.name}</div>
-                    <div className={style.bubbleTooltip}>
-                      {bubble.value / 1000}k views
-                    </div>
-                  </ToolTip>
-                </Bubble>
-              ))}
-            </BubbleChart>
-          )}
-        </div>
-        <div className={style.colors}>
-          {bubbleChartOptions.map((color, i) => {
-            const network = bubbleChartData.find((data) => data.color === color)
-            return (
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <div
+            className={style.marketViewCard}
+            style={{
+              backgroundColor: colors.modalBackground,
+              color: colors.textColor,
+            }}
+          >
+            <div className={style.marketViewCardTitle}>Color</div>
+            <div className={style.marketViewCardSubTitle}>
+              Top Performing Platform
+            </div>
+            <div className={style.chartSectionBadge}>
               <span
-                key={i}
-                style={{ backgroundColor: color }}
-                className={network && style.hasTriangle}
-              />
-            )
-          })}
-        </div>
-        <div className={style.marketViewCardDescription}>
-          Based on the number of shares for competitors across all platforms
-        </div>
-        <Link to="/marketview/competitor" className={style.marketViewCardLink}>
-          View Platform Metrics
-          <div className={style.icon}>
-            <span className="icon-Right-Arrow-Circle">
-              <span className="path1" />
-              <span className="path2" />
-              <span className="path3" />
-            </span>
+                style={{
+                  background: colors.labelBackground,
+                  color: colors.labelColor,
+                  shadowColor: colors.labelShadow,
+                }}
+              >
+                Past Month
+              </span>
+            </div>
+            <div className={style.bubbleChart}>
+              {bubbleChartData.length > 0 && (
+                <BubbleChart
+                  size={[800, 600]}
+                  fromPercentages={true}
+                  options={{ toolTipWidth: 200, toolTipHeight: 75 }}
+                >
+                  {bubbleChartData.map((bubble, i) => (
+                    <Bubble
+                      key={'bubble-' + i}
+                      radius={(parseInt(bubble.value) / 100) * 0.0015 + 15}
+                      fill="#21243B"
+                      stroke={bubble.color}
+                    >
+                      <Visual>
+                        <span
+                          className={
+                            socialIconSelector(bubble.icon) +
+                            ' ' +
+                            style.bubbleVisual
+                          }
+                        />
+                      </Visual>
+                      <ToolTip>
+                        <div className={style.bubbleTooltip}>{bubble.name}</div>
+                        <div className={style.bubbleTooltip}>
+                          {bubble.value / 1000}k views
+                        </div>
+                      </ToolTip>
+                    </Bubble>
+                  ))}
+                </BubbleChart>
+              )}
+            </div>
+            <div className={style.colors}>
+              <style>{`.${style.hasTriangle}:before {border-color: ${
+                colors.textColor
+              } transparent transparent transparent;}`}</style>
+              {bubbleChartOptions.map((color, i) => {
+                const network = bubbleChartData.find(
+                  (data) => data.color === color
+                )
+                return (
+                  <span
+                    key={i}
+                    style={{ backgroundColor: color }}
+                    className={network && style.hasTriangle}
+                  />
+                )
+              })}
+            </div>
+            <div className={style.marketViewCardDescription}>
+              Based on the number of shares for competitors across all platforms
+            </div>
+            <Link
+              to="/marketview/competitor"
+              className={style.marketViewCardLink}
+              style={{
+                backgroundColor: colors.moduleBorder,
+                color: colors.textColor,
+              }}
+            >
+              View Platform Metrics
+              <div className={style.icon}>
+                <span className="icon-Right-Arrow-Circle">
+                  <span className="path1" />
+                  <span className="path2" />
+                  <span className="path3" />
+                </span>
+              </div>
+            </Link>
           </div>
-        </Link>
-      </div>
+        )}
+      </ThemeContext.Consumer>
     )
   }
 }

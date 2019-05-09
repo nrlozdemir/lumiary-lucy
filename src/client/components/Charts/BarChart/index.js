@@ -1,28 +1,53 @@
 import React from 'react'
 import { Bar } from 'react-chartjs-2'
 import { barDurationOptions } from './options'
+import { withTheme } from 'ThemeContext/withTheme'
 
-const BarChart = ({
-  barDurationData,
-  height = 290,
-	width = 200,
-	tickOptions = {},
-}) => {
+const BarChart = (props) => {
+  console.log(props)
+  const {
+    barDurationData,
+    height = 290,
+    width = 200,
+    tickOptions = {},
+    themeContext: { colors },
+  } = props
   const chartOptions = {
     ...barDurationOptions,
+    chartArea: {
+      backgroundColor: colors.chartBackground,
+    },
     scales: {
-      ...barDurationOptions.scales,
+      xAxes: [
+        {
+          ...barDurationOptions.scales.xAxes[0],
+          ticks: {
+            ...barDurationOptions.scales.xAxes[0].ticks,
+            fontColor: colors.textColor,
+          },
+          gridLines: {
+            ...barDurationOptions.scales.xAxes[0].gridLines,
+            color: colors.chartStadiumBarBorder,
+          },
+        },
+      ],
       yAxes: [
         {
           ...barDurationOptions.scales.yAxes[0],
           ticks: {
             ...barDurationOptions.scales.yAxes[0].ticks,
+            fontColor: colors.textColor,
             ...tickOptions,
-					},
-				}
-			]
-		}
-	};
+          },
+          gridLines: {
+            ...barDurationOptions.scales.yAxes[0].gridLines,
+            color: colors.chartStadiumBarBorder,
+            zeroLineColor: colors.chartStadiumBarBorder,
+          },
+        },
+      ],
+    },
+  }
 
   const plugins = [
     {
@@ -65,17 +90,17 @@ const BarChart = ({
         ctx.restore()
       },
     },
-	]
+  ]
 
   return (
     <Bar
       data={barDurationData}
-			height={height}
-			width={width}
+      height={height}
+      width={width}
       options={{ ...chartOptions }}
       plugins={plugins}
     />
   )
 }
 
-export default BarChart
+export default withTheme(BarChart)
