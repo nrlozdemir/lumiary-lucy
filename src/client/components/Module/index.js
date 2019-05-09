@@ -17,19 +17,21 @@ export class Module extends React.Component {
       infoShow: false,
     }
   }
+
   componentDidUpdate(prevProps) {
-    if (this.props.selectFilters) {
-      if (
-        !_.isEqual(
-          prevProps.selectFilters.values[prevProps.moduleKey],
-          this.props.selectFilters.values[this.props.moduleKey]
-        )
-      ) {
-        this.props.action(
-          this.props.selectFilters.values[this.props.moduleKey],
-          this.props.moduleKey
-        )
-      }
+    if (
+      this.props.action &&
+      prevProps.selectFilters &&
+      this.props.selectFilters &&
+      !_.isEqual(
+        prevProps.selectFilters.values[prevProps.moduleKey],
+        this.props.selectFilters.values[this.props.moduleKey]
+      )
+    ) {
+      this.props.action(
+        this.props.selectFilters.values[this.props.moduleKey],
+        this.props.moduleKey
+      )
     }
   }
 
@@ -40,16 +42,7 @@ export class Module extends React.Component {
   }
 
   render() {
-    const {
-      children,
-      title,
-      subTitle,
-      legend,
-      filters,
-      bodyClass,
-      containerClass,
-    } = this.props
-
+    const { children, references, bodyClass, containerClass } = this.props
     const { infoShow } = this.state
 
     const moduleContainer = cx(
@@ -57,6 +50,9 @@ export class Module extends React.Component {
       style.moduleContainer,
       containerClass
     )
+
+    const referencesClass = cx('font-secondary-second', style.references)
+    const moduleContainerBody = cx(style.moduleContainerBody, bodyClass)
 
     return (
       <ThemeContext.Consumer>
@@ -78,9 +74,17 @@ export class Module extends React.Component {
                   themes={colors}
                 />
               </div>
-              <div className={cx(style.moduleContainerBody, bodyClass)}>
-                {children}
-              </div>
+              <div className={moduleContainerBody}>{children}</div>
+              {references && (
+                <div className={referencesClass}>
+                  {references.map((ref, index) => (
+                    <div className={style.referenceItem} key={index}>
+                      <span className={ref.className} />
+                      {ref.text}
+                    </div>
+                  ))}
+                </div>
+              )}
             </div>
           )
         }}

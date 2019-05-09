@@ -6,83 +6,81 @@ import mock from 'Api/mocks/libraryMock.json'
 import { findIdDetail } from 'Utils/api'
 
 function getBarChartApi({ LibraryDetailId }) {
-	//this will use ajax function in utils/api when real data is provided
-	return axios
-		.get('/')
-		.then((res) => findIdDetail(mock, LibraryDetailId, 'HeaderBarChartMock'))
+  //this will use ajax function in utils/api when real data is provided
+  return axios
+    .get('/')
+    .then((res) => findIdDetail(mock, LibraryDetailId, 'HeaderBarChartMock'))
 }
 function getDoughnutChartApi({ LibraryDetailId }) {
-	//this will use ajax function in utils/api when real data is provided
-	return axios
-		.get('/')
-		.then((res) => findIdDetail(mock, LibraryDetailId, 'DoughnutChartMock'))
+  //this will use ajax function in utils/api when real data is provided
+  return axios
+    .get('/')
+    .then((res) => findIdDetail(mock, LibraryDetailId, 'DoughnutChartMock'))
 }
 function getColorTempApi({ LibraryDetailId }) {
-	//this will use ajax function in utils/api when real data is provided
-	return axios
-		.get('/')
-		.then((res) => findIdDetail(mock, LibraryDetailId, 'ColorTempMock'))
+  //this will use ajax function in utils/api when real data is provided
+  return axios
+    .get('/')
+    .then((res) => findIdDetail(mock, LibraryDetailId, 'ColorTempMock'))
 }
 function getShotByShotApi({ LibraryDetailId }) {
-	//this will use ajax function in utils/api when real data is provided
-	return axios
-		.get('/')
-		.then((res) => findIdDetail(mock, LibraryDetailId, 'ShotByShotMock'))
+  //this will use ajax function in utils/api when real data is provided
+  return axios
+    .get('/')
+    .then((res) => findIdDetail(mock, LibraryDetailId, 'ShotByShotMock'))
 }
 
 function* getBarChart({ payload: { LibraryDetailId } }) {
-	try {
-		const payload = yield call(getBarChartApi, {
-			LibraryDetailId,
-		})
-		yield put(actions.getBarChartSuccess(payload))
-	} catch (error) {
-		yield put(actions.getBarChartFailure({ error }))
-	}
+  try {
+    const payload = yield call(getBarChartApi, {
+      LibraryDetailId,
+    })
+    yield put(actions.getBarChartSuccess(payload))
+  } catch (error) {
+    yield put(actions.getBarChartFailure({ error }))
+  }
 }
 
 function* getDoughnutChart({ payload: { LibraryDetailId } }) {
-	try {
-		const payload = yield call(getDoughnutChartApi, {
-			LibraryDetailId,
-		})
-		yield put(actions.getDoughnutChartSuccess(payload))
-	} catch (error) {
-		yield put(actions.getDoughnutChartFailure({ error }))
-	}
+  try {
+    const payload = yield call(getDoughnutChartApi, {
+      LibraryDetailId,
+    })
+    yield put(actions.getDoughnutChartSuccess(payload))
+  } catch (error) {
+    yield put(actions.getDoughnutChartFailure({ error }))
+  }
 }
 
 function* getColorTemperatureData({ payload: { LibraryDetailId } }) {
-	try {
-		const payload = yield call(getColorTempApi, {
-			LibraryDetailId,
-		})
+  try {
+    const payload = yield call(getColorTempApi, {
+      LibraryDetailId,
+    })
 
-		const shuffleData = _.shuffle(payload.colorTempData)
-
-		yield put({
-			type: types.GET_COLOR_TEMP_SUCCESS,
-			payload: shuffleData,
-		})
-	} catch (err) {
-		yield put(actions.getColorTempFailure(err))
-	}
+    yield put({
+      type: types.GET_COLOR_TEMP_SUCCESS,
+      payload: payload.colorTempData,
+    })
+  } catch (err) {
+    yield put(actions.getColorTempFailure(err))
+  }
 }
 
 function* getShotByShot({ payload: { LibraryDetailId } }) {
-	try {
-		const payload = yield call(getShotByShotApi, {
-			LibraryDetailId,
-		})
-		yield put(actions.getShotByShotSuccess(payload))
-	} catch (error) {
-		yield put(actions.getShotByShotFailure({ error }))
-	}
+  try {
+    const payload = yield call(getShotByShotApi, {
+      LibraryDetailId,
+    })
+    yield put(actions.getShotByShotSuccess(payload))
+  } catch (error) {
+    yield put(actions.getShotByShotFailure({ error }))
+  }
 }
 
 export default [
-	takeLatest(types.GET_BAR_CHART_REQUEST, getBarChart),
-	takeLatest(types.GET_DOUGHNUT_CHART_REQUEST, getDoughnutChart),
-	takeLatest(types.GET_COLOR_TEMP_REQUEST, getColorTemperatureData),
-	takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),
+  takeLatest(types.GET_BAR_CHART_REQUEST, getBarChart),
+  takeLatest(types.GET_DOUGHNUT_CHART_REQUEST, getDoughnutChart),
+  takeLatest(types.GET_COLOR_TEMP_REQUEST, getColorTemperatureData),
+  takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),
 ]

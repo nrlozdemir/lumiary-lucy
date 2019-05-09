@@ -14,10 +14,13 @@
     font-size: 18px;
     font-family: $font-family-ClanOTBold;
     line-height: 42px;
+    > div {
+      flex: auto;
+    }
     .headerTitle {
       display: flex;
       align-items: center;
-      flex: 1;
+      flex: auto;
       // flex-direction: column;
 
       .moduleInfo {
@@ -47,6 +50,9 @@
         font-size: 16px;
       }
     }
+    .headerLegend {
+      flex: auto;
+    }
     .headerFilters {
       display: flex;
       justify-content: flex-end;
@@ -70,5 +76,31 @@
   .moduleContainerBody {
     display: flex;
     padding: 8px 40px 40px;
+  }
+}
+
+.references {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .referenceItem {
+    display: flex;
+    padding-bottom: 40px;
+    font-size: 14px;
+    line-height: 1.8rem;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    span {
+      width: 16px;
+      height: 16px;
+      display: inline-block;
+      margin-bottom: -2px;
+      margin-right: 5px;
+      border-radius: 10px;
+    }
+  }
+  :not(:first-child) {
+    margin-left: 45px;
   }
 }
