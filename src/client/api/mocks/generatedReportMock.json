@@ -327,31 +327,20 @@
     ]
   },
   "topVideosOverTime": {
-    "labels": ["360", "480", "720p", "1080p", "4k"],
     "datasets": [
       {
-        "label": "Facebook",
-        "backgroundColor": "#5292E5",
         "data": [25, 10, 14, 51, 20]
       },
       {
-        "label": "Instagram",
-        "backgroundColor": "#8562F3",
         "data": [12, 24, 56, 9, 25]
       },
       {
-        "label": "Twitter",
-        "backgroundColor": "#acb0be",
         "data": [42, 18, 18, 25, 10]
       },
       {
-        "label": "YouTube",
-        "backgroundColor": "#2FD7C4",
         "data": [21, 48, 12, 15, 5]
       },
       {
-        "label": "Pinterest",
-        "backgroundColor": "#545B79",
         "data": [21, 48, 12, 15, 30]
       }
     ]
