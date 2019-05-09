@@ -370,26 +370,17 @@
       ]
     },
     "stackedChartData": {
-      "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
       "datasets": [
         {
-          "label": "0-15 seconds",
-          "backgroundColor": "#5292E5",
           "data": [25, 10, 14, 51]
         },
         {
-          "label": "15-30 seconds",
-          "backgroundColor": "#8562F3",
           "data": [12, 24, 56, 9]
         },
         {
-          "label": "30-60 seconds",
-          "backgroundColor": "#acb0be",
           "data": [42, 18, 18, 25]
         },
         {
-          "label": "60+ seconds",
-          "backgroundColor": "#2FD7C4",
           "data": [21, 48, 12, 15]
         }
       ]
