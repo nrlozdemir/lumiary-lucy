@@ -70,12 +70,7 @@ export class Module extends React.Component {
 						infoShow={infoShow}
 					/>
 				</div>
-				<div className={moduleContainerBody}>
-					{children}
-					{isEmpty && (
-						<div className={style.moduleEmpty}>No Data Available</div>
-					)}
-				</div>
+				<div className={moduleContainerBody}>{children}</div>
 				{references && (
 					<div className={referencesClass}>
 						{references.map((ref, index) => (
@@ -86,6 +81,7 @@ export class Module extends React.Component {
 						))}
 					</div>
 				)}
+				{isEmpty && <div className={style.moduleEmpty}>No Data Available</div>}
 			</div>
 		)
 	}

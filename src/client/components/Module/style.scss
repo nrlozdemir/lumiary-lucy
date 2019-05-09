@@ -1,118 +1,117 @@
 .moduleContainer {
-  background-color: $color-dark-grey-blue;
-  font-family: $font-family-ClanOT;
-  margin-top: 35px;
-  margin-bottom: 35px;
-  // position: relative;
-  // overflow: hidden;
+	position: relative;
+	background-color: $color-dark-grey-blue;
+	font-family: $font-family-ClanOT;
+	margin-top: 35px;
+	margin-bottom: 35px;
+	// position: relative;
+	// overflow: hidden;
 
-  .moduleContainerHeader {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 40px;
-    font-size: 18px;
-    font-family: $font-family-ClanOTBold;
-    line-height: 42px;
-    > div {
-      flex: auto;
-    }
-    .headerTitle {
-      display: flex;
-      align-items: center;
-      flex: auto;
-      // flex-direction: column;
+	.moduleContainerHeader {
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 40px;
+		font-size: 18px;
+		font-family: $font-family-ClanOTBold;
+		line-height: 42px;
+		> div {
+			flex: auto;
+		}
+		.headerTitle {
+			display: flex;
+			align-items: center;
+			flex: auto;
+			// flex-direction: column;
 
-      .moduleInfo {
-        color: #ffffff;
-        border-radius: 50%;
-        border: 2px solid #ffffff;
-        width: 20px;
-        height: 20px;
-        position: relative;
-        margin-left: 12px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        font-size: 14px;
-        cursor: pointer;
-        box-sizing: border-box;
-        margin-top: 2px;
-      }
+			.moduleInfo {
+				color: #ffffff;
+				border-radius: 50%;
+				border: 2px solid #ffffff;
+				width: 20px;
+				height: 20px;
+				position: relative;
+				margin-left: 12px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 14px;
+				cursor: pointer;
+				box-sizing: border-box;
+				margin-top: 2px;
+			}
 
-      h1,
-      h2 {
-        line-height: initial;
-      }
-      h1 {
-        font-size: 18px;
-      }
-      h2 {
-        font-size: 16px;
-      }
-    }
-    .headerLegend {
-      flex: auto;
-    }
-    .headerFilters {
-      display: flex;
-      justify-content: flex-end;
-      position: relative;
-      z-index: 12;
-      > div {
-        text-align: left;
-        margin: 0 0 0 24px;
-      }
-    }
+			h1,
+			h2 {
+				line-height: initial;
+			}
+			h1 {
+				font-size: 18px;
+			}
+			h2 {
+				font-size: 16px;
+			}
+		}
+		.headerLegend {
+			flex: auto;
+		}
+		.headerFilters {
+			display: flex;
+			justify-content: flex-end;
+			position: relative;
+			z-index: 12;
+			> div {
+				text-align: left;
+				margin: 0 0 0 24px;
+			}
+		}
 
-    .headerLegend {
-      flex: 1;
-      p{
-        font-size: 14px;
-        line-height: 1.8rem;
-      }
-    }
-  }
+		.headerLegend {
+			flex: 1;
+			p {
+				font-size: 14px;
+				line-height: 1.8rem;
+			}
+		}
+	}
 
-  .moduleContainerBody {
-  	position: relative;
-    display: flex;
-    padding: 8px 40px 40px;
+	.moduleContainerBody {
+		display: flex;
+		padding: 8px 40px 40px;
 
-    &--empty {
-    	opacity: .25;
-    }
-  }
+		&--empty {
+			opacity: 0.25;
+		}
+	}
 }
 
 .references {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  .referenceItem {
-    display: flex;
-    padding-bottom: 40px;
-    font-size: 14px;
-    line-height: 1.8rem;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    span {
-      width: 16px;
-      height: 16px;
-      display: inline-block;
-      margin-bottom: -2px;
-      margin-right: 5px;
-      border-radius: 10px;
-    }
-  }
-  :not(:first-child) {
-    margin-left: 45px;
-  }
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	.referenceItem {
+		display: flex;
+		padding-bottom: 40px;
+		font-size: 14px;
+		line-height: 1.8rem;
+		align-items: center;
+		justify-content: center;
+		text-align: center;
+		span {
+			width: 16px;
+			height: 16px;
+			display: inline-block;
+			margin-bottom: -2px;
+			margin-right: 5px;
+			border-radius: 10px;
+		}
+	}
+	:not(:first-child) {
+		margin-left: 45px;
+	}
 }
 
 .moduleEmpty {
-	opacity: 1 !important;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -124,5 +123,5 @@
 	bottom: 0;
 	left: 0;
 	font-size: 24px;
-  font-weight: bold;
+	font-weight: bold;
 }

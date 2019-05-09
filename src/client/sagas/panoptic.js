@@ -109,7 +109,7 @@ function* getPacingCardData({ data }) {
 					? [dateOptionValue.value.startDate, dateOptionValue.value.endDate]
 					: dateOptionValue.value)) ||
 			'24hours'
-			
+
 		const metric =
 			(!!metricOption && !!metricOption.value && metricOption.value.value) ||
 			'views'
