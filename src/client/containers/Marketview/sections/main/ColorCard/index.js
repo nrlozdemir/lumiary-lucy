@@ -37,7 +37,7 @@ class ColorCard extends Component {
   render() {
     const { bubbleChartOptions } = this.state
     const { bubbleChartData } = this.props
-    console.log('bubbleChartData', bubbleChartData)
+
     return (
       <div className={style.marketViewCard}>
         <div className={style.marketViewCardTitle}>Color</div>
@@ -64,7 +64,7 @@ class ColorCard extends Component {
                   <Visual>
                     <span
                       className={
-                        socialIconSelector(bubble.icon) +
+                        socialIconSelector(bubble.name) +
                         ' ' +
                         style.bubbleVisual
                       }
