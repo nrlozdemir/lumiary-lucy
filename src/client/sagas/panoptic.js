@@ -147,7 +147,9 @@ function* getAudienceGenderData() {
   try {
     const payload = yield call(getAudienceDataApi)
     const shuffleData = payload.genderData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
+    shuffleData.datasets[0].data = _.shuffle(
+      shuffleData.datasets[0].data.map((number) => -Math.abs(number))
+    )
     shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
     yield put(actions.getAudienceGenderDataSuccess(shuffleData))
   } catch (err) {
@@ -190,7 +192,7 @@ function* getAudienceContentVitalityScoreData() {
     let shuffleData = payload.lineStackedChartData
     shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
     shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-		yield put(actions.getAudienceContentVitalityScoreDataSuccess(shuffleData))
+    yield put(actions.getAudienceContentVitalityScoreDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getAudienceContentVitalityScoreDataError(err))
   }

@@ -1,7 +1,6 @@
 import React from 'react'
 import { HorizontalBar } from 'react-chartjs-2'
 
-import { barChartOptions } from './options'
 import { withTheme } from 'ThemeContext/withTheme'
 
 const plugins = [
@@ -42,59 +41,42 @@ const plugins = [
 ]
 
 const HorizontalStackedBarChart = (props) => {
-  const { barData } = props
+  const { barData, options, width, height } = props
   const themes = props.themeContext.colors
   return (
     <HorizontalBar
       key={Math.random()}
-      data={{
-        labels: barData.labels,
-        datasets: barData.datasets.map((data, index) => {
-          const indexValues = data.data.map((v, i) => {
-            return barData.datasets.map((d) => d.data[i])
-          })
-
-          return {
-            ...data,
-            data: data.data.map((value, i) => {
-              const totalValue = indexValues[i].reduce(
-                (accumulator, currentValue) => accumulator + currentValue
-              )
-              return parseFloat((value / (totalValue / 100)).toFixed(2))
-            }),
-          }
-        }),
-      }}
-      width={500}
-      height={340}
+      data={barData}
+      width={width}
+      height={height}
       options={{
-        ...barChartOptions,
+        ...options,
         chartArea: {
           backgroundColor: themes.chartBackground,
         },
         scales: {
           xAxes: [
             {
-              ...barChartOptions.scales.xAxes[0],
+              ...options.scales.xAxes[0],
               ticks: {
-                ...barChartOptions.scales.xAxes[0].ticks,
+                ...options.scales.xAxes[0].ticks,
                 fontColor: themes.textColor,
               },
               gridLines: {
-                ...barChartOptions.scales.xAxes[0].gridLines,
+                ...options.scales.xAxes[0].gridLines,
                 color: themes.chartStadiumBarBorder,
               },
             },
           ],
           yAxes: [
             {
-              ...barChartOptions.scales.yAxes[0],
+              ...options.scales.yAxes[0],
               ticks: {
-                ...barChartOptions.scales.yAxes[0].ticks,
+                ...options.scales.yAxes[0].ticks,
                 fontColor: themes.textColor,
               },
               gridLines: {
-                ...barChartOptions.scales.yAxes[0].gridLines,
+                ...options.scales.yAxes[0].gridLines,
                 color: themes.chartStadiumBarBorder,
                 zeroLineColor: themes.chartStadiumBarBorder,
               },

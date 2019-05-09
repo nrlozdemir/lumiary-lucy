@@ -95,7 +95,6 @@ class Performance extends React.Component {
       marginLeft: 0,
       display: 'none',
     }
-    console.log(this.props)
     return (
       <Module
         moduleKey={'Audience/Performance'}

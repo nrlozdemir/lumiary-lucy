@@ -63,7 +63,6 @@ class ChangeOverTime extends React.Component {
             <LineChart
               width={1162}
               height={292}
-              backgroundColor="#21243B"
               dataSet={data}
               xAxesFlatten
               yAxesAbbreviate

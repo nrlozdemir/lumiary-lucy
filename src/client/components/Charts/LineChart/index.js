@@ -4,6 +4,8 @@ import { randomKey, chartCombineDataset } from 'Utils/index'
 import { fromJS } from 'immutable'
 import { lineOptions, lineStackedAreaOptions } from './defaultOptions'
 
+import { withTheme } from 'ThemeContext/withTheme'
+
 function addComma(number) {
   if (number >= 1e3) {
     const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
@@ -26,76 +28,7 @@ function combineChartData(data, type = null) {
   }
 }
 
-const defaultProps = {
-  width: 1200,
-  height: 300,
-  options: {
-    responsive: false,
-    plugins: {
-      datalabels: false,
-    },
-    legend: {
-      display: false,
-    },
-    tooltips: {
-      xAlign: 'center',
-      yAlign: 'bottom',
-      backgroundColor: '#fff',
-      titleFontColor: '#21243B',
-      bodyFontColor: '#21243B',
-      footerFontColor: '#21243B',
-      xPadding: 14,
-      yPadding: 14,
-      cornerRadius: 10,
-    },
-    scales: {
-      xAxes: [
-        {
-          gridLines: {
-            display: true,
-            color: '#545B79',
-            lineWidth: 0.7,
-            drawBorder: true,
-            drawTicks: false,
-          },
-          ticks: {
-            fontColor: '#fff',
-            fontSize: 12,
-            fontFamily: 'ClanOTNews',
-            fontWeight: 'normal',
-            stepSize: 1,
-            beginAtZero: true,
-            padding: 20,
-          },
-        },
-      ],
-      yAxes: [
-        {
-          gridLines: {
-            display: true,
-            color: '#545B79',
-            lineWidth: 0.7,
-            drawBorder: true,
-            drawTicks: false,
-          },
-          ticks: {
-            display: true,
-            fontColor: '#fff',
-            fontSize: 12,
-            fontFamily: 'ClanOTNews',
-            fontWeight: 'normal',
-            max: 250,
-            stepSize: 50,
-            beginAtZero: true,
-            padding: 20,
-          },
-        },
-      ],
-    },
-  },
-}
-
-export default class LineChart extends React.Component {
+class LineChart extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -106,20 +39,90 @@ export default class LineChart extends React.Component {
   }
 
   render() {
+    const themes = this.props.themeContext.colors
+    const defaultProps = {
+      width: 1200,
+      height: 300,
+      options: {
+        responsive: false,
+        plugins: {
+          datalabels: false,
+        },
+        legend: {
+          display: false,
+        },
+        tooltips: {
+          xAlign: 'center',
+          yAlign: 'bottom',
+          backgroundColor: '#fff',
+          titleFontColor: '#21243B',
+          bodyFontColor: '#21243B',
+          footerFontColor: '#21243B',
+          xPadding: 14,
+          yPadding: 14,
+          cornerRadius: 10,
+        },
+        scales: {
+          xAxes: [
+            {
+              gridLines: {
+                display: true,
+                color: themes.chartStadiumBarBorder,
+                lineWidth: 0.7,
+                drawBorder: true,
+                drawTicks: false,
+              },
+              ticks: {
+                fontColor: themes.textColor,
+                fontSize: 12,
+                fontFamily: 'ClanOTNews',
+                fontWeight: 'normal',
+                stepSize: 1,
+                beginAtZero: true,
+                padding: 20,
+              },
+            },
+          ],
+          yAxes: [
+            {
+              gridLines: {
+                display: true,
+                color: themes.chartStadiumBarBorder,
+                lineWidth: 0.7,
+                drawBorder: true,
+                drawTicks: false,
+              },
+              ticks: {
+                display: true,
+                fontColor: themes.textColor,
+                fontSize: 12,
+                fontFamily: 'ClanOTNews',
+                fontWeight: 'normal',
+                max: 250,
+                stepSize: 50,
+                beginAtZero: true,
+                padding: 20,
+              },
+            },
+          ],
+        },
+      },
+    }
+
     let props = fromJS(defaultProps)
       .mergeDeep(this.props)
       .toJS()
 
     let plugins = []
 
-    if (props.backgroundColor) {
+    if (props.backgroundColor || themes.chartBackground) {
       plugins.push({
         beforeDraw: (chart, easing) => {
           let ctx = chart.chart.ctx
           let chartArea = chart.chartArea
 
           ctx.save()
-          ctx.fillStyle = props.backgroundColor
+          ctx.fillStyle = props.backgroundColor || themes.chartBackground
           ctx.fillRect(
             chartArea.left,
             chartArea.top,
@@ -267,4 +270,4 @@ export default class LineChart extends React.Component {
   }
 }
 
-LineChart.defaultProps = defaultProps
+export default withTheme(LineChart)

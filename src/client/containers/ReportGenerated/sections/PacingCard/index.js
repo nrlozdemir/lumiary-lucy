@@ -1,6 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
-import HorizontalStackedBarChart from 'Components/Charts/Panoptic/HorizontalStackedBarChart'
+import HorizontalStackedBarChart from 'Components/Charts/HorizontalStackedBarChart'
+import { barChartOptions } from './options'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
 import style from './style.scss'
 
@@ -14,7 +15,29 @@ const PacingCard = ({ barData }) => {
       </div>
       <div className={style.pacingCardInner}>
         <div className={style.pacingCardInnerItem}>
-          <HorizontalStackedBarChart barData={barData} />
+          <HorizontalStackedBarChart
+            width={500}
+            height={340}
+            barData={{
+              labels: barData.labels,
+              datasets: barData.datasets.map((data, index) => {
+                const indexValues = data.data.map((v, i) => {
+                  return barData.datasets.map((d) => d.data[i])
+                })
+
+                return {
+                  ...data,
+                  data: data.data.map((value, i) => {
+                    const totalValue = indexValues[i].reduce(
+                      (accumulator, currentValue) => accumulator + currentValue
+                    )
+                    return parseFloat((value / (totalValue / 100)).toFixed(2))
+                  }),
+                }
+              }),
+            }}
+            options={barChartOptions}
+          />
         </div>
         <div className={style.pacingCardInnerItem}>
           <StadiumChart

@@ -303,14 +303,14 @@
     "labels": ["Slowest", "Slow", "Medium", "Fast"],
     "datasets": [
       {
-        "label": "Dataset 1",
+        "label": "Male",
         "backgroundColor": "#5292E5",
         "borderColor": "#5292E5",
         "borderWidth": 1,
-        "data": [-20, -30, -25, -13]
+        "data": [20, 30, 25, 13]
       },
       {
-        "label": "Dataset 2",
+        "label": "Female",
         "backgroundColor": "#2FD7C4",
         "borderColor": "#2FD7C4",
         "data": [50, 80, 60, 50]
