@@ -30,13 +30,9 @@ const Front = (props) => {
 }
 
 const Back = (props) => {
-  const {
-    data: { text }
-  } = props
-
   return (
     <p className={style.backText}>
-      {textEdit(text, props.data)}
+      {textEdit("This video is receiving <b>{percentage}% less</b> {title} than your library average", props.data)}
     </p>
   )
 }

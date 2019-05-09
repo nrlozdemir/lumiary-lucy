@@ -1,140 +1,96 @@
 {
-	"doughnutData": [
-		{
-			"title": "Frame Rate",
-			"secondTitle": "24fps",
-			"average": "rP#4#",
-			"libraryData": "rP#4#",
-			"industryData": "rP#4#",
-			"libraryFpsData": {
-				"percentage": "52",
-				"fps": "24"
-			},
-			"industryFpsData": {
-				"percentage": "36",
-				"fps": "45"
-			},
-			"lineChartData": {
-				"labels": [
-					"S",
-					"M",
-					"T",
-					"W",
-					"T",
-					"F",
-					"S"
-				],
-				"datasets": [
-					{
-						"data": "rNA#7, 0, 100#"
-					},
-					{
-						"data": "rNA#7, 0, 100#"
-					}
-				]
-			}
-		},
-		{
-			"title": "Pacing",
-			"secondTitle": "Fastest",
-			"average": "rP#4#",
-			"libraryData": "rP#4#",
-			"industryData": "rP#4#",
-			"libraryFpsData": {
-				"percentage": "40",
-				"fps": "39"
-			},
-			"industryFpsData": {
-				"percentage": "60",
-				"fps": "47"
-			},
-			"lineChartData": {
-				"labels": [
-					"S",
-					"M",
-					"T",
-					"W",
-					"T",
-					"F",
-					"S"
-				],
-				"datasets": [
-					{
-						"data": "rNA#7, 0, 100#"
-					},
-					{
-						"data": "rNA#7, 0, 100#"
-					}
-				]
-			}
-		},
-		{
-			"title": "Shots",
-			"secondTitle": "12 Shots",
-			"average": "rP#4#",
-			"libraryData": "rP#4#",
-			"industryData": "rP#4#",
-			"libraryFpsData": {
-				"percentage": "44",
-				"fps": "55"
-			},
-			"industryFpsData": {
-				"percentage": "72",
-				"fps": "29"
-			},
-			"lineChartData": {
-				"labels": [
-					"S",
-					"M",
-					"T",
-					"W",
-					"T",
-					"F",
-					"S"
-				],
-				"datasets": [
-					{
-						"data": "rNA#7, 0, 100#"
-					},
-					{
-						"data": "rNA#7, 0, 100#"
-					}
-				]
-			}
-		},
-		{
-			"title": "Format",
-			"secondTitle": "Live Action",
-			"average": "rP#4#",
-			"libraryData": "rP#4#",
-			"industryData": "rP#4#",
-			"libraryFpsData": {
-				"percentage": "64",
-				"fps": "44"
-			},
-			"industryFpsData": {
-				"percentage": "55",
-				"fps": "56"
-			},
-			"lineChartData": {
-				"labels": [
-					"S",
-					"M",
-					"T",
-					"W",
-					"T",
-					"F",
-					"S"
-				],
-				"datasets": [
-					{
-						"data": "rNA#7, 0, 100#"
-					},
-					{
-						"data": "rNA#7, 0, 100#"
-					}
-				]
-			}
-		}
-	]
+  "doughnutData": [
+    {
+      "title": "Frame Rate",
+      "secondTitle": "24fps",
+      "average": "rP#4#",
+      "libraryData": "rP#4#",
+      "industryData": "rP#4#",
+      "libraryFpsData": {
+        "percentage": "52",
+        "fps": "24"
+      },
+      "industryFpsData": {
+        "percentage": "36",
+        "fps": "45"
+      },
+      "lineChartData": [
+        {
+          "data": "rNA#7, 0, 100#"
+        },
+        {
+          "data": "rNA#7, 0, 100#"
+        }
+      ]
+    },
+    {
+      "title": "Pacing",
+      "secondTitle": "Fastest",
+      "average": "rP#4#",
+      "libraryData": "rP#4#",
+      "industryData": "rP#4#",
+      "libraryFpsData": {
+        "percentage": "40",
+        "fps": "39"
+      },
+      "industryFpsData": {
+        "percentage": "60",
+        "fps": "47"
+      },
+      "lineChartData": [
+        {
+          "data": "rNA#7, 0, 100#"
+        },
+        {
+          "data": "rNA#7, 0, 100#"
+        }
+      ]
+    },
+    {
+      "title": "Shots",
+      "secondTitle": "12 Shots",
+      "average": "rP#4#",
+      "libraryData": "rP#4#",
+      "industryData": "rP#4#",
+      "libraryFpsData": {
+        "percentage": "44",
+        "fps": "55"
+      },
+      "industryFpsData": {
+        "percentage": "72",
+        "fps": "29"
+      },
+      "lineChartData": [
+        {
+          "data": "rNA#7, 0, 100#"
+        },
+        {
+          "data": "rNA#7, 0, 100#"
+        }
+      ]
+    },
+    {
+      "title": "Format",
+      "secondTitle": "Live Action",
+      "average": "rP#4#",
+      "libraryData": "rP#4#",
+      "industryData": "rP#4#",
+      "libraryFpsData": {
+        "percentage": "64",
+        "fps": "44"
+      },
+      "industryFpsData": {
+        "percentage": "55",
+        "fps": "56"
+      },
+      "lineChartData": [
+        {
+          "data": "rNA#7, 0, 100#"
+        },
+        {
+          "data": "rNA#7, 0, 100#"
+        }
+      ]
+    }
+  ]
 }

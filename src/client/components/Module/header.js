@@ -60,7 +60,7 @@ HeaderModule.propTypes = {
   title: PropTypes.string,
   subTitle: PropTypes.string,
   legend: PropTypes.object,
-  filters: PropTypes.array.isRequired,
+  filters: PropTypes.array,
 }
 
 export default HeaderModule
