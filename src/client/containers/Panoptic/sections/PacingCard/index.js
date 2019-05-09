@@ -37,8 +37,6 @@ class PacingCard extends React.Component {
 			) &&
 			stadiumData.every((data) => data.value === 0)
 
-		console.log('is pacing card empty', isEmpty)
-
 		return (
 			<Module
 				moduleKey={'Panoptic/PacingCard'}
