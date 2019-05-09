@@ -7,6 +7,7 @@ import {
   makeSelectAudienceContentVitalityScore,
 } from 'Reducers/panoptic'
 
+import { ThemeContext } from 'ThemeContext/themeContext'
 import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'
 
 class ContentVitalityScore extends React.Component {
@@ -19,24 +20,66 @@ class ContentVitalityScore extends React.Component {
     } = this.props
 
     return (
-      <ContentVitalityScoreModule
-        data={data}
-        moduleKey={'Audience/ContentVitalityScore'}
-        title="Content Vitality Score Based On Audience"
-        action={this.callBack}
-        filters={[
-          {
-            type: 'platform',
-            selectKey: 'ACOT-ads',
-            placeHolder: 'Platforms',
-          },
-          {
-            type: 'timeRange',
-            selectKey: 'ACOT-wds',
-            placeHolder: 'Date',
-          },
-        ]}
-      />
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <ContentVitalityScoreModule
+            data={data}
+            moduleKey={'Audience/ContentVitalityScore'}
+            title="Content Vitality Score Based On Audience"
+            action={this.callBack}
+            filters={[
+              {
+                type: 'platform',
+                selectKey: 'ACOT-ads',
+                placeHolder: 'Platforms',
+              },
+              {
+                type: 'timeRange',
+                selectKey: 'ACOT-wds',
+                placeHolder: 'Date',
+              },
+            ]}
+            removeTooltip
+            removePointRadius
+            xAxesFlatten
+            flattenFirstSpace={1}
+            flattenLastSpace={5}
+            options={{
+              scales: {
+                yAxes: [
+                  {
+                    ticks: {
+                      callback: function(value, index, values) {
+                        if (value === 0) {
+                          return value + ' '
+                        } else if (value === 250) {
+                          return value
+                        } else {
+                          return ''
+                        }
+                      },
+                      fontColor: colors.textColor,
+                    },
+                    gridLines: {
+                      color: colors.chartStadiumBarBorder,
+                    },
+                  },
+                ],
+                xAxes: [
+                  {
+                    ticks: {
+                      fontColor: colors.textColor,
+                    },
+                    gridLines: {
+                      color: colors.chartStadiumBarBorder,
+                    },
+                  },
+                ],
+              },
+            }}
+          />
+        )}
+      </ThemeContext.Consumer>
     )
   }
 }

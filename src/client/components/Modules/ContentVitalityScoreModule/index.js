@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Module from 'Components/Module'
 import cx from 'classnames'
-import LineChart from 'Components/LineChart/Chart'
+import LineChart from 'Components/Charts/LineChart'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import { lineChartOptions, lineChartData_DatasetOptions } from './options'
 import { chartCombineDataset } from 'Utils'
@@ -42,6 +42,12 @@ const ContentVitalityScoreModule = ({
   action,
   filters,
   legend,
+  removeTooltip,
+  removePointRadius,
+  xAxesFlatten,
+  flattenFirstSpace,
+  flattenLastSpace,
+  options,
 }) => {
   return (
     <ThemeContext.Consumer>
@@ -63,10 +69,17 @@ const ContentVitalityScoreModule = ({
                 className={style.vitalityContainer}
               >
                 <LineChart
-                  dataSet={() => combineChartData(data)}
-                  width={1117}
+                  chartType="lineStackedArea"
+                  width={1140}
                   height={291}
-                  options={lineChartOptions}
+                  backgroundColor={colors.chartBackground}
+                  dataSet={data}
+                  removeTooltip={removeTooltip}
+                  removePointRadius={removePointRadius}
+                  xAxesFlatten={xAxesFlatten}
+                  flattenFirstSpace={flattenFirstSpace}
+                  flattenLastSpace={flattenLastSpace}
+                  options={options}
                 />
               </div>
               <div className="row">
