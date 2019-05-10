@@ -1,12 +1,12 @@
 import React from 'react'
 import ProgressBar from 'Components/ProgressBar'
-import MarketViewSlider from 'Components/Sliders/Marketview'
+import Slider from 'Components/Sliders/Slider'
 
 import style from 'Containers/Marketview/style.scss'
 import { Module } from 'Components/Module'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
-export default class Slider extends React.Component {
+export default class SliderModule extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -23,6 +23,8 @@ export default class Slider extends React.Component {
       changeSelectedVideo,
       title,
       moduleKey,
+      filters,
+      action,
     } = this.props
 
     return (
@@ -33,24 +35,11 @@ export default class Slider extends React.Component {
             bodyClass={style.sliderModuleContainerBody}
             moduleKey={moduleKey}
             title={title}
-            filters={[
-              {
-                type: 'engagement',
-                selectKey: 'Mwplt-engagement',
-                placeHolder: 'Engagement',
-              },
-              {
-                type: 'timeRange',
-                selectKey: 'Mwplt-date',
-                placeHolder: 'Date',
-              },
-            ]}
+            filters={filters}
+            action={action}
           >
             <div className="col-12-no-gutters">
-              <MarketViewSlider
-                items={data}
-                changeVideo={changeSelectedVideo}
-              />
+              <Slider items={data} changeVideo={changeSelectedVideo} />
             </div>
             <div className="col-12-no-gutters mt-56">
               {selectedVideo &&

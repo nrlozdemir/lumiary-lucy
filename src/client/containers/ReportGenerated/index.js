@@ -6,7 +6,7 @@ import { actions, makeSelectGeneratedReport } from 'Reducers/generatedReport'
 import RouterLoading from 'Components/RouterLoading'
 //import ReportsHeader from './sections/ReportsHeader'
 import CreatedFilters from './sections/CreatedFilters'
-import Slider from './sections/Slider'
+import Slider from 'Components/Modules/SliderModule'
 import VideoReleasesBarChart from './sections/VideoReleasesBarChart'
 import TopVideosCard from './sections/TopVideosCard'
 import PacingCard from './sections/PacingCard'
@@ -72,6 +72,7 @@ class ReportGenerated extends Component {
               selectedVideo={selectedVideo}
               data={topPerformingVideos}
               changeSelectedVideo={this.changeSelectedVideo}
+              title="Top Performing Videos"
             />
           )}
           {videoReleasesData && (

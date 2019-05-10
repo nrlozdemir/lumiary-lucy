@@ -1,104 +1,121 @@
 import React from 'react'
-import Slider from 'react-slick'
+import classnames from 'classnames'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import style from './style.scss'
 import { socialIconSelector } from 'Utils/'
+import Swiper from 'react-id-swiper'
+import SwiperJS from 'swiper/dist/js/swiper.js'
 
-const GeneratedReportViewSlider = (props) => {
-
-  const NextArrow = (props) => {
-    const { className, style, onClick } = props
-    if (props.currentSlide + 4 >= props.slideCount) {
-      return null
-    }
-    return <div className={className} onClick={onClick} />
-  }
-
-  const PrevArrow = (props) => {
-    const { className, style, onClick } = props
-    if (props.currentSlide == 0) {
-      return null
-    }
-    return <div className={className} onClick={onClick} />
-  }
-
-  const settings = {
-    className: 'marketViewSlickSlider',
-    infinite: false,
-    slidesToShow: 3,
+class MarketViewSlider extends React.Component {
+  settings = {
+    modules: [SwiperJS.Pagination],
+    shouldSwiperUpdate: true,
+    navigation: {
+      nextEl: '.swiper-button-next',
+      prevEl: '.swiper-button-prev',
+    },
+    pagination: {
+      el: '.swiper-pagination',
+      type: 'bullet',
+      clickable: true,
+    },
+    slidesPerView: 'auto',
+    spaceBetween: 40,
+    centeredSlides: true,
     speed: 300,
-    centerMode: true,
-    centerPadding: '0',
-    dots: true,
-    dotsClass: 'slick-dots slick-thumb',
-    arrows: true,
-    variableWidth: true,
-    variableHeight: true,
-    swipeToSlide: false,
-    nextArrow: <NextArrow />,
-    prevArrow: <PrevArrow />,
-    afterChange: (currentSlide) => props.changeVideo(props.items[currentSlide]),
-    customPaging: (imgIndex) => {
-      if (imgIndex > props.items.length - 1) {
-        return <div />
-      }
+    autoplay: false,
+    keyboard: false,
+    slideToClickedSlide: true,
+    renderPagination: (props) => {
+      const { items } = this.props
+
       return (
-        <a>
-          <img src={props.items[imgIndex].image} />
-          <p>
-            <span className="icon">
-              <span
-                className={socialIconSelector(
-                  props.items[imgIndex].socialMedia
-                )}
-              />
-            </span>
-            {props.items[imgIndex].title}
-          </p>
-        </a>
+        <div className={classnames(style.pagination, 'pagination')}>
+          {items.map((item, i) => {
+            const socialIcon = classnames(
+              socialIconSelector(item.socialMedia),
+              style.icon
+            )
+
+            return (
+              <div
+                key={i}
+                onClick={() => this.refSlider.slideTo(i)}
+                className={i === 0 ? 'active' : ''}
+              >
+                <img src={item.image} />
+                <span>
+                  <i className={socialIcon} />
+                  {item.socialMedia}
+                </span>
+              </div>
+            )
+          })}
+        </div>
       )
+    },
+    on: {
+      slideChange: (index) => {
+        const bullets = this.refSlider.$el[0].querySelector('.pagination')
+          .children
+
+        for (const item of [...bullets]) {
+          item.classList.remove('active')
+        }
+
+        bullets[this.refSlider.activeIndex].classList.add('active')
+      },
     },
   }
 
-  return (
-    <div className={style.section}>
-      <Slider {...settings}>
-        {props.items.map((item, i) => (
-          <div className="item" key={i}>
-            <AssetLayer
-              containerNoBorder
-              leftSocialIcon={item.socialMedia}
-              centerText={item.secondTitle}
-              title={item.title}
-              width={634}
-              height="100%"
-              rightValue={item.cvScore}
-            >
-              <img src={item.image} />
-              <div className={style.percentageWrapper} style={{right: "80px"}}>
-                <PercentageBarGraph
-                  backgroundColor="#303a5d"
-                  customClass={style.libraryPercentageGraph}
-                  id={`videolist-${i}`}
-                  percentage={item.cvScore}
-                  disableLabels={true}
-                  color={"#2fd7c4"}
-                  lineCount={30}
-                  height={19}
-                  width={67}
-                  xSmall
-                />
+  render() {
+    const { props } = this
+    return (
+      <div className={style.section}>
+        <div className="marketViewSlider">
+          <Swiper
+            ref={(node) => node && (this.refSlider = node.swiper)}
+            {...this.settings}
+          >
+            {props.items.map((item, i) => (
+              <div className="item" key={i}>
+                <AssetLayer
+                  containerNoBorder
+                  leftSocialIcon={item.socialMedia}
+                  centerText={item.secondTitle}
+                  title={item.title}
+                  width={634}
+                  height="100%"
+                  rightValue={item.cvScore}
+                >
+                  <img src={item.image} />
+                  <div
+                    className={style.percentageWrapper}
+                    style={{ right: '80px' }}
+                  >
+                    <PercentageBarGraph
+                      backgroundColor="#303a5d"
+                      customClass={style.libraryPercentageGraph}
+                      id={`videolist-${i}`}
+                      percentage={item.cvScore}
+                      disableLabels={true}
+                      color={'#2fd7c4'}
+                      lineCount={30}
+                      height={19}
+                      width={67}
+                      xSmall
+                    />
+                  </div>
+                </AssetLayer>
               </div>
-            </AssetLayer>
-          </div>
-        ))}
-        <div />
-        <div />
-        <div />
-      </Slider>
-    </div>
-  )
+            ))}
+          </Swiper>
+          <div className="swiper-pagination" />
+        </div>
+      </div>
+    )
+  }
 }
 
-export default GeneratedReportViewSlider
+export default MarketViewSlider
