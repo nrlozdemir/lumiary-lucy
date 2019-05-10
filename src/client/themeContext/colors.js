@@ -101,6 +101,12 @@ const dark = {
   tooltipTextColor: '#373f5b',
   tooltipBackground: '#ffffff',
   // tooltip values
+
+  // radius icon values
+  iconColor: '#ffffff',
+  iconBackground: '#21243b',
+  iconBorder: '#2fd7c4',
+  // radius icon values
 }
 
 const light = {
@@ -207,6 +213,12 @@ const light = {
   tooltipTextColor: '#f3f6f9',
   tooltipBackground: '#505050',
   // tooltip values
+
+  // radius icon values
+  iconColor: '#505050',
+  iconBackground: '#f3f6f9',
+  iconBorder: '#2fd7c4',
+  // radius icon values
 }
 
 const themes = {

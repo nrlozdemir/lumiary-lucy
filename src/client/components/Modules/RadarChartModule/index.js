@@ -45,7 +45,7 @@ const RadarChartModule = ({
                   style={{
                     background: colors.labelBackground,
                     color: colors.labelColor,
-                    shadowColor: colors.labelShadow,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                   }}
                 >
                   <span>{leftTitle}</span>
@@ -60,7 +60,7 @@ const RadarChartModule = ({
                   style={{
                     background: colors.labelBackground,
                     color: colors.labelColor,
-                    shadowColor: colors.labelShadow,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                   }}
                 >
                   <span>{rightTitle}</span>

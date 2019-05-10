@@ -185,7 +185,7 @@ export class Main extends React.Component {
                                           style={{
                                             background: colors.labelBackground,
                                             color: colors.labelColor,
-                                            shadowColor: colors.labelShadow,
+                                            boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                                           }}
                                         >
                                           {item.title}

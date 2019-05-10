@@ -37,7 +37,7 @@ class PacingCard extends Component {
                 style={{
                   background: colors.labelBackground,
                   color: colors.labelColor,
-                  shadowColor: colors.labelShadow,
+                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                 }}
               >
                 Past Month

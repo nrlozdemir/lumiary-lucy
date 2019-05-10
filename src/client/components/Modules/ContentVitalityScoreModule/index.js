@@ -89,7 +89,7 @@ const ContentVitalityScoreModule = ({
                     style={{
                       background: colors.labelBackground,
                       color: colors.labelColor,
-                      shadowColor: colors.labelShadow,
+                      boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                     }}
                   >
                     Male Audience
@@ -114,7 +114,7 @@ const ContentVitalityScoreModule = ({
                     style={{
                       background: colors.labelBackground,
                       color: colors.labelColor,
-                      shadowColor: colors.labelShadow,
+                      boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                     }}
                   >
                     Your Library
@@ -139,7 +139,7 @@ const ContentVitalityScoreModule = ({
                     style={{
                       background: colors.labelBackground,
                       color: colors.labelColor,
-                      shadowColor: colors.labelShadow,
+                      boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                     }}
                   >
                     Female Audience

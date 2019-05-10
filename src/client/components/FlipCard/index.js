@@ -27,11 +27,16 @@ class FlipCard extends React.Component {
 
   render() {
     const { children, width, height } = this.props
-    const { textColor, moduleBackground } = this.props.themeContext.colors
+    const {
+      textColor,
+      moduleBackground,
+      moduleShadow,
+    } = this.props.themeContext.colors
 
     const themeStyle = {
       color: textColor,
       background: moduleBackground,
+      boxShadow: `0 2px 6px 0 ${moduleShadow}`,
     }
 
     const containerClassName = classnames(styles.flipContainer, 'col-3 ml-0')

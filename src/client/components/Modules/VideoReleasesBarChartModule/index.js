@@ -170,7 +170,7 @@ const VideoReleasesBarChartModule = (props) => {
                   style={{
                     background: colors.labelBackground,
                     color: colors.labelColor,
-                    shadowColor: colors.labelShadow,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                   }}
                 >
                   Live Action
@@ -190,7 +190,7 @@ const VideoReleasesBarChartModule = (props) => {
                   style={{
                     background: colors.labelBackground,
                     color: colors.labelColor,
-                    shadowColor: colors.labelShadow,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                   }}
                 >
                   Stop Motion
@@ -210,7 +210,7 @@ const VideoReleasesBarChartModule = (props) => {
                   style={{
                     background: colors.labelBackground,
                     color: colors.labelColor,
-                    shadowColor: colors.labelShadow,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                   }}
                 >
                   Cinemagraph
@@ -226,7 +226,7 @@ const VideoReleasesBarChartModule = (props) => {
                   style={{
                     background: colors.labelBackground,
                     color: colors.labelColor,
-                    shadowColor: colors.labelShadow,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                   }}
                 >
                   Animation
