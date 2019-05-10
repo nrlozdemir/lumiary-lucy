@@ -48,7 +48,7 @@ const HorizontalStackedBarChart = ({ barData }) => (
         const indexValues = data.data.map((v, i) => {
           return barData.datasets.map((d) => d.data[i])
         })
-
+        
         return {
           ...data,
           data: data.data.map((value, i) => {
