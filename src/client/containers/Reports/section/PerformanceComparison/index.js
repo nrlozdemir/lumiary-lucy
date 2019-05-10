@@ -13,6 +13,43 @@ import BarAndDoughnutChartModule from 'Components/Modules/BarAndDoughnutChartMod
 import { stackedChartOptions } from './options'
 import style from './style.scss'
 
+const barPlugins = [
+  {
+    beforeDraw: function(chart, easing) {
+      if (
+        chart.config.options.chartArea &&
+        chart.config.options.chartArea.backgroundColor
+      ) {
+        var ctx = chart.chart.ctx
+        var chartArea = chart.chartArea
+
+        ctx.save()
+        ctx.fillStyle = chart.config.options.chartArea.backgroundColor
+        ctx.fillRect(
+          chartArea.left,
+          chartArea.top,
+          chartArea.right - chartArea.left,
+          chartArea.bottom - chartArea.top
+        )
+        ctx.restore()
+      }
+      let configX = chart.config.options.scales.xAxes
+      //Save the rendering context state
+      ctx.save()
+      ctx.strokeStyle = configX[0].gridLines.color
+      ctx.lineWidth = configX[0].gridLines.lineWidth
+
+      ctx.beginPath()
+      ctx.moveTo(chart.chartArea.right, chart.chartArea.top)
+      ctx.lineTo(chart.chartArea.right, chart.chartArea.bottom)
+      ctx.stroke()
+
+      //Restore the rendering context state
+      ctx.restore()
+    },
+  },
+]
+
 class PerformanceComparison extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getPerformanceComparisonData(data)
@@ -21,6 +58,22 @@ class PerformanceComparison extends React.Component {
     const {
       performanceComparisonData: { data, loading, error },
     } = this.props
+
+    let doughnutData
+    if (data && data.doughnutData) {
+      doughnutData = data.doughnutData
+      doughnutData.datasets[0].backgroundColor = ["#5292E5", "#2FD7C4"]
+    }
+
+    let stackedChartData
+    if (data && data.stackedChartData) {
+      stackedChartData = data.stackedChartData
+      // "backgroundColor": "#5292E5",
+      // "backgroundColor": "#2FD7C4",
+      stackedChartData.datasets[0].backgroundColor = "#5292E5"
+      stackedChartData.datasets[1].backgroundColor = "#2FD7C4"
+    }
+
     return (
       <BarAndDoughnutChartModule
         data={data}
@@ -78,6 +131,43 @@ class PerformanceComparison extends React.Component {
           options: stackedChartOptions,
         }}
       />
+      >
+        <div className={style.container}>
+          {data && data.stackedChartData && (
+            <div className={style.chartContainer}>
+              <Bar
+                width={720}
+                height={340}
+                data={{
+                  labels: ["Slowest", "Slow", "Medium", "Fast"],
+                  datasets: data.stackedChartData.datasets
+                }}
+                datasetKeyProvider={this.datasetKeyProvider}
+                options={{
+                  ...stackedChartOptions,
+                }}
+                plugins={barPlugins}
+              />
+            </div>
+          )}
+          {data && data.doughnutData && doughnutData.datasets && (
+            <div className={style.chartContainer}>
+              <DoughnutChart
+                width={280}
+                height={280}
+                data={{
+                  labels: ["Red", "Green"],
+                  datasets: doughnutData.datasets
+                }}
+                cutoutPercentage={58}
+                fillText="Total Percentage"
+                dataLabelFunction="insertAfter"
+                dataLabelInsert="%"
+              />
+            </div>
+          )}
+        </div>
+      </Module>
     )
   }
 }

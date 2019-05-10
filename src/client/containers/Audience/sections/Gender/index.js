@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectAudienceGender } from 'Reducers/panoptic'
+import { actions, makeSelectAudienceGender } from 'Reducers/audience'
 import Module from 'Components/Module'
 import HorizontalStackedBarChart from 'Components/Charts/HorizontalStackedBarChart'
 import { barChartOptions } from './options'
@@ -17,6 +17,23 @@ class GenderSection extends React.Component {
     const {
       audienceGenderData: { data, loading, error },
     } = this.props
+
+    let genderData = []
+
+    if (data && data.datasets && genderData) {
+      genderData = data
+      data.datasets.map((el, i) => {
+        genderData.datasets[i].borderWidth = 1
+        genderData.datasets[i].label = 'Dataset 1'
+        genderData.datasets[i].borderColor = '#5292E5'
+        genderData.datasets[i].backgroundColor = '#5292E5'
+        if (i === 1) {
+          genderData.datasets[i].label = 'Dataset 2'
+          genderData.datasets[i].borderColor = '#2FD7C4'
+          genderData.datasets[i].backgroundColor = '#2FD7C4'
+        }
+      })
+    }
 
     return (
       <Module

@@ -30,11 +30,7 @@ function updateAudiencePerformanceApi({ min, max }) {
 function* getVideoReleasesData() {
   try {
     const payload = yield call(getPanopticDataApi)
-
-    const shuffleData = payload.videoReleasesData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getVideoReleasesDataSuccess(shuffleData))
+    yield put(actions.getVideoReleasesDataSuccess(payload.videoReleasesData))
   } catch (err) {
     yield put(actions.getVideoReleasesDataError(err))
   }
@@ -54,31 +50,7 @@ function* getColorTemperatureData() {
 function* getFilteringSectionData() {
   try {
     const payload = yield call(getPanopticDataApi)
-    const shuffleData = {
-      doughnutData: {
-        labels: payload.verticalStackedChartData.doughnutData.labels,
-        datasets: [
-          {
-            backgroundColor:
-              payload.verticalStackedChartData.doughnutData.datasets[0]
-                .backgroundColor,
-            data: _.shuffle(
-              payload.verticalStackedChartData.doughnutData.datasets[0].data
-            ),
-            hoverBackgroundColor:
-              payload.verticalStackedChartData.doughnutData.datasets[0]
-                .hoverBackgroundColor,
-          },
-        ],
-      },
-      stackedChartData: {
-        ...payload.verticalStackedChartData.stackedChartData,
-        datasets: _.shuffle(
-          payload.verticalStackedChartData.stackedChartData.datasets
-        ),
-      },
-    }
-    yield put(actions.getFilteringSectionDataSuccess(shuffleData))
+    yield put(actions.getFilteringSectionDataSuccess(payload.verticalStackedChartData))
   } catch (err) {
     yield put(actions.getFilteringSectionDataError(err))
   }
@@ -315,6 +287,15 @@ function* getFlipCardsData() {
   }
 }
 
+function* getTopPerformingFormatData() {
+  try {
+    const payload = yield call(getPanopticDataApi)
+    yield put(actions.getTopPerformingFormatDataSuccess(payload.topPerformingFormatData))
+  } catch (err) {
+    yield put(actions.getTopPerformingFormatDataError(err))
+  }
+}
+
 export default [
   takeLatest(types.GET_DATA, getData),
   takeLatest(types.GET_VIDEO_RELEASES_DATA, getVideoReleasesData),
@@ -346,4 +327,5 @@ export default [
   takeLatest(types.GET_AUDIENCE_DATA, getAudienceData),
   takeLatest(types.UPDATE_AUDIENCE_PERFORMANCE, updateAudiencePerformance),
   takeLatest(types.GET_FLIPCARDS_DATA, getFlipCardsData),
+  takeLatest(types.GET_TOP_PERFORMING_FORMAT_DATA, getTopPerformingFormatData),
 ]

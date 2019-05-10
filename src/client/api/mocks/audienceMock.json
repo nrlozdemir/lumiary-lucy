@@ -11,7 +11,6 @@
     ]
   },
   "lineStackedChartData": {
-    "labels": [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
     "datasets": [
       {
         "data": [0, 50, 125, 150, 125, 100, 90, 70, 60, 30, 0]
@@ -26,293 +25,170 @@
   },
   "colorTempData": [
     {
-      "text": "This is a blurb that will explain what this graph is showing",
       "data": [
         {
           "x": -50,
-          "y": 82,
-          "color": "#ff556f"
+          "y": 82
         },
         {
           "x": 50,
-          "y": -25,
-          "color": "#2FD7C4"
+          "y": -25
         }
       ]
     },
     {
-      "text": "This is a blurb that will explain what this graph is showing",
-      "topText": "Energetic",
-      "bottomText": "Calm",
-      "rightText": "Warm",
-      "leftText": "Cool",
       "data": [
         {
           "x": -50,
-          "y": 12,
-          "color": "#ff556f"
+          "y": 12
         },
         {
           "x": 50,
-          "y": 25,
-          "color": "#2FD7C4"
+          "y": 25
         }
       ]
     },
     {
-      "text": "This is a blurb that will explain what this graph is showing",
-      "topText": "Natural",
-      "bottomText": "Synthetic",
-      "rightText": "Warm",
-      "leftText": "Cool",
       "data": [
         {
           "x": -50,
-          "y": 12,
-          "color": "#ff556f"
+          "y": 12
         },
         {
           "x": 50,
-          "y": -75,
-          "color": "#2FD7C4"
+          "y": -75
         }
       ]
     }
   ],
   "chartData": [
     {
-      "type": "Facebook",
+      "type": "Bleacher Report",
       "datas": {
         "labels": [
           {
-            "color": "#cc2226",
-            "count": "96.7",
-            "name": "Red",
-            "selected": true
+            "count": 88.8,
+            "name": "Red"
           },
           {
-            "color": "#dd501d",
-            "count": "25.7",
-            "name": "Red-Orange",
-            "selected": false
+            "count": 12,
+            "name": "Red-Orange"
           },
           {
-            "color": "#eb7919",
-            "count": "50.1",
-            "name": "Orange",
-            "selected": false
+            "count": 14,
+            "name": "Orange"
           },
           {
-            "color": "#f8b90b",
-            "count": "15.7",
-            "name": "Yellow-Orange",
-            "selected": false
+            "count": 98,
+            "name": "Yellow-Orange"
           },
           {
-            "color": "#fff20d",
-            "count": "55.6",
-            "name": "Yellow",
-            "selected": true
+            "count": 16,
+            "name": "Yellow"
           },
           {
-            "color": "#aac923",
-            "count": "15.2",
-            "name": "Yellow-Green",
-            "selected": false
+            "count": 14,
+            "name": "Yellow-Green"
           },
           {
-            "color": "#13862b",
-            "count": "48.1",
-            "name": "Green",
-            "selected": false
+            "count": 86,
+            "name": "Green"
           },
           {
-            "color": "#229a78",
-            "count": "25",
-            "name": "Blue-Green",
-            "selected": false
+            "count": 12,
+            "name": "Blue-Green"
           },
           {
-            "color": "#3178b0",
-            "count": "100",
-            "name": "Blue",
-            "selected": true
+            "count": 100,
+            "name": "Blue"
           },
           {
-            "color": "#79609b",
-            "count": "40.4",
-            "name": "Blue-Purple",
-            "selected": false
+            "count": 24,
+            "name": "Blue-Purple"
           },
           {
-            "color": "#923683",
-            "count": "18.1",
-            "name": "Purple",
-            "selected": false
+            "count": 18,
+            "name": "Purple"
           },
           {
-            "color": "#b83057",
-            "count": "25.7",
-            "name": "Red-Purple",
-            "selected": false
+            "count": 18,
+            "name": "Red-Purple"
           }
         ],
         "datasets": [
           {
-            "label": "Facebook",
-            "backgroundColor": "rgba(255, 255, 255, 0.3)",
-            "borderColor": "transparent",
-            "pointBackgroundColor": "#ffffff",
-            "pointBorderColor": "#ffffff",
-            "data": [75, 25, 50, 15, 55, 15, 48, 25, 100, 40, 18, 25]
+            "label": "Facebook"
           }
         ]
-      },
-      "progress": [
-        {
-          "leftTitle": "Blue",
-          "color": "#3178b0",
-          "rightTitle": "91.6k Shares",
-          "value": 60
-        },
-        {
-          "leftTitle": "Red",
-          "color": "#cc2226",
-          "rightTitle": "64.3k Shares",
-          "value": 45
-        },
-        {
-          "leftTitle": "Yellow",
-          "color": "#fff20d",
-          "rightTitle": "54.8k Shares",
-          "value": 30
-        }
-      ]
+      }
     },
     {
-      "type": "YouTube",
+      "type": "Barstool Sports",
       "datas": {
         "labels": [
           {
-            "color": "#cc2226",
-            "count": "96.7",
-            "name": "Red",
-            "selected": false
+            "count": 96,
+            "name": "Red"
           },
           {
-            "color": "#dd501d",
-            "count": "25.7",
-            "name": "Red-Orange",
-            "selected": true
+            "count": 5,
+            "name": "Red-Orange"
           },
           {
-            "color": "#eb7919",
-            "count": "50.1",
-            "name": "Orange",
-            "selected": false
+            "count": 12,
+            "name": "Orange"
           },
           {
-            "color": "#f8b90b",
-            "count": "15.7",
-            "name": "Yellow-Orange",
-            "selected": true
+            "count": 16,
+            "name": "Yellow-Orange"
           },
           {
-            "color": "#fff20d",
-            "count": "55.6",
-            "name": "Yellow",
-            "selected": false
+            "count": 88,
+            "name": "Yellow"
           },
           {
-            "color": "#aac923",
-            "count": "15.2",
-            "name": "Yellow-Green",
-            "selected": false
+            "count": 8,
+            "name": "Yellow-Green"
           },
           {
-            "color": "#13862b",
-            "count": "48.1",
-            "name": "Green",
-            "selected": true
+            "count": 14,
+            "name": "Green"
           },
           {
-            "color": "#229a78",
-            "count": "25",
-            "name": "Blue-Green",
-            "selected": false
+            "count": 16,
+            "name": "Blue-Green"
           },
           {
-            "color": "#3178b0",
-            "count": "100",
-            "name": "Blue",
-            "selected": false
+            "count": 24,
+            "name": "Blue"
           },
           {
-            "color": "#79609b",
-            "count": "40.4",
-            "name": "Blue-Purple",
-            "selected": false
+            "count": 16,
+            "name": "Blue-Purple"
           },
           {
-            "color": "#923683",
-            "count": "18.1",
-            "name": "Purple",
-            "selected": false
+            "count": 85,
+            "name": "Purple"
           },
           {
-            "color": "#b83057",
-            "count": "25.7",
-            "name": "Red-Purple",
-            "selected": false
+            "count": 18,
+            "name": "Red-Purple"
           }
         ],
         "datasets": [
           {
-            "label": "YouTube",
-            "backgroundColor": "rgba(255, 255, 255, 0.3)",
-            "borderColor": "transparent",
-            "pointBackgroundColor": "#ffffff",
-            "pointBorderColor": "#ffffff",
-            "data": [30, 100, 25, 70, 22, 26, 55, 15, 48, 25, 30, 50]
+            "label": "YouTube"
           }
         ]
-      },
-      "progress": [
-        {
-          "leftTitle": "Orange",
-          "color": "#dd501d",
-          "rightTitle": "98.1k Shares",
-          "value": 80
-        },
-        {
-          "leftTitle": "Yellow - Orange",
-          "color": "#f8b90b",
-          "rightTitle": "75.3k Shares",
-          "value": 65
-        },
-        {
-          "leftTitle": "Green",
-          "color": "#13862b",
-          "rightTitle": "66.8k Shares",
-          "value": 45
-        }
-      ]
+      }
     }
   ],
   "genderData": {
-    "labels": ["Slowest", "Slow", "Medium", "Fast"],
     "datasets": [
       {
-        "label": "Male",
-        "backgroundColor": "#5292E5",
-        "borderColor": "#5292E5",
-        "borderWidth": 1,
-        "data": [20, 30, 25, 13]
+        "data": [-20, -30, -25, -13]
       },
       {
-        "label": "Female",
-        "backgroundColor": "#2FD7C4",
-        "borderColor": "#2FD7C4",
         "data": [50, 80, 60, 50]
       }
     ]

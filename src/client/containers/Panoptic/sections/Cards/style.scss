@@ -5,10 +5,11 @@
 }
 
 .stats {
-  margin: 30px 24px;
+  margin: 0px 24px;
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
 
   .content {
     display: flex;

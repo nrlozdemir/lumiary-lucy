@@ -226,6 +226,11 @@ const Template = (props) => {
       <div className={profileClass}>
         <div className="float-right">
           <Dropdown />
+          <img
+            src="https://picsum.photos/id/836/30/30"
+            className={imageClass}
+          />
+          {/*<span>Bleacher Report</span>*/}
         </div>
       </div>
     </div>
