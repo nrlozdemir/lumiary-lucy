@@ -9,6 +9,7 @@ import Switch from 'Components/Form/Switch'
 import { capitalizeFirstLetter } from 'Utils/index'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
+import Dropdown from './dropdown'
 // import PropTypes from 'prop-types';
 
 const containerClass = classnames(
@@ -16,9 +17,9 @@ const containerClass = classnames(
 )
 const linksClass = classnames(style.links)
 const profileClass = classnames(style.profile)
-const imageClass = classnames('circleImage ' + style.profileImage)
 
 const BackTo = (props) => {
+  const { textColor } = props.themes
   let link,
     title = ''
 
@@ -37,7 +38,7 @@ const BackTo = (props) => {
 
   return (
     <div className={style.backTo}>
-      <Link to={link}>
+      <Link to={link} style={{ color: textColor }}>
         <span className="icon-Left-Arrow-Circle">
           <span className="path1" />
           <span className="path2" />
@@ -179,24 +180,24 @@ const Selector = (props) => {
     }
 
     return {
-      leftSide: <BackTo {...url} title={backToTitle} />,
+      leftSide: <BackTo {...url} title={backToTitle} themes={props.themes} />,
       navigation: <SelectedNavLink title={title} load={loadComponent} />,
     }
   } else if (navigationSubRoutesMatch && navigationSubRoutesMatch.length > 0) {
     return {
-      leftSide: <BackTo {...url} />,
+      leftSide: <BackTo {...url} themes={props.themes} />,
       navigation: (
         <SelectedNavLink title={navigationSubRoutesMatch[0].navigation.title} />
       ),
     }
   } else if (navigationSubRoutes && navigationSubRoutes.length > 0) {
     return {
-      leftSide: <BackTo />,
+      leftSide: <BackTo themes={props.themes} />,
       navigation: <SubNavigation {...navigationSubRoutes[0].routes} />,
     }
   } else if (url[1] == 'library' && url[2] && url[2].match(/(\d+)/gm)) {
     return {
-      leftSide: <BackTo {...url} />,
+      leftSide: <BackTo {...url} themes={props.themes} />,
       navigation: <NavTitle {...props} />,
     }
   } else {
@@ -209,23 +210,22 @@ const Selector = (props) => {
 
 const Template = (props) => {
   const templateSelector = Selector(props)
-  const { textColor, moduleBackground } = props.themes
+  const { textColor, moduleBackground, moduleShadow } = props.themes
   const { switchOn, controlSwitch } = props
   return (
     <div
       className={containerClass}
-      style={{ color: textColor, background: moduleBackground }}
+      style={{
+        color: textColor,
+        background: moduleBackground,
+        boxShadow: `0 2px 6px 0 ${moduleShadow}`,
+      }}
     >
       {templateSelector['leftSide']}
       <div className={linksClass}>{templateSelector['navigation']}</div>
       <div className={profileClass}>
         <div className="float-right">
-          <img
-            src="https://picsum.photos/id/836/30/30"
-            className={imageClass}
-          />
-          <Switch switchOn={switchOn} controlSwitch={controlSwitch} />
-          <span style={{ color: textColor }}>Bleacher Report</span>
+          <Dropdown />
         </div>
       </div>
     </div>
@@ -234,34 +234,10 @@ const Template = (props) => {
 
 /* eslint-disable react/prefer-stateless-function */
 class Navbar extends React.Component {
-  constructor() {
-    super()
-    this.state = {
-      switchOn: false,
-    }
-  }
-
-  controlSwitch = () => {
-    this.setState(
-      {
-        switchOn: !this.state.switchOn,
-      },
-      () => {
-        this.props.themeContext.setColor(this.state.switchOn ? 'light' : 'dark')
-      }
-    )
-  }
-
   render() {
-    console.log('STATE', this.state.switchOn)
     return (
       <React.Fragment>
-        <Template
-          {...this.props}
-          themes={this.props.themeContext.colors}
-          switchOn={this.state.switchOn}
-          controlSwitch={this.controlSwitch}
-        />
+        <Template {...this.props} themes={this.props.themeContext.colors} />
       </React.Fragment>
     )
   }

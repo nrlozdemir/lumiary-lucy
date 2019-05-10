@@ -107,6 +107,13 @@ const dark = {
   iconBackground: '#21243b',
   iconBorder: '#2fd7c4',
   // radius icon values
+
+  // theme control dropdown values
+  themeControlBackground: '#545b79',
+  themeControlBorder: '#545b79',
+  themeControlShadow: 'rgba(0, 0, 0, 0.5)',
+  themeControlListBorder: '#21243b',
+  // theme control dropdown values
 }
 
 const light = {
@@ -219,6 +226,13 @@ const light = {
   iconBackground: '#f3f6f9',
   iconBorder: '#2fd7c4',
   // radius icon values
+
+  // theme control dropdown values
+  themeControlBackground: '#ffffff',
+  themeControlBorder: '#acb0be',
+  themeControlShadow: 'rgba(0, 0, 0, 0.5)',
+  themeControlListBorder: '#e8ecf0',
+  // theme control dropdown values
 }
 
 const themes = {

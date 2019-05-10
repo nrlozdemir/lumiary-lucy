@@ -8,7 +8,7 @@ class ThemeProvider extends React.Component {
     const { colors } = ThemeContext._currentValue.themeContext
     this.state = {
       setColor: this.setColor,
-      colors: { ...themes.dark },
+      colors: { ...themes.light },
     }
   }
 
@@ -20,7 +20,6 @@ class ThemeProvider extends React.Component {
   componentDidMount() {}
 
   componentDidUpdate() {
-    console.log('@@')
     document.body.style.backgroundColor = this.state.colors.bodyBackground
   }
 
