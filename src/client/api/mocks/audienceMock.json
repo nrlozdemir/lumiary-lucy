@@ -25,9 +25,6 @@
   },
   "colorTempData": [
     {
-      "text": "This is a blurb that will explain what this graph is showing",
-      "topText": "Happy",
-      "bottomText": "Sad",
       "data": [
         {
           "x": -50,
@@ -40,9 +37,6 @@
       ]
     },
     {
-      "text": "This is a blurb that will explain what this graph is showing",
-      "topText": "Energetic",
-      "bottomText": "Calm",
       "data": [
         {
           "x": -50,
@@ -55,9 +49,6 @@
       ]
     },
     {
-      "text": "This is a blurb that will explain what this graph is showing",
-      "topText": "Natural",
-      "bottomText": "Synthetic",
       "data": [
         {
           "x": -50,
