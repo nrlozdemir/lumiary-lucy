@@ -1,4 +1,5 @@
 .moduleContainer {
+  position: relative;
   background-color: $color-dark-grey-blue;
   font-family: $font-family-ClanOT;
   margin-top: 35px;
@@ -67,7 +68,7 @@
 
     .headerLegend {
       flex: 1;
-      p{
+      p {
         font-size: 14px;
         line-height: 1.8rem;
       }
@@ -77,6 +78,10 @@
   .moduleContainerBody {
     display: flex;
     padding: 8px 40px 40px;
+
+    &--empty {
+      opacity: 0.25;
+    }
   }
 }
 
@@ -104,4 +109,19 @@
   :not(:first-child) {
     margin-left: 45px;
   }
+}
+
+.moduleEmpty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  font-size: 24px;
+  font-weight: bold;
 }

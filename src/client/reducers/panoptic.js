@@ -6,6 +6,7 @@
 
 import { fromJS } from 'immutable'
 import { createSelector } from 'reselect'
+import { chartColors } from 'Utils/globals'
 
 export const types = {
   GET_DATA: 'Panoptic/GET_DATA',
@@ -356,18 +357,20 @@ export const initialState = fromJS({
     data: {},
     loading: false,
     error: null,
-	},
+  },
   flipCardsData: {
     data: {},
     loading: false,
     error: null,
-	},
+  },
   audienceData: null,
   loading: false,
   error: false,
 })
 
 const panopticReducer = (state = initialState, action) => {
+  const { payload } = action
+
   switch (action.type) {
     case types.GET_DATA:
       return state.set('loading', fromJS(true))
@@ -425,8 +428,47 @@ const panopticReducer = (state = initialState, action) => {
       return state.setIn(['pacingChartData', 'loading'], fromJS(true))
 
     case types.GET_PACING_CARD_DATA_SUCCESS:
+      const { stadiumData, horizontalStackedBarData } = payload
+
+      console.log(action)
+
+      const stadiumChartData = Object.keys(stadiumData).map((key, idx) => ({
+        title: key,
+        value: stadiumData[key] || 0,
+        color: chartColors[idx],
+      }))
+
+      const barChartData = Object.keys(horizontalStackedBarData).reduce(
+        (data, key, idx) => ({
+          labels: [...data.labels, key],
+          datasets: [
+            ...data.datasets,
+            {
+              label: key,
+              backgroundColor: chartColors[idx],
+              borderColor: chartColors[idx],
+              borderWidth: 1,
+              data: (!!horizontalStackedBarData[key] &&
+                Object.keys(horizontalStackedBarData[key]).map(
+                  (item) => horizontalStackedBarData[key][item]
+                )) || [0, 0, 0, 0],
+            },
+          ],
+        }),
+        {
+          labels: [],
+          datasets: [],
+        }
+      )
+
       return state
-        .setIn(['pacingChartData', 'data'], fromJS(action.payload))
+        .setIn(
+          ['pacingChartData', 'data'],
+          fromJS({
+            stadiumData: stadiumChartData,
+            horizontalStackedBarData: barChartData,
+          })
+        )
         .setIn(['pacingChartData', 'loading'], fromJS(false))
 
     case types.GET_PACING_CARD_DATA_ERROR:
@@ -710,10 +752,9 @@ export const makeSelectAudienceDominantColor = () =>
   createSelector(
     selectAudienceDominantColorDomain,
     (substate) => substate.toJS()
-	)
+  )
 
-const selectFlipCardsDomain = (state) =>
- state.Panoptic.get('flipCardsData')
+const selectFlipCardsDomain = (state) => state.Panoptic.get('flipCardsData')
 
 export const makeSelectFlipCards = () =>
   createSelector(
