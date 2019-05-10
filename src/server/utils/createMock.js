@@ -66,8 +66,7 @@ const randomCompetitiorArray = (backgroundColors) => {
 const randomHeaderBarArray = (headerBarTitles) => headerBarTitles.map((title) => ({
   "title": title,
   "value": randomNumber(100, 350),
-  "percentage": randomNumber(0, 100),
-  "text": "This video is receiving <b>{percentage}% less</b> {title} than your library average"
+  "percentage": randomNumber(0, 100)
 }))
 
 const random = file => {

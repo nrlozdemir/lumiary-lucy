@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   padding: 0 8px;
+  margin-top: 72px;
 }
 
 .marketViewCard {
@@ -177,76 +178,6 @@
   }
 }
 
-.colorList {
-  display: flex;
-  flex-direction: column;
-  padding-left: 40px;
-
-  .colorListItem {
-    display: flex;
-    align-items: center;
-    margin: 25px 0;
-    font-size: 14px;
-    font-family: $font-family-ClanOTNews;
-
-    &:before {
-      content: '';
-      display: inline-block;
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      background-color: black;
-      margin-right: 5px;
-    }
-
-    &:nth-child(1):before {
-      background-color: #2FD7C4;
-    }
-
-    &:nth-child(2):before {
-      background-color: #8562F3;
-    }
-
-    &:nth-child(3):before {
-      background-color: #5292E5;
-    }
-
-    &:nth-child(4):before {
-      background-color: #acb0be;
-    }
-
-    &:nth-child(5):before {
-      background-color: #545B79;
-    }
-  }
-
-  &.colorListHorizontal {
-    flex-direction: row;
-    padding-left: 0;
-
-    .colorListItem {
-      margin: 0 15px;
-    }
-  }
-
-  &.colorListSmall {
-    justify-content: center;
-    padding-left: 0;
-    margin: 40px 0;
-
-    .colorListItem {
-      font-size: 12px;
-      margin-right: 12px;
-    }
-
-    &:before {
-      width: 7px;
-      height: 7px;
-      margin-right: 2.5px;
-    }
-  }
-}
-
 .doughnutChart {
   position: relative;
 }
@@ -282,77 +213,72 @@
   }
 }
 
-.cardContainer {
-  @include grid-container;
-  margin: 56px;
-  padding-bottom: 50px;
-  .card {
-    @include grid-column(4);
-    border: 1px solid $color-dusk;
-    background-color: $color-dark-five;
-    .marketCardHeader {
-      padding-top: 48px;
+.card {
+  @include grid-column(4);
+  border: 1px solid $color-dusk;
+  background-color: $color-dark-five;
+  .marketCardHeader {
+    padding-top: 48px;
+    text-align: center;
+    font-family: $font-family-primary;
+    font-size: 32px;
+    color: $color-white;
+  }
+  .progressArea {
+    margin: 20px 48px 32px;
+    .title {
       text-align: center;
-      font-family: $font-family-primary;
-      font-size: 32px;
+      font-family: $font-family-ClanOTNews;
+      font-size: 14px;
+      padding: 20px 0;
+    }
+    .progressBar {
+      background-color: $color-dusk;
+      border-radius: 10px;
+    }
+    .percentageBlue {
+      border-radius: 10px;
+      height: 10px;
+      background-color: $color-cool-blue;
+      -webkit-transition: width 0.5s, height 0.5s;
+      transition: width 0.5s, height 0.5s;
+    }
+    .percentageRed {
+      border-radius: 10px;
+      height: 10px;
+      background-color: $color-coral-pink;
+      -webkit-transition: width 0.5s, height 0.5s;
+      transition: width 0.5s, height 0.5s;
+    }
+    .progressText {
       color: $color-white;
-    }
-    .progressArea {
-      margin: 20px 48px 32px;
-      .title {
-        text-align: center;
-        font-family: $font-family-ClanOTNews;
-        font-size: 14px;
-        padding: 20px 0;
+      font-size: 14px;
+      font-family: $font-family-ClanOTNews;
+      .leftTitle {
+        float: left;
       }
-      .progressBar {
-        background-color: $color-dusk;
-        border-radius: 10px;
-      }
-      .percentageBlue {
-        border-radius: 10px;
-        height: 10px;
-        background-color: $color-cool-blue;
-        -webkit-transition: width 0.5s, height 0.5s;
-        transition: width 0.5s, height 0.5s;
-      }
-      .percentageRed {
-        border-radius: 10px;
-        height: 10px;
-        background-color: $color-coral-pink;
-        -webkit-transition: width 0.5s, height 0.5s;
-        transition: width 0.5s, height 0.5s;
-      }
-      .progressText {
-        color: $color-white;
-        font-size: 14px;
-        font-family: $font-family-ClanOTNews;
-        .leftTitle {
-          float: left;
-        }
 
-        .rightTitle {
-          float: right;
-        }
-        &::after {
-          content: '';
-          clear: both;
-          display: table;
-        }
+      .rightTitle {
+        float: right;
+      }
+      &::after {
+        content: '';
+        clear: both;
+        display: table;
       }
     }
   }
-  .cardDescription {
-    margin: 0 48px 48px 48px;
-    font-family: $font-family-ClanOTNews;
-    font-size: 14px;
-    display: -webkit-box;
-    -webkit-line-clamp: 3;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    max-height: 85px;
-    height: 100%;
-  }
+}
+.cardDescription {
+  margin: 0 48px 48px 48px;
+  font-family: $font-family-ClanOTNews;
+  font-size: 14px;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  max-height: 85px;
+  height: 100%;
 }
 
 .bubbleChart {
@@ -390,4 +316,13 @@
 .detailTopPerformingPropertyContainer {
   position: relative;
   padding-top: 20px;
+}
+
+.sliderModuleContainer {
+  display: flex;
+}
+
+.sliderModuleContainer,
+.sliderModuleContainerBody {
+  flex-direction: column;
 }

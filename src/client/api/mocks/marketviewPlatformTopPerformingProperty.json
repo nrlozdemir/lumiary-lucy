@@ -1,5 +1,5 @@
 {
-	"labels": ["Facebook", "Instagram", "Twitter", "Youtube", "Pinterest"],
+	"labels": ["Facebook", "Instagram", "Twitter", "Youtube"],
 	"datasets": [
 		{
 			"label": "Fast",
