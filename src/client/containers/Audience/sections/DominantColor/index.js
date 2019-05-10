@@ -17,24 +17,23 @@ const addComma = (number) => {
 }
 
 const strToColor = (str) => {
-  str = str.toLowerCase().replace(/\s/g, "")
+	str = str.toLowerCase().replace(/\s/g, "")
 
-  const color = {
-    "red": "#cc2226",
-    "red-orange": "#dd501d",
-    "orange": "#dd501d", //#eb7919
-    "yellow-orange": "#f8b90b",
-    "yellow": "#fff20d",
-    "yellow-green": "#aac923",
-    "green": "#13862b",
-    "blue-green": "#229a78",
-    "blue": "#3178b0",
-    "blue-purple": "#79609b",
-    "purple": "#923683",
-    "red-purple": "#b83057"
-  }
-
-  return color[str]
+	const color = {
+		"red": "#cc2226",
+		"red-orange": "#dd501d",
+		"orange": "#dd501d", //#eb7919
+		"yellow-orange": "#f8b90b",
+		"yellow": "#fff20d",
+		"yellow-green": "#aac923",
+		"green": "#13862b",
+		"blue-green": "#229a78",
+		"blue": "#3178b0",
+		"blue-purple": "#79609b",
+		"purple": "#923683",
+		"red-purple": "#b83057"
+	}
+return color[str]
 }
 
 class DominantColor extends React.Component {
@@ -47,35 +46,52 @@ class DominantColor extends React.Component {
       audienceDominantColorData: { data, loading, error },
     } = this.props
 
-    let radarData = []
+    let colorsData
+		if (data && data.length > 0) {
+			colorsData = data
+			colorsData.map((el, i) => {
+				el.total = el.datas.labels
+					.map((a, k) => a)
+					.reduce((prev, next) => prev + parseFloat(next.count), 0)
+				el.progress = []
 
-    if(data && radarData) {
-      radarData = data
-      Object.values(data).map((dataRow, d) => {
-        //labels
-        dataRow.datas.labels.map((datalabelRow, l) => {
-          radarData[d].datas.labels[l].color = strToColor(datalabelRow.name)
-        })
-        //datasets
-        dataRow.datas.datasets.map((datasetRow, r) => {
-          radarData[d].datas.datasets[r].backgroundColor = "rgba(255, 255, 255, 0.3)"
-          radarData[d].datas.datasets[r].borderColor = "transparent"
-          radarData[d].datas.datasets[r].pointBackgroundColor = "#ffffff"
-          radarData[d].datas.datasets[r].pointBorderColor = "#ffffff"
-        })
-        //progress
-        dataRow.progress.map((progressRow, p) => {
-          radarData[d].progress[p].color = strToColor(progressRow.leftTitle)
-          radarData[d].progress[p].rightTitle = addComma(progressRow.rightTitle) + " Shares"
-        })
-      })
-    }
+				el.datas.datasets[0].backgroundColor = "rgba(255, 255, 255, 0.3)"
+				el.datas.datasets[0].borderColor = "transparent"
+				el.datas.datasets[0].pointBackgroundColor = "#ffffff"
+				el.datas.datasets[0].pointBorderColor = "#ffffff"
+				el.datas.datasets[0].data = []
+
+				el.datas.labels
+					.map((sub, k) => sub)
+					.sort((a, b) => (parseFloat(a.count) < parseFloat(b.count))
+						? 1
+						: ((parseFloat(b.count) < parseFloat(a.count)) ? -1 : 0))
+					.filter((m, j) => j < 3)
+					.map((f, k) => {
+						el.progress.push({
+							leftTitle: f.name,
+							color: strToColor(f.name),
+							rightTitle: `${f.count}k Shares`,
+							value: ((f.count / el.total) * 100).toFixed(0)
+						})
+					})
+
+				el.datas.labels
+					.map((sub, k) => {
+						data[i].datas.labels[k].color = strToColor(sub.name)
+						data[i].datas.labels[k].selected = !!el.progress.find(
+							(selected, i) => selected.color === strToColor(sub.name)
+						)
+						data[i].datas.datasets[0].data.push(sub.count)
+					})
+			})
+		}
 
     return (
       <RadarChartModule
-        data={radarData}
-        leftTitle="Male"
-        rightTitle="Female"
+        leftTitle={colorsData && colorsData.length > 0 && colorsData[0].type}
+        rightTitle={colorsData && colorsData.length > 0 && colorsData[1].type}
+        data={colorsData}
         moduleKey={'Audience/DominantColor'}
         title="Dominant Color Performance By Gender"
         action={this.callBack}

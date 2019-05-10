@@ -72,184 +72,124 @@
   ],
   "chartData": [
     {
-      "type": "Facebook",
+      "type": "Bleacher Report",
       "datas": {
         "labels": [
           {
-            "count": "96.7",
-            "name": "Red",
-            "selected": true
+            "count": 88.8,
+            "name": "Red"
           },
           {
-            "count": "25.7",
-            "name": "Red-Orange",
-            "selected": false
+            "count": 12,
+            "name": "Red-Orange"
           },
           {
-            "count": "50.1",
-            "name": "Orange",
-            "selected": false
+            "count": 14,
+            "name": "Orange"
           },
           {
-            "count": "15.7",
-            "name": "Yellow-Orange",
-            "selected": false
+            "count": 98,
+            "name": "Yellow-Orange"
           },
           {
-            "count": "55.6",
-            "name": "Yellow",
-            "selected": true
+            "count": 16,
+            "name": "Yellow"
           },
           {
-            "count": "15.2",
-            "name": "Yellow-Green",
-            "selected": false
+            "count": 14,
+            "name": "Yellow-Green"
           },
           {
-            "count": "48.1",
-            "name": "Green",
-            "selected": false
+            "count": 86,
+            "name": "Green"
           },
           {
-            "count": "25",
-            "name": "Blue-Green",
-            "selected": false
+            "count": 12,
+            "name": "Blue-Green"
           },
           {
-            "count": "100",
-            "name": "Blue",
-            "selected": true
+            "count": 100,
+            "name": "Blue"
           },
           {
-            "count": "40.4",
-            "name": "Blue-Purple",
-            "selected": false
+            "count": 24,
+            "name": "Blue-Purple"
           },
           {
-            "count": "18.1",
-            "name": "Purple",
-            "selected": false
+            "count": 18,
+            "name": "Purple"
           },
           {
-            "count": "25.7",
-            "name": "Red-Purple",
-            "selected": false
+            "count": 18,
+            "name": "Red-Purple"
           }
         ],
         "datasets": [
           {
-            "label": "Facebook",
-            "data": [75, 25, 50, 15, 55, 15, 48, 25, 100, 40, 18, 25]
+            "label": "Facebook"
           }
         ]
-      },
-      "progress": [
-        {
-          "leftTitle": "Blue",
-          "rightTitle": 91600,
-          "value": 60
-        },
-        {
-          "leftTitle": "Red",
-          "rightTitle": 64300,
-          "value": 45
-        },
-        {
-          "leftTitle": "Yellow",
-          "rightTitle": 54800,
-          "value": 30
-        }
-      ]
+      }
     },
     {
-      "type": "YouTube",
+      "type": "Barstool Sports",
       "datas": {
         "labels": [
           {
-            "count": "96.7",
-            "name": "Red",
-            "selected": false
+            "count": 96,
+            "name": "Red"
           },
           {
-            "count": "25.7",
-            "name": "Red-Orange",
-            "selected": true
+            "count": 5,
+            "name": "Red-Orange"
           },
           {
-            "count": "50.1",
-            "name": "Orange",
-            "selected": false
+            "count": 12,
+            "name": "Orange"
           },
           {
-            "count": "15.7",
-            "name": "Yellow-Orange",
-            "selected": true
+            "count": 16,
+            "name": "Yellow-Orange"
           },
           {
-            "count": "55.6",
-            "name": "Yellow",
-            "selected": false
+            "count": 88,
+            "name": "Yellow"
           },
           {
-            "count": "15.2",
-            "name": "Yellow-Green",
-            "selected": false
+            "count": 8,
+            "name": "Yellow-Green"
           },
           {
-            "count": "48.1",
-            "name": "Green",
-            "selected": true
+            "count": 14,
+            "name": "Green"
           },
           {
-            "count": "25",
-            "name": "Blue-Green",
-            "selected": false
+            "count": 16,
+            "name": "Blue-Green"
           },
           {
-            "count": "100",
-            "name": "Blue",
-            "selected": false
+            "count": 24,
+            "name": "Blue"
           },
           {
-            "count": "40.4",
-            "name": "Blue-Purple",
-            "selected": false
+            "count": 16,
+            "name": "Blue-Purple"
           },
           {
-            "count": "18.1",
-            "name": "Purple",
-            "selected": false
+            "count": 85,
+            "name": "Purple"
           },
           {
-            "count": "25.7",
-            "name": "Red-Purple",
-            "selected": false
+            "count": 18,
+            "name": "Red-Purple"
           }
         ],
         "datasets": [
           {
-            "label": "YouTube",
-            "data": [30, 100, 25, 70, 22, 26, 55, 15, 48, 25, 30, 50]
+            "label": "YouTube"
           }
         ]
-      },
-      "progress": [
-        {
-          "leftTitle": "Orange",
-          "rightTitle": 98100,
-          "value": 80
-        },
-        {
-          "leftTitle": "Yellow - Orange",
-          "rightTitle": 75300,
-          "value": 65
-        },
-        {
-          "leftTitle": "Green",
-          "rightTitle": 66800,
-          "value": 45
-        }
-      ]
+      }
     }
   ],
   "genderData": {
