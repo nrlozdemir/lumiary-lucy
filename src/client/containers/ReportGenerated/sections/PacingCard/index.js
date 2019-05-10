@@ -8,18 +8,18 @@ const pacingCardContainer = classnames('shadow-1', style.pacingCardContainer)
 
 const PacingCard = ({ barData }) => {
 
-	barData.labels = ["Live Action", "Stop Motion", "Cinemagraph", "Animation"]
+  barData.labels = ["Live Action", "Stop Motion", "Cinemagraph", "Animation"]
 
-	const labels = ["Slowest", "Slow", "Medium", "Fast"]
-	const backgroundColors = ["#2FD7C4", "#8562F3", "#5292E5", "#acb0be"]
-	const borderColors = ["#2FD7C4", "#8562F3", "#5292E5", "#acb0be"]
+  const labels = ["Slowest", "Slow", "Medium", "Fast"]
+  const backgroundColors = ["#2FD7C4", "#8562F3", "#5292E5", "#acb0be"]
+  const borderColors = ["#2FD7C4", "#8562F3", "#5292E5", "#acb0be"]
 
-	Object.values(barData.datasets).map((el, i) => {
-		barData.datasets[i].label = labels[i]
-		barData.datasets[i].backgroundColor = backgroundColors[i]
-		barData.datasets[i].borderColor = borderColors[i]
-		barData.datasets[i].borderWidth = 1
-	})
+  Object.values(barData.datasets).map((el, i) => {
+    barData.datasets[i].label = labels[i]
+    barData.datasets[i].backgroundColor = backgroundColors[i]
+    barData.datasets[i].borderColor = borderColors[i]
+    barData.datasets[i].borderWidth = 1
+  })
 
   return (
     <div className={pacingCardContainer}>

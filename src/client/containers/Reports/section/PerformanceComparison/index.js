@@ -63,22 +63,22 @@ class PerformanceComparison extends React.Component {
   render() {
     const {
       performanceComparisonData: { data, loading, error },
-		} = this.props
+    } = this.props
 
-		let doughnutData
-		if (data && data.doughnutData) {
-			doughnutData = data.doughnutData
+    let doughnutData
+    if (data && data.doughnutData) {
+      doughnutData = data.doughnutData
       doughnutData.datasets[0].backgroundColor = ["#5292E5", "#2FD7C4"]
-		}
+    }
 
-		let stackedChartData
-		if (data && data.stackedChartData) {
-			stackedChartData = data.stackedChartData
-			// "backgroundColor": "#5292E5",
-			// "backgroundColor": "#2FD7C4",
+    let stackedChartData
+    if (data && data.stackedChartData) {
+      stackedChartData = data.stackedChartData
+      // "backgroundColor": "#5292E5",
+      // "backgroundColor": "#2FD7C4",
       stackedChartData.datasets[0].backgroundColor = "#5292E5"
       stackedChartData.datasets[1].backgroundColor = "#2FD7C4"
-		}
+    }
 
     return (
       <Module
@@ -124,9 +124,9 @@ class PerformanceComparison extends React.Component {
                 width={720}
                 height={340}
                 data={{
-									labels: ["Slowest", "Slow", "Medium", "Fast"],
-									datasets: data.stackedChartData.datasets
-								}}
+                  labels: ["Slowest", "Slow", "Medium", "Fast"],
+                  datasets: data.stackedChartData.datasets
+                }}
                 datasetKeyProvider={this.datasetKeyProvider}
                 options={{
                   ...stackedChartOptions,
@@ -141,9 +141,9 @@ class PerformanceComparison extends React.Component {
                 width={280}
                 height={280}
                 data={{
-									labels: ["Red", "Green"],
-									datasets: doughnutData.datasets
-								}}
+                  labels: ["Red", "Green"],
+                  datasets: doughnutData.datasets
+                }}
                 cutoutPercentage={58}
                 fillText="Total Percentage"
                 dataLabelFunction="insertAfter"

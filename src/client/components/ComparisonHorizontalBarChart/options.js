@@ -17,13 +17,13 @@ export const barChartOptions = {
       },
       anchor: 'start',
       align: 'left',
-			color: '#fff',
-			font: {
-				family: "ClanOTNews",
-				size: 12,
-				color: "#fff",
-				weight: "normal"
-			}
+      color: '#fff',
+      font: {
+        family: "ClanOTNews",
+        size: 12,
+        color: "#fff",
+        weight: "normal"
+      }
     },
   },
   chartArea: {
@@ -44,7 +44,7 @@ export const barChartOptions = {
         ticks: {
           fontColor: 'white',
           fontFamily: 'ClanOTNews',
-					fontWeight: "normal",
+          fontWeight: "normal",
           fontSize: 12,
           padding: 15,
           min: 0,

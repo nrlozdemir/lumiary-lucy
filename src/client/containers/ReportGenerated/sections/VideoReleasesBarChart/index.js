@@ -10,23 +10,23 @@ class VideoReleasesBarChart extends Component {
   render() {
     const {
       data
-		} = this.props
+    } = this.props
 
-		let chartData
+    let chartData
 
-		if (this.props.data) {
-			chartData = this.props.data
-			chartData.labels = ["S", "M", "T", "W", "T", "F", "S"]
+    if (this.props.data) {
+      chartData = this.props.data
+      chartData.labels = ["S", "M", "T", "W", "T", "F", "S"]
 
-			Object.values(chartData.datasets).map((el, i) => {
-				chartData.datasets[i].label = "Dataset 2"
-				chartData.datasets[i].backgroundColor = "#5292E5"
-				if (i % 2 == 0) {
-					chartData.datasets[i].label = "Dataset 1"
-					chartData.datasets[i].backgroundColor = "#2FD7C4"
-				}
-			})
-		}
+      Object.values(chartData.datasets).map((el, i) => {
+        chartData.datasets[i].label = "Dataset 2"
+        chartData.datasets[i].backgroundColor = "#5292E5"
+        if (i % 2 == 0) {
+          chartData.datasets[i].label = "Dataset 1"
+          chartData.datasets[i].backgroundColor = "#2FD7C4"
+        }
+      })
+    }
 
     return (
       <VideoReleasesBarChartModule

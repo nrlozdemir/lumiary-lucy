@@ -15,20 +15,20 @@ class VideoComparison extends React.Component {
   render() {
     const {
       videoComparisonData: { data, loading, error },
-		} = this.props
-		let barData = data
+    } = this.props
+    let barData = data
 
-		barData && data.map((b, i) => {
-			barData[i].labels = ["", "", "", ""]
-			barData[i].datasets.map((d, k) => {
-				barData[i].datasets[k].backgroundColor = "#2FD7C4"
-				if (i % 2 === 0) {
-					barData[i].datasets[k].backgroundColor = "#5292E5"
-				}
-			})
-		})
+    barData && data.map((b, i) => {
+      barData[i].labels = ["", "", "", ""]
+      barData[i].datasets.map((d, k) => {
+        barData[i].datasets[k].backgroundColor = "#2FD7C4"
+        if (i % 2 === 0) {
+          barData[i].datasets[k].backgroundColor = "#5292E5"
+        }
+      })
+    })
 
-		console.log(barData)
+    console.log(barData)
 
     return (
       <Module
