@@ -42,17 +42,25 @@ export class Module extends React.Component {
   }
 
   render() {
-    const { children, references, bodyClass, containerClass } = this.props
+    const {
+      children,
+      references,
+      bodyClass,
+      isEmpty,
+      containerClass,
+    } = this.props
     const { infoShow } = this.state
 
     const moduleContainer = cx(
-      'grid-container col-12',
+      'shadow-1 grid-container col-12',
       style.moduleContainer,
       containerClass
     )
 
     const referencesClass = cx('font-secondary-second', style.references)
-    const moduleContainerBody = cx(style.moduleContainerBody, bodyClass)
+    const moduleContainerBody = cx(style.moduleContainerBody, bodyClass, {
+      [style['moduleContainerBody--empty']]: isEmpty,
+    })
 
     return (
       <ThemeContext.Consumer>
@@ -85,6 +93,9 @@ export class Module extends React.Component {
                   ))}
                 </div>
               )}
+              {isEmpty && (
+                <div className={style.moduleEmpty}>No Data Available</div>
+              )}
             </div>
           )
         }}
@@ -99,12 +110,14 @@ const mapStateToProps = createStructuredSelector({
 
 Module.defaultProps = {
   action: () => {},
+  isEmpty: false,
 }
 
 Module.propTypes = {
   action: PropTypes.func.isRequired,
   bodyClass: PropTypes.string,
   containerClass: PropTypes.string,
+  isEmpty: PropTypes.bool,
 }
 
 export default connect(

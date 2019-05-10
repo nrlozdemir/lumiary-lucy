@@ -26,6 +26,7 @@ class LibraryDetailColorTemperature extends React.Component {
         data={data}
         title="Color Temperature / Sentiment Comparison"
         action={this.callBack}
+        noStaticTexts={true}
         legend={[
           { label: 'This Video', color: 'coral-pink' },
           { label: 'Library Average', color: 'cool-blue' },

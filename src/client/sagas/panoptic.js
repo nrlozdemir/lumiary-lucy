@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { call, put, takeLatest, all } from 'redux-saga/effects'
 import axios from 'axios'
 import { actions, types } from 'Reducers/panoptic'
@@ -5,7 +6,11 @@ import panopticMockData from 'Api/mocks/panopticMock.json'
 import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 
+import { ajax } from 'Utils/api'
+
 import _ from 'lodash'
+
+const RESOURCE = '/report'
 
 function getPanopticDataApi() {
   //this will use ajax function in utils/api when real data is provided
@@ -79,19 +84,79 @@ function* getFilteringSectionData() {
   }
 }
 
-function* getPacingCardData() {
-  try {
-    const payload = yield call(getPanopticDataApi)
-    const shuffleData = payload.pacingChartData
-    shuffleData.horizontalStackedBarData.datasets = _.shuffle(
-      shuffleData.horizontalStackedBarData.datasets
-    )
+function getPacingCardDataApi(vals) {
+  return ajax({
+    url: RESOURCE,
+    method: 'POST',
+    params: qs.stringify(vals),
+  }).then((response) => {
+    if (response.error) {
+      throw response.error
+    }
+    return response.data
+  })
+}
 
-    shuffleData.stadiumData.map((item) => {
-      item.value = _.random(40, 90)
+function* getPacingCardData({ data }) {
+  try {
+    const { 'PCT-asd': metricOption = {}, 'PCT-wds': dateOption = {} } = data
+    const { value: dateOptionValue } = dateOption
+
+    const dateRange =
+      (!!dateOptionValue &&
+        dateOptionValue.value &&
+        (!!dateOptionValue.value.startDate
+          ? [dateOptionValue.value.startDate, dateOptionValue.value.endDate]
+          : dateOptionValue.value)) ||
+      '24hours'
+
+    const metric =
+      (!!metricOption && !!metricOption.value && metricOption.value.value) ||
+      'views'
+
+    const options = {
+      metric,
+      dateRange,
+      platform: 'all',
+      property: ['pacing'],
+      dateBucket: 'none',
+      display: 'percentage',
+    }
+
+    const stadiumData = yield call(getPacingCardDataApi, options)
+
+    const horizontalStackedBarData = yield call(getPacingCardDataApi, {
+      ...options,
+      proportionOf: 'format',
     })
-    yield put(actions.getPacingCardDataSuccess(shuffleData))
+
+    if (
+      !!stadiumData.data &&
+      !!stadiumData.data.pacing &&
+      !!horizontalStackedBarData.data &&
+      !!horizontalStackedBarData.data.pacing
+    ) {
+      const {
+        data: { pacing: stadiumPacing },
+      } = stadiumData
+
+      const {
+        data: { pacing: barChartPacing },
+      } = horizontalStackedBarData
+
+      yield put(
+        actions.getPacingCardDataSuccess({
+          stadiumData: stadiumPacing,
+          horizontalStackedBarData: barChartPacing,
+        })
+      )
+    } else {
+      yield put(
+        actions.getPacingCardDataError('Error fetching pacing card data')
+      )
+    }
   } catch (err) {
+    console.log(err)
     yield put(actions.getPacingCardDataError(err))
   }
 }

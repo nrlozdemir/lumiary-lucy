@@ -28,7 +28,6 @@ class PanopticColorTemperature extends React.Component {
         data={data}
         title="Color Temperature / Sentiment Comparison"
         action={this.callBack}
-        noStaticTexts={false}
         filters={[
           {
             type: 'colorTempature',
