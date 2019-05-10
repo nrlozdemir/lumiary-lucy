@@ -53,25 +53,6 @@ const barPlugins = [
   },
 ]
 
-const plugins = [
-  {
-    beforeDraw: function(chart) {
-      const ctx = chart.chart.ctx
-      const { top, bottom, left, right } = chart.chartArea
-      ctx.save()
-      ctx.fillStyle = '#FFFFFF'
-      ctx.font = '14px ClanOTBold'
-      ctx.fillText(
-        'Total Percentage',
-        (bottom - top) / 2 - 55,
-        (right - left) / 2 + 4,
-        right - left
-      )
-      ctx.restore()
-    },
-  },
-]
-
 class PerformanceComparison extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getPerformanceComparisonData(data)
@@ -83,6 +64,22 @@ class PerformanceComparison extends React.Component {
     const {
       performanceComparisonData: { data, loading, error },
     } = this.props
+
+    let doughnutData
+    if (data && data.doughnutData) {
+      doughnutData = data.doughnutData
+      doughnutData.datasets[0].backgroundColor = ["#5292E5", "#2FD7C4"]
+    }
+
+    let stackedChartData
+    if (data && data.stackedChartData) {
+      stackedChartData = data.stackedChartData
+      // "backgroundColor": "#5292E5",
+      // "backgroundColor": "#2FD7C4",
+      stackedChartData.datasets[0].backgroundColor = "#5292E5"
+      stackedChartData.datasets[1].backgroundColor = "#2FD7C4"
+    }
+
     return (
       <Module
         moduleKey={'Reports/PerformanceComparison'}
@@ -126,7 +123,10 @@ class PerformanceComparison extends React.Component {
               <Bar
                 width={720}
                 height={340}
-                data={data.stackedChartData}
+                data={{
+                  labels: ["Slowest", "Slow", "Medium", "Fast"],
+                  datasets: data.stackedChartData.datasets
+                }}
                 datasetKeyProvider={this.datasetKeyProvider}
                 options={{
                   ...stackedChartOptions,
@@ -135,12 +135,15 @@ class PerformanceComparison extends React.Component {
               />
             </div>
           )}
-          {data && data.doughnutData && (
+          {data && data.doughnutData && doughnutData.datasets && (
             <div className={style.chartContainer}>
               <DoughnutChart
                 width={280}
                 height={280}
-                data={data.doughnutData}
+                data={{
+                  labels: ["Red", "Green"],
+                  datasets: doughnutData.datasets
+                }}
                 cutoutPercentage={58}
                 fillText="Total Percentage"
                 dataLabelFunction="insertAfter"

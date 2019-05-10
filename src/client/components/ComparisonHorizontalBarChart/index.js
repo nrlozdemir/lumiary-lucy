@@ -9,6 +9,10 @@ const ComparisonHorizontalBarChart = ({ data }) => {
   reverseBarChartOptions.scales.xAxes[0].ticks = {
     ...reverseBarChartOptions.scales.xAxes[0].ticks,
     reverse: false,
+    callback: function(value) {
+      if (value === 0) return 0
+      return value + '%'
+    }
   }
   reverseBarChartOptions.plugins.datalabels = {
     ...reverseBarChartOptions.plugins.datalabels,
