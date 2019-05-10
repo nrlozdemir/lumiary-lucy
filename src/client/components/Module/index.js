@@ -53,10 +53,14 @@ export class Module extends React.Component {
 		const moduleContainer = cx(
 			'shadow-1 grid-container col-12',
 			style.moduleContainer,
-			containerClass
+			containerClass,
+			{
+				[style['moduleContainer--empty']]: isEmpty,
+			}
 		)
 
 		const referencesClass = cx('font-secondary-second', style.references)
+		
 		const moduleContainerBody = cx(style.moduleContainerBody, bodyClass, {
 			[style['moduleContainerBody--empty']]: isEmpty,
 		})
