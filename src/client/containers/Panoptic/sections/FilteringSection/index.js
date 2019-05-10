@@ -10,7 +10,10 @@ import 'chartjs-plugin-datalabels'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 import style from './style.scss'
-import { doughnutData_DatasetOptions, stackedChartData_DatasetOptions } from './options'
+import {
+  doughnutData_DatasetOptions,
+  stackedChartData_DatasetOptions,
+} from './options'
 
 class PanopticFilteringSection extends Component {
   callBack = (data, moduleKey) => {
@@ -27,24 +30,19 @@ class PanopticFilteringSection extends Component {
     } = this.props
 
     const combineDoughnutData = {
-      "labels": [
-        "0-15 seconds",
-        "15-30 seconds",
-        "30-45 seconds",
-        "45-60 seconds"
+      labels: [
+        '0-15 seconds',
+        '15-30 seconds',
+        '30-45 seconds',
+        '45-60 seconds',
       ],
-      "datasets": doughnutData
-    };
+      datasets: doughnutData,
+    }
 
     const combineStackedChartData = {
-      "labels": [
-        "Week 1",
-        "Week 2",
-        "Week 3",
-        "Week 4"
-      ],
-      "datasets": stackedChartData
-    };
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+      datasets: stackedChartData,
+    }
 
     return (
       <Module
@@ -55,26 +53,26 @@ class PanopticFilteringSection extends Component {
           {
             type: 'videoProperty',
             selectKey: 'PFS-dsad',
-						placeHolder: 'videoProperty',
-						defaultValue: 'duration'
+            placeHolder: 'videoProperty',
+            defaultValue: 'duration',
           },
           {
             type: 'engagement',
             selectKey: 'PFS-asdwda',
-						placeHolder: 'Engagement',
-						defaultValue: 'views'
+            placeHolder: 'Engagement',
+            defaultValue: 'views',
           },
           {
             type: 'platform',
             selectKey: 'PFS-dwdf',
-						placeHolder: 'Platform',
-						defaultValue: 'all'
+            placeHolder: 'Platform',
+            defaultValue: 'all',
           },
           {
             type: 'timeRange',
             selectKey: 'PFS-wxcvs',
-						placeHolder: 'Date',
-						defaultValue: 'month'
+            placeHolder: 'Date',
+            defaultValue: 'month',
           },
         ]}
       >
@@ -84,7 +82,10 @@ class PanopticFilteringSection extends Component {
               <DoughnutChart
                 width={270}
                 height={270}
-                data={chartCombineDataset(combineDoughnutData, doughnutData_DatasetOptions)}
+                data={chartCombineDataset(
+                  combineDoughnutData,
+                  doughnutData_DatasetOptions
+                )}
                 cutoutPercentage={58}
                 fillText="Total Percentage"
                 dataLabelFunction="insertAfter"
@@ -100,7 +101,14 @@ class PanopticFilteringSection extends Component {
             )}
           </div>
           <div className={style.stackedChart}>
-            {stackedChartData && <StackedBarChart barData={chartCombineDataset(combineStackedChartData, stackedChartData_DatasetOptions)} />}
+            {stackedChartData && (
+              <StackedBarChart
+                barData={chartCombineDataset(
+                  combineStackedChartData,
+                  stackedChartData_DatasetOptions
+                )}
+              />
+            )}
           </div>
         </div>
       </Module>
