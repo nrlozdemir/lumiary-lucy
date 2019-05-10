@@ -62,7 +62,7 @@ class PerformanceComparison extends React.Component {
     let doughnutData
     if (data && data.doughnutData) {
       doughnutData = data.doughnutData
-      doughnutData.datasets[0].backgroundColor = ["#5292E5", "#2FD7C4"]
+      doughnutData.datasets[0].backgroundColor = ['#5292E5', '#2FD7C4']
     }
 
     let stackedChartData
@@ -70,8 +70,8 @@ class PerformanceComparison extends React.Component {
       stackedChartData = data.stackedChartData
       // "backgroundColor": "#5292E5",
       // "backgroundColor": "#2FD7C4",
-      stackedChartData.datasets[0].backgroundColor = "#5292E5"
-      stackedChartData.datasets[1].backgroundColor = "#2FD7C4"
+      stackedChartData.datasets[0].backgroundColor = '#5292E5'
+      stackedChartData.datasets[1].backgroundColor = '#2FD7C4'
     }
 
     return (
@@ -131,43 +131,6 @@ class PerformanceComparison extends React.Component {
           options: stackedChartOptions,
         }}
       />
-      >
-        <div className={style.container}>
-          {data && data.stackedChartData && (
-            <div className={style.chartContainer}>
-              <Bar
-                width={720}
-                height={340}
-                data={{
-                  labels: ["Slowest", "Slow", "Medium", "Fast"],
-                  datasets: data.stackedChartData.datasets
-                }}
-                datasetKeyProvider={this.datasetKeyProvider}
-                options={{
-                  ...stackedChartOptions,
-                }}
-                plugins={barPlugins}
-              />
-            </div>
-          )}
-          {data && data.doughnutData && doughnutData.datasets && (
-            <div className={style.chartContainer}>
-              <DoughnutChart
-                width={280}
-                height={280}
-                data={{
-                  labels: ["Red", "Green"],
-                  datasets: doughnutData.datasets
-                }}
-                cutoutPercentage={58}
-                fillText="Total Percentage"
-                dataLabelFunction="insertAfter"
-                dataLabelInsert="%"
-              />
-            </div>
-          )}
-        </div>
-      </Module>
     )
   }
 }
