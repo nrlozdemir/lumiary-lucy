@@ -104,15 +104,17 @@ export class VideoCard extends PureComponent {
           </div>)}
           {video.videoUrl && itCanPlay ? (
             <div className={style.videoInner}>
-              <video
-                ref={this.video}
-                loop
-                muted
-                poster={video.poster}
-                controls={false}
-              >
-                <source src={video.videoUrl} type="video/mp4" />
-              </video>
+              <Link to={`/library/build-report/${video.id}`}>
+								<video
+									ref={this.video}
+									loop
+									muted
+									poster={video.poster}
+									controls={false}
+								>
+									<source src={video.videoUrl} type="video/mp4" />
+								</video>
+							</Link>
               <span
                 className={style.progressBar}
                 style={{
