@@ -107,6 +107,8 @@ const dark = {
   iconBackground: '#21243b',
   iconBorder: '#2fd7c4',
   // radius icon values
+
+  daySelectionBorderColor: '#545b79',
 }
 
 const light = {
@@ -219,6 +221,8 @@ const light = {
   iconBackground: '#f3f6f9',
   iconBorder: '#2fd7c4',
   // radius icon values
+
+  daySelectionBorderColor: '#c6c9d7',
 }
 
 const themes = {
