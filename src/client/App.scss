@@ -177,7 +177,7 @@
         }
       }
       li:last-child {
-        display: none;
+        // display: none;
       }
     }
   }
@@ -310,7 +310,8 @@
     }
   }
 
-  .audienceSlider {
+	.audienceSlider,
+	.marketViewSlider {
     height: 366px;
 
     .swiper-container{
@@ -439,7 +440,20 @@
         background: #fff;
       }
     }
-  }
+	}
+
+	.marketViewSlider {
+		.swiper-button-prev,
+		.swiper-button-next {
+			width: 32px;
+			height: 32px;
+			top: 35%;
+		}
+
+		.active {
+			opacity: 1;
+		}
+	}
 
   .custom-select {
     width: 170px;
