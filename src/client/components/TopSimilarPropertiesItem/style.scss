@@ -33,11 +33,10 @@
     border-radius: 10px;
     height: 10px;
     background-color: $color-cool-blue;
-    -webkit-transition: width .5s, height .5s;
-    transition: width .5s, height .5s;
+    -webkit-transition: width 0.5s, height 0.5s;
+    transition: width 0.5s, height 0.5s;
   }
   .progressText {
-    color: $color-white;
     font-size: 14px;
     font-family: $font-family-ClanOTNews;
     .leftTitle {
@@ -48,9 +47,24 @@
       float: right;
     }
     &::after {
-      content: "";
+      content: '';
       clear: both;
       display: table;
     }
+  }
+}
+.chartSectionBadge {
+  display: block;
+  margin: 40px 0 56px 24px;
+  text-align: center;
+
+  span {
+    background-color: $color-dusk;
+    border-radius: 17px;
+    font-family: $font-family-ClanOT;
+    font-size: 14px;
+    font-weight: bold;
+    padding: 8px 24px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
   }
 }
