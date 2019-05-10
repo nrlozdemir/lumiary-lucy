@@ -55,22 +55,26 @@ class PanopticFilteringSection extends Component {
           {
             type: 'videoProperty',
             selectKey: 'PFS-dsad',
-            placeHolder: 'videoProperty',
+						placeHolder: 'videoProperty',
+						defaultValue: 'duration'
           },
           {
             type: 'engagement',
             selectKey: 'PFS-asdwda',
-            placeHolder: 'Engagement',
+						placeHolder: 'Engagement',
+						defaultValue: 'views'
           },
           {
             type: 'platform',
             selectKey: 'PFS-dwdf',
-            placeHolder: 'Platform',
+						placeHolder: 'Platform',
+						defaultValue: 'all'
           },
           {
             type: 'timeRange',
             selectKey: 'PFS-wxcvs',
-            placeHolder: 'Date',
+						placeHolder: 'Date',
+						defaultValue: 'month'
           },
         ]}
       >
