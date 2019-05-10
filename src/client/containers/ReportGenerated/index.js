@@ -10,7 +10,7 @@ import Slider from 'Components/Modules/SliderModule'
 import VideoReleasesBarChart from './sections/VideoReleasesBarChart'
 import TopVideosCard from './sections/TopVideosCard'
 import PacingCard from './sections/PacingCard'
-import FilteringSection from './sections/FilteringSection'
+import EngagementByProperty from './sections/EngagementByProperty'
 import ColorTemperature from './sections/ColorTemperature'
 //import style from './style.scss'
 
@@ -94,7 +94,7 @@ class ReportGenerated extends Component {
             />
           )}
           {verticalStackedChartData && (
-            <FilteringSection
+            <EngagementByProperty
               data={verticalStackedChartData}
               handleSelectFilters={this.handleSelectFilters}
               selectDuration={selectDuration}
