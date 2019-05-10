@@ -4,6 +4,7 @@ import { randomKey } from 'Utils/index'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 import SelectFilters from 'Components/SelectFilters'
 import style from './style.scss'
+import { ThemeContext } from 'ThemeContext/themeContext'
 
 const barChartContainer = cx(
   'shadow-1 col-12-gutter-20 mb-48',
@@ -24,59 +25,70 @@ const TopVideosCard = ({
   handleSelectFilters,
 }) => {
   return (
-    <div className="grid-collapse">
-      <div className={barChartContainer}>
-        <div className={barChartHeaderClass}>
-          <div className="col-4 text-bold">
-            <p className={headerTitleClass}>
-              Top Videos Over Time By Competitor
-            </p>
-          </div>
-          <div className="col-8">
-            <div className={style.selects}>
-              <SelectFilters
-                handleSelectFilters={handleSelectFilters}
-                selectClasses={selectClasses}
-                selectResolution={selectResolution}
-                selectResolutionShow={true}
+    <ThemeContext.Consumer>
+      {({ themeContext: { colors } }) => (
+        <div className="grid-collapse">
+          <div
+            className={barChartContainer}
+            style={{
+              backgroundColor: colors.moduleBackground,
+              color: colors.textColor,
+              boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
+            }}
+          >
+            <div className={barChartHeaderClass}>
+              <div className="col-4 text-bold">
+                <p className={headerTitleClass}>
+                  Top Videos Over Time By Competitor
+                </p>
+              </div>
+              <div className="col-8">
+                <div className={style.selects}>
+                  <SelectFilters
+                    handleSelectFilters={handleSelectFilters}
+                    selectClasses={selectClasses}
+                    selectResolution={selectResolution}
+                    selectResolutionShow={true}
+                  />
+                </div>
+                <div className="clearFix" />
+              </div>
+            </div>
+            <div className="col-12">
+              <StackedBarChart
+                height={200}
+                barData={chartData}
+                datasetKeyProvider={datasetKeyProvider()}
               />
             </div>
-            <div className="clearFix" />
-          </div>
-        </div>
-        <div className='col-12'>
-          <StackedBarChart
-            height={200}
-            barData={chartData}
-            datasetKeyProvider={datasetKeyProvider()}
-          />
-        </div>
-        <div className="col-12">
-          <div className={referencesClass}>
-            <div className={style.referenceItem}>
-              <span className="bg-cool-blue" />
-              Facebook
-            </div>
-            <div className={style.referenceItem}>
-              <span className="bg-lighter-purple" />
-              Instagram
-            </div>
-            <div className={style.referenceItem}>
-              <span className="bg-coral-pink" />
-              Twitter
-            </div>
-            <div className={style.referenceItem}>
-              <span className="bg-cool-grey" />
-              YouTube
-            </div>
-            <div className={style.referenceItem}>
-              <span className="bg-dusk" />
-              Pinterest
+            <div className="col-12">
+              <div className={referencesClass}>
+                <div className={style.referenceItem}>
+                  <span className="bg-cool-blue" />
+                  Facebook
+                </div>
+                <div className={style.referenceItem}>
+                  <span className="bg-lighter-purple" />
+                  Instagram
+                </div>
+                <div className={style.referenceItem}>
+                  <span className="bg-coral-pink" />
+                  Twitter
+                </div>
+                <div className={style.referenceItem}>
+                  <span className="bg-cool-grey" />
+                  YouTube
+                </div>
+                <div className={style.referenceItem}>
+                  <span className="bg-dusk" />
+                  Pinterest
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </div>
-    </div>
+      )}
+    </ThemeContext.Consumer>
   )
 }
 

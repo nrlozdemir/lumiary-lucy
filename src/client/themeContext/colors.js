@@ -114,6 +114,7 @@ const dark = {
   themeControlShadow: 'rgba(0, 0, 0, 0.5)',
   themeControlListBorder: '#21243b',
   // theme control dropdown values
+  daySelectionBorderColor: '#545b79',
 }
 
 const light = {
@@ -233,6 +234,7 @@ const light = {
   themeControlShadow: 'rgba(0, 0, 0, 0.5)',
   themeControlListBorder: '#e8ecf0',
   // theme control dropdown values
+  daySelectionBorderColor: '#c6c9d7',
 }
 
 const themes = {
