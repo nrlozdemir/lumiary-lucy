@@ -20,8 +20,10 @@ const pacingCardContainer = classnames(
 
 class PacingCard extends React.Component {
   callBack = (data, moduleKey) => {
-    this.props.getPacingCardData(data)
+    const { getPacingCardData } = this.props
+    getPacingCardData(data)
   }
+
   render() {
     const {
       pacingChartData: {
@@ -45,6 +47,13 @@ class PacingCard extends React.Component {
       ...value,
       ...stadiumData_DatasetOptions[index],
     })) : []
+    const isEmpty =
+      !!horizontalStackedBarData &&
+      !!stadiumData &&
+      horizontalStackedBarData.datasets.every((dataset) =>
+        dataset.data.every((data) => data === 0)
+      ) &&
+      stadiumData.every((data) => data.value === 0)
 
     return (
       <Module
@@ -63,6 +72,7 @@ class PacingCard extends React.Component {
             placeHolder: 'Date',
           },
         ]}
+        isEmpty={isEmpty}
       >
         <div className={style.pacingCardInner}>
           <div className={style.pacingCardInnerItem}>

@@ -30,13 +30,13 @@ export const actions = {
 export const initialState = fromJS({
   options: {
     engagement: [
-      { value: 'Views', label: 'Views' },
-      { value: 'Likes', label: 'Likes' },
-      { value: 'Shares', label: 'Shares' },
-      { value: 'Comments', label: 'Comments' },
+      { value: 'views', label: 'Views' },
+      { value: 'likes', label: 'Likes' },
+      { value: 'shares', label: 'Shares' },
+      { value: 'comments', label: 'Comments' },
     ],
     platform: [
-      { value: 'All Platforms', label: 'All Platforms' },
+      { value: 'all', label: 'All Platforms' },
       { value: 'facebook', label: 'Facebook' },
       { value: 'twitter', label: 'Twitter' },
       { value: 'instagram', label: 'Instagram' },
@@ -122,17 +122,17 @@ export const initialState = fromJS({
       { value: 'natural-saynthetic', label: 'Natural / Saynthetic' },
     ],
     timeRange: [
-      { value: 'Today', label: 'Today' },
-      { value: 'Past Week', label: 'Past Week' },
-      { value: 'Past Month', label: 'Past Month' },
-      { value: 'Past 3 Months', label: 'Past 3 Months' },
+      { value: '24hours', label: 'Today' },
+      { value: 'week', label: 'Past Week' },
+      { value: 'month', label: 'Past Month' },
+      { value: '3months', label: 'Past 3 Months' },
       { value: 'custom', label: 'Custom' },
     ],
   },
   values: {},
   defaults: {
-    engagement: 'Views',
-    platform: 'All Platforms',
+    engagement: 'views',
+    platform: 'all',
     aspectRatio: '16:9',
     resolution: '4K',
     frameRate: '24',
@@ -145,7 +145,7 @@ export const initialState = fromJS({
     talentAge: '10-',
     talentGender: 'male',
     colorTempature: 'happy-sad',
-    timeRange: 'Today',
+    timeRange: '24hours',
   },
 })
 

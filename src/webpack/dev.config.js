@@ -60,7 +60,7 @@ module.exports = {
         STATIC_URL: JSON.stringify(static_url),
         MEDIA_URL: JSON.stringify(media_url),
         BASENAME: JSON.stringify('/'),
-        API_ROOT: JSON.stringify('https://api-local.quickframe.com:8080'),
+        API_ROOT: JSON.stringify('https://azazzle-local.quickframe.com:8081'),
         API_VERSION: JSON.stringify('v1'),
         BREAKPOINTS: breakpoints,
         FEATURE_CONTACT: JSON.stringify(true),
