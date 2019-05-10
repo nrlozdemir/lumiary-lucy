@@ -9,9 +9,14 @@ import { chartCombineDataset } from 'Utils'
 import classnames from 'classnames'
 import HorizontalStackedBarChart from 'Components/Charts/Panoptic/HorizontalStackedBarChart'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
+import { isEmpty } from 'lodash'
+
 import style from './style.scss'
 
-import { horizontalStackedBarData_DatasetOptions, stadiumData_DatasetOptions } from './options'
+import {
+  horizontalStackedBarData_DatasetOptions,
+  stadiumData_DatasetOptions,
+} from './options'
 
 const pacingCardContainer = classnames(
   'shadow-1 col-12 mt-72',
@@ -27,6 +32,7 @@ class PacingCard extends React.Component {
   render() {
     const {
       pacingChartData: {
+        data,
         data: { horizontalStackedBarData, stadiumData },
         loading,
         error,
@@ -34,26 +40,25 @@ class PacingCard extends React.Component {
     } = this.props
 
     const combineHorizontalStackedBarData = {
-      "labels": [
-        "Live Action",
-        "Stop Motion",
-        "Cinemagraph",
-        "Animation"
-      ],
-      "datasets": horizontalStackedBarData
+      labels: ['Live Action', 'Stop Motion', 'Cinemagraph', 'Animation'],
+      datasets: horizontalStackedBarData,
     }
 
-    const combineStadiumData = stadiumData ? stadiumData.map((value, index) => ({
-      ...value,
-      ...stadiumData_DatasetOptions[index],
-    })) : []
-    const isEmpty =
-      !!horizontalStackedBarData &&
-      !!stadiumData &&
-      horizontalStackedBarData.datasets.every((dataset) =>
-        dataset.data.every((data) => data === 0)
-      ) &&
-      stadiumData.every((data) => data.value === 0)
+    const combineStadiumData = stadiumData
+      ? stadiumData.map((value, index) => ({
+          ...value,
+          ...stadiumData_DatasetOptions[index],
+        }))
+      : []
+
+    const hasNoData =
+      (!!horizontalStackedBarData &&
+        !!stadiumData &&
+        horizontalStackedBarData.datasets.every((dataset) =>
+          dataset.data.every((data) => data === 0)
+        ) &&
+        stadiumData.every((data) => data.value === 0)) ||
+      isEmpty(data)
 
     return (
       <Module
@@ -72,16 +77,19 @@ class PacingCard extends React.Component {
             placeHolder: 'Date',
           },
         ]}
-        isEmpty={isEmpty}
+        isEmpty={hasNoData}
       >
         <div className={style.pacingCardInner}>
           <div className={style.pacingCardInnerItem}>
-            {horizontalStackedBarData && (
-              <HorizontalStackedBarChart barData={chartCombineDataset(combineHorizontalStackedBarData, horizontalStackedBarData_DatasetOptions)} />
-            )}
+            <HorizontalStackedBarChart
+              barData={chartCombineDataset(
+                combineHorizontalStackedBarData,
+                horizontalStackedBarData_DatasetOptions
+              )}
+            />
           </div>
           <div className={style.pacingCardInnerItem}>
-            {stadiumData && <StadiumChart data={combineStadiumData} />}
+            <StadiumChart data={combineStadiumData} />
           </div>
         </div>
       </Module>
