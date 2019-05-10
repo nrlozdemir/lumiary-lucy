@@ -24,8 +24,8 @@ const rootReducer = (history) =>
     LibraryDetail,
     Reports,
     GeneratedReport,
-		form: formReducer,
-		Audience,
+    form: formReducer,
+    Audience,
     SelectFilters,
   })
 
