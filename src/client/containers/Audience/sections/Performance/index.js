@@ -270,6 +270,9 @@ class Performance extends React.Component {
 									.customTooltip {
 									color: ${colors.textColor};
 									}
+									.customTooltip .rc-slider-tooltip-inner {
+										color: ${colors.textColor};
+										}
 								`}
               </style>
               <RangeWithBadge

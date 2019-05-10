@@ -74,7 +74,7 @@ class ColorCard extends Component {
                     <Bubble
                       key={'bubble-' + i}
                       radius={(parseInt(bubble.value) / 100) * 0.0015 + 15}
-                      fill="#21243B"
+                      fill={colors.bodyBackground}
                       stroke={bubble.color}
                     >
                       <Visual>
@@ -118,7 +118,7 @@ class ColorCard extends Component {
               Based on the number of shares for competitors across all platforms
             </div>
             <Link
-              to="/marketview/competitor"
+              to="/marketview/platform"
               className={style.marketViewCardLink}
               style={{
                 backgroundColor: colors.moduleBorder,

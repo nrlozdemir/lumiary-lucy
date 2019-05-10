@@ -63,7 +63,7 @@ class PacingCard extends Component {
               Based on the number of shares for competitors across all platforms
             </div>
             <Link
-              to="/marketview/platform"
+              to="/marketview/competitor"
               className={style.marketViewCardLink}
               style={{
                 backgroundColor: colors.moduleBorder,

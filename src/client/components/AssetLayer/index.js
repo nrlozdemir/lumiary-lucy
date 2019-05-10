@@ -34,7 +34,7 @@ const AssetLayer = (props) => {
         style={{
           width: width,
           height: height,
-          borderColor: themes.chartStadiumBarBorder,
+          border: `1px solid ${themes.chartStadiumBarBorder}`,
           color: themes.textColor,
         }}
       >
