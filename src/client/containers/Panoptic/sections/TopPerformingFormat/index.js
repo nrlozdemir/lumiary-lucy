@@ -3,22 +3,26 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectAudienceDominantColor } from 'Reducers/panoptic'
+import { actions, makeSelectTopPerformingFormat } from 'Reducers/panoptic'
 import { chartCombineDataset } from 'Utils'
 
 import LineAndDoughnutChartModule from 'Components/Modules/LineAndDoughnutChartModule'
 import { lineChartData_DatasetOptions, lineChartOptions } from './options'
 
 class TopPerformingFormat extends React.Component {
+  componentDidMount() {
+    this.props.getTopPerformingFormatData()
+  }
+
   callBack = (data, moduleKey) => {
-    this.props.getAudienceDominantColorData(data)
+    this.props.getTopPerformingFormatData(data)
   }
 
   customCallbackFunc = () => console.log('oldu')
 
   combineChartData = (lineData) => {
     return chartCombineDataset(lineData, lineChartData_DatasetOptions, {
-      beforeDraw: function(chart, easing) {
+      beforeDraw: function (chart, easing) {
         if (
           chart.config.options.chartArea &&
           chart.config.options.chartArea.backgroundColor
@@ -41,31 +45,27 @@ class TopPerformingFormat extends React.Component {
   }
 
   render() {
-    const lineData = {
-      labels: [
-        'Sunday',
-        'Monday',
-        'Tuesday',
-        'Wednesday',
-        'Thursday',
-        'Friday',
-        'Saturday',
-      ],
-      datasets: [
-        { data: [10, 15, 17, 20, 17, 26, 28] },
-        { data: [20, 25, 22, 27, 32, 30, 35] },
-        { data: [30, 35, 50, 45, 40, 42, 48] },
-        { data: [55, 60, 61, 65, 60, 62, 67] },
-        { data: [82, 85, 78, 75, 80, 85, 90] },
-      ],
-    }
+    const {
+      topPerformingFormatData: { data, loading, error },
+    } = this.props
 
     return (
       <LineAndDoughnutChartModule
         moduleKey="Panoptic/Top-Performing-Formats-This-Week-By-CV-Score"
         title="Top Performing Formats This Week By CV Score"
-        action={() => {}}
-        lineChartData={this.combineChartData(lineData)}
+        action={this.callBack}
+        lineChartData={this.combineChartData({
+          labels: [
+            'Sunday',
+            'Monday',
+            'Tuesday',
+            'Wednesday',
+            'Thursday',
+            'Friday',
+            'Saturday',
+          ],
+          datasets: data,
+        })}
         lineChartOptions={lineChartOptions}
         customCallbackFunc={this.customCallbackFunc}
         filters={[
@@ -82,7 +82,7 @@ class TopPerformingFormat extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  audienceDominantColorData: makeSelectAudienceDominantColor(),
+  topPerformingFormatData: makeSelectTopPerformingFormat(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)

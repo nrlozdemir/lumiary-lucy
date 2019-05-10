@@ -3,8 +3,10 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticVideoReleases } from 'Reducers/panoptic'
+import { chartCombineDataset } from 'Utils'
 
 import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
+import { videoReleasesData_DatasetOptions } from './options'
 
 class VideoReleasesBarChart extends Component {
   callBack = (data, moduleKey) => {
@@ -16,9 +18,22 @@ class VideoReleasesBarChart extends Component {
       videoReleasesData: { data, loading, error }
     } = this.props
 
+    const combineData = {
+      "labels": [
+        "S",
+        "M",
+        "T",
+        "W",
+        "T",
+        "F",
+        "S"
+      ],
+      "datasets": data
+    };
+
     return (
       <VideoReleasesBarChartModule
-        data={data}
+        data={chartCombineDataset(combineData, videoReleasesData_DatasetOptions)}
         moduleKey={'Panoptic/VideoReleasesBarChartModule'}
         title="Video Releases vs Engagement"
         action={this.callBack}

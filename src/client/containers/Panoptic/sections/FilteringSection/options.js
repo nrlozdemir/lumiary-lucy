@@ -1,29 +1,29 @@
 export const dropdownLists = {
   duration: [
-    {name: "0 - 15ms"},
-    {name: "15 - 30ms"},
-    {name: "30 - 45ms"},
-    {name: "45 - 60ms"},
+    { name: "0 - 15ms" },
+    { name: "15 - 30ms" },
+    { name: "30 - 45ms" },
+    { name: "45 - 60ms" },
   ],
   views: [
-    {name: "Views"},
-    {name: "Likes"},
-    {name: "Shares"},
-    {name: "Comments"}
+    { name: "Views" },
+    { name: "Likes" },
+    { name: "Shares" },
+    { name: "Comments" }
   ],
   socialMedia: [
-    {name: "Facebook"},
-    {name: "Instagram"},
-    {name: "Twitter"},
-    {name: "Snapchat"},
-    {name: "Youtube"},
-    {name: "Pinterest"}
+    { name: "Facebook" },
+    { name: "Instagram" },
+    { name: "Twitter" },
+    { name: "Snapchat" },
+    { name: "Youtube" },
+    { name: "Pinterest" }
   ],
   dateRange: [
-    {name: "Past 24 Hours"},
-    {name: "Past Week"},
-    {name: "Past Month"},
-    {name: "Past 3 Month"},
+    { name: "Past 24 Hours" },
+    { name: "Past Week" },
+    { name: "Past Month" },
+    { name: "Past 3 Month" },
   ],
 };
 
@@ -40,3 +40,32 @@ export const selectOptions = [
   { value: "strawberry", label: "Strawberry" },
   { value: "vanilla", label: "Vanilla" }
 ];
+
+export const doughnutData_DatasetOptions = [{
+  "backgroundColor": [
+    "#acb0be",
+    "#8562F3",
+    "#5292E5",
+    "#2FD7C4"
+  ],
+  "hoverBackgroundColor": [
+    "#acb0be",
+    "#8562F3",
+    "#5292E5",
+    "#2FD7C4"
+  ]
+}]
+
+export const stackedChartData_DatasetOptions = [{
+  "label": "0-15 seconds",
+  "backgroundColor": "#2FD7C4",
+}, {
+  "label": "15-30 seconds",
+  "backgroundColor": "#8562F3",
+}, {
+  "label": "30-45 seconds",
+  "backgroundColor": "#5292E5",
+}, {
+  "label": "45-60 seconds",
+  "backgroundColor": "#acb0be",
+}]
