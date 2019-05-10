@@ -42,6 +42,8 @@ function toSlug(str) {
 }
 
 function chartCombineDataset(data, options, globalOptions) {
+  if (!data || !data.datasets || !data.datasets.length) return {}
+
   return {
     ...data,
     ...globalOptions,
