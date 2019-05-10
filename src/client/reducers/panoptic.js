@@ -93,8 +93,10 @@ export const types = {
   GET_FLIPCARDS_DATA_ERROR: 'Panoptic/GET_FLIPCARDS_DATA_ERROR',
 
   GET_TOP_PERFORMING_FORMAT_DATA: 'Panoptic/GET_TOP_PERFORMING_FORMAT_DATA',
-  GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS: 'Panoptic/GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS',
-  GET_TOP_PERFORMING_FORMAT_DATA_ERROR: 'Panoptic/GET_TOP_PERFORMING_FORMAT_DATA_ERROR',
+  GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS:
+    'Panoptic/GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS',
+  GET_TOP_PERFORMING_FORMAT_DATA_ERROR:
+    'Panoptic/GET_TOP_PERFORMING_FORMAT_DATA_ERROR',
 }
 
 export const actions = {
@@ -102,12 +104,10 @@ export const actions = {
   getDataSuccess: (payload) => ({ type: types.GET_DATA_SUCCESS, payload }),
   getDataError: (error) => ({ type: types.GET_DATA_ERROR, error }),
 
-  getVideoReleasesData: (data) => {
-    return {
-      type: types.GET_VIDEO_RELEASES_DATA,
-      data,
-    }
-  },
+  getVideoReleasesData: (data) => ({
+    type: types.GET_VIDEO_RELEASES_DATA,
+    data,
+  }),
   getVideoReleasesDataSuccess: (payload) => ({
     type: types.GET_VIDEO_RELEASES_DATA_SUCCESS,
     payload,
@@ -117,12 +117,10 @@ export const actions = {
     error,
   }),
 
-  getColorTemperatureData: (data) => {
-    return {
-      type: types.GET_COLOR_TEMPERATURE_DATA,
-      data,
-    }
-  },
+  getColorTemperatureData: (data) => ({
+    type: types.GET_COLOR_TEMPERATURE_DATA,
+    data,
+  }),
   getColorTemperatureDataSuccess: (payload) => ({
     type: types.GET_COLOR_TEMPERATURE_DATA_SUCCESS,
     payload,
@@ -132,12 +130,10 @@ export const actions = {
     error,
   }),
 
-  getFilteringSectionData: (data) => {
-    return {
-      type: types.GET_FILTERING_SECTION_DATA,
-      data,
-    }
-  },
+  getFilteringSectionData: (data) => ({
+    type: types.GET_FILTERING_SECTION_DATA,
+    data,
+  }),
   getFilteringSectionDataSuccess: (payload) => ({
     type: types.GET_FILTERING_SECTION_DATA_SUCCESS,
     payload,
@@ -147,12 +143,10 @@ export const actions = {
     error,
   }),
 
-  getPacingCardData: (data) => {
-    return {
-      type: types.GET_PACING_CARD_DATA,
-      data,
-    }
-  },
+  getPacingCardData: (data) => ({
+    type: types.GET_PACING_CARD_DATA,
+    data,
+  }),
   getPacingCardDataSuccess: (payload) => ({
     type: types.GET_PACING_CARD_DATA_SUCCESS,
     payload,
@@ -162,12 +156,10 @@ export const actions = {
     error,
   }),
 
-  getCompareSharesData: (data) => {
-    return {
-      type: types.GET_COMPARE_SHARES_DATA,
-      data,
-    }
-  },
+  getCompareSharesData: (data) => ({
+    type: types.GET_COMPARE_SHARES_DATA,
+    data,
+  }),
   getCompareSharesDataSuccess: (payload) => ({
     type: types.GET_COMPARE_SHARES_DATA_SUCCESS,
     payload,
@@ -284,12 +276,10 @@ export const actions = {
     error,
   }),
 
-  getFlipCardsData: (data) => {
-    return {
-      type: types.GET_FLIPCARDS_DATA,
-      data,
-    }
-  },
+  getFlipCardsData: (data) => ({
+    type: types.GET_FLIPCARDS_DATA,
+    data,
+  }),
   getFlipCardsDataSuccess: (payload) => ({
     type: types.GET_FLIPCARDS_DATA_SUCCESS,
     payload,
@@ -299,12 +289,10 @@ export const actions = {
     error,
   }),
 
-  getTopPerformingFormatData: (data) => {
-    return {
-      type: types.GET_TOP_PERFORMING_FORMAT_DATA,
-      data,
-    }
-  },
+  getTopPerformingFormatData: (data) => ({
+    type: types.GET_TOP_PERFORMING_FORMAT_DATA,
+    data,
+  }),
   getTopPerformingFormatDataSuccess: (payload) => ({
     type: types.GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS,
     payload,
@@ -312,7 +300,7 @@ export const actions = {
   getTopPerformingFormatDataError: (error) => ({
     type: types.GET_TOP_PERFORMING_FORMAT_DATA_ERROR,
     error,
-  })
+  }),
 }
 
 export const initialState = fromJS({
@@ -791,8 +779,7 @@ export const makeSelectAudienceDominantColor = () =>
     (substate) => substate.toJS()
   )
 
-const selectFlipCardsDomain = (state) =>
-  state.Panoptic.get('flipCardsData')
+const selectFlipCardsDomain = (state) => state.Panoptic.get('flipCardsData')
 
 export const makeSelectFlipCards = () =>
   createSelector(

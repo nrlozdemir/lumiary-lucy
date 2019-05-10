@@ -35,7 +35,7 @@ class PanopticColorTemperature extends React.Component {
             placeHolder: 'Color Tempature',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'PCT-wds',
             placeHolder: 'Date',
           },

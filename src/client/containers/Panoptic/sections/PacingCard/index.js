@@ -49,12 +49,12 @@ class PacingCard extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'PCT-asd',
             placeHolder: 'Engagement',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'PCT-wds',
             placeHolder: 'Date',
           },

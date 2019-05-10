@@ -92,7 +92,7 @@ class PerformanceComparison extends React.Component {
             placeHolder: 'Pacing',
           },
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'RPC-aqax',
             placeHolder: 'Engagement',
           },
