@@ -34,7 +34,6 @@ class GenderSection extends React.Component {
         }
       })
     }
-
     return (
       <Module
         moduleKey={'Audience/Gender'}
@@ -81,7 +80,10 @@ class GenderSection extends React.Component {
               <HorizontalStackedBarChart
                 width={1200}
                 height={310}
-                barData={data}
+                barData={{
+                  labels: ['Slowest', 'Slow', 'Medium', 'Fast'],
+                  datasets: data.datasets,
+                }}
                 options={barChartOptions}
               />
             </div>
