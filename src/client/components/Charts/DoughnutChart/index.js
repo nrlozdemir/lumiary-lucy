@@ -105,6 +105,9 @@ const DoughnutChart = (props) => {
       },
     ]
   }
+  if (!data) {
+    return null
+  }
 
   return (
     <React.Fragment>
@@ -124,10 +127,16 @@ const DoughnutChart = (props) => {
                 labels: data.labels,
                 datasets: [
                   {
-                    data: data.datasets[0].data,
-                    backgroundColor: data.datasets[0].backgroundColor,
+                    data: data && data.datasets ? data.datasets[0].data : null,
+                    backgroundColor:
+                      data && data.datasets
+                        ? data.datasets[0].backgroundColor
+                        : null,
                     borderColor: themes.moduleBackground,
-                    hoverBackgroundColor: data.datasets[0].hoverBackgroundColor,
+                    hoverBackgroundColor:
+                      data && data.datasets
+                        ? data.datasets[0].hoverBackgroundColor
+                        : null,
                   },
                 ],
               }}

@@ -11,10 +11,6 @@ import style from './style.scss'
 import classnames from 'classnames'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
-const datasetKeyProvider = () => {
-  return randomKey(5)
-}
-
 const barPlugins = [
   {
     beforeDraw: function(chart, easing) {
@@ -53,7 +49,6 @@ const barPlugins = [
 ]
 
 const BarAndDoughnutChartModule = ({
-  data,
   moduleKey,
   title,
   action,
@@ -64,6 +59,8 @@ const BarAndDoughnutChartModule = ({
   reverse,
   barCustoms,
   doughnutCustoms,
+  doughnutData,
+  stackedChartData,
 }) => {
   return (
     <ThemeContext.Consumer>
@@ -78,13 +75,12 @@ const BarAndDoughnutChartModule = ({
           <div
             className={classnames(style.container, reverse && style.reverse)}
           >
-            {data && data.stackedChartData && (
+            {stackedChartData && (
               <div className={style.chartContainer}>
                 <Bar
                   width={barCustoms.width}
                   height={barCustoms.height}
-                  data={data.stackedChartData}
-                  datasetKeyProvider={datasetKeyProvider}
+                  data={stackedChartData}
                   key={Math.random()}
                   options={{
                     ...barCustoms.options,
@@ -129,10 +125,11 @@ const BarAndDoughnutChartModule = ({
                 />
               </div>
             )}
-            {data && data.doughnutData && (
+            {doughnutData && (
               <div className={style.chartContainer}>
                 <DoughnutChart
-                  data={data.doughnutData}
+                  key={Math.random()}
+                  data={doughnutData}
                   width={doughnutCustoms.width}
                   height={doughnutCustoms.height}
                   options={{
@@ -157,7 +154,6 @@ const BarAndDoughnutChartModule = ({
 }
 
 BarAndDoughnutChartModule.propTypes = {
-  data: PropTypes.any.isRequired,
   moduleKey: PropTypes.string.isRequired,
   title: PropTypes.string,
   subTitle: PropTypes.string,

@@ -43,92 +43,69 @@ const TopVideosCard = ({
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
-        <React.Fragment>
-          <div className="grid-collapse">
-            <div
-              className={barChartContainer}
-              style={{
-                backgroundColor: colors.moduleBackground,
-                color: colors.textColor,
-                boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
-              }}
-            >
-              <div className={barChartHeaderClass}>
-                <div className="col-4 text-bold">
-                  <p className={headerTitleClass}>
-                    Top Videos Over Time By Competitor
-                  </p>
-                </div>
-                <div className="col-8">
-                  <div className={style.selects}>
-                    <SelectFilters
-                      handleSelectFilters={handleSelectFilters}
-                      selectClasses={selectClasses}
-                      selectResolution={selectResolution}
-                      selectResolutionShow={true}
-                    />
-                  </div>
-                  <div className="clearFix" />
-                </div>
+        <div className="grid-collapse">
+          <div
+            className={barChartContainer}
+            style={{
+              backgroundColor: colors.moduleBackground,
+              color: colors.textColor,
+              boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
+            }}
+          >
+            <div className={barChartHeaderClass}>
+              <div className="col-4 text-bold">
+                <p className={headerTitleClass}>
+                  Top Videos Over Time By Competitor
+                </p>
               </div>
-              <div className="clearFix" />
+              <div className="col-8">
+                <div className={style.selects}>
+                  <SelectFilters
+                    handleSelectFilters={handleSelectFilters}
+                    selectClasses={selectClasses}
+                    selectResolution={selectResolution}
+                    selectResolutionShow={true}
+                  />
+                </div>
+                <div className="clearFix" />
+              </div>
             </div>
-          </div>
-          <div className="col-12">
-            <StackedBarChart
-              height={200}
-              barData={stackedChartData}
-              datasetKeyProvider={datasetKeyProvider()}
-            />
-          </div>
-          <div className="col-12">
-            <div className={referencesClass}>
-              <div className={style.referenceItem}>
-                <span className="bg-cool-blue" />
-                Facebook
-              </div>
-              <div className={style.referenceItem}>
-                <span className="bg-lighter-purple" />
-                Instagram
-              </div>
-              <div className={style.referenceItem}>
-                <span className="bg-coral-pink" />
-                Twitter
-              </div>
-              <div className={style.referenceItem}>
-                <span
-                  className="bg-cool-grey"
-                  style={{ backgroundColor: '#acb0be' }}
-                />
-                YouTube
-              </div>
-              <div className="col-12">
-                <div className={referencesClass}>
-                  <div className={style.referenceItem}>
-                    <span className="bg-cool-blue" />
-                    Facebook
-                  </div>
-                  <div className={style.referenceItem}>
-                    <span className="bg-lighter-purple" />
-                    Instagram
-                  </div>
-                  <div className={style.referenceItem}>
-                    <span className="bg-coral-pink" />
-                    Twitter
-                  </div>
-                  <div className={style.referenceItem}>
-                    <span className="bg-cool-grey" />
-                    YouTube
-                  </div>
-                  <div className={style.referenceItem}>
-                    <span className="bg-dusk" />
-                    Pinterest
-                  </div>
+            <div className="col-12">
+              <StackedBarChart
+                height={200}
+                barData={stackedChartData}
+                datasetKeyProvider={datasetKeyProvider()}
+              />
+            </div>
+            <div className="col-12">
+              <div className={referencesClass}>
+                <div className={style.referenceItem}>
+                  <span className="bg-cool-blue" />
+                  Facebook
+                </div>
+                <div className={style.referenceItem}>
+                  <span className="bg-lighter-purple" />
+                  Instagram
+                </div>
+                <div className={style.referenceItem}>
+                  <span className="bg-coral-pink" />
+                  Twitter
+                </div>
+                <div className={style.referenceItem}>
+                  <span
+                    className="bg-cool-grey"
+                    style={{ backgroundColor: '#acb0be' }}
+                  />
+                  YouTube
+                </div>
+                <div className={style.referenceItem}>
+                  <span className="bg-dusk" />
+                  Pinterest
                 </div>
               </div>
             </div>
           </div>
-        </React.Fragment>
+        </div>
       )}
     </ThemeContext.Consumer>
   )

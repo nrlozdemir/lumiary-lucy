@@ -3,7 +3,6 @@ import { Pie } from 'react-chartjs-2'
 import style from './style.scss'
 
 const PacingPieChart = ({ data }) => {
-  console.log(data)
   return (
     <div className={style.pieChartContainer}>
       <Pie

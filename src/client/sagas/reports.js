@@ -105,6 +105,7 @@ function* getVideoComparisonData() {
 function* getPerformanceComparisonData() {
   try {
     const payload = yield call(getReportsApi)
+
     let shuffleData = payload.performanceComparisonData
     shuffleData.doughnutData.datasets[0].data = _.shuffle(
       shuffleData.doughnutData.datasets[0].data

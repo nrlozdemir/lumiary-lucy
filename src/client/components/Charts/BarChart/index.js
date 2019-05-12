@@ -4,7 +4,6 @@ import { barDurationOptions } from './options'
 import { withTheme } from 'ThemeContext/withTheme'
 
 const BarChart = (props) => {
-  console.log(props)
   const {
     barDurationData,
     height = 290,

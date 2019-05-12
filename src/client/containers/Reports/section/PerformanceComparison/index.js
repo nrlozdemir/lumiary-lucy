@@ -62,6 +62,7 @@ class PerformanceComparison extends React.Component {
     let doughnutData
     if (data && data.doughnutData) {
       doughnutData = data.doughnutData
+      doughnutData.label = ['Red', 'Green']
       doughnutData.datasets[0].backgroundColor = ['#5292E5', '#2FD7C4']
     }
 
@@ -70,22 +71,15 @@ class PerformanceComparison extends React.Component {
       stackedChartData = data.stackedChartData
       // "backgroundColor": "#5292E5",
       // "backgroundColor": "#2FD7C4",
+      stackedChartData.labels = ['Slowest', 'Slow', 'Medium', 'Fast']
       stackedChartData.datasets[0].backgroundColor = '#5292E5'
       stackedChartData.datasets[1].backgroundColor = '#2FD7C4'
     }
-    const dataset = {
-      doughnutData: {
-        labels: ['Red', 'Green'],
-        datasets: data.doughnutData.datasets,
-      },
-      stackedChartData: {
-        labels: ['Slowest', 'Slow', 'Medium', 'Fast'],
-        datasets: data.stackedChartData.datasets,
-      },
-    }
+
     return (
       <BarAndDoughnutChartModule
-        data={dataset}
+        doughnutData={{ ...doughnutData }}
+        stackedChartData={{ ...stackedChartData }}
         moduleKey={'Reports/PerformanceComparison'}
         title="Property Performance Comparison"
         action={this.callBack}
