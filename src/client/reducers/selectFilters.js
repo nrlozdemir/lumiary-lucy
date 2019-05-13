@@ -27,9 +27,27 @@ export const actions = {
   }),
 }
 
+export const defaultFilters = {
+  metric: 'views',
+  platform: 'all',
+  aspectRatio: '16:9',
+  resolution: '4K',
+  frameRate: '24',
+  duration: '0-15',
+  pacing: 'fast',
+  videoFormat: 'liveAction',
+  property: 'aspectRatio',
+  audienceAge: '10-',
+  audienceGender: 'male',
+  talentAge: '10-',
+  talentGender: 'male',
+  colorTempature: 'happy-sad',
+  dateRange: '24hours',
+}
+
 export const initialState = fromJS({
   options: {
-    engagement: [
+    metric: [
       { value: 'views', label: 'Views' },
       { value: 'likes', label: 'Likes' },
       { value: 'shares', label: 'Shares' },
@@ -79,13 +97,13 @@ export const initialState = fromJS({
       { value: 'stopMotion', label: 'Stop Motion' },
       { value: 'animation', label: 'Animation' },
     ],
-    videoProperty: [
-      { value: 'aspect-ratio', label: 'Aspect Ratio' },
+    property: [
+      { value: 'aspectRatio', label: 'Aspect Ratio' },
       { value: 'duration', label: 'Duration' },
       { value: 'format', label: 'Format' },
-      { value: 'frame-rate', label: 'Frame Rate' },
+      { value: 'frameRate', label: 'Frame Rate' },
       { value: 'pacing', label: 'Pacing' },
-      { value: 'resolution', label: 'Resolution' }
+      { value: 'resolution', label: 'Resolution' },
     ],
     audienceAge: [
       { value: '10-', label: '10 and under' },
@@ -121,7 +139,7 @@ export const initialState = fromJS({
       { value: 'cool-warm', label: 'Cool / Warm' },
       { value: 'natural-saynthetic', label: 'Natural / Saynthetic' },
     ],
-    timeRange: [
+    dateRange: [
       { value: '24hours', label: 'Today' },
       { value: 'week', label: 'Past Week' },
       { value: 'month', label: 'Past Month' },
@@ -130,23 +148,7 @@ export const initialState = fromJS({
     ],
   },
   values: {},
-  defaults: {
-    engagement: 'views',
-    platform: 'all',
-    aspectRatio: '16:9',
-    resolution: '4K',
-    frameRate: '24',
-    duration: '0-15',
-    pacing: 'fast',
-    videoFormat: 'liveAction',
-    videoProperty: 'aspect-ratio',
-    audienceAge: '10-',
-    audienceGender: 'male',
-    talentAge: '10-',
-    talentGender: 'male',
-    colorTempature: 'happy-sad',
-    timeRange: '24hours',
-  },
+  defaults: defaultFilters,
 })
 
 const selectFiltersReducer = (state = initialState, action) => {

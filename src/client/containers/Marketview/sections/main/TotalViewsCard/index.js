@@ -39,12 +39,12 @@ class TotalViewsChart extends React.Component {
             placeHolder: 'Platform',
           },
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'Mw-sad',
             placeHolder: 'Engagement',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'Mw-wds',
             placeHolder: 'Date',
           },

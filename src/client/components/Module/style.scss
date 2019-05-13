@@ -1,11 +1,14 @@
 .moduleContainer {
-  position: relative;
   background-color: $color-dark-grey-blue;
   font-family: $font-family-ClanOT;
   margin-top: 35px;
   margin-bottom: 35px;
   // position: relative;
   // overflow: hidden;
+  
+  &--empty {
+    position: relative;
+  }
 
   .moduleContainerHeader {
     display: flex;

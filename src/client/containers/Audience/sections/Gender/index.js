@@ -41,17 +41,17 @@ class GenderSection extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'videoProperty',
+            type: 'property',
             selectKey: 'AG-asd',
             placeHolder: 'Resolution',
           },
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'AG-ads',
             placeHolder: 'Engagement',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'AG-wds',
             placeHolder: 'Date',
           },

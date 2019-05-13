@@ -25,7 +25,7 @@ class ChangeOverTime extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'ACOT-asd',
             placeHolder: 'Engagement',
           },
@@ -35,7 +35,7 @@ class ChangeOverTime extends React.Component {
             placeHolder: 'Platforms',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'ACOT-wds',
             placeHolder: 'Date',
           },

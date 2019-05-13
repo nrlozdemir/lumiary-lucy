@@ -3,7 +3,11 @@ import { compose } from 'redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { actions, makeSelectSelectFilters } from 'Reducers/selectFilters'
+import {
+  actions,
+  makeSelectSelectFilters,
+  defaultFilters,
+} from 'Reducers/selectFilters'
 import _ from 'lodash'
 import cx from 'classnames'
 import style from './style.scss'
@@ -41,6 +45,12 @@ export class Module extends React.Component {
     })
   }
 
+  changeInfoStatus = () => {
+    this.setState({
+      infoShow: !this.state.infoShow,
+    })
+  }
+
   render() {
     const {
       children,
@@ -49,15 +59,20 @@ export class Module extends React.Component {
       isEmpty,
       containerClass,
     } = this.props
+
     const { infoShow } = this.state
 
     const moduleContainer = cx(
       'shadow-1 grid-container col-12',
       style.moduleContainer,
-      containerClass
+      containerClass,
+      {
+        [style['moduleContainer--empty']]: isEmpty,
+      }
     )
 
     const referencesClass = cx('font-secondary-second', style.references)
+
     const moduleContainerBody = cx(style.moduleContainerBody, bodyClass, {
       [style['moduleContainerBody--empty']]: isEmpty,
     })

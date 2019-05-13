@@ -37,13 +37,13 @@ class AgeSlider extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'engagementOption',
             placeHolder: 'Engagement',
           },
           {
-            type: 'timeRange',
-            selectKey: 'timeRangeOption',
+            type: 'dateRange',
+            selectKey: 'dateRangeOption',
             placeHolder: 'Date',
           },
         ]}

@@ -25,7 +25,7 @@ class DominantColor extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'ADC-was',
             placeHolder: 'Engagement',
           },
@@ -35,7 +35,7 @@ class DominantColor extends React.Component {
             placeHolder: 'Platforms',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'ADC-wds',
             placeHolder: 'Date',
           },

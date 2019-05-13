@@ -91,9 +91,9 @@ export class Time extends React.Component {
           action={this.getSimilarProperties}
           filters={[
             {
-              type: 'timeRange',
-              selectKey: 'timeRange',
-              placeHolder: 'timeRange',
+              type: 'dateRange',
+              selectKey: 'dateRange',
+              placeHolder: 'dateRange',
             },
           ]}
         />
@@ -107,9 +107,9 @@ export class Time extends React.Component {
           action={this.getCompetitorTopVideos}
           filters={[
             {
-              type: 'videoProperty',
-              selectKey: 'videoProperty',
-              placeHolder: 'videoProperty',
+              type: 'property',
+              selectKey: 'property',
+              placeHolder: 'property',
             },
           ]}
           references={[

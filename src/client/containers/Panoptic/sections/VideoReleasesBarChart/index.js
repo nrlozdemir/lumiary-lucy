@@ -44,7 +44,7 @@ class VideoReleasesBarChart extends Component {
             placeHolder: 'Platform',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'PVR-wds',
             placeHolder: 'Date',
           }]}

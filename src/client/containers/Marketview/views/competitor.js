@@ -97,19 +97,19 @@ export class Competitor extends React.Component {
             action={this.getCompetitorTopVideos}
             filters={[
               {
-                type: 'videoProperty',
-                selectKey: 'videoProperty',
-                placeHolder: 'videoProperty',
+                type: 'property',
+                selectKey: 'property',
+                placeHolder: 'property',
               },
               {
-                type: 'engagement',
+                type: 'metric',
                 selectKey: 'engagement',
                 placeHolder: 'engagement',
               },
               {
-                type: 'timeRange',
-                selectKey: 'timeRange',
-                placeHolder: 'timeRange',
+                type: 'dateRange',
+                selectKey: 'dateRange',
+                placeHolder: 'dateRange',
               },
             ]}
             references={[
@@ -142,9 +142,9 @@ export class Competitor extends React.Component {
             action={this.getSimilarProperties}
             filters={[
               {
-                type: 'timeRange',
-                selectKey: 'timeRange',
-                placeHolder: 'timeRange',
+                type: 'dateRange',
+                selectKey: 'dateRange',
+                placeHolder: 'dateRange',
               },
             ]}
           />
@@ -158,9 +158,9 @@ export class Competitor extends React.Component {
             action={this.getTopPerformingPropertiesByCompetitors}
             filters={[
               {
-                type: 'videoProperty',
-                selectKey: 'videoProperty',
-                placeHolder: 'videoProperty',
+                type: 'property',
+                selectKey: 'property',
+                placeHolder: 'property',
               },
             ]}
             references={[

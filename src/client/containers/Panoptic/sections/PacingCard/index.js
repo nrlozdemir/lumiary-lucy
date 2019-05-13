@@ -4,18 +4,14 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticPacingCard } from 'Reducers/panoptic'
 import Module from 'Components/Module'
-import { chartCombineDataset } from 'Utils'
 
 import classnames from 'classnames'
 import HorizontalStackedBarChart from 'Components/Charts/HorizontalStackedBarChart'
 import { barChartOptions } from './options'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
-import style from './style.scss'
+import { isEmpty } from 'lodash'
 
-import {
-  horizontalStackedBarData_DatasetOptions,
-  stadiumData_DatasetOptions,
-} from './options'
+import style from './style.scss'
 
 const pacingCardContainer = classnames(
   'shadow-1 col-12 mt-72',
@@ -31,30 +27,21 @@ class PacingCard extends React.Component {
   render() {
     const {
       pacingChartData: {
+        data,
         data: { horizontalStackedBarData, stadiumData },
         loading,
         error,
       },
     } = this.props
 
-    const combineHorizontalStackedBarData = {
-      labels: ['Live Action', 'Stop Motion', 'Cinemagraph', 'Animation'],
-      datasets: horizontalStackedBarData,
-    }
-
-    const combineStadiumData = stadiumData
-      ? stadiumData.map((value, index) => ({
-          ...value,
-          ...stadiumData_DatasetOptions[index],
-        }))
-      : []
-    const isEmpty =
-      !!horizontalStackedBarData &&
-      !!stadiumData &&
-      horizontalStackedBarData.datasets.every((dataset) =>
-        dataset.data.every((data) => data === 0)
-      ) &&
-      stadiumData.every((data) => data.value === 0)
+    const hasNoData =
+      (!!horizontalStackedBarData &&
+        !!stadiumData &&
+        horizontalStackedBarData.datasets.every((dataset) =>
+          dataset.data.every((data) => data === 0)
+        ) &&
+        stadiumData.every((data) => data.value === 0)) ||
+      isEmpty(data)
 
     return (
       <Module
@@ -63,17 +50,17 @@ class PacingCard extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'PCT-asd',
             placeHolder: 'Engagement',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'PCT-wds',
             placeHolder: 'Date',
           },
         ]}
-        isEmpty={isEmpty}
+        isEmpty={hasNoData}
       >
         <div className={style.pacingCardInner}>
           <div className={style.pacingCardInnerItem}>
@@ -81,37 +68,13 @@ class PacingCard extends React.Component {
               <HorizontalStackedBarChart
                 width={500}
                 height={340}
-                barData={{
-                  labels: horizontalStackedBarData.labels,
-                  datasets: horizontalStackedBarData.datasets.map(
-                    (data, index) => {
-                      const indexValues = data.data.map((v, i) => {
-                        return horizontalStackedBarData.datasets.map(
-                          (d) => d.data[i]
-                        )
-                      })
-
-                      return {
-                        ...data,
-                        data: data.data.map((value, i) => {
-                          const totalValue = indexValues[i].reduce(
-                            (accumulator, currentValue) =>
-                              accumulator + currentValue
-                          )
-                          return parseFloat(
-                            (value / (totalValue / 100)).toFixed(2)
-                          )
-                        }),
-                      }
-                    }
-                  ),
-                }}
+                barData={horizontalStackedBarData}
                 options={barChartOptions}
               />
             )}
           </div>
           <div className={style.pacingCardInnerItem}>
-            {stadiumData && <StadiumChart data={combineStadiumData} />}
+            <StadiumChart data={stadiumData} />
           </div>
         </div>
       </Module>
