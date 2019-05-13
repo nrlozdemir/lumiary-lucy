@@ -16,8 +16,9 @@ import {
 } from './options'
 
 class PanopticFilteringSection extends Component {
-  callBack = (data, moduleKey) => {
-    this.props.getFilteringSectionData(data)
+  callBack = (data) => {
+    const { getFilteringSectionData } = this.props
+    getFilteringSectionData(data)
   }
 
   render() {
@@ -51,27 +52,27 @@ class PanopticFilteringSection extends Component {
         action={this.callBack}
         filters={[
           {
-            type: 'videoProperty',
-            selectKey: 'PFS-dsad',
-            placeHolder: 'videoProperty',
+						type: 'property',
+						selectKey: 'PFS-dsad',
+						placeHolder: 'property',
             defaultValue: 'duration',
           },
           {
-            type: 'engagement',
-            selectKey: 'PFS-asdwda',
-            placeHolder: 'Engagement',
+						type: 'metric',
+						selectKey: 'PFS-asdwda',
+						placeHolder: 'Engagement',
             defaultValue: 'views',
           },
           {
-            type: 'platform',
-            selectKey: 'PFS-dwdf',
-            placeHolder: 'Platform',
+						type: 'platform',
+						selectKey: 'PFS-dwdf',
+						placeHolder: 'Platform',
             defaultValue: 'all',
           },
           {
-            type: 'timeRange',
-            selectKey: 'PFS-wxcvs',
-            placeHolder: 'Date',
+						type: 'dateRange',
+						selectKey: 'PFS-wxcvs',
+						placeHolder: 'Date',
             defaultValue: 'month',
           },
         ]}

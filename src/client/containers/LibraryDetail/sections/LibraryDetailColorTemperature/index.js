@@ -34,7 +34,7 @@ class LibraryDetailColorTemperature extends React.Component {
         ]}
         filters={[
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'ACT-wds',
             placeHolder: 'Date',
           },

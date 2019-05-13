@@ -87,7 +87,7 @@ class ColorComparison extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'RVC-swda',
             placeHolder: 'Date',
           },
