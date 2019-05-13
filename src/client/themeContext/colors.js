@@ -118,6 +118,10 @@ const dark = {
   themeControlListBorder: '#21243b',
   // theme control dropdown values
   daySelectionBorderColor: '#545b79',
+
+  chartPointBackgroundColor: '#ffffff',
+  chartPointBorderColor: '#ffffff',
+  chartBackgroundColor: 'rgba(255, 255, 255, 0.4)',
 }
 
 const light = {
@@ -241,6 +245,10 @@ const light = {
   themeControlListBorder: '#e8ecf0',
   // theme control dropdown values
   daySelectionBorderColor: '#c6c9d7',
+
+  chartPointBackgroundColor: '#505050',
+  chartPointBorderColor: '#505050',
+  chartBackgroundColor: 'rgba(172, 176, 190, 0.4)',
 }
 
 const themes = {

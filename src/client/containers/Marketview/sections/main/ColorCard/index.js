@@ -66,6 +66,7 @@ class ColorCard extends Component {
             <div className={style.bubbleChart}>
               {bubbleChartData.length > 0 && (
                 <BubbleChart
+                  maximumIterationCount={1000}
                   size={[800, 600]}
                   fromPercentages={true}
                   options={{ toolTipWidth: 200, toolTipHeight: 75 }}

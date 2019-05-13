@@ -124,6 +124,7 @@ class Performance extends React.Component {
               <div className={'col-4'}>
                 <div className={style.bubbleCont}>
                   <BubbleChart
+                    maximumIterationCount={1000}
                     size={[800, 600]}
                     fromPercentages={true}
                     options={{ toolTipWidth: 200, toolTipHeight: 75 }}
@@ -171,6 +172,7 @@ class Performance extends React.Component {
               <div className={'col-4'}>
                 <div className={style.bubbleCont}>
                   <BubbleChart
+                    maximumIterationCount={1000}
                     size={[800, 600]}
                     fromPercentages={true}
                     options={{ toolTipWidth: 200, toolTipHeight: 75 }}
@@ -218,6 +220,7 @@ class Performance extends React.Component {
               <div className={'col-4'}>
                 <div className={style.bubbleCont}>
                   <BubbleChart
+                    maximumIterationCount={1000}
                     size={[800, 600]}
                     fromPercentages={true}
                     options={{ toolTipWidth: 200, toolTipHeight: 75 }}

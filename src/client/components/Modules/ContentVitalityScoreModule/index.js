@@ -73,7 +73,10 @@ const ContentVitalityScoreModule = ({
                   width={1140}
                   height={291}
                   backgroundColor={colors.chartBackground}
-                  dataSet={data}
+                  dataSet={{
+                    labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                    datasets: data.datasets,
+                  }}
                   removeTooltip={removeTooltip}
                   removePointRadius={removePointRadius}
                   xAxesFlatten={xAxesFlatten}

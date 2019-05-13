@@ -6,6 +6,8 @@ import panopticMockData from 'Api/mocks/panopticMock.json'
 import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 
+import { radarChartCalculate } from 'Utils'
+
 import { ajax } from 'Utils/api'
 
 import _ from 'lodash'
@@ -50,7 +52,9 @@ function* getColorTemperatureData() {
 function* getFilteringSectionData() {
   try {
     const payload = yield call(getPanopticDataApi)
-    yield put(actions.getFilteringSectionDataSuccess(payload.verticalStackedChartData))
+    yield put(
+      actions.getFilteringSectionDataSuccess(payload.verticalStackedChartData)
+    )
   } catch (err) {
     yield put(actions.getFilteringSectionDataError(err))
   }
@@ -136,14 +140,14 @@ function* getPacingCardData({ data }) {
 function* getCompareSharesData() {
   try {
     const payload = yield call(getPanopticDataApi)
-    const shuffleData = payload.compareSharesData
-    shuffleData[0].datas.datasets[0].data = _.shuffle(
-      shuffleData[0].datas.datasets[0].data
-    )
-    shuffleData[1].datas.datasets[0].data = _.shuffle(
-      shuffleData[1].datas.datasets[0].data
-    )
-
+    let shuffleData = payload.compareSharesData
+    shuffleData[0].datas.labels.forEach((item, index) => {
+      shuffleData[0].datas.labels[index].count = _.random(10, 90)
+    })
+    shuffleData[1].datas.labels.forEach((item, index) => {
+      shuffleData[1].datas.labels[index].count = _.random(10, 90)
+    })
+    shuffleData = radarChartCalculate(shuffleData)
     yield put(actions.getCompareSharesDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getCompareSharesDataError(err))
@@ -239,12 +243,13 @@ function* getAudienceDominantColorData() {
   try {
     const payload = yield call(getAudienceDataApi)
     let shuffleData = payload.chartData
-    shuffleData[0].datas.datasets[0].data = _.shuffle(
-      shuffleData[0].datas.datasets[0].data
-    )
-    shuffleData[1].datas.datasets[0].data = _.shuffle(
-      shuffleData[1].datas.datasets[0].data
-    )
+    shuffleData[0].datas.labels.forEach((item, index) => {
+      shuffleData[0].datas.labels[index].count = _.random(10, 90)
+    })
+    shuffleData[1].datas.labels.forEach((item, index) => {
+      shuffleData[1].datas.labels[index].count = _.random(10, 90)
+    })
+    shuffleData = radarChartCalculate(shuffleData)
     yield put(actions.getAudienceDominantColorDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getAudienceDominantColorDataError(err))
@@ -290,7 +295,9 @@ function* getFlipCardsData() {
 function* getTopPerformingFormatData() {
   try {
     const payload = yield call(getPanopticDataApi)
-    yield put(actions.getTopPerformingFormatDataSuccess(payload.topPerformingFormatData))
+    yield put(
+      actions.getTopPerformingFormatDataSuccess(payload.topPerformingFormatData)
+    )
   } catch (err) {
     yield put(actions.getTopPerformingFormatDataError(err))
   }

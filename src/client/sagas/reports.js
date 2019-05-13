@@ -6,6 +6,8 @@ import reportsMockData from 'Api/mocks/reportsMock.json'
 import { randomKey } from 'Utils/index'
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
+import { radarChartCalculate } from 'Utils'
+
 function getGeneratedReportApi() {
   //this will use ajax function in utils/api when real data is provided
   return axios.get('/').then((res) => generatedReportMockData)
@@ -126,12 +128,13 @@ function* getColorComparisonData() {
   try {
     const payload = yield call(getReportsApi)
     let shuffleData = payload.colorComparisonData
-    shuffleData[0].datas.datasets[0].data = _.shuffle(
-      shuffleData[0].datas.datasets[0].data
-    )
-    shuffleData[1].datas.datasets[0].data = _.shuffle(
-      shuffleData[1].datas.datasets[0].data
-    )
+    shuffleData[0].datas.labels.forEach((item, index) => {
+      shuffleData[0].datas.labels[index].count = _.random(10, 90)
+    })
+    shuffleData[1].datas.labels.forEach((item, index) => {
+      shuffleData[1].datas.labels[index].count = _.random(10, 90)
+    })
+    shuffleData = radarChartCalculate(shuffleData)
     yield put(actions.getColorComparisonDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getColorComparisonDataError(err))

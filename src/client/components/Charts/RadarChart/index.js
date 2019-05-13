@@ -46,9 +46,14 @@ const plugins = [
 const RadarChart = (props) => {
   const { data, width = 430, height = 430 } = props
   const themes = props.themeContext.colors
+  let parsedData = data
+  parsedData.datasets[0].backgroundColor = themes.chartBackgroundColor
+  parsedData.datasets[0].pointBackgroundColor = themes.chartPointBackgroundColor
+  parsedData.datasets[0].pointBorderColor = themes.chartPointBorderColor
+
   return (
     <Radar
-      data={data}
+      data={parsedData}
       width={width}
       height={height}
       plugins={plugins}
@@ -59,7 +64,7 @@ const RadarChart = (props) => {
           display: false,
         },
         layout: {
-          padding: 30
+          padding: 30,
         },
         tooltips: {
           backgroundColor: '#fff',
@@ -108,6 +113,8 @@ const RadarChart = (props) => {
             fontSize: 10,
             display: true,
             maxTicksLimit: 5,
+            min: 0,
+            max: 100,
             beginAtZero: true,
             stepSize: 25,
           },
