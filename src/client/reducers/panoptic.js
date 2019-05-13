@@ -91,6 +91,12 @@ export const types = {
   GET_FLIPCARDS_DATA: 'Panoptic/GET_FLIPCARDS_DATA',
   GET_FLIPCARDS_DATA_SUCCESS: 'Panoptic/GET_FLIPCARDS_DATA_SUCCESS',
   GET_FLIPCARDS_DATA_ERROR: 'Panoptic/GET_FLIPCARDS_DATA_ERROR',
+
+  GET_TOP_PERFORMING_FORMAT_DATA: 'Panoptic/GET_TOP_PERFORMING_FORMAT_DATA',
+  GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS:
+    'Panoptic/GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS',
+  GET_TOP_PERFORMING_FORMAT_DATA_ERROR:
+    'Panoptic/GET_TOP_PERFORMING_FORMAT_DATA_ERROR',
 }
 
 export const actions = {
@@ -98,12 +104,10 @@ export const actions = {
   getDataSuccess: (payload) => ({ type: types.GET_DATA_SUCCESS, payload }),
   getDataError: (error) => ({ type: types.GET_DATA_ERROR, error }),
 
-  getVideoReleasesData: (data) => {
-    return {
-      type: types.GET_VIDEO_RELEASES_DATA,
-      data,
-    }
-  },
+  getVideoReleasesData: (data) => ({
+    type: types.GET_VIDEO_RELEASES_DATA,
+    data,
+  }),
   getVideoReleasesDataSuccess: (payload) => ({
     type: types.GET_VIDEO_RELEASES_DATA_SUCCESS,
     payload,
@@ -113,12 +117,10 @@ export const actions = {
     error,
   }),
 
-  getColorTemperatureData: (data) => {
-    return {
-      type: types.GET_COLOR_TEMPERATURE_DATA,
-      data,
-    }
-  },
+  getColorTemperatureData: (data) => ({
+    type: types.GET_COLOR_TEMPERATURE_DATA,
+    data,
+  }),
   getColorTemperatureDataSuccess: (payload) => ({
     type: types.GET_COLOR_TEMPERATURE_DATA_SUCCESS,
     payload,
@@ -128,12 +130,10 @@ export const actions = {
     error,
   }),
 
-  getFilteringSectionData: (data) => {
-    return {
-      type: types.GET_FILTERING_SECTION_DATA,
-      data,
-    }
-  },
+  getFilteringSectionData: (data) => ({
+    type: types.GET_FILTERING_SECTION_DATA,
+    data,
+  }),
   getFilteringSectionDataSuccess: (payload) => ({
     type: types.GET_FILTERING_SECTION_DATA_SUCCESS,
     payload,
@@ -143,12 +143,10 @@ export const actions = {
     error,
   }),
 
-  getPacingCardData: (data) => {
-    return {
-      type: types.GET_PACING_CARD_DATA,
-      data,
-    }
-  },
+  getPacingCardData: (data) => ({
+    type: types.GET_PACING_CARD_DATA,
+    data,
+  }),
   getPacingCardDataSuccess: (payload) => ({
     type: types.GET_PACING_CARD_DATA_SUCCESS,
     payload,
@@ -158,12 +156,10 @@ export const actions = {
     error,
   }),
 
-  getCompareSharesData: (data) => {
-    return {
-      type: types.GET_COMPARE_SHARES_DATA,
-      data,
-    }
-  },
+  getCompareSharesData: (data) => ({
+    type: types.GET_COMPARE_SHARES_DATA,
+    data,
+  }),
   getCompareSharesDataSuccess: (payload) => ({
     type: types.GET_COMPARE_SHARES_DATA_SUCCESS,
     payload,
@@ -280,18 +276,29 @@ export const actions = {
     error,
   }),
 
-  getFlipCardsData: (data) => {
-    return {
-      type: types.GET_FLIPCARDS_DATA,
-      data,
-    }
-  },
+  getFlipCardsData: (data) => ({
+    type: types.GET_FLIPCARDS_DATA,
+    data,
+  }),
   getFlipCardsDataSuccess: (payload) => ({
     type: types.GET_FLIPCARDS_DATA_SUCCESS,
     payload,
   }),
   getFlipCardsDataError: (error) => ({
     type: types.GET_FLIPCARDS_DATA_ERROR,
+    error,
+  }),
+
+  getTopPerformingFormatData: (data) => ({
+    type: types.GET_TOP_PERFORMING_FORMAT_DATA,
+    data,
+  }),
+  getTopPerformingFormatDataSuccess: (payload) => ({
+    type: types.GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS,
+    payload,
+  }),
+  getTopPerformingFormatDataError: (error) => ({
+    type: types.GET_TOP_PERFORMING_FORMAT_DATA_ERROR,
     error,
   }),
 }
@@ -360,6 +367,11 @@ export const initialState = fromJS({
   },
   flipCardsData: {
     data: {},
+    loading: false,
+    error: null,
+  },
+  topPerformingFormatData: {
+    data: [],
     loading: false,
     error: null,
   },
@@ -633,6 +645,19 @@ const panopticReducer = (state = initialState, action) => {
         .setIn(['flipCardsData', 'error'], fromJS(action.error))
         .setIn(['flipCardsData', 'loading'], fromJS(false))
 
+    case types.GET_TOP_PERFORMING_FORMAT_DATA:
+      return state.setIn(['topPerformingFormatData', 'loading'], fromJS(true))
+
+    case types.GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS:
+      return state
+        .setIn(['topPerformingFormatData', 'data'], fromJS(action.payload))
+        .setIn(['topPerformingFormatData', 'loading'], fromJS(false))
+
+    case types.GET_TOP_PERFORMING_FORMAT_DATA_ERROR:
+      return state
+        .setIn(['topPerformingFormatData', 'error'], fromJS(action.error))
+        .setIn(['topPerformingFormatData', 'loading'], fromJS(false))
+
     default:
       return state
   }
@@ -759,6 +784,15 @@ const selectFlipCardsDomain = (state) => state.Panoptic.get('flipCardsData')
 export const makeSelectFlipCards = () =>
   createSelector(
     selectFlipCardsDomain,
+    (substate) => substate.toJS()
+  )
+
+const selectTopPerformingFormatDomain = (state) =>
+  state.Panoptic.get('topPerformingFormatData')
+
+export const makeSelectTopPerformingFormat = () =>
+  createSelector(
+    selectTopPerformingFormatDomain,
     (substate) => substate.toJS()
   )
 

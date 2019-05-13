@@ -23,6 +23,17 @@ const TopVideosCard = ({
   selectResolution,
   handleSelectFilters,
 }) => {
+
+  let stackedChartData = chartData
+  const labels = ["Facebook", "Instagram", "Twitter", "YouTube", "Pinterest"]
+  const backgroundColors = ["#2FD7C4", "#8562F3", "#5292E5", "#acb0be", "#545B79"]
+
+  stackedChartData.labels = ["360p", "480p", "720p", "1080p", "4k"]
+  stackedChartData.datasets.map((el, i) => {
+    stackedChartData.datasets[i].label = labels[i]
+    stackedChartData.datasets[i].backgroundColor = backgroundColors[i]
+  })
+
   return (
     <div className="grid-collapse">
       <div className={barChartContainer}>
@@ -47,7 +58,7 @@ const TopVideosCard = ({
         <div className='col-12'>
           <StackedBarChart
             height={200}
-            barData={chartData}
+            barData={stackedChartData}
             datasetKeyProvider={datasetKeyProvider()}
           />
         </div>
@@ -66,7 +77,7 @@ const TopVideosCard = ({
               Twitter
             </div>
             <div className={style.referenceItem}>
-              <span className="bg-cool-grey" />
+              <span className="bg-cool-grey" style={{backgroundColor: "#acb0be"}} />
               YouTube
             </div>
             <div className={style.referenceItem}>

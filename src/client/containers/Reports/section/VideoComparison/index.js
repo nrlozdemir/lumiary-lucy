@@ -16,6 +16,20 @@ class VideoComparison extends React.Component {
     const {
       videoComparisonData: { data, loading, error },
     } = this.props
+    let barData = data
+
+    barData && data.map((b, i) => {
+      barData[i].labels = ["", "", "", ""]
+      barData[i].datasets.map((d, k) => {
+        barData[i].datasets[k].backgroundColor = "#2FD7C4"
+        if (i % 2 === 0) {
+          barData[i].datasets[k].backgroundColor = "#5292E5"
+        }
+      })
+    })
+
+    console.log(barData)
+
     return (
       <Module
         moduleKey={'Reports/VideoComparison'}
@@ -23,7 +37,7 @@ class VideoComparison extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'RVC-swda',
             placeHolder: 'Date',
           },
@@ -49,7 +63,7 @@ class VideoComparison extends React.Component {
         }
       >
         {data && data.length > 0 && (
-          <ComparisonHorizontalBarChart data={data} />
+          <ComparisonHorizontalBarChart data={barData} />
         )}
       </Module>
     )

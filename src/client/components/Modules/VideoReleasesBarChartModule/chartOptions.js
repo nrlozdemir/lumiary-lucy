@@ -41,7 +41,9 @@ export const options = {
           tickMarkLength: 15,
         },
         ticks: {
-          fontColor: 'white',
+          fontSize: 12,
+          fontColor: '#fff',
+          fontFamily: "ClanOTNews",
         },
       },
     ],
@@ -57,6 +59,9 @@ export const options = {
         ticks: {
           display: false,
           stepSize: 50000,
+          fontColor: '#fff',
+          fontFamily: "ClanOTNews",
+          fontSize: 12,
         },
       },
     ],
@@ -87,6 +92,9 @@ export const wrapperBarOptions = (data) => ({
         },
         ticks: {
           display: false,
+          fontColor: '#fff',
+          fontFamily: "ClanOTNews",
+          fontSize: 12,
         },
       },
     ],
@@ -99,8 +107,10 @@ export const wrapperBarOptions = (data) => ({
           drawTicks: false,
         },
         ticks: {
-          fontColor: 'white',
           display: true,
+          fontColor: '#fff',
+          fontFamily: "ClanOTNews",
+          fontSize: 12,
           stepSize: 50000,
           padding: 15,
           callback: function (value, index, values) {

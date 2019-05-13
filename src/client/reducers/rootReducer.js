@@ -9,6 +9,7 @@ import Panoptic from './panoptic'
 import LibraryDetail from './libraryDetail'
 import Reports from './reports'
 import GeneratedReport from './generatedReport'
+import Audience from './audience'
 import app from './app'
 import SelectFilters from './selectFilters'
 
@@ -24,6 +25,7 @@ const rootReducer = (history) =>
     Reports,
     GeneratedReport,
     form: formReducer,
+    Audience,
     SelectFilters,
   })
 

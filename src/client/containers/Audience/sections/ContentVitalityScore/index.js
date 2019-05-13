@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectAudienceContentVitalityScore } from 'Reducers/panoptic'
+import { actions, makeSelectAudienceContentVitalityScore } from 'Reducers/audience'
 import Module from 'Components/Module'
 import cx from 'classnames'
 import LineChart from 'Components/Charts/LineChart'
@@ -34,7 +34,7 @@ class ContentVitalityScore extends React.Component {
             placeHolder: 'Platforms',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'ACOT-wds',
             placeHolder: 'Date',
           },
@@ -48,7 +48,10 @@ class ContentVitalityScore extends React.Component {
                 width={1140}
                 height={291}
                 backgroundColor="#21243B"
-                dataSet={data}
+                dataSet={{
+                  labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                  datasets: data.datasets
+                }}
                 removeTooltip
                 removePointRadius
                 xAxesFlatten

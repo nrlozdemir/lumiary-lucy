@@ -12,9 +12,21 @@ import _ from 'lodash'
 
 const RESOURCE = '/report'
 
-function getPanopticDataApi() {
-  //this will use ajax function in utils/api when real data is provided
+function getMockPanopticDataApi() {
   return axios.get('/').then((res) => panopticMockData)
+}
+
+function getPanopticDataApi(vals) {
+  return ajax({
+    url: RESOURCE,
+    method: 'POST',
+    params: qs.stringify(vals),
+  }).then((response) => {
+    if (response.error) {
+      throw response.error
+    }
+    return response.data
+  })
 }
 
 function getAudienceDataApi() {
@@ -29,12 +41,8 @@ function updateAudiencePerformanceApi({ min, max }) {
 
 function* getVideoReleasesData() {
   try {
-    const payload = yield call(getPanopticDataApi)
-
-    const shuffleData = payload.videoReleasesData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getVideoReleasesDataSuccess(shuffleData))
+    const payload = yield call(getMockPanopticDataApi)
+    yield put(actions.getVideoReleasesDataSuccess(payload.videoReleasesData))
   } catch (err) {
     yield put(actions.getVideoReleasesDataError(err))
   }
@@ -42,7 +50,7 @@ function* getVideoReleasesData() {
 
 function* getColorTemperatureData() {
   try {
-    const payload = yield call(getPanopticDataApi)
+    const payload = yield call(getMockPanopticDataApi)
 
     const shuffleData = _.shuffle(payload.colorTempData)
     yield put(actions.getColorTemperatureDataSuccess(shuffleData))
@@ -51,69 +59,21 @@ function* getColorTemperatureData() {
   }
 }
 
-function* getFilteringSectionData() {
+function* getFilteringSectionData(data) {
   try {
-    const payload = yield call(getPanopticDataApi)
-    const shuffleData = {
-      doughnutData: {
-        labels: payload.verticalStackedChartData.doughnutData.labels,
-        datasets: [
-          {
-            backgroundColor:
-              payload.verticalStackedChartData.doughnutData.datasets[0]
-                .backgroundColor,
-            data: _.shuffle(
-              payload.verticalStackedChartData.doughnutData.datasets[0].data
-            ),
-            hoverBackgroundColor:
-              payload.verticalStackedChartData.doughnutData.datasets[0]
-                .hoverBackgroundColor,
-          },
-        ],
-      },
-      stackedChartData: {
-        ...payload.verticalStackedChartData.stackedChartData,
-        datasets: _.shuffle(
-          payload.verticalStackedChartData.stackedChartData.datasets
-        ),
-      },
-    }
-    yield put(actions.getFilteringSectionDataSuccess(shuffleData))
+    const payload = yield call(getMockPanopticDataApi)
+    yield put(
+      actions.getFilteringSectionDataSuccess(payload.verticalStackedChartData)
+    )
   } catch (err) {
     yield put(actions.getFilteringSectionDataError(err))
   }
 }
 
-function getPacingCardDataApi(vals) {
-  return ajax({
-    url: RESOURCE,
-    method: 'POST',
-    params: qs.stringify(vals),
-  }).then((response) => {
-    if (response.error) {
-      throw response.error
-    }
-    return response.data
-  })
-}
-
 function* getPacingCardData({ data }) {
   try {
-    const { 'PCT-asd': metricOption = {}, 'PCT-wds': dateOption = {} } = data
-    const { value: dateOptionValue } = dateOption
-
-    const dateRange =
-      (!!dateOptionValue &&
-        dateOptionValue.value &&
-        (!!dateOptionValue.value.startDate
-          ? [dateOptionValue.value.startDate, dateOptionValue.value.endDate]
-          : dateOptionValue.value)) ||
-      '24hours'
-
-    const metric =
-      (!!metricOption && !!metricOption.value && metricOption.value.value) ||
-      'views'
-
+    const { metric, dateRange } = data 
+    
     const options = {
       metric,
       dateRange,
@@ -123,9 +83,9 @@ function* getPacingCardData({ data }) {
       display: 'percentage',
     }
 
-    const stadiumData = yield call(getPacingCardDataApi, options)
+    const stadiumData = yield call(getPanopticDataApi, options)
 
-    const horizontalStackedBarData = yield call(getPacingCardDataApi, {
+    const horizontalStackedBarData = yield call(getPanopticDataApi, {
       ...options,
       proportionOf: 'format',
     })
@@ -163,7 +123,7 @@ function* getPacingCardData({ data }) {
 
 function* getCompareSharesData() {
   try {
-    const payload = yield call(getPanopticDataApi)
+    const payload = yield call(getMockPanopticDataApi)
     const shuffleData = payload.compareSharesData
     shuffleData[0].datas.datasets[0].data = _.shuffle(
       shuffleData[0].datas.datasets[0].data
@@ -279,7 +239,7 @@ function* getAudienceDominantColorData() {
 
 function* getData() {
   try {
-    const payload = yield call(getPanopticDataApi)
+    const payload = yield call(getMockPanopticDataApi)
     yield put(actions.getDataSuccess(payload))
   } catch (err) {
     yield put(actions.getDataError(err))
@@ -306,10 +266,21 @@ function* updateAudiencePerformance({ payload: { min, max } }) {
 
 function* getFlipCardsData() {
   try {
-    const payload = yield call(getPanopticDataApi)
+    const payload = yield call(getMockPanopticDataApi)
     yield put(actions.getFlipCardsDataSuccess(payload.flipCardsData))
   } catch (err) {
     yield put(actions.getFlipCardsDataError(err))
+  }
+}
+
+function* getTopPerformingFormatData() {
+  try {
+    const payload = yield call(getMockPanopticDataApi)
+    yield put(
+      actions.getTopPerformingFormatDataSuccess(payload.topPerformingFormatData)
+    )
+  } catch (err) {
+    yield put(actions.getTopPerformingFormatDataError(err))
   }
 }
 
@@ -344,4 +315,5 @@ export default [
   takeLatest(types.GET_AUDIENCE_DATA, getAudienceData),
   takeLatest(types.UPDATE_AUDIENCE_PERFORMANCE, updateAudiencePerformance),
   takeLatest(types.GET_FLIPCARDS_DATA, getFlipCardsData),
+  takeLatest(types.GET_TOP_PERFORMING_FORMAT_DATA, getTopPerformingFormatData),
 ]

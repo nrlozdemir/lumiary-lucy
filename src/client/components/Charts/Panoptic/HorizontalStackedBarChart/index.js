@@ -1,7 +1,40 @@
 import React from 'react'
 import { HorizontalBar } from 'react-chartjs-2'
-
 import { barChartOptions } from './options'
+
+const emptyData = {
+  labels: ['Live Action', 'Stop Motion', 'Cinemagraph', 'Animation'],
+  datasets: [
+    {
+      label: 'Slowest',
+      backgroundColor: '#2FD7C4',
+      borderColor: '#2FD7C4',
+      borderWidth: 1,
+      data: [0, 0, 0, 0],
+    },
+    {
+      label: 'Slow',
+      backgroundColor: '#8562F3',
+      borderColor: '#8562F3',
+      borderWidth: 1,
+      data: [0, 0, 0, 0],
+    },
+    {
+      label: 'Medium',
+      backgroundColor: '#5292E5',
+      borderColor: '#5292E5',
+      borderWidth: 1,
+      data: [0, 0, 0, 0],
+    },
+    {
+      label: 'Fast',
+      backgroundColor: '#acb0be',
+      borderColor: '#acb0be',
+      borderWidth: 1,
+      data: [0, 0, 0, 0],
+    },
+  ],
+}
 
 const plugins = [
   {
@@ -40,7 +73,7 @@ const plugins = [
   },
 ]
 
-const HorizontalStackedBarChart = ({ barData }) => (
+const HorizontalStackedBarChart = ({ barData = emptyData }) => (
   <HorizontalBar
     data={{
       labels: barData.labels,
@@ -48,7 +81,7 @@ const HorizontalStackedBarChart = ({ barData }) => (
         const indexValues = data.data.map((v, i) => {
           return barData.datasets.map((d) => d.data[i])
         })
-        
+
         return {
           ...data,
           data: data.data.map((value, i) => {

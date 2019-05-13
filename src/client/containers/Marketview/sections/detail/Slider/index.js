@@ -32,12 +32,12 @@ export default class Slider extends React.Component {
         title={title}
         filters={[
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'Mwplt-engagement',
             placeHolder: 'Engagement',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'Mwplt-date',
             placeHolder: 'Date',
           },
