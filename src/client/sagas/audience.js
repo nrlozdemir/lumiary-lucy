@@ -4,6 +4,8 @@ import { actions, types } from 'Reducers/audience'
 import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 
+import { radarChartCalculate } from 'Utils'
+
 import _ from 'lodash'
 
 function getAudienceDataApi() {
@@ -112,12 +114,13 @@ function* getAudienceDominantColorData() {
   try {
     const payload = yield call(getAudienceDataApi)
     let shuffleData = payload.chartData
-    shuffleData[0].datas.datasets[0].data = _.shuffle(
-      shuffleData[0].datas.datasets[0].data
-    )
-    shuffleData[1].datas.datasets[0].data = _.shuffle(
-      shuffleData[1].datas.datasets[0].data
-    )
+    shuffleData[0].datas.labels.forEach((item, index) => {
+      shuffleData[0].datas.labels[index].count = _.random(10, 90)
+    })
+    shuffleData[1].datas.labels.forEach((item, index) => {
+      shuffleData[1].datas.labels[index].count = _.random(10, 90)
+    })
+    shuffleData = radarChartCalculate(shuffleData)
     yield put(actions.getAudienceDominantColorDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getAudienceDominantColorDataError(err))
@@ -133,7 +136,16 @@ export default [
   takeLatest(types.UPDATE_AUDIENCE_PERFORMANCE, updateAudiencePerformance),
   takeLatest(types.GET_AUDIENCE_AGE_SLIDER_DATA, getAudienceAgeSliderData),
   takeLatest(types.GET_AUDIENCE_GENDER_DATA, getAudienceGenderData),
-  takeLatest(types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA, getAudienceColorTemperatureData),
-  takeLatest(types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA, getAudienceChangeOverTimeData),
-  takeLatest(types.GET_AUDIENCE_DOMINANT_COLOR_DATA, getAudienceDominantColorData),
+  takeLatest(
+    types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA,
+    getAudienceColorTemperatureData
+  ),
+  takeLatest(
+    types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA,
+    getAudienceChangeOverTimeData
+  ),
+  takeLatest(
+    types.GET_AUDIENCE_DOMINANT_COLOR_DATA,
+    getAudienceDominantColorData
+  ),
 ]

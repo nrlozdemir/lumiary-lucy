@@ -24,7 +24,7 @@ export const lineChartOptions = {
           color: '#373f5b',
           offsetGridLines: false,
           lineWidth: 0.7,
-          drawBorder: false,
+          drawBorder: true,
           drawTicks: false,
         },
         barPercentage: 0.05,
@@ -35,7 +35,7 @@ export const lineChartOptions = {
           fontSize: 12,
           stepSize: 1,
           padding: 15,
-          beginAtZero: false,
+          beginAtZero: true,
           callback: function(value, index, values) {
             return value
           },

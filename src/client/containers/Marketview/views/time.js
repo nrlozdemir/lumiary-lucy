@@ -10,7 +10,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
-import Slider from 'Containers/Marketview/sections/detail/Slider'
+import Slider from 'Components/Modules/SliderModule'
 import DaySelection from 'Containers/Marketview/sections/detail/DaySelection'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
 import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
@@ -71,6 +71,18 @@ export class Time extends React.Component {
           title={`Top Performing ${activeDay
             .charAt(0)
             .toUpperCase()}${activeDay.slice(1)} Videos`}
+          filters={[
+            {
+              type: 'metric',
+              selectKey: 'Mwplt-metric',
+              placeHolder: 'metric',
+            },
+            {
+              type: 'dateRange',
+              selectKey: 'Mwplt-date',
+              placeHolder: 'Date',
+            },
+          ]}
         />
         <TopSimilarPropertiesModule
           moduleKey="MarketView/TopSimilarPropertiesModule"

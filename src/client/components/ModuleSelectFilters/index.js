@@ -60,6 +60,7 @@ class ModuleSelectFilters extends React.Component {
       selectKey,
       placeHolder,
       moduleKey,
+      themes,
     } = this.props
 
     const selectedOption =
