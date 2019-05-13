@@ -9,7 +9,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
-import Slider from 'Containers/Marketview/sections/detail/Slider'
+import Slider from 'Components/Modules/SliderModule'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
 import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
 import RouterLoading from 'Components/RouterLoading'
@@ -41,19 +41,19 @@ export class Platform extends React.Component {
 
   changeSelectedVideo = (video) => {
     this.props.setSelectedVideo(video)
-	}
+  }
 
-	getSimilarProperties = data => {
-		this.props.getSimilarPropertiesRequest(data);
-	}
+  getSimilarProperties = (data) => {
+    this.props.getSimilarPropertiesRequest(data)
+  }
 
-	getCompetitorTopVideos = data => {
-		this.props.getCompetitorTopVideosRequest(data);
-	}
+  getCompetitorTopVideos = (data) => {
+    this.props.getCompetitorTopVideosRequest(data)
+  }
 
-	getTopPerformingProperties = data => {
-		this.props.getTopPerformingPropertiesRequest(data);
-	}
+  getTopPerformingProperties = (data) => {
+    this.props.getTopPerformingPropertiesRequest(data)
+  }
 
   render() {
     const {
@@ -75,89 +75,101 @@ export class Platform extends React.Component {
         <Slider
           data={marketview.videos || []}
           selectedVideo={selectedVideo}
-					changeSelectedVideo={this.changeSelectedVideo}
-					title="Top Performing Videos By Platform"
-					moduleKey="MarketView/Platform/Slider"
+          changeSelectedVideo={this.changeSelectedVideo}
+          title="Top Performing Videos By Platform"
+          moduleKey="MarketView/Platform/Slider"
+          filters={[
+            {
+              type: 'engagement',
+              selectKey: 'Mwplt-engagement',
+              placeHolder: 'Engagement',
+            },
+            {
+              type: 'timeRange',
+              selectKey: 'Mwplt-date',
+              placeHolder: 'Date',
+            },
+          ]}
         />
-				<TopVideosCardModule
-					chartData={competitorTopVideos}
-					height={150}
-					moduleKey="MarketView/Platform/TopVideosCardModule"
-					title="Top Videos Over Time By Platform"
-					action={this.getCompetitorTopVideos}
-					filters={[
-						{
-							type: 'property',
-							selectKey: 'mwplttvcm-property',
-							placeHolder: 'property',
-						},
-						{
-							type: 'metric',
-							selectKey: 'mwplttvcm-engagement',
-							placeHolder: 'engagement',
-						},
-						{
-							type: 'dateRange',
-							selectKey: 'mwplttvcm-dateRange',
-							placeHolder: 'dateRange',
-						},
-					]}
-					references={[
-						{
-							className: 'bg-cool-blue',
-							text: 'Barstool Sports',
-						},
-						{
-							className: 'bg-lighter-purple',
-							text: 'SB Nation',
-						},
-						{
-							className: 'bg-coral-pink',
-							text: 'ESPN',
-						},
-						{
-							className: 'bg-cool-grey',
-							text: 'Scout Media',
-						},
-						{
-							className: 'bg-dusk"',
-							text: 'Fansided',
-						},
-					]}
-				/>
-				<TopSimilarPropertiesModule
-					moduleKey="MarketView/TopSimilarPropertiesModule"
-					data={similarProperties}
-					title="Top Similar Properties Of Top Videos"
-					action={this.getSimilarProperties}
-					filters={[
-						{
-							type: 'dateRange',
-							selectKey: 'dateRange',
-							placeHolder: 'dateRange',
-						},
-					]}
-				/>
-				<BarChartModule
-					moduleKey="MarketView/Platform/TopPerformingPropertyAcrossAllPlatforms"
-					barData={topPerformingPropertiesData}
-					title="Top Performing Property Across All Platforms"
-					height={55}
-					tickOptions={chartTickOptions}
-					action={this.getTopPerformingProperties}
-					filters={[
-						{
-							type: 'metric',
-							selectKey: 'mwplttpaap-engagement',
-							placeHolder: 'Engagement',
-						},
-						{
-							type: 'pacing',
-							selectKey: 'mwplttpaap-pacing',
-							placeHolder: 'Pacing',
-						},
-					]}
-				/>
+        <TopVideosCardModule
+          chartData={competitorTopVideos}
+          height={150}
+          moduleKey="MarketView/Platform/TopVideosCardModule"
+          title="Top Videos Over Time By Platform"
+          action={this.getCompetitorTopVideos}
+          filters={[
+            {
+              type: 'videoProperty',
+              selectKey: 'mwplttvcm-videoProperty',
+              placeHolder: 'videoProperty',
+            },
+            {
+              type: 'engagement',
+              selectKey: 'mwplttvcm-engagement',
+              placeHolder: 'engagement',
+            },
+            {
+              type: 'timeRange',
+              selectKey: 'mwplttvcm-timeRange',
+              placeHolder: 'timeRange',
+            },
+          ]}
+          references={[
+            {
+              className: 'bg-cool-blue',
+              text: 'Barstool Sports',
+            },
+            {
+              className: 'bg-lighter-purple',
+              text: 'SB Nation',
+            },
+            {
+              className: 'bg-coral-pink',
+              text: 'ESPN',
+            },
+            {
+              className: 'bg-cool-grey',
+              text: 'Scout Media',
+            },
+            {
+              className: 'bg-dusk"',
+              text: 'Fansided',
+            },
+          ]}
+        />
+        <TopSimilarPropertiesModule
+          moduleKey="MarketView/TopSimilarPropertiesModule"
+          data={similarProperties}
+          title="Top Similar Properties Of Top Videos"
+          action={this.getSimilarProperties}
+          filters={[
+            {
+              type: 'timeRange',
+              selectKey: 'timeRange',
+              placeHolder: 'timeRange',
+            },
+          ]}
+        />
+        <BarChartModule
+          moduleKey="MarketView/Platform/TopPerformingPropertyAcrossAllPlatforms"
+          barData={topPerformingPropertiesData}
+          title="Top Performing Property Across All Platforms"
+          height={55}
+          tickOptions={chartTickOptions}
+          action={this.getTopPerformingProperties}
+          filters={[
+            {
+              type: 'engagement',
+              selectKey: 'mwplttpaap-engagement',
+              placeHolder: 'Engagement',
+            },
+            {
+              type: 'pacing',
+              selectKey: 'mwplttpaap-pacing',
+              placeHolder: 'Pacing',
+            },
+          ]}
+        />
       </React.Fragment>
     )
   }

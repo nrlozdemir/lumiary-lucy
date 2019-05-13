@@ -23,20 +23,11 @@ class PointerCard extends React.Component {
   }
 
   render() {
-    const { data } = this.props
+    const { data, colors } = this.props
     const { pointerData } = this.state
     return (
       <div className={style.radialChart}>
-        {style.topTitle && (
-          <div
-            className={cn(
-              style.radialChartRadius,
-              'font-secondary-second font-size-14 text-center text-light'
-            )}
-          >
-            <span className={style.topTitle}>{data.topTitle}</span>
-          </div>
-        )}
+        {style.topTitle && <h1 className={style.topTitle}>{data.topTitle}</h1>}
         <p className="font-secondary-first font-size-14 text-bold">
           {data.basedOn}
         </p>
@@ -110,7 +101,7 @@ class PointerCard extends React.Component {
                           xlinkHref="#path-1"
                         />
                         <use
-                          fill="#596189"
+                          fill={colors.moduleBorder}
                           fillRule="evenodd"
                           xlinkHref="#path-1"
                         />
@@ -188,7 +179,7 @@ class PointerCard extends React.Component {
                         filter="url(#arrow-filter-2)"
                         xlinkHref="#arrow-path-1"
                       />
-                      <use fill="#e0436a" xlinkHref="#arrow-path-1" />
+                      <use fill="#5292e5" xlinkHref="#arrow-path-1" />
                     </g>
                   </g>
                 </svg>
@@ -199,7 +190,15 @@ class PointerCard extends React.Component {
                       transform: `rotate(${-pointerData + 90 || 0}deg)`,
                     }}
                   >
-                    <span className={style.svgLineText}>{pointerData}K</span>
+                    <span
+                      className={style.svgLineText}
+                      style={{
+                        color: colors.textColor,
+                        background: colors.moduleBackground,
+                      }}
+                    >
+                      {pointerData}K
+                    </span>
                     <svg height="22" width="55">
                       <line
                         x1="18"

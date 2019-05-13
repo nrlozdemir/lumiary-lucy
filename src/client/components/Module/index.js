@@ -12,6 +12,7 @@ import _ from 'lodash'
 import cx from 'classnames'
 import style from './style.scss'
 import HeaderModule from './header'
+import { ThemeContext } from 'ThemeContext/themeContext'
 
 export class Module extends React.Component {
   constructor(props) {
@@ -22,38 +23,26 @@ export class Module extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { action, selectFilters, moduleKey } = this.props
     if (
-      !!action &&
-      !!prevProps.selectFilters &&
-      !!selectFilters &&
+      this.props.action &&
+      prevProps.selectFilters &&
+      this.props.selectFilters &&
       !_.isEqual(
         prevProps.selectFilters.values[prevProps.moduleKey],
-        selectFilters.values[moduleKey]
+        this.props.selectFilters.values[this.props.moduleKey]
       )
     ) {
-      const selectFilterValues = selectFilters.values[moduleKey]
-
-      // reduce into { type: value } map which is easily read by azazzle
-      const valuesToType = Object.keys(selectFilterValues).reduce(
-        (values, key) => {
-          const filterValue = selectFilterValues[key]
-          const filterType = filterValue.type
-          values[filterType] = !!filterValue.value
-            ? !!filterValue.value.value && !!filterValue.value.value.startDate
-              ? [
-                  filterValue.value.value.startDate,
-                  filterValue.value.value.endDate,
-                ]
-              : filterValue.value.value
-            : defaultFilters[filterType]
-
-          return values
-        },
-        {}
+      this.props.action(
+        this.props.selectFilters.values[this.props.moduleKey],
+        this.props.moduleKey
       )
-      action(valuesToType, moduleKey)
     }
+  }
+
+  changeInfoStatus = () => {
+    this.setState({
+      infoShow: !this.state.infoShow,
+    })
   }
 
   changeInfoStatus = () => {
@@ -70,7 +59,7 @@ export class Module extends React.Component {
       isEmpty,
       containerClass,
     } = this.props
-    
+
     const { infoShow } = this.state
 
     const moduleContainer = cx(
@@ -89,27 +78,43 @@ export class Module extends React.Component {
     })
 
     return (
-      <div className={moduleContainer}>
-        <div className={style.moduleContainerHeader}>
-          <HeaderModule
-            {...this.props}
-            changeInfoStatus={this.changeInfoStatus}
-            infoShow={infoShow}
-          />
-        </div>
-        <div className={moduleContainerBody}>{children}</div>
-        {references && (
-          <div className={referencesClass}>
-            {references.map((ref, index) => (
-              <div className={style.referenceItem} key={index}>
-                <span className={ref.className} />
-                {ref.text}
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => {
+          return (
+            <div
+              className={moduleContainer}
+              style={{
+                background: colors.moduleBackground,
+                color: colors.textColor,
+                boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
+              }}
+            >
+              <div className={style.moduleContainerHeader}>
+                <HeaderModule
+                  {...this.props}
+                  changeInfoStatus={this.changeInfoStatus}
+                  infoShow={infoShow}
+                  themes={colors}
+                />
               </div>
-            ))}
-          </div>
-        )}
-        {isEmpty && <div className={style.moduleEmpty}>No Data Available</div>}
-      </div>
+              <div className={moduleContainerBody}>{children}</div>
+              {references && (
+                <div className={referencesClass}>
+                  {references.map((ref, index) => (
+                    <div className={style.referenceItem} key={index}>
+                      <span className={ref.className} />
+                      {ref.text}
+                    </div>
+                  ))}
+                </div>
+              )}
+              {isEmpty && (
+                <div className={style.moduleEmpty}>No Data Available</div>
+              )}
+            </div>
+          )
+        }}
+      </ThemeContext.Consumer>
     )
   }
 }

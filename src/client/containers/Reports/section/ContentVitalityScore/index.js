@@ -6,9 +6,9 @@ import {
   actions,
   makeSelectReportsContentVitalityScore,
 } from 'Reducers/reports'
-import Module from 'Components/Module'
-import LineChart from 'Components/Charts/LineChart'
-import chartStyle from './style.scss'
+
+import { ThemeContext } from 'ThemeContext/themeContext'
+import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'
 
 class ContentVitalityScore extends React.Component {
   callBack = (data, moduleKey) => {
@@ -16,69 +16,71 @@ class ContentVitalityScore extends React.Component {
   }
 
   render() {
-    // const { selectViews, selectPlatforms, selectDate } = this.state;
     const {
       contentVitalityScoreData: { data, loading, error },
     } = this.props
 
     return (
-      <Module
-        moduleKey={'Reports/ContentVitalityScore'}
-        title="Content Vitality Score Based On Audience"
-        action={this.callBack}
-        filters={[
-          {
-            type: 'platform',
-            selectKey: 'RCVS-ads',
-            placeHolder: 'Platforms',
-          },
-          {
-            type: 'dateRange',
-            selectKey: 'RCVS-wds',
-            placeHolder: 'Date',
-          },
-        ]}
-      >
-        {data && data.datasets && (
-          <div
-            data-vertical-title="Number Of Videos"
-            className={chartStyle.vitalityContainer}
-          >
-            <LineChart
-              chartType="lineStackedArea"
-              width={1144}
-              height={291}
-              backgroundColor="#21243B"
-              dataSet={{
-                labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                datasets: data.datasets
-              }}
-              removeTooltip
-              removePointRadius
-              xAxesFlatten
-              flattenFirstSpace={1}
-              flattenLastSpace={5}
-              options={{
-                scales:{
-                  yAxes: [{
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <ContentVitalityScoreModule
+            data={data}
+            moduleKey={'Reports/ContentVitalityScore'}
+            title="Content Vitality Score Based On Audience"
+            action={this.callBack}
+            filters={[
+              {
+                type: 'platform',
+                selectKey: 'RCVS-ads',
+                placeHolder: 'Platforms',
+              },
+              {
+                type: 'timeRange',
+                selectKey: 'RCVS-wds',
+                placeHolder: 'Date',
+              },
+            ]}
+            removeTooltip
+            removePointRadius
+            xAxesFlatten
+            flattenFirstSpace={1}
+            flattenLastSpace={5}
+            options={{
+              scales: {
+                yAxes: [
+                  {
                     ticks: {
                       callback: function(value, index, values) {
-                        if(value === 0) {
+                        if (value === 0) {
                           return value + ' '
-                        } else if(value === 250) {
+                        } else if (value === 250) {
                           return value
                         } else {
                           return ''
                         }
-                      }
-                    }
-                  }]
-                }
-              }}
-            />
-          </div>
+                      },
+                      fontColor: colors.textColor,
+                    },
+                    gridLines: {
+                      color: colors.chartStadiumBarBorder,
+                    },
+                  },
+                ],
+                xAxes: [
+                  {
+                    ticks: {
+                      fontColor: colors.textColor,
+                    },
+                    gridLines: {
+                      color: colors.chartStadiumBarBorder,
+                    },
+                  },
+                ],
+              },
+            }}
+          />
         )}
-      </Module>
+      </ThemeContext.Consumer>
     )
   }
 }

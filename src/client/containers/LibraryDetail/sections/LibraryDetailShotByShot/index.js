@@ -2,10 +2,11 @@ import React from 'react'
 import cn from 'classnames'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import Slider from 'rc-slider'
-import SingleItemSlider from 'Components/SingleItemSlider'
+import SingleItemSlider from 'Components/Sliders/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
 import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
 import style from './style.scss'
+import { ThemeContext } from 'ThemeContext/themeContext'
 
 class LibraryDetailShotByShot extends React.Component {
   constructor(props) {
@@ -23,14 +24,15 @@ class LibraryDetailShotByShot extends React.Component {
         marginLeft: '0px',
         marginTop: '0px',
       },
-      scenes: this.props.sliderWithThumbnails || []
+      scenes: this.props.sliderWithThumbnails || [],
     }
     this.slide = React.createRef()
   }
 
   secondToTime(timeInSeconds) {
-    let pad = (num, size) => { return ('000' + num).slice(size * -1) },
-
+    let pad = (num, size) => {
+        return ('000' + num).slice(size * -1)
+      },
       time = parseFloat(timeInSeconds).toFixed(3),
       hours = Math.floor(time / 60 / 60),
       minutes = Math.floor(time / 60) % 60,
@@ -68,7 +70,7 @@ class LibraryDetailShotByShot extends React.Component {
     */
 
     this.setState({
-      selectedImage: i
+      selectedImage: i,
     })
   }
 
@@ -78,18 +80,25 @@ class LibraryDetailShotByShot extends React.Component {
 
     e = parseInt(e)
 
-    let scrollTo = ((e - (this.state.sliderHandleRightStep / 2)) * this.state.sliderStepWidth) * -1
+    let scrollTo =
+      (e - this.state.sliderHandleRightStep / 2) *
+      this.state.sliderStepWidth *
+      -1
 
     if (scrollTo > 0) {
       scrollTo = 0
     }
-    if ((scrollTo * -1) + this.state.sliderViewportSize >= this.state.sliderTotalWidth) {
-      scrollTo = (this.state.sliderTotalWidth - this.state.sliderViewportSize) * -1
+    if (
+      scrollTo * -1 + this.state.sliderViewportSize >=
+      this.state.sliderTotalWidth
+    ) {
+      scrollTo =
+        (this.state.sliderTotalWidth - this.state.sliderViewportSize) * -1
     }
 
     this.setState({
       sliderValue: e,
-      sliderLeftPosition: scrollTo
+      sliderLeftPosition: scrollTo,
     })
 
     if (e === 100) {
@@ -99,19 +108,22 @@ class LibraryDetailShotByShot extends React.Component {
         sliderValue: 100,
         sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
-          marginLeft: `-${leftMargin}px`
-        }
+          marginLeft: `-${leftMargin}px`,
+        },
       })
-    }
-    else if (e + (this.state.sliderHandleRightStep / 2) > 100) {
-      sliderValue = Math.round(100 - (this.state.sliderHandleRightStep / 2))
-      leftMargin = Math.round(((this.state.sliderViewportSize - (sliderValue * this.state.sliderViewportStepWidth)) * 2) - this.state.sliderGrabberWidth)
+    } else if (e + this.state.sliderHandleRightStep / 2 > 100) {
+      sliderValue = Math.round(100 - this.state.sliderHandleRightStep / 2)
+      leftMargin = Math.round(
+        (this.state.sliderViewportSize -
+          sliderValue * this.state.sliderViewportStepWidth) *
+          2 -
+          this.state.sliderGrabberWidth
+      )
 
       if (leftMargin < 0) {
-        leftMargin = (this.state.sliderGrabberWidth / 2)
-      }
-      else {
-        leftMargin = (this.state.sliderGrabberWidth / 2) + leftMargin
+        leftMargin = this.state.sliderGrabberWidth / 2
+      } else {
+        leftMargin = this.state.sliderGrabberWidth / 2 + leftMargin
       }
       leftMargin = leftMargin.toFixed(0)
 
@@ -119,39 +131,38 @@ class LibraryDetailShotByShot extends React.Component {
         sliderValue: sliderValue,
         sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
-          marginLeft: `-${leftMargin}px`
-        }
-      })
-    }
-    else if (e - (Math.round(this.state.sliderHandleRightStep) / 2) < 1) {
-      this.setState({
-        sliderHandleStyle: {
-          ...this.state.sliderHandleStyle,
-          marginLeft: '0px'
+          marginLeft: `-${leftMargin}px`,
         },
-        sliderValue: 0
       })
-    }
-    else if (e === 0) {
+    } else if (e - Math.round(this.state.sliderHandleRightStep) / 2 < 1) {
       this.setState({
         sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
-          marginLeft: '2px'
+          marginLeft: '0px',
         },
-        sliderDisabled: true,
-      }, () => {
-        this.setState({
-          sliderDisabled: false,
-          sliderValue: 0
-        })
       })
-    }
-    else if (e !== 100 && e !== 0) {
+    } else if (e === 0) {
+      this.setState(
+        {
+          sliderHandleStyle: {
+            ...this.state.sliderHandleStyle,
+            marginLeft: '2px',
+          },
+          sliderDisabled: true,
+        },
+        () => {
+          this.setState({
+            sliderDisabled: false,
+            sliderValue: 0,
+          })
+        }
+      )
+    } else if (e !== 100 && e !== 0) {
       this.setState({
         sliderHandleStyle: {
           ...this.state.sliderHandleStyle,
-          marginLeft: parseInt((this.state.sliderGrabberWidth / 2) * -1) + 'px'
-        }
+          marginLeft: parseInt((this.state.sliderGrabberWidth / 2) * -1) + 'px',
+        },
       })
     }
   }
@@ -164,8 +175,13 @@ class LibraryDetailShotByShot extends React.Component {
     let totalWidth = 5 // with first item left margin
     let sliderMarks = []
 
-    const durations = this.state.scenes.map(element => this.timeToSeconds(element.duration))
-    const totalDuration = this.state.scenes.reduce((prev, next) => prev + this.timeToSeconds(next.duration), 0)
+    const durations = this.state.scenes.map((element) =>
+      this.timeToSeconds(element.duration)
+    )
+    const totalDuration = this.state.scenes.reduce(
+      (prev, next) => prev + this.timeToSeconds(next.duration),
+      0
+    )
     const dividedDuration = Math.round(totalDuration / (tickCount - 1))
 
     sliderMarks.push(this.secondToTime(0))
@@ -178,14 +194,21 @@ class LibraryDetailShotByShot extends React.Component {
     const maxShotDuration = Math.max(...durations)
     const shotDurationDifference = Math.ceil(maxShotDuration - minShotDuration)
     const shotDurationWidthDifference = Math.ceil(maxShotWidth - minShotWidth)
-    const anySecondWidth = (shotDurationWidthDifference / shotDurationDifference).toFixed(2)
+    const anySecondWidth = (
+      shotDurationWidthDifference / shotDurationDifference
+    ).toFixed(2)
 
     let tempState = {}
     let shotWidth = 0
 
     this.state.scenes.map((element, index) => {
       tempState = this.state
-      shotWidth = Math.floor(((this.timeToSeconds(tempState.scenes[index].duration) - minShotDuration) * anySecondWidth) + minShotWidth)
+      shotWidth = Math.floor(
+        (this.timeToSeconds(tempState.scenes[index].duration) -
+          minShotDuration) *
+          anySecondWidth +
+          minShotWidth
+      )
       tempState.scenes[index].width = shotWidth
       totalWidth += shotWidth + 5 // add all right margins
       tempState.sliderTotalWidth = totalWidth
@@ -196,11 +219,13 @@ class LibraryDetailShotByShot extends React.Component {
     //rcSliderWidth = parseInt(document.getElementsByClassName('rc-slider')[0].clientWidth) //calculate viewport for resposive
     const sliderViewportStepWidth = viewportSize / 100
     const sliderStepWidth = totalWidth / 100
-    let rcGrabberWidth = (viewportSize / (totalWidth / viewportSize))
+    let rcGrabberWidth = viewportSize / (totalWidth / viewportSize)
     if (rcGrabberWidth > viewportSize) {
       rcGrabberWidth = viewportSize
     }
-    const sliderHandleRightStep = 100 - ((viewportSize - rcGrabberWidth) / sliderViewportStepWidth).toFixed(2)
+    const sliderHandleRightStep =
+      100 -
+      ((viewportSize - rcGrabberWidth) / sliderViewportStepWidth).toFixed(2)
 
     //rebuild custom-marks
     let sliderMarksToState = {}
@@ -208,19 +233,17 @@ class LibraryDetailShotByShot extends React.Component {
       index = parseInt(index * 10)
       if (index === 0) {
         sliderMarksToState[index] = {
-          style: { transform: "translateX(0%)" },
-          label: <p className="customDot">{element}</p>
+          style: { transform: 'translateX(0%)' },
+          label: <p className="customDot">{element}</p>,
         }
-      }
-      else if (index === 100) {
+      } else if (index === 100) {
         sliderMarksToState[index] = {
-          style: { transform: "translateX(-100%)" },
-          label: <p className="customDot">{element}</p>
+          style: { transform: 'translateX(-100%)' },
+          label: <p className="customDot">{element}</p>,
         }
-      }
-      else {
+      } else {
         sliderMarksToState[index] = {
-          label: <p className="customDot">{element}</p>
+          label: <p className="customDot">{element}</p>,
         }
       }
     })
@@ -238,18 +261,14 @@ class LibraryDetailShotByShot extends React.Component {
       sliderStepWidth: sliderStepWidth,
       sliderHandleStyle: {
         ...this.state.sliderHandleStyle,
-        width: (rcGrabberWidth - 3) + 'px',
-        marginLeft: '0px'
-      }
+        width: rcGrabberWidth - 3 + 'px',
+        marginLeft: '0px',
+      },
     })
   }
 
   render() {
-    const {
-      sliderWithThumbnails,
-      slideImages,
-      radarData,
-    } = this.props
+    const { sliderWithThumbnails, slideImages, radarData } = this.props
     const { selectedImage } = this.state
     const sliderTabContainer = cn(
       'grid-container col-12 mt-48 mb-48',
@@ -257,156 +276,195 @@ class LibraryDetailShotByShot extends React.Component {
     )
 
     return (
-      <div>
-        {selectedImage ? (
-          <div className={sliderTabContainer}>
-            <div className="col-6-no-gutters bg-black">
-              <div className="mt-48 ml-48 mr-48">
-                <SingleItemSlider slideImages={sliderWithThumbnails} selectedImage={selectedImage} />
-              </div>
-            </div>
-            <div className="col-6-no-gutters ">
-              <Tabs>
-                <TabList className={style.tabList}>
-                  <Tab selectedClassName={style.selectedTab}>Demographics</Tab>
-                  <Tab selectedClassName={style.selectedTab}>Objects</Tab>
-                  <Tab selectedClassName={style.selectedTab}>Color</Tab>
-                  <div className={style.cancelButton}>
-                    <span
-                      className="icon-X-Circle"
-                      onClick={() => this.setState({ selectedImage: false })}
-                    >
-                      <span className="path1" />
-                      <span className="path2" />
-                      <span className="path3" />
-                    </span>
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <div
+            className="grid-container col-12 mt-48"
+            style={{
+              backgroundColor: colors.moduleBackground,
+              boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
+              color: colors.textColor,
+            }}
+          >
+            {selectedImage ? (
+              <div className={sliderTabContainer}>
+                <div className="col-6-no-gutters bg-black">
+                  <div className="mt-48 ml-48 mr-48">
+                    <SingleItemSlider
+                      slideImages={sliderWithThumbnails}
+                      selectedImage={selectedImage}
+                    />
                   </div>
-                </TabList>
-                <TabPanel>
-                  <div className={style.tabPanel}>
-                    {slideImages.map((image, i) => (
-                      <div
-                        className={style.tabPanelItem + ' grid-container mt-16'}
-                        key={i}
-                      >
-                        <div className="col-5-no-gutters">
-                          <img src={image.src} className="img-responsive" />
-                        </div>
-                        <div className="col-7-no-gutters">
-                          <div className="pt-20">
-                            {image.options.map((option, z) => (
-                              <div
-                                className={style.progressbarContainer}
-                                key={z}
-                              >
+                </div>
+                <div className="col-6-no-gutters ">
+                  <Tabs>
+                    <TabList className={style.tabList}>
+                      <Tab selectedClassName={style.selectedTab}>
+                        Demographics
+                      </Tab>
+                      <Tab selectedClassName={style.selectedTab}>Objects</Tab>
+                      <Tab selectedClassName={style.selectedTab}>Color</Tab>
+                      <div className={style.cancelButton}>
+                        <span
+                          className="icon-X-Circle"
+                          onClick={() =>
+                            this.setState({ selectedImage: false })
+                          }
+                        >
+                          <span className="path1" />
+                          <span className="path2" />
+                          <span className="path3" />
+                        </span>
+                      </div>
+                    </TabList>
+                    <TabPanel>
+                      <div className={style.tabPanel}>
+                        {slideImages.map((image, i) => (
+                          <div
+                            className={
+                              style.tabPanelItem + ' grid-container mt-16'
+                            }
+                            key={i}
+                          >
+                            <div className="col-5-no-gutters">
+                              <img src={image.src} className="img-responsive" />
+                            </div>
+                            <div className="col-7-no-gutters">
+                              <div className="pt-20">
+                                {image.options.map((option, z) => (
+                                  <div
+                                    className={style.progressbarContainer}
+                                    key={z}
+                                  >
+                                    <div className={style.barOptions}>
+                                      <p>{option.text}</p>
+                                      <p>{option.accurate}% Accurate</p>
+                                    </div>
+                                    <ProgressBar
+                                      width={option.percentage}
+                                      customBarClass={style.progressBar}
+                                      customPercentageClass={style.percentage}
+                                    />
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </TabPanel>
+                    <TabPanel>
+                      <div className={style.tabPanel}>
+                        <div
+                          className={
+                            style.tabPanelItem + ' grid-container mt-16'
+                          }
+                        >
+                          <div className="col-5-no-gutters">
+                            <img
+                              src="https://picsum.photos/500/270?image=8"
+                              className="img-responsive"
+                            />
+                          </div>
+                          <div className="col-7-no-gutters">
+                            <div className="pt-32">
+                              <div className={style.progressbarContainer}>
                                 <div className={style.barOptions}>
-                                  <p>{option.text}</p>
-                                  <p>{option.accurate}% Accurate</p>
+                                  <p>Football Helmet</p>
+                                  <p>78% Accurate</p>
                                 </div>
                                 <ProgressBar
-                                  width={option.percentage}
+                                  width={78}
                                   customBarClass={style.progressBar}
                                   customPercentageClass={style.percentage}
                                 />
                               </div>
-                            ))}
+                            </div>
                           </div>
                         </div>
                       </div>
-                    ))}
-                  </div>
-                </TabPanel>
-                <TabPanel>
-                  <div className={style.tabPanel}>
-                    <div
-                      className={style.tabPanelItem + ' grid-container mt-16'}
-                    >
-                      <div className="col-5-no-gutters">
-                        <img
-                          src="https://picsum.photos/500/270?image=8"
-                          className="img-responsive"
-                        />
+                    </TabPanel>
+                    <TabPanel>
+                      <div className={style.radarChartContainer}>
+                        <RadarChart data={radarData} />
                       </div>
-                      <div className="col-7-no-gutters">
-                        <div className="pt-32">
-                          <div className={style.progressbarContainer}>
-                            <div className={style.barOptions}>
-                              <p>Football Helmet</p>
-                              <p>78% Accurate</p>
-                            </div>
-                            <ProgressBar
-                              width={78}
-                              customBarClass={style.progressBar}
-                              customPercentageClass={style.percentage}
+                    </TabPanel>
+                  </Tabs>
+                </div>
+              </div>
+            ) : (
+              <div className="col-12 shadow-1 mt-48 mb-48 bg-dark-grey-blue">
+                <div className="col-12">
+                  <h2 className={style.sliderHeader}>Shot by Shot</h2>
+                  <div className={style.sliderContainer} ref={this.slide}>
+                    <div
+                      className={style.sliderWrapper}
+                      style={{
+                        left: this.state.sliderLeftPosition,
+                        width: this.state.sliderTotalWidth,
+                      }}
+                    >
+                      {this.state.scenes.map((scene, i) => (
+                        <div className={style.image} key={i}>
+                          <div
+                            style={{ width: `${scene.width}px` }}
+                            className={style.setCenter}
+                          >
+                            <div
+                              className={style.originalImage}
+                              style={{
+                                width: `${scene.width}px`,
+                                backgroundImage: `url(${scene.sceneURL})`,
+                              }}
                             />
                           </div>
+                          <img
+                            src={scene.sceneURL}
+                            className={style.hover}
+                            onClick={() => {
+                              this.handleClick(i)
+                            }}
+                          />
                         </div>
-                      </div>
+                      ))}
                     </div>
                   </div>
-                </TabPanel>
-                <TabPanel>
-                  <div className={style.radarChartContainer}>
-                    <RadarChart data={radarData} />
+                </div>
+                <div className="col-12 mt-16 mb-16 library-detail-slider">
+                  <div className="library-shotbyshot">
+                    <Slider
+                      step={1}
+                      defaultValue={0}
+                      value={this.state.sliderValue}
+                      onChange={(val) => this.onChangeSlider(val)}
+                      handleStyle={this.state.sliderHandleStyle}
+                      trackStyle={{
+                        height: '16px',
+                        backgroundColor: 'transparent',
+                      }}
+                      min={0}
+                      max={100}
+                      railStyle={{
+                        height: '16px',
+                        borderRadius: '10px',
+                        backgroundColor: '#21243B',
+                      }}
+                      dotStyle={{
+                        width: '0px',
+                        height: '16px',
+                        border: 0,
+                        top: '0px',
+                      }}
+                      disabled={this.state.sliderDisabled}
+                      marks={this.state.sliderMarks}
+                    />
                   </div>
-                </TabPanel>
-              </Tabs>
-            </div>
+                </div>
+              </div>
+            )}
           </div>
-        ) : (
-            <div className="col-12 shadow-1 mt-48 mb-48 bg-dark-grey-blue">
-              <div className="col-12">
-                <h2 className={style.sliderHeader}>Shot by Shot</h2>
-                <div className={style.sliderContainer} ref={this.slide}>
-                  <div className={style.sliderWrapper} style={{ left: this.state.sliderLeftPosition, width: this.state.sliderTotalWidth }}>
-                    {this.state.scenes.map((scene, i) => (
-                      <div
-                        className={style.image}
-                        key={i}
-                      >
-                        <div style={{ width: `${scene.width}px` }} className={style.setCenter}>
-                          <div className={style.originalImage} style={{ width: `${scene.width}px`, backgroundImage: `url(${scene.sceneURL})` }}></div>
-                        </div>
-                        <img src={scene.sceneURL} className={style.hover}
-                          onClick={() => { this.handleClick(i) }} />
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-              <div className="col-12 mt-16 mb-16 library-detail-slider">
-                <div className="library-shotbyshot">
-                  <Slider
-                    step={1}
-                    defaultValue={0}
-                    value={this.state.sliderValue}
-                    onChange={(val) => this.onChangeSlider(val)}
-                    handleStyle={this.state.sliderHandleStyle}
-                    trackStyle={{
-                      height: '16px',
-                      backgroundColor: 'transparent',
-                    }}
-                    min={0}
-                    max={100}
-                    railStyle={{
-                      height: '16px',
-                      borderRadius: '10px',
-                      backgroundColor: '#21243B',
-                    }}
-                    dotStyle={{
-                      width: '0px',
-                      height: '16px',
-                      border: 0,
-                      top: '0px',
-                    }}
-                    disabled={this.state.sliderDisabled}
-                    marks={this.state.sliderMarks}
-                  />
-                </div>
-              </div>
-            </div>
-          )}
-      </div>
+        )}
+      </ThemeContext.Consumer>
     )
   }
 }

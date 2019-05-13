@@ -19,29 +19,28 @@
   width: 424px;
   z-index: 1000;
   right: -426px; // 2px for shadow
-	top: 0;
+  top: 0;
 
-	&.fixed{
-		overflow: hidden;
-	}
+  &.fixed {
+    overflow: hidden;
+  }
 }
 
-.sidebarMain{
-	position: relative;
-	height: 100%;
-	width: 100%;
+.sidebarMain {
+  position: relative;
+  height: 100%;
+  width: 100%;
 
-	&.fixed{
-		display: flex;
-	}
+  &.fixed {
+    display: flex;
+  }
 }
 
-.sidebarDurationRange{
-	width: 100%;
+.sidebarDurationRange {
+  width: 100%;
 }
 
 .sidebarHeader {
-  background-color: $color-white;
   position: relative;
   width: 100%;
   .text {
@@ -55,25 +54,25 @@
     }
   }
 
-	&.fixed{
-		position: absolute;
-		left: 0px;
-		top: 0px;
-		z-index: 11;
-	}
+  &.fixed {
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    z-index: 11;
+  }
 }
 
 .sidebarVisible {
   right: 0;
 }
 
-.sidebarContent{
-	&.fixed{
-		width: 100%;
-		height: calc(100% - 80px);
-		overflow-x: hidden;
-		overflow-y: auto;
-	}
+.sidebarContent {
+  &.fixed {
+    width: 100%;
+    height: calc(100% - 80px);
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
 }
 
 .overlay {
@@ -86,7 +85,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba($color-dark-five, 0.4);
-  z-index: 1;
+  z-index: 999;
 }
 
 .overlayShow {
@@ -106,6 +105,6 @@
   color: $color-white;
 }
 
-.sidebarApplyButton{
-	border: 1px solid $color-cool-grey !important;
+.sidebarApplyButton {
+  border: 1px solid $color-cool-grey !important;
 }

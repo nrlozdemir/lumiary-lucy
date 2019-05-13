@@ -1,7 +1,7 @@
-
 import React from 'react'
 import classnames from 'classnames'
 import styles from './style.scss'
+import { withTheme } from 'ThemeContext/withTheme'
 
 /*
 Example Usage:
@@ -15,39 +15,50 @@ containerClassName, flipperClassName, frontClassName, backClassName
 */
 
 const defaultProps = {
-  containerClassName: classnames(styles.flipContainer, 'col-3 ml-0'),
-  flipperClassName: styles.flipper,
-  frontClassName: styles.front,
-  backClassName: styles.back,
   width: 260,
-  height: 134
+  height: 134,
 }
 
-export default class FlipCard extends React.Component {
+class FlipCard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
   }
 
   render() {
+    const { children, width, height } = this.props
     const {
-      containerClassName,
-      flipperClassName,
-      frontClassName,
-      backClassName,
-      children,
-      width,
-      height
-    } = this.props
+      textColor,
+      moduleBackground,
+      moduleShadow,
+    } = this.props.themeContext.colors
+
+    const themeStyle = {
+      color: textColor,
+      background: moduleBackground,
+      boxShadow: `0 2px 6px 0 ${moduleShadow}`,
+    }
+
+    const containerClassName = classnames(styles.flipContainer, 'col-3 ml-0')
+
+    const flipperClassName = styles.flipper
+    const frontClassName = styles.front
+    const backClassName = styles.back
 
     return (
       <React.Fragment>
-        <div className={containerClassName} style={{width: width + 'px', height: height + 'px'}}>
+        <div
+          className={containerClassName}
+          style={{
+            width: width + 'px',
+            height: height + 'px',
+          }}
+        >
           <div className={flipperClassName}>
-            <div className={frontClassName}>
+            <div className={frontClassName} style={{ ...themeStyle }}>
               {children && children[0]}
             </div>
-            <div className={backClassName}>
+            <div className={backClassName} style={{ ...themeStyle }}>
               {children && children[1]}
             </div>
           </div>
@@ -59,4 +70,4 @@ export default class FlipCard extends React.Component {
 
 FlipCard.defaultProps = defaultProps
 
-
+export default withTheme(FlipCard)
