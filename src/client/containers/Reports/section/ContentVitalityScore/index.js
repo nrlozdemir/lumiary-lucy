@@ -33,7 +33,7 @@ class ContentVitalityScore extends React.Component {
             placeHolder: 'Platforms',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'RCVS-wds',
             placeHolder: 'Date',
           },
@@ -49,7 +49,10 @@ class ContentVitalityScore extends React.Component {
               width={1144}
               height={291}
               backgroundColor="#21243B"
-              dataSet={data}
+              dataSet={{
+                labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                datasets: data.datasets
+              }}
               removeTooltip
               removePointRadius
               xAxesFlatten

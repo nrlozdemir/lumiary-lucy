@@ -123,22 +123,22 @@ class Cards extends React.Component {
     return (
       <div className="grid-container col-12">
         <div className={styles.flipWrapper}>
-          <FlipCard>
+          <FlipCard width={282} height={114}>
             {views && <Front data={views} title="Views" />}
             {views && <Back data={views} title="Views" />}
           </FlipCard>
 
-          <FlipCard>
+          <FlipCard width={282} height={114}>
             {likes && <Front data={likes} title="Likes" />}
             {likes && <Back data={likes} title="Likes" />}
           </FlipCard>
 
-          <FlipCard>
+          <FlipCard width={282} height={114}>
             {comments && <Front data={comments} title="Comments" />}
             {comments && <Back data={comments} title="Comments" />}
           </FlipCard>
 
-          <FlipCard>
+          <FlipCard width={282} height={114}>
             {shares && <Front data={shares} title="Shares" />}
             {shares && <Back data={shares} title="Shares" />}
           </FlipCard>

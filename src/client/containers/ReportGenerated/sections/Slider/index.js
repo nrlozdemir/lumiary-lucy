@@ -22,7 +22,7 @@ const Slider = ({ data, changeSelectedVideo, selectedVideo }) => {
                 <p className={style.title}>{value.title}</p>
                 <p className={style.progressText}>
                   <span className={style.leftTitle}>{value.leftTitle}</span>
-                  <span className={style.rightTitle}>{value.rightTitle}</span>
+                  <span className={style.rightTitle}>{value.value}%</span>
                 </p>
                 <ProgressBar
                   width={value.value}

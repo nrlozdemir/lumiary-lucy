@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectAudiencePerformance } from 'Reducers/panoptic'
+import { actions, makeSelectAudiencePerformance } from 'Reducers/audience'
 import Module from 'Components/Module'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
 import RangeWithBadge from 'Components/Form/RangeWithBadge'
@@ -102,12 +102,12 @@ class Performance extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'AP-asd',
             placeHolder: 'Engagement',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'AP-wds',
             placeHolder: 'Date',
           },

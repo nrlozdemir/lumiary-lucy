@@ -4,15 +4,44 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticFilteringSection } from 'Reducers/panoptic'
 import Module from 'Components/Module'
+import { chartCombineDataset } from 'Utils'
 //import classnames from 'classnames'
 import 'chartjs-plugin-datalabels'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 import style from './style.scss'
+import {
+  doughnutData_DatasetOptions,
+  stackedChartData_DatasetOptions,
+} from './options'
+
+const filters = [
+  {
+    type: 'property',
+    selectKey: 'PFS-dsad',
+    placeHolder: 'property',
+  },
+  {
+    type: 'metric',
+    selectKey: 'PFS-asdwda',
+    placeHolder: 'Engagement',
+  },
+  {
+    type: 'platform',
+    selectKey: 'PFS-dwdf',
+    placeHolder: 'Platform',
+  },
+  {
+    type: 'dateRange',
+    selectKey: 'PFS-wxcvs',
+    placeHolder: 'Date',
+  },
+]
 
 class PanopticFilteringSection extends Component {
-  callBack = (data, moduleKey) => {
-    this.props.getFilteringSectionData(data)
+  callBack = (data) => {
+    const { getFilteringSectionData } = this.props
+    getFilteringSectionData(data)
   }
 
   render() {
@@ -23,33 +52,31 @@ class PanopticFilteringSection extends Component {
         error,
       },
     } = this.props
+
+    const combineDoughnutData = {
+      labels: [
+        '0-15 seconds',
+        '15-30 seconds',
+        '30-45 seconds',
+        '45-60 seconds',
+      ],
+      datasets: doughnutData,
+    }
+
+    const combineStackedChartData = {
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+      datasets: stackedChartData,
+    }
+
+    //console.log('donute data', combineDoughnutData)
+    //console.log('stack chart', combineStackedChartData)
+
     return (
       <Module
         moduleKey={'Panoptic/FilteringSection'}
         title="Engagement By Property Over Time"
         action={this.callBack}
-        filters={[
-          {
-            type: 'videoProperty',
-            selectKey: 'PFS-dsad',
-            placeHolder: 'videoProperty',
-          },
-          {
-            type: 'engagement',
-            selectKey: 'PFS-asdwda',
-            placeHolder: 'Engagement',
-          },
-          {
-            type: 'platform',
-            selectKey: 'PFS-dwdf',
-            placeHolder: 'Platform',
-          },
-          {
-            type: 'timeRange',
-            selectKey: 'PFS-wxcvs',
-            placeHolder: 'Date',
-          },
-        ]}
+        filters={filters}
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
@@ -57,7 +84,10 @@ class PanopticFilteringSection extends Component {
               <DoughnutChart
                 width={270}
                 height={270}
-                data={doughnutData}
+                data={chartCombineDataset(
+                  combineDoughnutData,
+                  doughnutData_DatasetOptions
+                )}
                 cutoutPercentage={58}
                 fillText="Total Percentage"
                 dataLabelFunction="insertAfter"
@@ -73,7 +103,14 @@ class PanopticFilteringSection extends Component {
             )}
           </div>
           <div className={style.stackedChart}>
-            {stackedChartData && <StackedBarChart barData={stackedChartData} />}
+            {stackedChartData && (
+              <StackedBarChart
+                barData={chartCombineDataset(
+                  combineStackedChartData,
+                  stackedChartData_DatasetOptions
+                )}
+              />
+            )}
           </div>
         </div>
       </Module>

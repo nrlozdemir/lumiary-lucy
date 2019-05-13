@@ -7,6 +7,7 @@ import quickview from './quickview'
 import marketview from './marketview'
 import reports from './reports'
 import generatedReport from './generatedReport'
+import audience from './audience'
 
 export default function* rootSaga() {
   yield all([
@@ -17,5 +18,6 @@ export default function* rootSaga() {
     ...marketview,
     ...reports,
     ...generatedReport,
+    ...audience,
   ])
 }

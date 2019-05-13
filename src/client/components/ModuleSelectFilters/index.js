@@ -12,9 +12,9 @@ import { actions, makeSelectSelectFilters } from 'Reducers/selectFilters'
  * Represents a Select Filters.
  *
  * (Types are:  engagement, platform, aspectRatio, resolution,
- * 		frameRate, duration, pacing, videoFormat, videoProperty,
+ * 		frameRate, duration, pacing, videoFormat, property,
  * 		audienceAge, audienceGender, talentAge, talentGender,
- * 		colorTempature, timeRange
+ * 		colorTempature, dateRange
  *
  * @constructor
  * @param {selectKey} selectKey - The Uniqe Key of the Select.
@@ -82,7 +82,7 @@ class ModuleSelectFilters extends React.Component {
           onChange={(option) => this.onChange(option)}
           options={options[type]}
         />
-        {type === 'timeRange' &&
+        {type === 'dateRange' &&
           selectedOption &&
           selectedOption.value &&
           selectedOption.value.value === 'custom' && (
