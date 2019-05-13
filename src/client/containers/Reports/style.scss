@@ -26,7 +26,6 @@
       justify-content: center;
       font-size: 12px;
       span {
-        color: #5292E5;
         margin-bottom: 8px;
         cursor: pointer;
         font-family: $font-family-ClanOTBold;
@@ -35,13 +34,12 @@
         border-bottom: 1px solid transparent;
 
         &:hover {
-          border-bottom: 1px solid #5292E5;
+          border-bottom: 1px solid #5292e5;
           line-height: 1.2;
         }
       }
       a {
         cursor: pointer;
-        color: $color-dusk;
       }
     }
     div::after {
@@ -61,7 +59,7 @@
     &:after {
       content: '\e91a';
       font-family: $font-family-qf-icons;
-      color: $color-white;
+      // color: $color-white;
       cursor: pointer;
       font-size: 16px;
     }

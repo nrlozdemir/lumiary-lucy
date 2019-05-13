@@ -4,6 +4,7 @@ import style from './style.scss'
 import { socialIconSelector } from '../../utils'
 import { Link } from 'react-router-dom'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
+import { ThemeContext } from 'ThemeContext/themeContext'
 
 let hoverInReady
 
@@ -79,79 +80,117 @@ export class VideoCard extends PureComponent {
       style.iconClass
     )
     return (
-      <div className={style.cardContainer}>
-        <div
-          className={style.cardInner}
-          onMouseEnter={() => this.videoMouseEnterPlay()}
-          onMouseLeave={() => this.videoMouseLeavePlay()}
-        >
-        {video.cvScore && (<div className={style.cardCornerInfo}>
-            <span>{video.cvScore}</span>
-            <div className={style.percentageWrapper}>
-              <PercentageBarGraph
-                backgroundColor='#21243b'
-                customClass={style.libraryPercentageGraph}
-                id={id}
-                percentage={video.cvScore}
-                disableLabels={true}
-                color='#2fd7c4'
-                lineCount={30}
-                height={15}
-                width={45}
-                xSmall
-              />
-            </div>
-          </div>)}
-          {video.videoUrl && itCanPlay ? (
-            <div className={style.videoInner}>
-              <video
-                ref={this.video}
-                loop
-                muted
-                poster={video.poster}
-                controls={false}
-              >
-                <source src={video.videoUrl} type="video/mp4" />
-              </video>
-              <span
-                className={style.progressBar}
-                style={{
-                  width: `${(this.state.width * 100) / this.state.duration}%`,
-                }}
-              />
-            </div>
-          ) : (
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <div
+            className={style.cardContainer}
+            style={{
+              boxShadow: `0 2px 6px 0 colors.videoCardShadow`,
+            }}
+          >
             <div
-              className={style.blurredImage}
-              style={{ backgroundImage: `url(${video.poster})` }}
-            />
-          )}
-
-          <div className={classnames('bg-dusk', style.cardBody)}>
-            <div className={style.bodyHeader}>
-              <div className={style.cardInfo}>
-                <span className={style.iconWrapper}>
-                  <i className={iconClass} />
-                </span>
-                <span className={style.title}>{video.title}</span>
-              </div>
-              <Link
-                to={`/library/build-report/${video.id}`}
-                className={style.cardLink}
-              >
-                View Video Report
-                <div className={style.icon}>
-                  <span className="icon-Right-Arrow-Circle">
-                    <span className="path1" />
-                    <span className="path2" />
-                    <span className="path3" />
-                  </span>
+              className={style.cardInner}
+              onMouseEnter={() => this.videoMouseEnterPlay()}
+              onMouseLeave={() => this.videoMouseLeavePlay()}
+            >
+              {video.cvScore && (
+                <div
+                  className={style.cardCornerInfo}
+                  style={{
+                    backgroundColor: colors.videoRightPercentageBackground,
+                    color: colors.labelColor,
+                  }}
+                >
+                  <span>{video.cvScore}</span>
+                  <div className={style.percentageWrapper}>
+                    <PercentageBarGraph
+                      backgroundColor={colors.videoRightPercentageBackground}
+                      customClass={style.libraryPercentageGraph}
+                      id={id}
+                      percentage={video.cvScore}
+                      disableLabels={true}
+                      color="#2fd7c4"
+                      lineCount={30}
+                      height={15}
+                      width={45}
+                      xSmall
+                    />
+                  </div>
                 </div>
-              </Link>
+              )}
+              {video.videoUrl && itCanPlay ? (
+                <div
+                  className={style.videoInner}
+                  style={{
+                    border: `1px solid ${colors.videoBorder}`,
+                  }}
+                >
+                  <video
+                    ref={this.video}
+                    loop
+                    muted
+                    poster={video.poster}
+                    controls={false}
+                  >
+                    <source src={video.videoUrl} type="video/mp4" />
+                  </video>
+                  <span
+                    className={style.progressBar}
+                    style={{
+                      width: `${(this.state.width * 100) /
+                        this.state.duration}%`,
+                    }}
+                  />
+                </div>
+              ) : (
+                <div
+                  className={style.blurredImage}
+                  style={{
+                    backgroundImage: `url(${video.poster})`,
+                    border: `1px solid ${colors.videoBorder}`,
+                  }}
+                />
+              )}
+
+              <div
+                className={classnames('bg-dusk', style.cardBody)}
+                style={{
+                  backgroundColor: colors.videoCardBackground,
+                  color: colors.labelColor,
+                }}
+              >
+                <div className={style.bodyHeader}>
+                  <div className={style.cardInfo}>
+                    <span className={style.iconWrapper}>
+                      <i
+                        className={iconClass}
+                        style={{ color: colors.videoCardIcon }}
+                      />
+                    </span>
+                    <span className={style.title}>{video.title}</span>
+                  </div>
+                  <Link
+                    to={`/library/build-report/${video.id}`}
+                    className={style.cardLink}
+                    style={{
+                      color: colors.labelColor,
+                    }}
+                  >
+                    View Video Report
+                    <div className={style.icon}>
+                      <span className="icon-Right-Arrow-Circle">
+                        <span className="path1" />
+                        <span className="path2" />
+                        <span className="path3" />
+                      </span>
+                    </div>
+                  </Link>
+                </div>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
+        )}
+      </ThemeContext.Consumer>
     )
   }
 }

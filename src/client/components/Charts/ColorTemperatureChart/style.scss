@@ -24,7 +24,7 @@
     font-size: 14px;
     line-height: 1.86;
     text-align: center;
-    color: $color-white;
+    // color: $color-white;
     margin-top: 80px;
     padding: 0 80px;
   }
@@ -71,9 +71,6 @@
   right: -10px;
   font-family: $font-family-ClanOTNews;
   transform: translateX(100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .textLeft {
@@ -82,9 +79,6 @@
   left: -10px;
   right: unset;
   transform: translateX(-100%);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .horizontalLine {
@@ -109,9 +103,9 @@
   margin: 0 auto;
   width: 204px;
   height: 204px;
-  background-color: $color-dusk;
+  // background-color: $color-dusk;
   border-radius: 100%;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.5);
+  // box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.5);
   position: relative;
 
   .round {

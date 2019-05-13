@@ -5,9 +5,8 @@
   position: relative;
 
   &:before,
-  &:after{
+  &:after {
     font-size: 12px;
-    background-color: $color-dark-grey-blue;
     z-index: 4;
     position: absolute;
     top: 0;
@@ -17,12 +16,12 @@
     transform-origin: 0 0;
   }
 
-  &:before{
+  &:before {
     content: attr(data-first-legend);
     top: 12%;
   }
 
-  &:after{
+  &:after {
     content: attr(data-second-legend);
     top: 41%;
   }

@@ -6,9 +6,12 @@ import { actions, makeSelectPanopticPacingCard } from 'Reducers/panoptic'
 import Module from 'Components/Module'
 
 import classnames from 'classnames'
-import HorizontalStackedBarChart from 'Components/Charts/Panoptic/HorizontalStackedBarChart'
+import HorizontalStackedBarChart from 'Components/Charts/HorizontalStackedBarChart'
+import { barChartOptions } from './options'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
 import { isEmpty } from 'lodash'
+
+
 
 import style from './style.scss'
 
@@ -64,7 +67,10 @@ class PacingCard extends React.Component {
         <div className={style.pacingCardInner}>
           <div className={style.pacingCardInnerItem}>
             <HorizontalStackedBarChart
+              width={500}
+              height={340}
               barData={horizontalStackedBarData}
+              options={barChartOptions}
             />
           </div>
           <div className={style.pacingCardInnerItem}>

@@ -9,7 +9,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
-import Slider from 'Containers/Marketview/sections/detail/Slider'
+import Slider from 'Components/Modules/SliderModule'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
 import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
 import RouterLoading from 'Components/RouterLoading'
@@ -95,6 +95,18 @@ export class Platform extends React.Component {
           changeSelectedVideo={this.changeSelectedVideo}
           title="Top Performing Videos By Platform"
           moduleKey="MarketView/Platform/Slider"
+          filters={[
+            {
+              type: 'metric',
+              selectKey: 'Mwplt-engagement',
+              placeHolder: 'Engagement',
+            },
+            {
+              type: 'dateRange',
+              selectKey: 'Mwplt-date',
+              placeHolder: 'Date',
+            },
+          ]}
         />
 
         {competitorTopVideos && (
@@ -145,6 +157,7 @@ export class Platform extends React.Component {
             ]}
           />
         )}
+
         <TopSimilarPropertiesModule
           moduleKey="MarketView/TopSimilarPropertiesModule"
           data={similarProperties}
@@ -158,6 +171,7 @@ export class Platform extends React.Component {
             },
           ]}
         />
+
         {topPerformingPropertiesData && (
           <BarChartModule
             moduleKey="MarketView/Platform/TopPerformingPropertyAcrossAllPlatforms"

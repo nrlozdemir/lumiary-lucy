@@ -4,6 +4,7 @@ import { Bar } from 'react-chartjs-2'
 import cx from 'classnames'
 import style from './style.scss'
 import { randomKey } from 'Utils'
+import { withTheme } from 'ThemeContext/withTheme'
 
 import { options, wrapperBarOptions } from './chartOptions'
 
@@ -16,7 +17,7 @@ import Module from 'Components/Module'
 
 const plugins = [
   {
-    beforeDraw: function (chart, easing) {
+    beforeDraw: function(chart, easing) {
       if (
         chart.config.options.chartArea &&
         chart.config.options.chartArea.backgroundColor
@@ -45,7 +46,11 @@ const renderLegend = (legend, legendEnd) => {
 
   return (
     <div className={style.headerLabel}>
-      <div className={`d-flex align-items-center ${legendEnd ? 'justify-content-end' : 'justify-content-center'}`}>
+      <div
+        className={`d-flex align-items-center ${
+          legendEnd ? 'justify-content-end' : 'justify-content-center'
+        }`}
+      >
         {legend.map((item, idx) => (
           <Legend
             key={`BarChartLegend_${idx}`}
@@ -58,22 +63,45 @@ const renderLegend = (legend, legendEnd) => {
   )
 }
 
-const VideoReleasesBarChartModule = ({
-  data,
-  moduleKey,
-  title,
-  action,
-  filters,
-  legend,
-  legendEnd
-}) => {
-
+const VideoReleasesBarChartModule = (props) => {
   const datasetKeyProvider = () => {
     return randomKey(5)
   }
+  const {
+    data,
+    moduleKey,
+    title,
+    action,
+    filters,
+    legend,
+    legendEnd,
+    themeContext: { colors },
+  } = props
 
   if (!data && !data.length) return false
-
+  const barChartOptions = {
+    ...options,
+    scales: {
+      xAxes: [
+        {
+          ...options.scales.xAxes[0],
+          ticks: {
+            ...options.scales.xAxes[0].ticks,
+            fontColor: colors.textColor,
+          },
+          gridLines: {
+            ...options.scales.xAxes[0].gridLines,
+            color: colors.chartStadiumBarBorder,
+          },
+        },
+      ],
+      yAxes: [
+        {
+          ...options.scales.yAxes[0],
+        },
+      ],
+    },
+  }
   return (
     <Module
       moduleKey={moduleKey}
@@ -82,12 +110,47 @@ const VideoReleasesBarChartModule = ({
       filters={filters || []}
       legend={renderLegend(legend, legendEnd)}
     >
-      <div className={barChartContainer} data-first-legend={legend[0].label} data-second-legend={legend[1].label}>
+      <div
+        className={barChartContainer}
+        data-first-legend={legend[0].label}
+        data-second-legend={legend[1].label}
+        style={{
+          background: colors.moduleBackground,
+          color: colors.textColor,
+        }}
+      >
         <div className={barContainerClass}>
           <div className={style.wrapperBarChart}>
             <Bar
+              key={Math.random()}
               data={data}
-              options={wrapperBarOptions(data)}
+              options={{
+                ...wrapperBarOptions,
+                chartArea: {
+                  backgroundColor: colors.chartBackground,
+                },
+                scales: {
+                  xAxes: [
+                    {
+                      ...wrapperBarOptions.scales.xAxes[0],
+                    },
+                  ],
+                  yAxes: [
+                    {
+                      ...wrapperBarOptions.scales.yAxes[0],
+                      ticks: {
+                        ...wrapperBarOptions.scales.yAxes[0].ticks,
+                        fontColor: colors.labelColor,
+                      },
+                      gridLines: {
+                        ...wrapperBarOptions.scales.yAxes[0].gridLines,
+                        color: colors.chartStadiumBarBorder,
+                        zeroLineColor: colors.chartStadiumBarBorder,
+                      },
+                    },
+                  ],
+                },
+              }}
               datasetKeyProvider={datasetKeyProvider}
               plugins={plugins}
             />
@@ -96,45 +159,78 @@ const VideoReleasesBarChartModule = ({
             <div className="col-3">
               <div className={style.chartSection}>
                 <Bar
+                  key={Math.random()}
                   data={data}
-                  options={options}
+                  options={barChartOptions}
                   datasetKeyProvider={datasetKeyProvider}
                 />
               </div>
               <div className={style.chartSectionBadge}>
-                <span>Live Action</span>
+                <span
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  Live Action
+                </span>
               </div>
             </div>
             <div className="col-3">
               <div className={style.chartSection}>
                 <Bar
                   data={data}
-                  options={options}
+                  options={barChartOptions}
                   datasetKeyProvider={datasetKeyProvider}
                 />
               </div>
               <div className={style.chartSectionBadge}>
-                <span>Stop Motion</span>
+                <span
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  Stop Motion
+                </span>
               </div>
             </div>
             <div className="col-3">
               <div className={style.chartSection}>
                 <Bar
                   data={data}
-                  options={options}
+                  options={barChartOptions}
                   datasetKeyProvider={datasetKeyProvider}
                 />
               </div>
               <div className={style.chartSectionBadge}>
-                <span>Cinemagraph</span>
+                <span
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  Cinemagraph
+                </span>
               </div>
             </div>
             <div className="col-3">
               <div className={style.chartSection}>
-                <Bar data={data} options={options} />
+                <Bar data={data} options={barChartOptions} />
               </div>
               <div className={style.chartSectionBadge}>
-                <span>Animation</span>
+                <span
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  Animation
+                </span>
               </div>
             </div>
           </div>
@@ -147,7 +243,7 @@ const VideoReleasesBarChartModule = ({
 VideoReleasesBarChartModule.defaultProps = {
   data: [],
   legend: [],
-  legendEnd: false
+  legendEnd: false,
 }
 
 VideoReleasesBarChartModule.propTypes = {
@@ -156,7 +252,7 @@ VideoReleasesBarChartModule.propTypes = {
   title: PropTypes.string,
   filters: PropTypes.array,
   legend: PropTypes.array,
-  legendEnd: PropTypes.bool
+  legendEnd: PropTypes.bool,
 }
 
-export default VideoReleasesBarChartModule;
+export default withTheme(VideoReleasesBarChartModule)

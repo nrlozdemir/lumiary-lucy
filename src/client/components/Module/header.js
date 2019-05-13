@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import ModuleSelectFilters from 'Components/ModuleSelectFilters'
 import style from './style.scss'
 import ToolTip from 'Components/ToolTip'
+import classnames from 'classnames'
 
 const HeaderModule = ({
   key,
@@ -14,23 +15,24 @@ const HeaderModule = ({
   changeInfoStatus,
   infoShow,
   infoText,
+  themes,
 }) => {
   return (
     <React.Fragment>
       <div className={style.headerTitle}>
         <h1>{title}</h1>
         {/* <h2>{subTitle}</h2> */}
-        <span
-          className={style.moduleInfo}
+        <i
+          className={classnames('icon icon-Information', style.moduleInfo)}
           onMouseEnter={() => changeInfoStatus()}
           onMouseLeave={() => changeInfoStatus()}
+          style={{ color: themes.textColor }}
         >
-          i
           <ToolTip show={infoShow}>
             {infoText ||
               'This explains what this graph means and answers any questions a usermay potentially have.'}
           </ToolTip>
-        </span>
+        </i>
       </div>
       {!!legend && <div className={style.headerLegend}>{legend}</div>}
       {filters && filters.length && (
