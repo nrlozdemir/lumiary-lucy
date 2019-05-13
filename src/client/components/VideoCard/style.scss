@@ -45,7 +45,6 @@
   }
 
   .cardInner {
-    border: 1px solid $color-dusk-two;
     border-radius: 8px;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
@@ -65,7 +64,7 @@
     height: 0;
     padding-top: 100% / 16 * 9;
     overflow: hidden;
-    border-radius: 8px;
+    box-sizing: border-box;
   }
 
   .progressBar {
@@ -86,6 +85,7 @@
     height: 0;
     padding-top: 100% / 16 * 9;
     overflow: hidden;
+    box-sizing: border-box;
     video {
       position: absolute;
       width: 100%;

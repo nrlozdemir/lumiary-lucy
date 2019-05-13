@@ -82,7 +82,12 @@ export class VideoCard extends PureComponent {
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
-          <div className={style.cardContainer}>
+          <div
+            className={style.cardContainer}
+            style={{
+              boxShadow: `0 2px 6px 0 colors.videoCardShadow`,
+            }}
+          >
             <div
               className={style.cardInner}
               onMouseEnter={() => this.videoMouseEnterPlay()}
@@ -114,7 +119,12 @@ export class VideoCard extends PureComponent {
                 </div>
               )}
               {video.videoUrl && itCanPlay ? (
-                <div className={style.videoInner}>
+                <div
+                  className={style.videoInner}
+                  style={{
+                    border: `1px solid ${colors.videoBorder}`,
+                  }}
+                >
                   <video
                     ref={this.video}
                     loop
@@ -135,7 +145,10 @@ export class VideoCard extends PureComponent {
               ) : (
                 <div
                   className={style.blurredImage}
-                  style={{ backgroundImage: `url(${video.poster})` }}
+                  style={{
+                    backgroundImage: `url(${video.poster})`,
+                    border: `1px solid ${colors.videoBorder}`,
+                  }}
                 />
               )}
 

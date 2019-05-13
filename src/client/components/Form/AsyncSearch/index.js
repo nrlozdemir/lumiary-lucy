@@ -37,47 +37,73 @@ const AsyncSearch = (props) => {
     menuList: (provided, state) => ({
       ...provided,
       backgroundColor: colors.searchOptionsColor,
+      padding: 0,
       color:
         state.isSelected || state.isFocused
           ? colors.searchOptionsColor
           : colors.searchColor,
     }),
-    option: (provided, state) => ({
-      ...provided,
-      backgroundColor:
-        state.isSelected || state.isFocused
-          ? '#ffffff'
-          : colors.searchOptionsColor,
-      color:
-        state.isSelected || state.isFocused
-          ? colors.searchOptionsColor
-          : '#ffffff',
-      cursor: state.isDisabled ? 'not-allowed' : 'default',
+    option: (styles, { data, isDisabled, isFocused, isSelected }) => ({
+      ...styles,
+      height: '40px',
+      lineHeight: '27px',
+      backgroundColor: isSelected
+        ? colors.inputOptionSelectedBackground
+        : isFocused
+        ? colors.inputOptionFocusBackground
+        : colors.inputOptionBackground,
+      color: isSelected
+        ? colors.inputColor
+        : isFocused
+        ? colors.inputActiveColor
+        : colors.inputActiveColor,
+      cursor: 'pointer',
+      border: 'none',
+      boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.5)',
+      cursor: isDisabled ? 'not-allowed' : 'default',
     }),
-    control: (provided, state) => ({
-      ...provided,
-      backgroundColor: colors.searchColor,
-      color:
-        state.isSelected || state.isFocused
-          ? colors.searchOptionsColor
-          : '#ffffff',
+    control: (styles, { data, isDisabled, isFocused, isSelected }) => ({
+      ...styles,
+      background: colors.inputControlBackground,
+      color: isSelected
+        ? colors.inputControlBorder
+        : isFocused
+        ? colors.inputControlBorder
+        : colors.inputControlSelectedBorder,
+      borderRadius: '8px',
+      borderWidth: '1px',
+      boxShadow: 'rgba(0, 0, 0, 0.5)',
+      '&:hover': {
+        borderColor: 'none',
+      },
     }),
-    noOptionsMessage: (provided, state) => ({
-      ...provided,
+    noOptionsMessage: (
+      styles,
+      { data, isDisabled, isFocused, isSelected }
+    ) => ({
+      ...styles,
       backgroundColor: colors.searchOptionsColor,
-      color: '#ffffff',
+      color: isSelected
+        ? colors.inputColor
+        : isFocused
+        ? colors.inputActiveColor
+        : colors.inputColor,
     }),
-    input: (provided, state) => ({
-      ...provided,
-      color: colors.textColor,
+    input: (styles, { data, isDisabled, isFocused, isSelected }) => ({
+      ...styles,
+      color: colors.inputActiveColor,
     }),
-    singleValue: (provided, state) => ({
-      ...provided,
-      color: colors.textColor,
+    singleValue: (styles, state) => ({
+      ...styles,
+      color: colors.inputActiveColor,
     }),
-    placeholder: (provided, state) => ({
-      ...provided,
-      color: colors.placeholderColor,
+    placeholder: (styles, { data, isDisabled, isFocused, isSelected }) => ({
+      ...styles,
+      color: isFocused
+        ? colors.inputColor
+        : isSelected
+        ? colors.inputColor
+        : colors.inputActiveColor,
     }),
   }
 

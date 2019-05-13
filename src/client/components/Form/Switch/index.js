@@ -1,17 +1,17 @@
 import React from 'react'
 import style from './style.scss'
 
-const Switch = ({ switchOn, controlSwitch }) => {
+const Switch = ({ switchOn, controlSwitch, id }) => {
   return (
     <div className={style.switchContainer}>
       <input
-        id="switch-shadow"
+        id={id}
         className={style.switch}
         type="checkbox"
         checked={switchOn}
         onChange={() => controlSwitch()}
       />
-      <label htmlFor="switch-shadow" />
+      <label htmlFor={id} />
     </div>
   )
 }

@@ -90,7 +90,11 @@ const SelectedNavLink = (props) => {
       {props.load && (
         <div className={style.switchInner}>
           <span>Save Report</span>
-          {/*<Switch />*/}
+          <Switch
+            id={Math.random()}
+            switchOn={true}
+            controlSwitch={() => null}
+          />
         </div>
       )}
     </React.Fragment>

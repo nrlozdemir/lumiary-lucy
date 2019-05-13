@@ -24,7 +24,6 @@ class Dropdown extends Component {
   }
 
   closeMenu = (event) => {
-    console.dir(this.dropdownMenu)
     if (this.dropdownMenu && !this.dropdownMenu.contains(event.target)) {
       this.setState({ showMenu: false }, () => {
         document.removeEventListener('click', this.closeMenu)
@@ -66,6 +65,7 @@ class Dropdown extends Component {
               <li style={{ borderColor: colors.themeControlListBorder }}>
                 <p className={style.text}>Night Mode</p>
                 <Switch
+                  id={Math.random()}
                   switchOn={status === 'dark'}
                   controlSwitch={this.controlSwitch}
                 />

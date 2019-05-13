@@ -37,13 +37,10 @@ const Input = ({ error, value, label, placeholder, customClass, input }) => {
               value={value}
               {...input}
               style={{
-                color: colors.inputColor,
-                borderColor:
-                  value && value.length
-                    ? colors.inputBorder
-                    : colors.inputActiveBorder,
-                background: colors.inputBackground,
-                '::-webkit-input-placeholder': {
+                color: colors.inputActiveColor,
+                borderColor: colors.inputControlSelectedBorder,
+                background: colors.inputControlBackground,
+                '::WebkitInputPlaceholder': {
                   color: colors.inputPlaceholderColor,
                 },
               }}

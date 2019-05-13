@@ -51,7 +51,10 @@ class PredefinedReport extends Component {
                   })}
                   type="submit"
                   disabled={!this.state.formValid}
-                  style={{ background: colors.modalButtonBackground }}
+                  style={{
+                    background: colors.modalButtonBackground,
+                    color: colors.textColor,
+                  }}
                 >
                   Generate Report
                   <div className={style.icon}>

@@ -118,8 +118,8 @@
 
 .dropdown {
   position: absolute;
-  left: 0;
-  z-index: 10;
+  right: 0;
+  z-index: 100;
   transform: translate(0, 10px);
   width: 206px;
   border: solid 1px;

@@ -92,7 +92,10 @@ const ReportsForm = (props) => {
                 })}
                 type="submit"
                 disabled={!props.valid}
-                style={{ background: colors.modalButtonBackground }}
+                style={{
+                  background: colors.modalButtonBackground,
+                  color: colors.textColor,
+                }}
               >
                 Generate Report
                 <div className={style.icon}>
