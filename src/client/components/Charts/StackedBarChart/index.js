@@ -59,10 +59,10 @@ const plugins = [
 									(accumulator, currentValue) => accumulator + currentValue)
 									return parseFloat((value / (totalValue / 100)).toFixed(2))
 								}),
-								borderColor: themes.chartBackground,
-								borderWidth: data.data.map((value, i) => {
+								borderColor: props.barSpacing && themes.chartBackground,
+								borderWidth: props.barSpacing && data.data.map((value, i) => {
 									return {
-										top: (index !== 3) ? 2 : 0,
+										top: (index !== 3) ? props.barSpacing : 0,
 										right: 0,
 										bottom: 0,
 										left: 0
