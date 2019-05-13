@@ -64,14 +64,12 @@ class PacingCard extends React.Component {
       >
         <div className={style.pacingCardInner}>
           <div className={style.pacingCardInnerItem}>
-            {horizontalStackedBarData && (
-              <HorizontalStackedBarChart
-                width={500}
-                height={340}
-                barData={horizontalStackedBarData}
-                options={barChartOptions}
-              />
-            )}
+            <HorizontalStackedBarChart
+              width={500}
+              height={340}
+              barData={horizontalStackedBarData}
+              options={barChartOptions}
+            />
           </div>
           <div className={style.pacingCardInnerItem}>
             <StadiumChart data={stadiumData} />
