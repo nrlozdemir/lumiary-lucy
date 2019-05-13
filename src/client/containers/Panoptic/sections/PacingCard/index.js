@@ -11,6 +11,8 @@ import { barChartOptions } from './options'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
 import { isEmpty } from 'lodash'
 
+
+
 import style from './style.scss'
 
 const pacingCardContainer = classnames(
