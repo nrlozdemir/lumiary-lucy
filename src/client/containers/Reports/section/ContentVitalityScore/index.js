@@ -35,7 +35,7 @@ class ContentVitalityScore extends React.Component {
                 placeHolder: 'Platforms',
               },
               {
-                type: 'timeRange',
+                type: 'dateRange',
                 selectKey: 'RCVS-wds',
                 placeHolder: 'Date',
               },

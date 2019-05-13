@@ -80,12 +80,12 @@ export class Platform extends React.Component {
           moduleKey="MarketView/Platform/Slider"
           filters={[
             {
-              type: 'engagement',
+              type: 'metric',
               selectKey: 'Mwplt-engagement',
               placeHolder: 'Engagement',
             },
             {
-              type: 'timeRange',
+              type: 'dateRange',
               selectKey: 'Mwplt-date',
               placeHolder: 'Date',
             },
@@ -99,19 +99,19 @@ export class Platform extends React.Component {
           action={this.getCompetitorTopVideos}
           filters={[
             {
-              type: 'videoProperty',
-              selectKey: 'mwplttvcm-videoProperty',
-              placeHolder: 'videoProperty',
+              type: 'property',
+              selectKey: 'mwplttvcm-property',
+              placeHolder: 'property',
             },
             {
-              type: 'engagement',
+              type: 'metric',
               selectKey: 'mwplttvcm-engagement',
               placeHolder: 'engagement',
             },
             {
-              type: 'timeRange',
-              selectKey: 'mwplttvcm-timeRange',
-              placeHolder: 'timeRange',
+              type: 'dateRange',
+              selectKey: 'mwplttvcm-dateRange',
+              placeHolder: 'dateRange',
             },
           ]}
           references={[
@@ -144,9 +144,9 @@ export class Platform extends React.Component {
           action={this.getSimilarProperties}
           filters={[
             {
-              type: 'timeRange',
-              selectKey: 'timeRange',
-              placeHolder: 'timeRange',
+              type: 'dateRange',
+              selectKey: 'dateRange',
+              placeHolder: 'dateRange',
             },
           ]}
         />
@@ -159,7 +159,7 @@ export class Platform extends React.Component {
           action={this.getTopPerformingProperties}
           filters={[
             {
-              type: 'engagement',
+              type: 'metric',
               selectKey: 'mwplttpaap-engagement',
               placeHolder: 'Engagement',
             },
