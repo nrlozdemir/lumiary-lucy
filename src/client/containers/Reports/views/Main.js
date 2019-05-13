@@ -26,7 +26,7 @@ class Reports extends Component {
         {
           key: 'brand-insights',
           icon:
-            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/brand-insights-icon.svg',
+            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/brand-insights-icon.png',
           title: 'Brand Insights',
           text:
             'Get helpful, detailed engagement metrics about competitor brands',
@@ -34,14 +34,14 @@ class Reports extends Component {
         {
           key: 'compare-brands',
           icon:
-            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/compare-brands-icon.svg',
+            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/compare-brands-icon.png',
           title: 'Compare Brands',
           text: 'Compare two brands to learn what’s driving their performance',
         },
         {
           key: 'predefined-reports',
           icon:
-            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/predefined-reports-icon.svg',
+            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/predefined-reports-icon.png',
           title: 'Predefined Reports',
           text: 'Access unique, relevant and invaluable customized data',
         },
