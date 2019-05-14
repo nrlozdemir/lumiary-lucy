@@ -107,7 +107,8 @@ class PanopticFilteringSection extends Component {
                 barData={chartCombineDataset(
                   combineStackedChartData,
                   stackedChartData_DatasetOptions
-                )}
+								)}
+								barSpacing={2}
               />
             )}
           </div>
