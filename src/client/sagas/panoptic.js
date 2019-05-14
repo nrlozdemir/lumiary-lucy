@@ -51,10 +51,29 @@ function* getVideoReleasesData() {
 }
 
 function* getColorTemperatureData() {
-  try {
+	try {
     const payload = yield call(getMockPanopticDataApi)
+    let shuffleData = payload.colorTempData
+    shuffleData = shuffleData.map((data) => {
+      data.data.map((item) => {
+        item.x = _.random(-50, 50)
+        item.y = _.random(-50, 50)
+      })
+      return data
+		})
 
-    const shuffleData = _.shuffle(payload.colorTempData)
+		const colors = [
+			"rgba(82, 146, 229, 0.8)",
+			"#acb0be",
+			"rgba(133, 103, 240, 0.8)",
+			"rgba(81, 173, 192, 0.8)",
+		]
+		shuffleData = shuffleData.map((data) => {
+      data.data.map((item, i) => {
+        item.color = colors[i]
+      })
+      return data
+    })
     yield put(actions.getColorTemperatureDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getColorTemperatureDataError(err))
