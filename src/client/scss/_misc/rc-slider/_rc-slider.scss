@@ -78,7 +78,7 @@
     vertical-align: middle;
   }
 }
-.library-shotbyshot{
+.library-shotbyshot {
   width: 1120px;
   margin: 0px auto;
 }
@@ -107,27 +107,28 @@
   .rc-slider-handle-click-focused:focus {
     box-shadow: unset;
   }
-  .rc-slider-handle:hover { }
+  .rc-slider-handle:hover {
+  }
   .rc-slider-handle:active {
     cursor: -webkit-grabbing;
     cursor: grabbing;
   }
-  .rc-slider-mark-text{
+  .rc-slider-mark-text {
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
     .customDot {
       position: relative;
-      color: $color-white;
+      // color: $color-white;
       font-size: 12px;
       margin-top: 24px;
       font-family: $font-family-ClanOTNews;
-      &:before{
+      &:before {
         position: absolute;
         top: -36px;
         left: 24px;
-        content: "";
+        content: '';
         border: none;
         width: 1px;
         height: 14px;
@@ -137,13 +138,13 @@
     }
     &:first-child {
       transform: translateX(0%);
-      .customDot:before{
+      .customDot:before {
         display: none;
       }
     }
     &:last-child {
       transform: translateX(-100%);
-      .customDot:before{
+      .customDot:before {
         display: none;
       }
     }
@@ -160,7 +161,7 @@
     box-shadow: 0 2px 6px 0 $color-dark-five;
     border: 1px solid $color-dusk;
   }
-  .rc-slider-tooltip-inner{
+  .rc-slider-tooltip-inner {
     border: none;
     background: none;
     border-radius: 0px;
@@ -171,7 +172,7 @@
     line-height: 31px;
     margin-bottom: 8px;
   }
-  .rc-slider-tooltip-arrow{
+  .rc-slider-tooltip-arrow {
     padding: 0px;
     margin: 0px;
     display: none;
@@ -198,10 +199,10 @@
   vertical-align: middle;
   text-align: center;
   cursor: pointer;
-  color: #999;
+  // color: #999;
 }
 .rc-slider-mark-text-active {
-  color: #666;
+  // color: #ffffff;
 }
 .rc-slider-step {
   position: absolute;
