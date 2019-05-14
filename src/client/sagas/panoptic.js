@@ -125,7 +125,7 @@ function* getPacingCardData({ data }) {
 
 function* getCompareSharesData() {
   try {
-    const payload = yield call(getPanopticDataApi)
+    const payload = yield call(getMockPanopticDataApi)
     let shuffleData = payload.compareSharesData
     shuffleData[0].datas.labels.forEach((item, index) => {
       shuffleData[0].datas.labels[index].count = _.random(10, 90)

@@ -78,12 +78,12 @@ export class Competitor extends React.Component {
             title="Top Performing Competitor Videos"
             filters={[
               {
-                type: 'engagement',
+                type: 'metric',
                 selectKey: 'Mwplt-engagement',
                 placeHolder: 'Engagement',
               },
               {
-                type: 'timeRange',
+                type: 'dateRange',
                 selectKey: 'Mwplt-date',
                 placeHolder: 'Date',
               },

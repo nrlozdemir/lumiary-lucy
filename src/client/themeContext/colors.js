@@ -119,9 +119,19 @@ const dark = {
   // theme control dropdown values
   daySelectionBorderColor: '#545b79',
 
+  // radar chart values
   chartPointBackgroundColor: '#ffffff',
   chartPointBorderColor: '#ffffff',
   chartBackgroundColor: 'rgba(255, 255, 255, 0.4)',
+  // radar chart values
+
+  // shot by shot slider values
+  shotByShotBackground: '#21243b',
+  shotByShotBorder: '#545b79',
+  shotByShotTabHeader: '#545b79',
+  shotByShotTabBody: '#373f5b',
+  shotByShotSliderPointer: '#ffffff',
+  // shot by shot slider values
 }
 
 const light = {
@@ -246,9 +256,19 @@ const light = {
   // theme control dropdown values
   daySelectionBorderColor: '#c6c9d7',
 
+  // radar chart values
   chartPointBackgroundColor: '#505050',
   chartPointBorderColor: '#505050',
   chartBackgroundColor: 'rgba(172, 176, 190, 0.4)',
+  // radar chart values
+
+  // shot by shot slider values
+  shotByShotBackground: '#e8ecf0',
+  shotByShotBorder: '#c6c9d7',
+  shotByShotTabHeader: '#ffffff',
+  shotByShotTabBody: '#f3f6f9',
+  shotByShotSliderPointer: '#2fd7c4',
+  // shot by shot slider values
 }
 
 const themes = {

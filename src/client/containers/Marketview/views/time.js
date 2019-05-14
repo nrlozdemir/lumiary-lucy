@@ -73,12 +73,12 @@ export class Time extends React.Component {
             .toUpperCase()}${activeDay.slice(1)} Videos`}
           filters={[
             {
-              type: 'engagement',
-              selectKey: 'Mwplt-engagement',
-              placeHolder: 'Engagement',
+              type: 'metric',
+              selectKey: 'Mwplt-metric',
+              placeHolder: 'metric',
             },
             {
-              type: 'timeRange',
+              type: 'dateRange',
               selectKey: 'Mwplt-date',
               placeHolder: 'Date',
             },
