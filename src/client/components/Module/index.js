@@ -23,19 +23,37 @@ export class Module extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
+    const { action, selectFilters, moduleKey } = this.props
     if (
-      this.props.action &&
-      prevProps.selectFilters &&
-      this.props.selectFilters &&
+      !!action &&
+      !!prevProps.selectFilters &&
+      !!selectFilters &&
       !_.isEqual(
         prevProps.selectFilters.values[prevProps.moduleKey],
-        this.props.selectFilters.values[this.props.moduleKey]
+        selectFilters.values[moduleKey]
       )
     ) {
-      this.props.action(
-        this.props.selectFilters.values[this.props.moduleKey],
-        this.props.moduleKey
+      const selectFilterValues = selectFilters.values[moduleKey]
+
+      // reduce into { type: value } map which is easily read by azazzle
+      const valuesToType = Object.keys(selectFilterValues).reduce(
+        (values, key) => {
+          const filterValue = selectFilterValues[key]
+          const filterType = filterValue.type
+          values[filterType] = !!filterValue.value
+            ? !!filterValue.value.value && !!filterValue.value.value.startDate
+              ? [
+                  filterValue.value.value.startDate,
+                  filterValue.value.value.endDate,
+                ]
+              : filterValue.value.value
+            : defaultFilters[filterType]
+
+          return values
+        },
+        {}
       )
+      action(valuesToType, moduleKey)
     }
   }
 
