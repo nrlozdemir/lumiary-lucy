@@ -2,36 +2,9 @@ import React, { Component } from 'react'
 //import classnames from 'classnames'
 //import style from './styles.scss'
 import Slider from 'rc-slider'
+import { withTheme } from 'ThemeContext/withTheme'
 
 const RangeSlider = Slider.Range
-
-const defaultHandleStyle = [
-  {
-    width: '32px',
-    height: '32px',
-    marginTop: '-8px',
-    borderColor: '#fff',
-  },
-  {
-    width: '32px',
-    height: '32px',
-    marginTop: '-8px',
-    borderColor: '#fff',
-  },
-]
-
-const defaultTrackStyle = [
-  {
-    height: '16px',
-    backgroundColor: '#2FD7C4',
-  },
-]
-
-const defaultRailStyle = {
-  height: '16px',
-  borderRadius: '8px',
-  backgroundColor: '#21243B',
-}
 
 class Range extends Component {
   constructor(props) {
@@ -55,6 +28,39 @@ class Range extends Component {
   }
 
   render() {
+    const { value } = this.state
+    const {
+      themeContext: { colors },
+    } = this.props
+    const defaultHandleStyle = [
+      {
+        width: '32px',
+        height: '32px',
+        marginTop: '-8px',
+        backgroundColor: colors.rangeSliderTick,
+        borderColor: colors.rangeSliderTick,
+      },
+      {
+        width: '32px',
+        height: '32px',
+        marginTop: '-8px',
+        borderColor: colors.rangeSliderTick,
+        backgroundColor: colors.rangeSliderTick,
+      },
+    ]
+
+    const defaultTrackStyle = [
+      {
+        height: '16px',
+        backgroundColor: '#2FD7C4',
+      },
+    ]
+
+    const defaultRailStyle = {
+      height: '16px',
+      borderRadius: '8px',
+      backgroundColor: colors.trackColor,
+    }
     const {
       className,
       input: { onChange },
@@ -72,9 +78,6 @@ class Range extends Component {
       marks,
       customClass,
     } = this.props
-
-    const { value } = this.state
-
     return (
       <div className="range-slider">
         <RangeSlider
@@ -92,9 +95,13 @@ class Range extends Component {
           step={step}
           dots={dots}
           marks={marks}
+          colors={colors}
         />
         {customTicksUnvisible ? null : (
-          <div className="d-flex align-items-center justify-space-between mt-24 ticks">
+          <div
+            className="d-flex align-items-center justify-space-between mt-24 ticks"
+            style={{ color: colors.textColor }}
+          >
             <span>0-15s</span>
             <span>15-30s</span>
             <span>30-60s</span>
@@ -106,4 +113,4 @@ class Range extends Component {
   }
 }
 
-export default Range
+export default withTheme(Range)

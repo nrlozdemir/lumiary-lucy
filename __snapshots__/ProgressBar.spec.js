@@ -1,7 +1,10 @@
 exports['ProgressBar Component Rendering matches snapshot 1'] = {
   "type": "div",
   "props": {
-    "className": ""
+    "className": "",
+    "style": {
+      "boxShadow": "0 1px 2px 0 undefined"
+    }
   },
   "children": [
     {

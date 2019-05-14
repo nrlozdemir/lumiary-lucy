@@ -18,17 +18,16 @@ class VideoComparison extends React.Component {
     } = this.props
     let barData = data
 
-    barData && data.map((b, i) => {
-      barData[i].labels = ["", "", "", ""]
-      barData[i].datasets.map((d, k) => {
-        barData[i].datasets[k].backgroundColor = "#2FD7C4"
-        if (i % 2 === 0) {
-          barData[i].datasets[k].backgroundColor = "#5292E5"
-        }
+    barData &&
+      data.map((b, i) => {
+        barData[i].labels = ['', '', '', '']
+        barData[i].datasets.map((d, k) => {
+          barData[i].datasets[k].backgroundColor = '#2FD7C4'
+          if (i % 2 === 0) {
+            barData[i].datasets[k].backgroundColor = '#5292E5'
+          }
+        })
       })
-    })
-
-    console.log(barData)
 
     return (
       <Module

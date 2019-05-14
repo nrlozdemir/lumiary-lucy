@@ -12,11 +12,11 @@ export const stackedChartOptions = {
     mode: 'index',
     intersect: false,
   },
-  responsive: true,
+  responsive: false,
   scales: {
     xAxes: [
       {
-        barThickness: 56,
+        barThickness: 52,
         stacked: true,
         ticks: {
           fontColor: '#fff',

@@ -1,6 +1,7 @@
 import React from 'react'
 import { shadeHexColor } from 'Utils/index'
 import style from './style.scss'
+import { withTheme } from 'ThemeContext/withTheme'
 
 class Stadium extends React.Component {
   constructor(props) {
@@ -73,8 +74,6 @@ class Stadium extends React.Component {
     let {
       stadiumText,
       angleColor,
-      barStroke,
-      barFill,
       animationSpeed,
       borderWidth,
       border,
@@ -82,6 +81,7 @@ class Stadium extends React.Component {
       infoSpaceW,
       infoSpaceH,
       data,
+      themeContext,
     } = this.props
     // angelBorder = 4
 
@@ -95,6 +95,8 @@ class Stadium extends React.Component {
       infoSpaceWBorder + l * (2 * (borderWidth + otherSpace)) + 2 * borderWidth
     let svgH =
       infoSpaceHBorder + l * (2 * (borderWidth + otherSpace)) + 2 * borderWidth
+
+    const themes = themeContext.colors
 
     return (
       <React.Fragment>
@@ -152,9 +154,9 @@ class Stadium extends React.Component {
                   {/**/}
                   <rect
                     id="BORDER"
-                    stroke={barStroke}
+                    stroke={themes.chartStadiumBarBorder}
                     strokeWidth={border}
-                    fill={barFill}
+                    fill={themes.chartStadiumBarBackground}
                     x={x + index * borderWidth - (borderWidth + border) / 2}
                     y={y + index * borderWidth - (borderWidth + border) / 2}
                     width={w + borderWidth + border}
@@ -181,7 +183,7 @@ class Stadium extends React.Component {
 
                   <rect
                     id="ANGLE"
-                    stroke={angleColor}
+                    stroke={themes.chartStadiumBarBackground}
                     strokeWidth={angelBorder}
                     style={{
                       transition: `stroke-dasharray ${animationSpeed}s linear`,
@@ -202,8 +204,8 @@ class Stadium extends React.Component {
                     <React.Fragment>
                       <rect
                         id="Rectangle"
-                        stroke={barStroke}
-                        fill={barFill}
+                        stroke={themes.chartStadiumBarBorder}
+                        fill={themes.chartStadiumCenterBackground}
                         strokeWidth={border}
                         x={legendPos}
                         y={legendPos}
@@ -216,7 +218,7 @@ class Stadium extends React.Component {
                         id="Total-Percentage"
                         fontFamily="ClanOTBold"
                         fontSize="12"
-                        fill="#ffffff"
+                        fill={themes.textColor}
                         ref={this.text}
                       >
                         <tspan
@@ -248,4 +250,4 @@ class Stadium extends React.Component {
   }
 }
 
-export default Stadium
+export default withTheme(Stadium)

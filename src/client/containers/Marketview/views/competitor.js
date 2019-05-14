@@ -10,7 +10,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
-import Slider from 'Containers/Marketview/sections/detail/Slider'
+import Slider from 'Components/Modules/SliderModule'
 import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
 import BarChartModule from 'Components/Modules/BarChartModule'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
@@ -76,6 +76,18 @@ export class Competitor extends React.Component {
             selectedVideo={selectedVideo}
             changeSelectedVideo={this.changeSelectedVideo}
             title="Top Performing Competitor Videos"
+            filters={[
+              {
+                type: 'metric',
+                selectKey: 'Mwplt-engagement',
+                placeHolder: 'Engagement',
+              },
+              {
+                type: 'dateRange',
+                selectKey: 'Mwplt-date',
+                placeHolder: 'Date',
+              },
+            ]}
           />
           <TopVideosCardModule
             chartData={competitorTopVideos}
