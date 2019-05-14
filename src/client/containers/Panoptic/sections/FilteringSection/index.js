@@ -15,29 +15,6 @@ import {
   stackedChartData_DatasetOptions,
 } from './options'
 
-const filters = [
-  {
-    type: 'property',
-    selectKey: 'PFS-dsad',
-    placeHolder: 'property',
-  },
-  {
-    type: 'metric',
-    selectKey: 'PFS-asdwda',
-    placeHolder: 'Engagement',
-  },
-  {
-    type: 'platform',
-    selectKey: 'PFS-dwdf',
-    placeHolder: 'Platform',
-  },
-  {
-    type: 'dateRange',
-    selectKey: 'PFS-wxcvs',
-    placeHolder: 'Date',
-  },
-]
-
 class PanopticFilteringSection extends Component {
   callBack = (data) => {
     const { getFilteringSectionData } = this.props
@@ -68,15 +45,37 @@ class PanopticFilteringSection extends Component {
       datasets: stackedChartData,
     }
 
-    //console.log('donute data', combineDoughnutData)
-    //console.log('stack chart', combineStackedChartData)
-
     return (
       <Module
         moduleKey={'Panoptic/FilteringSection'}
         title="Engagement By Property Over Time"
         action={this.callBack}
-        filters={filters}
+        filters={[
+          {
+            type: 'property',
+            selectKey: 'PFS-dsad',
+            placeHolder: 'property',
+            defaultValue: 'duration',
+          },
+          {
+            type: 'metric',
+            selectKey: 'PFS-asdwda',
+            placeHolder: 'Engagement',
+            defaultValue: 'views',
+          },
+          {
+            type: 'platform',
+            selectKey: 'PFS-dwdf',
+            placeHolder: 'Platform',
+            defaultValue: 'all',
+          },
+          {
+            type: 'dateRange',
+            selectKey: 'PFS-wxcvs',
+            placeHolder: 'Date',
+            defaultValue: 'month',
+          },
+        ]}
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
