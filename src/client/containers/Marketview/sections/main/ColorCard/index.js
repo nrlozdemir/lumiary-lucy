@@ -8,6 +8,7 @@ import { Link } from 'react-router-dom'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
 import { socialIconSelector } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import RightArrowCircle from "Components/Icons/RightArrowCircle";
 
 import style from 'Containers/Marketview/style.scss'
 class ColorCard extends Component {
@@ -127,13 +128,7 @@ class ColorCard extends Component {
               }}
             >
               View Platform Metrics
-              <div className={style.icon}>
-                <span className="icon-Right-Arrow-Circle">
-                  <span className="path1" />
-                  <span className="path2" />
-                  <span className="path3" />
-                </span>
-              </div>
+							<RightArrowCircle containerClass={style.icon}></RightArrowCircle>
             </Link>
           </div>
         )}

@@ -5,6 +5,7 @@ import Input from 'Components/Form/Input'
 import cx from 'classnames'
 import { compose } from 'redux'
 import { required } from 'Utils/validate'
+import RightArrowCircle from "Components/Icons/RightArrowCircle";
 
 import style from '../style.scss'
 
@@ -98,13 +99,7 @@ const ReportsForm = (props) => {
                 }}
               >
                 Generate Report
-                <div className={style.icon}>
-                  <span className="icon-Right-Arrow-Circle">
-                    <span className="path1" />
-                    <span className="path2" />
-                    <span className="path3" />
-                  </span>
-                </div>
+                <RightArrowCircle containerClass={style.icon}></RightArrowCircle>
               </button>
             </div>
           </form>

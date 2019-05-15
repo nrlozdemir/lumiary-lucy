@@ -10,6 +10,7 @@ import { capitalizeFirstLetter } from 'Utils/index'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import Dropdown from './dropdown'
+import LeftArrowCircle from "Components/Icons/LeftArrowCircle";
 // import PropTypes from 'prop-types';
 
 const containerClass = classnames(
@@ -39,11 +40,7 @@ const BackTo = (props) => {
   return (
     <div className={style.backTo}>
       <Link to={link} style={{ color: textColor }}>
-        <span className="icon-Left-Arrow-Circle">
-          <span className="path1" />
-          <span className="path2" />
-          <span className="path3" />
-        </span>
+				<LeftArrowCircle></LeftArrowCircle>
         <span className={style.text}>{title}</span>
       </Link>
     </div>
