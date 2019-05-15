@@ -1,24 +1,24 @@
 {
-	"labels": ["Facebook", "Instagram", "Twitter", "Youtube", "Pinterest"],
+	"labels": ["Facebook", "Instagram", "Twitter", "Youtube"],
 	"datasets": [
 		{
 			"label": "Fast",
-			"backgroundColor": "#51adc0",
-			"borderColor": "#51adc0",
+			"backgroundColor": "#2FD7C4",
+			"borderColor": "#2FD7C4",
 			"borderWidth": 1,
 			"data": [750000, 300000, 500000, 100000, 500000]
 		},
 		{
 			"label": "Medium",
-			"backgroundColor": "#8567f0",
-			"borderColor": "#8567f0",
+			"backgroundColor": "#8562F3",
+			"borderColor": "#8562F3",
 			"borderWidth": 1,
 			"data": [350000, 850000, 200000, 500000, 300000]
 		},
 		{
 			"label": "Slow",
-			"backgroundColor": "#D0506C",
-			"borderColor": "#D0506C",
+			"backgroundColor": "#5292E5",
+			"borderColor": "#5292E5",
 			"borderWidth": 1,
 			"data": [400000, 500000, 400000, 200000, 800000]
 		},

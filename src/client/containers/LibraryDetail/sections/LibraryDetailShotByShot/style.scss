@@ -206,10 +206,10 @@
 
       div {
         i {
-          background-color: #242b49;
+          background-color: #21243b;
           border-radius: 20px;
           padding: 8px;
-          border: 2px solid #51adc0;
+          border: 2px solid #2fd7c4;
           margin-right: 20px;
         }
       }
@@ -230,18 +230,18 @@
 }
 
 .sliderTabContainer {
-  background-color: $color-dark-grey-blue;
+  // background-color: $color-dark-grey-blue;
 }
 
 .sliderHeader {
   padding: 56px 0 48px;
   line-height: 21px;
   text-align: center;
-	font-family: $font-family-ClanOT;
-	font-size: 18px;
+  font-family: $font-family-ClanOT;
+  font-size: 18px;
 }
 
-.sliderWrapper{
+.sliderWrapper {
   position: absolute;
   left: 0px;
   top: 0px;
@@ -256,7 +256,7 @@
 .sliderContainer {
   position: relative;
   width: 1120px;
-  height: 186px;
+  height: 170px;
   margin: 0px auto;
   z-index: 2;
   display: flex;
@@ -270,7 +270,7 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    margin-top: 8px;
+    // margin-top: 8px;
     cursor: pointer;
 
     .originalImage {
@@ -280,14 +280,14 @@
       border-top: 5px solid $color-dark-five;
       border-bottom: 5px solid $color-dark-five;
     }
-    .setCenter{
+    .setCenter {
       display: block;
       border-right: 5px solid $color-dark-five;
-      &:first-child{
+      &:first-child {
         border-left: 5px solid $color-dark-five;
         border-right: none;
       }
-      &:last-child{
+      &:last-child {
         border-right: 5px solid $color-dark-five;
       }
     }
@@ -306,25 +306,25 @@
   }
 }
 .tabList {
-  background: $color-dusk;
+  // background: $color-dusk;
   margin: 0;
   padding: 27px 23px;
   color: $color-cool-grey;
   font-family: $font-family-ClanOTNews;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+  // box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   font-size: 14px;
 }
 
 .selectedTab {
   background: transparent;
   font-weight: bold;
-  color: $color-white;
+  // color: $color-white;
 }
 .radarChartContainer {
   margin: 0 auto;
   padding-top: 35px;
-  background-color: $color-dark-grey-blue;
-  height: 303px;
+  background-color: transparent;
+  height: 360px;
 }
 .cancelButton {
   float: right;
@@ -332,13 +332,13 @@
   font-size: 30px;
 }
 .tabPanel {
-  background-color: $color-dark-grey-blue;
+  // background-color: $color-dark-grey-blue;
   padding: 10px 30px;
-  height: 318px;
+  height: 375px;
   overflow-y: scroll;
 
   .tabPanelItem {
-    background-color: $color-dark-five;
+    // background-color: $color-dark-five;
     border: 1px solid $color-dusk;
 
     div {

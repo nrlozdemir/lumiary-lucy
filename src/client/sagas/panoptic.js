@@ -1,3 +1,4 @@
+import qs from 'qs'
 import { call, put, takeLatest, all } from 'redux-saga/effects'
 import axios from 'axios'
 import { actions, types } from 'Reducers/panoptic'
@@ -5,11 +6,29 @@ import panopticMockData from 'Api/mocks/panopticMock.json'
 import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 
+import { radarChartCalculate } from 'Utils'
+
+import { ajax } from 'Utils/api'
+
 import _ from 'lodash'
 
-function getPanopticDataApi() {
-  //this will use ajax function in utils/api when real data is provided
+const RESOURCE = '/report'
+
+function getMockPanopticDataApi() {
   return axios.get('/').then((res) => panopticMockData)
+}
+
+function getPanopticDataApi(vals) {
+  return ajax({
+    url: RESOURCE,
+    method: 'POST',
+    params: qs.stringify(vals),
+  }).then((response) => {
+    if (response.error) {
+      throw response.error
+    }
+    return response.data
+  })
 }
 
 function getAudienceDataApi() {
@@ -24,12 +43,8 @@ function updateAudiencePerformanceApi({ min, max }) {
 
 function* getVideoReleasesData() {
   try {
-    const payload = yield call(getPanopticDataApi)
-
-    const shuffleData = payload.videoReleasesData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getVideoReleasesDataSuccess(shuffleData))
+    const payload = yield call(getMockPanopticDataApi)
+    yield put(actions.getVideoReleasesDataSuccess(payload.videoReleasesData))
   } catch (err) {
     yield put(actions.getVideoReleasesDataError(err))
   }
@@ -37,7 +52,7 @@ function* getVideoReleasesData() {
 
 function* getColorTemperatureData() {
   try {
-    const payload = yield call(getPanopticDataApi)
+    const payload = yield call(getMockPanopticDataApi)
 
     const shuffleData = _.shuffle(payload.colorTempData)
     yield put(actions.getColorTemperatureDataSuccess(shuffleData))
@@ -46,61 +61,79 @@ function* getColorTemperatureData() {
   }
 }
 
-function* getFilteringSectionData() {
+function* getFilteringSectionData(data) {
   try {
-    const payload = yield call(getPanopticDataApi)
-
-    const shuffleData = {
-      doughnutData: {
-        ...payload.verticalStackedChartData.doughnutData,
-        average: _.shuffle(
-          payload.verticalStackedChartData.doughnutData.average
-        ),
-      },
-      stackedChartData: {
-        ...payload.verticalStackedChartData.stackedChartData,
-        datasets: _.shuffle(
-          payload.verticalStackedChartData.stackedChartData.datasets
-        ),
-      },
-      doughnutRoundData: _.shuffle(
-        payload.verticalStackedChartData.doughnutRoundData
-      ),
-    }
-    yield put(actions.getFilteringSectionDataSuccess(shuffleData))
+    const payload = yield call(getMockPanopticDataApi)
+    yield put(
+      actions.getFilteringSectionDataSuccess(payload.verticalStackedChartData)
+    )
   } catch (err) {
     yield put(actions.getFilteringSectionDataError(err))
   }
 }
 
-function* getPacingCardData() {
+function* getPacingCardData({ data }) {
   try {
-    const payload = yield call(getPanopticDataApi)
-    const shuffleData = payload.pacingChartData
-    shuffleData.horizontalStackedBarData.datasets = _.shuffle(
-      shuffleData.horizontalStackedBarData.datasets
-    )
+    const { metric, dateRange } = data
 
-    shuffleData.stadiumData.map((item) => {
-      item.value = _.random(40, 90)
+    const options = {
+      metric,
+      dateRange,
+      platform: 'all',
+      property: ['pacing'],
+      dateBucket: 'none',
+      display: 'percentage',
+    }
+
+    const stadiumData = yield call(getPanopticDataApi, options)
+
+    const horizontalStackedBarData = yield call(getPanopticDataApi, {
+      ...options,
+      proportionOf: 'format',
     })
-    yield put(actions.getPacingCardDataSuccess(shuffleData))
+
+    if (
+      !!stadiumData.data &&
+      !!stadiumData.data.pacing &&
+      !!horizontalStackedBarData.data &&
+      !!horizontalStackedBarData.data.pacing
+    ) {
+      const {
+        data: { pacing: stadiumPacing },
+      } = stadiumData
+
+      const {
+        data: { pacing: barChartPacing },
+      } = horizontalStackedBarData
+
+      yield put(
+        actions.getPacingCardDataSuccess({
+          stadiumData: stadiumPacing,
+          horizontalStackedBarData: barChartPacing,
+        })
+      )
+    } else {
+      yield put(
+        actions.getPacingCardDataError('Error fetching pacing card data')
+      )
+    }
   } catch (err) {
+    console.log(err)
     yield put(actions.getPacingCardDataError(err))
   }
 }
 
 function* getCompareSharesData() {
   try {
-    const payload = yield call(getPanopticDataApi)
-    const shuffleData = payload.compareSharesData
-    shuffleData[0].datas.datasets[0].data = _.shuffle(
-      shuffleData[0].datas.datasets[0].data
-    )
-    shuffleData[1].datas.datasets[0].data = _.shuffle(
-      shuffleData[1].datas.datasets[0].data
-    )
-
+    const payload = yield call(getMockPanopticDataApi)
+    let shuffleData = payload.compareSharesData
+    shuffleData[0].datas.labels.forEach((item, index) => {
+      shuffleData[0].datas.labels[index].count = _.random(10, 90)
+    })
+    shuffleData[1].datas.labels.forEach((item, index) => {
+      shuffleData[1].datas.labels[index].count = _.random(10, 90)
+    })
+    shuffleData = radarChartCalculate(shuffleData)
     yield put(actions.getCompareSharesDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getCompareSharesDataError(err))
@@ -124,10 +157,13 @@ function* getAudienceAgeSliderData() {
   try {
     const payload = yield call(getAudienceDataApi)
     const randomImage = (image) => {
-      return image.replace(/image=(\d+)/g, 'image=' + Math.floor(Math.random(1) * Math.floor(30)))
+      return image.replace(
+        /image=(\d+)/g,
+        'image=' + Math.floor(Math.random(1) * Math.floor(30))
+      )
     }
-		const data = payload.ageSlider
-		data.map(element => element.image = randomImage(element.image))
+    const data = payload.ageSlider
+    data.map((element) => (element.image = randomImage(element.image)))
     yield put(actions.getAudienceAgeSliderDataSuccess(data))
   } catch (err) {
     yield put(actions.getAudienceAgeSliderDataError(err))
@@ -138,7 +174,9 @@ function* getAudienceGenderData() {
   try {
     const payload = yield call(getAudienceDataApi)
     const shuffleData = payload.genderData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
+    shuffleData.datasets[0].data = _.shuffle(
+      shuffleData.datasets[0].data.map((number) => -Math.abs(number))
+    )
     shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
     yield put(actions.getAudienceGenderDataSuccess(shuffleData))
   } catch (err) {
@@ -191,12 +229,13 @@ function* getAudienceDominantColorData() {
   try {
     const payload = yield call(getAudienceDataApi)
     let shuffleData = payload.chartData
-    shuffleData[0].datas.datasets[0].data = _.shuffle(
-      shuffleData[0].datas.datasets[0].data
-    )
-    shuffleData[1].datas.datasets[0].data = _.shuffle(
-      shuffleData[1].datas.datasets[0].data
-    )
+    shuffleData[0].datas.labels.forEach((item, index) => {
+      shuffleData[0].datas.labels[index].count = _.random(10, 90)
+    })
+    shuffleData[1].datas.labels.forEach((item, index) => {
+      shuffleData[1].datas.labels[index].count = _.random(10, 90)
+    })
+    shuffleData = radarChartCalculate(shuffleData)
     yield put(actions.getAudienceDominantColorDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getAudienceDominantColorDataError(err))
@@ -205,7 +244,7 @@ function* getAudienceDominantColorData() {
 
 function* getData() {
   try {
-    const payload = yield call(getPanopticDataApi)
+    const payload = yield call(getMockPanopticDataApi)
     yield put(actions.getDataSuccess(payload))
   } catch (err) {
     yield put(actions.getDataError(err))
@@ -232,10 +271,21 @@ function* updateAudiencePerformance({ payload: { min, max } }) {
 
 function* getFlipCardsData() {
   try {
-    const payload = yield call(getPanopticDataApi)
+    const payload = yield call(getMockPanopticDataApi)
     yield put(actions.getFlipCardsDataSuccess(payload.flipCardsData))
   } catch (err) {
     yield put(actions.getFlipCardsDataError(err))
+  }
+}
+
+function* getTopPerformingFormatData() {
+  try {
+    const payload = yield call(getMockPanopticDataApi)
+    yield put(
+      actions.getTopPerformingFormatDataSuccess(payload.topPerformingFormatData)
+    )
+  } catch (err) {
+    yield put(actions.getTopPerformingFormatDataError(err))
   }
 }
 
@@ -270,4 +320,5 @@ export default [
   takeLatest(types.GET_AUDIENCE_DATA, getAudienceData),
   takeLatest(types.UPDATE_AUDIENCE_PERFORMANCE, updateAudiencePerformance),
   takeLatest(types.GET_FLIPCARDS_DATA, getFlipCardsData),
+  takeLatest(types.GET_TOP_PERFORMING_FORMAT_DATA, getTopPerformingFormatData),
 ]

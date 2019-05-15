@@ -2,7 +2,30 @@ import React from 'react'
 import style from './style.scss'
 import Stadium from 'Components/StadiumChart'
 
-const StadiumChart = ({ data }) => {
+const emptyData = [
+  {
+    value: 0,
+    color: '#2FD7C4',
+    title: 'Slowest',
+  },
+  {
+    value: 0,
+    color: '#8562F3',
+    title: 'Slow',
+  },
+  {
+    value: 0,
+    color: '#5292E5',
+    title: 'Medium',
+  },
+  {
+    value: 0,
+    color: '#ACB0BE',
+    title: 'Fast',
+  },
+]
+
+const StadiumChart = ({ data = emptyData }) => {
   return (
     <div className={style.stadiumContainer}>
       <div className={style.colorList}>
@@ -25,9 +48,9 @@ const StadiumChart = ({ data }) => {
       <Stadium
         data={data}
         stadiumText={'Total Percentage'}
-        angleColor={'#242B49'}
-        barStroke={'#5A6386'}
-        barFill={'#242b49'}
+        angleColor={'#21243B'}
+        barStroke={'#545B79'}
+        barFill={'#21243B'}
         animationSpeed={1}
         borderWidth={26}
         border={1}

@@ -1,196 +1,207 @@
 @font-face {
-	font-family: "icomoon";
-	src: url("https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.eot?e21ori");
-	src: url("https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.eot?e21ori#iefix")
-			format("embedded-opentype"),
-		url("https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.ttf?e21ori")
-			format("truetype"),
-		url("https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.woff?e21ori")
-			format("woff"),
-		url("https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.svg?e21ori#icomoon")
-			format("svg");
-	font-weight: normal;
-	font-style: normal;
+  font-family: 'icomoon';
+  src: url('https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.eot?e21ori');
+  src: url('https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.eot?e21ori#iefix')
+      format('embedded-opentype'),
+    url('https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.ttf?e21ori')
+      format('truetype'),
+    url('https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.woff?e21ori')
+      format('woff'),
+    url('https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.svg?e21ori#icomoon')
+      format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
 
-[class^="icon-"],
-[class*=" icon-"] {
-	/* use !important to prevent issues with browser extensions that change fonts */
-	font-family: "icomoon" !important;
-	speak: none;
-	font-style: normal;
-	font-weight: normal;
-	font-variant: normal;
-	text-transform: none;
-	line-height: 1;
+[class^='icon-'],
+[class*=' icon-'] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'icomoon' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
 
-	/* Better Font Rendering =========== */
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
 .icon-Check:before {
-	content: "\e920";
-	color: #fff;
+  content: '\e920';
+  color: #fff;
 }
 .icon-Pinterest-Bubble:before {
-	content: "\e91b";
-	color: #fff;
+  content: '\e91b';
+  // color: #fff;
 }
 .icon-YouTube-Bubble:before {
-	content: "\e91c";
-	color: #fff;
+  content: '\e91c';
+  // color: #fff;
 }
 .icon-Twitter-Bubble:before {
-	content: "\e91d";
-	color: #fff;
+  content: '\e91d';
+  // color: #fff;
 }
 .icon-Instagram-Bubble:before {
-	content: "\e91e";
-	color: #fff;
+  content: '\e91e';
+  // color: #fff;
 }
 .icon-Facebook-Bubble:before {
-	content: "\e91f";
-	color: #fff;
+  content: '\e91f';
+  // color: #fff;
 }
 .icon-Up-Arrow-Circle .path1:before {
-	content: "\e900";
-	color: rgb(36, 43, 73);
+  content: '\e900';
+  color: rgb(36, 43, 73);
 }
 .icon-Up-Arrow-Circle .path2:before {
-	content: "\e901";
-	margin-left: -1em;
-	color: rgb(81, 173, 192);
+  content: '\e901';
+  margin-left: -1em;
+  color: rgb(81, 173, 192);
 }
 .icon-Up-Arrow-Circle .path3:before {
-	content: "\e902";
-	margin-left: -1em;
-	color: rgb(255, 255, 255);
+  content: '\e902';
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
 }
 .icon-Down-Arrow-Circle .path1:before {
-	content: "\e903";
-	color: rgb(36, 43, 73);
+  content: '\e903';
+  color: rgb(36, 43, 73);
 }
 .icon-Down-Arrow-Circle .path2:before {
-	content: "\e904";
-	margin-left: -1em;
-	color: rgb(81, 173, 192);
+  content: '\e904';
+  margin-left: -1em;
+  color: rgb(81, 173, 192);
 }
 .icon-Down-Arrow-Circle .path3:before {
-	content: "\e905";
-	margin-left: -1em;
-	color: rgb(255, 255, 255);
+  content: '\e905';
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
 }
 .icon-Left-Arrow-Circle .path1:before {
-	content: "\e906";
-	color: rgb(36, 43, 73);
+  content: '\e906';
+  color: rgb(36, 43, 73);
 }
 .icon-Left-Arrow-Circle .path2:before {
-	content: "\e907";
-	margin-left: -1em;
-	color: rgb(81, 173, 192);
+  content: '\e907';
+  margin-left: -1em;
+  color: rgb(81, 173, 192);
 }
 .icon-Left-Arrow-Circle .path3:before {
-	content: "\e908";
-	margin-left: -1em;
-	color: rgb(255, 255, 255);
+  content: '\e908';
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
 }
 .icon-Right-Arrow-Circle .path1:before {
-	content: "\e909";
-	color: rgb(36, 43, 73);
+  content: '\e909';
+  color: rgb(36, 43, 73);
 }
 .icon-Right-Arrow-Circle .path2:before {
-	content: "\e90a";
-	margin-left: -1em;
-	color: rgb(81, 173, 192);
+  content: '\e90a';
+  margin-left: -1em;
+  color: rgb(81, 173, 192);
 }
 .icon-Right-Arrow-Circle .path3:before {
-	content: "\e90b";
-	margin-left: -1em;
-	color: rgb(255, 255, 255);
+  content: '\e90b';
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
 }
 .icon-X-Circle .path1:before {
-	content: "\e90c";
-	color: rgb(36, 43, 73);
+  content: '\e90c';
+  color: rgb(36, 43, 73);
 }
 .icon-X-Circle .path2:before {
-	content: "\e90d";
-	margin-left: -1em;
-	color: rgb(81, 173, 192);
+  content: '\e90d';
+  margin-left: -1em;
+  color: rgb(81, 173, 192);
 }
 .icon-X-Circle .path3:before {
-	content: "\e90e";
-	margin-left: -1em;
-	color: rgb(255, 255, 255);
+  content: '\e90e';
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
 }
 .icon-Plus-Circle .path1:before {
-	content: "\e90f";
-	color: rgb(36, 43, 73);
+  content: '\e90f';
+  color: rgb(36, 43, 73);
 }
 .icon-Plus-Circle .path2:before {
-	content: "\e910";
-	margin-left: -1em;
-	color: rgb(81, 173, 192);
+  content: '\e910';
+  margin-left: -1em;
+  color: rgb(81, 173, 192);
 }
 .icon-Plus-Circle .path3:before {
-	content: "\e911";
-	margin-left: -1em;
-	color: rgb(255, 255, 255);
+  content: '\e911';
+  margin-left: -1em;
+  color: rgb(255, 255, 255);
 }
 .icon-Left-Arrow-Circle-White .path1:before {
-	content: "\e912";
-	color: rgb(255, 255, 255);
+  content: '\e912';
+  color: rgb(255, 255, 255);
 }
 .icon-Left-Arrow-Circle-White .path2:before {
-	content: "\e913";
-	margin-left: -1em;
-	color: rgb(36, 43, 73);
+  content: '\e913';
+  margin-left: -1em;
+  color: rgb(36, 43, 73);
 }
 .icon-Right-Arrow-Circle-White .path1:before {
-	content: "\e914";
-	color: rgb(255, 255, 255);
+  content: '\e914';
+  color: rgb(255, 255, 255);
 }
 .icon-Right-Arrow-Circle-White .path2:before {
-	content: "\e915";
-	margin-left: -1em;
-	color: rgb(36, 43, 73);
+  content: '\e915';
+  margin-left: -1em;
+  color: rgb(36, 43, 73);
 }
 .icon-Arrow-Down:before {
-	content: "\e916";
-	color: #fff;
+  content: '\e916';
+  color: #fff;
 }
 .icon-Filter:before {
-	content: "\e917";
-	color: #fff;
+  content: '\e917';
 }
 .icon-Search:before {
-	content: "\e918";
-	color: #fff;
+  content: '\e918';
+  color: #fff;
 }
 .icon-Information:before {
-	content: "\e919";
-	color: #fff;
+  content: '\e919';
+  // color: #fff;
 }
 .icon-Trash:before {
-	content: "\e91a";
-	color: #fff;
+  content: '\e91a';
+  color: #fff;
 }
 .icon-icon_stopmotion:before {
-	content: "\e925";
-	color: #fff;
+  content: '\e925';
+  color: #fff;
 }
 .icon-icon_animation:before {
-	content: "\e926";
-	color: #fff;
+  content: '\e926';
+  color: #fff;
 }
 .icon-icon_cinemagraph:before {
-	content: "\e927";
-	color: #fff;
+  content: '\e927';
+  color: #fff;
 }
 .icon-icon_liveaction:before {
-	content: "\e928";
-	color: #fff;
+  content: '\e928';
+  color: #fff;
 }
 .icon-search:before {
- content: "\e986";
+  content: '\e986';
+}
+.icon-facebook-square:before {
+  content: '\e921';
+}
+.icon-instagram-square:before {
+  content: '\e922';
+}
+.icon-twitter-square:before {
+  content: '\e923';
+}
+.icon-youtube-square:before {
+  content: '\e924';
 }

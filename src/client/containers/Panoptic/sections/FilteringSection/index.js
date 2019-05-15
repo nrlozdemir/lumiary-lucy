@@ -1,33 +1,50 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticFilteringSection } from 'Reducers/panoptic'
-
-import classnames from 'classnames'
-import 'chartjs-plugin-datalabels'
-import style from './style.scss'
-
-import DoughnutChart from 'Components/Charts/Panoptic/DoughnutChart'
-import StackedBarChart from 'Components/Charts/StackedBarChart'
-
 import Module from 'Components/Module'
+import { chartCombineDataset } from 'Utils'
+//import classnames from 'classnames'
+import 'chartjs-plugin-datalabels'
+import DoughnutChart from 'Components/Charts/DoughnutChart'
+import StackedBarChart from 'Components/Charts/StackedBarChart'
+import style from './style.scss'
+import {
+  doughnutData_DatasetOptions,
+  stackedChartData_DatasetOptions,
+} from './options'
 
 class PanopticFilteringSection extends Component {
-  callBack = (data, moduleKey) => {
-    this.props.getFilteringSectionData(data)
+  callBack = (data) => {
+    const { getFilteringSectionData } = this.props
+    getFilteringSectionData(data)
   }
 
   render() {
     const {
       filteringSectionData: {
-        data: { doughnutData, stackedChartData, doughnutRoundData },
+        data: { doughnutData, stackedChartData },
         loading,
         error,
       },
     } = this.props
+
+    const combineDoughnutData = {
+      labels: [
+        '0-15 seconds',
+        '15-30 seconds',
+        '30-45 seconds',
+        '45-60 seconds',
+      ],
+      datasets: doughnutData,
+    }
+
+    const combineStackedChartData = {
+      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
+      datasets: stackedChartData,
+    }
+
     return (
       <Module
         moduleKey={'Panoptic/FilteringSection'}
@@ -35,57 +52,64 @@ class PanopticFilteringSection extends Component {
         action={this.callBack}
         filters={[
           {
-            type: 'duration',
+            type: 'property',
             selectKey: 'PFS-dsad',
-            placeHolder: 'Duration',
+            placeHolder: 'property',
+            defaultValue: 'duration',
           },
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'PFS-asdwda',
             placeHolder: 'Engagement',
+            defaultValue: 'views',
           },
           {
             type: 'platform',
             selectKey: 'PFS-dwdf',
             placeHolder: 'Platform',
+            defaultValue: 'all',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'PFS-wxcvs',
             placeHolder: 'Date',
+            defaultValue: 'month',
           },
         ]}
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
-            <div>
-              {doughnutData && doughnutData.average && (
-                <DoughnutChart data={doughnutData.average} />
-              )}
-            </div>
-            <div>
-              {doughnutRoundData &&
-                doughnutRoundData.map((roundData, index) => (
-                  <div
-                    className={classnames(
-                      'd-flex',
-                      'align-items-center',
-                      style.lables
-                    )}
-                    key={index}
-                  >
-                    <span
-                      className={style.round}
-                      style={{ backgroundColor: `${roundData.color}` }}
-                    />
-                    <span className={style.secondsText}>{roundData.data}</span>
-                  </div>
-                ))}
-            </div>
+            {doughnutData && (
+              <DoughnutChart
+                width={270}
+                height={270}
+                data={chartCombineDataset(
+                  combineDoughnutData,
+                  doughnutData_DatasetOptions
+                )}
+                cutoutPercentage={58}
+                fillText="Total Percentage"
+                dataLabelFunction="insertAfter"
+                dataLabelInsert="%"
+                labelPositionRight
+                labelsData={[
+                  { data: '0-15 seconds', color: '#2FD7C4' },
+                  { data: '15-30 seconds', color: '#8562F3' },
+                  { data: '30-45 seconds', color: '#5292E5' },
+                  { data: '45-60 seconds', color: '#acb0be' },
+                ]}
+              />
+            )}
           </div>
           <div className={style.stackedChart}>
             {stackedChartData && (
-              <StackedBarChart barData={stackedChartData} />
+              <StackedBarChart
+                barData={chartCombineDataset(
+                  combineStackedChartData,
+                  stackedChartData_DatasetOptions
+								)}
+								barSpacing={2}
+              />
             )}
           </div>
         </div>

@@ -26,10 +26,9 @@
 .label {
   width: 100%;
   background-color: $color-dark-five;
-  border: 1px solid $color-cool-grey;
   display: block;
   margin-bottom: 16px;
-  margin-top: -4px;
+  margin-top: 0;
   box-sizing: border-box;
   .colorRadius {
     border-radius: 8px;

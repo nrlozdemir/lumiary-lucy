@@ -3,9 +3,12 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import ReactSelect from 'react-select'
 import style from './styles.scss'
+import { withTheme } from 'ThemeContext/withTheme'
 
 const Select = (props) => {
   const { className, id, options, placeholder, multiple, customClass } = props
+
+  const themes = props.themeContext.colors
 
   let args = props.input ? props.input : props
   let { name, onChange, value } = args
@@ -45,8 +48,12 @@ const Select = (props) => {
     control: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
-        background: '#242b49',
-        borderColor: isSelected ? '#acb0be' : isFocused ? '#acb0be' : '#5a6386',
+        background: themes.inputControlBackground,
+        borderColor: isSelected
+          ? themes.inputControlBorder
+          : isFocused
+          ? themes.inputControlBorder
+          : themes.inputControlSelectedBorder,
         borderRadius: '8px',
         borderWidth: '1px',
         boxShadow: 'rgba(0, 0, 0, 0.5)',
@@ -58,7 +65,11 @@ const Select = (props) => {
     input: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
-        color: '#ffffff',
+        color: isSelected
+          ? themes.inputColor
+          : isFocused
+          ? themes.inputActiveColor
+          : themes.inputColor,
       }
     },
     option: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -67,11 +78,15 @@ const Select = (props) => {
         height: '40px',
         lineHeight: '27px',
         backgroundColor: isSelected
-          ? '#242b49'
+          ? themes.inputOptionSelectedBackground
           : isFocused
-          ? '#ffffff'
-          : '#5a6386',
-        color: isSelected ? '#ffffff' : isFocused ? '#5a6386' : '#ffffff',
+          ? themes.inputOptionFocusBackground
+          : themes.inputOptionBackground,
+        color: isSelected
+          ? themes.inputColor
+          : isFocused
+          ? themes.inputActiveColor
+          : themes.inputActiveColor,
         cursor: 'pointer',
         border: 'none',
       }
@@ -79,12 +94,16 @@ const Select = (props) => {
     placeholder: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
-        color: isFocused ? '#ffffff' : isSelected ? '#ffffff' : '#5a6386',
+        color: isFocused
+          ? themes.inputColor
+          : isSelected
+          ? themes.inputColor
+          : themes.inputActiveColor,
       }
     },
     singleValue: (styles) => ({
       ...styles,
-      color: '#ffffff',
+      color: themes.inputActiveColor,
     }),
     menu: (base) => ({
       ...base,
@@ -141,4 +160,4 @@ Select.defaultProps = {
   placeholder: 'Select...',
 }
 
-export default Select
+export default withTheme(Select)

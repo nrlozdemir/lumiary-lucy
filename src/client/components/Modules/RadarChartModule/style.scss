@@ -1,0 +1,188 @@
+.progressContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.radarChartContainer {
+  width: 100%;
+}
+
+.progressInner {
+  max-width: 400px;
+  width: 100%;
+}
+
+.groupProgressBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  max-width: 950px;
+  margin: 0 auto;
+}
+
+.labelContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 100%;
+  max-width: 860px;
+  margin: 85px auto 75px;
+  p {
+    font-size: 18px;
+    font-family: $font-family-ClanOTBold;
+  }
+}
+
+.groupChart {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  max-width: 960px;
+  margin: 30px auto;
+}
+
+.chartPos {
+  display: flex;
+  &:last-child {
+    justify-content: end;
+  }
+}
+
+.label {
+  // margin-top: 30px;
+  display: flex;
+  justify-content: center;
+  // margin-bottom: 40px;
+  font-family: $font-family-ClanOTBold;
+  border-radius: 17px;
+  background-color: $color-dusk;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+
+  span {
+    display: flex;
+    align-items: center;
+    font-size: 14px;
+    height: 34px;
+    padding: 0 25px;
+  }
+}
+
+.progressBarArea {
+  width: 100%;
+
+  .progressBarInner {
+    margin-bottom: 60px;
+    width: 100%;
+    position: relative;
+
+    &.reverse {
+      .progressText {
+        .leftTitle {
+          float: right;
+        }
+
+        .rightTitle {
+          float: left;
+        }
+
+        span {
+          &:first-child {
+            text-align: right;
+          }
+        }
+      }
+
+      .progressBar {
+        display: flow-root;
+      }
+
+      .percentageBlue {
+        float: right;
+      }
+    }
+
+    .progressBar {
+      background-color: #21243b; // $color-dark-six
+      border-radius: 10px;
+      margin-top: 10px;
+    }
+
+    .percentageBlue {
+      border-radius: 10px;
+      height: 10px;
+      background-color: #545b79; // $dusk-two
+      -webkit-transition: width 0.5s, height 0.5s;
+      transition: width 0.5s, height 0.5s;
+    }
+
+    .progressText {
+      // color: $color-white;
+      font-size: 14px;
+      font-family: $font-family-ClanOTNews;
+
+      .leftTitle {
+        float: left;
+        font-size: 14px;
+        font-weight: bold;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+        display: flex;
+        align-items: center;
+
+        .dot {
+          width: 16px;
+          height: 16px;
+          margin-right: 10px;
+          border-radius: 50%;
+        }
+      }
+
+      .rightTitle {
+        float: right;
+        font-size: 12px;
+        font-weight: normal;
+        font-style: normal;
+        font-stretch: normal;
+        line-height: normal;
+        letter-spacing: normal;
+      }
+
+      &::after {
+        content: '';
+        clear: both;
+        display: table;
+      }
+    }
+  }
+}
+
+.progressCountArea {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  margin: 0 40px;
+
+  .progressCount {
+    font-family: ClanOT;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: #ffffff;
+    border: 1px solid $color-cool-grey;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    text-align: center;
+    display: block;
+    margin-bottom: 58px;
+    box-sizing: border-box;
+  }
+}

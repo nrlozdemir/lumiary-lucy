@@ -4,15 +4,15 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectGeneratedReport } from 'Reducers/generatedReport'
 import RouterLoading from 'Components/RouterLoading'
-import style from './style.scss'
-import ReportsHeader from './sections/ReportsHeader'
+//import ReportsHeader from './sections/ReportsHeader'
 import CreatedFilters from './sections/CreatedFilters'
-import Slider from './sections/Slider'
+import Slider from 'Components/Modules/SliderModule'
 import VideoReleasesBarChart from './sections/VideoReleasesBarChart'
 import TopVideosCard from './sections/TopVideosCard'
 import PacingCard from './sections/PacingCard'
-import FilteringSection from './sections/FilteringSection'
+import EngagementByProperty from './sections/EngagementByProperty'
 import ColorTemperature from './sections/ColorTemperature'
+//import style from './style.scss'
 
 class ReportGenerated extends Component {
   constructor(props) {
@@ -64,14 +64,15 @@ class ReportGenerated extends Component {
     }
     return (
       <React.Fragment>
-        <ReportsHeader />
-        <div className={style.ReportsGeneratedContainer}>
+        {/*<ReportsHeader />*/}
+        <div className="grid-container col-12 mr-40 ml-40 mt-72 mb-72">
           <CreatedFilters />
           {topPerformingVideos && (
             <Slider
               selectedVideo={selectedVideo}
               data={topPerformingVideos}
               changeSelectedVideo={this.changeSelectedVideo}
+              title="Top Performing Videos"
             />
           )}
           {videoReleasesData && (
@@ -93,7 +94,7 @@ class ReportGenerated extends Component {
             />
           )}
           {verticalStackedChartData && (
-            <FilteringSection
+            <EngagementByProperty
               data={verticalStackedChartData}
               handleSelectFilters={this.handleSelectFilters}
               selectDuration={selectDuration}

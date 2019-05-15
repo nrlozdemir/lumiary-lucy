@@ -2,34 +2,29 @@ import React from 'react'
 import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
-
-import style from './style.scss'
-
 import Select from 'Components/Form/SelectField'
 import Button from 'Components/Form/Button'
 import SocialCheckBoxes from 'Components/Form/SocialCheckBoxes/'
 import ColorRadioBoxes from 'Components/Form/ColorRadioBoxes/index'
 import Range from 'Components/Form/Range'
+import style from './style.scss'
 
 const Sidebar = (props) => {
-	const { reset, handleSubmit } = props
+  const { reset, handleSubmit, colors } = props
   const sidebarClass = classnames(style.sidebar, {
-		[style.sidebarVisible]: props.sidebarVisible,
-		[style.fixed] : props.fixedHeader
-	})
-	const sidebarMainClass = classnames(style.sidebarMain, {
-		[style.fixed] : props.fixedHeader
-	})
-	const sidebarHeaderClass = classnames(style.sidebarHeader, {
-		[style.fixed] : props.fixedHeader
-	})
-	const sidebarContentClass = classnames(
-		style.sidebarContent,
-		'ph-32',
-		{
-			[style.fixed]: props.fixedHeader,
-			'mt-80': props.fixedHeader
-		})
+    [style.sidebarVisible]: props.sidebarVisible,
+    [style.fixed]: props.fixedHeader,
+  })
+  const sidebarMainClass = classnames(style.sidebarMain, {
+    [style.fixed]: props.fixedHeader,
+  })
+  const sidebarHeaderClass = classnames(style.sidebarHeader, {
+    [style.fixed]: props.fixedHeader,
+  })
+  const sidebarContentClass = classnames(style.sidebarContent, 'ph-32', {
+    [style.fixed]: props.fixedHeader,
+    'mt-80': props.fixedHeader,
+  })
 
   const selectOptions = {
     orderByOptions: [
@@ -84,135 +79,140 @@ const Sidebar = (props) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <div className={sidebarClass}>
+      <div
+        className={sidebarClass}
+        style={{ backgroundColor: colors.duskBackground }}
+      >
         <div className={sidebarMainClass}>
-					<div className={sidebarHeaderClass}>
-						<p className={style.text}>
-							<span className="float-left color-dark-blue-grey">
-								Filter Videos
-							</span>
-							<span className="float-right color-cool-blue" onClick={reset}>
-								Reset
-							</span>
-						</p>
-						<div className="clearFix" />
-					</div>
-					<div className={sidebarContentClass}>
-						<div className="w-100 mt-48 d-flex flex-column align-items-start justify-content-center">
-							<Select
-								id="OrderedBy"
-								name="OrderedBy"
-								placeholder="Select One"
-								options={selectOptions.orderByOptions}
-								label="Ordered By"
-							/>
-						</div>
-						<div className="w-100 mt-48">
-							<SocialCheckBoxes />
-						</div>
-						<div className="w-100 d-flex justify-space-between mt-48">
-							<div className="w-50 ml-0 pr-8">
-								<Select
-									id="AgeRange"
-									name="AgeRange"
-									placeholder="Select One"
-									options={selectOptions.audienceAge}
-									label="Audience Age"
-								/>
-							</div>
-							<div className="w-50 ml-0 pl-8">
-								<Select
-									id="Gender"
-									name="Gender"
-									placeholder="Select One"
-									options={selectOptions.audienceGender}
-									label="Audience Gender"
-								/>
-							</div>
-						</div>
-						<div className="w-100 mt-48">
-							<Field
-								id="Duration"
-								name="Duration"
-								component={Range}
-								minValue={0}
-								maxValue={60}
-								customClass={style.sidebarDurationRange}
-							/>
-						</div>
-						<div className="w-100 mt-48">
-							<ColorRadioBoxes />
-						</div>
-						<div className="w-100 mt-48">
-							<Select
-								id="VideoFormat"
-								name="VideoFormat"
-								placeholder="Select One"
-								options={selectOptions.videoFormat}
-								label="Video Format"
-							/>
-						</div>
-						<div className="w-100 mt-48">
-							<Select
-								id="AspectRatio"
-								name="AspectRatio"
-								placeholder="Select One"
-								options={selectOptions.aspectRatio}
-								label="Aspect Ratio"
-							/>
-						</div>
-						<div className="w-100 mt-48">
-							<Select
-								id="FramesPerSecond"
-								name="FramesPerSecond"
-								placeholder="Select One"
-								options={selectOptions.frameRate}
-								label="Frame Rate"
-							/>
-						</div>
-						<div className="w-100 mt-48">
-							<Select
-								id="Resolution"
-								name="Resolution"
-								placeholder="Select One"
-								options={selectOptions.resolution}
-								label="Resolution"
-							/>
-						</div>
-						<div className="w-100 mt-48">
-							<Select
-								id="Pacing"
-								name="Pacing"
-								placeholder="Select One"
-								options={selectOptions.pacing}
-								label="Pacing"
-							/>
-						</div>
-						<div className="w-100 d-flex align-items-center justify-content-center">
-							<Button
-								customClass={classnames('mt-48', style.sidebarApplyButton)
-								}
-								buttonText="Apply Filters"
-							/>
-						</div>
-						<div className="w-100 d-flex align-items-center justify-content-center">
-							<span
-								className={style.cancel}
-								onClick={() => props.setSidebarVisible(false)}
-							>
-								Cancel
-							</span>
-						</div>
-					</div>
-				</div>
+          <div
+            className={sidebarHeaderClass}
+            style={{ backgroundColor: colors.filterHeader }}
+          >
+            <p className={style.text}>
+              <span className="float-left color-dark-blue-grey">
+                Filter Videos
+              </span>
+              <span className="float-right color-cool-blue" onClick={reset}>
+                Reset
+              </span>
+            </p>
+            <div className="clearFix" />
+          </div>
+          <div className={sidebarContentClass}>
+            <div className="w-100 mt-48 d-flex flex-column align-items-start justify-content-center">
+              <Select
+                id="OrderedBy"
+                name="OrderedBy"
+                placeholder="Select One"
+                options={selectOptions.orderByOptions}
+                label="Ordered By"
+              />
+            </div>
+            <div className="w-100 mt-48">
+              <SocialCheckBoxes colors={colors} />
+            </div>
+            <div className="w-100 d-flex justify-space-between mt-48">
+              <div className="w-50 ml-0 pr-8">
+                <Select
+                  id="AgeRange"
+                  name="AgeRange"
+                  placeholder="Select One"
+                  options={selectOptions.audienceAge}
+                  label="Audience Age"
+                />
+              </div>
+              <div className="w-50 ml-0 pl-8">
+                <Select
+                  id="Gender"
+                  name="Gender"
+                  placeholder="Select One"
+                  options={selectOptions.audienceGender}
+                  label="Audience Gender"
+                />
+              </div>
+            </div>
+            <div className="w-100 mt-48">
+              <Field
+                id="Duration"
+                name="Duration"
+                component={Range}
+                minValue={0}
+                maxValue={60}
+                customClass={style.sidebarDurationRange}
+              />
+            </div>
+            <div className="w-100 mt-48">
+              <ColorRadioBoxes colors={colors} />
+            </div>
+            <div className="w-100 mt-48">
+              <Select
+                id="VideoFormat"
+                name="VideoFormat"
+                placeholder="Select One"
+                options={selectOptions.videoFormat}
+                label="Video Format"
+              />
+            </div>
+            <div className="w-100 mt-48">
+              <Select
+                id="AspectRatio"
+                name="AspectRatio"
+                placeholder="Select One"
+                options={selectOptions.aspectRatio}
+                label="Aspect Ratio"
+              />
+            </div>
+            <div className="w-100 mt-48">
+              <Select
+                id="FramesPerSecond"
+                name="FramesPerSecond"
+                placeholder="Select One"
+                options={selectOptions.frameRate}
+                label="Frame Rate"
+              />
+            </div>
+            <div className="w-100 mt-48">
+              <Select
+                id="Resolution"
+                name="Resolution"
+                placeholder="Select One"
+                options={selectOptions.resolution}
+                label="Resolution"
+              />
+            </div>
+            <div className="w-100 mt-48">
+              <Select
+                id="Pacing"
+                name="Pacing"
+                placeholder="Select One"
+                options={selectOptions.pacing}
+                label="Pacing"
+              />
+            </div>
+            <div className="w-100 d-flex align-items-center justify-content-center">
+              <Button
+                customClass={classnames('mt-48', style.sidebarApplyButton)}
+                buttonText="Apply Filters"
+              />
+            </div>
+            <div className="w-100 d-flex align-items-center justify-content-center">
+              <span
+                className={style.cancel}
+                onClick={() => props.setSidebarVisible(false)}
+              >
+                Cancel
+              </span>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
   )
 }
 
 Sidebar.propTypes = {
-	sidebarVisible: PropTypes.bool,
-	fixedHeader: PropTypes.bool,
+  sidebarVisible: PropTypes.bool,
+  fixedHeader: PropTypes.bool,
 }
 
 export default reduxForm({

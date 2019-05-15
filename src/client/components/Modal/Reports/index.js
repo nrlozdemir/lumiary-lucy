@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Modal from 'react-modal'
 import style from './style.scss'
+import { withTheme } from 'ThemeContext/withTheme'
 
 const ReportsModal = ({
   isClosable,
@@ -13,10 +14,12 @@ const ReportsModal = ({
   children,
   shouldCloseOnEsc,
   shouldCloseOnOverlayClick,
+  themeContext,
 }) => {
+  const themes = themeContext.colors
   const customStyles = {
     content: {
-      backgroundColor: '#303a5d',
+      backgroundColor: themes.modalBackground,
       maxWidth: width,
     },
     overlay: {
@@ -34,8 +37,20 @@ const ReportsModal = ({
       shouldCloseOnEsc={shouldCloseOnEsc}
       shouldCloseOnOverlayClick={shouldCloseOnOverlayClick}
     >
-      <div className={style.modalHeader}>
-        <p className={style.headerTitle}>{title}</p>
+      <div
+        className={style.modalHeader}
+        style={{
+          background: themes.modalHeaderBackground,
+        }}
+      >
+        <p
+          className={style.headerTitle}
+          style={{
+            color: themes.modalHeaderColor,
+          }}
+        >
+          {title}
+        </p>
         {isClosable && (
           <div className={style.iconWrapper} onClick={() => onRequestClose()}>
             <span className="icon-X-Circle">
@@ -62,4 +77,4 @@ ReportsModal.propTypes = {
   ariaHideApp: PropTypes.bool,
 }
 
-export default ReportsModal
+export default withTheme(ReportsModal)

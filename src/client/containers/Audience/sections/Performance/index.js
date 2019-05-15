@@ -1,19 +1,16 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectAudiencePerformance } from 'Reducers/panoptic'
-
+import { actions, makeSelectAudiencePerformance } from 'Reducers/audience'
+import Module from 'Components/Module'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
 import RangeWithBadge from 'Components/Form/RangeWithBadge'
-import SelectFilters from 'Components/SelectFilters'
-import style from 'Containers/Audience/style.scss'
 import classnames from 'classnames'
 import { socialIconSelector } from 'Utils'
 import _ from 'lodash'
-
-import Module from 'Components/Module'
+import style from 'Containers/Audience/style.scss'
+import { withTheme } from 'ThemeContext/withTheme'
 
 class Performance extends React.Component {
   constructor(props) {
@@ -43,6 +40,7 @@ class Performance extends React.Component {
         loading,
         error,
       },
+      themeContext: { colors },
     } = this.props
 
     const handleStyle = [
@@ -51,7 +49,7 @@ class Performance extends React.Component {
         height: '10px',
         borderStyle: 'solid',
         borderWidth: '25px 10px 0 10px',
-        borderColor: ' #ffffff transparent transparent transparent',
+        borderColor: `${colors.textColor} 	transparent transparent transparent`,
         borderRadius: 0,
         backgroundColor: 'transparent',
         boxShadow: 'none',
@@ -65,7 +63,7 @@ class Performance extends React.Component {
         height: '10px',
         borderStyle: 'solid',
         borderWidth: '25px 10px 0 10px',
-        borderColor: '#ffffff transparent transparent transparent',
+        borderColor: `${colors.textColor} 	transparent transparent transparent`,
         backgroundColor: 'transparent',
         borderRadius: 0,
         boxShadow: 'none',
@@ -85,7 +83,7 @@ class Performance extends React.Component {
     const railStyle = {
       height: '16px',
       borderRadius: '8px',
-      backgroundColor: '#242b49',
+      backgroundColor: colors.bodyBackground,
     }
 
     const dotStyle = {
@@ -97,7 +95,6 @@ class Performance extends React.Component {
       marginLeft: 0,
       display: 'none',
     }
-
     return (
       <Module
         moduleKey={'Audience/Performance'}
@@ -105,12 +102,12 @@ class Performance extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'AP-asd',
             placeHolder: 'Engagement',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'AP-wds',
             placeHolder: 'Date',
           },
@@ -127,6 +124,7 @@ class Performance extends React.Component {
               <div className={'col-4'}>
                 <div className={style.bubbleCont}>
                   <BubbleChart
+                    maximumIterationCount={1000}
                     size={[800, 600]}
                     fromPercentages={true}
                     options={{ toolTipWidth: 200, toolTipHeight: 75 }}
@@ -135,8 +133,8 @@ class Performance extends React.Component {
                       <Bubble
                         key={'bubble-' + i}
                         radius={(parseInt(bubble.toolTip) / 100) * 0.0015 + 10}
-                        fill="#242b49"
-                        stroke="#d0506c"
+                        fill={colors.bodyBackground}
+                        stroke="#5292E5"
                       >
                         <Visual>
                           <span
@@ -158,14 +156,23 @@ class Performance extends React.Component {
                       </Bubble>
                     ))}
                   </BubbleChart>
-                  <div className={style.label}>
-                    <span>Males</span>
+                  <div className={style.chartSectionBadge}>
+                    <span
+                      style={{
+                        background: colors.labelBackground,
+                        color: colors.labelColor,
+                        boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                      }}
+                    >
+                      Males
+                    </span>
                   </div>
                 </div>
               </div>
               <div className={'col-4'}>
                 <div className={style.bubbleCont}>
                   <BubbleChart
+                    maximumIterationCount={1000}
                     size={[800, 600]}
                     fromPercentages={true}
                     options={{ toolTipWidth: 200, toolTipHeight: 75 }}
@@ -174,8 +181,8 @@ class Performance extends React.Component {
                       <Bubble
                         key={'bubble-' + i}
                         radius={(parseInt(bubble.toolTip) / 100) * 0.0015 + 10}
-                        fill="#242b49"
-                        stroke="#51adc0"
+                        fill={colors.bodyBackground}
+                        stroke="#2FD7C4"
                       >
                         <Visual>
                           <span
@@ -197,14 +204,23 @@ class Performance extends React.Component {
                       </Bubble>
                     ))}
                   </BubbleChart>
-                  <div className={style.label}>
-                    <span>Females</span>
+                  <div className={style.chartSectionBadge}>
+                    <span
+                      style={{
+                        background: colors.labelBackground,
+                        color: colors.labelColor,
+                        boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                      }}
+                    >
+                      Females
+                    </span>
                   </div>
                 </div>
               </div>
               <div className={'col-4'}>
                 <div className={style.bubbleCont}>
                   <BubbleChart
+                    maximumIterationCount={1000}
                     size={[800, 600]}
                     fromPercentages={true}
                     options={{ toolTipWidth: 200, toolTipHeight: 75 }}
@@ -213,8 +229,8 @@ class Performance extends React.Component {
                       <Bubble
                         key={'bubble-' + i}
                         radius={(parseInt(bubble.toolTip) / 100) * 0.0015 + 10}
-                        fill="#242b49"
-                        stroke="#8567f0"
+                        fill={colors.bodyBackground}
+                        stroke="#8562F3"
                       >
                         <Visual>
                           <span
@@ -236,14 +252,32 @@ class Performance extends React.Component {
                       </Bubble>
                     ))}
                   </BubbleChart>
-                  <div className={style.label}>
-                    <span>Both</span>
+                  <div className={style.chartSectionBadge}>
+                    <span
+                      style={{
+                        background: colors.labelBackground,
+                        color: colors.labelColor,
+                        boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                      }}
+                    >
+                      Both
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="col-12" style={{ paddingBottom: 40 }}>
+            <div className="col-12" style={{ color: colors.textColor }}>
+              <style>
+                {`
+									.customTooltip {
+									color: ${colors.textColor};
+									}
+									.customTooltip .rc-slider-tooltip-inner {
+										color: ${colors.textColor};
+										}
+								`}
+              </style>
               <RangeWithBadge
                 customClass={'customRangeSlider'}
                 minValue={0}
@@ -268,17 +302,94 @@ class Performance extends React.Component {
                 step={1}
                 dots={true}
                 marks={{
-                  0: <div className="custom-dot">0</div>,
-                  10: <div className="custom-dot">10</div>,
-                  20: <div className="custom-dot">20</div>,
-                  30: <div className="custom-dot">30</div>,
-                  40: <div className="custom-dot">40</div>,
-                  50: <div className="custom-dot">50</div>,
-                  60: <div className="custom-dot">60</div>,
-                  70: <div className="custom-dot">70</div>,
-                  80: <div className="custom-dot">80</div>,
-                  90: <div className="custom-dot">90</div>,
-                  100: <div className="custom-dot">100</div>,
+                  0: (
+                    <div
+                      className="custom-dot"
+                      style={{ color: colors.textColor }}
+                    >
+                      0
+                    </div>
+                  ),
+                  10: (
+                    <div
+                      className="custom-dot"
+                      style={{ color: colors.textColor }}
+                    >
+                      10
+                    </div>
+                  ),
+                  20: (
+                    <div
+                      className="custom-dot"
+                      style={{ color: colors.textColor }}
+                    >
+                      20
+                    </div>
+                  ),
+                  30: (
+                    <div
+                      className="custom-dot"
+                      style={{ color: colors.textColor }}
+                    >
+                      30
+                    </div>
+                  ),
+                  40: (
+                    <div
+                      className="custom-dot"
+                      style={{ color: colors.textColor }}
+                    >
+                      40
+                    </div>
+                  ),
+                  50: (
+                    <div
+                      className="custom-dot"
+                      style={{ color: colors.textColor }}
+                    >
+                      50
+                    </div>
+                  ),
+                  60: (
+                    <div
+                      className="custom-dot"
+                      style={{ color: colors.textColor }}
+                    >
+                      60
+                    </div>
+                  ),
+                  70: (
+                    <div
+                      className="custom-dot"
+                      style={{ color: colors.textColor }}
+                    >
+                      70
+                    </div>
+                  ),
+                  80: (
+                    <div
+                      className="custom-dot"
+                      style={{ color: colors.textColor }}
+                    >
+                      80
+                    </div>
+                  ),
+                  90: (
+                    <div
+                      className="custom-dot"
+                      style={{ color: colors.textColor }}
+                    >
+                      90
+                    </div>
+                  ),
+                  100: (
+                    <div
+                      className="custom-dot"
+                      style={{ color: colors.textColor }}
+                    >
+                      100
+                    </div>
+                  ),
                 }}
                 customTicksUnvisible
               />
@@ -301,4 +412,7 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(Performance)
+export default compose(
+  withConnect,
+  withTheme
+)(Performance)

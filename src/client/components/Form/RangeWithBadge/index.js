@@ -1,8 +1,5 @@
 import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
-import classnames from 'classnames'
-import PropTypes from 'prop-types'
-import style from './styles.scss'
+//import style from './styles.scss'
 import Slider, { createSliderWithTooltip } from 'rc-slider';
 
 const RangeSlider = createSliderWithTooltip(Slider.Range)
@@ -25,14 +22,14 @@ const defaultHandleStyle = [
 const defaultTrackStyle = [
   {
     height: '16px',
-    backgroundColor: '#51adc0',
+    backgroundColor: '#2FD7C4',
   },
 ]
 
 const defaultRailStyle = {
   height: '16px',
   borderRadius: '8px',
-  backgroundColor: '#242b49',
+  backgroundColor: '#21243B',
 }
 
 class RangeWithBadge extends Component {
@@ -71,9 +68,9 @@ class RangeWithBadge extends Component {
       max,
       step,
       dots,
-			marks,
-			tipProps,
-			handleLabel,
+      marks,
+      tipProps,
+      handleLabel,
       customClass,
     } = this.props
 
@@ -82,8 +79,8 @@ class RangeWithBadge extends Component {
     return (
       <div className="range-slider">
         <RangeSlider
-					overlayClassName='overlayBBB'
-					overlayStyle='font-size:15px'
+          overlayClassName='customOverlay'
+          overlayStyle='font-size:15px'
           className={customClass}
           allowCross={false}
           value={value}
@@ -96,9 +93,9 @@ class RangeWithBadge extends Component {
           min={min}
           max={max}
           step={step}
-					dots={dots}
-					tipProps={tipProps}
-					handleLabel={handleLabel}
+          dots={dots}
+          tipProps={tipProps}
+          handleLabel={handleLabel}
           marks={marks}
         />
       </div>

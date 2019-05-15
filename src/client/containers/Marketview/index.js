@@ -1,11 +1,9 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { NavLink, Route, Switch } from 'react-router-dom'
-import style from './style.scss'
-import classnames from 'classnames'
-
+import { Route, Switch } from 'react-router-dom'
+//import classnames from 'classnames'
 import RouterLoading from 'Components/RouterLoading'
 import DynamicImport from 'Containers/DynamicImport'
+import style from './style.scss'
 
 const subPage = (page) => (props) => (
   <DynamicImport
@@ -29,10 +27,6 @@ export class Marketview extends React.Component {
   render() {
     return (
       <div className="grid-container col-12">
-        <div className={style.alignTabs}>
-
-        </div>
-
         <Switch>
           <Route path="/marketview" exact component={Main} />
           <Route path="/marketview/platform" exact component={Platform} />

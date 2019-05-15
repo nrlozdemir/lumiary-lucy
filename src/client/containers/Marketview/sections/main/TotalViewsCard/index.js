@@ -1,6 +1,5 @@
-import React, { Component } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import classnames from 'classnames'
 
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
@@ -8,9 +7,9 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewTotalView } from 'Reducers/marketview'
 
 import StackedBarChart from 'Components/Charts/StackedBarChart'
-import TotalViewsDoughnutChart from 'Components/Charts/MarketView/TotalViewsDoughnutChart'
-import style from 'Containers/Marketview/style.scss'
-
+import DoughnutChart from 'Components/Charts/DoughnutChart'
+import style from './style.scss'
+import 'chartjs-plugin-datalabels'
 import Module from 'Components/Module'
 
 class TotalViewsChart extends React.Component {
@@ -24,13 +23,7 @@ class TotalViewsChart extends React.Component {
   render() {
     const {
       totalViewsData: { barData, doughnutData },
-      callBack,
-      moduleKey,
     } = this.props
-    const chartContainer = classnames(
-      'shadow-1 col-12-gutter-20 mb-48',
-      style.chartContainer
-    )
 
     // console.log('TOTAL CARD VIEW', this.props.totalViewsData)
 
@@ -46,24 +39,55 @@ class TotalViewsChart extends React.Component {
             placeHolder: 'Platform',
           },
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'Mw-sad',
             placeHolder: 'Engagement',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'Mw-wds',
             placeHolder: 'Date',
           },
         ]}
       >
         <div className="grid-collapse">
-          <div className="col-6">
+          <div className="col-6 mt-24">
             {barData && <StackedBarChart barData={barData} />}
           </div>
           <div className="col-6">
             {doughnutData && (
-              <TotalViewsDoughnutChart doughnutData={doughnutData} />
+              <DoughnutChart
+                width={270}
+                height={270}
+                data={doughnutData}
+                cutoutPercentage={58}
+                fillText="Total Percentage"
+                dataLabelFunction="insertAfter"
+                dataLabelInsert="%"
+                labelPositionLeft
+                labelsData={[
+                  {
+                    color: '#2FD7C4',
+                    data: 'Barstool Sports',
+                  },
+                  {
+                    color: '#8562F3',
+                    data: 'SB Nation',
+                  },
+                  {
+                    color: '#5292E5',
+                    data: 'ESPN',
+                  },
+                  {
+                    color: '#acb0be',
+                    data: 'Scout Media',
+                  },
+                  {
+                    color: '#545B79',
+                    data: 'Fansided',
+                  },
+                ]}
+              />
             )}
           </div>
         </div>

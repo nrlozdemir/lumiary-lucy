@@ -1,0 +1,183 @@
+.flipWrapper {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+}
+
+.stats {
+  margin: 0px 24px;
+  display: flex;
+	justify-content: space-between;
+	align-items: center;
+	height: 100%;
+
+  .content {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 40%;
+
+    .headline {
+      width: 100%;
+      overflow: hidden;
+      font-family: $font-family-ClanOT;
+      font-size: 14px;
+      font-weight: bold;
+      // color: $color-white;
+      margin: 0px 0px 0px 0px;
+    }
+
+    .changes {
+      width: 100%;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      flex-direction: row;
+      margin-top: 16px;
+
+      .circle {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: row;
+        color: $color-white;
+        position: relative;
+        width: 24px;
+        height: 24px;
+
+        &:before {
+          content: '';
+          position: absolute;
+          left: 0px;
+          top: 0px;
+          width: 24px;
+          height: 24px;
+          border-radius: 100%;
+          box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+        }
+      }
+
+      .label {
+        font-family: $font-family-ClanOT;
+        // color: $color-white;
+        margin: 0px 0px 0px 10px;
+        font-size: 14px;
+        font-weight: bold;
+      }
+    }
+  }
+
+  &.increase {
+    .circle {
+      &:before {
+        background-color: $color-cool-blue;
+      }
+    }
+  }
+
+  &.decrease {
+    .circle {
+      &:before {
+        background: $color-coral-pink;
+      }
+    }
+  }
+
+  &.noChange {
+    .circle {
+      &:before {
+        background: $color-dusk;
+      }
+    }
+    .content .changes .label {
+      color: $color-dusk;
+    }
+  }
+}
+
+$arrowWidth: 10px;
+$arrowHeight: 14px;
+$arrowBackground: #fff;
+
+@mixin arrowBody($width, $height, $top, $left) {
+  border: none;
+  background-color: $arrowBackground;
+  height: $height;
+  width: $width;
+  top: $top;
+  left: $left;
+}
+
+@mixin arrowStyle($width, $height, $top, $left, $way) {
+  left: $left;
+  top: $top;
+  border-width: $height $width;
+  border-#{$way}-color: $arrowBackground;
+}
+
+.arrow {
+  width: $arrowWidth;
+  height: $arrowHeight;
+  position: relative;
+  display: inline-block;
+
+  &:before,
+  &:after {
+    content: '';
+    border-color: transparent;
+    border-style: solid;
+    position: absolute;
+  }
+
+  &.arrowUp {
+    &:before {
+      @include arrowBody(30%, 50%, 50%, 50% - 30%/2);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    }
+    &:after {
+      @include arrowStyle($arrowWidth/2, $arrowHeight/2, -50%, 0, bottom);
+    }
+  }
+
+  &.arrowDown {
+    &:before {
+      @include arrowBody(30%, 50%, 0, 50% - 30%/2);
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    }
+    &:after {
+      @include arrowStyle($arrowWidth/2, $arrowHeight/2, 50%, 0, top);
+    }
+  }
+
+  &.arrowLeft {
+    &:before {
+      @include arrowBody(50%, 30%, 50% - 30%/2, 50%);
+    }
+    &:after {
+      @include arrowStyle($arrowWidth/2, $arrowHeight/2, 0, -50%, right);
+    }
+  }
+
+  &.arrowRight {
+    &:before {
+      @include arrowBody(50%, 30%, 50% - 30%/2, 0);
+    }
+    &:after {
+      @include arrowStyle($arrowWidth/2, $arrowHeight/2, 0, 50%, left);
+    }
+  }
+}
+
+.backText,
+.frontText {
+  font-family: $font-family-ClanOTNews;
+  font-size: 14px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  letter-spacing: normal;
+  line-height: 1.86;
+  text-align: center;
+  // color: $color-white;
+  margin: 0px 10px;
+}

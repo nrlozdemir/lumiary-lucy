@@ -1,9 +1,11 @@
-import { createBrowserHistory } from "history";
+import { createBrowserHistory, createMemoryHistory } from 'history'
 
-let history;
+let history
 
-if (typeof document !== "undefined") {
-	history = createBrowserHistory();
+if (typeof document !== 'undefined') {
+  history = createBrowserHistory()
+} else {
+  history = createMemoryHistory()
 }
 
-export default history;
+export default history

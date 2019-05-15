@@ -63,6 +63,12 @@ const randomCompetitiorArray = (backgroundColors) => {
   })
 }
 
+const randomHeaderBarArray = (headerBarTitles) => headerBarTitles.map((title) => ({
+  "title": title,
+  "value": randomNumber(100, 350),
+  "percentage": randomNumber(0, 100)
+}))
+
 const random = file => {
   let data = file;
 
@@ -89,9 +95,9 @@ const random = file => {
     return String('"' + randomNumber(parseInt($2), parseInt($3)) + " " + $1 + '"');
   })
 
-  data = data.replace(/image=(.*)"/g, ($0, $1) => {
+  /* data = data.replace(/image=(.*)"/g, ($0, $1) => {
     return 'image=' + randomNumber(1, 100) + '"';
-  })
+  }) */
 
   // Customs
   data = data.replace(/"rCSP#(.*)#"/g, ($0, $1) => {
@@ -102,6 +108,11 @@ const random = file => {
   data = data.replace(/"rCTV#(.*)#"/g, ($0, $1) => {
     const backgroundColors = $1.replace(/'/g, '"');
     return JSON.stringify(randomCompetitiorArray(JSON.parse(backgroundColors)));
+  })
+
+  data = data.replace(/"rCHB#(.*)#"/g, ($0, $1) => {
+    const headerBarTitles = $1.replace(/'/g, '"');
+    return JSON.stringify(randomHeaderBarArray(JSON.parse(headerBarTitles)));
   })
 
 

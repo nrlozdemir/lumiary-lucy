@@ -119,10 +119,10 @@
 
       div {
         i {
-          background-color: #242b49;
+          background-color: #21243B;
           border-radius: 20px;
           padding: 8px;
-          border: 2px solid #51adc0;
+          border: 2px solid #2FD7C4;
           margin-right: 20px;
         }
       }
@@ -317,13 +317,13 @@
   .secondsText {
     font-size: 14px;
     font-family: $font-family-ClanOTNews;
-    color: $color-white;
+    // color: $color-white;
   }
 }
 
 .stackedChart {
   position: relative;
-  margin-top: -20px;
+  margin-top: 0;
   canvas {
     margin: 0 auto;
   }

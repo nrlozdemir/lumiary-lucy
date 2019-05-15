@@ -2,62 +2,27 @@
   "labels": ["360", "480", "720p", "1080p", "4k"],
   "datasets": [{
 		"label": "Facebook",
-		"backgroundColor": "#51adc0",
-		"borderColor": ["#242b49", "#242b49", "#242b49", "#242b49",  "#242b49"],
-		"borderWidth": {
-			"top": 2,
-			"right": 0,
-			"bottom": 0,
-			"left": 0
-		},
+		"backgroundColor": "#2FD7C4",
 		"data": [10, 3, 5, 1, 8]
 	},
 	{
 		"label": "Instagram",
-		"backgroundColor": "#8567f0",
-		"borderColor": ["#242b49", "#242b49", "#242b49", "#242b49",  "#242b49"],
-		"borderWidth": {
-			"top": 2,
-			"right": 0,
-			"bottom": 0,
-			"left": 0
-		},
+		"backgroundColor": "#8562F3",
 		"data": [12, 13, 2, 5, 6]
 	},
 	{
 		"label": "Twitter",
-		"backgroundColor": "#D0506C",
-		"borderColor": ["#242b49", "#242b49", "#242b49", "#242b49",  "#242b49"],
-		"borderWidth": {
-			"top": 2,
-			"right": 0,
-			"bottom": 0,
-			"left": 0
-		},
+		"backgroundColor": "#5292E5",
 		"data": [4, 5, 4, 2, 7]
 	},
 	{
 		"label": "Youtube",
 		"backgroundColor": "#acb0be",
-		"borderColor": ["#242b49", "#242b49", "#242b49", "#242b49",  "#242b49"],
-		"borderWidth": {
-			"top": 2,
-			"right": 0,
-			"bottom": 0,
-			"left": 0
-		},
 		"data": [9, 8, 1, 4, 3]
 	},
 	{
 		"label": "Pinterest",
-		"backgroundColor": "#5a6386",
-		"borderColor": ["#242b49", "#242b49", "#242b49", "#242b49",  "#242b49"],
-		"borderWidth": {
-			"top": 2,
-			"right": 0,
-			"bottom": 0,
-			"left": 0
-		},
+		"backgroundColor": "#545B79",
 		"data": [9, 8, 1, 4, 2]
 	}]
 }

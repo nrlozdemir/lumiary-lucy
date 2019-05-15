@@ -18,6 +18,7 @@ module.exports = {
       'react-tabs',
       'react-router',
       'react-router-dom',
+      'connected-react-router',
       'react-modal',
       'react-date-range',
       'react-id-swiper',

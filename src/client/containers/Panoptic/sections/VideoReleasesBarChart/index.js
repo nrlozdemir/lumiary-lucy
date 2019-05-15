@@ -1,144 +1,58 @@
 import React, { Component } from 'react'
-import { Bar } from 'react-chartjs-2'
-import cx from 'classnames'
-import style from './style.scss'
-import { randomKey } from 'Utils/index'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticVideoReleases } from 'Reducers/panoptic'
+import { chartCombineDataset } from 'Utils'
 
-import { options, wrapperBarOptions } from './chartOptions'
+import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
+import { videoReleasesData_DatasetOptions } from './options'
 
-const barChartContainer = cx('col-12', style.panopticBarChart)
-const barChartHeaderClass = cx('col-12 mt-24 mb-24', style.barChartHeader)
-const barChartFooterClass = cx('col-12 mb-56', style.barChartFooter)
-const barContainerClass = cx('col-12', style.barChartContainer)
-const headerTitleClass = cx('font-secondary-second', style.title)
-const referencesClass = cx('font-secondary-second', style.references)
-
-import Module from 'Components/Module'
-
-const plugins = [
-  {
-    beforeDraw: function(chart, easing) {
-      if (
-        chart.config.options.chartArea &&
-        chart.config.options.chartArea.backgroundColor
-      ) {
-        var ctx = chart.chart.ctx
-        var chartArea = chart.chartArea
-
-        ctx.save()
-        ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-        ctx.fillRect(
-          chartArea.left,
-          chartArea.top,
-          chartArea.right - chartArea.left,
-          chartArea.bottom - chartArea.top
-        )
-        ctx.restore()
-      }
-    },
-  },
-]
-
-class PanopticBarChart extends React.Component {
+class VideoReleasesBarChart extends Component {
   callBack = (data, moduleKey) => {
     this.props.getVideoReleasesData(data)
   }
 
-  datasetKeyProvider() {
-    return randomKey(5)
-  }
-
   render() {
     const {
-      videoReleasesData: { data, loading, error },
+      videoReleasesData: { data, loading, error }
     } = this.props
+
+    const combineData = {
+      "labels": [
+        "S",
+        "M",
+        "T",
+        "W",
+        "T",
+        "F",
+        "S"
+      ],
+      "datasets": data
+    };
+
     return (
-      <Module
-        moduleKey={'Panoptic/VideoReleasesBarChart'}
+      <VideoReleasesBarChartModule
+        data={chartCombineDataset(combineData, videoReleasesData_DatasetOptions)}
+        moduleKey={'Panoptic/VideoReleasesBarChartModule'}
         title="Video Releases vs Engagement"
         action={this.callBack}
         filters={[
-          {
-            type: 'engagement',
-            selectKey: 'PVR-sad',
-            placeHolder: 'Engagement',
-          },
           {
             type: 'platform',
             selectKey: 'PVR-asd',
             placeHolder: 'Platform',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'PVR-wds',
             placeHolder: 'Date',
-          },
+          }]}
+        legend={[
+          { label: 'Videos', color: 'cool-blue' },
+          { label: 'Engagement', color: 'coral-pink' },
         ]}
-      >
-        <div className={barChartContainer}>
-          <div className={barContainerClass}>
-            <div className={style.wrapperBarChart}>
-              <Bar
-                data={data}
-                options={wrapperBarOptions}
-                datasetKeyProvider={this.datasetKeyProvider}
-                plugins={plugins}
-              />
-            </div>
-            <div className={style.groupChartsWrapper}>
-              <div className="col-3">
-                <div className={style.chartSection}>
-                  <Bar
-                    data={data}
-                    options={options}
-                    datasetKeyProvider={this.datasetKeyProvider}
-                  />
-                </div>
-                <div className={style.chartSectionBadge}>
-                  <span>Live Action</span>
-                </div>
-              </div>
-              <div className="col-3">
-                <div className={style.chartSection}>
-                  <Bar
-                    data={data}
-                    options={options}
-                    datasetKeyProvider={this.datasetKeyProvider}
-                  />
-                </div>
-                <div className={style.chartSectionBadge}>
-                  <span>Stop Motion</span>
-                </div>
-              </div>
-              <div className="col-3">
-                <div className={style.chartSection}>
-                  <Bar
-                    data={data}
-                    options={options}
-                    datasetKeyProvider={this.datasetKeyProvider}
-                  />
-                </div>
-                <div className={style.chartSectionBadge}>
-                  <span>Cinemagraph</span>
-                </div>
-              </div>
-              <div className="col-3">
-                <div className={style.chartSection}>
-                  <Bar data={data} options={options} />
-                </div>
-                <div className={style.chartSectionBadge}>
-                  <span>Animation</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </Module>
+      />
     )
   }
 }
@@ -154,4 +68,4 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(PanopticBarChart)
+export default compose(withConnect)(VideoReleasesBarChart)

@@ -1,17 +1,11 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectAudienceAgeSlider } from 'Reducers/panoptic'
-
-import AudienceSlider from 'Components/Sliders/Audience'
-import SelectFilters from 'Components/SelectFilters'
-
-import classnames from 'classnames'
-import style from 'Containers/Audience/style.scss'
-
+import { actions, makeSelectAudienceAgeSlider } from 'Reducers/audience'
 import Module from 'Components/Module'
+import AudienceSlider from 'Components/Sliders/Audience'
+import style from 'Containers/Audience/style.scss'
 
 class AgeSlider extends React.Component {
   constructor(props) {
@@ -43,13 +37,13 @@ class AgeSlider extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'engagementOption',
             placeHolder: 'Engagement',
           },
           {
-            type: 'timeRange',
-            selectKey: 'timeRangeOption',
+            type: 'dateRange',
+            selectKey: 'dateRangeOption',
             placeHolder: 'Date',
           },
         ]}

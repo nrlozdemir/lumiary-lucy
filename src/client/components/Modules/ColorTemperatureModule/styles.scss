@@ -1,0 +1,68 @@
+.colorChartContainer {
+	width: 100%;
+	position: relative;
+}
+
+.infoWrapperContainer {
+	padding: 0 20px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+
+	.infoWrapper {
+		width: 100%;
+		padding: 0 20px;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		flex: 1;
+
+		.infoHandle {
+			max-width: 204px;
+			width: 100%;
+			display: flex;
+			justify-content: center;
+
+			.infoText {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				background-color: $color-dusk;
+				border-radius: 17px;
+				font-family: $font-family-ClanOT;
+				font-size: 14px;
+				font-weight: bold;
+				padding: 8px 24px;
+				box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+			}
+		}
+	}
+}
+
+.colorChartContent {
+	padding: 56px 20px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	// justify-content: space-between;
+
+	&:first-child {
+		border: none;
+	}
+}
+
+.round {
+	width: 16px;
+	height: 16px;
+	border-radius: 100%;
+	margin-right: 5px;
+}
+
+.platformName {
+	font-family: $font-family-ClanOTNews;
+	font-size: 14px;
+}
+
+.moduleBody {
+	padding: 8px 0 40px !important;
+}

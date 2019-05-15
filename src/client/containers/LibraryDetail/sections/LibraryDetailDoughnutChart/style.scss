@@ -8,6 +8,13 @@
   }
 }
 
+.lineChartWrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .selectedRadialTab {
   background: transparent;
   color: $color-white;
@@ -26,8 +33,9 @@
     padding: 0 20px;
     list-style: none;
 
-    h1 {
-      font-size: 24px;
+    .panelHeader {
+      font-family: $font-family-ClanOTBold;
+      font-size: 18px;
     }
 
     &:nth-child(2) {
@@ -38,12 +46,6 @@
     .doughnutChartContainer {
       position: relative;
       margin-top: 40px;
-
-      canvas {
-        margin: 0 auto;
-        width: 180px !important;
-        height: 180px !important;
-      }
 
       p {
         font-family: $font-family-ClanOTNews;
@@ -79,7 +81,7 @@
     border-left: 1px solid $color-dusk;
     list-style: none;
     position: relative;
-    transition: all 1s ease-in-out;
+    // transition: all 1s ease-in-out;
     .cardTitle {
       font-family: $font-family-primary;
       font-size: 32px;
@@ -91,8 +93,8 @@
       margin-top: 24px;
       position: relative;
       border-radius: 17px;
-      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-      background-color: $color-dusk;
+      // box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+      // background-color: $color-dusk;
       p {
         line-height: 18px;
         font-family: $font-family-ClanOT;
@@ -157,7 +159,7 @@
       width: 24px;
       height: 24px;
       border-radius: 50%;
-      border: 1px solid #5a6386;
+      border: 1px solid #545b79;
       background: transparent;
       line-height: 24px;
       display: flex;
@@ -179,8 +181,7 @@
       .cardInner {
         margin-top: -25px;
       }
-      &:before {
-        content: '';
+      .doughnutChartContainerHover {
         position: absolute;
         left: -10px;
         right: -10px;
@@ -188,8 +189,6 @@
         bottom: -35px;
         height: calc(100% + 100px);
         width: calc(100% + 20px);
-        background-color: $color-dark-grey-blue;
-        box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
       }
       .doughnutChartFooter {
         display: flex;
@@ -197,7 +196,7 @@
     }
   }
   .doughnutPanelTab {
-    transition: 500ms;
+    // transition: 500ms;
     text-align: center;
     width: 100%;
     min-height: 400px;
@@ -209,7 +208,7 @@
       padding: 12px 40px;
       background-color: $color-dusk;
       display: flex;
-      color: $color-white;
+      // color: $color-white;
       align-items: center;
       justify-content: space-between;
       box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
@@ -227,7 +226,7 @@
           font-family: $font-family-ClanOTBold;
           font-size: 14px;
           font-weight: 500;
-          color: $color-white;
+          // color: $color-white;
           margin-left: 20px;
         }
       }
@@ -299,10 +298,10 @@
 .cancelButton {
   float: right;
   cursor: pointer;
-  background-color: #242b49;
+  background-color: #21243b;
   border-radius: 20px;
   padding: 8px;
-  border: 2px solid #51adc0;
+  border: 2px solid #2fd7c4;
 }
 .tabPanel {
   background-color: $color-dark-grey-blue;

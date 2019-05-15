@@ -1,29 +1,23 @@
-/**
- *
- * Library
- *
- */
-
-import React from "react"
-import classNames from "classnames"
-import PropTypes from "prop-types";
+import React from 'react'
+import classNames from 'classnames'
+import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import style from "./style.scss"
-
-import { actions, makeSelectLibrary } from "Reducers/library"
+import { actions, makeSelectLibrary } from 'Reducers/library'
 import LibraryHeader from './sections/LibraryHeader'
-import Sidebar from "./sidebar.js"
+import Sidebar from './sidebar.js'
 import VideoSection from './sections/VideoSection'
+import style from './style.scss'
+import { ThemeContext } from 'ThemeContext/themeContext'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Library extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-			sidebarVisible: false,
-			fixedHeader: true
+      sidebarVisible: false,
+      fixedHeader: true,
     }
   }
 
@@ -32,36 +26,45 @@ export class Library extends React.Component {
   }
 
   handleSubmit(e) {
-    const { changeFilter, library: { filters } } = this.props;
+    const {
+      changeFilter,
+      library: { filters },
+    } = this.props
     changeFilter({
       ...e,
-      ...(filters && filters.Search ? { Search: filters.Search } : {})
-    });
+      ...(filters && filters.Search ? { Search: filters.Search } : {}),
+    })
   }
 
   render() {
     const sideBarClass = classNames(style.overlay, {
-      [style.overlayShow]: this.state.sidebarVisible
+      [style.overlayShow]: this.state.sidebarVisible,
     })
     return (
-      <React.Fragment>
-        <div className="grid-container col-12">
-          <LibraryHeader
-            setSidebarVisible={this.setSidebarVisible.bind(this)}
-          />
-          <VideoSection />
-        </div>
-        <div
-          className={sideBarClass}
-          onClick={() => this.setSidebarVisible(false)}
-        />
-        <Sidebar
-					sidebarVisible={this.state.sidebarVisible}
-					fixedHeader={this.state.fixedHeader}
-          setSidebarVisible={e => this.setSidebarVisible(e)}
-          onSubmit={e => this.handleSubmit(e)}
-        />
-      </React.Fragment>
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <React.Fragment>
+            <div className="grid-container col-12">
+              <LibraryHeader
+                setSidebarVisible={this.setSidebarVisible.bind(this)}
+              />
+              <VideoSection />
+            </div>
+            <div
+              className={sideBarClass}
+              onClick={() => this.setSidebarVisible(false)}
+              style={{ backgroundColor: colors.bodyBackground, opacity: 0.4 }}
+            />
+            <Sidebar
+              sidebarVisible={this.state.sidebarVisible}
+              fixedHeader={this.state.fixedHeader}
+              setSidebarVisible={(e) => this.setSidebarVisible(e)}
+              onSubmit={(e) => this.handleSubmit(e)}
+              colors={colors}
+            />
+          </React.Fragment>
+        )}
+      </ThemeContext.Consumer>
     )
   }
 }
@@ -70,17 +73,17 @@ Library.propTypes = {
   library: PropTypes.object,
   getVideos: PropTypes.func,
   changeFilter: PropTypes.func,
-  dispatch: PropTypes.func
+  dispatch: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
-  library: makeSelectLibrary()
+  library: makeSelectLibrary(),
 })
 
 function mapDispatchToProps(dispatch) {
   return {
     getVideos: () => dispatch(actions.loadVideos()),
-    changeFilter: e => dispatch(actions.changeFilter(e))
+    changeFilter: (e) => dispatch(actions.changeFilter(e)),
   }
 }
 

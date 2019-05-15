@@ -1,4 +1,5 @@
 .cardContainer {
+  border-radius: 8px;
   margin: 0px 12px 24px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   position: relative;
@@ -14,7 +15,37 @@
     @include grid-column(12);
   }
 
+  .cardCornerInfo {
+    background-color: $color-dark-six;
+    border-color: $color-dusk-two;
+    border-style: solid;
+    border-width: 0 0 1px 1px;
+    border-radius: 0 7px 0 8px;
+    color: $color-white;
+    position: absolute;
+    right: 0;
+    top: 0;
+    opacity: 0.8;
+    z-index: 1;
+
+    span {
+      display: block;
+      font-family: $font-family-primary;
+      font-size: 18px;
+      font-weight: bold;
+      margin-top: 10px;
+      margin-bottom: 5px;
+      text-align: center;
+    }
+
+    .percentageWrapper {
+      display: flex;
+      margin-bottom: -10px;
+    }
+  }
+
   .cardInner {
+    border-radius: 8px;
     -webkit-backface-visibility: hidden;
     backface-visibility: hidden;
     position: relative;
@@ -33,6 +64,7 @@
     height: 0;
     padding-top: 100% / 16 * 9;
     overflow: hidden;
+    box-sizing: border-box;
   }
 
   .progressBar {
@@ -47,11 +79,13 @@
     box-shadow: 0 -1px 2px 0 rgba(0, 0, 0, 0.5);
   }
   .videoInner {
+    border-radius: 8px 8px 0 0;
     position: relative;
     width: 100%;
     height: 0;
     padding-top: 100% / 16 * 9;
     overflow: hidden;
+    box-sizing: border-box;
     video {
       position: absolute;
       width: 100%;
@@ -85,6 +119,7 @@
       }
     }
     .cardInner {
+      border-radius: 8px;
       // transform: scale(1.2);
       -webkit-animation: ease-in-out;
       -webkit-animation-name: run;
@@ -116,6 +151,7 @@
   }
   .cardBody {
     position: relative;
+    border-radius: 0 0 6px 6px;
     .cardInfo {
       display: flex;
       align-items: center;
@@ -131,7 +167,6 @@
       width: 100%;
       font-family: ClanOT;
       font-size: 14px;
-      color: #ffffff;
       text-decoration: none;
       span {
         font-size: 20px;
@@ -154,7 +189,6 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        color: $color-white;
         font-size: 14px;
         line-height: 50px;
         padding-right: 5px;
@@ -213,7 +247,6 @@
   .iconWrapper {
     height: 24px;
     width: 24px;
-    background-color: $color-dark-five;
     border-radius: 100%;
     display: flex;
     align-items: center;

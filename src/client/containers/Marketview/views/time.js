@@ -5,36 +5,15 @@
  */
 
 import React, { Fragment } from 'react'
-import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
-import Slider from 'Containers/Marketview/sections/detail/Slider'
+import Slider from 'Components/Modules/SliderModule'
 import DaySelection from 'Containers/Marketview/sections/detail/DaySelection'
-import TopVideosCard from 'Containers/Marketview/sections/detail/TopVideosCard'
-import TopSimilarProperties from 'Containers/Marketview/sections/detail/TopSimilarProperties'
-import RouterLoading from 'Components/RouterLoading'
-
-const topVideosReferences = [
-  {
-    className: 'bg-cool-blue',
-    text: 'Fast',
-  },
-  {
-    className: 'bg-lighter-purple',
-    text: 'Medium',
-  },
-  {
-    className: 'bg-coral-pink',
-    text: 'Slow',
-  },
-  {
-    className: 'bg-cool-grey',
-    text: 'Slowest',
-  },
-]
+import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
+import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Time extends React.Component {
@@ -61,6 +40,14 @@ export class Time extends React.Component {
     this.setState({ activeDay: day })
   }
 
+  getSimilarProperties = (data) => {
+    this.props.getSimilarPropertiesRequest(data)
+  }
+
+  getCompetitorTopVideos = (data) => {
+    this.props.getMarketviewDetailTimeRequest(data)
+  }
+
   render() {
     const {
       marketview,
@@ -68,10 +55,8 @@ export class Time extends React.Component {
     } = this.props
     const { activeDay } = this.state
 
-    const selectedDayData = marketviewDetailTime && marketviewDetailTime[activeDay]
-    if (!selectedVideo || marketview.loading || !marketviewDetailTime) {
-      return <RouterLoading />
-    }
+    const selectedDayData =
+      marketviewDetailTime && marketviewDetailTime[activeDay]
 
     return (
       <React.Fragment>
@@ -79,30 +64,73 @@ export class Time extends React.Component {
           onDayChange={(day) => this.changeActiveDay(day)}
           activeDay={activeDay}
         />
-        {selectedDayData && selectedDayData.CompetitorVideos && (
-          <Slider
-            data={selectedDayData.CompetitorVideos}
-            selectedVideo={selectedVideo}
-            changeSelectedVideo={this.changeSelectedVideo}
-            className="mt-48"
-            title={`Top Performing ${activeDay
-              .charAt(0)
-              .toUpperCase()}${activeDay.slice(1)} Videos`}
-          />
-        )}
-        {selectedDayData && selectedDayData.SimilarProperties && (
-          <TopSimilarProperties data={selectedDayData.SimilarProperties} />
-
-        )}
-        {selectedDayData && selectedDayData.CompetitorTopVideos && (
-          <TopVideosCard
-            chartData={selectedDayData.CompetitorTopVideos}
-            title="Top Performing Property Across All Days Of The Week"
-            selects={['Resolution']}
-            references={topVideosReferences}
-            height={150}
-          />
-        )}
+        <Slider
+          data={(selectedDayData && selectedDayData.CompetitorVideos) || []}
+          selectedVideo={selectedVideo}
+          changeSelectedVideo={this.changeSelectedVideo}
+          title={`Top Performing ${activeDay
+            .charAt(0)
+            .toUpperCase()}${activeDay.slice(1)} Videos`}
+          filters={[
+            {
+              type: 'metric',
+              selectKey: 'Mwplt-metric',
+              placeHolder: 'metric',
+            },
+            {
+              type: 'dateRange',
+              selectKey: 'Mwplt-date',
+              placeHolder: 'Date',
+            },
+          ]}
+        />
+        <TopSimilarPropertiesModule
+          moduleKey="MarketView/TopSimilarPropertiesModule"
+          data={(selectedDayData && selectedDayData.SimilarProperties) || null}
+          title="Top Similar Properties Of Top Videos"
+          action={this.getSimilarProperties}
+          filters={[
+            {
+              type: 'dateRange',
+              selectKey: 'dateRange',
+              placeHolder: 'dateRange',
+            },
+          ]}
+        />
+        <TopVideosCardModule
+          chartData={
+            (selectedDayData && selectedDayData.CompetitorTopVideos) || null
+          }
+          height={150}
+          moduleKey="MarketView/TopVideosCardModule"
+          title="Top Performing Property Across All Days Of The Week"
+          action={this.getCompetitorTopVideos}
+          filters={[
+            {
+              type: 'property',
+              selectKey: 'property',
+              placeHolder: 'property',
+            },
+          ]}
+          references={[
+            {
+              className: 'bg-cool-blue',
+              text: 'Fast',
+            },
+            {
+              className: 'bg-lighter-purple',
+              text: 'Medium',
+            },
+            {
+              className: 'bg-coral-pink',
+              text: 'Slow',
+            },
+            {
+              className: 'bg-cool-grey',
+              text: 'Slowest',
+            },
+          ]}
+        />
       </React.Fragment>
     )
   }

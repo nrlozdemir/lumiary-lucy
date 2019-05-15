@@ -9,7 +9,7 @@ import { chartCombineDataset } from "Utils"
 import { actions, makeSelectLibraryDetail } from "Reducers/libraryDetail"
 import { actions as libraryActions, makeSelectLibrary } from "Reducers/library"
 
-import { radarData_DatasetOptions, lineChartData_DatasetOptions } from './options'
+import { radarData_DatasetOptions } from './options'
 import LibraryDetailChartHeader from "./sections/LibraryDetailChartHeader"
 import LibraryDetailDoughnutChart from "./sections/LibraryDetailDoughnutChart"
 import LibraryDetailColorTemperature from "./sections/LibraryDetailColorTemperature"
@@ -76,27 +76,45 @@ export class LibraryDetail extends React.Component {
       match: { params: { videoId } }
     } = this.props
 
-    const { videoUrl, title, socialIcon } = videos.find(({ id }) => id == videoId) || {}
+    const { videoUrl, title, socialIcon, cvScore, id } = videos.find(({ id }) => id == videoId) || {}
 
-    let lineChartDataCombined = null
     let radarDataCombined = null
 
     if (shotByShotData) {
-      radarDataCombined = chartCombineDataset(shotByShotData.radarData, radarData_DatasetOptions)
+      radarDataCombined = chartCombineDataset({
+        "labels": [
+          "#fff20d",
+          "#f8b90b",
+          "#eb7919",
+          "#dd501d",
+          "#cc2226",
+          "#b83057",
+          "#923683",
+          "#79609b",
+          "#3178b0",
+          "#229a78",
+          "#13862b",
+          "#aac923"
+        ],
+        ...shotByShotData.radarData
+      }, radarData_DatasetOptions)
     }
 
     return (
       <React.Fragment>
-        {barChartData && <LibraryDetailChartHeader
+        {barChartData && cvScore && <LibraryDetailChartHeader
           barChartData={barChartData}
           videoUrl={videoUrl}
           title={title}
           socialIcon={socialIcon}
+          cvScore={cvScore}
+          id={id}
         />}
         {doughnutLineChartData && doughnutLineChartData.doughnutData && <LibraryDetailDoughnutChart
           doughnutData={doughnutLineChartData.doughnutData}
         />}
         <LibraryDetailColorTemperature
+          libraryDetailId={videoId}
           colorTempData={colorTempData}
         />
         {shotByShotData && <LibraryDetailShotByShot

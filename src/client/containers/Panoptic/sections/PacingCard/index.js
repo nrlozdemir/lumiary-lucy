@@ -1,18 +1,19 @@
 import React from 'react'
-
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticPacingCard } from 'Reducers/panoptic'
+import Module from 'Components/Module'
 
 import classnames from 'classnames'
-import style from './style.scss'
-
-import SelectFilters from 'Components/SelectFilters'
-import HorizontalStackedBarChart from 'Components/Charts/Panoptic/HorizontalStackedBarChart'
+import HorizontalStackedBarChart from 'Components/Charts/HorizontalStackedBarChart'
+import { barChartOptions } from './options'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
+import { isEmpty } from 'lodash'
 
-import Module from 'Components/Module'
+
+
+import style from './style.scss'
 
 const pacingCardContainer = classnames(
   'shadow-1 col-12 mt-72',
@@ -21,16 +22,29 @@ const pacingCardContainer = classnames(
 
 class PacingCard extends React.Component {
   callBack = (data, moduleKey) => {
-    this.props.getPacingCardData(data)
+    const { getPacingCardData } = this.props
+    getPacingCardData(data)
   }
+
   render() {
     const {
       pacingChartData: {
+        data,
         data: { horizontalStackedBarData, stadiumData },
         loading,
         error,
       },
     } = this.props
+
+    const hasNoData =
+      (!!horizontalStackedBarData &&
+        !!stadiumData &&
+        horizontalStackedBarData.datasets.every((dataset) =>
+          dataset.data.every((data) => data === 0)
+        ) &&
+        stadiumData.every((data) => data.value === 0)) ||
+      isEmpty(data)
+
     return (
       <Module
         moduleKey={'Panoptic/PacingCard'}
@@ -38,25 +52,29 @@ class PacingCard extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'PCT-asd',
             placeHolder: 'Engagement',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'PCT-wds',
             placeHolder: 'Date',
           },
         ]}
+        isEmpty={hasNoData}
       >
         <div className={style.pacingCardInner}>
           <div className={style.pacingCardInnerItem}>
-            {horizontalStackedBarData && (
-              <HorizontalStackedBarChart barData={horizontalStackedBarData} />
-            )}
+            <HorizontalStackedBarChart
+              width={500}
+              height={340}
+              barData={horizontalStackedBarData}
+              options={barChartOptions}
+            />
           </div>
           <div className={style.pacingCardInnerItem}>
-            {stadiumData && <StadiumChart data={stadiumData} />}
+            <StadiumChart data={stadiumData} />
           </div>
         </div>
       </Module>

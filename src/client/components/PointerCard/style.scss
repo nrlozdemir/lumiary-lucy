@@ -1,26 +1,16 @@
 .radialChart {
   text-align: center;
-  width: calc(100% - 20px);
+  width: 100%;
   float: left;
   margin: 0;
-  padding: 10px 20px;
   border-left: 1px solid $color-dusk;
   &:first-child {
     border: none;
   }
-  .radialChartRadius {
-    border-radius: 20px;
-    display: inline-block;
-    padding: 10px 20px;
-    .topTitle {
-      font-size: 24px;
-      font-family: $font-family-primary;
-      margin-top: -30px;
-    }
-    span {
-      line-height: 20px;
-      padding: 2px;
-    }
+
+  .topTitle {
+    font-family: $font-family-ClanOTBold;
+    font-size: 18px;
   }
   .pointerContainer {
     position: relative;
@@ -61,11 +51,11 @@
               stroke-width: 2;
             }
             .svgLineText {
-              color: $color-white;
+              // color: $color-white;
               font-family: $font-family-ClanOTNews;
               font-size: 12px;
               align-self: center;
-              background: $color-dark-grey-blue;
+              // background: $color-dark-grey-blue;
               margin-bottom: 5px;
               margin-left: 10px;
             }
@@ -77,7 +67,7 @@
           left: calc(50% - 3px);
           height: 76px;
           width: 6px;
-          // background: #d0506c;
+          // background: #5292E5;
           transform-origin: calc(0% + 3px) 100%;
           transform: rotate(-90deg);
           .pointerArrow {
@@ -121,7 +111,7 @@
   display: block;
   width: 75%;
   margin: 0 auto;
-  color: #fffffe;
+  // color: #fffffe;
   font-weight: normal;
 }
 .textBold {
