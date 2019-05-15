@@ -104,12 +104,16 @@ const SelectedNavLink = (props) => {
 const NavTitle = (props) => {
   const {
     match,
-    library: { videos },
+    library: {
+      videos: { videos },
+    },
   } = props
-
+  if (!videos) {
+    return null
+  }
   if (videos && match) {
     const video =
-      videos.find(({ id }) => id == Object.values(match.params)[0]) || {}
+      videos.find(({ uuid }) => uuid == Object.values(match.params)[0]) || {}
     const title = video.title
     return <div>{title && capitalizeFirstLetter(title)}</div>
   }
