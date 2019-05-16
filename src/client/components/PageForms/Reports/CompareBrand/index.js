@@ -73,9 +73,9 @@ class CompareBrand extends Component {
                   }}
                 >
                   Generate Report
-									<div className={style.icon}>
-										<RightArrowCircle></RightArrowCircle>
-									</div>
+                  <div className={style.icon}>
+                    <RightArrowCircle></RightArrowCircle>
+                  </div>
                 </button>
               </div>
             </form>

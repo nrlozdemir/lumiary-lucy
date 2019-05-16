@@ -10,27 +10,27 @@ import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
 import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
 
 class MarketViewSlider extends React.Component {
-	renderNextButton = () => {
-		return (
-			<RightArrowCircleFlat
-				className={classnames(style.nextButton, this.refSlider && this.refSlider.isEnd ? style.disabled : '')}
-				size={32}
-				onClick={() => this.refSlider.slideNext()}
-				>
-			</RightArrowCircleFlat>
-		)
-	}
+  renderNextButton = () => {
+    return (
+      <RightArrowCircleFlat
+        className={classnames(style.nextButton, this.refSlider && this.refSlider.isEnd ? style.disabled : '')}
+        size={32}
+        onClick={() => this.refSlider.slideNext()}
+        >
+      </RightArrowCircleFlat>
+    )
+  }
 
-	renderPrevButton = () => {
-		return (
-			<LeftArrowCircleFlat
-				className={classnames(style.prevButton, this.refSlider && this.refSlider.isBeginning ? style.disabled : '')}
-				size={32}
-				onClick={() => this.refSlider.slidePrev()}
-				>
-			</LeftArrowCircleFlat>
-		)
-	}
+  renderPrevButton = () => {
+    return (
+      <LeftArrowCircleFlat
+        className={classnames(style.prevButton, this.refSlider && this.refSlider.isBeginning ? style.disabled : '')}
+        size={32}
+        onClick={() => this.refSlider.slidePrev()}
+        >
+      </LeftArrowCircleFlat>
+    )
+  }
 
   settings = {
     modules: [SwiperJS.Pagination],
@@ -94,8 +94,8 @@ class MarketViewSlider extends React.Component {
 				this.forceUpdate();
       },
 		},
-		renderNextButton: this.renderNextButton,
-		renderPrevButton: this.renderPrevButton
+    renderNextButton: this.renderNextButton,
+    renderPrevButton: this.renderPrevButton
 	}
 
   render() {

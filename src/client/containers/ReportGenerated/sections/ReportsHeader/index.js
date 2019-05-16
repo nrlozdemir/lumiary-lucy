@@ -10,7 +10,7 @@ const ReportsHeader = () => (
   <div className={style.header}>
     <div className="">
       <Link to="/reports">
-				<LeftArrowCircle></LeftArrowCircle>
+        <LeftArrowCircle></LeftArrowCircle>
         <span className={style.text}>Generate New Report</span>
       </Link>
     </div>
