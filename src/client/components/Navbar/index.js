@@ -40,7 +40,7 @@ const BackTo = (props) => {
   return (
     <div className={style.backTo}>
       <Link to={link} style={{ color: textColor }}>
-				<LeftArrowCircle></LeftArrowCircle>
+        <LeftArrowCircle></LeftArrowCircle>
         <span className={style.text}>{title}</span>
       </Link>
     </div>
