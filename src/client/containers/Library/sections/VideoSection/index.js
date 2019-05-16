@@ -13,12 +13,12 @@ class VideoSection extends React.Component {
   }
 
   render() {
-    if (!this.props.library.videos || this.props.library.loading) {
+    if (!this.props.library.data || this.props.library.loading) {
       return <RouterLoading />
     }
     return (
       <div className={style.videoContainer}>
-        <VideoCardList data={this.props.library.videos} />
+        <VideoCardList data={this.props.library.data.videos} />
       </div>
     )
   }

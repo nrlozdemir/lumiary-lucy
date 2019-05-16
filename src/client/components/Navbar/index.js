@@ -105,7 +105,7 @@ const NavTitle = (props) => {
   const {
     match,
     library: {
-      videos: { videos },
+      data: { videos },
     },
   } = props
   if (!videos) {

@@ -76,7 +76,7 @@ export class LibraryDetail extends React.Component {
         shotByShotData,
       },
       library: {
-        videos: { videos },
+        data: { videos },
       },
       match: {
         params: { videoId },

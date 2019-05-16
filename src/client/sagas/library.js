@@ -15,9 +15,8 @@ function getLibraryApi() {
 
 function getLibraryDataApi(vals) {
   return ajax({
-    url: RESOURCE,
+    url: `${RESOURCE}?limit=${vals.limit}&page=${vals.page}`,
     method: 'GET',
-    params: qs.stringify(vals),
   }).then((response) => {
     if (response.error) {
       throw response.error
@@ -26,9 +25,14 @@ function getLibraryDataApi(vals) {
   })
 }
 
-function* getVideos() {
+function* getVideos(values) {
+  const page = values && values.payload && values.payload.page
   try {
-    const payload = yield call(getLibraryDataApi)
+    const options = {
+      limit: 16,
+      page: page || 1,
+    }
+    const payload = yield call(getLibraryDataApi, options)
     yield put(actions.loadVideosSuccess(payload))
   } catch (err) {
     yield put(actions.loadVideosError(err))

@@ -1,13 +1,13 @@
 import React from 'react'
 import VideoCard from 'Components/VideoCard'
 
-const VideoCardList = ({ data: { videos } }) => {
-  if (!videos) {
+const VideoCardList = ({ data }) => {
+  if (!data) {
     return null
   }
   return (
-    videos &&
-    videos.map((item, index) => (
+    data &&
+    data.map((item, index) => (
       <VideoCard
         video={item}
         key={`videolist-${index}`}
