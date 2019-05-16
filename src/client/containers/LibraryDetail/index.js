@@ -34,14 +34,16 @@ export class LibraryDetail extends React.Component {
       getDoughnutChartRequest,
       getColorTempRequest,
       getShotByShotRequest,
+      getSelectedVideo,
     } = this.props
 
     getVideos()
 
     if (match.params.videoId) {
+      getSelectedVideo(match.params.videoId)
       getBarChartRequest({ LibraryDetailId: 1 })
       getDoughnutChartRequest({ LibraryDetailId: 1 })
-      getColorTempRequest({ LibraryDetailId: 1 })
+      getColorTempRequest({ LibraryDetailId: 2 })
       getShotByShotRequest({ LibraryDetailId: 1 })
     }
   }
@@ -57,6 +59,7 @@ export class LibraryDetail extends React.Component {
     } = this.props
 
     if (prevMatch.params.videoId !== match.params.videoId) {
+      getSelectedVideo(match.params.videoId)
       getBarChartRequest({ LibraryDetailId: 1 })
       getDoughnutChartRequest({ LibraryDetailId: 1 })
       getColorTempRequest({ LibraryDetailId: 1 })
@@ -131,10 +134,12 @@ export class LibraryDetail extends React.Component {
             doughnutData={doughnutLineChartData.doughnutData}
           />
         )}
-        <LibraryDetailColorTemperature
-          libraryDetailId={videoId}
-          colorTempData={colorTempData}
-        />
+        {colorTempData && (
+          <LibraryDetailColorTemperature
+            libraryDetailId={videoId}
+            colorTempData={colorTempData}
+          />
+        )}
         {shotByShotData && (
           <LibraryDetailShotByShot
             sliderWithThumbnails={shotByShotData.sliderWithThumbnails}
@@ -166,6 +171,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    getSelectedVideo: (id) => dispatch(actions.getSelectedVideoRequest(id)),
     getVideos: () => dispatch(libraryActions.loadVideos()),
     getBarChartRequest: (id) => dispatch(actions.getBarChartRequest(id)),
     getDoughnutChartRequest: (id) =>
