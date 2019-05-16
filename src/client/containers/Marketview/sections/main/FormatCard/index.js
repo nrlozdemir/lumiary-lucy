@@ -102,7 +102,9 @@ class FormatCard extends Component {
               }}
             >
               View Time Metrics
-              <RightArrowCircle containerClass={style.icon}></RightArrowCircle>
+							<div className={style.icon}>
+								<RightArrowCircle></RightArrowCircle>
+							</div>
             </Link>
           </div>
         )}

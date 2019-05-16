@@ -6,8 +6,32 @@ import style from './style.scss'
 import { socialIconSelector } from 'Utils/'
 import Swiper from 'react-id-swiper'
 import SwiperJS from 'swiper/dist/js/swiper.js'
+import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
+import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
 
 class MarketViewSlider extends React.Component {
+	renderNextButton = () => {
+		return (
+			<RightArrowCircleFlat
+				className={classnames(style.nextButton, this.refSlider && this.refSlider.isEnd ? style.disabled : '')}
+				size={32}
+				onClick={() => this.refSlider.slideNext()}
+				>
+			</RightArrowCircleFlat>
+		)
+	}
+
+	renderPrevButton = () => {
+		return (
+			<LeftArrowCircleFlat
+				className={classnames(style.prevButton, this.refSlider && this.refSlider.isBeginning ? style.disabled : '')}
+				size={32}
+				onClick={() => this.refSlider.slidePrev()}
+				>
+			</LeftArrowCircleFlat>
+		)
+	}
+
   settings = {
     modules: [SwiperJS.Pagination],
     shouldSwiperUpdate: true,
@@ -64,13 +88,19 @@ class MarketViewSlider extends React.Component {
           item.classList.remove('active')
         }
 
-        bullets[this.refSlider.activeIndex].classList.add('active')
+				bullets[this.refSlider.activeIndex].classList.add('active')
+
+				// Force rendering needed to update disabled state of prev and next buttons
+				this.forceUpdate();
       },
-    },
-  }
+		},
+		renderNextButton: this.renderNextButton,
+		renderPrevButton: this.renderPrevButton
+	}
 
   render() {
-    const { props } = this
+		const { props } = this
+
     return (
       <div className={style.section}>
         <div className="marketViewSlider">

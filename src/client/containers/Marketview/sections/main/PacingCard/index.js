@@ -86,7 +86,9 @@ class PacingCard extends Component {
               }}
             >
               View Competitor Metrics
-              <RightArrowCircle containerClass={style.icon}></RightArrowCircle>
+							<div className={style.icon}>
+								<RightArrowCircle></RightArrowCircle>
+							</div>
             </Link>
           </div>
         )}

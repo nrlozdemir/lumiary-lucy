@@ -180,7 +180,9 @@ export class VideoCard extends PureComponent {
 										}}
 									>
 										View Video Report
-										<RightArrowCircle containerClass={style.icon}></RightArrowCircle>
+										<div className={style.icon}>
+											<RightArrowCircle></RightArrowCircle>
+										</div>
 									</Link>
 								</div>
 							</div>
