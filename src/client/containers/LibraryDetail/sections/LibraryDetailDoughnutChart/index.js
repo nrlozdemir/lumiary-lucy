@@ -5,6 +5,7 @@ import SelectFilters from 'Components/SelectFilters'
 import LineChart from 'Components/Charts/LineChart'
 import PointerCard from 'Components/PointerCard'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
+import DownArrowCircle from "Components/Icons/DownArrowCircle";
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import XCircle from "Components/Icons/XCircle";
@@ -138,13 +139,7 @@ class LibraryDetailDoughnutChart extends React.Component {
 											}}
 										>
 											View Metrics
-                      <div className={style.doughnutChartFooterIcon}>
-												<span className="icon-Arrow-Down">
-													<span className="path1" />
-													<span className="path2" />
-													<span className="path3" />
-												</span>
-											</div>
+											<DownArrowCircle className={style.icon} size={24}></DownArrowCircle>
 										</a>
 									</div>
 								))}
