@@ -91,6 +91,13 @@ function* getAudienceColorTemperatureData() {
         item.y = _.random(-50, 50)
       })
       return data
+		})
+
+		shuffleData = shuffleData.map((data) => {
+      data.data.map((item, i) => {
+        item.color = (i === 0) ? "#5292e5" : "#2fd7c4"
+      })
+      return data
     })
     yield put(actions.getAudienceColorTemperatureDataSuccess(shuffleData))
   } catch (err) {

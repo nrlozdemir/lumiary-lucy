@@ -1,10 +1,5 @@
-{
-  "labels": ["Slowest", "Slow", "Medium", "Fast"],
-  "datasets": [
-    {
-      "data": [70, 15, 10, 5],
-      "borderColor": "#373F5B",
-      "backgroundColor": ["#2FD7C4", "#8562F3", "#5292E5", "#acb0be"]
-    }
-  ]
-}
+[
+  {
+    "data": [70, 15, 10, 5]
+  }
+]

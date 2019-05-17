@@ -4,9 +4,9 @@
     "https://picsum.photos/250/140?image=11"
   ],
   "data": [
-    { "count": 36, "name": "Stop Motion", "iconClass": "icon-icon_stopmotion" },
-    { "count": 12, "name": "Animation", "iconClass": "icon-icon_animation" },
-    { "count": 28, "name": "Live Action", "iconClass": "icon-icon_cinemagraph" },
-    { "count": 10, "name": "Cinemagraph", "iconClass": "icon-icon_liveaction" }
+    { "count": 36, "name": "Stop Motion" },
+    { "count": 12, "name": "Animation" },
+    { "count": 28, "name": "Live Action" },
+    { "count": 10, "name": "Cinemagraph" }
   ]
 }

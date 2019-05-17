@@ -24,8 +24,8 @@ class ColorTemperature extends React.Component {
         title="Color Temperature / Sentiment Comparison"
         action={this.callBack}
         legend={[
-          { label: 'Male', color: 'redRound' },
-          { label: 'Female', color: 'purpleRound' },
+          { label: 'Male', color: 'coral-pink' },
+          { label: 'Female', color: 'cool-blue' },
         ]}
         filters={[
           {

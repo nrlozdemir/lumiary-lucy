@@ -2,31 +2,26 @@
   {
     "name": "Facebook",
     "value": 33000,
-    "icon": "Facebook",
     "color": "#fff20d"
   },
   {
     "name": "Instagram",
     "value": 540000,
-    "icon": "Instagram",
     "color": "#cc2226"
   },
   {
     "name": "Twitter",
     "value": 845000,
-    "icon": "Twitter",
     "color": "#13862b"
   },
   {
     "name": "Pinterest",
     "value": 480000,
-    "icon": "YouTube",
     "color": "#923683"
   },
   {
     "name": "Youtube",
     "value": 296000,
-    "icon": "Pinterest",
     "color": "#3178b0"
   }
 ]

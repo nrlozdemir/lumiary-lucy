@@ -11,6 +11,9 @@ import style from 'Containers/Marketview/style.scss'
 import PacingPieChart from 'Components/Charts/MarketView/PacingPieChart'
 import classnames from 'classnames'
 
+import { chartCombineDataset } from 'Utils'
+import { pacingCard_DatasetOptions } from './options'
+
 class PacingCard extends Component {
   componentDidMount() {
     this.props.getPacingChartRequest()
@@ -18,6 +21,15 @@ class PacingCard extends Component {
 
   render() {
     const { pacingChartData } = this.props
+
+    const combineData = chartCombineDataset(
+      {
+        labels: ['Slowest', 'Slow', 'Medium', 'Fast'],
+        datasets: pacingChartData,
+      },
+      pacingCard_DatasetOptions
+    )
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -44,7 +56,9 @@ class PacingCard extends Component {
               </span>
             </div>
 
-            <PacingPieChart data={pacingChartData} />
+            {(pacingChartData || pacingChartData.length) && (
+              <PacingPieChart data={combineData} />
+            )}
             <div className={style.marketViewCardChartTitle}>Medium Paced</div>
             <div
               className={classnames(
