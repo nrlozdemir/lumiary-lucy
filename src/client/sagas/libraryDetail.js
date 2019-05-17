@@ -56,15 +56,36 @@ function* getColorTemperatureData({ payload: { LibraryDetailId } }) {
   try {
     const payload = yield call(getColorTempApi, {
       LibraryDetailId,
+		})
+
+		let shuffleData = payload.colorTempData
+    shuffleData = shuffleData.map((data) => {
+      data.data.map((item) => {
+        item.x = _.random(-50, 50)
+        item.y = _.random(-50, 50)
+      })
+      return data
+		})
+
+		const colors = [
+			"#2fd7c4",
+			"#8562f3",
+			"#5292e5"
+		]
+		shuffleData = shuffleData.map((data) => {
+      data.data.map((item, i) => {
+        item.color = colors[i]
+      })
+      return data
     })
 
     yield put({
       type: types.GET_COLOR_TEMP_SUCCESS,
-      payload: payload.colorTempData,
+      payload: shuffleData,
     })
   } catch (err) {
     yield put(actions.getColorTempFailure(err))
-  }
+	}
 }
 
 function* getShotByShot({ payload: { LibraryDetailId } }) {

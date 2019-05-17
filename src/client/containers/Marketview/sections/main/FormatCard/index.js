@@ -14,8 +14,29 @@ class FormatCard extends Component {
   componentDidMount() {
     this.props.getFormatChartRequest()
   }
+
+  iconClass(name) {
+    switch (name) {
+      case 'Stop Motion':
+        return 'icon-icon_stopmotion'
+
+      case 'Animation':
+        return 'icon-icon_animation'
+
+      case 'Live Action':
+        return 'icon-icon_liveaction'
+
+      case 'Cinemagraph':
+        return 'icon-icon_cinemagraph'
+
+      default:
+        return null
+    }
+  }
+
   render() {
     const { formatChartData } = this.props
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -57,7 +78,7 @@ class FormatCard extends Component {
                 formatChartData.data.map((item, i) => (
                   <div key={i} className={formatStyles.formatItem}>
                     <div className={formatStyles.formatItemIcon}>
-                      <span className={item.iconClass} />
+                      <span className={this.iconClass(item.name)} />
                     </div>
                     <div className={formatStyles.formatItemText}>
                       <span>{item.count}</span>
