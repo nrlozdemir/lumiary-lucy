@@ -4,7 +4,7 @@ import axios from 'axios'
 import { actions, types } from 'Reducers/panoptic'
 import panopticMockData from 'Api/mocks/panopticMock.json'
 
-import { radarChartCalculate } from 'Utils'
+import { radarChartCalculate, convertDataIntoDatasets } from 'Utils'
 
 import { ajax } from 'Utils/api'
 
@@ -93,7 +93,6 @@ function* getPacingCardData({ data }) {
     }
 
     const stadiumData = yield call(getPanopticDataApi, options)
-
     const horizontalStackedBarData = yield call(getPanopticDataApi, {
       ...options,
       proportionOf: 'format',
@@ -115,8 +114,11 @@ function* getPacingCardData({ data }) {
 
       yield put(
         actions.getPacingCardDataSuccess({
-          stadiumData: stadiumPacing,
-          horizontalStackedBarData: barChartPacing,
+          stadiumData: convertDataIntoDatasets(stadiumPacing, options),
+          horizontalStackedBarData: convertDataIntoDatasets(barChartPacing, {
+            ...options,
+            proportionOf: 'format',
+          }),
         })
       )
     } else {

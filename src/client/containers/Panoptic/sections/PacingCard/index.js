@@ -11,8 +11,6 @@ import { barChartOptions } from './options'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
 import { isEmpty } from 'lodash'
 
-
-
 import style from './style.scss'
 
 const pacingCardContainer = classnames(
@@ -35,16 +33,21 @@ class PacingCard extends React.Component {
         error,
       },
     } = this.props
-
+    console.log(this.props)
     const hasNoData =
       (!!horizontalStackedBarData &&
         !!stadiumData &&
         horizontalStackedBarData.datasets.every((dataset) =>
           dataset.data.every((data) => data === 0)
         ) &&
-        stadiumData.every((data) => data.value === 0)) ||
+        stadiumData.datasets.every((dataset) =>
+          dataset.data.every((data) => data === 0)
+        )) ||
       isEmpty(data)
-
+    console.log(
+      !!stadiumData && stadiumData.datasets,
+      !!horizontalStackedBarData && horizontalStackedBarData.datasets
+    )
     return (
       <Module
         moduleKey={'Panoptic/PacingCard'}

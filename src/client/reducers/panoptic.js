@@ -6,7 +6,6 @@
 
 import { fromJS } from 'immutable'
 import { createSelector } from 'reselect'
-import { chartColors } from 'Utils/globals'
 
 export const types = {
   GET_DATA: 'Panoptic/GET_DATA',
@@ -247,43 +246,12 @@ const panopticReducer = (state = initialState, action) => {
     case types.GET_PACING_CARD_DATA_SUCCESS:
       const { stadiumData, horizontalStackedBarData } = payload
 
-      console.log(action)
-
-      const stadiumChartData = Object.keys(stadiumData).map((key, idx) => ({
-        title: key,
-        value: stadiumData[key] || 0,
-        color: chartColors[idx],
-      }))
-
-      const barChartData = Object.keys(horizontalStackedBarData).reduce(
-        (data, key, idx) => ({
-          labels: [...data.labels, key],
-          datasets: [
-            ...data.datasets,
-            {
-              label: key,
-              backgroundColor: chartColors[idx],
-              borderColor: chartColors[idx],
-              borderWidth: 1,
-              data: (!!horizontalStackedBarData[key] &&
-                Object.keys(horizontalStackedBarData[key]).map(
-                  (item) => horizontalStackedBarData[key][item]
-                )) || [0, 0, 0, 0],
-            },
-          ],
-        }),
-        {
-          labels: [],
-          datasets: [],
-        }
-      )
-
       return state
         .setIn(
           ['pacingChartData', 'data'],
           fromJS({
-            stadiumData: stadiumChartData,
-            horizontalStackedBarData: barChartData,
+            stadiumData: stadiumData,
+            horizontalStackedBarData: horizontalStackedBarData,
           })
         )
         .setIn(['pacingChartData', 'loading'], fromJS(false))

@@ -1,3 +1,4 @@
+import { chartColors } from 'Utils/globals'
 function randomKey(char) {
   var text = ''
   var possible =
@@ -7,6 +8,59 @@ function randomKey(char) {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
 
   return text
+}
+
+const convertDataIntoDatasets = (values, options, ...args) => {
+  if (options && options.proportionOf) {
+    return Object.keys(values).reduce(
+      (data, key, idx) => ({
+        labels: [...data.labels, key],
+        datasets: [
+          ...data.datasets,
+          {
+            label: key,
+            backgroundColor: chartColors[idx],
+            borderColor: chartColors[idx],
+            borderWidth: 1,
+            data: (!!data[key] &&
+              Object.keys(values[key]).map((item) => values[key][item])) || [
+              0,
+              0,
+              0,
+              0,
+            ],
+          },
+        ],
+      }),
+      {
+        labels: [],
+        datasets: [],
+      }
+    )
+  }
+  if (options && !options.proportionOf) {
+    return Object.keys(values).reduce(
+      (data, key, idx) => {
+        const { datasets, labels } = data
+        const color = chartColors[idx]
+        return {
+          labels: [...labels, key],
+          backgroundColor: color,
+          borderColor: color,
+          borderWidth: 1,
+          datasets: [
+            {
+              data: [...datasets[0].data, values[key]],
+            },
+          ],
+        }
+      },
+      {
+        labels: [],
+        datasets: [{ data: [] }],
+      }
+    )
+  }
 }
 
 function socialIconSelector(key) {
@@ -187,4 +241,5 @@ export {
   shadeHexColor,
   capitalizeFirstLetter,
   radarChartCalculate,
+  convertDataIntoDatasets,
 }
