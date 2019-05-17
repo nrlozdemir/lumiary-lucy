@@ -115,7 +115,7 @@ const strToColor = (str) => {
 
   const color = {
     red: '#cc2226',
-    'red-orange': '#dd501d',
+    'orange-red': '#dd501d',
     orange: '#eb7919',
     'yellow-orange': '#f8b90b',
     yellow: '#fff20d',

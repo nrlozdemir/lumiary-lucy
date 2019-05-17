@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { API_ROOT, API_VERSION } from 'Utils/globals'
+import { capitalizeFirstLetter } from 'Utils'
 
 export function handleResponse(response) {
   if (!response.ok) {
@@ -141,4 +142,23 @@ export function findIdDetail(data, detailId, detailName) {
   }
 
   return {}
+}
+
+export function compareSharesData(data) {
+  return data.map((item) => {
+    return {
+      type: capitalizeFirstLetter(item.platform),
+      datas: {
+        labels: Object.keys(item.data.color).map((color) => ({
+          name: color,
+          count: item.data.color[color],
+        })),
+        datasets: [
+          {
+            label: capitalizeFirstLetter(item.platform),
+          },
+        ],
+      },
+    }
+  })
 }
