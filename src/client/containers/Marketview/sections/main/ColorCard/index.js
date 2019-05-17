@@ -81,7 +81,7 @@ class ColorCard extends Component {
                       <Visual>
                         <span
                           className={
-                            socialIconSelector(bubble.icon) +
+                            socialIconSelector(bubble.name) +
                             ' ' +
                             style.bubbleVisual
                           }
