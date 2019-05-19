@@ -1,4 +1,4 @@
-import { chartColors } from 'Utils/globals'
+import { chartColors, weeks, dayOfWeek, month } from 'Utils/globals'
 function randomKey(char) {
   var text = ''
   var possible =
@@ -11,56 +11,69 @@ function randomKey(char) {
 }
 
 const convertDataIntoDatasets = (values, options, ...args) => {
-  if (options && options.proportionOf) {
-    return Object.keys(values).reduce(
-      (data, key, idx) => ({
-        labels: [...data.labels, key],
-        datasets: [
-          ...data.datasets,
-          {
-            label: key,
-            backgroundColor: chartColors[idx],
-            borderColor: chartColors[idx],
-            borderWidth: 1,
-            data: (!!data[key] &&
-              Object.keys(values[key]).map((item) => values[key][item])) || [
-              0,
-              0,
-              0,
-              0,
-            ],
-          },
-        ],
-      }),
-      {
-        labels: [],
-        datasets: [],
-      }
+  let labels
+  let datasetsFromValues
+  let timeBucket
+
+  timeBucket =
+    options.dateBucket === 'weeks'
+      ? weeks
+      : options.dateBucket === 'dayOfWeek'
+      ? dayOfWeek
+      : options.dateBucket === 'month'
+      ? month
+      : null
+
+  const getValueinObject = values.data[options.property[0]]
+
+  // If time bucket was  selected, it will change labels to time labels and it will set up datasets according to selected time bucket
+  if (timeBucket) {
+    datasetsFromValues = Object.keys(getValueinObject).map((item) =>
+      timeBucket.map((date) => getValueinObject[item][date])
     )
+    labels = timeBucket
   }
-  if (options && !options.proportionOf) {
-    return Object.keys(values).reduce(
-      (data, key, idx) => {
-        const { datasets, labels } = data
-        const color = chartColors[idx]
-        return {
-          labels: [...labels, key],
-          backgroundColor: color,
-          borderColor: color,
+
+  if (options.proportionOf) {
+    datasetsFromValues = Object.keys(getValueinObject).map((key) =>
+      Object.keys(getValueinObject[key]).map(
+        (item) =>
+          // users should not see the subtotal value in the graphs
+          getValueinObject[key][item]
+      )
+    )
+    labels = Object.keys(getValueinObject)
+  }
+
+  if (!timeBucket && !options.proportionOf) {
+    datasetsFromValues = Object.keys(getValueinObject).map(
+      (key) => getValueinObject[key]
+    )
+    labels = Object.keys(getValueinObject)
+  }
+
+  labels = (args && args.preparedLabel) || labels
+  datasetsFromValues = (args && args.preparedDatasets) || datasetsFromValues
+
+  return Object.keys(getValueinObject).reduce(
+    (data, key, idx) => ({
+      labels: [...labels],
+      datasets: [
+        ...data.datasets,
+        {
+          label: key,
+          backgroundColor: chartColors[idx],
+          borderColor: chartColors[idx],
           borderWidth: 1,
-          datasets: [
-            {
-              data: [...datasets[0].data, values[key]],
-            },
-          ],
-        }
-      },
-      {
-        labels: [],
-        datasets: [{ data: [] }],
-      }
-    )
-  }
+          data: datasetsFromValues[idx] || [0, 0, 0, 0],
+        },
+      ],
+    }),
+    {
+      labels: [],
+      datasets: [],
+    }
+  )
 }
 
 function socialIconSelector(key) {

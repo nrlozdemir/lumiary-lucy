@@ -104,21 +104,16 @@ function* getPacingCardData({ data }) {
       !!horizontalStackedBarData.data &&
       !!horizontalStackedBarData.data.pacing
     ) {
-      const {
-        data: { pacing: stadiumPacing },
-      } = stadiumData
-
-      const {
-        data: { pacing: barChartPacing },
-      } = horizontalStackedBarData
-
       yield put(
         actions.getPacingCardDataSuccess({
-          stadiumData: convertDataIntoDatasets(stadiumPacing, options),
-          horizontalStackedBarData: convertDataIntoDatasets(barChartPacing, {
-            ...options,
-            proportionOf: 'format',
-          }),
+          stadiumData: convertDataIntoDatasets(stadiumData, options),
+          horizontalStackedBarData: convertDataIntoDatasets(
+            horizontalStackedBarData,
+            {
+              ...options,
+              proportionOf: 'format',
+            }
+          ),
         })
       )
     } else {

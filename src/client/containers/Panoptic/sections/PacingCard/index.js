@@ -33,7 +33,7 @@ class PacingCard extends React.Component {
         error,
       },
     } = this.props
-    console.log(this.props)
+    console.log(stadiumData)
     const hasNoData =
       (!!horizontalStackedBarData &&
         !!stadiumData &&
@@ -44,10 +44,15 @@ class PacingCard extends React.Component {
           dataset.data.every((data) => data === 0)
         )) ||
       isEmpty(data)
-    console.log(
-      !!stadiumData && stadiumData.datasets,
-      !!horizontalStackedBarData && horizontalStackedBarData.datasets
-    )
+
+    const stadiumValues =
+      stadiumData &&
+      stadiumData.datasets.map((item, idx) => ({
+        title: item.label,
+        value: item.data[idx] || 0,
+        color: item.backgroundColor,
+      }))
+
     return (
       <Module
         moduleKey={'Panoptic/PacingCard'}
@@ -77,7 +82,7 @@ class PacingCard extends React.Component {
             />
           </div>
           <div className={style.pacingCardInnerItem}>
-            <StadiumChart data={stadiumData} />
+            <StadiumChart data={stadiumValues} />
           </div>
         </div>
       </Module>
