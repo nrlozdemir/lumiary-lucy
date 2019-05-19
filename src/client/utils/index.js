@@ -10,6 +10,13 @@ function randomKey(char) {
   return text
 }
 
+/**
+ * Convert data to chart js structure
+ * @constructor
+ * @param {object} values - Values which comes from backend response.
+ * @param {object} options - Option is the our request params.
+ * @param {object} args - Args attribute for other options like if you have any prepared labels or datasets you can pass quickly using with args attribute
+ */
 const convertDataIntoDatasets = (values, options, ...args) => {
   let labels
   let datasetsFromValues
@@ -35,6 +42,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     labels = timeBucket
   }
 
+  // If proportionOf was  selected, it will change labels to time labels and it will set up datasets according to selected proportionOf
   if (options.proportionOf) {
     datasetsFromValues = Object.keys(getValueinObject).map((key) =>
       Object.keys(getValueinObject[key]).map(
@@ -46,6 +54,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     labels = Object.keys(getValueinObject)
   }
 
+  // if timebucket or proportionOf werent selected, it will get data from single level json
   if (!timeBucket && !options.proportionOf) {
     datasetsFromValues = Object.keys(getValueinObject).map(
       (key) => getValueinObject[key]
@@ -54,6 +63,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     singleLevelJSON = true
   }
 
+  // You can pass prepared labels or datasets in args
   labels = (args && args.preparedLabel) || labels
   datasetsFromValues = (args && args.preparedDatasets) || datasetsFromValues
 
