@@ -5,6 +5,7 @@ import { socialIconSelector } from '../../utils'
 import { Link } from 'react-router-dom'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import { userUuid } from 'Utils/globals'
 
 let hoverInReady
 
@@ -134,7 +135,9 @@ export class VideoCard extends PureComponent {
                       controls={false}
                     >
                       <source
-                        src={`${process.env.MEDIA_URL}${video.fileName}`}
+                        src={`${process.env.MEDIA_URL}lumiere/${
+                          video.fileName
+                        }`}
                         type="video/mp4"
                       />
                     </video>

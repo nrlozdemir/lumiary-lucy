@@ -5,8 +5,9 @@ import { sortVideos } from 'Utils/sort-videos'
 import libraryMockData from 'Api/mocks/libraryMock.json'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { types, actions, makeSelectVideoFilters } from 'Reducers/library'
+import { userUuid } from 'Utils/globals'
 
-const RESOURCE = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea'
+const RESOURCE = '/brand'
 
 function getLibraryApi() {
   //this will use ajax function in utils/api when real data is provided
@@ -15,7 +16,7 @@ function getLibraryApi() {
 
 function getLibraryDataApi(vals) {
   return ajax({
-    url: `${RESOURCE}?limit=${vals.limit}&page=${vals.page}`,
+    url: `${RESOURCE}/${userUuid}?limit=${vals.limit}&page=${vals.page}`,
     method: 'GET',
   }).then((response) => {
     if (response.error) {
