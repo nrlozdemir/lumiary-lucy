@@ -29,7 +29,7 @@ const StadiumChart = ({ data = emptyData }) => {
   return (
     <div className={style.stadiumContainer}>
       <div className={style.colorList}>
-        {emptyData.map((item, index) => {
+        {data.map((item, index) => {
           return (
             <div
               className={style.colorListItem}
@@ -46,7 +46,7 @@ const StadiumChart = ({ data = emptyData }) => {
       </div>
 
       <Stadium
-        data={emptyData}
+        data={data}
         stadiumText={'Total Percentage'}
         angleColor={'#21243B'}
         barStroke={'#545B79'}

@@ -14,6 +14,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   let labels
   let datasetsFromValues
   let timeBucket
+  let singleLevelJSON
 
   timeBucket =
     options.dateBucket === 'weeks'
@@ -50,6 +51,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
       (key) => getValueinObject[key]
     )
     labels = Object.keys(getValueinObject)
+    singleLevelJSON = true
   }
 
   labels = (args && args.preparedLabel) || labels
@@ -65,7 +67,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
           backgroundColor: chartColors[idx],
           borderColor: chartColors[idx],
           borderWidth: 1,
-          data: datasetsFromValues[idx] || [0, 0, 0, 0],
+          data: singleLevelJSON
+            ? datasetsFromValues
+            : datasetsFromValues[idx] || [0, 0, 0, 0],
         },
       ],
     }),
