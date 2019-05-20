@@ -150,7 +150,10 @@ export function compareSharesData(data) {
       type: capitalizeFirstLetter(item.platform),
       datas: {
         labels: Object.keys(item.data.color).map((color) => ({
-          name: color,
+          name: color
+            .split('-')
+            .map((c) => capitalizeFirstLetter(c))
+            .join('-'),
           count: item.data.color[color],
         })),
         datasets: [
