@@ -14,6 +14,7 @@ import LibraryDetailChartHeader from './sections/LibraryDetailChartHeader'
 import LibraryDetailDoughnutChart from './sections/LibraryDetailDoughnutChart'
 import LibraryDetailColorTemperature from './sections/LibraryDetailColorTemperature'
 import LibraryDetailShotByShot from './sections/LibraryDetailShotByShot'
+import { userUuid } from 'Utils/globals'
 
 /* eslint-disable react/prefer-stateless-function */
 export class LibraryDetail extends React.Component {
@@ -88,9 +89,9 @@ export class LibraryDetail extends React.Component {
     }
 
     // temporary solution for library detail backend doesnt provide names and cvScore now
-    const { fileName, title, socialIcon, id } =
+    const { fileName, title, socialIcon, id, uuid } =
       videos.find(({ uuid }) => uuid == videoId) || {}
-    const cvScore = 80
+    const cvScore = 80.0
 
     let radarDataCombined = null
 
@@ -122,7 +123,7 @@ export class LibraryDetail extends React.Component {
         {barChartData && cvScore && (
           <LibraryDetailChartHeader
             barChartData={barChartData}
-            videoUrl={`${process.env.MEDIA_URL}${fileName}`}
+            videoUrl={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/${userUuid}/${uuid}.mp4`}
             title={'Temporary Title'}
             socialIcon={socialIcon}
             cvScore={cvScore}

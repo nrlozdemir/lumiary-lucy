@@ -135,9 +135,9 @@ export class VideoCard extends PureComponent {
                       controls={false}
                     >
                       <source
-                        src={`${process.env.MEDIA_URL}lumiere/${
-                          video.fileName
-                        }`}
+                        src={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/${userUuid}/${
+                          video.uuid
+                        }.mp4`}
                         type="video/mp4"
                       />
                     </video>
