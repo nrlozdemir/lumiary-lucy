@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects'
+import { takeLatest, call, put, all } from 'redux-saga/effects'
 import axios from 'axios'
 import _ from 'lodash'
 
@@ -14,6 +14,9 @@ import marketviewTotalCompetitorViewsData from 'Api/mocks/marketviewTotalCompeti
 import marketviewTimeMockData from 'Api/mocks/marketviewTimeMock.json'
 import marketviewTopPerformingProperties from 'Api/mocks/marketviewPlatformTopPerformingProperty.json'
 import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json'
+
+import { convertDataIntoDatasets } from 'Utils'
+import { getReportDataApi } from 'Api'
 
 function getCompetitorVideosApi() {
   return axios('/').then((res) => marketviewCompetitorVideosData)
@@ -42,11 +45,6 @@ function getPacingChartApi() {
 function getFormatChartApi() {
   //this will use ajax function in utils/api when real data is provided
   return axios.get('/').then((res) => marketviewFormatChartData)
-}
-
-function getTotalViewsApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewTotalViewsData)
 }
 
 function getTotalCompetitorViewsApi() {
@@ -125,10 +123,36 @@ function* getFormatChartData() {
   }
 }
 
-function* getTotalViewsData(data) {
+function* getTotalViewsData({ data: { platform, metric, dateRange } }) {
   try {
-    const payload = yield call(getTotalViewsApi)
-    yield put(actions.getTotalViewsSuccess(payload))
+    const options = {
+      platform,
+      metric,
+      dateRange,
+      property: ['aspectRatio'],
+      dateBucket: 'none',
+      display: 'percentage',
+    }
+
+    const [barData, doughnutData] = yield all([
+      call(getReportDataApi, {
+        ...options,
+        dateBucket: 'weeks',
+      }),
+      call(getReportDataApi, options),
+    ])
+
+    console.log([barData, doughnutData])
+
+    yield put(
+      actions.getTotalViewsSuccess({
+        barData: convertDataIntoDatasets(barData, {
+          ...options,
+          dateBucket: 'weeks',
+        }),
+        doughnutData: convertDataIntoDatasets(barData, options),
+      })
+    )
   } catch (error) {
     yield put(actions.getTotalViewsFailure(error))
   }
