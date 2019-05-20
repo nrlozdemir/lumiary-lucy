@@ -7,6 +7,7 @@ import style from '../style.scss'
 import { selectOptionsBrand } from '../options'
 import { required } from 'Utils/validate'
 import SelectBox from '../../../Form/CustomCheckbox'
+import RightArrowCircle from "Components/Icons/RightArrowCircle";
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -73,11 +74,7 @@ class CompareBrand extends Component {
                 >
                   Generate Report
                   <div className={style.icon}>
-                    <span className="icon-Right-Arrow-Circle">
-                      <span className="path1" />
-                      <span className="path2" />
-                      <span className="path3" />
-                    </span>
+                    <RightArrowCircle></RightArrowCircle>
                   </div>
                 </button>
               </div>

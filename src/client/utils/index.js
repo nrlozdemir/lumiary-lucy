@@ -1,3 +1,4 @@
+import { chartColors, weeks, dayOfWeek, month } from 'Utils/globals'
 function randomKey(char) {
   var text = ''
   var possible =
@@ -7,6 +8,86 @@ function randomKey(char) {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
 
   return text
+}
+
+/**
+ * Convert data to chart js structure
+ * @constructor
+ * @param {object} values - Values which comes from backend response.
+ * @param {object} options - Option is the our request params.
+ * @param {object} args - Args attribute for other options like if you have any prepared labels or datasets you can pass quickly using with args attribute
+ */
+const convertDataIntoDatasets = (values, options, ...args) => {
+  let labels
+  let datasetsFromValues
+  let timeBucket
+  let singleLevelJSON
+
+  timeBucket =
+    options.dateBucket === 'weeks'
+      ? weeks
+      : options.dateBucket === 'dayOfWeek'
+      ? dayOfWeek
+      : options.dateBucket === 'month'
+      ? month
+      : null
+
+  const getValueinObject = values.data[options.property[0]]
+
+  // If time bucket was  selected, it will change labels to time labels and it will set up datasets according to selected time bucket
+  if (timeBucket) {
+    datasetsFromValues = Object.keys(getValueinObject).map((item) =>
+      timeBucket.map((date) => getValueinObject[item][date])
+    )
+    labels = timeBucket
+  }
+
+  // If proportionOf was  selected, it will change labels to time labels and it will set up datasets according to selected proportionOf
+  if (options.proportionOf) {
+    datasetsFromValues = Object.keys(getValueinObject).map((key) =>
+      Object.keys(getValueinObject[key]).map(
+        (item) =>
+          // users should not see the subtotal value in the graphs
+          getValueinObject[key][item]
+      )
+    )
+    labels = Object.keys(getValueinObject)
+  }
+
+  // if timebucket or proportionOf werent selected, it will get data from single level json
+  if (!timeBucket && !options.proportionOf) {
+    datasetsFromValues = Object.keys(getValueinObject).map(
+      (key) => getValueinObject[key]
+    )
+    labels = Object.keys(getValueinObject)
+    singleLevelJSON = true
+  }
+
+  // You can pass prepared labels or datasets in args
+  labels = (args && args.preparedLabel) || labels
+  datasetsFromValues = (args && args.preparedDatasets) || datasetsFromValues
+
+  return Object.keys(getValueinObject).reduce(
+    (data, key, idx) => ({
+      labels: [...labels],
+      datasets: [
+        ...data.datasets,
+        {
+          label: key,
+          backgroundColor: chartColors[idx],
+          borderColor: chartColors[idx],
+          borderWidth: 1,
+          data: singleLevelJSON
+            ? datasetsFromValues
+            : datasetsFromValues[idx] || [0, 0, 0, 0],
+        },
+      ],
+    }),
+    {
+      labels: [],
+      datasets: [],
+    }
+  )
 }
 
 function socialIconSelector(key) {
@@ -187,4 +268,5 @@ export {
   shadeHexColor,
   capitalizeFirstLetter,
   radarChartCalculate,
+  convertDataIntoDatasets,
 }

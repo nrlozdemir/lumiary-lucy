@@ -152,9 +152,9 @@
       color: $color-dusk;
       cursor: pointer;
     }
-    .icon-Arrow-Down:before {
-      color: $color-dusk;
-    }
+    // .icon-Arrow-Down:before {
+    //   color: $color-dusk;
+    // }
     .doughnutChartFooterIcon {
       width: 24px;
       height: 24px;
@@ -170,9 +170,9 @@
         font-size: 12px;
         margin-top: 2px;
         font-weight: bold;
-        &:before {
-          color: $color-dusk;
-        }
+        // &:before {
+        //   color: $color-dusk;
+        // }
       }
     }
     &:hover {
@@ -237,6 +237,10 @@
       }
     }
   }
+}
+
+.icon {
+	margin-left: 8px;
 }
 
 .dot {

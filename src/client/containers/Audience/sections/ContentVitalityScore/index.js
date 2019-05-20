@@ -5,7 +5,7 @@ import { compose, bindActionCreators } from 'redux'
 import {
   actions,
   makeSelectAudienceContentVitalityScore,
-} from 'Reducers/panoptic'
+} from 'Reducers/audience'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'

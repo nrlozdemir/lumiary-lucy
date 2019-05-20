@@ -5,6 +5,7 @@ import { socialIconSelector } from '../../utils'
 import { Link } from 'react-router-dom'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import RightArrowCircle from "Components/Icons/RightArrowCircle";
 
 let hoverInReady
 
@@ -180,11 +181,7 @@ export class VideoCard extends PureComponent {
 									>
 										View Video Report
 										<div className={style.icon}>
-											<span className="icon-Right-Arrow-Circle">
-												<span className="path1" />
-												<span className="path2" />
-												<span className="path3" />
-											</span>
+											<RightArrowCircle></RightArrowCircle>
 										</div>
 									</Link>
 								</div>

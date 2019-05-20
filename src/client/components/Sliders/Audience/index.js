@@ -1,7 +1,10 @@
 import React from 'react'
+import classnames from 'classnames';
 import style from './style.scss'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
+import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
+import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
 import Swiper from 'react-id-swiper'
 import SwiperJS from 'swiper/dist/js/swiper.js'
 import { ThemeContext } from 'ThemeContext/themeContext'
@@ -18,7 +21,29 @@ class AudienceSlider extends React.Component {
     this.setState({
       refThumb: this.refThumb,
     })
-  }
+	}
+
+  renderNextButton = () => {
+    return (
+      <RightArrowCircleFlat
+        className={classnames(style.nextButton, this.refSlider && this.refSlider.isEnd ? style.disabled : '')}
+        size={32}
+        onClick={() => this.refSlider.slideNext()}
+        >
+      </RightArrowCircleFlat>
+		)
+	}
+
+  renderPrevButton = () => {
+    return (
+      <LeftArrowCircleFlat
+        className={classnames(style.prevButton, this.refSlider && this.refSlider.isBeginning ? style.disabled : '')}
+        size={32}
+        onClick={() => this.refSlider.slidePrev()}
+        >
+      </LeftArrowCircleFlat>
+		)
+	}
 
   render() {
     const { items, changeVideo } = this.props
@@ -45,7 +70,9 @@ class AudienceSlider extends React.Component {
           refThumb.slideTo(this.refSlider.activeIndex, 300)
           changeVideo(items[this.refSlider.activeIndex])
         },
-      },
+			},
+      renderNextButton: this.renderNextButton,
+      renderPrevButton: this.renderPrevButton
     }
 
     const thumbSettings = {
