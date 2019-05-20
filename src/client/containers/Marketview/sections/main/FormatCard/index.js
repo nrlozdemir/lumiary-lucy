@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewFormatCard } from 'Reducers/marketview'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import RightArrowCircle from "Components/Icons/RightArrowCircle";
 
 import style from 'Containers/Marketview/style.scss'
 import formatStyles from './style.scss'
@@ -14,8 +15,29 @@ class FormatCard extends Component {
   componentDidMount() {
     this.props.getFormatChartRequest()
   }
+
+  iconClass(name) {
+    switch (name) {
+      case 'Stop Motion':
+        return 'icon-icon_stopmotion'
+
+      case 'Animation':
+        return 'icon-icon_animation'
+
+      case 'Live Action':
+        return 'icon-icon_liveaction'
+
+      case 'Cinemagraph':
+        return 'icon-icon_cinemagraph'
+
+      default:
+        return null
+    }
+  }
+
   render() {
     const { formatChartData } = this.props
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -57,7 +79,7 @@ class FormatCard extends Component {
                 formatChartData.data.map((item, i) => (
                   <div key={i} className={formatStyles.formatItem}>
                     <div className={formatStyles.formatItemIcon}>
-                      <span className={item.iconClass} />
+                      <span className={this.iconClass(item.name)} />
                     </div>
                     <div className={formatStyles.formatItemText}>
                       <span>{item.count}</span>
@@ -81,11 +103,7 @@ class FormatCard extends Component {
             >
               View Time Metrics
               <div className={style.icon}>
-                <span className="icon-Right-Arrow-Circle">
-                  <span className="path1" />
-                  <span className="path2" />
-                  <span className="path3" />
-                </span>
+                <RightArrowCircle></RightArrowCircle>
               </div>
             </Link>
           </div>

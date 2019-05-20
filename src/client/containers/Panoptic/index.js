@@ -13,10 +13,6 @@ class Panoptic extends React.Component {
   render() {
     return (
       <React.Fragment>
-        <div className="grid-container col-12">
-          <div className={style.alignTabs} />
-        </div>
-
         <Cards />
         <TopPerformingFormat />
         <VideoReleasesBarChart />

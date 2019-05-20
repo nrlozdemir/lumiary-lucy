@@ -12,3 +12,27 @@ export const chartColors = [
   '#545b79',
 ]
 export const userUuid = '1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6'
+export const weeks = ['Week1', 'Week2', 'Week3', 'Week4']
+export const dayOfWeek = [
+  'Monday',
+  'Tuesday',
+  'Friday',
+  'Saturday',
+  'Wednesday',
+  'Thursday',
+  'Sunday',
+]
+export const month = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+]

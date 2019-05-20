@@ -6,10 +6,14 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewPacingChart } from 'Reducers/marketview'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import RightArrowCircle from "Components/Icons/RightArrowCircle";
 
 import style from 'Containers/Marketview/style.scss'
 import PacingPieChart from 'Components/Charts/MarketView/PacingPieChart'
 import classnames from 'classnames'
+
+import { chartCombineDataset } from 'Utils'
+import { pacingCard_DatasetOptions } from './options'
 
 class PacingCard extends Component {
   componentDidMount() {
@@ -18,6 +22,15 @@ class PacingCard extends Component {
 
   render() {
     const { pacingChartData } = this.props
+
+    const combineData = chartCombineDataset(
+      {
+        labels: ['Slowest', 'Slow', 'Medium', 'Fast'],
+        datasets: pacingChartData,
+      },
+      pacingCard_DatasetOptions
+    )
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -44,7 +57,9 @@ class PacingCard extends Component {
               </span>
             </div>
 
-            <PacingPieChart data={pacingChartData} />
+            {(pacingChartData || pacingChartData.length) && (
+              <PacingPieChart data={combineData} />
+            )}
             <div className={style.marketViewCardChartTitle}>Medium Paced</div>
             <div
               className={classnames(
@@ -72,11 +87,7 @@ class PacingCard extends Component {
             >
               View Competitor Metrics
               <div className={style.icon}>
-                <span className="icon-Right-Arrow-Circle">
-                  <span className="path1" />
-                  <span className="path2" />
-                  <span className="path3" />
-                </span>
+                <RightArrowCircle></RightArrowCircle>
               </div>
             </Link>
           </div>

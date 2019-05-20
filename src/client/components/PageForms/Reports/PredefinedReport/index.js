@@ -5,6 +5,7 @@ import { compose } from 'redux'
 import style from '../style.scss'
 import { selectPredefinedBrands } from '../options'
 import SelectBox from '../../../Form/CustomCheckbox'
+import RightArrowCircle from "Components/Icons/RightArrowCircle";
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -57,13 +58,9 @@ class PredefinedReport extends Component {
                   }}
                 >
                   Generate Report
-                  <div className={style.icon}>
-                    <span className="icon-Right-Arrow-Circle">
-                      <span className="path1" />
-                      <span className="path2" />
-                      <span className="path3" />
-                    </span>
-                  </div>
+                <div className={style.icon}>
+                  <RightArrowCircle></RightArrowCircle>
+                </div>
                 </button>
               </div>
             </form>

@@ -379,61 +379,6 @@
         }
       }
     }
-
-    .swiper-button-prev {
-      width: 40px;
-      height: 40px;
-      display: block;
-      background: white;
-      border-radius: 20px;
-      left: 40px;
-      top: 123.5%;
-      z-index: 11;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 0;
-
-      transform: translateY(-50%);
-
-      &::before {
-        font-family: $font-family-qf-icons;
-        content: '\E988';
-        color: black;
-        line-height: 40px;
-      }
-
-      &:hover {
-        background: #fff;
-      }
-    }
-
-    .swiper-button-next {
-      width: 40px;
-      height: 40px;
-      display: block;
-      background: white;
-      border-radius: 20px;
-      right: 40px;
-      top: 123.5%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-top: 0;
-
-      transform: translateY(-50%);
-
-      &::before {
-        content: '\e915';
-        color: $color-black;
-        font-family: $font-family-qf-icons;
-        line-height: 40px;
-      }
-
-      &:hover {
-        background: #fff;
-      }
-    }
   }
 
   .marketViewSlider {

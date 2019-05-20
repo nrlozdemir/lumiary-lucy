@@ -125,7 +125,7 @@ class Cards extends React.Component {
 		} = this.props.flipCardsData
 
 		return (
-			<div className="grid-container col-12">
+			<div className="grid-container col-12 mt-72 mb-72">
 				<div className={styles.flipWrapper}>
 					<FlipCard width={282} height={114}>
 						{views && <Front data={views} title="Views" />}

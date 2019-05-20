@@ -3,3 +3,26 @@
   position: relative;
   overflow: hidden;
 }
+
+.nextButton,
+.prevButton {
+  position: absolute;
+  cursor: pointer;
+  border-radius: 20px;
+  right: 40px;
+  top: 119%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+}
+
+.prevButton {
+  left: 40px;
+  right: auto;
+}
+
+.disabled {
+  opacity: .5;
+  cursor: initial;
+}
