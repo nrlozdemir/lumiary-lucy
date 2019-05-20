@@ -100,8 +100,10 @@ function* getFilteringSectionData({ data }) {
         { ...options, dateBucket: 'week' },
         { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
       )
+    
     console.log('response', stackedChartData)
     console.log('converted', test)
+
       yield put(
         actions.getFilteringSectionDataSuccess({
           doughnutData: convertDataIntoDatasets(doughnutData, options, {

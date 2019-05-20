@@ -10,12 +10,8 @@ import 'chartjs-plugin-datalabels'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 import style from './style.scss'
-import {
-  doughnutData_DatasetOptions,
-  stackedChartData_DatasetOptions,
-} from './options'
-import { chartColors } from 'Utils/globals'
 
+import { chartColors } from 'Utils/globals'
 import { isEmpty, isEqual } from 'lodash'
 
 class PanopticFilteringSection extends Component {
@@ -46,17 +42,16 @@ class PanopticFilteringSection extends Component {
       },
     } = this.props
 
-    const combineStackedChartData = {
-      labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-      datasets: stackedChartData,
-    }
+    console.log('component using stack data ===', stackedChartData)
+
+    const isDoughnutEmpty = isDataSetEmpty(doughnutData)
 
     const hasNoData =
       !loading &&
       ((!!doughnutData &&
         !!stackedChartData &&
-        isDataSetEmpty(doughnutData) &&
-        isDataSetEmpty(combineStackedChartData)) ||
+        isDoughnutEmpty &&
+        isDataSetEmpty(stackedChartData)) ||
         isEmpty(data))
 
     return (
@@ -90,43 +85,27 @@ class PanopticFilteringSection extends Component {
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
-            {doughnutData && (
-              <DoughnutChart
-                width={270}
-                height={270}
-                data={doughnutData}
-                cutoutPercentage={58}
-                fillText="Total Percentage"
-                dataLabelFunction="insertAfter"
-                dataLabelInsert="%"
-                labelPositionRight
-                labelsData={[
-                  { data: '0-15 seconds', color: '#2FD7C4' },
-                  { data: '15-30 seconds', color: '#8562F3' },
-                  { data: '30-45 seconds', color: '#5292E5' },
-                  { data: '45-60 seconds', color: '#acb0be' },
-                ]}
-                labelsData={
-                  !!doughnutData &&
-                  !!doughnutData.labels &&
-                  doughnutData.labels.map((label, idx) => ({
-                    data: label,
-                    color: chartColors[idx],
-                  }))
-                }
-              />
-            )}
+            <DoughnutChart
+              width={270}
+              height={270}
+              data={doughnutData}
+              cutoutPercentage={58}
+              fillText={isDoughnutEmpty ? 'No Data' : 'Total Percentage'}
+              dataLabelFunction="insertAfter"
+              dataLabelInsert="%"
+              labelPositionRight
+              labelsData={
+                !!doughnutData &&
+                !!doughnutData.labels &&
+                doughnutData.labels.map((label, idx) => ({
+                  data: label,
+                  color: chartColors[idx],
+                }))
+              }
+            />
           </div>
           <div className={style.stackedChart}>
-            {stackedChartData && (
-              <StackedBarChart
-                barData={chartCombineDataset(
-                  combineStackedChartData,
-                  stackedChartData_DatasetOptions
-                )}
-                barSpacing={2}
-              />
-            )}
+            <StackedBarChart barData={stackedChartData} barSpacing={2} />
           </div>
         </div>
       </Module>
