@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticFilteringSection } from 'Reducers/panoptic'
 import Module from 'Components/Module'
-import { chartCombineDataset } from 'Utils'
+import { chartCombineDataset, isDataSetEmpty } from 'Utils'
 //import classnames from 'classnames'
 import 'chartjs-plugin-datalabels'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
@@ -14,6 +14,9 @@ import {
   doughnutData_DatasetOptions,
   stackedChartData_DatasetOptions,
 } from './options'
+import { chartColors } from 'Utils/globals'
+
+import { isEmpty, isEqual } from 'lodash'
 
 class PanopticFilteringSection extends Component {
   callBack = (data) => {
@@ -21,29 +24,40 @@ class PanopticFilteringSection extends Component {
     getFilteringSectionData(data)
   }
 
+  shouldComponentUpdate(nextProps) {
+    const {
+      filteringSectionData: { data: nextData },
+    } = nextProps
+
+    const {
+      filteringSectionData: { data },
+    } = this.props
+
+    return !isEqual(nextData, data)
+  }
+
   render() {
     const {
       filteringSectionData: {
+        data,
         data: { doughnutData, stackedChartData },
         loading,
         error,
       },
     } = this.props
 
-    const combineDoughnutData = {
-      labels: [
-        '0-15 seconds',
-        '15-30 seconds',
-        '30-45 seconds',
-        '45-60 seconds',
-      ],
-      datasets: doughnutData,
-    }
-
     const combineStackedChartData = {
       labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
       datasets: stackedChartData,
     }
+
+    const hasNoData =
+      !loading &&
+      ((!!doughnutData &&
+        !!stackedChartData &&
+        isDataSetEmpty(doughnutData) &&
+        isDataSetEmpty(combineStackedChartData)) ||
+        isEmpty(data))
 
     return (
       <Module
@@ -55,27 +69,24 @@ class PanopticFilteringSection extends Component {
             type: 'property',
             selectKey: 'PFS-dsad',
             placeHolder: 'property',
-            defaultValue: 'duration',
           },
           {
             type: 'metric',
             selectKey: 'PFS-asdwda',
             placeHolder: 'Engagement',
-            defaultValue: 'views',
           },
           {
             type: 'platform',
             selectKey: 'PFS-dwdf',
             placeHolder: 'Platform',
-            defaultValue: 'all',
           },
           {
             type: 'dateRange',
             selectKey: 'PFS-wxcvs',
             placeHolder: 'Date',
-            defaultValue: 'month',
           },
         ]}
+        isEmpty={hasNoData}
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
@@ -83,10 +94,7 @@ class PanopticFilteringSection extends Component {
               <DoughnutChart
                 width={270}
                 height={270}
-                data={chartCombineDataset(
-                  combineDoughnutData,
-                  doughnutData_DatasetOptions
-                )}
+                data={doughnutData}
                 cutoutPercentage={58}
                 fillText="Total Percentage"
                 dataLabelFunction="insertAfter"
@@ -98,6 +106,14 @@ class PanopticFilteringSection extends Component {
                   { data: '30-45 seconds', color: '#5292E5' },
                   { data: '45-60 seconds', color: '#acb0be' },
                 ]}
+                labelsData={
+                  !!doughnutData &&
+                  !!doughnutData.labels &&
+                  doughnutData.labels.map((label, idx) => ({
+                    data: label,
+                    color: chartColors[idx],
+                  }))
+                }
               />
             )}
           </div>
@@ -107,8 +123,8 @@ class PanopticFilteringSection extends Component {
                 barData={chartCombineDataset(
                   combineStackedChartData,
                   stackedChartData_DatasetOptions
-								)}
-								barSpacing={2}
+                )}
+                barSpacing={2}
               />
             )}
           </div>

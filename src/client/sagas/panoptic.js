@@ -39,7 +39,7 @@ function* getVideoReleasesData() {
 }
 
 function* getColorTemperatureData() {
-	try {
+  try {
     const payload = yield call(getMockPanopticDataApi)
     let shuffleData = payload.colorTempData
     shuffleData = shuffleData.map((data) => {
@@ -48,15 +48,15 @@ function* getColorTemperatureData() {
         item.y = _.random(-50, 50)
       })
       return data
-		})
+    })
 
-		const colors = [
-			"rgba(82, 146, 229, 0.8)",
-			"#acb0be",
-			"rgba(133, 103, 240, 0.8)",
-			"rgba(81, 173, 192, 0.8)",
-		]
-		shuffleData = shuffleData.map((data) => {
+    const colors = [
+      'rgba(82, 146, 229, 0.8)',
+      '#acb0be',
+      'rgba(133, 103, 240, 0.8)',
+      'rgba(81, 173, 192, 0.8)',
+    ]
+    shuffleData = shuffleData.map((data) => {
       data.data.map((item, i) => {
         item.color = colors[i]
       })
@@ -68,13 +68,63 @@ function* getColorTemperatureData() {
   }
 }
 
-function* getFilteringSectionData(data) {
+function* getFilteringSectionData({ data }) {
   try {
+    const { property, metric, platform, dateRange } = data
+
+    const options = {
+      metric,
+      platform,
+      dateRange,
+      dateBucket: 'none',
+      display: 'percentage',
+      property: [property],
+    }
+
     const payload = yield call(getMockPanopticDataApi)
-    yield put(
-      actions.getFilteringSectionDataSuccess(payload.verticalStackedChartData)
-    )
+
+    const doughnutData = yield call(getPanopticDataApi, options)
+
+    const stackedChartData = yield call(getPanopticDataApi, {
+      ...options,
+      dateBucket: 'week',
+    })
+
+    if (
+      !!doughnutData.data &&
+      !!doughnutData.data[property] &&
+      stackedChartData.data
+    ) {
+      const test = convertDataIntoDatasets(
+        stackedChartData,
+        { ...options, dateBucket: 'week' },
+        { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+      )
+    console.log('response', stackedChartData)
+    console.log('converted', test)
+      yield put(
+        actions.getFilteringSectionDataSuccess({
+          doughnutData: convertDataIntoDatasets(doughnutData, options, {
+            singleDataset: true,
+          }),
+          stackedChartData: payload.verticalStackedChartData.stackedChartData,
+          property,
+        })
+      )
+    } else {
+      throw 'Error fetching FilteringSection data'
+    }
   } catch (err) {
+    console.log(err)
+    yield put(
+      // empty data
+      actions.getFilteringSectionDataSuccess({
+        doughnutData: {
+          total: 0,
+        },
+        stackedChartData: {},
+      })
+    )
     yield put(actions.getFilteringSectionDataError(err))
   }
 }
@@ -118,7 +168,7 @@ function* getPacingCardData({ data }) {
       )
     } else {
       yield put(
-        actions.getPacingCardDataError('Error fetching pacing card data')
+        actions.getPacingCardDataError('Error fetching Pacing Card data')
       )
     }
   } catch (err) {
