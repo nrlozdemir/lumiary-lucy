@@ -16,7 +16,6 @@ const RadarChartModule = ({
   leftTitle,
   rightTitle,
 }) => {
-  console.log(data)
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
