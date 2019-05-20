@@ -158,8 +158,9 @@ export const actions = {
     error,
   }),
 
-  getColorComparisonData: () => ({
+  getColorComparisonData: (data) => ({
     type: types.LOAD_COLOR_COMPARISON_DATA,
+    data,
   }),
   getColorComparisonDataSuccess: (payload) => ({
     type: types.LOAD_COLOR_COMPARISON_DATA_SUCCESS,
