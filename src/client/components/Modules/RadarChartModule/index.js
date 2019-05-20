@@ -16,6 +16,7 @@ const RadarChartModule = ({
   leftTitle,
   rightTitle,
 }) => {
+  console.log(data)
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -25,6 +26,7 @@ const RadarChartModule = ({
           action={action}
           filters={filters}
           legend={legend}
+          isEmpty={!data || !data.length || !data[0].total || !data[1].total}
         >
           {!!data && !!data.length && (
             <div
