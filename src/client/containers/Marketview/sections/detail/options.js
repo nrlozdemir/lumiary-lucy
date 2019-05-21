@@ -1,23 +1,18 @@
 export const CompetitorTopVideos_DatasetOptions = [
   {
     label: 'Facebook',
-    backgroundColor: '#2FD7C4',
   },
   {
     label: 'Instagram',
-    backgroundColor: '#8562F3',
   },
   {
     label: 'Twitter',
-    backgroundColor: '#5292E5',
   },
   {
     label: 'Youtube',
-    backgroundColor: '#acb0be',
   },
   {
     label: 'Pinterest',
-    backgroundColor: '#545B79',
   },
 ]
 

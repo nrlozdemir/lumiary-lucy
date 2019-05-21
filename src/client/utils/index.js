@@ -281,6 +281,34 @@ const compareSharesData = (data) => {
   })
 }
 
+const convertMultiRequestDataIntoDatasets = (payload) => {
+  const datasetLabels = Object.keys(payload)
+
+  const labels = Object.keys(
+    payload[datasetLabels[0]].data[
+      Object.keys(payload[datasetLabels[0]].data)[0]
+    ]
+  )
+
+  const datasets = datasetLabels.map((label, index) => {
+    const response = payload[label].data[Object.keys(payload[label].data)[0]]
+    const data = labels.map((key) => response[key])
+
+    return {
+      label: capitalizeFirstLetter(label),
+      backgroundColor: chartColors[index],
+      borderColor: chartColors[index],
+      borderWidth: 1,
+      data,
+    }
+  })
+
+  return {
+    labels: labels.map((key) => capitalizeFirstLetter(key)),
+    datasets,
+  }
+}
+
 export {
   randomKey,
   searchTermInText,
@@ -292,4 +320,5 @@ export {
   radarChartCalculate,
   convertDataIntoDatasets,
   compareSharesData,
+  convertMultiRequestDataIntoDatasets,
 }

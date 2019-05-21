@@ -24,6 +24,16 @@ export class Module extends React.Component {
 
   componentDidUpdate(prevProps) {
     const { action, selectFilters, moduleKey } = this.props
+    /* console.log(
+      !!action &&
+        !!prevProps.selectFilters &&
+        !!selectFilters &&
+        !_.isEqual(
+          prevProps.selectFilters.values[prevProps.moduleKey],
+          selectFilters.values[moduleKey]
+        ),
+      moduleKey
+    ) */
     if (
       !!action &&
       !!prevProps.selectFilters &&

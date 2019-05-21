@@ -15,9 +15,7 @@ const TopVideosCard = (props) => {
     moduleKey,
     action,
   } = props
-  if (!chartData) {
-    return null
-  }
+
   return (
     <Module
       title={title}
@@ -25,6 +23,15 @@ const TopVideosCard = (props) => {
       references={references}
       moduleKey={moduleKey}
       action={action}
+      isEmpty={
+        !chartData ||
+        !(
+          chartData.datasets &&
+          chartData.datasets[0] &&
+          chartData.datasets[0].data &&
+          chartData.datasets[0].data[0]
+        )
+      }
     >
       <div className="col-12-no-gutters">
         <StackedBarChart barData={chartData} height={height} />
