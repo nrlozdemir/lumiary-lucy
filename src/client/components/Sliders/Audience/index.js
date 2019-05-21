@@ -2,7 +2,8 @@ import React from 'react'
 import classnames from 'classnames';
 import style from './style.scss'
 import AssetLayer from 'Components/AssetLayer'
-import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
+//import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
+import LineChart from 'Components/Charts/LineChart'
 import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
 import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
 import Swiper from 'react-id-swiper'
@@ -114,14 +115,14 @@ class AudienceSlider extends React.Component {
                   {...settings}
                 >
                   {items.map((item, i) => (
-                    <div className="item" key={i}>
+                    <div className='item' key={i}>
                       <AssetLayer
                         containerNoBorder
                         leftSocialIcon={item.socialMedia}
                         centerText={item.secondTitle}
                         title={item.title}
                         width={634}
-                        height="100%"
+                        height='100%'
                         rightValue={item.cvScore}
                       >
                         <img src={item.image} />
@@ -129,20 +130,18 @@ class AudienceSlider extends React.Component {
                           className={style.percentageWrapper}
                           style={{ right: '80px' }}
                         >
-                          <PercentageBarGraph
-                            backgroundColor={
-                              colors.videoRightPercentageBackground
-                            }
-                            customClass={style.libraryPercentageGraph}
-                            id={`videolist-${i}`}
-                            percentage={item.cvScore}
-                            disableLabels={true}
-                            color={'#2fd7c4'}
-                            lineCount={30}
-                            height={19}
-                            width={67}
-                            xSmall
-                          />
+                        <LineChart
+        									chartType='percentageGraph'
+													width={282}
+													height={44}
+													cvScore={72}
+													removeTooltip={true}
+													removePointRadius={true}
+													xAxesFlatten={false}
+													flattenFirstSpace={0}
+													flattenLastSpace={0}
+													options={{color: 'grey'}}
+												/>
                         </div>
                       </AssetLayer>
                     </div>
