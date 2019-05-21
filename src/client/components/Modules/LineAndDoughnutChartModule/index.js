@@ -66,27 +66,27 @@ class LineAndDoughnutChartModule extends React.Component {
       {
         value: 33.5,
         key: 'Live Action',
-        color: '#5292e5',
+        color: 'purple',
       },
       {
         value: 60.1,
         key: 'Animation',
-        color: '#2fd7c4',
+        color: 'green',
       },
       {
         value: 72.5,
         key: 'Animation 2',
-        color: '#545b79',
+        color: 'blue',
       },
       {
         value: 50.2,
         key: 'Stop Motion',
-        color: '#acb0be',
+        color: 'lightGrey',
       },
       {
         value: 85.3,
         key: 'Cinemagraph',
-        color: '#8562f3',
+        color: 'grey',
       },
     ]
     return (
@@ -200,13 +200,11 @@ class LineAndDoughnutChartModule extends React.Component {
                           {chart.key}
                         </span>
                       </div>
-                      <PercentageBarGraph
-                        key={Math.random()}
-                        id={`percentage${i}`}
-                        percentage={chart.value}
-                        color={chart.color}
-                        backgroundColor={colors.moduleBackground}
-                      />
+											<PercentageBarGraph
+												key={Math.random()}
+												percentage={chart.value}
+												color={chart.color}
+											/>
                     </div>
                   ))}
                 </div>
