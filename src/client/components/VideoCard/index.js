@@ -103,18 +103,16 @@ export class VideoCard extends PureComponent {
                   }}
                 >
                   <span>{video.cvScore}</span>
-                  <div className={style.percentageWrapper}>
-                    <PercentageBarGraph
-                      key={Math.random()}
-                      percentage={video.cvScore}
-                      color="green"
-                      disableLabels
-                      width={60}
-                      height={15}
-                      barWidth={2}
-                      barSpaceWidth={1}
-                    />
-                  </div>
+                  <PercentageBarGraph
+                    key={Math.random()}
+                    percentage={video.cvScore}
+                    color="green"
+                    disableLabels
+                    width={60}
+                    height={15}
+                    barWidth={2}
+                    barSpaceWidth={1}
+                  />
                 </div>
               )}
               {video.videoUrl && itCanPlay ? (

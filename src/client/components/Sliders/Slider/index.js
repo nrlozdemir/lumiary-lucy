@@ -122,7 +122,6 @@ class MarketViewSlider extends React.Component {
                   <img src={item.image} />
                   <div
                     className={style.percentageWrapper}
-                    style={{ right: '80px' }}
                   >
                     <PercentageBarGraph
                       key={Math.random()}

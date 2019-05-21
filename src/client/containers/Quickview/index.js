@@ -148,7 +148,6 @@ export class Main extends React.Component {
                                   </div>
                                   <div
                                     className={style.percentageWrapper}
-                                    style={{ right: '80px' }}
                                   >
                                     <PercentageBarGraph
                                       key={Math.random()}

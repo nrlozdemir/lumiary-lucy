@@ -50,14 +50,18 @@ const AssetLayer = (props) => {
             {title}
           </div>
           {centerText && <div className={styles.centerText}>{centerText}</div>}
-          {children && children[1]}
-          {rightValue && (
-            <div className={styles.barChart}>
-              <div className={styles.barChartInfo}>
-                <span>{rightValue}</span>
+          <div className={styles.barChart}>
+            {children && children[1] && (
+              <div className={styles.percentageWrapper}>
+                {children[1]}
               </div>
+            )}
+            <div className={styles.barChartInfo}>
+              {rightValue && (
+                <span>{rightValue}</span>
+              )}
             </div>
-          )}
+          </div>
         </div>
       </div>
     </React.Fragment>

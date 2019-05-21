@@ -245,13 +245,17 @@ class StackedPercentageChart extends React.Component {
             }
             return true
           })
-          ctx.save()
+					ctx.save()
+
+					const topValueRightPosition = (barWidth === 1)
+						? findYMaxValue.currentVLine.x - barWidth
+						: findYMaxValue.currentVLine.x - barWidth + 0.5
 
           ctx.beginPath()
           ctx.restore()
-          ctx.moveTo(findYMaxValue.currentVLine.x - barWidth + 0.4,
+          ctx.moveTo(topValueRightPosition,
             height + findYMaxValue.currentVLine.y)
-          ctx.lineTo(findYMaxValue.currentVLine.x - barWidth + 0.4,
+          ctx.lineTo(topValueRightPosition,
             findYMaxValue.currentVLine.y)
           ctx.lineWidth = barWidth
           ctx.strokeStyle = tickColor
