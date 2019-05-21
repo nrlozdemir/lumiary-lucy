@@ -1,4 +1,4 @@
-import { chartColors, weeks, dayOfWeek, month } from 'Utils/globals'
+import { chartColors } from 'Utils/globals'
 function randomKey(char) {
   var text = ''
   var possible =
@@ -8,6 +8,25 @@ function randomKey(char) {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
 
   return text
+}
+
+/*
+  Returns an array of time labels from the api response
+  * Expected labels:
+     week - ['Week 1', 'Week 2', 'Week 3', 'Week 4']
+     month - array of 3 months from the current
+     dayOfWeek - array of 7 days from the current
+ */
+const getTimeBucket = (value) => {
+  const keys = Object.keys(value)
+  if (!!keys.length) {
+    // sometimes there is a null key
+    return Object.keys(keys[0]).reduce(
+      (all, label) => [...all, ...(label !== 'null' ? [label] : [])],
+      []
+    ).reverse()
+  }
+  return []
 }
 
 /**
@@ -30,25 +49,19 @@ function randomKey(char) {
 const convertDataIntoDatasets = (values, options, ...args) => {
   let labels
   let datasetsFromValues
-  let timeBucket
   let singleLevelJSON
 
   const arg = args && !!args[0] && args[0]
 
-  timeBucket =
-    options.dateBucket === 'weeks'
-      ? weeks
-      : options.dateBucket === 'dayOfWeek'
-      ? dayOfWeek
-      : options.dateBucket === 'month'
-      ? month
-      : null
-
   const getValueinObject = values.data[options.property[0]]
+
+  const timeBucket =
+    options.dateBucket !== 'none' ? getTimeBucket(getValueinObject) : null
 
   delete getValueinObject.subtotal
 
-  // If time bucket was  selected, it will change labels to time labels and it will set up datasets according to selected time bucket
+  // If time bucket was  selected, it will change labels to time labels
+  // defined within a data object from the api response
   if (timeBucket) {
     datasetsFromValues = Object.keys(getValueinObject).map((item) =>
       timeBucket.map((date) => getValueinObject[item][date])
@@ -87,9 +100,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
       const color = chartColors[idx]
 
       return arg && arg.singleDataset
-        // only one dataset is required sometimes 
-        // ie. doughnut chart in panoptic/engagement
-        ? {
+        ? // only one dataset is required sometimes
+          // ie. doughnut chart in panoptic/engagement
+          {
             labels: [
               ...data.labels,
               `${key} ${
@@ -327,9 +340,9 @@ const getDateBucketFromRange = (dateRange) => {
     case 'week':
       return 'dayOfWeek'
     case 'month':
-      return 'weeks'
+      return 'week'
     case '3months':
-      return 'months'
+      return 'month'
     default:
       return 'none'
   }
