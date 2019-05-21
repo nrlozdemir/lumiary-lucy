@@ -17,7 +17,6 @@ export const dropdownLists = {
     { name: "Twitter" },
     { name: "Snapchat" },
     { name: "Youtube" },
-    // { name: "Pinterest" }
   ],
   dateRange: [
     { name: "Past 24 Hours" },

@@ -38,7 +38,6 @@ const PLATFORM_OPTIONS = [
 	{ value: 'twitter', label: 'Twitter' },
 	{ value: 'instagram', label: 'Instagram' },
 	{ value: 'youtube', label: 'YouTube' },
-	// { value: 'pinterest', label: 'Pinterest' },
 ];
 
 const PERCENT_OPTIONS = [

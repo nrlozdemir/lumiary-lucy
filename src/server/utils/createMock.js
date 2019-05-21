@@ -31,7 +31,6 @@ const randomSocial = () => {
     "twitter",
     "instagram",
     "youtube",
-    "pinterest"
   ];
 
   const number = randomNumber(0, (socials.length - 1));
