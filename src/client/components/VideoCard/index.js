@@ -132,7 +132,9 @@ export class VideoCard extends PureComponent {
                       ref={this.video}
                       loop
                       muted
-                      poster={video.poster}
+                      poster={`https://s3.amazonaws.com/quickframe-media-qa/${
+                        video.thumbNail
+                      }`}
                       controls={false}
                     >
                       <source
@@ -155,7 +157,9 @@ export class VideoCard extends PureComponent {
                 <div
                   className={style.blurredImage}
                   style={{
-                    backgroundImage: `url(${video.poster})`,
+                    backgroundImage: `url(https://s3.amazonaws.com/quickframe-media-qa/${
+                      video.thumbNail
+                    })`,
                     border: `1px solid ${colors.videoBorder}`,
                   }}
                 />

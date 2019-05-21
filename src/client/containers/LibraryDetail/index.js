@@ -30,15 +30,12 @@ export class LibraryDetail extends React.Component {
   componentDidMount() {
     const {
       match,
-      getVideos,
       getBarChartRequest,
       getDoughnutChartRequest,
       getColorTempRequest,
       getShotByShotRequest,
       getSelectedVideo,
     } = this.props
-
-    getVideos()
 
     if (match.params.videoId) {
       getSelectedVideo(match.params.videoId)
@@ -75,22 +72,13 @@ export class LibraryDetail extends React.Component {
         doughnutLineChartData,
         colorTempData,
         shotByShotData,
-      },
-      library: {
-        data: { videos },
+        selectedVideo: { socialIcon, uuid },
       },
       match: {
         params: { videoId },
       },
     } = this.props
 
-    if (!videos) {
-      return null
-    }
-
-    // temporary solution for library detail backend doesnt provide names and cvScore now
-    const { fileName, title, socialIcon, id, uuid } =
-      videos.find(({ uuid }) => uuid == videoId) || {}
     const cvScore = 80.0
 
     let radarDataCombined = null
@@ -127,7 +115,7 @@ export class LibraryDetail extends React.Component {
             title={'Temporary Title'}
             socialIcon={socialIcon}
             cvScore={cvScore}
-            id={id}
+            id={uuid}
           />
         )}
         {doughnutLineChartData && doughnutLineChartData.doughnutData && (
