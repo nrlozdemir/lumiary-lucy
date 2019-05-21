@@ -1,56 +1,57 @@
-.percentageContainer{
+.percentageContainer {
   float: left;
-  background-color: $color-dark-grey-blue;
+  // background-color: $color-dark-grey-blue;
   display: flex;
   justify-content: center;
   width: 100%;
   flex-direction: column;
   margin-bottom: 20px;
 
-  .percentage{
+  .percentage {
     text-align: center;
     font-family: $font-family-primary;
     font-size: 32px;
     margin-bottom: 30px;
   }
 
-  .percentageGraph{
+  .percentageGraph {
     float: left;
     display: flex;
     justify-content: center;
     align-items: flex-end;
 
-    &:before{
-      content: "0";
+    &:before {
+      content: '0';
       float: left;
       margin-right: 8px;
     }
 
-    &:after{
-      content: "100";
+    &:after {
+      content: '100';
       float: right;
       margin-left: 8px;
     }
 
     &:before,
-    &:after{
+    &:after {
       font-family: $font-family-ClanOTBold;
       font-size: 12px;
     }
     &.noLabel {
-      &:before, &:after {
+      &:before,
+      &:after {
         content: '';
       }
     }
 
-    .percentageGraphWrapper{
+    .percentageGraphWrapper {
       position: relative;
       float: left;
       height: 40px;
       display: flex;
       align-items: flex-end;
 
-      svg{
+      svg {
         position: absolute;
         z-index: 2;
         left: 0;
@@ -60,7 +61,7 @@
 
       &.noLabel {
         &:before {
-          content: ''
+          content: '';
         }
 
         &:after {
@@ -69,8 +70,8 @@
         }
       }
 
-      &:before{
-        content: "CV Score";
+      &:before {
+        content: 'CV Score';
         font-family: $font-family-ClanOTBold;
         font-size: 12px;
         position: absolute;
@@ -82,8 +83,8 @@
         transition: 500ms;
       }
 
-      &:after{
-        content: "";
+      &:after {
+        content: '';
         width: 3px;
         height: 110%;
         background: #fff;
@@ -95,45 +96,44 @@
         transition: 500ms;
       }
 
-      .percentageGraphBar{
+      .percentageGraphBar {
         position: relative;
         float: left;
         width: 3px;
         height: 100%;
-        margin: 0 .5px;
+        margin: 0 0.5px;
         transition: 500ms;
 
         &.percentageGraphXSmall {
           width: 1px;
         }
 
-        &:after{
-          content: "";
+        &:after {
+          content: '';
           position: absolute;
           top: 0;
           left: 0;
           right: 0;
           bottom: 0;
-          background-color: rgba(0,0,0,0.2);
+          background-color: rgba(0, 0, 0, 0.2);
         }
 
         @for $i from 1 through 29 {
-          &[data-index="#{$i}"]{
+          &[data-index='#{$i}'] {
             @if $i > 15 {
-              &:after{
+              &:after {
                 opacity: #{($i / 15) - 1};
               }
             } @else if $i < 15 {
-              &:after{
+              &:after {
                 opacity: #{1 - ($i / 15)};
               }
             }
-
           }
         }
 
-        &[data-index="15"]{
-          &:after{
+        &[data-index='15'] {
+          &:after {
             opacity: 0;
           }
         }

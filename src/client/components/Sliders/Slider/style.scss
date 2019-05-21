@@ -1,0 +1,64 @@
+.section {
+  position: relative;
+  height: 480px;
+  overflow: hidden;
+  padding-top: 50px;
+}
+
+.pagination {
+  display: flex;
+  width: fit-content;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 38px;
+
+  div {
+    display: inline-block;
+    width: 104px;
+    opacity: 0.5;
+    transition: all 0.3s ease-in-out;
+    cursor: pointer;
+
+    &:not(:last-child) {
+      margin-right: 28px;
+    }
+
+    img {
+      width: 100%;
+      height: auto;
+      margin-bottom: 8px;
+    }
+
+    span {
+      font-size: 14px;
+
+      i {
+        margin-right: 8px;
+      }
+    }
+  }
+}
+
+.nextButton,
+.prevButton {
+  position: absolute;
+  cursor: pointer;
+  border-radius: 20px;
+  right: 40px;
+  top: 32%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 0;
+  z-index: 100;
+}
+
+.prevButton {
+  left: 40px;
+  right: auto;
+}
+
+.disabled {
+  opacity: .5;
+  cursor: initial;
+}

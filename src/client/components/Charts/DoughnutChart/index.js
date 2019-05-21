@@ -2,8 +2,9 @@ import React, { lazy, Suspense } from 'react'
 import { Doughnut } from 'react-chartjs-2'
 //import classnames from 'classnames'
 import style from './style.scss'
+import { withTheme } from 'ThemeContext/withTheme'
 
-const Labels = lazy(() => import('Components/Charts/Labels'))
+import Labels from 'Components/Charts/Labels'
 
 const propTypes = {}
 const defaultProps = {
@@ -42,57 +43,53 @@ const dataLabelPlugins = (value, func, item) => {
   return value
 }
 
-export default class DoughnutChart extends React.Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
-  }
+const DoughnutChart = (props) => {
+  const {
+    width,
+    height,
+    data,
+    datasetsBorderWidth,
+    datasetsBorderColor,
+    datasetsHoverBorderColor,
+    legend,
+    layoutPadding,
+    fillTextColor,
+    fillTextFontSize,
+    fillTextFontFamily,
+    fillText,
+    fillTextX,
+    fillTextY,
+    fillTextMaxWidth,
+    displayDataLabels,
+    dataLabelFunction,
+    dataLabelInsert,
+    dataLabelColor,
+    dataLabelFontFamily,
+    dataLabelFontSize,
+    dataLabelFontWeight,
+    legendLabelsFontColor,
+    legendLabelsFontSize,
+    legendLabelsFontFamily,
+    labelsData,
+    labelPositionBottom,
+    labelPositionRight,
+    labelPositionLeft,
+    cutoutPercentage,
+    customStyle,
+  } = props
 
-  render() {
-    const {
-      width,
-      height,
-      data,
-      datasetsBorderWidth,
-      datasetsBorderColor,
-      datasetsHoverBorderColor,
-      legend,
-      layoutPadding,
-      fillTextColor,
-      fillTextFontSize,
-      fillTextFontFamily,
-      fillText,
-      fillTextX,
-      fillTextY,
-      fillTextMaxWidth,
-      displayDataLabels,
-      dataLabelFunction,
-      dataLabelInsert,
-      dataLabelColor,
-      dataLabelFontFamily,
-      dataLabelFontSize,
-      dataLabelFontWeight,
-      legendLabelsFontColor,
-      legendLabelsFontSize,
-      legendLabelsFontFamily,
-      labelsData,
-      labelPositionBottom,
-      labelPositionRight,
-      labelPositionLeft,
-      cutoutPercentage,
-    } = this.props
+  const themes = props.themeContext.colors
 
-    let plugins = []
-
-    if (fillText) {
-      plugins.push({
+  let plugins = []
+  if (fillText) {
+    plugins = [
+      {
         beforeDraw: function(chart) {
           const ctx = chart.chart.ctx
           const { top, bottom, left, right } = chart.chartArea
           const customFillText = fillText.replace(/^\s+|\s+$/g, '')
-
           ctx.save()
-          ctx.fillStyle = fillTextColor
+          ctx.fillStyle = themes.textColor
           ctx.font = fillTextFontSize + ' ' + fillTextFontFamily
 
           ctx.fillText(
@@ -105,104 +102,109 @@ export default class DoughnutChart extends React.Component {
           )
           ctx.restore()
         },
-      })
-    }
+      },
+    ]
+  }
+  if (!data) {
+    return null
+  }
 
-    return (
-      <React.Fragment>
-        <div className={style.doughnutContainer}>
-          {labelPositionLeft && labelsData && (
-            <div className={style.labelContainer}>
-              <Suspense fallback={''}>
-                <Labels data={labelsData} />
-              </Suspense>
-            </div>
-          )}
-          <div className={style.chartWrapper}>
-            {data && (
-              <Doughnut
-                width={width}
-                height={height}
-                data={{
-                  labels: data.labels,
-                  datasets: [
-                    {
-                      data: data.datasets[0].data,
-                      backgroundColor: data.datasets[0].backgroundColor,
-                      borderColor: datasetsBorderColor,
-                      hoverBackgroundColor:
-                        data.datasets[0].hoverBackgroundColor,
-                    },
-                  ],
-                }}
-                plugins={plugins}
-                options={{
-                  responsive: false,
-                  tooltips: {
-                    enabled: true,
-                  },
-                  legend: {
-                    display: legend,
-                    labels: {
-                      fontColor: legendLabelsFontColor,
-                      fontSize: legendLabelsFontSize,
-                      fontFamily: legendLabelsFontFamily,
-                    },
-                  },
-                  layout: {
-                    padding: layoutPadding,
-                  },
-                  plugins: {
-                    datalabels: {
-                      display: displayDataLabels,
-                      formatter: (value) => {
-                        if (dataLabelFunction) {
-                          return dataLabelPlugins(
-                            value,
-                            dataLabelFunction,
-                            dataLabelInsert
-                          )
-                        }
-                        return value
-                      },
-                      color: dataLabelColor,
-                      font: {
-                        family: dataLabelFontFamily,
-                        weight: dataLabelFontWeight,
-                        size: dataLabelFontSize,
-                      },
-                    },
-                  },
-                  elements: {
-                    arc: {
-                      borderWidth: datasetsBorderWidth,
-                      hoverBorderColor: datasetsHoverBorderColor,
-                    },
-                  },
-                  cutoutPercentage: cutoutPercentage,
-                }}
-              />
-            )}
-          </div>
-          {labelPositionRight && labelsData && (
-            <div className={style.labelContainer}>
-              <Suspense fallback={''}>
-                <Labels data={labelsData} />
-              </Suspense>
-            </div>
-          )}
-        </div>
-        {labelPositionBottom && labelsData && (
+  return (
+    <React.Fragment>
+      <div className={style.doughnutContainer} style={customStyle}>
+        {labelPositionLeft && labelsData && (
           <div className={style.labelContainer}>
-            <Suspense fallback={''}>
-              <Labels data={labelsData} />
-            </Suspense>
+            <Labels data={labelsData} />
           </div>
         )}
-      </React.Fragment>
-    )
-  }
+        <div className={style.chartWrapper}>
+          {data && (
+            <Doughnut
+              key={Math.random()}
+              width={width}
+              height={height}
+              data={{
+                labels: data.labels,
+                datasets: [
+                  {
+                    data: data && data.datasets ? data.datasets[0].data : null,
+                    backgroundColor:
+                      data && data.datasets
+                        ? data.datasets[0].backgroundColor
+                        : null,
+                    borderColor: themes.moduleBackground,
+                    hoverBackgroundColor:
+                      data && data.datasets
+                        ? data.datasets[0].hoverBackgroundColor
+                        : null,
+                  },
+                ],
+              }}
+              plugins={plugins}
+              options={{
+                responsive: false,
+                tooltips: {
+                  enabled: true,
+                },
+                legend: {
+                  display: legend,
+                  labels: {
+                    fontColor: legendLabelsFontColor,
+                    fontSize: legendLabelsFontSize,
+                    fontFamily: legendLabelsFontFamily,
+                  },
+                },
+                layout: {
+                  padding: layoutPadding,
+                },
+                plugins: {
+                  datalabels: {
+                    display: displayDataLabels,
+                    formatter: (value) => {
+                      if (dataLabelFunction) {
+                        return dataLabelPlugins(
+                          value,
+                          dataLabelFunction,
+                          dataLabelInsert
+                        )
+                      }
+                      return value
+                    },
+                    color: dataLabelColor,
+                    font: {
+                      family: dataLabelFontFamily,
+                      weight: dataLabelFontWeight,
+                      size: dataLabelFontSize,
+                    },
+                  },
+                },
+                elements: {
+                  arc: {
+                    borderWidth: datasetsBorderWidth,
+                    hoverBorderColor: datasetsHoverBorderColor,
+                  },
+                },
+                cutoutPercentage: cutoutPercentage,
+              }}
+            />
+          )}
+        </div>
+        {labelPositionRight && labelsData && (
+          <div className={style.labelContainer}>
+            <Labels data={labelsData} />
+          </div>
+        )}
+      </div>
+      {labelPositionBottom && labelsData && (
+        <div className={style.labelContainer}>
+          <Labels data={labelsData} />
+        </div>
+      )}
+    </React.Fragment>
+  )
 }
 
 DoughnutChart.propTypes = propTypes
 DoughnutChart.defaultProps = defaultProps
+
+export default withTheme(DoughnutChart)

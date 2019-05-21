@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectAudienceChangeOverTime } from 'Reducers/panoptic'
+import { actions, makeSelectAudienceChangeOverTime } from 'Reducers/audience'
 import Module from 'Components/Module'
 import LineChart from 'Components/Charts/LineChart'
 import style from 'Containers/Audience/style.scss'
@@ -25,7 +25,7 @@ class ChangeOverTime extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'ACOT-asd',
             placeHolder: 'Engagement',
           },
@@ -35,7 +35,7 @@ class ChangeOverTime extends React.Component {
             placeHolder: 'Platforms',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'ACOT-wds',
             placeHolder: 'Date',
           },
@@ -63,7 +63,6 @@ class ChangeOverTime extends React.Component {
             <LineChart
               width={1162}
               height={292}
-              backgroundColor="#21243B"
               dataSet={data}
               xAxesFlatten
               yAxesAbbreviate

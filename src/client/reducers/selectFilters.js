@@ -27,16 +27,34 @@ export const actions = {
   }),
 }
 
+export const defaultFilters = {
+  metric: 'views',
+  platform: 'all',
+  aspectRatio: '16:9',
+  resolution: '4K',
+  frameRate: '24',
+  duration: '0-15',
+  pacing: 'fast',
+  videoFormat: 'liveAction',
+  property: 'aspectRatio',
+  audienceAge: '10-',
+  audienceGender: 'male',
+  talentAge: '10-',
+  talentGender: 'male',
+  colorTempature: 'happy-sad',
+  dateRange: '24hours',
+}
+
 export const initialState = fromJS({
   options: {
-    engagement: [
-      { value: 'Views', label: 'Views' },
-      { value: 'Likes', label: 'Likes' },
-      { value: 'Shares', label: 'Shares' },
-      { value: 'Comments', label: 'Comments' },
+    metric: [
+      { value: 'views', label: 'Views' },
+      { value: 'likes', label: 'Likes' },
+      { value: 'shares', label: 'Shares' },
+      { value: 'comments', label: 'Comments' },
     ],
     platform: [
-      { value: 'All Platforms', label: 'All Platforms' },
+      { value: 'all', label: 'All Platforms' },
       { value: 'facebook', label: 'Facebook' },
       { value: 'twitter', label: 'Twitter' },
       { value: 'instagram', label: 'Instagram' },
@@ -79,13 +97,13 @@ export const initialState = fromJS({
       { value: 'stopMotion', label: 'Stop Motion' },
       { value: 'animation', label: 'Animation' },
     ],
-    videoProperty: [
-      { value: 'aspect-ratio', label: 'Aspect Ratio' },
+    property: [
+      { value: 'aspectRatio', label: 'Aspect Ratio' },
       { value: 'duration', label: 'Duration' },
       { value: 'format', label: 'Format' },
-      { value: 'frame-rate', label: 'Frame Rate' },
+      { value: 'frameRate', label: 'Frame Rate' },
       { value: 'pacing', label: 'Pacing' },
-      { value: 'resolution', label: 'Resolution' }
+      { value: 'resolution', label: 'Resolution' },
     ],
     audienceAge: [
       { value: '10-', label: '10 and under' },
@@ -121,32 +139,16 @@ export const initialState = fromJS({
       { value: 'cool-warm', label: 'Cool / Warm' },
       { value: 'natural-saynthetic', label: 'Natural / Saynthetic' },
     ],
-    timeRange: [
-      { value: 'Today', label: 'Today' },
-      { value: 'Past Week', label: 'Past Week' },
-      { value: 'Past Month', label: 'Past Month' },
-      { value: 'Past 3 Months', label: 'Past 3 Months' },
+    dateRange: [
+      { value: '24hours', label: 'Today' },
+      { value: 'week', label: 'Past Week' },
+      { value: 'month', label: 'Past Month' },
+      { value: '3months', label: 'Past 3 Months' },
       { value: 'custom', label: 'Custom' },
     ],
   },
   values: {},
-  defaults: {
-    engagement: 'Views',
-    platform: 'All Platforms',
-    aspectRatio: '16:9',
-    resolution: '4K',
-    frameRate: '24',
-    duration: '0-15',
-    pacing: 'fast',
-    videoFormat: 'liveAction',
-    videoProperty: 'aspect-ratio',
-    audienceAge: '10-',
-    audienceGender: 'male',
-    talentAge: '10-',
-    talentGender: 'male',
-    colorTempature: 'happy-sad',
-    timeRange: 'Today',
-  },
+  defaults: defaultFilters,
 })
 
 const selectFiltersReducer = (state = initialState, action) => {

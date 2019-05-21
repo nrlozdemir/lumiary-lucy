@@ -11,7 +11,7 @@
   .barStyle {
     height: 33px;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-    background-color: $color-dusk;
+    // background-color: $color-dusk;
     text-align: center;
     position: relative;
 
@@ -27,7 +27,7 @@
       font-stretch: normal;
       line-height: normal;
       letter-spacing: normal;
-      color: $color-white;
+      // color: $color-white;
       opacity: 0.5;
       font-family: $font-family-ClanOTNews;
     }
@@ -39,7 +39,7 @@
       }
 
       &.increase {
-        background-color: $color-cool-blue;
+        background-color: $color-cool-blue !important;
       }
 
       &.noChange {
@@ -47,7 +47,7 @@
       }
 
       &.decrease {
-        background-color: $color-coral-pink;
+        background-color: $color-coral-pink !important;
       }
     }
   }

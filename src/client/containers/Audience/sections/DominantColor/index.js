@@ -2,7 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectAudienceDominantColor } from 'Reducers/panoptic'
+import { actions, makeSelectAudienceDominantColor } from 'Reducers/audience'
 import RadarChartModule from 'Components/Modules/RadarChartModule'
 
 class DominantColor extends React.Component {
@@ -17,15 +17,15 @@ class DominantColor extends React.Component {
 
     return (
       <RadarChartModule
+        leftTitle={data && data.length > 0 && data[0].type}
+        rightTitle={data && data.length > 0 && data[1].type}
         data={data}
-        leftTitle="Male"
-        rightTitle="Female"
         moduleKey={'Audience/DominantColor'}
         title="Dominant Color Performance By Gender"
         action={this.callBack}
         filters={[
           {
-            type: 'engagement',
+            type: 'metric',
             selectKey: 'ADC-was',
             placeHolder: 'Engagement',
           },
@@ -35,7 +35,7 @@ class DominantColor extends React.Component {
             placeHolder: 'Platforms',
           },
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'ADC-wds',
             placeHolder: 'Date',
           },

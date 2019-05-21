@@ -101,7 +101,6 @@ function* getSimilarProperties() {
 function* getBubbleChartData() {
   try {
     const payload = yield call(getBubbleChartApi)
-    console.log('payload', payload)
     yield put(actions.getBubleChartSuccess(payload))
   } catch (error) {
     yield put(actions.getBubleChartFailure(error))
@@ -129,11 +128,6 @@ function* getFormatChartData() {
 function* getTotalViewsData(data) {
   try {
     const payload = yield call(getTotalViewsApi)
-    const shuffleBarData = _.shuffle(payload.barData.datasets)
-    const shuffleDoughnutData = _.shuffle(payload.doughnutData.datasets[0].data)
-    payload.barData.datasets = shuffleBarData
-    payload.doughnutData.datasets[0].data = shuffleDoughnutData
-
     yield put(actions.getTotalViewsSuccess(payload))
   } catch (error) {
     yield put(actions.getTotalViewsFailure(error))

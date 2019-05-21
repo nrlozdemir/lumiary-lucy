@@ -12,14 +12,15 @@ export const stackedChartOptions = {
     mode: 'index',
     intersect: false,
   },
-  responsive: true,
+  responsive: false,
   scales: {
     xAxes: [
       {
-        barThickness: 56,
+        barThickness: 52,
         stacked: true,
         ticks: {
           fontColor: '#fff',
+          fontFamily: 'ClanOTNews',
           fontSize: 12,
           stepSize: 1,
           beginAtZero: true,
@@ -42,6 +43,7 @@ export const stackedChartOptions = {
         stacked: true,
         ticks: {
           fontColor: '#fff',
+          fontFamily: 'ClanOTNews',
           fontSize: 12,
           stepSize: 25,
           beginAtZero: true,

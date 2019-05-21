@@ -1,0 +1,48 @@
+version: '2'
+checks:
+  method-lines:
+    config:
+      threshold: 100
+  file-lines:
+    enabled: true
+    config:
+      threshold: 500
+plugins:
+  eslint:
+    enabled: true
+  csslint:
+    enabled: true
+  duplication:
+    enabled: true
+    channel: stable
+    config:
+      languages:
+        javascript:
+          mass_threshold: 65
+          filters:
+            - '(AssignmentExpression _ _ (MemberExpression object _ property _) ___)'
+exclude_patterns:
+  - 'src/build'
+  - 'src/webpack'
+  - 'src/test-results'
+  - 'src/tests'
+  - 'src/.babelrc'
+  - '.circleci'
+  - '.storybook'
+  - 'build'
+  - 'conf'
+  - 'stories'
+  - 'storybook-static'
+  - '.codeclimate.yml'
+  - '.dockerignore'
+  - '.editorconfig'
+  - '.eslintrc'
+  - '.gitignore'
+  - 'Dockerfile'
+  - '__snapshots__/'
+  - '.babelrc'
+  - 'package.json'
+  - '**/*.md'
+  - '**/*.yml'
+  - '**/*.spec.js'
+  - '**/*.png'

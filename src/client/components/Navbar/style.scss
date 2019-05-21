@@ -22,7 +22,7 @@
   font-family: $font-family-ClanOT;
 
   a {
-    color: $color-white;
+    // color: $color-white;
     text-decoration: none;
     display: inline-flex;
     align-items: center;
@@ -61,7 +61,7 @@
     font-size: 14px;
     font-family: $font-family-ClanOTBold;
 
-    &:hover{
+    &:hover {
       font-family: $font-family-ClanOTBold;
       font-weight: normal;
     }
@@ -76,7 +76,7 @@
     }
   }
 
-  a:hover{
+  a:hover {
     @extend .activeLink;
     font-family: $font-family-ClanOTNews;
     font-weight: normal;
@@ -84,6 +84,7 @@
 }
 
 .profile {
+  position: relative;
   flex: 3;
   color: $color-white;
   font-size: 14px;
@@ -113,4 +114,35 @@
   align-items: center;
   position: absolute;
   right: -140px;
+}
+
+.dropdown {
+  position: absolute;
+  right: 0;
+  z-index: 100;
+  transform: translate(0, 10px);
+  width: 206px;
+  border: solid 1px;
+
+  ul {
+    padding: 0;
+    margin: 0;
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 21px 24px;
+      border-bottom: 1px solid #acb0be;
+      &:last-child {
+        border: none;
+      }
+      .text {
+        font-family: $font-family-ClanOTBold;
+        font-size: 14px;
+        line-height: 24px;
+      }
+      .icon {
+      }
+    }
+  }
 }

@@ -25,7 +25,7 @@ class CompareShares extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'timeRange',
+            type: 'dateRange',
             selectKey: 'PCS-wds',
             placeHolder: 'Date',
           },

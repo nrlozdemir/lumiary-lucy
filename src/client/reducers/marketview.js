@@ -214,7 +214,7 @@ export const initialState = fromJS({
   selectedVideo: null,
   similarProperties: null,
   bubbleChartData: [],
-  pacingChartData: {},
+  pacingChartData: [],
   formatChartData: [],
   totalViewsData: {},
   totalCompetitorViewsData: {},

@@ -14,13 +14,11 @@
             {
               "title": "This Video",
               "leftTitle": "0-15s",
-              "rightTitle": "17%",
               "value": 17
             },
             {
               "title": "Industry",
               "leftTitle": "15-45s",
-              "rightTitle": "82%",
               "value": 82
             }
           ]
@@ -32,13 +30,11 @@
             {
               "title": "This Video",
               "leftTitle": "Fast",
-              "rightTitle": "25%",
               "value": 25
             },
             {
               "title": "Industry",
               "leftTitle": "Medium",
-              "rightTitle": "38%",
               "value": 38
             }
           ]
@@ -50,13 +46,11 @@
             {
               "title": "This Video",
               "leftTitle": "Stop Motion",
-              "rightTitle": "51%",
               "value": 51
             },
             {
               "title": "Industry",
               "leftTitle": "Animation",
-              "rightTitle": "15%",
               "value": 15
             }
           ]
@@ -77,13 +71,11 @@
             {
               "title": "This Video",
               "leftTitle": "0-15s",
-              "rightTitle": "27%",
               "value": 27
             },
             {
               "title": "Industry",
               "leftTitle": "15-45s",
-              "rightTitle": "55%",
               "value": 55
             }
           ]
@@ -95,13 +87,11 @@
             {
               "title": "This Video",
               "leftTitle": "Fast",
-              "rightTitle": "40%",
               "value": 40
             },
             {
               "title": "Industry",
               "leftTitle": "Medium",
-              "rightTitle": "11%",
               "value": 11
             }
           ]
@@ -113,13 +103,11 @@
             {
               "title": "This Video",
               "leftTitle": "Stop Motion",
-              "rightTitle": "89%",
               "value": 89
             },
             {
               "title": "Industry",
               "leftTitle": "Animation",
-              "rightTitle": "45%",
               "value": 45
             }
           ]
@@ -140,13 +128,11 @@
             {
               "title": "This Video",
               "leftTitle": "0-15s",
-              "rightTitle": "66%",
               "value": 66
             },
             {
               "title": "Industry",
               "leftTitle": "15-45s",
-              "rightTitle": "25%",
               "value": 25
             }
           ]
@@ -158,13 +144,11 @@
             {
               "title": "This Video",
               "leftTitle": "Fast",
-              "rightTitle": "92%",
               "value": 92
             },
             {
               "title": "Industry",
               "leftTitle": "Medium",
-              "rightTitle": "11%",
               "value": 11
             }
           ]
@@ -176,13 +160,11 @@
             {
               "title": "This Video",
               "leftTitle": "Stop Motion",
-              "rightTitle": "41%",
               "value": 41
             },
             {
               "title": "Industry",
               "leftTitle": "Animation",
-              "rightTitle": "75%",
               "value": 75
             }
           ]
@@ -203,13 +185,11 @@
             {
               "title": "This Video",
               "leftTitle": "0-15s",
-              "rightTitle": "51%",
               "value": 51
             },
             {
               "title": "Industry",
               "leftTitle": "15-45s",
-              "rightTitle": "21%",
               "value": 21
             }
           ]
@@ -221,13 +201,11 @@
             {
               "title": "This Video",
               "leftTitle": "Fast",
-              "rightTitle": "25%",
               "value": 25
             },
             {
               "title": "Industry",
               "leftTitle": "Medium",
-              "rightTitle": "38%",
               "value": 38
             }
           ]
@@ -239,13 +217,11 @@
             {
               "title": "This Video",
               "leftTitle": "Stop Motion",
-              "rightTitle": "51%",
               "value": 51
             },
             {
               "title": "Industry",
               "leftTitle": "Animation",
-              "rightTitle": "15%",
               "value": 15
             }
           ]
@@ -266,13 +242,11 @@
             {
               "title": "This Video",
               "leftTitle": "0-15s",
-              "rightTitle": "17%",
               "value": 17
             },
             {
               "title": "Industry",
               "leftTitle": "15-45s",
-              "rightTitle": "82%",
               "value": 82
             }
           ]
@@ -284,13 +258,11 @@
             {
               "title": "This Video",
               "leftTitle": "Fast",
-              "rightTitle": "61%",
               "value": 61
             },
             {
               "title": "Industry",
               "leftTitle": "Medium",
-              "rightTitle": "32%",
               "value": 32
             }
           ]
@@ -302,13 +274,11 @@
             {
               "title": "This Video",
               "leftTitle": "Stop Motion",
-              "rightTitle": "11%",
               "value": 11
             },
             {
               "title": "Industry",
               "leftTitle": "Animation",
-              "rightTitle": "16%",
               "value": 16
             }
           ]
@@ -317,161 +287,103 @@
     }
   ],
   "videoReleasesData": {
-    "labels": ["S", "M", "T", "W", "T", "F", "S"],
     "datasets": [
       {
-        "label": "Dataset 1",
-        "display": false,
-        "backgroundColor": "#2FD7C4",
         "data": [45000, 55000, 55000, 70000, 55000, 45000, 55000]
       },
       {
-        "label": "Dataset 2",
-        "backgroundColor": "#5292E5",
         "data": [-45000, -50000, -30000, -55000, -70000, -55000, -30000]
       }
     ]
   },
   "topVideosOverTime": {
-    "labels": ["360", "480", "720p", "1080p", "4k"],
     "datasets": [
       {
-        "label": "Facebook",
-        "backgroundColor": "#5292E5",
         "data": [25, 10, 14, 51, 20]
       },
       {
-        "label": "Instagram",
-        "backgroundColor": "#8562F3",
         "data": [12, 24, 56, 9, 25]
       },
       {
-        "label": "Twitter",
-        "backgroundColor": "#acb0be",
         "data": [42, 18, 18, 25, 10]
       },
       {
-        "label": "YouTube",
-        "backgroundColor": "#2FD7C4",
         "data": [21, 48, 12, 15, 5]
       },
       {
-        "label": "Pinterest",
-        "backgroundColor": "#545B79",
         "data": [21, 48, 12, 15, 30]
       }
     ]
   },
   "pacingChartData": {
-    "labels": ["Live Action", "Stop Motion", "Cinemagraph", "Animation"],
     "datasets": [
       {
-        "label": "Slowest",
-        "backgroundColor": "#2FD7C4",
-        "borderColor": "#2FD7C4",
-        "borderWidth": 1,
         "data": [10, 3, 5, 1]
       },
       {
-        "label": "Slow",
-        "backgroundColor": "#8562F3",
-        "borderColor": "#8562F3",
-        "borderWidth": 1,
         "data": [12, 13, 2, 5]
       },
       {
-        "label": "Medium",
-        "backgroundColor": "#5292E5",
-        "borderColor": "#5292E5",
-        "borderWidth": 1,
         "data": [4, 5, 4, 2]
       },
       {
-        "label": "Fast",
-        "backgroundColor": "#acb0be",
-        "borderColor": "#acb0be",
-        "borderWidth": 1,
         "data": [9, 8, 1, 4]
       }
     ]
   },
   "verticalStackedChartData": {
     "doughnutData": {
-      "labels": [
-        "0-15 seconds",
-        "15-30 seconds",
-        "30-45 seconds",
-        "45-60 seconds"
-      ],
       "datasets": [
         {
-          "data": [42, 24, 16, 18],
-          "backgroundColor": ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"],
-          "hoverBackgroundColor": ["#acb0be", "#8562F3", "#5292E5", "#2FD7C4"]
+          "data": [42, 24, 16, 18]
         }
       ]
     },
     "stackedChartData": {
-      "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
       "datasets": [
         {
-          "label": "0-15 seconds",
-          "backgroundColor": "#5292E5",
           "data": [25, 10, 14, 51]
         },
         {
-          "label": "15-30 seconds",
-          "backgroundColor": "#8562F3",
           "data": [12, 24, 56, 9]
         },
         {
-          "label": "30-60 seconds",
-          "backgroundColor": "#acb0be",
           "data": [42, 18, 18, 25]
         },
         {
-          "label": "60+ seconds",
-          "backgroundColor": "#2FD7C4",
           "data": [21, 48, 12, 15]
         }
       ]
-    },
-    "doughnutRoundData": [
-      { "data": "0-15 seconds", "color": "#2FD7C4" },
-      { "data": "15-30 seconds", "color": "#8562F3" },
-      { "data": "30-45 seconds", "color": "#5292E5" },
-      { "data": "45-60 seconds", "color": "#acb0be" }
-    ]
+    }
   },
   "colorTempData": [
     {
       "data": [
-        { "x": -50, "y": 82, "color": "#5292E5" },
-        { "x": 50, "y": -25, "color": "#2FD7C4" },
-        { "x": 75, "y": -30, "color": "#8562F3" },
-        { "x": 60, "y": 30, "color": "#ffffff" },
-        { "x": -12, "y": -30, "color": "#21243B" }
+        { "x": -50, "y": 82},
+        { "x": 50, "y": -25 },
+        { "x": 75, "y": -30 },
+        { "x": 60, "y": 30 }
       ]
     },
     {
       "data": [
-        { "x": -50, "y": 12, "color": "#5292E5" },
-        { "x": 50, "y": 25, "color": "#2FD7C4" },
-        { "x": 75, "y": -30, "color": "#8562F3" }
+        { "x": -50, "y": 12 },
+        { "x": 50, "y": 25 },
+        { "x": 75, "y": -30 }
       ]
     },
     {
       "data": [
-        { "x": -50, "y": 12, "color": "#5292E5" },
-        { "x": 50, "y": -75, "color": "#2FD7C4" },
-        { "x": 75, "y": -30, "color": "#8562F3" }
+        { "x": -50, "y": 12 },
+        { "x": 50, "y": -75 },
+        { "x": 75, "y": -30 }
       ]
     },
     {
       "data": [
-        { "x": -50, "y": 12, "color": "#5292E5" },
-        { "x": 50, "y": -75, "color": "#2FD7C4" },
-        { "x": 75, "y": -30, "color": "#8562F3" }
+        { "x": -50, "y": 12 },
+        { "x": 50, "y": -75 },
+        { "x": 75, "y": -30 }
       ]
     }
   ]

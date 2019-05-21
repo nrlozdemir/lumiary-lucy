@@ -1,0 +1,50 @@
+.vitalityContainer {
+  width: 100%;
+  position: relative;
+}
+
+.vitalityContainer::before {
+  content: attr(data-vertical-title);
+  position: absolute;
+  z-index: 200;
+  left: 14px;
+  top: calc(50% + 50px);
+  transform: rotate(-90deg);
+  transform-origin: top left;
+  font-family: $font-family-ClanOT;
+  // color: #fff;
+  font-size: 14px;
+  text-transform: uppercase;
+  height: 20px;
+  width: 150px;
+}
+
+.percentageCol {
+  position: relative;
+  margin-top: 40px;
+  box-sizing: border-box;
+  flex-direction: column;
+  align-items: center;
+  display: flex;
+
+  .legend {
+    border-radius: 17px;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    background-color: $color-dusk;
+    color: #ffffff;
+    font-family: $font-family-ClanOTBold;
+    font-size: 14px;
+    padding: 8px 28px;
+    margin: 15px 0 45px;
+    text-align: center;
+  }
+
+  .divider {
+    width: 1px;
+    height: 120px;
+    background-color: #c6c9d7;
+    position: absolute;
+    right: -1px;
+    transform: translate(0, 50%);
+  }
+}

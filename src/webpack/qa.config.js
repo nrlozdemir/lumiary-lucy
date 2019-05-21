@@ -43,7 +43,7 @@ module.exports = {
 				STATIC_URL: JSON.stringify(static_url),
 				MEDIA_URL: JSON.stringify(media_url),
 				BASENAME: JSON.stringify("/"),
-				API_ROOT: JSON.stringify("https://api.qa.quickframe.com"),
+				API_ROOT: JSON.stringify("https://azazzle.qa.quickframe.com"),
 				API_VERSION: JSON.stringify("v1"),
 				BREAKPOINTS: breakpoints
 			}
