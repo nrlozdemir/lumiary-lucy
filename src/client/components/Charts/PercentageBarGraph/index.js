@@ -14,11 +14,11 @@ const PercentageBarGraph = ({
   barWidth = 3,
   barSpaceWidth = 2
 }) => {
-	const percentageData = {
-		"datasets": [{
-			"data": createDataset(percentage)
-		}]
-	}
+  const percentageData = {
+    "datasets": [{
+      "data": createDataset(percentage)
+    }]
+  }
   return (
     <div className={id}>
       <div className={style.percentageContainer}>
@@ -61,8 +61,7 @@ const PercentageBarGraph = ({
                       display: false,
                       lineWidth: 1,
                       drawBorder: false,
-                      drawTicks: false,
-                      drawOnChartArea: false
+                      drawTicks: false
                     },
                     ticks: {
                       display: false,
@@ -77,8 +76,7 @@ const PercentageBarGraph = ({
                     gridLines: {
                       display: false,
                       drawBorder: false,
-                      drawTicks: false,
-                      drawOnChartArea: false
+                      drawTicks: false
                     },
                     ticks: {
                       display: false,
