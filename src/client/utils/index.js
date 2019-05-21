@@ -21,7 +21,7 @@ const getTimeBucket = (value) => {
   const keys = Object.keys(value)
   if (!!keys.length) {
     // sometimes there is a null key
-    return Object.keys(keys[0]).reduce(
+    return Object.keys(value[keys[0]]).reduce(
       (all, label) => [...all, ...(label !== 'null' ? [label] : [])],
       []
     ).reverse()

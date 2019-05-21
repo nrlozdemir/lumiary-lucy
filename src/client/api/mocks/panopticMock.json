@@ -83,59 +83,12 @@
         "data": [42, 24, 16, 18]
       }
     ],
-    "stackedChartData": {
-      "labels": ["Week 1", "Week 2", "Week 3", "Week 4"],
-      "datasets": [
-        {
-          "label": "0-15 seconds",
-          "backgroundColor": "#D0506C",
-          "data": [25, 10, 14, 51],
-          "borderColor": "#242b49",
-          "borderWidth": {
-            "top": 3,
-            "right": 0,
-            "bottom": 0,
-            "left": 0
-          }
-        },
-        {
-          "label": "15-30 seconds",
-          "backgroundColor": "#8567f0",
-          "data": [12, 24, 56, 9],
-          "borderColor": "#242b49",
-          "borderWidth": {
-            "top": 3,
-            "right": 0,
-            "bottom": 0,
-            "left": 0
-          }
-        },
-        {
-          "label": "30-45 seconds",
-          "backgroundColor": "#acb0be",
-          "data": [42, 18, 18, 25],
-          "borderColor": "#242b49",
-          "borderWidth": {
-            "top": 3,
-            "right": 0,
-            "bottom": 0,
-            "left": 0
-          }
-        },
-        {
-          "label": "45-60 seconds",
-          "backgroundColor": "#51adc0",
-          "data": [21, 48, 12, 15],
-          "borderColor": "#242b49",
-          "borderWidth": {
-            "top": 0,
-            "right": 0,
-            "bottom": 0,
-            "left": 0
-          }
-        }
-      ]
-    }
+    "stackedChartData": [
+      { "data": [20, 3, 5, 1] },
+      { "data": [20, 13, 2, 5] },
+      { "data": [20, 5, 4, 2] },
+      { "data": [9, 8, 1, 4] }
+    ]
   },
   "pacingChartData": {
     "stadiumData": [
