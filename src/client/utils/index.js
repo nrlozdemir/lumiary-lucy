@@ -259,6 +259,28 @@ const radarChartCalculate = (data) => {
   return colorsData
 }
 
+const compareSharesData = (data) => {
+  return data.map((item) => {
+    return {
+      type: capitalizeFirstLetter(item.platform),
+      datas: {
+        labels: Object.keys(item.data.color).map((color) => ({
+          name: color
+            .split('-')
+            .map((c) => capitalizeFirstLetter(c))
+            .join('-'),
+          count: item.data.color[color],
+        })),
+        datasets: [
+          {
+            label: capitalizeFirstLetter(item.platform),
+          },
+        ],
+      },
+    }
+  })
+}
+
 export {
   randomKey,
   searchTermInText,
@@ -269,4 +291,5 @@ export {
   capitalizeFirstLetter,
   radarChartCalculate,
   convertDataIntoDatasets,
+  compareSharesData,
 }

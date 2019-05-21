@@ -4,8 +4,7 @@ import { actions, types } from 'Reducers/audience'
 import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 
-import { radarChartCalculate } from 'Utils'
-import { compareSharesData } from 'Utils/api'
+import { compareSharesData, radarChartCalculate } from 'Utils'
 
 import { getReportDataApi } from 'Api'
 

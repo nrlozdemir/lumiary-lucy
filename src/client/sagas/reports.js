@@ -6,8 +6,7 @@ import reportsMockData from 'Api/mocks/reportsMock.json'
 import { randomKey } from 'Utils/index'
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
-import { radarChartCalculate } from 'Utils'
-import { compareSharesData } from 'Utils/api'
+import { compareSharesData, radarChartCalculate } from 'Utils'
 
 import { getReportDataApi } from 'Api'
 
