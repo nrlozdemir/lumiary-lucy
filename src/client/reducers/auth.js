@@ -72,12 +72,6 @@ const reducer = (state = initialState, action) => {
 
 export const selectAuthDomain = (state) => state.auth
 
-const selectAuthProfile = (state) => state.auth.get('profile')
-
-export const makeSelectAuthProfile = () =>
-  createSelector(
-    selectAuthProfile,
-    (substate) => substate.toJS()
-  )
+export const selectAuthProfile = (state) => state.auth.profile
 
 export default reducer

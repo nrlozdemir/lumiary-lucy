@@ -1,7 +1,7 @@
 import qs from 'qs'
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import axios from 'axios'
-import { makeSelectAuthProfile } from 'Reducers/auth'
+import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
 
 import panopticMockData from 'Api/mocks/panopticMock.json'
@@ -63,7 +63,7 @@ function* getColorTemperatureData() {
 
 function* getFilteringSectionData({ data }) {
   try {
-    const profile = yield select(makeSelectAuthProfile)
+    const profile = yield select(selectAuthProfile)
 
     const brandAndCompetitors = getBrandAndCompetitors(profile)
 
@@ -79,13 +79,13 @@ function* getFilteringSectionData({ data }) {
       ...brandAndCompetitors,
     }
 
-    const doughnutData = yield call(getPanopticDataApi, options)
+    const doughnutData = yield call(getReportDataApi, options)
 
     const dateBucket = getDateBucketFromRange(dateRange)
 
     const stackedChartData =
       dateBucket !== 'none'
-        ? yield call(getPanopticDataApi, {
+        ? yield call(getReportDataApi, {
             ...options,
             dateBucket,
           })
@@ -133,7 +133,7 @@ function* getFilteringSectionData({ data }) {
 
 function* getPacingCardData({ data }) {
   try {
-    const profile = yield select(makeSelectAuthProfile)
+    const profile = yield select(selectAuthProfile)
 
     const brandAndCompetitors = getBrandAndCompetitors(profile)
 
