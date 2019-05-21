@@ -21,7 +21,7 @@ class AudienceSlider extends React.Component {
     this.setState({
       refThumb: this.refThumb,
     })
-	}
+  }
 
   renderNextButton = () => {
     return (
@@ -31,8 +31,8 @@ class AudienceSlider extends React.Component {
         onClick={() => this.refSlider.slideNext()}
         >
       </RightArrowCircleFlat>
-		)
-	}
+    )
+  }
 
   renderPrevButton = () => {
     return (
@@ -42,8 +42,8 @@ class AudienceSlider extends React.Component {
         onClick={() => this.refSlider.slidePrev()}
         >
       </LeftArrowCircleFlat>
-		)
-	}
+    )
+  }
 
   render() {
     const { items, changeVideo } = this.props
@@ -70,7 +70,7 @@ class AudienceSlider extends React.Component {
           refThumb.slideTo(this.refSlider.activeIndex, 300)
           changeVideo(items[this.refSlider.activeIndex])
         },
-			},
+      },
       renderNextButton: this.renderNextButton,
       renderPrevButton: this.renderPrevButton
     }
@@ -94,18 +94,18 @@ class AudienceSlider extends React.Component {
           <div className={style.section}>
             <style>
               {`
-								.swiper-slide-thumb-active p {
-									background-color: ${colors.bodyBackground};
-									border: 1px solid ${colors.ageSliderBorder};
-									span {
-										color: ${colors.textColor}
-									}
-								}
+                .swiper-slide-thumb-active p {
+                  background-color: ${colors.bodyBackground};
+                  border: 1px solid ${colors.ageSliderBorder};
+                  span {
+                    color: ${colors.textColor}
+                  }
+                }
 
-								.swiper-slide-thumb-active p:after {
-									color: ${colors.textColor}
-								}
-							`}
+                .swiper-slide-thumb-active p:after {
+                  color: ${colors.textColor}
+                }
+              `}
             </style>
             {refThumb && (
               <div className="audienceSlider">
@@ -114,36 +114,27 @@ class AudienceSlider extends React.Component {
                   {...settings}
                 >
                   {items.map((item, i) => (
-                    <div className="item" key={i}>
+                    <div className='item' key={i}>
                       <AssetLayer
                         containerNoBorder
                         leftSocialIcon={item.socialMedia}
                         centerText={item.secondTitle}
                         title={item.title}
                         width={634}
-                        height="100%"
+                        height='100%'
                         rightValue={item.cvScore}
                       >
                         <img src={item.image} />
-                        <div
-                          className={style.percentageWrapper}
-                          style={{ right: '80px' }}
-                        >
-                          <PercentageBarGraph
-                            backgroundColor={
-                              colors.videoRightPercentageBackground
-                            }
-                            customClass={style.libraryPercentageGraph}
-                            id={`videolist-${i}`}
-                            percentage={item.cvScore}
-                            disableLabels={true}
-                            color={'#2fd7c4'}
-                            lineCount={30}
-                            height={19}
-                            width={67}
-                            xSmall
-                          />
-                        </div>
+                        <PercentageBarGraph
+                          key={Math.random()}
+                          percentage={item.cvScore}
+                          color="green"
+                          disableLabels
+                          width={80}
+                          height={20}
+                          barWidth={2}
+                          barSpaceWidth={1}
+                        />
                       </AssetLayer>
                     </div>
                   ))}

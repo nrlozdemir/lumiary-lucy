@@ -148,19 +148,16 @@ export class Main extends React.Component {
                                   </div>
                                   <div
                                     className={style.percentageWrapper}
-                                    style={{ right: '80px' }}
                                   >
                                     <PercentageBarGraph
-                                      backgroundColor="#303a5d"
-                                      customClass={style.libraryPercentageGraph}
-                                      id={`videolist-${i}`}
+                                      key={Math.random()}
                                       percentage={cvScore}
-                                      disableLabels={true}
-                                      color={i === 0 ? '#2fd7c4' : '#5292e5'}
-                                      lineCount={30}
-                                      height={19}
-                                      width={67}
-                                      xSmall
+                                      width={80}
+                                      height={20}
+                                      barWidth={2}
+                                      barSpaceWidth={1}
+                                      disableLabels
+                                      color={i === 0 ? 'green' : 'blue'}
                                     />
                                   </div>
                                 </AssetLayer>
