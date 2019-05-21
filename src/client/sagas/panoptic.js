@@ -4,8 +4,11 @@ import { actions, types } from 'Reducers/panoptic'
 
 import panopticMockData from 'Api/mocks/panopticMock.json'
 
-import { radarChartCalculate, convertDataIntoDatasets } from 'Utils'
-import { compareSharesData } from 'Utils/api'
+import {
+  compareSharesData,
+  radarChartCalculate,
+  convertDataIntoDatasets,
+} from 'Utils'
 
 import { getReportDataApi } from 'Api'
 
