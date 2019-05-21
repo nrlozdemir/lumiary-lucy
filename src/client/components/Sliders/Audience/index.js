@@ -11,166 +11,166 @@ import SwiperJS from 'swiper/dist/js/swiper.js'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 class AudienceSlider extends React.Component {
-	constructor(props) {
-		super(props)
-		this.state = {
-			refThumb: null,
-		}
-	}
+  constructor(props) {
+    super(props)
+    this.state = {
+      refThumb: null,
+    }
+  }
 
-	componentDidMount() {
-		this.setState({
-			refThumb: this.refThumb,
-		})
-	}
+  componentDidMount() {
+    this.setState({
+      refThumb: this.refThumb,
+    })
+  }
 
-	renderNextButton = () => {
-		return (
-			<RightArrowCircleFlat
-				className={classnames(style.nextButton, this.refSlider && this.refSlider.isEnd ? style.disabled : '')}
-				size={32}
-				onClick={() => this.refSlider.slideNext()}
-				>
-			</RightArrowCircleFlat>
-		)
-	}
+  renderNextButton = () => {
+    return (
+      <RightArrowCircleFlat
+        className={classnames(style.nextButton, this.refSlider && this.refSlider.isEnd ? style.disabled : '')}
+        size={32}
+        onClick={() => this.refSlider.slideNext()}
+        >
+      </RightArrowCircleFlat>
+    )
+  }
 
-	renderPrevButton = () => {
-		return (
-			<LeftArrowCircleFlat
-				className={classnames(style.prevButton, this.refSlider && this.refSlider.isBeginning ? style.disabled : '')}
-				size={32}
-				onClick={() => this.refSlider.slidePrev()}
-				>
-			</LeftArrowCircleFlat>
-		)
-	}
+  renderPrevButton = () => {
+    return (
+      <LeftArrowCircleFlat
+        className={classnames(style.prevButton, this.refSlider && this.refSlider.isBeginning ? style.disabled : '')}
+        size={32}
+        onClick={() => this.refSlider.slidePrev()}
+        >
+      </LeftArrowCircleFlat>
+    )
+  }
 
-	render() {
-		const { items, changeVideo } = this.props
-		const { refThumb } = this.state
+  render() {
+    const { items, changeVideo } = this.props
+    const { refThumb } = this.state
 
-		const settings = {
-			modules: [SwiperJS.Navigation],
-			navigation: {
-				nextEl: '.swiper-button-next',
-				prevEl: '.swiper-button-prev',
-			},
-			slidesPerView: 'auto',
-			spaceBetween: 40,
-			centeredSlides: true,
-			speed: 300,
-			autoplay: false,
-			keyboard: false,
-			slideToClickedSlide: true,
-			thumbs: {
-				swiper: refThumb,
-			},
-			on: {
-				slideChange: () => {
-					refThumb.slideTo(this.refSlider.activeIndex, 300)
-					changeVideo(items[this.refSlider.activeIndex])
-				},
-			},
-			renderNextButton: this.renderNextButton,
-			renderPrevButton: this.renderPrevButton
-		}
+    const settings = {
+      modules: [SwiperJS.Navigation],
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+      slidesPerView: 'auto',
+      spaceBetween: 40,
+      centeredSlides: true,
+      speed: 300,
+      autoplay: false,
+      keyboard: false,
+      slideToClickedSlide: true,
+      thumbs: {
+        swiper: refThumb,
+      },
+      on: {
+        slideChange: () => {
+          refThumb.slideTo(this.refSlider.activeIndex, 300)
+          changeVideo(items[this.refSlider.activeIndex])
+        },
+      },
+      renderNextButton: this.renderNextButton,
+      renderPrevButton: this.renderPrevButton
+    }
 
-		const thumbSettings = {
-			slidesPerView: 9,
-			centeredSlides: true,
-			watchSlidesVisibility: true,
-			watchSlidesProgress: true,
-			on: {
-				slideChange: () => {
-					this.refSlider.slideTo(this.refThumb.activeIndex, 300)
-					changeVideo(items[this.refThumb.activeIndex])
-				},
-			},
-		}
+    const thumbSettings = {
+      slidesPerView: 9,
+      centeredSlides: true,
+      watchSlidesVisibility: true,
+      watchSlidesProgress: true,
+      on: {
+        slideChange: () => {
+          this.refSlider.slideTo(this.refThumb.activeIndex, 300)
+          changeVideo(items[this.refThumb.activeIndex])
+        },
+      },
+    }
 
-		return (
-			<ThemeContext.Consumer>
-				{({ themeContext: { colors } }) => (
-					<div className={style.section}>
-						<style>
-							{`
-								.swiper-slide-thumb-active p {
-									background-color: ${colors.bodyBackground};
-									border: 1px solid ${colors.ageSliderBorder};
-									span {
-										color: ${colors.textColor}
-									}
-								}
+    return (
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <div className={style.section}>
+            <style>
+              {`
+                .swiper-slide-thumb-active p {
+                  background-color: ${colors.bodyBackground};
+                  border: 1px solid ${colors.ageSliderBorder};
+                  span {
+                    color: ${colors.textColor}
+                  }
+                }
 
-								.swiper-slide-thumb-active p:after {
-									color: ${colors.textColor}
-								}
-							`}
-						</style>
-						{refThumb && (
-							<div className="audienceSlider">
-								<Swiper
-									ref={(node) => node && (this.refSlider = node.swiper)}
-									{...settings}
-								>
-									{items.map((item, i) => (
-										<div className='item' key={i}>
-											<AssetLayer
-												containerNoBorder
-												leftSocialIcon={item.socialMedia}
-												centerText={item.secondTitle}
-												title={item.title}
-												width={634}
-												height='100%'
-												rightValue={item.cvScore}
-											>
-												<img src={item.image} />
-												<div
-													className={style.percentageWrapper}
-													style={{ right: '80px' }}
-												>
-												<LineChart
-													chartType='percentageGraph'
-													width={282}
-													height={44}
-													cvScore={72}
-													removeTooltip={true}
-													removePointRadius={true}
-													xAxesFlatten={false}
-													flattenFirstSpace={0}
-													flattenLastSpace={0}
-													options={{color: 'grey'}}
-												/>
-												</div>
-											</AssetLayer>
-										</div>
-									))}
-								</Swiper>
-							</div>
-						)}
+                .swiper-slide-thumb-active p:after {
+                  color: ${colors.textColor}
+                }
+              `}
+            </style>
+            {refThumb && (
+              <div className="audienceSlider">
+                <Swiper
+                  ref={(node) => node && (this.refSlider = node.swiper)}
+                  {...settings}
+                >
+                  {items.map((item, i) => (
+                    <div className='item' key={i}>
+                      <AssetLayer
+                        containerNoBorder
+                        leftSocialIcon={item.socialMedia}
+                        centerText={item.secondTitle}
+                        title={item.title}
+                        width={634}
+                        height='100%'
+                        rightValue={item.cvScore}
+                      >
+                        <img src={item.image} />
+                        <div
+                          className={style.percentageWrapper}
+                          style={{ right: '80px' }}
+                        >
+                        <LineChart
+                          chartType='percentageGraph'
+                          width={282}
+                          height={44}
+                          cvScore={72}
+                          removeTooltip={true}
+                          removePointRadius={true}
+                          xAxesFlatten={false}
+                          flattenFirstSpace={0}
+                          flattenLastSpace={0}
+                          options={{color: 'grey'}}
+                        />
+                        </div>
+                      </AssetLayer>
+                    </div>
+                  ))}
+                </Swiper>
+              </div>
+            )}
 
-						<div className="audienceThumbSlider">
-							<Swiper
-								ref={(node) => node && (this.refThumb = node.swiper)}
-								{...thumbSettings}
-							>
-								{items.map((item, i) => (
-									<div className="item" key={i}>
-										<p>
-											<span style={{ color: colors.textColor }}>
-												{item.age}
-											</span>
-										</p>
-									</div>
-								))}
-							</Swiper>
-						</div>
-					</div>
-				)}
-			</ThemeContext.Consumer>
-		)
-	}
+            <div className="audienceThumbSlider">
+              <Swiper
+                ref={(node) => node && (this.refThumb = node.swiper)}
+                {...thumbSettings}
+              >
+                {items.map((item, i) => (
+                  <div className="item" key={i}>
+                    <p>
+                      <span style={{ color: colors.textColor }}>
+                        {item.age}
+                      </span>
+                    </p>
+                  </div>
+                ))}
+              </Swiper>
+            </div>
+          </div>
+        )}
+      </ThemeContext.Consumer>
+    )
+  }
 }
 
 export default AudienceSlider
