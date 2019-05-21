@@ -1,17 +1,24 @@
 import React from 'react'
 import style from './style.scss'
 import classnames from 'classnames'
-import SvgChart from './SvgChart'
+import StackedPercentageChart from 'Components/Charts/StackedPercentageChart'
+
+const pdata = {"datasets": [{"data": [10, 12, 14, 16, 18, 20, 22, 24, 26,
+	28, 30, 32, 34, 36, 40, 48, 58, 70, 80,
+	88, 94, 98,
+	100,
+	98, 90, 80,
+	70, 60, 54, 48, 42, 36, 34, 32, 30, 28,
+	26, 24, 22, 20, 18]}]}
+
 
 const PercentageBarGraph = ({
   percentage,
   disableLabels = false,
   color,
   id,
-  lineCount = 60,
-  width = 250,
-  height = 40,
-  xSmall,
+  width = 238,
+  height = 44,
   backgroundColor,
 }) => {
   const active = Math.round((60 / 100) * percentage)
@@ -27,43 +34,77 @@ const PercentageBarGraph = ({
             [style.noLabel]: disableLabels,
           })}
         >
-          <style>
-            {`.${id} .${style.percentageGraphWrapper}:before{
-                  left: ${percentage}%;
-                  }.${id} .${style.percentageGraphWrapper}:after{
-                    left: ${percentage}%;
-                  }`}
-          </style>
-          <div
-            style={{ height: height }}
-            className={classnames(style.percentageGraphWrapper, {
-              [style.noLabel]: disableLabels,
-            })}
-            data-active={percentage}
-          >
-            <SvgChart
-              value={percentage}
-              width={width}
-              height={height}
-              backgroundColor={backgroundColor}
-            />
 
-            {[...Array(lineCount)].map((e, index) => (
-              <div
-                key={index}
-                data-index={
-                  index + 1 > active - 15 && index + 1 - (active - 15)
-                }
-                className={classnames(style.percentageGraphBar, {
-                  [style.percentageGraphXSmall]: xSmall,
-                })}
-                style={{ backgroundColor: color }}
-              />
-            ))}
+          <StackedPercentageChart
+                    key={Math.random()}
+                    backgroundColor="transparent"
+                    borderColor="transparent"
+                    width={width}
+                    height={height}
+                    chartType= 'percentageGraph'
+                    dataSet = {
+                      {
+                        labels: pdata.datasets[0].data,
+                        datasets: pdata.datasets,
+                      }
+                    }
+                    removeTooltip={true}
+                    removePointRadius={true}
+                    xAxesFlatten={false}
+                    flattenFirstSpace={0}
+                    flattenLastSpace={0}
+                    options={{
+                      responsive: false,
+                      color: color,
+                      chartType: 'percentageGraph',
+                      layout: {
+                        padding: {
+                          bottom: -10
+                        }
+                      },
+                      scales: {
+                        xAxes: [
+                          {
+                            gridLines: {
+                              display: false,
+                              lineWidth: 1,
+                              drawBorder: false,
+                              drawTicks: false,
+                              drawOnChartArea: false
+                            },
+                            ticks: {
+                              display: false,
+                              beginAtZero: true,
+                              padding: 0,
+                              stepSize: 1,
+                            },
+                          },
+                        ],
+                        yAxes: [
+                          {
+                            gridLines: {
+                              display: false,
+                              drawBorder: false,
+                              drawTicks: false,
+                              drawOnChartArea: false
+                            },
+                            ticks: {
+                              display: false,
+                              beginAtZero: true,
+                              padding: 0,
+                              max: 100,
+                              stepSize: 10,
+                            },
+                          },
+                        ],
+                      },
+                    }}
+                  />
+
+
           </div>
         </div>
       </div>
-    </div>
   )
 }
 

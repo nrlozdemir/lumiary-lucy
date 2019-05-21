@@ -83,7 +83,7 @@ const ContentVitalityScoreModule = ({
                     key={Math.random()}
                     id={'percentageContainer-1'}
                     percentage={33.4}
-                    color="#5292E5"
+                    color="purple"
                     backgroundColor={colors.moduleBackground}
                   />
                 </div>
@@ -108,7 +108,7 @@ const ContentVitalityScoreModule = ({
                     key={Math.random()}
                     id={'percentageContainer-2'}
                     percentage={40.1}
-                    color="#8562F3"
+                    color="green"
                     backgroundColor={colors.moduleBackground}
                   />
                 </div>
@@ -127,7 +127,7 @@ const ContentVitalityScoreModule = ({
                     key={Math.random()}
                     id={'percentageContainer-3'}
                     percentage={46.8}
-                    color="#2FD7C4"
+                    color="blue"
                     backgroundColor={colors.moduleBackground}
                   />
                 </div>

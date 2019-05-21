@@ -23,13 +23,15 @@
     &:before {
       content: '0';
       float: left;
-      margin-right: 8px;
+			margin-right: 8px;
+			margin-bottom: -4px;
     }
 
     &:after {
       content: '100';
       float: right;
-      margin-left: 8px;
+			margin-left: 8px;
+			margin-bottom: -4px;
     }
 
     &:before,

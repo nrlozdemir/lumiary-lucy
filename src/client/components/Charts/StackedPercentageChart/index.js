@@ -3,7 +3,7 @@ import { helpers, /* elements, */ defaults } from 'chart.js'
 import { Line, Chart } from 'react-chartjs-2'
 import { randomKey, chartCombineDataset } from 'Utils/index'
 import { fromJS } from 'immutable'
-import { lineOptions, lineStackedAreaOptions, percentageGraphOptions } from './defaultOptions'
+import { percentageGraphOptions } from './defaultOptions'
 import { createDataset } from './percentageDummyData'
 import { withTheme } from 'ThemeContext/withTheme'
 
@@ -72,28 +72,8 @@ moveTo(point.x, point.y) //x coord y coord
 lineTo(point.x, scale.endPoint) // start end
 */
 
-function addComma(number) {
-  if (number >= 1e3) {
-    const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
-    const unitname = ['k', 'm', 'B', 'T'][Math.floor(unit / 3) - 1]
-    return (number / ('1e' + unit)).toFixed(0) + unitname
-  }
-
-  return number
-}
-
-function addPercentage(number) {
-  return number + '%'
-}
-
 function combineChartData(data, type = null) {
-  if (type === null || type === 'line') {
-    return chartCombineDataset(data, lineOptions)
-  } else if (type === 'lineStackedArea') {
-    return chartCombineDataset(data, lineStackedAreaOptions)
-  } else if (type === 'percentageGraph') {
-    return chartCombineDataset(data, percentageGraphOptions)
-  }
+  return chartCombineDataset(data, percentageGraphOptions)
 }
 
 class StackedPercentageChart extends React.Component {
@@ -104,332 +84,340 @@ class StackedPercentageChart extends React.Component {
 
   datasetKeyProvider() {
     return randomKey(5)
-  }
+	}
+
 
   render() {
+
     const themes = this.props.themeContext.colors
     const valueOrDefault = helpers.valueOrDefault
 
-    if(this.props.chartType !== 'line' && this.props.chartType !== 'lineStackedArea') {
-      Chart.helpers.extend(Chart.elements.Line.prototype, {
+
+		Chart.helpers.extend(Chart.elements.Line.prototype, {
         draw: function () {
-          console.log("Draw function called")
-          const me = this
-          const vm = me._view
-          const ctx = me._chart.ctx
-          const {
-            width,
-            height,
-            config
-          } = me._chart
+						const me = this
+						const vm = me._view
+						const ctx = me._chart.ctx
+						const {
+							width,
+							height,
+							config
+						} = me._chart
 
-          const colors = {
-            'green': [
-              '#2fd7c4',
-              '#39e5d1',
-              '#2fd7c4'
-            ],
-            'blue': [
-              '#5292e5',
-              '#5d9ef2',
-              '#5292e5'
-            ],
-            'grey': [
-              '#acb0be',
-              '#acb0be',
-              '#acb0be'
-            ]
-          }
+						const spanGaps = vm.spanGaps
+						const points = me._children.slice()
+						const globalDefaults = defaults.global
+						const globalOptionLineElements = globalDefaults.elements.line
+						let lastDrawnIndex = -1
+						let index, current, previous, currentVM
 
-          const spanGaps = vm.spanGaps
-          const points = me._children.slice()
-          const globalDefaults = defaults.global
-          const globalOptionLineElements = globalDefaults.elements.line
-          let lastDrawnIndex = -1
-          let index, current, previous, currentVM
+						if (me._loop && points.length) {
+							points.push(points[0])
+						}
 
-          if (me._loop && points.length) {
-            points.push(points[0])
-          }
+						ctx.save()
 
-          ctx.save()
+						ctx.lineCap = vm.borderCapStyle || globalOptionLineElements.borderCapStyle
 
-          ctx.lineCap = vm.borderCapStyle || globalOptionLineElements.borderCapStyle
+						if (ctx.setLineDash) {
+							ctx.setLineDash(vm.borderDash || globalOptionLineElements.borderDash)
+						}
 
-          if (ctx.setLineDash) {
-            ctx.setLineDash(vm.borderDash || globalOptionLineElements.borderDash)
-          }
+						ctx.lineDashOffset = valueOrDefault(vm.borderDashOffset, globalOptionLineElements.borderDashOffset)
+						ctx.lineJoin = vm.borderJoinStyle || globalOptionLineElements.borderJoinStyle
+						ctx.lineWidth = valueOrDefault(vm.borderWidth, globalOptionLineElements.borderWidth)
+						ctx.strokeStyle = vm.borderColor || globalDefaults.defaultColor
 
-          ctx.lineDashOffset = valueOrDefault(vm.borderDashOffset, globalOptionLineElements.borderDashOffset)
-          ctx.lineJoin = vm.borderJoinStyle || globalOptionLineElements.borderJoinStyle
-          ctx.lineWidth = valueOrDefault(vm.borderWidth, globalOptionLineElements.borderWidth)
-          ctx.strokeStyle = vm.borderColor || globalDefaults.defaultColor
+						ctx.beginPath()
+						lastDrawnIndex = -1
 
-          ctx.beginPath()
-          lastDrawnIndex = -1
+						let lines = {}
 
-          let lines = {}
+						for (index = 0; index < points.length; ++index) {
+							current = points[index]
+							previous = helpers.previousItem(points, index)
+							currentVM = current._view
 
-          for (index = 0; index < points.length; ++index) {
-            current = points[index]
-            previous = helpers.previousItem(points, index)
-            currentVM = current._view
+							if (index === 0) {
+								if (!currentVM.skip) {
+									ctx.moveTo(currentVM.x, currentVM.y)
+									lastDrawnIndex = index
+								}
+							} else {
+								previous = lastDrawnIndex === -1 ? previous : points[lastDrawnIndex]
+								if (!currentVM.skip) {
+									if ((lastDrawnIndex !== (index - 1) && !spanGaps) || lastDrawnIndex === -1) {
+										ctx.moveTo(currentVM.x, currentVM.y)
+									} else {
+										helpers.canvas.lineTo(ctx, previous._view, current._view)
 
-            if (index === 0) {
-              if (!currentVM.skip) {
-                ctx.moveTo(currentVM.x, currentVM.y)
-                lastDrawnIndex = index
-              }
-            } else {
-              previous = lastDrawnIndex === -1 ? previous : points[lastDrawnIndex]
-              if (!currentVM.skip) {
-                if ((lastDrawnIndex !== (index - 1) && !spanGaps) || lastDrawnIndex === -1) {
-                  ctx.moveTo(currentVM.x, currentVM.y)
-                } else {
-                  helpers.canvas.lineTo(ctx, previous._view, current._view)
+										lines[index] = {
+											previousVLine: {
+												...previous._view
+											},
+											currentVLine: {
+												...current._view
+											}
+										}
+									}
+									lastDrawnIndex = index
+								}
+							}
+						}
 
-                  lines[index] = {
-                    previousVLine: {
-                      ...previous._view
-                    },
-                    currentVLine: {
-                      ...current._view
-                    }
-                  }
-                }
-                lastDrawnIndex = index
-              }
-            }
-          }
+						ctx.save()
+						ctx.stroke()
 
-          ctx.save()
-          ctx.stroke()
+						if(config.options.chartType === 'percentageGraph') {
 
-          const barWidth = 3
-          const barSpaceWidth = 2
-          const lineWidth = 1
+							const colors = {
+								'green': [
+									'#2fd7c4',
+									'#39e5d1',
+									'#2fd7c4'
+								],
+								'blue': [
+									'#5292e5',
+									'#5d9ef2',
+									'#5292e5'
+								],
+								'grey': [
+									'#acb0be',
+									'#acb0be',
+									'#acb0be'
+								],
+								'purple': [
+									'#8562f3',
+									'#9576f5',
+									'#8562f3'
+								]
+							}
 
-          let gradient = ctx.createLinearGradient(0, 0, 180, 800)
-          let cs = 0
-          for (let g = 0; g <= 1; g += 0.5){
-            gradient.addColorStop(g, colors[config.options.color][cs])
-            cs++
-          }
+							const barWidth = 3
+							const barSpaceWidth = 2
+							const lineWidth = 1
 
-          ctx.restore()
+							let gradient = ctx.createLinearGradient(0, 0, 180, 800)
+							let cs = 0
+							for (let g = 0; g <= 1; g += 0.5){
+								gradient.addColorStop(g, colors[config.options.color][cs])
+								cs++
+							}
 
-          const findYMaxValue = Object.values(lines).reduce(
-            (p, n) => (p.currentVLine.y > n.currentVLine.y) ? n : p
-          )
-          const findYMaxIndex = findYMaxValue && Object.values(lines).findIndex(
-            (l) => l.currentVLine.y === findYMaxValue.currentVLine.y
-          )
+							ctx.restore()
 
-          const previousIndices = Object.values(lines)
-          .filter((r, i) => i <= findYMaxIndex).reverse()
+							const findYMaxValue = Object.values(lines).reduce(
+								(p, n) => (p.currentVLine.y > n.currentVLine.y) ? n : p
+							)
+							const findYMaxIndex = findYMaxValue && Object.values(lines).findIndex(
+								(l) => l.currentVLine.y === findYMaxValue.currentVLine.y
+							)
 
-          let previousIndicesList = {}
-          previousIndices && Object.values(previousIndices).map((el, i) => {
-            previousIndicesList[i] = {
-              currentX: el.currentVLine.x,
-              previousX: el.previousVLine.x,
-              currentY: el.currentVLine.y,
-              previousY: el.previousVLine.y
-            }
-            /*
-            if (i + 1 === previousIndices.length) {
-              previousIndicesList[i + 1] = {
-                currentX: el.previousVLine.x,
-                previousX: el.previousVLine.x,
-                currentY: el.previousVLine.y,
-                previousY: el.previousVLine.y
-              }
-            }
-            */
-            return true
-          })
+							const previousIndices = Object.values(lines)
+							.filter((r, i) => i <= findYMaxIndex).reverse()
 
-          let createLeftIndexes = []
-          previousIndicesList && Object.values(previousIndicesList).map((el, i) => {
-            let calcAspectRatio = (el.previousY - el.currentY) / (el.currentX - el.previousX)
-            let returner = 0
-            for (let c = el.currentX; c > el.previousX; c--) {
-              createLeftIndexes.push({
-                x: c.toFixed(0),
-                y: (el.currentY + (returner * calcAspectRatio)),
-                currentX: el.currentX,
-                currentY: el.currentY,
-                previousX: el.previousX,
-                previousY: el.previousY
-              })
-              returner++
-            }
-            return true
-          })
+							let previousIndicesList = {}
+							previousIndices && Object.values(previousIndices).map((el, i) => {
+								previousIndicesList[i] = {
+									currentX: el.currentVLine.x,
+									previousX: el.previousVLine.x,
+									currentY: el.currentVLine.y,
+									previousY: el.previousVLine.y
+								}
+								/*
+								if (i + 1 === previousIndices.length) {
+									previousIndicesList[i + 1] = {
+										currentX: el.previousVLine.x,
+										previousX: el.previousVLine.x,
+										currentY: el.previousVLine.y,
+										previousY: el.previousVLine.y
+									}
+								}
+								*/
+								return true
+							})
 
-
-          ctx.beginPath()
-          createLeftIndexes && createLeftIndexes.map((el, i) => {
-            if (
-              el.x % (barWidth + barSpaceWidth) > barSpaceWidth
-              && el.x % (barWidth + barSpaceWidth) <= (barWidth + barSpaceWidth)
-            ) {
-              ctx.moveTo(el.x, height + el.y)
-              ctx.lineTo(el.x, el.y)
-              ctx.lineWidth = lineWidth
-              ctx.strokeStyle = gradient
-              ctx.stroke()
-            }
-            return true
-          })
-
-          /*
-          // add shadow to left indexes
-          ctx.beginPath()
-          createLeftIndexes && createLeftIndexes.map((el, i) => {
-            if (
-              el.x.toFixed(0) % (5) > 3
-              && el.x.toFixed(0) % (5) <= (4)
-            ) {
-
-              ctx.moveTo(el.x + lineWidth, height + el.y)
-              ctx.lineTo(el.x + lineWidth, el.y)
-              ctx.lineWidth = lineWidth
-              ctx.strokeStyle = '#2C3551'
-              ctx.stroke()
-            }
-            return true
-          })
-          ctx.save()
-          */
-
-          // end create left indexes
-
-          // start create right indexes
-          const nextIndices = Object.values(lines)
-          .filter((r, i) => i > findYMaxIndex)
-
-          let nextIndicesList = {}
-          nextIndices && Object.values(nextIndices).map((el, i) => {
-            nextIndicesList[i] = {
-              currentX: el.currentVLine.x,
-              previousX: el.previousVLine.x,
-              currentY: el.currentVLine.y,
-              previousY: el.previousVLine.y
-            }
-            return true
-          })
-
-          let createRightIndexes = []
-          nextIndicesList && Object.values(nextIndicesList).map((el, i) => {
-            let calcAspectRatio = (el.previousY - el.currentY) / (el.currentX - el.previousX)
-            let returner = 0
-            for (let c = el.previousX; c < el.currentX; c++) {
-              createRightIndexes.push({
-                x: c.toFixed(0),
-                y: (el.previousY - (returner * calcAspectRatio)),
-                currentX: el.currentX,
-                currentY: el.currentY,
-                previousX: el.previousX,
-                previousY: el.previousY
-              })
-              returner++
-            }
-            return true
-          })
+							let createLeftIndexes = []
+							previousIndicesList && Object.values(previousIndicesList).map((el, i) => {
+								let calcAspectRatio = (el.previousY - el.currentY) / (el.currentX - el.previousX)
+								let returner = 0
+								for (let c = el.currentX; c > el.previousX; c--) {
+									createLeftIndexes.push({
+										x: c.toFixed(0),
+										y: (el.currentY + (returner * calcAspectRatio)),
+										currentX: el.currentX,
+										currentY: el.currentY,
+										previousX: el.previousX,
+										previousY: el.previousY
+									})
+									returner++
+								}
+								return true
+							})
 
 
-          ctx.beginPath()
-          createRightIndexes && createRightIndexes.map((el, i) => {
-            if (
-              el.x % (barWidth + barSpaceWidth) > barSpaceWidth
-              && el.x % (barWidth + barSpaceWidth) <= (barWidth + barSpaceWidth)
-            ) {
+							ctx.beginPath()
+							createLeftIndexes && createLeftIndexes.map((el, i) => {
+								if (
+									el.x % (barWidth + barSpaceWidth) > barSpaceWidth
+									&& el.x % (barWidth + barSpaceWidth) <= (barWidth + barSpaceWidth)
+								) {
+									ctx.moveTo(el.x, height + el.y)
+									ctx.lineTo(el.x, el.y)
+									ctx.lineWidth = lineWidth
+									ctx.strokeStyle = gradient
+									ctx.stroke()
+								}
+								return true
+							})
 
-              ctx.moveTo(el.x, height + el.y)
-              ctx.lineTo(el.x, el.y)
-              ctx.lineWidth = lineWidth
-              ctx.strokeStyle = gradient
-              ctx.stroke()
+							/*
+							// add shadow to left indexes
+							ctx.beginPath()
+							createLeftIndexes && createLeftIndexes.map((el, i) => {
+								if (
+									el.x.toFixed(0) % (5) > 3
+									&& el.x.toFixed(0) % (5) <= (4)
+								) {
 
-            }
-            return true
-          })
-          ctx.save()
+									ctx.moveTo(el.x + lineWidth, height + el.y)
+									ctx.lineTo(el.x + lineWidth, el.y)
+									ctx.lineWidth = lineWidth
+									ctx.strokeStyle = '#2C3551'
+									ctx.stroke()
+								}
+								return true
+							})
+							ctx.save()
+							*/
+
+							// end create left indexes
+
+							// start create right indexes
+							const nextIndices = Object.values(lines)
+							.filter((r, i) => i > findYMaxIndex)
+
+							let nextIndicesList = {}
+							nextIndices && Object.values(nextIndices).map((el, i) => {
+								nextIndicesList[i] = {
+									currentX: el.currentVLine.x,
+									previousX: el.previousVLine.x,
+									currentY: el.currentVLine.y,
+									previousY: el.previousVLine.y
+								}
+								return true
+							})
+
+							let createRightIndexes = []
+							nextIndicesList && Object.values(nextIndicesList).map((el, i) => {
+								let calcAspectRatio = (el.previousY - el.currentY) / (el.currentX - el.previousX)
+								let returner = 0
+								for (let c = el.previousX; c < el.currentX; c++) {
+									createRightIndexes.push({
+										x: c.toFixed(0),
+										y: (el.previousY - (returner * calcAspectRatio)),
+										currentX: el.currentX,
+										currentY: el.currentY,
+										previousX: el.previousX,
+										previousY: el.previousY
+									})
+									returner++
+								}
+								return true
+							})
+
+							ctx.beginPath()
+							createRightIndexes && createRightIndexes.map((el, i) => {
+								if (
+									el.x % (barWidth + barSpaceWidth) > barSpaceWidth
+									&& el.x % (barWidth + barSpaceWidth) <= (barWidth + barSpaceWidth)
+								) {
+
+									ctx.moveTo(el.x, height + el.y)
+									ctx.lineTo(el.x, el.y)
+									ctx.lineWidth = lineWidth
+									ctx.strokeStyle = gradient
+									ctx.stroke()
+
+								}
+								return true
+							})
+							ctx.save()
 
 
-          // add shadow to right indexes
-          /*
-          ctx.beginPath()
-          createRightIndexes && createRightIndexes.map((el, i) => {
-            if (
-              el.x.toFixed(0) % (barWidth + barSpaceWidth) > barWidth
-              && el.x.toFixed(0) % (barWidth + barSpaceWidth) <= (barWidth + lineWidth)
-            ) {
+							// add shadow to right indexes
+							/*
+							ctx.beginPath()
+							createRightIndexes && createRightIndexes.map((el, i) => {
+								if (
+									el.x.toFixed(0) % (barWidth + barSpaceWidth) > barWidth
+									&& el.x.toFixed(0) % (barWidth + barSpaceWidth) <= (barWidth + lineWidth)
+								) {
 
-              ctx.moveTo(el.x + lineWidth, height + el.y)
-              ctx.lineTo(el.x + lineWidth, el.y)
-              ctx.lineWidth = lineWidth
-              ctx.strokeStyle = '#2C3551'
-              ctx.stroke()
-            }
-            return true
-          })
-          ctx.save()
-          */
-          // end create right indexes
+									ctx.moveTo(el.x + lineWidth, height + el.y)
+									ctx.lineTo(el.x + lineWidth, el.y)
+									ctx.lineWidth = lineWidth
+									ctx.strokeStyle = '#2C3551'
+									ctx.stroke()
+								}
+								return true
+							})
+							ctx.save()
+							*/
+							// end create right indexes
 
-          // start put top index
-          // white border
-
-
-          ctx.beginPath()
-          ctx.restore()
-          ctx.moveTo(findYMaxValue.currentVLine.x - 0,
-            height + findYMaxValue.currentVLine.y)
-          ctx.lineTo(findYMaxValue.currentVLine.x - 0,
-            findYMaxValue.currentVLine.y)
-          ctx.lineWidth = barWidth
-          ctx.strokeStyle = '#fff'
-          ctx.stroke()
-          ctx.save()
+							// start put top index
+							// white border
 
 
-          /*
-            // white border left shadow
-          ctx.beginPath()
-          ctx.restore()
-          ctx.moveTo(findYMaxValue.currentVLine.x - barWidth,
-            height + findYMaxValue.currentVLine.y)
-          ctx.lineTo(findYMaxValue.currentVLine.x - barWidth,
-            findYMaxValue.currentVLine.y)
-          ctx.lineWidth = lineWidth
-          ctx.strokeStyle = '#2C2B3E'
-          ctx.stroke()
-          ctx.save()
+							ctx.beginPath()
+							ctx.restore()
+							ctx.moveTo(findYMaxValue.currentVLine.x - 0,
+								height + findYMaxValue.currentVLine.y)
+							ctx.lineTo(findYMaxValue.currentVLine.x - 0,
+								findYMaxValue.currentVLine.y)
+							ctx.lineWidth = barWidth
+							ctx.strokeStyle = '#fff'
+							ctx.stroke()
+							ctx.save()
 
-          // white border right shadow
-          ctx.beginPath()
-          ctx.restore()
-          ctx.moveTo(findYMaxValue.currentVLine.x + lineWidth,
-            height + findYMaxValue.currentVLine.y)
-          ctx.lineTo(findYMaxValue.currentVLine.x + lineWidth,
-            findYMaxValue.currentVLine.y)
-          ctx.lineWidth = lineWidth
-          ctx.strokeStyle = '#2C2B3E'
-          ctx.stroke()
-          ctx.save()
-          */
 
-          // end put top index
-        }
+							/*
+								// white border left shadow
+							ctx.beginPath()
+							ctx.restore()
+							ctx.moveTo(findYMaxValue.currentVLine.x - barWidth,
+								height + findYMaxValue.currentVLine.y)
+							ctx.lineTo(findYMaxValue.currentVLine.x - barWidth,
+								findYMaxValue.currentVLine.y)
+							ctx.lineWidth = lineWidth
+							ctx.strokeStyle = '#2C2B3E'
+							ctx.stroke()
+							ctx.save()
+
+							// white border right shadow
+							ctx.beginPath()
+							ctx.restore()
+							ctx.moveTo(findYMaxValue.currentVLine.x + lineWidth,
+								height + findYMaxValue.currentVLine.y)
+							ctx.lineTo(findYMaxValue.currentVLine.x + lineWidth,
+								findYMaxValue.currentVLine.y)
+							ctx.lineWidth = lineWidth
+							ctx.strokeStyle = '#2C2B3E'
+							ctx.stroke()
+							ctx.save()
+							*/
+
+							// end put top index
+        	}
+				}
       })
-    }
 
     const defaultProps = {
       width: 1200,
       height: 300,
       options: {
+				animation: false,
         responsive: false,
         plugins: {
           datalabels: false,
@@ -502,158 +490,14 @@ class StackedPercentageChart extends React.Component {
 
     let plugins = []
 
-    if (props.backgroundColor || themes.chartBackground) {
-      plugins.push({
-        beforeDraw: (chart, easing) => {
-          let ctx = chart.chart.ctx
-          let chartArea = chart.chartArea
-
-          ctx.save()
-          ctx.fillStyle = props.backgroundColor || themes.chartBackground
-          ctx.fillRect(
-            chartArea.left,
-            chartArea.top,
-            chartArea.right - chartArea.left,
-            chartArea.bottom - chartArea.top
-          )
-          ctx.restore()
-        },
-      })
-    }
-
-    if (props.xAxesFlatten) {
-      props.options.scales.xAxes[0].ticks = {
-        ...props.options.scales.xAxes[0].ticks,
-        callback: (value, index, values) => {
-          if (props.xAxesFlatten) {
-            let space = props.flattenSpace || 11
-            if (value.length === 1) {
-              space = props.flattenSpace || 2
-            }
-            if (index === 0) {
-              return ' '.repeat(props.flattenFirstSpace || space) + value
-            }
-            if (index === values.length - 1) {
-              return value + ' '.repeat(props.flattenLastSpace || space)
-            }
-            return value
-          }
-          return value
-        },
-      }
-    }
-
-    if (props.yAxesPercentage) {
-      props.options.scales.yAxes[0].ticks = {
-        ...props.options.scales.yAxes[0].ticks,
-        max: 100,
-        callback: (value, index, values) => {
-          return addPercentage(value)
-        },
-      }
-    }
-
-    if (props.yAxesAbbreviate) {
-      props.options.scales.yAxes[0].ticks = {
-        ...props.options.scales.yAxes[0].ticks,
-        callback: (value, index, values) => {
-          return addComma(value)
-        },
-      }
-    }
-
-    if (props.customTooltipText) {
-      props.options.tooltips = {
-        ...props.options.tooltips,
-        callbacks: {
-          title: (tooltipItem, data) => {
-            const { datasetIndex, index } = tooltipItem[0]
-            return (
-              addComma(data.datasets[datasetIndex].data[index]) +
-              ' ' +
-              props.customTooltipText
-            )
-          },
-          label: (tooltipItem, data) => {
-            return null
-          },
-        },
-      }
-    }
-
-    if (props.removeTooltip) {
-      props.options.tooltips = {
-        enabled: false,
-      }
-    }
-
-    if (props.removePointRadius) {
-      props.options.elements = {
-        ...props.options.elements,
-        point: {
-          radius: 0,
-        },
-      }
-    }
-
-    if (props.ticksFontSize) {
-      props.options.scales.xAxes[0].ticks = {
-        ...props.options.scales.xAxes[0].ticks,
-        fontSize: props.ticksFontSize,
-      }
-
-      props.options.scales.yAxes[0].ticks = {
-        ...props.options.scales.yAxes[0].ticks,
-        fontSize: props.ticksFontSize,
-      }
-    }
-
-    if (props.xAxesStepSize) {
-      props.options.scales.xAxes[0].ticks = {
-        ...props.options.scales.xAxes[0].ticks,
-        stepSize: props.xAxesStepSize,
-      }
-    }
-
-    if (props.yAxesStepSize) {
-      props.options.scales.yAxes[0].ticks = {
-        ...props.options.scales.yAxes[0].ticks,
-        stepSize: props.yAxesStepSize,
-      }
-    }
-
-    if (props.yAxesMax) {
-      props.options.scales.yAxes[0].ticks = {
-        ...props.options.scales.yAxes[0].ticks,
-        max: props.yAxesMax,
-      }
-    }
-
-    if (props.xAxesTicksFontBold) {
-      props.options.scales.xAxes[0].ticks = {
-        ...props.options.scales.xAxes[0].ticks,
-        fontWeight: 'bold',
-      }
-    }
-
-    if (props.yAxesTicksFontBold) {
-      props.options.scales.yAxes[0].ticks = {
-        ...props.options.scales.yAxes[0].ticks,
-        fontWeight: 'bold',
-      }
-    }
-
-    const data = (props.chartType === 'percentageGraph')
-    ? {"datasets": [{"data": createDataset(props.cvScore)}]}
-    : combineChartData(props.dataSet, props.chartType)
 
     return (
       <React.Fragment>
-        {data && <Line
+        {props.dataSet && <Line
           key={Math.random()}
-          data={data}
+          data={combineChartData(props.dataSet, props.chartType)}
           plugins={plugins}
-          datasetKeyProvider={this.datasetKeyProvider}
+					datasetKeyProvider={this.datasetKeyProvider}
           {...props}
         />}
       </React.Fragment>
