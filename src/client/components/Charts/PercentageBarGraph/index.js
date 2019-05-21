@@ -17,20 +17,27 @@ const PercentageBarGraph = ({
   color,
   id,
   width = 238,
-  height = 44,
-  backgroundColor
+	height = 44,
+	barWidth = 3,
+	barSpaceWidth = 2
 }) => {
   const active = Math.round((60 / 100) * percentage)
   return (
     <div className={id}>
       <div className={style.percentageContainer}>
         {!disableLabels && <div className={style.percentage}>{percentage}</div>}
-        <div className={classnames(style.percentageGraph)}>
+        <div
+          className={classnames(style.percentageGraph, {
+            [style.noLabel]: disableLabels,
+          })}
+        >
           <StackedPercentageChart
             key={Math.random()}
             width={width}
             height={height}
-            chartType= 'percentageGraph'
+						chartType='percentageGraph'
+						barWidth={barWidth}
+						barSpaceWidth={barSpaceWidth}
             dataSet={
               {
                 labels: pdata.datasets[0].data,
