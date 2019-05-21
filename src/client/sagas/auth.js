@@ -1,19 +1,6 @@
 import qs from 'qs'
-import { browserHistory } from 'react-router'
-import { types, makeSelectAuthProfile } from 'Reducers/auth'
-import { delay } from 'redux-saga'
-import {
-  call,
-  fork,
-  take,
-  put,
-  all,
-  cancel,
-  cancelled,
-  takeEvery,
-  select,
-  takeLatest,
-} from 'redux-saga/effects'
+import { types } from 'Reducers/auth'
+import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import { ajax } from 'Utils/api'
 
 export function* authorize({ email, password }) {

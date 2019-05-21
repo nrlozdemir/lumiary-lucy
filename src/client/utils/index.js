@@ -21,10 +21,12 @@ const getTimeBucket = (value) => {
   const keys = Object.keys(value)
   if (!!keys.length) {
     // sometimes there is a null key
-    return Object.keys(value[keys[0]]).reduce(
-      (all, label) => [...all, ...(label !== 'null' ? [label] : [])],
-      []
-    ).reverse()
+    return Object.keys(value[keys[0]])
+      .reduce(
+        (all, label) => [...all, ...(label !== 'null' ? [label] : [])],
+        []
+      )
+      .reverse()
   }
   return []
 }
@@ -348,6 +350,22 @@ const getDateBucketFromRange = (dateRange) => {
   }
 }
 
+/*
+  Get api payload for brand_uuid and competitor_uuids
+ */
+const getBrandAndCompetitors = (profile) => {
+  const { brand } = profile
+
+  if (!!brand && !!brand.uuid && !!brand.competitors) {
+    return {
+      brand_uuid: brand.uuid,
+      competitor_uuids: brand.competitors.map((c) => c.uuid),
+    }
+  }
+
+  return {}
+}
+
 export {
   randomKey,
   searchTermInText,
@@ -360,4 +378,5 @@ export {
   isDataSetEmpty,
   convertDataIntoDatasets,
   getDateBucketFromRange,
+  getBrandAndCompetitors,
 }
