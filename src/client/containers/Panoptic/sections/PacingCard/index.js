@@ -10,7 +10,7 @@ import HorizontalStackedBarChart from 'Components/Charts/HorizontalStackedBarCha
 import { barChartOptions } from './options'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
 import { isEmpty } from 'lodash'
-
+import { isDataSetEmpty } from 'Utils'
 import style from './style.scss'
 
 const pacingCardContainer = classnames(
@@ -35,14 +35,15 @@ class PacingCard extends React.Component {
     } = this.props
     // console.log(stadiumData)
     const hasNoData =
-      (!!horizontalStackedBarData &&
-        !!stadiumData &&
-        horizontalStackedBarData.datasets.every((dataset) =>
-          dataset.data.every((data) => data === 0)
-        ) &&
-        stadiumData.datasets.every((dataset) =>
-          dataset.data.every((data) => data === 0)
-        )) ||
+      (!loading &&
+        (isDataSetEmpty(horizontalStackedBarData) &&
+          !!stadiumData &&
+          horizontalStackedBarData.datasets.every((dataset) =>
+            dataset.data.every((data) => data === 0)
+          ) &&
+          stadiumData.datasets.every((dataset) =>
+            dataset.data.every((data) => data === 0)
+          ))) ||
       isEmpty(data)
 
     const stadiumValues =

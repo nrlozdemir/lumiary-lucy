@@ -3,6 +3,10 @@ import { Bar, Chart } from 'react-chartjs-2'
 import { barDataOptions } from './options'
 import { withTheme } from 'ThemeContext/withTheme'
 
+const emptyData = {
+  datasets: [],
+}
+
 Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
   draw() {
     const { ctx } = this._chart
@@ -100,34 +104,33 @@ const plugins = [
 ]
 
 const StackedBarChart = (props) => {
-  const { barData, height = 300, width = 500, barSpacing } = props
+  const { barData = emptyData, height = 300, width = 500, barSpacing } = props
   const themes = props.themeContext.colors
-
   return (
     <Bar
       key={Math.random()}
-      data={
-        !!barData && !!barData.datasets
-          ? {
-              labels: barData.labels,
-              datasets: barData.datasets.map((data, index) => {
-                const indexValues = data.data.map((v, i) => {
-                  return barData.datasets.map((d) => d.data[i])
-                })
-                return {
-                  ...data,
-                  data: data.data.map((value, i) => {
-                    const totalValue = indexValues[i].reduce(
-                      (accumulator, currentValue) => accumulator + currentValue
-                    )
+      data={{
+        labels: barData.labels,
+        datasets:
+          (!!barData &&
+            !!barData.datasets &&
+            barData.datasets.map((data, index) => {
+              const indexValues = data.data.map((v, i) => {
+                return barData.datasets.map((d) => d.data[i])
+              })
+              return {
+                ...data,
+                data: data.data.map((value, i) => {
+                  const totalValue = indexValues[i].reduce(
+                    (accumulator, currentValue) => accumulator + currentValue
+                  )
 
-                    return parseFloat((value / (totalValue / 100)).toFixed(2))
-                  }),
-                }
-              }),
-            }
-          : {}
-      }
+                  return parseFloat((value / (totalValue / 100)).toFixed(2))
+                }),
+              }
+            })) ||
+          [],
+      }}
       width={width}
       options={{
         ...barDataOptions,
