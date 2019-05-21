@@ -102,8 +102,8 @@ class StackedPercentageChart extends React.Component {
 
 				if (config.options.chartType === 'percentageGraph') {
 
-					const barWidth = 3
-					const barSpaceWidth = 2
+					const barWidth = (config.options.barWidth) ? config.options.barWidth : 3
+					const barSpaceWidth = (config.options.barSpaceWidth) ? config.options.barSpaceWidth : 2
 					const lineWidth = 1
 
 					const colors = {
@@ -250,9 +250,9 @@ class StackedPercentageChart extends React.Component {
 
 					ctx.beginPath()
 					ctx.restore()
-					ctx.moveTo(findYMaxValue.currentVLine.x - barWidth,
+					ctx.moveTo(findYMaxValue.currentVLine.x - barWidth + 0.4,
 						height + findYMaxValue.currentVLine.y)
-					ctx.lineTo(findYMaxValue.currentVLine.x - barWidth,
+					ctx.lineTo(findYMaxValue.currentVLine.x - barWidth + 0.4,
 						findYMaxValue.currentVLine.y)
 					ctx.lineWidth = barWidth
 					ctx.strokeStyle = tickColor
@@ -339,6 +339,14 @@ class StackedPercentageChart extends React.Component {
 
 		if (props.chartType === 'percentageGraph') {
 			props.options.chartType = 'percentageGraph'
+
+			if (props.barWidth) {
+				props.options.barWidth = props.barWidth
+			}
+
+			if (props.barSpaceWidth) {
+				props.options.barSpaceWidth = props.barSpaceWidth
+			}
 		}
 
     let plugins = []
