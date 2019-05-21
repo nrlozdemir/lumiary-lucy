@@ -91,18 +91,16 @@ class Video extends Component {
             poster={poster}
           />
           <div className={styles.percentageWrapper} style={{right: "80px"}}>
-            <PercentageBarGraph
-              backgroundColor="#373f5b"
-              customClass={styles.libraryPercentageGraph}
-              id={`videolist-${id}`}
-              percentage={cvScore}
-              disableLabels={true}
-              color="#2fd7c4"
-              lineCount={30}
-              height={19}
-              width={67}
-              xSmall
-            />
+						<PercentageBarGraph
+							key={Math.random()}
+							percentage={cvScore}
+							color="green"
+							disableLabels
+							width={80}
+							height={20}
+							barWidth={2}
+							barSpaceWidth={1}
+						/>
           </div>
         </AssetLayer>
       </React.Fragment>
