@@ -124,18 +124,16 @@ class MarketViewSlider extends React.Component {
                     className={style.percentageWrapper}
                     style={{ right: '80px' }}
                   >
-                    <PercentageBarGraph
-                      backgroundColor="#303a5d"
-                      customClass={style.libraryPercentageGraph}
-                      id={`videolist-${i}`}
-                      percentage={item.cvScore}
-                      disableLabels={true}
-                      color={'#2fd7c4'}
-                      lineCount={30}
-                      height={19}
-                      width={67}
-                      xSmall
-                    />
+										<PercentageBarGraph
+											key={Math.random()}
+											percentage={item.cvScore}
+											width={80}
+											height={20}
+											barWidth={2}
+											barSpaceWidth={1}
+											disableLabels
+											color='green'
+										/>
                   </div>
                 </AssetLayer>
               </div>
