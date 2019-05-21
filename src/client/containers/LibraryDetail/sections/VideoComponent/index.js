@@ -92,16 +92,14 @@ class Video extends Component {
           />
           <div className={styles.percentageWrapper} style={{right: "80px"}}>
             <PercentageBarGraph
-              backgroundColor="#373f5b"
-              customClass={styles.libraryPercentageGraph}
-              id={`videolist-${id}`}
+              key={Math.random()}
               percentage={cvScore}
-              disableLabels={true}
-              color="#2fd7c4"
-              lineCount={30}
-              height={19}
-              width={67}
-              xSmall
+              color="green"
+              disableLabels
+              width={80}
+              height={20}
+              barWidth={2}
+              barSpaceWidth={1}
             />
           </div>
         </AssetLayer>

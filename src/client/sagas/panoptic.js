@@ -8,6 +8,7 @@ import {
   compareSharesData,
   radarChartCalculate,
   convertDataIntoDatasets,
+  getDateBucketFromRange,
 } from 'Utils'
 
 import { getReportDataApi } from 'Api'
@@ -57,13 +58,69 @@ function* getColorTemperatureData() {
   }
 }
 
-function* getFilteringSectionData(data) {
+function* getFilteringSectionData({ data }) {
   try {
+    const { property, metric, platform, dateRange } = data
+
+    const options = {
+      metric,
+      platform,
+      dateRange,
+      dateBucket: 'none',
+      display: 'percentage',
+      property: [property],
+    }
+
     const payload = yield call(getMockPanopticDataApi)
-    yield put(
-      actions.getFilteringSectionDataSuccess(payload.verticalStackedChartData)
-    )
+
+    const doughnutData = yield call(getPanopticDataApi, options)
+
+    const dateBucket = getDateBucketFromRange(dateRange)
+
+    const stackedChartData =
+      dateBucket !== 'none'
+        ? yield call(getPanopticDataApi, {
+            ...options,
+            dateBucket,
+          })
+        : { data: {} }
+
+    if (
+      !!doughnutData.data &&
+      !!doughnutData.data[property] &&
+      stackedChartData.data
+    ) {
+      yield put(
+        actions.getFilteringSectionDataSuccess({
+          doughnutData: convertDataIntoDatasets(doughnutData, options, {
+            singleDataset: true,
+          }),
+          stackedChartData:
+            (!_.isEmpty(stackedChartData.data) &&
+              convertDataIntoDatasets(
+                stackedChartData,
+                { ...options, dateBucket },
+                { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+              )) ||
+            {},
+
+          property,
+        })
+      )
+    } else {
+      throw 'Error fetching FilteringSection data'
+    }
   } catch (err) {
+    console.log(err)
+    yield put(
+      // empty data
+      actions.getFilteringSectionDataSuccess({
+        doughnutData: {
+          total: 0,
+        },
+        stackedChartData: {},
+      })
+    )
     yield put(actions.getFilteringSectionDataError(err))
   }
 }
@@ -107,7 +164,7 @@ function* getPacingCardData({ data }) {
       )
     } else {
       yield put(
-        actions.getPacingCardDataError('Error fetching pacing card data')
+        actions.getPacingCardDataError('Error fetching Pacing Card data')
       )
     }
   } catch (err) {
