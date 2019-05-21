@@ -81,10 +81,8 @@ const ContentVitalityScoreModule = ({
                   />
                   <PercentageBarGraph
                     key={Math.random()}
-                    id={'percentageContainer-1'}
                     percentage={33.4}
-                    color="purple"
-                    backgroundColor={colors.moduleBackground}
+                    color="blue"
                   />
                 </div>
                 <div className={percentageCol}>
@@ -106,10 +104,8 @@ const ContentVitalityScoreModule = ({
                   />
                   <PercentageBarGraph
                     key={Math.random()}
-                    id={'percentageContainer-2'}
                     percentage={40.1}
-                    color="green"
-                    backgroundColor={colors.moduleBackground}
+                    color="grey"
                   />
                 </div>
                 <div className={percentageCol}>
@@ -125,10 +121,8 @@ const ContentVitalityScoreModule = ({
                   </div>
                   <PercentageBarGraph
                     key={Math.random()}
-                    id={'percentageContainer-3'}
                     percentage={46.8}
-                    color="blue"
-                    backgroundColor={colors.moduleBackground}
+                    color="green"
                   />
                 </div>
               </div>
