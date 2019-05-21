@@ -1,24 +1,10 @@
-import qs from 'qs'
 import axios from 'axios'
 import mock from 'Api/mocks/libraryMock.json'
-import { findIdDetail, ajax } from 'Utils/api'
+import { findIdDetail, getReportDataApi } from 'Utils/api'
 import { types, actions } from 'Reducers/libraryDetail'
 import { takeLatest, call, put } from 'redux-saga/effects'
 import { convertDataIntoDatasets, getMaximumValueIndexFromArray } from 'Utils/'
 
-const RESOURCE = '/report'
-function getReportDataApi(vals) {
-  return ajax({
-    url: RESOURCE,
-    method: 'POST',
-    params: qs.stringify(vals),
-  }).then((response) => {
-    if (response.error) {
-      throw response.error
-    }
-    return response.data
-  })
-}
 function getBarChartApi({ LibraryDetailId }) {
   //this will use ajax function in utils/api when real data is provided
   return axios
@@ -58,10 +44,10 @@ function* getBarChart({ payload: { LibraryDetailId } }) {
 function* getDoughnutChart({ payload: { LibraryDetailId } }) {
   try {
     const expectedValues = [
-      { key: 'frameRate', title: 'Frame Rate', secondTitle: null, data: {} },
-      { key: 'pacing', title: 'Pacing', secondTitle: null, data: {} },
-      { key: 'duration', title: 'Duration', secondTitle: null, data: {} },
-      { key: 'format', title: 'Format', secondTitle: null, data: {} },
+      { key: 'frameRate', title: 'Frame Rate' },
+      { key: 'pacing', title: 'Pacing' },
+      { key: 'duration', title: 'Duration' },
+      { key: 'format', title: 'Format' },
     ]
     const parameters = {
       dateRange: '3months',
@@ -79,9 +65,14 @@ function* getDoughnutChart({ payload: { LibraryDetailId } }) {
     )
 
     const createCustomBackground = (data) => {
-      return Object.values(data).map((item, idx) =>
-        idx === getMaximumValueIndexFromArray(data) ? '#2FD7C4' : '#ffffff'
-      )
+      return Object.values(data).map((item, idx) => {
+        if (Object.values(data).includes(100)) {
+          return '#2FD7C4'
+        }
+        return idx === getMaximumValueIndexFromArray(data)
+          ? '#2FD7C4'
+          : '#ffffff'
+      })
     }
     const val = expectedValues.map((payload, idx) => ({
       ...payload,
@@ -96,7 +87,6 @@ function* getDoughnutChart({ payload: { LibraryDetailId } }) {
           backgroundColor: createCustomBackground(
             payloads[idx].data[payload.key]
           ),
-          hoverBG: ['#f3f5f9', '#f3f5f9', '#f3f5f9', '#f3f5f9'],
         }
       ),
     }))

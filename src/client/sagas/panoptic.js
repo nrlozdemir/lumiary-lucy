@@ -11,7 +11,7 @@ import {
   getDateBucketFromRange,
 } from 'Utils'
 
-import { getReportDataApi } from 'Api'
+import { getReportDataApi } from 'Utils/api'
 
 import _ from 'lodash'
 
@@ -71,15 +71,13 @@ function* getFilteringSectionData({ data }) {
       property: [property],
     }
 
-    const payload = yield call(getMockPanopticDataApi)
-
-    const doughnutData = yield call(getPanopticDataApi, options)
+    const doughnutData = yield call(getReportDataApi, options)
 
     const dateBucket = getDateBucketFromRange(dateRange)
 
     const stackedChartData =
       dateBucket !== 'none'
-        ? yield call(getPanopticDataApi, {
+        ? yield call(getReportDataApi, {
             ...options,
             dateBucket,
           })
@@ -111,7 +109,6 @@ function* getFilteringSectionData({ data }) {
       throw 'Error fetching FilteringSection data'
     }
   } catch (err) {
-    console.log(err)
     yield put(
       // empty data
       actions.getFilteringSectionDataSuccess({

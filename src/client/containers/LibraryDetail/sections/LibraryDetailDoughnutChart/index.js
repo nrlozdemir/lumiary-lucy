@@ -103,7 +103,6 @@ class LibraryDetailDoughnutChart extends React.Component {
                       </div>
                       <div className={style.doughnutChartContainer}>
                         <DoughnutChart
-                          key={i}
                           width={150}
                           height={150}
                           displayDataLabels={false}
@@ -116,7 +115,8 @@ class LibraryDetailDoughnutChart extends React.Component {
                               ...Object.values(
                                 chart.doughnutChartValues.datasets[0].data
                               )
-                            )}{' '}
+                            )}
+                            %{' '}
                           </span>
                           of your library
                           <br /> is shot in
