@@ -4,7 +4,6 @@ import { Line, Chart } from 'react-chartjs-2'
 import { randomKey, chartCombineDataset } from 'Utils/index'
 import { fromJS } from 'immutable'
 import { percentageGraphOptions } from './defaultOptions'
-import { createDataset } from './percentageDummyData'
 import { withTheme } from 'ThemeContext/withTheme'
 
 function combineChartData(data, type = null) {

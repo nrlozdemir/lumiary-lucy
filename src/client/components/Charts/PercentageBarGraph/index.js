@@ -2,14 +2,7 @@ import React from 'react'
 import style from './style.scss'
 import classnames from 'classnames'
 import StackedPercentageChart from 'Components/Charts/StackedPercentageChart'
-
-const pdata = {"datasets": [{"data": [10, 12, 14, 16, 18, 20, 22, 24, 26,
-  28, 30, 32, 34, 36, 40, 48, 58, 70, 80,
-  88, 94, 98,
-  100,
-  96, 90, 80,
-  70, 60, 54, 48, 42, 36, 34, 32, 30, 28,
-  26, 24, 22, 20, 18]}]}
+import {createDataset} from './dummyData'
 
 const PercentageBarGraph = ({
   percentage,
@@ -21,7 +14,11 @@ const PercentageBarGraph = ({
   barWidth = 3,
   barSpaceWidth = 2
 }) => {
-  const active = Math.round((60 / 100) * percentage)
+	const percentageData = {
+		"datasets": [{
+			"data": createDataset(percentage)
+		}]
+	}
   return (
     <div className={id}>
       <div className={style.percentageContainer}>
@@ -40,8 +37,8 @@ const PercentageBarGraph = ({
             barSpaceWidth={barSpaceWidth}
             dataSet={
               {
-                labels: pdata.datasets[0].data,
-                datasets: pdata.datasets
+                labels: percentageData.datasets[0].data,
+                datasets: percentageData.datasets
               }
             }
             removeTooltip={true}
