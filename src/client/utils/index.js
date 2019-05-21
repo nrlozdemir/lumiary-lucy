@@ -14,14 +14,28 @@ function randomKey(char) {
  * Convert data to chart js structure
  * @constructor
  * @param {object} values - Values which comes from backend response.
- * @param {object} options - Option is the our request params.
- * @param {object} args - Args attribute for other options like if you have any prepared labels or datasets you can pass quickly using with args attribute
+ * @param {object} options - Option is the request params.
+ * @param {object} args - Args attribute for other options:
+ *
+ * ...args
+   {
+		hoverBG: array,
+		backgroundColor: array,
+    preparedDatasets: array,
+    preparedLabels: array,
+    singleDataset: bool,
+    borderWidth: object || int
+    }
+  *
  */
+
 const convertDataIntoDatasets = (values, options, ...args) => {
   let labels
   let datasetsFromValues
   let timeBucket
   let singleLevelJSON
+
+  const arg = args && !!args[0] && args[0]
 
   timeBucket =
     options.dateBucket === 'weeks'
@@ -33,6 +47,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
       : null
 
   const getValueinObject = values.data[options.property[0]]
+  delete getValueinObject.subtotal
 
   // If time bucket was  selected, it will change labels to time labels and it will set up datasets according to selected time bucket
   if (timeBucket) {
@@ -64,25 +79,62 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   }
 
   // You can pass prepared labels or datasets in args
-  labels = (args && args.preparedLabel) || labels
-  datasetsFromValues = (args && args.preparedDatasets) || datasetsFromValues
+  labels = (arg && arg.preparedLabel) || labels
+  datasetsFromValues = (arg && arg.preparedDatasets) || datasetsFromValues
 
   return Object.keys(getValueinObject).reduce(
-    (data, key, idx) => ({
-      labels: [...labels],
-      datasets: [
-        ...data.datasets,
-        {
-          label: key,
-          backgroundColor: chartColors[idx],
-          borderColor: chartColors[idx],
-          borderWidth: 1,
-          data: singleLevelJSON
-            ? datasetsFromValues
-            : datasetsFromValues[idx] || [0, 0, 0, 0],
-        },
-      ],
-    }),
+    (data, key, idx) => {
+      const { datasets } = data
+      const color = chartColors[idx]
+
+      return arg && arg.singleDataset
+        ? {
+            labels: [
+              ...data.labels,
+              `${key}${
+                !!options.property && options.property == 'duration'
+                  ? ' seconds'
+                  : options.property == 'frameRate'
+                  ? 'fps'
+                  : ''
+              }`,
+            ],
+            datasets: [
+              {
+                data: datasetsFromValues || [0, 0, 0, 0],
+                backgroundColor: arg.backgroundColor || [
+                  ...(datasets[0] ? datasets[0].backgroundColor : []),
+                  color,
+                ],
+                hoverBackgroundColor:
+                  arg && arg.hoverBG
+                    ? [
+                        ...(datasets[0]
+                          ? datasets[0].hoverBackgroundColor
+                          : []),
+                        color,
+                      ]
+                    : [],
+              },
+            ],
+          }
+        : {
+            labels: [...labels],
+            datasets: [
+              ...datasets,
+              {
+                label: key,
+                backgroundColor: color,
+                borderColor: color,
+                borderWidth: (arg && arg.borderWidth) || 1,
+                hoverBackgroundColor: arg && arg.hoverBG ? color : null,
+                data: singleLevelJSON
+                  ? datasetsFromValues
+                  : datasetsFromValues[idx] || [0, 0, 0, 0],
+              },
+            ],
+          }
+    },
     {
       labels: [],
       datasets: [],
@@ -259,6 +311,9 @@ const radarChartCalculate = (data) => {
   return colorsData
 }
 
+const getMaximumValueIndexFromArray = (data) =>
+  Object.values(data).indexOf(Math.max(...Object.values(data)))
+
 export {
   randomKey,
   searchTermInText,
@@ -269,4 +324,5 @@ export {
   capitalizeFirstLetter,
   radarChartCalculate,
   convertDataIntoDatasets,
+  getMaximumValueIndexFromArray,
 }
