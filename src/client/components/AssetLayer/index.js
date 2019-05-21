@@ -43,7 +43,6 @@ const AssetLayer = (props) => {
           className={barOpacityClassName}
           style={{ background: themes.moduleBackground }}
         >
-          {children && children[1]}
         </div>
         <div className={barClassName}>
           <div className={styles.barTitle}>
@@ -51,6 +50,7 @@ const AssetLayer = (props) => {
             {title}
           </div>
           {centerText && <div className={styles.centerText}>{centerText}</div>}
+          {children && children[1]}
           {rightValue && (
             <div className={styles.barChart}>
               <div className={styles.barChartInfo}>
