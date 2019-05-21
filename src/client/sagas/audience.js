@@ -4,7 +4,9 @@ import { actions, types } from 'Reducers/audience'
 import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 
-import { radarChartCalculate } from 'Utils'
+import { compareSharesData, radarChartCalculate } from 'Utils'
+
+import { getReportDataApi } from 'Api'
 
 import _ from 'lodash'
 
@@ -91,11 +93,11 @@ function* getAudienceColorTemperatureData() {
         item.y = _.random(-50, 50)
       })
       return data
-		})
+    })
 
-		shuffleData = shuffleData.map((data) => {
+    shuffleData = shuffleData.map((data) => {
       data.data.map((item, i) => {
-        item.color = (i === 0) ? "#5292e5" : "#2fd7c4"
+        item.color = i === 0 ? '#5292e5' : '#2fd7c4'
       })
       return data
     })
@@ -117,18 +119,34 @@ function* getAudienceChangeOverTimeData() {
   }
 }
 
-function* getAudienceDominantColorData() {
+function* getAudienceDominantColorData({
+  data: { dateRange, metric, platform },
+}) {
   try {
-    const payload = yield call(getAudienceDataApi)
-    let shuffleData = payload.chartData
-    shuffleData[0].datas.labels.forEach((item, index) => {
-      shuffleData[0].datas.labels[index].count = _.random(10, 90)
-    })
-    shuffleData[1].datas.labels.forEach((item, index) => {
-      shuffleData[1].datas.labels[index].count = _.random(10, 90)
-    })
-    shuffleData = radarChartCalculate(shuffleData)
-    yield put(actions.getAudienceDominantColorDataSuccess(shuffleData))
+    const parameters = {
+      dateRange,
+      metric,
+      platform,
+      property: ['color'],
+      dateBucket: 'none',
+    }
+
+    const payload = yield all([
+      call(getReportDataApi, {
+        ...parameters,
+        brand: 'Bleacher Report',
+      }),
+      call(getReportDataApi, {
+        ...parameters,
+        brand: 'Barstool Sports',
+      }),
+    ])
+
+    yield put(
+      actions.getAudienceDominantColorDataSuccess(
+        radarChartCalculate(compareSharesData(payload))
+      )
+    )
   } catch (err) {
     yield put(actions.getAudienceDominantColorDataError(err))
   }

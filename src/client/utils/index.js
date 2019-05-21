@@ -262,7 +262,7 @@ const strToColor = (str) => {
 
   const color = {
     red: '#cc2226',
-    'red-orange': '#dd501d',
+    'orange-red': '#dd501d',
     orange: '#eb7919',
     'yellow-orange': '#f8b90b',
     yellow: '#fff20d',
@@ -325,6 +325,28 @@ const radarChartCalculate = (data) => {
   return colorsData
 }
 
+const compareSharesData = (data) => {
+  return data.map((item) => {
+    return {
+      type: capitalizeFirstLetter(item.platform),
+      datas: {
+        labels: Object.keys(item.data.color).map((color) => ({
+          name: color
+            .split('-')
+            .map((c) => capitalizeFirstLetter(c))
+            .join('-'),
+          count: item.data.color[color],
+        })),
+        datasets: [
+          {
+            label: capitalizeFirstLetter(item.platform),
+          },
+        ],
+      },
+    }
+  })
+}
+
 const isDataSetEmpty = (data) => {
   if (!!data && !!data.datasets && !!data.datasets.length) {
     return data.datasets.every((dataset) =>
@@ -377,6 +399,7 @@ export {
   radarChartCalculate,
   isDataSetEmpty,
   convertDataIntoDatasets,
+  compareSharesData,
   getDateBucketFromRange,
   getBrandAndCompetitors,
 }
