@@ -42,8 +42,6 @@ class PanopticFilteringSection extends Component {
       },
     } = this.props
 
-    console.log('component using stack data ===', stackedChartData)
-
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
 
     const hasNoData =

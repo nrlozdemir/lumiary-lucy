@@ -87,6 +87,8 @@ const convertDataIntoDatasets = (values, options, ...args) => {
       const color = chartColors[idx]
 
       return arg && arg.singleDataset
+        // only one dataset is required sometimes 
+        // ie. doughnut chart in panoptic/engagement
         ? {
             labels: [
               ...data.labels,
@@ -312,11 +314,24 @@ const isDataSetEmpty = (data) => {
   if (!!data && !!data.datasets && !!data.datasets.length) {
     return data.datasets.every((dataset) =>
       !!dataset.data && !!dataset.data.length
-        ? dataset.data.every((val) => val === 0)
+        ? dataset.data.every((val) => val === 0 || val === undefined)
         : true
     )
   } else {
     return true
+  }
+}
+
+const getDateBucketFromRange = (dateRange) => {
+  switch (dateRange) {
+    case 'week':
+      return 'dayOfWeek'
+    case 'month':
+      return 'weeks'
+    case '3months':
+      return 'months'
+    default:
+      return 'none'
   }
 }
 
@@ -331,4 +346,5 @@ export {
   radarChartCalculate,
   isDataSetEmpty,
   convertDataIntoDatasets,
+  getDateBucketFromRange,
 }

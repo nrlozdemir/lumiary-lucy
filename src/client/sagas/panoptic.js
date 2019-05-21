@@ -4,7 +4,11 @@ import axios from 'axios'
 import { actions, types } from 'Reducers/panoptic'
 import panopticMockData from 'Api/mocks/panopticMock.json'
 
-import { radarChartCalculate, convertDataIntoDatasets } from 'Utils'
+import {
+  radarChartCalculate,
+  convertDataIntoDatasets,
+  getDateBucketFromRange,
+} from 'Utils'
 
 import { ajax } from 'Utils/api'
 
@@ -85,31 +89,35 @@ function* getFilteringSectionData({ data }) {
 
     const doughnutData = yield call(getPanopticDataApi, options)
 
-    const stackedChartData = yield call(getPanopticDataApi, {
-      ...options,
-      dateBucket: 'week',
-    })
+    const dateBucket = getDateBucketFromRange(dateRange)
+
+    const stackedChartData =
+      dateBucket !== 'none'
+        ? yield call(getPanopticDataApi, {
+            ...options,
+            dateBucket,
+          })
+        : { data: {} }
 
     if (
       !!doughnutData.data &&
       !!doughnutData.data[property] &&
       stackedChartData.data
     ) {
-      const test = convertDataIntoDatasets(
-        stackedChartData,
-        { ...options, dateBucket: 'week' },
-        { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
-      )
-    
-    console.log('response', stackedChartData)
-    console.log('converted', test)
-
       yield put(
         actions.getFilteringSectionDataSuccess({
           doughnutData: convertDataIntoDatasets(doughnutData, options, {
             singleDataset: true,
           }),
-          stackedChartData: payload.verticalStackedChartData.stackedChartData,
+          stackedChartData:
+            (!_.isEmpty(stackedChartData.data) &&
+              convertDataIntoDatasets(
+                stackedChartData,
+                { ...options, dateBucket },
+                { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+              )) ||
+            {},
+
           property,
         })
       )
