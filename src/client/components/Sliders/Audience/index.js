@@ -2,8 +2,7 @@ import React from 'react'
 import classnames from 'classnames';
 import style from './style.scss'
 import AssetLayer from 'Components/AssetLayer'
-//import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
-import StackedPercentageChart from 'Components/Charts/StackedPercentageChart'
+import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
 import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
 import Swiper from 'react-id-swiper'
@@ -130,18 +129,16 @@ class AudienceSlider extends React.Component {
                           className={style.percentageWrapper}
                           style={{ right: '80px' }}
                         >
-                        <StackedPercentageChart
-                          chartType='percentageGraph'
-                          width={282}
-                          height={44}
-                          cvScore={72}
-                          removeTooltip={true}
-                          removePointRadius={true}
-                          xAxesFlatten={false}
-                          flattenFirstSpace={0}
-                          flattenLastSpace={0}
-                          options={{color: 'grey'}}
-                        />
+												<PercentageBarGraph
+													key={Math.random()}
+													percentage={item.cvScore}
+													color="green"
+													disableLabels
+													width={80}
+													height={20}
+													barWidth={2}
+													barSpaceWidth={1}
+												/>
                         </div>
                       </AssetLayer>
                     </div>
