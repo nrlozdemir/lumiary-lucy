@@ -16,10 +16,7 @@ import RouterLoading from 'Components/RouterLoading'
 import BarChartModule from 'Components/Modules/BarChartModule'
 
 import { chartCombineDataset } from 'Utils'
-import {
-  CompetitorTopVideos_DatasetOptions,
-  TopPerformingProperties_DatasetOptions,
-} from 'Containers/Marketview/sections/detail/options'
+import { TopPerformingProperties_DatasetOptions } from 'Containers/Marketview/sections/detail/options'
 
 const chartTickOptions = {
   stepSize: 250000,
@@ -68,11 +65,6 @@ export class Platform extends React.Component {
       },
     } = this.props
 
-    const competitorTopVideosCombineData = chartCombineDataset(
-      competitorTopVideos,
-      CompetitorTopVideos_DatasetOptions
-    )
-
     const topPerformingPropertiesDataCombineData = chartCombineDataset(
       {
         labels: ['Facebook', 'Instagram', 'Twitter', 'Youtube'],
@@ -106,7 +98,7 @@ export class Platform extends React.Component {
 
         <TopVideosCardModule
           moduleKey="MarketView/Platform/TopVideosCardModule"
-          chartData={competitorTopVideosCombineData}
+          chartData={competitorTopVideos}
           height={150}
           title="Top Videos Over Time By Platform"
           action={this.getCompetitorTopVideos}

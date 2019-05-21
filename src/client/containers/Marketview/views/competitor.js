@@ -16,10 +16,7 @@ import BarChartModule from 'Components/Modules/BarChartModule'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
 
 import { chartCombineDataset } from 'Utils'
-import {
-  CompetitorTopVideos_DatasetOptions,
-  TopPerformingProperties_DatasetOptions,
-} from 'Containers/Marketview/sections/detail/options'
+import { TopPerformingProperties_DatasetOptions } from 'Containers/Marketview/sections/detail/options'
 
 import style from '../style.scss'
 
@@ -70,11 +67,6 @@ export class Competitor extends React.Component {
       },
     } = this.props
 
-    const competitorTopVideosCombineData = chartCombineDataset(
-      competitorTopVideos,
-      CompetitorTopVideos_DatasetOptions
-    )
-
     const topPerformingPropertiesDataCombineData = chartCombineDataset(
       {
         labels: [
@@ -114,7 +106,7 @@ export class Competitor extends React.Component {
             ]}
           />
           <TopVideosCardModule
-            chartData={competitorTopVideosCombineData}
+            chartData={competitorTopVideos}
             height={150}
             moduleKey="MarketView/TopVideosCardModule"
             title="Top Videos Over Time By Competitor"

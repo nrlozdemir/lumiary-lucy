@@ -1,21 +1,3 @@
-export const CompetitorTopVideos_DatasetOptions = [
-  {
-    label: 'Facebook',
-  },
-  {
-    label: 'Instagram',
-  },
-  {
-    label: 'Twitter',
-  },
-  {
-    label: 'Youtube',
-  },
-  {
-    label: 'Pinterest',
-  },
-]
-
 export const TopPerformingProperties_DatasetOptions = [
   {
     label: 'Fast',
