@@ -22,18 +22,18 @@
     &:before {
       content: '0';
       float: left;
-			margin-right: 8px;
-			margin-bottom: -4px;
+      margin-right: 8px;
+      margin-bottom: -4px;
     }
 
     &:after {
       content: '100';
       float: right;
-			margin-left: 8px;
-			margin-bottom: -4px;
-		}
+      margin-left: 8px;
+      margin-bottom: -4px;
+    }
 
-		&.noLabel {
+    &.noLabel {
       &:before,
       &:after {
         content: '';
@@ -55,15 +55,15 @@
     }
   }
 
-	.cvScoreLabel {
-		font-family: $font-family-ClanOTBold;
-		font-size: 12px;
-		white-space: nowrap;
-		transition: 500ms;
-		width: 100%;
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		margin-top: 16px;
-	}
+  .cvScoreLabel {
+    font-family: $font-family-ClanOTBold;
+    font-size: 12px;
+    white-space: nowrap;
+    transition: 500ms;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+  }
 }

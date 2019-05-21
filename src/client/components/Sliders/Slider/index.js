@@ -88,18 +88,18 @@ class MarketViewSlider extends React.Component {
           item.classList.remove('active')
         }
 
-				bullets[this.refSlider.activeIndex].classList.add('active')
+        bullets[this.refSlider.activeIndex].classList.add('active')
 
-				// Force rendering needed to update disabled state of prev and next buttons
-				this.forceUpdate();
+        // Force rendering needed to update disabled state of prev and next buttons
+        this.forceUpdate();
       },
-		},
+    },
     renderNextButton: this.renderNextButton,
     renderPrevButton: this.renderPrevButton
-	}
+  }
 
   render() {
-		const { props } = this
+    const { props } = this
 
     return (
       <div className={style.section}>
@@ -124,16 +124,16 @@ class MarketViewSlider extends React.Component {
                     className={style.percentageWrapper}
                     style={{ right: '80px' }}
                   >
-										<PercentageBarGraph
-											key={Math.random()}
-											percentage={item.cvScore}
-											width={80}
-											height={20}
-											barWidth={2}
-											barSpaceWidth={1}
-											disableLabels
-											color='green'
-										/>
+                    <PercentageBarGraph
+                      key={Math.random()}
+                      percentage={item.cvScore}
+                      width={80}
+                      height={20}
+                      barWidth={2}
+                      barSpaceWidth={1}
+                      disableLabels
+                      color='green'
+                    />
                   </div>
                 </AssetLayer>
               </div>

@@ -4,12 +4,12 @@ import classnames from 'classnames'
 import StackedPercentageChart from 'Components/Charts/StackedPercentageChart'
 
 const pdata = {"datasets": [{"data": [10, 12, 14, 16, 18, 20, 22, 24, 26,
-	28, 30, 32, 34, 36, 40, 48, 58, 70, 80,
-	88, 94, 98,
-	100,
-	96, 90, 80,
-	70, 60, 54, 48, 42, 36, 34, 32, 30, 28,
-	26, 24, 22, 20, 18]}]}
+  28, 30, 32, 34, 36, 40, 48, 58, 70, 80,
+  88, 94, 98,
+  100,
+  96, 90, 80,
+  70, 60, 54, 48, 42, 36, 34, 32, 30, 28,
+  26, 24, 22, 20, 18]}]}
 
 const PercentageBarGraph = ({
   percentage,
@@ -17,9 +17,9 @@ const PercentageBarGraph = ({
   color,
   id,
   width = 238,
-	height = 44,
-	barWidth = 3,
-	barSpaceWidth = 2
+  height = 44,
+  barWidth = 3,
+  barSpaceWidth = 2
 }) => {
   const active = Math.round((60 / 100) * percentage)
   return (
@@ -35,9 +35,9 @@ const PercentageBarGraph = ({
             key={Math.random()}
             width={width}
             height={height}
-						chartType='percentageGraph'
-						barWidth={barWidth}
-						barSpaceWidth={barSpaceWidth}
+            chartType='percentageGraph'
+            barWidth={barWidth}
+            barSpaceWidth={barSpaceWidth}
             dataSet={
               {
                 labels: pdata.datasets[0].data,
@@ -51,8 +51,8 @@ const PercentageBarGraph = ({
             flattenLastSpace={0}
             options={{
               responsive: false,
-							color: color,
-							tickColor: 'black',
+              color: color,
+              tickColor: 'black',
               layout: {
                 padding: {
                   bottom: -10
@@ -97,7 +97,7 @@ const PercentageBarGraph = ({
             }}
           />
         </div>
-				{!disableLabels && <div className={style.cvScoreLabel}>CV Score</div>}
+        {!disableLabels && <div className={style.cvScoreLabel}>CV Score</div>}
       </div>
     </div>
   )

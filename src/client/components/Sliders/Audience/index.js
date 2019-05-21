@@ -129,16 +129,16 @@ class AudienceSlider extends React.Component {
                           className={style.percentageWrapper}
                           style={{ right: '80px' }}
                         >
-												<PercentageBarGraph
-													key={Math.random()}
-													percentage={item.cvScore}
-													color="green"
-													disableLabels
-													width={80}
-													height={20}
-													barWidth={2}
-													barSpaceWidth={1}
-												/>
+                        <PercentageBarGraph
+                          key={Math.random()}
+                          percentage={item.cvScore}
+                          color="green"
+                          disableLabels
+                          width={80}
+                          height={20}
+                          barWidth={2}
+                          barSpaceWidth={1}
+                        />
                         </div>
                       </AssetLayer>
                     </div>

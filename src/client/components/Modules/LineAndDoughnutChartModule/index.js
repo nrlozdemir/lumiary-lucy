@@ -200,11 +200,11 @@ class LineAndDoughnutChartModule extends React.Component {
                           {chart.key}
                         </span>
                       </div>
-											<PercentageBarGraph
-												key={Math.random()}
-												percentage={chart.value}
-												color={chart.color}
-											/>
+                      <PercentageBarGraph
+                        key={Math.random()}
+                        percentage={chart.value}
+                        color={chart.color}
+                      />
                     </div>
                   ))}
                 </div>

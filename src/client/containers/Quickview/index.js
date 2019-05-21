@@ -150,16 +150,16 @@ export class Main extends React.Component {
                                     className={style.percentageWrapper}
                                     style={{ right: '80px' }}
                                   >
-																		<PercentageBarGraph
-																			key={Math.random()}
-																			percentage={cvScore}
-																			width={80}
-																			height={20}
-																			barWidth={2}
-																			barSpaceWidth={1}
-																			disableLabels
-																			color={i === 0 ? 'green' : 'blue'}
-																		/>
+                                    <PercentageBarGraph
+                                      key={Math.random()}
+                                      percentage={cvScore}
+                                      width={80}
+                                      height={20}
+                                      barWidth={2}
+                                      barSpaceWidth={1}
+                                      disableLabels
+                                      color={i === 0 ? 'green' : 'blue'}
+                                    />
                                   </div>
                                 </AssetLayer>
                               </div>
