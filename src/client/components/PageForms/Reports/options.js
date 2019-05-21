@@ -12,7 +12,7 @@ export const selectOptionsSocial = [
   { value: 'instagram', label: 'Instagram' },
   { value: 'twitter', label: 'Twitter' },
   { value: 'youTube', label: 'YouTube' },
-  { value: 'pinterest', label: 'Pinterest' },
+  // { value: 'pinterest', label: 'Pinterest' },
 ]
 
 export const selectOptionsEngagement = [

@@ -59,7 +59,7 @@ export const initialState = fromJS({
       { value: 'twitter', label: 'Twitter' },
       { value: 'instagram', label: 'Instagram' },
       { value: 'youtube', label: 'YouTube' },
-      { value: 'pinterest', label: 'Pinterest' },
+      // { value: 'pinterest', label: 'Pinterest' },
     ],
     aspectRatio: [
       { value: '16:9', label: '16:9' },

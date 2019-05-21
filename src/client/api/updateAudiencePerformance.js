@@ -13,10 +13,6 @@ export default function (min, max) {
       visual: 'twitter',
     },
     {
-      toolTip: Math.round(Math.random() * 5000),
-      visual: 'pinterest',
-    },
-    {
       toolTip: Math.round(Math.random() * 15000),
       visual: 'instagram',
     },

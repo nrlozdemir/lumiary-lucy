@@ -17,7 +17,7 @@ function socialIconSelector(key) {
     twitter: 'icon-Twitter-Bubble',
     instagram: 'icon-Instagram-Bubble',
     youtube: 'icon-YouTube-Bubble',
-    pinterest: 'icon-Pinterest-Bubble',
+    // pinterest: 'icon-Pinterest-Bubble',
   }
 
   return socialIcons[keyToLowerCase]
