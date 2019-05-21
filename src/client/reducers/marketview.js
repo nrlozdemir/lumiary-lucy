@@ -150,9 +150,9 @@ export const actions = {
     type: types.GET_MARKETVIEW_FORMATCHART_FAILURE,
     error,
   }),
-  getTotalViewsRequest: (payload, moduleKey) => ({
+  getTotalViewsRequest: (data, moduleKey) => ({
     type: types.GET_MARKETVIEW_TOTALVIEWS_REQUEST,
-    payload,
+    data,
     moduleKey,
   }),
   getTotalViewsSuccess: (payload) => ({

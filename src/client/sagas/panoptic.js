@@ -1,32 +1,18 @@
-import qs from 'qs'
 import { call, put, takeLatest, all } from 'redux-saga/effects'
 import axios from 'axios'
 import { actions, types } from 'Reducers/panoptic'
+
 import panopticMockData from 'Api/mocks/panopticMock.json'
 
 import { radarChartCalculate, convertDataIntoDatasets } from 'Utils'
+import { compareSharesData } from 'Utils/api'
 
-import { ajax } from 'Utils/api'
+import { getReportDataApi } from 'Api'
 
 import _ from 'lodash'
 
-const RESOURCE = '/report'
-
 function getMockPanopticDataApi() {
   return axios.get('/').then((res) => panopticMockData)
-}
-
-function getPanopticDataApi(vals) {
-  return ajax({
-    url: RESOURCE,
-    method: 'POST',
-    params: qs.stringify(vals),
-  }).then((response) => {
-    if (response.error) {
-      throw response.error
-    }
-    return response.data
-  })
 }
 
 function* getVideoReleasesData() {
@@ -39,7 +25,7 @@ function* getVideoReleasesData() {
 }
 
 function* getColorTemperatureData() {
-	try {
+  try {
     const payload = yield call(getMockPanopticDataApi)
     let shuffleData = payload.colorTempData
     shuffleData = shuffleData.map((data) => {
@@ -48,15 +34,15 @@ function* getColorTemperatureData() {
         item.y = _.random(-50, 50)
       })
       return data
-		})
+    })
 
-		const colors = [
-			"rgba(82, 146, 229, 0.8)",
-			"#acb0be",
-			"rgba(133, 103, 240, 0.8)",
-			"rgba(81, 173, 192, 0.8)",
-		]
-		shuffleData = shuffleData.map((data) => {
+    const colors = [
+      'rgba(82, 146, 229, 0.8)',
+      '#acb0be',
+      'rgba(133, 103, 240, 0.8)',
+      'rgba(81, 173, 192, 0.8)',
+    ]
+    shuffleData = shuffleData.map((data) => {
       data.data.map((item, i) => {
         item.color = colors[i]
       })
@@ -92,8 +78,8 @@ function* getPacingCardData({ data }) {
       display: 'percentage',
     }
 
-    const stadiumData = yield call(getPanopticDataApi, options)
-    const horizontalStackedBarData = yield call(getPanopticDataApi, {
+    const stadiumData = yield call(getReportDataApi, options)
+    const horizontalStackedBarData = yield call(getReportDataApi, {
       ...options,
       proportionOf: 'format',
     })
@@ -127,18 +113,31 @@ function* getPacingCardData({ data }) {
   }
 }
 
-function* getCompareSharesData() {
+function* getCompareSharesData({ data: { dateRange } }) {
   try {
-    const payload = yield call(getMockPanopticDataApi)
-    let shuffleData = payload.compareSharesData
-    shuffleData[0].datas.labels.forEach((item, index) => {
-      shuffleData[0].datas.labels[index].count = _.random(10, 90)
-    })
-    shuffleData[1].datas.labels.forEach((item, index) => {
-      shuffleData[1].datas.labels[index].count = _.random(10, 90)
-    })
-    shuffleData = radarChartCalculate(shuffleData)
-    yield put(actions.getCompareSharesDataSuccess(shuffleData))
+    const parameters = {
+      dateRange,
+      metric: 'shares',
+      property: ['color'],
+      dateBucket: 'none',
+    }
+
+    const payload = yield all([
+      call(getReportDataApi, {
+        ...parameters,
+        platform: 'facebook',
+      }),
+      call(getReportDataApi, {
+        ...parameters,
+        platform: 'youtube',
+      }),
+    ])
+
+    yield put(
+      actions.getCompareSharesDataSuccess(
+        radarChartCalculate(compareSharesData(payload))
+      )
+    )
   } catch (err) {
     yield put(actions.getCompareSharesDataError(err))
   }
