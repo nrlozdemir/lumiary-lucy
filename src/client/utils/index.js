@@ -1,4 +1,4 @@
-import { chartColors, weeks, dayOfWeek, month } from 'Utils/globals'
+import { chartColors } from 'Utils/globals'
 function randomKey(char) {
   var text = ''
   var possible =
@@ -10,6 +10,27 @@ function randomKey(char) {
   return text
 }
 
+/*
+  Returns an array of time labels from the api response
+  * Expected labels:
+     week - ['Week 1', 'Week 2', 'Week 3', 'Week 4']
+     month - array of 3 months from the current
+     dayOfWeek - array of 7 days from the current
+ */
+const getTimeBucket = (value) => {
+  const keys = Object.keys(value)
+  if (!!keys.length) {
+    // sometimes there is a null key
+    return Object.keys(value[keys[0]])
+      .reduce(
+        (all, label) => [...all, ...(label !== 'null' ? [label] : [])],
+        []
+      )
+      .reverse()
+  }
+  return []
+}
+
 /**
  * Convert data to chart js structure
  * @constructor
@@ -19,8 +40,7 @@ function randomKey(char) {
  *
  * ...args
    {
-		hoverBG: array,
-		backgroundColor: array,
+    hoverBG: array
     preparedDatasets: array,
     preparedLabels: array,
     singleDataset: bool,
@@ -32,24 +52,20 @@ function randomKey(char) {
 const convertDataIntoDatasets = (values, options, ...args) => {
   let labels
   let datasetsFromValues
-  let timeBucket
   let singleLevelJSON
 
   const arg = args && !!args[0] && args[0]
 
-  timeBucket =
-    options.dateBucket === 'weeks'
-      ? weeks
-      : options.dateBucket === 'dayOfWeek'
-      ? dayOfWeek
-      : options.dateBucket === 'month'
-      ? month
-      : null
-
   const getValueinObject = values.data[options.property[0]]
   delete getValueinObject.subtotal
 
-  // If time bucket was  selected, it will change labels to time labels and it will set up datasets according to selected time bucket
+  const timeBucket =
+    options.dateBucket !== 'none' ? getTimeBucket(getValueinObject) : null
+
+  delete getValueinObject.subtotal
+
+  // If time bucket was  selected, it will change labels to time labels
+  // defined within a data object from the api response
   if (timeBucket) {
     datasetsFromValues = Object.keys(getValueinObject).map((item) =>
       timeBucket.map((date) => getValueinObject[item][date])
@@ -248,7 +264,7 @@ const strToColor = (str) => {
 
   const color = {
     red: '#cc2226',
-    'red-orange': '#dd501d',
+    'orange-red': '#dd501d',
     orange: '#eb7919',
     'yellow-orange': '#f8b90b',
     yellow: '#fff20d',
@@ -313,6 +329,52 @@ const radarChartCalculate = (data) => {
 
 const getMaximumValueIndexFromArray = (data) =>
   Object.values(data).indexOf(Math.max(...Object.values(data)))
+const compareSharesData = (data) => {
+  return data.map((item) => {
+    return {
+      type: capitalizeFirstLetter(item.platform),
+      datas: {
+        labels: Object.keys(item.data.color).map((color) => ({
+          name: color
+            .split('-')
+            .map((c) => capitalizeFirstLetter(c))
+            .join('-'),
+          count: item.data.color[color],
+        })),
+        datasets: [
+          {
+            label: capitalizeFirstLetter(item.platform),
+          },
+        ],
+      },
+    }
+  })
+}
+
+const isDataSetEmpty = (data) => {
+  if (!!data && !!data.datasets && !!data.datasets.length) {
+    return data.datasets.every((dataset) =>
+      !!dataset.data && !!dataset.data.length
+        ? dataset.data.every((val) => val === 0 || val === undefined)
+        : true
+    )
+  } else {
+    return true
+  }
+}
+
+const getDateBucketFromRange = (dateRange) => {
+  switch (dateRange) {
+    case 'week':
+      return 'dayOfWeek'
+    case 'month':
+      return 'week'
+    case '3months':
+      return 'month'
+    default:
+      return 'none'
+  }
+}
 
 export {
   randomKey,
@@ -323,6 +385,9 @@ export {
   shadeHexColor,
   capitalizeFirstLetter,
   radarChartCalculate,
+  isDataSetEmpty,
   convertDataIntoDatasets,
   getMaximumValueIndexFromArray,
+  compareSharesData,
+  getDateBucketFromRange,
 }

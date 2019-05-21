@@ -127,7 +127,16 @@ const DoughnutChart = (props) => {
                 labels: data.labels,
                 datasets: [
                   {
-                    data: data && data.datasets ? data.datasets[0].data : null,
+                    data:
+                      data && data.datasets
+                        ? data.datasets[0].data.reduce(
+                            (acc, curr) => [
+                              ...acc,
+                              ...(curr !== 0 ? [curr] : []),
+                            ],
+                            []
+                          )
+                        : null,
                     backgroundColor:
                       data && data.datasets
                         ? data.datasets[0].backgroundColor
