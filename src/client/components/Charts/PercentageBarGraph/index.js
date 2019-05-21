@@ -49,7 +49,6 @@ const PercentageBarGraph = ({
             options={{
               responsive: false,
               color: color,
-              tickColor: 'black',
               layout: {
                 padding: {
                   bottom: -10

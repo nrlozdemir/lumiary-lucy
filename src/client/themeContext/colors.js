@@ -131,7 +131,10 @@ const dark = {
   shotByShotTabHeader: '#545b79',
   shotByShotTabBody: '#373f5b',
   shotByShotSliderPointer: '#ffffff',
-  // shot by shot slider values
+	// shot by shot slider values
+
+	// percentage bar grap values
+	topValueColor: '#ffffff',
 }
 
 const light = {
@@ -269,6 +272,9 @@ const light = {
   shotByShotTabBody: '#f3f6f9',
   shotByShotSliderPointer: '#2fd7c4',
   // shot by shot slider values
+
+	// percentage bar grap values
+	topValueColor: '#000000',
 }
 
 const themes = {

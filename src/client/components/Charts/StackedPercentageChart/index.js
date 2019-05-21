@@ -22,7 +22,7 @@ class StackedPercentageChart extends React.Component {
 
   render() {
     const themes = this.props.themeContext.colors
-    const valueOrDefault = helpers.valueOrDefault
+		const valueOrDefault = helpers.valueOrDefault
 
     Chart.helpers.extend(Chart.elements.Line.prototype, {
       draw: function () {
@@ -139,7 +139,7 @@ class StackedPercentageChart extends React.Component {
             gradient.addColorStop(g, colors[config.options.color][cs])
             cs++
           }
-          const tickColor = (config.options.tickColor === 'black') ? '#505050' : '#fff'
+          const tickColor = (config.options.tickColor) ? config.options.tickColor : themes.topValueColor
 
           ctx.restore()
 
