@@ -3,7 +3,7 @@ import classnames from 'classnames';
 import style from './style.scss'
 import AssetLayer from 'Components/AssetLayer'
 //import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
-import LineChart from 'Components/Charts/LineChart'
+import StackedPercentageChart from 'Components/Charts/StackedPercentageChart'
 import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
 import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
 import Swiper from 'react-id-swiper'
@@ -130,7 +130,7 @@ class AudienceSlider extends React.Component {
                           className={style.percentageWrapper}
                           style={{ right: '80px' }}
                         >
-                        <LineChart
+                        <StackedPercentageChart
                           chartType='percentageGraph'
                           width={282}
                           height={44}
