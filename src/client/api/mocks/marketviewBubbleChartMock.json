@@ -15,13 +15,8 @@
     "color": "#13862b"
   },
   {
-    "name": "Pinterest",
-    "value": 480000,
-    "color": "#923683"
-  },
-  {
     "name": "Youtube",
-    "value": 296000,
+    "value": 525000,
     "color": "#3178b0"
   }
 ]
