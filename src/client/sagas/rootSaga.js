@@ -8,9 +8,11 @@ import marketview from './marketview'
 import reports from './reports'
 import generatedReport from './generatedReport'
 import audience from './audience'
+import auth from './auth'
 
 export default function* rootSaga() {
   yield all([
+    ...auth,
     ...library,
     ...libraryDetail,
     ...quickview,
