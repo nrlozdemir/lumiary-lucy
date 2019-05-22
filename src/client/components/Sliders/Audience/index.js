@@ -20,7 +20,10 @@ class AudienceSlider extends React.Component {
   componentDidMount() {
     this.setState({
       refThumb: this.refThumb,
-    })
+		}, () => {
+			const findSlide = Math.floor(parseInt(this.props.items.length) / 2)
+			this.refThumb && this.refThumb.slideTo(findSlide, 1)
+		})
   }
 
   renderNextButton = () => {
@@ -76,7 +79,7 @@ class AudienceSlider extends React.Component {
     }
 
     const thumbSettings = {
-      slidesPerView: 9,
+			slidesPerView: 9,
       centeredSlides: true,
       watchSlidesVisibility: true,
       watchSlidesProgress: true,
@@ -114,7 +117,7 @@ class AudienceSlider extends React.Component {
                   {...settings}
                 >
                   {items.map((item, i) => (
-                    <div className='item' key={i}>
+                    <div className="item" key={i}>
                       <AssetLayer
                         containerNoBorder
                         leftSocialIcon={item.socialMedia}
