@@ -34,6 +34,10 @@ const chartTickOptions = {
 
 /* eslint-disable react/prefer-stateless-function */
 export class Platform extends React.Component {
+  componentDidMount() {
+    this.props.getCompetitorVideosRequest()
+  }
+
   changeSelectedVideo = (video) => {
     this.props.setSelectedVideo(video)
   }

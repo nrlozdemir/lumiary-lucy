@@ -36,6 +36,10 @@ const chartTickOptions = {
 
 /* eslint-disable react/prefer-stateless-function */
 export class Competitor extends React.Component {
+  componentDidMount() {
+    this.props.getCompetitorVideosRequest()
+  }
+
   getSimilarProperties = (data) => {
     this.props.getSimilarPropertiesRequest(data)
   }
