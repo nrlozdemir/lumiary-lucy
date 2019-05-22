@@ -1,67 +1,28 @@
 [
   {
-    "title": "Duration",
-    "description": "0-15s",
-    "data": [
+    "labels": ["0-15s", "16-30s", "31-60s", "60+s"],
+    "datasets": [
       {
-        "leftTitle": "0-15s",
-        "value": "85"
-      },
-      {
-        "leftTitle": "16-30s",
-        "value": "6"
-      },
-      {
-        "leftTitle": "31-60s",
-        "value": "5"
-      },
-      {
-        "leftTitle": "60+s",
-        "value": "4"
+        "label": "Duration",
+        "data": [85, 6, 5, 4]
       }
     ]
   },
   {
-    "title": "Pacing",
-    "description": "Fast",
-    "data": [
+    "labels": ["Fast", "Medium", "Slow", "Slowest"],
+    "datasets": [
       {
-        "leftTitle": "Fast",
-        "value": "65"
-      },
-      {
-        "leftTitle": "Medium",
-        "value": "15"
-      },
-      {
-        "leftTitle": "Slow",
-        "value": "12"
-      },
-      {
-        "leftTitle": "Slowest",
-        "value": "8"
+        "label": "Pacing",
+        "data": [65, 15, 12, 8]
       }
     ]
   },
   {
-    "title": "Dominant Color",
-    "description": "Blue",
-    "data": [
+    "labels": ["Blue", "Yellow", "Green", "Red"],
+    "datasets": [
       {
-        "leftTitle": "Blue",
-        "value": "42"
-      },
-      {
-        "leftTitle": "Yellow",
-        "value": "28"
-      },
-      {
-        "leftTitle": "Green",
-        "value": "25"
-      },
-      {
-        "leftTitle": "Red",
-        "value": "5"
+        "label": "Dominant Color",
+        "data": [42, 28, 25, 5]
       }
     ]
   }

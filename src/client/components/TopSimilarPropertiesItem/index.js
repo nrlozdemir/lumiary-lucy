@@ -3,11 +3,15 @@ import cx from 'classnames'
 import ProgressBar from 'Components/ProgressBar'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import { capitalizeFirstLetter } from 'Utils'
 
 const sectionTitleClass = cx('font-primary', style.sectionTitle)
 const sectionBadgeStyle = cx('font-secondary-second', style.sectionBadge)
 
 const TopSimilarPropertiesItem = ({ sectionItem, i }) => {
+  const dataset = sectionItem.datasets[0]
+  const topItemIndex = dataset.data.indexOf(Math.max(...dataset.data))
+
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -20,7 +24,7 @@ const TopSimilarPropertiesItem = ({ sectionItem, i }) => {
               color: colors.textColor,
             }}
           >
-            <p className={sectionTitleClass}>{sectionItem.title}</p>
+            <p className={sectionTitleClass}>{dataset.label}</p>
 
             <div className={style.chartSectionBadge}>
               <span
@@ -30,21 +34,27 @@ const TopSimilarPropertiesItem = ({ sectionItem, i }) => {
                   shadowColor: colors.labelShadow,
                 }}
               >
-                {sectionItem.description}{' '}
+                {sectionItem.labels[topItemIndex]
+                  .split('-')
+                  .map((c) => capitalizeFirstLetter(c))
+                  .join('-')}
               </span>
             </div>
-            {sectionItem.data.map((progressItem, index) => (
+            {sectionItem.labels.map((title, index) => (
               <div key={index} className={style.progressBarArea}>
                 <p className={style.progressText}>
                   <span className={style.leftTitle}>
-                    {progressItem.leftTitle}
+                    {title
+                      .split('-')
+                      .map((c) => capitalizeFirstLetter(c))
+                      .join('-')}
                   </span>
                   <span className={style.rightTitle}>
-                    {progressItem.value}%
+                    {dataset.data[index]}%
                   </span>
                 </p>
                 <ProgressBar
-                  width={progressItem.value}
+                  width={dataset.data[index]}
                   customBarClass={style.progressBar}
                   customPercentageClass={style.percentageBlue}
                 />

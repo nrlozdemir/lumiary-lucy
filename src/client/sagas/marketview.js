@@ -15,16 +15,14 @@ import marketviewTimeMockData from 'Api/mocks/marketviewTimeMock.json'
 import marketviewTopPerformingProperties from 'Api/mocks/marketviewPlatformTopPerformingProperty.json'
 import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json'
 
-import { convertMultiRequestDataIntoDatasets } from 'Utils'
+import {
+  convertMultiRequestDataIntoDatasets,
+  convertDataIntoDatasets,
+} from 'Utils'
 import { getReportDataApi } from 'Api'
 
 function getCompetitorVideosApi() {
   return axios('/').then((res) => marketviewCompetitorVideosData)
-}
-
-function getSimilarPropertiesApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewSimilarPropertiesData)
 }
 
 function getBubbleChartApi() {
@@ -112,10 +110,44 @@ function* getCompetitorTopVideosMarketview({
   }
 }
 
-function* getSimilarProperties() {
+function* getSimilarProperties({ data: dateRange }) {
   try {
-    const payload = yield call(getSimilarPropertiesApi)
-    yield put(actions.getSimilarPropertiesSuccess(payload))
+    const expectedValues = [
+      { key: 'color', title: 'Dominant Color' },
+      { key: 'pacing', title: 'Pacing' },
+      { key: 'duration', title: 'Duration' },
+    ]
+
+    const parameters = {
+      dateRange,
+      metric: 'views',
+      platform: 'all',
+      dateBucket: 'none',
+      display: 'percentage',
+    }
+
+    const payloads = yield all(
+      expectedValues.map((item) =>
+        call(getReportDataApi, { ...parameters, property: [item.key] })
+      )
+    )
+
+    yield put(
+      actions.getSimilarPropertiesSuccess(
+        expectedValues.map((item, idx) =>
+          convertDataIntoDatasets(
+            payloads[idx],
+            {
+              ...parameters,
+              property: [item.key],
+            },
+            {
+              singleDataset: true,
+            }
+          )
+        )
+      )
+    )
   } catch (error) {
     yield put(actions.getSimilarPropertiesFailure(error))
   }
