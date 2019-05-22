@@ -36,7 +36,7 @@ class FormatCard extends Component {
   }
 
   render() {
-		const {
+    const {
       formatChartData: {
         data,
         video
@@ -71,13 +71,13 @@ class FormatCard extends Component {
             </div>
 
             <div className={style.videoContainer}>
-							{video && (
-								<SingleVideoCard
-									video={video}
-									muted={false}
-									options={{ size: 'auto', barColor: 'transparent' }}
-								/>
-							)}
+              {video && (
+                <SingleVideoCard
+                  video={video}
+                  muted={false}
+                  options={{ size: 'auto', barColor: 'transparent' }}
+                />
+              )}
             </div>
 
             <div className={style.marketViewCardChartTitle}>Live Action</div>
