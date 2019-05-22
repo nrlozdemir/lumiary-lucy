@@ -181,35 +181,11 @@
   position: relative;
 }
 
-.hoverImage {
-  position: relative;
-  width: 100%;
-  height: 140px;
-
-  img {
-    position: absolute;
-    top: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    transition: 300ms;
-    opacity: 1;
-    box-shadow: 0 4px 16px 0 rgba(0, 0, 0, 0.5);
-
-    &:nth-child(2) {
-      opacity: 0;
-    }
-  }
-
-  &:hover {
-    img {
-      &:nth-child(1) {
-        opacity: 0;
-      }
-      &:nth-child(2) {
-        opacity: 1;
-      }
-    }
-  }
+.videoContainer{
+	width: 200px;
+	height: 110px;
+	margin: 0px auto;
+	overflow: hidden;
 }
 
 .card {
