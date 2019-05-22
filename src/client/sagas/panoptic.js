@@ -1,5 +1,7 @@
-import { call, put, takeLatest, all } from 'redux-saga/effects'
+import qs from 'qs'
+import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import axios from 'axios'
+import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
 
 import panopticMockData from 'Api/mocks/panopticMock.json'
@@ -9,6 +11,7 @@ import {
   radarChartCalculate,
   convertDataIntoDatasets,
   getDateBucketFromRange,
+  getBrandAndCompetitors,
 } from 'Utils'
 
 import { getReportDataApi } from 'Utils/api'
@@ -60,6 +63,10 @@ function* getColorTemperatureData() {
 
 function* getFilteringSectionData({ data }) {
   try {
+    const profile = yield select(selectAuthProfile)
+
+    const brandAndCompetitors = getBrandAndCompetitors(profile)
+
     const { property, metric, platform, dateRange } = data
 
     const options = {
@@ -69,6 +76,7 @@ function* getFilteringSectionData({ data }) {
       dateBucket: 'none',
       display: 'percentage',
       property: [property],
+      ...brandAndCompetitors,
     }
 
     const doughnutData = yield call(getReportDataApi, options)
@@ -124,6 +132,10 @@ function* getFilteringSectionData({ data }) {
 
 function* getPacingCardData({ data }) {
   try {
+    const profile = yield select(selectAuthProfile)
+
+    const brandAndCompetitors = getBrandAndCompetitors(profile)
+
     const { metric, dateRange } = data
 
     const options = {
@@ -133,6 +145,7 @@ function* getPacingCardData({ data }) {
       property: ['pacing'],
       dateBucket: 'none',
       display: 'percentage',
+      ...brandAndCompetitors,
     }
 
     const stadiumData = yield call(getReportDataApi, options)
