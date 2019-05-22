@@ -197,7 +197,7 @@
     "bubblesMales": [
       {
         "visual": "youtube",
-        "toolTip": 33000
+        "toolTip": 330000
       },
       {
         "visual": "facebook",
@@ -206,10 +206,6 @@
       {
         "visual": "twitter",
         "toolTip": 845000
-      },
-      {
-        "visual": "pinterest",
-        "toolTip": 480000
       },
       {
         "visual": "instagram",
@@ -227,11 +223,7 @@
       },
       {
         "visual": "twitter",
-        "toolTip": 230000
-      },
-      {
-        "visual": "pinterest",
-        "toolTip": 970000
+        "toolTip": 530000
       },
       {
         "visual": "instagram",
@@ -250,10 +242,6 @@
       {
         "visual": "twitter",
         "toolTip": 438000
-      },
-      {
-        "visual": "pinterest",
-        "toolTip": 659000
       },
       {
         "visual": "instagram",

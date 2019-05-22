@@ -34,11 +34,11 @@ const ColorTemperature = ({ temp, verticalText, themeContext }) => {
       }}
     >
       <p className={style.textTop}>{temp.topText ? temp.topText : 'Happy'}</p>
-      <p className={rightText}>{temp.topText ? temp.rightText : 'Warm'}</p>
+      <p className={rightText}>{temp.rightText ? temp.rightText : 'Warm'}</p>
       <p className={style.textBottom}>
-        {temp.topText ? temp.bottomText : 'Sad'}
+        {temp.bottomText ? temp.bottomText : 'Sad'}
       </p>
-      <p className={leftText}>{temp.topText ? temp.leftText : 'Cool'}</p>
+      <p className={leftText}>{temp.leftText ? temp.leftText : 'Cool'}</p>
       <div
         className={style.verticalLine}
         style={{ background: themes.chartBackground }}
