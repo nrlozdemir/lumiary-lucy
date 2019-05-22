@@ -109,9 +109,25 @@ function* getAudienceColorTemperatureData() {
 			'Synthetic'
 		]
 
+		const leftTexts = [
+			'Cool',
+			'Cool',
+			'Cool',
+			'Cool'
+		]
+
+		const rightTexts = [
+			'Warm',
+			'Warm',
+			'Warm',
+			'Warm'
+		]
+
     shuffleData = shuffleData.map((data, i) => {
 			data.topText = topTexts[i]
 			data.bottomText = bottomTexts[i]
+			data.leftText = leftTexts[i]
+			data.rightText = rightTexts[i]
       data.data.map((item, i) => {
         item.color = i === 0 ? '#5292e5' : '#2fd7c4'
       })
