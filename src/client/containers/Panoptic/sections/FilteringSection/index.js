@@ -59,19 +59,14 @@ class PanopticFilteringSection extends Component {
         action={this.callBack}
         filters={[
           {
-            type: 'property',
-            selectKey: 'PFS-dsad',
-            placeHolder: 'property',
-          },
-          {
-            type: 'metric',
-            selectKey: 'PFS-asdwda',
-            placeHolder: 'Engagement',
+            type: 'duration',
+            selectKey: 'PFS-duration',
+            placeHolder: 'Duration',
           },
           {
             type: 'platform',
-            selectKey: 'PFS-dwdf',
-            placeHolder: 'Platform',
+            selectKey: 'PFS-asdwda',
+            placeHolder: 'Views on All Platforms',
           },
           {
             type: 'dateRange',
