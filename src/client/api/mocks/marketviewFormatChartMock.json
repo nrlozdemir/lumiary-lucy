@@ -1,12 +1,13 @@
 {
-  "hoverImages": [
-    "https://picsum.photos/250/140?image=10",
-    "https://picsum.photos/250/140?image=11"
-  ],
   "data": [
     { "count": 36, "name": "Stop Motion" },
     { "count": 12, "name": "Animation" },
     { "count": 28, "name": "Live Action" },
     { "count": 10, "name": "Cinemagraph" }
-  ]
+  ],
+	"video":
+	{
+		"videoUrl":"https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/12-years-ago-today-Kobe-dropped-81.mp4",
+		"poster":"https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/12-years-ago-today-Kobe-dropped-81.jpg"
+	}
 }
