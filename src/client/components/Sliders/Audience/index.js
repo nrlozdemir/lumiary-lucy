@@ -21,7 +21,7 @@ class AudienceSlider extends React.Component {
     this.setState({
       refThumb: this.refThumb,
     }, () => {
-      const findSlide = Math.floor(parseInt(this.props.items.length) / 2)
+      const findSlide = this.props.items && Math.floor(parseInt(this.props.items.length) / 2)
       this.props.items &&
         this.refThumb &&
         this.refThumb.slideTo(findSlide, 1)
