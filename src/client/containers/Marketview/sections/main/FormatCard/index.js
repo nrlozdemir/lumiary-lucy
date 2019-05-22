@@ -18,14 +18,14 @@ class FormatCard extends Component {
 
   iconClass(name) {
     switch (name) {
-      case 'Stop Motion':
-        return 'icon-icon_stopmotion'
+      case 'Live Action':
+        return 'icon-icon_liveaction'
 
       case 'Animation':
         return 'icon-icon_animation'
 
-      case 'Live Action':
-        return 'icon-icon_liveaction'
+      case 'Stop Motion':
+        return 'icon-icon_stopmotion'
 
       case 'Cinemagraph':
         return 'icon-icon_cinemagraph'
