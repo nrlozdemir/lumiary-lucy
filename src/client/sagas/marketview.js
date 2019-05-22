@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects'
+import { takeLatest, call, put, all } from 'redux-saga/effects'
 import axios from 'axios'
 import _ from 'lodash'
 
@@ -15,13 +15,11 @@ import marketviewTimeMockData from 'Api/mocks/marketviewTimeMock.json'
 import marketviewTopPerformingProperties from 'Api/mocks/marketviewPlatformTopPerformingProperty.json'
 import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json'
 
+import { convertMultiRequestDataIntoDatasets } from 'Utils'
+import { getReportDataApi } from 'Api'
+
 function getCompetitorVideosApi() {
   return axios('/').then((res) => marketviewCompetitorVideosData)
-}
-
-function getCompetitorTopVideosApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewCompetitorTopVideosData)
 }
 
 function getSimilarPropertiesApi() {
@@ -80,12 +78,39 @@ function* getCompetitorVideosMarketview() {
   }
 }
 
-function* getCompetitorTopVideosMarketview() {
+function* getCompetitorTopVideosMarketview({
+  data: { property, metric, dateRange },
+}) {
   try {
-    const payload = yield call(getCompetitorTopVideosApi)
-    yield put(actions.getCompetitorTopVideosSuccess(payload))
-  } catch (e) {
-    yield put(actions.getCompetitorTopVideosFailure({ e }))
+    const options = {
+      metric,
+      dateRange,
+      property: [property],
+      dateBucket: 'none',
+      display: 'percentage',
+    }
+
+    const [facebook, instagram, twitter, youtube, pinterest] = yield all([
+      call(getReportDataApi, { ...options, platform: 'facebook' }),
+      call(getReportDataApi, { ...options, platform: 'instagram' }),
+      call(getReportDataApi, { ...options, platform: 'twitter' }),
+      call(getReportDataApi, { ...options, platform: 'youtube' }),
+      call(getReportDataApi, { ...options, platform: 'pinterest' }),
+    ])
+
+    yield put(
+      actions.getCompetitorTopVideosSuccess(
+        convertMultiRequestDataIntoDatasets({
+          facebook,
+          instagram,
+          twitter,
+          youtube,
+          pinterest,
+        })
+      )
+    )
+  } catch (error) {
+    yield put(actions.getCompetitorTopVideosFailure(error))
   }
 }
 
