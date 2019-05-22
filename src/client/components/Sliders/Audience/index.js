@@ -20,10 +20,12 @@ class AudienceSlider extends React.Component {
   componentDidMount() {
     this.setState({
       refThumb: this.refThumb,
-		}, () => {
-			const findSlide = Math.floor(parseInt(this.props.items.length) / 2)
-			this.refThumb && this.refThumb.slideTo(findSlide, 1)
-		})
+    }, () => {
+      const findSlide = Math.floor(parseInt(this.props.items.length) / 2)
+      this.props.items &&
+        this.refThumb &&
+        this.refThumb.slideTo(findSlide, 1)
+    })
   }
 
   renderNextButton = () => {
@@ -79,7 +81,7 @@ class AudienceSlider extends React.Component {
     }
 
     const thumbSettings = {
-			slidesPerView: 9,
+      slidesPerView: 9,
       centeredSlides: true,
       watchSlidesVisibility: true,
       watchSlidesProgress: true,
