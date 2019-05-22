@@ -49,83 +49,83 @@ EXISTING_TASK=$(get_parameter deployment_checksum)
 echo "📦 Generating Container Definition..."
 cat > /tmp/containerdef.json <<JSON
 [
-	{
-		"name": "${SERVICE_NAME}-${CIRCLE_BRANCH}-container",
-		"image": "688003391719.dkr.ecr.us-east-1.amazonaws.com/${SERVICE_NAME}:${CIRCLE_BRANCH}",
-		"logConfiguration": {
-			"logDriver": "syslog",
-			"options": {
-				"syslog-address": "udp://logs3.papertrailapp.com:34568",
-				"tag": "${SERVICE_NAME}-${CIRCLE_BRANCH}/{{.ID}}"
-			}
-		},
-		"privileged": true,
-		"environment": [
-			{
-				"name": "API_URL",
-				"value": "${API_URL}"
-			},
-			{
-				"name": "API_VERSION",
-				"value": "${API_VERSION}"
-			},
-			{
-				"name": "BASENAME",
-				"value": "/"
-			},
-			{
-				"name": "CLOUDWATCH_REGION",
-				"value": "us-east-1"
-			},
-			{
-				"name": "ENVIRONMENT",
-				"value": "${CIRCLE_BRANCH}"
-			},
-			{
-				"name": "MEDIA_BUCKET",
-				"value": "quickframe-media-${CIRCLE_BRANCH}"
-			},
-			{
-				"name": "NODE_ENV",
-				"value": "production"
-			},
-			{
-				"name": "PORT",
-				"value": "80"
-			},
-			{
-				"name": "REDIS_HOST",
-				"value": "${REDIS_HOST}"
-			},
-			{
-				"name": "STATIC_URL",
-				"value": "https://s3.amazonaws.com/quickframe-static-${CIRCLE_BRANCH}/"
-			}
-		],
-		"secrets": [
-			{
-				"name": "CLOUDWATCH_ACCESS_KEY_ID",
-				"valueFrom": "/cloudwatch/access_key_id"
-			},
-			{
-				"name": "CLOUDWATCH_SECRET_ACCESS_KEY",
-				"valueFrom": "/cloudwatch/secret_access_key"
-			},
-			{
-				"name": "BASIC_AUTH_USER",
-				"valueFrom": "/${CIRCLE_BRANCH}/${SERVICE_NAME}/basic_auth_user"
-			},
-			{
-				"name": "BASIC_AUTH_PASSWORD",
-				"valueFrom": "/${CIRCLE_BRANCH}/${SERVICE_NAME}/basic_auth_password"
-			}
-		],
-		"portMappings": [
-			{
-				"containerPort": 80
-			}
-		]
-	}
+  {
+    "name": "${SERVICE_NAME}-${CIRCLE_BRANCH}-container",
+    "image": "688003391719.dkr.ecr.us-east-1.amazonaws.com/${SERVICE_NAME}:${CIRCLE_BRANCH}",
+    "logConfiguration": {
+      "logDriver": "syslog",
+      "options": {
+        "syslog-address": "udp://logs3.papertrailapp.com:34568",
+        "tag": "${SERVICE_NAME}-${CIRCLE_BRANCH}/{{.ID}}"
+      }
+    },
+    "privileged": true,
+    "environment": [
+      {
+        "name": "API_URL",
+        "value": "${API_URL}"
+      },
+      {
+        "name": "API_VERSION",
+        "value": "${API_VERSION}"
+      },
+      {
+        "name": "BASENAME",
+        "value": "/"
+      },
+      {
+        "name": "CLOUDWATCH_REGION",
+        "value": "us-east-1"
+      },
+      {
+        "name": "ENVIRONMENT",
+        "value": "${CIRCLE_BRANCH}"
+      },
+      {
+        "name": "MEDIA_BUCKET",
+        "value": "quickframe-media-${CIRCLE_BRANCH}"
+      },
+      {
+        "name": "NODE_ENV",
+        "value": "production"
+      },
+      {
+        "name": "PORT",
+        "value": "80"
+      },
+      {
+        "name": "REDIS_HOST",
+        "value": "${REDIS_HOST}"
+      },
+      {
+        "name": "STATIC_URL",
+        "value": "https://s3.amazonaws.com/quickframe-static-${CIRCLE_BRANCH}/"
+      }
+    ],
+    "secrets": [
+      {
+        "name": "CLOUDWATCH_ACCESS_KEY_ID",
+        "valueFrom": "/cloudwatch/access_key_id"
+      },
+      {
+        "name": "CLOUDWATCH_SECRET_ACCESS_KEY",
+        "valueFrom": "/cloudwatch/secret_access_key"
+      },
+      {
+        "name": "BASIC_AUTH_USER",
+        "valueFrom": "/${CIRCLE_BRANCH}/${SERVICE_NAME}/basic_auth_user"
+      },
+      {
+        "name": "BASIC_AUTH_PASSWORD",
+        "valueFrom": "/${CIRCLE_BRANCH}/${SERVICE_NAME}/basic_auth_password"
+      }
+    ],
+    "portMappings": [
+      {
+        "containerPort": 80
+      }
+    ]
+  }
 ]
 JSON
 

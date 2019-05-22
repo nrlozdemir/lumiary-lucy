@@ -6,8 +6,32 @@ import style from './style.scss'
 import { socialIconSelector } from 'Utils/'
 import Swiper from 'react-id-swiper'
 import SwiperJS from 'swiper/dist/js/swiper.js'
+import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
+import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
 
 class MarketViewSlider extends React.Component {
+  renderNextButton = () => {
+    return (
+      <RightArrowCircleFlat
+        className={classnames(style.nextButton, this.refSlider && this.refSlider.isEnd ? style.disabled : '')}
+        size={32}
+        onClick={() => this.refSlider.slideNext()}
+        >
+      </RightArrowCircleFlat>
+    )
+  }
+
+  renderPrevButton = () => {
+    return (
+      <LeftArrowCircleFlat
+        className={classnames(style.prevButton, this.refSlider && this.refSlider.isBeginning ? style.disabled : '')}
+        size={32}
+        onClick={() => this.refSlider.slidePrev()}
+        >
+      </LeftArrowCircleFlat>
+    )
+  }
+
   settings = {
     modules: [SwiperJS.Pagination],
     shouldSwiperUpdate: true,
@@ -65,12 +89,18 @@ class MarketViewSlider extends React.Component {
         }
 
         bullets[this.refSlider.activeIndex].classList.add('active')
+
+        // Force rendering needed to update disabled state of prev and next buttons
+        this.forceUpdate();
       },
     },
+    renderNextButton: this.renderNextButton,
+    renderPrevButton: this.renderPrevButton
   }
 
   render() {
     const { props } = this
+
     return (
       <div className={style.section}>
         <div className="marketViewSlider">
@@ -92,19 +122,16 @@ class MarketViewSlider extends React.Component {
                   <img src={item.image} />
                   <div
                     className={style.percentageWrapper}
-                    style={{ right: '80px' }}
                   >
                     <PercentageBarGraph
-                      backgroundColor="#303a5d"
-                      customClass={style.libraryPercentageGraph}
-                      id={`videolist-${i}`}
+                      key={Math.random()}
                       percentage={item.cvScore}
-                      disableLabels={true}
-                      color={'#2fd7c4'}
-                      lineCount={30}
-                      height={19}
-                      width={67}
-                      xSmall
+                      width={80}
+                      height={20}
+                      barWidth={2}
+                      barSpaceWidth={1}
+                      disableLabels
+                      color='green'
                     />
                   </div>
                 </AssetLayer>

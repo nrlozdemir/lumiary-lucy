@@ -6,7 +6,6 @@
 
 import { fromJS } from 'immutable'
 import { createSelector } from 'reselect'
-import { chartColors } from 'Utils/globals'
 
 export const types = {
   GET_DATA: 'Panoptic/GET_DATA',
@@ -34,59 +33,6 @@ export const types = {
   GET_COMPARE_SHARES_DATA: 'Panoptic/GET_COMPARE_SHARES_DATA',
   GET_COMPARE_SHARES_DATA_SUCCESS: 'Panoptic/GET_COMPARE_SHARES_DATA_SUCCESS',
   GET_COMPARE_SHARES_DATA_ERROR: 'Panoptic/GET_COMPARE_SHARES_DATA_ERROR',
-
-  GET_AUDIENCE_DATA: 'Panoptic/GET_AUDIENCE_DATA',
-  GET_AUDIENCE_DATA_SUCCESS: 'Panoptic/GET_AUDIENCE_DATA_SUCCESS',
-  GET_AUDIENCE_DATA_ERROR: 'Panoptic/GET_AUDIENCE_DATA_ERROR',
-
-  GET_AUDIENCE_PERFORMANCE_DATA: 'Panoptic/GET_AUDIENCE_PERFORMANCE_DATA',
-  GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS:
-    'Panoptic/GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS',
-  GET_AUDIENCE_PERFORMANCE_DATA_ERROR:
-    'Panoptic/GET_AUDIENCE_PERFORMANCE_DATA_ERROR',
-
-  GET_AUDIENCE_AGE_SLIDER_DATA: 'Panoptic/GET_AUDIENCE_AGE_SLIDER_DATA',
-  GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS:
-    'Panoptic/GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS',
-  GET_AUDIENCE_AGE_SLIDER_DATA_ERROR:
-    'Panoptic/GET_AUDIENCE_AGE_SLIDER_DATA_ERROR',
-
-  GET_AUDIENCE_GENDER_DATA: 'Panoptic/GET_AUDIENCE_GENDER_DATA',
-  GET_AUDIENCE_GENDER_DATA_SUCCESS: 'Panoptic/GET_AUDIENCE_GENDER_DATA_SUCCESS',
-  GET_AUDIENCE_GENDER_DATA_ERROR: 'Panoptic/GET_AUDIENCE_GENDER_DATA_ERROR',
-
-  GET_AUDIENCE_COLOR_TEMPERATURE_DATA:
-    'Panoptic/GET_AUDIENCE_COLOR_TEMPERATURE_DATA',
-  GET_AUDIENCE_COLOR_TEMPERATURE_DATA_SUCCESS:
-    'Panoptic/GET_AUDIENCE_COLOR_TEMPERATURE_DATA_SUCCESS',
-  GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR:
-    'Panoptic/GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR',
-
-  GET_AUDIENCE_CHANGE_OVER_TIME_DATA:
-    'Panoptic/GET_AUDIENCE_CHANGE_OVER_TIME_DATA',
-  GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS:
-    'Panoptic/GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS',
-  GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR:
-    'Panoptic/GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR',
-
-  GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA:
-    'Panoptic/GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA',
-  GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS:
-    'Panoptic/GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS',
-  GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR:
-    'Panoptic/GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR',
-
-  GET_AUDIENCE_DOMINANT_COLOR_DATA: 'Panoptic/GET_AUDIENCE_DOMINANT_COLOR_DATA',
-  GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS:
-    'Panoptic/GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS',
-  GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR:
-    'Panoptic/GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR',
-
-  UPDATE_AUDIENCE_PERFORMANCE: 'Panoptic/UPDATE_AUDIENCE_PERFORMANCE',
-  UPDATE_AUDIENCE_PERFORMANCE_SUCCESS:
-    'Panoptic/UPDATE_AUDIENCE_PERFORMANCE_SUCCESS',
-  UPDATE_AUDIENCE_PERFORMANCE_ERROR:
-    'Panoptic/UPDATE_AUDIENCE_PERFORMANCE_ERROR',
 
   GET_FLIPCARDS_DATA: 'Panoptic/GET_FLIPCARDS_DATA',
   GET_FLIPCARDS_DATA_SUCCESS: 'Panoptic/GET_FLIPCARDS_DATA_SUCCESS',
@@ -169,113 +115,6 @@ export const actions = {
     error,
   }),
 
-  getAudiencePerformanceData: () => ({
-    type: types.GET_AUDIENCE_PERFORMANCE_DATA,
-  }),
-  getAudiencePerformanceDataSuccess: (payload) => ({
-    type: types.GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS,
-    payload,
-  }),
-  getAudiencePerformanceDataError: (error) => ({
-    type: types.GET_AUDIENCE_PERFORMANCE_DATA_ERROR,
-    error,
-  }),
-
-  getAudienceAgeSliderData: () => ({
-    type: types.GET_AUDIENCE_AGE_SLIDER_DATA,
-  }),
-  getAudienceAgeSliderDataSuccess: (payload) => ({
-    type: types.GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS,
-    payload,
-  }),
-  getAudienceAgeSliderDataError: (error) => ({
-    type: types.GET_AUDIENCE_AGE_SLIDER_DATA_ERROR,
-    error,
-  }),
-
-  getAudienceGenderData: () => ({
-    type: types.GET_AUDIENCE_GENDER_DATA,
-  }),
-  getAudienceGenderDataSuccess: (payload) => ({
-    type: types.GET_AUDIENCE_GENDER_DATA_SUCCESS,
-    payload,
-  }),
-  getAudienceGenderDataError: (error) => ({
-    type: types.GET_AUDIENCE_GENDER_DATA_ERROR,
-    error,
-  }),
-
-  getAudienceColorTemperatureData: () => ({
-    type: types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA,
-  }),
-  getAudienceColorTemperatureDataSuccess: (payload) => ({
-    type: types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA_SUCCESS,
-    payload,
-  }),
-  getAudienceColorTemperatureDataError: (error) => ({
-    type: types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR,
-    error,
-  }),
-
-  getAudienceChangeOverTimeData: () => ({
-    type: types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA,
-  }),
-  getAudienceChangeOverTimeDataSuccess: (payload) => ({
-    type: types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS,
-    payload,
-  }),
-  getAudienceChangeOverTimeDataError: (error) => ({
-    type: types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR,
-    error,
-  }),
-
-  getAudienceContentVitalityScoreData: () => ({
-    type: types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA,
-  }),
-  getAudienceContentVitalityScoreDataSuccess: (payload) => ({
-    type: types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS,
-    payload,
-  }),
-  getAudienceContentVitalityScoreDataError: (error) => ({
-    type: types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR,
-    error,
-  }),
-
-  getAudienceDominantColorData: () => ({
-    type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA,
-  }),
-  getAudienceDominantColorDataSuccess: (payload) => ({
-    type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS,
-    payload,
-  }),
-  getAudienceDominantColorDataError: (error) => ({
-    type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR,
-    error,
-  }),
-
-  getAudienceData: () => ({ type: types.GET_AUDIENCE_DATA }),
-  getAudienceDataSuccess: (payload) => ({
-    type: types.GET_AUDIENCE_DATA_SUCCESS,
-    payload,
-  }),
-  getAudienceDataError: (error) => ({
-    type: types.GET_AUDIENCE_DATA_ERROR,
-    error,
-  }),
-
-  updateAudiencePerformance: (payload) => ({
-    type: types.UPDATE_AUDIENCE_PERFORMANCE,
-    payload,
-  }),
-  updateAudiencePerformanceSuccess: (payload) => ({
-    type: types.UPDATE_AUDIENCE_PERFORMANCE_SUCCESS,
-    payload,
-  }),
-  updateAudiencePerformanceError: (error) => ({
-    type: types.UPDATE_AUDIENCE_PERFORMANCE_ERROR,
-    error,
-  }),
-
   getFlipCardsData: (data) => ({
     type: types.GET_FLIPCARDS_DATA,
     data,
@@ -330,41 +169,7 @@ export const initialState = fromJS({
     loading: false,
     error: null,
   },
-  audiencePerformanceData: {
-    data: {},
-    loading: false,
-    error: null,
-  },
-  audienceAgeSliderData: {
-    data: [],
-    loading: false,
-    error: null,
-  },
-  audienceGenderData: {
-    data: [],
-    loading: false,
-    error: null,
-  },
-  audienceColorTemperatureData: {
-    data: [],
-    loading: false,
-    error: null,
-  },
-  audienceChangeOverTimeData: {
-    data: [],
-    loading: false,
-    error: null,
-  },
-  audienceContentVitalityScoreData: {
-    data: [],
-    loading: false,
-    error: null,
-  },
-  audienceDominantColorData: {
-    data: {},
-    loading: false,
-    error: null,
-  },
+
   flipCardsData: {
     data: {},
     loading: false,
@@ -375,7 +180,6 @@ export const initialState = fromJS({
     loading: false,
     error: null,
   },
-  audienceData: null,
   loading: false,
   error: false,
 })
@@ -427,8 +231,16 @@ const panopticReducer = (state = initialState, action) => {
       return state.setIn(['filteringSectionData', 'loading'], fromJS(true))
 
     case types.GET_FILTERING_SECTION_DATA_SUCCESS:
+      const { doughnutData, stackedChartData } = payload
+
       return state
-        .setIn(['filteringSectionData', 'data'], fromJS(action.payload))
+        .setIn(
+          ['filteringSectionData', 'data'],
+          fromJS({
+            doughnutData,
+            stackedChartData,
+          })
+        )
         .setIn(['filteringSectionData', 'loading'], fromJS(false))
 
     case types.GET_FILTERING_SECTION_DATA_ERROR:
@@ -442,43 +254,12 @@ const panopticReducer = (state = initialState, action) => {
     case types.GET_PACING_CARD_DATA_SUCCESS:
       const { stadiumData, horizontalStackedBarData } = payload
 
-      console.log(action)
-
-      const stadiumChartData = Object.keys(stadiumData).map((key, idx) => ({
-        title: key,
-        value: stadiumData[key] || 0,
-        color: chartColors[idx],
-      }))
-
-      const barChartData = Object.keys(horizontalStackedBarData).reduce(
-        (data, key, idx) => ({
-          labels: [...data.labels, key],
-          datasets: [
-            ...data.datasets,
-            {
-              label: key,
-              backgroundColor: chartColors[idx],
-              borderColor: chartColors[idx],
-              borderWidth: 1,
-              data: (!!horizontalStackedBarData[key] &&
-                Object.keys(horizontalStackedBarData[key]).map(
-                  (item) => horizontalStackedBarData[key][item]
-                )) || [0, 0, 0, 0],
-            },
-          ],
-        }),
-        {
-          labels: [],
-          datasets: [],
-        }
-      )
-
       return state
         .setIn(
           ['pacingChartData', 'data'],
           fromJS({
-            stadiumData: stadiumChartData,
-            horizontalStackedBarData: barChartData,
+            stadiumData,
+            horizontalStackedBarData,
           })
         )
         .setIn(['pacingChartData', 'loading'], fromJS(false))
@@ -500,137 +281,6 @@ const panopticReducer = (state = initialState, action) => {
       return state
         .setIn(['compareSharesData', 'error'], fromJS(action.error))
         .setIn(['compareSharesData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_DATA:
-      return state.set('loading', fromJS(true))
-
-    case types.GET_AUDIENCE_DATA_SUCCESS:
-      return state
-        .set('audienceData', fromJS(action.payload))
-        .set('loading', fromJS(false))
-
-    case types.GET_AUDIENCE_DATA_ERROR:
-      return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
-
-    case types.GET_AUDIENCE_PERFORMANCE_DATA:
-      return state.setIn(['audiencePerformanceData', 'loading'], fromJS(true))
-
-    case types.GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS:
-      return state
-        .setIn(['audiencePerformanceData', 'data'], fromJS(action.payload))
-        .setIn(['audiencePerformanceData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_PERFORMANCE_DATA_ERROR:
-      return state
-        .setIn(['audiencePerformanceData', 'error'], fromJS(action.error))
-        .setIn(['audiencePerformanceData', 'loading'], fromJS(false))
-
-    case types.UPDATE_AUDIENCE_PERFORMANCE_SUCCESS:
-      return state.mergeIn(
-        ['audiencePerformanceData', 'data'],
-        fromJS(action.payload)
-      )
-
-    case types.UPDATE_AUDIENCE_PERFORMANCE_ERROR:
-      return state.setIn(
-        ['audiencePerformanceData', 'error'],
-        fromJS(action.error)
-      )
-
-    case types.GET_AUDIENCE_AGE_SLIDER_DATA:
-      return state.setIn(['audienceAgeSliderData', 'loading'], fromJS(true))
-
-    case types.GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS:
-      return state
-        .setIn(['audienceAgeSliderData', 'data'], fromJS(action.payload))
-        .setIn(['audienceAgeSliderData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_AGE_SLIDER_DATA_ERROR:
-      return state
-        .setIn(['audienceAgeSliderData', 'error'], fromJS(action.error))
-        .setIn(['audienceAgeSliderData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_GENDER_DATA:
-      return state.setIn(['audienceGenderData', 'loading'], fromJS(true))
-
-    case types.GET_AUDIENCE_GENDER_DATA_SUCCESS:
-      return state
-        .setIn(['audienceGenderData', 'data'], fromJS(action.payload))
-        .setIn(['audienceGenderData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_GENDER_DATA_ERROR:
-      return state
-        .setIn(['audienceGenderData', 'error'], fromJS(action.error))
-        .setIn(['audienceGenderData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA:
-      return state.setIn(
-        ['audienceColorTemperatureData', 'loading'],
-        fromJS(true)
-      )
-
-    case types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA_SUCCESS:
-      return state
-        .setIn(['audienceColorTemperatureData', 'data'], fromJS(action.payload))
-        .setIn(['audienceColorTemperatureData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR:
-      return state
-        .setIn(['audienceColorTemperatureData', 'error'], fromJS(action.error))
-        .setIn(['audienceColorTemperatureData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA:
-      return state.setIn(
-        ['audienceChangeOverTimeData', 'loading'],
-        fromJS(true)
-      )
-
-    case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS:
-      return state
-        .setIn(['audienceChangeOverTimeData', 'data'], fromJS(action.payload))
-        .setIn(['audienceChangeOverTimeData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR:
-      return state
-        .setIn(['audienceChangeOverTimeData', 'error'], fromJS(action.error))
-        .setIn(['audienceChangeOverTimeData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA:
-      return state.setIn(
-        ['audienceContentVitalityScoreData', 'loading'],
-        fromJS(true)
-      )
-
-    case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS:
-      return state
-        .setIn(
-          ['audienceContentVitalityScoreData', 'data'],
-          fromJS(action.payload)
-        )
-        .setIn(['audienceContentVitalityScoreData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR:
-      return state
-        .setIn(
-          ['audienceContentVitalityScoreData', 'error'],
-          fromJS(action.error)
-        )
-        .setIn(['audienceContentVitalityScoreData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_DOMINANT_COLOR_DATA:
-      return state.setIn(['audienceDominantColorData', 'loading'], fromJS(true))
-
-    case types.GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS:
-      return state
-        .setIn(['audienceDominantColorData', 'data'], fromJS(action.payload))
-        .setIn(['audienceDominantColorData', 'loading'], fromJS(false))
-
-    case types.GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR:
-      return state
-        .setIn(['audienceDominantColorData', 'error'], fromJS(action.error))
-        .setIn(['audienceDominantColorData', 'loading'], fromJS(false))
 
     case types.GET_FLIPCARDS_DATA:
       return state.setIn(['flipCardsData', 'loading'], fromJS(true))
@@ -713,69 +363,6 @@ const selectPanopticCompareSharesDomain = (state) =>
 export const makeSelectPanopticCompareShares = () =>
   createSelector(
     selectPanopticCompareSharesDomain,
-    (substate) => substate.toJS()
-  )
-
-const selectAudiencePerformanceDomain = (state) =>
-  state.Panoptic.get('audiencePerformanceData')
-
-export const makeSelectAudiencePerformance = () =>
-  createSelector(
-    selectAudiencePerformanceDomain,
-    (substate) => substate.toJS()
-  )
-
-const selectAudienceAgeSliderDomain = (state) =>
-  state.Panoptic.get('audienceAgeSliderData')
-
-export const makeSelectAudienceAgeSlider = () =>
-  createSelector(
-    selectAudienceAgeSliderDomain,
-    (substate) => substate.toJS()
-  )
-
-const selectAudienceGenderDomain = (state) =>
-  state.Panoptic.get('audienceGenderData')
-
-export const makeSelectAudienceGender = () =>
-  createSelector(
-    selectAudienceGenderDomain,
-    (substate) => substate.toJS()
-  )
-
-const selectAudienceColorTemperatureDomain = (state) =>
-  state.Panoptic.get('audienceColorTemperatureData')
-
-export const makeSelectAudienceColorTemperature = () =>
-  createSelector(
-    selectAudienceColorTemperatureDomain,
-    (substate) => substate.toJS()
-  )
-
-const selectAudienceChangeOverTimeDomain = (state) =>
-  state.Panoptic.get('audienceChangeOverTimeData')
-
-export const makeSelectAudienceChangeOverTime = () =>
-  createSelector(
-    selectAudienceChangeOverTimeDomain,
-    (substate) => substate.toJS()
-  )
-
-const selectAudienceContentVitalityScoreDomain = (state) =>
-  state.Panoptic.get('audienceContentVitalityScoreData')
-
-export const makeSelectAudienceContentVitalityScore = () =>
-  createSelector(
-    selectAudienceContentVitalityScoreDomain,
-    (substate) => substate.toJS()
-  )
-
-const selectAudienceDominantColorDomain = (state) =>
-  state.Panoptic.get('audienceDominantColorData')
-
-export const makeSelectAudienceDominantColor = () =>
-  createSelector(
-    selectAudienceDominantColorDomain,
     (substate) => substate.toJS()
   )
 

@@ -1,3 +1,4 @@
+import { chartColors } from 'Utils/globals'
 function randomKey(char) {
   var text = ''
   var possible =
@@ -7,6 +8,152 @@ function randomKey(char) {
     text += possible.charAt(Math.floor(Math.random() * possible.length))
 
   return text
+}
+
+/*
+  Returns an array of time labels from the api response
+  * Expected labels:
+     week - ['Week 1', 'Week 2', 'Week 3', 'Week 4']
+     month - array of 3 months from the current
+     dayOfWeek - array of 7 days from the current
+ */
+const getTimeBucket = (value) => {
+  const keys = Object.keys(value)
+  if (!!keys.length) {
+    // sometimes there is a null key
+    return Object.keys(value[keys[0]])
+      .reduce(
+        (all, label) => [...all, ...(label !== 'null' ? [label] : [])],
+        []
+      )
+      .reverse()
+  }
+  return []
+}
+
+/**
+ * Convert data to chart js structure
+ * @constructor
+ * @param {object} values - Values which comes from backend response.
+ * @param {object} options - Option is the request params.
+ * @param {object} args - Args attribute for other options: 
+ *
+ * ...args
+   {
+    hoverBG: array
+    preparedDatasets: array, 
+    preparedLabels: array, 
+    singleDataset: bool, 
+    borderWidth: object || int
+    }
+  *
+ */
+const convertDataIntoDatasets = (values, options, ...args) => {
+  let labels
+  let datasetsFromValues
+  let singleLevelJSON
+
+  const arg = args && !!args[0] && args[0]
+
+  const getValueinObject = values.data[options.property[0]]
+
+  const timeBucket =
+    options.dateBucket !== 'none' ? getTimeBucket(getValueinObject) : null
+
+  delete getValueinObject.subtotal
+
+  // If time bucket was  selected, it will change labels to time labels
+  // defined within a data object from the api response
+  if (timeBucket) {
+    datasetsFromValues = Object.keys(getValueinObject).map((item) =>
+      timeBucket.map((date) => getValueinObject[item][date])
+    )
+    labels = timeBucket
+  }
+
+  // If proportionOf was  selected, it will change labels to time labels and it will set up datasets according to selected proportionOf
+  if (options.proportionOf) {
+    datasetsFromValues = Object.keys(getValueinObject).map((key) =>
+      Object.keys(getValueinObject[key]).map(
+        (item) =>
+          // users should not see the subtotal value in the graphs
+          getValueinObject[key][item]
+      )
+    )
+    labels = Object.keys(getValueinObject)
+  }
+
+  // if timebucket or proportionOf werent selected, it will get data from single level json
+  if (!timeBucket && !options.proportionOf) {
+    datasetsFromValues = Object.keys(getValueinObject).map(
+      (key) => getValueinObject[key]
+    )
+    labels = Object.keys(getValueinObject)
+    singleLevelJSON = true
+  }
+
+  // You can pass prepared labels or datasets in args
+  labels = (arg && arg.preparedLabel) || labels
+  datasetsFromValues = (arg && arg.preparedDatasets) || datasetsFromValues
+
+  return Object.keys(getValueinObject).reduce(
+    (data, key, idx) => {
+      const { datasets } = data
+      const color = chartColors[idx]
+
+      return arg && arg.singleDataset
+        ? // only one dataset is required sometimes
+          // ie. doughnut chart in panoptic/engagement
+          {
+            labels: [
+              ...data.labels,
+              `${key} ${
+                !!options.property && options.property == 'duration'
+                  ? 'seconds'
+                  : ''
+              }`,
+            ],
+            datasets: [
+              {
+                data: datasetsFromValues || [0, 0, 0, 0],
+                backgroundColor: [
+                  ...(datasets[0] ? datasets[0].backgroundColor : []),
+                  color,
+                ],
+                hoverBackgroundColor:
+                  arg && arg.hoverBG
+                    ? [
+                        ...(datasets[0]
+                          ? datasets[0].hoverBackgroundColor
+                          : []),
+                        color,
+                      ]
+                    : [],
+              },
+            ],
+          }
+        : {
+            labels: [...labels],
+            datasets: [
+              ...datasets,
+              {
+                label: key,
+                backgroundColor: color,
+                borderColor: color,
+                borderWidth: (arg && arg.borderWidth) || 1,
+                hoverBackgroundColor: arg && arg.hoverBG ? color : null,
+                data: singleLevelJSON
+                  ? datasetsFromValues
+                  : datasetsFromValues[idx] || [0, 0, 0, 0],
+              },
+            ],
+          }
+    },
+    {
+      labels: [],
+      datasets: [],
+    }
+  )
 }
 
 function socialIconSelector(key) {
@@ -114,7 +261,7 @@ const strToColor = (str) => {
 
   const color = {
     red: '#cc2226',
-    'red-orange': '#dd501d',
+    'orange-red': '#dd501d',
     orange: '#eb7919',
     'yellow-orange': '#f8b90b',
     yellow: '#fff20d',
@@ -177,6 +324,69 @@ const radarChartCalculate = (data) => {
   return colorsData
 }
 
+const compareSharesData = (data) => {
+  return data.map((item) => {
+    return {
+      type: capitalizeFirstLetter(item.platform),
+      datas: {
+        labels: Object.keys(item.data.color).map((color) => ({
+          name: color
+            .split('-')
+            .map((c) => capitalizeFirstLetter(c))
+            .join('-'),
+          count: item.data.color[color],
+        })),
+        datasets: [
+          {
+            label: capitalizeFirstLetter(item.platform),
+          },
+        ],
+      },
+    }
+  })
+}
+
+const isDataSetEmpty = (data) => {
+  if (!!data && !!data.datasets && !!data.datasets.length) {
+    return data.datasets.every((dataset) =>
+      !!dataset.data && !!dataset.data.length
+        ? dataset.data.every((val) => val === 0 || val === undefined)
+        : true
+    )
+  } else {
+    return true
+  }
+}
+
+const getDateBucketFromRange = (dateRange) => {
+  switch (dateRange) {
+    case 'week':
+      return 'dayOfWeek'
+    case 'month':
+      return 'week'
+    case '3months':
+      return 'month'
+    default:
+      return 'none'
+  }
+}
+
+/*
+  Get api payload for brand_uuid and competitor_uuids
+ */
+const getBrandAndCompetitors = (profile) => {
+  const { brand } = profile
+
+  if (!!brand && !!brand.uuid && !!brand.competitors) {
+    return {
+      brand_uuid: brand.uuid,
+      competitor_uuids: brand.competitors.map((c) => c.uuid),
+    }
+  }
+
+  return {}
+}
+
 export {
   randomKey,
   searchTermInText,
@@ -186,4 +396,9 @@ export {
   shadeHexColor,
   capitalizeFirstLetter,
   radarChartCalculate,
+  isDataSetEmpty,
+  convertDataIntoDatasets,
+  compareSharesData,
+  getDateBucketFromRange,
+  getBrandAndCompetitors,
 }

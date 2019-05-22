@@ -6,6 +6,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewPacingChart } from 'Reducers/marketview'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import RightArrowCircle from "Components/Icons/RightArrowCircle";
 
 import style from 'Containers/Marketview/style.scss'
 import PacingPieChart from 'Components/Charts/MarketView/PacingPieChart'
@@ -86,11 +87,7 @@ class PacingCard extends Component {
             >
               View Competitor Metrics
               <div className={style.icon}>
-                <span className="icon-Right-Arrow-Circle">
-                  <span className="path1" />
-                  <span className="path2" />
-                  <span className="path3" />
-                </span>
+                <RightArrowCircle></RightArrowCircle>
               </div>
             </Link>
           </div>
