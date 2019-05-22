@@ -98,26 +98,22 @@ function* getAudienceColorTemperatureData() {
     const topTexts = [
       'Happy',
       'Energetic',
-      'Cool',
       'Natural'
     ]
 
     const bottomTexts = [
       'Sad',
       'Calm',
-      'Warm',
       'Synthetic'
     ]
 
     const leftTexts = [
       'Cool',
       'Cool',
-      'Cool',
       'Cool'
     ]
 
     const rightTexts = [
-      'Warm',
       'Warm',
       'Warm',
       'Warm'
