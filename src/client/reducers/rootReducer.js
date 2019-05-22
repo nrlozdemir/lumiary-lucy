@@ -11,12 +11,14 @@ import Reports from './reports'
 import GeneratedReport from './generatedReport'
 import Audience from './audience'
 import app from './app'
+import auth from './auth'
 import SelectFilters from './selectFilters'
 
 const rootReducer = (history) =>
   combineReducers({
     router: connectRouter(history),
     app,
+    auth,
     Library,
     Quickview,
     Marketview,

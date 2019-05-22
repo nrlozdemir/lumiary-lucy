@@ -164,7 +164,6 @@ function socialIconSelector(key) {
     twitter: 'icon-Twitter-Bubble',
     instagram: 'icon-Instagram-Bubble',
     youtube: 'icon-YouTube-Bubble',
-    pinterest: 'icon-Pinterest-Bubble',
   }
 
   return socialIcons[keyToLowerCase]
@@ -372,6 +371,22 @@ const getDateBucketFromRange = (dateRange) => {
   }
 }
 
+/*
+  Get api payload for brand_uuid and competitor_uuids
+ */
+const getBrandAndCompetitors = (profile) => {
+  const { brand } = profile
+
+  if (!!brand && !!brand.uuid && !!brand.competitors) {
+    return {
+      brand_uuid: brand.uuid,
+      competitor_uuids: brand.competitors.map((c) => c.uuid),
+    }
+  }
+
+  return {}
+}
+
 export {
   randomKey,
   searchTermInText,
@@ -385,4 +400,5 @@ export {
   convertDataIntoDatasets,
   compareSharesData,
   getDateBucketFromRange,
+  getBrandAndCompetitors,
 }
