@@ -19,6 +19,7 @@ class ColorTemperature extends React.Component {
     return (
       <ColorTemperatureModule
         moduleKey="Audience/ColorTemperature"
+        verticalText
         extraClasses={chartStyle.colorChartWrapper}
         data={data}
         title="Color Temperature / Sentiment Comparison"
