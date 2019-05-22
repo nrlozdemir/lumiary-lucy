@@ -95,12 +95,28 @@ function* getAudienceColorTemperatureData() {
       return data
     })
 
-    shuffleData = shuffleData.map((data) => {
+		const topTexts = [
+			'Happy',
+			'Energetic',
+			'Cool',
+			'Natural'
+		]
+
+		const bottomTexts = [
+			'Sad',
+			'Calm',
+			'Warm',
+			'Synthetic'
+		]
+
+    shuffleData = shuffleData.map((data, i) => {
+			data.topText = topTexts[i]
+			data.bottomText = bottomTexts[i]
       data.data.map((item, i) => {
         item.color = i === 0 ? '#5292e5' : '#2fd7c4'
       })
       return data
-    })
+		})
     yield put(actions.getAudienceColorTemperatureDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getAudienceColorTemperatureDataError(err))
