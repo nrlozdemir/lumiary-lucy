@@ -90,12 +90,11 @@ function* getCompetitorTopVideosMarketview({
       display: 'percentage',
     }
 
-    const [facebook, instagram, twitter, youtube, pinterest] = yield all([
+    const [facebook, instagram, twitter, youtube] = yield all([
       call(getReportDataApi, { ...options, platform: 'facebook' }),
       call(getReportDataApi, { ...options, platform: 'instagram' }),
       call(getReportDataApi, { ...options, platform: 'twitter' }),
       call(getReportDataApi, { ...options, platform: 'youtube' }),
-      call(getReportDataApi, { ...options, platform: 'pinterest' }),
     ])
 
     yield put(
@@ -105,7 +104,6 @@ function* getCompetitorTopVideosMarketview({
           instagram,
           twitter,
           youtube,
-          pinterest,
         })
       )
     )
