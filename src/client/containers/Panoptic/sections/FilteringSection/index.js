@@ -60,8 +60,13 @@ class PanopticFilteringSection extends Component {
         filters={[
           {
             type: 'property',
-            selectKey: 'PFS-Property',
-            placeHolder: 'Property',
+            selectKey: 'PFS-dsad',
+            placeHolder: 'property',
+          },
+          {
+            type: 'metric',
+            selectKey: 'PFS-lalalol',
+            placeHolder: 'Engagement',
           },
           {
             type: 'platform',
