@@ -64,7 +64,7 @@ const ComparisonHorizontalBarChart = (props) => {
     callback: function(value) {
       if (value === 0) return 0
       return value + '%'
-    }
+    },
   }
   reverseBarChartOptions.plugins.datalabels = {
     ...reverseBarChartOptions.plugins.datalabels,
@@ -80,6 +80,7 @@ const ComparisonHorizontalBarChart = (props) => {
       return percentage
     },
   }
+  console.log(props)
 
   return (
     <div className={style.container}>
@@ -88,7 +89,7 @@ const ComparisonHorizontalBarChart = (props) => {
         data={data[0]}
         width={460}
         height={291}
-        plugins={plugins}
+        plugins={copyBarChartOptions.plugins}
         options={copyBarChartOptions}
       />
 
@@ -140,7 +141,7 @@ const ComparisonHorizontalBarChart = (props) => {
         data={data[1]}
         width={460}
         height={291}
-        plugins={plugins}
+        plugins={reverseBarChartOptions.plugins}
         options={reverseBarChartOptions}
       />
     </div>
