@@ -195,7 +195,7 @@ class LibraryDetailShotByShot extends React.Component {
     for (let i = 1; i < tickCount - 1; i++) {
       sliderMarks.push(this.state.scenes[i].duration)
     }
-    sliderMarks.push(this.secondToTime(totalDuration))
+    sliderMarks.push(this.state.scenes[this.state.scenes.length - 1].duration)
 
     const minShotDuration = Math.min(...durations)
     const maxShotDuration = Math.max(...durations)
