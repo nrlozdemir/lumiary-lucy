@@ -225,27 +225,52 @@ function* getTotalViewsData({ data }) {
     const brands = getBrandAndCompetitors(profile)
 
     const options = {
+      brands,
       metric,
       platform,
       dateRange,
       dateBucket: 'none',
       display: 'percentage',
       property: ['views'],
-      brands,
     }
 
     const payload = yield call(getTotalViewsApi)
 
     const barData = yield call(getReportDataApi, { ...options })
 
+    const dateBucket = getDateBucketFromRange(dateRange)
+
     const doughnutData = yield call(getReportDataApi, {
       ...options,
-      dateBucket: getDateBucketFromRange(dateRange),
+      dateBucket,
     })
 
+    const convertedBarData = convertDataIntoDatasets(barData, options)
+
+    const convertedDoughnutData = convertDataIntoDatasets(
+      doughnutData,
+      { ...options, dateBucket },
+      { hoverBG: true, singleDataset: true, useBrandLabels: true }
+    )
+
     console.log('api, ', barData, doughnutData)
+    console.log('converted', convertedBarData, convertedDoughnutData)
 
     yield put(actions.getTotalViewsSuccess(payload))
+
+    // yield put(
+    //   actions.getTotalViewsSuccess({
+    //     barData: convertDataIntoDatasets(doughnutData, options, {
+    //       singleDataset: true,
+    //       useBrandLabels: true,
+    //     }),
+    //     doughnutData: convertDataIntoDatasets(
+    //       stackedChartData,
+    //       { ...options, dateBucket },
+    //       { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+    //     ),
+    //   })
+    // )
   } catch (error) {
     console.log(error)
     yield put(actions.getTotalViewsFailure(error))

@@ -18,9 +18,23 @@ import {
   doughnutChart_DatasetOptions,
 } from './options'
 
-class TotalViewsChart extends React.Component {
+import { isEmpty, isEqual } from 'lodash'
+
+class TotalViewsChart extends React.PureComponent {
   callBack = (data, moduleKey) => {
     this.props.getTotalViewsRequest(data)
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const {
+      totalViewsData: { data: nextData },
+    } = nextProps
+
+    const {
+      totalViewsData: { data },
+    } = this.props
+
+    return !isEqual(nextData, data)
   }
 
   render() {

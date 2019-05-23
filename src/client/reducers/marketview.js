@@ -252,7 +252,9 @@ export const initialState = fromJS({
 })
 
 const marketviewReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action
+
+  switch (type) {
     case types.SET_MARKETVIEW_COMPETITOR_SELECTED_VIDEO:
       return state.set('selectedVideo', fromJS(action.payload))
 
@@ -316,16 +318,16 @@ const marketviewReducer = (state = initialState, action) => {
     // TOTAL VIEWS
     case types.GET_MARKETVIEW_TOTALVIEWS_REQUEST:
       return state.setIn(['totalViewsData', 'loading'], fromJS(true))
-      
+
     case types.GET_MARKETVIEW_TOTALVIEWS_SUCCESS:
-      const { doughnutData, stackedChartData } = payload
+      const { doughnutData, barData } = payload
 
       return state
         .setIn(
           ['totalViewsData', 'data'],
           fromJS({
             doughnutData,
-            stackedChartData,
+            barData,
           })
         )
         .setIn(['totalViewsData', 'loading'], fromJS(false))

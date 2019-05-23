@@ -31,6 +31,22 @@ const getTimeBucket = (value) => {
   return []
 }
 
+const getLabelWithSuffix = (label, property) => {
+  let suffix
+
+  switch (property) {
+    case 'duration':
+      suffix = 'seconds'
+      break
+    case 'frameRate':
+      suffix = 'FPS'
+      break
+    default:
+      suffix = ''
+  }
+  return `${label} ${suffix}`
+}
+
 /**
  * Convert data to chart js structure
  * @constructor
@@ -39,13 +55,14 @@ const getTimeBucket = (value) => {
  * @param {object} args - Args attribute for other options:
  *
  * ...args
-   {
+  {
     hoverBG: array
     preparedDatasets: array,
     preparedLabels: array,
     singleDataset: bool,
     borderWidth: object || int
-    }
+    useBrandLabels: bool,
+  }
   *
  */
 
@@ -75,6 +92,10 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     labels = timeBucket
   }
 
+  // set up datasets according to multiple brands
+  if (brands.length > 1) {
+  }
+
   // If proportionOf was  selected, it will change labels to time labels and it will set up datasets according to selected proportionOf
   if (options.proportionOf) {
     datasetsFromValues = Object.keys(getValueinObject).map((key) =>
@@ -84,7 +105,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
           getValueinObject[key][item]
       )
     )
-    labels = Object.keys(getValueinObject)
+    labels = Object.keys(getValueinObject).map((k) =>
+      getLabelWithSuffix(k, options.property[0])
+    )
   }
 
   // if timebucket or proportionOf werent selected, it will get data from single level json
@@ -92,10 +115,12 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     datasetsFromValues = Object.keys(getValueinObject).map(
       (key) => getValueinObject[key]
     )
-    labels = Object.keys(getValueinObject)
+    labels = Object.keys(getValueinObject).map((k) =>
+      getLabelWithSuffix(k, options.property[0])
+    )
     singleLevelJSON = true
   }
-  console.log(brands)
+
   if (brands.length > 1) {
     datasetsFromValues = brandObjects.map((brand, idx) =>
       Object.keys(brand[Object.keys(brand)[0]]).map(
@@ -105,29 +130,30 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     singleLevelJSON = false
     getValueinObject = brands
   }
-  console.log(datasetsFromValues)
+
   // Object.keys(
-  // 	brandObjects[0][Object.keys(brandObjects[0])]
+  //  brandObjects[0][Object.keys(brandObjects[0])]
   // ).map((value) => brandObjects.map((brand) => brand.duration[value]))
   // You can pass prepared labels or datasets in args
-  labels = (arg && arg.preparedLabel) || labels
+  labels =
+    (arg &&
+      (arg.preparedLabels
+        ? arg.preparedLabels
+        : arg.useBrandLabels
+        ? brands
+        : labels)) ||
+    labels
+
   datasetsFromValues = (arg && arg.preparedDatasets) || datasetsFromValues
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
       const color = chartColors[idx]
       return arg && arg.singleDataset
-        ? {
-            labels: [
-              ...data.labels,
-              `${key}${
-                !!options.property && options.property == 'duration'
-                  ? ' seconds'
-                  : options.property == 'frameRate'
-                  ? 'fps'
-                  : ''
-              }`,
-            ],
+        ? // only one dataset is required sometimes
+          // ie. doughnut chart in panoptic/engagement
+          {
+            labels: [...labels],
             datasets: [
               {
                 label: expectedNames[options.property],
