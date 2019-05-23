@@ -3,7 +3,6 @@ import PropTypes from 'prop-types'
 import TopSimilarPropertiesItem from 'Components/TopSimilarPropertiesItem'
 import style from './style.scss'
 import Module from 'Components/Module'
-import { isDataSetEmpty } from 'Utils'
 
 const TopSimilarProperties = (props) => {
   const { data, title, filters, action, moduleKey } = props
@@ -14,7 +13,6 @@ const TopSimilarProperties = (props) => {
       filters={filters}
       moduleKey={moduleKey}
       action={action}
-      isEmpty={isDataSetEmpty(data)}
     >
       <div className="col-12-no-gutters">
         {data &&

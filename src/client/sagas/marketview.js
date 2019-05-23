@@ -18,6 +18,7 @@ import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPl
 import {
   convertMultiRequestDataIntoDatasets,
   convertDataIntoDatasets,
+  getMaximumValueIndexFromArray,
 } from 'Utils'
 import { getReportDataApi } from 'Api'
 
@@ -132,6 +133,17 @@ function* getSimilarProperties({ data: dateRange }) {
       )
     )
 
+    const createCustomBackground = (data) => {
+      return Object.values(data).map((item, idx) => {
+        if (Object.values(data).includes(100)) {
+          return '#2FD7C4'
+        }
+        return idx === getMaximumValueIndexFromArray(data)
+          ? '#2FD7C4'
+          : '#ffffff'
+      })
+    }
+
     yield put(
       actions.getSimilarPropertiesSuccess(
         expectedValues.map((item, idx) =>
@@ -143,6 +155,9 @@ function* getSimilarProperties({ data: dateRange }) {
             },
             {
               singleDataset: true,
+              backgroundColor: createCustomBackground(
+                payloads[idx].data[payload.key]
+              ),
             }
           )
         )

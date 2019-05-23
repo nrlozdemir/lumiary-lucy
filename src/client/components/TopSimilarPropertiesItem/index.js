@@ -1,12 +1,11 @@
 import React from 'react'
 import cx from 'classnames'
-import ProgressBar from 'Components/ProgressBar'
+import DoughnutChart from 'Components/Charts/DoughnutChart'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import { capitalizeFirstLetter } from 'Utils'
 
 const sectionTitleClass = cx('font-primary', style.sectionTitle)
-const sectionBadgeStyle = cx('font-secondary-second', style.sectionBadge)
 
 const TopSimilarPropertiesItem = ({ sectionItem, i }) => {
   const dataset = sectionItem.datasets[0]
@@ -24,7 +23,9 @@ const TopSimilarPropertiesItem = ({ sectionItem, i }) => {
               color: colors.textColor,
             }}
           >
-            <p className={sectionTitleClass}>{dataset.label}</p>
+            <p className={sectionTitleClass}>
+              #{i + 1} {dataset.label}
+            </p>
 
             <div className={style.chartSectionBadge}>
               <span
@@ -40,26 +41,29 @@ const TopSimilarPropertiesItem = ({ sectionItem, i }) => {
                   .join('-')}
               </span>
             </div>
-            {sectionItem.labels.map((title, index) => (
-              <div key={index} className={style.progressBarArea}>
-                <p className={style.progressText}>
-                  <span className={style.leftTitle}>
-                    {title
-                      .split('-')
-                      .map((c) => capitalizeFirstLetter(c))
-                      .join('-')}
-                  </span>
-                  <span className={style.rightTitle}>
-                    {dataset.data[index]}%
-                  </span>
-                </p>
-                <ProgressBar
-                  width={dataset.data[index]}
-                  customBarClass={style.progressBar}
-                  customPercentageClass={style.percentageBlue}
-                />
-              </div>
-            ))}
+
+            <div className={style.doughnutChartContainer}>
+              <DoughnutChart
+                width={150}
+                height={150}
+                displayDataLabels={false}
+                cutoutPercentage={50}
+                data={sectionItem}
+              />
+              <p>
+                <span className={style.textBold}>
+                  {dataset.data[topItemIndex]}%{' '}
+                </span>
+                52% of top videos of top videos
+                <br /> are shot in{' '}
+                <span className={style.textBold}>
+                  {sectionItem.labels[topItemIndex]
+                    .split('-')
+                    .map((c) => capitalizeFirstLetter(c))
+                    .join('-')}
+                </span>
+              </p>
+            </div>
           </div>
         </div>
       )}
