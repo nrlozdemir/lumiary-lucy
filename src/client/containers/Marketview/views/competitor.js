@@ -78,7 +78,7 @@ export class Competitor extends React.Component {
           'SB Nation',
           'ESPN',
           'Scout Media',
-          'Fansided',
+          'Fanside',
         ],
         datasets: topPerformingPropertiesByCompetitorsData,
       },
@@ -151,7 +151,7 @@ export class Competitor extends React.Component {
               },
               {
                 className: 'bg-dusk"',
-                text: 'Fansided',
+                text: 'Fanside',
               },
             ]}
           />
@@ -160,6 +160,7 @@ export class Competitor extends React.Component {
             data={similarProperties}
             title="Top Performing Property Across All Competitors"
             action={this.getSimilarProperties}
+            presentWithDoughnut
             filters={[
               {
                 type: 'dateRange',
@@ -168,45 +169,45 @@ export class Competitor extends React.Component {
               },
             ]}
           />
-					<BarChartModule
-						moduleKey="MarketView/topPerformingPropertiesByCompetitors"
-						containerClass={style.detailTopPerformingPropertyContainer}
-						barData={topPerformingPropertiesDataCombineData}
-						tickOptions={chartTickOptions}
-						title="Top Performing Property Across All Competitors"
-						height={50}
-						action={this.getTopPerformingPropertiesByCompetitors}
-						filters={[
-							{
-								type: 'metric',
-								selectKey: 'engagement',
-								placeHolder: 'engagement',
-							},
-							{
-								type: 'dateRange',
-								selectKey: 'dateRange',
-								placeHolder: 'dateRange',
-							}
-						]}
-						references={[
-							{
-								className: 'bg-cool-blue',
-								text: 'Fast',
-							},
-							{
-								className: 'bg-lighter-purple',
-								text: 'Medium',
-							},
-							{
-								className: 'bg-coral-pink',
-								text: 'Slow',
-							},
-							{
-								className: 'bg-cool-grey',
-								text: 'Slowest',
-							},
-						]}
-					/>
+          <BarChartModule
+            moduleKey="MarketView/topPerformingPropertiesByCompetitors"
+            containerClass={style.detailTopPerformingPropertyContainer}
+            barData={topPerformingPropertiesDataCombineData}
+            tickOptions={chartTickOptions}
+            title="Top Performing Property Across All Competitors"
+            height={50}
+            action={this.getTopPerformingPropertiesByCompetitors}
+            filters={[
+              {
+                type: 'metric',
+                selectKey: 'engagement',
+                placeHolder: 'engagement',
+              },
+              {
+                type: 'dateRange',
+                selectKey: 'dateRange',
+                placeHolder: 'dateRange',
+              },
+            ]}
+            references={[
+              {
+                className: 'bg-cool-blue',
+                text: 'Fast',
+              },
+              {
+                className: 'bg-lighter-purple',
+                text: 'Medium',
+              },
+              {
+                className: 'bg-coral-pink',
+                text: 'Slow',
+              },
+              {
+                className: 'bg-cool-grey',
+                text: 'Slowest',
+              },
+            ]}
+          />
         </div>
       </React.Fragment>
     )
