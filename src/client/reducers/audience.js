@@ -122,8 +122,9 @@ export const actions = {
     error,
   }),
 
-  getAudienceDominantColorData: () => ({
-    type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA,
+  getAudienceDominantColorData: (data) => ({
+		type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA,
+		data
   }),
   getAudienceDominantColorDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS,

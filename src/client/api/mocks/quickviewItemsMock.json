@@ -2,7 +2,7 @@
   "all-platforms": [
     {
       "video": {
-        "title": "2,387,931 Views",
+        "title": "Ohio Stifles SDSU",
         "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anything-can-happen.mp4",
         "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anything-can-happen.jpg",
         "socialIcon": "instagram",
@@ -67,10 +67,10 @@
     },
     {
       "video": {
-        "title": "516 Views",
+        "title": "Ellis and Mitchell Faceoff",
         "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anthony-Davis-Finishes-with-43-Points.mp4",
         "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anthony-Davis-Finishes-with-43-Points.jpg",
-        "socialIcon": "pinterest",
+        "socialIcon": "instagram",
         "cvScore": 67.1
       },
       "infos": [
@@ -134,7 +134,7 @@
   "facebook": [
     {
       "video": {
-        "title": "1,137,931 Views",
+        "title": "12 years ago today, Kobe dropped 81",
         "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Deandre-Ayton-Knows.mp4",
         "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Deandre-Ayton-Knows.jpg",
         "socialIcon": "facebook",
@@ -199,7 +199,7 @@
     },
     {
       "video": {
-        "title": "12,516 Views",
+        "title": "13-Year-Old Jaden Newman",
         "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/12-years-ago-today-Kobe-dropped-81.mp4",
         "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/12-years-ago-today-Kobe-dropped-81.jpg",
         "socialIcon": "facebook",
@@ -266,7 +266,7 @@
   "instagram": [
     {
       "video": {
-        "title": "105,931 Views",
+        "title": "21 years later",
         "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Appreciate-the-greatness-of-the-Pats.mp4",
         "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Appreciate-the-greatness-of-the-Pats.jpg",
         "socialIcon": "instagram",
@@ -331,7 +331,7 @@
     },
     {
       "video": {
-        "title": "56,145 Views",
+        "title": "Andre Drummond All Star",
         "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Draymond-not-holding-back-on-the-ref.mp4",
         "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Draymond-not-holding-back-on-the-ref.jpg",
         "socialIcon": "instagram",
@@ -398,7 +398,7 @@
   "twitter": [
     {
       "video": {
-        "title": "250,931 Views",
+        "title": "Anything can happen",
         "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anthony-Davis-Finishes-with-43-Points.mp4",
         "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anthony-Davis-Finishes-with-43-Points.jpg",
         "socialIcon": "twitter",
@@ -463,7 +463,7 @@
     },
     {
       "video": {
-        "title": "89,098 Views",
+        "title": "Appreciate the greatness",
         "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Anything-can-happen.mp4",
         "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Anything-can-happen.jpg",
         "socialIcon": "twitter",
@@ -530,7 +530,7 @@
   "youtube": [
     {
       "video": {
-        "title": "450,782 Views",
+        "title": "Deandre Ayton Knows",
         "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Down-goes-Brown.mp4",
         "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Down-goes-Brown.jpg",
         "socialIcon": "youtube",
@@ -595,7 +595,7 @@
     },
     {
       "video": {
-        "title": "200,102 Views",
+        "title": "Down goes Brown",
         "videoUrl": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/Draymond-not-holding-back-on-the-ref.mp4",
         "poster": "https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/Draymond-not-holding-back-on-the-ref.jpg",
         "socialIcon": "youtube",

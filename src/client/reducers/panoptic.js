@@ -231,8 +231,16 @@ const panopticReducer = (state = initialState, action) => {
       return state.setIn(['filteringSectionData', 'loading'], fromJS(true))
 
     case types.GET_FILTERING_SECTION_DATA_SUCCESS:
+      const { doughnutData, stackedChartData } = payload
+
       return state
-        .setIn(['filteringSectionData', 'data'], fromJS(action.payload))
+        .setIn(
+          ['filteringSectionData', 'data'],
+          fromJS({
+            doughnutData,
+            stackedChartData,
+          })
+        )
         .setIn(['filteringSectionData', 'loading'], fromJS(false))
 
     case types.GET_FILTERING_SECTION_DATA_ERROR:
@@ -250,8 +258,8 @@ const panopticReducer = (state = initialState, action) => {
         .setIn(
           ['pacingChartData', 'data'],
           fromJS({
-            stadiumData: stadiumData,
-            horizontalStackedBarData: horizontalStackedBarData,
+            stadiumData,
+            horizontalStackedBarData,
           })
         )
         .setIn(['pacingChartData', 'loading'], fromJS(false))

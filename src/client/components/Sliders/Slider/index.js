@@ -88,18 +88,23 @@ class MarketViewSlider extends React.Component {
           item.classList.remove('active')
         }
 
-				bullets[this.refSlider.activeIndex].classList.add('active')
+        bullets[this.refSlider.activeIndex].classList.add('active')
 
-				// Force rendering needed to update disabled state of prev and next buttons
-				this.forceUpdate();
+        // Force rendering needed to update disabled state of prev and next buttons
+        this.forceUpdate();
       },
-		},
+    },
     renderNextButton: this.renderNextButton,
     renderPrevButton: this.renderPrevButton
-	}
+  }
+
+  componentDidMount() {
+    const findSlide = this.props.items && Math.floor(parseInt(this.props.items.length) / 2)
+    this.props.items &&  this.refSlider && this.refSlider.slideTo(findSlide, 1)
+  }
 
   render() {
-		const { props } = this
+    const { props } = this
 
     return (
       <div className={style.section}>
@@ -122,19 +127,16 @@ class MarketViewSlider extends React.Component {
                   <img src={item.image} />
                   <div
                     className={style.percentageWrapper}
-                    style={{ right: '80px' }}
                   >
                     <PercentageBarGraph
-                      backgroundColor="#303a5d"
-                      customClass={style.libraryPercentageGraph}
-                      id={`videolist-${i}`}
+                      key={Math.random()}
                       percentage={item.cvScore}
-                      disableLabels={true}
-                      color={'#2fd7c4'}
-                      lineCount={30}
-                      height={19}
-                      width={67}
-                      xSmall
+                      width={80}
+                      height={20}
+                      barWidth={2}
+                      barSpaceWidth={1}
+                      disableLabels
+                      color='green'
                     />
                   </div>
                 </AssetLayer>

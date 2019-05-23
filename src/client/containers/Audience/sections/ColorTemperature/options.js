@@ -17,5 +17,4 @@ export const platforms = [
   {name: 'Twitter', color: '#8562F3'},
   {name: 'Snapchat', color: '#acb0be'},
   {name: 'Youtube', color: '#ffffff'},
-  {name: 'Pinterest', color: '#21243B'},
 ];
