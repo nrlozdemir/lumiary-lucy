@@ -6,7 +6,7 @@ import updateAudiencePer from 'Api/updateAudiencePerformance'
 
 import { compareSharesData, radarChartCalculate } from 'Utils'
 
-import { getReportDataApi } from 'Api'
+import { getDataFromApi } from 'Api'
 
 import _ from 'lodash'
 
@@ -129,14 +129,15 @@ function* getAudienceDominantColorData({
       platform,
       property: ['color'],
       dateBucket: 'none',
+      url: '/report',
     }
 
     const payload = yield all([
-      call(getReportDataApi, {
+      call(getDataFromApi, {
         ...parameters,
         brand: 'Bleacher Report',
       }),
-      call(getReportDataApi, {
+      call(getDataFromApi, {
         ...parameters,
         brand: 'Barstool Sports',
       }),
