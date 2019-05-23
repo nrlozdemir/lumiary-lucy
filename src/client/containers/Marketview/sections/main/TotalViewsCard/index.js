@@ -45,7 +45,7 @@ class TotalViewsChart extends React.Component {
           'SB Nation',
           'ESPN',
           'Scout Media',
-          'Fansided',
+          'Fanside',
         ],
         datasets: doughnutData,
       },
@@ -109,7 +109,7 @@ class TotalViewsChart extends React.Component {
                   },
                   {
                     color: '#545B79',
-                    data: 'Fansided',
+                    data: 'Fanside',
                   },
                 ]}
               />

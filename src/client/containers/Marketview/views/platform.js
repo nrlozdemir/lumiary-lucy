@@ -100,58 +100,61 @@ export class Platform extends React.Component {
           ]}
         />
 
-        <TopVideosCardModule
-          moduleKey="MarketView/Platform/TopVideosCardModule"
-          chartData={competitorTopVideos}
-          height={150}
-          title="Top Videos Over Time By Platform"
-          action={this.getCompetitorTopVideos}
-          filters={[
-            {
-              type: 'property',
-              selectKey: 'mwplttvcm-property',
-              placeHolder: 'property',
-            },
-            {
-              type: 'metric',
-              selectKey: 'mwplttvcm-engagement',
-              placeHolder: 'engagement',
-            },
-            {
-              type: 'dateRange',
-              selectKey: 'mwplttvcm-dateRange',
-              placeHolder: 'dateRange',
-            },
-          ]}
-          references={[
-            {
-              className: 'bg-cool-blue',
-              text: 'Barstool Sports',
-            },
-            {
-              className: 'bg-lighter-purple',
-              text: 'SB Nation',
-            },
-            {
-              className: 'bg-coral-pink',
-              text: 'ESPN',
-            },
-            {
-              className: 'bg-cool-grey',
-              text: 'Scout Media',
-            },
-            {
-              className: 'bg-dusk"',
-              text: 'Fansided',
-            },
-          ]}
-        />
+        {competitorTopVideos && (
+          <TopVideosCardModule
+            chartData={competitorTopVideos}
+            height={150}
+            moduleKey="MarketView/Platform/TopVideosCardModule"
+            title="Top Videos Over Time By Platform"
+            action={this.getCompetitorTopVideos}
+            filters={[
+              {
+                type: 'property',
+                selectKey: 'mwplttvcm-property',
+                placeHolder: 'property',
+              },
+              {
+                type: 'metric',
+                selectKey: 'mwplttvcm-engagement',
+                placeHolder: 'engagement',
+              },
+              {
+                type: 'dateRange',
+                selectKey: 'mwplttvcm-dateRange',
+                placeHolder: 'dateRange',
+              },
+            ]}
+            references={[
+              {
+                className: 'bg-cool-blue',
+                text: 'Facebook',
+              },
+              {
+                className: 'bg-lighter-purple',
+                text: 'Instagram',
+              },
+              {
+                className: 'bg-coral-pink',
+                text: 'Twitter',
+              },
+              {
+                className: 'bg-cool-grey',
+                text: 'Scout Media',
+              },
+              {
+                className: 'bg-dusk"',
+                text: 'YouTube',
+              },
+            ]}
+          />
+        )}
 
         <TopSimilarPropertiesModule
           moduleKey="MarketView/TopSimilarPropertiesModule"
           data={similarProperties}
           title="Top Similar Properties Of Top Videos"
           action={this.getSimilarProperties}
+          presentWithDoughnut
           filters={[
             {
               type: 'dateRange',

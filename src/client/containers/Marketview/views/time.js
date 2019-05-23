@@ -99,6 +99,7 @@ export class Time extends React.Component {
           data={(selectedDayData && selectedDayData.SimilarProperties) || null}
           title="Top Similar Properties Of Top Videos"
           action={this.getSimilarProperties}
+          presentWithDoughnut
           filters={[
             {
               type: 'dateRange',
