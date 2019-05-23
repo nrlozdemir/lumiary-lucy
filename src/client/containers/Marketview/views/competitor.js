@@ -178,9 +178,14 @@ export class Competitor extends React.Component {
             action={this.getTopPerformingPropertiesByCompetitors}
             filters={[
               {
-                type: 'property',
-                selectKey: 'property',
-                placeHolder: 'property',
+                type: 'metric',
+                selectKey: 'engagement',
+                placeHolder: 'engagement',
+              },
+              {
+                type: 'dateRange',
+                selectKey: 'dateRange',
+                placeHolder: 'dateRange',
               },
             ]}
             references={[
