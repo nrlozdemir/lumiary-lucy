@@ -148,6 +148,10 @@ export class Platform extends React.Component {
               },
               {
                 className: 'bg-cool-grey',
+                text: 'Scout Media',
+              },
+              {
+                className: 'bg-dusk"',
                 text: 'YouTube',
               },
             ]}

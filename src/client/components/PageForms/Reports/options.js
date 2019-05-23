@@ -2,7 +2,7 @@ export const selectOptionsBrand = [
   { value: 'bleacher-report', label: 'Bleacher Report' },
   { value: 'espn', label: 'ESPN' },
   { value: 'scout-media', label: 'Scout Media' },
-  { value: 'fansided', label: 'Fansided' },
+  { value: 'fanside', label: 'Fanside' },
   { value: 'barstool-sports', label: 'Barstool Sports' },
 ]
 
