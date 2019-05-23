@@ -12,7 +12,7 @@ import style from './style.scss'
 import 'chartjs-plugin-datalabels'
 import Module from 'Components/Module'
 
-import { chartCombineDataset } from 'Utils'
+import { chartCombineDataset, isDataSetEmpty } from 'Utils'
 import {
   barChart_DatasetOptions,
   doughnutChart_DatasetOptions,
@@ -20,14 +20,16 @@ import {
 
 class TotalViewsChart extends React.Component {
   callBack = (data, moduleKey) => {
-    if (moduleKey === 'StackedBarChart') {
-      this.props.getTotalViewsRequest(data, moduleKey)
-    }
+    this.props.getTotalViewsRequest(data)
   }
 
   render() {
     const {
-      totalViewsData: { barData, doughnutData },
+      totalViewsData: {
+        data,
+        loading,
+        data: { barData, doughnutData },
+      },
     } = this.props
 
     const barDataCombine = chartCombineDataset(
@@ -52,6 +54,20 @@ class TotalViewsChart extends React.Component {
       doughnutChart_DatasetOptions
     )
 
+    console.log('bar data', barDataCombine)
+    console.log('donut data', doughnutDataCombine)
+
+    const isDoughnutEmpty = isDataSetEmpty(doughnutDataCombine)
+    const isBarChartEmpty = isDataSetEmpty(barDataCombine)
+
+    const hasNoData =
+      (!loading &&
+        (!!doughnutData &&
+          isDoughnutEmpty &&
+          !!stackedChartData &&
+          isBarChartEmpty)) ||
+      isEmpty(data)
+
     return (
       <Module
         moduleKey={'StackedBarChart'}
@@ -74,46 +90,45 @@ class TotalViewsChart extends React.Component {
             placeHolder: 'Date',
           },
         ]}
+        isEmpty={hasNoData}
       >
         <div className="grid-collapse">
           <div className="col-6 mt-24">
-            {barData && <StackedBarChart barData={barDataCombine} />}
+            <StackedBarChart barData={barDataCombine} />
           </div>
           <div className="col-6">
-            {doughnutData && (
-              <DoughnutChart
-                width={270}
-                height={270}
-                data={doughnutDataCombine}
-                cutoutPercentage={58}
-                fillText="Total Percentage"
-                dataLabelFunction="insertAfter"
-                dataLabelInsert="%"
-                labelPositionLeft
-                labelsData={[
-                  {
-                    color: '#2FD7C4',
-                    data: 'Barstool Sports',
-                  },
-                  {
-                    color: '#8562F3',
-                    data: 'SB Nation',
-                  },
-                  {
-                    color: '#5292E5',
-                    data: 'ESPN',
-                  },
-                  {
-                    color: '#acb0be',
-                    data: 'Scout Media',
-                  },
-                  {
-                    color: '#545B79',
-                    data: 'Fanside',
-                  },
-                ]}
-              />
-            )}
+            <DoughnutChart
+              width={270}
+              height={270}
+              data={doughnutDataCombine}
+              cutoutPercentage={58}
+              fillText="Total Percentage"
+              dataLabelFunction="insertAfter"
+              dataLabelInsert="%"
+              labelPositionLeft
+              labelsData={[
+                {
+                  color: '#2FD7C4',
+                  data: 'Barstool Sports',
+                },
+                {
+                  color: '#8562F3',
+                  data: 'SB Nation',
+                },
+                {
+                  color: '#5292E5',
+                  data: 'ESPN',
+                },
+                {
+                  color: '#acb0be',
+                  data: 'Scout Media',
+                },
+                {
+                  color: '#545B79',
+                  data: 'Fanside',
+                },
+              ]}
+            />
           </div>
         </div>
       </Module>

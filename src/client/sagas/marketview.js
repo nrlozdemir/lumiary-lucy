@@ -1,7 +1,7 @@
 import { takeLatest, call, put, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import _ from 'lodash'
-
+import { selectAuthProfile } from 'Reducers/auth'
 import { types, actions } from 'Reducers/marketview'
 import marketviewCompetitorVideosData from 'Api/mocks/marketviewCompetitorVideos.json'
 import marketviewCompetitorTopVideosData from 'Api/mocks/marketviewCompetitorTopVideosMock.json'
@@ -16,12 +16,21 @@ import marketviewTopPerformingProperties from 'Api/mocks/marketviewPlatformTopPe
 import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json'
 
 import {
+  compareSharesData,
   convertMultiRequestDataIntoDatasets,
   getBrandAndCompetitors,
   convertDataIntoDatasets,
+  getDateBucketFromRange,
   getMaximumValueIndexFromArray,
 } from 'Utils'
+
 import { getDataFromApi } from 'Utils/api'
+
+import { getReportDataApi } from 'Api'
+
+function getCompetitorVideosApi() {
+  return axios('/').then((res) => marketviewCompetitorVideosData)
+}
 
 import { selectAuthProfile } from 'Reducers/auth'
 
@@ -207,11 +216,38 @@ function* getFormatChartData() {
   }
 }
 
-function* getTotalViewsData(data) {
+function* getTotalViewsData({ data }) {
   try {
+    const { metric, dateRange, platform } = data
+
+    const profile = yield select(selectAuthProfile)
+
+    const brands = getBrandAndCompetitors(profile)
+
+    const options = {
+      metric,
+      platform,
+      dateRange,
+      dateBucket: 'none',
+      display: 'percentage',
+      property: ['views'],
+      brands,
+    }
+
     const payload = yield call(getTotalViewsApi)
+
+    const barData = yield call(getReportDataApi, { ...options })
+
+    const doughnutData = yield call(getReportDataApi, {
+      ...options,
+      dateBucket: getDateBucketFromRange(dateRange),
+    })
+
+    console.log('api, ', barData, doughnutData)
+
     yield put(actions.getTotalViewsSuccess(payload))
   } catch (error) {
+    console.log(error)
     yield put(actions.getTotalViewsFailure(error))
   }
 }

@@ -3,6 +3,7 @@ import { Doughnut } from 'react-chartjs-2'
 import classnames from 'classnames'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
+import { isDataSetEmpty } from 'Utils'
 
 import Labels from 'Components/Charts/Labels'
 
@@ -84,6 +85,7 @@ const DoughnutChart = (props) => {
 
   let plugins = []
   if (fillText) {
+    const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
     plugins = [
       {
         beforeDraw: function(chart) {
