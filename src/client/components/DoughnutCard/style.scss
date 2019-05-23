@@ -8,7 +8,6 @@
 
   .radialChart {
     text-align: center;
-    padding: 30px 20px;
     border-left: 1px solid $color-dusk;
     list-style: none;
     position: relative;
@@ -39,6 +38,13 @@
     .doughnutChartContainer {
       position: relative;
       margin-top: 40px;
+      .customDoughnutContainer {
+        display: block;
+        margin: 0 auto;
+      }
+      .customChartWrapper {
+        width: auto;
+      }
       p {
         font-family: $font-family-ClanOTNews;
         font-size: 14px;

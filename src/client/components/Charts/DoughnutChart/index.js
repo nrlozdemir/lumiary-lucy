@@ -1,6 +1,6 @@
-import React, { lazy, Suspense } from 'react'
+import React from 'react'
 import { Doughnut } from 'react-chartjs-2'
-//import classnames from 'classnames'
+import classnames from 'classnames'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 
@@ -76,6 +76,8 @@ const DoughnutChart = (props) => {
     labelPositionLeft,
     cutoutPercentage,
     customStyle,
+    customDoughnutContainer,
+    customChartWrapper,
   } = props
 
   const themes = props.themeContext.colors
@@ -111,13 +113,16 @@ const DoughnutChart = (props) => {
 
   return (
     <React.Fragment>
-      <div className={style.doughnutContainer} style={customStyle}>
+      <div
+        className={classnames(style.doughnutContainer, customDoughnutContainer)}
+        style={customStyle}
+      >
         {labelPositionLeft && labelsData && (
           <div className={style.labelContainer}>
             <Labels data={labelsData} />
           </div>
         )}
-        <div className={style.chartWrapper}>
+        <div className={classnames(style.chartWrapper, customChartWrapper)}>
           {data && (
             <Doughnut
               key={Math.random()}
