@@ -98,6 +98,11 @@ class MarketViewSlider extends React.Component {
     renderPrevButton: this.renderPrevButton
   }
 
+  componentDidMount() {
+    const findSlide = this.props.items && Math.floor(parseInt(this.props.items.length) / 2)
+    this.props.items &&  this.refSlider && this.refSlider.slideTo(findSlide, 1)
+  }
+
   render() {
     const { props } = this
 

@@ -168,40 +168,45 @@ export class Competitor extends React.Component {
               },
             ]}
           />
-          <BarChartModule
-            moduleKey="MarketView/topPerformingPropertiesByCompetitors"
-            containerClass={style.detailTopPerformingPropertyContainer}
-            barData={topPerformingPropertiesDataCombineData}
-            tickOptions={chartTickOptions}
-            title="Top Performing Property Across All Competitors"
-            height={50}
-            action={this.getTopPerformingPropertiesByCompetitors}
-            filters={[
-              {
-                type: 'property',
-                selectKey: 'property',
-                placeHolder: 'property',
-              },
-            ]}
-            references={[
-              {
-                className: 'bg-cool-blue',
-                text: 'Fast',
-              },
-              {
-                className: 'bg-lighter-purple',
-                text: 'Medium',
-              },
-              {
-                className: 'bg-coral-pink',
-                text: 'Slow',
-              },
-              {
-                className: 'bg-cool-grey',
-                text: 'Slowest',
-              },
-            ]}
-          />
+					<BarChartModule
+						moduleKey="MarketView/topPerformingPropertiesByCompetitors"
+						containerClass={style.detailTopPerformingPropertyContainer}
+						barData={topPerformingPropertiesDataCombineData}
+						tickOptions={chartTickOptions}
+						title="Top Performing Property Across All Competitors"
+						height={50}
+						action={this.getTopPerformingPropertiesByCompetitors}
+						filters={[
+							{
+								type: 'metric',
+								selectKey: 'engagement',
+								placeHolder: 'engagement',
+							},
+							{
+								type: 'dateRange',
+								selectKey: 'dateRange',
+								placeHolder: 'dateRange',
+							}
+						]}
+						references={[
+							{
+								className: 'bg-cool-blue',
+								text: 'Fast',
+							},
+							{
+								className: 'bg-lighter-purple',
+								text: 'Medium',
+							},
+							{
+								className: 'bg-coral-pink',
+								text: 'Slow',
+							},
+							{
+								className: 'bg-cool-grey',
+								text: 'Slowest',
+							},
+						]}
+					/>
         </div>
       </React.Fragment>
     )
