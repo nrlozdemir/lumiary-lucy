@@ -5,6 +5,7 @@ import style from './style.scss'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import { Line } from 'react-chartjs-2'
+import HorizontalSlider from 'Components/Sliders/Horizontal'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 class LineAndDoughnutChartModule extends React.Component {
@@ -186,6 +187,7 @@ class LineAndDoughnutChartModule extends React.Component {
                 </div>
               </div>
               <div className="col-12">
+								<HorizontalSlider>
                 <div className={style.scrollableContainer}>
                   {percentageData.map((chart, i) => (
                     <div className={percentageCol}>
@@ -208,6 +210,7 @@ class LineAndDoughnutChartModule extends React.Component {
                     </div>
                   ))}
                 </div>
+								</HorizontalSlider>
               </div>
             </div>
           </Module>
