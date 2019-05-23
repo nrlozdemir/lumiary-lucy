@@ -91,7 +91,7 @@ export class Competitor extends React.Component {
           'SB Nation',
           'ESPN',
           'Scout Media',
-          'Fansided',
+          'Fanside',
         ],
         datasets: topPerformingPropertiesByCompetitorsData,
       },
@@ -164,7 +164,7 @@ export class Competitor extends React.Component {
                 },
                 {
                   className: 'bg-dusk"',
-                  text: 'Fansided',
+                  text: 'Fanside',
                 },
               ]}
             />

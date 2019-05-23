@@ -16,7 +16,7 @@ export const barChart_DatasetOptions = [
     backgroundColor: '#acb0be',
   },
   {
-    label: 'Fansided',
+    label: 'Fanside',
     backgroundColor: '#545B79',
   },
 ]

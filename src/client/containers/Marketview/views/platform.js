@@ -152,7 +152,7 @@ export class Platform extends React.Component {
               },
               {
                 className: 'bg-dusk"',
-                text: 'Fansided',
+                text: 'Fanside',
               },
             ]}
           />
