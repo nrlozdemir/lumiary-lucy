@@ -174,6 +174,7 @@ export class Competitor extends React.Component {
             data={similarProperties}
             title="Top Performing Property Across All Competitors"
             action={this.getSimilarProperties}
+            presentWithDoughnut
             filters={[
               {
                 type: 'dateRange',
@@ -192,16 +193,16 @@ export class Competitor extends React.Component {
               height={50}
               action={this.getTopPerformingPropertiesByCompetitors}
               filters={[
-								{
+                {
                   type: 'metric',
                   selectKey: 'engagement',
                   placeHolder: 'engagement',
                 },
-								{
+                {
                   type: 'dateRange',
-                	selectKey: 'dateRange',
-                	placeHolder: 'dateRange',
-                }
+                  selectKey: 'dateRange',
+                  placeHolder: 'dateRange',
+                },
               ]}
               references={[
                 {
