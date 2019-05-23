@@ -142,6 +142,7 @@ const DoughnutChart = (props) => {
                         ? data.datasets[0].backgroundColor
                         : null,
                     borderColor: themes.moduleBackground,
+                    hoverBorderColor: themes.moduleBackground,
                     hoverBackgroundColor:
                       data && data.datasets
                         ? data.datasets[0].hoverBackgroundColor

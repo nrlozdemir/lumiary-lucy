@@ -136,23 +136,19 @@ export class Platform extends React.Component {
             references={[
               {
                 className: 'bg-cool-blue',
-                text: 'Barstool Sports',
+                text: 'Facebook',
               },
               {
                 className: 'bg-lighter-purple',
-                text: 'SB Nation',
+                text: 'Instagram',
               },
               {
                 className: 'bg-coral-pink',
-                text: 'ESPN',
+                text: 'Twitter',
               },
               {
                 className: 'bg-cool-grey',
-                text: 'Scout Media',
-              },
-              {
-                className: 'bg-dusk"',
-                text: 'Fansided',
+                text: 'YouTube',
               },
             ]}
           />
@@ -163,6 +159,7 @@ export class Platform extends React.Component {
           data={similarProperties}
           title="Top Similar Properties Of Top Videos"
           action={this.getSimilarProperties}
+          presentWithDoughnut
           filters={[
             {
               type: 'dateRange',
