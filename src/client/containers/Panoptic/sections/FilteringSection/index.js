@@ -59,9 +59,9 @@ class PanopticFilteringSection extends Component {
         action={this.callBack}
         filters={[
           {
-            type: 'duration',
-            selectKey: 'PFS-duration',
-            placeHolder: 'Duration',
+            type: 'property',
+            selectKey: 'PFS-Property',
+            placeHolder: 'Property',
           },
           {
             type: 'platform',
