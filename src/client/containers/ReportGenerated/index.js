@@ -12,6 +12,7 @@ import TopVideosCard from './sections/TopVideosCard'
 import PacingCard from './sections/PacingCard'
 import EngagementByProperty from './sections/EngagementByProperty'
 import ColorTemperature from './sections/ColorTemperature'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 //import style from './style.scss'
 
 class ReportGenerated extends Component {
@@ -105,6 +106,7 @@ class ReportGenerated extends Component {
               colorTempData={colorTempData}
               handleSelectFilters={this.handleSelectFilters}
               selectWarmColor={selectWarmColor}
+              selects={this.props.selects}
             />
           )}
         </div>
@@ -115,6 +117,7 @@ class ReportGenerated extends Component {
 
 const mapStateToProps = createStructuredSelector({
   generatedReport: makeSelectGeneratedReport(),
+  selects: makeSelectSelectFilters(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
