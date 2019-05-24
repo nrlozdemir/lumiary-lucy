@@ -2,8 +2,10 @@ import axios from 'axios'
 import mock from 'Api/mocks/libraryMock.json'
 import { findIdDetail, getReportDataApi } from 'Utils/api'
 import { types, actions } from 'Reducers/libraryDetail'
-import { takeLatest, call, put } from 'redux-saga/effects'
+import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { convertDataIntoDatasets, getMaximumValueIndexFromArray } from 'Utils/'
+import { selectAuthProfile } from 'Reducers/auth'
+import { getBrandAndCompetitors } from 'Utils/'
 
 function getBarChartApi({ LibraryDetailId }) {
   //this will use ajax function in utils/api when real data is provided
@@ -49,7 +51,11 @@ function* getDoughnutChart({ payload: { LibraryDetailId } }) {
       { key: 'duration', title: 'Duration' },
       { key: 'format', title: 'Format' },
     ]
+    const profile = yield select(selectAuthProfile)
+
+    const brands = getBrandAndCompetitors(profile)
     const parameters = {
+      ...brands,
       dateRange: '3months',
       metric: 'views',
       platform: 'all',
@@ -63,7 +69,6 @@ function* getDoughnutChart({ payload: { LibraryDetailId } }) {
         property: [item.key],
       })
     )
-
     const createCustomBackground = (data) => {
       return Object.values(data).map((item, idx) => {
         if (Object.values(data).includes(100)) {
@@ -85,14 +90,16 @@ function* getDoughnutChart({ payload: { LibraryDetailId } }) {
         {
           singleDataset: true,
           backgroundColor: createCustomBackground(
-            payloads[idx].data[payload.key]
+            payloads[idx].data[Object.keys(payloads[idx].data)[0]][payload.key]
           ),
         }
       ),
     }))
+    console.log(val)
 
     yield put(actions.getDoughnutChartSuccess(val))
   } catch (error) {
+    console.log(error)
     yield put(actions.getDoughnutChartFailure({ error }))
   }
 }

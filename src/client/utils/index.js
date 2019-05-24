@@ -55,9 +55,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   let singleLevelJSON
 
   const arg = args && !!args[0] && args[0]
-
-  const getValueinObject = values.data[options.property[0]]
-  delete getValueinObject.subtotal
+  const brands = Object.keys(values.data)
+  const brandObjects = brands.map((b) => values.data[b])
+  const getValueinObject = brandObjects[0][options.property[0]]
 
   const timeBucket =
     options.dateBucket !== 'none' ? getTimeBucket(getValueinObject) : null
@@ -382,13 +382,10 @@ const getBrandAndCompetitors = (profile) => {
   const { brand } = profile
 
   if (!!brand && !!brand.uuid && !!brand.competitors) {
-    return {
-      brand_uuid: brand.uuid,
-      competitor_uuids: brand.competitors.map((c) => c.uuid),
-    }
+    return [brand.uuid, ...brand.competitors.map((c) => c.uuid)]
   }
 
-  return {}
+  return [brand.uuid]
 }
 
 export {
