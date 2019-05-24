@@ -57,6 +57,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   const arg = args && !!args[0] && args[0]
   const brands = Object.keys(values.data)
   const brandObjects = brands.map((b) => values.data[b])
+
   const getValueinObject = brandObjects[0][options.property[0]]
 
   const timeBucket =
