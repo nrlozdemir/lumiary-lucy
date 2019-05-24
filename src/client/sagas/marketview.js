@@ -15,10 +15,7 @@ import marketviewTimeMockData from 'Api/mocks/marketviewTimeMock.json'
 import marketviewTopPerformingProperties from 'Api/mocks/marketviewPlatformTopPerformingProperty.json'
 import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json'
 
-import {
-  convertMultiRequestDataIntoDatasets,
-  getBrandAndCompetitors,
-} from 'Utils'
+import { convertMultiRequestDataIntoDatasets } from 'Utils'
 import { getReportDataApi } from 'Api'
 
 import { selectAuthProfile } from 'Reducers/auth'
@@ -87,9 +84,7 @@ function* getCompetitorTopVideosMarketview({
   data: { property, metric, dateRange },
 }) {
   try {
-    const profile = yield select(selectAuthProfile)
-
-    const brandAndCompetitors = getBrandAndCompetitors(profile)
+    const { brand } = yield select(selectAuthProfile)
 
     const options = {
       metric,
@@ -97,7 +92,7 @@ function* getCompetitorTopVideosMarketview({
       property: [property],
       dateBucket: 'none',
       display: 'percentage',
-      ...brandAndCompetitors,
+      brands: [brand.uuid],
     }
 
     const [facebook, instagram, twitter, youtube] = yield all([
