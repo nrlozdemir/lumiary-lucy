@@ -121,6 +121,8 @@ function* getCompetitorTopVideosMarketview({
 
 function* getSimilarProperties({ data: dateRange }) {
   try {
+    const { brand } = yield select(selectAuthProfile)
+
     const expectedValues = [
       { key: 'color', title: 'Dominant Color' },
       { key: 'pacing', title: 'Pacing' },
@@ -133,6 +135,7 @@ function* getSimilarProperties({ data: dateRange }) {
       platform: 'all',
       dateBucket: 'none',
       display: 'percentage',
+      brands: [brand.uuid],
     }
 
     const payloads = yield all(
