@@ -49,7 +49,7 @@ function* getDoughnutChart({ payload: { LibraryDetailId } }) {
       { key: 'frameRate', title: 'Frame Rate' },
       { key: 'pacing', title: 'Pacing' },
       { key: 'duration', title: 'Duration' },
-      { key: 'format', title: 'Format' },
+      { key: 'aspectRatio', title: 'Aspect Ratio' },
     ]
     const { brand } = yield select(selectAuthProfile)
 
