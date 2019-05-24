@@ -1,11 +1,11 @@
 import { searchTermInText } from 'Utils'
 
 export function sortVideos(videos, filters) {
-  const { Search, OrderedBy, AgeRange, Gender, Duration, radioColorSelected, VideoFormat, AspectRatio, FramesPerSecond, Resolution, Pacing, Facebook, Instagram, Youtube, Twitter, Pinterest } = filters;
+  const { Search, OrderedBy, AgeRange, Gender, Duration, radioColorSelected, VideoFormat, AspectRatio, FramesPerSecond, Resolution, Pacing, Facebook, Instagram, Youtube, Twitter } = filters;
   let newVideos = [...videos];
 
-  if ([Facebook, Instagram, Youtube, Twitter, Pinterest].some(value => value)) {
-    newVideos = newVideos.filter(({ socialIcon }) => ({ Facebook, Instagram, Youtube, Twitter, Pinterest }[socialIcon]));
+  if ([Facebook, Instagram, Youtube, Twitter].some(value => value)) {
+    newVideos = newVideos.filter(({ socialIcon }) => ({ Facebook, Instagram, Youtube, Twitter }[socialIcon]));
   }
 
   if (AgeRange) {

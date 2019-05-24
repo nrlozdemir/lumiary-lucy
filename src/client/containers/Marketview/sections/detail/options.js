@@ -15,10 +15,6 @@ export const CompetitorTopVideos_DatasetOptions = [
     label: 'Youtube',
     backgroundColor: '#acb0be',
   },
-  {
-    label: 'Pinterest',
-    backgroundColor: '#545B79',
-  },
 ]
 
 export const TopPerformingProperties_DatasetOptions = [

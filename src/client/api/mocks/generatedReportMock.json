@@ -3,7 +3,7 @@
     {
       "image": "https://picsum.photos/600/300?image=1",
       "socialMedia": "facebook",
-      "title": "ESN",
+      "title": "ESPN",
       "secondTitle": "425,512 Likes",
       "cvScore": 67.1,
       "options": [
@@ -231,7 +231,7 @@
     {
       "image": "https://picsum.photos/600/300?image=5",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "142 Comment",
       "cvScore": 88.1,
       "options": [
@@ -309,9 +309,6 @@
       },
       {
         "data": [21, 48, 12, 15, 5]
-      },
-      {
-        "data": [21, 48, 12, 15, 30]
       }
     ]
   },

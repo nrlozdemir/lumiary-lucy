@@ -20,6 +20,11 @@ class AudienceSlider extends React.Component {
   componentDidMount() {
     this.setState({
       refThumb: this.refThumb,
+    }, () => {
+      const findSlide = this.props.items && Math.floor(parseInt(this.props.items.length) / 2)
+      this.props.items &&
+        this.refThumb &&
+        this.refThumb.slideTo(findSlide, 1)
     })
   }
 
@@ -114,7 +119,7 @@ class AudienceSlider extends React.Component {
                   {...settings}
                 >
                   {items.map((item, i) => (
-                    <div className='item' key={i}>
+                    <div className="item" key={i}>
                       <AssetLayer
                         containerNoBorder
                         leftSocialIcon={item.socialMedia}
