@@ -51,11 +51,10 @@ function* getDoughnutChart({ payload: { LibraryDetailId } }) {
       { key: 'duration', title: 'Duration' },
       { key: 'format', title: 'Format' },
     ]
-    const profile = yield select(selectAuthProfile)
+    const { brand } = yield select(selectAuthProfile)
 
-    const brands = getBrandAndCompetitors(profile)
     const parameters = {
-      ...brands,
+      brands: [brand.uuid],
       dateRange: '3months',
       metric: 'views',
       platform: 'all',
@@ -95,11 +94,9 @@ function* getDoughnutChart({ payload: { LibraryDetailId } }) {
         }
       ),
     }))
-    console.log(val)
 
     yield put(actions.getDoughnutChartSuccess(val))
   } catch (error) {
-    console.log(error)
     yield put(actions.getDoughnutChartFailure({ error }))
   }
 }
