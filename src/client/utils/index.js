@@ -92,10 +92,6 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     labels = timeBucket
   }
 
-  // set up datasets according to multiple brands
-  if (brands.length > 1) {
-  }
-
   // If proportionOf was  selected, it will change labels to time labels and it will set up datasets according to selected proportionOf
   if (options.proportionOf) {
     datasetsFromValues = Object.keys(getValueinObject).map((key) =>
@@ -194,6 +190,54 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     {
       labels: [],
       datasets: [],
+    }
+  )
+}
+
+/* 
+ just using this for the donut chart in marketplace/total views
+ so still need to modify this function for other charts 
+*/ 
+const convertMetricDataIntoDatasets = (values, options, ...args) => {
+  let datasetsFromValues
+
+  const brands = Object.keys(values)
+
+  const arg = args && !!args[0] && args[0]
+
+  // single dataset structure
+  return brands.reduce(
+    (data, brand, idx) => {
+      const { datasets, labelsData } = data
+      const color = chartColors[idx]
+      const brandData = values[brand][0]
+
+      return {
+        labels: [...brands],
+        labelsData: [...labelsData, { data: brand, color }],
+        datasets: [
+          {
+            backgroundColor: [...datasets[0].backgroundColor, color],
+            borderWidth: (arg && arg.borderWidth) || 1,
+            hoverBackgroundColor: [...datasets[0].backgroundColor, color],
+            data: [
+              ...datasets[0].data,
+              !!brandData.percent ? brandData.percent : 0,
+            ],
+          },
+        ],
+      }
+    },
+    {
+      labels: [],
+      labelsData: [],
+      datasets: [
+        {
+          data: [],
+          backgroundColor: [],
+          hoverBackgroundColor: [],
+        },
+      ],
     }
   )
 }
@@ -481,4 +525,5 @@ export {
   convertMultiRequestDataIntoDatasets,
   getDateBucketFromRange,
   getBrandAndCompetitors,
+  convertMetricDataIntoDatasets,
 }

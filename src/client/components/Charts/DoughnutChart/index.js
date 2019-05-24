@@ -86,12 +86,13 @@ const DoughnutChart = (props) => {
   let plugins = []
   if (fillText) {
     const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
+
     plugins = [
       {
         beforeDraw: function(chart) {
           const ctx = chart.chart.ctx
           const { top, bottom, left, right } = chart.chartArea
-          const customFillText = fillText.replace(/^\s+|\s+$/g, '')
+          const customFillText = textToUse.replace(/^\s+|\s+$/g, '')
           ctx.save()
           ctx.fillStyle = themes.textColor
           ctx.font = fillTextFontSize + ' ' + fillTextFontFamily

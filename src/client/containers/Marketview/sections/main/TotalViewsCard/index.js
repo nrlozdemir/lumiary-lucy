@@ -20,7 +20,7 @@ import {
 
 import { isEmpty, isEqual } from 'lodash'
 
-class TotalViewsChart extends React.PureComponent {
+class TotalViewsChart extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getTotalViewsRequest(data)
   }
@@ -54,32 +54,15 @@ class TotalViewsChart extends React.PureComponent {
       barChart_DatasetOptions
     )
 
-    const doughnutDataCombine = chartCombineDataset(
-      {
-        labels: [
-          'Barstool Sports',
-          'SB Nation',
-          'ESPN',
-          'Scout Media',
-          'Fanside',
-        ],
-        datasets: doughnutData,
-      },
-      doughnutChart_DatasetOptions
-    )
-
     console.log('bar data', barDataCombine)
-    console.log('donut data', doughnutDataCombine)
+    console.log('donut data', doughnutData)
 
-    const isDoughnutEmpty = isDataSetEmpty(doughnutDataCombine)
+    const isDoughnutEmpty = isDataSetEmpty(doughnutData)
     const isBarChartEmpty = isDataSetEmpty(barDataCombine)
 
     const hasNoData =
       (!loading &&
-        (!!doughnutData &&
-          isDoughnutEmpty &&
-          !!stackedChartData &&
-          isBarChartEmpty)) ||
+        (!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty)) ||
       isEmpty(data)
 
     return (
@@ -114,34 +97,13 @@ class TotalViewsChart extends React.PureComponent {
             <DoughnutChart
               width={270}
               height={270}
-              data={doughnutDataCombine}
+              data={doughnutData}
               cutoutPercentage={58}
               fillText="Total Percentage"
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
               labelPositionLeft
-              labelsData={[
-                {
-                  color: '#2FD7C4',
-                  data: 'Barstool Sports',
-                },
-                {
-                  color: '#8562F3',
-                  data: 'SB Nation',
-                },
-                {
-                  color: '#5292E5',
-                  data: 'ESPN',
-                },
-                {
-                  color: '#acb0be',
-                  data: 'Scout Media',
-                },
-                {
-                  color: '#545B79',
-                  data: 'Fanside',
-                },
-              ]}
+              labelsData={(!!doughnutData && doughnutData.labelsData) || []}
             />
           </div>
         </div>

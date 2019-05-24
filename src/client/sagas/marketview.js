@@ -21,12 +21,13 @@ import {
   getBrandAndCompetitors,
   convertDataIntoDatasets,
   getDateBucketFromRange,
+  convertMetricDataIntoDatasets,
   getMaximumValueIndexFromArray,
 } from 'Utils'
 
 import { getDataFromApi } from 'Utils/api'
 
-import { getReportDataApi } from 'Api'
+import { getReportDataApi, getMetricDataApi } from 'Api'
 
 function getCompetitorVideosApi() {
   return axios('/').then((res) => marketviewCompetitorVideosData)
@@ -231,7 +232,7 @@ function* getTotalViewsData({ data }) {
       dateRange,
       dateBucket: 'none',
       display: 'percentage',
-      property: ['views'],
+      property: [metric],
     }
 
     const payload = yield call(getTotalViewsApi)
@@ -240,37 +241,26 @@ function* getTotalViewsData({ data }) {
 
     const dateBucket = getDateBucketFromRange(dateRange)
 
-    const doughnutData = yield call(getReportDataApi, {
-      ...options,
-      dateBucket,
+    const doughnutData = yield call(getMetricDataApi, {
+      metric,
+      platform,
+      dateRange,
     })
 
     const convertedBarData = convertDataIntoDatasets(barData, options)
 
-    const convertedDoughnutData = convertDataIntoDatasets(
+    const convertedDoughnutData = convertMetricDataIntoDatasets(
       doughnutData,
       { ...options, dateBucket },
       { hoverBG: true, singleDataset: true, useBrandLabels: true }
     )
-
-    console.log('api, ', barData, doughnutData)
-    console.log('converted', convertedBarData, convertedDoughnutData)
-
-    yield put(actions.getTotalViewsSuccess(payload))
-
-    // yield put(
-    //   actions.getTotalViewsSuccess({
-    //     barData: convertDataIntoDatasets(doughnutData, options, {
-    //       singleDataset: true,
-    //       useBrandLabels: true,
-    //     }),
-    //     doughnutData: convertDataIntoDatasets(
-    //       stackedChartData,
-    //       { ...options, dateBucket },
-    //       { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
-    //     ),
-    //   })
-    // )
+    
+    yield put(
+      actions.getTotalViewsSuccess({
+        barData: payload.barData,
+        doughnutData: convertedDoughnutData,
+      })
+    )
   } catch (error) {
     console.log(error)
     yield put(actions.getTotalViewsFailure(error))
