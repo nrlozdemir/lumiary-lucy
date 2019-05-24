@@ -1,4 +1,4 @@
-import { takeLatest, call, put, all } from 'redux-saga/effects'
+import { takeLatest, call, put, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import _ from 'lodash'
 
@@ -15,8 +15,13 @@ import marketviewTimeMockData from 'Api/mocks/marketviewTimeMock.json'
 import marketviewTopPerformingProperties from 'Api/mocks/marketviewPlatformTopPerformingProperty.json'
 import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json'
 
-import { convertMultiRequestDataIntoDatasets } from 'Utils'
+import {
+  convertMultiRequestDataIntoDatasets,
+  getBrandAndCompetitors,
+} from 'Utils'
 import { getReportDataApi } from 'Api'
+
+import { selectAuthProfile } from 'Reducers/auth'
 
 function getCompetitorVideosApi() {
   return axios('/').then((res) => marketviewCompetitorVideosData)
@@ -82,12 +87,17 @@ function* getCompetitorTopVideosMarketview({
   data: { property, metric, dateRange },
 }) {
   try {
+    const profile = yield select(selectAuthProfile)
+
+    const brandAndCompetitors = getBrandAndCompetitors(profile)
+
     const options = {
       metric,
       dateRange,
       property: [property],
       dateBucket: 'none',
       display: 'percentage',
+      ...brandAndCompetitors,
     }
 
     const [facebook, instagram, twitter, youtube] = yield all([
@@ -99,12 +109,15 @@ function* getCompetitorTopVideosMarketview({
 
     yield put(
       actions.getCompetitorTopVideosSuccess(
-        convertMultiRequestDataIntoDatasets({
-          facebook,
-          instagram,
-          twitter,
-          youtube,
-        })
+        convertMultiRequestDataIntoDatasets(
+          {
+            facebook,
+            instagram,
+            twitter,
+            youtube,
+          },
+          options
+        )
       )
     )
   } catch (error) {

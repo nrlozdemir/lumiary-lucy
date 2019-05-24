@@ -346,30 +346,41 @@ const compareSharesData = (data) => {
   })
 }
 
-const convertMultiRequestDataIntoDatasets = (payload) => {
+const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
   const datasetLabels = Object.keys(payload)
+  const property = options.property[0]
 
-  const labels = Object.keys(
-    payload[datasetLabels[0]].data[
-      Object.keys(payload[datasetLabels[0]].data)[0]
-    ]
+  // get first payload for labels
+  const firstPayload = payload[datasetLabels[0]].data
+  const firstPayloadBrand = Object.keys(firstPayload)[0]
+  const firstPayloadLabels = Object.keys(
+    firstPayload[firstPayloadBrand][property]
+  ).filter((key) => key !== 'subtotal')
+
+  const datasets = (!revert ? datasetLabels : firstPayloadLabels).map(
+    (label, index) => {
+      const data = (!revert ? firstPayloadLabels : datasetLabels).map((key) => {
+        const currentLabel = payload[!revert ? label : key].data
+        const brand = Object.keys(currentLabel)[0]
+        const response = currentLabel[brand][property]
+
+        return response[!revert ? key : label]
+      })
+
+      return {
+        label: capitalizeFirstLetter(label),
+        backgroundColor: chartColors[index],
+        borderColor: chartColors[index],
+        borderWidth: 1,
+        data,
+      }
+    }
   )
 
-  const datasets = datasetLabels.map((label, index) => {
-    const response = payload[label].data[Object.keys(payload[label].data)[0]]
-    const data = labels.map((key) => response[key])
-
-    return {
-      label: capitalizeFirstLetter(label),
-      backgroundColor: chartColors[index],
-      borderColor: chartColors[index],
-      borderWidth: 1,
-      data,
-    }
-  })
-
   return {
-    labels: labels.map((key) => capitalizeFirstLetter(key)),
+    labels: !revert
+      ? firstPayloadLabels.map((key) => capitalizeFirstLetter(key))
+      : datasetLabels.map((label) => capitalizeFirstLetter(label)),
     datasets,
   }
 }
@@ -400,7 +411,7 @@ const getDateBucketFromRange = (dateRange) => {
 }
 
 /*
-  Get api payload for brand_uuid and competitor_uuids
+  Get api payload for brand_uuid and brands
  */
 const getBrandAndCompetitors = (profile) => {
   const { brand } = profile
@@ -408,7 +419,7 @@ const getBrandAndCompetitors = (profile) => {
   if (!!brand && !!brand.uuid && !!brand.competitors) {
     return {
       brand_uuid: brand.uuid,
-      competitor_uuids: brand.competitors.map((c) => c.uuid),
+      brands: brand.competitors.map((c) => c.uuid),
     }
   }
 
