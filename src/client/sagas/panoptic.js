@@ -1,4 +1,3 @@
-import qs from 'qs'
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { selectAuthProfile } from 'Reducers/auth'

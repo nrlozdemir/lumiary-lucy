@@ -36,21 +36,13 @@ class ReportGenerated extends Component {
   }
 
   render() {
-    const {
-      selectLikes,
-      selectDate,
-      selectPlatforms,
-      selectWarmColor,
-      selectResolution,
-      selectDuration,
-    } = this.state
+    const { selectWarmColor, selectResolution, selectDuration } = this.state
     const {
       generatedReport: {
         data: {
           topPerformingVideos,
           videoReleasesData,
           topVideosOverTime,
-          pacingChartData,
           verticalStackedChartData,
           colorTempData,
         },
@@ -58,6 +50,7 @@ class ReportGenerated extends Component {
         loading,
         error,
       },
+      match: { params },
     } = this.props
 
     if (!selectedVideo || loading) {
@@ -66,50 +59,41 @@ class ReportGenerated extends Component {
     return (
       <React.Fragment>
         {/*<ReportsHeader />*/}
-        <div className="grid-container col-12 mr-40 ml-40 mt-72 mb-72">
-          <CreatedFilters />
-          {topPerformingVideos && (
-            <Slider
-              selectedVideo={selectedVideo}
-              data={topPerformingVideos}
-              changeSelectedVideo={this.changeSelectedVideo}
-              title="Top Performing Videos"
-            />
-          )}
-          {videoReleasesData && (
-            <VideoReleasesBarChart data={videoReleasesData} />
-          )}
-          {topVideosOverTime && (
-            <TopVideosCard
-              chartData={topVideosOverTime}
-              selectResolution={selectResolution}
-              handleSelectFilters={this.handleSelectFilters}
-            />
-          )}
-          {pacingChartData && (
-            <PacingCard
-              handleSelectFilters={this.handleSelectFilters}
-              barData={pacingChartData}
-              selectDate={selectDate}
-              selectLikes={selectLikes}
-            />
-          )}
-          {verticalStackedChartData && (
-            <EngagementByProperty
-              data={verticalStackedChartData}
-              handleSelectFilters={this.handleSelectFilters}
-              selectDuration={selectDuration}
-            />
-          )}
-          {colorTempData && (
-            <ColorTemperature
-              colorTempData={colorTempData}
-              handleSelectFilters={this.handleSelectFilters}
-              selectWarmColor={selectWarmColor}
-              selects={this.props.selects}
-            />
-          )}
-        </div>
+        <CreatedFilters />
+        {topPerformingVideos && (
+          <Slider
+            selectedVideo={selectedVideo}
+            data={topPerformingVideos}
+            changeSelectedVideo={this.changeSelectedVideo}
+            title="Top Performing Videos"
+          />
+        )}
+        {videoReleasesData && (
+          <VideoReleasesBarChart data={videoReleasesData} />
+        )}
+        {topVideosOverTime && (
+          <TopVideosCard
+            chartData={topVideosOverTime}
+            selectResolution={selectResolution}
+            handleSelectFilters={this.handleSelectFilters}
+          />
+        )}
+        <PacingCard reportId={params && params.id} />
+        {verticalStackedChartData && (
+          <EngagementByProperty
+            data={verticalStackedChartData}
+            handleSelectFilters={this.handleSelectFilters}
+            selectDuration={selectDuration}
+          />
+        )}
+        {colorTempData && (
+          <ColorTemperature
+            colorTempData={colorTempData}
+            handleSelectFilters={this.handleSelectFilters}
+            selectWarmColor={selectWarmColor}
+            selects={this.props.selects}
+          />
+        )}
       </React.Fragment>
     )
   }
