@@ -24,7 +24,7 @@ const TotalCompetitorCard = ({ data }) => {
         'SB Nation',
         'ESPN',
         'Scout Media',
-        'Fansided',
+        'Fanside',
       ]}
     />
   )
