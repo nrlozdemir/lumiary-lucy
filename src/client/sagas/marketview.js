@@ -1,4 +1,4 @@
-import { takeLatest, call, put, all } from 'redux-saga/effects'
+import { takeLatest, call, put, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import _ from 'lodash'
 
@@ -21,6 +21,8 @@ import {
   getMaximumValueIndexFromArray,
 } from 'Utils'
 import { getReportDataApi } from 'Api'
+
+import { selectAuthProfile } from 'Reducers/auth'
 
 function getCompetitorVideosApi() {
   return axios('/').then((res) => marketviewCompetitorVideosData)
@@ -81,12 +83,15 @@ function* getCompetitorTopVideosMarketview({
   data: { property, metric, dateRange },
 }) {
   try {
+    const { brand } = yield select(selectAuthProfile)
+
     const options = {
       metric,
       dateRange,
       property: [property],
       dateBucket: 'none',
       display: 'percentage',
+      brands: [brand.uuid],
     }
 
     const [facebook, instagram, twitter, youtube] = yield all([
@@ -98,12 +103,15 @@ function* getCompetitorTopVideosMarketview({
 
     yield put(
       actions.getCompetitorTopVideosSuccess(
-        convertMultiRequestDataIntoDatasets({
-          facebook,
-          instagram,
-          twitter,
-          youtube,
-        })
+        convertMultiRequestDataIntoDatasets(
+          {
+            facebook,
+            instagram,
+            twitter,
+            youtube,
+          },
+          options
+        )
       )
     )
   } catch (error) {
