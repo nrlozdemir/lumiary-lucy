@@ -64,9 +64,7 @@ function* getColorTemperatureData() {
 
 function* getFilteringSectionData({ data }) {
   try {
-    const profile = yield select(selectAuthProfile)
-
-    const brandAndCompetitors = getBrandAndCompetitors(profile)
+    const { brand } = yield select(selectAuthProfile)
 
     const { property, metric, platform, dateRange } = data
 
@@ -77,8 +75,8 @@ function* getFilteringSectionData({ data }) {
       dateBucket: 'none',
       display: 'percentage',
       property: [property],
-      ...brandAndCompetitors,
       url: '/report',
+      brands: [brand.uuid],
     }
 
     const doughnutData = yield call(getDataFromApi, options)
@@ -95,7 +93,8 @@ function* getFilteringSectionData({ data }) {
 
     if (
       !!doughnutData.data &&
-      !!doughnutData.data[property] &&
+      !!doughnutData.data[brand.name] &&
+      !!doughnutData.data[brand.name][property] &&
       stackedChartData.data
     ) {
       yield put(
@@ -135,9 +134,7 @@ function* getFilteringSectionData({ data }) {
 
 function* getPacingCardData({ data }) {
   try {
-    const profile = yield select(selectAuthProfile)
-
-    const brandAndCompetitors = getBrandAndCompetitors(profile)
+    const { brand } = yield select(selectAuthProfile)
 
     const { metric, dateRange } = data
 
@@ -148,8 +145,8 @@ function* getPacingCardData({ data }) {
       property: ['pacing'],
       dateBucket: 'none',
       display: 'percentage',
-      ...brandAndCompetitors,
       url: '/report',
+      brands: [brand.uuid],
     }
 
     const stadiumData = yield call(getDataFromApi, options)
@@ -160,9 +157,11 @@ function* getPacingCardData({ data }) {
 
     if (
       !!stadiumData.data &&
-      !!stadiumData.data.pacing &&
+      !!stadiumData.data[brand.name] &&
+      !!stadiumData.data[brand.name].pacing &&
       !!horizontalStackedBarData.data &&
-      !!horizontalStackedBarData.data.pacing
+      !!horizontalStackedBarData.data[brand.name] &&
+      !!horizontalStackedBarData.data[brand.name].pacing
     ) {
       yield put(
         actions.getPacingCardDataSuccess({

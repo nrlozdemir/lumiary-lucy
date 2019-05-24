@@ -45,6 +45,7 @@ const ColorTemperatureModule = ({
   platforms,
   moduleClass,
   chartWrapperClass,
+  selectValue,
 }) => {
   return (
     <ThemeContext.Consumer>
@@ -67,6 +68,7 @@ const ColorTemperatureModule = ({
                   colorTempData={data}
                   borderLess={borderLess}
                   verticalText={verticalText}
+                  selectValue={selectValue}
                 />
               )}
             </div>

@@ -197,7 +197,7 @@
     "bubblesMales": [
       {
         "visual": "youtube",
-        "toolTip": 33000
+        "toolTip": 330000
       },
       {
         "visual": "facebook",
@@ -206,10 +206,6 @@
       {
         "visual": "twitter",
         "toolTip": 845000
-      },
-      {
-        "visual": "pinterest",
-        "toolTip": 480000
       },
       {
         "visual": "instagram",
@@ -227,11 +223,7 @@
       },
       {
         "visual": "twitter",
-        "toolTip": 230000
-      },
-      {
-        "visual": "pinterest",
-        "toolTip": 970000
+        "toolTip": 530000
       },
       {
         "visual": "instagram",
@@ -252,10 +244,6 @@
         "toolTip": 438000
       },
       {
-        "visual": "pinterest",
-        "toolTip": 659000
-      },
-      {
         "visual": "instagram",
         "toolTip": 679000
       }
@@ -265,7 +253,7 @@
     {
       "image": "https://picsum.photos/600/300?image=5",
       "socialMedia": "facebook",
-      "title": "ESN",
+      "title": "ESPN",
       "secondTitle": "425,512 Likes",
       "age": 12,
       "cvScore": 77.1
@@ -297,7 +285,7 @@
     {
       "image": "https://picsum.photos/600/300?image=20",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "1142 Comments",
       "age": 16,
       "cvScore": 50
@@ -305,7 +293,7 @@
     {
       "image": "https://picsum.photos/600/300?image=22",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "2142 Comments",
       "age": 17,
       "cvScore": 49.1
@@ -313,7 +301,7 @@
     {
       "image": "https://picsum.photos/600/300?image=24",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "132 Comments",
       "age": 18,
       "cvScore": 46.1
@@ -321,7 +309,7 @@
     {
       "image": "https://picsum.photos/600/300?image=26",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "2132 Comments",
       "age": 19,
       "cvScore": 24.1
@@ -329,7 +317,7 @@
     {
       "image": "https://picsum.photos/600/300?image=28",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "342 Comments",
       "age": 20,
       "cvScore": 56.1
@@ -337,7 +325,7 @@
     {
       "image": "https://picsum.photos/600/300?image=30",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "3042 Comments",
       "age": 21,
       "cvScore": 98.1
@@ -345,7 +333,7 @@
     {
       "image": "https://picsum.photos/600/300?image=31",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "162 Comments",
       "age": 22,
       "cvScore": 90.1
@@ -353,7 +341,7 @@
     {
       "image": "https://picsum.photos/600/300?image=32",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "6202 Comments",
       "age": 23,
       "cvScore": 67.1
@@ -361,7 +349,7 @@
     {
       "image": "https://picsum.photos/600/300?image=33",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "780 Comments",
       "age": 24,
       "cvScore": 65.1
@@ -369,7 +357,7 @@
     {
       "image": "https://picsum.photos/600/300?image=5",
       "socialMedia": "facebook",
-      "title": "ESN",
+      "title": "ESPN",
       "secondTitle": "425,512 Likes",
       "age": 25,
       "cvScore": 78.1
@@ -401,7 +389,7 @@
     {
       "image": "https://picsum.photos/600/300?image=20",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "142 Comments",
       "age": 29,
       "cvScore": 74.1
@@ -409,7 +397,7 @@
     {
       "image": "https://picsum.photos/600/300?image=22",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "800 Likes",
       "age": 30,
       "cvScore": 75.1
@@ -417,7 +405,7 @@
     {
       "image": "https://picsum.photos/600/300?image=24",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "142 Comments",
       "age": 31,
       "cvScore": 76.1
@@ -425,7 +413,7 @@
     {
       "image": "https://picsum.photos/600/300?image=26",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "142 Likes",
       "age": 32,
       "cvScore": 66.1
@@ -433,7 +421,7 @@
     {
       "image": "https://picsum.photos/600/300?image=28",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "242 Comments",
       "age": 33,
       "cvScore": 44.1
@@ -441,7 +429,7 @@
     {
       "image": "https://picsum.photos/600/300?image=30",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "542 Likes",
       "age": 34,
       "cvScore": 82.1
@@ -449,7 +437,7 @@
     {
       "image": "https://picsum.photos/600/300?image=31",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "12 Comments",
       "age": 35,
       "cvScore": 84.1
@@ -457,7 +445,7 @@
     {
       "image": "https://picsum.photos/600/300?image=32",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "10 Comments",
       "age": 36,
       "cvScore": 86.1
@@ -465,7 +453,7 @@
     {
       "image": "https://picsum.photos/600/300?image=33",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "102 Comments",
       "age": 37,
       "cvScore": 42.1
@@ -473,7 +461,7 @@
     {
       "image": "https://picsum.photos/600/300?image=24",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "10 Comments",
       "age": 38,
       "cvScore": 68.1
@@ -481,7 +469,7 @@
     {
       "image": "https://picsum.photos/600/300?image=26",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "1 Comments",
       "age": 39,
       "cvScore": 61.1
@@ -489,7 +477,7 @@
     {
       "image": "https://picsum.photos/600/300?image=28",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "68 Comments",
       "age": 40,
       "cvScore": 64.1
@@ -497,7 +485,7 @@
     {
       "image": "https://picsum.photos/600/300?image=30",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "300 Comments",
       "age": 41,
       "cvScore": 56.1
@@ -505,7 +493,7 @@
     {
       "image": "https://picsum.photos/600/300?image=31",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "586 Comments",
       "age": 42,
       "cvScore": 49.1
@@ -513,7 +501,7 @@
     {
       "image": "https://picsum.photos/600/300?image=32",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "108 Comments",
       "age": 43,
       "cvScore": 88.1
@@ -521,7 +509,7 @@
     {
       "image": "https://picsum.photos/600/300?image=33",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "203 Comments",
       "age": 44,
       "cvScore": 77.1
@@ -529,7 +517,7 @@
     {
       "image": "https://picsum.photos/600/300?image=34",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "407 Comments",
       "age": 45,
       "cvScore": 55.1
@@ -537,7 +525,7 @@
     {
       "image": "https://picsum.photos/600/300?image=35",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "206 Comments",
       "age": 46,
       "cvScore": 66.1
@@ -545,7 +533,7 @@
     {
       "image": "https://picsum.photos/600/300?image=35",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "308 Comments",
       "age": 47,
       "cvScore": 62.1
@@ -553,7 +541,7 @@
     {
       "image": "https://picsum.photos/600/300?image=36",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "106 Comments",
       "age": 48,
       "cvScore": 63.1
@@ -561,7 +549,7 @@
     {
       "image": "https://picsum.photos/600/300?image=37",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "156 Comments",
       "age": 49,
       "cvScore": 64.1
@@ -569,7 +557,7 @@
     {
       "image": "https://picsum.photos/600/300?image=38",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "159 Comments",
       "age": 50,
       "cvScore": 54.1
@@ -577,7 +565,7 @@
     {
       "image": "https://picsum.photos/600/300?image=39",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "98 Comments",
       "age": 51,
       "cvScore": 45.1
@@ -585,7 +573,7 @@
     {
       "image": "https://picsum.photos/600/300?image=40",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "5 Comments",
       "age": 52,
       "cvScore": 89.1
@@ -593,7 +581,7 @@
     {
       "image": "https://picsum.photos/600/300?image=41",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "55 Comments",
       "age": 53,
       "cvScore": 78.1
@@ -601,7 +589,7 @@
     {
       "image": "https://picsum.photos/600/300?image=42",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "245 Comments",
       "age": 54,
       "cvScore": 66.1
@@ -609,7 +597,7 @@
     {
       "image": "https://picsum.photos/600/300?image=43",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "45 Comments",
       "age": 55,
       "cvScore": 65.1
@@ -617,7 +605,7 @@
     {
       "image": "https://picsum.photos/600/300?image=43",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "101 Comments",
       "age": 56,
       "cvScore": 64.1
@@ -625,7 +613,7 @@
     {
       "image": "https://picsum.photos/600/300?image=44",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "10 Comments",
       "age": 57,
       "cvScore": 56.1
@@ -633,7 +621,7 @@
     {
       "image": "https://picsum.photos/600/300?image=45",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "269 Comments",
       "age": 58,
       "cvScore": 86.1
@@ -641,7 +629,7 @@
     {
       "image": "https://picsum.photos/600/300?image=46",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "2 Comments",
       "age": 59,
       "cvScore": 87.1
@@ -649,7 +637,7 @@
     {
       "image": "https://picsum.photos/600/300?image=47",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "1 Comments",
       "age": 60,
       "cvScore": 89.1
@@ -657,7 +645,7 @@
     {
       "image": "https://picsum.photos/600/300?image=48",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "200 Comments",
       "age": 61,
       "cvScore": 78.1
@@ -665,7 +653,7 @@
     {
       "image": "https://picsum.photos/600/300?image=49",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "20 Comments",
       "age": 62,
       "cvScore": 56.1
@@ -673,7 +661,7 @@
     {
       "image": "https://picsum.photos/600/300?image=50",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "354 Comments",
       "age": 63,
       "cvScore": 54.1
@@ -681,7 +669,7 @@
     {
       "image": "https://picsum.photos/600/300?image=51",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "35 Comments",
       "age": 64,
       "cvScore": 70.1
@@ -689,7 +677,7 @@
     {
       "image": "https://picsum.photos/600/300?image=52",
       "socialMedia": "facebook",
-      "title": "Fansided",
+      "title": "Fanside",
       "secondTitle": "3 Comments",
       "age": 65,
       "cvScore": 67.1

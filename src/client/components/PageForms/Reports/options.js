@@ -2,7 +2,7 @@ export const selectOptionsBrand = [
   { value: 'bleacher-report', label: 'Bleacher Report' },
   { value: 'espn', label: 'ESPN' },
   { value: 'scout-media', label: 'Scout Media' },
-  { value: 'fansided', label: 'Fansided' },
+  { value: 'fanside', label: 'Fanside' },
   { value: 'barstool-sports', label: 'Barstool Sports' },
 ]
 
@@ -12,7 +12,6 @@ export const selectOptionsSocial = [
   { value: 'instagram', label: 'Instagram' },
   { value: 'twitter', label: 'Twitter' },
   { value: 'youTube', label: 'YouTube' },
-  { value: 'pinterest', label: 'Pinterest' },
 ]
 
 export const selectOptionsEngagement = [

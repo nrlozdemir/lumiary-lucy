@@ -91,7 +91,7 @@ export class Competitor extends React.Component {
           'SB Nation',
           'ESPN',
           'Scout Media',
-          'Fansided',
+          'Fanside',
         ],
         datasets: topPerformingPropertiesByCompetitorsData,
       },
@@ -164,7 +164,7 @@ export class Competitor extends React.Component {
                 },
                 {
                   className: 'bg-dusk"',
-                  text: 'Fansided',
+                  text: 'Fanside',
                 },
               ]}
             />
@@ -174,6 +174,7 @@ export class Competitor extends React.Component {
             data={similarProperties}
             title="Top Performing Property Across All Competitors"
             action={this.getSimilarProperties}
+            presentWithDoughnut
             filters={[
               {
                 type: 'dateRange',
@@ -193,9 +194,14 @@ export class Competitor extends React.Component {
               action={this.getTopPerformingPropertiesByCompetitors}
               filters={[
                 {
-                  type: 'property',
-                  selectKey: 'property',
-                  placeHolder: 'property',
+                  type: 'metric',
+                  selectKey: 'engagement',
+                  placeHolder: 'engagement',
+                },
+                {
+                  type: 'dateRange',
+                  selectKey: 'dateRange',
+                  placeHolder: 'dateRange',
                 },
               ]}
               references={[

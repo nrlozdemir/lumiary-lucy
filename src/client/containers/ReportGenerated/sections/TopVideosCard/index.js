@@ -25,13 +25,12 @@ const TopVideosCard = ({
   handleSelectFilters,
 }) => {
   let stackedChartData = chartData
-  const labels = ['Facebook', 'Instagram', 'Twitter', 'YouTube', 'Pinterest']
+  const labels = ['Facebook', 'Instagram', 'Twitter', 'YouTube']
   const backgroundColors = [
     '#2FD7C4',
     '#8562F3',
     '#5292E5',
     '#acb0be',
-    '#545B79',
   ]
 
   stackedChartData.labels = ['360p', '480p', '720p', '1080p', '4k']
@@ -97,10 +96,6 @@ const TopVideosCard = ({
                     style={{ backgroundColor: '#acb0be' }}
                   />
                   YouTube
-                </div>
-                <div className={style.referenceItem}>
-                  <span className="bg-dusk" />
-                  Pinterest
                 </div>
               </div>
             </div>
