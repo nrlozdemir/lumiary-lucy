@@ -6,7 +6,7 @@ import updateAudiencePer from 'Api/updateAudiencePerformance'
 
 import { compareSharesData, radarChartCalculate } from 'Utils'
 
-import { getReportDataApi } from 'Api'
+import { getReportDataApi } from 'Utils/api'
 
 import _ from 'lodash'
 
