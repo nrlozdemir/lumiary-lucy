@@ -350,6 +350,45 @@ const compareSharesData = (data) => {
   })
 }
 
+const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
+  const datasetLabels = Object.keys(payload)
+  const property = options.property[0]
+
+  // get first payload for labels
+  const firstPayload = payload[datasetLabels[0]].data
+  const firstPayloadBrand = Object.keys(firstPayload)[0]
+  const firstPayloadLabels = Object.keys(
+    firstPayload[firstPayloadBrand][property]
+  ).filter((key) => key !== 'subtotal')
+
+  const datasets = (!revert ? datasetLabels : firstPayloadLabels).map(
+    (label, index) => {
+      const data = (!revert ? firstPayloadLabels : datasetLabels).map((key) => {
+        const currentLabel = payload[!revert ? label : key].data
+        const brand = Object.keys(currentLabel)[0]
+        const response = currentLabel[brand][property]
+
+        return response[!revert ? key : label]
+      })
+
+      return {
+        label: capitalizeFirstLetter(label),
+        backgroundColor: chartColors[index],
+        borderColor: chartColors[index],
+        borderWidth: 1,
+        data,
+      }
+    }
+  )
+
+  return {
+    labels: !revert
+      ? firstPayloadLabels.map((key) => capitalizeFirstLetter(key))
+      : datasetLabels.map((label) => capitalizeFirstLetter(label)),
+    datasets,
+  }
+}
+
 const isDataSetEmpty = (data) => {
   if (!!data && !!data.datasets && !!data.datasets.length) {
     return data.datasets.every((dataset) =>
@@ -376,7 +415,7 @@ const getDateBucketFromRange = (dateRange) => {
 }
 
 /*
-  Get api payload for brand_uuid and competitor_uuids
+  Get api payload for brand_uuid and competitors
  */
 const getBrandAndCompetitors = (profile) => {
   const { brand } = profile
@@ -401,6 +440,7 @@ export {
   convertDataIntoDatasets,
   getMaximumValueIndexFromArray,
   compareSharesData,
+  convertMultiRequestDataIntoDatasets,
   getDateBucketFromRange,
   getBrandAndCompetitors,
 }

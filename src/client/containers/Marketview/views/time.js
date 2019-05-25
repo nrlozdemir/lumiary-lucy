@@ -29,9 +29,6 @@ export class Time extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getCompetitorTopVideosRequest()
-    this.props.getCompetitorVideosRequest()
-    this.props.getSimilarPropertiesRequest()
     this.props.getMarketviewDetailTimeRequest()
   }
 
@@ -48,7 +45,7 @@ export class Time extends React.Component {
   }
 
   getCompetitorTopVideos = (data) => {
-    this.props.getMarketviewDetailTimeRequest(data)
+    this.props.getCompetitorTopVideosRequest(data)
   }
 
   render() {
@@ -111,40 +108,38 @@ export class Time extends React.Component {
             },
           ]}
         />
-        {selectedDayData.CompetitorTopVideos && (
-          <TopVideosCardModule
-            chartData={competitorTopVideosCombineData}
-            height={150}
-            moduleKey="MarketView/TopVideosCardModule"
-            title="Top Performing Property Across All Days Of The Week"
-            action={this.getCompetitorTopVideos}
-            filters={[
-              {
-                type: 'property',
-                selectKey: 'property',
-                placeHolder: 'property',
-              },
-            ]}
-            references={[
-              {
-                className: 'bg-cool-blue',
-                text: 'Fast',
-              },
-              {
-                className: 'bg-lighter-purple',
-                text: 'Medium',
-              },
-              {
-                className: 'bg-coral-pink',
-                text: 'Slow',
-              },
-              {
-                className: 'bg-cool-grey',
-                text: 'Slowest',
-              },
-            ]}
-          />
-        )}
+        <TopVideosCardModule
+          chartData={competitorTopVideosCombineData}
+          height={150}
+          moduleKey="MarketView/TopVideosCardModule"
+          title="Top Performing Property Across All Days Of The Week"
+          action={this.getCompetitorTopVideos}
+          filters={[
+            {
+              type: 'property',
+              selectKey: 'property',
+              placeHolder: 'property',
+            },
+          ]}
+          references={[
+            {
+              className: 'bg-cool-blue',
+              text: 'Fast',
+            },
+            {
+              className: 'bg-lighter-purple',
+              text: 'Medium',
+            },
+            {
+              className: 'bg-coral-pink',
+              text: 'Slow',
+            },
+            {
+              className: 'bg-cool-grey',
+              text: 'Slowest',
+            },
+          ]}
+        />
       </React.Fragment>
     )
   }

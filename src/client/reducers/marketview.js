@@ -95,8 +95,9 @@ export const actions = {
     type: types.SET_MARKETVIEW_COMPETITOR_SELECTED_VIDEO,
     payload,
   }),
-  getCompetitorTopVideosRequest: () => ({
+  getCompetitorTopVideosRequest: (data) => ({
     type: types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_REQUEST,
+    data,
   }),
   getCompetitorTopVideosSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_SUCCESS,
