@@ -8,6 +8,7 @@ import FlipCard from 'Components/FlipCard'
 import CustomBarChart from 'Components/Charts/CustomBarChart'
 import styles from './style.scss'
 import { capitalizeFirstLetter } from 'Utils/'
+import { ThemeContext } from 'ThemeContext/themeContext'
 
 const days = [
   'Sunday',
@@ -77,30 +78,38 @@ const Front = (props) => {
     selected,
     statDifference,
   } = parseData(props)
+
   return (
-    <div className={styles.frontContainer}>
-      {data && data.isEmpty && (
-        <div className={styles.noContent}>
-          <p>No Data Available</p>
-        </div>
-      )}
-      <div className={statClassName}>
-        <div className={styles.content}>
-          <p className={styles.headline}>{title}</p>
-          <div className={styles.changes}>
-            <div className={styles.circle}>
-              <i className={statArrowClassName} />
+    <ThemeContext.Consumer>
+      {({ themeContext: { colors } }) => (
+        <div className={styles.frontContainer}>
+          {data && data.isEmpty && (
+            <div
+              className={styles.noContent}
+              style={{ backgroundColor: colors.moduleBackgroundOpacity }}
+            >
+              <p>No Data Available</p>
             </div>
-            <p className={styles.label}>{statDifference}%</p>
+          )}
+          <div className={statClassName}>
+            <div className={styles.content}>
+              <p className={styles.headline}>{title}</p>
+              <div className={styles.changes}>
+                <div className={styles.circle}>
+                  <i className={statArrowClassName} />
+                </div>
+                <p className={styles.label}>{statDifference}%</p>
+              </div>
+            </div>
+            <CustomBarChart
+              data={stats}
+              selected={selected}
+              difference={statDifference}
+            />
           </div>
         </div>
-        <CustomBarChart
-          data={stats}
-          selected={selected}
-          difference={statDifference}
-        />
-      </div>
-    </div>
+      )}
+    </ThemeContext.Consumer>
   )
 }
 
