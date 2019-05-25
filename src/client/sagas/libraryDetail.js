@@ -45,7 +45,6 @@ function* getBarChart({ payload: { LibraryDetailId } }) {
 
 function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
   try {
-    console.log(themeColors)
     const expectedValues = [
       { key: 'frameRate', title: 'Frame Rate' },
       { key: 'pacing', title: 'Pacing' },
