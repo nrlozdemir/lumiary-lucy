@@ -14,7 +14,7 @@ import {
   getBrandAndCompetitors,
 } from 'Utils'
 
-import { getDataFromApi } from 'Api'
+import { getDataFromApi } from 'Utils/api'
 
 import _ from 'lodash'
 import { dayOfWeek } from 'Utils/globals'
@@ -118,7 +118,6 @@ function* getFilteringSectionData({ data }) {
       throw 'Error fetching FilteringSection data'
     }
   } catch (err) {
-    console.log(err)
     yield put(
       // empty data
       actions.getFilteringSectionDataSuccess({

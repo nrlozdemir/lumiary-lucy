@@ -282,7 +282,7 @@ class LibraryDetailShotByShot extends React.Component {
         {({ themeContext: { colors } }) => {
           return (
             <div
-              className="grid-container col-12 mt-48 mb-48"
+              className="grid-container col-12 mt-72 mb-72"
               style={{
                 backgroundColor: colors.moduleBackground,
                 boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,

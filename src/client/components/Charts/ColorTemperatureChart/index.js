@@ -20,7 +20,6 @@ const ColorTemperatureChart = ({
     `col-${colSpan}`,
     { [style.borderless]: borderLess }
   )
-  console.log(arr)
 
   return (
     colorTempData &&

@@ -8,7 +8,7 @@ import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
 import { compareSharesData, radarChartCalculate } from 'Utils'
 
-import { getDataFromApi } from 'Api'
+import { getDataFromApi } from 'Utils/api'
 
 function getGeneratedReportApi() {
   //this will use ajax function in utils/api when real data is provided
