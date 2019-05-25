@@ -238,11 +238,15 @@ function* getFlipCardsData() {
         [metric]: {
           percentage: metrics[metric].changeOverPrevious,
           data: dayOfWeek.map((day) => metrics[metric][day]),
+          isEmpty: dayOfWeek.every((day) =>
+            metrics[metric][day] === 0 ? true : false
+          ),
         },
       }))
     )
     yield put(actions.getFlipCardsDataSuccess(payloads))
   } catch (err) {
+    console.log(err)
     yield put(actions.getFlipCardsDataError(err))
   }
 }
