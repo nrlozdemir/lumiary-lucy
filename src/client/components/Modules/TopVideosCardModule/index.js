@@ -4,6 +4,7 @@ import cx from 'classnames'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 import style from './style.scss'
 import Module from 'Components/Module'
+import { isDataSetEmpty } from 'Utils'
 
 const TopVideosCard = (props) => {
   const {
@@ -15,9 +16,7 @@ const TopVideosCard = (props) => {
     moduleKey,
     action,
   } = props
-  if (!chartData) {
-    return null
-  }
+
   return (
     <Module
       title={title}
@@ -25,6 +24,7 @@ const TopVideosCard = (props) => {
       references={references}
       moduleKey={moduleKey}
       action={action}
+      isEmpty={isDataSetEmpty(chartData)}
     >
       <div className="col-12-no-gutters">
         <StackedBarChart barData={chartData} height={height} />

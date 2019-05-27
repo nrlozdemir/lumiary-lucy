@@ -1,5 +1,19 @@
 import axios from 'axios'
 import { API_ROOT, API_VERSION } from 'Utils/globals'
+import qs from 'qs'
+
+export function getReportDataApi(parameters) {
+  return ajax({
+    url: '/report',
+    method: 'POST',
+    params: qs.stringify(parameters),
+  }).then((response) => {
+    if (response.error) {
+      throw response.error
+    }
+    return response.data
+  })
+}
 
 export function handleResponse(response) {
   if (!response.ok) {

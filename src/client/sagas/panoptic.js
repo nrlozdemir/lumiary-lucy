@@ -13,7 +13,7 @@ import {
   getBrandAndCompetitors,
 } from 'Utils'
 
-import { getReportDataApi } from 'Api'
+import { getReportDataApi } from 'Utils/api'
 
 import _ from 'lodash'
 
@@ -115,7 +115,6 @@ function* getFilteringSectionData({ data }) {
       throw 'Error fetching FilteringSection data'
     }
   } catch (err) {
-    console.log(err)
     yield put(
       // empty data
       actions.getFilteringSectionDataSuccess({

@@ -33,7 +33,6 @@ class SingleItemSlider extends React.Component {
     this.setState({ slideIndex: val })
   }
   render() {
-    console.log('##', this.props)
     return (
       <div className={cn(style.sliderClass, 'libraryDetailSingleItemSlider')}>
         <Slider

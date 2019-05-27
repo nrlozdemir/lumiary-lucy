@@ -36,29 +36,27 @@ const getTimeBucket = (value) => {
  * @constructor
  * @param {object} values - Values which comes from backend response.
  * @param {object} options - Option is the request params.
- * @param {object} args - Args attribute for other options: 
+ * @param {object} args - Args attribute for other options:
  *
  * ...args
    {
     hoverBG: array
-    preparedDatasets: array, 
-    preparedLabels: array, 
-    singleDataset: bool, 
+    preparedDatasets: array,
+    preparedLabels: array,
+    singleDataset: bool,
     borderWidth: object || int
     }
   *
  */
+
 const convertDataIntoDatasets = (values, options, ...args) => {
   let labels
   let datasetsFromValues
   let singleLevelJSON
 
   const arg = args && !!args[0] && args[0]
-
   const brands = Object.keys(values.data)
-
   const brandObjects = brands.map((b) => values.data[b])
-
   const getValueinObject = brandObjects[0][options.property[0]]
 
   const timeBucket =
@@ -106,21 +104,21 @@ const convertDataIntoDatasets = (values, options, ...args) => {
       const color = chartColors[idx]
 
       return arg && arg.singleDataset
-        ? // only one dataset is required sometimes
-          // ie. doughnut chart in panoptic/engagement
-          {
+        ? {
             labels: [
               ...data.labels,
-              `${key} ${
+              `${key}${
                 !!options.property && options.property == 'duration'
-                  ? 'seconds'
+                  ? ' seconds'
+                  : options.property == 'frameRate'
+                  ? 'fps'
                   : ''
               }`,
             ],
             datasets: [
               {
                 data: datasetsFromValues || [0, 0, 0, 0],
-                backgroundColor: [
+                backgroundColor: arg.backgroundColor || [
                   ...(datasets[0] ? datasets[0].backgroundColor : []),
                   color,
                 ],
@@ -328,6 +326,8 @@ const radarChartCalculate = (data) => {
   return colorsData
 }
 
+const getMaximumValueIndexFromArray = (data) =>
+  Object.values(data).indexOf(Math.max(...Object.values(data)))
 const compareSharesData = (data) => {
   return data.map((item) => {
     return {
@@ -348,6 +348,45 @@ const compareSharesData = (data) => {
       },
     }
   })
+}
+
+const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
+  const datasetLabels = Object.keys(payload)
+  const property = options.property[0]
+
+  // get first payload for labels
+  const firstPayload = payload[datasetLabels[0]].data
+  const firstPayloadBrand = Object.keys(firstPayload)[0]
+  const firstPayloadLabels = Object.keys(
+    firstPayload[firstPayloadBrand][property]
+  ).filter((key) => key !== 'subtotal')
+
+  const datasets = (!revert ? datasetLabels : firstPayloadLabels).map(
+    (label, index) => {
+      const data = (!revert ? firstPayloadLabels : datasetLabels).map((key) => {
+        const currentLabel = payload[!revert ? label : key].data
+        const brand = Object.keys(currentLabel)[0]
+        const response = currentLabel[brand][property]
+
+        return response[!revert ? key : label]
+      })
+
+      return {
+        label: capitalizeFirstLetter(label),
+        backgroundColor: chartColors[index],
+        borderColor: chartColors[index],
+        borderWidth: 1,
+        data,
+      }
+    }
+  )
+
+  return {
+    labels: !revert
+      ? firstPayloadLabels.map((key) => capitalizeFirstLetter(key))
+      : datasetLabels.map((label) => capitalizeFirstLetter(label)),
+    datasets,
+  }
 }
 
 const isDataSetEmpty = (data) => {
@@ -376,7 +415,7 @@ const getDateBucketFromRange = (dateRange) => {
 }
 
 /*
-  Get api payload for brand_uuid and competitor_uuids
+  Get api payload for brand_uuid and competitors
  */
 const getBrandAndCompetitors = (profile) => {
   const { brand } = profile
@@ -399,7 +438,9 @@ export {
   radarChartCalculate,
   isDataSetEmpty,
   convertDataIntoDatasets,
+  getMaximumValueIndexFromArray,
   compareSharesData,
+  convertMultiRequestDataIntoDatasets,
   getDateBucketFromRange,
   getBrandAndCompetitors,
 }
