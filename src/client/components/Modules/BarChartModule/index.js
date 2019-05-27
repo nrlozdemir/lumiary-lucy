@@ -45,27 +45,14 @@ const BarChartModule = ({
         )
       }
     >
-      <div className={style.barChartContainer}>
-        {barData && (
-          <BarChart
-            barDurationData={barData}
-            tickOptions={tickOptions}
-            width={width}
-            height={height}
-          />
-        )}
-
-        {barData && barData.labelLegends && (
-          <div className={style.moduleBodyColorList}>
-            {barData.labelLegends.map((data, index) => (
-              <div key={index} className={style.colorItem}>
-                <span style={{ background: data.color }} />
-                {data.title}
-              </div>
-            ))}
-          </div>
-        )}
-      </div>
+      {barData && (
+        <BarChart
+          barDurationData={barData}
+          tickOptions={tickOptions}
+          width={width}
+          height={height}
+        />
+      )}
     </Module>
   )
 }

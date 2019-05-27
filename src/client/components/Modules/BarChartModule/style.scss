@@ -72,36 +72,3 @@
     }
   }
 }
-
-.barChartContainer {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  align-items: center;
-
-  .moduleBodyColorList {
-    margin: 48px 0 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    .colorItem {
-      display: flex;
-      font-size: 14px;
-      font-family: $font-family-ClanOTNews;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      span {
-        width: 16px;
-        height: 16px;
-        display: inline-block;
-        margin-bottom: -2px;
-        margin-right: 5px;
-        border-radius: 10px;
-      }
-    }
-    :not(:first-child) {
-      margin-left: 45px;
-    }
-  }
-}
