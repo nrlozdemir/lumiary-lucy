@@ -39,12 +39,14 @@ class FlipCard extends React.Component {
       boxShadow: `0 2px 6px 0 ${moduleShadow}`,
     }
 
-    const containerClassName = classnames(styles.flipContainer, 'col-3 ml-0')
+    const containerClassName = classnames(
+      { [styles.flipContainer]: !this.props.isEmpty },
+      'col-3 ml-0'
+    )
 
     const flipperClassName = styles.flipper
     const frontClassName = styles.front
     const backClassName = styles.back
-
     return (
       <React.Fragment>
         <div
@@ -58,9 +60,11 @@ class FlipCard extends React.Component {
             <div className={frontClassName} style={{ ...themeStyle }}>
               {children && children[0]}
             </div>
-            <div className={backClassName} style={{ ...themeStyle }}>
-              {children && children[1]}
-            </div>
+            {!this.props.isEmpty && (
+              <div className={backClassName} style={{ ...themeStyle }}>
+                {children && children[1]}
+              </div>
+            )}
           </div>
         </div>
       </React.Fragment>

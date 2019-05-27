@@ -14,6 +14,7 @@ import LibraryDetailChartHeader from './sections/LibraryDetailChartHeader'
 import LibraryDetailDoughnutChart from './sections/LibraryDetailDoughnutChart'
 import LibraryDetailColorTemperature from './sections/LibraryDetailColorTemperature'
 import LibraryDetailShotByShot from './sections/LibraryDetailShotByShot'
+import { withTheme } from 'ThemeContext/withTheme'
 
 /* eslint-disable react/prefer-stateless-function */
 export class LibraryDetail extends React.Component {
@@ -34,13 +35,16 @@ export class LibraryDetail extends React.Component {
       getDoughnutChartRequest,
       getColorTempRequest,
       getShotByShotRequest,
+      themeContext: { colors },
     } = this.props
 
     getVideos()
-
     if (match.params.videoId) {
       getBarChartRequest({ LibraryDetailId: match.params.videoId })
-      getDoughnutChartRequest({ LibraryDetailId: match.params.videoId })
+      getDoughnutChartRequest({
+        LibraryDetailId: match.params.videoId,
+        themeColors: colors,
+      })
       getColorTempRequest({ LibraryDetailId: match.params.videoId })
       getShotByShotRequest({ LibraryDetailId: match.params.videoId })
     }
@@ -54,11 +58,20 @@ export class LibraryDetail extends React.Component {
       getDoughnutChartRequest,
       getColorTempRequest,
       getShotByShotRequest,
+      themeContext: { colors },
     } = this.props
-
+    if (
+      prevMatch.params.videoId !== match.params.videoId ||
+      prevProps.themeContext.colors.ageSliderBorder !== colors.ageSliderBorder
+    ) {
+      getDoughnutChartRequest({
+        LibraryDetailId: match.params.videoId,
+        themeColors: colors,
+      })
+    }
     if (prevMatch.params.videoId !== match.params.videoId) {
       getBarChartRequest({ LibraryDetailId: match.params.videoId })
-      getDoughnutChartRequest({ LibraryDetailId: match.params.videoId })
+
       getColorTempRequest({ LibraryDetailId: match.params.videoId })
       getShotByShotRequest({ LibraryDetailId: match.params.videoId })
     }
@@ -143,10 +156,10 @@ LibraryDetail.propTypes = {
   doughnutLineChartData: PropTypes.object,
   colorTempData: PropTypes.object,
   shotByShotData: PropTypes.object,
-  getBarChartRequest: PropTypes.func.isRequired,
-  getDoughnutChartRequest: PropTypes.func.isRequired,
-  getColorTempRequest: PropTypes.func.isRequired,
-  getShotByShotRequest: PropTypes.func.isRequired,
+  getBarChartRequest: PropTypes.func,
+  getDoughnutChartRequest: PropTypes.func,
+  getColorTempRequest: PropTypes.func,
+  getShotByShotRequest: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -174,5 +187,6 @@ export default compose(
   reduxForm({
     form: 'libraryDetail',
   }),
-  withConnect
+  withConnect,
+  withTheme
 )(LibraryDetail)
