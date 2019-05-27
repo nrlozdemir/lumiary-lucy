@@ -48,17 +48,15 @@ const getTimeBucket = (value) => {
     }
   *
  */
+
 const convertDataIntoDatasets = (values, options, ...args) => {
   let labels
   let datasetsFromValues
   let singleLevelJSON
 
   const arg = args && !!args[0] && args[0]
-
   const brands = Object.keys(values.data)
-
   const brandObjects = brands.map((b) => values.data[b])
-
   const getValueinObject = brandObjects[0][options.property[0]]
 
   const timeBucket =
@@ -106,14 +104,14 @@ const convertDataIntoDatasets = (values, options, ...args) => {
       const color = chartColors[idx]
 
       return arg && arg.singleDataset
-        ? // only one dataset is required sometimes
-          // ie. doughnut chart in panoptic/engagement
-          {
+        ? {
             labels: [
               ...data.labels,
-              `${key} ${
+              `${key}${
                 !!options.property && options.property == 'duration'
-                  ? 'seconds'
+                  ? ' seconds'
+                  : options.property == 'frameRate'
+                  ? 'fps'
                   : ''
               }`,
             ],
@@ -121,7 +119,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
               {
                 label: expectedNames[options.property],
                 data: datasetsFromValues || [0, 0, 0, 0],
-                backgroundColor: [
+                backgroundColor: arg.backgroundColor || [
                   ...(datasets[0] ? datasets[0].backgroundColor : []),
                   color,
                 ],
@@ -329,6 +327,8 @@ const radarChartCalculate = (data) => {
   return colorsData
 }
 
+const getMaximumValueIndexFromArray = (data) =>
+  Object.values(data).indexOf(Math.max(...Object.values(data)))
 const compareSharesData = (data) => {
   return data.map((item) => {
     return {
@@ -439,6 +439,7 @@ export {
   radarChartCalculate,
   isDataSetEmpty,
   convertDataIntoDatasets,
+  getMaximumValueIndexFromArray,
   compareSharesData,
   convertMultiRequestDataIntoDatasets,
   getDateBucketFromRange,

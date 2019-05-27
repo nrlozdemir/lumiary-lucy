@@ -33,7 +33,6 @@ class PacingCard extends React.Component {
         error,
       },
     } = this.props
-    // console.log(stadiumData)
     const hasNoData =
       (!loading &&
         (isDataSetEmpty(horizontalStackedBarData) &&

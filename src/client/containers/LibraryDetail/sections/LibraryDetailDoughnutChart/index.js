@@ -86,7 +86,19 @@ class LibraryDetailDoughnutChart extends React.Component {
                         }}
                       >
                         <p className="font-secondary-second font-size-12 text-center">
-                          {chart.secondTitle}
+                          {
+                            chart.doughnutChartValues.labels[
+                              Object.values(
+                                chart.doughnutChartValues.datasets[0].data
+                              ).indexOf(
+                                Math.max(
+                                  ...Object.values(
+                                    chart.doughnutChartValues.datasets[0].data
+                                  )
+                                )
+                              )
+                            ]
+                          }
                         </p>
                       </div>
                       <div className={style.doughnutChartContainer}>
@@ -95,37 +107,34 @@ class LibraryDetailDoughnutChart extends React.Component {
                           height={150}
                           displayDataLabels={false}
                           cutoutPercentage={50}
-                          data={{
-                            labels: ['Red', 'Green', 'Blue', 'Yellow'],
-                            datasets: [
-                              {
-                                data: [...chart.average],
-                                borderColor: '#373F5B',
-                                backgroundColor: [
-                                  colors.textColor,
-                                  colors.textColor,
-                                  colors.textColor,
-                                  '#2FD7C4',
-                                ],
-                                hoverBackgroundColor: [
-                                  colors.textColor,
-                                  colors.textColor,
-                                  colors.textColor,
-                                  '#2FD7C4',
-                                ],
-                              },
-                            ],
-                          }}
+                          data={chart.doughnutChartValues}
                         />
                         <p>
                           <span className={style.textBold}>
-                            {chart.average[chart.average.length - 1]}%{' '}
+                            {Math.max(
+                              ...Object.values(
+                                chart.doughnutChartValues.datasets[0].data
+                              )
+                            )}
+                            %{' '}
                           </span>
                           of your library
                           <br /> is shot in
                           <span className={style.textBold}>
                             {' '}
-                            {chart.secondTitle}
+                            {
+                              chart.doughnutChartValues.labels[
+                                Object.values(
+                                  chart.doughnutChartValues.datasets[0].data
+                                ).indexOf(
+                                  Math.max(
+                                    ...Object.values(
+                                      chart.doughnutChartValues.datasets[0].data
+                                    )
+                                  )
+                                )
+                              ]
+                            }
                           </span>
                         </p>
                       </div>
@@ -199,7 +208,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                               labels: ['Red', 'Green', 'Blue', 'Yellow'],
                               datasets: [
                                 {
-                                  data: [...selectedCardData.libraryData],
+                                  data: [9.87, 30.04, 18.83, 41.26],
                                   borderColor: '#373F5B',
                                   backgroundColor: [
                                     '#ffffff',
@@ -219,14 +228,9 @@ class LibraryDetailDoughnutChart extends React.Component {
                           />
                           <p className="pt-32">
                             <span className={style.duskRound} />
-                            <span className={style.textBold}>
-                              {selectedCardData.libraryFpsData.percentage}%
-                            </span>{' '}
+                            <span className={style.textBold}>52%</span>
                             of your library is shot in
-                            <span className={style.textBold}>
-                              {' '}
-                              {selectedCardData.libraryFpsData.fps}fps
-                            </span>
+                            <span className={style.textBold}>24fps</span>
                           </p>
                         </div>
                       </div>
@@ -253,8 +257,6 @@ class LibraryDetailDoughnutChart extends React.Component {
                         <h1 className={style.panelHeader}>Industry Data</h1>
                         <div className={style.doughnutChartContainer}>
                           <DoughnutChart
-                            doughnutData={selectedCardData.industryData}
-                            color="#8562F3"
                             width={180}
                             height={180}
                             displayDataLabels={false}
@@ -263,7 +265,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                               labels: ['Red', 'Green', 'Blue', 'Yellow'],
                               datasets: [
                                 {
-                                  data: [...selectedCardData.libraryData],
+                                  data: [9.87, 30.04, 18.83, 41.26],
                                   borderColor: '#373F5B',
                                   backgroundColor: [
                                     '#ffffff',
@@ -283,14 +285,9 @@ class LibraryDetailDoughnutChart extends React.Component {
                           />
                           <p className="w-75 text-center pt-32">
                             <span className={style.purpleRound} />
-                            <span className={style.textBold}>
-                              {selectedCardData.industryFpsData.percentage}%
-                            </span>{' '}
+                            <span className={style.textBold}>36%</span>
                             of your library is shot in
-                            <span className={style.textBold}>
-                              {' '}
-                              {selectedCardData.industryFpsData.fps}fps
-                            </span>
+                            <span className={style.textBold}>45fps</span>
                           </p>
                         </div>
                       </div>
@@ -303,7 +300,14 @@ class LibraryDetailDoughnutChart extends React.Component {
                             height={292}
                             dataSet={{
                               labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-                              datasets: selectedCardData.lineChartData,
+                              datasets: [
+                                {
+                                  data: [41, 43, 34, 75, 32, 88, 34],
+                                },
+                                {
+                                  data: [94, 15, 29, 64, 33, 5, 17],
+                                },
+                              ],
                             }}
                             xAxesFlatten
                             yAxesPercentage
