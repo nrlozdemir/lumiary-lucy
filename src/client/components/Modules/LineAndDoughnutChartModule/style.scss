@@ -1,12 +1,12 @@
 .percentageCol {
   position: relative;
   margin-top: 40px;
-  padding: 0 40px;
+  padding: 0 54px;
   margin-bottom: 40px;
 
   .chartSectionBadge {
     display: block;
-    margin: 40px 0 56px 24px;
+    margin: 40px 0 56px;
     text-align: center;
 
     span {
@@ -20,14 +20,21 @@
     }
   }
 
-  &:not(:last-child) {
-    border-right: 1px solid $color-dusk;
+  &:not(:last-child):after {
+		content: "";
+		position: absolute;
+		right:-1px;
+		bottom: 40px;
+		height: 120px;
+		width: 1px;
+		background: $color-dusk;
   }
+}
+.overflowHidden{
+	overflow: hidden;
 }
 .scrollableContainer {
   display: flex;
-  overflow-y: hidden;
-  overflow-x: scroll;
   &::-webkit-scrollbar {
     width: 6px;
     background-color: #21243b;

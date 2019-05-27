@@ -5,7 +5,7 @@ import style from './style.scss'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import { Line } from 'react-chartjs-2'
-import HorizontalSlider from 'Components/Sliders/Horizontal'
+import Scrubber from 'Components/Sliders/Scrubber'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 class LineAndDoughnutChartModule extends React.Component {
@@ -186,31 +186,33 @@ class LineAndDoughnutChartModule extends React.Component {
                   />
                 </div>
               </div>
-              <div className="col-12">
-								<HorizontalSlider>
-                <div className={style.scrollableContainer}>
-                  {percentageData.map((chart, i) => (
-                    <div className={percentageCol}>
-                      <div className={style.chartSectionBadge}>
-                        <span
-                          style={{
-                            background: colors.labelBackground,
-                            color: colors.labelColor,
-                            boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                          }}
-                        >
-                          {chart.key}
-                        </span>
-                      </div>
-                      <PercentageBarGraph
-                        key={Math.random()}
-                        percentage={chart.value}
-                        color={chart.color}
-                      />
-                    </div>
-                  ))}
-                </div>
-								</HorizontalSlider>
+              <div className={cx("col-12-no-gutters", style.overflowHidden)}>
+								<Scrubber
+									horizontal
+								>
+									<div className={style.scrollableContainer}>
+										{percentageData.map((chart, i) => (
+											<div className={percentageCol}>
+												<div className={style.chartSectionBadge}>
+													<span
+														style={{
+															background: colors.labelBackground,
+															color: colors.labelColor,
+															boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+														}}
+													>
+														{chart.key}
+													</span>
+												</div>
+												<PercentageBarGraph
+													key={Math.random()}
+													percentage={chart.value}
+													color={chart.color}
+												/>
+											</div>
+										))}
+									</div>
+								</Scrubber>
               </div>
             </div>
           </Module>
