@@ -5,7 +5,10 @@ import { actions, types } from 'Reducers/generatedReport'
 
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
-import { convertDataIntoDatasets } from 'Utils'
+import {
+  convertDataIntoDatasets,
+  convertMultiRequestDataIntoDatasets,
+} from 'Utils'
 
 import { getDataFromApi } from 'Utils/api'
 
@@ -104,12 +107,12 @@ function* getPacingCardData({ data: { reportId } }) {
   }
 }
 
-function* getCompetitorTopVideos({ data: { metric } }) {
+function* getCompetitorTopVideos({ data: { resolution } }) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
     const options = {
-      metric,
+      metric: 'views',
       dateRange: '24hours',
       property: ['resolution'],
       dateBucket: 'none',

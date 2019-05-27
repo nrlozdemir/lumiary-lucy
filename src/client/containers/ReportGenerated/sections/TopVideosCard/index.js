@@ -8,7 +8,7 @@ import {
 } from 'Reducers/generatedReport'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
 
-export class TopVideosCard extends React.Component {
+class TopVideosCard extends React.Component {
   getCompetitorTopVideos = (data) => {
     const { getCompetitorTopVideosRequest, reportId } = this.props
     getCompetitorTopVideosRequest({ ...data, reportId })
@@ -26,9 +26,9 @@ export class TopVideosCard extends React.Component {
         action={this.getCompetitorTopVideos}
         filters={[
           {
-            type: 'metric',
-            selectKey: 'competitorTopVideos-engagement',
-            placeHolder: 'Engagement',
+            type: 'resolution',
+            selectKey: 'competitorTopVideos-resolution',
+            placeHolder: 'Resolution',
           },
         ]}
         references={[
