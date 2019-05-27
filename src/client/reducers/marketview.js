@@ -66,6 +66,13 @@ export const types = {
   GET_MARKETVIEW_DETAIL_TIME_FAILURE:
     'Marketview/GET_MARKETVIEW_DETAIL_TIME_FAILURE',
 
+  GET_MARKETVIEW_DETAIL_PEFORMING_TIME_REQUEST:
+    'Marketview/GET_MARKETVIEW_DETAIL_PEFORMING_TIME_REQUEST',
+  GET_MARKETVIEW_DETAIL_PEFORMING_TIME_SUCCESS:
+    'Marketview/GET_MARKETVIEW_DETAIL_PEFORMING_TIME_SUCCESS',
+  GET_MARKETVIEW_DETAIL_PEFORMING_TIME_FAILURE:
+    'Marketview/GET_MARKETVIEW_DETAIL_PEFORMING_TIME_FAILURE',
+
   GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_REQUEST:
     'Marketview/GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_REQUEST',
   GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_SUCCESS:
@@ -187,6 +194,18 @@ export const actions = {
     type: types.GET_MARKETVIEW_DETAIL_TIME_FAILURE,
     error,
   }),
+  getTopPerformingTimeRequest: (payload) => ({
+    type: types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_REQUEST,
+    payload,
+  }),
+  getTopPerformingTimeSuccess: (payload) => ({
+    type: types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_SUCCESS,
+    payload,
+  }),
+  getTopPerformingTimeFailure: (error) => ({
+    type: types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_FAILURE,
+    error,
+  }),
   getTopPerformingPropertiesRequest: (payload) => ({
     type: types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_REQUEST,
     payload,
@@ -221,7 +240,7 @@ export const initialState = fromJS({
   formatChartData: [],
   totalViewsData: {},
   totalCompetitorViewsData: {},
-  marketviewDetailTime: null,
+  marketviewDetailTime: {},
   error: false,
   loading: false,
   topPerformingPropertiesData: null,
@@ -316,9 +335,23 @@ const marketviewReducer = (state = initialState, action) => {
       return state.set('loading', fromJS(true))
     case types.GET_MARKETVIEW_DETAIL_TIME_SUCCESS:
       return state
-        .set('marketviewDetailTime', fromJS(action.payload))
+        .setIn(['marketviewDetailTime', 'data'], fromJS(action.payload))
         .set('loading', fromJS(false))
     case types.GET_MARKETVIEW_DETAIL_TIME_FAILURE:
+      return state
+        .set('error', fromJS(action.error))
+        .set('loading', fromJS(false))
+
+    case types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_REQUEST:
+      return state.set('loading', fromJS(true))
+    case types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_SUCCESS:
+      return state
+        .setIn(
+          ['marketviewDetailTime', 'topPerformingData'],
+          fromJS(action.payload)
+        )
+        .set('loading', fromJS(false))
+    case types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_FAILURE:
       return state
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))

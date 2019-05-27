@@ -15,9 +15,6 @@ import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesM
 import RouterLoading from 'Components/RouterLoading'
 import BarChartModule from 'Components/Modules/BarChartModule'
 
-import { chartCombineDataset } from 'Utils'
-import { TopPerformingProperties_DatasetOptions } from 'Containers/Marketview/sections/detail/options'
-
 const chartTickOptions = {
   stepSize: 250000,
   min: 0,
@@ -68,7 +65,6 @@ export class Platform extends React.Component {
         topPerformingPropertiesData,
       },
     } = this.props
-    console.log('@@@', topPerformingPropertiesData)
     return (
       <React.Fragment>
         <Slider
@@ -173,6 +169,14 @@ export class Platform extends React.Component {
               placeHolder: 'Property',
             },
           ]}
+          references={
+            topPerformingPropertiesData &&
+            topPerformingPropertiesData.datasets &&
+            topPerformingPropertiesData.datasets.map((item) => ({
+              text: item.label,
+              color: item.backgroundColor,
+            }))
+          }
         />
       </React.Fragment>
     )

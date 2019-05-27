@@ -280,8 +280,7 @@ function* getTopPerformingPropertiesData({
             youtube,
           },
           options,
-          true, // for revert labels datas
-          true // for label legends
+          true // for revert labels datas
         )
       )
     )
@@ -296,6 +295,29 @@ function* getTopPerformingPropertiesByCompetitorsData() {
     yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess(payload))
   } catch (error) {
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))
+  }
+}
+
+function* getTopPerformingPropertiesByTimeData({ payload: { property } }) {
+  try {
+    const { brand } = yield select(selectAuthProfile)
+    const options = {
+      metric: 'views',
+      property: [property],
+      dateBucket: 'dayOfWeek',
+      display: 'percentage',
+      brands: [brand.uuid],
+    }
+    const data = yield call(getReportDataApi, options)
+    yield put(
+      actions.getTopPerformingTimeSuccess(
+        convertDataIntoDatasets(data, options, {
+          singleDataset: false,
+        })
+      )
+    )
+  } catch (error) {
+    yield put(actions.getTopPerformingTimeFailure(error))
   }
 }
 
@@ -335,5 +357,9 @@ export default [
   takeLatest(
     types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_REQUEST,
     getTopPerformingPropertiesByCompetitorsData
+  ),
+  takeLatest(
+    types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_REQUEST,
+    getTopPerformingPropertiesByTimeData
   ),
 ]
