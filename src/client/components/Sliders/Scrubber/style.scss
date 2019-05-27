@@ -1,34 +1,19 @@
-%arrows {
-	position: relative;
-	width: calc(100% - 10px);
-}
-
-%arrow {
-	position: absolute;
-	top: 0px;
-	height: 16px;
-	line-height: 16px;
-	font-weight: 300;
-	font-family: $font-family-primary;
-	font-size: 14px;
-}
-
 .arrowContainer{
-	position: relative;
-	display: flex;
-	flex-direction: row;
-	flex-wrap: nowrap;
-	justify-content: space-between;
-	align-items: center;
-	align-content: center;
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
 
-	.leftArrows{
-		margin-left: 13px;
-		margin-top: 2px;
-	}
+  .leftArrows{
+    margin-left: 13px;
+    margin-top: 2px;
+  }
 
-	.rightArrows{
-		margin-right: 13px;
-		margin-top: 2px;
-	}
+  .rightArrows{
+    margin-right: 13px;
+    margin-top: 2px;
+  }
 }
