@@ -6,10 +6,9 @@ import { actions, makeSelectReportsPacingCard } from 'Reducers/generatedReport'
 import PacingCardModule from 'Components/Modules/PacingCardModule'
 
 class PacingCard extends React.Component {
-  callBack = (data, moduleKey) => {
+  componentDidMount() {
     const { getPacingCardData, reportId } = this.props
-
-    getPacingCardData({ ...data, reportId })
+    getPacingCardData({ reportId })
   }
 
   render() {
@@ -22,7 +21,6 @@ class PacingCard extends React.Component {
         data={data}
         moduleKey={'Reports/PacingCard'}
         title="Pacing For Each Format by Performance"
-        action={this.callBack}
       />
     )
   }
