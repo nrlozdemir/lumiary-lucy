@@ -187,9 +187,7 @@ class LineAndDoughnutChartModule extends React.Component {
                 </div>
               </div>
               <div className={cx("col-12-no-gutters", style.overflowHidden)}>
-                <Scrubber
-                  horizontal
-                >
+								<Scrubber horizontal arrows={true}>
                   <div className={style.scrollableContainer}>
                     {percentageData.map((chart, i) => (
                       <div className={percentageCol}>

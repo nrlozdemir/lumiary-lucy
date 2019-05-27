@@ -5,7 +5,7 @@
   flex-wrap: nowrap;
   justify-content: space-between;
   align-items: center;
-  align-content: center;
+	align-content: center;
 
   .leftArrows{
     margin-left: 13px;
@@ -16,4 +16,13 @@
     margin-right: 13px;
     margin-top: 2px;
   }
+}
+
+.trackHorizontal{
+	position: absolute;
+	cursor: pointer;
+}
+
+.thumbHorizontal{
+
 }
