@@ -78,7 +78,9 @@ class ReportGenerated extends Component {
             handleSelectFilters={this.handleSelectFilters}
           />
         )}
+
         <PacingCard reportId={params && params.id} />
+
         {verticalStackedChartData && (
           <EngagementByProperty
             data={verticalStackedChartData}

@@ -22,6 +22,13 @@ export class Module extends React.Component {
     }
   }
 
+  componentDidMount() {
+    const { action, selectFilters, moduleKey } = this.props
+    if (!!action && !!selectFilters && !selectFilters.values[moduleKey]) {
+      action({}, moduleKey)
+    }
+  }
+
   componentDidUpdate(prevProps) {
     const { action, selectFilters, moduleKey } = this.props
     if (

@@ -7,7 +7,7 @@ import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
 import { convertDataIntoDatasets } from 'Utils'
 
-import { getReportDataApi } from 'Api'
+import { getReportDataApi } from 'Utils/api'
 
 import _ from 'lodash'
 
