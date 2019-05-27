@@ -1,4 +1,4 @@
-import { call, put, takeLatest, select } from 'redux-saga/effects'
+import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/generatedReport'
@@ -65,11 +65,13 @@ function* getPacingCardData({ data: { reportId } }) {
       url: '/report',
     }
 
-    const stadiumData = yield call(getDataFromApi, options)
-    const horizontalStackedBarData = yield call(getDataFromApi, {
-      ...options,
-      proportionOf: 'format',
-    })
+    const [stadiumData, horizontalStackedBarData] = yield all([
+      call(getDataFromApi, options),
+      call(getDataFromApi, {
+        ...options,
+        proportionOf: 'format',
+      }),
+    ])
 
     if (
       !!stadiumData.data &&
