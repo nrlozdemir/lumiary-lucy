@@ -363,7 +363,12 @@ const compareSharesData = (data) => {
   })
 }
 
-const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
+const convertMultiRequestDataIntoDatasets = (
+  payload,
+  options,
+  revert,
+  isLabelLegends
+) => {
   const datasetLabels = Object.keys(payload)
   const property = options.property[0]
 
@@ -394,12 +399,21 @@ const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
     }
   )
 
-  return {
+  const parsedData = {
     labels: !revert
       ? firstPayloadLabels.map((key) => capitalizeFirstLetter(key))
       : datasetLabels.map((label) => capitalizeFirstLetter(label)),
     datasets,
   }
+  if (isLabelLegends) {
+    parsedData.labelLegends = firstPayloadLabels.map((label, index) => {
+      return {
+        title: label,
+        color: chartColors[index],
+      }
+    })
+  }
+  return parsedData
 }
 
 const isDataSetEmpty = (data) => {

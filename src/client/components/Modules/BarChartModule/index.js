@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import BarChart from 'Components/Charts/BarChart'
 import Module from 'Components/Module'
 import style from './style.scss'
+import { isDataSetEmpty } from 'Utils'
 
 const BarChartModule = ({
   barData,
@@ -25,7 +26,7 @@ const BarChartModule = ({
       filters={filters}
       action={action}
       references={references}
-      isEmpty={isEmpty}
+      isEmpty={isDataSetEmpty(barData)}
       legend={
         titleLabels && (
           <div
@@ -44,14 +45,27 @@ const BarChartModule = ({
         )
       }
     >
-      {barData && (
-        <BarChart
-          barDurationData={barData}
-          tickOptions={tickOptions}
-          width={width}
-          height={height}
-        />
-      )}
+      <div className={style.barChartContainer}>
+        {barData && (
+          <BarChart
+            barDurationData={barData}
+            tickOptions={tickOptions}
+            width={width}
+            height={height}
+          />
+        )}
+
+        {barData && barData.labelLegends && (
+          <div className={style.moduleBodyColorList}>
+            {barData.labelLegends.map((data, index) => (
+              <div key={index} className={style.colorItem}>
+                <span style={{ background: data.color }} />
+                {data.title}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
     </Module>
   )
 }

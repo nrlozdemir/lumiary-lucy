@@ -248,10 +248,43 @@ function* getmarketviewTimeMockData() {
   }
 }
 
-function* getTopPerformingPropertiesData() {
+function* getTopPerformingPropertiesData({
+  payload: { property, metric, dateRange },
+}) {
   try {
-    const payload = yield call(getGetTopPerformingPropertiesApi)
-    yield put(actions.getTopPerformingPropertiesSuccess(payload))
+    const { brand } = yield select(selectAuthProfile)
+
+    const options = {
+      metric,
+      dateRange,
+      property: [property],
+      dateBucket: 'none',
+      display: 'percentage',
+      brands: [brand.uuid],
+    }
+
+    const [facebook, instagram, twitter, youtube] = yield all([
+      call(getReportDataApi, { ...options, platform: 'facebook' }),
+      call(getReportDataApi, { ...options, platform: 'instagram' }),
+      call(getReportDataApi, { ...options, platform: 'twitter' }),
+      call(getReportDataApi, { ...options, platform: 'youtube' }),
+    ])
+
+    yield put(
+      actions.getTopPerformingPropertiesSuccess(
+        convertMultiRequestDataIntoDatasets(
+          {
+            facebook,
+            instagram,
+            twitter,
+            youtube,
+          },
+          options,
+          true, // for revert labels datas
+          true // for label legends
+        )
+      )
+    )
   } catch (error) {
     yield put(actions.getTopPerformingPropertiesFailure(error))
   }

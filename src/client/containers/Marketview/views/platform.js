@@ -68,15 +68,7 @@ export class Platform extends React.Component {
         topPerformingPropertiesData,
       },
     } = this.props
-
-    const topPerformingPropertiesDataCombineData = chartCombineDataset(
-      {
-        labels: ['Facebook', 'Instagram', 'Twitter', 'Youtube'],
-        datasets: topPerformingPropertiesData,
-      },
-      TopPerformingProperties_DatasetOptions
-    )
-
+    console.log('@@@', topPerformingPropertiesData)
     return (
       <React.Fragment>
         <Slider
@@ -164,7 +156,7 @@ export class Platform extends React.Component {
 
         <BarChartModule
           moduleKey="MarketView/Platform/TopPerformingPropertyAcrossAllPlatforms"
-          barData={topPerformingPropertiesDataCombineData}
+          barData={topPerformingPropertiesData}
           title="Top Performing Property Across All Platforms"
           height={55}
           tickOptions={chartTickOptions}
@@ -176,9 +168,9 @@ export class Platform extends React.Component {
               placeHolder: 'Engagement',
             },
             {
-              type: 'pacing',
-              selectKey: 'mwplttpaap-pacing',
-              placeHolder: 'Pacing',
+              type: 'property',
+              selectKey: 'mwplttpaap-property',
+              placeHolder: 'Property',
             },
           ]}
         />

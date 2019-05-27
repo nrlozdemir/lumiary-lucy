@@ -187,8 +187,9 @@ export const actions = {
     type: types.GET_MARKETVIEW_DETAIL_TIME_FAILURE,
     error,
   }),
-  getTopPerformingPropertiesRequest: () => ({
+  getTopPerformingPropertiesRequest: (payload) => ({
     type: types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_REQUEST,
+    payload,
   }),
   getTopPerformingPropertiesSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_SUCCESS,
