@@ -111,7 +111,7 @@ const generatedReportsReducer = (state = initialState, action) => {
       return state.setIn(['pacingChartData', 'loading'], fromJS(true))
 
     case types.GET_PACING_CARD_DATA_SUCCESS:
-      const { stadiumData, horizontalStackedBarData } = payload
+      const { stadiumData, horizontalStackedBarData } = action.payload
 
       return state
         .setIn(
