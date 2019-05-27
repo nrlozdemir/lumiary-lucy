@@ -13,9 +13,10 @@ import {
   getBrandAndCompetitors,
 } from 'Utils'
 
-import { getReportDataApi } from 'Utils/api'
+import { getDataFromApi } from 'Utils/api'
 
 import _ from 'lodash'
+import { dayOfWeek } from 'Utils/globals'
 
 function getMockPanopticDataApi() {
   return axios.get('/').then((res) => panopticMockData)
@@ -73,16 +74,17 @@ function* getFilteringSectionData({ data }) {
       dateBucket: 'none',
       display: 'percentage',
       property: [property],
+      url: '/report',
       brands: [brand.uuid],
     }
 
-    const doughnutData = yield call(getReportDataApi, options)
+    const doughnutData = yield call(getDataFromApi, options)
 
     const dateBucket = getDateBucketFromRange(dateRange)
 
     const stackedChartData =
       dateBucket !== 'none'
-        ? yield call(getReportDataApi, {
+        ? yield call(getDataFromApi, {
             ...options,
             dateBucket,
           })
@@ -141,11 +143,12 @@ function* getPacingCardData({ data }) {
       property: ['pacing'],
       dateBucket: 'none',
       display: 'percentage',
+      url: '/report',
       brands: [brand.uuid],
     }
 
-    const stadiumData = yield call(getReportDataApi, options)
-    const horizontalStackedBarData = yield call(getReportDataApi, {
+    const stadiumData = yield call(getDataFromApi, options)
+    const horizontalStackedBarData = yield call(getDataFromApi, {
       ...options,
       proportionOf: 'format',
     })
@@ -188,14 +191,15 @@ function* getCompareSharesData({ data: { dateRange } }) {
       metric: 'shares',
       property: ['color'],
       dateBucket: 'none',
+      url: '/report',
     }
 
     const payload = yield all([
-      call(getReportDataApi, {
+      call(getDataFromApi, {
         ...parameters,
         platform: 'facebook',
       }),
-      call(getReportDataApi, {
+      call(getDataFromApi, {
         ...parameters,
         platform: 'youtube',
       }),
@@ -222,9 +226,25 @@ function* getData() {
 
 function* getFlipCardsData() {
   try {
-    const payload = yield call(getMockPanopticDataApi)
-    yield put(actions.getFlipCardsDataSuccess(payload.flipCardsData))
+    const metrics = yield call(getDataFromApi, {
+      url: '/metric',
+      requestType: 'GET',
+    })
+    const payloads = Object.assign(
+      {},
+      ...Object.keys(metrics).map((metric) => ({
+        [metric]: {
+          percentage: metrics[metric].changeOverPrevious,
+          data: dayOfWeek.map((day) => metrics[metric][day]),
+          isEmpty: dayOfWeek.every((day) =>
+            metrics[metric][day] === 0 ? true : false
+          ),
+        },
+      }))
+    )
+    yield put(actions.getFlipCardsDataSuccess(payloads))
   } catch (err) {
+    console.log(err)
     yield put(actions.getFlipCardsDataError(err))
   }
 }

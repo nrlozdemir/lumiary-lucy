@@ -2,10 +2,10 @@ import axios from 'axios'
 import { API_ROOT, API_VERSION } from 'Utils/globals'
 import qs from 'qs'
 
-export function getReportDataApi(parameters) {
+export function getDataFromApi(parameters) {
   return ajax({
-    url: '/report',
-    method: 'POST',
+    url: parameters.url,
+    method: parameters.requestType || 'POST',
     params: qs.stringify(parameters),
   }).then((response) => {
     if (response.error) {
