@@ -113,13 +113,14 @@ function* getCompetitorTopVideos({ data: { metric } }) {
       dateBucket: 'none',
       display: 'percentage',
       brands: [brand.uuid],
+      url: '/report',
     }
 
     const [facebook, instagram, twitter, youtube] = yield all([
-      call(getReportDataApi, { ...options, platform: 'facebook' }),
-      call(getReportDataApi, { ...options, platform: 'instagram' }),
-      call(getReportDataApi, { ...options, platform: 'twitter' }),
-      call(getReportDataApi, { ...options, platform: 'youtube' }),
+      call(getDataFromApi, { ...options, platform: 'facebook' }),
+      call(getDataFromApi, { ...options, platform: 'instagram' }),
+      call(getDataFromApi, { ...options, platform: 'twitter' }),
+      call(getDataFromApi, { ...options, platform: 'youtube' }),
     ])
 
     yield put(
