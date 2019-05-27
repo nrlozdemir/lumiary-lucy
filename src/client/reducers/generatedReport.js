@@ -19,6 +19,13 @@ export const types = {
   GET_PACING_CARD_DATA: 'GeneratedReport/GET_PACING_CARD_DATA',
   GET_PACING_CARD_DATA_SUCCESS: 'GeneratedReport/GET_PACING_CARD_DATA_SUCCESS',
   GET_PACING_CARD_DATA_ERROR: 'GeneratedReport/GET_PACING_CARD_DATA_ERROR',
+
+  GET_COMPETITOR_TOP_VIDEOS_REQUEST:
+    'GeneratedReport/GET_COMPETITOR_TOP_VIDEOS_REQUEST',
+  GET_COMPETITOR_TOP_VIDEOS_SUCCESS:
+    'GeneratedReport/GET_COMPETITOR_TOP_VIDEOS_SUCCESS',
+  GET_COMPETITOR_TOP_VIDEOS_FAILURE:
+    'GeneratedReport/GET_COMPETITOR_TOP_VIDEOS_FAILURE',
 }
 export const actions = {
   // LOAD GENERATED REPORT
@@ -48,6 +55,19 @@ export const actions = {
     type: types.GET_PACING_CARD_DATA_ERROR,
     error,
   }),
+
+  getCompetitorTopVideosRequest: (data) => ({
+    type: types.GET_COMPETITOR_TOP_VIDEOS_REQUEST,
+    data,
+  }),
+  getCompetitorTopVideosSuccess: (payload) => ({
+    type: types.GET_COMPETITOR_TOP_VIDEOS_SUCCESS,
+    payload,
+  }),
+  getCompetitorTopVideosFailure: (error) => ({
+    type: types.GET_COMPETITOR_TOP_VIDEOS_FAILURE,
+    error,
+  }),
 }
 export const initialState = fromJS({
   data: {},
@@ -56,6 +76,11 @@ export const initialState = fromJS({
   selectedVideo: null,
 
   pacingChartData: {
+    data: {},
+    loading: false,
+    error: null,
+  },
+  competitorTopVideos: {
     data: {},
     loading: false,
     error: null,
@@ -102,6 +127,18 @@ const generatedReportsReducer = (state = initialState, action) => {
       return state
         .setIn(['pacingChartData', 'error'], fromJS(action.error))
         .setIn(['pacingChartData', 'loading'], fromJS(false))
+
+    case types.GET_COMPETITOR_TOP_VIDEOS_REQUEST:
+      return state.set('loading', fromJS(true))
+
+    case types.GET_COMPETITOR_TOP_VIDEOS_SUCCESS:
+      return state
+        .set('competitorTopVideos', fromJS(action.payload))
+        .set('loading', fromJS(false))
+    case types.GET_COMPETITOR_TOP_VIDEOS_FAILURE:
+      return state
+        .set('error', fromJS(action.error))
+        .set('loading', fromJS(false))
     default:
       return state
   }
@@ -121,6 +158,15 @@ export const selectPacingChartData = (state) =>
 export const makeSelectReportsPacingCard = () =>
   createSelector(
     selectPacingChartData,
+    (substate) => substate.toJS()
+  )
+
+export const selectTopVideosCard = (state) =>
+  state.GeneratedReport.get('competitorTopVideos')
+
+export const makeSelectReportsTopVideosCard = () =>
+  createSelector(
+    selectTopVideosCard,
     (substate) => substate.toJS()
   )
 

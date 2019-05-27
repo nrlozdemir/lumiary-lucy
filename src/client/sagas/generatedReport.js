@@ -101,7 +101,46 @@ function* getPacingCardData({ data: { reportId } }) {
   }
 }
 
+function* getCompetitorTopVideos({ data: { metric } }) {
+  try {
+    const { brand } = yield select(selectAuthProfile)
+
+    const options = {
+      metric,
+      dateRange: '24hours',
+      property: ['resolution'],
+      dateBucket: 'none',
+      display: 'percentage',
+      brands: [brand.uuid],
+    }
+
+    const [facebook, instagram, twitter, youtube] = yield all([
+      call(getReportDataApi, { ...options, platform: 'facebook' }),
+      call(getReportDataApi, { ...options, platform: 'instagram' }),
+      call(getReportDataApi, { ...options, platform: 'twitter' }),
+      call(getReportDataApi, { ...options, platform: 'youtube' }),
+    ])
+
+    yield put(
+      actions.getCompetitorTopVideosSuccess(
+        convertMultiRequestDataIntoDatasets(
+          {
+            facebook,
+            instagram,
+            twitter,
+            youtube,
+          },
+          options
+        )
+      )
+    )
+  } catch (error) {
+    yield put(actions.getCompetitorTopVideosFailure(error))
+  }
+}
+
 export default [
   takeLatest(types.LOAD_GENERATED_REPORT, getGeneratedReport),
   takeLatest(types.GET_PACING_CARD_DATA, getPacingCardData),
+  takeLatest(types.GET_COMPETITOR_TOP_VIDEOS_REQUEST, getCompetitorTopVideos),
 ]

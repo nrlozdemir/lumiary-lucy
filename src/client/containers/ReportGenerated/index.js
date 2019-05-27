@@ -71,13 +71,8 @@ class ReportGenerated extends Component {
         {videoReleasesData && (
           <VideoReleasesBarChart data={videoReleasesData} />
         )}
-        {topVideosOverTime && (
-          <TopVideosCard
-            chartData={topVideosOverTime}
-            selectResolution={selectResolution}
-            handleSelectFilters={this.handleSelectFilters}
-          />
-        )}
+
+        <TopVideosCard reportId={params && params.id} />
 
         <PacingCard reportId={params && params.id} />
 
