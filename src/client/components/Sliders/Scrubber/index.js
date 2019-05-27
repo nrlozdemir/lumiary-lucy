@@ -19,7 +19,7 @@ const RightArrow = () => {
 	</svg>)
 }
 
-export default class HorizontalSlider extends React.Component {
+export default class Scrubber extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {};
@@ -83,5 +83,5 @@ export default class HorizontalSlider extends React.Component {
 	}
 }
 
-HorizontalSlider.propTypes = propTypes;
-HorizontalSlider.defaultProps = defaultProps;
+Scrubber.propTypes = propTypes;
+Scrubber.defaultProps = defaultProps;
