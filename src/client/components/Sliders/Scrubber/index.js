@@ -5,7 +5,12 @@ import { Scrollbars } from 'react-custom-scrollbars'
 import style from './style.scss'
 
 const propTypes = {}
-const defaultProps = {}
+const defaultProps = {
+	width: 1160,
+	height: 342,
+	arrows: false,
+	scrubberHeight: 14
+}
 
 const LeftArrow = () => {
   return (<svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10">
@@ -33,32 +38,30 @@ export default class Scrubber extends React.Component {
     this.setState({ top });
   }
 
-  renderTrackHorizontal() {
+  renderTrackHorizontal(props) {
     const inlineStyle = {
       right: 2,
       bottom: 2,
       left: 2,
-      borderRadius: 7,
+      borderRadius: Math.floor(parseInt(props.scrubberHeight) / 2),
       boxShadow: '0 2px 6px 0 #e8ecf0',
       border: '1px solid #c6c9d7',
-      position: 'absolute',
-      background: "#e8ecf0"
+			background: "#e8ecf0",
     }
 
-    return <div style={inlineStyle} />
+    return <div className={style.trackHorizontal} style={inlineStyle} />
   }
 
-  renderThumbHorizontal() {
+  renderThumbHorizontal(props) {
     const inlineStyle = {
-      cursor: 'pointer',
       borderRadius: 'inherit',
       background: "rgba(255, 255, 255, 0.9)",
       border: '1px solid #c6c9d7',
-      height: '14px'
+      height: props.scrubberHeight,
     }
 
-    return (<div style={inlineStyle}>
-      <div className={style.arrowContainer}>
+    return (<div className={style.thumbHorizontal} style={inlineStyle}>
+      {props.arrows && (<div className={style.arrowContainer}>
         <div className={style.leftArrows}>
           <LeftArrow />
           <LeftArrow />
@@ -67,18 +70,19 @@ export default class Scrubber extends React.Component {
           <RightArrow />
           <RightArrow />
         </div>
-      </div>
+      </div>)}
     </div>)
 }
 
   render() {
+		const { horizontal, width, height, children, arrows } = this.props
     return (
-      <Scrollbars
-        renderTrackHorizontal={this.renderTrackHorizontal}
-        renderThumbHorizontal={this.renderThumbHorizontal}
-        style={{ width: 1160, height: 342 }}>
-        {this.props.children}
-      </Scrollbars>
+			horizontal && (<Scrollbars
+        renderTrackHorizontal={ () => this.renderTrackHorizontal(this.props) }
+        renderThumbHorizontal={ () => this.renderThumbHorizontal(this.props) }
+        style={{ width: width, height: height }}>
+        {children}
+      </Scrollbars>)
     );
   }
 }
