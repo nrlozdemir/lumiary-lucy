@@ -25,7 +25,7 @@ const CreatedFilters = () => {
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
-        <div class="grid-container col-12 mt-72">
+        <div className="grid-container col-12 mt-72">
           <div className={style.filtersArea}>
             {filters.map((item, index) => {
               return (
