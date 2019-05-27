@@ -27,7 +27,7 @@ export class TopVideosCard extends React.Component {
         filters={[
           {
             type: 'metric',
-            selectKey: 'Mwpsdlt-engagement',
+            selectKey: 'competitorTopVideos-engagement',
             placeHolder: 'Engagement',
           },
         ]}
