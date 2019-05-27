@@ -55,6 +55,8 @@ function* getPacingCardData({ data: { reportId } }) {
 
     const options = {
       reportId,
+      metric: 'views',
+      dateRange: '24hours',
       platform: 'all',
       property: ['pacing'],
       dateBucket: 'none',
