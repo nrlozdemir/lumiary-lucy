@@ -17,10 +17,11 @@ import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPl
 
 import {
   convertMultiRequestDataIntoDatasets,
+  getBrandAndCompetitors,
   convertDataIntoDatasets,
   getMaximumValueIndexFromArray,
 } from 'Utils'
-import { getReportDataApi } from 'Api'
+import { getReportDataApi } from 'Utils/api'
 
 import { selectAuthProfile } from 'Reducers/auth'
 
@@ -217,8 +218,22 @@ function* getTotalViewsData(data) {
 
 function* getTotalCompetitorViewsData() {
   try {
-    const payload = yield call(getTotalCompetitorViewsApi)
-    yield put(actions.getTotalCompetitorViewsSuccess(payload))
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
+    const options = {
+      metric: 'views',
+      platform: 'all',
+      dateRange: 'week',
+      dateBucket: 'none',
+      property: ['duration'],
+      brands: [...competitors],
+    }
+    const payload = yield call(getReportDataApi, { ...options })
+    yield put(
+      actions.getTotalCompetitorViewsSuccess(
+        convertDataIntoDatasets(payload, options)
+      )
+    )
   } catch (error) {
     yield put(actions.getTotalCompetitorViewsFailure(error))
   }

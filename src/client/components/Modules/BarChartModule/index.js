@@ -16,6 +16,7 @@ const BarChartModule = ({
   filters,
   action,
   moduleKey,
+  isEmpty,
 }) => {
   return (
     <Module
@@ -24,6 +25,7 @@ const BarChartModule = ({
       filters={filters}
       action={action}
       references={references}
+      isEmpty={isEmpty}
       legend={
         titleLabels && (
           <div

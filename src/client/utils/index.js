@@ -53,11 +53,13 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   let labels
   let datasetsFromValues
   let singleLevelJSON
+  let customKey = false
+  let getValueinObject
 
   const arg = args && !!args[0] && args[0]
   const brands = Object.keys(values.data)
   const brandObjects = brands.map((b) => values.data[b])
-  const getValueinObject = brandObjects[0][options.property[0]]
+  getValueinObject = brandObjects[0][options.property[0]]
 
   const timeBucket =
     options.dateBucket !== 'none' ? getTimeBucket(getValueinObject) : null
@@ -93,16 +95,27 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     labels = Object.keys(getValueinObject)
     singleLevelJSON = true
   }
-
+  console.log(brands)
+  if (brands.length > 1) {
+    datasetsFromValues = brandObjects.map((brand, idx) =>
+      Object.keys(brand[Object.keys(brand)[0]]).map(
+        (key) => brandObjects[idx][Object.keys(brand)[0]][key]
+      )
+    )
+    singleLevelJSON = false
+    getValueinObject = brands
+  }
+  console.log(datasetsFromValues)
+  // Object.keys(
+  // 	brandObjects[0][Object.keys(brandObjects[0])]
+  // ).map((value) => brandObjects.map((brand) => brand.duration[value]))
   // You can pass prepared labels or datasets in args
   labels = (arg && arg.preparedLabel) || labels
   datasetsFromValues = (arg && arg.preparedDatasets) || datasetsFromValues
-
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
       const color = chartColors[idx]
-
       return arg && arg.singleDataset
         ? {
             labels: [
@@ -140,7 +153,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
             datasets: [
               ...datasets,
               {
-                label: key,
+                label: customKey ? labels[idx] : key,
                 backgroundColor: color,
                 borderColor: color,
                 borderWidth: (arg && arg.borderWidth) || 1,
@@ -192,7 +205,6 @@ function toSlug(str) {
 
 function chartCombineDataset(data, options, globalOptions) {
   if (!data || !data.datasets || !data.datasets.length) return {}
-
   return {
     ...data,
     ...globalOptions,

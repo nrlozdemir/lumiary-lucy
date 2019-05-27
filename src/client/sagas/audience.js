@@ -6,7 +6,7 @@ import updateAudiencePer from 'Api/updateAudiencePerformance'
 
 import { compareSharesData, radarChartCalculate } from 'Utils'
 
-import { getReportDataApi } from 'Utils/api'
+import { getDataFromApi } from 'Utils/api'
 
 import _ from 'lodash'
 
@@ -95,29 +95,13 @@ function* getAudienceColorTemperatureData() {
       return data
     })
 
-    const topTexts = [
-      'Happy',
-      'Energetic',
-      'Natural'
-    ]
+    const topTexts = ['Happy', 'Energetic', 'Natural']
 
-    const bottomTexts = [
-      'Sad',
-      'Calm',
-      'Synthetic'
-    ]
+    const bottomTexts = ['Sad', 'Calm', 'Synthetic']
 
-    const leftTexts = [
-      'Cool',
-      'Cool',
-      'Cool'
-    ]
+    const leftTexts = ['Cool', 'Cool', 'Cool']
 
-    const rightTexts = [
-      'Warm',
-      'Warm',
-      'Warm'
-    ]
+    const rightTexts = ['Warm', 'Warm', 'Warm']
 
     shuffleData = shuffleData.map((data, i) => {
       data.topText = topTexts[i]
@@ -157,14 +141,15 @@ function* getAudienceDominantColorData({
       platform,
       property: ['color'],
       dateBucket: 'none',
+      url: '/report',
     }
 
     const payload = yield all([
-      call(getReportDataApi, {
+      call(getDataFromApi, {
         ...parameters,
         brand: 'Bleacher Report',
       }),
-      call(getReportDataApi, {
+      call(getDataFromApi, {
         ...parameters,
         brand: 'Barstool Sports',
       }),

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import mock from 'Api/mocks/libraryMock.json'
-import { findIdDetail, getReportDataApi } from 'Utils/api'
+import { findIdDetail, getDataFromApi } from 'Utils/api'
 import { types, actions } from 'Reducers/libraryDetail'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { convertDataIntoDatasets, getMaximumValueIndexFromArray } from 'Utils/'
@@ -43,7 +43,7 @@ function* getBarChart({ payload: { LibraryDetailId } }) {
   }
 }
 
-function* getDoughnutChart({ payload: { LibraryDetailId } }) {
+function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
   try {
     const expectedValues = [
       { key: 'frameRate', title: 'Frame Rate' },
@@ -61,9 +61,10 @@ function* getDoughnutChart({ payload: { LibraryDetailId } }) {
       dateBucket: 'none',
       display: 'percentage',
       dateBucket: 'none',
+      url: '/report',
     }
     const payloads = yield expectedValues.map((item) =>
-      call(getReportDataApi, {
+      call(getDataFromApi, {
         ...parameters,
         property: [item.key],
       })
@@ -75,7 +76,7 @@ function* getDoughnutChart({ payload: { LibraryDetailId } }) {
         }
         return idx === getMaximumValueIndexFromArray(data)
           ? '#2FD7C4'
-          : '#ffffff'
+          : themeColors.textColor
       })
     }
     const val = expectedValues.map((payload, idx) => ({
@@ -94,7 +95,6 @@ function* getDoughnutChart({ payload: { LibraryDetailId } }) {
         }
       ),
     }))
-
     yield put(actions.getDoughnutChartSuccess(val))
   } catch (error) {
     yield put(actions.getDoughnutChartFailure({ error }))
