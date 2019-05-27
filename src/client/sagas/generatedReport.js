@@ -7,7 +7,7 @@ import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
 import { convertDataIntoDatasets } from 'Utils'
 
-import { getReportDataApi } from 'Utils/api'
+import { getDataFromApi } from 'Utils/api'
 
 import _ from 'lodash'
 
@@ -62,10 +62,11 @@ function* getPacingCardData({ data: { reportId } }) {
       dateBucket: 'none',
       display: 'percentage',
       brands: [brand.uuid],
+      url: '/report',
     }
 
-    const stadiumData = yield call(getReportDataApi, options)
-    const horizontalStackedBarData = yield call(getReportDataApi, {
+    const stadiumData = yield call(getDataFromApi, options)
+    const horizontalStackedBarData = yield call(getDataFromApi, {
       ...options,
       proportionOf: 'format',
     })
