@@ -26,8 +26,6 @@ import {
 
 import { getDataFromApi } from 'Utils/api'
 
-import { getReportDataApi, getMetricDataApi } from 'Api'
-
 function getCompetitorVideosApi() {
   return axios('/').then((res) => marketviewCompetitorVideosData)
 }
@@ -146,11 +144,12 @@ function* getSimilarProperties({ data: dateRange }) {
       dateBucket: 'none',
       display: 'percentage',
       brands: [brand.uuid],
+      url: '/report',
     }
 
     const payloads = yield all(
       expectedValues.map((item) =>
-        call(getReportDataApi, { ...parameters, property: [item.key] })
+        call(getDataFromApi, { ...parameters, property: [item.key] })
       )
     )
 
@@ -225,6 +224,8 @@ function* getTotalViewsData({ data }) {
     const brands = getBrandAndCompetitors(profile)
 
     const options = {
+      url: `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`,
+      requestType: 'GET',
       brands,
       metric,
       platform,
@@ -236,24 +237,20 @@ function* getTotalViewsData({ data }) {
 
     const payload = yield call(getTotalViewsApi)
 
-    const barData = yield call(getReportDataApi, { ...options })
+    //const barData = yield call(getDataFromApi, options)
 
     const dateBucket = getDateBucketFromRange(dateRange)
 
-    const doughnutData = yield call(getMetricDataApi, {
-      metric,
-      platform,
-      dateRange,
-    })
+    const doughnutData = yield call(getDataFromApi, options)
 
-    const convertedBarData = convertDataIntoDatasets(barData, options)
+    //const convertedBarData = convertDataIntoDatasets(barData, options)
 
     const convertedDoughnutData = convertMetricDataIntoDatasets(
       doughnutData,
       { ...options, dateBucket },
       { hoverBG: true, singleDataset: true, useBrandLabels: true }
     )
-    
+
     yield put(
       actions.getTotalViewsSuccess({
         barData: payload.barData,
