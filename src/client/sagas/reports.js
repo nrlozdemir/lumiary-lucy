@@ -8,7 +8,7 @@ import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
 import { compareSharesData, radarChartCalculate } from 'Utils'
 
-import { getReportDataApi } from 'Api'
+import { getDataFromApi } from 'Utils/api'
 
 function getGeneratedReportApi() {
   //this will use ajax function in utils/api when real data is provided
@@ -133,14 +133,15 @@ function* getColorComparisonData({ data: { dateRange } }) {
       metric: 'shares',
       property: ['color'],
       dateBucket: 'none',
+      url: '/report',
     }
 
     const payload = yield all([
-      call(getReportDataApi, {
+      call(getDataFromApi, {
         ...parameters,
         brand: 'Bleacher Report',
       }),
-      call(getReportDataApi, {
+      call(getDataFromApi, {
         ...parameters,
         brand: 'Barstool Sports',
       }),

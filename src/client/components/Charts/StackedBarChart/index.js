@@ -110,7 +110,7 @@ const StackedBarChart = (props) => {
     <Bar
       key={Math.random()}
       data={{
-        labels: barData.labels,
+        labels: !!barData && !!barData.labels && barData.labels,
         datasets:
           (!!barData &&
             !!barData.datasets &&

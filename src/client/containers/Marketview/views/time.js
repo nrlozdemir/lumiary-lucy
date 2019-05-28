@@ -15,9 +15,6 @@ import DaySelection from 'Containers/Marketview/sections/detail/DaySelection'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
 import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
 
-import { chartCombineDataset } from 'Utils'
-import { CompetitorTopVideos_DatasetOptions } from 'Containers/Marketview/sections/detail/options'
-
 /* eslint-disable react/prefer-stateless-function */
 export class Time extends React.Component {
   constructor(props) {
@@ -29,9 +26,6 @@ export class Time extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getCompetitorTopVideosRequest()
-    this.props.getCompetitorVideosRequest()
-    this.props.getSimilarPropertiesRequest()
     this.props.getMarketviewDetailTimeRequest()
   }
 
@@ -47,29 +41,24 @@ export class Time extends React.Component {
     this.props.getSimilarPropertiesRequest(data)
   }
 
-  getCompetitorTopVideos = (data) => {
-    this.props.getMarketviewDetailTimeRequest(data)
+  getTimeTopVideos = (data) => {
+    this.props.getTopPerformingTimeRequest(data)
   }
 
   render() {
     const {
       marketview,
-      marketview: { selectedVideo, marketviewDetailTime, competitorTopVideos },
+      marketview: {
+        selectedVideo,
+        marketviewDetailTime: { data, topPerformingData },
+        competitorTopVideos,
+      },
     } = this.props
     const { activeDay } = this.state
 
-    const selectedDayData =
-      marketviewDetailTime && marketviewDetailTime[activeDay]
+    const selectedDayData = data && data[activeDay]
 
     if (!selectedDayData) return false
-
-    const competitorTopVideosCombineData = chartCombineDataset(
-      {
-        labels: ['360', '480', '720p', '1080p', '4k'],
-        datasets: selectedDayData.CompetitorTopVideos,
-      },
-      CompetitorTopVideos_DatasetOptions
-    )
 
     return (
       <React.Fragment>
@@ -111,40 +100,28 @@ export class Time extends React.Component {
             },
           ]}
         />
-        {selectedDayData.CompetitorTopVideos && (
-          <TopVideosCardModule
-            chartData={competitorTopVideosCombineData}
-            height={150}
-            moduleKey="MarketView/TopVideosCardModule"
-            title="Top Performing Property Across All Days Of The Week"
-            action={this.getCompetitorTopVideos}
-            filters={[
-              {
-                type: 'property',
-                selectKey: 'property',
-                placeHolder: 'property',
-              },
-            ]}
-            references={[
-              {
-                className: 'bg-cool-blue',
-                text: 'Fast',
-              },
-              {
-                className: 'bg-lighter-purple',
-                text: 'Medium',
-              },
-              {
-                className: 'bg-coral-pink',
-                text: 'Slow',
-              },
-              {
-                className: 'bg-cool-grey',
-                text: 'Slowest',
-              },
-            ]}
-          />
-        )}
+        <TopVideosCardModule
+          chartData={topPerformingData}
+          height={150}
+          moduleKey="MarketView/TopVideosCardModule"
+          title="Top Performing Property Across All Days Of The Week"
+          action={this.getTimeTopVideos}
+          filters={[
+            {
+              type: 'property',
+              selectKey: 'property',
+              placeHolder: 'property',
+            },
+          ]}
+          references={
+            topPerformingData &&
+            topPerformingData.datasets &&
+            topPerformingData.datasets.map((item) => ({
+              text: item.label,
+              color: item.backgroundColor,
+            }))
+          }
+        />
       </React.Fragment>
     )
   }

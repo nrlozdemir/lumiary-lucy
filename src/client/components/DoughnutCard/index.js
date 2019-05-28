@@ -1,10 +1,10 @@
 import React from 'react'
 import style from './style.scss'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
-const DoughnutCard = ({ data, colors }) => {
-  if (!data) {
-    return null
-  }
+const DoughnutCard = ({ sectionItem, index, colors }) => {
+  const dataset = sectionItem.datasets[0]
+  const topItemIndex = dataset.data.indexOf(Math.max(...dataset.data))
+
   return (
     <div className={style.radialChartsContainer}>
       <div
@@ -20,7 +20,9 @@ const DoughnutCard = ({ data, colors }) => {
           }}
         />
         <div className={style.cardInner}>
-          <h1 className={style.cardTitle}>{data.title}</h1>
+          <h1 className={style.cardTitle}>
+            #{index + 1} {dataset.label}
+          </h1>
           <div
             className={style.subtitle}
             style={{
@@ -30,7 +32,10 @@ const DoughnutCard = ({ data, colors }) => {
             }}
           >
             <p className="font-secondary-second font-size-12 text-center">
-              {data.secondTitle}
+              {sectionItem.labels[topItemIndex]
+                .split('-')
+                .map((c) => capitalizeFirstLetter(c))
+                .join('-')}
             </p>
           </div>
           <div className={style.doughnutChartContainer}>
@@ -41,39 +46,20 @@ const DoughnutCard = ({ data, colors }) => {
               cutoutPercentage={50}
               customDoughnutContainer={style.customDoughnutContainer}
               customChartWrapper={style.customChartWrapper}
-              data={{
-                labels: ['Red', 'Green', 'Blue', 'Yellow'],
-                datasets: [
-                  {
-                    data: [...data.average],
-                    borderColor: '#373F5B',
-                    backgroundColor: [
-                      colors.textColor,
-                      colors.textColor,
-                      colors.textColor,
-
-                      '#2FD7C4',
-                    ],
-                    hoverBackgroundColor: [
-                      colors.textColor,
-                      colors.textColor,
-                      colors.textColor,
-
-                      '#2FD7C4',
-                    ],
-                  },
-                ],
-              }}
+              data={sectionItem}
             />
             <p>
               <span className={style.textBold}>
-                {data.average[data.average.length - 1]}%{' '}
+                {dataset.data[topItemIndex]}%{' '}
               </span>
-              of your library
-              <br /> is shot in
+              of top videos
+              <br /> are shot in{' '}
               <span className={style.textBold}>
-                {' '}
-                {data.secondTitle} {data.description}
+                {sectionItem.labels[topItemIndex]
+                  .split('-')
+                  .map((c) => capitalizeFirstLetter(c))
+                  .join('-')}{' '}
+                {dataset.label}
               </span>
             </p>
           </div>

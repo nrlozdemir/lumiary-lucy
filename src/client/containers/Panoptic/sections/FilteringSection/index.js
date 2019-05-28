@@ -43,13 +43,14 @@ class PanopticFilteringSection extends Component {
     } = this.props
 
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
+    const isStackedChartEmpty = isDataSetEmpty(stackedChartData)
 
     const hasNoData =
       !loading &&
       ((!!doughnutData &&
-        !!stackedChartData &&
         isDoughnutEmpty &&
-        isDataSetEmpty(stackedChartData)) ||
+        !!stackedChartData &&
+        isStackedChartEmpty) ||
         isEmpty(data))
 
     return (
@@ -60,8 +61,13 @@ class PanopticFilteringSection extends Component {
         filters={[
           {
             type: 'property',
-            selectKey: 'PFS-Property',
-            placeHolder: 'Property',
+            selectKey: 'PFS-dsad',
+            placeHolder: 'property',
+          },
+          {
+            type: 'metric',
+            selectKey: 'PFS-lalalol',
+            placeHolder: 'Engagement',
           },
           {
             type: 'platform',
@@ -83,7 +89,7 @@ class PanopticFilteringSection extends Component {
               height={270}
               data={doughnutData}
               cutoutPercentage={58}
-              fillText={isDoughnutEmpty ? 'No Data' : 'Total Percentage'}
+              fillText="Total Percentage"
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
               labelPositionRight

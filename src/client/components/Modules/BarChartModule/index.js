@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import BarChart from 'Components/Charts/BarChart'
 import Module from 'Components/Module'
 import style from './style.scss'
+import { isDataSetEmpty } from 'Utils'
 
 const BarChartModule = ({
   barData,
@@ -16,6 +17,7 @@ const BarChartModule = ({
   filters,
   action,
   moduleKey,
+  isEmpty,
 }) => {
   return (
     <Module
@@ -24,6 +26,7 @@ const BarChartModule = ({
       filters={filters}
       action={action}
       references={references}
+      isEmpty={isDataSetEmpty(barData)}
       legend={
         titleLabels && (
           <div
