@@ -1,7 +1,6 @@
 import { takeLatest, call, put, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import _ from 'lodash'
-import { selectAuthProfile } from 'Reducers/auth'
 import { types, actions } from 'Reducers/marketview'
 import marketviewCompetitorVideosData from 'Api/mocks/marketviewCompetitorVideos.json'
 import marketviewCompetitorTopVideosData from 'Api/mocks/marketviewCompetitorTopVideosMock.json'
