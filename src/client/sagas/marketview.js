@@ -2,6 +2,8 @@ import { takeLatest, call, put, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import _ from 'lodash'
 import { types, actions } from 'Reducers/marketview'
+import { selectAuthProfile } from 'Reducers/auth'
+
 import marketviewCompetitorVideosData from 'Api/mocks/marketviewCompetitorVideos.json'
 import marketviewCompetitorTopVideosData from 'Api/mocks/marketviewCompetitorTopVideosMock.json'
 import marketviewSimilarPropertiesData from 'Api/mocks/marketviewSimilarProperties.json'
@@ -25,12 +27,6 @@ import {
 } from 'Utils'
 
 import { getDataFromApi } from 'Utils/api'
-
-function getCompetitorVideosApi() {
-  return axios('/').then((res) => marketviewCompetitorVideosData)
-}
-
-import { selectAuthProfile } from 'Reducers/auth'
 
 function getCompetitorVideosApi() {
   return axios('/').then((res) => marketviewCompetitorVideosData)
