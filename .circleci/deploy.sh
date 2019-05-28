@@ -3,12 +3,6 @@ set -e
 
 SERVICE_NAME="lucy"
 
-# We keep this here until we decomission QA environment to make sure deployments to QA keep working
-if [ "$CIRCLE_BRANCH" !=  "staging" ]; then
-    .circleci/deploy_legacy.sh
-    exit
-fi
-
 echo "Branch: $CIRCLE_BRANCH"
 
 if [ "$CIRCLE_BRANCH" != "qa" ] && [ "$CIRCLE_BRANCH" != "staging" ] && [ "$CIRCLE_BRANCH" != "prod" ]; then
