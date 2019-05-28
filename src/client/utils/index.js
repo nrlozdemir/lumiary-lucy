@@ -1,4 +1,4 @@
-import { chartColors } from 'Utils/globals'
+import { chartColors, expectedNames } from 'Utils/globals'
 function randomKey(char) {
   var text = ''
   var possible =
@@ -130,6 +130,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
             ],
             datasets: [
               {
+                label: expectedNames[options.property],
                 data: datasetsFromValues || [0, 0, 0, 0],
                 backgroundColor: arg.backgroundColor || [
                   ...(datasets[0] ? datasets[0].backgroundColor : []),
