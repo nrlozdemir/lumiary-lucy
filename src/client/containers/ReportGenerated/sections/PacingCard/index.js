@@ -4,17 +4,22 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectReportsPacingCard } from 'Reducers/generatedReport'
 import PacingCardModule from 'Components/Modules/PacingCardModule'
+import RouterLoading from 'Components/RouterLoading'
 
 class PacingCard extends React.Component {
   componentDidMount() {
-    const { getPacingCardData, reportId } = this.props
-    getPacingCardData({ reportId })
+    const { getPacingCardDataRequest, reportId } = this.props
+    getPacingCardDataRequest({ reportId })
   }
 
   render() {
     const {
-      pacingChartData: { data },
+      pacingChartData: { data, loading },
     } = this.props
+
+    if (!data && loading) {
+      return <RouterLoading />
+    }
 
     return (
       <PacingCardModule

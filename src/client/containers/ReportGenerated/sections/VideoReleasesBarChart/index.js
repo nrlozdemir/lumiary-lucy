@@ -1,17 +1,29 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose, bindActionCreators } from 'redux'
+import {
+  actions,
+  makeSelectReportsVideoReleasesBarChart,
+} from 'Reducers/generatedReport'
 
 import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
 
-class VideoReleasesBarChart extends Component {
-  callBack = (data, moduleKey) => {}
+class VideoReleasesBarChart extends React.Component {
+  componentDidMount() {
+    const { getVideoReleasesBarChartRequest, reportId } = this.props
+    getVideoReleasesBarChartRequest({ reportId })
+  }
 
   render() {
-    const { data } = this.props
+    const {
+      videoReleasesBarChart: { data },
+    } = this.props
 
-    let chartData
+    let chartData = {}
 
-    if (this.props.data) {
-      chartData = this.props.data
+    if (data) {
+      chartData = data
       chartData.labels = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
 
       Object.values(chartData.datasets).map((el, i) => {
@@ -26,10 +38,9 @@ class VideoReleasesBarChart extends Component {
 
     return (
       <VideoReleasesBarChartModule
-        data={this.props.data && chartData}
+        data={data && chartData}
         moduleKey={'ReportGenerated/VideoReleasesBarChartModule'}
         title="Video Releases vs Engagement"
-        action={this.callBack}
         legend={[
           { label: 'Videos', color: 'cool-blue' },
           { label: 'Engagement', color: 'coral-pink' },
@@ -40,4 +51,15 @@ class VideoReleasesBarChart extends Component {
   }
 }
 
-export default VideoReleasesBarChart
+const mapStateToProps = createStructuredSelector({
+  videoReleasesBarChart: makeSelectReportsVideoReleasesBarChart(),
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(VideoReleasesBarChart)
