@@ -9,18 +9,19 @@ const defaultProps = {
 	width: 1160,
 	height: 342,
 	arrows: false,
-	scrubberHeight: 14
+	scrubberHeight: 14,
+	viewBordered: false
 }
 
 const LeftArrow = () => {
   return (<svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10">
-    <path fill="#505050" fill-rule="evenodd" d="M7.863 10L0 4.993 7.843 0l1.12.713-6.005 3.824.004-.003-.721.46L9 9.296 7.863 10z"/>
+    <path fill="#505050" fillRule="evenodd" d="M7.863 10L0 4.993 7.843 0l1.12.713-6.005 3.824.004-.003-.721.46L9 9.296 7.863 10z"/>
   </svg>)
 }
 
 const RightArrow = () => {
   return (<svg xmlns="http://www.w3.org/2000/svg" width="9" height="10" viewBox="0 0 9 10">
-    <path fill="#505050" fill-rule="evenodd" d="M1.137 10L9 4.993 1.157 0 .037.713l6.005 3.824-.004-.003.721.46L0 9.296 1.137 10z"/>
+    <path fill="#505050" fillRule="evenodd" d="M1.137 10L9 4.993 1.157 0 .037.713l6.005 3.824-.004-.003.721.46L0 9.296 1.137 10z"/>
   </svg>)
 }
 
@@ -31,6 +32,7 @@ export default class Scrubber extends React.Component {
     this.handleUpdate = this.handleUpdate.bind(this);
     this.renderTrackHorizontal = this.renderTrackHorizontal.bind(this);
     this.renderThumbHorizontal = this.renderThumbHorizontal.bind(this);
+		this.renderView = this.renderView.bind(this);
   }
 
   handleUpdate(values) {
@@ -61,25 +63,42 @@ export default class Scrubber extends React.Component {
     }
 
     return (<div className={style.thumbHorizontal} style={inlineStyle}>
-      {props.arrows && (<div className={style.arrowContainer}>
-        <div className={style.leftArrows}>
-          <LeftArrow />
-          <LeftArrow />
-        </div>
-        <div className={style.rightArrows}>
-          <RightArrow />
-          <RightArrow />
-        </div>
-      </div>)}
-    </div>)
-}
+      {props.arrows && (
+				<div className={style.arrowContainer}>
+					<div className={style.leftArrows}>
+						<LeftArrow />
+						<LeftArrow />
+					</div>
+					<div className={style.rightArrows}>
+						<RightArrow />
+						<RightArrow />
+					</div>
+				</div>
+				)
+			}
+		</div>
+		)
+	}
+
+	renderView({ style, ...props }) {
+		console.log(style)
+		console.log(props)
+			const customStyle = {
+					zIndex: 0,
+					margin: "1px 0px 0px 1px"
+			};
+			return (
+					<div className="RENDERVIEW" {...props} style={{ ...style, ...customStyle }}/>
+			);
+	}
 
   render() {
-		const { horizontal, width, height, children, arrows } = this.props
+		const { horizontal, width, height, children, arrows, viewBordered } = this.props
     return (
-			horizontal && (<Scrollbars
+			horizontal && (<Scrollbars universal
         renderTrackHorizontal={ () => this.renderTrackHorizontal(this.props) }
-        renderThumbHorizontal={ () => this.renderThumbHorizontal(this.props) }
+				renderThumbHorizontal={ () => this.renderThumbHorizontal(this.props) }
+				renderView={this.renderView}
         style={{ width: width, height: height }}>
         {children}
       </Scrollbars>)
