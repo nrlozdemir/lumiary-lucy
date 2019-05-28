@@ -4,10 +4,11 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectTopPerformingFormat } from 'Reducers/panoptic'
-import { chartCombineDataset } from 'Utils'
+import { chartCombineDataset, isDataSetEmpty } from 'Utils'
 
 import LineAndDoughnutChartModule from 'Components/Modules/LineAndDoughnutChartModule'
 import { lineChartData_DatasetOptions, lineChartOptions } from './options'
+import { isEmpty } from 'lodash'
 
 class TopPerformingFormat extends React.Component {
   componentDidMount() {
@@ -51,23 +52,72 @@ class TopPerformingFormat extends React.Component {
 
     console.log('lineanddonuts', data)
 
+    const hasNoData =
+      !loading && ((!!data && isDataSetEmpty(data)) || isEmpty(data))
+
+    const doughnutData = {
+      labels: [
+        'Live Action',
+        'Animation 2',
+        'Stop Motion',
+        'Animation',
+        'Cinemagraph',
+      ],
+      datasets: [
+        {
+          data: [5, 15, 25, 10, 45],
+          backgroundColor: [
+            '#5292e5',
+            '#545b79',
+            '#acb0be',
+            '#2fd7c4',
+            '#8562f3',
+          ],
+          hoverBackgroundColor: [
+            '#5292e5',
+            '#545b79',
+            '#acb0be',
+            '#2fd7c4',
+            '#8562f3',
+          ],
+        },
+      ],
+    }
+
+    const percentageData = [
+      {
+        value: 33.5,
+        key: 'Live Action',
+        color: 'purple',
+      },
+      {
+        value: 60.1,
+        key: 'Animation',
+        color: 'green',
+      },
+      {
+        value: 72.5,
+        key: 'Animation 2',
+        color: 'blue',
+      },
+      {
+        value: 50.2,
+        key: 'Stop Motion',
+        color: 'lightGrey',
+      },
+      {
+        value: 85.3,
+        key: 'Cinemagraph',
+        color: 'grey',
+      },
+    ]
+    
     return (
       <LineAndDoughnutChartModule
         moduleKey="Panoptic/Top-Performing-Formats-This-Week-By-CV-Score"
         title="Top Performing Formats This Week By CV Score"
         action={this.callBack}
-        lineChartData={this.combineChartData({
-          labels: [
-            'Sunday',
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-            'Saturday',
-          ],
-          datasets: data,
-        })}
+        lineChartData={data}
         lineChartOptions={lineChartOptions}
         customCallbackFunc={this.customCallbackFunc}
         filters={[
@@ -78,6 +128,9 @@ class TopPerformingFormat extends React.Component {
             defaultValue: 'facebook',
           },
         ]}
+        percentageData={percentageData}
+        doughnutData={doughnutData}
+        isEmpty={hasNoData}
       />
     )
   }

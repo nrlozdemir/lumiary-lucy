@@ -18,8 +18,12 @@ class LineAndDoughnutChartModule extends React.Component {
       lineChartData,
       lineChartOptions,
       filters,
+      isEmpty,
+      doughnutData,
+      percentageData,
       customCallbackFunc,
     } = this.props
+
     const plugins = [
       {
         beforeDraw: function(chart, easing) {
@@ -63,33 +67,6 @@ class LineAndDoughnutChartModule extends React.Component {
       },
     ]
 
-    const percentageData = [
-      {
-        value: 33.5,
-        key: 'Live Action',
-        color: 'purple',
-      },
-      {
-        value: 60.1,
-        key: 'Animation',
-        color: 'green',
-      },
-      {
-        value: 72.5,
-        key: 'Animation 2',
-        color: 'blue',
-      },
-      {
-        value: 50.2,
-        key: 'Stop Motion',
-        color: 'lightGrey',
-      },
-      {
-        value: 85.3,
-        key: 'Cinemagraph',
-        color: 'grey',
-      },
-    ]
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -98,6 +75,7 @@ class LineAndDoughnutChartModule extends React.Component {
             title={title}
             action={action}
             filters={filters}
+            isEmpty={isEmpty}
           >
             <div className="grid-collapse">
               <div className="col-12-no-gutters">
@@ -155,34 +133,7 @@ class LineAndDoughnutChartModule extends React.Component {
                     dataLabelFunction="insertAfter"
                     dataLabelInsert="%"
                     labelPositionRight
-                    data={{
-                      labels: [
-                        'Live Action',
-                        'Animation 2',
-                        'Stop Motion',
-                        'Animation',
-                        'Cinemagraph',
-                      ],
-                      datasets: [
-                        {
-                          data: [5, 15, 25, 10, 45],
-                          backgroundColor: [
-                            '#5292e5',
-                            '#545b79',
-                            '#acb0be',
-                            '#2fd7c4',
-                            '#8562f3',
-                          ],
-                          hoverBackgroundColor: [
-                            '#5292e5',
-                            '#545b79',
-                            '#acb0be',
-                            '#2fd7c4',
-                            '#8562f3',
-                          ],
-                        },
-                      ],
-                    }}
+                    data={doughnutData}
                   />
                 </div>
               </div>

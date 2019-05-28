@@ -249,7 +249,7 @@ function* getFlipCardsData() {
   }
 }
 
-function* getTopPerformingFormatData({ data }) {
+function* getTopPerformingFormatData({ data = {} }) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
@@ -275,14 +275,23 @@ function* getTopPerformingFormatData({ data }) {
       !!topPerformingFormatData.data[brand.name] &&
       !!topPerformingFormatData.data[brand.name].format
     ) {
-      console.log('api payload', topPerformingFormatData)
-    }
+      const convertedData = convertDataIntoDatasets(
+        topPerformingFormatData,
+        options
+      )
 
-    yield put(
-      actions.getTopPerformingFormatDataSuccess(payload.topPerformingFormatData)
-    )
+      console.log('converted', convertedData)
+
+      yield put(actions.getTopPerformingFormatDataSuccess(convertedData))
+    } else {
+      yield put(
+        actions.getTopPerformingFormatDataError(
+          'getTopPerformingFormatData error'
+        )
+      )
+    }
   } catch (err) {
-    console.log('getTopPerformingFormatData error', err)
+    console.log(err)
     yield put(actions.getTopPerformingFormatDataError(err))
   }
 }
