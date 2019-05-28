@@ -20,7 +20,7 @@ import {
   getBrandAndCompetitors,
   convertDataIntoDatasets,
 } from 'Utils'
-import { getReportDataApi } from 'Utils/api'
+import { getDataFromApi } from 'Utils/api'
 
 import { selectAuthProfile } from 'Reducers/auth'
 
@@ -100,10 +100,10 @@ function* getCompetitorTopVideosMarketview({
     }
 
     const [facebook, instagram, twitter, youtube] = yield all([
-      call(getReportDataApi, { ...options, platform: 'facebook' }),
-      call(getReportDataApi, { ...options, platform: 'instagram' }),
-      call(getReportDataApi, { ...options, platform: 'twitter' }),
-      call(getReportDataApi, { ...options, platform: 'youtube' }),
+      call(getDataFromApi, { ...options, platform: 'facebook' }),
+      call(getDataFromApi, { ...options, platform: 'instagram' }),
+      call(getDataFromApi, { ...options, platform: 'twitter' }),
+      call(getDataFromApi, { ...options, platform: 'youtube' }),
     ])
 
     yield put(
@@ -181,7 +181,7 @@ function* getTotalCompetitorViewsData() {
       property: ['duration'],
       brands: [...competitors],
     }
-    const payload = yield call(getReportDataApi, { ...options })
+    const payload = yield call(getDataFromApi, { ...options })
     yield put(
       actions.getTotalCompetitorViewsSuccess(
         convertDataIntoDatasets(payload, options)
