@@ -80,6 +80,7 @@ const ComparisonHorizontalBarChart = (props) => {
       return percentage
     },
   }
+  console.log(props)
 
   return (
     <div className={style.container}>

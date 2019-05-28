@@ -17,12 +17,14 @@ class PanopticColorTemperature extends React.Component {
     const {
       colorTemperatureData: { data, loading, error },
     } = this.props
+
     const moduleName = 'Panoptic/ColorTemperature'
     const selectKey = 'PCT-asd'
     const selectValue =
       this.props.selects.values[moduleName] &&
       this.props.selects.values[moduleName][selectKey].value &&
       this.props.selects.values[moduleName][selectKey].value.label
+
     return (
       <ColorTemperatureModule
         extraClasses={style.colorChartContent}
