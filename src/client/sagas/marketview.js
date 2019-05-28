@@ -221,6 +221,7 @@ function* getTotalCompetitorViewsData() {
     const profile = yield select(selectAuthProfile)
     const competitors = getBrandAndCompetitors(profile)
     const options = {
+      url: '/report',
       metric: 'views',
       platform: 'all',
       dateRange: 'week',
@@ -255,6 +256,7 @@ function* getTopPerformingPropertiesData({
     const { brand } = yield select(selectAuthProfile)
 
     const options = {
+      url: '/report',
       metric,
       dateRange,
       property: [property],
@@ -264,10 +266,10 @@ function* getTopPerformingPropertiesData({
     }
 
     const [facebook, instagram, twitter, youtube] = yield all([
-      call(getReportDataApi, { ...options, platform: 'facebook' }),
-      call(getReportDataApi, { ...options, platform: 'instagram' }),
-      call(getReportDataApi, { ...options, platform: 'twitter' }),
-      call(getReportDataApi, { ...options, platform: 'youtube' }),
+      call(getDataFromApi, { ...options, platform: 'facebook' }),
+      call(getDataFromApi, { ...options, platform: 'instagram' }),
+      call(getDataFromApi, { ...options, platform: 'twitter' }),
+      call(getDataFromApi, { ...options, platform: 'youtube' }),
     ])
 
     yield put(
@@ -302,13 +304,14 @@ function* getTopPerformingPropertiesByTimeData({ payload: { property } }) {
   try {
     const { brand } = yield select(selectAuthProfile)
     const options = {
+      url: '/report',
       metric: 'views',
       property: [property],
       dateBucket: 'dayOfWeek',
       display: 'percentage',
       brands: [brand.uuid],
     }
-    const data = yield call(getReportDataApi, options)
+    const data = yield call(getDataFromApi, options)
     yield put(
       actions.getTopPerformingTimeSuccess(
         convertDataIntoDatasets(data, options, {
@@ -345,10 +348,6 @@ export default [
   takeLatest(
     types.GET_MARKETVIEW_DETAIL_TIME_REQUEST,
     getmarketviewTimeMockData
-  ),
-  takeLatest(
-    types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST,
-    getTotalCompetitorViewsData
   ),
   takeLatest(
     types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_REQUEST,
