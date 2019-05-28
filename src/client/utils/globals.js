@@ -34,3 +34,12 @@ export const month = [
   'November',
   'December',
 ]
+export const expectedNames = {
+  color: 'Dominant Color',
+  pacing: 'Pacing',
+  duration: 'Duration',
+  resolution: 'Resolution',
+  aspectRatio: 'Aspect Ratio',
+  frameRate: 'Frame Rate',
+  format: 'Format',
+}

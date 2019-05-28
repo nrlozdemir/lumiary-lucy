@@ -21,7 +21,12 @@ const TopSimilarProperties = (props) => {
               data.map((sectionItem, i) => (
                 <div className="col-4-no-gutters">
                   <div style={{ borderColor: colors.moduleBorder }}>
-                    <DoughnutCard data={sectionItem} key={i} colors={colors} />
+                    <DoughnutCard
+                      data={sectionItem}
+                      key={i}
+                      index={i}
+                      colors={colors}
+                    />
                   </div>
                 </div>
               ))}

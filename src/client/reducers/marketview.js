@@ -107,8 +107,9 @@ export const actions = {
     type: types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_FAILURE,
     error,
   }),
-  getSimilarPropertiesRequest: () => ({
+  getSimilarPropertiesRequest: (data) => ({
     type: types.GET_MARKETVIEW_SIMILAR_PROPERTIES_REQUEST,
+    data,
   }),
   getSimilarPropertiesSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_SIMILAR_PROPERTIES_SUCCESS,

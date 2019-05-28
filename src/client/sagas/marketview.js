@@ -19,6 +19,7 @@ import {
   convertMultiRequestDataIntoDatasets,
   getBrandAndCompetitors,
   convertDataIntoDatasets,
+  getMaximumValueIndexFromArray,
 } from 'Utils'
 import { getDataFromApi } from 'Utils/api'
 
@@ -26,11 +27,6 @@ import { selectAuthProfile } from 'Reducers/auth'
 
 function getCompetitorVideosApi() {
   return axios('/').then((res) => marketviewCompetitorVideosData)
-}
-
-function getSimilarPropertiesApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewSimilarPropertiesData)
 }
 
 function getBubbleChartApi() {
@@ -124,10 +120,61 @@ function* getCompetitorTopVideosMarketview({
   }
 }
 
-function* getSimilarProperties() {
+function* getSimilarProperties({ data: dateRange }) {
   try {
-    const payload = yield call(getSimilarPropertiesApi)
-    yield put(actions.getSimilarPropertiesSuccess(payload))
+    const { brand } = yield select(selectAuthProfile)
+
+    const expectedValues = [
+      { key: 'color', title: 'Dominant Color' },
+      { key: 'pacing', title: 'Pacing' },
+      { key: 'duration', title: 'Duration' },
+    ]
+
+    const parameters = {
+      dateRange,
+      metric: 'views',
+      platform: 'all',
+      dateBucket: 'none',
+      display: 'percentage',
+      brands: [brand.uuid],
+    }
+
+    const payloads = yield all(
+      expectedValues.map((item) =>
+        call(getReportDataApi, { ...parameters, property: [item.key] })
+      )
+    )
+
+    const createCustomBackground = (data) => {
+      return Object.values(data).map((item, idx) => {
+        if (Object.values(data).includes(100)) {
+          return '#2FD7C4'
+        }
+        return idx === getMaximumValueIndexFromArray(data)
+          ? '#2FD7C4'
+          : '#ffffff'
+      })
+    }
+
+    yield put(
+      actions.getSimilarPropertiesSuccess(
+        expectedValues.map((item, idx) =>
+          convertDataIntoDatasets(
+            payloads[idx],
+            {
+              ...parameters,
+              property: [item.key],
+            },
+            {
+              singleDataset: true,
+              backgroundColor: createCustomBackground(
+                payloads[idx].data[payload.key]
+              ),
+            }
+          )
+        )
+      )
+    )
   } catch (error) {
     yield put(actions.getSimilarPropertiesFailure(error))
   }
