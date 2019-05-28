@@ -5,14 +5,21 @@ import DoughnutCard from 'Components/DoughnutCard'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import classnames from 'classnames'
 import style from './style.scss'
+import { isDataSetEmpty } from 'Utils/'
 const TopSimilarProperties = (props) => {
   const { data, title, filters, action, moduleKey } = props
+  const isEmpty =
+    data &&
+    data
+      .map((value) => isDataSetEmpty(value.doughnutChartValues))
+      .every((dataset) => dataset === true)
   return (
     <Module
       title={title}
       filters={filters}
       moduleKey={moduleKey}
       action={action}
+      isEmpty={isEmpty}
     >
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -22,7 +29,7 @@ const TopSimilarProperties = (props) => {
                 <div className="col-4-no-gutters">
                   <div style={{ borderColor: colors.moduleBorder }}>
                     <DoughnutCard
-                      data={sectionItem}
+                      data={sectionItem.doughnutChartValues}
                       key={i}
                       index={i}
                       colors={colors}

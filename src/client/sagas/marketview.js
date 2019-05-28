@@ -93,6 +93,7 @@ function* getCompetitorTopVideosMarketview({
       dateBucket: 'none',
       display: 'percentage',
       brands: [brand.uuid],
+      url: '/report',
     }
 
     const [facebook, instagram, twitter, youtube] = yield all([
@@ -120,16 +121,20 @@ function* getCompetitorTopVideosMarketview({
   }
 }
 
-function* getSimilarProperties({ data: dateRange }) {
+function* getSimilarProperties(props) {
   try {
     const { brand } = yield select(selectAuthProfile)
-
+    const {
+      data: {
+        date: { dateRange },
+        themeColors,
+      },
+    } = props
     const expectedValues = [
       { key: 'color', title: 'Dominant Color' },
       { key: 'pacing', title: 'Pacing' },
       { key: 'duration', title: 'Duration' },
     ]
-
     const parameters = {
       dateRange,
       metric: 'views',
@@ -137,12 +142,11 @@ function* getSimilarProperties({ data: dateRange }) {
       dateBucket: 'none',
       display: 'percentage',
       brands: [brand.uuid],
+      url: '/report',
     }
 
-    const payloads = yield all(
-      expectedValues.map((item) =>
-        call(getReportDataApi, { ...parameters, property: [item.key] })
-      )
+    const payloads = yield expectedValues.map((item) =>
+      call(getDataFromApi, { ...parameters, property: [item.key] })
     )
 
     const createCustomBackground = (data) => {
@@ -152,29 +156,27 @@ function* getSimilarProperties({ data: dateRange }) {
         }
         return idx === getMaximumValueIndexFromArray(data)
           ? '#2FD7C4'
-          : '#ffffff'
+          : themeColors.textColor
       })
     }
 
-    yield put(
-      actions.getSimilarPropertiesSuccess(
-        expectedValues.map((item, idx) =>
-          convertDataIntoDatasets(
-            payloads[idx],
-            {
-              ...parameters,
-              property: [item.key],
-            },
-            {
-              singleDataset: true,
-              backgroundColor: createCustomBackground(
-                payloads[idx].data[payload.key]
-              ),
-            }
-          )
-        )
-      )
-    )
+    const val = expectedValues.map((payload, idx) => ({
+      ...payload,
+      doughnutChartValues: convertDataIntoDatasets(
+        payloads[idx],
+        {
+          ...parameters,
+          property: [payload.key],
+        },
+        {
+          singleDataset: true,
+          backgroundColor: createCustomBackground(
+            payloads[idx].data[Object.keys(payloads[idx].data)[0]][payload.key]
+          ),
+        }
+      ),
+    }))
+    yield put(actions.getSimilarPropertiesSuccess(val))
   } catch (error) {
     yield put(actions.getSimilarPropertiesFailure(error))
   }

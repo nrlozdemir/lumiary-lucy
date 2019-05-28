@@ -17,6 +17,7 @@ import BarChartModule from 'Components/Modules/BarChartModule'
 
 import { chartCombineDataset } from 'Utils'
 import { TopPerformingProperties_DatasetOptions } from 'Containers/Marketview/sections/detail/options'
+import { withTheme } from 'ThemeContext/withTheme'
 
 const chartTickOptions = {
   stepSize: 250000,
@@ -43,7 +44,13 @@ export class Platform extends React.Component {
   }
 
   getSimilarProperties = (data) => {
-    this.props.getSimilarPropertiesRequest(data)
+    const {
+      themeContext: { colors },
+    } = this.props
+    this.props.getSimilarPropertiesRequest({
+      date: data,
+      themeColors: colors,
+    })
   }
 
   getCompetitorVideos = (data) => {
@@ -150,7 +157,7 @@ export class Platform extends React.Component {
         <TopSimilarPropertiesModule
           moduleKey="MarketView/TopSimilarPropertiesModule"
           data={similarProperties}
-          title="Top Similar Properties Of Top Videos"
+          title="Similar Properties Of Top Videos"
           action={this.getSimilarProperties}
           presentWithDoughnut
           filters={[
@@ -200,4 +207,7 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(Platform)
+export default compose(
+  withConnect,
+  withTheme
+)(Platform)

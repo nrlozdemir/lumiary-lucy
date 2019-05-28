@@ -17,6 +17,7 @@ import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesM
 
 import { chartCombineDataset } from 'Utils'
 import { CompetitorTopVideos_DatasetOptions } from 'Containers/Marketview/sections/detail/options'
+import { withTheme } from 'ThemeContext/withTheme'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Time extends React.Component {
@@ -41,7 +42,13 @@ export class Time extends React.Component {
   }
 
   getSimilarProperties = (data) => {
-    this.props.getSimilarPropertiesRequest(data)
+    const {
+      themeContext: { colors },
+    } = this.props
+    this.props.getSimilarPropertiesRequest({
+      date: data,
+      themeColors: colors,
+    })
   }
 
   getCompetitorTopVideos = (data) => {
@@ -97,7 +104,7 @@ export class Time extends React.Component {
         <TopSimilarPropertiesModule
           moduleKey="MarketView/TopSimilarPropertiesModule"
           data={(selectedDayData && selectedDayData.SimilarProperties) || null}
-          title="Top Similar Properties Of Top Videos"
+          title="Similar Properties Of Top Videos"
           action={this.getSimilarProperties}
           presentWithDoughnut
           filters={[
@@ -158,4 +165,7 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(Time)
+export default compose(
+  withConnect,
+  withTheme
+)(Time)

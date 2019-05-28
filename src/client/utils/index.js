@@ -95,7 +95,6 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     labels = Object.keys(getValueinObject)
     singleLevelJSON = true
   }
-  console.log(brands)
   if (brands.length > 1) {
     datasetsFromValues = brandObjects.map((brand, idx) =>
       Object.keys(brand[Object.keys(brand)[0]]).map(
@@ -105,7 +104,6 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     singleLevelJSON = false
     getValueinObject = brands
   }
-  console.log(datasetsFromValues)
   // Object.keys(
   // 	brandObjects[0][Object.keys(brandObjects[0])]
   // ).map((value) => brandObjects.map((brand) => brand.duration[value]))
