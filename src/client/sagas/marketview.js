@@ -1,8 +1,9 @@
 import { takeLatest, call, put, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import _ from 'lodash'
-
 import { types, actions } from 'Reducers/marketview'
+import { selectAuthProfile } from 'Reducers/auth'
+
 import marketviewCompetitorVideosData from 'Api/mocks/marketviewCompetitorVideos.json'
 import marketviewCompetitorTopVideosData from 'Api/mocks/marketviewCompetitorTopVideosMock.json'
 import marketviewSimilarPropertiesData from 'Api/mocks/marketviewSimilarProperties.json'
@@ -16,14 +17,16 @@ import marketviewTopPerformingProperties from 'Api/mocks/marketviewPlatformTopPe
 import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json'
 
 import {
+  compareSharesData,
   convertMultiRequestDataIntoDatasets,
   getBrandAndCompetitors,
   convertDataIntoDatasets,
+  getDateBucketFromRange,
+  convertMetricDataIntoDatasets,
   getMaximumValueIndexFromArray,
 } from 'Utils'
-import { getDataFromApi } from 'Utils/api'
 
-import { selectAuthProfile } from 'Reducers/auth'
+import { getDataFromApi } from 'Utils/api'
 
 function getCompetitorVideosApi() {
   return axios('/').then((res) => marketviewCompetitorVideosData)
@@ -209,11 +212,50 @@ function* getFormatChartData() {
   }
 }
 
-function* getTotalViewsData(data) {
+function* getTotalViewsData({ data }) {
   try {
+    const { metric, dateRange, platform } = data
+
+    const profile = yield select(selectAuthProfile)
+
+    const brands = getBrandAndCompetitors(profile)
+
+    const options = {
+      url: `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`,
+      requestType: 'GET',
+      brands,
+      metric,
+      platform,
+      dateRange,
+      dateBucket: 'none',
+      display: 'percentage',
+      property: [metric],
+    }
+
     const payload = yield call(getTotalViewsApi)
-    yield put(actions.getTotalViewsSuccess(payload))
+
+    //const barData = yield call(getDataFromApi, options)
+
+    const dateBucket = getDateBucketFromRange(dateRange)
+
+    const doughnutData = yield call(getDataFromApi, options)
+
+    //const convertedBarData = convertDataIntoDatasets(barData, options)
+
+    const convertedDoughnutData = convertMetricDataIntoDatasets(
+      doughnutData,
+      { ...options, dateBucket },
+      { hoverBG: true, singleDataset: true, useBrandLabels: true }
+    )
+
+    yield put(
+      actions.getTotalViewsSuccess({
+        barData: payload.barData,
+        doughnutData: convertedDoughnutData,
+      })
+    )
   } catch (error) {
+    console.log(error)
     yield put(actions.getTotalViewsFailure(error))
   }
 }
@@ -223,6 +265,7 @@ function* getTotalCompetitorViewsData() {
     const profile = yield select(selectAuthProfile)
     const competitors = getBrandAndCompetitors(profile)
     const options = {
+      url: '/report',
       metric: 'views',
       platform: 'all',
       dateRange: 'week',
@@ -250,10 +293,43 @@ function* getmarketviewTimeMockData() {
   }
 }
 
-function* getTopPerformingPropertiesData() {
+function* getTopPerformingPropertiesData({
+  payload: { property, metric, dateRange },
+}) {
   try {
-    const payload = yield call(getGetTopPerformingPropertiesApi)
-    yield put(actions.getTopPerformingPropertiesSuccess(payload))
+    const { brand } = yield select(selectAuthProfile)
+
+    const options = {
+      url: '/report',
+      metric,
+      dateRange,
+      property: [property],
+      dateBucket: 'none',
+      display: 'percentage',
+      brands: [brand.uuid],
+    }
+
+    const [facebook, instagram, twitter, youtube] = yield all([
+      call(getDataFromApi, { ...options, platform: 'facebook' }),
+      call(getDataFromApi, { ...options, platform: 'instagram' }),
+      call(getDataFromApi, { ...options, platform: 'twitter' }),
+      call(getDataFromApi, { ...options, platform: 'youtube' }),
+    ])
+
+    yield put(
+      actions.getTopPerformingPropertiesSuccess(
+        convertMultiRequestDataIntoDatasets(
+          {
+            facebook,
+            instagram,
+            twitter,
+            youtube,
+          },
+          options,
+          true // for revert labels datas
+        )
+      )
+    )
   } catch (error) {
     yield put(actions.getTopPerformingPropertiesFailure(error))
   }
@@ -265,6 +341,30 @@ function* getTopPerformingPropertiesByCompetitorsData() {
     yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess(payload))
   } catch (error) {
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))
+  }
+}
+
+function* getTopPerformingPropertiesByTimeData({ payload: { property } }) {
+  try {
+    const { brand } = yield select(selectAuthProfile)
+    const options = {
+      url: '/report',
+      metric: 'views',
+      property: [property],
+      dateBucket: 'dayOfWeek',
+      display: 'percentage',
+      brands: [brand.uuid],
+    }
+    const data = yield call(getDataFromApi, options)
+    yield put(
+      actions.getTopPerformingTimeSuccess(
+        convertDataIntoDatasets(data, options, {
+          singleDataset: false,
+        })
+      )
+    )
+  } catch (error) {
+    yield put(actions.getTopPerformingTimeFailure(error))
   }
 }
 
@@ -294,15 +394,15 @@ export default [
     getmarketviewTimeMockData
   ),
   takeLatest(
-    types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST,
-    getTotalCompetitorViewsData
-  ),
-  takeLatest(
     types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_REQUEST,
     getTopPerformingPropertiesData
   ),
   takeLatest(
     types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_REQUEST,
     getTopPerformingPropertiesByCompetitorsData
+  ),
+  takeLatest(
+    types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_REQUEST,
+    getTopPerformingPropertiesByTimeData
   ),
 ]

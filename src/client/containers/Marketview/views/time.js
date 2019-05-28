@@ -15,8 +15,6 @@ import DaySelection from 'Containers/Marketview/sections/detail/DaySelection'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
 import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
 
-import { chartCombineDataset } from 'Utils'
-import { CompetitorTopVideos_DatasetOptions } from 'Containers/Marketview/sections/detail/options'
 import { withTheme } from 'ThemeContext/withTheme'
 
 /* eslint-disable react/prefer-stateless-function */
@@ -51,30 +49,25 @@ export class Time extends React.Component {
     })
   }
 
-  getCompetitorTopVideos = (data) => {
-    this.props.getCompetitorTopVideosRequest(data)
+  getTimeTopVideos = (data) => {
+    this.props.getTopPerformingTimeRequest(data)
   }
 
   render() {
     const {
       marketview,
-      marketview: { selectedVideo, marketviewDetailTime, competitorTopVideos },
+      marketview: {
+        selectedVideo,
+        marketviewDetailTime: { data, topPerformingData },
+        competitorTopVideos,
+        similarProperties,
+      },
     } = this.props
     const { activeDay } = this.state
 
-    const selectedDayData =
-      marketviewDetailTime && marketviewDetailTime[activeDay]
+    const selectedDayData = data && data[activeDay]
 
     if (!selectedDayData) return false
-
-    const competitorTopVideosCombineData = chartCombineDataset(
-      {
-        labels: ['360', '480', '720p', '1080p', '4k'],
-        datasets: selectedDayData.CompetitorTopVideos,
-      },
-      CompetitorTopVideos_DatasetOptions
-    )
-
     return (
       <React.Fragment>
         <DaySelection
@@ -103,7 +96,7 @@ export class Time extends React.Component {
         />
         <TopSimilarPropertiesModule
           moduleKey="MarketView/TopSimilarPropertiesModule"
-          data={(selectedDayData && selectedDayData.SimilarProperties) || null}
+          data={similarProperties}
           title="Similar Properties Of Top Videos"
           action={this.getSimilarProperties}
           presentWithDoughnut
@@ -116,11 +109,11 @@ export class Time extends React.Component {
           ]}
         />
         <TopVideosCardModule
-          chartData={competitorTopVideosCombineData}
+          chartData={topPerformingData}
           height={150}
           moduleKey="MarketView/TopVideosCardModule"
           title="Top Performing Property Across All Days Of The Week"
-          action={this.getCompetitorTopVideos}
+          action={this.getTimeTopVideos}
           filters={[
             {
               type: 'property',
@@ -128,24 +121,14 @@ export class Time extends React.Component {
               placeHolder: 'property',
             },
           ]}
-          references={[
-            {
-              className: 'bg-cool-blue',
-              text: 'Fast',
-            },
-            {
-              className: 'bg-lighter-purple',
-              text: 'Medium',
-            },
-            {
-              className: 'bg-coral-pink',
-              text: 'Slow',
-            },
-            {
-              className: 'bg-cool-grey',
-              text: 'Slowest',
-            },
-          ]}
+          references={
+            topPerformingData &&
+            topPerformingData.datasets &&
+            topPerformingData.datasets.map((item) => ({
+              text: item.label,
+              color: item.backgroundColor,
+            }))
+          }
         />
       </React.Fragment>
     )

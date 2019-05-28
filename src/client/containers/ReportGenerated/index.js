@@ -96,6 +96,7 @@ class ReportGenerated extends Component {
             selects={this.props.selects}
           />
         )}
+
       </React.Fragment>
     )
   }
