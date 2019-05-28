@@ -12,6 +12,7 @@ import TopVideosCard from './sections/TopVideosCard'
 import PacingCard from './sections/PacingCard'
 import EngagementByProperty from './sections/EngagementByProperty'
 import ColorTemperature from './sections/ColorTemperature'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 //import style from './style.scss'
 
 class ReportGenerated extends Component {
@@ -35,21 +36,13 @@ class ReportGenerated extends Component {
   }
 
   render() {
-    const {
-      selectLikes,
-      selectDate,
-      selectPlatforms,
-      selectWarmColor,
-      selectResolution,
-      selectDuration,
-    } = this.state
+    const { selectWarmColor, selectResolution, selectDuration } = this.state
     const {
       generatedReport: {
         data: {
           topPerformingVideos,
           videoReleasesData,
           topVideosOverTime,
-          pacingChartData,
           verticalStackedChartData,
           colorTempData,
         },
@@ -57,6 +50,7 @@ class ReportGenerated extends Component {
         loading,
         error,
       },
+      match: { params },
     } = this.props
 
     if (!selectedVideo || loading) {
@@ -65,49 +59,44 @@ class ReportGenerated extends Component {
     return (
       <React.Fragment>
         {/*<ReportsHeader />*/}
-        <div className="grid-container col-12 mr-40 ml-40 mt-72 mb-72">
-          <CreatedFilters />
-          {topPerformingVideos && (
-            <Slider
-              selectedVideo={selectedVideo}
-              data={topPerformingVideos}
-              changeSelectedVideo={this.changeSelectedVideo}
-              title="Top Performing Videos"
-            />
-          )}
-          {videoReleasesData && (
-            <VideoReleasesBarChart data={videoReleasesData} />
-          )}
-          {topVideosOverTime && (
-            <TopVideosCard
-              chartData={topVideosOverTime}
-              selectResolution={selectResolution}
-              handleSelectFilters={this.handleSelectFilters}
-            />
-          )}
-          {pacingChartData && (
-            <PacingCard
-              handleSelectFilters={this.handleSelectFilters}
-              barData={pacingChartData}
-              selectDate={selectDate}
-              selectLikes={selectLikes}
-            />
-          )}
-          {verticalStackedChartData && (
-            <EngagementByProperty
-              data={verticalStackedChartData}
-              handleSelectFilters={this.handleSelectFilters}
-              selectDuration={selectDuration}
-            />
-          )}
-          {colorTempData && (
-            <ColorTemperature
-              colorTempData={colorTempData}
-              handleSelectFilters={this.handleSelectFilters}
-              selectWarmColor={selectWarmColor}
-            />
-          )}
-        </div>
+        <CreatedFilters />
+        {topPerformingVideos && (
+          <Slider
+            selectedVideo={selectedVideo}
+            data={topPerformingVideos}
+            changeSelectedVideo={this.changeSelectedVideo}
+            title="Top Performing Videos"
+          />
+        )}
+        {videoReleasesData && (
+          <VideoReleasesBarChart data={videoReleasesData} />
+        )}
+        {topVideosOverTime && (
+          <TopVideosCard
+            chartData={topVideosOverTime}
+            selectResolution={selectResolution}
+            handleSelectFilters={this.handleSelectFilters}
+          />
+        )}
+
+        <PacingCard reportId={params && params.id} />
+
+        {verticalStackedChartData && (
+          <EngagementByProperty
+            data={verticalStackedChartData}
+            handleSelectFilters={this.handleSelectFilters}
+            selectDuration={selectDuration}
+          />
+        )}
+        {colorTempData && (
+          <ColorTemperature
+            colorTempData={colorTempData}
+            handleSelectFilters={this.handleSelectFilters}
+            selectWarmColor={selectWarmColor}
+            selects={this.props.selects}
+          />
+        )}
+
       </React.Fragment>
     )
   }
@@ -115,6 +104,7 @@ class ReportGenerated extends Component {
 
 const mapStateToProps = createStructuredSelector({
   generatedReport: makeSelectGeneratedReport(),
+  selects: makeSelectSelectFilters(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)

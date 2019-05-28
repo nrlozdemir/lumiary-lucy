@@ -6,7 +6,9 @@ import reportsMockData from 'Api/mocks/reportsMock.json'
 import { randomKey } from 'Utils/index'
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
-import { radarChartCalculate } from 'Utils'
+import { compareSharesData, radarChartCalculate } from 'Utils'
+
+import { getDataFromApi } from 'Utils/api'
 
 function getGeneratedReportApi() {
   //this will use ajax function in utils/api when real data is provided
@@ -124,18 +126,32 @@ function* getPerformanceComparisonData() {
   }
 }
 
-function* getColorComparisonData() {
+function* getColorComparisonData({ data: { dateRange } }) {
   try {
-    const payload = yield call(getReportsApi)
-    let shuffleData = payload.colorComparisonData
-    shuffleData[0].datas.labels.forEach((item, index) => {
-      shuffleData[0].datas.labels[index].count = _.random(10, 90)
-    })
-    shuffleData[1].datas.labels.forEach((item, index) => {
-      shuffleData[1].datas.labels[index].count = _.random(10, 90)
-    })
-    shuffleData = radarChartCalculate(shuffleData)
-    yield put(actions.getColorComparisonDataSuccess(shuffleData))
+    const parameters = {
+      dateRange,
+      metric: 'shares',
+      property: ['color'],
+      dateBucket: 'none',
+      url: '/report',
+    }
+
+    const payload = yield all([
+      call(getDataFromApi, {
+        ...parameters,
+        brand: 'Bleacher Report',
+      }),
+      call(getDataFromApi, {
+        ...parameters,
+        brand: 'Barstool Sports',
+      }),
+    ])
+
+    yield put(
+      actions.getColorComparisonDataSuccess(
+        radarChartCalculate(compareSharesData(payload))
+      )
+    )
   } catch (err) {
     yield put(actions.getColorComparisonDataError(err))
   }

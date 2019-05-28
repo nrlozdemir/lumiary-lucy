@@ -1,7 +1,6 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { ajax } from 'Utils/api'
-import qs from 'qs'
 
 import {
   types,
@@ -9,7 +8,11 @@ import {
   makeSelectSelectedVideoID,
 } from 'Reducers/libraryDetail'
 import mock from 'Api/mocks/libraryMock.json'
-import { findIdDetail } from 'Utils/api'
+import { findIdDetail, getDataFromApi } from 'Utils/api'
+import { types, actions } from 'Reducers/libraryDetail'
+import { takeLatest, call, put, select } from 'redux-saga/effects'
+import { convertDataIntoDatasets, getMaximumValueIndexFromArray } from 'Utils/'
+import { selectAuthProfile } from 'Reducers/auth'
 
 const RESOURCE = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea'
 
@@ -62,12 +65,59 @@ function* getBarChart({ payload: { LibraryDetailId } }) {
   }
 }
 
-function* getDoughnutChart({ payload: { LibraryDetailId } }) {
+function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
   try {
-    const payload = yield call(getDoughnutChartApi, {
-      LibraryDetailId,
-    })
-    yield put(actions.getDoughnutChartSuccess(payload))
+    const expectedValues = [
+      { key: 'frameRate', title: 'Frame Rate' },
+      { key: 'pacing', title: 'Pacing' },
+      { key: 'duration', title: 'Duration' },
+      { key: 'aspectRatio', title: 'Aspect Ratio' },
+    ]
+    const { brand } = yield select(selectAuthProfile)
+
+    const parameters = {
+      brands: [brand.uuid],
+      dateRange: '3months',
+      metric: 'views',
+      platform: 'all',
+      dateBucket: 'none',
+      display: 'percentage',
+      dateBucket: 'none',
+      url: '/report',
+    }
+    const payloads = yield expectedValues.map((item) =>
+      call(getDataFromApi, {
+        ...parameters,
+        property: [item.key],
+      })
+    )
+    const createCustomBackground = (data) => {
+      return Object.values(data).map((item, idx) => {
+        if (Object.values(data).includes(100)) {
+          return '#2FD7C4'
+        }
+        return idx === getMaximumValueIndexFromArray(data)
+          ? '#2FD7C4'
+          : themeColors.textColor
+      })
+    }
+    const val = expectedValues.map((payload, idx) => ({
+      ...payload,
+      doughnutChartValues: convertDataIntoDatasets(
+        payloads[idx],
+        {
+          ...parameters,
+          property: [payload.key],
+        },
+        {
+          singleDataset: true,
+          backgroundColor: createCustomBackground(
+            payloads[idx].data[Object.keys(payloads[idx].data)[0]][payload.key]
+          ),
+        }
+      ),
+    }))
+    yield put(actions.getDoughnutChartSuccess(val))
   } catch (error) {
     yield put(actions.getDoughnutChartFailure({ error }))
   }
@@ -79,23 +129,19 @@ function* getColorTemperatureData({ payload: { LibraryDetailId } }) {
     console.log(id)
     const payload = yield call(getColorTempApi, {
       LibraryDetailId,
-		})
+    })
 
-		let shuffleData = payload.colorTempData
+    let shuffleData = payload.colorTempData
     shuffleData = shuffleData.map((data) => {
       data.data.map((item) => {
         item.x = _.random(-50, 50)
         item.y = _.random(-50, 50)
       })
       return data
-		})
+    })
 
-		const colors = [
-			"#2fd7c4",
-			"#8562f3",
-			"#5292e5"
-		]
-		shuffleData = shuffleData.map((data) => {
+    const colors = ['#2fd7c4', '#8562f3', '#5292e5']
+    shuffleData = shuffleData.map((data) => {
       data.data.map((item, i) => {
         item.color = colors[i]
       })
@@ -110,7 +156,7 @@ function* getColorTemperatureData({ payload: { LibraryDetailId } }) {
     })
   } catch (err) {
     yield put(actions.getColorTempFailure(err))
-	}
+  }
 }
 
 function* getShotByShot({ payload: { LibraryDetailId } }) {

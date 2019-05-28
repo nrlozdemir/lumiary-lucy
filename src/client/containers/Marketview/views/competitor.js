@@ -16,10 +16,7 @@ import BarChartModule from 'Components/Modules/BarChartModule'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
 
 import { chartCombineDataset } from 'Utils'
-import {
-  CompetitorTopVideos_DatasetOptions,
-  TopPerformingProperties_DatasetOptions,
-} from 'Containers/Marketview/sections/detail/options'
+import { TopPerformingProperties_DatasetOptions } from 'Containers/Marketview/sections/detail/options'
 
 import style from '../style.scss'
 
@@ -40,9 +37,7 @@ const chartTickOptions = {
 /* eslint-disable react/prefer-stateless-function */
 export class Competitor extends React.Component {
   componentDidMount() {
-    this.props.getCompetitorTopVideosRequest()
     this.props.getCompetitorVideosRequest()
-    this.props.getTopPerformingPropertiesByCompetitorsRequest()
   }
 
   getSimilarProperties = (data) => {
@@ -76,14 +71,6 @@ export class Competitor extends React.Component {
       },
     } = this.props
 
-    const competitorTopVideosCombineData = chartCombineDataset(
-      {
-        labels: ['360', '480', '720p', '1080p', '4k'],
-        datasets: competitorTopVideos,
-      },
-      CompetitorTopVideos_DatasetOptions
-    )
-
     const topPerformingPropertiesDataCombineData = chartCombineDataset(
       {
         labels: [
@@ -91,7 +78,7 @@ export class Competitor extends React.Component {
           'SB Nation',
           'ESPN',
           'Scout Media',
-          'Fansided',
+          'Fanside',
         ],
         datasets: topPerformingPropertiesByCompetitorsData,
       },
@@ -107,6 +94,7 @@ export class Competitor extends React.Component {
             data={marketview.videos || []}
             selectedVideo={selectedVideo}
             changeSelectedVideo={this.changeSelectedVideo}
+            action={this.getCompetitorVideos}
             title="Top Performing Competitor Videos"
             filters={[
               {
@@ -121,59 +109,58 @@ export class Competitor extends React.Component {
               },
             ]}
           />
-          {competitorTopVideos && (
-            <TopVideosCardModule
-              chartData={competitorTopVideosCombineData}
-              height={150}
-              moduleKey="MarketView/TopVideosCardModule"
-              title="Top Videos Over Time By Competitor"
-              action={this.getCompetitorTopVideos}
-              filters={[
-                {
-                  type: 'property',
-                  selectKey: 'property',
-                  placeHolder: 'property',
-                },
-                {
-                  type: 'metric',
-                  selectKey: 'engagement',
-                  placeHolder: 'engagement',
-                },
-                {
-                  type: 'dateRange',
-                  selectKey: 'dateRange',
-                  placeHolder: 'dateRange',
-                },
-              ]}
-              references={[
-                {
-                  className: 'bg-cool-blue',
-                  text: 'Barstool Sports',
-                },
-                {
-                  className: 'bg-lighter-purple',
-                  text: 'SB Nation',
-                },
-                {
-                  className: 'bg-coral-pink',
-                  text: 'ESPN',
-                },
-                {
-                  className: 'bg-cool-grey',
-                  text: 'Scout Media',
-                },
-                {
-                  className: 'bg-dusk"',
-                  text: 'Fansided',
-                },
-              ]}
-            />
-          )}
+          <TopVideosCardModule
+            chartData={competitorTopVideos}
+            height={150}
+            moduleKey="MarketView/TopVideosCardModule"
+            title="Top Videos Over Time By Competitor"
+            action={this.getCompetitorTopVideos}
+            filters={[
+              {
+                type: 'property',
+                selectKey: 'property',
+                placeHolder: 'property',
+              },
+              {
+                type: 'metric',
+                selectKey: 'engagement',
+                placeHolder: 'engagement',
+              },
+              {
+                type: 'dateRange',
+                selectKey: 'dateRange',
+                placeHolder: 'dateRange',
+              },
+            ]}
+            references={[
+              {
+                className: 'bg-cool-blue',
+                text: 'Barstool Sports',
+              },
+              {
+                className: 'bg-lighter-purple',
+                text: 'SB Nation',
+              },
+              {
+                className: 'bg-coral-pink',
+                text: 'ESPN',
+              },
+              {
+                className: 'bg-cool-grey',
+                text: 'Scout Media',
+              },
+              {
+                className: 'bg-dusk"',
+                text: 'Fanside',
+              },
+            ]}
+          />
           <TopSimilarPropertiesModule
             moduleKey="MarketView/TopSimilarPropertiesModule"
             data={similarProperties}
             title="Top Performing Property Across All Competitors"
             action={this.getSimilarProperties}
+            presentWithDoughnut
             filters={[
               {
                 type: 'dateRange',
@@ -182,42 +169,45 @@ export class Competitor extends React.Component {
               },
             ]}
           />
-          {topPerformingPropertiesByCompetitorsData && (
-            <BarChartModule
-              moduleKey="MarketView/topPerformingPropertiesByCompetitors"
-              containerClass={style.detailTopPerformingPropertyContainer}
-              barData={topPerformingPropertiesDataCombineData}
-              tickOptions={chartTickOptions}
-              title="Top Performing Property Across All Competitors"
-              height={50}
-              action={this.getTopPerformingPropertiesByCompetitors}
-              filters={[
-                {
-                  type: 'property',
-                  selectKey: 'property',
-                  placeHolder: 'property',
-                },
-              ]}
-              references={[
-                {
-                  className: 'bg-cool-blue',
-                  text: 'Fast',
-                },
-                {
-                  className: 'bg-lighter-purple',
-                  text: 'Medium',
-                },
-                {
-                  className: 'bg-coral-pink',
-                  text: 'Slow',
-                },
-                {
-                  className: 'bg-cool-grey',
-                  text: 'Slowest',
-                },
-              ]}
-            />
-          )}
+          <BarChartModule
+            moduleKey="MarketView/topPerformingPropertiesByCompetitors"
+            containerClass={style.detailTopPerformingPropertyContainer}
+            barData={topPerformingPropertiesDataCombineData}
+            tickOptions={chartTickOptions}
+            title="Top Performing Property Across All Competitors"
+            height={50}
+            action={this.getTopPerformingPropertiesByCompetitors}
+            filters={[
+              {
+                type: 'metric',
+                selectKey: 'engagement',
+                placeHolder: 'engagement',
+              },
+              {
+                type: 'dateRange',
+                selectKey: 'dateRange',
+                placeHolder: 'dateRange',
+              },
+            ]}
+            references={[
+              {
+                className: 'bg-cool-blue',
+                text: 'Fast',
+              },
+              {
+                className: 'bg-lighter-purple',
+                text: 'Medium',
+              },
+              {
+                className: 'bg-coral-pink',
+                text: 'Slow',
+              },
+              {
+                className: 'bg-cool-grey',
+                text: 'Slowest',
+              },
+            ]}
+          />
         </div>
       </React.Fragment>
     )

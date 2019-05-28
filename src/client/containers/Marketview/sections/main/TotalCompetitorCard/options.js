@@ -24,7 +24,7 @@ export const TotalCompetitor_DatasetOptions = [
     borderWidth: 1,
   },
   {
-    label: 'Fansided',
+    label: 'Fanside',
     backgroundColor: '#545B79',
     borderColor: '#545B79',
     borderWidth: 1,

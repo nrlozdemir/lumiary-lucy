@@ -1,4 +1,4 @@
-import { chartColors, weeks, dayOfWeek, month } from 'Utils/globals'
+import { chartColors, expectedNames } from 'Utils/globals'
 function randomKey(char) {
   var text = ''
   var possible =
@@ -10,31 +10,81 @@ function randomKey(char) {
   return text
 }
 
+/*
+  Returns an array of time labels from the api response
+  * Expected labels:
+     week - ['Week 1', 'Week 2', 'Week 3', 'Week 4']
+     month - array of 3 months from the current
+     dayOfWeek - array of 7 days from the current
+ */
+const getTimeBucket = (value) => {
+  const keys = Object.keys(value)
+  if (!!keys.length) {
+    // sometimes there is a null key
+    return Object.keys(value[keys[0]])
+      .reduce(
+        (all, label) => [...all, ...(label !== 'null' ? [label] : [])],
+        []
+      )
+      .reverse()
+  }
+  return []
+}
+
+const getLabelWithSuffix = (label, property) => {
+  let suffix
+
+  switch (property) {
+    case 'duration':
+      suffix = 'seconds'
+      break
+    case 'frameRate':
+      suffix = 'FPS'
+      break
+    default:
+      suffix = ''
+  }
+  return `${label} ${suffix}`
+}
+
 /**
  * Convert data to chart js structure
  * @constructor
  * @param {object} values - Values which comes from backend response.
- * @param {object} options - Option is the our request params.
- * @param {object} args - Args attribute for other options like if you have any prepared labels or datasets you can pass quickly using with args attribute
+ * @param {object} options - Option is the request params.
+ * @param {object} args - Args attribute for other options:
+ *
+ * ...args
+  {
+    hoverBG: array
+    preparedDatasets: array,
+    preparedLabels: array,
+    singleDataset: bool,
+    borderWidth: object || int
+    useBrandLabels: bool,
+  }
+  *
  */
+
 const convertDataIntoDatasets = (values, options, ...args) => {
   let labels
   let datasetsFromValues
-  let timeBucket
   let singleLevelJSON
+  let customKey = false
+  let getValueinObject
 
-  timeBucket =
-    options.dateBucket === 'weeks'
-      ? weeks
-      : options.dateBucket === 'dayOfWeek'
-      ? dayOfWeek
-      : options.dateBucket === 'month'
-      ? month
-      : null
+  const arg = args && !!args[0] && args[0]
+  const brands = Object.keys(values.data)
+  const brandObjects = brands.map((b) => values.data[b])
+  getValueinObject = brandObjects[0][options.property[0]]
 
-  const getValueinObject = values.data[options.property[0]]
+  const timeBucket =
+    options.dateBucket !== 'none' ? getTimeBucket(getValueinObject) : null
 
-  // If time bucket was  selected, it will change labels to time labels and it will set up datasets according to selected time bucket
+  delete getValueinObject.subtotal
+
+  // If time bucket was  selected, it will change labels to time labels
+  // defined within a data object from the api response
   if (timeBucket) {
     datasetsFromValues = Object.keys(getValueinObject).map((item) =>
       timeBucket.map((date) => getValueinObject[item][date])
@@ -51,7 +101,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
           getValueinObject[key][item]
       )
     )
-    labels = Object.keys(getValueinObject)
+    labels = Object.keys(getValueinObject).map((k) =>
+      getLabelWithSuffix(k, options.property[0])
+    )
   }
 
   // if timebucket or proportionOf werent selected, it will get data from single level json
@@ -59,33 +111,133 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     datasetsFromValues = Object.keys(getValueinObject).map(
       (key) => getValueinObject[key]
     )
-    labels = Object.keys(getValueinObject)
+    labels = Object.keys(getValueinObject).map((k) =>
+      getLabelWithSuffix(k, options.property[0])
+    )
     singleLevelJSON = true
   }
 
-  // You can pass prepared labels or datasets in args
-  labels = (args && args.preparedLabel) || labels
-  datasetsFromValues = (args && args.preparedDatasets) || datasetsFromValues
+  if (brands.length > 1) {
+    datasetsFromValues = brandObjects.map((brand, idx) =>
+      Object.keys(brand[Object.keys(brand)[0]]).map(
+        (key) => brandObjects[idx][Object.keys(brand)[0]][key]
+      )
+    )
+    singleLevelJSON = false
+    getValueinObject = brands
+  }
 
+  // Object.keys(
+  //  brandObjects[0][Object.keys(brandObjects[0])]
+  // ).map((value) => brandObjects.map((brand) => brand.duration[value]))
+  // You can pass prepared labels or datasets in args
+  labels =
+    (arg &&
+      (arg.preparedLabels
+        ? arg.preparedLabels
+        : arg.useBrandLabels
+        ? brands
+        : labels)) ||
+    labels
+
+  datasetsFromValues = (arg && arg.preparedDatasets) || datasetsFromValues
   return Object.keys(getValueinObject).reduce(
-    (data, key, idx) => ({
-      labels: [...labels],
-      datasets: [
-        ...data.datasets,
-        {
-          label: key,
-          backgroundColor: chartColors[idx],
-          borderColor: chartColors[idx],
-          borderWidth: 1,
-          data: singleLevelJSON
-            ? datasetsFromValues
-            : datasetsFromValues[idx] || [0, 0, 0, 0],
-        },
-      ],
-    }),
+    (data, key, idx) => {
+      const { datasets } = data
+      const color = chartColors[idx]
+      return arg && arg.singleDataset
+        ? // only one dataset is required sometimes
+          // ie. doughnut chart in panoptic/engagement
+          {
+            labels: [...labels],
+            datasets: [
+              {
+                label: expectedNames[options.property],
+                data: datasetsFromValues || [0, 0, 0, 0],
+                backgroundColor: arg.backgroundColor || [
+                  ...(datasets[0] ? datasets[0].backgroundColor : []),
+                  color,
+                ],
+                hoverBackgroundColor:
+                  arg && arg.hoverBG
+                    ? [
+                        ...(datasets[0]
+                          ? datasets[0].hoverBackgroundColor
+                          : []),
+                        color,
+                      ]
+                    : [],
+              },
+            ],
+          }
+        : {
+            labels: [...labels],
+            datasets: [
+              ...datasets,
+              {
+                label: customKey ? labels[idx] : key,
+                backgroundColor: color,
+                borderColor: color,
+                borderWidth: (arg && arg.borderWidth) || 1,
+                hoverBackgroundColor: arg && arg.hoverBG ? color : null,
+                data: singleLevelJSON
+                  ? datasetsFromValues
+                  : datasetsFromValues[idx] || [0, 0, 0, 0],
+              },
+            ],
+          }
+    },
     {
       labels: [],
       datasets: [],
+    }
+  )
+}
+
+/* 
+ just using this for the donut chart in marketplace/total views
+ so still need to modify this function for other charts 
+*/ 
+const convertMetricDataIntoDatasets = (values, options, ...args) => {
+  let datasetsFromValues
+
+  const brands = Object.keys(values)
+
+  const arg = args && !!args[0] && args[0]
+
+  // single dataset structure
+  return brands.reduce(
+    (data, brand, idx) => {
+      const { datasets, labelsData } = data
+      const color = chartColors[idx]
+      const brandData = values[brand][0]
+
+      return {
+        labels: [...brands],
+        labelsData: [...labelsData, { data: brand, color }],
+        datasets: [
+          {
+            backgroundColor: [...datasets[0].backgroundColor, color],
+            borderWidth: (arg && arg.borderWidth) || 1,
+            hoverBackgroundColor: [...datasets[0].backgroundColor, color],
+            data: [
+              ...datasets[0].data,
+              !!brandData.percent ? brandData.percent : 0,
+            ],
+          },
+        ],
+      }
+    },
+    {
+      labels: [],
+      labelsData: [],
+      datasets: [
+        {
+          data: [],
+          backgroundColor: [],
+          hoverBackgroundColor: [],
+        },
+      ],
     }
   )
 }
@@ -98,7 +250,6 @@ function socialIconSelector(key) {
     twitter: 'icon-Twitter-Bubble',
     instagram: 'icon-Instagram-Bubble',
     youtube: 'icon-YouTube-Bubble',
-    pinterest: 'icon-Pinterest-Bubble',
   }
 
   return socialIcons[keyToLowerCase]
@@ -124,7 +275,6 @@ function toSlug(str) {
 
 function chartCombineDataset(data, options, globalOptions) {
   if (!data || !data.datasets || !data.datasets.length) return {}
-
   return {
     ...data,
     ...globalOptions,
@@ -196,7 +346,7 @@ const strToColor = (str) => {
 
   const color = {
     red: '#cc2226',
-    'red-orange': '#dd501d',
+    'orange-red': '#dd501d',
     orange: '#eb7919',
     'yellow-orange': '#f8b90b',
     yellow: '#fff20d',
@@ -259,6 +409,106 @@ const radarChartCalculate = (data) => {
   return colorsData
 }
 
+const getMaximumValueIndexFromArray = (data) =>
+  Object.values(data).indexOf(Math.max(...Object.values(data)))
+const compareSharesData = (data) => {
+  return data.map((item) => {
+    return {
+      type: capitalizeFirstLetter(item.platform),
+      datas: {
+        labels: Object.keys(item.data.color).map((color) => ({
+          name: color
+            .split('-')
+            .map((c) => capitalizeFirstLetter(c))
+            .join('-'),
+          count: item.data.color[color],
+        })),
+        datasets: [
+          {
+            label: capitalizeFirstLetter(item.platform),
+          },
+        ],
+      },
+    }
+  })
+}
+
+const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
+  const datasetLabels = Object.keys(payload)
+  const property = options.property[0]
+
+  // get first payload for labels
+  const firstPayload = payload[datasetLabels[0]].data
+  const firstPayloadBrand = Object.keys(firstPayload)[0]
+  const firstPayloadLabels = Object.keys(
+    firstPayload[firstPayloadBrand][property]
+  ).filter((key) => key !== 'subtotal')
+
+  const datasets = (!revert ? datasetLabels : firstPayloadLabels).map(
+    (label, index) => {
+      const data = (!revert ? firstPayloadLabels : datasetLabels).map((key) => {
+        const currentLabel = payload[!revert ? label : key].data
+        const brand = Object.keys(currentLabel)[0]
+        const response = currentLabel[brand][property]
+
+        return response[!revert ? key : label]
+      })
+
+      return {
+        label: capitalizeFirstLetter(label),
+        backgroundColor: chartColors[index],
+        borderColor: chartColors[index],
+        borderWidth: 1,
+        data,
+      }
+    }
+  )
+  return {
+    labels: !revert
+      ? firstPayloadLabels.map((key) => capitalizeFirstLetter(key))
+      : datasetLabels.map((label) => capitalizeFirstLetter(label)),
+    datasets,
+  }
+}
+
+const isDataSetEmpty = (data) => {
+  if (!!data && !!data.datasets && !!data.datasets.length) {
+    return data.datasets.every((dataset) =>
+      !!dataset.data && !!dataset.data.length
+        ? dataset.data.every((val) => val === 0 || val === undefined)
+        : true
+    )
+  } else {
+    return true
+  }
+}
+
+const getDateBucketFromRange = (dateRange) => {
+  switch (dateRange) {
+    case 'week':
+      return 'dayOfWeek'
+    case 'month':
+      return 'week'
+    case '3months':
+      return 'month'
+    default:
+      return 'none'
+  }
+}
+
+/*
+  Get api payload for brand_uuid and competitors
+ */
+const getBrandAndCompetitors = (profile) => {
+  const { brand } = profile
+
+  if (!!brand && !!brand.uuid && !!brand.competitors) {
+    return [brand.uuid, ...brand.competitors.map((c) => c.uuid)]
+  }
+
+  return [brand.uuid]
+}
+
 export {
   randomKey,
   searchTermInText,
@@ -268,5 +518,12 @@ export {
   shadeHexColor,
   capitalizeFirstLetter,
   radarChartCalculate,
+  isDataSetEmpty,
   convertDataIntoDatasets,
+  getMaximumValueIndexFromArray,
+  compareSharesData,
+  convertMultiRequestDataIntoDatasets,
+  getDateBucketFromRange,
+  getBrandAndCompetitors,
+  convertMetricDataIntoDatasets,
 }

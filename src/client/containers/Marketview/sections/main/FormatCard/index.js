@@ -6,8 +6,8 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewFormatCard } from 'Reducers/marketview'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import RightArrowCircle from "Components/Icons/RightArrowCircle";
-
+import RightArrowCircle from "Components/Icons/RightArrowCircle"
+import SingleVideoCard from 'Components/SingleVideoCard'
 import style from 'Containers/Marketview/style.scss'
 import formatStyles from './style.scss'
 
@@ -18,14 +18,14 @@ class FormatCard extends Component {
 
   iconClass(name) {
     switch (name) {
-      case 'Stop Motion':
-        return 'icon-icon_stopmotion'
+      case 'Live Action':
+        return 'icon-icon_liveaction'
 
       case 'Animation':
         return 'icon-icon_animation'
 
-      case 'Live Action':
-        return 'icon-icon_liveaction'
+      case 'Stop Motion':
+        return 'icon-icon_stopmotion'
 
       case 'Cinemagraph':
         return 'icon-icon_cinemagraph'
@@ -36,7 +36,12 @@ class FormatCard extends Component {
   }
 
   render() {
-    const { formatChartData } = this.props
+    const {
+      formatChartData: {
+        data,
+        video
+      },
+    } = this.props
 
     return (
       <ThemeContext.Consumer>
@@ -65,18 +70,21 @@ class FormatCard extends Component {
               </span>
             </div>
 
-            <div className={style.hoverImage}>
-              {formatChartData.hoverImages &&
-                formatChartData.hoverImages.map((image, i) => (
-                  <img key={i} src={image} alt="" />
-                ))}
+            <div className={style.videoContainer}>
+              {video && (
+                <SingleVideoCard
+                  video={video}
+                  muted={false}
+                  options={{ size: 'auto', barColor: 'transparent' }}
+                />
+              )}
             </div>
 
-            <div className={style.marketViewCardChartTitle}>Stop Motion</div>
+            <div className={style.marketViewCardChartTitle}>Live Action</div>
 
             <div className={formatStyles.formatItems}>
-              {formatChartData.data &&
-                formatChartData.data.map((item, i) => (
+              {data &&
+                data.map((item, i) => (
                   <div key={i} className={formatStyles.formatItem}>
                     <div className={formatStyles.formatItemIcon}>
                       <span className={this.iconClass(item.name)} />

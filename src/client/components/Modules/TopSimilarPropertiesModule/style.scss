@@ -1,20 +1,12 @@
-.similarPropertiesContainer {
-  background-color: $color-dark-grey-blue;
-
-  .header {
-    .title {
-      font-size: 18px;
-      line-height: 42px;
+.container {
+  div {
+    div {
+      border-left: 1px solid;
     }
   }
-
-  .selects {
-    display: flex;
-    float: right;
-    position: relative;
-    z-index: 12;
-    > div {
-      margin: 0 0 0 24px;
+  div:first-child {
+    div {
+      border: none;
     }
   }
 }

@@ -57,7 +57,7 @@ export function getQuickviewItems() {
 				},
 				{
 					title: "Bad",
-					socialIcon: "pinterest",
+					socialIcon: "instagram",
 					barColor: "coral-pink",
 					thumbnailUrl: "https://picsum.photos/282/154?image=18"
 				}

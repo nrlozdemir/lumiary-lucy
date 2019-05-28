@@ -1,8 +1,9 @@
-import React, { lazy, Suspense } from 'react'
+import React from 'react'
 import { Doughnut } from 'react-chartjs-2'
-//import classnames from 'classnames'
+import classnames from 'classnames'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
+import { isDataSetEmpty } from 'Utils'
 
 import Labels from 'Components/Charts/Labels'
 
@@ -76,18 +77,22 @@ const DoughnutChart = (props) => {
     labelPositionLeft,
     cutoutPercentage,
     customStyle,
+    customDoughnutContainer,
+    customChartWrapper,
   } = props
 
   const themes = props.themeContext.colors
 
   let plugins = []
   if (fillText) {
+    const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
+
     plugins = [
       {
         beforeDraw: function(chart) {
           const ctx = chart.chart.ctx
           const { top, bottom, left, right } = chart.chartArea
-          const customFillText = fillText.replace(/^\s+|\s+$/g, '')
+          const customFillText = textToUse.replace(/^\s+|\s+$/g, '')
           ctx.save()
           ctx.fillStyle = themes.textColor
           ctx.font = fillTextFontSize + ' ' + fillTextFontFamily
@@ -111,13 +116,16 @@ const DoughnutChart = (props) => {
 
   return (
     <React.Fragment>
-      <div className={style.doughnutContainer} style={customStyle}>
+      <div
+        className={classnames(style.doughnutContainer, customDoughnutContainer)}
+        style={customStyle}
+      >
         {labelPositionLeft && labelsData && (
           <div className={style.labelContainer}>
             <Labels data={labelsData} />
           </div>
         )}
-        <div className={style.chartWrapper}>
+        <div className={classnames(style.chartWrapper, customChartWrapper)}>
           {data && (
             <Doughnut
               key={Math.random()}
@@ -127,12 +135,22 @@ const DoughnutChart = (props) => {
                 labels: data.labels,
                 datasets: [
                   {
-                    data: data && data.datasets ? data.datasets[0].data : null,
+                    data:
+                      data && data.datasets
+                        ? data.datasets[0].data.reduce(
+                            (acc, curr) => [
+                              ...acc,
+                              ...(curr !== 0 ? [curr] : []),
+                            ],
+                            []
+                          )
+                        : null,
                     backgroundColor:
                       data && data.datasets
                         ? data.datasets[0].backgroundColor
                         : null,
                     borderColor: themes.moduleBackground,
+                    hoverBorderColor: themes.moduleBackground,
                     hoverBackgroundColor:
                       data && data.datasets
                         ? data.datasets[0].hoverBackgroundColor

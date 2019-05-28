@@ -16,10 +16,10 @@ export const weeks = ['Week1', 'Week2', 'Week3', 'Week4']
 export const dayOfWeek = [
   'Monday',
   'Tuesday',
-  'Friday',
-  'Saturday',
   'Wednesday',
   'Thursday',
+  'Friday',
+  'Saturday',
   'Sunday',
 ]
 export const month = [
@@ -36,3 +36,12 @@ export const month = [
   'November',
   'December',
 ]
+export const expectedNames = {
+  color: 'Dominant Color',
+  pacing: 'Pacing',
+  duration: 'Duration',
+  resolution: 'Resolution',
+  aspectRatio: 'Aspect Ratio',
+  frameRate: 'Frame Rate',
+  format: 'Format',
+}

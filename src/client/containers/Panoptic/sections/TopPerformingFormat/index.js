@@ -18,11 +18,11 @@ class TopPerformingFormat extends React.Component {
     this.props.getTopPerformingFormatData(data)
   }
 
-  customCallbackFunc = () => console.log('oldu')
+  customCallbackFunc = () => console.log('Success')
 
   combineChartData = (lineData) => {
     return chartCombineDataset(lineData, lineChartData_DatasetOptions, {
-      beforeDraw: function (chart, easing) {
+      beforeDraw: function(chart, easing) {
         if (
           chart.config.options.chartArea &&
           chart.config.options.chartArea.backgroundColor

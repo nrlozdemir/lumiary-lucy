@@ -10,6 +10,8 @@ const dark = {
   textColor: '#ffffff',
   searchOptionsColor: '#545b79',
   ageSliderBorder: '#545b79',
+  moduleBackgroundOpacity: 'rgba(55, 63, 91, 0.7)',
+
   // global values
 
   // selectbox
@@ -132,6 +134,9 @@ const dark = {
   shotByShotTabBody: '#373f5b',
   shotByShotSliderPointer: '#ffffff',
   // shot by shot slider values
+
+  // percentage bar grap values
+  topValueColor: '#ffffff',
 }
 
 const light = {
@@ -146,7 +151,7 @@ const light = {
   placeholderColor: '#c6c9d7',
   searchOptionsColor: '#ffffff',
   ageSliderBorder: 'transparent',
-
+  moduleBackgroundOpacity: 'rgba(243, 246, 249, 0.7)',
   // global values
 
   // selectbox
@@ -269,6 +274,9 @@ const light = {
   shotByShotTabBody: '#f3f6f9',
   shotByShotSliderPointer: '#2fd7c4',
   // shot by shot slider values
+
+  // percentage bar grap values
+  topValueColor: '#000000',
 }
 
 const themes = {

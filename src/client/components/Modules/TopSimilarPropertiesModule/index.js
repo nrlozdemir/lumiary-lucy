@@ -1,12 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import TopSimilarPropertiesItem from 'Components/TopSimilarPropertiesItem'
-import style from './style.scss'
 import Module from 'Components/Module'
-
+import DoughnutCard from 'Components/DoughnutCard'
+import { ThemeContext } from 'ThemeContext/themeContext'
+import classnames from 'classnames'
+import style from './style.scss'
 const TopSimilarProperties = (props) => {
   const { data, title, filters, action, moduleKey } = props
-
   return (
     <Module
       title={title}
@@ -14,12 +14,25 @@ const TopSimilarProperties = (props) => {
       moduleKey={moduleKey}
       action={action}
     >
-      <div className="col-12-no-gutters">
-        {data &&
-          data.map((sectionItem, i) => (
-            <TopSimilarPropertiesItem key={i} sectionItem={sectionItem} i={i} />
-          ))}
-      </div>
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <div className={classnames('col-12-no-gutters', style.container)}>
+            {data &&
+              data.map((sectionItem, i) => (
+                <div className="col-4-no-gutters">
+                  <div style={{ borderColor: colors.moduleBorder }}>
+                    <DoughnutCard
+                      data={sectionItem}
+                      key={i}
+                      index={i}
+                      colors={colors}
+                    />
+                  </div>
+                </div>
+              ))}
+          </div>
+        )}
+      </ThemeContext.Consumer>
     </Module>
   )
 }

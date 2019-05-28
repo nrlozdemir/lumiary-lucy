@@ -2,7 +2,7 @@ import React from 'react'
 import cx from 'classnames'
 import { randomKey } from 'Utils/index'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
-import SelectFilters from 'Components/SelectFilters'
+import Module from 'Components/Module'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -19,20 +19,10 @@ const datasetKeyProvider = () => {
   return randomKey(5)
 }
 
-const TopVideosCard = ({
-  chartData,
-  selectResolution,
-  handleSelectFilters,
-}) => {
+const TopVideosCard = ({ chartData }) => {
   let stackedChartData = chartData
-  const labels = ['Facebook', 'Instagram', 'Twitter', 'YouTube', 'Pinterest']
-  const backgroundColors = [
-    '#2FD7C4',
-    '#8562F3',
-    '#5292E5',
-    '#acb0be',
-    '#545B79',
-  ]
+  const labels = ['Facebook', 'Instagram', 'Twitter', 'YouTube']
+  const backgroundColors = ['#2FD7C4', '#8562F3', '#5292E5', '#acb0be']
 
   stackedChartData.labels = ['360p', '480p', '720p', '1080p', '4k']
   stackedChartData.datasets.map((el, i) => {
@@ -43,69 +33,41 @@ const TopVideosCard = ({
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
-        <div className="grid-collapse">
-          <div
-            className={barChartContainer}
-            style={{
-              backgroundColor: colors.moduleBackground,
-              color: colors.textColor,
-              boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
-            }}
-          >
-            <div className={barChartHeaderClass}>
-              <div className="col-4 text-bold">
-                <p className={headerTitleClass}>
-                  Top Videos Over Time By Competitor
-                </p>
-              </div>
-              <div className="col-8">
-                <div className={style.selects}>
-                  <SelectFilters
-                    handleSelectFilters={handleSelectFilters}
-                    selectClasses={selectClasses}
-                    selectResolution={selectResolution}
-                    selectResolutionShow={true}
-                  />
-                </div>
-                <div className="clearFix" />
-              </div>
-            </div>
-            <div className="col-12">
-              <StackedBarChart
-                height={200}
-                barData={stackedChartData}
-                datasetKeyProvider={datasetKeyProvider()}
-              />
-            </div>
-            <div className="col-12">
-              <div className={referencesClass}>
-                <div className={style.referenceItem}>
-                  <span className="bg-cool-blue" />
-                  Facebook
-                </div>
-                <div className={style.referenceItem}>
-                  <span className="bg-lighter-purple" />
-                  Instagram
-                </div>
-                <div className={style.referenceItem}>
-                  <span className="bg-coral-pink" />
-                  Twitter
-                </div>
-                <div className={style.referenceItem}>
-                  <span
-                    className="bg-cool-grey"
-                    style={{ backgroundColor: '#acb0be' }}
-                  />
-                  YouTube
-                </div>
-                <div className={style.referenceItem}>
-                  <span className="bg-dusk" />
-                  Pinterest
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <Module
+          moduleKey={'Reports/TopVideosCard'}
+          title={'Top Videos Over Time By Competitor'}
+          filters={[
+            {
+              type: 'resolution',
+              selectKey: 'resolutionOption',
+              placeHolder: 'Resolution',
+            },
+          ]}
+          references={[
+            {
+              className: 'bg-cool-blue',
+              text: 'Facebook',
+            },
+            {
+              className: 'bg-lighter-purple',
+              text: 'Instagram',
+            },
+            {
+              className: 'bg-coral-pink',
+              text: 'Twitter',
+            },
+            {
+              className: 'bg-cool-grey',
+              text: 'YouTube',
+            },
+          ]}
+        >
+          <StackedBarChart
+            height={200}
+            barData={stackedChartData}
+            datasetKeyProvider={datasetKeyProvider()}
+          />
+        </Module>
       )}
     </ThemeContext.Consumer>
   )

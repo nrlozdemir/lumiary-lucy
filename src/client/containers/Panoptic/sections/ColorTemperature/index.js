@@ -6,6 +6,7 @@ import { actions, makeSelectPanopticColorTemperature } from 'Reducers/panoptic'
 import { platforms } from './options'
 import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
 import style from './style.scss'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 
 class PanopticColorTemperature extends React.Component {
   callBack = (data) => {
@@ -17,6 +18,13 @@ class PanopticColorTemperature extends React.Component {
       colorTemperatureData: { data, loading, error },
     } = this.props
 
+    const moduleName = 'Panoptic/ColorTemperature'
+    const selectKey = 'PCT-asd'
+    const selectValue =
+      this.props.selects.values[moduleName] &&
+      this.props.selects.values[moduleName][selectKey].value &&
+      this.props.selects.values[moduleName][selectKey].value.label
+
     return (
       <ColorTemperatureModule
         extraClasses={style.colorChartContent}
@@ -24,14 +32,15 @@ class PanopticColorTemperature extends React.Component {
         borderLess
         verticalText
         infoLabels={['Views', 'Likes', 'Comment', 'Shares']}
-        moduleKey={'Panoptic/ColorTemperature'}
+        moduleKey={moduleName}
         data={data}
         title="Color Temperature / Sentiment Comparison"
         action={this.callBack}
+        selectValue={selectValue}
         filters={[
           {
             type: 'colorTempature',
-            selectKey: 'PCT-asd',
+            selectKey: selectKey,
             placeHolder: 'Color Tempature',
           },
           {
@@ -48,6 +57,7 @@ class PanopticColorTemperature extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   colorTemperatureData: makeSelectPanopticColorTemperature(),
+  selects: makeSelectSelectFilters(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
