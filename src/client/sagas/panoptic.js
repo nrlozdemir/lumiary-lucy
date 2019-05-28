@@ -259,30 +259,41 @@ function* getTopPerformingFormatData({ data = {} }) {
       platform,
       metric: 'cvScore',
       dateRange: 'week',
-      dateBucket: 'dayOfWeek',
+      dateBucket: 'none',
       display: 'percentage',
       property: ['format'],
       url: '/report',
       brands: [brand.uuid],
     }
 
-    const topPerformingFormatData = yield call(getDataFromApi, options)
+    const dateBucketedOptions = { ...options, dateBucket: 'dayOfWeek' }
+
+    const [dataWithDateBuckets, dataWithoutDateBuckets] = yield all([
+      call(getDataFromApi, dateBucketedOptions),
+      call(getDataFromApi, options),
+    ])
 
     const payload = yield call(getMockPanopticDataApi)
 
-    if (
-      !!topPerformingFormatData.data &&
-      !!topPerformingFormatData.data[brand.name] &&
-      !!topPerformingFormatData.data[brand.name].format
-    ) {
-      const convertedData = convertDataIntoDatasets(
-        topPerformingFormatData,
-        options
+    if (!!dataWithDateBuckets.data && !!dataWithoutDateBuckets.data) {
+      const lineChartData = convertDataIntoDatasets(
+        dataWithDateBuckets,
+        dateBucketedOptions
       )
 
-      console.log('converted', convertedData)
+      const doughnutData = convertDataIntoDatasets(
+        dataWithoutDateBuckets,
+        options,
+        { singleDataset: true }
+      )
 
-      yield put(actions.getTopPerformingFormatDataSuccess(convertedData))
+      yield put(
+        actions.getTopPerformingFormatDataSuccess({
+          doughnutData,
+          lineChartData,
+          percentageData: dataWithoutDateBuckets,
+        })
+      )
     } else {
       yield put(
         actions.getTopPerformingFormatDataError(

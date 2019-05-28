@@ -3,12 +3,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, makeSelectTopPerformingFormat } from 'Reducers/panoptic'
 import { chartCombineDataset, isDataSetEmpty } from 'Utils'
 
 import LineAndDoughnutChartModule from 'Components/Modules/LineAndDoughnutChartModule'
 import { lineChartData_DatasetOptions, lineChartOptions } from './options'
 import { isEmpty } from 'lodash'
+import { chartColors } from 'Utils/globals'
 
 class TopPerformingFormat extends React.Component {
   componentDidMount() {
@@ -47,77 +49,52 @@ class TopPerformingFormat extends React.Component {
 
   render() {
     const {
-      topPerformingFormatData: { data, loading, error },
+      profile,
+      topPerformingFormatData: {
+        data,
+        data: { doughnutData, percentageData, lineChartData },
+        loading,
+        error,
+      },
     } = this.props
 
-    console.log('lineanddonuts', data)
+    const formatObj =
+      !!profile &&
+      !!profile.brand &&
+      !!percentageData &&
+      percentageData.data[profile.brand.name].format
+
+    const percentageData =
+      (!!formatObj &&
+        Object.keys(formatObj).map((key, idx) => ({
+          key,
+          color: chartColors[idx],
+          value: formatObj[key],
+        }))) ||
+      []
+
+    const isFormatEmpty = isDataSetEmpty(lineChartData)
+
+    const isDoughnutEmpty = isDataSetEmpty(doughnutData)
+
+    const isPercentagesEmpty = isDataSetEmpty(percentageData)
 
     const hasNoData =
-      !loading && ((!!data && isDataSetEmpty(data)) || isEmpty(data))
+      !loading &&
+      ((!!lineChartData &&
+        isFormatEmpty &&
+        !!doughnutData &&
+        isDoughnutEmpty &&
+        !!lineChartData &&
+        isPercentagesEmpty) ||
+        isEmpty(data))
 
-    const doughnutData = {
-      labels: [
-        'Live Action',
-        'Animation 2',
-        'Stop Motion',
-        'Animation',
-        'Cinemagraph',
-      ],
-      datasets: [
-        {
-          data: [5, 15, 25, 10, 45],
-          backgroundColor: [
-            '#5292e5',
-            '#545b79',
-            '#acb0be',
-            '#2fd7c4',
-            '#8562f3',
-          ],
-          hoverBackgroundColor: [
-            '#5292e5',
-            '#545b79',
-            '#acb0be',
-            '#2fd7c4',
-            '#8562f3',
-          ],
-        },
-      ],
-    }
-
-    const percentageData = [
-      {
-        value: 33.5,
-        key: 'Live Action',
-        color: 'purple',
-      },
-      {
-        value: 60.1,
-        key: 'Animation',
-        color: 'green',
-      },
-      {
-        value: 72.5,
-        key: 'Animation 2',
-        color: 'blue',
-      },
-      {
-        value: 50.2,
-        key: 'Stop Motion',
-        color: 'lightGrey',
-      },
-      {
-        value: 85.3,
-        key: 'Cinemagraph',
-        color: 'grey',
-      },
-    ]
-    
     return (
       <LineAndDoughnutChartModule
         moduleKey="Panoptic/Top-Performing-Formats-This-Week-By-CV-Score"
         title="Top Performing Formats This Week By CV Score"
         action={this.callBack}
-        lineChartData={data}
+        lineChartData={lineChartData}
         lineChartOptions={lineChartOptions}
         customCallbackFunc={this.customCallbackFunc}
         filters={[
@@ -137,6 +114,7 @@ class TopPerformingFormat extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
+  profile: makeSelectAuthProfile(),
   topPerformingFormatData: makeSelectTopPerformingFormat(),
 })
 
