@@ -5,7 +5,9 @@ import SingleItemSlider from 'Components/Sliders/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
 import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
 import style from './style.scss'
+import style2 from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import Scrubber from 'Components/Sliders/Scrubber'
 import XCircle from "Components/Icons/XCircle";
 
 class LibraryDetailShotByShot extends React.Component {
@@ -417,7 +419,8 @@ class LibraryDetailShotByShot extends React.Component {
                         className={style.sliderContainer}
                         ref={this.slide}
                         style={{
-                          border: `1px solid ${colors.shotByShotBorder}`,
+													border: `1px solid ${colors.shotByShotBorder}`,
+													height: 170
                         }}
                       >
                         <div
@@ -496,6 +499,212 @@ class LibraryDetailShotByShot extends React.Component {
                           disabled={this.state.sliderDisabled}
                           marks={this.state.sliderMarks}
                         />
+                      </div>
+                    </div>
+                  </div>
+								)}
+
+							{selectedImage ? (
+                <div className={style.sliderTabContainer}>
+                  <div className="col-6-no-gutters bg-black">
+                    <div className="mt-48 ml-48 mr-48">
+                      <SingleItemSlider
+                        customHandleStyle={{
+                          background: colors.shotByShotSliderPointer,
+                        }}
+                        slideImages={sliderWithThumbnails}
+                        selectedImage={selectedImage}
+                      />
+                    </div>
+                  </div>
+                  <div className="col-6-no-gutters ">
+                    <Tabs>
+                      <div
+                        style={{
+                          background: colors.shotByShotTabHeader,
+                          boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
+                        }}
+                      >
+                        <TabList className={style.tabList}>
+                          <Tab selectedClassName={style.selectedTab}>
+                            Demographics
+                          </Tab>
+                          <Tab selectedClassName={style.selectedTab}>
+                            Objects
+                          </Tab>
+                          <Tab selectedClassName={style.selectedTab}>Color</Tab>
+                          <div className={style.cancelButton}>
+                            <XCircle onClick={() => this.setState({ selectedImage: false })}></XCircle>
+                          </div>
+                        </TabList>
+                      </div>
+                      <TabPanel>
+                        <div className={style.tabPanel}>
+                          {slideImages.map((image, i) => (
+                            <div
+                              className={
+                                style.tabPanelItem + ' grid-container mt-16'
+                              }
+                              style={{
+                                background: colors.shotByShotBackground,
+                                borderColor: colors.shotByShotBorder,
+                              }}
+                              key={i}
+                            >
+                              <div className="col-5-no-gutters">
+                                <img
+                                  src={image.src}
+                                  className="img-responsive"
+                                />
+                              </div>
+                              <div className="col-7-no-gutters">
+                                <div className="pt-20">
+                                  {image.options.map((option, z) => (
+                                    <div
+                                      className={style.progressbarContainer}
+                                      key={z}
+                                    >
+                                      <div className={style.barOptions}>
+                                        <p>{option.text}</p>
+                                        <p>{option.accurate}% Accurate</p>
+                                      </div>
+                                      <ProgressBar
+                                        width={option.percentage}
+                                        customBarClass={style.progressBar}
+                                        customPercentageClass={style.percentage}
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </TabPanel>
+                      <TabPanel>
+                        <div className={style.tabPanel}>
+                          <div
+                            className={
+                              style.tabPanelItem + ' grid-container mt-16'
+                            }
+                            style={{
+                              background: colors.shotByShotBackground,
+                              borderColor: colors.shotByShotBorder,
+                            }}
+                          >
+                            <div className="col-5-no-gutters">
+                              <img
+                                src="https://picsum.photos/500/270?image=8"
+                                className="img-responsive"
+                              />
+                            </div>
+                            <div className="col-7-no-gutters">
+                              <div className="pt-32">
+                                <div className={style.progressbarContainer}>
+                                  <div className={style.barOptions}>
+                                    <p>Football Helmet</p>
+                                    <p>78% Accurate</p>
+                                  </div>
+                                  <ProgressBar
+                                    width={78}
+                                    customBarClass={style.progressBar}
+                                    customPercentageClass={style.percentage}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </TabPanel>
+                      <TabPanel>
+                        <div className={style.radarChartContainer}>
+                          <RadarChart data={radarData} />
+                        </div>
+                      </TabPanel>
+                    </Tabs>
+                  </div>
+                </div>
+              ) : (
+                  <div>
+                    <div className="col-12" style={{marginBottom: 40}}>
+                      <h2 className={style.sliderHeader}>Shot by Shot</h2>
+                      <div
+                        className={style.sliderContainer}
+                        ref={this.slide}
+                      >
+												<div className={style.shotByShotMask}>
+												</div>
+												<Scrubber horizontal arrows viewBordered height={230} width={1116}>
+                        <div
+                          className={style.sliderWrapper}
+                          style={{
+                            left: this.state.sliderLeftPosition,
+                            width: this.state.sliderTotalWidth * 2,
+                          }}
+                        >
+                          {this.state.scenes.map((scene, i) => (
+														<React.Fragment>
+															<div className={style.image} key={i+110}>
+                              <div
+                                style={{
+                                  width: `${scene.width}px`,
+                                  borderColor: colors.shotByShotBackground,
+                                }}
+                                className={style.setCenter}
+                              >
+                                <div
+                                  className={style.originalImage}
+                                  style={{
+                                    width: `${scene.width}px`,
+                                    height: '160px',
+                                    backgroundImage: `url(${scene.sceneURL})`,
+                                    backgroundSize: `160px 160px`,
+                                    borderColor: colors.shotByShotBackground,
+                                  }}
+                                />
+                              </div>
+                              <img
+                                src={scene.sceneURL}
+                                style={{height: '160px'}}
+                                className={style.hover}
+                                onClick={() => {
+                                  this.handleClick(i)
+                                }}
+                              />
+                            </div>
+														<div className={style.image} key={i+300}>
+														<div
+															style={{
+																width: `${scene.width}px`,
+																borderColor: colors.shotByShotBackground,
+															}}
+															className={style.setCenter}
+														>
+															<div
+																className={style.originalImage}
+																style={{
+																	width: `${scene.width}px`,
+																	height: '160px',
+																	backgroundImage: `url(${scene.sceneURL})`,
+																	backgroundSize: `160px 160px`,
+																	borderColor: colors.shotByShotBackground,
+																}}
+															/>
+														</div>
+														<img
+															src={scene.sceneURL}
+															style={{height: '160px'}}
+															className={style.hover}
+															onClick={() => {
+																this.handleClick(i)
+															}}
+														/>
+													</div>
+														</React.Fragment>
+
+													))}
+                        </div>
+												</Scrubber>
                       </div>
                     </div>
                   </div>

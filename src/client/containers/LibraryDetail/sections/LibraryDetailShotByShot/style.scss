@@ -256,7 +256,6 @@
 .sliderContainer {
   position: relative;
   width: 1120px;
-  height: 170px;
   margin: 0px auto;
   z-index: 2;
   display: flex;
@@ -565,4 +564,14 @@
       }
     }
   }
+}
+
+.shotByShotMask{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	width: 1118px;
+	height: 170px;
+	border: 1px solid #ccc;
+	z-index: 0
 }
