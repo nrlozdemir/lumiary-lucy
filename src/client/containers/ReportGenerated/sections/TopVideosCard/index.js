@@ -26,8 +26,8 @@ class TopVideosCard extends React.Component {
         action={this.getCompetitorTopVideos}
         filters={[
           {
-            type: 'resolution',
-            selectKey: 'competitorTopVideos-resolution',
+            type: 'property',
+            selectKey: 'RTVC-asd',
             placeHolder: 'Resolution',
           },
         ]}
