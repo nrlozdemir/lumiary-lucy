@@ -249,13 +249,40 @@ function* getFlipCardsData() {
   }
 }
 
-function* getTopPerformingFormatData() {
+function* getTopPerformingFormatData({ data }) {
   try {
+    const { brand } = yield select(selectAuthProfile)
+
+    const { platform = 'all' } = data
+
+    const options = {
+      platform,
+      metric: 'cvScore',
+      dateRange: 'week',
+      dateBucket: 'dayOfWeek',
+      display: 'percentage',
+      property: ['format'],
+      url: '/report',
+      brands: [brand.uuid],
+    }
+
+    const topPerformingFormatData = yield call(getDataFromApi, options)
+
     const payload = yield call(getMockPanopticDataApi)
+
+    if (
+      !!topPerformingFormatData.data &&
+      !!topPerformingFormatData.data[brand.name] &&
+      !!topPerformingFormatData.data[brand.name].format
+    ) {
+      console.log('api payload', topPerformingFormatData)
+    }
+
     yield put(
       actions.getTopPerformingFormatDataSuccess(payload.topPerformingFormatData)
     )
   } catch (err) {
+    console.log('getTopPerformingFormatData error', err)
     yield put(actions.getTopPerformingFormatDataError(err))
   }
 }

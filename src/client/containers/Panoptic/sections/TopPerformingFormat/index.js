@@ -49,6 +49,8 @@ class TopPerformingFormat extends React.Component {
       topPerformingFormatData: { data, loading, error },
     } = this.props
 
+    console.log('lineanddonuts', data)
+
     return (
       <LineAndDoughnutChartModule
         moduleKey="Panoptic/Top-Performing-Formats-This-Week-By-CV-Score"
