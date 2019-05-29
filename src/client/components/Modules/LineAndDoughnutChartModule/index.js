@@ -187,7 +187,7 @@ class LineAndDoughnutChartModule extends React.Component {
                 </div>
               </div>
               <div className="col-12-no-gutters">
-								<Scrubber horizontal arrows>
+                <Scrubber horizontal arrows>
                   <div className={style.percentageGraphContainer}>
                     {percentageData.map((chart, i) => (
                       <div className={percentageCol}>
