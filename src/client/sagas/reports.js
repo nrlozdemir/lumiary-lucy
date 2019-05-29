@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects'
+import { takeLatest, call, put, all } from 'redux-saga/effects'
 import axios from 'axios'
 import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
