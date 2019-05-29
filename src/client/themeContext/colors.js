@@ -137,6 +137,7 @@ const dark = {
 
   // percentage bar grap values
   topValueColor: '#ffffff',
+  barChartShadow: '#15192c',
 }
 
 const light = {
@@ -277,6 +278,7 @@ const light = {
 
   // percentage bar grap values
   topValueColor: '#000000',
+  barChartShadow: '#bebebe',
 }
 
 const themes = {
