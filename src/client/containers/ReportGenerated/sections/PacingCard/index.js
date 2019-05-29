@@ -23,7 +23,7 @@ class PacingCard extends React.Component {
 
     return (
       <PacingCardModule
-        data={data}
+        data={data || {}}
         moduleKey={'Reports/PacingCard'}
         title="Pacing For Each Format by Performance"
       />
