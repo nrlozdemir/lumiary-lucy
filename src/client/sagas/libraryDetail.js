@@ -32,18 +32,11 @@ function getBarChartApi({ LibraryDetailId }) {
     .get('/')
     .then((res) => findIdDetail(mock, LibraryDetailId, 'HeaderBarChartMock'))
 }
-function getDoughnutChartApi({ LibraryDetailId }) {
-  //this will use ajax function in utils/api when real data is provided
-  return axios
-    .get('/')
-    .then((res) => findIdDetail(mock, LibraryDetailId, 'DoughnutChartMock'))
-}
+
 function getColorTempApi({ LibraryDetailId }) {
   //this will use ajax function in utils/api when real data is provided
   console.log(LibraryDetailId)
-  return axios
-    .get('/')
-    .then((res) => findIdDetail(mock, LibraryDetailId, 'ColorTempMock'))
+  return axios.get('/').then((res) => findIdDetail(mock, 1, 'ColorTempMock'))
 }
 function getShotByShotApi({ LibraryDetailId }) {
   //this will use ajax function in utils/api when real data is provided
@@ -123,30 +116,17 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
 
 function* getColorTemperatureData({ payload: { LibraryDetailId } }) {
   try {
-    const id = yield select(makeSelectSelectedVideoID())
-    console.log(id)
     const payload = yield call(getColorTempApi, {
       LibraryDetailId,
     })
 
-    let shuffleData = payload.colorTempData
-    shuffleData = shuffleData.map((data) => {
-      data.data.map((item) => {
-        item.x = _.random(-50, 50)
-        item.y = _.random(-50, 50)
-      })
-      return data
-    })
-
     const colors = ['#2fd7c4', '#8562f3', '#5292e5']
-    shuffleData = shuffleData.map((data) => {
+    const shuffleData = payload.colorTempData.map((data) => {
       data.data.map((item, i) => {
         item.color = colors[i]
       })
       return data
     })
-
-    console.log(payload)
 
     yield put({
       type: types.GET_COLOR_TEMP_SUCCESS,

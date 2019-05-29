@@ -131,10 +131,8 @@ export class LibraryDetail extends React.Component {
             id={uuid}
           />
         )}
-        {doughnutLineChartData && doughnutLineChartData.doughnutData && (
-          <LibraryDetailDoughnutChart
-            doughnutData={doughnutLineChartData.doughnutData}
-          />
+        {doughnutLineChartData && (
+          <LibraryDetailDoughnutChart doughnutData={doughnutLineChartData} />
         )}
         {colorTempData && (
           <LibraryDetailColorTemperature
