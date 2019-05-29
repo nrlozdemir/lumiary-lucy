@@ -116,7 +116,7 @@ export class VideoCard extends PureComponent {
                   />
                 </div>
               )}
-              {video.videoUrl && itCanPlay ? (
+              {video.fileName && itCanPlay ? (
                 <div
                   className={style.videoInner}
                   style={{

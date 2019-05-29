@@ -54,9 +54,6 @@ class TotalViewsChart extends React.Component {
       barChart_DatasetOptions
     )
 
-    console.log('bar data', barDataCombine)
-    console.log('donut data', doughnutData)
-
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
     const isBarChartEmpty = isDataSetEmpty(barDataCombine)
 

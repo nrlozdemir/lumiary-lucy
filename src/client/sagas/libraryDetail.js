@@ -9,8 +9,6 @@ import {
 } from 'Reducers/libraryDetail'
 import mock from 'Api/mocks/libraryMock.json'
 import { findIdDetail, getDataFromApi } from 'Utils/api'
-import { types, actions } from 'Reducers/libraryDetail'
-import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { convertDataIntoDatasets, getMaximumValueIndexFromArray } from 'Utils/'
 import { selectAuthProfile } from 'Reducers/auth'
 

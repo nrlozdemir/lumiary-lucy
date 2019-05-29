@@ -36,17 +36,18 @@ export class LibraryDetail extends React.Component {
       getColorTempRequest,
       getShotByShotRequest,
       getSelectedVideo,
+      themeContext: { colors },
     } = this.props
 
-    getVideos()
     if (match.params.videoId) {
-      getBarChartRequest({ LibraryDetailId: match.params.videoId })
+      getSelectedVideo(match.params.videoId)
+      getBarChartRequest({ LibraryDetailId: 1 })
       getDoughnutChartRequest({
         LibraryDetailId: match.params.videoId,
         themeColors: colors,
       })
-      getColorTempRequest({ LibraryDetailId: match.params.videoId })
-      getShotByShotRequest({ LibraryDetailId: match.params.videoId })
+      getColorTempRequest({ LibraryDetailId: 1 })
+      getShotByShotRequest({ LibraryDetailId: 1 })
     }
   }
 
@@ -65,11 +66,12 @@ export class LibraryDetail extends React.Component {
       prevProps.themeContext.colors.ageSliderBorder !== colors.ageSliderBorder
     ) {
       getDoughnutChartRequest({
-        LibraryDetailId: 1,
+        LibraryDetailId: match.params.videoId,
         themeColors: colors,
       })
     }
     if (prevMatch.params.videoId !== match.params.videoId) {
+      getSelectedVideo(match.params.videoId)
       getBarChartRequest({ LibraryDetailId: 1 })
       getColorTempRequest({ LibraryDetailId: 1 })
       getShotByShotRequest({ LibraryDetailId: 1 })
@@ -116,7 +118,7 @@ export class LibraryDetail extends React.Component {
         radarData_DatasetOptions
       )
     }
-
+    console.log(this.props)
     return (
       <React.Fragment>
         {barChartData && cvScore && (
