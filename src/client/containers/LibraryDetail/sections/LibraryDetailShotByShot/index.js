@@ -13,7 +13,7 @@ class LibraryDetailShotByShot extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedImage: 9,
+      selectedImage: null,
       maxValue: 1000,
       sliderValue: 0,
       videoDuration: 185,
@@ -278,8 +278,6 @@ class LibraryDetailShotByShot extends React.Component {
         marginLeft: '0px',
       },
     })
-
-    console.log(this.shotSlider)
   }
 
   render() {
