@@ -15,7 +15,6 @@ import RouterLoading from 'Components/RouterLoading'
 
 class TopVideosCard extends React.Component {
   getTopVideosCard(data) {
-    console.log(this.props)
     const { getTopVideosCardRequest, reportId } = this.props
     getTopVideosCardRequest({ ...data, reportId })
   }

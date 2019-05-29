@@ -41,6 +41,15 @@ function* getVideoReleasesBarChart() {
   }
 }
 
+function* getColorTempData() {
+  try {
+    let { colorTempData } = yield call(getGeneratedReportApi)
+    yield put(actions.getColorTempDataSuccess(colorTempData))
+  } catch (err) {
+    yield put(actions.getColorTempDataFailure(err))
+  }
+}
+
 function* getPacingCardData({ data: { reportId } }) {
   try {
     const { brand } = yield select(selectAuthProfile)
@@ -104,4 +113,5 @@ export default [
     types.GET_VIDEO_RELEASES_BAR_CHART_REQUEST,
     getVideoReleasesBarChart
   ),
+  takeLatest(types.GET_COLOR_TEMP_DATA_REQUEST, getColorTempData),
 ]

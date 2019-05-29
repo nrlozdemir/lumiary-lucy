@@ -1,17 +1,37 @@
 import React from 'react'
-import { platforms } from './options'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose, bindActionCreators } from 'redux'
+import {
+  actions,
+  makeSelectReportsColorTempData,
+} from 'Reducers/generatedReport'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
+
 import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
+
 import style from './style.scss'
 
-class BrandInsightsColorTemperature extends React.Component {
+import { platforms } from './options'
+
+class ColorTemperature extends React.Component {
+  callBack = (data) => {
+    const { getColorTempDataRequest, reportId } = this.props
+    getColorTempDataRequest({ ...data, reportId })
+  }
+
   render() {
-    const { colorTempData, selectWarmColor, handleSelectFilters } = this.props
+    const {
+      colorTempData: { data },
+      selects,
+    } = this.props
+
     const moduleName = 'BrandInsight/ColorTemperature'
     const selectKey = 'PCT-asd'
     const selectValue =
-      this.props.selects.values[moduleName] &&
-      this.props.selects.values[moduleName][selectKey].value &&
-      this.props.selects.values[moduleName][selectKey].value.label
+      selects.values[moduleName] &&
+      selects.values[moduleName][selectKey].value &&
+      selects.values[moduleName][selectKey].value.label
     return (
       <ColorTemperatureModule
         moduleClass={style.moduleContainer}
@@ -21,9 +41,9 @@ class BrandInsightsColorTemperature extends React.Component {
         verticalText
         infoLabels={['Views', 'Likes', 'Comment', 'Shares']}
         moduleKey={'BrandInsight/ColorTemperature'}
-        data={colorTempData}
+        data={data}
         title="Color Temperature / Sentiment Comparison"
-        action={handleSelectFilters}
+        action={this.callBack.bind(this)}
         filters={[
           {
             type: 'colorTempature',
@@ -38,4 +58,16 @@ class BrandInsightsColorTemperature extends React.Component {
   }
 }
 
-export default BrandInsightsColorTemperature
+const mapStateToProps = createStructuredSelector({
+  colorTempData: makeSelectReportsColorTempData(),
+  selects: makeSelectSelectFilters(),
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(ColorTemperature)

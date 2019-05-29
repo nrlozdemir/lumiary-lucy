@@ -25,6 +25,10 @@ export const types = {
     'GeneratedReport/GET_VIDEO_RELEASES_BAR_CHART_SUCCESS',
   GET_VIDEO_RELEASES_BAR_CHART_FAILURE:
     'GeneratedReport/GET_VIDEO_RELEASES_BAR_CHART_FAILURE',
+
+  GET_COLOR_TEMP_DATA_REQUEST: 'GeneratedReport/GET_COLOR_TEMP_DATA_REQUEST',
+  GET_COLOR_TEMP_DATA_SUCCESS: 'GeneratedReport/GET_COLOR_TEMP_DATA_SUCCESS',
+  GET_COLOR_TEMP_DATA_FAILURE: 'GeneratedReport/GET_COLOR_TEMP_DATA_FAILURE',
 }
 export const actions = {
   setSelectedVideo: (payload) => ({
@@ -83,6 +87,19 @@ export const actions = {
     type: types.GET_VIDEO_RELEASES_BAR_CHART_FAILURE,
     error,
   }),
+
+  getColorTempDataRequest: (data) => ({
+    type: types.GET_COLOR_TEMP_DATA_REQUEST,
+    data,
+  }),
+  getColorTempDataSuccess: (payload) => ({
+    type: types.GET_COLOR_TEMP_DATA_SUCCESS,
+    payload,
+  }),
+  getColorTempDataFailure: (error) => ({
+    type: types.GET_COLOR_TEMP_DATA_FAILURE,
+    error,
+  }),
 }
 export const initialState = fromJS({
   selectedVideo: null,
@@ -107,6 +124,12 @@ export const initialState = fromJS({
   },
 
   videoReleasesBarChart: {
+    data: null,
+    loading: true,
+    error: null,
+  },
+
+  colorTempData: {
     data: null,
     loading: true,
     error: null,
@@ -184,6 +207,20 @@ const generatedReportsReducer = (state = initialState, action) => {
       return state
         .setIn(['videoReleasesBarChart', 'error'], fromJS(action.error))
         .setIn(['videoReleasesBarChart', 'loading'], fromJS(false))
+
+    case types.GET_COLOR_TEMP_DATA_REQUEST:
+      return state.setIn(['colorTempData', 'loading'], fromJS(true))
+
+    case types.GET_COLOR_TEMP_DATA_SUCCESS:
+      return state
+        .setIn(['colorTempData', 'data'], fromJS(action.payload))
+        .setIn(['colorTempData', 'loading'], fromJS(false))
+
+    case types.GET_COLOR_TEMP_DATA_FAILURE:
+      return state
+        .setIn(['colorTempData', 'error'], fromJS(action.error))
+        .setIn(['colorTempData', 'loading'], fromJS(false))
+
     default:
       return state
   }
@@ -222,6 +259,15 @@ export const selectVideoReleasesBarChart = (state) =>
 export const makeSelectReportsVideoReleasesBarChart = () =>
   createSelector(
     selectVideoReleasesBarChart,
+    (substate) => substate.toJS()
+  )
+
+export const selectColorTempData = (state) =>
+  state.GeneratedReport.get('colorTempData')
+
+export const makeSelectReportsColorTempData = () =>
+  createSelector(
+    selectColorTempData,
     (substate) => substate.toJS()
   )
 
