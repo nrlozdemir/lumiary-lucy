@@ -256,12 +256,23 @@
 .sliderContainer {
   position: relative;
   width: 1120px;
-  margin: 0px auto;
+  margin: 0px 0px;
   z-index: 2;
   display: flex;
   flex-wrap: nowrap;
   overflow-x: hidden;
   overflow-y: hidden;
+
+  .shotByShotMask{
+    position: absolute;
+    left: 0px;
+    top: 0px;
+    width: 1118px;
+    height: 170px;
+    border: 1px solid #ccc;
+    z-index: 0
+  }
+
   // height: 215px;
 
   .image {
@@ -332,9 +343,9 @@
 }
 .tabPanel {
   // background-color: $color-dark-grey-blue;
-  padding: 10px 30px;
-  height: 375px;
-  overflow-y: scroll;
+  //padding: 10px 30px;
+  //height: 582px;
+  overflow: hidden;
 
   .tabPanelItem {
     // background-color: $color-dark-five;
@@ -566,12 +577,22 @@
   }
 }
 
-.shotByShotMask{
-	position: absolute;
-	left: 0px;
-	top: 0px;
-	width: 1118px;
-	height: 170px;
-	border: 1px solid #ccc;
-	z-index: 0
+.shotTicks{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start
+}
+
+.shotTick{
+  position: relative;
+  font-size: 12px;
+  margin-top: 24px;
+  font-family: "ClanOTNews";
+  cursor: pointer;
+}
+
+.tabPanelReset{
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

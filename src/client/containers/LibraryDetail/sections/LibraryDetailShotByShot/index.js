@@ -1,20 +1,19 @@
 import React from 'react'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
-import Slider from 'rc-slider'
 import SingleItemSlider from 'Components/Sliders/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
 import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
 import style from './style.scss'
-import style2 from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import Scrubber from 'Components/Sliders/Scrubber'
-import XCircle from "Components/Icons/XCircle";
+import XCircle from "Components/Icons/XCircle"
+import classnames from 'classnames'
 
 class LibraryDetailShotByShot extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedImage: null,
+      selectedImage: 9,
       maxValue: 1000,
       sliderValue: 0,
       videoDuration: 185,
@@ -28,7 +27,8 @@ class LibraryDetailShotByShot extends React.Component {
       },
       scenes: this.props.sliderWithThumbnails || [],
     }
-    this.slide = React.createRef()
+    this.refs = []
+    this.shotSlider = React.createRef()
   }
 
   secondToTime(timeInSeconds) {
@@ -244,15 +244,19 @@ class LibraryDetailShotByShot extends React.Component {
         sliderMarksToState[index] = {
           style: { transform: 'translateX(0%)' },
           label: <p className="customDot">{element}</p>,
+          value: element,
         }
       } else if (index === 100) {
         sliderMarksToState[index] = {
           style: { transform: 'translateX(-100%)' },
           label: <p className="customDot">{element}</p>,
+          value: element,
         }
       } else {
         sliderMarksToState[index] = {
+          style: { },
           label: <p className="customDot">{element}</p>,
+          value: element,
         }
       }
     })
@@ -274,6 +278,8 @@ class LibraryDetailShotByShot extends React.Component {
         marginLeft: '0px',
       },
     })
+
+    console.log(this.shotSlider)
   }
 
   render() {
@@ -283,7 +289,7 @@ class LibraryDetailShotByShot extends React.Component {
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
           return (
-            <div
+            <div ref={shotSlider => this.shotSlider = shotSlider}
               className="grid-container col-12 mt-72 mb-72"
               style={{
                 backgroundColor: colors.moduleBackground,
@@ -293,7 +299,7 @@ class LibraryDetailShotByShot extends React.Component {
             >
               {selectedImage ? (
                 <div className={style.sliderTabContainer}>
-                  <div className="col-6-no-gutters bg-black">
+                  <div key={Math.random()} className="col-6-no-gutters bg-black">
                     <div className="mt-48 ml-48 mr-48">
                       <SingleItemSlider
                         customHandleStyle={{
@@ -325,260 +331,50 @@ class LibraryDetailShotByShot extends React.Component {
                           </div>
                         </TabList>
                       </div>
-                      <TabPanel>
-                        <div className={style.tabPanel}>
-                          {slideImages.map((image, i) => (
-                            <div
-                              className={
-                                style.tabPanelItem + ' grid-container mt-16'
-                              }
-                              style={{
-                                background: colors.shotByShotBackground,
-                                borderColor: colors.shotByShotBorder,
-                              }}
-                              key={i}
-                            >
-                              <div className="col-5-no-gutters">
-                                <img
-                                  src={image.src}
-                                  className="img-responsive"
-                                />
-                              </div>
-                              <div className="col-7-no-gutters">
-                                <div className="pt-20">
-                                  {image.options.map((option, z) => (
-                                    <div
-                                      className={style.progressbarContainer}
-                                      key={z}
-                                    >
-                                      <div className={style.barOptions}>
-                                        <p>{option.text}</p>
-                                        <p>{option.accurate}% Accurate</p>
-                                      </div>
-                                      <ProgressBar
-                                        width={option.percentage}
-                                        customBarClass={style.progressBar}
-                                        customPercentageClass={style.percentage}
-                                      />
-                                    </div>
-                                  ))}
-                                </div>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      </TabPanel>
-                      <TabPanel>
-                        <div className={style.tabPanel}>
-                          <div
-                            className={
-                              style.tabPanelItem + ' grid-container mt-16'
-                            }
-                            style={{
-                              background: colors.shotByShotBackground,
-                              borderColor: colors.shotByShotBorder,
-                            }}
-                          >
-                            <div className="col-5-no-gutters">
-                              <img
-                                src="https://picsum.photos/500/270?image=8"
-                                className="img-responsive"
-                              />
-                            </div>
-                            <div className="col-7-no-gutters">
-                              <div className="pt-32">
-                                <div className={style.progressbarContainer}>
-                                  <div className={style.barOptions}>
-                                    <p>Football Helmet</p>
-                                    <p>78% Accurate</p>
-                                  </div>
-                                  <ProgressBar
-                                    width={78}
-                                    customBarClass={style.progressBar}
-                                    customPercentageClass={style.percentage}
+                      <TabPanel className={style.tabPanelReset}>
+                        <div className={classnames(style.tabPanel, "mt-16")}>
+                          <Scrubber vertical width={570} height={600}>
+                            {slideImages.map((image, i) => (
+                              <div
+                                className={classnames(style.tabPanelItem, "grid-container", {
+                                  "mb-16": i !== slideImages.length - 1
+                                })}
+                                style={{
+                                  background: colors.shotByShotBackground,
+                                  borderColor: colors.shotByShotBorder,
+                                  marginRight: "16px !important"
+                                }}
+                                key={i}
+                              >
+                                <div className="col-5-no-gutters">
+                                  <img
+                                    src={image.src}
+                                    className="img-responsive"
                                   />
                                 </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </TabPanel>
-                      <TabPanel>
-                        <div className={style.radarChartContainer}>
-                          <RadarChart data={radarData} />
-                        </div>
-                      </TabPanel>
-                    </Tabs>
-                  </div>
-                </div>
-              ) : (
-                  <div>
-                    <div className="col-12">
-                      <h2 className={style.sliderHeader}>Shot by Shot</h2>
-                      <div
-                        className={style.sliderContainer}
-                        ref={this.slide}
-                        style={{
-													border: `1px solid ${colors.shotByShotBorder}`,
-													height: 170
-                        }}
-                      >
-                        <div
-                          className={style.sliderWrapper}
-                          style={{
-                            left: this.state.sliderLeftPosition,
-                            width: this.state.sliderTotalWidth,
-                          }}
-                        >
-                          {this.state.scenes.map((scene, i) => (
-                            <div className={style.image} key={i}>
-                              <div
-                                style={{
-                                  width: `${scene.width}px`,
-                                  borderColor: colors.shotByShotBackground,
-                                }}
-                                className={style.setCenter}
-                              >
-                                <div
-                                  className={style.originalImage}
-                                  style={{
-                                    width: `${scene.width}px`,
-                                    height: '160px',
-                                    backgroundImage: `url(${scene.sceneURL})`,
-                                    backgroundSize: `160px 160px`,
-                                    borderColor: colors.shotByShotBackground,
-                                  }}
-                                />
-                              </div>
-                              <img
-                                src={scene.sceneURL}
-                                style={{height: '160px'}}
-                                className={style.hover}
-                                onClick={() => {
-                                  this.handleClick(i)
-                                }}
-                              />
-                            </div>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-12 mt-16 mb-16 library-detail-slider">
-                      <div className="library-shotbyshot">
-                        <Slider
-                          step={1}
-                          defaultValue={0}
-                          value={this.state.sliderValue}
-                          onChange={(val) => this.onChangeSlider(val)}
-                          handleStyle={{
-                            ...this.state.sliderHandleStyle,
-                            borderColor: colors.shotByShotBorder,
-                          }}
-                          trackStyle={{
-                            height: '16px',
-                            backgroundColor: 'transparent',
-                            borderColor: colors.shotByShotBorder,
-                          }}
-                          min={0}
-                          max={100}
-                          railStyle={{
-                            height: '16px',
-                            borderRadius: '10px',
-                            backgroundColor: colors.shotByShotBackground,
-                            borderColor: colors.shotByShotBorder,
-                            boxShadow: `0 2px 6px 0 ${
-                              colors.shotByShotBackground
-                              }`,
-                          }}
-                          dotStyle={{
-                            width: '0px',
-                            height: '16px',
-                            border: 0,
-                            top: '0px',
-                          }}
-                          disabled={this.state.sliderDisabled}
-                          marks={this.state.sliderMarks}
-                        />
-                      </div>
-                    </div>
-                  </div>
-								)}
-
-							{selectedImage ? (
-                <div className={style.sliderTabContainer}>
-                  <div className="col-6-no-gutters bg-black">
-                    <div className="mt-48 ml-48 mr-48">
-                      <SingleItemSlider
-                        customHandleStyle={{
-                          background: colors.shotByShotSliderPointer,
-                        }}
-                        slideImages={sliderWithThumbnails}
-                        selectedImage={selectedImage}
-                      />
-                    </div>
-                  </div>
-                  <div className="col-6-no-gutters ">
-                    <Tabs>
-                      <div
-                        style={{
-                          background: colors.shotByShotTabHeader,
-                          boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
-                        }}
-                      >
-                        <TabList className={style.tabList}>
-                          <Tab selectedClassName={style.selectedTab}>
-                            Demographics
-                          </Tab>
-                          <Tab selectedClassName={style.selectedTab}>
-                            Objects
-                          </Tab>
-                          <Tab selectedClassName={style.selectedTab}>Color</Tab>
-                          <div className={style.cancelButton}>
-                            <XCircle onClick={() => this.setState({ selectedImage: false })}></XCircle>
-                          </div>
-                        </TabList>
-                      </div>
-                      <TabPanel>
-                        <div className={style.tabPanel}>
-                          {slideImages.map((image, i) => (
-                            <div
-                              className={
-                                style.tabPanelItem + ' grid-container mt-16'
-                              }
-                              style={{
-                                background: colors.shotByShotBackground,
-                                borderColor: colors.shotByShotBorder,
-                              }}
-                              key={i}
-                            >
-                              <div className="col-5-no-gutters">
-                                <img
-                                  src={image.src}
-                                  className="img-responsive"
-                                />
-                              </div>
-                              <div className="col-7-no-gutters">
-                                <div className="pt-20">
-                                  {image.options.map((option, z) => (
-                                    <div
-                                      className={style.progressbarContainer}
-                                      key={z}
-                                    >
-                                      <div className={style.barOptions}>
-                                        <p>{option.text}</p>
-                                        <p>{option.accurate}% Accurate</p>
+                                <div className="col-7-no-gutters">
+                                  <div className="pt-20">
+                                    {image.options.map((option, z) => (
+                                      <div
+                                        className={style.progressbarContainer}
+                                        key={z}
+                                      >
+                                        <div className={style.barOptions}>
+                                          <p>{option.text}</p>
+                                          <p>{option.accurate}% Accurate</p>
+                                        </div>
+                                        <ProgressBar
+                                          width={option.percentage}
+                                          customBarClass={style.progressBar}
+                                          customPercentageClass={style.percentage}
+                                        />
                                       </div>
-                                      <ProgressBar
-                                        width={option.percentage}
-                                        customBarClass={style.progressBar}
-                                        customPercentageClass={style.percentage}
-                                      />
-                                    </div>
-                                  ))}
+                                    ))}
+                                  </div>
                                 </div>
                               </div>
-                            </div>
-                          ))}
+                            ))}
+                          </Scrubber>
                         </div>
                       </TabPanel>
                       <TabPanel>
@@ -628,23 +424,19 @@ class LibraryDetailShotByShot extends React.Component {
                   <div>
                     <div className="col-12" style={{marginBottom: 40}}>
                       <h2 className={style.sliderHeader}>Shot by Shot</h2>
-                      <div
-                        className={style.sliderContainer}
-                        ref={this.slide}
-                      >
-												<div className={style.shotByShotMask}>
-												</div>
-												<Scrubber horizontal arrows viewBordered height={230} width={1116}>
+                      <div className={style.sliderContainer}>
+                        <div className={style.shotByShotMask}></div>
+                        <Scrubber horizontal arrows viewBordered verticalDisabled height={230} width={1121}>
                         <div
                           className={style.sliderWrapper}
                           style={{
                             left: this.state.sliderLeftPosition,
-                            width: this.state.sliderTotalWidth * 2,
+                            width: this.state.sliderTotalWidth,
                           }}
                         >
                           {this.state.scenes.map((scene, i) => (
-														<React.Fragment>
-															<div className={style.image} key={i+110}>
+                            <React.Fragment>
+                              <div className={style.image} key={i+110}>
                               <div
                                 style={{
                                   width: `${scene.width}px`,
@@ -672,39 +464,18 @@ class LibraryDetailShotByShot extends React.Component {
                                 }}
                               />
                             </div>
-														<div className={style.image} key={i+300}>
-														<div
-															style={{
-																width: `${scene.width}px`,
-																borderColor: colors.shotByShotBackground,
-															}}
-															className={style.setCenter}
-														>
-															<div
-																className={style.originalImage}
-																style={{
-																	width: `${scene.width}px`,
-																	height: '160px',
-																	backgroundImage: `url(${scene.sceneURL})`,
-																	backgroundSize: `160px 160px`,
-																	borderColor: colors.shotByShotBackground,
-																}}
-															/>
-														</div>
-														<img
-															src={scene.sceneURL}
-															style={{height: '160px'}}
-															className={style.hover}
-															onClick={() => {
-																this.handleClick(i)
-															}}
-														/>
-													</div>
-														</React.Fragment>
+                            </React.Fragment>
 
-													))}
+                          ))}
                         </div>
-												</Scrubber>
+                        </Scrubber>
+                      </div>
+                      <div className={style.shotTicks}>
+                        {this.state.sliderMarks && Object.keys(this.state.sliderMarks).map((m, i) => (
+                          <p className={style.shotTick}>
+                            {this.state.sliderMarks[m].value}
+                          </p>
+                        ))}
                       </div>
                     </div>
                   </div>
