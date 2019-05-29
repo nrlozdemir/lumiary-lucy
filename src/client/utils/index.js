@@ -116,7 +116,6 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     )
     singleLevelJSON = true
   }
-
   if (brands.length > 1) {
     datasetsFromValues = brandObjects.map((brand, idx) =>
       Object.keys(brand[Object.keys(brand)[0]]).map(
@@ -126,7 +125,6 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     singleLevelJSON = false
     getValueinObject = brands
   }
-
   // Object.keys(
   //  brandObjects[0][Object.keys(brandObjects[0])]
   // ).map((value) => brandObjects.map((brand) => brand.duration[value]))
@@ -194,10 +192,11 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   )
 }
 
-/* 
+/*
  just using this for the donut chart in marketplace/total views
- so still need to modify this function for other charts 
-*/ 
+ so still need to modify this function for other charts
+*/
+
 const convertMetricDataIntoDatasets = (values, options, ...args) => {
   let datasetsFromValues
 

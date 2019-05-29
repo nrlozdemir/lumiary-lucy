@@ -13,7 +13,6 @@ const TotalCompetitorCard = ({ data }) => {
     TotalCompetitor_DatasetOptions
   )
   const isEmpty = isDataSetEmpty(combineData)
-  console.log(isEmpty)
   return (
     <BarChartModule
       moduleKey={randomKey(10)}
