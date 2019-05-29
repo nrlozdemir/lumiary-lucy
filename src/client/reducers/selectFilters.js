@@ -163,9 +163,7 @@ const selectFiltersReducer = (state = initialState, action) => {
   }
 }
 
-export const selectFiltersState = (state) => {
-  return state.SelectFilters
-}
+export const selectFiltersState = (state) => state.SelectFilters
 
 export const makeSelectSelectFilters = () =>
   createSelector(

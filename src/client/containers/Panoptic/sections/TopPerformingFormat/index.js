@@ -104,7 +104,6 @@ class TopPerformingFormat extends React.Component {
             type: 'platform',
             selectKey: 'PTPF-420blazeit',
             placeHolder: 'Platforms',
-            defaultValue: 'facebook',
           },
         ]}
         percentageData={convertedPercentageData}
