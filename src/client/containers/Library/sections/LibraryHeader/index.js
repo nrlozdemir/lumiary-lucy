@@ -37,9 +37,7 @@ class LibraryHeader extends React.Component {
             .map(({ id, title }) => ({ value: String(id), label: title }))
         )
       }
-    } catch (e) {
-      console.log('error', e)
-    }
+    } catch (e) {}
   }
 
   async onChangeSearch(option, changeFilter, filters) {

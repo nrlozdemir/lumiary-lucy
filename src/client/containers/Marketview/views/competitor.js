@@ -19,6 +19,7 @@ import { chartCombineDataset } from 'Utils'
 import { TopPerformingProperties_DatasetOptions } from 'Containers/Marketview/sections/detail/options'
 
 import style from '../style.scss'
+import { withTheme } from 'ThemeContext/withTheme'
 
 const chartTickOptions = {
   stepSize: 250000,
@@ -41,7 +42,13 @@ export class Competitor extends React.Component {
   }
 
   getSimilarProperties = (data) => {
-    this.props.getSimilarPropertiesRequest(data)
+    const {
+      themeContext: { colors },
+    } = this.props
+    this.props.getSimilarPropertiesRequest({
+      date: data,
+      themeColors: colors,
+    })
   }
 
   getTopPerformingPropertiesByCompetitors = (data) => {
@@ -84,9 +91,6 @@ export class Competitor extends React.Component {
       },
       TopPerformingProperties_DatasetOptions
     )
-
-    console.log(topPerformingPropertiesByCompetitorsData)
-
     return (
       <React.Fragment>
         <div className="grid-collapse">
@@ -158,7 +162,7 @@ export class Competitor extends React.Component {
           <TopSimilarPropertiesModule
             moduleKey="MarketView/TopSimilarPropertiesModule"
             data={similarProperties}
-            title="Top Performing Property Across All Competitors"
+            title="Similar Properties Of Top Videos"
             action={this.getSimilarProperties}
             presentWithDoughnut
             filters={[
@@ -227,4 +231,7 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(Competitor)
+export default compose(
+  withConnect,
+  withTheme
+)(Competitor)
