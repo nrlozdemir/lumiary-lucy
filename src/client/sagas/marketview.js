@@ -1,8 +1,9 @@
 import { takeLatest, call, put, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import _ from 'lodash'
-
 import { types, actions } from 'Reducers/marketview'
+import { selectAuthProfile } from 'Reducers/auth'
+
 import marketviewCompetitorVideosData from 'Api/mocks/marketviewCompetitorVideos.json'
 import marketviewCompetitorTopVideosData from 'Api/mocks/marketviewCompetitorTopVideosMock.json'
 import marketviewSimilarPropertiesData from 'Api/mocks/marketviewSimilarProperties.json'
@@ -16,14 +17,16 @@ import marketviewTopPerformingProperties from 'Api/mocks/marketviewPlatformTopPe
 import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json'
 
 import {
+  compareSharesData,
   convertMultiRequestDataIntoDatasets,
   getBrandAndCompetitors,
   convertDataIntoDatasets,
+  getDateBucketFromRange,
+  convertMetricDataIntoDatasets,
   getMaximumValueIndexFromArray,
 } from 'Utils'
-import { getDataFromApi } from 'Utils/api'
 
-import { selectAuthProfile } from 'Reducers/auth'
+import { getDataFromApi } from 'Utils/api'
 
 function getCompetitorVideosApi() {
   return axios('/').then((res) => marketviewCompetitorVideosData)
@@ -93,6 +96,7 @@ function* getCompetitorTopVideosMarketview({
       dateBucket: 'none',
       display: 'percentage',
       brands: [brand.uuid],
+      url: '/report',
     }
 
     const [facebook, instagram, twitter, youtube] = yield all([
@@ -120,16 +124,20 @@ function* getCompetitorTopVideosMarketview({
   }
 }
 
-function* getSimilarProperties({ data: dateRange }) {
+function* getSimilarProperties(props) {
   try {
     const { brand } = yield select(selectAuthProfile)
-
+    const {
+      data: {
+        date: { dateRange },
+        themeColors,
+      },
+    } = props
     const expectedValues = [
       { key: 'color', title: 'Dominant Color' },
       { key: 'pacing', title: 'Pacing' },
       { key: 'duration', title: 'Duration' },
     ]
-
     const parameters = {
       dateRange,
       metric: 'views',
@@ -137,12 +145,11 @@ function* getSimilarProperties({ data: dateRange }) {
       dateBucket: 'none',
       display: 'percentage',
       brands: [brand.uuid],
+      url: '/report',
     }
 
-    const payloads = yield all(
-      expectedValues.map((item) =>
-        call(getReportDataApi, { ...parameters, property: [item.key] })
-      )
+    const payloads = yield expectedValues.map((item) =>
+      call(getDataFromApi, { ...parameters, property: [item.key] })
     )
 
     const createCustomBackground = (data) => {
@@ -152,29 +159,27 @@ function* getSimilarProperties({ data: dateRange }) {
         }
         return idx === getMaximumValueIndexFromArray(data)
           ? '#2FD7C4'
-          : '#ffffff'
+          : themeColors.textColor
       })
     }
 
-    yield put(
-      actions.getSimilarPropertiesSuccess(
-        expectedValues.map((item, idx) =>
-          convertDataIntoDatasets(
-            payloads[idx],
-            {
-              ...parameters,
-              property: [item.key],
-            },
-            {
-              singleDataset: true,
-              backgroundColor: createCustomBackground(
-                payloads[idx].data[payload.key]
-              ),
-            }
-          )
-        )
-      )
-    )
+    const val = expectedValues.map((payload, idx) => ({
+      ...payload,
+      doughnutChartValues: convertDataIntoDatasets(
+        payloads[idx],
+        {
+          ...parameters,
+          property: [payload.key],
+        },
+        {
+          singleDataset: true,
+          backgroundColor: createCustomBackground(
+            payloads[idx].data[Object.keys(payloads[idx].data)[0]][payload.key]
+          ),
+        }
+      ),
+    }))
+    yield put(actions.getSimilarPropertiesSuccess(val))
   } catch (error) {
     yield put(actions.getSimilarPropertiesFailure(error))
   }
@@ -207,11 +212,50 @@ function* getFormatChartData() {
   }
 }
 
-function* getTotalViewsData(data) {
+function* getTotalViewsData({ data }) {
   try {
+    const { metric, dateRange, platform } = data
+
+    const profile = yield select(selectAuthProfile)
+
+    const brands = getBrandAndCompetitors(profile)
+
+    const options = {
+      url: `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`,
+      requestType: 'GET',
+      brands,
+      metric,
+      platform,
+      dateRange,
+      dateBucket: 'none',
+      display: 'percentage',
+      property: [metric],
+    }
+
     const payload = yield call(getTotalViewsApi)
-    yield put(actions.getTotalViewsSuccess(payload))
+
+    //const barData = yield call(getDataFromApi, options)
+
+    const dateBucket = getDateBucketFromRange(dateRange)
+
+    const doughnutData = yield call(getDataFromApi, options)
+
+    //const convertedBarData = convertDataIntoDatasets(barData, options)
+
+    const convertedDoughnutData = convertMetricDataIntoDatasets(
+      doughnutData,
+      { ...options, dateBucket },
+      { hoverBG: true, singleDataset: true, useBrandLabels: true }
+    )
+
+    yield put(
+      actions.getTotalViewsSuccess({
+        barData: payload.barData,
+        doughnutData: convertedDoughnutData,
+      })
+    )
   } catch (error) {
+    console.log(error)
     yield put(actions.getTotalViewsFailure(error))
   }
 }

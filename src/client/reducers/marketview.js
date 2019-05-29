@@ -238,7 +238,11 @@ export const initialState = fromJS({
   bubbleChartData: [],
   pacingChartData: [],
   formatChartData: [],
-  totalViewsData: {},
+  totalViewsData: {
+    data: {},
+    loading: false,
+    error: null,
+  },
   totalCompetitorViewsData: {},
   marketviewDetailTime: {},
   error: false,
@@ -248,7 +252,9 @@ export const initialState = fromJS({
 })
 
 const marketviewReducer = (state = initialState, action) => {
-  switch (action.type) {
+  const { type, payload } = action
+
+  switch (type) {
     case types.SET_MARKETVIEW_COMPETITOR_SELECTED_VIDEO:
       return state.set('selectedVideo', fromJS(action.payload))
 
@@ -309,16 +315,27 @@ const marketviewReducer = (state = initialState, action) => {
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))
 
+    // TOTAL VIEWS
     case types.GET_MARKETVIEW_TOTALVIEWS_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['totalViewsData', 'loading'], fromJS(true))
+
     case types.GET_MARKETVIEW_TOTALVIEWS_SUCCESS:
+      const { doughnutData, barData } = payload
+
       return state
-        .set('totalViewsData', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(
+          ['totalViewsData', 'data'],
+          fromJS({
+            doughnutData,
+            barData,
+          })
+        )
+        .setIn(['totalViewsData', 'loading'], fromJS(false))
+
     case types.GET_MARKETVIEW_TOTALVIEWS_FAILURE:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['totalViewsData', 'error'], fromJS(action.error))
+        .setIn(['totalViewsData', 'loading'], fromJS(false))
 
     case types.GET_MARKETVIEW_SIMILAR_PROPERTIES_REQUEST:
       return state.set('loading', fromJS(true))

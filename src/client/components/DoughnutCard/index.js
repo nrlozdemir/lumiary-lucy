@@ -1,8 +1,9 @@
 import React from 'react'
 import style from './style.scss'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
-const DoughnutCard = ({ sectionItem, index, colors }) => {
-  const dataset = sectionItem.datasets[0]
+import { capitalizeFirstLetter } from 'Utils/'
+const DoughnutCard = ({ data, index, colors }) => {
+  const dataset = data.datasets[0]
   const topItemIndex = dataset.data.indexOf(Math.max(...dataset.data))
 
   return (
@@ -32,7 +33,7 @@ const DoughnutCard = ({ sectionItem, index, colors }) => {
             }}
           >
             <p className="font-secondary-second font-size-12 text-center">
-              {sectionItem.labels[topItemIndex]
+              {data.labels[topItemIndex]
                 .split('-')
                 .map((c) => capitalizeFirstLetter(c))
                 .join('-')}
@@ -46,7 +47,7 @@ const DoughnutCard = ({ sectionItem, index, colors }) => {
               cutoutPercentage={50}
               customDoughnutContainer={style.customDoughnutContainer}
               customChartWrapper={style.customChartWrapper}
-              data={sectionItem}
+              data={data}
             />
             <p>
               <span className={style.textBold}>
@@ -55,7 +56,7 @@ const DoughnutCard = ({ sectionItem, index, colors }) => {
               of top videos
               <br /> are shot in{' '}
               <span className={style.textBold}>
-                {sectionItem.labels[topItemIndex]
+                {data.labels[topItemIndex]
                   .split('-')
                   .map((c) => capitalizeFirstLetter(c))
                   .join('-')}{' '}

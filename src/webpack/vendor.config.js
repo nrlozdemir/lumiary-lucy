@@ -41,13 +41,14 @@ module.exports = {
       'immutable',
       'lodash',
       'swiper',
+      'react-custom-scrollbars',
 
       '@saypr/bubble-chart',
 
       'chart.js',
       'react-chartjs-2',
       'chartjs-plugin-datalabels',
-      'chartjs-plugin-style',
+      'chartjs-plugin-style'
     ],
   },
 

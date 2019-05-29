@@ -15,6 +15,8 @@ import DaySelection from 'Containers/Marketview/sections/detail/DaySelection'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
 import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
 
+import { withTheme } from 'ThemeContext/withTheme'
+
 /* eslint-disable react/prefer-stateless-function */
 export class Time extends React.Component {
   constructor(props) {
@@ -38,7 +40,13 @@ export class Time extends React.Component {
   }
 
   getSimilarProperties = (data) => {
-    this.props.getSimilarPropertiesRequest(data)
+    const {
+      themeContext: { colors },
+    } = this.props
+    this.props.getSimilarPropertiesRequest({
+      date: data,
+      themeColors: colors,
+    })
   }
 
   getTimeTopVideos = (data) => {
@@ -52,6 +60,7 @@ export class Time extends React.Component {
         selectedVideo,
         marketviewDetailTime: { data, topPerformingData },
         competitorTopVideos,
+        similarProperties,
       },
     } = this.props
     const { activeDay } = this.state
@@ -59,7 +68,6 @@ export class Time extends React.Component {
     const selectedDayData = data && data[activeDay]
 
     if (!selectedDayData) return false
-
     return (
       <React.Fragment>
         <DaySelection
@@ -88,8 +96,8 @@ export class Time extends React.Component {
         />
         <TopSimilarPropertiesModule
           moduleKey="MarketView/TopSimilarPropertiesModule"
-          data={(selectedDayData && selectedDayData.SimilarProperties) || null}
-          title="Top Similar Properties Of Top Videos"
+          data={similarProperties}
+          title="Similar Properties Of Top Videos"
           action={this.getSimilarProperties}
           presentWithDoughnut
           filters={[
@@ -140,4 +148,7 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(Time)
+export default compose(
+  withConnect,
+  withTheme
+)(Time)
