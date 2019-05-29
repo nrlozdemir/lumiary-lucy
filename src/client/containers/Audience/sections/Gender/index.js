@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceGender } from 'Reducers/audience'
 import Module from 'Components/Module'
-import HorizontalStackedBarChart from 'Components/Charts/HorizontalStackedBarChart'
+import HorizontalBarChart from 'Components/Charts/HorizontalBarChart'
 import { barChartOptions } from './options'
 import style from '../../style.scss'
 
@@ -73,17 +73,21 @@ class GenderSection extends React.Component {
       >
         <div className={style.audienceContainer}>
           {data && data.datasets && (
-            <div
-              style={{ display: 'flex' }}
-            >
-              <HorizontalStackedBarChart
-                width={1200}
-                height={310}
-                barData={{
-                  labels: ['Slowest', 'Slow', 'Medium', 'Fast'],
-                  datasets: data.datasets,
-                }}
-                options={barChartOptions}
+            <div className={style.container}>
+              <div className={style.legends}>
+                <div className={style.legend}>Fast</div>
+                <div className={style.legend}>Medium</div>
+                <div className={style.legend}>Slow</div>
+                <div className={style.legend}>Slowest</div>
+              </div>
+              <HorizontalBarChart
+                data={data.datasets[0]}
+                reverse
+                grids={['100%', '50%', '0%']}
+              />
+              <HorizontalBarChart
+                data={data.datasets[1]}
+                grids={['0%', '50%', '100%']}
               />
             </div>
           )}
