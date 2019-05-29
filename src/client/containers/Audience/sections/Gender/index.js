@@ -74,8 +74,7 @@ class GenderSection extends React.Component {
         <div className={style.audienceContainer}>
           {data && data.datasets && (
             <div
-              className="col-12"
-              style={{ display: 'flex', padding: '40px 0' }}
+              style={{ display: 'flex' }}
             >
               <HorizontalStackedBarChart
                 width={1200}
