@@ -158,12 +158,12 @@ function* getPacingCardData({ data: { reportId } }) {
       )
     } else {
       yield put(
-        actions.getPacingCardDataError('Error fetching Pacing Card data')
+        actions.getPacingCardDataFailure('Error fetching Pacing Card data')
       )
     }
   } catch (err) {
     console.log(err)
-    yield put(actions.getPacingCardDataError(err))
+    yield put(actions.getPacingCardDataFailure(err))
   }
 }
 
