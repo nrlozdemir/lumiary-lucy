@@ -284,7 +284,7 @@ function* getTopPerformingFormatData({ data = {} }) {
       const doughnutData = convertDataIntoDatasets(
         dataWithoutDateBuckets,
         options,
-        { singleDataset: true }
+        { singleDataset: true, hoverBG: true, }
       )
 
       yield put(

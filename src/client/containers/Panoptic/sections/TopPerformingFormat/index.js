@@ -64,7 +64,7 @@ class TopPerformingFormat extends React.Component {
       !!percentageData &&
       percentageData.data[profile.brand.name].format
 
-    const percentageData =
+    const convertedPercentageData =
       (!!formatObj &&
         Object.keys(formatObj).map((key, idx) => ({
           key,
@@ -73,19 +73,21 @@ class TopPerformingFormat extends React.Component {
         }))) ||
       []
 
-    const isFormatEmpty = isDataSetEmpty(lineChartData)
+    const isLineChartEmpty = isDataSetEmpty(lineChartData)
 
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
 
-    const isPercentagesEmpty = isDataSetEmpty(percentageData)
+    const isPercentagesEmpty =
+      !convertedPercentageData.length ||
+      convertedPercentageData.every((d) => d.value === 0)
 
     const hasNoData =
       !loading &&
       ((!!lineChartData &&
-        isFormatEmpty &&
+        isLineChartEmpty &&
         !!doughnutData &&
         isDoughnutEmpty &&
-        !!lineChartData &&
+        !!percentageData &&
         isPercentagesEmpty) ||
         isEmpty(data))
 
@@ -100,12 +102,12 @@ class TopPerformingFormat extends React.Component {
         filters={[
           {
             type: 'platform',
-            selectKey: 'platform',
+            selectKey: 'PTPF-420blazeit',
             placeHolder: 'Platforms',
             defaultValue: 'facebook',
           },
         ]}
-        percentageData={percentageData}
+        percentageData={convertedPercentageData}
         doughnutData={doughnutData}
         isEmpty={hasNoData}
       />

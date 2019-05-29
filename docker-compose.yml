@@ -6,7 +6,7 @@ services:
       context: .
       target: development
 
-    # command: [ "npm", "run", "vendor" ]
+    command: [ "npm", "run", "vendor" ]
 
     # Run tests:
     # command: ["npm", "run", "test" ]
