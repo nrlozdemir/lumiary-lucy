@@ -2,15 +2,16 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { Scrollbars } from 'react-custom-scrollbars'
-import style from './style.scss'
+import styles from './style.scss'
 
 const propTypes = {}
 const defaultProps = {
-	width: 1160,
-	height: 342,
-	arrows: false,
-	scrubberHeight: 14,
-	viewBordered: false
+  width: 1160,
+  height: 342,
+  arrows: false,
+  scrubberHeight: 14,
+  viewBordered: false,
+  verticalDisabled: true
 }
 
 const LeftArrow = () => {
@@ -27,31 +28,41 @@ const RightArrow = () => {
 
 export default class Scrubber extends React.Component {
   constructor(props) {
-    super(props);
-    this.state = {};
-    this.handleUpdate = this.handleUpdate.bind(this);
-    this.renderTrackHorizontal = this.renderTrackHorizontal.bind(this);
-    this.renderThumbHorizontal = this.renderThumbHorizontal.bind(this);
-		this.renderView = this.renderView.bind(this);
+    super(props)
+    this.state = {}
+    this.handleUpdate = this.handleUpdate.bind(this)
+    this.renderTrackHorizontal = this.renderTrackHorizontal.bind(this)
+    this.renderThumbHorizontal = this.renderThumbHorizontal.bind(this)
+    this.renderTrackVertical = this.renderTrackVertical.bind(this)
+    this.renderThumbVertical = this.renderThumbVertical.bind(this)
+    this.renderView = this.renderView.bind(this)
   }
 
   handleUpdate(values) {
-    const { top } = values;
-    this.setState({ top });
+    const { top } = values
+    this.setState({ top })
+  }
+
+  renderTrackVertical(props) {
+    return (<div />)
+  }
+
+  renderThumbVertical(props) {
+    return (<div />)
   }
 
   renderTrackHorizontal(props) {
     const inlineStyle = {
-      right: 2,
+      right: 1,
       bottom: 2,
-      left: 2,
+      left: 0,
       borderRadius: Math.floor(parseInt(props.scrubberHeight) / 2),
       boxShadow: '0 2px 6px 0 #e8ecf0',
       border: '1px solid #c6c9d7',
-			background: "#e8ecf0",
+      background: "#e8ecf0",
     }
 
-    return <div className={style.trackHorizontal} style={inlineStyle} />
+    return <div className={styles.trackHorizontal} style={inlineStyle} />
   }
 
   renderThumbHorizontal(props) {
@@ -62,49 +73,64 @@ export default class Scrubber extends React.Component {
       height: props.scrubberHeight,
     }
 
-    return (<div className={style.thumbHorizontal} style={inlineStyle}>
+    return (<div className={styles.thumbHorizontal} style={inlineStyle}>
       {props.arrows && (
-				<div className={style.arrowContainer}>
-					<div className={style.leftArrows}>
-						<LeftArrow />
-						<LeftArrow />
-					</div>
-					<div className={style.rightArrows}>
-						<RightArrow />
-						<RightArrow />
-					</div>
-				</div>
-				)
-			}
-		</div>
-		)
-	}
+        <div className={styles.arrowContainer}>
+          <div className={styles.leftArrows}>
+            <LeftArrow />
+            <LeftArrow />
+          </div>
+          <div className={styles.rightArrows}>
+            <RightArrow />
+            <RightArrow />
+          </div>
+        </div>
+        )
+      }
+    </div>
+    )
+  }
 
-	renderView({ style, ...props }) {
-		console.log(style)
-		console.log(props)
-			const customStyle = {
-					zIndex: 0,
-					margin: "1px 0px 0px 1px"
-			};
-			return (
-					<div className="RENDERVIEW" {...props} style={{ ...style, ...customStyle }}/>
-			);
-	}
+  renderView({ style, ...props }) {
+
+    const { viewBordered, verticalDisabled } = this.props
+    const customStyle = {
+    }
+    const customClass = classnames({
+      [styles.viewBordered]: viewBordered
+    })
+
+    return (
+      <div className={customClass} {...props} style={{ ...style, ...customStyle }} />
+    )
+  }
 
   render() {
-		const { horizontal, width, height, children, arrows, viewBordered } = this.props
+    const { horizontal, vertical, width, height, children, arrows, viewBordered, verticalDisabled } = this.props
     return (
-			horizontal && (<Scrollbars universal
-        renderTrackHorizontal={ () => this.renderTrackHorizontal(this.props) }
-				renderThumbHorizontal={ () => this.renderThumbHorizontal(this.props) }
-				renderView={this.renderView}
-        style={{ width: width, height: height }}>
-        {children}
-      </Scrollbars>)
-    );
+      <React.Fragment>
+        {horizontal ? (
+          <Scrollbars universal
+          renderTrackHorizontal={ () => this.renderTrackHorizontal(this.props) }
+          renderThumbHorizontal={ () => this.renderThumbHorizontal(this.props) }
+          renderTrackVertical={ props => <div {...props} className={styles.emptyScrollBar} /> }
+          renderThumbVertical={ props => <div {...props} className={styles.emptyScrollBar} /> }
+          renderView={ this.renderView }
+          style={{ width: width, height: height }}>
+          {children}
+          </Scrollbars>
+        ) : (
+          <Scrollbars universal
+            renderTrackHorizontal={ props => <div {...props} className={styles.emptyScrollBar} /> }
+            renderThumbHorizontal={ props => <div {...props} className={styles.emptyScrollBar} /> }
+            style={{ width: width, height: height }}>
+            {children}
+          </Scrollbars>
+      )}
+      </React.Fragment>
+    )
   }
 }
 
-Scrubber.propTypes = propTypes;
-Scrubber.defaultProps = defaultProps;
+Scrubber.propTypes = propTypes
+Scrubber.defaultProps = defaultProps
