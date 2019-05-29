@@ -78,7 +78,7 @@ const VideoReleasesBarChartModule = (props) => {
     themeContext: { colors },
   } = props
 
-  if (!data && !data.length) return false
+  if (!data) return false
   const barChartOptions = {
     ...options,
     scales: {
@@ -241,13 +241,13 @@ const VideoReleasesBarChartModule = (props) => {
 }
 
 VideoReleasesBarChartModule.defaultProps = {
-  data: [],
+  data: {},
   legend: [],
   legendEnd: false,
 }
 
 VideoReleasesBarChartModule.propTypes = {
-  data: PropTypes.any.isRequired,
+  data: PropTypes.any,
   moduleKey: PropTypes.string.isRequired,
   title: PropTypes.string,
   filters: PropTypes.array,

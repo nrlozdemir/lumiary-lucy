@@ -83,7 +83,9 @@ export class Module extends React.Component {
       }
     )
 
-    const referencesClass = cx('font-secondary-second', style.references)
+    const referencesClass = cx('font-secondary-second', style.references, {
+      [style['moduleContainerBody--empty']]: isEmpty,
+    })
 
     const moduleContainerBody = cx(style.moduleContainerBody, bodyClass, {
       [style['moduleContainerBody--empty']]: isEmpty,
@@ -114,7 +116,10 @@ export class Module extends React.Component {
                 <div className={referencesClass}>
                   {references.map((ref, index) => (
                     <div className={style.referenceItem} key={index}>
-                      <span className={ref.className} />
+                      {ref.className && <span className={ref.className} />}
+                      {ref.color && (
+                        <span style={{ backgroundColor: ref.color }} />
+                      )}
                       {ref.text}
                     </div>
                   ))}

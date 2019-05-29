@@ -1,12 +1,12 @@
 .percentageCol {
   position: relative;
   margin-top: 40px;
-  padding: 0 40px;
+  padding: 0 54px;
   margin-bottom: 40px;
 
   .chartSectionBadge {
     display: block;
-    margin: 40px 0 56px 24px;
+    margin: 40px 0 56px;
     text-align: center;
 
     span {
@@ -20,24 +20,19 @@
     }
   }
 
-  &:not(:last-child) {
-    border-right: 1px solid $color-dusk;
+  &:not(:last-child):after {
+		content: "";
+		position: absolute;
+		right:-1px;
+		bottom: 40px;
+		height: 120px;
+		width: 1px;
+		background: $color-dusk;
   }
 }
-.scrollableContainer {
+.overflowHidden{
+	overflow: hidden;
+}
+.percentageGraphContainer {
   display: flex;
-  overflow-y: hidden;
-  overflow-x: scroll;
-  &::-webkit-scrollbar {
-    width: 6px;
-    background-color: #21243b;
-    box-shadow: 0 2px 6px 0 #21243b;
-    border: solid 1px #545b79;
-    border-radius: 8px;
-  }
-  &::-webkit-scrollbar-thumb {
-    background-color: #fff;
-    border-radius: 8px;
-    width: 200px;
-  }
 }

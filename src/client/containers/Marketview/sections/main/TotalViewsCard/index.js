@@ -12,22 +12,38 @@ import style from './style.scss'
 import 'chartjs-plugin-datalabels'
 import Module from 'Components/Module'
 
-import { chartCombineDataset } from 'Utils'
+import { chartCombineDataset, isDataSetEmpty } from 'Utils'
 import {
   barChart_DatasetOptions,
   doughnutChart_DatasetOptions,
 } from './options'
 
+import { isEmpty, isEqual } from 'lodash'
+
 class TotalViewsChart extends React.Component {
   callBack = (data, moduleKey) => {
-    if (moduleKey === 'StackedBarChart') {
-      this.props.getTotalViewsRequest(data, moduleKey)
-    }
+    this.props.getTotalViewsRequest(data)
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const {
+      totalViewsData: { data: nextData },
+    } = nextProps
+
+    const {
+      totalViewsData: { data },
+    } = this.props
+
+    return !isEqual(nextData, data)
   }
 
   render() {
     const {
-      totalViewsData: { barData, doughnutData },
+      totalViewsData: {
+        data,
+        loading,
+        data: { barData, doughnutData },
+      },
     } = this.props
 
     const barDataCombine = chartCombineDataset(
@@ -38,19 +54,13 @@ class TotalViewsChart extends React.Component {
       barChart_DatasetOptions
     )
 
-    const doughnutDataCombine = chartCombineDataset(
-      {
-        labels: [
-          'Barstool Sports',
-          'SB Nation',
-          'ESPN',
-          'Scout Media',
-          'Fanside',
-        ],
-        datasets: doughnutData,
-      },
-      doughnutChart_DatasetOptions
-    )
+    const isDoughnutEmpty = isDataSetEmpty(doughnutData)
+    const isBarChartEmpty = isDataSetEmpty(barDataCombine)
+
+    const hasNoData =
+      (!loading &&
+        (!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty)) ||
+      isEmpty(data)
 
     return (
       <Module
@@ -74,46 +84,24 @@ class TotalViewsChart extends React.Component {
             placeHolder: 'Date',
           },
         ]}
+        isEmpty={hasNoData}
       >
         <div className="grid-collapse">
           <div className="col-6 mt-24">
-            {barData && <StackedBarChart barData={barDataCombine} />}
+            <StackedBarChart barData={barDataCombine} />
           </div>
           <div className="col-6">
-            {doughnutData && (
-              <DoughnutChart
-                width={270}
-                height={270}
-                data={doughnutDataCombine}
-                cutoutPercentage={58}
-                fillText="Total Percentage"
-                dataLabelFunction="insertAfter"
-                dataLabelInsert="%"
-                labelPositionLeft
-                labelsData={[
-                  {
-                    color: '#2FD7C4',
-                    data: 'Barstool Sports',
-                  },
-                  {
-                    color: '#8562F3',
-                    data: 'SB Nation',
-                  },
-                  {
-                    color: '#5292E5',
-                    data: 'ESPN',
-                  },
-                  {
-                    color: '#acb0be',
-                    data: 'Scout Media',
-                  },
-                  {
-                    color: '#545B79',
-                    data: 'Fanside',
-                  },
-                ]}
-              />
-            )}
+            <DoughnutChart
+              width={270}
+              height={270}
+              data={doughnutData}
+              cutoutPercentage={58}
+              fillText="Total Percentage"
+              dataLabelFunction="insertAfter"
+              dataLabelInsert="%"
+              labelPositionLeft
+              labelsData={(!!doughnutData && doughnutData.labelsData) || []}
+            />
           </div>
         </div>
       </Module>

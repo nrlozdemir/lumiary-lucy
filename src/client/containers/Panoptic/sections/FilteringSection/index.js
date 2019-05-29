@@ -43,13 +43,14 @@ class PanopticFilteringSection extends Component {
     } = this.props
 
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
+    const isStackedChartEmpty = isDataSetEmpty(stackedChartData)
 
     const hasNoData =
       !loading &&
       ((!!doughnutData &&
-        !!stackedChartData &&
         isDoughnutEmpty &&
-        isDataSetEmpty(stackedChartData)) ||
+        !!stackedChartData &&
+        isStackedChartEmpty) ||
         isEmpty(data))
 
     return (
@@ -88,7 +89,7 @@ class PanopticFilteringSection extends Component {
               height={270}
               data={doughnutData}
               cutoutPercentage={58}
-              fillText={isDoughnutEmpty ? 'No Data' : 'Total Percentage'}
+              fillText="Total Percentage"
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
               labelPositionRight

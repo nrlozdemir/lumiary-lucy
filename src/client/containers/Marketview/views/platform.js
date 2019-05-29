@@ -12,11 +12,9 @@ import { actions, makeSelectMarketview } from 'Reducers/marketview'
 import Slider from 'Components/Modules/SliderModule'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
 import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
-import RouterLoading from 'Components/RouterLoading'
 import BarChartModule from 'Components/Modules/BarChartModule'
 
-import { chartCombineDataset } from 'Utils'
-import { TopPerformingProperties_DatasetOptions } from 'Containers/Marketview/sections/detail/options'
+import { withTheme } from 'ThemeContext/withTheme'
 
 const chartTickOptions = {
   stepSize: 250000,
@@ -43,7 +41,13 @@ export class Platform extends React.Component {
   }
 
   getSimilarProperties = (data) => {
-    this.props.getSimilarPropertiesRequest(data)
+    const {
+      themeContext: { colors },
+    } = this.props
+    this.props.getSimilarPropertiesRequest({
+      date: data,
+      themeColors: colors,
+    })
   }
 
   getCompetitorVideos = (data) => {
@@ -68,15 +72,6 @@ export class Platform extends React.Component {
         topPerformingPropertiesData,
       },
     } = this.props
-
-    const topPerformingPropertiesDataCombineData = chartCombineDataset(
-      {
-        labels: ['Facebook', 'Instagram', 'Twitter', 'Youtube'],
-        datasets: topPerformingPropertiesData,
-      },
-      TopPerformingProperties_DatasetOptions
-    )
-
     return (
       <React.Fragment>
         <Slider
@@ -150,7 +145,7 @@ export class Platform extends React.Component {
         <TopSimilarPropertiesModule
           moduleKey="MarketView/TopSimilarPropertiesModule"
           data={similarProperties}
-          title="Top Similar Properties Of Top Videos"
+          title="Similar Properties Of Top Videos"
           action={this.getSimilarProperties}
           presentWithDoughnut
           filters={[
@@ -164,7 +159,7 @@ export class Platform extends React.Component {
 
         <BarChartModule
           moduleKey="MarketView/Platform/TopPerformingPropertyAcrossAllPlatforms"
-          barData={topPerformingPropertiesDataCombineData}
+          barData={topPerformingPropertiesData}
           title="Top Performing Property Across All Platforms"
           height={55}
           tickOptions={chartTickOptions}
@@ -176,11 +171,19 @@ export class Platform extends React.Component {
               placeHolder: 'Engagement',
             },
             {
-              type: 'pacing',
-              selectKey: 'mwplttpaap-pacing',
-              placeHolder: 'Pacing',
+              type: 'property',
+              selectKey: 'mwplttpaap-property',
+              placeHolder: 'Property',
             },
           ]}
+          references={
+            topPerformingPropertiesData &&
+            topPerformingPropertiesData.datasets &&
+            topPerformingPropertiesData.datasets.map((item) => ({
+              text: item.label,
+              color: item.backgroundColor,
+            }))
+          }
         />
       </React.Fragment>
     )
@@ -200,4 +203,7 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(Platform)
+export default compose(
+  withConnect,
+  withTheme
+)(Platform)

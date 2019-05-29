@@ -1,0 +1,55 @@
+.arrowContainer{
+  position: relative;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: center;
+
+  .leftArrows{
+    margin-left: 13px;
+    margin-top: 2px;
+  }
+
+  .rightArrows{
+    margin-right: 13px;
+    margin-top: 2px;
+  }
+}
+
+.trackHorizontal{
+  position: absolute;
+  cursor: pointer;
+}
+
+.thumbHorizontal{
+
+}
+
+.view{
+  position: relative;
+}
+
+.viewBordered{
+  z-index: 0;
+  margin: 1px 0px 0px 1px
+}
+
+.overflowYHidden{
+  overflow: scroll;
+  overflow-x: scroll;
+  overflow-y: hidden;
+}
+
+.emptyScrollBar{
+  position: absolute;
+  left: -2000px;
+  top: -2000px;
+  display: none;
+  width: 0;
+  height: 0;
+  border: 0;
+  padding: 0;
+  margin: 0;
+}

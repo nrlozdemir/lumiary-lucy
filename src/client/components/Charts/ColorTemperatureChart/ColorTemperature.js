@@ -24,6 +24,7 @@ const ColorTemperature = ({ temp, verticalText, themeContext }) => {
   })
 
   const themes = themeContext.colors
+
   return (
     <div
       className={style.temperatureContent}
