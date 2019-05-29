@@ -17,6 +17,7 @@ import {
   barChart_DatasetOptions,
   doughnutChart_DatasetOptions,
 } from './options'
+import { chartColors } from 'Utils/globals'
 
 import { isEmpty, isEqual } from 'lodash'
 
@@ -62,10 +63,12 @@ class TotalViewsChart extends React.Component {
         (!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty)) ||
       isEmpty(data)
 
+    console.log(doughnutData)
+
     return (
       <Module
         moduleKey={'StackedBarChart'}
-        title="Total Views For All Platforms In The Past Month"
+        title="Total Views For All Platforms"
         action={this.callBack}
         filters={[
           {
@@ -100,7 +103,14 @@ class TotalViewsChart extends React.Component {
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
               labelPositionLeft
-              labelsData={(!!doughnutData && doughnutData.labelsData) || []}
+              labelsData={
+                (!!doughnutData &&
+                  doughnutData.labels.map((label, idx) => ({
+                    data: label,
+                    color: chartColors[idx],
+                  }))) ||
+                []
+              }
             />
           </div>
         </div>

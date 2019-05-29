@@ -22,7 +22,6 @@ import {
   getBrandAndCompetitors,
   convertDataIntoDatasets,
   getDateBucketFromRange,
-  convertMetricDataIntoDatasets,
   getMaximumValueIndexFromArray,
 } from 'Utils'
 
@@ -220,32 +219,38 @@ function* getTotalViewsData({ data }) {
 
     const brands = getBrandAndCompetitors(profile)
 
+    const url = `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`
+
     const options = {
-      url: `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`,
       requestType: 'GET',
       brands,
       metric,
       platform,
       dateRange,
-      dateBucket: 'none',
       display: 'percentage',
       property: [metric],
     }
 
     const payload = yield call(getTotalViewsApi)
 
-    //const barData = yield call(getDataFromApi, options)
-
     const dateBucket = getDateBucketFromRange(dateRange)
 
-    const doughnutData = yield call(getDataFromApi, options)
+    const barData = yield call(getDataFromApi, {
+      ...options,
+      url: `${url}&datebucket=${dateBucket}`,
+    })
+
+    const doughnutData = yield call(getDataFromApi, {
+      ...options,
+      url: `${url}&datebucket=none`,
+    })
 
     //const convertedBarData = convertDataIntoDatasets(barData, options)
 
-    const convertedDoughnutData = convertMetricDataIntoDatasets(
+    const convertedDoughnutData = convertDataIntoDatasets(
       doughnutData,
       { ...options, dateBucket },
-      { hoverBG: true, singleDataset: true, useBrandLabels: true }
+      { hoverBG: true, singleDataset: true, useBrandLabels: true, isMetric: true }
     )
 
     yield put(

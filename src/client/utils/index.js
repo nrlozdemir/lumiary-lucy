@@ -62,6 +62,7 @@ const getLabelWithSuffix = (label, property) => {
     singleDataset: bool,
     borderWidth: object || int
     useBrandLabels: bool,
+    isMetric: bool,
   }
   *
  */
@@ -74,8 +75,10 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   let getValueinObject
 
   const arg = args && !!args[0] && args[0]
-  const brands = Object.keys(values.data)
-  const brandObjects = brands.map((b) => values.data[b])
+  const brands = Object.keys(values.data || values)
+  const brandObjects = brands.map((b) =>
+    values.data ? values.data[b] : values[b]
+  )
   getValueinObject = brandObjects[0][options.property[0]]
 
   const timeBucket =
@@ -116,15 +119,26 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     )
     singleLevelJSON = true
   }
+
   if (brands.length > 1) {
-    datasetsFromValues = brandObjects.map((brand, idx) =>
-      Object.keys(brand[Object.keys(brand)[0]]).map(
-        (key) => brandObjects[idx][Object.keys(brand)[0]][key]
-      )
-    )
+    datasetsFromValues = brandObjects.map((brand, idx) => {
+      const brandProp = Object.keys(brand)[0]
+      const brandDataObj = brandObjects[idx][brandProp]
+      if (arg && arg.isMetric) {
+        return brandDataObj
+      } else {
+        return Object.keys(brand[brandProp]).map((key) => brandDataObj[key])
+      }
+    })
     singleLevelJSON = false
     getValueinObject = brands
   }
+
+  // metric data comes with sum and percent
+  if (arg && arg.isMetric) {
+    datasetsFromValues = datasetsFromValues.map((d) => d.percent || 0)
+  }
+
   // Object.keys(
   //  brandObjects[0][Object.keys(brandObjects[0])]
   // ).map((value) => brandObjects.map((brand) => brand.duration[value]))
@@ -139,6 +153,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     labels
 
   datasetsFromValues = (arg && arg.preparedDatasets) || datasetsFromValues
+
+  console.log('datasetsFromValues', values, datasetsFromValues)
+
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
@@ -188,55 +205,6 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     {
       labels: [],
       datasets: [],
-    }
-  )
-}
-
-/*
- just using this for the donut chart in marketplace/total views
- so still need to modify this function for other charts
-*/
-
-const convertMetricDataIntoDatasets = (values, options, ...args) => {
-  let datasetsFromValues
-
-  const brands = Object.keys(values)
-
-  const arg = args && !!args[0] && args[0]
-
-  // single dataset structure
-  return brands.reduce(
-    (data, brand, idx) => {
-      const { datasets, labelsData } = data
-      const color = chartColors[idx]
-      const brandData = values[brand][0]
-
-      return {
-        labels: [...brands],
-        labelsData: [...labelsData, { data: brand, color }],
-        datasets: [
-          {
-            backgroundColor: [...datasets[0].backgroundColor, color],
-            borderWidth: (arg && arg.borderWidth) || 1,
-            hoverBackgroundColor: [...datasets[0].backgroundColor, color],
-            data: [
-              ...datasets[0].data,
-              !!brandData.percent ? brandData.percent : 0,
-            ],
-          },
-        ],
-      }
-    },
-    {
-      labels: [],
-      labelsData: [],
-      datasets: [
-        {
-          data: [],
-          backgroundColor: [],
-          hoverBackgroundColor: [],
-        },
-      ],
     }
   )
 }
@@ -524,5 +492,4 @@ export {
   convertMultiRequestDataIntoDatasets,
   getDateBucketFromRange,
   getBrandAndCompetitors,
-  convertMetricDataIntoDatasets,
 }
