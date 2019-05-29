@@ -41,7 +41,7 @@ module.exports = {
       'immutable',
       'lodash',
       'swiper',
-	  'react-custom-scrollbars',
+      'react-custom-scrollbars',
 
       '@saypr/bubble-chart',
 
