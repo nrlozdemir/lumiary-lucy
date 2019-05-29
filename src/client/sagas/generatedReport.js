@@ -5,7 +5,7 @@ import { actions, types } from 'Reducers/generatedReport'
 
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
-import { convertDataIntoDatasets } from 'Utils'
+import { convertDataIntoDatasets, getDateBucketFromRange } from 'Utils'
 import { getDataFromApi } from 'Utils/api'
 import _ from 'lodash'
 
@@ -47,6 +47,73 @@ function* getColorTempData() {
     yield put(actions.getColorTempDataSuccess(colorTempData))
   } catch (err) {
     yield put(actions.getColorTempDataFailure(err))
+  }
+}
+
+function* getFilteringSectionData({ data: { dateRange, reportId } }) {
+  try {
+    const { brand } = yield select(selectAuthProfile)
+
+    const options = {
+      reportId,
+      dateRange,
+      metric: 'views',
+      platform: 'all',
+      dateBucket: 'none',
+      display: 'percentage',
+      property: ['duration'],
+      url: '/report',
+      brands: [brand.uuid],
+    }
+
+    const doughnutData = yield call(getDataFromApi, options)
+
+    const dateBucket = getDateBucketFromRange(dateRange)
+
+    const stackedChartData =
+      dateBucket !== 'none'
+        ? yield call(getDataFromApi, {
+            ...options,
+            dateBucket,
+          })
+        : { data: {} }
+
+    if (
+      !!doughnutData.data &&
+      !!doughnutData.data[brand.name] &&
+      !!doughnutData.data[brand.name]['duration'] &&
+      stackedChartData.data
+    ) {
+      yield put(
+        actions.getFilteringSectionDataSuccess({
+          doughnutData: convertDataIntoDatasets(doughnutData, options, {
+            singleDataset: true,
+          }),
+          stackedChartData:
+            (!_.isEmpty(stackedChartData.data) &&
+              convertDataIntoDatasets(
+                stackedChartData,
+                { ...options, dateBucket },
+                { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+              )) ||
+            {},
+          property: 'duration',
+        })
+      )
+    } else {
+      throw 'Error fetching FilteringSection data'
+    }
+  } catch (err) {
+    yield put(
+      // empty data
+      actions.getFilteringSectionDataSuccess({
+        doughnutData: {
+          total: 0,
+        },
+        stackedChartData: {},
+      })
+    )
+    yield put(actions.getFilteringSectionDataFailure(err))
   }
 }
 
@@ -114,4 +181,5 @@ export default [
     getVideoReleasesBarChart
   ),
   takeLatest(types.GET_COLOR_TEMP_DATA_REQUEST, getColorTempData),
+  takeLatest(types.GET_FILTERING_SECTION_DATA_REQUEST, getFilteringSectionData),
 ]

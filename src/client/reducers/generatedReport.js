@@ -29,6 +29,13 @@ export const types = {
   GET_COLOR_TEMP_DATA_REQUEST: 'GeneratedReport/GET_COLOR_TEMP_DATA_REQUEST',
   GET_COLOR_TEMP_DATA_SUCCESS: 'GeneratedReport/GET_COLOR_TEMP_DATA_SUCCESS',
   GET_COLOR_TEMP_DATA_FAILURE: 'GeneratedReport/GET_COLOR_TEMP_DATA_FAILURE',
+
+  GET_FILTERING_SECTION_DATA_REQUEST:
+    'GeneratedReport/GET_FILTERING_SECTION_DATA_REQUEST',
+  GET_FILTERING_SECTION_DATA_SUCCESS:
+    'GeneratedReport/GET_FILTERING_SECTION_DATA_SUCCESS',
+  GET_FILTERING_SECTION_DATA_FAILURE:
+    'GeneratedReport/GET_FILTERING_SECTION_DATA_FAILURE',
 }
 export const actions = {
   setSelectedVideo: (payload) => ({
@@ -100,6 +107,19 @@ export const actions = {
     type: types.GET_COLOR_TEMP_DATA_FAILURE,
     error,
   }),
+
+  getFilteringSectionDataRequest: (data) => ({
+    type: types.GET_FILTERING_SECTION_DATA_REQUEST,
+    data,
+  }),
+  getFilteringSectionDataSuccess: (payload) => ({
+    type: types.GET_FILTERING_SECTION_DATA_SUCCESS,
+    payload,
+  }),
+  getFilteringSectionDataFailure: (error) => ({
+    type: types.GET_FILTERING_SECTION_DATA_FAILURE,
+    error,
+  }),
 }
 export const initialState = fromJS({
   selectedVideo: null,
@@ -132,6 +152,12 @@ export const initialState = fromJS({
   colorTempData: {
     data: null,
     loading: true,
+    error: null,
+  },
+
+  filteringSectionData: {
+    data: {},
+    loading: false,
     error: null,
   },
 })
@@ -221,6 +247,27 @@ const generatedReportsReducer = (state = initialState, action) => {
         .setIn(['colorTempData', 'error'], fromJS(action.error))
         .setIn(['colorTempData', 'loading'], fromJS(false))
 
+    case types.GET_FILTERING_SECTION_DATA_REQUEST:
+      return state.setIn(['filteringSectionData', 'loading'], fromJS(true))
+
+    case types.GET_FILTERING_SECTION_DATA_SUCCESS:
+      const { doughnutData, stackedChartData } = action.payload
+
+      return state
+        .setIn(
+          ['filteringSectionData', 'data'],
+          fromJS({
+            doughnutData,
+            stackedChartData,
+          })
+        )
+        .setIn(['filteringSectionData', 'loading'], fromJS(false))
+
+    case types.GET_FILTERING_SECTION_DATA_FAILURE:
+      return state
+        .setIn(['filteringSectionData', 'error'], fromJS(action.error))
+        .setIn(['filteringSectionData', 'loading'], fromJS(false))
+
     default:
       return state
   }
@@ -268,6 +315,15 @@ export const selectColorTempData = (state) =>
 export const makeSelectReportsColorTempData = () =>
   createSelector(
     selectColorTempData,
+    (substate) => substate.toJS()
+  )
+
+const selectReportsFilteringSectionDomain = (state) =>
+  state.GeneratedReport.get('filteringSectionData')
+
+export const makeSelectReportsFilteringSection = () =>
+  createSelector(
+    selectReportsFilteringSectionDomain,
     (substate) => substate.toJS()
   )
 
