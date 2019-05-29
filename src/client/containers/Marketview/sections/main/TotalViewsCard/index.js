@@ -63,7 +63,8 @@ class TotalViewsChart extends React.Component {
         (!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty)) ||
       isEmpty(data)
 
-    console.log(doughnutData)
+    console.log('totalviewsBarData', barDataCombine)
+
 
     return (
       <Module

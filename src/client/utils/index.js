@@ -62,7 +62,7 @@ const getLabelWithSuffix = (label, property) => {
     singleDataset: bool,
     borderWidth: object || int
     useBrandLabels: bool,
-    isMetric: bool,
+    isMetric: bool - true if the endpoint used was /metric,
   }
   *
  */
@@ -136,6 +136,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
 
   // metric data comes with sum and percent
   if (arg && arg.isMetric) {
+    console.log(datasetsFromValues)
     datasetsFromValues = datasetsFromValues.map((d) => d.percent || 0)
   }
 
@@ -153,8 +154,6 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     labels
 
   datasetsFromValues = (arg && arg.preparedDatasets) || datasetsFromValues
-
-  console.log('datasetsFromValues', values, datasetsFromValues)
 
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {

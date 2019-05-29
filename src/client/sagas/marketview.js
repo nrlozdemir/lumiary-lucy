@@ -245,12 +245,19 @@ function* getTotalViewsData({ data }) {
       url: `${url}&datebucket=none`,
     })
 
-    //const convertedBarData = convertDataIntoDatasets(barData, options)
+    const convertedBarData = convertDataIntoDatasets(barData, options, {
+      isMetric: true,
+    })
 
     const convertedDoughnutData = convertDataIntoDatasets(
       doughnutData,
       { ...options, dateBucket },
-      { hoverBG: true, singleDataset: true, useBrandLabels: true, isMetric: true }
+      {
+        hoverBG: true,
+        singleDataset: true,
+        useBrandLabels: true,
+        isMetric: true,
+      }
     )
 
     yield put(
