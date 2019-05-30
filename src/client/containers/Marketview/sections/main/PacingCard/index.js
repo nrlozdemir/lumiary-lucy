@@ -31,6 +31,8 @@ class PacingCard extends Component {
       pacingCard_DatasetOptions
     )
 
+    console.log('pacingcard', combineData)
+    
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (

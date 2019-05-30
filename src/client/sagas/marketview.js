@@ -195,8 +195,27 @@ function* getBubbleChartData() {
 
 function* getPacingChartData() {
   try {
-    const payload = yield call(getPacingChartApi)
-    yield put(actions.getPacingChartSuccess(payload))
+    const { brand } = yield select(selectAuthProfile)
+
+    const competitors =
+      !!brand.competitors &&
+      !!brand.competitors.length &&
+      brand.competitors.map((c) => c.uuid)
+
+    const options = {
+      competitors,
+    }
+
+    const url = `/brand/${brand.uuid}/properties?metric=shares&daterange=month${
+      !!competitors ? '&allcompetitors=true' : ''
+    }`
+
+    const mockData = yield call(getPacingChartApi)
+    const payload = yield call(getDataFromApi, options, url, 'GET')
+
+    console.log(mockData, payload)
+
+    yield put(actions.getPacingChartSuccess(mockData))
   } catch (error) {
     yield put(actions.getPacingChartFailure(error))
   }
@@ -217,13 +236,9 @@ function* getTotalViewsData({ data }) {
 
     const profile = yield select(selectAuthProfile)
 
-    const brands = getBrandAndCompetitors(profile)
-
     const url = `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`
 
     const options = {
-      requestType: 'GET',
-      brands,
       metric,
       platform,
       dateRange,
@@ -233,15 +248,19 @@ function* getTotalViewsData({ data }) {
 
     const dateBucket = getDateBucketFromRange(dateRange)
 
-    const barData = yield call(getDataFromApi, {
-      ...options,
-      url: `${url}&datebucket=${dateBucket}`,
-    })
+    const barData = yield call(
+      getDataFromApi,
+      null,
+      `${url}&datebucket=${dateBucket}`,
+      'GET'
+    )
 
-    const doughnutData = yield call(getDataFromApi, {
-      ...options,
-      url: `${url}&datebucket=none`,
-    })
+    const doughnutData = yield call(
+      getDataFromApi,
+      null,
+      `${url}&datebucket=none`,
+      'GET'
+    )
 
     const convertedBarData = convertDataIntoDatasets(
       barData,
