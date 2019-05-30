@@ -74,4 +74,10 @@ export const selectAuthDomain = (state) => state.auth
 
 export const selectAuthProfile = (state) => state.auth.profile
 
+export const makeSelectAuthProfile = () =>
+  createSelector(
+    selectAuthProfile,
+    (substate) => substate
+  )
+
 export default reducer

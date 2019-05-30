@@ -31,7 +31,7 @@ class PanopticColorTemperature extends React.Component {
         chartWrapperClass={style.colorTemperatureChartWrapper}
         borderLess
         verticalText
-        infoLabels={['Views', 'Likes', 'Comment', 'Shares']}
+        infoLabels={['Views', 'Likes', 'Comments', 'Shares']}
         moduleKey={moduleName}
         data={data}
         title="Color Temperature / Sentiment Comparison"

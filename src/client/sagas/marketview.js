@@ -22,7 +22,6 @@ import {
   getBrandAndCompetitors,
   convertDataIntoDatasets,
   getDateBucketFromRange,
-  convertMetricDataIntoDatasets,
   getMaximumValueIndexFromArray,
 } from 'Utils'
 
@@ -220,37 +219,51 @@ function* getTotalViewsData({ data }) {
 
     const brands = getBrandAndCompetitors(profile)
 
+    const url = `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`
+
     const options = {
-      url: `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`,
       requestType: 'GET',
       brands,
       metric,
       platform,
       dateRange,
-      dateBucket: 'none',
       display: 'percentage',
       property: [metric],
     }
 
-    const payload = yield call(getTotalViewsApi)
-
-    //const barData = yield call(getDataFromApi, options)
-
     const dateBucket = getDateBucketFromRange(dateRange)
 
-    const doughnutData = yield call(getDataFromApi, options)
+    const barData = yield call(getDataFromApi, {
+      ...options,
+      url: `${url}&datebucket=${dateBucket}`,
+    })
 
-    //const convertedBarData = convertDataIntoDatasets(barData, options)
+    const doughnutData = yield call(getDataFromApi, {
+      ...options,
+      url: `${url}&datebucket=none`,
+    })
 
-    const convertedDoughnutData = convertMetricDataIntoDatasets(
-      doughnutData,
+    const convertedBarData = convertDataIntoDatasets(
+      barData,
       { ...options, dateBucket },
-      { hoverBG: true, singleDataset: true, useBrandLabels: true }
+      {
+        isMetric: true,
+      }
     )
 
+    const convertedDoughnutData = convertDataIntoDatasets(
+      doughnutData,
+      { ...options, dateBucket: 'none' },
+      {
+        hoverBG: true,
+        singleDataset: true,
+        useBrandLabels: true,
+        isMetric: true,
+      }
+    )
     yield put(
       actions.getTotalViewsSuccess({
-        barData: payload.barData,
+        barData: convertedBarData,
         doughnutData: convertedDoughnutData,
       })
     )
@@ -331,15 +344,36 @@ function* getTopPerformingPropertiesData({
       )
     )
   } catch (error) {
+    console.log('error =>', error)
     yield put(actions.getTopPerformingPropertiesFailure(error))
   }
 }
 
-function* getTopPerformingPropertiesByCompetitorsData() {
+function* getTopPerformingPropertiesByCompetitorsData({
+  payload: { dateRange },
+}) {
   try {
-    const payload = yield call(getGetTopPerformingPropertiesByCompetitorsApi)
-    yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess(payload))
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
+    const options = {
+      url: '/report',
+      metric: 'views',
+      // platform: 'all',
+      dateRange: dateRange,
+      dateBucket: 'none',
+      property: ['pacing'],
+      brands: [...competitors],
+    }
+    const payload = yield call(getDataFromApi, { ...options })
+    yield put(
+      actions.getTopPerformingPropertiesByCompetitorsSuccess(
+        convertDataIntoDatasets(payload, options, {
+          useBrandLabels: true,
+        })
+      )
+    )
   } catch (error) {
+    console.log('error', error)
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))
   }
 }

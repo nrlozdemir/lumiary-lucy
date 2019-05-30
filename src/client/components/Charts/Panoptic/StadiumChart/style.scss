@@ -10,8 +10,8 @@ $min-height: 110;
 
 .colorList {
   display: flex;
-  flex-direction: column;
-  margin-left: 70px;
+	flex-direction: column;
+	margin: 0px auto;
 
   .colorListItem {
     display: flex;

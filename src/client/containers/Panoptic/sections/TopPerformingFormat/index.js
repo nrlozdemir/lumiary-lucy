@@ -3,11 +3,14 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, makeSelectTopPerformingFormat } from 'Reducers/panoptic'
-import { chartCombineDataset } from 'Utils'
+import { chartCombineDataset, isDataSetEmpty } from 'Utils'
 
 import LineAndDoughnutChartModule from 'Components/Modules/LineAndDoughnutChartModule'
 import { lineChartData_DatasetOptions, lineChartOptions } from './options'
+import { isEmpty } from 'lodash'
+import { chartColors } from 'Utils/globals'
 
 class TopPerformingFormat extends React.Component {
   componentDidMount() {
@@ -46,42 +49,73 @@ class TopPerformingFormat extends React.Component {
 
   render() {
     const {
-      topPerformingFormatData: { data, loading, error },
+      profile,
+      topPerformingFormatData: {
+        data,
+        data: { doughnutData, percentageData, lineChartData },
+        loading,
+        error,
+      },
     } = this.props
+
+    const formatObj =
+      !!profile &&
+      !!profile.brand &&
+      !!percentageData &&
+      percentageData.data[profile.brand.name].format
+
+    const convertedPercentageData =
+      (!!formatObj &&
+        Object.keys(formatObj).map((key, idx) => ({
+          key,
+          color: chartColors[idx],
+          value: formatObj[key],
+        }))) ||
+      []
+
+    const isLineChartEmpty = isDataSetEmpty(lineChartData)
+
+    const isDoughnutEmpty = isDataSetEmpty(doughnutData)
+
+    const isPercentagesEmpty =
+      !convertedPercentageData.length ||
+      convertedPercentageData.every((d) => d.value === 0)
+
+    const hasNoData =
+      !loading &&
+      ((!!lineChartData &&
+        isLineChartEmpty &&
+        !!doughnutData &&
+        isDoughnutEmpty &&
+        !!percentageData &&
+        isPercentagesEmpty) ||
+        isEmpty(data))
 
     return (
       <LineAndDoughnutChartModule
         moduleKey="Panoptic/Top-Performing-Formats-This-Week-By-CV-Score"
         title="Top Performing Formats This Week By CV Score"
         action={this.callBack}
-        lineChartData={this.combineChartData({
-          labels: [
-            'Sunday',
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-            'Saturday',
-          ],
-          datasets: data,
-        })}
+        lineChartData={lineChartData}
         lineChartOptions={lineChartOptions}
         customCallbackFunc={this.customCallbackFunc}
         filters={[
           {
             type: 'platform',
-            selectKey: 'platform',
+            selectKey: 'PTPF-420blazeit',
             placeHolder: 'Platforms',
-            defaultValue: 'facebook',
           },
         ]}
+        percentageData={convertedPercentageData}
+        doughnutData={doughnutData}
+        isEmpty={hasNoData}
       />
     )
   }
 }
 
 const mapStateToProps = createStructuredSelector({
+  profile: makeSelectAuthProfile(),
   topPerformingFormatData: makeSelectTopPerformingFormat(),
 })
 
