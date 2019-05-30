@@ -71,7 +71,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   let labels
   let datasetsFromValues
   let singleLevelJSON
-  let customKey = false
+  let customKeys
   let getValueinObject
 
   const arg = args && !!args[0] && args[0]
@@ -136,8 +136,12 @@ const convertDataIntoDatasets = (values, options, ...args) => {
 
   // metric data comes with sum and percent
   if (arg && arg.isMetric) {
-    console.log(datasetsFromValues)
-    datasetsFromValues = datasetsFromValues.map((d) => d.percent || 0)
+    datasetsFromValues = datasetsFromValues.map((d) =>
+      !timeBucket
+        ? d.percent || 0
+        : Object.keys(d.percents).map((key) => d.percents[key] || 0)
+    )
+    customKeys = brands
   }
 
   // Object.keys(
@@ -189,7 +193,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
             datasets: [
               ...datasets,
               {
-                label: customKey ? labels[idx] : key,
+                label: !!customKeys ? customKeys[idx] : key,
                 backgroundColor: color,
                 borderColor: color,
                 borderWidth: (arg && arg.borderWidth) || 1,

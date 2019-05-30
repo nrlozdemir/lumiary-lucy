@@ -231,8 +231,6 @@ function* getTotalViewsData({ data }) {
       property: [metric],
     }
 
-    const payload = yield call(getTotalViewsApi)
-
     const dateBucket = getDateBucketFromRange(dateRange)
 
     const barData = yield call(getDataFromApi, {
@@ -245,13 +243,17 @@ function* getTotalViewsData({ data }) {
       url: `${url}&datebucket=none`,
     })
 
-    const convertedBarData = convertDataIntoDatasets(barData, options, {
-      isMetric: true,
-    })
+    const convertedBarData = convertDataIntoDatasets(
+      barData,
+      { ...options, dateBucket },
+      {
+        isMetric: true,
+      }
+    )
 
     const convertedDoughnutData = convertDataIntoDatasets(
       doughnutData,
-      { ...options, dateBucket },
+      { ...options, dateBucket: 'none' },
       {
         hoverBG: true,
         singleDataset: true,
@@ -259,10 +261,9 @@ function* getTotalViewsData({ data }) {
         isMetric: true,
       }
     )
-
     yield put(
       actions.getTotalViewsSuccess({
-        barData: payload.barData,
+        barData: convertedBarData,
         doughnutData: convertedDoughnutData,
       })
     )

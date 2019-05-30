@@ -47,24 +47,13 @@ class TotalViewsChart extends React.Component {
       },
     } = this.props
 
-    const barDataCombine = chartCombineDataset(
-      {
-        labels: ['Week 1', 'Week 2', 'Week 3', 'Week 4'],
-        datasets: barData,
-      },
-      barChart_DatasetOptions
-    )
-
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
-    const isBarChartEmpty = isDataSetEmpty(barDataCombine)
+    const isBarChartEmpty = isDataSetEmpty(barData)
 
     const hasNoData =
       (!loading &&
         (!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty)) ||
       isEmpty(data)
-
-    console.log('totalviewsBarData', barDataCombine)
-
 
     return (
       <Module
@@ -92,7 +81,7 @@ class TotalViewsChart extends React.Component {
       >
         <div className="grid-collapse">
           <div className="col-6 mt-24">
-            <StackedBarChart barData={barDataCombine} />
+            <StackedBarChart barData={barData} />
           </div>
           <div className="col-6">
             <DoughnutChart
