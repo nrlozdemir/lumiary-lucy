@@ -331,15 +331,36 @@ function* getTopPerformingPropertiesData({
       )
     )
   } catch (error) {
+    console.log('error =>', error)
     yield put(actions.getTopPerformingPropertiesFailure(error))
   }
 }
 
-function* getTopPerformingPropertiesByCompetitorsData() {
+function* getTopPerformingPropertiesByCompetitorsData({
+  payload: { dateRange },
+}) {
   try {
-    const payload = yield call(getGetTopPerformingPropertiesByCompetitorsApi)
-    yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess(payload))
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
+    const options = {
+      url: '/report',
+      metric: 'views',
+      // platform: 'all',
+      dateRange: dateRange,
+      dateBucket: 'none',
+      property: ['pacing'],
+      brands: [...competitors],
+    }
+    const payload = yield call(getDataFromApi, { ...options })
+    yield put(
+      actions.getTopPerformingPropertiesByCompetitorsSuccess(
+        convertDataIntoDatasets(payload, options, {
+          useBrandLabels: true,
+        })
+      )
+    )
   } catch (error) {
+    console.log('error', error)
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))
   }
 }

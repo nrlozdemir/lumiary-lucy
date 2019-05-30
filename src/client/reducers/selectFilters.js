@@ -36,7 +36,7 @@ export const defaultFilters = {
   duration: '0-15',
   pacing: 'fast',
   videoFormat: 'liveAction',
-  property: 'aspectRatio',
+  property: 'pacing',
   audienceAge: '10-',
   audienceGender: 'male',
   talentAge: '10-',

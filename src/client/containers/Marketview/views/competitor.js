@@ -77,20 +77,6 @@ export class Competitor extends React.Component {
         topPerformingPropertiesByCompetitorsData,
       },
     } = this.props
-
-    const topPerformingPropertiesDataCombineData = chartCombineDataset(
-      {
-        labels: [
-          'Barstool Sports',
-          'SB Nation',
-          'ESPN',
-          'Scout Media',
-          'Fanside',
-        ],
-        datasets: topPerformingPropertiesByCompetitorsData,
-      },
-      TopPerformingProperties_DatasetOptions
-    )
     return (
       <React.Fragment>
         <div className="grid-collapse">
@@ -176,17 +162,12 @@ export class Competitor extends React.Component {
           <BarChartModule
             moduleKey="MarketView/topPerformingPropertiesByCompetitors"
             containerClass={style.detailTopPerformingPropertyContainer}
-            barData={topPerformingPropertiesDataCombineData}
+            barData={topPerformingPropertiesByCompetitorsData}
             tickOptions={chartTickOptions}
-            title="Top Performing Property Across All Competitors"
+            title="Top Performing Property, Pacing, Across All Competitors"
             height={50}
             action={this.getTopPerformingPropertiesByCompetitors}
             filters={[
-              {
-                type: 'metric',
-                selectKey: 'engagement',
-                placeHolder: 'engagement',
-              },
               {
                 type: 'dateRange',
                 selectKey: 'dateRange',
