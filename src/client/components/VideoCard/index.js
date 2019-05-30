@@ -61,7 +61,6 @@ export class VideoCard extends PureComponent {
       itCanPlay: false,
     })
   }
-
   render() {
     const { video, options = options || {}, muted = true, id } = this.props
     const { itCanPlay } = this.state
@@ -76,6 +75,7 @@ export class VideoCard extends PureComponent {
       },
       this.state.hoverReady && style.hoverReady
     )
+		console.log(video)
 
     const iconClass = classnames(
       socialIconSelector(video.socialIcon),
@@ -95,7 +95,7 @@ export class VideoCard extends PureComponent {
               onMouseEnter={() => this.videoMouseEnterPlay()}
               onMouseLeave={() => this.videoMouseLeavePlay()}
             >
-              {video.cvScore && (
+              {video['cvScores.value'] && (
                 <div
                   className={style.cardCornerInfo}
                   style={{
@@ -103,10 +103,10 @@ export class VideoCard extends PureComponent {
                     color: colors.labelColor,
                   }}
                 >
-                  <span>{video.cvScore}</span>
+                  <span>{video['cvScores.value']}</span>
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={video.cvScore}
+                    percentage={video['cvScores.value']}
                     color="green"
                     disableLabels
                     width={60}
