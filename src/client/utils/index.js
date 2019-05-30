@@ -382,20 +382,26 @@ const radarChartCalculate = (data) => {
 const getMaximumValueIndexFromArray = (data) =>
   Object.values(data).indexOf(Math.max(...Object.values(data)))
 const compareSharesData = (data) => {
-  return data.map((item) => {
+  return data.map((item, index) => {
+    const keyName = Object.keys(item.data)[0]
+    const colorData = item.data[keyName].color
+    const labels = Object.entries(colorData)
+    const type = item.platform ? item.platform : keyName
     return {
-      type: capitalizeFirstLetter(item.platform),
+      type: capitalizeFirstLetter(type),
       datas: {
-        labels: Object.keys(item.data.color).map((color) => ({
-          name: color
-            .split('-')
-            .map((c) => capitalizeFirstLetter(c))
-            .join('-'),
-          count: item.data.color[color],
-        })),
+        labels: labels.map((color, indx) => {
+          return {
+            name: color[0]
+              .split('-')
+              .map((c) => capitalizeFirstLetter(c))
+              .join('-'),
+            count: color[1],
+          }
+        }),
         datasets: [
           {
-            label: capitalizeFirstLetter(item.platform),
+            label: capitalizeFirstLetter(type),
           },
         ],
       },

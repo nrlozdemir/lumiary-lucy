@@ -186,12 +186,16 @@ function* getPacingCardData({ data }) {
 
 function* getCompareSharesData({ data: { dateRange } }) {
   try {
+    const { brand } = yield select(selectAuthProfile)
+
+    // TODO: We need change parameters when to do multiple select filter (Shares on Facebook & YouTube)
     const parameters = {
+      url: '/report',
       dateRange,
       metric: 'shares',
       property: ['color'],
       dateBucket: 'none',
-      url: '/report',
+      brands: [brand.uuid],
     }
 
     const payload = yield all([
@@ -211,6 +215,7 @@ function* getCompareSharesData({ data: { dateRange } }) {
       )
     )
   } catch (err) {
+    console.log('err', err)
     yield put(actions.getCompareSharesDataError(err))
   }
 }
@@ -284,7 +289,7 @@ function* getTopPerformingFormatData({ data = {} }) {
       const doughnutData = convertDataIntoDatasets(
         dataWithoutDateBuckets,
         options,
-        { singleDataset: true, hoverBG: true, }
+        { singleDataset: true, hoverBG: true }
       )
 
       yield put(
