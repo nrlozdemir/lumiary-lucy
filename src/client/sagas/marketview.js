@@ -206,17 +206,20 @@ function* getPacingChartData() {
       competitors,
     }
 
-    const url = `/brand/${brand.uuid}/properties?metric=shares&daterange=month${
-      !!competitors ? '&allcompetitors=true' : ''
-    }`
+    const url = `/brand/${brand.uuid}/properties?metric=shares&daterange=month`
+    //${!!competitors ? '&allcompetitors=true' : ''}`
 
-    const mockData = yield call(getPacingChartApi)
     const payload = yield call(getDataFromApi, options, url, 'GET')
 
-    console.log(mockData, payload)
+    const pacingChartData = convertDataIntoDatasets(
+      payload,
+      { property: ['pacing'] },
+      { customBorderColor: '#373F5B', singleDataset: true, noBrandKeys: true }
+    )
 
-    yield put(actions.getPacingChartSuccess(mockData))
+    yield put(actions.getPacingChartSuccess(pacingChartData))
   } catch (error) {
+    console.log(error)
     yield put(actions.getPacingChartFailure(error))
   }
 }
@@ -248,27 +251,21 @@ function* getTotalViewsData({ data }) {
 
     const dateBucket = getDateBucketFromRange(dateRange)
 
-    const barData = yield call(
-      getDataFromApi,
-      null,
-      `${url}&datebucket=${dateBucket}`,
-      'GET'
-    )
+    const [barData, doughnutData] = yield all([
+      call(getDataFromApi, null, `${url}&datebucket=${dateBucket}`, 'GET'),
+      call(getDataFromApi, null, `${url}&datebucket=none`, 'GET'),
+    ])
 
-    const doughnutData = yield call(
-      getDataFromApi,
-      null,
-      `${url}&datebucket=none`,
-      'GET'
-    )
-
-    const convertedBarData = convertDataIntoDatasets(
-      barData,
-      { ...options, dateBucket },
-      {
-        isMetric: true,
-      }
-    )
+    const convertedBarData =
+      dateBucket === 'none'
+        ? {}
+        : convertDataIntoDatasets(
+            barData,
+            { ...options, dateBucket },
+            {
+              isMetric: true,
+            }
+          )
 
     const convertedDoughnutData = convertDataIntoDatasets(
       doughnutData,

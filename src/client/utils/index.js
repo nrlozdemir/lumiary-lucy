@@ -57,12 +57,15 @@ const getLabelWithSuffix = (label, property) => {
  * ...args
   {
     hoverBG: array
+    backgroundColor: string,
     preparedDatasets: array,
     preparedLabels: array,
     singleDataset: bool,
     borderWidth: object || int
     useBrandLabels: bool,
     isMetric: bool - true if the endpoint used was /metric,
+    customBorderColor: string,
+    noBrandKeys: bool - payloads without brand key layer
   }
   *
  */
@@ -74,15 +77,33 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   let customKeys
   let getValueinObject
 
-  const arg = args && !!args[0] && args[0]
+  const {
+    hoverBG,
+    isMetric,
+    borderWidth,
+    noBrandKeys,
+    singleDataset,
+    preparedLabels,
+    useBrandLabels,
+    backgroundColor,
+    preparedDatasets,
+    customBorderColor,
+  } = (args && !!args[0] && args[0]) || {}
+
   const brands = Object.keys(values.data || values)
+
   const brandObjects = brands.map((b) =>
     values.data ? values.data[b] : values[b]
   )
-  getValueinObject = brandObjects[0][options.property[0]]
+
+  getValueinObject = noBrandKeys
+    ? values[options.property[0]]
+    : brandObjects[0][options.property[0]]
 
   const timeBucket =
-    options.dateBucket !== 'none' ? getTimeBucket(getValueinObject) : null
+    !!options.dateBucket && options.dateBucket !== 'none'
+      ? getTimeBucket(getValueinObject)
+      : null
 
   delete getValueinObject.subtotal
 
@@ -120,11 +141,11 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     singleLevelJSON = true
   }
 
-  if (brands.length > 1) {
+  if (brands.length > 1 && !noBrandKeys) {
     datasetsFromValues = brandObjects.map((brand, idx) => {
       const brandProp = Object.keys(brand)[0]
       const brandDataObj = brandObjects[idx][brandProp]
-      if (arg && arg.isMetric) {
+      if (isMetric) {
         return brandDataObj
       } else {
         return Object.keys(brand[brandProp]).map((key) => brandDataObj[key])
@@ -135,7 +156,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   }
 
   // metric data comes with sum and percent
-  if (arg && arg.isMetric) {
+  if (isMetric) {
     datasetsFromValues = datasetsFromValues.map((d) =>
       !timeBucket
         ? d.percent || 0
@@ -149,42 +170,35 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   // ).map((value) => brandObjects.map((brand) => brand.duration[value]))
   // You can pass prepared labels or datasets in args
   labels =
-    (arg &&
-      (arg.preparedLabels
-        ? arg.preparedLabels
-        : arg.useBrandLabels
-        ? brands
-        : labels)) ||
+    (preparedLabels ? preparedLabels : useBrandLabels ? brands : labels) ||
     labels
 
-  datasetsFromValues = (arg && arg.preparedDatasets) || datasetsFromValues
+  datasetsFromValues = preparedDatasets || datasetsFromValues
 
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
       const color = chartColors[idx]
-      return arg && arg.singleDataset
+      return singleDataset
         ? // only one dataset is required sometimes
           // ie. doughnut chart in panoptic/engagement
           {
             labels: [...labels],
             datasets: [
               {
+                borderColor: customBorderColor || color,
                 label: expectedNames[options.property],
                 data: datasetsFromValues || [0, 0, 0, 0],
-                backgroundColor: arg.backgroundColor || [
+                backgroundColor: backgroundColor || [
                   ...(datasets[0] ? datasets[0].backgroundColor : []),
                   color,
                 ],
-                hoverBackgroundColor:
-                  arg && arg.hoverBG
-                    ? [
-                        ...(datasets[0]
-                          ? datasets[0].hoverBackgroundColor
-                          : []),
-                        color,
-                      ]
-                    : [],
+                hoverBackgroundColor: hoverBG
+                  ? [
+                      ...(datasets[0] ? datasets[0].hoverBackgroundColor : []),
+                      color,
+                    ]
+                  : [],
               },
             ],
           }
@@ -195,9 +209,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
               {
                 label: !!customKeys ? customKeys[idx] : key,
                 backgroundColor: color,
-                borderColor: color,
-                borderWidth: (arg && arg.borderWidth) || 1,
-                hoverBackgroundColor: arg && arg.hoverBG ? color : null,
+                borderColor: customBorderColor || color,
+                borderWidth: borderWidth || 1,
+                hoverBackgroundColor: hoverBG ? color : null,
                 data: singleLevelJSON
                   ? datasetsFromValues
                   : datasetsFromValues[idx] || [0, 0, 0, 0],
