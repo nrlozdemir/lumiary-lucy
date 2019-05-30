@@ -30,11 +30,6 @@ class DominantColor extends React.Component {
             placeHolder: 'Engagement',
           },
           {
-            type: 'platform',
-            selectKey: 'ADC-wsd',
-            placeHolder: 'Platforms',
-          },
-          {
             type: 'dateRange',
             selectKey: 'ADC-wds',
             placeHolder: 'Date',
