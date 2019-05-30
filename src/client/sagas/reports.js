@@ -1,4 +1,4 @@
-import { takeLatest, call, put } from 'redux-saga/effects'
+import { all, takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
@@ -6,9 +6,14 @@ import reportsMockData from 'Api/mocks/reportsMock.json'
 import { randomKey } from 'Utils/index'
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
-import { compareSharesData, radarChartCalculate } from 'Utils'
+import {
+  compareSharesData,
+  radarChartCalculate,
+  getBrandAndCompetitors,
+} from 'Utils'
 
 import { getDataFromApi } from 'Utils/api'
+import { selectAuthProfile } from 'Reducers/auth'
 
 function getGeneratedReportApi() {
   //this will use ajax function in utils/api when real data is provided
@@ -126,24 +131,28 @@ function* getPerformanceComparisonData() {
   }
 }
 
-function* getColorComparisonData({ data: { dateRange } }) {
+function* getColorComparisonData({ data: { metric, dateRange } }) {
   try {
+    const { brand } = yield select(selectAuthProfile)
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
     const parameters = {
+      url: '/report',
       dateRange,
-      metric: 'shares',
+      metric,
       property: ['color'],
       dateBucket: 'none',
-      url: '/report',
+      brands: [brand.uuid],
     }
 
     const payload = yield all([
       call(getDataFromApi, {
         ...parameters,
-        brand: 'Bleacher Report',
+        brand: competitors[0],
       }),
       call(getDataFromApi, {
         ...parameters,
-        brand: 'Barstool Sports',
+        brand: competitors[1],
       }),
     ])
 
@@ -153,6 +162,7 @@ function* getColorComparisonData({ data: { dateRange } }) {
       )
     )
   } catch (err) {
+    console.log('err', err)
     yield put(actions.getColorComparisonDataError(err))
   }
 }

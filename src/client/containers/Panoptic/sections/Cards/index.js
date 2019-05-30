@@ -132,8 +132,9 @@ class Cards extends React.Component {
     return (
       <div className="grid-container col-12 mt-72 mb-72">
         <div className={styles.flipWrapper}>
-          {wholeSegmentsWithOrder.map((item) => (
+          {wholeSegmentsWithOrder.map((item, idx) => (
             <FlipCard
+              key={`flipCard_${idx}`}
               width={282}
               height={114}
               isEmpty={data && data[item] && data[item].isEmpty}

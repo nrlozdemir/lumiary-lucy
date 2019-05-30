@@ -176,7 +176,7 @@ export const initialState = fromJS({
     error: null,
   },
   topPerformingFormatData: {
-    data: [],
+    data: {},
     loading: false,
     error: null,
   },
