@@ -136,7 +136,11 @@ class StackedPercentageChart extends React.Component {
           let gradient = ctx.createLinearGradient(0, 0, 180, 800)
           let cs = 0
           for (let g = 0; g <= 1; g += 0.5) {
-            gradient.addColorStop(g, colors[config.options.color][cs])
+            gradient.addColorStop(
+              g,
+              !!colors[config.options.color] &&
+                colors[config.options.color][cs] || [config.options.color]
+            )
             cs++
           }
           const tickColor = (config.options.tickColor) ? config.options.tickColor : themes.topValueColor

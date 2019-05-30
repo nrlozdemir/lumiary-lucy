@@ -186,12 +186,16 @@ function* getPacingCardData({ data }) {
 
 function* getCompareSharesData({ data: { dateRange } }) {
   try {
+    const { brand } = yield select(selectAuthProfile)
+
+    // TODO: We need change parameters when to do multiple select filter (Shares on Facebook & YouTube)
     const parameters = {
+      url: '/report',
       dateRange,
       metric: 'shares',
       property: ['color'],
       dateBucket: 'none',
-      url: '/report',
+      brands: [brand.uuid],
     }
 
     const payload = yield all([
@@ -211,6 +215,7 @@ function* getCompareSharesData({ data: { dateRange } }) {
       )
     )
   } catch (err) {
+    console.log('err', err)
     yield put(actions.getCompareSharesDataError(err))
   }
 }
@@ -249,13 +254,60 @@ function* getFlipCardsData() {
   }
 }
 
-function* getTopPerformingFormatData() {
+function* getTopPerformingFormatData({ data = {} }) {
   try {
+    const { brand } = yield select(selectAuthProfile)
+
+    const { platform = 'all' } = data
+
+    const options = {
+      platform,
+      metric: 'cvScore',
+      dateRange: 'week',
+      dateBucket: 'none',
+      display: 'percentage',
+      property: ['format'],
+      url: '/report',
+      brands: [brand.uuid],
+    }
+
+    const dateBucketedOptions = { ...options, dateBucket: 'dayOfWeek' }
+
+    const [dataWithDateBuckets, dataWithoutDateBuckets] = yield all([
+      call(getDataFromApi, dateBucketedOptions),
+      call(getDataFromApi, options),
+    ])
+
     const payload = yield call(getMockPanopticDataApi)
-    yield put(
-      actions.getTopPerformingFormatDataSuccess(payload.topPerformingFormatData)
-    )
+
+    if (!!dataWithDateBuckets.data && !!dataWithoutDateBuckets.data) {
+      const lineChartData = convertDataIntoDatasets(
+        dataWithDateBuckets,
+        dateBucketedOptions
+      )
+
+      const doughnutData = convertDataIntoDatasets(
+        dataWithoutDateBuckets,
+        options,
+        { singleDataset: true, hoverBG: true }
+      )
+
+      yield put(
+        actions.getTopPerformingFormatDataSuccess({
+          doughnutData,
+          lineChartData,
+          percentageData: dataWithoutDateBuckets,
+        })
+      )
+    } else {
+      yield put(
+        actions.getTopPerformingFormatDataError(
+          'getTopPerformingFormatData error'
+        )
+      )
+    }
   } catch (err) {
+    console.log(err)
     yield put(actions.getTopPerformingFormatDataError(err))
   }
 }

@@ -1,8 +1,9 @@
-import { call, put, takeLatest, all } from 'redux-saga/effects'
+import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { actions, types } from 'Reducers/audience'
 import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
+import { selectAuthProfile } from 'Reducers/auth'
 
 import { compareSharesData, radarChartCalculate } from 'Utils'
 
@@ -131,27 +132,30 @@ function* getAudienceChangeOverTimeData() {
   }
 }
 
-function* getAudienceDominantColorData({
-  data: { dateRange, metric, platform },
-}) {
+function* getAudienceDominantColorData({ data: { dateRange, metric } }) {
   try {
+    const { brand } = yield select(selectAuthProfile)
     const parameters = {
+      url: '/report',
       dateRange,
       metric,
-      platform,
       property: ['color'],
       dateBucket: 'none',
-      url: '/report',
+      brands: [brand.uuid],
     }
 
+    // TODO: We need to change platform when gender data comes.
+    // platform is wrong parameter. they are here to work request
     const payload = yield all([
       call(getDataFromApi, {
         ...parameters,
-        brand: 'Bleacher Report',
+        platform: 'facebook',
+        // gender: 'male',
       }),
       call(getDataFromApi, {
         ...parameters,
-        brand: 'Barstool Sports',
+        platform: 'youtube',
+        // gender: 'female',
       }),
     ])
 
@@ -161,6 +165,7 @@ function* getAudienceDominantColorData({
       )
     )
   } catch (err) {
+    console.log('err', err)
     yield put(actions.getAudienceDominantColorDataError(err))
   }
 }
