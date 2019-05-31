@@ -39,7 +39,12 @@ class PacingCard extends Component {
             }}
           >
             {isDataEmpty && (
-              <div className={style.marketViewCardEmpty}>No Data Available</div>
+              <div
+                className={style.marketViewCardEmpty}
+                style={{ backgroundColor: colors.moduleBackgroundOpacity }}
+              >
+                No Data Available
+              </div>
             )}
             <div className={style.marketViewCardTitle}>Pacing</div>
             <div className={style.marketViewCardSubTitle}>
