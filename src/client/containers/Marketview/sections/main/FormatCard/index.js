@@ -6,7 +6,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewFormatCard } from 'Reducers/marketview'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import RightArrowCircle from "Components/Icons/RightArrowCircle"
+import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import SingleVideoCard from 'Components/SingleVideoCard'
 import style from 'Containers/Marketview/style.scss'
 import formatStyles from './style.scss'
@@ -18,15 +18,20 @@ class FormatCard extends Component {
 
   iconClass(name) {
     switch (name) {
+      case 'LA':
       case 'Live Action':
         return 'icon-icon_liveaction'
 
+      case 'AN':
       case 'Animation':
         return 'icon-icon_animation'
 
+      case 'HY':
+      case 'Hybrid':
       case 'Stop Motion':
         return 'icon-icon_stopmotion'
 
+      case 'CN':
       case 'Cinemagraph':
         return 'icon-icon_cinemagraph'
 
@@ -37,10 +42,7 @@ class FormatCard extends Component {
 
   render() {
     const {
-      formatChartData: {
-        data,
-        video
-      },
+      formatChartData: { data, video, currentDay },
     } = this.props
 
     return (
@@ -58,18 +60,19 @@ class FormatCard extends Component {
               Performance Over Time
             </div>
 
-            <div className={style.chartSectionBadge}>
-              <span
-                style={{
-                  background: colors.labelBackground,
-                  color: colors.labelColor,
-                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                }}
-              >
-                On Mondays
-              </span>
-            </div>
-
+            {!!currentDay && (
+              <div className={style.chartSectionBadge}>
+                <span
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  On {currentDay}s
+                </span>
+              </div>
+            )}
             <div className={style.videoContainer}>
               {video && (
                 <SingleVideoCard
@@ -111,7 +114,7 @@ class FormatCard extends Component {
             >
               View Time Metrics
               <div className={style.icon}>
-                <RightArrowCircle></RightArrowCircle>
+                <RightArrowCircle />
               </div>
             </Link>
           </div>

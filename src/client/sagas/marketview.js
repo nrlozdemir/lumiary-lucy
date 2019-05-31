@@ -24,7 +24,7 @@ import {
   getDateBucketFromRange,
   getMaximumValueIndexFromArray,
 } from 'Utils'
-
+import { dayOfWeek } from 'Utils/globals'
 import { getDataFromApi } from 'Utils/api'
 
 function getCompetitorVideosApi() {
@@ -226,9 +226,64 @@ function* getPacingChartData() {
 
 function* getFormatChartData() {
   try {
-    const payload = yield call(getFormatChartApi)
-    yield put(actions.getFormatChartSuccess(payload))
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
+
+    const options = {
+      metric: 'shares',
+      dateRange: '3months',
+      property: ['format'],
+      dateBucket: 'dayOfWeek',
+      display: 'none',
+      platform: 'all',
+      brands: [...competitors],
+    }
+
+    // video is still being pulled from mock
+    const { video } = yield call(getFormatChartApi)
+
+    const response = yield call(getDataFromApi, options, '/report')
+
+    // reduce reponse into array of categories and their count
+    // based on the current day
+    if (!!response && !!response.data) {
+      const currentDay = dayOfWeek[new Date().getDay()]
+
+      const formatCountsObj = Object.keys(response.data).reduce(
+        (all, brand) => {
+          const formatObj = response.data[brand].format
+
+          Object.keys(formatObj).forEach((formatKey) => {
+            const currentCount = formatObj[formatKey][currentDay]
+
+            if (!!all[formatKey]) {
+              all[formatKey] = all[formatKey] + currentCount
+            } else {
+              all[formatKey] = currentCount
+            }
+          })
+          return all
+        },
+        {}
+      )
+
+      const formatCountsArr = Object.keys(formatCountsObj).map((formatKey) => ({
+        name: formatKey,
+        count: formatCountsObj[formatKey],
+      }))
+
+      yield put(
+        actions.getFormatChartSuccess({
+          currentDay,
+          data: formatCountsArr,
+          video,
+        })
+      )
+    } else {
+      throw 'MarketView/FormatChart Fetch Data Error'
+    }
   } catch (error) {
+    console.log(error)
     yield put(actions.getFormatChartFailure(error))
   }
 }

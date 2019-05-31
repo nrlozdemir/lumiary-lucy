@@ -73,8 +73,13 @@ class PacingCard extends Component {
             >
               {!!data &&
                 !!data.labels &&
-                data.labels.map((label) => (
-                  <div className={style.colorListItem}>{label}</div>
+                data.labels.map((label, idx) => (
+                  <div
+                    key={`MV/PacingCard_label-${idx}`}
+                    className={style.colorListItem}
+                  >
+                    {label}
+                  </div>
                 ))}
             </div>
 

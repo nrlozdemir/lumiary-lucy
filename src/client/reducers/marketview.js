@@ -220,7 +220,7 @@ export const actions = {
   }),
   getTopPerformingPropertiesByCompetitorsRequest: (payload) => ({
     type: types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_REQUEST,
-    payload
+    payload,
   }),
   getTopPerformingPropertiesByCompetitorsSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_SUCCESS,
@@ -242,7 +242,13 @@ export const initialState = fromJS({
     loading: false,
     error: null,
   },
-  formatChartData: [],
+  formatChartData: {
+    data: null,
+    video: null,
+    currentDay: null,
+    loading: false,
+    error: null,
+  },
   totalViewsData: {
     data: {},
     loading: false,
@@ -301,16 +307,12 @@ const marketviewReducer = (state = initialState, action) => {
     // PACING CHART
     case types.GET_MARKETVIEW_PACINGCHART_REQUEST:
       return state.setIn(['pacingChartData', 'loading'], fromJS(true))
-    
-    case types.GET_MARKETVIEW_PACINGCHART_SUCCESS:
 
+    case types.GET_MARKETVIEW_PACINGCHART_SUCCESS:
       return state
-        .setIn(
-          ['pacingChartData', 'data'],
-          fromJS(payload)
-        )
+        .setIn(['pacingChartData', 'data'], fromJS(payload))
         .setIn(['pacingChartData', 'loading'], fromJS(false))
-    
+
     case types.GET_MARKETVIEW_PACINGCHART_FAILURE:
       return state
         .setIn(['pacingChartData', 'error'], fromJS(action.error))
@@ -318,17 +320,18 @@ const marketviewReducer = (state = initialState, action) => {
 
     // FORMAT CHART
     case types.GET_MARKETVIEW_FORMATCHART_REQUEST:
-      return state.set('loading', fromJS(true))
-    
+      return state.setIn(['formatChartData', 'loading'], fromJS(true))
+
     case types.GET_MARKETVIEW_FORMATCHART_SUCCESS:
-      return state
-        .set('formatChartData', fromJS(action.payload))
-        .set('loading', fromJS(false))
-    
+      return state.set(
+        'formatChartData',
+        fromJS({ ...action.payload, loading: false, error: null })
+      )
+
     case types.GET_MARKETVIEW_FORMATCHART_FAILURE:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['formatChartData', 'error'], fromJS(action.error))
+        .setIn(['formatChartData', 'loading'], fromJS(false))
 
     // TOTAL VIEWS
     case types.GET_MARKETVIEW_TOTALVIEWS_REQUEST:
