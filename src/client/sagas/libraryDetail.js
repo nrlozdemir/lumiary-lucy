@@ -1,11 +1,30 @@
+import { takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from 'axios'
+import { ajax } from 'Utils/api'
+
+import {
+  types,
+  actions,
+  makeSelectSelectedVideoID,
+} from 'Reducers/libraryDetail'
 import mock from 'Api/mocks/libraryMock.json'
 import { findIdDetail, getDataFromApi } from 'Utils/api'
-import { types, actions } from 'Reducers/libraryDetail'
-import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { convertDataIntoDatasets, getMaximumValueIndexFromArray } from 'Utils/'
 import { selectAuthProfile } from 'Reducers/auth'
-import { getBrandAndCompetitors } from 'Utils/'
+
+const RESOURCE = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea'
+
+function getOneVideo({ payload }) {
+  return ajax({
+    url: `${RESOURCE}/video/${payload}`,
+    method: 'GET',
+  }).then((response) => {
+    if (response.error) {
+      throw response.error
+    }
+    return response.data
+  })
+}
 
 function getBarChartApi({ LibraryDetailId }) {
   //this will use ajax function in utils/api when real data is provided
@@ -13,17 +32,11 @@ function getBarChartApi({ LibraryDetailId }) {
     .get('/')
     .then((res) => findIdDetail(mock, LibraryDetailId, 'HeaderBarChartMock'))
 }
-function getDoughnutChartApi({ LibraryDetailId }) {
-  //this will use ajax function in utils/api when real data is provided
-  return axios
-    .get('/')
-    .then((res) => findIdDetail(mock, LibraryDetailId, 'DoughnutChartMock'))
-}
+
 function getColorTempApi({ LibraryDetailId }) {
   //this will use ajax function in utils/api when real data is provided
-  return axios
-    .get('/')
-    .then((res) => findIdDetail(mock, LibraryDetailId, 'ColorTempMock'))
+  console.log(LibraryDetailId)
+  return axios.get('/').then((res) => findIdDetail(mock, 1, 'ColorTempMock'))
 }
 function getShotByShotApi({ LibraryDetailId }) {
   //this will use ajax function in utils/api when real data is provided
@@ -107,17 +120,8 @@ function* getColorTemperatureData({ payload: { LibraryDetailId } }) {
       LibraryDetailId,
     })
 
-    let shuffleData = payload.colorTempData
-    shuffleData = shuffleData.map((data) => {
-      data.data.map((item) => {
-        item.x = _.random(-50, 50)
-        item.y = _.random(-50, 50)
-      })
-      return data
-    })
-
     const colors = ['#2fd7c4', '#8562f3', '#5292e5']
-    shuffleData = shuffleData.map((data) => {
+    const shuffleData = payload.colorTempData.map((data) => {
       data.data.map((item, i) => {
         item.color = colors[i]
       })
@@ -144,9 +148,21 @@ function* getShotByShot({ payload: { LibraryDetailId } }) {
   }
 }
 
+function* getSelectedVideo({ payload }) {
+  try {
+    const data = yield call(getOneVideo, {
+      payload,
+    })
+    yield put(actions.getSelectedVideoSuccess(data.video))
+  } catch (error) {
+    yield put(actions.getSelectedVideoFailure({ error }))
+  }
+}
+
 export default [
   takeLatest(types.GET_BAR_CHART_REQUEST, getBarChart),
   takeLatest(types.GET_DOUGHNUT_CHART_REQUEST, getDoughnutChart),
   takeLatest(types.GET_COLOR_TEMP_REQUEST, getColorTemperatureData),
   takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),
+  takeLatest(types.GET_SELECTED_VIDEO_REQUEST, getSelectedVideo),
 ]

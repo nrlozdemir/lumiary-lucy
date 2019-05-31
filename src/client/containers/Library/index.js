@@ -10,6 +10,7 @@ import Sidebar from './sidebar.js'
 import VideoSection from './sections/VideoSection'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import Button from 'Components/Form/Button'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Library extends React.Component {
@@ -23,6 +24,18 @@ export class Library extends React.Component {
 
   setSidebarVisible(e) {
     this.setState({ sidebarVisible: e })
+  }
+
+  loadMoreVideo = () => {
+    const {
+      getVideos,
+      library: {
+        data: {
+          pagination: { page },
+        },
+      },
+    } = this.props
+    getVideos({ page: parseInt(page) + 1 })
   }
 
   handleSubmit(e) {
@@ -49,6 +62,11 @@ export class Library extends React.Component {
                 setSidebarVisible={this.setSidebarVisible.bind(this)}
               />
               <VideoSection />
+              <Button
+                buttonText="Load More"
+                customClass={style.loadButton}
+                onClick={this.loadMoreVideo}
+              />
             </div>
             <div
               className={sideBarClass}
@@ -82,7 +100,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    getVideos: () => dispatch(actions.loadVideos()),
+    getVideos: (opt) => dispatch(actions.loadVideos(opt)),
     changeFilter: (e) => dispatch(actions.changeFilter(e)),
   }
 }

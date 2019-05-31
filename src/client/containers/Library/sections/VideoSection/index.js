@@ -9,16 +9,18 @@ import style from '../../style.scss'
 
 class VideoSection extends React.Component {
   componentDidMount() {
-    this.props.getVideos()
+    if (this.props.library.data.videos.length == 0) {
+      this.props.getVideos()
+    }
   }
 
   render() {
-    if (!this.props.library.videos || this.props.library.loading) {
+    if (!this.props.library.data || this.props.library.loading) {
       return <RouterLoading />
     }
     return (
       <div className={style.videoContainer}>
-        <VideoCardList data={this.props.library.videos} />
+        <VideoCardList data={this.props.library.data.videos} />
       </div>
     )
   }
