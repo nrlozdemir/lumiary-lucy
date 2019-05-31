@@ -47,7 +47,10 @@ const LibraryDetailChartHeader = ({
   title,
   socialIcon,
   cvScore,
+  id,
+  selectedVideoAverage,
 }) => {
+  console.log('selectedVideoAverage', selectedVideoAverage)
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
