@@ -15,11 +15,13 @@ class TopVideosCard extends React.Component {
   }
 
   render() {
-    const { competitorTopVideos } = this.props
+    const {
+      competitorTopVideos: { data },
+    } = this.props
 
     return (
       <TopVideosCardModule
-        chartData={competitorTopVideos}
+        chartData={data}
         height={150}
         moduleKey="Reports/TopVideosCardModule"
         title="Top Videos Over Time By Competitor"

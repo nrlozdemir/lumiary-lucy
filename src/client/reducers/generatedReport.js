@@ -200,16 +200,16 @@ const generatedReportsReducer = (state = initialState, action) => {
         .setIn(['pacingChartData', 'loading'], fromJS(false))
 
     case types.GET_COMPETITOR_TOP_VIDEOS_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['competitorTopVideos', 'loading'], fromJS(true))
 
     case types.GET_COMPETITOR_TOP_VIDEOS_SUCCESS:
       return state
-        .set('competitorTopVideos', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(['competitorTopVideos', 'data'], fromJS(action.payload))
+        .setIn(['competitorTopVideos', 'loading'], fromJS(false))
     case types.GET_COMPETITOR_TOP_VIDEOS_FAILURE:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['competitorTopVideos', 'error'], fromJS(action.error))
+        .setIn(['competitorTopVideos', 'loading'], fromJS(false))
 
     case types.GET_TOP_PERFORMING_VIDEOS_REQUEST:
       return state.setIn(['topPerformingVideos', 'loading'], fromJS(true))
