@@ -6,88 +6,64 @@ import {
   actions,
   makeSelectReportsPerformanceComparison,
 } from 'Reducers/reports'
-//import cx from 'classnames'
-//import ComparisonHorizontalBarChart from 'Components/ComparisonHorizontalBarChart'
 import BarAndDoughnutChartModule from 'Components/Modules/BarAndDoughnutChartModule'
 
 import { stackedChartOptions } from './options'
 import style from './style.scss'
 
-const barPlugins = [
-  {
-    beforeDraw: function(chart, easing) {
-      if (
-        chart.config.options.chartArea &&
-        chart.config.options.chartArea.backgroundColor
-      ) {
-        var ctx = chart.chart.ctx
-        var chartArea = chart.chartArea
-
-        ctx.save()
-        ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-        ctx.fillRect(
-          chartArea.left,
-          chartArea.top,
-          chartArea.right - chartArea.left,
-          chartArea.bottom - chartArea.top
-        )
-        ctx.restore()
-      }
-      let configX = chart.config.options.scales.xAxes
-      //Save the rendering context state
-      ctx.save()
-      ctx.strokeStyle = configX[0].gridLines.color
-      ctx.lineWidth = configX[0].gridLines.lineWidth
-
-      ctx.beginPath()
-      ctx.moveTo(chart.chartArea.right, chart.chartArea.top)
-      ctx.lineTo(chart.chartArea.right, chart.chartArea.bottom)
-      ctx.stroke()
-
-      //Restore the rendering context state
-      ctx.restore()
-    },
-  },
-]
-
 class PerformanceComparison extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getPerformanceComparisonData(data)
   }
+
   render() {
     const {
       performanceComparisonData: { data, loading, error },
     } = this.props
 
-    let doughnutData
-    if (data && data.doughnutData) {
-      doughnutData = data.doughnutData
-      doughnutData.label = ['Red', 'Green']
-      doughnutData.datasets[0].backgroundColor = ['#5292E5', '#2FD7C4']
-    }
+    let doughnutData = {}
 
-    let stackedChartData
-    if (data && data.stackedChartData) {
-      stackedChartData = data.stackedChartData
-      // "backgroundColor": "#5292E5",
-      // "backgroundColor": "#2FD7C4",
-      stackedChartData.labels = ['Slowest', 'Slow', 'Medium', 'Fast']
-      stackedChartData.datasets[0].backgroundColor = '#5292E5'
-      stackedChartData.datasets[1].backgroundColor = '#2FD7C4'
+    if (data) {
+      const totalData = data.datasets.reduce((acc, dataset) => {
+        return acc + dataset.data.reduce((acc, val) => acc + val, 0)
+      }, 0)
+
+      const firstDatasetValue = data.datasets[0].data.reduce(
+        (acc, val) => acc + val,
+        0
+      )
+      const secondDatasetValue = data.datasets[1].data.reduce(
+        (acc, val) => acc + val,
+        0
+      )
+
+      doughnutData.datasets = [
+        {
+          data: [
+            (firstDatasetValue / (totalData / 100)).toFixed(2),
+            (secondDatasetValue / (totalData / 100)).toFixed(2),
+          ],
+          backgroundColor: [
+            data.datasets[0].backgroundColor,
+            data.datasets[1].backgroundColor,
+          ],
+        },
+      ]
+      doughnutData.labels = ['Bleacher Report', 'Barstool Sports']
     }
 
     return (
       <BarAndDoughnutChartModule
         doughnutData={{ ...doughnutData }}
-        stackedChartData={{ ...stackedChartData }}
+        stackedChartData={{ ...data }}
         moduleKey={'Reports/PerformanceComparison'}
         title="Property Performance Comparison"
         action={this.callBack}
         filters={[
           {
-            type: 'pacing',
-            selectKey: 'RPC-awaw',
-            placeHolder: 'Pacing',
+            type: 'property',
+            selectKey: 'RPC-asasdd',
+            placeHolder: 'Resolution',
           },
           {
             type: 'metric',
@@ -95,25 +71,10 @@ class PerformanceComparison extends React.Component {
             placeHolder: 'Engagement',
           },
         ]}
-        legend={
-          <div className={style.headerLabel}>
-            <div
-              className={
-                'd-flex align-items-center justify-content-center ' +
-                style.headerLabel
-              }
-            >
-              <div className="d-flex align-items-center mr-32">
-                <span className={style.redRound} />
-                <p>Bleacher Report</p>
-              </div>
-              <div className="d-flex align-items-center mr-32">
-                <span className={style.duskRound} />
-                <p>Barstool Sports</p>
-              </div>
-            </div>
-          </div>
-        }
+        legend={[
+          { label: 'Bleacher Report', color: 'coral-pink' },
+          { label: 'Barstool Sports', color: 'cool-blue' },
+        ]}
         reverse={false}
         barCustoms={{
           width: 720,

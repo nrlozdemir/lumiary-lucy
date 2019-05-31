@@ -146,8 +146,9 @@ export const actions = {
     error,
   }),
 
-  getPerformanceComparisonData: () => ({
+  getPerformanceComparisonData: (data) => ({
     type: types.LOAD_PERFORMANCE_COMPARISON_DATA,
+    data,
   }),
   getPerformanceComparisonDataSuccess: (payload) => ({
     type: types.LOAD_PERFORMANCE_COMPARISON_DATA_SUCCESS,
@@ -203,7 +204,7 @@ export const initialState = fromJS({
     loading: false,
   },
   performanceComparisonData: {
-    data: {},
+    data: null,
     error: false,
     loading: false,
   },
