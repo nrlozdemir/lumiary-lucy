@@ -72,7 +72,6 @@ class Video extends Component {
       title,
       socialIcon,
       cvScore,
-      id
     } = this.props
 
     return (
