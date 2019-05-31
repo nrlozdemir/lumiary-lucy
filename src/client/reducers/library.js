@@ -4,62 +4,79 @@
  *
  */
 
-import { fromJS } from "immutable";
-import { createSelector } from 'reselect';
+import { fromJS } from 'immutable'
+import { createSelector } from 'reselect'
 
 export const types = {
-  LOAD_VIDEOS: "Library/LOAD_VIDEOS",
-  LOAD_VIDEOS_SUCCESS: "Library/LOAD_VIDEOS_SUCCESS",
-  LOAD_VIDEOS_ERROR: "Library/LOAD_VIDEOS_ERROR",
+  LOAD_VIDEOS: 'Library/LOAD_VIDEOS',
+  LOAD_VIDEOS_SUCCESS: 'Library/LOAD_VIDEOS_SUCCESS',
+  LOAD_VIDEOS_ERROR: 'Library/LOAD_VIDEOS_ERROR',
 
-  CHANGE_FILTER: "Library/CHANGE_FILTER"
-};
+  CHANGE_FILTER: 'Library/CHANGE_FILTER',
+}
 export const actions = {
-  loadVideos: () => ({ type: types.LOAD_VIDEOS }),
-  loadVideosSuccess: payload => ({ type: types.LOAD_VIDEOS_SUCCESS, payload }),
-  loadVideosError: error => ({ type: types.LOAD_VIDEOS, error }),
-
-  changeFilter: payload => ({ type: types.CHANGE_FILTER, payload })
-};
+  loadVideos: (payload) => ({ type: types.LOAD_VIDEOS, payload }),
+  loadVideosSuccess: (payload) => ({
+    type: types.LOAD_VIDEOS_SUCCESS,
+    payload,
+  }),
+  loadVideosError: (error) => ({ type: types.LOAD_VIDEOS, error }),
+  setSelectedVideo: (payload) => ({ type: types.SET_SELECTED_VIDEO, payload }),
+  changeFilter: (payload) => ({ type: types.CHANGE_FILTER, payload }),
+}
 
 export const initialState = fromJS({
-  videos: [],
+  data: { videos: [], pagination: {} },
   filters: {},
   error: false,
-  loading: false
-});
+  loading: false,
+})
 
 const libraryReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOAD_VIDEOS:
-      return state.set("loading", fromJS(true));
+      return state.set('loading', fromJS(true))
 
     case types.LOAD_VIDEOS_SUCCESS:
       return state
-        .set('videos', fromJS(action.payload))
-        .set("loading", fromJS(false));
+        .setIn(
+          ['data', 'videos'],
+          fromJS(
+            state
+              .getIn(['data', 'videos'])
+              .concat(fromJS(action.payload.videos))
+          )
+        )
+        .setIn(['data', 'pagination'], fromJS(action.payload.pagination))
+        .set('loading', fromJS(false))
 
     case types.LOAD_VIDEOS_ERROR:
       return state
-        .set("error", fromJS(action.error))
-        .set("loading", fromJS(false));
+        .set('error', fromJS(action.error))
+        .set('loading', fromJS(false))
 
     case types.CHANGE_FILTER:
       return state
         .set('loading', fromJS(true))
-        .set('filters', fromJS(action.payload));
+        .set('filters', fromJS(action.payload))
 
     default:
-      return state;
+      return state
   }
-};
+}
 
-export const selectLibraryDomain = state => state.Library
+export const selectLibraryDomain = (state) => state.Library
 
 export const makeSelectLibrary = () =>
-  createSelector(selectLibraryDomain, substate => substate.toJS());
+  createSelector(
+    selectLibraryDomain,
+    (substate) => substate.toJS()
+  )
 
 export const makeSelectVideoFilters = () =>
-  createSelector(selectLibraryDomain, state => state.toJS().filters);
+  createSelector(
+    selectLibraryDomain,
+    (state) => state.toJS().filters
+  )
 
-export default libraryReducer;
+export default libraryReducer

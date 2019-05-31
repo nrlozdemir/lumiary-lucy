@@ -1,98 +1,20 @@
 import React from 'react'
-import { HorizontalBar } from 'react-chartjs-2'
-import { barChartOptions, plugins } from './options'
 import style from './style.scss'
 import 'chartjs-plugin-datalabels'
 
 import { withTheme } from 'ThemeContext/withTheme'
+import HorizontalBarChart from 'Components/Charts/HorizontalBarChart'
 
 const ComparisonHorizontalBarChart = (props) => {
   const { data } = props
   const themes = props.themeContext.colors
-  const copyBarChartOptions = JSON.parse(JSON.stringify(barChartOptions))
-
-  copyBarChartOptions.chartArea = {
-    backgroundColor: themes.chartBackground,
-  }
-  copyBarChartOptions.plugins.datalabels = {
-    ...copyBarChartOptions.plugins.datalabels,
-    formatter: (value, ctx) => {
-      let sum = 0
-      let dataArr = ctx.chart.data.datasets[0].data
-      dataArr.map((data) => {
-        sum += data
-      })
-      let percentage = ((value * 100) / sum).toFixed(0) + '%'
-      return percentage
-    },
-    color: themes.textColor,
-  }
-  copyBarChartOptions.scales = {
-    xAxes: [
-      {
-        ...copyBarChartOptions.scales.xAxes[0],
-        ticks: {
-          ...copyBarChartOptions.scales.xAxes[0].ticks,
-          fontColor: themes.textColor,
-        },
-        gridLines: {
-          ...copyBarChartOptions.scales.xAxes[0].gridLines,
-          color: themes.chartStadiumBarBorder,
-          zeroLineColor: themes.chartStadiumBarBorder,
-        },
-      },
-    ],
-    yAxes: [
-      {
-        ...copyBarChartOptions.scales.yAxes[0],
-        ticks: {
-          ...copyBarChartOptions.scales.yAxes[0].ticks,
-          fontColor: themes.textColor,
-        },
-        gridLines: {
-          ...copyBarChartOptions.scales.yAxes[0].gridLines,
-          color: themes.chartStadiumBarBorder,
-        },
-      },
-    ],
-  }
-
-  const reverseBarChartOptions = JSON.parse(JSON.stringify(copyBarChartOptions))
-  reverseBarChartOptions.scales.xAxes[0].ticks = {
-    ...reverseBarChartOptions.scales.xAxes[0].ticks,
-    reverse: false,
-    callback: function(value) {
-      if (value === 0) return 0
-      return value + '%'
-    },
-  }
-  reverseBarChartOptions.plugins.datalabels = {
-    ...reverseBarChartOptions.plugins.datalabels,
-    anchor: 'end',
-    align: 'right',
-    formatter: (value, ctx) => {
-      let sum = 0
-      let dataArr = ctx.chart.data.datasets[0].data
-      dataArr.map((data) => {
-        sum += data
-      })
-      let percentage = ((value * 100) / sum).toFixed(0) + '%'
-      return percentage
-    },
-  }
-  console.log(props)
-
   return (
     <div className={style.container}>
-      <HorizontalBar
-        key={Math.random()}
-        data={data[0]}
-        width={460}
-        height={291}
-        plugins={copyBarChartOptions.plugins}
-        options={copyBarChartOptions}
+      <HorizontalBarChart
+        data={data[0].datasets[0]}
+        reverse
+        grids={['100%', '75%', '50%', '25%', '0%']}
       />
-
       <div className={style.legends}>
         <div
           className={style.legend}
@@ -136,13 +58,9 @@ const ComparisonHorizontalBarChart = (props) => {
         </div>
       </div>
 
-      <HorizontalBar
-        key={Math.random()}
-        data={data[1]}
-        width={460}
-        height={291}
-        plugins={reverseBarChartOptions.plugins}
-        options={reverseBarChartOptions}
+      <HorizontalBarChart
+        data={data[1].datasets[0]}
+        grids={['0%', '25%', '50%', '75%', '100%']}
       />
     </div>
   )

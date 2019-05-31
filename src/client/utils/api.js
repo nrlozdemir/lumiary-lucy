@@ -2,10 +2,10 @@ import axios from 'axios'
 import { API_ROOT, API_VERSION } from 'Utils/globals'
 import qs from 'qs'
 
-export function getDataFromApi(parameters) {
+export function getDataFromApi(parameters, url, type) {
   return ajax({
-    url: parameters.url,
-    method: parameters.requestType || 'POST',
+    url: url || parameters.url,
+    method: type || parameters.requestType || 'POST',
     params: qs.stringify(parameters),
   }).then((response) => {
     if (response.error) {
@@ -122,7 +122,7 @@ export function ajax({
       responseType,
     }
 
-    if ('get' == method) {
+    if ('get' == method.toLowerCase()) {
       req.params = data ? data : null
     } else {
       req.data = data ? data : null

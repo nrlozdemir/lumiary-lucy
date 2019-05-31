@@ -218,8 +218,9 @@ export const actions = {
     type: types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_FAILURE,
     error,
   }),
-  getTopPerformingPropertiesByCompetitorsRequest: () => ({
+  getTopPerformingPropertiesByCompetitorsRequest: (payload) => ({
     type: types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_REQUEST,
+    payload
   }),
   getTopPerformingPropertiesByCompetitorsSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_SUCCESS,
@@ -236,7 +237,11 @@ export const initialState = fromJS({
   selectedVideo: null,
   similarProperties: null,
   bubbleChartData: [],
-  pacingChartData: [],
+  pacingChartData: {
+    data: {},
+    loading: false,
+    error: null,
+  },
   formatChartData: [],
   totalViewsData: {
     data: {},
@@ -293,23 +298,33 @@ const marketviewReducer = (state = initialState, action) => {
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))
 
+    // PACING CHART
     case types.GET_MARKETVIEW_PACINGCHART_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['pacingChartData', 'loading'], fromJS(true))
+    
     case types.GET_MARKETVIEW_PACINGCHART_SUCCESS:
+
       return state
-        .set('pacingChartData', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(
+          ['pacingChartData', 'data'],
+          fromJS(payload)
+        )
+        .setIn(['pacingChartData', 'loading'], fromJS(false))
+    
     case types.GET_MARKETVIEW_PACINGCHART_FAILURE:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['pacingChartData', 'error'], fromJS(action.error))
+        .setIn(['pacingChartData', 'loading'], fromJS(false))
 
+    // FORMAT CHART
     case types.GET_MARKETVIEW_FORMATCHART_REQUEST:
       return state.set('loading', fromJS(true))
+    
     case types.GET_MARKETVIEW_FORMATCHART_SUCCESS:
       return state
         .set('formatChartData', fromJS(action.payload))
         .set('loading', fromJS(false))
+    
     case types.GET_MARKETVIEW_FORMATCHART_FAILURE:
       return state
         .set('error', fromJS(action.error))

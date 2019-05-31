@@ -1,14 +1,20 @@
-import { takeLatest, call, put } from 'redux-saga/effects'
+import { all, takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
 import reportsMockData from 'Api/mocks/reportsMock.json'
-import { randomKey } from 'Utils/index'
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
-import { compareSharesData, radarChartCalculate } from 'Utils'
+import {
+  randomKey,
+  convertDataIntoDatasets,
+  compareSharesData,
+  radarChartCalculate,
+  getBrandAndCompetitors,
+} from 'Utils'
 
 import { getDataFromApi } from 'Utils/api'
+import { selectAuthProfile } from 'Reducers/auth'
 
 function getGeneratedReportApi() {
   //this will use ajax function in utils/api when real data is provided
@@ -106,44 +112,55 @@ function* getVideoComparisonData() {
   }
 }
 
-function* getPerformanceComparisonData() {
+function* getPerformanceComparisonData({ data: { metric, property } }) {
   try {
-    const payload = yield call(getReportsApi)
+    const { brand } = yield select(selectAuthProfile)
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
 
-    let shuffleData = payload.performanceComparisonData
-    shuffleData.doughnutData.datasets[0].data = _.shuffle(
-      shuffleData.doughnutData.datasets[0].data
+    const parameters = {
+      url: '/report',
+      dateRange: '24hours',
+      metric,
+      property: [property],
+      dateBucket: 'none',
+      brands: [competitors[0], competitors[1]],
+    }
+
+    const payload = yield call(getDataFromApi, parameters)
+
+    yield put(
+      actions.getPerformanceComparisonDataSuccess(
+        convertDataIntoDatasets(payload, parameters)
+      )
     )
-
-    shuffleData.stackedChartData.datasets[0].data.forEach((item, index) => {
-      let randomNumber = _.random(10, 90)
-      shuffleData.stackedChartData.datasets[0].data[index] = randomNumber
-      shuffleData.stackedChartData.datasets[1].data[index] = 100 - randomNumber
-    })
-    yield put(actions.getPerformanceComparisonDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getPerformanceComparisonDataError(err))
   }
 }
 
-function* getColorComparisonData({ data: { dateRange } }) {
+function* getColorComparisonData({ data: { metric, dateRange } }) {
   try {
+    const { brand } = yield select(selectAuthProfile)
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
     const parameters = {
+      url: '/report',
       dateRange,
-      metric: 'shares',
+      metric,
       property: ['color'],
       dateBucket: 'none',
-      url: '/report',
+      brands: [brand.uuid],
     }
 
     const payload = yield all([
       call(getDataFromApi, {
         ...parameters,
-        brand: 'Bleacher Report',
+        brand: competitors[0],
       }),
       call(getDataFromApi, {
         ...parameters,
-        brand: 'Barstool Sports',
+        brand: competitors[1],
       }),
     ])
 
@@ -153,6 +170,7 @@ function* getColorComparisonData({ data: { dateRange } }) {
       )
     )
   } catch (err) {
+    console.log('err', err)
     yield put(actions.getColorComparisonDataError(err))
   }
 }

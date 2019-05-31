@@ -186,3 +186,23 @@
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
   }
 }
+
+.container {
+  display: flex;
+  // padding: 8px 40px 40px;
+  width: 100%;
+  height: 300px;
+  justify-content: space-between;
+  padding-bottom: 45px;
+  .legends {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    margin: 0 16px 0px 0px;
+    .legend {
+      font-family: $font-family-ClanOTBold;
+      font-size: 14px;
+      text-align: right;
+    }
+  }
+}

@@ -49,6 +49,7 @@ const LibraryDetailChartHeader = ({
   cvScore,
   id,
 }) => {
+  console.log(videoUrl)
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (

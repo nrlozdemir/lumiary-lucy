@@ -184,10 +184,18 @@ module.exports = {
 							loader: "sass-resources-loader",
 							options: {
 								resources: [
-									path.resolve(__dirname, "../client/scss/variables.scss"),
-									path.resolve(__dirname, "../client/scss/fonts.scss"),
-									path.resolve(__dirname, "../client/scss/_misc/misc.scss")
-								]
+								  path.resolve(__dirname, '../client/scss/variables.scss'),
+								  // path.resolve(__dirname, '../client/scss/fonts.scss'),
+								  // path.resolve(__dirname, '../client/scss/_misc/misc.scss'),
+								  path.resolve(
+								    __dirname,
+								    '../../node_modules/bourbon/app/assets/stylesheets/_bourbon.scss'
+								  ),
+								  path.resolve(
+								    __dirname,
+								    '../../node_modules/bourbon-neat/core/_neat.scss'
+								  ),
+								],
 							}
 						}
 					]

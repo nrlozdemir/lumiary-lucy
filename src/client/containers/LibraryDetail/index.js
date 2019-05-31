@@ -14,6 +14,7 @@ import LibraryDetailChartHeader from './sections/LibraryDetailChartHeader'
 import LibraryDetailDoughnutChart from './sections/LibraryDetailDoughnutChart'
 import LibraryDetailColorTemperature from './sections/LibraryDetailColorTemperature'
 import LibraryDetailShotByShot from './sections/LibraryDetailShotByShot'
+import { userUuid } from 'Utils/globals'
 import { withTheme } from 'ThemeContext/withTheme'
 
 /* eslint-disable react/prefer-stateless-function */
@@ -30,23 +31,23 @@ export class LibraryDetail extends React.Component {
   componentDidMount() {
     const {
       match,
-      getVideos,
       getBarChartRequest,
       getDoughnutChartRequest,
       getColorTempRequest,
       getShotByShotRequest,
+      getSelectedVideo,
       themeContext: { colors },
     } = this.props
 
-    getVideos()
     if (match.params.videoId) {
-      getBarChartRequest({ LibraryDetailId: match.params.videoId })
+      getSelectedVideo(match.params.videoId)
+      getBarChartRequest({ LibraryDetailId: 1 })
       getDoughnutChartRequest({
         LibraryDetailId: match.params.videoId,
         themeColors: colors,
       })
-      getColorTempRequest({ LibraryDetailId: match.params.videoId })
-      getShotByShotRequest({ LibraryDetailId: match.params.videoId })
+      getColorTempRequest({ LibraryDetailId: 1 })
+      getShotByShotRequest({ LibraryDetailId: 1 })
     }
   }
 
@@ -70,10 +71,10 @@ export class LibraryDetail extends React.Component {
       })
     }
     if (prevMatch.params.videoId !== match.params.videoId) {
-      getBarChartRequest({ LibraryDetailId: match.params.videoId })
-
-      getColorTempRequest({ LibraryDetailId: match.params.videoId })
-      getShotByShotRequest({ LibraryDetailId: match.params.videoId })
+      getSelectedVideo(match.params.videoId)
+      getBarChartRequest({ LibraryDetailId: 1 })
+      getColorTempRequest({ LibraryDetailId: 1 })
+      getShotByShotRequest({ LibraryDetailId: 1 })
     }
   }
 
@@ -84,15 +85,14 @@ export class LibraryDetail extends React.Component {
         doughnutLineChartData,
         colorTempData,
         shotByShotData,
+        selectedVideo: { socialIcon, uuid },
       },
-      library: { videos },
       match: {
         params: { videoId },
       },
     } = this.props
 
-    const { videoUrl, title, socialIcon, cvScore, id } =
-      videos.find(({ id }) => id == videoId) || {}
+    const cvScore = 80.0
 
     let radarDataCombined = null
 
@@ -118,26 +118,28 @@ export class LibraryDetail extends React.Component {
         radarData_DatasetOptions
       )
     }
-
+    console.log(this.props)
     return (
       <React.Fragment>
         {barChartData && cvScore && (
           <LibraryDetailChartHeader
             barChartData={barChartData}
-            videoUrl={videoUrl}
-            title={title}
+            videoUrl={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/${userUuid}/${uuid}.mp4`}
+            title={'Temporary Title'}
             socialIcon={socialIcon}
             cvScore={cvScore}
-            id={id}
+            id={uuid}
           />
         )}
         {doughnutLineChartData && (
           <LibraryDetailDoughnutChart doughnutData={doughnutLineChartData} />
         )}
-        <LibraryDetailColorTemperature
-          libraryDetailId={videoId}
-          colorTempData={colorTempData}
-        />
+        {colorTempData && (
+          <LibraryDetailColorTemperature
+            libraryDetailId={videoId}
+            colorTempData={colorTempData}
+          />
+        )}
         {shotByShotData && (
           <LibraryDetailShotByShot
             sliderWithThumbnails={shotByShotData.sliderWithThumbnails}
@@ -169,6 +171,7 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
+    getSelectedVideo: (id) => dispatch(actions.getSelectedVideoRequest(id)),
     getVideos: () => dispatch(libraryActions.loadVideos()),
     getBarChartRequest: (id) => dispatch(actions.getBarChartRequest(id)),
     getDoughnutChartRequest: (id) =>

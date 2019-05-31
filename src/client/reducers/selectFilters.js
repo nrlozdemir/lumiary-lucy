@@ -36,7 +36,7 @@ export const defaultFilters = {
   duration: '0-15',
   pacing: 'fast',
   videoFormat: 'liveAction',
-  property: 'aspectRatio',
+  property: 'pacing',
   audienceAge: '10-',
   audienceGender: 'male',
   talentAge: '10-',
@@ -163,9 +163,7 @@ const selectFiltersReducer = (state = initialState, action) => {
   }
 }
 
-export const selectFiltersState = (state) => {
-  return state.SelectFilters
-}
+export const selectFiltersState = (state) => state.SelectFilters
 
 export const makeSelectSelectFilters = () =>
   createSelector(

@@ -22,7 +22,6 @@ import {
   getBrandAndCompetitors,
   convertDataIntoDatasets,
   getDateBucketFromRange,
-  convertMetricDataIntoDatasets,
   getMaximumValueIndexFromArray,
 } from 'Utils'
 
@@ -96,6 +95,7 @@ function* getCompetitorTopVideosMarketview({
       dateBucket: 'none',
       display: 'percentage',
       brands: [brand.uuid],
+      url: '/report',
     }
 
     const [facebook, instagram, twitter, youtube] = yield all([
@@ -123,16 +123,20 @@ function* getCompetitorTopVideosMarketview({
   }
 }
 
-function* getSimilarProperties({ data: dateRange }) {
+function* getSimilarProperties(props) {
   try {
     const { brand } = yield select(selectAuthProfile)
-
+    const {
+      data: {
+        date: { dateRange },
+        themeColors,
+      },
+    } = props
     const expectedValues = [
       { key: 'color', title: 'Dominant Color' },
       { key: 'pacing', title: 'Pacing' },
       { key: 'duration', title: 'Duration' },
     ]
-
     const parameters = {
       dateRange,
       metric: 'views',
@@ -143,10 +147,8 @@ function* getSimilarProperties({ data: dateRange }) {
       url: '/report',
     }
 
-    const payloads = yield all(
-      expectedValues.map((item) =>
-        call(getDataFromApi, { ...parameters, property: [item.key] })
-      )
+    const payloads = yield expectedValues.map((item) =>
+      call(getDataFromApi, { ...parameters, property: [item.key] })
     )
 
     const createCustomBackground = (data) => {
@@ -156,29 +158,27 @@ function* getSimilarProperties({ data: dateRange }) {
         }
         return idx === getMaximumValueIndexFromArray(data)
           ? '#2FD7C4'
-          : '#ffffff'
+          : themeColors.textColor
       })
     }
 
-    yield put(
-      actions.getSimilarPropertiesSuccess(
-        expectedValues.map((item, idx) =>
-          convertDataIntoDatasets(
-            payloads[idx],
-            {
-              ...parameters,
-              property: [item.key],
-            },
-            {
-              singleDataset: true,
-              backgroundColor: createCustomBackground(
-                payloads[idx].data[payload.key]
-              ),
-            }
-          )
-        )
-      )
-    )
+    const val = expectedValues.map((payload, idx) => ({
+      ...payload,
+      doughnutChartValues: convertDataIntoDatasets(
+        payloads[idx],
+        {
+          ...parameters,
+          property: [payload.key],
+        },
+        {
+          singleDataset: true,
+          backgroundColor: createCustomBackground(
+            payloads[idx].data[Object.keys(payloads[idx].data)[0]][payload.key]
+          ),
+        }
+      ),
+    }))
+    yield put(actions.getSimilarPropertiesSuccess(val))
   } catch (error) {
     yield put(actions.getSimilarPropertiesFailure(error))
   }
@@ -195,9 +195,31 @@ function* getBubbleChartData() {
 
 function* getPacingChartData() {
   try {
-    const payload = yield call(getPacingChartApi)
-    yield put(actions.getPacingChartSuccess(payload))
+    const { brand } = yield select(selectAuthProfile)
+
+    const competitors =
+      !!brand.competitors &&
+      !!brand.competitors.length &&
+      brand.competitors.map((c) => c.uuid)
+
+    const options = {
+      competitors,
+    }
+
+    const url = `/brand/${brand.uuid}/properties?metric=shares&daterange=month`
+    //${!!competitors ? '&allcompetitors=true' : ''}`
+
+    const payload = yield call(getDataFromApi, options, url, 'GET')
+
+    const pacingChartData = convertDataIntoDatasets(
+      payload,
+      { property: ['pacing'] },
+      { customBorderColor: '#373F5B', singleDataset: true, noBrandKeys: true }
+    )
+
+    yield put(actions.getPacingChartSuccess(pacingChartData))
   } catch (error) {
+    console.log(error)
     yield put(actions.getPacingChartFailure(error))
   }
 }
@@ -217,39 +239,47 @@ function* getTotalViewsData({ data }) {
 
     const profile = yield select(selectAuthProfile)
 
-    const brands = getBrandAndCompetitors(profile)
+    const url = `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`
 
     const options = {
-      url: `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`,
-      requestType: 'GET',
-      brands,
       metric,
       platform,
       dateRange,
-      dateBucket: 'none',
       display: 'percentage',
       property: [metric],
     }
 
-    const payload = yield call(getTotalViewsApi)
-
-    //const barData = yield call(getDataFromApi, options)
-
     const dateBucket = getDateBucketFromRange(dateRange)
 
-    const doughnutData = yield call(getDataFromApi, options)
+    const [barData, doughnutData] = yield all([
+      call(getDataFromApi, null, `${url}&datebucket=${dateBucket}`, 'GET'),
+      call(getDataFromApi, null, `${url}&datebucket=none`, 'GET'),
+    ])
 
-    //const convertedBarData = convertDataIntoDatasets(barData, options)
+    const convertedBarData =
+      dateBucket === 'none'
+        ? {}
+        : convertDataIntoDatasets(
+            barData,
+            { ...options, dateBucket },
+            {
+              isMetric: true,
+            }
+          )
 
-    const convertedDoughnutData = convertMetricDataIntoDatasets(
+    const convertedDoughnutData = convertDataIntoDatasets(
       doughnutData,
-      { ...options, dateBucket },
-      { hoverBG: true, singleDataset: true, useBrandLabels: true }
+      { ...options, dateBucket: 'none' },
+      {
+        hoverBG: true,
+        singleDataset: true,
+        useBrandLabels: true,
+        isMetric: true,
+      }
     )
-
     yield put(
       actions.getTotalViewsSuccess({
-        barData: payload.barData,
+        barData: convertedBarData,
         doughnutData: convertedDoughnutData,
       })
     )
@@ -330,15 +360,36 @@ function* getTopPerformingPropertiesData({
       )
     )
   } catch (error) {
+    console.log('error =>', error)
     yield put(actions.getTopPerformingPropertiesFailure(error))
   }
 }
 
-function* getTopPerformingPropertiesByCompetitorsData() {
+function* getTopPerformingPropertiesByCompetitorsData({
+  payload: { dateRange },
+}) {
   try {
-    const payload = yield call(getGetTopPerformingPropertiesByCompetitorsApi)
-    yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess(payload))
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
+    const options = {
+      url: '/report',
+      metric: 'views',
+      // platform: 'all',
+      dateRange: dateRange,
+      dateBucket: 'none',
+      property: ['pacing'],
+      brands: [...competitors],
+    }
+    const payload = yield call(getDataFromApi, { ...options })
+    yield put(
+      actions.getTopPerformingPropertiesByCompetitorsSuccess(
+        convertDataIntoDatasets(payload, options, {
+          useBrandLabels: true,
+        })
+      )
+    )
   } catch (error) {
+    console.log('error', error)
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))
   }
 }

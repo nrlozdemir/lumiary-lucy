@@ -93,6 +93,20 @@
       padding: 8 24px;
     }
   }
+
+  .marketViewCardEmpty {
+    position: absolute;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 56px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    background-color: rgba(243, 246, 249, 0.7);
+  }
 }
 
 .alignTabs {
@@ -181,7 +195,7 @@
   position: relative;
 }
 
-.videoContainer{
+.videoContainer {
   width: 200px;
   height: 110px;
   margin: 0px auto;
@@ -342,15 +356,15 @@
     }
 
     &:nth-child(1):before {
-      background-color: #51adc0;
+      background-color: #2fd7c4;
     }
 
     &:nth-child(2):before {
-      background-color: #8567f0;
+      background-color: #8562f3;
     }
 
     &:nth-child(3):before {
-      background-color: #d0506c;
+      background-color: #5292e5;
     }
 
     &:nth-child(4):before {
@@ -358,7 +372,7 @@
     }
 
     &:nth-child(5):before {
-      background-color: #5a6386;
+      background-color: #545b79;
     }
   }
 

@@ -5,102 +5,80 @@ import style from './style.scss'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import { Line } from 'react-chartjs-2'
+import Scrubber from 'Components/Sliders/Scrubber'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
-class LineAndDoughnutChartModule extends React.Component {
-  render() {
-    const percentageCol = cx(style.percentageCol)
-    const {
-      moduleKey,
-      title,
-      action,
-      lineChartData,
-      lineChartOptions,
-      filters,
-      customCallbackFunc,
-    } = this.props
-    const plugins = [
-      {
-        beforeDraw: function(chart, easing) {
-          if (
-            chart.config.options.chartArea &&
-            chart.config.options.chartArea.backgroundColor
-          ) {
-            var ctx = chart.chart.ctx
-            var chartArea = chart.chartArea
+const LineAndDoughnutChartModule = ({
+  moduleKey,
+  title,
+  action,
+  lineChartData,
+  lineChartOptions,
+  filters,
+  isEmpty,
+  doughnutData,
+  percentageData,
+  customCallbackFunc,
+}) => {
+  const percentageCol = cx(style.percentageCol)
 
-            ctx.save()
-            ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-            ctx.fillRect(
-              chartArea.left,
-              chartArea.top,
-              chartArea.right - chartArea.left,
-              chartArea.bottom - chartArea.top
-            )
-            ctx.restore()
-          }
-        },
-        beforeDatasetsDraw: function(chart) {
-          if (chart.tooltip._active && chart.tooltip._active.length) {
-            var activePoint = chart.tooltip._active[0],
-              ctx = chart.ctx,
-              x = activePoint.tooltipPosition().x,
-              topY = chart.scales['y-axis-0'].top,
-              bottomY = chart.scales['y-axis-0'].bottom
-            // chart.config.options.customCallbackFunc()
-            // draw line
-            ctx.save()
-            ctx.beginPath()
-            ctx.moveTo(x, topY)
-            ctx.lineTo(x, bottomY)
-            ctx.lineWidth = 5
-            ctx.strokeStyle = '#fff'
-            ctx.stroke()
-            ctx.restore()
-          }
-        },
-      },
-    ]
+  const plugins = [
+    {
+      beforeDraw: function(chart, easing) {
+        if (
+          chart.config.options.chartArea &&
+          chart.config.options.chartArea.backgroundColor
+        ) {
+          var ctx = chart.chart.ctx
+          var chartArea = chart.chartArea
 
-    const percentageData = [
-      {
-        value: 33.5,
-        key: 'Live Action',
-        color: 'purple',
+          ctx.save()
+          ctx.fillStyle = chart.config.options.chartArea.backgroundColor
+          ctx.fillRect(
+            chartArea.left,
+            chartArea.top,
+            chartArea.right - chartArea.left,
+            chartArea.bottom - chartArea.top
+          )
+          ctx.restore()
+        }
       },
-      {
-        value: 60.1,
-        key: 'Animation',
-        color: 'green',
+      beforeDatasetsDraw: function(chart) {
+        if (chart.tooltip._active && chart.tooltip._active.length) {
+          var activePoint = chart.tooltip._active[0],
+            ctx = chart.ctx,
+            x = activePoint.tooltipPosition().x,
+            topY = chart.scales['y-axis-0'].top,
+            bottomY = chart.scales['y-axis-0'].bottom
+          // chart.config.options.customCallbackFunc()
+          // draw line
+          ctx.save()
+          ctx.beginPath()
+          ctx.moveTo(x, topY)
+          ctx.lineTo(x, bottomY)
+          ctx.lineWidth = 5
+          ctx.strokeStyle = '#fff'
+          ctx.stroke()
+          ctx.restore()
+        }
       },
-      {
-        value: 72.5,
-        key: 'Animation 2',
-        color: 'blue',
-      },
-      {
-        value: 50.2,
-        key: 'Stop Motion',
-        color: 'lightGrey',
-      },
-      {
-        value: 85.3,
-        key: 'Cinemagraph',
-        color: 'grey',
-      },
-    ]
-    return (
-      <ThemeContext.Consumer>
-        {({ themeContext: { colors } }) => (
-          <Module
-            moduleKey={moduleKey}
-            title={title}
-            action={action}
-            filters={filters}
-          >
-            <div className="grid-collapse">
-              <div className="col-12-no-gutters">
-                <div className="col-8-no-gutters">
+    },
+  ]
+
+  return (
+    <ThemeContext.Consumer>
+      {({ themeContext: { colors } }) => (
+        <Module
+          moduleKey={moduleKey}
+          title={title}
+          action={action}
+          filters={filters}
+          isEmpty={isEmpty}
+        >
+          <div className="grid-collapse">
+            <div className="col-12-no-gutters">
+              <div className="col-8-no-gutters">
+                {lineChartData && (
                   <Line
                     key={Math.random()}
                     data={lineChartData}
@@ -144,8 +122,10 @@ class LineAndDoughnutChartModule extends React.Component {
                       },
                     }}
                   />
-                </div>
-                <div className="col-4-no-gutters d-flex align-items-center justify-content-center">
+                )}
+              </div>
+              <div className="col-4-no-gutters d-flex align-items-center justify-content-center">
+                {doughnutData && (
                   <DoughnutChart
                     width={270}
                     height={270}
@@ -154,67 +134,48 @@ class LineAndDoughnutChartModule extends React.Component {
                     dataLabelFunction="insertAfter"
                     dataLabelInsert="%"
                     labelPositionRight
-                    data={{
-                      labels: [
-                        'Live Action',
-                        'Animation 2',
-                        'Stop Motion',
-                        'Animation',
-                        'Cinemagraph',
-                      ],
-                      datasets: [
-                        {
-                          data: [5, 15, 25, 10, 45],
-                          backgroundColor: [
-                            '#5292e5',
-                            '#545b79',
-                            '#acb0be',
-                            '#2fd7c4',
-                            '#8562f3',
-                          ],
-                          hoverBackgroundColor: [
-                            '#5292e5',
-                            '#545b79',
-                            '#acb0be',
-                            '#2fd7c4',
-                            '#8562f3',
-                          ],
-                        },
-                      ],
-                    }}
+                    data={doughnutData}
                   />
-                </div>
-              </div>
-              <div className="col-12">
-                <div className={style.scrollableContainer}>
-                  {percentageData.map((chart, i) => (
-                    <div className={percentageCol}>
-                      <div className={style.chartSectionBadge}>
-                        <span
-                          style={{
-                            background: colors.labelBackground,
-                            color: colors.labelColor,
-                            boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                          }}
-                        >
-                          {chart.key}
-                        </span>
-                      </div>
-                      <PercentageBarGraph
-                        key={Math.random()}
-                        percentage={chart.value}
-                        color={chart.color}
-                      />
-                    </div>
-                  ))}
-                </div>
+                )}
               </div>
             </div>
-          </Module>
-        )}
-      </ThemeContext.Consumer>
-    )
-  }
+            {!!percentageData && !!percentageData.length && (
+              <div className="col-12-no-gutters">
+                <Scrubber horizontal arrows>
+                  <div className={style.percentageGraphContainer}>
+                    {percentageData &&
+                      percentageData.map((chart, idx) => (
+                        <div
+                          className={percentageCol}
+                          key={`PTPF_percentage-${idx}`}
+                        >
+                          <div className={style.chartSectionBadge}>
+                            <span
+                              style={{
+                                background: colors.labelBackground,
+                                color: colors.labelColor,
+                                boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                              }}
+                            >
+                              {chart.key}
+                            </span>
+                          </div>
+                          <PercentageBarGraph
+                            key={Math.random()}
+                            percentage={chart.value}
+                            color={chart.color}
+                          />
+                        </div>
+                      ))}
+                  </div>
+                </Scrubber>
+              </div>
+            )}
+          </div>
+        </Module>
+      )}
+    </ThemeContext.Consumer>
+  )
 }
 
 export default LineAndDoughnutChartModule

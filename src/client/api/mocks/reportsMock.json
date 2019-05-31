@@ -61,19 +61,7 @@
     }
   ],
   "performanceComparisonData": {
-    "doughnutData": {
-      "datasets": [
-        {
-          "data": [33, 77]
-        }
-      ]
-    },
-    "stackedChartData": {
-      "datasets": [
-        { "data": [75, 40, 35, 80] },
-        { "data": [25, 60, 65, 20] }
-      ]
-    }
+    "datasets": [{ "data": [75, 40, 35, 80] }, { "data": [25, 60, 65, 20] }]
   },
   "colorComparisonData": [
     {

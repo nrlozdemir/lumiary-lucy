@@ -6,14 +6,15 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewPacingChart } from 'Reducers/marketview'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import RightArrowCircle from "Components/Icons/RightArrowCircle";
+import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 
 import style from 'Containers/Marketview/style.scss'
 import PacingPieChart from 'Components/Charts/MarketView/PacingPieChart'
 import classnames from 'classnames'
 
-import { chartCombineDataset } from 'Utils'
+import { isDataSetEmpty } from 'Utils'
 import { pacingCard_DatasetOptions } from './options'
+import { isEmpty } from 'lodash'
 
 class PacingCard extends Component {
   componentDidMount() {
@@ -21,15 +22,11 @@ class PacingCard extends Component {
   }
 
   render() {
-    const { pacingChartData } = this.props
+    const {
+      pacingChartData: { data, loading, error },
+    } = this.props
 
-    const combineData = chartCombineDataset(
-      {
-        labels: ['Slowest', 'Slow', 'Medium', 'Fast'],
-        datasets: pacingChartData,
-      },
-      pacingCard_DatasetOptions
-    )
+    const isDataEmpty = (!loading && isDataSetEmpty(data)) || isEmpty(data)
 
     return (
       <ThemeContext.Consumer>
@@ -41,6 +38,9 @@ class PacingCard extends Component {
               color: colors.textColor,
             }}
           >
+            {isDataEmpty && (
+              <div className={style.marketViewCardEmpty}>No Data Available</div>
+            )}
             <div className={style.marketViewCardTitle}>Pacing</div>
             <div className={style.marketViewCardSubTitle}>
               Top Competitor Similarities
@@ -57,9 +57,7 @@ class PacingCard extends Component {
               </span>
             </div>
 
-            {(pacingChartData || pacingChartData.length) && (
-              <PacingPieChart data={combineData} />
-            )}
+            {!isDataEmpty && <PacingPieChart data={data} />}
             <div className={style.marketViewCardChartTitle}>Medium Paced</div>
             <div
               className={classnames(
@@ -68,10 +66,11 @@ class PacingCard extends Component {
                 style.colorList
               )}
             >
-              <div className={style.colorListItem}>Slowest</div>
-              <div className={style.colorListItem}>Slow</div>
-              <div className={style.colorListItem}>Medium</div>
-              <div className={style.colorListItem}>Fast</div>
+              {!!data &&
+                !!data.labels &&
+                data.labels.map((label) => (
+                  <div className={style.colorListItem}>{label}</div>
+                ))}
             </div>
 
             <div className={style.marketViewCardDescription}>
@@ -87,7 +86,7 @@ class PacingCard extends Component {
             >
               View Competitor Metrics
               <div className={style.icon}>
-                <RightArrowCircle></RightArrowCircle>
+                <RightArrowCircle />
               </div>
             </Link>
           </div>
