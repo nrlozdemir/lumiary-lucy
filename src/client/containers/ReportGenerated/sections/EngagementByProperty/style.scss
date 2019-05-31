@@ -1,3 +1,10 @@
+.filteringSectionContainer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .lables {
   padding: 24px 0;
 }
@@ -27,12 +34,6 @@
 
 .radialChartsContainer {
   position: relative;
-  box-sizing: border-box;
-  font-family: $font-family-ClanOTNews;
-  background-color: $color-dark-grey-blue;
-  display: inline-block;
-  width: 100%;
-  margin-bottom: 72px;
   .doughnutTabs {
     border: none;
     margin-block-start: 0;
@@ -118,10 +119,10 @@
 
       div {
         i {
-          background-color: #21243B;
+          background-color: #21243b;
           border-radius: 20px;
           padding: 8px;
-          border: 2px solid #2FD7C4;
+          border: 2px solid #2fd7c4;
           margin-right: 20px;
         }
       }
@@ -135,8 +136,9 @@
 }
 
 .temperatureHeader {
-  padding: 48px 40px;
   display: flex;
+  width: calc(100% - 80px);
+  padding: 48px 40px 20px;
   justify-content: space-between;
   align-items: center;
 
@@ -148,10 +150,6 @@
   h2 {
     font-family: $font-family-ClanOTBold;
     font-size: 18px;
-  }
-
-  form {
-    margin: 0;
   }
 
   .inputWrapper {
@@ -188,7 +186,7 @@
     position: relative;
     width: calc(33.33% - 41px);
     border-left: 1px solid $color-dusk;
-    padding: 0 20px 20px;
+    padding: 20px;
     &:first-child {
       border: none;
     }
@@ -313,6 +311,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  // padding: 60px 0 80px 0;
   width: 40%;
 
   .secondsText {
@@ -323,9 +322,10 @@
 }
 
 .stackedChart {
+  position: relative;
+  margin-top: 0;
   canvas {
     margin: 0 auto;
-    background-color: $color-dark-five;
   }
 }
 
