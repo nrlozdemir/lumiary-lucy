@@ -11,6 +11,7 @@ import mock from 'Api/mocks/libraryMock.json'
 import { findIdDetail, getDataFromApi } from 'Utils/api'
 import { convertDataIntoDatasets, getMaximumValueIndexFromArray } from 'Utils/'
 import { selectAuthProfile } from 'Reducers/auth'
+import { chartColors } from 'Utils/globals'
 
 const RESOURCE = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea'
 
@@ -114,24 +115,43 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
   }
 }
 
-function* getColorTemperatureData({ payload: { LibraryDetailId } }) {
+function* getColorTemperatureData({
+  payload: { videoId, daterange = 'week' },
+}) {
   try {
-    const payload = yield call(getColorTempApi, {
-      LibraryDetailId,
-    })
+    const { brand } = yield select(selectAuthProfile)
 
-    const colors = ['#2fd7c4', '#8562f3', '#5292e5']
-    const shuffleData = payload.colorTempData.map((data) => {
-      data.data.map((item, i) => {
-        item.color = colors[i]
+    const response = yield call(
+      getDataFromApi,
+      {
+        daterange,
+        videoUuid: videoId,
+        mode: 'industry',
+      },
+      `/brand/${brand.uuid}/compare`,
+      'GET'
+    )
+
+    if (!!response && !!response.sentiments) {
+      console.log(response)
+      const { colorTempData: mockData } = yield call(getColorTempApi, {
+        LibraryDetailId: 1,
       })
-      return data
-    })
 
-    yield put({
-      type: types.GET_COLOR_TEMP_SUCCESS,
-      payload: shuffleData,
-    })
+      const shuffleData = mockData.map((data) => {
+        data.data.map((item, i) => {
+          item.color = chartColors[i]
+        })
+        return data
+      })
+
+      yield put({
+        type: types.GET_COLOR_TEMP_SUCCESS,
+        payload: shuffleData,
+      })
+    } else {
+      throw 'Error fetching Library/Detail ColorTemperature'
+    }
   } catch (err) {
     yield put(actions.getColorTempFailure(err))
   }

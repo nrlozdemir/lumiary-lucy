@@ -73,7 +73,7 @@ export class LibraryDetail extends React.Component {
     if (prevMatch.params.videoId !== match.params.videoId) {
       getSelectedVideo(match.params.videoId)
       getBarChartRequest({ LibraryDetailId: 1 })
-      getColorTempRequest({ LibraryDetailId: 1 })
+      getColorTempRequest({ videoId: match.params.videoId })
       getShotByShotRequest({ LibraryDetailId: 1 })
     }
   }
@@ -122,8 +122,6 @@ export class LibraryDetail extends React.Component {
       )
     }
 
-    // console.log(this.props)
-
     return (
       <React.Fragment>
         {barChartData && (
@@ -140,7 +138,7 @@ export class LibraryDetail extends React.Component {
         )}
         {colorTempData && (
           <LibraryDetailColorTemperature
-            libraryDetailId={videoId}
+            videoId={videoId}
             colorTempData={colorTempData}
           />
         )}
