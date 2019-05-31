@@ -40,10 +40,13 @@ class PerformanceComparison extends React.Component {
       doughnutData.datasets = [
         {
           data: [
-            firstDatasetValue / (totalData / 100),
-            secondDatasetValue / (totalData / 100),
+            (firstDatasetValue / (totalData / 100)).toFixed(2),
+            (secondDatasetValue / (totalData / 100)).toFixed(2),
           ],
-          backgroundColor: ['#5292E5', '#2FD7C4'],
+          backgroundColor: [
+            data.datasets[0].backgroundColor,
+            data.datasets[1].backgroundColor,
+          ],
         },
       ]
       doughnutData.labels = ['Bleacher Report', 'Barstool Sports']

@@ -59,7 +59,7 @@
         }
       ]
     }
-  ],,
+  ],
   "performanceComparisonData": {
     "datasets": [{ "data": [75, 40, 35, 80] }, { "data": [25, 60, 65, 20] }]
   },
