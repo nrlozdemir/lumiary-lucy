@@ -8,17 +8,21 @@ import {
   makeSelectLibraryDetailColorTemperature,
 } from 'Reducers/libraryDetail'
 import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
+
 //import style from './style.scss'
 class LibraryDetailColorTemperature extends React.Component {
   callBack = (data) => {
-    const { getColorTempRequest, libraryDetailId } = this.props
-    getColorTempRequest({ LibraryDetailId: libraryDetailId })
+    const { daterange } = data
+    const { getColorTempRequest, videoId } = this.props
+    getColorTempRequest({ videoId, daterange })
   }
 
   render() {
     const {
       libraryDetailColorTemperatureData: { data, loading, error },
     } = this.props
+
+    console.log(data)
 
     return (
       <ColorTemperatureModule
@@ -37,6 +41,7 @@ class LibraryDetailColorTemperature extends React.Component {
             type: 'dateRange',
             selectKey: 'ACT-wds',
             placeHolder: 'Date',
+            defaultValue: 'week',
           },
         ]}
       />
@@ -58,7 +63,7 @@ const withConnect = connect(
 )
 
 LibraryDetailColorTemperature.propTypes = {
-  libraryDetailId: PropTypes.string,
+  videoId: PropTypes.string,
 }
 
 export default compose(withConnect)(LibraryDetailColorTemperature)
