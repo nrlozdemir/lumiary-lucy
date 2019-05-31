@@ -31,7 +31,7 @@ class FormatCard extends Component {
       case 'Stop Motion':
         return 'icon-icon_stopmotion'
 
-      case 'CN':
+      case 'CG':
       case 'Cinemagraph':
         return 'icon-icon_cinemagraph'
 
