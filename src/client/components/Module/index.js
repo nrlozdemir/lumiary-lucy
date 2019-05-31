@@ -63,12 +63,6 @@ export class Module extends React.Component {
     })
   }
 
-  changeInfoStatus = () => {
-    this.setState({
-      infoShow: !this.state.infoShow,
-    })
-  }
-
   render() {
     const {
       children,

@@ -5,10 +5,12 @@ import { actions, types } from 'Reducers/generatedReport'
 
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
-import { convertDataIntoDatasets } from 'Utils'
-
+import {
+  convertDataIntoDatasets,
+  getDateBucketFromRange,
+  convertMultiRequestDataIntoDatasets,
+} from 'Utils'
 import { getDataFromApi } from 'Utils/api'
-
 import _ from 'lodash'
 
 function getGeneratedReportApi() {
@@ -16,36 +18,97 @@ function getGeneratedReportApi() {
   return axios.get('/').then((res) => generatedReportMockData)
 }
 
-function* getGeneratedReport() {
+function* getTopPerformingVideos() {
   try {
-    let payload = yield call(getGeneratedReportApi)
-    let shuffleData = payload.colorTempData
-    shuffleData = shuffleData.map((data) => {
-      data.data.map((item) => {
-        item.x = _.random(-50, 50)
-        item.y = _.random(-50, 50)
-      })
-      return data
-    })
-
-    const colors = [
-      'rgba(82, 146, 229, 0.8)',
-      '#acb0be',
-      'rgba(133, 103, 240, 0.8)',
-      'rgba(81, 173, 192, 0.8)',
-    ]
-    shuffleData = shuffleData.map((data) => {
-      data.data.map((item, i) => {
-        item.color = colors[i]
-      })
-      return data
-    })
-
-    payload.colorTempData = shuffleData
-
-    yield put(actions.loadGeneratedReportSuccess(payload))
+    let { topPerformingVideos } = yield call(getGeneratedReportApi)
+    yield put(actions.getTopPerformingVideosSuccess(topPerformingVideos))
   } catch (err) {
-    yield put(actions.loadGeneratedReportError(err))
+    yield put(actions.getTopPerformingVideosFailure(err))
+  }
+}
+
+function* getVideoReleasesBarChart() {
+  try {
+    let { videoReleasesData } = yield call(getGeneratedReportApi)
+    yield put(actions.getVideoReleasesBarChartSuccess(videoReleasesData))
+  } catch (err) {
+    yield put(actions.getVideoReleasesBarChartFailure(err))
+  }
+}
+
+function* getColorTempData() {
+  try {
+    let { colorTempData } = yield call(getGeneratedReportApi)
+    yield put(actions.getColorTempDataSuccess(colorTempData))
+  } catch (err) {
+    yield put(actions.getColorTempDataFailure(err))
+  }
+}
+
+function* getFilteringSectionData({ data: { dateRange, reportId } }) {
+  try {
+    const { brand } = yield select(selectAuthProfile)
+
+    const options = {
+      reportId,
+      dateRange,
+      metric: 'views',
+      platform: 'all',
+      dateBucket: 'none',
+      display: 'percentage',
+      property: ['duration'],
+      url: '/report',
+      brands: [brand.uuid],
+    }
+
+    const doughnutData = yield call(getDataFromApi, options)
+
+    const dateBucket = getDateBucketFromRange(dateRange)
+
+    const stackedChartData =
+      dateBucket !== 'none'
+        ? yield call(getDataFromApi, {
+            ...options,
+            dateBucket,
+          })
+        : { data: {} }
+
+    if (
+      !!doughnutData.data &&
+      !!doughnutData.data[brand.name] &&
+      !!doughnutData.data[brand.name]['duration'] &&
+      stackedChartData.data
+    ) {
+      yield put(
+        actions.getFilteringSectionDataSuccess({
+          doughnutData: convertDataIntoDatasets(doughnutData, options, {
+            singleDataset: true,
+          }),
+          stackedChartData:
+            (!_.isEmpty(stackedChartData.data) &&
+              convertDataIntoDatasets(
+                stackedChartData,
+                { ...options, dateBucket },
+                { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+              )) ||
+            {},
+          property: 'duration',
+        })
+      )
+    } else {
+      throw 'Error fetching FilteringSection data'
+    }
+  } catch (err) {
+    yield put(
+      // empty data
+      actions.getFilteringSectionDataSuccess({
+        doughnutData: {
+          total: 0,
+        },
+        stackedChartData: {},
+      })
+    )
+    yield put(actions.getFilteringSectionDataFailure(err))
   }
 }
 
@@ -95,16 +158,62 @@ function* getPacingCardData({ data: { reportId } }) {
       )
     } else {
       yield put(
-        actions.getPacingCardDataError('Error fetching Pacing Card data')
+        actions.getPacingCardDataFailure('Error fetching Pacing Card data')
       )
     }
   } catch (err) {
     console.log(err)
-    yield put(actions.getPacingCardDataError(err))
+    yield put(actions.getPacingCardDataFailure(err))
+  }
+}
+
+function* getCompetitorTopVideos({ data: { resolution } }) {
+  try {
+    const { brand } = yield select(selectAuthProfile)
+
+    const options = {
+      metric: 'views',
+      dateRange: '24hours',
+      property: ['resolution'],
+      dateBucket: 'none',
+      display: 'percentage',
+      brands: [brand.uuid],
+      url: '/report',
+    }
+
+    const [facebook, instagram, twitter, youtube] = yield all([
+      call(getDataFromApi, { ...options, platform: 'facebook' }),
+      call(getDataFromApi, { ...options, platform: 'instagram' }),
+      call(getDataFromApi, { ...options, platform: 'twitter' }),
+      call(getDataFromApi, { ...options, platform: 'youtube' }),
+    ])
+
+    yield put(
+      actions.getCompetitorTopVideosSuccess(
+        convertMultiRequestDataIntoDatasets(
+          {
+            facebook,
+            instagram,
+            twitter,
+            youtube,
+          },
+          options
+        )
+      )
+    )
+  } catch (error) {
+    yield put(actions.getCompetitorTopVideosFailure(error))
   }
 }
 
 export default [
-  takeLatest(types.LOAD_GENERATED_REPORT, getGeneratedReport),
-  takeLatest(types.GET_PACING_CARD_DATA, getPacingCardData),
+  takeLatest(types.GET_PACING_CARD_DATA_REQUEST, getPacingCardData),
+  takeLatest(types.GET_COMPETITOR_TOP_VIDEOS_REQUEST, getCompetitorTopVideos),
+  takeLatest(types.GET_TOP_PERFORMING_VIDEOS_REQUEST, getTopPerformingVideos),
+  takeLatest(
+    types.GET_VIDEO_RELEASES_BAR_CHART_REQUEST,
+    getVideoReleasesBarChart
+  ),
+  takeLatest(types.GET_COLOR_TEMP_DATA_REQUEST, getColorTempData),
+  takeLatest(types.GET_FILTERING_SECTION_DATA_REQUEST, getFilteringSectionData),
 ]
