@@ -3,10 +3,11 @@ import axios from 'axios'
 import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
 import reportsMockData from 'Api/mocks/reportsMock.json'
-import { randomKey } from 'Utils/index'
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
 import {
+  randomKey,
+  convertMultiRequestDataIntoDatasets,
   compareSharesData,
   radarChartCalculate,
   getBrandAndCompetitors,
@@ -111,21 +112,37 @@ function* getVideoComparisonData() {
   }
 }
 
-function* getPerformanceComparisonData() {
+function* getPerformanceComparisonData({ data: { metric, property } }) {
   try {
-    const payload = yield call(getReportsApi)
+    const { brand } = yield select(selectAuthProfile)
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
 
-    let shuffleData = payload.performanceComparisonData
-    shuffleData.doughnutData.datasets[0].data = _.shuffle(
-      shuffleData.doughnutData.datasets[0].data
+    const parameters = {
+      url: '/report',
+      dateRange: '24hours',
+      metric,
+      property: [property],
+      dateBucket: 'none',
+      brands: [brand.uuid],
+    }
+
+    const payload = yield all([
+      call(getDataFromApi, {
+        ...parameters,
+        brand: competitors[0],
+      }),
+      call(getDataFromApi, {
+        ...parameters,
+        brand: competitors[1],
+      }),
+    ])
+
+    yield put(
+      actions.getPerformanceComparisonDataSuccess(
+        convertMultiRequestDataIntoDatasets(payload, parameters)
+      )
     )
-
-    shuffleData.stackedChartData.datasets[0].data.forEach((item, index) => {
-      let randomNumber = _.random(10, 90)
-      shuffleData.stackedChartData.datasets[0].data[index] = randomNumber
-      shuffleData.stackedChartData.datasets[1].data[index] = 100 - randomNumber
-    })
-    yield put(actions.getPerformanceComparisonDataSuccess(shuffleData))
   } catch (err) {
     yield put(actions.getPerformanceComparisonDataError(err))
   }

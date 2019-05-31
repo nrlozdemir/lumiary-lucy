@@ -44,36 +44,18 @@
       }
     ]
   },
-  "videoComparisonData": [
-    {
-      "datasets": [
-        {
-          "data": [10, 55, 5, 30]
-        }
-      ]
-    },
-    {
-      "datasets": [
-        {
-          "data": [12, 19, 5, 64]
-        }
-      ]
-    }
-  ],
+  "videoComparisonData": {
+    "datasets": [
+      {
+        "data": [10, 55, 5, 30]
+      },
+      {
+        "data": [12, 19, 5, 64]
+      }
+    ]
+  },
   "performanceComparisonData": {
-    "doughnutData": {
-      "datasets": [
-        {
-          "data": [33, 77]
-        }
-      ]
-    },
-    "stackedChartData": {
-      "datasets": [
-        { "data": [75, 40, 35, 80] },
-        { "data": [25, 60, 65, 20] }
-      ]
-    }
+    "datasets": [{ "data": [75, 40, 35, 80] }, { "data": [25, 60, 65, 20] }]
   },
   "colorComparisonData": [
     {

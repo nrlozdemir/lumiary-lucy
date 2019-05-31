@@ -5,11 +5,12 @@ import Module from 'Components/Module'
 import { Bar } from 'react-chartjs-2'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import 'chartjs-plugin-datalabels'
-import { randomKey } from 'Utils/index'
+import Legend from 'Components/Legend'
 
 import style from './style.scss'
 import classnames from 'classnames'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import { isDataSetEmpty } from 'Utils'
 
 const barPlugins = [
   {
@@ -48,6 +49,26 @@ const barPlugins = [
   },
 ]
 
+const renderLegend = (legend) => {
+  if (!legend.length) {
+    return null
+  }
+
+  return (
+    <div className={style.headerLabel}>
+      <div className={'d-flex align-items-center justify-content-center'}>
+        {legend.map((item, idx) => (
+          <Legend
+            key={`colorTempLegend_${idx}`}
+            color={item.color}
+            label={item.label}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
 const BarAndDoughnutChartModule = ({
   moduleKey,
   title,
@@ -70,7 +91,8 @@ const BarAndDoughnutChartModule = ({
           title={title}
           action={action}
           filters={filters}
-          legend={legend}
+          legend={renderLegend(legend)}
+          isEmpty={isDataSetEmpty(stackedChartData)}
         >
           <div
             className={classnames(style.container, reverse && style.reverse)}
