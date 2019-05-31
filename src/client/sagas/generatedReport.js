@@ -5,22 +5,17 @@ import { actions, types } from 'Reducers/generatedReport'
 
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
-import { convertDataIntoDatasets, getDateBucketFromRange } from 'Utils'
+import {
+  convertDataIntoDatasets,
+  getDateBucketFromRange,
+  convertMultiRequestDataIntoDatasets,
+} from 'Utils'
 import { getDataFromApi } from 'Utils/api'
 import _ from 'lodash'
 
 function getGeneratedReportApi() {
   //this will use ajax function in utils/api when real data is provided
   return axios.get('/').then((res) => generatedReportMockData)
-}
-
-function* getTopVideosCard() {
-  try {
-    let { topVideosOverTime } = yield call(getGeneratedReportApi)
-    yield put(actions.getTopVideosCardSuccess(topVideosOverTime))
-  } catch (err) {
-    yield put(actions.getTopVideosCardFailure(err))
-  }
 }
 
 function* getTopPerformingVideos() {
@@ -172,9 +167,48 @@ function* getPacingCardData({ data: { reportId } }) {
   }
 }
 
+function* getCompetitorTopVideos({ data: { resolution } }) {
+  try {
+    const { brand } = yield select(selectAuthProfile)
+
+    const options = {
+      metric: 'views',
+      dateRange: '24hours',
+      property: ['resolution'],
+      dateBucket: 'none',
+      display: 'percentage',
+      brands: [brand.uuid],
+      url: '/report',
+    }
+
+    const [facebook, instagram, twitter, youtube] = yield all([
+      call(getDataFromApi, { ...options, platform: 'facebook' }),
+      call(getDataFromApi, { ...options, platform: 'instagram' }),
+      call(getDataFromApi, { ...options, platform: 'twitter' }),
+      call(getDataFromApi, { ...options, platform: 'youtube' }),
+    ])
+
+    yield put(
+      actions.getCompetitorTopVideosSuccess(
+        convertMultiRequestDataIntoDatasets(
+          {
+            facebook,
+            instagram,
+            twitter,
+            youtube,
+          },
+          options
+        )
+      )
+    )
+  } catch (error) {
+    yield put(actions.getCompetitorTopVideosFailure(error))
+  }
+}
+
 export default [
   takeLatest(types.GET_PACING_CARD_DATA_REQUEST, getPacingCardData),
-  takeLatest(types.GET_TOP_VIDEOS_CARD_REQUEST, getTopVideosCard),
+  takeLatest(types.GET_COMPETITOR_TOP_VIDEOS_REQUEST, getCompetitorTopVideos),
   takeLatest(types.GET_TOP_PERFORMING_VIDEOS_REQUEST, getTopPerformingVideos),
   takeLatest(
     types.GET_VIDEO_RELEASES_BAR_CHART_REQUEST,

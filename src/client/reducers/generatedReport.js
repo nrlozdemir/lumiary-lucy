@@ -8,9 +8,12 @@ export const types = {
   GET_PACING_CARD_DATA_SUCCESS: 'GeneratedReport/GET_PACING_CARD_DATA_SUCCESS',
   GET_PACING_CARD_DATA_FAILURE: 'GeneratedReport/GET_PACING_CARD_DATA_FAILURE',
 
-  GET_TOP_VIDEOS_CARD_REQUEST: 'GeneratedReport/GET_TOP_VIDEOS_CARD_REQUEST',
-  GET_TOP_VIDEOS_CARD_SUCCESS: 'GeneratedReport/GET_TOP_VIDEOS_CARD_SUCCESS',
-  GET_TOP_VIDEOS_CARD_FAILURE: 'GeneratedReport/GET_TOP_VIDEOS_CARD_FAILURE',
+  GET_COMPETITOR_TOP_VIDEOS_REQUEST:
+    'GeneratedReport/GET_COMPETITOR_TOP_VIDEOS_REQUEST',
+  GET_COMPETITOR_TOP_VIDEOS_SUCCESS:
+    'GeneratedReport/GET_COMPETITOR_TOP_VIDEOS_SUCCESS',
+  GET_COMPETITOR_TOP_VIDEOS_FAILURE:
+    'GeneratedReport/GET_COMPETITOR_TOP_VIDEOS_FAILURE',
 
   GET_TOP_PERFORMING_VIDEOS_REQUEST:
     'GeneratedReport/GET_TOP_PERFORMING_VIDEOS_REQUEST',
@@ -53,19 +56,6 @@ export const actions = {
   }),
   getPacingCardDataFailure: (error) => ({
     type: types.GET_PACING_CARD_DATA_FAILURE,
-    error,
-  }),
-
-  getTopVideosCardRequest: (data) => ({
-    type: types.GET_TOP_VIDEOS_CARD_REQUEST,
-    data,
-  }),
-  getTopVideosCardSuccess: (payload) => ({
-    type: types.GET_TOP_VIDEOS_CARD_SUCCESS,
-    payload,
-  }),
-  getTopVideosCardFailure: (error) => ({
-    type: types.GET_TOP_VIDEOS_CARD_FAILURE,
     error,
   }),
 
@@ -120,6 +110,19 @@ export const actions = {
     type: types.GET_FILTERING_SECTION_DATA_FAILURE,
     error,
   }),
+
+  getCompetitorTopVideosRequest: (data) => ({
+    type: types.GET_COMPETITOR_TOP_VIDEOS_REQUEST,
+    data,
+  }),
+  getCompetitorTopVideosSuccess: (payload) => ({
+    type: types.GET_COMPETITOR_TOP_VIDEOS_SUCCESS,
+    payload,
+  }),
+  getCompetitorTopVideosFailure: (error) => ({
+    type: types.GET_COMPETITOR_TOP_VIDEOS_FAILURE,
+    error,
+  }),
 }
 export const initialState = fromJS({
   selectedVideo: null,
@@ -160,6 +163,11 @@ export const initialState = fromJS({
     loading: false,
     error: null,
   },
+  competitorTopVideos: {
+    data: {},
+    loading: false,
+    error: null,
+  },
 })
 
 const generatedReportsReducer = (state = initialState, action) => {
@@ -191,18 +199,17 @@ const generatedReportsReducer = (state = initialState, action) => {
         .setIn(['pacingChartData', 'error'], fromJS(action.error))
         .setIn(['pacingChartData', 'loading'], fromJS(false))
 
-    case types.GET_TOP_VIDEOS_CARD_REQUEST:
-      return state.setIn(['topVideosCard', 'loading'], fromJS(true))
+    case types.GET_COMPETITOR_TOP_VIDEOS_REQUEST:
+      return state.setIn(['competitorTopVideos', 'loading'], fromJS(true))
 
-    case types.GET_TOP_VIDEOS_CARD_SUCCESS:
+    case types.GET_COMPETITOR_TOP_VIDEOS_SUCCESS:
       return state
-        .setIn(['topVideosCard', 'data'], fromJS(action.payload))
-        .setIn(['topVideosCard', 'loading'], fromJS(false))
-
-    case types.GET_TOP_VIDEOS_CARD_FAILURE:
+        .setIn(['competitorTopVideos', 'data'], fromJS(action.payload))
+        .setIn(['competitorTopVideos', 'loading'], fromJS(false))
+    case types.GET_COMPETITOR_TOP_VIDEOS_FAILURE:
       return state
-        .setIn(['topVideosCard', 'error'], fromJS(action.error))
-        .setIn(['topVideosCard', 'loading'], fromJS(false))
+        .setIn(['competitorTopVideos', 'error'], fromJS(action.error))
+        .setIn(['competitorTopVideos', 'loading'], fromJS(false))
 
     case types.GET_TOP_PERFORMING_VIDEOS_REQUEST:
       return state.setIn(['topPerformingVideos', 'loading'], fromJS(true))
@@ -282,15 +289,6 @@ export const makeSelectReportsPacingCard = () =>
     (substate) => substate.toJS()
   )
 
-export const selectTopVideosCard = (state) =>
-  state.GeneratedReport.get('topVideosCard')
-
-export const makeSelectReportsTopVideosCard = () =>
-  createSelector(
-    selectTopVideosCard,
-    (substate) => substate.toJS()
-  )
-
 export const selectTopPerformingVideos = (state) =>
   state.GeneratedReport.get('topPerformingVideos')
 
@@ -324,6 +322,15 @@ const selectReportsFilteringSectionDomain = (state) =>
 export const makeSelectReportsFilteringSection = () =>
   createSelector(
     selectReportsFilteringSectionDomain,
+    (substate) => substate.toJS()
+  )
+
+export const selectTopVideosCard = (state) =>
+  state.GeneratedReport.get('competitorTopVideos')
+
+export const makeSelectReportsTopVideosCard = () =>
+  createSelector(
+    selectTopVideosCard,
     (substate) => substate.toJS()
   )
 
