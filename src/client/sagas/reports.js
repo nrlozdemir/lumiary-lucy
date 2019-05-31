@@ -7,7 +7,7 @@ import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 
 import {
   randomKey,
-  convertMultiRequestDataIntoDatasets,
+  convertDataIntoDatasets,
   compareSharesData,
   radarChartCalculate,
   getBrandAndCompetitors,
@@ -124,23 +124,14 @@ function* getPerformanceComparisonData({ data: { metric, property } }) {
       metric,
       property: [property],
       dateBucket: 'none',
-      brands: [brand.uuid],
+      brands: [competitors[0], competitors[1]],
     }
 
-    const payload = yield all([
-      call(getDataFromApi, {
-        ...parameters,
-        brand: competitors[0],
-      }),
-      call(getDataFromApi, {
-        ...parameters,
-        brand: competitors[1],
-      }),
-    ])
+    const payload = yield call(getDataFromApi, parameters)
 
     yield put(
       actions.getPerformanceComparisonDataSuccess(
-        convertMultiRequestDataIntoDatasets(payload, parameters)
+        convertDataIntoDatasets(payload, parameters)
       )
     )
   } catch (err) {
