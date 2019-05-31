@@ -6,6 +6,7 @@ import { actions, makeSelectReportsVideoComparison } from 'Reducers/reports'
 import Module from 'Components/Module'
 //import cx from 'classnames'
 import ComparisonHorizontalBarChart from 'Components/ComparisonHorizontalBarChart'
+import { isDataSetEmpty } from 'Utils'
 import style from './style.scss'
 
 class VideoComparison extends React.Component {
@@ -16,24 +17,13 @@ class VideoComparison extends React.Component {
     const {
       videoComparisonData: { data, loading, error },
     } = this.props
-    let barData = data
-
-    barData &&
-      data.map((b, i) => {
-        barData[i].labels = ['', '', '', '']
-        barData[i].datasets.map((d, k) => {
-          barData[i].datasets[k].backgroundColor = '#2FD7C4'
-          if (i % 2 === 0) {
-            barData[i].datasets[k].backgroundColor = '#5292E5'
-          }
-        })
-      })
 
     return (
       <Module
         moduleKey={'Reports/VideoComparison'}
         title="Video Format Distrubution Comparison"
         action={this.callBack}
+        isEmpty={isDataSetEmpty(data)}
         filters={[
           {
             type: 'dateRange',
@@ -61,9 +51,7 @@ class VideoComparison extends React.Component {
           </div>
         }
       >
-        {data && data.length > 0 && (
-          <ComparisonHorizontalBarChart data={barData} />
-        )}
+        {data && <ComparisonHorizontalBarChart data={data} />}
       </Module>
     )
   }

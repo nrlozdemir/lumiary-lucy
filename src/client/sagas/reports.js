@@ -100,13 +100,27 @@ function* getContentVitalityScoreData() {
   }
 }
 
-function* getVideoComparisonData() {
+function* getVideoComparisonData({ data: { dateRange } }) {
   try {
-    const payload = yield call(getReportsApi)
-    let shuffleData = payload.videoComparisonData
-    shuffleData[0].datasets[0].data = _.shuffle(shuffleData[0].datasets[0].data)
-    shuffleData[1].datasets[0].data = _.shuffle(shuffleData[1].datasets[0].data)
-    yield put(actions.getVideoComparisonDataSuccess(shuffleData))
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
+
+    const parameters = {
+      url: '/report',
+      dateRange,
+      metric: 'views',
+      property: ['format'],
+      dateBucket: 'none',
+      brands: [competitors[0], competitors[1]],
+    }
+
+    const payload = yield call(getDataFromApi, parameters)
+
+    yield put(
+      actions.getVideoComparisonDataSuccess(
+        convertDataIntoDatasets(payload, parameters)
+      )
+    )
   } catch (err) {
     yield put(actions.getVideoComparisonDataError(err))
   }
