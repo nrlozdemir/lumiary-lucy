@@ -220,7 +220,7 @@ export const actions = {
   }),
   getTopPerformingPropertiesByCompetitorsRequest: (payload) => ({
     type: types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_REQUEST,
-    payload
+    payload,
   }),
   getTopPerformingPropertiesByCompetitorsSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_SUCCESS,
@@ -301,16 +301,12 @@ const marketviewReducer = (state = initialState, action) => {
     // PACING CHART
     case types.GET_MARKETVIEW_PACINGCHART_REQUEST:
       return state.setIn(['pacingChartData', 'loading'], fromJS(true))
-    
-    case types.GET_MARKETVIEW_PACINGCHART_SUCCESS:
 
+    case types.GET_MARKETVIEW_PACINGCHART_SUCCESS:
       return state
-        .setIn(
-          ['pacingChartData', 'data'],
-          fromJS(payload)
-        )
+        .setIn(['pacingChartData', 'data'], fromJS(payload))
         .setIn(['pacingChartData', 'loading'], fromJS(false))
-    
+
     case types.GET_MARKETVIEW_PACINGCHART_FAILURE:
       return state
         .setIn(['pacingChartData', 'error'], fromJS(action.error))
@@ -319,12 +315,12 @@ const marketviewReducer = (state = initialState, action) => {
     // FORMAT CHART
     case types.GET_MARKETVIEW_FORMATCHART_REQUEST:
       return state.set('loading', fromJS(true))
-    
+
     case types.GET_MARKETVIEW_FORMATCHART_SUCCESS:
       return state
         .set('formatChartData', fromJS(action.payload))
         .set('loading', fromJS(false))
-    
+
     case types.GET_MARKETVIEW_FORMATCHART_FAILURE:
       return state
         .set('error', fromJS(action.error))
@@ -415,6 +411,9 @@ const marketviewReducer = (state = initialState, action) => {
   }
 }
 
+const selectMarketviewSelectedVideoDomain = (state) =>
+  state.Marketview.get('selectedVideo')
+
 const selectMarketviewBubbleChartDomain = (state) =>
   state.Marketview.get('bubbleChartData')
 
@@ -466,6 +465,17 @@ export const makeSelectMarketviewCompetitorView = () =>
   createSelector(
     selectMarketviewtotalCompetitorViewDomain,
     (substate) => substate.toJS()
+  )
+
+export const selectMarketviewVideosView = () =>
+  createSelector(
+    selectMarketviewDomain,
+    (substate) => substate.toJS().videos
+  )
+export const selectMarketviewSelectedVideoView = () =>
+  createSelector(
+    selectMarketviewDomain,
+    (substate) => substate.toJS().selectedVideo
   )
 
 export default marketviewReducer
