@@ -418,6 +418,9 @@ const marketviewReducer = (state = initialState, action) => {
   }
 }
 
+const selectMarketviewSelectedVideoDomain = (state) =>
+  state.Marketview.get('selectedVideo')
+
 const selectMarketviewBubbleChartDomain = (state) =>
   state.Marketview.get('bubbleChartData')
 
@@ -469,6 +472,17 @@ export const makeSelectMarketviewCompetitorView = () =>
   createSelector(
     selectMarketviewtotalCompetitorViewDomain,
     (substate) => substate.toJS()
+  )
+
+export const selectMarketviewVideosView = () =>
+  createSelector(
+    selectMarketviewDomain,
+    (substate) => substate.toJS().videos
+  )
+export const selectMarketviewSelectedVideoView = () =>
+  createSelector(
+    selectMarketviewDomain,
+    (substate) => substate.toJS().selectedVideo
   )
 
 export default marketviewReducer

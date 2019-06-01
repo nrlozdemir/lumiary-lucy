@@ -10,13 +10,10 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketview } from 'Reducers/marketview'
 
-import Slider from 'Components/Modules/SliderModule'
+import Slider from '../sections/detail/Slider'
 import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
 import BarChartModule from 'Components/Modules/BarChartModule'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
-
-import { chartCombineDataset } from 'Utils'
-import { TopPerformingProperties_DatasetOptions } from 'Containers/Marketview/sections/detail/options'
 
 import style from '../style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
@@ -37,14 +34,11 @@ const chartTickOptions = {
 
 /* eslint-disable react/prefer-stateless-function */
 export class Competitor extends React.Component {
-  componentDidMount() {
-    this.props.getCompetitorVideosRequest()
-  }
-
   getSimilarProperties = (data) => {
     const {
       themeContext: { colors },
     } = this.props
+    console.log(data)
     this.props.getSimilarPropertiesRequest({
       date: data,
       themeColors: colors,
@@ -53,10 +47,6 @@ export class Competitor extends React.Component {
 
   getTopPerformingPropertiesByCompetitors = (data) => {
     this.props.getTopPerformingPropertiesByCompetitorsRequest(data)
-  }
-
-  getCompetitorVideos = (data) => {
-    this.props.getCompetitorVideosRequest(data)
   }
 
   getCompetitorTopVideos = (data) => {
@@ -80,25 +70,7 @@ export class Competitor extends React.Component {
     return (
       <React.Fragment>
         <div className="grid-collapse">
-          <Slider
-            data={marketview.videos || []}
-            selectedVideo={selectedVideo}
-            changeSelectedVideo={this.changeSelectedVideo}
-            action={this.getCompetitorVideos}
-            title="Top Performing Competitor Videos"
-            filters={[
-              {
-                type: 'metric',
-                selectKey: 'Mwplt-engagement',
-                placeHolder: 'Engagement',
-              },
-              {
-                type: 'dateRange',
-                selectKey: 'Mwplt-date',
-                placeHolder: 'Date',
-              },
-            ]}
-          />
+          <Slider />
           <TopVideosCardModule
             chartData={competitorTopVideos}
             height={150}
