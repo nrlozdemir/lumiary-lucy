@@ -110,7 +110,6 @@ class MarketViewSlider extends React.Component {
 
   render() {
     const { items } = this.props
-    console.log(items)
     return (
       <div className={style.section}>
         <div className="marketViewSlider">

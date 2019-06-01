@@ -232,10 +232,14 @@ export const actions = {
   }),
 }
 export const initialState = fromJS({
-  competitorTopVideos: null,
-  videos: null,
+  competitorTopVideos: [],
+  videos: [],
   selectedVideo: null,
-  similarProperties: null,
+  similarProperties: {
+    data: [],
+    loading: false,
+    error: null,
+  },
   bubbleChartData: [],
   pacingChartData: {
     data: {},
@@ -356,15 +360,15 @@ const marketviewReducer = (state = initialState, action) => {
         .setIn(['totalViewsData', 'loading'], fromJS(false))
 
     case types.GET_MARKETVIEW_SIMILAR_PROPERTIES_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['similarProperties', 'loading'], fromJS(true))
     case types.GET_MARKETVIEW_SIMILAR_PROPERTIES_SUCCESS:
       return state
-        .set('similarProperties', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(['similarProperties', 'data'], fromJS(action.payload))
+        .setIn(['similarProperties', 'loading'], fromJS(false))
     case types.GET_MARKETVIEW_SIMILAR_PROPERTIES_FAILURE:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['similarProperties', 'error'], fromJS(action.error))
+        .setIn(['similarProperties', 'loading'], fromJS(false))
 
     case types.GET_MARKETVIEW_DETAIL_TIME_REQUEST:
       return state.set('loading', fromJS(true))
@@ -418,9 +422,6 @@ const marketviewReducer = (state = initialState, action) => {
   }
 }
 
-const selectMarketviewSelectedVideoDomain = (state) =>
-  state.Marketview.get('selectedVideo')
-
 const selectMarketviewBubbleChartDomain = (state) =>
   state.Marketview.get('bubbleChartData')
 
@@ -433,8 +434,15 @@ const selectMarketviewPacingChartDomain = (state) =>
 const selectMarketviewTotalViewDomain = (state) =>
   state.Marketview.get('totalViewsData')
 
+const selectMarketviewSimilarPropertiesDomain = (state) =>
+  state.Marketview.get('similarProperties')
+
 const selectMarketviewtotalCompetitorViewDomain = (state) =>
   state.Marketview.get('totalCompetitorViewsData')
+
+const selectMarketviewVideosDomain = (state) => state.Marketview.get('videos')
+const selectMarketviewCompetitorTopVideosDomain = (state) =>
+  state.Marketview.get('competitorTopVideos')
 
 export const selectMarketviewDomain = (state) => state.Marketview
 
@@ -476,13 +484,24 @@ export const makeSelectMarketviewCompetitorView = () =>
 
 export const selectMarketviewVideosView = () =>
   createSelector(
-    selectMarketviewDomain,
-    (substate) => substate.toJS().videos
+    selectMarketviewVideosDomain,
+    (substate) => substate.toJS()
   )
 export const selectMarketviewSelectedVideoView = () =>
   createSelector(
     selectMarketviewDomain,
     (substate) => substate.toJS().selectedVideo
+  )
+
+export const selectMarketviewCompetitorTopVideosView = () =>
+  createSelector(
+    selectMarketviewCompetitorTopVideosDomain,
+    (substate) => substate.toJS()
+  )
+export const selectMarketviewSimilarPropertiesView = () =>
+  createSelector(
+    selectMarketviewSimilarPropertiesDomain,
+    (substate) => substate.toJS()
   )
 
 export default marketviewReducer
