@@ -11,16 +11,18 @@ import SliderModule from 'Components/Modules/SliderModule'
 
 class Slider extends React.Component {
   componentDidMount() {
-    console.log(this.props)
     this.props.getCompetitorVideosRequest()
   }
   getCompetitorVideos = (data) => {
     this.props.getCompetitorVideosRequest(data)
   }
+  changeSelectedVideo = (video) => {
+    this.props.setSelectedVideo(video)
+  }
 
   render() {
     const { videos, selectedVideo } = this.props
-    console.log(this.props)
+    console.log('slide', this.props.videos)
     return (
       <SliderModule
         data={videos || []}
