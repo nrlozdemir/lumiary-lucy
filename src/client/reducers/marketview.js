@@ -280,6 +280,11 @@ export const initialState = fromJS({
     loading: false,
     error: null,
   },
+  topPerformingDataForTime: {
+    data: [],
+    loading: false,
+    error: null,
+  },
 })
 
 const marketviewReducer = (state = initialState, action) => {
@@ -398,18 +403,16 @@ const marketviewReducer = (state = initialState, action) => {
         .set('loading', fromJS(false))
 
     case types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['topPerformingDataForTime', 'loading'], fromJS(true))
     case types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_SUCCESS:
       return state
-        .setIn(
-          ['marketviewDetailTime', 'topPerformingData'],
-          fromJS(action.payload)
-        )
-        .set('loading', fromJS(false))
+        .setIn(['topPerformingDataForTime', 'data'], fromJS(action.payload))
+        .setIn(['topPerformingDataForTime', 'loading'], fromJS(false))
     case types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_FAILURE:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['topPerformingDataForTime', 'error'], fromJS(action.error))
+
+        .setIn(['topPerformingDataForTime', 'loading'], fromJS(false))
 
     case types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST:
       return state.setIn(['totalCompetitorViewsData', 'loading'], fromJS(true))
@@ -495,6 +498,9 @@ const selectMarketviewTopPerformingPropertiesByCompetitorsDataDomain = (
 const selectMarketviewTopPerformingPropertiesDataDomain = (state) =>
   state.Marketview.get('topPerformingPropertiesData')
 
+const selectMarketviewTopPerformingDataDomain = (state) =>
+  state.Marketview.get('topPerformingDataForTime')
+
 export const selectMarketviewDomain = (state) => state.Marketview
 
 export const makeSelectMarketview = () =>
@@ -564,6 +570,12 @@ export const selectMarketviewTopPerformingPropertiesByCompetitorsDataView = () =
 export const selectMarketviewTopPerformingPropertiesDataView = () =>
   createSelector(
     selectMarketviewTopPerformingPropertiesDataDomain,
+    (substate) => substate.toJS()
+  )
+
+export const selectMarketviewTopPerformingDataView = () =>
+  createSelector(
+    selectMarketviewTopPerformingDataDomain,
     (substate) => substate.toJS()
   )
 
