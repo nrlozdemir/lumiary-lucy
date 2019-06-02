@@ -49,7 +49,10 @@ function* getColorTemperatureData({ data }) {
       labels,
       platforms,
       data: colorTempData,
-    } = convertColorTempToDatasets(response, colorTemperature)
+    } = convertColorTempToDatasets(
+      response,
+      colorTemperature
+    )
 
     yield put(
       actions.getColorTemperatureDataSuccess({
