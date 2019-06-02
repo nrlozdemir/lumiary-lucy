@@ -1,11 +1,5 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectReportsColorComparison } from 'Reducers/reports'
-//import classnames from 'classnames'
 import RadarChartModule from 'Components/Modules/RadarChartModule'
-//import style from './style.scss'
 
 const strToColor = (str) => {
   str = str.toLowerCase().replace(/\s/g, '')
@@ -29,11 +23,13 @@ const strToColor = (str) => {
 
 class ColorComparison extends React.Component {
   callBack = (data, moduleKey) => {
-    this.props.getColorComparisonData(data)
+    const { action, report } = this.props
+    action({ ...data, report })
   }
+
   render() {
     const {
-      colorComparisonData: { data, loading, error },
+      data: { data, loading, error },
     } = this.props
 
     let colorsData
@@ -105,15 +101,4 @@ class ColorComparison extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  colorComparisonData: makeSelectReportsColorComparison(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(ColorComparison)
+export default ColorComparison

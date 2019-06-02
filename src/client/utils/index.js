@@ -400,8 +400,7 @@ const compareSharesData = ({ data }) => {
   return Object.keys(data).map((brand) => {
     const item = data[brand]
     const keyName = Object.keys(item)[0]
-    const colorData = item[keyName].color
-    const labels = Object.entries(colorData)
+    const labels = Object.entries(item[keyName])
     const type = brand ? brand : keyName
     return {
       type: capitalizeFirstLetter(type),
