@@ -1,18 +1,11 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import {
-  actions,
-  makeSelectReportsTopPerformingVideos,
-} from 'Reducers/generatedReport'
 import SliderModule from 'Components/Modules/SliderModule'
 import RouterLoading from 'Components/RouterLoading'
 
 class Slider extends React.Component {
   componentDidMount() {
-    const { getTopPerformingVideosRequest, reportId } = this.props
-    getTopPerformingVideosRequest({ reportId })
+    const { action, report } = this.props
+    action({ report })
   }
 
   changeSelectedVideo = (video) => {
@@ -21,7 +14,7 @@ class Slider extends React.Component {
 
   render() {
     const {
-      topPerformingVideos: { data, loading, selectedVideo },
+      data: { data, loading, selectedVideo },
     } = this.props
 
     if (!data && loading) {
@@ -40,15 +33,4 @@ class Slider extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  topPerformingVideos: makeSelectReportsTopPerformingVideos(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(Slider)
+export default Slider

@@ -11,6 +11,7 @@ import {
   compareSharesData,
   radarChartCalculate,
   getBrandAndCompetitors,
+  getFilteredCompetitors,
 } from 'Utils'
 
 import { getDataFromApi } from 'Utils/api'
@@ -100,10 +101,12 @@ function* getContentVitalityScoreData() {
   }
 }
 
-function* getVideoComparisonData({ data: { dateRange } }) {
+function* getVideoComparisonData({ data: { dateRange, report } }) {
   try {
     const profile = yield select(selectAuthProfile)
     const competitors = getBrandAndCompetitors(profile)
+
+    const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const parameters = {
       url: '/report',
@@ -111,7 +114,7 @@ function* getVideoComparisonData({ data: { dateRange } }) {
       metric: 'views',
       property: ['format'],
       dateBucket: 'none',
-      brands: [competitors[0], competitors[1]],
+      brands: [...filteredCompetitors.map((c) => c.uuid)],
     }
 
     const payload = yield call(getDataFromApi, parameters)
@@ -126,11 +129,12 @@ function* getVideoComparisonData({ data: { dateRange } }) {
   }
 }
 
-function* getPerformanceComparisonData({ data: { metric, property } }) {
+function* getPerformanceComparisonData({ data: { metric, property, report } }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
     const profile = yield select(selectAuthProfile)
     const competitors = getBrandAndCompetitors(profile)
+
+    const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const parameters = {
       url: '/report',
@@ -138,7 +142,7 @@ function* getPerformanceComparisonData({ data: { metric, property } }) {
       metric,
       property: [property],
       dateBucket: 'none',
-      brands: [competitors[0], competitors[1]],
+      brands: [...filteredCompetitors.map((c) => c.uuid)],
     }
 
     const payload = yield call(getDataFromApi, parameters)
@@ -153,30 +157,23 @@ function* getPerformanceComparisonData({ data: { metric, property } }) {
   }
 }
 
-function* getColorComparisonData({ data: { metric, dateRange } }) {
+function* getColorComparisonData({ data: { metric, dateRange, report } }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
     const profile = yield select(selectAuthProfile)
     const competitors = getBrandAndCompetitors(profile)
+
+    const filteredCompetitors = getFilteredCompetitors(competitors, report)
+
     const parameters = {
       url: '/report',
       dateRange,
       metric,
       property: ['color'],
       dateBucket: 'none',
-      brands: [brand.uuid],
+      brands: [...filteredCompetitors.map((c) => c.uuid)],
     }
 
-    const payload = yield all([
-      call(getDataFromApi, {
-        ...parameters,
-        brand: competitors[0],
-      }),
-      call(getDataFromApi, {
-        ...parameters,
-        brand: competitors[1],
-      }),
-    ])
+    const payload = yield call(getDataFromApi, parameters)
 
     yield put(
       actions.getColorComparisonDataSuccess(
