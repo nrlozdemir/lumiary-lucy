@@ -294,6 +294,7 @@ class LibraryDetailShotByShot extends React.Component {
                 backgroundColor: colors.moduleBackground,
                 boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
                 color: colors.textColor,
+                overflow: 'hidden',
               }}
             >
               {selectedImage ? (
