@@ -41,7 +41,7 @@ export const defaultFilters = {
   audienceGender: 'male',
   talentAge: '10-',
   talentGender: 'male',
-  colorTempature: 'happy-sad',
+  colorTemperature: 'happy-sad',
   dateRange: '24hours',
 }
 
@@ -132,11 +132,10 @@ export const initialState = fromJS({
       { value: 'female', label: 'Female' },
       { value: 'both', label: 'Both' },
     ],
-    colorTempature: [
+    colorTemperature: [
       { value: 'happy-sad', label: 'Happy / Sad' },
       { value: 'energetic-calm', label: 'Energetic / Calm' },
-      { value: 'cool-warm', label: 'Cool / Warm' },
-      { value: 'natural-saynthetic', label: 'Natural / Saynthetic' },
+      { value: 'natural-synthetic', label: 'Natural / Synthetic' },
     ],
     dateRange: [
       { value: '24hours', label: 'Today' },
