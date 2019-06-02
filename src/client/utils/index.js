@@ -579,13 +579,7 @@ const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
         y: sentimentObj.scale,
         count: platformMetricSums[platform][metric],
         color: chartColors[idx],
-        size: `${normalize(
-          platformMetricSums[platform][metric],
-          min,
-          max,
-          10,
-          60
-        )}px`,
+        size: normalize(platformMetricSums[platform][metric], min, max, 10, 60),
       }
     }),
   }))

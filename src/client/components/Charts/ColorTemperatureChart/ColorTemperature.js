@@ -60,6 +60,9 @@ const ColorTemperature = ({ temp, verticalText, themeContext }) => {
           y = newCoordinates.newY
         }
 
+        const size = `${data.size}px`
+        const offset = `calc(50% - ${20 + data.size / 2}px)`
+
         return (
           <span
             key={i}
@@ -67,8 +70,10 @@ const ColorTemperature = ({ temp, verticalText, themeContext }) => {
             style={{
               transform: `translateX(${x * 2}%) translateY(${y * 2}%)`,
               backgroundColor: `${data.color}`,
-              height: data.size,
-              width: data.size
+              height: size,
+              width: size,
+              left: offset,
+              top: offset,
             }}
           />
         )
