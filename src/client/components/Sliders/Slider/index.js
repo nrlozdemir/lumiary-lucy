@@ -13,22 +13,26 @@ class MarketViewSlider extends React.Component {
   renderNextButton = () => {
     return (
       <RightArrowCircleFlat
-        className={classnames(style.nextButton, this.refSlider && this.refSlider.isEnd ? style.disabled : '')}
+        className={classnames(
+          style.nextButton,
+          this.refSlider && this.refSlider.isEnd ? style.disabled : ''
+        )}
         size={32}
         onClick={() => this.refSlider.slideNext()}
-        >
-      </RightArrowCircleFlat>
+      />
     )
   }
 
   renderPrevButton = () => {
     return (
       <LeftArrowCircleFlat
-        className={classnames(style.prevButton, this.refSlider && this.refSlider.isBeginning ? style.disabled : '')}
+        className={classnames(
+          style.prevButton,
+          this.refSlider && this.refSlider.isBeginning ? style.disabled : ''
+        )}
         size={32}
         onClick={() => this.refSlider.slidePrev()}
-        >
-      </LeftArrowCircleFlat>
+      />
     )
   }
 
@@ -91,21 +95,21 @@ class MarketViewSlider extends React.Component {
         bullets[this.refSlider.activeIndex].classList.add('active')
 
         // Force rendering needed to update disabled state of prev and next buttons
-        this.forceUpdate();
+        this.forceUpdate()
       },
     },
     renderNextButton: this.renderNextButton,
-    renderPrevButton: this.renderPrevButton
+    renderPrevButton: this.renderPrevButton,
   }
 
   componentDidMount() {
-    const findSlide = this.props.items && Math.floor(parseInt(this.props.items.length) / 2)
-    this.props.items &&  this.refSlider && this.refSlider.slideTo(findSlide, 1)
+    const findSlide =
+      this.props.items && Math.floor(parseInt(this.props.items.length) / 2)
+    this.props.items && this.refSlider && this.refSlider.slideTo(findSlide, 1)
   }
 
   render() {
-    const { props } = this
-
+    const { items } = this.props
     return (
       <div className={style.section}>
         <div className="marketViewSlider">
@@ -113,35 +117,34 @@ class MarketViewSlider extends React.Component {
             ref={(node) => node && (this.refSlider = node.swiper)}
             {...this.settings}
           >
-            {props.items.map((item, i) => (
-              <div className="item" key={i}>
-                <AssetLayer
-                  containerNoBorder
-                  leftSocialIcon={item.socialMedia}
-                  centerText={item.secondTitle}
-                  title={item.title}
-                  width={634}
-                  height="100%"
-                  rightValue={item.cvScore}
-                >
-                  <img src={item.image} />
-                  <div
-                    className={style.percentageWrapper}
+            {items &&
+              items.map((item, i) => (
+                <div className="item" key={i}>
+                  <AssetLayer
+                    containerNoBorder
+                    leftSocialIcon={item.socialMedia}
+                    centerText={item.secondTitle}
+                    title={item.title}
+                    width={634}
+                    height="100%"
+                    rightValue={item.cvScore}
                   >
-                    <PercentageBarGraph
-                      key={Math.random()}
-                      percentage={item.cvScore}
-                      width={80}
-                      height={20}
-                      barWidth={2}
-                      barSpaceWidth={1}
-                      disableLabels
-                      color='green'
-                    />
-                  </div>
-                </AssetLayer>
-              </div>
-            ))}
+                    <img src={item.image} />
+                    <div className={style.percentageWrapper}>
+                      <PercentageBarGraph
+                        key={Math.random()}
+                        percentage={item.cvScore}
+                        width={80}
+                        height={20}
+                        barWidth={2}
+                        barSpaceWidth={1}
+                        disableLabels
+                        color="green"
+                      />
+                    </div>
+                  </AssetLayer>
+                </div>
+              ))}
           </Swiper>
           <div className="swiper-pagination" />
         </div>
