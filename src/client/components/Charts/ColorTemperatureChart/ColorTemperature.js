@@ -73,7 +73,6 @@ const ColorTemperature = ({ temp, verticalText, themeContext }) => {
               height: size,
               width: size,
               left: offset,
-              top: offset,
             }}
           />
         )
