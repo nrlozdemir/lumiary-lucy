@@ -427,7 +427,10 @@ const marketviewReducer = (state = initialState, action) => {
         .setIn(['totalCompetitorViewsData', 'loading'], fromJS(false))
 
     case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_REQUEST:
-      return state.setIn(['similarProperties', 'loading'], fromJS(true))
+      return state.setIn(
+        ['topPerformingPropertiesByCompetitorsData', 'loading'],
+        fromJS(true)
+      )
     case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_SUCCESS:
       return state
         .setIn(

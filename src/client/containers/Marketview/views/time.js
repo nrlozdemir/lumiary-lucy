@@ -34,6 +34,7 @@ export class Time extends React.Component {
           activeDay={activeDay}
         />
         <Slider
+          moduleKey="MarketView/Time/Slider"
           title={`Top Performing ${activeDay
             .charAt(0)
             .toUpperCase()}${activeDay.slice(1)} Videos`}
@@ -52,7 +53,7 @@ export class Time extends React.Component {
           container="time"
         />
         <TopSimilarProperties
-          moduleKey="MarketView/TopSimilarPropertiesModule"
+          moduleKey="MarketView/Time/SimilarPropertiesModule"
           title="Similar Properties Of Top Videos"
           activeDay={activeDay}
           filters={[
@@ -65,7 +66,7 @@ export class Time extends React.Component {
           container="time"
         />
         <TopVideosOverTime
-          moduleKey="MarketView/TopVideosCardModule"
+          moduleKey="MarketView/Time/TopVideosCardModule"
           title="Top Performing Property Across All Days Of The Week"
           filters={[
             {

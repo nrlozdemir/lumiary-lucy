@@ -17,7 +17,7 @@ export class Competitor extends React.Component {
       <React.Fragment>
         <div className="grid-collapse">
           <Slider
-            moduleKey="MarketView/CompetitorSlider"
+            moduleKey="MarketView/Competitor/Slider"
             title="Top Performing Competitor Videos"
             filters={[
               {
@@ -34,7 +34,7 @@ export class Competitor extends React.Component {
             container="competitor"
           />
           <TopVideosOverTime
-            moduleKey="MarketView/CompetitorTopVideosOverTime"
+            moduleKey="MarketView/Competitor/TopVideosOverTime"
             title="Top Videos Over Time By Competitor"
             filters={[
               {
@@ -78,7 +78,7 @@ export class Competitor extends React.Component {
             container="competitor"
           />
           <TopSimilarProperties
-            moduleKey="MarketView/CompetitorSimilarProperties"
+            moduleKey="MarketView/Competitor/TopSimilarProperties"
             title="Similar Properties Of Top Videos"
             filters={[
               {
@@ -90,7 +90,7 @@ export class Competitor extends React.Component {
             container="competitor"
           />
           <TopPerformingProperty
-            moduleKey="MarketView/topPerformingPropertiesByCompetitors"
+            moduleKey="MarketView/Competitor/TopPerformingProperty"
             title="Top Performing Property, Pacing, Across All Competitors"
             filters={[
               {
