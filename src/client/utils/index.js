@@ -534,19 +534,19 @@ const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
   const colorTempsAndSentiments =
     !!metricSums.length &&
     metricSums.map((pf) => ({
-      colorTemperature: metricSums[pf].colorTemperature,
-      sentiments: metricSums[pf].sentiments,
+      colorTemperature: metricObj[pf].colorTemperature,
+      sentiments: metricObj[pf].sentiments,
     }))
 
-  if (isEmpty(values) || isEmpty(metricSums) || !colorTempsAndSentiments) {
+  if (isEmpty(values) || isEmpty(metricObj) || !colorTempsAndSentiments) {
     return { labels: [], data: undefined, platforms: [] }
   }
 
   const metrics = ['likes', 'views', 'comments', 'shares']
 
-  const { min, max } = Object.keys(metricSums).reduce(
+  const { min, max } = Object.keys(metricObj).reduce(
     (acc, pf, idx) => {
-      const metricData = metricSums[pf]
+      const metricData = metricObj[pf]
 
       Object.keys(metricData).forEach((metric) => {
         const metricVal = metricData[metric]
@@ -569,7 +569,7 @@ const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
   )
 
   const data = metrics.map((metric) => ({
-    data: metricObj.map((platform, idx) => {
+    data: metricSums.map((platform, idx) => {
       const { colorTemperature, sentiments } = colorTempsAndSentiments[idx]
 
       const sentimentObj = sentiments.find((s) => !!s[sentiment.split('-')[0]])
@@ -577,9 +577,9 @@ const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
       return {
         x: colorTemperature.scale,
         y: sentimentObj.scale,
-        count: metricSums[platform][metric],
+        count: metricObj[platform][metric],
         color: chartColors[idx],
-        size: normalize(metricSums[platform][metric], min, max, 10, 60),
+        size: normalize(metricObj[platform][metric], min, max, 10, 60),
       }
     }),
   }))
