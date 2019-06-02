@@ -523,30 +523,30 @@ const getFilteredCompetitors = (competitors, report) =>
   @sentiment {string} - 'happy-sad', 'energetic-calm', 'natural-synthetic'
  */
 const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
-  const { platformMetricSums } = values
+  const { platformMetricSums, industryMetricSums } = values
 
-  const platforms = Object.keys(platformMetricSums)
+  const metricObj = industryMetricSums || platformMetricSums
+
+  const metricSums = Object.keys(
+    !!industryMetricSums ? industryMetricSums : platformMetricSums
+  )
 
   const colorTempsAndSentiments =
-    !!platforms.length &&
-    platforms.map((pf) => ({
-      colorTemperature: platformMetricSums[pf].colorTemperature,
-      sentiments: platformMetricSums[pf].sentiments,
+    !!metricSums.length &&
+    metricSums.map((pf) => ({
+      colorTemperature: metricSums[pf].colorTemperature,
+      sentiments: metricSums[pf].sentiments,
     }))
 
-  if (
-    isEmpty(values) ||
-    isEmpty(platformMetricSums) ||
-    !colorTempsAndSentiments
-  ) {
+  if (isEmpty(values) || isEmpty(metricSums) || !colorTempsAndSentiments) {
     return { labels: [], data: undefined, platforms: [] }
   }
 
   const metrics = ['likes', 'views', 'comments', 'shares']
 
-  const { min, max } = Object.keys(platformMetricSums).reduce(
+  const { min, max } = Object.keys(metricSums).reduce(
     (acc, pf, idx) => {
-      const metricData = platformMetricSums[pf]
+      const metricData = metricSums[pf]
 
       Object.keys(metricData).forEach((metric) => {
         const metricVal = metricData[metric]
@@ -569,7 +569,7 @@ const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
   )
 
   const data = metrics.map((metric) => ({
-    data: platforms.map((platform, idx) => {
+    data: metricObj.map((platform, idx) => {
       const { colorTemperature, sentiments } = colorTempsAndSentiments[idx]
 
       const sentimentObj = sentiments.find((s) => !!s[sentiment.split('-')[0]])
@@ -577,16 +577,16 @@ const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
       return {
         x: colorTemperature.scale,
         y: sentimentObj.scale,
-        count: platformMetricSums[platform][metric],
+        count: metricSums[platform][metric],
         color: chartColors[idx],
-        size: normalize(platformMetricSums[platform][metric], min, max, 10, 60),
+        size: normalize(metricSums[platform][metric], min, max, 10, 60),
       }
     }),
   }))
 
   return {
     data,
-    platforms: platforms.map((key, idx) => ({
+    platforms: metricSums.map((key, idx) => ({
       name: ucfirst(key),
       color: chartColors[idx],
     })),
