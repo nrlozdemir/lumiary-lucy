@@ -21,27 +21,16 @@ class Slider extends React.Component {
   }
 
   render() {
-    const { videos, selectedVideo } = this.props
-    console.log('slide', this.props.videos)
+    const { videos, selectedVideo, title, moduleKey, filters } = this.props
     return (
       <SliderModule
         data={videos || []}
         selectedVideo={selectedVideo}
         changeSelectedVideo={this.changeSelectedVideo}
         action={this.getCompetitorVideos}
-        title="Top Performing Competitor Videos"
-        filters={[
-          {
-            type: 'metric',
-            selectKey: 'Mwplt-engagement',
-            placeHolder: 'Engagement',
-          },
-          {
-            type: 'dateRange',
-            selectKey: 'Mwplt-date',
-            placeHolder: 'Date',
-          },
-        ]}
+        moduleKey={moduleKey}
+        title={title}
+        filters={filters}
       />
     )
   }

@@ -21,21 +21,15 @@ class TopSimilarProperties extends React.Component {
   }
 
   render() {
-    const { similarProperties } = this.props
+    const { similarProperties, title, moduleKey, filters } = this.props
     return (
       <TopSimilarPropertiesModule
-        moduleKey="MarketView/TopSimilarPropertiesModule"
+        moduleKey={moduleKey}
+        title={title}
         data={similarProperties.data}
-        title="Similar Properties Of Top Videos"
         action={this.getSimilarProperties}
         presentWithDoughnut
-        filters={[
-          {
-            type: 'dateRange',
-            selectKey: 'dateRange',
-            placeHolder: 'dateRange',
-          },
-        ]}
+        filters={filters}
       />
     )
   }

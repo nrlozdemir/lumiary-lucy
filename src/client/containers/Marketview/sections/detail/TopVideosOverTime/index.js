@@ -9,59 +9,28 @@ import {
 import TopVideosCard from 'Components/Modules/TopVideosCardModule'
 
 class TopVideosOverTime extends React.Component {
-  getCompetitorTopVideos = (data) => {
+  callback = (data) => {
     this.props.getCompetitorTopVideosRequest(data)
   }
 
   render() {
-    const { competitorTopVideos } = this.props
-    console.log('top', this.props)
+    const {
+      competitorTopVideos,
+      title,
+      moduleKey,
+      filters,
+      references,
+      container,
+    } = this.props
     return (
       <TopVideosCard
-        chartData={competitorTopVideos}
+        chartData={competitorTopVideos.data}
         height={150}
-        moduleKey="MarketView/TopVideosCardModule"
-        title="Top Videos Over Time By Competitor"
-        action={this.getCompetitorTopVideos}
-        filters={[
-          {
-            type: 'property',
-            selectKey: 'property',
-            placeHolder: 'property',
-          },
-          {
-            type: 'metric',
-            selectKey: 'engagement',
-            placeHolder: 'engagement',
-          },
-          {
-            type: 'dateRange',
-            selectKey: 'dateRange',
-            placeHolder: 'dateRange',
-          },
-        ]}
-        references={[
-          {
-            className: 'bg-cool-blue',
-            text: 'Barstool Sports',
-          },
-          {
-            className: 'bg-lighter-purple',
-            text: 'SB Nation',
-          },
-          {
-            className: 'bg-coral-pink',
-            text: 'ESPN',
-          },
-          {
-            className: 'bg-cool-grey',
-            text: 'Scout Media',
-          },
-          {
-            className: 'bg-dusk"',
-            text: 'Fanside',
-          },
-        ]}
+        moduleKey={moduleKey}
+        title={title}
+        action={this.callback}
+        filters={filters}
+        references={references}
       />
     )
   }

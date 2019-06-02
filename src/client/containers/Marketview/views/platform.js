@@ -3,121 +3,61 @@
  * Marketview Platform
  *
  */
+
 import React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectMarketview } from 'Reducers/marketview'
-
-import Slider from 'Components/Modules/SliderModule'
-import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
-import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
-import BarChartModule from 'Components/Modules/BarChartModule'
-
-import { withTheme } from 'ThemeContext/withTheme'
-
-const chartTickOptions = {
-  stepSize: 250000,
-  min: 0,
-  max: 1000000,
-  callback(value) {
-    if (value < 1000) {
-      return value
-    } else if (value < 1000000) {
-      return `${Math.round(value / 1000)}k`
-    }
-    return `${Math.round((value * 100) / 1000000) / 100}m`
-  },
-}
-
+import Slider from '../sections/detail/Slider'
+import TopVideosOverTime from '../sections/detail/TopVideosOverTime'
+import TopSimilarProperties from '../sections/detail/TopSimilarProperties'
+import TopPerformingProperty from '../sections/detail/TopPerformingProperty'
 /* eslint-disable react/prefer-stateless-function */
 export class Platform extends React.Component {
-  componentDidMount() {
-    this.props.getCompetitorVideosRequest()
-  }
-
-  changeSelectedVideo = (video) => {
-    this.props.setSelectedVideo(video)
-  }
-
-  getSimilarProperties = (data) => {
-    const {
-      themeContext: { colors },
-    } = this.props
-    this.props.getSimilarPropertiesRequest({
-      date: data,
-      themeColors: colors,
-    })
-  }
-
-  getCompetitorVideos = (data) => {
-    this.props.getCompetitorVideosRequest(data)
-  }
-
-  getCompetitorTopVideos = (data) => {
-    this.props.getCompetitorTopVideosRequest(data)
-  }
-
-  getTopPerformingProperties = (data) => {
-    this.props.getTopPerformingPropertiesRequest(data)
-  }
-
   render() {
-    const {
-      marketview,
-      marketview: {
-        selectedVideo,
-        competitorTopVideos,
-        similarProperties,
-        topPerformingPropertiesData,
-      },
-    } = this.props
     return (
       <React.Fragment>
         <Slider
-          data={marketview.videos || []}
-          selectedVideo={selectedVideo}
-          changeSelectedVideo={this.changeSelectedVideo}
           title="Top Performing Videos By Platform"
           moduleKey="MarketView/Platform/Slider"
-          action={this.getCompetitorVideos}
           filters={[
             {
               type: 'metric',
-              selectKey: 'Mwplt-engagement',
+              selectKey: 'mwplttpaap-engagement',
+              placeHolder: 'Engagement',
+            },
+            {
+              type: 'platform',
+              selectKey: 'mwplttpaap-platform',
+              placeHolder: 'Platform',
+            },
+            {
+              type: 'dateRange',
+              selectKey: 'dateRange',
+              placeHolder: 'dateRange',
+            },
+          ]}
+          container="platform"
+        />
+
+        <TopVideosOverTime
+          moduleKey="MarketView/Platform/TopVideosOverTime"
+          title="Top Videos Over Time By Platform"
+          filters={[
+            {
+              type: 'property',
+              selectKey: 'mwplttpaap-property',
+              placeHolder: 'Property',
+            },
+            {
+              type: 'metric',
+              selectKey: 'mwplttpaap-engagement',
               placeHolder: 'Engagement',
             },
             {
               type: 'dateRange',
-              selectKey: 'Mwplt-date',
-              placeHolder: 'Date',
-            },
-          ]}
-        />
-
-        <TopVideosCardModule
-          chartData={competitorTopVideos}
-          height={150}
-          moduleKey="MarketView/Platform/TopVideosCardModule"
-          title="Top Videos Over Time By Platform"
-          action={this.getCompetitorTopVideos}
-          filters={[
-            {
-              type: 'property',
-              selectKey: 'mwplttvcm-property',
-              placeHolder: 'property',
-            },
-            {
-              type: 'metric',
-              selectKey: 'mwplttvcm-engagement',
-              placeHolder: 'engagement',
-            },
-            {
-              type: 'dateRange',
-              selectKey: 'mwplttvcm-dateRange',
+              selectKey: 'dateRange',
               placeHolder: 'dateRange',
             },
           ]}
+          container="platform"
           references={[
             {
               className: 'bg-cool-blue',
@@ -133,18 +73,13 @@ export class Platform extends React.Component {
             },
             {
               className: 'bg-cool-grey',
-              text: 'Scout Media',
-            },
-            {
-              className: 'bg-dusk"',
-              text: 'YouTube',
+              text: 'Youtube',
             },
           ]}
+          container="platform"
         />
-
-        <TopSimilarPropertiesModule
+        <TopSimilarProperties
           moduleKey="MarketView/TopSimilarPropertiesModule"
-          data={similarProperties}
           title="Similar Properties Of Top Videos"
           action={this.getSimilarProperties}
           presentWithDoughnut
@@ -155,15 +90,11 @@ export class Platform extends React.Component {
               placeHolder: 'dateRange',
             },
           ]}
+          container="platform"
         />
-
-        <BarChartModule
+        <TopPerformingProperty
           moduleKey="MarketView/Platform/TopPerformingPropertyAcrossAllPlatforms"
-          barData={topPerformingPropertiesData}
           title="Top Performing Property Across All Platforms"
-          height={55}
-          tickOptions={chartTickOptions}
-          action={this.getTopPerformingProperties}
           filters={[
             {
               type: 'metric',
@@ -176,14 +107,7 @@ export class Platform extends React.Component {
               placeHolder: 'Property',
             },
           ]}
-          references={
-            topPerformingPropertiesData &&
-            topPerformingPropertiesData.datasets &&
-            topPerformingPropertiesData.datasets.map((item) => ({
-              text: item.label,
-              color: item.backgroundColor,
-            }))
-          }
+          container="platform"
         />
       </React.Fragment>
     )
@@ -192,18 +116,4 @@ export class Platform extends React.Component {
 
 Platform.propTypes = {}
 
-const mapStateToProps = createStructuredSelector({
-  marketview: makeSelectMarketview(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(
-  withConnect,
-  withTheme
-)(Platform)
+export default Platform
