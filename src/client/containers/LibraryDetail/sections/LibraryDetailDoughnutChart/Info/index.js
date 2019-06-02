@@ -15,7 +15,7 @@ class Info extends React.Component {
   }
 
   render() {
-    const { changeVisibilityDoughnut, selectedCardData } = this.props
+    const { selectedCardData } = this.props
 
     return (
       <ThemeContext.Consumer>

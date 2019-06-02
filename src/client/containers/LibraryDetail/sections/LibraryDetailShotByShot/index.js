@@ -433,8 +433,8 @@ class LibraryDetailShotByShot extends React.Component {
                           }}
                         >
                           {this.state.scenes.map((scene, i) => (
-                            <React.Fragment>
-                              <div className={style.image} key={i+110}>
+                            <React.Fragment key={i+110}>
+                              <div className={style.image}>
                               <div
                                 style={{
                                   width: `${scene.width}px`,
@@ -470,7 +470,7 @@ class LibraryDetailShotByShot extends React.Component {
                       </div>
                       <div className={style.shotTicks}>
                         {this.state.sliderMarks && Object.keys(this.state.sliderMarks).map((m, i) => (
-                          <p className={style.shotTick}>
+                          <p className={style.shotTick} key={i}>
                             {this.state.sliderMarks[m].value}
                           </p>
                         ))}

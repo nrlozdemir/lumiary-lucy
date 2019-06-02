@@ -64,7 +64,7 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
       { key: 'duration', title: 'Duration' },
       { key: 'aspectRatio', title: 'Aspect Ratio' },
     ]
-    const { brand } = yield select(selectAuthProfile)
+		const { brand } = yield select(selectAuthProfile)
 
     const parameters = {
       brands: [brand.uuid],
@@ -91,10 +91,10 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
           ? '#2FD7C4'
           : themeColors.textColor
       })
-    }
-    const val = expectedValues.map((payload, idx) => ({
-      ...payload,
-      doughnutChartValues: convertDataIntoDatasets(
+		}
+
+		const val = expectedValues.map((payload, idx) => {
+			const chartValues = convertDataIntoDatasets(
         payloads[idx],
         {
           ...parameters,
@@ -106,8 +106,22 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
             payloads[idx].data[Object.keys(payloads[idx].data)[0]][payload.key]
           ),
         }
-      ),
-    }))
+			);
+
+			const entries = payloads[idx].data[brand.name][payload.key];
+			const [ [ maxDataKey, maxDataValue ] ] = Object.entries(entries).sort(([, v1], [, v2]) => v1 > v2 ? -1 : 1);
+			const maxDataIndex = Object.keys(entries).findIndex(key => key === maxDataKey);
+
+			return {
+				...payload,
+				doughnutChartValues: chartValues,
+				max: {
+					label: chartValues.labels[maxDataIndex],
+					percentage: maxDataValue
+				}
+			}
+		})
+
     yield put(actions.getDoughnutChartSuccess(val))
   } catch (error) {
     yield put(actions.getDoughnutChartFailure({ error }))

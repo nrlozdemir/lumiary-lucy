@@ -82,7 +82,7 @@ export class LibraryDetail extends React.Component {
     const {
       libraryDetail: {
         barChartData,
-        doughnutLineChartData,
+        doughnutData,
         colorTempData,
         shotByShotData,
         selectedVideo: { socialIcon, uuid },
@@ -118,7 +118,6 @@ export class LibraryDetail extends React.Component {
         radarData_DatasetOptions
       )
     }
-    console.log(this.props)
     return (
       <React.Fragment>
         {barChartData && cvScore && (
@@ -131,8 +130,8 @@ export class LibraryDetail extends React.Component {
             id={uuid}
           />
         )}
-        {doughnutLineChartData && (
-          <LibraryDetailDoughnutChart doughnutData={doughnutLineChartData} />
+        {doughnutData && (
+          <LibraryDetailDoughnutChart />
         )}
         {colorTempData && (
           <LibraryDetailColorTemperature
@@ -166,7 +165,7 @@ LibraryDetail.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   libraryDetail: makeSelectLibraryDetail(),
-  library: makeSelectLibrary(),
+	library: makeSelectLibrary()
 })
 
 function mapDispatchToProps(dispatch) {

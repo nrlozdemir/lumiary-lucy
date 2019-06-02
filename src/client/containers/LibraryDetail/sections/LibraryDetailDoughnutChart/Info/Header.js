@@ -1,8 +1,12 @@
 import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import style from '../style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import XCircle from 'Components/Icons/XCircle'
 import SelectFilters from 'Components/SelectFilters'
+import { actions } from 'Reducers/libraryDetail';
 
 class Header extends React.Component {
   constructor(props) {
@@ -26,6 +30,7 @@ class Header extends React.Component {
 
   render() {
 		const { selectDate, selectLikes } = this.state
+		const { toggleInfoSection } = this.props;
 
     return (
       <ThemeContext.Consumer>
@@ -37,7 +42,7 @@ class Header extends React.Component {
               boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
             }}
           >
-            <div onClick={() => changeVisibilityDoughnut()}>
+            <div onClick={() => toggleInfoSection(false)}>
               <div className={style.iconWrapper}>
                 <XCircle />
                 <p className={style.iconTitle}>Frame Rate - 24 Fps</p>
@@ -63,4 +68,18 @@ class Header extends React.Component {
   }
 }
 
-export default Header
+const mapStateToProps = createStructuredSelector({
+})
+
+function mapDispatchToProps(dispatch) {
+  return {
+		toggleInfoSection: show => dispatch(actions.toggleInfoSection(show))
+  }
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(Header);

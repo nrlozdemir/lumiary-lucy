@@ -20,7 +20,9 @@ export const types = {
 
   GET_SHOT_BY_SHOT_REQUEST: 'LibraryDetail/GET_SHOT_BY_SHOT_REQUEST',
   GET_SHOT_BY_SHOT_SUCCESS: 'LibraryDetail/GET_SHOT_BY_SHOT_SUCCESS',
-  GET_SHOT_BY_SHOT_FAILURE: 'LibraryDetail/GET_SHOT_BY_SHOT_FAILURE',
+	GET_SHOT_BY_SHOT_FAILURE: 'LibraryDetail/GET_SHOT_BY_SHOT_FAILURE',
+
+	TOGGLE_INFO_SECTION: 'LibraryDetail/TOGGLE_INFO_SECTION',
 }
 export const actions = {
   getSelectedVideoRequest: (payload) => ({
@@ -82,11 +84,15 @@ export const actions = {
   getShotByShotFailure: (payload) => ({
     type: types.GET_SHOT_BY_SHOT_FAILURE,
     payload,
-  }),
+	}),
+  toggleInfoSection: (payload) => ({
+    type: types.TOGGLE_INFO_SECTION,
+    payload,
+	}),
 }
 export const initialState = fromJS({
   barChartData: null,
-  doughnutLineChartData: null,
+  doughnutData: null,
   colorTempData: {
     data: [],
     loading: false,
@@ -95,7 +101,10 @@ export const initialState = fromJS({
   shotByShotData: null,
   error: false,
   loading: false,
-  selectedVideo: {},
+	selectedVideo: {},
+	infoData: {
+		showSection: false,
+	}
 })
 
 const libraryDetailReducer = (state = initialState, action) => {
@@ -126,7 +135,7 @@ const libraryDetailReducer = (state = initialState, action) => {
       return state.set('loading', fromJS(true))
     case types.GET_DOUGHNUT_CHART_SUCCESS:
       return state
-        .set('doughnutLineChartData', fromJS(action.payload))
+        .set('doughnutData', fromJS(action.payload))
         .set('loading', fromJS(false))
     case types.GET_DOUGHNUT_CHART_FAILURE:
       return state
@@ -155,7 +164,10 @@ const libraryDetailReducer = (state = initialState, action) => {
     case types.GET_SHOT_BY_SHOT_FAILURE:
       return state
         .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+				.set('loading', fromJS(false))
+
+		case types.TOGGLE_INFO_SECTION:
+			return state.setIn(['infoData', 'showSection'], fromJS(action.payload))
 
     default:
       return state
@@ -188,6 +200,24 @@ export const makeSelectLibraryDetailColorTemperature = () =>
   createSelector(
     selectLibraryDetailColorTemperatureDomain,
     (substate) => substate.toJS()
-  )
+	)
+
+function selectInfoData(state) {
+	return state.LibraryDetail.get('infoData');
+}
+
+export function makeSelectInfoShowSection() {
+	return createSelector(
+		selectInfoData,
+		substate => substate.get('showSection')
+	)
+}
+
+export function makeSelectDoughnutData() {
+	return createSelector(
+		selectLibraryDetailDomain,
+		substate => substate.get('doughnutData').toJS()
+	)
+}
 
 export default libraryDetailReducer
