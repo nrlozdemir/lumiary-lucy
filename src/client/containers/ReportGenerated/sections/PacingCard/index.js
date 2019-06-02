@@ -8,13 +8,13 @@ import RouterLoading from 'Components/RouterLoading'
 
 class PacingCard extends React.Component {
   componentDidMount() {
-    const { getPacingCardDataRequest, reportId } = this.props
-    getPacingCardDataRequest({ reportId })
+    const { action, report } = this.props
+    action({ report })
   }
 
   render() {
     const {
-      pacingChartData: { data, loading },
+      data: { data, loading },
     } = this.props
 
     if (!data && loading) {
@@ -31,15 +31,4 @@ class PacingCard extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  pacingChartData: makeSelectReportsPacingCard(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(PacingCard)
+export default PacingCard

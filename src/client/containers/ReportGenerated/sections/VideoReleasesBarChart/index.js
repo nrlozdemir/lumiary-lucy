@@ -1,23 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import {
-  actions,
-  makeSelectReportsVideoReleasesBarChart,
-} from 'Reducers/generatedReport'
-
 import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
 
 class VideoReleasesBarChart extends React.Component {
   componentDidMount() {
-    const { getVideoReleasesBarChartRequest, reportId } = this.props
-    getVideoReleasesBarChartRequest({ reportId })
+    const { action, report } = this.props
+    action({ report })
   }
 
   render() {
     const {
-      videoReleasesBarChart: { data },
+      data: { data },
     } = this.props
 
     let chartData = {}
@@ -51,15 +43,4 @@ class VideoReleasesBarChart extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  videoReleasesBarChart: makeSelectReportsVideoReleasesBarChart(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(VideoReleasesBarChart)
+export default VideoReleasesBarChart
