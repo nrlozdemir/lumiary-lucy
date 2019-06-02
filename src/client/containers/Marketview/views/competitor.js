@@ -5,81 +5,48 @@
  */
 
 import React from 'react'
-// import { connect } from 'react-redux'
-// import { createStructuredSelector } from 'reselect'
-// import { compose, bindActionCreators } from 'redux'
-// import { actions, makeSelectMarketview } from 'Reducers/marketview'
-
 import Slider from '../sections/detail/Slider'
-// import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
-// import BarChartModule from 'Components/Modules/BarChartModule'
 import TopVideosOverTime from '../sections/detail/TopVideosOverTime'
 import TopSimilarProperties from '../sections/detail/TopSimilarProperties'
-
-// import style from '../style.scss'
-// import { withTheme } from 'ThemeContext/withTheme'
-
-// const chartTickOptions = {
-//   stepSize: 250000,
-//   min: 0,
-//   max: 1000000,
-//   callback(value) {
-//     if (value < 1000) {
-//       return value
-//     } else if (value < 1000000) {
-//       return `${Math.round(value / 1000)}k`
-//     }
-//     return `${Math.round((value * 100) / 1000000) / 100}m`
-//   },
-// }
+import TopPerformingProperty from '../sections/detail/TopPerformingProperty'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Competitor extends React.Component {
-  // getSimilarProperties = (data) => {
-  //   const {
-  //     themeContext: { colors },
-  //   } = this.props
-  //   console.log(data)
-  //   this.props.getSimilarPropertiesRequest({
-  //     date: data,
-  //     themeColors: colors,
-  //   })
-  // }
-
-  // getTopPerformingPropertiesByCompetitors = (data) => {
-  //   this.props.getTopPerformingPropertiesByCompetitorsRequest(data)
-  // }
-
   render() {
     return (
       <React.Fragment>
         <div className="grid-collapse">
-          <Slider />
-          <TopVideosOverTime />
-          <TopSimilarProperties />
-          {/* <TopSimilarPropertiesModule
-            moduleKey="MarketView/TopSimilarPropertiesModule"
-            data={similarProperties}
-            title="Similar Properties Of Top Videos"
-            action={this.getSimilarProperties}
-            presentWithDoughnut
+          <Slider
+            moduleKey="MarketView/CompetitorSlider"
+            title="Top Performing Competitor Videos"
             filters={[
               {
+                type: 'metric',
+                selectKey: 'Mwplt-engagement',
+                placeHolder: 'Engagement',
+              },
+              {
                 type: 'dateRange',
-                selectKey: 'dateRange',
-                placeHolder: 'dateRange',
+                selectKey: 'Mwplt-date',
+                placeHolder: 'Date',
               },
             ]}
+            container="competitor"
           />
-          <BarChartModule
-            moduleKey="MarketView/topPerformingPropertiesByCompetitors"
-            containerClass={style.detailTopPerformingPropertyContainer}
-            barData={topPerformingPropertiesByCompetitorsData}
-            tickOptions={chartTickOptions}
-            title="Top Performing Property, Pacing, Across All Competitors"
-            height={50}
-            action={this.getTopPerformingPropertiesByCompetitors}
+          <TopVideosOverTime
+            moduleKey="MarketView/CompetitorTopVideosOverTime"
+            title="Top Videos Over Time By Competitor"
             filters={[
+              {
+                type: 'property',
+                selectKey: 'property',
+                placeHolder: 'property',
+              },
+              {
+                type: 'metric',
+                selectKey: 'engagement',
+                placeHolder: 'engagement',
+              },
               {
                 type: 'dateRange',
                 selectKey: 'dateRange',
@@ -89,44 +56,55 @@ export class Competitor extends React.Component {
             references={[
               {
                 className: 'bg-cool-blue',
-                text: 'Fast',
+                text: 'Barstool Sports',
               },
               {
                 className: 'bg-lighter-purple',
-                text: 'Medium',
+                text: 'SB Nation',
               },
               {
                 className: 'bg-coral-pink',
-                text: 'Slow',
+                text: 'ESPN',
               },
               {
                 className: 'bg-cool-grey',
-                text: 'Slowest',
+                text: 'Scout Media',
+              },
+              {
+                className: 'bg-dusk"',
+                text: 'Fanside',
               },
             ]}
-          /> */}
+            container="competitor"
+          />
+          <TopSimilarProperties
+            moduleKey="MarketView/CompetitorSimilarProperties"
+            title="Similar Properties Of Top Videos"
+            filters={[
+              {
+                type: 'dateRange',
+                selectKey: 'dateRange',
+                placeHolder: 'dateRange',
+              },
+            ]}
+            container="competitor"
+          />
+          <TopPerformingProperty
+            moduleKey="MarketView/topPerformingPropertiesByCompetitors"
+            title="Top Performing Property, Pacing, Across All Competitors"
+            filters={[
+              {
+                type: 'dateRange',
+                selectKey: 'dateRange',
+                placeHolder: 'dateRange',
+              },
+            ]}
+            container="competitor"
+          />
         </div>
       </React.Fragment>
     )
   }
 }
-
-// Competitor.propTypes = {}
-
-// const mapStateToProps = createStructuredSelector({
-//   marketview: makeSelectMarketview(),
-// })
-
-// const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-// const withConnect = connect(
-//   mapStateToProps,
-//   mapDispatchToProps
-// )
-
-// export default compose(
-//   withConnect,
-//   withTheme
-// )(Competitor)
 
 export default Competitor

@@ -232,7 +232,11 @@ export const actions = {
   }),
 }
 export const initialState = fromJS({
-  competitorTopVideos: [],
+  competitorTopVideos: {
+    data: [],
+    loading: false,
+    error: null,
+  },
   videos: [],
   selectedVideo: null,
   similarProperties: {
@@ -258,12 +262,24 @@ export const initialState = fromJS({
     loading: false,
     error: null,
   },
-  totalCompetitorViewsData: {},
+  totalCompetitorViewsData: {
+    data: [],
+    loading: false,
+    error: null,
+  },
   marketviewDetailTime: {},
   error: false,
   loading: false,
-  topPerformingPropertiesData: null,
-  topPerformingPropertiesByCompetitorsData: null,
+  topPerformingPropertiesData: {
+    data: [],
+    loading: false,
+    error: null,
+  },
+  topPerformingPropertiesByCompetitorsData: {
+    data: [],
+    loading: false,
+    error: null,
+  },
 })
 
 const marketviewReducer = (state = initialState, action) => {
@@ -286,16 +302,16 @@ const marketviewReducer = (state = initialState, action) => {
         .set('loading', fromJS(false))
 
     case types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['competitorTopVideos', 'loading'], fromJS(true))
 
     case types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_SUCCESS:
       return state
-        .set('competitorTopVideos', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(['competitorTopVideos', 'data'], fromJS(action.payload))
+        .setIn(['competitorTopVideos', 'loading'], fromJS(false))
     case types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_FAILURE:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['competitorTopVideos', 'error'], fromJS(action.error))
+        .setIn(['competitorTopVideos', 'loading'], fromJS(false))
 
     case types.GET_MARKETVIEW_BUBBLECHART_REQUEST:
       return state.set('loading', fromJS(true))
@@ -396,26 +412,54 @@ const marketviewReducer = (state = initialState, action) => {
         .set('loading', fromJS(false))
 
     case types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST:
-    case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_REQUEST:
-    case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['totalCompetitorViewsData', 'loading'], fromJS(true))
     case types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_SUCCESS:
       return state
-        .set('totalCompetitorViewsData', fromJS(action.payload))
-        .set('loading', fromJS(false))
-    case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_SUCCESS:
+        .setIn(['totalCompetitorViewsData', 'data'], fromJS(action.payload))
+        .setIn(['totalCompetitorViewsData', 'loading'], fromJS(false))
+
+    case types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE:
       return state
-        .set('topPerformingPropertiesData', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(['totalCompetitorViewsData', 'error'], fromJS(action.error))
+        .setIn(['totalCompetitorViewsData', 'loading'], fromJS(false))
+
+    case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_REQUEST:
+      return state.setIn(['similarProperties', 'loading'], fromJS(true))
     case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_SUCCESS:
       return state
-        .set('topPerformingPropertiesByCompetitorsData', fromJS(action.payload))
-        .set('loading', fromJS(false))
-    case types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE:
+        .setIn(
+          ['topPerformingPropertiesByCompetitorsData', 'data'],
+          fromJS(action.payload)
+        )
+        .setIn(
+          ['topPerformingPropertiesByCompetitorsData', 'loading'],
+          fromJS(false)
+        )
+    case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_FAILURE:
+      return state
+        .setIn(
+          ['topPerformingPropertiesByCompetitorsData', 'error'],
+          fromJS(action.error)
+        )
+        .setIn(
+          ['topPerformingPropertiesByCompetitorsData', 'loading'],
+          fromJS(false)
+        )
+    case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_REQUEST:
+      return state.setIn(
+        ['topPerformingPropertiesData', 'loading'],
+        fromJS(true)
+      )
+
+    case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_SUCCESS:
+      return state
+        .setIn(['topPerformingPropertiesData', 'data'], fromJS(action.payload))
+        .setIn(['topPerformingPropertiesData', 'loading'], fromJS(false))
+
     case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_FAILURE:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['topPerformingPropertiesData', 'error'], fromJS(action.error))
+        .setIn(['topPerformingPropertiesData', 'loading'], fromJS(false))
 
     default:
       return state
@@ -443,6 +487,13 @@ const selectMarketviewtotalCompetitorViewDomain = (state) =>
 const selectMarketviewVideosDomain = (state) => state.Marketview.get('videos')
 const selectMarketviewCompetitorTopVideosDomain = (state) =>
   state.Marketview.get('competitorTopVideos')
+
+const selectMarketviewTopPerformingPropertiesByCompetitorsDataDomain = (
+  state
+) => state.Marketview.get('topPerformingPropertiesByCompetitorsData')
+
+const selectMarketviewTopPerformingPropertiesDataDomain = (state) =>
+  state.Marketview.get('topPerformingPropertiesData')
 
 export const selectMarketviewDomain = (state) => state.Marketview
 
@@ -501,6 +552,18 @@ export const selectMarketviewCompetitorTopVideosView = () =>
 export const selectMarketviewSimilarPropertiesView = () =>
   createSelector(
     selectMarketviewSimilarPropertiesDomain,
+    (substate) => substate.toJS()
+  )
+
+export const selectMarketviewTopPerformingPropertiesByCompetitorsDataView = () =>
+  createSelector(
+    selectMarketviewTopPerformingPropertiesByCompetitorsDataDomain,
+    (substate) => substate.toJS()
+  )
+
+export const selectMarketviewTopPerformingPropertiesDataView = () =>
+  createSelector(
+    selectMarketviewTopPerformingPropertiesDataDomain,
     (substate) => substate.toJS()
   )
 

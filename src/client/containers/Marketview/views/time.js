@@ -13,7 +13,7 @@ import { actions, makeSelectMarketview } from 'Reducers/marketview'
 import Slider from 'Components/Modules/SliderModule'
 import DaySelection from 'Containers/Marketview/sections/detail/DaySelection'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
-import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
+import TopSimilarProperties from '../sections/detail/TopSimilarProperties'
 
 import { withTheme } from 'ThemeContext/withTheme'
 
@@ -39,30 +39,11 @@ export class Time extends React.Component {
     this.setState({ activeDay: day })
   }
 
-  getSimilarProperties = (data) => {
-    const {
-      themeContext: { colors },
-    } = this.props
-    this.props.getSimilarPropertiesRequest({
-      date: data,
-      themeColors: colors,
-    })
-  }
-
   getTimeTopVideos = (data) => {
     this.props.getTopPerformingTimeRequest(data)
   }
 
   render() {
-    const {
-      marketview,
-      marketview: {
-        selectedVideo,
-        marketviewDetailTime: { data, topPerformingData },
-        competitorTopVideos,
-        similarProperties,
-      },
-    } = this.props
     const { activeDay } = this.state
 
     const selectedDayData = data && data[activeDay]
@@ -93,13 +74,11 @@ export class Time extends React.Component {
               placeHolder: 'Date',
             },
           ]}
+          container="time"
         />
-        <TopSimilarPropertiesModule
+        <TopSimilarProperties
           moduleKey="MarketView/TopSimilarPropertiesModule"
-          data={similarProperties}
           title="Similar Properties Of Top Videos"
-          action={this.getSimilarProperties}
-          presentWithDoughnut
           filters={[
             {
               type: 'dateRange',
@@ -107,8 +86,9 @@ export class Time extends React.Component {
               placeHolder: 'dateRange',
             },
           ]}
+          container="time"
         />
-        <TopVideosCardModule
+        <TopVideosOverTime
           chartData={topPerformingData}
           height={150}
           moduleKey="MarketView/TopVideosCardModule"
@@ -129,6 +109,7 @@ export class Time extends React.Component {
               color: item.backgroundColor,
             }))
           }
+          container="time"
         />
       </React.Fragment>
     )
