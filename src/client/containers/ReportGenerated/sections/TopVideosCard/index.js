@@ -1,22 +1,15 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import {
-  actions,
-  makeSelectReportsTopVideosCard,
-} from 'Reducers/generatedReport'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
 
 class TopVideosCard extends React.Component {
-  getCompetitorTopVideos = (data) => {
-    const { getCompetitorTopVideosRequest, reportId } = this.props
-    getCompetitorTopVideosRequest({ ...data, reportId })
+  callBack = (data) => {
+    const { action, report } = this.props
+    action({ ...data, report })
   }
 
   render() {
     const {
-      competitorTopVideos: { data },
+      data: { data },
     } = this.props
 
     return (
@@ -25,7 +18,7 @@ class TopVideosCard extends React.Component {
         height={150}
         moduleKey="Reports/TopVideosCardModule"
         title="Top Videos Over Time By Competitor"
-        action={this.getCompetitorTopVideos}
+        action={this.callBack}
         filters={[
           {
             type: 'property',
@@ -56,15 +49,4 @@ class TopVideosCard extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  competitorTopVideos: makeSelectReportsTopVideosCard(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(TopVideosCard)
+export default TopVideosCard
