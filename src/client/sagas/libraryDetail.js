@@ -8,8 +8,12 @@ import {
   makeSelectSelectedVideoID,
 } from 'Reducers/libraryDetail'
 import mock from 'Api/mocks/libraryMock.json'
-import { findIdDetail, getDataFromApi } from 'Utils/api'
-import { convertDataIntoDatasets, getMaximumValueIndexFromArray } from 'Utils/'
+import { findIdDetail, getDataFromApi, buildApiUrl } from 'Utils/api'
+import {
+  convertDataIntoDatasets,
+  getMaximumValueIndexFromArray,
+  convertColorTempToDatasets,
+} from 'Utils/'
 import { selectAuthProfile } from 'Reducers/auth'
 import { chartColors } from 'Utils/globals'
 
@@ -36,7 +40,6 @@ function getBarChartApi({ LibraryDetailId }) {
 
 function getColorTempApi({ LibraryDetailId }) {
   //this will use ajax function in utils/api when real data is provided
-  console.log(LibraryDetailId)
   return axios.get('/').then((res) => findIdDetail(mock, 1, 'ColorTempMock'))
 }
 function getShotByShotApi({ LibraryDetailId }) {
@@ -121,33 +124,25 @@ function* getColorTemperatureData({
   try {
     const { brand } = yield select(selectAuthProfile)
 
+    const options = {
+      daterange,
+      videoUuid: videoId,
+      mode: 'industry',
+    }
+
     const response = yield call(
       getDataFromApi,
-      {
-        daterange,
-        videoUuid: videoId,
-        mode: 'industry',
-      },
-      `/brand/${brand.uuid}/compare`,
+      null,
+      buildApiUrl(`/brand/${brand.uuid}/compare`, options),
       'GET'
     )
 
     if (!!response && !!response.sentiments) {
-      console.log(response)
-      const { colorTempData: mockData } = yield call(getColorTempApi, {
-        LibraryDetailId: 1,
-      })
-
-      const shuffleData = mockData.map((data) => {
-        data.data.map((item, i) => {
-          item.color = chartColors[i]
-        })
-        return data
-      })
-
+      const { data: convertedData } = convertColorTempToDatasets(response)
+      
       yield put({
         type: types.GET_COLOR_TEMP_SUCCESS,
-        payload: shuffleData,
+        payload: convertedData,
       })
     } else {
       throw 'Error fetching Library/Detail ColorTemperature'

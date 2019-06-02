@@ -12,17 +12,17 @@ import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
 //import style from './style.scss'
 class LibraryDetailColorTemperature extends React.Component {
   callBack = (data) => {
-    const { daterange } = data
+    const { dateRange } = data
     const { getColorTempRequest, videoId } = this.props
-    getColorTempRequest({ videoId, daterange })
+    if (videoId) {
+      getColorTempRequest({ videoId, daterange: dateRange })
+    }
   }
 
   render() {
     const {
       libraryDetailColorTemperatureData: { data, loading, error },
     } = this.props
-
-    console.log(data)
 
     return (
       <ColorTemperatureModule
@@ -44,6 +44,7 @@ class LibraryDetailColorTemperature extends React.Component {
             defaultValue: 'week',
           },
         ]}
+        isEmpty={!loading && !data}
       />
     )
   }
