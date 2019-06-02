@@ -134,8 +134,9 @@ export const actions = {
     error,
   }),
 
-  getVideoComparisonData: () => ({
-    type: types.LOAD_VIDEO_COMPARISON_DATA,
+  getVideoComparisonData: (data) => ({
+		type: types.LOAD_VIDEO_COMPARISON_DATA,
+		data,
   }),
   getVideoComparisonDataSuccess: (payload) => ({
     type: types.LOAD_VIDEO_COMPARISON_DATA_SUCCESS,
@@ -199,7 +200,7 @@ export const initialState = fromJS({
     loading: false,
   },
   videoComparisonData: {
-    data: [],
+    data: null,
     error: false,
     loading: false,
   },

@@ -85,14 +85,17 @@ export class LibraryDetail extends React.Component {
         doughnutLineChartData,
         colorTempData,
         shotByShotData,
-        selectedVideo: { socialIcon, uuid },
+        selectedVideo: {
+          socialIcon,
+          uuid,
+          title,
+          'cvScore.value': cvScore = 0.0,
+        },
       },
       match: {
         params: { videoId },
       },
     } = this.props
-
-    const cvScore = 80.0
 
     let radarDataCombined = null
 
@@ -118,17 +121,18 @@ export class LibraryDetail extends React.Component {
         radarData_DatasetOptions
       )
     }
-    console.log(this.props)
+
+    // console.log(this.props)
+
     return (
       <React.Fragment>
-        {barChartData && cvScore && (
+        {barChartData && (
           <LibraryDetailChartHeader
             barChartData={barChartData}
             videoUrl={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/${userUuid}/${uuid}.mp4`}
-            title={'Temporary Title'}
+            title={title}
             socialIcon={socialIcon}
             cvScore={cvScore}
-            id={uuid}
           />
         )}
         {doughnutLineChartData && (

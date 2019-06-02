@@ -7,7 +7,7 @@ import { withTheme } from 'ThemeContext/withTheme'
 Example Usage:
 <PureBarChart
   data={[
-    {"score": 25,	"label": "Sunday"},
+    {"score": 25, "label": "Sunday"},
     {"score": 48, "label": "Monday"},
     {"score": 36, "label": "Tuesday"},
     {"score": 54, "label": "Wednesday"},
@@ -67,6 +67,7 @@ class CustomBarChart extends React.Component {
                 zeroFill > 0 && element.score === 0
                   ? element.score + zeroFill
                   : element.score
+              const height = Math.ceil(elementScore * aspectRatio)
               return (
                 <div
                   key={index}
@@ -81,7 +82,7 @@ class CustomBarChart extends React.Component {
                     [styles.noChange]: difference === 0,
                   })}
                   style={{
-                    height: Math.ceil(elementScore * aspectRatio),
+                    height: (height !== Infinity && height) || '100%',
                     width: options.width,
                     background: duskBackground,
                   }}

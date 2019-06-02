@@ -9,6 +9,8 @@ import {
   convertDataIntoDatasets,
   getDateBucketFromRange,
   convertMultiRequestDataIntoDatasets,
+  getBrandAndCompetitors,
+  getFilteredCompetitors,
 } from 'Utils'
 import { getDataFromApi } from 'Utils/api'
 import _ from 'lodash'
@@ -45,12 +47,14 @@ function* getColorTempData() {
   }
 }
 
-function* getFilteringSectionData({ data: { dateRange, reportId } }) {
+function* getFilteringSectionData({ data: { dateRange, report } }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
+
+    const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const options = {
-      reportId,
       dateRange,
       metric: 'views',
       platform: 'all',
@@ -58,7 +62,7 @@ function* getFilteringSectionData({ data: { dateRange, reportId } }) {
       display: 'percentage',
       property: ['duration'],
       url: '/report',
-      brands: [brand.uuid],
+      brands: [...filteredCompetitors.map((c) => c.uuid)],
     }
 
     const doughnutData = yield call(getDataFromApi, options)
@@ -73,31 +77,22 @@ function* getFilteringSectionData({ data: { dateRange, reportId } }) {
           })
         : { data: {} }
 
-    if (
-      !!doughnutData.data &&
-      !!doughnutData.data[brand.name] &&
-      !!doughnutData.data[brand.name]['duration'] &&
-      stackedChartData.data
-    ) {
-      yield put(
-        actions.getFilteringSectionDataSuccess({
-          doughnutData: convertDataIntoDatasets(doughnutData, options, {
-            singleDataset: true,
-          }),
-          stackedChartData:
-            (!_.isEmpty(stackedChartData.data) &&
-              convertDataIntoDatasets(
-                stackedChartData,
-                { ...options, dateBucket },
-                { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
-              )) ||
-            {},
-          property: 'duration',
-        })
-      )
-    } else {
-      throw 'Error fetching FilteringSection data'
-    }
+    yield put(
+      actions.getFilteringSectionDataSuccess({
+        doughnutData: convertDataIntoDatasets(doughnutData, options, {
+          singleDataset: true,
+        }),
+        stackedChartData:
+          (!_.isEmpty(stackedChartData.data) &&
+            convertDataIntoDatasets(
+              stackedChartData,
+              { ...options, dateBucket },
+              { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+            )) ||
+          {},
+        property: 'duration',
+      })
+    )
   } catch (err) {
     yield put(
       // empty data
@@ -112,20 +107,22 @@ function* getFilteringSectionData({ data: { dateRange, reportId } }) {
   }
 }
 
-function* getPacingCardData({ data: { reportId } }) {
+function* getPacingCardData({ data: { report } }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
+
+    const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const options = {
-      reportId,
       metric: 'views',
       dateRange: '24hours',
       platform: 'all',
       property: ['pacing'],
       dateBucket: 'none',
       display: 'percentage',
-      brands: [brand.uuid],
       url: '/report',
+      brands: [...filteredCompetitors.map((c) => c.uuid)],
     }
 
     const [stadiumData, horizontalStackedBarData] = yield all([
@@ -136,49 +133,39 @@ function* getPacingCardData({ data: { reportId } }) {
       }),
     ])
 
-    if (
-      !!stadiumData.data &&
-      !!stadiumData.data[brand.name] &&
-      !!stadiumData.data[brand.name].pacing &&
-      !!horizontalStackedBarData.data &&
-      !!horizontalStackedBarData.data[brand.name] &&
-      !!horizontalStackedBarData.data[brand.name].pacing
-    ) {
-      yield put(
-        actions.getPacingCardDataSuccess({
-          stadiumData: convertDataIntoDatasets(stadiumData, options),
-          horizontalStackedBarData: convertDataIntoDatasets(
-            horizontalStackedBarData,
-            {
-              ...options,
-              proportionOf: 'format',
-            }
-          ),
-        })
-      )
-    } else {
-      yield put(
-        actions.getPacingCardDataFailure('Error fetching Pacing Card data')
-      )
-    }
+    yield put(
+      actions.getPacingCardDataSuccess({
+        stadiumData: convertDataIntoDatasets(stadiumData, options),
+        horizontalStackedBarData: convertDataIntoDatasets(
+          horizontalStackedBarData,
+          {
+            ...options,
+            proportionOf: 'format',
+          }
+        ),
+      })
+    )
   } catch (err) {
     console.log(err)
     yield put(actions.getPacingCardDataFailure(err))
   }
 }
 
-function* getCompetitorTopVideos({ data: { resolution } }) {
+function* getCompetitorTopVideos({ data: { property, report } }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const profile = yield select(selectAuthProfile)
+    const competitors = getBrandAndCompetitors(profile)
+
+    const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const options = {
       metric: 'views',
       dateRange: '24hours',
-      property: ['resolution'],
+      property: [property],
       dateBucket: 'none',
       display: 'percentage',
-      brands: [brand.uuid],
       url: '/report',
+      brands: [...filteredCompetitors.map((c) => c.uuid)],
     }
 
     const [facebook, instagram, twitter, youtube] = yield all([

@@ -6,10 +6,12 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewFormatCard } from 'Reducers/marketview'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import RightArrowCircle from "Components/Icons/RightArrowCircle"
+import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import SingleVideoCard from 'Components/SingleVideoCard'
 import style from 'Containers/Marketview/style.scss'
 import formatStyles from './style.scss'
+import { isDataSetEmpty } from 'Utils/'
+import { isEmpty } from 'lodash'
 
 class FormatCard extends Component {
   componentDidMount() {
@@ -18,15 +20,20 @@ class FormatCard extends Component {
 
   iconClass(name) {
     switch (name) {
+      case 'LA':
       case 'Live Action':
         return 'icon-icon_liveaction'
 
+      case 'AN':
       case 'Animation':
         return 'icon-icon_animation'
 
+      case 'HY':
+      case 'Hybrid':
       case 'Stop Motion':
         return 'icon-icon_stopmotion'
 
+      case 'CG':
       case 'Cinemagraph':
         return 'icon-icon_cinemagraph'
 
@@ -37,11 +44,9 @@ class FormatCard extends Component {
 
   render() {
     const {
-      formatChartData: {
-        data,
-        video
-      },
+      formatChartData: { data, video, currentDay, loading },
     } = this.props
+    const isDataEmpty = (!loading && isDataSetEmpty(data)) || isEmpty(data)
 
     return (
       <ThemeContext.Consumer>
@@ -53,23 +58,32 @@ class FormatCard extends Component {
               color: colors.textColor,
             }}
           >
+            {isDataEmpty && (
+              <div
+                className={style.marketViewCardEmpty}
+                style={{ backgroundColor: colors.moduleBackgroundOpacity }}
+              >
+                No Data Available
+              </div>
+            )}
             <div className={style.marketViewCardTitle}>Format</div>
             <div className={style.marketViewCardSubTitle}>
               Performance Over Time
             </div>
 
-            <div className={style.chartSectionBadge}>
-              <span
-                style={{
-                  background: colors.labelBackground,
-                  color: colors.labelColor,
-                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                }}
-              >
-                On Mondays
-              </span>
-            </div>
-
+            {!!currentDay && (
+              <div className={style.chartSectionBadge}>
+                <span
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  On {currentDay}s
+                </span>
+              </div>
+            )}
             <div className={style.videoContainer}>
               {video && (
                 <SingleVideoCard
@@ -111,7 +125,7 @@ class FormatCard extends Component {
             >
               View Time Metrics
               <div className={style.icon}>
-                <RightArrowCircle></RightArrowCircle>
+                <RightArrowCircle />
               </div>
             </Link>
           </div>

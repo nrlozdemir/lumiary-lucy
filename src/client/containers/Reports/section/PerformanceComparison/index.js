@@ -1,24 +1,17 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import {
-  actions,
-  makeSelectReportsPerformanceComparison,
-} from 'Reducers/reports'
 import BarAndDoughnutChartModule from 'Components/Modules/BarAndDoughnutChartModule'
 
 import { stackedChartOptions } from './options'
-import style from './style.scss'
 
 class PerformanceComparison extends React.Component {
   callBack = (data, moduleKey) => {
-    this.props.getPerformanceComparisonData(data)
+    const { action, report } = this.props
+    action({ ...data, report })
   }
 
   render() {
     const {
-      performanceComparisonData: { data, loading, error },
+      data: { data, loading, error },
     } = this.props
 
     let doughnutData = {}
@@ -99,15 +92,4 @@ class PerformanceComparison extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  performanceComparisonData: makeSelectReportsPerformanceComparison(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(PerformanceComparison)
+export default PerformanceComparison

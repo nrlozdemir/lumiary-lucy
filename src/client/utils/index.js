@@ -395,16 +395,17 @@ const radarChartCalculate = (data) => {
 
 const getMaximumValueIndexFromArray = (data) =>
   Object.values(data).indexOf(Math.max(...Object.values(data)))
-const compareSharesData = (data) => {
-  return data.map((item, index) => {
-    const keyName = Object.keys(item.data)[0]
-    const colorData = item.data[keyName].color
-    const labels = Object.entries(colorData)
-    const type = item.platform ? item.platform : keyName
+
+const compareSharesData = ({ data }) => {
+  return Object.keys(data).map((brand) => {
+    const item = data[brand]
+    const keyName = Object.keys(item)[0]
+    const labels = Object.entries(item[keyName])
+    const type = brand ? brand : keyName
     return {
       type: capitalizeFirstLetter(type),
       datas: {
-        labels: labels.map((color, indx) => {
+        labels: labels.map((color) => {
           return {
             name: color[0]
               .split('-')
@@ -493,11 +494,25 @@ const getBrandAndCompetitors = (profile) => {
   const { brand } = profile
 
   if (!!brand && !!brand.uuid && !!brand.competitors) {
-    return [brand.uuid, ...brand.competitors.map((c) => c.uuid)]
+    return [
+      {
+        name: brand.name,
+        uuid: brand.uuid,
+      },
+      ...brand.competitors,
+    ]
   }
 
-  return [brand.uuid]
+  return [
+    {
+      name: brand.name,
+      uuid: brand.uuid,
+    },
+  ]
 }
+
+const getFilteredCompetitors = (competitors, report) =>
+  competitors.filter((brand) => report.brands.map(c => c.uuid).indexOf(brand.uuid) > -1)
 
 export {
   randomKey,
@@ -515,4 +530,5 @@ export {
   convertMultiRequestDataIntoDatasets,
   getDateBucketFromRange,
   getBrandAndCompetitors,
+  getFilteredCompetitors,
 }
