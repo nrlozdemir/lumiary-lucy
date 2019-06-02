@@ -523,30 +523,31 @@ const getFilteredCompetitors = (competitors, report) =>
   @sentiment {string} - 'happy-sad', 'energetic-calm', 'natural-synthetic'
  */
 const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
-  const { platformMetricSums, colorTemperature, sentiments } = values
+  const { platformMetricSums } = values
 
-  const colorTempScale = !!colorTemperature && colorTemperature.scale
+  const platforms = Object.keys(platformMetricSums)
+
+  const colorTempsAndSentiments =
+    !!platforms.length &&
+    platforms.map((pf) => ({
+      colorTemperature: platformMetricSums[pf].colorTemperature,
+      sentiments: platformMetricSums[pf].sentiments,
+    }))
 
   if (
     isEmpty(values) ||
     isEmpty(platformMetricSums) ||
-    !colorTempScale ||
-    !sentiments ||
-    !colorTemperature
+    !colorTempsAndSentiments
   ) {
     return { labels: [], data: [], platforms: [] }
   }
 
-  const sentimentObj = sentiments.find((s) => !!s[sentiment.split('-')[0]])
-
-  const platforms = Object.keys(platformMetricSums)
-
-  const metrics =
-    (!!platforms.length && Object.keys(platformMetricSums[platforms[0]])) || []
+  const metrics = ['likes', 'views', 'comments', 'shares']
 
   const { min, max } = Object.keys(platformMetricSums).reduce(
     (acc, pf, idx) => {
       const metricData = platformMetricSums[pf]
+
       Object.keys(metricData).forEach((metric) => {
         const metricVal = metricData[metric]
         if (!acc.min || !acc.max) {
@@ -561,25 +562,32 @@ const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
           }
         }
       })
+
       return acc
     },
     { min: null, max: null }
   )
 
   const data = metrics.map((metric) => ({
-    data: platforms.map((platform, idx) => ({
-      x: colorTempScale,
-      y: sentimentObj.scale,
-      count: platformMetricSums[platform][metric],
-      color: chartColors[idx],
-      size: `${normalize(
-        platformMetricSums[platform][metric],
-        min,
-        max,
-        10,
-        60
-      )}px`,
-    })),
+    data: platforms.map((platform, idx) => {
+      const { colorTemperature, sentiments } = colorTempsAndSentiments[idx]
+
+      const sentimentObj = sentiments.find((s) => !!s[sentiment.split('-')[0]])
+
+      return {
+        x: colorTemperature.scale,
+        y: sentimentObj.scale,
+        count: platformMetricSums[platform][metric],
+        color: chartColors[idx],
+        size: `${normalize(
+          platformMetricSums[platform][metric],
+          min,
+          max,
+          10,
+          60
+        )}px`,
+      }
+    }),
   }))
 
   return {

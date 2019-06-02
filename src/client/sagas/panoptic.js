@@ -79,15 +79,15 @@ function* getColorTemperatureData({ data }) {
           views: 912884,
           comments: 264416,
           shares: 944496,
-          colorTemperature: {
+         colorTemperature: {
             average: 13083.6,
-            scale: -9.0844444444444434,
+            scale: -5.0844444444444434,
           },
           sentiments: [
             {
               happy: 1,
               sad: 3,
-              scale: -30,
+              scale: -20,
             },
             {
               energetic: 1,
@@ -106,20 +106,20 @@ function* getColorTemperatureData({ data }) {
           views: 1219625,
           comments: 52880,
           shares: 1185575,
-          colorTemperature: {
+        colorTemperature: {
             average: 13083.6,
-            scale: -7.0844444444444434,
+            scale: -5.0844444444444434,
           },
           sentiments: [
             {
               happy: 1,
               sad: 3,
-              scale: -30,
+              scale: -20,
             },
             {
               energetic: 1,
               calm: 3,
-              scale: -70,
+              scale: -50,
             },
             {
               natural: 1,
@@ -133,20 +133,20 @@ function* getColorTemperatureData({ data }) {
           views: 1184157,
           comments: 1504910,
           shares: 1651821,
-          colorTemperature: {
+         colorTemperature: {
             average: 13083.6,
-            scale: -3.0844444444444434,
+            scale: -5.0844444444444434,
           },
           sentiments: [
             {
               happy: 1,
               sad: 3,
-              scale: -30,
+              scale: -20,
             },
             {
               energetic: 1,
               calm: 3,
-              scale: -10,
+              scale: -50,
             },
             {
               natural: 1,
