@@ -10,6 +10,8 @@ import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import SingleVideoCard from 'Components/SingleVideoCard'
 import style from 'Containers/Marketview/style.scss'
 import formatStyles from './style.scss'
+import { isDataSetEmpty } from 'Utils/'
+import { isEmpty } from 'lodash'
 
 class FormatCard extends Component {
   componentDidMount() {
@@ -42,8 +44,9 @@ class FormatCard extends Component {
 
   render() {
     const {
-      formatChartData: { data, video, currentDay },
+      formatChartData: { data, video, currentDay, loading },
     } = this.props
+    const isDataEmpty = (!loading && isDataSetEmpty(data)) || isEmpty(data)
 
     return (
       <ThemeContext.Consumer>
@@ -55,6 +58,14 @@ class FormatCard extends Component {
               color: colors.textColor,
             }}
           >
+            {isDataEmpty && (
+              <div
+                className={style.marketViewCardEmpty}
+                style={{ backgroundColor: colors.moduleBackgroundOpacity }}
+              >
+                No Data Available
+              </div>
+            )}
             <div className={style.marketViewCardTitle}>Format</div>
             <div className={style.marketViewCardSubTitle}>
               Performance Over Time

@@ -5,86 +5,19 @@
  */
 
 import React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectMarketview } from 'Reducers/marketview'
-
-import Slider from 'Components/Modules/SliderModule'
-import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
-import BarChartModule from 'Components/Modules/BarChartModule'
-import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
-
-import { chartCombineDataset } from 'Utils'
-import { TopPerformingProperties_DatasetOptions } from 'Containers/Marketview/sections/detail/options'
-
-import style from '../style.scss'
-import { withTheme } from 'ThemeContext/withTheme'
-
-const chartTickOptions = {
-  stepSize: 250000,
-  min: 0,
-  max: 1000000,
-  callback(value) {
-    if (value < 1000) {
-      return value
-    } else if (value < 1000000) {
-      return `${Math.round(value / 1000)}k`
-    }
-    return `${Math.round((value * 100) / 1000000) / 100}m`
-  },
-}
+import Slider from '../sections/detail/Slider'
+import TopVideosOverTime from '../sections/detail/TopVideosOverTime'
+import TopSimilarProperties from '../sections/detail/TopSimilarProperties'
+import TopPerformingProperty from '../sections/detail/TopPerformingProperty'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Competitor extends React.Component {
-  componentDidMount() {
-    this.props.getCompetitorVideosRequest()
-  }
-
-  getSimilarProperties = (data) => {
-    const {
-      themeContext: { colors },
-    } = this.props
-    this.props.getSimilarPropertiesRequest({
-      date: data,
-      themeColors: colors,
-    })
-  }
-
-  getTopPerformingPropertiesByCompetitors = (data) => {
-    this.props.getTopPerformingPropertiesByCompetitorsRequest(data)
-  }
-
-  getCompetitorVideos = (data) => {
-    this.props.getCompetitorVideosRequest(data)
-  }
-
-  getCompetitorTopVideos = (data) => {
-    this.props.getCompetitorTopVideosRequest(data)
-  }
-
-  changeSelectedVideo = (video) => {
-    this.props.setSelectedVideo(video)
-  }
-
   render() {
-    const {
-      marketview,
-      marketview: {
-        selectedVideo,
-        competitorTopVideos,
-        similarProperties,
-        topPerformingPropertiesByCompetitorsData,
-      },
-    } = this.props
     return (
       <React.Fragment>
         <div className="grid-collapse">
           <Slider
-            data={marketview.videos || []}
-            selectedVideo={selectedVideo}
-            changeSelectedVideo={this.changeSelectedVideo}
-            action={this.getCompetitorVideos}
+            moduleKey="MarketView/Competitor/Slider"
             title="Top Performing Competitor Videos"
             filters={[
               {
@@ -98,13 +31,11 @@ export class Competitor extends React.Component {
                 placeHolder: 'Date',
               },
             ]}
+            container="competitor"
           />
-          <TopVideosCardModule
-            chartData={competitorTopVideos}
-            height={150}
-            moduleKey="MarketView/TopVideosCardModule"
+          <TopVideosOverTime
+            moduleKey="MarketView/Competitor/TopVideosOverTime"
             title="Top Videos Over Time By Competitor"
-            action={this.getCompetitorTopVideos}
             filters={[
               {
                 type: 'property',
@@ -144,13 +75,11 @@ export class Competitor extends React.Component {
                 text: 'Fanside',
               },
             ]}
+            container="competitor"
           />
-          <TopSimilarPropertiesModule
-            moduleKey="MarketView/TopSimilarPropertiesModule"
-            data={similarProperties}
+          <TopSimilarProperties
+            moduleKey="MarketView/Competitor/TopSimilarProperties"
             title="Similar Properties Of Top Videos"
-            action={this.getSimilarProperties}
-            presentWithDoughnut
             filters={[
               {
                 type: 'dateRange',
@@ -158,15 +87,11 @@ export class Competitor extends React.Component {
                 placeHolder: 'dateRange',
               },
             ]}
+            container="competitor"
           />
-          <BarChartModule
-            moduleKey="MarketView/topPerformingPropertiesByCompetitors"
-            containerClass={style.detailTopPerformingPropertyContainer}
-            barData={topPerformingPropertiesByCompetitorsData}
-            tickOptions={chartTickOptions}
+          <TopPerformingProperty
+            moduleKey="MarketView/Competitor/TopPerformingProperty"
             title="Top Performing Property, Pacing, Across All Competitors"
-            height={50}
-            action={this.getTopPerformingPropertiesByCompetitors}
             filters={[
               {
                 type: 'dateRange',
@@ -174,24 +99,7 @@ export class Competitor extends React.Component {
                 placeHolder: 'dateRange',
               },
             ]}
-            references={[
-              {
-                className: 'bg-cool-blue',
-                text: 'Fast',
-              },
-              {
-                className: 'bg-lighter-purple',
-                text: 'Medium',
-              },
-              {
-                className: 'bg-coral-pink',
-                text: 'Slow',
-              },
-              {
-                className: 'bg-cool-grey',
-                text: 'Slowest',
-              },
-            ]}
+            container="competitor"
           />
         </div>
       </React.Fragment>
@@ -199,20 +107,4 @@ export class Competitor extends React.Component {
   }
 }
 
-Competitor.propTypes = {}
-
-const mapStateToProps = createStructuredSelector({
-  marketview: makeSelectMarketview(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(
-  withConnect,
-  withTheme
-)(Competitor)
+export default Competitor
