@@ -398,7 +398,7 @@ const radarChartCalculate = (data) => {
 const getMaximumValueIndexFromArray = (data) =>
   Object.values(data).indexOf(Math.max(...Object.values(data)))
 
-const compareSharesData = ({ data }) => {
+const compareSharesData = ({ data = {} }) => {
   return Object.keys(data).map((brand) => {
     const item = data[brand]
     const keyName = Object.keys(item)[0]
