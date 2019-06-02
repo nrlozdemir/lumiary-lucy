@@ -1,4 +1,6 @@
 import { chartColors, expectedNames } from 'Utils/globals'
+import { isEmpty } from 'lodash'
+
 function randomKey(char) {
   var text = ''
   var possible =
@@ -512,9 +514,99 @@ const getBrandAndCompetitors = (profile) => {
 }
 
 const getFilteredCompetitors = (competitors, report) =>
-  competitors.filter((brand) => report.brands.map(c => c.uuid).indexOf(brand.uuid) > -1)
+  competitors.filter(
+    (brand) => report.brands.map((c) => c.uuid).indexOf(brand.uuid) > -1
+  )
+
+/*
+  /brand/{brandUuid}/compare
+  @sentiment {string} - 'happy-sad', 'energetic-calm', 'natural-synthetic'
+ */
+const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
+  const { platformMetricSums, colorTemperature, sentiments } = values
+
+  const colorTempScale = !!colorTemperature && colorTemperature.scale
+
+  if (
+    isEmpty(values) ||
+    isEmpty(platformMetricSums) ||
+    !colorTempScale ||
+    !sentiments ||
+    !colorTemperature
+  ) {
+    return { labels: [], data: [], platforms: [] }
+  }
+
+  const sentimentObj = sentiments.find((s) => !!s[sentiment.split('-')[0]])
+
+  const platforms = Object.keys(platformMetricSums)
+
+  const metrics =
+    (!!platforms.length && Object.keys(platformMetricSums[platforms[0]])) || []
+
+  const { min, max } = Object.keys(platformMetricSums).reduce(
+    (acc, pf, idx) => {
+      const metricData = platformMetricSums[pf]
+      Object.keys(metricData).forEach((metric) => {
+        const metricVal = metricData[metric]
+        if (!acc.min || !acc.max) {
+          acc.min = metricVal
+          acc.max = metricVal
+        } else {
+          if (metricVal < acc.min) {
+            acc.min = metricVal
+          }
+          if (metricVal > acc.max) {
+            acc.max = metricVal
+          }
+        }
+      })
+      return acc
+    },
+    { min: null, max: null }
+  )
+
+  const data = metrics.map((metric) => ({
+    data: platforms.map((platform, idx) => ({
+      x: colorTempScale,
+      y: sentimentObj.scale,
+      count: platformMetricSums[platform][metric],
+      color: chartColors[idx],
+      size: `${normalize(
+        platformMetricSums[platform][metric],
+        min,
+        max,
+        10,
+        60
+      )}px`,
+    })),
+  }))
+
+  return {
+    data,
+    platforms: platforms.map((key, idx) => ({
+      name: ucfirst(key),
+      color: chartColors[idx],
+    })),
+    labels: metrics.map((key) => ucfirst(key)),
+  }
+}
+
+const ucfirst = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+const normalize = (input, min, max, low_range, high_range) => {
+  const range = max - min
+  const norm = (input - min) / range
+
+  const scale_range = high_range - low_range
+  return norm * scale_range + low_range
+}
 
 export {
+  ucfirst,
+  normalize,
   randomKey,
   searchTermInText,
   socialIconSelector,
@@ -531,4 +623,5 @@ export {
   getDateBucketFromRange,
   getBrandAndCompetitors,
   getFilteredCompetitors,
+  convertColorTempToDatasets,
 }

@@ -3,19 +3,23 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticColorTemperature } from 'Reducers/panoptic'
-import { platforms } from './options'
 import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
 import style from './style.scss'
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 
 class PanopticColorTemperature extends React.Component {
   callBack = (data) => {
-    this.props.getColorTemperatureData(data)
+    const { getColorTemperatureData } = this.props
+    getColorTemperatureData(data)
   }
 
   render() {
     const {
-      colorTemperatureData: { data, loading, error },
+      colorTemperatureData: {
+        data: { data, platforms, labels },
+        loading,
+        error,
+      },
     } = this.props
 
     const moduleName = 'Panoptic/ColorTemperature'
@@ -25,13 +29,15 @@ class PanopticColorTemperature extends React.Component {
       this.props.selects.values[moduleName][selectKey].value &&
       this.props.selects.values[moduleName][selectKey].value.label
 
+    console.log(data)
+
     return (
       <ColorTemperatureModule
         extraClasses={style.colorChartContent}
         chartWrapperClass={style.colorTemperatureChartWrapper}
         borderLess
         verticalText
-        infoLabels={['Views', 'Likes', 'Comments', 'Shares']}
+        infoLabels={labels}
         moduleKey={moduleName}
         data={data}
         title="Color Temperature / Sentiment Comparison"
@@ -39,7 +45,7 @@ class PanopticColorTemperature extends React.Component {
         selectValue={selectValue}
         filters={[
           {
-            type: 'colorTempature',
+            type: 'colorTemperature',
             selectKey: selectKey,
             placeHolder: 'Color Tempature',
           },
@@ -50,6 +56,7 @@ class PanopticColorTemperature extends React.Component {
           },
         ]}
         platforms={platforms}
+        isEmpty={!data.length}
       />
     )
   }
