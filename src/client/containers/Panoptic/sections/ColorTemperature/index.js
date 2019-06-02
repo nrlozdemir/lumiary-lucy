@@ -54,7 +54,7 @@ class PanopticColorTemperature extends React.Component {
           },
         ]}
         platforms={platforms}
-        isEmpty={!data.length}
+        isEmpty={!loading && !data}
       />
     )
   }

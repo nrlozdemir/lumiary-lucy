@@ -539,7 +539,7 @@ const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
     isEmpty(platformMetricSums) ||
     !colorTempsAndSentiments
   ) {
-    return { labels: [], data: [], platforms: [] }
+    return { labels: [], data: undefined, platforms: [] }
   }
 
   const metrics = ['likes', 'views', 'comments', 'shares']

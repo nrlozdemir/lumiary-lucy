@@ -118,7 +118,7 @@ const ColorTemperatureModule = ({
 }
 
 ColorTemperatureModule.defaultProps = {
-  data: [],
+  data: [{ data: [] }, { data: [] }, { data: [] }],
   infoLabels: [],
   legend: [],
   borderLess: false,

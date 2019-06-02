@@ -151,7 +151,7 @@ export const initialState = fromJS({
   },
   colorTempData: {
     data: {
-      data: [],
+      data: undefined,
       labels: [],
       platforms: [],
     },
