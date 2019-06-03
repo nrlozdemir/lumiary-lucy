@@ -48,6 +48,7 @@ class CompareBrand extends Component {
                     type="checkbox"
                     options={brands}
                     canSelect={2}
+                    valid={this.state.formValid}
                     checkboxValidation={this.checkboxValidation}
                   />
                 </div>
