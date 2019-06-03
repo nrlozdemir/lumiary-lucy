@@ -5,32 +5,32 @@ import { createStructuredSelector } from 'reselect'
 import style from '../style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import XCircle from 'Components/Icons/XCircle'
-import SelectFilters from 'Components/SelectFilters'
-import { actions } from 'Reducers/libraryDetail';
+import SelectFilters from 'Components/ModuleSelectFilters'
+import { actions, makeSelectInfoShowSection, makeSelectDoughnutFilters } from 'Reducers/libraryDetail';
 
 class Header extends React.Component {
-  constructor(props) {
-    super(props)
+  handleDateChange = value => {
+		this.props.changeFilters({name: 'date', value: value ? value.value : value});
+	}
 
-    this.state = {
-      selectDate: null,
-      selectLikes: null,
-    }
-  }
+	handleMetricChange = value => {
+		this.props.changeFilters({name: 'metric', value: value ? value.value : value});
+	}
 
-  handleSelectFilters = (name, value) => {
-		const { onFilterChange = () => {} } = this.props;
+	componentDidMount() {
+		const { filters: { date, metric } } = this.props;
 
-    this.setState({
-      [name]: value,
-		});
+		if (!date) {
+			this.props.changeFilters({name: 'date', value: 'week'});
+		}
 
-		onFilterChange({...this.state, [name]: value});
+		if (!metric) {
+			this.props.changeFilters({name: 'metric', value: 'likes'});
+		}
 	}
 
   render() {
-		const { selectDate, selectLikes } = this.state
-		const { toggleInfoSection } = this.props;
+		const { toggleInfoSection, sectionData } = this.props;
 
     return (
       <ThemeContext.Consumer>
@@ -42,22 +42,28 @@ class Header extends React.Component {
               boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
             }}
           >
-            <div onClick={() => toggleInfoSection(false)}>
+            <div onClick={() => toggleInfoSection(null)}>
               <div className={style.iconWrapper}>
                 <XCircle />
-                <p className={style.iconTitle}>Frame Rate - 24 Fps</p>
+                <p className={style.iconTitle}>{sectionData.title} - {sectionData.label}</p>
               </div>
             </div>
             <div className={style.headerInfo}>
               <div />
               <div className={style.formWrapper}>
                 <SelectFilters
-                  handleSelectFilters={this.handleSelectFilters}
-                  selectClasses="custom-select"
-                  selectDate={selectDate}
-                  selectDateShow={true}
-                  selectLikes={selectLikes}
-                  selectLikesShow={true}
+									moduleKey="LDDH"
+                  onChange={this.handleDateChange}
+									type="dateRange"
+									selectKey="date"
+									defaultValue="week"
+                />
+                <SelectFilters
+									moduleKey="LDDH"
+                  onChange={this.handleMetricChange}
+									type="metric"
+									selectKey="metric"
+									defaultValue="likes"
                 />
               </div>
             </div>
@@ -69,11 +75,14 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
+	sectionData: makeSelectInfoShowSection(),
+	filters: makeSelectDoughnutFilters()
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-		toggleInfoSection: show => dispatch(actions.toggleInfoSection(show))
+		toggleInfoSection: show => dispatch(actions.toggleInfoSection(show)),
+		changeFilters: filters => dispatch(actions.changeDoughnutFilters(filters))
   }
 }
 

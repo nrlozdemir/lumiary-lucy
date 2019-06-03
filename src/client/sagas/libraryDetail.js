@@ -5,7 +5,8 @@ import { ajax } from 'Utils/api'
 import {
   types,
   actions,
-  makeSelectSelectedVideoID,
+	makeSelectInfoShowSection,
+	makeSelectDoughnutFilters,
 } from 'Reducers/libraryDetail'
 import mock from 'Api/mocks/libraryMock.json'
 import { findIdDetail, getDataFromApi } from 'Utils/api'
@@ -173,10 +174,41 @@ function* getSelectedVideo({ payload }) {
   }
 }
 
+function* getDoughnutSectionInfoData({ payload: { dateRange, metric, property}}) {
+	try {
+		const { date, metric } = yield select(makeSelectDoughnutFilters());
+
+		if (!date || !metric) {
+			return;
+		}
+
+		const { brand } = yield select(selectAuthProfile);
+		const { id } = yield select(makeSelectInfoShowSection());
+
+		const options = {
+			metric,
+			dateRange: date,
+			property: [id],
+			url: '/report',
+			brands: [brand.uuid],
+			platform: 'all',
+			dateBucket: 'none',
+			display: 'percentage'
+		};
+
+		const data = yield call(getDataFromApi, options);
+
+		console.log(data);
+	} catch (e) {
+		console.error(e);
+	}
+}
+
 export default [
   takeLatest(types.GET_BAR_CHART_REQUEST, getBarChart),
   takeLatest(types.GET_DOUGHNUT_CHART_REQUEST, getDoughnutChart),
   takeLatest(types.GET_COLOR_TEMP_REQUEST, getColorTemperatureData),
   takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),
   takeLatest(types.GET_SELECTED_VIDEO_REQUEST, getSelectedVideo),
+  takeLatest(types.CHANGE_DOUGHNUT_FILTERS, getDoughnutSectionInfoData),
 ]

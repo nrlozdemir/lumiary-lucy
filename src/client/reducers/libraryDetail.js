@@ -23,6 +23,7 @@ export const types = {
 	GET_SHOT_BY_SHOT_FAILURE: 'LibraryDetail/GET_SHOT_BY_SHOT_FAILURE',
 
 	TOGGLE_INFO_SECTION: 'LibraryDetail/TOGGLE_INFO_SECTION',
+	CHANGE_DOUGHNUT_FILTERS: 'LibraryDetail/CHANGE_DOUGHNUT_FILTERS'
 }
 export const actions = {
   getSelectedVideoRequest: (payload) => ({
@@ -89,7 +90,12 @@ export const actions = {
     type: types.TOGGLE_INFO_SECTION,
     payload,
 	}),
+  changeDoughnutFilters: (payload) => ({
+    type: types.CHANGE_DOUGHNUT_FILTERS,
+    payload,
+	}),
 }
+
 export const initialState = fromJS({
   barChartData: null,
   doughnutData: null,
@@ -103,7 +109,11 @@ export const initialState = fromJS({
   loading: false,
 	selectedVideo: {},
 	infoData: {
-		showSection: false,
+		shownSectionData: null,
+		filters: {
+			date: null,
+			metric: null
+		}
 	}
 })
 
@@ -167,7 +177,10 @@ const libraryDetailReducer = (state = initialState, action) => {
 				.set('loading', fromJS(false))
 
 		case types.TOGGLE_INFO_SECTION:
-			return state.setIn(['infoData', 'showSection'], fromJS(action.payload))
+			return state.setIn(['infoData', 'shownSectionData'], fromJS(action.payload))
+
+		case types.CHANGE_DOUGHNUT_FILTERS:
+			return state.setIn(['infoData', 'filters', action.payload.name], fromJS(action.payload.value))
 
     default:
       return state
@@ -209,7 +222,7 @@ function selectInfoData(state) {
 export function makeSelectInfoShowSection() {
 	return createSelector(
 		selectInfoData,
-		substate => substate.get('showSection')
+		substate => substate.get('shownSectionData') ? substate.get('shownSectionData').toJS() : null
 	)
 }
 
@@ -217,6 +230,13 @@ export function makeSelectDoughnutData() {
 	return createSelector(
 		selectLibraryDetailDomain,
 		substate => substate.get('doughnutData').toJS()
+	)
+}
+
+export function makeSelectDoughnutFilters() {
+	return createSelector(
+		selectInfoData,
+		substate => substate.get('filters').toJS()
 	)
 }
 

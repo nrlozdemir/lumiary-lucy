@@ -30,7 +30,7 @@ class ModuleSelectFilters extends React.Component {
   }
 
   onChange = (val) => {
-    const { selectKey, type, moduleKey } = this.props
+    const { selectKey, type, moduleKey, onChange = () => {} } = this.props
     const filterObj = {
       [moduleKey]: {
         [selectKey]: {
@@ -39,7 +39,8 @@ class ModuleSelectFilters extends React.Component {
         },
       },
     }
-    this.props.changeFilter(filterObj)
+		this.props.changeFilter(filterObj);
+		onChange(val);
   }
 
   removeFilterValue = () => {

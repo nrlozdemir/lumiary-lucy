@@ -63,7 +63,7 @@ class DoughnutCard extends React.Component {
             </div>
             <a
               className={style.doughnutChartFooter}
-              onClick={() => toggleInfoSection(true)}
+              onClick={() => toggleInfoSection({id: identifier, label: maxLabel, title})}
               style={{
                 backgroundColor: colors.modalButtonBackground,
                 color: colors.textColor,
