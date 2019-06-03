@@ -15,10 +15,14 @@ function getLibraryApi() {
 }
 
 function getLibraryDataApi(vals) {
+  const { limit, page, body = {} } = vals
+
   return ajax({
-    url: `${RESOURCE}/${userUuid}?limit=${vals.limit}&page=${vals.page}`,
-    method: 'GET',
+    url: `${RESOURCE}/${userUuid}?limit=${limit}&page=${page}`,
+    method: 'POST',
+    params: qs.stringify(body),
   }).then((response) => {
+    console.log(response.data)
     if (response.error) {
       throw response.error
     }
@@ -29,26 +33,61 @@ function getLibraryDataApi(vals) {
 function* getVideos(values) {
   const page = values && values.payload && values.payload.page
   try {
+    const filters = yield select(makeSelectVideoFilters())
+    const body = getBodyFromFilters(filters)
+
     const options = {
       limit: 16,
       page: page || 1,
+      body,
     }
     const payload = yield call(getLibraryDataApi, options)
     yield put(actions.loadVideosSuccess(payload))
   } catch (err) {
+    console.log(err)
+    debugger
     yield put(actions.loadVideosError(err))
   }
 }
 
+function getBodyFromFilters (filters = {}) {
+  return Object.keys(filters).reduce((accumulator, filter) => {
+    const thisFilter = filters[filter]
+    switch(filter) {
+      case 'Search':
+        const { value } = thisFilter
+        accumulator['term'] = value
+      break
+    }
+
+    return accumulator
+  }, {})
+}
+
 function* changeFilter() {
   try {
-    const payload = yield call(getLibraryApi)
-    const filter = yield select(makeSelectVideoFilters())
-    const sorted = sortVideos(payload, filter)
+    // const payload = yield call(getLibraryApi)
+    const filters = yield select(makeSelectVideoFilters())
+    const body = getBodyFromFilters(filters)
 
-    yield put(actions.loadVideosSuccess(sorted))
+    const options = {
+      limit: 16,
+      page: 1,
+      body,
+    }
+
+    const payload = yield call(getLibraryDataApi, options)
+    console.log(filters)
+    console.log(body)
+    console.log(payload)
+
+    yield put(actions.clearAndLoadVideos(payload))
+
+    // yield put(actions.loadVideosSuccess(sorted))
   } catch (err) {
-    yield put(actions.loadVideosError(err))
+    console.log(err)
+    debugger
+    // yield put(actions.loadVideosError(err))
   }
 }
 
