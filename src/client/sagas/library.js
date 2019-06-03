@@ -79,7 +79,10 @@ function getBodyFromFilters(filters = {}) {
         if (!accumulator['platforms']) {
           accumulator['platforms'] = []
         }
-        accumulator['platforms'].push(filter.toLowerCase())
+
+        if(thisFilter) {
+          accumulator['platforms'].push(filter.toLowerCase())
+        }
         break
 
       case 'FramesPerSecond':
@@ -138,7 +141,7 @@ function getBodyFromFilters(filters = {}) {
         if (!accumulator['colors']) {
           accumulator['colors'] = []
         }
-        accumulator['colors'].push(thisFilter.name.toLowerCase())
+        accumulator['colors'].push(thisFilter.name.toLowerCase().replace(/ /g, '-'))
         break
 
     }
@@ -149,7 +152,6 @@ function getBodyFromFilters(filters = {}) {
 
 function* changeFilter() {
   try {
-    // const payload = yield call(getLibraryApi)
     const filters = yield select(makeSelectVideoFilters())
     const body = getBodyFromFilters(filters)
 
@@ -160,17 +162,10 @@ function* changeFilter() {
     }
 
     const payload = yield call(getLibraryDataApi, options)
-    console.log(filters)
-    console.log(body)
-    console.log(payload)
 
     yield put(actions.clearAndLoadVideos(payload))
-
-    // yield put(actions.loadVideosSuccess(sorted))
   } catch (err) {
-    console.log(err)
-    debugger
-    // yield put(actions.loadVideosError(err))
+    yield put(actions.loadVideosError(err))
   }
 }
 

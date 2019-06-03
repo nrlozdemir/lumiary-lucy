@@ -58,20 +58,8 @@ const libraryReducer = (state = initialState, action) => {
         .set('loading', fromJS(false))
 
     case types.CLEAD_AND_LOAD_VIDEOS:
-      console.log(action.payload.videos)
       return state
       .setIn(['data'], fromJS(action.payload))
-      // .setIn(['data', 'videos'], fromJS(action.payload.videos))
-      // .setIn(['data', 'pagination'], fromJS(action.payload.pagination))
-      // .setIn(
-          //   ['data', 'videos'],
-          //   fromJS(
-          //     state
-          //       .setIn(['data', 'videos'], fromJS(action.payload.videos))
-          //   )
-          // )
-          // .setIn(['data', 'pagination'], fromJS(action.payload.pagination))
-          // .set('loading', fromJS(false))          
 
     case types.LOAD_VIDEOS_ERROR:
       return state
@@ -80,7 +68,6 @@ const libraryReducer = (state = initialState, action) => {
 
     case types.CHANGE_FILTER:
       return state
-        // .set('loading', fromJS(true))
         .set('filters', fromJS(action.payload))
 
     default:
