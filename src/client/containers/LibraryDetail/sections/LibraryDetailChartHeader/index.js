@@ -11,20 +11,32 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 const Front = (props) => {
   const { data, colors, title } = props
   return (
-    <div className={style.videoStat}>
-      <div className={style.progressText}>
-        <span className={style.leftTitle}>{capitalizeFirstLetter(title)}</span>
-        <span className={style.rightTitle}>{addComma(data.value)}</span>
+    <div className={style.frontContainer}>
+      <div className={style.videoStat}>
+        {data.value === 0 && (
+          <div
+            className={style.noContent}
+            style={{ backgroundColor: colors.moduleBackgroundOpacity }}
+          >
+            <p>No Data Available</p>
+          </div>
+        )}
+        <div className={style.progressText}>
+          <span className={style.leftTitle}>
+            {capitalizeFirstLetter(title)}
+          </span>
+          <span className={style.rightTitle}>{addComma(data.value)}</span>
+        </div>
+        <ProgressBar
+          width={(100 * data.value) / data.average}
+          customBarClass={style.progressBar}
+          customPercentageClass={classnames(style.percentageIncrease, {
+            [style.percentageDecrease]:
+              parseInt((data.average / data.value) * 100) < 50,
+          })}
+        />
+        <p className={style.averageText}>Avg</p>
       </div>
-      <ProgressBar
-        width={(100 * data.value) / data.average}
-        customBarClass={style.progressBar}
-        customPercentageClass={classnames(style.percentageIncrease, {
-          [style.percentageDecrease]:
-            parseInt((data.average / data.value) * 100) < 50,
-        })}
-      />
-      <p className={style.averageText}>Avg</p>
     </div>
   )
 }
@@ -72,9 +84,14 @@ const LibraryDetailChartHeader = ({
             </div>
             <div className={classnames('col-6', style.videoStatsWrapper)}>
               {selectedVideoAverage &&
-                Object.keys(selectedVideoAverage).map((key) => {
+                Object.keys(selectedVideoAverage).map((key, index) => {
                   return (
-                    <FlipCard width={320} height={100} key={`flipcard-${key}`}>
+                    <FlipCard
+                      width={320}
+                      height={100}
+                      key={`flipcard-${key}-${index}`}
+                      isEmpty={selectedVideoAverage[key].value === 0}
+                    >
                       <Front
                         data={selectedVideoAverage[key]}
                         title={key}
