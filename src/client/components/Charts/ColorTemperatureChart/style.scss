@@ -118,6 +118,8 @@
     border: 1px solid $color-dark-five;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
     transition: transform 1s ease-in-out;
+    box-sizing: border-box;
+    opacity: 0.7;
   }
 }
 

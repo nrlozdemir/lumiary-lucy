@@ -11,12 +11,13 @@ import {
   convertDataIntoDatasets,
   getDateBucketFromRange,
   getBrandAndCompetitors,
+  convertColorTempToDatasets,
 } from 'Utils'
 
 import { getDataFromApi } from 'Utils/api'
 
 import _ from 'lodash'
-import { dayOfWeek } from 'Utils/globals'
+import { dayOfWeek, chartColors } from 'Utils/globals'
 
 function getMockPanopticDataApi() {
   return axios.get('/').then((res) => panopticMockData)
@@ -31,32 +32,37 @@ function* getVideoReleasesData() {
   }
 }
 
-function* getColorTemperatureData() {
+function* getColorTemperatureData({ data }) {
   try {
-    const payload = yield call(getMockPanopticDataApi)
-    let shuffleData = payload.colorTempData
-    shuffleData = shuffleData.map((data) => {
-      data.data.map((item) => {
-        item.x = _.random(-50, 50)
-        item.y = _.random(-50, 50)
-      })
-      return data
-    })
+    const { dateRange, colorTemperature } = data
 
-    const colors = [
-      'rgba(82, 146, 229, 0.8)',
-      '#acb0be',
-      'rgba(133, 103, 240, 0.8)',
-      'rgba(81, 173, 192, 0.8)',
-    ]
-    shuffleData = shuffleData.map((data) => {
-      data.data.map((item, i) => {
-        item.color = colors[i]
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      null,
+      `/brand/${brand.uuid}/compare/?daterange=${dateRange}`,
+      'GET'
+    )
+
+    const {
+      labels,
+      platforms,
+      data: colorTempData,
+    } = convertColorTempToDatasets(
+      response,
+      colorTemperature
+    )
+
+    yield put(
+      actions.getColorTemperatureDataSuccess({
+        labels,
+        platforms,
+        data: colorTempData,
       })
-      return data
-    })
-    yield put(actions.getColorTemperatureDataSuccess(shuffleData))
+    )
   } catch (err) {
+    console.log(err)
     yield put(actions.getColorTemperatureDataError(err))
   }
 }

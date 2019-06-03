@@ -84,11 +84,12 @@ export const actions = {
     payload,
   }),
 }
+
 export const initialState = fromJS({
   barChartData: null,
   doughnutLineChartData: null,
   colorTempData: {
-    data: [],
+    data: undefined,
     loading: false,
     error: null,
   },

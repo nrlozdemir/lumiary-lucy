@@ -37,7 +37,7 @@ class ColorTemperature extends React.Component {
         action={this.callBack.bind(this)}
         filters={[
           {
-            type: 'colorTempature',
+            type: 'colorTemperature',
             selectKey: 'PCT-asd',
             placeHolder: 'Color Tempature',
           },

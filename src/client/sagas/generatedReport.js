@@ -29,7 +29,7 @@ function* getReport({ data: { id } }) {
   try {
     let reports = yield call(getReportsApi)
     const report = reports.reports.find((report) => report.id === id)
-    yield put(actions.getReportSuccess(report.length ? report : null))
+    yield put(actions.getReportSuccess(report))
   } catch (err) {
     yield put(actions.getReportFailure(err))
   }

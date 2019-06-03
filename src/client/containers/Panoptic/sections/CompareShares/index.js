@@ -17,7 +17,7 @@ class CompareShares extends React.Component {
     } = this.props
     return (
       <RadarChartModule
-        data={data}
+        data={data || []}
         moduleKey={'Panoptic/compareShares'}
         leftTitle="Facebook"
         rightTitle="YouTube"
