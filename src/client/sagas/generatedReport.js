@@ -4,6 +4,7 @@ import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/generatedReport'
 
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
+import reportsMockData from 'Api/mocks/reports.json'
 
 import {
   convertDataIntoDatasets,
@@ -18,6 +19,20 @@ import _ from 'lodash'
 function getGeneratedReportApi() {
   //this will use ajax function in utils/api when real data is provided
   return axios.get('/').then((res) => generatedReportMockData)
+}
+
+function getReportsApi() {
+  return axios.get('/').then((res) => reportsMockData)
+}
+
+function* getReport({ data: { id } }) {
+  try {
+    let reports = yield call(getReportsApi)
+    const report = reports.reports.find((report) => report.id === id)
+    yield put(actions.getReportSuccess(report.length ? report : null))
+  } catch (err) {
+    yield put(actions.getReportFailure(err))
+  }
 }
 
 function* getTopPerformingVideos() {
@@ -56,13 +71,13 @@ function* getFilteringSectionData({ data: { dateRange, report } }) {
 
     const options = {
       dateRange,
-      metric: 'views',
-      platform: 'all',
+      metric: report.engagement,
+      platform: report.social,
       dateBucket: 'none',
       display: 'percentage',
       property: ['duration'],
       url: '/report',
-      brands: [...filteredCompetitors.map((c) => c.uuid)],
+      brands: [...filteredCompetitors],
     }
 
     const doughnutData = yield call(getDataFromApi, options)
@@ -115,14 +130,14 @@ function* getPacingCardData({ data: { report } }) {
     const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const options = {
-      metric: 'views',
-      dateRange: '24hours',
-      platform: 'all',
+      metric: report.engagement,
+      platform: report.social,
+      dateRange: report.date,
       property: ['pacing'],
       dateBucket: 'none',
       display: 'percentage',
       url: '/report',
-      brands: [...filteredCompetitors.map((c) => c.uuid)],
+      brands: [...filteredCompetitors],
     }
 
     const [stadiumData, horizontalStackedBarData] = yield all([
@@ -159,13 +174,14 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
     const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const options = {
-      metric: 'views',
-      dateRange: '24hours',
+      metric: report.engagement,
+      platform: report.social,
+      dateRange: report.date,
       property: [property],
       dateBucket: 'none',
       display: 'percentage',
       url: '/report',
-      brands: [...filteredCompetitors.map((c) => c.uuid)],
+      brands: [...filteredCompetitors],
     }
 
     const [facebook, instagram, twitter, youtube] = yield all([
@@ -194,6 +210,7 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
 }
 
 export default [
+  takeLatest(types.GET_REPORT_REQUEST, getReport),
   takeLatest(types.GET_PACING_CARD_DATA_REQUEST, getPacingCardData),
   takeLatest(types.GET_COMPETITOR_TOP_VIDEOS_REQUEST, getCompetitorTopVideos),
   takeLatest(types.GET_TOP_PERFORMING_VIDEOS_REQUEST, getTopPerformingVideos),

@@ -2,8 +2,8 @@ import { all, takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
-import reportsMockData from 'Api/mocks/reportsMock.json'
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
+import reportsMockData from 'Api/mocks/reports.json'
 
 import {
   randomKey,
@@ -29,9 +29,8 @@ function getReportsApi() {
 
 function* getReports() {
   try {
-    const payload = yield call(getReportsApi)
-    payload.reportsData.reportsData.map((item) => (item.id = randomKey(4)))
-    yield put(actions.loadReportsSuccess(payload.reportsData))
+    const { reports, compareReports } = yield call(getReportsApi)
+    yield put(actions.loadReportsSuccess([...reports, ...compareReports]))
   } catch (err) {
     yield put(actions.loadReportsError(err))
   }
@@ -47,22 +46,47 @@ function* getMoreReports() {
   }
 }
 
-function* brandInsightSubmit(values) {
-  const id = `${randomKey(4)}-${randomKey(4)}-${randomKey(4)}-${randomKey(4)}`
+function* brandInsightSubmit({ payload }) {
   try {
-    const payload = yield call(getGeneratedReportApi)
-    yield put(actions.brandInsightFormSubmitSuccess(payload))
-    yield put(push(`/reports/brand-insight/${id}`))
+    const {
+      brand: { value: brand },
+      social: { value: social },
+      engagement: { value: engagement },
+      date: { value: date },
+      title,
+    } = payload
+
+    const parameters = {
+      url: 'https://lumiary-local.quickframe.com:9000/createReport',
+      brand,
+      social,
+      engagement,
+      date,
+      title,
+    }
+
+    const response = yield call(getDataFromApi, parameters)
+
+    yield put(actions.brandInsightFormSubmitSuccess(response))
+    yield put(push(`/reports/brand-insight/${response.id}`))
   } catch (err) {
     yield put(actions.brandInsightFormSubmitError(err))
   }
 }
 
-function* compareBrandSubmit(values) {
-  const id = `${randomKey(4)}-${randomKey(4)}-${randomKey(4)}-${randomKey(4)}`
+function* compareBrandSubmit({ payload }) {
   try {
-    const payload = yield call(getGeneratedReportApi)
-    yield put(actions.compareBrandFormSubmitSuccess(payload))
+    const { title, ...brands } = payload
+
+    console.log(brands)
+
+    const parameters = {
+      url: 'https://lumiary-local.quickframe.com:9000/createCompareReport',
+      title,
+    }
+
+    const response = yield call(getDataFromApi, parameters)
+    yield put(actions.compareBrandFormSubmitSuccess(response))
     yield put(push(`/reports/compare-brands/${id}`))
   } catch (err) {
     yield put(actions.compareBrandFormSubmitError(err))
@@ -114,7 +138,7 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
       metric: 'views',
       property: ['format'],
       dateBucket: 'none',
-      brands: [...filteredCompetitors.map((c) => c.uuid)],
+      brands: [...filteredCompetitors],
     }
 
     const payload = yield call(getDataFromApi, parameters)
@@ -142,7 +166,7 @@ function* getPerformanceComparisonData({ data: { metric, property, report } }) {
       metric,
       property: [property],
       dateBucket: 'none',
-      brands: [...filteredCompetitors.map((c) => c.uuid)],
+      brands: [...filteredCompetitors],
     }
 
     const payload = yield call(getDataFromApi, parameters)
@@ -170,7 +194,7 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
       metric,
       property: ['color'],
       dateBucket: 'none',
-      brands: [...filteredCompetitors.map((c) => c.uuid)],
+      brands: [...filteredCompetitors],
     }
 
     const payload = yield call(getDataFromApi, parameters)

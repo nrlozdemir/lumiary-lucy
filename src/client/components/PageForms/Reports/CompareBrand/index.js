@@ -4,15 +4,14 @@ import cx from 'classnames'
 import Input from 'Components/Form/Input'
 import { compose } from 'redux'
 import style from '../style.scss'
-import { selectOptionsBrand } from '../options'
 import { required } from 'Utils/validate'
 import SelectBox from '../../../Form/CustomCheckbox'
-import RightArrowCircle from "Components/Icons/RightArrowCircle";
+import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
-const getBrandKeysFromObject = () => {
-  return selectOptionsBrand.map((item) => item.value)
+const getBrandKeysFromObject = (brands) => {
+  return brands.map((brand) => brand.value)
 }
 
 class CompareBrand extends Component {
@@ -30,6 +29,8 @@ class CompareBrand extends Component {
   render() {
     const valid = this.props.valid && this.state.formValid
 
+    const { brands } = this.props
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
@@ -42,10 +43,10 @@ class CompareBrand extends Component {
                 <div className={style.formGroup}>
                   <p className={style.label}> Choose 2 Brands</p>
                   <Fields
-                    names={getBrandKeysFromObject()}
+                    names={getBrandKeysFromObject(brands)}
                     component={SelectBox}
                     type="checkbox"
-                    options={selectOptionsBrand}
+                    options={brands}
                     canSelect={2}
                     checkboxValidation={this.checkboxValidation}
                   />
@@ -74,7 +75,7 @@ class CompareBrand extends Component {
                 >
                   Generate Report
                   <div className={style.icon}>
-                    <RightArrowCircle></RightArrowCircle>
+                    <RightArrowCircle />
                   </div>
                 </button>
               </div>

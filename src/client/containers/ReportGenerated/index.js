@@ -10,9 +10,13 @@ import {
   makeSelectReportsPacingCard,
   makeSelectReportsFilteringSection,
   makeSelectReportsColorTempData,
+  makeSelectReport,
 } from 'Reducers/generatedReport'
 
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
+import { makeSelectAuthProfile } from 'Reducers/auth'
+
+import RouterLoading from 'Components/RouterLoading'
 
 //import ReportsHeader from './sections/ReportsHeader'
 
@@ -25,12 +29,24 @@ import EngagementByProperty from './sections/EngagementByProperty'
 import ColorTemperature from './sections/ColorTemperature'
 
 class ReportGenerated extends React.Component {
+  componentDidMount() {
+    const {
+      getReportRequest,
+      match: { params },
+    } = this.props
+
+    const id = params && params.id
+
+    getReportRequest({ id })
+  }
+
   render() {
     const {
-      match: { params },
+      report: { data: report },
 
       setSelectedVideo,
       selects,
+      profile: { brand },
 
       getVideoReleasesBarChartRequest,
       getCompetitorTopVideosRequest,
@@ -47,22 +63,23 @@ class ReportGenerated extends React.Component {
       filteringSectionData,
     } = this.props
 
-    const id = params && params.id
-
-    const report = {
-      id,
-      brands: [
-        {
-          name: 'barstoolsports',
-          uuid: '1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6',
-        },
-      ],
+    if (!report) {
+      return <RouterLoading />
     }
 
     return (
       <React.Fragment>
         {/*<ReportsHeader />*/}
-        <CreatedFilters report={report} />
+        <CreatedFilters
+          report={report}
+          brands={[
+            {
+              name: brand.name,
+              uuid: brand.uuid,
+            },
+            ...brand.competitors,
+          ]}
+        />
         <Slider
           action={getTopPerformingVideosRequest}
           setSelectedVideo={setSelectedVideo}
@@ -101,6 +118,9 @@ class ReportGenerated extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
+  profile: makeSelectAuthProfile(),
+
+  report: makeSelectReport(),
   videoReleasesBarChart: makeSelectReportsVideoReleasesBarChart(),
   competitorTopVideos: makeSelectReportsTopVideosCard(),
   topPerformingVideos: makeSelectReportsTopPerformingVideos(),

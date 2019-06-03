@@ -236,7 +236,7 @@ function* getFormatChartData() {
       dateBucket: 'dayOfWeek',
       display: 'none',
       platform: 'all',
-      brands: [...competitors.map((c) => c.uuid)],
+      brands: [...competitors],
     }
 
     // video is still being pulled from mock
@@ -355,7 +355,7 @@ function* getTotalCompetitorViewsData() {
       dateRange: 'week',
       dateBucket: 'none',
       property: ['duration'],
-      brands: [...competitors.map((c) => c.uuid)],
+      brands: [...competitors],
     }
     const payload = yield call(getDataFromApi, { ...options })
     yield put(
@@ -433,7 +433,7 @@ function* getTopPerformingPropertiesByCompetitorsData({
       dateRange: dateRange,
       dateBucket: 'none',
       property: ['pacing'],
-      brands: [...competitors.map((c) => c.uuid)],
+      brands: [...competitors],
     }
     const payload = yield call(getDataFromApi, { ...options })
     yield put(
