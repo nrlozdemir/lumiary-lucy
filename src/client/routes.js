@@ -17,8 +17,8 @@ const routes = [
     navigation: {
       level: 1,
       order: 3,
-      title: 'Library'
-    }
+      title: 'Library',
+    },
   },
   {
     path: '/library/build-report/:videoId',
@@ -37,8 +37,8 @@ const routes = [
     navigation: {
       level: 1,
       order: 5,
-      title: 'Quickview'
-    }
+      title: 'Quickview',
+    },
   },
   {
     path: '/quickview/:platform',
@@ -51,8 +51,8 @@ const routes = [
     navigation: {
       level: 1,
       order: 1,
-      title: 'Panoptic'
-    }
+      title: 'Panoptic',
+    },
   },
   {
     path: '/audience',
@@ -61,8 +61,8 @@ const routes = [
     navigation: {
       level: 1,
       order: 2,
-      title: 'Audience'
-    }
+      title: 'Audience',
+    },
   },
   {
     path: '/marketview',
@@ -71,8 +71,8 @@ const routes = [
     navigation: {
       level: 1,
       order: 4,
-      title: 'Marketview'
-    }
+      title: 'Marketview',
+    },
   },
   {
     path: '/marketview/:detail',
@@ -86,8 +86,8 @@ const routes = [
     navigation: {
       level: 1,
       order: 6,
-      title: 'Reports'
-    }
+      title: 'Reports',
+    },
   },
   {
     path: '/reports/brand-insight/:id',
@@ -95,11 +95,23 @@ const routes = [
     component: 'Reports',
     navigation: {
       type: 'makeTitle',
+      from: null,
+      title: 'Brand Insights Saved Report',
+      backToTitle: 'Generate New Report',
+    },
+  },
+  {
+    path: '/reports/brand-insight',
+    exact: true,
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
       loadComponent: true,
+      category: 'Brands Insights',
       from: null,
       title: 'Brand Insights Report',
-      backToTitle: 'Generate New Report'
-    }
+      backToTitle: 'Generate New Report',
+    },
   },
   {
     path: '/reports/compare-brands/:id',
@@ -107,11 +119,23 @@ const routes = [
     component: 'Reports',
     navigation: {
       type: 'makeTitle',
+      from: null,
+      title: 'Compare Brands Saved Report',
+      backToTitle: 'Generate New Report',
+    },
+  },
+  {
+    path: '/reports/compare-brands',
+    exact: true,
+    component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
       loadComponent: true,
+      category: 'Compare Brands',
       from: null,
       title: 'Compare Brands Report',
-      backToTitle: 'Generate New Report'
-    }
+      backToTitle: 'Generate New Report',
+    },
   },
   {
     path: '/reports/predefined-reports/:id',
@@ -119,16 +143,23 @@ const routes = [
     component: 'Reports',
     navigation: {
       type: 'makeTitle',
-      loadComponent: true,
       from: null,
-      title: 'Predefined Reports',
-      backToTitle: 'Generate New Report'
-    }
+      title: 'Predefined Saved Reports',
+      backToTitle: 'Generate New Report',
+    },
   },
   {
-    path: '/reports/brand-insight',
+    path: '/reports/predefined-reports',
     exact: true,
     component: 'Reports',
+    navigation: {
+      type: 'makeTitle',
+      loadComponent: true,
+      category: 'Predefined',
+      from: null,
+      title: 'Predefined Reports',
+      backToTitle: 'Generate New Report',
+    },
   },
   {
     path: '*',

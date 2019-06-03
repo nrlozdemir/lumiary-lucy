@@ -63,19 +63,15 @@ function* brandInsightSubmit({ payload }) {
     } = payload
 
     const parameters = {
-      baseUrl: true,
-      url: '/createReport',
-      brand,
+      brands: [brand],
       social,
       engagement,
       date,
       title,
     }
 
-    const response = yield call(getDataFromApi, parameters)
-
-    yield put(actions.brandInsightFormSubmitSuccess(response))
-    yield put(push(`/reports/brand-insight/${response.id}`))
+    yield put(actions.brandInsightFormSubmitSuccess(parameters))
+    yield put(push(`/reports/brand-insight`))
   } catch (err) {
     yield put(actions.brandInsightFormSubmitError(err))
   }
@@ -88,16 +84,12 @@ function* compareBrandSubmit({ payload }) {
     const filteredBrands = Object.keys(brands).filter((brand) => brands[brand])
 
     const parameters = {
-      baseUrl: true,
-      url: '/createCompareReport',
       title,
       brands: filteredBrands,
     }
 
-    const response = yield call(getDataFromApi, parameters)
-
-    yield put(actions.compareBrandFormSubmitSuccess(response))
-    yield put(push(`/reports/compare-brands/${response.id}`))
+    yield put(actions.compareBrandFormSubmitSuccess(parameters))
+    yield put(push(`/reports/compare-brands`))
   } catch (err) {
     yield put(actions.compareBrandFormSubmitError(err))
   }

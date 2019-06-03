@@ -8,6 +8,10 @@ export const types = {
   GET_REPORT_SUCCESS: 'GeneratedReport/GET_REPORT_SUCCESS',
   GET_REPORT_FAILURE: 'GeneratedReport/GET_REPORT_FAILURE',
 
+  SAVE_REPORT_REQUEST: 'GeneratedReport/SAVE_REPORT_REQUEST',
+  SAVE_REPORT_SUCCESS: 'GeneratedReport/SAVE_REPORT_SUCCESS',
+  SAVE_REPORT_FAILURE: 'GeneratedReport/SAVE_REPORT_FAILURE',
+
   GET_PACING_CARD_DATA_REQUEST: 'GeneratedReport/GET_PACING_CARD_DATA_REQUEST',
   GET_PACING_CARD_DATA_SUCCESS: 'GeneratedReport/GET_PACING_CARD_DATA_SUCCESS',
   GET_PACING_CARD_DATA_FAILURE: 'GeneratedReport/GET_PACING_CARD_DATA_FAILURE',
@@ -60,6 +64,19 @@ export const actions = {
   }),
   getReportFailure: (error) => ({
     type: types.GET_REPORT_FAILURE,
+    error,
+  }),
+
+  saveReportRequest: (data) => ({
+    type: types.SAVE_REPORT_REQUEST,
+    data,
+  }),
+  saveReportSuccess: (payload) => ({
+    type: types.SAVE_REPORT_SUCCESS,
+    payload,
+  }),
+  saveReportFailure: (error) => ({
+    type: types.SAVE_REPORT_FAILURE,
     error,
   }),
 
@@ -209,6 +226,18 @@ const generatedReportsReducer = (state = initialState, action) => {
         .setIn(['report', 'data'], fromJS(action.payload))
         .setIn(['report', 'loading'], fromJS(false))
     case types.GET_REPORT_FAILURE:
+      return state
+        .setIn(['report', 'error'], fromJS(action.error))
+        .setIn(['report', 'loading'], fromJS(false))
+
+    case types.SAVE_REPORT_REQUEST:
+      return state.setIn(['report', 'loading'], fromJS(true))
+
+    case types.SAVE_REPORT_SUCCESS:
+      return state
+        .setIn(['report', 'data'], fromJS(action.payload))
+        .setIn(['report', 'loading'], fromJS(false))
+    case types.SAVE_REPORT_FAILURE:
       return state
         .setIn(['report', 'error'], fromJS(action.error))
         .setIn(['report', 'loading'], fromJS(false))

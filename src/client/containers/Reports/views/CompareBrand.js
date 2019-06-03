@@ -8,6 +8,8 @@ import {
   makeSelectReportsColorComparison,
   makeSelectReportsPerformanceComparison,
   makeSelectReportsVideoComparison,
+  makeSelectReportsComparebrandValues,
+  makeSelectReportsPredefinedReportValues,
 } from 'Reducers/reports'
 
 import {
@@ -31,12 +33,17 @@ class CompareBrand extends React.Component {
 
     const id = params && params.id
 
-    getReportRequest({ id })
+    if (id) {
+      getReportRequest({ id })
+    }
   }
 
   render() {
     const {
+      match: { params },
       report: { data: report },
+      comparebrandValues: { data: comparebrandValues },
+      predefinedReportValues: { data: predefinedReportValues },
 
       getContentVitalityScoreData,
       getColorComparisonData,
@@ -49,7 +56,14 @@ class CompareBrand extends React.Component {
       videoComparisonData,
     } = this.props
 
-    if (!report) {
+    const reportValues =
+      params && params.id
+        ? report
+        : params.type === 'compare-brands'
+        ? comparebrandValues
+        : predefinedReportValues
+
+    if (!reportValues) {
       return <RouterLoading />
     }
 
@@ -58,22 +72,22 @@ class CompareBrand extends React.Component {
         <ContentVitalityScore
           action={getContentVitalityScoreData}
           data={contentVitalityScoreData}
-          report={report}
+          report={reportValues}
         />
         <VideoComparison
           action={getVideoComparisonData}
           data={videoComparisonData}
-          report={report}
+          report={reportValues}
         />
         <PerformanceComparison
           action={getPerformanceComparisonData}
           data={performanceComparisonData}
-          report={report}
+          report={reportValues}
         />
         <ColorComparison
           action={getColorComparisonData}
           data={colorComparisonData}
-          report={report}
+          report={reportValues}
         />
       </div>
     )
@@ -86,6 +100,9 @@ const mapStateToProps = createStructuredSelector({
   colorComparisonData: makeSelectReportsColorComparison(),
   videoComparisonData: makeSelectReportsVideoComparison(),
   performanceComparisonData: makeSelectReportsPerformanceComparison(),
+
+  comparebrandValues: makeSelectReportsComparebrandValues(),
+  predefinedReportValues: makeSelectReportsPredefinedReportValues(),
 })
 
 const mapDispatchToProps = (dispatch) =>

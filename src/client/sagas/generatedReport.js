@@ -1,4 +1,5 @@
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
+import { push } from 'connected-react-router'
 import axios from 'axios'
 import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/generatedReport'
@@ -23,6 +24,47 @@ function getGeneratedReportApi() {
 
 function getReportsApi() {
   return axios.get('/').then((res) => reportsMockData)
+}
+
+function* saveReport({ data }) {
+  try {
+    const { category } = data
+
+    if (category === 'Brands Insights') {
+      const { brands, social, engagement, date, title } = data
+
+      const parameters = {
+        baseUrl: true,
+        url: '/createReport',
+        brand: brands[0],
+        social,
+        engagement,
+        date,
+        title,
+      }
+
+      const response = yield call(getDataFromApi, parameters)
+
+      yield put(actions.saveReportSuccess(response))
+      yield put(push(`/reports/brand-insight/${response.id}`))
+    } else if (category === 'Compare Brands') {
+      const { title, brands } = data
+
+      const parameters = {
+        baseUrl: true,
+        url: '/createCompareReport',
+        title,
+        brands,
+      }
+
+      const response = yield call(getDataFromApi, parameters)
+
+      yield put(actions.saveReportSuccess(response))
+      yield put(push(`/reports/compare-brands/${response.id}`))
+    }
+  } catch (err) {
+    yield put(actions.saveReportFailure(err))
+  }
 }
 
 function* getReport({ data: { id } }) {
@@ -215,6 +257,7 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
 
 export default [
   takeLatest(types.GET_REPORT_REQUEST, getReport),
+  takeLatest(types.SAVE_REPORT_REQUEST, saveReport),
   takeLatest(types.GET_PACING_CARD_DATA_REQUEST, getPacingCardData),
   takeLatest(types.GET_COMPETITOR_TOP_VIDEOS_REQUEST, getCompetitorTopVideos),
   takeLatest(types.GET_TOP_PERFORMING_VIDEOS_REQUEST, getTopPerformingVideos),

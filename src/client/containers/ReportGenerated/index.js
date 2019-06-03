@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import {
-  actions,
+  actions as generatedReportActions,
   makeSelectReportsVideoReleasesBarChart,
   makeSelectReportsTopVideosCard,
   makeSelectReportsTopPerformingVideos,
@@ -12,6 +12,11 @@ import {
   makeSelectReportsColorTempData,
   makeSelectReport,
 } from 'Reducers/generatedReport'
+
+import {
+  actions as reportsActions,
+  makeSelectReportsBrandInsightValues,
+} from 'Reducers/reports'
 
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 import { makeSelectAuthProfile } from 'Reducers/auth'
@@ -37,12 +42,16 @@ class ReportGenerated extends React.Component {
 
     const id = params && params.id
 
-    getReportRequest({ id })
+    if (id) {
+      getReportRequest({ id })
+    }
   }
 
   render() {
     const {
+      match: { params },
       report: { data: report },
+      brandInsightValues: { data: brandInsightValues },
 
       setSelectedVideo,
       selects,
@@ -63,7 +72,9 @@ class ReportGenerated extends React.Component {
       filteringSectionData,
     } = this.props
 
-    if (!report) {
+    const reportValues = params && params.id ? report : brandInsightValues
+
+    if (!reportValues) {
       return <RouterLoading />
     }
 
@@ -71,7 +82,7 @@ class ReportGenerated extends React.Component {
       <React.Fragment>
         {/*<ReportsHeader />*/}
         <CreatedFilters
-          report={report}
+          report={reportValues}
           brands={[
             {
               name: brand.name,
@@ -84,33 +95,33 @@ class ReportGenerated extends React.Component {
           action={getTopPerformingVideosRequest}
           setSelectedVideo={setSelectedVideo}
           data={topPerformingVideos}
-          report={report}
+          report={reportValues}
         />
         <VideoReleasesBarChart
           action={getVideoReleasesBarChartRequest}
           data={videoReleasesBarChart}
-          report={report}
+          report={reportValues}
         />
         <TopVideosCard
           action={getCompetitorTopVideosRequest}
           data={competitorTopVideos}
-          report={report}
+          report={reportValues}
         />
         <PacingCard
           action={getPacingCardDataRequest}
           data={pacingChartData}
-          report={report}
+          report={reportValues}
         />
         <EngagementByProperty
           action={getFilteringSectionDataRequest}
           data={filteringSectionData}
-          report={report}
+          report={reportValues}
         />
         <ColorTemperature
           action={getColorTempDataRequest}
           data={colorTempData}
           selects={selects}
-          report={report}
+          report={reportValues}
         />
       </React.Fragment>
     )
@@ -129,9 +140,11 @@ const mapStateToProps = createStructuredSelector({
   filteringSectionData: makeSelectReportsFilteringSection(),
 
   selects: makeSelectSelectFilters(),
+  brandInsightValues: makeSelectReportsBrandInsightValues(),
 })
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ ...generatedReportActions, ...reportsActions }, dispatch)
 
 const withConnect = connect(
   mapStateToProps,

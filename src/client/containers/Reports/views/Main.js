@@ -274,11 +274,11 @@ class Reports extends Component {
                     {/* onClick={() => this.deleteReportAction(id)} */}
 
                     <div className={style.reportsTableFooter}>
-                      <Button
+                      {/* <Button
                         onClick={() => this.loadMore()}
                         customClass="font-secondary-first text-bold"
                         buttonText="Load More"
-                      />
+                      /> */}
                     </div>
                   </div>
                 )}
