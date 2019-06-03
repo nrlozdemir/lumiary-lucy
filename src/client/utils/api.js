@@ -28,11 +28,11 @@ export const buildApiUrl = (url, params) => {
   let requestUrl = `${API_ROOT}/${API_VERSION}${url}`
 
   if (params) {
-    let q = []
-    for (let key in params) {
-      if (params[key].length) {
-        let subkeys = []
-        for (let subkey in params[key]) {
+    const q = []
+    for (const key in params) {
+      if (typeof params[key] === 'object') {
+        const subkeys = []
+        for (const subkey in params[key]) {
           subkeys.push(`${JSON.stringify(params[key][subkey])}`)
         }
         q.push(`${key}=[${subkeys}]`)

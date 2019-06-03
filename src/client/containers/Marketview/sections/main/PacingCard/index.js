@@ -39,7 +39,12 @@ class PacingCard extends Component {
             }}
           >
             {isDataEmpty && (
-              <div className={style.marketViewCardEmpty}>No Data Available</div>
+              <div
+                className={style.marketViewCardEmpty}
+                style={{ backgroundColor: colors.moduleBackgroundOpacity }}
+              >
+                No Data Available
+              </div>
             )}
             <div className={style.marketViewCardTitle}>Pacing</div>
             <div className={style.marketViewCardSubTitle}>
@@ -68,8 +73,13 @@ class PacingCard extends Component {
             >
               {!!data &&
                 !!data.labels &&
-                data.labels.map((label) => (
-                  <div className={style.colorListItem}>{label}</div>
+                data.labels.map((label, idx) => (
+                  <div
+                    key={`MV/PacingCard_label-${idx}`}
+                    className={style.colorListItem}
+                  >
+                    {label}
+                  </div>
                 ))}
             </div>
 

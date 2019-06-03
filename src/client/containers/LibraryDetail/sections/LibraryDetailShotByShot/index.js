@@ -6,7 +6,7 @@ import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import Scrubber from 'Components/Sliders/Scrubber'
-import XCircle from "Components/Icons/XCircle"
+import XCircle from 'Components/Icons/XCircle'
 import classnames from 'classnames'
 
 class LibraryDetailShotByShot extends React.Component {
@@ -33,8 +33,8 @@ class LibraryDetailShotByShot extends React.Component {
 
   secondToTime(timeInSeconds) {
     let pad = (num, size) => {
-      return ('000' + num).slice(size * -1)
-    },
+        return ('000' + num).slice(size * -1)
+      },
       time = parseFloat(timeInSeconds).toFixed(3),
       hours = Math.floor(time / 60 / 60),
       minutes = Math.floor(time / 60) % 60,
@@ -125,8 +125,8 @@ class LibraryDetailShotByShot extends React.Component {
       leftMargin = Math.round(
         (this.state.sliderViewportSize -
           sliderValue * this.state.sliderViewportStepWidth) *
-        2 -
-        this.state.sliderGrabberWidth
+          2 -
+          this.state.sliderGrabberWidth
       )
 
       if (leftMargin < 0) {
@@ -215,8 +215,8 @@ class LibraryDetailShotByShot extends React.Component {
       shotWidth = Math.floor(
         (this.timeToSeconds(tempState.scenes[index].duration) -
           minShotDuration) *
-        anySecondWidth +
-        minShotWidth
+          anySecondWidth +
+          minShotWidth
       )
       tempState.scenes[index].width = shotWidth
       totalWidth += shotWidth + 5 // add all right margins
@@ -254,7 +254,7 @@ class LibraryDetailShotByShot extends React.Component {
         }
       } else {
         sliderMarksToState[index] = {
-          style: { },
+          style: {},
           label: <p className="customDot">{element}</p>,
           value: element,
         }
@@ -287,17 +287,22 @@ class LibraryDetailShotByShot extends React.Component {
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
           return (
-            <div ref={shotSlider => this.shotSlider = shotSlider}
+            <div
+              ref={(shotSlider) => (this.shotSlider = shotSlider)}
               className="grid-container col-12 mt-72 mb-72"
               style={{
                 backgroundColor: colors.moduleBackground,
                 boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
                 color: colors.textColor,
+                overflow: 'hidden',
               }}
             >
               {selectedImage ? (
                 <div className={style.sliderTabContainer}>
-                  <div key={Math.random()} className="col-6-no-gutters bg-black">
+                  <div
+                    key={Math.random()}
+                    className="col-6-no-gutters bg-black"
+                  >
                     <div className="mt-48 ml-48 mr-48">
                       <SingleItemSlider
                         customHandleStyle={{
@@ -325,22 +330,30 @@ class LibraryDetailShotByShot extends React.Component {
                           </Tab>
                           <Tab selectedClassName={style.selectedTab}>Color</Tab>
                           <div className={style.cancelButton}>
-                            <XCircle onClick={() => this.setState({ selectedImage: false })}></XCircle>
+                            <XCircle
+                              onClick={() =>
+                                this.setState({ selectedImage: false })
+                              }
+                            />
                           </div>
                         </TabList>
                       </div>
                       <TabPanel className={style.tabPanelReset}>
-                        <div className={classnames(style.tabPanel, "mt-16")}>
+                        <div className={classnames(style.tabPanel, 'mt-16')}>
                           <Scrubber vertical width={570} height={600}>
                             {slideImages.map((image, i) => (
                               <div
-                                className={classnames(style.tabPanelItem, "grid-container", {
-                                  "mb-16": i !== slideImages.length - 1
-                                })}
+                                className={classnames(
+                                  style.tabPanelItem,
+                                  'grid-container',
+                                  {
+                                    'mb-16': i !== slideImages.length - 1,
+                                  }
+                                )}
                                 style={{
                                   background: colors.shotByShotBackground,
                                   borderColor: colors.shotByShotBorder,
-                                  marginRight: "16px !important"
+                                  marginRight: '16px !important',
                                 }}
                                 key={i}
                               >
@@ -364,7 +377,9 @@ class LibraryDetailShotByShot extends React.Component {
                                         <ProgressBar
                                           width={option.percentage}
                                           customBarClass={style.progressBar}
-                                          customPercentageClass={style.percentage}
+                                          customPercentageClass={
+                                            style.percentage
+                                          }
                                         />
                                       </div>
                                     ))}
@@ -419,12 +434,19 @@ class LibraryDetailShotByShot extends React.Component {
                   </div>
                 </div>
               ) : (
-                  <div>
-                    <div className="col-12" style={{marginBottom: 40}}>
-                      <h2 className={style.sliderHeader}>Shot by Shot</h2>
-                      <div className={style.sliderContainer}>
-                        <div className={style.shotByShotMask}></div>
-                        <Scrubber horizontal arrows viewBordered verticalDisabled height={230} width={1121}>
+                <div>
+                  <div className="col-12" style={{ marginBottom: 40 }}>
+                    <h2 className={style.sliderHeader}>Shot by Shot</h2>
+                    <div className={style.sliderContainer}>
+                      <div className={style.shotByShotMask} />
+                      <Scrubber
+                        horizontal
+                        arrows
+                        viewBordered
+                        verticalDisabled
+                        height={230}
+                        width={1121}
+                      >
                         <div
                           className={style.sliderWrapper}
                           style={{
@@ -433,51 +455,51 @@ class LibraryDetailShotByShot extends React.Component {
                           }}
                         >
                           {this.state.scenes.map((scene, i) => (
-                            <React.Fragment key={i+110}>
+                            <React.Fragment key={i + 110}>
                               <div className={style.image}>
-                              <div
-                                style={{
-                                  width: `${scene.width}px`,
-                                  borderColor: colors.shotByShotBackground,
-                                }}
-                                className={style.setCenter}
-                              >
                                 <div
-                                  className={style.originalImage}
                                   style={{
                                     width: `${scene.width}px`,
-                                    height: '160px',
-                                    backgroundImage: `url(${scene.sceneURL})`,
-                                    backgroundSize: `160px 160px`,
                                     borderColor: colors.shotByShotBackground,
+                                  }}
+                                  className={style.setCenter}
+                                >
+                                  <div
+                                    className={style.originalImage}
+                                    style={{
+                                      width: `${scene.width}px`,
+                                      height: '160px',
+                                      backgroundImage: `url(${scene.sceneURL})`,
+                                      backgroundSize: `160px 160px`,
+                                      borderColor: colors.shotByShotBackground,
+                                    }}
+                                  />
+                                </div>
+                                <img
+                                  src={scene.sceneURL}
+                                  style={{ height: '160px' }}
+                                  className={style.hover}
+                                  onClick={() => {
+                                    this.handleClick(i)
                                   }}
                                 />
                               </div>
-                              <img
-                                src={scene.sceneURL}
-                                style={{height: '160px'}}
-                                className={style.hover}
-                                onClick={() => {
-                                  this.handleClick(i)
-                                }}
-                              />
-                            </div>
                             </React.Fragment>
-
                           ))}
                         </div>
-                        </Scrubber>
-                      </div>
-                      <div className={style.shotTicks}>
-                        {this.state.sliderMarks && Object.keys(this.state.sliderMarks).map((m, i) => (
-                          <p className={style.shotTick} key={i}>
+                      </Scrubber>
+                    </div>
+                    <div className={style.shotTicks}>
+                      {this.state.sliderMarks &&
+                        Object.keys(this.state.sliderMarks).map((m, i) => (
+                          <p key={`slideMark-${i}`} className={style.shotTick}>
                             {this.state.sliderMarks[m].value}
                           </p>
                         ))}
-                      </div>
                     </div>
                   </div>
-                )}
+                </div>
+              )}
             </div>
           )
         }}

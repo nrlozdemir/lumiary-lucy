@@ -1,23 +1,16 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import {
-  actions,
-  makeSelectReportsContentVitalityScore,
-} from 'Reducers/reports'
-
 import { ThemeContext } from 'ThemeContext/themeContext'
 import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'
 
 class ContentVitalityScore extends React.Component {
   callBack = (data, moduleKey) => {
-    this.props.getContentVitalityScoreData(data)
+    const { action, report } = this.props
+    action({ ...data, report })
   }
 
   render() {
     const {
-      contentVitalityScoreData: { data, loading, error },
+      data: { data, loading, error },
     } = this.props
 
     return (
@@ -85,15 +78,4 @@ class ContentVitalityScore extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  contentVitalityScoreData: makeSelectReportsContentVitalityScore(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(ContentVitalityScore)
+export default ContentVitalityScore

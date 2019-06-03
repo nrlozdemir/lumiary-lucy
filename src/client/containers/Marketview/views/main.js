@@ -32,8 +32,8 @@ class Main extends Component {
 
         <div className="grid-collapse">
           <TotalViewsCard />
-          {totalCompetitorViewsData && (
-            <TotalCompetitorCard data={totalCompetitorViewsData} />
+          {totalCompetitorViewsData.data && (
+            <TotalCompetitorCard data={totalCompetitorViewsData.data} />
           )}
         </div>
       </React.Fragment>

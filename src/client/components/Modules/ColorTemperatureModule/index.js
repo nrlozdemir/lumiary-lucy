@@ -46,6 +46,7 @@ const ColorTemperatureModule = ({
   moduleClass,
   chartWrapperClass,
   selectValue,
+  isEmpty,
 }) => {
   return (
     <ThemeContext.Consumer>
@@ -58,6 +59,7 @@ const ColorTemperatureModule = ({
           action={action}
           legend={renderLegend(legend)}
           filters={filters}
+          isEmpty={isEmpty}
         >
           <div className={style.colorChartContainer}>
             <div className={cx(extraClasses, style.colorChartContent)}>
@@ -116,7 +118,7 @@ const ColorTemperatureModule = ({
 }
 
 ColorTemperatureModule.defaultProps = {
-  data: [],
+  data: [{ data: [] }, { data: [] }, { data: [] }],
   infoLabels: [],
   legend: [],
   borderLess: false,

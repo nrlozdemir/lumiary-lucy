@@ -100,7 +100,7 @@ export const initialState = fromJS({
   barChartData: null,
   doughnutData: null,
   colorTempData: {
-    data: [],
+    data: undefined,
     loading: false,
     error: null,
   },

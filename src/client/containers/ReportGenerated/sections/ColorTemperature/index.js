@@ -1,13 +1,4 @@
 import React from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import {
-  actions,
-  makeSelectReportsColorTempData,
-} from 'Reducers/generatedReport'
-import { makeSelectSelectFilters } from 'Reducers/selectFilters'
-
 import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
 
 import style from './style.scss'
@@ -16,13 +7,13 @@ import { platforms } from './options'
 
 class ColorTemperature extends React.Component {
   callBack = (data) => {
-    const { getColorTempDataRequest, reportId } = this.props
-    getColorTempDataRequest({ ...data, reportId })
+    const { action, report } = this.props
+    action({ ...data, report })
   }
 
   render() {
     const {
-      colorTempData: { data },
+      data: { data },
       selects,
     } = this.props
 
@@ -46,7 +37,7 @@ class ColorTemperature extends React.Component {
         action={this.callBack.bind(this)}
         filters={[
           {
-            type: 'colorTempature',
+            type: 'colorTemperature',
             selectKey: 'PCT-asd',
             placeHolder: 'Color Tempature',
           },
@@ -58,16 +49,4 @@ class ColorTemperature extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  colorTempData: makeSelectReportsColorTempData(),
-  selects: makeSelectSelectFilters(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(ColorTemperature)
+export default ColorTemperature

@@ -1,4 +1,6 @@
 import { chartColors, expectedNames } from 'Utils/globals'
+import { isEmpty } from 'lodash'
+
 function randomKey(char) {
   var text = ''
   var possible =
@@ -395,16 +397,17 @@ const radarChartCalculate = (data) => {
 
 const getMaximumValueIndexFromArray = (data) =>
   Object.values(data).indexOf(Math.max(...Object.values(data)))
-const compareSharesData = (data) => {
-  return data.map((item, index) => {
-    const keyName = Object.keys(item.data)[0]
-    const colorData = item.data[keyName].color
-    const labels = Object.entries(colorData)
-    const type = item.platform ? item.platform : keyName
+
+const compareSharesData = ({ data = {} }) => {
+  return Object.keys(data).map((brand) => {
+    const item = data[brand]
+    const keyName = Object.keys(item)[0]
+    const labels = Object.entries(item[keyName])
+    const type = brand ? brand : keyName
     return {
       type: capitalizeFirstLetter(type),
       datas: {
-        labels: labels.map((color, indx) => {
+        labels: labels.map((color) => {
           return {
             name: color[0]
               .split('-')
@@ -493,13 +496,119 @@ const getBrandAndCompetitors = (profile) => {
   const { brand } = profile
 
   if (!!brand && !!brand.uuid && !!brand.competitors) {
-    return [brand.uuid, ...brand.competitors.map((c) => c.uuid)]
+    return [
+      {
+        name: brand.name,
+        uuid: brand.uuid,
+      },
+      ...brand.competitors,
+    ]
   }
 
-  return [brand.uuid]
+  return [
+    {
+      name: brand.name,
+      uuid: brand.uuid,
+    },
+  ]
+}
+
+const getFilteredCompetitors = (competitors, report) =>
+  competitors.filter(
+    (brand) => report.brands.map((c) => c.uuid).indexOf(brand.uuid) > -1
+  )
+
+/*
+  /brand/{brandUuid}/compare
+  @sentiment {string} - 'happy-sad', 'energetic-calm', 'natural-synthetic'
+ */
+const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
+  const { platformMetricSums, industryMetricSums } = values
+
+  const metricObj = industryMetricSums || platformMetricSums
+
+  const metricSums = Object.keys(
+    !!industryMetricSums ? industryMetricSums : platformMetricSums
+  )
+
+  const colorTempsAndSentiments =
+    !!metricSums.length &&
+    metricSums.map((pf) => ({
+      colorTemperature: metricObj[pf].colorTemperature,
+      sentiments: metricObj[pf].sentiments,
+    }))
+
+  if (isEmpty(values) || isEmpty(metricObj) || !colorTempsAndSentiments) {
+    return { labels: [], data: undefined, platforms: [] }
+  }
+
+  const metrics = ['likes', 'views', 'comments', 'shares']
+
+  const { min, max } = Object.keys(metricObj).reduce(
+    (acc, pf, idx) => {
+      const metricData = metricObj[pf]
+
+      Object.keys(metricData).forEach((metric) => {
+        const metricVal = metricData[metric]
+        if (!acc.min || !acc.max) {
+          acc.min = metricVal
+          acc.max = metricVal
+        } else {
+          if (metricVal < acc.min) {
+            acc.min = metricVal
+          }
+          if (metricVal > acc.max) {
+            acc.max = metricVal
+          }
+        }
+      })
+
+      return acc
+    },
+    { min: null, max: null }
+  )
+
+  const data = metrics.map((metric) => ({
+    data: metricSums.map((platform, idx) => {
+      const { colorTemperature, sentiments } = colorTempsAndSentiments[idx]
+
+      const sentimentObj = sentiments.find((s) => !!s[sentiment.split('-')[0]])
+
+      return {
+        x: colorTemperature.scale,
+        y: sentimentObj.scale,
+        count: metricObj[platform][metric],
+        color: chartColors[idx],
+        size: normalize(metricObj[platform][metric], min, max, 10, 60),
+      }
+    }),
+  }))
+
+  return {
+    data,
+    platforms: metricSums.map((key, idx) => ({
+      name: ucfirst(key),
+      color: chartColors[idx],
+    })),
+    labels: metrics.map((key) => ucfirst(key)),
+  }
+}
+
+const ucfirst = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+const normalize = (input, min, max, low_range, high_range) => {
+  const range = max - min
+  const norm = (input - min) / range
+
+  const scale_range = high_range - low_range
+  return norm * scale_range + low_range
 }
 
 export {
+  ucfirst,
+  normalize,
   randomKey,
   searchTermInText,
   socialIconSelector,
@@ -515,4 +624,6 @@ export {
   convertMultiRequestDataIntoDatasets,
   getDateBucketFromRange,
   getBrandAndCompetitors,
+  getFilteredCompetitors,
+  convertColorTempToDatasets,
 }

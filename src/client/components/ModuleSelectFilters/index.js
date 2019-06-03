@@ -14,7 +14,7 @@ import { actions, makeSelectSelectFilters } from 'Reducers/selectFilters'
  * (Types are:  engagement, platform, aspectRatio, resolution,
  * 		frameRate, duration, pacing, videoFormat, property,
  * 		audienceAge, audienceGender, talentAge, talentGender,
- * 		colorTempature, dateRange
+ * 		colorTemperature, dateRange
  *
  * @constructor
  * @param {selectKey} selectKey - The Uniqe Key of the Select.

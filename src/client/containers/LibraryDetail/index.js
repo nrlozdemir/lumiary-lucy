@@ -73,7 +73,7 @@ export class LibraryDetail extends React.Component {
     if (prevMatch.params.videoId !== match.params.videoId) {
       getSelectedVideo(match.params.videoId)
       getBarChartRequest({ LibraryDetailId: 1 })
-      getColorTempRequest({ LibraryDetailId: 1 })
+      getColorTempRequest({ videoId: match.params.videoId })
       getShotByShotRequest({ LibraryDetailId: 1 })
     }
   }
@@ -85,14 +85,17 @@ export class LibraryDetail extends React.Component {
         doughnutData,
         colorTempData,
         shotByShotData,
-        selectedVideo: { socialIcon, uuid },
+        selectedVideo: {
+          socialIcon,
+          uuid,
+          title,
+          'cvScore.value': cvScore = 0.0,
+        },
       },
       match: {
         params: { videoId },
       },
     } = this.props
-
-    const cvScore = 80.0
 
     let radarDataCombined = null
 
@@ -118,16 +121,16 @@ export class LibraryDetail extends React.Component {
         radarData_DatasetOptions
       )
     }
+
     return (
       <React.Fragment>
-        {barChartData && cvScore && (
+        {barChartData && (
           <LibraryDetailChartHeader
             barChartData={barChartData}
             videoUrl={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/${userUuid}/${uuid}.mp4`}
-            title={'Temporary Title'}
+            title={title}
             socialIcon={socialIcon}
             cvScore={cvScore}
-            id={uuid}
           />
         )}
         {doughnutData && (
@@ -135,7 +138,7 @@ export class LibraryDetail extends React.Component {
         )}
         {colorTempData && (
           <LibraryDetailColorTemperature
-            libraryDetailId={videoId}
+            videoId={videoId}
             colorTempData={colorTempData}
           />
         )}

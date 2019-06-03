@@ -16,7 +16,7 @@ const PacingCardModule = ({
   filters,
   legend,
 }) => {
-  const { horizontalStackedBarData, stadiumData } = data
+  const { horizontalStackedBarData = {}, stadiumData } = data
 
   const hasNoData =
     (isDataSetEmpty(horizontalStackedBarData) &&

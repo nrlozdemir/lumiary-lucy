@@ -47,9 +47,7 @@ const LibraryDetailChartHeader = ({
   title,
   socialIcon,
   cvScore,
-  id,
 }) => {
-  console.log(videoUrl)
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -61,7 +59,6 @@ const LibraryDetailChartHeader = ({
                 title={title}
                 socialIcon={socialIcon}
                 cvScore={cvScore}
-                id={id}
               />
             </div>
             <div className={classnames('col-6', style.videoStatsWrapper)}>
