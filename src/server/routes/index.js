@@ -34,7 +34,9 @@ module.exports = (app) => {
     require('./createMock').createMarketviewTimeMock
   )
 
+  // Create Report
   app.post('/createReport', require('./report').createReport)
+  app.post('/createCompareReport', require('./report').createCompareReport)
 
   if (
     process.env.ENVIRONMENT === 'qa' ||

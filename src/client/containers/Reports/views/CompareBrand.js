@@ -3,12 +3,19 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import {
-  actions,
+  actions as reportsActions,
   makeSelectReportsContentVitalityScore,
   makeSelectReportsColorComparison,
   makeSelectReportsPerformanceComparison,
   makeSelectReportsVideoComparison,
 } from 'Reducers/reports'
+
+import {
+  actions as generatedReportActions,
+  makeSelectReport,
+} from 'Reducers/generatedReport'
+
+import RouterLoading from 'Components/RouterLoading'
 
 import ContentVitalityScore from '../section/ContentVitalityScore'
 import VideoComparison from '../section/VideoComparison'
@@ -16,9 +23,20 @@ import PerformanceComparison from '../section/PerformanceComparison'
 import ColorComparison from '../section/ColorComparison'
 
 class CompareBrand extends React.Component {
+  componentDidMount() {
+    const {
+      getReportRequest,
+      match: { params },
+    } = this.props
+
+    const id = params && params.id
+
+    getReportRequest({ id })
+  }
+
   render() {
     const {
-      match: { params },
+      report: { data: report },
 
       getContentVitalityScoreData,
       getColorComparisonData,
@@ -31,20 +49,8 @@ class CompareBrand extends React.Component {
       videoComparisonData,
     } = this.props
 
-    const id = params && params.id
-
-    const report = {
-      id,
-      brands: [
-        {
-          name: 'barstoolsports',
-          uuid: '1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6',
-        },
-        {
-          name: 'bleacherreport',
-          uuid: 'd65aa957-d094-4cf3-8d37-dafe50e752ea',
-        },
-      ],
+    if (!report) {
+      return <RouterLoading />
     }
 
     return (
@@ -75,13 +81,15 @@ class CompareBrand extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
+  report: makeSelectReport(),
   contentVitalityScoreData: makeSelectReportsContentVitalityScore(),
   colorComparisonData: makeSelectReportsColorComparison(),
   videoComparisonData: makeSelectReportsVideoComparison(),
   performanceComparisonData: makeSelectReportsPerformanceComparison(),
 })
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ ...reportsActions, ...generatedReportActions }, dispatch)
 
 const withConnect = connect(
   mapStateToProps,

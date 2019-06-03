@@ -3,6 +3,7 @@ import axios from 'axios'
 import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
+import reportsDataMockData from 'Api/mocks/reportsMock.json'
 import reportsMockData from 'Api/mocks/reports.json'
 
 import {
@@ -25,6 +26,11 @@ function getGeneratedReportApi() {
 function getReportsApi() {
   //this will use ajax function in utils/api when real data is provided
   return axios.get('/').then((res) => reportsMockData)
+}
+
+function getReportsMockApi() {
+  //this will use ajax function in utils/api when real data is provided
+  return axios.get('/').then((res) => reportsDataMockData)
 }
 
 function* getReports() {
@@ -57,7 +63,8 @@ function* brandInsightSubmit({ payload }) {
     } = payload
 
     const parameters = {
-      url: 'https://lumiary-local.quickframe.com:9000/createReport',
+      baseUrl: true,
+      url: '/createReport',
       brand,
       social,
       engagement,
@@ -78,16 +85,19 @@ function* compareBrandSubmit({ payload }) {
   try {
     const { title, ...brands } = payload
 
-    console.log(brands)
+    const filteredBrands = Object.keys(brands).filter((brand) => brands[brand])
 
     const parameters = {
-      url: 'https://lumiary-local.quickframe.com:9000/createCompareReport',
+      baseUrl: true,
+      url: '/createCompareReport',
       title,
+      brands: filteredBrands,
     }
 
     const response = yield call(getDataFromApi, parameters)
+
     yield put(actions.compareBrandFormSubmitSuccess(response))
-    yield put(push(`/reports/compare-brands/${id}`))
+    yield put(push(`/reports/compare-brands/${response.id}`))
   } catch (err) {
     yield put(actions.compareBrandFormSubmitError(err))
   }
@@ -115,7 +125,7 @@ function* deleteReport(data) {
 
 function* getContentVitalityScoreData() {
   try {
-    const payload = yield call(getReportsApi)
+    const payload = yield call(getReportsMockApi)
     let shuffleData = payload.contentVitalityScoreData
     shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
     shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)

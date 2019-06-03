@@ -404,10 +404,10 @@ const compareSharesData = (payload) => {
 
   return data.map((value) => {
     const brand = isArray ? Object.keys(value.data)[0] : value
-    const item = isArray ? value.data[brand] : data[brand]
+    const item = isArray ? value.data[brand] : payload.data[brand]
     const keyName = Object.keys(item)[0]
     const labels = Object.entries(item[keyName])
-    const type = (isArray ? item.platform : item) || keyName
+    const type = (isArray ? item.platform : value) || keyName
 
     return {
       type: capitalizeFirstLetter(type),

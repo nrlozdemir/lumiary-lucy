@@ -44,4 +44,40 @@ const createReport = async (req, res) => {
   }, 10000)
 }
 
-module.exports = { createReport }
+const createCompareReport = async (req, res) => {
+  const { brands, title } = req.body
+  const reports = JSON.parse(
+    fs.readFileSync(path.join(root, `${mocks}/reports.json`), 'utf8')
+  )
+
+  const report = {
+    id: `${randomKey(4)}-${randomKey(4)}-${randomKey(4)}-${randomKey(4)}`,
+    brands,
+    title,
+    category: 'Compare Brands',
+  }
+
+  const mock = {
+    ...reports,
+    compareReports: [
+      ...reports.compareReports,
+      {
+        ...report,
+      },
+    ],
+  }
+
+  fs.writeFile(
+    path.join(root, `${mocks}/reports.json`),
+    JSON.stringify(mock),
+    (err) => {
+      if (err) console.log(err)
+    }
+  )
+
+  setTimeout(() => {
+    res.json(report)
+  }, 10000)
+}
+
+module.exports = { createReport, createCompareReport }
