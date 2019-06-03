@@ -116,7 +116,7 @@ export const initialState = fromJS({
   error: false,
   loading: false,
   selectedVideo: {},
-  selectedVideoAverage: {},
+  selectedVideoAverage: [],
 })
 
 const libraryDetailReducer = (state = initialState, action) => {
@@ -134,10 +134,11 @@ const libraryDetailReducer = (state = initialState, action) => {
 
     case types.GET_SELECTED_VIDEO_AVERAGE_REQUEST:
       return state.set('loading', fromJS(true))
-    case types.GET_SELECTED_VIDEO_AVERAGE_SUCCESS:
+    case types.GET_SELECTED_VIDEO_AVERAGE_SUCCESS: {
       return state
         .set('selectedVideoAverage', fromJS(action.payload))
         .set('loading', fromJS(false))
+    }
     case types.GET_SELECTED_VIDEO_AVERAGE_FAILURE:
       return state
         .set('error', fromJS(action.error))

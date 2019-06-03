@@ -174,6 +174,34 @@ function* getSelectedVideo({ payload }) {
   }
 }
 
+function parseAverage(payload) {
+  let calculateAverage = Object.keys(payload).reduce((acc, key) => {
+    const keyName = key.substr(0, key.indexOf('.'))
+    if (key.includes('LibraryAverage')) {
+      acc[keyName] = { average: parseInt(payload[key]) }
+    }
+    return acc
+  }, {})
+
+  Object.keys(payload.video).forEach((item) => {
+    let keyName = item.substr(0, item.indexOf('.'))
+    if (item.includes('diffFromLibrary')) {
+      calculateAverage[keyName] = {
+        ...calculateAverage[keyName],
+        diff: parseInt(payload.video[item]),
+      }
+    }
+    if (item.includes('value')) {
+      keyName = keyName.slice(0, keyName.length - 1)
+      calculateAverage[keyName] = {
+        ...calculateAverage[keyName],
+        value: parseInt(payload.video[item]),
+      }
+    }
+  })
+  return calculateAverage
+}
+
 function* getVideoAverage({ id }) {
   try {
     const { brand } = yield select(selectAuthProfile)
@@ -181,8 +209,7 @@ function* getVideoAverage({ id }) {
       url: `/brand/${brand.uuid}/video/${id}/metrics`,
       requestType: 'GET',
     })
-    console.log('payload', payload)
-    yield put(actions.getSelectedVideoAverageSuccess(payload))
+    yield put(actions.getSelectedVideoAverageSuccess(parseAverage(payload)))
   } catch (error) {
     console.log('error', error)
     yield put(actions.getSelectedVideoAverageFailure({ error }))

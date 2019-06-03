@@ -4,25 +4,24 @@ import style from './style.scss'
 import Video from '../VideoComponent'
 import FlipCard from 'Components/FlipCard'
 import ProgressBar from 'Components/ProgressBar'
-import { capitalizeFirstLetter } from 'Utils/index'
+import { capitalizeFirstLetter, addComma } from 'Utils/index'
 import { textEdit } from 'Utils/text'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 const Front = (props) => {
-  const { data, colors } = props
+  const { data, colors, title } = props
   return (
     <div className={style.videoStat}>
       <div className={style.progressText}>
-        <span className={style.leftTitle}>
-          {capitalizeFirstLetter(data.title)}
-        </span>
-        <span className={style.rightTitle}>{data.value}k</span>
+        <span className={style.leftTitle}>{capitalizeFirstLetter(title)}</span>
+        <span className={style.rightTitle}>{addComma(data.value)}</span>
       </div>
       <ProgressBar
-        width={data.percentage}
+        width={(100 * data.value) / data.average}
         customBarClass={style.progressBar}
         customPercentageClass={classnames(style.percentageIncrease, {
-          [style.percentageDecrease]: parseInt(data.percentage) < 50,
+          [style.percentageDecrease]:
+            parseInt((data.average / data.value) * 100) < 50,
         })}
       />
       <p className={style.averageText}>Avg</p>
@@ -31,11 +30,19 @@ const Front = (props) => {
 }
 
 const Back = (props) => {
+  const { data, title } = props
+  const text = data.diff > 0 ? 'more' : 'less'
   return (
     <p className={style.backText}>
       {textEdit(
-        'This video is receiving <b>{percentage}% less</b> {title} than your library average',
-        props.data
+        `This video is receiving <b>{percentage}% ${text}</b> {title} than your library average`,
+        {
+          percentage:
+            data.diff < 0
+              ? parseInt(data.diff.toString().substr(1))
+              : data.diff, // removed 'minus' first character
+          title,
+        }
       )}
     </p>
   )
@@ -50,7 +57,6 @@ const LibraryDetailChartHeader = ({
   id,
   selectedVideoAverage,
 }) => {
-  console.log('selectedVideoAverage', selectedVideoAverage)
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -65,14 +71,19 @@ const LibraryDetailChartHeader = ({
               />
             </div>
             <div className={classnames('col-6', style.videoStatsWrapper)}>
-              {barChartData.map((element, i) => {
-                return (
-                  <FlipCard key={i} width={320} height={100}>
-                    <Front data={element} colors={colors} />
-                    <Back data={element} />
-                  </FlipCard>
-                )
-              })}
+              {selectedVideoAverage &&
+                Object.keys(selectedVideoAverage).map((key) => {
+                  return (
+                    <FlipCard width={320} height={100} key={`flipcard-${key}`}>
+                      <Front
+                        data={selectedVideoAverage[key]}
+                        title={key}
+                        colors={colors}
+                      />
+                      <Back data={selectedVideoAverage[key]} title={key} />
+                    </FlipCard>
+                  )
+                })}
             </div>
           </div>
         </div>

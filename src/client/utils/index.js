@@ -626,4 +626,5 @@ export {
   getBrandAndCompetitors,
   getFilteredCompetitors,
   convertColorTempToDatasets,
+  addComma,
 }
