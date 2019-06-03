@@ -22,7 +22,6 @@ function getLibraryDataApi(vals) {
     method: 'POST',
     params: qs.stringify(body),
   }).then((response) => {
-    console.log(response.data)
     if (response.error) {
       throw response.error
     }
@@ -44,8 +43,6 @@ function* getVideos(values) {
     const payload = yield call(getLibraryDataApi, options)
     yield put(actions.loadVideosSuccess(payload))
   } catch (err) {
-    console.log(err)
-    debugger
     yield put(actions.loadVideosError(err))
   }
 }
