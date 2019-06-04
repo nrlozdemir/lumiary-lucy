@@ -36,7 +36,7 @@ export class Module extends React.Component {
       const selectFilterValues = selectFilters.values[moduleKey]
 
       // reduce into { type: value } map which is easily read by azazzle
-      const valuesToType = Object.keys(selectFilterValues).reduce(
+      const valuesToType = Object.keys(selectFilterValues || {}).reduce(
         (values, key) => {
           const filterValue = selectFilterValues[key]
           const filterType = filterValue.type

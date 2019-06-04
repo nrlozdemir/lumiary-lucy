@@ -10,13 +10,7 @@ import Header from './Header'
 import LineChart from './LineChart'
 
 class Info extends React.Component {
-  handleFilterChange = (filters) => {
-    console.log(filters)
-  }
-
   render() {
-    const { selectedCardData } = this.props
-
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -27,7 +21,7 @@ class Info extends React.Component {
                 background: colors.moduleBackground,
               }}
             >
-              <Header onFilterChange={this.handleFilterChange} />
+              <Header />
               <div
                 className={style.dataWrapper}
                 style={{
@@ -38,7 +32,7 @@ class Info extends React.Component {
                 <BasedOnShares />
                 <IndustryData />
               </div>
-              <LineChart selectedCardData={selectedCardData} />
+              <LineChart />
             </div>
           </div>
         )}

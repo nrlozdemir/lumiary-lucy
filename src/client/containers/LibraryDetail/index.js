@@ -120,7 +120,7 @@ export class LibraryDetail extends React.Component {
         },
         radarData_DatasetOptions
       )
-    }
+		}
 
     return (
       <React.Fragment>

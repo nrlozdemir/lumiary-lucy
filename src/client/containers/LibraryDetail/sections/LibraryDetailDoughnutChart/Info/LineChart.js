@@ -12,7 +12,8 @@ class LineChartSection extends React.Component {
         {({ themeContext: { colors } }) => (
           <div className={style.lineChartWrapper}>
             <div className="mt-48 mb-48">
-              {selectedCardData && (
+              {/* {selectedCardData && ( */}
+              {true && (
                 <LineChart
                   width={1090}
                   height={292}
