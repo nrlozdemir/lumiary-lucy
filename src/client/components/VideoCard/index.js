@@ -75,7 +75,6 @@ export class VideoCard extends PureComponent {
       },
       this.state.hoverReady && style.hoverReady
     )
-
     const iconClass = classnames(
       socialIconSelector(video.socialIcon),
       style.iconClass
@@ -102,7 +101,9 @@ export class VideoCard extends PureComponent {
                     color: colors.labelColor,
                   }}
                 >
-                  <span>{video['cvScores.value']}</span>
+                  <span>
+                    {Number.parseFloat(video['cvScores.value']).toFixed(1)}
+                  </span>
                   <PercentageBarGraph
                     key={Math.random()}
                     percentage={video['cvScores.value']}
