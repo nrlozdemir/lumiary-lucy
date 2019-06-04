@@ -10,6 +10,7 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 
 const Front = (props) => {
   const { data, colors, title } = props
+  const percentage = (100 * data.value) / data.max
   return (
     <div className={style.frontContainer}>
       <div className={style.videoStat}>
@@ -28,7 +29,7 @@ const Front = (props) => {
           <span className={style.rightTitle}>{addComma(data.value)}</span>
         </div>
         <ProgressBar
-          width={(100 * data.value) / data.average}
+          width={percentage > 100 ? 100 : percentage}
           customBarClass={style.progressBar}
           customPercentageClass={classnames(style.percentageIncrease, {
             [style.percentageDecrease]:

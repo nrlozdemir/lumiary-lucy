@@ -13,6 +13,7 @@ import {
   convertDataIntoDatasets,
   getMaximumValueIndexFromArray,
   convertColorTempToDatasets,
+  parseAverage,
 } from 'Utils/'
 import { selectAuthProfile } from 'Reducers/auth'
 import { chartColors } from 'Utils/globals'
@@ -139,7 +140,7 @@ function* getColorTemperatureData({
 
     if (!!response && !!response.sentiments) {
       const { data: convertedData } = convertColorTempToDatasets(response)
-      
+
       yield put({
         type: types.GET_COLOR_TEMP_SUCCESS,
         payload: convertedData,
@@ -172,34 +173,6 @@ function* getSelectedVideo({ payload }) {
   } catch (error) {
     yield put(actions.getSelectedVideoFailure({ error }))
   }
-}
-
-function parseAverage(payload) {
-  let calculateAverage = Object.keys(payload).reduce((acc, key) => {
-    const keyName = key.substr(0, key.indexOf('.'))
-    if (key.includes('LibraryAverage')) {
-      acc[keyName] = { average: parseInt(payload[key]) }
-    }
-    return acc
-  }, {})
-
-  Object.keys(payload.video).forEach((item) => {
-    let keyName = item.substr(0, item.indexOf('.'))
-    if (item.includes('diffFromLibrary')) {
-      calculateAverage[keyName] = {
-        ...calculateAverage[keyName],
-        diff: parseInt(payload.video[item]),
-      }
-    }
-    if (item.includes('value')) {
-      keyName = keyName.slice(0, keyName.length - 1)
-      calculateAverage[keyName] = {
-        ...calculateAverage[keyName],
-        value: parseInt(payload.video[item]),
-      }
-    }
-  })
-  return calculateAverage
 }
 
 function* getVideoAverage({ id }) {
