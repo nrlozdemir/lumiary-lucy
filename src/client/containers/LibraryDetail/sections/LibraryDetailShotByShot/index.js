@@ -14,18 +14,13 @@ class LibraryDetailShotByShot extends React.Component {
     super(props)
     this.state = {
       selectedImage: null,
-      maxValue: 1000,
       sliderValue: 0,
-      videoDuration: 185,
-      sliderDisabled: false,
-      sliderHandleStyle: {
-        width: '92px',
-        height: '16px',
-        borderRadius: '10px',
-        marginLeft: '0px',
-        marginTop: '0px',
-      },
       shots: this.props.shots || [],
+      shotsTotalWidth: 2500,
+      viewportShots: [],
+      viewportSize: 0,
+      viewportDurations: {},
+      sliderMarks: {}
     }
     this.refs = []
     this.shotSlider = React.createRef()
@@ -182,7 +177,9 @@ class LibraryDetailShotByShot extends React.Component {
     const viewportSize = 1120
     const tickCount = 11
     let sliderMarks = []
-    let totalWidth = 5 // with first item left margin
+    let sliderMarksToState = {}
+    let shotMargin = 5 // with first item left margin
+    let shotsTotalWidth = 0
     let viewportDurations = {}
     let viewportLeftOver = {}
     let viewportTempShots = {}
@@ -205,7 +202,6 @@ class LibraryDetailShotByShot extends React.Component {
     sliderMarks.push(this.secondToTime(shots[shots.length - 1].endTime))
 
     //rebuild custom-marks for styling
-    let sliderMarksToState = {}
     sliderMarks.map((element, index) => {
       index = parseInt(index * 10)
       if (index === 0) {
@@ -227,10 +223,6 @@ class LibraryDetailShotByShot extends React.Component {
           value: element,
         }
       }
-    })
-
-    this.setState({
-      sliderMarks: sliderMarksToState
     })
     
     //create viewports including max 11 items from shots, fit size to min and max
@@ -343,9 +335,12 @@ class LibraryDetailShotByShot extends React.Component {
       })
     }
 
-    console.log(viewportShots)  
+    viewportShots && viewportShots.map((el, i) => {
+      shotsTotalWidth += el.width + shotMargin
+    })
 
     this.setState({
+      shotsTotalWidth: shotsTotalWidth + shotMargin,
       viewportShots: viewportShots,
       viewportSize: viewportSize,
       viewportDurations: viewportDurations,
@@ -355,7 +350,7 @@ class LibraryDetailShotByShot extends React.Component {
 
   render() {
     const { sliderWithThumbnails, slideImages, radarData } = this.props
-    const { selectedImage } = this.state
+    const { selectedImage, viewportShots, sliderMarks, shotsTotalWidth } = this.state
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
@@ -524,15 +519,15 @@ class LibraryDetailShotByShot extends React.Component {
                           className={style.sliderWrapper}
                           style={{
                             left: 0,
-                            width: 0,
+                            width: shotsTotalWidth,
                           }}
                         >
-                          {this.state.shots.map((shot, i) => (
-                            <React.Fragment key={i + 110}>
+                          {viewportShots.map((shot, i) => (
+                            <React.Fragment key={i}>
                               <div className={style.image}>
                                 <div
                                   style={{
-                                    width: `${shot.width}px`,
+                                    width: `${shot.width.toFixed(2)}px`,
                                     borderColor: colors.shotByShotBackground,
                                   }}
                                   className={style.setCenter}
@@ -540,7 +535,7 @@ class LibraryDetailShotByShot extends React.Component {
                                   <div
                                     className={style.originalImage}
                                     style={{
-                                      width: `${shot.width}px`,
+                                      width: `${shot.width.toFixed(2)}px`,
                                       height: '160px',
                                       backgroundImage: `url(${shot.image})`,
                                       backgroundSize: `160px 160px`,
@@ -550,7 +545,9 @@ class LibraryDetailShotByShot extends React.Component {
                                 </div>
                                 <img
                                   src={shot.image}
-                                  style={{ height: '160px' }}
+                                  style={{ 
+                                    height: '160px' 
+                                  }}
                                   className={style.hover}
                                   onClick={() => {
                                     this.handleClick(i)
@@ -563,10 +560,10 @@ class LibraryDetailShotByShot extends React.Component {
                       </Scrubber>
                     </div>
                     <div className={style.shotTicks}>
-                      {this.state.sliderMarks &&
-                        Object.keys(this.state.sliderMarks).map((m, i) => (
+                      {sliderMarks &&
+                        Object.keys(sliderMarks).map((m, i) => (
                           <p key={`slideMark-${i}`} className={style.shotTick}>
-                            {this.state.sliderMarks[m].value}
+                            {sliderMarks[m].value}
                           </p>
                         ))}
                     </div>
