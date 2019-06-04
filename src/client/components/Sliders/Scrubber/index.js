@@ -11,7 +11,9 @@ const defaultProps = {
   arrows: false,
   scrubberHeight: 14,
   viewBordered: false,
-  verticalDisabled: true
+  verticalDisabled: true,
+  marks: false,
+  totalWidth: 1160
 }
 
 const LeftArrow = () => {
@@ -36,6 +38,17 @@ export default class Scrubber extends React.Component {
     this.renderTrackVertical = this.renderTrackVertical.bind(this)
     this.renderThumbVertical = this.renderThumbVertical.bind(this)
     this.renderView = this.renderView.bind(this)
+  }
+
+  markClick(e, totalWidth) {
+    console.log(totalWidth * e * 10 / 100)
+    if (e * 10 === 0) {
+      this.scrollbars.scrollLeft(0)
+    } else if (e * 10 === 100) {
+      this.scrollbars.scrollLeft(totalWidth)
+    } else {
+      this.scrollbars.scrollLeft(totalWidth * e * 6.5 / 100)
+    }
   }
 
   handleUpdate(values) {
@@ -106,11 +119,23 @@ export default class Scrubber extends React.Component {
   }
 
   render() {
-    const { horizontal, vertical, width, height, children, arrows, viewBordered, verticalDisabled } = this.props
+    const { 
+      horizontal, 
+      vertical, 
+      width, 
+      height, 
+      children, 
+      arrows, 
+      viewBordered, 
+      verticalDisabled, 
+      marks,
+      totalWidth
+    } = this.props
     return (
       <React.Fragment>
         {horizontal ? (
           <Scrollbars universal
+          ref={el => this.scrollbars = el}
           renderTrackHorizontal={ () => this.renderTrackHorizontal(this.props) }
           renderThumbHorizontal={ () => this.renderThumbHorizontal(this.props) }
           renderTrackVertical={ props => <div {...props} className={styles.emptyScrollBar} /> }
@@ -119,14 +144,27 @@ export default class Scrubber extends React.Component {
           style={{ width: width, height: height }}>
           {children}
           </Scrollbars>
+          
         ) : (
           <Scrollbars universal
+            ref={el => this.scrollbars = el}
             renderTrackHorizontal={ props => <div {...props} className={styles.emptyScrollBar} /> }
             renderThumbHorizontal={ props => <div {...props} className={styles.emptyScrollBar} /> }
             style={{ width: width, height: height }}>
             {children}
           </Scrollbars>
-      )}
+        )}
+        {marks && (
+          <div className={styles.ticksWrapper}>
+            <div className={styles.ticks}>
+              {Object.keys(marks).map((m, i) => (
+                <p key={`mark-${i}`} onClick={() => this.markClick(i, totalWidth)} className={styles.tick}>
+                  {marks[m].value}
+                </p>
+              ))}
+            </div>
+          </div>
+        )}
       </React.Fragment>
     )
   }
