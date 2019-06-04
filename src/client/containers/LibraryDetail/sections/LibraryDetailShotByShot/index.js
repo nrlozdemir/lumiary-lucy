@@ -412,7 +412,7 @@ class LibraryDetailShotByShot extends React.Component {
                         viewBordered
                         verticalDisabled
                         height={230}
-                        width={1118}
+                        width={1119}
                         marks={sliderMarks}
                         totalWidth={shotsTotalWidth}
                       >
