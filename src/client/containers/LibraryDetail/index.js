@@ -148,7 +148,7 @@ export class LibraryDetail extends React.Component {
         )}
         {shotByShotData && (
           <LibraryDetailShotByShot
-            sliderWithThumbnails={shotByShotData.sliderWithThumbnails}
+            shots={shotByShotData.video.shots}
             slideImages={shotByShotData.slideImages}
             radarData={radarDataCombined}
             videoList={shotByShotData.videoList}
