@@ -167,7 +167,7 @@ function* getShotByShot({ payload: { LibraryDetailId } }) {
 
     Object.values(payload.video.shots).map((el, i) => {
       const randomImage = Math.floor(Math.random(1) * Math.floor(30))
-      payload.video.shots[i].imageSrc = `https://picsum.photos/id/${randomImage}/320/320`
+      payload.video.shots[i].image = `https://picsum.photos/id/${randomImage}/320/320`
     })
 
     yield put(actions.getShotByShotSuccess(payload))

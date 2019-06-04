@@ -25,7 +25,7 @@ class LibraryDetailShotByShot extends React.Component {
         marginLeft: '0px',
         marginTop: '0px',
       },
-      scenes: this.props.sliderWithThumbnails || [],
+      shots: this.props.shots || [],
     }
     this.refs = []
     this.shotSlider = React.createRef()
@@ -181,62 +181,30 @@ class LibraryDetailShotByShot extends React.Component {
     const maxShotWidth = 156
     const viewportSize = 1120
     const tickCount = 11
-    let totalWidth = 5 // with first item left margin
     let sliderMarks = []
+    let totalWidth = 5 // with first item left margin
+    let viewportDurations = {}
+    let viewportLeftOver = {}
+    let viewportTempShots = {}
+    let viewportTempShotsTotalWidth = {}
+    let viewportShots = []
 
-    const durations = this.state.scenes.map((element) =>
-      this.timeToSeconds(element.duration)
+    const shots = Object.values(this.state.shots)
+    const durations = shots.map(
+      element => (element.endTime - element.startTime).toFixed(4)
     )
-    const totalDuration = this.state.scenes.reduce(
-      (prev, next) => prev + this.timeToSeconds(next.duration),
-      0
-    )
-    const dividedDuration = Math.round(totalDuration / (tickCount - 1))
-
-    sliderMarks.push(this.secondToTime(0))
-    for (let i = 1; i < tickCount - 1; i++) {
-      sliderMarks.push(this.state.scenes[i].duration)
+    const totalDuration = (shots[shots.length - 1].endTime).toFixed(4)
+    
+    //first index and last index not included
+    const dividedDuration = (Math.round(totalDuration / (tickCount))).toFixed(4)
+    
+    //create marks
+    for (let i = 0; i < tickCount - 1; i++) {
+      sliderMarks.push(this.secondToTime(i * dividedDuration))
     }
-    sliderMarks.push(this.state.scenes[this.state.scenes.length - 1].duration)
+    sliderMarks.push(this.secondToTime(shots[shots.length - 1].endTime))
 
-    const minShotDuration = Math.min(...durations)
-    const maxShotDuration = Math.max(...durations)
-    const shotDurationDifference = Math.ceil(maxShotDuration - minShotDuration)
-    const shotDurationWidthDifference = Math.ceil(maxShotWidth - minShotWidth)
-    const anySecondWidth = (
-      shotDurationWidthDifference / shotDurationDifference
-    ).toFixed(2)
-
-    let tempState = {}
-    let shotWidth = 0
-
-    this.state.scenes.map((element, index) => {
-      tempState = this.state
-      shotWidth = Math.floor(
-        (this.timeToSeconds(tempState.scenes[index].duration) -
-          minShotDuration) *
-          anySecondWidth +
-          minShotWidth
-      )
-      tempState.scenes[index].width = shotWidth
-      totalWidth += shotWidth + 5 // add all right margins
-      tempState.sliderTotalWidth = totalWidth
-
-      this.setState(tempState)
-    })
-
-    //rcSliderWidth = parseInt(document.getElementsByClassName('rc-slider')[0].clientWidth) //calculate viewport for resposive
-    const sliderViewportStepWidth = viewportSize / 100
-    const sliderStepWidth = totalWidth / 100
-    let rcGrabberWidth = viewportSize / (totalWidth / viewportSize)
-    if (rcGrabberWidth > viewportSize) {
-      rcGrabberWidth = viewportSize
-    }
-    const sliderHandleRightStep =
-      100 -
-      ((viewportSize - rcGrabberWidth) / sliderViewportStepWidth).toFixed(2)
-
-    //rebuild custom-marks
+    //rebuild custom-marks for styling
     let sliderMarksToState = {}
     sliderMarks.map((element, index) => {
       index = parseInt(index * 10)
@@ -254,7 +222,7 @@ class LibraryDetailShotByShot extends React.Component {
         }
       } else {
         sliderMarksToState[index] = {
-          style: {},
+          style: { },
           label: <p className="customDot">{element}</p>,
           value: element,
         }
@@ -262,21 +230,126 @@ class LibraryDetailShotByShot extends React.Component {
     })
 
     this.setState({
-      sliderViewportSize: viewportSize,
-      sliderShotSecondWidth: anySecondWidth,
-      sliderHandleRightStep: sliderHandleRightStep,
-      sliderTotalWidth: totalWidth,
-      sliderWidth: viewportSize,
-      sliderMarks: sliderMarksToState,
-      sliderLeftPosition: '0px',
-      sliderGrabberWidth: rcGrabberWidth,
-      sliderViewportStepWidth: sliderViewportStepWidth,
-      sliderStepWidth: sliderStepWidth,
-      sliderHandleStyle: {
-        ...this.state.sliderHandleStyle,
-        width: rcGrabberWidth - 3 + 'px',
-        marginLeft: '0px',
-      },
+      sliderMarks: sliderMarksToState
+    })
+    
+    //create viewports including max 11 items from shots, fit size to min and max
+    const totalViewports = (shots.length / tickCount).toFixed(2)
+    for (let v = 0; v < totalViewports; v++) {
+      viewportTempShots[v] = []
+      viewportTempShotsTotalWidth[v] = 0
+      viewportDurations[v] = 0
+      viewportLeftOver[v] = 0
+    }
+
+    shots.map((el, i) => {
+      const index = parseInt(Math.floor(i / 11))
+      el.duration = parseFloat(
+        (el.endTime - el.startTime).toFixed(4)
+      )
+      viewportTempShots[index].push(el)
+      viewportDurations[index] += el.duration
+    })
+
+    for (let v = 0; v < totalViewports; v++) {
+      Object.values(viewportTempShots[v]).map((el, i) => {
+        el.realWidth = parseFloat(
+          ((viewportSize / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
+        )
+        el.width = parseFloat(
+          ((viewportSize / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
+        )
+        el.max = 0
+        el.diff = maxShotWidth - el.width
+        if (el.width < minShotWidth) {
+          viewportLeftOver[v] -= minShotWidth - el.width
+          el.width = minShotWidth
+          el.diff = maxShotWidth - minShotWidth
+        }
+        if (el.width > maxShotWidth) {
+          viewportLeftOver[v] += el.width - maxShotWidth
+          el.width = maxShotWidth
+          el.diff = 0
+          el.max = 1
+        }
+      })
+
+      viewportTempShots[v].length === tickCount && 
+        Object.values(viewportTempShots[v]).map((el, i) => {
+        const findDiff = parseFloat(
+          ((viewportLeftOver[v]  / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
+        )
+        if (viewportLeftOver[v] > 0) {
+          if(el.width + findDiff > maxShotWidth){
+            el.width = maxShotWidth;
+            viewportLeftOver[v] -= maxShotWidth - el.width
+          } else {
+            el.width += findDiff
+            viewportLeftOver[v] -= findDiff
+          }
+        } else if (viewportLeftOver[v] < 0) {
+          if(el.width - findDiff < minShotWidth){
+            el.width = minShotWidth;
+            viewportLeftOver[v] += el.width - minShotWidth
+          } else {
+            el.width -= findDiff
+            viewportLeftOver[v] += findDiff
+          }
+        }
+      })
+
+      if (viewportTempShots[v].length === tickCount) {
+        do {
+          Object.values(viewportTempShots[v]).map((el, i) => {
+            if (viewportLeftOver[v] > 0) {
+              if (el.max !== 1 && el.diff > 0 && el.width !== maxShotWidth) {
+                el.width += 1
+                viewportLeftOver[v] -= 1
+              }
+            }
+          })
+        } while (viewportLeftOver[v] > 0)
+      }
+
+      viewportTempShotsTotalWidth[v] = Object.values(viewportTempShots[v]).reduce(
+        (prev, next) => prev + parseFloat(next.width.toFixed(4)), 0
+      )
+
+      if (viewportTempShotsTotalWidth[v] > viewportSize) {
+        const findTrimValue = parseFloat((viewportTempShotsTotalWidth[v] - viewportSize).toFixed(4))
+
+        viewportTempShots[v].length === tickCount && Object.values(viewportTempShots[v]).map((el, i) => {
+          if (el.width > Math.floor(el.width) 
+            && el.width - Math.floor(el.width) >= findTrimValue
+            && viewportTempShotsTotalWidth[v] !== viewportSize
+          ) {
+            el.width -= findTrimValue
+            viewportTempShotsTotalWidth[v] -= findTrimValue
+          }
+        })
+      } else if (viewportTempShotsTotalWidth[v] < viewportSize) {
+        const findTrimValue = parseFloat((viewportSize - viewportTempShotsTotalWidth[v]).toFixed(4))
+
+        viewportTempShots[v].length === tickCount && Object.values(viewportTempShots[v]).map((el, i) => {
+          if (viewportTempShotsTotalWidth[v] !== viewportSize) {
+            el.width += findTrimValue
+            viewportTempShotsTotalWidth[v] += findTrimValue
+          }
+        })
+      }
+
+      Object.values(viewportTempShots[v]).map((el, i) => {
+        viewportShots.push(el)
+      })
+    }
+
+    console.log(viewportShots)  
+
+    this.setState({
+      viewportShots: viewportShots,
+      viewportSize: viewportSize,
+      viewportDurations: viewportDurations,
+      sliderMarks: sliderMarksToState
     })
   }
 
@@ -450,16 +523,16 @@ class LibraryDetailShotByShot extends React.Component {
                         <div
                           className={style.sliderWrapper}
                           style={{
-                            left: this.state.sliderLeftPosition,
-                            width: this.state.sliderTotalWidth,
+                            left: 0,
+                            width: 0,
                           }}
                         >
-                          {this.state.scenes.map((scene, i) => (
+                          {this.state.shots.map((shot, i) => (
                             <React.Fragment key={i + 110}>
                               <div className={style.image}>
                                 <div
                                   style={{
-                                    width: `${scene.width}px`,
+                                    width: `${shot.width}px`,
                                     borderColor: colors.shotByShotBackground,
                                   }}
                                   className={style.setCenter}
@@ -467,16 +540,16 @@ class LibraryDetailShotByShot extends React.Component {
                                   <div
                                     className={style.originalImage}
                                     style={{
-                                      width: `${scene.width}px`,
+                                      width: `${shot.width}px`,
                                       height: '160px',
-                                      backgroundImage: `url(${scene.sceneURL})`,
+                                      backgroundImage: `url(${shot.image})`,
                                       backgroundSize: `160px 160px`,
                                       borderColor: colors.shotByShotBackground,
                                     }}
                                   />
                                 </div>
                                 <img
-                                  src={scene.sceneURL}
+                                  src={shot.image}
                                   style={{ height: '160px' }}
                                   className={style.hover}
                                   onClick={() => {
