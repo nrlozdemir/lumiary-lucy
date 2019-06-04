@@ -1,13 +1,17 @@
 import React from 'react'
+import classnames from 'classnames'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { actions, selectShotByShotInfo } from 'Reducers/libraryDetail'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import SingleItemSlider from 'Components/Sliders/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
 import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
-import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import Scrubber from 'Components/Sliders/Scrubber'
 import XCircle from 'Components/Icons/XCircle'
-import classnames from 'classnames'
+import style from './style.scss'
 
 class LibraryDetailShotByShot extends React.Component {
   constructor(props) {
@@ -23,7 +27,6 @@ class LibraryDetailShotByShot extends React.Component {
       sliderMarks: {}
     }
     this.refs = []
-    this.shotSlider = React.createRef()
   }
 
   secondToTime(timeInSeconds) {
@@ -53,10 +56,13 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   handleClick(i) {
-
+    /*
     this.setState({
       selectedImage: i,
     })
+    */
+
+    getShotInfo(i)
   }
 
   onChangeSlider(e) {
@@ -255,7 +261,6 @@ class LibraryDetailShotByShot extends React.Component {
         {({ themeContext: { colors } }) => {
           return (
             <div
-              ref={(shotSlider) => (this.shotSlider = shotSlider)}
               className="grid-container col-12 mt-72 mb-72"
               style={{
                 backgroundColor: colors.moduleBackground,
@@ -275,7 +280,7 @@ class LibraryDetailShotByShot extends React.Component {
                         customHandleStyle={{
                           background: colors.shotByShotSliderPointer,
                         }}
-                        slideImages={sliderWithThumbnails}
+                        slideImages={[]}
                         selectedImage={selectedImage}
                       />
                     </div>
@@ -308,7 +313,7 @@ class LibraryDetailShotByShot extends React.Component {
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
                           <Scrubber vertical width={570} height={600}>
-                            {slideImages.map((image, i) => (
+                            {slideImages && slideImages.map((image, i) => (
                               <div
                                 className={classnames(
                                   style.tabPanelItem,
@@ -471,4 +476,19 @@ class LibraryDetailShotByShot extends React.Component {
   }
 }
 
-export default LibraryDetailShotByShot
+const mapStateToProps = createStructuredSelector({
+  shotInfoData: selectShotByShotInfo(),
+})
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getShotInfo: (shotId) => dispatch(actions.getShotInfo(shotId)),
+  }
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(LibraryDetailShotByShot)

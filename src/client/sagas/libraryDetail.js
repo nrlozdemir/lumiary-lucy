@@ -176,6 +176,15 @@ function* getShotByShot({ payload: { LibraryDetailId } }) {
   }
 }
 
+function* getShotInfo({ payload }) {
+  try {
+    console.log("-------------------GET SHOT INFO------------------")
+    yield put(actions.getShotInfoRequestSuccess(data.video))
+  } catch (error) {
+    yield put(actions.getShotInfoRequestFailure({ error }))
+  }
+}
+
 function* getSelectedVideo({ payload }) {
   try {
     const data = yield call(getOneVideo, {
@@ -193,4 +202,5 @@ export default [
   takeLatest(types.GET_COLOR_TEMP_REQUEST, getColorTemperatureData),
   takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),
   takeLatest(types.GET_SELECTED_VIDEO_REQUEST, getSelectedVideo),
+  takeLatest(types.GET_SHOT_BY_SHOT_INFO_REQUEST, getShotInfo),
 ]
