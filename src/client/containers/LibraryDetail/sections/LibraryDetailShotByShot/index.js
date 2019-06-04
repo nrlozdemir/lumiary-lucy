@@ -73,7 +73,6 @@ class LibraryDetailShotByShot extends React.Component {
   componentDidMount() {
     const minShotWidth = 24
     const maxShotWidth = 148
-    const viewportSize = 1120
     const tickCount = 11
     let sliderMarks = []
     let sliderMarksToState = {}
@@ -84,6 +83,7 @@ class LibraryDetailShotByShot extends React.Component {
     let viewportTempShots = {}
     let viewportTempShotsTotalWidth = {}
     let viewportShots = []
+    const viewportSize = 1120 - ((tickCount + 1) * shotMargin)
 
     const shots = Object.values(this.state.shots)
     const durations = shots.map(
