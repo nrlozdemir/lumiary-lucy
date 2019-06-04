@@ -595,10 +595,39 @@ const normalize = (input, min, max, low_range, high_range) => {
   return norm * scale_range + low_range
 }
 
+const parseAverage = (payload) => {
+  let calculateAverage = Object.keys(payload).reduce((acc, key) => {
+    const keyName = key.substr(0, key.indexOf('.'))
+    if (key.includes('LibraryAverage')) {
+      acc[keyName] = { average: parseInt(payload[key]) }
+    }
+    if (key.includes('LibraryMax')) {
+      acc[keyName] = { max: parseInt(payload[key]) }
+    }
+    return acc
+  }, {})
+
+  Object.keys(payload.video).forEach((item) => {
+    let keyName = item.substr(0, item.indexOf('.'))
+    if (item.includes('diffFromLibrary')) {
+      calculateAverage[keyName] = {
+        ...calculateAverage[keyName],
+        diff: parseInt(payload.video[item]),
+      }
+    }
+    if (item.includes('value')) {
+      keyName = keyName.slice(0, keyName.length - 1)
+      calculateAverage[keyName] = {
+        ...calculateAverage[keyName],
+        value: parseInt(payload.video[item]),
+      }
+    }
+  })
+  console.log(calculateAverage)
+  return calculateAverage
+}
 const getFilteredCompetitors = (competitors, report) =>
-
   competitors.filter((uuid) => report.brands.indexOf(uuid) > -1)
-
 
 export {
   ucfirst,
@@ -620,4 +649,6 @@ export {
   getBrandAndCompetitors,
   getFilteredCompetitors,
   convertColorTempToDatasets,
+  addComma,
+  parseAverage,
 }

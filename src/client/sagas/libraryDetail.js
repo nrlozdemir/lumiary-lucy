@@ -13,6 +13,7 @@ import {
   convertDataIntoDatasets,
   getMaximumValueIndexFromArray,
   convertColorTempToDatasets,
+  parseAverage,
 } from 'Utils/'
 import { selectAuthProfile } from 'Reducers/auth'
 import { chartColors } from 'Utils/globals'
@@ -146,7 +147,7 @@ function* getColorTemperatureData({
 
     if (!!response && !!response.sentiments) {
       const { data: convertedData } = convertColorTempToDatasets(response)
-      
+
       yield put({
         type: types.GET_COLOR_TEMP_SUCCESS,
         payload: convertedData,
@@ -187,10 +188,25 @@ function* getSelectedVideo({ payload }) {
   }
 }
 
+function* getVideoAverage({ id }) {
+  try {
+    const { brand } = yield select(selectAuthProfile)
+    const payload = yield call(getDataFromApi, {
+      url: `/brand/${brand.uuid}/video/${id}/metrics`,
+      requestType: 'GET',
+    })
+    yield put(actions.getSelectedVideoAverageSuccess(parseAverage(payload)))
+  } catch (error) {
+    console.log('error', error)
+    yield put(actions.getSelectedVideoAverageFailure({ error }))
+  }
+}
+
 export default [
   takeLatest(types.GET_BAR_CHART_REQUEST, getBarChart),
   takeLatest(types.GET_DOUGHNUT_CHART_REQUEST, getDoughnutChart),
   takeLatest(types.GET_COLOR_TEMP_REQUEST, getColorTemperatureData),
   takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),
   takeLatest(types.GET_SELECTED_VIDEO_REQUEST, getSelectedVideo),
+  takeLatest(types.GET_SELECTED_VIDEO_AVERAGE_REQUEST, getVideoAverage),
 ]
