@@ -16,7 +16,7 @@ class LibraryDetailShotByShot extends React.Component {
       selectedImage: null,
       sliderValue: 0,
       shots: this.props.shots || [],
-      shotsTotalWidth: 1120,
+      shotsTotalWidth: 1118,
       viewportShots: [],
       viewportSize: 0,
       viewportDurations: {},
@@ -83,7 +83,7 @@ class LibraryDetailShotByShot extends React.Component {
     let viewportTempShots = {}
     let viewportTempShotsTotalWidth = {}
     let viewportShots = []
-    const viewportSize = 1120 - ((tickCount + 1) * shotMargin)
+    const viewportSize = 1118 - ((tickCount + 1) * shotMargin)
 
     const shots = Object.values(this.state.shots)
     const durations = shots.map(
