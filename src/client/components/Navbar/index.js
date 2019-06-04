@@ -1,16 +1,27 @@
 import React from 'react'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
+
 import { makeSelectLibrary } from 'Reducers/library'
+
+import {
+  actions as reportsActions,
+  makeSelectReportsBrandInsightValues,
+  makeSelectReportsComparebrandValues,
+  makeSelectReportsPredefinedReportValues,
+} from 'Reducers/reports'
+
+import { actions as generatedReportActions } from 'Reducers/generatedReport'
+
 import Switch from 'Components/Form/Switch'
 import { capitalizeFirstLetter } from 'Utils/index'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import Dropdown from './dropdown'
-import LeftArrowCircle from "Components/Icons/LeftArrowCircle";
+import LeftArrowCircle from 'Components/Icons/LeftArrowCircle'
 // import PropTypes from 'prop-types';
 
 const containerClass = classnames(
@@ -40,7 +51,7 @@ const BackTo = (props) => {
   return (
     <div className={style.backTo}>
       <Link to={link} style={{ color: textColor }}>
-        <LeftArrowCircle></LeftArrowCircle>
+        <LeftArrowCircle />
         <span className={style.text}>{title}</span>
       </Link>
     </div>
@@ -88,9 +99,9 @@ const SelectedNavLink = (props) => {
         <div className={style.switchInner}>
           <span>Save Report</span>
           <Switch
-            id={Math.random()}
-            switchOn={true}
-            controlSwitch={() => null}
+            id={'saveReport'}
+            switchOn={props.swicthControl}
+            controlSwitch={() => props.swicthChange(props.category)}
           />
         </div>
       )}
@@ -145,6 +156,8 @@ const SubNavigation = (props) => {
 const Selector = (props) => {
   const url = props && props.match.url.split('/')
   const navigation = props && props.routeConfig
+  const state = props && props.state
+  const actions = props && props.actions
 
   const navigationPathMatch = Object.values(navigation).filter(
     (r) =>
@@ -173,7 +186,7 @@ const Selector = (props) => {
       .filter((r) => r.path == url.join('/'))
 
   if (navigationPathMatch && navigationPathMatch.length > 0) {
-    const { from, loadComponent } = navigationPathMatch[0].navigation
+    const { from, loadComponent, category } = navigationPathMatch[0].navigation
     let title = navigationPathMatch[0].navigation.title
     let backToTitle
 
@@ -186,7 +199,15 @@ const Selector = (props) => {
 
     return {
       leftSide: <BackTo {...url} title={backToTitle} themes={props.themes} />,
-      navigation: <SelectedNavLink title={title} load={loadComponent} />,
+      navigation: (
+        <SelectedNavLink
+          title={title}
+          load={loadComponent}
+          category={category}
+          swicthControl={state.swicthControl}
+          swicthChange={actions.swicthChange}
+        />
+      ),
     }
   } else if (navigationSubRoutesMatch && navigationSubRoutesMatch.length > 0) {
     return {
@@ -216,7 +237,6 @@ const Selector = (props) => {
 const Template = (props) => {
   const templateSelector = Selector(props)
   const { textColor, moduleBackground, moduleShadow } = props.themes
-  const { switchOn, controlSwitch } = props
   return (
     <div
       className={containerClass}
@@ -241,10 +261,52 @@ const Template = (props) => {
 
 /* eslint-disable react/prefer-stateless-function */
 class Navbar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      swicthControl: false,
+    }
+  }
+
+  swicthChange(category) {
+    const {
+      saveReportRequest,
+      brandInsightValue: { data: brandInsightValue },
+      comparebrandValues: { data: comparebrandValues },
+      predefinedReportValues: { data: predefinedReportValues },
+    } = this.props
+
+    if (category === 'Brands Insights' && brandInsightValue) {
+      saveReportRequest({
+        ...brandInsightValue,
+        category,
+      })
+    } else if (category === 'Compare Brands' && comparebrandValues) {
+      saveReportRequest({
+        ...comparebrandValues,
+        category,
+      })
+    } else if (category === 'Predefined' && predefinedReportValues) {
+      saveReportRequest({
+        ...predefinedReportValues,
+        category,
+      })
+    }
+
+    this.setState({
+      swicthControl: true,
+    })
+  }
+
   render() {
     return (
       <React.Fragment>
-        <Template {...this.props} themes={this.props.themeContext.colors} />
+        <Template
+          {...this.props}
+          state={this.state}
+          actions={{ swicthChange: this.swicthChange.bind(this) }}
+          themes={this.props.themeContext.colors}
+        />
       </React.Fragment>
     )
   }
@@ -252,11 +314,19 @@ class Navbar extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   library: makeSelectLibrary(),
+  brandInsightValue: makeSelectReportsBrandInsightValues(),
+  comparebrandValues: makeSelectReportsComparebrandValues(),
+  predefinedReportValues: makeSelectReportsPredefinedReportValues(),
 })
 
-function mapDispatchToProps(dispatch) {
-  return {}
-}
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(
+    {
+      ...reportsActions,
+      ...generatedReportActions,
+    },
+    dispatch
+  )
 
 const withConnect = connect(
   mapStateToProps,

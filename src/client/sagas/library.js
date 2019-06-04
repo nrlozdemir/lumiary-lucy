@@ -15,9 +15,12 @@ function getLibraryApi() {
 }
 
 function getLibraryDataApi(vals) {
+  const { limit, page, body = {} } = vals
+
   return ajax({
-    url: `${RESOURCE}/${userUuid}?limit=${vals.limit}&page=${vals.page}`,
-    method: 'GET',
+    url: `${RESOURCE}/${userUuid}?limit=${limit}&page=${page}`,
+    method: 'POST',
+    params: qs.stringify(body),
   }).then((response) => {
     if (response.error) {
       throw response.error
@@ -29,9 +32,13 @@ function getLibraryDataApi(vals) {
 function* getVideos(values) {
   const page = values && values.payload && values.payload.page
   try {
+    const filters = yield select(makeSelectVideoFilters())
+    const body = getBodyFromFilters(filters)
+
     const options = {
       limit: 16,
       page: page || 1,
+      body,
     }
     const payload = yield call(getLibraryDataApi, options)
     yield put(actions.loadVideosSuccess(payload))
@@ -40,13 +47,120 @@ function* getVideos(values) {
   }
 }
 
+function getBodyFromFilters(filters = {}) {
+  return Object.keys(filters).reduce((accumulator, filter) => {
+    const thisFilter = filters[filter]
+    switch (filter) {
+      case 'Search':
+        accumulator['term'] = thisFilter.value
+        break
+
+      case 'AspectRatio':
+        if (!accumulator['aspectRatios']) {
+          accumulator['aspectRatios'] = []
+        }
+        accumulator['aspectRatios'].push(thisFilter.value)
+        break
+
+      case 'Duration':
+        accumulator['duration'] = {
+          min: thisFilter[0],
+          max: thisFilter[1],
+        }
+        break
+
+      case 'Facebook':
+      case 'Instagram':
+      case 'Youtube':
+      case 'Twitter':
+        if (!accumulator['platforms']) {
+          accumulator['platforms'] = []
+        }
+
+        if(thisFilter) {
+          accumulator['platforms'].push(filter.toLowerCase())
+        }
+        break
+
+      case 'FramesPerSecond':
+        if (!accumulator['frameRates']) {
+          accumulator['frameRates'] = []
+        }
+        accumulator['frameRates'].push(thisFilter.value)
+        break
+
+      case 'OrderedBy':
+        if (!accumulator['orderBy']) {
+          accumulator['orderBy'] = []
+        }
+
+        switch (thisFilter.value) {
+          case 'mostLikedVideos':
+            accumulator['orderBy'].push(['likes', 'desc'])
+            break
+
+          case 'mostViewedVideos':
+            accumulator['orderBy'].push(['views', 'desc'])
+            break
+
+          case 'mostSharedVideos':
+            accumulator['orderBy'].push(['shares', 'desc'])
+            break
+
+          case 'mostCommentedVideos':
+            accumulator['orderBy'].push(['comments', 'desc'])
+            break
+        }
+        break
+
+      case 'Pacing':
+        if (!accumulator['pacings']) {
+          accumulator['pacings'] = []
+        }
+        accumulator['pacings'].push(thisFilter.value.toLowerCase())
+        break
+
+      case 'Resolution':
+        if (!accumulator['resolutions']) {
+          accumulator['resolutions'] = []
+        }
+        accumulator['resolutions'].push(thisFilter.value.toLowerCase())
+        break
+
+      case 'VideoFormat':
+        if (!accumulator['formats']) {
+          accumulator['formats'] = []
+        }
+        accumulator['formats'].push(thisFilter.value)
+        break
+
+      case 'radioColorSelected':
+        if (!accumulator['colors']) {
+          accumulator['colors'] = []
+        }
+        accumulator['colors'].push(thisFilter.name.toLowerCase().replace(/ /g, '-'))
+        break
+
+    }
+
+    return accumulator
+  }, {})
+}
+
 function* changeFilter() {
   try {
-    const payload = yield call(getLibraryApi)
-    const filter = yield select(makeSelectVideoFilters())
-    const sorted = sortVideos(payload, filter)
+    const filters = yield select(makeSelectVideoFilters())
+    const body = getBodyFromFilters(filters)
 
-    yield put(actions.loadVideosSuccess(sorted))
+    const options = {
+      limit: 16,
+      page: 1,
+      body,
+    }
+
+    const payload = yield call(getLibraryDataApi, options)
+
+    yield put(actions.clearAndLoadVideos(payload))
   } catch (err) {
     yield put(actions.loadVideosError(err))
   }

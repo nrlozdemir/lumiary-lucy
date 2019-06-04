@@ -10,7 +10,9 @@ class Reports extends Component {
       <Switch>
         <Route path="/reports" exact component={Main} />
         <Route path="/reports/brand-insight/:id" component={ReportGenerated} />
+        <Route path="/reports/brand-insight" component={ReportGenerated} />
         <Route path="/reports/:type/:id" component={CompareBrand} />
+        <Route path="/reports/:type" component={CompareBrand} />
       </Switch>
     )
   }

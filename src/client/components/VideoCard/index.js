@@ -75,7 +75,6 @@ export class VideoCard extends PureComponent {
       },
       this.state.hoverReady && style.hoverReady
     )
-		console.log(video)
 
     const iconClass = classnames(
       socialIconSelector(video.socialIcon),

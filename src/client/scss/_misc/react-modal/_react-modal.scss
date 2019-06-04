@@ -1,5 +1,7 @@
 .ReactModalPortal {
+  position: relative;
   font-family: $font-family-ClanOT;
+  z-index: 999;
   .ReactModal__Overlay {
     overflow-y: auto;
     opacity: 0;

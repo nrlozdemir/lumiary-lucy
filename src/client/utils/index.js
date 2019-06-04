@@ -398,12 +398,17 @@ const radarChartCalculate = (data) => {
 const getMaximumValueIndexFromArray = (data) =>
   Object.values(data).indexOf(Math.max(...Object.values(data)))
 
-const compareSharesData = ({ data = {} }) => {
-  return Object.keys(data).map((brand) => {
-    const item = data[brand]
+const compareSharesData = (payload) => {
+  const isArray = Array.isArray(payload)
+  const data = isArray ? payload : Object.keys(payload.data)
+
+  return data.map((value) => {
+    const brand = isArray ? Object.keys(value.data)[0] : value
+    const item = isArray ? value.data[brand] : payload.data[brand]
     const keyName = Object.keys(item)[0]
     const labels = Object.entries(item[keyName])
-    const type = brand ? brand : keyName
+    const type = (isArray ? item.platform : value) || keyName
+
     return {
       type: capitalizeFirstLetter(type),
       datas: {
@@ -496,27 +501,11 @@ const getBrandAndCompetitors = (profile) => {
   const { brand } = profile
 
   if (!!brand && !!brand.uuid && !!brand.competitors) {
-    return [
-      {
-        name: brand.name,
-        uuid: brand.uuid,
-      },
-      ...brand.competitors,
-    ]
+    return [brand.uuid, ...brand.competitors.map((c) => c.uuid)]
   }
 
-  return [
-    {
-      name: brand.name,
-      uuid: brand.uuid,
-    },
-  ]
+  return [brand.uuid]
 }
-
-const getFilteredCompetitors = (competitors, report) =>
-  competitors.filter(
-    (brand) => report.brands.map((c) => c.uuid).indexOf(brand.uuid) > -1
-  )
 
 /*
   /brand/{brandUuid}/compare
@@ -605,6 +594,11 @@ const normalize = (input, min, max, low_range, high_range) => {
   const scale_range = high_range - low_range
   return norm * scale_range + low_range
 }
+
+const getFilteredCompetitors = (competitors, report) =>
+
+  competitors.filter((uuid) => report.brands.indexOf(uuid) > -1)
+
 
 export {
   ucfirst,

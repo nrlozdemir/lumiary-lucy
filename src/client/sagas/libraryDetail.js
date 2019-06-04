@@ -43,10 +43,17 @@ function getColorTempApi({ LibraryDetailId }) {
   return axios.get('/').then((res) => findIdDetail(mock, 1, 'ColorTempMock'))
 }
 function getShotByShotApi({ LibraryDetailId }) {
-  //this will use ajax function in utils/api when real data is provided
-  return axios
-    .get('/')
-    .then((res) => findIdDetail(mock, LibraryDetailId, 'ShotByShotMock'))
+  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/2203807d-50e0-4c4f-8290-08b7de4ce1bf/shots'
+
+  return ajax({
+    url: URL,
+    method: 'GET',
+  }).then((response) => {
+    if (response.error) {
+      throw response.error
+    }
+    return response.data
+  })
 }
 
 function* getBarChart({ payload: { LibraryDetailId } }) {
@@ -154,9 +161,15 @@ function* getColorTemperatureData({
 
 function* getShotByShot({ payload: { LibraryDetailId } }) {
   try {
-    const payload = yield call(getShotByShotApi, {
+    let payload = yield call(getShotByShotApi, {
       LibraryDetailId,
     })
+
+    Object.values(payload.video.shots).map((el, i) => {
+      const randomImage = Math.floor(Math.random(1) * Math.floor(30))
+      payload.video.shots[i].image = `https://picsum.photos/id/${randomImage}/320/320`
+    })
+
     yield put(actions.getShotByShotSuccess(payload))
   } catch (error) {
     yield put(actions.getShotByShotFailure({ error }))
