@@ -53,22 +53,14 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   handleClick(i) {
-    /*
-    let totalWidthToShot = 0
-
-    for(let index in this.state.scenes){
-      if(index > i){
-        break
-      }
-      totalWidthToShot += this.timeToSeconds(this.state.scenes[index].duration) * this.state.sliderShotSecondWidth
-    }
-
-    const findDifference = totalWidthToShot - this.state.sliderGrabberWidth
-    */
 
     this.setState({
       selectedImage: i,
     })
+  }
+
+  markClick(e) {
+    this.scrubber.scrollLeft(e * 10 * this.state.viewportSize)
   }
 
   onChangeSlider(e) {
@@ -79,96 +71,7 @@ class LibraryDetailShotByShot extends React.Component {
       sliderValue: 0,
       sliderLeftPosition: 0,
     })
-    //
     return false
-
-    e = parseInt(e)
-
-    let scrollTo =
-      (e - this.state.sliderHandleRightStep / 2) *
-      this.state.sliderStepWidth *
-      -1
-
-    if (scrollTo > 0) {
-      scrollTo = 0
-    }
-    if (
-      scrollTo * -1 + this.state.sliderViewportSize >=
-      this.state.sliderTotalWidth
-    ) {
-      scrollTo =
-        (this.state.sliderTotalWidth - this.state.sliderViewportSize) * -1
-    }
-
-    this.setState({
-      sliderValue: e,
-      sliderLeftPosition: scrollTo,
-    })
-
-    if (e === 100) {
-      leftMargin = Math.round(this.state.sliderGrabberWidth)
-
-      this.setState({
-        sliderValue: 100,
-        sliderHandleStyle: {
-          ...this.state.sliderHandleStyle,
-          marginLeft: `-${leftMargin}px`,
-        },
-      })
-    } else if (e + this.state.sliderHandleRightStep / 2 > 100) {
-      sliderValue = Math.round(100 - this.state.sliderHandleRightStep / 2)
-      leftMargin = Math.round(
-        (this.state.sliderViewportSize -
-          sliderValue * this.state.sliderViewportStepWidth) *
-          2 -
-          this.state.sliderGrabberWidth
-      )
-
-      if (leftMargin < 0) {
-        leftMargin = this.state.sliderGrabberWidth / 2
-      } else {
-        leftMargin = this.state.sliderGrabberWidth / 2 + leftMargin
-      }
-      leftMargin = leftMargin.toFixed(0)
-
-      this.setState({
-        sliderValue: sliderValue,
-        sliderHandleStyle: {
-          ...this.state.sliderHandleStyle,
-          marginLeft: `-${leftMargin}px`,
-        },
-      })
-    } else if (e - Math.round(this.state.sliderHandleRightStep) / 2 < 1) {
-      this.setState({
-        sliderHandleStyle: {
-          ...this.state.sliderHandleStyle,
-          marginLeft: '0px',
-        },
-      })
-    } else if (e === 0) {
-      this.setState(
-        {
-          sliderHandleStyle: {
-            ...this.state.sliderHandleStyle,
-            marginLeft: '2px',
-          },
-          sliderDisabled: true,
-        },
-        () => {
-          this.setState({
-            sliderDisabled: false,
-            sliderValue: 0,
-          })
-        }
-      )
-    } else if (e !== 100 && e !== 0) {
-      this.setState({
-        sliderHandleStyle: {
-          ...this.state.sliderHandleStyle,
-          marginLeft: parseInt((this.state.sliderGrabberWidth / 2) * -1) + 'px',
-        },
-      })
-    }
   }
 
   componentDidMount() {
@@ -508,6 +411,7 @@ class LibraryDetailShotByShot extends React.Component {
                     <div className={style.sliderContainer}>
                       <div className={style.shotByShotMask} />
                       <Scrubber
+                        ref={el => this.scrubber = el}
                         horizontal
                         arrows
                         viewBordered
@@ -562,7 +466,7 @@ class LibraryDetailShotByShot extends React.Component {
                     <div className={style.shotTicks}>
                       {sliderMarks &&
                         Object.keys(sliderMarks).map((m, i) => (
-                          <p key={`slideMark-${i}`} className={style.shotTick}>
+                          <p key={`slideMark-${i}`} onClick={() => this.markClick(i)} className={style.shotTick}>
                             {sliderMarks[m].value}
                           </p>
                         ))}
