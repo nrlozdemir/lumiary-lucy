@@ -75,8 +75,8 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   componentDidMount() {
-    const minShotWidth = 48
-    const maxShotWidth = 156
+    const minShotWidth = 24
+    const maxShotWidth = 148
     const viewportSize = 1120
     const tickCount = 11
     let sliderMarks = []
