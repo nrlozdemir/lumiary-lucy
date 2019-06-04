@@ -89,6 +89,7 @@ class LibraryDetailShotByShot extends React.Component {
     const durations = shots.map(
       element => (element.endTime - element.startTime).toFixed(4)
     )
+
     const totalDuration = (shots[shots.length - 1].endTime).toFixed(4)
     
     //first index and last index not included
@@ -117,7 +118,7 @@ class LibraryDetailShotByShot extends React.Component {
         }
       } else {
         sliderMarksToState[index] = {
-          style: { },
+          style: {},
           label: <p className="customDot">{element}</p>,
           value: element,
         }
@@ -415,6 +416,7 @@ class LibraryDetailShotByShot extends React.Component {
                         width={1119}
                         marks={sliderMarks}
                         totalWidth={shotsTotalWidth}
+
                       >
                         <div
                           className={style.sliderWrapper}
@@ -449,6 +451,7 @@ class LibraryDetailShotByShot extends React.Component {
                                   style={{ 
                                     height: '160px' 
                                   }}
+
                                   className={style.hover}
                                   onClick={() => {
                                     this.handleClick(i)

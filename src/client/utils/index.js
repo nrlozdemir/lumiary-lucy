@@ -596,7 +596,9 @@ const normalize = (input, min, max, low_range, high_range) => {
 }
 
 const getFilteredCompetitors = (competitors, report) =>
+
   competitors.filter((uuid) => report.brands.indexOf(uuid) > -1)
+
 
 export {
   ucfirst,
