@@ -84,6 +84,7 @@ export default class Scrubber extends React.Component {
       background: "rgba(255, 255, 255, 0.9)",
       border: '1px solid #c6c9d7',
       height: props.scrubberHeight,
+      zIndex: 4
     }
 
     return (<div className={styles.thumbHorizontal} style={inlineStyle}>
