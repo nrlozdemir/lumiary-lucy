@@ -16,7 +16,7 @@ class LibraryDetailShotByShot extends React.Component {
       selectedImage: null,
       sliderValue: 0,
       shots: this.props.shots || [],
-      shotsTotalWidth: 2500,
+      shotsTotalWidth: 1120,
       viewportShots: [],
       viewportSize: 0,
       viewportDurations: {},
