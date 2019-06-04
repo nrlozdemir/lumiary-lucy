@@ -22,9 +22,9 @@ export const types = {
   GET_SHOT_BY_SHOT_SUCCESS: 'LibraryDetail/GET_SHOT_BY_SHOT_SUCCESS',
   GET_SHOT_BY_SHOT_FAILURE: 'LibraryDetail/GET_SHOT_BY_SHOT_FAILURE',
 
-  GET_SHOT_BY_SHOT_INFO_REQUEST: 'LibraryDetail/GET_SHOT_BY_SHOT_INFO_REQUEST',
-  GET_SHOT_BY_SHOT_INFO_SUCCESS: 'LibraryDetail/GET_SHOT_BY_SHOT_INFO_SUCCESS',
-  GET_SHOT_BY_SHOT_INFO_FAILURE: 'LibraryDetail/GET_SHOT_BY_SHOT_INFO_FAILURE',
+  GET_SHOT_INFO_REQUEST: 'LibraryDetail/GET_SHOT_INFO_REQUEST',
+  GET_SHOT_INFO_SUCCESS: 'LibraryDetail/GET_SHOT_INFO_SUCCESS',
+  GET_SHOT_INFO_FAILURE: 'LibraryDetail/GET_SHOT_INFO_FAILURE',
 }
 export const actions = {
   getSelectedVideoRequest: (payload) => ({
@@ -87,12 +87,12 @@ export const actions = {
     type: types.GET_SHOT_BY_SHOT_FAILURE,
     payload,
   }),
-  getShotInfoRequest: (payload) => ({ type: types.GET_SHOT_BY_SHOT_INFO_REQUEST, payload }),
+  getShotInfoRequest: (payload) => ({ type: types.GET_SHOT_INFO_REQUEST, payload }),
   getShotInfoSuccess: (payload) => ({
-    type: types.GET_SHOT_BY_SHOT_INFO_SUCCESS,
+    type: types.GET_SHOT_INFO_SUCCESS,
     payload,
   }),
-  getShotInfoError: (error) => ({ type: types.GET_SHOT_BY_SHOT_INFO_FAILURE, error }),
+  getShotInfoFailure: (error) => ({ type: types.GET_SHOT_INFO_FAILURE, error }),
 }
 
 export const initialState = fromJS({
@@ -169,13 +169,13 @@ const libraryDetailReducer = (state = initialState, action) => {
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))
 
-    case types.GET_SHOT_BY_SHOT_INFO_REQUEST:
+    case types.GET_SHOT_INFO_REQUEST:
       return state.set('loading', fromJS(true))
-    case types.GET_SHOT_BY_SHOT_INFO_SUCCESS:
+    case types.GET_SHOT_INFO_SUCCESS:
       return state
         .set('shotInfoData', fromJS(action.payload))
         .set('loading', fromJS(false))
-    case types.GET_SHOT_BY_SHOT_INFO_FAILURE:
+    case types.GET_SHOT_INFO_FAILURE:
       return state
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))
@@ -188,7 +188,8 @@ const libraryDetailReducer = (state = initialState, action) => {
 export const selectLibraryDetailDomain = (state) => state.LibraryDetail
 export const selectLibraryDetailSelectedVideo = (state) =>
   state.LibraryDetail.get('selectedVideo')
-export const selectShotByShotInfo = (state) =>
+
+export const selectShotInfo = () =>
   createSelector(
     selectLibraryDetailSelectedVideo,
     (substate) => substate.toJS()

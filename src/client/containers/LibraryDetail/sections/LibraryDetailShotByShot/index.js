@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { actions, selectShotByShotInfo } from 'Reducers/libraryDetail'
+import { actions, selectShotInfo } from 'Reducers/libraryDetail'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import SingleItemSlider from 'Components/Sliders/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
@@ -56,13 +56,11 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   handleClick(i) {
-    /*
     this.setState({
       selectedImage: i,
     })
-    */
 
-    getShotInfo(i)
+    this.props.getShotInfoRequest(i)
   }
 
   onChangeSlider(e) {
@@ -280,7 +278,7 @@ class LibraryDetailShotByShot extends React.Component {
                         customHandleStyle={{
                           background: colors.shotByShotSliderPointer,
                         }}
-                        slideImages={[]}
+                        slideImages={shotInfo}
                         selectedImage={selectedImage}
                       />
                     </div>
@@ -455,9 +453,7 @@ class LibraryDetailShotByShot extends React.Component {
                                     height: '160px' 
                                   }}
                                   className={style.hover}
-                                  onClick={() => {
-                                    this.handleClick(i)
-                                  }}
+                                  onClick={() => { this.handleClick(i) }}
                                 />
                               </div>
                             </React.Fragment>
@@ -477,12 +473,12 @@ class LibraryDetailShotByShot extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  shotInfoData: selectShotByShotInfo(),
+  shotInfoData: selectShotInfo(),
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    getShotInfo: (shotId) => dispatch(actions.getShotInfo(shotId)),
+    getShotInfoRequest: (shotId) => dispatch(actions.getShotInfoRequest(shotId)),
   }
 }
 
