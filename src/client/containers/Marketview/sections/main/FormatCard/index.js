@@ -46,6 +46,7 @@ class FormatCard extends Component {
     const {
       formatChartData: { data, video, currentDay, loading },
     } = this.props
+    
     const isDataEmpty = (!loading && isDataSetEmpty(data)) || isEmpty(data)
 
     return (

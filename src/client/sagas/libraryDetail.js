@@ -140,7 +140,7 @@ function* getColorTemperatureData({
 
     const response = yield call(
       getDataFromApi,
-      null,
+      undefined,
       buildApiUrl(`/brand/${brand.uuid}/compare`, options),
       'GET'
     )
