@@ -154,7 +154,7 @@ function* getColorTemperatureData({
 
     if (!!response && !!response.sentiments) {
       const { data: convertedData } = convertColorTempToDatasets(response)
-      
+
       yield put({
         type: types.GET_COLOR_TEMP_SUCCESS,
         payload: convertedData,
@@ -189,7 +189,7 @@ function* getSelectedVideo({ payload }) {
   }
 }
 
-function* getDoughnutSectionInfoData({ payload: { dateRange, metric, property}}) {
+function* getDoughnutSectionInfoData() {
 	try {
 		const { date, metric } = yield select(makeSelectDoughnutFilters());
 
@@ -197,13 +197,18 @@ function* getDoughnutSectionInfoData({ payload: { dateRange, metric, property}})
 			return;
 		}
 
+		const infoData = yield select(makeSelectInfoShowSection());
+
+		if (!infoData) {
+			return;
+		}
+
 		const { brand } = yield select(selectAuthProfile);
-		const { id } = yield select(makeSelectInfoShowSection());
 
 		const options = {
 			metric,
 			dateRange: date,
-			property: [id],
+			property: [infoData.id],
 			url: '/report',
 			brands: [brand.uuid],
 			platform: 'all',
@@ -226,4 +231,5 @@ export default [
   takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),
   takeLatest(types.GET_SELECTED_VIDEO_REQUEST, getSelectedVideo),
   takeLatest(types.CHANGE_DOUGHNUT_FILTERS, getDoughnutSectionInfoData),
+  takeLatest(types.TOGGLE_INFO_SECTION, getDoughnutSectionInfoData),
 ]
