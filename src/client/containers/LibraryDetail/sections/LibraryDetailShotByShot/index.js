@@ -59,10 +59,6 @@ class LibraryDetailShotByShot extends React.Component {
     })
   }
 
-  markClick(e) {
-    this.scrubber.scrollLeft(e * 10 * this.state.viewportSize)
-  }
-
   onChangeSlider(e) {
     let sliderValue
     let leftMargin = 0 //calculate left margin if needed
@@ -411,13 +407,14 @@ class LibraryDetailShotByShot extends React.Component {
                     <div className={style.sliderContainer}>
                       <div className={style.shotByShotMask} />
                       <Scrubber
-                        ref={el => this.scrubber = el}
                         horizontal
                         arrows
                         viewBordered
                         verticalDisabled
                         height={230}
                         width={1121}
+                        marks={sliderMarks}
+                        totalWidth={shotsTotalWidth}
                       >
                         <div
                           className={style.sliderWrapper}
@@ -462,14 +459,6 @@ class LibraryDetailShotByShot extends React.Component {
                           ))}
                         </div>
                       </Scrubber>
-                    </div>
-                    <div className={style.shotTicks}>
-                      {sliderMarks &&
-                        Object.keys(sliderMarks).map((m, i) => (
-                          <p key={`slideMark-${i}`} onClick={() => this.markClick(i)} className={style.shotTick}>
-                            {sliderMarks[m].value}
-                          </p>
-                        ))}
                     </div>
                   </div>
                 </div>

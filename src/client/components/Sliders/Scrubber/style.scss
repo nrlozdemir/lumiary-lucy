@@ -53,3 +53,39 @@
   padding: 0;
   margin: 0;
 }
+
+.ticksWrapper{
+  width: 100%;
+  display: block;
+}
+
+.ticks{
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.tick{
+  position: relative;
+  font-size: 12px;
+  margin-top: 24px;
+  font-family: "ClanOTNews";
+  cursor: pointer;
+
+  /*
+  &:not(:first-child):not(:last-child){
+    &:before{
+      content: "";
+      height: 16px;
+      background: #ccc;
+      width: 1px;
+      font-size: 0px;
+      position: absolute;
+      top: -43px;
+      left: 50%;
+      text-align: center;
+      z-index: 2;
+    }
+  }
+  */
+}

@@ -258,7 +258,6 @@
   width: 1120px;
   margin: 0px 0px;
   z-index: 2;
-  display: flex;
   flex-wrap: nowrap;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -576,38 +575,6 @@
     }
   }
 }
-
-.shotTicks{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start
-}
-
-.shotTick{
-  position: relative;
-  font-size: 12px;
-  margin-top: 24px;
-  font-family: "ClanOTNews";
-  cursor: pointer;
-
-  /*
-  &:not(:first-child):not(:last-child){
-    &:before{
-      content: "";
-      height: 16px;
-      background: #ccc;
-      width: 1px;
-      font-size: 0px;
-      position: absolute;
-      top: -43px;
-      left: 50%;
-      text-align: center;
-      z-index: 2;
-    }
-  }
-  */
-}
-
 
 .tabPanelReset{
   display: flex;
