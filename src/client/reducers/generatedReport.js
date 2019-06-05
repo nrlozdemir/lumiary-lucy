@@ -187,8 +187,8 @@ export const initialState = fromJS({
   },
 
   videoReleasesBarChart: {
-    data: null,
-    loading: true,
+    data: [],
+    loading: false,
     error: null,
   },
 

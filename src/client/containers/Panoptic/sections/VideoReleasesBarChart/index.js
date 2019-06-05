@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticVideoReleases } from 'Reducers/panoptic'
-import { chartCombineDataset, isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils'
 
 import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
 

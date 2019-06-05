@@ -650,7 +650,11 @@ const getFilteredCompetitors = (competitors, report) =>
     maxEngagement: {int}
   }]
  */
-const convertVideoEngagementData = (videoData, engagementData) => {
+const convertVideoEngagementData = (
+  videoData,
+  engagementData,
+  metric = 'all'
+) => {
   if (isEmpty(engagementData)) {
     return []
   }
@@ -664,7 +668,11 @@ const convertVideoEngagementData = (videoData, engagementData) => {
     return fmts
   }, [])
 
-  const metricKeys = Object.keys(engagementData)
+  let metricKeys = Object.keys(engagementData)
+
+  if (metric !== 'all') {
+    metricKeys.filter((m) => `${m}s` === metric)
+  }
 
   const dateBuckets = Object.keys(
     engagementData[metricKeys[0]].format[formats[0]]
