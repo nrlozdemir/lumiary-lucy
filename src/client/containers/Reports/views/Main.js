@@ -16,6 +16,7 @@ import ReportCards from '../section/ReportCardsModule'
 import ReactTable from 'react-table'
 import { selectOptions } from '../options'
 import style from '../style.scss'
+import { staticUrl } from "Utils/globals";
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -28,23 +29,20 @@ class Reports extends Component {
       reportCardsData: [
         {
           key: 'brand-insights',
-          icon:
-            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/brand-insights-icon.png',
+          icon: `${staticUrl}lucy-assets/brand-insights-icon.png`,
           title: 'Brand Insights',
           text:
             'Get helpful, detailed engagement metrics about competitor brands',
         },
         {
           key: 'compare-brands',
-          icon:
-            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/compare-brands-icon.png',
+          icon: `${staticUrl}lucy-assets/compare-brands-icon.png`,
           title: 'Compare Brands',
           text: 'Compare two brands to learn what’s driving their performance',
         },
         {
           key: 'predefined-reports',
-          icon:
-            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/predefined-reports-icon.png',
+          icon: `${staticUrl}lucy-assets/predefined-reports-icon.png`,
           title: 'Predefined Reports',
           text: 'Access unique, relevant and invaluable customized data',
         },

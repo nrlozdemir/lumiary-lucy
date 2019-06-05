@@ -1,13 +1,13 @@
 @font-face {
   font-family: 'icomoon';
-  src: url('https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.eot?e21ori');
-  src: url('https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.eot?e21ori#iefix')
+  src: url($staticUrl + 'fonts/lumiary/icomoon.eot?e21ori');
+  src: url($staticUrl + 'fonts/lumiary/icomoon.eot?e21ori#iefix')
       format('embedded-opentype'),
-    url('https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.ttf?e21ori')
+    url($staticUrl + 'fonts/lumiary/icomoon.ttf?e21ori')
       format('truetype'),
-    url('https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.woff?e21ori')
+    url($staticUrl + 'fonts/lumiary/icomoon.woff?e21ori')
       format('woff'),
-    url('https://s3.amazonaws.com/quickframe-static-dev/fonts/lumiary/icomoon.svg?e21ori#icomoon')
+    url($staticUrl + 'fonts/lumiary/icomoon.svg?e21ori#icomoon')
       format('svg');
   font-weight: normal;
   font-style: normal;
