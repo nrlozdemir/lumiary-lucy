@@ -24,7 +24,8 @@ class LibraryDetailShotByShot extends React.Component {
       viewportShots: [],
       viewportSize: 0,
       viewportDurations: {},
-      sliderMarks: {}
+      sliderMarks: {},
+      rightPaneHeight: 480
     }
     this.refs = []
   }
@@ -61,6 +62,11 @@ class LibraryDetailShotByShot extends React.Component {
     })
 
     this.props.getShotInfoRequest(i)
+    const { height } = this.slider.getBoundingClientRect()
+    const totalHeight = Math.floor(height) + 48 - 85 - 20 - 15 // + top margin - tabs area - right top+bottom margins - bottom margin
+    this.setState({
+      rightPaneHeight: totalHeight
+    })
   }
 
   onChangeSlider(e) {
@@ -254,13 +260,15 @@ class LibraryDetailShotByShot extends React.Component {
   render() {
     const { radarData, shotInfo } = this.props
     const { selectedImage, viewportShots, sliderMarks, shotsTotalWidth } = this.state
-    console.log(shotInfo)
+
+    
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
           return (
             <div
               className="grid-container col-12 mt-72 mb-72"
+              ref={el => this.slider = el}
               style={{
                 backgroundColor: colors.moduleBackground,
                 boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
@@ -275,13 +283,15 @@ class LibraryDetailShotByShot extends React.Component {
                     className="col-6-no-gutters bg-black"
                   >
                     <div className="mt-48 ml-48 mr-48">
-                      <SingleItemSlider
-                        customHandleStyle={{
-                          background: colors.shotByShotSliderPointer,
-                        }}
-                        slideImages={shotInfo}
-                        selectedImage={selectedImage}
-                      />
+                      {shotInfo && (
+                        <SingleItemSlider
+                          customHandleStyle={{
+                            background: colors.shotByShotSliderPointer,
+                          }}
+                          slideImages={shotInfo.shot.frames}
+                          selectedImage={selectedImage}
+                        />
+                      )}
                     </div>
                   </div>
                   <div className="col-6-no-gutters ">
@@ -311,15 +321,14 @@ class LibraryDetailShotByShot extends React.Component {
                       </div>
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
-                          <Scrubber vertical width={570} height={600}>
-                            {/*
-                            {slideImages && slideImages.map((image, i) => (
+                          <Scrubber vertical width={570} height={this.state.rightPaneHeight}>
+                            {shotInfo && shotInfo.shot && shotInfo.shot.labels && shotInfo.shot.labels.map((info, i) => (
                               <div
                                 className={classnames(
                                   style.tabPanelItem,
                                   'grid-container',
                                   {
-                                    'mb-16': i !== slideImages.length - 1,
+                                    'mb-16': i !== shotInfo.shot.labels.length - 1,
                                   }
                                 )}
                                 style={{
@@ -331,35 +340,32 @@ class LibraryDetailShotByShot extends React.Component {
                               >
                                 <div className="col-5-no-gutters">
                                   <img
-                                    src={image.src}
+                                    src={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${shotInfo.shot.frames[i]}`}
                                     className="img-responsive"
                                   />
                                 </div>
                                 <div className="col-7-no-gutters">
                                   <div className="pt-20">
-                                    {image.options.map((option, z) => (
-                                      <div
+                                    <div
                                         className={style.progressbarContainer}
-                                        key={z}
+                                        key={i}
                                       >
                                         <div className={style.barOptions}>
-                                          <p>{option.text}</p>
-                                          <p>{option.accurate}% Accurate</p>
+                                          <p>{info.label}</p>
+                                          <p>{(info.confidence*100).toFixed(0)}% Accurate</p>
                                         </div>
                                         <ProgressBar
-                                          width={option.percentage}
+                                          width={(info.confidence*100).toFixed(0)}
                                           customBarClass={style.progressBar}
                                           customPercentageClass={
                                             style.percentage
                                           }
                                         />
-                                      </div>
-                                    ))}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
                             ))}
-                            */}
                           </Scrubber>
                         </div>
                       </TabPanel>
@@ -400,7 +406,7 @@ class LibraryDetailShotByShot extends React.Component {
                       </TabPanel>
                       <TabPanel>
                         <div className={style.radarChartContainer}>
-                          <RadarChart data={radarData} />
+                          {radarData && (<RadarChart data={radarData} />)}
                         </div>
                       </TabPanel>
                     </Tabs>
