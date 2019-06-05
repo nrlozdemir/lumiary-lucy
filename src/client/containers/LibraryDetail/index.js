@@ -88,6 +88,7 @@ export class LibraryDetail extends React.Component {
         doughnutLineChartData,
         colorTempData,
         shotByShotData,
+        shotInfoData,
         selectedVideo: {
           socialIcon,
           uuid,
@@ -150,6 +151,7 @@ export class LibraryDetail extends React.Component {
           <LibraryDetailShotByShot
             shots={shotByShotData.video.shots}
             slideImages={shotByShotData.slideImages}
+            shotInfo={shotInfoData && shotInfoData}
             radarData={radarDataCombined}
             videoList={shotByShotData.videoList}
           />

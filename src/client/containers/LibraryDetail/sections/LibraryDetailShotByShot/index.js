@@ -1,13 +1,18 @@
 import React from 'react'
+import classnames from 'classnames'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { actions, selectShotInfo } from 'Reducers/libraryDetail'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import SingleItemSlider from 'Components/Sliders/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
 import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
-import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import Scrubber from 'Components/Sliders/Scrubber'
 import XCircle from 'Components/Icons/XCircle'
-import classnames from 'classnames'
+import { mediaUrl } from 'Utils/globals'
+import style from './style.scss'
 
 class LibraryDetailShotByShot extends React.Component {
   constructor(props) {
@@ -20,10 +25,10 @@ class LibraryDetailShotByShot extends React.Component {
       viewportShots: [],
       viewportSize: 0,
       viewportDurations: {},
-      sliderMarks: {}
+      sliderMarks: {},
+      rightPaneHeight: 480
     }
     this.refs = []
-    this.shotSlider = React.createRef()
   }
 
   secondToTime(timeInSeconds) {
@@ -53,9 +58,15 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   handleClick(i) {
-
     this.setState({
       selectedImage: i,
+    })
+
+    this.props.getShotInfoRequest(i)
+    const { height } = this.slider.getBoundingClientRect()
+    const totalHeight = Math.floor(height) + 48 - 85 - 20 - 15 // + top margin - tabs area - right top+bottom margins - bottom margin
+    this.setState({
+      rightPaneHeight: totalHeight
     })
   }
 
@@ -89,7 +100,6 @@ class LibraryDetailShotByShot extends React.Component {
     const durations = shots.map(
       element => (element.endTime - element.startTime).toFixed(4)
     )
-
     const totalDuration = (shots[shots.length - 1].endTime).toFixed(4)
     
     //first index and last index not included
@@ -118,7 +128,7 @@ class LibraryDetailShotByShot extends React.Component {
         }
       } else {
         sliderMarksToState[index] = {
-          style: {},
+          style: { },
           label: <p className="customDot">{element}</p>,
           value: element,
         }
@@ -249,15 +259,16 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   render() {
-    const { sliderWithThumbnails, slideImages, radarData } = this.props
+    const { radarData, shotInfo } = this.props
     const { selectedImage, viewportShots, sliderMarks, shotsTotalWidth } = this.state
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
           return (
             <div
-              ref={(shotSlider) => (this.shotSlider = shotSlider)}
               className="grid-container col-12 mt-72 mb-72"
+              ref={el => this.slider = el}
               style={{
                 backgroundColor: colors.moduleBackground,
                 boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
@@ -272,13 +283,15 @@ class LibraryDetailShotByShot extends React.Component {
                     className="col-6-no-gutters bg-black"
                   >
                     <div className="mt-48 ml-48 mr-48">
-                      <SingleItemSlider
-                        customHandleStyle={{
-                          background: colors.shotByShotSliderPointer,
-                        }}
-                        slideImages={sliderWithThumbnails}
-                        selectedImage={selectedImage}
-                      />
+                      {shotInfo && (
+                        <SingleItemSlider
+                          customHandleStyle={{
+                            background: colors.shotByShotSliderPointer,
+                          }}
+                          slideImages={shotInfo.shot.frames}
+                          selectedImage={selectedImage}
+                        />
+                      )}
                     </div>
                   </div>
                   <div className="col-6-no-gutters ">
@@ -308,14 +321,14 @@ class LibraryDetailShotByShot extends React.Component {
                       </div>
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
-                          <Scrubber vertical width={570} height={600}>
-                            {slideImages.map((image, i) => (
+                          <Scrubber vertical width={570} height={this.state.rightPaneHeight}>
+                            {shotInfo && shotInfo.shot && shotInfo.shot.labels && shotInfo.shot.labels.map((info, i) => (
                               <div
                                 className={classnames(
                                   style.tabPanelItem,
                                   'grid-container',
                                   {
-                                    'mb-16': i !== slideImages.length - 1,
+                                    'mb-16': i !== shotInfo.shot.labels.length - 1,
                                   }
                                 )}
                                 style={{
@@ -327,30 +340,28 @@ class LibraryDetailShotByShot extends React.Component {
                               >
                                 <div className="col-5-no-gutters">
                                   <img
-                                    src={image.src}
+                                    src={`${mediaUrl}lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${shotInfo.shot.frames[i]}`}
                                     className="img-responsive"
                                   />
                                 </div>
                                 <div className="col-7-no-gutters">
                                   <div className="pt-20">
-                                    {image.options.map((option, z) => (
-                                      <div
+                                    <div
                                         className={style.progressbarContainer}
-                                        key={z}
+                                        key={i}
                                       >
                                         <div className={style.barOptions}>
-                                          <p>{option.text}</p>
-                                          <p>{option.accurate}% Accurate</p>
+                                          <p>{info.label}</p>
+                                          <p>{(info.confidence*100).toFixed(0)}% Accurate</p>
                                         </div>
                                         <ProgressBar
-                                          width={option.percentage}
+                                          width={(info.confidence*100).toFixed(0)}
                                           customBarClass={style.progressBar}
                                           customPercentageClass={
                                             style.percentage
                                           }
                                         />
-                                      </div>
-                                    ))}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
@@ -395,7 +406,7 @@ class LibraryDetailShotByShot extends React.Component {
                       </TabPanel>
                       <TabPanel>
                         <div className={style.radarChartContainer}>
-                          <RadarChart data={radarData} />
+                          {radarData && (<RadarChart data={radarData} />)}
                         </div>
                       </TabPanel>
                     </Tabs>
@@ -416,7 +427,6 @@ class LibraryDetailShotByShot extends React.Component {
                         width={1119}
                         marks={sliderMarks}
                         totalWidth={shotsTotalWidth}
-
                       >
                         <div
                           className={style.sliderWrapper}
@@ -451,11 +461,8 @@ class LibraryDetailShotByShot extends React.Component {
                                   style={{ 
                                     height: '160px' 
                                   }}
-
                                   className={style.hover}
-                                  onClick={() => {
-                                    this.handleClick(i)
-                                  }}
+                                  onClick={() => { this.handleClick(i) }}
                                 />
                               </div>
                             </React.Fragment>
@@ -474,4 +481,19 @@ class LibraryDetailShotByShot extends React.Component {
   }
 }
 
-export default LibraryDetailShotByShot
+const mapStateToProps = createStructuredSelector({
+  shotInfoData: selectShotInfo(),
+})
+
+function mapDispatchToProps(dispatch) {
+  return {
+    getShotInfoRequest: (shotId) => dispatch(actions.getShotInfoRequest(shotId)),
+  }
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(LibraryDetailShotByShot)

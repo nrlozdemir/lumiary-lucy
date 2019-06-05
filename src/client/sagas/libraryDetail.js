@@ -43,6 +43,7 @@ function getColorTempApi({ LibraryDetailId }) {
   //this will use ajax function in utils/api when real data is provided
   return axios.get('/').then((res) => findIdDetail(mock, 1, 'ColorTempMock'))
 }
+
 function getShotByShotApi({ LibraryDetailId }) {
   const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/2203807d-50e0-4c4f-8290-08b7de4ce1bf/shots'
 
@@ -54,6 +55,31 @@ function getShotByShotApi({ LibraryDetailId }) {
       throw response.error
     }
     return response.data
+  })
+}
+
+function getShotInfoRequestApi({ LibraryDetailId }) {
+  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/2203807d-50e0-4c4f-8290-08b7de4ce1bf/shots/1'
+  const FRAMES_INFO = '/brand/6421cdac-d5eb-4427-a267-b9be2e232177/video/e2843ddb-4ba1-4062-acd9-2ffbe302a183/shots/0'
+  
+  return ajax({
+    url: URL,
+    method: 'GET',
+  }).then((response) => {
+    if (response.error) {
+      throw response.error
+    }
+    // get frames
+    return ajax({
+      url: FRAMES_INFO,
+      method: 'GET',
+    }).then((framesResponse) => {
+      if (framesResponse.error) {
+        throw framesResponse.error
+      }
+      response.data.shot.frames = framesResponse.data.shot.frames
+      return response.data
+    })
   })
 }
 
@@ -177,6 +203,17 @@ function* getShotByShot({ payload: { LibraryDetailId } }) {
   }
 }
 
+function* getShotInfoRequest({ ShotId }) {
+  try {
+    const payload = yield call(getShotInfoRequestApi, {
+      ShotId,
+    })
+    yield put(actions.getShotInfoSuccess(payload))
+  } catch (error) {
+    yield put(actions.getShotInfoFailure({ error }))
+  }
+}
+
 function* getSelectedVideo({ payload }) {
   try {
     const data = yield call(getOneVideo, {
@@ -208,5 +245,6 @@ export default [
   takeLatest(types.GET_COLOR_TEMP_REQUEST, getColorTemperatureData),
   takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),
   takeLatest(types.GET_SELECTED_VIDEO_REQUEST, getSelectedVideo),
+  takeLatest(types.GET_SHOT_INFO_REQUEST, getShotInfoRequest),
   takeLatest(types.GET_SELECTED_VIDEO_AVERAGE_REQUEST, getVideoAverage),
 ]
