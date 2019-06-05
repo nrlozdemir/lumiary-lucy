@@ -252,8 +252,9 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   render() {
-    const { sliderWithThumbnails, slideImages, radarData } = this.props
+    const { radarData, shotInfo } = this.props
     const { selectedImage, viewportShots, sliderMarks, shotsTotalWidth } = this.state
+    console.log(shotInfo)
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
@@ -311,6 +312,7 @@ class LibraryDetailShotByShot extends React.Component {
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
                           <Scrubber vertical width={570} height={600}>
+                            {/*
                             {slideImages && slideImages.map((image, i) => (
                               <div
                                 className={classnames(
@@ -357,6 +359,7 @@ class LibraryDetailShotByShot extends React.Component {
                                 </div>
                               </div>
                             ))}
+                            */}
                           </Scrubber>
                         </div>
                       </TabPanel>
