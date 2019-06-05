@@ -626,8 +626,48 @@ const parseAverage = (payload) => {
   console.log(calculateAverage)
   return calculateAverage
 }
+
 const getFilteredCompetitors = (competitors, report) =>
   competitors.filter((uuid) => report.brands.indexOf(uuid) > -1)
+
+/* Converts the api responses from /metric & /brand/{brandUuid}/count
+ * into chart data structures that
+ * VideoReleases Vs Engagement will use (Panoptic/Reports)
+ * @videoData {api response} from /brand/{brandUuid}/count
+ * @engagementData {api response} from /metric
+ *** Expected Output Structure: ***
+  [{ 
+    datasets: {array} - 
+      [{ 
+        backgroundColor: string, 
+        data: array, 
+        display:bool, 
+        label: string 
+      }], 
+    label: string, 
+    labels: {array} [{string}] 
+  }]
+ */
+const convertVideoEngagementData = (videoData, engagementData) => {
+  if(isEmpty(engagementData)) {
+    return []
+  }
+  
+  const formats = Object.keys(engagementData).reduce((fmts, metricKey) => {
+    for (const fmtKey in engagementData[metricKey].format) {
+      if (fmts.indexOf(fmtKey) === -1) {
+        fmts.push(fmtKey)
+      }
+    }
+    return fmts
+  }, [])
+
+  const chartData = formats.map
+
+  console.log('converted', chartData)
+
+  return chartData
+}
 
 export {
   ucfirst,
@@ -651,4 +691,5 @@ export {
   convertColorTempToDatasets,
   addComma,
   parseAverage,
+  convertVideoEngagementData,
 }

@@ -12,9 +12,10 @@ import {
   getDateBucketFromRange,
   getBrandAndCompetitors,
   convertColorTempToDatasets,
+  convertVideoEngagementData,
 } from 'Utils'
 
-import { getDataFromApi } from 'Utils/api'
+import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import _ from 'lodash'
 import { dayOfWeek, chartColors } from 'Utils/globals'
@@ -23,11 +24,38 @@ function getMockPanopticDataApi() {
   return axios.get('/').then((res) => panopticMockData)
 }
 
-function* getVideoReleasesData() {
+function* getVideoReleasesData({ data }) {
   try {
-    const payload = yield call(getMockPanopticDataApi)
-    yield put(actions.getVideoReleasesDataSuccess(payload.videoReleasesData))
+    const { brand } = yield select(selectAuthProfile)
+    const { platform, dateRange } = data
+
+    const options = {
+      platform,
+      property: 'format',
+      daterange: dateRange,
+      brandUuid: brand.uuid,
+    }
+
+    const [videoCountData, engagementCountData] = yield all([
+      call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl(`/brand/${brand.uuid}/count`, options),
+        'GET'
+      ),
+      call(getDataFromApi, undefined, buildApiUrl('/metric', options), 'GET'),
+    ])
+
+    console.log('api return', videoCountData, engagementCountData)
+
+    const test = convertVideoEngagementData(videoCountData, engagementCountData)
+
+    const mock = yield call(getMockPanopticDataApi)
+
+    yield put(actions.getVideoReleasesDataSuccess(mock.videoReleasesData))
+
   } catch (err) {
+    console.log(err)
     yield put(actions.getVideoReleasesDataError(err))
   }
 }

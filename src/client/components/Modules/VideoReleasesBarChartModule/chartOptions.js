@@ -47,7 +47,6 @@ export const options = {
         },
       },
     ],
-    labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
     yAxes: [
       {
         stacked: false,
