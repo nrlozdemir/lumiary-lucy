@@ -14,7 +14,7 @@ import LibraryDetailChartHeader from './sections/LibraryDetailChartHeader'
 import LibraryDetailDoughnutChart from './sections/LibraryDetailDoughnutChart'
 import LibraryDetailColorTemperature from './sections/LibraryDetailColorTemperature'
 import LibraryDetailShotByShot from './sections/LibraryDetailShotByShot'
-import { userUuid } from 'Utils/globals'
+import { userUuid, mediaUrl } from 'Utils/globals'
 import { withTheme } from 'ThemeContext/withTheme'
 
 /* eslint-disable react/prefer-stateless-function */
@@ -132,7 +132,7 @@ export class LibraryDetail extends React.Component {
           <LibraryDetailChartHeader
             barChartData={barChartData}
             selectedVideoAverage={selectedVideoAverage}
-            videoUrl={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/${userUuid}/${uuid}.mp4`}
+            videoUrl={`${mediaUrl}lumiere/${userUuid}/${uuid}.mp4`}
             title={title}
             socialIcon={socialIcon}
             cvScore={cvScore}

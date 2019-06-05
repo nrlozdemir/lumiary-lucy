@@ -5,7 +5,7 @@ import { socialIconSelector } from '../../utils'
 import { Link } from 'react-router-dom'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import { userUuid } from 'Utils/globals'
+import { userUuid, mediaUrl } from 'Utils/globals'
 import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 
 let hoverInReady
@@ -128,15 +128,11 @@ export class VideoCard extends PureComponent {
                       ref={this.video}
                       loop
                       muted
-                      poster={`https://s3.amazonaws.com/quickframe-media-qa/${
-                        video.thumbNail
-                      }`}
+											poster={mediaUrl + video.thumbNail}
                       controls={false}
                     >
                       <source
-                        src={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/${userUuid}/${
-                          video.uuid
-                        }.mp4`}
+												src={`${mediaUrl}lumiere/${userUuid}/${video.uuid}.mp4`}
                         type="video/mp4"
                       />
                     </video>
@@ -153,9 +149,7 @@ export class VideoCard extends PureComponent {
                 <div
                   className={style.blurredImage}
                   style={{
-                    backgroundImage: `url(https://s3.amazonaws.com/quickframe-media-qa/${
-                      video.thumbNail
-                    })`,
+										backgroundImage: `url(${mediaUrl}${video.thumbNail})`,
                     border: `1px solid ${colors.videoBorder}`,
                   }}
                 />
