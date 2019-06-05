@@ -11,6 +11,7 @@ import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import Scrubber from 'Components/Sliders/Scrubber'
 import XCircle from 'Components/Icons/XCircle'
+import { mediaUrl } from 'Utils/globals'
 import style from './style.scss'
 
 class LibraryDetailShotByShot extends React.Component {
@@ -339,7 +340,7 @@ class LibraryDetailShotByShot extends React.Component {
                               >
                                 <div className="col-5-no-gutters">
                                   <img
-                                    src={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${shotInfo.shot.frames[i]}`}
+                                    src={`${mediaUrl}lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${shotInfo.shot.frames[i]}`}
                                     className="img-responsive"
                                   />
                                 </div>

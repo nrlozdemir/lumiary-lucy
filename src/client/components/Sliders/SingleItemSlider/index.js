@@ -2,6 +2,7 @@ import React from 'react'
 import cn from 'classnames'
 import Slider from 'react-slick'
 import ScrollSlider from 'rc-slider'
+import { mediaUrl } from 'Utils/globals'
 import style from './style.scss'
 
 /* eslint-disable react/prefer-stateless-function */
@@ -45,7 +46,7 @@ class SingleItemSlider extends React.Component {
           {this.props.slideImages.map((image, i) => (
             <div key={`slideImage-${i}`}>
               <img 
-                src={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${image}`} 
+                src={`${mediaUrl}lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${image}`} 
                 className="img-responsive" />
             </div>
           ))}
@@ -71,7 +72,7 @@ class SingleItemSlider extends React.Component {
                 })}
                 key={`thumbnailImage-${i}`}
               >
-                <img src={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${image}`}/>
+                <img src={`${mediaUrl}lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${image}`}/>
               </div>
             ))}
           </Slider>
