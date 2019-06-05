@@ -6,11 +6,22 @@ import { actions, makeSelectPanopticVideoReleases } from 'Reducers/panoptic'
 import { chartCombineDataset, isDataSetEmpty } from 'Utils'
 
 import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
-import { videoReleasesData_DatasetOptions } from './options'
 
 class VideoReleasesBarChart extends Component {
   callBack = (data, moduleKey) => {
     this.props.getVideoReleasesData(data)
+  }
+
+  shouldComponentUpdate(nextProps) {
+    const {
+      videoReleasesData: { loading: nextLoading },
+    } = nextProps
+
+    const {
+      videoReleasesData: { loading },
+    } = this.props
+
+    return !nextLoading & !!loading
   }
 
   render() {
@@ -18,29 +29,17 @@ class VideoReleasesBarChart extends Component {
       videoReleasesData: { data, loading, error },
     } = this.props
 
-    const combineData = {
-      labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-      label: 'Live Action',
-      datasets: data,
-    }
-
-    const combinedData = [
-      chartCombineDataset(combineData, videoReleasesData_DatasetOptions),
-    ]
-
-    console.log(combinedData)
-
     const isEmpty =
       !loading &&
-      (!combinedData ||
-        (!!combinedData &&
-          (!combinedData.length ||
-            (!!combinedData.length &&
-              combinedData.every((dataset) => isDataSetEmpty(dataset))))))
+      (!data ||
+        (!!data &&
+          (!data.length ||
+            (!!data.length &&
+              data.every((dataset) => isDataSetEmpty(dataset))))))
 
     return (
       <VideoReleasesBarChartModule
-        data={combinedData}
+        data={data}
         moduleKey={'Panoptic/VideoReleasesBarChartModule'}
         title="Video Releases vs Engagement"
         action={this.callBack}

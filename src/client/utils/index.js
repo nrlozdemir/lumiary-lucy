@@ -645,14 +645,16 @@ const getFilteredCompetitors = (competitors, report) =>
         label: string 
       }], 
     label: string, 
-    labels: {array} [{string}] 
+    labels: {array} [{string}],
+    maxVideo: {int}
+    maxEngagement: {int}
   }]
  */
 const convertVideoEngagementData = (videoData, engagementData) => {
-  if(isEmpty(engagementData)) {
+  if (isEmpty(engagementData)) {
     return []
   }
-  
+
   const formats = Object.keys(engagementData).reduce((fmts, metricKey) => {
     for (const fmtKey in engagementData[metricKey].format) {
       if (fmts.indexOf(fmtKey) === -1) {
@@ -662,11 +664,64 @@ const convertVideoEngagementData = (videoData, engagementData) => {
     return fmts
   }, [])
 
-  const chartData = formats.map
+  const metricKeys = Object.keys(engagementData)
 
-  console.log('converted', chartData)
+  const dateBuckets = Object.keys(
+    engagementData[metricKeys[0]].format[formats[0]]
+  )
 
-  return chartData
+  return formats.map((fmt) => {
+    // sum up all engagement data from /metric by format and datebucket
+    const engagementCounts = metricKeys.reduce((counts, metric) => {
+      const fmtData = engagementData[metric].format[fmt]
+      Object.keys(fmtData).forEach((day, idx) => {
+        counts[idx] = Math.abs(counts[idx]) || 0
+        counts[idx] += fmtData[day]
+        counts[idx] = counts[idx] == 0 ? 0 : -Math.abs(counts[idx])
+      })
+      return counts
+    }, [])
+
+    // get dateBucketed video counts by format
+    const videoFormatData =
+      videoData[
+        fmt
+          .toLowerCase()
+          .split(' ')
+          .join('')
+      ]
+
+    const videoCounts = dateBuckets.map((dateBucketKey) => {
+      if (!!videoFormatData) {
+        return videoFormatData[dateBucketKey] || 0
+      }
+      return 0
+    })
+
+    const maxCount = (array) => Math.max.apply(null, array.map(Math.abs))
+
+    return {
+      maxVideo: maxCount(videoCounts),
+      maxEngagement: maxCount(engagementCounts),
+      labels: dateBuckets.map(
+        (db, idx) => `${db[0]}${/\d/.test(db) ? idx : ''}`
+      ),
+      label: fmt,
+      datasets: [
+        {
+          data: videoCounts,
+          label: 'Videos',
+          backgroundColor: '#2FD7C4',
+          display: false,
+        },
+        {
+          data: engagementCounts,
+          label: 'Engagement',
+          backgroundColor: '#5292E5',
+        },
+      ],
+    }
+  })
 }
 
 export {

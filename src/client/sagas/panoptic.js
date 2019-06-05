@@ -46,14 +46,12 @@ function* getVideoReleasesData({ data }) {
       call(getDataFromApi, undefined, buildApiUrl('/metric', options), 'GET'),
     ])
 
-    console.log('api return', videoCountData, engagementCountData)
+    const chartData = convertVideoEngagementData(
+      videoCountData,
+      engagementCountData
+    )
 
-    const test = convertVideoEngagementData(videoCountData, engagementCountData)
-
-    const mock = yield call(getMockPanopticDataApi)
-
-    yield put(actions.getVideoReleasesDataSuccess(mock.videoReleasesData))
-
+    yield put(actions.getVideoReleasesDataSuccess(chartData))
   } catch (err) {
     console.log(err)
     yield put(actions.getVideoReleasesDataError(err))
@@ -308,8 +306,6 @@ function* getTopPerformingFormatData({ data = {} }) {
       call(getDataFromApi, dateBucketedOptions),
       call(getDataFromApi, options),
     ])
-
-    const payload = yield call(getMockPanopticDataApi)
 
     if (!!dataWithDateBuckets.data && !!dataWithoutDateBuckets.data) {
       const lineChartData = convertDataIntoDatasets(

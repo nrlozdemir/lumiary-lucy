@@ -80,8 +80,53 @@ const VideoReleasesBarChartModule = (props) => {
   } = props
 
   if (!data) return false
+
+  const maxSteps = data.reduce(
+    (max, obj) => ({
+      engagement:
+        obj.maxEngagement > max.engagement ? obj.maxEngagement : max.engagement,
+      vids: obj.maxVideo > max.vids ? obj.maxVideo : max.vids,
+    }),
+    { vids: 0, engagement: 0 }
+  )
+
+  const stepSize =
+    maxSteps.engagement / 2 !== 0 ? maxSteps.engagement / 2 : 50000
+
+  // normalize video counts in relation to engagement
+  const videoNormalizer =
+    maxSteps.engagement / maxSteps.vids !== 0
+      ? maxSteps.engagement / maxSteps.vids
+      : 50000
+
+  const normalizedData = data.map((data) => ({
+    ...data,
+    datasets: [
+      {
+        ...data.datasets[0],
+        data: data.datasets[0].data.map((v) => v * videoNormalizer),
+      },
+      { ...data.datasets[1] },
+    ],
+  }))
+
   const barChartOptions = {
     ...options,
+    tooltips: {
+      ...options.tooltips,
+      callbacks: {
+        title: function(tooltipItem, data) {
+          const value = Math.abs(tooltipItem[0].yLabel)
+          if (tooltipItem[0].yLabel < 0) {
+            return `${~~(value / 1000)}${value >= 1000 ? 'k' : ''} Engagement`
+          }
+          return `${value / videoNormalizer} Videos`
+        },
+        label: function() {
+          return null
+        },
+      },
+    },
     scales: {
       xAxes: [
         {
@@ -99,10 +144,15 @@ const VideoReleasesBarChartModule = (props) => {
       yAxes: [
         {
           ...options.scales.yAxes[0],
+          ticks: {
+            ...options.scales.yAxes[0].ticks,
+            stepSize,
+          },
         },
       ],
     },
   }
+
   return (
     <Module
       moduleKey={moduleKey}
@@ -112,21 +162,21 @@ const VideoReleasesBarChartModule = (props) => {
       legend={renderLegend(legend, legendEnd)}
       isEmpty={isEmpty}
     >
-      <div
-        className={barChartContainer}
-        data-first-legend={legend[0].label}
-        data-second-legend={legend[1].label}
-        style={{
-          background: colors.moduleBackground,
-          color: colors.textColor,
-        }}
-      >
-        <div className={barContainerClass}>
-          {!!data && data.length && (
+      {!!data && !!data.length ? (
+        <div
+          className={barChartContainer}
+          data-first-legend={legend[0].label}
+          data-second-legend={legend[1].label}
+          style={{
+            background: colors.moduleBackground,
+            color: colors.textColor,
+          }}
+        >
+          <div className={barContainerClass}>
             <div className={style.wrapperBarChart}>
               <Bar
                 key={Math.random()}
-                data={data[0]}
+                data={normalizedData[0]}
                 options={{
                   ...wrapperBarOptions,
                   chartArea: {
@@ -144,6 +194,23 @@ const VideoReleasesBarChartModule = (props) => {
                         ticks: {
                           ...wrapperBarOptions.scales.yAxes[0].ticks,
                           fontColor: colors.labelColor,
+                          stepSize,
+                          callback: function(value, index, values) {
+                            if (value == 0) {
+                              return 0
+                            }
+                            const val = Math.abs(value / 1000)
+                            const val2 = values[index] / videoNormalizer
+
+                            if (value < 0) {
+                              return Math.abs(value) === maxSteps.engagement
+                                ? `${~~val}${
+                                    Math.abs(value) >= 1000 ? 'k' : ''
+                                  }`
+                                : ''
+                            }
+                            return val2 === maxSteps.vids ? `${val2}v` : ''
+                          },
                         },
                         gridLines: {
                           ...wrapperBarOptions.scales.yAxes[0].gridLines,
@@ -158,38 +225,39 @@ const VideoReleasesBarChartModule = (props) => {
                 plugins={plugins}
               />
             </div>
-          )}
-          <div className={style.groupChartsWrapper}>
-            {!!data &&
-              !!data.length &&
-              data.map((chartData, idx) => (
-                <div className="col-3" key={`xxx666xxx-${idx}`}>
-                  <div className={style.chartSection}>
-                    <Bar
-                      key={Math.random()}
-                      data={chartData}
-                      options={barChartOptions}
-                      datasetKeyProvider={datasetKeyProvider}
-                    />
+
+            <div className={style.groupChartsWrapper}>
+              {!!data &&
+                !!data.length &&
+                normalizedData.map((chartData, idx) => (
+                  <div className="col-3" key={`xxx666xxx-${idx}`}>
+                    <div className={style.chartSection}>
+                      <Bar
+                        key={`vrbcmc-${idx}`}
+                        data={chartData}
+                        options={barChartOptions}
+                        datasetKeyProvider={datasetKeyProvider}
+                      />
+                    </div>
+                    <div className={style.chartSectionBadge}>
+                      {!!chartData.label && (
+                        <span
+                          style={{
+                            background: colors.labelBackground,
+                            color: colors.labelColor,
+                            boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                          }}
+                        >
+                          {chartData.label}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                  <div className={style.chartSectionBadge}>
-                    {!!chartData.label && (
-                      <span
-                        style={{
-                          background: colors.labelBackground,
-                          color: colors.labelColor,
-                          boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                        }}
-                      >
-                        {chartData.label}
-                      </span>
-                    )}
-                  </div>
-                </div>
-              ))}
+                ))}
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </Module>
   )
 }
