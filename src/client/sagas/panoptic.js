@@ -40,7 +40,7 @@ function* getColorTemperatureData({ data }) {
 
     const response = yield call(
       getDataFromApi,
-      null,
+      { baseUrl: false },
       `/brand/${brand.uuid}/compare/?daterange=${dateRange}`,
       'GET'
     )
@@ -49,10 +49,7 @@ function* getColorTemperatureData({ data }) {
       labels,
       platforms,
       data: colorTempData,
-    } = convertColorTempToDatasets(
-      response,
-      colorTemperature
-    )
+    } = convertColorTempToDatasets(response, colorTemperature)
 
     yield put(
       actions.getColorTemperatureDataSuccess({

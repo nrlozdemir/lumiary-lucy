@@ -261,7 +261,6 @@ class LibraryDetailShotByShot extends React.Component {
     const { radarData, shotInfo } = this.props
     const { selectedImage, viewportShots, sliderMarks, shotsTotalWidth } = this.state
 
-    
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {

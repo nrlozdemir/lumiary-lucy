@@ -2,9 +2,10 @@ import axios from 'axios'
 import { API_ROOT, API_VERSION } from 'Utils/globals'
 import qs from 'qs'
 
-export function getDataFromApi(parameters, url, type) {
+export function getDataFromApi(parameters = {}, url, type) {
   return ajax({
     url: url || parameters.url,
+    baseUrl: parameters.baseUrl || false,
     method: type || parameters.requestType || 'POST',
     params: qs.stringify(parameters),
   }).then((response) => {
@@ -78,6 +79,7 @@ export function ajax({
   method = 'post',
   params: data = null,
   token,
+  baseUrl,
   url,
   headers = null,
   responseType = null,
@@ -107,7 +109,9 @@ export function ajax({
         throw new Error('url must be defined')
       }
       url =
-        url.indexOf('https://') > -1 ? url : `${API_ROOT}/${API_VERSION}${url}`
+        baseUrl || url.indexOf('https://') > -1
+          ? url
+          : `${API_ROOT}/${API_VERSION}${url}`
       headers = token ? { Authorization: `Bearer ${token}` } : headers
     } catch (error) {
       resolve({

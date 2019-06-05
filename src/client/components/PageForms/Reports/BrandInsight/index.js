@@ -5,7 +5,7 @@ import Input from 'Components/Form/Input'
 import cx from 'classnames'
 import { compose } from 'redux'
 import { required } from 'Utils/validate'
-import RightArrowCircle from "Components/Icons/RightArrowCircle";
+import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 
 import style from '../style.scss'
 
@@ -32,7 +32,7 @@ const ReportsForm = (props) => {
                 <p className={style.label}>Choose a Brand</p>
                 <Field
                   component={Select}
-                  options={selectOptionsBrand}
+                  options={props.brands}
                   id="brand"
                   name="brand"
                   placeholder="Select One"
@@ -100,7 +100,7 @@ const ReportsForm = (props) => {
               >
                 Generate Report
                 <div className={style.icon}>
-                  <RightArrowCircle></RightArrowCircle>
+                  <RightArrowCircle />
                 </div>
               </button>
             </div>

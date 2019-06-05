@@ -17,6 +17,7 @@ import marketviewTopPerformingProperties from 'Api/mocks/marketviewPlatformTopPe
 import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json'
 
 import {
+  ucfirst,
   compareSharesData,
   convertMultiRequestDataIntoDatasets,
   getBrandAndCompetitors,
@@ -25,7 +26,7 @@ import {
   getMaximumValueIndexFromArray,
 } from 'Utils'
 import { dayOfWeek } from 'Utils/globals'
-import { getDataFromApi } from 'Utils/api'
+import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 function getCompetitorVideosApi() {
   return axios('/').then((res) => marketviewCompetitorVideosData)
@@ -186,8 +187,53 @@ function* getSimilarProperties(props) {
 
 function* getBubbleChartData() {
   try {
-    const payload = yield call(getBubbleChartApi)
-    yield put(actions.getBubleChartSuccess(payload))
+    const { brand } = yield select(selectAuthProfile)
+
+    const competitors =
+      !!brand.competitors &&
+      !!brand.competitors.length &&
+      brand.competitors.map((c) => c.uuid)
+
+    const options = {
+      competitors,
+      metric: 'shares',
+      property: 'color',
+      daterange: 'month',
+    }
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/brand/${brand.uuid}/platforms`, options),
+      'GET'
+    )
+
+    if (
+      !!response &&
+      !!response.twitter &&
+      !!response.facebook &&
+      !!response.instagram &&
+      !!response.youtube
+    ) {
+      // convert response into array of { name, value, color }
+      const bubbleData = Object.keys(response).map((pf) =>
+        Object.keys(response[pf].color).reduce(
+          (val, colorKey) => {
+            const colorMetric = response[pf].color[colorKey]
+            if (colorMetric > val.value) {
+              val.value = colorMetric
+              val.color = colorKey
+            }
+            return val
+          },
+          { name: ucfirst(pf), value: 0, color: null }
+        )
+      )
+
+      yield put(actions.getBubleChartSuccess(bubbleData))
+    } else {
+      throw 'Error fetching MarketView/BubbleChartData'
+    }
   } catch (error) {
     yield put(actions.getBubleChartFailure(error))
   }
@@ -307,8 +353,8 @@ function* getTotalViewsData({ data }) {
     const dateBucket = getDateBucketFromRange(dateRange)
 
     const [barData, doughnutData] = yield all([
-      call(getDataFromApi, null, `${url}&datebucket=${dateBucket}`, 'GET'),
-      call(getDataFromApi, null, `${url}&datebucket=none`, 'GET'),
+      call(getDataFromApi, undefined, `${url}&datebucket=${dateBucket}`, 'GET'),
+      call(getDataFromApi, undefined, `${url}&datebucket=none`, 'GET'),
     ])
 
     const convertedBarData =
