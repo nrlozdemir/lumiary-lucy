@@ -101,10 +101,10 @@ class LibraryDetailShotByShot extends React.Component {
       element => (element.endTime - element.startTime).toFixed(4)
     )
     const totalDuration = (shots[shots.length - 1].endTime).toFixed(4)
-    
+
     //first index and last index not included
     const dividedDuration = (Math.round(totalDuration / (tickCount))).toFixed(4)
-    
+
     //create marks
     for (let i = 0; i < tickCount - 1; i++) {
       sliderMarks.push(this.secondToTime(i * dividedDuration))
@@ -134,7 +134,7 @@ class LibraryDetailShotByShot extends React.Component {
         }
       }
     })
-    
+
     //create viewports including max 11 items from shots, fit size to min and max
     const totalViewports = (shots.length / tickCount).toFixed(2)
     for (let v = 0; v < totalViewports; v++) {
@@ -176,7 +176,7 @@ class LibraryDetailShotByShot extends React.Component {
         }
       })
 
-      viewportTempShots[v].length === tickCount && 
+      viewportTempShots[v].length === tickCount &&
         Object.values(viewportTempShots[v]).map((el, i) => {
         const findDiff = parseFloat(
           ((viewportLeftOver[v]  / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
@@ -221,7 +221,7 @@ class LibraryDetailShotByShot extends React.Component {
         const findTrimValue = parseFloat((viewportTempShotsTotalWidth[v] - viewportSize).toFixed(4))
 
         viewportTempShots[v].length === tickCount && Object.values(viewportTempShots[v]).map((el, i) => {
-          if (el.width > Math.floor(el.width) 
+          if (el.width > Math.floor(el.width)
             && el.width - Math.floor(el.width) >= findTrimValue
             && viewportTempShotsTotalWidth[v] !== viewportSize
           ) {
@@ -340,7 +340,7 @@ class LibraryDetailShotByShot extends React.Component {
                               >
                                 <div className="col-5-no-gutters">
                                   <img
-                                    src={`${mediaUrl}lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${shotInfo.shot.frames[i]}`}
+                                    src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${shotInfo.shot.frames[i]}`}
                                     className="img-responsive"
                                   />
                                 </div>
@@ -458,8 +458,8 @@ class LibraryDetailShotByShot extends React.Component {
                                 </div>
                                 <img
                                   src={shot.image}
-                                  style={{ 
-                                    height: '160px' 
+                                  style={{
+                                    height: '160px'
                                   }}
                                   className={style.hover}
                                   onClick={() => { this.handleClick(i) }}

@@ -128,11 +128,11 @@ export class VideoCard extends PureComponent {
                       ref={this.video}
                       loop
                       muted
-											poster={mediaUrl + video.thumbNail}
+											poster={mediaUrl + '/' + video.thumbNail}
                       controls={false}
                     >
                       <source
-												src={`${mediaUrl}lumiere/${userUuid}/${video.uuid}.mp4`}
+												src={`${mediaUrl}/lumiere/${userUuid}/${video.uuid}.mp4`}
                         type="video/mp4"
                       />
                     </video>
@@ -149,7 +149,7 @@ export class VideoCard extends PureComponent {
                 <div
                   className={style.blurredImage}
                   style={{
-										backgroundImage: `url(${mediaUrl}${video.thumbNail})`,
+										backgroundImage: `url(${mediaUrl}/${video.thumbNail})`,
                     border: `1px solid ${colors.videoBorder}`,
                   }}
                 />

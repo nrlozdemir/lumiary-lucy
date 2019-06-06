@@ -61,7 +61,7 @@ function getShotByShotApi({ LibraryDetailId }) {
 function getShotInfoRequestApi({ LibraryDetailId }) {
   const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/2203807d-50e0-4c4f-8290-08b7de4ce1bf/shots/1'
   const FRAMES_INFO = '/brand/6421cdac-d5eb-4427-a267-b9be2e232177/video/e2843ddb-4ba1-4062-acd9-2ffbe302a183/shots/0'
-  
+
   return ajax({
     url: URL,
     method: 'GET',
