@@ -39,6 +39,7 @@ module.exports = {
       'history',
       'immutability-helper',
       'immutable',
+      'jwt-decode',
       'lodash',
       'swiper',
       'react-custom-scrollbars',
