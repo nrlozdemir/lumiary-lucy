@@ -13,8 +13,9 @@ import {
   convertMultiRequestDataIntoDatasets,
   getBrandAndCompetitors,
   getFilteredCompetitors,
+  convertVideoEngagementData,
 } from 'Utils'
-import { getDataFromApi } from 'Utils/api'
+import { getDataFromApi, buildApiUrl } from 'Utils/api'
 import _ from 'lodash'
 
 function getGeneratedReportApi() {
@@ -90,11 +91,38 @@ function* getTopPerformingVideos() {
   }
 }
 
-function* getVideoReleasesBarChart() {
+function* getVideoReleasesBarChart({ data: { report } }) {
   try {
-    let { videoReleasesData } = yield call(getGeneratedReportApi)
-    yield put(actions.getVideoReleasesBarChartSuccess(videoReleasesData))
+    const { engagement, dateRange, platform } = report
+
+    const { brand } = yield select(selectAuthProfile)
+
+    const options = {
+      platform,
+      property: 'format',
+      daterange: dateRange,
+      brandUuid: brand.uuid,
+    }
+
+    const [videoCountData, engagementCountData] = yield all([
+      call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl(`/brand/${brand.uuid}/count`, options),
+        'GET'
+      ),
+      call(getDataFromApi, undefined, buildApiUrl('/metric', options), 'GET'),
+    ])
+
+    const chartData = convertVideoEngagementData(
+      videoCountData,
+      engagementCountData,
+      engagement
+    )
+
+    yield put(actions.getVideoReleasesBarChartSuccess(chartData))
   } catch (err) {
+    console.log(err)
     yield put(actions.getVideoReleasesBarChartFailure(err))
   }
 }

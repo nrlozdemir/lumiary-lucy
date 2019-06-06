@@ -595,10 +595,142 @@ const normalize = (input, min, max, low_range, high_range) => {
   return norm * scale_range + low_range
 }
 
-const getFilteredCompetitors = (competitors, report) =>
+const parseAverage = (payload) => {
+  let calculateAverage = Object.keys(payload).reduce((acc, key) => {
+    const keyName = key.substr(0, key.indexOf('.'))
+    if (key.includes('LibraryAverage')) {
+      acc[keyName] = { average: parseInt(payload[key]) }
+    }
+    if (key.includes('LibraryMax')) {
+      acc[keyName] = { max: parseInt(payload[key]) }
+    }
+    return acc
+  }, {})
 
+  Object.keys(payload.video).forEach((item) => {
+    let keyName = item.substr(0, item.indexOf('.'))
+    if (item.includes('diffFromLibrary')) {
+      calculateAverage[keyName] = {
+        ...calculateAverage[keyName],
+        diff: parseInt(payload.video[item]),
+      }
+    }
+    if (item.includes('value')) {
+      keyName = keyName.slice(0, keyName.length - 1)
+      calculateAverage[keyName] = {
+        ...calculateAverage[keyName],
+        value: parseInt(payload.video[item]),
+      }
+    }
+  })
+  console.log(calculateAverage)
+  return calculateAverage
+}
+
+const getFilteredCompetitors = (competitors, report) =>
   competitors.filter((uuid) => report.brands.indexOf(uuid) > -1)
 
+/* Converts the api responses from /metric & /brand/{brandUuid}/count
+ * into chart data structures that
+ * VideoReleases Vs Engagement will use (Panoptic/Reports)
+ * @videoData {api response} from /brand/{brandUuid}/count
+ * @engagementData {api response} from /metric
+ *** Expected Output Structure: ***
+  [{ 
+    datasets: {array} - 
+      [{ 
+        backgroundColor: string, 
+        data: array, 
+        display:bool, 
+        label: string 
+      }], 
+    label: string, 
+    labels: {array} [{string}],
+    maxVideo: {int}
+    maxEngagement: {int}
+  }]
+ */
+const convertVideoEngagementData = (
+  videoData,
+  engagementData,
+  metric = 'all'
+) => {
+  if (isEmpty(engagementData)) {
+    return []
+  }
+
+  const formats = Object.keys(engagementData).reduce((fmts, metricKey) => {
+    for (const fmtKey in engagementData[metricKey].format) {
+      if (fmts.indexOf(fmtKey) === -1) {
+        fmts.push(fmtKey)
+      }
+    }
+    return fmts
+  }, [])
+
+  let metricKeys = Object.keys(engagementData)
+
+  if (metric !== 'all') {
+    metricKeys.filter((m) => `${m}s` === metric)
+  }
+
+  const dateBuckets = Object.keys(
+    engagementData[metricKeys[0]].format[formats[0]]
+  )
+
+  return formats.map((fmt) => {
+    // sum up all engagement data from /metric by format and datebucket
+    const engagementCounts = metricKeys.reduce((counts, metric) => {
+      const fmtData = engagementData[metric].format[fmt]
+      Object.keys(fmtData).forEach((day, idx) => {
+        counts[idx] = Math.abs(counts[idx]) || 0
+        counts[idx] += fmtData[day]
+        counts[idx] = counts[idx] == 0 ? 0 : -Math.abs(counts[idx])
+      })
+      return counts
+    }, [])
+
+    // get dateBucketed video counts by format
+    const videoFormatData =
+      videoData[
+        fmt
+          .toLowerCase()
+          .split(' ')
+          .join('')
+      ]
+
+    const videoCounts = dateBuckets.map((dateBucketKey) => {
+      if (!!videoFormatData) {
+        return videoFormatData[dateBucketKey] || 0
+      }
+      return 0
+    })
+
+    const maxCount = (array) => Math.max.apply(null, array.map(Math.abs))
+
+    return {
+      maxVideo: maxCount(videoCounts),
+      maxEngagement: maxCount(engagementCounts),
+      labels: dateBuckets.map(
+        (db, idx) => `${db[0]}${/\d/.test(db) ? idx : ''}`
+      ),
+      label: fmt,
+      datasets: [
+        {
+          data: videoCounts,
+          label: 'Videos',
+          backgroundColor: '#2FD7C4',
+          display: false,
+        },
+        {
+          data: engagementCounts,
+          label: 'Engagement',
+          backgroundColor: '#5292E5',
+        },
+      ],
+    }
+  })
+}
 
 export {
   ucfirst,
@@ -620,4 +752,7 @@ export {
   getBrandAndCompetitors,
   getFilteredCompetitors,
   convertColorTempToDatasets,
+  addComma,
+  parseAverage,
+  convertVideoEngagementData,
 }

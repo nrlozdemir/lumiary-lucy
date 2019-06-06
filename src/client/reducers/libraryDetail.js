@@ -6,6 +6,13 @@ export const types = {
   GET_SELECTED_VIDEO_SUCCESS: 'LibraryDetail/GET_SELECTED_VIDEO_SUCCESS',
   GET_SELECTED_VIDEO_ERROR: 'LibraryDetail/GET_SELECTED_VIDEO_ERROR',
 
+  GET_SELECTED_VIDEO_AVERAGE_REQUEST:
+    'LibraryDetail/GET_SELECTED_VIDEO_AVERAGE_REQUEST',
+  GET_SELECTED_VIDEO_AVERAGE_SUCCESS:
+    'LibraryDetail/GET_SELECTED_VIDEO_AVERAGE_SUCCESS',
+  GET_SELECTED_VIDEO_AVERAGE_ERROR:
+    'LibraryDetail/GET_SELECTED_VIDEO_AVERAGE_ERROR',
+
   GET_BAR_CHART_REQUEST: 'LibraryDetail/GET_BAR_CHART_REQUEST',
   GET_BAR_CHART_SUCCESS: 'LibraryDetail/GET_BAR_CHART_SUCCESS',
   GET_BAR_CHART_FAILURE: 'LibraryDetail/GET_BAR_CHART_FAILURE',
@@ -21,6 +28,10 @@ export const types = {
   GET_SHOT_BY_SHOT_REQUEST: 'LibraryDetail/GET_SHOT_BY_SHOT_REQUEST',
   GET_SHOT_BY_SHOT_SUCCESS: 'LibraryDetail/GET_SHOT_BY_SHOT_SUCCESS',
   GET_SHOT_BY_SHOT_FAILURE: 'LibraryDetail/GET_SHOT_BY_SHOT_FAILURE',
+
+  GET_SHOT_INFO_REQUEST: 'LibraryDetail/GET_SHOT_INFO_REQUEST',
+  GET_SHOT_INFO_SUCCESS: 'LibraryDetail/GET_SHOT_INFO_SUCCESS',
+  GET_SHOT_INFO_FAILURE: 'LibraryDetail/GET_SHOT_INFO_FAILURE',
 }
 export const actions = {
   getSelectedVideoRequest: (payload) => ({
@@ -33,6 +44,18 @@ export const actions = {
   }),
   getSelectedVideoFailure: (error) => ({
     type: types.GET_SELECTED_VIDEO_FAILURE,
+    error,
+  }),
+  getSelectedVideoAverageRequest: (id) => ({
+    type: types.GET_SELECTED_VIDEO_AVERAGE_REQUEST,
+    id,
+  }),
+  getSelectedVideoAverageSuccess: (payload) => ({
+    type: types.GET_SELECTED_VIDEO_AVERAGE_SUCCESS,
+    payload,
+  }),
+  getSelectedVideoAverageFailure: (error) => ({
+    type: types.GET_SELECTED_VIDEO_AVERAGE_FAILURE,
     error,
   }),
   getBarChartRequest: (payload) => ({
@@ -83,6 +106,12 @@ export const actions = {
     type: types.GET_SHOT_BY_SHOT_FAILURE,
     payload,
   }),
+  getShotInfoRequest: (payload) => ({ type: types.GET_SHOT_INFO_REQUEST, payload }),
+  getShotInfoSuccess: (payload) => ({
+    type: types.GET_SHOT_INFO_SUCCESS,
+    payload,
+  }),
+  getShotInfoFailure: (error) => ({ type: types.GET_SHOT_INFO_FAILURE, error }),
 }
 
 export const initialState = fromJS({
@@ -94,9 +123,11 @@ export const initialState = fromJS({
     error: null,
   },
   shotByShotData: null,
+  shotInfoData: null,
   error: false,
   loading: false,
   selectedVideo: {},
+  selectedVideoAverage: [],
 })
 
 const libraryDetailReducer = (state = initialState, action) => {
@@ -108,6 +139,18 @@ const libraryDetailReducer = (state = initialState, action) => {
         .set('selectedVideo', fromJS(action.payload))
         .set('loading', fromJS(false))
     case types.GET_SELECTED_VIDEO_FAILURE:
+      return state
+        .set('error', fromJS(action.error))
+        .set('loading', fromJS(false))
+
+    case types.GET_SELECTED_VIDEO_AVERAGE_REQUEST:
+      return state.set('loading', fromJS(true))
+    case types.GET_SELECTED_VIDEO_AVERAGE_SUCCESS: {
+      return state
+        .set('selectedVideoAverage', fromJS(action.payload))
+        .set('loading', fromJS(false))
+    }
+    case types.GET_SELECTED_VIDEO_AVERAGE_FAILURE:
       return state
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))
@@ -158,6 +201,17 @@ const libraryDetailReducer = (state = initialState, action) => {
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))
 
+    case types.GET_SHOT_INFO_REQUEST:
+      return state.set('loading', fromJS(true))
+    case types.GET_SHOT_INFO_SUCCESS:
+      return state
+        .set('shotInfoData', fromJS(action.payload))
+        .set('loading', fromJS(false))
+    case types.GET_SHOT_INFO_FAILURE:
+      return state
+        .set('error', fromJS(action.error))
+        .set('loading', fromJS(false))
+
     default:
       return state
   }
@@ -166,6 +220,12 @@ const libraryDetailReducer = (state = initialState, action) => {
 export const selectLibraryDetailDomain = (state) => state.LibraryDetail
 export const selectLibraryDetailSelectedVideo = (state) =>
   state.LibraryDetail.get('selectedVideo')
+
+export const selectShotInfo = () =>
+  createSelector(
+    selectLibraryDetailSelectedVideo,
+    (substate) => substate.toJS()
+  )
 
 export const makeSelectLibraryDetail = () =>
   createSelector(

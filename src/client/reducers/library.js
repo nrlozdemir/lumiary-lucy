@@ -26,7 +26,7 @@ export const actions = {
     type: types.CLEAD_AND_LOAD_VIDEOS,
     payload,
   }),
-  loadVideosError: (error) => ({ type: types.LOAD_VIDEOS, error }),
+  loadVideosError: (error) => ({ type: types.LOAD_VIDEOS_ERROR, error }),
   setSelectedVideo: (payload) => ({ type: types.SET_SELECTED_VIDEO, payload }),
   changeFilter: (payload) => ({ type: types.CHANGE_FILTER, payload }),
 }

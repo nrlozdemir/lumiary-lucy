@@ -13,6 +13,7 @@ import {
   convertDataIntoDatasets,
   getMaximumValueIndexFromArray,
   convertColorTempToDatasets,
+  parseAverage,
 } from 'Utils/'
 import { selectAuthProfile } from 'Reducers/auth'
 import { chartColors } from 'Utils/globals'
@@ -42,6 +43,7 @@ function getColorTempApi({ LibraryDetailId }) {
   //this will use ajax function in utils/api when real data is provided
   return axios.get('/').then((res) => findIdDetail(mock, 1, 'ColorTempMock'))
 }
+
 function getShotByShotApi({ LibraryDetailId }) {
   const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/2203807d-50e0-4c4f-8290-08b7de4ce1bf/shots'
 
@@ -53,6 +55,31 @@ function getShotByShotApi({ LibraryDetailId }) {
       throw response.error
     }
     return response.data
+  })
+}
+
+function getShotInfoRequestApi({ LibraryDetailId }) {
+  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/2203807d-50e0-4c4f-8290-08b7de4ce1bf/shots/1'
+  const FRAMES_INFO = '/brand/6421cdac-d5eb-4427-a267-b9be2e232177/video/e2843ddb-4ba1-4062-acd9-2ffbe302a183/shots/0'
+  
+  return ajax({
+    url: URL,
+    method: 'GET',
+  }).then((response) => {
+    if (response.error) {
+      throw response.error
+    }
+    // get frames
+    return ajax({
+      url: FRAMES_INFO,
+      method: 'GET',
+    }).then((framesResponse) => {
+      if (framesResponse.error) {
+        throw framesResponse.error
+      }
+      response.data.shot.frames = framesResponse.data.shot.frames
+      return response.data
+    })
   })
 }
 
@@ -139,14 +166,14 @@ function* getColorTemperatureData({
 
     const response = yield call(
       getDataFromApi,
-      null,
+      undefined,
       buildApiUrl(`/brand/${brand.uuid}/compare`, options),
       'GET'
     )
 
     if (!!response && !!response.sentiments) {
       const { data: convertedData } = convertColorTempToDatasets(response)
-      
+
       yield put({
         type: types.GET_COLOR_TEMP_SUCCESS,
         payload: convertedData,
@@ -176,6 +203,17 @@ function* getShotByShot({ payload: { LibraryDetailId } }) {
   }
 }
 
+function* getShotInfoRequest({ ShotId }) {
+  try {
+    const payload = yield call(getShotInfoRequestApi, {
+      ShotId,
+    })
+    yield put(actions.getShotInfoSuccess(payload))
+  } catch (error) {
+    yield put(actions.getShotInfoFailure({ error }))
+  }
+}
+
 function* getSelectedVideo({ payload }) {
   try {
     const data = yield call(getOneVideo, {
@@ -187,10 +225,26 @@ function* getSelectedVideo({ payload }) {
   }
 }
 
+function* getVideoAverage({ id }) {
+  try {
+    const { brand } = yield select(selectAuthProfile)
+    const payload = yield call(getDataFromApi, {
+      url: `/brand/${brand.uuid}/video/${id}/metrics`,
+      requestType: 'GET',
+    })
+    yield put(actions.getSelectedVideoAverageSuccess(parseAverage(payload)))
+  } catch (error) {
+    console.log('error', error)
+    yield put(actions.getSelectedVideoAverageFailure({ error }))
+  }
+}
+
 export default [
   takeLatest(types.GET_BAR_CHART_REQUEST, getBarChart),
   takeLatest(types.GET_DOUGHNUT_CHART_REQUEST, getDoughnutChart),
   takeLatest(types.GET_COLOR_TEMP_REQUEST, getColorTemperatureData),
   takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),
   takeLatest(types.GET_SELECTED_VIDEO_REQUEST, getSelectedVideo),
+  takeLatest(types.GET_SHOT_INFO_REQUEST, getShotInfoRequest),
+  takeLatest(types.GET_SELECTED_VIDEO_AVERAGE_REQUEST, getVideoAverage),
 ]

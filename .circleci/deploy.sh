@@ -37,6 +37,7 @@ TASK_MEMORY=$(get_parameter task_memory)
 TASK_ROLE=$(get_parameter task_role)
 API_URL=$(get_env_parameter api_url)
 API_VERSION=$(get_env_parameter api_version)
+AWS_S3_MEDIA_BUCKET=$(get_parameter aws_s3_media_bucket)
 REDIS_HOST=$(get_env_parameter lumiere/redis_host)
 EXISTING_TASK=$(get_parameter deployment_checksum)
 
@@ -64,6 +65,10 @@ cat > /tmp/containerdef.json <<JSON
         "value": "${API_VERSION}"
       },
       {
+        "name": "AWS_S3_MEDIA_BUCKET",
+        "value": "${AWS_S3_MEDIA_BUCKET}"
+      },
+      {
         "name": "BASENAME",
         "value": "/"
       },
@@ -77,7 +82,7 @@ cat > /tmp/containerdef.json <<JSON
       },
       {
         "name": "MEDIA_BUCKET",
-        "value": "quickframe-media-${CIRCLE_BRANCH}"
+        "value": "${AWS_S3_MEDIA_BUCKET}"
       },
       {
         "name": "NODE_ENV",

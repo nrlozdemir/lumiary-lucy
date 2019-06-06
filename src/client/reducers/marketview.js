@@ -244,7 +244,11 @@ export const initialState = fromJS({
     loading: false,
     error: null,
   },
-  bubbleChartData: [],
+  bubbleChartData: {
+    data: [],
+    loading: false,
+    error: null,
+  },
   pacingChartData: {
     data: {},
     loading: false,
@@ -318,16 +322,19 @@ const marketviewReducer = (state = initialState, action) => {
         .setIn(['competitorTopVideos', 'error'], fromJS(action.error))
         .setIn(['competitorTopVideos', 'loading'], fromJS(false))
 
+    // BUBBLE CHART
     case types.GET_MARKETVIEW_BUBBLECHART_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['bubbleChartData', 'loading'], fromJS(true))
+
     case types.GET_MARKETVIEW_BUBBLECHART_SUCCESS:
-      return state
-        .set('bubbleChartData', fromJS(action.payload))
-        .set('loading', fromJS(false))
+  return state
+        .setIn(['bubbleChartData', 'data'], fromJS(action.payload))
+        .setIn(['bubbleChartData', 'loading'], fromJS(false))
+
     case types.GET_MARKETVIEW_BUBBLECHART_FAILURE:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['bubbleChartData', 'error'], fromJS(action.error))
+        .setIn(['bubbleChartData', 'loading'], fromJS(false))
 
     // PACING CHART
     case types.GET_MARKETVIEW_PACINGCHART_REQUEST:
