@@ -12,13 +12,17 @@ const PercentageBarGraph = ({
   width = 238,
   height = 44,
   barWidth = 3,
-  barSpaceWidth = 2
+	barSpaceWidth = 2,
+	percentageDataSet
 }) => {
-  const percentageData = {
+	const percentageData = (!percentageDataSet) 
+	? {
     "datasets": [{
       "data": createDataset(percentage)
     }]
-  }
+	} 
+	: percentageDataSet
+	
   return (
 		<div className={style.percentageContainer}>
 			{!disableLabels && <div className={style.percentage}>{percentage}</div>}

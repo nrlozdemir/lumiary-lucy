@@ -25,6 +25,19 @@ const ContentVitalityScoreModule = ({
   flattenLastSpace,
   options,
 }) => {
+  const dataOverride = {
+    datasets: [
+      {
+        data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+      },
+      {
+        data: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0]
+      },
+    ]
+  }
+
+  console.log('data', data)
+
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -81,8 +94,17 @@ const ContentVitalityScoreModule = ({
                   />
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={33.4}
+                    percentage={100}
                     color="blue"
+                    percentageDataSet={
+                      {
+                        datasets: [
+                          {
+                            data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+                          }
+                        ]
+                      }
+                    }
                   />
                 </div>
                 <div className={percentageCol}>
@@ -104,9 +126,17 @@ const ContentVitalityScoreModule = ({
                   />
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={40.1}
+                    percentage={100}
                     color="grey"
-                  />
+                    percentageDataSet={
+                      {
+                        datasets: [
+                          {
+                            data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+                          }
+                        ]
+                      }
+                    }/>
                 </div>
                 <div className={percentageCol}>
                   <div
@@ -121,8 +151,17 @@ const ContentVitalityScoreModule = ({
                   </div>
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={46.8}
+                    percentage={100}
                     color="green"
+                    percentageDataSet={
+                      {
+                        datasets: [
+                          {
+                            data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+                          }
+                        ]
+                      }
+                    }
                   />
                 </div>
               </div>
