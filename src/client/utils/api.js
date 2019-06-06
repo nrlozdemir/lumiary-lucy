@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { API_ROOT, API_VERSION } from 'Utils/globals'
+import { API_ROOT, API_VERSION, QAPI_ROOT, QAPI_VERSION, } from 'Utils/globals'
 import qs from 'qs'
 
 export function getDataFromApi(parameters = {}, url, type) {
@@ -46,6 +46,10 @@ export const buildApiUrl = (url, params) => {
   }
 
   return requestUrl
+}
+
+export const buildQApiUrl = url => {
+  return `${QAPI_ROOT}/${QAPI_VERSION}${url}`
 }
 
 export const baseRequest = (token, method) => {
