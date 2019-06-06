@@ -132,7 +132,7 @@ export class LibraryDetail extends React.Component {
           <LibraryDetailChartHeader
             barChartData={barChartData}
             selectedVideoAverage={selectedVideoAverage}
-            videoUrl={`${mediaUrl}lumiere/${userUuid}/${uuid}.mp4`}
+            videoUrl={`${mediaUrl}/lumiere/${userUuid}/${uuid}.mp4`}
             title={title}
             socialIcon={socialIcon}
             cvScore={cvScore}
