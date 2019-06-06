@@ -13,13 +13,24 @@ class ContentVitalityScore extends React.Component {
       data: { data, loading, error },
     } = this.props
 
+    const dataOverride = {
+      datasets: [
+        {
+          data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+        },
+        {
+          data: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0]
+        },
+      ]
+    }
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <ContentVitalityScoreModule
-            data={data}
+            data={dataOverride}
             moduleKey={'Reports/ContentVitalityScore'}
-            title="Content Vitality Score Based On Audience"
+            title="Content Vitality Score by Videos Produced Comparison"
             action={this.callBack}
             filters={[
               {

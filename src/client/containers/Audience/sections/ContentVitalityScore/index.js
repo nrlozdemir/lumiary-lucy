@@ -25,7 +25,7 @@ class ContentVitalityScore extends React.Component {
           <ContentVitalityScoreModule
             data={data}
             moduleKey={'Audience/ContentVitalityScore'}
-            title="Content Vitality Score Based On Audience"
+            title="Content Vitality Score by Videos Produced Comparison"
             action={this.callBack}
             filters={[
               {
