@@ -135,7 +135,7 @@ export class VideoCard extends PureComponent {
                       ref={this.video}
                       loop
                       muted
-                      poster={mediaUrl + '/' + video.thumbNail}
+                      poster={`${mediaUrl}${video.thumbNail}`}
                       controls={false}
                     >
                       <source
