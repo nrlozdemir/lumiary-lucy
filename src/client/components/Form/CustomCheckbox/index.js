@@ -23,9 +23,10 @@ const SelectBox = (props) => {
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => {
-        return props.names.map((field) => {
+        return props.names.map((field, idx) => {
           return (
             <div
+              key={idx}
               className={cx(style.selectBoxContainer, {
                 [style.selected]: props[field].input.value,
               })}

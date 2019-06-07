@@ -55,11 +55,14 @@ class HorizontalBarChart extends React.Component {
             alignItems: `${reverse ? 'flex-end' : 'flex-start'}`,
           }}
         >
-          {bars.data.map((bar) => this.renderBar(bar))}
+          {bars.data.map((bar, idx) => (
+            <React.Fragment key={idx}>{this.renderBar(bar)}</React.Fragment>
+          ))}
         </div>
         <div className={styles.grids}>
-          {grids.map((grid) => (
+          {grids.map((grid, idx) => (
             <div
+              key={idx}
               className={styles.grid}
               style={{ backgroundColor: colors.moduleBorder }}
             >

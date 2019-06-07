@@ -5,6 +5,7 @@ import { types, actions } from 'Reducers/reports'
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 import reportsDataMockData from 'Api/mocks/reportsMock.json'
 import reportsMockData from 'Api/mocks/reports.json'
+import querystring from 'querystring'
 
 import {
   randomKey,
@@ -117,12 +118,33 @@ function* deleteReport(data) {
 
 function* getContentVitalityScoreData() {
   try {
-    const payload = yield call(getReportsMockApi)
-    let shuffleData = payload.contentVitalityScoreData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getContentVitalityScoreDataSuccess(shuffleData))
+    const response = yield call((() => {
+      return getDataFromApi(
+        {}, 
+        `/report/compare/brands?${querystring.stringify({
+          "brands": [
+            "d65aa957-d094-4cf3-8d37-dafe50e752ea",
+            "1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6"
+          ],
+          "property": "cvScore",
+          "mode": "sumVideos",
+          "daterange": "3months",
+          "platform": "all"
+        })}`, 
+        'GET'
+      )
+      .then((response) => {
+        if(response.error) {
+          throw response.error
+        }
+
+        return response
+      })
+    }), {})
+
+    yield put(actions.getContentVitalityScoreDataSuccess(response))
   } catch (err) {
+    console.log(err)
     yield put(actions.getContentVitalityScoreDataError(err))
   }
 }

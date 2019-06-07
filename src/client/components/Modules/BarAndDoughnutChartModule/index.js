@@ -179,7 +179,7 @@ BarAndDoughnutChartModule.propTypes = {
   moduleKey: PropTypes.string.isRequired,
   title: PropTypes.string,
   subTitle: PropTypes.string,
-  legend: PropTypes.object,
+  legend: PropTypes.array,
   filters: PropTypes.array,
 }
 

@@ -3,6 +3,7 @@ import style from './style.scss'
 import classnames from 'classnames'
 import StackedPercentageChart from 'Components/Charts/StackedPercentageChart'
 import {createDataset} from './dummyData'
+const { fromJS } = require('immutable');
 
 const PercentageBarGraph = ({
   percentage,
@@ -13,7 +14,8 @@ const PercentageBarGraph = ({
   height = 44,
   barWidth = 3,
 	barSpaceWidth = 2,
-	percentageDataSet
+	percentageDataSet,
+	options = {},
 }) => {
 	const percentageData = (!percentageDataSet) 
 	? {
@@ -22,7 +24,7 @@ const PercentageBarGraph = ({
     }]
 	} 
 	: percentageDataSet
-	
+
   return (
 		<div className={style.percentageContainer}>
 			{!disableLabels && <div className={style.percentage}>{percentage}</div>}
@@ -49,7 +51,7 @@ const PercentageBarGraph = ({
 				xAxesFlatten={false}
 				flattenFirstSpace={0}
 				flattenLastSpace={0}
-				options={{
+				options={fromJS({
 					responsive: false,
 					color: color,
 					layout: {
@@ -91,7 +93,7 @@ const PercentageBarGraph = ({
 							}
 						]
 					}
-				}}
+				}).mergeDeep(options)}
 			/>
 			</div>
 			{!disableLabels && <div className={style.cvScoreLabel}>CV Score</div>}

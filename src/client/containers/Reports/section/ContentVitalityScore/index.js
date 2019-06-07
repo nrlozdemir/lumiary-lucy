@@ -1,4 +1,9 @@
 import React from 'react'
+import { createStructuredSelector } from 'reselect'
+import { connect } from 'react-redux'
+import { compose } from 'redux'
+
+import { makeSelectAuthProfile } from 'Reducers/auth'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'
 
@@ -13,22 +18,28 @@ class ContentVitalityScore extends React.Component {
       data: { data, loading, error },
     } = this.props
 
-    const dataOverride = {
-      datasets: [
-        {
-          data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-        },
-        {
-          data: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0]
-        },
-      ]
-    }
+    let yAxisMax = 0
+    const formattedData = Object.keys(data).reduce((accumulator, brandUuid) => {
+      const cvCountArray = Object.values(data[brandUuid])
+      const maxCount = Math.max(...cvCountArray)
+      yAxisMax = (maxCount > yAxisMax) ? maxCount : yAxisMax
+      accumulator.datasets.push({
+        data: cvCountArray
+      })
+      return accumulator
+    }, {
+      datasets: []
+    })
+    
+    const chartYAxisMax = (yAxisMax < 1000) ? Math.ceil(yAxisMax/100)*100 : Math.ceil(yAxisMax/1000)*1000
+    const chartYAxisStepSize = (yAxisMax < 1000) ? 100 : 1000
 
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <ContentVitalityScoreModule
-            data={dataOverride}
+            chartYAxisMax={chartYAxisMax}
+            data={formattedData}
             moduleKey={'Reports/ContentVitalityScore'}
             title="Content Vitality Score by Videos Produced Comparison"
             action={this.callBack}
@@ -57,13 +68,15 @@ class ContentVitalityScore extends React.Component {
                       callback: function(value, index, values) {
                         if (value === 0) {
                           return value + ' '
-                        } else if (value === 250) {
+                        } else if (value === chartYAxisMax) {
                           return value
                         } else {
                           return ''
                         }
                       },
+                      stepSize: chartYAxisStepSize,
                       fontColor: colors.textColor,
+                      max: chartYAxisMax,
                     },
                     gridLines: {
                       color: colors.chartStadiumBarBorder,
@@ -89,4 +102,14 @@ class ContentVitalityScore extends React.Component {
   }
 }
 
-export default ContentVitalityScore
+const mapStateToProps = createStructuredSelector({
+  profile: makeSelectAuthProfile(),
+})
+
+const withConnect = connect(
+  mapStateToProps,
+)
+
+export default compose(withConnect)(ContentVitalityScore)
+
+// export default ContentVitalityScore
