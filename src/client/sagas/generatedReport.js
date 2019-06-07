@@ -14,6 +14,7 @@ import {
   getBrandAndCompetitors,
   getFilteredCompetitors,
   convertVideoEngagementData,
+  convertColorTempToDatasets,
 } from 'Utils'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 import _ from 'lodash'
@@ -127,11 +128,37 @@ function* getVideoReleasesBarChart({ data: { report } }) {
   }
 }
 
-function* getColorTempData() {
+function* getColorTempData({
+  data: {
+    report: { brands, date: dateRange },
+    colorTemperature,
+  },
+}) {
   try {
-    let { colorTempData } = yield call(getGeneratedReportApi)
-    yield put(actions.getColorTempDataSuccess(colorTempData))
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      {},
+      `/brand/${brands[0]}/compare/?daterange=${dateRange}`,
+      'GET'
+    )
+
+    const {
+      labels,
+      platforms,
+      data: colorTempData,
+    } = convertColorTempToDatasets(response, colorTemperature)
+
+    yield put(
+      actions.getColorTempDataSuccess({
+        labels,
+        platforms,
+        data: colorTempData,
+      })
+    )
   } catch (err) {
+    console.log(err)
     yield put(actions.getColorTempDataFailure(err))
   }
 }

@@ -13,7 +13,11 @@ class ColorTemperature extends React.Component {
 
   render() {
     const {
-      data: { data },
+      data: {
+        data: { data, platforms, labels },
+        loading,
+        error,
+      },
       selects,
     } = this.props
 
@@ -23,27 +27,28 @@ class ColorTemperature extends React.Component {
       selects.values[moduleName] &&
       selects.values[moduleName][selectKey].value &&
       selects.values[moduleName][selectKey].value.label
+
     return (
       <ColorTemperatureModule
-        moduleClass={style.moduleContainer}
         extraClasses={style.colorChartContent}
         chartWrapperClass={style.colorTemperatureChartWrapper}
         borderLess
         verticalText
-        infoLabels={['Views', 'Likes', 'Comment', 'Shares']}
-        moduleKey={'BrandInsight/ColorTemperature'}
+        infoLabels={labels}
+        moduleKey={moduleName}
         data={data}
         title="Color Temperature / Sentiment Comparison"
-        action={this.callBack.bind(this)}
+        action={this.callBack}
+        selectValue={selectValue}
         filters={[
           {
             type: 'colorTemperature',
-            selectKey: 'PCT-asd',
+            selectKey: selectKey,
             placeHolder: 'Color Tempature',
           },
         ]}
         platforms={platforms}
-        selectValue={selectValue}
+        isEmpty={!loading && !data}
       />
     )
   }
