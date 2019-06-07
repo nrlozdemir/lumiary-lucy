@@ -15,6 +15,9 @@ class CompareShares extends React.Component {
     const {
       compareSharesData: { data, loading, error },
     } = this.props
+
+    console.log(data)
+    
     return (
       <RadarChartModule
         data={data || []}
