@@ -103,7 +103,7 @@ const RadarChartModule = ({
 }
 
 RadarChartModule.propTypes = {
-  data: PropTypes.any.isRequired,
+  data: PropTypes.any,
   moduleKey: PropTypes.string.isRequired,
   title: PropTypes.string,
   subTitle: PropTypes.string,

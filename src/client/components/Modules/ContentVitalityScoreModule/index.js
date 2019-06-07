@@ -24,19 +24,8 @@ const ContentVitalityScoreModule = ({
   flattenFirstSpace,
   flattenLastSpace,
   options,
+  chartYAxisMax = 100
 }) => {
-  const dataOverride = {
-    datasets: [
-      {
-        data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
-      },
-      {
-        data: [100, 90, 80, 70, 60, 50, 40, 30, 20, 10, 0]
-      },
-    ]
-  }
-
-  console.log('data', data)
 
   return (
     <ThemeContext.Consumer>
@@ -48,7 +37,7 @@ const ContentVitalityScoreModule = ({
           filters={filters}
           legend={legend}
         >
-          {data && data.datasets && (
+          {data && data.datasets && data.datasets.length > 0 && (
             <div
               className="col-12-no-gutters"
               style={{ colors: colors.textColor }}
@@ -100,11 +89,22 @@ const ContentVitalityScoreModule = ({
                       {
                         datasets: [
                           {
-                            data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+                            data: data.datasets[0].data
                           }
                         ]
                       }
                     }
+                    options={{
+                      scales: {
+                        yAxes: [
+                          {
+                            ticks: {
+                              max: chartYAxisMax,
+                            },
+                          },
+                        ],
+                      }
+                    }}
                   />
                 </div>
                 <div className={percentageCol}>
@@ -157,11 +157,22 @@ const ContentVitalityScoreModule = ({
                       {
                         datasets: [
                           {
-                            data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+                            data: data.datasets[1].data
                           }
                         ]
                       }
                     }
+                    options={{
+                      scales: {
+                        yAxes: [
+                          {
+                            ticks: {
+                              max: chartYAxisMax,
+                            },
+                          },
+                        ],
+                      }
+                    }}
                   />
                 </div>
               </div>
