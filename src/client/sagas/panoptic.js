@@ -260,10 +260,15 @@ function* getData() {
 
 function* getFlipCardsData() {
   try {
-    const metrics = yield call(getDataFromApi, {
-      url: '/metric',
-      requestType: 'GET',
-    })
+    const { brand } = yield select(selectAuthProfile)
+
+    const metrics = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl('/metric', { brandUuid: brand.uuid, platform: 'all' }),
+      'GET'
+    )
+
     const payloads = Object.assign(
       {},
       ...Object.keys(metrics).map((metric) => ({
