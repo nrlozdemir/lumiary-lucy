@@ -661,7 +661,7 @@ const convertVideoEngagementData = (
 
   const formats = Object.keys(engagementData).reduce((fmts, metricKey) => {
     for (const fmtKey in engagementData[metricKey].format) {
-      if (fmts.indexOf(fmtKey) === -1) {
+      if (fmts.indexOf(fmtKey) === -1 && fmtKey !== 'None') {
         fmts.push(fmtKey)
       }
     }
