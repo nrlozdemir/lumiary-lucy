@@ -5,7 +5,9 @@ import { socialIconSelector } from '../../utils'
 import { Link } from 'react-router-dom'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import { userUuid, mediaUrl } from 'Utils/globals'
+
+import { mediaUrl } from 'Utils/globals'
+
 import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 
 let hoverInReady
@@ -62,7 +64,14 @@ export class VideoCard extends PureComponent {
     })
   }
   render() {
-    const { video, options = options || {}, muted = true, id } = this.props
+    const {
+      video,
+      options = options || {},
+      muted = true,
+      id,
+      brandId,
+    } = this.props
+
     const { itCanPlay } = this.state
     const cardContainerClass = classnames(
       style.cardContainer,
@@ -128,11 +137,14 @@ export class VideoCard extends PureComponent {
                       ref={this.video}
                       loop
                       muted
-											poster={mediaUrl + '/' + video.thumbNail}
+                      poster={`${mediaUrl}${video.thumbNail}`}
                       controls={false}
                     >
                       <source
-												src={`${mediaUrl}/lumiere/${userUuid}/${video.uuid}.mp4`}
+                        src={`${mediaUrl}lumiere/${brandId}/${
+                          video.uuid
+                        }.mp4`}
+
                         type="video/mp4"
                       />
                     </video>
@@ -149,7 +161,7 @@ export class VideoCard extends PureComponent {
                 <div
                   className={style.blurredImage}
                   style={{
-										backgroundImage: `url(${mediaUrl}/${video.thumbNail})`,
+                    backgroundImage: `url(${mediaUrl}${video.thumbNail})`,
                     border: `1px solid ${colors.videoBorder}`,
                   }}
                 />
