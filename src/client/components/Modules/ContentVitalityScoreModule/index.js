@@ -36,12 +36,23 @@ const ContentVitalityScoreModule = ({
       uuid: brand,
     }
 
+    // this assignment of variables needs to be fixed up
     if(authProfile.brand.uuid === brand){
-      accumulator.brand_1 = thisBrand
+      accumulator.brand_1 = {
+        ...thisBrand,
+        name: authProfile.brand.name,
+      }
     } else if(brand !== 'other') {
-      accumulator.brand_2 = thisBrand
+      // authProfile.brand.comp
+      accumulator.brand_2 = {
+        ...thisBrand,
+        name: 'test2',
+      }
     } else {
-      accumulator.average = thisBrand
+      accumulator.average = {
+        ...thisBrand,
+        name: 'test1',
+      }
     }
 
     return accumulator
