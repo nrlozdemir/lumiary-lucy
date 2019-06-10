@@ -163,12 +163,12 @@ function* getPacingCardData({ data }) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
-    const { metric, dateRange } = data
+    const { metric, dateRange, platform } = data
 
     const options = {
       metric,
       dateRange,
-      platform: 'all',
+      platform,
       property: ['pacing'],
       dateBucket: 'none',
       display: 'percentage',

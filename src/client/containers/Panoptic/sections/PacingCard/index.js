@@ -23,6 +23,11 @@ class PacingCard extends React.Component {
         action={this.callBack}
         filters={[
           {
+            type: 'platform',
+            selectKey: 'PCT-pltf',
+            placeHolder: 'Platform',
+          },
+          {
             type: 'metric',
             selectKey: 'PCT-asd',
             placeHolder: 'Engagement',
