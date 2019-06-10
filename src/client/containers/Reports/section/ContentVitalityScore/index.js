@@ -14,52 +14,16 @@ class ContentVitalityScore extends React.Component {
       authProfile = {}
     } = this.props
 
-    const { bucketedBrands = {}, brandCvSummary = {}} = data
-
-    let yAxisMax = 0
-    const formattedData = Object.keys(bucketedBrands).reduce((accumulator, brandUuid) => {
-      const cvCountArray = Object.values(bucketedBrands[brandUuid])
-      const maxCount = Math.max(...cvCountArray)
-      yAxisMax = (maxCount > yAxisMax) ? maxCount : yAxisMax
-      accumulator.datasets.push({
-        data: cvCountArray
-      })
-      
-      if(!accumulator.brands[brandUuid]){
-        accumulator.brands[brandUuid] = {
-          name: '',
-          isCompetitor: false,
-        }
-      }
-
-      accumulator.brands[brandUuid].data = cvCountArray
-      if(authProfile.brand.uuid === brandUuid) {
-        accumulator.brands[brandUuid].name = authProfile.brand.name
-      } else {
-        authProfile.brand.competitors.forEach((competitor) => {
-          if(competitor.uuid === brandUuid){
-            accumulator.brands[brandUuid].name = competitor.name
-            accumulator.brands[brandUuid].isCompetitor = true
-          }
-        })
-      }
-
-      return accumulator
-    }, {
-      datasets: [],
-      brands: {}
-    })
-    
-    const chartYAxisMax = (yAxisMax < 1000) ? Math.ceil(yAxisMax/100)*100 : Math.ceil(yAxisMax/1000)*1000
-    const chartYAxisStepSize = (yAxisMax < 1000) ? 100 : 1000
+    const chartYAxisMax = 100
+    const chartYAxisStepSize = 25
 
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <ContentVitalityScoreModule
             chartYAxisMax={chartYAxisMax}
-            data={formattedData}
-            brandCvSummary={brandCvSummary}
+            data={data}
+            authProfile={authProfile}
             moduleKey={'Reports/ContentVitalityScore'}
             title="Content Vitality Score by Videos Produced Comparison"
             action={this.callBack}

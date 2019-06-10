@@ -12,7 +12,8 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 const percentageCol = cx('col-4-no-gutters', style.percentageCol)
 
 const ContentVitalityScoreModule = ({
-  data,
+  data = {},
+  authProfile = {},
   moduleKey,
   title,
   action,
@@ -28,27 +29,19 @@ const ContentVitalityScoreModule = ({
   brandCvSummary = {}
 }) => {
 
-  console.log('brandCvSummary', brandCvSummary)
-
-  const { brands = {} } = data
-
-  const formattedData = Object.keys(brands).reduce((accumulator, brand) => {
+  const formattedData = Object.keys(data).reduce((accumulator, brand) => {
 
     const thisBrand = {
-      ...brands[brand],
+      ...data[brand],
       uuid: brand,
     }
-    if(!thisBrand.isCompetitor){
-      accumulator.brand_1 = thisBrand
-    } else {
-      accumulator.brand_2 = thisBrand
-    }
 
-    if(accumulator.brand_1 && accumulator.brand_2){
-      accumulator.brand_1.data.forEach((datum, idx) => {
-        const average = (datum + accumulator.brand_2.data[idx]) / 2
-        accumulator.average.data.push(average)
-      })
+    if(authProfile.brand.uuid === brand){
+      accumulator.brand_1 = thisBrand
+    } else if(brand !== 'other') {
+      accumulator.brand_2 = thisBrand
+    } else {
+      accumulator.average = thisBrand
     }
 
     return accumulator
@@ -61,8 +54,10 @@ const ContentVitalityScoreModule = ({
     },
   })
 
+  console.log(data)
+  console.log(authProfile)
   console.log(formattedData)
-  console.log('data.datasets', data.datasets)
+
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -73,13 +68,13 @@ const ContentVitalityScoreModule = ({
           filters={filters}
           legend={legend}
         >
-          {data && data.datasets && data.datasets.length > 0 && (
+          {formattedData.brand_1 && formattedData.brand_2 && formattedData.average && (
             <div
               className="col-12-no-gutters"
               style={{ colors: colors.textColor }}
             >
               <div
-                data-vertical-title="Number Of Videos"
+                data-vertical-title="% with CV Score"
                 className={style.vitalityContainer}
               >
                 <LineChart
@@ -89,7 +84,11 @@ const ContentVitalityScoreModule = ({
                   backgroundColor={colors.chartBackground}
                   dataSet={{
                     labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                    datasets: [formattedData.brand_2, formattedData.brand_1],
+                    datasets: [{
+                      data: formattedData.brand_2.videoPercents
+                    }, {
+                      data: formattedData.brand_1.videoPercents
+                    }],
                   }}
                   removeTooltip={removeTooltip}
                   removePointRadius={removePointRadius}
@@ -119,13 +118,13 @@ const ContentVitalityScoreModule = ({
                   />
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={Math.round(brandCvSummary[formattedData.brand_1.uuid].sum/brandCvSummary[formattedData.brand_1.uuid].count).toFixed(1)}
+                    percentage={formattedData.brand_1.averageCvScore}
                     color="blue"
                     percentageDataSet={
                       {
                         datasets: [
                           {
-                            data: formattedData.brand_1.data
+                            data: formattedData.brand_1.videoPercents
                           }
                         ]
                       }
@@ -152,7 +151,7 @@ const ContentVitalityScoreModule = ({
                       boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                     }}
                   >
-                    {`${formattedData.average.name}`}
+                    {`Average`}
                   </div>
                   <div
                     className={style.divider}
@@ -162,13 +161,13 @@ const ContentVitalityScoreModule = ({
                   />
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={Math.round((brandCvSummary[formattedData.brand_1.uuid].sum + brandCvSummary[formattedData.brand_2.uuid].sum)/(brandCvSummary[formattedData.brand_1.uuid].count + brandCvSummary[formattedData.brand_2.uuid].count)).toFixed(1)}
+                    percentage={formattedData.average.averageCvScore}
                     color="grey"
                     percentageDataSet={
                       {
                         datasets: [
                           {
-                            data: formattedData.average.data
+                            data: formattedData.average.videoPercents
                           }
                         ]
                       }
@@ -199,13 +198,13 @@ const ContentVitalityScoreModule = ({
                   </div>
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={Math.round(brandCvSummary[formattedData.brand_2.uuid].sum/brandCvSummary[formattedData.brand_2.uuid].count).toFixed(1)}
+                    percentage={formattedData.brand_2.averageCvScore}
                     color="green"
                     percentageDataSet={
                       {
                         datasets: [
                           {
-                            data: formattedData.brand_2.data
+                            data: formattedData.brand_2.videoPercents
                           }
                         ]
                       }
