@@ -17,15 +17,12 @@ const getBrandKeysFromObject = () => {
 }
 
 class PredefinedReport extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      formValid: false,
-    }
-  }
+  checkboxValidation = () => {
+    const {
+      formData: { values },
+    } = this.props
 
-  checkboxValidation = (valid) => {
-    this.setState({ formValid: valid })
+    return !!values && !!values.length && values.indexOf(true) !== -1
   }
 
   goToReport = (values) => {
@@ -40,6 +37,8 @@ class PredefinedReport extends Component {
 
   render() {
     const { handleSubmitFunc, handleSubmit } = this.props
+
+    const formValid = this.checkboxValidation()
 
     return (
       <ThemeContext.Consumer>
@@ -64,10 +63,10 @@ class PredefinedReport extends Component {
 
                 <button
                   className={cx(style.selectionLink, {
-                    [style.active]: this.state.formValid,
+                    [style.active]: formValid,
                   })}
                   type="submit"
-                  disabled={!this.state.formValid}
+                  disabled={!formValid}
                   style={{
                     background: colors.modalButtonBackground,
                     color: colors.textColor,
@@ -87,8 +86,16 @@ class PredefinedReport extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  const { PredefinedReport } = state.form
+
+  return {
+    formData: PredefinedReport || {},
+  }
+}
+
 const connected = connect(
-  null,
+  mapStateToProps,
   { push }
 )(PredefinedReport)
 

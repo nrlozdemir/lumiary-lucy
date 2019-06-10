@@ -105,9 +105,15 @@ function* compareBrandSubmit({ payload }) {
 
 function* predefinedReportRequest({ payload }) {
   try {
-    console.log('getting report', payload)
-    const payload = yield call(getGeneratedReportApi)
-    yield put(actions.predefinedReportRequestSuccess(payload))
+    const { brand } = yield select(selectAuthProfile)
+
+    const url = `/brand/${brand.uuid}/predef/${payload}`
+
+    console.log('getting report with id = ', payload)
+
+    const response = yield call(getGeneratedReportApi)
+
+    yield put(actions.predefinedReportRequestSuccess(response))
   } catch (err) {
     yield put(actions.predefinedReportRequestError(err))
   }
@@ -120,6 +126,18 @@ function* deleteReport(data) {
   // } catch (err) {
   //   yield put(actions.loadDeleteReportError(err))
   // }
+}
+
+function* getPredefinedReportChartRequest({ payload }) {
+  try {
+    yield put({ type: PREDEFINED_REPORT_CHART_REQUEST_SUCCESS, payload: {} })
+  } catch (err) {
+    console.log(err)
+    yield put({
+      type: types.PREDEFINED_REPORT_CHART_REQUEST_ERROR,
+      payload: err.message,
+    })
+  }
 }
 
 function* getContentVitalityScoreData({ payload = {} }) {
@@ -248,4 +266,8 @@ export default [
     getPerformanceComparisonData
   ),
   takeLatest(types.LOAD_COLOR_COMPARISON_DATA, getColorComparisonData),
+  takeLatest(
+    types.PREDEFINED_REPORT_CHART_REQUEST,
+    getPredefinedReportChartRequest
+  ),
 ]

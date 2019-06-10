@@ -33,6 +33,12 @@ export const types = {
     'Reports/PREDEFINED_REPORT_REQUEST_SUCCESS',
   PREDEFINED_REPORT_REQUEST_ERROR: 'Reports/PREDEFINED_REPORT_REQUEST_ERROR',
 
+  PREDEFINED_REPORT_CHART_REQUEST: 'Reports/PREDEFINED_REPORT_CHART_REQUEST',
+  PREDEFINED_REPORT_CHART_REQUEST_SUCCESS:
+    'Reports/PREDEFINED_REPORT_CHART_REQUEST:SUCCESS',
+  PREDEFINED_REPORT_CHART_REQUEST_ERROR:
+    'Reports/PREDEFINED_REPORT_CHART_REQUEST:ERROR',
+
   GET_CONTENT_VITALITY_SCORE_DATA: 'Reports/GET_CONTENT_VITALITY_SCORE_DATA',
   GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS:
     'Reports/GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS',
@@ -109,9 +115,9 @@ export const actions = {
     type: types.COMPARE_BRAND_REQUEST_ERROR,
     error,
   }),
-  predefinedReportRequest: (values) => ({
+  predefinedReportRequest: (payload) => ({
     type: types.PREDEFINED_REPORT_REQUEST,
-    payload: values,
+    payload,
   }),
   predefinedReportRequestSuccess: (payload) => ({
     type: types.PREDEFINED_REPORT_REQUEST_SUCCESS,
@@ -173,6 +179,11 @@ export const actions = {
     type: types.LOAD_COLOR_COMPARISON_DATA_ERROR,
     error,
   }),
+
+  getPredefinedReportChartData: (data) => ({
+    type: types.PREDEFINED_REPORT_CHART_REQUEST,
+    payload: data,
+  }),
 }
 export const initialState = fromJS({
   reports: {
@@ -197,6 +208,7 @@ export const initialState = fromJS({
   },
   predefinedReportValues: {
     data: null,
+    chartData: null,
     error: false,
     loading: false,
   },
@@ -306,7 +318,7 @@ const reportsReducer = (state = initialState, action) => {
         .setIn(['comparebrandValues', 'loading'], fromJS(false))
     /** END submit brand insight form */
 
-    /** START submit brand insight form */
+    /** START Predefined Report form */
     case types.PREDEFINED_REPORT_REQUEST:
       return state.setIn(['predefinedReportValues', 'loading'], fromJS(true))
 
@@ -319,7 +331,24 @@ const reportsReducer = (state = initialState, action) => {
       return state
         .setIn(['predefinedReportValues', 'error'], fromJS(action.error))
         .setIn(['predefinedReportValues', 'loading'], fromJS(false))
-    /** END submit brand insight form */
+
+    case types.PREDEFINED_REPORT_REQUEST:
+      return state
+    // return state.setIn([
+    //   'predefinedReportValues',
+    //   'chartData',
+    //   fromJS({
+    //     ...state.predefinedReportValues.chartData,
+    //     ...action.payload,
+    //   }),
+    // ])
+
+    case types.PREDEFINED_REPORT_CHART_REQUEST_SUCCESS:
+      return state
+
+    case types.PREDEFINED_REPORT_REQUEST_ERROR:
+      return state
+    /** END Predefined Report form */
 
     /** START video comparison data */
     case types.LOAD_VIDEO_COMPARISON_DATA:

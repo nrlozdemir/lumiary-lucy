@@ -14,24 +14,31 @@ class ReportBuilder extends React.Component {
     const {
       match: { params },
     } = this.props
-    
+
     const { predefinedReportRequest } = this.props
 
     const id = params && params.id
 
     if (id) {
-      console.log('fetching predefined report with id =', id)
-
-      predefinedReportRequest({ id })
+      predefinedReportRequest(id)
     }
   }
 
   render() {
     const {
-      predefinedReportValues: { data: reportValues },
+      getPredefinedReportChartData,
+      predefinedReportValues: { data: reportValues, loading, chartData },
     } = this.props
 
     console.log('predefined report values =', reportValues)
+
+    if (loading) {
+      return <RouterLoading />
+    }
+
+    if (!loading && !reportValues) {
+      return <div>Empty Report</div>
+    }
 
     return <div>hi</div>
   }
