@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
-import moment from 'moment'
 import Select from 'Components/Form/Select'
-import Datepicker from 'Components/Datepicker'
 
 const LIKES_OPTIONS = [
 	{ value: 'Views', label: 'Views' },
@@ -53,11 +51,9 @@ const VIEW_OPTIONS = [
 ];
 
 const DATE_OPTIONS = [
-	{ value: 'Today', label: 'Today' },
 	{ value: 'Past Week', label: 'Past Week' },
 	{ value: 'Past Month', label: 'Past Month' },
 	{ value: 'Past 3 Months', label: 'Past 3 Months' },
-	{ value: 'custom', label: 'Custom' },
 ];
 
 class SelectFilters extends Component {
@@ -97,7 +93,7 @@ class SelectFilters extends Component {
 				platforms = 'All Platforms',
 				percent = '360',
 				views = 'Card',
-				date = 'Today'
+				date = 'Past Week'
 			} = {}
     } = this.props
 
@@ -183,26 +179,6 @@ class SelectFilters extends Component {
               onChange={(option) => this.handleChange(option, 'selectDate')}
               options={[...DATE_OPTIONS]}
             />
-            {selectDate && selectDate.value === 'custom' && (
-              <Datepicker
-                type={'range'}
-                apply={(value) => {
-                  const val = {
-                    value: {
-                      startDate: value.startDate,
-                      endDate: value.endDate,
-                    },
-                    label:
-                      moment(value.startDate).format('DD/MM/YYYY') +
-                      ' - ' +
-                      moment(value.endDate).format('DD/MM/YYYY'),
-                  }
-                  this.props.onChange && this.props.onChange('selectDate', val)
-                  handleSelectFilters('selectDate', val)
-                }}
-                back={() => handleSelectFilters('selectDate', null)}
-              />
-            )}
           </React.Fragment>
         )}
       </React.Fragment>
