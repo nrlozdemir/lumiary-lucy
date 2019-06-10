@@ -24,9 +24,45 @@ const ContentVitalityScoreModule = ({
   flattenFirstSpace,
   flattenLastSpace,
   options,
-  chartYAxisMax = 100
+  chartYAxisMax = 100,
+  brandCvSummary = {}
 }) => {
 
+  console.log('brandCvSummary', brandCvSummary)
+
+  const { brands = {} } = data
+
+  const formattedData = Object.keys(brands).reduce((accumulator, brand) => {
+
+    const thisBrand = {
+      ...brands[brand],
+      uuid: brand,
+    }
+    if(!thisBrand.isCompetitor){
+      accumulator.brand_1 = thisBrand
+    } else {
+      accumulator.brand_2 = thisBrand
+    }
+
+    if(accumulator.brand_1 && accumulator.brand_2){
+      accumulator.brand_1.data.forEach((datum, idx) => {
+        const average = (datum + accumulator.brand_2.data[idx]) / 2
+        accumulator.average.data.push(average)
+      })
+    }
+
+    return accumulator
+  }, {
+    brand_1: null,
+    brand_2: null,
+    average: {
+      data: [],
+      name: 'Average'
+    },
+  })
+
+  console.log(formattedData)
+  console.log('data.datasets', data.datasets)
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -53,7 +89,7 @@ const ContentVitalityScoreModule = ({
                   backgroundColor={colors.chartBackground}
                   dataSet={{
                     labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                    datasets: data.datasets,
+                    datasets: [formattedData.brand_2, formattedData.brand_1],
                   }}
                   removeTooltip={removeTooltip}
                   removePointRadius={removePointRadius}
@@ -73,7 +109,7 @@ const ContentVitalityScoreModule = ({
                       boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                     }}
                   >
-                    Male Audience
+                    {`${formattedData.brand_2.name}`}
                   </div>
                   <div
                     className={style.divider}
@@ -83,13 +119,13 @@ const ContentVitalityScoreModule = ({
                   />
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={100}
+                    percentage={Math.round(brandCvSummary[formattedData.brand_1.uuid].sum/brandCvSummary[formattedData.brand_1.uuid].count).toFixed(1)}
                     color="blue"
                     percentageDataSet={
                       {
                         datasets: [
                           {
-                            data: data.datasets[0].data
+                            data: formattedData.brand_1.data
                           }
                         ]
                       }
@@ -116,7 +152,7 @@ const ContentVitalityScoreModule = ({
                       boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                     }}
                   >
-                    Your Library
+                    {`${formattedData.average.name}`}
                   </div>
                   <div
                     className={style.divider}
@@ -126,17 +162,29 @@ const ContentVitalityScoreModule = ({
                   />
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={100}
+                    percentage={Math.round((brandCvSummary[formattedData.brand_1.uuid].sum + brandCvSummary[formattedData.brand_2.uuid].sum)/(brandCvSummary[formattedData.brand_1.uuid].count + brandCvSummary[formattedData.brand_2.uuid].count)).toFixed(1)}
                     color="grey"
                     percentageDataSet={
                       {
                         datasets: [
                           {
-                            data: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100]
+                            data: formattedData.average.data
                           }
                         ]
                       }
-                    }/>
+                    }
+                    options={{
+                      scales: {
+                        yAxes: [
+                          {
+                            ticks: {
+                              max: chartYAxisMax,
+                            },
+                          },
+                        ],
+                      }
+                    }}
+                  />
                 </div>
                 <div className={percentageCol}>
                   <div
@@ -147,17 +195,17 @@ const ContentVitalityScoreModule = ({
                       boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                     }}
                   >
-                    Female Audience
+                    {`${formattedData.brand_2.name}`}
                   </div>
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={100}
+                    percentage={Math.round(brandCvSummary[formattedData.brand_2.uuid].sum/brandCvSummary[formattedData.brand_2.uuid].count).toFixed(1)}
                     color="green"
                     percentageDataSet={
                       {
                         datasets: [
                           {
-                            data: data.datasets[1].data
+                            data: formattedData.brand_2.data
                           }
                         ]
                       }

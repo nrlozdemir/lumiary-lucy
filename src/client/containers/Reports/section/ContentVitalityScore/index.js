@@ -1,9 +1,4 @@
 import React from 'react'
-import { createStructuredSelector } from 'reselect'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
-
-import { makeSelectAuthProfile } from 'Reducers/auth'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'
 
@@ -16,19 +11,43 @@ class ContentVitalityScore extends React.Component {
   render() {
     const {
       data: { data, loading, error },
+      authProfile = {}
     } = this.props
 
+    const { bucketedBrands = {}, brandCvSummary = {}} = data
+
     let yAxisMax = 0
-    const formattedData = Object.keys(data).reduce((accumulator, brandUuid) => {
-      const cvCountArray = Object.values(data[brandUuid])
+    const formattedData = Object.keys(bucketedBrands).reduce((accumulator, brandUuid) => {
+      const cvCountArray = Object.values(bucketedBrands[brandUuid])
       const maxCount = Math.max(...cvCountArray)
       yAxisMax = (maxCount > yAxisMax) ? maxCount : yAxisMax
       accumulator.datasets.push({
         data: cvCountArray
       })
+      
+      if(!accumulator.brands[brandUuid]){
+        accumulator.brands[brandUuid] = {
+          name: '',
+          isCompetitor: false,
+        }
+      }
+
+      accumulator.brands[brandUuid].data = cvCountArray
+      if(authProfile.brand.uuid === brandUuid) {
+        accumulator.brands[brandUuid].name = authProfile.brand.name
+      } else {
+        authProfile.brand.competitors.forEach((competitor) => {
+          if(competitor.uuid === brandUuid){
+            accumulator.brands[brandUuid].name = competitor.name
+            accumulator.brands[brandUuid].isCompetitor = true
+          }
+        })
+      }
+
       return accumulator
     }, {
-      datasets: []
+      datasets: [],
+      brands: {}
     })
     
     const chartYAxisMax = (yAxisMax < 1000) ? Math.ceil(yAxisMax/100)*100 : Math.ceil(yAxisMax/1000)*1000
@@ -40,6 +59,7 @@ class ContentVitalityScore extends React.Component {
           <ContentVitalityScoreModule
             chartYAxisMax={chartYAxisMax}
             data={formattedData}
+            brandCvSummary={brandCvSummary}
             moduleKey={'Reports/ContentVitalityScore'}
             title="Content Vitality Score by Videos Produced Comparison"
             action={this.callBack}
@@ -102,14 +122,4 @@ class ContentVitalityScore extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  profile: makeSelectAuthProfile(),
-})
-
-const withConnect = connect(
-  mapStateToProps,
-)
-
-export default compose(withConnect)(ContentVitalityScore)
-
-// export default ContentVitalityScore
+export default ContentVitalityScore

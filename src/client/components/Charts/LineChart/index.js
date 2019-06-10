@@ -21,6 +21,7 @@ function addPercentage(number) {
 }
 
 function combineChartData(data, type = null) {
+  console.log(data)
   if (type === null || type === 'line') {
     return chartCombineDataset(data, lineOptions)
   } else if (type === 'lineStackedArea') {
@@ -255,7 +256,7 @@ class LineChart extends React.Component {
         fontWeight: 'bold',
       }
     }
-
+console.log(props)
     return (
       <React.Fragment>
         <Line
