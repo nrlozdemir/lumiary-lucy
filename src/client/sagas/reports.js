@@ -120,7 +120,7 @@ function* getContentVitalityScoreData() {
   try {
     const response = yield call((() => {
       return getDataFromApi(
-        {}, 
+        {},
         `/report/compare/brands?${querystring.stringify({
           "brands": [
             "d65aa957-d094-4cf3-8d37-dafe50e752ea",
@@ -130,7 +130,7 @@ function* getContentVitalityScoreData() {
           "mode": "sumVideos",
           "daterange": "3months",
           "platform": "all"
-        })}`, 
+        })}`,
         'GET'
       )
       .then((response) => {
@@ -186,7 +186,7 @@ function* getPerformanceComparisonData({ data: { metric, property, report } }) {
 
     const parameters = {
       url: '/report',
-      dateRange: '24hours',
+      dateRange: 'week',
       metric,
       property: [property],
       dateBucket: 'none',

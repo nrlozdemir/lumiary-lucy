@@ -42,7 +42,7 @@ export const defaultFilters = {
   talentAge: '10-',
   talentGender: 'male',
   colorTemperature: 'happy-sad',
-  dateRange: '24hours',
+  dateRange: 'week',
 }
 
 export const initialState = fromJS({
@@ -138,11 +138,9 @@ export const initialState = fromJS({
       { value: 'natural-synthetic', label: 'Natural / Synthetic' },
     ],
     dateRange: [
-      { value: '24hours', label: 'Today' },
       { value: 'week', label: 'Past Week' },
       { value: 'month', label: 'Past Month' },
       { value: '3months', label: 'Past 3 Months' },
-      { value: 'custom', label: 'Custom' },
     ],
   },
   values: {},

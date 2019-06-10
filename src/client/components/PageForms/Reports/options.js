@@ -22,7 +22,6 @@ export const selectOptionsEngagement = [
 ]
 
 export const selectOptionsDateRange = [
-  { value: '24hours', label: 'Today' },
   { value: 'week', label: 'Past Week' },
   { value: 'month', label: 'Past Month' },
   { value: '3months', label: 'Past 3 Months' },
