@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
 import { reduxForm, Fields } from 'redux-form'
 import cx from 'classnames'
 import { compose } from 'redux'
@@ -6,12 +7,15 @@ import style from '../style.scss'
 import { selectPredefinedBrands } from '../options'
 import SelectBox from '../../../Form/CustomCheckbox'
 import RightArrowCircle from 'Components/Icons/RightArrowCircle'
+import { randomKey } from 'Utils'
+import { push } from 'connected-react-router'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 const getBrandKeysFromObject = () => {
   return selectPredefinedBrands.map((item) => item.value)
 }
+
 class PredefinedReport extends Component {
   constructor(props) {
     super(props)
@@ -24,13 +28,25 @@ class PredefinedReport extends Component {
     this.setState({ formValid: valid })
   }
 
+  goToReport = (values) => {
+    const { push } = this.props
+    console.log('go to report', values)
+    push(
+      `/reports/predefined-reports/${randomKey(4)}-${randomKey(4)}-${randomKey(
+        4
+      )}-${randomKey(4)}`
+    )
+  }
+
   render() {
+    const { handleSubmitFunc, handleSubmit } = this.props
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
           return (
             <form
-              onSubmit={this.props.handleSubmit(this.props.handleSubmitFunc)}
+              onSubmit={handleSubmit(this.goToReport)}
               style={{ color: colors.textColor }}
             >
               <div className={style.formArea}>
@@ -71,8 +87,13 @@ class PredefinedReport extends Component {
   }
 }
 
+const connected = connect(
+  null,
+  { push }
+)(PredefinedReport)
+
 export default compose(
   reduxForm({
     form: 'PredefinedReport',
   })
-)(PredefinedReport)
+)(connected)

@@ -103,14 +103,13 @@ function* compareBrandSubmit({ payload }) {
   }
 }
 
-function* predefinedReportSubmit(values) {
-  const id = `${randomKey(4)}-${randomKey(4)}-${randomKey(4)}-${randomKey(4)}`
+function* predefinedReportRequest({ payload }) {
   try {
+    console.log('getting report', payload)
     const payload = yield call(getGeneratedReportApi)
-    yield put(actions.predefinedReportFormSubmitSuccess(payload))
-    yield put(push(`/reports/predefined-reports/${id}`))
+    yield put(actions.predefinedReportRequestSuccess(payload))
   } catch (err) {
-    yield put(actions.predefinedReportFormSubmitError(err))
+    yield put(actions.predefinedReportRequestError(err))
   }
 }
 
@@ -237,7 +236,7 @@ export default [
   takeLatest(types.LOAD_MORE_REPORTS, getMoreReports),
   takeLatest(types.BRAND_INSIGHT_REQUEST, brandInsightSubmit),
   takeLatest(types.COMPARE_BRAND_REQUEST, compareBrandSubmit),
-  takeLatest(types.PREDEFINED_REPORT_REQUEST, predefinedReportSubmit),
+  takeLatest(types.PREDEFINED_REPORT_REQUEST, predefinedReportRequest),
   takeLatest(types.DELETE_REPORT, deleteReport),
   takeLatest(
     types.GET_CONTENT_VITALITY_SCORE_DATA,

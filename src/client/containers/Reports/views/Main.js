@@ -16,7 +16,7 @@ import ReportCards from '../section/ReportCardsModule'
 import ReactTable from 'react-table'
 import { selectOptions } from '../options'
 import style from '../style.scss'
-import { staticUrl } from "Utils/globals";
+import { staticUrl } from 'Utils/globals'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -77,6 +77,8 @@ class Reports extends Component {
   renderModalInside = () => {
     const { selectedReportCardKey } = this.state
     const {
+      brandInsightFormSubmit,
+      compareBrandFormSubmit,
       profile: { brand },
     } = this.props
 
@@ -95,7 +97,7 @@ class Reports extends Component {
       case 'brand-insights':
         return (
           <ReportsForm
-            handleSubmitFunc={this.props.brandInsightFormSubmit}
+            handleSubmitFunc={brandInsightFormSubmit}
             brands={brands}
           />
         )
@@ -103,16 +105,14 @@ class Reports extends Component {
       case 'compare-brands':
         return (
           <CompareBrand
-            handleSubmitFunc={this.props.compareBrandFormSubmit}
+            handleSubmitFunc={compareBrandFormSubmit}
             brands={brands}
           />
         )
 
       case 'predefined-reports':
         return (
-          <PredefinedReport
-            handleSubmitFunc={this.props.predefinedReportFormSubmit}
-          />
+          <PredefinedReport />
         )
 
       default:

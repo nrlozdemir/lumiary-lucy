@@ -109,15 +109,15 @@ export const actions = {
     type: types.COMPARE_BRAND_REQUEST_ERROR,
     error,
   }),
-  predefinedReportFormSubmit: (values) => ({
+  predefinedReportRequest: (values) => ({
     type: types.PREDEFINED_REPORT_REQUEST,
     payload: values,
   }),
-  predefinedReportFormSubmitSuccess: (payload) => ({
+  predefinedReportRequestSuccess: (payload) => ({
     type: types.PREDEFINED_REPORT_REQUEST_SUCCESS,
     payload,
   }),
-  predefinedReportFormSubmitError: (error) => ({
+  predefinedReportRequestError: (error) => ({
     type: types.PREDEFINED_REPORT_REQUEST_ERROR,
     error,
   }),
