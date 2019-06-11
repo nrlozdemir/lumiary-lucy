@@ -208,7 +208,7 @@ export const initialState = fromJS({
   },
   predefinedReportValues: {
     data: null,
-    chartData: null,
+    chartData: {},
     error: false,
     loading: false,
   },
