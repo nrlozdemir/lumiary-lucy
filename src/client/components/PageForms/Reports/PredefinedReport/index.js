@@ -29,9 +29,7 @@ class PredefinedReport extends Component {
     const { push } = this.props
     console.log('go to report', values)
     push(
-      `/reports/predefined-reports/${randomKey(4)}-${randomKey(4)}-${randomKey(
-        4
-      )}-${randomKey(4)}`
+      `/reports/predefined-reports/abcdefg`
     )
   }
 
