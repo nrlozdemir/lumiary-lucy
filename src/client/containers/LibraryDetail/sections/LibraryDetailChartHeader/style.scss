@@ -59,16 +59,6 @@
       background-color: $color-dark-five;
       border-radius: 10px;
       position: relative;
-
-      &:before {
-        content: '';
-        position: absolute;
-        width: 4px;
-        height: 100%;
-        top: 0px;
-        left: calc(50% - 2px);
-        background: $color-white;
-      }
     }
 
     .percentageIncrease {
@@ -121,6 +111,11 @@
       }
     }
 
+    .markers{
+      width: 250px;
+      position: relative;
+    }
+
     .averageText {
       font-family: $font-family-ClanOTNews;
       font-size: 12px;
@@ -132,6 +127,7 @@
       text-align: center;
       // color: $color-white;
       margin-top: 8px;
+      position: absolute;
     }
 
     &:last-child {
