@@ -8,6 +8,7 @@ import style from './style.scss'
 import { isDataSetEmpty } from 'Utils/datasets'
 import MultipleNoDataModule from 'Components/MultipleNoDataModule'
 import RouterLoading from 'Components/RouterLoading'
+
 const TopSimilarProperties = (props) => {
   const { data, title, filters, action, moduleKey, isLoading, isError } = props
   return (
@@ -25,19 +26,21 @@ const TopSimilarProperties = (props) => {
               <RouterLoading />
             ) : (
               <MultipleNoDataModule>
-                {data &&
+                {!!data &&
+                  !!data.length &&
                   data.map((sectionItem, i) => {
                     const moduleContainer = classnames({
                       [style.similarContainer]: i !== 0,
                     })
                     const isEmpty =
-                      data &&
+                      !!data &&
+                      !!data.length &&
                       data
                         .map((value) =>
                           isDataSetEmpty(value.doughnutChartValues)
                         )
                         .every((dataset) => dataset === true)
-                        
+
                     return (
                       <div
                         className={moduleContainer}
@@ -56,7 +59,7 @@ const TopSimilarProperties = (props) => {
                     )
                   })}
               </MultipleNoDataModule>
-            )}
+            )}{' '}
           </div>
         )}
       </ThemeContext.Consumer>
@@ -65,7 +68,7 @@ const TopSimilarProperties = (props) => {
 }
 
 TopSimilarProperties.propTypes = {
-  data: PropTypes.array,
+  data: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
 }
 
 export default TopSimilarProperties

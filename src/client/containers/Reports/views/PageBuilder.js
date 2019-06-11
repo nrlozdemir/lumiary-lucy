@@ -85,12 +85,16 @@ class PageBuilder extends React.Component {
 
     return (
       <div>
+        {/**** To test all modules
+        {Object.keys(modules).map((moduleKey, idx) => {
+          else
         {sortedModules.map((module, idx) => {
           const moduleKey =
-            !!module &&
-            !!module.predefined_report_modules &&
-            module.predefined_report_modules.module
-
+          !!module &&
+          !!module.predefined_report_modules &&
+          module.predefined_report_modules.module
+        ******/}
+        {Object.keys(modules).map((moduleKey, idx) => {
           const ModuleToRender = !!moduleKey && modules[moduleKey]
 
           console.log(ModuleToRender)
