@@ -60,6 +60,11 @@ export const types = {
   LOAD_COLOR_COMPARISON_DATA_SUCCESS:
     'Reports/LOAD_COLOR_COMPARISON_DATA_SUCCESS',
   LOAD_COLOR_COMPARISON_DATA_ERROR: 'Reports/LOAD_COLOR_COMPARISON_DATA_ERROR',
+
+  GET_PREDEFINED_REPORTS_REQUEST: 'Reports/GET_PREDEFINED_REPORTS_REQUEST',
+  GET_PREDEFINED_REPORTS_REQUEST_SUCCESS:
+    'Reports/GET_PREDEFINED_REPORTS:SUCCESS',
+  GET_PREDEFINED_REPORTS_REQUEST_ERROR: 'Reports/GET_PREDEFINED_REPORTS:ERROR',
 }
 
 export const actions = {
@@ -184,7 +189,12 @@ export const actions = {
     type: types.PREDEFINED_REPORT_CHART_REQUEST,
     payload: data,
   }),
+
+  getPredefinedReports: () => ({
+    type: types.GET_PREDEFINED_REPORTS_REQUEST,
+  }),
 }
+
 export const initialState = fromJS({
   reports: {
     data: [],
@@ -223,6 +233,11 @@ export const initialState = fromJS({
     loading: false,
   },
   colorComparisonData: {
+    data: [],
+    error: false,
+    loading: false,
+  },
+  predefinedReports: {
     data: [],
     error: false,
     loading: false,
@@ -348,6 +363,19 @@ const reportsReducer = (state = initialState, action) => {
 
     case types.PREDEFINED_REPORT_REQUEST_ERROR:
       return state
+
+    case types.GET_PREDEFINED_REPORTS_REQUEST:
+      return state.setIn(['predefinedReports', 'loading'], fromJS(true))
+
+    case types.GET_PREDEFINED_REPORTS_REQUEST_SUCCESS:
+      return state
+        .setIn(['predefinedReports', 'data'], fromJS(action.payload))
+        .setIn(['predefinedReports', 'loading'], fromJS(false))
+
+    case types.GET_PREDEFINED_REPORTS_REQUEST_ERROR:
+      return state
+        .setIn(['predefinedReports', 'error'], fromJS(action.error))
+        .setIn(['predefinedReports', 'loading'], fromJS(false))
     /** END Predefined Report form */
 
     /** START video comparison data */
