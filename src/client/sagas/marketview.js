@@ -24,6 +24,8 @@ import {
   convertDataIntoDatasets,
   getDateBucketFromRange,
   getMaximumValueIndexFromArray,
+  getBrandNameAndCompetitorsName,
+  getFilteredCompetitorValues,
 } from 'Utils'
 import { dayOfWeek } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
@@ -339,6 +341,7 @@ function* getTotalViewsData({ data }) {
     const { metric, dateRange, platform } = data
 
     const profile = yield select(selectAuthProfile)
+    const competitors = getBrandNameAndCompetitorsName(profile)
 
     const url = `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`
 
@@ -361,7 +364,7 @@ function* getTotalViewsData({ data }) {
       dateBucket === 'none'
         ? {}
         : convertDataIntoDatasets(
-            barData,
+            getFilteredCompetitorValues(competitors, barData),
             { ...options, dateBucket },
             {
               isMetric: true,
@@ -369,7 +372,7 @@ function* getTotalViewsData({ data }) {
           )
 
     const convertedDoughnutData = convertDataIntoDatasets(
-      doughnutData,
+      getFilteredCompetitorValues(competitors, doughnutData),
       { ...options, dateBucket: 'none' },
       {
         hoverBG: true,

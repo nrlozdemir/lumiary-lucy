@@ -3,7 +3,6 @@ import { Route, Switch } from 'react-router-dom'
 //import classnames from 'classnames'
 import RouterLoading from 'Components/RouterLoading'
 import DynamicImport from 'Containers/DynamicImport'
-import style from './style.scss'
 
 const subPage = (page) => (props) => (
   <DynamicImport
