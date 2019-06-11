@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import { reduxForm, Fields } from 'redux-form'
+import { reduxForm, Fields, reset } from 'redux-form'
 import cx from 'classnames'
 import { compose } from 'redux'
 import style from '../style.scss'
@@ -39,12 +39,11 @@ class PredefinedReport extends Component {
 
   render() {
     const {
+      reset,
       handleSubmitFunc,
       handleSubmit,
       predefinedReports: { data, error, loading },
     } = this.props
-
-    console.log('reports', data)
 
     const formValid = this.checkboxValidation()
 
@@ -74,6 +73,7 @@ class PredefinedReport extends Component {
                         options={reportOptions}
                         canSelect={1}
                         checkboxValidation={this.checkboxValidation}
+                        reset={reset}
                       />
                     </div>
 
