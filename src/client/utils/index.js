@@ -644,15 +644,10 @@ const getFilteredCompetitorValues = (competitors, data) => {
   const filteredCompetitors = competitors.filter(
     (name) => Object.keys(data).indexOf(name) > -1
   )
-  return filteredCompetitors
-    .map((name) => ({
-      name,
-      data: data[name],
-    }))
-    .reduce((obj, value) => {
-      obj[value.name] = value.data
-      return obj
-    }, {})
+  return filteredCompetitors.reduce((obj, name) => {
+    obj[name] = data[name]
+    return obj
+  }, {})
 }
 
 /* Converts the api responses from /metric & /brand/{brandUuid}/count
