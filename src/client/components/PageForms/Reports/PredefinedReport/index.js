@@ -29,7 +29,7 @@ class PredefinedReport extends Component {
     const { push } = this.props
     console.log('go to report', values)
     push(
-      `/reports/predefined-reports/abcdefg`
+      `/reports/predefined-reports/20aa7853-ed00-4e1b-9cf4-d2b8f03c72c3`
     )
   }
 
