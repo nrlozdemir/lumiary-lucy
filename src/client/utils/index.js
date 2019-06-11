@@ -77,7 +77,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   let datasetsFromValues
   let singleLevelJSON
   let customKeys
-  let getValueinObject
+	let getValueinObject
+
+	console.log(values)
 
   const {
     hoverBG,
@@ -507,6 +509,16 @@ const getBrandAndCompetitors = (profile) => {
   return [brand.uuid]
 }
 
+const getBrandNameAndCompetitorsName = (profile) => {
+  const { brand } = profile
+
+  if (!!brand && !!brand.name && !!brand.competitors) {
+    return [brand.name, ...brand.competitors.map((c) => c.name)]
+  }
+
+  return [brand.name]
+}
+
 /*
   /brand/{brandUuid}/compare
   @sentiment {string} - 'happy-sad', 'energetic-calm', 'natural-synthetic'
@@ -630,21 +642,35 @@ const parseAverage = (payload) => {
 const getFilteredCompetitors = (competitors, report) =>
   competitors.filter((uuid) => report.brands.indexOf(uuid) > -1)
 
+const getFilteredCompetitorValues = (competitors, data) => {
+  const filteredCompetitors = competitors.filter((name) => Object.keys(data).indexOf(name) > -1);
+	return filteredCompetitors.map(name => ({
+		name,
+		data: data[name]
+	})).reduce(
+		(obj, value) => {
+			obj[value.name] = value.data
+			return obj
+		},
+		{}
+	)
+}
+
 /* Converts the api responses from /metric & /brand/{brandUuid}/count
  * into chart data structures that
  * VideoReleases Vs Engagement will use (Panoptic/Reports)
  * @videoData {api response} from /brand/{brandUuid}/count
  * @engagementData {api response} from /metric
  *** Expected Output Structure: ***
-  [{ 
-    datasets: {array} - 
-      [{ 
-        backgroundColor: string, 
-        data: array, 
-        display:bool, 
-        label: string 
-      }], 
-    label: string, 
+  [{
+    datasets: {array} -
+      [{
+        backgroundColor: string,
+        data: array,
+        display:bool,
+        label: string
+      }],
+    label: string,
     labels: {array} [{string}],
     maxVideo: {int}
     maxEngagement: {int}
@@ -750,7 +776,9 @@ export {
   convertMultiRequestDataIntoDatasets,
   getDateBucketFromRange,
   getBrandAndCompetitors,
-  getFilteredCompetitors,
+  getBrandNameAndCompetitorsName,
+	getFilteredCompetitors,
+	getFilteredCompetitorValues,
   convertColorTempToDatasets,
   addComma,
   parseAverage,
