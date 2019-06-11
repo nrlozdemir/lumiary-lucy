@@ -6,8 +6,8 @@ import {
   actions as reportsActions,
   makeSelectReportsPredefinedReportValues,
 } from 'Reducers/reports'
-
 import RouterLoading from 'Components/RouterLoading'
+import { orderBy } from 'lodash'
 
 // MODULE IMPORTS
 import ContentVitalityScore from '../section/ContentVitalityScore'
@@ -15,9 +15,6 @@ import VideoComparison from '../section/VideoComparison'
 import PerformanceComparison from '../section/PerformanceComparison'
 import ColorComparison from '../section/ColorComparison'
 import ReportCards from '../section/ReportCardsModule'
-
-import { orderBy } from 'lodash'
-
 import {
   SliderModule,
   BarChartModule,
@@ -94,11 +91,17 @@ class PageBuilder extends React.Component {
             !!module.predefined_report_modules &&
             module.predefined_report_modules.module
 
-          const ModuleToRender = modules[moduleKey]
+          const ModuleToRender = !!moduleKey && modules[moduleKey]
 
-          const moduleData = chartData[moduleKey]
+          console.log(ModuleToRender)
 
-          return !!moduleKey && !!moduleData ? (
+          const moduleData = {
+            error: false,
+            data: chartData[moduleKey],
+            loading: !chartData[moduleKey],
+          }
+
+          return !!ModuleToRender ? (
             <div key={`module_${idx}`}>
               <ModuleToRender
                 moduleKey={`Reports/${moduleKey}`}
