@@ -20,10 +20,13 @@ const dark = {
   // selectbox
 
   // progressbar values
-  progressBackground: '#21243b',
-  progressColor: '#545b79',
+  progressBackground: '#545b79',
+  progressColor: 'transparent',
   progressShadow: 'transparent',
   progressCountBackground: '#373f5b',
+  progressLibraryDetailBackground: '#545b79',
+  progressLibraryDetailShadow: 'rgba(0, 0, 0, 0.5)',
+  progressLibraryDetailTickColor: '#ffffff',
   // progressbar values
 
   // labels
@@ -165,6 +168,9 @@ const light = {
   progressColor: '#3dd6c4',
   progressShadow: '#bebebe',
   progressCountBackground: '#ffffff',
+  progressLibraryDetailBackground: '#c6c9d7',
+  progressLibraryDetailShadow: 'rgba(0, 0, 0, 0.5)',
+  progressLibraryDetailTickColor: '#505050',
   // progressbar values
 
   // labels
