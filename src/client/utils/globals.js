@@ -45,3 +45,20 @@ export const expectedNames = {
   frameRate: 'Frame Rate',
   format: 'Format',
 }
+export const moduleNames = [
+  'BarAndDoughnutChartModule',
+  'BarChartModule',
+  'ColorTemperatureModule',
+  'ContentVitalityScoreModule',
+  'LineAndDoughnutChartModule',
+  'PacingCardModule',
+  'RadarChartModule',
+  'SliderModule',
+  'TopSimilarPropertiesModule',
+  'TopVideosCardModule',
+  'VideoReleasesBarChartModule',
+  'ReportCardsModule',
+  'VideoComparisonModule',
+  'ColorComparisonModule',
+  'PerformanceComparisonModule',
+]
