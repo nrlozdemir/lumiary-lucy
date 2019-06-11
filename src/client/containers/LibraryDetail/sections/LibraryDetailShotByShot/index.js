@@ -97,6 +97,12 @@ class LibraryDetailShotByShot extends React.Component {
     const viewportSize = 1118 - ((tickCount + 1) * shotMargin)
 
     const shots = Object.values(this.state.shots)
+    
+    if (!shots || shots.length == 0)
+    {
+      return false;
+    }
+
     const durations = shots.map(
       element => (element.endTime - element.startTime).toFixed(4)
     )
@@ -418,7 +424,7 @@ class LibraryDetailShotByShot extends React.Component {
                     <h2 className={style.sliderHeader}>Shot by Shot</h2>
                     <div className={style.sliderContainer}>
                       <div className={style.shotByShotMask} />
-                      <Scrubber
+                      {viewportShots && sliderMarks && shotsTotalWidth && (<Scrubber
                         horizontal
                         arrows
                         viewBordered
@@ -468,7 +474,7 @@ class LibraryDetailShotByShot extends React.Component {
                             </React.Fragment>
                           ))}
                         </div>
-                      </Scrubber>
+                      </Scrubber>)}
                     </div>
                   </div>
                 </div>
