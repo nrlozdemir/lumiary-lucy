@@ -99,8 +99,8 @@ class PageBuilder extends React.Component {
             !!module &&
             !!module.predefined_report_modules &&
             module.predefined_report_modules.module
-            
-          const ModuleToRender = !!moduleKey && modules[moduleKey]
+
+          const ModuleToRender = (!!moduleKey && modules[moduleKey]) || null
 
           console.log(ModuleToRender)
 

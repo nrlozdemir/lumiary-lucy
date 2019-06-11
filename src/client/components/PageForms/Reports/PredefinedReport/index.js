@@ -42,6 +42,7 @@ class PredefinedReport extends Component {
       reset,
       handleSubmitFunc,
       handleSubmit,
+      formdata: { values },
       predefinedReports: { data, error, loading },
     } = this.props
 
@@ -74,6 +75,7 @@ class PredefinedReport extends Component {
                         canSelect={1}
                         checkboxValidation={this.checkboxValidation}
                         reset={reset}
+                        values={values}
                       />
                     </div>
 
