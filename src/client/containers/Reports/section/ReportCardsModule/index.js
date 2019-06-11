@@ -9,7 +9,7 @@ const ReportsCards = ({ openModal, reportCardsData }) => {
       {({ themeContext: { colors } }) => {
         return (
           <div className={style.reportsCardContainer}>
-            {reportCardsData.map((card, index) => {
+            {!!reportCardsData && reportCardsData.map((card, index) => {
               const disabled = card.key === 'predefined-reports'
               const cardContainerStyle = classnames(style.reportsCard, {[style.disabled]: disabled})
               return(
