@@ -109,9 +109,9 @@ function* predefinedReportRequest({ payload }) {
 
     const url = `/brand/${brand.uuid}/predef/${payload}`
 
-    console.log('getting report with id = ', payload)
+    const response = yield call(getDataFromApi, undefined, url, 'GET')
 
-    const response = yield call(getGeneratedReportApi)
+    console.log('predefined report response', response)
 
     yield put(actions.predefinedReportRequestSuccess(response))
   } catch (err) {
