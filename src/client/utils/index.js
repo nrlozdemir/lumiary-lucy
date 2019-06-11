@@ -167,6 +167,11 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     customKeys = brands
   }
 
+  // if dataset values type of object, get value in the object
+  if (datasetsFromValues && typeof datasetsFromValues[0] === 'object') {
+    datasetsFromValues = datasetsFromValues.map((d) => d.value)
+  }
+
   // Object.keys(
   //  brandObjects[0][Object.keys(brandObjects[0])]
   // ).map((value) => brandObjects.map((brand) => brand.duration[value]))
