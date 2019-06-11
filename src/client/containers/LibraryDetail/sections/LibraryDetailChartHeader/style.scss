@@ -59,6 +59,16 @@
       background-color: $color-dark-five;
       border-radius: 10px;
       position: relative;
+
+      &:before {
+        content: '';
+        position: absolute;
+        width: 4px;
+        height: 100%;
+        top: 0px;
+        left: calc(50% - 2px);
+        background: $color-white;
+      }
     }
 
     .percentageIncrease {
@@ -128,6 +138,7 @@
       // color: $color-white;
       margin-top: 8px;
       position: absolute;
+      left: calc(50% - 11px);
     }
 
     &:last-child {
