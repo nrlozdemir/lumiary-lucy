@@ -110,11 +110,17 @@ class PageBuilder extends React.Component {
             loading: !chartData[moduleKey],
           }
 
+          const moduleQuery =
+            (!!module &&
+              !!module.predefined_report_modules &&
+              module.predefined_report_modules.predefined_report_queries) ||
+            ''
+
           return !!ModuleToRender ? (
             <div key={`module_${idx}`}>
               <ModuleToRender
                 moduleKey={`Reports/${moduleKey}`}
-                action={getPredefinedReportChartData}
+                action={() => getPredefinedReportChartData(moduleQuery)}
                 data={moduleData}
               />
             </div>
