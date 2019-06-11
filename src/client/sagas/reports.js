@@ -129,11 +129,39 @@ function* deleteReport(data) {
 function* getPredefinedReportChartRequest({ payload }) {
   try {
     console.log('predefined chart data request', payload)
-    yield put({ type: types.PREDEFINED_REPORT_CHART_REQUEST_SUCCESS, payload: {} })
+    yield put({
+      type: types.PREDEFINED_REPORT_CHART_REQUEST_SUCCESS,
+      payload: {},
+    })
   } catch (err) {
     console.log(err)
     yield put({
       type: types.PREDEFINED_REPORT_CHART_REQUEST_ERROR,
+      payload: err.message,
+    })
+  }
+}
+
+function* getPredefinedReports() {
+  try {
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      `/brand/${brand.uuid}/predef`
+    )
+
+    if (!!response) {
+      yield put({
+        type: types.GET_PREDEFINED_REPORTS_REQUEST_SUCCESS,
+        payload: response,
+      })
+    }
+  } catch (err) {
+    console.log(err)
+    yield put({
+      type: types.GET_PREDEFINED_REPORTS_REQUEST_ERROR,
       payload: err.message,
     })
   }
@@ -269,4 +297,5 @@ export default [
     types.PREDEFINED_REPORT_CHART_REQUEST,
     getPredefinedReportChartRequest
   ),
+  takeLatest(types.GET_PREDEFINED_REPORTS_REQUEST, getPredefinedReports),
 ]

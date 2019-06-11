@@ -26,14 +26,3 @@ export const selectOptionsDateRange = [
   { value: 'month', label: 'Past Month' },
   { value: '3months', label: 'Past 3 Months' },
 ]
-
-export const selectPredefinedBrands = [
-  { value: '1', label: 'Every video with Dwayne Wade' },
-  { value: '2', label: 'In-game videos vs non-game videos' },
-  { value: '3', label: 'Soccer videos on Instagram' },
-  {
-    value: '4',
-    label:
-      'All videos with game winning shots at the	buzzer beater and the crowd goes wild',
-  },
-]
