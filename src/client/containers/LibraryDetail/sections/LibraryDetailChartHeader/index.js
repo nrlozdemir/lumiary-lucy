@@ -30,20 +30,21 @@ const Front = (props) => {
         </div>
         <ProgressBar
           width={percentage > 100 ? 100 : (
-            parseFloat(percentage).toFixed(2) < 1 ? 1 : parseFloat(percentage).toFixed(2) 
+            parseFloat(percentage).toFixed(2) > 0 && parseFloat(percentage).toFixed(2) < 1 
+              ? 1 
+              : parseFloat(percentage).toFixed(2) 
           )}
           customBarClass={style.progressBar}
           customPercentageClass={classnames(style.percentageIncrease, {
             [style.percentageDecrease]:
               parseInt((data.average / data.value) * 100) < 50,
           })}
-          tickPosition={parseFloat(data.average * 100 / data.max).toFixed(2)}
-          tickBackgroundColor={colors.textColor}
+          tickColor={colors.progressLibraryDetailTickColor}
+          progressBarBackgroundColor={colors.progressLibraryDetailBackground}
+          progressBarShadowColor={colors.progressLibraryDetailShadow}
         />
         <div className={style.markers}>
-          <p className={style.averageText} style={{ left: `${
-            parseFloat(data.average * 100 / data.max).toFixed(2) - 4 < 4 ? 0 : parseFloat(data.average * 100 / data.max).toFixed(2) - 4
-          }%`}}>Avg</p>
+          <p className={style.averageText}>Avg</p>
         </div>
       </div>
     </div>
