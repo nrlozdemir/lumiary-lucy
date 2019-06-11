@@ -149,7 +149,8 @@ function* getPredefinedReports() {
     const response = yield call(
       getDataFromApi,
       undefined,
-      `/brand/${brand.uuid}/predef`
+      `/brand/${brand.uuid}/predef`,
+      'GET'
     )
 
     if (!!response) {

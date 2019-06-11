@@ -522,4 +522,13 @@ export const makeSelectReportsPredefinedReportValues = () =>
     (substate) => substate.toJS()
   )
 
+const selectPredefinedReports = (state) =>
+  state.Reports.get('predefinedReports')
+
+export const makeSelectPredefinedReports = () =>
+  createSelector(
+    selectPredefinedReports,
+    (substate) => substate.toJS()
+  )
+
 export default reportsReducer
