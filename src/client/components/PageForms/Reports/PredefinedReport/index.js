@@ -42,7 +42,7 @@ class PredefinedReport extends Component {
       reset,
       handleSubmitFunc,
       handleSubmit,
-      formdata: { values },
+      formData: { values },
       predefinedReports: { data, error, loading },
     } = this.props
 
