@@ -8,6 +8,12 @@ class ContentVitalityScore extends React.Component {
     action({ ...data, report })
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(this.props.data.data)
+    console.log(nextProps.data.data)
+    return JSON.stringify(this.props.data.data) !== JSON.stringify(nextProps.data.data)
+  }
+
   render() {
     const {
       data: { data, loading, error },
