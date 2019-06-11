@@ -26,48 +26,42 @@ const ContentVitalityScoreModule = ({
   flattenLastSpace,
   options,
   chartYAxisMax = 100,
-  brandCvSummary = {}
 }) => {
 
-  const formattedData = Object.keys(data).reduce((accumulator, brand) => {
+  const formattedData = Object.keys(data).reduce((accumulator, uuid) => {
+    switch(uuid) {
+      case 'other':
+        accumulator.average = {
+          ...data[uuid],
+          name: 'Average',
+        }
+      break
 
-    const thisBrand = {
-      ...data[brand],
-      uuid: brand,
-    }
-
-    // this assignment of variables needs to be fixed up
-    if(authProfile.brand.uuid === brand){
-      accumulator.brand_1 = {
-        ...thisBrand,
-        name: authProfile.brand.name,
-      }
-    } else if(brand !== 'other') {
-      // authProfile.brand.comp
-      accumulator.brand_2 = {
-        ...thisBrand,
-        name: 'test2',
-      }
-    } else {
-      accumulator.average = {
-        ...thisBrand,
-        name: 'test1',
-      }
+      default: 
+        if(uuid === authProfile.brand.uuid){
+          accumulator.brand_1 = {
+            ...data[uuid],
+            name: authProfile.brand.name,
+          }
+        } else {
+          authProfile.brand.competitors.forEach((competitor) => {
+            if(uuid === competitor.uuid){
+              accumulator.brand_2 = {
+                ...data[uuid],
+                name: competitor.name,
+              }
+            }
+          })
+        }
+      break
     }
 
     return accumulator
   }, {
     brand_1: null,
     brand_2: null,
-    average: {
-      data: [],
-      name: 'Average'
-    },
+    average: null,
   })
-
-  console.log(data)
-  console.log(authProfile)
-  console.log(formattedData)
 
   return (
     <ThemeContext.Consumer>
@@ -119,7 +113,7 @@ const ContentVitalityScoreModule = ({
                       boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                     }}
                   >
-                    {`${formattedData.brand_2.name}`}
+                    {`${formattedData.brand_1.name}`}
                   </div>
                   <div
                     className={style.divider}

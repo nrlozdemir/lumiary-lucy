@@ -14,8 +14,13 @@ class ContentVitalityScore extends React.Component {
       authProfile = {}
     } = this.props
 
-    const chartYAxisMax = 100
-    const chartYAxisStepSize = 25
+    const maxVideoPercent = Object.keys(data).reduce((accumulator, key) => {
+      const maxPercentInSet = Math.max(...data[key].videoPercents)
+      return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
+    }, 0)
+
+    const chartYAxisMax = (maxVideoPercent > 50) ? 100 : 50
+    const chartYAxisStepSize = (maxVideoPercent > 50) ? 25 : 12.5
 
     return (
       <ThemeContext.Consumer>
