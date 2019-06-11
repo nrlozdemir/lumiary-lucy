@@ -111,8 +111,6 @@ function* predefinedReportRequest({ payload }) {
 
     const response = yield call(getDataFromApi, undefined, url, 'GET')
 
-    console.log('predefined report response', response)
-
     yield put(actions.predefinedReportRequestSuccess(response))
   } catch (err) {
     yield put(actions.predefinedReportRequestError(err))
