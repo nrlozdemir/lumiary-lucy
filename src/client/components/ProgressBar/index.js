@@ -11,7 +11,7 @@ import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 /* eslint-disable react/prefer-stateless-function */
-const ProgressBar = ({ customBarClass, customPercentageClass, width }) => {
+const ProgressBar = ({ customBarClass, customPercentageClass, width, tickPosition, tickBackgroundColor }) => {
   const barClass = classnames(style.progressBar, customBarClass)
   const percentageClass = classnames(customPercentageClass)
   return (
@@ -25,6 +25,12 @@ const ProgressBar = ({ customBarClass, customPercentageClass, width }) => {
               boxShadow: `0 1px 2px 0 ${colors.progressShadow}`,
             }}
           >
+            {tickPosition && tickBackgroundColor && (
+              <div 
+                className={style.tick}
+                style={{ left: `${tickPosition}%`, background: tickBackgroundColor }}
+              />
+            )}
             <div
               className={percentageClass}
               style={{ width: `${width}%`, background: colors.progressColor }}
