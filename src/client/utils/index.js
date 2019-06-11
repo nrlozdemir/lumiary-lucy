@@ -77,9 +77,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   let datasetsFromValues
   let singleLevelJSON
   let customKeys
-	let getValueinObject
-
-	console.log(values)
+  let getValueinObject
 
   const {
     hoverBG,
@@ -642,18 +640,19 @@ const parseAverage = (payload) => {
 const getFilteredCompetitors = (competitors, report) =>
   competitors.filter((uuid) => report.brands.indexOf(uuid) > -1)
 
-const getFilteredCompetitorValues = (competitors, data) => {
-  const filteredCompetitors = competitors.filter((name) => Object.keys(data).indexOf(name) > -1);
-	return filteredCompetitors.map(name => ({
-		name,
-		data: data[name]
-	})).reduce(
-		(obj, value) => {
-			obj[value.name] = value.data
-			return obj
-		},
-		{}
-	)
+const getFilteredCompetitorValues = (competitors, data) => {
+  const filteredCompetitors = competitors.filter(
+    (name) => Object.keys(data).indexOf(name) > -1
+  )
+  return filteredCompetitors
+    .map((name) => ({
+      name,
+      data: data[name],
+    }))
+    .reduce((obj, value) => {
+      obj[value.name] = value.data
+      return obj
+    }, {})
 }
 
 /* Converts the api responses from /metric & /brand/{brandUuid}/count
@@ -777,8 +776,8 @@ export {
   getDateBucketFromRange,
   getBrandAndCompetitors,
   getBrandNameAndCompetitorsName,
-	getFilteredCompetitors,
-	getFilteredCompetitorValues,
+  getFilteredCompetitors,
+  getFilteredCompetitorValues,
   convertColorTempToDatasets,
   addComma,
   parseAverage,
