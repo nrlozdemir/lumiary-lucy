@@ -21,13 +21,20 @@ class PredefinedReport extends Component {
       formData: { values },
     } = this.props
 
-    return !!values && !!values.length && values.indexOf(true) !== -1
+    return (
+      !!values &&
+      Object.keys(values).some((key) => !!values[key])
+    )
   }
 
   goToReport = (values) => {
     const { push } = this.props
-    console.log('go to report', values)
-    push(`/reports/predefined-reports/20aa7853-ed00-4e1b-9cf4-d2b8f03c72c3`)
+
+    const reportUuid = !!values && Object.keys(values).filter((key) => !!values[key]) || []
+
+    if(!!reportUuid.length) {
+      push(`/reports/predefined-reports/${reportUuid[0]}`)
+    }
   }
 
   render() {
@@ -36,6 +43,8 @@ class PredefinedReport extends Component {
       handleSubmit,
       predefinedReports: { data, error, loading },
     } = this.props
+
+    console.log('reports', data)
 
     const formValid = this.checkboxValidation()
 
@@ -54,34 +63,42 @@ class PredefinedReport extends Component {
               style={{ color: colors.textColor }}
             >
               <div className={style.formArea}>
-                <div className={style.formGroup}>
-                  <p className={style.label}> Show me..</p>
-                  <Fields
-                    names={getBrandKeysFromObject(reportOptions)}
-                    component={SelectBox}
-                    type="checkbox"
-                    options={reportOptions}
-                    canSelect={1}
-                    checkboxValidation={this.checkboxValidation}
-                  />
-                </div>
+                {!!reportOptions && !!reportOptions.length ? (
+                  <React.Fragment>
+                    <div className={style.formGroup}>
+                      <p className={style.label}> Show me..</p>
+                      <Fields
+                        names={getBrandKeysFromObject(reportOptions)}
+                        component={SelectBox}
+                        type="checkbox"
+                        options={reportOptions}
+                        canSelect={1}
+                        checkboxValidation={this.checkboxValidation}
+                      />
+                    </div>
 
-                <button
-                  className={cx(style.selectionLink, {
-                    [style.active]: formValid,
-                  })}
-                  type="submit"
-                  disabled={!formValid}
-                  style={{
-                    background: colors.modalButtonBackground,
-                    color: colors.textColor,
-                  }}
-                >
-                  Generate Report
-                  <div className={style.icon}>
-                    <RightArrowCircle />
+                    <button
+                      className={cx(style.selectionLink, {
+                        [style.active]: formValid,
+                      })}
+                      type="submit"
+                      disabled={!formValid}
+                      style={{
+                        background: colors.modalButtonBackground,
+                        color: colors.textColor,
+                      }}
+                    >
+                      Generate Report
+                      <div className={style.icon}>
+                        <RightArrowCircle />
+                      </div>
+                    </button>
+                  </React.Fragment>
+                ) : (
+                  <div style={{ textAlign: 'center' }}>
+                    No Predefined Reports Available
                   </div>
-                </button>
+                )}
               </div>
             </form>
           )
@@ -93,10 +110,8 @@ class PredefinedReport extends Component {
 
 const mapStateToProps = (state) => {
   const { PredefinedReport } = state.form
-
   return {
     formData: PredefinedReport || {},
-    predefinedReports: state.Reports.predefinedReports,
   }
 }
 

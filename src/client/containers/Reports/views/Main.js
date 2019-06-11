@@ -3,7 +3,11 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import moment from 'moment'
-import { actions, makeSelectReports } from 'Reducers/reports'
+import {
+  actions,
+  makeSelectReports,
+  makeSelectPredefinedReports,
+} from 'Reducers/reports'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import Select from 'Components/Form/Select'
 import Button from 'Components/Form/Button'
@@ -50,6 +54,11 @@ class Reports extends Component {
     }
   }
 
+  componentDidMount() {
+    const { getPredefinedReports } = this.props
+    getPredefinedReports()
+  }
+
   componentWillMount() {
     this.props.loadReports()
   }
@@ -77,6 +86,7 @@ class Reports extends Component {
   renderModalInside = () => {
     const { selectedReportCardKey } = this.state
     const {
+      predefinedReports,
       brandInsightFormSubmit,
       compareBrandFormSubmit,
       profile: { brand },
@@ -111,9 +121,7 @@ class Reports extends Component {
         )
 
       case 'predefined-reports':
-        return (
-          <PredefinedReport />
-        )
+        return <PredefinedReport predefinedReports={predefinedReports} />
 
       default:
         return null
@@ -292,6 +300,7 @@ class Reports extends Component {
 const mapStateToProps = createStructuredSelector({
   reports: makeSelectReports(),
   profile: makeSelectAuthProfile(),
+  predefinedReports: makeSelectPredefinedReports(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
