@@ -128,7 +128,8 @@ function* deleteReport(data) {
 
 function* getPredefinedReportChartRequest({ payload }) {
   try {
-    yield put({ type: PREDEFINED_REPORT_CHART_REQUEST_SUCCESS, payload: {} })
+    console.log('predefined chart data request', payload)
+    yield put({ type: types.PREDEFINED_REPORT_CHART_REQUEST_SUCCESS, payload: {} })
   } catch (err) {
     console.log(err)
     yield put({
