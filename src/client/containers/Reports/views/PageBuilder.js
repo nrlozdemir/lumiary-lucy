@@ -94,7 +94,12 @@ class PageBuilder extends React.Component {
           !!module.predefined_report_modules &&
           module.predefined_report_modules.module
         ******/}
-        {Object.keys(modules).map((moduleKey, idx) => {
+        {sortedModules.map((module, idx) => {
+          const moduleKey =
+            !!module &&
+            !!module.predefined_report_modules &&
+            module.predefined_report_modules.module
+            
           const ModuleToRender = !!moduleKey && modules[moduleKey]
 
           console.log(ModuleToRender)
