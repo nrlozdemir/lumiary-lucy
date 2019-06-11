@@ -233,34 +233,9 @@ function* getVideoAverage({ id }) {
       url: `/brand/${brand.uuid}/video/${id}/metrics`,
       requestType: 'GET',
     })
-    
-    /*
-    const payload = {
-      "video": {
-        "likes.value": 393,
-        "views.value": 38393,
-        "comments.value": 57,
-        "shares.value": 91,
-        "like.diffFromLibrary": -99.51689033025177,
-        "view.diffFromLibrary": -95.90291929996458,
-        "comment.diffFromLibrary": -96.92664600798369,
-        "share.diffFromLibrary": -86.5427255985267
-      },
-      "like.LibraryAverage": "81347.988792029888",
-      "like.LibraryMax": 661051,
-      "view.LibraryAverage": "937081.859277708593",
-      "view.LibraryMax": 3955345,
-      "comment.LibraryAverage": "1854.6513075965130760",
-      "comment.LibraryMax": 32249,
-      "share.LibraryAverage": "676.2141967621419676",
-      "share.LibraryMax": 61338
-    }
-    */
 
     yield put(actions.getSelectedVideoAverageSuccess(parseAverage(payload)))
-    //yield put(actions.getSelectedVideoAverageSuccess(payload))
   } catch (error) {
-    console.log('error', error)
     yield put(actions.getSelectedVideoAverageFailure({ error }))
   }
 }
