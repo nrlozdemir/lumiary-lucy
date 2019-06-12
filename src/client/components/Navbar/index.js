@@ -25,7 +25,7 @@ import LeftArrowCircle from 'Components/Icons/LeftArrowCircle'
 // import PropTypes from 'prop-types';
 
 const containerClass = classnames(
-  'grid-container bg-dark-grey-blue ' + style.container
+  'grid-container ' + style.container
 )
 const linksClass = classnames(style.links)
 const profileClass = classnames(style.profile)
@@ -238,24 +238,25 @@ const Template = (props) => {
   const templateSelector = Selector(props)
   const { textColor, moduleBackground, moduleShadow } = props.themes
   return (
-    <div
-      className={containerClass}
-      style={{
-        color: textColor,
-        background: moduleBackground,
-        boxShadow: `0 2px 6px 0 ${moduleShadow}`,
-      }}
-    >
-      {templateSelector['leftSide']}
-      <div className={linksClass}>{templateSelector['navigation']}</div>
-      <div className={profileClass}>
-        <div className="float-right">
-          <Dropdown />
+    <header style={
+			{
+				color: textColor,
+				background: moduleBackground,
+				boxShadow: `0 2px 6px 0 ${moduleShadow}`,
+			}
+		}>
+      <div className={containerClass}>
+        {templateSelector['leftSide']}
+        <div className={linksClass}>{templateSelector['navigation']}</div>
+        <div className={profileClass}>
+          <div className="float-right">
+            <Dropdown />
 
-          {/*<span>Bleacher Report</span>*/}
+            {/*<span>Bleacher Report</span>*/}
+          </div>
         </div>
       </div>
-    </div>
+    </header>
   )
 }
 
