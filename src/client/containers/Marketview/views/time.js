@@ -67,12 +67,17 @@ export class Time extends React.Component {
         />
         <TopVideosOverTime
           moduleKey="MarketView/Time/TopVideosCardModule"
-          title="Top Performing Property Across All Days Of The Week"
+          title="Top Performing Property Across All Days Of The"
           filters={[
             {
               type: 'property',
               selectKey: 'property',
               placeHolder: 'property',
+            },
+            {
+              type: 'dateRange',
+              selectKey: 'Mwvlt-date',
+              placeHolder: 'Date',
             },
           ]}
           container="time"
