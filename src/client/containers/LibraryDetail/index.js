@@ -121,6 +121,7 @@ export class LibraryDetail extends React.Component {
         radarData_DatasetOptions
       )
     }
+    console.log(floatCvScore(selectedVideo['cvScores.value']))
     return (
       <React.Fragment>
         {barChartData && (
@@ -132,7 +133,7 @@ export class LibraryDetail extends React.Component {
             }.mp4`}
             title={selectedVideo.title}
             socialIcon={selectedVideo.socialIcon}
-            cvScore={floatCvScore(selectedVideo['cvScores.value'])}
+            cvScore={floatCvScore(selectedVideo['cvScores.value']) || 0.0}
           />
         )}
         {doughnutLineChartData && (
