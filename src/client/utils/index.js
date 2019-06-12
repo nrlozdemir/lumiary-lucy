@@ -766,6 +766,7 @@ const convertVideoEngagementData = (
   })
 }
 
+const floatCvScore = (val) => Number.parseFloat(val).toFixed(1)
 export {
   ucfirst,
   normalize,
@@ -791,4 +792,5 @@ export {
   addComma,
   parseAverage,
   convertVideoEngagementData,
+  floatCvScore,
 }

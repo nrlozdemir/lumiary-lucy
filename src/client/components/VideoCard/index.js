@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import style from './style.scss'
-import { socialIconSelector } from '../../utils'
+import { socialIconSelector, floatCvScore } from 'Utils'
 import { Link } from 'react-router-dom'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import { ThemeContext } from 'ThemeContext/themeContext'
@@ -110,9 +110,7 @@ export class VideoCard extends PureComponent {
                     color: colors.labelColor,
                   }}
                 >
-                  <span>
-                    {Number.parseFloat(video['cvScores.value']).toFixed(1)}
-                  </span>
+                  <span>{floatCvScore(video['cvScores.value'])}</span>
                   <PercentageBarGraph
                     key={Math.random()}
                     percentage={video['cvScores.value']}
@@ -141,10 +139,7 @@ export class VideoCard extends PureComponent {
                       controls={false}
                     >
                       <source
-                        src={`${mediaUrl}lumiere/${brandId}/${
-                          video.uuid
-                        }.mp4`}
-
+                        src={`${mediaUrl}lumiere/${brandId}/${video.uuid}.mp4`}
                         type="video/mp4"
                       />
                     </video>
