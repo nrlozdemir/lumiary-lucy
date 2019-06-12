@@ -32,6 +32,10 @@ export const types = {
   GET_SHOT_INFO_REQUEST: 'LibraryDetail/GET_SHOT_INFO_REQUEST',
   GET_SHOT_INFO_SUCCESS: 'LibraryDetail/GET_SHOT_INFO_SUCCESS',
   GET_SHOT_INFO_FAILURE: 'LibraryDetail/GET_SHOT_INFO_FAILURE',
+
+  GET_RADAR_CHART_REQUEST: 'LibraryDetail/GET_RADAR_CHART_REQUEST',
+  GET_RADAR_CHART_SUCCESS: 'LibraryDetail/GET_RADAR_CHART_SUCCESS',
+  GET_RADAR_CHART_FAILURE: 'LibraryDetail/GET_RADAR_CHART_FAILURE',
 }
 export const actions = {
   getSelectedVideoRequest: (payload) => ({
@@ -112,6 +116,12 @@ export const actions = {
     payload,
   }),
   getShotInfoFailure: (error) => ({ type: types.GET_SHOT_INFO_FAILURE, error }),
+  getRadarChartRequest: (payload) => ({ type: types.GET_RADAR_CHART_REQUEST, payload }),
+  getRadarChartSuccess: (payload) => ({
+    type: types.GET_RADAR_CHART_SUCCESS,
+    payload,
+  }),
+  getRadarChartFailure: (error) => ({ type: types.GET_RADAR_CHART_FAILURE, error }),
 }
 
 export const initialState = fromJS({
@@ -128,6 +138,7 @@ export const initialState = fromJS({
   loading: false,
   selectedVideo: {},
   selectedVideoAverage: [],
+  radarChartData: {},
 })
 
 const libraryDetailReducer = (state = initialState, action) => {
@@ -208,6 +219,17 @@ const libraryDetailReducer = (state = initialState, action) => {
         .set('shotInfoData', fromJS(action.payload))
         .set('loading', fromJS(false))
     case types.GET_SHOT_INFO_FAILURE:
+      return state
+        .set('error', fromJS(action.error))
+        .set('loading', fromJS(false))
+
+    case types.GET_RADAR_CHART_REQUEST:
+      return state.set('loading', fromJS(true))
+    case types.GET_RADAR_CHART_SUCCESS:
+      return state
+        .set('radarChartData', fromJS(action.payload))
+        .set('loading', fromJS(false))
+    case types.GET_RADAR_CHART_FAILURE:
       return state
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))
