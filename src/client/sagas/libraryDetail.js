@@ -45,7 +45,7 @@ function getColorTempApi({ LibraryDetailId }) {
 }
 
 function getShotByShotApi({ LibraryDetailId }) {
-  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/2203807d-50e0-4c4f-8290-08b7de4ce1bf/shots'
+  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/0639d12f-7a1a-40fe-840d-8c43c1268f31/shots'
 
   return ajax({
     url: URL,
@@ -58,8 +58,8 @@ function getShotByShotApi({ LibraryDetailId }) {
   })
 }
 
-function getShotInfoRequestApi({ LibraryDetailId }) {
-  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/2203807d-50e0-4c4f-8290-08b7de4ce1bf/shots/1'
+function getShotInfoRequestApi({ shotId }) {
+  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/0639d12f-7a1a-40fe-840d-8c43c1268f31/shots/1'
   const FRAMES_INFO = '/brand/6421cdac-d5eb-4427-a267-b9be2e232177/video/e2843ddb-4ba1-4062-acd9-2ffbe302a183/shots/0'
 
   return ajax({
@@ -80,6 +80,20 @@ function getShotInfoRequestApi({ LibraryDetailId }) {
       response.data.shot.frames = framesResponse.data.shot.frames
       return response.data
     })
+  })
+}
+
+function getRadarChartRequestApi({ shotId }) {
+  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/4/colors'
+
+  return ajax({
+    url: URL,
+    method: 'GET',
+  }).then((response) => {
+    if (response.error) {
+      throw response.error
+    }
+    return response.data
   })
 }
 
@@ -239,6 +253,17 @@ function* getVideoAverage({ id }) {
   }
 }
 
+function* getRadarChartRequest({ ShotId }) {
+  try {
+    const payload = yield call(getRadarChartRequestApi, {
+      ShotId,
+    })
+    yield put(actions.getRadarChartSuccess(payload))
+  } catch (error) {
+    yield put(actions.getRadarChartFailure({ error }))
+  }
+}
+
 export default [
   takeLatest(types.GET_BAR_CHART_REQUEST, getBarChart),
   takeLatest(types.GET_DOUGHNUT_CHART_REQUEST, getDoughnutChart),
@@ -247,4 +272,5 @@ export default [
   takeLatest(types.GET_SELECTED_VIDEO_REQUEST, getSelectedVideo),
   takeLatest(types.GET_SHOT_INFO_REQUEST, getShotInfoRequest),
   takeLatest(types.GET_SELECTED_VIDEO_AVERAGE_REQUEST, getVideoAverage),
+  takeLatest(types.GET_RADAR_CHART_REQUEST, getRadarChartRequest),
 ]
