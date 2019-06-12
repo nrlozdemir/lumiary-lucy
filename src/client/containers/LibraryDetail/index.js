@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import { bindActionCreators, compose } from 'redux'
 import { reduxForm } from 'redux-form'
 
-import { chartCombineDataset, floatCvScore } from 'Utils'
+import { floatCvScore } from 'Utils'
 import { actions, makeSelectLibraryDetail } from 'Reducers/libraryDetail'
 import { actions as libraryActions, makeSelectLibrary } from 'Reducers/library'
 
@@ -107,7 +107,7 @@ export class LibraryDetail extends React.Component {
             }.mp4`}
             title={selectedVideo.title}
             socialIcon={selectedVideo.socialIcon}
-            cvScore={floatCvScore(selectedVideo['cvScores.value'])}
+            cvScore={floatCvScore(selectedVideo['cvScores.value']) || 0.0}
           />
         )}
         {doughnutLineChartData && (
