@@ -498,14 +498,20 @@ function* getTopPerformingPropertiesByCompetitorsData({
   }
 }
 
-function* getTopPerformingPropertiesByTimeData({ payload: { property } }) {
+function* getTopPerformingPropertiesByTimeData({
+  payload: { property, dateRange },
+}) {
   try {
     const { brand } = yield select(selectAuthProfile)
+
+    const dateBucket = getDateBucketFromRange(dateRange)
+
     const options = {
+      dateRange,
+      dateBucket,
       url: '/report',
       metric: 'views',
       property: [property],
-      dateBucket: 'dayOfWeek',
       display: 'percentage',
       brands: [brand.uuid],
     }

@@ -26,7 +26,7 @@ class LibraryDetailShotByShot extends React.Component {
       viewportSize: 0,
       viewportDurations: {},
       sliderMarks: {},
-      rightPaneHeight: 480
+      rightPaneHeight: 480,
     }
     this.refs = []
   }
@@ -67,7 +67,7 @@ class LibraryDetailShotByShot extends React.Component {
     const { height } = this.slider.getBoundingClientRect()
     const totalHeight = Math.floor(height) + 48 - 85 - 20 - 15 // + top margin - tabs area - right top+bottom margins - bottom margin
     this.setState({
-      rightPaneHeight: totalHeight
+      rightPaneHeight: totalHeight,
     })
   }
 
@@ -95,7 +95,7 @@ class LibraryDetailShotByShot extends React.Component {
     let viewportTempShots = {}
     let viewportTempShotsTotalWidth = {}
     let viewportShots = []
-    const viewportSize = 1118 - ((tickCount + 1) * shotMargin)
+    const viewportSize = 1118 - (tickCount + 1) * shotMargin
 
     const shots = Object.values(this.state.shots)
 
@@ -264,7 +264,12 @@ class LibraryDetailShotByShot extends React.Component {
 
   render() {
     const { radarData, shotInfo } = this.props
-    const { selectedImage, viewportShots, sliderMarks, shotsTotalWidth } = this.state
+    const {
+      selectedImage,
+      viewportShots,
+      sliderMarks,
+      shotsTotalWidth,
+    } = this.state
 
     const radarChartData = {
       "labels":[
@@ -322,7 +327,7 @@ class LibraryDetailShotByShot extends React.Component {
           return (
             <div
               className="grid-container col-12 mt-72 mb-72"
-              ref={el => this.slider = el}
+              ref={(el) => (this.slider = el)}
               style={{
                 backgroundColor: colors.moduleBackground,
                 boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
@@ -375,51 +380,66 @@ class LibraryDetailShotByShot extends React.Component {
                       </div>
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
-                          <Scrubber vertical width={570} height={this.state.rightPaneHeight}>
-                            {shotInfo && shotInfo.shot && shotInfo.shot.labels && shotInfo.shot.labels.map((info, i) => (
-                              <div
-                                className={classnames(
-                                  style.tabPanelItem,
-                                  'grid-container',
-                                  {
-                                    'mb-16': i !== shotInfo.shot.labels.length - 1,
-                                  }
-                                )}
-                                style={{
-                                  background: colors.shotByShotBackground,
-                                  borderColor: colors.shotByShotBorder,
-                                  marginRight: '16px !important',
-                                }}
-                                key={i}
-                              >
-                                <div className="col-5-no-gutters">
-                                  <img
-                                    src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${shotInfo.shot.frames[i]}`}
-                                    className="img-responsive"
-                                  />
-                                </div>
-                                <div className="col-7-no-gutters">
-                                  <div className="pt-20">
-                                    <div
+                          <Scrubber
+                            vertical
+                            width={570}
+                            height={this.state.rightPaneHeight}
+                          >
+                            {shotInfo &&
+                              shotInfo.shot &&
+                              shotInfo.shot.labels &&
+                              shotInfo.shot.labels.map((info, i) => (
+                                <div
+                                  className={classnames(
+                                    style.tabPanelItem,
+                                    'grid-container',
+                                    {
+                                      'mb-16':
+                                        i !== shotInfo.shot.labels.length - 1,
+                                    }
+                                  )}
+                                  style={{
+                                    background: colors.shotByShotBackground,
+                                    borderColor: colors.shotByShotBorder,
+                                    marginRight: '16px !important',
+                                  }}
+                                  key={i}
+                                >
+                                  <div className="col-5-no-gutters">
+                                    <img
+                                      src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${
+                                        shotInfo.shot.frames[i]
+                                      }`}
+                                      className="img-responsive"
+                                    />
+                                  </div>
+                                  <div className="col-7-no-gutters">
+                                    <div className="pt-20">
+                                      <div
                                         className={style.progressbarContainer}
                                         key={i}
                                       >
                                         <div className={style.barOptions}>
                                           <p>{info.label}</p>
-                                          <p>{(info.confidence*100).toFixed(0)}% Accurate</p>
+                                          <p>
+                                            {(info.confidence * 100).toFixed(0)}
+                                            % Accurate
+                                          </p>
                                         </div>
                                         <ProgressBar
-                                          width={(info.confidence*100).toFixed(0)}
+                                          width={(
+                                            info.confidence * 100
+                                          ).toFixed(0)}
                                           customBarClass={style.progressBar}
                                           customPercentageClass={
                                             style.percentage
                                           }
                                         />
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            ))}
+                              ))}
                           </Scrubber>
                         </div>
                       </TabPanel>
@@ -472,7 +492,7 @@ class LibraryDetailShotByShot extends React.Component {
                     <h2 className={style.sliderHeader}>Shot by Shot</h2>
                     <div className={style.sliderContainer}>
                       <div className={style.shotByShotMask} />
-                      <Scrubber
+                      {viewportShots && sliderMarks && shotsTotalWidth && (<Scrubber
                         horizontal
                         arrows
                         viewBordered
@@ -513,16 +533,18 @@ class LibraryDetailShotByShot extends React.Component {
                                 <img
                                   src={shot.image}
                                   style={{
-                                    height: '160px'
+                                    height: '160px',
                                   }}
                                   className={style.hover}
-                                  onClick={() => { this.handleClick(i) }}
+                                  onClick={() => {
+                                    this.handleClick(i)
+                                  }}
                                 />
                               </div>
                             </React.Fragment>
                           ))}
                         </div>
-                      </Scrubber>
+                      </Scrubber>)}
                     </div>
                   </div>
                 </div>

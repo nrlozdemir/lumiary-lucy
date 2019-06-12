@@ -2,12 +2,12 @@ export const lineStackedAreaOptions = [
   {
     fill: true,
     borderColor: "transparent",
-    backgroundColor: "rgba(220, 118, 149, 0.6)"
+    backgroundColor: "rgba(47, 215, 196, 0.8)"
   },
   {
     fill: true,
     borderColor: "transparent",
-    backgroundColor: "rgba(163, 137, 255, 0.6)"
+    backgroundColor: "rgba(82, 146, 229, 0.8)"
   },
   {
     fill: true,
