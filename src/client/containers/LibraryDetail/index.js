@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import { bindActionCreators, compose } from 'redux'
 import { reduxForm } from 'redux-form'
 
-import { chartCombineDataset } from 'Utils'
+import { chartCombineDataset, floatCvScore } from 'Utils'
 import { actions, makeSelectLibraryDetail } from 'Reducers/libraryDetail'
 import { actions as libraryActions, makeSelectLibrary } from 'Reducers/library'
 
@@ -89,12 +89,7 @@ export class LibraryDetail extends React.Component {
         colorTempData,
         shotByShotData,
         shotInfoData,
-        selectedVideo: {
-          socialIcon,
-          uuid,
-          title,
-          'cvScore.value': cvScore = 0.0,
-        },
+        selectedVideo,
         selectedVideoAverage,
       },
       match: {
@@ -132,10 +127,12 @@ export class LibraryDetail extends React.Component {
           <LibraryDetailChartHeader
             barChartData={barChartData}
             selectedVideoAverage={selectedVideoAverage}
-            videoUrl={`${mediaUrl}/lumiere/${userUuid}/${uuid}.mp4`}
-            title={title}
-            socialIcon={socialIcon}
-            cvScore={cvScore}
+            videoUrl={`${mediaUrl}/lumiere/${userUuid}/${
+              selectedVideo.uuid
+            }.mp4`}
+            title={selectedVideo.title}
+            socialIcon={selectedVideo.socialIcon}
+            cvScore={floatCvScore(selectedVideo['cvScores.value'])}
           />
         )}
         {doughnutLineChartData && (

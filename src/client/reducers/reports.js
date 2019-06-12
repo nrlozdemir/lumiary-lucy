@@ -122,8 +122,9 @@ export const actions = {
     error,
   }),
 
-  getContentVitalityScoreData: () => ({
+  getContentVitalityScoreData: (payload) => ({
     type: types.GET_CONTENT_VITALITY_SCORE_DATA,
+    payload,
   }),
   getContentVitalityScoreDataSuccess: (payload) => ({
     type: types.GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS,

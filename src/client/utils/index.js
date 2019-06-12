@@ -167,6 +167,11 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     customKeys = brands
   }
 
+  // if dataset values type of object, get value in the object
+  if (datasetsFromValues && typeof datasetsFromValues[0] === 'object') {
+    datasetsFromValues = datasetsFromValues.map((d) => d.value)
+  }
+
   // Object.keys(
   //  brandObjects[0][Object.keys(brandObjects[0])]
   // ).map((value) => brandObjects.map((brand) => brand.duration[value]))
@@ -607,13 +612,22 @@ const normalize = (input, min, max, low_range, high_range) => {
 
 const parseAverage = (payload) => {
   let calculateAverage = Object.keys(payload).reduce((acc, key) => {
-    const keyName = key.substr(0, key.indexOf('.'))
-    if (key.includes('LibraryAverage')) {
-      acc[keyName] = { average: parseInt(payload[key]) }
+    const keyName = key !== 'video' && key.substr(0, key.indexOf('.'))
+    if (keyName) {
+      if (key.includes('LibraryAverage')) {
+        acc[keyName] = {
+          ...acc[keyName],
+          average: parseFloat(payload[key]).toFixed(0),
+        }
+      }
+      if (key.includes('LibraryMax')) {
+        acc[keyName] = {
+          ...acc[keyName],
+          max: parseFloat(payload[key]).toFixed(0)
+        }
+      }
     }
-    if (key.includes('LibraryMax')) {
-      acc[keyName] = { max: parseInt(payload[key]) }
-    }
+    
     return acc
   }, {})
 
@@ -622,18 +636,18 @@ const parseAverage = (payload) => {
     if (item.includes('diffFromLibrary')) {
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
-        diff: parseInt(payload.video[item]),
+        diff: parseFloat(payload.video[item]).toFixed(2),
       }
     }
     if (item.includes('value')) {
       keyName = keyName.slice(0, keyName.length - 1)
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
-        value: parseInt(payload.video[item]),
+        value: parseFloat(payload.video[item]).toFixed(0),
       }
     }
   })
-  console.log(calculateAverage)
+
   return calculateAverage
 }
 
@@ -752,6 +766,7 @@ const convertVideoEngagementData = (
   })
 }
 
+const floatCvScore = (val) => Number.parseFloat(val).toFixed(1)
 export {
   ucfirst,
   normalize,
@@ -777,4 +792,5 @@ export {
   addComma,
   parseAverage,
   convertVideoEngagementData,
+  floatCvScore,
 }
