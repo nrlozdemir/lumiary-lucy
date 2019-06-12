@@ -242,10 +242,18 @@ const libraryDetailReducer = (state = initialState, action) => {
 export const selectLibraryDetailDomain = (state) => state.LibraryDetail
 export const selectLibraryDetailSelectedVideo = (state) =>
   state.LibraryDetail.get('selectedVideo')
+export const selectLibraryDetailRaharChart = (state) =>
+  state.LibraryDetail.get('radarChartData')
 
 export const selectShotInfo = () =>
   createSelector(
     selectLibraryDetailSelectedVideo,
+    (substate) => substate.toJS()
+  )
+
+export const selectColorsInfo = () =>
+  createSelector(
+    selectLibraryDetailRaharChart,
     (substate) => substate.toJS()
   )
 
