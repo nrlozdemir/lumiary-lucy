@@ -263,13 +263,40 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   render() {
-    const { radarData, shotInfo, radarChartData } = this.props
+    const { shotInfo, radarChartData } = this.props
     const {
       selectedImage,
       viewportShots,
       sliderMarks,
       shotsTotalWidth,
     } = this.state
+    
+    const radarChartDataConfigured = {
+      "labels": [
+        "#cc2226",
+        "#dd501d",
+        "#eb7919",
+        "#f8b90b",
+        "#aac923",
+        "#fff20d",
+        "13862b",
+        "#229a78",
+        "#79609b",
+        "#923683",
+        "#b83057",
+        //"#3178b0",
+      ],
+      "datasets": [
+        {
+          label: "Shots",
+          backgroundColor: "rgb(82, 146, 229, 0.5)",
+          borderColor: "rgb(82, 146, 229, 1)",
+          pointBackgroundColor: "rgb(82, 146, 229, 0.5)",
+          pointBorderColor: "rgb(82, 146, 229, 1)",
+          "data": radarChartData
+        }
+      ]
+    }
 
     return (
       <ThemeContext.Consumer>
@@ -328,6 +355,41 @@ class LibraryDetailShotByShot extends React.Component {
                           </div>
                         </TabList>
                       </div>
+                      <TabPanel>
+                        <div className={style.tabPanel}>
+                          <div
+                            className={
+                              style.tabPanelItem + ' grid-container mt-16'
+                            }
+                            style={{
+                              background: colors.shotByShotBackground,
+                              borderColor: colors.shotByShotBorder,
+                            }}
+                          >
+                            <div className="col-5-no-gutters">
+                              <img
+                                src="https://picsum.photos/500/270?image=8"
+                                className="img-responsive"
+                              />
+                            </div>
+                            <div className="col-7-no-gutters">
+                              <div className="pt-32">
+                                <div className={style.progressbarContainer}>
+                                  <div className={style.barOptions}>
+                                    <p>Football Helmet</p>
+                                    <p>78% Accurate</p>
+                                  </div>
+                                  <ProgressBar
+                                    width={78}
+                                    customBarClass={style.progressBar}
+                                    customPercentageClass={style.percentage}
+                                  />
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </TabPanel>
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
                           <Scrubber
@@ -394,43 +456,8 @@ class LibraryDetailShotByShot extends React.Component {
                         </div>
                       </TabPanel>
                       <TabPanel>
-                        <div className={style.tabPanel}>
-                          <div
-                            className={
-                              style.tabPanelItem + ' grid-container mt-16'
-                            }
-                            style={{
-                              background: colors.shotByShotBackground,
-                              borderColor: colors.shotByShotBorder,
-                            }}
-                          >
-                            <div className="col-5-no-gutters">
-                              <img
-                                src="https://picsum.photos/500/270?image=8"
-                                className="img-responsive"
-                              />
-                            </div>
-                            <div className="col-7-no-gutters">
-                              <div className="pt-32">
-                                <div className={style.progressbarContainer}>
-                                  <div className={style.barOptions}>
-                                    <p>Football Helmet</p>
-                                    <p>78% Accurate</p>
-                                  </div>
-                                  <ProgressBar
-                                    width={78}
-                                    customBarClass={style.progressBar}
-                                    customPercentageClass={style.percentage}
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </TabPanel>
-                      <TabPanel>
                         <div className={style.radarChartContainer}>
-                          {radarChartData && (<RadarChart data={radarChartData} />)}
+                          {radarChartDataConfigured && (<RadarChart data={radarChartDataConfigured} />)}
                         </div>
                       </TabPanel>
                     </Tabs>
