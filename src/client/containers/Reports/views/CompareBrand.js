@@ -17,6 +17,8 @@ import {
   makeSelectReport,
 } from 'Reducers/generatedReport'
 
+import { makeSelectAuthProfile } from 'Reducers/auth'
+
 import RouterLoading from 'Components/RouterLoading'
 
 import ContentVitalityScore from '../section/ContentVitalityScore'
@@ -44,6 +46,7 @@ class CompareBrand extends React.Component {
       report: { data: report },
       comparebrandValues: { data: comparebrandValues },
       predefinedReportValues: { data: predefinedReportValues },
+      authProfile = {},
 
       getContentVitalityScoreData,
       getColorComparisonData,
@@ -73,6 +76,7 @@ class CompareBrand extends React.Component {
           action={getContentVitalityScoreData}
           data={contentVitalityScoreData}
           report={reportValues}
+          authProfile={authProfile}
         />
         <VideoComparison
           action={getVideoComparisonData}
@@ -103,6 +107,7 @@ const mapStateToProps = createStructuredSelector({
 
   comparebrandValues: makeSelectReportsComparebrandValues(),
   predefinedReportValues: makeSelectReportsPredefinedReportValues(),
+  authProfile: makeSelectAuthProfile(),
 })
 
 const mapDispatchToProps = (dispatch) =>

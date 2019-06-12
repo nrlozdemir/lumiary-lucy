@@ -29,14 +29,23 @@ const Front = (props) => {
           <span className={style.rightTitle}>{addComma(data.value)}</span>
         </div>
         <ProgressBar
-          width={percentage > 100 ? 100 : percentage}
+          width={percentage > 100 ? 100 : (
+            parseFloat(percentage).toFixed(2) > 0 && parseFloat(percentage).toFixed(2) < 1 
+              ? 1 
+              : parseFloat(percentage).toFixed(2) 
+          )}
           customBarClass={style.progressBar}
           customPercentageClass={classnames(style.percentageIncrease, {
             [style.percentageDecrease]:
               parseInt((data.average / data.value) * 100) < 50,
           })}
+          tickColor={colors.progressLibraryDetailTickColor}
+          progressBarBackgroundColor={colors.progressLibraryDetailBackground}
+          progressBarShadowColor={colors.progressLibraryDetailShadow}
         />
-        <p className={style.averageText}>Avg</p>
+        <div className={style.markers}>
+          <p className={style.averageText}>Avg</p>
+        </div>
       </div>
     </div>
   )

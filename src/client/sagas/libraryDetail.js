@@ -227,14 +227,15 @@ function* getSelectedVideo({ payload }) {
 
 function* getVideoAverage({ id }) {
   try {
+    
     const { brand } = yield select(selectAuthProfile)
     const payload = yield call(getDataFromApi, {
       url: `/brand/${brand.uuid}/video/${id}/metrics`,
       requestType: 'GET',
     })
+
     yield put(actions.getSelectedVideoAverageSuccess(parseAverage(payload)))
   } catch (error) {
-    console.log('error', error)
     yield put(actions.getSelectedVideoAverageFailure({ error }))
   }
 }

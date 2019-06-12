@@ -1,9 +1,4 @@
 import React from 'react'
-import { createStructuredSelector } from 'reselect'
-import { connect } from 'react-redux'
-import { compose } from 'redux'
-
-import { makeSelectAuthProfile } from 'Reducers/auth'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'
 
@@ -13,33 +8,33 @@ class ContentVitalityScore extends React.Component {
     action({ ...data, report })
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    console.log(this.props.data.data)
+    console.log(nextProps.data.data)
+    return JSON.stringify(this.props.data.data) !== JSON.stringify(nextProps.data.data)
+  }
+
   render() {
     const {
       data: { data, loading, error },
+      authProfile = {}
     } = this.props
 
-    let yAxisMax = 0
-    const formattedData = Object.keys(data).reduce((accumulator, brandUuid) => {
-      const cvCountArray = Object.values(data[brandUuid])
-      const maxCount = Math.max(...cvCountArray)
-      yAxisMax = (maxCount > yAxisMax) ? maxCount : yAxisMax
-      accumulator.datasets.push({
-        data: cvCountArray
-      })
-      return accumulator
-    }, {
-      datasets: []
-    })
-    
-    const chartYAxisMax = (yAxisMax < 1000) ? Math.ceil(yAxisMax/100)*100 : Math.ceil(yAxisMax/1000)*1000
-    const chartYAxisStepSize = (yAxisMax < 1000) ? 100 : 1000
+    const maxVideoPercent = Object.keys(data).reduce((accumulator, key) => {
+      const maxPercentInSet = Math.max(...data[key].videoPercents)
+      return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
+    }, 0)
+
+    const chartYAxisMax = (maxVideoPercent > 50) ? 100 : 50
+    const chartYAxisStepSize = (maxVideoPercent > 50) ? 25 : 12.5
 
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <ContentVitalityScoreModule
             chartYAxisMax={chartYAxisMax}
-            data={formattedData}
+            data={data}
+            authProfile={authProfile}
             moduleKey={'Reports/ContentVitalityScore'}
             title="Content Vitality Score by Videos Produced Comparison"
             action={this.callBack}
@@ -102,14 +97,4 @@ class ContentVitalityScore extends React.Component {
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  profile: makeSelectAuthProfile(),
-})
-
-const withConnect = connect(
-  mapStateToProps,
-)
-
-export default compose(withConnect)(ContentVitalityScore)
-
-// export default ContentVitalityScore
+export default ContentVitalityScore

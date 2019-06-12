@@ -456,7 +456,7 @@ class LibraryDetailShotByShot extends React.Component {
                     <h2 className={style.sliderHeader}>Shot by Shot</h2>
                     <div className={style.sliderContainer}>
                       <div className={style.shotByShotMask} />
-                      <Scrubber
+                      {viewportShots && sliderMarks && shotsTotalWidth && (<Scrubber
                         horizontal
                         arrows
                         viewBordered
@@ -508,7 +508,7 @@ class LibraryDetailShotByShot extends React.Component {
                             </React.Fragment>
                           ))}
                         </div>
-                      </Scrubber>
+                      </Scrubber>)}
                     </div>
                   </div>
                 </div>

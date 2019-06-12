@@ -116,21 +116,20 @@ function* deleteReport(data) {
   // }
 }
 
-function* getContentVitalityScoreData() {
+function* getContentVitalityScoreData({ payload = {} }) {
+  const { dateRange, platform, report = {} } = payload
+  const { brands = [] } = report
   try {
     const response = yield call((() => {
       return getDataFromApi(
         {},
         `/report/compare/brands?${querystring.stringify({
-          "brands": [
-            "d65aa957-d094-4cf3-8d37-dafe50e752ea",
-            "1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6"
-          ],
+          "brands": brands,
           "property": "cvScore",
           "mode": "sumVideos",
-          "daterange": "3months",
-          "platform": "all"
-        })}`,
+          "daterange": dateRange,
+          "platform": platform
+        })}`, 
         'GET'
       )
       .then((response) => {
@@ -141,7 +140,7 @@ function* getContentVitalityScoreData() {
         return response
       })
     }), {})
-
+console.log('response', response)
     yield put(actions.getContentVitalityScoreDataSuccess(response))
   } catch (err) {
     console.log(err)
