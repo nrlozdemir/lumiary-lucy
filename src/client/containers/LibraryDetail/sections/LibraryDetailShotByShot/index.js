@@ -63,6 +63,7 @@ class LibraryDetailShotByShot extends React.Component {
     })
 
     this.props.getShotInfoRequest(i)
+    this.props.getRadarChartRequest(i)
     const { height } = this.slider.getBoundingClientRect()
     const totalHeight = Math.floor(height) + 48 - 85 - 20 - 15 // + top margin - tabs area - right top+bottom margins - bottom margin
     this.setState({
@@ -97,169 +98,172 @@ class LibraryDetailShotByShot extends React.Component {
     const viewportSize = 1118 - ((tickCount + 1) * shotMargin)
 
     const shots = Object.values(this.state.shots)
-    const durations = shots.map(
-      element => (element.endTime - element.startTime).toFixed(4)
-    )
-    const totalDuration = (shots[shots.length - 1].endTime).toFixed(4)
 
-    //first index and last index not included
-    const dividedDuration = (Math.round(totalDuration / (tickCount))).toFixed(4)
-
-    //create marks
-    for (let i = 0; i < tickCount - 1; i++) {
-      sliderMarks.push(this.secondToTime(i * dividedDuration))
-    }
-    sliderMarks.push(this.secondToTime(shots[shots.length - 1].endTime))
-
-    //rebuild custom-marks for styling
-    sliderMarks.map((element, index) => {
-      index = parseInt(index * 10)
-      if (index === 0) {
-        sliderMarksToState[index] = {
-          style: { transform: 'translateX(0%)' },
-          label: <p className="customDot">{element}</p>,
-          value: element,
-        }
-      } else if (index === 100) {
-        sliderMarksToState[index] = {
-          style: { transform: 'translateX(-100%)' },
-          label: <p className="customDot">{element}</p>,
-          value: element,
-        }
-      } else {
-        sliderMarksToState[index] = {
-          style: { },
-          label: <p className="customDot">{element}</p>,
-          value: element,
-        }
-      }
-    })
-
-    //create viewports including max 11 items from shots, fit size to min and max
-    const totalViewports = (shots.length / tickCount).toFixed(2)
-    for (let v = 0; v < totalViewports; v++) {
-      viewportTempShots[v] = []
-      viewportTempShotsTotalWidth[v] = 0
-      viewportDurations[v] = 0
-      viewportLeftOver[v] = 0
-    }
-
-    shots.map((el, i) => {
-      const index = parseInt(Math.floor(i / 11))
-      el.duration = parseFloat(
-        (el.endTime - el.startTime).toFixed(4)
+    if (shots && shots.length > 0) {
+      const durations = shots.map(
+        element => (element.endTime - element.startTime).toFixed(4)
       )
-      viewportTempShots[index].push(el)
-      viewportDurations[index] += el.duration
-    })
-
-    for (let v = 0; v < totalViewports; v++) {
-      Object.values(viewportTempShots[v]).map((el, i) => {
-        el.realWidth = parseFloat(
-          ((viewportSize / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
-        )
-        el.width = parseFloat(
-          ((viewportSize / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
-        )
-        el.max = 0
-        el.diff = maxShotWidth - el.width
-        if (el.width < minShotWidth) {
-          viewportLeftOver[v] -= minShotWidth - el.width
-          el.width = minShotWidth
-          el.diff = maxShotWidth - minShotWidth
-        }
-        if (el.width > maxShotWidth) {
-          viewportLeftOver[v] += el.width - maxShotWidth
-          el.width = maxShotWidth
-          el.diff = 0
-          el.max = 1
+      const totalDuration = (shots[shots.length - 1].endTime).toFixed(4)
+  
+      //first index and last index not included
+      const dividedDuration = (Math.round(totalDuration / (tickCount))).toFixed(4)
+  
+      //create marks
+      for (let i = 0; i < tickCount - 1; i++) {
+        sliderMarks.push(this.secondToTime(i * dividedDuration))
+      }
+      sliderMarks.push(this.secondToTime(shots[shots.length - 1].endTime))
+  
+      //rebuild custom-marks for styling
+      sliderMarks.map((element, index) => {
+        index = parseInt(index * 10)
+        if (index === 0) {
+          sliderMarksToState[index] = {
+            style: { transform: 'translateX(0%)' },
+            label: <p className="customDot">{element}</p>,
+            value: element,
+          }
+        } else if (index === 100) {
+          sliderMarksToState[index] = {
+            style: { transform: 'translateX(-100%)' },
+            label: <p className="customDot">{element}</p>,
+            value: element,
+          }
+        } else {
+          sliderMarksToState[index] = {
+            style: { },
+            label: <p className="customDot">{element}</p>,
+            value: element,
+          }
         }
       })
-
-      viewportTempShots[v].length === tickCount &&
+  
+      //create viewports including max 11 items from shots, fit size to min and max
+      const totalViewports = (shots.length / tickCount).toFixed(2)
+      for (let v = 0; v < totalViewports; v++) {
+        viewportTempShots[v] = []
+        viewportTempShotsTotalWidth[v] = 0
+        viewportDurations[v] = 0
+        viewportLeftOver[v] = 0
+      }
+  
+      shots.map((el, i) => {
+        const index = parseInt(Math.floor(i / 11))
+        el.duration = parseFloat(
+          (el.endTime - el.startTime).toFixed(4)
+        )
+        viewportTempShots[index].push(el)
+        viewportDurations[index] += el.duration
+      })
+  
+      for (let v = 0; v < totalViewports; v++) {
         Object.values(viewportTempShots[v]).map((el, i) => {
-        const findDiff = parseFloat(
-          ((viewportLeftOver[v]  / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
-        )
-        if (viewportLeftOver[v] > 0) {
-          if(el.width + findDiff > maxShotWidth){
-            el.width = maxShotWidth;
-            viewportLeftOver[v] -= maxShotWidth - el.width
-          } else {
-            el.width += findDiff
-            viewportLeftOver[v] -= findDiff
+          el.realWidth = parseFloat(
+            ((viewportSize / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
+          )
+          el.width = parseFloat(
+            ((viewportSize / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
+          )
+          el.max = 0
+          el.diff = maxShotWidth - el.width
+          if (el.width < minShotWidth) {
+            viewportLeftOver[v] -= minShotWidth - el.width
+            el.width = minShotWidth
+            el.diff = maxShotWidth - minShotWidth
           }
-        } else if (viewportLeftOver[v] < 0) {
-          if(el.width - findDiff < minShotWidth){
-            el.width = minShotWidth;
-            viewportLeftOver[v] += el.width - minShotWidth
-          } else {
-            el.width -= findDiff
-            viewportLeftOver[v] += findDiff
+          if (el.width > maxShotWidth) {
+            viewportLeftOver[v] += el.width - maxShotWidth
+            el.width = maxShotWidth
+            el.diff = 0
+            el.max = 1
           }
-        }
-      })
-
-      if (viewportTempShots[v].length === tickCount) {
-        do {
+        })
+  
+        viewportTempShots[v].length === tickCount &&
           Object.values(viewportTempShots[v]).map((el, i) => {
-            if (viewportLeftOver[v] > 0) {
-              if (el.max !== 1 && el.diff > 0 && el.width !== maxShotWidth) {
-                el.width += 1
-                viewportLeftOver[v] -= 1
+          const findDiff = parseFloat(
+            ((viewportLeftOver[v]  / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
+          )
+          if (viewportLeftOver[v] > 0) {
+            if(el.width + findDiff > maxShotWidth){
+              el.width = maxShotWidth;
+              viewportLeftOver[v] -= maxShotWidth - el.width
+            } else {
+              el.width += findDiff
+              viewportLeftOver[v] -= findDiff
+            }
+          } else if (viewportLeftOver[v] < 0) {
+            if(el.width - findDiff < minShotWidth){
+              el.width = minShotWidth;
+              viewportLeftOver[v] += el.width - minShotWidth
+            } else {
+              el.width -= findDiff
+              viewportLeftOver[v] += findDiff
+            }
+          }
+        })
+  
+        if (viewportTempShots[v].length === tickCount) {
+          do {
+            Object.values(viewportTempShots[v]).map((el, i) => {
+              if (viewportLeftOver[v] > 0) {
+                if (el.max !== 1 && el.diff > 0 && el.width !== maxShotWidth) {
+                  el.width += 1
+                  viewportLeftOver[v] -= 1
+                }
               }
+            })
+          } while (viewportLeftOver[v] > 0)
+        }
+  
+        viewportTempShotsTotalWidth[v] = Object.values(viewportTempShots[v]).reduce(
+          (prev, next) => prev + parseFloat(next.width.toFixed(4)), 0
+        )
+  
+        if (viewportTempShotsTotalWidth[v] > viewportSize) {
+          const findTrimValue = parseFloat((viewportTempShotsTotalWidth[v] - viewportSize).toFixed(4))
+  
+          viewportTempShots[v].length === tickCount && Object.values(viewportTempShots[v]).map((el, i) => {
+            if (el.width > Math.floor(el.width)
+              && el.width - Math.floor(el.width) >= findTrimValue
+              && viewportTempShotsTotalWidth[v] !== viewportSize
+            ) {
+              el.width -= findTrimValue
+              viewportTempShotsTotalWidth[v] -= findTrimValue
             }
           })
-        } while (viewportLeftOver[v] > 0)
-      }
-
-      viewportTempShotsTotalWidth[v] = Object.values(viewportTempShots[v]).reduce(
-        (prev, next) => prev + parseFloat(next.width.toFixed(4)), 0
-      )
-
-      if (viewportTempShotsTotalWidth[v] > viewportSize) {
-        const findTrimValue = parseFloat((viewportTempShotsTotalWidth[v] - viewportSize).toFixed(4))
-
-        viewportTempShots[v].length === tickCount && Object.values(viewportTempShots[v]).map((el, i) => {
-          if (el.width > Math.floor(el.width)
-            && el.width - Math.floor(el.width) >= findTrimValue
-            && viewportTempShotsTotalWidth[v] !== viewportSize
-          ) {
-            el.width -= findTrimValue
-            viewportTempShotsTotalWidth[v] -= findTrimValue
-          }
-        })
-      } else if (viewportTempShotsTotalWidth[v] < viewportSize) {
-        const findTrimValue = parseFloat((viewportSize - viewportTempShotsTotalWidth[v]).toFixed(4))
-
-        viewportTempShots[v].length === tickCount && Object.values(viewportTempShots[v]).map((el, i) => {
-          if (viewportTempShotsTotalWidth[v] !== viewportSize) {
-            el.width += findTrimValue
-            viewportTempShotsTotalWidth[v] += findTrimValue
-          }
+        } else if (viewportTempShotsTotalWidth[v] < viewportSize) {
+          const findTrimValue = parseFloat((viewportSize - viewportTempShotsTotalWidth[v]).toFixed(4))
+  
+          viewportTempShots[v].length === tickCount && Object.values(viewportTempShots[v]).map((el, i) => {
+            if (viewportTempShotsTotalWidth[v] !== viewportSize) {
+              el.width += findTrimValue
+              viewportTempShotsTotalWidth[v] += findTrimValue
+            }
+          })
+        }
+  
+        Object.values(viewportTempShots[v]).map((el, i) => {
+          viewportShots.push(el)
         })
       }
-
-      Object.values(viewportTempShots[v]).map((el, i) => {
-        viewportShots.push(el)
+  
+      viewportShots && viewportShots.map((el, i) => {
+        shotsTotalWidth += el.width + shotMargin
       })
-    }
-
-    viewportShots && viewportShots.map((el, i) => {
-      shotsTotalWidth += el.width + shotMargin
-    })
-
-    this.setState({
-      shotsTotalWidth: shotsTotalWidth + shotMargin,
-      viewportShots: viewportShots,
-      viewportSize: viewportSize,
-      viewportDurations: viewportDurations,
-      sliderMarks: sliderMarksToState
-    })
+  
+      this.setState({
+        shotsTotalWidth: shotsTotalWidth + shotMargin,
+        viewportShots: viewportShots,
+        viewportSize: viewportSize,
+        viewportDurations: viewportDurations,
+        sliderMarks: sliderMarksToState
+      })
+    } 
   }
 
   render() {
-    const { radarData, shotInfo } = this.props
+    const { radarData, shotInfo, radarChartData } = this.props
     const { selectedImage, viewportShots, sliderMarks, shotsTotalWidth } = this.state
 
     return (
@@ -406,7 +410,7 @@ class LibraryDetailShotByShot extends React.Component {
                       </TabPanel>
                       <TabPanel>
                         <div className={style.radarChartContainer}>
-                          {radarData && (<RadarChart data={radarData} />)}
+                          {radarChartData && (<RadarChart data={radarChartData} />)}
                         </div>
                       </TabPanel>
                     </Tabs>
@@ -435,7 +439,7 @@ class LibraryDetailShotByShot extends React.Component {
                             width: shotsTotalWidth,
                           }}
                         >
-                          {viewportShots.map((shot, i) => (
+                          {viewportShots && viewportShots.map((shot, i) => (
                             <React.Fragment key={i}>
                               <div className={style.image}>
                                 <div
@@ -488,6 +492,7 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     getShotInfoRequest: (shotId) => dispatch(actions.getShotInfoRequest(shotId)),
+    getRadarChartRequest: (shotId) => dispatch(actions.getRadarChartRequest(shotId)),
   }
 }
 
