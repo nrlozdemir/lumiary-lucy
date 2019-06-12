@@ -26,7 +26,7 @@ class LibraryDetailShotByShot extends React.Component {
       viewportSize: 0,
       viewportDurations: {},
       sliderMarks: {},
-      rightPaneHeight: 480
+      rightPaneHeight: 480,
     }
     this.refs = []
   }
@@ -66,7 +66,7 @@ class LibraryDetailShotByShot extends React.Component {
     const { height } = this.slider.getBoundingClientRect()
     const totalHeight = Math.floor(height) + 48 - 85 - 20 - 15 // + top margin - tabs area - right top+bottom margins - bottom margin
     this.setState({
-      rightPaneHeight: totalHeight
+      rightPaneHeight: totalHeight,
     })
   }
 
@@ -94,173 +94,196 @@ class LibraryDetailShotByShot extends React.Component {
     let viewportTempShots = {}
     let viewportTempShotsTotalWidth = {}
     let viewportShots = []
-    const viewportSize = 1118 - ((tickCount + 1) * shotMargin)
+    const viewportSize = 1118 - (tickCount + 1) * shotMargin
 
     const shots = Object.values(this.state.shots)
-    const durations = shots.map(
-      element => (element.endTime - element.startTime).toFixed(4)
-    )
-    const totalDuration = (shots[shots.length - 1].endTime).toFixed(4)
 
-    //first index and last index not included
-    const dividedDuration = (Math.round(totalDuration / (tickCount))).toFixed(4)
-
-    //create marks
-    for (let i = 0; i < tickCount - 1; i++) {
-      sliderMarks.push(this.secondToTime(i * dividedDuration))
-    }
-    sliderMarks.push(this.secondToTime(shots[shots.length - 1].endTime))
-
-    //rebuild custom-marks for styling
-    sliderMarks.map((element, index) => {
-      index = parseInt(index * 10)
-      if (index === 0) {
-        sliderMarksToState[index] = {
-          style: { transform: 'translateX(0%)' },
-          label: <p className="customDot">{element}</p>,
-          value: element,
-        }
-      } else if (index === 100) {
-        sliderMarksToState[index] = {
-          style: { transform: 'translateX(-100%)' },
-          label: <p className="customDot">{element}</p>,
-          value: element,
-        }
-      } else {
-        sliderMarksToState[index] = {
-          style: { },
-          label: <p className="customDot">{element}</p>,
-          value: element,
-        }
-      }
-    })
-
-    //create viewports including max 11 items from shots, fit size to min and max
-    const totalViewports = (shots.length / tickCount).toFixed(2)
-    for (let v = 0; v < totalViewports; v++) {
-      viewportTempShots[v] = []
-      viewportTempShotsTotalWidth[v] = 0
-      viewportDurations[v] = 0
-      viewportLeftOver[v] = 0
-    }
-
-    shots.map((el, i) => {
-      const index = parseInt(Math.floor(i / 11))
-      el.duration = parseFloat(
-        (el.endTime - el.startTime).toFixed(4)
+    if (shots && shots.length > 0) {
+      const durations = shots.map((element) =>
+        (element.endTime - element.startTime).toFixed(4)
       )
-      viewportTempShots[index].push(el)
-      viewportDurations[index] += el.duration
-    })
+      const totalDuration = shots[shots.length - 1].endTime.toFixed(4)
 
-    for (let v = 0; v < totalViewports; v++) {
-      Object.values(viewportTempShots[v]).map((el, i) => {
-        el.realWidth = parseFloat(
-          ((viewportSize / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
-        )
-        el.width = parseFloat(
-          ((viewportSize / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
-        )
-        el.max = 0
-        el.diff = maxShotWidth - el.width
-        if (el.width < minShotWidth) {
-          viewportLeftOver[v] -= minShotWidth - el.width
-          el.width = minShotWidth
-          el.diff = maxShotWidth - minShotWidth
-        }
-        if (el.width > maxShotWidth) {
-          viewportLeftOver[v] += el.width - maxShotWidth
-          el.width = maxShotWidth
-          el.diff = 0
-          el.max = 1
+      //first index and last index not included
+      const dividedDuration = Math.round(totalDuration / tickCount).toFixed(4)
+
+      //create marks
+      for (let i = 0; i < tickCount - 1; i++) {
+        sliderMarks.push(this.secondToTime(i * dividedDuration))
+      }
+      sliderMarks.push(this.secondToTime(shots[shots.length - 1].endTime))
+
+      //rebuild custom-marks for styling
+      sliderMarks.map((element, index) => {
+        index = parseInt(index * 10)
+        if (index === 0) {
+          sliderMarksToState[index] = {
+            style: { transform: 'translateX(0%)' },
+            label: <p className="customDot">{element}</p>,
+            value: element,
+          }
+        } else if (index === 100) {
+          sliderMarksToState[index] = {
+            style: { transform: 'translateX(-100%)' },
+            label: <p className="customDot">{element}</p>,
+            value: element,
+          }
+        } else {
+          sliderMarksToState[index] = {
+            style: {},
+            label: <p className="customDot">{element}</p>,
+            value: element,
+          }
         }
       })
 
-      viewportTempShots[v].length === tickCount &&
+      //create viewports including max 11 items from shots, fit size to min and max
+      const totalViewports = (shots.length / tickCount).toFixed(2)
+      for (let v = 0; v < totalViewports; v++) {
+        viewportTempShots[v] = []
+        viewportTempShotsTotalWidth[v] = 0
+        viewportDurations[v] = 0
+        viewportLeftOver[v] = 0
+      }
+
+      shots.map((el, i) => {
+        const index = parseInt(Math.floor(i / 11))
+        el.duration = parseFloat((el.endTime - el.startTime).toFixed(4))
+        viewportTempShots[index].push(el)
+        viewportDurations[index] += el.duration
+      })
+
+      for (let v = 0; v < totalViewports; v++) {
         Object.values(viewportTempShots[v]).map((el, i) => {
-        const findDiff = parseFloat(
-          ((viewportLeftOver[v]  / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
-        )
-        if (viewportLeftOver[v] > 0) {
-          if(el.width + findDiff > maxShotWidth){
-            el.width = maxShotWidth;
-            viewportLeftOver[v] -= maxShotWidth - el.width
-          } else {
-            el.width += findDiff
-            viewportLeftOver[v] -= findDiff
+          el.realWidth = parseFloat(
+            (
+              (viewportSize / 100) *
+              ((el.duration * 100) / viewportDurations[v])
+            ).toFixed(4)
+          )
+          el.width = parseFloat(
+            (
+              (viewportSize / 100) *
+              ((el.duration * 100) / viewportDurations[v])
+            ).toFixed(4)
+          )
+          el.max = 0
+          el.diff = maxShotWidth - el.width
+          if (el.width < minShotWidth) {
+            viewportLeftOver[v] -= minShotWidth - el.width
+            el.width = minShotWidth
+            el.diff = maxShotWidth - minShotWidth
           }
-        } else if (viewportLeftOver[v] < 0) {
-          if(el.width - findDiff < minShotWidth){
-            el.width = minShotWidth;
-            viewportLeftOver[v] += el.width - minShotWidth
-          } else {
-            el.width -= findDiff
-            viewportLeftOver[v] += findDiff
+          if (el.width > maxShotWidth) {
+            viewportLeftOver[v] += el.width - maxShotWidth
+            el.width = maxShotWidth
+            el.diff = 0
+            el.max = 1
           }
-        }
-      })
+        })
 
-      if (viewportTempShots[v].length === tickCount) {
-        do {
+        viewportTempShots[v].length === tickCount &&
           Object.values(viewportTempShots[v]).map((el, i) => {
+            const findDiff = parseFloat(
+              (
+                (viewportLeftOver[v] / 100) *
+                ((el.duration * 100) / viewportDurations[v])
+              ).toFixed(4)
+            )
             if (viewportLeftOver[v] > 0) {
-              if (el.max !== 1 && el.diff > 0 && el.width !== maxShotWidth) {
-                el.width += 1
-                viewportLeftOver[v] -= 1
+              if (el.width + findDiff > maxShotWidth) {
+                el.width = maxShotWidth
+                viewportLeftOver[v] -= maxShotWidth - el.width
+              } else {
+                el.width += findDiff
+                viewportLeftOver[v] -= findDiff
+              }
+            } else if (viewportLeftOver[v] < 0) {
+              if (el.width - findDiff < minShotWidth) {
+                el.width = minShotWidth
+                viewportLeftOver[v] += el.width - minShotWidth
+              } else {
+                el.width -= findDiff
+                viewportLeftOver[v] += findDiff
               }
             }
           })
-        } while (viewportLeftOver[v] > 0)
+
+        if (viewportTempShots[v].length === tickCount) {
+          do {
+            Object.values(viewportTempShots[v]).map((el, i) => {
+              if (viewportLeftOver[v] > 0) {
+                if (el.max !== 1 && el.diff > 0 && el.width !== maxShotWidth) {
+                  el.width += 1
+                  viewportLeftOver[v] -= 1
+                }
+              }
+            })
+          } while (viewportLeftOver[v] > 0)
+        }
+
+        viewportTempShotsTotalWidth[v] = Object.values(
+          viewportTempShots[v]
+        ).reduce((prev, next) => prev + parseFloat(next.width.toFixed(4)), 0)
+
+        if (viewportTempShotsTotalWidth[v] > viewportSize) {
+          const findTrimValue = parseFloat(
+            (viewportTempShotsTotalWidth[v] - viewportSize).toFixed(4)
+          )
+
+          viewportTempShots[v].length === tickCount &&
+            Object.values(viewportTempShots[v]).map((el, i) => {
+              if (
+                el.width > Math.floor(el.width) &&
+                el.width - Math.floor(el.width) >= findTrimValue &&
+                viewportTempShotsTotalWidth[v] !== viewportSize
+              ) {
+                el.width -= findTrimValue
+                viewportTempShotsTotalWidth[v] -= findTrimValue
+              }
+            })
+        } else if (viewportTempShotsTotalWidth[v] < viewportSize) {
+          const findTrimValue = parseFloat(
+            (viewportSize - viewportTempShotsTotalWidth[v]).toFixed(4)
+          )
+
+          viewportTempShots[v].length === tickCount &&
+            Object.values(viewportTempShots[v]).map((el, i) => {
+              if (viewportTempShotsTotalWidth[v] !== viewportSize) {
+                el.width += findTrimValue
+                viewportTempShotsTotalWidth[v] += findTrimValue
+              }
+            })
+        }
+
+        Object.values(viewportTempShots[v]).map((el, i) => {
+          viewportShots.push(el)
+        })
       }
 
-      viewportTempShotsTotalWidth[v] = Object.values(viewportTempShots[v]).reduce(
-        (prev, next) => prev + parseFloat(next.width.toFixed(4)), 0
-      )
-
-      if (viewportTempShotsTotalWidth[v] > viewportSize) {
-        const findTrimValue = parseFloat((viewportTempShotsTotalWidth[v] - viewportSize).toFixed(4))
-
-        viewportTempShots[v].length === tickCount && Object.values(viewportTempShots[v]).map((el, i) => {
-          if (el.width > Math.floor(el.width)
-            && el.width - Math.floor(el.width) >= findTrimValue
-            && viewportTempShotsTotalWidth[v] !== viewportSize
-          ) {
-            el.width -= findTrimValue
-            viewportTempShotsTotalWidth[v] -= findTrimValue
-          }
+      viewportShots &&
+        viewportShots.map((el, i) => {
+          shotsTotalWidth += el.width + shotMargin
         })
-      } else if (viewportTempShotsTotalWidth[v] < viewportSize) {
-        const findTrimValue = parseFloat((viewportSize - viewportTempShotsTotalWidth[v]).toFixed(4))
 
-        viewportTempShots[v].length === tickCount && Object.values(viewportTempShots[v]).map((el, i) => {
-          if (viewportTempShotsTotalWidth[v] !== viewportSize) {
-            el.width += findTrimValue
-            viewportTempShotsTotalWidth[v] += findTrimValue
-          }
-        })
-      }
-
-      Object.values(viewportTempShots[v]).map((el, i) => {
-        viewportShots.push(el)
+      this.setState({
+        shotsTotalWidth: shotsTotalWidth + shotMargin,
+        viewportShots: viewportShots,
+        viewportSize: viewportSize,
+        viewportDurations: viewportDurations,
+        sliderMarks: sliderMarksToState,
       })
     }
-
-    viewportShots && viewportShots.map((el, i) => {
-      shotsTotalWidth += el.width + shotMargin
-    })
-
-    this.setState({
-      shotsTotalWidth: shotsTotalWidth + shotMargin,
-      viewportShots: viewportShots,
-      viewportSize: viewportSize,
-      viewportDurations: viewportDurations,
-      sliderMarks: sliderMarksToState
-    })
   }
 
   render() {
     const { radarData, shotInfo } = this.props
-    const { selectedImage, viewportShots, sliderMarks, shotsTotalWidth } = this.state
+    const {
+      selectedImage,
+      viewportShots,
+      sliderMarks,
+      shotsTotalWidth,
+    } = this.state
 
     return (
       <ThemeContext.Consumer>
@@ -268,7 +291,7 @@ class LibraryDetailShotByShot extends React.Component {
           return (
             <div
               className="grid-container col-12 mt-72 mb-72"
-              ref={el => this.slider = el}
+              ref={(el) => (this.slider = el)}
               style={{
                 backgroundColor: colors.moduleBackground,
                 boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
@@ -321,51 +344,66 @@ class LibraryDetailShotByShot extends React.Component {
                       </div>
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
-                          <Scrubber vertical width={570} height={this.state.rightPaneHeight}>
-                            {shotInfo && shotInfo.shot && shotInfo.shot.labels && shotInfo.shot.labels.map((info, i) => (
-                              <div
-                                className={classnames(
-                                  style.tabPanelItem,
-                                  'grid-container',
-                                  {
-                                    'mb-16': i !== shotInfo.shot.labels.length - 1,
-                                  }
-                                )}
-                                style={{
-                                  background: colors.shotByShotBackground,
-                                  borderColor: colors.shotByShotBorder,
-                                  marginRight: '16px !important',
-                                }}
-                                key={i}
-                              >
-                                <div className="col-5-no-gutters">
-                                  <img
-                                    src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${shotInfo.shot.frames[i]}`}
-                                    className="img-responsive"
-                                  />
-                                </div>
-                                <div className="col-7-no-gutters">
-                                  <div className="pt-20">
-                                    <div
+                          <Scrubber
+                            vertical
+                            width={570}
+                            height={this.state.rightPaneHeight}
+                          >
+                            {shotInfo &&
+                              shotInfo.shot &&
+                              shotInfo.shot.labels &&
+                              shotInfo.shot.labels.map((info, i) => (
+                                <div
+                                  className={classnames(
+                                    style.tabPanelItem,
+                                    'grid-container',
+                                    {
+                                      'mb-16':
+                                        i !== shotInfo.shot.labels.length - 1,
+                                    }
+                                  )}
+                                  style={{
+                                    background: colors.shotByShotBackground,
+                                    borderColor: colors.shotByShotBorder,
+                                    marginRight: '16px !important',
+                                  }}
+                                  key={i}
+                                >
+                                  <div className="col-5-no-gutters">
+                                    <img
+                                      src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${
+                                        shotInfo.shot.frames[i]
+                                      }`}
+                                      className="img-responsive"
+                                    />
+                                  </div>
+                                  <div className="col-7-no-gutters">
+                                    <div className="pt-20">
+                                      <div
                                         className={style.progressbarContainer}
                                         key={i}
                                       >
                                         <div className={style.barOptions}>
                                           <p>{info.label}</p>
-                                          <p>{(info.confidence*100).toFixed(0)}% Accurate</p>
+                                          <p>
+                                            {(info.confidence * 100).toFixed(0)}
+                                            % Accurate
+                                          </p>
                                         </div>
                                         <ProgressBar
-                                          width={(info.confidence*100).toFixed(0)}
+                                          width={(
+                                            info.confidence * 100
+                                          ).toFixed(0)}
                                           customBarClass={style.progressBar}
                                           customPercentageClass={
                                             style.percentage
                                           }
                                         />
+                                      </div>
                                     </div>
                                   </div>
                                 </div>
-                              </div>
-                            ))}
+                              ))}
                           </Scrubber>
                         </div>
                       </TabPanel>
@@ -406,7 +444,7 @@ class LibraryDetailShotByShot extends React.Component {
                       </TabPanel>
                       <TabPanel>
                         <div className={style.radarChartContainer}>
-                          {radarData && (<RadarChart data={radarData} />)}
+                          {radarData && <RadarChart data={radarData} />}
                         </div>
                       </TabPanel>
                     </Tabs>
@@ -459,10 +497,12 @@ class LibraryDetailShotByShot extends React.Component {
                                 <img
                                   src={shot.image}
                                   style={{
-                                    height: '160px'
+                                    height: '160px',
                                   }}
                                   className={style.hover}
-                                  onClick={() => { this.handleClick(i) }}
+                                  onClick={() => {
+                                    this.handleClick(i)
+                                  }}
                                 />
                               </div>
                             </React.Fragment>
@@ -487,7 +527,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    getShotInfoRequest: (shotId) => dispatch(actions.getShotInfoRequest(shotId)),
+    getShotInfoRequest: (shotId) =>
+      dispatch(actions.getShotInfoRequest(shotId)),
   }
 }
 
