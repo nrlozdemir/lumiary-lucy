@@ -259,7 +259,6 @@ function* getRadarChartRequest({ ShotId }) {
     const payload = yield call(getRadarChartRequestApi, {
       ShotId,
     })
-    let radarChartData = {}
 
     const colorNames = [
       "red",
@@ -269,11 +268,11 @@ function* getRadarChartRequest({ ShotId }) {
       "yellow-green",
       "yellow",
       "green",
-      "blue",
       "blue-green",
       "blue-purple",
       "purple",
       "red-purple",
+      //"blue",
     ]
 
     const colors = [
@@ -284,44 +283,37 @@ function* getRadarChartRequest({ ShotId }) {
       "#aac923",
       "#fff20d",
       "13862b",
-      "#3178b0",
       "#229a78",
       "#79609b",
       "#923683",
       "#b83057",
+      //"#3178b0",
     ]
 
-    const xxx = Object.values(payload).map((color, i) => {
-      if (color !== 'undefined') {
-        console.log(payload[[colorNames[i]]])
+    const totalValue = Object.values(payload).reduce(
+      (prev, next) => prev + next
+      , 0
+    )
+
+    const aspectRatio = totalValue > 0 ? 100 / totalValue : 1
+
+    let values = []
+    Object.keys(payload).map((color, i) => {
+      if (i <= 10) {
+        values.push((payload[[colorNames[i]]] * aspectRatio).toFixed(0))
       }
     })
 
-
-    /*
     const radarChartData = {
       "labels": [...colors],
       "datasets":[
          {
-            "data":[
-               65,
-               59,
-               34,
-               81,
-               56,
-               40,
-               65,
-               59,
-               34,
-               81,
-               56
-            ]
+            "data": [...values]
          }
       ]
    }
-    */
 
-    yield put(actions.getRadarChartSuccess(payload))
+    yield put(actions.getRadarChartSuccess(radarChartData))
   } catch (error) {
     yield put(actions.getRadarChartFailure({ error }))
   }
