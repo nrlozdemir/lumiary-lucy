@@ -27,7 +27,7 @@ class PacingCard extends Component {
     } = this.props
 
     const isDataEmpty = (!loading && isDataSetEmpty(data)) || isEmpty(data)
-
+    
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
