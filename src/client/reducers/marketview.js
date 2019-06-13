@@ -290,7 +290,7 @@ export const initialState = fromJS({
     error: null,
   },
   totalCompetitorViewsData: {
-    data: [],
+    data: {},
     loading: false,
     error: null,
   },

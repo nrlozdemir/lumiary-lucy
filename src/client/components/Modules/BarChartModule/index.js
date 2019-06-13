@@ -19,6 +19,18 @@ const BarChartModule = ({
   moduleKey,
   isEmpty,
 }) => {
+  const chartTickOptions = {
+    callback(value) {
+      if (value < 1000) {
+        return value
+      } else if (value < 1000000) {
+        return `${Math.round(value / 1000)}k`
+      }
+      return `${Math.round((value * 100) / 1000000) / 100}m`
+    },
+    ...tickOptions,
+  }
+
   return (
     <Module
       moduleKey={moduleKey}
@@ -45,10 +57,10 @@ const BarChartModule = ({
         )
       }
     >
-      {barData && (
+      {!!barData && (
         <BarChart
           barDurationData={barData}
-          tickOptions={tickOptions}
+          tickOptions={chartTickOptions}
           width={width}
           height={height}
         />

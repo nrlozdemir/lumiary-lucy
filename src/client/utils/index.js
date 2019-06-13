@@ -68,17 +68,12 @@ const getLabelWithSuffix = (label, property) => {
     isMetric: bool - true if the endpoint used was /metric,
     customBorderColor: string,
     noBrandKeys: bool - payloads without brand key layer
+    customKeys: array,
   }
   *
  */
 
 const convertDataIntoDatasets = (values, options, ...args) => {
-  let labels
-  let datasetsFromValues
-  let singleLevelJSON
-  let customKeys
-  let getValueinObject
-
   const {
     hoverBG,
     isMetric,
@@ -90,7 +85,14 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     backgroundColor,
     preparedDatasets,
     customBorderColor,
+    customKeys: argKeys,
   } = (args && !!args[0] && args[0]) || {}
+
+  let labels
+  let datasetsFromValues
+  let singleLevelJSON
+  let customKeys = argKeys
+  let getValueinObject
 
   const brands = Object.keys(values.data || values)
 
@@ -164,7 +166,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
         ? d.percent || 0
         : Object.keys(d.percents).map((key) => d.percents[key] || 0)
     )
-    customKeys = brands
+    customKeys = !customKeys ? brands : customKeys
   }
   // if dataset values type of object, get value in the object
   if (
@@ -769,6 +771,27 @@ const convertVideoEngagementData = (
 }
 
 const floatCvScore = (val) => Number.parseFloat(val).toFixed(1)
+
+const getMinMaxFromDatasets = (datasets = [], initial = 0, type = 'max') => {
+  return !!datasets.length
+    ? datasets.reduce((result, dataset) => {
+        const { data } = dataset
+
+        if (!!data && !!data.length) {
+          const dataSetResult =
+            type === 'max' ? Math.max(...data) : Math.min(...data)
+
+          if (
+            type === 'max' ? dataSetResult > result : dataSetResult < result
+          ) {
+            result = dataSetResult
+          }
+        }
+        return result
+      }, initial)
+    : 0
+}
+
 export {
   ucfirst,
   normalize,
@@ -795,4 +818,5 @@ export {
   parseAverage,
   convertVideoEngagementData,
   floatCvScore,
+  getMinMaxFromDatasets,
 }
