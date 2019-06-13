@@ -91,38 +91,92 @@ function* getCompetitorTopVideosMarketview({
   try {
     const { brand } = yield select(selectAuthProfile)
 
+    const competitors =
+      !!brand.competitors &&
+      !!brand.competitors.length &&
+      brand.competitors.map((c) => c.uuid)
+
     const options = {
       metric,
       dateRange,
       property: [property],
       dateBucket: 'none',
       display: 'percentage',
-      brands: [brand.uuid],
+      brands: competitors,
       url: '/report',
     }
+    let response = yield call(getDataFromApi, options)
 
-    const [facebook, instagram, twitter, youtube] = yield all([
-      call(getDataFromApi, { ...options, platform: 'facebook' }),
-      call(getDataFromApi, { ...options, platform: 'instagram' }),
-      call(getDataFromApi, { ...options, platform: 'twitter' }),
-      call(getDataFromApi, { ...options, platform: 'youtube' }),
-    ])
+    // preliminary to convertMultiRequestDataIntoDatasets structure
+    response = Object.keys(response.data).reduce((acc, key) => {
+      acc[key] = {
+        data: { [key]: response.data[key] },
+      }
+      return acc
+    }, {})
 
     yield put(
       actions.getCompetitorTopVideosSuccess(
         convertMultiRequestDataIntoDatasets(
           {
-            facebook,
-            instagram,
-            twitter,
-            youtube,
+            ...response,
           },
           options
         )
       )
     )
   } catch (error) {
+    console.log('saga getCompetitorTopVideosFailure error', error)
     yield put(actions.getCompetitorTopVideosFailure(error))
+  }
+}
+
+function* getPlatformTopVideosMarketview({
+  data: { property, metric, dateRange },
+}) {
+  try {
+    const { brand } = yield select(selectAuthProfile)
+
+    let options = {
+      metric,
+      dateRange,
+      property: property,
+      dateBucket: 'none',
+      display: 'percentage',
+      brandUuid: brand.uuid,
+    }
+
+    let response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/brand/${brand.uuid}/platforms`, options),
+      'GET'
+    )
+
+    // preliminary to convertMultiRequestDataIntoDatasets structure
+    response = Object.keys(response).reduce((acc, key) => {
+      acc[key] = {
+        data: { [key]: response[key] },
+      }
+      return acc
+    }, {})
+
+    yield put(
+      actions.getPlatformTopVideosSuccess(
+        convertMultiRequestDataIntoDatasets(
+          {
+            ...response,
+          },
+          {
+            ...options,
+            property: [property],
+          }
+        )
+      )
+    )
+  } catch (error) {
+    console.log('saga getPlatformTopVideosFailure error', error)
+    yield put(actions.getPlatformTopVideosFailure(error))
   }
 }
 
@@ -535,6 +589,10 @@ export default [
   takeLatest(
     types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_REQUEST,
     getCompetitorTopVideosMarketview
+  ),
+  takeLatest(
+    types.GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_REQUEST,
+    getPlatformTopVideosMarketview
   ),
   takeLatest(
     types.GET_MARKETVIEW_COMPETITOR_VIDEOS_REQUEST,

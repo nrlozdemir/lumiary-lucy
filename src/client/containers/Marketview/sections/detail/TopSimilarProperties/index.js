@@ -22,7 +22,6 @@ class TopSimilarProperties extends React.Component {
 
   render() {
     const { similarProperties, title, moduleKey, filters } = this.props
-    console.log(similarProperties)
     return (
       <TopSimilarPropertiesModule
         moduleKey={moduleKey}
