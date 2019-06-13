@@ -455,17 +455,22 @@ function* getTotalCompetitorViewsData() {
       url: '/report',
       metric: 'views',
       platform: 'all',
-      dateRange: 'week',
+      dateRange: '3months',
       dateBucket: 'none',
       property: ['duration'],
-      brands: [...competitors.map((c) => c.uuid)],
+      brands: [...competitors],
     }
     const payload = yield call(getDataFromApi, { ...options })
-    yield put(
-      actions.getTotalCompetitorViewsSuccess(
-        convertDataIntoDatasets(payload, options)
+
+    if (!!payload) {
+      yield put(
+        actions.getTotalCompetitorViewsSuccess(
+          convertDataIntoDatasets(payload, options, {
+            customKeys: Object.keys(payload.data),
+          })
+        )
       )
-    )
+    }
   } catch (error) {
     yield put(actions.getTotalCompetitorViewsFailure(error))
   }
