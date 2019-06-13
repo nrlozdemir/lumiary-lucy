@@ -33,10 +33,7 @@ const ContentVitalityScoreModule = ({
         case 'other':
           accumulator.average = {
             ...data[uuid],
-            name: 'Average',
-            ...(data[uuid].averageCvScore === 'NaN'
-              ? { averageCvScore: 0 }
-              : {}),
+            name: 'Average'
           }
           break
 
@@ -44,20 +41,14 @@ const ContentVitalityScoreModule = ({
           if (uuid === authProfile.brand.uuid) {
             accumulator.brand_1 = {
               ...data[uuid],
-              name: authProfile.brand.name,
-              ...(data[uuid].averageCvScore === 'NaN'
-                ? { averageCvScore: 0 }
-                : {}),
+              name: authProfile.brand.name
             }
           } else {
             authProfile.brand.competitors.forEach((competitor) => {
               if (uuid === competitor.uuid) {
                 accumulator.brand_2 = {
                   ...data[uuid],
-                  name: competitor.name,
-                  ...(data[uuid].averageCvScore === 'NaN'
-                    ? { averageCvScore: 0 }
-                    : {}),
+                  name: competitor.name
                 }
               }
             })
