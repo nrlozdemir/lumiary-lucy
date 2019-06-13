@@ -350,6 +350,7 @@
   .tabPanelItem {
     // background-color: $color-dark-five;
     border: 1px solid $color-dusk;
+    margin-bottom: 24px;
 
     div {
       img {
@@ -583,4 +584,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.imageItem{
+  width: 238px;
+  height: 136px;
 }

@@ -266,7 +266,6 @@ class LibraryDetailShotByShot extends React.Component {
 
   render() {
     const { shotInfo, radarChartData, peopleData } = this.props
-    console.log(this.props)
     const {
       selectedImage,
       viewportShots,
@@ -363,7 +362,7 @@ class LibraryDetailShotByShot extends React.Component {
                           <Scrubber
                             vertical
                             width={570}
-                            height={this.state.rightPaneHeight}
+                            height={368}
                           >
                             {peopleData && Object.values(peopleData).map((info, i) => (
                               <div
@@ -381,7 +380,10 @@ class LibraryDetailShotByShot extends React.Component {
                                 <div className="col-5-no-gutters">
                                   <img
                                     src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/`}
-                                    className="img-responsive"
+                                    className={classnames(
+                                      style.imageItem,
+                                      'grid-container'
+                                    )}
                                   />
                                 </div>
                                 <div className="col-7-no-gutters">
@@ -440,7 +442,7 @@ class LibraryDetailShotByShot extends React.Component {
                           <Scrubber
                             vertical
                             width={570}
-                            height={this.state.rightPaneHeight}
+                            height={368}
                           >
                             {shotInfo &&
                               shotInfo.shot &&
@@ -467,7 +469,10 @@ class LibraryDetailShotByShot extends React.Component {
                                     src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${
                                       shotInfo.shot.frames[i]
                                     }`}
-                                    className="img-responsive"
+                                    className={classnames(
+                                      style.imageItem,
+                                      'grid-container'
+                                    )}
                                   />
                                 </div>
                                 <div className="col-7-no-gutters">
