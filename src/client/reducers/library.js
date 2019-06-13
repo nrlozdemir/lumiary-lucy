@@ -12,7 +12,7 @@ export const types = {
   LOAD_VIDEOS_SUCCESS: 'Library/LOAD_VIDEOS_SUCCESS',
   LOAD_VIDEOS_ERROR: 'Library/LOAD_VIDEOS_ERROR',
 
-  CLEAD_AND_LOAD_VIDEOS: 'Library/CLEAD_AND_LOAD_VIDEOS',
+  CLEAN_AND_LOAD_VIDEOS: 'Library/CLEAN_AND_LOAD_VIDEOS',
 
   CHANGE_FILTER: 'Library/CHANGE_FILTER',
 }
@@ -23,7 +23,7 @@ export const actions = {
     payload,
   }),
   clearAndLoadVideos: (payload) => ({
-    type: types.CLEAD_AND_LOAD_VIDEOS,
+    type: types.CLEAN_AND_LOAD_VIDEOS,
     payload,
   }),
   loadVideosError: (error) => ({ type: types.LOAD_VIDEOS_ERROR, error }),
@@ -42,7 +42,7 @@ const libraryReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOAD_VIDEOS:
       return state
-      // return state.set('loading', fromJS(true))
+    // return state.set('loading', fromJS(true))
 
     case types.LOAD_VIDEOS_SUCCESS:
       return state
@@ -57,9 +57,8 @@ const libraryReducer = (state = initialState, action) => {
         .setIn(['data', 'pagination'], fromJS(action.payload.pagination))
         .set('loading', fromJS(false))
 
-    case types.CLEAD_AND_LOAD_VIDEOS:
-      return state
-      .setIn(['data'], fromJS(action.payload))
+    case types.CLEAN_AND_LOAD_VIDEOS:
+      return state.setIn(['data'], fromJS(action.payload))
 
     case types.LOAD_VIDEOS_ERROR:
       return state
@@ -67,8 +66,7 @@ const libraryReducer = (state = initialState, action) => {
         .set('loading', fromJS(false))
 
     case types.CHANGE_FILTER:
-      return state
-        .set('filters', fromJS(action.payload))
+      return state.set('filters', fromJS(action.payload))
 
     default:
       return state
