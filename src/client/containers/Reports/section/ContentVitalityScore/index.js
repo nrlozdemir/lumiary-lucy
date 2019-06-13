@@ -9,15 +9,16 @@ class ContentVitalityScore extends React.Component {
   }
 
   shouldComponentUpdate(nextProps, nextState) {
-    console.log(this.props.data.data)
-    console.log(nextProps.data.data)
-    return JSON.stringify(this.props.data.data) !== JSON.stringify(nextProps.data.data)
+    return (
+      JSON.stringify(this.props.data.data) !==
+      JSON.stringify(nextProps.data.data)
+    )
   }
 
   render() {
     const {
       data: { data, loading, error },
-      authProfile = {}
+      authProfile = {},
     } = this.props
 
     const maxVideoPercent = Object.keys(data).reduce((accumulator, key) => {
@@ -25,8 +26,8 @@ class ContentVitalityScore extends React.Component {
       return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
     }, 0)
 
-    const chartYAxisMax = (maxVideoPercent > 50) ? 100 : 50
-    const chartYAxisStepSize = (maxVideoPercent > 50) ? 25 : 12.5
+    const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
+    const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
 
     return (
       <ThemeContext.Consumer>
