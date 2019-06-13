@@ -433,32 +433,35 @@ function* getTopPerformingPropertiesData({
     const { brand } = yield select(selectAuthProfile)
 
     const options = {
-      url: '/report',
       metric,
-      dateRange,
-      property: [property],
+      dateRange: '3months',
+      property: property,
       dateBucket: 'none',
-      display: 'percentage',
-      brands: [brand.uuid],
+      brandUuid: brand.uuid,
     }
 
-    const [facebook, instagram, twitter, youtube] = yield all([
-      call(getDataFromApi, { ...options, platform: 'facebook' }),
-      call(getDataFromApi, { ...options, platform: 'instagram' }),
-      call(getDataFromApi, { ...options, platform: 'twitter' }),
-      call(getDataFromApi, { ...options, platform: 'youtube' }),
-    ])
+    let response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/brand/${brand.uuid}/platforms`, options),
+      'GET'
+    )
+
+    // preliminary to convertMultiRequestDataIntoDatasets structure
+    response = Object.keys(response).reduce((acc, key) => {
+      acc[key] = {
+        data: { [key]: response[key] },
+      }
+      return acc
+    }, {})
 
     yield put(
       actions.getTopPerformingPropertiesSuccess(
         convertMultiRequestDataIntoDatasets(
           {
-            facebook,
-            instagram,
-            twitter,
-            youtube,
+            ...response,
           },
-          options,
+          { ...options, property: [property] },
           true // for revert labels datas
         )
       )
