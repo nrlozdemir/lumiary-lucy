@@ -57,7 +57,7 @@ const BarChartModule = ({
         )
       }
     >
-      {barData && (
+      {!!barData && (
         <BarChart
           barDurationData={barData}
           tickOptions={chartTickOptions}
