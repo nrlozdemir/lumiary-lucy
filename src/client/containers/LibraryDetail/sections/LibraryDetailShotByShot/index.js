@@ -316,8 +316,11 @@ class LibraryDetailShotByShot extends React.Component {
     this.setState({
       selectedImage: i,
     })
-  
+
     this.props.getShotInfoRequest(i)
+    this.props.getRadarChartRequest(i)
+    this.props.getPeopleRequest(i)
+
     const { height } = this.slider.getBoundingClientRect()
     const totalHeight = Math.floor(height) + 48 - 120
     this.setState({
@@ -327,7 +330,35 @@ class LibraryDetailShotByShot extends React.Component {
 
   render() {
     const { shotInfo, radarChartData, peopleData } = this.props
+    console.log(this.props)
     const { selectedImage } = this.state
+    const radarChartDataConfigured = radarChartData &&{
+      labels: [
+        "#cc2226",
+        "#dd501d",
+        "#eb7919",
+        "#f8b90b",
+        "#aac923",
+        "#fff20d",
+        "13862b",
+        "#229a78",
+        "#79609b",
+        "#923683",
+        "#b83057",
+        //"#3178b0",
+      ],
+      datasets: [
+        {
+          label: "Shots",
+          backgroundColor: "rgb(82, 146, 229, 0.5)",
+          borderColor: "rgb(82, 146, 229, 1)",
+          pointBackgroundColor: "rgb(82, 146, 229, 0.5)",
+          pointBorderColor: "rgb(82, 146, 229, 1)",
+          data: radarChartData
+        }
+      ]
+    }
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
