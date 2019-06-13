@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { actions, selectShotInfo, selectColorsInfo } from 'Reducers/libraryDetail'
+import { actions, selectShotInfo, selectColorsInfo, selectPeopleData } from 'Reducers/libraryDetail'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import SingleItemSlider from 'Components/Sliders/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
@@ -12,6 +12,7 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 import Scrubber from 'Components/Sliders/Scrubber'
 import XCircle from 'Components/Icons/XCircle'
 import { mediaUrl } from 'Utils/globals'
+import {capitalizeFirstLetter} from 'Utils'
 import style from './style.scss'
 
 class LibraryDetailShotByShot extends React.Component {
@@ -64,6 +65,7 @@ class LibraryDetailShotByShot extends React.Component {
 
     this.props.getShotInfoRequest(i)
     this.props.getRadarChartRequest(i)
+    this.props.getPeopleRequest(i)
     const { height } = this.slider.getBoundingClientRect()
     const totalHeight = Math.floor(height) + 48 - 85 - 20 - 15 // + top margin - tabs area - right top+bottom margins - bottom margin
     this.setState({
@@ -263,7 +265,8 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   render() {
-    const { shotInfo, radarChartData } = this.props
+    const { shotInfo, radarChartData, peopleData } = this.props
+    console.log(this.props)
     const {
       selectedImage,
       viewportShots,
@@ -340,7 +343,7 @@ class LibraryDetailShotByShot extends React.Component {
                       >
                         <TabList className={style.tabList}>
                           <Tab selectedClassName={style.selectedTab}>
-                            Demographics
+                            People
                           </Tab>
                           <Tab selectedClassName={style.selectedTab}>
                             Objects
@@ -355,39 +358,81 @@ class LibraryDetailShotByShot extends React.Component {
                           </div>
                         </TabList>
                       </div>
-                      <TabPanel>
-                        <div className={style.tabPanel}>
-                          <div
-                            className={
-                              style.tabPanelItem + ' grid-container mt-16'
-                            }
-                            style={{
-                              background: colors.shotByShotBackground,
-                              borderColor: colors.shotByShotBorder,
-                            }}
+                      <TabPanel className={style.tabPanelReset}>
+                      <div className={classnames(style.tabPanel, 'mt-16')}>
+                          <Scrubber
+                            vertical
+                            width={570}
+                            height={this.state.rightPaneHeight}
                           >
-                            <div className="col-5-no-gutters">
-                              <img
-                                src="https://picsum.photos/500/270?image=8"
-                                className="img-responsive"
-                              />
-                            </div>
-                            <div className="col-7-no-gutters">
-                              <div className="pt-32">
-                                <div className={style.progressbarContainer}>
-                                  <div className={style.barOptions}>
-                                    <p>Football Helmet</p>
-                                    <p>78% Accurate</p>
-                                  </div>
-                                  <ProgressBar
-                                    width={78}
-                                    customBarClass={style.progressBar}
-                                    customPercentageClass={style.percentage}
+                            {peopleData && Object.values(peopleData).map((info, i) => (
+                              <div
+                                className={classnames(
+                                  style.tabPanelItem,
+                                  'grid-container'
+                                )}
+                                style={{
+                                  background: colors.shotByShotBackground,
+                                  borderColor: colors.shotByShotBorder,
+                                  marginRight: '16px !important',
+                                }}
+                                key={i}
+                              >
+                                <div className="col-5-no-gutters">
+                                  <img
+                                    src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/`}
+                                    className="img-responsive"
                                   />
                                 </div>
+                                <div className="col-7-no-gutters">
+                                  <div className="pt-20">
+                                    <div
+                                      className={style.progressbarContainer}
+                                      key={i}
+                                    >
+                                      <div className={style.barOptions}>
+                                        <p>{capitalizeFirstLetter(info.gender)}</p>
+                                        <p>
+                                          {(info.ages.confidence * 100).toFixed(0)}
+                                          % Accurate
+                                        </p>
+                                      </div>
+                                      <ProgressBar
+                                        width={(info.ages.confidence * 100).toFixed(0)}
+                                        customBarClass={style.progressBar}
+                                        customPercentageClass={
+                                          style.percentage
+                                        }
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div className="pt-20">
+                                    <div
+                                      className={style.progressbarContainer}
+                                      key={i}
+                                    >
+                                      <div className={style.barOptions}>
+                                        <p>{info.ages.min} Y/O</p>
+                                        <p>
+                                          {(info.ages.min).toFixed(0)}
+                                          % Accurate
+                                        </p>
+                                      </div>
+                                      <ProgressBar
+                                        width={(info.ages.confidence * 100).toFixed(0)}
+                                        customBarClass={style.progressBar}
+                                        customPercentageClass={
+                                          style.percentage
+                                        }
+                                      />
+                                    </div>
+                                  </div>
+
+                                </div>
                               </div>
-                            </div>
-                          </div>
+                            ))}
+                          </Scrubber>
                         </div>
                       </TabPanel>
                       <TabPanel className={style.tabPanelReset}>
@@ -401,63 +446,65 @@ class LibraryDetailShotByShot extends React.Component {
                               shotInfo.shot &&
                               shotInfo.shot.labels &&
                               shotInfo.shot.labels.map((info, i) => (
-                                <div
-                                  className={classnames(
-                                    style.tabPanelItem,
-                                    'grid-container',
-                                    {
-                                      'mb-16':
-                                        i !== shotInfo.shot.labels.length - 1,
-                                    }
-                                  )}
-                                  style={{
-                                    background: colors.shotByShotBackground,
-                                    borderColor: colors.shotByShotBorder,
-                                    marginRight: '16px !important',
-                                  }}
-                                  key={i}
-                                >
-                                  <div className="col-5-no-gutters">
-                                    <img
-                                      src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${
-                                        shotInfo.shot.frames[i]
-                                      }`}
-                                      className="img-responsive"
-                                    />
-                                  </div>
-                                  <div className="col-7-no-gutters">
-                                    <div className="pt-20">
-                                      <div
-                                        className={style.progressbarContainer}
-                                        key={i}
-                                      >
-                                        <div className={style.barOptions}>
-                                          <p>{info.label}</p>
-                                          <p>
-                                            {(info.confidence * 100).toFixed(0)}
-                                            % Accurate
-                                          </p>
-                                        </div>
-                                        <ProgressBar
-                                          width={(
-                                            info.confidence * 100
-                                          ).toFixed(0)}
-                                          customBarClass={style.progressBar}
-                                          customPercentageClass={
-                                            style.percentage
-                                          }
-                                        />
+                              <div
+                                className={classnames(
+                                  style.tabPanelItem,
+                                  'grid-container',
+                                  {
+                                    'mb-16':
+                                      i !== shotInfo.shot.labels.length - 1,
+                                  }
+                                )}
+                                style={{
+                                  background: colors.shotByShotBackground,
+                                  borderColor: colors.shotByShotBorder,
+                                  marginRight: '16px !important',
+                                }}
+                                key={i}
+                              >
+                                <div className="col-5-no-gutters">
+                                  <img
+                                    src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${
+                                      shotInfo.shot.frames[i]
+                                    }`}
+                                    className="img-responsive"
+                                  />
+                                </div>
+                                <div className="col-7-no-gutters">
+                                  <div className="pt-20">
+                                    <div
+                                      className={style.progressbarContainer}
+                                      key={i}
+                                    >
+                                      <div className={style.barOptions}>
+                                        <p>{info.label}</p>
+                                        <p>
+                                          {(info.confidence * 100).toFixed(0)}
+                                          % Accurate
+                                        </p>
                                       </div>
+                                      <ProgressBar
+                                        width={(
+                                          info.confidence * 100
+                                        ).toFixed(0)}
+                                        customBarClass={style.progressBar}
+                                        customPercentageClass={
+                                          style.percentage
+                                        }
+                                      />
                                     </div>
                                   </div>
                                 </div>
-                              ))}
+                              </div>
+                            ))}
                           </Scrubber>
                         </div>
                       </TabPanel>
                       <TabPanel>
                         <div className={style.radarChartContainer}>
-                          {radarChartDataConfigured && (<RadarChart data={radarChartDataConfigured} />)}
+                          {radarChartDataConfigured && (
+                            <RadarChart data={radarChartDataConfigured} />
+                          )}
                         </div>
                       </TabPanel>
                     </Tabs>
@@ -537,12 +584,14 @@ class LibraryDetailShotByShot extends React.Component {
 const mapStateToProps = createStructuredSelector({
   shotInfoData: selectShotInfo(),
   radarChartData: selectColorsInfo(),
+  peopleData: selectPeopleData(),
 })
 
 function mapDispatchToProps(dispatch) {
   return {
     getShotInfoRequest: (shotId) => dispatch(actions.getShotInfoRequest(shotId)),
     getRadarChartRequest: (shotId) => dispatch(actions.getRadarChartRequest(shotId)),
+    getPeopleRequest: (shotId) => dispatch(actions.getPeopleRequest(shotId)), 
   }
 }
 
