@@ -350,6 +350,7 @@
   .tabPanelItem {
     // background-color: $color-dark-five;
     border: 1px solid $color-dusk;
+    margin-bottom: 24px;
 
     div {
       img {
@@ -378,9 +379,11 @@
           border-radius: 8px;
         }
         .percentage {
-          border-radius: 8px;
-          height: 8px;
-          background-color: $color-lighter-purple;
+          border-radius: 10px;
+          height: 10px;
+          background-color: #2fd7c4;
+          -webkit-transition: width 0.5s, height 0.5s;
+          transition: width 0.5s, height 0.5s;
         }
       }
     }
@@ -581,4 +584,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.imageItem{
+  width: 238px;
+  height: 136px;
 }
