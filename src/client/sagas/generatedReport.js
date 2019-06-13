@@ -94,14 +94,13 @@ function* getTopPerformingVideos() {
 
 function* getVideoReleasesBarChart({ data: { report } }) {
   try {
-    const { engagement, dateRange, platform } = report
-
+    const { engagement, date, social } = report
     const { brand } = yield select(selectAuthProfile)
 
     const options = {
-      platform,
+      platform: social,
       property: 'format',
-      daterange: dateRange,
+      daterange: date,
       brandUuid: brand.uuid,
     }
 
