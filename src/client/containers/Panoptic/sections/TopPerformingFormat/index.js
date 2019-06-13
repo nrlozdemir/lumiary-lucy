@@ -13,9 +13,6 @@ import { isEmpty } from 'lodash'
 import { chartColors } from 'Utils/globals'
 
 class TopPerformingFormat extends React.Component {
-  componentDidMount() {
-    this.props.getTopPerformingFormatData()
-  }
 
   callBack = (data, moduleKey) => {
     this.props.getTopPerformingFormatData(data)

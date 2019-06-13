@@ -29,11 +29,14 @@ const Front = (props) => {
           <span className={style.rightTitle}>{addComma(data.value)}</span>
         </div>
         <ProgressBar
-          width={percentage > 100 ? 100 : (
-            parseFloat(percentage).toFixed(2) > 0 && parseFloat(percentage).toFixed(2) < 1 
-              ? 1 
-              : parseFloat(percentage).toFixed(2) 
-          )}
+          width={
+            percentage > 100
+              ? 100
+              : parseFloat(percentage).toFixed(2) > 0 &&
+                parseFloat(percentage).toFixed(2) < 1
+              ? 1
+              : parseFloat(percentage).toFixed(2)
+          }
           customBarClass={style.progressBar}
           customPercentageClass={classnames(style.percentageIncrease, {
             [style.percentageDecrease]:
@@ -89,7 +92,7 @@ const LibraryDetailChartHeader = ({
                 src={videoUrl}
                 title={title}
                 socialIcon={socialIcon}
-                cvScore={cvScore}
+                cvScore={cvScore || 0.0}
               />
             </div>
             <div className={classnames('col-6', style.videoStatsWrapper)}>

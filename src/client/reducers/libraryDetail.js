@@ -32,6 +32,14 @@ export const types = {
   GET_SHOT_INFO_REQUEST: 'LibraryDetail/GET_SHOT_INFO_REQUEST',
   GET_SHOT_INFO_SUCCESS: 'LibraryDetail/GET_SHOT_INFO_SUCCESS',
   GET_SHOT_INFO_FAILURE: 'LibraryDetail/GET_SHOT_INFO_FAILURE',
+
+  GET_RADAR_CHART_REQUEST: 'LibraryDetail/GET_RADAR_CHART_REQUEST',
+  GET_RADAR_CHART_SUCCESS: 'LibraryDetail/GET_RADAR_CHART_SUCCESS',
+  GET_RADAR_CHART_FAILURE: 'LibraryDetail/GET_RADAR_CHART_FAILURE',
+
+  GET_PEOPLE_REQUEST: 'LibraryDetail/GET_PEOPLE_REQUEST',
+  GET_PEOPLE_SUCCESS: 'LibraryDetail/GET_PEOPLE_SUCCESS',
+  GET_PEOPLE_FAILURE: 'LibraryDetail/GET_PEOPLE_FAILURE',
 }
 export const actions = {
   getSelectedVideoRequest: (payload) => ({
@@ -112,6 +120,18 @@ export const actions = {
     payload,
   }),
   getShotInfoFailure: (error) => ({ type: types.GET_SHOT_INFO_FAILURE, error }),
+  getRadarChartRequest: (payload) => ({ type: types.GET_RADAR_CHART_REQUEST, payload }),
+  getRadarChartSuccess: (payload) => ({
+    type: types.GET_RADAR_CHART_SUCCESS,
+    payload,
+  }),
+  getRadarChartFailure: (error) => ({ type: types.GET_RADAR_CHART_FAILURE, error }),
+  getPeopleRequest: (payload) => ({ type: types.GET_PEOPLE_REQUEST, payload }),
+  getPeopleSuccess: (payload) => ({
+    type: types.GET_PEOPLE_SUCCESS,
+    payload,
+  }),
+  getPeopleFailure: (error) => ({ type: types.GET_PEOPLE_FAILURE, error }),
 }
 
 export const initialState = fromJS({
@@ -128,6 +148,8 @@ export const initialState = fromJS({
   loading: false,
   selectedVideo: {},
   selectedVideoAverage: [],
+  radarChartData: {},
+  peopleData: {}
 })
 
 const libraryDetailReducer = (state = initialState, action) => {
@@ -212,18 +234,59 @@ const libraryDetailReducer = (state = initialState, action) => {
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))
 
+    case types.GET_RADAR_CHART_REQUEST:
+      return state.set('loading', fromJS(true))
+    case types.GET_RADAR_CHART_SUCCESS:
+      return state
+        .set('radarChartData', fromJS(action.payload))
+        .set('loading', fromJS(false))
+    case types.GET_RADAR_CHART_FAILURE:
+      return state
+        .set('error', fromJS(action.error))
+        .set('loading', fromJS(false))
+
+    case types.GET_PEOPLE_REQUEST:
+      return state.set('loading', fromJS(true))
+    case types.GET_PEOPLE_SUCCESS:
+      return state
+        .set('peopleData', fromJS(action.payload))
+        .set('loading', fromJS(false))
+    case types.GET_PEOPLE_FAILURE:
+      return state
+        .set('error', fromJS(action.error))
+        .set('loading', fromJS(false))
+
     default:
       return state
   }
 }
 
 export const selectLibraryDetailDomain = (state) => state.LibraryDetail
+
 export const selectLibraryDetailSelectedVideo = (state) =>
   state.LibraryDetail.get('selectedVideo')
+
+export const selectLibraryDetailRaharChart = (state) =>
+  state.LibraryDetail.get('radarChartData')
+  
+export const selectLibraryDetailPeople = (state) =>
+  state.LibraryDetail.get('peopleData')
 
 export const selectShotInfo = () =>
   createSelector(
     selectLibraryDetailSelectedVideo,
+    (substate) => substate.toJS()
+  )
+
+export const selectColorsInfo = () =>
+  createSelector(
+    selectLibraryDetailRaharChart,
+    (substate) => substate.toJS()
+  )
+
+export const selectPeopleData = () =>
+  createSelector(
+    selectLibraryDetailPeople,
     (substate) => substate.toJS()
   )
 

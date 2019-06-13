@@ -5,11 +5,10 @@ import { createStructuredSelector } from 'reselect'
 import { bindActionCreators, compose } from 'redux'
 import { reduxForm } from 'redux-form'
 
-import { chartCombineDataset, floatCvScore } from 'Utils'
+import { floatCvScore } from 'Utils'
 import { actions, makeSelectLibraryDetail } from 'Reducers/libraryDetail'
 import { actions as libraryActions, makeSelectLibrary } from 'Reducers/library'
 
-import { radarData_DatasetOptions } from './options'
 import LibraryDetailChartHeader from './sections/LibraryDetailChartHeader'
 import LibraryDetailDoughnutChart from './sections/LibraryDetailDoughnutChart'
 import LibraryDetailColorTemperature from './sections/LibraryDetailColorTemperature'
@@ -97,30 +96,6 @@ export class LibraryDetail extends React.Component {
       },
     } = this.props
 
-    let radarDataCombined = null
-
-    if (shotByShotData) {
-      radarDataCombined = chartCombineDataset(
-        {
-          labels: [
-            '#fff20d',
-            '#f8b90b',
-            '#eb7919',
-            '#dd501d',
-            '#cc2226',
-            '#b83057',
-            '#923683',
-            '#79609b',
-            '#3178b0',
-            '#229a78',
-            '#13862b',
-            '#aac923',
-          ],
-          ...shotByShotData.radarData,
-        },
-        radarData_DatasetOptions
-      )
-    }
     return (
       <React.Fragment>
         {barChartData && (
@@ -132,7 +107,7 @@ export class LibraryDetail extends React.Component {
             }.mp4`}
             title={selectedVideo.title}
             socialIcon={selectedVideo.socialIcon}
-            cvScore={floatCvScore(selectedVideo['cvScores.value'])}
+            cvScore={floatCvScore(selectedVideo['cvScores.value']) || 0.0}
           />
         )}
         {doughnutLineChartData && (
@@ -149,7 +124,6 @@ export class LibraryDetail extends React.Component {
             shots={shotByShotData.video.shots}
             slideImages={shotByShotData.slideImages}
             shotInfo={shotInfoData && shotInfoData}
-            radarData={radarDataCombined}
             videoList={shotByShotData.videoList}
           />
         )}

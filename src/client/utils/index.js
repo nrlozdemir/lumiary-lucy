@@ -166,9 +166,12 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     )
     customKeys = brands
   }
-
   // if dataset values type of object, get value in the object
-  if (datasetsFromValues && typeof datasetsFromValues[0] === 'object') {
+  if (
+    datasetsFromValues &&
+    typeof datasetsFromValues[0] === 'object' &&
+    !Array.isArray(datasetsFromValues[0])
+  ) {
     datasetsFromValues = datasetsFromValues.map((d) => d.value)
   }
 
@@ -181,7 +184,6 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     labels
 
   datasetsFromValues = preparedDatasets || datasetsFromValues
-
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
@@ -623,11 +625,11 @@ const parseAverage = (payload) => {
       if (key.includes('LibraryMax')) {
         acc[keyName] = {
           ...acc[keyName],
-          max: parseFloat(payload[key]).toFixed(0)
+          max: parseFloat(payload[key]).toFixed(0),
         }
       }
     }
-    
+
     return acc
   }, {})
 

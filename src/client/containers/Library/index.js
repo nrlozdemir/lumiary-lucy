@@ -79,6 +79,7 @@ export class Library extends React.Component {
               setSidebarVisible={(e) => this.setSidebarVisible(e)}
               onSubmit={(e) => this.handleSubmit(e)}
               colors={colors}
+              changeFilter={this.props.changeFilter}
             />
           </React.Fragment>
         )}

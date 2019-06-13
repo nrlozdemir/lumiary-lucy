@@ -5,6 +5,7 @@ import { compose, bindActionCreators } from 'redux'
 import {
   actions,
   selectMarketviewCompetitorTopVideosView,
+  selectMarketviewPlatformTopVideosView,
   selectMarketviewTopPerformingDataView,
 } from 'Reducers/marketview'
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
@@ -15,6 +16,8 @@ class TopVideosOverTime extends React.Component {
   callback = (data) => {
     if (this.props.container === 'time') {
       this.props.getTopPerformingTimeRequest(data)
+    } else if (this.props.container === 'platform') {
+      this.props.getPlatformTopVideosRequest(data)
     } else {
       this.props.getCompetitorTopVideosRequest(data)
     }
@@ -23,6 +26,7 @@ class TopVideosOverTime extends React.Component {
   render() {
     const {
       competitorTopVideos,
+      platformTopVideos,
       topPerformingData,
       title,
       moduleKey,
@@ -32,18 +36,28 @@ class TopVideosOverTime extends React.Component {
       selects,
     } = this.props
 
-    const referencesData =
+    const whichReferencesData =
       container === 'time'
-        ? topPerformingData &&
-          topPerformingData.datasets &&
-          topPerformingData.datasets.map((item) => ({
+        ? 'topPerformingData'
+        : container === 'competitor'
+        ? 'competitorTopVideos'
+        : null
+    const referencesData =
+      container === 'time' || container === 'competitor'
+        ? this.props[whichReferencesData].data &&
+          this.props[whichReferencesData].data.datasets &&
+          this.props[whichReferencesData].data.datasets.map((item) => ({
             text: item.label,
             color: item.backgroundColor,
           }))
         : references
 
     const chartData =
-      container === 'time' ? topPerformingData.data : competitorTopVideos.data
+      container === 'time'
+        ? topPerformingData.data
+        : container === 'platform'
+        ? platformTopVideos.data
+        : competitorTopVideos.data
 
     const selectValue =
       selects.values[moduleKey] &&
@@ -72,6 +86,7 @@ TopVideosOverTime.propTypes = {}
 const mapStateToProps = createStructuredSelector({
   competitorTopVideos: selectMarketviewCompetitorTopVideosView(),
   topPerformingData: selectMarketviewTopPerformingDataView(),
+  platformTopVideos: selectMarketviewPlatformTopVideosView(),
   selects: makeSelectSelectFilters(),
 })
 

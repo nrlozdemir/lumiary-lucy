@@ -45,7 +45,7 @@ function getColorTempApi({ LibraryDetailId }) {
 }
 
 function getShotByShotApi({ LibraryDetailId }) {
-  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/2203807d-50e0-4c4f-8290-08b7de4ce1bf/shots'
+  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/0639d12f-7a1a-40fe-840d-8c43c1268f31/shots'
 
   return ajax({
     url: URL,
@@ -58,9 +58,10 @@ function getShotByShotApi({ LibraryDetailId }) {
   })
 }
 
-function getShotInfoRequestApi({ LibraryDetailId }) {
-  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/2203807d-50e0-4c4f-8290-08b7de4ce1bf/shots/1'
+function getShotInfoRequestApi({ shotId }) {
+  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/0639d12f-7a1a-40fe-840d-8c43c1268f31/shots/1'
   const FRAMES_INFO = '/brand/6421cdac-d5eb-4427-a267-b9be2e232177/video/e2843ddb-4ba1-4062-acd9-2ffbe302a183/shots/0'
+  const LABELS_INFO = '/brand/6421cdac-d5eb-4427-a267-b9be2e232177/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/0'
 
   return ajax({
     url: URL,
@@ -77,9 +78,48 @@ function getShotInfoRequestApi({ LibraryDetailId }) {
       if (framesResponse.error) {
         throw framesResponse.error
       }
+
       response.data.shot.frames = framesResponse.data.shot.frames
-      return response.data
+
+      return ajax({
+        url: LABELS_INFO,
+        method: 'GET',
+      }).then((labelsResponse) => {
+        if (labelsResponse.error) {
+          throw labelsResponse.error
+        }
+        response.data.shot.labels = labelsResponse.data.shot.labels
+        return response.data
+      })
     })
+  })
+}
+
+function getRadarChartRequestApi({ shotId }) {
+  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/4/colors'
+
+  return ajax({
+    url: URL,
+    method: 'GET',
+  }).then((response) => {
+    if (response.error) {
+      throw response.error
+    }
+    return response.data
+  })
+}
+
+function getPeopleRequestApi({ shotId }) {
+  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/0/demographics'
+
+  return ajax({
+    url: URL,
+    method: 'GET',
+  }).then((response) => {
+    if (response.error) {
+      throw response.error
+    }
+    return response.data
   })
 }
 
@@ -240,6 +280,65 @@ function* getVideoAverage({ id }) {
   }
 }
 
+function* getRadarChartRequest({ ShotId }) {
+  try {
+    const payload = yield call(getRadarChartRequestApi, {
+      ShotId,
+    })
+
+    const colorNames = [
+      "red",
+      "orange-red",
+      "orange",
+      "yellow-orange",
+      "yellow-green",
+      "yellow",
+      "green",
+      "blue-green",
+      "blue-purple",
+      "purple",
+      "red-purple",
+      //"blue",
+    ]
+
+    const totalValue = Object.values(payload).reduce(
+      (prev, next) => prev + next
+      , 0
+    )
+
+    const aspectRatio = totalValue > 0 ? 100 / totalValue : 1
+
+    let values = []
+    Object.keys(payload).map((color, i) => {
+      if (i <= 10) {
+        values.push(
+          /*
+          payload[[colorNames[i]]] === 0 
+            ? Math.floor(Math.random() * 1) 
+            : payload[[colorNames[i]]]
+          */
+          payload[[colorNames[i]]]
+        )
+      }
+    })
+
+    yield put(actions.getRadarChartSuccess(values))
+  } catch (error) {
+    yield put(actions.getRadarChartFailure({ error }))
+  }
+}
+
+function* getPeopleRequest({ ShotId }) {
+  try {
+    const payload = yield call(getPeopleRequestApi, {
+      ShotId,
+    })
+    yield put(actions.getPeopleSuccess(payload))
+  } catch (error) {
+    yield put(actions.getPeopleFailure({ error }))
+  }
+}
+
 export default [
   takeLatest(types.GET_BAR_CHART_REQUEST, getBarChart),
   takeLatest(types.GET_DOUGHNUT_CHART_REQUEST, getDoughnutChart),
@@ -248,4 +347,6 @@ export default [
   takeLatest(types.GET_SELECTED_VIDEO_REQUEST, getSelectedVideo),
   takeLatest(types.GET_SHOT_INFO_REQUEST, getShotInfoRequest),
   takeLatest(types.GET_SELECTED_VIDEO_AVERAGE_REQUEST, getVideoAverage),
+  takeLatest(types.GET_RADAR_CHART_REQUEST, getRadarChartRequest),
+  takeLatest(types.GET_PEOPLE_REQUEST, getPeopleRequest),
 ]

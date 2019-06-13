@@ -36,7 +36,6 @@ export class Platform extends React.Component {
           ]}
           container="platform"
         />
-
         <TopVideosOverTime
           moduleKey="MarketView/Platform/TopVideosOverTime"
           title="Top Videos Over Time By Platform"

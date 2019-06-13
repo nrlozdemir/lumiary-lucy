@@ -19,6 +19,7 @@ const AssetLayer = (props) => {
     children,
     width,
     height,
+    truncateTitle,
   } = props
 
   const socialIcon = classnames(socialIconSelector(leftSocialIcon), styles.icon)
@@ -42,24 +43,25 @@ const AssetLayer = (props) => {
         <div
           className={barOpacityClassName}
           style={{ background: themes.moduleBackground }}
-        >
-        </div>
+        />
         <div className={barClassName}>
           <div className={styles.barTitle}>
             {socialIcon && <span className={socialIcon} />}
-            {title}
+            {truncateTitle ? (
+              <p className={styles.videoTitle} title={title}>
+                {title}
+              </p>
+            ) : (
+              title
+            )}
           </div>
           {centerText && <div className={styles.centerText}>{centerText}</div>}
           <div className={styles.barChart}>
             {children && children[1] && (
-              <div className={styles.percentageWrapper}>
-                {children[1]}
-              </div>
+              <div className={styles.percentageWrapper}>{children[1]}</div>
             )}
             <div className={styles.barChartInfo}>
-              {rightValue && (
-                <span>{rightValue}</span>
-              )}
+              {rightValue && <span>{rightValue}</span>}
             </div>
           </div>
         </div>

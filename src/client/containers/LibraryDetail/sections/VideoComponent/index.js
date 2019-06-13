@@ -15,7 +15,7 @@ class Video extends Component {
       videoPlayButton
 
     let videoMethods = {
-      renderVideoPlayButton: function () {
+      renderVideoPlayButton: function() {
         if (videoWrapper.contains(video)) {
           this.formatVideoPlayButton()
           videoPlayButton = videoWrapper.getElementsByClassName(
@@ -25,7 +25,7 @@ class Video extends Component {
         }
       },
 
-      formatVideoPlayButton: function () {
+      formatVideoPlayButton: function() {
         videoWrapper.insertAdjacentHTML(
           'beforeend',
           '\
@@ -37,7 +37,7 @@ class Video extends Component {
         )
       },
 
-      hideVideoPlayButton: function () {
+      hideVideoPlayButton: function() {
         if (
           Object.values(videoPlayButton.classList).indexOf('is-hidden') > -1
         ) {
@@ -66,13 +66,7 @@ class Video extends Component {
   }
 
   render() {
-    const {
-      src,
-      poster = "",
-      title,
-      socialIcon,
-      cvScore,
-    } = this.props
+    const { src, poster = '', title, socialIcon, cvScore } = this.props
 
     return (
       <React.Fragment>
@@ -80,6 +74,7 @@ class Video extends Component {
           leftSocialIcon={socialIcon}
           title={title}
           rightValue={cvScore}
+          truncateTitle
         >
           <video
             ref={this.video}
@@ -89,7 +84,7 @@ class Video extends Component {
             controls={false}
             poster={poster}
           />
-          <div className={styles.percentageWrapper} style={{right: "80px"}}>
+          <div className={styles.percentageWrapper} style={{ right: '80px' }}>
             <PercentageBarGraph
               key={Math.random()}
               percentage={cvScore}

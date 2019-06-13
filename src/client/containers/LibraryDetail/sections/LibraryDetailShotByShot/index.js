@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { actions, selectShotInfo } from 'Reducers/libraryDetail'
+import { actions, selectShotInfo, selectColorsInfo, selectPeopleData } from 'Reducers/libraryDetail'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import SingleItemSlider from 'Components/Sliders/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
@@ -12,6 +12,7 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 import Scrubber from 'Components/Sliders/Scrubber'
 import XCircle from 'Components/Icons/XCircle'
 import { mediaUrl } from 'Utils/globals'
+import {capitalizeFirstLetter} from 'Utils'
 import style from './style.scss'
 
 class LibraryDetailShotByShot extends React.Component {
@@ -63,6 +64,8 @@ class LibraryDetailShotByShot extends React.Component {
     })
 
     this.props.getShotInfoRequest(i)
+    this.props.getRadarChartRequest(i)
+    this.props.getPeopleRequest(i)
     const { height } = this.slider.getBoundingClientRect()
     const totalHeight = Math.floor(height) + 48 - 85 - 20 - 15 // + top margin - tabs area - right top+bottom margins - bottom margin
     this.setState({
@@ -99,20 +102,20 @@ class LibraryDetailShotByShot extends React.Component {
     const shots = Object.values(this.state.shots)
 
     if (shots && shots.length > 0) {
-      const durations = shots.map((element) =>
-        (element.endTime - element.startTime).toFixed(4)
+      const durations = shots.map(
+        element => (element.endTime - element.startTime).toFixed(4)
       )
-      const totalDuration = shots[shots.length - 1].endTime.toFixed(4)
-
+      const totalDuration = (shots[shots.length - 1].endTime).toFixed(4)
+  
       //first index and last index not included
-      const dividedDuration = Math.round(totalDuration / tickCount).toFixed(4)
-
+      const dividedDuration = (Math.round(totalDuration / (tickCount))).toFixed(4)
+  
       //create marks
       for (let i = 0; i < tickCount - 1; i++) {
         sliderMarks.push(this.secondToTime(i * dividedDuration))
       }
       sliderMarks.push(this.secondToTime(shots[shots.length - 1].endTime))
-
+  
       //rebuild custom-marks for styling
       sliderMarks.map((element, index) => {
         index = parseInt(index * 10)
@@ -130,13 +133,13 @@ class LibraryDetailShotByShot extends React.Component {
           }
         } else {
           sliderMarksToState[index] = {
-            style: {},
+            style: { },
             label: <p className="customDot">{element}</p>,
             value: element,
           }
         }
       })
-
+  
       //create viewports including max 11 items from shots, fit size to min and max
       const totalViewports = (shots.length / tickCount).toFixed(2)
       for (let v = 0; v < totalViewports; v++) {
@@ -145,27 +148,23 @@ class LibraryDetailShotByShot extends React.Component {
         viewportDurations[v] = 0
         viewportLeftOver[v] = 0
       }
-
+  
       shots.map((el, i) => {
         const index = parseInt(Math.floor(i / 11))
-        el.duration = parseFloat((el.endTime - el.startTime).toFixed(4))
+        el.duration = parseFloat(
+          (el.endTime - el.startTime).toFixed(4)
+        )
         viewportTempShots[index].push(el)
         viewportDurations[index] += el.duration
       })
-
+  
       for (let v = 0; v < totalViewports; v++) {
         Object.values(viewportTempShots[v]).map((el, i) => {
           el.realWidth = parseFloat(
-            (
-              (viewportSize / 100) *
-              ((el.duration * 100) / viewportDurations[v])
-            ).toFixed(4)
+            ((viewportSize / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
           )
           el.width = parseFloat(
-            (
-              (viewportSize / 100) *
-              ((el.duration * 100) / viewportDurations[v])
-            ).toFixed(4)
+            ((viewportSize / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
           )
           el.max = 0
           el.diff = maxShotWidth - el.width
@@ -181,34 +180,31 @@ class LibraryDetailShotByShot extends React.Component {
             el.max = 1
           }
         })
-
+  
         viewportTempShots[v].length === tickCount &&
           Object.values(viewportTempShots[v]).map((el, i) => {
-            const findDiff = parseFloat(
-              (
-                (viewportLeftOver[v] / 100) *
-                ((el.duration * 100) / viewportDurations[v])
-              ).toFixed(4)
-            )
-            if (viewportLeftOver[v] > 0) {
-              if (el.width + findDiff > maxShotWidth) {
-                el.width = maxShotWidth
-                viewportLeftOver[v] -= maxShotWidth - el.width
-              } else {
-                el.width += findDiff
-                viewportLeftOver[v] -= findDiff
-              }
-            } else if (viewportLeftOver[v] < 0) {
-              if (el.width - findDiff < minShotWidth) {
-                el.width = minShotWidth
-                viewportLeftOver[v] += el.width - minShotWidth
-              } else {
-                el.width -= findDiff
-                viewportLeftOver[v] += findDiff
-              }
+          const findDiff = parseFloat(
+            ((viewportLeftOver[v]  / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
+          )
+          if (viewportLeftOver[v] > 0) {
+            if(el.width + findDiff > maxShotWidth){
+              el.width = maxShotWidth;
+              viewportLeftOver[v] -= maxShotWidth - el.width
+            } else {
+              el.width += findDiff
+              viewportLeftOver[v] -= findDiff
             }
-          })
-
+          } else if (viewportLeftOver[v] < 0) {
+            if(el.width - findDiff < minShotWidth){
+              el.width = minShotWidth;
+              viewportLeftOver[v] += el.width - minShotWidth
+            } else {
+              el.width -= findDiff
+              viewportLeftOver[v] += findDiff
+            }
+          }
+        })
+  
         if (viewportTempShots[v].length === tickCount) {
           do {
             Object.values(viewportTempShots[v]).map((el, i) => {
@@ -221,69 +217,88 @@ class LibraryDetailShotByShot extends React.Component {
             })
           } while (viewportLeftOver[v] > 0)
         }
-
-        viewportTempShotsTotalWidth[v] = Object.values(
-          viewportTempShots[v]
-        ).reduce((prev, next) => prev + parseFloat(next.width.toFixed(4)), 0)
-
+  
+        viewportTempShotsTotalWidth[v] = Object.values(viewportTempShots[v]).reduce(
+          (prev, next) => prev + parseFloat(next.width.toFixed(4)), 0
+        )
+  
         if (viewportTempShotsTotalWidth[v] > viewportSize) {
-          const findTrimValue = parseFloat(
-            (viewportTempShotsTotalWidth[v] - viewportSize).toFixed(4)
-          )
-
-          viewportTempShots[v].length === tickCount &&
-            Object.values(viewportTempShots[v]).map((el, i) => {
-              if (
-                el.width > Math.floor(el.width) &&
-                el.width - Math.floor(el.width) >= findTrimValue &&
-                viewportTempShotsTotalWidth[v] !== viewportSize
-              ) {
-                el.width -= findTrimValue
-                viewportTempShotsTotalWidth[v] -= findTrimValue
-              }
-            })
+          const findTrimValue = parseFloat((viewportTempShotsTotalWidth[v] - viewportSize).toFixed(4))
+  
+          viewportTempShots[v].length === tickCount && Object.values(viewportTempShots[v]).map((el, i) => {
+            if (el.width > Math.floor(el.width)
+              && el.width - Math.floor(el.width) >= findTrimValue
+              && viewportTempShotsTotalWidth[v] !== viewportSize
+            ) {
+              el.width -= findTrimValue
+              viewportTempShotsTotalWidth[v] -= findTrimValue
+            }
+          })
         } else if (viewportTempShotsTotalWidth[v] < viewportSize) {
-          const findTrimValue = parseFloat(
-            (viewportSize - viewportTempShotsTotalWidth[v]).toFixed(4)
-          )
-
-          viewportTempShots[v].length === tickCount &&
-            Object.values(viewportTempShots[v]).map((el, i) => {
-              if (viewportTempShotsTotalWidth[v] !== viewportSize) {
-                el.width += findTrimValue
-                viewportTempShotsTotalWidth[v] += findTrimValue
-              }
-            })
+          const findTrimValue = parseFloat((viewportSize - viewportTempShotsTotalWidth[v]).toFixed(4))
+  
+          viewportTempShots[v].length === tickCount && Object.values(viewportTempShots[v]).map((el, i) => {
+            if (viewportTempShotsTotalWidth[v] !== viewportSize) {
+              el.width += findTrimValue
+              viewportTempShotsTotalWidth[v] += findTrimValue
+            }
+          })
         }
-
+  
         Object.values(viewportTempShots[v]).map((el, i) => {
           viewportShots.push(el)
         })
       }
-
-      viewportShots &&
-        viewportShots.map((el, i) => {
-          shotsTotalWidth += el.width + shotMargin
-        })
-
+  
+      viewportShots && viewportShots.map((el, i) => {
+        shotsTotalWidth += el.width + shotMargin
+      })
+  
       this.setState({
         shotsTotalWidth: shotsTotalWidth + shotMargin,
         viewportShots: viewportShots,
         viewportSize: viewportSize,
         viewportDurations: viewportDurations,
-        sliderMarks: sliderMarksToState,
+        sliderMarks: sliderMarksToState
       })
-    }
+    } 
   }
 
   render() {
-    const { radarData, shotInfo } = this.props
+    const { shotInfo, radarChartData, peopleData } = this.props
     const {
       selectedImage,
       viewportShots,
       sliderMarks,
       shotsTotalWidth,
     } = this.state
+    
+    const radarChartDataConfigured = {
+      "labels": [
+        "#cc2226",
+        "#dd501d",
+        "#eb7919",
+        "#f8b90b",
+        "#aac923",
+        "#fff20d",
+        "13862b",
+        "#229a78",
+        "#79609b",
+        "#923683",
+        "#b83057",
+        //"#3178b0",
+      ],
+      "datasets": [
+        {
+          label: "Shots",
+          backgroundColor: "rgb(82, 146, 229, 0.5)",
+          borderColor: "rgb(82, 146, 229, 1)",
+          pointBackgroundColor: "rgb(82, 146, 229, 0.5)",
+          pointBorderColor: "rgb(82, 146, 229, 1)",
+          "data": radarChartData
+        }
+      ]
+    }
 
     return (
       <ThemeContext.Consumer>
@@ -327,7 +342,7 @@ class LibraryDetailShotByShot extends React.Component {
                       >
                         <TabList className={style.tabList}>
                           <Tab selectedClassName={style.selectedTab}>
-                            Demographics
+                            People
                           </Tab>
                           <Tab selectedClassName={style.selectedTab}>
                             Objects
@@ -343,108 +358,158 @@ class LibraryDetailShotByShot extends React.Component {
                         </TabList>
                       </div>
                       <TabPanel className={style.tabPanelReset}>
+                      <div className={classnames(style.tabPanel, 'mt-16')}>
+                          <Scrubber
+                            vertical
+                            width={570}
+                            height={368}
+                          >
+                            {peopleData && Object.values(peopleData).map((info, i) => (
+                              <div
+                                className={classnames(
+                                  style.tabPanelItem,
+                                  'grid-container'
+                                )}
+                                style={{
+                                  background: colors.shotByShotBackground,
+                                  borderColor: colors.shotByShotBorder,
+                                  marginRight: '16px !important',
+                                }}
+                                key={i}
+                              >
+                                <div className="col-5-no-gutters">
+                                  <img
+                                    src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/`}
+                                    className={classnames(
+                                      style.imageItem,
+                                      'grid-container'
+                                    )}
+                                  />
+                                </div>
+                                <div className="col-7-no-gutters">
+                                  <div className="pt-20">
+                                    <div
+                                      className={style.progressbarContainer}
+                                      key={i}
+                                    >
+                                      <div className={style.barOptions}>
+                                        <p>{capitalizeFirstLetter(info.gender)}</p>
+                                        <p>
+                                          {(info.ages.confidence * 100).toFixed(0)}
+                                          % Accurate
+                                        </p>
+                                      </div>
+                                      <ProgressBar
+                                        width={(info.ages.confidence * 100).toFixed(0)}
+                                        customBarClass={style.progressBar}
+                                        customPercentageClass={
+                                          style.percentage
+                                        }
+                                      />
+                                    </div>
+                                  </div>
+
+                                  <div className="pt-20">
+                                    <div
+                                      className={style.progressbarContainer}
+                                      key={i}
+                                    >
+                                      <div className={style.barOptions}>
+                                        <p>{info.ages.min} Y/O</p>
+                                        <p>
+                                          {(info.ages.min).toFixed(0)}
+                                          % Accurate
+                                        </p>
+                                      </div>
+                                      <ProgressBar
+                                        width={(info.ages.confidence * 100).toFixed(0)}
+                                        customBarClass={style.progressBar}
+                                        customPercentageClass={
+                                          style.percentage
+                                        }
+                                      />
+                                    </div>
+                                  </div>
+
+                                </div>
+                              </div>
+                            ))}
+                          </Scrubber>
+                        </div>
+                      </TabPanel>
+                      <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
                           <Scrubber
                             vertical
                             width={570}
-                            height={this.state.rightPaneHeight}
+                            height={368}
                           >
                             {shotInfo &&
                               shotInfo.shot &&
                               shotInfo.shot.labels &&
                               shotInfo.shot.labels.map((info, i) => (
-                                <div
-                                  className={classnames(
-                                    style.tabPanelItem,
-                                    'grid-container',
-                                    {
-                                      'mb-16':
-                                        i !== shotInfo.shot.labels.length - 1,
-                                    }
-                                  )}
-                                  style={{
-                                    background: colors.shotByShotBackground,
-                                    borderColor: colors.shotByShotBorder,
-                                    marginRight: '16px !important',
-                                  }}
-                                  key={i}
-                                >
-                                  <div className="col-5-no-gutters">
-                                    <img
-                                      src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${
-                                        shotInfo.shot.frames[i]
-                                      }`}
-                                      className="img-responsive"
-                                    />
-                                  </div>
-                                  <div className="col-7-no-gutters">
-                                    <div className="pt-20">
-                                      <div
-                                        className={style.progressbarContainer}
-                                        key={i}
-                                      >
-                                        <div className={style.barOptions}>
-                                          <p>{info.label}</p>
-                                          <p>
-                                            {(info.confidence * 100).toFixed(0)}
-                                            % Accurate
-                                          </p>
-                                        </div>
-                                        <ProgressBar
-                                          width={(
-                                            info.confidence * 100
-                                          ).toFixed(0)}
-                                          customBarClass={style.progressBar}
-                                          customPercentageClass={
-                                            style.percentage
-                                          }
-                                        />
+                              <div
+                                className={classnames(
+                                  style.tabPanelItem,
+                                  'grid-container',
+                                  {
+                                    'mb-16':
+                                      i !== shotInfo.shot.labels.length - 1,
+                                  }
+                                )}
+                                style={{
+                                  background: colors.shotByShotBackground,
+                                  borderColor: colors.shotByShotBorder,
+                                  marginRight: '16px !important',
+                                }}
+                                key={i}
+                              >
+                                <div className="col-5-no-gutters">
+                                  <img
+                                    src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${
+                                      shotInfo.shot.frames[i]
+                                    }`}
+                                    className={classnames(
+                                      style.imageItem,
+                                      'grid-container'
+                                    )}
+                                  />
+                                </div>
+                                <div className="col-7-no-gutters">
+                                  <div className="pt-20">
+                                    <div
+                                      className={style.progressbarContainer}
+                                      key={i}
+                                    >
+                                      <div className={style.barOptions}>
+                                        <p>{info.label}</p>
+                                        <p>
+                                          {(info.confidence * 100).toFixed(0)}
+                                          % Accurate
+                                        </p>
                                       </div>
+                                      <ProgressBar
+                                        width={(
+                                          info.confidence * 100
+                                        ).toFixed(0)}
+                                        customBarClass={style.progressBar}
+                                        customPercentageClass={
+                                          style.percentage
+                                        }
+                                      />
                                     </div>
                                   </div>
                                 </div>
-                              ))}
+                              </div>
+                            ))}
                           </Scrubber>
                         </div>
                       </TabPanel>
                       <TabPanel>
-                        <div className={style.tabPanel}>
-                          <div
-                            className={
-                              style.tabPanelItem + ' grid-container mt-16'
-                            }
-                            style={{
-                              background: colors.shotByShotBackground,
-                              borderColor: colors.shotByShotBorder,
-                            }}
-                          >
-                            <div className="col-5-no-gutters">
-                              <img
-                                src="https://picsum.photos/500/270?image=8"
-                                className="img-responsive"
-                              />
-                            </div>
-                            <div className="col-7-no-gutters">
-                              <div className="pt-32">
-                                <div className={style.progressbarContainer}>
-                                  <div className={style.barOptions}>
-                                    <p>Football Helmet</p>
-                                    <p>78% Accurate</p>
-                                  </div>
-                                  <ProgressBar
-                                    width={78}
-                                    customBarClass={style.progressBar}
-                                    customPercentageClass={style.percentage}
-                                  />
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        </div>
-                      </TabPanel>
-                      <TabPanel>
                         <div className={style.radarChartContainer}>
-                          {radarData && <RadarChart data={radarData} />}
+                          {radarChartDataConfigured && (
+                            <RadarChart data={radarChartDataConfigured} />
+                          )}
                         </div>
                       </TabPanel>
                     </Tabs>
@@ -473,7 +538,7 @@ class LibraryDetailShotByShot extends React.Component {
                             width: shotsTotalWidth,
                           }}
                         >
-                          {viewportShots.map((shot, i) => (
+                          {viewportShots && viewportShots.map((shot, i) => (
                             <React.Fragment key={i}>
                               <div className={style.image}>
                                 <div
@@ -523,12 +588,15 @@ class LibraryDetailShotByShot extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   shotInfoData: selectShotInfo(),
+  radarChartData: selectColorsInfo(),
+  peopleData: selectPeopleData(),
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-    getShotInfoRequest: (shotId) =>
-      dispatch(actions.getShotInfoRequest(shotId)),
+    getShotInfoRequest: (shotId) => dispatch(actions.getShotInfoRequest(shotId)),
+    getRadarChartRequest: (shotId) => dispatch(actions.getRadarChartRequest(shotId)),
+    getPeopleRequest: (shotId) => dispatch(actions.getPeopleRequest(shotId)), 
   }
 }
 
