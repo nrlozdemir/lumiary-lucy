@@ -5,14 +5,16 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import Info from './Info';
-import DoughnutCard from './DoughnutCard';
-import { makeSelectInfoShowSection, makeSelectDoughnutData } from 'Reducers/libraryDetail';
+import Info from './Info'
+import DoughnutCard from './DoughnutCard'
+import {
+  makeSelectInfoShowSection,
+  makeSelectDoughnutData,
+} from 'Reducers/libraryDetail'
 
 class LibraryDetailDoughnutChart extends React.Component {
   render() {
-		const { doughnutData, showInfo } = this.props
-		console.log(doughnutData);
+    const { doughnutData, showInfo } = this.props
 
     return (
       <ThemeContext.Consumer>
@@ -26,16 +28,30 @@ class LibraryDetailDoughnutChart extends React.Component {
             }}
           >
             <div className={style.radialChartsContainer}>
-              {!showInfo && doughnutData && doughnutData.map(({key, title, doughnutChartValues, max: {label, percentage}}, i) => (
-								<DoughnutCard
-									key={i}
-									identifier={key}
-									title={title}
-									chartData={doughnutChartValues}
-									maxLabel={label}
-									maxPercentage={percentage}
-								/>
-							))}
+              {!showInfo &&
+                doughnutData &&
+                doughnutData.map(
+                  (
+                    {
+                      key,
+                      title,
+                      doughnutChartValues,
+                      max: { label, percentage },
+                      data,
+                    },
+                    i
+                  ) => (
+                    <DoughnutCard
+                      key={i}
+                      identifier={key}
+                      title={title}
+                      chartData={doughnutChartValues}
+                      maxLabel={label}
+                      maxPercentage={percentage}
+                      data={data}
+                    />
+                  )
+                )}
               {showInfo && <Info />}
             </div>
           </div>
@@ -46,13 +62,12 @@ class LibraryDetailDoughnutChart extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-	showInfo: makeSelectInfoShowSection(),
-	doughnutData: makeSelectDoughnutData()
+  showInfo: makeSelectInfoShowSection(),
+  doughnutData: makeSelectDoughnutData(),
 })
 
 function mapDispatchToProps(dispatch) {
-  return {
-  }
+  return {}
 }
 
 const withConnect = connect(
@@ -63,6 +78,6 @@ const withConnect = connect(
 export default compose(
   reduxForm({
     form: 'libraryDetailDoughnutChart',
-	}),
-	withConnect
+  }),
+  withConnect
 )(LibraryDetailDoughnutChart)

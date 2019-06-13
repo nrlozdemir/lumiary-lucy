@@ -23,7 +23,10 @@ export const types = {
 	GET_SHOT_BY_SHOT_FAILURE: 'LibraryDetail/GET_SHOT_BY_SHOT_FAILURE',
 
 	TOGGLE_INFO_SECTION: 'LibraryDetail/TOGGLE_INFO_SECTION',
-	CHANGE_DOUGHNUT_FILTERS: 'LibraryDetail/CHANGE_DOUGHNUT_FILTERS'
+	CHANGE_DOUGHNUT_FILTERS: 'LibraryDetail/CHANGE_DOUGHNUT_FILTERS',
+
+	DOUGHNUT_INFO_SUCCESS: 'LibraryDetail/DOUGHNUT_INFO_SUCCESS',
+	DOUGHNUT_INFO_FAILURE: 'LibraryDetail/DOUGHNUT_INFO_FAILURE',
 }
 export const actions = {
   getSelectedVideoRequest: (payload) => ({
@@ -94,6 +97,14 @@ export const actions = {
     type: types.CHANGE_DOUGHNUT_FILTERS,
     payload,
 	}),
+	doughnutInfoIndustrySuccess: payload => ({
+		type: types.DOUGHNUT_INFO_SUCCESS,
+		payload
+	}),
+	doughnutInfoIndustryFailure: payload => ({
+		type: types.DOUGHNUT_INFO_FAILURE,
+		payload
+	})
 }
 
 export const initialState = fromJS({
@@ -113,7 +124,8 @@ export const initialState = fromJS({
 		filters: {
 			date: null,
 			metric: null
-		}
+		},
+		industryData: null
 	}
 })
 
@@ -182,6 +194,12 @@ const libraryDetailReducer = (state = initialState, action) => {
 		case types.CHANGE_DOUGHNUT_FILTERS:
 			return state.setIn(['infoData', 'filters', action.payload.name], fromJS(action.payload.value))
 
+		case types.DOUGHNUT_INFO_SUCCESS:
+			return state.setIn(['infoData', 'industryData'], fromJS(action.payload))
+
+		case types.DOUGHNUT_INFO_FAILURE:
+			return state.setIn(['infoData', 'industryData'], fromJS(null))
+
     default:
       return state
   }
@@ -223,6 +241,13 @@ export function makeSelectInfoShowSection() {
 	return createSelector(
 		selectInfoData,
 		substate => substate.get('shownSectionData') ? substate.get('shownSectionData').toJS() : null
+	)
+}
+
+export function makeSelectInfoIndustryData() {
+	return createSelector(
+		selectInfoData,
+		substate => substate.get('industryData') ? substate.get('industryData').toJS() : null
 	)
 }
 

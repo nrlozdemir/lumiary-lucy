@@ -10,7 +10,7 @@ import { actions } from 'Reducers/libraryDetail'
 
 class DoughnutCard extends React.Component {
   render() {
-		const { identifier, title, maxLabel, maxPercentage, toggleInfoSection, chartData } = this.props;
+		const { identifier, title, maxLabel, maxPercentage, toggleInfoSection, chartData, data } = this.props;
 
     return (
       <ThemeContext.Consumer>
@@ -63,7 +63,7 @@ class DoughnutCard extends React.Component {
             </div>
             <a
               className={style.doughnutChartFooter}
-              onClick={() => toggleInfoSection({id: identifier, label: maxLabel, title})}
+              onClick={() => toggleInfoSection({id: identifier, label: maxLabel, title, data})}
               style={{
                 backgroundColor: colors.modalButtonBackground,
                 color: colors.textColor,

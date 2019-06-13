@@ -78,15 +78,23 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
       platform: 'all',
       dateBucket: 'none',
       display: 'percentage',
-      dateBucket: 'none',
+			dateBucket: 'none',
       url: '/report',
-    }
-    const payloads = yield expectedValues.map((item) =>
-      call(getDataFromApi, {
-        ...parameters,
-        property: [item.key],
-      })
-    )
+		}
+		const response = yield call(getDataFromApi, {
+			...parameters,
+			property: expectedValues.map(({key}) => key)
+		});
+
+		const payloads = Object.entries(response.data[brand.name]).map(([key, value]) => ({
+			platform: 'All',
+			data: {
+				[brand.name]: {
+					[key]: value
+				}
+			}
+		}));
+
     const createCustomBackground = (data) => {
       return Object.values(data).map((item, idx) => {
         if (Object.values(data).includes(100)) {
@@ -123,7 +131,8 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
 				max: {
 					label: chartValues.labels[maxDataIndex],
 					percentage: maxDataValue
-				}
+				},
+				data: payloads[idx]
 			}
 		})
 
@@ -199,6 +208,8 @@ function* getDoughnutSectionInfoData() {
 
 		const infoData = yield select(makeSelectInfoShowSection());
 
+		console.log('infoData', infoData);
+
 		if (!infoData) {
 			return;
 		}
@@ -213,14 +224,35 @@ function* getDoughnutSectionInfoData() {
 			brands: [brand.uuid],
 			platform: 'all',
 			dateBucket: 'none',
-			display: 'percentage'
+			display: 'percentage',
+			mode: 'industry',
 		};
 
 		const data = yield call(getDataFromApi, options);
+		const extracted = data.data[brand.name][infoData.id];
 
-		console.log(data);
+		delete extracted.subtotal;
+
+		yield put(actions.doughnutInfoIndustrySuccess(extracted));
+
+		const libraryChart = convertDataIntoDatasets(
+			infoData.data,
+			{
+				property: [infoData.id],
+			},
+			{
+				singleDataset: true,
+				backgroundColor: createCustomBackground(
+					infoData.data.data[Object.keys(infoData.data.data)[0]][infoData.id]
+				),
+			}
+		);
+
+		console.log('library', libraryChart);
+
 	} catch (e) {
-		console.error(e);
+		debugger;
+		yield put(actions.doughnutInfoIndustryFailure(e));
 	}
 }
 

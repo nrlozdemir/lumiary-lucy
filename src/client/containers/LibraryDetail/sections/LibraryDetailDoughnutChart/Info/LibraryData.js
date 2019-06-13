@@ -1,10 +1,18 @@
 import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import style from '../style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
+import {
+  makeSelectInfoShowSection,
+  makeSelectInfoIndustryData,
+} from 'Reducers/libraryDetail'
 
 class LibraryData extends React.Component {
   render() {
+		console.log(this.props);
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -55,4 +63,19 @@ class LibraryData extends React.Component {
   }
 }
 
-export default LibraryData;
+const mapStateToProps = createStructuredSelector({
+  sectionData: makeSelectInfoShowSection(),
+  industryData: makeSelectInfoIndustryData(),
+})
+
+function mapDispatchToProps(dispatch) {
+  return {}
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(LibraryData)
+
