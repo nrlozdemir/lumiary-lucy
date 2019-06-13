@@ -316,7 +316,12 @@ function* getPacingChartData() {
     const pacingChartData = convertDataIntoDatasets(
       payload,
       { property: ['pacing'] },
-      { customBorderColor: '#373F5B', singleDataset: true, noBrandKeys: true }
+      {
+        customBorderColor: '#373F5B',
+        singleDataset: true,
+        noBrandKeys: true,
+        customValueKey: 'proportionOfLibrary',
+      }
     )
 
     yield put(actions.getPacingChartSuccess(pacingChartData))

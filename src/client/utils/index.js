@@ -69,6 +69,7 @@ const getLabelWithSuffix = (label, property) => {
     customBorderColor: string,
     noBrandKeys: bool - payloads without brand key layer
     customKeys: array,
+    customValueKey: string - custom key of data object (value default)
   }
   *
  */
@@ -82,6 +83,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     singleDataset,
     preparedLabels,
     useBrandLabels,
+    customValueKey,
     backgroundColor,
     preparedDatasets,
     customBorderColor,
@@ -174,7 +176,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     typeof datasetsFromValues[0] === 'object' &&
     !Array.isArray(datasetsFromValues[0])
   ) {
-    datasetsFromValues = datasetsFromValues.map((d) => d.value)
+    datasetsFromValues = datasetsFromValues.map((d) =>
+      customValueKey ? d[customValueKey] || 0 : d.value || 0
+    )
   }
 
   // Object.keys(
