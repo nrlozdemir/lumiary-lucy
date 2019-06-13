@@ -17,7 +17,7 @@ const PercentageBarGraph = ({
   percentageDataSet,
   options = {},
 }) => {
-  if (!percentage) return null
+  if (!percentage || percentage === 'NaN') return null
 
   const percentageData = !percentageDataSet
     ? {
