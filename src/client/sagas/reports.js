@@ -120,28 +120,20 @@ function* getContentVitalityScoreData({ payload = {} }) {
   const { dateRange, platform, report = {} } = payload
   const { brands = [] } = report
   try {
-    const response = yield call((() => {
-      return getDataFromApi(
-        {},
-        `/report/compare/brands?${querystring.stringify({
-          "brands": brands,
-          "property": "cvScore",
-          "mode": "sumVideos",
-          "daterange": dateRange,
-          "platform": platform
-        })}`, 
-        'GET'
-      )
-      .then((response) => {
-        if(response.error) {
-          throw response.error
-        }
+    const payload = yield call(
+      getDataFromApi,
+      {},
+      `/report/compare/brands?${querystring.stringify({
+        brands: brands,
+        property: 'cvScore',
+        mode: 'sumVideos',
+        daterange: dateRange,
+        platform: platform,
+      })}`,
+      'GET'
+    )
 
-        return response
-      })
-    }), {})
-console.log('response', response)
-    yield put(actions.getContentVitalityScoreDataSuccess(response))
+    yield put(actions.getContentVitalityScoreDataSuccess(payload))
   } catch (err) {
     console.log(err)
     yield put(actions.getContentVitalityScoreDataError(err))
