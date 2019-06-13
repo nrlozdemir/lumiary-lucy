@@ -32,6 +32,7 @@ const Sidebar = (props) => {
       { value: 'mostLikedVideos', label: 'Most Liked Videos' },
       { value: 'mostSharedVideos', label: 'Most Shared Videos' },
       { value: 'mostCommentedVideos', label: 'Most Commented Videos' },
+      { value: 'orderByCvScore', label: 'CvScore' },
     ],
     audienceGender: [
       { value: 'male', label: 'Male' },
@@ -224,4 +225,5 @@ Sidebar.propTypes = {
 
 export default reduxForm({
   form: 'sidebar',
+  destroyOnUnmount: false,
 })(Sidebar)
