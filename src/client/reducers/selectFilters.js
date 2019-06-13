@@ -42,7 +42,7 @@ export const defaultFilters = {
   talentAge: '10-',
   talentGender: 'male',
   colorTemperature: 'happy-sad',
-  dateRange: 'week',
+  dateRange: '3months',
 }
 
 export const initialState = fromJS({
