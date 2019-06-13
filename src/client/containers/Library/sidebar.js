@@ -10,7 +10,7 @@ import Range from 'Components/Form/Range'
 import style from './style.scss'
 
 const Sidebar = (props) => {
-  const { reset, handleSubmit, colors } = props
+  const { reset, handleSubmit, colors, changeFilter } = props
   const sidebarClass = classnames(style.sidebar, {
     [style.sidebarVisible]: props.sidebarVisible,
     [style.fixed]: props.fixedHeader,
@@ -77,8 +77,12 @@ const Sidebar = (props) => {
     ],
   }
 
+  const resetFormValues = () => {
+    reset()
+    changeFilter()
+  }
   return (
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <div
         className={sidebarClass}
         style={{ backgroundColor: colors.duskBackground }}
@@ -92,7 +96,10 @@ const Sidebar = (props) => {
               <span className="float-left color-dark-blue-grey">
                 Filter Videos
               </span>
-              <span className="float-right color-cool-blue" onClick={reset}>
+              <span
+                className="float-right color-cool-blue"
+                onClick={() => resetFormValues()}
+              >
                 Reset
               </span>
             </p>
