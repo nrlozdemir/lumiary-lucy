@@ -351,6 +351,10 @@
     // background-color: $color-dark-five;
     border: 1px solid $color-dusk;
     margin-bottom: 24px;
+    
+    &:last-child {
+      margin-bottom: 0px;
+    }
 
     div {
       img {
