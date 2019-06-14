@@ -400,9 +400,14 @@ function* getTotalViewsData({ data }) {
     const { metric, dateRange, platform } = data
 
     const profile = yield select(selectAuthProfile)
-    const competitors = getBrandNameAndCompetitorsName(profile)
+    const competitors = getBrandAndCompetitors(profile)
 
-    const url = `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`
+    const url = buildApiUrl(`/metric/totals`, {
+      metric,
+      platform,
+      competitors,
+      daterange: dateRange,
+    })
 
     const options = {
       metric,
@@ -423,7 +428,7 @@ function* getTotalViewsData({ data }) {
       dateBucket === 'none'
         ? {}
         : convertDataIntoDatasets(
-            getFilteredCompetitorValues(competitors, barData),
+            barData,
             { ...options, dateBucket },
             {
               isMetric: true,
@@ -431,7 +436,7 @@ function* getTotalViewsData({ data }) {
           )
 
     const convertedDoughnutData = convertDataIntoDatasets(
-      getFilteredCompetitorValues(competitors, doughnutData),
+      doughnutData,
       { ...options, dateBucket: 'none' },
       {
         hoverBG: true,
@@ -440,6 +445,7 @@ function* getTotalViewsData({ data }) {
         isMetric: true,
       }
     )
+
     yield put(
       actions.getTotalViewsSuccess({
         barData: convertedBarData,
