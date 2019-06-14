@@ -390,7 +390,7 @@ const radarChartCalculate = (data) => {
           el.progress.push({
             leftTitle: f.name,
             color: strToColor(f.name),
-            rightTitle: `${f.count}k Shares`,
+            rightTitle: `${addComma(f.count)} Shares`,
             value: ((f.count / el.total) * 100).toFixed(0),
           })
         })
