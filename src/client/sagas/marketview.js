@@ -557,14 +557,18 @@ function* getTopPerformingPropertiesByCompetitorsData({
       property: ['pacing'],
       brands: [...competitors.map((c) => c.uuid)],
     }
+
     const payload = yield call(getDataFromApi, { ...options })
-    yield put(
-      actions.getTopPerformingPropertiesByCompetitorsSuccess(
-        convertDataIntoDatasets(payload, options, {
-          useBrandLabels: true,
-        })
+
+    if (!!payload && !!payload.data && !_.isEmpty(payload.data)) {
+      yield put(
+        actions.getTopPerformingPropertiesByCompetitorsSuccess(
+          convertDataIntoDatasets(payload, options, {
+            useBrandLabels: true,
+          })
+        )
       )
-    )
+    }
   } catch (error) {
     console.log('error', error)
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))
