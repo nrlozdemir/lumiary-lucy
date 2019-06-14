@@ -1,7 +1,7 @@
 import React from 'react'
 import { Radar } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
-import { addComma } from 'Utils'
+import { metricSuffix } from 'Utils'
 
 const plugins = [
   {
@@ -88,7 +88,7 @@ const RadarChart = (props) => {
             },
             afterLabel: function(tooltipItem, data) {
               return (
-                addComma(data.labels[tooltipItem['index']].count) + ' Shares'
+                metricSuffix(data.labels[tooltipItem['index']].count) + ' Shares'
               )
             },
           },
@@ -110,7 +110,7 @@ const RadarChart = (props) => {
           },
           ticks: {
             callback: function(value) {
-              return addComma(value)
+              return metricSuffix(value)
             },
             backdropColor: 'transparent',
             fontSize: 10,
