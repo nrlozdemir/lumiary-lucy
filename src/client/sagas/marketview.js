@@ -568,6 +568,8 @@ function* getTopPerformingPropertiesByCompetitorsData({
           })
         )
       )
+    } else {
+      yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess({}))
     }
   } catch (error) {
     console.log('error', error)
