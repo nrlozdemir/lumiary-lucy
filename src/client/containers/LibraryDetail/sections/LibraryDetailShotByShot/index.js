@@ -59,71 +59,77 @@ const SliderWithScrubber = (props) => {
     scrubberIsDot,
     scrubberWidth,
     scrubberHeight,
+    isEmpty
   } = props
 
-  if (shots && shots.length > 0) {
-    let tempMarks = []
-    let marks = {}
-    let shotsTotalWidth = 0
-    let viewportDurations = {}
-    let viewportLeftOver = {}
-    let viewportTempShots = {}
-    let viewportTempShotsTotalWidth = {}
-    let viewportShots = []
-    const viewportSize = viewportWidth - ((ticks + 1) * shotMargin)
-    
-    /*
+  let tempMarks = []
+  let marks = {}
+  let shotsTotalWidth = 0
+  let viewportDurations = {}
+  let viewportLeftOver = {}
+  let viewportTempShots = {}
+  let viewportTempShotsTotalWidth = {}
+  let viewportShots = []
+  const viewportSize = viewportWidth - ((ticks + 1) * shotMargin)
+  /*
     const durations = shots.map(
       element => (element.endTime - element.startTime).toFixed(4)
     )
-    */
-    const totalDuration = (shots[shots.length - 1].endTime).toFixed(4)
-    
-    //first index and last index not included
-    const dividedDuration = (Math.round(totalDuration / (ticks))).toFixed(4)
-    
-    if(markers) {
-      //create marks
-      for (let i = 0; i < ticks - 1; i++) {
-        tempMarks.push(secondToTime(i * dividedDuration))
-      }
-      tempMarks.push(secondToTime(shots[shots.length - 1].endTime))
-  
-      //rebuild custom-marks for styling
-      tempMarks.map((element, index) => {
-        index = parseInt(index * 10)
-        if (index === 0) {
-          marks[index] = {
-            style: {
-              transform: 'translateX(0%)'
-            },
-            label: <p className = "customDot" > {
-              element
-            } </p>,
-            value: element,
-          }
-        } else if (index === 100) {
-          marks[index] = {
-            style: {
-              transform: 'translateX(-100%)'
-            },
-            label: <p className = "customDot" > {
-              element
-            } </p>,
-            value: element,
-          }
-        } else {
-          marks[index] = {
-            style: {},
-            label: <p className = "customDot" > {
-              element
-            } </p>,
-            value: element,
-          }
-        }
-      })
+  */
+  const totalDuration = (shots && shots.length > 0) 
+    ? (shots[shots.length - 1].endTime).toFixed(4)
+    : 0
+  const dividedDuration = totalDuration && 
+    (Math.round(totalDuration / (ticks))).toFixed(4)
+
+  //create marks
+  if(markers) {
+    for (let i = 0; i < ticks - 1; i++) {
+      tempMarks.push(secondToTime(i * dividedDuration))
     }
-    
+
+    const lastMarker = totalDuration > 0 
+      ? shots[shots.length - 1].endTime
+      : 0 
+
+    tempMarks.push(secondToTime(lastMarker))
+
+    //rebuild custom-marks for styling
+    tempMarks.map((element, index) => {
+      index = parseInt(index * 10)
+      if (index === 0) {
+        marks[index] = {
+          style: {
+            transform: 'translateX(0%)'
+          },
+          label: <p className="customDot">{
+            element
+          }</p>,
+          value: element,
+        }
+      } else if (index === 100) {
+        marks[index] = {
+          style: {
+            transform: 'translateX(-100%)'
+          },
+          label: <p className="customDot">{
+            element
+          }</p>,
+          value: element,
+        }
+      } else {
+        marks[index] = {
+          style: {},
+          label: <p className="customDot">{
+            element
+          }</p>,
+          value: element,
+        }
+      }
+    })
+  }
+
+  if (isEmpty !== true && shots && shots.length > 0) {
     //create viewports including max 11 items from shots, fit size to min and max
     const totalViewports = (shots.length / ticks).toFixed(2)
     for (let v = 0; v < totalViewports; v++) {
@@ -237,63 +243,72 @@ const SliderWithScrubber = (props) => {
     viewportShots && viewportShots.map((el, i) => {
       shotsTotalWidth += el.width + shotMargin
     })
-  
-    return (
-      <Scrubber
-        horizontal
-        arrows
-        viewBordered
-        verticalDisabled
-        height={viewportHeight}
-        width={viewportWidth + 1}
-        marks={marks}
-        totalWidth={shotsTotalWidth}
-        scrubberWidth={scrubberWidth}
-        scrubberHeight={scrubberHeight}
-        scrubberIsDot={scrubberIsDot}
+  }
+
+  return (
+    <Scrubber
+      horizontal
+      arrows
+      viewBordered
+      verticalDisabled
+      height={viewportHeight}
+      width={viewportWidth + 1}
+      marks={!!marks && marks}
+      totalWidth={
+        (isEmpty === true) 
+          ? viewportWidth + 2 
+          : shotsTotalWidth
+      }
+      scrubberWidth={scrubberWidth}
+      scrubberHeight={scrubberHeight}
+      scrubberIsDot={scrubberIsDot}
+    >
+      <div className={customClass.sliderWrapper}
+        style={{
+          left: 0,
+          width: (isEmpty === true) 
+            ? viewportWidth + 2 
+            : shotsTotalWidth,
+        }}
       >
-        <div className={customClass.sliderWrapper}
-          style={{
-            left: 0,
-            width: shotsTotalWidth,
-          }}
-        >
-        {viewportShots.map((shot, i) => (
-          <React.Fragment key={i}>
-            <div className={customClass.image}>
+      
+      {isEmpty !== true 
+        && viewportShots 
+        && viewportShots.map((shot, i) => (
+        <React.Fragment key={i}>
+          <div className={customClass.image}>
+            <div
+              style={{
+                width: `${shot.width.toFixed(2)}px`,
+                borderColor: customStyle.imageWrapperBorderColor,
+              }}
+              className={customClass.imageWrapper}
+            >
               <div
+                className={customClass.originalImage}
                 style={{
                   width: `${shot.width.toFixed(2)}px`,
-                  borderColor: customStyle.imageWrapperBorderColor,
-                }}
-                className={customClass.imageWrapper}
-              >
-                <div
-                  className={customClass.originalImage}
-                  style={{
-                    width: `${shot.width.toFixed(2)}px`,
-                    height: `${shotHeight}px`,
-                    backgroundImage: `url(${shot.image})`,
-                    backgroundSize: `${shotHoverWidth}px ${shotHoverHeight}px`,
-                    borderColor: customStyle.originalImageBorderColor,
-                  }}
-                />
-              </div>
-              <img
-                src={shot.image}
-                style={{ 
                   height: `${shotHeight}px`,
+                  backgroundImage: `url(${shot.image})`,
+                  backgroundSize: `${shotHoverWidth}px ${shotHoverHeight}px`,
+                  borderColor: customStyle.originalImageBorderColor,
                 }}
-                className={customClass.imageHover}
-                onClick={() => { !!props.clickEvent && props.clickEvent(i) }}
               />
             </div>
-          </React.Fragment>
-        ))}
-        </div>
-      </Scrubber>
-    )
-  }
+            <img
+              src={shot.image}
+              style={{ 
+                height: `${shotHeight}px`,
+              }}
+              className={customClass.imageHover}
+              onClick={() => { !!props.clickEvent && props.clickEvent(i) }}
+            />
+          </div>
+        </React.Fragment>
+      ))}
+      </div>
+    </Scrubber>
+  )
 }
 
 class LibraryDetailShotByShot extends React.Component {
@@ -309,8 +324,7 @@ class LibraryDetailShotByShot extends React.Component {
 
   onChangeSlider(e) {
     this.setState({
-      sliderValue: 0,
-      sliderLeftPosition: 0,
+      sliderValue: 0
     })
   }
 
@@ -327,7 +341,7 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   render() {
-    const { shotInfo, radarChartData, peopleData } = this.props
+    const { shots, shotInfo, radarChartData, peopleData } = this.props
     const { selectedImage } = this.state
     const radarChartDataConfigured = radarChartData &&{
       labels: [
@@ -355,6 +369,9 @@ class LibraryDetailShotByShot extends React.Component {
         }
       ]
     }
+    const dataIsEmpty = (shots && Object.values(shots).length > 0) 
+      ? false 
+      : true
 
     return (
       <ThemeContext.Consumer>
@@ -507,8 +524,7 @@ class LibraryDetailShotByShot extends React.Component {
                                 style.tabPanelItem,
                                 'grid-container',
                                 {
-                                  'mb-16':
-                                    i !== shotInfo.shot.labels.length - 1,
+                                  'mb-16': i !== shotInfo.shot.labels.length - 1,
                                 }
                               )}
                               style={{
@@ -573,32 +589,44 @@ class LibraryDetailShotByShot extends React.Component {
                 <React.Fragment>
                   <h2 className={style.sliderHeader}>Shot by Shot</h2>
                   <div className={style.sliderContainer}>
-                    <div className={style.shotByShotMask} />
-                    <SliderWithScrubber
-                      clickEvent={ this.shotClick }
-                      shots={Object.values(this.props.shots)} 
-                      shotMargin={5}
-                      minShotWidth={24}
-                      maxShotWidth={148}
-                      shotHeight={160}
-                      shotHoverWidth={160}
-                      shotHoverHeight={160}
-                      viewportWidth={1118}
-                      viewportHeight={230}
-                      ticks={11}
-                      markers 
-                      customClass={{
-                        sliderWrapper: style.sliderWrapper,
-                        imageWrapper: style.setCenter,
-                        image: style.image,
-                        imageHover: style.hover,
-                        originalImage: style.originalImage,
-                      }}
-                      customStyle={{
-                        originalImageBorderColor: colors.shotByShotBackground,
-                        imageWrapperBorderColor: colors.shotByShotBackground
-                      }}
-                    />
+                    <div 
+                      className={classnames(
+                        {
+                          [style.emptyContainer]: dataIsEmpty === true,
+                        }
+                      )}
+                    >
+                      <div className={style.shotByShotMask} />
+                      <SliderWithScrubber
+                        clickEvent={ this.shotClick }
+                        shots={Object.values(shots)} 
+                        shotMargin={5}
+                        minShotWidth={24}
+                        maxShotWidth={148}
+                        shotHeight={160}
+                        shotHoverWidth={160}
+                        shotHoverHeight={160}
+                        viewportWidth={1118}
+                        viewportHeight={230}
+                        ticks={11}
+                        markers 
+                        customClass={{
+                          sliderWrapper: style.sliderWrapper,
+                          imageWrapper: style.setCenter,
+                          image: style.image,
+                          imageHover: style.hover,
+                          originalImage: style.originalImage,
+                        }}
+                        customStyle={{
+                          originalImageBorderColor: colors.shotByShotBackground,
+                          imageWrapperBorderColor: colors.shotByShotBackground
+                        }}
+                        isEmpty={dataIsEmpty}
+                      />
+                    </div>
+                    {dataIsEmpty === true && (
+                      <div className={style.emptyData}>No Data Available</div>
+                    )}
                   </div>
                 </React.Fragment>
               )}
