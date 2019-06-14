@@ -92,7 +92,7 @@ const LibraryDetailChartHeader = ({
                 src={videoUrl}
                 title={title}
                 socialIcon={socialIcon}
-                cvScore={cvScore || 0.0}
+                cvScore={cvScore}
               />
             </div>
             <div className={classnames('col-6', style.videoStatsWrapper)}>
