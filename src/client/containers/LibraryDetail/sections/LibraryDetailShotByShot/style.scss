@@ -230,7 +230,7 @@
 }
 
 .sliderHeader {
-  padding: 56px 0 48px;
+  margin: 56px auto 64px;
   line-height: 21px;
   text-align: center;
   font-family: $font-family-ClanOT;
@@ -252,7 +252,7 @@
 .sliderContainer {
   position: relative;
   width: 1120px;
-  margin: 0px 0px;
+  margin: 0px auto 40px;
   z-index: 2;
   flex-wrap: nowrap;
   overflow-x: hidden;
