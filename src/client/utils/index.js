@@ -329,7 +329,7 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-const addComma = (number) => {
+const metricSuffix = (number) => {
   number = parseInt(number)
   if (number >= 1e3) {
     const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
@@ -390,7 +390,7 @@ const radarChartCalculate = (data) => {
           el.progress.push({
             leftTitle: f.name,
             color: strToColor(f.name),
-            rightTitle: `${addComma(f.count)} Shares`,
+            rightTitle: `${metricSuffix(f.count)} Shares`,
             value: ((f.count / el.total) * 100).toFixed(0),
           })
         })
@@ -818,7 +818,7 @@ export {
   getFilteredCompetitors,
   getFilteredCompetitorValues,
   convertColorTempToDatasets,
-  addComma,
+  metricSuffix,
   parseAverage,
   convertVideoEngagementData,
   floatCvScore,

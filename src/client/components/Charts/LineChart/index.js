@@ -6,7 +6,7 @@ import { lineOptions, lineStackedAreaOptions } from './defaultOptions'
 
 import { withTheme } from 'ThemeContext/withTheme'
 
-function addComma(number) {
+function metricSuffix(number) {
   if (number >= 1e3) {
     const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
     const unitname = ['k', 'm', 'B', 'T'][Math.floor(unit / 3) - 1]
@@ -170,7 +170,7 @@ class LineChart extends React.Component {
       props.options.scales.yAxes[0].ticks = {
         ...props.options.scales.yAxes[0].ticks,
         callback: (value, index, values) => {
-          return addComma(value)
+          return metricSuffix(value)
         },
       }
     }
@@ -182,7 +182,7 @@ class LineChart extends React.Component {
           title: (tooltipItem, data) => {
             const { datasetIndex, index } = tooltipItem[0]
             return (
-              addComma(data.datasets[datasetIndex].data[index]) +
+              metricSuffix(data.datasets[datasetIndex].data[index]) +
               ' ' +
               props.customTooltipText
             )
