@@ -26,7 +26,7 @@ const TopSimilarProperties = (props) => {
           <div className={classnames('col-12-no-gutters', style.container)}>
             {data &&
               data.map((sectionItem, i) => (
-                <div className="col-4-no-gutters">
+                <div className="col-4-no-gutters" key={`TopSimilarProperties_${i}`}>
                   <div style={{ borderColor: colors.moduleBorder }}>
                     <DoughnutCard
                       data={sectionItem.doughnutChartValues}

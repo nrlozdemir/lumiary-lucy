@@ -13,10 +13,6 @@ import 'chartjs-plugin-datalabels'
 import Module from 'Components/Module'
 
 import { chartCombineDataset, isDataSetEmpty } from 'Utils'
-import {
-  barChart_DatasetOptions,
-  doughnutChart_DatasetOptions,
-} from './options'
 import { chartColors } from 'Utils/globals'
 
 import { isEmpty, isEqual } from 'lodash'
@@ -49,7 +45,7 @@ class TotalViewsChart extends React.Component {
 
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
     const isBarChartEmpty = isDataSetEmpty(barData)
-
+    
     const hasNoData =
       (!loading &&
         (!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty)) ||

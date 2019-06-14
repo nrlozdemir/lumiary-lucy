@@ -83,7 +83,6 @@ class Video extends Component {
             src={src}
             muted
             controls={false}
-            poster={poster}
           />
           <div className={styles.percentageWrapper} style={{ right: '80px' }}>
             <PercentageBarGraph

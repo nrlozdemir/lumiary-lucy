@@ -7,7 +7,7 @@ const MultipleNoDataModule = ({ children }) => {
     <div className={style.noDataContainer}>
       {children.map((child, index) => {
         return (
-          <div className={style.noDataContainerBody}>
+          <div className={style.noDataContainerBody} key={`nodata_${index}`}>
             <div
               className={
                 child.props.datasetsIsEmpty ? style.noDataOpacity : undefined
