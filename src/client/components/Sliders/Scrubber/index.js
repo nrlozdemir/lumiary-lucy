@@ -15,8 +15,8 @@ const defaultProps = {
   verticalDisabled: true,
   marks: false,
   totalWidth: 1160,
+  scrubberCustomClass: {},
   scrubberIsDot: false,
-  scrubberCustomClass: {}
 }
 
 const LeftArrow = () => {
@@ -67,18 +67,29 @@ export default class Scrubber extends React.Component {
   }
 
   renderTrackHorizontal(props) {
-    const inlineStyle = {
-      right: 1,
-      bottom: 2,
-      left: 0,
-      borderRadius: Math.floor(parseInt(props.scrubberHeight) / 2),
-      boxShadow: '0 2px 6px 0 #e8ecf0',
-      border: '1px solid #c6c9d7',
-      background: "#e8ecf0",
-      height: 16
+    if( ! props.scrubberIsDot) {
+      const inlineStyle = {
+        right: 1,
+        bottom: 2,
+        left: 0,
+        borderRadius: Math.floor(parseInt(props.scrubberHeight) / 2),
+        boxShadow: '0 2px 6px 0 #e8ecf0',
+        border: '1px solid #c6c9d7',
+        background: "#e8ecf0",
+      }
+      return <div className={styles.trackHorizontal} style={inlineStyle} />
+    } else {
+      const inlineStyle = {
+        right: 1,
+        bottom: 2,
+        left: 0,
+        borderRadius: 16,
+        background: "#21243b",
+        margin: '6px 0px 6px 0px',
+        height: 4
+      }
+      return <div className={styles.trackHorizontal} style={inlineStyle} />
     }
-
-    return <div className={styles.trackHorizontal} style={inlineStyle} />
   }
 
   renderThumbHorizontal(props) {
@@ -108,13 +119,15 @@ export default class Scrubber extends React.Component {
           }
         </div>
       )
-    } else if (props.scrubberIsDot) {
+    } else {
       const inlineStyle = {
-        background: "rgba(255, 255, 255, 0.9)",
-        width: 32,
-        height: 32,
-        borderRadius: 32,
-        zIndex: 4
+        background: "rgba(255, 255, 255, 1)",
+        width: 16,
+        height: 16,
+        borderRadius: 16,
+        zIndex: 4,
+        top: -7,
+        position: 'absolute'
       }
 
       return (
@@ -150,12 +163,18 @@ export default class Scrubber extends React.Component {
       verticalDisabled, 
       marks,
       totalWidth,
-      scrubberIsDot
+      scrubberIsDot,
+      scrubberWidth,
+      scrubberHeight,
+      scrubberDotClassname,
+      viewportBackgroundColor,
     } = this.props
 
+    console.log(this.props)
+
     let horizontalProps = {}
-    if (scrubberIsDot) {
-      horizontalProps.thumbSize = 32
+    if (scrubberIsDot === true) {
+      horizontalProps.thumbSize = scrubberWidth
     }
     
     return (
@@ -169,7 +188,7 @@ export default class Scrubber extends React.Component {
             renderThumbVertical={ props => <div {...props} className={styles.emptyScrollBar} /> }
             renderView={ this.renderView }
             {...horizontalProps} 
-            style={{ width: width, height: height }}
+            style={{ width: width, height: height, backgroundColor: viewportBackgroundColor }}
           >
             {children}
           </Scrollbars>
