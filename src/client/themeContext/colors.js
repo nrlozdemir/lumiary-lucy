@@ -136,6 +136,7 @@ const dark = {
   shotByShotTabHeader: '#545b79',
   shotByShotTabBody: '#373f5b',
   shotByShotSliderPointer: '#ffffff',
+  shotByShotSliderImageBorder: '#000',
   // shot by shot slider values
 
   // percentage bar grap values
@@ -280,6 +281,7 @@ const light = {
   shotByShotTabHeader: '#ffffff',
   shotByShotTabBody: '#f3f6f9',
   shotByShotSliderPointer: '#2fd7c4',
+  shotByShotSliderImageBorder: '#000',
   // shot by shot slider values
 
   // percentage bar grap values
