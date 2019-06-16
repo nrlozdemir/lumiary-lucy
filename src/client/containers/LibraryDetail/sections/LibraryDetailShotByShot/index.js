@@ -42,7 +42,8 @@ const timeToSeconds = (timeString) => {
 }
 
 const SliderWithScrubber = (props) => {
-  const { 
+  const {
+    name,
     markers, 
     shots, 
     shotMargin, 
@@ -51,6 +52,7 @@ const SliderWithScrubber = (props) => {
     ticks, 
     viewportWidth, 
     viewportHeight, 
+    viewportBackgroundColor,
     shotHeight, 
     shotHoverWidth, 
     shotHoverHeight,
@@ -59,6 +61,7 @@ const SliderWithScrubber = (props) => {
     scrubberIsDot,
     scrubberWidth,
     scrubberHeight,
+    scrubberDotClassname,
     isEmpty
   } = props
 
@@ -73,7 +76,7 @@ const SliderWithScrubber = (props) => {
   const viewportSize = viewportWidth - ((ticks + 1) * shotMargin)
   /*
     const durations = shots.map(
-      element => (element.endTime - element.startTime).toFixed(4)
+      d => (d.endTime - d.startTime).toFixed(4)
     )
   */
   const totalDuration = (shots && shots.length > 0) 
@@ -95,7 +98,7 @@ const SliderWithScrubber = (props) => {
     tempMarks.push(secondToTime(lastMarker))
 
     //rebuild custom-marks for styling
-    tempMarks.map((element, index) => {
+    tempMarks.map((mark, index) => {
       index = parseInt(index * 10)
       if (index === 0) {
         marks[index] = {
@@ -103,9 +106,9 @@ const SliderWithScrubber = (props) => {
             transform: 'translateX(0%)'
           },
           label: <p className="customDot">{
-            element
+            mark
           }</p>,
-          value: element,
+          value: mark,
         }
       } else if (index === 100) {
         marks[index] = {
@@ -113,17 +116,17 @@ const SliderWithScrubber = (props) => {
             transform: 'translateX(-100%)'
           },
           label: <p className="customDot">{
-            element
+            mark
           }</p>,
-          value: element,
+          value: mark,
         }
       } else {
         marks[index] = {
           style: {},
           label: <p className="customDot">{
-            element
+            mark
           }</p>,
-          value: element,
+          value: mark,
         }
       }
     })
@@ -247,11 +250,13 @@ const SliderWithScrubber = (props) => {
 
   return (
     <Scrubber
+      name={name}
       horizontal
       arrows
       viewBordered
       verticalDisabled
       height={viewportHeight}
+      viewportBackgroundColor={viewportBackgroundColor}
       width={viewportWidth + 1}
       marks={!!marks && marks}
       totalWidth={
@@ -259,9 +264,10 @@ const SliderWithScrubber = (props) => {
           ? viewportWidth + 2 
           : shotsTotalWidth
       }
+      scrubberIsDot={scrubberIsDot}
       scrubberWidth={scrubberWidth}
       scrubberHeight={scrubberHeight}
-      scrubberIsDot={scrubberIsDot}
+      scrubberDotClassname={scrubberDotClassname}
     >
       <div className={customClass.sliderWrapper}
         style={{
@@ -598,6 +604,7 @@ class LibraryDetailShotByShot extends React.Component {
                     >
                       <div className={style.shotByShotMask} />
                       <SliderWithScrubber
+                        name="1.slider"
                         clickEvent={ this.shotClick }
                         shots={Object.values(shots)} 
                         shotMargin={5}
@@ -608,6 +615,7 @@ class LibraryDetailShotByShot extends React.Component {
                         shotHoverHeight={160}
                         viewportWidth={1118}
                         viewportHeight={230}
+                        viewportBackgroundColor={"transparent"}
                         ticks={11}
                         markers 
                         customClass={{
@@ -622,6 +630,38 @@ class LibraryDetailShotByShot extends React.Component {
                           imageWrapperBorderColor: colors.shotByShotBackground
                         }}
                         isEmpty={dataIsEmpty}
+                        scrubberIsDot={false}
+                      />
+
+                      <SliderWithScrubber
+                        name="2.slider"
+                        shots={Object.values(shots)} 
+                        shotMargin={4}
+                        minShotWidth={12}
+                        maxShotWidth={104}
+                        shotHeight={56}
+                        shotHoverWidth={104}
+                        shotHoverHeight={56}
+                        viewportWidth={492}
+                        viewportHeight={100}
+                        viewportBackgroundColor={colors.shotByShotSliderImageBorder}
+                        ticks={12}
+                        customClass={{
+                          sliderWrapper: style.sliderWrapper,
+                          imageWrapper: style.sliderSetCenter,
+                          image: style.sliderImage,
+                          imageHover: style.sliderHover,
+                          originalImage: style.sliderOriginalImage,
+                        }}
+                        customStyle={{
+                          originalImageBorderColor: colors.shotByShotSliderImageBorder,
+                          imageWrapperBorderColor: colors.shotByShotSliderImageBorder
+                        }}
+                        isEmpty={dataIsEmpty}
+                        scrubberIsDot={true}
+                        scrubberWidth={16}
+                        scrubberHeight={16}
+                        scrubberDotClassname={style.dotScrubber}
                       />
                     </div>
                     {dataIsEmpty === true && (
