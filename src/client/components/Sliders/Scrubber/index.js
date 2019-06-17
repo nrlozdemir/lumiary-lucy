@@ -170,8 +170,6 @@ export default class Scrubber extends React.Component {
       viewportBackgroundColor,
     } = this.props
 
-    console.log(this.props)
-
     let horizontalProps = {}
     if (scrubberIsDot === true) {
       horizontalProps.thumbSize = scrubberWidth
