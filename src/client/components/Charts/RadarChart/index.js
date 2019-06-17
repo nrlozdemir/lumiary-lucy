@@ -1,6 +1,7 @@
 import React from 'react'
 import { Radar } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
+import { metricSuffix } from 'Utils'
 
 const plugins = [
   {
@@ -50,7 +51,11 @@ const RadarChart = (props) => {
   parsedData.datasets[0].backgroundColor = themes.chartBackgroundColor
   parsedData.datasets[0].pointBackgroundColor = themes.chartPointBackgroundColor
   parsedData.datasets[0].pointBorderColor = themes.chartPointBorderColor
-
+  const maxTicksStepLimit = parsedData.datasets[0].data.every(
+    (n) => n <= 100000 // 100k
+  )
+    ? 100000 // 100k
+    : Math.max(...parsedData.datasets[0].data) // any big number than 100k
   return (
     <Radar
       data={parsedData}
@@ -79,14 +84,12 @@ const RadarChart = (props) => {
           callbacks: {
             title: () => '',
             label: function(tooltipItem, data) {
-              return (
-                data['datasets'][0]['data'][tooltipItem['index']] +
-                '% ' +
-                data.labels[tooltipItem['index']].name
-              )
+              return data.labels[tooltipItem['index']].name
             },
             afterLabel: function(tooltipItem, data) {
-              return data.labels[tooltipItem['index']].count + 'k Shares'
+              return (
+                metricSuffix(data.labels[tooltipItem['index']].count) + ' Shares'
+              )
             },
           },
         },
@@ -107,16 +110,16 @@ const RadarChart = (props) => {
           },
           ticks: {
             callback: function(value) {
-              return value + 'k'
+              return metricSuffix(value)
             },
             backdropColor: 'transparent',
             fontSize: 10,
             display: true,
             maxTicksLimit: 5,
             min: 0,
-            max: 100,
+            max: maxTicksStepLimit,
             beginAtZero: true,
-            stepSize: 25,
+            stepSize: 25000,
           },
           angleLines: {
             color: '#3D4665',

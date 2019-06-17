@@ -4,38 +4,70 @@ import style from './style.scss'
 import Video from '../VideoComponent'
 import FlipCard from 'Components/FlipCard'
 import ProgressBar from 'Components/ProgressBar'
-import { capitalizeFirstLetter } from 'Utils/index'
+import { capitalizeFirstLetter, metricSuffix } from 'Utils/index'
 import { textEdit } from 'Utils/text'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 const Front = (props) => {
-  const { data, colors } = props
+  const { data, colors, title } = props
+  const percentage = (100 * data.value) / data.max
   return (
-    <div className={style.videoStat}>
-      <div className={style.progressText}>
-        <span className={style.leftTitle}>
-          {capitalizeFirstLetter(data.title)}
-        </span>
-        <span className={style.rightTitle}>{data.value}k</span>
+    <div className={style.frontContainer}>
+      <div className={style.videoStat}>
+        {data.value === 0 && (
+          <div
+            className={style.noContent}
+            style={{ backgroundColor: colors.moduleBackgroundOpacity }}
+          >
+            <p>No Data Available</p>
+          </div>
+        )}
+        <div className={style.progressText}>
+          <span className={style.leftTitle}>
+            {capitalizeFirstLetter(title)}
+          </span>
+          <span className={style.rightTitle}>{metricSuffix(data.value)}</span>
+        </div>
+        <ProgressBar
+          width={
+            percentage > 100
+              ? 100
+              : parseFloat(percentage).toFixed(2) > 0 &&
+                parseFloat(percentage).toFixed(2) < 1
+              ? 1
+              : parseFloat(percentage).toFixed(2)
+          }
+          customBarClass={style.progressBar}
+          customPercentageClass={classnames(style.percentageIncrease, {
+            [style.percentageDecrease]:
+              parseInt((data.average / data.value) * 100) < 50,
+          })}
+          tickColor={colors.progressLibraryDetailTickColor}
+          progressBarBackgroundColor={colors.progressLibraryDetailBackground}
+          progressBarShadowColor={colors.progressLibraryDetailShadow}
+        />
+        <div className={style.markers}>
+          <p className={style.averageText}>Avg</p>
+        </div>
       </div>
-      <ProgressBar
-        width={data.percentage}
-        customBarClass={style.progressBar}
-        customPercentageClass={classnames(style.percentageIncrease, {
-          [style.percentageDecrease]: parseInt(data.percentage) < 50,
-        })}
-      />
-      <p className={style.averageText}>Avg</p>
     </div>
   )
 }
 
 const Back = (props) => {
+  const { data, title } = props
+  const text = data.diff > 0 ? 'more' : 'less'
   return (
     <p className={style.backText}>
       {textEdit(
-        'This video is receiving <b>{percentage}% less</b> {title} than your library average',
-        props.data
+        `This video is receiving <b>{percentage}% ${text}</b> {title} than your library average`,
+        {
+          percentage:
+            data.diff < 0
+              ? parseInt(data.diff.toString().substr(1))
+              : data.diff, // removed 'minus' first character
+          title,
+        }
       )}
     </p>
   )
@@ -47,6 +79,8 @@ const LibraryDetailChartHeader = ({
   title,
   socialIcon,
   cvScore,
+  id,
+  selectedVideoAverage,
 }) => {
   return (
     <ThemeContext.Consumer>
@@ -62,14 +96,24 @@ const LibraryDetailChartHeader = ({
               />
             </div>
             <div className={classnames('col-6', style.videoStatsWrapper)}>
-              {barChartData.map((element, i) => {
-                return (
-                  <FlipCard key={i} width={320} height={100}>
-                    <Front data={element} colors={colors} />
-                    <Back data={element} />
-                  </FlipCard>
-                )
-              })}
+              {selectedVideoAverage &&
+                Object.keys(selectedVideoAverage).map((key, index) => {
+                  return (
+                    <FlipCard
+                      width={320}
+                      height={100}
+                      key={`flipcard-${key}-${index}`}
+                      isEmpty={selectedVideoAverage[key].value === 0}
+                    >
+                      <Front
+                        data={selectedVideoAverage[key]}
+                        title={key}
+                        colors={colors}
+                      />
+                      <Back data={selectedVideoAverage[key]} title={key} />
+                    </FlipCard>
+                  )
+                })}
             </div>
           </div>
         </div>

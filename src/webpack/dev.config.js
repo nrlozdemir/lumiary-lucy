@@ -9,7 +9,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 const sassVars = require('@epegzz/sass-vars-loader')
 
 const static_url = 'https://s3.amazonaws.com/quickframe-static-dev/'
-const media_url = 'https://s3.amazonaws.com/quickframe-media-dev/'
+const media_url = 'https://s3.amazonaws.com/' + process.env.AWS_S3_MEDIA_BUCKET;
+
 const breakpoints = {
   xsmall: 320,
   small: 414,

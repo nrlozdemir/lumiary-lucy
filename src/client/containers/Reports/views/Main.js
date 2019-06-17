@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import moment from 'moment'
 import { actions, makeSelectReports } from 'Reducers/reports'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 import Select from 'Components/Form/Select'
 import Button from 'Components/Form/Button'
 import ReportsModal from 'Components/Modal/Reports'
@@ -15,6 +16,7 @@ import ReportCards from '../section/ReportCardsModule'
 import ReactTable from 'react-table'
 import { selectOptions } from '../options'
 import style from '../style.scss'
+import { staticUrl } from "Utils/globals";
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -27,23 +29,20 @@ class Reports extends Component {
       reportCardsData: [
         {
           key: 'brand-insights',
-          icon:
-            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/brand-insights-icon.png',
+          icon: `${staticUrl}lucy-assets/brand-insights-icon.png`,
           title: 'Brand Insights',
           text:
             'Get helpful, detailed engagement metrics about competitor brands',
         },
         {
           key: 'compare-brands',
-          icon:
-            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/compare-brands-icon.png',
+          icon: `${staticUrl}lucy-assets/compare-brands-icon.png`,
           title: 'Compare Brands',
           text: 'Compare two brands to learn what’s driving their performance',
         },
         {
           key: 'predefined-reports',
-          icon:
-            'https://s3.amazonaws.com/quickframe-static-dev/lucy-assets/predefined-reports-icon.png',
+          icon: `${staticUrl}lucy-assets/predefined-reports-icon.png`,
           title: 'Predefined Reports',
           text: 'Access unique, relevant and invaluable customized data',
         },
@@ -77,16 +76,36 @@ class Reports extends Component {
 
   renderModalInside = () => {
     const { selectedReportCardKey } = this.state
+    const {
+      profile: { brand },
+    } = this.props
+
+    const brands = [
+      {
+        name: brand.name,
+        uuid: brand.uuid,
+      },
+      ...brand.competitors,
+    ].map((competitor) => ({
+      value: competitor.uuid,
+      label: competitor.name,
+    }))
 
     switch (selectedReportCardKey && selectedReportCardKey.key) {
       case 'brand-insights':
         return (
-          <ReportsForm handleSubmitFunc={this.props.brandInsightFormSubmit} />
+          <ReportsForm
+            handleSubmitFunc={this.props.brandInsightFormSubmit}
+            brands={brands}
+          />
         )
 
       case 'compare-brands':
         return (
-          <CompareBrand handleSubmitFunc={this.props.compareBrandFormSubmit} />
+          <CompareBrand
+            handleSubmitFunc={this.props.compareBrandFormSubmit}
+            brands={brands}
+          />
         )
 
       case 'predefined-reports':
@@ -201,7 +220,7 @@ class Reports extends Component {
                         },
                         {
                           Header: 'Platform',
-                          accessor: 'platform',
+                          accessor: 'social',
                         },
                         {
                           Header: 'Date',
@@ -253,11 +272,11 @@ class Reports extends Component {
                     {/* onClick={() => this.deleteReportAction(id)} */}
 
                     <div className={style.reportsTableFooter}>
-                      <Button
+                      {/* <Button
                         onClick={() => this.loadMore()}
                         customClass="font-secondary-first text-bold"
                         buttonText="Load More"
-                      />
+                      /> */}
                     </div>
                   </div>
                 )}
@@ -272,20 +291,10 @@ class Reports extends Component {
 
 const mapStateToProps = createStructuredSelector({
   reports: makeSelectReports(),
+  profile: makeSelectAuthProfile(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-// function mapDispatchToProps(dispatch) {
-//   return {
-//     getReports: () => dispatch(actions.loadReports()),
-//     getMoreReports: () => dispatch(actions.loadMoreReports()),
-// 		deleteReport: (id) => dispatch(actions.loadDeleteReport(id)),
-// 		brandInsightFormSubmit: (values) => dispatch(actions.brandInsightFormSubmit(values)),
-// 		compareBrandFormSubmit: (values) => dispatch(actions.compareBrandFormSubmit(values)),
-// 		predefinedBrandFormSubmit: (values) => dispatch(actions.predefinedBrandFormSubmit(values))
-//   }
-// }
 
 const withConnect = connect(
   mapStateToProps,

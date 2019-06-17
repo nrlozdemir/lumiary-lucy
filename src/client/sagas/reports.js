@@ -2,8 +2,10 @@ import { all, takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
-import reportsMockData from 'Api/mocks/reportsMock.json'
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
+import reportsDataMockData from 'Api/mocks/reportsMock.json'
+import reportsMockData from 'Api/mocks/reports.json'
+import querystring from 'querystring'
 
 import {
   randomKey,
@@ -27,11 +29,15 @@ function getReportsApi() {
   return axios.get('/').then((res) => reportsMockData)
 }
 
+function getReportsMockApi() {
+  //this will use ajax function in utils/api when real data is provided
+  return axios.get('/').then((res) => reportsDataMockData)
+}
+
 function* getReports() {
   try {
-    const payload = yield call(getReportsApi)
-    payload.reportsData.reportsData.map((item) => (item.id = randomKey(4)))
-    yield put(actions.loadReportsSuccess(payload.reportsData))
+    const { reports, compareReports } = yield call(getReportsApi)
+    yield put(actions.loadReportsSuccess([...reports, ...compareReports]))
   } catch (err) {
     yield put(actions.loadReportsError(err))
   }
@@ -47,23 +53,44 @@ function* getMoreReports() {
   }
 }
 
-function* brandInsightSubmit(values) {
-  const id = `${randomKey(4)}-${randomKey(4)}-${randomKey(4)}-${randomKey(4)}`
+function* brandInsightSubmit({ payload }) {
   try {
-    const payload = yield call(getGeneratedReportApi)
-    yield put(actions.brandInsightFormSubmitSuccess(payload))
-    yield put(push(`/reports/brand-insight/${id}`))
+    const {
+      brand: { value: brand },
+      social: { value: social },
+      engagement: { value: engagement },
+      date: { value: date },
+      title,
+    } = payload
+
+    const parameters = {
+      brands: [brand],
+      social,
+      engagement,
+      date,
+      title,
+    }
+
+    yield put(actions.brandInsightFormSubmitSuccess(parameters))
+    yield put(push(`/reports/brand-insight`))
   } catch (err) {
     yield put(actions.brandInsightFormSubmitError(err))
   }
 }
 
-function* compareBrandSubmit(values) {
-  const id = `${randomKey(4)}-${randomKey(4)}-${randomKey(4)}-${randomKey(4)}`
+function* compareBrandSubmit({ payload }) {
   try {
-    const payload = yield call(getGeneratedReportApi)
-    yield put(actions.compareBrandFormSubmitSuccess(payload))
-    yield put(push(`/reports/compare-brands/${id}`))
+    const { title, ...brands } = payload
+
+    const filteredBrands = Object.keys(brands).filter((brand) => brands[brand])
+
+    const parameters = {
+      title,
+      brands: filteredBrands,
+    }
+
+    yield put(actions.compareBrandFormSubmitSuccess(parameters))
+    yield put(push(`/reports/compare-brands`))
   } catch (err) {
     yield put(actions.compareBrandFormSubmitError(err))
   }
@@ -89,14 +116,26 @@ function* deleteReport(data) {
   // }
 }
 
-function* getContentVitalityScoreData() {
+function* getContentVitalityScoreData({ payload = {} }) {
+  const { dateRange, platform, report = {} } = payload
+  const { brands = [] } = report
   try {
-    const payload = yield call(getReportsApi)
-    let shuffleData = payload.contentVitalityScoreData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getContentVitalityScoreDataSuccess(shuffleData))
+    const payload = yield call(
+      getDataFromApi,
+      {},
+      `/report/compare/brands?${querystring.stringify({
+        brands: brands,
+        property: 'cvScore',
+        mode: 'sumVideos',
+        daterange: dateRange,
+        platform: platform,
+      })}`,
+      'GET'
+    )
+
+    yield put(actions.getContentVitalityScoreDataSuccess(payload))
   } catch (err) {
+    console.log(err)
     yield put(actions.getContentVitalityScoreDataError(err))
   }
 }
@@ -114,7 +153,7 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
       metric: 'views',
       property: ['format'],
       dateBucket: 'none',
-      brands: [...filteredCompetitors.map((c) => c.uuid)],
+      brands: [...filteredCompetitors],
     }
 
     const payload = yield call(getDataFromApi, parameters)
@@ -138,11 +177,11 @@ function* getPerformanceComparisonData({ data: { metric, property, report } }) {
 
     const parameters = {
       url: '/report',
-      dateRange: '24hours',
+      dateRange: 'week',
       metric,
       property: [property],
       dateBucket: 'none',
-      brands: [...filteredCompetitors.map((c) => c.uuid)],
+      brands: [...filteredCompetitors],
     }
 
     const payload = yield call(getDataFromApi, parameters)
@@ -170,7 +209,7 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
       metric,
       property: ['color'],
       dateBucket: 'none',
-      brands: [...filteredCompetitors.map((c) => c.uuid)],
+      brands: [...filteredCompetitors],
     }
 
     const payload = yield call(getDataFromApi, parameters)

@@ -12,9 +12,10 @@ import {
   getDateBucketFromRange,
   getBrandAndCompetitors,
   convertColorTempToDatasets,
+  convertVideoEngagementData,
 } from 'Utils'
 
-import { getDataFromApi } from 'Utils/api'
+import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import _ from 'lodash'
 import { dayOfWeek, chartColors } from 'Utils/globals'
@@ -23,11 +24,36 @@ function getMockPanopticDataApi() {
   return axios.get('/').then((res) => panopticMockData)
 }
 
-function* getVideoReleasesData() {
+function* getVideoReleasesData({ data }) {
   try {
-    const payload = yield call(getMockPanopticDataApi)
-    yield put(actions.getVideoReleasesDataSuccess(payload.videoReleasesData))
+    const { brand } = yield select(selectAuthProfile)
+    const { platform, dateRange } = data
+
+    const options = {
+      platform,
+      property: 'format',
+      daterange: dateRange,
+      brandUuid: brand.uuid,
+    }
+
+    const [videoCountData, engagementCountData] = yield all([
+      call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl(`/brand/${brand.uuid}/count`, options),
+        'GET'
+      ),
+      call(getDataFromApi, undefined, buildApiUrl('/metric', options), 'GET'),
+    ])
+
+    const chartData = convertVideoEngagementData(
+      videoCountData,
+      engagementCountData
+    )
+
+    yield put(actions.getVideoReleasesDataSuccess(chartData))
   } catch (err) {
+    console.log(err)
     yield put(actions.getVideoReleasesDataError(err))
   }
 }
@@ -40,7 +66,7 @@ function* getColorTemperatureData({ data }) {
 
     const response = yield call(
       getDataFromApi,
-      null,
+      { baseUrl: false },
       `/brand/${brand.uuid}/compare/?daterange=${dateRange}`,
       'GET'
     )
@@ -49,10 +75,7 @@ function* getColorTemperatureData({ data }) {
       labels,
       platforms,
       data: colorTempData,
-    } = convertColorTempToDatasets(
-      response,
-      colorTemperature
-    )
+    } = convertColorTempToDatasets(response, colorTemperature)
 
     yield put(
       actions.getColorTemperatureDataSuccess({
@@ -140,12 +163,12 @@ function* getPacingCardData({ data }) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
-    const { metric, dateRange } = data
+    const { metric, dateRange, platform } = data
 
     const options = {
       metric,
       dateRange,
-      platform: 'all',
+      platform,
       property: ['pacing'],
       dateBucket: 'none',
       display: 'percentage',
@@ -237,15 +260,20 @@ function* getData() {
 
 function* getFlipCardsData() {
   try {
-    const metrics = yield call(getDataFromApi, {
-      url: '/metric',
-      requestType: 'GET',
-    })
+    const { brand } = yield select(selectAuthProfile)
+
+    const metrics = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl('/metric', { brandUuid: brand.uuid, platform: 'all' }),
+      'GET'
+    )
+
     const payloads = Object.assign(
       {},
       ...Object.keys(metrics).map((metric) => ({
         [metric]: {
-          percentage: metrics[metric].changeOverPrevious,
+          percentage: metrics[metric].changeOverPrevious || 0,
           data: dayOfWeek.map((day) => metrics[metric][day]),
           isEmpty: dayOfWeek.every((day) =>
             metrics[metric][day] === 0 ? true : false
@@ -283,8 +311,6 @@ function* getTopPerformingFormatData({ data = {} }) {
       call(getDataFromApi, dateBucketedOptions),
       call(getDataFromApi, options),
     ])
-
-    const payload = yield call(getMockPanopticDataApi)
 
     if (!!dataWithDateBuckets.data && !!dataWithoutDateBuckets.data) {
       const lineChartData = convertDataIntoDatasets(

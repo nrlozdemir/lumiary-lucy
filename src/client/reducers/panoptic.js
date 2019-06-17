@@ -145,7 +145,7 @@ export const actions = {
 export const initialState = fromJS({
   data: {},
   videoReleasesData: {
-    data: {},
+    data: [],
     loading: false,
     error: null,
   },

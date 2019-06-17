@@ -17,8 +17,9 @@ const ComparisonHorizontalBarChart = (props) => {
         grids={['100%', '75%', '50%', '25%', '0%']}
       />
       <div className={style.legends}>
-        {data.labels.map((label) => (
+        {data.labels.map((label, idx) => (
           <div
+            key={`${idx}`}
             className={style.legend}
             style={{
               background: themes.labelBackground,

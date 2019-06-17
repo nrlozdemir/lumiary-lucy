@@ -8,6 +8,8 @@ import {
   selectMarketviewTopPerformingPropertiesDataView,
 } from 'Reducers/marketview'
 import BarChartModule from 'Components/Modules/BarChartModule'
+import { getMinMaxFromDatasets } from 'Utils'
+
 import style from '../../../style.scss'
 
 class TopPerformingProperty extends React.Component {
@@ -20,10 +22,35 @@ class TopPerformingProperty extends React.Component {
   }
 
   render() {
+    const {
+      title,
+      filters,
+      moduleKey,
+      container,
+      topPerformingPropertiesByCompetitorsData,
+      topPerformingPropertiesData,
+    } = this.props
+
+    const chartData =
+      container === 'competitor'
+        ? topPerformingPropertiesByCompetitorsData.data
+        : topPerformingPropertiesData.data
+
+    const hasDatasets =
+      !!chartData && !!chartData.datasets && !!chartData.datasets.length
+
+    const max = (hasDatasets && getMinMaxFromDatasets(chartData.datasets)) || 0
+
+    const min =
+      (hasDatasets && getMinMaxFromDatasets(chartData.datasets, max, 'min')) ||
+      0
+
+    const stepSize = !!max && ~~(max / 4)
+
     const chartTickOptions = {
-      stepSize: 250000,
-      min: 0,
-      max: 1000000,
+      min,
+      max,
+      stepSize,
       callback(value) {
         if (value < 1000) {
           return value
@@ -33,18 +60,6 @@ class TopPerformingProperty extends React.Component {
         return `${Math.round((value * 100) / 1000000) / 100}m`
       },
     }
-    const {
-      topPerformingPropertiesByCompetitorsData,
-      topPerformingPropertiesData,
-      title,
-      moduleKey,
-      filters,
-      container,
-    } = this.props
-    const chartData =
-      container === 'competitor'
-        ? topPerformingPropertiesByCompetitorsData.data
-        : topPerformingPropertiesData.data
 
     const referencesData =
       container === 'competitor'

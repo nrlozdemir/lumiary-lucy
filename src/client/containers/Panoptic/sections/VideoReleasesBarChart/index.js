@@ -3,37 +3,43 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticVideoReleases } from 'Reducers/panoptic'
-import { chartCombineDataset } from 'Utils'
+import { isDataSetEmpty } from 'Utils'
 
 import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
-import { videoReleasesData_DatasetOptions } from './options'
 
 class VideoReleasesBarChart extends Component {
   callBack = (data, moduleKey) => {
     this.props.getVideoReleasesData(data)
   }
 
-  render() {
+  shouldComponentUpdate(nextProps) {
     const {
-      videoReleasesData: { data, loading, error }
+      videoReleasesData: { loading: nextLoading },
+    } = nextProps
+
+    const {
+      videoReleasesData: { loading },
     } = this.props
 
-    const combineData = {
-      "labels": [
-        "S",
-        "M",
-        "T",
-        "W",
-        "T",
-        "F",
-        "S"
-      ],
-      "datasets": data
-    };
+    return !nextLoading & !!loading
+  }
+
+  render() {
+    const {
+      videoReleasesData: { data, loading, error },
+    } = this.props
+
+    const isEmpty =
+      !loading &&
+      (!data ||
+        (!!data &&
+          (!data.length ||
+            (!!data.length &&
+              data.every((dataset) => isDataSetEmpty(dataset))))))
 
     return (
       <VideoReleasesBarChartModule
-        data={chartCombineDataset(combineData, videoReleasesData_DatasetOptions)}
+        data={data}
         moduleKey={'Panoptic/VideoReleasesBarChartModule'}
         title="Video Releases vs Engagement"
         action={this.callBack}
@@ -47,11 +53,13 @@ class VideoReleasesBarChart extends Component {
             type: 'dateRange',
             selectKey: 'PVR-wds',
             placeHolder: 'Date',
-          }]}
+          },
+        ]}
         legend={[
           { label: 'Videos', color: 'cool-blue' },
           { label: 'Engagement', color: 'coral-pink' },
         ]}
+        isEmpty={isEmpty}
       />
     )
   }

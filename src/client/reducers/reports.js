@@ -122,8 +122,9 @@ export const actions = {
     error,
   }),
 
-  getContentVitalityScoreData: () => ({
+  getContentVitalityScoreData: (payload) => ({
     type: types.GET_CONTENT_VITALITY_SCORE_DATA,
+    payload,
   }),
   getContentVitalityScoreDataSuccess: (payload) => ({
     type: types.GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS,
@@ -135,8 +136,8 @@ export const actions = {
   }),
 
   getVideoComparisonData: (data) => ({
-		type: types.LOAD_VIDEO_COMPARISON_DATA,
-		data,
+    type: types.LOAD_VIDEO_COMPARISON_DATA,
+    data,
   }),
   getVideoComparisonDataSuccess: (payload) => ({
     type: types.LOAD_VIDEO_COMPARISON_DATA_SUCCESS,
@@ -180,7 +181,7 @@ export const initialState = fromJS({
     loading: false,
   },
   brandInsightValues: {
-    data: [],
+    data: null,
     error: false,
     loading: false,
   },
@@ -190,12 +191,12 @@ export const initialState = fromJS({
     loading: false,
   },
   comparebrandValues: {
-    data: [],
+    data: null,
     error: false,
     loading: false,
   },
   predefinedReportValues: {
-    data: [],
+    data: null,
     error: false,
     loading: false,
   },
@@ -434,6 +435,33 @@ const selectReportsColorComparisonDomain = (state) =>
 export const makeSelectReportsColorComparison = () =>
   createSelector(
     selectReportsColorComparisonDomain,
+    (substate) => substate.toJS()
+  )
+
+const selectReportsBrandInsightValues = (state) =>
+  state.Reports.get('brandInsightValues')
+
+export const makeSelectReportsBrandInsightValues = () =>
+  createSelector(
+    selectReportsBrandInsightValues,
+    (substate) => substate.toJS()
+  )
+
+const selectReportsComparebrandValues = (state) =>
+  state.Reports.get('comparebrandValues')
+
+export const makeSelectReportsComparebrandValues = () =>
+  createSelector(
+    selectReportsComparebrandValues,
+    (substate) => substate.toJS()
+  )
+
+const selectReportsPredefinedReportValues = (state) =>
+  state.Reports.get('predefinedReportValues')
+
+export const makeSelectReportsPredefinedReportValues = () =>
+  createSelector(
+    selectReportsPredefinedReportValues,
     (substate) => substate.toJS()
   )
 

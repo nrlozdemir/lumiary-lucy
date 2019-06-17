@@ -2,34 +2,36 @@ import React from 'react'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
-const filters = [
-  {
-    name: 'Brand',
-    filteredName: 'Scout Media',
-  },
-  {
-    name: 'Platform',
-    filteredName: 'All Platforms',
-  },
-  {
-    name: 'Engagement',
-    filteredName: 'Likes',
-  },
-  {
-    name: 'Date Range',
-    filteredName: 'Past Month',
-  },
-]
+const CreatedFilters = ({ report, brands }) => {
+  const filters = [
+    {
+      name: 'Brand',
+      filteredName: brands.find((brand) => brand.uuid === report.brands[0])
+        .name,
+    },
+    {
+      name: 'Platform',
+      filteredName: report.social,
+    },
+    {
+      name: 'Engagement',
+      filteredName: report.engagement,
+    },
+    {
+      name: 'Date Range',
+      filteredName: report.date,
+    },
+  ]
 
-const CreatedFilters = () => {
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
         <div className="grid-container col-12 mt-72">
           <div className={style.filtersArea}>
-            {filters.map((item, index) => {
+            {filters.map((item, idx) => {
               return (
                 <div
+                  key={`bi-filter-${idx}`}
                   className={style.filtersAreaItem}
                   style={{
                     backgroundColor: colors.moduleBackground,

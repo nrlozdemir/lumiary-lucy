@@ -1,10 +1,8 @@
 import React from 'react'
-import moment from 'moment'
 import { compose } from 'redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Select from 'Components/Form/Select'
-import Datepicker from 'Components/Datepicker'
 import { createStructuredSelector } from 'reselect'
 import { actions, makeSelectSelectFilters } from 'Reducers/selectFilters'
 
@@ -84,28 +82,6 @@ class ModuleSelectFilters extends React.Component {
           onChange={(option) => this.onChange(option)}
           options={options[type]}
         />
-        {type === 'dateRange' &&
-          selectedOption &&
-          selectedOption.value &&
-          selectedOption.value.value === 'custom' && (
-            <Datepicker
-              type={'range'}
-              apply={(value) => {
-                const val = {
-                  value: {
-                    startDate: value.startDate,
-                    endDate: value.endDate,
-                  },
-                  label:
-                    moment(value.startDate).format('DD/MM/YYYY') +
-                    ' - ' +
-                    moment(value.endDate).format('DD/MM/YYYY'),
-                }
-                this.onChange(val)
-              }}
-              back={() => this.removeFilterValue()}
-            />
-          )}
       </React.Fragment>
     )
   }

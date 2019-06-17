@@ -9,6 +9,7 @@ import {
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 
 class ContentVitalityScore extends React.Component {
   callBack = (data, moduleKey) => {
@@ -17,6 +18,7 @@ class ContentVitalityScore extends React.Component {
   render() {
     const {
       audienceContentVitalityScoreData: { data, loading, error },
+      authProfile = {},
     } = this.props
 
     return (
@@ -25,8 +27,9 @@ class ContentVitalityScore extends React.Component {
           <ContentVitalityScoreModule
             data={data}
             moduleKey={'Audience/ContentVitalityScore'}
-            title="Content Vitality Score Based On Audience"
+            title="Content Vitality Score by Videos Produced Comparison"
             action={this.callBack}
+            authProfile={authProfile}
             filters={[
               {
                 type: 'platform',
@@ -86,6 +89,7 @@ class ContentVitalityScore extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   audienceContentVitalityScoreData: makeSelectAudienceContentVitalityScore(),
+  authProfile: makeSelectAuthProfile(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)

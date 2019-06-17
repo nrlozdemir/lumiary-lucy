@@ -1,11 +1,13 @@
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import style from './style.scss'
-import { socialIconSelector } from '../../utils'
+import { socialIconSelector, floatCvScore } from 'Utils'
 import { Link } from 'react-router-dom'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import { userUuid } from 'Utils/globals'
+
+import { mediaUrl } from 'Utils/globals'
+
 import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 
 let hoverInReady
@@ -55,14 +57,26 @@ export class VideoCard extends PureComponent {
 
   videoMouseLeavePlay = () => {
     clearInterval(hoverInReady)
+    if (!!this.video) {
+      this.video.current.pause()
+      this.video.current.currentTime = 0
+    }
     this.setState({
       width: 0,
       duration: 0,
       itCanPlay: false,
     })
   }
+
   render() {
-    const { video, options = options || {}, muted = true, id } = this.props
+    const {
+      video,
+      options = options || {},
+      muted = true,
+      id,
+      brandId,
+    } = this.props
+
     const { itCanPlay } = this.state
     const cardContainerClass = classnames(
       style.cardContainer,
@@ -75,12 +89,13 @@ export class VideoCard extends PureComponent {
       },
       this.state.hoverReady && style.hoverReady
     )
-		console.log(video)
-
     const iconClass = classnames(
       socialIconSelector(video.socialIcon),
       style.iconClass
     )
+    
+    const videoUrl = `${mediaUrl}lumiere/${brandId}/${video.uuid}.mp4`
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -103,7 +118,7 @@ export class VideoCard extends PureComponent {
                     color: colors.labelColor,
                   }}
                 >
-                  <span>{video['cvScores.value']}</span>
+                  <span>{floatCvScore(video['cvScores.value'])}</span>
                   <PercentageBarGraph
                     key={Math.random()}
                     percentage={video['cvScores.value']}
@@ -116,7 +131,7 @@ export class VideoCard extends PureComponent {
                   />
                 </div>
               )}
-              {video.fileName && itCanPlay ? (
+              {!!video.fileName && (
                 <div
                   className={style.videoInner}
                   style={{
@@ -124,21 +139,8 @@ export class VideoCard extends PureComponent {
                   }}
                 >
                   <Link to={`/library/build-report/${video.uuid}`}>
-                    <video
-                      ref={this.video}
-                      loop
-                      muted
-                      poster={`https://s3.amazonaws.com/quickframe-media-qa/${
-                        video.thumbNail
-                      }`}
-                      controls={false}
-                    >
-                      <source
-                        src={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/${userUuid}/${
-                          video.uuid
-                        }.mp4`}
-                        type="video/mp4"
-                      />
+                    <video ref={this.video} loop muted controls={false}>
+                      <source src={videoUrl} type="video/mp4" />
                     </video>
                   </Link>
                   <span
@@ -149,16 +151,6 @@ export class VideoCard extends PureComponent {
                     }}
                   />
                 </div>
-              ) : (
-                <div
-                  className={style.blurredImage}
-                  style={{
-                    backgroundImage: `url(https://s3.amazonaws.com/quickframe-media-qa/${
-                      video.thumbNail
-                    })`,
-                    border: `1px solid ${colors.videoBorder}`,
-                  }}
-                />
               )}
 
               <div

@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { createStructuredSelector } from 'reselect'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, makeSelectLibrary } from 'Reducers/library'
 import VideoCardList from 'Components/VideoCardList'
 import RouterLoading from 'Components/RouterLoading'
@@ -15,12 +16,18 @@ class VideoSection extends React.Component {
   }
 
   render() {
-    if (!this.props.library.data || this.props.library.loading) {
+    const {
+      profile: { brand },
+      library: { data, loading },
+    } = this.props
+
+    if (!data || loading) {
       return <RouterLoading />
     }
+
     return (
       <div className={style.videoContainer}>
-        <VideoCardList data={this.props.library.data.videos} />
+        <VideoCardList data={data.videos} brandId={brand.uuid} />
       </div>
     )
   }
@@ -28,6 +35,7 @@ class VideoSection extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   library: makeSelectLibrary(),
+  profile: makeSelectAuthProfile(),
 })
 
 function mapDispatchToProps(dispatch) {

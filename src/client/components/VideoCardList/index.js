@@ -1,7 +1,7 @@
 import React from 'react'
 import VideoCard from 'Components/VideoCard'
 
-const VideoCardList = ({ data }) => {
+const VideoCardList = ({ data, brandId }) => {
   if (!data) {
     return null
   }
@@ -12,6 +12,7 @@ const VideoCardList = ({ data }) => {
         video={item}
         key={`videolist-${index}`}
         id={`videolist-${index}`}
+        brandId={brandId}
       />
     ))
   )

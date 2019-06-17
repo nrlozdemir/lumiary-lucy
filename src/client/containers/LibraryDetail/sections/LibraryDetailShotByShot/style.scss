@@ -258,7 +258,6 @@
   width: 1120px;
   margin: 0px 0px;
   z-index: 2;
-  display: flex;
   flex-wrap: nowrap;
   overflow-x: hidden;
   overflow-y: hidden;
@@ -270,7 +269,8 @@
     width: 1118px;
     height: 170px;
     border: 1px solid #ccc;
-    z-index: 0
+    z-index: 0;
+    background: rgb(232, 236, 240);
   }
 
   // height: 215px;
@@ -350,6 +350,7 @@
   .tabPanelItem {
     // background-color: $color-dark-five;
     border: 1px solid $color-dusk;
+    margin-bottom: 24px;
 
     div {
       img {
@@ -378,9 +379,11 @@
           border-radius: 8px;
         }
         .percentage {
-          border-radius: 8px;
-          height: 8px;
-          background-color: $color-lighter-purple;
+          border-radius: 10px;
+          height: 10px;
+          background-color: #2fd7c4;
+          -webkit-transition: width 0.5s, height 0.5s;
+          transition: width 0.5s, height 0.5s;
         }
       }
     }
@@ -577,22 +580,13 @@
   }
 }
 
-.shotTicks{
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start
-}
-
-.shotTick{
-  position: relative;
-  font-size: 12px;
-  margin-top: 24px;
-  font-family: "ClanOTNews";
-  cursor: pointer;
-}
-
 .tabPanelReset{
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.imageItem{
+  width: 238px;
+  height: 136px;
 }

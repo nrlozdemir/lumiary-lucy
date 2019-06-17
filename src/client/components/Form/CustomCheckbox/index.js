@@ -11,22 +11,22 @@ const canSelect = (fields) => {
   const selectedFields = fields.names.filter(
     (field) => fields[field].input.value === true
   )
+
   if (selectedFields.length < fields.canSelect) {
     fields.checkboxValidation(false)
   } else {
     fields.checkboxValidation(true)
   }
-
-  return selectedFields.length == fields.canSelect
 }
 
 const SelectBox = (props) => {
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => {
-        return props.names.map((field) => {
+        return props.names.map((field, idx) => {
           return (
             <div
+              key={idx}
               className={cx(style.selectBoxContainer, {
                 [style.selected]: props[field].input.value,
               })}
@@ -52,7 +52,11 @@ const SelectBox = (props) => {
                 type="checkbox"
                 id={props[field].input.name}
                 {...props[field].input}
-                disabled={props[field].input.value ? false : canSelect(props)}
+                disabled={props.valid}
+                onBlur={(value) => {
+                  props[field].input.onBlur(value)
+                  canSelect(props)
+                }}
               />
               <span
                 className={cx(style.selectCircle)}

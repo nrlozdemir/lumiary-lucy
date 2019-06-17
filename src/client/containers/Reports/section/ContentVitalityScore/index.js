@@ -8,18 +8,36 @@ class ContentVitalityScore extends React.Component {
     action({ ...data, report })
   }
 
+  shouldComponentUpdate(nextProps, nextState) {
+    return (
+      JSON.stringify(this.props.data.data) !==
+      JSON.stringify(nextProps.data.data)
+    )
+  }
+
   render() {
     const {
       data: { data, loading, error },
+      authProfile = {},
     } = this.props
+
+    const maxVideoPercent = Object.keys(data).reduce((accumulator, key) => {
+      const maxPercentInSet = Math.max(...data[key].videoPercents)
+      return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
+    }, 0)
+
+    const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
+    const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
 
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <ContentVitalityScoreModule
+            chartYAxisMax={chartYAxisMax}
             data={data}
+            authProfile={authProfile}
             moduleKey={'Reports/ContentVitalityScore'}
-            title="Content Vitality Score Based On Audience"
+            title="Content Vitality Score by Videos Produced Comparison"
             action={this.callBack}
             filters={[
               {
@@ -46,13 +64,15 @@ class ContentVitalityScore extends React.Component {
                       callback: function(value, index, values) {
                         if (value === 0) {
                           return value + ' '
-                        } else if (value === 250) {
+                        } else if (value === chartYAxisMax) {
                           return value
                         } else {
                           return ''
                         }
                       },
+                      stepSize: chartYAxisStepSize,
                       fontColor: colors.textColor,
+                      max: chartYAxisMax,
                     },
                     gridLines: {
                       color: colors.chartStadiumBarBorder,

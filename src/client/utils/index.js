@@ -68,17 +68,13 @@ const getLabelWithSuffix = (label, property) => {
     isMetric: bool - true if the endpoint used was /metric,
     customBorderColor: string,
     noBrandKeys: bool - payloads without brand key layer
+    customKeys: array,
+    customValueKey: string - custom key of data object (value default)
   }
   *
  */
 
 const convertDataIntoDatasets = (values, options, ...args) => {
-  let labels
-  let datasetsFromValues
-  let singleLevelJSON
-  let customKeys
-  let getValueinObject
-
   const {
     hoverBG,
     isMetric,
@@ -87,10 +83,18 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     singleDataset,
     preparedLabels,
     useBrandLabels,
+    customValueKey,
     backgroundColor,
     preparedDatasets,
     customBorderColor,
+    customKeys: argKeys,
   } = (args && !!args[0] && args[0]) || {}
+
+  let labels
+  let datasetsFromValues
+  let singleLevelJSON
+  let customKeys = argKeys
+  let getValueinObject
 
   const brands = Object.keys(values.data || values)
 
@@ -164,7 +168,17 @@ const convertDataIntoDatasets = (values, options, ...args) => {
         ? d.percent || 0
         : Object.keys(d.percents).map((key) => d.percents[key] || 0)
     )
-    customKeys = brands
+    customKeys = !customKeys ? brands : customKeys
+  }
+  // if dataset values type of object, get value in the object
+  if (
+    datasetsFromValues &&
+    typeof datasetsFromValues[0] === 'object' &&
+    !Array.isArray(datasetsFromValues[0])
+  ) {
+    datasetsFromValues = datasetsFromValues.map((d) =>
+      customValueKey ? d[customValueKey] || 0 : d.value || 0
+    )
   }
 
   // Object.keys(
@@ -176,7 +190,6 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     labels
 
   datasetsFromValues = preparedDatasets || datasetsFromValues
-
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
@@ -316,7 +329,7 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-const addComma = (number) => {
+const metricSuffix = (number) => {
   number = parseInt(number)
   if (number >= 1e3) {
     const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
@@ -377,7 +390,7 @@ const radarChartCalculate = (data) => {
           el.progress.push({
             leftTitle: f.name,
             color: strToColor(f.name),
-            rightTitle: `${f.count}k Shares`,
+            rightTitle: `${metricSuffix(f.count)} Shares`,
             value: ((f.count / el.total) * 100).toFixed(0),
           })
         })
@@ -398,12 +411,17 @@ const radarChartCalculate = (data) => {
 const getMaximumValueIndexFromArray = (data) =>
   Object.values(data).indexOf(Math.max(...Object.values(data)))
 
-const compareSharesData = ({ data = {} }) => {
-  return Object.keys(data).map((brand) => {
-    const item = data[brand]
+const compareSharesData = (payload) => {
+  const isArray = Array.isArray(payload)
+  const data = isArray ? payload : Object.keys(payload.data)
+
+  return data.map((value) => {
+    const brand = isArray ? Object.keys(value.data)[0] : value
+    const item = isArray ? value.data[brand] : payload.data[brand]
     const keyName = Object.keys(item)[0]
     const labels = Object.entries(item[keyName])
-    const type = brand ? brand : keyName
+    const type = (isArray ? item.platform : value) || keyName
+
     return {
       type: capitalizeFirstLetter(type),
       datas: {
@@ -496,27 +514,21 @@ const getBrandAndCompetitors = (profile) => {
   const { brand } = profile
 
   if (!!brand && !!brand.uuid && !!brand.competitors) {
-    return [
-      {
-        name: brand.name,
-        uuid: brand.uuid,
-      },
-      ...brand.competitors,
-    ]
+    return [brand.uuid, ...brand.competitors.map((c) => c.uuid)]
   }
 
-  return [
-    {
-      name: brand.name,
-      uuid: brand.uuid,
-    },
-  ]
+  return [brand.uuid]
 }
 
-const getFilteredCompetitors = (competitors, report) =>
-  competitors.filter(
-    (brand) => report.brands.map((c) => c.uuid).indexOf(brand.uuid) > -1
-  )
+const getBrandNameAndCompetitorsName = (profile) => {
+  const { brand } = profile
+
+  if (!!brand && !!brand.name && !!brand.competitors) {
+    return [brand.name, ...brand.competitors.map((c) => c.name)]
+  }
+
+  return [brand.name]
+}
 
 /*
   /brand/{brandUuid}/compare
@@ -606,6 +618,184 @@ const normalize = (input, min, max, low_range, high_range) => {
   return norm * scale_range + low_range
 }
 
+const parseAverage = (payload) => {
+  let calculateAverage = Object.keys(payload).reduce((acc, key) => {
+    const keyName = key !== 'video' && key.substr(0, key.indexOf('.'))
+    if (keyName) {
+      if (key.includes('LibraryAverage')) {
+        acc[keyName] = {
+          ...acc[keyName],
+          average: parseFloat(payload[key]).toFixed(0),
+        }
+      }
+      if (key.includes('LibraryMax')) {
+        acc[keyName] = {
+          ...acc[keyName],
+          max: parseFloat(payload[key]).toFixed(0),
+        }
+      }
+    }
+
+    return acc
+  }, {})
+
+  Object.keys(payload.video).forEach((item) => {
+    let keyName = item.substr(0, item.indexOf('.'))
+    if (item.includes('diffFromLibrary')) {
+      calculateAverage[keyName] = {
+        ...calculateAverage[keyName],
+        diff: parseFloat(payload.video[item]).toFixed(2),
+      }
+    }
+    if (item.includes('value')) {
+      keyName = keyName.slice(0, keyName.length - 1)
+      calculateAverage[keyName] = {
+        ...calculateAverage[keyName],
+        value: parseFloat(payload.video[item]).toFixed(0),
+      }
+    }
+  })
+
+  return calculateAverage
+}
+
+const getFilteredCompetitors = (competitors, report) =>
+  competitors.filter((uuid) => report.brands.indexOf(uuid) > -1)
+
+const getFilteredCompetitorValues = (competitors, data) => {
+  const filteredCompetitors = competitors.filter(
+    (name) => Object.keys(data).indexOf(name) > -1
+  )
+  return filteredCompetitors.reduce((obj, name) => {
+    obj[name] = data[name]
+    return obj
+  }, {})
+}
+
+/* Converts the api responses from /metric & /brand/{brandUuid}/count
+ * into chart data structures that
+ * VideoReleases Vs Engagement will use (Panoptic/Reports)
+ * @videoData {api response} from /brand/{brandUuid}/count
+ * @engagementData {api response} from /metric
+ *** Expected Output Structure: ***
+  [{
+    datasets: {array} -
+      [{
+        backgroundColor: string,
+        data: array,
+        display:bool,
+        label: string
+      }],
+    label: string,
+    labels: {array} [{string}],
+    maxVideo: {int}
+    maxEngagement: {int}
+  }]
+ */
+const convertVideoEngagementData = (
+  videoData,
+  engagementData,
+  metric = 'all'
+) => {
+  if (isEmpty(engagementData)) {
+    return []
+  }
+
+  const formats = Object.keys(engagementData).reduce((fmts, metricKey) => {
+    for (const fmtKey in engagementData[metricKey].format) {
+      if (fmts.indexOf(fmtKey) === -1 && fmtKey !== 'None') {
+        fmts.push(fmtKey)
+      }
+    }
+    return fmts
+  }, [])
+
+  let metricKeys = Object.keys(engagementData)
+
+  if (metric !== 'all') {
+    metricKeys.filter((m) => `${m}s` === metric)
+  }
+
+  const dateBuckets = Object.keys(
+    engagementData[metricKeys[0]].format[formats[0]]
+  )
+
+  return formats.map((fmt) => {
+    // sum up all engagement data from /metric by format and datebucket
+    const engagementCounts = metricKeys.reduce((counts, metric) => {
+      const fmtData = engagementData[metric].format[fmt]
+      Object.keys(fmtData).forEach((day, idx) => {
+        counts[idx] = Math.abs(counts[idx]) || 0
+        counts[idx] += fmtData[day]
+        counts[idx] = counts[idx] == 0 ? 0 : -Math.abs(counts[idx])
+      })
+      return counts
+    }, [])
+
+    // get dateBucketed video counts by format
+    const videoFormatData =
+      videoData[
+        fmt
+          .toLowerCase()
+          .split(' ')
+          .join('')
+      ]
+
+    const videoCounts = dateBuckets.map((dateBucketKey) => {
+      if (!!videoFormatData) {
+        return videoFormatData[dateBucketKey] || 0
+      }
+      return 0
+    })
+
+    const maxCount = (array) => Math.max.apply(null, array.map(Math.abs))
+
+    return {
+      maxVideo: maxCount(videoCounts),
+      maxEngagement: maxCount(engagementCounts),
+      labels: dateBuckets.map(
+        (db, idx) => `${db[0]}${/\d/.test(db) ? idx : ''}`
+      ),
+      label: fmt,
+      datasets: [
+        {
+          data: videoCounts,
+          label: 'Videos',
+          backgroundColor: '#2FD7C4',
+          display: false,
+        },
+        {
+          data: engagementCounts,
+          label: 'Engagement',
+          backgroundColor: '#5292E5',
+        },
+      ],
+    }
+  })
+}
+
+const floatCvScore = (val) => Number.parseFloat(val).toFixed(1)
+
+const getMinMaxFromDatasets = (datasets = [], initial = 0, type = 'max') => {
+  return !!datasets.length
+    ? datasets.reduce((result, dataset) => {
+        const { data } = dataset
+
+        if (!!data && !!data.length) {
+          const dataSetResult =
+            type === 'max' ? Math.max(...data) : Math.min(...data)
+
+          if (
+            type === 'max' ? dataSetResult > result : dataSetResult < result
+          ) {
+            result = dataSetResult
+          }
+        }
+        return result
+      }, initial)
+    : 0
+}
+
 export {
   ucfirst,
   normalize,
@@ -624,6 +814,13 @@ export {
   convertMultiRequestDataIntoDatasets,
   getDateBucketFromRange,
   getBrandAndCompetitors,
+  getBrandNameAndCompetitorsName,
   getFilteredCompetitors,
+  getFilteredCompetitorValues,
   convertColorTempToDatasets,
+  metricSuffix,
+  parseAverage,
+  convertVideoEngagementData,
+  floatCvScore,
+  getMinMaxFromDatasets,
 }

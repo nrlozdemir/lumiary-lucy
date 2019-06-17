@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styles from './style.scss'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
+import { floatCvScore } from 'Utils'
 
 class Video extends Component {
   constructor(props) {
@@ -15,7 +16,7 @@ class Video extends Component {
       videoPlayButton
 
     let videoMethods = {
-      renderVideoPlayButton: function () {
+      renderVideoPlayButton: function() {
         if (videoWrapper.contains(video)) {
           this.formatVideoPlayButton()
           videoPlayButton = videoWrapper.getElementsByClassName(
@@ -25,7 +26,7 @@ class Video extends Component {
         }
       },
 
-      formatVideoPlayButton: function () {
+      formatVideoPlayButton: function() {
         videoWrapper.insertAdjacentHTML(
           'beforeend',
           '\
@@ -37,7 +38,7 @@ class Video extends Component {
         )
       },
 
-      hideVideoPlayButton: function () {
+      hideVideoPlayButton: function() {
         if (
           Object.values(videoPlayButton.classList).indexOf('is-hidden') > -1
         ) {
@@ -66,20 +67,15 @@ class Video extends Component {
   }
 
   render() {
-    const {
-      src,
-      poster = "",
-      title,
-      socialIcon,
-      cvScore,
-    } = this.props
+    const { src, poster = '', title, socialIcon, cvScore } = this.props
 
     return (
       <React.Fragment>
         <AssetLayer
           leftSocialIcon={socialIcon}
           title={title}
-          rightValue={cvScore}
+          rightValue={floatCvScore(cvScore) || 0.0}
+          truncateTitle
         >
           <video
             ref={this.video}
@@ -87,9 +83,8 @@ class Video extends Component {
             src={src}
             muted
             controls={false}
-            poster={poster}
           />
-          <div className={styles.percentageWrapper} style={{right: "80px"}}>
+          <div className={styles.percentageWrapper} style={{ right: '80px' }}>
             <PercentageBarGraph
               key={Math.random()}
               percentage={cvScore}

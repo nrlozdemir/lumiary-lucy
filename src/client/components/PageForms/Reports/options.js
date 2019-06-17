@@ -22,9 +22,9 @@ export const selectOptionsEngagement = [
 ]
 
 export const selectOptionsDateRange = [
-  { value: 'past-week', label: 'Past Week' },
-  { value: 'past-month', label: 'Past Month' },
-  { value: 'past-3-months', label: 'Past 3 Months' },
+  { value: 'week', label: 'Past Week' },
+  { value: 'month', label: 'Past Month' },
+  { value: '3months', label: 'Past 3 Months' },
 ]
 
 export const selectPredefinedBrands = [

@@ -1,5 +1,6 @@
 import React from 'react'
 import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
+import { isDataSetEmpty } from 'Utils'
 
 class VideoReleasesBarChart extends React.Component {
   componentDidMount() {
@@ -9,28 +10,20 @@ class VideoReleasesBarChart extends React.Component {
 
   render() {
     const {
-      data: { data },
+      data: { data, loading },
     } = this.props
 
-    let chartData = {}
-
-    if (data) {
-      chartData = data
-      chartData.labels = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
-
-      Object.values(chartData.datasets).map((el, i) => {
-        chartData.datasets[i].label = 'Dataset 2'
-        chartData.datasets[i].backgroundColor = '#5292E5'
-        if (i % 2 == 0) {
-          chartData.datasets[i].label = 'Dataset 1'
-          chartData.datasets[i].backgroundColor = '#2FD7C4'
-        }
-      })
-    }
+    const isEmpty =
+      !loading &&
+      (!data ||
+        (!!data &&
+          (!data.length ||
+            (!!data.length &&
+              data.every((dataset) => isDataSetEmpty(dataset))))))
 
     return (
       <VideoReleasesBarChartModule
-        data={data && chartData}
+        data={data}
         moduleKey={'ReportGenerated/VideoReleasesBarChartModule'}
         title="Video Releases vs Engagement"
         legend={[
@@ -38,6 +31,7 @@ class VideoReleasesBarChart extends React.Component {
           { label: 'Engagement', color: 'coral-pink' },
         ]}
         legendEnd={true}
+        isEmpty={isEmpty}
       />
     )
   }

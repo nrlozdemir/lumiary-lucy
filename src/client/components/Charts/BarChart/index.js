@@ -11,6 +11,7 @@ const BarChart = (props) => {
     tickOptions = {},
     themeContext: { colors },
   } = props
+
   const chartOptions = {
     ...barDurationOptions,
     chartArea: {

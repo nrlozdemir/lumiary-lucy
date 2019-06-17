@@ -3,12 +3,23 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import {
-  actions,
+  actions as reportsActions,
   makeSelectReportsContentVitalityScore,
   makeSelectReportsColorComparison,
   makeSelectReportsPerformanceComparison,
   makeSelectReportsVideoComparison,
+  makeSelectReportsComparebrandValues,
+  makeSelectReportsPredefinedReportValues,
 } from 'Reducers/reports'
+
+import {
+  actions as generatedReportActions,
+  makeSelectReport,
+} from 'Reducers/generatedReport'
+
+import { makeSelectAuthProfile } from 'Reducers/auth'
+
+import RouterLoading from 'Components/RouterLoading'
 
 import ContentVitalityScore from '../section/ContentVitalityScore'
 import VideoComparison from '../section/VideoComparison'
@@ -16,9 +27,26 @@ import PerformanceComparison from '../section/PerformanceComparison'
 import ColorComparison from '../section/ColorComparison'
 
 class CompareBrand extends React.Component {
+  componentDidMount() {
+    const {
+      getReportRequest,
+      match: { params },
+    } = this.props
+
+    const id = params && params.id
+
+    if (id) {
+      getReportRequest({ id })
+    }
+  }
+
   render() {
     const {
       match: { params },
+      report: { data: report },
+      comparebrandValues: { data: comparebrandValues },
+      predefinedReportValues: { data: predefinedReportValues },
+      authProfile = {},
 
       getContentVitalityScoreData,
       getColorComparisonData,
@@ -31,20 +59,15 @@ class CompareBrand extends React.Component {
       videoComparisonData,
     } = this.props
 
-    const id = params && params.id
+    const reportValues =
+      params && params.id
+        ? report
+        : params.type === 'compare-brands'
+        ? comparebrandValues
+        : predefinedReportValues
 
-    const report = {
-      id,
-      brands: [
-        {
-          name: 'barstoolsports',
-          uuid: '1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6',
-        },
-        {
-          name: 'bleacherreport',
-          uuid: 'd65aa957-d094-4cf3-8d37-dafe50e752ea',
-        },
-      ],
+    if (!reportValues) {
+      return <RouterLoading />
     }
 
     return (
@@ -52,22 +75,23 @@ class CompareBrand extends React.Component {
         <ContentVitalityScore
           action={getContentVitalityScoreData}
           data={contentVitalityScoreData}
-          report={report}
+          report={reportValues}
+          authProfile={authProfile}
         />
         <VideoComparison
           action={getVideoComparisonData}
           data={videoComparisonData}
-          report={report}
+          report={reportValues}
         />
         <PerformanceComparison
           action={getPerformanceComparisonData}
           data={performanceComparisonData}
-          report={report}
+          report={reportValues}
         />
         <ColorComparison
           action={getColorComparisonData}
           data={colorComparisonData}
-          report={report}
+          report={reportValues}
         />
       </div>
     )
@@ -75,13 +99,19 @@ class CompareBrand extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
+  report: makeSelectReport(),
   contentVitalityScoreData: makeSelectReportsContentVitalityScore(),
   colorComparisonData: makeSelectReportsColorComparison(),
   videoComparisonData: makeSelectReportsVideoComparison(),
   performanceComparisonData: makeSelectReportsPerformanceComparison(),
+
+  comparebrandValues: makeSelectReportsComparebrandValues(),
+  predefinedReportValues: makeSelectReportsPredefinedReportValues(),
+  authProfile: makeSelectAuthProfile(),
 })
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ ...reportsActions, ...generatedReportActions }, dispatch)
 
 const withConnect = connect(
   mapStateToProps,

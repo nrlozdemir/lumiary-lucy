@@ -22,6 +22,12 @@ export const types = {
     'Marketview/GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_SUCCESS',
   GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_FAILURE:
     'Marketview/GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_FAILURE',
+  GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_REQUEST:
+    'Marketview/GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_REQUEST',
+  GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_SUCCESS:
+    'Marketview/GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_SUCCESS',
+  GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_FAILURE:
+    'Marketview/GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_FAILURE',
   GET_MARKETVIEW_SIMILAR_PROPERTIES_REQUEST:
     'Marketview/GET_MARKETVIEW_SIMILAR_PROPERTIES_REQUEST',
   GET_MARKETVIEW_SIMILAR_PROPERTIES_SUCCESS:
@@ -112,6 +118,18 @@ export const actions = {
   }),
   getCompetitorTopVideosFailure: (error) => ({
     type: types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_FAILURE,
+    error,
+  }),
+  getPlatformTopVideosRequest: (data) => ({
+    type: types.GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_REQUEST,
+    data,
+  }),
+  getPlatformTopVideosSuccess: (payload) => ({
+    type: types.GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_SUCCESS,
+    payload,
+  }),
+  getPlatformTopVideosFailure: (error) => ({
+    type: types.GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_FAILURE,
     error,
   }),
   getSimilarPropertiesRequest: (data) => ({
@@ -237,6 +255,11 @@ export const initialState = fromJS({
     loading: false,
     error: null,
   },
+  platformTopVideos: {
+    data: [],
+    loading: false,
+    error: null,
+  },
   videos: [],
   selectedVideo: null,
   similarProperties: {
@@ -244,7 +267,11 @@ export const initialState = fromJS({
     loading: false,
     error: null,
   },
-  bubbleChartData: [],
+  bubbleChartData: {
+    data: [],
+    loading: false,
+    error: null,
+  },
   pacingChartData: {
     data: {},
     loading: false,
@@ -263,7 +290,7 @@ export const initialState = fromJS({
     error: null,
   },
   totalCompetitorViewsData: {
-    data: [],
+    data: {},
     loading: false,
     error: null,
   },
@@ -271,17 +298,17 @@ export const initialState = fromJS({
   error: false,
   loading: false,
   topPerformingPropertiesData: {
-    data: [],
+    data: {},
     loading: false,
     error: null,
   },
   topPerformingPropertiesByCompetitorsData: {
-    data: [],
+    data: {},
     loading: false,
     error: null,
   },
   topPerformingDataForTime: {
-    data: [],
+    data: {},
     loading: false,
     error: null,
   },
@@ -318,16 +345,31 @@ const marketviewReducer = (state = initialState, action) => {
         .setIn(['competitorTopVideos', 'error'], fromJS(action.error))
         .setIn(['competitorTopVideos', 'loading'], fromJS(false))
 
+    case types.GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_REQUEST:
+      return state.setIn(['platformTopVideos', 'loading'], fromJS(true))
+
+    case types.GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_SUCCESS:
+      return state
+        .setIn(['platformTopVideos', 'data'], fromJS(action.payload))
+        .setIn(['platformTopVideos', 'loading'], fromJS(false))
+    case types.GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_FAILURE:
+      return state
+        .setIn(['platformTopVideos', 'error'], fromJS(action.error))
+        .setIn(['platformTopVideos', 'loading'], fromJS(false))
+
+    // BUBBLE CHART
     case types.GET_MARKETVIEW_BUBBLECHART_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['bubbleChartData', 'loading'], fromJS(true))
+
     case types.GET_MARKETVIEW_BUBBLECHART_SUCCESS:
       return state
-        .set('bubbleChartData', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(['bubbleChartData', 'data'], fromJS(action.payload))
+        .setIn(['bubbleChartData', 'loading'], fromJS(false))
+
     case types.GET_MARKETVIEW_BUBBLECHART_FAILURE:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['bubbleChartData', 'error'], fromJS(action.error))
+        .setIn(['bubbleChartData', 'loading'], fromJS(false))
 
     // PACING CHART
     case types.GET_MARKETVIEW_PACINGCHART_REQUEST:
@@ -494,6 +536,9 @@ const selectMarketviewVideosDomain = (state) => state.Marketview.get('videos')
 const selectMarketviewCompetitorTopVideosDomain = (state) =>
   state.Marketview.get('competitorTopVideos')
 
+const selectMarketviewPlatformTopVideosDomain = (state) =>
+  state.Marketview.get('platformTopVideos')
+
 const selectMarketviewTopPerformingPropertiesByCompetitorsDataDomain = (
   state
 ) => state.Marketview.get('topPerformingPropertiesByCompetitorsData')
@@ -579,6 +624,12 @@ export const selectMarketviewTopPerformingPropertiesDataView = () =>
 export const selectMarketviewTopPerformingDataView = () =>
   createSelector(
     selectMarketviewTopPerformingDataDomain,
+    (substate) => substate.toJS()
+  )
+
+export const selectMarketviewPlatformTopVideosView = () =>
+  createSelector(
+    selectMarketviewPlatformTopVideosDomain,
     (substate) => substate.toJS()
   )
 

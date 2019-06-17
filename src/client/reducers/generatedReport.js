@@ -4,6 +4,14 @@ import { createSelector } from 'reselect'
 export const types = {
   SET_GENERATED_SELECTED_VIDEO: 'GeneratedReport/SET_GENERATED_SELECTED_VIDEO',
 
+  GET_REPORT_REQUEST: 'GeneratedReport/GET_REPORT_REQUEST',
+  GET_REPORT_SUCCESS: 'GeneratedReport/GET_REPORT_SUCCESS',
+  GET_REPORT_FAILURE: 'GeneratedReport/GET_REPORT_FAILURE',
+
+  SAVE_REPORT_REQUEST: 'GeneratedReport/SAVE_REPORT_REQUEST',
+  SAVE_REPORT_SUCCESS: 'GeneratedReport/SAVE_REPORT_SUCCESS',
+  SAVE_REPORT_FAILURE: 'GeneratedReport/SAVE_REPORT_FAILURE',
+
   GET_PACING_CARD_DATA_REQUEST: 'GeneratedReport/GET_PACING_CARD_DATA_REQUEST',
   GET_PACING_CARD_DATA_SUCCESS: 'GeneratedReport/GET_PACING_CARD_DATA_SUCCESS',
   GET_PACING_CARD_DATA_FAILURE: 'GeneratedReport/GET_PACING_CARD_DATA_FAILURE',
@@ -44,6 +52,32 @@ export const actions = {
   setSelectedVideo: (payload) => ({
     type: types.SET_GENERATED_SELECTED_VIDEO,
     payload,
+  }),
+
+  getReportRequest: (data) => ({
+    type: types.GET_REPORT_REQUEST,
+    data,
+  }),
+  getReportSuccess: (payload) => ({
+    type: types.GET_REPORT_SUCCESS,
+    payload,
+  }),
+  getReportFailure: (error) => ({
+    type: types.GET_REPORT_FAILURE,
+    error,
+  }),
+
+  saveReportRequest: (data) => ({
+    type: types.SAVE_REPORT_REQUEST,
+    data,
+  }),
+  saveReportSuccess: (payload) => ({
+    type: types.SAVE_REPORT_SUCCESS,
+    payload,
+  }),
+  saveReportFailure: (error) => ({
+    type: types.SAVE_REPORT_FAILURE,
+    error,
   }),
 
   getPacingCardDataRequest: (data) => ({
@@ -127,6 +161,12 @@ export const actions = {
 export const initialState = fromJS({
   selectedVideo: null,
 
+  report: {
+    data: null,
+    loading: true,
+    error: null,
+  },
+
   pacingChartData: {
     data: null,
     loading: true,
@@ -147,13 +187,17 @@ export const initialState = fromJS({
   },
 
   videoReleasesBarChart: {
-    data: null,
-    loading: true,
+    data: [],
+    loading: false,
     error: null,
   },
 
   colorTempData: {
-    data: null,
+    data: {
+      data: undefined,
+      labels: [],
+      platforms: [],
+    },
     loading: true,
     error: null,
   },
@@ -177,6 +221,30 @@ const generatedReportsReducer = (state = initialState, action) => {
         ['topPerformingVideos', 'selectedVideo'],
         fromJS(action.payload)
       )
+
+    case types.GET_REPORT_REQUEST:
+      return state.setIn(['report', 'loading'], fromJS(true))
+
+    case types.GET_REPORT_SUCCESS:
+      return state
+        .setIn(['report', 'data'], fromJS(action.payload))
+        .setIn(['report', 'loading'], fromJS(false))
+    case types.GET_REPORT_FAILURE:
+      return state
+        .setIn(['report', 'error'], fromJS(action.error))
+        .setIn(['report', 'loading'], fromJS(false))
+
+    case types.SAVE_REPORT_REQUEST:
+      return state.setIn(['report', 'loading'], fromJS(true))
+
+    case types.SAVE_REPORT_SUCCESS:
+      return state
+        .setIn(['report', 'data'], fromJS(action.payload))
+        .setIn(['report', 'loading'], fromJS(false))
+    case types.SAVE_REPORT_FAILURE:
+      return state
+        .setIn(['report', 'error'], fromJS(action.error))
+        .setIn(['report', 'loading'], fromJS(false))
 
     case types.GET_PACING_CARD_DATA_REQUEST:
       return state.setIn(['pacingChartData', 'loading'], fromJS(true))
@@ -279,6 +347,14 @@ const generatedReportsReducer = (state = initialState, action) => {
       return state
   }
 }
+
+export const selectReport = (state) => state.GeneratedReport.get('report')
+
+export const makeSelectReport = () =>
+  createSelector(
+    selectReport,
+    (substate) => substate.toJS()
+  )
 
 export const selectPacingChartData = (state) =>
   state.GeneratedReport.get('pacingChartData')

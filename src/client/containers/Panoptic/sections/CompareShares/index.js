@@ -6,15 +6,32 @@ import { actions, makeSelectPanopticCompareShares } from 'Reducers/panoptic'
 //import classnames from 'classnames'
 import RadarChartModule from 'Components/Modules/RadarChartModule'
 //import style from './style.scss'
+import { isEqual } from 'lodash'
 
 class CompareShares extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getCompareSharesData(data)
   }
+
+  shouldComponentUpdate(nextProps) {
+    const {
+      compareSharesData: { data: nextData },
+    } = nextProps
+
+    const {
+      compareSharesData: { data },
+    } = this.props
+
+    return !isEqual(nextData, data)
+  }
+  
   render() {
     const {
       compareSharesData: { data, loading, error },
     } = this.props
+
+    console.log(data)
+
     return (
       <RadarChartModule
         data={data || []}

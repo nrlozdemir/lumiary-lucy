@@ -5,16 +5,14 @@ import { createStructuredSelector } from 'reselect'
 import { bindActionCreators, compose } from 'redux'
 import { reduxForm } from 'redux-form'
 
-import { chartCombineDataset } from 'Utils'
 import { actions, makeSelectLibraryDetail } from 'Reducers/libraryDetail'
 import { actions as libraryActions, makeSelectLibrary } from 'Reducers/library'
 
-import { radarData_DatasetOptions } from './options'
 import LibraryDetailChartHeader from './sections/LibraryDetailChartHeader'
 import LibraryDetailDoughnutChart from './sections/LibraryDetailDoughnutChart'
 import LibraryDetailColorTemperature from './sections/LibraryDetailColorTemperature'
 import LibraryDetailShotByShot from './sections/LibraryDetailShotByShot'
-import { userUuid } from 'Utils/globals'
+import { userUuid, mediaUrl } from 'Utils/globals'
 import { withTheme } from 'ThemeContext/withTheme'
 
 /* eslint-disable react/prefer-stateless-function */
@@ -36,11 +34,13 @@ export class LibraryDetail extends React.Component {
       getColorTempRequest,
       getShotByShotRequest,
       getSelectedVideo,
+      getSelectedVideoAverage,
       themeContext: { colors },
     } = this.props
 
     if (match.params.videoId) {
       getSelectedVideo(match.params.videoId)
+      getSelectedVideoAverage(match.params.videoId)
       getBarChartRequest({ LibraryDetailId: 1 })
       getDoughnutChartRequest({
         LibraryDetailId: match.params.videoId,
@@ -72,6 +72,7 @@ export class LibraryDetail extends React.Component {
     }
     if (prevMatch.params.videoId !== match.params.videoId) {
       getSelectedVideo(match.params.videoId)
+      getSelectedVideoAverage(match.params.videoId)
       getBarChartRequest({ LibraryDetailId: 1 })
       getColorTempRequest({ videoId: match.params.videoId })
       getShotByShotRequest({ LibraryDetailId: 1 })
@@ -85,52 +86,27 @@ export class LibraryDetail extends React.Component {
         doughnutData,
         colorTempData,
         shotByShotData,
-        selectedVideo: {
-          socialIcon,
-          uuid,
-          title,
-          'cvScore.value': cvScore = 0.0,
-        },
+        shotInfoData,
+        selectedVideo,
+        selectedVideoAverage,
       },
       match: {
         params: { videoId },
       },
     } = this.props
 
-    let radarDataCombined = null
-
-    if (shotByShotData) {
-      radarDataCombined = chartCombineDataset(
-        {
-          labels: [
-            '#fff20d',
-            '#f8b90b',
-            '#eb7919',
-            '#dd501d',
-            '#cc2226',
-            '#b83057',
-            '#923683',
-            '#79609b',
-            '#3178b0',
-            '#229a78',
-            '#13862b',
-            '#aac923',
-          ],
-          ...shotByShotData.radarData,
-        },
-        radarData_DatasetOptions
-      )
-		}
-
     return (
       <React.Fragment>
         {barChartData && (
           <LibraryDetailChartHeader
             barChartData={barChartData}
-            videoUrl={`https://s3.amazonaws.com/quickframe-media-qa/lumiere/${userUuid}/${uuid}.mp4`}
-            title={title}
-            socialIcon={socialIcon}
-            cvScore={cvScore}
+            selectedVideoAverage={selectedVideoAverage}
+            videoUrl={`${mediaUrl}/lumiere/${userUuid}/${
+              selectedVideo.uuid
+            }.mp4`}
+            title={selectedVideo.title}
+            socialIcon={selectedVideo.socialIcon}
+            cvScore={selectedVideo['cvScores.value']}
           />
         )}
         {doughnutData && (
@@ -144,9 +120,9 @@ export class LibraryDetail extends React.Component {
         )}
         {shotByShotData && (
           <LibraryDetailShotByShot
-            sliderWithThumbnails={shotByShotData.sliderWithThumbnails}
+            shots={shotByShotData.video.shots}
             slideImages={shotByShotData.slideImages}
-            radarData={radarDataCombined}
+            shotInfo={shotInfoData && shotInfoData}
             videoList={shotByShotData.videoList}
           />
         )}
@@ -174,6 +150,8 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     getSelectedVideo: (id) => dispatch(actions.getSelectedVideoRequest(id)),
+    getSelectedVideoAverage: (id) =>
+      dispatch(actions.getSelectedVideoAverageRequest(id)),
     getVideos: () => dispatch(libraryActions.loadVideos()),
     getBarChartRequest: (id) => dispatch(actions.getBarChartRequest(id)),
     getDoughnutChartRequest: (id) =>
