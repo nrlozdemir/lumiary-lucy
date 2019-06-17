@@ -275,8 +275,8 @@ class SliderWithScrubber extends React.Component {
       scrubberHeight={scrubberHeight}
       scrubberDotClassname={scrubberDotClassname}
     >
-      <div className={customClass.sliderWrapper}
-        ref={scope.name}
+      <div 
+        className={customClass.sliderWrapper}
         style={{
           left: 0,
           width: (isEmpty === true) 
@@ -291,9 +291,9 @@ class SliderWithScrubber extends React.Component {
         <React.Fragment key={`${name}_shots_${i}`}>
           <div 
             className={customClass.image}
-            onClick={(i) => { 
+            onClick={() => { 
               !!this.props.clickEvent && 
-              this.props.clickEvent(i, scope) 
+              this.props.clickEvent(i) 
             }}
           >
             <div

@@ -309,6 +309,7 @@
       }
     }
   }
+
   .sliderImage {
     -webkit-user-select: none;
     -moz-user-select: none;
@@ -316,9 +317,8 @@
     user-select: none;
     // margin-top: 8px;
     cursor: pointer;
-    opacity: 0.4;
 
-    &:hover, &:active, &.clicked {
+    &:hover, &:active {
       opacity: 1;
     }
 
@@ -652,4 +652,12 @@
 
 .dotScrubber{
   
+}
+
+.sliderImageCurrent {
+  opacity: 0.4;
+}
+
+.sliderImageActive{
+  opacity: 1;
 }

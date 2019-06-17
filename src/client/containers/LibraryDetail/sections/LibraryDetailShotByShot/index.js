@@ -53,7 +53,15 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   shotSliderClick(i) {
-    console.log(this.slider2Component)
+    const ref = this.slider2.children[0].children[0].childNodes[0]
+
+    for (let k = 0; k < ref.childNodes.length; k++) {
+      ref.childNodes[k].classList.remove(style.sliderImageActive)
+      ref.childNodes[k].classList.add(style.sliderImageCurrent)
+    }
+    ref.childNodes[i].classList.remove(style.sliderImageCurrent)
+    ref.childNodes[i].classList.add(style.sliderImageActive)
+
   }
 
   render() {
@@ -304,7 +312,9 @@ class LibraryDetailShotByShot extends React.Component {
               ) : (
                 <React.Fragment>
                   <h2 className={style.sliderHeader}>Shot by Shot</h2>
-                  <div className={style.sliderContainer}>
+                  <div 
+                    className={style.sliderContainer}
+                  >
                     <div 
                       className={classnames(
                         {
@@ -347,38 +357,42 @@ class LibraryDetailShotByShot extends React.Component {
                       <div style={{ height: 100, display: 'block', width: 500}}></div>
                       
                       <div style={{height: 420, width: 493, backgroundColor: '#000'}} />
-                      <SliderWithScrubber
-                        name="slider2"
-                        scope={this}
-                        clickEvent={ this.shotSliderClick }
-                        shots={Object.values(shots)} 
-                        shotMargin={4}
-                        minShotWidth={12}
-                        maxShotWidth={104}
-                        shotHeight={56}
-                        shotHoverWidth={104}
-                        shotHoverHeight={56}
-                        viewportWidth={492}
-                        viewportHeight={100}
-                        viewportBackgroundColor={colors.shotByShotSliderImageBorder}
-                        ticks={12}
-                        customClass={{
-                          sliderWrapper: style.sliderWrapper,
-                          imageWrapper: style.sliderSetCenter,
-                          image: style.sliderImage,
-                          imageHover: style.sliderHover,
-                          originalImage: style.sliderOriginalImage,
-                        }}
-                        customStyle={{
-                          originalImageBorderColor: colors.shotByShotSliderImageBorder,
-                          imageWrapperBorderColor: colors.shotByShotSliderImageBorder
-                        }}
-                        isEmpty={dataIsEmpty}
-                        scrubberIsDot={true}
-                        scrubberWidth={16}
-                        scrubberHeight={16}
-                        scrubberDotClassname={style.dotScrubber}
-                      />
+                      <div
+                        ref={(el) => (this.slider2 = el)}
+                      >
+                        <SliderWithScrubber
+                          name="slider2"
+                          scope={this}
+                          clickEvent={ this.shotSliderClick }
+                          shots={Object.values(shots)} 
+                          shotMargin={4}
+                          minShotWidth={12}
+                          maxShotWidth={104}
+                          shotHeight={56}
+                          shotHoverWidth={104}
+                          shotHoverHeight={56}
+                          viewportWidth={492}
+                          viewportHeight={100}
+                          viewportBackgroundColor={colors.shotByShotSliderImageBorder}
+                          ticks={12}
+                          customClass={{
+                            sliderWrapper: style.sliderWrapper,
+                            imageWrapper: style.sliderSetCenter,
+                            image: classnames(style.sliderImage, style.sliderImageCurrent),
+                            imageHover: style.sliderHover,
+                            originalImage: style.sliderOriginalImage,
+                          }}
+                          customStyle={{
+                            originalImageBorderColor: colors.shotByShotSliderImageBorder,
+                            imageWrapperBorderColor: colors.shotByShotSliderImageBorder
+                          }}
+                          isEmpty={dataIsEmpty}
+                          scrubberIsDot={true}
+                          scrubberWidth={16}
+                          scrubberHeight={16}
+                          scrubberDotClassname={style.dotScrubber}
+                        />
+                      </div>
                     </div>
                     {dataIsEmpty === true && (
                       <div className={style.emptyData}>No Data Available</div>
