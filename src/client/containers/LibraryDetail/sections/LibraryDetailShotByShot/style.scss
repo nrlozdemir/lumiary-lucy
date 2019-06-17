@@ -656,8 +656,38 @@
 
 .sliderImageCurrent {
   opacity: 0.4;
+  margin-right: 4px;
 }
 
 .sliderImageActive{
   opacity: 1;
+  margin-right: 4px;
+}
+
+.shotSliderWrapper{
+  width: 504px;
+  height: 278px;
+  overflow: hidden;
+  position: relative;
+}
+
+.shotSliderContainer{
+  height: 278px;
+  width: auto;
+  position: absolute;
+  left:0px;
+  top:0px;
+  background-color: #000;
+}
+
+.shotSliderImage{
+  width: 504px;
+  height: 278px;
+  text-align: center;
+}
+
+.shotSliderImage img{
+  max-width: 504px;
+  height: 278px;
+  max-height: 278px;
 }

@@ -60,7 +60,6 @@ class SliderWithScrubber extends React.Component {
       scrubberWidth,
       scrubberHeight,
       scrubberDotClassname,
-      scope,
       isEmpty
     } = this.props
 
@@ -256,7 +255,6 @@ class SliderWithScrubber extends React.Component {
 
     return (
       <Scrubber
-      name={name}
       horizontal
       arrows
       viewBordered
@@ -314,13 +312,13 @@ class SliderWithScrubber extends React.Component {
                 }}
               />
             </div>
-            <img
+            {!scrubberIsDot && (<img
               src={shot.image}
               style={{ 
                 height: `${shotHeight}px`,
               }}
               className={customClass.imageHover}
-            />
+            />)}
           </div>
         </React.Fragment>
       ))}
