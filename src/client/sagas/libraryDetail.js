@@ -45,7 +45,8 @@ function getColorTempApi({ LibraryDetailId }) {
 }
 
 function getShotByShotApi({ LibraryDetailId }) {
-  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/0639d12f-7a1a-40fe-840d-8c43c1268f31/shots'
+  const URL =
+    '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/0639d12f-7a1a-40fe-840d-8c43c1268f31/shots'
 
   return ajax({
     url: URL,
@@ -59,9 +60,12 @@ function getShotByShotApi({ LibraryDetailId }) {
 }
 
 function getShotInfoRequestApi({ shotId }) {
-  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/0639d12f-7a1a-40fe-840d-8c43c1268f31/shots/1'
-  const FRAMES_INFO = '/brand/6421cdac-d5eb-4427-a267-b9be2e232177/video/e2843ddb-4ba1-4062-acd9-2ffbe302a183/shots/0'
-  const LABELS_INFO = '/brand/6421cdac-d5eb-4427-a267-b9be2e232177/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/0'
+  const URL =
+    '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/0639d12f-7a1a-40fe-840d-8c43c1268f31/shots/1'
+  const FRAMES_INFO =
+    '/brand/6421cdac-d5eb-4427-a267-b9be2e232177/video/e2843ddb-4ba1-4062-acd9-2ffbe302a183/shots/0'
+  const LABELS_INFO =
+    '/brand/6421cdac-d5eb-4427-a267-b9be2e232177/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/0'
 
   return ajax({
     url: URL,
@@ -96,7 +100,8 @@ function getShotInfoRequestApi({ shotId }) {
 }
 
 function getRadarChartRequestApi({ shotId }) {
-  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/4/colors'
+  const URL =
+    '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/4/colors'
 
   return ajax({
     url: URL,
@@ -110,7 +115,8 @@ function getRadarChartRequestApi({ shotId }) {
 }
 
 function getPeopleRequestApi({ shotId }) {
-  const URL = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/0/demographics'
+  const URL =
+    '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/0/demographics'
 
   return ajax({
     url: URL,
@@ -234,7 +240,9 @@ function* getShotByShot({ payload: { LibraryDetailId } }) {
 
     Object.values(payload.video.shots).map((el, i) => {
       const randomImage = Math.floor(Math.random(1) * Math.floor(30))
-      payload.video.shots[i].image = `https://picsum.photos/id/${randomImage}/320/320`
+      payload.video.shots[
+        i
+      ].image = `https://picsum.photos/id/${randomImage}/320/320`
     })
 
     yield put(actions.getShotByShotSuccess(payload))
@@ -248,6 +256,7 @@ function* getShotInfoRequest({ ShotId }) {
     const payload = yield call(getShotInfoRequestApi, {
       ShotId,
     })
+    console.log(payload)
     yield put(actions.getShotInfoSuccess(payload))
   } catch (error) {
     yield put(actions.getShotInfoFailure({ error }))
@@ -267,7 +276,6 @@ function* getSelectedVideo({ payload }) {
 
 function* getVideoAverage({ id }) {
   try {
-    
     const { brand } = yield select(selectAuthProfile)
     const payload = yield call(getDataFromApi, {
       url: `/brand/${brand.uuid}/video/${id}/metrics`,
@@ -287,23 +295,23 @@ function* getRadarChartRequest({ ShotId }) {
     })
 
     const colorNames = [
-      "red",
-      "orange-red",
-      "orange",
-      "yellow-orange",
-      "yellow-green",
-      "yellow",
-      "green",
-      "blue-green",
-      "blue-purple",
-      "purple",
-      "red-purple",
+      'red',
+      'orange-red',
+      'orange',
+      'yellow-orange',
+      'yellow-green',
+      'yellow',
+      'green',
+      'blue-green',
+      'blue-purple',
+      'purple',
+      'red-purple',
       //"blue",
     ]
 
     const totalValue = Object.values(payload).reduce(
-      (prev, next) => prev + next
-      , 0
+      (prev, next) => prev + next,
+      0
     )
 
     const aspectRatio = totalValue > 0 ? 100 / totalValue : 1
@@ -313,8 +321,8 @@ function* getRadarChartRequest({ ShotId }) {
       if (i <= 10) {
         values.push(
           /*
-          payload[[colorNames[i]]] === 0 
-            ? Math.floor(Math.random() * 1) 
+          payload[[colorNames[i]]] === 0
+            ? Math.floor(Math.random() * 1)
             : payload[[colorNames[i]]]
           */
           payload[[colorNames[i]]]

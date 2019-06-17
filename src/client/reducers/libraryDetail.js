@@ -114,18 +114,27 @@ export const actions = {
     type: types.GET_SHOT_BY_SHOT_FAILURE,
     payload,
   }),
-  getShotInfoRequest: (payload) => ({ type: types.GET_SHOT_INFO_REQUEST, payload }),
+  getShotInfoRequest: (payload) => ({
+    type: types.GET_SHOT_INFO_REQUEST,
+    payload,
+  }),
   getShotInfoSuccess: (payload) => ({
     type: types.GET_SHOT_INFO_SUCCESS,
     payload,
   }),
   getShotInfoFailure: (error) => ({ type: types.GET_SHOT_INFO_FAILURE, error }),
-  getRadarChartRequest: (payload) => ({ type: types.GET_RADAR_CHART_REQUEST, payload }),
+  getRadarChartRequest: (payload) => ({
+    type: types.GET_RADAR_CHART_REQUEST,
+    payload,
+  }),
   getRadarChartSuccess: (payload) => ({
     type: types.GET_RADAR_CHART_SUCCESS,
     payload,
   }),
-  getRadarChartFailure: (error) => ({ type: types.GET_RADAR_CHART_FAILURE, error }),
+  getRadarChartFailure: (error) => ({
+    type: types.GET_RADAR_CHART_FAILURE,
+    error,
+  }),
   getPeopleRequest: (payload) => ({ type: types.GET_PEOPLE_REQUEST, payload }),
   getPeopleSuccess: (payload) => ({
     type: types.GET_PEOPLE_SUCCESS,
@@ -143,13 +152,13 @@ export const initialState = fromJS({
     error: null,
   },
   shotByShotData: null,
-  shotInfoData: null,
+  shotInfoData: {},
   error: false,
   loading: false,
   selectedVideo: {},
   selectedVideoAverage: [],
   radarChartData: {},
-  peopleData: {}
+  peopleData: {},
 })
 
 const libraryDetailReducer = (state = initialState, action) => {
@@ -226,6 +235,7 @@ const libraryDetailReducer = (state = initialState, action) => {
     case types.GET_SHOT_INFO_REQUEST:
       return state.set('loading', fromJS(true))
     case types.GET_SHOT_INFO_SUCCESS:
+      console.log(action.payload)
       return state
         .set('shotInfoData', fromJS(action.payload))
         .set('loading', fromJS(false))
@@ -268,12 +278,11 @@ export const selectLibraryDetailSelectedVideo = (state) =>
 
 export const selectLibraryDetailRaharChart = (state) =>
   state.LibraryDetail.get('radarChartData')
-  
+
 export const selectLibraryDetailPeople = (state) =>
   state.LibraryDetail.get('peopleData')
 
-export const selectShotInfo = (state) =>
-  state.LibraryDetail.get('shotInfoData')
+export const selectShotInfo = (state) => state.LibraryDetail.get('shotInfoData')
 
 export const selectColorsInfo = () =>
   createSelector(
@@ -299,6 +308,11 @@ export const makeSelectSelectedVideoID = () =>
     (substate) => {
       // return substate.toJS().selectedVideo.uuid
     }
+  )
+export const selectShotInfoSelector = () =>
+  createSelector(
+    selectShotInfo,
+    (substate) => console.log(substate)
   )
 
 const selectLibraryDetailColorTemperatureDomain = (state) =>
