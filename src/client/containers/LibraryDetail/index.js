@@ -86,7 +86,6 @@ export class LibraryDetail extends React.Component {
         doughnutLineChartData,
         colorTempData,
         shotByShotData,
-        shotInfoData,
         selectedVideo,
         selectedVideoAverage,
       },
@@ -119,12 +118,7 @@ export class LibraryDetail extends React.Component {
           />
         )}
         {shotByShotData && (
-          <LibraryDetailShotByShot
-            shots={shotByShotData.video.shots}
-            slideImages={shotByShotData.slideImages}
-            shotInfo={shotInfoData && shotInfoData}
-            videoList={shotByShotData.videoList}
-          />
+          <LibraryDetailShotByShot shots={shotByShotData.video.shots} />
         )}
       </React.Fragment>
     )
@@ -135,7 +129,6 @@ LibraryDetail.propTypes = {
   barChartData: PropTypes.object,
   doughnutLineChartData: PropTypes.object,
   colorTempData: PropTypes.object,
-  shotByShotData: PropTypes.object,
   getBarChartRequest: PropTypes.func,
   getDoughnutChartRequest: PropTypes.func,
   getColorTempRequest: PropTypes.func,

@@ -272,11 +272,8 @@ export const selectLibraryDetailRaharChart = (state) =>
 export const selectLibraryDetailPeople = (state) =>
   state.LibraryDetail.get('peopleData')
 
-export const selectShotInfo = () =>
-  createSelector(
-    selectLibraryDetailSelectedVideo,
-    (substate) => substate.toJS()
-  )
+export const selectShotInfo = (state) =>
+  state.LibraryDetail.get('shotInfoData')
 
 export const selectColorsInfo = () =>
   createSelector(

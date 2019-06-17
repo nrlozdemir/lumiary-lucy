@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { actions, selectShotInfo, selectColorsInfo, selectPeopleData } from 'Reducers/libraryDetail'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
-import SingleItemSlider from 'Components/Sliders/SingleItemSlider'
+//import SingleItemSlider from 'Components/Sliders/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
 import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
 import { ThemeContext } from 'ThemeContext/themeContext'
@@ -47,32 +47,17 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   shotSliderClick(i) {
-    console.log(this.props)
-    if (this.props.getShotInfoRequest(i)) {
-
-      this.props.getRadarChartRequest(i)
-      this.props.getPeopleRequest(i)
-
-      const ref = this.slider2.children[0].children[0].childNodes[0]
-
-      for (let k = 0; k < ref.childNodes.length; k++) {
-        ref.childNodes[k].classList.remove(style.sliderImageActive)
-        ref.childNodes[k].classList.add(style.sliderImageCurrent)
-      }
-      ref.childNodes[i].classList.remove(style.sliderImageCurrent)
-      ref.childNodes[i].classList.add(style.sliderImageActive)
-  
-      this.setState({
-        selectedImage: i,
-        sliderImageSrc: 'https://picsum.photos/id/2/320/320'
-      })
-      return true
-    }
+    this.props.getShotInfoRequest(i).then(() => {
+      console.log(this.props)
+    })
   }
 
   render() {
     const { shots, shotInfo, radarChartData, peopleData } = this.props
     const { selectedImage, sliderImageSrc } = this.state
+
+    console.log(this.props)
+
     const radarChartDataConfigured = radarChartData && {
       labels: [
         "#cc2226",
@@ -119,32 +104,6 @@ class LibraryDetailShotByShot extends React.Component {
             >
               {selectedImage !== null ? (
               <React.Fragment>
-                {
-                  /*
-                  <div className={style.sliderTabContainer}>
-                  <div
-                    key={Math.random()}
-                    className="col-6-no-gutters bg-black"
-                  >
-                    <div className="mt-48 ml-48 mr-48">
-                      {shotInfo && (
-                        <SingleItemSlider
-                          customHandleStyle={{
-                            background: colors.shotByShotSliderPointer,
-                          }}
-                          slideImages={shotInfo.shot.frames}
-                          selectedImage={selectedImage}
-                        />
-                      )}
-                    </div>
-                  </div>
-                  <div className="col-6-no-gutters">
-                    
-                  </div>
-                </div>
-                  */
-                }
-
                 <div className={style.sliderTabContainer}>
                   <div
                     key={Math.random()}
@@ -181,7 +140,7 @@ class LibraryDetailShotByShot extends React.Component {
                         <SliderWithScrubber
                           name="slider2"
                           clickEvent={ this.shotSliderClick }
-                          shots={Object.values()} 
+                          shots={Object.values(shotInfo.shot.frames)} 
                           shotMargin={4}
                           minShotWidth={12}
                           maxShotWidth={104}
