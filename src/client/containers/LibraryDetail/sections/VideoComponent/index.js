@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import styles from './style.scss'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
+import { floatCvScore } from 'Utils'
 
 class Video extends Component {
   constructor(props) {
@@ -73,7 +74,7 @@ class Video extends Component {
         <AssetLayer
           leftSocialIcon={socialIcon}
           title={title}
-          rightValue={cvScore}
+          rightValue={floatCvScore(cvScore) || 0.0}
           truncateTitle
         >
           <video
@@ -82,7 +83,6 @@ class Video extends Component {
             src={src}
             muted
             controls={false}
-            poster={poster}
           />
           <div className={styles.percentageWrapper} style={{ right: '80px' }}>
             <PercentageBarGraph

@@ -4,9 +4,9 @@ import Module from 'Components/Module'
 import HorizontalStackedBarChart from 'Components/Charts/HorizontalStackedBarChart'
 import { barChartOptions } from './options'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
-import { isEmpty } from 'lodash'
-import { isDataSetEmpty } from 'Utils'
+import MultipleNoDataModule from 'Components/MultipleNoDataModule'
 import style from './style.scss'
+import { isDataSetEmpty } from 'Utils'
 
 const PacingCardModule = ({
   data,
@@ -17,17 +17,6 @@ const PacingCardModule = ({
   legend,
 }) => {
   const { horizontalStackedBarData = {}, stadiumData } = data
-
-  const hasNoData =
-    (isDataSetEmpty(horizontalStackedBarData) &&
-      !!stadiumData &&
-      horizontalStackedBarData.datasets.every((dataset) =>
-        dataset.data.every((data) => data === 0)
-      ) &&
-      stadiumData.datasets.every((dataset) =>
-        dataset.data.every((data) => data === 0)
-      )) ||
-    isEmpty(data)
 
   const stadiumValues =
     stadiumData &&
@@ -44,20 +33,21 @@ const PacingCardModule = ({
       action={action}
       filters={filters}
       legend={legend}
-      isEmpty={hasNoData}
     >
       <div className={style.pacingCardInner}>
-        <div className={style.pacingCardInnerItem}>
+        <MultipleNoDataModule>
           <HorizontalStackedBarChart
             width={500}
             height={340}
             barData={horizontalStackedBarData}
             options={barChartOptions}
+            datasetsIsEmpty={isDataSetEmpty(horizontalStackedBarData)}
           />
-        </div>
-        <div className={style.pacingCardInnerItem}>
-          <StadiumChart data={stadiumValues} />
-        </div>
+          <StadiumChart
+            data={stadiumValues}
+            datasetsIsEmpty={isDataSetEmpty(stadiumData)}
+          />
+        </MultipleNoDataModule>
       </div>
     </Module>
   )

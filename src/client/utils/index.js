@@ -68,17 +68,13 @@ const getLabelWithSuffix = (label, property) => {
     isMetric: bool - true if the endpoint used was /metric,
     customBorderColor: string,
     noBrandKeys: bool - payloads without brand key layer
+    customKeys: array,
+    customValueKey: string - custom key of data object (value default)
   }
   *
  */
 
 const convertDataIntoDatasets = (values, options, ...args) => {
-  let labels
-  let datasetsFromValues
-  let singleLevelJSON
-  let customKeys
-  let getValueinObject
-
   const {
     hoverBG,
     isMetric,
@@ -87,10 +83,18 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     singleDataset,
     preparedLabels,
     useBrandLabels,
+    customValueKey,
     backgroundColor,
     preparedDatasets,
     customBorderColor,
+    customKeys: argKeys,
   } = (args && !!args[0] && args[0]) || {}
+
+  let labels
+  let datasetsFromValues
+  let singleLevelJSON
+  let customKeys = argKeys
+  let getValueinObject
 
   const brands = Object.keys(values.data || values)
 
@@ -164,7 +168,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
         ? d.percent || 0
         : Object.keys(d.percents).map((key) => d.percents[key] || 0)
     )
-    customKeys = brands
+    customKeys = !customKeys ? brands : customKeys
   }
   // if dataset values type of object, get value in the object
   if (
@@ -172,7 +176,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     typeof datasetsFromValues[0] === 'object' &&
     !Array.isArray(datasetsFromValues[0])
   ) {
-    datasetsFromValues = datasetsFromValues.map((d) => d.value)
+    datasetsFromValues = datasetsFromValues.map((d) =>
+      customValueKey ? d[customValueKey] || 0 : d.value || 0
+    )
   }
 
   // Object.keys(
@@ -323,7 +329,7 @@ const capitalizeFirstLetter = (string) => {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
-const addComma = (number) => {
+const metricSuffix = (number) => {
   number = parseInt(number)
   if (number >= 1e3) {
     const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
@@ -384,7 +390,7 @@ const radarChartCalculate = (data) => {
           el.progress.push({
             leftTitle: f.name,
             color: strToColor(f.name),
-            rightTitle: `${f.count}k Shares`,
+            rightTitle: `${metricSuffix(f.count)} Shares`,
             value: ((f.count / el.total) * 100).toFixed(0),
           })
         })
@@ -769,6 +775,27 @@ const convertVideoEngagementData = (
 }
 
 const floatCvScore = (val) => Number.parseFloat(val).toFixed(1)
+
+const getMinMaxFromDatasets = (datasets = [], initial = 0, type = 'max') => {
+  return !!datasets.length
+    ? datasets.reduce((result, dataset) => {
+        const { data } = dataset
+
+        if (!!data && !!data.length) {
+          const dataSetResult =
+            type === 'max' ? Math.max(...data) : Math.min(...data)
+
+          if (
+            type === 'max' ? dataSetResult > result : dataSetResult < result
+          ) {
+            result = dataSetResult
+          }
+        }
+        return result
+      }, initial)
+    : 0
+}
+
 export {
   ucfirst,
   normalize,
@@ -791,8 +818,9 @@ export {
   getFilteredCompetitors,
   getFilteredCompetitorValues,
   convertColorTempToDatasets,
-  addComma,
+  metricSuffix,
   parseAverage,
   convertVideoEngagementData,
   floatCvScore,
+  getMinMaxFromDatasets,
 }

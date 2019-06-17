@@ -316,7 +316,12 @@ function* getPacingChartData() {
     const pacingChartData = convertDataIntoDatasets(
       payload,
       { property: ['pacing'] },
-      { customBorderColor: '#373F5B', singleDataset: true, noBrandKeys: true }
+      {
+        customBorderColor: '#373F5B',
+        singleDataset: true,
+        noBrandKeys: true,
+        customValueKey: 'proportionOfLibrary',
+      }
     )
 
     yield put(actions.getPacingChartSuccess(pacingChartData))
@@ -395,9 +400,14 @@ function* getTotalViewsData({ data }) {
     const { metric, dateRange, platform } = data
 
     const profile = yield select(selectAuthProfile)
-    const competitors = getBrandNameAndCompetitorsName(profile)
+    const competitors = getBrandAndCompetitors(profile)
 
-    const url = `/metric/totals?metric=${metric}&platform=${platform}&daterange=${dateRange}`
+    const url = buildApiUrl(`/metric/totals`, {
+      metric,
+      platform,
+      competitors,
+      daterange: dateRange,
+    })
 
     const options = {
       metric,
@@ -418,7 +428,7 @@ function* getTotalViewsData({ data }) {
       dateBucket === 'none'
         ? {}
         : convertDataIntoDatasets(
-            getFilteredCompetitorValues(competitors, barData),
+            barData,
             { ...options, dateBucket },
             {
               isMetric: true,
@@ -426,7 +436,7 @@ function* getTotalViewsData({ data }) {
           )
 
     const convertedDoughnutData = convertDataIntoDatasets(
-      getFilteredCompetitorValues(competitors, doughnutData),
+      doughnutData,
       { ...options, dateBucket: 'none' },
       {
         hoverBG: true,
@@ -435,6 +445,7 @@ function* getTotalViewsData({ data }) {
         isMetric: true,
       }
     )
+
     yield put(
       actions.getTotalViewsSuccess({
         barData: convertedBarData,
@@ -455,17 +466,22 @@ function* getTotalCompetitorViewsData() {
       url: '/report',
       metric: 'views',
       platform: 'all',
-      dateRange: 'week',
+      dateRange: '3months',
       dateBucket: 'none',
       property: ['duration'],
-      brands: [...competitors.map((c) => c.uuid)],
+      brands: [...competitors],
     }
     const payload = yield call(getDataFromApi, { ...options })
-    yield put(
-      actions.getTotalCompetitorViewsSuccess(
-        convertDataIntoDatasets(payload, options)
+
+    if (!!payload) {
+      yield put(
+        actions.getTotalCompetitorViewsSuccess(
+          convertDataIntoDatasets(payload, options, {
+            customKeys: Object.keys(payload.data),
+          })
+        )
       )
-    )
+    }
   } catch (error) {
     yield put(actions.getTotalCompetitorViewsFailure(error))
   }
@@ -541,14 +557,20 @@ function* getTopPerformingPropertiesByCompetitorsData({
       property: ['pacing'],
       brands: [...competitors.map((c) => c.uuid)],
     }
+
     const payload = yield call(getDataFromApi, { ...options })
-    yield put(
-      actions.getTopPerformingPropertiesByCompetitorsSuccess(
-        convertDataIntoDatasets(payload, options, {
-          useBrandLabels: true,
-        })
+
+    if (!!payload && !!payload.data && !_.isEmpty(payload.data)) {
+      yield put(
+        actions.getTopPerformingPropertiesByCompetitorsSuccess(
+          convertDataIntoDatasets(payload, options, {
+            useBrandLabels: true,
+          })
+        )
       )
-    )
+    } else {
+      yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess({}))
+    }
   } catch (error) {
     console.log('error', error)
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))

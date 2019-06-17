@@ -35,10 +35,11 @@ class Stadium extends React.Component {
     })
 
     this.stadium.current.addEventListener('mousemove', (event) => {
-      this.tooltip.current.style.top =
-        event.pageY - this.tooltip.current.clientHeight - 20 + 'px'
+      const { clientX, clientY } = event
+      const { top } = this.tooltip.current.getBoundingClientRect()
+      this.tooltip.current.style.top = event.clientY - 50 + 'px'
       this.tooltip.current.style.left =
-        event.pageX - this.tooltip.current.clientWidth / 2 + 'px'
+        event.clientX - this.tooltip.current.clientWidth / 2 + 'px'
       if (event.target.attributes['stroke'] && id === 'BAR') {
         event.target.attributes['stroke'].value = shadeHexColor(color, 0.12)
       }

@@ -57,12 +57,17 @@ export class VideoCard extends PureComponent {
 
   videoMouseLeavePlay = () => {
     clearInterval(hoverInReady)
+    if (!!this.video) {
+      this.video.current.pause()
+      this.video.current.currentTime = 0
+    }
     this.setState({
       width: 0,
       duration: 0,
       itCanPlay: false,
     })
   }
+
   render() {
     const {
       video,
@@ -88,6 +93,9 @@ export class VideoCard extends PureComponent {
       socialIconSelector(video.socialIcon),
       style.iconClass
     )
+    
+    const videoUrl = `${mediaUrl}lumiere/${brandId}/${video.uuid}.mp4`
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -123,7 +131,7 @@ export class VideoCard extends PureComponent {
                   />
                 </div>
               )}
-              {video.fileName && itCanPlay ? (
+              {!!video.fileName && (
                 <div
                   className={style.videoInner}
                   style={{
@@ -131,17 +139,8 @@ export class VideoCard extends PureComponent {
                   }}
                 >
                   <Link to={`/library/build-report/${video.uuid}`}>
-                    <video
-                      ref={this.video}
-                      loop
-                      muted
-                      poster={`${mediaUrl}${video.thumbNail}`}
-                      controls={false}
-                    >
-                      <source
-                        src={`${mediaUrl}lumiere/${brandId}/${video.uuid}.mp4`}
-                        type="video/mp4"
-                      />
+                    <video ref={this.video} loop muted controls={false}>
+                      <source src={videoUrl} type="video/mp4" />
                     </video>
                   </Link>
                   <span
@@ -152,14 +151,6 @@ export class VideoCard extends PureComponent {
                     }}
                   />
                 </div>
-              ) : (
-                <div
-                  className={style.blurredImage}
-                  style={{
-                    backgroundImage: `url(${mediaUrl}${video.thumbNail})`,
-                    border: `1px solid ${colors.videoBorder}`,
-                  }}
-                />
               )}
 
               <div

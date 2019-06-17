@@ -4,7 +4,7 @@ import style from './style.scss'
 import Video from '../VideoComponent'
 import FlipCard from 'Components/FlipCard'
 import ProgressBar from 'Components/ProgressBar'
-import { capitalizeFirstLetter, addComma } from 'Utils/index'
+import { capitalizeFirstLetter, metricSuffix } from 'Utils/index'
 import { textEdit } from 'Utils/text'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -26,7 +26,7 @@ const Front = (props) => {
           <span className={style.leftTitle}>
             {capitalizeFirstLetter(title)}
           </span>
-          <span className={style.rightTitle}>{addComma(data.value)}</span>
+          <span className={style.rightTitle}>{metricSuffix(data.value)}</span>
         </div>
         <ProgressBar
           width={
@@ -92,7 +92,7 @@ const LibraryDetailChartHeader = ({
                 src={videoUrl}
                 title={title}
                 socialIcon={socialIcon}
-                cvScore={cvScore || 0.0}
+                cvScore={cvScore}
               />
             </div>
             <div className={classnames('col-6', style.videoStatsWrapper)}>

@@ -273,7 +273,7 @@ function* getFlipCardsData() {
       {},
       ...Object.keys(metrics).map((metric) => ({
         [metric]: {
-          percentage: metrics[metric].changeOverPrevious,
+          percentage: metrics[metric].changeOverPrevious || 0,
           data: dayOfWeek.map((day) => metrics[metric][day]),
           isEmpty: dayOfWeek.every((day) =>
             metrics[metric][day] === 0 ? true : false

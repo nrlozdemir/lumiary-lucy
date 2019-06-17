@@ -290,7 +290,7 @@ export const initialState = fromJS({
     error: null,
   },
   totalCompetitorViewsData: {
-    data: [],
+    data: {},
     loading: false,
     error: null,
   },
@@ -298,17 +298,17 @@ export const initialState = fromJS({
   error: false,
   loading: false,
   topPerformingPropertiesData: {
-    data: [],
+    data: {},
     loading: false,
     error: null,
   },
   topPerformingPropertiesByCompetitorsData: {
-    data: [],
+    data: {},
     loading: false,
     error: null,
   },
   topPerformingDataForTime: {
-    data: [],
+    data: {},
     loading: false,
     error: null,
   },
