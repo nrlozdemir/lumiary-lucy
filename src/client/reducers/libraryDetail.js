@@ -135,7 +135,6 @@ export const actions = {
 	doughnutInfoIndustryFailure: payload => ({
 		type: types.DOUGHNUT_INFO_FAILURE,
 		payload
-	})
   }),
   getShotInfoRequest: (payload) => ({ type: types.GET_SHOT_INFO_REQUEST, payload }),
   getShotInfoSuccess: (payload) => ({
