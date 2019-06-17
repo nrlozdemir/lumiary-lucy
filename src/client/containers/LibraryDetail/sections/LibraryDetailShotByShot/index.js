@@ -61,7 +61,6 @@ class LibraryDetailShotByShot extends React.Component {
     }
     ref.childNodes[i].classList.remove(style.sliderImageCurrent)
     ref.childNodes[i].classList.add(style.sliderImageActive)
-
   }
 
   render() {
@@ -356,7 +355,10 @@ class LibraryDetailShotByShot extends React.Component {
 
                       <div style={{ height: 100, display: 'block', width: 500}}></div>
                       
-                      <div style={{height: 420, width: 493, backgroundColor: '#000'}} />
+                      <div style={{height: 420, width: 493, backgroundColor: '#000'}}>
+                        {Object.values(shots).map((el, i) => <img src={el.image} />)} 
+                      </div>
+
                       <div
                         ref={(el) => (this.slider2 = el)}
                       >
