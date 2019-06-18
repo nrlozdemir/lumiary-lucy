@@ -7,21 +7,71 @@ import {
   selectMarketviewVideosView,
   selectMarketviewSelectedVideoView,
 } from 'Reducers/marketview'
+import {
+  makeSelectAuthProfile,
+} from 'Reducers/auth'
+
 import SliderModule from 'Components/Modules/SliderModule'
 
 class Slider extends React.Component {
-  componentDidMount() {
-    this.props.getCompetitorVideosRequest()
+  constructor (props) {
+    super(props)
+    this.state = {
+      lastRequestBody: {}
+    }
   }
-  getCompetitorVideos = (data) => {
-    this.props.getCompetitorVideosRequest(data)
+
+  getCompetitorVideos = (data = {}) => {
+    const { container, activeDay, profile } = this.props
+    const { brand = {} } = profile
+    const { uuid:brandUuid, competitors = [] } = brand
+
+    if(!brandUuid) {
+      console.warn('brand uuid is not defined')
+      return false
+    }
+
+    if(competitors.length === 0) {
+      console.warn('no competitors provide')
+    }
+
+    const requestBody = {
+      ...data,
+      brandUuid,
+    }
+
+    if(activeDay) {
+      requestBody.activeDay = activeDay
+    }
+
+    if(container === 'competitor') {
+      requestBody.competitors = competitors
+    }
+
+    this.setState({
+      lastRequestBody: requestBody
+    })
+
+    this.props.getCompetitorVideosRequest(requestBody)
   }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps.activeDay !== this.props.activeDay) {
+      this.getCompetitorVideos({
+        ...this.state.lastRequestBody
+      })
+    }
+  }
+
   changeSelectedVideo = (video) => {
     this.props.setSelectedVideo(video)
   }
 
   render() {
     const { videos, selectedVideo, title, moduleKey, filters } = this.props
+    // console.log('videos', videos)
+    // console.log('selectedVideo', selectedVideo)
+    // console.log('filters', filters)
     return (
       <SliderModule
         data={videos || []}
@@ -38,6 +88,7 @@ class Slider extends React.Component {
 Slider.propTypes = {}
 
 const mapStateToProps = createStructuredSelector({
+  profile: makeSelectAuthProfile(),
   videos: selectMarketviewVideosView(),
   selectedVideo: selectMarketviewSelectedVideoView(),
 })

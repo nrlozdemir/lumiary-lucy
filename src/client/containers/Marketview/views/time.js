@@ -38,6 +38,7 @@ export class Time extends React.Component {
           title={`Top Performing ${activeDay
             .charAt(0)
             .toUpperCase()}${activeDay.slice(1)} Videos`}
+          activeDay={activeDay}
           filters={[
             {
               type: 'metric',

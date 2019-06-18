@@ -31,7 +31,9 @@ import {
 import { dayOfWeek } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
-function getCompetitorVideosApi() {
+function getCompetitorVideosApi({ payload }) {
+  console.log('payload', payload)
+  // console.log('marketviewCompetitorVideosData', marketviewCompetitorVideosData)
   return axios('/').then((res) => marketviewCompetitorVideosData)
 }
 
@@ -77,9 +79,9 @@ function getGetTopPerformingPropertiesByCompetitorsApi() {
     .then((res) => marketviewTopPerformingPropertiesCompetitors)
 }
 
-function* getCompetitorVideosMarketview() {
+function* getCompetitorVideosMarketview(params) {
   try {
-    const payload = yield call(getCompetitorVideosApi)
+    const payload = yield call(getCompetitorVideosApi, params)
     yield put(actions.getCompetitorVideosSuccess(payload))
   } catch (error) {
     yield put(actions.getCompetitorVideosFailure({ error }))

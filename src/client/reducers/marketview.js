@@ -93,8 +93,9 @@ export const types = {
     'Marketview/GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_FAILURE',
 }
 export const actions = {
-  getCompetitorVideosRequest: () => ({
+  getCompetitorVideosRequest: (payload) => ({
     type: types.GET_MARKETVIEW_COMPETITOR_VIDEOS_REQUEST,
+    payload
   }),
   getCompetitorVideosSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_COMPETITOR_VIDEOS_SUCCESS,
