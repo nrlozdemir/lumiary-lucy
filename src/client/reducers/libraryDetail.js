@@ -114,18 +114,27 @@ export const actions = {
     type: types.GET_SHOT_BY_SHOT_FAILURE,
     payload,
   }),
-  getShotInfoRequest: (payload) => ({ type: types.GET_SHOT_INFO_REQUEST, payload }),
+  getShotInfoRequest: (payload) => ({
+    type: types.GET_SHOT_INFO_REQUEST,
+    payload,
+  }),
   getShotInfoSuccess: (payload) => ({
     type: types.GET_SHOT_INFO_SUCCESS,
     payload,
   }),
   getShotInfoFailure: (error) => ({ type: types.GET_SHOT_INFO_FAILURE, error }),
-  getRadarChartRequest: (payload) => ({ type: types.GET_RADAR_CHART_REQUEST, payload }),
+  getRadarChartRequest: (payload) => ({
+    type: types.GET_RADAR_CHART_REQUEST,
+    payload,
+  }),
   getRadarChartSuccess: (payload) => ({
     type: types.GET_RADAR_CHART_SUCCESS,
     payload,
   }),
-  getRadarChartFailure: (error) => ({ type: types.GET_RADAR_CHART_FAILURE, error }),
+  getRadarChartFailure: (error) => ({
+    type: types.GET_RADAR_CHART_FAILURE,
+    error,
+  }),
   getPeopleRequest: (payload) => ({ type: types.GET_PEOPLE_REQUEST, payload }),
   getPeopleSuccess: (payload) => ({
     type: types.GET_PEOPLE_SUCCESS,
@@ -143,13 +152,13 @@ export const initialState = fromJS({
     error: null,
   },
   shotByShotData: null,
-  shotInfoData: null,
+  shotInfoData: {},
   error: false,
   loading: false,
   selectedVideo: {},
   selectedVideoAverage: [],
   radarChartData: {},
-  peopleData: {}
+  peopleData: {},
 })
 
 const libraryDetailReducer = (state = initialState, action) => {
@@ -266,27 +275,31 @@ export const selectLibraryDetailDomain = (state) => state.LibraryDetail
 export const selectLibraryDetailSelectedVideo = (state) =>
   state.LibraryDetail.get('selectedVideo')
 
-export const selectLibraryDetailRaharChart = (state) =>
-  state.LibraryDetail.get('radarChartData')
-  
-export const selectLibraryDetailPeople = (state) =>
-  state.LibraryDetail.get('peopleData')
-
-export const selectShotInfo = () =>
+export const selectShotInfoData = () =>
   createSelector(
-    selectLibraryDetailSelectedVideo,
+    selectLibraryDetailShotInfo,
     (substate) => substate.toJS()
   )
 
-export const selectColorsInfo = () =>
-  createSelector(
-    selectLibraryDetailRaharChart,
-    (substate) => substate.toJS()
-  )
+export const selectLibraryDetailShotInfo = (state) =>
+  state.LibraryDetail.get('shotInfoData')
 
 export const selectPeopleData = () =>
   createSelector(
     selectLibraryDetailPeople,
+    (substate) => substate.toJS()
+  )
+
+export const selectLibraryDetailPeople = (state) =>
+  state.LibraryDetail.get('peopleData')
+
+
+export const selectLibraryDetailRaharChart = (state) =>
+  state.LibraryDetail.get('radarChartData')
+
+export const selectColorsData = () =>
+  createSelector(
+    selectLibraryDetailRaharChart,
     (substate) => substate.toJS()
   )
 
