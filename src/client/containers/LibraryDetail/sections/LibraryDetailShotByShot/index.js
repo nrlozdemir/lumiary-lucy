@@ -47,29 +47,34 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   shotSliderClick(i) {
-    const ref = this.slider2.children[0].children[0].childNodes[0]
-    if (this.props.getShotInfoRequest(i)) {
 
-      this.props.getRadarChartRequest(i)
-      this.props.getPeopleRequest(i)
-
-      for (let k = 0; k < ref.childNodes.length; k++) {
-        const ref = this.slider2.children[0].children[0].childNodes[0]
-
+    this.setState({
+      selectedImage: 1
+    }, () => {
+      const ref = this.slider2.children[0].children[0].childNodes[0]
+      if (this.props.getShotInfoRequest(i)) {
+  
+        this.props.getRadarChartRequest(i)
+        this.props.getPeopleRequest(i)
+  
         for (let k = 0; k < ref.childNodes.length; k++) {
-          ref.childNodes[k].classList.remove(style.sliderImageActive)
-          ref.childNodes[k].classList.add(style.sliderImageCurrent)
+          const ref = this.slider2.children[0].children[0].childNodes[0]
+  
+          for (let k = 0; k < ref.childNodes.length; k++) {
+            ref.childNodes[k].classList.remove(style.sliderImageActive)
+            ref.childNodes[k].classList.add(style.sliderImageCurrent)
+          }
+          ref.childNodes[i].classList.remove(style.sliderImageCurrent)
+          ref.childNodes[i].classList.add(style.sliderImageActive)
+  
+          this.setState({
+            selectedImage: i,
+            sliderImageSrc: 'https://picsum.photos/id/2/320/320'
+          })
+          return true
         }
-        ref.childNodes[i].classList.remove(style.sliderImageCurrent)
-        ref.childNodes[i].classList.add(style.sliderImageActive)
-
-        this.setState({
-          selectedImage: i,
-          sliderImageSrc: 'https://picsum.photos/id/2/320/320'
-        })
-        return true
       }
-    }
+    })
   }
 
   render() {
