@@ -146,7 +146,7 @@ class ColorCard extends Component {
                 color: colors.textColor,
               }}
             >
-              View Platform Metrics
+              ${`View Platform Metrics`}
               <div className={style.icon}>
                 <RightArrowCircle />
               </div>
