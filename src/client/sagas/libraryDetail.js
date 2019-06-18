@@ -255,12 +255,11 @@ function* getShotInfoRequest({ ShotId }) {
   const payload = yield call(getShotInfoRequestApi, {
     ShotId,
   })
-  console.log(payload)
   try {
     
-    yield put(actions.getPeopleSuccess(payload))
+    yield put(actions.getShotInfoSuccess(payload))
   } catch (error) {
-    yield put(actions.getPeopleFailure({ error }))
+    yield put(actions.getShotInfoFailure({ error }))
   }
 }
 

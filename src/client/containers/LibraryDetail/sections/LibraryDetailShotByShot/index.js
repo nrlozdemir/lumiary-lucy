@@ -36,9 +36,6 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   componentDidMount() {
-    this.props.getShotInfoRequest(1)
-    this.props.getRadarChartRequest(1)
-    this.props.getPeopleRequest(1)
   }
 
   onChangeSlider(e) {
@@ -51,27 +48,20 @@ class LibraryDetailShotByShot extends React.Component {
 
     this.setState({
       selectedImage: i,
+    }, () => {
+      this.props.getShotInfoRequest(i)
+      this.props.getRadarChartRequest(i)
+      this.props.getPeopleRequest(i)
     })
-    
-    /*
-    
-
-    this.setState({
-      selectedImage: i,
-    })
-
-    this.shotSliderClick(i)
-    */
-
-    //const { height } = this.slider.getBoundingClientRect()
   }
 
   shotSliderClick(i) {
 
     this.setState({
-      selectedImage: 1
+      sliderImageSrc: 'https://picsum.photos/id/2/320/320'
     }, () => {
 
+      /*
       const ref = this.slider2.children[0].children[0].childNodes[0]
 
       for (let k = 0; k < ref.childNodes.length; k++) {
@@ -90,14 +80,13 @@ class LibraryDetailShotByShot extends React.Component {
         })
         return true
       }
+      */
     })
   }
 
   render() {
-    const { shots, shotInfo, radarChartData, peopleData } = this.props
+    const { shots, shotInfoData, radarChartData, peopleData } = this.props
     const { selectedImage, sliderImageSrc } = this.state
-
-    console.log(this.props)
 
     const radarChartDataConfigured = radarChartData && {
       labels: [
@@ -156,10 +145,8 @@ class LibraryDetailShotByShot extends React.Component {
                               width: Object.values(shots).length * 504,
                             }}
                           >
-                            {shotInfo &&
-                              shotInfo.shot &&
-                              shotInfo.shot.frames &&
-                              Object.values(shotInfo.shot.frames).map(
+                            {shots && Object.values(shots).length > 0 &&
+                              Object.values(shots).map(
                                 (el, i) => (
                                   <div className={style.shotSliderImage}>
                                     <img src={sliderImageSrc} />
@@ -173,11 +160,11 @@ class LibraryDetailShotByShot extends React.Component {
                           ref={(el) => (this.slider2 = el)}
                           className="mt-32 mb-24"
                         >
-                          {shotInfo && shotInfo.shot && shotInfo.shot.frames && (
+                          {shots && Object.values(shots).length > 0 && (
                             <SliderWithScrubber
                               name="slider2"
                               clickEvent={this.shotSliderClick}
-                              shots={Object.values(shotInfo.shot.frames)}
+                              shots={Object.values(shots)}
                               shotMargin={4}
                               minShotWidth={12}
                               maxShotWidth={104}
@@ -331,17 +318,17 @@ class LibraryDetailShotByShot extends React.Component {
                         <TabPanel className={style.tabPanelReset}>
                           <div className={classnames(style.tabPanel, 'mt-16')}>
                             <Scrubber vertical width={570} height={368}>
-                              {shotInfo &&
-                                shotInfo.shot &&
-                                shotInfo.shot.labels &&
-                                shotInfo.shot.labels.map((info, i) => (
+                              {shotInfoData &&
+                                shotInfoData.shot &&
+                                shotInfoData.shot.labels &&
+                                shotInfoData.shot.labels.map((info, i) => (
                                   <div
                                     className={classnames(
                                       style.tabPanelItem,
                                       'grid-container',
                                       {
                                         'mb-16':
-                                          i !== shotInfo.shot.labels.length - 1,
+                                          i !== shotInfoData.shot.labels.length - 1,
                                       }
                                     )}
                                     style={{
@@ -354,7 +341,7 @@ class LibraryDetailShotByShot extends React.Component {
                                     <div className="col-5-no-gutters">
                                       <img
                                         src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${
-                                          shotInfo.shot.frames[i]
+                                          shotInfoData.shot.frames[i]
                                         }`}
                                         className={classnames(
                                           style.imageItem,
