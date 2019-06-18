@@ -69,9 +69,6 @@ class Slider extends React.Component {
 
   render() {
     const { videos, selectedVideo, title, moduleKey, filters } = this.props
-    // console.log('videos', videos)
-    // console.log('selectedVideo', selectedVideo)
-    // console.log('filters', filters)
     return (
       <SliderModule
         data={videos || []}

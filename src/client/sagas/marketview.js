@@ -32,8 +32,6 @@ import { dayOfWeek } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 function getCompetitorVideosApi({ payload }) {
-  console.log('payload', payload)
-  // console.log('marketviewCompetitorVideosData', marketviewCompetitorVideosData)
   return axios('/').then((res) => marketviewCompetitorVideosData)
 }
 
