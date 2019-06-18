@@ -10,7 +10,6 @@ import {
   selectPeopleData,
 } from 'Reducers/libraryDetail'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
-//import SingleItemSlider from 'Components/Sliders/SingleItemSlider'
 import ProgressBar from 'Components/ProgressBar'
 import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
 import { ThemeContext } from 'ThemeContext/themeContext'
