@@ -19,54 +19,36 @@ import style from './style.scss'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
-const filters = [
-  {
-    type: 'metric',
-    selectKey: 'QV-metric',
-    placeHolder: 'Engagement',
-  },
-  {
-    type: 'dateRange',
-    selectKey: 'QV-date',
-    placeHolder: 'Date',
-  },
-]
-
 const moduleKey = 'Quickview'
 
-export class Main extends React.Component {
+export class Main extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      platforms: ['facebook', 'instagram', 'twitter', 'youtube'],
-    }
-  }
-
-  componentDidMount() {
-    const { match, getQuickviewItemsRequest } = this.props
-    if (typeof match.params.platform === 'undefined') {
-      getQuickviewItemsRequest('facebook')
-    } else {
-      getQuickviewItemsRequest(match.params.platform)
+      platforms: [
+        {
+          name: 'facebook',
+          filter: {
+            type: 'metric',
+            selectKey: 'QV-facebook-metric',
+            placeHolder: 'Engagement',
+          },
+        },
+        { name: 'instagram' },
+        { name: 'twitter' },
+        { name: 'youtube' },
+      ],
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { match: prevMatch, selectFilters: prevSelectFilters } = prevProps
-    const { match, getQuickviewItemsRequest, selectFilters } = this.props
-
-    if (prevMatch.params.platform !== match.params.platform) {
-      if (typeof match.params.platform === 'undefined') {
-        getQuickviewItemsRequest('facebook')
-      } else {
-        getQuickviewItemsRequest(match.params.platform)
-      }
-    }
+    const { selectFilters: prevSelectFilters } = prevProps
+    const { getQuickviewItemsRequest, selectFilters } = this.props
 
     if (
       !!prevSelectFilters &&
       !!selectFilters &&
-      !_.isEqual(
+      !isEqual(
         prevSelectFilters.values[moduleKey],
         selectFilters.values[moduleKey]
       )
@@ -75,21 +57,29 @@ export class Main extends React.Component {
 
       const valuesToType = selectFiltersToType(selectFilterValues)
 
-      this.callBack(valuesToType)
+      this.handleFilterChange(valuesToType)
     }
   }
 
-  callBack = (data) => {
-    console.log('quickview', data)
+  handleFilterChange = (data, platform = 'facebook') => {
+    const { match, getQuickviewItemsRequest } = this.props
+
+    getQuickviewItemsRequest({
+      platform: match.params.platform || 'facebook',
+      data,
+    })
   }
 
   render() {
     const { platforms } = this.state
     const {
+      match,
       quickview: {
         selectedPlatform: { platformsValues },
       },
     } = this.props
+
+    const selectedPlatform = match.params.platform || 'facebook'
 
     return (
       <ThemeContext.Consumer>
@@ -99,36 +89,41 @@ export class Main extends React.Component {
               <div className="grid-collapse mt-50">
                 <div className={style.navigation}>
                   <div className={style.navItem}>
-                    {platforms.map((platform, index) => (
-                      <NavLink
-                        key={index}
-                        activeStyle={{
-                          background: colors.tabActiveBackground,
-                        }}
-                        style={{
-                          background: colors.tabBackground,
-                          color: colors.textColor,
-                          borderColor: colors.tabBorder,
-                        }}
-                        to={`/quickview/${toSlug(platform)}`}
-                      >
-                        <i className={socialIconSelector(platform)} />
-                        {index === 0 && (
+                    {platforms.map((platform, idx) =>
+                      !!platform.filter &&
+                      selectedPlatform === platform.name ? (
+                        <div key={idx}>
+                          <i className={socialIconSelector(platform.name)} />
                           <ModuleSelectFilters
-                            key={`filter-${index}`}
-                            type={filters[index].type}
+                            key={`filter-${idx}`}
+                            type={platform.filter.type}
                             moduleKey={moduleKey}
-                            selectKey={filters[index].selectKey}
-                            placeHolder={filters[index].placeHolder}
+                            selectKey={platform.filter.selectKey}
+                            placeHolder={platform.filter.placeHolder}
                           />
-                        )}
-                      </NavLink>
-                    ))}
+                        </div>
+                      ) : (
+                        <NavLink
+                          key={idx}
+                          activeStyle={{
+                            background: colors.tabActiveBackground,
+                          }}
+                          style={{
+                            background: colors.tabBackground,
+                            color: colors.textColor,
+                            borderColor: colors.tabBorder,
+                          }}
+                          to={`/quickview/${toSlug(platform.name)}`}
+                        >
+                          <i className={socialIconSelector(platform.name)} />
+                        </NavLink>
+                      )
+                    )}
                     <ModuleSelectFilters
-                      type={filters[1].type}
+                      type={'dateRange'}
                       moduleKey={moduleKey}
-                      selectKey={filters[1].selectKey}
-                      placeHolder={filters[1].placeHolder}
+                      selectKey={'QV-date'}
+                      placeHolder={'Date'}
                     />
                   </div>
                 </div>

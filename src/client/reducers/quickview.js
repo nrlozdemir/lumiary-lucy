@@ -18,20 +18,11 @@ export const actions = {
     type: types.GET_QUICKVIEW_ITEMS_REQUEST,
     payload
   }),
-  getQuickviewItemsSuccess: payload => ({
-    type: types.GET_QUICKVIEW_ITEMS_SUCCESS,
-    payload
-  }),
-  getQuickviewItemsFailure: error => ({
-    type: types.GET_QUICKVIEW_ITEMS_FAILURE,
-    error
-  })
 }
 
 export const initialState = fromJS({
   quickviewItems: [],
   selectedPlatform: {
-    id: null,
     platformsValues: []
   },
   error: false,
@@ -44,7 +35,6 @@ const quickviewReducer = (state = initialState, action) => {
       return state.set("loading", fromJS(true))
     case types.GET_QUICKVIEW_ITEMS_SUCCESS:
       return state
-        .setIn(["selectedPlatform", "platform"], fromJS(action.payload.platform))
         .setIn(
           ["selectedPlatform", "platformsValues"],
           fromJS(action.payload.platformsValues)
