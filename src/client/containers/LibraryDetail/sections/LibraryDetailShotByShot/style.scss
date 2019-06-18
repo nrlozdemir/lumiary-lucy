@@ -678,6 +678,8 @@
   left:0px;
   top:0px;
   background-color: #000;
+  display: flex;
+  transition: transform 500ms ease-in-out;
 }
 
 .shotSliderImage{

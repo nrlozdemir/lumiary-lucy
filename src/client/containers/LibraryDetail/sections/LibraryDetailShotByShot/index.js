@@ -25,10 +25,7 @@ class LibraryDetailShotByShot extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedImage: null,
-      selectedImageClassName: '',
-      sliderValue: null,
-      sliderImageSrc: null,
+      selectedImage: null
     }
 
     this.shotClick = this.shotClick.bind(this)
@@ -39,9 +36,7 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   onChangeSlider(e) {
-    this.setState({
-      sliderValue: 0,
-    })
+    
   }
 
   shotClick(i) {
@@ -56,37 +51,24 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   shotSliderClick(i) {
+    const ref = this.sliderThumbs.children[0].children[0].childNodes[0]
 
-    this.setState({
-      sliderImageSrc: 'https://picsum.photos/id/2/320/320'
-    }, () => {
+    for (let k = 0; k < ref.childNodes.length; k++) {
+      ref.childNodes[k].classList.remove(style.sliderImageActive)
+      ref.childNodes[k].classList.add(style.sliderImageCurrent)
+    }
+    ref.childNodes[i].classList.remove(style.sliderImageCurrent)
+    ref.childNodes[i].classList.add(style.sliderImageActive)
 
-      /*
-      const ref = this.slider2.children[0].children[0].childNodes[0]
+    //const { backgroundImage } = ref.childNodes[i].children[0].children[0].style
+    //const currentImage = backgroundImage.replace(/\(|\)|url|\"/gi, '')
 
-      for (let k = 0; k < ref.childNodes.length; k++) {
-        const ref = this.slider2.children[0].children[0].childNodes[0]
-
-        for (let k = 0; k < ref.childNodes.length; k++) {
-          ref.childNodes[k].classList.remove(style.sliderImageActive)
-          ref.childNodes[k].classList.add(style.sliderImageCurrent)
-        }
-        ref.childNodes[i].classList.remove(style.sliderImageCurrent)
-        ref.childNodes[i].classList.add(style.sliderImageActive)
-
-        this.setState({
-          selectedImage: i,
-          sliderImageSrc: 'https://picsum.photos/id/2/320/320'
-        })
-        return true
-      }
-      */
-    })
+    this.sliderImages.style.left = ((i) * 504) * -1
   }
 
   render() {
     const { shots, shotInfoData, radarChartData, peopleData } = this.props
-    const { selectedImage, sliderImageSrc } = this.state
+    const { selectedImage } = this.state
 
     const radarChartDataConfigured = radarChartData && {
       labels: [
@@ -138,9 +120,12 @@ class LibraryDetailShotByShot extends React.Component {
                       className="col-6-no-gutters bg-black"
                     >
                       <div className="mt-48 ml-48 mr-48">
-                        <div className={style.shotSliderWrapper}>
+                        <div 
+                          className={style.shotSliderWrapper} 
+                        >
                           <div
-                            className={style.shotSliderContainer}
+                            className={style.shotSliderContainer}  
+                            ref={(el) => (this.sliderImages = el)}
                             style={{
                               width: Object.values(shots).length * 504,
                             }}
@@ -149,20 +134,19 @@ class LibraryDetailShotByShot extends React.Component {
                               Object.values(shots).map(
                                 (el, i) => (
                                   <div className={style.shotSliderImage}>
-                                    <img src={sliderImageSrc} />
+                                    <img src={el.image} />
                                   </div>
                                 )
                               )}
                           </div>
                         </div>
-
                         <div
-                          ref={(el) => (this.slider2 = el)}
+                          ref={(el) => (this.sliderThumbs = el)}
                           className="mt-32 mb-24"
                         >
                           {shots && Object.values(shots).length > 0 && (
                             <SliderWithScrubber
-                              name="slider2"
+                              name="sliderThumbs"
                               clickEvent={this.shotSliderClick}
                               shots={Object.values(shots)}
                               shotMargin={4}
