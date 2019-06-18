@@ -29,27 +29,14 @@ class LibraryDetailShotByShot extends React.Component {
 
     this.shotClick = this.shotClick.bind(this)
     this.shotSliderClick = this.shotSliderClick.bind(this)
+    this.sliderAction = this.sliderAction.bind(this)
   }
 
   componentDidMount() {
   }
 
-  onChangeSlider(e) {
-    
-  }
-
-  shotClick(i) {
-
-    this.setState({
-      selectedImage: i,
-    }, () => {
-      this.props.getShotInfoRequest(i)
-      this.props.getRadarChartRequest(i)
-      this.props.getPeopleRequest(i)
-    })
-  }
-
-  shotSliderClick(i) {
+  sliderAction(i) {
+    console.log(i)
     const ref = this.sliderThumbs.children[0].children[0].childNodes[0]
 
     for (let k = 0; k < ref.childNodes.length; k++) {
@@ -63,6 +50,21 @@ class LibraryDetailShotByShot extends React.Component {
     //const currentImage = backgroundImage.replace(/\(|\)|url|\"/gi, '')
 
     this.sliderImages.style.left = ((i) * 504) * -1
+  }
+
+  shotClick(i) {
+    this.setState({
+      selectedImage: i,
+    }, () => {
+      this.props.getShotInfoRequest(i)
+      this.props.getRadarChartRequest(i)
+      this.props.getPeopleRequest(i)
+      this.sliderAction(i)
+    })
+  }
+
+  shotSliderClick(i) {
+    this.sliderAction(i)
   }
 
   render() {
