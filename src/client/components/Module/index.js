@@ -3,15 +3,12 @@ import { compose } from 'redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import {
-  actions,
-  makeSelectSelectFilters,
-  defaultFilters,
-} from 'Reducers/selectFilters'
+import { actions, makeSelectSelectFilters } from 'Reducers/selectFilters'
 import _ from 'lodash'
 import cx from 'classnames'
 import style from './style.scss'
 import HeaderModule from './header'
+import { selectFiltersToType } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 export class Module extends React.Component {
@@ -35,24 +32,8 @@ export class Module extends React.Component {
     ) {
       const selectFilterValues = selectFilters.values[moduleKey]
 
-      // reduce into { type: value } map which is easily read by azazzle
-      const valuesToType = Object.keys(selectFilterValues).reduce(
-        (values, key) => {
-          const filterValue = selectFilterValues[key]
-          const filterType = filterValue.type
-          values[filterType] = !!filterValue.value
-            ? !!filterValue.value.value && !!filterValue.value.value.startDate
-              ? [
-                  filterValue.value.value.startDate,
-                  filterValue.value.value.endDate,
-                ]
-              : filterValue.value.value
-            : defaultFilters[filterType]
-
-          return values
-        },
-        {}
-      )
+      const valuesToType = selectFiltersToType(selectFilterValues)
+      
       action(valuesToType, moduleKey)
     }
   }

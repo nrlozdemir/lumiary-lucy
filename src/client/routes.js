@@ -31,7 +31,7 @@ const routes = [
     component: 'LibraryDetail',
   },
   {
-    path: '/quickview/all-platforms',
+    path: '/quickview/facebook',
     exact: true,
     component: 'Quickview',
     navigation: {

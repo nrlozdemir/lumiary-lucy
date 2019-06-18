@@ -5,50 +5,82 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectQuickview } from 'Reducers/quickview'
-import { toSlug, socialIconSelector } from 'Utils/index'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
+import { toSlug, socialIconSelector, selectFiltersToType } from 'Utils'
 import classnames from 'classnames'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import SingleVideoCard from 'Components/SingleVideoCard'
 import ProgressBar from 'Components/ProgressBar'
 import { textEdit } from 'Utils/text'
+import ModuleSelectFilters from 'Components/ModuleSelectFilters'
+import { isEqual } from 'lodash'
 import style from './style.scss'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
+
+const filters = [
+  {
+    type: 'metric',
+    selectKey: 'QV-metric',
+    placeHolder: 'Engagement',
+  },
+  {
+    type: 'dateRange',
+    selectKey: 'QV-date',
+    placeHolder: 'Date',
+  },
+]
+
+const moduleKey = 'Quickview'
 
 export class Main extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      platforms: [
-        'all-platforms',
-        'facebook',
-        'instagram',
-        'twitter',
-        'youtube',
-      ],
+      platforms: ['facebook', 'instagram', 'twitter', 'youtube'],
     }
   }
 
   componentDidMount() {
-    if (typeof this.props.match.params.platform === 'undefined') {
-      this.props.getQuickviewItemsRequest('all-platforms')
+    const { match, getQuickviewItemsRequest } = this.props
+    if (typeof match.params.platform === 'undefined') {
+      getQuickviewItemsRequest('facebook')
     } else {
-      this.props.getQuickviewItemsRequest(this.props.match.params.platform)
+      getQuickviewItemsRequest(match.params.platform)
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { match: prevMatch } = prevProps
-    const { match, getQuickviewItemsRequest } = this.props
+    const { match: prevMatch, selectFilters: prevSelectFilters } = prevProps
+    const { match, getQuickviewItemsRequest, selectFilters } = this.props
 
     if (prevMatch.params.platform !== match.params.platform) {
       if (typeof match.params.platform === 'undefined') {
-        getQuickviewItemsRequest('all-platforms')
+        getQuickviewItemsRequest('facebook')
       } else {
         getQuickviewItemsRequest(match.params.platform)
       }
     }
+
+    if (
+      !!prevSelectFilters &&
+      !!selectFilters &&
+      !_.isEqual(
+        prevSelectFilters.values[moduleKey],
+        selectFilters.values[moduleKey]
+      )
+    ) {
+      const selectFilterValues = selectFilters.values[moduleKey]
+
+      const valuesToType = selectFiltersToType(selectFilterValues)
+
+      this.callBack(valuesToType)
+    }
+  }
+
+  callBack = (data) => {
+    console.log('quickview', data)
   }
 
   render() {
@@ -80,13 +112,24 @@ export class Main extends React.Component {
                         }}
                         to={`/quickview/${toSlug(platform)}`}
                       >
-                        {index === 0 ? (
-                          platform.replace('-', ' ')
-                        ) : (
-                          <i className={socialIconSelector(platform)} />
+                        <i className={socialIconSelector(platform)} />
+                        {index === 0 && (
+                          <ModuleSelectFilters
+                            key={`filter-${index}`}
+                            type={filters[index].type}
+                            moduleKey={moduleKey}
+                            selectKey={filters[index].selectKey}
+                            placeHolder={filters[index].placeHolder}
+                          />
                         )}
                       </NavLink>
                     ))}
+                    <ModuleSelectFilters
+                      type={filters[1].type}
+                      moduleKey={moduleKey}
+                      selectKey={filters[1].selectKey}
+                      placeHolder={filters[1].placeHolder}
+                    />
                   </div>
                 </div>
                 <div
@@ -146,9 +189,7 @@ export class Main extends React.Component {
                                       options={{ size: 'auto' }}
                                     />
                                   </div>
-                                  <div
-                                    className={style.percentageWrapper}
-                                  >
+                                  <div className={style.percentageWrapper}>
                                     <PercentageBarGraph
                                       key={Math.random()}
                                       percentage={cvScore}
@@ -182,7 +223,9 @@ export class Main extends React.Component {
                                           style={{
                                             background: colors.labelBackground,
                                             color: colors.labelColor,
-                                            boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                                            boxShadow: `0 1px 2px 0 ${
+                                              colors.labelShadow
+                                            }`,
                                           }}
                                         >
                                           {item.title}
@@ -237,6 +280,7 @@ Main.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
+  selectFilters: makeSelectSelectFilters(),
   quickview: makeSelectQuickview(),
 })
 
