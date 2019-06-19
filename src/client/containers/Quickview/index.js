@@ -185,16 +185,18 @@ export class Main extends React.PureComponent {
                                   : colors.moduleBackground,
                             }}
                           >
+                            {/* HEADER */}
                             <div className={style.card}>
                               <h1>
                                 {i == 0
-                                  ? 'Best Performing Videos'
-                                  : 'Underperforming Videos'}
+                                  ? 'Underperforming Videos'
+                                  : 'Best Performing Videos'}
                                 <i
                                   className="icon icon-Information"
                                   style={{ color: colors.textColor }}
                                 />
                               </h1>
+                              {/* VIDEO */}
                               <div className={style.assetContainer}>
                                 <AssetLayer
                                   leftSocialIcon={socialIcon}
@@ -224,75 +226,104 @@ export class Main extends React.PureComponent {
                                   </div>
                                 </AssetLayer>
                               </div>
+                              {/* PROPERTY VALUES */}
                               <div className={style.items}>
-                                {el.infos.map((item, index) => (
-                                  <div
-                                    key={index}
-                                    className={style.itemWrapper}
-                                    style={{
-                                      borderColor:
-                                        i === 0
-                                          ? colors.chartStadiumBarBorder
-                                          : colors.bodyBackground,
-                                    }}
-                                  >
-                                    <div className={style.infoItem}>
-                                      <p
-                                        className={cx(
-                                          'font-secondary-second',
-                                          style.sectionBadge
+                                {el.infos.map((item, index) => {
+                                  const hasDifference =
+                                    ['duration', 'pacing'].indexOf(
+                                      item.title.toLowerCase()
+                                    ) !== -1
+
+                                  const difference = hasDifference && 50
+
+                                  return (
+                                    <div
+                                      key={`info_${i}-${index}`}
+                                      className={style.itemWrapper}
+                                      style={{
+                                        borderColor:
+                                          i === 0
+                                            ? colors.chartStadiumBarBorder
+                                            : colors.bodyBackground,
+                                      }}
+                                    >
+                                      <div className={style.infoItem}>
+                                        {difference && i === 1 && (
+                                          <div
+                                            className={
+                                              style.infoItem_diffBubble
+                                            }
+                                            style={{
+                                              borderColor:
+                                                colors.tabActiveBackground,
+                                              background: colors.bodyBackground,
+                                              color: colors.labelColor
+                                            }}
+                                          >
+                                            <span>{difference}%</span>
+                                            <span>Difference</span>
+                                          </div>
                                         )}
-                                      >
-                                        <span
-                                          style={{
-                                            background:
-                                              i === 0
-                                                ? colors.labelBackground
-                                                : colors.bodyBackground,
-                                            color: colors.labelColor,
-                                            boxShadow: `0 1px 2px 0 ${
-                                              colors.labelShadow
-                                            }`,
-                                          }}
+                                        <p
+                                          className={cx(
+                                            'font-secondary-second',
+                                            style.sectionBadge
+                                          )}
                                         >
-                                          {item.title}
-                                        </span>
-                                      </p>
-                                      <div
-                                        className={style.itemValue}
-                                        data-id={i}
-                                      >
-                                        {item.value}
+                                          <span
+                                            style={{
+                                              background:
+                                                i === 0
+                                                  ? colors.labelBackground
+                                                  : colors.bodyBackground,
+                                              color: colors.labelColor,
+                                              boxShadow: `0 1px 2px 0 ${
+                                                colors.labelShadow
+                                              }`,
+                                            }}
+                                          >
+                                            {item.title}
+                                          </span>
+                                        </p>
+                                        <div
+                                          className={style.itemValue}
+                                          data-id={i}
+                                        >
+                                          {item.value}
+                                        </div>
+                                        <div className={style.progressText}>
+                                          <span className={style.rightTitle}>
+                                            {item.percentage}%
+                                          </span>
+                                        </div>
+                                        <ProgressBar
+                                          width={item.percentage}
+                                          customBarClass={cx(
+                                            style.progressBar,
+                                            {
+                                              [style[
+                                                `progressBar--${
+                                                  colors.themeType === 'dark'
+                                                    ? 'dark'
+                                                    : 'light'
+                                                }`
+                                              ]]: i === 1,
+                                            }
+                                          )}
+                                          customPercentageClass={cx(
+                                            style.percentageBlue,
+                                            {
+                                              [style.percentagePink]: i == 1,
+                                            }
+                                          )}
+                                        />
+                                        <p className={style.infoText}>
+                                          {textEdit(item.text, item)}
+                                        </p>
                                       </div>
-                                      <div className={style.progressText}>
-                                        <span className={style.rightTitle}>
-                                          {item.percentage}%
-                                        </span>
-                                      </div>
-                                      <ProgressBar
-                                        width={item.percentage}
-                                        customBarClass={cx(style.progressBar, {
-                                          [style[
-                                            `progressBar--${
-                                              colors.themeType === 'dark'
-                                                ? 'dark'
-                                                : 'light'
-                                            }`
-                                          ]]: i === 1,
-                                        })}
-                                        customPercentageClass={cx(
-                                          style.percentageBlue,
-                                          {
-                                            [style.percentagePink]: i == 1,
-                                          }
-                                        )}
-                                      />
-                                      <p className={style.infoText}>
-                                        {textEdit(item.text, item)}
-                                      </p>
                                     </div>
-                                  </div>
-                                ))}
+                                  )
+                                })}
                               </div>
                             </div>
                           </div>
