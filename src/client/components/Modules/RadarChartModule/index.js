@@ -16,6 +16,11 @@ const RadarChartModule = ({
   leftTitle,
   rightTitle,
 }) => {
+  if(data && data[0] && data[0].datas){
+    console.log("datas 0")
+    console.log(data[0].datas)
+    console.log("------")
+  }
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -57,7 +62,7 @@ const RadarChartModule = ({
                   Dominant Colors
                 </p>
                 <div
-                  className={style.label}
+                   className={style.label}
                   style={{
                     background: colors.labelBackground,
                     color: colors.labelColor,

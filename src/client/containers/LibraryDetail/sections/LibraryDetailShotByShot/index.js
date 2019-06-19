@@ -11,7 +11,8 @@ import {
 } from 'Reducers/libraryDetail'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import ProgressBar from 'Components/ProgressBar'
-import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
+//import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
+import RadarChart from 'Components/Charts/RadarChart'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import Scrubber from 'Components/Sliders/Scrubber'
 import XCircle from 'Components/Icons/XCircle'
@@ -33,6 +34,7 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   componentDidMount() {
+    
   }
 
   sliderAction(i) {
@@ -98,6 +100,110 @@ class LibraryDetailShotByShot extends React.Component {
       ],
     }
     const dataIsEmpty = shots && Object.values(shots).length > 0 ? false : true
+
+    const datastore = {
+      "datasets": [
+        {
+          "data": [
+            88.8,
+            12,
+            14,
+            98,
+            16,
+            14,
+            86,
+            12,
+            24,
+            18,
+            18
+          ],
+          "​​borderColor": "#ccc",
+          "​​​​​pointBackgroundColor": "#505050", 
+          "pointBorderColor": "#505050", 
+          "label": "Color",
+          "​​backgroundColor": "rgba(172, 176, 190, 0.4)",
+        }
+      ],
+      "labels": [
+        {
+          "count": 88.8,
+          "name": "Red",
+          "color": "#cc2226",
+          "selected": false
+        },
+        {
+          "count": 12,
+          "name": "Red-Orange",
+          "color": "#dd501d",
+          "selected": false
+        },
+        {
+          "count": 14,
+          "name": "Orange",
+          "color": "#eb7919",
+          "selected": false
+        },
+        {
+          "count": 98,
+          "name": "Yellow-Orange",
+          "color": "#f8b90b",
+          "selected": false
+        },
+        {
+          "count": 16,
+          "name": "Yellow",
+          "color": "#fff20d",
+          "selected": false
+        },
+        {
+          "count": 14,
+          "name": "Yellow-Green",
+          "color": "#aac923",
+          "selected": false
+        },
+        {
+          "count": 86,
+          "name": "Green",
+          "color": "#13862b",
+          "selected": false
+        },
+        {
+          "count": 12,
+          "name": "Blue-Green",
+          "color": "#229a78",
+          "selected": false
+        },
+        {
+          "count": 24,
+          "name": "Blue-Purple",
+          "color": "#79609b",
+          "selected": false
+        },
+        {
+          "count": 18,
+          "name": "Purple",
+          "color": "#923683",
+          "selected": false
+        },
+        {
+          "count": 18,
+          "name": "Red-Purple",
+          "color": "#b83057",
+          "selected": false
+        }
+      ]
+    }
+
+    const data = {
+      labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
+      datasets: [{
+          data: [20, 10, 4, 2]
+      }]
+    }
+    
+    console.log("----")
+
+    console.log(datastore)
 
     return (
       <ThemeContext.Consumer>
@@ -368,9 +474,9 @@ class LibraryDetailShotByShot extends React.Component {
                         </TabPanel>
                         <TabPanel>
                           <div className={style.radarChartContainer}>
-                            {radarChartDataConfigured && (
+                            {/*radarChartDataConfigured && (
                               <RadarChart data={radarChartDataConfigured} />
-                            )}
+                            )*/}
                           </div>
                         </TabPanel>
                       </Tabs>
@@ -379,6 +485,11 @@ class LibraryDetailShotByShot extends React.Component {
                 </React.Fragment>
               ) : (
                 <React.Fragment>
+                  <div className="col-12-no-gutters bg-white">
+
+                    <RadarChart data={datastore} key={Math.random()} />
+
+                  </div>
                   <h2 className={style.sliderHeader}>Shot by Shot</h2>
                   <div className={style.sliderContainer}>
                     <div
