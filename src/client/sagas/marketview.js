@@ -1,3 +1,4 @@
+import { delay } from 'redux-saga'
 import { takeLatest, call, put, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import _ from 'lodash'
@@ -180,63 +181,59 @@ function* getPlatformTopVideosMarketview({
   }
 }
 
-function* getSimilarProperties(props) {
+function* getSimilarProperties({ data: { dateRange } }) {
+  console.log('==== data', dateRange)
   try {
     const { brand } = yield select(selectAuthProfile)
-    const {
-      data: {
-        date: { dateRange },
-        themeColors,
-      },
-    } = props
-    const expectedValues = [
-      { key: 'color', title: 'Dominant Color' },
-      { key: 'pacing', title: 'Pacing' },
-      { key: 'duration', title: 'Duration' },
-    ]
-    const parameters = {
-      dateRange,
-      metric: 'views',
-      platform: 'all',
-      dateBucket: 'none',
-      display: 'percentage',
-      brands: [brand.uuid],
-      url: '/report',
+
+    const competitors =
+      !!brand.competitors &&
+      !!brand.competitors.length &&
+      brand.competitors.map((c) => c.uuid)
+
+    const options = {
+      competitors,
     }
 
-    const payloads = yield expectedValues.map((item) =>
-      call(getDataFromApi, { ...parameters, property: [item.key] })
-    )
+    const url = `/brand/${
+      brand.uuid
+    }/properties?metric=shares&daterange=${dateRange}`
+    //${!!competitors ? '&allcompetitors=true' : ''}`
 
-    const createCustomBackground = (data) => {
-      return Object.values(data).map((item, idx) => {
-        if (Object.values(data).includes(100)) {
-          return '#2FD7C4'
-        }
-        return idx === getMaximumValueIndexFromArray(data)
-          ? '#2FD7C4'
-          : themeColors.textColor
-      })
+    const payload = yield call(getDataFromApi, options, url, 'GET')
+    console.log('payload', payload)
+
+    let parsedNewPayload, highestBuckets
+    if (!!payload && !!payload.propertyBucketsRanked) {
+      highestBuckets = _.slice(
+        _.orderBy(
+          payload.propertyBucketsRanked,
+          (item) => {
+            return item.numberOfMetric
+          },
+          ['desc']
+        ),
+        0,
+        3
+      )
     }
 
-    const val = expectedValues.map((payload, idx) => ({
-      ...payload,
+    const val = highestBuckets.map((value, idx) => ({
       doughnutChartValues: convertDataIntoDatasets(
-        payloads[idx],
-        {
-          ...parameters,
-          property: [payload.key],
-        },
+        payload,
+        { property: [value.highestProperty] },
         {
           singleDataset: true,
-          backgroundColor: createCustomBackground(
-            payloads[idx].data[Object.keys(payloads[idx].data)[0]][payload.key]
-          ),
+          noBrandKeys: true,
+          customValueKeyGetAll: true,
         }
       ),
     }))
+
+    yield delay(2000)
     yield put(actions.getSimilarPropertiesSuccess(val))
   } catch (error) {
+    console.log('error == ', error)
     yield put(actions.getSimilarPropertiesFailure(error))
   }
 }

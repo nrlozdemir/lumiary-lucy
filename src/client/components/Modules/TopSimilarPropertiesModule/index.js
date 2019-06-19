@@ -5,38 +5,56 @@ import DoughnutCard from 'Components/DoughnutCard'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import classnames from 'classnames'
 import style from './style.scss'
-import { isDataSetEmpty } from 'Utils/'
+import { isDataSetEmpty } from 'Utils'
+import MultipleNoDataModule from 'Components/MultipleNoDataModule'
+import RouterLoading from 'Components/RouterLoading'
 const TopSimilarProperties = (props) => {
-  const { data, title, filters, action, moduleKey } = props
-  const isEmpty =
-    data &&
-    data
-      .map((value) => isDataSetEmpty(value.doughnutChartValues))
-      .every((dataset) => dataset === true)
+  const { data, title, filters, action, moduleKey, isLoading } = props
   return (
     <Module
       title={title}
       filters={filters}
       moduleKey={moduleKey}
       action={action}
-      isEmpty={isEmpty}
     >
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
-          <div className={classnames('col-12-no-gutters', style.container)}>
-            {data &&
-              data.map((sectionItem, i) => (
-                <div className="col-4-no-gutters" key={`TopSimilarProperties_${i}`}>
-                  <div style={{ borderColor: colors.moduleBorder }}>
-                    <DoughnutCard
-                      data={sectionItem.doughnutChartValues}
-                      key={i}
-                      index={i}
-                      colors={colors}
-                    />
-                  </div>
-                </div>
-              ))}
+          <div className={style.container}>
+            {isLoading ? (
+              <RouterLoading />
+            ) : (
+              <MultipleNoDataModule>
+                {data &&
+                  data.map((sectionItem, i) => {
+                    const moduleContainer = classnames({
+                      [style.similarContainer]: i !== 0,
+                    })
+                    const isEmpty =
+                      data &&
+                      data
+                        .map((value) =>
+                          isDataSetEmpty(value.doughnutChartValues)
+                        )
+                        .every((dataset) => dataset === true)
+                    return (
+                      <div
+                        className={moduleContainer}
+                        style={{ borderColor: colors.moduleBorder }}
+                        key={`TopSimilarProperties_${i}`}
+                        datasetsIsEmpty={isEmpty}
+                      >
+                        <DoughnutCard
+                          data={sectionItem.doughnutChartValues}
+                          key={i}
+                          index={i}
+                          colors={colors}
+                          isEmpty={isEmpty}
+                        />
+                      </div>
+                    )
+                  })}
+              </MultipleNoDataModule>
+            )}
           </div>
         )}
       </ThemeContext.Consumer>
