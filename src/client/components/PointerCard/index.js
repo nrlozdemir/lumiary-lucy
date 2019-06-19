@@ -24,7 +24,8 @@ class PointerCard extends React.Component {
 
   render() {
     const { data, colors } = this.props
-    const { pointerData } = this.state
+		const { pointerData } = this.state
+		console.log(this.props);
     return (
       <div className={style.radialChart}>
         {style.topTitle && <h1 className={style.topTitle}>{data.topTitle}</h1>}
@@ -235,9 +236,9 @@ class PointerCard extends React.Component {
         >
           <p className={style.infoText}>
             This video performs{' '}
-            <span className={style.textBold}>{data.percent}%</span> better than
+            <span className={style.textBold}>{Math.abs(data.percent)}%</span> {data.percent > 0 ? 'better' : 'worse'} than
             the average video at{' '}
-            <span className={style.textBold}>{data.fps}fps</span>
+            <span className={style.textBold}>{data.fps}</span>
           </p>
         </div>
       </div>

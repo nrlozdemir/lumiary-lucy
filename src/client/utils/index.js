@@ -822,5 +822,6 @@ export {
   parseAverage,
   convertVideoEngagementData,
   floatCvScore,
-  getMinMaxFromDatasets,
+	getMinMaxFromDatasets,
+	getLabelWithSuffix
 }

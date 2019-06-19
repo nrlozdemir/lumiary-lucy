@@ -7,12 +7,13 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import {
   makeSelectInfoShowSection,
-  makeSelectInfoIndustryData,
+  makeSelectInfoModalData,
 } from 'Reducers/libraryDetail'
 
 class LibraryData extends React.Component {
   render() {
-		console.log(this.props);
+    const { modalData } = this.props
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -21,41 +22,30 @@ class LibraryData extends React.Component {
             style={{ borderColor: colors.moduleBorder }}
           >
             <h1 className={style.panelHeader}>Library Data</h1>
-            <div className={style.doughnutChartContainer}>
-              <DoughnutChart
-                width={180}
-                height={180}
-                displayDataLabels={false}
-                cutoutPercentage={50}
-                data={{
-                  labels: ['Red', 'Green', 'Blue', 'Yellow'],
-                  datasets: [
-                    {
-                      data: [9.87, 30.04, 18.83, 41.26],
-                      borderColor: '#373F5B',
-                      backgroundColor: [
-                        '#ffffff',
-                        '#ffffff',
-                        '#ffffff',
-                        '#2FD7C4',
-                      ],
-                      hoverBackgroundColor: [
-                        '#ffffff',
-                        '#ffffff',
-                        '#ffffff',
-                        '#2FD7C4',
-                      ],
-                    },
-                  ],
-                }}
-              />
-              <p className="pt-32">
-                <span className={style.duskRound} />
-                <span className={style.textBold}>52%</span>
-                of your library is shot in
-                <span className={style.textBold}>24fps</span>
-              </p>
-            </div>
+            {modalData && modalData.libraryChartData ? (
+              <div className={style.doughnutChartContainer}>
+                <DoughnutChart
+                  width={180}
+                  height={180}
+                  displayDataLabels={false}
+                  cutoutPercentage={50}
+                  data={modalData.libraryChartData}
+                />
+                <p className="pt-32">
+                  <span className={style.duskRound} />
+                  <span className={style.textBold}>
+                    {modalData.libraryMaxValue}%{' '}
+                  </span>
+                  of your library is shot in
+                  <span className={style.textBold}>
+                    {' '}
+                    {modalData.libraryMaxKey}
+                  </span>
+                </p>
+              </div>
+            ) : (
+              <div className={style.emptyData}>No Data Available</div>
+            )}
           </div>
         )}
       </ThemeContext.Consumer>
@@ -65,7 +55,7 @@ class LibraryData extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   sectionData: makeSelectInfoShowSection(),
-  industryData: makeSelectInfoIndustryData(),
+  modalData: makeSelectInfoModalData(),
 })
 
 function mapDispatchToProps(dispatch) {
@@ -78,4 +68,3 @@ const withConnect = connect(
 )
 
 export default compose(withConnect)(LibraryData)
-

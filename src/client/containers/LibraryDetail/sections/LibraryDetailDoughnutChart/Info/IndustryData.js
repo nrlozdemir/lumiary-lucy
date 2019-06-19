@@ -1,10 +1,16 @@
 import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import style from '../style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
+import { makeSelectInfoModalData } from 'Reducers/libraryDetail'
 
 class IndustryData extends React.Component {
   render() {
+    const { modalData } = this.props
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -13,41 +19,30 @@ class IndustryData extends React.Component {
             style={{ borderColor: colors.moduleBorder }}
           >
             <h1 className={style.panelHeader}>Industry Data</h1>
-            <div className={style.doughnutChartContainer}>
-              <DoughnutChart
-                width={180}
-                height={180}
-                displayDataLabels={false}
-                cutoutPercentage={50}
-                data={{
-                  labels: ['Red', 'Green', 'Blue', 'Yellow'],
-                  datasets: [
-                    {
-                      data: [9.87, 30.04, 18.83, 41.26],
-                      borderColor: '#373F5B',
-                      backgroundColor: [
-                        '#ffffff',
-                        '#ffffff',
-                        '#ffffff',
-                        '#2FD7C4',
-                      ],
-                      hoverBackgroundColor: [
-                        '#ffffff',
-                        '#ffffff',
-                        '#ffffff',
-                        '#2FD7C4',
-                      ],
-                    },
-                  ],
-                }}
-              />
-              <p className="w-75 text-center pt-32">
-                <span className={style.purpleRound} />
-                <span className={style.textBold}>36%</span>
-                of your library is shot in
-                <span className={style.textBold}>45fps</span>
-              </p>
-            </div>
+            {modalData && modalData.industryChartData ? (
+              <div className={style.doughnutChartContainer}>
+                <DoughnutChart
+                  width={180}
+                  height={180}
+                  displayDataLabels={false}
+                  cutoutPercentage={50}
+                  data={modalData.industryChartData}
+                />
+                <p className="w-75 text-center pt-32">
+                  <span className={style.purpleRound} />
+                  <span className={style.textBold}>
+                    {modalData.industryMaxValue}%{' '}
+                  </span>
+                  of your library is shot in
+                  <span className={style.textBold}>
+                    {' '}
+                    {modalData.industryMaxKey}
+                  </span>
+                </p>
+              </div>
+            ) : (
+              <div className={style.emptyData}>No Data Available</div>
+            )}
           </div>
         )}
       </ThemeContext.Consumer>
@@ -55,4 +50,17 @@ class IndustryData extends React.Component {
   }
 }
 
-export default IndustryData
+const mapStateToProps = createStructuredSelector({
+  modalData: makeSelectInfoModalData(),
+})
+
+function mapDispatchToProps(dispatch) {
+  return {}
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(IndustryData)

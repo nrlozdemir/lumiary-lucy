@@ -1,19 +1,27 @@
 import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import style from '../style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import LineChart from 'Components/Charts/LineChart'
+import {
+  makeSelectInfoShowSection,
+  makeSelectInfoModalData,
+} from 'Reducers/libraryDetail'
 
 class LineChartSection extends React.Component {
   render() {
-		const { selectedCardData } = this.props;
+		const { modalData, sectionData } = this.props;
+
+		console.log(sectionData);
 
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <div className={style.lineChartWrapper}>
             <div className="mt-48 mb-48">
-              {/* {selectedCardData && ( */}
-              {true && (
+              {modalData && sectionData && (
                 <LineChart
                   width={1090}
                   height={292}
@@ -21,10 +29,10 @@ class LineChartSection extends React.Component {
                     labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
                     datasets: [
                       {
-                        data: [41, 43, 34, 75, 32, 88, 34],
+                        data: modalData.libraryDayAverages,
                       },
                       {
-                        data: [94, 15, 29, 64, 33, 5, 17],
+                        data: modalData.industryDayAverages,
                       },
                     ],
                   }}
@@ -43,11 +51,11 @@ class LineChartSection extends React.Component {
                           if (datasetIndex === 1) {
                             return `${
                               data.datasets[datasetIndex].data[index]
-                            }% of industry is shot in 24fps`
+                            }% of industry is shot in ${sectionData.label}`
                           } else {
                             return `${
                               data.datasets[datasetIndex].data[index]
-                            }% of frames is shot in 24fps`
+                            }% of frames is shot in ${sectionData.label}`
                           }
                         },
                         label: function(tooltipItem, data) {
@@ -66,4 +74,18 @@ class LineChartSection extends React.Component {
   }
 }
 
-export default LineChartSection
+const mapStateToProps = createStructuredSelector({
+  sectionData: makeSelectInfoShowSection(),
+  modalData: makeSelectInfoModalData(),
+})
+
+function mapDispatchToProps(dispatch) {
+  return {}
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(LineChartSection)

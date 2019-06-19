@@ -1,13 +1,23 @@
 import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
 import style from '../style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import PointerCard from 'Components/PointerCard'
+import {
+  makeSelectInfoShowSection,
+  makeSelectInfoModalData,
+} from 'Reducers/libraryDetail'
 
 class BasedOnShares extends React.Component {
   render() {
+		const { modalData, sectionData } = this.props;
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
+					modalData && sectionData &&
           <div
             className={style.panelChart}
             style={{ borderColor: colors.moduleBorder }}
@@ -15,11 +25,11 @@ class BasedOnShares extends React.Component {
             <PointerCard
               data={{
                 topTitle: 'Based on Shares',
-                pointerData: 140,
+                pointerData: modalData.videoPropertyAverage,
                 bottomText: 'of your library is shot in',
-                avg: 103,
-                percent: 16,
-                fps: 24,
+                avg: modalData.libraryPropertyAverage,
+                percent: modalData.propertyLibraryPercentChange,
+                fps: sectionData.label,
               }}
               colors={colors}
             />
@@ -30,4 +40,18 @@ class BasedOnShares extends React.Component {
   }
 }
 
-export default BasedOnShares
+const mapStateToProps = createStructuredSelector({
+  sectionData: makeSelectInfoShowSection(),
+  modalData: makeSelectInfoModalData(),
+})
+
+function mapDispatchToProps(dispatch) {
+  return {}
+}
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(BasedOnShares)

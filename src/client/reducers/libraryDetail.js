@@ -175,7 +175,7 @@ export const initialState = fromJS({
 			date: null,
 			metric: null
 		},
-		industryData: null
+		modalData: null
 	},
   selectedVideoAverage: [],
   radarChartData: {},
@@ -260,10 +260,10 @@ const libraryDetailReducer = (state = initialState, action) => {
 			return state.setIn(['infoData', 'filters', action.payload.name], fromJS(action.payload.value))
 
 		case types.DOUGHNUT_INFO_SUCCESS:
-			return state.setIn(['infoData', 'industryData'], fromJS(action.payload))
+			return state.setIn(['infoData', 'modalData'], fromJS(action.payload))
 
 		case types.DOUGHNUT_INFO_FAILURE:
-			return state.setIn(['infoData', 'industryData'], fromJS(null))
+			return state.setIn(['infoData', 'modalData'], fromJS(null))
 
     case types.GET_SHOT_INFO_REQUEST:
       return state.set('loading', fromJS(true))
@@ -366,10 +366,10 @@ export function makeSelectInfoShowSection() {
 	)
 }
 
-export function makeSelectInfoIndustryData() {
+export function makeSelectInfoModalData() {
 	return createSelector(
 		selectInfoData,
-		substate => substate.get('industryData') ? substate.get('industryData').toJS() : null
+		substate => substate.get('modalData') ? substate.get('modalData').toJS() : null
 	)
 }
 
