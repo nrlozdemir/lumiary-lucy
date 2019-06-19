@@ -7,7 +7,7 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectQuickview } from 'Reducers/quickview'
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 import { toSlug, socialIconSelector, selectFiltersToType } from 'Utils'
-import classnames from 'classnames'
+import cx from 'classnames'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import SingleVideoCard from 'Components/SingleVideoCard'
@@ -89,13 +89,28 @@ export class Main extends React.PureComponent {
               <div className="grid-collapse mt-50">
                 <div className={style.navigation}>
                   <div className={style.navItem}>
-                    {platforms.map((platform, idx) =>
-                      !!platform.filter &&
-                      selectedPlatform === platform.name ? (
-                        <div key={idx}>
-                          <i className={socialIconSelector(platform.name)} />
+                    {platforms.map((platform, idx) => {
+                      const isSelected = selectedPlatform === platform.name
+                      return !!platform.filter && isSelected ? (
+                        <div
+                          key={idx}
+                          className={style.navItem_btn}
+                          style={{
+                            background: isSelected
+                              ? colors.tabActiveBackground
+                              : colors.tabBackground,
+                            color: colors.textColor,
+                            borderColor: colors.tabBorder,
+                          }}
+                        >
+                          <i
+                            className={cx(
+                              socialIconSelector(platform.name),
+                              style.activeIcon
+                            )}
+                          />
                           <ModuleSelectFilters
-                            key={`filter-${idx}`}
+                            isActive={isSelected}
                             type={platform.filter.type}
                             moduleKey={moduleKey}
                             selectKey={platform.filter.selectKey}
@@ -105,6 +120,7 @@ export class Main extends React.PureComponent {
                       ) : (
                         <NavLink
                           key={idx}
+                          className={style.navItem_btn}
                           activeStyle={{
                             background: colors.tabActiveBackground,
                           }}
@@ -118,13 +134,22 @@ export class Main extends React.PureComponent {
                           <i className={socialIconSelector(platform.name)} />
                         </NavLink>
                       )
-                    )}
-                    <ModuleSelectFilters
-                      type={'dateRange'}
-                      moduleKey={moduleKey}
-                      selectKey={'QV-date'}
-                      placeHolder={'Date'}
-                    />
+                    })}
+                    <div
+                      className={style.navItem_btn}
+                      style={{
+                        background: colors.tabBackground,
+                        color: colors.textColor,
+                        borderColor: colors.tabBorder,
+                      }}
+                    >
+                      <ModuleSelectFilters
+                        type={'dateRange'}
+                        moduleKey={moduleKey}
+                        selectKey={'QV-date'}
+                        placeHolder={'Date'}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
@@ -135,7 +160,10 @@ export class Main extends React.PureComponent {
                     boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
                   }}
                 >
-                  <div className={style.content}>
+                  <div
+                    className={style.content}
+                    style={{ background: colors.bodyBackground }}
+                  >
                     {platformsValues &&
                       platformsValues.map((el, i) => {
                         const {
@@ -149,14 +177,16 @@ export class Main extends React.PureComponent {
                         return (
                           <div
                             key={i}
-                            className={classnames('col-6', style.cardBlock)}
+                            className={style.cardBlock}
+                            style={{
+                              background:
+                                i === 1
+                                  ? colors.tabActiveBackground
+                                  : colors.moduleBackground,
+                            }}
                           >
                             <div className={style.card}>
-                              <h1
-                                className={classnames({
-                                  [style.rightVideoTitle]: i === 1,
-                                })}
-                              >
+                              <h1>
                                 {i == 0
                                   ? 'Best Performing Videos'
                                   : 'Underperforming Videos'}
@@ -165,16 +195,12 @@ export class Main extends React.PureComponent {
                                   style={{ color: colors.textColor }}
                                 />
                               </h1>
-                              <div
-                                className={classnames(style.assetContainer, {
-                                  [style.right]: i === 1,
-                                })}
-                              >
+                              <div className={style.assetContainer}>
                                 <AssetLayer
                                   leftSocialIcon={socialIcon}
                                   title={title}
                                   rightValue={cvScore}
-                                  width={510}
+                                  width={'100%'}
                                   height={286}
                                 >
                                   <div className={style.video}>
@@ -204,19 +230,25 @@ export class Main extends React.PureComponent {
                                     key={index}
                                     className={style.itemWrapper}
                                     style={{
-                                      borderColor: colors.chartStadiumBarBorder,
+                                      borderColor:
+                                        i === 0
+                                          ? colors.chartStadiumBarBorder
+                                          : colors.bodyBackground,
                                     }}
                                   >
                                     <div className={style.infoItem}>
                                       <p
-                                        className={classnames(
+                                        className={cx(
                                           'font-secondary-second',
                                           style.sectionBadge
                                         )}
                                       >
                                         <span
                                           style={{
-                                            background: colors.labelBackground,
+                                            background:
+                                              i === 0
+                                                ? colors.labelBackground
+                                                : colors.bodyBackground,
                                             color: colors.labelColor,
                                             boxShadow: `0 1px 2px 0 ${
                                               colors.labelShadow
@@ -239,8 +271,16 @@ export class Main extends React.PureComponent {
                                       </div>
                                       <ProgressBar
                                         width={item.percentage}
-                                        customBarClass={style.progressBar}
-                                        customPercentageClass={classnames(
+                                        customBarClass={cx(style.progressBar, {
+                                          [style[
+                                            `progressBar--${
+                                              colors.themeType === 'dark'
+                                                ? 'dark'
+                                                : 'light'
+                                            }`
+                                          ]]: i === 1,
+                                        })}
+                                        customPercentageClass={cx(
                                           style.percentageBlue,
                                           {
                                             [style.percentagePink]: i == 1,

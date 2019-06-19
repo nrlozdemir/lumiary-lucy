@@ -1,5 +1,6 @@
 const dark = {
   // global values
+  themeType: 'dark',
   bodyBackground: '#21243B',
   moduleBackground: '#373f5b',
   moduleShadow: 'rgba(0, 0, 0, 0.5)',
@@ -146,6 +147,7 @@ const dark = {
 
 const light = {
   // global values
+  themeType: 'light',
   bodyBackground: '#e8ecf0',
   moduleBackground: '#f3f6f9',
   moduleShadow: '#bebebe',
