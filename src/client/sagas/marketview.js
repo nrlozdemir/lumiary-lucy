@@ -4,6 +4,7 @@ import axios from 'axios'
 import _ from 'lodash'
 import { types, actions } from 'Reducers/marketview'
 import { selectAuthProfile } from 'Reducers/auth'
+import querystring from 'querystring'
 
 import marketviewCompetitorVideosData from 'Api/mocks/marketviewCompetitorVideos.json'
 import marketviewCompetitorTopVideosData from 'Api/mocks/marketviewCompetitorTopVideosMock.json'
@@ -31,8 +32,28 @@ import {
 import { dayOfWeek } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
-function getCompetitorVideosApi({ payload }) {
-  return axios('/').then((res) => marketviewCompetitorVideosData)
+function* getCompetitorVideosApi({ payload }) {
+  console.log(payload)
+  console.log(marketviewCompetitorVideosData)
+  const requestObject = {
+    ...payload
+  }
+
+  if(payload.competitors) {
+    requestObject.competitors = JSON.stringify(payload.competitors)
+  }
+
+  let response = yield call(
+    getDataFromApi,
+    {},
+    `/brand/${payload.brandUuid}/topvideos?${querystring.stringify(requestObject)}`,
+    'GET'
+  )
+
+  console.log(response)
+
+  // return axios('/').then((res) => marketviewCompetitorVideosData)
+  return response
 }
 
 function getBubbleChartApi() {
