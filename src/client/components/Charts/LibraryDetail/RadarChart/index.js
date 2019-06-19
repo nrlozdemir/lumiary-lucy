@@ -1,5 +1,5 @@
 import React from 'react'
-import { Radar } from 'react-chartjs-2'
+import { Radar, Chart } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
 import { metricSuffix } from 'Utils'
 
@@ -9,8 +9,7 @@ const plugins = [
       let ctx = chart.chart.ctx
       let chartArea = chart.chartArea
       chart.config.data.datasets.forEach(function(dataset, i) {
-        const meta = chart.controller.getDatasetMeta(i)
-        meta.data.forEach(function(bar, index) {
+        chart.controller.getDatasetMeta(i).data.forEach(function(bar, index) {
           ctx.beginPath()
           const color = chart.config.data.labels[index].color
           const selected = chart.config.data.labels[index].selected
@@ -32,54 +31,43 @@ const plugins = [
           ctx.fillStyle = color
           ctx.fill()
           
-          /*
-            clientX: 306
-​            clientY: 489
-
-            layerX: 266
-            layerY: 428
-            ​
-            offsetX: 0
-            offsetY: 0
-            ​
-            pageX: 306
-            pageY: 2340
-            ​
-            screenX: 306
-            screenY: 666
-
-            x: 306
-            y: 489
-
-
-            console.log("i: " + index + 
-            ",clientX: " + e.clientX + ", clientY: " + e.clientY + 
-            ",layerX: " + e.layerX + ", layerY: " + e.layerY + 
-            ",offsetX: " + e.offsetX + ", offsetY: " + e.offsetY + 
-            ",pageX: " + e.pageX + ", pageY: " + e.pageY + 
-            ",screenX: " + e.screenX + ", screenY: " + e.screenY + 
-            ", posX: " + pointLabelPosition.x + ", posY:" + pointLabelPosition.y
-            )
+          ctx.canvas.addEventListener('click', (e) => {
             
-          */
-          
-            ctx.canvas.addEventListener('click', (e) => {
+            chart.pluginTooltips = [];
 
-            if (pointLabelPosition.x > e.offsetX - 12 && pointLabelPosition.x < e.offsetX + 12 && 
-              pointLabelPosition.y > e.offsetY - 12 && pointLabelPosition.y < e.offsetY + 12
+            if (pointLabelPosition.x > e.offsetX - 12 && 
+                pointLabelPosition.x < e.offsetX + 12 && 
+                pointLabelPosition.y > e.offsetY - 12 && 
+                pointLabelPosition.y < e.offsetY + 12
             ) {
-              console.log("i: " + index + ",X: " + e.offsetX + ", Y: " + e.offsetY + ", posX: " + pointLabelPosition.x + ", posY:" + pointLabelPosition.y)
+              //here we handle the cursor position if it's on any circle
+              chart.pluginTooltips.push(new Chart.Tooltip({
+                _chart: chart.chart,
+                _chartInstance: chart,
+                _data: chart.data,
+                _options: chart.options.tooltips,
+                _active: [bar]
+              }, chart))
+
+              Chart.helpers.each(chart.pluginTooltips, function (tooltip) {
+                tooltip.initialize();
+                tooltip.update(); // we don't actually need this since we are not animating tooltips
+                tooltip.pivot();
+                tooltip.transition(easing).draw();
+              });
+              
+              console.log(chart.controller.tooltip)
+
+              /*
+              
+              */
             }
           })
-          
 
-          /*
-          ctx.canvas.addEventListener('mouseover', (e) => {
-            console.log(e)
+          ctx.canvas.addEventListener('mouseout', (e) => {
+            
+            chart.options.tooltips.enabled = false;
           })
-          */
-
-          //console.log(pointLabelPosition.x, pointLabelPosition.y)
 
           if (selected) {
             ctx.stroke()
@@ -122,6 +110,7 @@ const RadarChart = (props) => {
           padding: 30,
         },
         tooltips: {
+          enabled: true,
           backgroundColor: '#fff',
           cornerRadius: 6,
           titleFontColor: '#000',
@@ -130,18 +119,6 @@ const RadarChart = (props) => {
           bodyFontColor: '#000',
           yAlign: 'bottom',
           xAlign: 'center',
-          displayColors: false,
-          callbacks: {
-            title: () => '',
-            label: function(tooltipItem, data) {
-              return data.labels[tooltipItem['index']].name
-            },
-            afterLabel: function(tooltipItem, data) {
-              return (
-                metricSuffix(data.labels[tooltipItem['index']].count) + ' Shares'
-              )
-            },
-          },
         },
         plugins: {
           datalabels: false,
