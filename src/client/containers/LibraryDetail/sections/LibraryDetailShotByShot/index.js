@@ -11,8 +11,8 @@ import {
 } from 'Reducers/libraryDetail'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import ProgressBar from 'Components/ProgressBar'
-//import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
-import RadarChart from 'Components/Charts/RadarChart'
+import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
+//import RadarChart from 'Components/Charts/RadarChart'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import Scrubber from 'Components/Sliders/Scrubber'
 import XCircle from 'Components/Icons/XCircle'
@@ -104,8 +104,21 @@ class LibraryDetailShotByShot extends React.Component {
     const datastore = {
       "datasets": [
         {
+          "labels": [
+            88,
+            12,
+            14,
+            98,
+            16,
+            14,
+            86,
+            12,
+            24,
+            18,
+            18
+          ],
           "data": [
-            88.8,
+            88,
             12,
             14,
             98,
