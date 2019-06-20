@@ -27,13 +27,13 @@ export const types = {
 
   GET_SHOT_BY_SHOT_REQUEST: 'LibraryDetail/GET_SHOT_BY_SHOT_REQUEST',
   GET_SHOT_BY_SHOT_SUCCESS: 'LibraryDetail/GET_SHOT_BY_SHOT_SUCCESS',
-	GET_SHOT_BY_SHOT_FAILURE: 'LibraryDetail/GET_SHOT_BY_SHOT_FAILURE',
+  GET_SHOT_BY_SHOT_FAILURE: 'LibraryDetail/GET_SHOT_BY_SHOT_FAILURE',
 
-	TOGGLE_INFO_SECTION: 'LibraryDetail/TOGGLE_INFO_SECTION',
-	CHANGE_DOUGHNUT_FILTERS: 'LibraryDetail/CHANGE_DOUGHNUT_FILTERS',
+  TOGGLE_INFO_SECTION: 'LibraryDetail/TOGGLE_INFO_SECTION',
+  CHANGE_DOUGHNUT_FILTERS: 'LibraryDetail/CHANGE_DOUGHNUT_FILTERS',
 
-	DOUGHNUT_INFO_SUCCESS: 'LibraryDetail/DOUGHNUT_INFO_SUCCESS',
-	DOUGHNUT_INFO_FAILURE: 'LibraryDetail/DOUGHNUT_INFO_FAILURE',
+  DOUGHNUT_INFO_SUCCESS: 'LibraryDetail/DOUGHNUT_INFO_SUCCESS',
+  DOUGHNUT_INFO_FAILURE: 'LibraryDetail/DOUGHNUT_INFO_FAILURE',
 
   GET_SHOT_INFO_REQUEST: 'LibraryDetail/GET_SHOT_INFO_REQUEST',
   GET_SHOT_INFO_SUCCESS: 'LibraryDetail/GET_SHOT_INFO_SUCCESS',
@@ -119,35 +119,44 @@ export const actions = {
   getShotByShotFailure: (payload) => ({
     type: types.GET_SHOT_BY_SHOT_FAILURE,
     payload,
-	}),
+  }),
   toggleInfoSection: (payload) => ({
     type: types.TOGGLE_INFO_SECTION,
     payload,
-	}),
+  }),
   changeDoughnutFilters: (payload) => ({
     type: types.CHANGE_DOUGHNUT_FILTERS,
     payload,
-	}),
-	doughnutInfoIndustrySuccess: payload => ({
-		type: types.DOUGHNUT_INFO_SUCCESS,
-		payload
-	}),
-	doughnutInfoIndustryFailure: payload => ({
-		type: types.DOUGHNUT_INFO_FAILURE,
-		payload
   }),
-  getShotInfoRequest: (payload) => ({ type: types.GET_SHOT_INFO_REQUEST, payload }),
+  doughnutInfoIndustrySuccess: (payload) => ({
+    type: types.DOUGHNUT_INFO_SUCCESS,
+    payload,
+  }),
+  doughnutInfoIndustryFailure: (payload) => ({
+    type: types.DOUGHNUT_INFO_FAILURE,
+    payload,
+  }),
+  getShotInfoRequest: (payload) => ({
+    type: types.GET_SHOT_INFO_REQUEST,
+    payload,
+  }),
   getShotInfoSuccess: (payload) => ({
     type: types.GET_SHOT_INFO_SUCCESS,
     payload,
   }),
   getShotInfoFailure: (error) => ({ type: types.GET_SHOT_INFO_FAILURE, error }),
-  getRadarChartRequest: (payload) => ({ type: types.GET_RADAR_CHART_REQUEST, payload }),
+  getRadarChartRequest: (payload) => ({
+    type: types.GET_RADAR_CHART_REQUEST,
+    payload,
+  }),
   getRadarChartSuccess: (payload) => ({
     type: types.GET_RADAR_CHART_SUCCESS,
     payload,
   }),
-  getRadarChartFailure: (error) => ({ type: types.GET_RADAR_CHART_FAILURE, error }),
+  getRadarChartFailure: (error) => ({
+    type: types.GET_RADAR_CHART_FAILURE,
+    error,
+  }),
   getPeopleRequest: (payload) => ({ type: types.GET_PEOPLE_REQUEST, payload }),
   getPeopleSuccess: (payload) => ({
     type: types.GET_PEOPLE_SUCCESS,
@@ -168,18 +177,18 @@ export const initialState = fromJS({
   shotInfoData: null,
   error: false,
   loading: false,
-	selectedVideo: {},
-	infoData: {
-		shownSectionData: null,
-		filters: {
-			date: null,
-			metric: null
-		},
-		modalData: null
-	},
+  selectedVideo: {},
+  infoData: {
+    shownSectionData: null,
+    filters: {
+      date: null,
+      metric: null,
+    },
+    modalData: null,
+  },
   selectedVideoAverage: [],
   radarChartData: {},
-  peopleData: {}
+  peopleData: {},
 })
 
 const libraryDetailReducer = (state = initialState, action) => {
@@ -251,19 +260,25 @@ const libraryDetailReducer = (state = initialState, action) => {
     case types.GET_SHOT_BY_SHOT_FAILURE:
       return state
         .set('error', fromJS(action.error))
-				.set('loading', fromJS(false))
+        .set('loading', fromJS(false))
 
-		case types.TOGGLE_INFO_SECTION:
-			return state.setIn(['infoData', 'shownSectionData'], fromJS(action.payload))
+    case types.TOGGLE_INFO_SECTION:
+      return state.setIn(
+        ['infoData', 'shownSectionData'],
+        fromJS(action.payload)
+      )
 
-		case types.CHANGE_DOUGHNUT_FILTERS:
-			return state.setIn(['infoData', 'filters', action.payload.name], fromJS(action.payload.value))
+    case types.CHANGE_DOUGHNUT_FILTERS:
+      return state.setIn(
+        ['infoData', 'filters', action.payload.name],
+        fromJS(action.payload.value)
+      )
 
-		case types.DOUGHNUT_INFO_SUCCESS:
-			return state.setIn(['infoData', 'modalData'], fromJS(action.payload))
+    case types.DOUGHNUT_INFO_SUCCESS:
+      return state.setIn(['infoData', 'modalData'], fromJS(action.payload))
 
-		case types.DOUGHNUT_INFO_FAILURE:
-			return state.setIn(['infoData', 'modalData'], fromJS(null))
+    case types.DOUGHNUT_INFO_FAILURE:
+      return state.setIn(['infoData', 'modalData'], fromJS(null))
 
     case types.GET_SHOT_INFO_REQUEST:
       return state.set('loading', fromJS(true))
@@ -353,38 +368,42 @@ export const makeSelectLibraryDetailColorTemperature = () =>
   createSelector(
     selectLibraryDetailColorTemperatureDomain,
     (substate) => substate.toJS()
-	)
+  )
 
 function selectInfoData(state) {
-	return state.LibraryDetail.get('infoData');
+  return state.LibraryDetail.get('infoData')
 }
 
 export function makeSelectInfoShowSection() {
-	return createSelector(
-		selectInfoData,
-		substate => substate.get('shownSectionData') ? substate.get('shownSectionData').toJS() : null
-	)
+  return createSelector(
+    selectInfoData,
+    (substate) =>
+      substate.get('shownSectionData')
+        ? substate.get('shownSectionData').toJS()
+        : null
+  )
 }
 
 export function makeSelectInfoModalData() {
-	return createSelector(
-		selectInfoData,
-		substate => substate.get('modalData') ? substate.get('modalData').toJS() : null
-	)
+  return createSelector(
+    selectInfoData,
+    (substate) =>
+      substate.get('modalData') ? substate.get('modalData').toJS() : null
+  )
 }
 
 export function makeSelectDoughnutData() {
-	return createSelector(
-		selectLibraryDetailDomain,
-		substate => substate.get('doughnutData').toJS()
-	)
+  return createSelector(
+    selectLibraryDetailDomain,
+    (substate) => substate.get('doughnutData').toJS()
+  )
 }
 
 export function makeSelectDoughnutFilters() {
-	return createSelector(
-		selectInfoData,
-		substate => substate.get('filters').toJS()
-	)
+  return createSelector(
+    selectInfoData,
+    (substate) => substate.get('filters').toJS()
+  )
 }
 
 export default libraryDetailReducer

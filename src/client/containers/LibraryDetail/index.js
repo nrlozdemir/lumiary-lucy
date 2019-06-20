@@ -109,9 +109,7 @@ export class LibraryDetail extends React.Component {
             cvScore={selectedVideo['cvScores.value']}
           />
         )}
-        {doughnutData && (
-          <LibraryDetailDoughnutChart />
-        )}
+        {doughnutData && <LibraryDetailDoughnutChart />}
         {colorTempData && (
           <LibraryDetailColorTemperature
             videoId={videoId}
@@ -144,7 +142,7 @@ LibraryDetail.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   libraryDetail: makeSelectLibraryDetail(),
-	library: makeSelectLibrary()
+  library: makeSelectLibrary(),
 })
 
 function mapDispatchToProps(dispatch) {

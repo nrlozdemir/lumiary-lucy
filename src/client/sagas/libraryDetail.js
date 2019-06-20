@@ -64,14 +64,6 @@ function getShotByShotApi({ LibraryDetailId }) {
   })
 }
 
-function getDougnutInfoRequestApi(brandId, videoId, metric, date) {
-  return axios
-    .get(
-      `${API_ROOT}/${API_VERSION}/brand/${brandId}/video/${videoId}/compare?metric=${metric}&daterange=${date}`
-    )
-    .then((res) => res.data)
-}
-
 function getShotInfoRequestApi({ shotId }) {
   const URL =
     '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/0639d12f-7a1a-40fe-840d-8c43c1268f31/shots/1'
@@ -336,73 +328,86 @@ function* getDoughnutSectionInfoData() {
       libraryMetricPercents,
       industryMetricPercents,
       libraryDayAverages,
-			industryDayAverages,
-			videoPropertyAverage,
-			libraryPropertyAverage,
-			propertyLibraryPercentChange
-		} = yield call(getDougnutInfoRequestApi, brand.uuid, uuid, metric, date)
+      industryDayAverages,
+      videoPropertyAverage,
+      libraryPropertyAverage,
+      propertyLibraryPercentChange,
+    } = yield call(getDataFromApi, {
+      url: `/brand/${brand.uuid}/video/${uuid}/compare`,
+      requestType: 'GET',
+      metric,
+      daterange: date,
+    })
 
-		let libraryChartData = null, libraryMaxKey, libraryMaxValue, libraryChartMax;
+    let libraryChartData = null,
+      libraryMaxKey,
+      libraryMaxValue,
+      libraryChartMax
 
-		if (Object.keys(libraryMetricPercents).length && !Object.keys(libraryMetricPercents).includes('undefined')) {
-			libraryChartMax = _.max(Object.values(libraryMetricPercents))
+    if (
+      Object.keys(libraryMetricPercents).length &&
+      !Object.keys(libraryMetricPercents).includes('undefined')
+    ) {
+      libraryChartMax = _.max(Object.values(libraryMetricPercents))
 
-			libraryChartData = {
-				labels: Object.keys(libraryMetricPercents).map((key) =>
-					getLabelWithSuffix(key, metric)
-				),
-				datasets: [
-					{
-						borderColor: '#ACB0BE',
-						label: infoData.title,
-						data: Object.values(libraryMetricPercents).map((val) =>
-							Math.floor(val * 100)
-						),
-						backgroundColor: Object.values(libraryMetricPercents).map((val) =>
-							val === libraryChartMax ? '#2FD7C4' : '#fff'
-						),
-						hoverBackgroundColor: [],
-					},
-				],
-			}
+      libraryChartData = {
+        labels: Object.keys(libraryMetricPercents).map((key) =>
+          getLabelWithSuffix(key, metric)
+        ),
+        datasets: [
+          {
+            borderColor: '#ACB0BE',
+            label: infoData.title,
+            data: Object.values(libraryMetricPercents).map((val) =>
+              Math.floor(val * 100)
+            ),
+            backgroundColor: Object.values(libraryMetricPercents).map((val) =>
+              val === libraryChartMax ? '#2FD7C4' : '#fff'
+            ),
+            hoverBackgroundColor: [],
+          },
+        ],
+      }[(libraryMaxKey, libraryMaxValue)] = Object.entries(
+        libraryMetricPercents
+      ).sort(([, v1], [, v2]) => (v1 > v2 ? -1 : 1))[0]
+    }
 
-			[libraryMaxKey, libraryMaxValue] = Object.entries(
-				libraryMetricPercents
-			).sort(([, v1], [, v2]) => (v1 > v2 ? -1 : 1))[0]
-		}
+    let industryChartData = null,
+      industryChartMax,
+      industryMaxKey,
+      industryMaxValue
 
-		let industryChartData = null, industryChartMax, industryMaxKey, industryMaxValue;
+    if (
+      Object.keys(industryMetricPercents).length &&
+      !Object.keys(industryMetricPercents).includes('undefined')
+    ) {
+      industryChartMax = _.max(Object.values(industryMetricPercents))
 
-		if (Object.keys(industryMetricPercents).length && !Object.keys(industryMetricPercents).includes('undefined')) {
-			industryChartMax = _.max(Object.values(industryMetricPercents))
+      industryChartData = {
+        labels: Object.keys(industryMetricPercents).map((key) =>
+          getLabelWithSuffix(key, metric)
+        ),
+        datasets: [
+          {
+            borderColor: '#ACB0BE',
+            label: infoData.title,
+            data: Object.values(industryMetricPercents).map((val) =>
+              Math.floor(val * 100)
+            ),
+            backgroundColor: Object.values(industryMetricPercents).map((val) =>
+              val === industryChartMax ? '#2FD7C4' : '#fff'
+            ),
+            hoverBackgroundColor: [],
+          },
+        ],
+      }[(industryMaxKey, industryMaxValue)] = Object.entries(
+        industryMetricPercents
+      ).sort(([, v1], [, v2]) => (v1 > v2 ? -1 : 1))[0]
+    }
 
-			industryChartData = {
-				labels: Object.keys(industryMetricPercents).map((key) =>
-					getLabelWithSuffix(key, metric)
-				),
-				datasets: [
-					{
-						borderColor: '#ACB0BE',
-						label: infoData.title,
-						data: Object.values(industryMetricPercents).map((val) =>
-							Math.floor(val * 100)
-						),
-						backgroundColor: Object.values(industryMetricPercents).map((val) =>
-							val === industryChartMax ? '#2FD7C4' : '#fff'
-						),
-						hoverBackgroundColor: [],
-					},
-				],
-			}
-
-			[industryMaxKey, industryMaxValue] = Object.entries(
-				industryMetricPercents
-			).sort(([, v1], [, v2]) => (v1 > v2 ? -1 : 1))[0]
-		}
-
-		videoPropertyAverage = 446089;
-		libraryPropertyAverage = 514125.3333333333;
-		propertyLibraryPercentChange = -0.13233413901668592;
+    videoPropertyAverage = 446089
+    libraryPropertyAverage = 514125.3333333333
+    propertyLibraryPercentChange = -0.13233413901668592
 
     yield put(
       actions.doughnutInfoIndustrySuccess({
@@ -417,48 +422,15 @@ function* getDoughnutSectionInfoData() {
         ),
         industryDayAverages: Object.values(industryDayAverages).map((val) =>
           Math.floor(val * 100)
-				),
-				videoPropertyAverage: Math.floor(videoPropertyAverage / 1000),
-				libraryPropertyAverage: Math.floor(libraryPropertyAverage / 1000),
-				propertyLibraryPercentChange: Math.floor(propertyLibraryPercentChange * 100) / 100
+        ),
+        videoPropertyAverage: Math.floor(videoPropertyAverage / 1000),
+        libraryPropertyAverage: Math.floor(libraryPropertyAverage / 1000),
+        propertyLibraryPercentChange:
+          Math.floor(propertyLibraryPercentChange * 100) / 100,
       })
     )
-
-    // const options = {
-    // 	metric,
-    // 	dateRange: date,
-    // 	property: [infoData.id],
-    // 	url: '/report',
-    // 	brands: [brand.uuid],
-    // 	platform: 'all',
-    // 	dateBucket: 'none',
-    // 	display: 'percentage',
-    // 	mode: 'industry',
-    // };
-
-    // const data = yield call(getDataFromApi, options);
-    // const extracted = data.data[brand.name][infoData.id];
-
-    // delete extracted.subtotal;
-
-    // yield put(actions.doughnutInfoIndustrySuccess(extracted));
-
-    // const libraryChart = convertDataIntoDatasets(
-    // 	infoData.data,
-    // 	{
-    // 		property: [infoData.id],
-    // 	},
-    // 	{
-    // 		singleDataset: true,
-    // 		backgroundColor: createCustomBackground(
-    // 			infoData.data.data[Object.keys(infoData.data.data)[0]][infoData.id]
-    // 		),
-    // 	}
-    // );
-
-    // console.log('library', libraryChart);
   } catch (e) {
-    debugger
+    console.error(e)
     yield put(actions.doughnutInfoIndustryFailure(e))
   }
 }
