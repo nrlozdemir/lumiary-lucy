@@ -1,5 +1,6 @@
 import { chartColors, expectedNames } from 'Utils/globals'
 import { isEmpty } from 'lodash'
+import { defaultFilters } from 'Reducers/selectFilters'
 
 function randomKey(char) {
   var text = ''
@@ -796,6 +797,24 @@ const getMinMaxFromDatasets = (datasets = [], initial = 0, type = 'max') => {
     : 0
 }
 
+/*
+ reduce selectFilter values
+ into { type: value } map which is easily read by azazzle
+*/
+const selectFiltersToType = (selectValues = {}) => {
+  return Object.keys(selectValues).reduce((values, key) => {
+    const filterValue = selectValues[key]
+    const filterType = filterValue.type
+    values[filterType] = !!filterValue.value
+      ? !!filterValue.value.value && !!filterValue.value.value.startDate
+        ? [filterValue.value.value.startDate, filterValue.value.value.endDate]
+        : filterValue.value.value
+      : defaultFilters[filterType]
+
+    return values
+  }, {})
+}
+
 export {
   ucfirst,
   normalize,
@@ -824,4 +843,5 @@ export {
   floatCvScore,
   getMinMaxFromDatasets,
   getLabelWithSuffix,
+  selectFiltersToType,
 }

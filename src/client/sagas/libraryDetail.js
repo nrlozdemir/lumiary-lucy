@@ -9,7 +9,7 @@ import {
   actions,
   makeSelectInfoShowSection,
   makeSelectDoughnutFilters,
-  selectShotInfo,
+  selectShotInfoData,
 } from 'Reducers/libraryDetail'
 import mock from 'Api/mocks/libraryMock.json'
 import { findIdDetail, getDataFromApi, buildApiUrl } from 'Utils/api'
@@ -101,7 +101,7 @@ function getShotInfoRequestApi({ shotId }) {
         return response.data
       })
     })
-  })
+})
 }
 
 function getRadarChartRequestApi({ shotId }) {
@@ -286,10 +286,11 @@ function* getShotByShot({ payload: { LibraryDetailId } }) {
 }
 
 function* getShotInfoRequest({ ShotId }) {
+  const payload = yield call(getShotInfoRequestApi, {
+    ShotId,
+  })
   try {
-    const payload = yield call(getShotInfoRequestApi, {
-      ShotId,
-    })
+
     yield put(actions.getShotInfoSuccess(payload))
   } catch (error) {
     yield put(actions.getShotInfoFailure({ error }))
@@ -322,7 +323,7 @@ function* getDoughnutSectionInfoData() {
     }
 
     const { brand } = yield select(selectAuthProfile)
-    const { uuid } = yield select(selectShotInfo())
+    const { uuid } = yield select(selectShotInfoData())
 
     let {
       libraryMetricPercents,
@@ -517,6 +518,7 @@ export default [
   takeLatest(types.TOGGLE_INFO_SECTION, getDoughnutSectionInfoData),
   takeLatest(types.GET_SHOT_INFO_REQUEST, getShotInfoRequest),
   takeLatest(types.GET_SELECTED_VIDEO_AVERAGE_REQUEST, getVideoAverage),
+  takeLatest(types.GET_SHOT_INFO_REQUEST, getShotInfoRequest),
   takeLatest(types.GET_RADAR_CHART_REQUEST, getRadarChartRequest),
   takeLatest(types.GET_PEOPLE_REQUEST, getPeopleRequest),
 ]

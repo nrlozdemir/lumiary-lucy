@@ -6,7 +6,15 @@ import style from './styles.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 
 const Select = (props) => {
-  const { className, id, options, placeholder, multiple, customClass } = props
+  const {
+    className,
+    id,
+    options,
+    placeholder,
+    multiple,
+    customClass,
+    isActive,
+  } = props
 
   const themes = props.themeContext.colors
 
@@ -14,11 +22,11 @@ const Select = (props) => {
   let { name, onChange, value } = args
 
   // if (props.input) {
-  // 	var {
-  // 		input: { name, onChange, value, customClass }
-  // 	} = props;
+  //  var {
+  //    input: { name, onChange, value, customClass }
+  //  } = props;
   // } else {
-  // 	var { name, onChange, value, customClass } = props;
+  //  var { name, onChange, value, customClass } = props;
   // }
 
   const reduxFormOnChange = (option) => {
@@ -48,7 +56,9 @@ const Select = (props) => {
     control: (styles, { data, isDisabled, isFocused, isSelected }) => {
       return {
         ...styles,
-        background: themes.inputControlBackground,
+        background: isActive
+          ? themes.tabActiveBackground
+          : themes.inputControlBackground,
         borderColor: isSelected
           ? themes.inputControlBorder
           : isFocused

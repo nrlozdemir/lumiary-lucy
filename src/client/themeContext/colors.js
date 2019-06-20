@@ -1,5 +1,6 @@
 const dark = {
   // global values
+  themeType: 'dark',
   bodyBackground: '#21243B',
   moduleBackground: '#373f5b',
   moduleShadow: 'rgba(0, 0, 0, 0.5)',
@@ -136,6 +137,7 @@ const dark = {
   shotByShotTabHeader: '#545b79',
   shotByShotTabBody: '#373f5b',
   shotByShotSliderPointer: '#ffffff',
+  shotByShotSliderImageBorder: '#000',
   // shot by shot slider values
 
   // percentage bar grap values
@@ -145,6 +147,7 @@ const dark = {
 
 const light = {
   // global values
+  themeType: 'light',
   bodyBackground: '#e8ecf0',
   moduleBackground: '#f3f6f9',
   moduleShadow: '#bebebe',
@@ -280,6 +283,7 @@ const light = {
   shotByShotTabHeader: '#ffffff',
   shotByShotTabBody: '#f3f6f9',
   shotByShotSliderPointer: '#2fd7c4',
+  shotByShotSliderImageBorder: '#000',
   // shot by shot slider values
 
   // percentage bar grap values

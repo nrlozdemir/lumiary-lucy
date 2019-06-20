@@ -174,7 +174,7 @@ export const initialState = fromJS({
     error: null,
   },
   shotByShotData: null,
-  shotInfoData: null,
+  shotInfoData: {},
   error: false,
   loading: false,
   selectedVideo: {},
@@ -329,21 +329,31 @@ export const selectLibraryDetailRaharChart = (state) =>
 export const selectLibraryDetailPeople = (state) =>
   state.LibraryDetail.get('peopleData')
 
-export const selectShotInfo = () =>
+export const selectShotInfoData = () =>
   createSelector(
-    selectLibraryDetailSelectedVideo,
+    selectLibraryDetailShotInfo,
     (substate) => substate.toJS()
   )
 
-export const selectColorsInfo = () =>
-  createSelector(
-    selectLibraryDetailRaharChart,
-    (substate) => substate.toJS()
-  )
+export const selectLibraryDetailShotInfo = (state) =>
+  state.LibraryDetail.get('shotInfoData')
 
 export const selectPeopleData = () =>
   createSelector(
     selectLibraryDetailPeople,
+    (substate) => substate.toJS()
+  )
+
+export const selectLibraryDetailPeople = (state) =>
+  state.LibraryDetail.get('peopleData')
+
+
+export const selectLibraryDetailRaharChart = (state) =>
+  state.LibraryDetail.get('radarChartData')
+
+export const selectColorsData = () =>
+  createSelector(
+    selectLibraryDetailRaharChart,
     (substate) => substate.toJS()
   )
 
