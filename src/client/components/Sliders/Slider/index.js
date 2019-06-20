@@ -72,7 +72,9 @@ class MarketViewSlider extends React.Component {
                 onClick={() => this.refSlider.slideTo(i)}
                 className={i === 0 ? 'active' : ''}
               >
-                <img src={item.image} />
+                <div className={style.videoContainer}>
+                  <video src={item.image} />
+                </div>
                 <span>
                   <i className={socialIcon} />
                   {item.socialMedia}
@@ -124,12 +126,12 @@ class MarketViewSlider extends React.Component {
                     containerNoBorder
                     leftSocialIcon={item.socialMedia}
                     centerText={item.secondTitle}
-                    title={item.title}
+                    title={`${item.title.substring(0, 20)}...`}
                     width={634}
                     height="100%"
                     rightValue={item.cvScore}
                   >
-                    <img src={item.image} />
+                    <video className={style.fullVideo} src={item.image} />
                     <div className={style.percentageWrapper}>
                       <PercentageBarGraph
                         key={Math.random()}

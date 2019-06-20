@@ -1,6 +1,5 @@
 import React from 'react'
 import VideoReleasesBarChart from './sections/VideoReleasesBarChart'
-import ColorTemperature from './sections/ColorTemperature'
 import FilteringSection from './sections/FilteringSection'
 import PacingCard from './sections/PacingCard'
 import CompareShares from './sections/CompareShares'
@@ -16,7 +15,6 @@ class Panoptic extends React.Component {
         <Cards />
         <TopPerformingFormat />
         <VideoReleasesBarChart />
-        <ColorTemperature />
         <FilteringSection />
         <PacingCard />
         <CompareShares />

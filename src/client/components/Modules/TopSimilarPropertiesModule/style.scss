@@ -1,12 +1,6 @@
 .container {
-  div {
-    div {
-      border-left: 1px solid;
-    }
-  }
-  div:first-child {
-    div {
-      border: none;
-    }
+  width: 100%;
+  .similarContainer {
+    border-left: 1px solid;
   }
 }

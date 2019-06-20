@@ -5,59 +5,81 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectQuickview } from 'Reducers/quickview'
-import { toSlug, socialIconSelector } from 'Utils/index'
-import classnames from 'classnames'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
+import { toSlug, socialIconSelector, selectFiltersToType } from 'Utils'
+import cx from 'classnames'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import SingleVideoCard from 'Components/SingleVideoCard'
 import ProgressBar from 'Components/ProgressBar'
 import { textEdit } from 'Utils/text'
+import ModuleSelectFilters from 'Components/ModuleSelectFilters'
+import { isEqual } from 'lodash'
 import style from './style.scss'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
-export class Main extends React.Component {
+const moduleKey = 'Quickview'
+
+export class Main extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
       platforms: [
-        'all-platforms',
-        'facebook',
-        'instagram',
-        'twitter',
-        'youtube',
+        {
+          name: 'facebook',
+          filter: {
+            type: 'metric',
+            selectKey: 'QV-facebook-metric',
+            placeHolder: 'Engagement',
+          },
+        },
+        { name: 'instagram' },
+        { name: 'twitter' },
+        { name: 'youtube' },
       ],
     }
   }
 
-  componentDidMount() {
-    if (typeof this.props.match.params.platform === 'undefined') {
-      this.props.getQuickviewItemsRequest('all-platforms')
-    } else {
-      this.props.getQuickviewItemsRequest(this.props.match.params.platform)
+  componentDidUpdate(prevProps) {
+    const { selectFilters: prevSelectFilters } = prevProps
+    const { getQuickviewItemsRequest, selectFilters } = this.props
+
+    if (
+      !!prevSelectFilters &&
+      !!selectFilters &&
+      !isEqual(
+        prevSelectFilters.values[moduleKey],
+        selectFilters.values[moduleKey]
+      )
+    ) {
+      const selectFilterValues = selectFilters.values[moduleKey]
+
+      const valuesToType = selectFiltersToType(selectFilterValues)
+
+      this.handleFilterChange(valuesToType)
     }
   }
 
-  componentDidUpdate(prevProps) {
-    const { match: prevMatch } = prevProps
+  handleFilterChange = (data, platform = 'facebook') => {
     const { match, getQuickviewItemsRequest } = this.props
 
-    if (prevMatch.params.platform !== match.params.platform) {
-      if (typeof match.params.platform === 'undefined') {
-        getQuickviewItemsRequest('all-platforms')
-      } else {
-        getQuickviewItemsRequest(match.params.platform)
-      }
-    }
+    getQuickviewItemsRequest({
+      platform: match.params.platform || 'facebook',
+      data,
+    })
   }
 
   render() {
     const { platforms } = this.state
     const {
+      match,
       quickview: {
         selectedPlatform: { platformsValues },
       },
     } = this.props
+
+    const selectedPlatform = match.params.platform || 'facebook'
 
     return (
       <ThemeContext.Consumer>
@@ -67,26 +89,67 @@ export class Main extends React.Component {
               <div className="grid-collapse mt-50">
                 <div className={style.navigation}>
                   <div className={style.navItem}>
-                    {platforms.map((platform, index) => (
-                      <NavLink
-                        key={index}
-                        activeStyle={{
-                          background: colors.tabActiveBackground,
-                        }}
-                        style={{
-                          background: colors.tabBackground,
-                          color: colors.textColor,
-                          borderColor: colors.tabBorder,
-                        }}
-                        to={`/quickview/${toSlug(platform)}`}
-                      >
-                        {index === 0 ? (
-                          platform.replace('-', ' ')
-                        ) : (
-                          <i className={socialIconSelector(platform)} />
-                        )}
-                      </NavLink>
-                    ))}
+                    {platforms.map((platform, idx) => {
+                      const isSelected = selectedPlatform === platform.name
+                      return !!platform.filter && isSelected ? (
+                        <div
+                          key={idx}
+                          className={style.navItem_btn}
+                          style={{
+                            background: isSelected
+                              ? colors.tabActiveBackground
+                              : colors.tabBackground,
+                            color: colors.textColor,
+                            borderColor: colors.tabBorder,
+                          }}
+                        >
+                          <i
+                            className={cx(
+                              socialIconSelector(platform.name),
+                              style.activeIcon
+                            )}
+                          />
+                          <ModuleSelectFilters
+                            isActive={isSelected}
+                            type={platform.filter.type}
+                            moduleKey={moduleKey}
+                            selectKey={platform.filter.selectKey}
+                            placeHolder={platform.filter.placeHolder}
+                          />
+                        </div>
+                      ) : (
+                        <NavLink
+                          key={idx}
+                          className={style.navItem_btn}
+                          activeStyle={{
+                            background: colors.tabActiveBackground,
+                          }}
+                          style={{
+                            background: colors.tabBackground,
+                            color: colors.textColor,
+                            borderColor: colors.tabBorder,
+                          }}
+                          to={`/quickview/${toSlug(platform.name)}`}
+                        >
+                          <i className={socialIconSelector(platform.name)} />
+                        </NavLink>
+                      )
+                    })}
+                    <div
+                      className={style.navItem_btn}
+                      style={{
+                        background: colors.tabBackground,
+                        color: colors.textColor,
+                        borderColor: colors.tabBorder,
+                      }}
+                    >
+                      <ModuleSelectFilters
+                        type={'dateRange'}
+                        moduleKey={moduleKey}
+                        selectKey={'QV-date'}
+                        placeHolder={'Date'}
+                      />
+                    </div>
                   </div>
                 </div>
                 <div
@@ -97,7 +160,10 @@ export class Main extends React.Component {
                     boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
                   }}
                 >
-                  <div className={style.content}>
+                  <div
+                    className={style.content}
+                    style={{ background: colors.bodyBackground }}
+                  >
                     {platformsValues &&
                       platformsValues.map((el, i) => {
                         const {
@@ -111,32 +177,32 @@ export class Main extends React.Component {
                         return (
                           <div
                             key={i}
-                            className={classnames('col-6', style.cardBlock)}
+                            className={style.cardBlock}
+                            style={{
+                              background:
+                                i === 1
+                                  ? colors.tabActiveBackground
+                                  : colors.moduleBackground,
+                            }}
                           >
+                            {/* HEADER */}
                             <div className={style.card}>
-                              <h1
-                                className={classnames({
-                                  [style.rightVideoTitle]: i === 1,
-                                })}
-                              >
+                              <h1>
                                 {i == 0
-                                  ? 'Best Performing Videos'
-                                  : 'Underperforming Videos'}
+                                  ? 'Underperforming Videos'
+                                  : 'Best Performing Videos'}
                                 <i
                                   className="icon icon-Information"
                                   style={{ color: colors.textColor }}
                                 />
                               </h1>
-                              <div
-                                className={classnames(style.assetContainer, {
-                                  [style.right]: i === 1,
-                                })}
-                              >
+                              {/* VIDEO */}
+                              <div className={style.assetContainer}>
                                 <AssetLayer
                                   leftSocialIcon={socialIcon}
                                   title={title}
                                   rightValue={cvScore}
-                                  width={510}
+                                  width={'100%'}
                                   height={286}
                                 >
                                   <div className={style.video}>
@@ -146,9 +212,7 @@ export class Main extends React.Component {
                                       options={{ size: 'auto' }}
                                     />
                                   </div>
-                                  <div
-                                    className={style.percentageWrapper}
-                                  >
+                                  <div className={style.percentageWrapper}>
                                     <PercentageBarGraph
                                       key={Math.random()}
                                       percentage={cvScore}
@@ -162,59 +226,104 @@ export class Main extends React.Component {
                                   </div>
                                 </AssetLayer>
                               </div>
+                              {/* PROPERTY VALUES */}
                               <div className={style.items}>
-                                {el.infos.map((item, index) => (
-                                  <div
-                                    key={index}
-                                    className={style.itemWrapper}
-                                    style={{
-                                      borderColor: colors.chartStadiumBarBorder,
-                                    }}
-                                  >
-                                    <div className={style.infoItem}>
-                                      <p
-                                        className={classnames(
-                                          'font-secondary-second',
-                                          style.sectionBadge
+                                {el.infos.map((item, index) => {
+                                  const hasDifference =
+                                    ['duration', 'pacing'].indexOf(
+                                      item.title.toLowerCase()
+                                    ) !== -1
+
+                                  const difference = hasDifference && 50
+
+                                  return (
+                                    <div
+                                      key={`info_${i}-${index}`}
+                                      className={style.itemWrapper}
+                                      style={{
+                                        borderColor:
+                                          i === 0
+                                            ? colors.chartStadiumBarBorder
+                                            : colors.bodyBackground,
+                                      }}
+                                    >
+                                      <div className={style.infoItem}>
+                                        {difference && i === 1 && (
+                                          <div
+                                            className={
+                                              style.infoItem_diffBubble
+                                            }
+                                            style={{
+                                              borderColor:
+                                                colors.tabActiveBackground,
+                                              background: colors.bodyBackground,
+                                              color: colors.labelColor
+                                            }}
+                                          >
+                                            <span>{difference}%</span>
+                                            <span>Difference</span>
+                                          </div>
                                         )}
-                                      >
-                                        <span
-                                          style={{
-                                            background: colors.labelBackground,
-                                            color: colors.labelColor,
-                                            boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                                          }}
+                                        <p
+                                          className={cx(
+                                            'font-secondary-second',
+                                            style.sectionBadge
+                                          )}
                                         >
-                                          {item.title}
-                                        </span>
-                                      </p>
-                                      <div
-                                        className={style.itemValue}
-                                        data-id={i}
-                                      >
-                                        {item.value}
+                                          <span
+                                            style={{
+                                              background:
+                                                i === 0
+                                                  ? colors.labelBackground
+                                                  : colors.bodyBackground,
+                                              color: colors.labelColor,
+                                              boxShadow: `0 1px 2px 0 ${
+                                                colors.labelShadow
+                                              }`,
+                                            }}
+                                          >
+                                            {item.title}
+                                          </span>
+                                        </p>
+                                        <div
+                                          className={style.itemValue}
+                                          data-id={i}
+                                        >
+                                          {item.value}
+                                        </div>
+                                        <div className={style.progressText}>
+                                          <span className={style.rightTitle}>
+                                            {item.percentage}%
+                                          </span>
+                                        </div>
+                                        <ProgressBar
+                                          width={item.percentage}
+                                          customBarClass={cx(
+                                            style.progressBar,
+                                            {
+                                              [style[
+                                                `progressBar--${
+                                                  colors.themeType === 'dark'
+                                                    ? 'dark'
+                                                    : 'light'
+                                                }`
+                                              ]]: i === 1,
+                                            }
+                                          )}
+                                          customPercentageClass={cx(
+                                            style.percentageBlue,
+                                            {
+                                              [style.percentagePink]: i == 1,
+                                            }
+                                          )}
+                                        />
+                                        <p className={style.infoText}>
+                                          {textEdit(item.text, item)}
+                                        </p>
                                       </div>
-                                      <div className={style.progressText}>
-                                        <span className={style.rightTitle}>
-                                          {item.percentage}%
-                                        </span>
-                                      </div>
-                                      <ProgressBar
-                                        width={item.percentage}
-                                        customBarClass={style.progressBar}
-                                        customPercentageClass={classnames(
-                                          style.percentageBlue,
-                                          {
-                                            [style.percentagePink]: i == 1,
-                                          }
-                                        )}
-                                      />
-                                      <p className={style.infoText}>
-                                        {textEdit(item.text, item)}
-                                      </p>
                                     </div>
-                                  </div>
-                                ))}
+                                  )
+                                })}
                               </div>
                             </div>
                           </div>
@@ -237,6 +346,7 @@ Main.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
+  selectFilters: makeSelectSelectFilters(),
   quickview: makeSelectQuickview(),
 })
 

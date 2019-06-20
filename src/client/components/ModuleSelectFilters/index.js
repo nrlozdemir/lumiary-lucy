@@ -28,7 +28,7 @@ class ModuleSelectFilters extends React.Component {
   }
 
   onChange = (val) => {
-    const { selectKey, type, moduleKey } = this.props
+    const { selectKey, type, moduleKey, onChange = () => {} } = this.props
     const filterObj = {
       [moduleKey]: {
         [selectKey]: {
@@ -37,7 +37,8 @@ class ModuleSelectFilters extends React.Component {
         },
       },
     }
-    this.props.changeFilter(filterObj)
+		this.props.changeFilter(filterObj);
+		onChange(val);
   }
 
   removeFilterValue = () => {
@@ -59,6 +60,7 @@ class ModuleSelectFilters extends React.Component {
       placeHolder,
       moduleKey,
       themes,
+      isActive,
     } = this.props
 
     const selectedOption =
@@ -80,6 +82,7 @@ class ModuleSelectFilters extends React.Component {
           value={value}
           onChange={(option) => this.onChange(option)}
           options={options[type]}
+          isActive={isActive}
         />
       </React.Fragment>
     )
@@ -94,6 +97,7 @@ ModuleSelectFilters.propTypes = {
   dispatch: PropTypes.func,
   moduleKey: PropTypes.string.isRequired,
   defaultValue: PropTypes.any,
+  isActive: PropTypes.bool,
 }
 
 const mapStateToProps = createStructuredSelector({
