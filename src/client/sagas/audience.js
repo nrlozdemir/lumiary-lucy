@@ -5,9 +5,9 @@ import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 import { selectAuthProfile } from 'Reducers/auth'
 
-import { compareSharesData, radarChartCalculate } from 'Utils'
-
 import { getDataFromApi } from 'Utils/api'
+
+import { radarChartCalculate, compareSharesData } from 'Utils/datasets'
 
 import _ from 'lodash'
 

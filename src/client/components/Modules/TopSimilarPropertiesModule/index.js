@@ -5,7 +5,7 @@ import DoughnutCard from 'Components/DoughnutCard'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import classnames from 'classnames'
 import style from './style.scss'
-import { isDataSetEmpty } from 'Utils/'
+import { isDataSetEmpty } from 'Utils/datasets'
 const TopSimilarProperties = (props) => {
   const { data, title, filters, action, moduleKey } = props
   const isEmpty =
@@ -26,7 +26,10 @@ const TopSimilarProperties = (props) => {
           <div className={classnames('col-12-no-gutters', style.container)}>
             {data &&
               data.map((sectionItem, i) => (
-                <div className="col-4-no-gutters" key={`TopSimilarProperties_${i}`}>
+                <div
+                  className="col-4-no-gutters"
+                  key={`TopSimilarProperties_${i}`}
+                >
                   <div style={{ borderColor: colors.moduleBorder }}>
                     <DoughnutCard
                       data={sectionItem.doughnutChartValues}

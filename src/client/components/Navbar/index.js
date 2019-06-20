@@ -17,16 +17,14 @@ import {
 import { actions as generatedReportActions } from 'Reducers/generatedReport'
 
 import Switch from 'Components/Form/Switch'
-import { capitalizeFirstLetter } from 'Utils/index'
+import { capitalizeFirstLetter } from 'Utils'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import Dropdown from './dropdown'
 import LeftArrowCircle from 'Components/Icons/LeftArrowCircle'
 // import PropTypes from 'prop-types';
 
-const containerClass = classnames(
-  'grid-container ' + style.container
-)
+const containerClass = classnames('grid-container ' + style.container)
 const linksClass = classnames(style.links)
 const profileClass = classnames(style.profile)
 
@@ -238,13 +236,13 @@ const Template = (props) => {
   const templateSelector = Selector(props)
   const { textColor, moduleBackground, moduleShadow } = props.themes
   return (
-    <header style={
-			{
-				color: textColor,
-				background: moduleBackground,
-				boxShadow: `0 2px 6px 0 ${moduleShadow}`,
-			}
-		}>
+    <header
+      style={{
+        color: textColor,
+        background: moduleBackground,
+        boxShadow: `0 2px 6px 0 ${moduleShadow}`,
+      }}
+    >
       <div className={containerClass}>
         {templateSelector['leftSide']}
         <div className={linksClass}>{templateSelector['navigation']}</div>

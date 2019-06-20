@@ -10,7 +10,7 @@ import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import SingleVideoCard from 'Components/SingleVideoCard'
 import style from 'Containers/Marketview/style.scss'
 import formatStyles from './style.scss'
-import { isDataSetEmpty } from 'Utils/'
+import { isDataSetEmpty } from 'Utils/datasets'
 import { isEmpty } from 'lodash'
 
 class FormatCard extends Component {
@@ -46,7 +46,7 @@ class FormatCard extends Component {
     const {
       formatChartData: { data, video, currentDay, loading },
     } = this.props
-    
+
     const isDataEmpty = (!loading && isDataSetEmpty(data)) || isEmpty(data)
 
     return (

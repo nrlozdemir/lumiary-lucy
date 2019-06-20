@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './style.scss'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
-import { capitalizeFirstLetter } from 'Utils/'
+import { capitalizeFirstLetter } from 'Utils'
 const DoughnutCard = ({ data, index, colors }) => {
   const dataset = data.datasets[0]
   const topItemIndex = dataset.data.indexOf(Math.max(...dataset.data))

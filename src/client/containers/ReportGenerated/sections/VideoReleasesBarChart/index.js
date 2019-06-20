@@ -1,6 +1,6 @@
 import React from 'react'
 import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
-import { isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 
 class VideoReleasesBarChart extends React.Component {
   componentDidMount() {

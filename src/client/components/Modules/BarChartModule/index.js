@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import BarChart from 'Components/Charts/BarChart'
 import Module from 'Components/Module'
 import style from './style.scss'
-import { isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 
 const BarChartModule = ({
   barData,

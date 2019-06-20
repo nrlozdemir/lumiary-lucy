@@ -4,7 +4,7 @@ import style from './style.scss'
 import Video from '../VideoComponent'
 import FlipCard from 'Components/FlipCard'
 import ProgressBar from 'Components/ProgressBar'
-import { capitalizeFirstLetter, metricSuffix } from 'Utils/index'
+import { capitalizeFirstLetter, metricSuffix } from 'Utils'
 import { textEdit } from 'Utils/text'
 import { ThemeContext } from 'ThemeContext/themeContext'
 

@@ -1,7 +1,7 @@
 import React from 'react'
 import Module from 'Components/Module'
 import ComparisonHorizontalBarChart from 'Components/ComparisonHorizontalBarChart'
-import { isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 import style from './style.scss'
 
 class VideoComparison extends React.Component {

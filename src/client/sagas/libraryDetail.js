@@ -2,21 +2,20 @@ import { takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { ajax } from 'Utils/api'
 
-import {
-  types,
-  actions,
-  makeSelectSelectedVideoID,
-} from 'Reducers/libraryDetail'
+import { types, actions } from 'Reducers/libraryDetail'
+
 import mock from 'Api/mocks/libraryMock.json'
 import { findIdDetail, getDataFromApi, buildApiUrl } from 'Utils/api'
+
+import { getMaximumValueIndexFromArray } from 'Utils'
+
 import {
   convertDataIntoDatasets,
-  getMaximumValueIndexFromArray,
   convertColorTempToDatasets,
   parseAverage,
-} from 'Utils/'
+} from 'Utils/datasets'
+
 import { selectAuthProfile } from 'Reducers/auth'
-import { chartColors } from 'Utils/globals'
 
 const RESOURCE = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea'
 
@@ -96,7 +95,7 @@ function getShotInfoRequestApi({ shotId }) {
         return response.data
       })
     })
-})
+  })
 }
 
 function getRadarChartRequestApi({ shotId }) {
@@ -256,7 +255,6 @@ function* getShotInfoRequest({ ShotId }) {
     ShotId,
   })
   try {
-    
     yield put(actions.getShotInfoSuccess(payload))
   } catch (error) {
     yield put(actions.getShotInfoFailure({ error }))
