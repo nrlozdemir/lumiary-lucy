@@ -11,6 +11,43 @@ function randomKey(char) {
   return text
 }
 
+/*
+  Returns an array of time labels from the api response
+  * Expected labels:
+     week - ['Week 1', 'Week 2', 'Week 3', 'Week 4']
+     month - array of 3 months from the current
+     dayOfWeek - array of 7 days from the current
+ */
+const getTimeBucket = (value) => {
+  const keys = Object.keys(value)
+  if (!!keys.length) {
+    // sometimes there is a null key
+    return Object.keys(value[keys[0]])
+      .reduce(
+        (all, label) => [...all, ...(label !== 'null' ? [label] : [])],
+        []
+      )
+      .reverse()
+  }
+  return []
+}
+
+const getLabelWithSuffix = (label, property) => {
+  let suffix
+
+  switch (property) {
+    case 'duration':
+      suffix = 'seconds'
+      break
+    case 'frameRate':
+      suffix = 'FPS'
+      break
+    default:
+      suffix = ''
+  }
+  return `${label} ${suffix}`
+}
+
 function socialIconSelector(key) {
   if (!key) return
   const keyToLowerCase = key.toLowerCase()
@@ -121,75 +158,6 @@ const strToColor = (str) => {
 const getMaximumValueIndexFromArray = (data) =>
   Object.values(data).indexOf(Math.max(...Object.values(data)))
 
-const ucfirst = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
-
-const normalize = (input, min, max, low_range, high_range) => {
-  const range = max - min
-  const norm = (input - min) / range
-
-  const scale_range = high_range - low_range
-  return norm * scale_range + low_range
-}
-
-const floatCvScore = (val) => Number.parseFloat(val).toFixed(1)
-
-/*
- reduce selectFilter values
- into { type: value } map which is easily read by azazzle
-*/
-const selectFiltersToType = (selectValues = {}) => {
-  return Object.keys(selectValues).reduce((values, key) => {
-    const filterValue = selectValues[key]
-    const filterType = filterValue.type
-    values[filterType] = !!filterValue.value
-      ? !!filterValue.value.value && !!filterValue.value.value.startDate
-        ? [filterValue.value.value.startDate, filterValue.value.value.endDate]
-        : filterValue.value.value
-      : defaultFilters[filterType]
-
-    return values
-  }, {})
-}
-
-/*
-  Returns an array of time labels from the api response
-  * Expected labels:
-     week - ['Week 1', 'Week 2', 'Week 3', 'Week 4']
-     month - array of 3 months from the current
-     dayOfWeek - array of 7 days from the current
- */
-const getTimeBucket = (value) => {
-  const keys = Object.keys(value)
-  if (!!keys.length) {
-    // sometimes there is a null key
-    return Object.keys(value[keys[0]])
-      .reduce(
-        (all, label) => [...all, ...(label !== 'null' ? [label] : [])],
-        []
-      )
-      .reverse()
-  }
-  return []
-}
-
-const getLabelWithSuffix = (label, property) => {
-  let suffix
-
-  switch (property) {
-    case 'duration':
-      suffix = 'seconds'
-      break
-    case 'frameRate':
-      suffix = 'FPS'
-      break
-    default:
-      suffix = ''
-  }
-  return `${label} ${suffix}`
-}
-
 const getDateBucketFromRange = (dateRange) => {
   switch (dateRange) {
     case 'week':
@@ -226,6 +194,18 @@ const getBrandNameAndCompetitorsName = (profile) => {
   return [brand.name]
 }
 
+const ucfirst = (string) => {
+  return string.charAt(0).toUpperCase() + string.slice(1)
+}
+
+const normalize = (input, min, max, low_range, high_range) => {
+  const range = max - min
+  const norm = (input - min) / range
+
+  const scale_range = high_range - low_range
+  return norm * scale_range + low_range
+}
+
 const getFilteredCompetitors = (competitors, report) =>
   competitors.filter((uuid) => report.brands.indexOf(uuid) > -1)
 
@@ -236,6 +216,26 @@ const getFilteredCompetitorValues = (competitors, data) => {
   return filteredCompetitors.reduce((obj, name) => {
     obj[name] = data[name]
     return obj
+  }, {})
+}
+
+const floatCvScore = (val) => Number.parseFloat(val).toFixed(1)
+
+/*
+ reduce selectFilter values
+ into { type: value } map which is easily read by azazzle
+*/
+const selectFiltersToType = (selectValues = {}) => {
+  return Object.keys(selectValues).reduce((values, key) => {
+    const filterValue = selectValues[key]
+    const filterType = filterValue.type
+    values[filterType] = !!filterValue.value
+      ? !!filterValue.value.value && !!filterValue.value.value.startDate
+        ? [filterValue.value.value.startDate, filterValue.value.value.endDate]
+        : filterValue.value.value
+      : defaultFilters[filterType]
+
+    return values
   }, {})
 }
 
