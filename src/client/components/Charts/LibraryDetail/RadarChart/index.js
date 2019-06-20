@@ -3,6 +3,7 @@ import { Radar, Chart } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
 import { metricSuffix } from 'Utils'
 
+let tooltipArea = {}
 const plugins = [
   {
     beforeDraw: function(chart, easing) {
@@ -30,44 +31,12 @@ const plugins = [
           )
           ctx.fillStyle = color
           ctx.fill()
-          
-          ctx.canvas.addEventListener('click', (e) => {
-            
-            chart.pluginTooltips = [];
 
-            if (pointLabelPosition.x > e.offsetX - 12 && 
-                pointLabelPosition.x < e.offsetX + 12 && 
-                pointLabelPosition.y > e.offsetY - 12 && 
-                pointLabelPosition.y < e.offsetY + 12
-            ) {
-              //here we handle the cursor position if it's on any circle
-              chart.pluginTooltips.push(new Chart.Tooltip({
-                _chart: chart.chart,
-                _chartInstance: chart,
-                _data: chart.data,
-                _options: chart.options.tooltips,
-                _active: [bar]
-              }, chart))
-
-              Chart.helpers.each(chart.pluginTooltips, function (tooltip) {
-                tooltip.initialize();
-                tooltip.update(); // we don't actually need this since we are not animating tooltips
-                tooltip.pivot();
-                tooltip.transition(easing).draw();
-              });
-              
-              console.log(chart.controller.tooltip)
-
-              /*
-              
-              */
-            }
-          })
-
-          ctx.canvas.addEventListener('mouseout', (e) => {
-            
-            chart.options.tooltips.enabled = false;
-          })
+          tooltipArea[index] = {
+            sector: bar,
+            x: pointLabelPosition.x,
+            y: pointLabelPosition.y
+          }
 
           if (selected) {
             ctx.stroke()
@@ -78,9 +47,22 @@ const plugins = [
           }
         })
       })
+
     },
   },
 ]
+
+Chart.Tooltip.positioners.custom = function(e, p) {
+  if ( ! e.length) {
+    return false;
+  }
+
+  return {
+    x: tooltipArea[e[0]._index].x,
+    y: tooltipArea[e[0]._index].y
+  }
+}
+
 
 const RadarChart = (props) => {
   const { data, width = 430, height = 430 } = props
@@ -89,11 +71,7 @@ const RadarChart = (props) => {
   parsedData.datasets[0].backgroundColor = themes.chartBackgroundColor
   parsedData.datasets[0].pointBackgroundColor = themes.chartPointBackgroundColor
   parsedData.datasets[0].pointBorderColor = themes.chartPointBorderColor
-  const maxTicksStepLimit = parsedData.datasets[0].data.every(
-    (n) => n <= 100000 // 100k
-  )
-    ? 100000 // 100k
-    : Math.max(...parsedData.datasets[0].data) // any big number than 100k
+  
   return (
     <Radar
       data={parsedData}
@@ -111,6 +89,7 @@ const RadarChart = (props) => {
         },
         tooltips: {
           enabled: true,
+          position: 'custom',
           backgroundColor: '#fff',
           cornerRadius: 6,
           titleFontColor: '#000',

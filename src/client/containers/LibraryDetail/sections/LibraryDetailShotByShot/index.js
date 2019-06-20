@@ -38,7 +38,6 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   sliderAction(i) {
-    console.log(i)
     const ref = this.sliderThumbs.children[0].children[0].childNodes[0]
 
     for (let k = 0; k < ref.childNodes.length; k++) {
@@ -213,10 +212,6 @@ class LibraryDetailShotByShot extends React.Component {
           data: [20, 10, 4, 2]
       }]
     }
-    
-    console.log("----")
-
-    console.log(datastore)
 
     return (
       <ThemeContext.Consumer>
@@ -498,7 +493,7 @@ class LibraryDetailShotByShot extends React.Component {
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  <div className="col-12-no-gutters bg-white">
+                  <div className="col-12-no-gutters bg-black">
 
                     <RadarChart data={datastore} key={Math.random()} />
 
