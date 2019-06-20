@@ -344,9 +344,6 @@ export const selectPeopleData = () =>
     (substate) => substate.toJS()
   )
 
-export const selectLibraryDetailRaharChart = (state) =>
-  state.LibraryDetail.get('radarChartData')
-
 export const selectColorsData = () =>
   createSelector(
     selectLibraryDetailRaharChart,
