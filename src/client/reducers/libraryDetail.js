@@ -323,9 +323,6 @@ export const selectLibraryDetailDomain = (state) => state.LibraryDetail
 export const selectLibraryDetailSelectedVideo = (state) =>
   state.LibraryDetail.get('selectedVideo')
 
-export const selectLibraryDetailRaharChart = (state) =>
-  state.LibraryDetail.get('radarChartData')
-
 export const selectLibraryDetailPeople = (state) =>
   state.LibraryDetail.get('peopleData')
 
