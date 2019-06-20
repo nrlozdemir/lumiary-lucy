@@ -25,6 +25,7 @@ class PointerCard extends React.Component {
   render() {
     const { data, colors } = this.props
     const { pointerData } = this.state
+
     return (
       <div className={style.radialChart}>
         {style.topTitle && <h1 className={style.topTitle}>{data.topTitle}</h1>}
@@ -123,7 +124,8 @@ class PointerCard extends React.Component {
                   style.pointerInner
                 )}
                 style={{
-                  transform: `rotate(${pointerData - 90 || 0}deg)`,
+                  transform: `rotate(${pointerData / ((data.avg * 2) / 180) -
+                    90 || 0}deg)`,
                 }}
               >
                 <svg
@@ -187,7 +189,9 @@ class PointerCard extends React.Component {
                   <div
                     className={style.pointerTextInner}
                     style={{
-                      transform: `rotate(${-pointerData + 90 || 0}deg)`,
+                      transform: `rotate(${-1 *
+                        (pointerData / ((data.avg * 2) / 180)) +
+                        90 || 0}deg)`,
                     }}
                   >
                     <span
@@ -235,9 +239,9 @@ class PointerCard extends React.Component {
         >
           <p className={style.infoText}>
             This video performs{' '}
-            <span className={style.textBold}>{data.percent}%</span> better than
-            the average video at{' '}
-            <span className={style.textBold}>{data.fps}fps</span>
+            <span className={style.textBold}>{Math.abs(data.percent)}%</span>{' '}
+            {data.percent > 0 ? 'better' : 'worse'} than the average video at{' '}
+            <span className={style.textBold}>{data.fps}</span>
           </p>
         </div>
       </div>

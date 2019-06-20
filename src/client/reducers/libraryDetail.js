@@ -29,6 +29,12 @@ export const types = {
   GET_SHOT_BY_SHOT_SUCCESS: 'LibraryDetail/GET_SHOT_BY_SHOT_SUCCESS',
   GET_SHOT_BY_SHOT_FAILURE: 'LibraryDetail/GET_SHOT_BY_SHOT_FAILURE',
 
+  TOGGLE_INFO_SECTION: 'LibraryDetail/TOGGLE_INFO_SECTION',
+  CHANGE_DOUGHNUT_FILTERS: 'LibraryDetail/CHANGE_DOUGHNUT_FILTERS',
+
+  DOUGHNUT_INFO_SUCCESS: 'LibraryDetail/DOUGHNUT_INFO_SUCCESS',
+  DOUGHNUT_INFO_FAILURE: 'LibraryDetail/DOUGHNUT_INFO_FAILURE',
+
   GET_SHOT_INFO_REQUEST: 'LibraryDetail/GET_SHOT_INFO_REQUEST',
   GET_SHOT_INFO_SUCCESS: 'LibraryDetail/GET_SHOT_INFO_SUCCESS',
   GET_SHOT_INFO_FAILURE: 'LibraryDetail/GET_SHOT_INFO_FAILURE',
@@ -114,6 +120,22 @@ export const actions = {
     type: types.GET_SHOT_BY_SHOT_FAILURE,
     payload,
   }),
+  toggleInfoSection: (payload) => ({
+    type: types.TOGGLE_INFO_SECTION,
+    payload,
+  }),
+  changeDoughnutFilters: (payload) => ({
+    type: types.CHANGE_DOUGHNUT_FILTERS,
+    payload,
+  }),
+  doughnutInfoIndustrySuccess: (payload) => ({
+    type: types.DOUGHNUT_INFO_SUCCESS,
+    payload,
+  }),
+  doughnutInfoIndustryFailure: (payload) => ({
+    type: types.DOUGHNUT_INFO_FAILURE,
+    payload,
+  }),
   getShotInfoRequest: (payload) => ({
     type: types.GET_SHOT_INFO_REQUEST,
     payload,
@@ -145,7 +167,7 @@ export const actions = {
 
 export const initialState = fromJS({
   barChartData: null,
-  doughnutLineChartData: null,
+  doughnutData: null,
   colorTempData: {
     data: undefined,
     loading: false,
@@ -156,6 +178,14 @@ export const initialState = fromJS({
   error: false,
   loading: false,
   selectedVideo: {},
+  infoData: {
+    shownSectionData: null,
+    filters: {
+      date: null,
+      metric: null,
+    },
+    modalData: null,
+  },
   selectedVideoAverage: [],
   radarChartData: {},
   peopleData: {},
@@ -201,7 +231,7 @@ const libraryDetailReducer = (state = initialState, action) => {
       return state.set('loading', fromJS(true))
     case types.GET_DOUGHNUT_CHART_SUCCESS:
       return state
-        .set('doughnutLineChartData', fromJS(action.payload))
+        .set('doughnutData', fromJS(action.payload))
         .set('loading', fromJS(false))
     case types.GET_DOUGHNUT_CHART_FAILURE:
       return state
@@ -231,6 +261,24 @@ const libraryDetailReducer = (state = initialState, action) => {
       return state
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))
+
+    case types.TOGGLE_INFO_SECTION:
+      return state.setIn(
+        ['infoData', 'shownSectionData'],
+        fromJS(action.payload)
+      )
+
+    case types.CHANGE_DOUGHNUT_FILTERS:
+      return state.setIn(
+        ['infoData', 'filters', action.payload.name],
+        fromJS(action.payload.value)
+      )
+
+    case types.DOUGHNUT_INFO_SUCCESS:
+      return state.setIn(['infoData', 'modalData'], fromJS(action.payload))
+
+    case types.DOUGHNUT_INFO_FAILURE:
+      return state.setIn(['infoData', 'modalData'], fromJS(null))
 
     case types.GET_SHOT_INFO_REQUEST:
       return state.set('loading', fromJS(true))
@@ -275,6 +323,12 @@ export const selectLibraryDetailDomain = (state) => state.LibraryDetail
 export const selectLibraryDetailSelectedVideo = (state) =>
   state.LibraryDetail.get('selectedVideo')
 
+export const selectLibraryDetailRaharChart = (state) =>
+  state.LibraryDetail.get('radarChartData')
+
+export const selectLibraryDetailPeople = (state) =>
+  state.LibraryDetail.get('peopleData')
+
 export const selectShotInfoData = () =>
   createSelector(
     selectLibraryDetailShotInfo,
@@ -289,13 +343,6 @@ export const selectPeopleData = () =>
     selectLibraryDetailPeople,
     (substate) => substate.toJS()
   )
-
-export const selectLibraryDetailPeople = (state) =>
-  state.LibraryDetail.get('peopleData')
-
-
-export const selectLibraryDetailRaharChart = (state) =>
-  state.LibraryDetail.get('radarChartData')
 
 export const selectColorsData = () =>
   createSelector(
@@ -325,5 +372,41 @@ export const makeSelectLibraryDetailColorTemperature = () =>
     selectLibraryDetailColorTemperatureDomain,
     (substate) => substate.toJS()
   )
+
+function selectInfoData(state) {
+  return state.LibraryDetail.get('infoData')
+}
+
+export function makeSelectInfoShowSection() {
+  return createSelector(
+    selectInfoData,
+    (substate) =>
+      substate.get('shownSectionData')
+        ? substate.get('shownSectionData').toJS()
+        : null
+  )
+}
+
+export function makeSelectInfoModalData() {
+  return createSelector(
+    selectInfoData,
+    (substate) =>
+      substate.get('modalData') ? substate.get('modalData').toJS() : null
+  )
+}
+
+export function makeSelectDoughnutData() {
+  return createSelector(
+    selectLibraryDetailDomain,
+    (substate) => substate.get('doughnutData').toJS()
+  )
+}
+
+export function makeSelectDoughnutFilters() {
+  return createSelector(
+    selectInfoData,
+    (substate) => substate.get('filters').toJS()
+  )
+}
 
 export default libraryDetailReducer

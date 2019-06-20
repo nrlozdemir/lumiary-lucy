@@ -176,7 +176,9 @@
         position: absolute;
         top: 0;
         bottom: 0;
-        left: calc(-42px - 50px);
+        left: calc(
+          -42px - 50px - 8px
+        ); //col padding & bubblewidth/2 & columngap/2
         width: 100px;
         height: 100px;
         border: solid 4px white;

@@ -45,6 +45,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     preparedLabels,
     useBrandLabels,
     customValueKey,
+    customValueKeyGetAll,
     backgroundColor,
     preparedDatasets,
     customBorderColor,
@@ -72,7 +73,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
       ? getTimeBucket(getValueinObject)
       : null
 
-  delete getValueinObject.subtotal
+  if (getValueinObject.subtotal) delete getValueinObject.subtotal
 
   // If time bucket was  selected, it will change labels to time labels
   // defined within a data object from the api response
@@ -138,7 +139,11 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     !Array.isArray(datasetsFromValues[0])
   ) {
     datasetsFromValues = datasetsFromValues.map((d) =>
-      customValueKey ? d[customValueKey] || 0 : d.value || 0
+      customValueKey
+        ? d[customValueKey] || 0
+        : customValueKeyGetAll
+        ? d
+        : d.value || 0
     )
   }
 

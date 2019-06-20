@@ -14,15 +14,28 @@
   margin-right: auto;
   margin-top: 38px;
 
-  div {
+  > div {
     display: inline-block;
     width: 104px;
+    height: 78px;
     opacity: 0.5;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
 
     &:not(:last-child) {
       margin-right: 28px;
+    }
+
+    .videoContainer{
+      position: relative;
+      width: 104px;
+      height: 52px;
+      overflow: hidden;
+      video {
+        height: 100%;
+        width: 100%;
+        object-fit: cover;
+      }
     }
 
     img {
@@ -63,4 +76,8 @@
 .disabled {
   opacity: .5;
   cursor: initial;
+}
+
+.fullVideo {
+  width: 100%;
 }

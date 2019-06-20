@@ -1,8 +1,10 @@
+import { delay } from 'redux-saga'
 import { takeLatest, call, put, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import _ from 'lodash'
 import { types, actions } from 'Reducers/marketview'
 import { selectAuthProfile } from 'Reducers/auth'
+import querystring from 'querystring'
 
 import marketviewCompetitorVideosData from 'Api/mocks/marketviewCompetitorVideos.json'
 import marketviewCompetitorTopVideosData from 'Api/mocks/marketviewCompetitorTopVideosMock.json'
@@ -31,8 +33,28 @@ import {
 import { dayOfWeek } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
-function getCompetitorVideosApi() {
-  return axios('/').then((res) => marketviewCompetitorVideosData)
+function* getCompetitorVideosApi({ payload }) {
+  console.log(payload)
+  console.log(marketviewCompetitorVideosData)
+  const requestObject = {
+    ...payload
+  }
+
+  if(payload.competitors) {
+    requestObject.competitors = JSON.stringify(payload.competitors)
+  }
+
+  let response = yield call(
+    getDataFromApi,
+    {},
+    `/brand/${payload.brandUuid}/topvideos?${querystring.stringify(requestObject)}`,
+    'GET'
+  )
+
+  console.log(response)
+
+  // return axios('/').then((res) => marketviewCompetitorVideosData)
+  return response
 }
 
 function getBubbleChartApi() {
@@ -77,9 +99,9 @@ function getGetTopPerformingPropertiesByCompetitorsApi() {
     .then((res) => marketviewTopPerformingPropertiesCompetitors)
 }
 
-function* getCompetitorVideosMarketview() {
+function* getCompetitorVideosMarketview(params) {
   try {
-    const payload = yield call(getCompetitorVideosApi)
+    const payload = yield call(getCompetitorVideosApi, params)
     yield put(actions.getCompetitorVideosSuccess(payload))
   } catch (error) {
     yield put(actions.getCompetitorVideosFailure({ error }))
@@ -181,63 +203,57 @@ function* getPlatformTopVideosMarketview({
   }
 }
 
-function* getSimilarProperties(props) {
+function* getSimilarProperties({ data: { dateRange } }) {
   try {
     const { brand } = yield select(selectAuthProfile)
-    const {
-      data: {
-        date: { dateRange },
-        themeColors,
-      },
-    } = props
-    const expectedValues = [
-      { key: 'color', title: 'Dominant Color' },
-      { key: 'pacing', title: 'Pacing' },
-      { key: 'duration', title: 'Duration' },
-    ]
-    const parameters = {
-      dateRange,
-      metric: 'views',
-      platform: 'all',
-      dateBucket: 'none',
-      display: 'percentage',
-      brands: [brand.uuid],
-      url: '/report',
+
+    const competitors =
+      !!brand.competitors &&
+      !!brand.competitors.length &&
+      brand.competitors.map((c) => c.uuid)
+
+    const options = {
+      competitors,
     }
 
-    const payloads = yield expectedValues.map((item) =>
-      call(getDataFromApi, { ...parameters, property: [item.key] })
-    )
+    const url = `/brand/${
+      brand.uuid
+    }/properties?metric=shares&daterange=${dateRange}`
+    //${!!competitors ? '&allcompetitors=true' : ''}`
+    console.log('options', options)
+    const payload = yield call(getDataFromApi, options, url, 'GET')
 
-    const createCustomBackground = (data) => {
-      return Object.values(data).map((item, idx) => {
-        if (Object.values(data).includes(100)) {
-          return '#2FD7C4'
-        }
-        return idx === getMaximumValueIndexFromArray(data)
-          ? '#2FD7C4'
-          : themeColors.textColor
-      })
+    let parsedNewPayload, highestBuckets
+    if (!!payload && !!payload.propertyBucketsRanked) {
+      highestBuckets = _.slice(
+        _.orderBy(
+          payload.propertyBucketsRanked,
+          (item) => {
+            return item.numberOfMetric
+          },
+          ['desc']
+        ),
+        0,
+        3
+      )
     }
 
-    const val = expectedValues.map((payload, idx) => ({
-      ...payload,
+    const val = highestBuckets.map((value, idx) => ({
       doughnutChartValues: convertDataIntoDatasets(
-        payloads[idx],
-        {
-          ...parameters,
-          property: [payload.key],
-        },
+        payload,
+        { property: [value.highestProperty] },
         {
           singleDataset: true,
-          backgroundColor: createCustomBackground(
-            payloads[idx].data[Object.keys(payloads[idx].data)[0]][payload.key]
-          ),
+          noBrandKeys: true,
+          customValueKeyGetAll: true,
         }
       ),
     }))
+
+    yield delay(2000)
     yield put(actions.getSimilarPropertiesSuccess(val))
   } catch (error) {
+    console.log('error == ', error)
     yield put(actions.getSimilarPropertiesFailure(error))
   }
 }

@@ -79,6 +79,7 @@ const DoughnutChart = (props) => {
     customStyle,
     customDoughnutContainer,
     customChartWrapper,
+    customTooltips,
   } = props
 
   const themes = props.themeContext.colors
@@ -135,16 +136,7 @@ const DoughnutChart = (props) => {
                 labels: data.labels,
                 datasets: [
                   {
-                    data:
-                      data && data.datasets
-                        ? data.datasets[0].data.reduce(
-                            (acc, curr) => [
-                              ...acc,
-                              ...(curr !== 0 ? [curr] : []),
-                            ],
-                            []
-                          )
-                        : null,
+                    ...data.datasets[0],
                     backgroundColor:
                       data && data.datasets
                         ? data.datasets[0].backgroundColor
@@ -162,6 +154,7 @@ const DoughnutChart = (props) => {
               options={{
                 responsive: false,
                 tooltips: {
+                  ...customTooltips,
                   enabled: true,
                 },
                 legend: {
