@@ -33,7 +33,7 @@ export class Module extends React.Component {
       const selectFilterValues = selectFilters.values[moduleKey]
 
       const valuesToType = selectFiltersToType(selectFilterValues)
-      
+
       action(valuesToType, moduleKey)
     }
   }

@@ -1,11 +1,15 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { ajax } from 'Utils/api'
+import { API_ROOT, API_VERSION } from 'Utils/globals'
+import _ from 'lodash'
 
 import {
   types,
   actions,
-  makeSelectSelectedVideoID,
+  makeSelectInfoShowSection,
+  makeSelectDoughnutFilters,
+  selectShotInfoData,
 } from 'Reducers/libraryDetail'
 import mock from 'Api/mocks/libraryMock.json'
 import { findIdDetail, getDataFromApi, buildApiUrl } from 'Utils/api'
@@ -14,6 +18,7 @@ import {
   getMaximumValueIndexFromArray,
   convertColorTempToDatasets,
   parseAverage,
+  getLabelWithSuffix,
 } from 'Utils/'
 import { selectAuthProfile } from 'Reducers/auth'
 import { chartColors } from 'Utils/globals'
@@ -160,12 +165,22 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
       dateBucket: 'none',
       url: '/report',
     }
-    const payloads = yield expectedValues.map((item) =>
-      call(getDataFromApi, {
-        ...parameters,
-        property: [item.key],
+    const response = yield call(getDataFromApi, {
+      ...parameters,
+      property: expectedValues.map(({ key }) => key),
+    })
+
+    const payloads = Object.entries(response.data[brand.name]).map(
+      ([key, value]) => ({
+        platform: 'All',
+        data: {
+          [brand.name]: {
+            [key]: value,
+          },
+        },
       })
     )
+
     const createCustomBackground = (data) => {
       return Object.values(data).map((item, idx) => {
         if (Object.values(data).includes(100)) {
@@ -176,9 +191,9 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
           : themeColors.textColor
       })
     }
-    const val = expectedValues.map((payload, idx) => ({
-      ...payload,
-      doughnutChartValues: convertDataIntoDatasets(
+
+    const val = expectedValues.map((payload, idx) => {
+      const chartValues = convertDataIntoDatasets(
         payloads[idx],
         {
           ...parameters,
@@ -190,8 +205,27 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
             payloads[idx].data[Object.keys(payloads[idx].data)[0]][payload.key]
           ),
         }
-      ),
-    }))
+      )
+
+      const entries = payloads[idx].data[brand.name][payload.key]
+      const [[maxDataKey, maxDataValue]] = Object.entries(entries).sort(
+        ([, v1], [, v2]) => (v1 > v2 ? -1 : 1)
+      )
+      const maxDataIndex = Object.keys(entries).findIndex(
+        (key) => key === maxDataKey
+      )
+
+      return {
+        ...payload,
+        doughnutChartValues: chartValues,
+        max: {
+          label: chartValues.labels[maxDataIndex],
+          percentage: maxDataValue,
+        },
+        data: payloads[idx],
+      }
+    })
+
     yield put(actions.getDoughnutChartSuccess(val))
   } catch (error) {
     yield put(actions.getDoughnutChartFailure({ error }))
@@ -256,7 +290,7 @@ function* getShotInfoRequest({ ShotId }) {
     ShotId,
   })
   try {
-    
+
     yield put(actions.getShotInfoSuccess(payload))
   } catch (error) {
     yield put(actions.getShotInfoFailure({ error }))
@@ -274,6 +308,133 @@ function* getSelectedVideo({ payload }) {
   }
 }
 
+function* getDoughnutSectionInfoData() {
+  try {
+    const { date, metric } = yield select(makeSelectDoughnutFilters())
+
+    if (!date || !metric) {
+      return
+    }
+
+    const infoData = yield select(makeSelectInfoShowSection())
+
+    if (!infoData) {
+      return
+    }
+
+    const { brand } = yield select(selectAuthProfile)
+    const { uuid } = yield select(selectShotInfoData())
+
+    let {
+      libraryMetricPercents,
+      industryMetricPercents,
+      libraryDayAverages,
+      industryDayAverages,
+      videoPropertyAverage,
+      libraryPropertyAverage,
+      propertyLibraryPercentChange,
+    } = yield call(getDataFromApi, {
+      url: `/brand/${brand.uuid}/video/${uuid}/compare`,
+      requestType: 'GET',
+      metric,
+      daterange: date,
+    })
+
+    let libraryChartData = null,
+      libraryMaxKey,
+      libraryMaxValue,
+      libraryChartMax
+
+    if (
+      Object.keys(libraryMetricPercents).length &&
+      !Object.keys(libraryMetricPercents).includes('undefined')
+    ) {
+      libraryChartMax = _.max(Object.values(libraryMetricPercents))
+
+      libraryChartData = {
+        labels: Object.keys(libraryMetricPercents).map((key) =>
+          getLabelWithSuffix(key, metric)
+        ),
+        datasets: [
+          {
+            borderColor: '#ACB0BE',
+            label: infoData.title,
+            data: Object.values(libraryMetricPercents).map((val) =>
+              Math.floor(val * 100)
+            ),
+            backgroundColor: Object.values(libraryMetricPercents).map((val) =>
+              val === libraryChartMax ? '#2FD7C4' : '#fff'
+            ),
+            hoverBackgroundColor: [],
+          },
+        ],
+      }[(libraryMaxKey, libraryMaxValue)] = Object.entries(
+        libraryMetricPercents
+      ).sort(([, v1], [, v2]) => (v1 > v2 ? -1 : 1))[0]
+    }
+
+    let industryChartData = null,
+      industryChartMax,
+      industryMaxKey,
+      industryMaxValue
+
+    if (
+      Object.keys(industryMetricPercents).length &&
+      !Object.keys(industryMetricPercents).includes('undefined')
+    ) {
+      industryChartMax = _.max(Object.values(industryMetricPercents))
+
+      industryChartData = {
+        labels: Object.keys(industryMetricPercents).map((key) =>
+          getLabelWithSuffix(key, metric)
+        ),
+        datasets: [
+          {
+            borderColor: '#ACB0BE',
+            label: infoData.title,
+            data: Object.values(industryMetricPercents).map((val) =>
+              Math.floor(val * 100)
+            ),
+            backgroundColor: Object.values(industryMetricPercents).map((val) =>
+              val === industryChartMax ? '#2FD7C4' : '#fff'
+            ),
+            hoverBackgroundColor: [],
+          },
+        ],
+      }[(industryMaxKey, industryMaxValue)] = Object.entries(
+        industryMetricPercents
+      ).sort(([, v1], [, v2]) => (v1 > v2 ? -1 : 1))[0]
+    }
+
+    videoPropertyAverage = 446089
+    libraryPropertyAverage = 514125.3333333333
+    propertyLibraryPercentChange = -0.13233413901668592
+
+    yield put(
+      actions.doughnutInfoIndustrySuccess({
+        libraryChartData,
+        libraryMaxKey,
+        libraryMaxValue: Math.floor(libraryMaxValue * 100),
+        industryChartData,
+        industryMaxKey,
+        industryMaxValue: Math.floor(industryMaxValue * 100),
+        libraryDayAverages: Object.values(libraryDayAverages).map((val) =>
+          Math.floor(val * 100)
+        ),
+        industryDayAverages: Object.values(industryDayAverages).map((val) =>
+          Math.floor(val * 100)
+        ),
+        videoPropertyAverage: Math.floor(videoPropertyAverage / 1000),
+        libraryPropertyAverage: Math.floor(libraryPropertyAverage / 1000),
+        propertyLibraryPercentChange:
+          Math.floor(propertyLibraryPercentChange * 100) / 100,
+      })
+    )
+  } catch (e) {
+    console.error(e)
+    yield put(actions.doughnutInfoIndustryFailure(e))
+  }
+}
 function* getVideoAverage({ id }) {
   try {
     const { brand } = yield select(selectAuthProfile)
@@ -353,6 +514,9 @@ export default [
   takeLatest(types.GET_COLOR_TEMP_REQUEST, getColorTemperatureData),
   takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),
   takeLatest(types.GET_SELECTED_VIDEO_REQUEST, getSelectedVideo),
+  takeLatest(types.CHANGE_DOUGHNUT_FILTERS, getDoughnutSectionInfoData),
+  takeLatest(types.TOGGLE_INFO_SECTION, getDoughnutSectionInfoData),
+  takeLatest(types.GET_SHOT_INFO_REQUEST, getShotInfoRequest),
   takeLatest(types.GET_SELECTED_VIDEO_AVERAGE_REQUEST, getVideoAverage),
   takeLatest(types.GET_SHOT_INFO_REQUEST, getShotInfoRequest),
   takeLatest(types.GET_RADAR_CHART_REQUEST, getRadarChartRequest),

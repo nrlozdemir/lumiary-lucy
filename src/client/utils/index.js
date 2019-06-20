@@ -802,7 +802,7 @@ const getMinMaxFromDatasets = (datasets = [], initial = 0, type = 'max') => {
     : 0
 }
 
-/* 
+/*
  reduce selectFilter values
  into { type: value } map which is easily read by azazzle
 */
@@ -847,5 +847,6 @@ export {
   convertVideoEngagementData,
   floatCvScore,
   getMinMaxFromDatasets,
+  getLabelWithSuffix,
   selectFiltersToType,
 }

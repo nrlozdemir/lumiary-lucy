@@ -83,7 +83,7 @@ export class LibraryDetail extends React.Component {
     const {
       libraryDetail: {
         barChartData,
-        doughnutLineChartData,
+        doughnutData,
         colorTempData,
         shotByShotData,
         selectedVideo,
@@ -108,9 +108,7 @@ export class LibraryDetail extends React.Component {
             cvScore={selectedVideo['cvScores.value']}
           />
         )}
-        {doughnutLineChartData && (
-          <LibraryDetailDoughnutChart doughnutData={doughnutLineChartData} />
-        )}
+        {doughnutData && <LibraryDetailDoughnutChart />}
         {colorTempData && (
           <LibraryDetailColorTemperature
             videoId={videoId}
