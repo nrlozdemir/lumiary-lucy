@@ -493,7 +493,7 @@ class LibraryDetailShotByShot extends React.Component {
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  <div className="col-12-no-gutters bg-black">
+                  <div className="col-12-no-gutters">
 
                     <RadarChart data={datastore} key={Math.random()} />
 

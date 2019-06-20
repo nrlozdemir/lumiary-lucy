@@ -48,9 +48,48 @@ const plugins = [
         })
       })
 
+      // circles mouse on event
+      ctx.canvas.addEventListener('mousemove', (e) => {
+        
+        Object.values(tooltipArea).map((p, i) => {
+          if (p.x > e.offsetX - 12 
+            && p.x < e.offsetX + 12 
+            && p.y > e.offsetY - 12 
+            && p.y < e.offsetY + 12
+          ) {
+
+            let pluginTooltips = []
+
+            pluginTooltips.push(new Chart.Tooltip({
+              _chart: chart.chart,
+              _chartInstance: chart,
+              _data: chart.data,
+              _options: chart.options.tooltips,
+              _active: [p.sector]
+            }, chart))
+
+            Chart.helpers.each(pluginTooltips, function (tooltip) {
+              tooltip.initialize();
+              tooltip.update();
+              tooltip.pivot();
+              tooltip.transition(easing).draw();
+            })
+            Chart.defaults.global.tooltips.enabled = true;
+            //chart.options.tooltips.enabled = true
+            //console.log("mouse over:" + p.x)
+      
+          } else {
+            Chart.defaults.global.tooltips.enabled = false;
+            //console.log("mouse leave: " + e.offsetX)
+            //chart.options.tooltips.enabled = false
+          }
+        })
+      })
     },
   },
 ]
+
+console.log(Chart.Tooltip)
 
 Chart.Tooltip.positioners.custom = function(e, p) {
   if ( ! e.length) {
@@ -90,10 +129,11 @@ const RadarChart = (props) => {
         tooltips: {
           enabled: true,
           position: 'custom',
+          mode: "x",
+          intersect: false,
           backgroundColor: '#fff',
           cornerRadius: 6,
           titleFontColor: '#000',
-          mode: 'point',
           titleFontFamily: 'ClanOTBold',
           bodyFontColor: '#000',
           yAlign: 'bottom',
