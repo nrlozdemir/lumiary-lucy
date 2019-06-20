@@ -9,13 +9,14 @@ import { isDataSetEmpty } from 'Utils'
 import MultipleNoDataModule from 'Components/MultipleNoDataModule'
 import RouterLoading from 'Components/RouterLoading'
 const TopSimilarProperties = (props) => {
-  const { data, title, filters, action, moduleKey, isLoading } = props
+  const { data, title, filters, action, moduleKey, isLoading, isError } = props
   return (
     <Module
       title={title}
       filters={filters}
       moduleKey={moduleKey}
       action={action}
+      isEmpty={!isLoading && isError}
     >
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (

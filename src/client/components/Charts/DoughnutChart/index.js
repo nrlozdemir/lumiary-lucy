@@ -79,6 +79,7 @@ const DoughnutChart = (props) => {
     customStyle,
     customDoughnutContainer,
     customChartWrapper,
+    customTooltips,
   } = props
 
   const themes = props.themeContext.colors
@@ -153,6 +154,7 @@ const DoughnutChart = (props) => {
               options={{
                 responsive: false,
                 tooltips: {
+                  ...customTooltips,
                   enabled: true,
                 },
                 legend: {

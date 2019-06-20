@@ -182,7 +182,6 @@ function* getPlatformTopVideosMarketview({
 }
 
 function* getSimilarProperties({ data: { dateRange } }) {
-  console.log('==== data', dateRange)
   try {
     const { brand } = yield select(selectAuthProfile)
 
@@ -199,9 +198,8 @@ function* getSimilarProperties({ data: { dateRange } }) {
       brand.uuid
     }/properties?metric=shares&daterange=${dateRange}`
     //${!!competitors ? '&allcompetitors=true' : ''}`
-
+    console.log('options', options)
     const payload = yield call(getDataFromApi, options, url, 'GET')
-    console.log('payload', payload)
 
     let parsedNewPayload, highestBuckets
     if (!!payload && !!payload.propertyBucketsRanked) {

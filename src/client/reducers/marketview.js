@@ -423,7 +423,9 @@ const marketviewReducer = (state = initialState, action) => {
         .setIn(['totalViewsData', 'loading'], fromJS(false))
 
     case types.GET_MARKETVIEW_SIMILAR_PROPERTIES_REQUEST:
-      return state.setIn(['similarProperties', 'loading'], fromJS(true))
+      return state
+        .setIn(['similarProperties', 'loading'], fromJS(true))
+        .setIn(['similarProperties', 'error'], fromJS(null))
     case types.GET_MARKETVIEW_SIMILAR_PROPERTIES_SUCCESS:
       return state
         .setIn(['similarProperties', 'data'], fromJS(action.payload))
@@ -432,6 +434,7 @@ const marketviewReducer = (state = initialState, action) => {
       return state
         .setIn(['similarProperties', 'error'], fromJS(action.error))
         .setIn(['similarProperties', 'loading'], fromJS(false))
+        .setIn(['similarProperties', 'data'], fromJS([]))
 
     case types.GET_MARKETVIEW_DETAIL_TIME_REQUEST:
       return state.set('loading', fromJS(true))

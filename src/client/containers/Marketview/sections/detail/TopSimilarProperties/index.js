@@ -32,17 +32,17 @@ class TopSimilarProperties extends React.Component {
   // }
 
   render() {
-    const { similarProperties, title, moduleKey, filters } = this.props
-    console.log('similarProperties', similarProperties)
+    const { similarProperties: {data, loading, error}, title, moduleKey, filters } = this.props
     return (
       <TopSimilarPropertiesModule
         moduleKey={moduleKey}
         title={title}
-        data={similarProperties.data}
+        data={data}
         action={this.getSimilarProperties}
         presentWithDoughnut
         filters={filters}
-        isLoading={similarProperties.loading}
+        isError={error}
+        isLoading={loading}
       />
     )
   }

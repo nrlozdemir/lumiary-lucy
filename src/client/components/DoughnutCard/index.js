@@ -1,9 +1,8 @@
 import React from 'react'
 import style from './style.scss'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
-import { capitalizeFirstLetter } from 'Utils/'
+import { capitalizeFirstLetter, metricSuffix } from 'Utils/'
 const DoughnutCard = ({ data, index, colors, isEmpty }) => {
-  console.log('data', data)
   const dataset = data.datasets[0]
   const checkObjectOrValue = dataset.data.map((item) =>
     !!item.value ? item.value : item
@@ -17,7 +16,7 @@ const DoughnutCard = ({ data, index, colors, isEmpty }) => {
       {
         ...data.datasets[0],
         data: data.datasets[0].data.map((item) =>
-          !!item.proportionOfLibrary ? item.proportionOfLibrary : item
+          !!item.value ? item.value : item
         ),
       },
     ],
@@ -27,7 +26,6 @@ const DoughnutCard = ({ data, index, colors, isEmpty }) => {
       return idx === topItemIndex ? '#2FD7C4' : colors.textColor
     }
   )
-  console.log('data', data)
   return (
     <div className={style.radialChartsContainer}>
       <div
@@ -42,11 +40,12 @@ const DoughnutCard = ({ data, index, colors, isEmpty }) => {
             color: colors.textColor,
           }}
         />
-        <div className={style.cardInner}>
-          <h1 className={style.cardTitle}>
-            #{index + 1} {dataset.label}
-          </h1>
-          {!isEmpty && (
+        {!isEmpty && (
+          <div className={style.cardInner}>
+            <h1 className={style.cardTitle}>
+              #{index + 1} {dataset.label}
+            </h1>
+
             <div
               className={style.subtitle}
               style={{
@@ -59,18 +58,30 @@ const DoughnutCard = ({ data, index, colors, isEmpty }) => {
                 {data.labels[topItemIndex]}
               </p>
             </div>
-          )}
-          <div className={style.doughnutChartContainer}>
-            <DoughnutChart
-              width={150}
-              height={150}
-              displayDataLabels={false}
-              cutoutPercentage={50}
-              customDoughnutContainer={style.customDoughnutContainer}
-              customChartWrapper={style.customChartWrapper}
-              data={customData}
-            />
-            {!isEmpty && (
+            <div className={style.doughnutChartContainer}>
+              <DoughnutChart
+                width={150}
+                height={150}
+                displayDataLabels={false}
+                cutoutPercentage={50}
+                customDoughnutContainer={style.customDoughnutContainer}
+                customChartWrapper={style.customChartWrapper}
+                customTooltips={{
+                  callbacks: {
+                    title: (tooltipItem, data) => {
+                      return data.datasets[0].label
+                    },
+                    label: ({ index }, data) => {
+                      return (
+                        data.labels[index] +
+                        ': ' +
+                        metricSuffix(data.datasets[0].data[index])
+                      )
+                    },
+                  },
+                }}
+                data={customData}
+              />
               <p>
                 <span className={style.textBold}>
                   {!!dataset.data[topItemIndex].proportionOfLibrary
@@ -84,9 +95,9 @@ const DoughnutCard = ({ data, index, colors, isEmpty }) => {
                   {data.labels[topItemIndex]} {dataset.label}
                 </span>
               </p>
-            )}
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </div>
   )
