@@ -3,6 +3,37 @@ import { Radar, Chart } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
 import { metricSuffix } from 'Utils'
 
+function openTooltip(chart, easing, datasetIndex, pointIndex){
+  if(chart.tooltip._active == undefined)
+     chart.tooltip._active = []
+  var activeElements = chart.tooltip._active;
+  var requestedElem = chart.getDatasetMeta(datasetIndex).data[pointIndex];
+  for(var i = 0; i < activeElements.length; i++) {
+      if(requestedElem._index == activeElements[i]._index)  
+         return;
+  }
+  activeElements.push(requestedElem);
+  chart.tooltip._active = activeElements;
+  chart.tooltip.update(true);
+  chart.draw();
+}
+
+function closeTooltip(chart, easing, datasetIndex, pointIndex){
+  var activeElements = chart.tooltip._active;
+  if(activeElements == undefined || activeElements.length == 0)
+    return;
+  var requestedElem = chart.getDatasetMeta(datasetIndex).data[pointIndex];
+  for(var i = 0; i < activeElements.length; i++) {
+      if(requestedElem._index == activeElements[i]._index)  {
+         activeElements.splice(i, 1);
+         break;
+      }
+  }
+  chart.tooltip._active = activeElements;
+  chart.tooltip.update(true);
+  chart.draw();
+}
+
 let tooltipArea = {}
 const plugins = [
   {
@@ -33,6 +64,7 @@ const plugins = [
           ctx.fill()
 
           tooltipArea[index] = {
+            index: index,
             sector: bar,
             x: pointLabelPosition.x,
             y: pointLabelPosition.y
@@ -60,30 +92,63 @@ const plugins = [
 
             let pluginTooltips = []
 
-            pluginTooltips.push(new Chart.Tooltip({
+            chart.options.tooltips.enabled = true
+
+            openTooltip(chart, easing, 0, p.index)
+
+            ctx.restore()
+
+            //let chartData = chart.data
+
+
+            //chart.options.tooltips.enabled = false
+
+            /*
+            chart.options.tooltips.enabled = true
+
+            Chart.helpers.each([new Chart.Tooltip({
               _chart: chart.chart,
               _chartInstance: chart,
-              _data: chart.data,
+              _data: chartData,
               _options: chart.options.tooltips,
               _active: [p.sector]
-            }, chart))
-
-            Chart.helpers.each(pluginTooltips, function (tooltip) {
+            }, chart)], function (tooltip) {
               tooltip.initialize();
               tooltip.update();
               tooltip.pivot();
               tooltip.transition(easing).draw();
+              tooltip.update();
+              //console.log(tooltip._active);
+              //console.log("----")
+            }, () => {
             })
-            Chart.defaults.global.tooltips.enabled = true;
+            */
+            
+            //console.log(chart.data)
+            
             //chart.options.tooltips.enabled = true
             //console.log("mouse over:" + p.x)
       
           } else {
-            Chart.defaults.global.tooltips.enabled = false;
+            
+          
+            chart.options.tooltips.enabled = false
+            
             //console.log("mouse leave: " + e.offsetX)
             //chart.options.tooltips.enabled = false
           }
         })
+      })
+
+
+      //
+      ctx.canvas.addEventListener('mouseout', (e) => {
+        console.log("mouseot");
+
+        chart.options.tooltips.enabled = false
+        for (let t = 0; t < 11; t++) {
+          closeTooltip(chart, easing, 0, t);
+        }
       })
     },
   },
@@ -118,6 +183,11 @@ const RadarChart = (props) => {
       height={height}
       plugins={plugins}
       options={{
+        elements: {
+          line: {
+            tension: 0 // no bezier in radar
+          }
+        },
         responsive: false,
         maintainAspectRatio: false,
         legend: {
@@ -129,8 +199,11 @@ const RadarChart = (props) => {
         tooltips: {
           enabled: true,
           position: 'custom',
-          mode: "x",
-          intersect: false,
+          /*custom : function(tooltipModel) 
+          {
+            tooltipModel.opacity = 0
+          },*/
+          mode: "label",
           backgroundColor: '#fff',
           cornerRadius: 6,
           titleFontColor: '#000',

@@ -131,6 +131,7 @@ class LibraryDetailShotByShot extends React.Component {
           ],
           "​​borderColor": "#ccc",
           "​​​​​pointBackgroundColor": "#505050", 
+          "tooltip": false,
           "pointBorderColor": "#505050", 
           "label": "Color",
           "​​backgroundColor": "rgba(172, 176, 190, 0.4)",
