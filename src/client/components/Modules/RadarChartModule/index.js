@@ -34,10 +34,10 @@ const RadarChartModule = ({
             >
               <div className={style.groupChart}>
                 <div className={style.chartPos}>
-                  <RadarChart data={data[0].datas} key={Math.random()} />
+                  <RadarChart data={data[0].datas} />
                 </div>
                 <div className={style.chartPos}>
-                  <RadarChart data={data[1].datas} key={Math.random()} />
+                  <RadarChart data={data[1].datas} />
                 </div>
               </div>
               <div className={'mt-32 ' + style.labelContainer}>
