@@ -10,6 +10,9 @@ import {
   makeSelectInfoShowSection,
   makeSelectDoughnutFilters,
   selectShotInfoData,
+  makeSelectSelectedVideoID,
+  selectLibraryDetailSelectedVideo,
+  selectLibraryDetailDomain,
 } from 'Reducers/libraryDetail'
 import mock from 'Api/mocks/libraryMock.json'
 import { findIdDetail, getDataFromApi, buildApiUrl } from 'Utils/api'
@@ -42,96 +45,6 @@ function getBarChartApi({ LibraryDetailId }) {
   return axios
     .get('/')
     .then((res) => findIdDetail(mock, LibraryDetailId, 'HeaderBarChartMock'))
-}
-
-function getColorTempApi({ LibraryDetailId }) {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => findIdDetail(mock, 1, 'ColorTempMock'))
-}
-
-function getShotByShotApi({ LibraryDetailId }) {
-  const URL =
-    '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/0639d12f-7a1a-40fe-840d-8c43c1268f31/shots'
-
-  return ajax({
-    url: URL,
-    method: 'GET',
-  }).then((response) => {
-    if (response.error) {
-      throw response.error
-    }
-    return response.data
-  })
-}
-
-function getShotInfoRequestApi({ shotId }) {
-  const URL =
-    '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/0639d12f-7a1a-40fe-840d-8c43c1268f31/shots/1'
-  const FRAMES_INFO =
-    '/brand/6421cdac-d5eb-4427-a267-b9be2e232177/video/e2843ddb-4ba1-4062-acd9-2ffbe302a183/shots/0'
-  const LABELS_INFO =
-    '/brand/6421cdac-d5eb-4427-a267-b9be2e232177/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/0'
-
-  return ajax({
-    url: URL,
-    method: 'GET',
-  }).then((response) => {
-    if (response.error) {
-      throw response.error
-    }
-    // get frames
-    return ajax({
-      url: FRAMES_INFO,
-      method: 'GET',
-    }).then((framesResponse) => {
-      if (framesResponse.error) {
-        throw framesResponse.error
-      }
-
-      response.data.shot.frames = framesResponse.data.shot.frames
-
-      return ajax({
-        url: LABELS_INFO,
-        method: 'GET',
-      }).then((labelsResponse) => {
-        if (labelsResponse.error) {
-          throw labelsResponse.error
-        }
-        response.data.shot.labels = labelsResponse.data.shot.labels
-        return response.data
-      })
-    })
-})
-}
-
-function getRadarChartRequestApi({ shotId }) {
-  const URL =
-    '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/4/colors'
-
-  return ajax({
-    url: URL,
-    method: 'GET',
-  }).then((response) => {
-    if (response.error) {
-      throw response.error
-    }
-    return response.data
-  })
-}
-
-function getPeopleRequestApi({ shotId }) {
-  const URL =
-    '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea/video/a40de7da-a57b-4d8c-8833-6648268aa939/shots/0/demographics'
-
-  return ajax({
-    url: URL,
-    method: 'GET',
-  }).then((response) => {
-    if (response.error) {
-      throw response.error
-    }
-    return response.data
-  })
 }
 
 function* getBarChart({ payload: { LibraryDetailId } }) {
@@ -266,30 +179,29 @@ function* getColorTemperatureData({
   }
 }
 
-function* getShotByShot({ payload: { LibraryDetailId } }) {
+function* getShotByShot(videoId) {
   try {
-    let payload = yield call(getShotByShotApi, {
-      LibraryDetailId,
-    })
+    const { brand } = yield select(selectAuthProfile)
 
-    Object.values(payload.video.shots).map((el, i) => {
-      const randomImage = Math.floor(Math.random(1) * Math.floor(30))
-      payload.video.shots[
-        i
-      ].image = `https://picsum.photos/id/${randomImage}/320/320`
-    })
-
+    const payload = yield call(
+      getDataFromApi,
+      {},
+      `/brand/${brand.uuid}/video/${videoId.payload}/shots`,
+      'GET'
+    )
     yield put(actions.getShotByShotSuccess(payload))
   } catch (error) {
     yield put(actions.getShotByShotFailure({ error }))
   }
 }
 
-function* getShotInfoRequest({ ShotId }) {
-  const payload = yield call(getShotInfoRequestApi, {
-    ShotId,
-  })
+function* getShotInfoRequest(ids) {
   try {
+    console.log(ids)
+    const url = `/brand/${ids.payload.brandUuid}/video/${
+      ids.payload.videoUuid
+    }/shots/${ids.payload.shotId}`
+    const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
 
     yield put(actions.getShotInfoSuccess(payload))
   } catch (error) {
@@ -449,11 +361,11 @@ function* getVideoAverage({ id }) {
   }
 }
 
-function* getRadarChartRequest({ ShotId }) {
+function* getRadarChartRequest(ids) {
   try {
-    const payload = yield call(getRadarChartRequestApi, {
-      ShotId,
-    })
+    const url = `/brand/${ids.payload.brandUuid}/video/${
+      ids.payload.videoUuid
+    }/shots/${ids.payload.shotId}/colors`
 
     const colorNames = [
       'red',
@@ -469,7 +381,8 @@ function* getRadarChartRequest({ ShotId }) {
       'red-purple',
       //"blue",
     ]
-
+    const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
+    console.log(payload)
     const totalValue = Object.values(payload).reduce(
       (prev, next) => prev + next,
       0
@@ -493,15 +406,18 @@ function* getRadarChartRequest({ ShotId }) {
 
     yield put(actions.getRadarChartSuccess(values))
   } catch (error) {
+    console.log(error)
     yield put(actions.getRadarChartFailure({ error }))
   }
 }
 
-function* getPeopleRequest({ ShotId }) {
+function* getPeopleRequest(ids) {
   try {
-    const payload = yield call(getPeopleRequestApi, {
-      ShotId,
-    })
+    const url = `/brand/${ids.payload.brandUuid}/video/${
+      ids.payload.videoUuid
+    }/shots/${ids.payload.shotId}/demographics`
+    const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
+
     yield put(actions.getPeopleSuccess(payload))
   } catch (error) {
     yield put(actions.getPeopleFailure({ error }))
@@ -518,7 +434,6 @@ export default [
   takeLatest(types.TOGGLE_INFO_SECTION, getDoughnutSectionInfoData),
   takeLatest(types.GET_SHOT_INFO_REQUEST, getShotInfoRequest),
   takeLatest(types.GET_SELECTED_VIDEO_AVERAGE_REQUEST, getVideoAverage),
-  takeLatest(types.GET_SHOT_INFO_REQUEST, getShotInfoRequest),
   takeLatest(types.GET_RADAR_CHART_REQUEST, getRadarChartRequest),
   takeLatest(types.GET_PEOPLE_REQUEST, getPeopleRequest),
 ]

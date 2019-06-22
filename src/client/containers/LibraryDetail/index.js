@@ -41,13 +41,13 @@ export class LibraryDetail extends React.Component {
     if (match.params.videoId) {
       getSelectedVideo(match.params.videoId)
       getSelectedVideoAverage(match.params.videoId)
-      getBarChartRequest({ LibraryDetailId: 1 })
+      getBarChartRequest(match.params.videoId)
       getDoughnutChartRequest({
         LibraryDetailId: match.params.videoId,
         themeColors: colors,
       })
-      getColorTempRequest({ LibraryDetailId: 1 })
-      getShotByShotRequest({ LibraryDetailId: 1 })
+      getColorTempRequest(match.params.videoId)
+      getShotByShotRequest(match.params.videoId)
     }
   }
 

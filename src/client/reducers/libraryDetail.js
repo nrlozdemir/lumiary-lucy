@@ -360,7 +360,7 @@ export const makeSelectSelectedVideoID = () =>
   createSelector(
     selectLibraryDetailSelectedVideo,
     (substate) => {
-      // return substate.toJS().selectedVideo.uuid
+      return substate.toJS().uuid
     }
   )
 
