@@ -24,13 +24,11 @@ class CompareShares extends React.Component {
 
     return !isEqual(nextData, data)
   }
-  
+
   render() {
     const {
       compareSharesData: { data, loading, error },
     } = this.props
-
-    console.log(data)
 
     return (
       <RadarChartModule
