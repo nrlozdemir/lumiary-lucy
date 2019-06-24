@@ -183,11 +183,13 @@ function* getShotByShot(videoId) {
 
 function* getShotInfoRequest(ids) {
   try {
-    console.log(ids)
+    console.log('get shot info', ids)
+    
     const url = `/brand/${ids.payload.brandUuid}/video/${
       ids.payload.videoUuid
     }/shots/${ids.payload.shotId}`
-    const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
+
+    const payload = yield call(getDataFromApi, undefined, url, 'GET')
 
     yield put(actions.getShotInfoSuccess(payload))
   } catch (error) {
