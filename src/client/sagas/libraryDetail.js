@@ -221,12 +221,7 @@ function* getDoughnutSectionInfoData({ payload }) {
       return
     }
 
-    const {
-      videoId,
-      property,
-      dateRange = 'week',
-      metric = 'likes',
-    } = payload
+    const { videoId, property, dateRange = 'week', metric = 'likes' } = payload
 
     const infoData = yield select(makeSelectInfoShowSection)
 
@@ -346,6 +341,10 @@ function* getDoughnutSectionInfoData({ payload }) {
             metricLibraryPercentChange * 100
           ),
         })
+      )
+    } else {
+      yield put(
+        actions.doughnutInfoIndustryFailure('Doughnut Info Request Error')
       )
     }
   } catch (e) {

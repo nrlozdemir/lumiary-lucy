@@ -11,7 +11,7 @@ import LineChart from './LineChart'
 
 const moduleKey = 'LDDH'
 
-const Info = ({ videoId, title, ...rest }) => (
+const Info = ({ videoId, title, loading, ...rest }) => (
   <ThemeContext.Consumer>
     {({ themeContext: { colors } }) => (
       <div className={style.radialChartsContainer}>
@@ -27,17 +27,23 @@ const Info = ({ videoId, title, ...rest }) => (
             moduleKey={moduleKey}
             {...rest}
           />
-          <div
-            className={style.dataWrapper}
-            style={{
-              background: colors.moduleBackground,
-            }}
-          >
-            <LibraryData />
-            <BasedOnShares title={title} moduleKey={moduleKey} {...rest} />
-            <IndustryData />
-          </div>
-          <LineChart />
+          {!loading ? (
+            <React.Fragment>
+              <div
+                className={style.dataWrapper}
+                style={{
+                  background: colors.moduleBackground,
+                }}
+              >
+                <LibraryData />
+                <BasedOnShares title={title} moduleKey={moduleKey} {...rest} />
+                <IndustryData />
+              </div>
+              <LineChart />
+            </React.Fragment>
+          ) : (
+            <div className={style.infoLoading}>loading...</div>
+          )}
         </div>
       </div>
     )}
