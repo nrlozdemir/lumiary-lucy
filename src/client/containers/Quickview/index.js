@@ -75,9 +75,12 @@ export class Main extends React.PureComponent {
     const {
       match,
       quickview: {
-        selectedPlatform: { platformsValues },
+        selectedPlatform: { platformsValues, differencesValues },
       },
     } = this.props
+
+    console.log('platformsValues', platformsValues)
+    console.log('differencesValues', differencesValues)
 
     const selectedPlatform = match.params.platform || 'facebook'
 
@@ -234,7 +237,7 @@ export class Main extends React.PureComponent {
                                       item.title.toLowerCase()
                                     ) !== -1
 
-                                  const difference = hasDifference && 50
+                                  const difference = (!hasDifference) ? false : differencesValues[item.slug] || 'N/A'
 
                                   return (
                                     <div

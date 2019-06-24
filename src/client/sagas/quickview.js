@@ -10,56 +10,6 @@ import { getDataFromApi } from 'Utils/api'
 import quickviewItemsData from 'Api/mocks/quickviewItemsMock.json'
 
 function* getQuickviewItemsApi({ platform, metric, daterange, uuid, }) {
-  //this will use ajax function in utils/api when real data is provided
-
-  // // const platform = 'facebook'
-  // const serverData = {
-  //   "maxVideo": {
-  //     "id": 1130,
-  //     "uuid": "13c710aa-1c0b-450a-9fe1-0b4274a83fd4",
-  //     "title": "The levels of disrespect...\n\n(via _kennedychandler1/IG)",
-  //     "fileName": "d65aa957-d094-4cf3-8d37-dafe50e752ea/facebook/13c710aa-1c0b-450a-9fe1-0b4274a83fd4/442696289887625.mp4",
-  //     "date": "2019-06-04T15:55:13.000Z",
-  //     "brand_uuid": "d65aa957-d094-4cf3-8d37-dafe50e752ea",
-  //     "platform": null,
-  //     "createdAt": "2019-06-04T17:14:42.914Z",
-  //     "updatedAt": "2019-06-04T19:41:00.899Z",
-  //     "cvScores.value": 15.376738536833,
-  //     "aspectRatios.value": "4:5",
-  //     "frameRates.value": 30,
-  //     "durations.value": 5.933984,
-  //     "durations.bucket_name": '0-15',
-  //     "pacings.value": 5.9,
-  //     "pacings.bucket_name": 'Medium',
-  //     "formats.value": "None",
-  //     "resolutions.value": "480p"
-  //   },
-  //   "minVideo": {
-  //     "id": 1125,
-  //     "uuid": "a9be4618-0296-48c6-849c-de7ac547f992",
-  //     "title": "Steph wishes he would've handled things differently",
-  //     "fileName": "d65aa957-d094-4cf3-8d37-dafe50e752ea/facebook/a9be4618-0296-48c6-849c-de7ac547f992/2435667196490605.mp4",
-  //     "date": "2019-06-04T16:51:46.000Z",
-  //     "brand_uuid": "d65aa957-d094-4cf3-8d37-dafe50e752ea",
-  //     "platform": null,
-  //     "createdAt": "2019-06-04T17:12:22.854Z",
-  //     "updatedAt": "2019-06-04T19:40:58.746Z",
-  //     "cvScores.value": 1,
-  //     "aspectRatios.value": "1:1",
-  //     "frameRates.value": 29.97,
-  //     "durations.value": 9.34301,
-  //     "durations.bucket_name": '31-60',
-  //     "pacings.value": 2.0353685,
-  //     "pacings.bucket_name": 'Slowest',
-  //     "formats.value": "None",
-  //     "resolutions.value": "480p"
-  //   },
-  //   "differences": {
-  //     "duration": 36.48744890565246,
-  //     "pacings": 189.87379926534186
-  //   }
-  // }
-
   const parseVideoResponse = ({ videoInfo, serverData }) => {
     const { 
       title = '', 
@@ -101,54 +51,63 @@ function* getQuickviewItemsApi({ platform, metric, daterange, uuid, }) {
       },
       infos: [
         {
+          "slug": "duration",
           "title": "Duration",
           "value": durationsBucketName,
           "percentage": durationsIndustryPercent,
           "text": "{percentage}% of industry videos are {value} sec in length"
         },
         {
+          "slug": "pacing",
           "title": "Pacing",
           "value": pacingsBucketName,
           "percentage": pacingsIndustryPercent,
           "text": "{percentage}% of industry videos have <b>{value} {title}</b>"
         },
         {
+          "slug": "format",
           "title": "Format",
           "value": formatsBucketName,
           "percentage": formatsIndustryPercent,
           "text": "{percentage}% of industry videos have a <b>{title}</b> of <b>{value}</b>"
         },
         {
+          "slug": "dominantColor",
           "title": "Dominant Color",
           "value": "N/A",
           "percentage": 0,
           "text": "{percentage}% of industry videos have a <b>{title}</b> of <b>{value}</b>"
         },
         {
+          "slug": "predominantTalentAge",
           "title": "Predominant Talent Age",
           "value": "N/A",
           "percentage": 0,
           "text": "{percentage}% of industry videos are <b>{title}</b> of <b>{value}</b>"
         },
         {
+          "slug": "predominantTalentGender",
           "title": "Predominant Talent Gender",
           "value": "N/A",
           "percentage": 0,
           "text": "{percentage}% of industry videos are <b>{title}</b> of <b>{value}</b>"
         },
         {
+          "slug": "aspectRatio",
           "title": "Aspect Ratio",
           "value": aspectRatiosBucketName,
           "percentage": aspectRatiosIndustryPercent,
           "text": "{percentage}% of industry videos have an <b>{title}</b> of <b>{value}</b>"
         },
         {
+          "slug": "resolution",
           "title": "Resolution",
           "value": resolutionsBucketName,
           "percentage": resolutionsIndustryPercent,
           "text": "{percentage}% of industry videos have a <b>{title}</b> of <b>{value}</b>"
         },
         {
+          "slug": "frameRate",
           "title": "Frame Rate",
           "value": `${frameRatesBucketName}fps`,
           "percentage": frameRatesIndustryPercent,
@@ -187,14 +146,14 @@ function* getQuickviewItemsApi({ platform, metric, daterange, uuid, }) {
         break
 
       case 'differences':
+        accumulator.differences[platform] = videoInfo
         break
     }
 
     return accumulator
-  }, {})
-
-  console.log('serverObject', serverObject)
-  console.log('quickviewItemsData', quickviewItemsData)
+  }, {
+    differences: {}
+  })
 
   return serverObject
 }
@@ -223,6 +182,7 @@ function* getQuickviewItemsSaga({ payload }) {
       type: types.GET_QUICKVIEW_ITEMS_SUCCESS,
       payload: {
         platformsValues: response[platform],
+        differencesValues: response.differences[platform],
       },
     })
   } catch (error) {

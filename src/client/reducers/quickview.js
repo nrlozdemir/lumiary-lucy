@@ -23,7 +23,8 @@ export const actions = {
 export const initialState = fromJS({
   quickviewItems: [],
   selectedPlatform: {
-    platformsValues: []
+    platformsValues: [],
+    differencesValues: {}
   },
   error: false,
   loading: false
@@ -38,6 +39,10 @@ const quickviewReducer = (state = initialState, action) => {
         .setIn(
           ["selectedPlatform", "platformsValues"],
           fromJS(action.payload.platformsValues)
+        )
+        .setIn(
+          ["selectedPlatform", "differencesValues"],
+          fromJS(action.payload.differencesValues)
         )
         .set("loading", fromJS(false))
     case types.GET_QUICKVIEW_ITEMS_FAILURE:
