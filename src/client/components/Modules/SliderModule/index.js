@@ -3,7 +3,7 @@ import ProgressBar from 'Components/ProgressBar'
 import Slider from 'Components/Sliders/Slider'
 
 import style from 'Containers/Marketview/style.scss'
-import { Module } from 'Components/Module'
+import Module from 'Components/Module'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 const SliderModule = (props) => {

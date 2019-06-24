@@ -8,6 +8,7 @@ import {
   selectShotInfoData,
   selectColorsData,
   selectPeopleData,
+  makeSelectSelectedVideoID,
 } from 'Reducers/libraryDetail'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import ProgressBar from 'Components/ProgressBar'
@@ -19,12 +20,13 @@ import { mediaUrl } from 'Utils/globals'
 import { capitalizeFirstLetter } from 'Utils'
 import SliderWithScrubber from 'Components/Sliders/SliderWithScrubber'
 import style from './style.scss'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 
 class LibraryDetailShotByShot extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
-      selectedImage: null
+      selectedImage: null,
     }
 
     this.shotClick = this.shotClick.bind(this)
@@ -32,9 +34,7 @@ class LibraryDetailShotByShot extends React.Component {
     this.sliderAction = this.sliderAction.bind(this)
   }
 
-  componentDidMount() {
-    
-  }
+  componentDidMount() {}
 
   sliderAction(i) {
     const ref = this.sliderThumbs.children[0].children[0].childNodes[0]
@@ -49,18 +49,26 @@ class LibraryDetailShotByShot extends React.Component {
     //const { backgroundImage } = ref.childNodes[i].children[0].children[0].style
     //const currentImage = backgroundImage.replace(/\(|\)|url|\"/gi, '')
 
-    this.sliderImages.style.left = ((i) * 504) * -1
+    this.sliderImages.style.left = i * 504 * -1
   }
 
   shotClick(i) {
-    this.setState({
-      selectedImage: i,
-    }, () => {
-      this.props.getShotInfoRequest(i)
-      this.props.getRadarChartRequest(i)
-      this.props.getPeopleRequest(i)
-      this.sliderAction(i)
-    })
+    const val = {
+      shotId: i,
+      brandUuid: this.props.authProfile.brand.uuid,
+      videoUuid: this.props.selectedVideo,
+    }
+    this.setState(
+      {
+        selectedImage: i,
+      },
+      () => {
+        this.props.getShotInfoRequest(val)
+        this.props.getRadarChartRequest(val)
+        this.props.getPeopleRequest(val)
+        this.sliderAction(val.shotId)
+      }
+    )
   }
 
   shotSliderClick(i) {
@@ -144,7 +152,6 @@ class LibraryDetailShotByShot extends React.Component {
         }
       ]
     }
-
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
@@ -167,24 +174,21 @@ class LibraryDetailShotByShot extends React.Component {
                       className="col-6-no-gutters bg-black"
                     >
                       <div className="mt-48 ml-48 mr-48">
-                        <div 
-                          className={style.shotSliderWrapper} 
-                        >
+                        <div className={style.shotSliderWrapper}>
                           <div
-                            className={style.shotSliderContainer}  
+                            className={style.shotSliderContainer}
                             ref={(el) => (this.sliderImages = el)}
                             style={{
                               width: Object.values(shots).length * 504,
                             }}
                           >
-                            {shots && Object.values(shots).length > 0 &&
-                              Object.values(shots).map(
-                                (el, i) => (
-                                  <div className={style.shotSliderImage}>
-                                    <img src={el.image} />
-                                  </div>
-                                )
-                              )}
+                            {shots &&
+                              Object.values(shots).length > 0 &&
+                              Object.values(shots).map((el, i) => (
+                                <div className={style.shotSliderImage}>
+                                  <img src={el.image} />
+                                </div>
+                              ))}
                           </div>
                         </div>
                         <div
@@ -280,7 +284,11 @@ class LibraryDetailShotByShot extends React.Component {
                                   >
                                     <div className="col-5-no-gutters">
                                       <img
-                                        src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/`}
+                                        src={`${mediaUrl}/lumiere/${
+                                          this.props.authProfile.brand.uuid
+                                        }/${this.props.selectedVideo}/${
+                                          this.state.selectedImage
+                                        }/`}
                                         className={classnames(
                                           style.imageItem,
                                           'grid-container'
@@ -359,7 +367,8 @@ class LibraryDetailShotByShot extends React.Component {
                                       'grid-container',
                                       {
                                         'mb-16':
-                                          i !== shotInfoData.shot.labels.length - 1,
+                                          i !==
+                                          shotInfoData.shot.labels.length - 1,
                                       }
                                     )}
                                     style={{
@@ -371,9 +380,11 @@ class LibraryDetailShotByShot extends React.Component {
                                   >
                                     <div className="col-5-no-gutters">
                                       <img
-                                        src={`${mediaUrl}/lumiere/6421cdac-d5eb-4427-a267-b9be2e232177/e2843ddb-4ba1-4062-acd9-2ffbe302a183/0/${
-                                          shotInfoData.shot.frames[i]
-                                        }`}
+                                        src={`${mediaUrl}/lumiere/${
+                                          this.props.authProfile.brand.uuid
+                                        }/${this.props.selectedVideo}/${
+                                          this.state.selectedImage
+                                        }/${shotInfoData.shot.frames[i]}`}
                                         className={classnames(
                                           style.imageItem,
                                           'grid-container'
@@ -484,6 +495,8 @@ const mapStateToProps = createStructuredSelector({
   shotInfoData: selectShotInfoData(),
   radarChartData: selectColorsData(),
   peopleData: selectPeopleData(),
+  authProfile: makeSelectAuthProfile(),
+  selectedVideo: makeSelectSelectedVideoID(),
 })
 
 function mapDispatchToProps(dispatch) {

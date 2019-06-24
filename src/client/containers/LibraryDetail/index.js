@@ -41,13 +41,13 @@ export class LibraryDetail extends React.Component {
     if (match.params.videoId) {
       getSelectedVideo(match.params.videoId)
       getSelectedVideoAverage(match.params.videoId)
-      getBarChartRequest({ LibraryDetailId: 1 })
+      getBarChartRequest(match.params.videoId)
       getDoughnutChartRequest({
         LibraryDetailId: match.params.videoId,
         themeColors: colors,
       })
-      getColorTempRequest({ LibraryDetailId: 1 })
-      getShotByShotRequest({ LibraryDetailId: 1 })
+      getColorTempRequest(match.params.videoId)
+      getShotByShotRequest(match.params.videoId)
     }
   }
 
@@ -83,7 +83,7 @@ export class LibraryDetail extends React.Component {
     const {
       libraryDetail: {
         barChartData,
-        doughnutLineChartData,
+        doughnutData,
         colorTempData,
         shotByShotData,
         selectedVideo,
@@ -108,9 +108,7 @@ export class LibraryDetail extends React.Component {
             cvScore={selectedVideo['cvScores.value']}
           />
         )}
-        {doughnutLineChartData && (
-          <LibraryDetailDoughnutChart doughnutData={doughnutLineChartData} />
-        )}
+        {doughnutData && <LibraryDetailDoughnutChart />}
         {colorTempData && (
           <LibraryDetailColorTemperature
             videoId={videoId}

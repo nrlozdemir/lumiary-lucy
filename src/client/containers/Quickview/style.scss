@@ -37,27 +37,29 @@
   }
 
   .navItem {
-    display: flex;
+    display: grid;
+    grid-auto-columns: 1fr;
+    grid-auto-flow: column;
+    grid-column-gap: 50px;
     width: 100%;
-    justify-content: space-between;
 
-    a {
+    &_btn {
       cursor: pointer;
-      min-height: 56px;
-      min-width: 164px;
+      height: 56px;
+      width: 100%;
       // color: $color-cool-grey;
       font-family: $font-family-ClanOT;
       text-align: center;
       text-decoration: none;
       text-transform: capitalize;
       border: 1px solid $color-dusk;
-      background-color: $color-dark-five;
       font-size: 14px;
       font-weight: bold;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
+      box-sizing: border-box;
 
       &:hover,
       &:active {
@@ -66,7 +68,15 @@
       }
 
       i {
-        font-size: 30px;
+        font-size: 24px;
+      }
+
+      > div > div {
+        border: none;
+      }
+
+      .activeIcon {
+        margin-left: 24px;
       }
     }
 
@@ -103,56 +113,13 @@
 }
 
 .content {
-  float: left;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 16px;
   width: 100%;
 
   .cardBlock {
-    padding-left: 0px;
-    margin-left: 0px;
-
-    &:first-child {
-      padding-left: 60px;
-      width: calc(50% - 61px); // itemWrapper:first-child border-right is 1px
-
-      .video {
-        margin-right: 60px;
-      }
-
-      .infoItem {
-        margin-right: 30px;
-      }
-
-      .itemWrapper {
-        &:after {
-          content: '';
-          position: absolute;
-          right: 0px;
-          top: 25%;
-          width: 1px;
-          height: 50%;
-          background-color: $color-dusk;
-        }
-      }
-    }
-    &:last-child {
-      padding-right: 60px;
-      width: calc(50% - 60px);
-
-      .video {
-        margin-left: 0px;
-      }
-
-      .infoItem {
-        margin-left: 30px;
-      }
-
-      .card {
-        h1 {
-          margin-right: 0;
-          margin-left: 32px;
-        }
-      }
-    }
+    padding: 0 42px;
   }
 
   .card {
@@ -168,17 +135,12 @@
       font-stretch: normal;
       line-height: normal;
       letter-spacing: normal;
-      margin: 0px 32px 48px 0px;
       text-align: center;
+      margin-bottom: 16px;
 
       i {
         margin-left: 8px;
         font-size: 20px;
-      }
-
-      &.rightVideoTitle {
-        margin-right: 0;
-        margin-left: 60px;
       }
     }
   }
@@ -208,6 +170,38 @@
       flex-direction: column;
       align-items: center;
       justify-content: center;
+      position: relative;
+
+      &_diffBubble {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        left: calc(
+          -42px - 50px - 8px
+        ); //col padding & bubblewidth/2 & columngap/2
+        width: 100px;
+        height: 100px;
+        border: solid 4px white;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        margin: auto;
+        box-sizing: border-box;
+
+        span {
+          &:nth-of-type(1) {
+            font-size: 24px;
+            font-weight: 800;
+            font-family: $font-family-primary;
+          }
+          &:nth-of-type(2) {
+            font-size: 12px;
+            font-family: $font-family-ClanOTNews;
+          }
+        }
+      }
 
       .itemValue {
         margin: 32px 0px 38px;
@@ -243,6 +237,13 @@
         margin-left: 0px;
         background-color: $color-dark-five;
         border-radius: 10px;
+
+        &--dark {
+          background: rgb(33, 36, 59) !important;
+        }
+        &--light {
+          background: rgb(232, 236, 240) !important;
+        }
       }
 
       .percentageBlue {
@@ -284,51 +285,21 @@
       > div {
         text-align: center;
 
-        &:nth-child(1) {
+        &.progressText {
           color: $color-cool-grey;
-          font-size: 18px;
+          font-size: 14px;
           font-family: $font-family-ClanOTNews;
-          margin-bottom: 16px;
+          margin-bottom: 4px;
         }
 
-        &:nth-child(2) {
+        &.itemValue {
           // color: $color-white;
           font-size: 32px;
           font-family: $font-family-primary;
+          margin-bottom: 16px;
         }
       }
     }
-  }
-
-  .differenceCircle {
-    position: absolute;
-    right: -10px;
-    transform: translateX(50%);
-    margin-top: -90px;
-    z-index: 2;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 40px;
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: $color-dark-five;
-    // color: $color-white;
-    font-size: 12px;
-    font-family: $font-family-ClanOTNews;
-
-    & > div > div {
-      font-size: 18px;
-      font-weight: 800;
-      margin-bottom: 4px;
-    }
-  }
-}
-
-.assetContainer {
-  &.right {
-    margin-left: 30px;
   }
 }
 
