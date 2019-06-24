@@ -8,6 +8,7 @@ import BasedOnShares from './BasedOnShares'
 import IndustryData from './IndustryData'
 import Header from './Header'
 import LineChart from './LineChart'
+import RouterLoading from 'Components/RouterLoading'
 
 const moduleKey = 'LDDH'
 
@@ -42,7 +43,9 @@ const Info = ({ videoId, title, loading, ...rest }) => (
               <LineChart />
             </React.Fragment>
           ) : (
-            <div className={style.infoLoading}>loading...</div>
+            <div className={style.infoLoading}>
+              <RouterLoading />
+            </div>
           )}
         </div>
       </div>
