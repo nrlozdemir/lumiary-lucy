@@ -58,11 +58,6 @@ const routes = [
     path: '/audience',
     exact: true,
     component: 'Audience',
-    navigation: {
-      level: 1,
-      order: 2,
-      title: 'Audience',
-    },
   },
   {
     path: '/marketview',
