@@ -119,6 +119,7 @@ function* getQuickviewItemsApi({ platform, metric, daterange, uuid, }) {
     return maxVideo
   }
 
+  console.log('request', metric, daterange, platform,)
   const serverData = yield call(
     getDataFromApi,
     {},

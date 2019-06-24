@@ -34,9 +34,30 @@ export class Main extends React.PureComponent {
             placeHolder: 'Engagement',
           },
         },
-        { name: 'instagram' },
-        { name: 'twitter' },
-        { name: 'youtube' },
+        { 
+          name: 'instagram',
+          filter: {
+            type: 'metric',
+            selectKey: 'QV-instagram-metric',
+            placeHolder: 'Engagement',
+          },
+        },
+        { 
+          name: 'twitter',
+          filter: {
+            type: 'metric',
+            selectKey: 'QV-twitter-metric',
+            placeHolder: 'Engagement',
+          },
+        },
+        { 
+          name: 'youtube',
+          filter: {
+            type: 'metric',
+            selectKey: 'QV-youtube-metric',
+            placeHolder: 'Engagement',
+          },
+        },
       ],
     }
   }
@@ -80,7 +101,7 @@ export class Main extends React.PureComponent {
     } = this.props
 
     const selectedPlatform = match.params.platform || 'facebook'
-
+console.log(platforms)
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
