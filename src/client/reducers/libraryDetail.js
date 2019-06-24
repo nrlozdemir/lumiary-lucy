@@ -254,10 +254,9 @@ const libraryDetailReducer = (state = initialState, action) => {
         .set('loading', fromJS(false))
 
     case types.TOGGLE_INFO_SECTION:
-      return state.setIn(
-        ['infoData', 'shownSectionData'],
-        fromJS(action.payload)
-      )
+      return state
+        .setIn(['infoData', 'shownSectionData'], fromJS(action.payload))
+        .setIn(['infoData', 'modalData'], fromJS(null))
 
     case types.DOUGHNUT_INFO_SUCCESS:
       return state.setIn(['infoData', 'modalData'], fromJS(action.payload))

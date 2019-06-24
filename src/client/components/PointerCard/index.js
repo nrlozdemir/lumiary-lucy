@@ -26,7 +26,7 @@ class PointerCard extends React.Component {
       data: { pointerData: prevPointerData },
     } = prevProps
 
-    if (pointerData !== prevPointerData) {
+    if (pointerData && pointerData !== prevPointerData) {
       this.resetPointer(pointerData)
     }
   }
@@ -36,11 +36,19 @@ class PointerCard extends React.Component {
   }
 
   resetPointer = (to) => {
-    console.log('reset', to)
     this.interval = setInterval(() => {
-      this.setState(({ pointerData }) => ({
-        pointerData: pointerData + 1,
-      }))
+      this.setState(
+        ({ pointerData }) => ({
+          pointerData: pointerData > to ? pointerData - 1 : pointerData + 1,
+        }),
+        () => {
+          const { pointerData: current } = this.state
+
+          if (current === to) {
+            clearInterval(this.interval)
+          }
+        }
+      )
     }, 8)
   }
 
