@@ -9,12 +9,23 @@ import {
   makeSelectInfoShowSection,
   makeSelectInfoModalData,
 } from 'Reducers/libraryDetail'
+import { isEqual } from 'lodash'
 
 class LineChartSection extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    const {
+      modalData: nextData,
+    } = nextProps
+
+    const {
+      modalData: data,
+    } = this.props
+
+    return !isEqual(nextData, data)
+  }
+
   render() {
 		const { modalData, sectionData } = this.props;
-
-		console.log(sectionData);
 
     return (
       <ThemeContext.Consumer>

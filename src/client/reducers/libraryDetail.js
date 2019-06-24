@@ -30,7 +30,6 @@ export const types = {
   GET_SHOT_BY_SHOT_FAILURE: 'LibraryDetail/GET_SHOT_BY_SHOT_FAILURE',
 
   TOGGLE_INFO_SECTION: 'LibraryDetail/TOGGLE_INFO_SECTION',
-  CHANGE_DOUGHNUT_FILTERS: 'LibraryDetail/CHANGE_DOUGHNUT_FILTERS',
 
   DOUGHNUT_INFO_SUCCESS: 'LibraryDetail/DOUGHNUT_INFO_SUCCESS',
   DOUGHNUT_INFO_FAILURE: 'LibraryDetail/DOUGHNUT_INFO_FAILURE',
@@ -124,10 +123,6 @@ export const actions = {
     type: types.TOGGLE_INFO_SECTION,
     payload,
   }),
-  changeDoughnutFilters: (payload) => ({
-    type: types.CHANGE_DOUGHNUT_FILTERS,
-    payload,
-  }),
   doughnutInfoIndustrySuccess: (payload) => ({
     type: types.DOUGHNUT_INFO_SUCCESS,
     payload,
@@ -180,10 +175,6 @@ export const initialState = fromJS({
   selectedVideo: {},
   infoData: {
     shownSectionData: null,
-    filters: {
-      date: null,
-      metric: null,
-    },
     modalData: null,
   },
   selectedVideoAverage: [],
@@ -268,12 +259,6 @@ const libraryDetailReducer = (state = initialState, action) => {
         fromJS(action.payload)
       )
 
-    case types.CHANGE_DOUGHNUT_FILTERS:
-      return state.setIn(
-        ['infoData', 'filters', action.payload.name],
-        fromJS(action.payload.value)
-      )
-
     case types.DOUGHNUT_INFO_SUCCESS:
       return state.setIn(['infoData', 'modalData'], fromJS(action.payload))
 
@@ -326,14 +311,14 @@ export const selectLibraryDetailSelectedVideo = (state) =>
 export const selectLibraryDetailPeople = (state) =>
   state.LibraryDetail.get('peopleData')
 
+export const selectLibraryDetailShotInfo = (state) =>
+  state.LibraryDetail.get('shotInfoData')
+
 export const selectShotInfoData = () =>
   createSelector(
     selectLibraryDetailShotInfo,
     (substate) => substate.toJS()
   )
-
-export const selectLibraryDetailShotInfo = (state) =>
-  state.LibraryDetail.get('shotInfoData')
 
 export const selectPeopleData = () =>
   createSelector(
@@ -399,13 +384,6 @@ export function makeSelectDoughnutData() {
   return createSelector(
     selectLibraryDetailDomain,
     (substate) => substate.get('doughnutData').toJS()
-  )
-}
-
-export function makeSelectDoughnutFilters() {
-  return createSelector(
-    selectInfoData,
-    (substate) => substate.get('filters').toJS()
   )
 }
 

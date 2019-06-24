@@ -9,17 +9,39 @@ class PointerCard extends React.Component {
       pointerData: 0,
     }
   }
+
   componentDidMount() {
-    this.interval = setInterval(() => {
-      this.setState({ pointerData: ++this.state.pointerData }, () => {
-        if (this.state.pointerData === this.props.data.pointerData) {
-          clearInterval(this.interval)
-        }
-      })
-    }, 8)
+    const {
+      data: { pointerData },
+    } = this.props
+    this.resetPointer(pointerData)
   }
+
+  componentDidUpdate(prevProps) {
+    const {
+      data: { pointerData },
+    } = this.props
+
+    const {
+      data: { pointerData: prevPointerData },
+    } = prevProps
+
+    if (pointerData !== prevPointerData) {
+      this.resetPointer(pointerData)
+    }
+  }
+
   componentWillUnmount() {
     clearInterval(this.interval)
+  }
+
+  resetPointer = (to) => {
+    console.log('reset', to)
+    this.interval = setInterval(() => {
+      this.setState(({ pointerData }) => ({
+        pointerData: pointerData + 1,
+      }))
+    }, 8)
   }
 
   render() {
@@ -34,7 +56,9 @@ class PointerCard extends React.Component {
         </p>
         <div className={style.pointerContainer}>
           <div className={style.pointerWrapper}>
-            <p className={style.pointerHeadText}>Avg: {data.avg}k</p>
+            <p className={style.pointerHeadText}>
+              Avg: {`${data.avg}${data.avg >= 1000 ? 'k' : ''}`}
+            </p>
             <svg
               width="188px"
               height="101px"
@@ -201,7 +225,7 @@ class PointerCard extends React.Component {
                         background: colors.moduleBackground,
                       }}
                     >
-                      {pointerData}K
+                      {`${pointerData}${pointerData >= 1000 ? 'k' : ''}`}
                     </span>
                     <svg height="22" width="55">
                       <line

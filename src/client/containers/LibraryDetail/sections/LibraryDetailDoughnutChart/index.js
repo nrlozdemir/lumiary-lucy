@@ -5,16 +5,18 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import Info from './Info'
 import DoughnutCard from './DoughnutCard'
 import {
   makeSelectInfoShowSection,
   makeSelectDoughnutData,
 } from 'Reducers/libraryDetail'
+import Info from './Info'
 
 class LibraryDetailDoughnutChart extends React.Component {
   render() {
-    const { doughnutData, showInfo } = this.props
+    const { doughnutData, showInfo, videoId } = this.props
+
+    const sectionToShow = !!showInfo && showInfo.title || false
 
     return (
       <ThemeContext.Consumer>
@@ -28,8 +30,7 @@ class LibraryDetailDoughnutChart extends React.Component {
             }}
           >
             <div className={style.radialChartsContainer}>
-              {!showInfo &&
-                doughnutData &&
+              {doughnutData &&
                 doughnutData.map(
                   (
                     {
@@ -40,19 +41,30 @@ class LibraryDetailDoughnutChart extends React.Component {
                       data,
                     },
                     i
-                  ) => (
-                    <DoughnutCard
-                      key={i}
-                      identifier={key}
-                      title={title}
-                      chartData={doughnutChartValues}
-                      maxLabel={label}
-                      maxPercentage={percentage}
-                      data={data}
-                    />
-                  )
+                  ) => {
+                    const cardProps = {
+                      title,
+                      videoId,
+                      identifier: key,
+                      maxLabel: label,
+                    }
+                    return (
+                      <React.Fragment key={i}>
+                        {!sectionToShow && (
+                          <DoughnutCard
+                            chartData={doughnutChartValues}
+                            maxPercentage={percentage}
+                            data={data}
+                            {...cardProps}
+                          />
+                        )}
+                        {!!sectionToShow && sectionToShow === title && (
+                          <Info {...cardProps} />
+                        )}
+                      </React.Fragment>
+                    )
+                  }
                 )}
-              {showInfo && <Info />}
             </div>
           </div>
         )}
