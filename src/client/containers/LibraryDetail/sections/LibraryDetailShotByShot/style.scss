@@ -366,10 +366,12 @@
   // color: $color-white;
 }
 .radarChartContainer {
-  margin: 0 auto;
-  padding-top: 35px;
+  margin: 10px auto 0px;
   background-color: transparent;
   height: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .cancelButton {
   float: right;

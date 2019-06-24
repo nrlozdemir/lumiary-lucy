@@ -12,7 +12,6 @@ import {
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
 import ProgressBar from 'Components/ProgressBar'
 import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
-//import RadarChart from 'Components/Charts/RadarChart'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import Scrubber from 'Components/Sliders/Scrubber'
 import XCircle from 'Components/Icons/XCircle'
@@ -100,34 +99,36 @@ class LibraryDetailShotByShot extends React.Component {
     }
     const dataIsEmpty = shots && Object.values(shots).length > 0 ? false : true
 
+    console.log(radarChartData)
+
     const datastore = {
       "datasets": [
         {
           "labels": [
-            88,
-            12,
-            14,
-            98,
-            16,
-            14,
-            86,
-            12,
-            24,
-            18,
-            18
+            0,
+            0,
+            3,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
           ],
           "data": [
-            88,
-            12,
-            14,
-            98,
-            16,
-            14,
-            86,
-            12,
-            24,
-            18,
-            18
+            0,
+            0,
+            3,
+            0,
+            1,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
           ],
           "​​borderColor": "#ccc",
           "​​​​​pointBackgroundColor": "#505050", 
@@ -205,13 +206,6 @@ class LibraryDetailShotByShot extends React.Component {
           "selected": false
         }
       ]
-    }
-
-    const data = {
-      labels: ['Running', 'Swimming', 'Eating', 'Cycling'],
-      datasets: [{
-          data: [20, 10, 4, 2]
-      }]
     }
 
     return (
@@ -483,9 +477,12 @@ class LibraryDetailShotByShot extends React.Component {
                         </TabPanel>
                         <TabPanel>
                           <div className={style.radarChartContainer}>
-                            {/*radarChartDataConfigured && (
-                              <RadarChart data={radarChartDataConfigured} />
-                            )*/}
+                            {datastore && (
+                              <RadarChart 
+                                data={datastore} 
+                                key={Math.random()} 
+                              />
+                            )}
                           </div>
                         </TabPanel>
                       </Tabs>
@@ -494,11 +491,6 @@ class LibraryDetailShotByShot extends React.Component {
                 </React.Fragment>
               ) : (
                 <React.Fragment>
-                  <div className="col-12-no-gutters">
-
-                    <RadarChart data={datastore} key={Math.random()} />
-
-                  </div>
                   <h2 className={style.sliderHeader}>Shot by Shot</h2>
                   <div className={style.sliderContainer}>
                     <div

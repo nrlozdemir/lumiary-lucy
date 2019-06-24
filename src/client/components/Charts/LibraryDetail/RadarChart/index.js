@@ -6,32 +6,39 @@ import { metricSuffix } from 'Utils'
 function openTooltip(chart, easing, datasetIndex, pointIndex){
   if(chart.tooltip._active == undefined)
      chart.tooltip._active = []
-  var activeElements = chart.tooltip._active;
-  var requestedElem = chart.getDatasetMeta(datasetIndex).data[pointIndex];
+  var activeElements = chart.tooltip._active
+  var requestedElem = chart.getDatasetMeta(datasetIndex).data[pointIndex]
   for(var i = 0; i < activeElements.length; i++) {
       if(requestedElem._index == activeElements[i]._index)  
-         return;
+         return
   }
-  activeElements.push(requestedElem);
-  chart.tooltip._active = activeElements;
-  chart.tooltip.update(true);
-  chart.draw();
+  activeElements.push(requestedElem)
+  chart.tooltip._active = activeElements
+  chart.tooltip.update(true)
+  chart.draw()
 }
 
-function closeTooltip(chart, easing, datasetIndex, pointIndex){
-  var activeElements = chart.tooltip._active;
-  if(activeElements == undefined || activeElements.length == 0)
-    return;
-  var requestedElem = chart.getDatasetMeta(datasetIndex).data[pointIndex];
-  for(var i = 0; i < activeElements.length; i++) {
-      if(requestedElem._index == activeElements[i]._index)  {
-         activeElements.splice(i, 1);
-         break;
+function closeTooltip(chart, datasetIndex, pointIndex){
+  var activeElements = chart.tooltip._active
+  if (activeElements == undefined || activeElements.length == 0) {
+    return
+  }
+  var requestedElem = chart.getDatasetMeta(datasetIndex).data[pointIndex]
+  for (var i = 0; i < activeElements.length; i++) {
+      if (requestedElem._index == activeElements[i]._index)  {
+         activeElements.splice(i, 1)
+         break
       }
   }
-  chart.tooltip._active = activeElements;
-  chart.tooltip.update(true);
-  chart.draw();
+  chart.tooltip._active = activeElements
+  chart.tooltip.update(true)
+  chart.draw()
+}
+
+function closeAllTooltips(chart){
+  chart.tooltip._active = []
+  chart.tooltip.update(true)
+  chart.draw()
 }
 
 let tooltipArea = {}
@@ -82,72 +89,25 @@ const plugins = [
 
       // circles mouse on event
       ctx.canvas.addEventListener('mousemove', (e) => {
-        
         Object.values(tooltipArea).map((p, i) => {
           if (p.x > e.offsetX - 12 
             && p.x < e.offsetX + 12 
             && p.y > e.offsetY - 12 
             && p.y < e.offsetY + 12
           ) {
-
-            let pluginTooltips = []
-
             chart.options.tooltips.enabled = true
-
             openTooltip(chart, easing, 0, p.index)
-
-            ctx.restore()
-
-            //let chartData = chart.data
-
-
-            //chart.options.tooltips.enabled = false
-
-            /*
-            chart.options.tooltips.enabled = true
-
-            Chart.helpers.each([new Chart.Tooltip({
-              _chart: chart.chart,
-              _chartInstance: chart,
-              _data: chartData,
-              _options: chart.options.tooltips,
-              _active: [p.sector]
-            }, chart)], function (tooltip) {
-              tooltip.initialize();
-              tooltip.update();
-              tooltip.pivot();
-              tooltip.transition(easing).draw();
-              tooltip.update();
-              //console.log(tooltip._active);
-              //console.log("----")
-            }, () => {
-            })
-            */
-            
-            //console.log(chart.data)
-            
-            //chart.options.tooltips.enabled = true
-            //console.log("mouse over:" + p.x)
-      
           } else {
-            
-          
-            chart.options.tooltips.enabled = false
-            
-            //console.log("mouse leave: " + e.offsetX)
-            //chart.options.tooltips.enabled = false
+            if (chart.tooltip._active.length > 0) {
+              //closeAllTooltips(chart)
+            }
           }
         })
       })
 
-
-      //
       ctx.canvas.addEventListener('mouseout', (e) => {
-        console.log("mouseot");
-
-        chart.options.tooltips.enabled = false
-        for (let t = 0; t < 11; t++) {
-          closeTooltip(chart, easing, 0, t);
+        if (chart.tooltip._active.length > 0) {
+          closeAllTooltips(chart)
         }
       })
     },
@@ -158,7 +118,7 @@ console.log(Chart.Tooltip)
 
 Chart.Tooltip.positioners.custom = function(e, p) {
   if ( ! e.length) {
-    return false;
+    return false
   }
 
   return {
@@ -185,7 +145,7 @@ const RadarChart = (props) => {
       options={{
         elements: {
           line: {
-            tension: 0 // no bezier in radar
+            tension: 0
           }
         },
         responsive: false,
@@ -199,18 +159,48 @@ const RadarChart = (props) => {
         tooltips: {
           enabled: true,
           position: 'custom',
-          /*custom : function(tooltipModel) 
-          {
-            tooltipModel.opacity = 0
-          },*/
           mode: "label",
           backgroundColor: '#fff',
           cornerRadius: 6,
-          titleFontColor: '#000',
+
+          titleFontColor: '#23294b',
           titleFontFamily: 'ClanOTBold',
-          bodyFontColor: '#000',
+          titleFontStyle: 'bold',
+          titleFontSize: 13,
+
+          bodyFontColor: '#23294b',
+          bodyFontFamily: 'ClanOTBold',
+          bodyFontStyle: 'bold',
+          bodyFontSize: 13,
+
           yAlign: 'bottom',
           xAlign: 'center',
+          displayColors: false,
+          callbacks: {
+            title: function(items, data) {
+              console.log("items")
+              console.log(items)
+              console.log("data")
+              console.log(data)
+              return 'This Video: ' + data.labels[items[0].index].count + '%' + data.labels[items[0].index].name
+            },
+            label: function(items, data) {
+              console.log("items")
+              console.log(items, data)
+              console.log("data")
+              console.log(data)
+              return 'This Shot: ' + data.labels[items.index].count + '%' + data.labels[items.index].name
+            },
+            labelColor: function(tooltipItem, chart) {
+              return {
+                borderColor: 'transparent',
+                backgroundColor: 'transparent'
+              }
+            },
+            labelTextColor: function(tooltipItem, chart) {
+                return '#23294b';
+            }
+          }
         },
         plugins: {
           datalabels: false,
@@ -229,16 +219,16 @@ const RadarChart = (props) => {
           },
           ticks: {
             callback: function(value) {
-              return metricSuffix(value)
+              return ''
             },
             backdropColor: 'transparent',
             fontSize: 10,
             display: true,
-            maxTicksLimit: 5,
+            maxTicksLimit: 6,
             min: 0,
-            max: 100,
+            max: 8,
             beginAtZero: true,
-            stepSize: 25,
+            stepSize: 1,
           },
           angleLines: {
             color: 'rgba(90, 99, 134, 0.3)',

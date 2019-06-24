@@ -305,8 +305,7 @@ function* getRadarChartRequest({ ShotId }) {
       'blue-green',
       'blue-purple',
       'purple',
-      'red-purple',
-      //"blue",
+      'red-purple'
     ]
 
     const totalValue = Object.values(payload).reduce(
@@ -319,14 +318,7 @@ function* getRadarChartRequest({ ShotId }) {
     let values = []
     Object.keys(payload).map((color, i) => {
       if (i <= 10) {
-        values.push(
-          /*
-          payload[[colorNames[i]]] === 0
-            ? Math.floor(Math.random() * 1)
-            : payload[[colorNames[i]]]
-          */
-          payload[[colorNames[i]]]
-        )
+        values.push(payload[[colorNames[i]]])
       }
     })
 
