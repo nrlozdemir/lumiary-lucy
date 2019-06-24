@@ -221,7 +221,7 @@ function* getDoughnutSectionInfoData({ payload }) {
       return
     }
 
-    const { videoId, property, dateRange = 'week', metric = 'likes' } = payload
+    const { videoId, property, dateRange, metric } = payload
 
     const infoData = yield select(makeSelectInfoShowSection)
 
