@@ -39,6 +39,8 @@ function* getQuickviewItemsApi({ platform, metric, daterange, uuid, }) {
       'frameRates.value':frameRatesValue = '',
       'frameRates.bucket_name':frameRatesBucketName = '',
       'frameRates.industry_percent':frameRatesIndustryPercent = '',
+      'personGenders.value':personGendersValue = '',
+      'personAges.value':personAgesValue = '',
     } = videoInfo
 
     const maxVideo = {
@@ -81,14 +83,14 @@ function* getQuickviewItemsApi({ platform, metric, daterange, uuid, }) {
         {
           "slug": "predominantTalentAge",
           "title": "Predominant Talent Age",
-          "value": "N/A",
+          "value": personAgesValue,
           "percentage": 0,
           "text": "{percentage}% of industry videos are <b>{title}</b> of <b>{value}</b>"
         },
         {
           "slug": "predominantTalentGender",
           "title": "Predominant Talent Gender",
-          "value": "N/A",
+          "value": personGendersValue,
           "percentage": 0,
           "text": "{percentage}% of industry videos are <b>{title}</b> of <b>{value}</b>"
         },
