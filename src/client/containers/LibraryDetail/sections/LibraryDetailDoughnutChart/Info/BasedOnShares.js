@@ -22,7 +22,7 @@ class BasedOnShares extends React.Component {
         !!filters.values[moduleKey].metric &&
         !!filters.values[moduleKey].metric.value &&
         filters.values[moduleKey].metric.value.label) ||
-      'Likes'
+      'Views'
 
     const topTitle = `Based on ${filterTitle}`
 

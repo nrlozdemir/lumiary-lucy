@@ -19,12 +19,14 @@ class Header extends React.Component {
       filters,
       videoId,
       title,
+      loading,
       identifier,
       maxLabel,
       moduleKey
     } = this.props
 
     if (
+      !loading && 
       !!filters &&
       !!prevFilters &&
       !isEqual(prevFilters.values[moduleKey], filters.values[moduleKey])
@@ -77,7 +79,6 @@ class Header extends React.Component {
                   moduleKey={moduleKey}
                   type="metric"
                   selectKey="metric"
-                  defaultValue="likes"
                 />
               </div>
             </div>

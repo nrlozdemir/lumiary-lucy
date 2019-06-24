@@ -70,10 +70,7 @@ class DoughnutCard extends React.Component {
               className={style.doughnutChartFooter}
               onClick={() =>
                 toggleInfoSection({
-                  data,
                   title,
-                  videoId,
-                  property: identifier,
                   label: maxLabel,
                 })
               }
