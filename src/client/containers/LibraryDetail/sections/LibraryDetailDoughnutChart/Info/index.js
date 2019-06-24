@@ -9,36 +9,39 @@ import IndustryData from './IndustryData'
 import Header from './Header'
 import LineChart from './LineChart'
 
-class Info extends React.Component {
-  render() {
-    return (
-      <ThemeContext.Consumer>
-        {({ themeContext: { colors } }) => (
-          <div className={style.radialChartsContainer}>
-            <div
-              className={style.doughnutPanelTab}
-              style={{
-                background: colors.moduleBackground,
-              }}
-            >
-              <Header />
-              <div
-                className={style.dataWrapper}
-                style={{
-                  background: colors.moduleBackground,
-                }}
-              >
-                <LibraryData />
-                <BasedOnShares />
-                <IndustryData />
-              </div>
-              <LineChart />
-            </div>
+const moduleKey = 'LDDH'
+
+const Info = ({ videoId, title, ...rest }) => (
+  <ThemeContext.Consumer>
+    {({ themeContext: { colors } }) => (
+      <div className={style.radialChartsContainer}>
+        <div
+          className={style.doughnutPanelTab}
+          style={{
+            background: colors.moduleBackground,
+          }}
+        >
+          <Header
+            videoId={videoId}
+            title={title}
+            moduleKey={moduleKey}
+            {...rest}
+          />
+          <div
+            className={style.dataWrapper}
+            style={{
+              background: colors.moduleBackground,
+            }}
+          >
+            <LibraryData />
+            <BasedOnShares title={title} moduleKey={moduleKey} {...rest} />
+            <IndustryData />
           </div>
-        )}
-      </ThemeContext.Consumer>
-    )
-  }
-}
+          <LineChart />
+        </div>
+      </div>
+    )}
+  </ThemeContext.Consumer>
+)
 
 export default Info

@@ -5,32 +5,46 @@ import { createStructuredSelector } from 'reselect'
 import style from '../style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import XCircle from 'Components/Icons/XCircle'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 import SelectFilters from 'Components/ModuleSelectFilters'
-import { actions, makeSelectInfoShowSection, makeSelectDoughnutFilters } from 'Reducers/libraryDetail';
+import { actions, makeSelectInfoShowSection } from 'Reducers/libraryDetail'
+import { isEqual } from 'lodash'
+import { selectFiltersToType } from 'Utils'
 
 class Header extends React.Component {
-  handleDateChange = value => {
-		this.props.changeFilters({name: 'date', value: value ? value.value : value});
-	}
+  componentDidUpdate(prevProps) {
+    const { filters: prevFilters } = prevProps
+    const {
+      toggleInfoSection,
+      filters,
+      videoId,
+      title,
+      identifier,
+      maxLabel,
+      moduleKey
+    } = this.props
 
-	handleMetricChange = value => {
-		this.props.changeFilters({name: 'metric', value: value ? value.value : value});
-	}
+    if (
+      !!filters &&
+      !!prevFilters &&
+      !isEqual(prevFilters.values[moduleKey], filters.values[moduleKey])
+    ) {
+      const filterValues = filters.values[moduleKey]
 
-	componentDidMount() {
-		const { filters: { date, metric } } = this.props;
+      const valuesToType = selectFiltersToType(filterValues)
 
-		if (!date) {
-			this.props.changeFilters({name: 'date', value: 'week'});
-		}
-
-		if (!metric) {
-			this.props.changeFilters({name: 'metric', value: 'likes'});
-		}
-	}
+      toggleInfoSection({
+        ...valuesToType,
+        title,
+        videoId,
+        property: identifier,
+        label: maxLabel,
+      })
+    }
+  }
 
   render() {
-		const { toggleInfoSection, sectionData } = this.props;
+    const { toggleInfoSection, sectionData, moduleKey } = this.props
 
     return (
       <ThemeContext.Consumer>
@@ -45,25 +59,25 @@ class Header extends React.Component {
             <div onClick={() => toggleInfoSection(null)}>
               <div className={style.iconWrapper}>
                 <XCircle />
-                <p className={style.iconTitle}>{sectionData.title} - {sectionData.label}</p>
+                <p className={style.iconTitle}>
+                  {sectionData.title} - {sectionData.label}
+                </p>
               </div>
             </div>
             <div className={style.headerInfo}>
               <div />
               <div className={style.formWrapper}>
                 <SelectFilters
-									moduleKey="LDDH"
-                  onChange={this.handleDateChange}
-									type="dateRange"
-									selectKey="date"
-									defaultValue="week"
+                  moduleKey={moduleKey}
+                  type="dateRange"
+                  selectKey="date"
+                  defaultValue="week"
                 />
                 <SelectFilters
-									moduleKey="LDDH"
-                  onChange={this.handleMetricChange}
-									type="metric"
-									selectKey="metric"
-									defaultValue="likes"
+                  moduleKey={moduleKey}
+                  type="metric"
+                  selectKey="metric"
+                  defaultValue="likes"
                 />
               </div>
             </div>
@@ -75,14 +89,13 @@ class Header extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-	sectionData: makeSelectInfoShowSection(),
-	filters: makeSelectDoughnutFilters()
+  sectionData: makeSelectInfoShowSection(),
+  filters: makeSelectSelectFilters(),
 })
 
 function mapDispatchToProps(dispatch) {
   return {
-		toggleInfoSection: show => dispatch(actions.toggleInfoSection(show)),
-		changeFilters: filters => dispatch(actions.changeDoughnutFilters(filters))
+    toggleInfoSection: (show) => dispatch(actions.toggleInfoSection(show)),
   }
 }
 
@@ -91,4 +104,4 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(Header);
+export default compose(withConnect)(Header)

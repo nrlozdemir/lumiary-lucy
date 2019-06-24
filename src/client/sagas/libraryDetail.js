@@ -181,17 +181,19 @@ function* getShotByShot(videoId) {
   }
 }
 
-function* getShotInfoRequest(ids) {
+function* getShotInfoRequest({ payload }) {
   try {
-    console.log('get shot info', ids)
-    
-    const url = `/brand/${ids.payload.brandUuid}/video/${
-      ids.payload.videoUuid
-    }/shots/${ids.payload.shotId}`
+    const { brandUuid, videoUuid, shotId } = payload
 
-    const payload = yield call(getDataFromApi, undefined, url, 'GET')
+    console.log('shot info', brandUuid, videoUuid, shotId)
 
-    yield put(actions.getShotInfoSuccess(payload))
+    if (!!brandUuid && !!videoUuid && !!shotId) {
+      const url = `/brand/${brandUuid}/video/${videoUuid}/shots/${shotId}`
+
+      const payload = yield call(getDataFromApi, undefined, url, 'GET')
+
+      yield put(actions.getShotInfoSuccess(payload))
+    }
   } catch (error) {
     yield put(actions.getShotInfoFailure({ error }))
   }
@@ -213,128 +215,140 @@ function* getSelectedVideo({ payload }) {
   }
 }
 
-function* getDoughnutSectionInfoData() {
+function* getDoughnutSectionInfoData({ payload }) {
   try {
-    const { date, metric } = yield select(makeSelectDoughnutFilters())
-
-    if (!date || !metric) {
+    if (!payload) {
       return
     }
 
-    const infoData = yield select(makeSelectInfoShowSection())
+    const {
+      videoId,
+      dateRange = 'week',
+      metric = 'likes',
+      property = 'frameRate',
+    } = payload
 
-    if (!infoData) {
-      return
-    }
+    const infoData = yield select(makeSelectInfoShowSection)
 
     const { brand } = yield select(selectAuthProfile)
-    const { uuid } = yield select(selectShotInfoData())
 
-    let {
-      libraryMetricPercents,
-      industryMetricPercents,
-      libraryDayAverages,
-      industryDayAverages,
-      videoPropertyAverage,
-      libraryPropertyAverage,
-      propertyLibraryPercentChange,
-    } = yield call(getDataFromApi, {
-      url: `/brand/${brand.uuid}/video/${uuid}/compare`,
-      requestType: 'GET',
-      metric,
-      daterange: date,
-    })
+    console.log('lib detail dounut section', payload)
 
-    let libraryChartData = null,
-      libraryMaxKey,
-      libraryMaxValue,
-      libraryChartMax
+    if (!!brand && !!videoId && !!dateRange && !!metric && !!infoData) {
+      let {
+        libraryMetricPercents,
+        industryMetricPercents,
+        libraryDayAverages,
+        industryDayAverages,
+        videoPropertyAverage,
+        libraryPropertyAverage,
+        metricLibraryPercentChange,
+      } = yield call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl(`/brand/${brand.uuid}/video/${videoId}/compare`, {
+          metric: property,
+          property: metric,
+          daterange: dateRange,
+        }),
+        'GET'
+      )
 
-    if (
-      Object.keys(libraryMetricPercents).length &&
-      !Object.keys(libraryMetricPercents).includes('undefined')
-    ) {
-      libraryChartMax = _.max(Object.values(libraryMetricPercents))
-
-      libraryChartData = {
-        labels: Object.keys(libraryMetricPercents).map((key) =>
-          getLabelWithSuffix(key, metric)
-        ),
-        datasets: [
-          {
-            borderColor: '#ACB0BE',
-            label: infoData.title,
-            data: Object.values(libraryMetricPercents).map((val) =>
-              Math.floor(val * 100)
-            ),
-            backgroundColor: Object.values(libraryMetricPercents).map((val) =>
-              val === libraryChartMax ? '#2FD7C4' : '#fff'
-            ),
-            hoverBackgroundColor: [],
-          },
-        ],
-      }[(libraryMaxKey, libraryMaxValue)] = Object.entries(
-        libraryMetricPercents
-      ).sort(([, v1], [, v2]) => (v1 > v2 ? -1 : 1))[0]
-    }
-
-    let industryChartData = null,
-      industryChartMax,
-      industryMaxKey,
-      industryMaxValue
-
-    if (
-      Object.keys(industryMetricPercents).length &&
-      !Object.keys(industryMetricPercents).includes('undefined')
-    ) {
-      industryChartMax = _.max(Object.values(industryMetricPercents))
-
-      industryChartData = {
-        labels: Object.keys(industryMetricPercents).map((key) =>
-          getLabelWithSuffix(key, metric)
-        ),
-        datasets: [
-          {
-            borderColor: '#ACB0BE',
-            label: infoData.title,
-            data: Object.values(industryMetricPercents).map((val) =>
-              Math.floor(val * 100)
-            ),
-            backgroundColor: Object.values(industryMetricPercents).map((val) =>
-              val === industryChartMax ? '#2FD7C4' : '#fff'
-            ),
-            hoverBackgroundColor: [],
-          },
-        ],
-      }[(industryMaxKey, industryMaxValue)] = Object.entries(
-        industryMetricPercents
-      ).sort(([, v1], [, v2]) => (v1 > v2 ? -1 : 1))[0]
-    }
-
-    videoPropertyAverage = 446089
-    libraryPropertyAverage = 514125.3333333333
-    propertyLibraryPercentChange = -0.13233413901668592
-
-    yield put(
-      actions.doughnutInfoIndustrySuccess({
-        libraryChartData,
+      let libraryChartData = null,
         libraryMaxKey,
-        libraryMaxValue: Math.floor(libraryMaxValue * 100),
-        industryChartData,
+        libraryMaxValue,
+        libraryChartMax
+
+      if (
+        Object.keys(libraryMetricPercents).length &&
+        !Object.keys(libraryMetricPercents).includes('undefined')
+      ) {
+        libraryChartMax = _.max(Object.values(libraryMetricPercents))
+
+        libraryChartData = {
+          labels: Object.keys(libraryMetricPercents).map((key) =>
+            getLabelWithSuffix(key, metric)
+          ),
+          datasets: [
+            {
+              borderColor: '#ACB0BE',
+              label: infoData.title,
+              data: Object.values(libraryMetricPercents).map((val) =>
+                Math.floor(val * 100)
+              ),
+              backgroundColor: Object.values(libraryMetricPercents).map((val) =>
+                val === libraryChartMax ? '#2FD7C4' : '#fff'
+              ),
+              hoverBackgroundColor: [],
+            },
+          ],
+        }[(libraryMaxKey, libraryMaxValue)] = Object.entries(
+          libraryMetricPercents
+        ).sort(([, v1], [, v2]) => (v1 > v2 ? -1 : 1))[0]
+      }
+
+      let industryChartData = null,
+        industryChartMax,
         industryMaxKey,
-        industryMaxValue: Math.floor(industryMaxValue * 100),
-        libraryDayAverages: Object.values(libraryDayAverages).map((val) =>
-          Math.floor(val * 100)
-        ),
-        industryDayAverages: Object.values(industryDayAverages).map((val) =>
-          Math.floor(val * 100)
-        ),
-        videoPropertyAverage: Math.floor(videoPropertyAverage / 1000),
-        libraryPropertyAverage: Math.floor(libraryPropertyAverage / 1000),
-        propertyLibraryPercentChange:
-          Math.floor(propertyLibraryPercentChange * 100) / 100,
-      })
-    )
+        industryMaxValue
+
+      if (
+        Object.keys(industryMetricPercents).length &&
+        !Object.keys(industryMetricPercents).includes('undefined')
+      ) {
+        industryChartMax = _.max(Object.values(industryMetricPercents))
+
+        industryChartData = {
+          labels: Object.keys(industryMetricPercents).map((key) =>
+            getLabelWithSuffix(key, metric)
+          ),
+          datasets: [
+            {
+              borderColor: '#ACB0BE',
+              label: infoData.title,
+              data: Object.values(industryMetricPercents).map((val) =>
+                Math.floor(val * 100)
+              ),
+              backgroundColor: Object.values(industryMetricPercents).map(
+                (val) => (val === industryChartMax ? '#2FD7C4' : '#fff')
+              ),
+              hoverBackgroundColor: [],
+            },
+          ],
+        }[(industryMaxKey, industryMaxValue)] = Object.entries(
+          industryMetricPercents
+        ).sort(([, v1], [, v2]) => (v1 > v2 ? -1 : 1))[0]
+      }
+
+      yield put(
+        actions.doughnutInfoIndustrySuccess({
+          libraryChartData,
+          libraryMaxKey,
+          libraryMaxValue: Math.floor(libraryMaxValue * 100),
+          industryChartData,
+          industryMaxKey,
+          industryMaxValue: Math.floor(industryMaxValue * 100),
+          libraryDayAverages: Object.values(libraryDayAverages).map((val) =>
+            Math.floor(val * 100)
+          ),
+          industryDayAverages: Object.values(industryDayAverages).map((val) =>
+            Math.floor(val * 100)
+          ),
+          videoPropertyAverage: Math.floor(
+            videoPropertyAverage >= 1000
+              ? videoPropertyAverage / 1000
+              : videoPropertyAverage
+          ),
+          libraryPropertyAverage: Math.floor(
+            libraryPropertyAverage >= 1000
+              ? libraryPropertyAverage / 1000
+              : libraryPropertyAverage
+          ),
+          propertyLibraryPercentChange:
+            Math.floor(metricLibraryPercentChange * 100),
+        })
+      )
+    }
   } catch (e) {
     console.error(e)
     yield put(actions.doughnutInfoIndustryFailure(e))
@@ -375,7 +389,7 @@ function* getRadarChartRequest(ids) {
       //"blue",
     ]
     const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
-    console.log(payload)
+
     const totalValue = Object.values(payload).reduce(
       (prev, next) => prev + next,
       0
@@ -423,7 +437,6 @@ export default [
   takeLatest(types.GET_COLOR_TEMP_REQUEST, getColorTemperatureData),
   takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),
   takeLatest(types.GET_SELECTED_VIDEO_REQUEST, getSelectedVideo),
-  takeLatest(types.CHANGE_DOUGHNUT_FILTERS, getDoughnutSectionInfoData),
   takeLatest(types.TOGGLE_INFO_SECTION, getDoughnutSectionInfoData),
   takeLatest(types.GET_SHOT_INFO_REQUEST, getShotInfoRequest),
   takeLatest(types.GET_SELECTED_VIDEO_AVERAGE_REQUEST, getVideoAverage),
