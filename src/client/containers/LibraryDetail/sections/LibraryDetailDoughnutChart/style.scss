@@ -202,6 +202,8 @@
   }
   .doughnutPanelTab {
     // transition: 500ms;
+    display: flex;
+    flex-direction: column;
     text-align: center;
     width: 100%;
     min-height: 400px;
@@ -565,4 +567,8 @@
   font-weight: bold;
   font-family: $font-family-ClanOT;
   background-color: rgba(255, 255, 255, 0.3);
+}
+
+.infoLoading {
+  margin: auto;
 }

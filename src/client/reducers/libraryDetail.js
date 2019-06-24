@@ -174,6 +174,7 @@ export const initialState = fromJS({
   loading: false,
   selectedVideo: {},
   infoData: {
+    loading: false,
     shownSectionData: null,
     modalData: null,
   },
@@ -257,12 +258,17 @@ const libraryDetailReducer = (state = initialState, action) => {
       return state
         .setIn(['infoData', 'shownSectionData'], fromJS(action.payload))
         .setIn(['infoData', 'modalData'], fromJS(null))
+        .setIn(['infoData', 'loading'], fromJS(true))
 
     case types.DOUGHNUT_INFO_SUCCESS:
-      return state.setIn(['infoData', 'modalData'], fromJS(action.payload))
+      return state
+        .setIn(['infoData', 'modalData'], fromJS(action.payload))
+        .setIn(['infoData', 'loading'], fromJS(false))
 
     case types.DOUGHNUT_INFO_FAILURE:
-      return state.setIn(['infoData', 'modalData'], fromJS(null))
+      return state
+        .setIn(['infoData', 'modalData'], fromJS(null))
+        .setIn(['infoData', 'loading'], fromJS(false))
 
     case types.GET_SHOT_INFO_REQUEST:
       return state.set('loading', fromJS(true))
@@ -370,6 +376,12 @@ export function makeSelectInfoShowSection() {
         : null
   )
 }
+
+export const makeSelectInfoData = () =>
+  createSelector(
+    selectInfoData,
+    (substate) => substate.toJS()
+  )
 
 export function makeSelectInfoModalData() {
   return createSelector(

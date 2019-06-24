@@ -7,6 +7,7 @@ import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutCard from './DoughnutCard'
 import {
+  makeSelectInfoData,
   makeSelectInfoShowSection,
   makeSelectDoughnutData,
 } from 'Reducers/libraryDetail'
@@ -14,9 +15,14 @@ import Info from './Info'
 
 class LibraryDetailDoughnutChart extends React.Component {
   render() {
-    const { doughnutData, showInfo, videoId } = this.props
+    const {
+      doughnutData,
+      showInfo,
+      videoId,
+      infoData: { loading },
+    } = this.props
 
-    const sectionToShow = !!showInfo && showInfo.title || false
+    const sectionToShow = (!!showInfo && showInfo.title) || false
 
     return (
       <ThemeContext.Consumer>
@@ -59,7 +65,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                           />
                         )}
                         {!!sectionToShow && sectionToShow === title && (
-                          <Info {...cardProps} />
+                          <Info {...cardProps} loading={loading}/>
                         )}
                       </React.Fragment>
                     )
@@ -76,6 +82,7 @@ class LibraryDetailDoughnutChart extends React.Component {
 const mapStateToProps = createStructuredSelector({
   showInfo: makeSelectInfoShowSection(),
   doughnutData: makeSelectDoughnutData(),
+  infoData: makeSelectInfoData(),
 })
 
 function mapDispatchToProps(dispatch) {
