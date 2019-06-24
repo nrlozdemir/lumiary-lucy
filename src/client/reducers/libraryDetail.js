@@ -4,14 +4,14 @@ import { createSelector } from 'reselect'
 export const types = {
   GET_SELECTED_VIDEO_REQUEST: 'LibraryDetail/GET_SELECTED_VIDEO_REQUEST',
   GET_SELECTED_VIDEO_SUCCESS: 'LibraryDetail/GET_SELECTED_VIDEO_SUCCESS',
-  GET_SELECTED_VIDEO_ERROR: 'LibraryDetail/GET_SELECTED_VIDEO_ERROR',
+  GET_SELECTED_VIDEO_FAILURE: 'LibraryDetail/GET_SELECTED_VIDEO_FAILURE',
 
   GET_SELECTED_VIDEO_AVERAGE_REQUEST:
     'LibraryDetail/GET_SELECTED_VIDEO_AVERAGE_REQUEST',
   GET_SELECTED_VIDEO_AVERAGE_SUCCESS:
     'LibraryDetail/GET_SELECTED_VIDEO_AVERAGE_SUCCESS',
-  GET_SELECTED_VIDEO_AVERAGE_ERROR:
-    'LibraryDetail/GET_SELECTED_VIDEO_AVERAGE_ERROR',
+  GET_SELECTED_VIDEO_AVERAGE_FAILURE:
+    'LibraryDetail/GET_SELECTED_VIDEO_AVERAGE_FAILURE',
 
   GET_BAR_CHART_REQUEST: 'LibraryDetail/GET_BAR_CHART_REQUEST',
   GET_BAR_CHART_SUCCESS: 'LibraryDetail/GET_BAR_CHART_SUCCESS',
@@ -340,7 +340,6 @@ export const selectPeopleData = () =>
     selectLibraryDetailPeople,
     (substate) => substate.toJS()
   )
-
 
 export const selectLibraryDetailRaharChart = (state) =>
   state.LibraryDetail.get('radarChartData')
