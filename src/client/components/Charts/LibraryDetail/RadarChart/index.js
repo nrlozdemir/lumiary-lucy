@@ -114,8 +114,6 @@ const plugins = [
   },
 ]
 
-console.log(Chart.Tooltip)
-
 Chart.Tooltip.positioners.custom = function(e, p) {
   if ( ! e.length) {
     return false
