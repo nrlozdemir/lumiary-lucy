@@ -229,11 +229,21 @@ const selectFiltersToType = (selectValues = {}) => {
   return Object.keys(selectValues).reduce((values, key) => {
     const filterValue = selectValues[key]
     const filterType = filterValue.type
-    values[filterType] = !!filterValue.value
-      ? !!filterValue.value.value && !!filterValue.value.value.startDate
-        ? [filterValue.value.value.startDate, filterValue.value.value.endDate]
-        : filterValue.value.value
-      : defaultFilters[filterType]
+
+    if (filterType !== 'platformEngagement') {
+      values[filterType] = !!filterValue.value
+        ? !!filterValue.value.value && !!filterValue.value.value.startDate
+          ? [filterValue.value.value.startDate, filterValue.value.value.endDate]
+          : filterValue.value.value
+        : defaultFilters[filterType]
+    } else {
+      values.platform = !!filterValue.value
+        ? filterValue.value.value.split('|')[0]
+        : defaultFilters.platform
+      values.metric = !!filterValue.value
+        ? filterValue.value.value.split('|')[1]
+        : defaultFilters.metric
+    }
 
     return values
   }, {})

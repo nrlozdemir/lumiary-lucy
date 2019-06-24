@@ -1,9 +1,58 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import classNames from 'classnames'
-import ReactSelect from 'react-select'
+import ReactSelect, { components } from 'react-select'
 import style from './styles.scss'
 import { withTheme } from 'ThemeContext/withTheme'
+
+const DropdownIndicator = (props) => {
+  const menuIsOpenClass = classNames('icon-Arrow-Down', style.iconIndicator, {
+    [style.active]: props.hasValue,
+    [style.focus]: props.selectProps && props.selectProps.menuIsOpen,
+  })
+  return (
+    <div className={style.DropdownIndicator}>
+      <span className={menuIsOpenClass}>
+        <span className="path1" />
+        <span className="path2" />
+        <span className="path3" />
+      </span>
+    </div>
+  )
+}
+
+class Group extends React.Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      open: false,
+    }
+  }
+
+  handleToggle = () => {
+    this.setState({ open: !this.state.open })
+  }
+
+  render() {
+    const {
+      props,
+      state: { open },
+    } = this
+
+    return (
+      <div>
+        <h4 onClick={this.handleToggle} className={style.groupLabel}>
+          {props.data.label}
+          <span style={{ transform: !open ? 'rotate(-90deg)' : 'none' }}>
+            <DropdownIndicator />
+          </span>
+        </h4>
+        <div style={{ display: open ? 'block' : 'none' }}>{props.children}</div>
+      </div>
+    )
+  }
+}
 
 const Select = (props) => {
   const {
@@ -21,14 +70,6 @@ const Select = (props) => {
   let args = props.input ? props.input : props
   let { name, onChange, value } = args
 
-  // if (props.input) {
-  //  var {
-  //    input: { name, onChange, value, customClass }
-  //  } = props;
-  // } else {
-  //  var { name, onChange, value, customClass } = props;
-  // }
-
   const reduxFormOnChange = (option) => {
     onChange(option)
   }
@@ -36,21 +77,6 @@ const Select = (props) => {
   const selectClass = classNames(`${customClass} ` + style.Select, {
     [style.selected]: !!value,
   })
-  const DropdownIndicator = (props) => {
-    const menuIsOpenClass = classNames('icon-Arrow-Down', style.iconIndicator, {
-      [style.active]: props.hasValue,
-      [style.focus]: props.selectProps.menuIsOpen,
-    })
-    return (
-      <div className={style.DropdownIndicator}>
-        <span className={menuIsOpenClass}>
-          <span className="path1" />
-          <span className="path2" />
-          <span className="path3" />
-        </span>
-      </div>
-    )
-  }
 
   const colourStyles = {
     control: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -128,7 +154,7 @@ const Select = (props) => {
 
   return (
     <ReactSelect
-      components={{ DropdownIndicator }}
+      components={{ DropdownIndicator, Group }}
       id={id}
       className={selectClass}
       clearable={false}

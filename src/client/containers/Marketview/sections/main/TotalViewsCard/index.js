@@ -45,7 +45,7 @@ class TotalViewsChart extends React.Component {
 
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
     const isBarChartEmpty = isDataSetEmpty(barData)
-    
+
     const hasNoData =
       (!loading &&
         (!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty)) ||
@@ -58,14 +58,9 @@ class TotalViewsChart extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'platform',
+            type: 'platformEngagement',
             selectKey: 'Mw-asd',
             placeHolder: 'Platform',
-          },
-          {
-            type: 'metric',
-            selectKey: 'Mw-sad',
-            placeHolder: 'Engagement',
           },
           {
             type: 'dateRange',
