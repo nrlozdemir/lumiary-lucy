@@ -223,16 +223,14 @@ function* getDoughnutSectionInfoData({ payload }) {
 
     const {
       videoId,
+      property,
       dateRange = 'week',
       metric = 'likes',
-      property = 'frameRate',
     } = payload
 
     const infoData = yield select(makeSelectInfoShowSection)
 
     const { brand } = yield select(selectAuthProfile)
-
-    console.log('lib detail dounut section', payload)
 
     if (!!brand && !!videoId && !!dateRange && !!metric && !!infoData) {
       let {
@@ -344,8 +342,9 @@ function* getDoughnutSectionInfoData({ payload }) {
               ? libraryPropertyAverage / 1000
               : libraryPropertyAverage
           ),
-          propertyLibraryPercentChange:
-            Math.floor(metricLibraryPercentChange * 100),
+          propertyLibraryPercentChange: Math.floor(
+            metricLibraryPercentChange * 100
+          ),
         })
       )
     }
