@@ -71,65 +71,13 @@ class LibraryDetailShotByShot extends React.Component {
     const { shots, shotInfoData, radarChartData, peopleData } = this.props
     const { selectedImage } = this.state
 
-    const radarChartDataConfigured = radarChartData && {
-      labels: [
-        '#cc2226',
-        '#dd501d',
-        '#eb7919',
-        '#f8b90b',
-        '#aac923',
-        '#fff20d',
-        '13862b',
-        '#229a78',
-        '#79609b',
-        '#923683',
-        '#b83057',
-        //"#3178b0",
-      ],
-      datasets: [
-        {
-          label: 'Shots',
-          backgroundColor: 'rgb(82, 146, 229, 0.5)',
-          borderColor: 'rgb(82, 146, 229, 1)',
-          pointBackgroundColor: 'rgb(82, 146, 229, 0.5)',
-          pointBorderColor: 'rgb(82, 146, 229, 1)',
-          data: radarChartData,
-        },
-      ],
-    }
     const dataIsEmpty = shots && Object.values(shots).length > 0 ? false : true
 
-    console.log(radarChartData)
-
-    const datastore = {
+    const radarChartDataConfigured = {
       "datasets": [
         {
-          "labels": [
-            0,
-            0,
-            3,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
-          "data": [
-            0,
-            0,
-            3,
-            0,
-            1,
-            0,
-            0,
-            0,
-            0,
-            0,
-            0
-          ],
+          "labels": radarChartData,
+          "data": radarChartData,
           "​​borderColor": "#ccc",
           "​​​​​pointBackgroundColor": "#505050", 
           "tooltip": false,
@@ -140,67 +88,56 @@ class LibraryDetailShotByShot extends React.Component {
       ],
       "labels": [
         {
-          "count": 88.8,
           "name": "Red",
           "color": "#cc2226",
           "selected": false
         },
         {
-          "count": 12,
           "name": "Red-Orange",
           "color": "#dd501d",
           "selected": false
         },
         {
-          "count": 14,
           "name": "Orange",
           "color": "#eb7919",
           "selected": false
         },
         {
-          "count": 98,
           "name": "Yellow-Orange",
           "color": "#f8b90b",
           "selected": false
         },
         {
-          "count": 16,
           "name": "Yellow",
           "color": "#fff20d",
           "selected": false
         },
         {
-          "count": 14,
           "name": "Yellow-Green",
           "color": "#aac923",
           "selected": false
         },
         {
-          "count": 86,
           "name": "Green",
           "color": "#13862b",
           "selected": false
         },
         {
-          "count": 12,
           "name": "Blue-Green",
           "color": "#229a78",
           "selected": false
         },
         {
-          "count": 24,
           "name": "Blue-Purple",
           "color": "#79609b",
           "selected": false
         },
         {
-          "count": 18,
           "name": "Purple",
           "color": "#923683",
           "selected": false
         },
         {
-          "count": 18,
           "name": "Red-Purple",
           "color": "#b83057",
           "selected": false
@@ -477,9 +414,9 @@ class LibraryDetailShotByShot extends React.Component {
                         </TabPanel>
                         <TabPanel>
                           <div className={style.radarChartContainer}>
-                            {datastore && (
+                            {radarChartDataConfigured && (
                               <RadarChart 
-                                data={datastore} 
+                                data={radarChartDataConfigured} 
                                 key={Math.random()} 
                               />
                             )}

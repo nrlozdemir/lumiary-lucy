@@ -178,18 +178,18 @@ const RadarChart = (props) => {
           displayColors: false,
           callbacks: {
             title: function(items, data) {
-              console.log("items")
-              console.log(items)
-              console.log("data")
-              console.log(data)
-              return 'This Video: ' + data.labels[items[0].index].count + '%' + data.labels[items[0].index].name
+              return [
+                'This Video:',
+                data.datasets[0].data[items[0].index] + '%',
+                data.labels[items[0].index].name
+              ].join(' ')
             },
             label: function(items, data) {
-              console.log("items")
-              console.log(items, data)
-              console.log("data")
-              console.log(data)
-              return 'This Shot: ' + data.labels[items.index].count + '%' + data.labels[items.index].name
+              return [
+                'This Shot:',
+                data.datasets[0].data[items.index] + '%',
+                data.labels[items.index].name
+              ].join(' ')
             },
             labelColor: function(tooltipItem, chart) {
               return {
