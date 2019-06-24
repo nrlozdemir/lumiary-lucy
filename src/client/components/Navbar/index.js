@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 
-import { makeSelectLibrary } from 'Reducers/library'
+import { makeSelectLibraryDetail } from 'Reducers/libraryDetail'
 
 import {
   actions as reportsActions,
@@ -24,9 +24,7 @@ import Dropdown from './dropdown'
 import LeftArrowCircle from 'Components/Icons/LeftArrowCircle'
 // import PropTypes from 'prop-types';
 
-const containerClass = classnames(
-  'grid-container ' + style.container
-)
+const containerClass = classnames('grid-container ' + style.container)
 const linksClass = classnames(style.links)
 const profileClass = classnames(style.profile)
 
@@ -112,19 +110,12 @@ const SelectedNavLink = (props) => {
 const NavTitle = (props) => {
   const {
     match,
-    library: {
-      data: { videos },
-    },
+    libraryDetail: { selectedVideo },
   } = props
-  if (!videos) {
-    return null
+  if (selectedVideo && selectedVideo.title) {
+    return <div>{capitalizeFirstLetter(selectedVideo.title)}</div>
   }
-  if (videos && match) {
-    const video =
-      videos.find(({ uuid }) => uuid == Object.values(match.params)[0]) || {}
-    const title = video.title
-    return <div>{title && capitalizeFirstLetter(title)}</div>
-  }
+  return null
 }
 
 const SubNavigation = (props) => {
@@ -238,13 +229,13 @@ const Template = (props) => {
   const templateSelector = Selector(props)
   const { textColor, moduleBackground, moduleShadow } = props.themes
   return (
-    <header style={
-			{
-				color: textColor,
-				background: moduleBackground,
-				boxShadow: `0 2px 6px 0 ${moduleShadow}`,
-			}
-		}>
+    <header
+      style={{
+        color: textColor,
+        background: moduleBackground,
+        boxShadow: `0 2px 6px 0 ${moduleShadow}`,
+      }}
+    >
       <div className={containerClass}>
         {templateSelector['leftSide']}
         <div className={linksClass}>{templateSelector['navigation']}</div>
@@ -314,7 +305,7 @@ class Navbar extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  library: makeSelectLibrary(),
+  libraryDetail: makeSelectLibraryDetail(),
   brandInsightValue: makeSelectReportsBrandInsightValues(),
   comparebrandValues: makeSelectReportsComparebrandValues(),
   predefinedReportValues: makeSelectReportsPredefinedReportValues(),

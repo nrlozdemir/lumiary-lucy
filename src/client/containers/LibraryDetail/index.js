@@ -39,7 +39,7 @@ export class LibraryDetail extends React.Component {
     } = this.props
 
     if (match.params.videoId) {
-      getSelectedVideo(match.params.videoId)
+      getSelectedVideo({ brandUuid: userUuid, videoId: match.params.videoId })
       getSelectedVideoAverage(match.params.videoId)
       getBarChartRequest(match.params.videoId)
       getDoughnutChartRequest({
@@ -71,7 +71,7 @@ export class LibraryDetail extends React.Component {
       })
     }
     if (prevMatch.params.videoId !== match.params.videoId) {
-      getSelectedVideo(match.params.videoId)
+      getSelectedVideo({ brandUuid: userUuid, videoId: match.params.videoId })
       getSelectedVideoAverage(match.params.videoId)
       getBarChartRequest({ LibraryDetailId: 1 })
       // getColorTempRequest({ videoId: match.params.videoId })
@@ -100,9 +100,7 @@ export class LibraryDetail extends React.Component {
           <LibraryDetailChartHeader
             barChartData={barChartData}
             selectedVideoAverage={selectedVideoAverage}
-            videoUrl={`${mediaUrl}/lumiere/${userUuid}/${
-              selectedVideo.uuid
-            }.mp4`}
+            videoUrl={`${mediaUrl}/lumiere/${userUuid}/${videoId}.mp4`}
             title={selectedVideo.title}
             socialIcon={selectedVideo.socialIcon}
             cvScore={selectedVideo['cvScores.value']}
