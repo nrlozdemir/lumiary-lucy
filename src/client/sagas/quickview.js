@@ -74,8 +74,8 @@ function* getQuickviewItemsApi({ platform, metric, daterange, uuid, }) {
         {
           "slug": "dominantColor",
           "title": "Dominant Color",
-          "value": "N/A",
-          "percentage": 0,
+          "value": colorsBucketName.charAt(0).toUpperCase() + colorsBucketName.slice(1),
+          "percentage": colorsIndustryPercent,
           "text": "{percentage}% of industry videos have a <b>{title}</b> of <b>{value}</b>"
         },
         {

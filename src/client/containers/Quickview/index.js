@@ -79,9 +79,6 @@ export class Main extends React.PureComponent {
       },
     } = this.props
 
-    console.log('platformsValues', platformsValues)
-    console.log('differencesValues', differencesValues)
-
     const selectedPlatform = match.params.platform || 'facebook'
 
     return (
