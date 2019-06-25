@@ -182,6 +182,7 @@ function* getShotInfoRequest({ payload }) {
   try {
     const { brandUuid, videoUuid, shotId } = payload
 
+
     if (!!brandUuid && !!videoUuid && !!shotId) {
       const url = `/brand/${brandUuid}/video/${videoUuid}/shots/${shotId}`
 
@@ -382,7 +383,7 @@ function* getRadarChartRequest(ids) {
       //"blue",
     ]
     const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
-    
+
     const totalValue = Object.values(payload).reduce(
       (prev, next) => prev + next,
       0
