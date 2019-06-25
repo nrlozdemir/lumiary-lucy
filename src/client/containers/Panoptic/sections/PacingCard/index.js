@@ -24,14 +24,9 @@ class PacingCard extends React.Component {
         loading={loading}
         filters={[
           {
-            type: 'platform',
-            selectKey: 'PCT-pltf',
-            placeHolder: 'Platform',
-          },
-          {
-            type: 'metric',
-            selectKey: 'PCT-asd',
-            placeHolder: 'Engagement',
+            type: 'platformEngagement',
+            selectKey: 'PCT-plateng',
+            placeHolder: 'Engagement by Platform',
           },
           {
             type: 'dateRange',

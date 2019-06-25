@@ -54,6 +54,26 @@ class Group extends React.Component {
   }
 }
 
+class SingleValue extends React.Component {
+  render() {
+    const { children, options, data } = this.props
+    let label = children
+
+    if (data.value && data.value.includes('|')) {
+      const platform = options.find((option) =>
+        option.options.some((o) => o.value === data.value)
+      ).label
+      label = `${data.label} on ${platform}`
+    }
+
+    return (
+      <components.SingleValue {...this.props} alt={label}>
+        {label}
+      </components.SingleValue>
+    )
+  }
+}
+
 const Select = (props) => {
   const {
     className,
@@ -135,6 +155,7 @@ const Select = (props) => {
           : isSelected
           ? themes.inputColor
           : themes.inputActiveColor,
+        whiteSpace: 'nowrap',
       }
     },
     singleValue: (styles) => ({
@@ -154,7 +175,7 @@ const Select = (props) => {
 
   return (
     <ReactSelect
-      components={{ DropdownIndicator, Group }}
+      components={{ DropdownIndicator, Group, SingleValue }}
       id={id}
       className={selectClass}
       clearable={false}
