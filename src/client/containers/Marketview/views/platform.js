@@ -19,14 +19,9 @@ export class Platform extends React.Component {
           moduleKey="MarketView/Platform/Slider"
           filters={[
             {
-              type: 'metric',
-              selectKey: 'mwplttpaap-engagement',
-              placeHolder: 'Engagement',
-            },
-            {
-              type: 'platform',
-              selectKey: 'mwplttpaap-platform',
-              placeHolder: 'Platform',
+              type: 'platformEngagement',
+              selectKey: 'mwplttpaap-plateng',
+              placeHolder: 'Engagement by Platform',
             },
             {
               type: 'dateRange',

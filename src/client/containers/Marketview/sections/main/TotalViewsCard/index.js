@@ -60,7 +60,7 @@ class TotalViewsChart extends React.Component {
           {
             type: 'platformEngagement',
             selectKey: 'Mw-asd',
-            placeHolder: 'Platform',
+            placeHolder: 'Engagement by Platform',
           },
           {
             type: 'dateRange',

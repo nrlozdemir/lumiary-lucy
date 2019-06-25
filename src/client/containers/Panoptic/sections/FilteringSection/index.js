@@ -53,14 +53,9 @@ class PanopticFilteringSection extends Component {
             placeHolder: 'property',
           },
           {
-            type: 'metric',
-            selectKey: 'PFS-lalalol',
-            placeHolder: 'Engagement',
-          },
-          {
-            type: 'platform',
-            selectKey: 'PFS-asdwda',
-            placeHolder: 'Views on All Platforms',
+            type: 'platformEngagement',
+            selectKey: 'PFS-plateng',
+            placeHolder: 'Engagement by Platform',
           },
           {
             type: 'dateRange',
