@@ -127,13 +127,13 @@ Chart.Tooltip.positioners.custom = function(e, p) {
 
 
 const RadarChart = (props) => {
-  const { data, width = 430, height = 430 } = props
+  const { data, width = 380, height = 380 } = props
   const themes = props.themeContext.colors
   let parsedData = data
   parsedData.datasets[0].backgroundColor = themes.chartBackgroundColor
   parsedData.datasets[0].pointBackgroundColor = themes.chartPointBackgroundColor
   parsedData.datasets[0].pointBorderColor = themes.chartPointBorderColor
-  
+
   return (
     <Radar
       data={parsedData}
@@ -158,18 +158,23 @@ const RadarChart = (props) => {
           enabled: true,
           position: 'custom',
           mode: "label",
-          backgroundColor: '#fff',
+          backgroundColor: themes.tooltipBackground,
           cornerRadius: 6,
 
-          titleFontColor: '#23294b',
+          titleFontColor: themes.tooltipRadarChartTextColor,
           titleFontFamily: 'ClanOTBold',
-          titleFontStyle: 'bold',
-          titleFontSize: 13,
+          titleFontStyle: 'normal',
+          titleFontSize: 12,
 
-          bodyFontColor: '#23294b',
+          bodyFontColor: themes.tooltipRadarChartTextColor,
           bodyFontFamily: 'ClanOTBold',
-          bodyFontStyle: 'bold',
-          bodyFontSize: 13,
+          bodyFontStyle: 'normal',
+          bodyFontSize: 12,
+          xPadding: 12,
+          yPadding: 12,
+          caretPadding: 0,
+          bodySpacing: 0,
+          titleMarginBottom: 8,
 
           yAlign: 'bottom',
           xAlign: 'center',
@@ -196,7 +201,7 @@ const RadarChart = (props) => {
               }
             },
             labelTextColor: function(tooltipItem, chart) {
-                return '#23294b';
+                return themes.tooltipRadarChartTextColor
             }
           }
         },
