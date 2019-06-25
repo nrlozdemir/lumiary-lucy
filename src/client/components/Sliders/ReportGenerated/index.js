@@ -41,7 +41,7 @@ class MarketViewSlider extends React.Component {
             return (
               <div
                 key={i}
-                onClick={() => this.refSlider.slideTo(i)}
+                onClick={() => this.refSlider && this.refSlider.slideTo(i)}
                 className={i === 0 ? 'active' : ''}
               >
                 <img src={item.image} />
@@ -57,14 +57,17 @@ class MarketViewSlider extends React.Component {
     },
     on: {
       slideChange: (index) => {
-        const bullets = this.refSlider.$el[0].querySelector('.pagination')
-          .children
+        const bullets =
+          this.refSlider &&
+          this.refSlider.$el[0].querySelector('.pagination').children
 
         for (const item of [...bullets]) {
           item.classList.remove('active')
         }
 
-        bullets[this.refSlider.activeIndex].classList.add('active')
+        if (bullets && this.refSlider && this.refSlider.activeIndex) {
+          bullets[this.refSlider.activeIndex].classList.add('active')
+        }
       },
     },
   }

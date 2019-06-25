@@ -1,5 +1,5 @@
 import React from 'react'
-import classnames from 'classnames';
+import classnames from 'classnames'
 import style from './style.scss'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
@@ -18,35 +18,41 @@ class AudienceSlider extends React.Component {
   }
 
   componentDidMount() {
-    this.setState({
-      refThumb: this.refThumb,
-    }, () => {
-      const findSlide = this.props.items && Math.floor(parseInt(this.props.items.length) / 2)
-      this.props.items &&
-        this.refThumb &&
-        this.refThumb.slideTo(findSlide, 1)
-    })
+    this.setState(
+      {
+        refThumb: this.refThumb,
+      },
+      () => {
+        const findSlide =
+          this.props.items && Math.floor(parseInt(this.props.items.length) / 2)
+        this.props.items && this.refThumb && this.refThumb.slideTo(findSlide, 1)
+      }
+    )
   }
 
   renderNextButton = () => {
     return (
       <RightArrowCircleFlat
-        className={classnames(style.nextButton, this.refSlider && this.refSlider.isEnd ? style.disabled : '')}
+        className={classnames(
+          style.nextButton,
+          this.refSlider && this.refSlider.isEnd ? style.disabled : ''
+        )}
         size={32}
         onClick={() => this.refSlider.slideNext()}
-        >
-      </RightArrowCircleFlat>
+      />
     )
   }
 
   renderPrevButton = () => {
     return (
       <LeftArrowCircleFlat
-        className={classnames(style.prevButton, this.refSlider && this.refSlider.isBeginning ? style.disabled : '')}
+        className={classnames(
+          style.prevButton,
+          this.refSlider && this.refSlider.isBeginning ? style.disabled : ''
+        )}
         size={32}
         onClick={() => this.refSlider.slidePrev()}
-        >
-      </LeftArrowCircleFlat>
+      />
     )
   }
 
@@ -72,12 +78,14 @@ class AudienceSlider extends React.Component {
       },
       on: {
         slideChange: () => {
-          refThumb.slideTo(this.refSlider.activeIndex, 300)
-          changeVideo(items[this.refSlider.activeIndex])
+          if (this.refSlider) {
+            refThumb.slideTo(this.refSlider.activeIndex, 300)
+            changeVideo(items[this.refSlider.activeIndex])
+          }
         },
       },
       renderNextButton: this.renderNextButton,
-      renderPrevButton: this.renderPrevButton
+      renderPrevButton: this.renderPrevButton,
     }
 
     const thumbSettings = {
@@ -87,8 +95,10 @@ class AudienceSlider extends React.Component {
       watchSlidesProgress: true,
       on: {
         slideChange: () => {
-          this.refSlider.slideTo(this.refThumb.activeIndex, 300)
-          changeVideo(items[this.refThumb.activeIndex])
+          if (this.refSlider) {
+            this.refSlider.slideTo(this.refThumb.activeIndex, 300)
+            changeVideo(items[this.refThumb.activeIndex])
+          }
         },
       },
     }
@@ -115,7 +125,9 @@ class AudienceSlider extends React.Component {
             {refThumb && (
               <div className="audienceSlider">
                 <Swiper
-                  ref={(node) => node && (this.refSlider = node.swiper)}
+                  ref={(node) =>
+                    node && this.refSlider && (this.refSlider = node.swiper)
+                  }
                   {...settings}
                 >
                   {items.map((item, i) => (
@@ -126,7 +138,7 @@ class AudienceSlider extends React.Component {
                         centerText={item.secondTitle}
                         title={item.title}
                         width={634}
-                        height='100%'
+                        height="100%"
                         rightValue={item.cvScore}
                       >
                         <img src={item.image} />
