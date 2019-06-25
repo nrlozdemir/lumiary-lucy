@@ -76,6 +76,7 @@ const VideoReleasesBarChartModule = (props) => {
     legend,
     legendEnd,
     isEmpty,
+    loading = false,
     themeContext: { colors },
   } = props
 
@@ -161,6 +162,7 @@ const VideoReleasesBarChartModule = (props) => {
       filters={filters || []}
       legend={renderLegend(legend, legendEnd)}
       isEmpty={isEmpty}
+      loading={loading}
     >
       {!!data && !!data.length ? (
         <div

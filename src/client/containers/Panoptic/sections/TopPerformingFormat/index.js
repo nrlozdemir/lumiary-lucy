@@ -106,6 +106,7 @@ class TopPerformingFormat extends React.Component {
         percentageData={convertedPercentageData}
         doughnutData={doughnutData}
         isEmpty={hasNoData}
+        loading={loading}
       />
     )
   }

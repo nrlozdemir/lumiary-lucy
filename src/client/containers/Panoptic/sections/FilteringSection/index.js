@@ -12,24 +12,12 @@ import StackedBarChart from 'Components/Charts/StackedBarChart'
 import style from './style.scss'
 
 import { chartColors } from 'Utils/globals'
-import { isEmpty, isEqual } from 'lodash'
+import { isEmpty } from 'lodash'
 
 class PanopticFilteringSection extends Component {
   callBack = (data) => {
     const { getFilteringSectionData } = this.props
     getFilteringSectionData(data)
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const {
-      filteringSectionData: { data: nextData },
-    } = nextProps
-
-    const {
-      filteringSectionData: { data },
-    } = this.props
-
-    return !isEqual(nextData, data)
   }
 
   render() {
@@ -81,13 +69,14 @@ class PanopticFilteringSection extends Component {
           },
         ]}
         isEmpty={hasNoData}
+        loading={loading}
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
             <DoughnutChart
               width={270}
               height={270}
-              data={doughnutData}
+              data={!loading ? doughnutData : null}
               cutoutPercentage={58}
               fillText="Total Percentage"
               dataLabelFunction="insertAfter"
@@ -104,7 +93,10 @@ class PanopticFilteringSection extends Component {
             />
           </div>
           <div className={style.stackedChart}>
-            <StackedBarChart barData={stackedChartData} barSpacing={2} />
+            <StackedBarChart
+              barData={!loading ? stackedChartData : null}
+              barSpacing={2}
+            />
           </div>
         </div>
       </Module>

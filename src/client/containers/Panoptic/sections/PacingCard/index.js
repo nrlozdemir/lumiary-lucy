@@ -12,7 +12,7 @@ class PacingCard extends React.Component {
 
   render() {
     const {
-      pacingChartData: { data },
+      pacingChartData: { data, loading },
     } = this.props
 
     return (
@@ -21,6 +21,7 @@ class PacingCard extends React.Component {
         moduleKey={'Panoptic/PacingCard'}
         title="Pacing For Each Format by Performance"
         action={this.callBack}
+        loading={loading}
         filters={[
           {
             type: 'platform',
