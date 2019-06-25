@@ -321,3 +321,10 @@
 .libraryPercentageGraph {
   opacity: 0.8;
 }
+
+.noData{
+  position: absolute;
+  font-family: $font-family-ClanOTNews;
+  font-size: 24px;
+  font-weight: bold;
+}

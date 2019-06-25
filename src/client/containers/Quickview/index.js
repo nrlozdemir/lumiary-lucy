@@ -287,6 +287,7 @@ export class Main extends React.PureComponent {
                                           ) !== -1
 
                                         const difference = (!hasDifference) ? false : differencesValues[item.slug] || 'N/A'
+                                        const noData = !item.value
 
                                         return (
                                           <div
@@ -299,7 +300,13 @@ export class Main extends React.PureComponent {
                                                   : colors.bodyBackground,
                                             }}
                                           >
-                                            <div className={style.infoItem}>
+                                            {noData && <p className={style.noData}>No Data Available</p>}
+                                            <div 
+                                              className={style.infoItem}
+                                              style={{
+                                                opacity: (noData) ? 0.1 : 1,
+                                              }}
+                                            >
                                               {difference && i === 1 && (
                                                 <div
                                                   className={
