@@ -87,12 +87,13 @@ export class Main extends React.PureComponent {
   handleFilterChange = (data, platform = 'facebook') => {
     const { match, getQuickviewItemsRequest } = this.props
     const selectedMetric = match.params.metric || 'views'
+    const selectedDateRange = match.params.dateRange || 'week'
 
     getQuickviewItemsRequest({
       platform: match.params.platform || 'facebook',
       data: {
-        ...data,
-        metric: selectedMetric
+        metric: selectedMetric,
+        dateRange: selectedDateRange
       }
     })
   }
@@ -110,6 +111,7 @@ export class Main extends React.PureComponent {
 
     const selectedPlatform = match.params.platform || 'facebook'
     const selectedMetric = match.params.metric || 'views'
+    const selectedDateRange = match.params.dateRange || 'week'
 
     return (
       <ThemeContext.Consumer>
@@ -150,7 +152,7 @@ export class Main extends React.PureComponent {
                               const { value } = options
 
                               if(value){
-                                push(`/quickview/${toSlug(platform.name)}/${value}`)
+                                push(`/quickview/${toSlug(platform.name)}/${value}/${selectedDateRange}`)
                               }
                             }}
                           />
@@ -186,6 +188,14 @@ export class Main extends React.PureComponent {
                         moduleKey={moduleKey}
                         selectKey={'QV-date'}
                         placeHolder={'Date'}
+                        defaultValue={selectedDateRange}
+                        onChange={(options = {}) => {
+                          const { value } = options
+
+                          if(value){
+                            push(`/quickview/${selectedPlatform}/${selectedMetric}/${value}`)
+                          }
+                        }}
                       />
                     </div>
                   </div>
