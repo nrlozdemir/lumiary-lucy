@@ -183,7 +183,6 @@ function* getShotByShot(videoId) {
 
 function* getShotInfoRequest(ids) {
   try {
-    console.log(ids)
     const url = `/brand/${ids.payload.brandUuid}/video/${
       ids.payload.videoUuid
     }/shots/${ids.payload.shotId}`
@@ -373,7 +372,6 @@ function* getRadarChartRequest(ids) {
       //"blue",
     ]
     const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
-    console.log(payload)
     const totalValue = Object.values(payload).reduce(
       (prev, next) => prev + next,
       0
@@ -397,7 +395,6 @@ function* getRadarChartRequest(ids) {
 
     yield put(actions.getRadarChartSuccess(values))
   } catch (error) {
-    console.log(error)
     yield put(actions.getRadarChartFailure({ error }))
   }
 }
