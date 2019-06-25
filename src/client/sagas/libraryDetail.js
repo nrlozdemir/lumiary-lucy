@@ -26,20 +26,6 @@ import {
 import { selectAuthProfile } from 'Reducers/auth'
 import { chartColors } from 'Utils/globals'
 
-const RESOURCE = '/brand/d65aa957-d094-4cf3-8d37-dafe50e752ea'
-
-function getOneVideo({ payload }) {
-  return ajax({
-    url: `${RESOURCE}/video/${payload}`,
-    method: 'GET',
-  }).then((response) => {
-    if (response.error) {
-      throw response.error
-    }
-    return response.data
-  })
-}
-
 function getBarChartApi({ LibraryDetailId }) {
   //this will use ajax function in utils/api when real data is provided
   return axios
@@ -211,10 +197,15 @@ function* getShotInfoRequest(ids) {
 
 function* getSelectedVideo({ payload }) {
   try {
-    const data = yield call(getOneVideo, {
-      payload,
-    })
-    yield put(actions.getSelectedVideoSuccess(data.video))
+    const { brandUuid, videoId } = payload
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/brand/${brandUuid}/video/${videoId}`),
+      'GET'
+    )
+
+    yield put(actions.getSelectedVideoSuccess(response.video))
   } catch (error) {
     yield put(actions.getSelectedVideoFailure({ error }))
   }

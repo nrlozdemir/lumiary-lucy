@@ -9,7 +9,7 @@ const bourbon = require("bourbon-neat");
 const sassVars = require("@epegzz/sass-vars-loader");
 
 const static_url = "//s3.amazonaws.com/quickframe-static-qa/";
-const media_url = "//s3.amazonaws.com/quickframe-media-qa/";
+const media_url = "//s3.amazonaws.com/quickframe-media-qa";
 const S3Plugin = require("webpack-s3-plugin");
 
 const s3_region = "us-east-1";
