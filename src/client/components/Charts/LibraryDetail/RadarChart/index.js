@@ -99,13 +99,16 @@ const plugins = [
             openTooltip(chart, easing, 0, p.index)
           } else {
             if (chart.tooltip._active.length > 0) {
-              //closeAllTooltips(chart)
+              chart.options.tooltips.enabled = false
+              //closeTooltip(chart, 0, p.index)
             }
           }
         })
       })
 
       ctx.canvas.addEventListener('mouseout', (e) => {
+
+        chart.options.tooltips.enabled = false
         if (chart.tooltip._active.length > 0) {
           closeAllTooltips(chart)
         }
@@ -127,12 +130,31 @@ Chart.Tooltip.positioners.custom = function(e, p) {
 
 
 const RadarChart = (props) => {
-  const { data, width = 380, height = 380 } = props
+  const { data, width = 400, height = 400 } = props
   const themes = props.themeContext.colors
   let parsedData = data
-  parsedData.datasets[0].backgroundColor = themes.chartBackgroundColor
-  parsedData.datasets[0].pointBackgroundColor = themes.chartPointBackgroundColor
-  parsedData.datasets[0].pointBorderColor = themes.chartPointBorderColor
+  parsedData.datasets[0].backgroundColor = 'rgb(82, 146, 229, 0.5)'
+  parsedData.datasets[0].pointBackgroundColor = 'transparent'
+  parsedData.datasets[0].pointBorderColor = 'transparent'
+  parsedData.datasets[0].pointHoverBackgroundColor = 'transparent'
+  parsedData.datasets[0].pointHoverBorderColor = 'transparent'
+
+  parsedData.datasets[0].pointBorderWidth = 0
+  parsedData.datasets[0].pointHoverBorderWidth = 0
+  parsedData.datasets[0].pointHitRadius = 0
+
+  
+  let maxTicksStepLimit = Object.values(parsedData.datasets[0].data).reduce((prev, next) => {
+    return (prev < next) ? next : prev
+  }, 10)
+
+  if (maxTicksStepLimit > 10) {
+    maxTicksStepLimit = (Math.ceil(maxTicksStepLimit / 10) * 10)
+  }
+
+  const maxTicksLimit = 5
+  const lineWidth = 16
+  const stepSize = 1
 
   return (
     <Radar
@@ -152,20 +174,23 @@ const RadarChart = (props) => {
           display: false,
         },
         layout: {
-          padding: 30,
+          padding: {
+            top: 50,
+            right: 50,
+            bottom: 50,
+            left: 50,
+          },
         },
         tooltips: {
-          enabled: true,
+          enabled: false,
           position: 'custom',
-          mode: "label",
+          mode: 'label',
           backgroundColor: themes.tooltipBackground,
           cornerRadius: 6,
-
           titleFontColor: themes.tooltipRadarChartTextColor,
           titleFontFamily: 'ClanOTBold',
           titleFontStyle: 'normal',
           titleFontSize: 12,
-
           bodyFontColor: themes.tooltipRadarChartTextColor,
           bodyFontFamily: 'ClanOTBold',
           bodyFontStyle: 'normal',
@@ -175,7 +200,7 @@ const RadarChart = (props) => {
           caretPadding: 0,
           bodySpacing: 0,
           titleMarginBottom: 8,
-
+          caretSize: 8,
           yAlign: 'bottom',
           xAlign: 'center',
           displayColors: false,
@@ -210,7 +235,7 @@ const RadarChart = (props) => {
         },
         scale: {
           gridLines: {
-            lineWidth: 20,
+            lineWidth: lineWidth,
             zeroLineColor: '#FFF',
             color: themes.bodyBackground,
           },
@@ -227,11 +252,11 @@ const RadarChart = (props) => {
             backdropColor: 'transparent',
             fontSize: 10,
             display: true,
-            maxTicksLimit: 6,
+            maxTicksLimit: maxTicksLimit,
             min: 0,
-            max: 8,
+            max: maxTicksStepLimit,
             beginAtZero: true,
-            stepSize: 1,
+            stepSize: stepSize,
           },
           angleLines: {
             color: 'rgba(90, 99, 134, 0.3)',
