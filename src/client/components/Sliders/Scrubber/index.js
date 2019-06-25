@@ -17,6 +17,7 @@ const defaultProps = {
   totalWidth: 1160,
   scrubberCustomClass: {},
   scrubberIsDot: false,
+  isEmpty: false,
 }
 
 const LeftArrow = () => {
@@ -101,7 +102,15 @@ export default class Scrubber extends React.Component {
         height: props.scrubberHeight,
         zIndex: 4
       }
-
+      
+      if (props.isEmpty) {
+        return (
+        <div 
+          className={styles.thumbHorizontal} 
+          style={inlineStyle}>
+        </div>)
+      }
+      
       return (
         <div className={styles.thumbHorizontal} style={inlineStyle}>
           {props.arrows && (
