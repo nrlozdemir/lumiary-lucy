@@ -37,6 +37,7 @@ const TopSimilarProperties = (props) => {
                           isDataSetEmpty(value.doughnutChartValues)
                         )
                         .every((dataset) => dataset === true)
+                        
                     return (
                       <div
                         className={moduleContainer}
