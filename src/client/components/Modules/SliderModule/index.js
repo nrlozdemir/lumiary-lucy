@@ -19,8 +19,6 @@ const SliderModule = (props) => {
     loading,
   } = props
 
-  console.log('slider loaidng', loading)
-
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (

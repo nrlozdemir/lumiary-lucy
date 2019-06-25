@@ -220,7 +220,7 @@ function* getSimilarProperties({ data: { dateRange } }) {
       brand.uuid
     }/properties?metric=shares&daterange=${dateRange}`
     //${!!competitors ? '&allcompetitors=true' : ''}`
-    console.log('options', options)
+
     const payload = yield call(getDataFromApi, options, url, 'GET')
 
     let parsedNewPayload, highestBuckets
