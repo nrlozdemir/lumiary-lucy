@@ -22,6 +22,8 @@ import SliderWithScrubber from 'Components/Sliders/SliderWithScrubber'
 import style from './style.scss'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
+const shotSliderWidth = 504
+
 class LibraryDetailShotByShot extends React.Component {
   constructor(props) {
     super(props)
@@ -37,19 +39,22 @@ class LibraryDetailShotByShot extends React.Component {
   componentDidMount() {}
 
   sliderAction(i) {
-    const ref = this.sliderThumbs.children[0].children[0].childNodes[0]
+    const calculateLeft = i * shotSliderWidth * -1
+    this.setState({
+      sliderImageLeft: calculateLeft
+    }, () => {
+      this.sliderImages.style.left = calculateLeft
+      const ref = this.sliderThumbs.children[0].children[0].childNodes[0]
 
-    for (let k = 0; k < ref.childNodes.length; k++) {
-      ref.childNodes[k].classList.remove(style.sliderImageActive)
-      ref.childNodes[k].classList.add(style.sliderImageCurrent)
-    }
-    ref.childNodes[i].classList.remove(style.sliderImageCurrent)
-    ref.childNodes[i].classList.add(style.sliderImageActive)
-
+      for (let k = 0; k < ref.childNodes.length; k++) {
+        ref.childNodes[k].classList.remove(style.sliderImageActive)
+        ref.childNodes[k].classList.add(style.sliderImageCurrent)
+      }
+      ref.childNodes[i].classList.remove(style.sliderImageCurrent)
+      ref.childNodes[i].classList.add(style.sliderImageActive)
+    })
     //const { backgroundImage } = ref.childNodes[i].children[0].children[0].style
     //const currentImage = backgroundImage.replace(/\(|\)|url|\"/gi, '')
-
-    this.sliderImages.style.left = i * 504 * -1
   }
 
   shotClick(i) {
@@ -58,21 +63,20 @@ class LibraryDetailShotByShot extends React.Component {
       brandUuid: this.props.authProfile.brand.uuid,
       videoUuid: this.props.selectedVideo,
     }
-    this.setState(
-      {
-        selectedImage: i,
-      },
-      () => {
+
+    this.setState({
+      selectedImage: i,
+    }, () => {
         this.props.getShotInfoRequest(val)
         this.props.getRadarChartRequest(val)
         this.props.getPeopleRequest(val)
-        this.sliderAction(val.shotId)
+        this.sliderAction(i)
       }
     )
   }
 
   shotSliderClick(i) {
-    this.sliderAction(i)
+    this.shotClick(i)
   }
 
   render() {
@@ -152,6 +156,24 @@ class LibraryDetailShotByShot extends React.Component {
         }
       ]
     }
+    const dataIsEmpty = (shots && 
+      Object.values(shots).length > 0
+    ) 
+      ? false 
+      : true
+    const peopleIsEmpty = (!peopleData || 
+      Object.values(peopleData).length === 0
+    ) 
+      ? true 
+      : false
+    const objectIsEmpty = (shotInfoData &&
+      shotInfoData.shot &&
+      shotInfoData.shot.labels &&
+      shotInfoData.shot.labels.length > 0
+    ) 
+      ? false
+      : true
+    
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
@@ -179,16 +201,21 @@ class LibraryDetailShotByShot extends React.Component {
                             className={style.shotSliderContainer}
                             ref={(el) => (this.sliderImages = el)}
                             style={{
-                              width: Object.values(shots).length * 504,
+                              width: Object.values(shots).length * shotSliderWidth,
                             }}
                           >
                             {shots &&
                               Object.values(shots).length > 0 &&
-                              Object.values(shots).map((el, i) => (
-                                <div className={style.shotSliderImage}>
-                                  <img src={el.image} />
-                                </div>
-                              ))}
+                              Object.values(shots).map((shot, i) => {
+                                const frameShotUrl = (shot.frameUrls && shot.frameUrls[0]) 
+                                  ? `${mediaUrl}/${shot.frameUrls[0]}`
+                                  : '' 
+                                return (
+                                  <div key={i} className={style.shotSliderImage}>
+                                    <img src={frameShotUrl} />
+                                  </div>
+                                )
+                              })}
                           </div>
                         </div>
                         <div
@@ -208,9 +235,7 @@ class LibraryDetailShotByShot extends React.Component {
                               shotHoverHeight={56}
                               viewportWidth={492}
                               viewportHeight={100}
-                              viewportBackgroundColor={
-                                colors.shotByShotSliderImageBorder
-                              }
+                              viewportBackgroundColor={colors.shotByShotSliderImageBorder}
                               ticks={12}
                               customClass={{
                                 sliderWrapper: style.sliderWrapper,
@@ -223,10 +248,8 @@ class LibraryDetailShotByShot extends React.Component {
                                 originalImage: style.sliderOriginalImage,
                               }}
                               customStyle={{
-                                originalImageBorderColor:
-                                  colors.shotByShotSliderImageBorder,
-                                imageWrapperBorderColor:
-                                  colors.shotByShotSliderImageBorder,
+                                originalImageBorderColor: colors.shotByShotSliderImageBorder,
+                                imageWrapperBorderColor: colors.shotByShotSliderImageBorder,
                               }}
                               isEmpty={dataIsEmpty}
                               scrubberIsDot={true}
@@ -266,10 +289,15 @@ class LibraryDetailShotByShot extends React.Component {
                           </TabList>
                         </div>
                         <TabPanel className={style.tabPanelReset}>
-                          <div className={classnames(style.tabPanel, 'mt-16')}>
-                            <Scrubber vertical width={570} height={368}>
-                              {peopleData &&
-                                Object.values(peopleData).map((info, i) => (
+                          <div 
+                            className={classnames(
+                              style.tabPanel, 
+                              'mt-16'
+                            )}
+                          >
+                            {peopleIsEmpty === false && (
+                              <Scrubber vertical width={570} height={368}>
+                                {Object.values(peopleData).map((info, i) => (
                                   <div
                                     className={classnames(
                                       style.tabPanelItem,
@@ -302,26 +330,13 @@ class LibraryDetailShotByShot extends React.Component {
                                           key={i}
                                         >
                                           <div className={style.barOptions}>
-                                            <p>
-                                              {capitalizeFirstLetter(
-                                                info.gender
-                                              )}
-                                            </p>
-                                            <p>
-                                              {(
-                                                info.ages.confidence * 100
-                                              ).toFixed(0)}
-                                              % Accurate
-                                            </p>
+                                            <p>{capitalizeFirstLetter(info.gender)}</p>
+                                            <p>{(info.ages.confidence * 100).toFixed(0)}% Accurate</p>
                                           </div>
                                           <ProgressBar
-                                            width={(
-                                              info.ages.confidence * 100
-                                            ).toFixed(0)}
+                                            width={(info.ages.confidence * 100).toFixed(0)}
                                             customBarClass={style.progressBar}
-                                            customPercentageClass={
-                                              style.percentage
-                                            }
+                                            customPercentageClass={style.percentage}
                                           />
                                         </div>
                                       </div>
@@ -332,43 +347,41 @@ class LibraryDetailShotByShot extends React.Component {
                                         >
                                           <div className={style.barOptions}>
                                             <p>{info.ages.min} Y/O</p>
-                                            <p>
-                                              {info.ages.min.toFixed(0)}%
-                                              Accurate
-                                            </p>
+                                            <p>{info.ages.min.toFixed(0)}% Accurate</p>
                                           </div>
                                           <ProgressBar
-                                            width={(
-                                              info.ages.confidence * 100
-                                            ).toFixed(0)}
+                                            width={(info.ages.confidence * 100).toFixed(0)}
                                             customBarClass={style.progressBar}
-                                            customPercentageClass={
-                                              style.percentage
-                                            }
+                                            customPercentageClass={style.percentage}
                                           />
                                         </div>
                                       </div>
                                     </div>
                                   </div>
                                 ))}
-                            </Scrubber>
+                              </Scrubber>
+                            )}
+                            {peopleIsEmpty === true && (
+                              <div className={style.tabsEmptyData}>No Data Available</div>
+                            )}
                           </div>
                         </TabPanel>
                         <TabPanel className={style.tabPanelReset}>
-                          <div className={classnames(style.tabPanel, 'mt-16')}>
-                            <Scrubber vertical width={570} height={368}>
-                              {shotInfoData &&
-                                shotInfoData.shot &&
-                                shotInfoData.shot.labels &&
-                                shotInfoData.shot.labels.map((info, i) => (
+                          <div 
+                            className={classnames(
+                              style.tabPanel, 
+                              'mt-16'
+                            )}
+                          >
+                            {objectIsEmpty === false && (
+                              <Scrubber vertical width={570} height={368}>
+                                {shotInfoData.shot.labels.map((info, i) => (
                                   <div
                                     className={classnames(
                                       style.tabPanelItem,
                                       'grid-container',
                                       {
-                                        'mb-16':
-                                          i !==
-                                          shotInfoData.shot.labels.length - 1,
+                                        'mb-16':  i !== shotInfoData.shot.labels.length - 1,
                                       }
                                     )}
                                     style={{
@@ -399,28 +412,23 @@ class LibraryDetailShotByShot extends React.Component {
                                         >
                                           <div className={style.barOptions}>
                                             <p>{info.label}</p>
-                                            <p>
-                                              {(info.confidence * 100).toFixed(
-                                                0
-                                              )}
-                                              % Accurate
-                                            </p>
+                                            <p>{(info.confidence * 100).toFixed(0)}% Accurate</p>
                                           </div>
                                           <ProgressBar
-                                            width={(
-                                              info.confidence * 100
-                                            ).toFixed(0)}
+                                            width={(info.confidence * 100).toFixed(0)}
                                             customBarClass={style.progressBar}
-                                            customPercentageClass={
-                                              style.percentage
-                                            }
+                                            customPercentageClass={style.percentage}
                                           />
                                         </div>
                                       </div>
                                     </div>
                                   </div>
                                 ))}
-                            </Scrubber>
+                              </Scrubber>
+                            )}
+                            {objectIsEmpty === true && (
+                              <div className={style.tabsEmptyData}>No Data Available</div>
+                            )}
                           </div>
                         </TabPanel>
                         <TabPanel>
@@ -501,10 +509,8 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    getShotInfoRequest: (shotId) =>
-      dispatch(actions.getShotInfoRequest(shotId)),
-    getRadarChartRequest: (shotId) =>
-      dispatch(actions.getRadarChartRequest(shotId)),
+    getShotInfoRequest: (shotId) => dispatch(actions.getShotInfoRequest(shotId)),
+    getRadarChartRequest: (shotId) => dispatch(actions.getRadarChartRequest(shotId)),
     getPeopleRequest: (shotId) => dispatch(actions.getPeopleRequest(shotId)),
   }
 }
