@@ -1,6 +1,7 @@
 import React from 'react'
 import Scrubber from 'Components/Sliders/Scrubber'
 import { withTheme } from 'ThemeContext/withTheme'
+import { mediaUrl } from 'Utils/globals'
 
 const secondToTime = (timeInSeconds) => {
   let pad = (num, size) => {
@@ -33,10 +34,6 @@ const timeToSeconds = (timeString) => {
 class SliderWithScrubber extends React.Component {
   constructor(props) {
     super(props)
-    
-    this.state = {
-      
-    }
   }
   
   render() {
@@ -110,9 +107,7 @@ class SliderWithScrubber extends React.Component {
             style: {
               transform: 'translateX(0%)'
             },
-            label: <p className="customDot">{
-              mark
-            }</p>,
+            label: <p className="customDot">{mark}</p>,
             value: mark,
           }
         } else if (index === 100) {
@@ -120,17 +115,13 @@ class SliderWithScrubber extends React.Component {
             style: {
               transform: 'translateX(-100%)'
             },
-            label: <p className="customDot">{
-              mark
-            }</p>,
+            label: <p className="customDot">{mark}</p>,
             value: mark,
           }
         } else {
           marks[index] = {
             style: {},
-            label: <p className="customDot">{
-              mark
-            }</p>,
+            label: <p className="customDot">{mark}</p>,
             value: mark,
           }
         }
@@ -272,6 +263,7 @@ class SliderWithScrubber extends React.Component {
       scrubberWidth={scrubberWidth}
       scrubberHeight={scrubberHeight}
       scrubberDotClassname={scrubberDotClassname}
+      isEmpty={isEmpty}
     >
       <div 
         className={customClass.sliderWrapper}
@@ -279,49 +271,57 @@ class SliderWithScrubber extends React.Component {
           left: 0,
           width: (isEmpty === true) 
             ? viewportWidth + 2 
-            : shotsTotalWidth,
+            : (shotsTotalWidth < viewportWidth) 
+              ? (viewportWidth + 2) 
+              : shotsTotalWidth,
         }}
       >
       
       {isEmpty !== true 
         && viewportShots 
-        && viewportShots.map((shot, i) => (
-        <React.Fragment key={`${name}_shots_${i}`}>
-          <div 
-            className={customClass.image}
-            onClick={() => { 
-              !!this.props.clickEvent && 
-              this.props.clickEvent(i) 
-            }}
-          >
-            <div
-              style={{
-                width: `${shot.width.toFixed(2)}px`,
-                borderColor: customStyle.imageWrapperBorderColor,
+        && viewportShots.map((shot, i) => {
+          const frameShotUrl = (shot.frameUrls && shot.frameUrls[0]) 
+            ? `${mediaUrl}/${shot.frameUrls[0]}`
+            : ''
+          
+          return (<React.Fragment key={`${name}_shots_${i}`}>
+            <div 
+              className={customClass.image}
+              onClick={() => { 
+                !!this.props.clickEvent && 
+                this.props.clickEvent(i) 
               }}
-              className={customClass.imageWrapper}
             >
               <div
-                className={customClass.originalImage}
                 style={{
                   width: `${shot.width.toFixed(2)}px`,
-                  height: `${shotHeight}px`,
-                  backgroundImage: `url(${shot.image})`,
-                  backgroundSize: `${shotHoverWidth}px ${shotHoverHeight}px`,
-                  borderColor: customStyle.originalImageBorderColor,
+                  borderColor: customStyle.imageWrapperBorderColor,
                 }}
-              />
+                className={customClass.imageWrapper}
+              >
+                <div
+                  className={customClass.originalImage}
+                  style={{
+                    width: `${shot.width.toFixed(2)}px`,
+                    height: `${shotHeight}px`,
+                    backgroundColor: '#ccc',
+                    backgroundImage: `url(${frameShotUrl})`,
+                    backgroundSize: `${shotHoverWidth}px ${shotHoverHeight}px`,
+                    borderColor: customStyle.originalImageBorderColor,
+                  }}
+                />
+              </div>
+              {!scrubberIsDot && (<img
+                src={frameShotUrl}
+                style={{ 
+                  height: `${shotHeight}px`,
+                }}
+                className={customClass.imageHover}
+              />)}
             </div>
-            {!scrubberIsDot && (<img
-              src={shot.image}
-              style={{ 
-                height: `${shotHeight}px`,
-              }}
-              className={customClass.imageHover}
-            />)}
-          </div>
-        </React.Fragment>
-      ))}
+          </React.Fragment>)
+        }
+        )}
       </div>
     </Scrubber>  
     )
