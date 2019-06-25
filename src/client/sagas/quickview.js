@@ -9,7 +9,7 @@ import { getDataFromApi } from 'Utils/api'
 //mocks
 import quickviewItemsData from 'Api/mocks/quickviewItemsMock.json'
 
-function* getQuickviewItemsApi({ platform, metric, daterange, uuid, }) {
+function* getQuickviewItemsApi({ platform, metric, dateRange, uuid, }) {
   const parseVideoResponse = ({ videoInfo, serverData }) => {
     const { 
       title = '', 
@@ -47,7 +47,6 @@ function* getQuickviewItemsApi({ platform, metric, daterange, uuid, }) {
       video: {
         title: title,
         videoUrl: `https://s3.amazonaws.com/quickframe-media-staging/lumiere/${brand_uuid}/${uuid}.mp4`,
-        poster: `https://s3.amazonaws.com/quickframe-media-staging/lumiere/${brand_uuid}/${uuid}.mp4`,
         socialIcon: platform,
         cvScore: cvScoresValue,
       },
@@ -121,17 +120,19 @@ function* getQuickviewItemsApi({ platform, metric, daterange, uuid, }) {
     return maxVideo
   }
 
-  console.log('request', metric, daterange, platform,)
+  // console.log('request', metric, dateRange, platform,)
   const serverData = yield call(
     getDataFromApi,
     {},
     `/quickview?${querystring.stringify({
       metric,
-      daterange,
+      daterange: dateRange,
       platform,
     })}`,
     'GET'
   )
+
+  // console.log('serverData', serverData)
 
   const serverObject = Object.keys(serverData).reduce((accumulator, compareKey) => {
     if(!accumulator[platform]){
@@ -158,13 +159,15 @@ function* getQuickviewItemsApi({ platform, metric, daterange, uuid, }) {
     differences: {}
   })
 
+  // console.log('serverObject', serverObject)
+
   return serverObject
 }
 
 function* getQuickviewItemsSaga({ payload }) {
   try {
     const { platform = 'facebook', data = {} } = payload
-    const { metric = 'views', daterange = 'week' } = data
+    const { metric = 'views', dateRange = 'week' } = data
 
     const profile = yield select(selectAuthProfile)
     const { brand = {} } = profile
@@ -177,7 +180,7 @@ function* getQuickviewItemsSaga({ payload }) {
     const response = yield call(getQuickviewItemsApi, {
       platform,
       metric,
-      daterange,
+      dateRange,
       uuid,
     })
 

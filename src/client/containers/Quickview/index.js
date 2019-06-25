@@ -16,6 +16,7 @@ import { textEdit } from 'Utils/text'
 import ModuleSelectFilters from 'Components/ModuleSelectFilters'
 import { isEqual } from 'lodash'
 import style from './style.scss'
+import RouterLoading from 'Components/RouterLoading'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -96,12 +97,13 @@ export class Main extends React.PureComponent {
     const {
       match,
       quickview: {
+        loading = false,
         selectedPlatform: { platformsValues, differencesValues },
       },
     } = this.props
 
     const selectedPlatform = match.params.platform || 'facebook'
-console.log(platforms)
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -181,176 +183,182 @@ console.log(platforms)
                     boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
                   }}
                 >
-                  <div
-                    className={style.content}
-                    style={{ background: colors.bodyBackground }}
-                  >
-                    {platformsValues &&
-                      platformsValues.map((el, i) => {
-                        const {
-                          cvScore,
-                          socialIcon,
-                          title,
-                          videoUrl,
-                          poster,
-                        } = el.video
-
-                        return (
-                          <div
-                            key={i}
-                            className={style.cardBlock}
-                            style={{
-                              background:
-                                i === 1
-                                  ? colors.tabActiveBackground
-                                  : colors.moduleBackground,
-                            }}
-                          >
-                            {/* HEADER */}
-                            <div className={style.card}>
-                              <h1>
-                                {i == 0
-                                  ? 'Underperforming Videos'
-                                  : 'Best Performing Videos'}
-                                <i
-                                  className="icon icon-Information"
-                                  style={{ color: colors.textColor }}
-                                />
-                              </h1>
-                              {/* VIDEO */}
-                              <div className={style.assetContainer}>
-                                <AssetLayer
-                                  leftSocialIcon={socialIcon}
-                                  title={title}
-                                  rightValue={cvScore}
-                                  width={'100%'}
-                                  height={286}
+                  {
+                    (loading)
+                      ? (<RouterLoading />)
+                      : (
+                        <div
+                          className={style.content}
+                          style={{ background: colors.bodyBackground }}
+                        >
+                          {platformsValues &&
+                            platformsValues.map((el, i) => {
+                              const {
+                                cvScore,
+                                socialIcon,
+                                title,
+                                videoUrl,
+                                poster,
+                              } = el.video
+                              
+                              return (
+                                <div
+                                  key={i}
+                                  className={style.cardBlock}
+                                  style={{
+                                    background:
+                                      i === 1
+                                        ? colors.tabActiveBackground
+                                        : colors.moduleBackground,
+                                  }}
                                 >
-                                  <div className={style.video}>
-                                    <SingleVideoCard
-                                      {...el}
-                                      muted={false}
-                                      options={{ size: 'auto' }}
-                                    />
-                                  </div>
-                                  <div className={style.percentageWrapper}>
-                                    <PercentageBarGraph
-                                      key={Math.random()}
-                                      percentage={cvScore}
-                                      width={80}
-                                      height={20}
-                                      barWidth={2}
-                                      barSpaceWidth={1}
-                                      disableLabels
-                                      color={i === 0 ? 'green' : 'blue'}
-                                    />
-                                  </div>
-                                </AssetLayer>
-                              </div>
-                              {/* PROPERTY VALUES */}
-                              <div className={style.items}>
-                                {el.infos.map((item, index) => {
-                                  const hasDifference =
-                                    ['duration', 'pacing'].indexOf(
-                                      item.title.toLowerCase()
-                                    ) !== -1
+                                  {/* HEADER */}
+                                  <div className={style.card}>
+                                    <h1>
+                                      {i == 0
+                                        ? 'Underperforming Videos'
+                                        : 'Best Performing Videos'}
+                                      <i
+                                        className="icon icon-Information"
+                                        style={{ color: colors.textColor }}
+                                      />
+                                    </h1>
+                                    {/* VIDEO */}
+                                    <div className={style.assetContainer}>
+                                      <AssetLayer
+                                        leftSocialIcon={socialIcon}
+                                        title={title}
+                                        rightValue={cvScore}
+                                        width={'100%'}
+                                        height={286}
+                                      >
+                                        <div className={style.video}>
+                                          <SingleVideoCard
+                                            {...el}
+                                            muted={false}
+                                            options={{ size: 'auto' }}
+                                          />
+                                        </div>
+                                        <div className={style.percentageWrapper}>
+                                          <PercentageBarGraph
+                                            key={Math.random()}
+                                            percentage={cvScore}
+                                            width={80}
+                                            height={20}
+                                            barWidth={2}
+                                            barSpaceWidth={1}
+                                            disableLabels
+                                            color={i === 0 ? 'green' : 'blue'}
+                                          />
+                                        </div>
+                                      </AssetLayer>
+                                    </div>
+                                    {/* PROPERTY VALUES */}
+                                    <div className={style.items}>
+                                      {el.infos.map((item, index) => {
+                                        const hasDifference =
+                                          ['duration', 'pacing'].indexOf(
+                                            item.title.toLowerCase()
+                                          ) !== -1
 
-                                  const difference = (!hasDifference) ? false : differencesValues[item.slug] || 'N/A'
+                                        const difference = (!hasDifference) ? false : differencesValues[item.slug] || 'N/A'
 
-                                  return (
-                                    <div
-                                      key={`info_${i}-${index}`}
-                                      className={style.itemWrapper}
-                                      style={{
-                                        borderColor:
-                                          i === 0
-                                            ? colors.chartStadiumBarBorder
-                                            : colors.bodyBackground,
-                                      }}
-                                    >
-                                      <div className={style.infoItem}>
-                                        {difference && i === 1 && (
+                                        return (
                                           <div
-                                            className={
-                                              style.infoItem_diffBubble
-                                            }
+                                            key={`info_${i}-${index}`}
+                                            className={style.itemWrapper}
                                             style={{
                                               borderColor:
-                                                colors.tabActiveBackground,
-                                              background: colors.bodyBackground,
-                                              color: colors.labelColor
-                                            }}
-                                          >
-                                            <span>{difference}%</span>
-                                            <span>Difference</span>
-                                          </div>
-                                        )}
-                                        <p
-                                          className={cx(
-                                            'font-secondary-second',
-                                            style.sectionBadge
-                                          )}
-                                        >
-                                          <span
-                                            style={{
-                                              background:
                                                 i === 0
-                                                  ? colors.labelBackground
+                                                  ? colors.chartStadiumBarBorder
                                                   : colors.bodyBackground,
-                                              color: colors.labelColor,
-                                              boxShadow: `0 1px 2px 0 ${
-                                                colors.labelShadow
-                                              }`,
                                             }}
                                           >
-                                            {item.title}
-                                          </span>
-                                        </p>
-                                        <div
-                                          className={style.itemValue}
-                                          data-id={i}
-                                        >
-                                          {item.value}
-                                        </div>
-                                        <div className={style.progressText}>
-                                          <span className={style.rightTitle}>
-                                            {item.percentage}%
-                                          </span>
-                                        </div>
-                                        <ProgressBar
-                                          width={item.percentage}
-                                          customBarClass={cx(
-                                            style.progressBar,
-                                            {
-                                              [style[
-                                                `progressBar--${
-                                                  colors.themeType === 'dark'
-                                                    ? 'dark'
-                                                    : 'light'
-                                                }`
-                                              ]]: i === 1,
-                                            }
-                                          )}
-                                          customPercentageClass={cx(
-                                            style.percentageBlue,
-                                            {
-                                              [style.percentagePink]: i == 1,
-                                            }
-                                          )}
-                                        />
-                                        <p className={style.infoText}>
-                                          {textEdit(item.text, item)}
-                                        </p>
-                                      </div>
+                                            <div className={style.infoItem}>
+                                              {difference && i === 1 && (
+                                                <div
+                                                  className={
+                                                    style.infoItem_diffBubble
+                                                  }
+                                                  style={{
+                                                    borderColor:
+                                                      colors.tabActiveBackground,
+                                                    background: colors.bodyBackground,
+                                                    color: colors.labelColor
+                                                  }}
+                                                >
+                                                  <span>{difference}%</span>
+                                                  <span>Difference</span>
+                                                </div>
+                                              )}
+                                              <p
+                                                className={cx(
+                                                  'font-secondary-second',
+                                                  style.sectionBadge
+                                                )}
+                                              >
+                                                <span
+                                                  style={{
+                                                    background:
+                                                      i === 0
+                                                        ? colors.labelBackground
+                                                        : colors.bodyBackground,
+                                                    color: colors.labelColor,
+                                                    boxShadow: `0 1px 2px 0 ${
+                                                      colors.labelShadow
+                                                    }`,
+                                                  }}
+                                                >
+                                                  {item.title}
+                                                </span>
+                                              </p>
+                                              <div
+                                                className={style.itemValue}
+                                                data-id={i}
+                                              >
+                                                {item.value}
+                                              </div>
+                                              <div className={style.progressText}>
+                                                <span className={style.rightTitle}>
+                                                  {item.percentage}%
+                                                </span>
+                                              </div>
+                                              <ProgressBar
+                                                width={item.percentage}
+                                                customBarClass={cx(
+                                                  style.progressBar,
+                                                  {
+                                                    [style[
+                                                      `progressBar--${
+                                                        colors.themeType === 'dark'
+                                                          ? 'dark'
+                                                          : 'light'
+                                                      }`
+                                                    ]]: i === 1,
+                                                  }
+                                                )}
+                                                customPercentageClass={cx(
+                                                  style.percentageBlue,
+                                                  {
+                                                    [style.percentagePink]: i == 1,
+                                                  }
+                                                )}
+                                              />
+                                              <p className={style.infoText}>
+                                                {textEdit(item.text, item)}
+                                              </p>
+                                            </div>
+                                          </div>
+                                        )
+                                      })}
                                     </div>
-                                  )
-                                })}
-                              </div>
-                            </div>
-                          </div>
-                        )
-                      })}
-                  </div>
+                                  </div>
+                                </div>
+                              )
+                            })}
+                        </div>
+                      )
+                  }
                 </div>
               </div>
             </div>
