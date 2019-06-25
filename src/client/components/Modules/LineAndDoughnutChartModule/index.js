@@ -16,6 +16,7 @@ const LineAndDoughnutChartModule = ({
   lineChartOptions,
   filters,
   isEmpty,
+  loading = false,
   doughnutData,
   percentageData,
   customCallbackFunc,
@@ -73,6 +74,7 @@ const LineAndDoughnutChartModule = ({
       action={action}
       filters={filters}
       isEmpty={isEmpty}
+      loading={loading}
     >
       <div className="grid-collapse">
         <div className="col-12-no-gutters">

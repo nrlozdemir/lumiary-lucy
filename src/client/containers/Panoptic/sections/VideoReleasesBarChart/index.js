@@ -12,18 +12,6 @@ class VideoReleasesBarChart extends Component {
     this.props.getVideoReleasesData(data)
   }
 
-  shouldComponentUpdate(nextProps) {
-    const {
-      videoReleasesData: { loading: nextLoading },
-    } = nextProps
-
-    const {
-      videoReleasesData: { loading },
-    } = this.props
-
-    return !nextLoading & !!loading
-  }
-
   render() {
     const {
       videoReleasesData: { data, loading, error },
@@ -60,6 +48,7 @@ class VideoReleasesBarChart extends Component {
           { label: 'Engagement', color: 'coral-pink' },
         ]}
         isEmpty={isEmpty}
+        loading={loading}
       />
     )
   }

@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import styles from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
+import RouterLoading from 'Components/RouterLoading'
 
 /*
 Example Usage:
@@ -26,7 +27,7 @@ class FlipCard extends React.Component {
   }
 
   render() {
-    const { children, width, height } = this.props
+    const { children, width, height, loading, isEmpty } = this.props
     const {
       textColor,
       moduleBackground,
