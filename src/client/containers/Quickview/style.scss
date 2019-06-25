@@ -149,7 +149,9 @@
     padding: 40px 0px 0px;
 
     .itemWrapper {
-      padding: 72px 0px;
+      // padding: 72px 0px;
+      height: 33vh;
+      min-height: 320px;
       width: 100%;
       border-bottom: 1px solid $color-dusk;
       position: relative;

@@ -33,7 +33,7 @@ export class Main extends React.PureComponent {
           filter: {
             type: 'metric',
             selectKey: 'QV-facebook-metric',
-            placeHolder: '',
+            placeHolder: 'Facebook',
           },
         },
         { 
@@ -41,7 +41,7 @@ export class Main extends React.PureComponent {
           filter: {
             type: 'metric',
             selectKey: 'QV-instagram-metric',
-            placeHolder: '',
+            placeHolder: 'Instagram',
           },
         },
         { 
@@ -49,7 +49,7 @@ export class Main extends React.PureComponent {
           filter: {
             type: 'metric',
             selectKey: 'QV-twitter-metric',
-            placeHolder: '',
+            placeHolder: 'Twitter',
           },
         },
         { 
@@ -57,7 +57,7 @@ export class Main extends React.PureComponent {
           filter: {
             type: 'metric',
             selectKey: 'QV-youtube-metric',
-            placeHolder: '',
+            placeHolder: 'YouTube',
           },
         },
       ],
