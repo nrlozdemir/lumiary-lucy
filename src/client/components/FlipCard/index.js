@@ -48,7 +48,8 @@ class FlipCard extends React.Component {
     const flipperClassName = styles.flipper
     const frontClassName = styles.front
     const backClassName = styles.back
-    return (
+    
+    return !loading ? (
       <React.Fragment>
         <div
           className={containerClassName}
@@ -69,7 +70,7 @@ class FlipCard extends React.Component {
           </div>
         </div>
       </React.Fragment>
-    )
+    ) : null
   }
 }
 
