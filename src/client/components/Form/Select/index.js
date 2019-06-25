@@ -21,7 +21,7 @@ const DropdownIndicator = (props) => {
   )
 }
 
-class Group extends React.Component {
+class _Group extends React.Component {
   constructor(props) {
     super(props)
 
@@ -41,7 +41,12 @@ class Group extends React.Component {
     } = this
 
     return (
-      <div>
+      <div
+        style={{
+          backgroundColor: this.props.themeContext.colors
+            .inputControlBackground,
+        }}
+      >
         <h4 onClick={this.handleToggle} className={style.groupLabel}>
           {props.data.label}
           <span style={{ transform: !open ? 'rotate(-90deg)' : 'none' }}>
@@ -53,6 +58,8 @@ class Group extends React.Component {
     )
   }
 }
+
+const Group = withTheme(_Group)
 
 class SingleValue extends React.Component {
   render() {
