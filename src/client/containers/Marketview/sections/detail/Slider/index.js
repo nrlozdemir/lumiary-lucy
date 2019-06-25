@@ -80,7 +80,7 @@ class Slider extends React.Component {
         moduleKey={moduleKey}
         title={title}
         filters={filters}
-        loaing={loading}
+        loading={loading}
       />
     )
   }
