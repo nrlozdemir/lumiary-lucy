@@ -83,8 +83,6 @@ class LibraryDetailShotByShot extends React.Component {
     const { shots, shotInfoData, radarChartData, peopleData } = this.props
     const { selectedImage } = this.state
 
-    const dataIsEmpty = shots && Object.values(shots).length > 0 ? false : true
-
     const radarChartDataConfigured = {
       "datasets": [
         {
@@ -156,6 +154,7 @@ class LibraryDetailShotByShot extends React.Component {
         }
       ]
     }
+
     const dataIsEmpty = (shots && 
       Object.values(shots).length > 0
     ) 
