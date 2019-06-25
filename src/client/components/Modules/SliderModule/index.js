@@ -36,7 +36,7 @@ const SliderModule = (props) => {
               <div className="col-12-no-gutters">
                 <Slider items={data} changeVideo={changeSelectedVideo} />
               </div>
-              <div className="col-12-no-gutters mt-56">
+              <div className={style.sliderGrid}>
                 {selectedVideo &&
                   selectedVideo.options.map((card, index) => (
                     <div
@@ -49,29 +49,37 @@ const SliderModule = (props) => {
                       }}
                     >
                       <p className={style.marketCardHeader}>{card.name}</p>
-                      {card.compareValues.map((value, i) => (
-                        <div className={style.progressArea} key={i}>
-                          <p className={style.title}>{value.title}</p>
-                          <p className={style.progressText}>
-                            <span className={style.leftTitle}>
-                              {value.leftTitle}
-                            </span>
-                            <span className={style.rightTitle}>
-                              {value.rightTitle}
-                            </span>
+                      {!!card.compareValues ? (
+                        <React.Fragment>
+                          {card.compareValues.map((value, i) => (
+                            <div className={style.progressArea} key={i}>
+                              <p className={style.title}>{value.title}</p>
+                              <p className={style.progressText}>
+                                <span className={style.leftTitle}>
+                                  {value.leftTitle}
+                                </span>
+                                <span className={style.rightTitle}>
+                                  {value.rightTitle}
+                                </span>
+                              </p>
+                              <ProgressBar
+                                width={value.value}
+                                customBarClass={style.progressBar}
+                                customPercentageClass={
+                                  i % 2
+                                    ? style.percentageRed
+                                    : style.percentageBlue
+                                }
+                              />
+                            </div>
+                          ))}
+                          <p className={style.cardDescription}>
+                            {card.description}{' '}
                           </p>
-                          <ProgressBar
-                            width={value.value}
-                            customBarClass={style.progressBar}
-                            customPercentageClass={
-                              i % 2 ? style.percentageRed : style.percentageBlue
-                            }
-                          />
-                        </div>
-                      ))}
-                      <p className={style.cardDescription}>
-                        {card.description}{' '}
-                      </p>
+                        </React.Fragment>
+                      ) : (
+                        <div className={style.cardEmpty}>No Data Available</div>
+                      )}
                     </div>
                   ))}
               </div>
