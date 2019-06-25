@@ -5,7 +5,7 @@ import classnames from 'classnames'
 import { Link, NavLink } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 
-import { makeSelectLibrary } from 'Reducers/library'
+import { makeSelectLibraryDetail } from 'Reducers/libraryDetail'
 
 import {
   actions as reportsActions,
@@ -110,19 +110,12 @@ const SelectedNavLink = (props) => {
 const NavTitle = (props) => {
   const {
     match,
-    library: {
-      data: { videos },
-    },
+    libraryDetail: { selectedVideo },
   } = props
-  if (!videos) {
-    return null
+  if (selectedVideo && selectedVideo.title) {
+    return <div>{capitalizeFirstLetter(selectedVideo.title)}</div>
   }
-  if (videos && match) {
-    const video =
-      videos.find(({ uuid }) => uuid == Object.values(match.params)[0]) || {}
-    const title = video.title
-    return <div>{title && capitalizeFirstLetter(title)}</div>
-  }
+  return null
 }
 
 const SubNavigation = (props) => {
@@ -312,7 +305,7 @@ class Navbar extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  library: makeSelectLibrary(),
+  libraryDetail: makeSelectLibraryDetail(),
   brandInsightValue: makeSelectReportsBrandInsightValues(),
   comparebrandValues: makeSelectReportsComparebrandValues(),
   predefinedReportValues: makeSelectReportsPredefinedReportValues(),

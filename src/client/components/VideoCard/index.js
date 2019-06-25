@@ -94,8 +94,8 @@ export class VideoCard extends PureComponent {
       socialIconSelector(video.platform),
       style.iconClass
     )
-    
-    const videoUrl = `${mediaUrl}lumiere/${brandId}/${video.uuid}.mp4`
+
+    const videoUrl = `${mediaUrl}/lumiere/${brandId}/${video.uuid}.mp4`
 
     return (
       <ThemeContext.Consumer>

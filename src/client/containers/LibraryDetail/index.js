@@ -10,7 +10,7 @@ import { actions as libraryActions, makeSelectLibrary } from 'Reducers/library'
 
 import LibraryDetailChartHeader from './sections/LibraryDetailChartHeader'
 import LibraryDetailDoughnutChart from './sections/LibraryDetailDoughnutChart'
-import LibraryDetailColorTemperature from './sections/LibraryDetailColorTemperature'
+// import LibraryDetailColorTemperature from './sections/LibraryDetailColorTemperature'
 import LibraryDetailShotByShot from './sections/LibraryDetailShotByShot'
 import { userUuid, mediaUrl } from 'Utils/globals'
 import { withTheme } from 'ThemeContext/withTheme'
@@ -31,7 +31,7 @@ export class LibraryDetail extends React.Component {
       match,
       getBarChartRequest,
       getDoughnutChartRequest,
-      getColorTempRequest,
+      // getColorTempRequest,
       getShotByShotRequest,
       getSelectedVideo,
       getSelectedVideoAverage,
@@ -39,14 +39,14 @@ export class LibraryDetail extends React.Component {
     } = this.props
 
     if (match.params.videoId) {
-      getSelectedVideo(match.params.videoId)
+      getSelectedVideo({ brandUuid: userUuid, videoId: match.params.videoId })
       getSelectedVideoAverage(match.params.videoId)
       getBarChartRequest(match.params.videoId)
       getDoughnutChartRequest({
         LibraryDetailId: match.params.videoId,
         themeColors: colors,
       })
-      getColorTempRequest(match.params.videoId)
+      // getColorTempRequest(match.params.videoId)
       getShotByShotRequest(match.params.videoId)
     }
   }
@@ -57,7 +57,7 @@ export class LibraryDetail extends React.Component {
       match,
       getBarChartRequest,
       getDoughnutChartRequest,
-      getColorTempRequest,
+      // getColorTempRequest,
       getShotByShotRequest,
       themeContext: { colors },
     } = this.props
@@ -71,10 +71,10 @@ export class LibraryDetail extends React.Component {
       })
     }
     if (prevMatch.params.videoId !== match.params.videoId) {
-      getSelectedVideo(match.params.videoId)
+      getSelectedVideo({ brandUuid: userUuid, videoId: match.params.videoId })
       getSelectedVideoAverage(match.params.videoId)
       getBarChartRequest({ LibraryDetailId: 1 })
-      getColorTempRequest({ videoId: match.params.videoId })
+      // getColorTempRequest({ videoId: match.params.videoId })
       getShotByShotRequest({ LibraryDetailId: 1 })
     }
   }
@@ -100,21 +100,13 @@ export class LibraryDetail extends React.Component {
           <LibraryDetailChartHeader
             barChartData={barChartData}
             selectedVideoAverage={selectedVideoAverage}
-            videoUrl={`${mediaUrl}/lumiere/${userUuid}/${
-              selectedVideo.uuid
-            }.mp4`}
+            videoUrl={`${mediaUrl}/lumiere/${userUuid}/${videoId}.mp4`}
             title={selectedVideo.title}
             socialIcon={selectedVideo.socialIcon}
             cvScore={selectedVideo['cvScores.value']}
           />
         )}
-        {doughnutData && <LibraryDetailDoughnutChart />}
-        {colorTempData && (
-          <LibraryDetailColorTemperature
-            videoId={videoId}
-            colorTempData={colorTempData}
-          />
-        )}
+        {doughnutData && <LibraryDetailDoughnutChart videoId={videoId} />}
         {shotByShotData && (
           <LibraryDetailShotByShot shots={shotByShotData.video.shots} />
         )}
@@ -126,10 +118,10 @@ export class LibraryDetail extends React.Component {
 LibraryDetail.propTypes = {
   barChartData: PropTypes.object,
   doughnutLineChartData: PropTypes.object,
-  colorTempData: PropTypes.object,
+  // colorTempData: PropTypes.object,
   getBarChartRequest: PropTypes.func,
   getDoughnutChartRequest: PropTypes.func,
-  getColorTempRequest: PropTypes.func,
+  // getColorTempRequest: PropTypes.func,
   getShotByShotRequest: PropTypes.func,
 }
 
@@ -147,7 +139,7 @@ function mapDispatchToProps(dispatch) {
     getBarChartRequest: (id) => dispatch(actions.getBarChartRequest(id)),
     getDoughnutChartRequest: (id) =>
       dispatch(actions.getDoughnutChartRequest(id)),
-    getColorTempRequest: (id) => dispatch(actions.getColorTempRequest(id)),
+    // getColorTempRequest: (id) => dispatch(actions.getColorTempRequest(id)),
     getShotByShotRequest: (id) => dispatch(actions.getShotByShotRequest(id)),
   }
 }
