@@ -4,14 +4,17 @@ import { withTheme } from 'ThemeContext/withTheme'
 import { metricSuffix } from 'Utils'
 
 function openTooltip(chart, easing, datasetIndex, pointIndex){
-  if(chart.tooltip._active == undefined)
+  if (chart.tooltip._active == undefined)
      chart.tooltip._active = []
-  var activeElements = chart.tooltip._active
-  var requestedElem = chart.getDatasetMeta(datasetIndex).data[pointIndex]
-  for(var i = 0; i < activeElements.length; i++) {
-      if(requestedElem._index == activeElements[i]._index)  
-         return
+  
+  let activeElements = chart.tooltip._active
+  let requestedElem = chart.getDatasetMeta(datasetIndex).data[pointIndex]
+  
+  for (let i = 0; i < activeElements.length; i++) {
+    if (requestedElem._index == activeElements[i]._index)  
+      return
   }
+  
   activeElements.push(requestedElem)
   chart.tooltip._active = activeElements
   chart.tooltip.update(true)
@@ -19,16 +22,19 @@ function openTooltip(chart, easing, datasetIndex, pointIndex){
 }
 
 function closeTooltip(chart, datasetIndex, pointIndex){
-  var activeElements = chart.tooltip._active
+  let activeElements = chart.tooltip._active
+  
   if (activeElements == undefined || activeElements.length == 0) {
     return
   }
-  var requestedElem = chart.getDatasetMeta(datasetIndex).data[pointIndex]
-  for (var i = 0; i < activeElements.length; i++) {
-      if (requestedElem._index == activeElements[i]._index)  {
-         activeElements.splice(i, 1)
-         break
-      }
+
+  let requestedElem = chart.getDatasetMeta(datasetIndex).data[pointIndex]
+
+  for (let i = 0; i < activeElements.length; i++) {
+    if (requestedElem._index == activeElements[i]._index) {
+      activeElements.splice(i, 1)
+      break
+    }
   }
   chart.tooltip._active = activeElements
   chart.tooltip.update(true)
@@ -84,22 +90,40 @@ const plugins = [
             // ctx.shadowOffsetX = 0
             // ctx.shadowOffsetY = 8
           }
+
+          //console.log(tooltipArea)
         })
       })
+
+      ctx.save()
 
       // circles mouse on event
       ctx.canvas.addEventListener('mousemove', (e) => {
         Object.values(tooltipArea).map((p, i) => {
+          //console.log(e)
           if (p.x > e.offsetX - 12 
             && p.x < e.offsetX + 12 
             && p.y > e.offsetY - 12 
             && p.y < e.offsetY + 12
           ) {
+            //ctx.restore()
             chart.options.tooltips.enabled = true
             openTooltip(chart, easing, 0, p.index)
+
+            //console.log(chart.tooltip._active)
           } else {
+            chart.options.tooltips.enabled = false
+            ctx.restore()
+            //chart.draw()
+            //ctx.restore()
+            //openTooltip(chart, easing, 0, zeroLineColor)
+            //chart.tooltip._active = 5
+            //chart.tooltip.update(true)
             if (chart.tooltip._active.length > 0) {
-              chart.options.tooltips.enabled = false
+              //console.log("out...")
+              //chart.options.tooltips.enabled = false
+              //chart.tooltip.update(true)
+              //chart.draw()
               //closeTooltip(chart, 0, p.index)
             }
           }
@@ -107,10 +131,10 @@ const plugins = [
       })
 
       ctx.canvas.addEventListener('mouseout', (e) => {
-
         chart.options.tooltips.enabled = false
+        //console.log(chart.tooltip._active.length)
         if (chart.tooltip._active.length > 0) {
-          closeAllTooltips(chart)
+          //closeAllTooltips(chart)
         }
       })
     },
@@ -127,6 +151,7 @@ Chart.Tooltip.positioners.custom = function(e, p) {
     y: tooltipArea[e[0]._index].y
   }
 }
+
 
 
 const RadarChart = (props) => {
