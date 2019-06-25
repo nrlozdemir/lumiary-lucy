@@ -6,7 +6,7 @@ import { barChartOptions } from './options'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
 import MultipleNoDataModule from 'Components/MultipleNoDataModule'
 import style from './style.scss'
-import { isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 
 const PacingCardModule = ({
   data,

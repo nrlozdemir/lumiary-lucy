@@ -7,7 +7,7 @@ import classnames from 'classnames'
 import FlipCard from 'Components/FlipCard'
 import CustomBarChart from 'Components/Charts/CustomBarChart'
 import styles from './style.scss'
-import { capitalizeFirstLetter } from 'Utils/'
+import { capitalizeFirstLetter } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 const days = [

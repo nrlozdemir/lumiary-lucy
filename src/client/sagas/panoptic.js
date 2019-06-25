@@ -5,15 +5,15 @@ import { actions, types } from 'Reducers/panoptic'
 
 import panopticMockData from 'Api/mocks/panopticMock.json'
 
+import { getDateBucketFromRange } from 'Utils'
+
 import {
-  compareSharesData,
-  radarChartCalculate,
   convertDataIntoDatasets,
-  getDateBucketFromRange,
-  getBrandAndCompetitors,
+  radarChartCalculate,
+  compareSharesData,
   convertColorTempToDatasets,
   convertVideoEngagementData,
-} from 'Utils'
+} from 'Utils/datasets'
 
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 

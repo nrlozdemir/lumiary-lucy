@@ -8,14 +8,18 @@ import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 import reportsMockData from 'Api/mocks/reports.json'
 
 import {
-  convertDataIntoDatasets,
   getDateBucketFromRange,
-  convertMultiRequestDataIntoDatasets,
   getBrandAndCompetitors,
   getFilteredCompetitors,
+} from 'Utils'
+
+import {
+  convertDataIntoDatasets,
+  convertMultiRequestDataIntoDatasets,
   convertVideoEngagementData,
   convertColorTempToDatasets,
-} from 'Utils'
+} from 'Utils/datasets'
+
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 import _ from 'lodash'
 

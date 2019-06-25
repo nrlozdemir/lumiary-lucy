@@ -12,7 +12,7 @@ import style from './style.scss'
 import 'chartjs-plugin-datalabels'
 import Module from 'Components/Module'
 
-import { chartCombineDataset, isDataSetEmpty } from 'Utils'
+import { chartCombineDataset, isDataSetEmpty } from 'Utils/datasets'
 import { chartColors } from 'Utils/globals'
 
 import { isEmpty, isEqual } from 'lodash'

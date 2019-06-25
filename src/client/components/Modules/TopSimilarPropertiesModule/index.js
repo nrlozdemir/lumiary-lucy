@@ -5,7 +5,7 @@ import DoughnutCard from 'Components/DoughnutCard'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import classnames from 'classnames'
 import style from './style.scss'
-import { isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 import MultipleNoDataModule from 'Components/MultipleNoDataModule'
 import RouterLoading from 'Components/RouterLoading'
 const TopSimilarProperties = (props) => {

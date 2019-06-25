@@ -8,7 +8,7 @@ import {
   selectMarketviewTopPerformingPropertiesDataView,
 } from 'Reducers/marketview'
 import BarChartModule from 'Components/Modules/BarChartModule'
-import { getMinMaxFromDatasets } from 'Utils'
+import { getMinMaxFromDatasets } from 'Utils/datasets'
 
 import style from '../../../style.scss'
 
