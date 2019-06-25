@@ -3,7 +3,7 @@ import style from './style.scss'
 // import PropTypes from 'prop-types';
 import { Field } from 'redux-form'
 import ColorRadioBox from './ColorRadioBox'
-import { randomKey } from 'Utils/index'
+import { randomKey } from 'Utils'
 
 /* eslint-disable react/prefer-stateless-function */
 class ColorRadioBoxes extends React.Component {

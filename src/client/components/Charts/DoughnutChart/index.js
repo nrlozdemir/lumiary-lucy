@@ -3,7 +3,7 @@ import { Doughnut } from 'react-chartjs-2'
 import classnames from 'classnames'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
-import { isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 
 import Labels from 'Components/Charts/Labels'
 

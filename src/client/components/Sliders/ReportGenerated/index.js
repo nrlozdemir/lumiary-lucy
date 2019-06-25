@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import style from './style.scss'
-import { socialIconSelector } from 'Utils/'
+import { socialIconSelector } from 'Utils'
 import Swiper from 'react-id-swiper'
 import SwiperJS from 'swiper/dist/js/swiper.js'
 
@@ -102,7 +102,7 @@ class MarketViewSlider extends React.Component {
                       barWidth={2}
                       barSpaceWidth={1}
                       disableLabels
-                      color='green'
+                      color="green"
                     />
                   </div>
                 </AssetLayer>

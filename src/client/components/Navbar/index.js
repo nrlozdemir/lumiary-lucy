@@ -17,7 +17,7 @@ import {
 import { actions as generatedReportActions } from 'Reducers/generatedReport'
 
 import Switch from 'Components/Form/Switch'
-import { capitalizeFirstLetter } from 'Utils/index'
+import { capitalizeFirstLetter } from 'Utils'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import Dropdown from './dropdown'

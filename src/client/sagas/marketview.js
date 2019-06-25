@@ -19,16 +19,17 @@ import marketviewTopPerformingProperties from 'Api/mocks/marketviewPlatformTopPe
 import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json'
 
 import {
-  ucfirst,
-  compareSharesData,
-  convertMultiRequestDataIntoDatasets,
-  getBrandAndCompetitors,
-  convertDataIntoDatasets,
-  getDateBucketFromRange,
   getMaximumValueIndexFromArray,
-  getBrandNameAndCompetitorsName,
-  getFilteredCompetitorValues,
+  ucfirst,
+  getDateBucketFromRange,
+  getBrandAndCompetitors,
 } from 'Utils'
+
+import {
+  convertDataIntoDatasets,
+  convertMultiRequestDataIntoDatasets,
+} from 'Utils/datasets'
+
 import { dayOfWeek } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 

@@ -1,6 +1,7 @@
 import React from 'react'
 import { Line } from 'react-chartjs-2'
-import { randomKey, chartCombineDataset } from 'Utils/index'
+import { randomKey } from 'Utils'
+import { chartCombineDataset } from 'Utils/datasets'
 import { fromJS } from 'immutable'
 import { lineOptions, lineStackedAreaOptions } from './defaultOptions'
 

@@ -4,7 +4,7 @@ import cx from 'classnames'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 import style from './style.scss'
 import Module from 'Components/Module'
-import { isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 
 const TopVideosCard = (props) => {
   const {

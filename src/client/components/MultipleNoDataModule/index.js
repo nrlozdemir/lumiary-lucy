@@ -1,6 +1,5 @@
 import React from 'react'
 import style from './style.scss'
-import { isDataSetEmpty, randomKey } from 'Utils'
 
 const MultipleNoDataModule = ({ children }) => {
   return (

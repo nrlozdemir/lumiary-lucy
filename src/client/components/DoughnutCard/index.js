@@ -1,7 +1,7 @@
 import React from 'react'
 import style from './style.scss'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
-import { capitalizeFirstLetter, metricSuffix } from 'Utils/'
+import { metricSuffix } from 'Utils'
 const DoughnutCard = ({ data, index, colors, isEmpty }) => {
   const dataset = data.datasets[0]
   const checkObjectOrValue = dataset.data.map((item) =>

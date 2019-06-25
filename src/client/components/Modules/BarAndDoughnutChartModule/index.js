@@ -10,7 +10,7 @@ import Legend from 'Components/Legend'
 import style from './style.scss'
 import classnames from 'classnames'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import { isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 
 const barPlugins = [
   {
