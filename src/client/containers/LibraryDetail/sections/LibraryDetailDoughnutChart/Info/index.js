@@ -8,20 +8,29 @@ import BasedOnShares from './BasedOnShares'
 import IndustryData from './IndustryData'
 import Header from './Header'
 import LineChart from './LineChart'
+import RouterLoading from 'Components/RouterLoading'
 
-class Info extends React.Component {
-  render() {
-    return (
-      <ThemeContext.Consumer>
-        {({ themeContext: { colors } }) => (
-          <div className={style.radialChartsContainer}>
-            <div
-              className={style.doughnutPanelTab}
-              style={{
-                background: colors.moduleBackground,
-              }}
-            >
-              <Header />
+const moduleKey = 'LDDH'
+
+const Info = ({ videoId, title, loading, ...rest }) => (
+  <ThemeContext.Consumer>
+    {({ themeContext: { colors } }) => (
+      <div className={style.radialChartsContainer}>
+        <div
+          className={style.doughnutPanelTab}
+          style={{
+            background: colors.moduleBackground,
+          }}
+        >
+          <Header
+            videoId={videoId}
+            title={title}
+            moduleKey={moduleKey}
+            loading={loading}
+            {...rest}
+          />
+          {!loading ? (
+            <React.Fragment>
               <div
                 className={style.dataWrapper}
                 style={{
@@ -29,16 +38,20 @@ class Info extends React.Component {
                 }}
               >
                 <LibraryData />
-                <BasedOnShares />
+                <BasedOnShares title={title} moduleKey={moduleKey} {...rest} />
                 <IndustryData />
               </div>
               <LineChart />
+            </React.Fragment>
+          ) : (
+            <div className={style.infoLoading}>
+              <RouterLoading />
             </div>
-          </div>
-        )}
-      </ThemeContext.Consumer>
-    )
-  }
-}
+          )}
+        </div>
+      </div>
+    )}
+  </ThemeContext.Consumer>
+)
 
 export default Info

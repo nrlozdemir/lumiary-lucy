@@ -106,7 +106,7 @@ export class LibraryDetail extends React.Component {
             cvScore={selectedVideo['cvScores.value']}
           />
         )}
-        {doughnutData && <LibraryDetailDoughnutChart />}
+        {doughnutData && <LibraryDetailDoughnutChart videoId={videoId} />}
         {shotByShotData && (
           <LibraryDetailShotByShot shots={shotByShotData.video.shots} />
         )}

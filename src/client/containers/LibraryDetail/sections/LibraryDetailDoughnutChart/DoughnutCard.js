@@ -10,7 +10,16 @@ import { actions } from 'Reducers/libraryDetail'
 
 class DoughnutCard extends React.Component {
   render() {
-		const { identifier, title, maxLabel, maxPercentage, toggleInfoSection, chartData, data } = this.props;
+    const {
+      identifier,
+      title,
+      maxLabel,
+      maxPercentage,
+      toggleInfoSection,
+      chartData,
+      data,
+      videoId,
+    } = this.props
 
     return (
       <ThemeContext.Consumer>
@@ -50,20 +59,21 @@ class DoughnutCard extends React.Component {
                   data={chartData}
                 />
                 <p>
-                  <span className={style.textBold}>
-                    {maxPercentage}%{' '}
-                  </span>
+                  <span className={style.textBold}>{maxPercentage}% </span>
                   of your library
                   <br /> is shot in
-                  <span className={style.textBold}>
-                    {' '}{maxLabel}
-                  </span>
+                  <span className={style.textBold}> {maxLabel}</span>
                 </p>
               </div>
             </div>
             <a
               className={style.doughnutChartFooter}
-              onClick={() => toggleInfoSection({id: identifier, label: maxLabel, title, data})}
+              onClick={() =>
+                toggleInfoSection({
+                  title,
+                  label: maxLabel,
+                })
+              }
               style={{
                 backgroundColor: colors.modalButtonBackground,
                 color: colors.textColor,
@@ -79,13 +89,11 @@ class DoughnutCard extends React.Component {
   }
 }
 
-
-const mapStateToProps = createStructuredSelector({
-})
+const mapStateToProps = createStructuredSelector({})
 
 function mapDispatchToProps(dispatch) {
   return {
-		toggleInfoSection: show => dispatch(actions.toggleInfoSection(show))
+    toggleInfoSection: (show) => dispatch(actions.toggleInfoSection(show)),
   }
 }
 
