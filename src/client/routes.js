@@ -41,6 +41,10 @@ const routes = [
     },
   },
   {
+    path: '/quickview/:platform/:metric',
+    component: 'Quickview',
+  },
+  {
     path: '/quickview/:platform',
     component: 'Quickview',
   },

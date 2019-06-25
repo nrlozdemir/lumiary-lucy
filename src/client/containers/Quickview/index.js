@@ -4,6 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
+import { push } from 'connected-react-router'
 import { actions, makeSelectQuickview } from 'Reducers/quickview'
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 import { toSlug, socialIconSelector, selectFiltersToType } from 'Utils'
@@ -32,7 +33,7 @@ export class Main extends React.PureComponent {
           filter: {
             type: 'metric',
             selectKey: 'QV-facebook-metric',
-            placeHolder: 'Engagement',
+            placeHolder: '',
           },
         },
         { 
@@ -40,7 +41,7 @@ export class Main extends React.PureComponent {
           filter: {
             type: 'metric',
             selectKey: 'QV-instagram-metric',
-            placeHolder: 'Engagement',
+            placeHolder: '',
           },
         },
         { 
@@ -48,7 +49,7 @@ export class Main extends React.PureComponent {
           filter: {
             type: 'metric',
             selectKey: 'QV-twitter-metric',
-            placeHolder: 'Engagement',
+            placeHolder: '',
           },
         },
         { 
@@ -56,7 +57,7 @@ export class Main extends React.PureComponent {
           filter: {
             type: 'metric',
             selectKey: 'QV-youtube-metric',
-            placeHolder: 'Engagement',
+            placeHolder: '',
           },
         },
       ],
@@ -85,10 +86,14 @@ export class Main extends React.PureComponent {
 
   handleFilterChange = (data, platform = 'facebook') => {
     const { match, getQuickviewItemsRequest } = this.props
+    const selectedMetric = match.params.metric || 'views'
 
     getQuickviewItemsRequest({
       platform: match.params.platform || 'facebook',
-      data,
+      data: {
+        ...data,
+        metric: selectedMetric
+      }
     })
   }
 
@@ -100,9 +105,11 @@ export class Main extends React.PureComponent {
         loading = false,
         selectedPlatform: { platformsValues, differencesValues },
       },
+      push,
     } = this.props
 
     const selectedPlatform = match.params.platform || 'facebook'
+    const selectedMetric = match.params.metric || 'views'
 
     return (
       <ThemeContext.Consumer>
@@ -114,7 +121,7 @@ export class Main extends React.PureComponent {
                   <div className={style.navItem}>
                     {platforms.map((platform, idx) => {
                       const isSelected = selectedPlatform === platform.name
-                      return !!platform.filter && isSelected ? (
+                      return !!platform.filter && isSelected || true ? (
                         <div
                           key={idx}
                           className={style.navItem_btn}
@@ -138,6 +145,14 @@ export class Main extends React.PureComponent {
                             moduleKey={moduleKey}
                             selectKey={platform.filter.selectKey}
                             placeHolder={platform.filter.placeHolder}
+                            defaultValue={selectedMetric}
+                            onChange={(options = {}) => {
+                              const { value } = options
+
+                              if(value){
+                                push(`/quickview/${toSlug(platform.name)}/${value}`)
+                              }
+                            }}
                           />
                         </div>
                       ) : (
@@ -227,7 +242,7 @@ export class Main extends React.PureComponent {
                                     <div className={style.assetContainer}>
                                       <AssetLayer
                                         leftSocialIcon={socialIcon}
-                                        title={title}
+                                        title={title.substring(0, 32)}
                                         rightValue={cvScore}
                                         width={'100%'}
                                         height={286}
@@ -379,7 +394,12 @@ const mapStateToProps = createStructuredSelector({
   quickview: makeSelectQuickview(),
 })
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    push: (url) => dispatch(push(url)),
+    ...bindActionCreators(actions, dispatch),
+  }
+}
 
 const withConnect = connect(
   mapStateToProps,
