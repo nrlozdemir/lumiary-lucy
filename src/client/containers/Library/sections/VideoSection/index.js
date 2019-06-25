@@ -5,7 +5,6 @@ import { createStructuredSelector } from 'reselect'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, makeSelectLibrary } from 'Reducers/library'
 import VideoCardList from 'Components/VideoCardList'
-import RouterLoading from 'Components/RouterLoading'
 import style from '../../style.scss'
 
 class VideoSection extends React.Component {
@@ -18,12 +17,8 @@ class VideoSection extends React.Component {
   render() {
     const {
       profile: { brand },
-      library: { data, loading },
+      library: { data },
     } = this.props
-
-    if (!data || loading) {
-      return <RouterLoading />
-    }
 
     return (
       <div className={style.videoContainer}>

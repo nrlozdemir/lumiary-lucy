@@ -41,8 +41,7 @@ export const initialState = fromJS({
 const libraryReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOAD_VIDEOS:
-      return state
-    // return state.set('loading', fromJS(true))
+      return state.set('loading', fromJS(true))
 
     case types.LOAD_VIDEOS_SUCCESS:
       return state
