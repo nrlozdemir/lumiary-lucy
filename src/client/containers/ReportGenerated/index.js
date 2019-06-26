@@ -52,6 +52,7 @@ class ReportGenerated extends React.Component {
   render() {
     const {
       match: { params },
+      location: { search },
       report: { data: report },
       brandInsightValues: { data: brandInsightValues },
 
@@ -74,7 +75,7 @@ class ReportGenerated extends React.Component {
       filteringSectionData,
     } = this.props
 
-    const urlParams = getLocationParams(window.location.search)
+    const urlParams = getLocationParams(search)
     urlParams.brands = [urlParams.brand]
     const reportValues =
       params && params.id
@@ -126,12 +127,13 @@ class ReportGenerated extends React.Component {
           data={filteringSectionData}
           report={reportValues}
         />
-        <ColorTemperature
+        {/*<ColorTemperature
           action={getColorTempDataRequest}
           data={colorTempData}
           selects={selects}
           report={reportValues}
         />
+        */}
       </React.Fragment>
     )
   }
