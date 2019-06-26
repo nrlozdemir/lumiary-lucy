@@ -34,6 +34,11 @@ class LibraryDetailShotByShot extends React.Component {
     this.shotClick = this.shotClick.bind(this)
     this.shotSliderClick = this.shotSliderClick.bind(this)
     this.sliderAction = this.sliderAction.bind(this)
+    this.getDimensions = this.getDimensions.bind(this)
+  }
+
+  getDimensions(e){
+    //console.log(e)
   }
 
   componentDidMount() {}
@@ -436,6 +441,7 @@ class LibraryDetailShotByShot extends React.Component {
                               <RadarChart 
                                 data={radarChartDataConfigured} 
                                 key={Math.random()} 
+                                clientDimensions={this.getDimensions}
                               />
                             )}
                           </div>
