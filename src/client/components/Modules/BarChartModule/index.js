@@ -18,6 +18,7 @@ const BarChartModule = ({
   action,
   moduleKey,
   isEmpty,
+  loading = false,
 }) => {
   const chartTickOptions = {
     callback(value) {
@@ -56,6 +57,7 @@ const BarChartModule = ({
           </div>
         )
       }
+      loading={loading}
     >
       {!!barData && (
         <BarChart

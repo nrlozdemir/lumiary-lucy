@@ -15,23 +15,11 @@ import Module from 'Components/Module'
 import { chartCombineDataset, isDataSetEmpty } from 'Utils/datasets'
 import { chartColors } from 'Utils/globals'
 
-import { isEmpty, isEqual } from 'lodash'
+import { isEmpty } from 'lodash'
 
 class TotalViewsChart extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getTotalViewsRequest(data)
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const {
-      totalViewsData: { data: nextData },
-    } = nextProps
-
-    const {
-      totalViewsData: { data },
-    } = this.props
-
-    return !isEqual(nextData, data)
   }
 
   render() {
@@ -47,9 +35,9 @@ class TotalViewsChart extends React.Component {
     const isBarChartEmpty = isDataSetEmpty(barData)
 
     const hasNoData =
-      (!loading &&
-        (!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty)) ||
-      isEmpty(data)
+      !loading &&
+      ((!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty) ||
+        isEmpty(data))
 
     return (
       <Module
@@ -69,28 +57,31 @@ class TotalViewsChart extends React.Component {
           },
         ]}
         isEmpty={hasNoData}
+        loading={loading}
       >
         <div className="grid-collapse">
           <div className="col-6 mt-24">
-            <StackedBarChart barData={barData} />
+            <StackedBarChart barData={loading ? {} : barData} />
           </div>
           <div className="col-6">
             <DoughnutChart
               width={270}
               height={270}
-              data={doughnutData}
+              data={loading ? {} : doughnutData}
               cutoutPercentage={58}
               fillText="Total Percentage"
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
               labelPositionLeft
               labelsData={
-                (!!doughnutData &&
-                  doughnutData.labels.map((label, idx) => ({
-                    data: label,
-                    color: chartColors[idx],
-                  }))) ||
-                []
+                loading
+                  ? []
+                  : (!!doughnutData &&
+                      doughnutData.labels.map((label, idx) => ({
+                        data: label,
+                        color: chartColors[idx],
+                      }))) ||
+                    []
               }
             />
           </div>

@@ -22,6 +22,7 @@ class Main extends Component {
 
   render() {
     const { totalCompetitorViewsData } = this.props
+    
     return (
       <React.Fragment>
         <div className={style.mainCardContainer}>
@@ -32,9 +33,9 @@ class Main extends Component {
 
         <div className="grid-collapse">
           <TotalViewsCard />
-          {totalCompetitorViewsData.data && (
-            <TotalCompetitorCard data={totalCompetitorViewsData.data} />
-          )}
+          <TotalCompetitorCard
+            totalCompetitorViewsData={totalCompetitorViewsData}
+          />
         </div>
       </React.Fragment>
     )

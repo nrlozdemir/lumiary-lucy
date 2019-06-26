@@ -5,7 +5,9 @@ import { randomKey } from 'Utils'
 
 import { isDataSetEmpty, getMinMaxFromDatasets } from 'Utils/datasets'
 
-const TotalCompetitorCard = ({ data }) => {
+const TotalCompetitorCard = ({
+  totalCompetitorViewsData: { data, loading },
+}) => {
   const isEmpty = isDataSetEmpty(data)
 
   const hasDatasets = !!data && !!data.datasets && !!data.datasets.length
@@ -32,6 +34,7 @@ const TotalCompetitorCard = ({ data }) => {
       isEmpty={isEmpty}
       titleLabels={(hasDatasets && data.datasets.map((d) => d.label)) || []}
       tickOptions={chartTickOptions}
+      loading={loading}
     />
   )
 }
