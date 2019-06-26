@@ -37,17 +37,19 @@ function* getCompetitorVideosApi({ payload }) {
   console.log(payload)
   console.log(marketviewCompetitorVideosData)
   const requestObject = {
-    ...payload
+    ...payload,
   }
 
-  if(payload.competitors) {
+  if (payload.competitors) {
     requestObject.competitors = JSON.stringify(payload.competitors)
   }
 
   let response = yield call(
     getDataFromApi,
     {},
-    `/brand/${payload.brandUuid}/topvideos?${querystring.stringify(requestObject)}`,
+    `/brand/${payload.brandUuid}/topvideos?${querystring.stringify(
+      requestObject
+    )}`,
     'GET'
   )
 
@@ -360,7 +362,7 @@ function* getFormatChartData() {
       dateBucket: 'dayOfWeek',
       display: 'none',
       platform: 'all',
-      brands: [...competitors.map((c) => c.uuid)],
+      brands: [...competitors],
     }
 
     // video is still being pulled from mock
@@ -565,6 +567,7 @@ function* getTopPerformingPropertiesByCompetitorsData({
   try {
     const profile = yield select(selectAuthProfile)
     const competitors = getBrandAndCompetitors(profile)
+
     const options = {
       url: '/report',
       metric: 'views',
@@ -572,7 +575,7 @@ function* getTopPerformingPropertiesByCompetitorsData({
       dateRange: dateRange,
       dateBucket: 'none',
       property: ['pacing'],
-      brands: [...competitors.map((c) => c.uuid)],
+      brands: [...competitors],
     }
 
     const payload = yield call(getDataFromApi, { ...options })
