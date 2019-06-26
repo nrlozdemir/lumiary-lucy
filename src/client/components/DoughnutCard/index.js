@@ -10,6 +10,9 @@ const DoughnutCard = ({ data, index, colors, isEmpty }) => {
   const topItemIndex = checkObjectOrValue.indexOf(
     Math.max(...checkObjectOrValue)
   )
+  
+  const topItemData = dataset.data[topItemIndex] || {}
+
   let customData = {
     ...data,
     datasets: [
@@ -84,9 +87,9 @@ const DoughnutCard = ({ data, index, colors, isEmpty }) => {
               />
               <p>
                 <span className={style.textBold}>
-                  {!!dataset.data[topItemIndex].proportionOfLibrary
-                    ? dataset.data[topItemIndex].proportionOfLibrary
-                    : dataset.data[topItemIndex]}
+                  {!!topItemData.proportionOfLibrary
+                    ? topItemData.proportionOfLibrary
+                    : topItemData}
                   %{' '}
                 </span>
                 of top videos
