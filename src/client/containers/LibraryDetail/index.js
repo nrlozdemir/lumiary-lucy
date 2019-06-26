@@ -96,6 +96,17 @@ export class LibraryDetail extends React.Component {
 
     return (
       <React.Fragment>
+        {barChartData && (
+          <LibraryDetailChartHeader
+            barChartData={barChartData}
+            selectedVideoAverage={selectedVideoAverage}
+            videoUrl={`${mediaUrl}/lumiere/${userUuid}/${videoId}.mp4`}
+            title={selectedVideo.title}
+            socialIcon={selectedVideo.socialIcon}
+            cvScore={selectedVideo['cvScores.value']}
+          />
+        )}
+        {doughnutData && <LibraryDetailDoughnutChart videoId={videoId} />}
         {shotByShotData && (
           <LibraryDetailShotByShot shots={shotByShotData.video.shots} />
         )}

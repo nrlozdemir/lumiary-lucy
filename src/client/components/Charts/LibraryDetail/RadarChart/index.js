@@ -3,8 +3,6 @@ import { Radar, Chart } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
 import { metricSuffix } from 'Utils'
 
-let hide = false
-
 function openTooltip(chart, easing, datasetIndex, pointIndex){
   if (chart.tooltip._active == undefined)
      chart.tooltip._active = []
@@ -38,11 +36,9 @@ function closeTooltip(chart, datasetIndex, pointIndex){
       break
     }
   }
-
-  console.log(activeElements)
-  //chart.tooltip._active = activeElements
-  //chart.tooltip.update(true)
-  //chart.draw()
+  chart.tooltip._active = activeElements
+  chart.tooltip.update(true)
+  chart.draw()
 }
 
 function closeAllTooltips(chart){
@@ -51,29 +47,98 @@ function closeAllTooltips(chart){
   chart.draw()
 }
 
+let tooltipArea = {}
+const plugins = [
+  {
+    beforeDraw: function(chart, easing) {
+      let ctx = chart.chart.ctx
+      let chartArea = chart.chartArea
+      chart.config.data.datasets.forEach(function(dataset, i) {
+        chart.controller.getDatasetMeta(i).data.forEach(function(bar, index) {
+          ctx.beginPath()
+          const color = chart.config.data.labels[index].color
+          const selected = chart.config.data.labels[index].selected
+          const pointLabelPosition = bar._scale.getPointPosition(
+            index,
+            bar._scale.getDistanceFromCenterForValue(bar._scale.max) +
+              (selected ? 31 : 25)
+          )
+          // draw a circle at that point
+          ctx.beginPath()
+          ctx.arc(
+            pointLabelPosition.x,
+            pointLabelPosition.y,
+            selected ? 12 : 6,
+            0,
+            2 * Math.PI,
+            false
+          )
+          ctx.fillStyle = color
+          ctx.fill()
+
+          tooltipArea[index] = {
+            index: index,
+            sector: bar,
+            x: pointLabelPosition.x,
+            y: pointLabelPosition.y
+          }
+
+          if (selected) {
+            ctx.stroke()
+            // ctx.shadowColor = 'black'
+            // ctx.shadowBlur = 0
+            // ctx.shadowOffsetX = 0
+            // ctx.shadowOffsetY = 8
+          }
+        })
+      })
+
+      ctx.save()
+
+      // circles mouse on event
+      ctx.canvas.addEventListener('mousemove', (e) => {
+        Object.values(tooltipArea).map((p, i) => {
+          if (p.x > e.offsetX - 12 
+            && p.x < e.offsetX + 12 
+            && p.y > e.offsetY - 12 
+            && p.y < e.offsetY + 12
+          ) {
+            chart.options.tooltips.enabled = true
+            openTooltip(chart, easing, 0, p.index)
+          } else {
+            chart.options.tooltips.enabled = false
+            ctx.restore()
+            if (chart.tooltip._active.length > 0) {
+              //chart.options.tooltips.enabled = false
+            }
+          }
+        })
+      })
+
+      ctx.canvas.addEventListener('mouseout', (e) => {
+        chart.options.tooltips.enabled = false
+        if (chart.tooltip._active.length > 0) {
+          //closeAllTooltips(chart)
+        }
+      })
+    },
+  },
+]
+
+Chart.Tooltip.positioners.custom = function(e, p) {
+  if ( ! e.length) {
+    return false
+  }
+
+  return {
+    x: tooltipArea[e[0]._index].x,
+    y: tooltipArea[e[0]._index].y
+  }
+}
+
 
 
 const RadarChart = (props) => {
-
-
-  let tooltipArea = {}
-
-  Chart.Tooltip.positioners.custom = function(e, p) {
-    if ( ! e.length) {
-      return false
-    }
-
-    let diff = 0
-    if (tooltipArea[e[0]._index].hide === true) {
-      diff -= 5000
-    }
-
-    return {
-      x: tooltipArea[e[0]._index].x + diff,
-      y: tooltipArea[e[0]._index].y + diff
-    }
-  }
-
   const { data, width = 400, height = 400 } = props
   const themes = props.themeContext.colors
   let parsedData = data
@@ -100,144 +165,12 @@ const RadarChart = (props) => {
   const lineWidth = 16
   const stepSize = 1
 
-  document.addEventListener('mouseout', (e) => {
-    //console.log(e)
-  })
-
   return (
     <Radar
       data={parsedData}
       width={width}
       height={height}
-      plugins={[
-        {
-          beforeDraw: function(chart, easing) {
-            let ctx = chart.chart.ctx
-            let chartArea = chart.chartArea
-            chart.config.data.datasets.forEach(function(dataset, i) {
-              chart.controller.getDatasetMeta(i).data.forEach(function(bar, index) {
-                ctx.beginPath()
-                const color = chart.config.data.labels[index].color
-                const selected = chart.config.data.labels[index].selected
-                const pointLabelPosition = bar._scale.getPointPosition(
-                  index,
-                  bar._scale.getDistanceFromCenterForValue(bar._scale.max) +
-                    (selected ? 31 : 25)
-                )
-                // draw a circle at that point
-                ctx.beginPath()
-                ctx.arc(
-                  pointLabelPosition.x,
-                  pointLabelPosition.y,
-                  selected ? 12 : 6,
-                  0,
-                  2 * Math.PI,
-                  false
-                )
-                ctx.fillStyle = color
-                ctx.fill()
-      
-                tooltipArea[index] = {
-                  index: index,
-                  sector: bar,
-                  x: pointLabelPosition.x,
-                  y: pointLabelPosition.y,
-                  hide: false
-                }
-      
-                if (selected) {
-                  ctx.stroke()
-                  // ctx.shadowColor = 'black'
-                  // ctx.shadowBlur = 0
-                  // ctx.shadowOffsetX = 0
-                  // ctx.shadowOffsetY = 8
-                }
-      
-                //console.log(tooltipArea)
-              })
-            })
-      
-            ctx.save()
-      
-            // circles mouse on event
-            ctx.canvas.addEventListener('mousemove', (e) => {
-              Object.values(tooltipArea).map((p, i) => {
-                if (p.x > e.offsetX - 12 
-                  && p.x < e.offsetX + 12 
-                  && p.y > e.offsetY - 12 
-                  && p.y < e.offsetY + 12
-                ) {
-                  const a = {
-                    clientX: e.clientX,
-                    clientY: e.clientY,
-                    layerX: e.layerX,
-                    layerY: e.layerY,
-                    offsetX: e.offsetX,
-                    offsetY: e.offsetY,
-                    pageX: e.pageX,
-                    pageY: e.pageY,
-                    screenX: e.screenX,
-                    screenY: e.screenY,
-                    x: e.x,
-                    y: e.y,
-                    pX: p.x,
-                    pY: p.y
-                  }
-      
-                  //console.log(a)
-                  
-                  //ctx.restore()
-                  chart.options.tooltips.enabled = true
-                  openTooltip(chart, easing, 0, p.index)
-      
-                  //console.log(chart.tooltip._active)
-                } else {
-                  //ctx.restore()
-                  //closeTooltip(chart, 0, p.index)
-                  //chart.setActiveElements([], []);
-                  //chart.options.tooltip.enabled = false;
-                  tooltipArea[i].hide = true
-                  //chart.options.tooltips.enabled = false
-                  
-                  //chart.draw()
-                  //ctx.restore()
-                  //openTooltip(chart, easing, 0, zeroLineColor)
-                  //chart.tooltip._active = 5
-                  //chart.tooltip.update(true)
-                  if (chart.tooltip._active.length > 0) {
-                    //console.log("out...")
-                    //chart.options.tooltips.enabled = false
-                    //chart.tooltip.update(true)
-                    //chart.draw()
-                    //closeTooltip(chart, 0, p.index)
-                  }
-                }
-              })
-            })
-      
-            ctx.canvas.addEventListener('mouseout', (e) => {
-              chart.options.tooltips.enabled = false
-              //console.log(chart.tooltip._active.length)
-              if (chart.tooltip._active.length > 0) {
-                //closeAllTooltips(chart)
-              }
-            })
-          },
-          afterDraw: function(chart, easing) {
-            const { canvas } = chart.ctx
-            props.clientDimensions({
-              clientWidth: canvas.clientWidth,
-              clientHeight: canvas.clientHeight,
-              clientTop: canvas.clientTop,
-              clientLeft: canvas.clientLeft,
-              offsetWidth: canvas.offsetWidth,
-              offsetHeight: canvas.offsetHeight,
-              offsetTop: canvas.offsetTop,
-              offsetLeft: canvas.offsetLeft
-            })
-          }
-        },
-      ]}
+      plugins={plugins}
       options={{
         elements: {
           line: {
