@@ -21,7 +21,6 @@ class TopPerformingProperty extends React.Component {
   callback = (data) => {
     const {
       container,
-      topProperty,
       getTopPerformingPropertiesRequest,
     } = this.props
 

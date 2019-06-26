@@ -582,17 +582,25 @@ function* getTopPerformingPropertiesByCompetitorsData({
     const profile = yield select(selectAuthProfile)
     const competitors = getBrandAndCompetitors(profile)
 
-    console.log('HELLO GET TOP PERFORMING COMPETITOR PROP', dateRange, property)
+    if (!!property) {
+      const response = yield call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl(`/property/${property}`, {
+          daterange: dateRange,
+          brandUuids: competitors,
+        })
+      )
 
-    // const options = {
-    //   url: '/report',
-    //   metric: 'views',
-    //   // platform: 'all',
-    //   dateRange: dateRange,
-    //   dateBucket: 'none',
-    //   property: ['pacing'],
-    //   brands: [...competitors.map((c) => c.uuid)],
-    // }
+      console.log(
+        'RESPONSE FOR getTopPerformingPropertiesByCompetitorsData',
+        response,
+        dateRange,
+        property
+      )
+    } else {
+      throw new Error('Get Top Performing Property Error')
+    }
 
     // const payload = yield call(getDataFromApi, { ...options })
 
