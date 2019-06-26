@@ -74,8 +74,6 @@ function* brandInsightSubmit({ payload }) {
       title,
     }
 
-    console.log(parameters)
-
     yield put(actions.brandInsightFormSubmitSuccess(parameters))
     yield put(
       push(
