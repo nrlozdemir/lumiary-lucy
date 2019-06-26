@@ -138,12 +138,9 @@ class StackedPercentageChart extends React.Component {
 
           ctx.restore()
 
-          const findYMaxValue =
-            !!lines &&
-            Object.values(lines).reduce(
-              (p, n) => (p.currentVLine.y > n.currentVLine.y ? n : p),
-              0
-            )
+          const findYMaxValue = Object.values(lines).reduce((p, n) =>
+            p.currentVLine.y > n.currentVLine.y ? n : p
+          )
 
           const findYMaxIndex =
             findYMaxValue &&
