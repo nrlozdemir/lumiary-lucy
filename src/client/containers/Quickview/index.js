@@ -307,7 +307,7 @@ export class Main extends React.PureComponent {
                                                 opacity: (noData) ? 0.1 : 1,
                                               }}
                                             >
-                                              {difference && i === 1 && (
+                                              {difference && i === 1 && false && (
                                                 <div
                                                   className={
                                                     style.infoItem_diffBubble

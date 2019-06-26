@@ -114,7 +114,7 @@ function* getQuickviewItemsApi({ platform, metric, dateRange, uuid, }) {
         {
           "slug": "frameRate",
           "title": "Frame Rate",
-          "value": `${frameRatesBucketName}fps`,
+          "value": frameRatesBucketName === '' ? '' : `${frameRatesBucketName}fps`,
           "percentage": frameRatesIndustryPercent,
           "text": "{percentage}% of industry videos have a <b>{title}</b> of <b>{value}</b>"
         }
