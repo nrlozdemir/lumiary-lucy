@@ -19,10 +19,7 @@ import style from '../../../style.scss'
 
 class TopPerformingProperty extends React.Component {
   callback = (data) => {
-    const {
-      container,
-      getTopPerformingPropertiesRequest,
-    } = this.props
+    const { container, getTopPerformingPropertiesRequest } = this.props
 
     if (container === 'platform') {
       getTopPerformingPropertiesRequest(data)
@@ -108,31 +105,12 @@ class TopPerformingProperty extends React.Component {
     }
 
     const referencesData =
-      container === 'competitor'
-        ? [
-            {
-              className: 'bg-cool-blue',
-              text: 'Fast',
-            },
-            {
-              className: 'bg-lighter-purple',
-              text: 'Medium',
-            },
-            {
-              className: 'bg-coral-pink',
-              text: 'Slow',
-            },
-            {
-              className: 'bg-cool-grey',
-              text: 'Slowest',
-            },
-          ]
-        : chartData &&
-          chartData.datasets &&
-          chartData.datasets.map((item) => ({
-            text: item.label,
-            color: item.backgroundColor,
-          }))
+      chartData &&
+      chartData.datasets &&
+      chartData.datasets.map((item) => ({
+        text: item.label,
+        color: item.backgroundColor,
+      }))
 
     return (
       <BarChartModule

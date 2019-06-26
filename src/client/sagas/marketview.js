@@ -21,6 +21,7 @@ import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPl
 import {
   getMaximumValueIndexFromArray,
   ucfirst,
+  getLabelWithSuffix,
   getDateBucketFromRange,
   getBrandAndCompetitors,
 } from 'Utils'
@@ -30,7 +31,7 @@ import {
   convertMultiRequestDataIntoDatasets,
 } from 'Utils/datasets'
 
-import { dayOfWeek } from 'Utils/globals'
+import { dayOfWeek, chartColors } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 function* getCompetitorVideosApi({ payload }) {
@@ -586,35 +587,49 @@ function* getTopPerformingPropertiesByCompetitorsData({
       const response = yield call(
         getDataFromApi,
         undefined,
-        buildApiUrl(`/property/${property}`, {
+        buildApiUrl(`/property/brands/${property}`, {
           daterange: dateRange,
           brandUuids: competitors,
-        })
+        }),
+        'GET'
       )
 
-      console.log(
-        'RESPONSE FOR getTopPerformingPropertiesByCompetitorsData',
-        response,
-        dateRange,
-        property
-      )
+      if (!!response) {
+        // wtfis this man put it somewher else o.O
+        const brandLabels = Object.keys(response)
+
+        const propLabels = brandLabels.reduce((all, brand) => {
+          Object.keys(response[brand]).forEach((prop) => {
+            if (all.indexOf(prop) === -1) {
+              all.push(prop)
+            }
+          })
+          return all
+        }, [])
+
+        const convertedDatasets = propLabels.map((prop, idx) => {
+          const data = brandLabels.map(
+            (b) => (!!response[b] && response[b][prop]) || 0
+          )
+          return {
+            data,
+            label: getLabelWithSuffix(prop, property),
+            borderWidth: 1,
+            borderColor: chartColors[idx],
+            backgroundColor: chartColors[idx],
+          }
+        })
+
+        yield put(
+          actions.getTopPerformingPropertiesByCompetitorsSuccess({
+            datasets: convertedDatasets,
+            labels: brandLabels,
+          })
+        )
+      }
     } else {
       throw new Error('Get Top Performing Property Error')
     }
-
-    // const payload = yield call(getDataFromApi, { ...options })
-
-    // if (!!payload && !!payload.data && !_.isEmpty(payload.data)) {
-    //   yield put(
-    //     actions.getTopPerformingPropertiesByCompetitorsSuccess(
-    //       convertDataIntoDatasets(payload, options, {
-    //         useBrandLabels: true,
-    //       })
-    //     )
-    //   )
-    // } else {
-    //   yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess({}))
-    // }
   } catch (error) {
     console.log('error', error)
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))

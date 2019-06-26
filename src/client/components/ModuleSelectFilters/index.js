@@ -75,7 +75,7 @@ class ModuleSelectFilters extends React.Component {
         : options && options[type].find(({ value: v }) => v === _defaultValue)
 
     const onChangeFunc = (onChange) ? onChange : this.onChange
-console.log(selectClasses)
+
     return (
       <React.Fragment>
         <Select
