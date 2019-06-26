@@ -12,6 +12,7 @@ import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import { isEmpty } from 'lodash'
 
 import style from 'Containers/Marketview/style.scss'
+import RouterLoading from 'Components/RouterLoading'
 
 class ColorCard extends Component {
   constructor(props) {
@@ -61,12 +62,12 @@ class ColorCard extends Component {
               color: colors.textColor,
             }}
           >
-            {isDataEmpty && (
+            {(loading || (isDataEmpty && !loading)) && (
               <div
                 className={style.marketViewCardEmpty}
                 style={{ backgroundColor: colors.moduleBackgroundOpacity }}
               >
-                No Data Available
+                {loading ? <RouterLoading /> : 'No Data Available'}
               </div>
             )}
             <div className={style.marketViewCardTitle}>Color</div>
