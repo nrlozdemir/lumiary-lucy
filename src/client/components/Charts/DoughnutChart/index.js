@@ -136,7 +136,9 @@ const DoughnutChart = (props) => {
                 labels: data.labels,
                 datasets: [
                   {
-                    ...data.datasets[0],
+                    ...(!!data && !!data.datasets && !!data.datasets[0]
+                      ? data.datasets[0]
+                      : {}),
                     backgroundColor:
                       data && data.datasets
                         ? data.datasets[0].backgroundColor
