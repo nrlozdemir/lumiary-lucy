@@ -9,30 +9,25 @@ import {
 import TopSimilarPropertiesModule from 'Components/Modules/TopSimilarPropertiesModule'
 import { withTheme } from 'ThemeContext/withTheme'
 
-import { isEmpty, isEqual } from 'lodash'
-
 class TopSimilarProperties extends React.Component {
   getSimilarProperties = (data) => {
     const {
+      container,
+      getSimilarPropertiesRequest,
       themeContext: { colors },
     } = this.props
-    this.props.getSimilarPropertiesRequest(data)
+
+    getSimilarPropertiesRequest({ ...data, container })
   }
 
-  // shouldComponentUpdate(nextProps) {
-  //   const {
-  //     similarProperties: { data: nextData },
-  //   } = nextProps
-  //
-  //   const {
-  //     similarProperties: { data },
-  //   } = this.props
-  //
-  //   return !isEqual(nextData, data)
-  // }
-
   render() {
-    const { similarProperties: {data, loading, error}, title, moduleKey, filters } = this.props
+    const {
+      similarProperties: { data, loading, error },
+      title,
+      moduleKey,
+      filters,
+    } = this.props
+
     return (
       <TopSimilarPropertiesModule
         moduleKey={moduleKey}
