@@ -8,8 +8,12 @@ import {
   selectMarketviewTopPerformingPropertiesByCompetitorsDataView,
   selectMarketviewTopPerformingPropertiesDataView,
 } from 'Reducers/marketview'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
+
 import BarChartModule from 'Components/Modules/BarChartModule'
+import { splitCamelCaseToString, selectFiltersToType } from 'Utils'
 import { getMinMaxFromDatasets } from 'Utils/datasets'
+import { isEqual } from 'lodash'
 
 import style from '../../../style.scss'
 
@@ -19,16 +23,9 @@ class TopPerformingProperty extends React.Component {
       container,
       topProperty,
       getTopPerformingPropertiesRequest,
-      getTopPerformingPropertiesByCompetitorsRequest,
     } = this.props
 
-    if (container === 'competitor') {
-      !!topProperty &&
-        getTopPerformingPropertiesByCompetitorsRequest({
-          ...data,
-          property: topProperty,
-        })
-    } else if (container === 'platform') {
+    if (container === 'platform') {
       getTopPerformingPropertiesRequest(data)
     }
   }
@@ -37,14 +34,37 @@ class TopPerformingProperty extends React.Component {
     const { topProperty: prevTopProperty } = prevProps
     const {
       topProperty,
+      container,
+      moduleKey,
+      selectFilters,
       getTopPerformingPropertiesByCompetitorsRequest,
     } = this.props
 
-    if (!!topProperty && topProperty !== prevTopProperty) {
+    if (
+      container === 'competitor' &&
+      ((!!prevProps.selectFilters &&
+        !!selectFilters &&
+        !isEqual(
+          prevProps.selectFilters.values[prevProps.moduleKey],
+          selectFilters.values[moduleKey]
+        ) &&
+        !!topProperty) ||
+        prevTopProperty !== topProperty)
+    ) {
+      const selectFilterValues = selectFilters.values[moduleKey]
+
+      const valuesToType = selectFiltersToType(selectFilterValues)
+
       getTopPerformingPropertiesByCompetitorsRequest({
+        ...valuesToType,
         property: topProperty,
       })
     }
+  }
+
+  componentWillUnmount() {
+    const { container, setCompetitorTopProperty } = this.props
+    container === 'competitor' && setCompetitorTopProperty(null)
   }
 
   render() {
@@ -53,6 +73,7 @@ class TopPerformingProperty extends React.Component {
       filters,
       moduleKey,
       container,
+      topProperty,
       topPerformingPropertiesByCompetitorsData,
       topPerformingPropertiesData,
     } = this.props
@@ -113,10 +134,17 @@ class TopPerformingProperty extends React.Component {
             text: item.label,
             color: item.backgroundColor,
           }))
+
     return (
       <BarChartModule
         moduleKey={moduleKey}
-        title={title}
+        title={
+          title
+            ? title
+            : `Top Performing Property, ${
+                topProperty ? `${splitCamelCaseToString(topProperty)},` : ''
+              } Across All Competitors`
+        }
         containerClass={
           container === 'competitor' &&
           style.detailTopPerformingPropertyContainer
@@ -136,6 +164,7 @@ const mapStateToProps = createStructuredSelector({
   topPerformingPropertiesByCompetitorsData: selectMarketviewTopPerformingPropertiesByCompetitorsDataView(),
   topPerformingPropertiesData: selectMarketviewTopPerformingPropertiesDataView(),
   topProperty: makeSelectMarketviewTopProperty(),
+  selectFilters: makeSelectSelectFilters(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)

@@ -48,6 +48,8 @@ const getLabelWithSuffix = (label, property) => {
   return `${label} ${suffix}`
 }
 
+const splitCamelCaseToString = (s) => ucfirst(s.split(/(?=[A-Z])/).join(' '))
+
 function socialIconSelector(key) {
   if (!key) return
   const keyToLowerCase = key.toLowerCase()
@@ -281,4 +283,5 @@ export {
   getFilteredCompetitors,
   getFilteredCompetitorValues,
   getLocationParams,
+  splitCamelCaseToString,
 }

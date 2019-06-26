@@ -251,7 +251,12 @@ export const actions = {
     type: types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_FAILURE,
     error,
   }),
+  setCompetitorTopProperty: (payload) => ({
+    type: types.SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY,
+    payload,
+  }),
 }
+
 export const initialState = fromJS({
   competitorTopVideos: {
     data: [],
@@ -430,7 +435,6 @@ const marketviewReducer = (state = initialState, action) => {
       return state
         .setIn(['similarProperties', 'loading'], fromJS(true))
         .setIn(['similarProperties', 'error'], fromJS(null))
-        .set('topProperty', fromJS(null))
 
     case types.GET_MARKETVIEW_SIMILAR_PROPERTIES_SUCCESS:
       return state
@@ -478,11 +482,10 @@ const marketviewReducer = (state = initialState, action) => {
         .setIn(['totalCompetitorViewsData', 'loading'], fromJS(false))
 
     case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_REQUEST:
-      return state
-        .setIn(
-          ['topPerformingPropertiesByCompetitorsData', 'loading'],
-          fromJS(true)
-        )
+      return state.setIn(
+        ['topPerformingPropertiesByCompetitorsData', 'loading'],
+        fromJS(true)
+      )
 
     case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_SUCCESS:
       return state
