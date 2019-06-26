@@ -25,15 +25,21 @@ class TopVideosOverTime extends React.Component {
 
   render() {
     const {
-      competitorTopVideos,
-      platformTopVideos,
-      topPerformingData,
       title,
       moduleKey,
       filters,
       references,
       container,
       selects,
+      topPerformingData: {
+        data: topPerformingData,
+        loading: topPerformingLoading,
+      },
+      competitorTopVideos: {
+        data: competitorTopData,
+        loading: competitorTopLoading,
+      },
+      platformTopVideos: { data: platformTopData, loading: platformTopLoading },
     } = this.props
 
     const whichReferencesData =
@@ -42,6 +48,7 @@ class TopVideosOverTime extends React.Component {
         : container === 'competitor'
         ? 'competitorTopVideos'
         : null
+
     const referencesData =
       container === 'time' || container === 'competitor'
         ? this.props[whichReferencesData].data &&
@@ -54,10 +61,10 @@ class TopVideosOverTime extends React.Component {
 
     const chartData =
       container === 'time'
-        ? topPerformingData.data
+        ? topPerformingData
         : container === 'platform'
-        ? platformTopVideos.data
-        : competitorTopVideos.data
+        ? platformTopData
+        : competitorTopData
 
     const selectValue =
       selects.values[moduleKey] &&
@@ -65,9 +72,12 @@ class TopVideosOverTime extends React.Component {
       selects.values[moduleKey]['Mwvlt-date'].value &&
       selects.values[moduleKey]['Mwvlt-date'].value.label
 
+    const loading =
+      topPerformingLoading || competitorTopLoading || platformTopLoading
+
     return (
       <TopVideosCard
-        chartData={chartData}
+        chartData={loading ? {} : chartData}
         height={150}
         moduleKey={moduleKey}
         title={
@@ -76,7 +86,8 @@ class TopVideosOverTime extends React.Component {
         }
         action={this.callback}
         filters={filters}
-        references={referencesData}
+        references={loading ? [] : referencesData}
+        loading={loading}
       />
     )
   }
