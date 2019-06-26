@@ -18,6 +18,8 @@ import {
   makeSelectReportsBrandInsightValues,
 } from 'Reducers/reports'
 
+import { getLocationParams } from 'Utils'
+
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
@@ -72,7 +74,14 @@ class ReportGenerated extends React.Component {
       filteringSectionData,
     } = this.props
 
-    const reportValues = params && params.id ? report : brandInsightValues
+    const urlParams = getLocationParams(window.location.search)
+    urlParams.brands = [urlParams.brand]
+    const reportValues =
+      params && params.id
+        ? report
+        : brandInsightValues
+        ? brandInsightValues
+        : urlParams
 
     if (!reportValues) {
       return <RouterLoading />
