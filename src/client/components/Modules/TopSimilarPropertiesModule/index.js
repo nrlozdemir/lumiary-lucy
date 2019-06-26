@@ -26,40 +26,40 @@ const TopSimilarProperties = (props) => {
               <RouterLoading />
             ) : (
               <MultipleNoDataModule>
-                {!!data &&
-                  !!data.length &&
-                  data.map((sectionItem, i) => {
-                    const moduleContainer = classnames({
-                      [style.similarContainer]: i !== 0,
-                    })
-                    const isEmpty =
-                      !!data &&
-                      !!data.length &&
-                      data
-                        .map((value) =>
-                          isDataSetEmpty(value.doughnutChartValues)
-                        )
-                        .every((dataset) => dataset === true)
+                {!!data && !!data.length
+                  ? data.map((sectionItem, i) => {
+                      const moduleContainer = classnames({
+                        [style.similarContainer]: i !== 0,
+                      })
+                      const isEmpty =
+                        !!data &&
+                        !!data.length &&
+                        data
+                          .map((value) =>
+                            isDataSetEmpty(value.doughnutChartValues)
+                          )
+                          .every((dataset) => dataset === true)
 
-                    return (
-                      <div
-                        className={moduleContainer}
-                        style={{ borderColor: colors.moduleBorder }}
-                        key={`TopSimilarProperties_${i}`}
-                        datasetsIsEmpty={isEmpty}
-                      >
-                        <DoughnutCard
-                          data={sectionItem.doughnutChartValues}
-                          key={i}
-                          index={i}
-                          colors={colors}
-                          isEmpty={isEmpty}
-                        />
-                      </div>
-                    )
-                  })}
+                      return (
+                        <div
+                          className={moduleContainer}
+                          style={{ borderColor: colors.moduleBorder }}
+                          key={`TopSimilarProperties_${i}`}
+                          datasetsIsEmpty={isEmpty}
+                        >
+                          <DoughnutCard
+                            data={sectionItem.doughnutChartValues}
+                            key={i}
+                            index={i}
+                            colors={colors}
+                            isEmpty={isEmpty}
+                          />
+                        </div>
+                      )
+                    })
+                  : null}
               </MultipleNoDataModule>
-            )}{' '}
+            )}
           </div>
         )}
       </ThemeContext.Consumer>
