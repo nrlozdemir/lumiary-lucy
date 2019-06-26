@@ -249,6 +249,16 @@ const selectFiltersToType = (selectValues = {}) => {
   }, {})
 }
 
+const getLocationParams = (value) => {
+  const urlSplit = value.replace('?', '').split('&')
+
+  return urlSplit.reduce((obj, val) => {
+    const keyAndValue = val.split('=')
+    obj[keyAndValue[0]] = keyAndValue[1]
+    return obj
+  }, {})
+}
+
 export {
   randomKey,
   socialIconSelector,
@@ -270,4 +280,5 @@ export {
   getBrandNameAndCompetitorsName,
   getFilteredCompetitors,
   getFilteredCompetitorValues,
+  getLocationParams,
 }

@@ -86,7 +86,9 @@ class MarketViewSlider extends React.Component {
       )
     },
     on: {
-      slideChange: (index) => {
+      slideChange: () => {
+        const { changeVideo, items } = this.props
+
         const bullets =
           this.refSlider &&
           this.refSlider.$el[0].querySelector('.pagination').children
@@ -99,6 +101,8 @@ class MarketViewSlider extends React.Component {
         }
         // Force rendering needed to update disabled state of prev and next buttons
         this.forceUpdate()
+
+        this.refSlider && changeVideo(items[this.refSlider.activeIndex])
       },
     },
     renderNextButton: this.renderNextButton,

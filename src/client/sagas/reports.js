@@ -75,7 +75,11 @@ function* brandInsightSubmit({ payload }) {
     }
 
     yield put(actions.brandInsightFormSubmitSuccess(parameters))
-    yield put(push(`/reports/brand-insight`))
+    yield put(
+      push(
+        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}`
+      )
+    )
   } catch (err) {
     yield put(actions.brandInsightFormSubmitError(err))
   }
