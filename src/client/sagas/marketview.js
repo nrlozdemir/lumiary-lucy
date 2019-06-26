@@ -205,7 +205,7 @@ function* getPlatformTopVideosMarketview({
   }
 }
 
-function* getSimilarProperties({ data: { dateRange } }) {
+function* getSimilarProperties({ data: { dateRange, container } }) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
@@ -238,6 +238,20 @@ function* getSimilarProperties({ data: { dateRange } }) {
         0,
         3
       )
+    }
+
+    if (
+      container === 'competitor' &&
+      !!highestBuckets &&
+      !!highestBuckets.length
+    ) {
+      yield put({
+        type: types.SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY,
+        payload:
+          !!highestBuckets[0] && !!highestBuckets[0].highestProperty
+            ? highestBuckets[0].highestProperty
+            : null,
+      })
     }
 
     const val = highestBuckets.map((value, idx) => ({
@@ -562,35 +576,37 @@ function* getTopPerformingPropertiesData({
 }
 
 function* getTopPerformingPropertiesByCompetitorsData({
-  payload: { dateRange },
+  payload: { dateRange = 'week', property },
 }) {
   try {
     const profile = yield select(selectAuthProfile)
     const competitors = getBrandAndCompetitors(profile)
 
-    const options = {
-      url: '/report',
-      metric: 'views',
-      // platform: 'all',
-      dateRange: dateRange,
-      dateBucket: 'none',
-      property: ['pacing'],
-      brands: [...competitors],
-    }
+    console.log('HELLO GET TOP PERFORMING COMPETITOR PROP', dateRange, property)
 
-    const payload = yield call(getDataFromApi, { ...options })
+    // const options = {
+    //   url: '/report',
+    //   metric: 'views',
+    //   // platform: 'all',
+    //   dateRange: dateRange,
+    //   dateBucket: 'none',
+    //   property: ['pacing'],
+    //   brands: [...competitors.map((c) => c.uuid)],
+    // }
 
-    if (!!payload && !!payload.data && !_.isEmpty(payload.data)) {
-      yield put(
-        actions.getTopPerformingPropertiesByCompetitorsSuccess(
-          convertDataIntoDatasets(payload, options, {
-            useBrandLabels: true,
-          })
-        )
-      )
-    } else {
-      yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess({}))
-    }
+    // const payload = yield call(getDataFromApi, { ...options })
+
+    // if (!!payload && !!payload.data && !_.isEmpty(payload.data)) {
+    //   yield put(
+    //     actions.getTopPerformingPropertiesByCompetitorsSuccess(
+    //       convertDataIntoDatasets(payload, options, {
+    //         useBrandLabels: true,
+    //       })
+    //     )
+    //   )
+    // } else {
+    //   yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess({}))
+    // }
   } catch (error) {
     console.log('error', error)
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))

@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import {
   actions,
+  makeSelectMarketviewTopProperty,
   selectMarketviewTopPerformingPropertiesByCompetitorsDataView,
   selectMarketviewTopPerformingPropertiesDataView,
 } from 'Reducers/marketview'
@@ -14,10 +15,35 @@ import style from '../../../style.scss'
 
 class TopPerformingProperty extends React.Component {
   callback = (data) => {
-    if (this.props.container === 'competitor') {
-      this.props.getTopPerformingPropertiesByCompetitorsRequest(data)
-    } else if (this.props.container === 'platform') {
-      this.props.getTopPerformingPropertiesRequest(data)
+    const {
+      container,
+      topProperty,
+      getTopPerformingPropertiesRequest,
+      getTopPerformingPropertiesByCompetitorsRequest,
+    } = this.props
+
+    if (container === 'competitor') {
+      !!topProperty &&
+        getTopPerformingPropertiesByCompetitorsRequest({
+          ...data,
+          property: topProperty,
+        })
+    } else if (container === 'platform') {
+      getTopPerformingPropertiesRequest(data)
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { topProperty: prevTopProperty } = prevProps
+    const {
+      topProperty,
+      getTopPerformingPropertiesByCompetitorsRequest,
+    } = this.props
+
+    if (!!topProperty && topProperty !== prevTopProperty) {
+      getTopPerformingPropertiesByCompetitorsRequest({
+        property: topProperty,
+      })
     }
   }
 
@@ -92,7 +118,7 @@ class TopPerformingProperty extends React.Component {
         moduleKey={moduleKey}
         title={title}
         containerClass={
-          this.props.container === 'competitor' &&
+          container === 'competitor' &&
           style.detailTopPerformingPropertyContainer
         }
         barData={chartData}
@@ -105,11 +131,11 @@ class TopPerformingProperty extends React.Component {
     )
   }
 }
-TopPerformingProperty.propTypes = {}
 
 const mapStateToProps = createStructuredSelector({
   topPerformingPropertiesByCompetitorsData: selectMarketviewTopPerformingPropertiesByCompetitorsDataView(),
   topPerformingPropertiesData: selectMarketviewTopPerformingPropertiesDataView(),
+  topProperty: makeSelectMarketviewTopProperty(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
