@@ -55,3 +55,29 @@
 .focus {
   transform: rotate(180deg);
 }
+
+.groupLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  line-height: 40px;
+  padding-left: 8px;
+  font-family: $font-family-ClanOTNews;
+  font-weight: normal;
+  font-size: 14px;
+  max-width: 100%;
+  cursor: pointer;
+
+  > span {
+    position: relative;
+    display: inline-block;
+    transition: all 0.3s ease;
+    transform-origin: center center;
+    width: 30px;
+    height: 30px;
+    line-height: 30px;
+    text-align: center;
+    top: -5px;
+    overflow: hidden;
+  }
+}

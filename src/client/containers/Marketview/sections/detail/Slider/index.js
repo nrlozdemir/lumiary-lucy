@@ -4,6 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import {
   actions,
+  makeSelectMarketviewLoading,
   selectMarketviewVideosView,
   selectMarketviewSelectedVideoView,
 } from 'Reducers/marketview'
@@ -68,7 +69,8 @@ class Slider extends React.Component {
   }
 
   render() {
-    const { videos, selectedVideo, title, moduleKey, filters } = this.props
+    const { videos, selectedVideo, title, moduleKey, filters, loading } = this.props
+
     return (
       <SliderModule
         data={videos || []}
@@ -78,6 +80,7 @@ class Slider extends React.Component {
         moduleKey={moduleKey}
         title={title}
         filters={filters}
+        loading={loading}
       />
     )
   }
@@ -88,6 +91,7 @@ const mapStateToProps = createStructuredSelector({
   profile: makeSelectAuthProfile(),
   videos: selectMarketviewVideosView(),
   selectedVideo: selectMarketviewSelectedVideoView(),
+  loading: makeSelectMarketviewLoading(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)

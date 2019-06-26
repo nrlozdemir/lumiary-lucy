@@ -15,6 +15,7 @@ const RadarChartModule = ({
   legend,
   leftTitle,
   rightTitle,
+  loading = false,
 }) => {
   if(data && data[0] && data[0].datas){
     console.log("datas 0")
@@ -31,6 +32,7 @@ const RadarChartModule = ({
           filters={filters}
           legend={legend}
           isEmpty={!data || !data.length || (!data[0].total && !data[1].total)}
+          loading={loading}
         >
           {!!data && !!data.length && (
             <div

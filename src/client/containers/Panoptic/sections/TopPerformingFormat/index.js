@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, makeSelectTopPerformingFormat } from 'Reducers/panoptic'
-import { chartCombineDataset, isDataSetEmpty } from 'Utils'
+import { chartCombineDataset, isDataSetEmpty } from 'Utils/datasets'
 
 import LineAndDoughnutChartModule from 'Components/Modules/LineAndDoughnutChartModule'
 import { lineChartData_DatasetOptions, lineChartOptions } from './options'
@@ -106,6 +106,7 @@ class TopPerformingFormat extends React.Component {
         percentageData={convertedPercentageData}
         doughnutData={doughnutData}
         isEmpty={hasNoData}
+        loading={loading}
       />
     )
   }

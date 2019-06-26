@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Module from 'Components/Module'
-import { isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 import 'chartjs-plugin-datalabels'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import StackedBarChart from 'Components/Charts/StackedBarChart'

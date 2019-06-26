@@ -12,7 +12,7 @@ import style from 'Containers/Marketview/style.scss'
 import PacingPieChart from 'Components/Charts/MarketView/PacingPieChart'
 import classnames from 'classnames'
 
-import { isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 import { pacingCard_DatasetOptions } from './options'
 import { isEmpty } from 'lodash'
 

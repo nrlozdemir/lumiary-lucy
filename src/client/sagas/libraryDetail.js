@@ -1,7 +1,6 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { ajax } from 'Utils/api'
-import { API_ROOT, API_VERSION } from 'Utils/globals'
 import _ from 'lodash'
 
 import {
@@ -10,21 +9,19 @@ import {
   makeSelectInfoShowSection,
   makeSelectDoughnutFilters,
   selectShotInfoData,
-  makeSelectSelectedVideoID,
-  selectLibraryDetailSelectedVideo,
-  selectLibraryDetailDomain,
 } from 'Reducers/libraryDetail'
 import mock from 'Api/mocks/libraryMock.json'
 import { findIdDetail, getDataFromApi, buildApiUrl } from 'Utils/api'
+
+import { getMaximumValueIndexFromArray, getLabelWithSuffix } from 'Utils'
+
 import {
   convertDataIntoDatasets,
-  getMaximumValueIndexFromArray,
   convertColorTempToDatasets,
   parseAverage,
-  getLabelWithSuffix,
-} from 'Utils/'
+} from 'Utils/datasets'
+
 import { selectAuthProfile } from 'Reducers/auth'
-import { chartColors } from 'Utils/globals'
 
 function getBarChartApi({ LibraryDetailId }) {
   //this will use ajax function in utils/api when real data is provided
@@ -184,6 +181,7 @@ function* getShotByShot(videoId) {
 function* getShotInfoRequest({ payload }) {
   try {
     const { brandUuid, videoUuid, shotId } = payload
+
 
     if (!!brandUuid && !!videoUuid && !!shotId) {
       const url = `/brand/${brandUuid}/video/${videoUuid}/shots/${shotId}`
@@ -384,7 +382,7 @@ function* getRadarChartRequest(ids) {
       'red-purple'
     ]
     const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
-    
+
     const totalValue = Object.values(payload).reduce(
       (prev, next) => prev + next,
       0

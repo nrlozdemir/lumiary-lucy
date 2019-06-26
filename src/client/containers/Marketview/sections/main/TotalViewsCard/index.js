@@ -12,7 +12,7 @@ import style from './style.scss'
 import 'chartjs-plugin-datalabels'
 import Module from 'Components/Module'
 
-import { chartCombineDataset, isDataSetEmpty } from 'Utils'
+import { chartCombineDataset, isDataSetEmpty } from 'Utils/datasets'
 import { chartColors } from 'Utils/globals'
 
 import { isEmpty, isEqual } from 'lodash'
@@ -45,7 +45,7 @@ class TotalViewsChart extends React.Component {
 
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
     const isBarChartEmpty = isDataSetEmpty(barData)
-    
+
     const hasNoData =
       (!loading &&
         (!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty)) ||
@@ -58,14 +58,9 @@ class TotalViewsChart extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'platform',
+            type: 'platformEngagement',
             selectKey: 'Mw-asd',
-            placeHolder: 'Platform',
-          },
-          {
-            type: 'metric',
-            selectKey: 'Mw-sad',
-            placeHolder: 'Engagement',
+            placeHolder: 'Engagement by Platform',
           },
           {
             type: 'dateRange',

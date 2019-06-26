@@ -1,12 +1,9 @@
 import React from 'react'
 import BarChartModule from 'Components/Modules/BarChartModule'
 
-import {
-  getMinMaxFromDatasets,
-  chartCombineDataset,
-  randomKey,
-  isDataSetEmpty,
-} from 'Utils'
+import { randomKey } from 'Utils'
+
+import { isDataSetEmpty, getMinMaxFromDatasets } from 'Utils/datasets'
 
 const TotalCompetitorCard = ({ data }) => {
   const isEmpty = isDataSetEmpty(data)
@@ -19,7 +16,6 @@ const TotalCompetitorCard = ({ data }) => {
     (hasDatasets && getMinMaxFromDatasets(data.datasets, max, 'min')) || 0
 
   const stepSize = !!max && ~~(max / 4)
-
 
   const chartTickOptions = {
     min,

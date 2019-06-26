@@ -108,7 +108,13 @@
 .sidebarApplyButton {
   border: 1px solid $color-cool-grey !important;
 }
+
 .loadButton {
   display: block;
   margin: 0 auto;
 }
+
+.libraryLoading {
+  height: min-content;
+}
+

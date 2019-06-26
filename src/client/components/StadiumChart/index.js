@@ -1,5 +1,5 @@
 import React from 'react'
-import { shadeHexColor } from 'Utils/index'
+import { shadeHexColor } from 'Utils'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 

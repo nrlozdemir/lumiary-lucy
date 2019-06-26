@@ -5,7 +5,6 @@ import cx from 'classnames'
 import LineChart from 'Components/Charts/LineChart'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import { lineChartOptions, lineChartData_DatasetOptions } from './options'
-import { chartCombineDataset } from 'Utils'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -33,7 +32,7 @@ const ContentVitalityScoreModule = ({
         case 'other':
           accumulator.average = {
             ...data[uuid],
-            name: 'Average'
+            name: 'Average',
           }
           break
 
@@ -41,14 +40,14 @@ const ContentVitalityScoreModule = ({
           if (uuid === authProfile.brand.uuid) {
             accumulator.brand_1 = {
               ...data[uuid],
-              name: authProfile.brand.name
+              name: authProfile.brand.name,
             }
           } else {
             authProfile.brand.competitors.forEach((competitor) => {
               if (uuid === competitor.uuid) {
                 accumulator.brand_2 = {
                   ...data[uuid],
-                  name: competitor.name
+                  name: competitor.name,
                 }
               }
             })

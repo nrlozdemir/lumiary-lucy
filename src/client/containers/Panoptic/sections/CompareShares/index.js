@@ -6,23 +6,10 @@ import { actions, makeSelectPanopticCompareShares } from 'Reducers/panoptic'
 //import classnames from 'classnames'
 import RadarChartModule from 'Components/Modules/RadarChartModule'
 //import style from './style.scss'
-import { isEqual } from 'lodash'
 
 class CompareShares extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getCompareSharesData(data)
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const {
-      compareSharesData: { data: nextData },
-    } = nextProps
-
-    const {
-      compareSharesData: { data },
-    } = this.props
-
-    return !isEqual(nextData, data)
   }
 
   render() {
@@ -38,6 +25,7 @@ class CompareShares extends React.Component {
         rightTitle="YouTube"
         title="Dominant Color On Facebook and YouTube By Shares"
         action={this.callBack}
+        loading={loading}
         filters={[
           {
             type: 'dateRange',

@@ -6,7 +6,7 @@ import { barChartOptions } from './options'
 import StadiumChart from 'Components/Charts/Panoptic/StadiumChart'
 import MultipleNoDataModule from 'Components/MultipleNoDataModule'
 import style from './style.scss'
-import { isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 
 const PacingCardModule = ({
   data,
@@ -15,6 +15,7 @@ const PacingCardModule = ({
   action,
   filters,
   legend,
+  loading = false,
 }) => {
   const { horizontalStackedBarData = {}, stadiumData } = data
 
@@ -33,6 +34,7 @@ const PacingCardModule = ({
       action={action}
       filters={filters}
       legend={legend}
+      loading={loading}
     >
       <div className={style.pacingCardInner}>
         <MultipleNoDataModule>

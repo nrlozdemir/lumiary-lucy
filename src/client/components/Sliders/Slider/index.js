@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import style from './style.scss'
-import { socialIconSelector } from 'Utils/'
+import { socialIconSelector } from 'Utils'
 import Swiper from 'react-id-swiper'
 import SwiperJS from 'swiper/dist/js/swiper.js'
 import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
@@ -18,7 +18,7 @@ class MarketViewSlider extends React.Component {
           this.refSlider && this.refSlider.isEnd ? style.disabled : ''
         )}
         size={32}
-        onClick={() => this.refSlider.slideNext()}
+        onClick={() => this.refSlider && this.refSlider.slideNext()}
       />
     )
   }
@@ -31,7 +31,7 @@ class MarketViewSlider extends React.Component {
           this.refSlider && this.refSlider.isBeginning ? style.disabled : ''
         )}
         size={32}
-        onClick={() => this.refSlider.slidePrev()}
+        onClick={() => this.refSlider && this.refSlider.slidePrev()}
       />
     )
   }
@@ -69,7 +69,7 @@ class MarketViewSlider extends React.Component {
             return (
               <div
                 key={i}
-                onClick={() => this.refSlider.slideTo(i)}
+                onClick={() => this.refSlider && this.refSlider.slideTo(i)}
                 className={i === 0 ? 'active' : ''}
               >
                 <div className={style.videoContainer}>
@@ -87,15 +87,16 @@ class MarketViewSlider extends React.Component {
     },
     on: {
       slideChange: (index) => {
-        const bullets = this.refSlider.$el[0].querySelector('.pagination')
-          .children
+        const bullets =
+          this.refSlider &&
+          this.refSlider.$el[0].querySelector('.pagination').children
 
         for (const item of [...bullets]) {
           item.classList.remove('active')
         }
-
-        bullets[this.refSlider.activeIndex].classList.add('active')
-
+        if (bullets && this.refSlider && this.refSlider.activeIndex) {
+          bullets[this.refSlider.activeIndex].classList.add('active')
+        }
         // Force rendering needed to update disabled state of prev and next buttons
         this.forceUpdate()
       },

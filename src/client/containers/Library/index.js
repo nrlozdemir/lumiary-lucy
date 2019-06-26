@@ -11,6 +11,7 @@ import VideoSection from './sections/VideoSection'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import Button from 'Components/Form/Button'
+import RouterLoading from 'Components/RouterLoading'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Library extends React.Component {
@@ -50,9 +51,14 @@ export class Library extends React.Component {
   }
 
   render() {
+    const {
+      library: { loading },
+    } = this.props
+
     const sideBarClass = classNames(style.overlay, {
       [style.overlayShow]: this.state.sidebarVisible,
     })
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -62,11 +68,17 @@ export class Library extends React.Component {
                 setSidebarVisible={this.setSidebarVisible.bind(this)}
               />
               <VideoSection />
-              <Button
-                buttonText="Load More"
-                customClass={style.loadButton}
-                onClick={this.loadMoreVideo}
-              />
+              {!loading ? (
+                <Button
+                  buttonText="Load More"
+                  customClass={style.loadButton}
+                  onClick={this.loadMoreVideo}
+                />
+              ) : (
+                <div className={style.libraryLoading}>
+                  <RouterLoading />
+                </div>
+              )}
             </div>
             <div
               className={sideBarClass}

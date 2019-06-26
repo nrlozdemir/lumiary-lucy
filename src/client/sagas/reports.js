@@ -9,12 +9,15 @@ import querystring from 'querystring'
 
 import {
   randomKey,
-  convertDataIntoDatasets,
-  compareSharesData,
-  radarChartCalculate,
   getBrandAndCompetitors,
   getFilteredCompetitors,
 } from 'Utils'
+
+import {
+  convertDataIntoDatasets,
+  radarChartCalculate,
+  compareSharesData,
+} from 'Utils/datasets'
 
 import { getDataFromApi } from 'Utils/api'
 import { selectAuthProfile } from 'Reducers/auth'

@@ -95,7 +95,7 @@ export const types = {
 export const actions = {
   getCompetitorVideosRequest: (payload) => ({
     type: types.GET_MARKETVIEW_COMPETITOR_VIDEOS_REQUEST,
-    payload
+    payload,
   }),
   getCompetitorVideosSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_COMPETITOR_VIDEOS_SUCCESS,
@@ -537,6 +537,7 @@ const selectMarketviewtotalCompetitorViewDomain = (state) =>
   state.Marketview.get('totalCompetitorViewsData')
 
 const selectMarketviewVideosDomain = (state) => state.Marketview.get('videos')
+
 const selectMarketviewCompetitorTopVideosDomain = (state) =>
   state.Marketview.get('competitorTopVideos')
 
@@ -554,6 +555,12 @@ const selectMarketviewTopPerformingDataDomain = (state) =>
   state.Marketview.get('topPerformingDataForTime')
 
 export const selectMarketviewDomain = (state) => state.Marketview
+
+export const makeSelectMarketviewLoading = () =>
+  createSelector(
+    selectMarketviewDomain,
+    (substate) => substate.toJS().loading
+  )
 
 export const makeSelectMarketview = () =>
   createSelector(

@@ -9,6 +9,7 @@ import cx from 'classnames'
 import style from './style.scss'
 import HeaderModule from './header'
 import { selectFiltersToType } from 'Utils'
+import RouterLoading from 'Components/RouterLoading'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 export class Module extends React.Component {
@@ -51,6 +52,7 @@ export class Module extends React.Component {
       bodyClass,
       isEmpty,
       containerClass,
+      loading,
     } = this.props
 
     const { infoShow } = this.state
@@ -60,16 +62,16 @@ export class Module extends React.Component {
       style.moduleContainer,
       containerClass,
       {
-        [style['moduleContainer--empty']]: isEmpty,
+        [style['moduleContainer--empty']]: isEmpty || loading,
       }
     )
 
     const referencesClass = cx('font-secondary-second', style.references, {
-      [style['moduleContainerBody--empty']]: isEmpty,
+      [style['moduleContainerBody--empty']]: isEmpty || loading,
     })
 
     const moduleContainerBody = cx(style.moduleContainerBody, bodyClass, {
-      [style['moduleContainerBody--empty']]: isEmpty,
+      [style['moduleContainerBody--empty']]: isEmpty || loading,
     })
 
     return (
@@ -106,8 +108,13 @@ export class Module extends React.Component {
                   ))}
                 </div>
               )}
-              {isEmpty && (
+              {isEmpty && !loading && (
                 <div className={style.moduleEmpty}>No Data Available</div>
+              )}
+              {loading && (
+                <div className={style.moduleEmpty}>
+                  <RouterLoading />
+                </div>
               )}
             </div>
           )
@@ -124,6 +131,7 @@ const mapStateToProps = createStructuredSelector({
 Module.defaultProps = {
   action: () => {},
   isEmpty: false,
+  loading: false,
 }
 
 Module.propTypes = {

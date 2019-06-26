@@ -7,7 +7,7 @@ import classnames from 'classnames'
 import FlipCard from 'Components/FlipCard'
 import CustomBarChart from 'Components/Charts/CustomBarChart'
 import styles from './style.scss'
-import { capitalizeFirstLetter } from 'Utils/'
+import { capitalizeFirstLetter } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 const days = [
@@ -125,7 +125,7 @@ class Cards extends React.Component {
 
   render() {
     const {
-      flipCardsData: { data },
+      flipCardsData: { data, loading },
     } = this.props
     const wholeSegmentsWithOrder = ['view', 'like', 'comment', 'share']
 
@@ -138,6 +138,7 @@ class Cards extends React.Component {
               width={282}
               height={114}
               isEmpty={data && data[item] && data[item].isEmpty}
+              loading={loading}
             >
               {data && data[item] && (
                 <Front

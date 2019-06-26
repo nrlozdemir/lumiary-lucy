@@ -3,25 +3,13 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectPanopticVideoReleases } from 'Reducers/panoptic'
-import { isDataSetEmpty } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 
 import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
 
 class VideoReleasesBarChart extends Component {
   callBack = (data, moduleKey) => {
     this.props.getVideoReleasesData(data)
-  }
-
-  shouldComponentUpdate(nextProps) {
-    const {
-      videoReleasesData: { loading: nextLoading },
-    } = nextProps
-
-    const {
-      videoReleasesData: { loading },
-    } = this.props
-
-    return !nextLoading & !!loading
   }
 
   render() {
@@ -60,6 +48,7 @@ class VideoReleasesBarChart extends Component {
           { label: 'Engagement', color: 'coral-pink' },
         ]}
         isEmpty={isEmpty}
+        loading={loading}
       />
     )
   }
