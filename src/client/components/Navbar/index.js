@@ -40,11 +40,12 @@ const BackTo = (props) => {
     title = 'overview'
     link = '/'
   }
-  title = 'Back to ' + capitalizeFirstLetter(title)
 
   if (props && props.title) {
     title = capitalizeFirstLetter(props.title)
   }
+
+  title = 'Back to ' + capitalizeFirstLetter(title)
 
   return (
     <div className={style.backTo}>
@@ -145,6 +146,7 @@ const SubNavigation = (props) => {
 }
 
 const Selector = (props) => {
+  const orginalUrl = props && props.match.url
   const url = props && props.match.url.split('/')
   const navigation = props && props.routeConfig
   const state = props && props.state
@@ -159,20 +161,12 @@ const Selector = (props) => {
   )
 
   const navigationSubRoutes = Object.values(navigation)
-    .filter((r) => r.path.replace('/', '') == url[1])
-    .filter(
-      (r) =>
-        r.navigation &&
-        r.navigation.level == 1 &&
-        r.navigation.order > 0 &&
-        r.routes &&
-        r.routes.length > 0
-    )
+    .filter((r) => r.routes && r.routes.length > 0)
+    .find((r) => !!r.routes.find((route) => route.path === orginalUrl))
 
   const navigationSubRoutesMatch =
     navigationSubRoutes &&
-    navigationSubRoutes[0] &&
-    navigationSubRoutes[0].routes
+    navigationSubRoutes.routes
       .map((el, i) => el)
       .filter((r) => r.path == url.join('/'))
 
@@ -200,17 +194,21 @@ const Selector = (props) => {
         />
       ),
     }
+  } else if (navigationSubRoutes) {
+    return {
+      leftSide: (
+        <BackTo {...url} themes={props.themes} />
+      ),
+      navigation: (
+        <SubNavigation {...navigationSubRoutes.routes} themes={props.themes} />
+      ),
+    }
   } else if (navigationSubRoutesMatch && navigationSubRoutesMatch.length > 0) {
     return {
       leftSide: <BackTo {...url} themes={props.themes} />,
       navigation: (
         <SelectedNavLink title={navigationSubRoutesMatch[0].navigation.title} />
       ),
-    }
-  } else if (navigationSubRoutes && navigationSubRoutes.length > 0) {
-    return {
-      leftSide: <BackTo themes={props.themes} />,
-      navigation: <SubNavigation {...navigationSubRoutes[0].routes} />,
     }
   } else if (url[1] == 'library' && url[2] && url[2].match(/(\d+)/gm)) {
     return {
