@@ -9,7 +9,13 @@ import { getDataFromApi } from 'Utils/api'
 //mocks
 import quickviewItemsData from 'Api/mocks/quickviewItemsMock.json'
 
-function* getQuickviewItemsApi({ platform, metric, dateRange, uuid, }) {
+function* getQuickviewItemsApi({ 
+  platform, 
+  metric, 
+  dateRange, 
+  brandUuid,
+  competitors = [],
+}) {
   const parseVideoResponse = ({ videoInfo, serverData }) => {
     const { 
       title = '', 
@@ -132,6 +138,8 @@ function* getQuickviewItemsApi({ platform, metric, dateRange, uuid, }) {
       metric,
       daterange: dateRange,
       platform,
+      brandUuid,
+      competitors: JSON.stringify(competitors)
     })}`,
     'GET'
   )
@@ -175,7 +183,7 @@ function* getQuickviewItemsSaga({ payload }) {
 
     const profile = yield select(selectAuthProfile)
     const { brand = {} } = profile
-    const { uuid } = brand
+    const { uuid, competitors = [] } = brand
 
     if(!uuid){
       throw new Error('brand uuid must be provided')
@@ -185,7 +193,8 @@ function* getQuickviewItemsSaga({ payload }) {
       platform,
       metric,
       dateRange,
-      uuid,
+      brandUuid: uuid,
+      competitors,
     })
 
     yield put({

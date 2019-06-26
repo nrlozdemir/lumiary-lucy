@@ -89,7 +89,8 @@ const DoughnutCard = ({ data, index, colors, isEmpty }) => {
                 <span className={style.textBold}>
                   {!!topItemData.proportionOfLibrary
                     ? topItemData.proportionOfLibrary
-                    : topItemData}
+                    : ''}
+
                   %{' '}
                 </span>
                 of top videos
