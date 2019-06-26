@@ -11,6 +11,7 @@
     padding: 48px 30px 34px;
     margin: 0 12px;
     cursor: pointer;
+    position: relative;
 
     &:hover {
       background-color: $color-dusk;
@@ -52,6 +53,43 @@
       -webkit-box-orient: vertical;
       overflow: hidden;
       max-height: 40px;
+    }
+
+    .badge {
+      background-color: $color-lighter-purple;
+      box-shadow: 0 2px 4px 0 $color-dark-five;
+      color: $color-white;
+      font-size: 14px;
+      line-height: 18px;
+      padding: 8px 14px;
+      position: absolute;
+      right: -16px;
+      top: 8px;
+      z-index: 3;
+
+      &:after {
+        content: '';
+        border-right: 16px solid transparent;
+        border-top: 20px solid $color-darker-purple;
+        width: 0;
+        height: 0;
+        position: absolute;
+        top: 34px;
+        right: 0;
+      }
+    }
+
+    &.disabled {
+      pointer-events: none;
+      .opacityBg {
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        left: 0;
+        opacity: .6;
+      }
     }
   }
 }

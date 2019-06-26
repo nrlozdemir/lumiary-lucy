@@ -8,31 +8,29 @@ import {
   selectMarketviewVideosView,
   selectMarketviewSelectedVideoView,
 } from 'Reducers/marketview'
-import {
-  makeSelectAuthProfile,
-} from 'Reducers/auth'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 
 import SliderModule from 'Components/Modules/SliderModule'
 
 class Slider extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.state = {
-      lastRequestBody: {}
+      lastRequestBody: {},
     }
   }
 
   getCompetitorVideos = (data = {}) => {
     const { container, activeDay, profile } = this.props
     const { brand = {} } = profile
-    const { uuid:brandUuid, competitors = [] } = brand
+    const { uuid: brandUuid, competitors = [] } = brand
 
-    if(!brandUuid) {
+    if (!brandUuid) {
       console.warn('brand uuid is not defined')
       return false
     }
 
-    if(competitors.length === 0) {
+    if (competitors.length === 0) {
       console.warn('no competitors provide')
     }
 
@@ -41,16 +39,16 @@ class Slider extends React.Component {
       brandUuid,
     }
 
-    if(activeDay) {
+    if (activeDay) {
       requestBody.activeDay = activeDay
     }
 
-    if(container === 'competitor') {
+    if (container === 'competitor') {
       requestBody.competitors = competitors
     }
 
     this.setState({
-      lastRequestBody: requestBody
+      lastRequestBody: requestBody,
     })
 
     this.props.getCompetitorVideosRequest(requestBody)
@@ -59,7 +57,7 @@ class Slider extends React.Component {
   componentDidUpdate(prevProps) {
     if (prevProps.activeDay !== this.props.activeDay) {
       this.getCompetitorVideos({
-        ...this.state.lastRequestBody
+        ...this.state.lastRequestBody,
       })
     }
   }
@@ -69,7 +67,14 @@ class Slider extends React.Component {
   }
 
   render() {
-    const { videos, selectedVideo, title, moduleKey, filters, loading } = this.props
+    const {
+      videos,
+      selectedVideo,
+      title,
+      moduleKey,
+      filters,
+      loading,
+    } = this.props
 
     return (
       <SliderModule

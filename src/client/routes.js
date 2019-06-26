@@ -73,6 +73,38 @@ const routes = [
     path: '/marketview/:detail',
     exact: true,
     component: 'Marketview',
+    routes: [
+      {
+        path: '/marketview/platform',
+        exact: true,
+        component: 'Marketview',
+        navigation: {
+          level: 2,
+          order: 1,
+          title: 'Platform',
+        },
+      },
+      {
+        path: '/marketview/competitor',
+        exact: true,
+        component: 'Marketview',
+        navigation: {
+          level: 2,
+          order: 2,
+          title: 'Competitor',
+        },
+      },
+      {
+        path: '/marketview/time',
+        exact: true,
+        component: 'Marketview',
+        navigation: {
+          level: 2,
+          order: 3,
+          title: 'Time',
+        },
+      },
+    ],
   },
   {
     path: '/reports',
