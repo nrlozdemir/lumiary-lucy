@@ -1,8 +1,8 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import { isEqual } from 'lodash'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutCard from './DoughnutCard'
@@ -14,6 +14,10 @@ import {
 import Info from './Info'
 
 class LibraryDetailDoughnutChart extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return !isEqual(this.props, nextProps)
+  }
+
   render() {
     const {
       doughnutData,
@@ -65,7 +69,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                           />
                         )}
                         {!!sectionToShow && sectionToShow === title && (
-                          <Info {...cardProps} loading={loading}/>
+                          <Info {...cardProps} loading={loading} />
                         )}
                       </React.Fragment>
                     )
@@ -94,9 +98,4 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(
-  reduxForm({
-    form: 'libraryDetailDoughnutChart',
-  }),
-  withConnect
-)(LibraryDetailDoughnutChart)
+export default compose(withConnect)(LibraryDetailDoughnutChart)
