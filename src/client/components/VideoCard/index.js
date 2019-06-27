@@ -140,7 +140,7 @@ export class VideoCard extends PureComponent {
                   }}
                 >
                   <Link to={`/library/build-report/${video.uuid}`}>
-                    <video ref={this.video} loop muted controls={false}>
+                    <video key={video.uuid} ref={this.video} loop muted controls={false}>
                       <source src={videoUrl} type="video/mp4" />
                     </video>
                   </Link>
