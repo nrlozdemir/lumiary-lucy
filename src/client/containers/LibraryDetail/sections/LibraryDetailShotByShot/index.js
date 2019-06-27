@@ -40,19 +40,22 @@ class LibraryDetailShotByShot extends React.Component {
 
   sliderAction(i) {
     const calculateLeft = i * shotSliderWidth * -1
-    this.setState({
-      sliderImageLeft: calculateLeft
-    }, () => {
-      this.sliderImages.style.left = calculateLeft
-      const ref = this.sliderThumbs.children[0].children[0].childNodes[0]
+    this.setState(
+      {
+        sliderImageLeft: calculateLeft,
+      },
+      () => {
+        this.sliderImages.style.left = calculateLeft
+        const ref = this.sliderThumbs.children[0].children[0].childNodes[0]
 
-      for (let k = 0; k < ref.childNodes.length; k++) {
-        ref.childNodes[k].classList.remove(style.sliderImageActive)
-        ref.childNodes[k].classList.add(style.sliderImageCurrent)
+        for (let k = 0; k < ref.childNodes.length; k++) {
+          ref.childNodes[k].classList.remove(style.sliderImageActive)
+          ref.childNodes[k].classList.add(style.sliderImageCurrent)
+        }
+        ref.childNodes[i].classList.remove(style.sliderImageCurrent)
+        ref.childNodes[i].classList.add(style.sliderImageActive)
       }
-      ref.childNodes[i].classList.remove(style.sliderImageCurrent)
-      ref.childNodes[i].classList.add(style.sliderImageActive)
-    })
+    )
     //const { backgroundImage } = ref.childNodes[i].children[0].children[0].style
     //const currentImage = backgroundImage.replace(/\(|\)|url|\"/gi, '')
   }
@@ -64,9 +67,11 @@ class LibraryDetailShotByShot extends React.Component {
       videoUuid: this.props.selectedVideo,
     }
 
-    this.setState({
-      selectedImage: i,
-    }, () => {
+    this.setState(
+      {
+        selectedImage: i,
+      },
+      () => {
         this.props.getShotInfoRequest(val)
         this.props.getRadarChartRequest(val)
         this.props.getPeopleRequest(val)
@@ -109,24 +114,28 @@ class LibraryDetailShotByShot extends React.Component {
         },
       ],
     }
-    const dataIsEmpty = (shots && 
-      Object.values(shots).length > 0
-    ) 
-      ? false 
-      : true
-    const peopleIsEmpty = (!peopleData || 
-      Object.values(peopleData).length === 0
-    ) 
-      ? true 
-      : false
-    const objectIsEmpty = (shotInfoData &&
+    const dataIsEmpty = shots && Object.values(shots).length > 0 ? false : true
+
+    const peopleValues = (!!peopleData && Object.values(peopleData)) || []
+
+    const peopleIsEmpty =
+      !peopleValues.length ||
+      (!!peopleValues.length &&
+        peopleValues.every(
+          (v) =>
+            !v.uuid ||
+            !v.gender ||
+            ((!!v.ages && !v.ages.confidence) || !v.ages)
+        ))
+
+    const objectIsEmpty =
+      shotInfoData &&
       shotInfoData.shot &&
       shotInfoData.shot.labels &&
       shotInfoData.shot.labels.length > 0
-    ) 
-      ? false
-      : true
-    
+        ? false
+        : true
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
@@ -154,17 +163,22 @@ class LibraryDetailShotByShot extends React.Component {
                             className={style.shotSliderContainer}
                             ref={(el) => (this.sliderImages = el)}
                             style={{
-                              width: Object.values(shots).length * shotSliderWidth,
+                              width:
+                                Object.values(shots).length * shotSliderWidth,
                             }}
                           >
                             {shots &&
                               Object.values(shots).length > 0 &&
                               Object.values(shots).map((shot, i) => {
-                                const frameShotUrl = (shot.frameUrls && shot.frameUrls[0]) 
-                                  ? `${mediaUrl}/${shot.frameUrls[0]}`
-                                  : '' 
+                                const frameShotUrl =
+                                  shot.frameUrls && shot.frameUrls[0]
+                                    ? `${mediaUrl}/${shot.frameUrls[0]}`
+                                    : ''
                                 return (
-                                  <div key={i} className={style.shotSliderImage}>
+                                  <div
+                                    key={i}
+                                    className={style.shotSliderImage}
+                                  >
                                     <img src={frameShotUrl} />
                                   </div>
                                 )
@@ -188,7 +202,9 @@ class LibraryDetailShotByShot extends React.Component {
                               shotHoverHeight={56}
                               viewportWidth={492}
                               viewportHeight={100}
-                              viewportBackgroundColor={colors.shotByShotSliderImageBorder}
+                              viewportBackgroundColor={
+                                colors.shotByShotSliderImageBorder
+                              }
                               ticks={12}
                               customClass={{
                                 sliderWrapper: style.sliderWrapper,
@@ -201,8 +217,10 @@ class LibraryDetailShotByShot extends React.Component {
                                 originalImage: style.sliderOriginalImage,
                               }}
                               customStyle={{
-                                originalImageBorderColor: colors.shotByShotSliderImageBorder,
-                                imageWrapperBorderColor: colors.shotByShotSliderImageBorder,
+                                originalImageBorderColor:
+                                  colors.shotByShotSliderImageBorder,
+                                imageWrapperBorderColor:
+                                  colors.shotByShotSliderImageBorder,
                               }}
                               isEmpty={dataIsEmpty}
                               scrubberIsDot={true}
@@ -242,90 +260,106 @@ class LibraryDetailShotByShot extends React.Component {
                           </TabList>
                         </div>
                         <TabPanel className={style.tabPanelReset}>
-                          <div 
-                            className={classnames(
-                              style.tabPanel, 
-                              'mt-16'
-                            )}
-                          >
+                          <div className={classnames(style.tabPanel, 'mt-16')}>
                             {peopleIsEmpty === false && (
                               <Scrubber vertical width={570} height={368}>
-                                {Object.values(peopleData).map((info, i) => (
-                                  <div
-                                    className={classnames(
-                                      style.tabPanelItem,
-                                      'grid-container'
-                                    )}
-                                    style={{
-                                      background: colors.shotByShotBackground,
-                                      borderColor: colors.shotByShotBorder,
-                                      marginRight: '16px !important',
-                                    }}
-                                    key={i}
-                                  >
-                                    <div className="col-5-no-gutters">
-                                      <img
-                                        src={`${mediaUrl}/lumiere/${
-                                          this.props.authProfile.brand.uuid
-                                        }/${this.props.selectedVideo}/${
-                                          this.state.selectedImage
-                                        }/`}
-                                        className={classnames(
-                                          style.imageItem,
-                                          'grid-container'
-                                        )}
-                                      />
-                                    </div>
-                                    <div className="col-7-no-gutters">
-                                      <div className="pt-20">
-                                        <div
-                                          className={style.progressbarContainer}
-                                          key={i}
-                                        >
-                                          <div className={style.barOptions}>
-                                            <p>{ucfirst(info.gender)}</p>
-                                            <p>{(info.ages.confidence * 100).toFixed(0)}% Accurate</p>
+                                {peopleValues.map((info, i) => {
+                                  const { ages, gender, uuid } = info
+                                  return !gender ||
+                                    !uuid ||
+                                    !ages.confidence ? null : (
+                                    <div
+                                      className={classnames(
+                                        style.tabPanelItem,
+                                        'grid-container'
+                                      )}
+                                      style={{
+                                        background: colors.shotByShotBackground,
+                                        borderColor: colors.shotByShotBorder,
+                                        marginRight: '16px !important',
+                                      }}
+                                      key={i}
+                                    >
+                                      <div className="col-5-no-gutters">
+                                        <img
+                                          src={`${mediaUrl}/lumiere/${
+                                            this.props.authProfile.brand.uuid
+                                          }/${this.props.selectedVideo}/${
+                                            this.state.selectedImage
+                                          }/`}
+                                          className={classnames(
+                                            style.imageItem,
+                                            'grid-container'
+                                          )}
+                                        />
+                                      </div>
+                                      <div className="col-7-no-gutters">
+                                        <div className="pt-20">
+                                          <div
+                                            className={
+                                              style.progressbarContainer
+                                            }
+                                            key={i}
+                                          >
+                                            <div className={style.barOptions}>
+                                              <p>{ucfirst(gender)}</p>
+                                              <p>
+                                                {(
+                                                  ages.confidence * 100
+                                                ).toFixed(0)}
+                                                % Accurate
+                                              </p>
+                                            </div>
+                                            <ProgressBar
+                                              width={(
+                                                ages.confidence * 100
+                                              ).toFixed(0)}
+                                              customBarClass={style.progressBar}
+                                              customPercentageClass={
+                                                style.percentage
+                                              }
+                                            />
                                           </div>
-                                          <ProgressBar
-                                            width={(info.ages.confidence * 100).toFixed(0)}
-                                            customBarClass={style.progressBar}
-                                            customPercentageClass={style.percentage}
-                                          />
+                                        </div>
+                                        <div className="pt-20">
+                                          <div
+                                            className={
+                                              style.progressbarContainer
+                                            }
+                                            key={i}
+                                          >
+                                            <div className={style.barOptions}>
+                                              <p>{ages.min} Y/O</p>
+                                              <p>
+                                                {ages.min.toFixed(0)}% Accurate
+                                              </p>
+                                            </div>
+                                            <ProgressBar
+                                              width={(
+                                                ages.confidence * 100
+                                              ).toFixed(0)}
+                                              customBarClass={style.progressBar}
+                                              customPercentageClass={
+                                                style.percentage
+                                              }
+                                            />
+                                          </div>
                                         </div>
                                       </div>
-                                      <div className="pt-20">
-                                        <div
-                                          className={style.progressbarContainer}
-                                          key={i}
-                                        >
-                                          <div className={style.barOptions}>
-                                            <p>{info.ages.min} Y/O</p>
-                                            <p>{info.ages.min.toFixed(0)}% Accurate</p>
-                                          </div>
-                                          <ProgressBar
-                                            width={(info.ages.confidence * 100).toFixed(0)}
-                                            customBarClass={style.progressBar}
-                                            customPercentageClass={style.percentage}
-                                          />
-                                        </div>
-                                      </div>
                                     </div>
-                                  </div>
-                                ))}
+                                  )
+                                })}
                               </Scrubber>
                             )}
                             {peopleIsEmpty === true && (
-                              <div className={style.tabsEmptyData}>No Data Available</div>
+                              <div className={style.tabsEmptyData}>
+                                No Data Available
+                              </div>
                             )}
                           </div>
                         </TabPanel>
                         <TabPanel className={style.tabPanelReset}>
-                          <div 
-                            className={classnames(
-                              style.tabPanel, 
-                              'mt-16'
-                            )}
-                          >
+                          <div className={classnames(style.tabPanel, 'mt-16')}>
                             {objectIsEmpty === false && (
                               <Scrubber vertical width={570} height={368}>
                                 {shotInfoData.shot.labels.map((info, i) => (
@@ -334,7 +368,9 @@ class LibraryDetailShotByShot extends React.Component {
                                       style.tabPanelItem,
                                       'grid-container',
                                       {
-                                        'mb-16':  i !== shotInfoData.shot.labels.length - 1,
+                                        'mb-16':
+                                          i !==
+                                          shotInfoData.shot.labels.length - 1,
                                       }
                                     )}
                                     style={{
@@ -365,12 +401,21 @@ class LibraryDetailShotByShot extends React.Component {
                                         >
                                           <div className={style.barOptions}>
                                             <p>{info.label}</p>
-                                            <p>{(info.confidence * 100).toFixed(0)}% Accurate</p>
+                                            <p>
+                                              {(info.confidence * 100).toFixed(
+                                                0
+                                              )}
+                                              % Accurate
+                                            </p>
                                           </div>
                                           <ProgressBar
-                                            width={(info.confidence * 100).toFixed(0)}
+                                            width={(
+                                              info.confidence * 100
+                                            ).toFixed(0)}
                                             customBarClass={style.progressBar}
-                                            customPercentageClass={style.percentage}
+                                            customPercentageClass={
+                                              style.percentage
+                                            }
                                           />
                                         </div>
                                       </div>
@@ -380,7 +425,9 @@ class LibraryDetailShotByShot extends React.Component {
                               </Scrubber>
                             )}
                             {objectIsEmpty === true && (
-                              <div className={style.tabsEmptyData}>No Data Available</div>
+                              <div className={style.tabsEmptyData}>
+                                No Data Available
+                              </div>
                             )}
                           </div>
                         </TabPanel>
@@ -459,8 +506,10 @@ const mapStateToProps = createStructuredSelector({
 
 function mapDispatchToProps(dispatch) {
   return {
-    getShotInfoRequest: (shotId) => dispatch(actions.getShotInfoRequest(shotId)),
-    getRadarChartRequest: (shotId) => dispatch(actions.getRadarChartRequest(shotId)),
+    getShotInfoRequest: (shotId) =>
+      dispatch(actions.getShotInfoRequest(shotId)),
+    getRadarChartRequest: (shotId) =>
+      dispatch(actions.getRadarChartRequest(shotId)),
     getPeopleRequest: (shotId) => dispatch(actions.getPeopleRequest(shotId)),
   }
 }
