@@ -395,7 +395,9 @@
   }
 
   .custom-select {
-    width: 130px;
+    height: 40px;
+    //width: 130px;
+
     // max-width: 230px;
     // border-radius: 8px;
     // border: 1px solid $color-dusk;
@@ -409,7 +411,7 @@
   }
 
   .custom-select.combine-select {
-    width: 220px;
+    //width: 220px;
   }
 
   .headerRight {
