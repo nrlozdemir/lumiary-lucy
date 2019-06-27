@@ -11,6 +11,7 @@ import {
   makeSelectInfoShowSection,
   makeSelectDoughnutData,
 } from 'Reducers/libraryDetail'
+import RouterLoading from 'Components/RouterLoading'
 import Info from './Info'
 
 class LibraryDetailDoughnutChart extends React.Component {
@@ -20,10 +21,10 @@ class LibraryDetailDoughnutChart extends React.Component {
 
   render() {
     const {
-      doughnutData,
+      doughnutData: { data: doughnutData, loading: doughnutLoading },
       showInfo,
       videoId,
-      infoData: { loading },
+      infoData: { loading: doughnutInfoLoading },
     } = this.props
 
     const sectionToShow = (!!showInfo && showInfo.title) || false
@@ -40,7 +41,7 @@ class LibraryDetailDoughnutChart extends React.Component {
             }}
           >
             <div className={style.radialChartsContainer}>
-              {doughnutData &&
+              {!!doughnutData && !doughnutLoading &&
                 doughnutData.map(
                   (
                     {
@@ -69,12 +70,17 @@ class LibraryDetailDoughnutChart extends React.Component {
                           />
                         )}
                         {!!sectionToShow && sectionToShow === title && (
-                          <Info {...cardProps} loading={loading} />
+                          <Info {...cardProps} loading={doughnutInfoLoading} />
                         )}
                       </React.Fragment>
                     )
                   }
                 )}
+              {doughnutLoading && (
+                <div className={style.radialChartsContainer_loading}>
+                  <RouterLoading />
+                </div>
+              )}
             </div>
           </div>
         )}

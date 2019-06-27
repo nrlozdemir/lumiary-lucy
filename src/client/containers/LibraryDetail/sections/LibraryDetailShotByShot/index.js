@@ -21,6 +21,7 @@ import { ucfirst } from 'Utils'
 import SliderWithScrubber from 'Components/Sliders/SliderWithScrubber'
 import style from './style.scss'
 import { makeSelectAuthProfile } from 'Reducers/auth'
+import RouterLoading from 'Components/RouterLoading'
 
 const shotSliderWidth = 504
 
@@ -85,7 +86,13 @@ class LibraryDetailShotByShot extends React.Component {
   }
 
   render() {
-    const { shots, shotInfoData, radarChartData, peopleData } = this.props
+    const {
+      shots,
+      shotInfoData,
+      radarChartData,
+      peopleData,
+      loading,
+    } = this.props
     const { selectedImage } = this.state
 
     const radarChartDataConfigured = radarChartData && {
@@ -114,7 +121,12 @@ class LibraryDetailShotByShot extends React.Component {
         },
       ],
     }
-    const dataIsEmpty = shots && Object.values(shots).length > 0 ? false : true
+
+    const shotValues = (!!shots && Object.values(shots)) || []
+
+    const dataIsEmpty =
+      !shotValues.length ||
+      (!!shotValues.length && shotValues.every((s) => !s.frameUrls))
 
     const peopleValues = (!!peopleData && Object.values(peopleData)) || []
 
@@ -173,15 +185,16 @@ class LibraryDetailShotByShot extends React.Component {
                                 const frameShotUrl =
                                   shot.frameUrls && shot.frameUrls[0]
                                     ? `${mediaUrl}/${shot.frameUrls[0]}`
-                                    : ''
-                                return (
+                                    : null
+
+                                return frameShotUrl ? (
                                   <div
                                     key={i}
                                     className={style.shotSliderImage}
                                   >
                                     <img src={frameShotUrl} />
                                   </div>
-                                )
+                                ) : null
                               })}
                           </div>
                         </div>
@@ -455,7 +468,7 @@ class LibraryDetailShotByShot extends React.Component {
                       <SliderWithScrubber
                         name="slider1"
                         clickEvent={this.shotClick}
-                        shots={Object.values(shots)}
+                        shots={shotValues}
                         shotMargin={5}
                         minShotWidth={24}
                         maxShotWidth={148}
@@ -482,8 +495,13 @@ class LibraryDetailShotByShot extends React.Component {
                         scrubberIsDot={false}
                       />
                     </div>
-                    {dataIsEmpty === true && (
+                    {dataIsEmpty && !loading && (
                       <div className={style.emptyData}>No Data Available</div>
+                    )}
+                    {loading && (
+                      <div className={style.emptyData}>
+                        <RouterLoading />
+                      </div>
                     )}
                   </div>
                 </React.Fragment>
