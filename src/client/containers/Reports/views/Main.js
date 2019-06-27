@@ -54,10 +54,10 @@ class Reports extends Component {
     }
   }
 
-  componentDidMount() {
-    const { getPredefinedReports } = this.props
-    getPredefinedReports()
-  }
+  // componentDidMount() {
+  //   const { getPredefinedReports } = this.props
+  //   getPredefinedReports()
+  // }
 
   componentWillMount() {
     this.props.loadReports()
@@ -134,7 +134,7 @@ class Reports extends Component {
     const {
       reports: { data, loading, error },
     } = this.props
-
+    console.log('DATA==', data)
     // tableHeaderBackground
     // tableBodyBackground
     // tableBackground
@@ -231,11 +231,11 @@ class Reports extends Component {
                         },
                         {
                           Header: 'Platform',
-                          accessor: 'social',
+                          accessor: 'platform',
                         },
                         {
                           Header: 'Date',
-                          accessor: 'date',
+                          accessor: 'date_range',
                           sortMethod: (a, b) => {
                             const valueOfA = moment(a, 'D/M/YY').valueOf()
                             const valueOfB = moment(b, 'D/M/YY').valueOf()
