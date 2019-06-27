@@ -224,7 +224,15 @@ function* getDoughnutSectionInfoData({ payload }) {
     const { brand } = yield select(selectAuthProfile)
 
     if (!!brand && !!videoId && !!dateRange && !!metric && !!infoData) {
-      const response = yield call(
+      const {
+        libraryMetricPercents,
+        industryMetricPercents,
+        libraryDayAverages,
+        industryDayAverages,
+        videoPropertyAverage,
+        libraryPropertyAverage,
+        metricLibraryPercentChange,
+      } = yield call(
         getDataFromApi,
         undefined,
         buildApiUrl(`/brand/${brand.uuid}/video/${videoId}/compare`, {
@@ -234,16 +242,6 @@ function* getDoughnutSectionInfoData({ payload }) {
         }),
         'GET'
       )
-
-      let {
-        libraryMetricPercents,
-        industryMetricPercents,
-        libraryDayAverages,
-        industryDayAverages,
-        videoPropertyAverage,
-        libraryPropertyAverage,
-        metricLibraryPercentChange,
-      } = response
 
       const {
         chartData: libraryChartData,
