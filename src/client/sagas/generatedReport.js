@@ -115,6 +115,8 @@ function* getTopPerformingVideos({ data: { report = {} } }) {
       } else {
         yield put(actions.getTopPerformingVideosSuccess([]))
       }
+    } else {
+      throw new Error('Brand Insights Error')
     }
   } catch (err) {
     console.log(err)
