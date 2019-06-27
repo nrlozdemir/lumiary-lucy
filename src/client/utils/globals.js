@@ -10,7 +10,18 @@ export const chartColors = [
   '#5292E5',
   '#ACB0BE',
   '#545b79',
+
+  
+  // random shit colors idk bro
+  '#ff556f',
+  '#3edcca',
+  '#229a78',
+  '#fff20d',
+  '#9576f5',
+  '#ffacb9',
+  '#eb7919',
 ]
+
 export const userUuid = 'd65aa957-d094-4cf3-8d37-dafe50e752ea'
 export const weeks = ['Week1', 'Week2', 'Week3', 'Week4']
 export const dayOfWeek = [
@@ -45,3 +56,20 @@ export const expectedNames = {
   frameRate: 'Frame Rate',
   format: 'Format',
 }
+export const moduleNames = [
+  'SliderModule',
+  'BarChartModule',
+  'PacingCardModule',
+  'RadarChartModule',
+  'ReportCardsModule',
+  'TopVideosCardModule',
+  'VideoComparisonModule',
+  'ColorComparisonModule',
+  'ColorTemperatureModule',
+  'BarAndDoughnutChartModule',
+  'ContentVitalityScoreModule',
+  'LineAndDoughnutChartModule',
+  'TopSimilarPropertiesModule',
+  'PerformanceComparisonModule',
+  'VideoReleasesBarChartModule',
+]

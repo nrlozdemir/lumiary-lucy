@@ -3,7 +3,11 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import moment from 'moment'
-import { actions, makeSelectReports } from 'Reducers/reports'
+import {
+  actions,
+  makeSelectReports,
+  makeSelectPredefinedReports,
+} from 'Reducers/reports'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import Select from 'Components/Form/Select'
 import Button from 'Components/Form/Button'
@@ -16,7 +20,7 @@ import ReportCards from '../section/ReportCardsModule'
 import ReactTable from 'react-table'
 import { selectOptions } from '../options'
 import style from '../style.scss'
-import { staticUrl } from "Utils/globals";
+import { staticUrl } from 'Utils/globals'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -50,6 +54,11 @@ class Reports extends Component {
     }
   }
 
+  componentDidMount() {
+    const { getPredefinedReports } = this.props
+    getPredefinedReports()
+  }
+
   componentWillMount() {
     this.props.loadReports()
   }
@@ -77,6 +86,9 @@ class Reports extends Component {
   renderModalInside = () => {
     const { selectedReportCardKey } = this.state
     const {
+      predefinedReports,
+      brandInsightFormSubmit,
+      compareBrandFormSubmit,
       profile: { brand },
     } = this.props
 
@@ -95,7 +107,7 @@ class Reports extends Component {
       case 'brand-insights':
         return (
           <ReportsForm
-            handleSubmitFunc={this.props.brandInsightFormSubmit}
+            handleSubmitFunc={brandInsightFormSubmit}
             brands={brands}
           />
         )
@@ -103,17 +115,13 @@ class Reports extends Component {
       case 'compare-brands':
         return (
           <CompareBrand
-            handleSubmitFunc={this.props.compareBrandFormSubmit}
+            handleSubmitFunc={compareBrandFormSubmit}
             brands={brands}
           />
         )
 
       case 'predefined-reports':
-        return (
-          <PredefinedReport
-            handleSubmitFunc={this.props.predefinedReportFormSubmit}
-          />
-        )
+        return <PredefinedReport predefinedReports={predefinedReports} />
 
       default:
         return null
@@ -292,6 +300,7 @@ class Reports extends Component {
 const mapStateToProps = createStructuredSelector({
   reports: makeSelectReports(),
   profile: makeSelectAuthProfile(),
+  predefinedReports: makeSelectPredefinedReports(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)

@@ -60,11 +60,13 @@ class MarketViewSlider extends React.Component {
 
       return (
         <div className={classnames(style.pagination, 'pagination')}>
-          {items.map((item, i) => {
-            const socialIcon = classnames(
-              socialIconSelector(item.socialMedia),
-              style.icon
-            )
+          {!!items &&
+            !!items.length &&
+            items.map((item, i) => {
+              const socialIcon = classnames(
+                socialIconSelector(item.socialMedia),
+                style.icon
+              )
 
             return (
               <div
@@ -96,6 +98,7 @@ class MarketViewSlider extends React.Component {
         for (const item of [...bullets]) {
           item.classList.remove('active')
         }
+
         if (bullets && this.refSlider && this.refSlider.activeIndex) {
           bullets[this.refSlider.activeIndex].classList.add('active')
         }

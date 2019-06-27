@@ -61,6 +61,7 @@ class ModuleSelectFilters extends React.Component {
       moduleKey,
       themes,
       isActive,
+      onChange,
     } = this.props
 
     const selectedOption =
@@ -73,14 +74,16 @@ class ModuleSelectFilters extends React.Component {
         ? selectedOption.value
         : options && options[type].find(({ value: v }) => v === _defaultValue)
 
+    const onChangeFunc = (onChange) ? onChange : this.onChange
+
     return (
       <React.Fragment>
         <Select
           name={`select${type}`}
           customClass={selectClasses || 'custom-select'}
           placeholder={placeHolder}
-          value={value}
-          onChange={(option) => this.onChange(option)}
+          value={(isActive || type === 'dateRange') ? value : ''}
+          onChange={(option) => onChangeFunc(option)}
           options={options[type]}
           isActive={isActive}
         />

@@ -57,6 +57,16 @@ const SelectBox = (props) => {
                   props[field].input.onBlur(value)
                   canSelect(props)
                 }}
+                onClick={() => {
+                  if (
+                    props.canSelect === 1 &&
+                    !!props.reset &&
+                    !!props.values &&
+                    !!Object.keys(props.values).some((v) => !!v)
+                  ) {
+                    props.reset()
+                  }
+                }}
               />
               <span
                 className={cx(style.selectCircle)}

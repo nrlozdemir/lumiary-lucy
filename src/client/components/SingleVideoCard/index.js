@@ -43,6 +43,7 @@ const SingleVideoCard = ({ video, options = options || {}, muted = true }) => {
         {video.videoUrl && (
           <div className={style.videoInner}>
             <video
+              key={video.videoUrl}
               ref={videoRef}
               loop
               muted

@@ -40,7 +40,7 @@ const plugins = [
 ]
 
 const renderLegend = (legend, legendEnd) => {
-  if (!legend.length) {
+  if (!!legend && !legend.length) {
     return null
   }
 
@@ -51,7 +51,7 @@ const renderLegend = (legend, legendEnd) => {
           legendEnd ? 'justify-content-end' : 'justify-content-center'
         }`}
       >
-        {legend.map((item, idx) => (
+        {!!legend && !!legend.length && legend.map((item, idx) => (
           <Legend
             key={`BarChartLegend_${idx}`}
             color={item.color}
@@ -82,7 +82,7 @@ const VideoReleasesBarChartModule = (props) => {
 
   if (!data) return false
 
-  const maxSteps = data.reduce(
+  const maxSteps = !!data && !!data.length && data.reduce(
     (max, obj) => ({
       engagement:
         obj.maxEngagement > max.engagement ? obj.maxEngagement : max.engagement,
@@ -100,7 +100,7 @@ const VideoReleasesBarChartModule = (props) => {
       ? maxSteps.engagement / maxSteps.vids
       : 50000
 
-  const normalizedData = data.map((data) => ({
+  const normalizedData = !!data && !!data.length && data.map((data) => ({
     ...data,
     datasets: [
       {
