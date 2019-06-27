@@ -125,17 +125,6 @@ const routes = [
     },
   },
   {
-    path: '/reports/brand-insight/:id',
-    exact: true,
-    component: 'Reports',
-    navigation: {
-      type: 'makeTitle',
-      from: null,
-      title: 'Brand Insights Saved Report',
-      backToTitle: 'Generate New Report',
-    },
-  },
-  {
     path: '/reports/brand-insight',
     exact: true,
     component: 'Reports',
@@ -149,17 +138,6 @@ const routes = [
     },
   },
   {
-    path: '/reports/compare-brands/:id',
-    exact: true,
-    component: 'Reports',
-    navigation: {
-      type: 'makeTitle',
-      from: null,
-      title: 'Compare Brands Saved Report',
-      backToTitle: 'Generate New Report',
-    },
-  },
-  {
     path: '/reports/compare-brands',
     exact: true,
     component: 'Reports',
@@ -169,17 +147,6 @@ const routes = [
       category: 'Compare Brands',
       from: null,
       title: 'Compare Brands Report',
-      backToTitle: 'Generate New Report',
-    },
-  },
-  {
-    path: '/reports/predefined-reports/:id',
-    exact: true,
-    component: 'Reports',
-    navigation: {
-      type: 'makeTitle',
-      from: null,
-      title: 'Predefined Saved Reports',
       backToTitle: 'Generate New Report',
     },
   },

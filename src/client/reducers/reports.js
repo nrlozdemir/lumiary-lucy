@@ -96,9 +96,9 @@ export const actions = {
   }),
 
   // SUBMIT NEW BRAND INSIGHT
-  brandInsightFormSubmit: (values) => ({
+  brandInsightFormSubmit: (params, onlySave = false) => ({
     type: types.BRAND_INSIGHT_REQUEST,
-    payload: values,
+    payload: { params, onlySave },
   }),
   brandInsightFormSubmitSuccess: (payload) => ({
     type: types.BRAND_INSIGHT_REQUEST_SUCCESS,

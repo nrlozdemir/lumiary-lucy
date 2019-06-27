@@ -1,6 +1,7 @@
 import React from 'react'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import { ucfirst } from 'Utils'
 
 const CreatedFilters = ({ report, brands }) => {
   const filters = [
@@ -46,7 +47,13 @@ const CreatedFilters = ({ report, brands }) => {
                       backgroundColor: colors.bodyBackground,
                     }}
                   >
-                    {item.filteredName}
+                    {ucfirst(
+                      item && !!item.filteredName
+                        ? item.filteredName === 'all'
+                          ? item.filteredName + ' Platforms'
+                          : item.filteredName
+                        : ''
+                    )}
                   </span>
                 </div>
               )
