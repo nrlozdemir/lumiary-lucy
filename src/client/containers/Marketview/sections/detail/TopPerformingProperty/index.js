@@ -70,14 +70,14 @@ class TopPerformingProperty extends React.Component {
       moduleKey,
       container,
       topProperty,
-      topPerformingPropertiesByCompetitorsData,
-      topPerformingPropertiesData,
+      topPerformingPropertiesByCompetitorsData: {
+        data: compTopData,
+        loading: compTopLoading,
+      },
+      topPerformingPropertiesData: { data: topData, loading: topLoading },
     } = this.props
 
-    const chartData =
-      container === 'competitor'
-        ? topPerformingPropertiesByCompetitorsData.data
-        : topPerformingPropertiesData.data
+    const chartData = container === 'competitor' ? compTopData : topData
 
     const hasDatasets =
       !!chartData && !!chartData.datasets && !!chartData.datasets.length
@@ -112,6 +112,8 @@ class TopPerformingProperty extends React.Component {
         color: item.backgroundColor,
       }))
 
+    const loading = compTopLoading || topLoading
+
     return (
       <BarChartModule
         moduleKey={moduleKey}
@@ -126,12 +128,13 @@ class TopPerformingProperty extends React.Component {
           container === 'competitor' &&
           style.detailTopPerformingPropertyContainer
         }
-        barData={chartData}
+        barData={loading ? {} : chartData}
         tickOptions={chartTickOptions}
         height={50}
         action={this.callback}
         filters={filters}
-        references={referencesData}
+        references={loading ? [] : referencesData}
+        loading={loading}
       />
     )
   }

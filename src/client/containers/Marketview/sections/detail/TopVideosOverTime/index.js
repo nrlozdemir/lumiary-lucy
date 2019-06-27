@@ -12,14 +12,40 @@ import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 
 import TopVideosCard from 'Components/Modules/TopVideosCardModule'
 
+import { isEqual } from 'lodash'
+
 class TopVideosOverTime extends React.Component {
-  callback = (data) => {
-    if (this.props.container === 'time') {
-      this.props.getTopPerformingTimeRequest(data)
-    } else if (this.props.container === 'platform') {
-      this.props.getPlatformTopVideosRequest(data)
+  shouldComponentUpdate(prevProps) {
+    const {
+      container,
+      topPerformingData,
+      competitorTopVideos,
+      platformTopVideos,
+    } = this.props
+
+    if (container === 'time') {
+      return !isEqual(prevProps.topPerformingData, topPerformingData)
+    } else if (container === 'platform') {
+      return !isEqual(prevProps.platformTopVideos, platformTopVideos)
     } else {
-      this.props.getCompetitorTopVideosRequest(data)
+      return !isEqual(prevProps.competitorTopVideos, competitorTopVideos)
+    }
+  }
+
+  callback = (data) => {
+    const {
+      container,
+      getTopPerformingTimeRequest,
+      getPlatformTopVideosRequest,
+      getCompetitorTopVideosRequest,
+    } = this.props
+
+    if (container === 'time') {
+      getTopPerformingTimeRequest(data)
+    } else if (container === 'platform') {
+      getPlatformTopVideosRequest(data)
+    } else {
+      getCompetitorTopVideosRequest(data)
     }
   }
 
