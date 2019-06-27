@@ -10,7 +10,11 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 
 const Front = (props) => {
   const { data, colors, title } = props
-  const percentage = (100 * data.value) / data.max
+  let percentage = (100 * data.value) / data.max
+  if (title == 'comment') {
+    percentage = parseInt(data.percentile) || 0  
+  }
+
   return (
     <div className={style.frontContainer}>
       <div className={style.videoStat}>
@@ -32,9 +36,6 @@ const Front = (props) => {
           width={
             percentage > 100
               ? 100
-              : parseFloat(percentage).toFixed(2) > 0 &&
-                parseFloat(percentage).toFixed(2) < 1
-              ? 1
               : parseFloat(percentage).toFixed(2)
           }
           customBarClass={style.progressBar}
