@@ -41,10 +41,33 @@ function getReportsMockApi() {
 
 function* getReports() {
   try {
-    const { reports, compareReports } = yield call(getReportsApi)
-    yield put(actions.loadReportsSuccess([...reports, ...compareReports]))
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      `/user/${brand.uuid}/report`,
+      'GET'
+    )
+    console.log('response', response)
+    if (!!response) {
+      const compare =
+        !!response.compare &&
+        !!response.compare.length &&
+        response.compare.map((item) => {
+          return { ...item, category: 'Compare Brands' }
+        })
+      const insights =
+        !!response.insights &&
+        !!response.insights.length &&
+        response.insights.map((item) => {
+          return { ...item, category: 'Brands Insights' }
+        })
+      yield put(actions.loadReportsSuccess([...compare, ...insights]))
+    }
   } catch (err) {
-    yield put(actions.loadReportsError(err))
+    console.log('err', err)
+    yield put(actions.loadReportsError(err.message))
   }
 }
 
