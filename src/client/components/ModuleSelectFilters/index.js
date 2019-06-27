@@ -82,7 +82,7 @@ class ModuleSelectFilters extends React.Component {
           name={`select${type}`}
           customClass={selectClasses || 'custom-select'}
           placeholder={placeHolder}
-          value={(isActive || type === 'dateRange') ? value : ''}
+          value={(isActive || type === 'dateRange' || isActive === undefined) ? value : ''}
           onChange={(option) => onChangeFunc(option)}
           options={options[type]}
           isActive={isActive}
