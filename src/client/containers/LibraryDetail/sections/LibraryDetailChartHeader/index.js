@@ -38,8 +38,7 @@ const Front = (props) => {
           }
           customBarClass={style.progressBar}
           customPercentageClass={classnames(style.percentageIncrease, {
-            [style.percentageDecrease]:
-              parseInt((data.average / data.value) * 100) < 50,
+            [style.percentageDecrease]: percentage < 50,
           })}
           tickColor={colors.progressLibraryDetailTickColor}
           progressBarBackgroundColor={colors.progressLibraryDetailBackground}
