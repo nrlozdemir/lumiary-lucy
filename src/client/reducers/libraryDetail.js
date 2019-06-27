@@ -162,13 +162,21 @@ export const actions = {
 
 export const initialState = fromJS({
   barChartData: null,
-  doughnutData: null,
+  doughnutData: {
+    data: undefined,
+    loading: false,
+    error: null,
+  },
   colorTempData: {
     data: undefined,
     loading: false,
     error: null,
   },
-  shotByShotData: null,
+  shotByShotData: {
+    data: null,
+    loading: false,
+    error: null,
+  },
   shotInfoData: {},
   error: false,
   loading: false,
@@ -220,15 +228,17 @@ const libraryDetailReducer = (state = initialState, action) => {
         .set('loading', fromJS(false))
 
     case types.GET_DOUGHNUT_CHART_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['doughnutData', 'loading'], fromJS(true))
+
     case types.GET_DOUGHNUT_CHART_SUCCESS:
       return state
-        .set('doughnutData', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(['doughnutData', 'data'], fromJS(action.payload))
+        .setIn(['doughnutData', 'loading'], fromJS(false))
+
     case types.GET_DOUGHNUT_CHART_FAILURE:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['doughnutData', 'data'], fromJS(action.payload))
+        .setIn(['doughnutData', 'loading'], fromJS(false))
 
     case types.GET_COLOR_TEMP_REQUEST:
       return state.setIn(['colorTempData', 'loading'], fromJS(true))
@@ -244,15 +254,17 @@ const libraryDetailReducer = (state = initialState, action) => {
         .setIn(['colorTempData', 'loading'], fromJS(false))
 
     case types.GET_SHOT_BY_SHOT_REQUEST:
-      return state.set('loading', fromJS(true))
+      return state.setIn(['shotByShotData', 'loading'], fromJS(true))
+
     case types.GET_SHOT_BY_SHOT_SUCCESS:
       return state
-        .set('shotByShotData', fromJS(action.payload))
-        .set('loading', fromJS(false))
+        .setIn(['shotByShotData', 'data'], fromJS(action.payload))
+        .setIn(['shotByShotData', 'loading'], fromJS(false))
+
     case types.GET_SHOT_BY_SHOT_FAILURE:
       return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
+        .setIn(['shotByShotData', 'error'], fromJS(action.error))
+        .setIn(['shotByShotData', 'loading'], fromJS(false))
 
     case types.TOGGLE_INFO_SECTION:
       return state
@@ -395,6 +407,13 @@ export function makeSelectDoughnutData() {
   return createSelector(
     selectLibraryDetailDomain,
     (substate) => substate.get('doughnutData').toJS()
+  )
+}
+
+export function makeSelectLibDetailLoading() {
+  return createSelector(
+    selectLibraryDetailDomain,
+    (substate) => substate.toJS().loading
   )
 }
 
