@@ -38,14 +38,19 @@ import ColorTemperature from './sections/ColorTemperature'
 class ReportGenerated extends React.Component {
   componentDidMount() {
     const {
-      getReportRequest,
-      match: { params },
+      location: { search },
+      brandInsightFormSubmit,
+      brandInsightValues: { data: brandInsightValues },
     } = this.props
-
-    const id = params && params.id
-
-    if (id) {
-      getReportRequest({ id })
+    if (!brandInsightValues) {
+      const urlParams = getLocationParams(search)
+      const parsedData =
+        !!urlParams &&
+        Object.keys(urlParams).reduce((acc, curr) => {
+          acc[curr] = { value: urlParams[curr] }
+          return acc
+        }, {})
+      brandInsightFormSubmit({ ...parsedData, title: urlParams.title }, true)
     }
   }
 
@@ -55,18 +60,15 @@ class ReportGenerated extends React.Component {
       location: { search },
       report: { data: report },
       brandInsightValues: { data: brandInsightValues },
-
       setSelectedVideo,
       selects,
       profile: { brand },
-
       getVideoReleasesBarChartRequest,
       getCompetitorTopVideosRequest,
       getTopPerformingVideosRequest,
       getPacingCardDataRequest,
       getColorTempDataRequest,
       getFilteringSectionDataRequest,
-
       videoReleasesBarChart,
       competitorTopVideos,
       topPerformingVideos,
@@ -75,24 +77,22 @@ class ReportGenerated extends React.Component {
       filteringSectionData,
     } = this.props
 
-    const urlParams = getLocationParams(search)
-    urlParams.brands = [urlParams.brand]
-    const reportValues =
-      params && params.id
-        ? report
-        : brandInsightValues
-        ? brandInsightValues
-        : urlParams
-
-    if (!reportValues) {
-      return <RouterLoading />
+    if (
+      !brandInsightValues ||
+      !brandInsightValues.brand ||
+      !brandInsightValues.date ||
+      !brandInsightValues.engagement ||
+      !brandInsightValues.title ||
+      !brandInsightValues.social
+    ) {
+      return null
     }
 
     return (
       <React.Fragment>
         {/*<ReportsHeader />*/}
         <CreatedFilters
-          report={reportValues}
+          report={brandInsightValues}
           brands={[
             {
               name: brand.name,
@@ -105,33 +105,33 @@ class ReportGenerated extends React.Component {
           action={getTopPerformingVideosRequest}
           setSelectedVideo={setSelectedVideo}
           data={topPerformingVideos}
-          report={reportValues}
+          report={brandInsightValues}
         />
         <VideoReleasesBarChart
           action={getVideoReleasesBarChartRequest}
           data={videoReleasesBarChart}
-          report={reportValues}
+          report={brandInsightValues}
         />
         <TopVideosCard
           action={getCompetitorTopVideosRequest}
           data={competitorTopVideos}
-          report={reportValues}
+          report={brandInsightValues}
         />
         <PacingCard
           action={getPacingCardDataRequest}
           data={pacingChartData}
-          report={reportValues}
+          report={brandInsightValues}
         />
         <EngagementByProperty
           action={getFilteringSectionDataRequest}
           data={filteringSectionData}
-          report={reportValues}
+          report={brandInsightValues}
         />
         {/*<ColorTemperature
           action={getColorTempDataRequest}
           data={colorTempData}
           selects={selects}
-          report={reportValues}
+          report={urlParams}
         />
         */}
       </React.Fragment>

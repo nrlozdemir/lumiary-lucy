@@ -58,7 +58,7 @@ function* getMoreReports() {
   }
 }
 
-function* brandInsightSubmit({ payload }) {
+function* brandInsightSubmit({ payload: { params, onlySave } }) {
   try {
     const {
       brand: { value: brand },
@@ -66,9 +66,10 @@ function* brandInsightSubmit({ payload }) {
       engagement: { value: engagement },
       date: { value: date },
       title,
-    } = payload
+    } = params
 
     const parameters = {
+      brand,
       brands: [brand],
       social,
       engagement,
@@ -77,12 +78,15 @@ function* brandInsightSubmit({ payload }) {
     }
 
     yield put(actions.brandInsightFormSubmitSuccess(parameters))
-    yield put(
-      push(
-        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}`
+    if (!!onlySave) {
+      yield put(
+        push(
+          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}`
+        )
       )
-    )
+    }
   } catch (err) {
+    console.log('err', err)
     yield put(actions.brandInsightFormSubmitError(err))
   }
 }

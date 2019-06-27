@@ -36,24 +36,31 @@ function getReportsApi() {
 function* saveReport({ data }) {
   try {
     const { category } = data
-
+    const {
+      brand: { uuid },
+    } = yield select(selectAuthProfile)
+    console.log('data', data)
+    // return null
     if (category === 'Brands Insights') {
-      const { brands, social, engagement, date, title } = data
+      const { brands, social, engagement, date, title, brand } = data
 
       const parameters = {
-        baseUrl: true,
-        url: '/createReport',
-        brand: brands[0],
-        social,
-        engagement,
-        date,
+        brand_uuid: brand,
+        platform: social,
+        metric: engagement,
+        date_range: date,
         title,
       }
 
-      const response = yield call(getDataFromApi, parameters)
-
+      const response = yield call(
+        getDataFromApi,
+        parameters,
+        `/user/${uuid}/report/?type=insights`,
+        'POST'
+      )
+      console.log('response', response)
       yield put(actions.saveReportSuccess(response))
-      yield put(push(`/reports/brand-insight/${response.id}`))
+      yield put(push('/reports'))
     } else if (category === 'Compare Brands') {
       const { title, brands } = data
 
@@ -70,6 +77,7 @@ function* saveReport({ data }) {
       yield put(push(`/reports/compare-brands/${response.id}`))
     }
   } catch (err) {
+    console.log('err', err)
     yield put(actions.saveReportFailure(err))
   }
 }
