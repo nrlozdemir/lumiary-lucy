@@ -9,6 +9,14 @@ import { isDataSetEmpty } from 'Utils/datasets'
 import MultipleNoDataModule from 'Components/MultipleNoDataModule'
 import RouterLoading from 'Components/RouterLoading'
 
+const WrapperModule = ({ children, style, className}) => {
+  return(
+    <div className={className} style={style}>
+      {children}
+    </div>
+  )
+}
+
 const TopSimilarProperties = (props) => {
   const { data, title, filters, action, moduleKey, isLoading, isError } = props
   return (
@@ -41,7 +49,7 @@ const TopSimilarProperties = (props) => {
                           .every((dataset) => dataset === true)
 
                       return (
-                        <div
+                        <WrapperModule
                           className={moduleContainer}
                           style={{ borderColor: colors.moduleBorder }}
                           key={`TopSimilarProperties_${i}`}
@@ -54,7 +62,7 @@ const TopSimilarProperties = (props) => {
                             colors={colors}
                             isEmpty={isEmpty}
                           />
-                        </div>
+                        </WrapperModule>
                       )
                     })
                   : null}
