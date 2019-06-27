@@ -7,7 +7,7 @@ import classnames from 'classnames'
 import FlipCard from 'Components/FlipCard'
 import CustomBarChart from 'Components/Charts/CustomBarChart'
 import styles from './style.scss'
-import { capitalizeFirstLetter } from 'Utils'
+import { capitalizeFirstLetter, metricSuffix } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 const days = [
@@ -49,13 +49,13 @@ function parseData(props) {
     statClassName = classnames(styles.stats, styles.increase)
     backText = `${title} increased ${
       data.percentage
-    }% today from yesterday, from ${previousDayScore}k to ${todayScore}k`
+    }% today from yesterday, from ${metricSuffix(previousDayScore)} to ${metricSuffix(todayScore)}`
   } else if (data.percentage < 0) {
     statArrowClassName = classnames(styles.arrow, styles.arrowDown)
     statClassName = classnames(styles.stats, styles.decrease)
     backText = `${title} decreased ${
       data.percentage
-    }% today from yesterday, from ${previousDayScore}k to ${todayScore}k`
+    }% today from yesterday, from ${metricSuffix(previousDayScore)} to ${metricSuffix(todayScore)}`
   }
 
   return {
