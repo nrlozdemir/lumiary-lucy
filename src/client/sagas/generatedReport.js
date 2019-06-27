@@ -3,6 +3,7 @@ import { push } from 'connected-react-router'
 import axios from 'axios'
 import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/generatedReport'
+import querystring from 'querystring'
 
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 import reportsMockData from 'Api/mocks/reports.json'
@@ -87,11 +88,36 @@ function* getReport({ data: { id } }) {
   }
 }
 
-function* getTopPerformingVideos() {
+function* getTopPerformingVideos({ data: { report = {} } }) {
   try {
-    let { topPerformingVideos } = yield call(getGeneratedReportApi)
-    yield put(actions.getTopPerformingVideosSuccess(topPerformingVideos))
+    const {
+      brands = [],
+      date: dateRange,
+      engagement: metric,
+      social: platform,
+    } = report
+
+    if (!!brands.length && !!dateRange && !!metric && !!platform) {
+      const response = yield call(
+        getDataFromApi,
+        undefined,
+        `/brand/${brands[0]}/topvideos?${querystring.stringify({
+          dateRange,
+          platform,
+          metric,
+          brandUuid: brands[0],
+        })}`,
+        'GET'
+      )
+
+      if (!!response && !!response.length) {
+        yield put(actions.getTopPerformingVideosSuccess(response))
+      } else {
+        yield put(actions.getTopPerformingVideosSuccess([]))
+      }
+    }
   } catch (err) {
+    console.log(err)
     yield put(actions.getTopPerformingVideosFailure(err))
   }
 }
