@@ -202,11 +202,11 @@ class LibraryDetailShotByShot extends React.Component {
                           ref={(el) => (this.sliderThumbs = el)}
                           className="mt-32 mb-24"
                         >
-                          {shots && Object.values(shots).length > 0 && (
+                          {!!shotValues.length && (
                             <SliderWithScrubber
                               name="sliderThumbs"
                               clickEvent={this.shotSliderClick}
-                              shots={Object.values(shots)}
+                              shots={loading ? [] : shotValues}
                               shotMargin={4}
                               minShotWidth={12}
                               maxShotWidth={104}

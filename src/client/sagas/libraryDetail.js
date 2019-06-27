@@ -236,8 +236,8 @@ function* getDoughnutSectionInfoData({ payload }) {
         getDataFromApi,
         undefined,
         buildApiUrl(`/brand/${brand.uuid}/video/${videoId}/compare`, {
-          metric: property,
-          property: metric,
+          metric,
+          property,
           daterange: dateRange,
         }),
         'GET'
