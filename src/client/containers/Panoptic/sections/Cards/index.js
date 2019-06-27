@@ -7,7 +7,7 @@ import classnames from 'classnames'
 import FlipCard from 'Components/FlipCard'
 import CustomBarChart from 'Components/Charts/CustomBarChart'
 import styles from './style.scss'
-import { capitalizeFirstLetter, metricSuffix } from 'Utils'
+import { ucfirst, metricSuffix } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 const days = [
@@ -143,13 +143,13 @@ class Cards extends React.Component {
               {data && data[item] && (
                 <Front
                   data={data[item]}
-                  title={`${capitalizeFirstLetter(item)}s`}
+                  title={`${ucfirst(item)}s`}
                 />
               )}
               {data && data[item] && (
                 <Back
                   data={data[item]}
-                  title={`${capitalizeFirstLetter(item)}s`}
+                  title={`${ucfirst(item)}s`}
                 />
               )}
             </FlipCard>

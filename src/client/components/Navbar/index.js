@@ -17,7 +17,7 @@ import {
 import { actions as generatedReportActions } from 'Reducers/generatedReport'
 
 import Switch from 'Components/Form/Switch'
-import { capitalizeFirstLetter } from 'Utils'
+import { ucfirst } from 'Utils'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import Dropdown from './dropdown'
@@ -42,10 +42,10 @@ const BackTo = (props) => {
   }
 
   if (props && props.title) {
-    title = capitalizeFirstLetter(props.title)
+    title = ucfirst(props.title)
   }
 
-  title = 'Back to ' + capitalizeFirstLetter(title)
+  title = 'Back to ' + ucfirst(title)
 
   return (
     <div className={style.backTo}>
@@ -93,7 +93,7 @@ const Default = (props) => {
 const SelectedNavLink = (props) => {
   return (
     <React.Fragment>
-      <div>{capitalizeFirstLetter(props.title)}</div>
+      <div>{ucfirst(props.title)}</div>
       {props.load && (
         <div className={style.switchInner}>
           <span>Save Report</span>
@@ -114,7 +114,7 @@ const NavTitle = (props) => {
     libraryDetail: { selectedVideo },
   } = props
   if (selectedVideo && selectedVideo.title) {
-    return <div>{capitalizeFirstLetter(selectedVideo.title)}</div>
+    return <div>{ucfirst(selectedVideo.title)}</div>
   }
   return null
 }
