@@ -10,10 +10,8 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 
 const Front = (props) => {
   const { data, colors, title } = props
-  let percentage = (100 * data.value) / data.max
-  if (title == 'comment') {
-    percentage = parseInt(data.percentile) || 0  
-  }
+  //let percentage = (100 * data.value) / data.max
+  let percentage = parseInt(data.percentile) || 0 
 
   return (
     <div className={style.frontContainer}>
