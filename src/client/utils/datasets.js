@@ -447,7 +447,9 @@ const parseAverage = (payload) => {
   }, {})
 
   Object.keys(payload.video).forEach((payloadRow) => {
-    const item = payloadRow.replace('cvScores.library_', '').replace('_p', 's.p')
+    const item = payloadRow
+      .replace('cvScores.library_', '')
+      .replace('_p', 's.p')
     let keyName = item.substr(0, item.indexOf('.'))
 
     if (item.includes('diffFromLibrary')) {
@@ -467,7 +469,9 @@ const parseAverage = (payload) => {
       keyName = keyName.slice(0, keyName.length - 1)
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
-        percentile: parseFloat(payload.video[`cvScores.library_${item.replace('s.', '_')}`]).toFixed(0),
+        percentile: parseFloat(
+          payload.video[`cvScores.library_${item.replace('s.', '_')}`]
+        ).toFixed(0),
       }
     }
   })
@@ -597,6 +601,49 @@ const getMinMaxFromDatasets = (datasets = [], initial = 0, type = 'max') => {
     : 0
 }
 
+// @param - Vals {object} key/value pair of label/oercentage
+const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
+  const result = {
+    maxKey: null,
+    maxValue: null,
+    chartData: null,
+  }
+
+  const keys = (!!obj && Object.keys(obj)) || []
+
+  const vals = (!!keys.length && Object.values(obj)) || []
+
+  if (!!vals.length) {
+    const { maxKey, maxVal } = keys.reduce(
+      (max, currentKey) => {
+        const { maxKey, maxVal } = max
+        const val = Math.floor(obj[currentKey] * 100)
+        const isHigher = val >= maxVal
+        return {
+          maxKey: isHigher ? currentKey : maxKey,
+          maxVal: isHigher ? val : maxVal,
+        }
+      },
+      { maxKey: null, maxVal: 0 }
+    )
+
+    result.maxKey = getLabelWithSuffix(maxKey, property)
+    result.maxValue = maxVal
+    result.chartData = {
+      labels: keys.map((key) => getLabelWithSuffix(key, property)),
+      datasets: [
+        {
+          borderColor: '#ACB0BE',
+          data: vals.map((val) => Math.floor(val * 100)),
+          backgroundColor: keys.map((key) => (key === maxKey ? color : '#fff')),
+          hoverBackgroundColor: [],
+        },
+      ],
+    }
+  }
+  return result
+}
+
 export {
   convertDataIntoDatasets,
   chartCombineDataset,
@@ -608,4 +655,5 @@ export {
   parseAverage,
   convertVideoEngagementData,
   getMinMaxFromDatasets,
+  convertIntoLibAndIndustryDoughnut,
 }

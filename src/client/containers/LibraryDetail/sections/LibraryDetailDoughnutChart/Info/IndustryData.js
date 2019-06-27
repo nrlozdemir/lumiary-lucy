@@ -10,7 +10,7 @@ import { makeSelectInfoModalData } from 'Reducers/libraryDetail'
 class IndustryData extends React.Component {
   render() {
     const { modalData } = this.props
-
+    
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
