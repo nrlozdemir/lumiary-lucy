@@ -447,8 +447,10 @@ const parseAverage = (payload) => {
     return acc
   }, {})
 
-  Object.keys(payload.video).forEach((item) => {
+  Object.keys(payload.video).forEach((payloadRow) => {
+    const item = payloadRow.replace('cvScores.library_', '').replace('_p', 's.p')
     let keyName = item.substr(0, item.indexOf('.'))
+
     if (item.includes('diffFromLibrary')) {
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
@@ -460,6 +462,13 @@ const parseAverage = (payload) => {
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
         value: parseFloat(payload.video[item]).toFixed(0),
+      }
+    }
+    if (item.includes('percentile')) {
+      keyName = keyName.slice(0, keyName.length - 1)
+      calculateAverage[keyName] = {
+        ...calculateAverage[keyName],
+        percentile: parseFloat(payload.video[`cvScores.library_${item.replace('s.', '_')}`]).toFixed(0),
       }
     }
   })
