@@ -1,9 +1,8 @@
 import { chartColors, expectedNames } from 'Utils/globals'
 import {
-  capitalizeFirstLetter,
+  ucfirst,
   metricSuffix,
   strToColor,
-  ucfirst,
   normalize,
   getTimeBucket,
   getLabelWithSuffix,
@@ -279,20 +278,20 @@ const compareSharesData = (payload) => {
     const type = (isArray ? item.platform : value) || keyName
 
     return {
-      type: capitalizeFirstLetter(type),
+      type: ucfirst(type),
       datas: {
         labels: labels.map((color) => {
           return {
             name: color[0]
               .split('-')
-              .map((c) => capitalizeFirstLetter(c))
+              .map((c) => ucfirst(c))
               .join('-'),
             count: color[1],
           }
         }),
         datasets: [
           {
-            label: capitalizeFirstLetter(type),
+            label: ucfirst(type),
           },
         ],
       },
@@ -322,7 +321,7 @@ const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
       })
 
       return {
-        label: capitalizeFirstLetter(label),
+        label: ucfirst(label),
         backgroundColor: chartColors[index],
         borderColor: chartColors[index],
         borderWidth: 1,
@@ -332,8 +331,8 @@ const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
   )
   return {
     labels: !revert
-      ? firstPayloadLabels.map((key) => capitalizeFirstLetter(key))
-      : datasetLabels.map((label) => capitalizeFirstLetter(label)),
+      ? firstPayloadLabels.map((key) => ucfirst(key))
+      : datasetLabels.map((label) => ucfirst(label)),
     datasets,
   }
 }

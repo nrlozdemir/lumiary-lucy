@@ -17,7 +17,7 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 import Scrubber from 'Components/Sliders/Scrubber'
 import XCircle from 'Components/Icons/XCircle'
 import { mediaUrl } from 'Utils/globals'
-import { capitalizeFirstLetter } from 'Utils'
+import { ucfirst } from 'Utils'
 import SliderWithScrubber from 'Components/Sliders/SliderWithScrubber'
 import style from './style.scss'
 import { makeSelectAuthProfile } from 'Reducers/auth'
@@ -283,7 +283,7 @@ class LibraryDetailShotByShot extends React.Component {
                                           key={i}
                                         >
                                           <div className={style.barOptions}>
-                                            <p>{capitalizeFirstLetter(info.gender)}</p>
+                                            <p>{ucfirst(info.gender)}</p>
                                             <p>{(info.ages.confidence * 100).toFixed(0)}% Accurate</p>
                                           </div>
                                           <ProgressBar

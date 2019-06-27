@@ -122,10 +122,6 @@ const shadeHexColor = (color, percent) => {
   )
 }
 
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
-
 const metricSuffix = (number) => {
   number = parseInt(number)
   if (number >= 1e3) {
@@ -196,7 +192,7 @@ const getBrandNameAndCompetitorsName = (profile) => {
   return [brand.name]
 }
 
-const ucfirst = (string) => {
+const ucfirst = (string = '') => {
   return string.charAt(0).toUpperCase() + string.slice(1)
 }
 
@@ -267,7 +263,6 @@ export {
   toSlug,
   searchTermInText,
   shadeHexColor,
-  capitalizeFirstLetter,
   metricSuffix,
   strToColor,
   getMaximumValueIndexFromArray,
