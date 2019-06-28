@@ -242,7 +242,7 @@ export class Main extends React.PureComponent {
                                     <h1>
                                       {i == 0
                                         ? 'Underperforming Videos'
-                                        : 'Best Performing Videos'}
+                                        : 'Over Performing Videos'}
                                       <i
                                         className="icon icon-Information"
                                         style={{ color: colors.textColor }}
