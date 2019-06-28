@@ -15,7 +15,7 @@ export const barDataOptions = {
           fontColor: '#fff',
           fontSize: 12,
           fontFamily: 'ClanOTNews',
-          padding: 16,
+          padding: 4,
           beginAtZero: true,
           callback: function(value, index, values) {
             return value

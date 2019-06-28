@@ -37,8 +37,8 @@ class ModuleSelectFilters extends React.Component {
         },
       },
     }
-		this.props.changeFilter(filterObj);
-		onChange(val);
+    this.props.changeFilter(filterObj)
+    onChange(val)
   }
 
   removeFilterValue = () => {
@@ -72,9 +72,19 @@ class ModuleSelectFilters extends React.Component {
     const value =
       selectedOption && selectedOption.value
         ? selectedOption.value
-        : options && options[type].find(({ value: v }) => v === _defaultValue)
+        : options &&
+          options[type] &&
+          [
+            ...(type === 'platformEngagement'
+              ? !!options[type] &&
+                !!options[type].length &&
+                !!options[type][0].options &&
+                !!options[type][0].options.length &&
+                options[type][0].options
+              : options[type]),
+          ].find(({ value: v }) => v === _defaultValue)
 
-    const onChangeFunc = (onChange) ? onChange : this.onChange
+    const onChangeFunc = onChange ? onChange : this.onChange
 
     return (
       <React.Fragment>
@@ -82,7 +92,11 @@ class ModuleSelectFilters extends React.Component {
           name={`select${type}`}
           customClass={selectClasses || 'custom-select'}
           placeholder={placeHolder}
-          value={(isActive || type === 'dateRange' || isActive === undefined) ? value : ''}
+          value={
+            isActive || type === 'dateRange' || isActive === undefined
+              ? value
+              : ''
+          }
           onChange={(option) => onChangeFunc(option)}
           options={options[type]}
           isActive={isActive}

@@ -65,9 +65,7 @@ class CustomBarChart extends React.Component {
                   ? element.score + zeroFill
                   : element.score
               const isSelected = element.label === selected
-              let heightPx = isSelected 
-              ? Math.ceil(Math.abs((difference * options.maxHeight) / 100))
-              : Math.ceil((elementScore * options.maxHeight) / statMax.score)
+              let heightPx = Math.ceil(Math.abs((elementScore * options.maxHeight) / statMax.score))
               
               //if height is 0, we reassign 1 to height bcoz of ux experience. 
               //empty area doesn't seem good.

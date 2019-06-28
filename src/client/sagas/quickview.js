@@ -66,63 +66,63 @@ function* getQuickviewItemsApi({
           "title": "Duration",
           "value": durationsBucketName,
           "percentage": durationsIndustryPercent,
-          "text": "{percentage}% of industry videos are {value} sec in length"
+          "text": "<b>{percentage}%</b> of industry videos are <b>{value} sec</b> in length"
         },
         {
           "slug": "pacing",
           "title": "Pacing",
           "value": pacingsBucketName,
           "percentage": pacingsIndustryPercent,
-          "text": "{percentage}% of industry videos have <b>{value} {title}</b>"
+          "text": "<b>{percentage}%</b> of industry videos have <b>{value} {title}</b>"
         },
         {
           "slug": "format",
           "title": "Format",
           "value": formatsBucketName,
           "percentage": formatsIndustryPercent,
-          "text": "{percentage}% of industry videos have a <b>{title}</b> of <b>{value}</b>"
+          "text": "<b>{percentage}%</b> of industry videos have a <b>{title}</b> of <b>{value}</b>"
         },
         {
           "slug": "dominantColor",
           "title": "Dominant Color",
           "value": colorsBucketName.charAt(0).toUpperCase() + colorsBucketName.slice(1),
           "percentage": colorsIndustryPercent,
-          "text": "{percentage}% of industry videos have a <b>{title}</b> of <b>{value}</b>"
+          "text": "<b>{percentage}%</b> of industry videos have a <b>{title}</b> of <b>{value}</b>"
         },
         {
           "slug": "predominantTalentAge",
           "title": "Predominant Talent Age",
           "value": agesBucketName,
           "percentage": agesIndustryPercent,
-          "text": "{percentage}% of industry videos are <b>{title}</b> of <b>{value}</b>"
+          "text": "<b>{percentage}%</b> of industry videos are <b>{title}</b> of <b>{value}</b>"
         },
         {
           "slug": "predominantTalentGender",
           "title": "Predominant Talent Gender",
           "value": gendersBucketName,
           "percentage": gendersIndustryPercent,
-          "text": "{percentage}% of industry videos are <b>{title}</b> of <b>{value}</b>"
+          "text": "<b>{percentage}%</b> of industry videos are <b>{title}</b> of <b>{value}</b>"
         },
         {
           "slug": "aspectRatio",
           "title": "Aspect Ratio",
           "value": aspectRatiosBucketName,
           "percentage": aspectRatiosIndustryPercent,
-          "text": "{percentage}% of industry videos have an <b>{title}</b> of <b>{value}</b>"
+          "text": "<b>{percentage}%</b> of industry videos have an <b>{title}</b> of <b>{value}</b>"
         },
         {
           "slug": "resolution",
           "title": "Resolution",
           "value": resolutionsBucketName,
           "percentage": resolutionsIndustryPercent,
-          "text": "{percentage}% of industry videos have a <b>{title}</b> of <b>{value}</b>"
+          "text": "<b>{percentage}%</b> of industry videos have a <b>{title}</b> of <b>{value}</b>"
         },
         {
           "slug": "frameRate",
           "title": "Frame Rate",
           "value": frameRatesBucketName === '' ? '' : `${frameRatesBucketName}fps`,
           "percentage": frameRatesIndustryPercent,
-          "text": "{percentage}% of industry videos have a <b>{title}</b> of <b>{value}</b>"
+          "text": "<b>{percentage}%</b> of industry videos have a <b>{title}</b> of <b>{value}</b>"
         }
       ]
     }

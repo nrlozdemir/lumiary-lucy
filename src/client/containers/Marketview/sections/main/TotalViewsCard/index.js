@@ -5,14 +5,15 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewTotalView } from 'Reducers/marketview'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
-import style from './style.scss'
 import 'chartjs-plugin-datalabels'
 import Module from 'Components/Module'
 
-import { chartCombineDataset, isDataSetEmpty } from 'Utils/datasets'
+import { selectFiltersToType } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 import { chartColors } from 'Utils/globals'
 
 import { isEmpty } from 'lodash'
@@ -24,6 +25,7 @@ class TotalViewsChart extends React.Component {
 
   render() {
     const {
+      selectFilters,
       totalViewsData: {
         data,
         loading,
@@ -39,10 +41,23 @@ class TotalViewsChart extends React.Component {
       ((!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty) ||
         isEmpty(data))
 
+    const moduleKey = 'Marketview/StackedBarChart'
+    const selects = selectFiltersToType(
+      selectFilters.values && selectFilters.values[moduleKey]
+    )
+    const platform = selectFilters.options.platform.find(
+      (platform) => selects.platform === platform.value
+    )
+    const metric = selectFilters.options.metric.find(
+      (metric) => selects.metric === metric.value
+    )
+
     return (
       <Module
-        moduleKey={'StackedBarChart'}
-        title="Total Views For All Platforms"
+        moduleKey={moduleKey}
+        title={`Total ${metric ? metric.label : 'Views'} For ${
+          platform ? platform.label : 'All Platforms'
+        }`}
         action={this.callBack}
         filters={[
           {
@@ -104,6 +119,7 @@ TotalViewsChart.defaultProps = {
 
 const mapStateToProps = createStructuredSelector({
   totalViewsData: makeSelectMarketviewTotalView(),
+  selectFilters: makeSelectSelectFilters(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
