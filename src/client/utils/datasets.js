@@ -634,7 +634,7 @@ const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
       datasets: [
         {
           borderColor: '#ACB0BE',
-          data: vals.map((val) => Math.floor(val * 100)),
+          data: vals.map((val) => (val * 100).toFixed(2)),
           backgroundColor: keys.map((key) => (key === maxKey ? color : '#fff')),
           hoverBackgroundColor: [],
         },

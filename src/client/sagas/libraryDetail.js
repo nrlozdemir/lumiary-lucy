@@ -227,8 +227,8 @@ function* getDoughnutSectionInfoData({ payload }) {
       const {
         libraryMetricPercents,
         industryMetricPercents,
-        libraryDayAverages,
-        industryDayAverages,
+        libraryDateAverages,
+        industryDateAverages,
         videoPropertyAverage,
         libraryPropertyAverage,
         metricLibraryPercentChange,
@@ -271,10 +271,10 @@ function* getDoughnutSectionInfoData({ payload }) {
           industryChartData,
           industryMaxKey,
           industryMaxValue,
-          libraryDayAverages: Object.values(libraryDayAverages).map((val) =>
+          libraryDateAverages: Object.values(libraryDateAverages).map((val) =>
             Math.floor(val * 100)
           ),
-          industryDayAverages: Object.values(industryDayAverages).map((val) =>
+          industryDateAverages: Object.values(industryDateAverages).map((val) =>
             Math.floor(val * 100)
           ),
           videoPropertyAverage: Math.floor(

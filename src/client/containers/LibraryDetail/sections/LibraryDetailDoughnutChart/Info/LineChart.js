@@ -40,10 +40,10 @@ class LineChartSection extends React.Component {
                     labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
                     datasets: [
                       {
-                        data: modalData.libraryDayAverages,
+                        data: modalData.libraryDateAverages,
                       },
                       {
-                        data: modalData.industryDayAverages,
+                        data: modalData.industryDateAverages,
                       },
                     ],
                   }}
