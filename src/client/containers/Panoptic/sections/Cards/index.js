@@ -10,15 +10,21 @@ import styles from './style.scss'
 import { ucfirst, metricSuffix } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
-const days = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-]
+const getWeekDays = (locale) => {
+  let days = []
+  let currentDate = new Date()
+  
+  for(let i = 0; i < 7; i++)
+  {       
+    days.push(currentDate.toLocaleDateString(locale, { 
+      weekday: 'long' 
+    }))
+    currentDate.setDate(currentDate.getDate() - 1)      
+  }
+  return days
+}
+
+const days = getWeekDays('en-US').reverse()
 
 function parseData(props) {
   const { data, title } = props
