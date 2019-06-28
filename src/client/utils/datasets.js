@@ -644,6 +644,12 @@ const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
   return result
 }
 
+// convert an array of numbers into an array of their distrubted percentages
+const convertNumberArrIntoPercentages = (arr = []) => {
+  const sum = arr.reduce((tot, n) => (tot += n), 0)
+  return arr.map((n) => parseFloat(((n / sum) * 100).toFixed(2)))
+}
+
 export {
   convertDataIntoDatasets,
   chartCombineDataset,
@@ -655,5 +661,6 @@ export {
   parseAverage,
   convertVideoEngagementData,
   getMinMaxFromDatasets,
+  convertNumberArrIntoPercentages,
   convertIntoLibAndIndustryDoughnut,
 }
