@@ -12,6 +12,9 @@
 }
 
 .labelContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   margin-left: 50px;
   margin-top: 10px;
   width: 200px;
