@@ -23,6 +23,7 @@ export const types = {
   BRAND_INSIGHT_REQUEST: 'Reports/BRAND_INSIGHT_REQUEST',
   BRAND_INSIGHT_REQUEST_SUCCESS: 'Reports/BRAND_INSIGHT_REQUEST_SUCCESS',
   BRAND_INSIGHT_REQUEST_ERROR: 'Reports/BRAND_INSIGHT_REQUEST_ERROR',
+  BRAND_INSIGHT_SELECTED_REQUEST: 'Reports/BRAND_INSIGHT_SELECTED_REQUEST',
 
   COMPARE_BRAND_REQUEST: 'Reports/COMPARE_BRAND_REQUEST',
   COMPARE_BRAND_REQUEST_SUCCESS: 'Reports/COMPARE_BRAND_REQUEST_SUCCESS',
@@ -107,6 +108,10 @@ export const actions = {
   brandInsightFormSubmitError: (error) => ({
     type: types.BRAND_INSIGHT_REQUEST_ERROR,
     error,
+  }),
+  brandInsightReportSave: (payload) => ({
+    type: types.BRAND_INSIGHT_SELECTED_REQUEST,
+    payload,
   }),
   compareBrandFormSubmit: (values) => ({
     type: types.COMPARE_BRAND_REQUEST,
@@ -205,6 +210,10 @@ export const initialState = fromJS({
     data: null,
     error: false,
     loading: false,
+    control: {
+      isSaved: false, // saved created report?
+      uuid: null,
+    },
   },
   contentVitalityScoreData: {
     data: [],
@@ -316,6 +325,16 @@ const reportsReducer = (state = initialState, action) => {
       return state
         .setIn(['brandInsightValues', 'error'], fromJS(action.error))
         .setIn(['brandInsightValues', 'loading'], fromJS(false))
+    case types.BRAND_INSIGHT_SELECTED_REQUEST: {
+      console.log('ACTION', action)
+      return state
+        .setIn(
+          ['brandInsightValues', 'control', 'isSaved'],
+          action.payload.isSaved
+        )
+        .setIn(['brandInsightValues', 'control', 'uuid'], action.payload.uuid)
+    }
+
     /** END submit brand insight form */
 
     /** START submit brand insight form */

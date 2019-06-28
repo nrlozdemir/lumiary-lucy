@@ -198,9 +198,7 @@ const Selector = (props) => {
     }
   } else if (navigationSubRoutes) {
     return {
-      leftSide: (
-        <BackTo {...url} themes={props.themes} />
-      ),
+      leftSide: <BackTo {...url} themes={props.themes} />,
       navigation: (
         <SubNavigation {...navigationSubRoutes.routes} themes={props.themes} />
       ),
@@ -266,12 +264,24 @@ class Navbar extends React.Component {
   swicthChange(category) {
     const {
       saveReportRequest,
-      brandInsightValue: { data: brandInsightValue },
+      loadDeleteReport,
+      brandInsightValue: {
+        data: brandInsightValue,
+        control: { isSaved, uuid },
+      },
       comparebrandValues: { data: comparebrandValues },
       predefinedReportValues: { data: predefinedReportValues },
     } = this.props
 
     if (category === 'Brands Insights' && brandInsightValue) {
+      this.setState({
+        swicthControl: !isSaved,
+      })
+      if (isSaved) {
+        return loadDeleteReport({
+          uuid,
+        })
+      }
       saveReportRequest({
         ...brandInsightValue,
         category,
@@ -287,13 +297,10 @@ class Navbar extends React.Component {
         category,
       })
     }
-
-    this.setState({
-      swicthControl: true,
-    })
   }
 
   render() {
+    console.log('===', this.props)
     return (
       <React.Fragment>
         <Template
