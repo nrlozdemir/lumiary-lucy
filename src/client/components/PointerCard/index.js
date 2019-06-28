@@ -35,7 +35,16 @@ class PointerCard extends React.Component {
     clearInterval(this.interval)
   }
 
-  resetPointer = (to) => {
+  resetPointer = (target) => {
+    let to = target
+    const { data: { avg = 0 } } = this.props
+
+    //if the target is too low or too high,
+    //set the pointer 0 or 180 degree
+    to = target < 0 
+        ? 0 
+        : target > avg * 2 ? avg * 2 : target 
+
     this.interval = setInterval(() => {
       this.setState(
         ({ pointerData }) => ({
@@ -152,7 +161,7 @@ class PointerCard extends React.Component {
             <div className={style.pointer}>
               <div
                 className={cn(
-                  pointerData <= 90 && style.left,
+                  pointerData <= data.avg && style.left,
                   style.pointerInner
                 )}
                 style={{
