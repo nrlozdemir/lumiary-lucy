@@ -14,7 +14,7 @@ const DAYS = [
 ]
 
 const containerClassnames = classnames(
-  'col-12-gutter-20 mt-16',
+  'col-12-gutter-20 mt-48',
   style.container
 )
 
