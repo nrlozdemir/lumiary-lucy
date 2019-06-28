@@ -34,6 +34,10 @@ export const initialState = {
           name: 'barstoolsports',
           uuid: '1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6',
         },
+        {
+          name: 'espn',
+          uuid: '40002bf1-c2d3-41cb-8d85-77f5533d7b45',
+        },
       ],
     },
   },

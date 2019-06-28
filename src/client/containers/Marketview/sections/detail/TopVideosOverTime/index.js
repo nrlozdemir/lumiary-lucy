@@ -45,6 +45,7 @@ class TopVideosOverTime extends React.Component {
     } else if (container === 'platform') {
       getPlatformTopVideosRequest(data)
     } else {
+      console.log('getCompetitorTopVideosRequest', data)
       getCompetitorTopVideosRequest(data)
     }
   }
