@@ -13,9 +13,10 @@ import {
 import mock from 'Api/mocks/libraryMock.json'
 import { findIdDetail, getDataFromApi, buildApiUrl } from 'Utils/api'
 
-import { getMaximumValueIndexFromArray, getLabelWithSuffix } from 'Utils'
+import { getMaximumValueIndexFromArray } from 'Utils'
 
 import {
+  convertIntoLibAndIndustryDoughnut,
   convertDataIntoDatasets,
   convertColorTempToDatasets,
   parseAverage,
@@ -182,7 +183,6 @@ function* getShotInfoRequest({ payload }) {
   try {
     const { brandUuid, videoUuid, shotId } = payload
 
-
     if (!!brandUuid && !!videoUuid && !!shotId) {
       const url = `/brand/${brandUuid}/video/${videoUuid}/shots/${shotId}`
 
@@ -224,7 +224,7 @@ function* getDoughnutSectionInfoData({ payload }) {
     const { brand } = yield select(selectAuthProfile)
 
     if (!!brand && !!videoId && !!dateRange && !!metric && !!infoData) {
-      let {
+      const {
         libraryMetricPercents,
         industryMetricPercents,
         libraryDayAverages,
@@ -236,87 +236,41 @@ function* getDoughnutSectionInfoData({ payload }) {
         getDataFromApi,
         undefined,
         buildApiUrl(`/brand/${brand.uuid}/video/${videoId}/compare`, {
-          metric: property,
-          property: metric,
+          metric,
+          property,
           daterange: dateRange,
         }),
         'GET'
       )
 
-      let libraryChartData = null,
-        libraryMaxKey,
-        libraryMaxValue,
-        libraryChartMax
+      const {
+        chartData: libraryChartData,
+        maxKey: libraryMaxKey,
+        maxValue: libraryMaxValue,
+      } = convertIntoLibAndIndustryDoughnut(
+        libraryMetricPercents,
+        property,
+        '#2FD7C4'
+      )
 
-      if (
-        Object.keys(libraryMetricPercents).length &&
-        !Object.keys(libraryMetricPercents).includes('undefined')
-      ) {
-        libraryChartMax = _.max(Object.values(libraryMetricPercents))
-
-        libraryChartData = {
-          labels: Object.keys(libraryMetricPercents).map((key) =>
-            getLabelWithSuffix(key, metric)
-          ),
-          datasets: [
-            {
-              borderColor: '#ACB0BE',
-              label: infoData.title,
-              data: Object.values(libraryMetricPercents).map((val) =>
-                Math.floor(val * 100)
-              ),
-              backgroundColor: Object.values(libraryMetricPercents).map((val) =>
-                val === libraryChartMax ? '#2FD7C4' : '#fff'
-              ),
-              hoverBackgroundColor: [],
-            },
-          ],
-        }[(libraryMaxKey, libraryMaxValue)] = Object.entries(
-          libraryMetricPercents
-        ).sort(([, v1], [, v2]) => (v1 > v2 ? -1 : 1))[0]
-      }
-
-      let industryChartData = null,
-        industryChartMax,
-        industryMaxKey,
-        industryMaxValue
-
-      if (
-        Object.keys(industryMetricPercents).length &&
-        !Object.keys(industryMetricPercents).includes('undefined')
-      ) {
-        industryChartMax = _.max(Object.values(industryMetricPercents))
-
-        industryChartData = {
-          labels: Object.keys(industryMetricPercents).map((key) =>
-            getLabelWithSuffix(key, metric)
-          ),
-          datasets: [
-            {
-              borderColor: '#ACB0BE',
-              label: infoData.title,
-              data: Object.values(industryMetricPercents).map((val) =>
-                Math.floor(val * 100)
-              ),
-              backgroundColor: Object.values(industryMetricPercents).map(
-                (val) => (val === industryChartMax ? '#2FD7C4' : '#fff')
-              ),
-              hoverBackgroundColor: [],
-            },
-          ],
-        }[(industryMaxKey, industryMaxValue)] = Object.entries(
-          industryMetricPercents
-        ).sort(([, v1], [, v2]) => (v1 > v2 ? -1 : 1))[0]
-      }
+      const {
+        chartData: industryChartData,
+        maxKey: industryMaxKey,
+        maxValue: industryMaxValue,
+      } = convertIntoLibAndIndustryDoughnut(
+        industryMetricPercents,
+        property,
+        '#8562f3'
+      )
 
       yield put(
         actions.doughnutInfoIndustrySuccess({
           libraryChartData,
           libraryMaxKey,
-          libraryMaxValue: Math.floor(libraryMaxValue * 100),
+          libraryMaxValue,
           industryChartData,
           industryMaxKey,
-          industryMaxValue: Math.floor(industryMaxValue * 100),
+          industryMaxValue,
           libraryDayAverages: Object.values(libraryDayAverages).map((val) =>
             Math.floor(val * 100)
           ),

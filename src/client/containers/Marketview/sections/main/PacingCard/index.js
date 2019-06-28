@@ -15,6 +15,7 @@ import classnames from 'classnames'
 import { isDataSetEmpty } from 'Utils/datasets'
 import { pacingCard_DatasetOptions } from './options'
 import { isEmpty } from 'lodash'
+import RouterLoading from 'Components/RouterLoading'
 
 class PacingCard extends Component {
   componentDidMount() {
@@ -27,7 +28,7 @@ class PacingCard extends Component {
     } = this.props
 
     const isDataEmpty = (!loading && isDataSetEmpty(data)) || isEmpty(data)
-    
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -38,12 +39,12 @@ class PacingCard extends Component {
               color: colors.textColor,
             }}
           >
-            {isDataEmpty && (
+            {(loading || (isDataEmpty && !loading)) && (
               <div
                 className={style.marketViewCardEmpty}
                 style={{ backgroundColor: colors.moduleBackgroundOpacity }}
               >
-                No Data Available
+                {loading ? <RouterLoading /> : 'No Data Available'}
               </div>
             )}
             <div className={style.marketViewCardTitle}>Pacing</div>

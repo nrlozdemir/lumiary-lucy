@@ -91,6 +91,8 @@ export const types = {
     'Marketview/GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_SUCCESS',
   GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_FAILURE:
     'Marketview/GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_FAILURE',
+  SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY:
+    'Marketview/SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY',
 }
 export const actions = {
   getCompetitorVideosRequest: (payload) => ({
@@ -249,7 +251,12 @@ export const actions = {
     type: types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_FAILURE,
     error,
   }),
+  setCompetitorTopProperty: (payload) => ({
+    type: types.SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY,
+    payload,
+  }),
 }
+
 export const initialState = fromJS({
   competitorTopVideos: {
     data: [],
@@ -313,6 +320,7 @@ export const initialState = fromJS({
     loading: false,
     error: null,
   },
+  topProperty: null,
 })
 
 const marketviewReducer = (state = initialState, action) => {
@@ -427,6 +435,7 @@ const marketviewReducer = (state = initialState, action) => {
       return state
         .setIn(['similarProperties', 'loading'], fromJS(true))
         .setIn(['similarProperties', 'error'], fromJS(null))
+
     case types.GET_MARKETVIEW_SIMILAR_PROPERTIES_SUCCESS:
       return state
         .setIn(['similarProperties', 'data'], fromJS(action.payload))
@@ -477,6 +486,7 @@ const marketviewReducer = (state = initialState, action) => {
         ['topPerformingPropertiesByCompetitorsData', 'loading'],
         fromJS(true)
       )
+
     case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_SUCCESS:
       return state
         .setIn(
@@ -512,6 +522,9 @@ const marketviewReducer = (state = initialState, action) => {
       return state
         .setIn(['topPerformingPropertiesData', 'error'], fromJS(action.error))
         .setIn(['topPerformingPropertiesData', 'loading'], fromJS(false))
+
+    case types.SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY:
+      return state.set('topProperty', fromJS(action.payload))
 
     default:
       return state
@@ -560,6 +573,12 @@ export const makeSelectMarketviewLoading = () =>
   createSelector(
     selectMarketviewDomain,
     (substate) => substate.toJS().loading
+  )
+
+export const makeSelectMarketviewTopProperty = (state) =>
+  createSelector(
+    selectMarketviewDomain,
+    (substate) => substate.toJS().topProperty
   )
 
 export const makeSelectMarketview = () =>

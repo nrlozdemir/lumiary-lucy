@@ -85,7 +85,7 @@ export class LibraryDetail extends React.Component {
         barChartData,
         doughnutData,
         colorTempData,
-        shotByShotData,
+        shotByShotData: { data: shotByShotData, loading: shotByShotLoading },
         selectedVideo,
         selectedVideoAverage,
       },
@@ -106,10 +106,16 @@ export class LibraryDetail extends React.Component {
             cvScore={selectedVideo['cvScores.value']}
           />
         )}
-        {doughnutData && <LibraryDetailDoughnutChart videoId={videoId} />}
-        {shotByShotData && (
-          <LibraryDetailShotByShot shots={shotByShotData.video.shots} />
-        )}
+        <LibraryDetailDoughnutChart videoId={videoId} />
+        <LibraryDetailShotByShot
+          shots={
+            (!!shotByShotData &&
+              !!shotByShotData.video &&
+              shotByShotData.video.shots) ||
+            []
+          }
+          loading={shotByShotLoading}
+        />
       </React.Fragment>
     )
   }

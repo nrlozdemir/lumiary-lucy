@@ -1,9 +1,8 @@
 import { chartColors, expectedNames } from 'Utils/globals'
 import {
-  capitalizeFirstLetter,
+  ucfirst,
   metricSuffix,
   strToColor,
-  ucfirst,
   normalize,
   getTimeBucket,
   getLabelWithSuffix,
@@ -279,20 +278,20 @@ const compareSharesData = (payload) => {
     const type = (isArray ? item.platform : value) || keyName
 
     return {
-      type: capitalizeFirstLetter(type),
+      type: ucfirst(type),
       datas: {
         labels: labels.map((color) => {
           return {
             name: color[0]
               .split('-')
-              .map((c) => capitalizeFirstLetter(c))
+              .map((c) => ucfirst(c))
               .join('-'),
             count: color[1],
           }
         }),
         datasets: [
           {
-            label: capitalizeFirstLetter(type),
+            label: ucfirst(type),
           },
         ],
       },
@@ -322,7 +321,7 @@ const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
       })
 
       return {
-        label: capitalizeFirstLetter(label),
+        label: ucfirst(label),
         backgroundColor: chartColors[index],
         borderColor: chartColors[index],
         borderWidth: 1,
@@ -332,8 +331,8 @@ const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
   )
   return {
     labels: !revert
-      ? firstPayloadLabels.map((key) => capitalizeFirstLetter(key))
-      : datasetLabels.map((label) => capitalizeFirstLetter(label)),
+      ? firstPayloadLabels.map((key) => ucfirst(key))
+      : datasetLabels.map((label) => ucfirst(label)),
     datasets,
   }
 }
@@ -447,8 +446,12 @@ const parseAverage = (payload) => {
     return acc
   }, {})
 
-  Object.keys(payload.video).forEach((item) => {
+  Object.keys(payload.video).forEach((payloadRow) => {
+    const item = payloadRow
+      .replace('cvScores.library_', '')
+      .replace('_p', 's.p')
     let keyName = item.substr(0, item.indexOf('.'))
+
     if (item.includes('diffFromLibrary')) {
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
@@ -460,6 +463,15 @@ const parseAverage = (payload) => {
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
         value: parseFloat(payload.video[item]).toFixed(0),
+      }
+    }
+    if (item.includes('percentile')) {
+      keyName = keyName.slice(0, keyName.length - 1)
+      calculateAverage[keyName] = {
+        ...calculateAverage[keyName],
+        percentile: parseFloat(
+          payload.video[`cvScores.library_${item.replace('s.', '_')}`]
+        ).toFixed(0),
       }
     }
   })
@@ -589,6 +601,49 @@ const getMinMaxFromDatasets = (datasets = [], initial = 0, type = 'max') => {
     : 0
 }
 
+// @param - Vals {object} key/value pair of label/oercentage
+const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
+  const result = {
+    maxKey: null,
+    maxValue: null,
+    chartData: null,
+  }
+
+  const keys = (!!obj && Object.keys(obj)) || []
+
+  const vals = (!!keys.length && Object.values(obj)) || []
+
+  if (!!vals.length) {
+    const { maxKey, maxVal } = keys.reduce(
+      (max, currentKey) => {
+        const { maxKey, maxVal } = max
+        const val = Math.floor(obj[currentKey] * 100)
+        const isHigher = val >= maxVal
+        return {
+          maxKey: isHigher ? currentKey : maxKey,
+          maxVal: isHigher ? val : maxVal,
+        }
+      },
+      { maxKey: null, maxVal: 0 }
+    )
+
+    result.maxKey = getLabelWithSuffix(maxKey, property)
+    result.maxValue = maxVal
+    result.chartData = {
+      labels: keys.map((key) => getLabelWithSuffix(key, property)),
+      datasets: [
+        {
+          borderColor: '#ACB0BE',
+          data: vals.map((val) => Math.floor(val * 100)),
+          backgroundColor: keys.map((key) => (key === maxKey ? color : '#fff')),
+          hoverBackgroundColor: [],
+        },
+      ],
+    }
+  }
+  return result
+}
+
 export {
   convertDataIntoDatasets,
   chartCombineDataset,
@@ -600,4 +655,5 @@ export {
   parseAverage,
   convertVideoEngagementData,
   getMinMaxFromDatasets,
+  convertIntoLibAndIndustryDoughnut,
 }

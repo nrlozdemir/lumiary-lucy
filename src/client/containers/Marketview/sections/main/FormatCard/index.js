@@ -11,6 +11,7 @@ import SingleVideoCard from 'Components/SingleVideoCard'
 import style from 'Containers/Marketview/style.scss'
 import formatStyles from './style.scss'
 import { isDataSetEmpty } from 'Utils/datasets'
+import RouterLoading from 'Components/RouterLoading'
 import { isEmpty } from 'lodash'
 
 class FormatCard extends Component {
@@ -59,12 +60,12 @@ class FormatCard extends Component {
               color: colors.textColor,
             }}
           >
-            {isDataEmpty && (
+            {(loading || (isDataEmpty && !loading)) && (
               <div
                 className={style.marketViewCardEmpty}
                 style={{ backgroundColor: colors.moduleBackgroundOpacity }}
               >
-                No Data Available
+                {loading ? <RouterLoading /> : 'No Data Available'}
               </div>
             )}
             <div className={style.marketViewCardTitle}>Format</div>

@@ -16,7 +16,7 @@ import { selectFiltersToType } from 'Utils'
 import { isDataSetEmpty } from 'Utils/datasets'
 import { chartColors } from 'Utils/globals'
 
-import { isEmpty, isEqual } from 'lodash'
+import { isEmpty } from 'lodash'
 
 class TotalViewsChart extends React.Component {
   callBack = (data, moduleKey) => {
@@ -37,9 +37,9 @@ class TotalViewsChart extends React.Component {
     const isBarChartEmpty = isDataSetEmpty(barData)
 
     const hasNoData =
-      (!loading &&
-        (!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty)) ||
-      isEmpty(data)
+      !loading &&
+      ((!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty) ||
+        isEmpty(data))
 
     const moduleKey = 'Marketview/StackedBarChart'
     const selects = selectFiltersToType(
@@ -72,28 +72,31 @@ class TotalViewsChart extends React.Component {
           },
         ]}
         isEmpty={hasNoData}
+        loading={loading}
       >
         <div className="grid-collapse">
           <div className="col-6 mt-24">
-            <StackedBarChart barData={barData} />
+            <StackedBarChart barData={loading ? {} : barData} />
           </div>
           <div className="col-6">
             <DoughnutChart
               width={270}
               height={270}
-              data={doughnutData}
+              data={loading ? {} : doughnutData}
               cutoutPercentage={58}
               fillText="Total Percentage"
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
               labelPositionLeft
               labelsData={
-                (!!doughnutData &&
-                  doughnutData.labels.map((label, idx) => ({
-                    data: label,
-                    color: chartColors[idx],
-                  }))) ||
-                []
+                loading
+                  ? []
+                  : (!!doughnutData &&
+                      doughnutData.labels.map((label, idx) => ({
+                        data: label,
+                        color: chartColors[idx],
+                      }))) ||
+                    []
               }
             />
           </div>

@@ -19,7 +19,7 @@ class TotalCompetitorCard extends React.Component {
 
   render() {
     const {
-      totalCompetitorViewsData: { data },
+      totalCompetitorViewsData: { data, loading },
     } = this.props
 
     const isEmpty = isDataSetEmpty(data)
@@ -48,6 +48,7 @@ class TotalCompetitorCard extends React.Component {
         isEmpty={isEmpty}
         titleLabels={(hasDatasets && data.datasets.map((d) => d.label)) || []}
         tickOptions={chartTickOptions}
+        loading={loading}
       />
     )
   }

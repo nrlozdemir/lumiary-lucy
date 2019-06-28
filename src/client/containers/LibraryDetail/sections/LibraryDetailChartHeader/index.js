@@ -4,13 +4,15 @@ import style from './style.scss'
 import Video from '../VideoComponent'
 import FlipCard from 'Components/FlipCard'
 import ProgressBar from 'Components/ProgressBar'
-import { capitalizeFirstLetter, metricSuffix } from 'Utils'
+import { ucfirst, metricSuffix } from 'Utils'
 import { textEdit } from 'Utils/text'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 const Front = (props) => {
   const { data, colors, title } = props
-  const percentage = (100 * data.value) / data.max
+  //let percentage = (100 * data.value) / data.max
+  let percentage = parseInt(data.percentile) || 0 
+
   return (
     <div className={style.frontContainer}>
       <div className={style.videoStat}>
@@ -24,7 +26,7 @@ const Front = (props) => {
         )}
         <div className={style.progressText}>
           <span className={style.leftTitle}>
-            {capitalizeFirstLetter(title)}
+            {ucfirst(title)}
           </span>
           <span className={style.rightTitle}>{metricSuffix(data.value)}</span>
         </div>
@@ -32,15 +34,11 @@ const Front = (props) => {
           width={
             percentage > 100
               ? 100
-              : parseFloat(percentage).toFixed(2) > 0 &&
-                parseFloat(percentage).toFixed(2) < 1
-              ? 1
               : parseFloat(percentage).toFixed(2)
           }
           customBarClass={style.progressBar}
           customPercentageClass={classnames(style.percentageIncrease, {
-            [style.percentageDecrease]:
-              parseInt((data.average / data.value) * 100) < 50,
+            [style.percentageDecrease]: percentage < 50,
           })}
           tickColor={colors.progressLibraryDetailTickColor}
           progressBarBackgroundColor={colors.progressLibraryDetailBackground}
