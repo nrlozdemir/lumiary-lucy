@@ -6,7 +6,6 @@ import { actions, makeSelectPanopticCompareShares } from 'Reducers/panoptic'
 //import classnames from 'classnames'
 import RadarChartModule from 'Components/Modules/RadarChartModule'
 //import style from './style.scss'
-import emptyData from './emptyData.json'
 
 class CompareShares extends React.Component {
   callBack = (data, moduleKey) => {
@@ -20,7 +19,7 @@ class CompareShares extends React.Component {
 
     return (
       <RadarChartModule
-        data={data || emptyData}
+        data={data}
         moduleKey={'Panoptic/compareShares'}
         leftTitle="Facebook"
         rightTitle="YouTube"

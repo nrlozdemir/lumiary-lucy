@@ -84,6 +84,7 @@ class ColorComparison extends React.Component {
         moduleKey={'Reports/ColorComparison'}
         title="Video Library Color Comparison"
         action={this.callBack}
+        loading={loading}
         filters={[
           {
             type: 'metric',

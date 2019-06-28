@@ -27,6 +27,7 @@ class VideoComparison extends React.Component {
             placeHolder: 'Date',
           },
         ]}
+        loading={loading}
         legend={
           <div className={style.headerLabel}>
             <div

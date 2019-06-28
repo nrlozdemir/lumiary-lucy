@@ -87,6 +87,7 @@ class PerformanceComparison extends React.Component {
           dataLabelInsert: '%',
           options: stackedChartOptions,
         }}
+        loading={loading}
       />
     )
   }
