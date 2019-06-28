@@ -2,7 +2,7 @@
   position: relative;
   height: 480px;
   overflow: hidden;
-  padding-top: 50px;
+  margin-top: 16px;
 }
 
 .pagination {
@@ -46,6 +46,10 @@
 
     span {
       font-size: 14px;
+      margin: 8px 0px 0px;
+      display: flex;
+      justify-content: left;
+      align-items: baseline;
 
       i {
         margin-right: 8px;
