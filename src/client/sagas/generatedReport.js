@@ -3,7 +3,11 @@ import { push } from 'connected-react-router'
 import axios from 'axios'
 import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/generatedReport'
+<<<<<<< HEAD
 import querystring from 'querystring'
+=======
+import { actions as reportsActions } from 'Reducers/reports'
+>>>>>>> feat: generated report switch save/delete
 
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 import reportsMockData from 'Api/mocks/reports.json'
@@ -58,9 +62,21 @@ function* saveReport({ data }) {
         `/user/${uuid}/report/?type=insights`,
         'POST'
       )
+
+      // const response = {
+      //   uuid: 'test',
+      // }
       console.log('response', response)
-      yield put(actions.saveReportSuccess(response))
-      yield put(push('/reports'))
+      if (!!response) {
+        yield put(actions.saveReportSuccess(response))
+        yield put(
+          reportsActions.brandInsightReportSave({
+            isSaved: true,
+            uuid: response.uuid,
+          })
+        )
+      }
+      // yield put(push('/reports'))
     } else if (category === 'Compare Brands') {
       const { title, brands } = data
 

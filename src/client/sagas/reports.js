@@ -146,13 +146,37 @@ function* predefinedReportRequest({ payload }) {
   }
 }
 
-function* deleteReport(data) {
-  yield put(actions.loadDeleteReportSuccess(data.payload))
-  // try {
+function* deleteReport({ payload: id }) {
+  console.log(id)
+  try {
+    const {
+      brand: { uuid },
+    } = yield select(selectAuthProfile)
 
-  // } catch (err) {
-  //   yield put(actions.loadDeleteReportError(err))
-  // }
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      `/user/${uuid}/report/${id}`,
+      'DELETE'
+    )
+
+    if (!!response) {
+      yield put(actions.loadDeleteReportSuccess(response))
+      yield put({
+        type: types.BRAND_INSIGHT_SELECTED_REQUEST,
+        payload: {
+          isSaved: false,
+          uuid: id,
+        },
+      })
+      // yield call(getReports)
+    } else {
+      throw 'Error deleting a report on report page'
+    }
+  } catch (err) {
+    console.log('err', err)
+    yield put(actions.loadDeleteReportError(err))
+  }
 }
 
 function* getPredefinedReportChartRequest({ payload }) {

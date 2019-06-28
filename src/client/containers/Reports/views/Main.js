@@ -76,6 +76,7 @@ class Reports extends Component {
   }
 
   deleteReportAction(id) {
+    console.log('id', id)
     this.props.loadDeleteReport(id)
   }
 
@@ -245,7 +246,7 @@ class Reports extends Component {
                         {
                           Header: null,
                           width: 65,
-                          Cell: ({ original: { id } }) => (
+                          Cell: ({ original: { uuid } }) => (
                             <div className={style.deleteWrapper} tabIndex="1">
                               <div
                                 className={style.deleteIcon}
@@ -260,7 +261,7 @@ class Reports extends Component {
                                     color: colors.tablePopoverDeleteColor,
                                   }}
                                   onClick={(e) => {
-                                    this.deleteReportAction(id)
+                                    this.deleteReportAction(uuid)
                                   }}
                                 >
                                   Delete Report
@@ -279,8 +280,6 @@ class Reports extends Component {
                         },
                       ]}
                     />
-
-                    {/* onClick={() => this.deleteReportAction(id)} */}
 
                     <div className={style.reportsTableFooter}>
                       {/* <Button
