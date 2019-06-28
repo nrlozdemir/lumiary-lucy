@@ -169,7 +169,7 @@ export const initialState = fromJS({
     error: null,
   },
   compareSharesData: {
-    data: [],
+    data: null,
     loading: false,
     error: null,
   },
