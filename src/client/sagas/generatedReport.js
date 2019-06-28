@@ -3,11 +3,8 @@ import { push } from 'connected-react-router'
 import axios from 'axios'
 import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/generatedReport'
-<<<<<<< HEAD
-import querystring from 'querystring'
-=======
 import { actions as reportsActions } from 'Reducers/reports'
->>>>>>> feat: generated report switch save/delete
+import querystring from 'querystring'
 
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
 import reportsMockData from 'Api/mocks/reports.json'
