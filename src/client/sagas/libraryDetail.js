@@ -272,13 +272,13 @@ function* getDoughnutSectionInfoData({ payload }) {
       )
 
       const lineChartData = {
-        labels: Object.keys(libraryDateCounts),
+        labels: Object.keys(libraryDateCounts).reverse(),
         datasets: [
           {
-            data: libraryPercentages,
+            data: libraryPercentages.reverse(),
           },
           {
-            data: industryPercentages,
+            data: industryPercentages.reverse(),
           },
         ],
       }
