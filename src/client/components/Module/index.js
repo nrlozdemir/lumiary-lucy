@@ -53,6 +53,7 @@ export class Module extends React.Component {
       isEmpty,
       containerClass,
       loading,
+      customEmptyClasses,
     } = this.props
 
     const { infoShow } = this.state
@@ -109,7 +110,9 @@ export class Module extends React.Component {
                 </div>
               )}
               {isEmpty && !loading && (
-                <div className={style.moduleEmpty}>No Data Available</div>
+                <div className={cx(style.moduleEmpty, customEmptyClasses)}>
+                  No Data Available
+                </div>
               )}
               {loading && (
                 <div className={style.moduleEmpty}>
@@ -139,6 +142,7 @@ Module.propTypes = {
   bodyClass: PropTypes.string,
   containerClass: PropTypes.string,
   isEmpty: PropTypes.bool,
+  customEmptyClasses: PropTypes.string,
 }
 
 export default connect(

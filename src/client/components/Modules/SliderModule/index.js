@@ -19,6 +19,11 @@ const SliderModule = (props) => {
     loading,
   } = props
 
+  const videoOptions =
+    !!selectedVideo && !!selectedVideo.options && !loading
+      ? selectedVideo.options
+      : [...Array(3).keys()]
+
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -30,24 +35,31 @@ const SliderModule = (props) => {
           filters={filters}
           action={action}
           isEmpty={isEmpty(data) && !loading}
+          customEmptyClasses={style.sliderEmpty}
         >
-          {!loading ? (
-            <React.Fragment>
-              <div className="col-12-no-gutters">
+          <React.Fragment>
+            <div className="col-12-no-gutters">
+              {!loading ? (
                 <Slider items={data} changeVideo={changeSelectedVideo} />
-              </div>
-              <div className={style.sliderGrid}>
-                {selectedVideo &&
-                  selectedVideo.options.map((card, index) => (
-                    <div
-                      className={style.card}
-                      key={index}
-                      style={{
-                        backgroundColor: colors.bodyBackground,
-                        color: colors.textColor,
-                        border: ` 1px solid ${colors.moduleBorder}`,
-                      }}
-                    >
+              ) : (
+                <div className={style.sliderLoader}>
+                  <RouterLoading />
+                </div>
+              )}
+            </div>
+            <div className={style.sliderGrid}>
+              {videoOptions.map((card, index) => (
+                <div
+                  className={style.card}
+                  key={index}
+                  style={{
+                    backgroundColor: colors.bodyBackground,
+                    color: colors.textColor,
+                    border: ` 1px solid ${colors.moduleBorder}`,
+                  }}
+                >
+                  {!loading ? (
+                    <React.Fragment>
                       <p className={style.marketCardHeader}>{card.name}</p>
                       {!!card.compareValues ? (
                         <React.Fragment>
@@ -79,16 +91,17 @@ const SliderModule = (props) => {
                         </React.Fragment>
                       ) : (
                         <div className={style.cardEmpty}>No Data Available</div>
-                      )}
+                      )}{' '}
+                    </React.Fragment>
+                  ) : (
+                    <div className={style.cardEmpty}>
+                      <RouterLoading />
                     </div>
-                  ))}
-              </div>
-            </React.Fragment>
-          ) : (
-            <div>
-              <RouterLoading />
+                  )}
+                </div>
+              ))}
             </div>
-          )}
+          </React.Fragment>
         </Module>
       )}
     </ThemeContext.Consumer>
