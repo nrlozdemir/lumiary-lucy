@@ -7,6 +7,7 @@ class PointerCard extends React.Component {
     super(props)
     this.state = {
       pointerData: 0,
+      pointerTextVal: null
     }
   }
 
@@ -54,6 +55,7 @@ class PointerCard extends React.Component {
           const { pointerData: current } = this.state
 
           if (current === to) {
+            this.setState({ pointerTextVal: target < 0 || target > avg * 2 ? target : null })
             clearInterval(this.interval)
           }
         }
@@ -63,7 +65,7 @@ class PointerCard extends React.Component {
 
   render() {
     const { data, colors } = this.props
-    const { pointerData } = this.state
+    const { pointerData, pointerTextVal } = this.state
 
     return (
       <div className={style.radialChart}>
@@ -242,7 +244,7 @@ class PointerCard extends React.Component {
                         background: colors.moduleBackground,
                       }}
                     >
-                      {`${pointerData}${pointerData >= 1000 ? 'k' : ''}`}
+                      {`${pointerTextVal || pointerData}${pointerData >= 1000 ? 'k' : ''}`}
                     </span>
                     <svg height="22" width="55">
                       <line
