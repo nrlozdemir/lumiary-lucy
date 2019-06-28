@@ -48,7 +48,7 @@ class VideoComparison extends React.Component {
           </div>
         }
       >
-        {data && <ComparisonHorizontalBarChart data={data} />}
+        <ComparisonHorizontalBarChart data={data || {}} />
       </Module>
     )
   }

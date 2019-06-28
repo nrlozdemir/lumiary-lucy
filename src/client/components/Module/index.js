@@ -115,7 +115,7 @@ export class Module extends React.Component {
                 </div>
               )}
               {loading && (
-                <div className={style.moduleEmpty}>
+                <div className={cx(style.moduleEmpty, customEmptyClasses)}>
                   <RouterLoading />
                 </div>
               )}
