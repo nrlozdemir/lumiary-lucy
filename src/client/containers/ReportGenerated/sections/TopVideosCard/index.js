@@ -9,11 +9,12 @@ class TopVideosCard extends React.Component {
 
   render() {
     const {
-      data: { data },
+      data: { data, loading },
     } = this.props
 
     return (
       <TopVideosCardModule
+        loading={loading}
         chartData={data}
         height={150}
         moduleKey="Reports/TopVideosCardModule"

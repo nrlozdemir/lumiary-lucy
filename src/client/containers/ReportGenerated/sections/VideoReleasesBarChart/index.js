@@ -32,6 +32,7 @@ class VideoReleasesBarChart extends React.Component {
         ]}
         legendEnd={true}
         isEmpty={isEmpty}
+        loading={loading}
       />
     )
   }
