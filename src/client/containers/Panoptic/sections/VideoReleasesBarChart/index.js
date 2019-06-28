@@ -33,9 +33,9 @@ class VideoReleasesBarChart extends Component {
         action={this.callBack}
         filters={[
           {
-            type: 'platform',
+            type: 'platformEngagement',
             selectKey: 'PVR-asd',
-            placeHolder: 'Platform',
+            placeHolder: 'Engagement by Platform',
           },
           {
             type: 'dateRange',
