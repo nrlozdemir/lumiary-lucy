@@ -20,6 +20,7 @@ import {
   convertDataIntoDatasets,
   convertColorTempToDatasets,
   parseAverage,
+  convertNumberArrIntoPercentages,
 } from 'Utils/datasets'
 
 import { selectAuthProfile } from 'Reducers/auth'
@@ -227,8 +228,8 @@ function* getDoughnutSectionInfoData({ payload }) {
       const {
         libraryMetricPercents,
         industryMetricPercents,
-        libraryDateAverages,
-        industryDateAverages,
+        libraryDateCounts,
+        industryDateCounts,
         videoPropertyAverage,
         libraryPropertyAverage,
         metricLibraryPercentChange,
@@ -263,6 +264,25 @@ function* getDoughnutSectionInfoData({ payload }) {
         '#8562f3'
       )
 
+      const libraryPercentages = convertNumberArrIntoPercentages(
+        Object.values(libraryDateCounts)
+      )
+      const industryPercentages = convertNumberArrIntoPercentages(
+        Object.values(industryDateCounts)
+      )
+
+      const lineChartData = {
+        labels: Object.keys(libraryDateCounts),
+        datasets: [
+          {
+            data: libraryPercentages,
+          },
+          {
+            data: industryPercentages,
+          },
+        ],
+      }
+
       yield put(
         actions.doughnutInfoIndustrySuccess({
           libraryChartData,
@@ -271,12 +291,7 @@ function* getDoughnutSectionInfoData({ payload }) {
           industryChartData,
           industryMaxKey,
           industryMaxValue,
-          libraryDateAverages: Object.values(libraryDateAverages).map((val) =>
-            Math.floor(val * 100)
-          ),
-          industryDateAverages: Object.values(industryDateAverages).map((val) =>
-            Math.floor(val * 100)
-          ),
+          lineChartData,
           videoPropertyAverage: Math.floor(
             videoPropertyAverage >= 1000
               ? videoPropertyAverage / 1000
