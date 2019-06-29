@@ -13,7 +13,6 @@ import { isEmpty } from 'lodash'
 import { chartColors } from 'Utils/globals'
 
 class TopPerformingFormat extends React.Component {
-
   callBack = (data, moduleKey) => {
     this.props.getTopPerformingFormatData(data)
   }
@@ -49,7 +48,7 @@ class TopPerformingFormat extends React.Component {
       profile,
       topPerformingFormatData: {
         data,
-        data: { doughnutData, percentageData, lineChartData },
+        data: { doughnutData = {}, percentageData = {}, lineChartData = {} },
         loading,
         error,
       },
@@ -59,6 +58,7 @@ class TopPerformingFormat extends React.Component {
       !!profile &&
       !!profile.brand &&
       !!percentageData &&
+      !!percentageData.data &&
       percentageData.data[profile.brand.name].format
 
     const convertedPercentageData =

@@ -89,9 +89,21 @@
   padding: 0px 40px;
 }
 
+.sliderLoader {
+  display: flex;
+  align-items: center;
+  min-height: 496px;
+}
+
 .cardEmpty {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  min-height: 528px;
   margin: auto;
   font-size: 24px;
   font-weight: bold;
+}
+
+.sliderEmpty {
+  height: 496px !important;
 }

@@ -15,7 +15,8 @@
   margin: 0 12px;
   display: flex;
   flex-direction: column;
-
+  min-height: 766px;
+  
   .marketViewCardTitle {
     font-family: $font-family-primary;
     font-size: 32px;

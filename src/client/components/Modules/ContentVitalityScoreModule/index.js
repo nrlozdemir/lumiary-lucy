@@ -24,6 +24,7 @@ const ContentVitalityScoreModule = ({
   flattenFirstSpace,
   flattenLastSpace,
   options,
+  loading = false,
   chartYAxisMax = 100,
 }) => {
   const formattedData = Object.keys(data).reduce(
@@ -73,42 +74,53 @@ const ContentVitalityScoreModule = ({
           action={action}
           filters={filters}
           legend={legend}
+          loading={loading}
         >
-          {formattedData.brand_1 &&
-            formattedData.brand_2 &&
-            formattedData.average && (
-              <div
-                className="col-12-no-gutters"
-                style={{ colors: colors.textColor }}
-              >
-                <div
-                  data-vertical-title="% with CV Score"
-                  className={style.vitalityContainer}
-                >
-                  <LineChart
-                    chartType="lineStackedArea"
-                    width={1140}
-                    height={291}
-                    backgroundColor={colors.chartBackground}
-                    dataSet={{
-                      labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-                      datasets: [
-                        {
-                          data: formattedData.brand_2.videoPercents,
-                        },
-                        {
-                          data: formattedData.brand_1.videoPercents,
-                        },
-                      ],
-                    }}
-                    removeTooltip={removeTooltip}
-                    removePointRadius={removePointRadius}
-                    xAxesFlatten={xAxesFlatten}
-                    flattenFirstSpace={flattenFirstSpace}
-                    flattenLastSpace={flattenLastSpace}
-                    options={options}
-                  />
-                </div>
+          <div
+            className="col-12-no-gutters"
+            style={{ colors: colors.textColor }}
+          >
+            <div
+              data-vertical-title="% with CV Score"
+              className={style.vitalityContainer}
+            >
+              <LineChart
+                chartType="lineStackedArea"
+                width={1140}
+                height={291}
+                backgroundColor={colors.chartBackground}
+                dataSet={
+                  loading
+                    ? {}
+                    : {
+                        labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+                        datasets: [
+                          {
+                            data:
+                              (formattedData.brand_2 &&
+                                formattedData.brand_2.videoPercents) ||
+                              [],
+                          },
+                          {
+                            data:
+                              (formattedData.brand_1 &&
+                                formattedData.brand_1.videoPercents) ||
+                              [],
+                          },
+                        ],
+                      }
+                }
+                removeTooltip={removeTooltip}
+                removePointRadius={removePointRadius}
+                xAxesFlatten={xAxesFlatten}
+                flattenFirstSpace={flattenFirstSpace}
+                flattenLastSpace={flattenLastSpace}
+                options={options}
+              />
+            </div>
+            {formattedData.brand_1 &&
+              formattedData.brand_2 &&
+              formattedData.average && (
                 <div className="row">
                   <div className={percentageCol}>
                     <div
@@ -228,8 +240,8 @@ const ContentVitalityScoreModule = ({
                     />
                   </div>
                 </div>
-              </div>
-            )}
+              )}
+          </div>
         </Module>
       )}
     </ThemeContext.Consumer>

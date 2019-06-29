@@ -10,10 +10,11 @@ import {
   makeSelectInfoShowSection,
   makeSelectInfoModalData,
 } from 'Reducers/libraryDetail'
+import cx from 'classnames'
 
 class BasedOnShares extends React.Component {
   render() {
-    const { modalData, sectionData, title, filters, moduleKey } = this.props
+    const { modalData, sectionData, title, filters, moduleKey, loading } = this.props
 
     const filterTitle =
       (!!filters &&
@@ -51,7 +52,13 @@ class BasedOnShares extends React.Component {
             ) : (
               <React.Fragment>
                 <h1 className={style.panelHeader}>{topTitle}</h1>
-                <div className={style.emptyData}>No Data Available</div>
+                <div
+                  className={cx(style.emptyData, {
+                    [style['emptyData--loading']]: loading,
+                  })}
+                >
+                  {!loading ? 'No Data Available' : ''}
+                </div>
               </React.Fragment>
             )}
           </div>

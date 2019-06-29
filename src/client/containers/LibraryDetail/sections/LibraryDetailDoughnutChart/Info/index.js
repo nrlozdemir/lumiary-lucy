@@ -9,6 +9,7 @@ import IndustryData from './IndustryData'
 import Header from './Header'
 import LineChart from './LineChart'
 import RouterLoading from 'Components/RouterLoading'
+import cx from 'classnames'
 
 const moduleKey = 'LDDH'
 
@@ -29,21 +30,27 @@ const Info = ({ videoId, title, loading, ...rest }) => (
             loading={loading}
             {...rest}
           />
-          {!loading ? (
-            <React.Fragment>
-              <div
-                className={style.dataWrapper}
-                style={{
-                  background: colors.moduleBackground,
-                }}
-              >
-                <LibraryData />
-                <BasedOnShares title={title} moduleKey={moduleKey} {...rest} />
-                <IndustryData />
-              </div>
-              <LineChart />
-            </React.Fragment>
-          ) : (
+          <React.Fragment>
+            <div
+              className={cx(style.dataWrapper, {
+                [style.chartLoading]: loading,
+              })}
+              style={{
+                background: colors.moduleBackground,
+              }}
+            >
+              <LibraryData loading={loading} />
+              <BasedOnShares
+                loading={loading}
+                title={title}
+                moduleKey={moduleKey}
+                {...rest}
+              />
+              <IndustryData loading={loading} />
+            </div>
+            <LineChart />
+          </React.Fragment>
+          {loading && (
             <div className={style.infoLoading}>
               <RouterLoading />
             </div>
