@@ -88,13 +88,12 @@ class CompareBrand extends React.Component {
 
     return (
       <div>
-        {/*<ContentVitalityScore
+        <ContentVitalityScore
           action={getContentVitalityScoreData}
           data={contentVitalityScoreData}
           report={reportValues}
           authProfile={authProfile}
         />
-        */}
         <VideoComparison
           action={getVideoComparisonData}
           data={videoComparisonData}

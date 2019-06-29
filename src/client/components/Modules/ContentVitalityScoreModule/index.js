@@ -7,6 +7,7 @@ import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import { lineChartOptions, lineChartData_DatasetOptions } from './options'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import { isDataSetEmpty } from 'Utils/datasets'
 
 const percentageCol = cx('col-4-no-gutters', style.percentageCol)
 
@@ -75,6 +76,7 @@ const ContentVitalityScoreModule = ({
           filters={filters}
           legend={legend}
           loading={loading}
+          isEmpty={isDataSetEmpty(data)}
         >
           <div
             className="col-12-no-gutters"
@@ -86,7 +88,7 @@ const ContentVitalityScoreModule = ({
             >
               <LineChart
                 chartType="lineStackedArea"
-                width={1140}
+                width={1040}
                 height={291}
                 backgroundColor={colors.chartBackground}
                 dataSet={

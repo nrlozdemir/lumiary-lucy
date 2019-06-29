@@ -259,16 +259,16 @@ function* getContentVitalityScoreData({ payload = {} }) {
 function* getVideoComparisonData({ data: { dateRange, report } }) {
   try {
     const profile = yield select(selectAuthProfile)
-    const competitors = getBrandAndCompetitors(profile)
+    // const competitors = getBrandAndCompetitors(profile)
 
-    const filteredCompetitors = getFilteredCompetitors(competitors, report)
+    // const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const parameters = {
       dateRange,
       metric: 'views',
       property: ['format'],
       dateBucket: 'none',
-      brands: [...filteredCompetitors],
+      brands: [...report.brands],
       platform: 'all',
     }
 
@@ -300,16 +300,16 @@ function* getPerformanceComparisonData({
 }) {
   try {
     const profile = yield select(selectAuthProfile)
-    const competitors = getBrandAndCompetitors(profile)
+    // const competitors = getBrandAndCompetitors(profile)
 
-    const filteredCompetitors = getFilteredCompetitors(competitors, report)
+    // const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const parameters = {
       metric,
       dateRange,
       property: [property],
       dateBucket: 'none',
-      brands: [...filteredCompetitors],
+      brands: [...report.brands],
       platform: 'all',
     }
 
@@ -339,9 +339,9 @@ function* getPerformanceComparisonData({
 function* getColorComparisonData({ data: { metric, dateRange, report } }) {
   try {
     const profile = yield select(selectAuthProfile)
-    const competitors = getBrandAndCompetitors(profile)
+    // const competitors = getBrandAndCompetitors(profile)
 
-    const filteredCompetitors = getFilteredCompetitors(competitors, report)
+    // const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const parameters = {
       dateRange,
@@ -351,17 +351,17 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
       dateBucket: 'none',
     }
 
-    if (!!filteredCompetitors && !!filteredCompetitors.length) {
+    if (!!report && !!report.brands && !!report.brands.length) {
       // faster to split it up
       const [brand1, brand2] = yield all([
         call(
           getDataFromApi,
-          { ...parameters, brands: filteredCompetitors[0] },
+          { ...parameters, brands: report.brands[0] },
           '/report'
         ),
         call(
           getDataFromApi,
-          { ...parameters, brands: filteredCompetitors[1] },
+          { ...parameters, brands: report.brands[1] },
           '/report'
         ),
       ])
