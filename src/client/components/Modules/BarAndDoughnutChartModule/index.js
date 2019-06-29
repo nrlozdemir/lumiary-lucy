@@ -107,6 +107,7 @@ const BarAndDoughnutChartModule = ({
                   width={barCustoms.width}
                   height={barCustoms.height}
                   barData={!loading ? stackedChartData : null}
+                  datalabels={barCustoms.datalabels}
                   barSpacing={2}
                 />
               </div>
