@@ -1,8 +1,6 @@
 import React from 'react'
 import BarAndDoughnutChartModule from 'Components/Modules/BarAndDoughnutChartModule'
 
-import { stackedChartOptions } from './options'
-
 class PerformanceComparison extends React.Component {
   callBack = (data, moduleKey) => {
     const { action, report } = this.props
@@ -79,7 +77,6 @@ class PerformanceComparison extends React.Component {
           fillText: 'Total Percentage',
           dataLabelFunction: 'insertAfter',
           dataLabelInsert: '%',
-          options: stackedChartOptions,
         }}
         doughnutCustoms={{
           width: 280,
@@ -88,7 +85,6 @@ class PerformanceComparison extends React.Component {
           fillText: 'Total Percentage',
           dataLabelFunction: 'insertAfter',
           dataLabelInsert: '%',
-          options: stackedChartOptions,
         }}
         loading={loading}
       />

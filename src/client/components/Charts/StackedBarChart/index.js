@@ -2,6 +2,7 @@ import React from 'react'
 import { Bar, Chart } from 'react-chartjs-2'
 import { barDataOptions } from './options'
 import { withTheme } from 'ThemeContext/withTheme'
+import { metricSuffix } from 'Utils'
 
 const emptyData = {
   datasets: [],
@@ -137,6 +138,30 @@ const StackedBarChart = (props) => {
         chartArea: {
           backgroundColor: themes.chartBackground,
           barSpacing,
+        },
+        plugins: {
+          datalabels: {
+            formatter: (value, { datasetIndex, dataIndex }) => {
+              const ogValue =
+                !!barData &&
+                !!barData.datasets &&
+                !!barData.datasets[datasetIndex] &&
+                !!barData.datasets[datasetIndex].data &&
+                !!barData.datasets[datasetIndex].data.length &&
+                !!barData.datasets[datasetIndex].data[dataIndex]
+                  ? barData.datasets[datasetIndex].data[dataIndex]
+                  : value
+
+              return metricSuffix(ogValue)
+            },
+            align: 'center',
+            anchor: 'center',
+            color: '#fff',
+            font: {
+              size: 14,
+              family: 'ClanOTBold',
+            },
+          },
         },
         scales: {
           xAxes: [

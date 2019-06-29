@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Module from 'Components/Module'
 
-import { Bar } from 'react-chartjs-2'
+import StackedBarChart from 'Components/Charts/StackedBarChart'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import 'chartjs-plugin-datalabels'
 import Legend from 'Components/Legend'
@@ -86,7 +86,6 @@ const BarAndDoughnutChartModule = ({
   stackedChartData,
   loading = false,
 }) => {
-  console.log(stackedChartData)
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -104,57 +103,18 @@ const BarAndDoughnutChartModule = ({
           >
             {stackedChartData && (
               <div className={style.chartContainer}>
-                <Bar
+                <StackedBarChart
                   width={barCustoms.width}
                   height={barCustoms.height}
-                  data={!loading ? stackedChartData : {}}
-                  key={Math.random()}
-                  options={{
-                    ...barCustoms.options,
-                    chartArea: {
-                      backgroundColor: colors.chartBackground,
-                    },
-                    scales: {
-                      xAxes: [
-                        {
-                          ...barCustoms.options.scales.xAxes[0],
-                          ticks: {
-                            ...barCustoms.options.scales.xAxes[0].ticks,
-                            fontColor: colors.textColor,
-                          },
-                          gridLines: {
-                            ...barCustoms.options.scales.xAxes[0].gridLines,
-                            color: colors.chartStadiumBarBorder,
-                          },
-                        },
-                      ],
-                      yAxes: [
-                        {
-                          ...barCustoms.options.scales.yAxes[0],
-                          ticks: {
-                            ...barCustoms.options.scales.yAxes[0].ticks,
-                            fontColor: colors.textColor,
-                          },
-                          gridLines: {
-                            ...barCustoms.options.scales.yAxes[0].gridLines,
-                            color: colors.chartStadiumBarBorder,
-                            zeroLineColor: colors.chartStadiumBarBorder,
-                          },
-                        },
-                      ],
-                    },
-                  }}
-                  plugins={barPlugins}
-                  cutoutPercentage={barCustoms.cutoutPercentage}
-                  fillText={barCustoms.fillText}
-                  dataLabelFunction={barCustoms.dataLabelFunction}
-                  dataLabelInsert={barCustoms.dataLabelInsert}
+                  barData={!loading ? stackedChartData : null}
+                  barSpacing={2}
                 />
               </div>
             )}
             {doughnutData && (
               <div className={style.chartContainer}>
                 <DoughnutChart
+                  customDoughnutContainer={style.doughnutChartContainer}
                   key={Math.random()}
                   data={!loading ? doughnutData : {}}
                   width={doughnutCustoms.width}
