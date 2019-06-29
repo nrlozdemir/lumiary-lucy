@@ -602,6 +602,35 @@ const getMinMaxFromDatasets = (datasets = [], initial = 0, type = 'max') => {
     : 0
 }
 
+//gets top n values by category of datasets.
+//it defaultly returns top 5 datasets which have highest datas
+export const getTopNValues = (datasets = [], n = 5) => {
+  let filteredArray = []
+
+  //returns new array with highest values
+  datasets.forEach((item, index) => {
+    const highest = item.data.reduce((accumulator, current) => {
+      return current > accumulator ? current : accumulator
+    }, 0)
+    filteredArray.push({ index, highest })
+  })
+
+  //sort the array
+  const sortedArray = filteredArray.sort((a, b) => {
+    return b.highest - a.highest
+  })
+
+  //get n items
+  const topNItems = sortedArray.slice(0, n)
+
+  //get datasets with given indexes
+  let newDatasets = []
+  topNItems.forEach((item) => {
+    newDatasets.push(datasets[item.index])
+  })
+  return newDatasets
+}
+
 // @param - Vals {object} key/value pair of label/oercentage
 const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
   const result = {
