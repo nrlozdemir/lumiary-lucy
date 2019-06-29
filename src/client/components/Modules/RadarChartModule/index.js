@@ -38,6 +38,35 @@ const RadarChartModule = ({
               <div className={style.chartPos}>
                 <RadarChart data={!!data && data[0] && data[0].datas} />
               </div>
+              {/* 
+              Conflict: 
+              <div className={'mt-32 ' + style.labelContainer}>
+                <div
+                  className={style.label}
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  <span>{leftTitle}</span>
+                </div>
+                <p>
+                  Top{' '}
+                  {!!data[0] && !!data[0].progress && data[0].progress.length}{' '}
+                  Dominant Colors
+                </p>
+                <div
+                   className={style.label}
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  <span>{rightTitle}</span>
+                </div>
+              */}
               <div className={style.chartPos}>
                 <RadarChart data={!!data && data[1] && data[1].datas} />
               </div>

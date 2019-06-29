@@ -12,7 +12,7 @@ import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 
 import BarChartModule from 'Components/Modules/BarChartModule'
 import { splitCamelCaseToString, selectFiltersToType } from 'Utils'
-import { getMinMaxFromDatasets } from 'Utils/datasets'
+import { getMinMaxFromDatasets, getTopNValues } from 'Utils/datasets'
 import { isEqual } from 'lodash'
 
 import style from '../../../style.scss'
@@ -77,10 +77,15 @@ class TopPerformingProperty extends React.Component {
       topPerformingPropertiesData: { data: topData, loading: topLoading },
     } = this.props
 
-    const chartData = container === 'competitor' ? compTopData : topData
+    let chartData = container === 'competitor' ? compTopData : topData
 
     const hasDatasets =
       !!chartData && !!chartData.datasets && !!chartData.datasets.length
+
+    if(hasDatasets && chartData.datasets.length > 5) {
+      const top5datasets = getTopNValues(chartData.datasets, 5)
+      chartData = {...chartData, datasets: top5datasets}
+    }
 
     const max = (hasDatasets && getMinMaxFromDatasets(chartData.datasets)) || 0
 

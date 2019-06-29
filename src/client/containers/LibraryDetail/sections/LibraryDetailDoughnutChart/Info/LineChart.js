@@ -53,7 +53,7 @@ class LineChartSection extends React.Component {
                               } else {
                                 return `${
                                   data.datasets[datasetIndex].data[index]
-                                }% of frames is shot in ${sectionData.label}`
+                                }% of your library is shot in ${sectionData.label}`
                               }
                             },
                             label: function(tooltipItem, data) {

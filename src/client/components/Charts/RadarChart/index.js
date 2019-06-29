@@ -49,6 +49,7 @@ const RadarChart = (props) => {
   const themes = props.themeContext.colors
   let parsedData = data || {}
   let maxTicksStepLimit = 100000
+  let stepSize = 25000
 
   const hasData =
     !!parsedData && !!parsedData.datasets && !!parsedData.datasets[0]
@@ -59,11 +60,15 @@ const RadarChart = (props) => {
       themes.chartPointBackgroundColor
     parsedData.datasets[0].pointBorderColor = themes.chartPointBorderColor
 
+    const max = Math.max(...parsedData.datasets[0].data)
+
+    stepSize = max / 4
+
     maxTicksStepLimit = parsedData.datasets[0].data.every(
       (n) => n <= 100000 // 100k
     )
       ? 100000 // 100k
-      : Math.max(...parsedData.datasets[0].data) // any big number than 100k
+      : max // any big number than 100k
   }
 
   return (
@@ -120,6 +125,7 @@ const RadarChart = (props) => {
             lineHeight: 4,
           },
           ticks: {
+            stepSize,
             callback: function(value) {
               return metricSuffix(value)
             },
@@ -130,7 +136,6 @@ const RadarChart = (props) => {
             min: 0,
             max: maxTicksStepLimit,
             beginAtZero: true,
-            stepSize: 25000,
           },
           angleLines: {
             color: '#3D4665',
