@@ -19,6 +19,8 @@ import {
   compareSharesData,
 } from 'Utils/datasets'
 
+import { compareBrandChartColors } from 'Utils/globals'
+
 import { getDataFromApi } from 'Utils/api'
 import { selectAuthProfile } from 'Reducers/auth'
 
@@ -210,11 +212,22 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
 
     const payload = yield call(getDataFromApi, parameters, '/report')
 
-    yield put(
-      actions.getVideoComparisonDataSuccess(
-        convertDataIntoDatasets(payload, parameters)
+    if (!!payload && !!payload.data) {
+      const legend = Object.keys(payload.data).map((b, idx) => ({
+        label: b,
+        color: idx === 1 ? 'coral-pink' : 'cool-blue',
+      }))
+      yield put(
+        actions.getVideoComparisonDataSuccess({
+          legend,
+          ...convertDataIntoDatasets(payload, parameters, {
+            compareBrands: true,
+          }),
+        })
       )
-    )
+    } else {
+      throw new Error('Compare Brands getVideoComparisonDataError')
+    }
   } catch (err) {
     yield put(actions.getVideoComparisonDataError(err))
   }
@@ -240,13 +253,22 @@ function* getPerformanceComparisonData({
 
     const payload = yield call(getDataFromApi, parameters, '/report')
 
-    yield put(
-      actions.getPerformanceComparisonDataSuccess(
-        convertDataIntoDatasets(payload, parameters, {
-          customColors: ['#2FD7C4', '#5292E5'],
+    if (!!payload && !!payload.data) {
+      const legend = Object.keys(payload.data).map((b, idx) => ({
+        label: b,
+        color: idx === 1 ? 'coral-pink' : 'cool-blue',
+      }))
+      yield put(
+        actions.getPerformanceComparisonDataSuccess({
+          legend,
+          ...convertDataIntoDatasets(payload, parameters, {
+            compareBrands: true,
+          }),
         })
       )
-    )
+    } else {
+      throw new Error('Compare Brands getPerformanceComparisonDataError')
+    }
   } catch (err) {
     yield put(actions.getPerformanceComparisonDataError(err))
   }

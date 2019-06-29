@@ -59,6 +59,7 @@ class TopPerformingFormat extends React.Component {
       !!profile.brand &&
       !!percentageData &&
       !!percentageData.data &&
+      !!percentageData.data[profile.brand.name] &&
       percentageData.data[profile.brand.name].format
 
     const convertedPercentageData =

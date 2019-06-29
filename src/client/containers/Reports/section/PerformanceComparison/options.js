@@ -1,3 +1,5 @@
+import { metricSuffix } from 'Utils'
+
 export const stackedChartOptions = {
   titleFontColor: '#21243B',
   bodyFontColor: '#21243B',
@@ -22,7 +24,7 @@ export const stackedChartOptions = {
           fontColor: '#fff',
           fontFamily: 'ClanOTNews',
           fontSize: 12,
-          stepSize: 1000000,
+          stepSize: 1,
           beginAtZero: true,
           callback: function(value, index, values) {
             return value
@@ -68,7 +70,7 @@ export const stackedChartOptions = {
   plugins: {
     datalabels: {
       formatter: (value, ctx) => {
-        return value + 'm'
+        return metricSuffix(value)
       },
       align: 'center',
       anchor: 'center',

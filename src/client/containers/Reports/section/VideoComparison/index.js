@@ -1,8 +1,32 @@
 import React from 'react'
 import Module from 'Components/Module'
 import ComparisonHorizontalBarChart from 'Components/ComparisonHorizontalBarChart'
+import Legend from 'Components/Legend'
+
 import { isDataSetEmpty } from 'Utils/datasets'
 import style from './style.scss'
+
+const renderLegend = (legend) => {
+  if (!!legend && !legend.length) {
+    return null
+  }
+
+  return (
+    <div className={style.headerLabel}>
+      <div className={'d-flex align-items-center justify-content-center'}>
+        {!!legend &&
+          !!legend.length &&
+          legend.map((item, idx) => (
+            <Legend
+              key={`VideoComparisonLegend_${idx}`}
+              color={item.color}
+              label={item.label}
+            />
+          ))}
+      </div>
+    </div>
+  )
+}
 
 class VideoComparison extends React.Component {
   callBack = (data, moduleKey) => {
@@ -28,25 +52,9 @@ class VideoComparison extends React.Component {
           },
         ]}
         loading={loading}
-        legend={
-          <div className={style.headerLabel}>
-            <div
-              className={
-                'd-flex align-items-center justify-content-center ' +
-                style.headerLabel
-              }
-            >
-              <div className="d-flex align-items-center mr-32">
-                <span className={style.redRound} />
-                <p>Bleacher Report</p>
-              </div>
-              <div className="d-flex align-items-center mr-32">
-                <span className={style.duskRound} />
-                <p>Barstool Sports</p>
-              </div>
-            </div>
-          </div>
-        }
+        legend={renderLegend(
+          !!data && !!data.legend && !!data.legend.length ? data.legend : []
+        )}
       >
         <ComparisonHorizontalBarChart data={data || {}} />
       </Module>
