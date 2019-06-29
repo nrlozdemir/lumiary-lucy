@@ -77,7 +77,7 @@ class Reports extends Component {
 
   deleteReportAction(id) {
     console.log('id', id)
-    this.props.loadDeleteReport(id)
+    this.props.loadDeleteReport(id, true)
   }
 
   loadMore() {

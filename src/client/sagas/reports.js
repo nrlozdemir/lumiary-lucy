@@ -114,10 +114,9 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
   }
 }
 
-function* compareBrandSubmit({ payload }) {
+function* compareBrandSubmit({ payload: { params, onlySave } }) {
   try {
-    const { title, ...brands } = payload
-
+    const { title, ...brands } = params
     const filteredBrands = Object.keys(brands).filter((brand) => brands[brand])
 
     const parameters = {
@@ -125,9 +124,20 @@ function* compareBrandSubmit({ payload }) {
       brands: filteredBrands,
     }
 
+    console.log('+++', onlySave, filteredBrands, parameters)
+
     yield put(actions.compareBrandFormSubmitSuccess(parameters))
-    yield put(push(`/reports/compare-brands`))
+    if (!!onlySave && filteredBrands[0] && filteredBrands[1]) {
+      yield put(
+        push(
+          `/reports/compare-brands?title=${title}&brand_one_uuid=${
+            filteredBrands[0]
+          }&brand_two_uuid=${filteredBrands[1]}`
+        )
+      )
+    }
   } catch (err) {
+    console.log('err', err)
     yield put(actions.compareBrandFormSubmitError(err))
   }
 }
@@ -146,7 +156,7 @@ function* predefinedReportRequest({ payload }) {
   }
 }
 
-function* deleteReport({ payload: id }) {
+function* deleteReport({ payload: { id, isGetAllReports } }) {
   console.log(id)
   try {
     const {
@@ -169,7 +179,7 @@ function* deleteReport({ payload: id }) {
           uuid: id,
         },
       })
-      // yield call(getReports)
+      if (isGetAllReports) yield call(getReports) // get all reports if if you want after the deleted a report
     } else {
       throw 'Error deleting a report on report page'
     }
@@ -222,6 +232,7 @@ function* getPredefinedReports() {
 }
 
 function* getContentVitalityScoreData({ payload = {} }) {
+  console.log('@@@', payload)
   const { dateRange, platform, report = {} } = payload
   const { brands = [] } = report
   try {
