@@ -11,7 +11,6 @@ export const chartColors = [
   '#ACB0BE',
   '#545b79',
 
-  
   // random shit colors idk bro
   '#ff556f',
   '#3edcca',
@@ -21,6 +20,8 @@ export const chartColors = [
   '#ffacb9',
   '#eb7919',
 ]
+
+export const compareBrandChartColors = ['#2FD7C4', '#5292E5']
 
 export const userUuid = 'd65aa957-d094-4cf3-8d37-dafe50e752ea'
 export const weeks = ['Week1', 'Week2', 'Week3', 'Week4']

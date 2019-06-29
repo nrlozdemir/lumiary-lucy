@@ -1,4 +1,8 @@
-import { chartColors, expectedNames } from 'Utils/globals'
+import {
+  chartColors,
+  expectedNames,
+  compareBrandChartColors,
+} from 'Utils/globals'
 import {
   ucfirst,
   metricSuffix,
@@ -30,6 +34,7 @@ import { isEmpty } from 'lodash'
     noBrandKeys: bool - payloads without brand key layer
     customKeys: array,
     customValueKey: string - custom key of data object (value default)
+    compareBrands: bool - should be true if being used in compareBrands
   }
   *
  */
@@ -49,6 +54,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     preparedDatasets,
     customBorderColor,
     customColors,
+    compareBrands,
     customKeys: argKeys,
   } = (args && !!args[0] && args[0]) || {}
 
@@ -159,7 +165,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
-      const color = customColors ? customColors[idx] : chartColors[idx]
+      const color = compareBrands
+        ? compareBrandChartColors[idx]
+        : chartColors[idx]
       return singleDataset
         ? // only one dataset is required sometimes
           // ie. doughnut chart in panoptic/engagement
@@ -188,7 +196,11 @@ const convertDataIntoDatasets = (values, options, ...args) => {
             datasets: [
               ...datasets,
               {
-                label: !!customKeys ? customKeys[idx] : key,
+                label: !!customKeys
+                  ? customKeys[idx]
+                  : compareBrands
+                  ? brands[idx]
+                  : key,
                 backgroundColor: color,
                 borderColor: customBorderColor || color,
                 borderWidth: borderWidth || 1,

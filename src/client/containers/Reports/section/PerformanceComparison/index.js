@@ -11,6 +11,7 @@ class PerformanceComparison extends React.Component {
 
   render() {
     const {
+      report,
       data: { data, loading, error },
     } = this.props
 
@@ -42,7 +43,10 @@ class PerformanceComparison extends React.Component {
           ],
         },
       ]
-      doughnutData.labels = ['Bleacher Report', 'Barstool Sports']
+      doughnutData.labels =
+        !!data && !!data.legend && !!data.legend.length
+          ? data.legend.map((d) => d.label)
+          : []
     }
 
     return (
@@ -64,10 +68,9 @@ class PerformanceComparison extends React.Component {
             placeHolder: 'Engagement',
           },
         ]}
-        legend={[
-          { label: 'Bleacher Report', color: 'coral-pink' },
-          { label: 'Barstool Sports', color: 'cool-blue' },
-        ]}
+        legend={
+          !!data && !!data.legend && !!data.legend.length ? data.legend : []
+        }
         reverse={false}
         barCustoms={{
           width: 720,
