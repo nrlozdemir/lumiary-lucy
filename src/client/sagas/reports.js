@@ -200,15 +200,15 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
     const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const parameters = {
-      url: '/report',
       dateRange,
       metric: 'views',
       property: ['format'],
       dateBucket: 'none',
       brands: [...filteredCompetitors],
+      platform: 'all',
     }
 
-    const payload = yield call(getDataFromApi, parameters)
+    const payload = yield call(getDataFromApi, parameters, '/report')
 
     yield put(
       actions.getVideoComparisonDataSuccess(
@@ -220,7 +220,9 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
   }
 }
 
-function* getPerformanceComparisonData({ data: { metric, property, report } }) {
+function* getPerformanceComparisonData({
+  data: { metric, property, report, dateRange = '3months' },
+}) {
   try {
     const profile = yield select(selectAuthProfile)
     const competitors = getBrandAndCompetitors(profile)
@@ -228,19 +230,21 @@ function* getPerformanceComparisonData({ data: { metric, property, report } }) {
     const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const parameters = {
-      url: '/report',
-      dateRange: 'week',
       metric,
+      dateRange,
       property: [property],
       dateBucket: 'none',
       brands: [...filteredCompetitors],
+      platform: 'all',
     }
 
-    const payload = yield call(getDataFromApi, parameters)
+    const payload = yield call(getDataFromApi, parameters, '/report')
 
     yield put(
       actions.getPerformanceComparisonDataSuccess(
-        convertDataIntoDatasets(payload, parameters)
+        convertDataIntoDatasets(payload, parameters, {
+          customColors: ['#2FD7C4', '#5292E5'],
+        })
       )
     )
   } catch (err) {

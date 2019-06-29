@@ -22,7 +22,7 @@ export const stackedChartOptions = {
           fontColor: '#fff',
           fontFamily: 'ClanOTNews',
           fontSize: 12,
-          stepSize: 1,
+          stepSize: 1000000,
           beginAtZero: true,
           callback: function(value, index, values) {
             return value
@@ -45,7 +45,7 @@ export const stackedChartOptions = {
           fontColor: '#fff',
           fontFamily: 'ClanOTNews',
           fontSize: 12,
-          stepSize: 25,
+          stepSize: 1000000,
           beginAtZero: true,
           callback: function(value, index, values) {
             return value + '%'

@@ -48,6 +48,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     backgroundColor,
     preparedDatasets,
     customBorderColor,
+    customColors,
     customKeys: argKeys,
   } = (args && !!args[0] && args[0]) || {}
 
@@ -158,7 +159,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
-      const color = chartColors[idx]
+      const color = customColors ? customColors[idx] : chartColors[idx]
       return singleDataset
         ? // only one dataset is required sometimes
           // ie. doughnut chart in panoptic/engagement
