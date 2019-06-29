@@ -126,33 +126,33 @@ function* getTopPerformingVideos({ data: { report = {} } }) {
 
 function* getVideoReleasesBarChart({ data: { report } }) {
   try {
-    const { engagement, date, social } = report
+    const { engagement: metric, date: daterange, social: platform } = report
     const { brand } = yield select(selectAuthProfile)
 
     const options = {
-      platform: social,
+      metric,
+      platform,
+      daterange,
+
       property: 'format',
-      daterange: date,
-      brandUuid: brand.uuid,
     }
 
-    const [videoCountData, engagementCountData] = yield all([
-      call(
-        getDataFromApi,
-        undefined,
-        buildApiUrl(`/brand/${brand.uuid}/count`, options),
-        'GET'
-      ),
-      call(getDataFromApi, undefined, buildApiUrl('/metric', options), 'GET'),
-    ])
-
-    const chartData = convertVideoEngagementData(
-      videoCountData,
-      engagementCountData,
-      engagement
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/brand/${brand.uuid}/count`, options),
+      'GET'
     )
 
-    yield put(actions.getVideoReleasesBarChartSuccess(chartData))
+    if (!!response) {
+      yield put(
+        actions.getVideoReleasesBarChartSuccess(
+          convertVideoEngagementData(response, metric)
+        )
+      )
+    } else {
+      throw new Error('Brand Insights Error getVideoReleasesBarChart')
+    }
   } catch (err) {
     console.log(err)
     yield put(actions.getVideoReleasesBarChartFailure(err))

@@ -43,18 +43,15 @@ function* getVideoReleasesData({ data }) {
       'GET'
     )
 
-    if(!!response) {
-      console.log('o hi mark', response)
+    if (!!response) {
+      yield put(
+        actions.getVideoReleasesDataSuccess(
+          convertVideoEngagementData(response, metric)
+        )
+      )
     } else {
       throw new Error('Panoptic Error getVideoReleasesData')
     }
-
-    // const chartData = convertVideoEngagementData(
-    //   videoCountData,
-    //   engagementCountData
-    // )
-
-    //yield put(actions.getVideoReleasesDataSuccess(chartData))
   } catch (err) {
     console.log(err)
     yield put(actions.getVideoReleasesDataError(err))
