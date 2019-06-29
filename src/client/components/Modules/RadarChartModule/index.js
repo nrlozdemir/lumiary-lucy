@@ -27,7 +27,7 @@ const RadarChartModule = ({
           action={action}
           filters={filters}
           legend={legend}
-          isEmpty={!data || !data.length || (data[0].empty && data[1].empty)}
+          isEmpty={!data || !data.length || (!data[0].total && !data[1].total)}
           loading={loading}
         >
           <div
