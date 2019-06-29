@@ -27,19 +27,19 @@ export const initialState = {
   loggedIn: false,
   profile: {
     brand: {
-      name: 'bleacherreport',
+      name: 'Bleacher Report',
       uuid: 'd65aa957-d094-4cf3-8d37-dafe50e752ea',
       competitors: [
         {
-          name: 'barstoolsports',
+          name: 'Barstool Sports',
           uuid: '1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6',
         },
         {
-          name: 'espn',
+          name: 'ESPN',
           uuid: '40002bf1-c2d3-41cb-8d85-77f5533d7b45',
         },
         {
-          name: 'player\'s tribune',
+          name: 'Players\' Tribune',
           uuid: '7a5d6636-a49a-41ab-9d28-a47933fa5f04',
         }
       ],
