@@ -256,21 +256,38 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
     const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const parameters = {
-      url: '/report',
       dateRange,
       metric,
+      platform: 'all',
       property: ['color'],
       dateBucket: 'none',
-      brands: [...filteredCompetitors],
     }
 
-    const payload = yield call(getDataFromApi, parameters)
+    if (!!filteredCompetitors && !!filteredCompetitors.length) {
+      // faster to split it up
+      const [brand1, brand2] = yield all([
+        call(
+          getDataFromApi,
+          { ...parameters, brands: filteredCompetitors[0] },
+          '/report'
+        ),
+        call(
+          getDataFromApi,
+          { ...parameters, brands: filteredCompetitors[1] },
+          '/report'
+        ),
+      ])
 
-    yield put(
-      actions.getColorComparisonDataSuccess(
-        radarChartCalculate(compareSharesData(payload))
+      const payload = { data: { ...brand1.data, ...brand2.data } }
+
+      yield put(
+        actions.getColorComparisonDataSuccess(
+          radarChartCalculate(compareSharesData(payload))
+        )
       )
-    )
+    } else {
+      throw new Error('CompareBrands Error Fetching Color Comparison Data')
+    }
   } catch (err) {
     console.log('err', err)
     yield put(actions.getColorComparisonDataError(err))

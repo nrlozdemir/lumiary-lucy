@@ -226,6 +226,9 @@ const radarChartCalculate = (data) => {
       el.total = el.datas.labels
         .map((a, k) => a)
         .reduce((prev, next) => prev + parseFloat(next.count), 0)
+
+      el.empty = !el.total 
+
       el.progress = []
 
       el.datas.datasets[0].backgroundColor = 'rgba(255, 255, 255, 0.3)'
