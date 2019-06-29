@@ -348,8 +348,7 @@ function* getRadarChartRequest(ids) {
       'blue-green',
       'blue-purple',
       'purple',
-      'red-purple',
-      //"blue",
+      'red-purple'
     ]
     const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
 
@@ -363,14 +362,7 @@ function* getRadarChartRequest(ids) {
     let values = []
     Object.keys(payload).map((color, i) => {
       if (i <= 10) {
-        values.push(
-          /*
-          payload[[colorNames[i]]] === 0
-            ? Math.floor(Math.random() * 1)
-            : payload[[colorNames[i]]]
-          */
-          payload[[colorNames[i]]]
-        )
+        values.push(payload[[colorNames[i]]])
       }
     })
 

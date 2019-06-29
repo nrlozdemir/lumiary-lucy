@@ -95,31 +95,76 @@ class LibraryDetailShotByShot extends React.Component {
     } = this.props
     const { selectedImage } = this.state
 
-    const radarChartDataConfigured = radarChartData && {
-      labels: [
-        '#cc2226',
-        '#dd501d',
-        '#eb7919',
-        '#f8b90b',
-        '#aac923',
-        '#fff20d',
-        '13862b',
-        '#229a78',
-        '#79609b',
-        '#923683',
-        '#b83057',
-        //"#3178b0",
-      ],
-      datasets: [
+    const radarChartDataConfigured = {
+      "datasets": [
         {
-          label: 'Shots',
-          backgroundColor: 'rgb(82, 146, 229, 0.5)',
-          borderColor: 'rgb(82, 146, 229, 1)',
-          pointBackgroundColor: 'rgb(82, 146, 229, 0.5)',
-          pointBorderColor: 'rgb(82, 146, 229, 1)',
-          data: radarChartData,
-        },
+          "labels": radarChartData,
+          "data": radarChartData,
+          "​​borderColor": "#ccc",
+          "​​​​​pointBackgroundColor": "#505050", 
+          "tooltip": false,
+          "pointBorderColor": "#505050", 
+          "label": "Color",
+          "​​backgroundColor": "rgba(172, 176, 190, 0.4)",
+        }
       ],
+      "labels": [
+        {
+          "name": "Red",
+          "color": "#cc2226",
+          "selected": false
+        },
+        {
+          "name": "Red-Orange",
+          "color": "#dd501d",
+          "selected": false
+        },
+        {
+          "name": "Orange",
+          "color": "#eb7919",
+          "selected": false
+        },
+        {
+          "name": "Yellow-Orange",
+          "color": "#f8b90b",
+          "selected": false
+        },
+        {
+          "name": "Yellow",
+          "color": "#fff20d",
+          "selected": false
+        },
+        {
+          "name": "Yellow-Green",
+          "color": "#aac923",
+          "selected": false
+        },
+        {
+          "name": "Green",
+          "color": "#13862b",
+          "selected": false
+        },
+        {
+          "name": "Blue-Green",
+          "color": "#229a78",
+          "selected": false
+        },
+        {
+          "name": "Blue-Purple",
+          "color": "#79609b",
+          "selected": false
+        },
+        {
+          "name": "Purple",
+          "color": "#923683",
+          "selected": false
+        },
+        {
+          "name": "Red-Purple",
+          "color": "#b83057",
+          "selected": false
+        }
+      ]
     }
 
     const shotValues = (!!shots && Object.values(shots)) || []
@@ -447,7 +492,10 @@ class LibraryDetailShotByShot extends React.Component {
                         <TabPanel>
                           <div className={style.radarChartContainer}>
                             {radarChartDataConfigured && (
-                              <RadarChart data={radarChartDataConfigured} />
+                              <RadarChart 
+                                data={radarChartDataConfigured} 
+                                key={Math.random()} 
+                              />
                             )}
                           </div>
                         </TabPanel>
