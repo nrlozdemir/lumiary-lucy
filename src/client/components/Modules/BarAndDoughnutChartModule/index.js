@@ -86,6 +86,7 @@ const BarAndDoughnutChartModule = ({
   stackedChartData,
   loading = false,
 }) => {
+  console.log(stackedChartData)
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -106,7 +107,7 @@ const BarAndDoughnutChartModule = ({
                 <Bar
                   width={barCustoms.width}
                   height={barCustoms.height}
-                  data={stackedChartData}
+                  data={!loading ? stackedChartData : {}}
                   key={Math.random()}
                   options={{
                     ...barCustoms.options,
@@ -155,7 +156,7 @@ const BarAndDoughnutChartModule = ({
               <div className={style.chartContainer}>
                 <DoughnutChart
                   key={Math.random()}
-                  data={doughnutData}
+                  data={!loading ? doughnutData : {}}
                   width={doughnutCustoms.width}
                   height={doughnutCustoms.height}
                   options={{
