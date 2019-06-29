@@ -513,61 +513,25 @@ const parseAverage = (payload) => {
     maxEngagement: {int}
   }]
  */
-const convertVideoEngagementData = (
-  videoData,
-  engagementData,
-  metric = 'all'
-) => {
-  if (isEmpty(engagementData)) {
+const convertVideoEngagementData = (data, metric = 'views') => {
+  if (isEmpty(data)) {
     return []
   }
 
-  const formats = Object.keys(engagementData).reduce((fmts, metricKey) => {
-    for (const fmtKey in engagementData[metricKey].format) {
-      if (fmts.indexOf(fmtKey) === -1 && fmtKey !== 'None') {
-        fmts.push(fmtKey)
-      }
-    }
-    return fmts
-  }, [])
+  const formats = Object.keys(data)
 
-  let metricKeys = Object.keys(engagementData)
-
-  if (metric !== 'all') {
-    metricKeys.filter((m) => `${m}s` === metric)
-  }
-
-  const dateBuckets = Object.keys(
-    engagementData[metricKeys[0]].format[formats[0]]
-  )
+  const dateBuckets = Object.keys(data[formats[0]][metric])
 
   return formats.map((fmt) => {
-    // sum up all engagement data from /metric by format and datebucket
-    const engagementCounts = metricKeys.reduce((counts, metric) => {
-      const fmtData = engagementData[metric].format[fmt]
-      Object.keys(fmtData).forEach((day, idx) => {
-        counts[idx] = Math.abs(counts[idx]) || 0
-        counts[idx] += fmtData[day]
-        counts[idx] = counts[idx] == 0 ? 0 : -Math.abs(counts[idx])
-      })
-      return counts
-    }, [])
+    const videoCounts = dateBuckets.map((db) =>
+      !!data[fmt] && !!data[fmt][db] ? data[fmt][db] : 0
+    )
 
-    // get dateBucketed video counts by format
-    const videoFormatData =
-      videoData[
-        fmt
-          .toLowerCase()
-          .split(' ')
-          .join('')
-      ]
-
-    const videoCounts = dateBuckets.map((dateBucketKey) => {
-      if (!!videoFormatData) {
-        return videoFormatData[dateBucketKey] || 0
-      }
-      return 0
-    })
+    const engagementCounts = dateBuckets.map((db) =>
+      !!data[fmt] && !!data[fmt][metric] && !!data[fmt][metric][db]
+        ? -Math.abs(data[fmt][metric][db])
+        : 0
+    )
 
     const maxCount = (array) => Math.max.apply(null, array.map(Math.abs))
 
