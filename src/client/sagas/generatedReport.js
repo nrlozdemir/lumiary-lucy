@@ -69,7 +69,7 @@ function* saveReport({ data }) {
         yield put(
           reportsActions.brandInsightReportSave({
             isSaved: true,
-            uuid: response.uuid,
+            uuid: response.reportUuid,
           })
         )
       }

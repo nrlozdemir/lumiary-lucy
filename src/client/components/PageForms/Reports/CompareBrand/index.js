@@ -30,7 +30,7 @@ class CompareBrand extends Component {
     const valid = this.props.valid && this.state.formValid
 
     const { brands } = this.props
-
+    console.log('!!', brands, getBrandKeysFromObject(brands))
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {

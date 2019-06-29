@@ -278,9 +278,7 @@ class Navbar extends React.Component {
         swicthControl: !isSaved,
       })
       if (isSaved) {
-        return loadDeleteReport({
-          uuid,
-        })
+        return loadDeleteReport(uuid)
       }
       saveReportRequest({
         ...brandInsightValue,

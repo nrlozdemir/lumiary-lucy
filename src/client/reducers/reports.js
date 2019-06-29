@@ -86,7 +86,10 @@ export const actions = {
   loadMoreReportsError: (error) => ({ type: types.LOAD_MORE_REPORTS, error }),
 
   // DELETE A REPORT
-  loadDeleteReport: (id) => ({ type: types.DELETE_REPORT, payload: id }),
+  loadDeleteReport: (id, isGetAllReports) => ({
+    type: types.DELETE_REPORT,
+    payload: { id, isGetAllReports },
+  }),
   loadDeleteReportSuccess: (payload) => ({
     type: types.DELETE_REPORT_SUCCESS,
     payload,
@@ -113,10 +116,13 @@ export const actions = {
     type: types.BRAND_INSIGHT_SELECTED_REQUEST,
     payload,
   }),
-  compareBrandFormSubmit: (values) => ({
-    type: types.COMPARE_BRAND_REQUEST,
-    payload: values,
-  }),
+  compareBrandFormSubmit: (params, onlySave = false) => {
+    console.log('params', params)
+    return {
+      type: types.COMPARE_BRAND_REQUEST,
+      payload: { params, onlySave },
+    }
+  },
   compareBrandFormSubmitSuccess: (payload) => ({
     type: types.COMPARE_BRAND_REQUEST_SUCCESS,
     payload,
