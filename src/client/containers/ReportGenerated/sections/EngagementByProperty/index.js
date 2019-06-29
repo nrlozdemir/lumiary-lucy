@@ -17,14 +17,14 @@ class EngagementByProperty extends Component {
 
   shouldComponentUpdate(nextProps) {
     const {
-      data: { data: nextData },
+      data: { data: nextData, loading: nextLoading },
     } = nextProps
 
     const {
-      data: { data },
+      data: { data, loading },
     } = this.props
 
-    return !isEqual(nextData, data)
+    return !isEqual(nextData, data) || loading !== nextLoading
   }
 
   render() {
@@ -60,6 +60,7 @@ class EngagementByProperty extends Component {
           },
         ]}
         isEmpty={hasNoData}
+        loading={loading}
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>

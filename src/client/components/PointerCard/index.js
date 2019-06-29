@@ -7,6 +7,7 @@ class PointerCard extends React.Component {
     super(props)
     this.state = {
       pointerData: 0,
+      pointerTextVal: null
     }
   }
 
@@ -35,7 +36,16 @@ class PointerCard extends React.Component {
     clearInterval(this.interval)
   }
 
-  resetPointer = (to) => {
+  resetPointer = (target) => {
+    let to = target
+    const { data: { avg = 0 } } = this.props
+
+    //if the target is too low or too high,
+    //set the pointer 0 or 180 degree
+    to = target < 0 
+        ? 0 
+        : target > avg * 2 ? avg * 2 : target 
+
     this.interval = setInterval(() => {
       this.setState(
         ({ pointerData }) => ({
@@ -45,6 +55,7 @@ class PointerCard extends React.Component {
           const { pointerData: current } = this.state
 
           if (current === to) {
+            this.setState({ pointerTextVal: target < 0 || target > avg * 2 ? target : null })
             clearInterval(this.interval)
           }
         }
@@ -54,7 +65,7 @@ class PointerCard extends React.Component {
 
   render() {
     const { data, colors } = this.props
-    const { pointerData } = this.state
+    const { pointerData, pointerTextVal } = this.state
 
     return (
       <div className={style.radialChart}>
@@ -152,7 +163,7 @@ class PointerCard extends React.Component {
             <div className={style.pointer}>
               <div
                 className={cn(
-                  pointerData <= 90 && style.left,
+                  pointerData <= data.avg && style.left,
                   style.pointerInner
                 )}
                 style={{
@@ -233,7 +244,7 @@ class PointerCard extends React.Component {
                         background: colors.moduleBackground,
                       }}
                     >
-                      {`${pointerData}${pointerData >= 1000 ? 'k' : ''}`}
+                      {`${pointerTextVal || pointerData}${pointerData >= 1000 ? 'k' : ''}`}
                     </span>
                     <svg height="22" width="55">
                       <line
