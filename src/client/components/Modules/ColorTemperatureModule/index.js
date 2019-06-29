@@ -10,14 +10,14 @@ import cx from 'classnames'
 import style from './styles.scss'
 
 const renderLegend = (legend) => {
-  if (!legend.length) {
+  if (!!legend && !legend.length) {
     return null
   }
 
   return (
     <div className={style.headerLabel}>
       <div className={'d-flex align-items-center justify-content-center'}>
-        {legend.map((item, idx) => (
+        {!!legend && !!legend.length && legend.map((item, idx) => (
           <Legend
             key={`colorTempLegend_${idx}`}
             color={item.color}

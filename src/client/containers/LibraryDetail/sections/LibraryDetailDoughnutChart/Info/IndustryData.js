@@ -10,7 +10,7 @@ import { makeSelectInfoModalData } from 'Reducers/libraryDetail'
 class IndustryData extends React.Component {
   render() {
     const { modalData } = this.props
-
+    
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -33,7 +33,7 @@ class IndustryData extends React.Component {
                   <span className={style.textBold}>
                     {modalData.industryMaxValue}%{' '}
                   </span>
-                  of your library is shot in
+                  of the industry is shot in
                   <span className={style.textBold}>
                     {' '}
                     {modalData.industryMaxKey}

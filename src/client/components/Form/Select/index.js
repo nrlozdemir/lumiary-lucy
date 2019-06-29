@@ -152,6 +152,7 @@ const Select = (props) => {
           : themes.inputActiveColor,
         cursor: 'pointer',
         border: 'none',
+        width: '100%',
       }
     },
     placeholder: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -163,11 +164,17 @@ const Select = (props) => {
           ? themes.inputColor
           : themes.inputActiveColor,
         whiteSpace: 'nowrap',
+        position: 'unset',
+        transform: 'unset',
+        maxWidth: '100%',
       }
     },
     singleValue: (styles) => ({
       ...styles,
       color: themes.inputActiveColor,
+      position: 'unset',
+      transform: 'unset',
+      maxWidth: '100%',
     }),
     menu: (base) => ({
       ...base,
@@ -177,6 +184,7 @@ const Select = (props) => {
     menuList: (base) => ({
       ...base,
       padding: 0,
+      minWidth: 'max-content',
     }),
   }
 
@@ -185,6 +193,7 @@ const Select = (props) => {
       components={{ DropdownIndicator, Group, SingleValue }}
       id={id}
       className={selectClass}
+      classNamePrefix="react-select"
       clearable={false}
       name={name}
       onChange={!!props.input ? reduxFormOnChange : onChange}

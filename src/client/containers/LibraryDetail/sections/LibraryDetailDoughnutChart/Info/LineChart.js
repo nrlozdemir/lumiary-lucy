@@ -13,19 +13,15 @@ import { isEqual } from 'lodash'
 
 class LineChartSection extends React.Component {
   shouldComponentUpdate(nextProps) {
-    const {
-      modalData: nextData,
-    } = nextProps
+    const { modalData: nextData } = nextProps
 
-    const {
-      modalData: data,
-    } = this.props
+    const { modalData: data } = this.props
 
     return !isEqual(nextData, data)
   }
 
   render() {
-		const { modalData, sectionData } = this.props;
+    const { modalData, sectionData } = this.props
 
     return (
       <ThemeContext.Consumer>
@@ -36,17 +32,7 @@ class LineChartSection extends React.Component {
                 <LineChart
                   width={1090}
                   height={292}
-                  dataSet={{
-                    labels: ['S', 'M', 'T', 'W', 'T', 'F', 'S'],
-                    datasets: [
-                      {
-                        data: modalData.libraryDayAverages,
-                      },
-                      {
-                        data: modalData.industryDayAverages,
-                      },
-                    ],
-                  }}
+                  dataSet={modalData.lineChartData}
                   xAxesFlatten
                   yAxesPercentage
                   xAxesStepSize={1}

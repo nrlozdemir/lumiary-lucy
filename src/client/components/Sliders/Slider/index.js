@@ -10,6 +10,10 @@ import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
 import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
 
 class MarketViewSlider extends React.Component {
+  constructor(props) {
+    super(props)
+    this.videoRef = []
+  }
   renderNextButton = () => {
     return (
       <RightArrowCircleFlat
@@ -21,6 +25,19 @@ class MarketViewSlider extends React.Component {
         onClick={() => this.refSlider && this.refSlider.slideNext()}
       />
     )
+  }
+
+  handleMouseOverPlay = (i) => {
+    const activeIndex = this.refSlider.activeIndex
+    activeIndex === i && this.videoRef[i].play()
+  }
+
+  handleMouseOutPlay = (i) => {
+    const activeIndex = this.refSlider.activeIndex
+    if(activeIndex === i) {
+      this.videoRef[i].pause()
+      this.videoRef[i].currentTime = 0
+    }
   }
 
   renderPrevButton = () => {
@@ -60,11 +77,13 @@ class MarketViewSlider extends React.Component {
 
       return (
         <div className={classnames(style.pagination, 'pagination')}>
-          {items.map((item, i) => {
-            const socialIcon = classnames(
-              socialIconSelector(item.socialMedia),
-              style.icon
-            )
+          {!!items &&
+            !!items.length &&
+            items.map((item, i) => {
+              const socialIcon = classnames(
+                socialIconSelector(item.socialMedia),
+                style.icon
+              )
 
             return (
               <div
@@ -96,6 +115,7 @@ class MarketViewSlider extends React.Component {
         for (const item of [...bullets]) {
           item.classList.remove('active')
         }
+
         if (bullets && this.refSlider && this.refSlider.activeIndex) {
           bullets[this.refSlider.activeIndex].classList.add('active')
         }
@@ -126,7 +146,12 @@ class MarketViewSlider extends React.Component {
           >
             {items &&
               items.map((item, i) => (
-                <div className="item" key={i}>
+                <div 
+                  className="item" 
+                  key={i}
+                  onMouseEnter={() => this.handleMouseOverPlay(i)}
+                  onMouseLeave={() => this.handleMouseOutPlay(i)}
+                >
                   <AssetLayer
                     containerNoBorder
                     leftSocialIcon={item.socialMedia}
@@ -136,7 +161,14 @@ class MarketViewSlider extends React.Component {
                     height="100%"
                     rightValue={item.cvScore}
                   >
-                    <video className={style.fullVideo} src={item.image} />
+                    <video 
+                      className={style.fullVideo} 
+                      src={item.image}
+                      ref={videoRef => this.videoRef[i] = videoRef}
+                      loop
+                      muted
+                      controls={false}  
+                    />
                     <div className={style.percentageWrapper}>
                       <PercentageBarGraph
                         key={Math.random()}

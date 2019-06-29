@@ -53,10 +53,7 @@ class CustomBarChart extends React.Component {
     const statMax = Object.values(data).reduce((prev, next) => {
       return prev.score < next.score ? next : prev
     })
-    const aspectRatio =
-      statMax && (options.maxHeight / statMax.score).toFixed(2)
-
-    const { textColor, duskBackground } = this.props.themeContext.colors
+    const { duskBackground } = this.props.themeContext.colors
 
     return (
       <React.Fragment>
@@ -67,7 +64,13 @@ class CustomBarChart extends React.Component {
                 zeroFill > 0 && element.score === 0
                   ? element.score + zeroFill
                   : element.score
-              const height = Math.ceil(elementScore * aspectRatio)
+              const isSelected = element.label === selected
+              let heightPx = Math.ceil(Math.abs((elementScore * options.maxHeight) / statMax.score))
+              
+              //if height is 0, we reassign 1 to height bcoz of ux experience. 
+              //empty area doesn't seem good.
+              const height = heightPx || 1
+
               return (
                 <div
                   key={index}
@@ -76,13 +79,13 @@ class CustomBarChart extends React.Component {
                     options.labelCharLength
                   )}
                   className={classnames(barStyle, {
-                    [barSelectedStyle]: element.label === selected,
+                    [barSelectedStyle]: isSelected,
                     [styles.increase]: difference > 0,
                     [styles.decrease]: difference < 0,
                     [styles.noChange]: difference === 0,
                   })}
                   style={{
-                    height: (height !== Infinity && height) || '100%',
+                    height: (height !== Infinity && `${height}`) || '100%',
                     width: options.width,
                     background: duskBackground,
                   }}

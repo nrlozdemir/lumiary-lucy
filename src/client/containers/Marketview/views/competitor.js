@@ -91,7 +91,6 @@ export class Competitor extends React.Component {
           />
           <TopPerformingProperty
             moduleKey="MarketView/Competitor/TopPerformingProperty"
-            title="Top Performing Property, Pacing, Across All Competitors"
             filters={[
               {
                 type: 'dateRange',

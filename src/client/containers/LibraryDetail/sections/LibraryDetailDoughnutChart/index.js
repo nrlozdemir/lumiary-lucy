@@ -1,8 +1,8 @@
 import React from 'react'
-import { reduxForm } from 'redux-form'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
+import { isEqual } from 'lodash'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutCard from './DoughnutCard'
@@ -11,15 +11,20 @@ import {
   makeSelectInfoShowSection,
   makeSelectDoughnutData,
 } from 'Reducers/libraryDetail'
+import RouterLoading from 'Components/RouterLoading'
 import Info from './Info'
 
 class LibraryDetailDoughnutChart extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    return !isEqual(this.props, nextProps)
+  }
+
   render() {
     const {
-      doughnutData,
+      doughnutData: { data: doughnutData, loading: doughnutLoading },
       showInfo,
       videoId,
-      infoData: { loading },
+      infoData: { loading: doughnutInfoLoading },
     } = this.props
 
     const sectionToShow = (!!showInfo && showInfo.title) || false
@@ -36,7 +41,7 @@ class LibraryDetailDoughnutChart extends React.Component {
             }}
           >
             <div className={style.radialChartsContainer}>
-              {doughnutData &&
+              {!!doughnutData && !doughnutLoading &&
                 doughnutData.map(
                   (
                     {
@@ -65,12 +70,17 @@ class LibraryDetailDoughnutChart extends React.Component {
                           />
                         )}
                         {!!sectionToShow && sectionToShow === title && (
-                          <Info {...cardProps} loading={loading}/>
+                          <Info {...cardProps} loading={doughnutInfoLoading} />
                         )}
                       </React.Fragment>
                     )
                   }
                 )}
+              {doughnutLoading && (
+                <div className={style.radialChartsContainer_loading}>
+                  <RouterLoading />
+                </div>
+              )}
             </div>
           </div>
         )}
@@ -94,9 +104,4 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(
-  reduxForm({
-    form: 'libraryDetailDoughnutChart',
-  }),
-  withConnect
-)(LibraryDetailDoughnutChart)
+export default compose(withConnect)(LibraryDetailDoughnutChart)

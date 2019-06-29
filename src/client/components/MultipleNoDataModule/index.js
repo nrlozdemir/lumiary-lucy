@@ -4,7 +4,7 @@ import style from './style.scss'
 const MultipleNoDataModule = ({ children }) => {
   return (
     <div className={style.noDataContainer}>
-      {children.map((child, index) => {
+      {!!children && children.map((child, index) => {
         return (
           <div className={style.noDataContainerBody} key={`nodata_${index}`}>
             <div

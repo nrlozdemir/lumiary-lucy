@@ -141,6 +141,7 @@ class StackedPercentageChart extends React.Component {
           const findYMaxValue = Object.values(lines).reduce((p, n) =>
             p.currentVLine.y > n.currentVLine.y ? n : p
           )
+
           const findYMaxIndex =
             findYMaxValue &&
             Object.values(lines).findIndex(
@@ -253,17 +254,29 @@ class StackedPercentageChart extends React.Component {
           ctx.save()
 
           const topValueRightPosition =
-            barWidth === 1
-              ? findYMaxValue.currentVLine.x - barWidth
-              : findYMaxValue.currentVLine.x - barWidth + 0.5
+            (!!findYMaxValue &&
+              !!findYMaxValue.currentVLine &&
+              !!findYMaxValue.currentVLine.x &&
+              (barWidth === 1
+                ? findYMaxValue.currentVLine.x - barWidth
+                : findYMaxValue.currentVLine.x - barWidth + 0.5)) ||
+            0
 
           ctx.beginPath()
           ctx.restore()
           ctx.moveTo(
             topValueRightPosition,
-            height + findYMaxValue.currentVLine.y
+            height + !!findYMaxValue &&
+              !!findYMaxValue.currentVLine &&
+              findYMaxValue.currentVLine.y
           )
-          ctx.lineTo(topValueRightPosition, findYMaxValue.currentVLine.y)
+          ctx.lineTo(
+            topValueRightPosition,
+            (!!findYMaxValue &&
+              !!findYMaxValue.currentVLine &&
+              findYMaxValue.currentVLine.y) ||
+              0
+          )
           ctx.lineWidth = barWidth
           ctx.strokeStyle = tickColor
           ctx.stroke()

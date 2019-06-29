@@ -15,6 +15,7 @@ const TopVideosCard = (props) => {
     references,
     moduleKey,
     action,
+    loading = false,
   } = props
 
   return (
@@ -25,6 +26,7 @@ const TopVideosCard = (props) => {
       moduleKey={moduleKey}
       action={action}
       isEmpty={isDataSetEmpty(chartData)}
+      loading={loading}
     >
       <div className="col-12-no-gutters">
         <StackedBarChart barData={chartData} height={height} />

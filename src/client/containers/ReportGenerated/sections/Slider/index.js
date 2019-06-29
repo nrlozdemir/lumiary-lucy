@@ -17,17 +17,14 @@ class Slider extends React.Component {
       data: { data, loading, selectedVideo },
     } = this.props
 
-    if (!data && loading) {
-      return <RouterLoading />
-    }
-
     return (
       <SliderModule
-        data={data}
+        data={data || []}
         moduleKey={'Reports/TopPerformingVideos'}
         title="Top Performing Videos"
         selectedVideo={selectedVideo}
         changeSelectedVideo={this.changeSelectedVideo}
+        loading={loading}
       />
     )
   }

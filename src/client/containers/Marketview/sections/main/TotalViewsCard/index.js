@@ -5,37 +5,27 @@ import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewTotalView } from 'Reducers/marketview'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
-import style from './style.scss'
 import 'chartjs-plugin-datalabels'
 import Module from 'Components/Module'
 
-import { chartCombineDataset, isDataSetEmpty } from 'Utils/datasets'
+import { selectFiltersToType } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
 import { chartColors } from 'Utils/globals'
 
-import { isEmpty, isEqual } from 'lodash'
+import { isEmpty } from 'lodash'
 
 class TotalViewsChart extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getTotalViewsRequest(data)
   }
 
-  shouldComponentUpdate(nextProps) {
-    const {
-      totalViewsData: { data: nextData },
-    } = nextProps
-
-    const {
-      totalViewsData: { data },
-    } = this.props
-
-    return !isEqual(nextData, data)
-  }
-
   render() {
     const {
+      selectFilters,
       totalViewsData: {
         data,
         loading,
@@ -47,14 +37,27 @@ class TotalViewsChart extends React.Component {
     const isBarChartEmpty = isDataSetEmpty(barData)
 
     const hasNoData =
-      (!loading &&
-        (!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty)) ||
-      isEmpty(data)
+      !loading &&
+      ((!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty) ||
+        isEmpty(data))
+
+    const moduleKey = 'Marketview/StackedBarChart'
+    const selects = selectFiltersToType(
+      selectFilters.values && selectFilters.values[moduleKey]
+    )
+    const platform = selectFilters.options.platform.find(
+      (platform) => selects.platform === platform.value
+    )
+    const metric = selectFilters.options.metric.find(
+      (metric) => selects.metric === metric.value
+    )
 
     return (
       <Module
-        moduleKey={'StackedBarChart'}
-        title="Total Views For All Platforms"
+        moduleKey={moduleKey}
+        title={`Total ${metric ? metric.label : 'Views'} For ${
+          platform ? platform.label : 'All Platforms'
+        }`}
         action={this.callBack}
         filters={[
           {
@@ -69,28 +72,31 @@ class TotalViewsChart extends React.Component {
           },
         ]}
         isEmpty={hasNoData}
+        loading={loading}
       >
         <div className="grid-collapse">
           <div className="col-6 mt-24">
-            <StackedBarChart barData={barData} />
+            <StackedBarChart barData={loading ? {} : barData} />
           </div>
           <div className="col-6">
             <DoughnutChart
               width={270}
               height={270}
-              data={doughnutData}
+              data={loading ? {} : doughnutData}
               cutoutPercentage={58}
               fillText="Total Percentage"
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
               labelPositionLeft
               labelsData={
-                (!!doughnutData &&
-                  doughnutData.labels.map((label, idx) => ({
-                    data: label,
-                    color: chartColors[idx],
-                  }))) ||
-                []
+                loading
+                  ? []
+                  : (!!doughnutData &&
+                      doughnutData.labels.map((label, idx) => ({
+                        data: label,
+                        color: chartColors[idx],
+                      }))) ||
+                    []
               }
             />
           </div>
@@ -113,6 +119,7 @@ TotalViewsChart.defaultProps = {
 
 const mapStateToProps = createStructuredSelector({
   totalViewsData: makeSelectMarketviewTotalView(),
+  selectFilters: makeSelectSelectFilters(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)

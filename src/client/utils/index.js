@@ -48,6 +48,8 @@ const getLabelWithSuffix = (label, property) => {
   return `${label} ${suffix}`
 }
 
+const splitCamelCaseToString = (s) => ucfirst(s.split(/(?=[A-Z])/).join(' '))
+
 function socialIconSelector(key) {
   if (!key) return
   const keyToLowerCase = key.toLowerCase()
@@ -120,10 +122,6 @@ const shadeHexColor = (color, percent) => {
   )
 }
 
-const capitalizeFirstLetter = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1)
-}
-
 const metricSuffix = (number) => {
   number = parseInt(number)
   if (number >= 1e3) {
@@ -194,8 +192,8 @@ const getBrandNameAndCompetitorsName = (profile) => {
   return [brand.name]
 }
 
-const ucfirst = (string) => {
-  return string.charAt(0).toUpperCase() + string.slice(1)
+const ucfirst = (string = '') => {
+  return !!string ? string.charAt(0).toUpperCase() + string.slice(1) : ''
 }
 
 const normalize = (input, min, max, low_range, high_range) => {
@@ -265,7 +263,6 @@ export {
   toSlug,
   searchTermInText,
   shadeHexColor,
-  capitalizeFirstLetter,
   metricSuffix,
   strToColor,
   getMaximumValueIndexFromArray,
@@ -281,4 +278,5 @@ export {
   getFilteredCompetitors,
   getFilteredCompetitorValues,
   getLocationParams,
+  splitCamelCaseToString,
 }

@@ -21,6 +21,7 @@ import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPl
 import {
   getMaximumValueIndexFromArray,
   ucfirst,
+  getLabelWithSuffix,
   getDateBucketFromRange,
   getBrandAndCompetitors,
 } from 'Utils'
@@ -30,28 +31,26 @@ import {
   convertMultiRequestDataIntoDatasets,
 } from 'Utils/datasets'
 
-import { dayOfWeek } from 'Utils/globals'
+import { dayOfWeek, chartColors } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 function* getCompetitorVideosApi({ payload }) {
-  console.log(payload)
-  console.log(marketviewCompetitorVideosData)
   const requestObject = {
-    ...payload
+    ...payload,
   }
 
-  if(payload.competitors) {
+  if (payload.competitors) {
     requestObject.competitors = JSON.stringify(payload.competitors)
   }
 
   let response = yield call(
     getDataFromApi,
     {},
-    `/brand/${payload.brandUuid}/topvideos?${querystring.stringify(requestObject)}`,
+    `/brand/${payload.brandUuid}/topvideos?${querystring.stringify(
+      requestObject
+    )}`,
     'GET'
   )
-
-  console.log(response)
 
   // return axios('/').then((res) => marketviewCompetitorVideosData)
   return response
@@ -127,6 +126,7 @@ function* getCompetitorTopVideosMarketview({
       display: 'percentage',
       brands: competitors,
       url: '/report',
+      platform: 'all',
     }
     let response = yield call(getDataFromApi, options)
 
@@ -203,7 +203,7 @@ function* getPlatformTopVideosMarketview({
   }
 }
 
-function* getSimilarProperties({ data: { dateRange } }) {
+function* getSimilarProperties({ data: { dateRange, container } }) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
@@ -236,6 +236,20 @@ function* getSimilarProperties({ data: { dateRange } }) {
         0,
         3
       )
+    }
+
+    if (
+      container === 'competitor' &&
+      !!highestBuckets &&
+      !!highestBuckets.length
+    ) {
+      yield put({
+        type: types.SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY,
+        payload:
+          !!highestBuckets[0] && !!highestBuckets[0].highestProperty
+            ? highestBuckets[0].highestProperty
+            : null,
+      })
     }
 
     const val = highestBuckets.map((value, idx) => ({
@@ -360,7 +374,7 @@ function* getFormatChartData() {
       dateBucket: 'dayOfWeek',
       display: 'none',
       platform: 'all',
-      brands: [...competitors.map((c) => c.uuid)],
+      brands: [...competitors],
     }
 
     // video is still being pulled from mock
@@ -560,33 +574,58 @@ function* getTopPerformingPropertiesData({
 }
 
 function* getTopPerformingPropertiesByCompetitorsData({
-  payload: { dateRange },
+  payload: { dateRange = 'week', property },
 }) {
   try {
     const profile = yield select(selectAuthProfile)
     const competitors = getBrandAndCompetitors(profile)
-    const options = {
-      url: '/report',
-      metric: 'views',
-      // platform: 'all',
-      dateRange: dateRange,
-      dateBucket: 'none',
-      property: ['pacing'],
-      brands: [...competitors.map((c) => c.uuid)],
-    }
 
-    const payload = yield call(getDataFromApi, { ...options })
+    if (!!property) {
+      const response = yield call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl(`/property/brands/${property}`, {
+          daterange: dateRange,
+          brandUuids: competitors,
+        }),
+        'GET'
+      )
 
-    if (!!payload && !!payload.data && !_.isEmpty(payload.data)) {
-      yield put(
-        actions.getTopPerformingPropertiesByCompetitorsSuccess(
-          convertDataIntoDatasets(payload, options, {
-            useBrandLabels: true,
+      if (!!response) {
+        // wtfis this man put it somewher else o.O
+        const brandLabels = Object.keys(response)
+
+        const propLabels = brandLabels.reduce((all, brand) => {
+          Object.keys(response[brand]).forEach((prop) => {
+            if (all.indexOf(prop) === -1) {
+              all.push(prop)
+            }
+          })
+          return all
+        }, [])
+
+        const convertedDatasets = propLabels.map((prop, idx) => {
+          const data = brandLabels.map(
+            (b) => (!!response[b] && response[b][prop]) || 0
+          )
+          return {
+            data,
+            label: getLabelWithSuffix(prop, property),
+            borderWidth: 1,
+            borderColor: chartColors[idx],
+            backgroundColor: chartColors[idx],
+          }
+        })
+
+        yield put(
+          actions.getTopPerformingPropertiesByCompetitorsSuccess({
+            datasets: convertedDatasets,
+            labels: brandLabels,
           })
         )
-      )
+      }
     } else {
-      yield put(actions.getTopPerformingPropertiesByCompetitorsSuccess({}))
+      throw new Error('Get Top Performing Property Error')
     }
   } catch (error) {
     console.log('error', error)

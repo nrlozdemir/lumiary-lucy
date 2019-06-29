@@ -45,6 +45,11 @@ class Header extends React.Component {
     }
   }
 
+  componentWillUnmount() {
+    const { toggleInfoSection } = this.props 
+    toggleInfoSection(null)
+  }
+
   render() {
     const { toggleInfoSection, sectionData, moduleKey } = this.props
 

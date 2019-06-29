@@ -27,9 +27,10 @@ function getMockPanopticDataApi() {
 function* getVideoReleasesData({ data }) {
   try {
     const { brand } = yield select(selectAuthProfile)
-    const { platform, dateRange } = data
+    const { platform, dateRange, metric } = data
 
     const options = {
+      metric,
       platform,
       property: 'format',
       daterange: dateRange,

@@ -33,6 +33,12 @@ export const types = {
     'Reports/PREDEFINED_REPORT_REQUEST_SUCCESS',
   PREDEFINED_REPORT_REQUEST_ERROR: 'Reports/PREDEFINED_REPORT_REQUEST_ERROR',
 
+  PREDEFINED_REPORT_CHART_REQUEST: 'Reports/PREDEFINED_REPORT_CHART_REQUEST',
+  PREDEFINED_REPORT_CHART_REQUEST_SUCCESS:
+    'Reports/PREDEFINED_REPORT_CHART_REQUEST:SUCCESS',
+  PREDEFINED_REPORT_CHART_REQUEST_ERROR:
+    'Reports/PREDEFINED_REPORT_CHART_REQUEST:ERROR',
+
   GET_CONTENT_VITALITY_SCORE_DATA: 'Reports/GET_CONTENT_VITALITY_SCORE_DATA',
   GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS:
     'Reports/GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS',
@@ -54,6 +60,11 @@ export const types = {
   LOAD_COLOR_COMPARISON_DATA_SUCCESS:
     'Reports/LOAD_COLOR_COMPARISON_DATA_SUCCESS',
   LOAD_COLOR_COMPARISON_DATA_ERROR: 'Reports/LOAD_COLOR_COMPARISON_DATA_ERROR',
+
+  GET_PREDEFINED_REPORTS_REQUEST: 'Reports/GET_PREDEFINED_REPORTS_REQUEST',
+  GET_PREDEFINED_REPORTS_REQUEST_SUCCESS:
+    'Reports/GET_PREDEFINED_REPORTS:SUCCESS',
+  GET_PREDEFINED_REPORTS_REQUEST_ERROR: 'Reports/GET_PREDEFINED_REPORTS:ERROR',
 }
 
 export const actions = {
@@ -109,15 +120,15 @@ export const actions = {
     type: types.COMPARE_BRAND_REQUEST_ERROR,
     error,
   }),
-  predefinedReportFormSubmit: (values) => ({
+  predefinedReportRequest: (payload) => ({
     type: types.PREDEFINED_REPORT_REQUEST,
-    payload: values,
+    payload,
   }),
-  predefinedReportFormSubmitSuccess: (payload) => ({
+  predefinedReportRequestSuccess: (payload) => ({
     type: types.PREDEFINED_REPORT_REQUEST_SUCCESS,
     payload,
   }),
-  predefinedReportFormSubmitError: (error) => ({
+  predefinedReportRequestError: (error) => ({
     type: types.PREDEFINED_REPORT_REQUEST_ERROR,
     error,
   }),
@@ -173,7 +184,17 @@ export const actions = {
     type: types.LOAD_COLOR_COMPARISON_DATA_ERROR,
     error,
   }),
+
+  getPredefinedReportChartData: (data) => ({
+    type: types.PREDEFINED_REPORT_CHART_REQUEST,
+    payload: data,
+  }),
+
+  getPredefinedReports: () => ({
+    type: types.GET_PREDEFINED_REPORTS_REQUEST,
+  }),
 }
+
 export const initialState = fromJS({
   reports: {
     data: [],
@@ -197,6 +218,7 @@ export const initialState = fromJS({
   },
   predefinedReportValues: {
     data: null,
+    chartData: {},
     error: false,
     loading: false,
   },
@@ -211,6 +233,11 @@ export const initialState = fromJS({
     loading: false,
   },
   colorComparisonData: {
+    data: [],
+    error: false,
+    loading: false,
+  },
+  predefinedReports: {
     data: [],
     error: false,
     loading: false,
@@ -306,7 +333,7 @@ const reportsReducer = (state = initialState, action) => {
         .setIn(['comparebrandValues', 'loading'], fromJS(false))
     /** END submit brand insight form */
 
-    /** START submit brand insight form */
+    /** START Predefined Report form */
     case types.PREDEFINED_REPORT_REQUEST:
       return state.setIn(['predefinedReportValues', 'loading'], fromJS(true))
 
@@ -319,7 +346,37 @@ const reportsReducer = (state = initialState, action) => {
       return state
         .setIn(['predefinedReportValues', 'error'], fromJS(action.error))
         .setIn(['predefinedReportValues', 'loading'], fromJS(false))
-    /** END submit brand insight form */
+
+    case types.PREDEFINED_REPORT_REQUEST:
+      return state
+    // return state.setIn([
+    //   'predefinedReportValues',
+    //   'chartData',
+    //   fromJS({
+    //     ...state.predefinedReportValues.chartData,
+    //     ...action.payload,
+    //   }),
+    // ])
+
+    case types.PREDEFINED_REPORT_CHART_REQUEST_SUCCESS:
+      return state
+
+    case types.PREDEFINED_REPORT_REQUEST_ERROR:
+      return state
+
+    case types.GET_PREDEFINED_REPORTS_REQUEST:
+      return state.setIn(['predefinedReports', 'loading'], fromJS(true))
+
+    case types.GET_PREDEFINED_REPORTS_REQUEST_SUCCESS:
+      return state
+        .setIn(['predefinedReports', 'data'], fromJS(action.payload))
+        .setIn(['predefinedReports', 'loading'], fromJS(false))
+
+    case types.GET_PREDEFINED_REPORTS_REQUEST_ERROR:
+      return state
+        .setIn(['predefinedReports', 'error'], fromJS(action.error))
+        .setIn(['predefinedReports', 'loading'], fromJS(false))
+    /** END Predefined Report form */
 
     /** START video comparison data */
     case types.LOAD_VIDEO_COMPARISON_DATA:
@@ -462,6 +519,15 @@ const selectReportsPredefinedReportValues = (state) =>
 export const makeSelectReportsPredefinedReportValues = () =>
   createSelector(
     selectReportsPredefinedReportValues,
+    (substate) => substate.toJS()
+  )
+
+const selectPredefinedReports = (state) =>
+  state.Reports.get('predefinedReports')
+
+export const makeSelectPredefinedReports = () =>
+  createSelector(
+    selectPredefinedReports,
     (substate) => substate.toJS()
   )
 

@@ -7,27 +7,30 @@ import classnames from 'classnames'
 import FlipCard from 'Components/FlipCard'
 import CustomBarChart from 'Components/Charts/CustomBarChart'
 import styles from './style.scss'
-import { capitalizeFirstLetter } from 'Utils'
+import { ucfirst, metricSuffix } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
-const days = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-]
+const getWeekDays = (locale) => {
+  let days = []
+  let currentDate = new Date()
+  
+  for(let i = 0; i < 7; i++)
+  {       
+    days.push(currentDate.toLocaleDateString(locale, { 
+      weekday: 'long' 
+    }))
+    currentDate.setDate(currentDate.getDate() - 1)      
+  }
+  return days
+}
+
+const days = getWeekDays('en-US').reverse()
 
 function parseData(props) {
   const { data, title } = props
   const stats = data.data.map((el, i) => ({ label: days[i], score: el }))
-  const selected = days[new Date().getDay()]
-  const selectedPrev =
-    days[
-      ((day) => new Date(day.setDate(day.getDate() - 1)).getDay())(new Date())
-    ]
+  const selected = days[days.length - 1]
+  const selectedPrev = days[days.length - 2]
   const statSelected = Object.values(stats).filter(
     (day) => stats && day.label === selected
   )
@@ -49,13 +52,13 @@ function parseData(props) {
     statClassName = classnames(styles.stats, styles.increase)
     backText = `${title} increased ${
       data.percentage
-    }% today from yesterday, from ${previousDayScore}k to ${todayScore}k`
+    }% today from yesterday, from ${metricSuffix(previousDayScore)} to ${metricSuffix(todayScore)}`
   } else if (data.percentage < 0) {
     statArrowClassName = classnames(styles.arrow, styles.arrowDown)
     statClassName = classnames(styles.stats, styles.decrease)
     backText = `${title} decreased ${
       data.percentage
-    }% today from yesterday, from ${previousDayScore}k to ${todayScore}k`
+    }% today from yesterday, from ${metricSuffix(previousDayScore)} to ${metricSuffix(todayScore)}`
   }
 
   return {
@@ -143,13 +146,13 @@ class Cards extends React.Component {
               {data && data[item] && (
                 <Front
                   data={data[item]}
-                  title={`${capitalizeFirstLetter(item)}s`}
+                  title={`${ucfirst(item)}s`}
                 />
               )}
               {data && data[item] && (
                 <Back
                   data={data[item]}
-                  title={`${capitalizeFirstLetter(item)}s`}
+                  title={`${ucfirst(item)}s`}
                 />
               )}
             </FlipCard>

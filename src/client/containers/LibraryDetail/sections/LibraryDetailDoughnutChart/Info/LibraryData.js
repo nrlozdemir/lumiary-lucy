@@ -13,7 +13,7 @@ import {
 class LibraryData extends React.Component {
   render() {
     const { modalData } = this.props
-
+    
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (

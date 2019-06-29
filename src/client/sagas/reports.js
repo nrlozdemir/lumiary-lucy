@@ -103,14 +103,17 @@ function* compareBrandSubmit({ payload }) {
   }
 }
 
-function* predefinedReportSubmit(values) {
-  const id = `${randomKey(4)}-${randomKey(4)}-${randomKey(4)}-${randomKey(4)}`
+function* predefinedReportRequest({ payload }) {
   try {
-    const payload = yield call(getGeneratedReportApi)
-    yield put(actions.predefinedReportFormSubmitSuccess(payload))
-    yield put(push(`/reports/predefined-reports/${id}`))
+    const { brand } = yield select(selectAuthProfile)
+
+    const url = `/brand/${brand.uuid}/predef/${payload}`
+
+    const response = yield call(getDataFromApi, undefined, url, 'GET')
+
+    yield put(actions.predefinedReportRequestSuccess(response))
   } catch (err) {
-    yield put(actions.predefinedReportFormSubmitError(err))
+    yield put(actions.predefinedReportRequestError(err))
   }
 }
 
@@ -121,6 +124,48 @@ function* deleteReport(data) {
   // } catch (err) {
   //   yield put(actions.loadDeleteReportError(err))
   // }
+}
+
+function* getPredefinedReportChartRequest({ payload }) {
+  try {
+    console.log('predefined chart data request', payload)
+    yield put({
+      type: types.PREDEFINED_REPORT_CHART_REQUEST_SUCCESS,
+      payload: {},
+    })
+  } catch (err) {
+    console.log(err)
+    yield put({
+      type: types.PREDEFINED_REPORT_CHART_REQUEST_ERROR,
+      payload: err.message,
+    })
+  }
+}
+
+function* getPredefinedReports() {
+  try {
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      `/brand/${brand.uuid}/predef`,
+      'GET'
+    )
+
+    if (!!response) {
+      yield put({
+        type: types.GET_PREDEFINED_REPORTS_REQUEST_SUCCESS,
+        payload: response,
+      })
+    }
+  } catch (err) {
+    console.log(err)
+    yield put({
+      type: types.GET_PREDEFINED_REPORTS_REQUEST_ERROR,
+      payload: err.message,
+    })
+  }
 }
 
 function* getContentVitalityScoreData({ payload = {} }) {
@@ -237,7 +282,7 @@ export default [
   takeLatest(types.LOAD_MORE_REPORTS, getMoreReports),
   takeLatest(types.BRAND_INSIGHT_REQUEST, brandInsightSubmit),
   takeLatest(types.COMPARE_BRAND_REQUEST, compareBrandSubmit),
-  takeLatest(types.PREDEFINED_REPORT_REQUEST, predefinedReportSubmit),
+  takeLatest(types.PREDEFINED_REPORT_REQUEST, predefinedReportRequest),
   takeLatest(types.DELETE_REPORT, deleteReport),
   takeLatest(
     types.GET_CONTENT_VITALITY_SCORE_DATA,
@@ -249,4 +294,9 @@ export default [
     getPerformanceComparisonData
   ),
   takeLatest(types.LOAD_COLOR_COMPARISON_DATA, getColorComparisonData),
+  takeLatest(
+    types.PREDEFINED_REPORT_CHART_REQUEST,
+    getPredefinedReportChartRequest
+  ),
+  takeLatest(types.GET_PREDEFINED_REPORTS_REQUEST, getPredefinedReports),
 ]

@@ -17,11 +17,6 @@ const RadarChartModule = ({
   rightTitle,
   loading = false,
 }) => {
-  if(data && data[0] && data[0].datas){
-    console.log("datas 0")
-    console.log(data[0].datas)
-    console.log("------")
-  }
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (

@@ -1,11 +1,4 @@
 import React, { Component } from 'react'
-import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import {
-  actions,
-  makeSelectMarketviewCompetitorView,
-} from 'Reducers/marketview'
 
 import ColorCard from 'Containers/Marketview/sections/main/ColorCard'
 import PacingCard from 'Containers/Marketview/sections/main/PacingCard'
@@ -16,12 +9,7 @@ import TotalCompetitorCard from 'Containers/Marketview/sections/main/TotalCompet
 import style from '../style.scss'
 
 class Main extends Component {
-  componentDidMount() {
-    this.props.getTotalCompetitorViewsRequest()
-  }
-
   render() {
-    const { totalCompetitorViewsData } = this.props
     return (
       <React.Fragment>
         <div className={style.mainCardContainer}>
@@ -32,24 +20,11 @@ class Main extends Component {
 
         <div className="grid-collapse">
           <TotalViewsCard />
-          {totalCompetitorViewsData.data && (
-            <TotalCompetitorCard data={totalCompetitorViewsData.data} />
-          )}
+          <TotalCompetitorCard />
         </div>
       </React.Fragment>
     )
   }
 }
 
-const mapStateToProps = createStructuredSelector({
-  totalCompetitorViewsData: makeSelectMarketviewCompetitorView(),
-})
-
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
-
-const withConnect = connect(
-  mapStateToProps,
-  mapDispatchToProps
-)
-
-export default compose(withConnect)(Main)
+export default Main

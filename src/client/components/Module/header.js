@@ -46,6 +46,10 @@ const HeaderModule = ({
                 selectKey={filter.selectKey}
                 placeHolder={filter.placeHolder}
                 defaultValue={filter.defaultValue}
+                selectClasses={
+                  filter.type === 'platformEngagement' &&
+                  'custom-select combine-select'
+                }
               />
             )
           })}
