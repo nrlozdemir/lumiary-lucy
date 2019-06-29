@@ -10,24 +10,27 @@ import styles from './style.scss'
 import { ucfirst, metricSuffix } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
-const days = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-]
+const getWeekDays = (locale) => {
+  let days = []
+  let currentDate = new Date()
+  
+  for(let i = 0; i < 7; i++)
+  {       
+    days.push(currentDate.toLocaleDateString(locale, { 
+      weekday: 'long' 
+    }))
+    currentDate.setDate(currentDate.getDate() - 1)      
+  }
+  return days
+}
+
+const days = getWeekDays('en-US').reverse()
 
 function parseData(props) {
   const { data, title } = props
   const stats = data.data.map((el, i) => ({ label: days[i], score: el }))
-  const selected = days[new Date().getDay()]
-  const selectedPrev =
-    days[
-      ((day) => new Date(day.setDate(day.getDate() - 1)).getDay())(new Date())
-    ]
+  const selected = days[days.length - 1]
+  const selectedPrev = days[days.length - 2]
   const statSelected = Object.values(stats).filter(
     (day) => stats && day.label === selected
   )

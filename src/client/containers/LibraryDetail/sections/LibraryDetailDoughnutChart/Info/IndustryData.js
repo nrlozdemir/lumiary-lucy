@@ -6,11 +6,12 @@ import style from '../style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import { makeSelectInfoModalData } from 'Reducers/libraryDetail'
+import cx from 'classnames'
 
 class IndustryData extends React.Component {
   render() {
-    const { modalData } = this.props
-    
+    const { modalData, loading } = this.props
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -41,7 +42,11 @@ class IndustryData extends React.Component {
                 </p>
               </div>
             ) : (
-              <div className={style.emptyData}>No Data Available</div>
+              <div className={cx(style.emptyData, {
+                [style['emptyData--loading']]: loading
+              })}>
+                {!loading ? 'No Data Available' : ''}
+              </div>
             )}
           </div>
         )}

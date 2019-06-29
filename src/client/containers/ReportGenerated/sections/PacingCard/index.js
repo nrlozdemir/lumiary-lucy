@@ -17,15 +17,12 @@ class PacingCard extends React.Component {
       data: { data, loading },
     } = this.props
 
-    if (!data && loading) {
-      return <RouterLoading />
-    }
-
     return (
       <PacingCardModule
         data={data || {}}
         moduleKey={'Reports/PacingCard'}
         title="Pacing For Each Format by Performance"
+        loading={loading}
       />
     )
   }

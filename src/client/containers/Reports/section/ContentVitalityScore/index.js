@@ -8,23 +8,34 @@ class ContentVitalityScore extends React.Component {
     action({ ...data, report })
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
+  shouldComponentUpdate(nextProps) {
+    const {
+      data: { data, loading },
+    } = this.props
+
+    const {
+      data: { data: nextData, loading: nextLoading },
+    } = nextProps
+
     return (
-      JSON.stringify(this.props.data.data) !==
-      JSON.stringify(nextProps.data.data)
+      JSON.stringify(data) !== JSON.stringify(data) || loading !== nextLoading
     )
   }
 
   render() {
     const {
+      data: test,
       data: { data, loading, error },
       authProfile = {},
     } = this.props
 
-    const maxVideoPercent = !!data && Object.keys(data).reduce((accumulator, key) => {
-      const maxPercentInSet = Math.max(...data[key].videoPercents)
-      return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
-    }, 0) || 0
+    const maxVideoPercent =
+      (!!data &&
+        Object.keys(data).reduce((accumulator, key) => {
+          const maxPercentInSet = Math.max(...data[key].videoPercents)
+          return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
+        }, 0)) ||
+      0
 
     const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
     const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
@@ -33,6 +44,7 @@ class ContentVitalityScore extends React.Component {
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <ContentVitalityScoreModule
+            loading={loading}
             chartYAxisMax={chartYAxisMax}
             data={data}
             authProfile={authProfile}

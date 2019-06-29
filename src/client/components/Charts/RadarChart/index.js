@@ -47,15 +47,25 @@ const plugins = [
 const RadarChart = (props) => {
   const { data, width = 430, height = 430 } = props
   const themes = props.themeContext.colors
-  let parsedData = data
-  parsedData.datasets[0].backgroundColor = themes.chartBackgroundColor
-  parsedData.datasets[0].pointBackgroundColor = themes.chartPointBackgroundColor
-  parsedData.datasets[0].pointBorderColor = themes.chartPointBorderColor
-  const maxTicksStepLimit = parsedData.datasets[0].data.every(
-    (n) => n <= 100000 // 100k
-  )
-    ? 100000 // 100k
-    : Math.max(...parsedData.datasets[0].data) // any big number than 100k
+  let parsedData = data || {}
+  let maxTicksStepLimit = 100000
+
+  const hasData =
+    !!parsedData && !!parsedData.datasets && !!parsedData.datasets[0]
+
+  if (hasData) {
+    parsedData.datasets[0].backgroundColor = themes.chartBackgroundColor
+    parsedData.datasets[0].pointBackgroundColor =
+      themes.chartPointBackgroundColor
+    parsedData.datasets[0].pointBorderColor = themes.chartPointBorderColor
+
+    maxTicksStepLimit = parsedData.datasets[0].data.every(
+      (n) => n <= 100000 // 100k
+    )
+      ? 100000 // 100k
+      : Math.max(...parsedData.datasets[0].data) // any big number than 100k
+  }
+
   return (
     <Radar
       data={parsedData}
@@ -88,7 +98,8 @@ const RadarChart = (props) => {
             },
             afterLabel: function(tooltipItem, data) {
               return (
-                metricSuffix(data.labels[tooltipItem['index']].count) + ' Shares'
+                metricSuffix(data.labels[tooltipItem['index']].count) +
+                ' Shares'
               )
             },
           },

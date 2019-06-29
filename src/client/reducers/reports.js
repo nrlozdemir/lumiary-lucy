@@ -233,7 +233,7 @@ export const initialState = fromJS({
     loading: false,
   },
   colorComparisonData: {
-    data: [],
+    data: undefined,
     error: false,
     loading: false,
   },

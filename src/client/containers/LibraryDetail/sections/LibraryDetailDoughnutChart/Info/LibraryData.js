@@ -9,10 +9,11 @@ import {
   makeSelectInfoShowSection,
   makeSelectInfoModalData,
 } from 'Reducers/libraryDetail'
+import cx from 'classnames'
 
 class LibraryData extends React.Component {
   render() {
-    const { modalData } = this.props
+    const { modalData, loading } = this.props
     
     return (
       <ThemeContext.Consumer>
@@ -44,7 +45,11 @@ class LibraryData extends React.Component {
                 </p>
               </div>
             ) : (
-              <div className={style.emptyData}>No Data Available</div>
+              <div className={cx(style.emptyData, {
+                [style['emptyData--loading']]: loading
+              })}>
+                {!loading ? 'No Data Available' : ''}
+              </div>
             )}
           </div>
         )}

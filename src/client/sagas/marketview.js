@@ -35,8 +35,6 @@ import { dayOfWeek, chartColors } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 function* getCompetitorVideosApi({ payload }) {
-  console.log(payload)
-  console.log(marketviewCompetitorVideosData)
   const requestObject = {
     ...payload,
   }
@@ -53,8 +51,6 @@ function* getCompetitorVideosApi({ payload }) {
     )}`,
     'GET'
   )
-
-  console.log(response)
 
   // return axios('/').then((res) => marketviewCompetitorVideosData)
   return response
@@ -130,6 +126,7 @@ function* getCompetitorTopVideosMarketview({
       display: 'percentage',
       brands: competitors,
       url: '/report',
+      platform: 'all',
     }
     let response = yield call(getDataFromApi, options)
 
