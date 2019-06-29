@@ -28,41 +28,43 @@ class LineChartSection extends React.Component {
         {({ themeContext: { colors } }) => (
           <div className={style.lineChartWrapper}>
             <div className="mt-48 mb-48">
-              {modalData && sectionData && (
-                <LineChart
-                  width={1090}
-                  height={292}
-                  dataSet={modalData.lineChartData}
-                  xAxesFlatten
-                  yAxesPercentage
-                  xAxesStepSize={1}
-                  yAxesStepSize={25}
-                  options={{
-                    tooltips: {
-                      xPadding: 10,
-                      yPadding: 16,
-                      cornerRadius: 3,
-                      callbacks: {
-                        title: function(tooltipItem, data) {
-                          const { datasetIndex, index } = tooltipItem[0]
-                          if (datasetIndex === 1) {
-                            return `${
-                              data.datasets[datasetIndex].data[index]
-                            }% of industry is shot in ${sectionData.label}`
-                          } else {
-                            return `${
-                              data.datasets[datasetIndex].data[index]
-                            }% of your library is shot in ${sectionData.label}`
+              <LineChart
+                width={1090}
+                height={292}
+                dataSet={(!!modalData && modalData.lineChartData) || {}}
+                xAxesFlatten
+                yAxesPercentage
+                xAxesStepSize={1}
+                yAxesStepSize={25}
+                options={{
+                  tooltips: {
+                    xPadding: 10,
+                    yPadding: 16,
+                    cornerRadius: 3,
+                    callbacks: {
+                      ...(!!modalData && !!sectionData
+                        ? {
+                            title: function(tooltipItem, data) {
+                              const { datasetIndex, index } = tooltipItem[0]
+                              if (datasetIndex === 1) {
+                                return `${
+                                  data.datasets[datasetIndex].data[index]
+                                }% of industry is shot in ${sectionData.label}`
+                              } else {
+                                return `${
+                                  data.datasets[datasetIndex].data[index]
+                                }% of your library is shot in ${sectionData.label}`
+                              }
+                            },
+                            label: function(tooltipItem, data) {
+                              return null
+                            },
                           }
-                        },
-                        label: function(tooltipItem, data) {
-                          return null
-                        },
-                      },
+                        : {}),
                     },
-                  }}
-                />
-              )}
+                  },
+                }}
+              />
             </div>
           </div>
         )}

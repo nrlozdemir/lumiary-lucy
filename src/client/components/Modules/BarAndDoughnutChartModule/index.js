@@ -57,13 +57,15 @@ const renderLegend = (legend) => {
   return (
     <div className={style.headerLabel}>
       <div className={'d-flex align-items-center justify-content-center'}>
-        {!!legend && !!legend.length && legend.map((item, idx) => (
-          <Legend
-            key={`colorTempLegend_${idx}`}
-            color={item.color}
-            label={item.label}
-          />
-        ))}
+        {!!legend &&
+          !!legend.length &&
+          legend.map((item, idx) => (
+            <Legend
+              key={`colorTempLegend_${idx}`}
+              color={item.color}
+              label={item.label}
+            />
+          ))}
       </div>
     </div>
   )
@@ -82,6 +84,7 @@ const BarAndDoughnutChartModule = ({
   doughnutCustoms,
   doughnutData,
   stackedChartData,
+  loading = false,
 }) => {
   return (
     <ThemeContext.Consumer>
@@ -93,6 +96,7 @@ const BarAndDoughnutChartModule = ({
           filters={filters}
           legend={renderLegend(legend)}
           isEmpty={isDataSetEmpty(stackedChartData)}
+          loading={loading}
         >
           <div
             className={classnames(style.container, reverse && style.reverse)}

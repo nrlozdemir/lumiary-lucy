@@ -27,6 +27,7 @@ class VideoComparison extends React.Component {
             placeHolder: 'Date',
           },
         ]}
+        loading={loading}
         legend={
           <div className={style.headerLabel}>
             <div
@@ -47,7 +48,7 @@ class VideoComparison extends React.Component {
           </div>
         }
       >
-        {data && <ComparisonHorizontalBarChart data={data} />}
+        <ComparisonHorizontalBarChart data={data || {}} />
       </Module>
     )
   }

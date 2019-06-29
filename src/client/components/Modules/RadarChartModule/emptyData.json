@@ -1,0 +1,210 @@
+[
+  {
+    "type": "Color",
+    "datas": {
+      "labels": [
+        {
+          "name": "Red",
+          "count": 0,
+          "color": "#cc2226",
+          "selected": true
+        },
+        {
+          "name": "Orange",
+          "count": 0,
+          "color": "#eb7919",
+          "selected": true
+        },
+        {
+          "name": "Yellow",
+          "count": 0,
+          "color": "#fff20d",
+          "selected": true
+        },
+        {
+          "name": "Green",
+          "count": 0,
+          "color": "#13862b",
+          "selected": false
+        },
+        {
+          "name": "Purple",
+          "count": 0,
+          "color": "#923683",
+          "selected": false
+        },
+        {
+          "name": "Orange-Red",
+          "count": 0,
+          "color": "#dd501d",
+          "selected": false
+        },
+        {
+          "name": "Yellow-Orange",
+          "count": 0,
+          "color": "#f8b90b",
+          "selected": false
+        },
+        {
+          "name": "Yellow-Green",
+          "count": 0,
+          "color": "#aac923",
+          "selected": false
+        },
+        {
+          "name": "Blue-Green",
+          "count": 0,
+          "color": "#229a78",
+          "selected": false
+        },
+        {
+          "name": "Blue-Purple",
+          "count": 0,
+          "color": "#79609b",
+          "selected": false
+        },
+        {
+          "name": "Red-Purple",
+          "count": 0,
+          "color": "#b83057",
+          "selected": false
+        }
+      ],
+      "datasets": [
+        {
+          "label": "Color",
+          "backgroundColor": "rgba(172, 176, 190, 0.4)",
+          "borderColor": "transparent",
+          "pointBackgroundColor": "#505050",
+          "pointBorderColor": "#505050",
+          "data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      ]
+    },
+    "total": 0,
+    "progress": [
+      {
+        "leftTitle": "Red",
+        "color": "#cc2226",
+        "rightTitle": "0 Shares",
+        "value": "NaN"
+      },
+      {
+        "leftTitle": "Orange",
+        "color": "#eb7919",
+        "rightTitle": "0 Shares",
+        "value": "NaN"
+      },
+      {
+        "leftTitle": "Yellow",
+        "color": "#fff20d",
+        "rightTitle": "0 Shares",
+        "value": "NaN"
+      }
+    ]
+  },
+  {
+    "type": "Color",
+    "datas": {
+      "labels": [
+        {
+          "name": "Red",
+          "count": 0,
+          "color": "#cc2226",
+          "selected": true
+        },
+        {
+          "name": "Orange",
+          "count": 0,
+          "color": "#eb7919",
+          "selected": true
+        },
+        {
+          "name": "Yellow",
+          "count": 0,
+          "color": "#fff20d",
+          "selected": true
+        },
+        {
+          "name": "Green",
+          "count": 0,
+          "color": "#13862b",
+          "selected": false
+        },
+        {
+          "name": "Purple",
+          "count": 0,
+          "color": "#923683",
+          "selected": false
+        },
+        {
+          "name": "Orange-Red",
+          "count": 0,
+          "color": "#dd501d",
+          "selected": false
+        },
+        {
+          "name": "Yellow-Orange",
+          "count": 0,
+          "color": "#f8b90b",
+          "selected": false
+        },
+        {
+          "name": "Yellow-Green",
+          "count": 0,
+          "color": "#aac923",
+          "selected": false
+        },
+        {
+          "name": "Blue-Green",
+          "count": 0,
+          "color": "#229a78",
+          "selected": false
+        },
+        {
+          "name": "Blue-Purple",
+          "count": 0,
+          "color": "#79609b",
+          "selected": false
+        },
+        {
+          "name": "Red-Purple",
+          "count": 0,
+          "color": "#b83057",
+          "selected": false
+        }
+      ],
+      "datasets": [
+        {
+          "label": "Color",
+          "backgroundColor": "rgba(172, 176, 190, 0.4)",
+          "borderColor": "transparent",
+          "pointBackgroundColor": "#505050",
+          "pointBorderColor": "#505050",
+          "data": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        }
+      ]
+    },
+    "total": 0,
+    "progress": [
+      {
+        "leftTitle": "Red",
+        "color": "#cc2226",
+        "rightTitle": "0 Shares",
+        "value": "NaN"
+      },
+      {
+        "leftTitle": "Orange",
+        "color": "#eb7919",
+        "rightTitle": "0 Shares",
+        "value": "NaN"
+      },
+      {
+        "leftTitle": "Yellow",
+        "color": "#fff20d",
+        "rightTitle": "0 Shares",
+        "value": "NaN"
+      }
+    ]
+  }
+]
