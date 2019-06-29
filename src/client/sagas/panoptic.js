@@ -34,25 +34,27 @@ function* getVideoReleasesData({ data }) {
       platform,
       property: 'format',
       daterange: dateRange,
-      brandUuid: brand.uuid,
     }
 
-    const [videoCountData, engagementCountData] = yield all([
-      call(
-        getDataFromApi,
-        undefined,
-        buildApiUrl(`/brand/${brand.uuid}/count`, options),
-        'GET'
-      ),
-      call(getDataFromApi, undefined, buildApiUrl('/metric', options), 'GET'),
-    ])
-
-    const chartData = convertVideoEngagementData(
-      videoCountData,
-      engagementCountData
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/brand/${brand.uuid}/count`, options),
+      'GET'
     )
 
-    yield put(actions.getVideoReleasesDataSuccess(chartData))
+    if(!!response) {
+      console.log('o hi mark', response)
+    } else {
+      throw new Error('Panoptic Error getVideoReleasesData')
+    }
+
+    // const chartData = convertVideoEngagementData(
+    //   videoCountData,
+    //   engagementCountData
+    // )
+
+    //yield put(actions.getVideoReleasesDataSuccess(chartData))
   } catch (err) {
     console.log(err)
     yield put(actions.getVideoReleasesDataError(err))
