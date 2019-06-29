@@ -41,7 +41,7 @@ class Dropdown extends Component {
     const { profileImg } = this.props
     const { status, colors } = this.props.themeContext
     const imageClass = classnames('circleImage ' + style.profileImage)
-    console.log(profileImg)
+
     return (
       <div>
         <img
