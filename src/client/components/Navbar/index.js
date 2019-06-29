@@ -16,6 +16,8 @@ import {
 
 import { actions as generatedReportActions } from 'Reducers/generatedReport'
 
+import { makeSelectAuthProfile } from 'Reducers/auth'
+
 import Switch from 'Components/Form/Switch'
 import { ucfirst } from 'Utils'
 import style from './style.scss'
@@ -225,6 +227,9 @@ const Selector = (props) => {
 
 const Template = (props) => {
   const templateSelector = Selector(props)
+  const { profile = {} } = props
+  const { brand = {} } = profile
+  const { profileImg } = brand
   const { textColor, moduleBackground, moduleShadow } = props.themes
   return (
     <header
@@ -239,7 +244,7 @@ const Template = (props) => {
         <div className={linksClass}>{templateSelector['navigation']}</div>
         <div className={profileClass}>
           <div className="float-right">
-            <Dropdown />
+            <Dropdown profileImg={profileImg} />
 
             {/*<span>Bleacher Report</span>*/}
           </div>
@@ -307,6 +312,7 @@ const mapStateToProps = createStructuredSelector({
   brandInsightValue: makeSelectReportsBrandInsightValues(),
   comparebrandValues: makeSelectReportsComparebrandValues(),
   predefinedReportValues: makeSelectReportsPredefinedReportValues(),
+  profile: makeSelectAuthProfile(),
 })
 
 const mapDispatchToProps = (dispatch) =>

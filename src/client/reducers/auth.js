@@ -29,6 +29,7 @@ export const initialState = {
     brand: {
       name: 'Bleacher Report',
       uuid: 'd65aa957-d094-4cf3-8d37-dafe50e752ea',
+      profileImg: 'https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png',
       competitors: [
         {
           name: 'Barstool Sports',
