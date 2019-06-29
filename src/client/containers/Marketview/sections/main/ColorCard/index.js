@@ -53,7 +53,7 @@ class ColorCard extends Component {
       isEmpty(data)
 
     const totalChartValue =
-      data.reduce((total, { value }) => total + value, 0) || 1000
+      data.reduce((total, { value }) => total + value, 0);
 
     return (
       <ThemeContext.Consumer>
@@ -89,7 +89,7 @@ class ColorCard extends Component {
               </span>
             </div>
             <div className={style.bubbleChart}>
-              {!!data && !!data.length && (
+              {!!data && !!data.length && totalChartValue && (
                 <BubbleChart
                   maximumIterationCount={1000}
                   size={[totalChartValue * 3.2, totalChartValue * 2.4]}
