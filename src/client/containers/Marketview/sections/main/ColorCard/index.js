@@ -52,6 +52,9 @@ class ColorCard extends Component {
           (!!data && !!data.length && data.every((obj) => obj.value === 0)))) ||
       isEmpty(data)
 
+    const totalChartValue =
+      data.reduce((total, { value }) => total + value, 0) || 1000
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -89,14 +92,23 @@ class ColorCard extends Component {
               {!!data && !!data.length && (
                 <BubbleChart
                   maximumIterationCount={1000}
-                  size={[800, 600]}
-                  fromPercentages={true}
-                  options={{ toolTipWidth: 200, toolTipHeight: 75 }}
+                  size={[totalChartValue * 3.2, totalChartValue * 2.4]}
+                  options={{
+                    toolTipWidth: totalChartValue * 1.2,
+                    toolTipHeight: totalChartValue * 0.4,
+                    visualWidth: totalChartValue * 0.2,
+                    visualHeight: totalChartValue * 0.2,
+                    toolTipRadius: totalChartValue * 0.1,
+                    toolTipGap: totalChartValue * 0.1,
+                    toolTipArrowWidth: totalChartValue * 0.1,
+                    toolTipArrowHeight: totalChartValue * 0.05,
+                  }}
                 >
                   {data.map((bubble, i) => (
                     <Bubble
                       key={'bubble-' + i}
-                      radius={(parseInt(bubble.value) / 100) * 0.0015 + 15}
+                      // radius={(parseInt(bubble.value) / 100) * 0.0015 + 15}
+                      radius={bubble.value || totalChartValue * 0.1}
                       fill={colors.bodyBackground}
                       stroke={bubble.color}
                     >
@@ -107,11 +119,20 @@ class ColorCard extends Component {
                             ' ' +
                             style.bubbleVisual
                           }
+                          style={{ fontSize: totalChartValue * 0.2 }}
                         />
                       </Visual>
                       <ToolTip>
-                        <div className={style.bubbleTooltip}>{bubble.name}</div>
-                        <div className={style.bubbleTooltip}>
+                        <div
+                          className={style.bubbleTooltip}
+                          style={{ fontSize: totalChartValue * 0.1 }}
+                        >
+                          {bubble.name}
+                        </div>
+                        <div
+                          className={style.bubbleTooltip}
+                          style={{ fontSize: totalChartValue * 0.1 }}
+                        >
                           {bubble.value / 1000}
                           {bubble.value < 1000 ? '' : 'k'} views
                         </div>
