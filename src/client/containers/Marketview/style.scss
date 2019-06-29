@@ -289,7 +289,7 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-    font-size: 50px;
+    font-size: inherit;
   }
 }
 
@@ -297,7 +297,7 @@
   font-family: $font-family-ClanOT;
   text-align: center;
   font-size: 18px;
-  line-height: 28px;
+  line-height: 1.6;
   color: black;
   font-weight: bold;
 
