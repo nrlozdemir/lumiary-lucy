@@ -1,7 +1,20 @@
 import React from 'react'
 import BarAndDoughnutChartModule from 'Components/Modules/BarAndDoughnutChartModule'
+import { isEqual } from 'lodash'
 
 class PerformanceComparison extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    const {
+      data: { data: nextData, loading: nextLoading },
+    } = nextProps
+
+    const {
+      data: { data, loading },
+    } = this.props
+
+    return !isEqual(nextData, data) || loading !== nextLoading
+  }
+
   callBack = (data, moduleKey) => {
     const { action, report } = this.props
     action({ ...data, report })
@@ -9,7 +22,6 @@ class PerformanceComparison extends React.Component {
 
   render() {
     const {
-      report,
       data: { data, loading, error },
     } = this.props
 
