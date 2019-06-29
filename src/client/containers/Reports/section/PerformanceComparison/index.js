@@ -89,6 +89,7 @@ class PerformanceComparison extends React.Component {
           fillText: 'Total Percentage',
           dataLabelFunction: 'insertAfter',
           dataLabelInsert: '%',
+          datalabels: true,
         }}
         doughnutCustoms={{
           width: 280,

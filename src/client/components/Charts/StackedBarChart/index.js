@@ -105,7 +105,13 @@ const plugins = [
 ]
 
 const StackedBarChart = (props) => {
-  const { barData = emptyData, height = 300, width = 500, barSpacing } = props
+  const {
+    barData = emptyData,
+    height = 300,
+    width = 500,
+    barSpacing,
+    datalabels = false,
+  } = props
   const themes = props.themeContext.colors
   return (
     <Bar
@@ -139,30 +145,34 @@ const StackedBarChart = (props) => {
           backgroundColor: themes.chartBackground,
           barSpacing,
         },
-        plugins: {
-          datalabels: {
-            formatter: (value, { datasetIndex, dataIndex }) => {
-              const ogValue =
-                !!barData &&
-                !!barData.datasets &&
-                !!barData.datasets[datasetIndex] &&
-                !!barData.datasets[datasetIndex].data &&
-                !!barData.datasets[datasetIndex].data.length &&
-                !!barData.datasets[datasetIndex].data[dataIndex]
-                  ? barData.datasets[datasetIndex].data[dataIndex]
-                  : value
+        ...(datalabels
+          ? {
+              plugins: {
+                datalabels: {
+                  formatter: (value, { datasetIndex, dataIndex }) => {
+                    const ogValue =
+                      !!barData &&
+                      !!barData.datasets &&
+                      !!barData.datasets[datasetIndex] &&
+                      !!barData.datasets[datasetIndex].data &&
+                      !!barData.datasets[datasetIndex].data.length &&
+                      !!barData.datasets[datasetIndex].data[dataIndex]
+                        ? barData.datasets[datasetIndex].data[dataIndex]
+                        : value
 
-              return metricSuffix(ogValue)
-            },
-            align: 'center',
-            anchor: 'center',
-            color: '#fff',
-            font: {
-              size: 14,
-              family: 'ClanOTBold',
-            },
-          },
-        },
+                    return metricSuffix(ogValue)
+                  },
+                  align: 'center',
+                  anchor: 'center',
+                  color: '#fff',
+                  font: {
+                    size: 14,
+                    family: 'ClanOTBold',
+                  },
+                },
+              },
+            }
+          : {}),
         scales: {
           xAxes: [
             {
