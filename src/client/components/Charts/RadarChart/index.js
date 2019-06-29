@@ -49,7 +49,7 @@ const RadarChart = (props) => {
   const themes = props.themeContext.colors
   let parsedData = data || {}
   let maxTicksStepLimit = 100000
-  let stepSize = 2500000
+  let stepSize = 25000
 
   const hasData =
     !!parsedData && !!parsedData.datasets && !!parsedData.datasets[0]
