@@ -157,6 +157,9 @@ class Reports extends Component {
               .ReactTable .rt-tbody .rt-tr-group {
                 border-color: ${colors.tableBorder};
               }
+              .${style.deleteWrapper} div:after{
+                border-color: ${colors.tablePopoverBackground} transparent transparent transparent;
+              }
             `}
             </style>
             <div className={style.reportsContainer}>
