@@ -14,7 +14,7 @@ const getBrandKeysFromObject = (brands) => {
   return brands.map((brand) => brand.value)
 }
 
-class CompareBrand extends Component {
+class CompareBrand extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
@@ -48,7 +48,7 @@ class CompareBrand extends Component {
                     options={brands}
                     canSelect={2}
                     valid={this.state.formValid}
-                    checkboxValidation={() => this.checkboxValidation()}
+                    checkboxValidation={this.checkboxValidation}
                   />
                 </div>
 
