@@ -157,6 +157,12 @@ class Reports extends Component {
               .ReactTable .rt-tbody .rt-tr-group {
                 border-color: ${colors.tableBorder};
               }
+
+              .ReactTable .rt-tbody .rt-tr-group:hover {
+                background-color: ${colors.tableRowHoverBg};
+                font-family: 'ClanOT';
+                font-weight: bold;
+              }
             `}
             </style>
             <div className={style.reportsContainer}>
@@ -216,6 +222,7 @@ class Reports extends Component {
                       resizable={false}
                       sortable={true}
                       minRows={4}
+                      className={style.table}
                       pageSize={data.length}
                       columns={[
                         {
