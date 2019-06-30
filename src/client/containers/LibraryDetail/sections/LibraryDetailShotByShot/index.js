@@ -96,75 +96,75 @@ class LibraryDetailShotByShot extends React.Component {
     const { selectedImage } = this.state
 
     const radarChartDataConfigured = {
-      "datasets": [
+      datasets: [
         {
-          "labels": radarChartData,
-          "data": radarChartData,
-          "​​borderColor": "#ccc",
-          "​​​​​pointBackgroundColor": "#505050", 
-          "tooltip": false,
-          "pointBorderColor": "#505050", 
-          "label": "Color",
-          "​​backgroundColor": "rgba(172, 176, 190, 0.4)",
-        }
+          labels: radarChartData,
+          data: radarChartData,
+          '​​borderColor': '#ccc',
+          '​​​​​pointBackgroundColor': '#505050',
+          tooltip: false,
+          pointBorderColor: '#505050',
+          label: 'Color',
+          '​​backgroundColor': 'rgba(172, 176, 190, 0.4)',
+        },
       ],
-      "labels": [
+      labels: [
         {
-          "name": "Red",
-          "color": "#cc2226",
-          "selected": false
+          name: 'Red',
+          color: '#cc2226',
+          selected: false,
         },
         {
-          "name": "Red-Orange",
-          "color": "#dd501d",
-          "selected": false
+          name: 'Red-Orange',
+          color: '#dd501d',
+          selected: false,
         },
         {
-          "name": "Orange",
-          "color": "#eb7919",
-          "selected": false
+          name: 'Orange',
+          color: '#eb7919',
+          selected: false,
         },
         {
-          "name": "Yellow-Orange",
-          "color": "#f8b90b",
-          "selected": false
+          name: 'Yellow-Orange',
+          color: '#f8b90b',
+          selected: false,
         },
         {
-          "name": "Yellow",
-          "color": "#fff20d",
-          "selected": false
+          name: 'Yellow',
+          color: '#fff20d',
+          selected: false,
         },
         {
-          "name": "Yellow-Green",
-          "color": "#aac923",
-          "selected": false
+          name: 'Yellow-Green',
+          color: '#aac923',
+          selected: false,
         },
         {
-          "name": "Green",
-          "color": "#13862b",
-          "selected": false
+          name: 'Green',
+          color: '#13862b',
+          selected: false,
         },
         {
-          "name": "Blue-Green",
-          "color": "#229a78",
-          "selected": false
+          name: 'Blue-Green',
+          color: '#229a78',
+          selected: false,
         },
         {
-          "name": "Blue-Purple",
-          "color": "#79609b",
-          "selected": false
+          name: 'Blue-Purple',
+          color: '#79609b',
+          selected: false,
         },
         {
-          "name": "Purple",
-          "color": "#923683",
-          "selected": false
+          name: 'Purple',
+          color: '#923683',
+          selected: false,
         },
         {
-          "name": "Red-Purple",
-          "color": "#b83057",
-          "selected": false
-        }
-      ]
+          name: 'Red-Purple',
+          color: '#b83057',
+          selected: false,
+        },
+      ],
     }
 
     const shotValues = (!!shots && Object.values(shots)) || []
@@ -246,6 +246,10 @@ class LibraryDetailShotByShot extends React.Component {
                         <div
                           ref={(el) => (this.sliderThumbs = el)}
                           className="mt-32 mb-24"
+                          style={{
+                            width: 'max-content',
+                            overflow: 'hidden',
+                          }}
                         >
                           {!!shotValues.length && (
                             <SliderWithScrubber
@@ -492,9 +496,9 @@ class LibraryDetailShotByShot extends React.Component {
                         <TabPanel>
                           <div className={style.radarChartContainer}>
                             {radarChartDataConfigured && (
-                              <RadarChart 
-                                data={radarChartDataConfigured} 
-                                key={Math.random()} 
+                              <RadarChart
+                                data={radarChartDataConfigured}
+                                key={Math.random()}
                               />
                             )}
                           </div>
