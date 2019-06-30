@@ -30,7 +30,6 @@ class CompareBrand extends Component {
     const valid = this.props.valid && this.state.formValid
 
     const { brands } = this.props
-    console.log('!!', brands, getBrandKeysFromObject(brands))
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => {
@@ -49,7 +48,7 @@ class CompareBrand extends Component {
                     options={brands}
                     canSelect={2}
                     valid={this.state.formValid}
-                    checkboxValidation={this.checkboxValidation}
+                    checkboxValidation={() => this.checkboxValidation()}
                   />
                 </div>
 

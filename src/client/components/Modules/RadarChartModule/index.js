@@ -8,7 +8,7 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 import emptyData from './emptyData.json'
 
 const RadarChartModule = ({
-  data = emptyData,
+  data,
   moduleKey,
   title,
   action,
@@ -18,6 +18,11 @@ const RadarChartModule = ({
   rightTitle,
   loading = false,
 }) => {
+  let checkData =
+    !data || !data.length || (data.length && (!data[0] || !data[1]))
+      ? emptyData
+      : data
+
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -27,7 +32,9 @@ const RadarChartModule = ({
           action={action}
           filters={filters}
           legend={legend}
-          isEmpty={!data || !data.length || (!data[0].total && !data[1].total)}
+          isEmpty={
+            !data || !data.length || (data.length && (!data[0] || !data[1]))
+          }
           loading={loading}
         >
           <div
@@ -36,10 +43,10 @@ const RadarChartModule = ({
           >
             <div className={style.groupChart}>
               <div className={style.chartPos}>
-                <RadarChart data={!!data && data[0] && data[0].datas} />
+                <RadarChart data={checkData[0].datas} />
               </div>
-              {/* 
-              Conflict: 
+              {/*
+              Conflict:
               <div className={'mt-32 ' + style.labelContainer}>
                 <div
                   className={style.label}
@@ -68,7 +75,7 @@ const RadarChartModule = ({
                 </div>
               */}
               <div className={style.chartPos}>
-                <RadarChart data={!!data && data[1] && data[1].datas} />
+                <RadarChart data={checkData[1].datas} />
               </div>
             </div>
             <div className={'mt-32 ' + style.labelContainer}>
@@ -80,14 +87,16 @@ const RadarChartModule = ({
                   boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                 }}
               >
-                <span>{leftTitle}</span>
+                <span>
+                  {!!checkData && !!checkData[0] && checkData[0].type}
+                </span>
               </div>
               <p>
                 Top{' '}
-                {!!data &&
-                  !!data[0] &&
-                  !!data[0].progress &&
-                  data[0].progress.length}{' '}
+                {!!checkData &&
+                  !!checkData[0] &&
+                  !!checkData[0].progress &&
+                  checkData[0].progress.length}{' '}
                 Dominant Colors
               </p>
               <div
@@ -98,27 +107,29 @@ const RadarChartModule = ({
                   boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                 }}
               >
-                <span>{rightTitle}</span>
+                <span>
+                  {!!checkData && !!checkData[1] && checkData[1].type}
+                </span>
               </div>
             </div>
             <div className={style.groupProgressBar}>
               <div className={style.progressInner}>
                 <Progress
                   progress={
-                    !!data &&
-                    !!data[0] &&
-                    !!data[0].progress &&
-                    data[0].progress
+                    !!checkData &&
+                    !!checkData[0] &&
+                    !!checkData[0].progress &&
+                    checkData[0].progress
                   }
                   reverse={true}
                 />
               </div>
               <div className={style.progressCountArea}>
-                {!!data &&
-                  !!data[0] &&
-                  !!data[0].progress &&
-                  data[0].progress.length &&
-                  data[0].progress.map((item, index) => {
+                {!!checkData &&
+                  !!checkData[0] &&
+                  !!checkData[0].progress &&
+                  checkData[0].progress.length &&
+                  checkData[0].progress.map((item, index) => {
                     return (
                       <span
                         key={`progressbar-${index}`}
@@ -136,10 +147,10 @@ const RadarChartModule = ({
               <div className={style.progressInner}>
                 <Progress
                   progress={
-                    !!data &&
-                    !!data[1] &&
-                    !!data[1].progress &&
-                    data[1].progress
+                    !!checkData &&
+                    !!checkData[1] &&
+                    !!checkData[1].progress &&
+                    checkData[1].progress
                   }
                 />
               </div>

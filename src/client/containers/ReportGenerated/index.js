@@ -54,6 +54,13 @@ class ReportGenerated extends React.Component {
     }
   }
 
+  componenWillUnmount() {
+    this.props.createdReportControl({
+      isSaved: false,
+      uuid: null,
+    })
+  }
+
   render() {
     const {
       match: { params },

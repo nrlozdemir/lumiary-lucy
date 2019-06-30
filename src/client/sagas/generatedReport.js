@@ -40,8 +40,6 @@ function* saveReport({ data }) {
     const {
       brand: { uuid },
     } = yield select(selectAuthProfile)
-    console.log('data', data)
-    // return null
     if (category === 'Brands Insights') {
       const { brands, social, engagement, date, title, brand } = data
 
@@ -60,34 +58,45 @@ function* saveReport({ data }) {
         'POST'
       )
 
-      // const response = {
-      //   uuid: 'test',
-      // }
-      console.log('response', response)
-      if (!!response) {
+      if (!!response && !!response.reportUuid) {
         yield put(actions.saveReportSuccess(response))
         yield put(
-          reportsActions.brandInsightReportSave({
+          reportsActions.createdReportControl({
             isSaved: true,
             uuid: response.reportUuid,
           })
         )
+      } else {
+        throw new Error('Error Brands Insights save report on saga')
       }
       // yield put(push('/reports'))
     } else if (category === 'Compare Brands') {
       const { title, brands } = data
 
       const parameters = {
-        baseUrl: true,
-        url: '/createCompareReport',
+        brand_one_uuid: brands[0],
+        brand_two_uuid: brands[1],
         title,
-        brands,
       }
 
-      const response = yield call(getDataFromApi, parameters)
+      const response = yield call(
+        getDataFromApi,
+        parameters,
+        `/user/${uuid}/report/?type=compare`,
+        'POST'
+      )
 
-      yield put(actions.saveReportSuccess(response))
-      yield put(push(`/reports/compare-brands/${response.id}`))
+      if (!!response && !!response.reportUuid) {
+        yield put(actions.saveReportSuccess(response))
+        yield put(
+          reportsActions.createdReportControl({
+            isSaved: true,
+            uuid: response.reportUuid,
+          })
+        )
+      } else {
+        throw new Error('Error Compare Brands save report on saga')
+      }
     }
   } catch (err) {
     console.log('err', err)
