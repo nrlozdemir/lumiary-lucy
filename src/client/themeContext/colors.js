@@ -104,6 +104,7 @@ const dark = {
   tablePopoverBackground: '#ffffff',
   tablePopoverDeleteColor: '#2fd7c4',
   tablePopoverColor: '#545b79',
+  tableRowHoverBg: '#545b79',
   // table values
 
   // tooltip values
@@ -251,6 +252,7 @@ const light = {
   tablePopoverBackground: '#505050',
   tablePopoverDeleteColor: '#2fd7c4',
   tablePopoverColor: '#ffffff',
+  tableRowHoverBg: '#ffffff',
   // table values
 
   // tooltip values

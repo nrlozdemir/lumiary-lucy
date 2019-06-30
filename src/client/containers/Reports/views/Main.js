@@ -156,6 +156,11 @@ class Reports extends Component {
               .ReactTable .rt-tbody .rt-tr-group {
                 border-color: ${colors.tableBorder};
               }
+              .ReactTable .rt-tbody .rt-tr-group:hover {
+                background-color: ${colors.tableRowHoverBg};
+                font-family: 'ClanOT';
+                font-weight: bold;
+              }
               .${style.deleteWrapper} div:after{
                 border-color: ${colors.tablePopoverBackground} transparent transparent transparent;
               }
