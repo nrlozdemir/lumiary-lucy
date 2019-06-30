@@ -82,16 +82,14 @@ class TopPerformingProperty extends React.Component {
     const hasDatasets =
       !!chartData && !!chartData.datasets && !!chartData.datasets.length
 
-    if(hasDatasets && chartData.datasets.length > 5) {
+    if (hasDatasets && chartData.datasets.length > 5) {
       const top5datasets = getTopNValues(chartData.datasets, 5)
-      chartData = {...chartData, datasets: top5datasets}
+      chartData = { ...chartData, datasets: top5datasets }
     }
 
     const max = (hasDatasets && getMinMaxFromDatasets(chartData.datasets)) || 0
 
-    const min =
-      (hasDatasets && getMinMaxFromDatasets(chartData.datasets, max, 'min')) ||
-      0
+    const min = 0
 
     const stepSize = !!max && ~~(max / 4)
 
