@@ -48,7 +48,7 @@ class CompareBrand extends React.PureComponent {
                     options={brands}
                     canSelect={2}
                     valid={this.state.formValid}
-                    checkboxValidation={this.checkboxValidation}
+                    checkboxValidation={() => this.checkboxValidation()}
                   />
                 </div>
 

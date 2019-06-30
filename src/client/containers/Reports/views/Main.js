@@ -161,6 +161,7 @@ class Reports extends Component {
                 font-family: 'ClanOT';
                 font-weight: bold;
               }
+
               .${style.deleteWrapper} div:after{
                 border-color: ${colors.tablePopoverBackground} transparent transparent transparent;
               }
