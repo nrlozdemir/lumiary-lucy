@@ -228,20 +228,26 @@ const selectFiltersToType = (selectValues = {}) => {
     const filterValue = selectValues[key]
     const filterType = filterValue.type
 
-    if (filterType !== 'platformEngagement') {
-      values[filterType] = !!filterValue.value
-        ? !!filterValue.value.value && !!filterValue.value.value.startDate
-          ? [filterValue.value.value.startDate, filterValue.value.value.endDate]
-          : filterValue.value.value
-        : defaultFilters[filterType]
-    } else {
-      values.platform = !!filterValue.value
+    if (
+      filterType === 'platformEngagement' ||
+      filterType === 'propertyEngagement'
+    ) {
+      const whichValueKey =
+        filterType === 'platformEngagement' ? 'platform' : 'property'
+      values[whichValueKey] = !!filterValue.value
         ? filterValue.value.value.split('|')[0]
-        : defaultFilters.platform
+        : defaultFilters[whichValueKey]
       values.metric = !!filterValue.value
         ? filterValue.value.value.split('|')[1]
         : defaultFilters.metric
+      return values
     }
+
+    values[filterType] = !!filterValue.value
+      ? !!filterValue.value.value && !!filterValue.value.value.startDate
+        ? [filterValue.value.value.startDate, filterValue.value.value.endDate]
+        : filterValue.value.value
+      : defaultFilters[filterType]
 
     return values
   }, {})

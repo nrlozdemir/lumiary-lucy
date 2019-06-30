@@ -108,9 +108,10 @@ function* getCompetitorVideosMarketview(params) {
   }
 }
 
-function* getCompetitorTopVideosMarketview({
-  data: { property, metric, dateRange },
-}) {
+function* getCompetitorTopVideosMarketview(payload) {
+  const {
+    data: { property, metric, dateRange },
+  } = payload
   try {
     const { brand } = yield select(selectAuthProfile)
 

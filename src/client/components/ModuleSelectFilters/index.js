@@ -75,7 +75,7 @@ class ModuleSelectFilters extends React.Component {
         : options &&
           options[type] &&
           [
-            ...(type === 'platformEngagement'
+            ...(type === 'platformEngagement' || type === 'propertyEngagement'
               ? !!options[type] &&
                 !!options[type].length &&
                 !!options[type][0].options &&
