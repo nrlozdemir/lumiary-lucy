@@ -23,7 +23,7 @@ class CompareShares extends React.Component {
         moduleKey={'Panoptic/compareShares'}
         leftTitle="Facebook"
         rightTitle="YouTube"
-        title="Dominant Color On Facebook and YouTube By Shares"
+        title="Dominant Color On Facebook and YouTube By Views"
         action={this.callBack}
         loading={loading}
         filters={[

@@ -231,7 +231,7 @@ function* getCompareSharesData({ data: { dateRange } }) {
     const parameters = {
       url: '/report',
       dateRange,
-      metric: 'shares',
+      metric: 'views',
       property: ['color'],
       dateBucket: 'none',
       brands: [brand.uuid],
