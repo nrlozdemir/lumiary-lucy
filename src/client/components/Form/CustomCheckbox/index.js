@@ -9,72 +9,64 @@ const getBrandNamesFromObject = (field, options) => {
 
 const canSelect = (fields) => {
   const selectedFields = fields.names.filter(
-    (field) => fields[field].input.value === true
+    (field) => fields[field].input.checked
   )
-
-  if (selectedFields.length < fields.canSelect) {
-    fields.checkboxValidation(false)
-  } else {
-    fields.checkboxValidation(true)
-  }
+  const checkValid = selectedFields.length === fields.canSelect
+  fields.checkboxValidation(checkValid) // for parent validation
+  return checkValid // for here validation
 }
 
 const SelectBox = (props) => {
+  const { options } = props
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => {
-        return props.names.map((field, idx) => {
+        return options.map((field, idx) => {
+          const isChecked = props[field.value].input.checked
           return (
             <div
               key={idx}
               className={cx(style.selectBoxContainer, {
-                [style.selected]: props[field].input.value,
+                [style.selected]: isChecked,
               })}
               style={{
-                background: props[field].input.value
+                background: isChecked
                   ? colors.customSelectActiveBackground
                   : colors.customSelectBackground,
-                borderColor: props[field].input.value
+                borderColor: isChecked
                   ? colors.customSelectActiveBorder
                   : colors.customSelectBorder,
               }}
             >
               <label
-                htmlFor={props[field].input.name}
+                htmlFor={field.value}
                 style={{
                   color: colors.customSelectColor,
                 }}
               >
-                {getBrandNamesFromObject(field, props.options)}
+                {field.label}
               </label>
               <input
+                {...props[field.value].input}
                 className={style.selectBox}
                 type="checkbox"
-                id={props[field].input.name}
-                {...props[field].input}
-                disabled={props.valid}
-                onBlur={(value) => {
-                  props[field].input.onBlur(value)
+                id={field.value}
+                disabled={!isChecked && canSelect(props)}
+                value={field.value}
+                onChange={(event) => {
+                  props[event.target.value].input.onChange(
+                    !props[event.target.value].input.checked
+                  )
                   canSelect(props)
-                }}
-                onClick={() => {
-                  if (
-                    props.canSelect === 1 &&
-                    !!props.reset &&
-                    !!props.values &&
-                    !!Object.keys(props.values).some((v) => !!v)
-                  ) {
-                    props.reset()
-                  }
                 }}
               />
               <span
                 className={cx(style.selectCircle)}
                 style={{
-                  background: props[field].input.value
+                  background: isChecked
                     ? colors.customSelectCircleColor
                     : colors.customSelectBackground,
-                  borderColor: props[field].input.value
+                  borderColor: isChecked
                     ? colors.customSelectActiveBorder
                     : colors.customSelectCircleBorderColor,
                 }}

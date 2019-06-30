@@ -27,8 +27,8 @@ const defaultProps = {
   displayDataLabels: true,
   dataLabelColor: '#ffffff',
   dataLabelFontFamily: 'ClanOTBold',
-  dataLabelFontSize: 14,
-  dataLabelFontWeight: 'normal',
+  dataLabelFontSize: 12,
+  dataLabelFontWeight: 'bold',
 
   legendLabelsFontColor: '#ffffff',
   legendLabelsFontFamily: 'ClanOTBold',
@@ -113,6 +113,12 @@ const DoughnutChart = (props) => {
   }
   if (!data) {
     return null
+  }
+
+  if (data.datasets) {
+    data.datasets[0].data = data.datasets[0].data.map((value) =>
+      parseFloat(value).toFixed(0)
+    )
   }
 
   return (

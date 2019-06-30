@@ -8,6 +8,7 @@
     display: block;
     margin: 40px 0 56px;
     text-align: center;
+    white-space: nowrap;
 
     span {
       background-color: $color-dusk;
@@ -21,17 +22,17 @@
   }
 
   &:not(:last-child):after {
-		content: "";
-		position: absolute;
-		right:-1px;
-		bottom: 40px;
-		height: 120px;
-		width: 1px;
-		background: $color-dusk;
+    content: '';
+    position: absolute;
+    right: -1px;
+    bottom: 40px;
+    height: 120px;
+    width: 1px;
+    background: $color-dusk;
   }
 }
-.overflowHidden{
-	overflow: hidden;
+.overflowHidden {
+  overflow: hidden;
 }
 .percentageGraphContainer {
   display: flex;

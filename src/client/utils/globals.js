@@ -34,6 +34,17 @@ export const dayOfWeek = [
   'Friday',
   'Saturday',
 ]
+
+export const smallDayOfWeek = {
+  Sunday: 'S',
+  Monday: 'M',
+  Tuesday: 'T',
+  Wednesday: 'W',
+  Thursday: 'T',
+  Friday: 'F',
+  Saturday: 'S',
+}
+
 export const month = [
   'January',
   'February',

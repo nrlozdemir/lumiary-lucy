@@ -14,7 +14,7 @@ import Module from 'Components/Module'
 
 import { selectFiltersToType } from 'Utils'
 import { isDataSetEmpty } from 'Utils/datasets'
-import { chartColors } from 'Utils/globals'
+import { chartColors, smallDayOfWeek } from 'Utils/globals'
 
 import { isEmpty } from 'lodash'
 
@@ -51,6 +51,10 @@ class TotalViewsChart extends React.Component {
     const metric = selectFilters.options.metric.find(
       (metric) => selects.metric === metric.value
     )
+
+    if (barData) {
+      barData.labels = barData.labels.map((day) => smallDayOfWeek[day])
+    }
 
     return (
       <Module

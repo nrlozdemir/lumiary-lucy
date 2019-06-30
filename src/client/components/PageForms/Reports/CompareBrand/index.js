@@ -14,7 +14,7 @@ const getBrandKeysFromObject = (brands) => {
   return brands.map((brand) => brand.value)
 }
 
-class CompareBrand extends Component {
+class CompareBrand extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
