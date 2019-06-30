@@ -236,10 +236,10 @@ const selectFiltersToType = (selectValues = {}) => {
         filterType === 'platformEngagement' ? 'platform' : 'property'
       values[whichValueKey] = !!filterValue.value
         ? filterValue.value.value.split('|')[0]
-        : defaultFilters[whichValueKey]
+        : defaultFilters[filterType].split('|')[0]
       values.metric = !!filterValue.value
         ? filterValue.value.value.split('|')[1]
-        : defaultFilters.metric
+        : defaultFilters[filterType].split('|')[1]
       return values
     }
 
