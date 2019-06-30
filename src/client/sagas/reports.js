@@ -267,6 +267,7 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
       dateBucket: 'none',
       brands: [...report.brands],
       platform: 'all',
+      limit: 4,
     }
 
     const payload = yield call(getDataFromApi, parameters, '/report')
@@ -310,6 +311,10 @@ function* getPerformanceComparisonData({
       platform: 'all',
     }
 
+    if(property === 'format') {
+      options.limit = 4
+    }
+    
     const payload = yield call(getDataFromApi, parameters, '/report')
 
     if (!!payload && !!payload.data) {

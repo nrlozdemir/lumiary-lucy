@@ -163,8 +163,8 @@ function* getVideoReleasesBarChart({ data: { report } }) {
       metric,
       platform,
       daterange,
-
       property: 'format',
+      limit: 4,
     }
 
     const response = yield call(
@@ -307,6 +307,7 @@ function* getPacingCardData({ data: { report } }) {
       call(getDataFromApi, {
         ...options,
         proportionOf: 'format',
+        limit: 4,
       }),
     ])
 
@@ -346,6 +347,10 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
       brands: [...filteredCompetitors],
     }
 
+    if(property === 'format') {
+      options.limit = 4
+    }
+    
     const [facebook, instagram, twitter, youtube] = yield all([
       call(getDataFromApi, { ...options, platform: 'facebook' }),
       call(getDataFromApi, { ...options, platform: 'instagram' }),
