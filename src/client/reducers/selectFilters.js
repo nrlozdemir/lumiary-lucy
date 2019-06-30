@@ -43,7 +43,7 @@ export const defaultFilters = {
   talentGender: 'male',
   colorTemperature: 'happy-sad',
   dateRange: 'week',
-  platformEngagement: 'all|views',
+  platformEngagement: 'facebook|views',
 }
 
 export const initialState = fromJS({
