@@ -222,7 +222,6 @@ class Reports extends Component {
                       resizable={false}
                       sortable={true}
                       minRows={4}
-                      className={style.table}
                       pageSize={data.length}
                       columns={[
                         {
