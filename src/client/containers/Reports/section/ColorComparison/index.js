@@ -14,8 +14,8 @@ class ColorComparison extends React.Component {
 
     return (
       <RadarChartModule
-        leftTitle={data && data.length > 0 && data[0].type}
-        rightTitle={data && data.length > 0 && data[1].type}
+        leftTitle={data && data.length > 0 && data[0] && data[0].type}
+        rightTitle={data && data.length > 0 && data[1] && data[1].type}
         data={data}
         moduleKey={'Reports/ColorComparison'}
         title="Video Library Color Comparison"

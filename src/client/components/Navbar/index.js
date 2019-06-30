@@ -12,6 +12,7 @@ import {
   makeSelectReportsBrandInsightValues,
   makeSelectReportsComparebrandValues,
   makeSelectReportsPredefinedReportValues,
+  makeSelectCreatedReportControl,
 } from 'Reducers/reports'
 
 import { actions as generatedReportActions } from 'Reducers/generatedReport'
@@ -265,14 +266,11 @@ class Navbar extends React.Component {
     const {
       saveReportRequest,
       loadDeleteReport,
-      brandInsightValue: {
-        data: brandInsightValue,
-        control: { isSaved, uuid },
-      },
+      brandInsightValue: { data: brandInsightValue },
       comparebrandValues: { data: comparebrandValues },
+      createdReportControls: { isSaved, uuid },
       predefinedReportValues: { data: predefinedReportValues },
     } = this.props
-
     if (category === 'Brands Insights' && brandInsightValue) {
       this.setState({
         swicthControl: !isSaved,
@@ -285,6 +283,12 @@ class Navbar extends React.Component {
         category,
       })
     } else if (category === 'Compare Brands' && comparebrandValues) {
+      this.setState({
+        swicthControl: !isSaved,
+      })
+      if (isSaved) {
+        return loadDeleteReport(uuid)
+      }
       saveReportRequest({
         ...comparebrandValues,
         category,
@@ -298,7 +302,6 @@ class Navbar extends React.Component {
   }
 
   render() {
-    console.log('===', this.props)
     return (
       <React.Fragment>
         <Template
@@ -317,6 +320,7 @@ const mapStateToProps = createStructuredSelector({
   brandInsightValue: makeSelectReportsBrandInsightValues(),
   comparebrandValues: makeSelectReportsComparebrandValues(),
   predefinedReportValues: makeSelectReportsPredefinedReportValues(),
+  createdReportControls: makeSelectCreatedReportControl(),
   profile: makeSelectAuthProfile(),
 })
 

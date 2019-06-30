@@ -49,7 +49,6 @@ function* getReports() {
       `/user/${brand.uuid}/report`,
       'GET'
     )
-    console.log('response', response)
     if (!!response) {
       const compare =
         !!response.compare &&
@@ -124,8 +123,6 @@ function* compareBrandSubmit({ payload: { params, onlySave } }) {
       brands: filteredBrands,
     }
 
-    console.log('+++', onlySave, filteredBrands, parameters)
-
     yield put(actions.compareBrandFormSubmitSuccess(parameters))
     if (!!onlySave && filteredBrands[0] && filteredBrands[1]) {
       yield put(
@@ -135,6 +132,8 @@ function* compareBrandSubmit({ payload: { params, onlySave } }) {
           }&brand_two_uuid=${filteredBrands[1]}`
         )
       )
+    } else {
+      throw 'Error save form compare brand'
     }
   } catch (err) {
     console.log('err', err)
@@ -157,7 +156,6 @@ function* predefinedReportRequest({ payload }) {
 }
 
 function* deleteReport({ payload: { id, isGetAllReports } }) {
-  console.log(id)
   try {
     const {
       brand: { uuid },
@@ -173,7 +171,7 @@ function* deleteReport({ payload: { id, isGetAllReports } }) {
     if (!!response) {
       yield put(actions.loadDeleteReportSuccess(response))
       yield put({
-        type: types.BRAND_INSIGHT_SELECTED_REQUEST,
+        type: types.CREATED_REPORT_CONTROL,
         payload: {
           isSaved: false,
           uuid: id,
@@ -232,7 +230,6 @@ function* getPredefinedReports() {
 }
 
 function* getContentVitalityScoreData({ payload = {} }) {
-  console.log('@@@', payload)
   const { dateRange, platform, report = {} } = payload
   const { brands = [] } = report
   try {

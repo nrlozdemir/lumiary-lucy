@@ -55,6 +55,13 @@ class CompareBrand extends React.Component {
     }
   }
 
+  componenWillUnmount() {
+    this.props.createdReportControl({
+      isSaved: false,
+      uuid: null,
+    })
+  }
+
   render() {
     const {
       match: { params },
@@ -62,23 +69,18 @@ class CompareBrand extends React.Component {
       comparebrandValues: { data: comparebrandValues },
       predefinedReportValues: { data: predefinedReportValues },
       authProfile = {},
-
       getContentVitalityScoreData,
       getColorComparisonData,
       getPerformanceComparisonData,
       getVideoComparisonData,
-
       contentVitalityScoreData,
       colorComparisonData,
       performanceComparisonData,
       videoComparisonData,
     } = this.props
-    console.log('comparebrandValues', comparebrandValues)
 
     const reportValues =
-      params && params.id
-        ? report
-        : params.type === 'compare-brands'
+      params.type === 'compare-brands'
         ? comparebrandValues
         : predefinedReportValues
 

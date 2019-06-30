@@ -66,6 +66,20 @@ const ContentVitalityScoreModule = ({
     }
   )
 
+  const newDatasets = {
+    labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+    datasets: [
+      {
+        data:
+          (formattedData.brand_2 && formattedData.brand_2.videoPercents) || [],
+      },
+      {
+        data:
+          (formattedData.brand_1 && formattedData.brand_1.videoPercents) || [],
+      },
+    ],
+  }
+
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -76,7 +90,7 @@ const ContentVitalityScoreModule = ({
           filters={filters}
           legend={legend}
           loading={loading}
-          isEmpty={isDataSetEmpty(data)}
+          isEmpty={isDataSetEmpty(loading ? {} : newDatasets)}
         >
           <div
             className="col-12-no-gutters"

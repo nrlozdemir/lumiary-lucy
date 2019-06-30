@@ -76,7 +76,6 @@ class Reports extends Component {
   }
 
   deleteReportAction(id) {
-    console.log('id', id)
     this.props.loadDeleteReport(id, true)
   }
 
@@ -135,7 +134,6 @@ class Reports extends Component {
     const {
       reports: { data, loading, error },
     } = this.props
-    console.log('DATA==', data)
     // tableHeaderBackground
     // tableBodyBackground
     // tableBackground
