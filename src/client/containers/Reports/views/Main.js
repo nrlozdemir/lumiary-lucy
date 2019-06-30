@@ -54,10 +54,10 @@ class Reports extends Component {
     }
   }
 
-  componentDidMount() {
-    const { getPredefinedReports } = this.props
-    getPredefinedReports()
-  }
+  // componentDidMount() {
+  //   const { getPredefinedReports } = this.props
+  //   getPredefinedReports()
+  // }
 
   componentWillMount() {
     this.props.loadReports()
@@ -76,7 +76,7 @@ class Reports extends Component {
   }
 
   deleteReportAction(id) {
-    this.props.loadDeleteReport(id)
+    this.props.loadDeleteReport(id, true)
   }
 
   loadMore() {
@@ -134,7 +134,6 @@ class Reports extends Component {
     const {
       reports: { data, loading, error },
     } = this.props
-
     // tableHeaderBackground
     // tableBodyBackground
     // tableBackground
@@ -157,11 +156,13 @@ class Reports extends Component {
               .ReactTable .rt-tbody .rt-tr-group {
                 border-color: ${colors.tableBorder};
               }
-
               .ReactTable .rt-tbody .rt-tr-group:hover {
                 background-color: ${colors.tableRowHoverBg};
                 font-family: 'ClanOT';
                 font-weight: bold;
+              }
+              .${style.deleteWrapper} div:after{
+                border-color: ${colors.tablePopoverBackground} transparent transparent transparent;
               }
             `}
             </style>
@@ -234,11 +235,11 @@ class Reports extends Component {
                         },
                         {
                           Header: 'Platform',
-                          accessor: 'social',
+                          accessor: 'platform',
                         },
                         {
                           Header: 'Date',
-                          accessor: 'date',
+                          accessor: 'date_range',
                           sortMethod: (a, b) => {
                             const valueOfA = moment(a, 'D/M/YY').valueOf()
                             const valueOfB = moment(b, 'D/M/YY').valueOf()
@@ -248,7 +249,7 @@ class Reports extends Component {
                         {
                           Header: null,
                           width: 65,
-                          Cell: ({ original: { id } }) => (
+                          Cell: ({ original: { uuid } }) => (
                             <div className={style.deleteWrapper} tabIndex="1">
                               <div
                                 className={style.deleteIcon}
@@ -263,7 +264,7 @@ class Reports extends Component {
                                     color: colors.tablePopoverDeleteColor,
                                   }}
                                   onClick={(e) => {
-                                    this.deleteReportAction(id)
+                                    this.deleteReportAction(uuid)
                                   }}
                                 >
                                   Delete Report
@@ -282,8 +283,6 @@ class Reports extends Component {
                         },
                       ]}
                     />
-
-                    {/* onClick={() => this.deleteReportAction(id)} */}
 
                     <div className={style.reportsTableFooter}>
                       {/* <Button

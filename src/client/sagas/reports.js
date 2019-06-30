@@ -41,10 +41,32 @@ function getReportsMockApi() {
 
 function* getReports() {
   try {
-    const { reports, compareReports } = yield call(getReportsApi)
-    yield put(actions.loadReportsSuccess([...reports, ...compareReports]))
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      `/user/${brand.uuid}/report`,
+      'GET'
+    )
+    if (!!response) {
+      const compare =
+        !!response.compare &&
+        !!response.compare.length &&
+        response.compare.map((item) => {
+          return { ...item, category: 'Compare Brands' }
+        })
+      const insights =
+        !!response.insights &&
+        !!response.insights.length &&
+        response.insights.map((item) => {
+          return { ...item, category: 'Brands Insights' }
+        })
+      yield put(actions.loadReportsSuccess([...compare, ...insights]))
+    }
   } catch (err) {
-    yield put(actions.loadReportsError(err))
+    console.log('err', err)
+    yield put(actions.loadReportsError(err.message))
   }
 }
 
@@ -58,7 +80,7 @@ function* getMoreReports() {
   }
 }
 
-function* brandInsightSubmit({ payload }) {
+function* brandInsightSubmit({ payload: { params, onlySave } }) {
   try {
     const {
       brand: { value: brand },
@@ -66,9 +88,10 @@ function* brandInsightSubmit({ payload }) {
       engagement: { value: engagement },
       date: { value: date },
       title,
-    } = payload
+    } = params
 
     const parameters = {
+      brand,
       brands: [brand],
       social,
       engagement,
@@ -77,20 +100,22 @@ function* brandInsightSubmit({ payload }) {
     }
 
     yield put(actions.brandInsightFormSubmitSuccess(parameters))
-    yield put(
-      push(
-        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}`
+    if (!!onlySave) {
+      yield put(
+        push(
+          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}`
+        )
       )
-    )
+    }
   } catch (err) {
+    console.log('err', err)
     yield put(actions.brandInsightFormSubmitError(err))
   }
 }
 
-function* compareBrandSubmit({ payload }) {
+function* compareBrandSubmit({ payload: { params, onlySave } }) {
   try {
-    const { title, ...brands } = payload
-
+    const { title, ...brands } = params
     const filteredBrands = Object.keys(brands).filter((brand) => brands[brand])
 
     const parameters = {
@@ -99,8 +124,19 @@ function* compareBrandSubmit({ payload }) {
     }
 
     yield put(actions.compareBrandFormSubmitSuccess(parameters))
-    yield put(push(`/reports/compare-brands`))
+    if (!!onlySave && filteredBrands[0] && filteredBrands[1]) {
+      yield put(
+        push(
+          `/reports/compare-brands?title=${title}&brand_one_uuid=${
+            filteredBrands[0]
+          }&brand_two_uuid=${filteredBrands[1]}`
+        )
+      )
+    } else {
+      throw 'Error save form compare brand'
+    }
   } catch (err) {
+    console.log('err', err)
     yield put(actions.compareBrandFormSubmitError(err))
   }
 }
@@ -119,13 +155,36 @@ function* predefinedReportRequest({ payload }) {
   }
 }
 
-function* deleteReport(data) {
-  yield put(actions.loadDeleteReportSuccess(data.payload))
-  // try {
+function* deleteReport({ payload: { id, isGetAllReports } }) {
+  try {
+    const {
+      brand: { uuid },
+    } = yield select(selectAuthProfile)
 
-  // } catch (err) {
-  //   yield put(actions.loadDeleteReportError(err))
-  // }
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      `/user/${uuid}/report/${id}`,
+      'DELETE'
+    )
+
+    if (!!response) {
+      yield put(actions.loadDeleteReportSuccess(response))
+      yield put({
+        type: types.CREATED_REPORT_CONTROL,
+        payload: {
+          isSaved: false,
+          uuid: id,
+        },
+      })
+      if (isGetAllReports) yield call(getReports) // get all reports if if you want after the deleted a report
+    } else {
+      throw 'Error deleting a report on report page'
+    }
+  } catch (err) {
+    console.log('err', err)
+    yield put(actions.loadDeleteReportError(err))
+  }
 }
 
 function* getPredefinedReportChartRequest({ payload }) {
@@ -197,16 +256,16 @@ function* getContentVitalityScoreData({ payload = {} }) {
 function* getVideoComparisonData({ data: { dateRange, report } }) {
   try {
     const profile = yield select(selectAuthProfile)
-    const competitors = getBrandAndCompetitors(profile)
+    // const competitors = getBrandAndCompetitors(profile)
 
-    const filteredCompetitors = getFilteredCompetitors(competitors, report)
+    // const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const parameters = {
       dateRange,
       metric: 'views',
       property: ['format'],
       dateBucket: 'none',
-      brands: [...filteredCompetitors],
+      brands: [...report.brands],
       platform: 'all',
     }
 
@@ -238,16 +297,16 @@ function* getPerformanceComparisonData({
 }) {
   try {
     const profile = yield select(selectAuthProfile)
-    const competitors = getBrandAndCompetitors(profile)
+    // const competitors = getBrandAndCompetitors(profile)
 
-    const filteredCompetitors = getFilteredCompetitors(competitors, report)
+    // const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const parameters = {
       metric,
       dateRange,
       property: [property],
       dateBucket: 'none',
-      brands: [...filteredCompetitors],
+      brands: [...report.brands],
       platform: 'all',
     }
 
@@ -277,9 +336,9 @@ function* getPerformanceComparisonData({
 function* getColorComparisonData({ data: { metric, dateRange, report } }) {
   try {
     const profile = yield select(selectAuthProfile)
-    const competitors = getBrandAndCompetitors(profile)
+    // const competitors = getBrandAndCompetitors(profile)
 
-    const filteredCompetitors = getFilteredCompetitors(competitors, report)
+    // const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
     const parameters = {
       dateRange,
@@ -289,17 +348,17 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
       dateBucket: 'none',
     }
 
-    if (!!filteredCompetitors && !!filteredCompetitors.length) {
+    if (!!report && !!report.brands && !!report.brands.length) {
       // faster to split it up
       const [brand1, brand2] = yield all([
         call(
           getDataFromApi,
-          { ...parameters, brands: filteredCompetitors[0] },
+          { ...parameters, brands: report.brands[0] },
           '/report'
         ),
         call(
           getDataFromApi,
-          { ...parameters, brands: filteredCompetitors[1] },
+          { ...parameters, brands: report.brands[1] },
           '/report'
         ),
       ])

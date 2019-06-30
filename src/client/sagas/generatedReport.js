@@ -3,6 +3,7 @@ import { push } from 'connected-react-router'
 import axios from 'axios'
 import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/generatedReport'
+import { actions as reportsActions } from 'Reducers/reports'
 import querystring from 'querystring'
 
 import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
@@ -36,40 +37,69 @@ function getReportsApi() {
 function* saveReport({ data }) {
   try {
     const { category } = data
-
+    const {
+      brand: { uuid },
+    } = yield select(selectAuthProfile)
     if (category === 'Brands Insights') {
-      const { brands, social, engagement, date, title } = data
+      const { brands, social, engagement, date, title, brand } = data
 
       const parameters = {
-        baseUrl: true,
-        url: '/createReport',
-        brand: brands[0],
-        social,
-        engagement,
-        date,
+        brand_uuid: brand,
+        platform: social,
+        metric: engagement,
+        date_range: date,
         title,
       }
 
-      const response = yield call(getDataFromApi, parameters)
+      const response = yield call(
+        getDataFromApi,
+        parameters,
+        `/user/${uuid}/report/?type=insights`,
+        'POST'
+      )
 
-      yield put(actions.saveReportSuccess(response))
-      yield put(push(`/reports/brand-insight/${response.id}`))
+      if (!!response && !!response.reportUuid) {
+        yield put(actions.saveReportSuccess(response))
+        yield put(
+          reportsActions.createdReportControl({
+            isSaved: true,
+            uuid: response.reportUuid,
+          })
+        )
+      } else {
+        throw new Error('Error Brands Insights save report on saga')
+      }
+      // yield put(push('/reports'))
     } else if (category === 'Compare Brands') {
       const { title, brands } = data
 
       const parameters = {
-        baseUrl: true,
-        url: '/createCompareReport',
+        brand_one_uuid: brands[0],
+        brand_two_uuid: brands[1],
         title,
-        brands,
       }
 
-      const response = yield call(getDataFromApi, parameters)
+      const response = yield call(
+        getDataFromApi,
+        parameters,
+        `/user/${uuid}/report/?type=compare`,
+        'POST'
+      )
 
-      yield put(actions.saveReportSuccess(response))
-      yield put(push(`/reports/compare-brands/${response.id}`))
+      if (!!response && !!response.reportUuid) {
+        yield put(actions.saveReportSuccess(response))
+        yield put(
+          reportsActions.createdReportControl({
+            isSaved: true,
+            uuid: response.reportUuid,
+          })
+        )
+      } else {
+        throw new Error('Error Compare Brands save report on saga')
+      }
     }
   } catch (err) {
+    console.log('err', err)
     yield put(actions.saveReportFailure(err))
   }
 }

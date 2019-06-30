@@ -12,6 +12,7 @@ import {
   makeSelectReportsBrandInsightValues,
   makeSelectReportsComparebrandValues,
   makeSelectReportsPredefinedReportValues,
+  makeSelectCreatedReportControl,
 } from 'Reducers/reports'
 
 import { actions as generatedReportActions } from 'Reducers/generatedReport'
@@ -198,9 +199,7 @@ const Selector = (props) => {
     }
   } else if (navigationSubRoutes) {
     return {
-      leftSide: (
-        <BackTo {...url} themes={props.themes} />
-      ),
+      leftSide: <BackTo {...url} themes={props.themes} />,
       navigation: (
         <SubNavigation {...navigationSubRoutes.routes} themes={props.themes} />
       ),
@@ -266,17 +265,30 @@ class Navbar extends React.Component {
   swicthChange(category) {
     const {
       saveReportRequest,
+      loadDeleteReport,
       brandInsightValue: { data: brandInsightValue },
       comparebrandValues: { data: comparebrandValues },
+      createdReportControls: { isSaved, uuid },
       predefinedReportValues: { data: predefinedReportValues },
     } = this.props
-
     if (category === 'Brands Insights' && brandInsightValue) {
+      this.setState({
+        swicthControl: !isSaved,
+      })
+      if (isSaved) {
+        return loadDeleteReport(uuid)
+      }
       saveReportRequest({
         ...brandInsightValue,
         category,
       })
     } else if (category === 'Compare Brands' && comparebrandValues) {
+      this.setState({
+        swicthControl: !isSaved,
+      })
+      if (isSaved) {
+        return loadDeleteReport(uuid)
+      }
       saveReportRequest({
         ...comparebrandValues,
         category,
@@ -287,10 +299,6 @@ class Navbar extends React.Component {
         category,
       })
     }
-
-    this.setState({
-      swicthControl: true,
-    })
   }
 
   render() {
@@ -312,6 +320,7 @@ const mapStateToProps = createStructuredSelector({
   brandInsightValue: makeSelectReportsBrandInsightValues(),
   comparebrandValues: makeSelectReportsComparebrandValues(),
   predefinedReportValues: makeSelectReportsPredefinedReportValues(),
+  createdReportControls: makeSelectCreatedReportControl(),
   profile: makeSelectAuthProfile(),
 })
 

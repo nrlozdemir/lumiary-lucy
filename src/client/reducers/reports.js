@@ -27,6 +27,7 @@ export const types = {
   COMPARE_BRAND_REQUEST: 'Reports/COMPARE_BRAND_REQUEST',
   COMPARE_BRAND_REQUEST_SUCCESS: 'Reports/COMPARE_BRAND_REQUEST_SUCCESS',
   COMPARE_BRAND_REQUEST_ERROR: 'Reports/COMPARE_BRAND_REQUEST_ERROR',
+  CREATED_REPORT_CONTROL: 'Reports/CREATED_REPORT_CONTROL',
 
   PREDEFINED_REPORT_REQUEST: 'Reports/PREDEFINED_REPORT_REQUEST',
   PREDEFINED_REPORT_REQUEST_SUCCESS:
@@ -85,7 +86,10 @@ export const actions = {
   loadMoreReportsError: (error) => ({ type: types.LOAD_MORE_REPORTS, error }),
 
   // DELETE A REPORT
-  loadDeleteReport: (id) => ({ type: types.DELETE_REPORT, payload: id }),
+  loadDeleteReport: (id, isGetAllReports) => ({
+    type: types.DELETE_REPORT,
+    payload: { id, isGetAllReports },
+  }),
   loadDeleteReportSuccess: (payload) => ({
     type: types.DELETE_REPORT_SUCCESS,
     payload,
@@ -96,9 +100,9 @@ export const actions = {
   }),
 
   // SUBMIT NEW BRAND INSIGHT
-  brandInsightFormSubmit: (values) => ({
+  brandInsightFormSubmit: (params, onlySave = false) => ({
     type: types.BRAND_INSIGHT_REQUEST,
-    payload: values,
+    payload: { params, onlySave },
   }),
   brandInsightFormSubmitSuccess: (payload) => ({
     type: types.BRAND_INSIGHT_REQUEST_SUCCESS,
@@ -108,10 +112,12 @@ export const actions = {
     type: types.BRAND_INSIGHT_REQUEST_ERROR,
     error,
   }),
-  compareBrandFormSubmit: (values) => ({
-    type: types.COMPARE_BRAND_REQUEST,
-    payload: values,
-  }),
+  compareBrandFormSubmit: (params, onlySave = false) => {
+    return {
+      type: types.COMPARE_BRAND_REQUEST,
+      payload: { params, onlySave },
+    }
+  },
   compareBrandFormSubmitSuccess: (payload) => ({
     type: types.COMPARE_BRAND_REQUEST_SUCCESS,
     payload,
@@ -119,6 +125,10 @@ export const actions = {
   compareBrandFormSubmitError: (error) => ({
     type: types.COMPARE_BRAND_REQUEST_ERROR,
     error,
+  }),
+  createdReportControl: (payload) => ({
+    type: types.CREATED_REPORT_CONTROL,
+    payload,
   }),
   predefinedReportRequest: (payload) => ({
     type: types.PREDEFINED_REPORT_REQUEST,
@@ -215,6 +225,10 @@ export const initialState = fromJS({
     data: null,
     error: false,
     loading: false,
+  },
+  createdReportControls: {
+    isSaved: false, // saved a created report?
+    uuid: null, // saved report uuid
   },
   predefinedReportValues: {
     data: null,
@@ -316,6 +330,7 @@ const reportsReducer = (state = initialState, action) => {
       return state
         .setIn(['brandInsightValues', 'error'], fromJS(action.error))
         .setIn(['brandInsightValues', 'loading'], fromJS(false))
+
     /** END submit brand insight form */
 
     /** START submit brand insight form */
@@ -331,6 +346,11 @@ const reportsReducer = (state = initialState, action) => {
       return state
         .setIn(['comparebrandValues', 'error'], fromJS(action.error))
         .setIn(['comparebrandValues', 'loading'], fromJS(false))
+    case types.CREATED_REPORT_CONTROL:
+      return state
+        .setIn(['createdReportControls', 'isSaved'], action.payload.isSaved)
+        .setIn(['createdReportControls', 'uuid'], action.payload.uuid)
+
     /** END submit brand insight form */
 
     /** START Predefined Report form */
@@ -528,6 +548,15 @@ const selectPredefinedReports = (state) =>
 export const makeSelectPredefinedReports = () =>
   createSelector(
     selectPredefinedReports,
+    (substate) => substate.toJS()
+  )
+
+const selectCreatedReportControl = (state) =>
+  state.Reports.get('createdReportControls')
+
+export const makeSelectCreatedReportControl = () =>
+  createSelector(
+    selectCreatedReportControl,
     (substate) => substate.toJS()
   )
 

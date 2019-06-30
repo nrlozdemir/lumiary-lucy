@@ -17,6 +17,8 @@ import {
   makeSelectReport,
 } from 'Reducers/generatedReport'
 
+import { getLocationParams } from 'Utils'
+
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
 import RouterLoading from 'Components/RouterLoading'
@@ -29,15 +31,35 @@ import ColorComparison from '../section/ColorComparison'
 class CompareBrand extends React.Component {
   componentDidMount() {
     const {
-      getReportRequest,
-      match: { params },
+      location: { search },
+      compareBrandFormSubmit,
+      comparebrandValues: { data: comparebrandValues },
     } = this.props
-
-    const id = params && params.id
-
-    if (id) {
-      getReportRequest({ id })
+    const urlParams = getLocationParams(search)
+    if (
+      !comparebrandValues &&
+      urlParams &&
+      urlParams.brand_one_uuid &&
+      urlParams.brand_two_uuid &&
+      urlParams.title
+    ) {
+      const urlParams = getLocationParams(search)
+      compareBrandFormSubmit(
+        {
+          [urlParams.brand_one_uuid]: true,
+          [urlParams.brand_two_uuid]: true,
+          title: urlParams.title,
+        },
+        true
+      )
     }
+  }
+
+  componenWillUnmount() {
+    this.props.createdReportControl({
+      isSaved: false,
+      uuid: null,
+    })
   }
 
   render() {
@@ -47,12 +69,10 @@ class CompareBrand extends React.Component {
       comparebrandValues: { data: comparebrandValues },
       predefinedReportValues: { data: predefinedReportValues },
       authProfile = {},
-
       getContentVitalityScoreData,
       getColorComparisonData,
       getPerformanceComparisonData,
       getVideoComparisonData,
-
       contentVitalityScoreData,
       colorComparisonData,
       performanceComparisonData,
@@ -60,9 +80,7 @@ class CompareBrand extends React.Component {
     } = this.props
 
     const reportValues =
-      params && params.id
-        ? report
-        : params.type === 'compare-brands'
+      params.type === 'compare-brands'
         ? comparebrandValues
         : predefinedReportValues
 

@@ -1,5 +1,5 @@
 export const selectOptions = [
   { value: 'all-reports', label: 'All Reports' },
-  { value: 'no-data', label: 'No data' },
-  { value: 'no-data', label: 'No data' },
+  { value: 'compare', label: 'Compare Brands' },
+  { value: 'insights', label: 'Brands Insights' },
 ]
