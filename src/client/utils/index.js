@@ -257,6 +257,50 @@ const getLocationParams = (value) => {
   }, {})
 }
 
+//can sort and get the top n values of flat array of objects
+const getNValuesOfObject = ({ obj = {}, n, sortOrder = '' }) => {
+  const keys = Object.keys(obj)
+  if(!keys.length) {
+    return obj
+  } 
+    let newObj = {}
+    let newArr = keys.map(i => ({ key: i, value: obj[i] }))
+    
+    if(sortOrder) {
+      let sortCallBack = null
+
+      switch(sortOrder) {
+        case 'asc':
+          sortCallBack = (a, b) => a[1] - b[1]
+          break
+        case 'desc':
+          sortCallBack = (a, b) => b[1] - a[1]
+          break
+        default:
+          sortCallBack = null
+      }
+
+      if(sortCallBack) {
+        const sortable = []
+        for (const key in obj) {
+          sortable.push([key, obj[key]])
+        }
+        sortable.sort(sortCallBack)
+        newArr = sortable.map((item) => {
+            return { key: item[0], value: item[1] }
+          })
+        
+      }
+    }
+    if(!!n && n > 0 && n < newArr.length) {
+      newArr = newArr.slice(0, n)
+    }
+    newArr.forEach(item => {
+      newObj = { ...newObj, [item.key]: item.value }
+    })
+    return newObj
+}
+
 export {
   randomKey,
   socialIconSelector,
@@ -279,4 +323,5 @@ export {
   getFilteredCompetitorValues,
   getLocationParams,
   splitCamelCaseToString,
+  getNValuesOfObject,
 }

@@ -24,6 +24,7 @@ import {
   getLabelWithSuffix,
   getDateBucketFromRange,
   getBrandAndCompetitors,
+  getNValuesOfObject,
 } from 'Utils'
 
 import {
@@ -392,7 +393,10 @@ function* getFormatChartData() {
           const formatObj = response.data[brand].format
 
           Object.keys(formatObj).forEach((formatKey) => {
-            const currentCount = formatObj[formatKey][currentDay]
+            const currentKey = formatObj[formatKey]
+            const currentCount = Object.keys(currentKey).reduce((accumulator, day) => {
+              return accumulator + currentKey[day]
+            }, 0)
 
             if (!!all[formatKey]) {
               all[formatKey] = all[formatKey] + currentCount
@@ -405,7 +409,8 @@ function* getFormatChartData() {
         {}
       )
 
-      const formatCountsArr = Object.keys(formatCountsObj).map((formatKey) => ({
+      const slicedObj = getNValuesOfObject({ obj: formatCountsObj, n: 4, sortOrder: 'desc' })
+      const formatCountsArr = Object.keys(slicedObj).map((formatKey) => ({
         name: formatKey,
         count: formatCountsObj[formatKey],
       }))

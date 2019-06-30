@@ -5,6 +5,7 @@
   margin-bottom: 30px;
 
   .formatItem {
+    flex: 1;
     &:nth-child(1) {
       .formatItemIcon span {
         background-color: $color-cool-blue;
