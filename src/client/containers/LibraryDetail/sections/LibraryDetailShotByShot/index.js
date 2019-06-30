@@ -198,7 +198,7 @@ class LibraryDetailShotByShot extends React.Component {
         {({ themeContext: { colors } }) => {
           return (
             <div
-              className="grid-container col-12 mt-72 mb-72"
+              className={style.shotByShotGrid}
               ref={(el) => (this.slider = el)}
               style={{
                 backgroundColor: colors.moduleBackground,
@@ -209,231 +209,122 @@ class LibraryDetailShotByShot extends React.Component {
             >
               {selectedImage !== null ? (
                 <React.Fragment>
-                  <div className={style.sliderTabContainer}>
-                    <div
-                      key={Math.random()}
-                      className="col-6-no-gutters bg-black"
-                    >
-                      <div className="mt-48 ml-48 mr-48">
-                        <div className={style.shotSliderWrapper}>
-                          <div
-                            className={style.shotSliderContainer}
-                            ref={(el) => (this.sliderImages = el)}
-                            style={{
-                              width:
-                                Object.values(shots).length * shotSliderWidth,
-                            }}
-                          >
-                            {shots &&
-                              Object.values(shots).length > 0 &&
-                              Object.values(shots).map((shot, i) => {
-                                const frameShotUrl =
-                                  shot.frameUrls && shot.frameUrls[0]
-                                    ? `${mediaUrl}/${shot.frameUrls[0]}`
-                                    : null
-
-                                return frameShotUrl ? (
-                                  <div
-                                    key={i}
-                                    className={style.shotSliderImage}
-                                  >
-                                    <img src={frameShotUrl} />
-                                  </div>
-                                ) : null
-                              })}
-                          </div>
-                        </div>
+                  <div key={Math.random()} className="bg-black">
+                    <div className={style.shotSliderWrapperContainer}>
+                      <div className={style.shotSliderWrapper}>
                         <div
-                          ref={(el) => (this.sliderThumbs = el)}
-                          className="mt-32 mb-24"
+                          className={style.shotSliderContainer}
+                          ref={(el) => (this.sliderImages = el)}
                           style={{
-                            width: 'max-content',
-                            overflow: 'hidden',
+                            width:
+                              Object.values(shots).length * shotSliderWidth,
                           }}
                         >
-                          {!!shotValues.length && (
-                            <SliderWithScrubber
-                              name="sliderThumbs"
-                              clickEvent={this.shotSliderClick}
-                              shots={loading ? [] : shotValues}
-                              shotMargin={4}
-                              minShotWidth={12}
-                              maxShotWidth={104}
-                              shotHeight={56}
-                              shotHoverWidth={104}
-                              shotHoverHeight={56}
-                              viewportWidth={492}
-                              viewportHeight={100}
-                              viewportBackgroundColor={
-                                colors.shotByShotSliderImageBorder
-                              }
-                              ticks={12}
-                              customClass={{
-                                sliderWrapper: style.sliderWrapper,
-                                imageWrapper: style.sliderSetCenter,
-                                image: classnames(
-                                  style.sliderImage,
-                                  style.sliderImageCurrent
-                                ),
-                                imageHover: style.sliderHover,
-                                originalImage: style.sliderOriginalImage,
-                              }}
-                              customStyle={{
-                                originalImageBorderColor:
-                                  colors.shotByShotSliderImageBorder,
-                                imageWrapperBorderColor:
-                                  colors.shotByShotSliderImageBorder,
-                              }}
-                              isEmpty={dataIsEmpty}
-                              scrubberIsDot={true}
-                              scrubberWidth={16}
-                              scrubberHeight={16}
-                              scrubberDotClassname={style.dotScrubber}
-                            />
-                          )}
+                          {shots &&
+                            Object.values(shots).length > 0 &&
+                            Object.values(shots).map((shot, i) => {
+                              const frameShotUrl =
+                                shot.frameUrls && shot.frameUrls[0]
+                                  ? `${mediaUrl}/${shot.frameUrls[0]}`
+                                  : null
+
+                              return frameShotUrl ? (
+                                <div key={i} className={style.shotSliderImage}>
+                                  <img src={frameShotUrl} />
+                                </div>
+                              ) : null
+                            })}
                         </div>
                       </div>
+                      <div
+                        ref={(el) => (this.sliderThumbs = el)}
+                        className="mt-32 mb-24"
+                        style={{
+                          width: 'max-content',
+                          overflow: 'hidden',
+                        }}
+                      >
+                        {!!shotValues.length && (
+                          <SliderWithScrubber
+                            name="sliderThumbs"
+                            clickEvent={this.shotSliderClick}
+                            shots={loading ? [] : shotValues}
+                            shotMargin={4}
+                            minShotWidth={12}
+                            maxShotWidth={104}
+                            shotHeight={56}
+                            shotHoverWidth={104}
+                            shotHoverHeight={56}
+                            viewportWidth={492}
+                            viewportHeight={100}
+                            viewportBackgroundColor={
+                              colors.shotByShotSliderImageBorder
+                            }
+                            ticks={12}
+                            customClass={{
+                              sliderWrapper: style.sliderWrapper,
+                              imageWrapper: style.sliderSetCenter,
+                              image: classnames(
+                                style.sliderImage,
+                                style.sliderImageCurrent
+                              ),
+                              imageHover: style.sliderHover,
+                              originalImage: style.sliderOriginalImage,
+                            }}
+                            customStyle={{
+                              originalImageBorderColor:
+                                colors.shotByShotSliderImageBorder,
+                              imageWrapperBorderColor:
+                                colors.shotByShotSliderImageBorder,
+                            }}
+                            isEmpty={dataIsEmpty}
+                            scrubberIsDot={true}
+                            scrubberWidth={16}
+                            scrubberHeight={16}
+                            scrubberDotClassname={style.dotScrubber}
+                          />
+                        )}
+                      </div>
                     </div>
-                    <div className="col-6-no-gutters">
-                      <Tabs>
-                        <div
-                          style={{
-                            background: colors.shotByShotTabHeader,
-                            boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
-                          }}
-                        >
-                          <TabList className={style.tabList}>
-                            <Tab selectedClassName={style.selectedTab}>
-                              People
-                            </Tab>
-                            <Tab selectedClassName={style.selectedTab}>
-                              Objects
-                            </Tab>
-                            <Tab selectedClassName={style.selectedTab}>
-                              Color
-                            </Tab>
-                            <div className={style.cancelButton}>
-                              <XCircle
-                                onClick={() =>
-                                  this.setState({ selectedImage: null })
-                                }
-                              />
-                            </div>
-                          </TabList>
-                        </div>
-                        <TabPanel className={style.tabPanelReset}>
-                          <div className={classnames(style.tabPanel, 'mt-16')}>
-                            {peopleIsEmpty === false && (
-                              <Scrubber vertical width={570} height={368}>
-                                {peopleValues.map((info, i) => {
-                                  const { ages, gender, uuid } = info
-                                  return !gender ||
-                                    !uuid ||
-                                    !ages.confidence ? null : (
-                                    <div
-                                      className={classnames(
-                                        style.tabPanelItem,
-                                        'grid-container'
-                                      )}
-                                      style={{
-                                        background: colors.shotByShotBackground,
-                                        borderColor: colors.shotByShotBorder,
-                                        marginRight: '16px !important',
-                                      }}
-                                      key={i}
-                                    >
-                                      <div className="col-5-no-gutters">
-                                        <img
-                                          src={`${mediaUrl}/lumiere/${
-                                            this.props.authProfile.brand.uuid
-                                          }/${this.props.selectedVideo}/${
-                                            this.state.selectedImage
-                                          }/`}
-                                          className={classnames(
-                                            style.imageItem,
-                                            'grid-container'
-                                          )}
-                                        />
-                                      </div>
-                                      <div className="col-7-no-gutters">
-                                        <div className="pt-20">
-                                          <div
-                                            className={
-                                              style.progressbarContainer
-                                            }
-                                            key={i}
-                                          >
-                                            <div className={style.barOptions}>
-                                              <p>{ucfirst(gender)}</p>
-                                              <p>
-                                                {(
-                                                  ages.confidence * 100
-                                                ).toFixed(0)}
-                                                % Accurate
-                                              </p>
-                                            </div>
-                                            <ProgressBar
-                                              width={(
-                                                ages.confidence * 100
-                                              ).toFixed(0)}
-                                              customBarClass={style.progressBar}
-                                              customPercentageClass={
-                                                style.percentage
-                                              }
-                                            />
-                                          </div>
-                                        </div>
-                                        <div className="pt-20">
-                                          <div
-                                            className={
-                                              style.progressbarContainer
-                                            }
-                                            key={i}
-                                          >
-                                            <div className={style.barOptions}>
-                                              <p>{ages.min} Y/O</p>
-                                              <p>
-                                                {ages.min.toFixed(0)}% Accurate
-                                              </p>
-                                            </div>
-                                            <ProgressBar
-                                              width={(
-                                                ages.confidence * 100
-                                              ).toFixed(0)}
-                                              customBarClass={style.progressBar}
-                                              customPercentageClass={
-                                                style.percentage
-                                              }
-                                            />
-                                          </div>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  )
-                                })}
-                              </Scrubber>
-                            )}
-                            {peopleIsEmpty === true && (
-                              <div className={style.tabsEmptyData}>
-                                No Data Available
-                              </div>
-                            )}
+                  </div>
+                  <div>
+                    <Tabs>
+                      <div
+                        style={{
+                          background: colors.shotByShotTabHeader,
+                          boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
+                        }}
+                      >
+                        <TabList className={style.tabList}>
+                          <Tab selectedClassName={style.selectedTab}>
+                            People
+                          </Tab>
+                          <Tab selectedClassName={style.selectedTab}>
+                            Objects
+                          </Tab>
+                          <Tab selectedClassName={style.selectedTab}>Color</Tab>
+                          <div className={style.cancelButton}>
+                            <XCircle
+                              onClick={() =>
+                                this.setState({ selectedImage: null })
+                              }
+                            />
                           </div>
-                        </TabPanel>
-                        <TabPanel className={style.tabPanelReset}>
-                          <div className={classnames(style.tabPanel, 'mt-16')}>
-                            {objectIsEmpty === false && (
-                              <Scrubber vertical width={570} height={368}>
-                                {shotInfoData.shot.labels.map((info, i) => (
+                        </TabList>
+                      </div>
+                      <TabPanel className={style.tabPanelReset}>
+                        <div className={classnames(style.tabPanel, 'mt-16')}>
+                          {peopleIsEmpty === false && (
+                            <Scrubber vertical width={'100%'} height={368}>
+                              {peopleValues.map((info, i) => {
+                                const { ages, gender, uuid } = info
+                                return !gender ||
+                                  !uuid ||
+                                  !ages.confidence ? null : (
                                   <div
                                     className={classnames(
                                       style.tabPanelItem,
-                                      'grid-container',
-                                      {
-                                        'mb-16':
-                                          i !==
-                                          shotInfoData.shot.labels.length - 1,
-                                      }
+                                      'grid-container'
                                     )}
                                     style={{
                                       background: colors.shotByShotBackground,
@@ -448,7 +339,7 @@ class LibraryDetailShotByShot extends React.Component {
                                           this.props.authProfile.brand.uuid
                                         }/${this.props.selectedVideo}/${
                                           this.state.selectedImage
-                                        }/${shotInfoData.shot.frames[i]}`}
+                                        }/`}
                                         className={classnames(
                                           style.imageItem,
                                           'grid-container'
@@ -462,9 +353,9 @@ class LibraryDetailShotByShot extends React.Component {
                                           key={i}
                                         >
                                           <div className={style.barOptions}>
-                                            <p>{info.label}</p>
+                                            <p>{ucfirst(gender)}</p>
                                             <p>
-                                              {(info.confidence * 100).toFixed(
+                                              {(ages.confidence * 100).toFixed(
                                                 0
                                               )}
                                               % Accurate
@@ -472,7 +363,29 @@ class LibraryDetailShotByShot extends React.Component {
                                           </div>
                                           <ProgressBar
                                             width={(
-                                              info.confidence * 100
+                                              ages.confidence * 100
+                                            ).toFixed(0)}
+                                            customBarClass={style.progressBar}
+                                            customPercentageClass={
+                                              style.percentage
+                                            }
+                                          />
+                                        </div>
+                                      </div>
+                                      <div className="pt-20">
+                                        <div
+                                          className={style.progressbarContainer}
+                                          key={i}
+                                        >
+                                          <div className={style.barOptions}>
+                                            <p>{ages.min} Y/O</p>
+                                            <p>
+                                              {ages.min.toFixed(0)}% Accurate
+                                            </p>
+                                          </div>
+                                          <ProgressBar
+                                            width={(
+                                              ages.confidence * 100
                                             ).toFixed(0)}
                                             customBarClass={style.progressBar}
                                             customPercentageClass={
@@ -483,80 +396,155 @@ class LibraryDetailShotByShot extends React.Component {
                                       </div>
                                     </div>
                                   </div>
-                                ))}
-                              </Scrubber>
-                            )}
-                            {objectIsEmpty === true && (
-                              <div className={style.tabsEmptyData}>
-                                No Data Available
-                              </div>
-                            )}
-                          </div>
-                        </TabPanel>
-                        <TabPanel>
-                          <div className={style.radarChartContainer}>
-                            {radarChartDataConfigured && (
-                              <RadarChart
-                                data={radarChartDataConfigured}
-                                key={Math.random()}
-                              />
-                            )}
-                          </div>
-                        </TabPanel>
-                      </Tabs>
-                    </div>
+                                )
+                              })}
+                            </Scrubber>
+                          )}
+                          {peopleIsEmpty === true && (
+                            <div className={style.tabsEmptyData}>
+                              No Data Available
+                            </div>
+                          )}
+                        </div>
+                      </TabPanel>
+                      <TabPanel className={style.tabPanelReset}>
+                        <div className={classnames(style.tabPanel, 'mt-16')}>
+                          {objectIsEmpty === false && (
+                            <Scrubber vertical width={'100%'} height={368}>
+                              {shotInfoData.shot.labels.map((info, i) => (
+                                <div
+                                  className={classnames(
+                                    style.tabPanelItem,
+                                    'grid-container',
+                                    {
+                                      'mb-16':
+                                        i !==
+                                        shotInfoData.shot.labels.length - 1,
+                                    }
+                                  )}
+                                  style={{
+                                    background: colors.shotByShotBackground,
+                                    borderColor: colors.shotByShotBorder,
+                                    marginRight: '16px !important',
+                                  }}
+                                  key={i}
+                                >
+                                  <div className="col-5-no-gutters">
+                                    <img
+                                      src={`${mediaUrl}/lumiere/${
+                                        this.props.authProfile.brand.uuid
+                                      }/${this.props.selectedVideo}/${
+                                        this.state.selectedImage
+                                      }/${shotInfoData.shot.frames[i]}`}
+                                      className={classnames(
+                                        style.imageItem,
+                                        'grid-container'
+                                      )}
+                                    />
+                                  </div>
+                                  <div className="col-7-no-gutters">
+                                    <div className="pt-20">
+                                      <div
+                                        className={style.progressbarContainer}
+                                        key={i}
+                                      >
+                                        <div className={style.barOptions}>
+                                          <p>{info.label}</p>
+                                          <p>
+                                            {(info.confidence * 100).toFixed(0)}
+                                            % Accurate
+                                          </p>
+                                        </div>
+                                        <ProgressBar
+                                          width={(
+                                            info.confidence * 100
+                                          ).toFixed(0)}
+                                          customBarClass={style.progressBar}
+                                          customPercentageClass={
+                                            style.percentage
+                                          }
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              ))}
+                            </Scrubber>
+                          )}
+                          {objectIsEmpty === true && (
+                            <div className={style.tabsEmptyData}>
+                              No Data Available
+                            </div>
+                          )}
+                        </div>
+                      </TabPanel>
+                      <TabPanel>
+                        <div className={style.radarChartContainer}>
+                          {radarChartDataConfigured && (
+                            <RadarChart
+                              data={radarChartDataConfigured}
+                              key={Math.random()}
+                            />
+                          )}
+                        </div>
+                      </TabPanel>
+                    </Tabs>
                   </div>
                 </React.Fragment>
               ) : (
-                <React.Fragment>
+                <div className={style.sliderContainer}>
                   <h2 className={style.sliderHeader}>Shot by Shot</h2>
-                  <div className={style.sliderContainer}>
+                  <div
+                    className={classnames({
+                      [style.emptyContainer]: dataIsEmpty === true || loading,
+                    })}
+                    style={{ position: 'relative' }}
+                  >
                     <div
-                      className={classnames({
-                        [style.emptyContainer]: dataIsEmpty === true,
-                      })}
-                    >
-                      <div className={style.shotByShotMask} />
-                      <SliderWithScrubber
-                        name="slider1"
-                        clickEvent={this.shotClick}
-                        shots={shotValues}
-                        shotMargin={5}
-                        minShotWidth={24}
-                        maxShotWidth={148}
-                        shotHeight={160}
-                        shotHoverWidth={160}
-                        shotHoverHeight={160}
-                        viewportWidth={1118}
-                        viewportHeight={230}
-                        viewportBackgroundColor={'transparent'}
-                        ticks={11}
-                        markers
-                        customClass={{
-                          sliderWrapper: style.sliderWrapper,
-                          imageWrapper: style.setCenter,
-                          image: style.image,
-                          imageHover: style.hover,
-                          originalImage: style.originalImage,
-                        }}
-                        customStyle={{
-                          originalImageBorderColor: colors.shotByShotBackground,
-                          imageWrapperBorderColor: colors.shotByShotBackground,
-                        }}
-                        isEmpty={dataIsEmpty}
-                        scrubberIsDot={false}
-                      />
-                    </div>
-                    {dataIsEmpty && !loading && (
-                      <div className={style.emptyData}>No Data Available</div>
-                    )}
-                    {loading && (
-                      <div className={style.emptyData}>
-                        <RouterLoading />
-                      </div>
-                    )}
+                      className={style.shotByShotMask}
+                      style={{
+                        borderColor: colors.themeType === 'light' ? '#ccc' : '#545b79',
+                      }}
+                    />
+                    <SliderWithScrubber
+                      name="slider1"
+                      clickEvent={this.shotClick}
+                      shots={shotValues}
+                      shotMargin={5}
+                      minShotWidth={24}
+                      maxShotWidth={148}
+                      shotHeight={160}
+                      shotHoverWidth={160}
+                      shotHoverHeight={160}
+                      viewportWidth={1118}
+                      viewportHeight={230}
+                      viewportBackgroundColor={'transparent'}
+                      ticks={11}
+                      markers
+                      customClass={{
+                        sliderWrapper: style.sliderWrapper,
+                        imageWrapper: style.setCenter,
+                        image: style.image,
+                        imageHover: style.hover,
+                        originalImage: style.originalImage,
+                      }}
+                      customStyle={{
+                        originalImageBorderColor: colors.shotByShotBackground,
+                        imageWrapperBorderColor: colors.shotByShotBackground,
+                      }}
+                      isEmpty={dataIsEmpty}
+                      scrubberIsDot={false}
+                    />
                   </div>
-                </React.Fragment>
+                  {dataIsEmpty && !loading && (
+                    <div className={style.emptyData}>No Data Available</div>
+                  )}
+                  {loading && (
+                    <div className={style.emptyData}>
+                      <RouterLoading />
+                    </div>
+                  )}
+                </div>
               )}
             </div>
           )
