@@ -38,6 +38,7 @@ const ReportsForm = (props) => {
                   placeholder="Select One"
                   label="Choose a Brand"
                   validate={required}
+                  isReportDropdown
                 />
               </div>
               <div className={style.selectionArea}>
@@ -50,6 +51,7 @@ const ReportsForm = (props) => {
                   placeholder="Social Platform"
                   label="Social Platform"
                   validate={required}
+                  isReportDropdown
                 />
               </div>
               <div className={style.selectionArea}>
@@ -62,6 +64,7 @@ const ReportsForm = (props) => {
                   placeholder="Select One"
                   label="Engagement"
                   validate={required}
+                  isReportDropdown
                 />
               </div>
               <div className={style.selectionArea}>
@@ -74,6 +77,7 @@ const ReportsForm = (props) => {
                   placeholder="Select Date"
                   label="Date Range"
                   validate={required}
+                  isReportDropdown
                 />
               </div>
               <div className={style.selectionArea}>
