@@ -47,7 +47,8 @@ const HeaderModule = ({
                 placeHolder={filter.placeHolder}
                 defaultValue={filter.defaultValue}
                 selectClasses={
-                  filter.type === 'platformEngagement' &&
+                  (filter.type === 'platformEngagement' ||
+                    filter.type === 'propertyEngagement') &&
                   'custom-select combine-select'
                 }
               />

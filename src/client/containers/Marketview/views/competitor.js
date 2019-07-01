@@ -38,14 +38,9 @@ export class Competitor extends React.Component {
             title="Top Videos Over Time By Competitor"
             filters={[
               {
-                type: 'property',
-                selectKey: 'property',
-                placeHolder: 'property',
-              },
-              {
-                type: 'metric',
-                selectKey: 'engagement',
-                placeHolder: 'engagement',
+                type: 'propertyEngagement',
+                selectKey: 'propertyEngagement',
+                placeHolder: 'Engagement by property',
               },
               {
                 type: 'dateRange',

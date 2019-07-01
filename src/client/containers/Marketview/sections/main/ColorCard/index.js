@@ -89,7 +89,7 @@ class ColorCard extends Component {
               </span>
             </div>
             <div className={style.bubbleChart}>
-              {!!data && !!data.length && totalChartValue && (
+              {!!data && !!data.length && totalChartValue ? (
                 <BubbleChart
                   maximumIterationCount={1000}
                   size={[totalChartValue * 3.2, totalChartValue * 2.4]}
@@ -140,7 +140,7 @@ class ColorCard extends Component {
                     </Bubble>
                   ))}
                 </BubbleChart>
-              )}
+              ): null}
             </div>
             <div className={style.colors}>
               <style>{`.${style.hasTriangle}:before {border-color: ${

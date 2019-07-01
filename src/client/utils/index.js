@@ -228,20 +228,26 @@ const selectFiltersToType = (selectValues = {}) => {
     const filterValue = selectValues[key]
     const filterType = filterValue.type
 
-    if (filterType !== 'platformEngagement') {
-      values[filterType] = !!filterValue.value
-        ? !!filterValue.value.value && !!filterValue.value.value.startDate
-          ? [filterValue.value.value.startDate, filterValue.value.value.endDate]
-          : filterValue.value.value
-        : defaultFilters[filterType]
-    } else {
-      values.platform = !!filterValue.value
+    if (
+      filterType === 'platformEngagement' ||
+      filterType === 'propertyEngagement'
+    ) {
+      const whichValueKey =
+        filterType === 'platformEngagement' ? 'platform' : 'property'
+      values[whichValueKey] = !!filterValue.value
         ? filterValue.value.value.split('|')[0]
-        : defaultFilters.platform
+        : defaultFilters[filterType].split('|')[0]
       values.metric = !!filterValue.value
         ? filterValue.value.value.split('|')[1]
-        : defaultFilters.metric
+        : defaultFilters[filterType].split('|')[1]
+      return values
     }
+
+    values[filterType] = !!filterValue.value
+      ? !!filterValue.value.value && !!filterValue.value.value.startDate
+        ? [filterValue.value.value.startDate, filterValue.value.value.endDate]
+        : filterValue.value.value
+      : defaultFilters[filterType]
 
     return values
   }, {})
@@ -255,6 +261,50 @@ const getLocationParams = (value) => {
     obj[keyAndValue[0]] = keyAndValue[1]
     return obj
   }, {})
+}
+
+//can sort and get the top n values of flat array of objects
+const getNValuesOfObject = ({ obj = {}, n, sortOrder = '' }) => {
+  const keys = Object.keys(obj)
+  if(!keys.length) {
+    return obj
+  } 
+    let newObj = {}
+    let newArr = keys.map(i => ({ key: i, value: obj[i] }))
+    
+    if(sortOrder) {
+      let sortCallBack = null
+
+      switch(sortOrder) {
+        case 'asc':
+          sortCallBack = (a, b) => a[1] - b[1]
+          break
+        case 'desc':
+          sortCallBack = (a, b) => b[1] - a[1]
+          break
+        default:
+          sortCallBack = null
+      }
+
+      if(sortCallBack) {
+        const sortable = []
+        for (const key in obj) {
+          sortable.push([key, obj[key]])
+        }
+        sortable.sort(sortCallBack)
+        newArr = sortable.map((item) => {
+            return { key: item[0], value: item[1] }
+          })
+        
+      }
+    }
+    if(!!n && n > 0 && n < newArr.length) {
+      newArr = newArr.slice(0, n)
+    }
+    newArr.forEach(item => {
+      newObj = { ...newObj, [item.key]: item.value }
+    })
+    return newObj
 }
 
 export {
@@ -279,4 +329,5 @@ export {
   getFilteredCompetitorValues,
   getLocationParams,
   splitCamelCaseToString,
+  getNValuesOfObject,
 }
