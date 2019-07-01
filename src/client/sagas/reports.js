@@ -118,10 +118,11 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
 
 function* compareBrandSubmit({ payload: { params, onlySave } }) {
   try {
-    const { title, ...brands } = params
+    const { saved, title, ...brands } = params
     const filteredBrands = Object.keys(brands).filter((brand) => brands[brand])
 
     const parameters = {
+      saved,
       title,
       brands: filteredBrands,
     }
@@ -132,7 +133,7 @@ function* compareBrandSubmit({ payload: { params, onlySave } }) {
         push(
           `/reports/compare-brands?title=${title}&brand_one_uuid=${
             filteredBrands[0]
-          }&brand_two_uuid=${filteredBrands[1]}`
+          }&brand_two_uuid=${filteredBrands[1]}&saved=${saved}`
         )
       )
     } else {

@@ -131,20 +131,30 @@ class Reports extends Component {
 
   onRowClick = (state, rowInfo, column, instance) => {
     return {
-        onClick: e => {
-            const {
-              original: { 
-                date_range: date,
-                metric: engagement,
-                platform: social,
-                title,
-                brand_uuid: brand
-              }
-            } = rowInfo
+      onClick: e => {
+        const {
+          original: { 
+            date_range: date,
+            metric: engagement,
+            platform: social,
+            title,
+            brand_uuid: brand,
+            brand_one_uuid,
+            brand_two_uuid,
+            category
+          }
+        } = rowInfo
+        console.log('row info : ', rowInfo)
             const { push } = this.props
-            push(
-              `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=true`
-            )
+            if(category === 'Brands Insights') {
+              push(
+                `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=true`
+              )
+            }else if(category === 'Compare Brands') {
+              push(
+                `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=true`
+              )
+            }
         }
     }
 }

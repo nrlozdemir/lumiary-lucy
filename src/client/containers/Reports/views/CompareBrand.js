@@ -49,6 +49,7 @@ class CompareBrand extends React.Component {
           [urlParams.brand_one_uuid]: true,
           [urlParams.brand_two_uuid]: true,
           title: urlParams.title,
+          saved: urlParams.saved
         },
         true
       )
