@@ -1,4 +1,7 @@
 .navigation{
+  *{
+    transition: all 0.1s ease;
+  }
   .navItem{
     display: flex;
     justify-content: space-between;
@@ -7,6 +10,9 @@
       position: relative;
       height: 56px;
       min-width: 200px;
+      &:hover{
+        cursor: pointer;
+      }
 
       [class*='-Bubble'] {
         position: absolute;
@@ -15,12 +21,11 @@
         justify-content: center;
         height: 100%;
         &:before{
-          z-index: 100;
           font-size: 24px;
         }
       }
 
-      [class*='react-select__value-container'] {
+      [class*='react-select__control'] {
         &:hover{
           cursor: pointer;
         }
@@ -30,12 +35,16 @@
         height: 100%;
         [class*='react-select__control'] {
           height: 100%;
+          background-color: transparent;
         }
       }
 
-      [class*='react-select__menu'] {
+      [class*='react-select__menu']:not([class*='react-select__menu-list']) {
         z-index: 200;
         box-shadow: none;
+        margin-top: 0;
+        padding-top: 8px;
+        background-color: transparent;
         [class*='react-select__option'] {
           background-color: transparent;
         }
@@ -47,18 +56,37 @@
       [class*='-Bubble'] {
         width: 100%;
       }
+
+      [class*='react-select__control'] {
+        [class*='react-select__indicators'] {
+          opacity: 0;
+        }
+      }
+
+      &:hover{
+        [class*='react-select__control'] {
+          [class*='react-select__indicators'] {
+            opacity: 1;
+          }
+        }
+      }
+
     }
 
     .navItem_btn.selected{
       [class*='-Bubble'] {
         width: 72px;
+        z-index: 1;
       }
       [class*='-singleValue'] {
         margin-left: 48px;
       }
+      [class*='react-select__control'] {
+        background-color: $light_inputOptionBackground;
+      }
     }
 
-    .navItem_btn.selected.light{
+    .navItem_btn.light{
       [class*='react-select__menu'] {
         [class*='react-select__menu-list'] {
           background-color: $light_inputControlBackground;
@@ -78,6 +106,228 @@
       opacity: 0;
     }
 
+  }
+}
+
+.sectionBadge {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  span {
+    background-color: $light_bodyBackground;
+    font-weight: bold;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    font-size: 14px;
+    padding: 10px 24px;
+    line-height: 14px;
+  }
+}
+
+.cardWrapper {
+  padding-top: 48px;
+  padding-bottom: 72px;
+  .content{
+    display: flex;
+    .cardBlock{
+      width: 50%;
+      padding: 48px 42px;
+      &:first-child{
+        margin-right: 6px;
+        background-color: rgba(255, 255, 255, 0.6);
+      }
+      &:last-child{
+        margin-left: 6px;
+        background-color: $light_videoCardBackground;
+        box-shadow: 0 0 10px 0 #bebebe;
+      }
+      .card {
+        position: relative;
+        h1 {
+          // color: $color-white;
+          font-family: $font-family-ClanOT;
+          font-size: 18px;
+          font-weight: bold;
+          font-style: normal;
+          font-stretch: normal;
+          line-height: normal;
+          letter-spacing: normal;
+          text-align: center;
+          margin-bottom: 65px;
+
+          i {
+            margin-left: 8px;
+            font-size: 20px;
+          }
+        }
+
+        .items {
+          padding: 40px 0px 0px;
+
+          .itemWrapper {
+            // padding: 72px 0px;
+            width: 100%;
+            &:after{
+              content: '';
+              width: 365px;
+              height: 1px;
+              background-color: $light_barChartShadow;
+              display: block;
+              margin: 72px auto 0;
+            }
+            position: relative;
+
+            &:last-child {
+              border-bottom: none;
+              &:after{
+                display: none;
+              }
+            }
+          }
+
+          .infoItem {
+            width: 100%;
+            height: 250px;
+            padding: 72px 0px 72px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+
+            &_diffBubble {
+              position: absolute;
+              top: 0;
+              bottom: 0;
+              left: calc(
+                -42px - 50px - 8px
+              ); //col padding & bubblewidth/2 & columngap/2
+              width: 100px;
+              height: 100px;
+              border: solid 4px white;
+              border-radius: 50%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              flex-direction: column;
+              margin: auto;
+              box-sizing: border-box;
+
+              span {
+                &:nth-of-type(1) {
+                  font-size: 24px;
+                  font-weight: 800;
+                  font-family: $font-family-primary;
+                }
+                &:nth-of-type(2) {
+                  font-size: 12px;
+                  font-family: $font-family-ClanOTNews;
+                }
+              }
+            }
+
+            .itemValue {
+              margin: 32px 0px 38px;
+              // color: $color-white;
+              font-family: $font-family-primary;
+              font-size: 32px;
+              font-weight: 800;
+              font-style: normal;
+              font-stretch: condensed;
+              line-height: normal;
+              letter-spacing: normal;
+            }
+
+            .infoText {
+              margin: 32px 0px 0px 0px;
+              font-family: $font-family-ClanOTNews;
+              // color: $color-white;
+              font-size: 14px;
+              line-height: 1.86;
+              font-weight: bold;
+              font-weight: normal;
+              font-style: normal;
+              font-stretch: normal;
+              letter-spacing: normal;
+              text-align: center;
+              max-height: 60px;
+              width: 300px;
+              overflow: hidden;
+            }
+
+            .progressBar {
+              width: 250px;
+              margin-left: 0px;
+              background-color: $color-dark-five;
+              border-radius: 10px;
+
+              &--dark {
+                background: rgb(33, 36, 59) !important;
+              }
+              &--light {
+                background: rgb(232, 236, 240) !important;
+              }
+            }
+
+            .percentageBlue {
+              border-radius: 10px;
+              height: 10px;
+              background-color: $color-cool-blue;
+              -webkit-transition: width 0.5s, height 0.5s;
+              transition: width 0.5s, height 0.5s;
+            }
+
+            .percentagePink {
+              background-color: $color-coral-pink;
+            }
+
+            .progressText {
+              width: 250px;
+              // color: $color-white;
+              font-size: 14px;
+              font-family: $font-family-ClanOTNews;
+              margin-bottom: 4px;
+
+              .rightTitle {
+                float: right;
+              }
+
+              &::after {
+                content: '';
+                clear: both;
+                display: table;
+              }
+            }
+
+            &:last-child {
+              padding-bottom: 0;
+              border-bottom: none;
+            }
+
+            > div {
+              text-align: center;
+
+              &.progressText {
+                color: $color-cool-grey;
+                font-size: 14px;
+                font-family: $font-family-ClanOTNews;
+                margin-bottom: 4px;
+              }
+
+              &.itemValue {
+                // color: $color-white;
+                font-size: 32px;
+                font-family: $font-family-primary;
+                margin-bottom: 16px;
+              }
+            }
+          }
+        }
+
+      }
+    }
   }
 }
 // .navigation {
@@ -402,9 +652,19 @@
 //   opacity: 0.8;
 // }
 
-// .noData{
-//   position: absolute;
-//   font-family: $font-family-ClanOTNews;
-//   font-size: 24px;
-//   font-weight: bold;
-// }
+.noData{
+  position: absolute;
+  font-family: $font-family-ClanOTNews;
+  font-size: 24px;
+  font-weight: bold;
+  width: 100%;
+  height: 99%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1;
+}
+
+.noDataWrapper{
+  opacity: 0.1;
+}

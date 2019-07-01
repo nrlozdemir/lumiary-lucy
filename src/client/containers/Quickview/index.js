@@ -189,7 +189,15 @@ export class Main extends React.PureComponent {
                       )
                     })}
                     <div
-                      className={style.navItem_btn}
+                      className={cx(
+                        style.navItem_btn,
+                        {
+                          [colors.themeType === style.dark
+                          ? style.dark
+                          : style.light]: true
+                        }
+                      )}
+                      
                       // style={{
                       //   background: colors.tabBackground,
                       //   color: colors.textColor,
@@ -311,7 +319,9 @@ export class Main extends React.PureComponent {
                                         return (
                                           <div
                                             key={`info_${i}-${index}`}
-                                            className={style.itemWrapper}
+                                            className={cx(
+                                              style.itemWrapper,
+                                            )}
                                             // style={{
                                             //   borderColor:
                                             //     i === 0
@@ -321,7 +331,12 @@ export class Main extends React.PureComponent {
                                           >
                                             {noData && <p className={style.noData}>No Data Available</p>}
                                             <div 
-                                              className={style.infoItem}
+                                              className={cx(
+                                                style.infoItem,
+                                                {
+                                                  [style.noDataWrapper]: noData
+                                                }
+                                              )}
                                               // style={{
                                               //   opacity: (noData) ? 0.1 : 1,
                                               // }}
