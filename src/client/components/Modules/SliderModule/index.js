@@ -17,6 +17,7 @@ const SliderModule = (props) => {
     filters,
     action,
     loading,
+    infoText
   } = props
 
   const videoOptions =
@@ -36,7 +37,7 @@ const SliderModule = (props) => {
           action={action}
           isEmpty={isEmpty(data) && !loading}
           customEmptyClasses={style.sliderEmpty}
-          infoText={'infoText'}
+          infoText={infoText}
         >
           <React.Fragment>
             <div className="col-12-no-gutters">

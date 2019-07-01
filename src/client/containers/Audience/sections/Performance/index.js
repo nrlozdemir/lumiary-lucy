@@ -41,6 +41,7 @@ class Performance extends React.Component {
         error,
       },
       themeContext: { colors },
+      infoText,
     } = this.props
 
     const handleStyle = [
@@ -99,7 +100,7 @@ class Performance extends React.Component {
       <Module
         moduleKey={'Audience/Performance'}
         title="Performance By Age, Gender and Date"
-        infoText={'infoText'}
+        infoText={infoText}
         action={this.callBack}
         filters={[
           {

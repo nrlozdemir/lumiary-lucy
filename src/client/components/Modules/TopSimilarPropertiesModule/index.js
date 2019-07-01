@@ -18,7 +18,7 @@ const WrapperModule = ({ children, style, className}) => {
 }
 
 const TopSimilarProperties = (props) => {
-  const { data, title, filters, action, moduleKey, isLoading, isError } = props
+  const { data, title, filters, action, moduleKey, isLoading, isError, infoText } = props
   return (
     <Module
       title={title}
@@ -26,7 +26,7 @@ const TopSimilarProperties = (props) => {
       moduleKey={moduleKey}
       action={action}
       isEmpty={!isLoading && isError}
-      infoText={'infoText'}
+      infoText={infoText}
     >
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
