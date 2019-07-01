@@ -128,14 +128,25 @@ export class Main extends React.PureComponent {
                       return !!platform.filter && isSelected || true ? (
                         <div
                           key={idx}
-                          className={style.navItem_btn}
-                          style={{
-                            background: isSelected
-                              ? colors.tabActiveBackground
-                              : colors.tabBackground,
-                            color: colors.textColor,
-                            borderColor: colors.tabBorder,
-                          }}
+                          className={cx(
+                            style.navItem_btn,
+                            {
+                              [style.selected]: isSelected
+                            },
+                            {
+                              [colors.themeType === style.dark
+                              ? style.dark
+                              : style.light]: true
+                            }
+                          )}
+                          
+                          // style={{
+                          //   background: isSelected
+                          //     ? colors.tabActiveBackground
+                          //     : colors.tabBackground,
+                          //   color: colors.textColor,
+                          //   borderColor: colors.tabBorder,
+                          // }}
                         >
                           <i
                             className={cx(
@@ -166,11 +177,11 @@ export class Main extends React.PureComponent {
                           activeStyle={{
                             background: colors.tabActiveBackground,
                           }}
-                          style={{
-                            background: colors.tabBackground,
-                            color: colors.textColor,
-                            borderColor: colors.tabBorder,
-                          }}
+                          // style={{
+                          //   background: colors.tabBackground,
+                          //   color: colors.textColor,
+                          //   borderColor: colors.tabBorder,
+                          // }}
                           to={`/quickview/${toSlug(platform.name)}`}
                         >
                           <i className={socialIconSelector(platform.name)} />
@@ -179,11 +190,11 @@ export class Main extends React.PureComponent {
                     })}
                     <div
                       className={style.navItem_btn}
-                      style={{
-                        background: colors.tabBackground,
-                        color: colors.textColor,
-                        borderColor: colors.tabBorder,
-                      }}
+                      // style={{
+                      //   background: colors.tabBackground,
+                      //   color: colors.textColor,
+                      //   borderColor: colors.tabBorder,
+                      // }}
                     >
                       <ModuleSelectFilters
                         type={'dateRange'}
@@ -204,11 +215,11 @@ export class Main extends React.PureComponent {
                 </div>
                 <div
                   className={style.cardWrapper}
-                  style={{
-                    background: colors.moduleBackground,
-                    color: colors.textColor,
-                    boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
-                  }}
+                  // style={{
+                  //   background: colors.moduleBackground,
+                  //   color: colors.textColor,
+                  //   boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
+                  // }}
                 >
                   {
                     (loading)
@@ -216,7 +227,7 @@ export class Main extends React.PureComponent {
                       : (
                         <div
                           className={style.content}
-                          style={{ background: colors.bodyBackground }}
+                          // style={{ background: colors.bodyBackground }}
                         >
                           {platformsValues &&
                             platformsValues.map((el, i) => {
@@ -232,12 +243,12 @@ export class Main extends React.PureComponent {
                                 <div
                                   key={i}
                                   className={style.cardBlock}
-                                  style={{
-                                    background:
-                                      i === 1
-                                        ? colors.tabActiveBackground
-                                        : colors.moduleBackground,
-                                  }}
+                                  // style={{
+                                  //   background:
+                                  //     i === 1
+                                  //       ? colors.tabActiveBackground
+                                  //       : colors.moduleBackground,
+                                  // }}
                                 >
                                   {/* HEADER */}
                                   <div className={style.card}>
@@ -301,31 +312,31 @@ export class Main extends React.PureComponent {
                                           <div
                                             key={`info_${i}-${index}`}
                                             className={style.itemWrapper}
-                                            style={{
-                                              borderColor:
-                                                i === 0
-                                                  ? colors.chartStadiumBarBorder
-                                                  : colors.bodyBackground,
-                                            }}
+                                            // style={{
+                                            //   borderColor:
+                                            //     i === 0
+                                            //       ? colors.chartStadiumBarBorder
+                                            //       : colors.bodyBackground,
+                                            // }}
                                           >
                                             {noData && <p className={style.noData}>No Data Available</p>}
                                             <div 
                                               className={style.infoItem}
-                                              style={{
-                                                opacity: (noData) ? 0.1 : 1,
-                                              }}
+                                              // style={{
+                                              //   opacity: (noData) ? 0.1 : 1,
+                                              // }}
                                             >
                                               {difference && i === 1 && false && (
                                                 <div
                                                   className={
                                                     style.infoItem_diffBubble
                                                   }
-                                                  style={{
-                                                    borderColor:
-                                                      colors.tabActiveBackground,
-                                                    background: colors.bodyBackground,
-                                                    color: colors.labelColor
-                                                  }}
+                                                  // style={{
+                                                  //   borderColor:
+                                                  //     colors.tabActiveBackground,
+                                                  //   background: colors.bodyBackground,
+                                                  //   color: colors.labelColor
+                                                  // }}
                                                 >
                                                   <span>{difference}%</span>
                                                   <span>Difference</span>
@@ -338,16 +349,16 @@ export class Main extends React.PureComponent {
                                                 )}
                                               >
                                                 <span
-                                                  style={{
-                                                    background:
-                                                      i === 0
-                                                        ? colors.labelBackground
-                                                        : colors.bodyBackground,
-                                                    color: colors.labelColor,
-                                                    boxShadow: `0 1px 2px 0 ${
-                                                      colors.labelShadow
-                                                    }`,
-                                                  }}
+                                                  // style={{
+                                                  //   background:
+                                                  //     i === 0
+                                                  //       ? colors.labelBackground
+                                                  //       : colors.bodyBackground,
+                                                  //   color: colors.labelColor,
+                                                  //   boxShadow: `0 1px 2px 0 ${
+                                                  //     colors.labelShadow
+                                                  //   }`,
+                                                  // }}
                                                 >
                                                   {item.title}
                                                 </span>
