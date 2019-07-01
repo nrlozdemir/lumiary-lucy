@@ -99,6 +99,7 @@ class Performance extends React.Component {
       <Module
         moduleKey={'Audience/Performance'}
         title="Performance By Age, Gender and Date"
+        infoText={'infoText'}
         action={this.callBack}
         filters={[
           {

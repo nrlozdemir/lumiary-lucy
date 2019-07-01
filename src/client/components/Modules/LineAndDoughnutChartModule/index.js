@@ -21,6 +21,7 @@ const LineAndDoughnutChartModule = ({
   percentageData,
   customCallbackFunc,
   themeContext: { colors },
+  infoText,
 }) => {
   const percentageCol = cx(style.percentageCol)
 
@@ -75,6 +76,7 @@ const LineAndDoughnutChartModule = ({
       filters={filters}
       isEmpty={isEmpty}
       loading={loading}
+      infoText={infoText}
     >
       <div className="grid-collapse">
         <div className="col-12-no-gutters">

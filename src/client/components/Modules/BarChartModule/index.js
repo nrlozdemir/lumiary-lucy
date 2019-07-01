@@ -40,6 +40,7 @@ const BarChartModule = ({
       action={action}
       references={references}
       isEmpty={isDataSetEmpty(barData)}
+      infoText={'infoText'}
       legend={
         titleLabels && (
           <div

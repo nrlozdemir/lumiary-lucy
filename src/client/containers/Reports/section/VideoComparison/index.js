@@ -36,6 +36,7 @@ class VideoComparison extends React.Component {
   render() {
     const {
       data: { data, loading, error },
+      infoText,
     } = this.props
 
     return (
@@ -55,6 +56,7 @@ class VideoComparison extends React.Component {
         legend={renderLegend(
           !!data && !!data.legend && !!data.legend.length ? data.legend : []
         )}
+        infoText={infoText}
       >
         <ComparisonHorizontalBarChart data={data || {}} />
       </Module>

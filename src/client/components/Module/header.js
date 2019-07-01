@@ -22,7 +22,7 @@ const HeaderModule = ({
       <div className={style.headerTitle}>
         <h1>{title}</h1>
         {/* <h2>{subTitle}</h2> */}
-        <i
+        {infoText && <i
           className={classnames('icon icon-Information', style.moduleInfo)}
           onMouseEnter={() => changeInfoStatus()}
           onMouseLeave={() => changeInfoStatus()}
@@ -32,7 +32,7 @@ const HeaderModule = ({
             {infoText ||
               'This explains what this graph means and answers any questions a usermay potentially have.'}
           </ToolTip>
-        </i>
+        </i>}
       </div>
       {!!legend && <div className={style.headerLegend}>{legend}</div>}
       {filters && filters.length ? (
