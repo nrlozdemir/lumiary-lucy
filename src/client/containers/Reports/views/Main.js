@@ -144,7 +144,6 @@ class Reports extends Component {
             category
           }
         } = rowInfo
-        console.log('row info : ', rowInfo)
             const { push } = this.props
             if(category === 'Brands Insights') {
               push(

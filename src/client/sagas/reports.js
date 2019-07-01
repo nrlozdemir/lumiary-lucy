@@ -118,7 +118,7 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
 
 function* compareBrandSubmit({ payload: { params, onlySave } }) {
   try {
-    const { saved, title, ...brands } = params
+    const { saved = false, title, ...brands } = params
     const filteredBrands = Object.keys(brands).filter((brand) => brands[brand])
 
     const parameters = {

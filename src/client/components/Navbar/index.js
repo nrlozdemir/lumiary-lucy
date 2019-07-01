@@ -1,9 +1,11 @@
 import React from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import classnames from 'classnames'
 import { Link, NavLink, withRouter } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
+import { createBrowserHistory } from 'history'
 
 import { makeSelectLibraryDetail } from 'Reducers/libraryDetail'
 
@@ -272,10 +274,24 @@ class Navbar extends React.Component {
       comparebrandValues: { data: comparebrandValues },
       createdReportControls: { isSaved, uuid },
       predefinedReportValues: { data: predefinedReportValues },
+      push,
+      location: { search }
     } = this.props
     if (category === 'Brands Insights' && brandInsightValue) {
       this.setState({
         swicthControl: !isSaved,
+      }, () => {
+        const urlParams = getLocationParams(search)
+        const {
+          date,
+          engagement,
+          title,
+          social,
+          brand
+        } = urlParams
+        push(
+          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${!isSaved}`
+        )
       })
       if (isSaved) {
         return loadDeleteReport(uuid)
@@ -287,6 +303,16 @@ class Navbar extends React.Component {
     } else if (category === 'Compare Brands' && comparebrandValues) {
       this.setState({
         swicthControl: !isSaved,
+      },() => {
+        const urlParams = getLocationParams(search)
+        const {
+          title,
+          brand_one_uuid,
+          brand_two_uuid,
+        } = urlParams
+        push(
+          `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${!isSaved}`
+        )
       })
       if (isSaved) {
         return loadDeleteReport(uuid)
@@ -326,14 +352,18 @@ const mapStateToProps = createStructuredSelector({
   profile: makeSelectAuthProfile(),
 })
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      ...reportsActions,
-      ...generatedReportActions,
-    },
-    dispatch
-  )
+const mapDispatchToProps = (dispatch) => {
+  return {
+    push: (url) => dispatch(push(url)),
+    ...bindActionCreators(
+      {
+        ...reportsActions,
+        ...generatedReportActions,
+      },
+      dispatch
+    )
+  }
+}
 
 const withConnect = connect(
   mapStateToProps,
