@@ -232,7 +232,8 @@ function* getDoughnutSectionInfoData({ payload }) {
       const {
         libraryMetricPercents,
         industryMetricPercents,
-        libraryDateCounts,
+        libraryMetricDateSums,
+        industryMetricDateSums,
         industryDateCounts,
         videoPropertyAverage,
         libraryPropertyAverage,
@@ -249,6 +250,7 @@ function* getDoughnutSectionInfoData({ payload }) {
       )
 
       const {
+        maxKeyLabel: libraryMaxKeyLabel,
         chartData: libraryChartData,
         maxKey: libraryMaxKey,
         maxValue: libraryMaxValue,
@@ -259,6 +261,7 @@ function* getDoughnutSectionInfoData({ payload }) {
       )
 
       const {
+        maxKeyLabel: industryMaxKeyLabel,
         chartData: industryChartData,
         maxKey: industryMaxKey,
         maxValue: industryMaxValue,
@@ -269,14 +272,14 @@ function* getDoughnutSectionInfoData({ payload }) {
       )
 
       const libraryPercentages = convertNumberArrIntoPercentages(
-        Object.values(libraryDateCounts)
+        Object.values(libraryMetricDateSums[libraryMaxKeyLabel])
       )
       const industryPercentages = convertNumberArrIntoPercentages(
-        Object.values(industryDateCounts)
+        Object.values(industryMetricDateSums[industryMaxKeyLabel])
       )
 
       const lineChartData = {
-        labels: Object.keys(libraryDateCounts).reverse(),
+        labels: Object.keys(industryDateCounts).reverse(),
         datasets: [
           {
             data: libraryPercentages.reverse(),
