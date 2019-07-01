@@ -307,10 +307,10 @@ function* getBubbleChartData() {
 
     if (
       !!response &&
-      !!response.twitter &&
-      !!response.facebook &&
-      !!response.instagram &&
-      !!response.youtube
+      !!response.Twitter &&
+      !!response.Facebook &&
+      !!response.Instagram &&
+      !!response.YouTube
     ) {
       // convert response into array of { name, value, color }
       const bubbleData = Object.keys(response).map((pf) =>
