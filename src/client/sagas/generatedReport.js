@@ -163,8 +163,8 @@ function* getVideoReleasesBarChart({ data: { report } }) {
       metric,
       platform,
       daterange,
-
       property: 'format',
+      limit: 4,
     }
 
     const response = yield call(
@@ -224,27 +224,26 @@ function* getColorTempData({
   }
 }
 
-function* getFilteringSectionData({ data: { dateRange, report } }) {
+function* getFilteringSectionData({ data: { property, report } }) {
   try {
     const profile = yield select(selectAuthProfile)
     const competitors = getBrandAndCompetitors(profile)
 
     const filteredCompetitors = getFilteredCompetitors(competitors, report)
-
     const options = {
-      dateRange,
+      dateRange: report.date,
       metric: report.engagement,
       platform: report.social,
       dateBucket: 'none',
       display: 'percentage',
-      property: ['duration'],
+      property: [property],
       url: '/report',
       brands: [...filteredCompetitors],
     }
 
     const doughnutData = yield call(getDataFromApi, options)
 
-    const dateBucket = getDateBucketFromRange(dateRange)
+    const dateBucket = getDateBucketFromRange(report.date)
 
     const stackedChartData =
       dateBucket !== 'none'
@@ -253,7 +252,6 @@ function* getFilteringSectionData({ data: { dateRange, report } }) {
             dateBucket,
           })
         : { data: {} }
-
     yield put(
       actions.getFilteringSectionDataSuccess({
         doughnutData: convertDataIntoDatasets(doughnutData, options, {
@@ -307,6 +305,7 @@ function* getPacingCardData({ data: { report } }) {
       call(getDataFromApi, {
         ...options,
         proportionOf: 'format',
+        limit: 4,
       }),
     ])
 
@@ -346,6 +345,10 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
       brands: [...filteredCompetitors],
     }
 
+    if(property === 'format') {
+      options.limit = 4
+    }
+    
     const [facebook, instagram, twitter, youtube] = yield all([
       call(getDataFromApi, { ...options, platform: 'facebook' }),
       call(getDataFromApi, { ...options, platform: 'instagram' }),

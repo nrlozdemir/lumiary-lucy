@@ -43,6 +43,7 @@ export const defaultFilters = {
   talentGender: 'male',
   colorTemperature: 'happy-sad',
   dateRange: 'week',
+  propertyEngagement: 'pacing|views',
   platformEngagement: 'facebook|views',
 }
 
@@ -187,6 +188,62 @@ export const initialState = fromJS({
           { value: 'youtube|likes', label: 'Likes' },
           { value: 'youtube|shares', label: 'Shares' },
           { value: 'youtube|comments', label: 'Comments' },
+        ],
+      },
+    ],
+    propertyEngagement: [
+      {
+        label: 'Pacing',
+        options: [
+          { value: 'pacing|views', label: 'Views' },
+          { value: 'pacing|likes', label: 'Likes' },
+          { value: 'pacing|shares', label: 'Shares' },
+          { value: 'pacing|comments', label: 'Comments' },
+        ],
+      },
+      {
+        label: 'Aspect Ratio',
+        options: [
+          { value: 'aspectRatio|views', label: 'Views' },
+          { value: 'aspectRatio|likes', label: 'Likes' },
+          { value: 'aspectRatio|shares', label: 'Shares' },
+          { value: 'aspectRatio|comments', label: 'Comments' },
+        ],
+      },
+      {
+        label: 'Duration',
+        options: [
+          { value: 'duration|views', label: 'Views' },
+          { value: 'duration|likes', label: 'Likes' },
+          { value: 'duration|shares', label: 'Shares' },
+          { value: 'duration|comments', label: 'Comments' },
+        ],
+      },
+      {
+        label: 'Format',
+        options: [
+          { value: 'format|views', label: 'Views' },
+          { value: 'format|likes', label: 'Likes' },
+          { value: 'format|shares', label: 'Shares' },
+          { value: 'format|comments', label: 'Comments' },
+        ],
+      },
+      {
+        label: 'Frame Rate',
+        options: [
+          { value: 'frameRate|views', label: 'Views' },
+          { value: 'frameRate|likes', label: 'Likes' },
+          { value: 'frameRate|shares', label: 'Shares' },
+          { value: 'frameRate|comments', label: 'Comments' },
+        ],
+      },
+      {
+        label: 'Resolution',
+        options: [
+          { value: 'resolution|views', label: 'Views' },
+          { value: 'resolution|likes', label: 'Likes' },
+          { value: 'resolution|shares', label: 'Shares' },
+          { value: 'resolution|comments', label: 'Comments' },
         ],
       },
     ],
