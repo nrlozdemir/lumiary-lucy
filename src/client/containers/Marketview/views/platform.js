@@ -17,6 +17,7 @@ export class Platform extends React.Component {
         <Slider
           title="Top Performing Videos By Platform"
           moduleKey="MarketView/Platform/Slider"
+          infoText={`This module compares the videos within your library by the Content Vitality (CV) Score, showing the top scoring videos for each platform.`}
           filters={[
             {
               type: 'platformEngagement',
