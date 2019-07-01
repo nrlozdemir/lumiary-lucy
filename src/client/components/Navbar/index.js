@@ -2,7 +2,7 @@ import React from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import classnames from 'classnames'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, withRouter } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
 
 import { makeSelectLibraryDetail } from 'Reducers/libraryDetail'
@@ -20,7 +20,7 @@ import { actions as generatedReportActions } from 'Reducers/generatedReport'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
 import Switch from 'Components/Form/Switch'
-import { ucfirst } from 'Utils'
+import { ucfirst, getLocationParams } from 'Utils'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import Dropdown from './dropdown'
@@ -257,8 +257,10 @@ const Template = (props) => {
 class Navbar extends React.Component {
   constructor(props) {
     super(props)
+    const {location: { search }} = props
+    const urlParams = getLocationParams(search)
     this.state = {
-      swicthControl: false,
+      swicthControl: !!urlParams && urlParams.saved === 'true' ,
     }
   }
 
@@ -338,7 +340,9 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(
+const composedComponent = compose(
   withConnect,
   withTheme
-)(Navbar)
+)(Navbar) 
+
+export default withRouter(composedComponent)
