@@ -10,6 +10,7 @@ class TopVideosCard extends React.Component {
   render() {
     const {
       data: { data, loading },
+      infoText,
     } = this.props
 
     return (
@@ -20,6 +21,7 @@ class TopVideosCard extends React.Component {
         moduleKey="Reports/TopVideosCardModule"
         title="Top Videos Over Time By Competitor"
         action={this.callBack}
+        infoText={infoText}
         filters={[
           {
             type: 'property',

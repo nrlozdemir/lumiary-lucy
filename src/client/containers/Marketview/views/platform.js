@@ -34,6 +34,7 @@ export class Platform extends React.Component {
         <TopVideosOverTime
           moduleKey="MarketView/Platform/TopVideosOverTime"
           title="Top Videos Over Time By Platform"
+          infoText={`This module provides insights for the top performing industry videos against engagement metrics across time and property.  Using the drop-downs, you can adjust for the property, engagement metric, and time range to analyze.`}
           filters={[
             {
               type: 'property',
@@ -75,6 +76,7 @@ export class Platform extends React.Component {
         <TopSimilarProperties
           moduleKey="MarketView/Platform/TopSimilarPropertiesModule"
           title="Similar Properties Of Top Videos"
+          infoText={`This module offers insights on top 3 similar properties found within top performing industry videos. `}
           action={this.getSimilarProperties}
           presentWithDoughnut
           filters={[
