@@ -134,7 +134,7 @@ export class Main extends React.PureComponent {
                               [style.selected]: isSelected
                             },
                             {
-                              [colors.themeType === style.dark
+                              [colors.themeType === 'dark'
                               ? style.dark
                               : style.light]: true
                             }
@@ -222,7 +222,14 @@ export class Main extends React.PureComponent {
                   </div>
                 </div>
                 <div
-                  className={style.cardWrapper}
+                  className={cx(
+                    style.cardWrapper,
+                    {
+                      [colors.themeType === 'dark'
+                      ? style.dark
+                      : style.light]: true
+                    }
+                  )}
                   // style={{
                   //   background: colors.moduleBackground,
                   //   color: colors.textColor,

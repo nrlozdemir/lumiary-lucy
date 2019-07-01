@@ -6,6 +6,10 @@
     display: flex;
     justify-content: space-between;
     
+    [class*='__placeholder'] {
+      opacity: 0;
+    }
+
     .navItem_btn{
       position: relative;
       height: 56px;
@@ -81,12 +85,13 @@
       [class*='-singleValue'] {
         margin-left: 48px;
       }
-      [class*='react-select__control'] {
-        background-color: $light_inputOptionBackground;
-      }
     }
 
     .navItem_btn.light{
+      [class*='-Bubble'] {
+        color: $light_iconColor;
+      }
+
       [class*='react-select__menu'] {
         [class*='react-select__menu-list'] {
           background-color: $light_inputControlBackground;
@@ -101,9 +106,34 @@
       }
     }
 
+    .navItem_btn.light.selected{
+      [class*='react-select__control'] {
+        background-color: $light_inputOptionBackground;
+      }
+    }
 
-    [class*='__placeholder'] {
-      opacity: 0;
+    .navItem_btn.dark{
+      [class*='-Bubble'] {
+        color: $dark_iconColor;
+      }
+      [class*='react-select__menu'] {
+        [class*='react-select__menu-list'] {
+          background-color: $dark_inputControlBackground;
+          border: 1px solid $dark_inputControlSelectedBorder;
+          [class*='react-select__option'] {
+            color: $dark_inputColor;
+          }
+          [class*='react-select__option--is-focused'] {
+            color: $dark_inputActiveColor;
+          }
+        }
+      }
+    }
+
+    .navItem_btn.dark.selected{
+      [class*='react-select__control'] {
+        background-color: $dark_inputOptionBackground;
+      }
     }
 
   }
@@ -126,6 +156,36 @@
   }
 }
 
+.cardWrapper.light {
+  .content{
+    .cardBlock{
+      &:first-child{
+        background-color: rgba(255, 255, 255, 0.6);
+      }
+      &:last-child{
+        background-color: $light_videoCardBackground;
+        box-shadow: 0 0 10px 0 #bebebe;
+      }
+    }
+  }
+}
+
+.cardWrapper.dark {
+  .content{
+    .cardBlock{
+      &:first-child{
+        background-color: rgba(84, 91, 121, 0.4);
+        color: #acb0be;
+      }
+      &:last-child{
+        background-color: $dark_videoCardBackground;
+        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+        color: $dark_iconColor;
+      }
+    }
+  }
+}
+
 .cardWrapper {
   padding-top: 48px;
   padding-bottom: 72px;
@@ -136,12 +196,12 @@
       padding: 48px 42px;
       &:first-child{
         margin-right: 6px;
-        background-color: rgba(255, 255, 255, 0.6);
+        // background-color: rgba(255, 255, 255, 0.6);
       }
       &:last-child{
         margin-left: 6px;
-        background-color: $light_videoCardBackground;
-        box-shadow: 0 0 10px 0 #bebebe;
+        // background-color: $light_videoCardBackground;
+        // box-shadow: 0 0 10px 0 #bebebe;
       }
       .card {
         position: relative;
@@ -160,6 +220,12 @@
           i {
             margin-left: 8px;
             font-size: 20px;
+          }
+        }
+
+        .assetContainer{
+          [class*='AssetLayer'] {
+            z-index: 1;
           }
         }
 
