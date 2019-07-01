@@ -62,10 +62,14 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
       display: 'percentage',
       dateBucket: 'none',
     }
-    const response = yield call(getDataFromApi, {
-      ...parameters,
-      property: expectedValues.map(({ key }) => key),
-    }, '/report')
+    const response = yield call(
+      getDataFromApi,
+      {
+        ...parameters,
+        property: expectedValues.map(({ key }) => key),
+      },
+      '/report'
+    )
 
     const payloads = Object.entries(response.data[brand.name]).map(
       ([key, value]) => ({
@@ -191,6 +195,7 @@ function* getShotInfoRequest({ payload }) {
       yield put(actions.getShotInfoSuccess(payload))
     }
   } catch (error) {
+    console.log(error)
     yield put(actions.getShotInfoFailure({ error }))
   }
 }
@@ -306,10 +311,6 @@ function* getDoughnutSectionInfoData({ payload }) {
           ),
         })
       )
-    } else {
-      yield put(
-        actions.doughnutInfoIndustryFailure('Doughnut Info Request Error')
-      )
     }
   } catch (e) {
     console.error(e)
@@ -347,7 +348,7 @@ function* getRadarChartRequest(ids) {
       'blue-green',
       'blue-purple',
       'purple',
-      'red-purple'
+      'red-purple',
     ]
     const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
 

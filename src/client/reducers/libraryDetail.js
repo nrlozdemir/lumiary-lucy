@@ -30,7 +30,6 @@ export const types = {
   GET_SHOT_BY_SHOT_FAILURE: 'LibraryDetail/GET_SHOT_BY_SHOT_FAILURE',
 
   TOGGLE_INFO_SECTION: 'LibraryDetail/TOGGLE_INFO_SECTION',
-
   DOUGHNUT_INFO_SUCCESS: 'LibraryDetail/DOUGHNUT_INFO_SUCCESS',
   DOUGHNUT_INFO_FAILURE: 'LibraryDetail/DOUGHNUT_INFO_FAILURE',
 
@@ -46,6 +45,7 @@ export const types = {
   GET_PEOPLE_SUCCESS: 'LibraryDetail/GET_PEOPLE_SUCCESS',
   GET_PEOPLE_FAILURE: 'LibraryDetail/GET_PEOPLE_FAILURE',
 }
+
 export const actions = {
   getSelectedVideoRequest: (payload) => ({
     type: types.GET_SELECTED_VIDEO_REQUEST,

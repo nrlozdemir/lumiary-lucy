@@ -17,17 +17,20 @@ import Info from './Info'
 class LibraryDetailDoughnutChart extends React.Component {
   shouldComponentUpdate(nextProps) {
     const {
+      showInfo,
       doughnutData: { data, loading },
       infoData: { loading: doughnutInfoLoading },
     } = this.props
 
     const {
+      showInfo: nextShowInfo,
       doughnutData: { data: nextData, loading: nextLoading },
       infoData: { loading: doughnutInfoNextLoading },
     } = nextProps
 
     return (
       !isEqual(JSON.stringify(data), JSON.stringify(nextData)) ||
+      !isEqual(showInfo, nextShowInfo) ||
       loading !== nextLoading ||
       doughnutInfoLoading !== doughnutInfoNextLoading
     )
