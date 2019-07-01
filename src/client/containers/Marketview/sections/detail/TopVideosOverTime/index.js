@@ -66,6 +66,7 @@ class TopVideosOverTime extends React.Component {
         loading: competitorTopLoading,
       },
       platformTopVideos: { data: platformTopData, loading: platformTopLoading },
+      infoText,
     } = this.props
 
     const whichReferencesData =
@@ -103,6 +104,7 @@ class TopVideosOverTime extends React.Component {
 
     return (
       <TopVideosCard
+        infoText={infoText}
         chartData={loading ? {} : chartData}
         height={150}
         moduleKey={moduleKey}
