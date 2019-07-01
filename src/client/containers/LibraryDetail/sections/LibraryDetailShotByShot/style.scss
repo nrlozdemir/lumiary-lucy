@@ -256,6 +256,7 @@
   flex-wrap: nowrap;
   overflow-x: hidden;
   overflow-y: hidden;
+  grid-column: -1/1;
 
   .shotByShotMask {
     position: absolute;
@@ -721,8 +722,9 @@
 
 .shotByShotGrid {
   display: grid;
-  grid-template-columns: 592px 528px;
+  grid-template-columns: 592px 1fr;
   width: calc(100% - 80px);
   margin: 72px auto;
   max-width: 1200px;
+  justify-content: center;
 }
