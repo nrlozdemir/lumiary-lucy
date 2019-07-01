@@ -61,12 +61,11 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
       dateBucket: 'none',
       display: 'percentage',
       dateBucket: 'none',
-      url: '/report',
     }
     const response = yield call(getDataFromApi, {
       ...parameters,
       property: expectedValues.map(({ key }) => key),
-    })
+    }, '/report')
 
     const payloads = Object.entries(response.data[brand.name]).map(
       ([key, value]) => ({

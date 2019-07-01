@@ -127,10 +127,14 @@ function* getCompetitorTopVideosMarketview(payload) {
       dateBucket: 'none',
       display: 'percentage',
       brands: competitors,
-      url: '/report',
       platform: 'all',
     }
-    let response = yield call(getDataFromApi, options)
+
+    if (property === 'format') {
+      options.limit = 4
+    }
+
+    let response = yield call(getDataFromApi, options, '/report')
 
     // preliminary to convertMultiRequestDataIntoDatasets structure
     response = Object.keys(response.data).reduce((acc, key) => {
@@ -169,6 +173,10 @@ function* getPlatformTopVideosMarketview({
       dateBucket: 'none',
       display: 'percentage',
       brandUuid: brand.uuid,
+    }
+
+    if (property === 'format') {
+      options.limit = 4
     }
 
     let response = yield call(
@@ -377,6 +385,7 @@ function* getFormatChartData() {
       display: 'none',
       platform: 'all',
       brands: [...competitors],
+      limit: 4,
     }
 
     // video is still being pulled from mock
@@ -500,7 +509,6 @@ function* getTotalCompetitorViewsData() {
     const profile = yield select(selectAuthProfile)
     const competitors = getBrandAndCompetitors(profile)
     const options = {
-      url: '/report',
       metric: 'views',
       platform: 'all',
       dateRange: '3months',
@@ -508,7 +516,7 @@ function* getTotalCompetitorViewsData() {
       property: ['duration'],
       brands: [...competitors],
     }
-    const payload = yield call(getDataFromApi, { ...options })
+    const payload = yield call(getDataFromApi, { ...options }, '/report')
 
     if (!!payload) {
       yield put(
@@ -650,13 +658,18 @@ function* getTopPerformingPropertiesByTimeData({
     const options = {
       dateRange,
       dateBucket,
-      url: '/report',
       metric: 'views',
       property: [property],
       display: 'percentage',
       brands: [brand.uuid],
     }
-    const data = yield call(getDataFromApi, options)
+
+    if (property === 'format') {
+      options.limit = 4
+    }
+
+    const data = yield call(getDataFromApi, options, '/report')
+    
     yield put(
       actions.getTopPerformingTimeSuccess(
         convertDataIntoDatasets(data, options, {

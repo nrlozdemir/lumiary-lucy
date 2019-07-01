@@ -312,6 +312,7 @@ function* getTopPerformingFormatData({ data = {} }) {
       display: 'percentage',
       property: ['format'],
       brands: [brand.uuid],
+      //limit: 4,
     }
 
     const dateBucketedOptions = { ...options, dateBucket: 'dayOfWeek' }
