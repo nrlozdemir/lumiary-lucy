@@ -19,6 +19,7 @@ const BarChartModule = ({
   moduleKey,
   isEmpty,
   loading = false,
+  infoText
 }) => {
   const chartTickOptions = {
     callback(value) {
@@ -40,7 +41,7 @@ const BarChartModule = ({
       action={action}
       references={references}
       isEmpty={isDataSetEmpty(barData)}
-      infoText={'infoText'}
+      infoText={infoText}
       legend={
         titleLabels && (
           <div
