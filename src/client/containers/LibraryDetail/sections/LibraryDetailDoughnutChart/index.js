@@ -18,21 +18,22 @@ class LibraryDetailDoughnutChart extends React.Component {
   shouldComponentUpdate(nextProps) {
     const {
       showInfo,
+      infoData,
       doughnutData: { data, loading },
-      infoData: { loading: doughnutInfoLoading },
     } = this.props
 
     const {
       showInfo: nextShowInfo,
+      infoData: nextInfoData,
       doughnutData: { data: nextData, loading: nextLoading },
-      infoData: { loading: doughnutInfoNextLoading },
     } = nextProps
+
 
     return (
       !isEqual(JSON.stringify(data), JSON.stringify(nextData)) ||
-      !isEqual(showInfo, nextShowInfo) ||
+      !isEqual(JSON.stringify(infoData), JSON.stringify(nextInfoData)) ||
       loading !== nextLoading ||
-      doughnutInfoLoading !== doughnutInfoNextLoading
+      (!!showInfo || !!nextShowInfo) 
     )
   }
 
@@ -86,7 +87,10 @@ class LibraryDetailDoughnutChart extends React.Component {
                           />
                         )}
                         {!!sectionToShow && sectionToShow === title && (
-                          <Info {...cardProps} loading={doughnutInfoLoading} />
+                          <Info
+                            {...cardProps}
+                            loading={doughnutInfoLoading}
+                          />
                         )}
                       </React.Fragment>
                     )
@@ -111,13 +115,9 @@ const mapStateToProps = createStructuredSelector({
   infoData: makeSelectInfoData(),
 })
 
-function mapDispatchToProps(dispatch) {
-  return {}
-}
-
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )
 
 export default compose(withConnect)(LibraryDetailDoughnutChart)
