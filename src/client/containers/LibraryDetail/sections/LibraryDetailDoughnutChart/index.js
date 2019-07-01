@@ -16,7 +16,21 @@ import Info from './Info'
 
 class LibraryDetailDoughnutChart extends React.Component {
   shouldComponentUpdate(nextProps) {
-    return !isEqual(this.props, nextProps)
+    const {
+      doughnutData: { data, loading },
+      infoData: { loading: doughnutInfoLoading },
+    } = this.props
+
+    const {
+      doughnutData: { data: nextData, loading: nextLoading },
+      infoData: { loading: doughnutInfoNextLoading },
+    } = nextProps
+
+    return (
+      !isEqual(JSON.stringify(data), JSON.stringify(nextData)) ||
+      loading !== nextLoading ||
+      doughnutInfoLoading !== doughnutInfoNextLoading
+    )
   }
 
   render() {
@@ -41,7 +55,8 @@ class LibraryDetailDoughnutChart extends React.Component {
             }}
           >
             <div className={style.radialChartsContainer}>
-              {!!doughnutData && !doughnutLoading &&
+              {!!doughnutData &&
+                !doughnutLoading &&
                 doughnutData.map(
                   (
                     {
@@ -49,7 +64,6 @@ class LibraryDetailDoughnutChart extends React.Component {
                       title,
                       doughnutChartValues,
                       max: { label, percentage },
-                      data,
                     },
                     i
                   ) => {
@@ -65,7 +79,6 @@ class LibraryDetailDoughnutChart extends React.Component {
                           <DoughnutCard
                             chartData={doughnutChartValues}
                             maxPercentage={percentage}
-                            data={data}
                             {...cardProps}
                           />
                         )}
