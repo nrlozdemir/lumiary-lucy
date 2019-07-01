@@ -27,7 +27,6 @@ const Info = ({ videoId, title, loading, ...rest }) => (
             videoId={videoId}
             title={title}
             moduleKey={moduleKey}
-            loading={loading}
             {...rest}
           />
           <React.Fragment>

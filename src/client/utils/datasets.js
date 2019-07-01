@@ -233,7 +233,8 @@ const chartCombineDataset = (data, options, globalOptions) => {
 
 const radarChartCalculate = (data) => {
   let colorsData
-  if (data && data.length > 0) {
+
+  if (data && !!data.length) {
     colorsData = data
     colorsData.map((el, i) => {
       el.total = el.datas.labels
@@ -276,7 +277,6 @@ const radarChartCalculate = (data) => {
       })
     })
   }
-
   return colorsData
 }
 
@@ -288,21 +288,25 @@ const compareSharesData = (payload) => {
     const brand = isArray ? Object.keys(value.data)[0] : value
     const item = isArray ? value.data[brand] : payload.data[brand]
     const keyName = Object.keys(item)[0]
-    const labels = Object.entries(item[keyName])
+
+    const labelsObj = { ...item[keyName] }
+    
+    delete labelsObj.subtotal
+
+    const labels = Object.entries(labelsObj)
+
     const type = (isArray ? item.platform : value) || keyName
 
     return {
       type: ucfirst(type),
       datas: {
-        labels: labels.map((color) => {
-          return {
-            name: color[0]
-              .split('-')
-              .map((c) => ucfirst(c))
-              .join('-'),
-            count: color[1],
-          }
-        }),
+        labels: labels.map((color) => ({
+          name: color[0]
+            .split('-')
+            .map((c) => ucfirst(c))
+            .join('-'),
+          count: color[1],
+        })),
         datasets: [
           {
             label: ucfirst(type),

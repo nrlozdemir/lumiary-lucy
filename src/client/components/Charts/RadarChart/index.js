@@ -11,32 +11,38 @@ const plugins = [
       chart.config.data.datasets.forEach(function(dataset, i) {
         const meta = chart.controller.getDatasetMeta(i)
         meta.data.forEach(function(bar, index) {
-          ctx.beginPath()
-          const color = chart.config.data.labels[index].color
-          const selected = chart.config.data.labels[index].selected
-          const pointLabelPosition = bar._scale.getPointPosition(
-            index,
-            bar._scale.getDistanceFromCenterForValue(bar._scale.max) +
-              (selected ? 31 : 25)
-          )
-          // draw a circle at that point
-          ctx.beginPath()
-          ctx.arc(
-            pointLabelPosition.x,
-            pointLabelPosition.y,
-            selected ? 12 : 6,
-            0,
-            2 * Math.PI,
-            false
-          )
-          ctx.fillStyle = color
-          ctx.fill()
-          if (selected) {
-            ctx.stroke()
-            // ctx.shadowColor = 'black'
-            // ctx.shadowBlur = 0
-            // ctx.shadowOffsetX = 0
-            // ctx.shadowOffsetY = 8
+          if (
+            !!chart.config.data.labels &&
+            !!chart.config.data.labels.length &&
+            !!!!chart.config.data.labels[index]
+          ) {
+            ctx.beginPath()
+            const color = chart.config.data.labels[index].color
+            const selected = chart.config.data.labels[index].selected
+            const pointLabelPosition = bar._scale.getPointPosition(
+              index,
+              bar._scale.getDistanceFromCenterForValue(bar._scale.max) +
+                (selected ? 31 : 25)
+            )
+            // draw a circle at that point
+            ctx.beginPath()
+            ctx.arc(
+              pointLabelPosition.x,
+              pointLabelPosition.y,
+              selected ? 12 : 6,
+              0,
+              2 * Math.PI,
+              false
+            )
+            ctx.fillStyle = color
+            ctx.fill()
+            if (selected) {
+              ctx.stroke()
+              // ctx.shadowColor = 'black'
+              // ctx.shadowBlur = 0
+              // ctx.shadowOffsetX = 0
+              // ctx.shadowOffsetY = 8
+            }
           }
         })
       })

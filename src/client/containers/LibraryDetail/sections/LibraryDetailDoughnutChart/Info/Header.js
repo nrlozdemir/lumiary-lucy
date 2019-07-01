@@ -19,14 +19,12 @@ class Header extends React.Component {
       filters,
       videoId,
       title,
-      loading,
       identifier,
       maxLabel,
-      moduleKey
+      moduleKey,
     } = this.props
 
     if (
-      !loading && 
       !!filters &&
       !!prevFilters &&
       !isEqual(prevFilters.values[moduleKey], filters.values[moduleKey])
@@ -46,7 +44,7 @@ class Header extends React.Component {
   }
 
   componentWillUnmount() {
-    const { toggleInfoSection } = this.props 
+    const { toggleInfoSection } = this.props
     toggleInfoSection(null)
   }
 
@@ -67,7 +65,8 @@ class Header extends React.Component {
               <div className={style.iconWrapper}>
                 <XCircle />
                 <p className={style.iconTitle}>
-                  {sectionData.title} - {sectionData.label}
+                  {`${sectionData && sectionData.title} - ${sectionData &&
+                    sectionData.label}`}
                 </p>
               </div>
             </div>
