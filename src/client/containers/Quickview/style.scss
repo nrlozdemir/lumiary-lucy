@@ -60,11 +60,14 @@
 
     .navItem_btn.selected.light{
       [class*='react-select__menu'] {
-        border: 1px solid $light_customSelectBorder;
         [class*='react-select__menu-list'] {
           background-color: $light_inputControlBackground;
+          border: 1px solid $light_inputControlSelectedBorder;
+          [class*='react-select__option'] {
+            color: $light_inputColor;
+          }
           [class*='react-select__option--is-focused'] {
-            background-color: theColorThatISfocused
+            color: $light_inputActiveColor;
           }
         }
       }
