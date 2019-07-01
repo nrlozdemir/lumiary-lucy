@@ -36,7 +36,6 @@ class EngagementByProperty extends Component {
         error,
       },
     } = this.props
-
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
 
     const hasNoData =
@@ -54,9 +53,9 @@ class EngagementByProperty extends Component {
         action={this.callBack}
         filters={[
           {
-            type: 'dateRange',
+            type: 'property',
             selectKey: 'PFS-wxcvs',
-            placeHolder: 'Date',
+            placeHolder: 'Property',
           },
         ]}
         isEmpty={hasNoData}
