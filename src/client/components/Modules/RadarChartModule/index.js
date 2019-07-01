@@ -6,6 +6,7 @@ import { Progress } from './Progress'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import emptyData from './emptyData.json'
+import { isDataSetEmpty } from 'Utils/datasets'
 
 const RadarChartModule = ({
   data,
@@ -24,6 +25,24 @@ const RadarChartModule = ({
       ? emptyData
       : data
 
+  const isEmpty =
+    !data || !data.length || (data.length && (!data[0] || !data[1]))
+
+  const leftIsEmpty =
+    !isEmpty &&
+    !loading &&
+    (!!data[0] && !!data[0].datas) &&
+    isDataSetEmpty(data[0].datas)
+
+  const rightIsEmpty =
+    !isEmpty &&
+    !loading &&
+    (!!data[1] && !!data[1].datas) &&
+    isDataSetEmpty(data[1].datas)
+
+  const leftOpacity = leftIsEmpty ? 0.25 : 1
+  const rightOpacity = rightIsEmpty ? 0.25 : 1
+
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -33,9 +52,7 @@ const RadarChartModule = ({
           action={action}
           filters={filters}
           legend={legend}
-          isEmpty={
-            !data || !data.length || (data.length && (!data[0] || !data[1]))
-          }
+          isEmpty={isEmpty}
           loading={loading}
           infoText={infoText}
         >
@@ -45,39 +62,20 @@ const RadarChartModule = ({
           >
             <div className={style.groupChart}>
               <div className={style.chartPos}>
-                <RadarChart data={checkData[0].datas} />
+                {leftIsEmpty && (
+                  <div className={style.emptyData}>No Data Available</div>
+                )}
+                <div style={{ opacity: leftOpacity }}>
+                  <RadarChart data={checkData[0].datas} />
+                </div>
               </div>
-              {/*
-              Conflict:
-              <div className={'mt-32 ' + style.labelContainer}>
-                <div
-                  className={style.label}
-                  style={{
-                    background: colors.labelBackground,
-                    color: colors.labelColor,
-                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                  }}
-                >
-                  <span>{leftTitle}</span>
-                </div>
-                <p>
-                  Top{' '}
-                  {!!data[0] && !!data[0].progress && data[0].progress.length}{' '}
-                  Dominant Colors
-                </p>
-                <div
-                   className={style.label}
-                  style={{
-                    background: colors.labelBackground,
-                    color: colors.labelColor,
-                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                  }}
-                >
-                  <span>{rightTitle}</span>
-                </div>
-              */}
               <div className={style.chartPos}>
-                <RadarChart data={checkData[1].datas} />
+                {rightIsEmpty && (
+                  <div className={style.emptyData}>No Data Available</div>
+                )}
+                <div style={{ opacity: rightOpacity }}>
+                  <RadarChart data={checkData[1].datas} />
+                </div>
               </div>
             </div>
             <div className={'mt-32 ' + style.labelContainer}>
@@ -87,10 +85,13 @@ const RadarChartModule = ({
                   background: colors.labelBackground,
                   color: colors.labelColor,
                   boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  opacity: leftOpacity,
                 }}
               >
                 <span>
-                  {!!checkData && !!checkData[0] && checkData[0].type}
+                  {leftTitle
+                    ? leftTitle
+                    : !!checkData && !!checkData[0] && checkData[0].type}
                 </span>
               </div>
               <p>
@@ -107,15 +108,21 @@ const RadarChartModule = ({
                   background: colors.labelBackground,
                   color: colors.labelColor,
                   boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  opacity: rightOpacity,
                 }}
               >
                 <span>
-                  {!!checkData && !!checkData[1] && checkData[1].type}
+                  {rightTitle
+                    ? rightTitle
+                    : !!checkData && !!checkData[1] && checkData[1].type}
                 </span>
               </div>
             </div>
             <div className={style.groupProgressBar}>
-              <div className={style.progressInner}>
+              <div
+                className={style.progressInner}
+                style={{ opacity: leftOpacity }}
+              >
                 <Progress
                   progress={
                     !!checkData &&
@@ -146,7 +153,10 @@ const RadarChartModule = ({
                     )
                   })}
               </div>
-              <div className={style.progressInner}>
+              <div
+                className={style.progressInner}
+                style={{ opacity: rightOpacity }}
+              >
                 <Progress
                   progress={
                     !!checkData &&
