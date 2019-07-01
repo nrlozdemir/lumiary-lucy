@@ -47,6 +47,7 @@ class AgeSlider extends React.Component {
             placeHolder: 'Date',
           },
         ]}
+        infoText={'infoText'}
       >
         <div className={style.audienceContainer}>
           {data && data.length > 0 && (

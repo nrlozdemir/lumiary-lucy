@@ -23,6 +23,7 @@ class ChangeOverTime extends React.Component {
         moduleKey={'Audience/ChangeOverTime'}
         title="Change Over Time By Property"
         action={this.callBack}
+        infoText={'infoText'}
         filters={[
           {
             type: 'platformEngagement',

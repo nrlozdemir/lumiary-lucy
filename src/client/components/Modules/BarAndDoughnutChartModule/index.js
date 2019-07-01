@@ -97,6 +97,7 @@ const BarAndDoughnutChartModule = ({
           legend={renderLegend(legend)}
           isEmpty={isDataSetEmpty(stackedChartData)}
           loading={loading}
+          infoText={'infoText'}
         >
           <div
             className={classnames(style.container, reverse && style.reverse)}

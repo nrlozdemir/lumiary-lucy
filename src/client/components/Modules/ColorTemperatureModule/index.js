@@ -60,6 +60,7 @@ const ColorTemperatureModule = ({
           legend={renderLegend(legend)}
           filters={filters}
           isEmpty={isEmpty}
+          infoText={'infoText'}
         >
           <div className={style.colorChartContainer}>
             <div className={cx(extraClasses, style.colorChartContent)}>

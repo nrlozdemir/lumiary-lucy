@@ -31,6 +31,7 @@ class TotalViewsChart extends React.Component {
         loading,
         data: { barData, doughnutData },
       },
+      infoText
     } = this.props
 
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
@@ -63,6 +64,7 @@ class TotalViewsChart extends React.Component {
           platform ? platform.label : 'All Platforms'
         }`}
         action={this.callBack}
+        infoText={infoText}
         filters={[
           {
             type: 'platformEngagement',
