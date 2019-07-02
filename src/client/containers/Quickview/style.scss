@@ -98,6 +98,10 @@
         color: $light_iconColor;
       }
 
+      [class*='-singleValue'] {
+        color: $light_iconColor;
+      }
+
       [class*='react-select__menu'] {
         [class*='react-select__menu-list'] {
           background-color: $light_inputControlBackground;
