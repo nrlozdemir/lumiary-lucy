@@ -16,6 +16,7 @@ const PacingCardModule = ({
   filters,
   legend,
   loading = false,
+  infoText,
 }) => {
   const { horizontalStackedBarData = {}, stadiumData } = data
 
@@ -35,6 +36,7 @@ const PacingCardModule = ({
       filters={filters}
       legend={legend}
       loading={loading}
+      infoText={infoText}
     >
       <div className={style.pacingCardInner}>
         <MultipleNoDataModule>

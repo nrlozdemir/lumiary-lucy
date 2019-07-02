@@ -108,6 +108,7 @@ class TopPerformingFormat extends React.Component {
         doughnutData={doughnutData}
         isEmpty={hasNoData}
         loading={loading}
+        infoText={`This chart compares the video formats within your library by the Content Vitality (CV) Score, showing the top three scoring formats according to a specified day in the week on a selected platform.`}
       />
     )
   }

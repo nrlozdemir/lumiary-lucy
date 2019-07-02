@@ -62,10 +62,14 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
       display: 'percentage',
       dateBucket: 'none',
     }
-    const response = yield call(getDataFromApi, {
-      ...parameters,
-      property: expectedValues.map(({ key }) => key),
-    }, '/report')
+    const response = yield call(
+      getDataFromApi,
+      {
+        ...parameters,
+        property: expectedValues.map(({ key }) => key),
+      },
+      '/report'
+    )
 
     const payloads = Object.entries(response.data[brand.name]).map(
       ([key, value]) => ({
@@ -191,6 +195,7 @@ function* getShotInfoRequest({ payload }) {
       yield put(actions.getShotInfoSuccess(payload))
     }
   } catch (error) {
+    console.log(error)
     yield put(actions.getShotInfoFailure({ error }))
   }
 }
@@ -227,7 +232,8 @@ function* getDoughnutSectionInfoData({ payload }) {
       const {
         libraryMetricPercents,
         industryMetricPercents,
-        libraryDateCounts,
+        libraryMetricDateSums,
+        industryMetricDateSums,
         industryDateCounts,
         videoPropertyAverage,
         libraryPropertyAverage,
@@ -244,6 +250,7 @@ function* getDoughnutSectionInfoData({ payload }) {
       )
 
       const {
+        maxKeyLabel: libraryMaxKeyLabel,
         chartData: libraryChartData,
         maxKey: libraryMaxKey,
         maxValue: libraryMaxValue,
@@ -254,6 +261,7 @@ function* getDoughnutSectionInfoData({ payload }) {
       )
 
       const {
+        maxKeyLabel: industryMaxKeyLabel,
         chartData: industryChartData,
         maxKey: industryMaxKey,
         maxValue: industryMaxValue,
@@ -264,14 +272,14 @@ function* getDoughnutSectionInfoData({ payload }) {
       )
 
       const libraryPercentages = convertNumberArrIntoPercentages(
-        Object.values(libraryDateCounts)
+        Object.values(libraryMetricDateSums[libraryMaxKeyLabel])
       )
       const industryPercentages = convertNumberArrIntoPercentages(
-        Object.values(industryDateCounts)
+        Object.values(industryMetricDateSums[industryMaxKeyLabel])
       )
 
       const lineChartData = {
-        labels: Object.keys(libraryDateCounts).reverse(),
+        labels: Object.keys(industryDateCounts).reverse(),
         datasets: [
           {
             data: libraryPercentages.reverse(),
@@ -305,10 +313,6 @@ function* getDoughnutSectionInfoData({ payload }) {
             metricLibraryPercentChange * 100
           ),
         })
-      )
-    } else {
-      yield put(
-        actions.doughnutInfoIndustryFailure('Doughnut Info Request Error')
       )
     }
   } catch (e) {
@@ -347,7 +351,7 @@ function* getRadarChartRequest(ids) {
       'blue-green',
       'blue-purple',
       'purple',
-      'red-purple'
+      'red-purple',
     ]
     const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
 

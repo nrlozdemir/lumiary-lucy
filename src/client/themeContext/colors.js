@@ -86,14 +86,15 @@ const dark = {
   // custom selectbox values
 
   // input values
-  inputControlBackground: '#21243B',
+  inputControlBackground: '#373f5b',
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#545b79',
   inputColor: '#545B79',
-  inputActiveColor: '#ffffff',
+  inputActiveColor: '#505050',
   inputOptionBackground: '#545B79',
   inputOptionFocusBackground: '#21243B',
   inputOptionSelectedBackground: '#ffffff',
+  inputPlaceholderColor: '#545b79',
   // input values
 
   // table values
@@ -235,14 +236,16 @@ const light = {
   // custom selectbox values
 
   // input values
-  inputControlBackground: '#e8ecf0',
+  inputControlBackground: '#f3f6f9',
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#c6c9d7',
-  inputColor: '#c6c9d7',
+  inputColor: '#000',
   inputActiveColor: '#505050',
   inputOptionBackground: '#ffffff',
-  inputOptionFocusBackground: '#e8ecf0',
+  inputOptionFocusBackground: '#f3f6f9',
   inputOptionSelectedBackground: '#505050',
+  inputPlaceholderColor: '#c6c9d7',
+
   // input values
 
   // table values

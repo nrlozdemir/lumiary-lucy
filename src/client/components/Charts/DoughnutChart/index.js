@@ -111,15 +111,12 @@ const DoughnutChart = (props) => {
       },
     ]
   }
+
   if (!data) {
     return null
   }
 
-  if (data.datasets) {
-    data.datasets[0].data = data.datasets[0].data.map((value) =>
-      parseFloat(value).toFixed(0)
-    )
-  }
+  let newData = { ...data }
 
   return (
     <React.Fragment>
@@ -133,27 +130,30 @@ const DoughnutChart = (props) => {
           </div>
         )}
         <div className={classnames(style.chartWrapper, customChartWrapper)}>
-          {data && (
+          {newData && (
             <Doughnut
               key={Math.random()}
               width={width}
               height={height}
               data={{
-                labels: data.labels,
+                labels: newData.labels,
                 datasets: [
                   {
-                    ...(!!data && !!data.datasets && !!data.datasets[0]
-                      ? data.datasets[0]
-                      : {}),
+                    data:
+                      !!newData && !!newData.datasets && !!newData.datasets[0]
+                        ? newData.datasets[0].data.map((value) =>
+                            parseFloat(value).toFixed(0)
+                          )
+                        : [],
                     backgroundColor:
-                      data && data.datasets
-                        ? data.datasets[0].backgroundColor
+                      newData && newData.datasets
+                        ? newData.datasets[0].backgroundColor
                         : null,
                     borderColor: themes.moduleBackground,
                     hoverBorderColor: themes.moduleBackground,
                     hoverBackgroundColor:
-                      data && data.datasets
-                        ? data.datasets[0].hoverBackgroundColor
+                      data && newData.datasets
+                        ? newData.datasets[0].hoverBackgroundColor
                         : null,
                   },
                 ],

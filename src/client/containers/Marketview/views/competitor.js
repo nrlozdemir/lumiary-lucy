@@ -75,6 +75,7 @@ export class Competitor extends React.Component {
           <TopSimilarProperties
             moduleKey="MarketView/Competitor/TopSimilarProperties"
             title="Similar Properties Of Top Videos"
+            infoText={`This module offers insights on top 3 similar properties found within top performing industry videos. `}
             filters={[
               {
                 type: 'dateRange',

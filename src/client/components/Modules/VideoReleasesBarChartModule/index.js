@@ -80,6 +80,7 @@ const VideoReleasesBarChartModule = (props) => {
     isEmpty,
     loading = false,
     themeContext: { colors },
+    infoText,
   } = props
 
   if (!data) return false
@@ -174,6 +175,7 @@ const VideoReleasesBarChartModule = (props) => {
       legend={renderLegend(legend, legendEnd)}
       isEmpty={isEmpty}
       loading={loading}
+      infoText={infoText}
     >
       <div
         className={barChartContainer}

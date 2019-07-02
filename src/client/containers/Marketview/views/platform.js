@@ -17,6 +17,7 @@ export class Platform extends React.Component {
         <Slider
           title="Top Performing Videos By Platform"
           moduleKey="MarketView/Platform/Slider"
+          infoText={`This module compares the videos within your library by the Content Vitality (CV) Score, showing the top scoring videos for each platform.`}
           filters={[
             {
               type: 'platformEngagement',
@@ -34,6 +35,7 @@ export class Platform extends React.Component {
         <TopVideosOverTime
           moduleKey="MarketView/Platform/TopVideosOverTime"
           title="Top Videos Over Time By Platform"
+          infoText={`This module provides insights for the top performing industry videos against engagement metrics across time and property.  Using the drop-downs, you can adjust for the property, engagement metric, and time range to analyze.`}
           filters={[
             {
               type: 'property',
@@ -75,6 +77,7 @@ export class Platform extends React.Component {
         <TopSimilarProperties
           moduleKey="MarketView/Platform/TopSimilarPropertiesModule"
           title="Similar Properties Of Top Videos"
+          infoText={`This module offers insights on top 3 similar properties found within top performing industry videos. `}
           action={this.getSimilarProperties}
           presentWithDoughnut
           filters={[

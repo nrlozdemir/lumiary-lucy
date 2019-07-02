@@ -18,6 +18,7 @@ import ModuleSelectFilters from 'Components/ModuleSelectFilters'
 import { isEqual } from 'lodash'
 import style from './style.scss'
 import RouterLoading from 'Components/RouterLoading'
+import ToolTip from 'Components/ToolTip'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -107,6 +108,7 @@ export class Main extends React.PureComponent {
         selectedPlatform: { platformsValues, differencesValues },
       },
       push,
+      infoText,
     } = this.props
 
     const selectedPlatform = match.params.platform || 'facebook'
@@ -243,10 +245,16 @@ export class Main extends React.PureComponent {
                                       {i == 0
                                         ? 'Underperforming Videos'
                                         : 'Over Performing Videos'}
-                                      <i
-                                        className="icon icon-Information"
-                                        style={{ color: colors.textColor }}
-                                      />
+                                      {infoText && <i
+                                        className={cx('icon icon-Information', style.moduleInfo)}
+                                        onMouseEnter={() => changeInfoStatus()}
+                                        onMouseLeave={() => changeInfoStatus()}
+                                        style={{ color: themes.textColor }}
+                                      >
+                                        <ToolTip show={infoShow}>
+                                          {infoText}
+                                        </ToolTip>
+                                      </i>}
                                     </h1>
                                     {/* VIDEO */}
                                     <div className={style.assetContainer}>

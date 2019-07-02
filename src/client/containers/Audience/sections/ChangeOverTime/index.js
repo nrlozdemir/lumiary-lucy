@@ -16,6 +16,7 @@ class ChangeOverTime extends React.Component {
     // const { selectViews, selectPlatforms, selectDate } = this.state;
     const {
       audienceChangeOverTimeData: { data, loading, error },
+      infoText
     } = this.props
 
     return (
@@ -23,6 +24,7 @@ class ChangeOverTime extends React.Component {
         moduleKey={'Audience/ChangeOverTime'}
         title="Change Over Time By Property"
         action={this.callBack}
+        infoText={infoText}
         filters={[
           {
             type: 'platformEngagement',

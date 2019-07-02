@@ -11,7 +11,6 @@ import {
   makeSelectSelectedVideoID,
 } from 'Reducers/libraryDetail'
 import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
-import ProgressBar from 'Components/ProgressBar'
 import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import Scrubber from 'Components/Sliders/Scrubber'
@@ -22,6 +21,7 @@ import SliderWithScrubber from 'Components/Sliders/SliderWithScrubber'
 import style from './style.scss'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import RouterLoading from 'Components/RouterLoading'
+import ConfidenceImage from './ConfidenceImage'
 
 const shotSliderWidth = 504
 
@@ -88,10 +88,10 @@ class LibraryDetailShotByShot extends React.Component {
   render() {
     const {
       shots,
-      shotInfoData,
-      radarChartData,
-      peopleData,
       loading,
+      peopleData: { data: peopleData, loading: peopleLoading },
+      shotInfoData: { data: shotInfoData, loading: shotInfoLoading },
+      radarChartData: { data: radarChartData, loading: radarChartLoading },
     } = this.props
     const { selectedImage } = this.state
 
@@ -314,93 +314,37 @@ class LibraryDetailShotByShot extends React.Component {
                       </div>
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
-                          {peopleIsEmpty === false && (
+                          {peopleIsEmpty === false && !peopleLoading && (
                             <Scrubber vertical width={'100%'} height={368}>
                               {peopleValues.map((info, i) => {
                                 const { ages, gender, uuid } = info
+                                const imgUrl = `${mediaUrl}/lumiere/${
+                                  this.props.authProfile.brand.uuid
+                                }/${this.props.selectedVideo}/${
+                                  this.state.selectedImage
+                                }/`
                                 return !gender ||
                                   !uuid ||
                                   !ages.confidence ? null : (
-                                  <div
-                                    className={classnames(
-                                      style.tabPanelItem,
-                                      'grid-container'
+                                  <ConfidenceImage
+                                    imgUrl={imgUrl}
+                                    colors={colors}
+                                    label={ucfirst(gender)}
+                                    confidence={(ages.confidence * 100).toFixed(
+                                      0
                                     )}
-                                    style={{
-                                      background: colors.shotByShotBackground,
-                                      borderColor: colors.shotByShotBorder,
-                                      marginRight: '16px !important',
-                                    }}
-                                    key={i}
-                                  >
-                                    <div className="col-5-no-gutters">
-                                      <img
-                                        src={`${mediaUrl}/lumiere/${
-                                          this.props.authProfile.brand.uuid
-                                        }/${this.props.selectedVideo}/${
-                                          this.state.selectedImage
-                                        }/`}
-                                        className={classnames(
-                                          style.imageItem,
-                                          'grid-container'
-                                        )}
-                                      />
-                                    </div>
-                                    <div className="col-7-no-gutters">
-                                      <div className="pt-20">
-                                        <div
-                                          className={style.progressbarContainer}
-                                          key={i}
-                                        >
-                                          <div className={style.barOptions}>
-                                            <p>{ucfirst(gender)}</p>
-                                            <p>
-                                              {(ages.confidence * 100).toFixed(
-                                                0
-                                              )}
-                                              % Accurate
-                                            </p>
-                                          </div>
-                                          <ProgressBar
-                                            width={(
-                                              ages.confidence * 100
-                                            ).toFixed(0)}
-                                            customBarClass={style.progressBar}
-                                            customPercentageClass={
-                                              style.percentage
-                                            }
-                                          />
-                                        </div>
-                                      </div>
-                                      <div className="pt-20">
-                                        <div
-                                          className={style.progressbarContainer}
-                                          key={i}
-                                        >
-                                          <div className={style.barOptions}>
-                                            <p>{ages.min} Y/O</p>
-                                            <p>
-                                              {ages.min.toFixed(0)}% Accurate
-                                            </p>
-                                          </div>
-                                          <ProgressBar
-                                            width={(
-                                              ages.confidence * 100
-                                            ).toFixed(0)}
-                                            customBarClass={style.progressBar}
-                                            customPercentageClass={
-                                              style.percentage
-                                            }
-                                          />
-                                        </div>
-                                      </div>
-                                    </div>
-                                  </div>
+                                    minAge={ages.min}
+                                  />
                                 )
                               })}
                             </Scrubber>
                           )}
-                          {peopleIsEmpty === true && (
+                          {peopleLoading && (
+                            <div className={style.tabsEmptyData}>
+                              <RouterLoading />
+                            </div>
+                          )}
+                          {peopleIsEmpty === true && !peopleLoading && (
                             <div className={style.tabsEmptyData}>
                               No Data Available
                             </div>
@@ -409,69 +353,35 @@ class LibraryDetailShotByShot extends React.Component {
                       </TabPanel>
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
-                          {objectIsEmpty === false && (
+                          {objectIsEmpty === false && !shotInfoLoading && (
                             <Scrubber vertical width={'100%'} height={368}>
-                              {shotInfoData.shot.labels.map((info, i) => (
-                                <div
-                                  className={classnames(
-                                    style.tabPanelItem,
-                                    'grid-container',
-                                    {
-                                      'mb-16':
-                                        i !==
-                                        shotInfoData.shot.labels.length - 1,
-                                    }
-                                  )}
-                                  style={{
-                                    background: colors.shotByShotBackground,
-                                    borderColor: colors.shotByShotBorder,
-                                    marginRight: '16px !important',
-                                  }}
-                                  key={i}
-                                >
-                                  <div className="col-5-no-gutters">
-                                    <img
-                                      src={`${mediaUrl}/lumiere/${
-                                        this.props.authProfile.brand.uuid
-                                      }/${this.props.selectedVideo}/${
-                                        this.state.selectedImage
-                                      }/${shotInfoData.shot.frames[i]}`}
-                                      className={classnames(
-                                        style.imageItem,
-                                        'grid-container'
-                                      )}
-                                    />
-                                  </div>
-                                  <div className="col-7-no-gutters">
-                                    <div className="pt-20">
-                                      <div
-                                        className={style.progressbarContainer}
-                                        key={i}
-                                      >
-                                        <div className={style.barOptions}>
-                                          <p>{info.label}</p>
-                                          <p>
-                                            {(info.confidence * 100).toFixed(0)}
-                                            % Accurate
-                                          </p>
-                                        </div>
-                                        <ProgressBar
-                                          width={(
-                                            info.confidence * 100
-                                          ).toFixed(0)}
-                                          customBarClass={style.progressBar}
-                                          customPercentageClass={
-                                            style.percentage
-                                          }
-                                        />
-                                      </div>
-                                    </div>
-                                  </div>
-                                </div>
-                              ))}
+                              {shotInfoData.shot.labels.map((info, i) => {
+                                const imgUrl = `${mediaUrl}/lumiere/${
+                                  this.props.authProfile.brand.uuid
+                                }/${this.props.selectedVideo}/${
+                                  this.state.selectedImage
+                                }/${shotInfoData.shot.frames[i]}`
+
+                                return (
+                                  <ConfidenceImage
+                                    imgUrl={imgUrl}
+                                    colors={colors}
+                                    key={`object_${i}`}
+                                    label={info.label}
+                                    confidence={(info.confidence * 100).toFixed(
+                                      0
+                                    )}
+                                  />
+                                )
+                              })}
                             </Scrubber>
                           )}
-                          {objectIsEmpty === true && (
+                          {shotInfoLoading && (
+                            <div className={style.tabsEmptyData}>
+                              <RouterLoading />
+                            </div>
+                          )}
+                          {objectIsEmpty === true && !shotInfoLoading && (
                             <div className={style.tabsEmptyData}>
                               No Data Available
                             </div>
@@ -485,6 +395,11 @@ class LibraryDetailShotByShot extends React.Component {
                               data={radarChartDataConfigured}
                               key={Math.random()}
                             />
+                          )}
+                          {radarChartLoading && (
+                            <div className={style.tabsEmptyData}>
+                              <RouterLoading />
+                            </div>
                           )}
                         </div>
                       </TabPanel>
@@ -503,7 +418,8 @@ class LibraryDetailShotByShot extends React.Component {
                     <div
                       className={style.shotByShotMask}
                       style={{
-                        borderColor: colors.themeType === 'light' ? '#ccc' : '#545b79',
+                        borderColor:
+                          colors.themeType === 'light' ? '#ccc' : '#545b79',
                       }}
                     />
                     <SliderWithScrubber

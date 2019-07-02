@@ -27,6 +27,7 @@ const ContentVitalityScoreModule = ({
   options,
   loading = false,
   chartYAxisMax = 100,
+  infoText
 }) => {
   const formattedData = Object.keys(data).reduce(
     (accumulator, uuid) => {
@@ -91,6 +92,7 @@ const ContentVitalityScoreModule = ({
           legend={legend}
           loading={loading}
           isEmpty={isDataSetEmpty(loading ? {} : newDatasets)}
+          infoText={infoText}
         >
           <div
             className="col-12-no-gutters"
