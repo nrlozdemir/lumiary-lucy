@@ -122,6 +122,12 @@
       [class*='-Bubble'] {
         color: $dark_iconColor;
       }
+      [class*='react-select__single-value'] {
+        color: $dark_iconColor;
+      }
+      [class*='icon-Arrow-Down'] {
+        color: $dark_iconColor;
+      }
       [class*='react-select__menu'] {
         [class*='react-select__menu-list'] {
           background-color: $dark_inputControlBackground;

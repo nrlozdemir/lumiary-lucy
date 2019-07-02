@@ -193,7 +193,7 @@ export class Main extends React.PureComponent {
                       className={cx(
                         style.navItem_btn,
                         {
-                          [colors.themeType === style.dark
+                          [colors.themeType === 'dark'
                           ? style.dark
                           : style.light]: true
                         }
