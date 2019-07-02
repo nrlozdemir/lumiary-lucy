@@ -313,7 +313,7 @@ export class Main extends React.PureComponent {
                                             barWidth={2}
                                             barSpaceWidth={1}
                                             disableLabels
-                                            color={i === 0 ? 'green' : 'blue'}
+                                            color={i === 0 ? 'blue' : 'green'}
                                           />
                                         </div>
                                       </AssetLayer>
@@ -419,7 +419,7 @@ export class Main extends React.PureComponent {
                                                 customPercentageClass={cx(
                                                   style.percentageBlue,
                                                   {
-                                                    [style.percentagePink]: i == 1,
+                                                    [style.percentagePink]: i == 0,
                                                   }
                                                 )}
                                               />

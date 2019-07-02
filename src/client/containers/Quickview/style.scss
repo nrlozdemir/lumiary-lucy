@@ -20,6 +20,10 @@
         cursor: pointer;
       }
 
+      input{
+        color: transparent !important;
+      }
+
       [class*='-Bubble'] {
         position: absolute;
         display: flex;
