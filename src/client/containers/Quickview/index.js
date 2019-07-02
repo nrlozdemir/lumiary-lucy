@@ -140,14 +140,6 @@ export class Main extends React.PureComponent {
                               : style.light]: true
                             }
                           )}
-                          
-                          // style={{
-                          //   background: isSelected
-                          //     ? colors.tabActiveBackground
-                          //     : colors.tabBackground,
-                          //   color: colors.textColor,
-                          //   borderColor: colors.tabBorder,
-                          // }}
                         >
                           <i
                             className={cx(
@@ -178,11 +170,6 @@ export class Main extends React.PureComponent {
                           activeStyle={{
                             background: colors.tabActiveBackground,
                           }}
-                          // style={{
-                          //   background: colors.tabBackground,
-                          //   color: colors.textColor,
-                          //   borderColor: colors.tabBorder,
-                          // }}
                           to={`/quickview/${toSlug(platform.name)}`}
                         >
                           <i className={socialIconSelector(platform.name)} />
@@ -198,12 +185,6 @@ export class Main extends React.PureComponent {
                           : style.light]: true
                         }
                       )}
-                      
-                      // style={{
-                      //   background: colors.tabBackground,
-                      //   color: colors.textColor,
-                      //   borderColor: colors.tabBorder,
-                      // }}
                     >
                       <ModuleSelectFilters
                         type={'dateRange'}
@@ -231,11 +212,6 @@ export class Main extends React.PureComponent {
                       : style.light]: true
                     }
                   )}
-                  // style={{
-                  //   background: colors.moduleBackground,
-                  //   color: colors.textColor,
-                  //   boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
-                  // }}
                 >
                   {
                     (loading)
@@ -259,12 +235,6 @@ export class Main extends React.PureComponent {
                                 <div
                                   key={i}
                                   className={style.cardBlock}
-                                  // style={{
-                                  //   background:
-                                  //     i === 1
-                                  //       ? colors.tabActiveBackground
-                                  //       : colors.moduleBackground,
-                                  // }}
                                 >
                                   {/* HEADER */}
                                   <div className={style.card}>
@@ -335,12 +305,6 @@ export class Main extends React.PureComponent {
                                             className={cx(
                                               style.itemWrapper,
                                             )}
-                                            // style={{
-                                            //   borderColor:
-                                            //     i === 0
-                                            //       ? colors.chartStadiumBarBorder
-                                            //       : colors.bodyBackground,
-                                            // }}
                                           >
                                             {noData && <p className={style.noData}>No Data Available</p>}
                                             <div 
@@ -350,21 +314,12 @@ export class Main extends React.PureComponent {
                                                   [style.noDataWrapper]: noData
                                                 }
                                               )}
-                                              // style={{
-                                              //   opacity: (noData) ? 0.1 : 1,
-                                              // }}
                                             >
                                               {difference && i === 1 && false && (
                                                 <div
                                                   className={
                                                     style.infoItem_diffBubble
                                                   }
-                                                  // style={{
-                                                  //   borderColor:
-                                                  //     colors.tabActiveBackground,
-                                                  //   background: colors.bodyBackground,
-                                                  //   color: colors.labelColor
-                                                  // }}
                                                 >
                                                   <span>{difference}%</span>
                                                   <span>Difference</span>
@@ -376,18 +331,7 @@ export class Main extends React.PureComponent {
                                                   style.sectionBadge
                                                 )}
                                               >
-                                                <span
-                                                  // style={{
-                                                  //   background:
-                                                  //     i === 0
-                                                  //       ? colors.labelBackground
-                                                  //       : colors.bodyBackground,
-                                                  //   color: colors.labelColor,
-                                                  //   boxShadow: `0 1px 2px 0 ${
-                                                  //     colors.labelShadow
-                                                  //   }`,
-                                                  // }}
-                                                >
+                                                <span>
                                                   {item.title}
                                                 </span>
                                               </p>
