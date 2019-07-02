@@ -7,10 +7,8 @@
 .input {
   font-family: $font-family-ClanOTNews;
   outline: 0;
-  border: 1px solid $color-dusk;
+  border: 1px solid;
   padding: 10px 20px;
-  background-color: $color-dark-five;
-  color: $color-dusk;
   box-sizing: border-box;
   height: 40px;
   font-size: 14px;
@@ -19,18 +17,33 @@
   font-stretch: normal;
   line-height: normal;
   letter-spacing: normal;
-  &::placeholder {
-    color: $color-dusk;
-  }
+}
+.dark {
+  color: #fff;
+  border-color: #545b79;
+  background: #373f5b;
   &:focus {
-    border: 1px solid $color-white;
-    color: $color-white;
+    border-color: #acb0be;
+  }
+  &::placeholder {
+    color: #545b79;
+  }
+}
+.light {
+  color: #505050;
+  border-color: #c6c9d7;
+  background: #f3f6f9;
+  &:focus {
+    border-color: #acb0be;
+  }
+  &::placeholder {
+    color: #c6c9d7;
   }
 }
 .typing {
-  border: 1px solid $color-white;
-  color: $color-white;
+  border: 1px solid #acb0be;
 }
+
 .error {
   border: 1px solid $color-coral-pink;
   .label {

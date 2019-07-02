@@ -638,6 +638,7 @@ const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
       { maxKey: null, maxVal: 0 }
     )
 
+    result.maxKeyLabel = maxKey
     result.maxKey = getLabelWithSuffix(maxKey, property)
     result.maxValue = maxVal
     result.chartData = {

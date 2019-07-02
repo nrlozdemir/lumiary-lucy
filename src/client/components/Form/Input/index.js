@@ -6,15 +6,6 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 
 /* eslint-disable react/prefer-stateless-function */
 const Input = ({ error, value, label, placeholder, customClass, input }) => {
-  const cx = classnames(
-    style.input,
-    {
-      [style.error]: error,
-      [style.typing]: !!input.value,
-    },
-    customClass
-  )
-
   // inputBackground
   // inputBorder
   // inputActiveBorder
@@ -23,6 +14,16 @@ const Input = ({ error, value, label, placeholder, customClass, input }) => {
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => {
+        console.log(colors)
+        const cx = classnames(
+          style.input,
+          {
+            [style.error]: error,
+            [colors.themeType === 'dark' ? style.dark : style.light]: true,
+            [style.typing]: !!input.value,
+          },
+          customClass
+        )
         return (
           <div className="w-100">
             {label ? (
@@ -36,14 +37,6 @@ const Input = ({ error, value, label, placeholder, customClass, input }) => {
               placeholder={placeholder}
               value={value}
               {...input}
-              style={{
-                color: colors.inputActiveColor,
-                borderColor: colors.inputControlSelectedBorder,
-                background: colors.inputControlBackground,
-                '::WebkitInputPlaceholder': {
-                  color: colors.inputPlaceholderColor,
-                },
-              }}
             />
           </div>
         )
