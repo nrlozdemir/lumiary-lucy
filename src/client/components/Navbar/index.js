@@ -278,7 +278,6 @@ class Navbar extends React.Component {
       location: { search }
     } = this.props
     const urlParams = getLocationParams(search)
-    // const isSaved = !!urlParams && urlParams.saved === 'true'
 
     if (category === 'Brands Insights' && brandInsightValue) {
       this.setState({
