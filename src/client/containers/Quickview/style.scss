@@ -13,7 +13,9 @@
     .navItem_btn{
       position: relative;
       height: 56px;
-      min-width: 200px;
+      width: 20%;
+      max-width: 200px;
+      min-width: 150px;
       &:hover{
         cursor: pointer;
       }
@@ -139,23 +141,6 @@
   }
 }
 
-.sectionBadge {
-  margin: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-
-  span {
-    background-color: $light_bodyBackground;
-    font-weight: bold;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-    border-radius: 50px;
-    font-size: 14px;
-    padding: 10px 24px;
-    line-height: 14px;
-  }
-}
-
 .cardWrapper.light {
   .content{
     .cardBlock{
@@ -164,7 +149,23 @@
       }
       &:last-child{
         background-color: $light_videoCardBackground;
-        box-shadow: 0 0 10px 0 #bebebe;
+        box-shadow: 0 0 10px 0 $light_chartShadow;
+      }
+      .card {
+        .items {
+          .itemWrapper {
+            &:after{
+              background-color: $light_barChartShadow;
+            }
+          }
+          .infoItem {
+            .sectionBadge {
+              span {
+                background-color: $light_bodyBackground;
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -172,6 +173,9 @@
 
 .cardWrapper.dark {
   .content{
+    h1{
+      color: $color-white;
+    }
     .cardBlock{
       &:first-child{
         background-color: rgba(84, 91, 121, 0.4);
@@ -179,8 +183,24 @@
       }
       &:last-child{
         background-color: $dark_videoCardBackground;
-        box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.4);
+        box-shadow: 0 0 10px 0 $dark_chartShadow;
         color: $dark_iconColor;
+      }
+      .card {
+        .items {
+          .itemWrapper {
+            &:after{
+              background-color: $dark_barChartShadow;
+            }
+          }
+          .infoItem {
+            .sectionBadge {
+              span {
+                background-color: $dark_modalBackground;
+              }
+            }
+          }
+        }
       }
     }
   }
@@ -215,7 +235,7 @@
           line-height: normal;
           letter-spacing: normal;
           text-align: center;
-          margin-bottom: 65px;
+          margin-bottom: 16px;
 
           i {
             margin-left: 8px;
@@ -223,9 +243,27 @@
           }
         }
 
+        svg{
+          display: block;
+          margin: 0px auto 24px;
+        }
+
         .assetContainer{
-          [class*='AssetLayer'] {
-            z-index: 1;
+          [class*='AssetLayer-style__container'] {
+            height: 0;
+          }
+          [class*='AssetLayer-style__content'] {
+            position: relative;
+            height: 0;
+            padding-top: 56.25%;
+            > div {
+              z-index: 1;
+              position: absolute;
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;  
+            }
           }
         }
 
@@ -262,6 +300,23 @@
             align-items: center;
             justify-content: center;
             position: relative;
+
+            .sectionBadge {
+              margin: 0px;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+            
+              span {
+                background-color: $light_bodyBackground;
+                font-weight: bold;
+                box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+                border-radius: 50px;
+                font-size: 14px;
+                padding: 10px 24px;
+                line-height: 14px;
+              }
+            }            
 
             &_diffBubble {
               position: absolute;

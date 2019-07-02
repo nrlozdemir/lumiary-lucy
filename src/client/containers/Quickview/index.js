@@ -19,6 +19,7 @@ import { isEqual } from 'lodash'
 import style from './style.scss'
 import RouterLoading from 'Components/RouterLoading'
 import ToolTip from 'Components/ToolTip'
+import { Up, Down } from 'Components/Icons/Thumbs'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -271,6 +272,7 @@ export class Main extends React.PureComponent {
                                       {i == 0
                                         ? 'Underperforming Videos'
                                         : 'Over Performing Videos'}
+
                                       {infoText && <i
                                         className={cx('icon icon-Information', style.moduleInfo)}
                                         onMouseEnter={() => changeInfoStatus()}
@@ -282,6 +284,10 @@ export class Main extends React.PureComponent {
                                         </ToolTip>
                                       </i>}
                                     </h1>
+                                    {i === 0
+                                      ? <Down />
+                                      : <Up />
+                                    }
                                     {/* VIDEO */}
                                     <div className={style.assetContainer}>
                                       <AssetLayer
@@ -289,7 +295,7 @@ export class Main extends React.PureComponent {
                                         title={title.substring(0, 32)}
                                         rightValue={cvScore}
                                         width={'100%'}
-                                        height={286}
+                                        height={'100%'}
                                       >
                                         <div className={style.video}>
                                           <SingleVideoCard
