@@ -272,16 +272,18 @@ class Navbar extends React.Component {
       loadDeleteReport,
       brandInsightValue: { data: brandInsightValue },
       comparebrandValues: { data: comparebrandValues },
-      createdReportControls: { isSaved, uuid },
+      createdReportControls: { uuid, isSaved },
       predefinedReportValues: { data: predefinedReportValues },
       push,
       location: { search }
     } = this.props
+    const urlParams = getLocationParams(search)
+    // const isSaved = !!urlParams && urlParams.saved === 'true'
+
     if (category === 'Brands Insights' && brandInsightValue) {
       this.setState({
         swicthControl: !isSaved,
       }, () => {
-        const urlParams = getLocationParams(search)
         const {
           date,
           engagement,
@@ -289,8 +291,9 @@ class Navbar extends React.Component {
           social,
           brand
         } = urlParams
-        push(
-          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${!isSaved}`
+        window.history.pushState('',
+        '',
+        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${!isSaved}`
         )
       })
       if (isSaved) {
@@ -304,15 +307,16 @@ class Navbar extends React.Component {
       this.setState({
         swicthControl: !isSaved,
       },() => {
-        const urlParams = getLocationParams(search)
         const {
           title,
           brand_one_uuid,
           brand_two_uuid,
         } = urlParams
-        push(
+        window.history.pushState(
+          '',
+          '',
           `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${!isSaved}`
-        )
+          )
       })
       if (isSaved) {
         return loadDeleteReport(uuid)
@@ -325,6 +329,48 @@ class Navbar extends React.Component {
       saveReportRequest({
         ...predefinedReportValues,
         category,
+      })
+    }
+  }
+
+  componentDidUpdate() {
+    const { createdReportControls: { uuid }, location: { search, pathname } } = this.props
+    const urlParams = getLocationParams(search)
+    const {
+      title,
+      brand_one_uuid,
+      brand_two_uuid,
+      date,
+      engagement,
+      social,
+      brand,
+      saved
+    } = urlParams
+    const { swicthControl } = this.state
+    if(uuid) {
+      if(pathname === '/reports/brand-insight') {
+        window.history.pushState('',
+        '',
+        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${swicthControl}&report_uuid=${uuid}`
+        )
+      }else if(pathname === '/reports/compare-brands') {
+        window.history.pushState(
+          '',
+          '',
+          `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${swicthControl}&report_uuid=${uuid}`
+        )
+      }
+    }
+  }
+
+  componentDidMount() {
+    const { createdReportControls: { uuid }, location: { search } } = this.props
+    const urlParams = getLocationParams(search)
+    const { report_uuid  } = urlParams
+    if(!uuid && report_uuid) {
+      this.props.createdReportControl({
+        isSaved: !!urlParams && urlParams.saved === 'true',
+        uuid: report_uuid,
       })
     }
   }

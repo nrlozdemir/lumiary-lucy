@@ -90,7 +90,8 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
       title,
     } = params
 
-    const saved = params && params.saved && params.saved.value ? params.saved.value : false 
+    const saved = params && params.saved && params.saved.value ? params.saved.value : false
+    const report_uuid = params && params.report_uuid
 
     const parameters = {
       brand,
@@ -106,7 +107,7 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
     if (!!onlySave) {
       yield put(
         push(
-          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${saved}`
+          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${saved}${report_uuid ? `&report_uuid=${report_uuid}` :''}`
         )
       )
     }

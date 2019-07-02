@@ -141,17 +141,19 @@ class Reports extends Component {
             brand_uuid: brand,
             brand_one_uuid,
             brand_two_uuid,
-            category
+            category,
+            uuid
           }
         } = rowInfo
-            const { push } = this.props
+
+          const { push } = this.props
             if(category === 'Brands Insights') {
               push(
-                `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=true`
+                `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&report_uuid=${uuid}&saved=true`
               )
             }else if(category === 'Compare Brands') {
               push(
-                `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=true`
+                `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&report_uuid=${uuid}&saved=true`
               )
             }
         }
