@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import moment from 'moment'
@@ -128,6 +129,37 @@ class Reports extends Component {
     }
   }
 
+  onRowClick = (state, rowInfo, column, instance) => {
+    return {
+      onClick: e => {
+        const {
+          original: { 
+            date_range: date,
+            metric: engagement,
+            platform: social,
+            title,
+            brand_uuid: brand,
+            brand_one_uuid,
+            brand_two_uuid,
+            category,
+            uuid
+          }
+        } = rowInfo
+
+          const { push } = this.props
+            if(category === 'Brands Insights') {
+              push(
+                `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&report_uuid=${uuid}&saved=true`
+              )
+            }else if(category === 'Compare Brands') {
+              push(
+                `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&report_uuid=${uuid}&saved=true`
+              )
+            }
+        }
+    }
+}
+
   render() {
     const { modalIsOpen, reportCardsData, selectedReportCardKey } = this.state
 
@@ -158,6 +190,7 @@ class Reports extends Component {
               }
               .ReactTable .rt-tbody .rt-tr-group:hover {
                 background-color: ${colors.tableRowHoverBg};
+                cursor:pointer;
                 font-family: 'ClanOT';
                 font-weight: bold;
               }
@@ -225,6 +258,7 @@ class Reports extends Component {
                       sortable={true}
                       minRows={4}
                       pageSize={data.length}
+                      getTrProps={this.onRowClick}
                       columns={[
                         {
                           Header: 'Title',
@@ -251,7 +285,11 @@ class Reports extends Component {
                           Header: null,
                           width: 65,
                           Cell: ({ original: { uuid } }) => (
-                            <div className={style.deleteWrapper} tabIndex="1">
+                            <div 
+                              className={style.deleteWrapper}
+                              tabIndex="1"
+                              onClick={(e) => e.stopPropagation()}
+                            >
                               <div
                                 className={style.deleteIcon}
                                 style={{
@@ -309,7 +347,12 @@ const mapStateToProps = createStructuredSelector({
   predefinedReports: makeSelectPredefinedReports(),
 })
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    push: (url) => dispatch(push(url)),
+    ...bindActionCreators(actions, dispatch)
+  }
+}
 
 const withConnect = connect(
   mapStateToProps,
