@@ -9,8 +9,8 @@ import {
   selectMarketviewSelectedVideoView,
 } from 'Reducers/marketview'
 import { makeSelectAuthProfile } from 'Reducers/auth'
-
 import SliderModule from 'Components/Modules/SliderModule'
+import style from './style.scss'
 
 class Slider extends React.Component {
   constructor(props) {
@@ -78,17 +78,19 @@ class Slider extends React.Component {
     } = this.props
 
     return (
-      <SliderModule
-        data={videos || []}
-        selectedVideo={selectedVideo}
-        changeSelectedVideo={this.changeSelectedVideo}
-        action={this.getCompetitorVideos}
-        moduleKey={moduleKey}
-        title={title}
-        filters={filters}
-        loading={loading}
-        infoText={infoText}
-      />
+      <div className={style.sliderWrapper}>
+        <SliderModule
+          data={videos || []}
+          selectedVideo={selectedVideo}
+          changeSelectedVideo={this.changeSelectedVideo}
+          action={this.getCompetitorVideos}
+          moduleKey={moduleKey}
+          title={title}
+          filters={filters}
+          loading={loading}
+          infoText={infoText}
+        />
+      </div>
     )
   }
 }
