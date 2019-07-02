@@ -2,7 +2,7 @@
   display: flex;
   flex-direction: column;
   width: 100%;
-  height: 100%;
+  height: 451px;
   min-height: 250px;
   border: 1px solid $color-dusk;
   background-color: $color-dark-five;
@@ -14,12 +14,13 @@
     font-size: 32px;
   }
   .progressArea {
-    margin: 20px 48px 32px;
+    margin: 0 48px;
     .title {
       text-align: center;
-      font-family: $font-family-ClanOTNews;
+      font-family: $font-family-ClanOT;
       font-size: 14px;
-      padding: 20px 0;
+      padding-top: 34px;
+      padding-bottom: 16px;
     }
     .progressBar {
       background-color: $color-dusk;
@@ -41,6 +42,7 @@
     }
     .progressText {
       font-size: 14px;
+
       font-family: $font-family-ClanOTNews;
       .leftTitle {
         float: left;
@@ -59,7 +61,8 @@
 }
 
 .cardDescription {
-  margin: 0 48px 48px 48px;
+  margin: 0 48px;
+  padding-top: 34px;
   font-family: $font-family-ClanOTNews;
   font-size: 14px;
   display: -webkit-box;
@@ -98,7 +101,6 @@
 .cardEmpty {
   display: flex;
   align-items: center;
-  min-height: 528px;
   margin: auto;
   font-size: 24px;
   font-weight: bold;

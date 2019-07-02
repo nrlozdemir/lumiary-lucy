@@ -1,9 +1,11 @@
 import React from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import classnames from 'classnames'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, withRouter } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
+import { createBrowserHistory } from 'history'
 
 import { makeSelectLibraryDetail } from 'Reducers/libraryDetail'
 
@@ -20,7 +22,7 @@ import { actions as generatedReportActions } from 'Reducers/generatedReport'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
 import Switch from 'Components/Form/Switch'
-import { ucfirst } from 'Utils'
+import { ucfirst, getLocationParams } from 'Utils'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import Dropdown from './dropdown'
@@ -257,8 +259,10 @@ const Template = (props) => {
 class Navbar extends React.Component {
   constructor(props) {
     super(props)
+    const {location: { search }} = props
+    const urlParams = getLocationParams(search)
     this.state = {
-      swicthControl: false,
+      swicthControl: !!urlParams && urlParams.saved === 'true' ,
     }
   }
 
@@ -268,12 +272,28 @@ class Navbar extends React.Component {
       loadDeleteReport,
       brandInsightValue: { data: brandInsightValue },
       comparebrandValues: { data: comparebrandValues },
-      createdReportControls: { isSaved, uuid },
+      createdReportControls: { uuid, isSaved },
       predefinedReportValues: { data: predefinedReportValues },
+      push,
+      location: { search }
     } = this.props
+    const urlParams = getLocationParams(search)
+
     if (category === 'Brands Insights' && brandInsightValue) {
       this.setState({
         swicthControl: !isSaved,
+      }, () => {
+        const {
+          date,
+          engagement,
+          title,
+          social,
+          brand
+        } = urlParams
+        window.history.pushState('',
+        '',
+        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${!isSaved}`
+        )
       })
       if (isSaved) {
         return loadDeleteReport(uuid)
@@ -285,6 +305,17 @@ class Navbar extends React.Component {
     } else if (category === 'Compare Brands' && comparebrandValues) {
       this.setState({
         swicthControl: !isSaved,
+      },() => {
+        const {
+          title,
+          brand_one_uuid,
+          brand_two_uuid,
+        } = urlParams
+        window.history.pushState(
+          '',
+          '',
+          `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${!isSaved}`
+          )
       })
       if (isSaved) {
         return loadDeleteReport(uuid)
@@ -297,6 +328,48 @@ class Navbar extends React.Component {
       saveReportRequest({
         ...predefinedReportValues,
         category,
+      })
+    }
+  }
+
+  componentDidUpdate() {
+    const { createdReportControls: { uuid }, location: { search, pathname } } = this.props
+    const urlParams = getLocationParams(search)
+    const {
+      title,
+      brand_one_uuid,
+      brand_two_uuid,
+      date,
+      engagement,
+      social,
+      brand,
+      saved
+    } = urlParams
+    const { swicthControl } = this.state
+    if(uuid) {
+      if(pathname === '/reports/brand-insight') {
+        window.history.pushState('',
+        '',
+        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${swicthControl}&report_uuid=${uuid}`
+        )
+      }else if(pathname === '/reports/compare-brands') {
+        window.history.pushState(
+          '',
+          '',
+          `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${swicthControl}&report_uuid=${uuid}`
+        )
+      }
+    }
+  }
+
+  componentDidMount() {
+    const { createdReportControls: { uuid }, location: { search } } = this.props
+    const urlParams = getLocationParams(search)
+    const { report_uuid  } = urlParams
+    if(!uuid && report_uuid) {
+      this.props.createdReportControl({
+        isSaved: !!urlParams && urlParams.saved === 'true',
+        uuid: report_uuid,
       })
     }
   }
@@ -324,21 +397,27 @@ const mapStateToProps = createStructuredSelector({
   profile: makeSelectAuthProfile(),
 })
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      ...reportsActions,
-      ...generatedReportActions,
-    },
-    dispatch
-  )
+const mapDispatchToProps = (dispatch) => {
+  return {
+    push: (url) => dispatch(push(url)),
+    ...bindActionCreators(
+      {
+        ...reportsActions,
+        ...generatedReportActions,
+      },
+      dispatch
+    )
+  }
+}
 
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps
 )
 
-export default compose(
+const composedComponent = compose(
   withConnect,
   withTheme
-)(Navbar)
+)(Navbar) 
+
+export default withRouter(composedComponent)

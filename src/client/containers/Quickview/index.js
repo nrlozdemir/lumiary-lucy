@@ -19,6 +19,7 @@ import { isEqual } from 'lodash'
 import style from './style.scss'
 import RouterLoading from 'Components/RouterLoading'
 import ToolTip from 'Components/ToolTip'
+import { Up, Down } from 'Components/Icons/Thumbs'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -128,14 +129,17 @@ export class Main extends React.PureComponent {
                       return !!platform.filter && isSelected || true ? (
                         <div
                           key={idx}
-                          className={style.navItem_btn}
-                          style={{
-                            background: isSelected
-                              ? colors.tabActiveBackground
-                              : colors.tabBackground,
-                            color: colors.textColor,
-                            borderColor: colors.tabBorder,
-                          }}
+                          className={cx(
+                            style.navItem_btn,
+                            {
+                              [style.selected]: isSelected
+                            },
+                            {
+                              [colors.themeType === 'dark'
+                              ? style.dark
+                              : style.light]: true
+                            }
+                          )}
                         >
                           <i
                             className={cx(
@@ -166,11 +170,6 @@ export class Main extends React.PureComponent {
                           activeStyle={{
                             background: colors.tabActiveBackground,
                           }}
-                          style={{
-                            background: colors.tabBackground,
-                            color: colors.textColor,
-                            borderColor: colors.tabBorder,
-                          }}
                           to={`/quickview/${toSlug(platform.name)}`}
                         >
                           <i className={socialIconSelector(platform.name)} />
@@ -178,12 +177,14 @@ export class Main extends React.PureComponent {
                       )
                     })}
                     <div
-                      className={style.navItem_btn}
-                      style={{
-                        background: colors.tabBackground,
-                        color: colors.textColor,
-                        borderColor: colors.tabBorder,
-                      }}
+                      className={cx(
+                        style.navItem_btn,
+                        {
+                          [colors.themeType === 'dark'
+                          ? style.dark
+                          : style.light]: true
+                        }
+                      )}
                     >
                       <ModuleSelectFilters
                         type={'dateRange'}
@@ -203,12 +204,14 @@ export class Main extends React.PureComponent {
                   </div>
                 </div>
                 <div
-                  className={style.cardWrapper}
-                  style={{
-                    background: colors.moduleBackground,
-                    color: colors.textColor,
-                    boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
-                  }}
+                  className={cx(
+                    style.cardWrapper,
+                    {
+                      [colors.themeType === 'dark'
+                      ? style.dark
+                      : style.light]: true
+                    }
+                  )}
                 >
                   {
                     (loading)
@@ -216,7 +219,7 @@ export class Main extends React.PureComponent {
                       : (
                         <div
                           className={style.content}
-                          style={{ background: colors.bodyBackground }}
+                          // style={{ background: colors.bodyBackground }}
                         >
                           {platformsValues &&
                             platformsValues.map((el, i) => {
@@ -232,12 +235,6 @@ export class Main extends React.PureComponent {
                                 <div
                                   key={i}
                                   className={style.cardBlock}
-                                  style={{
-                                    background:
-                                      i === 1
-                                        ? colors.tabActiveBackground
-                                        : colors.moduleBackground,
-                                  }}
                                 >
                                   {/* HEADER */}
                                   <div className={style.card}>
@@ -245,6 +242,7 @@ export class Main extends React.PureComponent {
                                       {i == 0
                                         ? 'Underperforming Videos'
                                         : 'Over Performing Videos'}
+
                                       {infoText && <i
                                         className={cx('icon icon-Information', style.moduleInfo)}
                                         onMouseEnter={() => changeInfoStatus()}
@@ -256,6 +254,10 @@ export class Main extends React.PureComponent {
                                         </ToolTip>
                                       </i>}
                                     </h1>
+                                    {i === 0
+                                      ? <Down />
+                                      : <Up />
+                                    }
                                     {/* VIDEO */}
                                     <div className={style.assetContainer}>
                                       <AssetLayer
@@ -263,7 +265,7 @@ export class Main extends React.PureComponent {
                                         title={title.substring(0, 32)}
                                         rightValue={cvScore}
                                         width={'100%'}
-                                        height={286}
+                                        height={'100%'}
                                       >
                                         <div className={style.video}>
                                           <SingleVideoCard
@@ -281,7 +283,7 @@ export class Main extends React.PureComponent {
                                             barWidth={2}
                                             barSpaceWidth={1}
                                             disableLabels
-                                            color={i === 0 ? 'green' : 'blue'}
+                                            color={i === 0 ? 'blue' : 'green'}
                                           />
                                         </div>
                                       </AssetLayer>
@@ -300,32 +302,24 @@ export class Main extends React.PureComponent {
                                         return (
                                           <div
                                             key={`info_${i}-${index}`}
-                                            className={style.itemWrapper}
-                                            style={{
-                                              borderColor:
-                                                i === 0
-                                                  ? colors.chartStadiumBarBorder
-                                                  : colors.bodyBackground,
-                                            }}
+                                            className={cx(
+                                              style.itemWrapper,
+                                            )}
                                           >
                                             {noData && <p className={style.noData}>No Data Available</p>}
                                             <div 
-                                              className={style.infoItem}
-                                              style={{
-                                                opacity: (noData) ? 0.1 : 1,
-                                              }}
+                                              className={cx(
+                                                style.infoItem,
+                                                {
+                                                  [style.noDataWrapper]: noData
+                                                }
+                                              )}
                                             >
                                               {difference && i === 1 && false && (
                                                 <div
                                                   className={
                                                     style.infoItem_diffBubble
                                                   }
-                                                  style={{
-                                                    borderColor:
-                                                      colors.tabActiveBackground,
-                                                    background: colors.bodyBackground,
-                                                    color: colors.labelColor
-                                                  }}
                                                 >
                                                   <span>{difference}%</span>
                                                   <span>Difference</span>
@@ -337,18 +331,7 @@ export class Main extends React.PureComponent {
                                                   style.sectionBadge
                                                 )}
                                               >
-                                                <span
-                                                  style={{
-                                                    background:
-                                                      i === 0
-                                                        ? colors.labelBackground
-                                                        : colors.bodyBackground,
-                                                    color: colors.labelColor,
-                                                    boxShadow: `0 1px 2px 0 ${
-                                                      colors.labelShadow
-                                                    }`,
-                                                  }}
-                                                >
+                                                <span>
                                                   {item.title}
                                                 </span>
                                               </p>
@@ -380,7 +363,7 @@ export class Main extends React.PureComponent {
                                                 customPercentageClass={cx(
                                                   style.percentageBlue,
                                                   {
-                                                    [style.percentagePink]: i == 1,
+                                                    [style.percentagePink]: i == 0,
                                                   }
                                                 )}
                                               />
