@@ -418,8 +418,8 @@ class LibraryDetailShotByShot extends React.Component {
                     <div
                       className={style.shotByShotMask}
                       style={{
-                        borderColor:
-                          colors.themeType === 'light' ? '#ccc' : '#545b79',
+                        backgroundColor: colors.shotByShotMaskBackgroundColor,
+                        borderColor: colors.shotByShotMaskBorderColor,
                       }}
                     />
                     <SliderWithScrubber
