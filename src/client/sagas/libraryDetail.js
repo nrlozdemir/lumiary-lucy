@@ -187,12 +187,14 @@ function* getShotInfoRequest({ payload }) {
   try {
     const { brandUuid, videoUuid, shotId } = payload
 
-    if (!!brandUuid && !!videoUuid && !!shotId) {
+    if (!!brandUuid && !!videoUuid && shotId !== undefined) {
       const url = `/brand/${brandUuid}/video/${videoUuid}/shots/${shotId}`
 
       const payload = yield call(getDataFromApi, undefined, url, 'GET')
 
       yield put(actions.getShotInfoSuccess(payload))
+    } else {
+      throw new Error('Library Detail getShotInfoRequest Error')
     }
   } catch (error) {
     console.log(error)
@@ -380,6 +382,7 @@ function* getPeopleRequest(ids) {
     const url = `/brand/${ids.payload.brandUuid}/video/${
       ids.payload.videoUuid
     }/shots/${ids.payload.shotId}/demographics`
+    
     const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
 
     yield put(actions.getPeopleSuccess(payload))
