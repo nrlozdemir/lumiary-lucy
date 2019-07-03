@@ -58,7 +58,7 @@ const dark = {
   videoCardColor: '#ffffff',
   videoCardShadow: 'rgba(0, 0, 0, 0.5)',
   videoBorder: '#545b79',
-  videoRightPercentageBackground: 'rgb(33, 36, 59, 0.4)',
+  videoRightPercentageBackground: 'rgb(33, 36, 59, 0.8)',
 
   // Sidebar
   filterHeader: '#ffffff',
@@ -222,7 +222,7 @@ const light = {
   videoCardShadow: '#bebebe',
   videoBorder: '#c6c9d7',
   videoCardIcon: '#505050',
-  videoRightPercentageBackground: 'rgba(255, 255, 255, 0.4)',
+  videoRightPercentageBackground: 'rgba(255, 255, 255, 0.8)',
 
   // Sidebar
   filterHeader: '#e8ecf0',

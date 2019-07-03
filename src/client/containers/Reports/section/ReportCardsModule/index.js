@@ -46,7 +46,14 @@ const ReportsCards = ({ openModal, reportCardsData }) => {
                     )}
                     <p className={style.cardTitle}>{card.title}</p>
                     <div className={style.cardIcons}>
-                      <img src={card.icon} alt={card.key} />
+                      <img
+                        src={
+                          colors.themeType === 'light'
+                            ? card.iconLight || card.icon
+                            : card.icon
+                        }
+                        alt={card.key}
+                      />
                     </div>
                     <p className={style.cardDescription}>{card.text}</p>
                   </div>
