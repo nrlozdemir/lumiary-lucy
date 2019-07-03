@@ -48,7 +48,12 @@ class FormatCard extends Component {
       formatChartData: { data, video, currentDay, loading },
     } = this.props
 
-    const isDataEmpty = (!loading && isDataSetEmpty(data)) || isEmpty(data)
+    const isDataEmpty =
+      (!loading &&
+        !!data &&
+        !!data.length &&
+        data.every((d) => d.count === 0)) ||
+      isEmpty(data)
 
     return (
       <ThemeContext.Consumer>
