@@ -10,6 +10,7 @@ const VideoCardList = ({ data, brandId }) => {
     data.map((item, index) => (
       <VideoCard
         video={item}
+        index={index}
         key={`videolist-${index}`}
         id={`videolist-${index}`}
         brandId={brandId}
