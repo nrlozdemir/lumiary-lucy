@@ -98,16 +98,6 @@ class Scrubber extends React.Component {
     }
   }
 
-  /*
-  trackBackgroundColor: colors.trackBackgroundColor,
-  trackShadowColor: colors.trackShadowColor,
-  trackBorderColor: colors.trackBorderColor,
-  thumbBackgroundColor: colors.thumbBackgroundColor,
-  thumbArrowsColor: colors.thumbArrowsColor,
-  thumbBorderColor: colors.thumbBorderColor,
-  trackTicksBackgroundColor: colors.trackTicksBackgroundColor,
-  */
-
   renderThumbHorizontal(props) {
     const {
       colors
@@ -122,7 +112,6 @@ class Scrubber extends React.Component {
       }
       
       if (props.isEmpty) {
-        console.log(11111);
         return (
         <div 
           className={styles.thumbHorizontal} 
