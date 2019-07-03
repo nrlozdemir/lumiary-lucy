@@ -29,6 +29,7 @@ class LibraryDetailShotByShot extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      sliderImageLeft: 0,
       selectedImage: null,
     }
 
@@ -42,26 +43,9 @@ class LibraryDetailShotByShot extends React.Component {
   sliderAction(i) {
     const calculateLeft = i * shotSliderWidth * -1
     this.setState(
-      {
-        sliderImageLeft: calculateLeft,
-        sliderImageSelected: i
-      },
-      () => {
-        //this.sliderImages.style.left = calculateLeft
-        /*
-        const ref = this.sliderThumbs.children[0].children[0].childNodes[0]
-
-        for (let k = 0; k < ref.childNodes.length; k++) {
-          ref.childNodes[k].classList.remove(style.sliderImageActive)
-          ref.childNodes[k].classList.add(style.sliderImageCurrent)
-        }
-        ref.childNodes[i].classList.remove(style.sliderImageCurrent)
-        ref.childNodes[i].classList.add(style.sliderImageActive)
-        */
-      }
-    )
-    //const { backgroundImage } = ref.childNodes[i].children[0].children[0].style
-    //const currentImage = backgroundImage.replace(/\(|\)|url|\"/gi, '')
+    {
+      sliderImageLeft: calculateLeft
+    })
   }
 
   shotClick(i) {
@@ -287,7 +271,7 @@ class LibraryDetailShotByShot extends React.Component {
                             scrubberWidth={16}
                             scrubberHeight={16}
                             scrubberDotClassname={style.dotScrubber}
-                            selectedShot={this.state.sliderImageSelected}
+                            selectedShot={this.state.selectedImage}
                           />
                         )}
                       </div>
