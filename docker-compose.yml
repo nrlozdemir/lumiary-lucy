@@ -27,9 +27,9 @@ services:
     environment:
       - PORT=9000
       - NODE_ENV=development
-      - API_ROOT=https://api-local.quickframe.com:8080
+      - API_ROOT=https://azazzle-local.quickframe.com:8081
       - API_VERSION=v1
-      - MEDIA_URL=https://s3.amazonaws.com/quickframe-media-dev/
+      - MEDIA_URL=https://s3.amazonaws.com/quickframe-media-staging/
       - STATIC_URL=https://s3.amazonaws.com/quickframe-static-dev/
       - AWS_ACCESS_KEY_ID=AKIAIILRAYHRCIOFIR4Q
       - AWS_SECRET_ACCESS_KEY=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

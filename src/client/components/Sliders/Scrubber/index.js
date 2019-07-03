@@ -2,6 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { Scrollbars } from 'react-custom-scrollbars'
+import { withTheme } from 'ThemeContext/withTheme'
 import styles from './style.scss'
 
 const propTypes = {}
@@ -32,7 +33,7 @@ const RightArrow = () => {
   </svg>)
 }
 
-export default class Scrubber extends React.Component {
+class Scrubber extends React.Component {
   constructor(props) {
     super(props)
     this.state = {}
@@ -68,15 +69,19 @@ export default class Scrubber extends React.Component {
   }
 
   renderTrackHorizontal(props) {
+    const {
+      colors
+    } = this.props.themeContext
+
     if( ! props.scrubberIsDot) {
       const inlineStyle = {
         right: 1,
         bottom: 2,
         left: 0,
         borderRadius: Math.floor(parseInt(props.scrubberHeight) / 2),
-        boxShadow: '0 2px 6px 0 #e8ecf0',
-        border: '1px solid #c6c9d7',
-        background: "#e8ecf0",
+        boxShadow: `0 2px 6px 0 ${colors.trackShadowColor}`,
+        border: `1px solid ${colors.trackBorderColor}`,
+        background: colors.trackBackgroundColor,
       }
       return <div className={styles.trackHorizontal} style={inlineStyle} />
     } else {
@@ -85,7 +90,7 @@ export default class Scrubber extends React.Component {
         bottom: 2,
         left: 0,
         borderRadius: 16,
-        background: "#21243b",
+        background: colors.dotTrackBackgroundColor,
         margin: '6px 0px 6px 0px',
         height: 4
       }
@@ -94,11 +99,14 @@ export default class Scrubber extends React.Component {
   }
 
   renderThumbHorizontal(props) {
+    const {
+      colors
+    } = this.props.themeContext
     if( ! props.scrubberIsDot) {
       const inlineStyle = {
         borderRadius: 'inherit',
-        background: "rgba(255, 255, 255, 0.9)",
-        border: '1px solid #c6c9d7',
+        background: colors.thumbBackgroundColor,
+        border: `1px solid ${colors.thumbBorderColor}`,
         height: props.scrubberHeight,
         zIndex: 4
       }
@@ -107,7 +115,11 @@ export default class Scrubber extends React.Component {
         return (
         <div 
           className={styles.thumbHorizontal} 
-          style={inlineStyle}>
+          style={{
+            ...inlineStyle,
+            width: '0px',
+            border: 'none'
+          }}>
         </div>)
       }
       
@@ -130,12 +142,13 @@ export default class Scrubber extends React.Component {
       )
     } else {
       const inlineStyle = {
-        background: "rgba(255, 255, 255, 1)",
+        background: colors.dotThumbBackgroundColor,
         width: 16,
         height: 16,
         borderRadius: 16,
         zIndex: 4,
         top: -7,
+        boxShadow: `0 2px 6px 0 ${colors.dotThumbShadowColor}`,
         position: 'absolute'
       }
 
@@ -176,7 +189,7 @@ export default class Scrubber extends React.Component {
       scrubberWidth,
       scrubberHeight,
       scrubberDotClassname,
-      viewportBackgroundColor,
+      viewportBackgroundColor
     } = this.props
 
     let horizontalProps = {}
@@ -225,6 +238,8 @@ export default class Scrubber extends React.Component {
     )
   }
 }
+
+export default withTheme(Scrubber)
 
 Scrubber.propTypes = propTypes
 Scrubber.defaultProps = defaultProps
