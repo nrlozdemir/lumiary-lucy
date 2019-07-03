@@ -75,6 +75,7 @@ export class VideoCard extends PureComponent {
       muted = true,
       id,
       brandId,
+      index,
     } = this.props
 
     const { itCanPlay } = this.state
@@ -101,7 +102,12 @@ export class VideoCard extends PureComponent {
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <div
-            className={style.cardContainer}
+            className={classnames(
+              style.cardContainer,
+              {
+                [style.rightVideoContainer]: index > 0 && (index + 1) % 4 === 0,
+              }
+            )}
             style={{
               boxShadow: `0 2px 6px 0 colors.videoCardShadow`,
             }}

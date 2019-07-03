@@ -112,3 +112,298 @@ $xlarge-grid: (
 );
 
 $max-grid-size: 1200px;
+
+// global values
+$dark_themeType: dark;
+$dark_bodyBackground: #21243B;
+$dark_moduleBackground: #373f5b;
+$dark_moduleBackgroundHover: #545b79;
+$dark_moduleShadow: rgba(0, 0, 0, 0.5);
+$dark_moduleBorder: #545b79;
+$dark_duskBackground: #545b79;
+$dark_searchColor: #21243B;
+$dark_placeholderColor: #ffffff;
+$dark_textColor: #ffffff;
+$dark_searchOptionsColor: #545b79;
+$dark_ageSliderBorder: #545b79;
+$dark_moduleBackgroundOpacity: rgba(55, 63, 91, 0.7);
+
+// global values
+
+// selectbox
+$dark_selectBackground: #21243B;
+$dark_selectBorder: #545b79;
+// selectbox
+
+// progressbar values
+$dark_progressBackground: #545b79;
+$dark_progressColor: transparent;
+$dark_progressShadow: transparent;
+$dark_progressCountBackground: #373f5b;
+$dark_progressLibraryDetailBackground: #545b79;
+$dark_progressLibraryDetailShadow: rgba(0, 0, 0, 0.5);
+$dark_progressLibraryDetailTickColor: #ffffff;
+// progressbar values
+
+// labels
+$dark_labelBackground: #545b79;
+$dark_labelColor: #ffffff;
+$dark_labelShadow: rgba(0, 0, 0, 0.5);
+// labels
+
+// chart values
+$dark_chartBackground: #21243b;
+$dark_chartLightBackground: #545b79;
+$dark_chartShadow: rgba(0, 0, 0, 0.5);
+$dark_chartStadiumBarBackground: #21243b;
+$dark_chartStadiumBarBorder: #545b79;
+$dark_chartStadiumCenterBackground: #373f5b;
+// chart values
+
+// tabs values
+$dark_tabBackground: #21243b;
+$dark_tabActiveBackground: #545b79;
+$dark_tabBorder: #545b79;
+// tabs values
+
+// Video Card
+$dark_videoCardBackground: #545b79;
+$dark_videoCardIcon: #ffffff;
+$dark_videoCardColor: #ffffff;
+$dark_videoCardShadow: rgba(0, 0, 0, 0.5);
+$dark_videoBorder: #545b79;
+$dark_videoRightPercentageBackground: rgba(33, 36, 59, 0.4);
+
+// Sidebar
+$dark_filterHeader: #ffffff;
+$dark_socialCheckboxBackground: #21243b;
+$dark_socialColor: #545b79;
+$dark_socialActiveBackground: #ffffff;
+$dark_rangeSliderTick: #ffffff;
+$dark_trackColor: #21243b;
+
+// modal values
+$dark_modalBackground: #373f5b;
+$dark_modalHeaderBackground: #ffffff;
+$dark_modalHeaderColor: #202952;
+$dark_modalButtonBackground: #545b79;
+// modal values
+
+// custom selectbox values
+$dark_customSelectBackground: #21243b;
+$dark_customSelectBorder: #545b79;
+$dark_customSelectActiveBackground: #545b79;
+$dark_customSelectActiveBorder: #acb0be;
+$dark_customSelectCircleColor: #2fd7c4;
+$dark_customSelectCircleBorderColor: #ffffff;
+$dark_customSelectColor: #ffffff;
+// custom selectbox values
+
+// input values
+$dark_inputControlBackground: #21243B;
+$dark_inputControlBorder: #acb0be;
+$dark_inputControlSelectedBorder: #545b79;
+$dark_inputColor: #545B79;
+$dark_inputActiveColor: #ffffff;
+$dark_inputOptionBackground: #545B79;
+$dark_inputOptionFocusBackground: #21243B;
+$dark_inputOptionSelectedBackground: #ffffff;
+// input values
+
+// table values
+$dark_tableHeaderBackground: #545b79;
+$dark_tableBodyBackground: #373f5b;
+$dark_tableBackground: #21243b;
+$dark_tableBorder: #545b79;
+$dark_tableShadow: rgba(0, 0, 0, 0.5);
+$dark_tablePopoverBackground: #ffffff;
+$dark_tablePopoverDeleteColor: #2fd7c4;
+$dark_tablePopoverColor: #545b79;
+$dark_tableRowHoverBg: #545b79;
+// table values
+
+// tooltip values
+$dark_tooltipTextColor: #373f5b;
+$dark_tooltipBackground: #ffffff;
+$dark_tooltipRadarChartTextColor: #23294b;
+// tooltip values
+
+// radius icon values
+$dark_iconColor: #ffffff;
+$dark_iconBackground: #21243b;
+$dark_iconBorder: #2fd7c4;
+// radius icon values
+
+// theme control dropdown values
+$dark_themeControlBackground: #545b79;
+$dark_themeControlBorder: #545b79;
+$dark_themeControlShadow: rgba(0, 0, 0, 0.5);
+$dark_themeControlListBorder: #21243b;
+// theme control dropdown values
+$dark_daySelectionBorderColor: #545b79;
+
+// radar chart values
+$dark_chartPointBackgroundColor: #ffffff;
+$dark_chartPointBorderColor: #ffffff;
+$dark_chartBackgroundColor: rgba(255, 255, 255, 0.4);
+// radar chart values
+
+// shot by shot slider values
+$dark_shotByShotBackground: #21243b;
+$dark_shotByShotBorder: #545b79;
+$dark_shotByShotTabHeader: #545b79;
+$dark_shotByShotTabBody: #373f5b;
+$dark_shotByShotSliderPointer: #ffffff;
+$dark_shotByShotSliderImageBorder: #000;
+// shot by shot slider values
+
+// percentage bar grap values
+$dark_topValueColor: #ffffff;
+$dark_barChartShadow: #15192c;
+
+// global values
+$light_themeType: light;
+$light_bodyBackground: #e8ecf0;
+$light_moduleBackground: #f3f6f9;
+$light_moduleBackgroundHover: #ffffff;
+$light_moduleShadow: #bebebe;
+$light_moduleBorder: #c6c9d7;
+$light_duskBackground: #ffffff;
+$light_textColor: #505050;
+$light_searchColor: #e8ecf0;
+$light_placeholderColor: #c6c9d7;
+$light_searchOptionsColor: #ffffff;
+$light_ageSliderBorder: transparent;
+$light_moduleBackgroundOpacity: rgba(243, 246, 249, 0.7);
+// global values
+
+// selectbox
+$light_selectBackground: #ffffff;
+$light_selectBorder: #c6c9d7;
+// selectbox
+
+// progressbar values
+$light_progressBackground: #ffffff;
+$light_progressColor: #3dd6c4;
+$light_progressShadow: #bebebe;
+$light_progressCountBackground: #ffffff;
+$light_progressLibraryDetailBackground: #c6c9d7;
+$light_progressLibraryDetailShadow: rgba(0, 0, 0, 0.5);
+$light_progressLibraryDetailTickColor: #505050;
+// progressbar values
+
+// labels
+$light_labelBackground: #ffffff;
+$light_labelColor: #505050;
+$light_labelShadow: rgba(0, 0, 0, 0.5);
+// labels
+
+// chart values
+$light_chartBackground: #e8ecf0;
+$light_chartShadow: #bebebe;
+$light_chartLightBackground: #ffffff;
+$light_chartStadiumBarBackground: #e8ecf0;
+$light_chartStadiumBarBorder: #c6c9d7;
+$light_chartStadiumCenterBackground: #f3f6f9;
+// chart values
+
+// tabs values
+$light_tabBackground: #e8ecf0;
+$light_tabActiveBackground: #ffffff;
+$light_tabBorder: #c6c9d7;
+// tabs values
+
+// Video Card
+$light_videoCardBackground: #ffffff;
+$light_videoCardColor: #505050;
+$light_videoCardShadow: #bebebe;
+$light_videoBorder: #c6c9d7;
+$light_videoCardIcon: #505050;
+$light_videoRightPercentageBackground: rgba(255, 255, 255, 0.4);
+
+// Sidebar
+$light_filterHeader: #e8ecf0;
+$light_socialCheckboxBackground: #e8ecf0;
+$light_socialColor: #c6c9d7;
+$light_socialActiveBackground: #505050;
+$light_rangeSliderTick: #505050;
+$light_trackColor: #e8ecf0;
+
+// modal values
+$light_modalBackground: #f3f6f9;
+$light_modalHeaderBackground: #505050;
+$light_modalHeaderColor: #ffffff;
+$light_modalButtonBackground: #c6c9d7;
+// modal values
+
+// custom selectbox values
+$light_customSelectBackground: #e8ecf0;
+$light_customSelectBorder: #acb0be;
+$light_customSelectActiveBackground: #ffffff;
+$light_customSelectActiveBorder: #acb0be;
+$light_customSelectCircleColor: #2fd7c4;
+$light_customSelectCircleBorderColor: #505050;
+$light_customSelectColor: #505050;
+// custom selectbox values
+
+// input values
+$light_inputControlBackground: #e8ecf0;
+$light_inputControlBorder: #acb0be;
+$light_inputControlSelectedBorder: #c6c9d7;
+$light_inputColor: #c6c9d7;
+$light_inputActiveColor: #505050;
+$light_inputOptionBackground: #ffffff;
+$light_inputOptionFocusBackground: #e8ecf0;
+$light_inputOptionSelectedBackground: #505050;
+// input values
+
+// table values
+$light_tableHeaderBackground: #ffffff;
+$light_tableBodyBackground: #f3f6f9;
+$light_tableBackground: #e8ecf0;
+$light_tableBorder: #c6c9d7;
+$light_tableShadow: #bebebe;
+$light_tablePopoverBackground: #505050;
+$light_tablePopoverDeleteColor: #2fd7c4;
+$light_tablePopoverColor: #ffffff;
+$light_tableRowHoverBg: #ffffff;
+// table values
+
+// tooltip values
+$light_tooltipTextColor: #f3f6f9;
+$light_tooltipBackground: #505050;
+$light_tooltipRadarChartTextColor: #fff;
+// tooltip values
+
+// radius icon values
+$light_iconColor: #505050;
+$light_iconBackground: #f3f6f9;
+$light_iconBorder: #2fd7c4;
+// radius icon values
+
+// theme control dropdown values
+$light_themeControlBackground: #ffffff;
+$light_themeControlBorder: #acb0be;
+$light_themeControlShadow: rgba(0, 0, 0, 0.5);
+$light_themeControlListBorder: #e8ecf0;
+// theme control dropdown values
+$light_daySelectionBorderColor: #c6c9d7;
+
+// radar chart values
+$light_chartPointBackgroundColor: #505050;
+$light_chartPointBorderColor: #505050;
+$light_chartBackgroundColor: rgba(172, 176, 190, 0.4);
+// radar chart values
+
+// shot by shot slider values
+$light_shotByShotBackground: #e8ecf0;
+$light_shotByShotBorder: #c6c9d7;
+$light_shotByShotTabHeader: #ffffff;
+$light_shotByShotTabBody: #f3f6f9;
+$light_shotByShotSliderPointer: #2fd7c4;
+$light_shotByShotSliderImageBorder: #000;
+// shot by shot slider values
+
+// percentage bar grap values
+$light_topValueColor: #000000;
+$light_barChartShadow: #bebebe;

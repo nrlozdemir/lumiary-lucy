@@ -12,7 +12,7 @@ const ReportsCards = ({ openModal, reportCardsData }) => {
             <style>
               // DON'T DELETE THIS STYLE. it's need to dynamic hover style
               {`
-                .${style.reportsCardContainer}.${style.reportsCard}:hover {
+                .${style.reportsCardContainer} .${style.reportsCard}:hover {
                   background: ${colors.moduleBackgroundHover} !important
                 }
               `}
@@ -46,7 +46,14 @@ const ReportsCards = ({ openModal, reportCardsData }) => {
                     )}
                     <p className={style.cardTitle}>{card.title}</p>
                     <div className={style.cardIcons}>
-                      <img src={card.icon} alt={card.key} />
+                      <img
+                        src={
+                          colors.themeType === 'light'
+                            ? card.iconLight || card.icon
+                            : card.icon
+                        }
+                        alt={card.key}
+                      />
                     </div>
                     <p className={style.cardDescription}>{card.text}</p>
                   </div>

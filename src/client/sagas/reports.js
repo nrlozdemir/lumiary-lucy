@@ -90,6 +90,9 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
       title,
     } = params
 
+    const saved = params && params.saved && params.saved.value ? params.saved.value : false
+    const report_uuid = params && params.report_uuid
+
     const parameters = {
       brand,
       brands: [brand],
@@ -97,13 +100,14 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
       engagement,
       date,
       title,
+      saved
     }
 
     yield put(actions.brandInsightFormSubmitSuccess(parameters))
     if (!!onlySave) {
       yield put(
         push(
-          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}`
+          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${saved}${report_uuid ? `&report_uuid=${report_uuid}` :''}`
         )
       )
     }
@@ -115,10 +119,11 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
 
 function* compareBrandSubmit({ payload: { params, onlySave } }) {
   try {
-    const { title, ...brands } = params
+    const { saved = false, title, ...brands } = params
     const filteredBrands = Object.keys(brands).filter((brand) => brands[brand])
 
     const parameters = {
+      saved,
       title,
       brands: filteredBrands,
     }
@@ -129,7 +134,7 @@ function* compareBrandSubmit({ payload: { params, onlySave } }) {
         push(
           `/reports/compare-brands?title=${title}&brand_one_uuid=${
             filteredBrands[0]
-          }&brand_two_uuid=${filteredBrands[1]}`
+          }&brand_two_uuid=${filteredBrands[1]}&saved=${saved}`
         )
       )
     } else {

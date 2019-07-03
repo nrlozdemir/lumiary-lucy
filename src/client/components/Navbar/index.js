@@ -1,9 +1,11 @@
 import React from 'react'
 import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
+import { push } from 'connected-react-router'
 import classnames from 'classnames'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, withRouter } from 'react-router-dom'
 import { createStructuredSelector } from 'reselect'
+import { createBrowserHistory } from 'history'
 
 import { makeSelectLibraryDetail } from 'Reducers/libraryDetail'
 
@@ -20,7 +22,7 @@ import { actions as generatedReportActions } from 'Reducers/generatedReport'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
 import Switch from 'Components/Form/Switch'
-import { ucfirst } from 'Utils'
+import { ucfirst, getLocationParams } from 'Utils'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import Dropdown from './dropdown'
@@ -68,6 +70,18 @@ const Logo = ({ themes }) => (
   </div>
 )
 
+export const NavLinkComponent = props => (
+  <NavLink {...props} isActive={(match, location) => {
+    if (props.to === location.pathname) {
+      return true
+    }
+    if (location.pathname === '/' && props.to === '/library') {
+      return true
+    }
+    return false
+  }}/>
+)
+
 const Default = (props) => {
   const { textColor, moduleBackground } = props.themes
   return Object.values(props)
@@ -81,16 +95,19 @@ const Default = (props) => {
         ? -1
         : 0
     )
-    .map((el, i) => (
-      <NavLink
-        key={i}
-        to={el.path}
-        activeClassName={style.activeLink}
-        style={{ color: textColor }}
-      >
-        {el.navigation.title}
-      </NavLink>
-    ))
+    .map((el, i) => {
+
+      return (
+        <NavLinkComponent
+          key={i}
+          to={el.path}
+          activeClassName={style.activeLink}
+          style={{ color: textColor }}
+        >
+          {el.navigation.title}
+        </NavLinkComponent>
+      )
+    })
 }
 
 const SelectedNavLink = (props) => {
@@ -103,7 +120,7 @@ const SelectedNavLink = (props) => {
           <Switch
             id={'saveReport'}
             switchOn={props.swicthControl}
-            controlSwitch={() => props.swicthChange(props.category)}
+            controlSwitch={() => props.switchChange(props.category)}
           />
         </div>
       )}
@@ -193,7 +210,7 @@ const Selector = (props) => {
           load={loadComponent}
           category={category}
           swicthControl={state.swicthControl}
-          swicthChange={actions.swicthChange}
+          switchChange={actions.switchChange}
         />
       ),
     }
@@ -257,23 +274,41 @@ const Template = (props) => {
 class Navbar extends React.Component {
   constructor(props) {
     super(props)
+    const {location: { search }} = props
+    const urlParams = getLocationParams(search)
     this.state = {
-      swicthControl: false,
+      swicthControl: !!urlParams && urlParams.saved === 'true' ,
     }
   }
 
-  swicthChange(category) {
+  switchChange(category) {
     const {
       saveReportRequest,
       loadDeleteReport,
       brandInsightValue: { data: brandInsightValue },
       comparebrandValues: { data: comparebrandValues },
-      createdReportControls: { isSaved, uuid },
+      createdReportControls: { uuid, isSaved },
       predefinedReportValues: { data: predefinedReportValues },
+      push,
+      location: { search }
     } = this.props
+    const urlParams = getLocationParams(search)
+
     if (category === 'Brands Insights' && brandInsightValue) {
       this.setState({
         swicthControl: !isSaved,
+      }, () => {
+        const {
+          date,
+          engagement,
+          title,
+          social,
+          brand
+        } = urlParams
+        window.history.pushState('',
+        '',
+        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${!isSaved}`
+        )
       })
       if (isSaved) {
         return loadDeleteReport(uuid)
@@ -285,6 +320,17 @@ class Navbar extends React.Component {
     } else if (category === 'Compare Brands' && comparebrandValues) {
       this.setState({
         swicthControl: !isSaved,
+      },() => {
+        const {
+          title,
+          brand_one_uuid,
+          brand_two_uuid,
+        } = urlParams
+        window.history.pushState(
+          '',
+          '',
+          `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${!isSaved}`
+          )
       })
       if (isSaved) {
         return loadDeleteReport(uuid)
@@ -301,13 +347,55 @@ class Navbar extends React.Component {
     }
   }
 
+  componentDidUpdate() {
+    const { createdReportControls: { uuid }, location: { search, pathname } } = this.props
+    const urlParams = getLocationParams(search)
+    const {
+      title,
+      brand_one_uuid,
+      brand_two_uuid,
+      date,
+      engagement,
+      social,
+      brand,
+      saved
+    } = urlParams
+    const { swicthControl } = this.state
+    if(uuid) {
+      if(pathname === '/reports/brand-insight') {
+        window.history.pushState('',
+        '',
+        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${swicthControl}&report_uuid=${uuid}`
+        )
+      }else if(pathname === '/reports/compare-brands') {
+        window.history.pushState(
+          '',
+          '',
+          `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${swicthControl}&report_uuid=${uuid}`
+        )
+      }
+    }
+  }
+
+  componentDidMount() {
+    const { createdReportControls: { uuid }, location: { search } } = this.props
+    const urlParams = getLocationParams(search)
+    const { report_uuid  } = urlParams
+    if(!uuid && report_uuid) {
+      this.props.createdReportControl({
+        isSaved: !!urlParams && urlParams.saved === 'true',
+        uuid: report_uuid,
+      })
+    }
+  }
+
   render() {
     return (
       <React.Fragment>
         <Template
           {...this.props}
           state={this.state}
-          actions={{ swicthChange: this.swicthChange.bind(this) }}
+          actions={{ switchChange: this.switchChange.bind(this) }}
           themes={this.props.themeContext.colors}
         />
       </React.Fragment>
@@ -324,21 +412,27 @@ const mapStateToProps = createStructuredSelector({
   profile: makeSelectAuthProfile(),
 })
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    {
-      ...reportsActions,
-      ...generatedReportActions,
-    },
-    dispatch
-  )
+const mapDispatchToProps = (dispatch) => {
+  return {
+    push: (url) => dispatch(push(url)),
+    ...bindActionCreators(
+      {
+        ...reportsActions,
+        ...generatedReportActions,
+      },
+      dispatch
+    )
+  }
+}
 
 const withConnect = connect(
   mapStateToProps,
   mapDispatchToProps
 )
 
-export default compose(
+const composedComponent = compose(
   withConnect,
   withTheme
-)(Navbar)
+)(Navbar) 
+
+export default withRouter(composedComponent)
