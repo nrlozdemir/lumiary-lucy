@@ -90,7 +90,7 @@ class Scrubber extends React.Component {
         bottom: 2,
         left: 0,
         borderRadius: 16,
-        background: colors.trackBackgroundColor,
+        background: colors.dotTrackBackgroundColor,
         margin: '6px 0px 6px 0px',
         height: 4
       }
@@ -159,6 +159,7 @@ class Scrubber extends React.Component {
         borderRadius: 16,
         zIndex: 4,
         top: -7,
+        boxShadow: `0 2px 6px 0 ${colors.dotThumbShadowColor}`,
         position: 'absolute'
       }
 
