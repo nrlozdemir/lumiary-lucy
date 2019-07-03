@@ -305,7 +305,7 @@ class LibraryDetailShotByShot extends React.Component {
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
                           {peopleIsEmpty === false && !peopleLoading && (
-                            <Scrubber vertical width={560} height={368}>
+                            <Scrubber vertical width={'100%'} height={368}>
                               {peopleValues.map((info, i) => {
                                 const { ages, gender, uuid } = info
                                 const imgUrl = `${mediaUrl}/lumiere/${
@@ -344,7 +344,7 @@ class LibraryDetailShotByShot extends React.Component {
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
                           {objectIsEmpty === false && !shotInfoLoading && (
-                            <Scrubber vertical width={560} height={368}>
+                            <Scrubber vertical width={'100%'} height={368}>
                               {shotInfoData.shot.labels.map((info, i) => {
                                 const imgUrl = `${mediaUrl}/lumiere/${
                                   this.props.authProfile.brand.uuid
