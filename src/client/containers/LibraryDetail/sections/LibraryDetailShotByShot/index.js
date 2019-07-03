@@ -46,7 +46,7 @@ class LibraryDetailShotByShot extends React.Component {
         sliderImageLeft: calculateLeft,
       },
       () => {
-        this.sliderImages.style.left = calculateLeft
+        //this.sliderImages.style.left = calculateLeft
         const ref = this.sliderThumbs.children[0].children[0].childNodes[0]
 
         for (let k = 0; k < ref.childNodes.length; k++) {
@@ -218,6 +218,7 @@ class LibraryDetailShotByShot extends React.Component {
                           style={{
                             width:
                               Object.values(shots).length * shotSliderWidth,
+                            left: this.state.sliderImageLeft
                           }}
                         >
                           {shots &&
@@ -282,6 +283,9 @@ class LibraryDetailShotByShot extends React.Component {
                             scrubberWidth={16}
                             scrubberHeight={16}
                             scrubberDotClassname={style.dotScrubber}
+                            selectedShot={}
+                            shotCurrentClassname={style.sliderImageCurrent}
+                            shotActiveClassname={style.sliderImageActive}
                           />
                         )}
                       </div>
