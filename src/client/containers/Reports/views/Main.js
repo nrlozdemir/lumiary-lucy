@@ -47,7 +47,8 @@ class Reports extends Component {
         },
         {
           key: 'predefined-reports',
-          icon: `${staticUrl}lucy-assets/predefined-reports-icon.png`,
+					icon: `${staticUrl}lucy-assets/predefined-reports-icon.png`,
+					iconLight: `${staticUrl}lucy-assets/light-predefined-reports-icon.png`,
           title: 'Predefined Reports',
           text: 'Access unique, relevant and invaluable customized data',
         },
@@ -133,7 +134,7 @@ class Reports extends Component {
     return {
       onClick: e => {
         const {
-          original: { 
+          original: {
             date_range: date,
             metric: engagement,
             platform: social,
@@ -285,7 +286,7 @@ class Reports extends Component {
                           Header: null,
                           width: 65,
                           Cell: ({ original: { uuid } }) => (
-                            <div 
+                            <div
                               className={style.deleteWrapper}
                               tabIndex="1"
                               onClick={(e) => e.stopPropagation()}
