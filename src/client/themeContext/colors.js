@@ -143,7 +143,7 @@ const dark = {
   shotByShotSliderPointer: '#ffffff',
   shotByShotSliderImageBorder: '#000',
   shotByShotMaskBackgroundColor: '#21243b',
-  shotByShotMaskBorderColor: '#c6c9d7',
+  shotByShotMaskBorderColor: '#545b79',
   // shot by shot slider values
 
   // percentage bar grap values
@@ -158,8 +158,9 @@ const dark = {
   thumbArrowsColor: '#373f5b',
   thumbBorderColor: '#545b79',
   trackTicksBackgroundColor: '#545b79',
-  dotTrackBackgroundColor: '#ccc',
+  dotTrackBackgroundColor: '#21243b',
   dotThumbBackgroundColor: '#ffffff',
+  dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
 }
 
 const light = {
@@ -307,7 +308,7 @@ const light = {
   shotByShotSliderPointer: '#2fd7c4',
   shotByShotSliderImageBorder: '#000',
   shotByShotMaskBackgroundColor: '#e8ecf0',
-  shotByShotMaskBorderColor: '#545b79',
+  shotByShotMaskBorderColor: '#c6c9d7',
   // shot by shot slider values
 
   // percentage bar grap values
@@ -322,8 +323,9 @@ const light = {
   thumbArrowsColor: '#505050',
   thumbBorderColor: '#c6c9d7',
   trackTicksBackgroundColor: '#c6c9d7',
-  dotTrackBackgroundColor: '#ccc',
-  dotThumbBackgroundColor: '#ffffff',
+  dotTrackBackgroundColor: '#e8ecf0',
+  dotThumbBackgroundColor: '#2fd7c4',
+  dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
 }
 
 const themes = {
