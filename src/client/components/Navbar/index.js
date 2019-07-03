@@ -70,6 +70,30 @@ const Logo = ({ themes }) => (
   </div>
 )
 
+const isActive = (match, location) => {
+  if (!location || !location.pathname) {
+    return false
+  }
+  console.log(match);
+  console.log(location)
+  if(location.pathname === '/'){
+    return true
+  }
+  return false;
+}
+
+export const NavLinkComponent = props => (
+  <NavLink {...props} isActive={(match, location) => {
+    if (props.to === location.pathname) {
+      return true
+    }
+    if (location.pathname === '/' && props.to === '/library') {
+      return true
+    }
+    return false
+  }}/>
+)
+
 const Default = (props) => {
   const { textColor, moduleBackground } = props.themes
   return Object.values(props)
@@ -83,16 +107,19 @@ const Default = (props) => {
         ? -1
         : 0
     )
-    .map((el, i) => (
-      <NavLink
-        key={i}
-        to={el.path}
-        activeClassName={style.activeLink}
-        style={{ color: textColor }}
-      >
-        {el.navigation.title}
-      </NavLink>
-    ))
+    .map((el, i) => {
+
+      return (
+        <NavLinkComponent
+          key={i}
+          to={el.path}
+          activeClassName={style.activeLink}
+          style={{ color: textColor }}
+        >
+          {el.navigation.title}
+        </NavLinkComponent>
+      )
+    })
 }
 
 const SelectedNavLink = (props) => {
@@ -105,7 +132,7 @@ const SelectedNavLink = (props) => {
           <Switch
             id={'saveReport'}
             switchOn={props.swicthControl}
-            controlSwitch={() => props.swicthChange(props.category)}
+            controlSwitch={() => props.switchChange(props.category)}
           />
         </div>
       )}
@@ -195,7 +222,7 @@ const Selector = (props) => {
           load={loadComponent}
           category={category}
           swicthControl={state.swicthControl}
-          swicthChange={actions.swicthChange}
+          switchChange={actions.switchChange}
         />
       ),
     }
@@ -266,7 +293,7 @@ class Navbar extends React.Component {
     }
   }
 
-  swicthChange(category) {
+  switchChange(category) {
     const {
       saveReportRequest,
       loadDeleteReport,
@@ -380,7 +407,7 @@ class Navbar extends React.Component {
         <Template
           {...this.props}
           state={this.state}
-          actions={{ swicthChange: this.swicthChange.bind(this) }}
+          actions={{ switchChange: this.switchChange.bind(this) }}
           themes={this.props.themeContext.colors}
         />
       </React.Fragment>
