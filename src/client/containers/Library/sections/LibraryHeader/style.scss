@@ -15,7 +15,7 @@
   .filterSelect {
     &:first-child {
       outline: none;
-      padding-left: 39px;
+      padding-left: 29px;
       border: 1px solid $color-dusk;
       width: 280px;
       border-radius: 0;
@@ -38,6 +38,7 @@
     > div {
       border-radius: 0;
       z-index: 20;
+      background: transparent !important;
     }
     p {
       border-radius: 0;
@@ -45,5 +46,9 @@
     div {
       border-radius: 0;
     }
+  }
+
+  .filterButton {
+    padding:  11px 17px;
   }
 }
