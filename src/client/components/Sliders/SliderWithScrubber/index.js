@@ -2,6 +2,7 @@ import React from 'react'
 import Scrubber from 'Components/Sliders/Scrubber'
 import { withTheme } from 'ThemeContext/withTheme'
 import { mediaUrl } from 'Utils/globals'
+import classnames from 'classnames'
 
 const secondToTime = (timeInSeconds) => {
   let pad = (num, size) => {
@@ -57,7 +58,8 @@ class SliderWithScrubber extends React.Component {
       scrubberWidth,
       scrubberHeight,
       scrubberDotClassname,
-      isEmpty
+      isEmpty,
+      selectedShot
     } = this.props
 
     /*
@@ -286,7 +288,9 @@ class SliderWithScrubber extends React.Component {
           
           return (<React.Fragment key={`${name}_shots_${i}`}>
             <div 
-              className={customClass.image}
+              className={classnames(customClass.image, {
+                [customClass.imageActive]: i === selectedShot,
+              })}
               onClick={() => { 
                 !!this.props.clickEvent && 
                 this.props.clickEvent(i) 
