@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux'
 import { createStructuredSelector } from 'reselect'
+import classnames from 'classnames'
 import { actions, makeSelectLibrary } from 'Reducers/library'
 import AsyncSearch from 'Components/Form/AsyncSearch'
 import Button from 'Components/Form/Button'
@@ -86,7 +87,7 @@ class LibraryHeader extends React.Component {
         <div>
           <Button
             onClick={() => setSidebarVisible(true)}
-            customClass="float-right font-secondary-first text-bold"
+            customClass={classnames('float-right font-secondary-first text-bold', style.filterButton)}
             buttonText="Filter Videos"
             iconRight="icon-Filter"
           />
