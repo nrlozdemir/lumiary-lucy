@@ -70,18 +70,6 @@ const Logo = ({ themes }) => (
   </div>
 )
 
-const isActive = (match, location) => {
-  if (!location || !location.pathname) {
-    return false
-  }
-  console.log(match);
-  console.log(location)
-  if(location.pathname === '/'){
-    return true
-  }
-  return false;
-}
-
 export const NavLinkComponent = props => (
   <NavLink {...props} isActive={(match, location) => {
     if (props.to === location.pathname) {
