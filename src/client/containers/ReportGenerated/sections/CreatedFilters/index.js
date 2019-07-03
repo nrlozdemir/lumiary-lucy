@@ -27,7 +27,7 @@ const CreatedFilters = ({ report, brands }) => {
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
-        <div className="grid-container col-12 mt-72">
+        <div className="grid-container col-12">
           <div className={style.filtersArea}>
             {filters.map((item, idx) => {
               return (
@@ -38,7 +38,7 @@ const CreatedFilters = ({ report, brands }) => {
                     backgroundColor: colors.moduleBackground,
                     color: colors.textColor,
                     boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
-                    border: ` 1px solid ${colors.moduleBorder}`,
+                    border: `1px solid ${colors.moduleBorder}`,
                   }}
                 >
                   <p>{item.name}</p>
