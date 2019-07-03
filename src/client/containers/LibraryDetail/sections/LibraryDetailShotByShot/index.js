@@ -44,9 +44,11 @@ class LibraryDetailShotByShot extends React.Component {
     this.setState(
       {
         sliderImageLeft: calculateLeft,
+        sliderImageSelected: i
       },
       () => {
         //this.sliderImages.style.left = calculateLeft
+        /*
         const ref = this.sliderThumbs.children[0].children[0].childNodes[0]
 
         for (let k = 0; k < ref.childNodes.length; k++) {
@@ -55,6 +57,7 @@ class LibraryDetailShotByShot extends React.Component {
         }
         ref.childNodes[i].classList.remove(style.sliderImageCurrent)
         ref.childNodes[i].classList.add(style.sliderImageActive)
+        */
       }
     )
     //const { backgroundImage } = ref.childNodes[i].children[0].children[0].style
@@ -271,6 +274,7 @@ class LibraryDetailShotByShot extends React.Component {
                               ),
                               imageHover: style.sliderHover,
                               originalImage: style.sliderOriginalImage,
+                              imageActive: style.sliderImageActive,
                             }}
                             customStyle={{
                               originalImageBorderColor:
@@ -283,9 +287,7 @@ class LibraryDetailShotByShot extends React.Component {
                             scrubberWidth={16}
                             scrubberHeight={16}
                             scrubberDotClassname={style.dotScrubber}
-                            selectedShot={}
-                            shotCurrentClassname={style.sliderImageCurrent}
-                            shotActiveClassname={style.sliderImageActive}
+                            selectedShot={this.state.sliderImageSelected}
                           />
                         )}
                       </div>
