@@ -57,6 +57,10 @@ cat > /tmp/containerdef.json <<JSON
     "privileged": true,
     "environment": [
       {
+        "name": "API_ROOT",
+        "value": "${API_URL}"
+      },
+      {
         "name": "API_URL",
         "value": "${API_URL}"
       },
