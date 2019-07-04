@@ -29,6 +29,7 @@ class LibraryDetailShotByShot extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
+      sliderImageLeft: 0,
       selectedImage: null,
     }
 
@@ -42,23 +43,9 @@ class LibraryDetailShotByShot extends React.Component {
   sliderAction(i) {
     const calculateLeft = i * shotSliderWidth * -1
     this.setState(
-      {
-        sliderImageLeft: calculateLeft,
-      },
-      () => {
-        this.sliderImages.style.left = calculateLeft
-        const ref = this.sliderThumbs.children[0].children[0].childNodes[0]
-
-        for (let k = 0; k < ref.childNodes.length; k++) {
-          ref.childNodes[k].classList.remove(style.sliderImageActive)
-          ref.childNodes[k].classList.add(style.sliderImageCurrent)
-        }
-        ref.childNodes[i].classList.remove(style.sliderImageCurrent)
-        ref.childNodes[i].classList.add(style.sliderImageActive)
-      }
-    )
-    //const { backgroundImage } = ref.childNodes[i].children[0].children[0].style
-    //const currentImage = backgroundImage.replace(/\(|\)|url|\"/gi, '')
+    {
+      sliderImageLeft: calculateLeft
+    })
   }
 
   shotClick(i) {
@@ -218,6 +205,7 @@ class LibraryDetailShotByShot extends React.Component {
                           style={{
                             width:
                               Object.values(shots).length * shotSliderWidth,
+                            left: this.state.sliderImageLeft
                           }}
                         >
                           {shots &&
@@ -270,6 +258,7 @@ class LibraryDetailShotByShot extends React.Component {
                               ),
                               imageHover: style.sliderHover,
                               originalImage: style.sliderOriginalImage,
+                              imageActive: style.sliderImageActive,
                             }}
                             customStyle={{
                               originalImageBorderColor:
@@ -282,6 +271,7 @@ class LibraryDetailShotByShot extends React.Component {
                             scrubberWidth={16}
                             scrubberHeight={16}
                             scrubberDotClassname={style.dotScrubber}
+                            selectedShot={this.state.selectedImage}
                           />
                         )}
                       </div>
@@ -418,8 +408,8 @@ class LibraryDetailShotByShot extends React.Component {
                     <div
                       className={style.shotByShotMask}
                       style={{
-                        borderColor:
-                          colors.themeType === 'light' ? '#ccc' : '#545b79',
+                        backgroundColor: colors.shotByShotMaskBackgroundColor,
+                        borderColor: colors.shotByShotMaskBorderColor,
                       }}
                     />
                     <SliderWithScrubber

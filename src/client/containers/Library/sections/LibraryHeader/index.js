@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { bindActionCreators, compose } from 'redux'
 import { createStructuredSelector } from 'reselect'
+import classnames from 'classnames'
 import { actions, makeSelectLibrary } from 'Reducers/library'
 import AsyncSearch from 'Components/Form/AsyncSearch'
 import Button from 'Components/Form/Button'
@@ -63,47 +64,36 @@ class LibraryHeader extends React.Component {
     } = this.props
     const { AsyncSearchValue } = this.state
     return (
-      <ThemeContext.Consumer>
-        {({ themeContext: { colors } }) => (
-          <div className={style.headerContainer}>
-            <style key={Math.random()}>
-              {`
-              .${style.filterSelect}:first-child{
-                border: 1px solid blue;
-              }
-            `}
-            </style>
-            <div>
-              <AsyncSearch
-                name="libraryFilterInput"
-                loadOptions={this.onLoadOptions.bind(this)}
-                placeholder="Search a video…"
-                customClass={style.filterSelect}
-                value={AsyncSearchValue}
-                onChange={(option) =>
-                  this.onChangeSearch(option, changeFilter, filters)
-                }
-              />
-            </div>
-            <div>
-              <h1
-                className="alpha text-center font-primary text-bold"
-                style={{ color: colors.labelColor }}
-              >
-                Library
-        </h1>
-            </div>
-            <div>
-              <Button
-                onClick={() => setSidebarVisible(true)}
-                customClass="float-right font-secondary-first text-bold"
-                buttonText="Filter Videos"
-                iconRight="icon-Filter"
-              />
-            </div>
-          </div>
-        )}
-      </ThemeContext.Consumer>
+      <div className={style.headerContainer}>
+        <div>
+          <AsyncSearch
+            name="libraryFilterInput"
+            loadOptions={this.onLoadOptions.bind(this)}
+            placeholder="Search a video…"
+            customClass={style.filterSelect}
+            value={AsyncSearchValue}
+            onChange={(option) =>
+              this.onChangeSearch(option, changeFilter, filters)
+            }
+          />
+        </div>
+        <div>
+          <h1
+            className="alpha text-center font-primary text-bold"
+            style={{ color: colors.labelColor }}
+          >
+            Library
+          </h1>
+        </div>
+        <div>
+          <Button
+            onClick={() => setSidebarVisible(true)}
+            customClass={classnames('float-right font-secondary-first text-bold', style.filterButton)}
+            buttonText="Filter Videos"
+            iconRight="icon-Filter"
+          />
+        </div>
+      </div>
     )
   }
 }

@@ -1,9 +1,14 @@
+import jwtDecode from 'jwt-decode'
 import { createSelector } from 'reselect'
 
 export const types = {
   LOGIN_REQUEST: 'AUTH/LOGIN_REQUEST',
   LOGIN_SUCCESS: 'AUTH/LOGIN_SUCCESS',
   LOGIN_ERROR: 'AUTH/LOGIN_ERROR',
+
+  LOGIN_SSO_REQUEST: 'AUTH/LOGIN_SSO:REQUEST',
+  LOGIN_SSO_SUCCESS: 'AUTH/LOGIN_SSO:SUCCESS',
+  LOGIN_SSO_ERROR: 'AUTH/LOGIN_SSO:ERROR',
 }
 
 export const actions = {
@@ -11,6 +16,9 @@ export const actions = {
     type: types.LOGIN_REQUEST,
     email,
     password,
+  }),
+  loginSsoRequest: data => ({
+     type: types.LOGIN_SSO_REQUEST, payload: data
   }),
 }
 
@@ -58,16 +66,18 @@ const reducer = (state = initialState, action) => {
         successful: false,
         loginError: null,
       }
+
     case types.LOGIN_SUCCESS:
+    case types.LOGIN_SSO_SUCCESS:
       const { token, refresh, profile } = action.payload
-      // const expiry = parseInt(jwtDecode(token).exp + '000')
+      const expiry = parseInt(jwtDecode(token).exp + '000')
 
       return {
         ...state,
         profile,
-        //token: token,
-        //refresh: refresh,
-        //expiry: expiry,
+        token: token,
+        refresh: refresh,
+        expiry: expiry,
         requesting: false,
         successful: true,
         loggedIn: true,

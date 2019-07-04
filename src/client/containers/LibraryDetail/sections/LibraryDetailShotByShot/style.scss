@@ -250,7 +250,8 @@
 
 .sliderContainer {
   position: relative;
-  width: 1120px;
+  width: 100%;
+  max-width: 1120px;
   margin: 0px auto 40px;
   z-index: 2;
   flex-wrap: nowrap;
@@ -262,11 +263,12 @@
     position: absolute;
     left: 0px;
     top: 0px;
-    width: 1118px;
+    width: 100%;
+    max-width: 1118px;
     height: 170px;
-    border: 1px solid #ccc;
+    border-width: 1px;
+    border-style: solid;
     z-index: 0;
-    background: rgb(232, 236, 240);
   }
 
   // height: 215px;
@@ -387,7 +389,13 @@
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 360px;
+  height: 328px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
+  padding-top: 48px;
+  padding-bottom: 48px;
 
   .tabPanelItem {
     // background-color: $color-dark-five;
