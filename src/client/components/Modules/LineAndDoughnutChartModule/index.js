@@ -140,11 +140,7 @@ const LineAndDoughnutChartModule = ({
           </div>
         </div>
         <div className="col-12-no-gutters">
-          <Scrubber 
-            horizontal 
-            arrows 
-            isEmpty={isEmpty}
-          >
+          <Scrubber horizontal arrows isEmpty={isEmpty}>
             <div className={style.percentageGraphContainer}>
               {percentageData &&
                 percentageData.map((chart, idx) => (
