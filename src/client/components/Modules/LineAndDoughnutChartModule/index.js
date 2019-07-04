@@ -91,7 +91,7 @@ const LineAndDoughnutChartModule = ({
                 ...lineChartOptions,
                 customCallbackFunc: customCallbackFunc,
                 chartArea: {
-                  backgroundColor: colors.chartBackground,
+                  backgroundColor: colors.lineChartBackgroundColor,
                 },
                 scales: {
                   xAxes: [
@@ -103,7 +103,8 @@ const LineAndDoughnutChartModule = ({
                       },
                       gridLines: {
                         ...lineChartOptions.scales.xAxes[0].gridLines,
-                        color: colors.chartStadiumBarBorder,
+                        color: colors.lineChartGridColor,
+                        zeroLineColor: colors.lineChartGridColor,
                       },
                     },
                   ],
@@ -116,8 +117,8 @@ const LineAndDoughnutChartModule = ({
                       },
                       gridLines: {
                         ...lineChartOptions.scales.yAxes[0].gridLines,
-                        color: colors.chartStadiumBarBorder,
-                        zeroLineColor: colors.chartStadiumBarBorder,
+                        color: colors.lineChartGridColor,
+                        zeroLineColor: colors.lineChartGridColor,
                       },
                     },
                   ],
