@@ -91,6 +91,7 @@ const Select = (props) => {
     customClass,
     isActive,
     isReportDropdown,
+    inModuleFilter,
   } = props
   const themes = props.themeContext.colors
 
@@ -143,7 +144,7 @@ const Select = (props) => {
         '&:hover': {
           borderColor: 'none',
         },
-        width: 64 + maxLenght * 8.5,
+        ...(inModuleFilter ? { width: 64 + maxLenght * 7.5 } : {}),
         color: isFocused
           ? themes.inputActiveColor
           : hasValue
