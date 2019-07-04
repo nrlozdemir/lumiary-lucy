@@ -84,13 +84,15 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
   try {
     const {
       brand: { value: brand },
-      social: { value: social },
-      engagement: { value: engagement },
+      engagamentByPlatform: { value: engagamentByPlatform },
       date: { value: date },
       title,
     } = params
 
-    const saved = params && params.saved && params.saved.value ? params.saved.value : false
+    const [social, engagement] = engagamentByPlatform.split('|')
+
+    const saved =
+      params && params.saved && params.saved.value ? params.saved.value : false
     const report_uuid = params && params.report_uuid
 
     const parameters = {
@@ -100,14 +102,16 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
       engagement,
       date,
       title,
-      saved
+      saved,
     }
 
     yield put(actions.brandInsightFormSubmitSuccess(parameters))
     if (!!onlySave) {
       yield put(
         push(
-          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${saved}${report_uuid ? `&report_uuid=${report_uuid}` :''}`
+          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${saved}${
+            report_uuid ? `&report_uuid=${report_uuid}` : ''
+          }`
         )
       )
     }
@@ -316,10 +320,10 @@ function* getPerformanceComparisonData({
       platform: 'all',
     }
 
-    if(property === 'format') {
+    if (property === 'format') {
       options.limit = 4
     }
-    
+
     const payload = yield call(getDataFromApi, parameters, '/report')
 
     if (!!payload && !!payload.data) {
