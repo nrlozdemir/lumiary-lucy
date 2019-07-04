@@ -6,6 +6,7 @@ import style from './style.scss'
 import Module from 'Components/Module'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import { isEmpty } from 'lodash'
+import { replaceBoldString } from 'Utils/text'
 
 const SliderModule = (props) => {
   const {
@@ -17,6 +18,7 @@ const SliderModule = (props) => {
     filters,
     action,
     loading,
+    infoText,
   } = props
 
   const videoOptions =
@@ -36,6 +38,7 @@ const SliderModule = (props) => {
           action={action}
           isEmpty={isEmpty(data) && !loading}
           customEmptyClasses={style.sliderEmpty}
+          infoText={infoText}
         >
           <React.Fragment>
             <div className="col-12-no-gutters">
@@ -85,9 +88,12 @@ const SliderModule = (props) => {
                               />
                             </div>
                           ))}
-                          <p className={style.cardDescription}>
-                            {card.description}{' '}
-                          </p>
+                          <p
+                            className={style.cardDescription}
+                            dangerouslySetInnerHTML={{
+                              __html: replaceBoldString(card.description),
+                            }}
+                          />
                         </React.Fragment>
                       ) : (
                         <div className={style.cardEmpty}>No Data Available</div>

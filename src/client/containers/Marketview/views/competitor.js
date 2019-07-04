@@ -38,14 +38,9 @@ export class Competitor extends React.Component {
             title="Top Videos Over Time By Competitor"
             filters={[
               {
-                type: 'property',
-                selectKey: 'property',
-                placeHolder: 'property',
-              },
-              {
-                type: 'metric',
-                selectKey: 'engagement',
-                placeHolder: 'engagement',
+                type: 'propertyEngagement',
+                selectKey: 'propertyEngagement',
+                placeHolder: 'Engagement by property',
               },
               {
                 type: 'dateRange',
@@ -80,6 +75,7 @@ export class Competitor extends React.Component {
           <TopSimilarProperties
             moduleKey="MarketView/Competitor/TopSimilarProperties"
             title="Similar Properties Of Top Videos"
+            infoText={`This module offers insights on top 3 similar properties found within top performing industry videos. `}
             filters={[
               {
                 type: 'dateRange',

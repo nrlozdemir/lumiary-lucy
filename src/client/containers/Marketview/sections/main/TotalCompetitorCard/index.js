@@ -28,8 +28,7 @@ class TotalCompetitorCard extends React.Component {
 
     const max = (hasDatasets && getMinMaxFromDatasets(data.datasets)) || 0
 
-    const min =
-      (hasDatasets && getMinMaxFromDatasets(data.datasets, max, 'min')) || 0
+    const min = 0
 
     const stepSize = !!max && ~~(max / 4)
 

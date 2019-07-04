@@ -35,8 +35,8 @@ class EngagementByProperty extends Component {
         loading,
         error,
       },
+      infoText,
     } = this.props
-
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
 
     const hasNoData =
@@ -54,13 +54,14 @@ class EngagementByProperty extends Component {
         action={this.callBack}
         filters={[
           {
-            type: 'dateRange',
+            type: 'property',
             selectKey: 'PFS-wxcvs',
-            placeHolder: 'Date',
+            placeHolder: 'Property',
           },
         ]}
         isEmpty={hasNoData}
         loading={loading}
+        infoText={infoText}
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>

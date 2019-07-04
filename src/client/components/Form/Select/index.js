@@ -90,8 +90,8 @@ const Select = (props) => {
     multiple,
     customClass,
     isActive,
+    isReportDropdown,
   } = props
-
   const themes = props.themeContext.colors
 
   let args = props.input ? props.input : props
@@ -106,7 +106,10 @@ const Select = (props) => {
   })
 
   const colourStyles = {
-    control: (styles, { data, isDisabled, isFocused, isSelected }) => {
+    control: (
+      styles,
+      { data, isDisabled, isFocused, isSelected, hasValue }
+    ) => {
       return {
         ...styles,
         background: isActive
@@ -123,6 +126,13 @@ const Select = (props) => {
         '&:hover': {
           borderColor: 'none',
         },
+        color: isFocused
+          ? themes.inputActiveColor
+          : hasValue
+          ? themes.inputActiveColor
+          : isReportDropdown
+          ? themes.moduleBorder
+          : themes.inputActiveColor,
       }
     },
     input: (styles, { data, isDisabled, isFocused, isSelected }) => {
@@ -132,6 +142,8 @@ const Select = (props) => {
           ? themes.inputColor
           : isFocused
           ? themes.inputActiveColor
+          : isReportDropdown
+          ? themes.moduleBorder
           : themes.inputColor,
       }
     },
@@ -162,6 +174,8 @@ const Select = (props) => {
           ? themes.inputColor
           : isSelected
           ? themes.inputColor
+          : isReportDropdown
+          ? themes.moduleBorder
           : themes.inputActiveColor,
         whiteSpace: 'nowrap',
         position: 'unset',

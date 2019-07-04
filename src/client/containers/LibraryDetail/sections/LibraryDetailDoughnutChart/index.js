@@ -16,7 +16,25 @@ import Info from './Info'
 
 class LibraryDetailDoughnutChart extends React.Component {
   shouldComponentUpdate(nextProps) {
-    return !isEqual(this.props, nextProps)
+    const {
+      showInfo,
+      infoData,
+      doughnutData: { data, loading },
+    } = this.props
+
+    const {
+      showInfo: nextShowInfo,
+      infoData: nextInfoData,
+      doughnutData: { data: nextData, loading: nextLoading },
+    } = nextProps
+
+
+    return (
+      !isEqual(JSON.stringify(data), JSON.stringify(nextData)) ||
+      !isEqual(JSON.stringify(infoData), JSON.stringify(nextInfoData)) ||
+      loading !== nextLoading ||
+      (!!showInfo || !!nextShowInfo) 
+    )
   }
 
   render() {
@@ -41,7 +59,8 @@ class LibraryDetailDoughnutChart extends React.Component {
             }}
           >
             <div className={style.radialChartsContainer}>
-              {!!doughnutData && !doughnutLoading &&
+              {!!doughnutData &&
+                !doughnutLoading &&
                 doughnutData.map(
                   (
                     {
@@ -49,7 +68,6 @@ class LibraryDetailDoughnutChart extends React.Component {
                       title,
                       doughnutChartValues,
                       max: { label, percentage },
-                      data,
                     },
                     i
                   ) => {
@@ -65,12 +83,14 @@ class LibraryDetailDoughnutChart extends React.Component {
                           <DoughnutCard
                             chartData={doughnutChartValues}
                             maxPercentage={percentage}
-                            data={data}
                             {...cardProps}
                           />
                         )}
                         {!!sectionToShow && sectionToShow === title && (
-                          <Info {...cardProps} loading={doughnutInfoLoading} />
+                          <Info
+                            {...cardProps}
+                            loading={doughnutInfoLoading}
+                          />
                         )}
                       </React.Fragment>
                     )
@@ -95,13 +115,9 @@ const mapStateToProps = createStructuredSelector({
   infoData: makeSelectInfoData(),
 })
 
-function mapDispatchToProps(dispatch) {
-  return {}
-}
-
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )
 
 export default compose(withConnect)(LibraryDetailDoughnutChart)

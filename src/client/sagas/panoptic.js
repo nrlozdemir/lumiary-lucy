@@ -34,6 +34,7 @@ function* getVideoReleasesData({ data }) {
       platform,
       property: 'format',
       daterange: dateRange,
+      limit: 4,
     }
 
     const response = yield call(
@@ -107,6 +108,10 @@ function* getFilteringSectionData({ data }) {
       brands: [brand.uuid],
     }
 
+    if (property === 'format') {
+      options.limit = 4
+    }
+
     const doughnutData = yield call(getDataFromApi, options)
 
     const dateBucket = getDateBucketFromRange(dateRange)
@@ -172,15 +177,20 @@ function* getPacingCardData({ data }) {
       property: ['pacing'],
       dateBucket: 'none',
       display: 'percentage',
-      url: '/report',
       brands: [brand.uuid],
     }
 
-    const stadiumData = yield call(getDataFromApi, options)
-    const horizontalStackedBarData = yield call(getDataFromApi, {
-      ...options,
-      proportionOf: 'format',
-    })
+    const stadiumData = yield call(getDataFromApi, options, '/report')
+
+    const horizontalStackedBarData = yield call(
+      getDataFromApi,
+      {
+        ...options,
+        proportionOf: 'format',
+        limit: 4,
+      },
+      '/report'
+    )
 
     if (
       !!stadiumData.data &&
@@ -221,7 +231,7 @@ function* getCompareSharesData({ data: { dateRange } }) {
     const parameters = {
       url: '/report',
       dateRange,
-      metric: 'shares',
+      metric: 'views',
       property: ['color'],
       dateBucket: 'none',
       brands: [brand.uuid],
@@ -301,15 +311,15 @@ function* getTopPerformingFormatData({ data = {} }) {
       dateBucket: 'none',
       display: 'percentage',
       property: ['format'],
-      url: '/report',
       brands: [brand.uuid],
+      //limit: 4,
     }
 
     const dateBucketedOptions = { ...options, dateBucket: 'dayOfWeek' }
 
     const [dataWithDateBuckets, dataWithoutDateBuckets] = yield all([
-      call(getDataFromApi, dateBucketedOptions),
-      call(getDataFromApi, options),
+      call(getDataFromApi, dateBucketedOptions, '/report'),
+      call(getDataFromApi, options, '/report'),
     ])
 
     if (!!dataWithDateBuckets.data && !!dataWithoutDateBuckets.data) {

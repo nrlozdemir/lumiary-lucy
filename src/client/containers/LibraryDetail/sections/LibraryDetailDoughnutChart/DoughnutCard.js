@@ -17,7 +17,6 @@ class DoughnutCard extends React.Component {
       maxPercentage,
       toggleInfoSection,
       chartData,
-      data,
       videoId,
     } = this.props
 

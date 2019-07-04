@@ -250,22 +250,25 @@
 
 .sliderContainer {
   position: relative;
-  width: 1120px;
+  width: 100%;
+  max-width: 1120px;
   margin: 0px auto 40px;
   z-index: 2;
   flex-wrap: nowrap;
   overflow-x: hidden;
   overflow-y: hidden;
+  grid-column: -1/1;
 
-  .shotByShotMask{
+  .shotByShotMask {
     position: absolute;
     left: 0px;
     top: 0px;
-    width: 1118px;
+    width: 100%;
+    max-width: 1118px;
     height: 170px;
-    border: 1px solid #ccc;
+    border-width: 1px;
+    border-style: solid;
     z-index: 0;
-    background: rgb(232, 236, 240);
   }
 
   // height: 215px;
@@ -318,7 +321,8 @@
     // margin-top: 8px;
     cursor: pointer;
 
-    &:hover, &:active {
+    &:hover,
+    &:active {
       opacity: 1;
     }
 
@@ -385,13 +389,19 @@
   overflow: hidden;
   position: relative;
   width: 100%;
-  height: 360px;
+  height: 328px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0px;
+  padding-top: 48px;
+  padding-bottom: 48px;
 
   .tabPanelItem {
     // background-color: $color-dark-five;
     border: 1px solid $color-dusk;
     margin-bottom: 24px;
-    
+
     &:last-child {
       margin-bottom: 0px;
     }
@@ -624,27 +634,27 @@
   }
 }
 
-.tabPanelReset{
+.tabPanelReset {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.imageItem{
+.imageItem {
   width: 238px;
   height: 136px;
 }
 
-.emptyContainer{
-  opacity: 0.25
+.emptyContainer {
+  opacity: 0.25;
 }
 
-.emptyData{
+.emptyData {
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 160px;
+  height: 100%;
   position: absolute;
   top: 0;
   right: 0;
@@ -655,7 +665,7 @@
   font-family: $font-family-ClanOTBold;
 }
 
-.tabsEmptyData{
+.tabsEmptyData {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -671,8 +681,7 @@
   font-family: $font-family-ClanOTBold;
 }
 
-.dotScrubber{
-  
+.dotScrubber {
 }
 
 .sliderImageCurrent {
@@ -680,37 +689,50 @@
   margin-right: 4px;
 }
 
-.sliderImageActive{
+.sliderImageActive {
   opacity: 1;
   margin-right: 4px;
 }
 
-.shotSliderWrapper{
+.shotSliderWrapper {
   width: 504px;
   height: 278px;
   overflow: hidden;
   position: relative;
 }
 
-.shotSliderContainer{
+.shotSliderContainer {
   height: 278px;
   width: auto;
   position: absolute;
-  left:0px;
-  top:0px;
+  left: 0px;
+  top: 0px;
   background-color: #000;
   display: flex;
   transition: transform 500ms ease-in-out;
 }
 
-.shotSliderImage{
+.shotSliderImage {
   width: 504px;
   height: 278px;
   text-align: center;
 }
 
-.shotSliderImage img{
+.shotSliderImage img {
   max-width: 504px;
   height: 278px;
   max-height: 278px;
+}
+
+.shotSliderWrapperContainer {
+  padding: 48px 48px 0;
+}
+
+.shotByShotGrid {
+  display: grid;
+  grid-template-columns: 592px 1fr;
+  width: calc(100% - 80px);
+  margin: 72px auto;
+  max-width: 1200px;
+  justify-content: center;
 }

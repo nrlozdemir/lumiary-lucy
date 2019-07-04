@@ -10,6 +10,7 @@ class TopVideosCard extends React.Component {
   render() {
     const {
       data: { data, loading },
+      infoText,
     } = this.props
 
     return (
@@ -18,8 +19,9 @@ class TopVideosCard extends React.Component {
         chartData={data}
         height={150}
         moduleKey="Reports/TopVideosCardModule"
-        title="Top Videos Over Time By Competitor"
+        title="Top Videos Over Time By All Platforms"
         action={this.callBack}
+        infoText={infoText}
         filters={[
           {
             type: 'property',

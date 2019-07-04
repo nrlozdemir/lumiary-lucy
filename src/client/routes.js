@@ -164,6 +164,11 @@ const routes = [
     },
   },
   {
+    path: '/sso',
+    exact: true,
+    component: 'SSO'
+  },
+  {
     path: '*',
     component: 'NotFound',
   },

@@ -54,6 +54,7 @@ export class Module extends React.Component {
       containerClass,
       loading,
       customEmptyClasses,
+      infoText,
     } = this.props
 
     const { infoShow } = this.state
@@ -90,6 +91,7 @@ export class Module extends React.Component {
               <div className={style.moduleContainerHeader}>
                 <HeaderModule
                   {...this.props}
+                  infoText={infoText}
                   changeInfoStatus={this.changeInfoStatus}
                   infoShow={infoShow}
                   themes={colors}

@@ -21,6 +21,7 @@ const LineAndDoughnutChartModule = ({
   percentageData,
   customCallbackFunc,
   themeContext: { colors },
+  infoText,
 }) => {
   const percentageCol = cx(style.percentageCol)
 
@@ -75,6 +76,7 @@ const LineAndDoughnutChartModule = ({
       filters={filters}
       isEmpty={isEmpty}
       loading={loading}
+      infoText={infoText}
     >
       <div className="grid-collapse">
         <div className="col-12-no-gutters">
@@ -137,7 +139,11 @@ const LineAndDoughnutChartModule = ({
           </div>
         </div>
         <div className="col-12-no-gutters">
-          <Scrubber horizontal arrows>
+          <Scrubber 
+            horizontal 
+            arrows 
+            isEmpty={isEmpty}
+          >
             <div className={style.percentageGraphContainer}>
               {percentageData &&
                 percentageData.map((chart, idx) => (

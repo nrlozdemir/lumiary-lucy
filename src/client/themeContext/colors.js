@@ -3,6 +3,7 @@ const dark = {
   themeType: 'dark',
   bodyBackground: '#21243B',
   moduleBackground: '#373f5b',
+  moduleBackgroundHover: '#545b79',
   moduleShadow: 'rgba(0, 0, 0, 0.5)',
   moduleBorder: '#545b79',
   duskBackground: '#545b79',
@@ -57,7 +58,7 @@ const dark = {
   videoCardColor: '#ffffff',
   videoCardShadow: 'rgba(0, 0, 0, 0.5)',
   videoBorder: '#545b79',
-  videoRightPercentageBackground: 'rgb(33, 36, 59, 0.4)',
+  videoRightPercentageBackground: 'rgb(33, 36, 59, 0.8)',
 
   // Sidebar
   filterHeader: '#ffffff',
@@ -85,14 +86,15 @@ const dark = {
   // custom selectbox values
 
   // input values
-  inputControlBackground: '#21243B',
+  inputControlBackground: '#373f5b',
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#545b79',
   inputColor: '#545B79',
-  inputActiveColor: '#ffffff',
+  inputActiveColor: '#505050',
   inputOptionBackground: '#545B79',
   inputOptionFocusBackground: '#21243B',
   inputOptionSelectedBackground: '#ffffff',
+  inputPlaceholderColor: '#545b79',
   // input values
 
   // table values
@@ -140,11 +142,25 @@ const dark = {
   shotByShotTabBody: '#373f5b',
   shotByShotSliderPointer: '#ffffff',
   shotByShotSliderImageBorder: '#000',
+  shotByShotMaskBackgroundColor: '#21243b',
+  shotByShotMaskBorderColor: '#545b79',
   // shot by shot slider values
 
   // percentage bar grap values
   topValueColor: '#ffffff',
   barChartShadow: '#15192c',
+
+  // scrubber styling
+  trackBackgroundColor: '#21243b',
+  trackShadowColor: '#21243b',
+  trackBorderColor: '#545b79',
+  thumbBackgroundColor: '#ffffff',
+  thumbArrowsColor: '#373f5b',
+  thumbBorderColor: '#545b79',
+  trackTicksBackgroundColor: '#545b79',
+  dotTrackBackgroundColor: '#21243b',
+  dotThumbBackgroundColor: '#ffffff',
+  dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
 }
 
 const light = {
@@ -152,6 +168,7 @@ const light = {
   themeType: 'light',
   bodyBackground: '#e8ecf0',
   moduleBackground: '#f3f6f9',
+  moduleBackgroundHover: '#ffffff',
   moduleShadow: '#bebebe',
   moduleBorder: '#c6c9d7',
   duskBackground: '#ffffff',
@@ -205,7 +222,7 @@ const light = {
   videoCardShadow: '#bebebe',
   videoBorder: '#c6c9d7',
   videoCardIcon: '#505050',
-  videoRightPercentageBackground: 'rgba(255, 255, 255, 0.4)',
+  videoRightPercentageBackground: 'rgba(255, 255, 255, 0.8)',
 
   // Sidebar
   filterHeader: '#e8ecf0',
@@ -233,14 +250,16 @@ const light = {
   // custom selectbox values
 
   // input values
-  inputControlBackground: '#e8ecf0',
+  inputControlBackground: '#f3f6f9',
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#c6c9d7',
-  inputColor: '#c6c9d7',
+  inputColor: '#000',
   inputActiveColor: '#505050',
   inputOptionBackground: '#ffffff',
-  inputOptionFocusBackground: '#e8ecf0',
+  inputOptionFocusBackground: '#f3f6f9',
   inputOptionSelectedBackground: '#505050',
+  inputPlaceholderColor: '#c6c9d7',
+
   // input values
 
   // table values
@@ -288,11 +307,25 @@ const light = {
   shotByShotTabBody: '#f3f6f9',
   shotByShotSliderPointer: '#2fd7c4',
   shotByShotSliderImageBorder: '#000',
+  shotByShotMaskBackgroundColor: '#e8ecf0',
+  shotByShotMaskBorderColor: '#c6c9d7',
   // shot by shot slider values
 
   // percentage bar grap values
   topValueColor: '#000000',
   barChartShadow: '#bebebe',
+
+  // scrubber styling
+  trackBackgroundColor: '#e8ecf0',
+  trackShadowColor: '#e8ecf0',
+  trackBorderColor: '#c6c9d7',
+  thumbBackgroundColor: '#ffffff',
+  thumbArrowsColor: '#505050',
+  thumbBorderColor: '#c6c9d7',
+  trackTicksBackgroundColor: '#c6c9d7',
+  dotTrackBackgroundColor: '#e8ecf0',
+  dotThumbBackgroundColor: '#2fd7c4',
+  dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
 }
 
 const themes = {

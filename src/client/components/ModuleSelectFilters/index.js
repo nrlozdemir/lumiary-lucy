@@ -69,20 +69,27 @@ class ModuleSelectFilters extends React.Component {
 
     const _defaultValue = defaultValue || defaults[type]
 
+    const findEngagementOptions = () => {
+      return options[type].reduce((acc, curr) => {
+        curr.options.find((item) => {
+          if (item.value === _defaultValue) {
+            acc = item
+          }
+        })
+        return acc
+      }, {})
+    }
+
     const value =
       selectedOption && selectedOption.value
         ? selectedOption.value
         : options &&
           options[type] &&
-          [
-            ...(type === 'platformEngagement'
-              ? !!options[type] &&
-                !!options[type].length &&
-                !!options[type][0].options &&
-                !!options[type][0].options.length &&
-                options[type][0].options
-              : options[type]),
-          ].find(({ value: v }) => v === _defaultValue)
+          !!options[type].length &&
+          !!options[type][0].options &&
+          !!options[type][0].options.length
+        ? findEngagementOptions()
+        : options[type].find(({ value: v }) => v === _defaultValue)
 
     const onChangeFunc = onChange ? onChange : this.onChange
 

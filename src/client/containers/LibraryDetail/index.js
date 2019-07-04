@@ -101,9 +101,9 @@ export class LibraryDetail extends React.Component {
             barChartData={barChartData}
             selectedVideoAverage={selectedVideoAverage}
             videoUrl={`${mediaUrl}/lumiere/${userUuid}/${videoId}.mp4`}
-            title={selectedVideo.title}
-            socialIcon={selectedVideo.socialIcon}
-            cvScore={selectedVideo['cvScores.value']}
+            title={selectedVideo && selectedVideo.title}
+            socialIcon={selectedVideo && selectedVideo.socialIcon}
+            cvScore={selectedVideo && selectedVideo['cvScores.value']}
           />
         )}
         <LibraryDetailDoughnutChart videoId={videoId} />
