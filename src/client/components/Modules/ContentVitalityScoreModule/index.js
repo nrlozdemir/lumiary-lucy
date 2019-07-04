@@ -27,7 +27,7 @@ const ContentVitalityScoreModule = ({
   options,
   loading = false,
   chartYAxisMax = 100,
-  infoText
+  infoText,
 }) => {
   const formattedData = Object.keys(data).reduce(
     (accumulator, uuid) => {
@@ -104,14 +104,13 @@ const ContentVitalityScoreModule = ({
             >
               <LineChart
                 chartType="lineStackedArea"
-                width={1040}
+                width={1140}
                 height={291}
                 backgroundColor={colors.chartBackground}
                 dataSet={
                   loading
                     ? {}
                     : {
-                        labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
                         datasets: [
                           {
                             data:
@@ -136,129 +135,132 @@ const ContentVitalityScoreModule = ({
                 options={options}
               />
             </div>
-            {formattedData.brand_1 &&
-              formattedData.brand_2 &&
-              formattedData.average && (
-                <div className="row">
-                  <div className={percentageCol}>
-                    <div
-                      className={style.legend}
-                      style={{
-                        background: colors.labelBackground,
-                        color: colors.labelColor,
-                        boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                      }}
-                    >
-                      {`${formattedData.brand_1.name}`}
-                    </div>
-                    <div
-                      className={style.divider}
-                      style={{
-                        background: colors.moduleBorder,
-                      }}
-                    />
-                    <PercentageBarGraph
-                      key={Math.random()}
-                      percentage={formattedData.brand_1.averageCvScore || 0}
-                      color="blue"
-                      percentageDataSet={{
-                        datasets: [
-                          {
-                            data: formattedData.brand_1.videoPercents,
-                          },
-                        ],
-                      }}
-                      options={{
-                        scales: {
-                          yAxes: [
-                            {
-                              ticks: {
-                                max: chartYAxisMax,
-                              },
-                            },
-                          ],
-                        },
-                      }}
-                    />
-                  </div>
-                  <div className={percentageCol}>
-                    <div
-                      className={style.legend}
-                      style={{
-                        background: colors.labelBackground,
-                        color: colors.labelColor,
-                        boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                      }}
-                    >
-                      {`Average`}
-                    </div>
-                    <div
-                      className={style.divider}
-                      style={{
-                        background: colors.moduleBorder,
-                      }}
-                    />
-                    <PercentageBarGraph
-                      key={Math.random()}
-                      percentage={formattedData.average.averageCvScore || 0}
-                      color="grey"
-                      percentageDataSet={{
-                        datasets: [
-                          {
-                            data: formattedData.average.videoPercents,
-                          },
-                        ],
-                      }}
-                      options={{
-                        scales: {
-                          yAxes: [
-                            {
-                              ticks: {
-                                max: chartYAxisMax,
-                              },
-                            },
-                          ],
-                        },
-                      }}
-                    />
-                  </div>
-                  <div className={percentageCol}>
-                    <div
-                      className={style.legend}
-                      style={{
-                        background: colors.labelBackground,
-                        color: colors.labelColor,
-                        boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                      }}
-                    >
-                      {`${formattedData.brand_2.name}`}
-                    </div>
-                    <PercentageBarGraph
-                      key={Math.random()}
-                      percentage={formattedData.brand_2.averageCvScore || 0}
-                      color="green"
-                      percentageDataSet={{
-                        datasets: [
-                          {
-                            data: formattedData.brand_2.videoPercents,
-                          },
-                        ],
-                      }}
-                      options={{
-                        scales: {
-                          yAxes: [
-                            {
-                              ticks: {
-                                max: chartYAxisMax,
-                              },
-                            },
-                          ],
-                        },
-                      }}
-                    />
-                  </div>
+
+            <div className="row">
+              <div className={percentageCol}>
+                <div
+                  className={style.legend}
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  Male Audience{' '}
                 </div>
-              )}
+                <div
+                  className={style.divider}
+                  style={{
+                    background: colors.moduleBorder,
+                  }}
+                />
+                {formattedData.brand_1 && (
+                  <PercentageBarGraph
+                    key={Math.random()}
+                    percentage={formattedData.brand_1.averageCvScore || 0}
+                    color="blue"
+                    percentageDataSet={{
+                      datasets: [
+                        {
+                          data: formattedData.brand_1.videoPercents,
+                        },
+                      ],
+                    }}
+                    options={{
+                      scales: {
+                        yAxes: [
+                          {
+                            ticks: {
+                              max: chartYAxisMax,
+                            },
+                          },
+                        ],
+                      },
+                    }}
+                  />
+                )}
+              </div>
+              <div className={percentageCol}>
+                <div
+                  className={style.legend}
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  Percent Difference
+                </div>
+                <div
+                  className={style.divider}
+                  style={{
+                    background: colors.moduleBorder,
+                  }}
+                />
+                {formattedData.brand_1 && (
+                  <PercentageBarGraph
+                    key={Math.random()}
+                    percentage={formattedData.average.averageCvScore || 0}
+                    color="grey"
+                    percentageDataSet={{
+                      datasets: [
+                        {
+                          data: formattedData.average.videoPercents,
+                        },
+                      ],
+                    }}
+                    options={{
+                      scales: {
+                        yAxes: [
+                          {
+                            ticks: {
+                              max: chartYAxisMax,
+                            },
+                          },
+                        ],
+                      },
+                    }}
+                  />
+                )}
+              </div>
+              <div className={percentageCol}>
+                <div
+                  className={style.legend}
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  Female Audience{' '}
+                </div>
+                {formattedData.brand_1 && (
+                  <PercentageBarGraph
+                    key={Math.random()}
+                    percentage={formattedData.brand_2.averageCvScore || 0}
+                    color="green"
+                    percentageDataSet={{
+                      datasets: [
+                        {
+                          data: formattedData.brand_2.videoPercents,
+                        },
+                      ],
+                    }}
+                    options={{
+                      scales: {
+                        yAxes: [
+                          {
+                            ticks: {
+                              max: chartYAxisMax,
+                            },
+                          },
+                        ],
+                      },
+                    }}
+                  />
+                )}
+              </div>
+            </div>
           </div>
         </Module>
       )}
