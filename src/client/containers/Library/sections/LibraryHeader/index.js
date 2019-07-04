@@ -64,36 +64,47 @@ class LibraryHeader extends React.Component {
     } = this.props
     const { AsyncSearchValue } = this.state
     return (
-      <div className={style.headerContainer}>
-        <div>
-          <AsyncSearch
-            name="libraryFilterInput"
-            loadOptions={this.onLoadOptions.bind(this)}
-            placeholder="Search a video…"
-            customClass={style.filterSelect}
-            value={AsyncSearchValue}
-            onChange={(option) =>
-              this.onChangeSearch(option, changeFilter, filters)
-            }
-          />
-        </div>
-        <div>
-          <h1
-            className="alpha text-center font-primary text-bold"
-            style={{ color: colors.labelColor }}
-          >
-            Library
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <div className={style.headerContainer}>
+            <style key={Math.random()}>
+              {`
+              .${style.filterSelect}{
+                border: 1px solid ${colors.inputControlSelectedBorder};
+              }
+            `}
+            </style>
+            <div>
+              <AsyncSearch
+                name="libraryFilterInput"
+                loadOptions={this.onLoadOptions.bind(this)}
+                placeholder="Search a video…"
+                customClass={style.filterSelect}
+                value={AsyncSearchValue}
+                onChange={(option) =>
+                  this.onChangeSearch(option, changeFilter, filters)
+                }
+              />
+            </div>
+            <div>
+              <h1
+                className="alpha text-center font-primary text-bold"
+                style={{ color: colors.labelColor }}
+              >
+                Library
           </h1>
-        </div>
-        <div>
-          <Button
-            onClick={() => setSidebarVisible(true)}
-            customClass={classnames('float-right font-secondary-first text-bold', style.filterButton)}
-            buttonText="Filter Videos"
-            iconRight="icon-Filter"
-          />
-        </div>
-      </div>
+            </div>
+            <div>
+              <Button
+                onClick={() => setSidebarVisible(true)}
+                customClass={classnames('float-right font-secondary-first text-bold', style.filterButton)}
+                buttonText="Filter Videos"
+                iconRight="icon-Filter"
+              />
+            </div>
+          </div>
+        )}
+      </ThemeContext.Consumer>
     )
   }
 }

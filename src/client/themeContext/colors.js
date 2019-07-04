@@ -90,7 +90,7 @@ const dark = {
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#545b79',
   inputColor: '#545B79',
-  inputActiveColor: '#505050',
+  inputActiveColor: '#fff',
   inputOptionBackground: '#545B79',
   inputOptionFocusBackground: '#21243B',
   inputOptionSelectedBackground: '#ffffff',

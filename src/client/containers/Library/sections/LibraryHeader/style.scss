@@ -8,7 +8,7 @@
     &:last-child {
       justify-content: flex-end;
     }
-    &:nth-child(2) {
+    &:nth-of-type(2) {
       justify-content: center;
     }
   }
@@ -16,7 +16,6 @@
     &:first-child {
       outline: none;
       padding-left: 29px;
-      border: 1px solid $color-dusk;
       width: 280px;
       border-radius: 0;
       input::placeholder {
