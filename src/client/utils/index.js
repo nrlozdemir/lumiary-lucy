@@ -50,14 +50,14 @@ const getLabelWithSuffix = (label, property) => {
 
 const splitCamelCaseToString = (s) => ucfirst(s.split(/(?=[A-Z])/).join(' '))
 
-function socialIconSelector(key) {
+function socialIconSelector(key, isSquare) {
   if (!key) return
   const keyToLowerCase = key.toLowerCase()
   const socialIcons = {
-    facebook: 'icon-Facebook-Bubble',
-    twitter: 'icon-Twitter-Bubble',
-    instagram: 'icon-Instagram-Bubble',
-    youtube: 'icon-YouTube-Bubble',
+    facebook: !isSquare ? 'icon-Facebook-Bubble' : 'icon-facebook-square',
+    twitter: !isSquare ? 'icon-Twitter-Bubble' : 'icon-twitter-square',
+    instagram: !isSquare ? 'icon-Instagram-Bubble' : 'icon-instagram-square',
+    youtube: !isSquare ? 'icon-YouTube-Bubble' : 'icon-youtube-square',
   }
 
   return socialIcons[keyToLowerCase]
@@ -127,7 +127,7 @@ const metricSuffix = (number) => {
   if (number >= 1e3) {
     const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
     const unitname = ['k', 'm', 'B', 'T'][Math.floor(unit / 3) - 1]
-    return (number / ('1e' + unit)).toFixed(0) + unitname
+    return (number / ('1e' + unit)).toFixed(1) + unitname
   }
 
   return number
@@ -266,45 +266,69 @@ const getLocationParams = (value) => {
 //can sort and get the top n values of flat array of objects
 const getNValuesOfObject = ({ obj = {}, n, sortOrder = '' }) => {
   const keys = Object.keys(obj)
-  if(!keys.length) {
+  if (!keys.length) {
     return obj
-  } 
-    let newObj = {}
-    let newArr = keys.map(i => ({ key: i, value: obj[i] }))
-    
-    if(sortOrder) {
-      let sortCallBack = null
+  }
+  let newObj = {}
+  let newArr = keys.map((i) => ({ key: i, value: obj[i] }))
 
-      switch(sortOrder) {
-        case 'asc':
-          sortCallBack = (a, b) => a[1] - b[1]
-          break
-        case 'desc':
-          sortCallBack = (a, b) => b[1] - a[1]
-          break
-        default:
-          sortCallBack = null
-      }
+  if (sortOrder) {
+    let sortCallBack = null
 
-      if(sortCallBack) {
-        const sortable = []
-        for (const key in obj) {
-          sortable.push([key, obj[key]])
-        }
-        sortable.sort(sortCallBack)
-        newArr = sortable.map((item) => {
-            return { key: item[0], value: item[1] }
-          })
-        
+    switch (sortOrder) {
+      case 'asc':
+        sortCallBack = (a, b) => a[1] - b[1]
+        break
+      case 'desc':
+        sortCallBack = (a, b) => b[1] - a[1]
+        break
+      default:
+        sortCallBack = null
+    }
+
+    if (sortCallBack) {
+      const sortable = []
+      for (const key in obj) {
+        sortable.push([key, obj[key]])
       }
+      sortable.sort(sortCallBack)
+      newArr = sortable.map((item) => {
+        return { key: item[0], value: item[1] }
+      })
     }
-    if(!!n && n > 0 && n < newArr.length) {
-      newArr = newArr.slice(0, n)
+  }
+  if (!!n && n > 0 && n < newArr.length) {
+    newArr = newArr.slice(0, n)
+  }
+  newArr.forEach((item) => {
+    newObj = { ...newObj, [item.key]: item.value }
+  })
+  return newObj
+}
+
+const valuesIsEqual = (num, equal) => num.every((o) => o === equal)
+
+const normalizationBubbleMapping = (arr, tMin, tMax) => {
+  if (!arr.length || !tMin || !tMax) return {}
+  const numbers = arr.map((a) => a.value)
+
+  if (valuesIsEqual(numbers, 0) || (!numbers && !numbers.length)) return {}
+  const allNumberSame = valuesIsEqual(numbers, numbers[0])
+  const [min, max] = [Math.min(...numbers), Math.max(...numbers)]
+  const [rMin, rMax] = [
+    allNumberSame ? 1 : !min ? 1 : min,
+    allNumberSame ? numbers[0] : max,
+  ]
+
+  return numbers.map((m, i) => {
+    const value = (((!m ? 1 : m) - rMin) / (rMax - rMin)) * (tMax - tMin) + tMin
+    return {
+      name: arr[i].name,
+      color: arr[i].color,
+      value: value === tMin ? (tMin * 6) / 8 : value,
+      oldValue: arr[i].value,
     }
-    newArr.forEach(item => {
-      newObj = { ...newObj, [item.key]: item.value }
-    })
-    return newObj
+  })
 }
 
 export {
@@ -330,4 +354,5 @@ export {
   getLocationParams,
   splitCamelCaseToString,
   getNValuesOfObject,
+  normalizationBubbleMapping,
 }

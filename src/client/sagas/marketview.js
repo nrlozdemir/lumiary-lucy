@@ -25,6 +25,7 @@ import {
   getDateBucketFromRange,
   getBrandAndCompetitors,
   getNValuesOfObject,
+  normalizationBubbleMapping,
 } from 'Utils'
 
 import {
@@ -293,7 +294,7 @@ function* getBubbleChartData() {
 
     const options = {
       competitors,
-      metric: 'shares',
+      metric: 'views',
       property: 'color',
       daterange: 'month',
     }
@@ -327,11 +328,38 @@ function* getBubbleChartData() {
         )
       )
 
-      yield put(actions.getBubleChartSuccess(bubbleData))
+      // you can handle like this data
+      // bubbleData = [
+      //   {
+      //     name: 'YouTube',
+      //     value: 100001,
+      //     color: 'blue-purple',
+      //   },
+      //   {
+      //     name: 'Facebook',
+      //     value: 0,
+      //     color: 'red',
+      //   },
+      //   {
+      //     name: 'Twitter',
+      //     value: 0,
+      //     color: 'blue-green',
+      //   },
+      //   {
+      //     name: 'Instagram',
+      //     value: 1000001,
+      //     color: 'yellow-green',
+      //   },
+      // ]
+
+      const normalizedData = normalizationBubbleMapping(bubbleData, 55, 100)
+
+      yield put(actions.getBubleChartSuccess(normalizedData))
     } else {
       throw 'Error fetching MarketView/BubbleChartData'
     }
   } catch (error) {
+    console.log('error', error)
     yield put(actions.getBubleChartFailure(error))
   }
 }
@@ -404,9 +432,12 @@ function* getFormatChartData() {
 
           Object.keys(formatObj).forEach((formatKey) => {
             const currentKey = formatObj[formatKey]
-            const currentCount = Object.keys(currentKey).reduce((accumulator, day) => {
-              return accumulator + currentKey[day]
-            }, 0)
+            const currentCount = Object.keys(currentKey).reduce(
+              (accumulator, day) => {
+                return accumulator + currentKey[day]
+              },
+              0
+            )
 
             if (!!all[formatKey]) {
               all[formatKey] = all[formatKey] + currentCount
@@ -419,7 +450,11 @@ function* getFormatChartData() {
         {}
       )
 
-      const slicedObj = getNValuesOfObject({ obj: formatCountsObj, n: 4, sortOrder: 'desc' })
+      const slicedObj = getNValuesOfObject({
+        obj: formatCountsObj,
+        n: 4,
+        sortOrder: 'desc',
+      })
       const formatCountsArr = Object.keys(slicedObj).map((formatKey) => ({
         name: formatKey,
         count: formatCountsObj[formatKey],
@@ -669,7 +704,7 @@ function* getTopPerformingPropertiesByTimeData({
     }
 
     const data = yield call(getDataFromApi, options, '/report')
-    
+
     yield put(
       actions.getTopPerformingTimeSuccess(
         convertDataIntoDatasets(data, options, {
