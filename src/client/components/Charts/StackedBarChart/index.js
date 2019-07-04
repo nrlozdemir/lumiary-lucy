@@ -111,6 +111,7 @@ const StackedBarChart = (props) => {
     width = 500,
     barSpacing,
     datalabels = false,
+    xGridDisplay,
   } = props
   const themes = props.themeContext.colors
   return (
@@ -184,6 +185,7 @@ const StackedBarChart = (props) => {
               gridLines: {
                 ...barDataOptions.scales.xAxes[0].gridLines,
                 color: themes.chartStadiumBarBorder,
+                display: xGridDisplay || false,
               },
             },
           ],
