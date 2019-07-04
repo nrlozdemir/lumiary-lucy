@@ -31,7 +31,7 @@ class TotalViewsChart extends React.Component {
         loading,
         data: { barData, doughnutData },
       },
-      infoText
+      infoText,
     } = this.props
 
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)

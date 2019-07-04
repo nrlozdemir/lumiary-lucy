@@ -85,7 +85,7 @@ const BarAndDoughnutChartModule = ({
   doughnutData,
   stackedChartData,
   loading = false,
-  infoText
+  infoText,
 }) => {
   return (
     <ThemeContext.Consumer>
