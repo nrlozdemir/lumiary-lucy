@@ -161,6 +161,10 @@ const dark = {
   dotTrackBackgroundColor: '#21243b',
   dotThumbBackgroundColor: '#ffffff',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
+
+  // color chart
+  lineBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+  colorChartShadowColor: 'rgba(0, 0, 0, 0.5)',
 }
 
 const light = {
@@ -326,6 +330,10 @@ const light = {
   dotTrackBackgroundColor: '#e8ecf0',
   dotThumbBackgroundColor: '#2fd7c4',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
+
+  // color chart
+  lineBackgroundColor: '#bebebe',
+  colorChartShadowColor: '#bebebe',
 }
 
 const themes = {

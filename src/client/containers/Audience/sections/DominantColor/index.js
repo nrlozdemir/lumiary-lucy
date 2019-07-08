@@ -33,6 +33,7 @@ class DominantColor extends React.Component {
             type: 'dateRange',
             selectKey: 'ADC-wds',
             placeHolder: 'Date',
+            defaultValue: 'month',
           },
         ]}
       />

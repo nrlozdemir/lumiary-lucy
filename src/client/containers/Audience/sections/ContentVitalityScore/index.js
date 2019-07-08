@@ -27,7 +27,7 @@ class ContentVitalityScore extends React.Component {
           <ContentVitalityScoreModule
             data={data}
             moduleKey={'Audience/ContentVitalityScore'}
-            title="Content Vitality Score by Videos Produced Comparison"
+						title="Content Vitality Score By Videos Produced Comparison"
             action={this.callBack}
             authProfile={authProfile}
             filters={[
@@ -40,6 +40,7 @@ class ContentVitalityScore extends React.Component {
                 type: 'dateRange',
                 selectKey: 'ACOT-wds',
                 placeHolder: 'Date',
+                defaultValue: 'month',
               },
             ]}
             removeTooltip
