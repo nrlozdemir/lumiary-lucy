@@ -13,6 +13,8 @@
     }
   }
   .filterSelect {
+    position: relative;
+    
     &:first-child {
       outline: none;
       padding-left: 29px;

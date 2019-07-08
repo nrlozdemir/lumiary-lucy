@@ -92,10 +92,15 @@ const dark = {
   inputColor: '#545B79',
   inputActiveColor: '#fff',
   inputOptionBackground: '#545B79',
-  inputOptionFocusBackground: '#21243B',
+  inputOptionFocusBackground: '#545B79',
   inputOptionSelectedBackground: '#ffffff',
   inputPlaceholderColor: '#545b79',
   // input values
+
+  // search input colors
+  searchInputColor: '#fff',
+  searchInputActiveColor: '#fff',
+  searchInputPlaceholderColor: '#fff',
 
   // table values
   tableHeaderBackground: '#545b79',
@@ -162,7 +167,6 @@ const dark = {
   dotThumbBackgroundColor: '#ffffff',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
 
-
   // panoptic line chart
   lineChartGridColor: '#545b79',
   lineChartBackgroundColor: '#21243b',
@@ -170,7 +174,6 @@ const dark = {
   // color chart
   lineBackgroundColor: 'rgba(0, 0, 0, 0.5)',
   colorChartShadowColor: 'rgba(0, 0, 0, 0.5)',
-
 }
 
 const light = {
@@ -272,6 +275,11 @@ const light = {
 
   // input values
 
+  // search input colors
+  searchInputColor: '#000',
+  searchInputActiveColor: '#505050',
+  searchInputPlaceholderColor: '#c6c9d7',
+
   // table values
   tableHeaderBackground: '#ffffff',
   tableBodyBackground: '#f3f6f9',
@@ -337,7 +345,6 @@ const light = {
   dotThumbBackgroundColor: '#2fd7c4',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
 
-
   // panoptic line chart
   lineChartGridColor: '#c6c9d7',
   lineChartBackgroundColor: '#e8ecf0',
@@ -345,7 +352,6 @@ const light = {
   // color chart
   lineBackgroundColor: '#bebebe',
   colorChartShadowColor: '#bebebe',
-
 }
 
 const themes = {
