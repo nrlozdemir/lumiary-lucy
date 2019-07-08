@@ -39,18 +39,16 @@ const BackTo = (props) => {
     title = ''
 
   if (typeof props != 'undefined' && props[1] != null) {
-    title = props[1]
+    title = 'Back To ' + ucfirst(props[1])
     link = '/' + props[1]
   } else {
-    title = 'overview'
+    title = 'Back To Overview'
     link = '/'
   }
 
   if (props && props.title) {
     title = ucfirst(props.title)
   }
-
-  title = 'Back to ' + ucfirst(title)
 
   return (
     <div className={style.backTo}>
@@ -119,7 +117,7 @@ const SelectedNavLink = (props) => {
           <span>Save Report</span>
           <Switch
             id={'saveReport'}
-            switchOn={props.swicthControl}
+            switchOn={props.switchControl}
             controlSwitch={() => props.switchChange(props.category)}
           />
         </div>
@@ -209,14 +207,17 @@ const Selector = (props) => {
           title={title}
           load={loadComponent}
           category={category}
-          swicthControl={state.swicthControl}
+          switchControl={state.switchControl}
           switchChange={actions.switchChange}
         />
       ),
     }
   } else if (navigationSubRoutes) {
+    let backToTitle
+    backToTitle = navigationSubRoutes.backToTitle && navigationSubRoutes.backToTitle
+
     return {
-      leftSide: <BackTo {...url} themes={props.themes} />,
+      leftSide: <BackTo {...url} title={backToTitle} themes={props.themes} />,
       navigation: (
         <SubNavigation {...navigationSubRoutes.routes} themes={props.themes} />
       ),
@@ -277,7 +278,7 @@ class Navbar extends React.Component {
     const {location: { search }} = props
     const urlParams = getLocationParams(search)
     this.state = {
-      swicthControl: !!urlParams && urlParams.saved === 'true' ,
+      switchControl: !!urlParams && urlParams.saved === 'true' ,
     }
   }
 
@@ -296,7 +297,7 @@ class Navbar extends React.Component {
 
     if (category === 'Brands Insights' && brandInsightValue) {
       this.setState({
-        swicthControl: !isSaved,
+        switchControl: !isSaved,
       }, () => {
         const {
           date,
@@ -319,7 +320,7 @@ class Navbar extends React.Component {
       })
     } else if (category === 'Compare Brands' && comparebrandValues) {
       this.setState({
-        swicthControl: !isSaved,
+        switchControl: !isSaved,
       },() => {
         const {
           title,
@@ -360,18 +361,18 @@ class Navbar extends React.Component {
       brand,
       saved
     } = urlParams
-    const { swicthControl } = this.state
+    const { switchControl } = this.state
     if(uuid) {
       if(pathname === '/reports/brand-insight') {
         window.history.pushState('',
         '',
-        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${swicthControl}&report_uuid=${uuid}`
+        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${switchControl}&report_uuid=${uuid}`
         )
       }else if(pathname === '/reports/compare-brands') {
         window.history.pushState(
           '',
           '',
-          `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${swicthControl}&report_uuid=${uuid}`
+          `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${switchControl}&report_uuid=${uuid}`
         )
       }
     }
