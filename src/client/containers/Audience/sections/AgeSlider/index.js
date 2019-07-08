@@ -49,6 +49,7 @@ class AgeSlider extends React.Component {
           },
         ]}
         infoText={infoText}
+        bodyClass={style.sliderWrapper}
       >
         <div className={style.audienceContainer}>
           {data && data.length > 0 && (
