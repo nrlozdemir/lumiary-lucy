@@ -20,6 +20,19 @@ function get_env_parameter {
     aws ssm get-parameter --with-decryption --name /${CIRCLE_BRANCH}/${parameter} | jq -r .Parameter.Value
 }
 
+echo "⚙ Getting config parameters..."
+TASK_CPU=$(get_parameter task_cpu)
+TASK_MEMORY=$(get_parameter task_memory)
+TASK_ROLE=$(get_parameter task_role)
+AWS_S3_MEDIA_BUCKET=$(get_parameter aws_s3_media_bucket)
+REDIS_HOST=$(get_env_parameter lumiere/redis_host)
+EXISTING_TASK=$(get_parameter deployment_checksum)
+# export to webpack
+export API_ROOT=$(get_env_parameter azazzle/app_url)
+export API_VERSION=$(get_env_parameter azazzle/api_version)
+export QAPI_ROOT=$(get_env_parameter api_url)
+export QAPI_VERSION=$(get_env_parameter api_version)
+
 echo "🛠 Building static files..."
 npm run build:$CIRCLE_BRANCH
 
@@ -30,16 +43,6 @@ docker tag $SERVICE_NAME:$CIRCLE_BRANCH 688003391719.dkr.ecr.us-east-1.amazonaws
 
 echo "📦 Pushing the Docker image..."
 docker push 688003391719.dkr.ecr.us-east-1.amazonaws.com/$SERVICE_NAME:$CIRCLE_BRANCH
-
-echo "⚙ Getting config parameters..."
-TASK_CPU=$(get_parameter task_cpu)
-TASK_MEMORY=$(get_parameter task_memory)
-TASK_ROLE=$(get_parameter task_role)
-API_URL=$(get_env_parameter api_url)
-API_VERSION=$(get_env_parameter api_version)
-AWS_S3_MEDIA_BUCKET=$(get_parameter aws_s3_media_bucket)
-REDIS_HOST=$(get_env_parameter lumiere/redis_host)
-EXISTING_TASK=$(get_parameter deployment_checksum)
 
 echo "📦 Generating Container Definition..."
 cat > /tmp/containerdef.json <<JSON
@@ -57,16 +60,24 @@ cat > /tmp/containerdef.json <<JSON
     "privileged": true,
     "environment": [
       {
-        "name": "API_ROOT",
-        "value": "${API_URL}"
+        "name": "API_URL",
+        "value": "${API_ROOT}"
       },
       {
-        "name": "API_URL",
-        "value": "${API_URL}"
+        "name": "API_ROOT",
+        "value": "${API_ROOT}"
       },
       {
         "name": "API_VERSION",
         "value": "${API_VERSION}"
+      },
+      {
+        "name": "QAPI_ROOT",
+        "value": "${QAPI_ROOT}"
+      },
+      {
+        "name": "QAPI_VERSION",
+        "value": "${QAPI_VERSION}"
       },
       {
         "name": "AWS_S3_MEDIA_BUCKET",
