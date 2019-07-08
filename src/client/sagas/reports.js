@@ -39,7 +39,7 @@ function getReportsMockApi() {
   return axios.get('/').then((res) => reportsDataMockData)
 }
 
-function* getReports() {
+function* getReports({ payload: { value: filterValue } = {} }) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
@@ -52,17 +52,28 @@ function* getReports() {
     if (!!response) {
       const compare =
         !!response.compare &&
-        !!response.compare.length &&
         response.compare.map((item) => {
           return { ...item, category: 'Compare Brands' }
         })
       const insights =
         !!response.insights &&
-        !!response.insights.length &&
         response.insights.map((item) => {
           return { ...item, category: 'Brands Insights' }
         })
-      yield put(actions.loadReportsSuccess([...compare, ...insights]))
+      let values
+
+      switch (filterValue) {
+        case 'insights':
+          values = insights
+          break
+        case 'compare':
+          values = compare
+          break
+        default:
+          values = [...compare, ...insights]
+      }
+
+      yield put(actions.loadReportsSuccess(values))
     }
   } catch (err) {
     console.log('err', err)
@@ -90,7 +101,8 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
       title,
     } = params
 
-    const saved = params && params.saved && params.saved.value ? params.saved.value : false
+    const saved =
+      params && params.saved && params.saved.value ? params.saved.value : false
     const report_uuid = params && params.report_uuid
 
     const parameters = {
@@ -100,14 +112,16 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
       engagement,
       date,
       title,
-      saved
+      saved,
     }
 
     yield put(actions.brandInsightFormSubmitSuccess(parameters))
     if (!!onlySave) {
       yield put(
         push(
-          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${saved}${report_uuid ? `&report_uuid=${report_uuid}` :''}`
+          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${saved}${
+            report_uuid ? `&report_uuid=${report_uuid}` : ''
+          }`
         )
       )
     }
@@ -316,10 +330,10 @@ function* getPerformanceComparisonData({
       platform: 'all',
     }
 
-    if(property === 'format') {
+    if (property === 'format') {
       options.limit = 4
     }
-    
+
     const payload = yield call(getDataFromApi, parameters, '/report')
 
     if (!!payload && !!payload.data) {
