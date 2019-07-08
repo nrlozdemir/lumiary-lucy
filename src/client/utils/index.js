@@ -253,6 +253,17 @@ const selectFiltersToType = (selectValues = {}) => {
   }, {})
 }
 
+export const getCvScoreColor = (val = 0) => {
+  switch(true) {
+    case (val > 50 && val < 75):
+      return '#8562f3'
+    case (val > 75 && val < 100):
+      return '#2fd7c4'
+    default:
+      return '#5292e5'
+    }
+}
+
 const getLocationParams = (value) => {
   const urlSplit = value.replace('?', '').split('&')
 
