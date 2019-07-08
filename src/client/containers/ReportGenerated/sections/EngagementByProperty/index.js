@@ -85,7 +85,7 @@ class EngagementByProperty extends Component {
             />
           </div>
           <div className={style.stackedChart}>
-            <StackedBarChart barData={stackedChartData} barSpacing={2} />
+            <StackedBarChart barData={stackedChartData} barSpacing={4} />
           </div>
         </div>
       </Module>

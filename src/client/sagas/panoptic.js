@@ -1,9 +1,6 @@
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
-import axios from 'axios'
 import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
-
-import panopticMockData from 'Api/mocks/panopticMock.json'
 
 import { getDateBucketFromRange } from 'Utils'
 
@@ -18,11 +15,7 @@ import {
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import _ from 'lodash'
-import { dayOfWeek, chartColors } from 'Utils/globals'
-
-function getMockPanopticDataApi() {
-  return axios.get('/').then((res) => panopticMockData)
-}
+import { dayOfWeek } from 'Utils/globals'
 
 function* getVideoReleasesData({ data }) {
   try {
@@ -259,15 +252,6 @@ function* getCompareSharesData({ data: { dateRange } }) {
   }
 }
 
-function* getData() {
-  try {
-    const payload = yield call(getMockPanopticDataApi)
-    yield put(actions.getDataSuccess(payload))
-  } catch (err) {
-    yield put(actions.getDataError(err))
-  }
-}
-
 function* getFlipCardsData() {
   try {
     const { brand } = yield select(selectAuthProfile)
@@ -355,7 +339,6 @@ function* getTopPerformingFormatData({ data = {} }) {
 }
 
 export default [
-  takeLatest(types.GET_DATA, getData),
   takeLatest(types.GET_VIDEO_RELEASES_DATA, getVideoReleasesData),
   takeLatest(types.GET_COLOR_TEMPERATURE_DATA, getColorTemperatureData),
   takeLatest(types.GET_FILTERING_SECTION_DATA, getFilteringSectionData),

@@ -65,13 +65,6 @@ export const types = {
   GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE:
     'Marketview/GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE',
 
-  GET_MARKETVIEW_DETAIL_TIME_REQUEST:
-    'Marketview/GET_MARKETVIEW_DETAIL_TIME_REQUEST',
-  GET_MARKETVIEW_DETAIL_TIME_SUCCESS:
-    'Marketview/GET_MARKETVIEW_DETAIL_TIME_SUCCESS',
-  GET_MARKETVIEW_DETAIL_TIME_FAILURE:
-    'Marketview/GET_MARKETVIEW_DETAIL_TIME_FAILURE',
-
   GET_MARKETVIEW_DETAIL_PEFORMING_TIME_REQUEST:
     'Marketview/GET_MARKETVIEW_DETAIL_PEFORMING_TIME_REQUEST',
   GET_MARKETVIEW_DETAIL_PEFORMING_TIME_SUCCESS:
@@ -204,17 +197,7 @@ export const actions = {
     type: types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE,
     error,
   }),
-  getMarketviewDetailTimeRequest: () => ({
-    type: types.GET_MARKETVIEW_DETAIL_TIME_REQUEST,
-  }),
-  getMarketviewDetailTimeSuccess: (payload) => ({
-    type: types.GET_MARKETVIEW_DETAIL_TIME_SUCCESS,
-    payload,
-  }),
-  getMarketviewDetailTimeFailure: (error) => ({
-    type: types.GET_MARKETVIEW_DETAIL_TIME_FAILURE,
-    error,
-  }),
+
   getTopPerformingTimeRequest: (payload) => ({
     type: types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_REQUEST,
     payload,
@@ -445,17 +428,6 @@ const marketviewReducer = (state = initialState, action) => {
         .setIn(['similarProperties', 'error'], fromJS(action.error))
         .setIn(['similarProperties', 'loading'], fromJS(false))
         .setIn(['similarProperties', 'data'], fromJS([]))
-
-    case types.GET_MARKETVIEW_DETAIL_TIME_REQUEST:
-      return state.set('loading', fromJS(true))
-    case types.GET_MARKETVIEW_DETAIL_TIME_SUCCESS:
-      return state
-        .setIn(['marketviewDetailTime', 'data'], fromJS(action.payload))
-        .set('loading', fromJS(false))
-    case types.GET_MARKETVIEW_DETAIL_TIME_FAILURE:
-      return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
 
     case types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_REQUEST:
       return state.setIn(['topPerformingDataForTime', 'loading'], fromJS(true))

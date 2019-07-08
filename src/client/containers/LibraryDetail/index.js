@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { bindActionCreators, compose } from 'redux'
+import { compose } from 'redux'
 import { reduxForm } from 'redux-form'
 
 import { actions, makeSelectLibraryDetail } from 'Reducers/libraryDetail'
@@ -29,7 +29,6 @@ export class LibraryDetail extends React.Component {
   componentDidMount() {
     const {
       match,
-      getBarChartRequest,
       getDoughnutChartRequest,
       // getColorTempRequest,
       getShotByShotRequest,
@@ -41,7 +40,6 @@ export class LibraryDetail extends React.Component {
     if (match.params.videoId) {
       getSelectedVideo({ brandUuid: userUuid, videoId: match.params.videoId })
       getSelectedVideoAverage(match.params.videoId)
-      getBarChartRequest(match.params.videoId)
       getDoughnutChartRequest({
         LibraryDetailId: match.params.videoId,
         themeColors: colors,
@@ -55,7 +53,6 @@ export class LibraryDetail extends React.Component {
     const { match: prevMatch } = prevProps
     const {
       match,
-      getBarChartRequest,
       getDoughnutChartRequest,
       // getColorTempRequest,
       getShotByShotRequest,
@@ -73,18 +70,14 @@ export class LibraryDetail extends React.Component {
     if (prevMatch.params.videoId !== match.params.videoId) {
       getSelectedVideo({ brandUuid: userUuid, videoId: match.params.videoId })
       getSelectedVideoAverage(match.params.videoId)
-      getBarChartRequest({ LibraryDetailId: 1 })
       // getColorTempRequest({ videoId: match.params.videoId })
-      getShotByShotRequest({ LibraryDetailId: 1 })
+      getShotByShotRequest(match.params.videoId)
     }
   }
 
   render() {
     const {
       libraryDetail: {
-        barChartData,
-        doughnutData,
-        colorTempData,
         shotByShotData: { data: shotByShotData, loading: shotByShotLoading },
         selectedVideo,
         selectedVideoAverage,
@@ -96,16 +89,13 @@ export class LibraryDetail extends React.Component {
 
     return (
       <React.Fragment>
-        {barChartData && (
-          <LibraryDetailChartHeader
-            barChartData={barChartData}
-            selectedVideoAverage={selectedVideoAverage}
-            videoUrl={`${mediaUrl}/lumiere/${userUuid}/${videoId}.mp4`}
-            title={selectedVideo && selectedVideo.title}
-            socialIcon={selectedVideo && selectedVideo.socialIcon}
-            cvScore={selectedVideo && selectedVideo['cvScores.value']}
-          />
-        )}
+        <LibraryDetailChartHeader
+          selectedVideoAverage={selectedVideoAverage}
+          videoUrl={`${mediaUrl}/lumiere/${userUuid}/${videoId}.mp4`}
+          title={selectedVideo && selectedVideo.title}
+          socialIcon={selectedVideo && selectedVideo.socialIcon}
+          cvScore={selectedVideo && selectedVideo['cvScores.value']}
+        />
         <LibraryDetailDoughnutChart videoId={videoId} />
         <LibraryDetailShotByShot
           shots={
@@ -142,7 +132,6 @@ function mapDispatchToProps(dispatch) {
     getSelectedVideoAverage: (id) =>
       dispatch(actions.getSelectedVideoAverageRequest(id)),
     getVideos: () => dispatch(libraryActions.loadVideos()),
-    getBarChartRequest: (id) => dispatch(actions.getBarChartRequest(id)),
     getDoughnutChartRequest: (id) =>
       dispatch(actions.getDoughnutChartRequest(id)),
     // getColorTempRequest: (id) => dispatch(actions.getColorTempRequest(id)),
