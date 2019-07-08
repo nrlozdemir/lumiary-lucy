@@ -27,17 +27,6 @@ module.exports = (app) => {
     })
   )
 
-  // Create Mock
-  app.get('/createLibraryMock', require('./createMock').createLibraryMock)
-  app.get(
-    '/createMarketviewTimeMock',
-    require('./createMock').createMarketviewTimeMock
-  )
-
-  // Create Report
-  app.post('/createReport', require('./report').createReport)
-  app.post('/createCompareReport', require('./report').createCompareReport)
-
   if (
     process.env.ENVIRONMENT === 'qa' ||
     process.env.ENVIRONMENT === 'staging'
