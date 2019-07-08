@@ -22,6 +22,7 @@ class TopVideosCard extends React.Component {
         title="Top Videos Over Time By All Platforms"
         action={this.callBack}
         infoText={infoText}
+        xGridDisplay
         filters={[
           {
             type: 'property',
