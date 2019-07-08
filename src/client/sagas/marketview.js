@@ -11,6 +11,7 @@ import {
   getDateBucketFromRange,
   getBrandAndCompetitors,
   getNValuesOfObject,
+  normalizationBubbleMapping,
 } from 'Utils'
 
 import {
@@ -242,7 +243,7 @@ function* getBubbleChartData() {
 
     const options = {
       competitors,
-      metric: 'shares',
+      metric: 'views',
       property: 'color',
       daterange: 'month',
     }
@@ -276,11 +277,38 @@ function* getBubbleChartData() {
         )
       )
 
-      yield put(actions.getBubleChartSuccess(bubbleData))
+      // you can handle like this data
+      // bubbleData = [
+      //   {
+      //     name: 'YouTube',
+      //     value: 100001,
+      //     color: 'blue-purple',
+      //   },
+      //   {
+      //     name: 'Facebook',
+      //     value: 0,
+      //     color: 'red',
+      //   },
+      //   {
+      //     name: 'Twitter',
+      //     value: 0,
+      //     color: 'blue-green',
+      //   },
+      //   {
+      //     name: 'Instagram',
+      //     value: 1000001,
+      //     color: 'yellow-green',
+      //   },
+      // ]
+
+      const normalizedData = normalizationBubbleMapping(bubbleData, 55, 100)
+
+      yield put(actions.getBubleChartSuccess(normalizedData))
     } else {
       throw 'Error fetching MarketView/BubbleChartData'
     }
   } catch (error) {
+    console.log('error', error)
     yield put(actions.getBubleChartFailure(error))
   }
 }
