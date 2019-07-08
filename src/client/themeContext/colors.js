@@ -90,7 +90,7 @@ const dark = {
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#545b79',
   inputColor: '#545B79',
-  inputActiveColor: '#505050',
+  inputActiveColor: '#ffffff',
   inputOptionBackground: '#545B79',
   inputOptionFocusBackground: '#21243B',
   inputOptionSelectedBackground: '#ffffff',
@@ -162,9 +162,15 @@ const dark = {
   dotThumbBackgroundColor: '#ffffff',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
 
+
   // panoptic line chart
   lineChartGridColor: '#545b79',
   lineChartBackgroundColor: '#21243b',
+
+  // color chart
+  lineBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+  colorChartShadowColor: 'rgba(0, 0, 0, 0.5)',
+
 }
 
 const light = {
@@ -331,9 +337,15 @@ const light = {
   dotThumbBackgroundColor: '#2fd7c4',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
 
+
   // panoptic line chart
   lineChartGridColor: '#c6c9d7',
   lineChartBackgroundColor: '#e8ecf0',
+
+  // color chart
+  lineBackgroundColor: '#bebebe',
+  colorChartShadowColor: '#bebebe',
+
 }
 
 const themes = {
