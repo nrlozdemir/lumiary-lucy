@@ -5,21 +5,7 @@ import _ from 'lodash'
 import { types, actions } from 'Reducers/marketview'
 import { selectAuthProfile } from 'Reducers/auth'
 import querystring from 'querystring'
-
-import marketviewCompetitorVideosData from 'Api/mocks/marketviewCompetitorVideos.json'
-import marketviewCompetitorTopVideosData from 'Api/mocks/marketviewCompetitorTopVideosMock.json'
-import marketviewSimilarPropertiesData from 'Api/mocks/marketviewSimilarProperties.json'
-import marketviewBubbleChartData from 'Api/mocks/marketviewBubbleChartMock.json'
-import marketviewPacingChartData from 'Api/mocks/marketviewPacingChartMock.json'
-import marketviewFormatChartData from 'Api/mocks/marketviewFormatChartMock.json'
-import marketviewTotalViewsData from 'Api/mocks/marketviewTotalViewsMock.json'
-import marketviewTotalCompetitorViewsData from 'Api/mocks/marketviewTotalCompetitorViewsMock.json'
-import marketviewTimeMockData from 'Api/mocks/marketviewTimeMock.json'
-import marketviewTopPerformingProperties from 'Api/mocks/marketviewPlatformTopPerformingProperty.json'
-import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json'
-
 import {
-  getMaximumValueIndexFromArray,
   ucfirst,
   getLabelWithSuffix,
   getDateBucketFromRange,
@@ -57,46 +43,9 @@ function* getCompetitorVideosApi({ payload }) {
   return response
 }
 
-function getBubbleChartApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewBubbleChartData)
-}
-
-function getPacingChartApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewPacingChartData)
-}
-
-function getFormatChartApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewFormatChartData)
-}
-
-function getTotalViewsApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewTotalViewsData)
-}
-
-function getTotalCompetitorViewsApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewTotalCompetitorViewsData)
-}
-
 function getMarketviewDaysApi() {
   //this will use ajax function in utils/api when real data is provided
   return axios.get('/').then((res) => marketviewTimeMockData)
-}
-
-function getGetTopPerformingPropertiesApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewTopPerformingProperties)
-}
-
-function getGetTopPerformingPropertiesByCompetitorsApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios
-    .get('/')
-    .then((res) => marketviewTopPerformingPropertiesCompetitors)
 }
 
 function* getCompetitorVideosMarketview(params) {
@@ -389,7 +338,12 @@ function* getFormatChartData() {
     }
 
     // video is still being pulled from mock
-    const { video } = yield call(getFormatChartApi)
+    const video = {
+      videoUrl:
+        'https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/12-years-ago-today-Kobe-dropped-81.mp4',
+      poster:
+        'https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/12-years-ago-today-Kobe-dropped-81.jpg',
+    }
 
     const response = yield call(getDataFromApi, options, '/report')
 
@@ -404,9 +358,12 @@ function* getFormatChartData() {
 
           Object.keys(formatObj).forEach((formatKey) => {
             const currentKey = formatObj[formatKey]
-            const currentCount = Object.keys(currentKey).reduce((accumulator, day) => {
-              return accumulator + currentKey[day]
-            }, 0)
+            const currentCount = Object.keys(currentKey).reduce(
+              (accumulator, day) => {
+                return accumulator + currentKey[day]
+              },
+              0
+            )
 
             if (!!all[formatKey]) {
               all[formatKey] = all[formatKey] + currentCount
@@ -419,7 +376,11 @@ function* getFormatChartData() {
         {}
       )
 
-      const slicedObj = getNValuesOfObject({ obj: formatCountsObj, n: 4, sortOrder: 'desc' })
+      const slicedObj = getNValuesOfObject({
+        obj: formatCountsObj,
+        n: 4,
+        sortOrder: 'desc',
+      })
       const formatCountsArr = Object.keys(slicedObj).map((formatKey) => ({
         name: formatKey,
         count: formatCountsObj[formatKey],
@@ -529,15 +490,6 @@ function* getTotalCompetitorViewsData() {
     }
   } catch (error) {
     yield put(actions.getTotalCompetitorViewsFailure(error))
-  }
-}
-
-function* getmarketviewTimeMockData() {
-  try {
-    const payload = yield call(getMarketviewDaysApi)
-    yield put(actions.getMarketviewDetailTimeSuccess(payload))
-  } catch (error) {
-    yield put(actions.getMarketviewDetailTimeFailure(error))
   }
 }
 
@@ -669,7 +621,7 @@ function* getTopPerformingPropertiesByTimeData({
     }
 
     const data = yield call(getDataFromApi, options, '/report')
-    
+
     yield put(
       actions.getTopPerformingTimeSuccess(
         convertDataIntoDatasets(data, options, {
@@ -707,10 +659,7 @@ export default [
     types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST,
     getTotalCompetitorViewsData
   ),
-  takeLatest(
-    types.GET_MARKETVIEW_DETAIL_TIME_REQUEST,
-    getmarketviewTimeMockData
-  ),
+
   takeLatest(
     types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_REQUEST,
     getTopPerformingPropertiesData
