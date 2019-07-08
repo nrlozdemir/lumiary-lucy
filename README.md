@@ -44,3 +44,4 @@ If you see the QF logo spinner, you're good to go!
 
 - Uncomment any of [these lines](docker-compose.yml#L12-L16) and save
 - Re-comment and save before committing `docker-compose.yml`
+
