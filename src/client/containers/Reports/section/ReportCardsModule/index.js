@@ -10,7 +10,6 @@ const ReportsCards = ({ openModal, reportCardsData }) => {
         return (
           <div className={style.reportsCardContainer}>
             <style>
-              // DON'T DELETE THIS STYLE. it's need to dynamic hover style
               {`
                 .${style.reportsCardContainer} .${style.reportsCard}:hover {
                   background: ${colors.moduleBackgroundHover} !important
