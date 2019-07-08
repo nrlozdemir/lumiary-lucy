@@ -37,3 +37,20 @@
 .percentageGraphContainer {
   display: flex;
 }
+
+.contentVitalityChart {
+	position: relative;
+  &:before {
+    font-size: 12px;
+    z-index: 4;
+    position: absolute;
+    left: 0;
+    transform: rotateZ(-90deg) translateX(-40%);
+    transform-origin: 0 0;
+  }
+
+  &:before {
+    content: attr(data-legend);
+    top: 50%;
+  }
+}
