@@ -14,7 +14,6 @@ import {
 
 import {
   actions as generatedReportActions,
-  makeSelectReport,
 } from 'Reducers/generatedReport'
 
 import { getLocationParams } from 'Utils'
@@ -67,7 +66,6 @@ class CompareBrand extends React.Component {
   render() {
     const {
       match: { params },
-      report: { data: report },
       comparebrandValues: { data: comparebrandValues },
       predefinedReportValues: { data: predefinedReportValues },
       authProfile = {},
@@ -119,7 +117,6 @@ class CompareBrand extends React.Component {
 }
 
 const mapStateToProps = createStructuredSelector({
-  report: makeSelectReport(),
   contentVitalityScoreData: makeSelectReportsContentVitalityScore(),
   colorComparisonData: makeSelectReportsColorComparison(),
   videoComparisonData: makeSelectReportsVideoComparison(),
