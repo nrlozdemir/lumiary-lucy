@@ -10,7 +10,7 @@ import ContentVitalityScore from './sections/ContentVitalityScore'
 const Audience = () => {
   return (
     <React.Fragment>
-			<ContentVitalityScore />
+      <ContentVitalityScore />
       <Performance />
       <AgeSlider />
       <GenderSection />

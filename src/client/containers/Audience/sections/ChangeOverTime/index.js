@@ -16,7 +16,7 @@ class ChangeOverTime extends React.Component {
     // const { selectViews, selectPlatforms, selectDate } = this.state;
     const {
       audienceChangeOverTimeData: { data, loading, error },
-      infoText
+      infoText,
     } = this.props
 
     return (
@@ -35,6 +35,7 @@ class ChangeOverTime extends React.Component {
             type: 'dateRange',
             selectKey: 'ACOT-wds',
             placeHolder: 'Date',
+            defaultValue: 'month',
           },
         ]}
         legend={
