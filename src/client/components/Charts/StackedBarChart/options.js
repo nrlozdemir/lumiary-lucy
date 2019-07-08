@@ -22,7 +22,7 @@ export const barDataOptions = {
           },
         },
         gridLines: {
-          display: false,
+          display: true,
           color: '#545B79',
           lineWidth: 1,
           drawBorder: true,
