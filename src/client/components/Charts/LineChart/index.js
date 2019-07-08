@@ -53,16 +53,9 @@ class LineChart extends React.Component {
           display: false,
         },
         tooltips: {
-          xAlign: 'center',
-          yAlign: 'bottom',
-          backgroundColor: '#fff',
-          titleFontColor: '#21243B',
-          bodyFontColor: '#21243B',
-          footerFontColor: '#21243B',
-          xPadding: 14,
-          yPadding: 14,
-          cornerRadius: 10,
+          enabled: false,
         },
+
         scales: {
           xAxes: [
             {
@@ -131,6 +124,21 @@ class LineChart extends React.Component {
             chartArea.bottom - chartArea.top
           )
           ctx.restore()
+        },
+        afterDraw: (chart, easing) => {
+          if (chart.options.average) {
+            let ctx = chart.chart.ctx
+            let chartArea = chart.chartArea
+            ctx.fillStyle = '#000'
+            ctx.fillRect(
+              ((chartArea.right - chartArea.left) / 100) *
+                chart.options.average +
+                48,
+              5,
+              4,
+              chartArea.bottom - chartArea.top
+            )
+          }
         },
       })
     }
