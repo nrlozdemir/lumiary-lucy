@@ -4,10 +4,10 @@ import Module from 'Components/Module'
 import cx from 'classnames'
 import LineChart from 'Components/Charts/LineChart'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
-import { lineChartOptions, lineChartData_DatasetOptions } from './options'
+// import { lineChartOptions, lineChartData_DatasetOptions } from './options'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import { isDataSetEmpty } from 'Utils/datasets'
+// import { isDataSetEmpty } from 'Utils/datasets'
 
 const percentageCol = cx('col-4-no-gutters', style.percentageCol)
 
@@ -27,7 +27,7 @@ const ContentVitalityScoreModule = ({
   options,
   loading = false,
   chartYAxisMax = 100,
-  infoText
+  infoText,
 }) => {
   const formattedData = Object.keys(data).reduce(
     (accumulator, uuid) => {
@@ -67,19 +67,19 @@ const ContentVitalityScoreModule = ({
     }
   )
 
-  const newDatasets = {
-    labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-    datasets: [
-      {
-        data:
-          (formattedData.brand_2 && formattedData.brand_2.videoPercents) || [],
-      },
-      {
-        data:
-          (formattedData.brand_1 && formattedData.brand_1.videoPercents) || [],
-      },
-    ],
-  }
+  // const newDatasets = {
+  //   labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
+  //   datasets: [
+  //     {
+  //       data:
+  //         (formattedData.brand_2 && formattedData.brand_2.videoPercents) || [],
+  //     },
+  //     {
+  //       data:
+  //         (formattedData.brand_1 && formattedData.brand_1.videoPercents) || [],
+  //     },
+  //   ],
+  // }
 
   return (
     <ThemeContext.Consumer>
@@ -91,7 +91,7 @@ const ContentVitalityScoreModule = ({
           filters={filters}
           legend={legend}
           loading={loading}
-          isEmpty={isDataSetEmpty(loading ? {} : newDatasets)}
+          isEmpty={false}
           infoText={infoText}
         >
           <div
@@ -104,7 +104,7 @@ const ContentVitalityScoreModule = ({
             >
               <LineChart
                 chartType="lineStackedArea"
-                width={1040}
+                width={1140}
                 height={291}
                 backgroundColor={colors.chartBackground}
                 dataSet={
@@ -114,16 +114,34 @@ const ContentVitalityScoreModule = ({
                         labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
                         datasets: [
                           {
-                            data:
-                              (formattedData.brand_2 &&
-                                formattedData.brand_2.videoPercents) ||
-                              [],
+                            data: [
+                              100,
+                              120,
+                              180,
+                              200,
+                              150,
+                              120,
+                              90,
+                              80,
+                              70,
+                              60,
+                              50,
+                            ],
                           },
                           {
-                            data:
-                              (formattedData.brand_1 &&
-                                formattedData.brand_1.videoPercents) ||
-                              [],
+                            data: [
+                              70,
+                              90,
+                              110,
+                              130,
+                              150,
+                              170,
+                              190,
+                              170,
+                              100,
+                              70,
+                              40,
+                            ],
                           },
                         ],
                       }
@@ -133,7 +151,7 @@ const ContentVitalityScoreModule = ({
                 xAxesFlatten={xAxesFlatten}
                 flattenFirstSpace={flattenFirstSpace}
                 flattenLastSpace={flattenLastSpace}
-                options={options}
+                options={{ ...options, average: 50 }}
               />
             </div>
             {formattedData.brand_1 &&
