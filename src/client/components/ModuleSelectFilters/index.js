@@ -62,6 +62,7 @@ class ModuleSelectFilters extends React.Component {
       themes,
       isActive,
       onChange,
+      inModuleFilter,
     } = this.props
 
     const selectedOption =
@@ -107,6 +108,7 @@ class ModuleSelectFilters extends React.Component {
           onChange={(option) => onChangeFunc(option)}
           options={options[type]}
           isActive={isActive}
+          inModuleFilter={inModuleFilter}
         />
       </React.Fragment>
     )

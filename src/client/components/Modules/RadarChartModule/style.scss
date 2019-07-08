@@ -105,13 +105,14 @@
 
     .progressBar {
       background-color: #21243b; // $color-dark-six
-      border-radius: 10px;
+      border-radius: 12px;
+      height: 12px;
       margin-top: 10px;
     }
 
     .percentageBlue {
-      border-radius: 10px;
-      height: 10px;
+      border-radius: 12px;
+      height: 12px;
       background-color: #545b79; // $dusk-two
       -webkit-transition: width 0.5s, height 0.5s;
       transition: width 0.5s, height 0.5s;

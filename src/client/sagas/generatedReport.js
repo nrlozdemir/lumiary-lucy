@@ -6,9 +6,6 @@ import { actions, types } from 'Reducers/generatedReport'
 import { actions as reportsActions } from 'Reducers/reports'
 import querystring from 'querystring'
 
-import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
-import reportsMockData from 'Api/mocks/reports.json'
-
 import {
   getDateBucketFromRange,
   getBrandAndCompetitors,
@@ -24,15 +21,6 @@ import {
 
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 import _ from 'lodash'
-
-function getGeneratedReportApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => generatedReportMockData)
-}
-
-function getReportsApi() {
-  return axios.get('/').then((res) => reportsMockData)
-}
 
 function* saveReport({ data }) {
   try {
@@ -101,20 +89,6 @@ function* saveReport({ data }) {
   } catch (err) {
     console.log('err', err)
     yield put(actions.saveReportFailure(err))
-  }
-}
-
-function* getReport({ data: { id } }) {
-  try {
-    let { reports, compareReports } = yield call(getReportsApi)
-
-    const report = [...reports, ...compareReports].find(
-      (report) => report.id === id
-    )
-
-    yield put(actions.getReportSuccess(report))
-  } catch (err) {
-    yield put(actions.getReportFailure(err))
   }
 }
 
@@ -345,10 +319,10 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
       brands: [...filteredCompetitors],
     }
 
-    if(property === 'format') {
+    if (property === 'format') {
       options.limit = 4
     }
-    
+
     const [facebook, instagram, twitter, youtube] = yield all([
       call(getDataFromApi, { ...options, platform: 'facebook' }),
       call(getDataFromApi, { ...options, platform: 'instagram' }),
@@ -375,7 +349,6 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
 }
 
 export default [
-  takeLatest(types.GET_REPORT_REQUEST, getReport),
   takeLatest(types.SAVE_REPORT_REQUEST, saveReport),
   takeLatest(types.GET_PACING_CARD_DATA_REQUEST, getPacingCardData),
   takeLatest(types.GET_COMPETITOR_TOP_VIDEOS_REQUEST, getCompetitorTopVideos),
