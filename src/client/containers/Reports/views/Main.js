@@ -208,10 +208,16 @@ class Reports extends Component {
               }
 
               .${style.deleteWrapper} div:after{
-                border-color: ${
-                  colors.tablePopoverBackground
-                } transparent transparent transparent;
-              }
+                border-color: ${colors.tablePopoverBackground} transparent transparent transparent;
+							}
+
+							.ReactTable .rt-thead .rt-th.-sort-asc div,
+							.ReactTable .rt-thead .rt-td.-sort-asc div,
+							.ReactTable .rt-thead .rt-th.-sort-desc div,
+							.ReactTable .rt-thead .rt-td.-sort-desc div{
+								font-weight: bold;
+								border-bottom: 1px solid ${colors.labelColor};
+							}
             `}
             </style>
             <div className={style.reportsContainer}>

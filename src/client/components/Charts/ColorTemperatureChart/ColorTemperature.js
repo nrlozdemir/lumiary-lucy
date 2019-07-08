@@ -30,7 +30,7 @@ const ColorTemperature = ({ temp, verticalText, themeContext }) => {
       className={style.temperatureContent}
       style={{
         background: themes.chartLightBackground,
-        boxShadow: `0 2px 12px 0 ${themes.chartShadow}`,
+        boxShadow: `0 2px 12px 0 ${themes.colorChartShadowColor}`,
       }}
     >
       <p className={style.textTop}>{temp.topText ? temp.topText : 'Happy'}</p>
@@ -41,11 +41,11 @@ const ColorTemperature = ({ temp, verticalText, themeContext }) => {
       <p className={leftText}>{temp.leftText ? temp.leftText : 'Cool'}</p>
       <div
         className={style.verticalLine}
-        style={{ background: themes.chartBackground }}
+        style={{ background: themes.lineBackgroundColor }}
       />
       <div
         className={style.horizontalLine}
-        style={{ background: themes.chartBackground }}
+        style={{ background: themes.lineBackgroundColor }}
       />
       {temp.data.map((data, i) => {
         let x = data.x

@@ -28,7 +28,7 @@ class AgeSlider extends React.Component {
   render() {
     const {
       audienceAgeSliderData: { data, loading, error },
-      infoText
+      infoText,
     } = this.props
 
     return (
@@ -46,9 +46,11 @@ class AgeSlider extends React.Component {
             type: 'dateRange',
             selectKey: 'dateRangeOption',
             placeHolder: 'Date',
+            defaultValue: 'month',
           },
         ]}
         infoText={infoText}
+        bodyClass={style.sliderWrapper}
       >
         <div className={style.audienceContainer}>
           {data && data.length > 0 && (

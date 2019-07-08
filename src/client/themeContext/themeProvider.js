@@ -2,25 +2,28 @@ import { ThemeContext } from './themeContext'
 import { themes } from './colors'
 import React from 'react'
 
+const checkTheme = window.localStorage.getItem('theme')
+const check = checkTheme ? checkTheme : 'light'
+
 class ThemeProvider extends React.Component {
   constructor() {
     super()
     const { colors } = ThemeContext._currentValue.themeContext
     this.state = {
       setColor: this.setColor,
-      colors: { ...themes.light },
+      colors: { ...themes[check] },
     }
   }
 
   setColor = (name) => {
-    console.log(name)
-    this.setState({ colors: themes[name], status: name })
+    window.localStorage.setItem('theme', name)
+    this.setState({ colors: themes[name], status: name }, () => {
+      document.body.style.backgroundColor = this.state.colors.bodyBackground
+    })
   }
 
-  componentDidMount() {}
-
-  componentDidUpdate() {
-    document.body.style.backgroundColor = this.state.colors.bodyBackground
+  componentDidMount() {
+    this.setColor(check)
   }
 
   render() {
