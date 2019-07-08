@@ -185,7 +185,7 @@
   .audienceThumbSlider {
     width: calc(100% - 230px);
     height: 110px;
-    margin: 40px auto;
+    margin: 40px auto 30px;
 
     .item {
       box-sizing: border-box;
@@ -193,7 +193,7 @@
       color: $color-dusk;
       font-family: $font-family-primary;
       font-size: 40px;
-      padding: 2px 15px;
+      // padding: 2px 15px;
       display: flex;
       justify-content: center;
       align-items: center;

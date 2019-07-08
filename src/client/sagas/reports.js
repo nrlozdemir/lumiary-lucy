@@ -2,16 +2,8 @@ import { all, takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
-import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
-import reportsDataMockData from 'Api/mocks/reportsMock.json'
-import reportsMockData from 'Api/mocks/reports.json'
-import querystring from 'querystring'
 
-import {
-  randomKey,
-  getBrandAndCompetitors,
-  getFilteredCompetitors,
-} from 'Utils'
+import querystring from 'querystring'
 
 import {
   convertDataIntoDatasets,
@@ -19,25 +11,8 @@ import {
   compareSharesData,
 } from 'Utils/datasets'
 
-import { compareBrandChartColors } from 'Utils/globals'
-
 import { getDataFromApi } from 'Utils/api'
 import { selectAuthProfile } from 'Reducers/auth'
-
-function getGeneratedReportApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => generatedReportMockData)
-}
-
-function getReportsApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => reportsMockData)
-}
-
-function getReportsMockApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => reportsDataMockData)
-}
 
 function* getReports() {
   try {
@@ -70,16 +45,6 @@ function* getReports() {
   }
 }
 
-function* getMoreReports() {
-  try {
-    const payload = yield call(getReportsApi)
-    payload.reportsData.map((item) => (item.id = randomKey(4)))
-    yield put(actions.loadMoreReportsSuccess(payload.reportsData))
-  } catch (err) {
-    yield put(actions.loadMoreReportsError(err))
-  }
-}
-
 function* brandInsightSubmit({ payload: { params, onlySave } }) {
   try {
     const {
@@ -90,7 +55,8 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
       title,
     } = params
 
-    const saved = params && params.saved && params.saved.value ? params.saved.value : false
+    const saved =
+      params && params.saved && params.saved.value ? params.saved.value : false
     const report_uuid = params && params.report_uuid
 
     const parameters = {
@@ -100,14 +66,16 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
       engagement,
       date,
       title,
-      saved
+      saved,
     }
 
     yield put(actions.brandInsightFormSubmitSuccess(parameters))
     if (!!onlySave) {
       yield put(
         push(
-          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${saved}${report_uuid ? `&report_uuid=${report_uuid}` :''}`
+          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${saved}${
+            report_uuid ? `&report_uuid=${report_uuid}` : ''
+          }`
         )
       )
     }
@@ -316,10 +284,10 @@ function* getPerformanceComparisonData({
       platform: 'all',
     }
 
-    if(property === 'format') {
+    if (property === 'format') {
       options.limit = 4
     }
-    
+
     const payload = yield call(getDataFromApi, parameters, '/report')
 
     if (!!payload && !!payload.data) {
@@ -391,7 +359,6 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
 
 export default [
   takeLatest(types.LOAD_REPORTS, getReports),
-  takeLatest(types.LOAD_MORE_REPORTS, getMoreReports),
   takeLatest(types.BRAND_INSIGHT_REQUEST, brandInsightSubmit),
   takeLatest(types.COMPARE_BRAND_REQUEST, compareBrandSubmit),
   takeLatest(types.PREDEFINED_REPORT_REQUEST, predefinedReportRequest),
