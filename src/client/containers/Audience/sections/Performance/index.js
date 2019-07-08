@@ -112,6 +112,7 @@ class Performance extends React.Component {
             type: 'dateRange',
             selectKey: 'AP-wds',
             placeHolder: 'Date',
+            defaultValue: 'month',
           },
         ]}
       >
