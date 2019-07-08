@@ -81,7 +81,7 @@ class TotalViewsChart extends React.Component {
         loading={loading}
       >
         <div className="grid-collapse">
-          <div className="col-6 mt-24">
+          <div className="col-6">
             <StackedBarChart barData={loading ? {} : barData} barSpacing={2} />
           </div>
           <div className="col-6">
