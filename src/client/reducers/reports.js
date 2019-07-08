@@ -70,7 +70,7 @@ export const types = {
 
 export const actions = {
   // LOAD REPORTS
-  loadReports: () => ({ type: types.LOAD_REPORTS }),
+  loadReports: (payload) => ({ type: types.LOAD_REPORTS, payload }),
   loadReportsSuccess: (payload) => ({
     type: types.LOAD_REPORTS_SUCCESS,
     payload,
