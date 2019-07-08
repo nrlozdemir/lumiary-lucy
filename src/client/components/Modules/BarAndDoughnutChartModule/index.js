@@ -85,7 +85,7 @@ const BarAndDoughnutChartModule = ({
   doughnutData,
   stackedChartData,
   loading = false,
-  infoText
+  infoText,
 }) => {
   return (
     <ThemeContext.Consumer>
@@ -110,7 +110,7 @@ const BarAndDoughnutChartModule = ({
                   height={barCustoms.height}
                   barData={!loading ? stackedChartData : null}
                   datalabels={barCustoms.datalabels}
-                  barSpacing={2}
+                  barSpacing={4}
                 />
               </div>
             )}

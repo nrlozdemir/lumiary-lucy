@@ -23,7 +23,7 @@ export const lineChartOptions = {
           display: true,
           color: '#373f5b',
           offsetGridLines: false,
-          lineWidth: 0.7,
+          lineWidth: 1,
           drawBorder: true,
           drawTicks: false,
         },
@@ -47,7 +47,7 @@ export const lineChartOptions = {
         gridLines: {
           display: true,
           color: '#373f5b',
-          lineWidth: 0.7,
+          lineWidth: 1,
           drawBorder: true,
           drawTicks: false,
           zeroLineColor: 'transparent',
