@@ -104,12 +104,9 @@ export class VideoCard extends PureComponent {
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <div
-            className={classnames(
-              style.cardContainer,
-              {
-                [style.rightVideoContainer]: index > 0 && (index + 1) % 4 === 0,
-              }
-            )}
+            className={classnames(style.cardContainer, {
+              [style.rightVideoContainer]: index > 0 && (index + 1) % 4 === 0,
+            })}
             style={{
               boxShadow: `0 2px 6px 0 colors.videoCardShadow`,
             }}
@@ -148,7 +145,13 @@ export class VideoCard extends PureComponent {
                   }}
                 >
                   <Link to={`/library/build-report/${video.uuid}`}>
-                    <video key={video.uuid} ref={this.video} loop muted controls={false}>
+                    <video
+                      key={video.uuid}
+                      ref={this.video}
+                      loop
+                      muted
+                      controls={false}
+                    >
                       <source src={videoUrl} type="video/mp4" />
                     </video>
                   </Link>
@@ -157,6 +160,7 @@ export class VideoCard extends PureComponent {
                     style={{
                       width: `${(this.state.width * 100) /
                         this.state.duration}%`,
+                      background: colors.videoProgressBar,
                     }}
                   />
                 </div>
@@ -186,7 +190,7 @@ export class VideoCard extends PureComponent {
                       color: colors.labelColor,
                     }}
                   >
-                    View Video Report
+                    View Video Details
                     <div className={style.icon}>
                       <RightArrowCircle />
                     </div>
