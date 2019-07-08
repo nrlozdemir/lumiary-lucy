@@ -46,7 +46,6 @@ function* getReports() {
 }
 
 function* brandInsightSubmit({ payload: { params, onlySave } }) {
-  console.log('asdf', params)
   try {
     const {
       title,
