@@ -161,6 +161,16 @@ const dark = {
   dotTrackBackgroundColor: '#21243b',
   dotThumbBackgroundColor: '#ffffff',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
+
+
+  // panoptic line chart
+  lineChartGridColor: '#545b79',
+  lineChartBackgroundColor: '#21243b',
+
+  // color chart
+  lineBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+  colorChartShadowColor: 'rgba(0, 0, 0, 0.5)',
+
 }
 
 const light = {
@@ -326,6 +336,16 @@ const light = {
   dotTrackBackgroundColor: '#e8ecf0',
   dotThumbBackgroundColor: '#2fd7c4',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
+
+
+  // panoptic line chart
+  lineChartGridColor: '#c6c9d7',
+  lineChartBackgroundColor: '#e8ecf0',
+
+  // color chart
+  lineBackgroundColor: '#bebebe',
+  colorChartShadowColor: '#bebebe',
+
 }
 
 const themes = {

@@ -1,17 +1,13 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects'
-import axios from 'axios'
-import { ajax } from 'Utils/api'
+
 import _ from 'lodash'
 
 import {
   types,
   actions,
   makeSelectInfoShowSection,
-  makeSelectDoughnutFilters,
-  selectShotInfoData,
 } from 'Reducers/libraryDetail'
-import mock from 'Api/mocks/libraryMock.json'
-import { findIdDetail, getDataFromApi, buildApiUrl } from 'Utils/api'
+import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import { getMaximumValueIndexFromArray } from 'Utils'
 
@@ -24,24 +20,6 @@ import {
 } from 'Utils/datasets'
 
 import { selectAuthProfile } from 'Reducers/auth'
-
-function getBarChartApi({ LibraryDetailId }) {
-  //this will use ajax function in utils/api when real data is provided
-  return axios
-    .get('/')
-    .then((res) => findIdDetail(mock, LibraryDetailId, 'HeaderBarChartMock'))
-}
-
-function* getBarChart({ payload: { LibraryDetailId } }) {
-  try {
-    const payload = yield call(getBarChartApi, {
-      LibraryDetailId,
-    })
-    yield put(actions.getBarChartSuccess(payload))
-  } catch (error) {
-    yield put(actions.getBarChartFailure({ error }))
-  }
-}
 
 function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
   try {
@@ -382,7 +360,7 @@ function* getPeopleRequest(ids) {
     const url = `/brand/${ids.payload.brandUuid}/video/${
       ids.payload.videoUuid
     }/shots/${ids.payload.shotId}/demographics`
-    
+
     const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
 
     yield put(actions.getPeopleSuccess(payload))
@@ -392,7 +370,6 @@ function* getPeopleRequest(ids) {
 }
 
 export default [
-  takeLatest(types.GET_BAR_CHART_REQUEST, getBarChart),
   takeLatest(types.GET_DOUGHNUT_CHART_REQUEST, getDoughnutChart),
   takeLatest(types.GET_COLOR_TEMP_REQUEST, getColorTemperatureData),
   takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),
