@@ -13,10 +13,6 @@ export const types = {
   GET_SELECTED_VIDEO_AVERAGE_FAILURE:
     'LibraryDetail/GET_SELECTED_VIDEO_AVERAGE_FAILURE',
 
-  GET_BAR_CHART_REQUEST: 'LibraryDetail/GET_BAR_CHART_REQUEST',
-  GET_BAR_CHART_SUCCESS: 'LibraryDetail/GET_BAR_CHART_SUCCESS',
-  GET_BAR_CHART_FAILURE: 'LibraryDetail/GET_BAR_CHART_FAILURE',
-
   GET_DOUGHNUT_CHART_REQUEST: 'LibraryDetail/GET_DOUGHNUT_CHART_REQUEST',
   GET_DOUGHNUT_CHART_SUCCESS: 'LibraryDetail/GET_DOUGHNUT_CHART_SUCCESS',
   GET_DOUGHNUT_CHART_FAILURE: 'LibraryDetail/GET_DOUGHNUT_CHART_FAILURE',
@@ -71,18 +67,7 @@ export const actions = {
     type: types.GET_SELECTED_VIDEO_AVERAGE_FAILURE,
     error,
   }),
-  getBarChartRequest: (payload) => ({
-    type: types.GET_BAR_CHART_REQUEST,
-    payload,
-  }),
-  getBarChartSuccess: (payload) => ({
-    type: types.GET_BAR_CHART_SUCCESS,
-    payload,
-  }),
-  getBarChartFailure: (error) => ({
-    type: types.GET_BAR_CHART_FAILURE,
-    error,
-  }),
+
   getDoughnutChartRequest: (payload) => ({
     type: types.GET_DOUGHNUT_CHART_REQUEST,
     payload,
@@ -224,17 +209,6 @@ const libraryDetailReducer = (state = initialState, action) => {
         .set('loading', fromJS(false))
     }
     case types.GET_SELECTED_VIDEO_AVERAGE_FAILURE:
-      return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
-
-    case types.GET_BAR_CHART_REQUEST:
-      return state.set('loading', fromJS(true))
-    case types.GET_BAR_CHART_SUCCESS:
-      return state
-        .set('barChartData', fromJS(action.payload))
-        .set('loading', fromJS(false))
-    case types.GET_BAR_CHART_FAILURE:
       return state
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))

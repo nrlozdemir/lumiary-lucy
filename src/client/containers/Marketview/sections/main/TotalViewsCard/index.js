@@ -31,7 +31,7 @@ class TotalViewsChart extends React.Component {
         loading,
         data: { barData, doughnutData },
       },
-      infoText
+      infoText,
     } = this.props
 
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
@@ -82,7 +82,7 @@ class TotalViewsChart extends React.Component {
       >
         <div className="grid-collapse">
           <div className="col-6 mt-24">
-            <StackedBarChart barData={loading ? {} : barData} />
+            <StackedBarChart barData={loading ? {} : barData} barSpacing={2} />
           </div>
           <div className="col-6">
             <DoughnutChart
