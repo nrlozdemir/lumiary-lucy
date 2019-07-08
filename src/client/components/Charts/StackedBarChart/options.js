@@ -29,6 +29,7 @@ export const barDataOptions = {
           drawTicks: true,
           offsetGridLines: true,
           zeroLineColor: 'red',
+          tickMarkLength: 0,
         },
       },
     ],
