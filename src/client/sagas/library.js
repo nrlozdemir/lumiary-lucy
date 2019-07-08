@@ -1,18 +1,10 @@
 import qs from 'qs'
-import axios from 'axios'
 import { ajax } from 'Utils/api'
-import { sortVideos } from 'Utils/sort-videos'
-import libraryMockData from 'Api/mocks/libraryMock.json'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { types, actions, makeSelectVideoFilters } from 'Reducers/library'
 import { userUuid } from 'Utils/globals'
 
 const RESOURCE = '/brand'
-
-function getLibraryApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => libraryMockData)
-}
 
 function getLibraryDataApi(vals) {
   const { limit, page, body = {} } = vals
@@ -77,7 +69,7 @@ function getBodyFromFilters(filters = {}) {
           accumulator['platforms'] = []
         }
 
-        if(thisFilter) {
+        if (thisFilter) {
           accumulator['platforms'].push(filter.toLowerCase())
         }
         break
@@ -138,9 +130,10 @@ function getBodyFromFilters(filters = {}) {
         if (!accumulator['colors']) {
           accumulator['colors'] = []
         }
-        accumulator['colors'].push(thisFilter.name.toLowerCase().replace(/ /g, '-'))
+        accumulator['colors'].push(
+          thisFilter.name.toLowerCase().replace(/ /g, '-')
+        )
         break
-
     }
 
     return accumulator
