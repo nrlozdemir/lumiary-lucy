@@ -104,9 +104,14 @@ class Performance extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'metric',
+            type: 'platformEngagement',
+            selectKey: 'AP-plateng',
+            placeHolder: 'Engagement by Platform',
+          },
+          {
+            type: 'property',
             selectKey: 'AP-asd',
-            placeHolder: 'Engagement',
+            placeHolder: 'Resolution',
           },
           {
             type: 'dateRange',
