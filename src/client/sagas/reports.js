@@ -2,16 +2,8 @@ import { all, takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
-import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
-import reportsDataMockData from 'Api/mocks/reportsMock.json'
-import reportsMockData from 'Api/mocks/reports.json'
-import querystring from 'querystring'
 
-import {
-  randomKey,
-  getBrandAndCompetitors,
-  getFilteredCompetitors,
-} from 'Utils'
+import querystring from 'querystring'
 
 import {
   convertDataIntoDatasets,
@@ -19,25 +11,8 @@ import {
   compareSharesData,
 } from 'Utils/datasets'
 
-import { compareBrandChartColors } from 'Utils/globals'
-
 import { getDataFromApi } from 'Utils/api'
 import { selectAuthProfile } from 'Reducers/auth'
-
-function getGeneratedReportApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => generatedReportMockData)
-}
-
-function getReportsApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => reportsMockData)
-}
-
-function getReportsMockApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => reportsDataMockData)
-}
 
 function* getReports() {
   try {
@@ -67,16 +42,6 @@ function* getReports() {
   } catch (err) {
     console.log('err', err)
     yield put(actions.loadReportsError(err.message))
-  }
-}
-
-function* getMoreReports() {
-  try {
-    const payload = yield call(getReportsApi)
-    payload.reportsData.map((item) => (item.id = randomKey(4)))
-    yield put(actions.loadMoreReportsSuccess(payload.reportsData))
-  } catch (err) {
-    yield put(actions.loadMoreReportsError(err))
   }
 }
 
@@ -395,7 +360,6 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
 
 export default [
   takeLatest(types.LOAD_REPORTS, getReports),
-  takeLatest(types.LOAD_MORE_REPORTS, getMoreReports),
   takeLatest(types.BRAND_INSIGHT_REQUEST, brandInsightSubmit),
   takeLatest(types.COMPARE_BRAND_REQUEST, compareBrandSubmit),
   takeLatest(types.PREDEFINED_REPORT_REQUEST, predefinedReportRequest),
