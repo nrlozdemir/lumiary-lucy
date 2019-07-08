@@ -60,7 +60,7 @@ const LineAndDoughnutChartModule = ({
           ctx.moveTo(x, topY)
           ctx.lineTo(x, bottomY)
           ctx.lineWidth = 5
-          ctx.strokeStyle = '#fff'
+          ctx.strokeStyle = '#000'
           ctx.stroke()
           ctx.restore()
         }
