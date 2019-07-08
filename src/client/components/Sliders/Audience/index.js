@@ -15,6 +15,7 @@ class AudienceSlider extends React.Component {
     this.state = {
       refThumb: null,
     }
+    this.refSlider = React.createRef()
   }
 
   componentDidMount() {

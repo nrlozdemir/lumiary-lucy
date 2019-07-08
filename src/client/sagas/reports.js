@@ -49,11 +49,12 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
   try {
     const {
       brand: { value: brand },
-      social: { value: social },
-      engagement: { value: engagement },
+      engagamentByPlatform: { value: engagamentByPlatform },
       date: { value: date },
       title,
     } = params
+
+    const [social, engagement] = engagamentByPlatform.split('|')
 
     const saved =
       params && params.saved && params.saved.value ? params.saved.value : false
