@@ -91,7 +91,7 @@ class PanopticFilteringSection extends Component {
           <div className={style.stackedChart}>
             <StackedBarChart
               barData={!loading ? stackedChartData : null}
-              barSpacing={2}
+              barSpacing={4}
             />
           </div>
         </div>

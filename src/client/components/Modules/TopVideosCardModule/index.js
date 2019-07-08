@@ -36,6 +36,7 @@ const TopVideosCard = (props) => {
           barData={chartData}
           height={height}
           xGridDisplay={xGridDisplay}
+          barSpacing={4}
         />
       </div>
     </Module>
