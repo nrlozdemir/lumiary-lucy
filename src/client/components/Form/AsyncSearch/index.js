@@ -100,10 +100,10 @@ const AsyncSearch = (props) => {
     placeholder: (styles, { data, isDisabled, isFocused, isSelected }) => ({
       ...styles,
       color: isFocused
-        ? colors.inputColor
+        ? colors.inputActiveColor
         : isSelected
         ? colors.inputColor
-        : colors.inputActiveColor,
+        : colors.inputPlaceholderColor,
     }),
   }
 
