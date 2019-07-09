@@ -115,32 +115,33 @@ const ContentVitalityScoreModule = ({
                         datasets: [
                           {
                             data: [
-                              100,
+                              30,
+                              60,
+
                               120,
                               180,
-                              200,
-                              150,
                               120,
-                              90,
-                              80,
-                              70,
                               60,
                               50,
+                              40,
+                              30,
+                              20,
+                              10,
                             ],
                           },
                           {
                             data: [
-                              70,
-                              90,
-                              110,
-                              130,
-                              150,
-                              170,
-                              190,
-                              170,
-                              100,
-                              70,
+                              10,
+                              20,
+                              30,
                               40,
+                              50,
+                              60,
+                              120,
+                              180,
+                              120,
+                              60,
+                              50,
                             ],
                           },
                         ],
@@ -151,7 +152,7 @@ const ContentVitalityScoreModule = ({
                 xAxesFlatten={xAxesFlatten}
                 flattenFirstSpace={flattenFirstSpace}
                 flattenLastSpace={flattenLastSpace}
-                options={{ ...options, average: 50 }}
+                options={{ ...options, average: 10 }}
               />
             </div>
             {formattedData.brand_1 &&
