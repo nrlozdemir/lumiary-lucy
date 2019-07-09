@@ -312,15 +312,15 @@ function* getTopPerformingFormatData({ data = {} }) {
     ])
 
     if (!!dataWithDateBuckets.data && !!dataWithoutDateBuckets.data) {
-      const lineChartData = convertDataIntoDatasets(
-        dataWithDateBuckets,
-        dateBucketedOptions
+      const lineChartData = percentageManipulation(
+        convertDataIntoDatasets(dataWithDateBuckets, dateBucketedOptions)
       )
 
-      const doughnutData = convertDataIntoDatasets(
-        dataWithoutDateBuckets,
-        options,
-        { singleDataset: true, hoverBG: true }
+      const doughnutData = percentageManipulation(
+        convertDataIntoDatasets(dataWithoutDateBuckets, options, {
+          singleDataset: true,
+          hoverBG: true,
+        })
       )
 
       yield put(
