@@ -17,6 +17,7 @@ import {
   convertColorTempToDatasets,
   parseAverage,
   convertNumberArrIntoPercentages,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { selectAuthProfile } from 'Reducers/auth'
@@ -105,7 +106,7 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
       }
     })
 
-    yield put(actions.getDoughnutChartSuccess(val))
+    yield put(actions.getDoughnutChartSuccess(percentageManipulation(val)))
   } catch (error) {
     yield put(actions.getDoughnutChartFailure({ error }))
   }
