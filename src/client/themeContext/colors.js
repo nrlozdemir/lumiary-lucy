@@ -86,7 +86,7 @@ const dark = {
   // custom selectbox values
 
   // input values
-  inputControlBackground: '#373f5b',
+  inputControlBackground: '#21243B',
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#545b79',
   inputColor: '#545B79',
