@@ -14,7 +14,7 @@ import {
 import { getDataFromApi } from 'Utils/api'
 import { selectAuthProfile } from 'Reducers/auth'
 
-function* getReports() {
+function* getReports({ payload: { value: filterValue } = {} }) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
@@ -27,17 +27,28 @@ function* getReports() {
     if (!!response) {
       const compare =
         !!response.compare &&
-        !!response.compare.length &&
         response.compare.map((item) => {
           return { ...item, category: 'Compare Brands' }
         })
       const insights =
         !!response.insights &&
-        !!response.insights.length &&
         response.insights.map((item) => {
           return { ...item, category: 'Brands Insights' }
         })
-      yield put(actions.loadReportsSuccess([...compare, ...insights]))
+      let values
+
+      switch (filterValue) {
+        case 'insights':
+          values = insights
+          break
+        case 'compare':
+          values = compare
+          break
+        default:
+          values = [...compare, ...insights]
+      }
+
+      yield put(actions.loadReportsSuccess(values))
     }
   } catch (err) {
     console.log('err', err)
