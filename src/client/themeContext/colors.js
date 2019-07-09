@@ -92,10 +92,15 @@ const dark = {
   inputColor: '#545B79',
   inputActiveColor: '#fff',
   inputOptionBackground: '#545B79',
-  inputOptionFocusBackground: '#21243B',
+  inputOptionFocusBackground: '#545B79',
   inputOptionSelectedBackground: '#ffffff',
   inputPlaceholderColor: '#545b79',
   // input values
+
+  // search input colors
+  searchInputColor: '#fff',
+  searchInputActiveColor: '#fff',
+  searchInputPlaceholderColor: '#fff',
 
   // table values
   tableHeaderBackground: '#545b79',
@@ -271,6 +276,11 @@ const light = {
   inputPlaceholderColor: '#c6c9d7',
 
   // input values
+
+  // search input colors
+  searchInputColor: '#000',
+  searchInputActiveColor: '#505050',
+  searchInputPlaceholderColor: '#c6c9d7',
 
   // table values
   tableHeaderBackground: '#ffffff',
