@@ -136,7 +136,7 @@ function* getColorTemperatureData({
 
       yield put({
         type: types.GET_COLOR_TEMP_SUCCESS,
-        payload: convertedData,
+        payload: percentageManipulation(convertedData),
       })
     } else {
       throw 'Error fetching Library/Detail ColorTemperature'
