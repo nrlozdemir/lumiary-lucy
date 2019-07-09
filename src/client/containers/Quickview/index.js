@@ -237,7 +237,7 @@ export class Main extends React.PureComponent {
                                 <h1>
                                   {i == 0
                                     ? 'Underperforming Videos'
-                                    : 'Overperforming Videos'}
+                                    : 'Overperforming Video'}
 
                                   {infoText && (
                                     <i
