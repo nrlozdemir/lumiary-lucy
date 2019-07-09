@@ -191,7 +191,9 @@ function* getSelectedVideo({ payload }) {
       'GET'
     )
 
-    yield put(actions.getSelectedVideoSuccess(percentageManipulation(response.video)))
+    yield put(
+      actions.getSelectedVideoSuccess(percentageManipulation(response.video))
+    )
   } catch (error) {
     yield put(actions.getSelectedVideoFailure({ error }))
   }
@@ -235,29 +237,37 @@ function* getDoughnutSectionInfoData({ payload }) {
         chartData: libraryChartData,
         maxKey: libraryMaxKey,
         maxValue: libraryMaxValue,
-      } = percentageManipulation(convertIntoLibAndIndustryDoughnut(
-        libraryMetricPercents,
-        property,
-        '#2FD7C4'
-      ))
+      } = percentageManipulation(
+        convertIntoLibAndIndustryDoughnut(
+          libraryMetricPercents,
+          property,
+          '#2FD7C4'
+        )
+      )
 
       const {
         maxKeyLabel: industryMaxKeyLabel,
         chartData: industryChartData,
         maxKey: industryMaxKey,
         maxValue: industryMaxValue,
-      } = percentageManipulation(convertIntoLibAndIndustryDoughnut(
-        industryMetricPercents,
-        property,
-        '#8562f3'
-      ))
+      } = percentageManipulation(
+        convertIntoLibAndIndustryDoughnut(
+          industryMetricPercents,
+          property,
+          '#8562f3'
+        )
+      )
 
-      const libraryPercentages = percentageManipulation(convertNumberArrIntoPercentages(
-        Object.values(libraryMetricDateSums[libraryMaxKeyLabel])
-      ))
-      const industryPercentages = percentageManipulation(convertNumberArrIntoPercentages(
-        Object.values(industryMetricDateSums[industryMaxKeyLabel])
-      ))
+      const libraryPercentages = percentageManipulation(
+        convertNumberArrIntoPercentages(
+          Object.values(libraryMetricDateSums[libraryMaxKeyLabel])
+        )
+      )
+      const industryPercentages = percentageManipulation(
+        convertNumberArrIntoPercentages(
+          Object.values(industryMetricDateSums[industryMaxKeyLabel])
+        )
+      )
 
       const lineChartData = {
         labels: Object.keys(industryDateCounts).reverse(),
@@ -309,7 +319,11 @@ function* getVideoAverage({ id }) {
       requestType: 'GET',
     })
 
-    yield put(actions.getSelectedVideoAverageSuccess(parseAverage(payload)))
+    yield put(
+      actions.getSelectedVideoAverageSuccess(
+        percentageManipulation(parseAverage(payload))
+      )
+    )
   } catch (error) {
     yield put(actions.getSelectedVideoAverageFailure({ error }))
   }
