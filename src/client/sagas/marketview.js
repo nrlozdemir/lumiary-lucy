@@ -484,8 +484,8 @@ function* getTotalViewsData({ data }) {
 
     yield put(
       actions.getTotalViewsSuccess({
-        barData: convertedBarData,
-        doughnutData: convertedDoughnutData,
+        barData: percentageManipulation(convertedBarData),
+        doughnutData: percentageManipulation(convertedDoughnutData),
       })
     )
   } catch (error) {
