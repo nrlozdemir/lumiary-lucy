@@ -17,6 +17,7 @@ import {
   convertMultiRequestDataIntoDatasets,
   convertVideoEngagementData,
   convertColorTempToDatasets,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
@@ -115,7 +116,7 @@ function* getTopPerformingVideos({ data: { report = {} } }) {
       )
 
       if (!!response && !!response.length) {
-        yield put(actions.getTopPerformingVideosSuccess(response))
+        yield put(actions.getTopPerformingVideosSuccess(percentageManipulation(response)))
       } else {
         yield put(actions.getTopPerformingVideosSuccess([]))
       }
