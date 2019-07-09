@@ -551,6 +551,8 @@ function* getTopPerformingPropertiesData({
       return acc
     }, {})
 
+    response = percentageManipulation(response)
+
     yield put(
       actions.getTopPerformingPropertiesSuccess(
         convertMultiRequestDataIntoDatasets(
