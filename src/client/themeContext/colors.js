@@ -58,7 +58,7 @@ const dark = {
   videoCardColor: '#ffffff',
   videoCardShadow: 'rgba(0, 0, 0, 0.5)',
   videoBorder: '#545b79',
-  videoRightPercentageBackground: '#202952',
+  videoRightPercentageBackground: 'rgba(32, 41, 82, 0.8)',
 
   // Sidebar
   filterHeader: '#ffffff',
@@ -71,7 +71,7 @@ const dark = {
   filterHeaderText: '#202952',
 
   // modal values
-  modalBackground: '#373f5b',
+  modalBackground: 'x#373f5b',
   modalHeaderBackground: '#ffffff',
   modalHeaderColor: '#202952',
   modalButtonBackground: '#545b79',
@@ -242,7 +242,7 @@ const light = {
   videoCardShadow: '#bebebe',
   videoBorder: '#c6c9d7',
   videoCardIcon: '#505050',
-  videoRightPercentageBackground: '#fff',
+  videoRightPercentageBackground: 'rgba(255, 255, 255, 0.8)',
 
   // Sidebar
   filterHeader: '#505050',
