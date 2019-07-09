@@ -9,6 +9,7 @@ import {
   convertDataIntoDatasets,
   radarChartCalculate,
   compareSharesData,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { getDataFromApi } from 'Utils/api'
@@ -238,7 +239,7 @@ function* getContentVitalityScoreData({ payload = {} }) {
       'GET'
     )
 
-    yield put(actions.getContentVitalityScoreDataSuccess(payload))
+    yield put(actions.getContentVitalityScoreDataSuccess(percentageManipulation(payload)))
   } catch (err) {
     console.log(err)
     yield put(actions.getContentVitalityScoreDataError(err))
