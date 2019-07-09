@@ -364,7 +364,7 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
 
       yield put(
         actions.getColorComparisonDataSuccess(
-          radarChartCalculate(compareSharesData(payload))
+          radarChartCalculate(compareSharesData(payload, parameters))
         )
       )
     } else {
