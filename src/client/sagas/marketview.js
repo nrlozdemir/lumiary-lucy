@@ -343,7 +343,9 @@ function* getPacingChartData() {
       }
     )
 
-    yield put(actions.getPacingChartSuccess(pacingChartData))
+    yield put(
+      actions.getPacingChartSuccess(percentageManipulation(pacingChartData))
+    )
   } catch (error) {
     console.log(error)
     yield put(actions.getPacingChartFailure(error))
