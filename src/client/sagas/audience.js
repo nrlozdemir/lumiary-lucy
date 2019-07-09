@@ -80,7 +80,9 @@ function* getAudienceAgeSliderData() {
     }
     const data = payload.ageSlider
     data.map((element) => (element.image = randomImage(element.image)))
-    yield put(actions.getAudienceAgeSliderDataSuccess(data))
+    yield put(
+      actions.getAudienceAgeSliderDataSuccess(percentageManipulation(data))
+    )
   } catch (err) {
     yield put(actions.getAudienceAgeSliderDataError(err))
   }
