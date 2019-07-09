@@ -7,7 +7,11 @@ import { selectAuthProfile } from 'Reducers/auth'
 
 import { getDataFromApi } from 'Utils/api'
 
-import { radarChartCalculate, compareSharesData, percentageManipulation } from 'Utils/datasets'
+import {
+  radarChartCalculate,
+  compareSharesData,
+  percentageManipulation,
+} from 'Utils/datasets'
 
 import _ from 'lodash'
 
@@ -27,7 +31,11 @@ function* getAudienceContentVitalityScoreData() {
     let shuffleData = payload.lineStackedChartData
     shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
     shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getAudienceContentVitalityScoreDataSuccess(percentageManipulation(shuffleData))
+    yield put(
+      actions.getAudienceContentVitalityScoreDataSuccess(
+        percentageManipulation(shuffleData)
+      )
+    )
   } catch (err) {
     yield put(actions.getAudienceContentVitalityScoreDataError(err))
   }
