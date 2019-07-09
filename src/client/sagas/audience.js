@@ -61,7 +61,9 @@ function* getAudiencePerformanceData() {
 function* updateAudiencePerformance({ payload: { min, max } }) {
   try {
     const payload = yield call(updateAudiencePerformanceApi, { min, max })
-    yield put(actions.updateAudiencePerformanceSuccess(payload))
+    yield put(
+      actions.updateAudiencePerformanceSuccess(percentageManipulation(payload))
+    )
   } catch (err) {
     yield put(actions.updateAudiencePerformanceError(err))
   }
