@@ -161,6 +161,7 @@ export class VideoCard extends PureComponent {
                     style={{
                       width: `${(this.state.width * 100) /
                         this.state.duration}%`,
+                      background: colors.videoProgressBar,
                     }}
                   />
                 </div>
@@ -190,7 +191,7 @@ export class VideoCard extends PureComponent {
                       color: colors.labelColor,
                     }}
                   >
-                    View Video Report
+                    View Video Details
                     <div className={style.icon}>
                       <RightArrowCircle />
                     </div>
