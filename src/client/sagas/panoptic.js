@@ -76,7 +76,7 @@ function* getColorTemperatureData({ data }) {
       actions.getColorTemperatureDataSuccess({
         labels,
         platforms,
-        data: colorTempData,
+        data: percentageManipulation(colorTempData),
       })
     )
   } catch (err) {
