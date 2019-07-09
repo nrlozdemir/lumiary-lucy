@@ -203,6 +203,8 @@ function* getDoughnutSectionInfoData({ payload }) {
       return
     }
 
+    payload = percentageManipulation(payload)
+
     const { videoId, property, dateRange, metric } = payload
 
     const infoData = yield select(makeSelectInfoShowSection)
