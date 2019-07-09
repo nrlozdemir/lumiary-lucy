@@ -236,7 +236,7 @@ export class Main extends React.PureComponent {
                               <div className={style.card}>
                                 <h1>
                                   {i == 0
-                                    ? 'Underperforming Videos'
+                                    ? 'Underperforming Video'
                                     : 'Overperforming Video'}
 
                                   {infoText && (
