@@ -71,6 +71,7 @@ class LibraryHeader extends React.Component {
               {`
               .${style.filterSelect}{
                 border: 1px solid ${colors.inputControlSelectedBorder};
+                color: ${colors.themeType === 'dark' ? '#fff' : 'unset'};
               }
             `}
             </style>
@@ -92,12 +93,15 @@ class LibraryHeader extends React.Component {
                 style={{ color: colors.labelColor }}
               >
                 Library
-          </h1>
+              </h1>
             </div>
             <div>
               <Button
                 onClick={() => setSidebarVisible(true)}
-                customClass={classnames('float-right font-secondary-first text-bold', style.filterButton)}
+                customClass={classnames(
+                  'float-right font-secondary-first text-bold',
+                  style.filterButton
+                )}
                 buttonText="Filter Videos"
                 iconRight="icon-Filter"
               />
