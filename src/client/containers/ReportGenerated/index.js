@@ -10,7 +10,6 @@ import {
   makeSelectReportsPacingCard,
   makeSelectReportsFilteringSection,
   makeSelectReportsColorTempData,
-  makeSelectReport,
 } from 'Reducers/generatedReport'
 
 import {
@@ -65,7 +64,6 @@ class ReportGenerated extends React.Component {
     const {
       match: { params },
       location: { search },
-      report: { data: report },
       brandInsightValues: { data: brandInsightValues },
       setSelectedVideo,
       selects,
@@ -149,7 +147,6 @@ class ReportGenerated extends React.Component {
 const mapStateToProps = createStructuredSelector({
   profile: makeSelectAuthProfile(),
 
-  report: makeSelectReport(),
   videoReleasesBarChart: makeSelectReportsVideoReleasesBarChart(),
   competitorTopVideos: makeSelectReportsTopVideosCard(),
   topPerformingVideos: makeSelectReportsTopPerformingVideos(),
