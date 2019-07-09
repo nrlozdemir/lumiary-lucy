@@ -653,7 +653,7 @@ function* getTopPerformingPropertiesByTimeData({
 
     yield put(
       actions.getTopPerformingTimeSuccess(
-        convertDataIntoDatasets(data, options, {
+        convertDataIntoDatasets(percentageManipulation(data), options, {
           singleDataset: false,
         })
       )
