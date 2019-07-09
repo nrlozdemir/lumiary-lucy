@@ -108,10 +108,9 @@ const RadarChart = (props) => {
               return data.labels[tooltipItem['index']].name
             },
             afterLabel: function(tooltipItem, data) {
-              return (
-                metricSuffix(data.labels[tooltipItem['index']].count) +
-                ' Shares'
-              )
+              return `${metricSuffix(
+                data.labels[tooltipItem['index']].count
+              )} ${data.datasets[0].metric}`
             },
           },
         },
