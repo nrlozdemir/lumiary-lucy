@@ -203,8 +203,6 @@ function* getDoughnutSectionInfoData({ payload }) {
       return
     }
 
-    payload = percentageManipulation(payload)
-
     const { videoId, property, dateRange, metric } = payload
 
     const infoData = yield select(makeSelectInfoShowSection)
@@ -237,29 +235,29 @@ function* getDoughnutSectionInfoData({ payload }) {
         chartData: libraryChartData,
         maxKey: libraryMaxKey,
         maxValue: libraryMaxValue,
-      } = convertIntoLibAndIndustryDoughnut(
+      } = percentageManipulation(convertIntoLibAndIndustryDoughnut(
         libraryMetricPercents,
         property,
         '#2FD7C4'
-      )
+      ))
 
       const {
         maxKeyLabel: industryMaxKeyLabel,
         chartData: industryChartData,
         maxKey: industryMaxKey,
         maxValue: industryMaxValue,
-      } = convertIntoLibAndIndustryDoughnut(
+      } = percentageManipulation(convertIntoLibAndIndustryDoughnut(
         industryMetricPercents,
         property,
         '#8562f3'
-      )
+      ))
 
-      const libraryPercentages = convertNumberArrIntoPercentages(
+      const libraryPercentages = percentageManipulation(convertNumberArrIntoPercentages(
         Object.values(libraryMetricDateSums[libraryMaxKeyLabel])
-      )
-      const industryPercentages = convertNumberArrIntoPercentages(
+      ))
+      const industryPercentages = percentageManipulation(convertNumberArrIntoPercentages(
         Object.values(industryMetricDateSums[industryMaxKeyLabel])
-      )
+      ))
 
       const lineChartData = {
         labels: Object.keys(industryDateCounts).reverse(),
