@@ -278,7 +278,7 @@ function* getFlipCardsData() {
         },
       }))
     )
-    yield put(actions.getFlipCardsDataSuccess(payloads))
+    yield put(actions.getFlipCardsDataSuccess(percentageManipulation(payloads)))
   } catch (err) {
     console.log(err)
     yield put(actions.getFlipCardsDataError(err))
