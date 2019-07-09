@@ -226,7 +226,7 @@ function* getSimilarProperties({ data: { dateRange, container } }) {
     }))
 
     yield delay(2000)
-    yield put(actions.getSimilarPropertiesSuccess(val))
+    yield put(actions.getSimilarPropertiesSuccess(percentageManipulation(val)))
   } catch (error) {
     console.log('error == ', error)
     yield put(actions.getSimilarPropertiesFailure(error))
