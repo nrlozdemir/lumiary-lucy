@@ -10,6 +10,7 @@ import {
   compareSharesData,
   convertColorTempToDatasets,
   convertVideoEngagementData,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
@@ -195,7 +196,9 @@ function* getPacingCardData({ data }) {
     ) {
       yield put(
         actions.getPacingCardDataSuccess({
-          stadiumData: convertDataIntoDatasets(stadiumData, options),
+          stadiumData: percentageManipulation(
+            convertDataIntoDatasets(stadiumData, options)
+          ),
           horizontalStackedBarData: convertDataIntoDatasets(
             horizontalStackedBarData,
             {
