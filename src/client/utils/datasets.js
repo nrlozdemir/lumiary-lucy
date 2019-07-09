@@ -11,7 +11,14 @@ import {
   getTimeBucket,
   getLabelWithSuffix,
 } from 'Utils'
-import { isEmpty, isObject, isArray, isNumber, isFinite } from 'lodash'
+import {
+  isEmpty,
+  isObject,
+  isArray,
+  isNumber,
+  isFinite,
+  isInteger,
+} from 'lodash'
 
 /**
  * Convert data to chart js structure
@@ -666,16 +673,16 @@ const convertNumberArrIntoPercentages = (arr = []) => {
 }
 
 const percentageBeautifier = (value, precision) => {
-  if (value === 0) {
+  if (isInteger(value) || value === 0) {
     return value
   }
 
-  const multiplier = Math.pow(10, precision || 1);
-  value = Math.round(value * multiplier) / multiplier;
+  const multiplier = Math.pow(10, precision || 1)
+  value = Math.round(value * multiplier) / multiplier
 
   if (value.toString().substr(-1, 1) == 0) {
     value = value.toString().replace('.0', '')
-  } 
+  }
 
   return value
 }
@@ -720,6 +727,7 @@ const percentageManipulation = (bucket) => {
       }
     })
   }
+
   return bucket
 }
 
