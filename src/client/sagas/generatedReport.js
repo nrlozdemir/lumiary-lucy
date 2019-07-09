@@ -296,18 +296,17 @@ function* getPacingCardData({ data: { report } }) {
 
     yield put(
       actions.getPacingCardDataSuccess({
-        stadiumData: convertDataIntoDatasets(stadiumData, options),
-        horizontalStackedBarData: convertDataIntoDatasets(
+        stadiumData: percentageManipulation(convertDataIntoDatasets(stadiumData, options)),
+        horizontalStackedBarData: percentageManipulation(convertDataIntoDatasets(
           horizontalStackedBarData,
           {
             ...options,
             proportionOf: 'format',
           }
-        ),
+        )),
       })
     )
   } catch (err) {
-    console.log(err)
     yield put(actions.getPacingCardDataFailure(err))
   }
 }
