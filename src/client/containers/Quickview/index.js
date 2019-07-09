@@ -241,7 +241,7 @@ export class Main extends React.PureComponent {
                                     <h1>
                                       {i == 0
                                         ? 'Underperforming Videos'
-                                        : 'Over Performing Videos'}
+                                        : 'Overperforming Videos'}
 
                                       {infoText && <i
                                         className={cx('icon icon-Information', style.moduleInfo)}
