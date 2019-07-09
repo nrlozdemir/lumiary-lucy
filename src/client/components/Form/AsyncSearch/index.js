@@ -49,10 +49,10 @@ const AsyncSearch = (props) => {
       lineHeight: '27px',
       backgroundColor: colors.searchOptionsColor,
       color: isSelected
-        ? colors.inputColor
+        ? colors.searchInputColor
         : isFocused
-        ? colors.inputActiveColor
-        : colors.inputActiveColor,
+        ? colors.searchInputActiveColor
+        : colors.searchInputActiveColor,
       cursor: 'pointer',
       border: 'none',
       boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.5)',
@@ -87,11 +87,11 @@ const AsyncSearch = (props) => {
     }),
     input: (styles, { data, isDisabled, isFocused, isSelected }) => ({
       ...styles,
-      color: colors.inputActiveColor,
+      color: colors.searchInputActiveColor,
     }),
     singleValue: (styles, state) => ({
       ...styles,
-      color: colors.inputActiveColor,
+      color: colors.searchInputActiveColor,
     }),
     placeholder: (styles, { data, isDisabled, isFocused, isSelected }) => ({
       ...styles,

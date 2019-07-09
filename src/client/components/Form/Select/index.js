@@ -195,7 +195,7 @@ const Select = (props) => {
           ? themes.inputColor
           : isReportDropdown
           ? themes.moduleBorder
-          : themes.inputActiveColor,
+          : themes.inputPlaceholderColor,
         whiteSpace: 'nowrap',
         position: 'unset',
         transform: 'unset',
@@ -213,6 +213,7 @@ const Select = (props) => {
       ...base,
       boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.5)',
       borderRadius: 0,
+      zIndex: 100
     }),
     menuList: (base) => ({
       ...base,
