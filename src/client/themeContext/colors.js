@@ -176,6 +176,9 @@ const dark = {
   // color chart
   lineBackgroundColor: 'rgba(0, 0, 0, 0.5)',
   colorChartShadowColor: 'rgba(0, 0, 0, 0.5)',
+
+  // video hover progress bar
+  videoProgressBar: '#fff',
 }
 
 const light = {
@@ -356,6 +359,9 @@ const light = {
   // color chart
   lineBackgroundColor: '#bebebe',
   colorChartShadowColor: '#bebebe',
+
+  // video hover progress bar
+  videoProgressBar: '#2fd7c4',
 }
 
 const themes = {
