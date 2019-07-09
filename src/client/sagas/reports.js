@@ -239,9 +239,12 @@ function* getContentVitalityScoreData({ payload = {} }) {
       'GET'
     )
 
-    yield put(actions.getContentVitalityScoreDataSuccess(percentageManipulation(payload)))
+    yield put(
+      actions.getContentVitalityScoreDataSuccess(
+        percentageManipulation(payload)
+      )
+    )
   } catch (err) {
-    console.log(err)
     yield put(actions.getContentVitalityScoreDataError(err))
   }
 }
@@ -273,9 +276,13 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
       yield put(
         actions.getVideoComparisonDataSuccess({
           legend,
-          ...convertDataIntoDatasets(payload, parameters, {
-            compareBrands: true,
-          }),
+          ...convertDataIntoDatasets(
+            percentageManipulation(payload),
+            parameters,
+            {
+              compareBrands: true,
+            }
+          ),
         })
       )
     } else {
