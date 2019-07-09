@@ -171,7 +171,7 @@ function* getShotInfoRequest({ payload }) {
 
       const payload = yield call(getDataFromApi, undefined, url, 'GET')
 
-      yield put(actions.getShotInfoSuccess(payload))
+      yield put(actions.getShotInfoSuccess(percentageManipulation(payload)))
     } else {
       throw new Error('Library Detail getShotInfoRequest Error')
     }
