@@ -89,7 +89,7 @@
         z-index: 1;
       }
       [class*='_single-value'] {
-        margin-left: 48px;
+        margin-left: 48px !important;
       }
     }
 
@@ -97,7 +97,9 @@
       [class*='-Bubble'] {
         color: $light_iconColor;
       }
-
+      [class*='react-select__single-value'] {
+        margin-left: 24px;
+      }
       [class*='-singleValue'] {
         color: $light_iconColor;
       }
@@ -128,6 +130,7 @@
       }
       [class*='react-select__single-value'] {
         color: $dark_iconColor;
+        margin-left: 24px;
       }
       [class*='icon-Arrow-Down'] {
         color: $dark_iconColor;
