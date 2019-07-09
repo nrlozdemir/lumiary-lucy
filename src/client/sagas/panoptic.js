@@ -126,18 +126,21 @@ function* getFilteringSectionData({ data }) {
     ) {
       yield put(
         actions.getFilteringSectionDataSuccess({
-          doughnutData: convertDataIntoDatasets(doughnutData, options, {
-            singleDataset: true,
-          }),
+          doughnutData: convertDataIntoDatasets(
+            percentageManipulation(doughnutData),
+            options,
+            {
+              singleDataset: true,
+            }
+          ),
           stackedChartData:
             (!_.isEmpty(stackedChartData.data) &&
               convertDataIntoDatasets(
-                stackedChartData,
+                percentageManipulation(stackedChartData),
                 { ...options, dateBucket },
                 { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
               )) ||
             {},
-
           property,
         })
       )
