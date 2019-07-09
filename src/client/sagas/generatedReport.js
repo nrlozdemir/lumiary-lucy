@@ -232,17 +232,22 @@ function* getFilteringSectionData({ data: { property, report } }) {
             dateBucket,
           })
         : { data: {} }
+
     yield put(
       actions.getFilteringSectionDataSuccess({
-        doughnutData: convertDataIntoDatasets(doughnutData, options, {
-          singleDataset: true,
-        }),
+        doughnutData: percentageManipulation(
+          convertDataIntoDatasets(doughnutData, options, {
+            singleDataset: true,
+          })
+        ),
         stackedChartData:
           (!_.isEmpty(stackedChartData.data) &&
-            convertDataIntoDatasets(
-              stackedChartData,
-              { ...options, dateBucket },
-              { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+            percentageManipulation(
+              convertDataIntoDatasets(
+                stackedChartData,
+                { ...options, dateBucket },
+                { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+              )
             )) ||
           {},
         property: 'duration',
