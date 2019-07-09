@@ -364,7 +364,7 @@ function* getRadarChartRequest(ids) {
       }
     })
 
-    yield put(actions.getRadarChartSuccess(values))
+    yield put(actions.getRadarChartSuccess(percentageManipulation(values)))
   } catch (error) {
     yield put(actions.getRadarChartFailure({ error }))
   }
