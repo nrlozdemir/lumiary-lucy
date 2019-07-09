@@ -31,14 +31,14 @@ const RadarChartModule = ({
   const leftIsEmpty =
     !isEmpty &&
     !loading &&
-    (!!data[0] && !!data[0].datas) &&
-    isDataSetEmpty(data[0].datas)
+    (!!data[0] && !!data[0].data) &&
+    isDataSetEmpty(data[0].data)
 
   const rightIsEmpty =
     !isEmpty &&
     !loading &&
-    (!!data[1] && !!data[1].datas) &&
-    isDataSetEmpty(data[1].datas)
+    (!!data[1] && !!data[1].data) &&
+    isDataSetEmpty(data[1].data)
 
   const leftOpacity = leftIsEmpty ? 0.25 : 1
   const rightOpacity = rightIsEmpty ? 0.25 : 1
@@ -66,7 +66,7 @@ const RadarChartModule = ({
                   <div className={style.emptyData}>No Data Available</div>
                 )}
                 <div style={{ opacity: leftOpacity }}>
-                  <RadarChart data={checkData[0].datas} />
+                  <RadarChart data={checkData[0].data} />
                 </div>
               </div>
               <div className={style.chartPos}>
@@ -74,7 +74,7 @@ const RadarChartModule = ({
                   <div className={style.emptyData}>No Data Available</div>
                 )}
                 <div style={{ opacity: rightOpacity }}>
-                  <RadarChart data={checkData[1].datas} />
+                  <RadarChart data={checkData[1].data} />
                 </div>
               </div>
             </div>

@@ -237,19 +237,19 @@ const radarChartCalculate = (data) => {
   if (data && !!data.length) {
     colorsData = data
     colorsData.map((el, i) => {
-      el.total = el.datas.labels
+      el.total = el.data.labels
         .map((a, k) => a)
         .reduce((prev, next) => prev + parseFloat(next.count), 0)
 
       el.progress = []
 
-      el.datas.datasets[0].backgroundColor = 'rgba(255, 255, 255, 0.3)'
-      el.datas.datasets[0].borderColor = 'transparent'
-      el.datas.datasets[0].pointBackgroundColor = '#ffffff'
-      el.datas.datasets[0].pointBorderColor = '#ffffff'
-      el.datas.datasets[0].data = []
+      el.data.datasets[0].backgroundColor = 'rgba(255, 255, 255, 0.3)'
+      el.data.datasets[0].borderColor = 'transparent'
+      el.data.datasets[0].pointBackgroundColor = '#ffffff'
+      el.data.datasets[0].pointBorderColor = '#ffffff'
+      el.data.datasets[0].data = []
 
-      el.datas.labels
+      el.data.labels
         .map((sub, k) => sub)
         .sort((a, b) =>
           parseFloat(a.count) < parseFloat(b.count)
@@ -263,24 +263,26 @@ const radarChartCalculate = (data) => {
           el.progress.push({
             leftTitle: f.name,
             color: strToColor(f.name),
-            rightTitle: `${metricSuffix(f.count)} Shares`,
+            rightTitle: `${metricSuffix(f.count)} ${ucfirst(
+              el.data.datasets[0].metric
+            )}`,
             value: ((f.count / el.total) * 100).toFixed(0),
           })
         })
 
-      el.datas.labels.map((sub, k) => {
-        data[i].datas.labels[k].color = strToColor(sub.name)
-        data[i].datas.labels[k].selected = !!el.progress.find(
+      el.data.labels.map((sub, k) => {
+        data[i].data.labels[k].color = strToColor(sub.name)
+        data[i].data.labels[k].selected = !!el.progress.find(
           (selected, i) => selected.color === strToColor(sub.name)
         )
-        data[i].datas.datasets[0].data.push(sub.count)
+        data[i].data.datasets[0].data.push(sub.count)
       })
     })
   }
   return colorsData
 }
 
-const compareSharesData = (payload) => {
+const compareSharesData = (payload, options) => {
   const isArray = Array.isArray(payload)
   const data = isArray ? payload : Object.keys(payload.data)
 
@@ -290,16 +292,16 @@ const compareSharesData = (payload) => {
     const keyName = Object.keys(item)[0]
 
     const labelsObj = { ...item[keyName] }
-    
+
     delete labelsObj.subtotal
 
     const labels = Object.entries(labelsObj)
 
-    const type = (isArray ? item.platform : value) || keyName
+    const type = (isArray ? value.platform : value) || keyName
 
     return {
       type: ucfirst(type),
-      datas: {
+      data: {
         labels: labels.map((color) => ({
           name: color[0]
             .split('-')
@@ -309,7 +311,8 @@ const compareSharesData = (payload) => {
         })),
         datasets: [
           {
-            label: ucfirst(type),
+            label: ucfirst(brand),
+            metric: options.metric,
           },
         ],
       },
