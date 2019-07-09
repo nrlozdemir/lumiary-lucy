@@ -378,7 +378,7 @@ function* getPeopleRequest(ids) {
 
     const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
 
-    yield put(actions.getPeopleSuccess(payload))
+    yield put(actions.getPeopleSuccess(percentageManipulation(payload)))
   } catch (error) {
     yield put(actions.getPeopleFailure({ error }))
   }
