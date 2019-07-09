@@ -12,6 +12,7 @@ import {
   getBrandAndCompetitors,
   getNValuesOfObject,
   normalizationBubbleMapping,
+  percentageManipulation,
 } from 'Utils'
 
 import {
