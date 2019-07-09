@@ -41,14 +41,13 @@ function* getVideoReleasesData({ data }) {
     if (!!response) {
       yield put(
         actions.getVideoReleasesDataSuccess(
-          convertVideoEngagementData(response, metric)
+          percentageManipulation(convertVideoEngagementData(response, metric))
         )
       )
     } else {
       throw new Error('Panoptic Error getVideoReleasesData')
     }
   } catch (err) {
-    console.log(err)
     yield put(actions.getVideoReleasesDataError(err))
   }
 }
@@ -80,7 +79,6 @@ function* getColorTemperatureData({ data }) {
       })
     )
   } catch (err) {
-    console.log(err)
     yield put(actions.getColorTemperatureDataError(err))
   }
 }
