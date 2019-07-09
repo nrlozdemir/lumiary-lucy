@@ -325,9 +325,13 @@ function* getPerformanceComparisonData({
       yield put(
         actions.getPerformanceComparisonDataSuccess({
           legend,
-          ...convertDataIntoDatasets(payload, parameters, {
-            compareBrands: true,
-          }),
+          ...convertDataIntoDatasets(
+            percentageManipulation(payload),
+            parameters,
+            {
+              compareBrands: true,
+            }
+          ),
         })
       )
     } else {
