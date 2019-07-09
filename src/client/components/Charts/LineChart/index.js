@@ -107,14 +107,15 @@ class LineChart extends React.Component {
             },
           ],
         },
-      },
+			},
+			plugins: []
     }
 
     let props = fromJS(defaultProps)
       .mergeDeep(this.props)
       .toJS()
 
-    let plugins = []
+    const plugins = [...props.plugins];
 
     if (props.backgroundColor || themes.chartBackground) {
       plugins.push({
