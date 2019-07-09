@@ -296,14 +296,15 @@ function* getPacingCardData({ data: { report } }) {
 
     yield put(
       actions.getPacingCardDataSuccess({
-        stadiumData: percentageManipulation(convertDataIntoDatasets(stadiumData, options)),
-        horizontalStackedBarData: percentageManipulation(convertDataIntoDatasets(
-          horizontalStackedBarData,
-          {
+        stadiumData: percentageManipulation(
+          convertDataIntoDatasets(stadiumData, options)
+        ),
+        horizontalStackedBarData: percentageManipulation(
+          convertDataIntoDatasets(horizontalStackedBarData, {
             ...options,
             proportionOf: 'format',
-          }
-        )),
+          })
+        ),
       })
     )
   } catch (err) {
@@ -342,14 +343,16 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
 
     yield put(
       actions.getCompetitorTopVideosSuccess(
-        convertMultiRequestDataIntoDatasets(
-          {
-            facebook,
-            instagram,
-            twitter,
-            youtube,
-          },
-          options
+        percentageManipulation(
+          convertMultiRequestDataIntoDatasets(
+            {
+              facebook,
+              instagram,
+              twitter,
+              youtube,
+            },
+            options
+          )
         )
       )
     )
