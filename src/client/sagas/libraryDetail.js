@@ -156,7 +156,7 @@ function* getShotByShot(videoId) {
       `/brand/${brand.uuid}/video/${videoId.payload}/shots`,
       'GET'
     )
-    yield put(actions.getShotByShotSuccess(payload))
+    yield put(actions.getShotByShotSuccess(percentageManipulation(payload)))
   } catch (error) {
     yield put(actions.getShotByShotFailure({ error }))
   }
