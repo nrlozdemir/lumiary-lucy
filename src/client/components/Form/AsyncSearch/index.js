@@ -32,7 +32,7 @@ const AsyncSearch = (props) => {
           : '#ffffff',
       backgroundColor: colors.searchOptionsColor,
       borderRadius: 0,
-      marginLeft: '-40px',
+      left: 0,
     }),
     menuList: (provided, state) => ({
       ...provided,
@@ -47,16 +47,12 @@ const AsyncSearch = (props) => {
       ...styles,
       height: '40px',
       lineHeight: '27px',
-      backgroundColor: isSelected
-        ? colors.inputOptionSelectedBackground
-        : isFocused
-        ? colors.inputOptionFocusBackground
-        : colors.inputOptionBackground,
+      backgroundColor: colors.searchOptionsColor,
       color: isSelected
-        ? colors.inputColor
+        ? colors.searchInputColor
         : isFocused
-        ? colors.inputActiveColor
-        : colors.inputActiveColor,
+        ? colors.searchInputActiveColor
+        : colors.searchInputActiveColor,
       cursor: 'pointer',
       border: 'none',
       boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.5)',
@@ -84,26 +80,26 @@ const AsyncSearch = (props) => {
       ...styles,
       backgroundColor: colors.searchOptionsColor,
       color: isSelected
-        ? colors.inputColor
+        ? colors.searchInputColor
         : isFocused
-        ? colors.inputActiveColor
-        : colors.inputColor,
+        ? colors.searchInputActiveColor
+        : colors.searchInputColor,
     }),
     input: (styles, { data, isDisabled, isFocused, isSelected }) => ({
       ...styles,
-      color: colors.inputActiveColor,
+      color: colors.searchInputActiveColor,
     }),
     singleValue: (styles, state) => ({
       ...styles,
-      color: colors.inputActiveColor,
+      color: colors.searchInputActiveColor,
     }),
     placeholder: (styles, { data, isDisabled, isFocused, isSelected }) => ({
       ...styles,
       color: isFocused
-        ? colors.inputActiveColor
+        ? colors.searchInputActiveColor
         : isSelected
-        ? colors.inputColor
-        : colors.inputPlaceholderColor,
+        ? colors.searchInputColor
+        : colors.searchInputPlaceholderColor,
     }),
   }
 

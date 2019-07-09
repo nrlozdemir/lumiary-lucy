@@ -59,13 +59,20 @@ function* getReports({ payload: { value: filterValue } = {} }) {
 function* brandInsightSubmit({ payload: { params, onlySave } }) {
   try {
     const {
-      brand: { value: brand },
-      engagamentByPlatform: { value: engagamentByPlatform },
-      date: { value: date },
       title,
+      engagamentByPlatform,
+      social: socialParam,
+      engagement: engagementParam,
+      brand: { value: brand },
+      date: { value: date },
     } = params
 
-    const [social, engagement] = engagamentByPlatform.split('|')
+    const [socialSplit, engagementSplit] = engagamentByPlatform
+      ? engagamentByPlatform.value.split('|')
+      : [null, null]
+
+    let social = socialSplit ? socialSplit : socialParam.value
+    let engagement = engagementSplit ? engagementSplit : engagementParam.value
 
     const saved =
       params && params.saved && params.saved.value ? params.saved.value : false
@@ -357,7 +364,7 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
 
       yield put(
         actions.getColorComparisonDataSuccess(
-          radarChartCalculate(compareSharesData(payload))
+          radarChartCalculate(compareSharesData(payload, parameters))
         )
       )
     } else {
