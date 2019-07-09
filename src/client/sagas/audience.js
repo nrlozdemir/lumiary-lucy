@@ -187,7 +187,9 @@ function* getAudienceDominantColorData({ data: { dateRange, metric } }) {
 
     yield put(
       actions.getAudienceDominantColorDataSuccess(
-        radarChartCalculate(compareSharesData(payload, parameters))
+        percentageManipulation(
+          radarChartCalculate(compareSharesData(payload, parameters))
+        )
       )
     )
   } catch (err) {
