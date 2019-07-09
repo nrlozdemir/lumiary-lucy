@@ -614,7 +614,7 @@ function* getTopPerformingPropertiesByCompetitorsData({
 
         yield put(
           actions.getTopPerformingPropertiesByCompetitorsSuccess({
-            datasets: convertedDatasets,
+            datasets: percentageManipulation(convertedDatasets),
             labels: brandLabels,
           })
         )
@@ -623,7 +623,6 @@ function* getTopPerformingPropertiesByCompetitorsData({
       throw new Error('Get Top Performing Property Error')
     }
   } catch (error) {
-    console.log('error', error)
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))
   }
 }
