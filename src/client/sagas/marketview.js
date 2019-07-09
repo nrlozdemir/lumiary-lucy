@@ -97,16 +97,17 @@ function* getCompetitorTopVideosMarketview(payload) {
 
     yield put(
       actions.getCompetitorTopVideosSuccess(
-        convertMultiRequestDataIntoDatasets(
-          {
-            ...response,
-          },
-          options
+        percentageManipulation(
+          convertMultiRequestDataIntoDatasets(
+            {
+              ...response,
+            },
+            options
+          )
         )
       )
     )
   } catch (error) {
-    console.log('saga getCompetitorTopVideosFailure error', error)
     yield put(actions.getCompetitorTopVideosFailure(error))
   }
 }
