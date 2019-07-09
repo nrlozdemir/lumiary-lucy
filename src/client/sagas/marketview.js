@@ -147,19 +147,20 @@ function* getPlatformTopVideosMarketview({
 
     yield put(
       actions.getPlatformTopVideosSuccess(
-        convertMultiRequestDataIntoDatasets(
-          {
-            ...response,
-          },
-          {
-            ...options,
-            property: [property],
-          }
+        percentageManipulation(
+          convertMultiRequestDataIntoDatasets(
+            {
+              ...response,
+            },
+            {
+              ...options,
+              property: [property],
+            }
+          )
         )
       )
     )
   } catch (error) {
-    console.log('saga getPlatformTopVideosFailure error', error)
     yield put(actions.getPlatformTopVideosFailure(error))
   }
 }
