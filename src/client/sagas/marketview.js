@@ -53,7 +53,9 @@ function getMarketviewDaysApi() {
 function* getCompetitorVideosMarketview(params) {
   try {
     const payload = yield call(getCompetitorVideosApi, params)
-    yield put(actions.getCompetitorVideosSuccess(payload))
+    yield put(
+      actions.getCompetitorVideosSuccess(percentageManipulation(payload))
+    )
   } catch (error) {
     yield put(actions.getCompetitorVideosFailure({ error }))
   }
