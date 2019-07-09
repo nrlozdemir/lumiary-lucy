@@ -48,7 +48,11 @@ function* getAudiencePerformanceData() {
     shuffleData.bubblesBoth = _.shuffle(shuffleData.bubblesBoth)
     shuffleData.bubblesFemales = _.shuffle(shuffleData.bubblesFemales)
     shuffleData.bubblesMales = _.shuffle(shuffleData.bubblesMales)
-    yield put(actions.getAudiencePerformanceDataSuccess(shuffleData))
+    yield put(
+      actions.getAudiencePerformanceDataSuccess(
+        percentageManipulation(shuffleData)
+      )
+    )
   } catch (err) {
     yield put(actions.getAudiencePerformanceDataError(err))
   }
