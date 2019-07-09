@@ -132,7 +132,11 @@ function* getAudienceColorTemperatureData() {
       })
       return data
     })
-    yield put(actions.getAudienceColorTemperatureDataSuccess(shuffleData))
+    yield put(
+      actions.getAudienceColorTemperatureDataSuccess(
+        percentageManipulation(shuffleData)
+      )
+    )
   } catch (err) {
     yield put(actions.getAudienceColorTemperatureDataError(err))
   }
