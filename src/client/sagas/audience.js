@@ -148,7 +148,11 @@ function* getAudienceChangeOverTimeData() {
     let shuffleData = payload.lineChartData
     shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
     shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getAudienceChangeOverTimeDataSuccess(shuffleData))
+    yield put(
+      actions.getAudienceChangeOverTimeDataSuccess(
+        percentageManipulation(shuffleData)
+      )
+    )
   } catch (err) {
     yield put(actions.getAudienceChangeOverTimeDataError(err))
   }
