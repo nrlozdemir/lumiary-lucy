@@ -116,7 +116,11 @@ function* getTopPerformingVideos({ data: { report = {} } }) {
       )
 
       if (!!response && !!response.length) {
-        yield put(actions.getTopPerformingVideosSuccess(percentageManipulation(response)))
+        yield put(
+          actions.getTopPerformingVideosSuccess(
+            percentageManipulation(response)
+          )
+        )
       } else {
         yield put(actions.getTopPerformingVideosSuccess([]))
       }
@@ -152,7 +156,7 @@ function* getVideoReleasesBarChart({ data: { report } }) {
     if (!!response) {
       yield put(
         actions.getVideoReleasesBarChartSuccess(
-          convertVideoEngagementData(response, metric)
+          percentageManipulation(convertVideoEngagementData(response, metric))
         )
       )
     } else {
