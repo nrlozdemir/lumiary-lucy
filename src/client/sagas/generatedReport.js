@@ -191,14 +191,15 @@ function* getColorTempData({
     } = convertColorTempToDatasets(response, colorTemperature)
 
     yield put(
-      actions.getColorTempDataSuccess({
-        labels,
-        platforms,
-        data: colorTempData,
-      })
+      percentageManipulation(
+        actions.getColorTempDataSuccess({
+          labels,
+          platforms,
+          data: colorTempData,
+        })
+      )
     )
   } catch (err) {
-    console.log(err)
     yield put(actions.getColorTempDataFailure(err))
   }
 }
