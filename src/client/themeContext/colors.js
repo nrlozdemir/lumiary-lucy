@@ -58,7 +58,7 @@ const dark = {
   videoCardColor: '#ffffff',
   videoCardShadow: 'rgba(0, 0, 0, 0.5)',
   videoBorder: '#545b79',
-  videoRightPercentageBackground: 'rgb(33, 36, 59, 0.8)',
+  videoRightPercentageBackground: '#202952',
 
   // Sidebar
   filterHeader: '#ffffff',
@@ -164,7 +164,6 @@ const dark = {
   dotThumbBackgroundColor: '#ffffff',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
 
-
   // panoptic line chart
   lineChartGridColor: '#545b79',
   lineChartBackgroundColor: '#21243b',
@@ -172,7 +171,6 @@ const dark = {
   // color chart
   lineBackgroundColor: 'rgba(0, 0, 0, 0.5)',
   colorChartShadowColor: 'rgba(0, 0, 0, 0.5)',
-
 }
 
 const light = {
@@ -234,7 +232,7 @@ const light = {
   videoCardShadow: '#bebebe',
   videoBorder: '#c6c9d7',
   videoCardIcon: '#505050',
-  videoRightPercentageBackground: 'rgba(255, 255, 255, 0.8)',
+  videoRightPercentageBackground: '#fff',
 
   // Sidebar
   filterHeader: '#e8ecf0',
@@ -341,7 +339,6 @@ const light = {
   dotThumbBackgroundColor: '#2fd7c4',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
 
-
   // panoptic line chart
   lineChartGridColor: '#c6c9d7',
   lineChartBackgroundColor: '#e8ecf0',
@@ -349,7 +346,6 @@ const light = {
   // color chart
   lineBackgroundColor: '#bebebe',
   colorChartShadowColor: '#bebebe',
-
 }
 
 const themes = {
