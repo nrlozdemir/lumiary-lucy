@@ -132,7 +132,9 @@ const dark = {
   // radar chart values
   chartPointBackgroundColor: '#ffffff',
   chartPointBorderColor: '#ffffff',
-  chartBackgroundColor: 'rgba(255, 255, 255, 0.4)',
+  chartBackgroundColor: 'rgba(172, 176, 190, 0.4)',
+  chartTickColor: 'rgba(255, 255, 255, 0.4)',
+  chartAngleLineColor: 'rgba(90, 99, 134, 0.3)',
   // radar chart values
 
   // shot by shot slider values
@@ -308,6 +310,8 @@ const light = {
   chartPointBackgroundColor: '#505050',
   chartPointBorderColor: '#505050',
   chartBackgroundColor: 'rgba(172, 176, 190, 0.4)',
+  chartTickColor: 'rgba(80, 80, 80, 0.4)',
+  chartAngleLineColor: 'rgba(90, 99, 134, 0.3)',
   // radar chart values
 
   // shot by shot slider values
