@@ -32,7 +32,7 @@ const AsyncSearch = (props) => {
           : '#ffffff',
       backgroundColor: colors.searchOptionsColor,
       borderRadius: 0,
-      marginLeft: '-40px',
+      left: 0,
     }),
     menuList: (provided, state) => ({
       ...provided,
@@ -47,11 +47,7 @@ const AsyncSearch = (props) => {
       ...styles,
       height: '40px',
       lineHeight: '27px',
-      backgroundColor: isSelected
-        ? colors.inputOptionSelectedBackground
-        : isFocused
-        ? colors.inputOptionFocusBackground
-        : colors.inputOptionBackground,
+      backgroundColor: colors.searchOptionsColor,
       color: isSelected
         ? colors.inputColor
         : isFocused
@@ -84,10 +80,10 @@ const AsyncSearch = (props) => {
       ...styles,
       backgroundColor: colors.searchOptionsColor,
       color: isSelected
-        ? colors.inputColor
+        ? colors.searchInputColor
         : isFocused
-        ? colors.inputActiveColor
-        : colors.inputColor,
+        ? colors.searchInputActiveColor
+        : colors.searchInputColor,
     }),
     input: (styles, { data, isDisabled, isFocused, isSelected }) => ({
       ...styles,
@@ -100,10 +96,10 @@ const AsyncSearch = (props) => {
     placeholder: (styles, { data, isDisabled, isFocused, isSelected }) => ({
       ...styles,
       color: isFocused
-        ? colors.inputActiveColor
+        ? colors.searchInputActiveColor
         : isSelected
-        ? colors.inputColor
-        : colors.inputPlaceholderColor,
+        ? colors.searchInputColor
+        : colors.searchInputPlaceholderColor,
     }),
   }
 

@@ -104,12 +104,9 @@ export class VideoCard extends PureComponent {
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <div
-            className={classnames(
-              style.cardContainer,
-              {
-                [style.rightVideoContainer]: index > 0 && (index + 1) % 4 === 0,
-              }
-            )}
+            className={classnames(style.cardContainer, {
+              [style.rightVideoContainer]: index > 0 && (index + 1) % 4 === 0,
+            })}
             style={{
               boxShadow: `0 2px 6px 0 colors.videoCardShadow`,
             }}
@@ -125,6 +122,7 @@ export class VideoCard extends PureComponent {
                   style={{
                     backgroundColor: colors.videoRightPercentageBackground,
                     color: colors.labelColor,
+                    opacity: 0.8,
                   }}
                 >
                   <span>{floatCvScore(cvScore)}</span>
@@ -148,7 +146,13 @@ export class VideoCard extends PureComponent {
                   }}
                 >
                   <Link to={`/library/build-report/${video.uuid}`}>
-                    <video key={video.uuid} ref={this.video} loop muted controls={false}>
+                    <video
+                      key={video.uuid}
+                      ref={this.video}
+                      loop
+                      muted
+                      controls={false}
+                    >
                       <source src={videoUrl} type="video/mp4" />
                     </video>
                   </Link>

@@ -313,14 +313,6 @@ const generatedReportsReducer = (state = initialState, action) => {
   }
 }
 
-export const selectReport = (state) => state.GeneratedReport.get('report')
-
-export const makeSelectReport = () =>
-  createSelector(
-    selectReport,
-    (substate) => substate.toJS()
-  )
-
 export const selectPacingChartData = (state) =>
   state.GeneratedReport.get('pacingChartData')
 
