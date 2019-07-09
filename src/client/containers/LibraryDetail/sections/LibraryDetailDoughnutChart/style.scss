@@ -393,10 +393,14 @@
   align-items: center;
   flex-direction: row-reverse;
   justify-content: space-between;
-  width: 360px;
+  //width: 360px;
   margin-bottom: 0;
   text-align: left;
   position: relative;
+
+  > div:last-child {
+    margin-right: 24px;
+  }
 }
 
 .formWrapper > form > div {
@@ -604,5 +608,5 @@
 }
 
 .chartLoading {
-  opacity: .25;
+  opacity: 0.25;
 }
