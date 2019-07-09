@@ -247,11 +247,12 @@ function* getCompareSharesData({ data: { dateRange } }) {
 
     yield put(
       actions.getCompareSharesDataSuccess(
-        radarChartCalculate(compareSharesData(payload, parameters))
+        percentageManipulation(
+          radarChartCalculate(compareSharesData(payload, parameters))
+        )
       )
     )
   } catch (err) {
-    console.log('err', err)
     yield put(actions.getCompareSharesDataError(err))
   }
 }
