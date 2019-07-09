@@ -133,8 +133,8 @@ const NavTitle = (props) => {
     match,
     libraryDetail: { selectedVideo },
   } = props
-  if (selectedVideo && selectedVideo.title) {
-    return <div>{ucfirst(selectedVideo.title)}</div>
+  if (selectedVideo) {
+    return <div className={style.headerTitle}>Library</div>
   }
   return null
 }
