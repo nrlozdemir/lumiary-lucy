@@ -9,8 +9,11 @@ import ColorRadioBoxes from 'Components/Form/ColorRadioBoxes/index'
 import Range from 'Components/Form/Range'
 import style from './style.scss'
 
-const ageRangeClasses = classnames('w-50 ml-0 pr-8', style.sidebarSelectContainer);
-const genderClasses = classnames('w-50 ml-0 pl-8', style.sidebarSelectContainer);
+const ageRangeClasses = classnames(
+  'w-50 ml-0 pr-8',
+  style.sidebarSelectContainer
+)
+const genderClasses = classnames('w-50 ml-0 pl-8', style.sidebarSelectContainer)
 
 const Sidebar = (props) => {
   const { reset, handleSubmit, colors, changeFilter } = props
@@ -94,12 +97,13 @@ const Sidebar = (props) => {
         <div className={sidebarMainClass}>
           <div
             className={sidebarHeaderClass}
-            style={{ backgroundColor: colors.filterHeader }}
+            style={{
+              backgroundColor: colors.filterHeader,
+              color: colors.filterHeaderText,
+            }}
           >
             <p className={style.text}>
-              <span className="float-left color-dark-blue-grey">
-                Filter Videos
-              </span>
+              <span className="float-left">Filter Videos</span>
               <span
                 className="float-right color-cool-blue"
                 onClick={() => resetFormValues()}
