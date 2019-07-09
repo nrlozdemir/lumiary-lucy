@@ -191,7 +191,7 @@ function* getSelectedVideo({ payload }) {
       'GET'
     )
 
-    yield put(actions.getSelectedVideoSuccess(response.video))
+    yield put(actions.getSelectedVideoSuccess(percentageManipulation(response.video)))
   } catch (error) {
     yield put(actions.getSelectedVideoFailure({ error }))
   }
