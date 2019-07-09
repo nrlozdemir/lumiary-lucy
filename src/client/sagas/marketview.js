@@ -12,12 +12,12 @@ import {
   getBrandAndCompetitors,
   getNValuesOfObject,
   normalizationBubbleMapping,
-  percentageManipulation,
 } from 'Utils'
 
 import {
   convertDataIntoDatasets,
   convertMultiRequestDataIntoDatasets,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { dayOfWeek, chartColors } from 'Utils/globals'
@@ -215,7 +215,7 @@ function* getSimilarProperties({ data: { dateRange, container } }) {
 
     const val = highestBuckets.map((value, idx) => ({
       doughnutChartValues: convertDataIntoDatasets(
-        payload,
+        percentageManipulation(payload),
         { property: [value.highestProperty] },
         {
           singleDataset: true,
@@ -226,9 +226,8 @@ function* getSimilarProperties({ data: { dateRange, container } }) {
     }))
 
     yield delay(2000)
-    yield put(actions.getSimilarPropertiesSuccess(percentageManipulation(val)))
+    yield put(actions.getSimilarPropertiesSuccess(val))
   } catch (error) {
-    console.log('error == ', error)
     yield put(actions.getSimilarPropertiesFailure(error))
   }
 }
