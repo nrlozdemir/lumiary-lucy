@@ -511,9 +511,11 @@ function* getTotalCompetitorViewsData() {
     if (!!payload) {
       yield put(
         actions.getTotalCompetitorViewsSuccess(
-          convertDataIntoDatasets(payload, options, {
-            customKeys: Object.keys(payload.data),
-          })
+          percentageManipulation(
+            convertDataIntoDatasets(payload, options, {
+              customKeys: Object.keys(payload.data),
+            })
+          )
         )
       )
     }
