@@ -418,7 +418,7 @@ function* getFormatChartData() {
       yield put(
         actions.getFormatChartSuccess({
           currentDay,
-          data: formatCountsArr,
+          data: percentageManipulation(formatCountsArr),
           video,
         })
       )
@@ -489,7 +489,6 @@ function* getTotalViewsData({ data }) {
       })
     )
   } catch (error) {
-    console.log(error)
     yield put(actions.getTotalViewsFailure(error))
   }
 }
