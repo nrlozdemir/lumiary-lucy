@@ -62,6 +62,7 @@ const dark = {
 
   // Sidebar
   filterHeader: '#ffffff',
+  filterText: '#fff',
   socialCheckboxBackground: '#21243b',
   socialColor: '#545b79',
   socialActiveBackground: '#ffffff',
@@ -244,6 +245,7 @@ const light = {
 
   // Sidebar
   filterHeader: '#e8ecf0',
+  filterText: '#505050',
   socialCheckboxBackground: '#e8ecf0',
   socialColor: '#c6c9d7',
   socialActiveBackground: '#505050',

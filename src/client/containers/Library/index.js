@@ -51,12 +51,15 @@ export class Library extends React.Component {
   }
 
   render() {
+    const { sidebarVisible, fixedHeader } = this.state
+
     const {
+      changeFilter,
       library: { loading },
     } = this.props
 
     const sideBarClass = classNames(style.overlay, {
-      [style.overlayShow]: this.state.sidebarVisible,
+      [style.overlayShow]: sidebarVisible,
     })
 
     return (
@@ -86,12 +89,12 @@ export class Library extends React.Component {
               style={{ backgroundColor: colors.bodyBackground, opacity: 0.4 }}
             />
             <Sidebar
-              sidebarVisible={this.state.sidebarVisible}
-              fixedHeader={this.state.fixedHeader}
+              sidebarVisible={sidebarVisible}
+              fixedHeader={fixedHeader}
               setSidebarVisible={(e) => this.setSidebarVisible(e)}
               onSubmit={(e) => this.handleSubmit(e)}
               colors={colors}
-              changeFilter={this.props.changeFilter}
+              changeFilter={changeFilter}
             />
           </React.Fragment>
         )}
