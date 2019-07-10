@@ -7,7 +7,11 @@ import { selectAuthProfile } from 'Reducers/auth'
 
 import { getDataFromApi } from 'Utils/api'
 
-import { radarChartCalculate, compareSharesData } from 'Utils/datasets'
+import {
+  radarChartCalculate,
+  compareSharesData,
+  percentageManipulation,
+} from 'Utils/datasets'
 
 import _ from 'lodash'
 
@@ -27,7 +31,11 @@ function* getAudienceContentVitalityScoreData() {
     let shuffleData = payload.lineStackedChartData
     shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
     shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getAudienceContentVitalityScoreDataSuccess(shuffleData))
+    yield put(
+      actions.getAudienceContentVitalityScoreDataSuccess(
+        percentageManipulation(shuffleData)
+      )
+    )
   } catch (err) {
     yield put(actions.getAudienceContentVitalityScoreDataError(err))
   }
@@ -40,7 +48,11 @@ function* getAudiencePerformanceData() {
     shuffleData.bubblesBoth = _.shuffle(shuffleData.bubblesBoth)
     shuffleData.bubblesFemales = _.shuffle(shuffleData.bubblesFemales)
     shuffleData.bubblesMales = _.shuffle(shuffleData.bubblesMales)
-    yield put(actions.getAudiencePerformanceDataSuccess(shuffleData))
+    yield put(
+      actions.getAudiencePerformanceDataSuccess(
+        percentageManipulation(shuffleData)
+      )
+    )
   } catch (err) {
     yield put(actions.getAudiencePerformanceDataError(err))
   }
@@ -49,7 +61,9 @@ function* getAudiencePerformanceData() {
 function* updateAudiencePerformance({ payload: { min, max } }) {
   try {
     const payload = yield call(updateAudiencePerformanceApi, { min, max })
-    yield put(actions.updateAudiencePerformanceSuccess(payload))
+    yield put(
+      actions.updateAudiencePerformanceSuccess(percentageManipulation(payload))
+    )
   } catch (err) {
     yield put(actions.updateAudiencePerformanceError(err))
   }
@@ -66,7 +80,9 @@ function* getAudienceAgeSliderData() {
     }
     const data = payload.ageSlider
     data.map((element) => (element.image = randomImage(element.image)))
-    yield put(actions.getAudienceAgeSliderDataSuccess(data))
+    yield put(
+      actions.getAudienceAgeSliderDataSuccess(percentageManipulation(data))
+    )
   } catch (err) {
     yield put(actions.getAudienceAgeSliderDataError(err))
   }
@@ -78,7 +94,9 @@ function* getAudienceGenderData() {
     const shuffleData = payload.genderData
     shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
     shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getAudienceGenderDataSuccess(shuffleData))
+    yield put(
+      actions.getAudienceGenderDataSuccess(percentageManipulation(shuffleData))
+    )
   } catch (err) {
     yield put(actions.getAudienceGenderDataError(err))
   }
@@ -114,7 +132,11 @@ function* getAudienceColorTemperatureData() {
       })
       return data
     })
-    yield put(actions.getAudienceColorTemperatureDataSuccess(shuffleData))
+    yield put(
+      actions.getAudienceColorTemperatureDataSuccess(
+        percentageManipulation(shuffleData)
+      )
+    )
   } catch (err) {
     yield put(actions.getAudienceColorTemperatureDataError(err))
   }
@@ -126,7 +148,11 @@ function* getAudienceChangeOverTimeData() {
     let shuffleData = payload.lineChartData
     shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
     shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getAudienceChangeOverTimeDataSuccess(shuffleData))
+    yield put(
+      actions.getAudienceChangeOverTimeDataSuccess(
+        percentageManipulation(shuffleData)
+      )
+    )
   } catch (err) {
     yield put(actions.getAudienceChangeOverTimeDataError(err))
   }
@@ -161,7 +187,9 @@ function* getAudienceDominantColorData({ data: { dateRange, metric } }) {
 
     yield put(
       actions.getAudienceDominantColorDataSuccess(
-        radarChartCalculate(compareSharesData(payload, parameters))
+        percentageManipulation(
+          radarChartCalculate(compareSharesData(payload, parameters))
+        )
       )
     )
   } catch (err) {
