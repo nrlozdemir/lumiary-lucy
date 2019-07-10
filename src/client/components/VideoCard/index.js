@@ -122,7 +122,6 @@ export class VideoCard extends PureComponent {
                   style={{
                     backgroundColor: colors.videoRightPercentageBackground,
                     color: colors.labelColor,
-                    opacity: 0.8,
                   }}
                 >
                   <span>{floatCvScore(cvScore)}</span>
