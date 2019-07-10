@@ -32,7 +32,10 @@ function combineChartData(data, type = null) {
 class LineChart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      chartWidth: 1140,
+      chartHeight: 285,
+    }
   }
 
   datasetKeyProvider() {
@@ -124,6 +127,21 @@ class LineChart extends React.Component {
             chartArea.bottom - chartArea.top
           )
           ctx.restore()
+        },
+        afterDraw: (chart, easing) => {
+          let ctx = chart.chart.ctx
+          let chartArea = chart.chartArea
+          if (chart.options.average) {
+            ctx.fillStyle = '#000'
+            ctx.fillRect(
+              ((chartArea.right - chartArea.left) / 100) *
+                chart.options.average +
+                48,
+              5,
+              4,
+              chartArea.bottom - chartArea.top
+            )
+          }
         },
       })
     }
