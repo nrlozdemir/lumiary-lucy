@@ -14,7 +14,7 @@ function* getQuickviewItemsApi({
   brandUuid,
   competitors = [],
 }) {
-  const parseVideoResponse = ({ videoInfo, serverData }) => {
+  const parseVideoResponse = ({ videoInfo, serverData, type = 'maxVideo' }) => {
     const {
       title = '',
       brand_uuid = '',
@@ -51,6 +51,8 @@ function* getQuickviewItemsApi({
       'ages.industry_percent': agesIndustryPercent = '',
     } = videoInfo
 
+    const performingText = type === 'maxVideo' ? 'overperforming' : ''
+ 
     const maxVideo = {
       video: {
         title: title,
@@ -65,7 +67,7 @@ function* getQuickviewItemsApi({
           value: durationsBucketName,
           percentage: durationsIndustryPercent,
           text:
-            '<b>{percentage}%</b> of industry videos are <b>{value} sec</b> in length',
+            `<b>{percentage}%</b> of ${performingText} industry videos are <b>{value} sec</b> in length`,
         },
         {
           slug: 'pacing',
@@ -73,7 +75,7 @@ function* getQuickviewItemsApi({
           value: pacingsBucketName,
           percentage: pacingsIndustryPercent,
           text:
-            '<b>{percentage}%</b> of industry videos have <b>{value} {title}</b>',
+            `<b>{percentage}%</b> of ${performingText} industry videos have <b>{value} {title}</b>`,
         },
         {
           slug: 'format',
@@ -81,7 +83,7 @@ function* getQuickviewItemsApi({
           value: formatsBucketName,
           percentage: formatsIndustryPercent,
           text:
-            '<b>{percentage}%</b> of industry videos have a <b>{title}</b> of <b>{value}</b>',
+            `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
         },
         {
           slug: 'dominantColor',
@@ -91,7 +93,7 @@ function* getQuickviewItemsApi({
             colorsBucketName.slice(1),
           percentage: colorsIndustryPercent,
           text:
-            '<b>{percentage}%</b> of industry videos have a <b>{title}</b> of <b>{value}</b>',
+            `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
         },
         {
           slug: 'predominantTalentAge',
@@ -99,7 +101,7 @@ function* getQuickviewItemsApi({
           value: agesBucketName,
           percentage: agesIndustryPercent,
           text:
-            '<b>{percentage}%</b> of industry videos are <b>{title}</b> of <b>{value}</b>',
+            `<b>{percentage}%</b> of ${performingText} industry videos are <b>{title}</b> of <b>{value}</b>`,
         },
         {
           slug: 'predominantTalentGender',
@@ -107,7 +109,7 @@ function* getQuickviewItemsApi({
           value: gendersBucketName,
           percentage: gendersIndustryPercent,
           text:
-            '<b>{percentage}%</b> of industry videos are <b>{title}</b> of <b>{value}</b>',
+            `<b>{percentage}%</b> of ${performingText} industry videos are <b>{title}</b> of <b>{value}</b>`,
         },
         {
           slug: 'aspectRatio',
@@ -115,7 +117,7 @@ function* getQuickviewItemsApi({
           value: aspectRatiosBucketName,
           percentage: aspectRatiosIndustryPercent,
           text:
-            '<b>{percentage}%</b> of industry videos have an <b>{title}</b> of <b>{value}</b>',
+            `<b>{percentage}%</b> of ${performingText} industry videos have an <b>{title}</b> of <b>{value}</b>`,
         },
         {
           slug: 'resolution',
@@ -123,7 +125,7 @@ function* getQuickviewItemsApi({
           value: resolutionsBucketName,
           percentage: resolutionsIndustryPercent,
           text:
-            '<b>{percentage}%</b> of industry videos have a <b>{title}</b> of <b>{value}</b>',
+            `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
         },
         {
           slug: 'frameRate',
@@ -132,7 +134,7 @@ function* getQuickviewItemsApi({
             frameRatesBucketName === '' ? '' : `${frameRatesBucketName}fps`,
           percentage: frameRatesIndustryPercent,
           text:
-            '<b>{percentage}%</b> of industry videos have a <b>{title}</b> of <b>{value}</b>',
+            `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
         },
       ],
     }
@@ -140,7 +142,6 @@ function* getQuickviewItemsApi({
     return maxVideo
   }
 
-  // console.log('request', metric, dateRange, platform,)
   const serverData = yield call(
     getDataFromApi,
     {},
@@ -154,27 +155,30 @@ function* getQuickviewItemsApi({
     'GET'
   )
 
-  // console.log('serverData', serverData)
-
   const serverObject = Object.keys(serverData).reduce(
     (accumulator, compareKey) => {
       if (!accumulator[platform]) {
         accumulator[platform] = [null, null]
       }
       const videoInfo = serverData[compareKey] || {}
+      let type
 
       switch (compareKey) {
         case 'maxVideo':
+          type = 'maxVideo'
           accumulator[platform][1] = parseVideoResponse({
             videoInfo,
             serverData,
+            type,
           })
           break
 
         case 'minVideo':
+          type = 'minVideo'
           accumulator[platform][0] = parseVideoResponse({
             videoInfo,
             serverData,
+            type,
           })
           break
 
@@ -189,8 +193,6 @@ function* getQuickviewItemsApi({
       differences: {},
     }
   )
-
-  // console.log('serverObject', serverObject)
 
   return serverObject
 }
@@ -226,7 +228,6 @@ function* getQuickviewItemsSaga({ payload }) {
       },
     })
   } catch (error) {
-    console.log(error)
     yield put({
       type: types.GET_QUICKVIEW_ITEMS_FAILURE,
       error,
