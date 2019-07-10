@@ -181,6 +181,9 @@ const dark = {
 
   // video hover progress bar
   videoProgressBar: '#fff',
+
+  // chart zero line
+  chartZeroLineColor: '#505050',
 }
 
 const light = {
@@ -366,6 +369,9 @@ const light = {
 
   // video hover progress bar
   videoProgressBar: '#2fd7c4',
+
+  // chart zero line
+  chartZeroLineColor: '#505050',
 }
 
 const themes = {
