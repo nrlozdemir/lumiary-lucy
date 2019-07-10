@@ -254,14 +254,14 @@ const selectFiltersToType = (selectValues = {}) => {
 }
 
 export const getCvScoreColor = (val = 0) => {
-  switch(true) {
-    case (val > 50 && val < 75):
+  switch (true) {
+    case val > 50 && val < 75:
       return '#8562f3'
-    case (val > 75 && val < 100):
+    case val > 75 && val < 100:
       return '#2fd7c4'
     default:
       return '#5292e5'
-    }
+  }
 }
 
 const getLocationParams = (value) => {
@@ -342,6 +342,25 @@ const normalizationBubbleMapping = (arr, tMin, tMax) => {
   })
 }
 
+/*
+  Convert seconds to hh:mm:ss
+  hh, wont show if not available, mm always shows
+ */
+const secondsToHHMMSS = (s = 0) => {
+  if (!!s) {
+    const date = new Date(s * 1000)
+    const hh = date.getUTCHours()
+    const mm = date.getUTCMinutes()
+    const ss = date.getSeconds()
+
+    return `${!!hh ? `${hh < 10 ? '0' : ''}${hh}:` : ''}${
+      mm < 10 ? '0' : ''
+    }${mm}:${ss < 10 ? '0' : ''}${ss}`
+  } else {
+    return '00:00:00'
+  }
+}
+
 export {
   randomKey,
   socialIconSelector,
@@ -366,4 +385,5 @@ export {
   splitCamelCaseToString,
   getNValuesOfObject,
   normalizationBubbleMapping,
+  secondsToHHMMSS,
 }
