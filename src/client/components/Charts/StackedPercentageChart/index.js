@@ -26,7 +26,7 @@ class StackedPercentageChart extends React.Component {
     const valueOrDefault = helpers.valueOrDefault
 
     Chart.helpers.extend(Chart.elements.Line.prototype, {
-      draw: function() {
+      draw: function () {
         const me = this
         const vm = me._view
         const ctx = me._chart.ctx
@@ -120,6 +120,8 @@ class StackedPercentageChart extends React.Component {
             lightGrey: ['#c6c9d7', '#c6c9d7', '#c6c9d7'],
             grey: ['#acb0be', '#acb0be', '#acb0be'],
             purple: ['#8562f3', '#9576f5', '#8562f3'],
+            darkgrey: ['#505050', '#505050', '#505050'],
+            white: ['#ffffff', '#ffffff', '#ffffff'],
           }
 
           let gradient = ctx.createLinearGradient(0, 0, 180, 800)
@@ -267,15 +269,15 @@ class StackedPercentageChart extends React.Component {
           ctx.moveTo(
             topValueRightPosition,
             height + !!findYMaxValue &&
-              !!findYMaxValue.currentVLine &&
-              findYMaxValue.currentVLine.y
+            !!findYMaxValue.currentVLine &&
+            findYMaxValue.currentVLine.y
           )
           ctx.lineTo(
             topValueRightPosition,
             (!!findYMaxValue &&
               !!findYMaxValue.currentVLine &&
               findYMaxValue.currentVLine.y) ||
-              0
+            0
           )
           ctx.lineWidth = barWidth
           ctx.strokeStyle = tickColor
