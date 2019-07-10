@@ -265,7 +265,7 @@ export class Main extends React.PureComponent {
                                         title={title.substring(0, 32)}
                                         rightValue={cvScore}
                                         width={'100%'}
-                                        height={'100%'}
+                                        height={286}
                                       >
                                         <div className={style.video}>
                                           <SingleVideoCard
