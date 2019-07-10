@@ -2,19 +2,19 @@ export default function(min, max) {
   const randomMap = () => [
     {
       toolTip: Math.round(Math.random() * 25000),
-      visual: 'slowest',
+      visual: 'Slowest',
     },
     {
       toolTip: Math.round(Math.random() * 10000),
-      visual: 'slow',
+      visual: 'Slow',
     },
     {
       toolTip: Math.round(Math.random() * 15000),
-      visual: 'medium',
+      visual: 'Medium',
     },
     {
       toolTip: Math.round(Math.random() * 15000),
-      visual: 'fastest',
+      visual: 'Fastest',
     },
   ]
 

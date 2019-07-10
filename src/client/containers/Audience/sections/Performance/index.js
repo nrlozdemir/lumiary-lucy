@@ -49,7 +49,7 @@ class Performance extends React.Component {
         width: '10px',
         height: '10px',
         borderStyle: 'solid',
-        borderWidth: '25px 10px 0 10px',
+        borderWidth: '20px 10px 0 10px',
         borderColor: `${colors.textColor} 	transparent transparent transparent`,
         borderRadius: 0,
         backgroundColor: 'transparent',
@@ -63,7 +63,7 @@ class Performance extends React.Component {
         width: '10px',
         height: '10px',
         borderStyle: 'solid',
-        borderWidth: '25px 10px 0 10px',
+        borderWidth: '20px 10px 0 10px',
         borderColor: `${colors.textColor} 	transparent transparent transparent`,
         backgroundColor: 'transparent',
         borderRadius: 0,
@@ -128,7 +128,7 @@ class Performance extends React.Component {
               'grid-container mr-20 ml-20'
             )}
           >
-            <div className={'col-12'}>
+            <div className="col-12-no-gutters">
               <div className={'col-4'}>
                 <div className={style.bubbleCont}>
                   <BubbleChart
@@ -278,15 +278,18 @@ class Performance extends React.Component {
               </div>
             </div>
 
-            <div className="col-12" style={{ color: colors.textColor }}>
+            <div
+              className="col-12-gutter-20"
+              style={{ color: colors.textColor }}
+            >
               <style>
                 {`
 									.customTooltip {
-									color: ${colors.textColor};
+										color: ${colors.textColor};
 									}
 									.customTooltip .rc-slider-tooltip-inner {
 										color: ${colors.textColor};
-										}
+									}
 								`}
               </style>
               <RangeWithBadge

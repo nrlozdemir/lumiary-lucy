@@ -9,12 +9,6 @@ import ColorRadioBoxes from 'Components/Form/ColorRadioBoxes/index'
 import Range from 'Components/Form/Range'
 import style from './style.scss'
 
-const ageRangeClasses = classnames(
-  'w-50 ml-0 pr-8',
-  style.sidebarSelectContainer
-)
-const genderClasses = classnames('w-50 ml-0 pl-8', style.sidebarSelectContainer)
-
 class Sidebar extends React.Component {
   constructor(props) {
     super(props)
@@ -26,11 +20,20 @@ class Sidebar extends React.Component {
     this.resetFormValues = this.resetFormValues.bind(this)
     this.formChange = this.formChange.bind(this)
   }
-
-  resetFormValues() {
-    this.props.reset()
-    this.props.changeFilter()
+  
+  componentDidUpdate(prevProps) {
+    const { sidebarVisible } = this.props
+    if (sidebarVisible !== prevProps.sidebarVisible && !sidebarVisible) {
+      this.resetFormValues()
+    }
   }
+  
+  resetFormValues = () => {
+    const { reset, changeFilter } = this.props
+    reset()
+    changeFilter()
+  }
+
 
   formChange() {
     this.setState({
@@ -39,27 +42,43 @@ class Sidebar extends React.Component {
   }
 
   render() {
+    const { formChange } = this.state
     const {
-      handleSubmit,
       colors,
-      setSidebarVisible,
-      sidebarVisible,
       fixedHeader,
+      handleSubmit,
+      sidebarVisible,
+      setSidebarVisible,
     } = this.props
+
     const sidebarClass = classnames(style.sidebar, {
       [style.sidebarVisible]: sidebarVisible,
       [style.fixed]: fixedHeader,
     })
+
     const sidebarMainClass = classnames(style.sidebarMain, {
       [style.fixed]: fixedHeader,
     })
+
     const sidebarHeaderClass = classnames(style.sidebarHeader, {
       [style.fixed]: fixedHeader,
     })
+
+
     const sidebarContentClass = classnames(style.sidebarContent, 'ph-32', {
       [style.fixed]: fixedHeader,
       'mt-80': fixedHeader,
     })
+
+    const ageRangeClasses = classnames(
+      'w-50 ml-0 pr-8',
+      style.sidebarSelectContainer
+    )
+
+    const genderClasses = classnames(
+      'w-50 ml-0 pl-8',
+      style.sidebarSelectContainer
+    )
 
     const selectOptions = {
       orderByOptions: [
@@ -130,7 +149,7 @@ class Sidebar extends React.Component {
                 </span>
                 <span
                   className="float-right color-cool-blue"
-                  onClick={() => this.resetFormValues()}
+                  onClick={this.resetFormValues}
                 >
                   Reset
                 </span>
@@ -243,7 +262,7 @@ class Sidebar extends React.Component {
               <div className="w-100 d-flex align-items-center justify-content-center">
                 <Button
                   customClass={classnames('mt-48', style.sidebarApplyButton, {
-                    [style.formChange]: this.state.formChange === true,
+                    [style.formChange]: formChange === true,
                   })}
                   buttonText="Apply Filters"
                 />
@@ -252,6 +271,9 @@ class Sidebar extends React.Component {
                 <span
                   className={style.cancel}
                   onClick={() => setSidebarVisible(false)}
+                  style={{
+                    color: colors.filterText,
+                  }}
                 >
                   Cancel
                 </span>

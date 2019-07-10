@@ -62,11 +62,13 @@ const dark = {
 
   // Sidebar
   filterHeader: '#ffffff',
+  filterText: '#fff',
   socialCheckboxBackground: '#21243b',
   socialColor: '#545b79',
   socialActiveBackground: '#ffffff',
   rangeSliderTick: '#ffffff',
   trackColor: '#21243b',
+  filterHeaderText: '#202952',
 
   // modal values
   modalBackground: '#373f5b',
@@ -243,12 +245,14 @@ const light = {
   videoRightPercentageBackground: '#fff',
 
   // Sidebar
-  filterHeader: '#e8ecf0',
+  filterHeader: '#505050',
+  filterText: '#505050',
   socialCheckboxBackground: '#e8ecf0',
   socialColor: '#c6c9d7',
   socialActiveBackground: '#505050',
   rangeSliderTick: '#505050',
   trackColor: '#e8ecf0',
+  filterHeaderText: '#fff',
 
   // modal values
   modalBackground: '#f3f6f9',
