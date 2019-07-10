@@ -135,7 +135,12 @@ class Performance extends React.Component {
                     maximumIterationCount={1000}
                     size={[800, 600]}
                     fromPercentages={true}
-                    options={{ toolTipWidth: 200, toolTipHeight: 75 }}
+                    options={{
+                      toolTipWidth: 200,
+                      toolTipHeight: 75,
+                      visualWidth: 100,
+                      visualHeight: 50,
+                    }}
                   >
                     {bubblesMales.map((bubble, i) => (
                       <Bubble
@@ -145,13 +150,9 @@ class Performance extends React.Component {
                         stroke="#5292E5"
                       >
                         <Visual>
-                          <span
-                            className={
-                              socialIconSelector(bubble.visual) +
-                              ' ' +
-                              style.bubbleVisual
-                            }
-                          />
+                          <span className={style.bubbleVisual}>
+                            {bubble.visual}
+                          </span>
                         </Visual>
                         <ToolTip>
                           <div className={style.bubbleTooltip}>
@@ -183,7 +184,12 @@ class Performance extends React.Component {
                     maximumIterationCount={1000}
                     size={[800, 600]}
                     fromPercentages={true}
-                    options={{ toolTipWidth: 200, toolTipHeight: 75 }}
+                    options={{
+                      toolTipWidth: 200,
+                      toolTipHeight: 75,
+                      visualWidth: 100,
+                      visualHeight: 50,
+                    }}
                   >
                     {bubblesFemales.map((bubble, i) => (
                       <Bubble
@@ -193,13 +199,9 @@ class Performance extends React.Component {
                         stroke="#2FD7C4"
                       >
                         <Visual>
-                          <span
-                            className={
-                              socialIconSelector(bubble.visual) +
-                              ' ' +
-                              style.bubbleVisual
-                            }
-                          />
+                          <span className={style.bubbleVisual}>
+                            {bubble.visual}
+                          </span>
                         </Visual>
                         <ToolTip>
                           <div className={style.bubbleTooltip}>
@@ -231,7 +233,12 @@ class Performance extends React.Component {
                     maximumIterationCount={1000}
                     size={[800, 600]}
                     fromPercentages={true}
-                    options={{ toolTipWidth: 200, toolTipHeight: 75 }}
+                    options={{
+                      toolTipWidth: 200,
+                      toolTipHeight: 75,
+                      visualWidth: 100,
+                      visualHeight: 50,
+                    }}
                   >
                     {bubblesBoth.map((bubble, i) => (
                       <Bubble
@@ -241,13 +248,9 @@ class Performance extends React.Component {
                         stroke="#8562F3"
                       >
                         <Visual>
-                          <span
-                            className={
-                              socialIconSelector(bubble.visual) +
-                              ' ' +
-                              style.bubbleVisual
-                            }
-                          />
+                          <span className={style.bubbleVisual}>
+                            {bubble.visual}
+                          </span>
                         </Visual>
                         <ToolTip>
                           <div className={style.bubbleTooltip}>
