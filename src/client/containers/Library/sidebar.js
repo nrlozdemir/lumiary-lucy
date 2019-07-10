@@ -9,21 +9,39 @@ import ColorRadioBoxes from 'Components/Form/ColorRadioBoxes/index'
 import Range from 'Components/Form/Range'
 import style from './style.scss'
 
-class Sidebar extends React.PureComponent {
+class Sidebar extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      sidebarVisible: false,
+      fixedHeader: true,
+    }
+
+    this.resetFormValues = this.resetFormValues.bind(this)
+    this.formChange = this.formChange.bind(this)
+  }
+  
   componentDidUpdate(prevProps) {
     const { sidebarVisible } = this.props
     if (sidebarVisible !== prevProps.sidebarVisible && !sidebarVisible) {
       this.resetFormValues()
     }
   }
-
+  
   resetFormValues = () => {
     const { reset, changeFilter } = this.props
     reset()
     changeFilter()
   }
 
+  formChange() {
+    this.setState({
+      formChange: true,
+    })
+  }
+
   render() {
+    const { formChange } = this.state
     const {
       colors,
       fixedHeader,
@@ -44,6 +62,7 @@ class Sidebar extends React.PureComponent {
     const sidebarHeaderClass = classnames(style.sidebarHeader, {
       [style.fixed]: fixedHeader,
     })
+
 
     const sidebarContentClass = classnames(style.sidebarContent, 'ph-32', {
       [style.fixed]: fixedHeader,
@@ -144,10 +163,14 @@ class Sidebar extends React.PureComponent {
                   placeholder="Select One"
                   options={selectOptions.orderByOptions}
                   label="Ordered By"
+                  onChange={this.formChange}
                 />
               </div>
               <div className="w-100 mt-48">
-                <SocialCheckBoxes colors={colors} />
+                <SocialCheckBoxes
+                  colors={colors}
+                  clickEvent={this.formChange}
+                />
               </div>
               <div className="w-100 d-flex justify-space-between mt-48">
                 <div className={ageRangeClasses}>
@@ -157,6 +180,7 @@ class Sidebar extends React.PureComponent {
                     placeholder="Select One"
                     options={selectOptions.audienceAge}
                     label="Audience Age"
+                    onChange={this.formChange}
                   />
                 </div>
                 <div className={genderClasses}>
@@ -166,6 +190,7 @@ class Sidebar extends React.PureComponent {
                     placeholder="Select One"
                     options={selectOptions.audienceGender}
                     label="Audience Gender"
+                    onChange={this.formChange}
                   />
                 </div>
               </div>
@@ -177,10 +202,11 @@ class Sidebar extends React.PureComponent {
                   minValue={0}
                   maxValue={60}
                   customClass={style.sidebarDurationRange}
+                  onChange={this.formChange}
                 />
               </div>
               <div className="w-100 mt-48">
-                <ColorRadioBoxes colors={colors} />
+                <ColorRadioBoxes colors={colors} clickEvent={this.formChange} />
               </div>
               <div className="w-100 mt-48">
                 <Select
@@ -189,6 +215,7 @@ class Sidebar extends React.PureComponent {
                   placeholder="Select One"
                   options={selectOptions.videoFormat}
                   label="Video Format"
+                  onChange={this.formChange}
                 />
               </div>
               <div className="w-100 mt-48">
@@ -198,6 +225,7 @@ class Sidebar extends React.PureComponent {
                   placeholder="Select One"
                   options={selectOptions.aspectRatio}
                   label="Aspect Ratio"
+                  onChange={this.formChange}
                 />
               </div>
               <div className="w-100 mt-48">
@@ -207,6 +235,7 @@ class Sidebar extends React.PureComponent {
                   placeholder="Select One"
                   options={selectOptions.frameRate}
                   label="Frame Rate"
+                  onChange={this.formChange}
                 />
               </div>
               <div className="w-100 mt-48">
@@ -216,6 +245,7 @@ class Sidebar extends React.PureComponent {
                   placeholder="Select One"
                   options={selectOptions.resolution}
                   label="Resolution"
+                  onChange={this.formChange}
                 />
               </div>
               <div className="w-100 mt-48">
@@ -225,11 +255,14 @@ class Sidebar extends React.PureComponent {
                   placeholder="Select One"
                   options={selectOptions.pacing}
                   label="Pacing"
+                  onChange={this.formChange}
                 />
               </div>
               <div className="w-100 d-flex align-items-center justify-content-center">
                 <Button
-                  customClass={classnames('mt-48', style.sidebarApplyButton)}
+                  customClass={classnames('mt-48', style.sidebarApplyButton, {
+                    [style.formChange]: formChange === true,
+                  })}
                   buttonText="Apply Filters"
                 />
               </div>

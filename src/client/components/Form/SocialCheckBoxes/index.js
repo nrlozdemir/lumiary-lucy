@@ -23,6 +23,9 @@ class SocialSelectBoxes extends React.Component {
               <Field
                 type="checkbox"
                 colors={this.props.colors}
+                onChange={(e) => {
+                  this.props.clickEvent(e)
+                }}
                 component={(props) => {
                   return (
                     <React.Fragment>
