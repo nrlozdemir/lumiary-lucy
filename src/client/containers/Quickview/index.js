@@ -38,7 +38,7 @@ export class Main extends React.PureComponent {
             placeHolder: 'Facebook',
           },
         },
-        { 
+        {
           name: 'instagram',
           filter: {
             type: 'metric',
@@ -46,7 +46,7 @@ export class Main extends React.PureComponent {
             placeHolder: 'Instagram',
           },
         },
-        { 
+        {
           name: 'twitter',
           filter: {
             type: 'metric',
@@ -54,7 +54,7 @@ export class Main extends React.PureComponent {
             placeHolder: 'Twitter',
           },
         },
-        { 
+        {
           name: 'youtube',
           filter: {
             type: 'metric',
@@ -95,8 +95,8 @@ export class Main extends React.PureComponent {
       platform: match.params.platform || 'facebook',
       data: {
         metric: selectedMetric,
-        dateRange: selectedDateRange
-      }
+        dateRange: selectedDateRange,
+      },
     })
   }
 
@@ -126,18 +126,18 @@ export class Main extends React.PureComponent {
                   <div className={style.navItem}>
                     {platforms.map((platform, idx) => {
                       const isSelected = selectedPlatform === platform.name
-                      return !!platform.filter && isSelected || true ? (
+                      return (!!platform.filter && isSelected) || true ? (
                         <div
                           key={idx}
                           className={cx(
                             style.navItem_btn,
                             {
-                              [style.selected]: isSelected
+                              [style.selected]: isSelected,
                             },
                             {
                               [colors.themeType === 'dark'
-                              ? style.dark
-                              : style.light]: true
+                                ? style.dark
+                                : style.light]: true,
                             }
                           )}
                         >
@@ -157,8 +157,12 @@ export class Main extends React.PureComponent {
                             onChange={(options = {}) => {
                               const { value } = options
 
-                              if(value){
-                                push(`/quickview/${toSlug(platform.name)}/${value}/${selectedDateRange}`)
+                              if (value) {
+                                push(
+                                  `/quickview/${toSlug(
+                                    platform.name
+                                  )}/${value}/${selectedDateRange}`
+                                )
                               }
                             }}
                           />
@@ -177,14 +181,11 @@ export class Main extends React.PureComponent {
                       )
                     })}
                     <div
-                      className={cx(
-                        style.navItem_btn,
-                        {
-                          [colors.themeType === 'dark'
+                      className={cx(style.navItem_btn, {
+                        [colors.themeType === 'dark'
                           ? style.dark
-                          : style.light]: true
-                        }
-                      )}
+                          : style.light]: true,
+                      })}
                     >
                       <ModuleSelectFilters
                         type={'dateRange'}
@@ -195,8 +196,10 @@ export class Main extends React.PureComponent {
                         onChange={(options = {}) => {
                           const { value } = options
 
-                          if(value){
-                            push(`/quickview/${selectedPlatform}/${selectedMetric}/${value}`)
+                          if (value) {
+                            push(
+                              `/quickview/${selectedPlatform}/${selectedMetric}/${value}`
+                            )
                           }
                         }}
                       />
@@ -204,184 +207,185 @@ export class Main extends React.PureComponent {
                   </div>
                 </div>
                 <div
-                  className={cx(
-                    style.cardWrapper,
-                    {
-                      [colors.themeType === 'dark'
+                  className={cx(style.cardWrapper, {
+                    [colors.themeType === 'dark'
                       ? style.dark
-                      : style.light]: true
-                    }
-                  )}
+                      : style.light]: true,
+                  })}
                 >
-                  {
-                    (loading)
-                      ? (<RouterLoading />)
-                      : (
-                        <div
-                          className={style.content}
-                          // style={{ background: colors.bodyBackground }}
-                        >
-                          {platformsValues &&
-                            platformsValues.map((el, i) => {
-                              const {
-                                cvScore,
-                                socialIcon,
-                                title,
-                                videoUrl,
-                                poster,
-                              } = el.video
-                              
-                              return (
-                                <div
-                                  key={i}
-                                  className={style.cardBlock}
-                                >
-                                  {/* HEADER */}
-                                  <div className={style.card}>
-                                    <h1>
-                                      {i == 0
-                                        ? 'Underperforming Videos'
-                                        : 'Overperforming Videos'}
+                  {loading ? (
+                    <RouterLoading />
+                  ) : (
+                    <div
+                      className={style.content}
+                      // style={{ background: colors.bodyBackground }}
+                    >
+                      {platformsValues &&
+                        platformsValues.map((el, i) => {
+                          const {
+                            cvScore,
+                            socialIcon,
+                            title,
+                            videoUrl,
+                            poster,
+                          } = el.video
 
-                                      {infoText && <i
-                                        className={cx('icon icon-Information', style.moduleInfo)}
-                                        onMouseEnter={() => changeInfoStatus()}
-                                        onMouseLeave={() => changeInfoStatus()}
-                                        style={{ color: themes.textColor }}
-                                      >
-                                        <ToolTip show={infoShow}>
-                                          {infoText}
-                                        </ToolTip>
-                                      </i>}
-                                    </h1>
-                                    {i === 0
-                                      ? <Down />
-                                      : <Up />
-                                    }
-                                    {/* VIDEO */}
-                                    <div className={style.assetContainer}>
-                                      <AssetLayer
-                                        leftSocialIcon={socialIcon}
-                                        title={title.substring(0, 32)}
-                                        rightValue={cvScore}
-                                        width={'100%'}
-                                        height={286}
-                                      >
-                                        <div className={style.video}>
-                                          <SingleVideoCard
-                                            {...el}
-                                            muted={false}
-                                            options={{ size: 'auto' }}
-                                          />
-                                        </div>
-                                        <div className={style.percentageWrapper}>
-                                          <PercentageBarGraph
-                                            key={Math.random()}
-                                            percentage={cvScore}
-                                            width={80}
-                                            height={20}
-                                            barWidth={2}
-                                            barSpaceWidth={1}
-                                            disableLabels
-                                            color={i === 0 ? 'blue' : 'green'}
-                                          />
-                                        </div>
-                                      </AssetLayer>
+                          return (
+                            <div key={i} className={style.cardBlock}>
+                              {/* HEADER */}
+                              <div className={style.card}>
+                                <h1>
+                                  {i == 0
+                                    ? 'Underperforming Video'
+                                    : 'Overperforming Video'}
+
+                                  {infoText && (
+                                    <i
+                                      className={cx(
+                                        'icon icon-Information',
+                                        style.moduleInfo
+                                      )}
+                                      onMouseEnter={() => changeInfoStatus()}
+                                      onMouseLeave={() => changeInfoStatus()}
+                                      style={{ color: themes.textColor }}
+                                    >
+                                      <ToolTip show={infoShow}>
+                                        {infoText}
+                                      </ToolTip>
+                                    </i>
+                                  )}
+                                </h1>
+                                {i === 0 ? <Down /> : <Up />}
+                                {/* VIDEO */}
+                                <div className={style.assetContainer}>
+                                  <AssetLayer
+                                    leftSocialIcon={socialIcon}
+                                    title={title.substring(0, 32)}
+                                    rightValue={cvScore}
+                                    width={'100%'}
+                                    height={286}
+                                  >
+                                    <div className={style.video}>
+                                      <SingleVideoCard
+                                        {...el}
+                                        muted={false}
+                                        options={{ size: 'auto' }}
+                                      />
                                     </div>
-                                    {/* PROPERTY VALUES */}
-                                    <div className={style.items}>
-                                      {el.infos.map((item, index) => {
-                                        const hasDifference =
-                                          ['duration', 'pacing'].indexOf(
-                                            item.title.toLowerCase()
-                                          ) !== -1
+                                    <div className={style.percentageWrapper}>
+                                      <PercentageBarGraph
+                                        key={Math.random()}
+                                        percentage={cvScore}
+                                        width={80}
+                                        height={20}
+                                        barWidth={2}
+                                        barSpaceWidth={1}
+                                        disableLabels
+                                        color={
+                                          colors.themeType === 'dark'
+                                            ? 'white'
+                                            : 'darkgrey'
+                                        }
+                                      />
+                                    </div>
+                                  </AssetLayer>
+                                </div>
+                                {/* PROPERTY VALUES */}
+                                <div
+                                  className={cx(style.items, {
+                                    [style.itemsHasOpacity]: i === 0,
+                                  })}
+                                >
+                                  {el.infos.map((item, index) => {
+                                    const hasDifference =
+                                      ['duration', 'pacing'].indexOf(
+                                        item.title.toLowerCase()
+                                      ) !== -1
 
-                                        const difference = (!hasDifference) ? false : differencesValues[item.slug] || 'N/A'
-                                        const noData = !item.value
+                                    const difference = !hasDifference
+                                      ? false
+                                      : differencesValues[item.slug] || 'N/A'
+                                    const noData = !item.value
 
-                                        return (
-                                          <div
-                                            key={`info_${i}-${index}`}
+                                    return (
+                                      <div
+                                        key={`info_${i}-${index}`}
+                                        className={cx(style.itemWrapper)}
+                                      >
+                                        {noData && (
+                                          <p className={style.noData}>
+                                            No Data Available
+                                          </p>
+                                        )}
+                                        <div
+                                          className={cx(style.infoItem, {
+                                            [style.noDataWrapper]: noData,
+                                          })}
+                                        >
+                                          {difference && i === 1 && false && (
+                                            <div
+                                              className={
+                                                style.infoItem_diffBubble
+                                              }
+                                            >
+                                              <span>{difference}%</span>
+                                              <span>Difference</span>
+                                            </div>
+                                          )}
+                                          <p
                                             className={cx(
-                                              style.itemWrapper,
+                                              'font-secondary-second',
+                                              style.sectionBadge
                                             )}
                                           >
-                                            {noData && <p className={style.noData}>No Data Available</p>}
-                                            <div 
-                                              className={cx(
-                                                style.infoItem,
-                                                {
-                                                  [style.noDataWrapper]: noData
-                                                }
-                                              )}
-                                            >
-                                              {difference && i === 1 && false && (
-                                                <div
-                                                  className={
-                                                    style.infoItem_diffBubble
-                                                  }
-                                                >
-                                                  <span>{difference}%</span>
-                                                  <span>Difference</span>
-                                                </div>
-                                              )}
-                                              <p
-                                                className={cx(
-                                                  'font-secondary-second',
-                                                  style.sectionBadge
-                                                )}
-                                              >
-                                                <span>
-                                                  {item.title}
-                                                </span>
-                                              </p>
-                                              <div
-                                                className={style.itemValue}
-                                                data-id={i}
-                                              >
-                                                {item.value}
-                                              </div>
-                                              <div className={style.progressText}>
-                                                <span className={style.rightTitle}>
-                                                  {item.percentage}%
-                                                </span>
-                                              </div>
-                                              <ProgressBar
-                                                width={item.percentage}
-                                                customBarClass={cx(
-                                                  style.progressBar,
-                                                  {
-                                                    [style[
-                                                      `progressBar--${
-                                                        colors.themeType === 'dark'
-                                                          ? 'dark'
-                                                          : 'light'
-                                                      }`
-                                                    ]]: i === 1,
-                                                  }
-                                                )}
-                                                customPercentageClass={cx(
-                                                  style.percentageBlue,
-                                                  {
-                                                    [style.percentagePink]: i == 0,
-                                                  }
-                                                )}
-                                              />
-                                              <p className={style.infoText}>
-                                                {textEdit(item.text, item)}
-                                              </p>
-                                            </div>
+                                            <span>{item.title}</span>
+                                          </p>
+                                          <div
+                                            className={style.itemValue}
+                                            data-id={i}
+                                          >
+                                            {item.value}
                                           </div>
-                                        )
-                                      })}
-                                    </div>
-                                  </div>
+                                          <div className={style.progressText}>
+                                            <span className={style.rightTitle}>
+                                              {item.percentage}%
+                                            </span>
+                                          </div>
+                                          <ProgressBar
+                                            width={item.percentage}
+                                            customBarClass={cx(
+                                              style.progressBar,
+                                              {
+                                                [style[
+                                                  `progressBar--${
+                                                    colors.themeType === 'dark'
+                                                      ? 'dark'
+                                                      : 'light'
+                                                  }`
+                                                ]]: i === 1,
+                                              }
+                                            )}
+                                            customPercentageClass={cx(
+                                              style.percentageBlue,
+                                              {
+                                                [style.percentagePink]: i == 0,
+                                              }
+                                            )}
+                                          />
+                                          <p className={style.infoText}>
+                                            {textEdit(item.text, item)}
+                                          </p>
+                                        </div>
+                                      </div>
+                                    )
+                                  })}
                                 </div>
-                              )
-                            })}
-                        </div>
-                      )
-                  }
+                              </div>
+                            </div>
+                          )
+                        })}
+                    </div>
+                  )}
                 </div>
               </div>
             </div>
