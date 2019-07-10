@@ -14,7 +14,7 @@ import {
 import { getDataFromApi } from 'Utils/api'
 import { selectAuthProfile } from 'Reducers/auth'
 
-function* getReports() {
+function* getReports({ payload: { value: filterValue } = {} }) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
@@ -27,17 +27,28 @@ function* getReports() {
     if (!!response) {
       const compare =
         !!response.compare &&
-        !!response.compare.length &&
         response.compare.map((item) => {
           return { ...item, category: 'Compare Brands' }
         })
       const insights =
         !!response.insights &&
-        !!response.insights.length &&
         response.insights.map((item) => {
           return { ...item, category: 'Brands Insights' }
         })
-      yield put(actions.loadReportsSuccess([...compare, ...insights]))
+      let values
+
+      switch (filterValue) {
+        case 'insights':
+          values = insights
+          break
+        case 'compare':
+          values = compare
+          break
+        default:
+          values = [...compare, ...insights]
+      }
+
+      yield put(actions.loadReportsSuccess(values))
     }
   } catch (err) {
     console.log('err', err)
@@ -48,13 +59,20 @@ function* getReports() {
 function* brandInsightSubmit({ payload: { params, onlySave } }) {
   try {
     const {
-      brand: { value: brand },
-      engagamentByPlatform: { value: engagamentByPlatform },
-      date: { value: date },
       title,
+      engagamentByPlatform,
+      social: socialParam,
+      engagement: engagementParam,
+      brand: { value: brand },
+      date: { value: date },
     } = params
 
-    const [social, engagement] = engagamentByPlatform.split('|')
+    const [socialSplit, engagementSplit] = engagamentByPlatform
+      ? engagamentByPlatform.value.split('|')
+      : [null, null]
+
+    let social = socialSplit ? socialSplit : socialParam.value
+    let engagement = engagementSplit ? engagementSplit : engagementParam.value
 
     const saved =
       params && params.saved && params.saved.value ? params.saved.value : false
@@ -346,7 +364,7 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
 
       yield put(
         actions.getColorComparisonDataSuccess(
-          radarChartCalculate(compareSharesData(payload))
+          radarChartCalculate(compareSharesData(payload, parameters))
         )
       )
     } else {

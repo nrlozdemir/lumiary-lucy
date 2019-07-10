@@ -130,6 +130,7 @@
         width: 75%;
         display: block;
         margin: 0 auto;
+        padding-left: 4px;
         padding-top: 32px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
@@ -137,6 +138,18 @@
         overflow: hidden;
         max-height: 60px;
         height: 100%;
+        position: relative;
+
+        &:before {
+          content: '';
+          background-color: $color-cool-blue;
+          border-radius: 50%;
+          height: 16px;
+          width: 16px;
+          position: absolute;
+          left: 0px;
+          top: 37px;
+        }
       }
       .textBold {
         font-family: $font-family-ClanOTBold;
@@ -380,10 +393,14 @@
   align-items: center;
   flex-direction: row-reverse;
   justify-content: space-between;
-  width: 360px;
+  //width: 360px;
   margin-bottom: 0;
   text-align: left;
   position: relative;
+
+  > div:last-child {
+    margin-right: 24px;
+  }
 }
 
 .formWrapper > form > div {
@@ -591,5 +608,5 @@
 }
 
 .chartLoading {
-  opacity: .25;
+  opacity: 0.25;
 }

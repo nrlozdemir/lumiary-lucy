@@ -9,6 +9,9 @@ import ColorRadioBoxes from 'Components/Form/ColorRadioBoxes/index'
 import Range from 'Components/Form/Range'
 import style from './style.scss'
 
+const ageRangeClasses = classnames('w-50 ml-0 pr-8', style.sidebarSelectContainer);
+const genderClasses = classnames('w-50 ml-0 pl-8', style.sidebarSelectContainer);
+
 const Sidebar = (props) => {
   const { reset, handleSubmit, colors, changeFilter } = props
   const sidebarClass = classnames(style.sidebar, {
@@ -120,7 +123,7 @@ const Sidebar = (props) => {
               <SocialCheckBoxes colors={colors} />
             </div>
             <div className="w-100 d-flex justify-space-between mt-48">
-              <div className="w-50 ml-0 pr-8">
+              <div className={ageRangeClasses}>
                 <Select
                   id="AgeRange"
                   name="AgeRange"
@@ -129,7 +132,7 @@ const Sidebar = (props) => {
                   label="Audience Age"
                 />
               </div>
-              <div className="w-50 ml-0 pl-8">
+              <div className={genderClasses}>
                 <Select
                   id="Gender"
                   name="Gender"

@@ -91,11 +91,29 @@ const Select = (props) => {
     customClass,
     isActive,
     isReportDropdown,
+    inModuleFilter,
   } = props
   const themes = props.themeContext.colors
 
   let args = props.input ? props.input : props
   let { name, onChange, value } = args
+
+  let labels = options.map(({ label, options: labelOptions }) => {
+    if (labelOptions) {
+      return labelOptions.map((o) => `${label} on ${o.label}`.length)
+    }
+    return label.length
+  })
+  if (labels && typeof labels[0] === 'object') {
+    const customLabels = []
+    labels.map((value) => {
+      value.map((v) => {
+        customLabels.push(v)
+      })
+    })
+    labels = customLabels
+  }
+  const maxLenght = labels.sort((a, b) => b - a)[0]
 
   const reduxFormOnChange = (option) => {
     onChange(option)
@@ -126,6 +144,7 @@ const Select = (props) => {
         '&:hover': {
           borderColor: 'none',
         },
+        ...(inModuleFilter ? { width: 64 + maxLenght * 7.5 } : {}),
         color: isFocused
           ? themes.inputActiveColor
           : hasValue
@@ -176,7 +195,7 @@ const Select = (props) => {
           ? themes.inputColor
           : isReportDropdown
           ? themes.moduleBorder
-          : themes.inputActiveColor,
+          : themes.inputPlaceholderColor,
         whiteSpace: 'nowrap',
         position: 'unset',
         transform: 'unset',
@@ -194,6 +213,7 @@ const Select = (props) => {
       ...base,
       boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.5)',
       borderRadius: 0,
+      zIndex: 100
     }),
     menuList: (base) => ({
       ...base,

@@ -58,7 +58,7 @@ const dark = {
   videoCardColor: '#ffffff',
   videoCardShadow: 'rgba(0, 0, 0, 0.5)',
   videoBorder: '#545b79',
-  videoRightPercentageBackground: 'rgb(33, 36, 59, 0.8)',
+  videoRightPercentageBackground: '#202952',
 
   // Sidebar
   filterHeader: '#ffffff',
@@ -86,16 +86,21 @@ const dark = {
   // custom selectbox values
 
   // input values
-  inputControlBackground: '#373f5b',
+  inputControlBackground: '#21243B',
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#545b79',
   inputColor: '#545B79',
-  inputActiveColor: '#ffffff',
+  inputActiveColor: '#fff',
   inputOptionBackground: '#545B79',
-  inputOptionFocusBackground: '#21243B',
+  inputOptionFocusBackground: '#545B79',
   inputOptionSelectedBackground: '#ffffff',
   inputPlaceholderColor: '#545b79',
   // input values
+
+  // search input colors
+  searchInputColor: '#fff',
+  searchInputActiveColor: '#fff',
+  searchInputPlaceholderColor: '#fff',
 
   // table values
   tableHeaderBackground: '#545b79',
@@ -132,7 +137,9 @@ const dark = {
   // radar chart values
   chartPointBackgroundColor: '#ffffff',
   chartPointBorderColor: '#ffffff',
-  chartBackgroundColor: 'rgba(255, 255, 255, 0.4)',
+  chartBackgroundColor: 'rgba(172, 176, 190, 0.4)',
+  chartTickColor: 'rgba(255, 255, 255, 0.4)',
+  chartAngleLineColor: 'rgba(90, 99, 134, 0.3)',
   // radar chart values
 
   // shot by shot slider values
@@ -162,7 +169,6 @@ const dark = {
   dotThumbBackgroundColor: '#ffffff',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
 
-
   // panoptic line chart
   lineChartGridColor: '#545b79',
   lineChartBackgroundColor: '#21243b',
@@ -171,6 +177,8 @@ const dark = {
   lineBackgroundColor: 'rgba(0, 0, 0, 0.5)',
   colorChartShadowColor: 'rgba(0, 0, 0, 0.5)',
 
+  // video hover progress bar
+  videoProgressBar: '#fff',
 }
 
 const light = {
@@ -232,7 +240,7 @@ const light = {
   videoCardShadow: '#bebebe',
   videoBorder: '#c6c9d7',
   videoCardIcon: '#505050',
-  videoRightPercentageBackground: 'rgba(255, 255, 255, 0.8)',
+  videoRightPercentageBackground: '#fff',
 
   // Sidebar
   filterHeader: '#e8ecf0',
@@ -272,6 +280,11 @@ const light = {
 
   // input values
 
+  // search input colors
+  searchInputColor: '#000',
+  searchInputActiveColor: '#505050',
+  searchInputPlaceholderColor: '#c6c9d7',
+
   // table values
   tableHeaderBackground: '#ffffff',
   tableBodyBackground: '#f3f6f9',
@@ -308,6 +321,8 @@ const light = {
   chartPointBackgroundColor: '#505050',
   chartPointBorderColor: '#505050',
   chartBackgroundColor: 'rgba(172, 176, 190, 0.4)',
+  chartTickColor: 'rgba(80, 80, 80, 0.4)',
+  chartAngleLineColor: 'rgba(90, 99, 134, 0.3)',
   // radar chart values
 
   // shot by shot slider values
@@ -337,7 +352,6 @@ const light = {
   dotThumbBackgroundColor: '#2fd7c4',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
 
-
   // panoptic line chart
   lineChartGridColor: '#c6c9d7',
   lineChartBackgroundColor: '#e8ecf0',
@@ -346,6 +360,8 @@ const light = {
   lineBackgroundColor: '#bebebe',
   colorChartShadowColor: '#bebebe',
 
+  // video hover progress bar
+  videoProgressBar: '#2fd7c4',
 }
 
 const themes = {
