@@ -51,7 +51,7 @@ function* getQuickviewItemsApi({
       'ages.industry_percent': agesIndustryPercent = '',
     } = videoInfo
 
-    const performingText = type === 'maxVideo' ? 'overperforming' : ''
+    const performingText = type === 'maxVideo' ? 'overperforming' : 'underperforming'
  
     const maxVideo = {
       video: {
