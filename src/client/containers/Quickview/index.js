@@ -291,7 +291,11 @@ export class Main extends React.PureComponent {
                                   </AssetLayer>
                                 </div>
                                 {/* PROPERTY VALUES */}
-                                <div className={style.items}>
+                                <div
+                                  className={cx(style.items, {
+                                    [style.itemsHasOpacity]: i === 0,
+                                  })}
+                                >
                                   {el.infos.map((item, index) => {
                                     const hasDifference =
                                       ['duration', 'pacing'].indexOf(
