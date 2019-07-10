@@ -21,21 +21,16 @@ class FormatCard extends Component {
 
   iconClass(name) {
     switch (name) {
-      case 'LA':
-      case 'Live Action':
-        return 'icon-icon_liveaction'
-
-      case 'AN':
-      case 'Animation':
-        return 'icon-icon_animation'
-
-      case 'HY':
-      case 'Hybrid':
-      case 'Stop Motion':
+      case 0:
         return 'icon-icon_stopmotion'
 
-      case 'CG':
-      case 'Cinemagraph':
+      case 1:
+        return 'icon-icon_animation'
+
+      case 2:
+        return 'icon-icon_liveaction'
+
+      case 3:
         return 'icon-icon_cinemagraph'
 
       default:
@@ -108,7 +103,7 @@ class FormatCard extends Component {
                 data.map((item, i) => (
                   <div key={i} className={formatStyles.formatItem}>
                     <div className={formatStyles.formatItemIcon}>
-                      <span className={this.iconClass(item.name)} />
+                      <span className={this.iconClass(i)} />
                     </div>
                     <div className={formatStyles.formatItemText}>
                       <span>{item.count}</span>
