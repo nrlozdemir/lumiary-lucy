@@ -196,55 +196,55 @@
   "performance": {
     "bubblesMales": [
       {
-        "visual": "youtube",
+        "visual": "slowest",
         "toolTip": 330000
       },
       {
-        "visual": "facebook",
+        "visual": "slow",
         "toolTip": 540000
       },
       {
-        "visual": "twitter",
+        "visual": "medium",
         "toolTip": 845000
       },
       {
-        "visual": "instagram",
+        "visual": "fastest",
         "toolTip": 296000
       }
     ],
     "bubblesFemales": [
       {
-        "visual": "youtube",
+        "visual": "slowest",
         "toolTip": 715000
       },
       {
-        "visual": "facebook",
+        "visual": "slow",
         "toolTip": 744000
       },
       {
-        "visual": "twitter",
+        "visual": "medium",
         "toolTip": 530000
       },
       {
-        "visual": "instagram",
+        "visual": "fastest",
         "toolTip": 472000
       }
     ],
     "bubblesBoth": [
       {
-        "visual": "youtube",
+        "visual": "slowest",
         "toolTip": 828000
       },
       {
-        "visual": "facebook",
+        "visual": "slow",
         "toolTip": 881000
       },
       {
-        "visual": "twitter",
+        "visual": "medium",
         "toolTip": 438000
       },
       {
-        "visual": "instagram",
+        "visual": "fastest",
         "toolTip": 679000
       }
     ]
