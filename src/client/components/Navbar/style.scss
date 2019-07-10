@@ -28,8 +28,10 @@
     justify-content: center;
 
     .text {
+      font-family: $font-family-ClanOT;
       margin-left: 20px;
       font-size: 14px;
+      font-weight: bold;
     }
 
     span {
@@ -146,4 +148,10 @@
       }
     }
   }
+}
+
+.headerTitle {
+  font-size: 14px;
+  font-weight: bold;
+  font-family: $font-family-ClanOT;
 }
