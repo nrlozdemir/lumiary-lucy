@@ -10,6 +10,7 @@ import {
   compareSharesData,
   convertColorTempToDatasets,
   convertVideoEngagementData,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
@@ -40,14 +41,13 @@ function* getVideoReleasesData({ data }) {
     if (!!response) {
       yield put(
         actions.getVideoReleasesDataSuccess(
-          convertVideoEngagementData(response, metric)
+          percentageManipulation(convertVideoEngagementData(response, metric))
         )
       )
     } else {
       throw new Error('Panoptic Error getVideoReleasesData')
     }
   } catch (err) {
-    console.log(err)
     yield put(actions.getVideoReleasesDataError(err))
   }
 }
@@ -75,11 +75,10 @@ function* getColorTemperatureData({ data }) {
       actions.getColorTemperatureDataSuccess({
         labels,
         platforms,
-        data: colorTempData,
+        data: percentageManipulation(colorTempData),
       })
     )
   } catch (err) {
-    console.log(err)
     yield put(actions.getColorTemperatureDataError(err))
   }
 }
@@ -125,18 +124,21 @@ function* getFilteringSectionData({ data }) {
     ) {
       yield put(
         actions.getFilteringSectionDataSuccess({
-          doughnutData: convertDataIntoDatasets(doughnutData, options, {
-            singleDataset: true,
-          }),
+          doughnutData: convertDataIntoDatasets(
+            percentageManipulation(doughnutData),
+            options,
+            {
+              singleDataset: true,
+            }
+          ),
           stackedChartData:
             (!_.isEmpty(stackedChartData.data) &&
               convertDataIntoDatasets(
-                stackedChartData,
+                percentageManipulation(stackedChartData),
                 { ...options, dateBucket },
                 { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
               )) ||
             {},
-
           property,
         })
       )
@@ -195,7 +197,9 @@ function* getPacingCardData({ data }) {
     ) {
       yield put(
         actions.getPacingCardDataSuccess({
-          stadiumData: convertDataIntoDatasets(stadiumData, options),
+          stadiumData: percentageManipulation(
+            convertDataIntoDatasets(stadiumData, options)
+          ),
           horizontalStackedBarData: convertDataIntoDatasets(
             horizontalStackedBarData,
             {
@@ -243,11 +247,12 @@ function* getCompareSharesData({ data: { dateRange } }) {
 
     yield put(
       actions.getCompareSharesDataSuccess(
-        radarChartCalculate(compareSharesData(payload, parameters))
+        percentageManipulation(
+          radarChartCalculate(compareSharesData(payload, parameters))
+        )
       )
     )
   } catch (err) {
-    console.log('err', err)
     yield put(actions.getCompareSharesDataError(err))
   }
 }
@@ -275,7 +280,7 @@ function* getFlipCardsData() {
         },
       }))
     )
-    yield put(actions.getFlipCardsDataSuccess(payloads))
+    yield put(actions.getFlipCardsDataSuccess(percentageManipulation(payloads)))
   } catch (err) {
     console.log(err)
     yield put(actions.getFlipCardsDataError(err))
@@ -307,15 +312,15 @@ function* getTopPerformingFormatData({ data = {} }) {
     ])
 
     if (!!dataWithDateBuckets.data && !!dataWithoutDateBuckets.data) {
-      const lineChartData = convertDataIntoDatasets(
-        dataWithDateBuckets,
-        dateBucketedOptions
+      const lineChartData = percentageManipulation(
+        convertDataIntoDatasets(dataWithDateBuckets, dateBucketedOptions)
       )
 
-      const doughnutData = convertDataIntoDatasets(
-        dataWithoutDateBuckets,
-        options,
-        { singleDataset: true, hoverBG: true }
+      const doughnutData = percentageManipulation(
+        convertDataIntoDatasets(dataWithoutDateBuckets, options, {
+          singleDataset: true,
+          hoverBG: true,
+        })
       )
 
       yield put(

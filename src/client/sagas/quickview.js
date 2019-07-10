@@ -5,6 +5,8 @@ import { types } from 'Reducers/quickview'
 import { selectAuthProfile } from 'Reducers/auth'
 import { getDataFromApi } from 'Utils/api'
 
+import { percentageManipulation } from 'Utils/datasets'
+
 function* getQuickviewItemsApi({
   platform,
   metric,
@@ -217,8 +219,10 @@ function* getQuickviewItemsSaga({ payload }) {
     yield put({
       type: types.GET_QUICKVIEW_ITEMS_SUCCESS,
       payload: {
-        platformsValues: response[platform],
-        differencesValues: response.differences[platform],
+        platformsValues: percentageManipulation(response[platform]),
+        differencesValues: percentageManipulation(
+          response.differences[platform]
+        ),
       },
     })
   } catch (error) {

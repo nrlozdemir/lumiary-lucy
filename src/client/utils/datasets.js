@@ -11,7 +11,14 @@ import {
   getTimeBucket,
   getLabelWithSuffix,
 } from 'Utils'
-import { isEmpty } from 'lodash'
+import {
+  isEmpty,
+  isObject,
+  isArray,
+  isNumber,
+  isFinite,
+  isInteger,
+} from 'lodash'
 
 /**
  * Convert data to chart js structure
@@ -665,6 +672,65 @@ const convertNumberArrIntoPercentages = (arr = []) => {
   return arr.map((n) => parseFloat(((n / sum) * 100).toFixed(2)))
 }
 
+const percentageBeautifier = (value, precision) => {
+  if (isInteger(value) || value === 0) {
+    return value
+  }
+
+  const multiplier = Math.pow(10, precision || 1)
+  value = Math.round(value * multiplier) / multiplier
+
+  if (value.toString().substr(-1, 1) == 0) {
+    value = value.toString().replace('.0', '')
+  }
+
+  return value
+}
+
+const percentageManipulation = (bucket) => {
+  if (isObject(bucket)) {
+    Object.keys(bucket).map((el, i) => {
+      if (isNumber(bucket[el]) && isFinite(bucket[el])) {
+        bucket[el] = percentageBeautifier(bucket[el])
+      } else if (isArray(bucket[el])) {
+        bucket[el].forEach((item, index) => {
+          if (isNumber(bucket[el][index])) {
+            bucket[el][index] = percentageBeautifier(item)
+          } else {
+            bucket[el][index] = percentageManipulation(bucket[el][index])
+          }
+        })
+      } else if (isObject(bucket[el])) {
+        Object.keys(bucket[el]).map((key, k) => {
+          bucket[el][key] = percentageManipulation(bucket[el][key])
+        })
+      }
+    })
+  } else if (isArray(bucket)) {
+    bucket.forEach((item, index) => {
+      if (isNumber(bucket[index]) && isFinite(bucket[el])) {
+        bucket[index] = percentageBeautifier(item)
+      } else if (isArray(bucket[index])) {
+        bucket[index].forEach((arrayItem, arrayIndex) => {
+          if (isNumber(bucket[index][arrayIndex])) {
+            bucket[index][arrayIndex] = percentageBeautifier(arrayItem)
+          } else {
+            bucket[index][arrayIndex] = percentageManipulation(
+              bucket[index][arrayIndex]
+            )
+          }
+        })
+      } else if (isObject(bucket[index])) {
+        Object.keys(bucket[index]).map((key, k) => {
+          bucket[index][key] = percentageManipulation(bucket[index][key])
+        })
+      }
+    })
+  }
+
+  return bucket
+}
+
 export {
   convertDataIntoDatasets,
   chartCombineDataset,
@@ -678,4 +744,5 @@ export {
   getMinMaxFromDatasets,
   convertNumberArrIntoPercentages,
   convertIntoLibAndIndustryDoughnut,
+  percentageManipulation,
 }
