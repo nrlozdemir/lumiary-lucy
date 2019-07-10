@@ -18,7 +18,7 @@
   overflow-y: auto;
   width: 439px;
   z-index: 1000;
-  right: -426px; // 2px for shadow
+  right: -442px;
   top: 0;
 
   &.fixed {
@@ -119,6 +119,6 @@
 }
 
 .sidebarSelectContainer {
-	position: relative;
-	z-index: 10;
+  position: relative;
+  z-index: 10;
 }
