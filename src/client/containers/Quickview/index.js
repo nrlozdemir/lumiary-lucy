@@ -120,89 +120,90 @@ export class Main extends React.PureComponent {
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <React.Fragment>
-            <div className="grid-container col-12 mt-50">
-							<div className={style.navigation}>
-								<div className={style.navItem}>
-									{platforms.map((platform, idx) => {
-										const isSelected = selectedPlatform === platform.name
-										return !!platform.filter && isSelected || true ? (
-											<div
-												key={idx}
-												className={cx(
-													style.navItem_btn,
-													{
-														[style.selected]: isSelected
-													},
-													{
-														[colors.themeType === 'dark'
-														? style.dark
-														: style.light]: true
-													}
-												)}
-											>
-												<i
-													className={cx(
-														socialIconSelector(platform.name),
-														style.activeIcon
-													)}
-												/>
-												<ModuleSelectFilters
-													isActive={isSelected}
-													type={platform.filter.type}
-													moduleKey={moduleKey}
-													selectKey={platform.filter.selectKey}
-													placeHolder={platform.filter.placeHolder}
-													defaultValue={selectedMetric}
-													onChange={(options = {}) => {
-														const { value } = options
+            <div className="grid-container col-12">
+              <div className="grid-collapse mt-50">
+                <div className={style.navigation}>
+                  <div className={style.navItem}>
+                    {platforms.map((platform, idx) => {
+                      const isSelected = selectedPlatform === platform.name
+                      return !!platform.filter && isSelected || true ? (
+                        <div
+                          key={idx}
+                          className={cx(
+                            style.navItem_btn,
+                            {
+                              [style.selected]: isSelected
+                            },
+                            {
+                              [colors.themeType === 'dark'
+                              ? style.dark
+                              : style.light]: true
+                            }
+                          )}
+                        >
+                          <i
+                            className={cx(
+                              socialIconSelector(platform.name),
+                              style.activeIcon
+                            )}
+                          />
+                          <ModuleSelectFilters
+                            isActive={isSelected}
+                            type={platform.filter.type}
+                            moduleKey={moduleKey}
+                            selectKey={platform.filter.selectKey}
+                            placeHolder={platform.filter.placeHolder}
+                            defaultValue={selectedMetric}
+                            onChange={(options = {}) => {
+                              const { value } = options
 
-														if(value){
-															push(`/quickview/${toSlug(platform.name)}/${value}/${selectedDateRange}`)
-														}
-													}}
-												/>
-											</div>
-										) : (
-											<NavLink
-												key={idx}
-												className={style.navItem_btn}
-												activeStyle={{
-													background: colors.tabActiveBackground,
-												}}
-												to={`/quickview/${toSlug(platform.name)}`}
-											>
-												<i className={socialIconSelector(platform.name)} />
-											</NavLink>
-										)
-									})}
-									<div
-										className={cx(
-											style.navItem_btn,
-											{
-												[colors.themeType === 'dark'
-												? style.dark
-												: style.light]: true
-											}
-										)}
-									>
-										<ModuleSelectFilters
-											type={'dateRange'}
-											moduleKey={moduleKey}
-											selectKey={'QV-date'}
-											placeHolder={'Date'}
-											defaultValue={selectedDateRange}
-											onChange={(options = {}) => {
-												const { value } = options
+                              if(value){
+                                push(`/quickview/${toSlug(platform.name)}/${value}/${selectedDateRange}`)
+                              }
+                            }}
+                          />
+                        </div>
+                      ) : (
+                        <NavLink
+                          key={idx}
+                          className={style.navItem_btn}
+                          activeStyle={{
+                            background: colors.tabActiveBackground,
+                          }}
+                          to={`/quickview/${toSlug(platform.name)}`}
+                        >
+                          <i className={socialIconSelector(platform.name)} />
+                        </NavLink>
+                      )
+                    })}
+                    <div
+                      className={cx(
+                        style.navItem_btn,
+                        {
+                          [colors.themeType === 'dark'
+                          ? style.dark
+                          : style.light]: true
+                        }
+                      )}
+                    >
+                      <ModuleSelectFilters
+                        type={'dateRange'}
+                        moduleKey={moduleKey}
+                        selectKey={'QV-date'}
+                        placeHolder={'Date'}
+                        defaultValue={selectedDateRange}
+                        onChange={(options = {}) => {
+                          const { value } = options
 
-												if(value){
-													push(`/quickview/${selectedPlatform}/${selectedMetric}/${value}`)
-												}
-											}}
-										/>
-									</div>
-								</div>
-							</div>
-							<div
+                          if(value){
+                            push(`/quickview/${selectedPlatform}/${selectedMetric}/${value}`)
+                          }
+                        }}
+                      />
+                    </div>
+                  </div>
+                </div>
+                <div
                   className={cx(
                     style.cardWrapper,
                     {
@@ -382,6 +383,7 @@ export class Main extends React.PureComponent {
                       )
                   }
                 </div>
+              </div>
             </div>
           </React.Fragment>
         )}
