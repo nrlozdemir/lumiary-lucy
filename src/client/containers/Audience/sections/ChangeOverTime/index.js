@@ -7,17 +7,19 @@ import Module from 'Components/Module'
 import LineChart from 'Components/Charts/LineChart'
 import style from 'Containers/Audience/style.scss'
 
-const SHADOW_PLUGINS = [
-	{
-		beforeDatasetDraw: function ({ctx}, {meta}) {
-			ctx.shadowBlur = 10;
-			ctx.shadowColor = meta.$filler.el._model.borderColor;
-		},
-		afterDatasetDraw: function (chart) {
-			chart.ctx.shadowBlur = 0;
-		},
-	},
-];
+const plugins = [
+  {
+    beforeDatasetDraw: function({ ctx }, { meta }) {
+      ctx.shadowBlur = 10
+      ctx.shadowColor = meta.$filler.el._model.borderColor
+    },
+  },
+  {
+    afterDatasetDraw: function(chart) {
+      chart.ctx.shadowBlur = 0
+    },
+  },
+]
 
 class ChangeOverTime extends React.Component {
   callBack = (data, moduleKey) => {
@@ -79,7 +81,7 @@ class ChangeOverTime extends React.Component {
               customTooltipText="Likes"
               yAxesStepSize={250000}
               yAxesMax={1000000}
-              plugins={SHADOW_PLUGINS}
+              plugins={plugins}
             />
           </div>
         )}

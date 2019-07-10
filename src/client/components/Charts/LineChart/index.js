@@ -32,10 +32,7 @@ function combineChartData(data, type = null) {
 class LineChart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {
-      chartWidth: 1140,
-      chartHeight: 285,
-    }
+    this.state = {}
   }
 
   datasetKeyProvider() {
@@ -44,7 +41,6 @@ class LineChart extends React.Component {
 
   render() {
     const themes = this.props.themeContext.colors
-    const { chartWidth, chartHeight } = this.state
 
     const defaultProps = {
       options: {
@@ -57,41 +53,6 @@ class LineChart extends React.Component {
         },
         tooltips: {
           enabled: false,
-        },
-        hover: {
-          mode: 'dataset',
-          intersect: false,
-          onHover: (a, c) => {
-            const max = Math.min.apply(
-              Math,
-              c.map(function(o) {
-                return o._model.y
-              })
-            )
-
-            const maxObject = c.find((o) => o._model.y === max)
-            const chart = maxObject && maxObject._chart
-            if (!maxObject) return null
-            const averagePoint =
-              ((chart.chartArea.right - chart.chartArea.left) / 100) *
-                chart.options.average +
-              48
-            chart.ctx.beginPath()
-            chart.ctx.setLineDash([8, 5])
-
-            if (averagePoint < maxObject._model.x) {
-              chart.ctx.moveTo(averagePoint, maxObject._model.y - 30)
-              chart.ctx.lineTo(maxObject._model.x, maxObject._model.y - 30)
-            } else {
-              chart.ctx.moveTo(maxObject._model.x, maxObject._model.y - 30)
-              chart.ctx.lineTo(averagePoint, maxObject._model.y - 30)
-            }
-            chart.ctx.moveTo(maxObject._model.x, maxObject._model.y - 30)
-            chart.ctx.lineTo(maxObject._model.x, maxObject._model.y)
-            chart.ctx.strokeStyle = '#000'
-            chart.ctx.lineWidth = 2
-            chart.ctx.stroke()
-          },
         },
 
         scales: {
@@ -139,22 +100,21 @@ class LineChart extends React.Component {
             },
           ],
         },
-			},
-			plugins: []
+      },
     }
 
     let props = fromJS(defaultProps)
       .mergeDeep(this.props)
       .toJS()
+    let plugins = props.plugins ? [...props.plugins] : []
 
-    const plugins = [...props.plugins];
-
+    // console.log()
     if (props.backgroundColor || themes.chartBackground) {
       plugins.push({
         beforeDraw: (chart, easing) => {
           let ctx = chart.chart.ctx
           let chartArea = chart.chartArea
-
+          console.log('asdas')
           ctx.save()
           ctx.fillStyle = props.backgroundColor || themes.chartBackground
           ctx.fillRect(
@@ -165,9 +125,14 @@ class LineChart extends React.Component {
           )
           ctx.restore()
         },
+      })
+    }
+    if (props.customLine) {
+      plugins.push({
         afterDraw: (chart, easing) => {
           let ctx = chart.chart.ctx
           let chartArea = chart.chartArea
+          console.log(chart)
           if (chart.options.average) {
             ctx.fillStyle = '#000'
             ctx.fillRect(
@@ -304,8 +269,6 @@ class LineChart extends React.Component {
         fontWeight: 'bold',
       }
     }
-    console.log(props)
-
     return (
       <React.Fragment>
         <Line

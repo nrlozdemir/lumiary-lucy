@@ -152,7 +152,55 @@ const ContentVitalityScoreModule = ({
                 xAxesFlatten={xAxesFlatten}
                 flattenFirstSpace={flattenFirstSpace}
                 flattenLastSpace={flattenLastSpace}
-                options={{ ...options, average: 10 }}
+                customLine
+                options={{
+                  ...options,
+                  average: 50,
+                  hover: {
+                    mode: 'dataset',
+                    intersect: false,
+                    onHover: (a, c) => {
+                      const max = Math.min.apply(
+                        Math,
+                        c.map(function(o) {
+                          return o._model.y
+                        })
+                      )
+
+                      const maxObject = c.find((o) => o._model.y === max)
+                      const chart = maxObject && maxObject._chart
+                      if (!maxObject) return null
+                      const averagePoint =
+                        ((chart.chartArea.right - chart.chartArea.left) / 100) *
+                          chart.options.average +
+                        48
+                      chart.ctx.beginPath()
+                      chart.ctx.setLineDash([8, 5])
+
+                      if (averagePoint < maxObject._model.x) {
+                        chart.ctx.moveTo(averagePoint, maxObject._model.y - 30)
+                        chart.ctx.lineTo(
+                          maxObject._model.x,
+                          maxObject._model.y - 30
+                        )
+                      } else {
+                        chart.ctx.moveTo(
+                          maxObject._model.x,
+                          maxObject._model.y - 30
+                        )
+                        chart.ctx.lineTo(averagePoint, maxObject._model.y - 30)
+                      }
+                      chart.ctx.moveTo(
+                        maxObject._model.x,
+                        maxObject._model.y - 30
+                      )
+                      chart.ctx.lineTo(maxObject._model.x, maxObject._model.y)
+                      chart.ctx.strokeStyle = '#000'
+                      chart.ctx.lineWidth = 2
+                      chart.ctx.stroke()
+                    },
+                  },
+                }}
               />
             </div>
             {formattedData.brand_1 &&
