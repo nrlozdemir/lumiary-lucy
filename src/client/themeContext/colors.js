@@ -71,7 +71,7 @@ const dark = {
   filterHeaderText: '#202952',
 
   // modal values
-  modalBackground: 'x#373f5b',
+  modalBackground: '#373f5b',
   modalHeaderBackground: '#ffffff',
   modalHeaderColor: '#202952',
   modalButtonBackground: '#545b79',
