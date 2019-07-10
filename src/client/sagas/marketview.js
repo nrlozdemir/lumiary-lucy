@@ -335,7 +335,7 @@ function* getPacingChartData() {
       payload,
       { property: ['pacing'] },
       {
-        customBorderColor: '#373F5B',
+        customBorderColor: '#fff',
         singleDataset: true,
         noBrandKeys: true,
         customValueKey: 'proportionOfLibrary',
