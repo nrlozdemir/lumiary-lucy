@@ -74,6 +74,10 @@ class ChangeOverTime extends React.Component {
               width={1162}
               height={292}
               dataSet={data}
+              customLineOptions={[
+                {borderColor: '#2fd7c4'},
+                {borderColor: '#5292e5'},
+              ]}
               xAxesFlatten
               yAxesAbbreviate
               customTooltipText="Likes"
