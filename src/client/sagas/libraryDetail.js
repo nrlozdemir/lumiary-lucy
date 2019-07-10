@@ -149,91 +149,12 @@ function* getShotByShot(videoId) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
-    const payload = {
-      "video": {
-        "brand_uuid": "d65aa957-d094-4cf3-8d37-dafe50e752ea",
-        "video_uuid": "d6970ee5-5fed-43eb-a32d-8a94df654ed3",
-        "bucket": "quickframe-media-staging",
-        "shots": {
-          "0": {
-            "startTime": 0,
-            "endTime": 2.6026,
-            "proportion": 0.08515283749926016,
-            "frameUrls": [
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/0/0.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/0/19.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/0/39.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/0/58.jpg"
-            ]
-          },
-          "1": {
-            "startTime": 2.635966,
-            "endTime": 4.6046,
-            "proportion": 0.06441050145912491,
-            "frameUrls": [
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/1/108.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/1/123.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/1/79.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/1/93.jpg"
-            ]
-          },
-          "2": {
-            "startTime": 4.637966,
-            "endTime": 12.345666,
-            "proportion": 0.25218340336319356,
-            "frameUrls": [
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/2/139.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/2/167.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/2/196.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/2/225.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/2/254.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/2/283.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/2/312.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/2/341.jpg"
-            ]
-          },
-          "3": {
-            "startTime": 12.379033,
-            "endTime": 17.083733,
-            "proportion": 0.15393012932558564,
-            "frameUrls": [
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/3/371.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/3/399.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/3/427.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/3/455.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/3/483.jpg"
-            ]
-          },
-          "4": {
-            "startTime": 17.1171,
-            "endTime": 25.7257,
-            "proportion": 0.2816593855744759,
-            "frameUrls": [
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/4/513.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/4/545.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/4/577.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/4/609.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/4/642.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/4/674.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/4/706.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/4/738.jpg"
-            ]
-          },
-          "5": {
-            "startTime": 25.759066,
-            "endTime": 30.5305,
-            "proportion": 0.15611355722755893,
-            "frameUrls": [
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/5/772.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/5/800.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/5/829.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/5/857.jpg",
-              "lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/d6970ee5-5fed-43eb-a32d-8a94df654ed3/5/886.jpg"
-            ]
-          }
-        }
-      }
-    }
+    const payload = yield call(
+      getDataFromApi,
+      {},
+      `/brand/${brand.uuid}/video/${videoId.payload}/shots`,
+      'GET'
+    )
     yield put(actions.getShotByShotSuccess(payload))
   } catch (error) {
     yield put(actions.getShotByShotFailure({ error }))
