@@ -184,11 +184,19 @@ class LineChart extends React.Component {
         },
       }
     }
-
+    let maximumDatainDatasets
+    if (props.dynamicPercentage) {
+      const v = props.dataSet.datasets.map((dataset) => {
+        return dataset.data
+      })
+      maximumDatainDatasets = Math.max(...[...v[0], ...v[1]])
+    }
     if (props.yAxesPercentage) {
       props.options.scales.yAxes[0].ticks = {
         ...props.options.scales.yAxes[0].ticks,
-        max: 100,
+        max: maximumDatainDatasets
+          ? maximumDatainDatasets + maximumDatainDatasets * 0.3
+          : 100,
         callback: (value, index, values) => {
           return addPercentage(value)
         },
@@ -284,7 +292,7 @@ class LineChart extends React.Component {
         fontWeight: 'bold',
       }
     }
-
+    console.log(props)
     return (
       <React.Fragment>
         <Line

@@ -67,6 +67,29 @@ const ContentVitalityScoreModule = ({
     }
   )
 
+  const roundRect = (ctx, x, y, width, height) => {
+    const radius = 5
+    ctx.beginPath()
+    ctx.shadowColor = 'rgba(0, 0, 0, 0.15)'
+    ctx.shadowBlur = 3
+    ctx.shadowOffsetX = 1
+    ctx.shadowOffsetY = 2
+    ctx.moveTo(x + radius, y)
+    ctx.lineTo(x + width - radius, y)
+    ctx.quadraticCurveTo(x + width, y, x + width, y + radius)
+    ctx.lineTo(x + width, y + height - radius)
+    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height)
+    ctx.lineTo(x + radius, y + height)
+    ctx.quadraticCurveTo(x, y + height, x, y + height - radius)
+    ctx.lineTo(x, y + radius)
+    ctx.quadraticCurveTo(x, y, x + radius, y)
+    ctx.closePath()
+    ctx.fill()
+    ctx.shadowBlur = 0
+    ctx.shadowOffsetX = 0
+    ctx.shadowOffsetY = 0
+  }
+
   // const newDatasets = {
   //   labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
   //   datasets: [
@@ -99,13 +122,13 @@ const ContentVitalityScoreModule = ({
             style={{ colors: colors.textColor }}
           >
             <div
-              data-vertical-title="% with CV Score"
+              data-vertical-title="Number Of Videos"
               className={style.vitalityContainer}
             >
               <LineChart
                 chartType="lineStackedArea"
-                width={1140}
-                height={291}
+                width={1120}
+                height={295}
                 tickUnvisible
                 backgroundColor={colors.chartBackground}
                 dataSet={
@@ -115,48 +138,27 @@ const ContentVitalityScoreModule = ({
                         labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
                         datasets: [
                           {
-                            data: [
-                              30,
-                              60,
-
-                              120,
-                              250,
-                              120,
-                              60,
-                              50,
-                              40,
-                              30,
-                              20,
-                              10,
-                            ],
+                            data: [10, 25, 40, 55, 40, 25, 10, 9, 5, 4, 1],
                           },
                           {
-                            data: [
-                              10,
-                              20,
-                              30,
-                              40,
-                              50,
-                              60,
-                              120,
-                              180,
-                              120,
-                              60,
-                              50,
-                            ],
+                            data: [5, 6, 7, 8, 10, 15, 25, 45, 25, 15, 10],
                           },
                         ],
                       }
                 }
                 removeTooltip={removeTooltip}
-                removePointRadius={removePointRadius}
-                xAxesFlatten={xAxesFlatten}
-                flattenFirstSpace={flattenFirstSpace}
-                flattenLastSpace={flattenLastSpace}
+                // removePointRadius={removePointRadius}
+                // xAxesFlatten={xAxesFlatten}
+                // flattenFirstSpace={flattenFirstSpace}
+                // flattenLastSpace={flattenLastSpace}
+                yAxesStepSize={500}
+                yAxesMax={0}
+                yAxesPercentage
+                dynamicPercentage
                 customLine
                 options={{
                   ...options,
-                  average: 50,
+                  average: 10,
                   hover: {
                     mode: 'dataset',
                     intersect: false,
@@ -169,6 +171,7 @@ const ContentVitalityScoreModule = ({
                       )
 
                       const maxObject = c.find((o) => o._model.y === max)
+
                       const chart = maxObject && maxObject._chart
                       if (!maxObject) return null
                       const averagePoint =
@@ -206,6 +209,33 @@ const ContentVitalityScoreModule = ({
                       chart.ctx.strokeStyle = '#505050'
                       chart.ctx.lineWidth = 2
                       chart.ctx.stroke()
+
+                      chart.ctx.lineWidth = 4
+                      chart.ctx.fillStyle = '#505050'
+                      var rectWidth = 210
+                      const rectX =
+                        averagePoint < maxObject._model.x
+                          ? maxObject._model.x + 20
+                          : maxObject._model.x - rectWidth - 20
+                      const rectY =
+                        (maxObject._model.y - dashMarginTop) / 2 - 10
+                      roundRect(chart.ctx, rectX, rectY, 210, 90, 10, true)
+                      chart.ctx.font = '12px ClanOT'
+                      chart.ctx.textAlign = 'center'
+                      chart.ctx.textBaseline = 'middle'
+                      chart.ctx.fillStyle = '#fff'
+
+                      const text = `The average ${
+                        maxObject._datasetIndex ? 'female' : 'male'
+                      } scores 10\n points above your library\n average on facebook!`
+                      const lines = text.split('\n')
+
+                      for (let i = 0; i < lines.length; i++)
+                        chart.ctx.fillText(
+                          lines[i],
+                          rectX + rectWidth / 2,
+                          rectY + i * 20 + 25
+                        )
                     },
                   },
                 }}
