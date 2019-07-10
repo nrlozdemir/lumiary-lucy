@@ -357,17 +357,21 @@
 .tabList {
   // background: $color-dusk;
   margin: 0;
-  padding: 27px 23px;
+  padding: 27px 40px;
   color: $color-cool-grey;
   font-family: $font-family-ClanOTNews;
   // box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   font-size: 14px;
+
+  li {
+    padding: 6px 48px 6px 0;
+  }
 }
 
 .selectedTab {
-  background: transparent;
+  color: $light_textColor;
+  font-family: $font-family-ClanOT;
   font-weight: bold;
-  // color: $color-white;
 }
 .radarChartContainer {
   margin: 10px auto 0px;

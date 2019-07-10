@@ -9,6 +9,7 @@ import {
   convertDataIntoDatasets,
   radarChartCalculate,
   compareSharesData,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { getDataFromApi } from 'Utils/api'
@@ -238,9 +239,12 @@ function* getContentVitalityScoreData({ payload = {} }) {
       'GET'
     )
 
-    yield put(actions.getContentVitalityScoreDataSuccess(payload))
+    yield put(
+      actions.getContentVitalityScoreDataSuccess(
+        percentageManipulation(payload)
+      )
+    )
   } catch (err) {
-    console.log(err)
     yield put(actions.getContentVitalityScoreDataError(err))
   }
 }
@@ -272,9 +276,13 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
       yield put(
         actions.getVideoComparisonDataSuccess({
           legend,
-          ...convertDataIntoDatasets(payload, parameters, {
-            compareBrands: true,
-          }),
+          ...convertDataIntoDatasets(
+            percentageManipulation(payload),
+            parameters,
+            {
+              compareBrands: true,
+            }
+          ),
         })
       )
     } else {
@@ -317,9 +325,13 @@ function* getPerformanceComparisonData({
       yield put(
         actions.getPerformanceComparisonDataSuccess({
           legend,
-          ...convertDataIntoDatasets(payload, parameters, {
-            compareBrands: true,
-          }),
+          ...convertDataIntoDatasets(
+            percentageManipulation(payload),
+            parameters,
+            {
+              compareBrands: true,
+            }
+          ),
         })
       )
     } else {
@@ -364,7 +376,9 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
 
       yield put(
         actions.getColorComparisonDataSuccess(
-          radarChartCalculate(compareSharesData(payload, parameters))
+          radarChartCalculate(
+            compareSharesData(percentageManipulation(payload), parameters)
+          )
         )
       )
     } else {

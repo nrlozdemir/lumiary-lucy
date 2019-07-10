@@ -3,6 +3,7 @@ import { Bar, Chart } from 'react-chartjs-2'
 import { barDataOptions } from './options'
 import { withTheme } from 'ThemeContext/withTheme'
 import { metricSuffix } from 'Utils'
+import { percentageManipulation } from 'Utils/datasets'
 
 const emptyData = {
   datasets: [],
@@ -133,7 +134,7 @@ const StackedBarChart = (props) => {
                     (accumulator, currentValue) => accumulator + currentValue
                   )
 
-                  return parseFloat((value / (totalValue / 100)).toFixed(2))
+                  return percentageManipulation(value / (totalValue / 100))
                 }),
               }
             })) ||

@@ -75,6 +75,10 @@ export class LibraryDetail extends React.Component {
     }
   }
 
+  getVideoRef = (v) => {
+    this.video = v.current
+  }
+
   render() {
     const {
       libraryDetail: {
@@ -95,8 +99,12 @@ export class LibraryDetail extends React.Component {
           title={selectedVideo && selectedVideo.title}
           socialIcon={selectedVideo && selectedVideo.socialIcon}
           cvScore={selectedVideo && selectedVideo['cvScores.value']}
+          getVideoRef={this.getVideoRef}
         />
-        <LibraryDetailDoughnutChart videoId={videoId} />
+        <LibraryDetailDoughnutChart
+          videoId={videoId}
+          videoDuration={this.video && this.video.duration}
+        />
         <LibraryDetailShotByShot
           shots={
             (!!shotByShotData &&
