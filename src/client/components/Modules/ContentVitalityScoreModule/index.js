@@ -106,6 +106,7 @@ const ContentVitalityScoreModule = ({
                 chartType="lineStackedArea"
                 width={1140}
                 height={291}
+                tickUnvisible
                 backgroundColor={colors.chartBackground}
                 dataSet={
                   loading
@@ -119,7 +120,7 @@ const ContentVitalityScoreModule = ({
                               60,
 
                               120,
-                              180,
+                              250,
                               120,
                               60,
                               50,
@@ -176,26 +177,33 @@ const ContentVitalityScoreModule = ({
                         48
                       chart.ctx.beginPath()
                       chart.ctx.setLineDash([8, 5])
+                      const dashMarginTop = (30 * maxObject._model.y) / 285
 
                       if (averagePoint < maxObject._model.x) {
-                        chart.ctx.moveTo(averagePoint, maxObject._model.y - 30)
+                        chart.ctx.moveTo(
+                          averagePoint,
+                          maxObject._model.y - dashMarginTop
+                        )
                         chart.ctx.lineTo(
                           maxObject._model.x,
-                          maxObject._model.y - 30
+                          maxObject._model.y - dashMarginTop
                         )
                       } else {
                         chart.ctx.moveTo(
                           maxObject._model.x,
-                          maxObject._model.y - 30
+                          maxObject._model.y - dashMarginTop
                         )
-                        chart.ctx.lineTo(averagePoint, maxObject._model.y - 30)
+                        chart.ctx.lineTo(
+                          averagePoint,
+                          maxObject._model.y - dashMarginTop
+                        )
                       }
                       chart.ctx.moveTo(
                         maxObject._model.x,
-                        maxObject._model.y - 30
+                        maxObject._model.y - dashMarginTop
                       )
                       chart.ctx.lineTo(maxObject._model.x, maxObject._model.y)
-                      chart.ctx.strokeStyle = '#000'
+                      chart.ctx.strokeStyle = '#505050'
                       chart.ctx.lineWidth = 2
                       chart.ctx.stroke()
                     },

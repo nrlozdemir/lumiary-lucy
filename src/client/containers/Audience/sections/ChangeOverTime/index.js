@@ -6,20 +6,7 @@ import { actions, makeSelectAudienceChangeOverTime } from 'Reducers/audience'
 import Module from 'Components/Module'
 import LineChart from 'Components/Charts/LineChart'
 import style from 'Containers/Audience/style.scss'
-
-const plugins = [
-  {
-    beforeDatasetDraw: function({ ctx }, { meta }) {
-      ctx.shadowBlur = 10
-      ctx.shadowColor = meta.$filler.el._model.borderColor
-    },
-  },
-  {
-    afterDatasetDraw: function(chart) {
-      chart.ctx.shadowBlur = 0
-    },
-  },
-]
+import { ThemeContext } from 'ThemeContext/themeContext'
 
 class ChangeOverTime extends React.Component {
   callBack = (data, moduleKey) => {
@@ -32,60 +19,64 @@ class ChangeOverTime extends React.Component {
       audienceChangeOverTimeData: { data, loading, error },
       infoText,
     } = this.props
-
     return (
-      <Module
-        moduleKey={'Audience/ChangeOverTime'}
-        title="Change Over Time By Property"
-        action={this.callBack}
-        infoText={infoText}
-        filters={[
-          {
-            type: 'platformEngagement',
-            selectKey: 'ACOT-plateng',
-            placeHolder: 'Engagement by Platform',
-          },
-          {
-            type: 'dateRange',
-            selectKey: 'ACOT-wds',
-            placeHolder: 'Date',
-            defaultValue: 'month',
-          },
-        ]}
-        legend={
-          <div
-            className={
-              'd-flex align-items-center justify-content-center ' +
-              style.headerLabel
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <Module
+            moduleKey={'Audience/ChangeOverTime'}
+            title="Change Over Time By Property"
+            action={this.callBack}
+            infoText={infoText}
+            filters={[
+              {
+                type: 'platformEngagement',
+                selectKey: 'ACOT-plateng',
+                placeHolder: 'Engagement by Platform',
+              },
+              {
+                type: 'dateRange',
+                selectKey: 'ACOT-wds',
+                placeHolder: 'Date',
+                defaultValue: 'month',
+              },
+            ]}
+            legend={
+              <div
+                className={
+                  'd-flex align-items-center justify-content-center ' +
+                  style.headerLabel
+                }
+              >
+                <div className="d-flex align-items-center mr-32">
+                  <span className={style.redRound} />
+                  <p>Male</p>
+                </div>
+                <div className="d-flex align-items-center mr-32">
+                  <span className={style.duskRound} />
+                  <p>Female</p>
+                </div>
+              </div>
             }
           >
-            <div className="d-flex align-items-center mr-32">
-              <span className={style.redRound} />
-              <p>Male</p>
-            </div>
-            <div className="d-flex align-items-center mr-32">
-              <span className={style.duskRound} />
-              <p>Female</p>
-            </div>
-          </div>
-        }
-      >
-        {data && data.datasets && (
-          <div className={style.audienceContainer}>
-            <LineChart
-              width={1162}
-              height={292}
-              dataSet={data}
-              xAxesFlatten
-              yAxesAbbreviate
-              customTooltipText="Likes"
-              yAxesStepSize={250000}
-              yAxesMax={1000000}
-              plugins={plugins}
-            />
-          </div>
+            {data && data.datasets && (
+              <div className={style.audienceContainer}>
+                <LineChart
+                  width={1162}
+                  height={292}
+                  dataSet={data}
+                  xAxesFlatten
+                  yAxesAbbreviate
+                  shadow
+                  customTooltipText="Likes"
+                  backgroundColor={colors.chartBackground}
+                  yAxesStepSize={250000}
+                  yAxesMax={1000000}
+                />
+              </div>
+            )}
+          </Module>
         )}
-      </Module>
+      </ThemeContext.Consumer>
     )
   }
 }

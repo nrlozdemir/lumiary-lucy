@@ -69,7 +69,7 @@ class LineChart extends React.Component {
                 drawTicks: false,
               },
               ticks: {
-                display: false,
+                display: this.props.tickUnvisible ? false : true,
                 fontColor: themes.textColor,
                 fontSize: 12,
                 fontFamily: 'ClanOTNews',
@@ -109,15 +109,13 @@ class LineChart extends React.Component {
     let props = fromJS(defaultProps)
       .mergeDeep(this.props)
       .toJS()
-    let plugins = props.plugins ? [...props.plugins] : []
+    let plugins = []
 
-    // console.log()
     if (props.backgroundColor || themes.chartBackground) {
       plugins.push({
         beforeDraw: (chart, easing) => {
           let ctx = chart.chart.ctx
           let chartArea = chart.chartArea
-          console.log('asdas')
           ctx.save()
           ctx.fillStyle = props.backgroundColor || themes.chartBackground
           ctx.fillRect(
@@ -128,11 +126,15 @@ class LineChart extends React.Component {
           )
           ctx.restore()
         },
+      })
+    }
+    if (props.customLine) {
+      plugins.push({
         afterDraw: (chart, easing) => {
           let ctx = chart.chart.ctx
           let chartArea = chart.chartArea
           if (chart.options.average) {
-            ctx.fillStyle = '#000'
+            ctx.fillStyle = '#505050'
             ctx.fillRect(
               ((chartArea.right - chartArea.left) / 100) *
                 chart.options.average +
@@ -145,25 +147,20 @@ class LineChart extends React.Component {
         },
       })
     }
-    if (props.customLine) {
-      plugins.push({
-        afterDraw: (chart, easing) => {
-          let ctx = chart.chart.ctx
-          let chartArea = chart.chartArea
-          console.log(chart)
-          if (chart.options.average) {
-            ctx.fillStyle = '#000'
-            ctx.fillRect(
-              ((chartArea.right - chartArea.left) / 100) *
-                chart.options.average +
-                48,
-              5,
-              4,
-              chartArea.bottom - chartArea.top
-            )
-          }
+    if (props.shadow) {
+      plugins.push(
+        {
+          beforeDatasetDraw: function({ ctx }, { meta }) {
+            ctx.shadowBlur = 10
+            ctx.shadowColor = meta.$filler.el._model.borderColor
+          },
         },
-      })
+        {
+          afterDatasetDraw: function(chart) {
+            chart.ctx.shadowBlur = 0
+          },
+        }
+      )
     }
 
     if (props.xAxesFlatten) {
@@ -287,6 +284,7 @@ class LineChart extends React.Component {
         fontWeight: 'bold',
       }
     }
+
     return (
       <React.Fragment>
         <Line
