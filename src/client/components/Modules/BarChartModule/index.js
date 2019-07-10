@@ -23,12 +23,16 @@ const BarChartModule = ({
 }) => {
   const chartTickOptions = {
     callback(value) {
-      if (value < 1000) {
-        return value
-      } else if (value < 1000000) {
-        return `${Math.round(value / 1000)}k`
+      if (value >= 1e9) {
+        return (value / 1e9).toFixed(0).replace(/\.0$/, '') + 'g';
       }
-      return `${Math.round((value * 100) / 1000000) / 100}m`
+      if (value >= 1e6) {
+          return (value / 1e6).toFixed(0).replace(/\.0$/, '') + 'm';
+      }
+      if (value >= 1e3) {
+          return (value / 1e3).toFixed(0).replace(/\.0$/, '') + 'k';
+      }
+     return value;
     },
     ...tickOptions,
   }
