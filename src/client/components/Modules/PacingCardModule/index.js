@@ -20,6 +20,14 @@ const PacingCardModule = ({
 }) => {
   const { horizontalStackedBarData = {}, stadiumData } = data
 
+  for (const _data of (horizontalStackedBarData &&
+    horizontalStackedBarData.datasets) ||
+    []) {
+    if (!_data.hoverBackgroundColor) {
+			delete _data.hoverBackgroundColor
+    }
+  }
+
   const stadiumValues =
     stadiumData &&
     stadiumData.datasets.map((item, idx) => ({

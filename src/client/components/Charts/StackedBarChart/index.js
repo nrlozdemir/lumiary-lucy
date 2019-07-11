@@ -9,8 +9,14 @@ const emptyData = {
   datasets: [],
 }
 
+const rectProto = Chart.elements.Rectangle.prototype.draw
+
 Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
   draw() {
+    if (this._chart.config.type !== 'bar') {
+      return rectProto.apply(this, arguments)
+    }
+
     const { ctx } = this._chart
     const vm = this._view
     const strokeColor =
