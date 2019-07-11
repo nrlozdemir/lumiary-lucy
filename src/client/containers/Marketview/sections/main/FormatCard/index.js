@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
+import classnames from 'classnames'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
@@ -10,7 +10,6 @@ import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import SingleVideoCard from 'Components/SingleVideoCard'
 import style from 'Containers/Marketview/style.scss'
 import formatStyles from './style.scss'
-import { isDataSetEmpty } from 'Utils/datasets'
 import RouterLoading from 'Components/RouterLoading'
 import { isEmpty } from 'lodash'
 
@@ -91,7 +90,11 @@ class FormatCard extends Component {
                 </span>
               </div>
             )}
-            <div className={style.videoContainer}>
+            <div
+              className={classnames(style.videoContainer, {
+                [colors.themeType === 'dark' ? style.dark : style.light]: true,
+              })}
+            >
               {video && (
                 <SingleVideoCard
                   video={video}
