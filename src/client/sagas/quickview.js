@@ -210,10 +210,6 @@ function* getQuickviewItemsSaga({ payload }) {
         brandUuid: uuid,
         competitors,
       })
-
-      console.log("success response")
-      console.log(platform, metric, dateRange, uuid, competitors)
-      console.log(response)
   
       yield put({
         type: types.GET_QUICKVIEW_ITEMS_SUCCESS,
@@ -229,24 +225,22 @@ function* getQuickviewItemsSaga({ payload }) {
       const response = {
         "differences": {
           "facebook": {
-            "duration": "0",
-            "pacing": "0"
+            "duration": "0"
           }
         },
         "facebook": [
           {
             "video": {
               "title": "",
-              "videoUrl": "",
               "socialIcon": "",
-              "cvScore": "0"
+              "cvScore": ""
             },
             "infos": [
               {
                 "slug": "duration",
                 "title": "Duration",
-                "value": "0",
-                "percentage": "0",
+                "value": "",
+                "percentage": "",
                 "text": ""
               }
             ]
@@ -254,16 +248,15 @@ function* getQuickviewItemsSaga({ payload }) {
           {
             "video": {
               "title": "",
-              "videoUrl": "",
               "socialIcon": "",
-              "cvScore": "0"
+              "cvScore": ""
             },
             "infos": [
               {
                 "slug": "duration",
                 "title": "Duration",
-                "value": "0",
-                "percentage": "0",
+                "value": "",
+                "percentage": "",
                 "text": ""
               }
             ]
@@ -277,7 +270,7 @@ function* getQuickviewItemsSaga({ payload }) {
           platformsValues: percentageManipulation(response['facebook']),
           differencesValues: percentageManipulation(
             response.differences['facebook']
-          ),
+          )
         },
       })
       
