@@ -37,8 +37,6 @@ function* getAudienceContentVitalityScoreData({ payload = {} }) {
       'GET'
     )
 
-    console.log(response)
-
     if (!!response && !!Object.keys(response).length) {
       yield put(
         actions.getAudienceContentVitalityScoreDataSuccess(
