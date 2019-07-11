@@ -118,6 +118,8 @@ function* getQuickviewItemsApi({
           title: 'Resolution',
           value: resolutionsBucketName,
           percentage: resolutionsIndustryPercent,
+          text:
+            `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
           text: `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
         },
         {
@@ -126,6 +128,8 @@ function* getQuickviewItemsApi({
           value:
             frameRatesBucketName === '' ? '' : `${frameRatesBucketName}fps`,
           percentage: frameRatesIndustryPercent,
+          text:
+            `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
           text: `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
         },
       ],
