@@ -17,6 +17,7 @@ import {
   convertMultiRequestDataIntoDatasets,
   convertVideoEngagementData,
   convertColorTempToDatasets,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
@@ -115,7 +116,11 @@ function* getTopPerformingVideos({ data: { report = {} } }) {
       )
 
       if (!!response && !!response.length) {
-        yield put(actions.getTopPerformingVideosSuccess(response))
+        yield put(
+          actions.getTopPerformingVideosSuccess(
+            percentageManipulation(response)
+          )
+        )
       } else {
         yield put(actions.getTopPerformingVideosSuccess([]))
       }
@@ -151,7 +156,7 @@ function* getVideoReleasesBarChart({ data: { report } }) {
     if (!!response) {
       yield put(
         actions.getVideoReleasesBarChartSuccess(
-          convertVideoEngagementData(response, metric)
+          percentageManipulation(convertVideoEngagementData(response, metric))
         )
       )
     } else {
@@ -186,14 +191,15 @@ function* getColorTempData({
     } = convertColorTempToDatasets(response, colorTemperature)
 
     yield put(
-      actions.getColorTempDataSuccess({
-        labels,
-        platforms,
-        data: colorTempData,
-      })
+      percentageManipulation(
+        actions.getColorTempDataSuccess({
+          labels,
+          platforms,
+          data: colorTempData,
+        })
+      )
     )
   } catch (err) {
-    console.log(err)
     yield put(actions.getColorTempDataFailure(err))
   }
 }
@@ -226,17 +232,22 @@ function* getFilteringSectionData({ data: { property, report } }) {
             dateBucket,
           })
         : { data: {} }
+
     yield put(
       actions.getFilteringSectionDataSuccess({
-        doughnutData: convertDataIntoDatasets(doughnutData, options, {
-          singleDataset: true,
-        }),
+        doughnutData: percentageManipulation(
+          convertDataIntoDatasets(doughnutData, options, {
+            singleDataset: true,
+          })
+        ),
         stackedChartData:
           (!_.isEmpty(stackedChartData.data) &&
-            convertDataIntoDatasets(
-              stackedChartData,
-              { ...options, dateBucket },
-              { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+            percentageManipulation(
+              convertDataIntoDatasets(
+                stackedChartData,
+                { ...options, dateBucket },
+                { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+              )
             )) ||
           {},
         property: 'duration',
@@ -285,18 +296,18 @@ function* getPacingCardData({ data: { report } }) {
 
     yield put(
       actions.getPacingCardDataSuccess({
-        stadiumData: convertDataIntoDatasets(stadiumData, options),
-        horizontalStackedBarData: convertDataIntoDatasets(
-          horizontalStackedBarData,
-          {
+        stadiumData: percentageManipulation(
+          convertDataIntoDatasets(stadiumData, options)
+        ),
+        horizontalStackedBarData: percentageManipulation(
+          convertDataIntoDatasets(horizontalStackedBarData, {
             ...options,
             proportionOf: 'format',
-          }
+          })
         ),
       })
     )
   } catch (err) {
-    console.log(err)
     yield put(actions.getPacingCardDataFailure(err))
   }
 }
@@ -332,14 +343,16 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
 
     yield put(
       actions.getCompetitorTopVideosSuccess(
-        convertMultiRequestDataIntoDatasets(
-          {
-            facebook,
-            instagram,
-            twitter,
-            youtube,
-          },
-          options
+        percentageManipulation(
+          convertMultiRequestDataIntoDatasets(
+            {
+              facebook,
+              instagram,
+              twitter,
+              youtube,
+            },
+            options
+          )
         )
       )
     )

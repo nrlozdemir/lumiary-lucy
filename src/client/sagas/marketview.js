@@ -17,6 +17,7 @@ import {
 import {
   convertDataIntoDatasets,
   convertMultiRequestDataIntoDatasets,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { dayOfWeek, chartColors } from 'Utils/globals'
@@ -52,7 +53,9 @@ function getMarketviewDaysApi() {
 function* getCompetitorVideosMarketview(params) {
   try {
     const payload = yield call(getCompetitorVideosApi, params)
-    yield put(actions.getCompetitorVideosSuccess(payload))
+    yield put(
+      actions.getCompetitorVideosSuccess(percentageManipulation(payload))
+    )
   } catch (error) {
     yield put(actions.getCompetitorVideosFailure({ error }))
   }
@@ -96,16 +99,17 @@ function* getCompetitorTopVideosMarketview(payload) {
 
     yield put(
       actions.getCompetitorTopVideosSuccess(
-        convertMultiRequestDataIntoDatasets(
-          {
-            ...response,
-          },
-          options
+        percentageManipulation(
+          convertMultiRequestDataIntoDatasets(
+            {
+              ...response,
+            },
+            options
+          )
         )
       )
     )
   } catch (error) {
-    console.log('saga getCompetitorTopVideosFailure error', error)
     yield put(actions.getCompetitorTopVideosFailure(error))
   }
 }
@@ -146,19 +150,20 @@ function* getPlatformTopVideosMarketview({
 
     yield put(
       actions.getPlatformTopVideosSuccess(
-        convertMultiRequestDataIntoDatasets(
-          {
-            ...response,
-          },
-          {
-            ...options,
-            property: [property],
-          }
+        percentageManipulation(
+          convertMultiRequestDataIntoDatasets(
+            {
+              ...response,
+            },
+            {
+              ...options,
+              property: [property],
+            }
+          )
         )
       )
     )
   } catch (error) {
-    console.log('saga getPlatformTopVideosFailure error', error)
     yield put(actions.getPlatformTopVideosFailure(error))
   }
 }
@@ -214,7 +219,7 @@ function* getSimilarProperties({ data: { dateRange, container } }) {
 
     const val = highestBuckets.map((value, idx) => ({
       doughnutChartValues: convertDataIntoDatasets(
-        payload,
+        percentageManipulation(payload),
         { property: [value.highestProperty] },
         {
           singleDataset: true,
@@ -227,7 +232,6 @@ function* getSimilarProperties({ data: { dateRange, container } }) {
     yield delay(2000)
     yield put(actions.getSimilarPropertiesSuccess(val))
   } catch (error) {
-    console.log('error == ', error)
     yield put(actions.getSimilarPropertiesFailure(error))
   }
 }
@@ -335,14 +339,16 @@ function* getPacingChartData() {
       payload,
       { property: ['pacing'] },
       {
-        customBorderColor: '#373F5B',
+        customBorderColor: '#fff',
         singleDataset: true,
         noBrandKeys: true,
         customValueKey: 'proportionOfLibrary',
       }
     )
 
-    yield put(actions.getPacingChartSuccess(pacingChartData))
+    yield put(
+      actions.getPacingChartSuccess(percentageManipulation(pacingChartData))
+    )
   } catch (error) {
     console.log(error)
     yield put(actions.getPacingChartFailure(error))
@@ -417,7 +423,7 @@ function* getFormatChartData() {
       yield put(
         actions.getFormatChartSuccess({
           currentDay,
-          data: formatCountsArr,
+          data: percentageManipulation(formatCountsArr),
           video,
         })
       )
@@ -483,12 +489,11 @@ function* getTotalViewsData({ data }) {
 
     yield put(
       actions.getTotalViewsSuccess({
-        barData: convertedBarData,
-        doughnutData: convertedDoughnutData,
+        barData: percentageManipulation(convertedBarData),
+        doughnutData: percentageManipulation(convertedDoughnutData),
       })
     )
   } catch (error) {
-    console.log(error)
     yield put(actions.getTotalViewsFailure(error))
   }
 }
@@ -510,9 +515,11 @@ function* getTotalCompetitorViewsData() {
     if (!!payload) {
       yield put(
         actions.getTotalCompetitorViewsSuccess(
-          convertDataIntoDatasets(payload, options, {
-            customKeys: Object.keys(payload.data),
-          })
+          percentageManipulation(
+            convertDataIntoDatasets(payload, options, {
+              customKeys: Object.keys(payload.data),
+            })
+          )
         )
       )
     }
@@ -549,6 +556,8 @@ function* getTopPerformingPropertiesData({
       }
       return acc
     }, {})
+
+    response = percentageManipulation(response)
 
     yield put(
       actions.getTopPerformingPropertiesSuccess(
@@ -613,7 +622,7 @@ function* getTopPerformingPropertiesByCompetitorsData({
 
         yield put(
           actions.getTopPerformingPropertiesByCompetitorsSuccess({
-            datasets: convertedDatasets,
+            datasets: percentageManipulation(convertedDatasets),
             labels: brandLabels,
           })
         )
@@ -622,7 +631,6 @@ function* getTopPerformingPropertiesByCompetitorsData({
       throw new Error('Get Top Performing Property Error')
     }
   } catch (error) {
-    console.log('error', error)
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))
   }
 }
@@ -652,7 +660,7 @@ function* getTopPerformingPropertiesByTimeData({
 
     yield put(
       actions.getTopPerformingTimeSuccess(
-        convertDataIntoDatasets(data, options, {
+        convertDataIntoDatasets(percentageManipulation(data), options, {
           singleDataset: false,
         })
       )

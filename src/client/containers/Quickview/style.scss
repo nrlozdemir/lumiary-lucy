@@ -1,26 +1,26 @@
-.navigation{
-  *{
+.navigation {
+  * {
     transition: all 0.1s ease;
   }
-  .navItem{
+  .navItem {
     display: flex;
     justify-content: space-between;
-    
+
     [class*='__placeholder'] {
       opacity: 0;
     }
 
-    .navItem_btn{
+    .navItem_btn {
       position: relative;
       height: 56px;
       width: 20%;
       max-width: 200px;
       min-width: 150px;
-      &:hover{
+      &:hover {
         cursor: pointer;
       }
 
-      input{
+      input {
         color: transparent !important;
       }
 
@@ -30,13 +30,13 @@
         align-items: center;
         justify-content: center;
         height: 100%;
-        &:before{
+        &:before {
           font-size: 24px;
         }
       }
 
       [class*='react-select__control'] {
-        &:hover{
+        &:hover {
           cursor: pointer;
         }
       }
@@ -59,10 +59,9 @@
           background-color: transparent;
         }
       }
-  
     }
 
-    .navItem_btn:not(.selected){
+    .navItem_btn:not(.selected) {
       [class*='-Bubble'] {
         width: 100%;
       }
@@ -73,17 +72,16 @@
         }
       }
 
-      &:hover{
+      &:hover {
         [class*='react-select__control'] {
           [class*='react-select__indicators'] {
             opacity: 1;
           }
         }
       }
-
     }
 
-    .navItem_btn.selected{
+    .navItem_btn.selected {
       [class*='-Bubble'] {
         width: 72px;
         z-index: 1;
@@ -93,7 +91,7 @@
       }
     }
 
-    .navItem_btn.light{
+    .navItem_btn.light {
       [class*='-Bubble'] {
         color: $light_iconColor;
       }
@@ -118,13 +116,13 @@
       }
     }
 
-    .navItem_btn.light.selected{
+    .navItem_btn.light.selected {
       [class*='react-select__control'] {
         background-color: $light_inputOptionBackground;
       }
     }
 
-    .navItem_btn.dark{
+    .navItem_btn.dark {
       [class*='-Bubble'] {
         color: $dark_iconColor;
       }
@@ -149,30 +147,29 @@
       }
     }
 
-    .navItem_btn.dark.selected{
+    .navItem_btn.dark.selected {
       [class*='react-select__control'] {
         background-color: $dark_inputOptionBackground;
       }
     }
-
   }
 }
 
 .cardWrapper.light {
-  .content{
-    .cardBlock{
-      &:first-child{
+  .content {
+    .cardBlock {
+      &:first-child {
         background-color: rgba(255, 255, 255, 0.6);
       }
-      &:last-child{
+      &:last-child {
         background-color: $light_videoCardBackground;
         box-shadow: 0 0 10px 0 $light_chartShadow;
       }
       .card {
         .items {
           .itemWrapper {
-            &:after{
-              background-color: $light_barChartShadow;
+            &:after {
+              background-color: #c6c9d7;
             }
           }
           .infoItem {
@@ -189,16 +186,16 @@
 }
 
 .cardWrapper.dark {
-  .content{
-    h1{
+  .content {
+    h1 {
       color: $color-white;
     }
-    .cardBlock{
-      &:first-child{
+    .cardBlock {
+      &:first-child {
         background-color: rgba(84, 91, 121, 0.4);
-        color: #acb0be;
+        color: #fff;
       }
-      &:last-child{
+      &:last-child {
         background-color: $dark_videoCardBackground;
         box-shadow: 0 0 10px 0 $dark_chartShadow;
         color: $dark_iconColor;
@@ -206,8 +203,8 @@
       .card {
         .items {
           .itemWrapper {
-            &:after{
-              background-color: $dark_barChartShadow;
+            &:after {
+              background-color: #acb0be;
             }
           }
           .infoItem {
@@ -226,16 +223,16 @@
 .cardWrapper {
   padding-top: 48px;
   padding-bottom: 72px;
-  .content{
+  .content {
     display: flex;
-    .cardBlock{
+    .cardBlock {
       width: 50%;
       padding: 48px 42px;
-      &:first-child{
+      &:first-child {
         margin-right: 6px;
         // background-color: rgba(255, 255, 255, 0.6);
       }
-      &:last-child{
+      &:last-child {
         margin-left: 6px;
         // background-color: $light_videoCardBackground;
         // box-shadow: 0 0 10px 0 #bebebe;
@@ -260,12 +257,12 @@
           }
         }
 
-        svg{
+        svg {
           display: block;
           margin: 0px auto 24px;
         }
 
-        .assetContainer{
+        .assetContainer {
           [class*='AssetLayer-style__container'] {
             height: 0;
           }
@@ -279,9 +276,13 @@
               top: 0;
               left: 0;
               width: 100%;
-              height: 100%;  
+              height: 100%;
             }
           }
+        }
+
+        .itemsHasOpacity {
+          opacity: 0.4;
         }
 
         .items {
@@ -290,7 +291,7 @@
           .itemWrapper {
             // padding: 72px 0px;
             width: 100%;
-            &:after{
+            &:after {
               content: '';
               width: 365px;
               height: 1px;
@@ -302,7 +303,7 @@
 
             &:last-child {
               border-bottom: none;
-              &:after{
+              &:after {
                 display: none;
               }
             }
@@ -323,7 +324,7 @@
               display: flex;
               align-items: center;
               justify-content: center;
-            
+
               span {
                 background-color: $light_bodyBackground;
                 font-weight: bold;
@@ -333,7 +334,7 @@
                 padding: 10px 24px;
                 line-height: 14px;
               }
-            }            
+            }
 
             &_diffBubble {
               position: absolute;
@@ -463,13 +464,12 @@
             }
           }
         }
-
       }
     }
   }
 }
 
-.noData{
+.noData {
   position: absolute;
   font-family: $font-family-ClanOTNews;
   font-size: 24px;
@@ -482,6 +482,6 @@
   z-index: 1;
 }
 
-.noDataWrapper{
+.noDataWrapper {
   opacity: 0.1;
 }

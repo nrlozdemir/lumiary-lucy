@@ -45,6 +45,7 @@ class LineChart extends React.Component {
   render() {
     const themes = this.props.themeContext.colors
 
+    const { customLineOptions } = this.props
     const defaultProps = {
       options: {
         responsive: false,
@@ -292,13 +293,20 @@ class LineChart extends React.Component {
         fontWeight: 'bold',
       }
     }
-    console.log(props)
+
+    let combinedData = combineChartData(props.dataSet, props.chartType)
+    if (customLineOptions) {
+      combinedData.datasets = combinedData.datasets.map((item, index) => {
+        return { ...item, ...customLineOptions[index] }
+      })
+    }
+
     return (
       <React.Fragment>
         <Line
           id="chartjs-customline"
           key={Math.random()}
-          data={combineChartData(props.dataSet, props.chartType)}
+          data={combinedData}
           plugins={plugins}
           datasetKeyProvider={this.datasetKeyProvider}
           height={this.state.chartHeight}
