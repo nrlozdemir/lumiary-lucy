@@ -34,6 +34,7 @@ class Sidebar extends React.Component {
     changeFilter()
   }
 
+
   formChange() {
     this.setState({
       formChange: true,
