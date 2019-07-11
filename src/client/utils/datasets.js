@@ -731,7 +731,30 @@ const percentageManipulation = (bucket) => {
   return bucket
 }
 
+/*
+ returns the chartYAxisMax, chartYAxisStepSize from the api  
+ */
+
+const getCVScoreChartAttributes = (data) => {
+  const maxVideoPercent =
+    (!!data &&
+      Object.keys(data).reduce((accumulator, key) => {
+        const maxPercentInSet = Math.max(...data[key].videoPercents)
+        return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
+      }, 0)) ||
+    0
+
+  const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
+  const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
+
+  return {
+    chartYAxisMax,
+    chartYAxisStepSize,
+  }
+}
+
 export {
+  getCVScoreChartAttributes,
   convertDataIntoDatasets,
   chartCombineDataset,
   radarChartCalculate,

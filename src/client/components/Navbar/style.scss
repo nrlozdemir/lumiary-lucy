@@ -18,7 +18,8 @@
 .backTo {
   flex: 3;
   font-size: 14px;
-  font-family: $font-family-ClanOT;
+  font-family: $font-family-ClanOTBold;
+  font-weight: 700;
 
   a {
     // color: $color-white;
@@ -62,11 +63,12 @@
     color: $color-white;
     font-size: 14px;
     font-family: $font-family-ClanOTBold;
+    font-weight: 700;
 
-    &:hover {
-      font-family: $font-family-ClanOTBold;
-      font-weight: normal;
-    }
+    // &:hover {
+    //   font-family: $font-family-ClanOTBold;
+    //   font-weight: normal;
+    // }
 
     &:before {
       content: '';
@@ -78,11 +80,11 @@
     }
   }
 
-  a:hover {
-    @extend .activeLink;
-    font-family: $font-family-ClanOTNews;
-    font-weight: normal;
-  }
+  // a:hover {
+  //   @extend .activeLink;
+  //   font-family: $font-family-ClanOTNews;
+  //   font-weight: normal;
+  // }
 }
 
 .profile {
@@ -97,6 +99,7 @@
     width: 34px;
     border: 2px solid $color-white;
     vertical-align: middle;
+    box-sizing: border-box;
   }
 
   span {

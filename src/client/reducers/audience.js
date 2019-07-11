@@ -37,8 +37,9 @@ export const types = {
 }
 
 export const actions = {
-  getAudienceContentVitalityScoreData: () => ({
+  getAudienceContentVitalityScoreData: (payload) => ({
     type: types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA,
+    payload
   }),
   getAudienceContentVitalityScoreDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS,

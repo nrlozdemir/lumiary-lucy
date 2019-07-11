@@ -227,7 +227,7 @@ const VideoReleasesBarChartModule = (props) => {
                       gridLines: {
                         ...wrapperBarOptions.scales.yAxes[0].gridLines,
                         color: colors.chartStadiumBarBorder,
-                        zeroLineColor: colors.chartStadiumBarBorder,
+                        zeroLineColor: colors.chartZeroLineColor,
                       },
                     },
                   ],
