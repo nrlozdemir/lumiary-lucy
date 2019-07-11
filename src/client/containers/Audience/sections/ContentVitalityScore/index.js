@@ -34,7 +34,7 @@ class ContentVitalityScore extends React.Component {
               {
                 type: 'platform',
                 selectKey: 'ACOT-ads',
-                placeHolder: 'Platforms',
+                defaultValue: 'facebook',
               },
               {
                 type: 'dateRange',

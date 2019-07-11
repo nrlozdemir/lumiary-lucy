@@ -51,8 +51,9 @@ function* getQuickviewItemsApi({
       'ages.industry_percent': agesIndustryPercent = '',
     } = videoInfo
 
-    const performingText = type === 'maxVideo' ? 'overperforming' : ''
- 
+    const performingText =
+      type === 'maxVideo' ? 'overperforming' : 'underperforming'
+
     const maxVideo = {
       video: {
         title: title,
@@ -66,24 +67,21 @@ function* getQuickviewItemsApi({
           title: 'Duration',
           value: durationsBucketName,
           percentage: durationsIndustryPercent,
-          text:
-            `<b>{percentage}%</b> of ${performingText} industry videos are <b>{value} sec</b> in length`,
+          text: `<b>{percentage}%</b> of ${performingText} industry videos are <b>{value} sec</b> in length`,
         },
         {
           slug: 'pacing',
           title: 'Pacing',
           value: pacingsBucketName,
           percentage: pacingsIndustryPercent,
-          text:
-            `<b>{percentage}%</b> of ${performingText} industry videos have <b>{value} {title}</b>`,
+          text: `<b>{percentage}%</b> of ${performingText} industry videos have <b>{value} {title}</b>`,
         },
         {
           slug: 'format',
           title: 'Format',
           value: formatsBucketName,
           percentage: formatsIndustryPercent,
-          text:
-            `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
+          text: `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
         },
         {
           slug: 'dominantColor',
@@ -92,32 +90,28 @@ function* getQuickviewItemsApi({
             colorsBucketName.charAt(0).toUpperCase() +
             colorsBucketName.slice(1),
           percentage: colorsIndustryPercent,
-          text:
-            `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
+          text: `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
         },
         {
           slug: 'predominantTalentAge',
           title: 'Predominant Talent Age',
           value: agesBucketName,
           percentage: agesIndustryPercent,
-          text:
-            `<b>{percentage}%</b> of ${performingText} industry videos are <b>{title}</b> of <b>{value}</b>`,
+          text: `<b>{percentage}%</b> of ${performingText} industry videos are <b>{title}</b> of <b>{value}</b>`,
         },
         {
           slug: 'predominantTalentGender',
           title: 'Predominant Talent Gender',
           value: gendersBucketName,
           percentage: gendersIndustryPercent,
-          text:
-            `<b>{percentage}%</b> of ${performingText} industry videos are <b>{title}</b> of <b>{value}</b>`,
+          text: `<b>{percentage}%</b> of ${performingText} industry videos are <b>{title}</b> of <b>{value}</b>`,
         },
         {
           slug: 'aspectRatio',
           title: 'Aspect Ratio',
           value: aspectRatiosBucketName,
           percentage: aspectRatiosIndustryPercent,
-          text:
-            `<b>{percentage}%</b> of ${performingText} industry videos have an <b>{title}</b> of <b>{value}</b>`,
+          text: `<b>{percentage}%</b> of ${performingText} industry videos have an <b>{title}</b> of <b>{value}</b>`,
         },
         {
           slug: 'resolution',
@@ -126,6 +120,7 @@ function* getQuickviewItemsApi({
           percentage: resolutionsIndustryPercent,
           text:
             `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
+          text: `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
         },
         {
           slug: 'frameRate',
@@ -135,6 +130,7 @@ function* getQuickviewItemsApi({
           percentage: frameRatesIndustryPercent,
           text:
             `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
+          text: `<b>{percentage}%</b> of ${performingText} industry videos have a <b>{title}</b> of <b>{value}</b>`,
         },
       ],
     }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
-
+import classnames from 'classnames'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
@@ -10,7 +10,6 @@ import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import SingleVideoCard from 'Components/SingleVideoCard'
 import style from 'Containers/Marketview/style.scss'
 import formatStyles from './style.scss'
-import { isDataSetEmpty } from 'Utils/datasets'
 import RouterLoading from 'Components/RouterLoading'
 import { isEmpty } from 'lodash'
 
@@ -21,21 +20,16 @@ class FormatCard extends Component {
 
   iconClass(name) {
     switch (name) {
-      case 'LA':
-      case 'Live Action':
-        return 'icon-icon_liveaction'
-
-      case 'AN':
-      case 'Animation':
-        return 'icon-icon_animation'
-
-      case 'HY':
-      case 'Hybrid':
-      case 'Stop Motion':
+      case 0:
         return 'icon-icon_stopmotion'
 
-      case 'CG':
-      case 'Cinemagraph':
+      case 1:
+        return 'icon-icon_animation'
+
+      case 2:
+        return 'icon-icon_liveaction'
+
+      case 3:
         return 'icon-icon_cinemagraph'
 
       default:
@@ -63,6 +57,7 @@ class FormatCard extends Component {
             style={{
               backgroundColor: colors.modalBackground,
               color: colors.textColor,
+              boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
             }}
           >
             {(loading || (isDataEmpty && !loading)) && (
@@ -91,7 +86,11 @@ class FormatCard extends Component {
                 </span>
               </div>
             )}
-            <div className={style.videoContainer}>
+            <div
+              className={classnames(style.videoContainer, {
+                [colors.themeType === 'dark' ? style.dark : style.light]: true,
+              })}
+            >
               {video && (
                 <SingleVideoCard
                   video={video}
@@ -108,7 +107,7 @@ class FormatCard extends Component {
                 data.map((item, i) => (
                   <div key={i} className={formatStyles.formatItem}>
                     <div className={formatStyles.formatItemIcon}>
-                      <span className={this.iconClass(item.name)} />
+                      <span className={this.iconClass(i)} />
                     </div>
                     <div className={formatStyles.formatItemText}>
                       <span>{item.count}</span>

@@ -37,6 +37,7 @@ class PacingCard extends Component {
             style={{
               backgroundColor: colors.modalBackground,
               color: colors.textColor,
+              boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
             }}
           >
             {(loading || (isDataEmpty && !loading)) && (
