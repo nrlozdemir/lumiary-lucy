@@ -42,7 +42,7 @@ class ContentVitalityScore extends React.Component {
             data={data}
             authProfile={authProfile}
             moduleKey={'Reports/ContentVitalityScore'}
-            title="Content Vitality Score by Videos Produced Comparison"
+            title="Content Vitality Score By Videos Produced Comparison"
             action={this.callBack}
             filters={[
               {

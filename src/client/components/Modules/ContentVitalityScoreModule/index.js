@@ -28,30 +28,37 @@ const ContentVitalityScoreModule = ({
   loading = false,
   chartYAxisMax = 100,
   infoText,
-  leftLabel,
-  rightLabel
+  dataKeys: {
+    leftLabel,
+    rightLabel,
+    middleLabel,
+    leftKey,
+    rightKey,
+    middleKey,
+  },
 }) => {
   const formattedData = Object.keys(data).reduce(
     (accumulator, dataKey) => {
       switch (dataKey) {
+        case middleKey:
         case 'other':
           accumulator.middleDataset = {
-            ...data[dataKey],
-            name: 'Average',
+            ...data[middleKey || dataKey],
+            name: middleLabel ? middleLabel : middleKey ? middleKey : 'Average',
           }
           break
 
-        case leftLabel:
+        case leftKey:
           accumulator.leftDataset = {
-            ...data[leftLabel],
-            name: leftLabel,
+            ...data[leftKey],
+            name: leftLabel || leftKey,
           }
           break
 
-        case rightLabel:
+        case rightKey:
           accumulator.rightDataset = {
-            ...data[rightLabel],
-            name: rightLabel,
+            ...data[rightKey],
+            name: rightLabel || rightKey,
           }
           break
 
@@ -132,6 +139,7 @@ const ContentVitalityScoreModule = ({
                   loading
                     ? {}
                     : {
+                        labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
                         datasets: [
                           {
                             data:
@@ -167,7 +175,8 @@ const ContentVitalityScoreModule = ({
                     boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                   }}
                 >
-                  Male Audience{' '}
+                  {formattedData.leftDataset &&
+                    `${formattedData.leftDataset.name}`}
                 </div>
                 <div
                   className={style.divider}
@@ -210,7 +219,8 @@ const ContentVitalityScoreModule = ({
                     boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                   }}
                 >
-                  Percent Difference
+                  {formattedData.middleDataset &&
+                    `${formattedData.middleDataset.name}`}
                 </div>
                 <div
                   className={style.divider}
@@ -218,7 +228,7 @@ const ContentVitalityScoreModule = ({
                     background: colors.moduleBorder,
                   }}
                 />
-                {formattedData.leftDataset && (
+                {formattedData.middleDataset && (
                   <PercentageBarGraph
                     key={Math.random()}
                     percentage={formattedData.middleDataset.averageCvScore || 0}
@@ -237,7 +247,6 @@ const ContentVitalityScoreModule = ({
                             ticks: {
                               max: chartYAxisMax,
                             },
-
                           },
                         ],
                       },
@@ -254,9 +263,10 @@ const ContentVitalityScoreModule = ({
                     boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                   }}
                 >
-                  Female Audience{' '}
+                  {formattedData.rightDataset &&
+                    `${formattedData.rightDataset.name}`}
                 </div>
-                {formattedData.leftDataset && (
+                {formattedData.rightDataset && (
                   <PercentageBarGraph
                     key={Math.random()}
                     percentage={formattedData.rightDataset.averageCvScore || 0}
@@ -275,7 +285,6 @@ const ContentVitalityScoreModule = ({
                             ticks: {
                               max: chartYAxisMax,
                             },
-
                           },
                         ],
                       },
@@ -298,6 +307,11 @@ ContentVitalityScoreModule.propTypes = {
   subTitle: PropTypes.string,
   legend: PropTypes.object,
   filters: PropTypes.array,
+  dataKeys: PropTypes.object,
+}
+
+ContentVitalityScoreModule.defaultProps = {
+  dataKeys: {},
 }
 
 export default ContentVitalityScoreModule

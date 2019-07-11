@@ -17,24 +17,9 @@ class ContentVitalityScore extends React.Component {
     this.props.getAudienceContentVitalityScoreData(data)
   }
 
-  shouldComponentUpdate(nextProps) {
-    const {
-      audienceContentVitalityScoreData: { data, loading },
-    } = this.props
-
-    const {
-      audienceContentVitalityScoreData: { data: nextData, loading: nextLoading },
-    } = nextProps
-
-    return (
-      JSON.stringify(data) !== JSON.stringify(data) || loading !== nextLoading
-    )
-  }
-
   render() {
     const {
       audienceContentVitalityScoreData: { data, loading, error },
-      authProfile = {},
     } = this.props
 
     const { chartYAxisMax, chartYAxisStepSize } = getCVScoreChartAttributes(
@@ -45,6 +30,15 @@ class ContentVitalityScore extends React.Component {
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <ContentVitalityScoreModule
+            loading={loading}
+            dataKeys={{
+              leftKey: 'male',
+              leftLabel: 'Male Audience',
+              rightKey: 'female',
+              rightLabel: 'Female Audience',
+              middleKey: 'difference',
+              middleLabel: 'Percent Difference',
+            }}
             data={data}
             chartYAxisMax={chartYAxisMax}
             moduleKey={'Audience/ContentVitalityScore'}
@@ -112,7 +106,6 @@ class ContentVitalityScore extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   audienceContentVitalityScoreData: makeSelectAudienceContentVitalityScore(),
-  authProfile: makeSelectAuthProfile(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
