@@ -1,7 +1,6 @@
 .cardContainer {
   border-radius: 8px;
   margin: 0px 24px 40px 0px;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   position: relative;
 
   box-sizing: content-box;
@@ -13,6 +12,95 @@
   @include grid-media($small-grid) {
     margin-top: 20px;
     @include grid-column(12);
+  }
+
+  &:hover{
+    z-index: 10;
+
+    .progressBar {
+      opacity: 1;
+    }
+
+    .cardInner {
+      border-radius: 8px;
+      // transform: scale(1.2);
+      -webkit-animation: ease-in-out;
+      -webkit-animation-duration: 0.4s;
+      position: absolute;
+      left: -35px;
+      right: -35px;
+      bottom: -19px;
+      top: -19px;
+      width: calc(100% + 70px);
+      height: calc(100% + 38px);
+      video {
+        object-fit: cover;
+      }
+    }
+    .cardBody {
+      .cardLink {
+        display: flex;
+      }
+      .cardInfo {
+        display: none;
+      }
+    }
+  }
+  
+  &.dark{
+    box-shadow: 0 2px 6px 0 #000;
+    &:hover {
+      @-webkit-keyframes runDark {
+        0% {
+          width: 100%;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: 0;
+          height: 120px;
+        }
+        100% {
+          left: -35px;
+          right: -35px;
+          bottom: -19px;
+          top: -19px;
+          width: calc(100% + 70px);
+          box-shadow: 0 10px 20px 0 #000;
+        }
+      }
+      .cardInner {
+        animation-name: runDark;
+        box-shadow: 0 10px 20px 0 #000;
+      }
+    }
+  }
+  
+  &.light{
+    box-shadow: 0 2px 6px 0 #bebebe;
+    &:hover {
+      @-webkit-keyframes runLight {
+        0% {
+          width: 100%;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          top: 0;
+          height: 120px;
+        }
+        100% {
+          left: -35px;
+          right: -35px;
+          bottom: -19px;
+          top: -19px;
+          width: calc(100% + 70px);
+          box-shadow: 0 10px 20px 0 #bebebe;
+        }
+      }
+      .cardInner {
+        animation-name: runLight;
+        box-shadow: 0 10px 20px 0 #bebebe;
+      }
+    }
   }
 
   .cardCornerInfo {
@@ -92,60 +180,7 @@
       object-fit: cover;
     }
   }
-  &:hover {
-    z-index: 10;
-    .progressBar {
-      opacity: 1;
-    }
-    @-webkit-keyframes run {
-      0% {
-        width: 100%;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        top: 0;
-        height: 120px;
-      }
-      100% {
-        left: -35px;
-        right: -35px;
-        bottom: -19px;
-        top: -19px;
-        width: calc(100% + 70px);
-        box-shadow: 0 10px 20px 0 #000;
-      }
-    }
-    .cardInner {
-      border-radius: 8px;
-      // transform: scale(1.2);
-      -webkit-animation: ease-in-out;
-      -webkit-animation-name: run;
-      -webkit-animation-duration: 0.4s;
-      position: absolute;
-      left: -35px;
-      right: -35px;
-      bottom: -19px;
-      top: -19px;
-      width: calc(100% + 70px);
-      height: calc(100% + 38px);
-      box-shadow: 0 10px 20px 0 #000;
-      .cardLink {
-        // transform: scale(0.8);
-      }
-      video {
-        object-fit: cover;
-        // transform: scale(1);
-      }
-    }
-    .cardBody {
-      .cardLink {
-        display: flex;
-      }
-      .cardInfo {
-        display: none;
-      }
-    }
-  }
+  
   .cardBody {
     position: relative;
     border-radius: 0 0 6px 6px;
@@ -255,6 +290,9 @@
     color: $color-white;
   }
 }
+
+
+
 
 .rightVideoContainer{
   margin-right: 0px;
