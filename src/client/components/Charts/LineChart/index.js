@@ -313,9 +313,6 @@ class LineChart extends React.Component {
           width={this.state.chartWidth}
           {...props}
         />
-        <div id="chartjs-tooltip">
-          <table />
-        </div>
       </React.Fragment>
     )
   }

@@ -70,10 +70,10 @@ const ContentVitalityScoreModule = ({
   const roundRect = (ctx, x, y, width, height) => {
     const radius = 5
     ctx.beginPath()
-    ctx.shadowColor = 'rgba(0, 0, 0, 0.15)'
-    ctx.shadowBlur = 3
-    ctx.shadowOffsetX = 1
-    ctx.shadowOffsetY = 2
+    // ctx.shadowColor = 'rgba(0, 0, 0, 0.15)'
+    // ctx.shadowBlur = 3
+    // ctx.shadowOffsetX = 1
+    // ctx.shadowOffsetY = 2
     ctx.moveTo(x + radius, y)
     ctx.lineTo(x + width - radius, y)
     ctx.quadraticCurveTo(x + width, y, x + width, y + radius)
@@ -85,9 +85,9 @@ const ContentVitalityScoreModule = ({
     ctx.quadraticCurveTo(x, y, x + radius, y)
     ctx.closePath()
     ctx.fill()
-    ctx.shadowBlur = 0
-    ctx.shadowOffsetX = 0
-    ctx.shadowOffsetY = 0
+    // ctx.shadowBlur = 0
+    // ctx.shadowOffsetX = 0
+    // ctx.shadowOffsetY = 0
   }
 
   // const newDatasets = {
@@ -158,7 +158,7 @@ const ContentVitalityScoreModule = ({
                 customLine
                 options={{
                   ...options,
-                  average: 10,
+                  average: 50,
                   hover: {
                     mode: 'dataset',
                     intersect: false,
@@ -212,14 +212,15 @@ const ContentVitalityScoreModule = ({
 
                       chart.ctx.lineWidth = 4
                       chart.ctx.fillStyle = '#505050'
-                      var rectWidth = 210
+                      const rectWidth = 210
+                      const rectHeight = 90
+
                       const rectX =
                         averagePoint < maxObject._model.x
                           ? maxObject._model.x + 20
                           : maxObject._model.x - rectWidth - 20
-                      const rectY =
-                        (maxObject._model.y - dashMarginTop) / 2 - 10
-                      roundRect(chart.ctx, rectX, rectY, 210, 90, 10, true)
+                      const rectY = maxObject._model.y - rectHeight / 2
+                      roundRect(chart.ctx, rectX, rectY, rectWidth, rectHeight)
                       chart.ctx.font = '12px ClanOT'
                       chart.ctx.textAlign = 'center'
                       chart.ctx.textBaseline = 'middle'
@@ -236,6 +237,29 @@ const ContentVitalityScoreModule = ({
                           rectX + rectWidth / 2,
                           rectY + i * 20 + 25
                         )
+
+                      if (averagePoint < maxObject._model.x) {
+                        chart.ctx.beginPath()
+                        chart.ctx.lineTo(rectX + 3, rectY + rectHeight / 2 - 13)
+                        chart.ctx.lineTo(rectX - 10, rectY + rectHeight / 2)
+                        chart.ctx.lineTo(rectX + 3, rectY + rectHeight / 2 + 13)
+                      } else {
+                        chart.ctx.beginPath()
+                        chart.ctx.lineTo(
+                          rectX + rectWidth,
+                          rectY + rectHeight / 2 - 10
+                        )
+                        chart.ctx.lineTo(
+                          rectX + rectWidth + 10,
+                          rectY + rectHeight / 2
+                        )
+                        chart.ctx.lineTo(
+                          rectX + rectWidth,
+                          rectY + rectHeight / 2 + 10
+                        )
+                      }
+                      chart.ctx.fillStyle = '#505050'
+                      chart.ctx.fill()
                     },
                   },
                 }}
