@@ -97,7 +97,7 @@ const DoughnutChart = (props) => {
           ctx.fillStyle = themes.textColor
           ctx.font = fillTextFontSize + ' ' + fillTextFontFamily
 
-          ctx.fillText(customFillText, Math.round(width / 2), height / 2)
+          ctx.fillText(customFillText, width / 2, height / 2)
 
           ctx.save()
         },
