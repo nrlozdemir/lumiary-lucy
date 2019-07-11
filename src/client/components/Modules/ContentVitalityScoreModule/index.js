@@ -28,42 +28,59 @@ const ContentVitalityScoreModule = ({
   loading = false,
   chartYAxisMax = 100,
   infoText,
+  leftLabel,
+  rightLabel
 }) => {
   const formattedData = Object.keys(data).reduce(
-    (accumulator, uuid) => {
-      switch (uuid) {
+    (accumulator, dataKey) => {
+      switch (dataKey) {
         case 'other':
-          accumulator.average = {
-            ...data[uuid],
+          accumulator.middleDataset = {
+            ...data[dataKey],
             name: 'Average',
           }
           break
 
+        case leftLabel:
+          accumulator.leftDataset = {
+            ...data[leftLabel],
+            name: leftLabel,
+          }
+          break
+
+        case rightLabel:
+          accumulator.rightDataset = {
+            ...data[rightLabel],
+            name: rightLabel,
+          }
+          break
+
         default:
-          if (uuid === authProfile.brand.uuid) {
-            accumulator.brand_1 = {
-              ...data[uuid],
+          if (dataKey === authProfile.brand.uuid) {
+            accumulator.leftDataset = {
+              ...data[dataKey],
               name: authProfile.brand.name,
             }
           } else {
             authProfile.brand.competitors.forEach((competitor) => {
-              if (uuid === competitor.uuid) {
-                accumulator.brand_2 = {
-                  ...data[uuid],
+              if (dataKey === competitor.uuid) {
+                accumulator.rightDataset = {
+                  ...data[dataKey],
                   name: competitor.name,
                 }
               }
             })
           }
+
           break
       }
 
       return accumulator
     },
     {
-      brand_1: null,
-      brand_2: null,
-      average: null,
+      leftDataset: null,
+      middleDataset: null,
+      rightDataset: null,
     }
   )
 
@@ -72,11 +89,15 @@ const ContentVitalityScoreModule = ({
     datasets: [
       {
         data:
-          (formattedData.brand_2 && formattedData.brand_2.videoPercents) || [],
+          (formattedData.rightDataset &&
+            formattedData.rightDataset.videoPercents) ||
+          [],
       },
       {
         data:
-          (formattedData.brand_1 && formattedData.brand_1.videoPercents) || [],
+          (formattedData.leftDataset &&
+            formattedData.leftDataset.videoPercents) ||
+          [],
       },
     ],
   }
@@ -114,14 +135,14 @@ const ContentVitalityScoreModule = ({
                         datasets: [
                           {
                             data:
-                              (formattedData.brand_2 &&
-                                formattedData.brand_2.videoPercents) ||
+                              (formattedData.rightDataset &&
+                                formattedData.rightDataset.videoPercents) ||
                               [],
                           },
                           {
                             data:
-                              (formattedData.brand_1 &&
-                                formattedData.brand_1.videoPercents) ||
+                              (formattedData.leftDataset &&
+                                formattedData.leftDataset.videoPercents) ||
                               [],
                           },
                         ],
@@ -154,15 +175,15 @@ const ContentVitalityScoreModule = ({
                     background: colors.moduleBorder,
                   }}
                 />
-                {formattedData.brand_1 && (
+                {formattedData.leftDataset && (
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={formattedData.brand_1.averageCvScore || 0}
+                    percentage={formattedData.leftDataset.averageCvScore || 0}
                     color="blue"
                     percentageDataSet={{
                       datasets: [
                         {
-                          data: formattedData.brand_1.videoPercents,
+                          data: formattedData.leftDataset.videoPercents,
                         },
                       ],
                     }}
@@ -197,15 +218,15 @@ const ContentVitalityScoreModule = ({
                     background: colors.moduleBorder,
                   }}
                 />
-                {formattedData.brand_1 && (
+                {formattedData.leftDataset && (
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={formattedData.average.averageCvScore || 0}
+                    percentage={formattedData.middleDataset.averageCvScore || 0}
                     color="grey"
                     percentageDataSet={{
                       datasets: [
                         {
-                          data: formattedData.average.videoPercents,
+                          data: formattedData.middleDataset.videoPercents,
                         },
                       ],
                     }}
@@ -216,6 +237,7 @@ const ContentVitalityScoreModule = ({
                             ticks: {
                               max: chartYAxisMax,
                             },
+
                           },
                         ],
                       },
@@ -234,15 +256,15 @@ const ContentVitalityScoreModule = ({
                 >
                   Female Audience{' '}
                 </div>
-                {formattedData.brand_1 && (
+                {formattedData.leftDataset && (
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={formattedData.brand_2.averageCvScore || 0}
+                    percentage={formattedData.rightDataset.averageCvScore || 0}
                     color="green"
                     percentageDataSet={{
                       datasets: [
                         {
-                          data: formattedData.brand_2.videoPercents,
+                          data: formattedData.rightDataset.videoPercents,
                         },
                       ],
                     }}
@@ -253,6 +275,7 @@ const ContentVitalityScoreModule = ({
                             ticks: {
                               max: chartYAxisMax,
                             },
+
                           },
                         ],
                       },

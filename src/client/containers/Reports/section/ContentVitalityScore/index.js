@@ -1,6 +1,7 @@
 import React from 'react'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'
+import { getCVScoreChartAttributes } from 'Utils/datasets'
 
 class ContentVitalityScore extends React.Component {
   callBack = (data, moduleKey) => {
@@ -24,21 +25,13 @@ class ContentVitalityScore extends React.Component {
 
   render() {
     const {
-      data: test,
       data: { data, loading, error },
       authProfile = {},
     } = this.props
 
-    const maxVideoPercent =
-      (!!data &&
-        Object.keys(data).reduce((accumulator, key) => {
-          const maxPercentInSet = Math.max(...data[key].videoPercents)
-          return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
-        }, 0)) ||
-      0
-
-    const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
-    const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
+    const { chartYAxisMax, chartYAxisStepSize } = getCVScoreChartAttributes(
+      data
+    )
 
     return (
       <ThemeContext.Consumer>

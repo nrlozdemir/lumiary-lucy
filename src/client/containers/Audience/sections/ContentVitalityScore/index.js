@@ -10,31 +10,51 @@ import {
 import { ThemeContext } from 'ThemeContext/themeContext'
 import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'
 import { makeSelectAuthProfile } from 'Reducers/auth'
+import { getCVScoreChartAttributes } from 'Utils/datasets'
 
 class ContentVitalityScore extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getAudienceContentVitalityScoreData(data)
   }
+
+  shouldComponentUpdate(nextProps) {
+    const {
+      audienceContentVitalityScoreData: { data, loading },
+    } = this.props
+
+    const {
+      audienceContentVitalityScoreData: { data: nextData, loading: nextLoading },
+    } = nextProps
+
+    return (
+      JSON.stringify(data) !== JSON.stringify(data) || loading !== nextLoading
+    )
+  }
+
   render() {
     const {
       audienceContentVitalityScoreData: { data, loading, error },
       authProfile = {},
     } = this.props
 
+    const { chartYAxisMax, chartYAxisStepSize } = getCVScoreChartAttributes(
+      data
+    )
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <ContentVitalityScoreModule
             data={data}
+            chartYAxisMax={chartYAxisMax}
             moduleKey={'Audience/ContentVitalityScore'}
-						title="Content Vitality Score By Videos Produced Comparison"
+            title="Content Vitality Score By Videos Produced Comparison"
             action={this.callBack}
-            authProfile={authProfile}
             filters={[
               {
-                type: 'platform',
+                type: 'platformEngagement',
                 selectKey: 'ACOT-ads',
-                defaultValue: 'facebook',
+                placeHolder: 'Engagement by Platform',
               },
               {
                 type: 'dateRange',
@@ -56,13 +76,15 @@ class ContentVitalityScore extends React.Component {
                       callback: function(value, index, values) {
                         if (value === 0) {
                           return value + ' '
-                        } else if (value === 250) {
+                        } else if (value === chartYAxisMax) {
                           return value
                         } else {
                           return ''
                         }
                       },
+                      stepSize: chartYAxisStepSize,
                       fontColor: colors.textColor,
+                      max: chartYAxisMax,
                     },
                     gridLines: {
                       color: colors.chartStadiumBarBorder,
