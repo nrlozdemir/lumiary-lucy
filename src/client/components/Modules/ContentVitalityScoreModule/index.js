@@ -116,8 +116,6 @@ const ContentVitalityScoreModule = ({
     ],
   }
 
-  console.log('asdf', formattedData)
-
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
