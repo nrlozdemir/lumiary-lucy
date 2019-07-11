@@ -183,6 +183,8 @@ const dark = {
   // video hover progress bar
   videoProgressBar: '#fff',
 
+  // chart zero line
+  chartZeroLineColor: '#505050',
   // Asset Layer
   assetLayerBorderColor: '#545b79',
   assetLayerShadowColor: 'rgba(0, 0, 0, 0.5)',
@@ -373,6 +375,8 @@ const light = {
   // video hover progress bar
   videoProgressBar: '#2fd7c4',
 
+  // chart zero line
+  chartZeroLineColor: '#505050',
   // Asset Layer
   assetLayerBorderColor: '#c6c9d7',
   assetLayerShadowColor: '#bebebe',
