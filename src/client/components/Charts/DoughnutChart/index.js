@@ -58,9 +58,6 @@ const DoughnutChart = (props) => {
     fillTextFontSize,
     fillTextFontFamily,
     fillText,
-    fillTextX,
-    fillTextY,
-    fillTextMaxWidth,
     displayDataLabels,
     dataLabelFunction,
     dataLabelInsert,
@@ -92,21 +89,17 @@ const DoughnutChart = (props) => {
       {
         beforeDraw: function(chart) {
           const ctx = chart.chart.ctx
-          const { top, bottom, left, right } = chart.chartArea
           const customFillText = textToUse.replace(/^\s+|\s+$/g, '')
-          ctx.save()
+
+          ctx.restore()
+          ctx.textAlign = 'center'
+          ctx.textBaseline = 'middle'
           ctx.fillStyle = themes.textColor
           ctx.font = fillTextFontSize + ' ' + fillTextFontFamily
 
-          ctx.fillText(
-            customFillText,
-            fillTextX && fillTextX > 0 ? fillTextX : (bottom - top) / 2 - 55,
-            fillTextY && fillTextY > 0 ? fillTextY : (right - left) / 2 + 4,
-            fillTextMaxWidth && fillTextMaxWidth > 0
-              ? fillTextMaxWidth
-              : right - left
-          )
-          ctx.restore()
+          ctx.fillText(customFillText, width / 2, height / 2)
+
+          ctx.save()
         },
       },
     ]
