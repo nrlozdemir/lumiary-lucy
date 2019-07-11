@@ -63,10 +63,10 @@
     font-size: 14px;
     font-family: $font-family-ClanOTBold;
 
-    &:hover {
-      font-family: $font-family-ClanOTBold;
-      font-weight: normal;
-    }
+    // &:hover {
+    //   font-family: $font-family-ClanOTBold;
+    //   font-weight: normal;
+    // }
 
     &:before {
       content: '';
@@ -78,11 +78,11 @@
     }
   }
 
-  a:hover {
-    @extend .activeLink;
-    font-family: $font-family-ClanOTNews;
-    font-weight: normal;
-  }
+  // a:hover {
+  //   @extend .activeLink;
+  //   font-family: $font-family-ClanOTNews;
+  //   font-weight: normal;
+  // }
 }
 
 .profile {

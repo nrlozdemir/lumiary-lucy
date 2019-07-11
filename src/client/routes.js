@@ -43,14 +43,23 @@ const routes = [
   {
     path: '/quickview/:platform/:metric/:dateRange',
     component: 'Quickview',
+    navigation: {
+      type: 'dynamicActive', // if have dynamic route, need to this for active border, but both of component name must be same
+    },
   },
   {
     path: '/quickview/:platform/:metric',
     component: 'Quickview',
+    navigation: {
+      type: 'dynamicActive',
+    },
   },
   {
     path: '/quickview/:platform',
     component: 'Quickview',
+    navigation: {
+      type: 'dynamicActive',
+    },
   },
   {
     path: '/panoptic',
@@ -167,7 +176,7 @@ const routes = [
   {
     path: '/sso',
     exact: true,
-    component: 'SSO'
+    component: 'SSO',
   },
   {
     path: '*',
