@@ -5,6 +5,7 @@ import PacingCard from 'Containers/Marketview/sections/main/PacingCard'
 import FormatCard from 'Containers/Marketview/sections/main/FormatCard'
 import TotalViewsCard from 'Containers/Marketview/sections/main/TotalViewsCard'
 import TotalCompetitorCard from 'Containers/Marketview/sections/main/TotalCompetitorCard'
+import classnames from 'classnames'
 
 import style from '../style.scss'
 
@@ -12,16 +13,21 @@ class Main extends Component {
   render() {
     return (
       <React.Fragment>
-        <div className={style.mainCardContainer}>
-          <ColorCard />
-          <PacingCard />
-          <FormatCard />
+        <div
+          className={classnames(
+            'grid-container col-12',
+            style.mainCardContainer
+          )}
+        >
+          <div className={style.mainCardContainerInner}>
+            <ColorCard />
+            <PacingCard />
+            <FormatCard />
+          </div>
         </div>
 
-        <div className="grid-collapse">
-          <TotalViewsCard />
-          <TotalCompetitorCard />
-        </div>
+        <TotalViewsCard />
+        <TotalCompetitorCard />
       </React.Fragment>
     )
   }

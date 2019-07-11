@@ -54,85 +54,85 @@ function* getQuickviewItemsApi({
     const performingText =
       type && type === 'maxVideo' ? 'overperforming ' : 'underperforming '
 
-    const maxVideo = {
-      video: {
-        title: title,
-        videoUrl: `https://s3.amazonaws.com/quickframe-media-staging/lumiere/${brand_uuid}/${uuid}.mp4`,
-        socialIcon: platform,
-        cvScore: cvScoresValue,
-      },
-      infos: [
-        {
-          slug: 'duration',
-          title: 'Duration',
-          value: durationsBucketName,
-          percentage: durationsIndustryPercent,
-          text: `<b>{percentage}%</b> of ${performingText}industry videos are <b>{value} sec</b> in length`,
+      const maxVideo = {
+        video: {
+          title: title,
+          videoUrl: `https://s3.amazonaws.com/quickframe-media-staging/lumiere/${brand_uuid}/${uuid}.mp4`,
+          socialIcon: platform,
+          cvScore: cvScoresValue,
         },
-        {
-          slug: 'pacing',
-          title: 'Pacing',
-          value: pacingsBucketName,
-          percentage: pacingsIndustryPercent,
-          text: `<b>{percentage}%</b> of ${performingText}industry videos have <b>{value} {title}</b>`,
-        },
-        {
-          slug: 'format',
-          title: 'Format',
-          value: formatsBucketName,
-          percentage: formatsIndustryPercent,
-          text: `<b>{percentage}%</b> of ${performingText}industry videos have a <b>{title}</b> of <b>{value}</b>`,
-        },
-        {
-          slug: 'dominantColor',
-          title: 'Dominant Color',
-          value:
-            colorsBucketName.charAt(0).toUpperCase() +
-            colorsBucketName.slice(1),
-          percentage: colorsIndustryPercent,
-          text: `<b>{percentage}%</b> of ${performingText}industry videos have a <b>{title}</b> of <b>{value}</b>`,
-        },
-        {
-          slug: 'predominantTalentAge',
-          title: 'Predominant Talent Age',
-          value: agesBucketName,
-          percentage: agesIndustryPercent,
-          text: `<b>{percentage}%</b> of ${performingText}industry videos are <b>{title}</b> of <b>{value}</b>`,
-        },
-        {
-          slug: 'predominantTalentGender',
-          title: 'Predominant Talent Gender',
-          value: gendersBucketName,
-          percentage: gendersIndustryPercent,
-          text: `<b>{percentage}%</b> of ${performingText}industry videos are <b>{title}</b> of <b>{value}</b>`,
-        },
-        {
-          slug: 'aspectRatio',
-          title: 'Aspect Ratio',
-          value: aspectRatiosBucketName,
-          percentage: aspectRatiosIndustryPercent,
-          text: `<b>{percentage}%</b> of ${performingText}industry videos have an <b>{title}</b> of <b>{value}</b>`,
-        },
-        {
-          slug: 'resolution',
-          title: 'Resolution',
-          value: resolutionsBucketName,
-          percentage: resolutionsIndustryPercent,
-          text: `<b>{percentage}%</b> of ${performingText}industry videos have a <b>{title}</b> of <b>{value}</b>`,
-        },
-        {
-          slug: 'frameRate',
-          title: 'Frame Rate',
-          value:
-            frameRatesBucketName === '' ? '' : `${frameRatesBucketName}fps`,
-          percentage: frameRatesIndustryPercent,
-          text: `<b>{percentage}%</b> of ${performingText}industry videos have a <b>{title}</b> of <b>{value}</b>`,
-        },
-      ],
+        infos: [
+          {
+            slug: 'duration',
+            title: 'Duration',
+            value: durationsBucketName,
+            percentage: durationsIndustryPercent,
+            text: `<b>{percentage}%</b> of ${performingText}industry videos are <b>{value} sec</b> in length`,
+          },
+          {
+            slug: 'pacing',
+            title: 'Pacing',
+            value: pacingsBucketName,
+            percentage: pacingsIndustryPercent,
+            text: `<b>{percentage}%</b> of ${performingText}industry videos have <b>{value} {title}</b>`,
+          },
+          {
+            slug: 'format',
+            title: 'Format',
+            value: formatsBucketName,
+            percentage: formatsIndustryPercent,
+            text: `<b>{percentage}%</b> of ${performingText}industry videos have a <b>{title}</b> of <b>{value}</b>`,
+          },
+          {
+            slug: 'dominantColor',
+            title: 'Dominant Color',
+            value:
+              colorsBucketName.charAt(0).toUpperCase() +
+              colorsBucketName.slice(1),
+            percentage: colorsIndustryPercent,
+            text: `<b>{percentage}%</b> of ${performingText}industry videos have a <b>{title}</b> of <b>{value}</b>`,
+          },
+          {
+            slug: 'predominantTalentAge',
+            title: 'Predominant Talent Age',
+            value: agesBucketName,
+            percentage: agesIndustryPercent,
+            text: `<b>{percentage}%</b> of ${performingText}industry videos are <b>{title}</b> of <b>{value}</b>`,
+          },
+          {
+            slug: 'predominantTalentGender',
+            title: 'Predominant Talent Gender',
+            value: gendersBucketName,
+            percentage: gendersIndustryPercent,
+            text: `<b>{percentage}%</b> of ${performingText}industry videos are <b>{title}</b> of <b>{value}</b>`,
+          },
+          {
+            slug: 'aspectRatio',
+            title: 'Aspect Ratio',
+            value: aspectRatiosBucketName,
+            percentage: aspectRatiosIndustryPercent,
+            text: `<b>{percentage}%</b> of ${performingText}industry videos have an <b>{title}</b> of <b>{value}</b>`,
+          },
+          {
+            slug: 'resolution',
+            title: 'Resolution',
+            value: resolutionsBucketName,
+            percentage: resolutionsIndustryPercent,
+            text: `<b>{percentage}%</b> of ${performingText}industry videos have a <b>{title}</b> of <b>{value}</b>`,
+          },
+          {
+            slug: 'frameRate',
+            title: 'Frame Rate',
+            value:
+              frameRatesBucketName === '' ? '' : `${frameRatesBucketName}fps`,
+            percentage: frameRatesIndustryPercent,
+            text: `<b>{percentage}%</b> of ${performingText}industry videos have a <b>{title}</b> of <b>{value}</b>`,
+          },
+        ],
+      }
+  
+      return maxVideo
     }
-
-    return maxVideo
-  }
 
   const serverData = yield call(
     getDataFromApi,

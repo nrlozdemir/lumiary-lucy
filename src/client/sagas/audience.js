@@ -25,15 +25,30 @@ function updateAudiencePerformanceApi({ min, max }) {
   return axios.get('/').then((res) => updateAudiencePer(min, max))
 }
 
-function* getAudienceContentVitalityScoreData() {
+function* getAudienceContentVitalityScoreData({ payload = {} }) {
+  const { platform, metric, dateRange } = payload
+
   try {
-    const payload = yield call(getAudienceDataApi)
-    let shuffleData = payload.lineStackedChartData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
+    //const response = yield call(getDataFromApi)
+
+    const response = {
+      male: {
+        averageCvScore: '38.8',
+        videoPercents: [2, 9, 5, 11, 5, 0, 11, 6, 2, 5, 0],
+      },
+      female: {
+        averageCvScore: '58.8',
+        videoPercents: [0, 5, 4, 14, 1, 2, 1, 15, 2, 0, 0],
+      },
+      difference: {
+        averageCvScore: '28.8',
+        videoPercents: [9, 12, 8, 17, 15, 20, 11, 6, 22, 2, 0],
+      },
+    }
+
     yield put(
       actions.getAudienceContentVitalityScoreDataSuccess(
-        percentageManipulation(shuffleData)
+        percentageManipulation(response)
       )
     )
   } catch (err) {
