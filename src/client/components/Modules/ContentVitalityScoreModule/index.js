@@ -37,59 +37,66 @@ const ContentVitalityScoreModule = ({
     middleKey,
   },
 }) => {
-  const formattedData = Object.keys(data).reduce(
-    (accumulator, dataKey) => {
-      switch (dataKey) {
-        case middleKey:
-        case 'other':
-          accumulator.middleDataset = {
-            ...data[middleKey || dataKey],
-            name: middleLabel ? middleLabel : middleKey ? middleKey : 'Average',
-          }
-          break
-
-        case leftKey:
-          accumulator.leftDataset = {
-            ...data[leftKey],
-            name: leftLabel || leftKey,
-          }
-          break
-
-        case rightKey:
-          accumulator.rightDataset = {
-            ...data[rightKey],
-            name: rightLabel || rightKey,
-          }
-          break
-
-        default:
-          if (dataKey === authProfile.brand.uuid) {
-            accumulator.leftDataset = {
-              ...data[dataKey],
-              name: authProfile.brand.name,
-            }
-          } else {
-            authProfile.brand.competitors.forEach((competitor) => {
-              if (dataKey === competitor.uuid) {
-                accumulator.rightDataset = {
-                  ...data[dataKey],
-                  name: competitor.name,
-                }
+  const formattedData =
+    (!!data &&
+      Object.keys(data).reduce(
+        (accumulator, dataKey) => {
+          switch (dataKey) {
+            case middleKey:
+            case 'other':
+              accumulator.middleDataset = {
+                ...data[middleKey || dataKey],
+                name: middleLabel
+                  ? middleLabel
+                  : middleKey
+                  ? middleKey
+                  : 'Average',
               }
-            })
+              break
+
+            case leftKey:
+              accumulator.leftDataset = {
+                ...data[leftKey],
+                name: leftLabel || leftKey,
+              }
+              break
+
+            case rightKey:
+              accumulator.rightDataset = {
+                ...data[rightKey],
+                name: rightLabel || rightKey,
+              }
+              break
+
+            default:
+              if (dataKey === authProfile.brand.uuid) {
+                accumulator.leftDataset = {
+                  ...data[dataKey],
+                  name: authProfile.brand.name,
+                }
+              } else {
+                authProfile.brand.competitors.forEach((competitor) => {
+                  if (dataKey === competitor.uuid) {
+                    accumulator.rightDataset = {
+                      ...data[dataKey],
+                      name: competitor.name,
+                    }
+                  }
+                })
+              }
+
+              break
           }
 
-          break
-      }
-
-      return accumulator
-    },
-    {
-      leftDataset: null,
-      middleDataset: null,
-      rightDataset: null,
-    }
-  )
+          return accumulator
+        },
+        {
+          leftDataset: null,
+          middleDataset: null,
+          rightDataset: null,
+        }
+      )) ||
+    {}
 
   const newDatasets = {
     labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
@@ -108,6 +115,8 @@ const ContentVitalityScoreModule = ({
       },
     ],
   }
+
+  console.log('asdf', formattedData)
 
   return (
     <ThemeContext.Consumer>
@@ -178,16 +187,14 @@ const ContentVitalityScoreModule = ({
                   {formattedData.leftDataset &&
                     `${formattedData.leftDataset.name}`}
                 </div>
-                {!!formattedData.leftDataset &&
-                  !!formattedData.leftDataset.averageCvScore &&
-                  formattedData.leftDataset.averageCvScore !== 'NaN' && (
-                    <div
-                      className={style.divider}
-                      style={{
-                        background: colors.moduleBorder,
-                      }}
-                    />
-                  )}
+                {formattedData.leftDataset && (
+                  <div
+                    className={style.divider}
+                    style={{
+                      background: colors.moduleBorder,
+                    }}
+                  />
+                )}
                 {formattedData.leftDataset && (
                   <PercentageBarGraph
                     key={Math.random()}
@@ -226,16 +233,14 @@ const ContentVitalityScoreModule = ({
                   {formattedData.middleDataset &&
                     `${formattedData.middleDataset.name}`}
                 </div>
-                {!!formattedData.middleDataset &&
-                  !!formattedData.middleDataset.averageCvScore &&
-                  formattedData.middleDataset.averageCvScore !== 'NaN' && (
-                    <div
-                      className={style.divider}
-                      style={{
-                        background: colors.moduleBorder,
-                      }}
-                    />
-                  )}
+                {formattedData.middleDataset && (
+                  <div
+                    className={style.divider}
+                    style={{
+                      background: colors.moduleBorder,
+                    }}
+                  />
+                )}
                 {formattedData.middleDataset && (
                   <PercentageBarGraph
                     key={Math.random()}
