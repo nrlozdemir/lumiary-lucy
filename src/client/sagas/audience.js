@@ -5,7 +5,7 @@ import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 import { selectAuthProfile } from 'Reducers/auth'
 
-import { getDataFromApi } from 'Utils/api'
+import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import {
   radarChartCalculate,
@@ -24,28 +24,30 @@ function* getAudienceContentVitalityScoreData({ payload = {} }) {
   const { platform, metric, dateRange } = payload
 
   try {
-    //const response = yield call(getDataFromApi)
+    const { brand } = yield select(selectAuthProfile)
 
-    const response = {
-      male: {
-        averageCvScore: '38.8',
-        videoPercents: [2, 9, 5, 11, 5, 0, 11, 6, 2, 5, 0],
-      },
-      female: {
-        averageCvScore: '58.8',
-        videoPercents: [0, 5, 4, 14, 1, 2, 1, 15, 2, 0, 0],
-      },
-      difference: {
-        averageCvScore: '28.8',
-        videoPercents: [9, 12, 8, 17, 15, 20, 11, 6, 22, 2, 0],
-      },
-    }
-
-    yield put(
-      actions.getAudienceContentVitalityScoreDataSuccess(
-        percentageManipulation(response)
-      )
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/cvscores`, {
+        metric,
+        platform,
+        daterange: dateRange,
+      }),
+      'GET'
     )
+
+    console.log(response)
+
+    if (!!response && !!Object.keys(response).length) {
+      yield put(
+        actions.getAudienceContentVitalityScoreDataSuccess(
+          percentageManipulation(response)
+        )
+      )
+    } else {
+      throw new Error('Audience/getAudienceContentVitalityScoreData Error')
+    }
   } catch (err) {
     yield put(actions.getAudienceContentVitalityScoreDataError(err))
   }

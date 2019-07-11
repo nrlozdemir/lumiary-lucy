@@ -119,7 +119,7 @@ const ContentVitalityScoreModule = ({
           filters={filters}
           legend={legend}
           loading={loading}
-          isEmpty={isDataSetEmpty(loading ? {} : newDatasets)}
+          isEmpty={isDataSetEmpty(loading ? {} : newDatasets.datasets)}
           infoText={infoText}
         >
           <div
