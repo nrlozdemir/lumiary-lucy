@@ -68,20 +68,26 @@ const Logo = ({ themes }) => (
   </div>
 )
 
-export const NavLinkComponent = (props) => (
-  <NavLink
-    {...props}
-    isActive={(match, location) => {
-      if (props.to === location.pathname) {
-        return true
-      }
-      if (location.pathname === '/' && props.to === '/library') {
-        return true
-      }
-      return false
-    }}
-  />
-)
+export const NavLinkComponent = (props) => {
+  const { forceActiveChildren, ...rest } = props
+  return (
+    <NavLink
+      {...rest}
+      isActive={(match, location) => {
+        if (forceActiveChildren && forceActiveChildren === rest.children) {
+          return true
+        }
+        if (rest.to === location.pathname) {
+          return true
+        }
+        if (location.pathname === '/' && rest.to === '/library') {
+          return true
+        }
+        return false
+      }}
+    />
+  )
+}
 
 const Default = (props) => {
   const { textColor, moduleBackground } = props.themes
@@ -103,6 +109,7 @@ const Default = (props) => {
           to={el.path}
           activeClassName={style.activeLink}
           style={{ color: textColor }}
+          forceActiveChildren={props.forceActiveChildren}
         >
           {el.navigation.title}
         </NavLinkComponent>
@@ -133,8 +140,8 @@ const NavTitle = (props) => {
     match,
     libraryDetail: { selectedVideo },
   } = props
-  if (selectedVideo && selectedVideo.title) {
-    return <div>{ucfirst(selectedVideo.title)}</div>
+  if (selectedVideo) {
+    return <div className={style.headerTitle}>Library</div>
   }
   return null
 }
@@ -171,6 +178,28 @@ const Selector = (props) => {
   const navigation = props && props.routeConfig
   const state = props && props.state
   const actions = props && props.actions
+
+  const navigationForcePathMatch = Object.values(navigation).filter(
+    (r) =>
+      r.path == props.match.path &&
+      r.navigation &&
+      r.navigation.type &&
+      r.navigation.type == 'dynamicActive'
+  )
+
+  if (navigationForcePathMatch && navigationForcePathMatch.length) {
+    console.log('navigationForcePathMatch', navigationForcePathMatch)
+    return {
+      leftSide: <Logo themes={props.themes} />,
+      navigation: (
+        <Default
+          {...navigation}
+          forceActiveChildren={navigationForcePathMatch[0].component}
+          themes={props.themes}
+        />
+      ),
+    }
+  }
 
   const navigationPathMatch = Object.values(navigation).filter(
     (r) =>
@@ -235,7 +264,9 @@ const Selector = (props) => {
     }
   } else if (url[1] == 'library' && url[2] && url[2].match(/(\d+)/gm)) {
     return {
-      leftSide: <BackTo {...url} title="Back To Overview" themes={props.themes} />,
+      leftSide: (
+        <BackTo {...url} title="Back To Overview" themes={props.themes} />
+      ),
       navigation: <NavTitle {...props} />,
     }
   } else {

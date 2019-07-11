@@ -1,9 +1,8 @@
 import React from 'react'
 import classnames from 'classnames'
 import { socialIconSelector } from 'Utils'
-import styles from './style.scss'
-
 import { withTheme } from 'ThemeContext/withTheme'
+import styles from './style.scss'
 
 const AssetLayer = (props) => {
   const {
@@ -35,7 +34,8 @@ const AssetLayer = (props) => {
         style={{
           width: width,
           height: height,
-          border: `1px solid ${themes.chartStadiumBarBorder}`,
+          boxShadow: `0 2px 6px 0 ${themes.assetLayerShadowColor}`,
+          border: `1px solid ${themes.assetLayerBorderColor}`,
           color: themes.textColor,
         }}
       >

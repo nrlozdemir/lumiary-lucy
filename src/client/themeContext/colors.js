@@ -58,7 +58,7 @@ const dark = {
   videoCardColor: '#ffffff',
   videoCardShadow: 'rgba(0, 0, 0, 0.5)',
   videoBorder: '#545b79',
-  videoRightPercentageBackground: '#202952',
+  videoRightPercentageBackground: 'rgba(32, 41, 82, 0.8)',
 
   // Sidebar
   filterHeader: '#ffffff',
@@ -92,6 +92,7 @@ const dark = {
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#545b79',
   inputColor: '#545B79',
+  inputDropdownColor: '#545b79',
   inputActiveColor: '#fff',
   inputOptionBackground: '#545B79',
   inputOptionFocusBackground: '#545B79',
@@ -181,6 +182,12 @@ const dark = {
 
   // video hover progress bar
   videoProgressBar: '#fff',
+
+  // chart zero line
+  chartZeroLineColor: '#505050',
+  // Asset Layer
+  assetLayerBorderColor: '#545b79',
+  assetLayerShadowColor: 'rgba(0, 0, 0, 0.5)',
 }
 
 const light = {
@@ -242,7 +249,7 @@ const light = {
   videoCardShadow: '#bebebe',
   videoBorder: '#c6c9d7',
   videoCardIcon: '#505050',
-  videoRightPercentageBackground: '#fff',
+  videoRightPercentageBackground: 'rgba(255, 255, 255, 0.8)',
 
   // Sidebar
   filterHeader: '#505050',
@@ -276,6 +283,7 @@ const light = {
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#c6c9d7',
   inputColor: '#000',
+  inputDropdownColor: '#ffffff',
   inputActiveColor: '#505050',
   inputOptionBackground: '#ffffff',
   inputOptionFocusBackground: '#f3f6f9',
@@ -366,6 +374,12 @@ const light = {
 
   // video hover progress bar
   videoProgressBar: '#2fd7c4',
+
+  // chart zero line
+  chartZeroLineColor: '#505050',
+  // Asset Layer
+  assetLayerBorderColor: '#c6c9d7',
+  assetLayerShadowColor: '#bebebe',
 }
 
 const themes = {

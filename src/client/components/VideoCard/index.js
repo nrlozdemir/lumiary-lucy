@@ -106,10 +106,8 @@ export class VideoCard extends PureComponent {
           <div
             className={classnames(style.cardContainer, {
               [style.rightVideoContainer]: index > 0 && (index + 1) % 4 === 0,
+              [colors.themeType === 'dark' ? style.dark : style.light]: true,
             })}
-            style={{
-              boxShadow: `0 2px 6px 0 colors.videoCardShadow`,
-            }}
           >
             <div
               className={style.cardInner}
@@ -122,7 +120,6 @@ export class VideoCard extends PureComponent {
                   style={{
                     backgroundColor: colors.videoRightPercentageBackground,
                     color: colors.labelColor,
-                    opacity: 0.8,
                   }}
                 >
                   <span>{floatCvScore(cvScore)}</span>

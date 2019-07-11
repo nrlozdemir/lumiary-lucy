@@ -177,7 +177,7 @@ const Select = (props) => {
           ? themes.inputOptionFocusBackground
           : themes.inputOptionBackground,
         color: isSelected
-          ? themes.inputColor
+          ? themes.inputDropdownColor
           : isFocused
           ? themes.inputActiveColor
           : themes.inputActiveColor,
@@ -213,7 +213,7 @@ const Select = (props) => {
       ...base,
       boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.5)',
       borderRadius: 0,
-      zIndex: 100
+      zIndex: 100,
     }),
     menuList: (base) => ({
       ...base,
