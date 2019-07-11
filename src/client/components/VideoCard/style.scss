@@ -14,7 +14,7 @@
     @include grid-column(12);
   }
 
-  &:hover{
+  &:hover {
     z-index: 10;
 
     .progressBar {
@@ -46,8 +46,8 @@
       }
     }
   }
-  
-  &.dark{
+
+  &.dark {
     box-shadow: 0 2px 6px 0 $dark_videoCardShadow;
     &:hover {
       @-webkit-keyframes runDark {
@@ -74,8 +74,8 @@
       }
     }
   }
-  
-  &.light{
+
+  &.light {
     box-shadow: 0 2px 6px 0 $light_videoCardShadow;
     &:hover {
       @-webkit-keyframes runLight {
@@ -180,7 +180,7 @@
       object-fit: cover;
     }
   }
-  
+
   .cardBody {
     position: relative;
     border-radius: 0 0 6px 6px;
@@ -291,9 +291,6 @@
   }
 }
 
-
-
-
-.rightVideoContainer{
+.rightVideoContainer {
   margin-right: 0px;
 }
