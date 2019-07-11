@@ -15,6 +15,7 @@ class DoughnutCard extends React.Component {
       identifier,
       title,
       maxLabel,
+      duration,
       maxPercentage,
       toggleInfoSection,
       chartData,
@@ -86,7 +87,7 @@ class DoughnutCard extends React.Component {
                 }}
               >
                 <p className="font-secondary-second font-size-12 text-center">
-                  {maxLabel}
+                  {!!duration ? duration : maxLabel}
                 </p>
               </div>
               <div className={style.doughnutChartContainer}>

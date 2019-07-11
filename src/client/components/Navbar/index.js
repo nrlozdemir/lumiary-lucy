@@ -133,8 +133,8 @@ const NavTitle = (props) => {
     match,
     libraryDetail: { selectedVideo },
   } = props
-  if (selectedVideo && selectedVideo.title) {
-    return <div>{ucfirst(selectedVideo.title)}</div>
+  if (selectedVideo) {
+    return <div className={style.headerTitle}>Library</div>
   }
   return null
 }
@@ -235,7 +235,7 @@ const Selector = (props) => {
     }
   } else if (url[1] == 'library' && url[2] && url[2].match(/(\d+)/gm)) {
     return {
-      leftSide: <BackTo {...url} themes={props.themes} />,
+      leftSide: <BackTo {...url} title="Back To Overview" themes={props.themes} />,
       navigation: <NavTitle {...props} />,
     }
   } else {

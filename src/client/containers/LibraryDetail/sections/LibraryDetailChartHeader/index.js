@@ -72,6 +72,7 @@ const Back = (props) => {
 }
 
 const LibraryDetailChartHeader = ({
+  getVideoRef,
   barChartData,
   videoUrl,
   title,
@@ -87,6 +88,7 @@ const LibraryDetailChartHeader = ({
           <div className={classnames('mt-72', style.containerClass)}>
             <div className={classnames('col-6', style.videoWrapper)}>
               <Video
+                setRef={getVideoRef}
                 src={videoUrl}
                 title={title}
                 socialIcon={socialIcon}

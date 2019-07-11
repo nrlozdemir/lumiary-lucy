@@ -61,6 +61,9 @@ class ColorRadioBoxes extends React.Component {
           name="radioColorSelected"
           component={renderRadioContainer}
           colors={this.props.colors}
+          onChange={(e) => {
+            this.props.clickEvent(e)
+          }}
         />
       </React.Fragment>
     )

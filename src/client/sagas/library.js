@@ -3,6 +3,7 @@ import { ajax } from 'Utils/api'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { types, actions, makeSelectVideoFilters } from 'Reducers/library'
 import { userUuid } from 'Utils/globals'
+import { percentageManipulation } from 'Utils/datasets'
 
 const RESOURCE = '/brand'
 
@@ -33,7 +34,7 @@ function* getVideos(values) {
       body,
     }
     const payload = yield call(getLibraryDataApi, options)
-    yield put(actions.loadVideosSuccess(payload))
+    yield put(actions.loadVideosSuccess(percentageManipulation(payload)))
   } catch (err) {
     yield put(actions.loadVideosError(err))
   }
