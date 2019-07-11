@@ -284,7 +284,7 @@
         }
 
         .itemsHasOpacity {
-          opacity: 0.4;
+          opacity: 0.6;
         }
 
         .items {
@@ -461,6 +461,7 @@
                 font-size: 32px;
                 font-family: $font-family-primary;
                 margin-bottom: 16px;
+                height: 40px;
               }
             }
           }
@@ -468,6 +469,10 @@
       }
     }
   }
+}
+
+.bothColumnsOpacity {
+  opacity: 0.6;
 }
 
 .noData {

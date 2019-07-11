@@ -3,16 +3,21 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import style from './style.scss'
 import { socialIconSelector } from '../../utils'
+import { isEmpty } from 'lodash'
 
 /* eslint-disable react/prefer-stateless-function */
 const SingleVideoCard = ({ video, options = options || {}, muted = true }) => {
   const handleMouseOverPlay = () => {
-    videoRef.current.play()
+    if (!!videoRef) {
+      videoRef.current.play()
+    }
   }
 
   const handleMouseOutPlay = () => {
-    videoRef.current.pause()
-    videoRef.current.currentTime = 0
+    if (!!videoRef) {
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+    }
   }
 
   const cardContainerClass = classnames(style.cardContainer, {
@@ -27,7 +32,8 @@ const SingleVideoCard = ({ video, options = options || {}, muted = true }) => {
     socialIconSelector(video.socialIcon),
     style.iconClass
   )
-  const videoRef = React.createRef()
+  const videoRef =
+    video && video.videoUrl && !isEmpty(video.videoUrl) && React.createRef()
   return (
     <div
       key={video.index}
@@ -40,7 +46,7 @@ const SingleVideoCard = ({ video, options = options || {}, muted = true }) => {
           className={style.blurredImage}
           style={{ backgroundImage: `url(${video.poster})` }}
         />
-        {video.videoUrl && (
+        {video && video.videoUrl && !isEmpty(video.videoUrl) && (
           <div className={style.videoInner}>
             <video
               key={video.videoUrl}

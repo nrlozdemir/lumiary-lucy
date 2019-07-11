@@ -17,15 +17,24 @@ class Performance extends React.Component {
     super(props)
     this.state = {
       slider: [0, 100],
+      params: null,
     }
     this.updateSlider = _.debounce(this.updateSlider, 250)
   }
 
   updateSlider(val) {
-    this.props.updateAudiencePerformance({ min: val[0], max: val[1] })
+    const { params } = this.state
+    this.props.getAudiencePerformanceData({
+      min: val[0],
+      max: val[1],
+      ...params,
+    })
   }
 
   callBack = (data, moduleKey) => {
+    this.setState({
+      params: data,
+    })
     this.props.getAudiencePerformanceData(data)
   }
 
@@ -36,7 +45,8 @@ class Performance extends React.Component {
 
     const {
       audiencePerformanceData: {
-        data: { bubblesBoth, bubblesFemales, bubblesMales },
+        data: { both, female, male },
+        data,
         loading,
         error,
       },
@@ -50,7 +60,9 @@ class Performance extends React.Component {
         height: '10px',
         borderStyle: 'solid',
         borderWidth: '20px 10px 0 10px',
-        borderColor: `${colors.textColor} 	transparent transparent transparent`,
+        borderColor: `${
+          colors.textColor
+        }   transparent transparent transparent`,
         borderRadius: 0,
         backgroundColor: 'transparent',
         boxShadow: 'none',
@@ -64,7 +76,9 @@ class Performance extends React.Component {
         height: '10px',
         borderStyle: 'solid',
         borderWidth: '20px 10px 0 10px',
-        borderColor: `${colors.textColor} 	transparent transparent transparent`,
+        borderColor: `${
+          colors.textColor
+        }   transparent transparent transparent`,
         backgroundColor: 'transparent',
         borderRadius: 0,
         boxShadow: 'none',
@@ -98,6 +112,15 @@ class Performance extends React.Component {
     }
     return (
       <Module
+        isEmpty={
+          !loading &&
+          (_.isEmpty(data) ||
+            (!!data &&
+              Object.values(data).every((valArr) =>
+                valArr.every((v) => !v.toolTip)
+              )))
+        }
+        loading={loading}
         moduleKey={'Audience/Performance'}
         title="Performance By Age, Gender and Date"
         infoText={infoText}
@@ -121,7 +144,7 @@ class Performance extends React.Component {
           },
         ]}
       >
-        {bubblesMales && bubblesFemales && bubblesBoth && (
+        {male && female && both && (
           <div
             className={classnames(
               style.audienceContainer,
@@ -142,7 +165,7 @@ class Performance extends React.Component {
                       visualHeight: 50,
                     }}
                   >
-                    {bubblesMales.map((bubble, i) => (
+                    {male.map((bubble, i) => (
                       <Bubble
                         key={'bubble-' + i}
                         radius={(parseInt(bubble.toolTip) / 100) * 0.0015 + 10}
@@ -191,7 +214,7 @@ class Performance extends React.Component {
                       visualHeight: 50,
                     }}
                   >
-                    {bubblesFemales.map((bubble, i) => (
+                    {female.map((bubble, i) => (
                       <Bubble
                         key={'bubble-' + i}
                         radius={(parseInt(bubble.toolTip) / 100) * 0.0015 + 10}
@@ -240,7 +263,7 @@ class Performance extends React.Component {
                       visualHeight: 50,
                     }}
                   >
-                    {bubblesBoth.map((bubble, i) => (
+                    {both.map((bubble, i) => (
                       <Bubble
                         key={'bubble-' + i}
                         radius={(parseInt(bubble.toolTip) / 100) * 0.0015 + 10}
@@ -284,13 +307,13 @@ class Performance extends React.Component {
             >
               <style>
                 {`
-									.customTooltip {
-										color: ${colors.textColor};
-									}
-									.customTooltip .rc-slider-tooltip-inner {
-										color: ${colors.textColor};
-									}
-								`}
+                  .customTooltip {
+                    color: ${colors.textColor};
+                  }
+                  .customTooltip .rc-slider-tooltip-inner {
+                    color: ${colors.textColor};
+                  }
+                `}
               </style>
               <RangeWithBadge
                 customClass={'customRangeSlider'}

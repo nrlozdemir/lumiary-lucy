@@ -5,7 +5,7 @@ import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 import { selectAuthProfile } from 'Reducers/auth'
 
-import { getDataFromApi } from 'Utils/api'
+import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import {
   radarChartCalculate,
@@ -20,67 +20,79 @@ function getAudienceDataApi() {
   return axios.get('/').then((res) => audienceMockData)
 }
 
-function updateAudiencePerformanceApi({ min, max }) {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => updateAudiencePer(min, max))
-}
-
 function* getAudienceContentVitalityScoreData({ payload = {} }) {
   const { platform, metric, dateRange } = payload
 
   try {
-    //const response = yield call(getDataFromApi)
+    const { brand } = yield select(selectAuthProfile)
 
-    const response = {
-      male: {
-        averageCvScore: '38.8',
-        videoPercents: [2, 9, 5, 11, 5, 0, 11, 6, 2, 5, 0],
-      },
-      female: {
-        averageCvScore: '58.8',
-        videoPercents: [0, 5, 4, 14, 1, 2, 1, 15, 2, 0, 0],
-      },
-      difference: {
-        averageCvScore: '28.8',
-        videoPercents: [9, 12, 8, 17, 15, 20, 11, 6, 22, 2, 0],
-      },
-    }
-
-    yield put(
-      actions.getAudienceContentVitalityScoreDataSuccess(
-        percentageManipulation(response)
-      )
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/cvscores`, {
+        metric,
+        platform,
+        daterange: dateRange,
+      }),
+      'GET'
     )
+
+    if (!!response && !!Object.keys(response).length) {
+      yield put(
+        actions.getAudienceContentVitalityScoreDataSuccess(
+          percentageManipulation(response)
+        )
+      )
+    } else {
+      throw new Error('Audience/getAudienceContentVitalityScoreData Error')
+    }
   } catch (err) {
     yield put(actions.getAudienceContentVitalityScoreDataError(err))
   }
 }
 
-function* getAudiencePerformanceData() {
+function* getAudiencePerformanceData({ payload = {} }) {
+  const { platform, metric, property, dateRange, min = 0, max = 100 } = payload
+  
   try {
-    const payload = yield call(getAudienceDataApi)
-    const shuffleData = payload.performance
-    shuffleData.bubblesBoth = _.shuffle(shuffleData.bubblesBoth)
-    shuffleData.bubblesFemales = _.shuffle(shuffleData.bubblesFemales)
-    shuffleData.bubblesMales = _.shuffle(shuffleData.bubblesMales)
+    //const response = yield call(getDataFromApi)
+
+    const response = {
+      male: [
+        { name: 'Slow', value: 881000 },
+        { name: 'Medium', value: 438000 },
+        { name: 'Slowest', value: 828000 },
+        { name: 'Fastest', value: 679000 },
+      ],
+      female: [
+        { name: 'Slow', value: 881000 },
+        { name: 'Medium', value: 438000 },
+        { name: 'Slowest', value: 828000 },
+        { name: 'Fastest', value: 679000 },
+      ],
+      both: [
+        { name: 'Slow', value: 881000 },
+        { name: 'Medium', value: 438000 },
+        { name: 'Slowest', value: 828000 },
+        { name: 'Fastest', value: 679000 },
+      ],
+    }
+
+    const updatedResponse = Object.keys(response).reduce((newData, key) => {
+      newData[key] = response[key].map((v) => ({
+        visual: v.name,
+        toolTip: v.value,
+      }))
+      return newData
+    }, {})
+
     yield put(
       actions.getAudiencePerformanceDataSuccess(
-        percentageManipulation(shuffleData)
+        percentageManipulation(updatedResponse)
       )
     )
   } catch (err) {
     yield put(actions.getAudiencePerformanceDataError(err))
-  }
-}
-
-function* updateAudiencePerformance({ payload: { min, max } }) {
-  try {
-    const payload = yield call(updateAudiencePerformanceApi, { min, max })
-    yield put(
-      actions.updateAudiencePerformanceSuccess(percentageManipulation(payload))
-    )
-  } catch (err) {
-    yield put(actions.updateAudiencePerformanceError(err))
   }
 }
 
@@ -219,7 +231,6 @@ export default [
     getAudienceContentVitalityScoreData
   ),
   takeLatest(types.GET_AUDIENCE_PERFORMANCE_DATA, getAudiencePerformanceData),
-  takeLatest(types.UPDATE_AUDIENCE_PERFORMANCE, updateAudiencePerformance),
   takeLatest(types.GET_AUDIENCE_AGE_SLIDER_DATA, getAudienceAgeSliderData),
   takeLatest(types.GET_AUDIENCE_GENDER_DATA, getAudienceGenderData),
   takeLatest(

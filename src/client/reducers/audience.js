@@ -11,10 +11,6 @@ export const types = {
   GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS: 'Audience/GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS',
   GET_AUDIENCE_PERFORMANCE_DATA_ERROR: 'Audience/GET_AUDIENCE_PERFORMANCE_DATA_ERROR',
 
-  UPDATE_AUDIENCE_PERFORMANCE: 'Audience/UPDATE_AUDIENCE_PERFORMANCE',
-  UPDATE_AUDIENCE_PERFORMANCE_SUCCESS: 'Audience/UPDATE_AUDIENCE_PERFORMANCE_SUCCESS',
-  UPDATE_AUDIENCE_PERFORMANCE_ERROR: 'Audience/UPDATE_AUDIENCE_PERFORMANCE_ERROR',
-
   GET_AUDIENCE_AGE_SLIDER_DATA: 'Audience/GET_AUDIENCE_AGE_SLIDER_DATA',
   GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS: 'Audience/GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS',
   GET_AUDIENCE_AGE_SLIDER_DATA_ERROR: 'Audience/GET_AUDIENCE_AGE_SLIDER_DATA_ERROR',
@@ -50,8 +46,9 @@ export const actions = {
     error,
   }),
 
-  getAudiencePerformanceData: () => ({
+  getAudiencePerformanceData: (payload) => ({
     type: types.GET_AUDIENCE_PERFORMANCE_DATA,
+    payload
   }),
   getAudiencePerformanceDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS,
@@ -59,19 +56,6 @@ export const actions = {
   }),
   getAudiencePerformanceDataError: (error) => ({
     type: types.GET_AUDIENCE_PERFORMANCE_DATA_ERROR,
-    error,
-  }),
-
-  updateAudiencePerformance: (payload) => ({
-    type: types.UPDATE_AUDIENCE_PERFORMANCE,
-    payload,
-  }),
-  updateAudiencePerformanceSuccess: (payload) => ({
-    type: types.UPDATE_AUDIENCE_PERFORMANCE_SUCCESS,
-    payload,
-  }),
-  updateAudiencePerformanceError: (error) => ({
-    type: types.UPDATE_AUDIENCE_PERFORMANCE_ERROR,
     error,
   }),
 
@@ -237,20 +221,6 @@ const audienceReducer = (state = initialState, action) => {
           ['audiencePerformanceData', 'loading'],
           fromJS(false)
         )
-
-    case types.UPDATE_AUDIENCE_PERFORMANCE_SUCCESS:
-      return state
-        .mergeIn(
-          ['audiencePerformanceData', 'data'],
-          fromJS(action.payload)
-        )
-
-    case types.UPDATE_AUDIENCE_PERFORMANCE_ERROR:
-      return state
-        .setIn(
-          ['audiencePerformanceData', 'error'],
-          fromJS(action.error)
-      )
 
     case types.GET_AUDIENCE_AGE_SLIDER_DATA:
       return state
