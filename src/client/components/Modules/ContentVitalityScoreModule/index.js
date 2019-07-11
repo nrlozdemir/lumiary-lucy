@@ -119,7 +119,7 @@ const ContentVitalityScoreModule = ({
           filters={filters}
           legend={legend}
           loading={loading}
-          isEmpty={isDataSetEmpty(loading ? {} : newDatasets.datasets)}
+          isEmpty={!loading && isDataSetEmpty(newDatasets)}
           infoText={infoText}
         >
           <div
@@ -178,12 +178,16 @@ const ContentVitalityScoreModule = ({
                   {formattedData.leftDataset &&
                     `${formattedData.leftDataset.name}`}
                 </div>
-                <div
-                  className={style.divider}
-                  style={{
-                    background: colors.moduleBorder,
-                  }}
-                />
+                {!!formattedData.leftDataset &&
+                  !!formattedData.leftDataset.averageCvScore &&
+                  formattedData.leftDataset.averageCvScore !== 'NaN' && (
+                    <div
+                      className={style.divider}
+                      style={{
+                        background: colors.moduleBorder,
+                      }}
+                    />
+                  )}
                 {formattedData.leftDataset && (
                   <PercentageBarGraph
                     key={Math.random()}
@@ -222,12 +226,16 @@ const ContentVitalityScoreModule = ({
                   {formattedData.middleDataset &&
                     `${formattedData.middleDataset.name}`}
                 </div>
-                <div
-                  className={style.divider}
-                  style={{
-                    background: colors.moduleBorder,
-                  }}
-                />
+                {!!formattedData.middleDataset &&
+                  !!formattedData.middleDataset.averageCvScore &&
+                  formattedData.middleDataset.averageCvScore !== 'NaN' && (
+                    <div
+                      className={style.divider}
+                      style={{
+                        background: colors.moduleBorder,
+                      }}
+                    />
+                  )}
                 {formattedData.middleDataset && (
                   <PercentageBarGraph
                     key={Math.random()}
