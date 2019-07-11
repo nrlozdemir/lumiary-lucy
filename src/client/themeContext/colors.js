@@ -181,6 +181,10 @@ const dark = {
 
   // video hover progress bar
   videoProgressBar: '#fff',
+
+  // Asset Layer
+  assetLayerBorderColor: '#545b79',
+  assetLayerShadowColor: 'rgba(0, 0, 0, 0.5)',
 }
 
 const light = {
@@ -366,6 +370,10 @@ const light = {
 
   // video hover progress bar
   videoProgressBar: '#2fd7c4',
+
+  // Asset Layer
+  assetLayerBorderColor: '#c6c9d7',
+  assetLayerShadowColor: '#bebebe',
 }
 
 const themes = {

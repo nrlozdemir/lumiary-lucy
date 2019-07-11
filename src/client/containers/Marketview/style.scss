@@ -201,6 +201,13 @@
   height: 110px;
   margin: 0px auto;
   overflow: hidden;
+  &.dark{
+    box-shadow: 0 4px 16px 0 $dark_videoCardShadow;
+  }
+
+  &.light{
+    box-shadow: 0 4px 16px 0 $light_videoCardShadow;
+  }
 }
 
 .card {
