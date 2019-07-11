@@ -115,6 +115,10 @@ export class Main extends React.PureComponent {
     const selectedPlatform = match.params.platform || 'facebook'
     const selectedMetric = match.params.metric || 'views'
     const selectedDateRange = match.params.dateRange || 'week'
+    const dummyData =
+      differencesValues.duration == 0 &&
+      platformsValues &&
+      platformsValues[1].infos.length == 1
 
     return (
       <ThemeContext.Consumer>
@@ -216,7 +220,9 @@ export class Main extends React.PureComponent {
                   <RouterLoading />
                 ) : (
                   <div
-                    className={style.content}
+                    className={cx(style.content, {
+                      [style.bothColumnsOpacity]: dummyData === true,
+                    })}
                     // style={{ background: colors.bodyBackground }}
                   >
                     {platformsValues &&
@@ -272,27 +278,30 @@ export class Main extends React.PureComponent {
                                     />
                                   </div>
                                   <div className={style.percentageWrapper}>
-                                    <PercentageBarGraph
-                                      key={Math.random()}
-                                      percentage={cvScore}
-                                      width={80}
-                                      height={20}
-                                      barWidth={2}
-                                      barSpaceWidth={1}
-                                      disableLabels
-                                      color={
-                                        colors.themeType === 'dark'
-                                          ? 'white'
-                                          : 'darkgrey'
-                                      }
-                                    />
+                                    {cvScore && parseInt(cvScore) > 0 && (
+                                      <PercentageBarGraph
+                                        key={Math.random()}
+                                        percentage={cvScore}
+                                        width={80}
+                                        height={20}
+                                        barWidth={2}
+                                        barSpaceWidth={1}
+                                        disableLabels
+                                        color={
+                                          colors.themeType === 'dark'
+                                            ? 'white'
+                                            : 'darkgrey'
+                                        }
+                                      />
+                                    )}
                                   </div>
                                 </AssetLayer>
                               </div>
                               {/* PROPERTY VALUES */}
                               <div
                                 className={cx(style.items, {
-                                  [style.itemsHasOpacity]: i === 0,
+                                  [style.itemsHasOpacity]:
+                                    i === 0 && dummyData !== true,
                                 })}
                               >
                                 {el.infos.map((item, index) => {
