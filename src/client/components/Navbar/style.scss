@@ -18,7 +18,8 @@
 .backTo {
   flex: 3;
   font-size: 14px;
-  font-family: $font-family-ClanOT;
+  font-family: $font-family-ClanOTBold;
+  font-weight: 700;
 
   a {
     // color: $color-white;
@@ -62,6 +63,7 @@
     color: $color-white;
     font-size: 14px;
     font-family: $font-family-ClanOTBold;
+    font-weight: 700;
 
     // &:hover {
     //   font-family: $font-family-ClanOTBold;

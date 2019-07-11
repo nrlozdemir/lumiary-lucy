@@ -1,13 +1,15 @@
 .mainCardContainer {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 8px;
   margin-top: 72px;
+  .mainCardContainerInner {
+    margin: 0 -12px;
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .marketViewCard {
   position: relative;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+  // box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   background-color: $color-dark-grey-blue;
   padding: 40px 20px 0;
   font-family: $font-family-ClanOTNews;
