@@ -13,10 +13,7 @@ const DAYS = [
   'saturday',
 ]
 
-const containerClassnames = classnames(
-  'col-12-gutter-20 mt-48',
-  style.container
-)
+const containerClassnames = classnames('mt-48', style.container)
 
 export default ({ activeDay, onDayChange = () => {} }) => (
   <ThemeContext.Consumer>
@@ -24,16 +21,16 @@ export default ({ activeDay, onDayChange = () => {} }) => (
       <React.Fragment>
         <style>
           {`.${style.dayButton}:hover{
-							background-color: ${colors.duskBackground};
-							color: ${colors.textColor};
+							background-color: ${colors.duskBackground} !important;
+							color: ${colors.textColor} !important;
 						};
 						.${style.selected}{
-							background-color: ${colors.duskBackground};
-							color: ${colors.textColor};
+							background-color: ${colors.duskBackground} !important;
+							color: ${colors.textColor} !important;
 						};
 					`}
         </style>
-        <div className="grid-container">
+        <div className="grid-container col-12">
           <div className={containerClassnames}>
             {DAYS.map((day, i) => (
               <button

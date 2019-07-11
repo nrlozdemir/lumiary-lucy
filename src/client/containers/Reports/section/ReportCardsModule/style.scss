@@ -1,5 +1,6 @@
 .reportsCardContainer {
   display: flex;
+  margin: 0 -12px;
 
   .reportsCard {
     width: 0;
@@ -12,13 +13,6 @@
     margin: 0 12px;
     cursor: pointer;
     position: relative;
-
-    &:first-child {
-      margin-left: 0;
-    }
-    &:last-child {
-      margin-right: 0;
-    }
 
     .cardIcons {
       display: flex;

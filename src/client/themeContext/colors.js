@@ -92,6 +92,7 @@ const dark = {
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#545b79',
   inputColor: '#545B79',
+  inputDropdownColor: '#545b79',
   inputActiveColor: '#fff',
   inputOptionBackground: '#545B79',
   inputOptionFocusBackground: '#545B79',
@@ -184,6 +185,9 @@ const dark = {
 
   // chart zero line
   chartZeroLineColor: '#505050',
+  // Asset Layer
+  assetLayerBorderColor: '#545b79',
+  assetLayerShadowColor: 'rgba(0, 0, 0, 0.5)',
 }
 
 const light = {
@@ -279,6 +283,7 @@ const light = {
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#c6c9d7',
   inputColor: '#000',
+  inputDropdownColor: '#ffffff',
   inputActiveColor: '#505050',
   inputOptionBackground: '#ffffff',
   inputOptionFocusBackground: '#f3f6f9',
@@ -372,6 +377,9 @@ const light = {
 
   // chart zero line
   chartZeroLineColor: '#505050',
+  // Asset Layer
+  assetLayerBorderColor: '#c6c9d7',
+  assetLayerShadowColor: '#bebebe',
 }
 
 const themes = {

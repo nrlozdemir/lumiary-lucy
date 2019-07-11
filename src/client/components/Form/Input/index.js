@@ -14,7 +14,7 @@ const Input = ({ error, value, label, placeholder, customClass, input }) => {
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => {
-        console.log(colors)
+        // console.log(colors)
         const cx = classnames(
           style.input,
           {
