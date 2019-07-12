@@ -23,6 +23,21 @@
 }
 
 .disabled {
-  opacity: .5;
+  opacity: 0.5;
   cursor: initial;
+}
+
+video {
+  width: 100%;
+  height: 100%;
+}
+
+.videoEmpty {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  height: 100%;
+  width: 100%;
 }

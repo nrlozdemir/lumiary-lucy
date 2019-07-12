@@ -56,7 +56,6 @@ class GenderSection extends React.Component {
             type: 'dateRange',
             selectKey: 'AG-wds',
             placeHolder: 'Date',
-            defaultValue: 'month',
           },
         ]}
         legend={
