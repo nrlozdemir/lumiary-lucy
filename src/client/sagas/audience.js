@@ -127,14 +127,27 @@ function* getAudienceAgeSliderData({ payload = {} }) {
   }
 }
 
-function* getAudienceGenderData() {
+function* getAudienceGenderData({ payload = {} }) {
+  const { property, metric, dateRange } = payload
+
   try {
-    const payload = yield call(getAudienceDataApi)
-    const shuffleData = payload.genderData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/properties`, {
+        metric,
+        property,
+        daterange: dateRange,
+      }),
+      'GET'
+    )
+
     yield put(
-      actions.getAudienceGenderDataSuccess(percentageManipulation(shuffleData))
+      actions.getAudienceGenderDataSuccess(
+        percentageManipulation(response)
+      )
     )
   } catch (err) {
     yield put(actions.getAudienceGenderDataError(err))

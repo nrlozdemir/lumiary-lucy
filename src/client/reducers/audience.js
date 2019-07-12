@@ -86,8 +86,9 @@ export const actions = {
     error,
   }),
 
-  getAudienceGenderData: () => ({
+  getAudienceGenderData: (payload) => ({
     type: types.GET_AUDIENCE_GENDER_DATA,
+    payload
   }),
   getAudienceGenderDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_GENDER_DATA_SUCCESS,
@@ -154,7 +155,7 @@ export const initialState = fromJS({
     error: null,
   },
   audienceGenderData: {
-    data: [],
+    data: {},
     loading: false,
     error: null,
   },
