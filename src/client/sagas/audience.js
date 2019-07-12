@@ -107,7 +107,7 @@ function* getAudienceAgeSliderData({ payload = {} }) {
       buildApiUrl(`/audience/${brand.uuid}/popular`, {
         metric,
         ages,
-        daterange: '3months',
+        daterange: dateRange,
       }),
       'GET'
     )

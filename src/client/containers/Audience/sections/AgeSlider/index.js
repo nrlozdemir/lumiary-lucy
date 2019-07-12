@@ -6,7 +6,7 @@ import { actions, makeSelectAudienceAgeSlider } from 'Reducers/audience'
 import Module from 'Components/Module'
 import AudienceSlider from 'Components/Sliders/Audience'
 import style from 'Containers/Audience/style.scss'
-import { isEqual } from 'lodash'
+import { isEqual, find, debounce } from 'lodash'
 
 // 12 - 65
 const defaultAgeRange = Array.from(Array(54).keys(), (n) => n + 12).map(
@@ -24,6 +24,8 @@ class AgeSlider extends React.PureComponent {
       params: null,
       videosArr: defaultAgeRange,
     }
+
+    this.onChangeSlider = debounce(this.onChangeSlider, 100)
   }
 
   componentDidUpdate(prevProps, prevState) {
@@ -69,9 +71,14 @@ class AgeSlider extends React.PureComponent {
 
   onChangeSlider = ({ age }) => {
     const { getAudienceAgeSliderData } = this.props
-    const { params } = this.state
+    const { params, videosArr } = this.state
 
-    const agesToFetch = age > 1 ? [age - 1, age, age + 1] : [age, age + 1]
+    let agesToFetch = age > 1 ? [age - 1, age, age + 1] : [age, age + 1]
+
+    agesToFetch = agesToFetch.filter((a) => {
+      const storedAge = find(videosArr, ['age', a])
+      return !!storedAge && !storedAge.image
+    })
 
     this.setState({ prevAges: agesToFetch })
 

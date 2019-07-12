@@ -9,6 +9,7 @@ import Swiper from 'react-id-swiper'
 import SwiperJS from 'swiper/dist/js/swiper.js'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import RouterLoading from 'Components/RouterLoading'
+import { floatCvScore } from 'Utils'
 
 class AudienceSlider extends React.Component {
   constructor(props) {
@@ -146,7 +147,7 @@ class AudienceSlider extends React.Component {
                           title={item.title}
                           width={634}
                           height="100%"
-                          rightValue={item.cvScore}
+                          rightValue={floatCvScore(item.cvScore) || 0.0}
                         >
                           {!!item.image ? (
                             <video
@@ -155,7 +156,9 @@ class AudienceSlider extends React.Component {
                               controls
                             />
                           ) : (
-                            <div className={style.videoEmpty}>No Data Available</div>
+                            <div className={style.videoEmpty}>
+                              No Data Available
+                            </div>
                           )}
                           <PercentageBarGraph
                             key={Math.random()}
