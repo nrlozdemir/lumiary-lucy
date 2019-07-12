@@ -29,7 +29,7 @@ class AgeSlider extends React.Component {
     const {
       audienceAgeSliderData: { data, loading, error },
     } = this.props
-
+    
     return (
       <Module
         moduleKey={'Audience/AgeSlider'}

@@ -53,44 +53,41 @@ function* getAudienceContentVitalityScoreData({ payload = {} }) {
 
 function* getAudiencePerformanceData({ payload = {} }) {
   const { platform, metric, property, dateRange, min = 0, max = 100 } = payload
-  
+
   try {
-    //const response = yield call(getDataFromApi)
+    const { brand } = yield select(selectAuthProfile)
 
-    const response = {
-      male: [
-        { name: 'Slow', value: 881000 },
-        { name: 'Medium', value: 438000 },
-        { name: 'Slowest', value: 828000 },
-        { name: 'Fastest', value: 679000 },
-      ],
-      female: [
-        { name: 'Slow', value: 881000 },
-        { name: 'Medium', value: 438000 },
-        { name: 'Slowest', value: 828000 },
-        { name: 'Fastest', value: 679000 },
-      ],
-      both: [
-        { name: 'Slow', value: 881000 },
-        { name: 'Medium', value: 438000 },
-        { name: 'Slowest', value: 828000 },
-        { name: 'Fastest', value: 679000 },
-      ],
-    }
-
-    const updatedResponse = Object.keys(response).reduce((newData, key) => {
-      newData[key] = response[key].map((v) => ({
-        visual: v.name,
-        toolTip: v.value,
-      }))
-      return newData
-    }, {})
-
-    yield put(
-      actions.getAudiencePerformanceDataSuccess(
-        percentageManipulation(updatedResponse)
-      )
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/performance`, {
+        metric,
+        platform,
+        property,
+        ageMin: min,
+        ageMax: max,
+        daterange: dateRange,
+      }),
+      'GET'
     )
+
+    if (!!response) {
+      const updatedResponse = Object.keys(response).reduce((newData, key) => {
+        newData[key] = Object.keys(response[key]).map((v) => ({
+          visual: v,
+          toolTip: response[key][v],
+        }))
+        return newData
+      }, {})
+
+      yield put(
+        actions.getAudiencePerformanceDataSuccess(
+          percentageManipulation(updatedResponse)
+        )
+      )
+    } else {
+      throw new Error('Audience/getAudiencePerformanceData Error')
+    }
   } catch (err) {
     yield put(actions.getAudiencePerformanceDataError(err))
   }
