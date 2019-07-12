@@ -47,7 +47,6 @@ class ChangeOverTime extends React.Component {
             type: 'dateRange',
             selectKey: 'ACOT-wds',
             placeHolder: 'Date',
-            defaultValue: 'month',
           },
         ]}
         legend={
