@@ -19,6 +19,8 @@ const RadarChartModule = ({
   rightTitle,
   loading = false,
   infoText,
+  width = 430,
+  height = 430,
 }) => {
   let checkData =
     !data || !data.length || (data.length && (!data[0] || !data[1]))
@@ -65,7 +67,9 @@ const RadarChartModule = ({
                 {leftIsEmpty && (
                   <div className={style.emptyData}>No Data Available</div>
                 )}
-                <div style={{ opacity: leftOpacity }}>
+                <div
+                  style={{ opacity: leftOpacity, width: width, height: height }}
+                >
                   <RadarChart data={checkData[0].data} />
                 </div>
               </div>
@@ -73,7 +77,13 @@ const RadarChartModule = ({
                 {rightIsEmpty && (
                   <div className={style.emptyData}>No Data Available</div>
                 )}
-                <div style={{ opacity: rightOpacity }}>
+                <div
+                  style={{
+                    opacity: rightOpacity,
+                    width: width,
+                    height: height,
+                  }}
+                >
                   <RadarChart data={checkData[1].data} />
                 </div>
               </div>
