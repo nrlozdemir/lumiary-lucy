@@ -97,7 +97,7 @@ class AgeSlider extends React.PureComponent {
       audienceAgeSliderData: { data, loading, error },
       infoText,
     } = this.props
-
+    
     return (
       <Module
         loading={loading}

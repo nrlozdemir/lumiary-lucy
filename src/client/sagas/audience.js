@@ -56,7 +56,7 @@ function* getAudiencePerformanceData({ payload = {} }) {
 
   try {
     const { brand } = yield select(selectAuthProfile)
-
+    
     const response = yield call(
       getDataFromApi,
       undefined,
