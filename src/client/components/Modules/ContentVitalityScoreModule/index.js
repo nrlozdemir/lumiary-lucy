@@ -27,7 +27,6 @@ const ContentVitalityScoreModule = ({
   options,
   loading = false,
   chartYAxisMax = 100,
-  infoText,
   dataKeys: {
     leftLabel,
     rightLabel,
@@ -127,7 +126,6 @@ const ContentVitalityScoreModule = ({
           legend={legend}
           loading={loading}
           isEmpty={!loading && isDataSetEmpty(newDatasets)}
-          infoText={infoText}
         >
           <div
             className="col-12-no-gutters"

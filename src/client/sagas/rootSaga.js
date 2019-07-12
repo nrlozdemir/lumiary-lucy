@@ -1,4 +1,7 @@
-import { all } from 'redux-saga/effects'
+import { call, all, take, actionChannel } from 'redux-saga/effects'
+
+import { types as globalTypes } from 'Reducers/global'
+import global from './global'
 
 import library from './library'
 import libraryDetail from './libraryDetail'
@@ -22,4 +25,17 @@ export default function* rootSaga() {
     ...generatedReport,
     ...audience,
   ])
+
+  // Quene for all section explanations
+  while (true) {
+    const requestChan = yield actionChannel(
+      globalTypes.GET_SECTION_EXPLANATIONS_REQUEST
+    )
+    let resetChannel = false
+
+    while (!resetChannel) {
+      const action = yield take(requestChan)
+      resetChannel = yield call(global.getSectionExplanations, action)
+    }
+  }
 }

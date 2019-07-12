@@ -19,20 +19,19 @@ const BarChartModule = ({
   moduleKey,
   isEmpty,
   loading = false,
-  infoText
 }) => {
   const chartTickOptions = {
     callback(value) {
       if (value >= 1e9) {
-        return (value / 1e9).toFixed(0).replace(/\.0$/, '') + 'g';
+        return (value / 1e9).toFixed(0).replace(/\.0$/, '') + 'g'
       }
       if (value >= 1e6) {
-          return (value / 1e6).toFixed(0).replace(/\.0$/, '') + 'm';
+        return (value / 1e6).toFixed(0).replace(/\.0$/, '') + 'm'
       }
       if (value >= 1e3) {
-          return (value / 1e3).toFixed(0).replace(/\.0$/, '') + 'k';
+        return (value / 1e3).toFixed(0).replace(/\.0$/, '') + 'k'
       }
-     return value;
+      return value
     },
     ...tickOptions,
   }
@@ -45,7 +44,6 @@ const BarChartModule = ({
       action={action}
       references={references}
       isEmpty={isDataSetEmpty(barData)}
-      infoText={infoText}
       legend={
         titleLabels && (
           <div

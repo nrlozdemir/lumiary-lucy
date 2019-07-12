@@ -13,6 +13,7 @@ import Audience from './audience'
 import app from './app'
 import auth from './auth'
 import SelectFilters from './selectFilters'
+import Global from './global'
 
 const rootReducer = (history) =>
   combineReducers({
@@ -29,6 +30,7 @@ const rootReducer = (history) =>
     form: formReducer,
     Audience,
     SelectFilters,
+    Global,
   })
 
 export default rootReducer

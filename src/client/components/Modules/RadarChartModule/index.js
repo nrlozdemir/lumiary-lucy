@@ -18,7 +18,6 @@ const RadarChartModule = ({
   leftTitle,
   rightTitle,
   loading = false,
-  infoText,
 }) => {
   let checkData =
     !data || !data.length || (data.length && (!data[0] || !data[1]))
@@ -54,7 +53,6 @@ const RadarChartModule = ({
           legend={legend}
           isEmpty={isEmpty}
           loading={loading}
-          infoText={infoText}
         >
           <div
             className={style.radarChartContainer}

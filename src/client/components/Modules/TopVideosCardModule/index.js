@@ -16,7 +16,6 @@ const TopVideosCard = (props) => {
     moduleKey,
     action,
     loading = false,
-    infoText,
     xGridDisplay,
   } = props
 
@@ -29,7 +28,6 @@ const TopVideosCard = (props) => {
       action={action}
       isEmpty={isDataSetEmpty(chartData)}
       loading={loading}
-      infoText={infoText}
     >
       <div className="col-12-no-gutters">
         <StackedBarChart

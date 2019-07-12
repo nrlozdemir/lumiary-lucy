@@ -1,9 +1,10 @@
 import React from 'react'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { actions, makeSelectSelectFilters } from 'Reducers/selectFilters'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
+import { actions as globalActions, makeSelectGlobal } from 'Reducers/global'
 import _ from 'lodash'
 import cx from 'classnames'
 import style from './style.scss'
@@ -17,6 +18,18 @@ export class Module extends React.Component {
     super(props)
     this.state = {
       infoShow: false,
+    }
+  }
+
+  componentDidMount() {
+    const {
+      moduleKey,
+      global: { sections: sectionExplanations },
+      getSectionExplanationsRequest,
+    } = this.props
+
+    if (sectionExplanations && !sectionExplanations[moduleKey]) {
+      getSectionExplanationsRequest({ key: moduleKey })
     }
   }
 
@@ -47,6 +60,7 @@ export class Module extends React.Component {
 
   render() {
     const {
+      moduleKey,
       children,
       references,
       bodyClass,
@@ -54,7 +68,7 @@ export class Module extends React.Component {
       containerClass,
       loading,
       customEmptyClasses,
-      infoText,
+      global: { sections: sectionExplanations },
     } = this.props
 
     const { infoShow } = this.state
@@ -91,10 +105,14 @@ export class Module extends React.Component {
               <div className={style.moduleContainerHeader}>
                 <HeaderModule
                   {...this.props}
-                  infoText={infoText}
                   changeInfoStatus={this.changeInfoStatus}
                   infoShow={infoShow}
                   themes={colors}
+                  infoData={
+                    sectionExplanations[moduleKey]
+                      ? sectionExplanations[moduleKey].data
+                      : null
+                  }
                 />
               </div>
               <div className={moduleContainerBody}>{children}</div>
@@ -131,6 +149,7 @@ export class Module extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   selectFilters: makeSelectSelectFilters(),
+  global: makeSelectGlobal(),
 })
 
 Module.defaultProps = {
@@ -147,7 +166,12 @@ Module.propTypes = {
   customEmptyClasses: PropTypes.string,
 }
 
-export default connect(
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators(globalActions, dispatch)
+
+const withConnect = connect(
   mapStateToProps,
-  {}
-)(Module)
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(Module)

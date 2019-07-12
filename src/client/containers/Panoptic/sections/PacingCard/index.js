@@ -34,7 +34,6 @@ class PacingCard extends React.Component {
             placeHolder: 'Date',
           },
         ]}
-        infoText={`These two graphs measure specific properties for each format against engagement/platform over a certain time period. The graph on the right is an aggregate of all formats measured as a total percentage. Using the drop-downs, you can change the property being measured, engagement/platform and time range.`}
       />
     )
   }

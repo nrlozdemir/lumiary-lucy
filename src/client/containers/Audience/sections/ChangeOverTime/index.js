@@ -8,16 +8,16 @@ import LineChart from 'Components/Charts/LineChart'
 import style from 'Containers/Audience/style.scss'
 
 const SHADOW_PLUGINS = [
-	{
-		beforeDatasetDraw: function ({ctx}, {meta}) {
-			ctx.shadowBlur = 10;
-			ctx.shadowColor = meta.$filler.el._model.borderColor;
-		},
-		afterDatasetDraw: function (chart) {
-			chart.ctx.shadowBlur = 0;
-		},
-	},
-];
+  {
+    beforeDatasetDraw: function({ ctx }, { meta }) {
+      ctx.shadowBlur = 10
+      ctx.shadowColor = meta.$filler.el._model.borderColor
+    },
+    afterDatasetDraw: function(chart) {
+      chart.ctx.shadowBlur = 0
+    },
+  },
+]
 
 class ChangeOverTime extends React.Component {
   callBack = (data, moduleKey) => {
@@ -28,7 +28,6 @@ class ChangeOverTime extends React.Component {
     // const { selectViews, selectPlatforms, selectDate } = this.state;
     const {
       audienceChangeOverTimeData: { data, loading, error },
-      infoText,
     } = this.props
 
     return (
@@ -36,7 +35,6 @@ class ChangeOverTime extends React.Component {
         moduleKey={'Audience/ChangeOverTime'}
         title="Change Over Time By Property"
         action={this.callBack}
-        infoText={infoText}
         filters={[
           {
             type: 'platformEngagement',
@@ -75,8 +73,8 @@ class ChangeOverTime extends React.Component {
               height={292}
               dataSet={data}
               customLineOptions={[
-                {borderColor: '#2fd7c4'},
-                {borderColor: '#5292e5'},
+                { borderColor: '#2fd7c4' },
+                { borderColor: '#5292e5' },
               ]}
               xAxesFlatten
               yAxesAbbreviate
