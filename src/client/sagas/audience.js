@@ -56,7 +56,7 @@ function* getAudiencePerformanceData({ payload = {} }) {
 
   try {
     const { brand } = yield select(selectAuthProfile)
-    
+
     const response = yield call(
       getDataFromApi,
       undefined,
@@ -145,9 +145,7 @@ function* getAudienceGenderData({ payload = {} }) {
     )
 
     yield put(
-      actions.getAudienceGenderDataSuccess(
-        percentageManipulation(response)
-      )
+      actions.getAudienceGenderDataSuccess(percentageManipulation(response))
     )
   } catch (err) {
     yield put(actions.getAudienceGenderDataError(err))
@@ -194,15 +192,27 @@ function* getAudienceColorTemperatureData() {
   }
 }
 
-function* getAudienceChangeOverTimeData() {
+function* getAudienceChangeOverTimeData({ payload = {} }) {
+  const { property, platform, metric, dateRange } = payload
+
   try {
-    const payload = yield call(getAudienceDataApi)
-    let shuffleData = payload.lineChartData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/change`, {
+        metric,
+        property,
+        platform,
+        daterange: dateRange,
+      }),
+      'GET'
+    )
+
     yield put(
       actions.getAudienceChangeOverTimeDataSuccess(
-        percentageManipulation(shuffleData)
+        percentageManipulation(response)
       )
     )
   } catch (err) {
