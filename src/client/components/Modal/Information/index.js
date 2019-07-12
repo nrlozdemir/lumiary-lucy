@@ -71,15 +71,8 @@ const InformationModal = ({
   )
 }
 
-InformationModal.defaultProps = {
-  ariaHideApp: true,
-  title: 'Custom Modal',
-  isClosable: false,
-}
-
 InformationModal.propTypes = {
   isOpen: PropTypes.bool,
-  ariaHideApp: PropTypes.bool,
 }
 
 export default withTheme(InformationModal)
