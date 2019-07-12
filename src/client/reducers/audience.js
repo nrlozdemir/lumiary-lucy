@@ -111,8 +111,9 @@ export const actions = {
     error,
   }),
 
-  getAudienceChangeOverTimeData: () => ({
+  getAudienceChangeOverTimeData: (payload) => ({
     type: types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA,
+    payload
   }),
   getAudienceChangeOverTimeDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS,
