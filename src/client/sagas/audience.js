@@ -101,20 +101,24 @@ function* getAudienceAgeSliderData({ payload = {} }) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
-    const response = yield call(
-      getDataFromApi,
-      undefined,
-      buildApiUrl(`/audience/${brand.uuid}/popular`, {
-        metric,
-        ages,
-        daterange: dateRange,
-      }),
-      'GET'
-    )
+    if (!!ages.length) {
+      const response = yield call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl(`/audience/${brand.uuid}/popular`, {
+          metric,
+          ages,
+          daterange: dateRange,
+        }),
+        'GET'
+      )
 
-    yield put(
-      actions.getAudienceAgeSliderDataSuccess(percentageManipulation(response))
-    )
+      yield put(
+        actions.getAudienceAgeSliderDataSuccess(
+          percentageManipulation(response)
+        )
+      )
+    }
   } catch (err) {
     yield put(
       actions.getAudienceAgeSliderDataSuccess(percentageManipulation(fallBack))

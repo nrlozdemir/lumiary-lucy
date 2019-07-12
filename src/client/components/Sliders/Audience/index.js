@@ -144,7 +144,7 @@ class AudienceSlider extends React.Component {
                           containerNoBorder
                           leftSocialIcon={item.socialMedia}
                           centerText={item.secondTitle}
-                          title={item.title}
+                          title={item.title && item.title.substring(0, 28)}
                           width={634}
                           height="100%"
                           rightValue={floatCvScore(item.cvScore) || 0.0}
