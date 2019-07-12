@@ -31,8 +31,8 @@ class ContentVitalityScore extends React.Component {
 
     const { chartYAxisMax, chartYAxisStepSize } = getCVScoreChartAttributes(
       data
-    )
-
+    ) 
+    
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
