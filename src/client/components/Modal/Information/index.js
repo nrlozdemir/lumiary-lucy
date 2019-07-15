@@ -57,7 +57,11 @@ const InformationModal = ({
                 />
               </div>
               <div className={style.image}>
-                <img src={item.image} />
+                {item.type === 'image' ? (
+                  <img src={item.asset} />
+                ) : (
+                  <video src={item.asset} controls />
+                )}
               </div>
               <div
                 className={style.content}
