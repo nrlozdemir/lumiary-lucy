@@ -2,43 +2,54 @@ import { fromJS } from 'immutable'
 import { createSelector } from 'reselect'
 
 export const types = {
-
-  GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA: 'Audience/GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA',
-  GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS: 'Audience/GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS',
-  GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR: 'Audience/GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR',
+  GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA:
+    'Audience/GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA',
+  GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS:
+    'Audience/GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS',
+  GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR:
+    'Audience/GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR',
 
   GET_AUDIENCE_PERFORMANCE_DATA: 'Audience/GET_AUDIENCE_PERFORMANCE_DATA',
-  GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS: 'Audience/GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS',
-  GET_AUDIENCE_PERFORMANCE_DATA_ERROR: 'Audience/GET_AUDIENCE_PERFORMANCE_DATA_ERROR',
-
-  UPDATE_AUDIENCE_PERFORMANCE: 'Audience/UPDATE_AUDIENCE_PERFORMANCE',
-  UPDATE_AUDIENCE_PERFORMANCE_SUCCESS: 'Audience/UPDATE_AUDIENCE_PERFORMANCE_SUCCESS',
-  UPDATE_AUDIENCE_PERFORMANCE_ERROR: 'Audience/UPDATE_AUDIENCE_PERFORMANCE_ERROR',
+  GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS:
+    'Audience/GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS',
+  GET_AUDIENCE_PERFORMANCE_DATA_ERROR:
+    'Audience/GET_AUDIENCE_PERFORMANCE_DATA_ERROR',
 
   GET_AUDIENCE_AGE_SLIDER_DATA: 'Audience/GET_AUDIENCE_AGE_SLIDER_DATA',
-  GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS: 'Audience/GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS',
-  GET_AUDIENCE_AGE_SLIDER_DATA_ERROR: 'Audience/GET_AUDIENCE_AGE_SLIDER_DATA_ERROR',
+  GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS:
+    'Audience/GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS',
+  GET_AUDIENCE_AGE_SLIDER_DATA_ERROR:
+    'Audience/GET_AUDIENCE_AGE_SLIDER_DATA_ERROR',
 
   GET_AUDIENCE_GENDER_DATA: 'Audience/GET_AUDIENCE_GENDER_DATA',
   GET_AUDIENCE_GENDER_DATA_SUCCESS: 'Audience/GET_AUDIENCE_GENDER_DATA_SUCCESS',
   GET_AUDIENCE_GENDER_DATA_ERROR: 'Audience/GET_AUDIENCE_GENDER_DATA_ERROR',
 
-  GET_AUDIENCE_COLOR_TEMPERATURE_DATA: 'Audience/GET_AUDIENCE_COLOR_TEMPERATURE_DATA',
-  GET_AUDIENCE_COLOR_TEMPERATURE_DATA_SUCCESS: 'Audience/GET_AUDIENCE_COLOR_TEMPERATURE_DATA_SUCCESS',
-  GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR: 'Audience/GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR',
+  GET_AUDIENCE_COLOR_TEMPERATURE_DATA:
+    'Audience/GET_AUDIENCE_COLOR_TEMPERATURE_DATA',
+  GET_AUDIENCE_COLOR_TEMPERATURE_DATA_SUCCESS:
+    'Audience/GET_AUDIENCE_COLOR_TEMPERATURE_DATA_SUCCESS',
+  GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR:
+    'Audience/GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR',
 
-  GET_AUDIENCE_CHANGE_OVER_TIME_DATA: 'Audience/GET_AUDIENCE_CHANGE_OVER_TIME_DATA',
-  GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS: 'Audience/GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS',
-  GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR: 'Audience/GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR',
+  GET_AUDIENCE_CHANGE_OVER_TIME_DATA:
+    'Audience/GET_AUDIENCE_CHANGE_OVER_TIME_DATA',
+  GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS:
+    'Audience/GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS',
+  GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR:
+    'Audience/GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR',
 
   GET_AUDIENCE_DOMINANT_COLOR_DATA: 'Audience/GET_AUDIENCE_DOMINANT_COLOR_DATA',
-  GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS: 'Audience/GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS',
-  GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR: 'Audience/GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR',
+  GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS:
+    'Audience/GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS',
+  GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR:
+    'Audience/GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR',
 }
 
 export const actions = {
-  getAudienceContentVitalityScoreData: () => ({
+  getAudienceContentVitalityScoreData: (payload) => ({
     type: types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA,
+    payload,
   }),
   getAudienceContentVitalityScoreDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS,
@@ -49,8 +60,9 @@ export const actions = {
     error,
   }),
 
-  getAudiencePerformanceData: () => ({
+  getAudiencePerformanceData: (payload) => ({
     type: types.GET_AUDIENCE_PERFORMANCE_DATA,
+    payload,
   }),
   getAudiencePerformanceDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS,
@@ -61,21 +73,9 @@ export const actions = {
     error,
   }),
 
-  updateAudiencePerformance: (payload) => ({
-    type: types.UPDATE_AUDIENCE_PERFORMANCE,
-    payload,
-  }),
-  updateAudiencePerformanceSuccess: (payload) => ({
-    type: types.UPDATE_AUDIENCE_PERFORMANCE_SUCCESS,
-    payload,
-  }),
-  updateAudiencePerformanceError: (error) => ({
-    type: types.UPDATE_AUDIENCE_PERFORMANCE_ERROR,
-    error,
-  }),
-
-  getAudienceAgeSliderData: () => ({
+  getAudienceAgeSliderData: (payload) => ({
     type: types.GET_AUDIENCE_AGE_SLIDER_DATA,
+    payload,
   }),
   getAudienceAgeSliderDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS,
@@ -86,8 +86,9 @@ export const actions = {
     error,
   }),
 
-  getAudienceGenderData: () => ({
+  getAudienceGenderData: (payload) => ({
     type: types.GET_AUDIENCE_GENDER_DATA,
+    payload
   }),
   getAudienceGenderDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_GENDER_DATA_SUCCESS,
@@ -110,8 +111,9 @@ export const actions = {
     error,
   }),
 
-  getAudienceChangeOverTimeData: () => ({
+  getAudienceChangeOverTimeData: (payload) => ({
     type: types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA,
+    payload
   }),
   getAudienceChangeOverTimeDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS,
@@ -123,8 +125,8 @@ export const actions = {
   }),
 
   getAudienceDominantColorData: (data) => ({
-		type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA,
-		data
+    type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA,
+    data,
   }),
   getAudienceDominantColorDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS,
@@ -154,7 +156,7 @@ export const initialState = fromJS({
     error: null,
   },
   audienceGenderData: {
-    data: [],
+    data: {},
     loading: false,
     error: null,
   },
@@ -180,11 +182,10 @@ export const initialState = fromJS({
 const audienceReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA:
-      return state
-        .setIn(
-          ['audienceContentVitalityScoreData', 'loading'],
-          fromJS(true)
-        )
+      return state.setIn(
+        ['audienceContentVitalityScoreData', 'loading'],
+        fromJS(true)
+      )
 
     case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS:
       return state
@@ -192,10 +193,7 @@ const audienceReducer = (state = initialState, action) => {
           ['audienceContentVitalityScoreData', 'data'],
           fromJS(action.payload)
         )
-        .setIn(
-          ['audienceContentVitalityScoreData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audienceContentVitalityScoreData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR:
       return state
@@ -203,198 +201,94 @@ const audienceReducer = (state = initialState, action) => {
           ['audienceContentVitalityScoreData', 'error'],
           fromJS(action.error)
         )
-        .setIn(
-          ['audienceContentVitalityScoreData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audienceContentVitalityScoreData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_PERFORMANCE_DATA:
-      return state
-        .setIn(
-          ['audiencePerformanceData', 'loading'],
-          fromJS(true)
-        )
+      return state.setIn(['audiencePerformanceData', 'loading'], fromJS(true))
 
     case types.GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS:
       return state
-        .setIn(
-          ['audiencePerformanceData', 'data'],
-          fromJS(action.payload)
-        )
-        .setIn(
-          ['audiencePerformanceData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audiencePerformanceData', 'data'], fromJS(action.payload))
+        .setIn(['audiencePerformanceData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_PERFORMANCE_DATA_ERROR:
       return state
-        .setIn(
-          ['audiencePerformanceData', 'error'],
-          fromJS(action.error)
-        )
-        .setIn(
-          ['audiencePerformanceData', 'loading'],
-          fromJS(false)
-        )
-
-    case types.UPDATE_AUDIENCE_PERFORMANCE_SUCCESS:
-      return state
-        .mergeIn(
-          ['audiencePerformanceData', 'data'],
-          fromJS(action.payload)
-        )
-
-    case types.UPDATE_AUDIENCE_PERFORMANCE_ERROR:
-      return state
-        .setIn(
-          ['audiencePerformanceData', 'error'],
-          fromJS(action.error)
-      )
+        .setIn(['audiencePerformanceData', 'error'], fromJS(action.error))
+        .setIn(['audiencePerformanceData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_AGE_SLIDER_DATA:
-      return state
-        .setIn(
-          ['audienceAgeSliderData', 'loading'],
-          fromJS(true)
-        )
+      return state.setIn(
+        ['audienceAgeSliderData', 'loading'],
+        fromJS(action.payload.loading ? true : false)
+      )
 
     case types.GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS:
       return state
-        .setIn(
-          ['audienceAgeSliderData', 'data'],
-          fromJS(action.payload)
-        )
-        .setIn(
-          ['audienceAgeSliderData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audienceAgeSliderData', 'data'], fromJS(action.payload))
+        .setIn(['audienceAgeSliderData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_AGE_SLIDER_DATA_ERROR:
       return state
-        .setIn(
-          ['audienceAgeSliderData', 'error'],
-          fromJS(action.error)
-        )
-        .setIn(
-          ['audienceAgeSliderData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audienceAgeSliderData', 'error'], fromJS(action.error))
+        .setIn(['audienceAgeSliderData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_GENDER_DATA:
-      return state
-        .setIn(
-          ['audienceGenderData', 'loading'],
-          fromJS(true)
-        )
+      return state.setIn(['audienceGenderData', 'loading'], fromJS(true))
 
     case types.GET_AUDIENCE_GENDER_DATA_SUCCESS:
       return state
-        .setIn(
-          ['audienceGenderData', 'data'],
-          fromJS(action.payload)
-        )
-        .setIn(
-          ['audienceGenderData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audienceGenderData', 'data'], fromJS(action.payload))
+        .setIn(['audienceGenderData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_GENDER_DATA_ERROR:
       return state
-        .setIn(
-          ['audienceGenderData', 'error'],
-          fromJS(action.error)
-        )
-        .setIn(
-          ['audienceGenderData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audienceGenderData', 'error'], fromJS(action.error))
+        .setIn(['audienceGenderData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA:
-      return state
-        .setIn(
-          ['audienceColorTemperatureData', 'loading'],
-          fromJS(true)
-        )
+      return state.setIn(
+        ['audienceColorTemperatureData', 'loading'],
+        fromJS(true)
+      )
 
     case types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA_SUCCESS:
       return state
-        .setIn(
-          ['audienceColorTemperatureData', 'data'],
-          fromJS(action.payload)
-        )
-        .setIn(
-          ['audienceColorTemperatureData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audienceColorTemperatureData', 'data'], fromJS(action.payload))
+        .setIn(['audienceColorTemperatureData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR:
       return state
-        .setIn(
-          ['audienceColorTemperatureData', 'error'],
-          fromJS(action.error)
-        )
-        .setIn(
-          ['audienceColorTemperatureData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audienceColorTemperatureData', 'error'], fromJS(action.error))
+        .setIn(['audienceColorTemperatureData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA:
-      return state
-        .setIn(
-          ['audienceChangeOverTimeData', 'loading'],
-          fromJS(true)
-        )
+      return state.setIn(
+        ['audienceChangeOverTimeData', 'loading'],
+        fromJS(true)
+      )
 
     case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS:
       return state
-        .setIn(
-          ['audienceChangeOverTimeData', 'data'],
-          fromJS(action.payload)
-        )
-        .setIn(
-          ['audienceChangeOverTimeData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audienceChangeOverTimeData', 'data'], fromJS(action.payload))
+        .setIn(['audienceChangeOverTimeData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR:
       return state
-        .setIn(
-          ['audienceChangeOverTimeData', 'error'],
-          fromJS(action.error)
-        )
-        .setIn(
-          ['audienceChangeOverTimeData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audienceChangeOverTimeData', 'error'], fromJS(action.error))
+        .setIn(['audienceChangeOverTimeData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_DOMINANT_COLOR_DATA:
-      return state
-        .setIn(
-          ['audienceDominantColorData', 'loading'],
-          fromJS(true)
-        )
+      return state.setIn(['audienceDominantColorData', 'loading'], fromJS(true))
 
     case types.GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS:
       return state
-        .setIn(
-          ['audienceDominantColorData', 'data'],
-          fromJS(action.payload)
-        )
-        .setIn(
-          ['audienceDominantColorData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audienceDominantColorData', 'data'], fromJS(action.payload))
+        .setIn(['audienceDominantColorData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR:
       return state
-        .setIn(
-          ['audienceDominantColorData', 'error'],
-          fromJS(action.error)
-        )
-        .setIn(
-          ['audienceDominantColorData', 'loading'],
-          fromJS(false)
-        )
+        .setIn(['audienceDominantColorData', 'error'], fromJS(action.error))
+        .setIn(['audienceDominantColorData', 'loading'], fromJS(false))
 
     default:
       return state

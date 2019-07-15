@@ -33,7 +33,6 @@ class ColorTemperature extends React.Component {
             type: 'dateRange',
             selectKey: 'ACT-wds',
             placeHolder: 'Date',
-            defaultValue: 'month',
           },
         ]}
       />

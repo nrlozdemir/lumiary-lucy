@@ -228,7 +228,7 @@ function* getContentVitalityScoreData({ payload = {} }) {
   try {
     const payload = yield call(
       getDataFromApi,
-      {},
+      undefined,
       `/report/compare/brands?${querystring.stringify({
         brands: brands,
         property: 'cvScore',

@@ -20,20 +20,19 @@ class Sidebar extends React.Component {
     this.resetFormValues = this.resetFormValues.bind(this)
     this.formChange = this.formChange.bind(this)
   }
-  
+
   componentDidUpdate(prevProps) {
     const { sidebarVisible } = this.props
     if (sidebarVisible !== prevProps.sidebarVisible && !sidebarVisible) {
       this.resetFormValues()
     }
   }
-  
+
   resetFormValues = () => {
     const { reset, changeFilter } = this.props
     reset()
     changeFilter()
   }
-
 
   formChange() {
     this.setState({
@@ -63,7 +62,6 @@ class Sidebar extends React.Component {
     const sidebarHeaderClass = classnames(style.sidebarHeader, {
       [style.fixed]: fixedHeader,
     })
-
 
     const sidebarContentClass = classnames(style.sidebarContent, 'ph-32', {
       [style.fixed]: fixedHeader,
@@ -144,7 +142,12 @@ class Sidebar extends React.Component {
               style={{ backgroundColor: colors.filterHeader }}
             >
               <p className={style.text}>
-                <span className="float-left color-dark-blue-grey">
+                <span
+                  className="float-left"
+                  style={{
+                    color: colors.filterHeaderText,
+                  }}
+                >
                   Filter Videos
                 </span>
                 <span

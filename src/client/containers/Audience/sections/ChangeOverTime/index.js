@@ -5,6 +5,7 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceChangeOverTime } from 'Reducers/audience'
 import Module from 'Components/Module'
 import LineChart from 'Components/Charts/LineChart'
+import { isDataSetEmpty } from 'Utils/datasets'
 import style from 'Containers/Audience/style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -14,73 +15,108 @@ class ChangeOverTime extends React.Component {
   }
 
   render() {
-    // const { selectViews, selectPlatforms, selectDate } = this.state;
     const {
-      audienceChangeOverTimeData: { data, loading, error },
+      audienceChangeOverTimeData: { data: dataToConvert, loading, error },
       infoText,
     } = this.props
+
+    const labels = (!!dataToConvert && Object.keys(dataToConvert)) || []
+
+    const data = {
+      labels,
+      datasets:
+        !!labels.length &&
+        labels.reduce(
+          (datasets, label) => {
+            const dataset = dataToConvert[label]
+            let maleVal = 0
+            let femaleVal = 0
+            if (!!dataset) {
+              const { male, female } = dataset
+              maleVal = male
+              femaleVal = femaleVal
+            }
+            datasets[0].data.push(maleVal)
+            datasets[1].data.push(femaleVal)
+
+            return datasets
+          },
+          [{ data: [] }, { data: [] }]
+        ),
+    }
+
+    const max =
+      (!!data &&
+        !!data.datasets &&
+        data.datasets.reduce((val, dataset) => {
+          const currMax = Math.max(...dataset.data)
+          return currMax > val ? currMax : val
+        }, 0)) ||
+      1000000
+
+    const step = Math.ceil(max / 4)
+
     return (
-      <ThemeContext.Consumer>
-        {({ themeContext: { colors } }) => (
-          <Module
-            moduleKey={'Audience/ChangeOverTime'}
-            title="Change Over Time By Property"
-            action={this.callBack}
-            infoText={infoText}
-            filters={[
-              {
-                type: 'platformEngagement',
-                selectKey: 'ACOT-plateng',
-                placeHolder: 'Engagement by Platform',
-              },
-              {
-                type: 'dateRange',
-                selectKey: 'ACOT-wds',
-                placeHolder: 'Date',
-                defaultValue: 'month',
-              },
-            ]}
-            legend={
-              <div
-                className={
-                  'd-flex align-items-center justify-content-center ' +
-                  style.headerLabel
-                }
-              >
-                <div className="d-flex align-items-center mr-32">
-                  <span className={style.redRound} />
-                  <p>Male</p>
-                </div>
-                <div className="d-flex align-items-center mr-32">
-                  <span className={style.duskRound} />
-                  <p>Female</p>
-                </div>
-              </div>
+      <Module
+        loading={loading}
+        isEmpty={!loading && isDataSetEmpty(data)}
+        moduleKey={'Audience/ChangeOverTime'}
+        title="Change Over Time By Property"
+        action={this.callBack}
+        infoText={infoText}
+        filters={[
+          {
+            type: 'property',
+            selectKey: 'ACOT-blablablatralala',
+            placeHolder: 'Resolution',
+          },
+          {
+            type: 'platformEngagement',
+            selectKey: 'ACOT-plateng',
+            placeHolder: 'Engagement by Platform',
+          },
+          {
+            type: 'dateRange',
+            selectKey: 'ACOT-wds',
+            placeHolder: 'Date',
+          },
+        ]}
+        legend={
+          <div
+            className={
+              'd-flex align-items-center justify-content-center ' +
+              style.headerLabel
             }
           >
-            {data && data.datasets && (
-              <div className={style.audienceContainer}>
-                <LineChart
-                  width={1162}
-                  height={292}
-                  dataSet={data}
-                  xAxesFlatten
-                  yAxesAbbreviate
-                  shadow
-                  customLineOptions={[
-                    { borderColor: '#2fd7c4' },
-                    { borderColor: '#5292e5' },
-                  ]}
-                  customTooltipText="Likes"
-                  backgroundColor={colors.chartBackground}
-                  yAxesStepSize={250000}
-                  yAxesMax={1000000}
-                />
-              </div>
-            )}
-          </Module>
-        )}
-      </ThemeContext.Consumer>
+            <div className="d-flex align-items-center mr-32">
+              <span className={style.redRound} />
+              <p>Male</p>
+            </div>
+            <div className="d-flex align-items-center mr-32">
+              <span className={style.duskRound} />
+              <p>Female</p>
+            </div>
+          </div>
+        }
+      >
+        <div className={style.audienceContainer}>
+          <LineChart
+            width={1162}
+            height={292}
+            dataSet={data || []}
+            customLineOptions={[
+              { borderColor: '#2fd7c4' },
+              { borderColor: '#5292e5' },
+            ]}
+            xAxesFlatten
+            shadow
+            yAxesAbbreviate
+            customTooltipText="Likes"
+            yAxesStepSize={step}
+            yAxesMax={max}
+          />
+        </div>
+      </Module>
     )
   }
 }

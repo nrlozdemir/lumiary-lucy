@@ -296,9 +296,11 @@ class LineChart extends React.Component {
 
     let combinedData = combineChartData(props.dataSet, props.chartType)
     if (customLineOptions) {
-      combinedData.datasets = combinedData.datasets.map((item, index) => {
-        return { ...item, ...customLineOptions[index] }
-      })
+      combinedData.datasets =
+        !!combinedData.datasets &&
+        combinedData.datasets.map((item, index) => {
+          return { ...item, ...customLineOptions[index] }
+        })
     }
 
     return (
