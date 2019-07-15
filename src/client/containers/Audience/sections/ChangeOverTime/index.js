@@ -103,7 +103,7 @@ class ChangeOverTime extends React.Component {
           <LineChart
             width={1162}
             height={292}
-            dataSet={data || []}
+            dataSet={!loading ? data || [] : []}
             customLineOptions={[
               { borderColor: '#2fd7c4' },
               { borderColor: '#5292e5' },
