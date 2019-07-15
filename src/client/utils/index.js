@@ -344,12 +344,14 @@ const normalizationBubbleMapping = (arr, tMin, tMax) => {
 
 //convert hex color to rgb color
 const hexToRgb = (hex) => {
-  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
-  return result ? {
-    r: parseInt(result[1], 16),
-    g: parseInt(result[2], 16),
-    b: parseInt(result[3], 16)
-  } : null;
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : null
 }
 
 /*
@@ -369,6 +371,31 @@ const secondsToHHMMSS = (s = 0) => {
   } else {
     return '00:00:00'
   }
+}
+
+/*
+  Used to pull the brand and competiitors from SSO success payload, which contains { profile: { buyer: { brands }}}
+ */
+const getBrandAndCompetitorsFromProfileObject = (profile, brand_id) => {
+  const { buyer = {} } = profile
+  const { brands = [] } = buyer
+
+  let response = {}
+
+  if (!!brands.length) {
+    const foundBrand = brands.find((b) =>
+      brand_id ? b.uuid === brand_id : !!b.is_lumiere
+    )
+
+    if (!!foundBrand) {
+      if (!foundBrand.competitors) {
+        foundBrand.competitors = []
+      }
+      response = foundBrand
+    }
+  }
+
+  return response
 }
 
 export {
@@ -397,4 +424,5 @@ export {
   normalizationBubbleMapping,
   hexToRgb,
   secondsToHHMMSS,
+  getBrandAndCompetitorsFromProfileObject,
 }
