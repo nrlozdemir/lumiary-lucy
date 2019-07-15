@@ -5,7 +5,7 @@ import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 import { selectAuthProfile } from 'Reducers/auth'
 
-import { getDataFromApi } from 'Utils/api'
+import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import {
   radarChartCalculate,
@@ -20,82 +20,132 @@ function getAudienceDataApi() {
   return axios.get('/').then((res) => audienceMockData)
 }
 
-function updateAudiencePerformanceApi({ min, max }) {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => updateAudiencePer(min, max))
-}
+function* getAudienceContentVitalityScoreData({ payload = {} }) {
+  const { platform, metric, dateRange } = payload
 
-function* getAudienceContentVitalityScoreData() {
   try {
-    const payload = yield call(getAudienceDataApi)
-    let shuffleData = payload.lineStackedChartData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(
-      actions.getAudienceContentVitalityScoreDataSuccess(
-        percentageManipulation(shuffleData)
-      )
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/cvscores`, {
+        metric,
+        platform,
+        daterange: dateRange,
+      }),
+      'GET'
     )
+
+    if (!!response && !!Object.keys(response).length) {
+      yield put(
+        actions.getAudienceContentVitalityScoreDataSuccess(
+          percentageManipulation(response)
+        )
+      )
+    } else {
+      throw new Error('Audience/getAudienceContentVitalityScoreData Error')
+    }
   } catch (err) {
     yield put(actions.getAudienceContentVitalityScoreDataError(err))
   }
 }
 
-function* getAudiencePerformanceData() {
+function* getAudiencePerformanceData({ payload = {} }) {
+  const { platform, metric, property, dateRange, min = 0, max = 100 } = payload
+
   try {
-    const payload = yield call(getAudienceDataApi)
-    const shuffleData = payload.performance
-    shuffleData.bubblesBoth = _.shuffle(shuffleData.bubblesBoth)
-    shuffleData.bubblesFemales = _.shuffle(shuffleData.bubblesFemales)
-    shuffleData.bubblesMales = _.shuffle(shuffleData.bubblesMales)
-    yield put(
-      actions.getAudiencePerformanceDataSuccess(
-        percentageManipulation(shuffleData)
-      )
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/performance`, {
+        metric,
+        platform,
+        property,
+        ageMin: min,
+        ageMax: max,
+        daterange: dateRange,
+      }),
+      'GET'
     )
+
+    if (!!response) {
+      const updatedResponse = Object.keys(response).reduce((newData, key) => {
+        newData[key] = Object.keys(response[key]).map((v) => ({
+          visual: v,
+          toolTip: response[key][v],
+        }))
+        return newData
+      }, {})
+
+      yield put(
+        actions.getAudiencePerformanceDataSuccess(
+          percentageManipulation(updatedResponse)
+        )
+      )
+    } else {
+      throw new Error('Audience/getAudiencePerformanceData Error')
+    }
   } catch (err) {
     yield put(actions.getAudiencePerformanceDataError(err))
   }
 }
 
-function* updateAudiencePerformance({ payload: { min, max } }) {
-  try {
-    const payload = yield call(updateAudiencePerformanceApi, { min, max })
-    yield put(
-      actions.updateAudiencePerformanceSuccess(percentageManipulation(payload))
-    )
-  } catch (err) {
-    yield put(actions.updateAudiencePerformanceError(err))
-  }
-}
+function* getAudienceAgeSliderData({ payload = {} }) {
+  const { metric, dateRange, ages = [] } = payload
 
-function* getAudienceAgeSliderData() {
+  const fallBack = ages.map((a) => ({ age: a, loading: false, image: null }))
+
   try {
-    const payload = yield call(getAudienceDataApi)
-    const randomImage = (image) => {
-      return image.replace(
-        /image=(\d+)/g,
-        'image=' + Math.floor(Math.random(1) * Math.floor(30))
+    const { brand } = yield select(selectAuthProfile)
+
+    if (!!ages.length) {
+      const response = yield call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl(`/audience/${brand.uuid}/popular`, {
+          metric,
+          ages,
+          daterange: dateRange,
+        }),
+        'GET'
+      )
+
+      yield put(
+        actions.getAudienceAgeSliderDataSuccess(
+          percentageManipulation(response)
+        )
       )
     }
-    const data = payload.ageSlider
-    data.map((element) => (element.image = randomImage(element.image)))
-    yield put(
-      actions.getAudienceAgeSliderDataSuccess(percentageManipulation(data))
-    )
   } catch (err) {
+    yield put(
+      actions.getAudienceAgeSliderDataSuccess(percentageManipulation(fallBack))
+    )
     yield put(actions.getAudienceAgeSliderDataError(err))
   }
 }
 
-function* getAudienceGenderData() {
+function* getAudienceGenderData({ payload = {} }) {
+  const { property, metric, dateRange } = payload
+
   try {
-    const payload = yield call(getAudienceDataApi)
-    const shuffleData = payload.genderData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/properties`, {
+        metric,
+        property,
+        daterange: dateRange,
+      }),
+      'GET'
+    )
+
     yield put(
-      actions.getAudienceGenderDataSuccess(percentageManipulation(shuffleData))
+      actions.getAudienceGenderDataSuccess(percentageManipulation(response))
     )
   } catch (err) {
     yield put(actions.getAudienceGenderDataError(err))
@@ -142,15 +192,27 @@ function* getAudienceColorTemperatureData() {
   }
 }
 
-function* getAudienceChangeOverTimeData() {
+function* getAudienceChangeOverTimeData({ payload = {} }) {
+  const { property, platform, metric, dateRange } = payload
+
   try {
-    const payload = yield call(getAudienceDataApi)
-    let shuffleData = payload.lineChartData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/change`, {
+        metric,
+        property,
+        platform,
+        daterange: dateRange,
+      }),
+      'GET'
+    )
+
     yield put(
       actions.getAudienceChangeOverTimeDataSuccess(
-        percentageManipulation(shuffleData)
+        percentageManipulation(response)
       )
     )
   } catch (err) {
@@ -204,7 +266,6 @@ export default [
     getAudienceContentVitalityScoreData
   ),
   takeLatest(types.GET_AUDIENCE_PERFORMANCE_DATA, getAudiencePerformanceData),
-  takeLatest(types.UPDATE_AUDIENCE_PERFORMANCE, updateAudiencePerformance),
   takeLatest(types.GET_AUDIENCE_AGE_SLIDER_DATA, getAudienceAgeSliderData),
   takeLatest(types.GET_AUDIENCE_GENDER_DATA, getAudienceGenderData),
   takeLatest(

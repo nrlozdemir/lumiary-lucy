@@ -108,15 +108,15 @@ class LineChart extends React.Component {
             },
           ],
         },
-			},
-			plugins: []
+      },
+      plugins: [],
     }
 
     let props = fromJS(defaultProps)
       .mergeDeep(this.props)
       .toJS()
 
-    const plugins = [...props.plugins];
+    const plugins = [...props.plugins]
 
     if (props.backgroundColor || themes.chartBackground) {
       plugins.push({
@@ -260,10 +260,12 @@ class LineChart extends React.Component {
     }
 
     let combinedData = combineChartData(props.dataSet, props.chartType)
-    if(customLineOptions) {
-      combinedData.datasets = combinedData.datasets.map((item, index) => {
-        return { ...item, ...customLineOptions[index] }
-      })
+    if (customLineOptions) {
+      combinedData.datasets =
+        !!combinedData.datasets &&
+        combinedData.datasets.map((item, index) => {
+          return { ...item, ...customLineOptions[index] }
+        })
     }
 
     return (

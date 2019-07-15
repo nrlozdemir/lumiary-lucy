@@ -11,7 +11,7 @@ class Video extends Component {
   }
 
   componentDidMount() {
-    const { setRef } = this.props 
+    const { setRef } = this.props
 
     setRef(this.video)
 
@@ -82,6 +82,7 @@ class Video extends Component {
           truncateTitle
         >
           <video
+            key={`video_${src}${title}`}
             ref={this.video}
             className={styles.video}
             src={src}
@@ -107,6 +108,6 @@ class Video extends Component {
 }
 
 Video.defaultProps = {
-  setRef: () => {}
+  setRef: () => {},
 }
 export default Video

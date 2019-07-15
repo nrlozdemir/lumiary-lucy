@@ -369,7 +369,9 @@ const isDataSetEmpty = (data) => {
   if (!!data && !!data.datasets && !!data.datasets.length) {
     return data.datasets.every((dataset) =>
       !!dataset.data && !!dataset.data.length
-        ? dataset.data.every((val) => val === 0 || val === undefined)
+        ? dataset.data.every(
+            (val) => val === 0 || val === undefined || val === null
+          )
         : true
     )
   } else {
@@ -731,7 +733,30 @@ const percentageManipulation = (bucket) => {
   return bucket
 }
 
+/*
+ returns the chartYAxisMax, chartYAxisStepSize from the api  
+ */
+
+const getCVScoreChartAttributes = (data) => {
+  const maxVideoPercent =
+    (!!data &&
+      Object.keys(data).reduce((accumulator, key) => {
+        const maxPercentInSet = Math.max(...data[key].videoPercents)
+        return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
+      }, 0)) ||
+    0
+
+  const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
+  const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
+
+  return {
+    chartYAxisMax,
+    chartYAxisStepSize,
+  }
+}
+
 export {
+  getCVScoreChartAttributes,
   convertDataIntoDatasets,
   chartCombineDataset,
   radarChartCalculate,

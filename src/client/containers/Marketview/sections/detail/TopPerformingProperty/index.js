@@ -17,6 +17,14 @@ import { isEqual } from 'lodash'
 
 import style from '../../../style.scss'
 
+const LEGEND_COLOR_ORDER = [
+  '#2fd7c4',
+  '#8562f3',
+  '#5292e5',
+  '#acb0be',
+  '#505050',
+]
+
 class TopPerformingProperty extends React.Component {
   callback = (data) => {
     const { container, getTopPerformingPropertiesRequest } = this.props
@@ -106,6 +114,10 @@ class TopPerformingProperty extends React.Component {
         return `${Math.round((value * 100) / 1000000) / 100}m`
       },
     }
+
+    ;((chartData && chartData.datasets) || []).forEach((set, index) => {
+      set.backgroundColor = LEGEND_COLOR_ORDER[index]
+    })
 
     const referencesData =
       chartData &&

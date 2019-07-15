@@ -25,14 +25,12 @@ const Main = subPage('main')
 export class Marketview extends React.Component {
   render() {
     return (
-      <div className="grid-container col-12">
-        <Switch>
-          <Route path="/marketview" exact component={Main} />
-          <Route path="/marketview/platform" exact component={Platform} />
-          <Route path="/marketview/competitor" exact component={Competitor} />
-          <Route path="/marketview/time" exact component={Time} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route path="/marketview" exact component={Main} />
+        <Route path="/marketview/platform" exact component={Platform} />
+        <Route path="/marketview/competitor" exact component={Competitor} />
+        <Route path="/marketview/time" exact component={Time} />
+      </Switch>
     )
   }
 }

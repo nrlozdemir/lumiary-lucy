@@ -27,56 +27,91 @@ const ContentVitalityScoreModule = ({
   options,
   loading = false,
   chartYAxisMax = 100,
-  infoText
+  infoText,
+  dataKeys: {
+    leftLabel,
+    rightLabel,
+    middleLabel,
+    leftKey,
+    rightKey,
+    middleKey,
+  },
 }) => {
-  const formattedData = Object.keys(data).reduce(
-    (accumulator, uuid) => {
-      switch (uuid) {
-        case 'other':
-          accumulator.average = {
-            ...data[uuid],
-            name: 'Average',
-          }
-          break
-
-        default:
-          if (uuid === authProfile.brand.uuid) {
-            accumulator.brand_1 = {
-              ...data[uuid],
-              name: authProfile.brand.name,
-            }
-          } else {
-            authProfile.brand.competitors.forEach((competitor) => {
-              if (uuid === competitor.uuid) {
-                accumulator.brand_2 = {
-                  ...data[uuid],
-                  name: competitor.name,
-                }
+  const formattedData =
+    (!!data &&
+      Object.keys(data).reduce(
+        (accumulator, dataKey) => {
+          switch (dataKey) {
+            case middleKey:
+            case 'other':
+              accumulator.middleDataset = {
+                ...data[middleKey || dataKey],
+                name: middleLabel
+                  ? middleLabel
+                  : middleKey
+                  ? middleKey
+                  : 'Average',
               }
-            })
-          }
-          break
-      }
+              break
 
-      return accumulator
-    },
-    {
-      brand_1: null,
-      brand_2: null,
-      average: null,
-    }
-  )
+            case leftKey:
+              accumulator.leftDataset = {
+                ...data[leftKey],
+                name: leftLabel || leftKey,
+              }
+              break
+
+            case rightKey:
+              accumulator.rightDataset = {
+                ...data[rightKey],
+                name: rightLabel || rightKey,
+              }
+              break
+
+            default:
+              if (dataKey === authProfile.brand.uuid) {
+                accumulator.leftDataset = {
+                  ...data[dataKey],
+                  name: authProfile.brand.name,
+                }
+              } else {
+                authProfile.brand.competitors.forEach((competitor) => {
+                  if (dataKey === competitor.uuid) {
+                    accumulator.rightDataset = {
+                      ...data[dataKey],
+                      name: competitor.name,
+                    }
+                  }
+                })
+              }
+
+              break
+          }
+
+          return accumulator
+        },
+        {
+          leftDataset: null,
+          middleDataset: null,
+          rightDataset: null,
+        }
+      )) ||
+    {}
 
   const newDatasets = {
     labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
     datasets: [
       {
         data:
-          (formattedData.brand_2 && formattedData.brand_2.videoPercents) || [],
+          (formattedData.rightDataset &&
+            formattedData.rightDataset.videoPercents) ||
+          [],
       },
       {
         data:
-          (formattedData.brand_1 && formattedData.brand_1.videoPercents) || [],
+          (formattedData.leftDataset &&
+            formattedData.leftDataset.videoPercents) ||
+          [],
       },
     ],
   }
@@ -91,7 +126,7 @@ const ContentVitalityScoreModule = ({
           filters={filters}
           legend={legend}
           loading={loading}
-          isEmpty={isDataSetEmpty(loading ? {} : newDatasets)}
+          isEmpty={!loading && isDataSetEmpty(newDatasets)}
           infoText={infoText}
         >
           <div
@@ -104,7 +139,7 @@ const ContentVitalityScoreModule = ({
             >
               <LineChart
                 chartType="lineStackedArea"
-                width={1040}
+                width={1140}
                 height={291}
                 backgroundColor={colors.chartBackground}
                 dataSet={
@@ -115,14 +150,14 @@ const ContentVitalityScoreModule = ({
                         datasets: [
                           {
                             data:
-                              (formattedData.brand_2 &&
-                                formattedData.brand_2.videoPercents) ||
+                              (formattedData.rightDataset &&
+                                formattedData.rightDataset.videoPercents) ||
                               [],
                           },
                           {
                             data:
-                              (formattedData.brand_1 &&
-                                formattedData.brand_1.videoPercents) ||
+                              (formattedData.leftDataset &&
+                                formattedData.leftDataset.videoPercents) ||
                               [],
                           },
                         ],
@@ -136,129 +171,139 @@ const ContentVitalityScoreModule = ({
                 options={options}
               />
             </div>
-            {formattedData.brand_1 &&
-              formattedData.brand_2 &&
-              formattedData.average && (
-                <div className="row">
-                  <div className={percentageCol}>
-                    <div
-                      className={style.legend}
-                      style={{
-                        background: colors.labelBackground,
-                        color: colors.labelColor,
-                        boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                      }}
-                    >
-                      {`${formattedData.brand_1.name}`}
-                    </div>
-                    <div
-                      className={style.divider}
-                      style={{
-                        background: colors.moduleBorder,
-                      }}
-                    />
-                    <PercentageBarGraph
-                      key={Math.random()}
-                      percentage={formattedData.brand_1.averageCvScore || 0}
-                      color="blue"
-                      percentageDataSet={{
-                        datasets: [
-                          {
-                            data: formattedData.brand_1.videoPercents,
-                          },
-                        ],
-                      }}
-                      options={{
-                        scales: {
-                          yAxes: [
-                            {
-                              ticks: {
-                                max: chartYAxisMax,
-                              },
-                            },
-                          ],
-                        },
-                      }}
-                    />
-                  </div>
-                  <div className={percentageCol}>
-                    <div
-                      className={style.legend}
-                      style={{
-                        background: colors.labelBackground,
-                        color: colors.labelColor,
-                        boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                      }}
-                    >
-                      {`Average`}
-                    </div>
-                    <div
-                      className={style.divider}
-                      style={{
-                        background: colors.moduleBorder,
-                      }}
-                    />
-                    <PercentageBarGraph
-                      key={Math.random()}
-                      percentage={formattedData.average.averageCvScore || 0}
-                      color="grey"
-                      percentageDataSet={{
-                        datasets: [
-                          {
-                            data: formattedData.average.videoPercents,
-                          },
-                        ],
-                      }}
-                      options={{
-                        scales: {
-                          yAxes: [
-                            {
-                              ticks: {
-                                max: chartYAxisMax,
-                              },
-                            },
-                          ],
-                        },
-                      }}
-                    />
-                  </div>
-                  <div className={percentageCol}>
-                    <div
-                      className={style.legend}
-                      style={{
-                        background: colors.labelBackground,
-                        color: colors.labelColor,
-                        boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                      }}
-                    >
-                      {`${formattedData.brand_2.name}`}
-                    </div>
-                    <PercentageBarGraph
-                      key={Math.random()}
-                      percentage={formattedData.brand_2.averageCvScore || 0}
-                      color="green"
-                      percentageDataSet={{
-                        datasets: [
-                          {
-                            data: formattedData.brand_2.videoPercents,
-                          },
-                        ],
-                      }}
-                      options={{
-                        scales: {
-                          yAxes: [
-                            {
-                              ticks: {
-                                max: chartYAxisMax,
-                              },
-                            },
-                          ],
-                        },
-                      }}
-                    />
-                  </div>
+
+            <div className="row">
+              <div className={percentageCol}>
+                <div
+                  className={style.legend}
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  {formattedData.leftDataset &&
+                    `${formattedData.leftDataset.name}`}
                 </div>
-              )}
+                {formattedData.leftDataset && (
+                  <div
+                    className={style.divider}
+                    style={{
+                      background: colors.moduleBorder,
+                    }}
+                  />
+                )}
+                {formattedData.leftDataset && (
+                  <PercentageBarGraph
+                    key={Math.random()}
+                    percentage={formattedData.leftDataset.averageCvScore || 0}
+                    color="blue"
+                    percentageDataSet={{
+                      datasets: [
+                        {
+                          data: formattedData.leftDataset.videoPercents,
+                        },
+                      ],
+                    }}
+                    options={{
+                      scales: {
+                        yAxes: [
+                          {
+                            ticks: {
+                              max: chartYAxisMax,
+                            },
+                          },
+                        ],
+                      },
+                    }}
+                  />
+                )}
+              </div>
+              <div className={percentageCol}>
+                <div
+                  className={style.legend}
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  {formattedData.middleDataset &&
+                    `${formattedData.middleDataset.name}`}
+                </div>
+                {formattedData.middleDataset && (
+                  <div
+                    className={style.divider}
+                    style={{
+                      background: colors.moduleBorder,
+                    }}
+                  />
+                )}
+                {formattedData.middleDataset && (
+                  <PercentageBarGraph
+                    key={Math.random()}
+                    percentage={formattedData.middleDataset.averageCvScore || 0}
+                    color="grey"
+                    percentageDataSet={{
+                      datasets: [
+                        {
+                          data: formattedData.middleDataset.videoPercents,
+                        },
+                      ],
+                    }}
+                    options={{
+                      scales: {
+                        yAxes: [
+                          {
+                            ticks: {
+                              max: chartYAxisMax,
+                            },
+                          },
+                        ],
+                      },
+                    }}
+                  />
+                )}
+              </div>
+              <div className={percentageCol}>
+                <div
+                  className={style.legend}
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  }}
+                >
+                  {formattedData.rightDataset &&
+                    `${formattedData.rightDataset.name}`}
+                </div>
+                {formattedData.rightDataset && (
+                  <PercentageBarGraph
+                    key={Math.random()}
+                    percentage={formattedData.rightDataset.averageCvScore || 0}
+                    color="green"
+                    percentageDataSet={{
+                      datasets: [
+                        {
+                          data: formattedData.rightDataset.videoPercents,
+                        },
+                      ],
+                    }}
+                    options={{
+                      scales: {
+                        yAxes: [
+                          {
+                            ticks: {
+                              max: chartYAxisMax,
+                            },
+                          },
+                        ],
+                      },
+                    }}
+                  />
+                )}
+              </div>
+            </div>
           </div>
         </Module>
       )}
@@ -273,6 +318,11 @@ ContentVitalityScoreModule.propTypes = {
   subTitle: PropTypes.string,
   legend: PropTypes.object,
   filters: PropTypes.array,
+  dataKeys: PropTypes.object,
+}
+
+ContentVitalityScoreModule.defaultProps = {
+  dataKeys: {},
 }
 
 export default ContentVitalityScoreModule
