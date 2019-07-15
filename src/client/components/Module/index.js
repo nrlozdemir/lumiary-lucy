@@ -22,7 +22,7 @@ export class Module extends React.Component {
     }
   }
 
-  /* componentDidUpdate(prevProps) {
+  componentDidUpdate(prevProps) {
     const { action, selectFilters, moduleKey } = this.props
     if (
       !!action &&
@@ -39,7 +39,7 @@ export class Module extends React.Component {
 
       action(valuesToType, moduleKey)
     }
-  } */
+  }
 
   changeInfoStatus = () => {
     this.setState({
