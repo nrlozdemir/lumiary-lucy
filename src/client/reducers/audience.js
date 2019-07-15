@@ -242,6 +242,7 @@ const audienceReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_GENDER_DATA_ERROR:
       return state
+        .setIn(['audienceGenderData', 'data'], fromJS({}))
         .setIn(['audienceGenderData', 'error'], fromJS(action.error))
         .setIn(['audienceGenderData', 'loading'], fromJS(false))
 
