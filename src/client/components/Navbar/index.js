@@ -281,7 +281,7 @@ const Template = (props) => {
   const templateSelector = Selector(props)
   const { profile = {} } = props
   const { brand = {} } = profile
-  const { profileImg } = brand
+  const { avatar } = brand
   const { textColor, moduleBackground, moduleShadow } = props.themes
   return (
     <header
@@ -296,7 +296,7 @@ const Template = (props) => {
         <div className={linksClass}>{templateSelector['navigation']}</div>
         <div className={profileClass}>
           <div className="float-right">
-            <Dropdown profileImg={profileImg} />
+            <Dropdown avatar={avatar} />
 
             {/*<span>Bleacher Report</span>*/}
           </div>
