@@ -4,11 +4,12 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 import { ucfirst } from 'Utils'
 
 const CreatedFilters = ({ report, brands }) => {
+  const filteredBrand = brands.find((brand) => brand.uuid === report.brand)
+
   const filters = [
     {
       name: 'Brand',
-      filteredName: brands.find((brand) => brand.uuid === report.brands[0])
-        .name,
+      filteredName: !!filteredBrand ? filteredBrand.name : '',
     },
     {
       name: 'Platform',
