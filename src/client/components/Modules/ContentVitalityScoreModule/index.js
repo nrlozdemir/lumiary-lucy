@@ -187,10 +187,16 @@ const ContentVitalityScoreModule = ({
                         labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
                         datasets: [
                           {
-                            data: [10, 25, 40, 55, 40, 25, 10, 9, 5, 4, 1],
+                            data:
+                              (formattedData.rightDataset &&
+                                formattedData.rightDataset.videoPercents) ||
+                              [],
                           },
                           {
-                            data: [5, 6, 7, 8, 10, 15, 25, 45, 25, 15, 10],
+                            data:
+                              (formattedData.leftDataset &&
+                                formattedData.leftDataset.videoPercents) ||
+                              [],
                           },
                         ],
                       }
