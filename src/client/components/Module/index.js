@@ -18,22 +18,11 @@ export class Module extends React.Component {
     super(props)
     this.state = {
       infoShow: false,
+      modalShow: false,
     }
   }
 
-  componentDidMount() {
-    const {
-      moduleKey,
-      global: { sections: sectionExplanations },
-      getSectionExplanationsRequest,
-    } = this.props
-
-    if (sectionExplanations && !sectionExplanations[moduleKey]) {
-      getSectionExplanationsRequest({ key: moduleKey })
-    }
-  }
-
-  componentDidUpdate(prevProps) {
+  /* componentDidUpdate(prevProps) {
     const { action, selectFilters, moduleKey } = this.props
     if (
       !!action &&
@@ -50,11 +39,17 @@ export class Module extends React.Component {
 
       action(valuesToType, moduleKey)
     }
-  }
+  } */
 
   changeInfoStatus = () => {
     this.setState({
       infoShow: !this.state.infoShow,
+    })
+  }
+
+  setModalShow = (status) => {
+    this.setState({
+      modalShow: status,
     })
   }
 
@@ -68,10 +63,9 @@ export class Module extends React.Component {
       containerClass,
       loading,
       customEmptyClasses,
-      global: { sections: sectionExplanations },
     } = this.props
 
-    const { infoShow } = this.state
+    const { infoShow, modalShow } = this.state
 
     const moduleContainer = cx(
       'shadow-1 grid-container col-12',
@@ -107,12 +101,9 @@ export class Module extends React.Component {
                   {...this.props}
                   changeInfoStatus={this.changeInfoStatus}
                   infoShow={infoShow}
+                  setModalShow={this.setModalShow}
+                  modalShow={modalShow}
                   themes={colors}
-                  infoData={
-                    sectionExplanations[moduleKey]
-                      ? sectionExplanations[moduleKey].data
-                      : null
-                  }
                 />
               </div>
               <div className={moduleContainerBody}>{children}</div>

@@ -1,19 +1,25 @@
-import { call, put, take, actionChannel } from 'redux-saga/effects'
+import { call, put, takeEvery, delay } from 'redux-saga/effects'
 import axios from 'axios'
 import globalMockData from 'Api/mocks/globalMock.json'
-import { actions } from 'Reducers/global'
+import { actions, types } from 'Reducers/global'
 import { moduleIds } from 'Utils/globals'
 
 function getGlobalDataApi(name, key) {
-  return axios
-    .get('/')
-    .then((res) =>
-      globalMockData[name]
-        ? key
-          ? globalMockData[name][key]
-          : globalMockData[name]
-        : null
-    )
+  const delayData = async () => {
+    await new Promise((resolve) => setTimeout(resolve, 1000))
+
+    return axios
+      .get('/')
+      .then((res) =>
+        globalMockData[name]
+          ? key
+            ? globalMockData[name][key]
+            : globalMockData[name]
+          : null
+      )
+  }
+
+  return delayData()
 }
 
 function* getSectionExplanations({ payload: { key } }) {
@@ -32,6 +38,6 @@ function* getSectionExplanations({ payload: { key } }) {
   }
 }
 
-export default {
-  getSectionExplanations,
-}
+export default [
+  takeEvery(types.GET_SECTION_EXPLANATIONS_REQUEST, getSectionExplanations),
+]

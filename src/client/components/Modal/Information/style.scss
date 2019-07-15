@@ -1,12 +1,12 @@
 .iconWrapper {
   position: absolute;
-  right: -40px;
-  top: 12px;
+  right: -48px;
+  top: 0;
   cursor: pointer;
   z-index: 10;
 
   span {
-    font-size: 24px;
+    font-size: 32px;
   }
 }
 .modalContainer {
@@ -84,4 +84,14 @@
       font-family: $font-family-ClanOTBold;
     }
   }
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  font-size: 24px;
+  font-weight: bold;
 }
