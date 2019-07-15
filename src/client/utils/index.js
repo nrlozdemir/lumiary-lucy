@@ -342,6 +342,16 @@ const normalizationBubbleMapping = (arr, tMin, tMax) => {
   })
 }
 
+//convert hex color to rgb color
+const hexToRgb = (hex) => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+  return result ? {
+    r: parseInt(result[1], 16),
+    g: parseInt(result[2], 16),
+    b: parseInt(result[3], 16)
+  } : null;
+}
+
 /*
   Convert seconds to hh:mm:ss
   hh, wont show if not available, mm always shows
@@ -385,5 +395,6 @@ export {
   splitCamelCaseToString,
   getNValuesOfObject,
   normalizationBubbleMapping,
+  hexToRgb,
   secondsToHHMMSS,
 }
