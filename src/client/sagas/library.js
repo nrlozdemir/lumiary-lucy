@@ -2,6 +2,8 @@ import qs from 'qs'
 import { ajax } from 'Utils/api'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { types, actions, makeSelectVideoFilters } from 'Reducers/library'
+import { selectAuthProfile } from 'Reducers/auth'
+
 import { percentageManipulation } from 'Utils/datasets'
 
 const RESOURCE = '/brand'
@@ -25,7 +27,6 @@ function* getVideos(values) {
   const page = values && values.payload && values.payload.page
   try {
     const { brand } = yield select(selectAuthProfile)
-
     const filters = yield select(makeSelectVideoFilters())
     const body = getBodyFromFilters(filters)
 
@@ -34,9 +35,12 @@ function* getVideos(values) {
       page: page || 1,
       body,
     }
+    
     const payload = yield call(getLibraryDataApi, options, brand.uuid)
+
     yield put(actions.loadVideosSuccess(percentageManipulation(payload)))
   } catch (err) {
+    console.log(err)
     yield put(actions.loadVideosError(err))
   }
 }
