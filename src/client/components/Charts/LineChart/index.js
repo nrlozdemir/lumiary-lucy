@@ -187,10 +187,13 @@ class LineChart extends React.Component {
     }
     let maximumDatainDatasets
     if (props.dynamicPercentage) {
-      const v = props.dataSet.datasets.map((dataset) => {
-        return dataset.data
-      })
-      maximumDatainDatasets = Math.max(...[...v[0], ...v[1]])
+      const v =
+        props.dataSet &&
+        props.dataSet.datasets &&
+        props.dataSet.datasets.map((dataset) => {
+          return dataset.data
+        })
+      maximumDatainDatasets = v && Math.max(...[...v[0], ...v[1]])
     }
     if (props.yAxesPercentage) {
       props.options.scales.yAxes[0].ticks = {

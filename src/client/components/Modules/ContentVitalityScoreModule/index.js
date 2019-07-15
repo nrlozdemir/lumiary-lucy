@@ -7,7 +7,7 @@ import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 // import { lineChartOptions, lineChartData_DatasetOptions } from './options'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
-// import { isDataSetEmpty } from 'Utils/datasets'
+import { isDataSetEmpty } from 'Utils/datasets'
 
 const percentageCol = cx('col-4-no-gutters', style.percentageCol)
 
@@ -119,6 +119,8 @@ const ContentVitalityScoreModule = ({
     // ctx.shadowBlur = 0
     // ctx.shadowOffsetX = 0
     // ctx.shadowOffsetY = 0
+  }
+
   const newDatasets = {
     labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
     datasets: [
