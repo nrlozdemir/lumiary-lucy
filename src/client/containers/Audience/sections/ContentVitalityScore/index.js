@@ -54,7 +54,6 @@ class ContentVitalityScore extends React.Component {
                 type: 'dateRange',
                 selectKey: 'ACOT-wds',
                 placeHolder: 'Date',
-                defaultValue: 'month',
               },
             ]}
             removeTooltip

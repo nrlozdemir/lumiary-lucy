@@ -199,6 +199,9 @@
     flex-direction: column;
     justify-content: space-evenly;
     margin: 0 16px 0px 0px;
+    width: 100%;
+    max-width: max-content;
+    
     .legend {
       font-family: $font-family-ClanOTBold;
       font-size: 14px;
