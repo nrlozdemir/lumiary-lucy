@@ -415,7 +415,7 @@ class LibraryDetailShotByShot extends React.Component {
                     <SliderWithScrubber
                       name="slider1"
                       clickEvent={this.shotClick}
-                      shots={shotValues}
+                      shots={!loading ? shotValues : []}
                       shotMargin={5}
                       minShotWidth={24}
                       maxShotWidth={148}
