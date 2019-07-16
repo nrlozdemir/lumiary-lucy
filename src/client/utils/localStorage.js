@@ -1,1 +1,1 @@
-export const sectionsStore = JSON.parse(localStorage.getItem('sections'))
+export const sectionsStore = JSON.parse(window.localStorage.getItem('sections'))

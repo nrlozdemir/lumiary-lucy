@@ -231,7 +231,7 @@ class Routes extends React.Component {
     const { sections } = this.props
 
     if (prevProps.sections !== sections) {
-      localStorage.setItem('sections', JSON.stringify(sections))
+      window.localStorage.setItem('sections', JSON.stringify(sections))
     }
   }
 
