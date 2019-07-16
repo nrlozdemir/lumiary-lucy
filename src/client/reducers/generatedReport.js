@@ -229,6 +229,7 @@ const generatedReportsReducer = (state = initialState, action) => {
 
     case types.GET_PACING_CARD_DATA_FAILURE:
       return state
+        .setIn(['pacingChartData', 'data'], fromJS(null))
         .setIn(['pacingChartData', 'error'], fromJS(action.error))
         .setIn(['pacingChartData', 'loading'], fromJS(false))
 
@@ -241,6 +242,7 @@ const generatedReportsReducer = (state = initialState, action) => {
         .setIn(['competitorTopVideos', 'loading'], fromJS(false))
     case types.GET_COMPETITOR_TOP_VIDEOS_FAILURE:
       return state
+        .setIn(['competitorTopVideos', 'data'], fromJS({}))
         .setIn(['competitorTopVideos', 'error'], fromJS(action.error))
         .setIn(['competitorTopVideos', 'loading'], fromJS(false))
 
@@ -258,6 +260,7 @@ const generatedReportsReducer = (state = initialState, action) => {
 
     case types.GET_TOP_PERFORMING_VIDEOS_FAILURE:
       return state
+        .setIn(['topPerformingVideos', 'data'], fromJS(null))
         .setIn(['topPerformingVideos', 'error'], fromJS(action.error))
         .setIn(['topPerformingVideos', 'loading'], fromJS(false))
 
@@ -271,6 +274,7 @@ const generatedReportsReducer = (state = initialState, action) => {
 
     case types.GET_VIDEO_RELEASES_BAR_CHART_FAILURE:
       return state
+        .setIn(['videoReleasesBarChart', 'data'], fromJS([]))
         .setIn(['videoReleasesBarChart', 'error'], fromJS(action.error))
         .setIn(['videoReleasesBarChart', 'loading'], fromJS(false))
 
@@ -305,6 +309,7 @@ const generatedReportsReducer = (state = initialState, action) => {
 
     case types.GET_FILTERING_SECTION_DATA_FAILURE:
       return state
+        .setIn(['filteringSectionData', 'data'], fromJS({}))
         .setIn(['filteringSectionData', 'error'], fromJS(action.error))
         .setIn(['filteringSectionData', 'loading'], fromJS(false))
 
