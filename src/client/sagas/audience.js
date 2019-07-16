@@ -15,11 +15,6 @@ import {
 
 import _ from 'lodash'
 
-function getAudienceDataApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => audienceMockData)
-}
-
 function* getAudienceContentVitalityScoreData({ payload = {} }) {
   const { platform, metric, dateRange } = payload
 
@@ -152,45 +147,45 @@ function* getAudienceGenderData({ payload = {} }) {
   }
 }
 
-function* getAudienceColorTemperatureData() {
-  try {
-    const payload = yield call(getAudienceDataApi)
-    let shuffleData = payload.colorTempData
-    shuffleData = shuffleData.map((data) => {
-      data.data.map((item) => {
-        item.x = _.random(-50, 50)
-        item.y = _.random(-50, 50)
-      })
-      return data
-    })
+// function* getAudienceColorTemperatureData() {
+//   try {
+//     const payload = yield call(getAudienceDataApi)
+//     let shuffleData = payload.colorTempData
+//     shuffleData = shuffleData.map((data) => {
+//       data.data.map((item) => {
+//         item.x = _.random(-50, 50)
+//         item.y = _.random(-50, 50)
+//       })
+//       return data
+//     })
 
-    const topTexts = ['Happy', 'Energetic', 'Natural']
+//     const topTexts = ['Happy', 'Energetic', 'Natural']
 
-    const bottomTexts = ['Sad', 'Calm', 'Synthetic']
+//     const bottomTexts = ['Sad', 'Calm', 'Synthetic']
 
-    const leftTexts = ['Cool', 'Cool', 'Cool']
+//     const leftTexts = ['Cool', 'Cool', 'Cool']
 
-    const rightTexts = ['Warm', 'Warm', 'Warm']
+//     const rightTexts = ['Warm', 'Warm', 'Warm']
 
-    shuffleData = shuffleData.map((data, i) => {
-      data.topText = topTexts[i]
-      data.bottomText = bottomTexts[i]
-      data.leftText = leftTexts[i]
-      data.rightText = rightTexts[i]
-      data.data.map((item, i) => {
-        item.color = i === 0 ? '#5292e5' : '#2fd7c4'
-      })
-      return data
-    })
-    yield put(
-      actions.getAudienceColorTemperatureDataSuccess(
-        percentageManipulation(shuffleData)
-      )
-    )
-  } catch (err) {
-    yield put(actions.getAudienceColorTemperatureDataError(err))
-  }
-}
+//     shuffleData = shuffleData.map((data, i) => {
+//       data.topText = topTexts[i]
+//       data.bottomText = bottomTexts[i]
+//       data.leftText = leftTexts[i]
+//       data.rightText = rightTexts[i]
+//       data.data.map((item, i) => {
+//         item.color = i === 0 ? '#5292e5' : '#2fd7c4'
+//       })
+//       return data
+//     })
+//     yield put(
+//       actions.getAudienceColorTemperatureDataSuccess(
+//         percentageManipulation(shuffleData)
+//       )
+//     )
+//   } catch (err) {
+//     yield put(actions.getAudienceColorTemperatureDataError(err))
+//   }
+// }
 
 function* getAudienceChangeOverTimeData({ payload = {} }) {
   const { property, platform, metric, dateRange } = payload
@@ -223,34 +218,23 @@ function* getAudienceChangeOverTimeData({ payload = {} }) {
 function* getAudienceDominantColorData({ data: { dateRange, metric } }) {
   try {
     const { brand } = yield select(selectAuthProfile)
+
     const parameters = {
-      url: '/report',
-      dateRange,
       metric,
-      property: ['color'],
-      dateBucket: 'none',
-      brands: [brand.uuid],
+      daterange: dateRange,
     }
 
-    // TODO: We need to change platform when gender data comes.
-    // platform is wrong parameter. they are here to work request
-    const payload = yield all([
-      call(getDataFromApi, {
-        ...parameters,
-        platform: 'facebook',
-        // gender: 'male',
-      }),
-      call(getDataFromApi, {
-        ...parameters,
-        platform: 'youtube',
-        // gender: 'female',
-      }),
-    ])
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/dominantcolor`, parameters),
+      'GET'
+    )
 
     yield put(
       actions.getAudienceDominantColorDataSuccess(
         percentageManipulation(
-          radarChartCalculate(compareSharesData(payload, parameters))
+          radarChartCalculate(compareSharesData({ data: response }, parameters))
         )
       )
     )
@@ -268,10 +252,10 @@ export default [
   takeLatest(types.GET_AUDIENCE_PERFORMANCE_DATA, getAudiencePerformanceData),
   takeLatest(types.GET_AUDIENCE_AGE_SLIDER_DATA, getAudienceAgeSliderData),
   takeLatest(types.GET_AUDIENCE_GENDER_DATA, getAudienceGenderData),
-  takeLatest(
-    types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA,
-    getAudienceColorTemperatureData
-  ),
+  // takeLatest(
+  //   types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA,
+  //   getAudienceColorTemperatureData
+  // ),
   takeLatest(
     types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA,
     getAudienceChangeOverTimeData
