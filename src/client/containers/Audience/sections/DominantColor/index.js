@@ -15,6 +15,7 @@ class DominantColor extends React.Component {
       audienceDominantColorData: { data, loading, error },
     } = this.props
 
+
     return (
       <RadarChartModule
         loading={loading}
