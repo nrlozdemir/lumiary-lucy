@@ -17,9 +17,10 @@ class DominantColor extends React.Component {
 
     return (
       <RadarChartModule
-        leftTitle={data && data.length > 0 && data[0].type}
-        rightTitle={data && data.length > 0 && data[1].type}
-        data={data}
+        loading={loading}
+        leftTitle="Male"
+        rightTitle="Female"
+        data={loading ? {} : data}
         moduleKey={'Audience/DominantColor'}
         title="Dominant Color Performance By Gender"
         action={this.callBack}
