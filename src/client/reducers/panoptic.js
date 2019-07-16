@@ -194,6 +194,7 @@ const panopticReducer = (state = initialState, action) => {
 
     case types.GET_VIDEO_RELEASES_DATA_ERROR:
       return state
+        .setIn(['videoReleasesData', 'data'], fromJS([]))
         .setIn(['videoReleasesData', 'error'], fromJS(action.error))
         .setIn(['videoReleasesData', 'loading'], fromJS(false))
 
@@ -228,6 +229,7 @@ const panopticReducer = (state = initialState, action) => {
 
     case types.GET_FILTERING_SECTION_DATA_ERROR:
       return state
+        .setIn(['filteringSectionData', 'data'], fromJS({}))
         .setIn(['filteringSectionData', 'error'], fromJS(action.error))
         .setIn(['filteringSectionData', 'loading'], fromJS(false))
 
@@ -249,6 +251,7 @@ const panopticReducer = (state = initialState, action) => {
 
     case types.GET_PACING_CARD_DATA_ERROR:
       return state
+        .setIn(['pacingChartData', 'data'], fromJS({}))
         .setIn(['pacingChartData', 'error'], fromJS(action.error))
         .setIn(['pacingChartData', 'loading'], fromJS(false))
 
@@ -275,6 +278,7 @@ const panopticReducer = (state = initialState, action) => {
 
     case types.GET_FLIPCARDS_DATA_ERROR:
       return state
+        .setIn(['flipCardsData', 'data'], fromJS({}))
         .setIn(['flipCardsData', 'error'], fromJS(action.error))
         .setIn(['flipCardsData', 'loading'], fromJS(false))
 
@@ -288,6 +292,7 @@ const panopticReducer = (state = initialState, action) => {
 
     case types.GET_TOP_PERFORMING_FORMAT_DATA_ERROR:
       return state
+        .setIn(['topPerformingFormatData', 'data'], fromJS({}))
         .setIn(['topPerformingFormatData', 'error'], fromJS(action.error))
         .setIn(['topPerformingFormatData', 'loading'], fromJS(false))
 
