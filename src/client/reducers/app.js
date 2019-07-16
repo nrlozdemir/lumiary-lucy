@@ -1,6 +1,5 @@
 import update from 'immutability-helper'
 import { createSelector } from 'reselect'
-import { sectionsStore } from 'Utils/localStorage'
 
 export const types = {
   IS_MOBILE: 'APP/IS_MOBILE',
@@ -50,7 +49,9 @@ export const actions = {
 }
 
 export const initialState = {
-  sections: sectionsStore || {
+  sections: (typeof window === 'object'
+    ? JSON.parse(window.localStorage.getItem('sections'))
+    : null) || {
     data: null,
     loading: false,
   },

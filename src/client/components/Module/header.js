@@ -19,9 +19,6 @@ const HeaderModule = ({
   themes,
   sections: { data, loading },
 }) => {
-  if (modalShow) {
-    window.modules = { ...(window.modules || {}), [moduleKey]: '' }
-  }
   return (
     <React.Fragment>
       <div className={style.headerTitle}>

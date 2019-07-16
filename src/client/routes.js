@@ -8,7 +8,6 @@ import { actions, makeSelectGlobalSection } from 'Reducers/app'
 
 import RouterLoading from 'Components/RouterLoading'
 import DynamicImport from 'Containers/DynamicImport'
-import { sectionsStore } from 'Utils/localStorage'
 
 const routes = [
   {
@@ -221,6 +220,8 @@ const RouteWithSubRoutes = (route) => (
 class Routes extends React.Component {
   componentDidMount() {
     const { getSectionExplanationsRequest } = this.props
+
+    const sectionsStore = JSON.parse(window.localStorage.getItem('sections'))
 
     if (!sectionsStore || !sectionsStore.data) {
       getSectionExplanationsRequest()
