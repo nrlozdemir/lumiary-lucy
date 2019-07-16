@@ -118,9 +118,9 @@ const RadarChart = (props) => {
         legend: {
           display: false,
         },
-        // layout: {
-        //   padding: 30,
-        // },
+        layout: {
+          padding: 40,
+        },
         tooltips: {
           backgroundColor: '#fff',
           cornerRadius: 6,
