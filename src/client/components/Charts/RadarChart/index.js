@@ -105,11 +105,7 @@ const RadarChart = (props) => {
 
     stepSize = max / 4
 
-    maxTicksStepLimit = parsedData.datasets[0].data.every(
-      (n) => n <= 100000 // 100k
-    )
-      ? 100000 // 100k
-      : max // any big number than 100k
+    maxTicksStepLimit = max
   }
 
   return (
