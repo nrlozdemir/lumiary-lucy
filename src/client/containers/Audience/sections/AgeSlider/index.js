@@ -77,12 +77,13 @@ class AgeSlider extends React.PureComponent {
 
     agesToFetch = agesToFetch.filter((a) => {
       const storedAge = find(videosArr, ['age', a])
-      return !!storedAge && !storedAge.image
+      return !!storedAge && !!storedAge.loading
     })
 
     this.setState({ prevAges: agesToFetch })
 
     params &&
+      !!agesToFetch.length &&
       getAudienceAgeSliderData({
         ...params,
         loading: false,
@@ -96,7 +97,7 @@ class AgeSlider extends React.PureComponent {
     const {
       audienceAgeSliderData: { data, loading, error },
     } = this.props
-    
+
     return (
       <Module
         loading={loading}

@@ -9,8 +9,13 @@ import style from '../../style.scss'
 
 class VideoSection extends React.Component {
   componentDidMount() {
-    if (this.props.library.data.videos.length == 0) {
-      this.props.getVideos()
+    const {
+      library: { data },
+      getVideos,
+    } = this.props
+    
+    if (!!data && !!data.videos && !data.videos.length) {
+      getVideos()
     }
   }
 

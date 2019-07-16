@@ -181,9 +181,7 @@ function* getSimilarProperties({ data: { dateRange, container } }) {
       competitors,
     }
 
-    const url = `/brand/${
-      brand.uuid
-    }/properties?metric=shares&daterange=${dateRange}`
+    const url = `/brand/${brand.uuid}/properties?metric=shares&daterange=${dateRange}`
     //${!!competitors ? '&allcompetitors=true' : ''}`
 
     const payload = yield call(getDataFromApi, options, url, 'GET')
@@ -460,40 +458,55 @@ function* getTotalViewsData({ data }) {
 
     const dateBucket = getDateBucketFromRange(dateRange)
 
-    const [barData, doughnutData] = yield all([
-      call(getDataFromApi, undefined, `${url}&datebucket=${dateBucket}`, 'GET'),
-      call(getDataFromApi, undefined, `${url}&datebucket=none`, 'GET'),
-    ])
-
-    const convertedBarData =
-      dateBucket === 'none'
-        ? {}
-        : convertDataIntoDatasets(
-            barData,
-            { ...options, dateBucket },
-            {
-              isMetric: true,
-            }
-          )
-
-    const convertedDoughnutData = convertDataIntoDatasets(
-      doughnutData,
-      { ...options, dateBucket: 'none' },
-      {
-        hoverBG: true,
-        singleDataset: true,
-        useBrandLabels: true,
-        isMetric: true,
-      }
+    const barData = yield call(
+      getDataFromApi,
+      undefined,
+      `${url}&datebucket=${dateBucket}`,
+      'GET'
     )
 
-    yield put(
-      actions.getTotalViewsSuccess({
-        barData: percentageManipulation(convertedBarData),
-        doughnutData: percentageManipulation(convertedDoughnutData),
-      })
-    )
+    if (!!barData) {
+      const convertedBarData =
+        dateBucket === 'none'
+          ? {}
+          : convertDataIntoDatasets(
+              barData,
+              { ...options, dateBucket },
+              {
+                isMetric: true,
+              }
+            )
+      const covertDataForDoughnut = Object.keys(barData).reduce((acc, key) => {
+        acc[key] = {
+          [metric]: {
+            percent: Math.max(...Object.values(barData[key][metric].percents)),
+          },
+        }
+        return acc
+      }, {})
+
+      const convertedDoughnutData = convertDataIntoDatasets(
+        covertDataForDoughnut,
+        { ...options },
+        {
+          hoverBG: true,
+          singleDataset: true,
+          useBrandLabels: true,
+          isMetric: true,
+        }
+      )
+
+      yield put(
+        actions.getTotalViewsSuccess({
+          barData: percentageManipulation(convertedBarData),
+          doughnutData: percentageManipulation(convertedDoughnutData),
+        })
+      )
+    } else {
+      throw new Error('Get Total Views Error')
+    }
   } catch (error) {
+    console.log('error', error)
     yield put(actions.getTotalViewsFailure(error))
   }
 }

@@ -38,14 +38,14 @@ class Dropdown extends Component {
 
   render() {
     const { switchOn } = this.state
-    const { profileImg } = this.props
+    const { avatar } = this.props
     const { status, colors } = this.props.themeContext
     const imageClass = classnames('circleImage ' + style.profileImage)
 
     return (
       <div>
         <img
-          src={profileImg || `https://picsum.photos/id/836/30/30`}
+          src={avatar || `https://picsum.photos/id/836/30/30`}
           className={imageClass}
           onClick={this.showMenu}
         />

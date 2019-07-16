@@ -7,12 +7,13 @@ import { reduxForm } from 'redux-form'
 
 import { actions, makeSelectLibraryDetail } from 'Reducers/libraryDetail'
 import { actions as libraryActions, makeSelectLibrary } from 'Reducers/library'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 
 import LibraryDetailChartHeader from './sections/LibraryDetailChartHeader'
 import LibraryDetailDoughnutChart from './sections/LibraryDetailDoughnutChart'
 // import LibraryDetailColorTemperature from './sections/LibraryDetailColorTemperature'
 import LibraryDetailShotByShot from './sections/LibraryDetailShotByShot'
-import { userUuid, mediaUrl } from 'Utils/globals'
+import { mediaUrl } from 'Utils/globals'
 import { withTheme } from 'ThemeContext/withTheme'
 
 /* eslint-disable react/prefer-stateless-function */
@@ -35,10 +36,11 @@ export class LibraryDetail extends React.Component {
       getSelectedVideo,
       getSelectedVideoAverage,
       themeContext: { colors },
+      profile: { brand },
     } = this.props
 
     if (match.params.videoId) {
-      getSelectedVideo({ brandUuid: userUuid, videoId: match.params.videoId })
+      getSelectedVideo({ brandUuid: brand.uuid, videoId: match.params.videoId })
       getSelectedVideoAverage(match.params.videoId)
       getDoughnutChartRequest({
         LibraryDetailId: match.params.videoId,
@@ -57,6 +59,7 @@ export class LibraryDetail extends React.Component {
       // getColorTempRequest,
       getShotByShotRequest,
       themeContext: { colors },
+      profile: { brand },
     } = this.props
     if (
       prevMatch.params.videoId !== match.params.videoId ||
@@ -68,7 +71,7 @@ export class LibraryDetail extends React.Component {
       })
     }
     if (prevMatch.params.videoId !== match.params.videoId) {
-      getSelectedVideo({ brandUuid: userUuid, videoId: match.params.videoId })
+      getSelectedVideo({ brandUuid: brand.uuid, videoId: match.params.videoId })
       getSelectedVideoAverage(match.params.videoId)
       // getColorTempRequest({ videoId: match.params.videoId })
       getShotByShotRequest(match.params.videoId)
@@ -81,6 +84,7 @@ export class LibraryDetail extends React.Component {
 
   render() {
     const {
+      profile: { brand },
       libraryDetail: {
         shotByShotData: { data: shotByShotData, loading: shotByShotLoading },
         selectedVideo,
@@ -95,7 +99,7 @@ export class LibraryDetail extends React.Component {
       <React.Fragment>
         <LibraryDetailChartHeader
           selectedVideoAverage={selectedVideoAverage}
-          videoUrl={`${mediaUrl}/lumiere/${userUuid}/${videoId}.mp4`}
+          videoUrl={`${mediaUrl}/lumiere/${brand.uuid}/${videoId}.mp4`}
           title={selectedVideo && selectedVideo.title}
           socialIcon={selectedVideo && selectedVideo.socialIcon}
           cvScore={selectedVideo && selectedVideo['cvScores.value']}
@@ -130,6 +134,7 @@ LibraryDetail.propTypes = {
 }
 
 const mapStateToProps = createStructuredSelector({
+  profile: makeSelectAuthProfile(),
   libraryDetail: makeSelectLibraryDetail(),
   library: makeSelectLibrary(),
 })
