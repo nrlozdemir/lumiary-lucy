@@ -19,8 +19,8 @@ const RadarChartModule = ({
   rightTitle,
   loading = false,
   infoText,
-  width = 430,
-  height = 430,
+  width = 460,
+  height = 460,
 }) => {
   let checkData =
     !data || !data.length || (data.length && (!data[0] || !data[1]))
