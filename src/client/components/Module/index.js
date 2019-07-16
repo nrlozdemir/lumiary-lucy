@@ -4,7 +4,7 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
-import { actions as globalActions, makeSelectGlobal } from 'Reducers/global'
+import { makeSelectGlobalSection } from 'Reducers/app'
 import _ from 'lodash'
 import cx from 'classnames'
 import style from './style.scss'
@@ -140,7 +140,7 @@ export class Module extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   selectFilters: makeSelectSelectFilters(),
-  global: makeSelectGlobal(),
+  sections: makeSelectGlobalSection(),
 })
 
 Module.defaultProps = {
@@ -157,12 +157,9 @@ Module.propTypes = {
   customEmptyClasses: PropTypes.string,
 }
 
-const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(globalActions, dispatch)
-
 const withConnect = connect(
   mapStateToProps,
-  mapDispatchToProps
+  null
 )
 
 export default compose(withConnect)(Module)

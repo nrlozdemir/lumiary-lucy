@@ -5,6 +5,7 @@ import style from './style.scss'
 import ToolTip from 'Components/ToolTip'
 import InformationModal from 'Components/Modal/Information'
 import classnames from 'classnames'
+import { moduleIds } from 'Utils/globals'
 
 const HeaderModule = ({
   title,
@@ -16,9 +17,11 @@ const HeaderModule = ({
   setModalShow,
   modalShow,
   themes,
-  global: { sections: sectionExplanations },
-  getSectionExplanationsRequest,
+  sections: { data, loading },
 }) => {
+  if (modalShow) {
+    window.modules = { ...(window.modules || {}), [moduleKey]: '' }
+  }
   return (
     <React.Fragment>
       <div className={style.headerTitle}>
@@ -38,14 +41,10 @@ const HeaderModule = ({
             isOpen={modalShow}
             closeTimeoutMS={300}
             onRequestClose={() => setModalShow(false)}
-            onAfterOpen={() => {
-              if (sectionExplanations && !sectionExplanations[moduleKey]) {
-                getSectionExplanationsRequest({ key: moduleKey })
-              }
+            options={{
+              data: data && data[moduleIds[moduleKey]],
+              loading,
             }}
-            options={
-              (sectionExplanations && sectionExplanations[moduleKey]) || []
-            }
           />
         )}
       </div>

@@ -49,7 +49,7 @@ const InformationModal = ({
         }}
       >
         <div className={style.modalContent}>
-          {data && data.length ? (
+          {data ? (
             data.map((item, key) => (
               <div key={key} className={style.item}>
                 <div className={style.header}>

@@ -1,8 +1,14 @@
 import React, { Component } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
 
+import { compose, bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { actions, makeSelectGlobalSection } from 'Reducers/app'
+
 import RouterLoading from 'Components/RouterLoading'
 import DynamicImport from 'Containers/DynamicImport'
+import { sectionsStore } from 'Utils/localStorage'
 
 const routes = [
   {
@@ -208,6 +214,22 @@ const RouteWithSubRoutes = (route) => (
 )
 
 class Routes extends React.Component {
+  componentDidMount() {
+    const { getSectionExplanationsRequest } = this.props
+
+    if (!sectionsStore || !sectionsStore.data) {
+      getSectionExplanationsRequest()
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { sections } = this.props
+
+    if (prevProps.sections !== sections) {
+      localStorage.setItem('sections', JSON.stringify(sections))
+    }
+  }
+
   render() {
     return (
       <Switch>
@@ -221,4 +243,15 @@ class Routes extends React.Component {
 
 Routes.propTypes = {}
 
-export default withRouter(Routes)
+const mapStateToProps = createStructuredSelector({
+  sections: makeSelectGlobalSection(),
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(withRouter(Routes))
