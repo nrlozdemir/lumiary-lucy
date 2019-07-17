@@ -13,3 +13,87 @@
     }
   }
 }
+
+.form {
+  font-family: $font-family-ClanOT;
+
+  .info {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+    margin-bottom: 40px;
+
+    .image {
+      position: relative;
+      width: 64px;
+      height: 64px;
+      overflow: hidden;
+      border: 1px solid #fff;
+      border-radius: 50%;
+
+      img {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, 0);
+        max-height: 100%;
+      }
+    }
+
+    h1 {
+      color: #fff;
+      font-family: $font-family-primary;
+      font-size: 24px;
+      line-height: 30px;
+      font-weight: 800;
+      font-stretch: condensed;
+      margin-top: 24px;
+    }
+  }
+
+  .link {
+    display: block;
+    width: 100%;
+    color: #fff;
+    font-family: $font-family-ClanOTBold;
+    font-weight: bold;
+    font-size: 14px;
+    text-align: center;
+    margin: 40px 0;
+    text-decoration: none;
+  }
+
+  .input {
+    display: block;
+    margin-bottom: 24px;
+
+    input {
+      width: 100%;
+      background-color: #21243b;
+      color: $color-dusk-two;
+      border: 1px solid $color-dusk-two;
+
+      &:valid {
+        border-color: #fff;
+      }
+    }
+  }
+
+  .button {
+    border: 1px solid $color-cool-grey;
+    color: $color-cool-grey;
+    background-color: transparent;
+    padding: 11px 24px;
+    border-radius: 8px;
+    outline: none;
+    text-decoration: none;
+    font-family: $font-family-ClanOTBold;
+    font-size: 14px;
+
+    &:hover {
+      border-color: $color-cool-blue;
+      color: #fff;
+    }
+  }
+}

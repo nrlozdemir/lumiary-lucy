@@ -5,7 +5,16 @@ import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 /* eslint-disable react/prefer-stateless-function */
-const Input = ({ error, value, label, placeholder, customClass, input }) => {
+const Input = ({
+  error,
+  value,
+  type,
+  label,
+  placeholder,
+  customClass,
+  input,
+  required,
+}) => {
   // inputBackground
   // inputBorder
   // inputActiveBorder
@@ -33,9 +42,11 @@ const Input = ({ error, value, label, placeholder, customClass, input }) => {
             ) : null}
             <input
               id={label}
+              type={type || 'text'}
               className={cx}
               placeholder={placeholder}
               value={value}
+              {...(required ? { required: true } : {})}
               {...input}
             />
           </div>

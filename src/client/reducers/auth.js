@@ -65,6 +65,7 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOGIN_REQUEST:
       return {
+        ...state,
         requesting: true,
         successful: false,
         loginError: null,
