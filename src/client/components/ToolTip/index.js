@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
-export default ({ show = false, children }) => {
+export default ({ show = false, onClick = () => {}, children }) => {
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -13,11 +13,12 @@ export default ({ show = false, children }) => {
             color: colors.tooltipTextColor,
             background: colors.tooltipBackground,
           }}
+          onClick={onClick}
         >
           <span
             className={style.toolTipTick}
             style={{
-              border: `10px solid ${colors.tooltipBackground}`,
+              border: `6px solid ${colors.tooltipBackground}`,
               borderColor: `transparent transparent ${
                 colors.tooltipBackground
               } ${colors.tooltipBackground}`,

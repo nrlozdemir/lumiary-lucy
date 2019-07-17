@@ -56,7 +56,6 @@ const RadarChartModule = ({
           legend={legend}
           isEmpty={isEmpty}
           loading={loading}
-          infoText={infoText}
         >
           <div
             className={style.radarChartContainer}

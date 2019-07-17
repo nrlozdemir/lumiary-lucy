@@ -17,13 +17,15 @@ const renderLegend = (legend) => {
   return (
     <div className={style.headerLabel}>
       <div className={'d-flex align-items-center justify-content-center'}>
-        {!!legend && !!legend.length && legend.map((item, idx) => (
-          <Legend
-            key={`colorTempLegend_${idx}`}
-            color={item.color}
-            label={item.label}
-          />
-        ))}
+        {!!legend &&
+          !!legend.length &&
+          legend.map((item, idx) => (
+            <Legend
+              key={`colorTempLegend_${idx}`}
+              color={item.color}
+              label={item.label}
+            />
+          ))}
       </div>
     </div>
   )
@@ -47,7 +49,6 @@ const ColorTemperatureModule = ({
   chartWrapperClass,
   selectValue,
   isEmpty,
-  infoText
 }) => {
   return (
     <ThemeContext.Consumer>
@@ -61,7 +62,6 @@ const ColorTemperatureModule = ({
           legend={renderLegend(legend)}
           filters={filters}
           isEmpty={isEmpty}
-          infoText={infoText}
         >
           <div className={style.colorChartContainer}>
             <div className={cx(extraClasses, style.colorChartContent)}>
