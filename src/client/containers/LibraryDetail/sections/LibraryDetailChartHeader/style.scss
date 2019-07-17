@@ -91,11 +91,11 @@
       margin-bottom: 12px;
 
       .leftTitle {
-        font-family: $font-family-ClanOT;
-        font-size: 14px;
-        font-weight: bold;
+        font-family: $font-family-primary;
+        font-size: 18px;
+        font-weight: 800;
         font-style: normal;
-        font-stretch: normal;
+        font-stretch: condensed;
         line-height: normal;
         letter-spacing: normal;
         // color: $color-white;
@@ -103,11 +103,11 @@
       }
 
       .rightTitle {
-        font-family: $font-family-primary;
-        font-size: 18px;
-        font-weight: 800;
+        font-family: $font-family-ClanOT;
+        font-size: 14px;
+        font-weight: bold;
         font-style: normal;
-        font-stretch: condensed;
+        font-stretch: normal;
         line-height: normal;
         letter-spacing: normal;
         // color: $color-white;
@@ -647,4 +647,10 @@
   text-align: center;
   // color: $color-white;
   margin: 0px 20px;
+}
+
+.moduleInfo{
+  font-size: 14px;
+  margin-left: 8px;
+  position: relative;
 }
