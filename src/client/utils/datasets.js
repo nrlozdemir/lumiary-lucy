@@ -519,7 +519,6 @@ const parseAverage = (payload) => {
       keyName = keyName.slice(0, keyName.length - 1)
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
-        order: getOrder(keyName),
         percentile: percentageBeautifier(
           payload.video[`cvScores.library_${item.replace('s.', '_')}`]
         ),
