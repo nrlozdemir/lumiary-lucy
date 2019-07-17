@@ -189,6 +189,9 @@ const dark = {
   // Asset Layer
   assetLayerBorderColor: '#545b79',
   assetLayerShadowColor: 'rgba(0, 0, 0, 0.5)',
+
+  // Information Modal
+  informationModalBackgroundColor: '#acb0be',
 }
 
 const light = {
@@ -382,6 +385,9 @@ const light = {
   // Asset Layer
   assetLayerBorderColor: '#c6c9d7',
   assetLayerShadowColor: '#bebebe',
+
+  // Information Modal
+  informationModalBackgroundColor: '#505050',
 }
 
 const themes = {

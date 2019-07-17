@@ -9,8 +9,8 @@ import { isDataSetEmpty } from 'Utils/datasets'
 import MultipleNoDataModule from 'Components/MultipleNoDataModule'
 import RouterLoading from 'Components/RouterLoading'
 
-const WrapperModule = ({ children, style, className}) => {
-  return(
+const WrapperModule = ({ children, style, className }) => {
+  return (
     <div className={className} style={style}>
       {children}
     </div>
@@ -18,7 +18,7 @@ const WrapperModule = ({ children, style, className}) => {
 }
 
 const TopSimilarProperties = (props) => {
-  const { data, title, filters, action, moduleKey, isLoading, isError, infoText } = props
+  const { data, title, filters, action, moduleKey, isLoading, isError } = props
   return (
     <Module
       title={title}
@@ -26,7 +26,6 @@ const TopSimilarProperties = (props) => {
       moduleKey={moduleKey}
       action={action}
       isEmpty={!isLoading && isError}
-      infoText={infoText}
     >
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (

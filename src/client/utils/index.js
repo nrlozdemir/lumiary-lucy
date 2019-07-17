@@ -407,6 +407,8 @@ return {
   mode: 'point',
   titleFontFamily: 'ClanOTBold',
   bodyFontColor: themes.chartTooltipColor,
+  xPadding: 8,
+  yPadding: 12,
   bodyFontStyle: 'bold',
   yAlign: 'bottom',
   xAlign: 'center',

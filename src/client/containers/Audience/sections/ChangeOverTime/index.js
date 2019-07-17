@@ -17,7 +17,6 @@ class ChangeOverTime extends React.Component {
   render() {
     const {
       audienceChangeOverTimeData: { data: dataToConvert, loading, error },
-      infoText,
     } = this.props
 
     const labels = (!!dataToConvert && Object.keys(dataToConvert)) || []
@@ -63,7 +62,6 @@ class ChangeOverTime extends React.Component {
         moduleKey={'Audience/ChangeOverTime'}
         title="Change Over Time By Property"
         action={this.callBack}
-        infoText={infoText}
         filters={[
           {
             type: 'property',

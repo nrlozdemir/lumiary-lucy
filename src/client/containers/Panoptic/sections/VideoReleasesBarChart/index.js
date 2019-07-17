@@ -49,7 +49,6 @@ class VideoReleasesBarChart extends Component {
         ]}
         isEmpty={isEmpty}
         loading={loading}
-        infoText={`This graph measures the total number of video releases for each format type against engagement across a seven-day period. The split vertical bars measure the number of video releases against the level of engagement. Using the drop-downs, you can adjust the engagement/platform and the time range.`}
       />
     )
   }

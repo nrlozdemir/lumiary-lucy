@@ -1,22 +1,22 @@
 .toolTip {
+  min-width: 94px;
   text-align: center;
+  border-radius: 8px;
   box-sizing: border-box;
-  width: 480px;
   box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
-  // background-color: #545b79;
-  // color: #ffffff;
   font-family: $font-family-ClanOTNews;
-  font-size: 14px;
-  padding: 16px;
-  line-height: 26px;
+  font-size: 12px;
+  padding: 6px 12px;
+  line-height: 20px;
   position: absolute;
-  bottom: 38px;
+  bottom: 32px;
   -webkit-transition: 0.3s;
   -moz-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
   opacity: 0;
   visibility: hidden;
+  border-radius: 8px;
 
   &.show {
     opacity: 1;

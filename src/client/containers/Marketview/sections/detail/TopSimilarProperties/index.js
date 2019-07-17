@@ -15,7 +15,6 @@ class TopSimilarProperties extends React.Component {
       container,
       getSimilarPropertiesRequest,
       themeContext: { colors },
-      infoText,
     } = this.props
 
     getSimilarPropertiesRequest({ ...data, container })
@@ -27,7 +26,6 @@ class TopSimilarProperties extends React.Component {
       title,
       moduleKey,
       filters,
-      infoText,
     } = this.props
 
     return (
@@ -40,7 +38,6 @@ class TopSimilarProperties extends React.Component {
         filters={filters}
         isError={error}
         isLoading={loading}
-        infoText={infoText}
       />
     )
   }

@@ -85,7 +85,6 @@ const BarAndDoughnutChartModule = ({
   doughnutData,
   stackedChartData,
   loading = false,
-  infoText,
 }) => {
   return (
     <ThemeContext.Consumer>
@@ -98,7 +97,6 @@ const BarAndDoughnutChartModule = ({
           legend={renderLegend(legend)}
           isEmpty={isDataSetEmpty(stackedChartData)}
           loading={loading}
-          infoText={infoText}
         >
           <div
             className={classnames(style.container, reverse && style.reverse)}

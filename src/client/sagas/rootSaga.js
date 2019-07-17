@@ -9,9 +9,11 @@ import reports from './reports'
 import generatedReport from './generatedReport'
 import audience from './audience'
 import auth from './auth'
+import app from './app'
 
 export default function* rootSaga() {
   yield all([
+    ...app,
     ...auth,
     ...library,
     ...libraryDetail,
