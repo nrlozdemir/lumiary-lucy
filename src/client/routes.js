@@ -184,8 +184,39 @@ const routes = [
     component: 'SSO',
   },
   {
+    path: '/account/login',
+    exact: true,
+    component: 'Account',
+    navbarOff: true,
+  },
+  {
+    path: '/account/change-password',
+    exact: true,
+    component: 'Account',
+    navbarOff: true,
+  },
+  {
+    path: '/account/competitors',
+    exact: true,
+    component: 'Account',
+    navbarOff: true,
+  },
+  {
+    path: '/account/forgot-password',
+    exact: true,
+    component: 'Account',
+    navbarOff: true,
+  },
+  {
+    path: '/account/oauth',
+    exact: true,
+    component: 'Account',
+    navbarOff: true,
+  },
+  {
     path: '*',
     component: 'NotFound',
+    navbarOff: true,
   },
 ]
 
