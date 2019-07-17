@@ -13,6 +13,18 @@ const Front = ({ data, title, colors, mouseenter, mouseleave, tooltipIsOpen }) =
   //let percentage = (100 * data.value) / data.max
   let percentage = parseInt(data.percentile) || 0
 
+  const text = data.diff > 0 ? 'more' : 'less'
+  const tooltipText = textEdit(
+    `This video is receiving <b>{percentage}% ${text}</b> {title} than your library average`,
+    {
+      percentage:
+        data.diff < 0
+          ? parseInt(data.diff.toString().substr(1))
+          : data.diff, // removed 'minus' first character
+      title,
+    }
+  )
+
   return (
     <div className={style.frontContainer}>
       <div className={style.videoStat}>
@@ -31,10 +43,10 @@ const Front = ({ data, title, colors, mouseenter, mouseleave, tooltipIsOpen }) =
               onMouseEnter={mouseenter}
               onMouseLeave={mouseleave}
             />
-            <ToolTip show={tooltipIsOpen}>Hi....</ToolTip>
+            <ToolTip show={tooltipIsOpen[title]} width={206}>{tooltipText}</ToolTip>
           </span>
           <span className={style.rightTitle}>
-            {ucfirst(title)}{' '}
+            {ucfirst(title)}{'s'}
           </span>
         </div>
         <ProgressBar
@@ -55,25 +67,6 @@ const Front = ({ data, title, colors, mouseenter, mouseleave, tooltipIsOpen }) =
   )
 }
 
-const Back = (props) => {
-  const { data, title } = props
-  const text = data.diff > 0 ? 'more' : 'less'
-  return (
-    <p className={style.backText}>
-      {textEdit(
-        `This video is receiving <b>{percentage}% ${text}</b> {title} than your library average`,
-        {
-          percentage:
-            data.diff < 0
-              ? parseInt(data.diff.toString().substr(1))
-              : data.diff, // removed 'minus' first character
-          title,
-        }
-      )}
-    </p>
-  )
-}
-
 class LibraryDetailChartHeader extends React.Component {
   constructor(props) {
     super(props)
@@ -85,15 +78,21 @@ class LibraryDetailChartHeader extends React.Component {
     this.callMouseLeave = this.callMouseLeave.bind(this)
   }
 
-  callMouseEnter() {
+  callMouseEnter(key) {
     this.setState({
-      tooltipIsOpen: true
+      tooltipIsOpen: {
+        ...false,
+        [key] : true,
+      }
     })
   }
 
-  callMouseLeave() {
+  callMouseLeave(key) {
     this.setState({
-      tooltipIsOpen: false
+      tooltipIsOpen: {
+        ...false,
+        [key] : false,
+      }
     })
   }
 
@@ -135,11 +134,11 @@ class LibraryDetailChartHeader extends React.Component {
                       data={key}
                       title={key.keyName}
                       colors={colors}
-                      mouseenter={this.callMouseEnter}
-                      mouseleave={this.callMouseLeave}
+                      mouseenter={() => this.callMouseEnter(key.keyName)}
+                      mouseleave={() => this.callMouseLeave(key.keyName)}
                       tooltipIsOpen={this.state.tooltipIsOpen}
                     />
-                    <Back data={key} title={key.keyName} />
+                    <div />
                   </FlipCard>
                 )
               })}
