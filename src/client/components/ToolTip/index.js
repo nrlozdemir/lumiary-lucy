@@ -3,7 +3,7 @@ import classnames from 'classnames'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
-export default ({ show = false, children }) => {
+export default ({ show = false, children, width = 480 }) => {
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -12,6 +12,7 @@ export default ({ show = false, children }) => {
           style={{
             color: colors.tooltipTextColor,
             background: colors.tooltipBackground,
+            width: `${width}px`
           }}
         >
           <span
