@@ -18,8 +18,9 @@ const RadarChartModule = ({
   leftTitle,
   rightTitle,
   loading = false,
-  width = 430,
-  height = 430,
+  infoText,
+  width = 460,
+  height = 460,
 }) => {
   let checkData =
     !data || !data.length || (data.length && (!data[0] || !data[1]))
@@ -142,7 +143,7 @@ const RadarChartModule = ({
                 />
               </div>
               <div className={style.progressCountArea}>
-                {!!checkData &&
+                {(!!checkData &&
                   !!checkData[0] &&
                   !!checkData[0].progress &&
                   checkData[0].progress.length &&
@@ -159,7 +160,8 @@ const RadarChartModule = ({
                         {index + 1}
                       </span>
                     )
-                  })}
+                  })) ||
+                  null}
               </div>
               <div
                 className={style.progressInner}

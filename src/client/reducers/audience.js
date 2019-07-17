@@ -88,7 +88,7 @@ export const actions = {
 
   getAudienceGenderData: (payload) => ({
     type: types.GET_AUDIENCE_GENDER_DATA,
-    payload
+    payload,
   }),
   getAudienceGenderDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_GENDER_DATA_SUCCESS,
@@ -113,7 +113,7 @@ export const actions = {
 
   getAudienceChangeOverTimeData: (payload) => ({
     type: types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA,
-    payload
+    payload,
   }),
   getAudienceChangeOverTimeDataSuccess: (payload) => ({
     type: types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS,
@@ -197,6 +197,7 @@ const audienceReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR:
       return state
+        .setIn(['audienceContentVitalityScoreData', 'data'], fromJS([]))
         .setIn(
           ['audienceContentVitalityScoreData', 'error'],
           fromJS(action.error)
@@ -213,6 +214,7 @@ const audienceReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_PERFORMANCE_DATA_ERROR:
       return state
+        .setIn(['audiencePerformanceData', 'data'], fromJS({}))
         .setIn(['audiencePerformanceData', 'error'], fromJS(action.error))
         .setIn(['audiencePerformanceData', 'loading'], fromJS(false))
 
@@ -275,6 +277,7 @@ const audienceReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR:
       return state
+        .setIn(['audienceChangeOverTimeData', 'data'], fromJS([]))
         .setIn(['audienceChangeOverTimeData', 'error'], fromJS(action.error))
         .setIn(['audienceChangeOverTimeData', 'loading'], fromJS(false))
 
@@ -288,6 +291,7 @@ const audienceReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR:
       return state
+        .setIn(['audienceDominantColorData', 'data'], fromJS({}))
         .setIn(['audienceDominantColorData', 'error'], fromJS(action.error))
         .setIn(['audienceDominantColorData', 'loading'], fromJS(false))
 

@@ -322,6 +322,7 @@ const marketviewReducer = (state = initialState, action) => {
         .set('selectedVideo', fromJS(action.payload[0]))
     case types.GET_MARKETVIEW_COMPETITOR_VIDEOS_FAILURE:
       return state
+        .set('videos', fromJS([]))
         .set('error', fromJS(action.error))
         .set('loading', fromJS(false))
 
@@ -334,6 +335,7 @@ const marketviewReducer = (state = initialState, action) => {
         .setIn(['competitorTopVideos', 'loading'], fromJS(false))
     case types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_FAILURE:
       return state
+        .setIn(['competitorTopVideos', 'data'], fromJS([]))
         .setIn(['competitorTopVideos', 'error'], fromJS(action.error))
         .setIn(['competitorTopVideos', 'loading'], fromJS(false))
 
@@ -346,6 +348,7 @@ const marketviewReducer = (state = initialState, action) => {
         .setIn(['platformTopVideos', 'loading'], fromJS(false))
     case types.GET_MARKETVIEW_PLATFORM_TOP_VIDEOS_FAILURE:
       return state
+        .setIn(['platformTopVideos', 'data'], fromJS([]))
         .setIn(['platformTopVideos', 'error'], fromJS(action.error))
         .setIn(['platformTopVideos', 'loading'], fromJS(false))
 
@@ -360,6 +363,7 @@ const marketviewReducer = (state = initialState, action) => {
 
     case types.GET_MARKETVIEW_BUBBLECHART_FAILURE:
       return state
+        .setIn(['bubbleChartData', 'data'], fromJS([]))
         .setIn(['bubbleChartData', 'error'], fromJS(action.error))
         .setIn(['bubbleChartData', 'loading'], fromJS(false))
 
@@ -374,6 +378,7 @@ const marketviewReducer = (state = initialState, action) => {
 
     case types.GET_MARKETVIEW_PACINGCHART_FAILURE:
       return state
+        .setIn(['pacingChartData', 'data'], fromJS({}))
         .setIn(['pacingChartData', 'error'], fromJS(action.error))
         .setIn(['pacingChartData', 'loading'], fromJS(false))
 
@@ -411,6 +416,7 @@ const marketviewReducer = (state = initialState, action) => {
 
     case types.GET_MARKETVIEW_TOTALVIEWS_FAILURE:
       return state
+        .setIn(['totalViewsData', 'data'], fromJS({}))
         .setIn(['totalViewsData', 'error'], fromJS(action.error))
         .setIn(['totalViewsData', 'loading'], fromJS(false))
 
@@ -437,6 +443,7 @@ const marketviewReducer = (state = initialState, action) => {
         .setIn(['topPerformingDataForTime', 'loading'], fromJS(false))
     case types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_FAILURE:
       return state
+        .setIn(['topPerformingDataForTime', 'data'], fromJS({}))
         .setIn(['topPerformingDataForTime', 'error'], fromJS(action.error))
 
         .setIn(['topPerformingDataForTime', 'loading'], fromJS(false))
@@ -450,6 +457,7 @@ const marketviewReducer = (state = initialState, action) => {
 
     case types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_FAILURE:
       return state
+        .setIn(['totalCompetitorViewsData', 'data'], fromJS({}))
         .setIn(['totalCompetitorViewsData', 'error'], fromJS(action.error))
         .setIn(['totalCompetitorViewsData', 'loading'], fromJS(false))
 
@@ -471,6 +479,7 @@ const marketviewReducer = (state = initialState, action) => {
         )
     case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_FAILURE:
       return state
+        .setIn(['topPerformingPropertiesByCompetitorsData', 'data'], fromJS({}))
         .setIn(
           ['topPerformingPropertiesByCompetitorsData', 'error'],
           fromJS(action.error)
@@ -492,6 +501,7 @@ const marketviewReducer = (state = initialState, action) => {
 
     case types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_FAILURE:
       return state
+        .setIn(['topPerformingPropertiesData', 'data'], fromJS({}))
         .setIn(['topPerformingPropertiesData', 'error'], fromJS(action.error))
         .setIn(['topPerformingPropertiesData', 'loading'], fromJS(false))
 
