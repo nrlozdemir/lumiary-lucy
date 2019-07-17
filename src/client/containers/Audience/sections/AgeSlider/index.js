@@ -96,7 +96,6 @@ class AgeSlider extends React.PureComponent {
 
     const {
       audienceAgeSliderData: { data, loading, error },
-      infoText,
     } = this.props
 
     return (
@@ -117,7 +116,6 @@ class AgeSlider extends React.PureComponent {
             placeHolder: 'Date',
           },
         ]}
-        infoText={infoText}
         bodyClass={style.sliderWrapper}
       >
         <div className={style.audienceContainer}>

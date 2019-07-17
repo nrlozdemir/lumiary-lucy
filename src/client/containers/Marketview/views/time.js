@@ -56,7 +56,6 @@ export class Time extends React.Component {
         <TopSimilarProperties
           moduleKey="MarketView/Time/SimilarPropertiesModule"
           title="Similar Properties Of Top Videos"
-          infoText={`This module offers insights on top 3 similar properties found within top performing industry videos. `}
           activeDay={activeDay}
           filters={[
             {

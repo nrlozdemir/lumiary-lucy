@@ -61,7 +61,7 @@ const AssetLayer = (props) => {
               <div className={styles.percentageWrapper}>{children[1]}</div>
             )}
             <div className={styles.barChartInfo}>
-              {rightValue && <span>{rightValue}</span>}
+              {rightValue && rightValue !== 'NaN' && <span>{rightValue}</span>}
             </div>
           </div>
         </div>
