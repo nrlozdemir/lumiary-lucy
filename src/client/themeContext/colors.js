@@ -121,6 +121,7 @@ const dark = {
   tooltipTextColor: '#373f5b',
   tooltipBackground: '#ffffff',
   tooltipRadarChartTextColor: '#23294b',
+  chartTooltipColor: '#21243b',
   // tooltip values
 
   // radius icon values
@@ -313,6 +314,7 @@ const light = {
   tooltipTextColor: '#f3f6f9',
   tooltipBackground: '#505050',
   tooltipRadarChartTextColor: '#fff',
+  chartTooltipColor: '#fff',
   // tooltip values
 
   // radius icon values

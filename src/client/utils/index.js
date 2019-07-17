@@ -398,6 +398,34 @@ const getBrandAndCompetitorsFromProfileObject = (profile, brand_id) => {
   return response
 }
 
+const customChartToolTip = (themes, customOptions = {}) => {
+return {
+  backgroundColor: themes.tooltipBackground,
+  cornerRadius: 6,
+  titleFontColor: themes.chartTooltipColor,
+  titleFontStyle: 'bold',
+  mode: 'point',
+  titleFontFamily: 'ClanOTBold',
+  bodyFontColor: themes.chartTooltipColor,
+  bodyFontStyle: 'bold',
+  yAlign: 'bottom',
+  xAlign: 'center',
+  displayColors: false,
+  callbacks: {
+    title: () => '',
+    label: function(tooltipItem, data) {
+      const count = data && data.labels && data.labels[tooltipItem['index']] && data.labels[tooltipItem['index']].count || 0
+      const metric = data && data.datasets && data.datasets[0] && data.datasets[0].metric || ''
+      const name = data && data.labels && data.labels[tooltipItem['index']] && data.labels[tooltipItem['index']].name 
+      return `${metricSuffix(
+        count
+      ) || 0} ${metric || ''} ${!!name && `| ${name}`}`
+    },
+  },
+  ...customOptions
+}
+}
+
 export {
   randomKey,
   socialIconSelector,
@@ -425,4 +453,5 @@ export {
   hexToRgb,
   secondsToHHMMSS,
   getBrandAndCompetitorsFromProfileObject,
+  customChartToolTip
 }
