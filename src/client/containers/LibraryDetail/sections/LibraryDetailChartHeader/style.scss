@@ -89,6 +89,12 @@
       font-size: 14px;
       font-family: $font-family-ClanOTNews;
       margin-bottom: 12px;
+      display: flex;
+      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: space-between;
+      align-items: center;
+      align-content: center;
 
       .leftTitle {
         font-family: $font-family-primary;
@@ -99,7 +105,10 @@
         line-height: normal;
         letter-spacing: normal;
         // color: $color-white;
-        float: left;
+        position: relative;
+        order: 0;
+        flex: 0 1 auto;
+        align-self: auto;
       }
 
       .rightTitle {
@@ -110,8 +119,10 @@
         font-stretch: normal;
         line-height: normal;
         letter-spacing: normal;
+        order: 1;
+        flex: 0 1 auto;
+        align-self: auto;
         // color: $color-white;
-        float: right;
       }
 
       &::after {
@@ -652,5 +663,4 @@
 .moduleInfo{
   font-size: 14px;
   margin: 0px 0px 2px 8px;
-  position: relative;
 }
