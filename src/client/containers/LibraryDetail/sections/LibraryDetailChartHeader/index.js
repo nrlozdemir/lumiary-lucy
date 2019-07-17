@@ -6,12 +6,12 @@ import FlipCard from 'Components/FlipCard'
 import ProgressBar from 'Components/ProgressBar'
 import { ucfirst, metricSuffix } from 'Utils'
 import { textEdit } from 'Utils/text'
-import { ThemeContext } from 'ThemeContext/themeContext'
+import { withTheme } from 'ThemeContext/withTheme'
+import ToolTip from 'Components/ToolTip'
 
-const Front = (props) => {
-  const { data, colors, title } = props
+const Front = ({ data, title, colors, mouseenter, mouseleave, tooltipIsOpen }) => {
   //let percentage = (100 * data.value) / data.max
-  let percentage = parseInt(data.percentile) || 0 
+  let percentage = parseInt(data.percentile) || 0
 
   return (
     <div className={style.frontContainer}>
@@ -25,17 +25,20 @@ const Front = (props) => {
           </div>
         )}
         <div className={style.progressText}>
-          <span className={style.leftTitle}>
-            {ucfirst(title)}
+          <span className={style.leftTitle}>{metricSuffix(data.value)}
+            <i
+              className={classnames('icon icon-Information', style.moduleInfo)}
+              onMouseEnter={mouseenter}
+              onMouseLeave={mouseleave}
+            />
+            <ToolTip show={tooltipIsOpen}>Hi....</ToolTip>
           </span>
-          <span className={style.rightTitle}>{metricSuffix(data.value)}</span>
+          <span className={style.rightTitle}>
+            {ucfirst(title)}{' '}
+          </span>
         </div>
         <ProgressBar
-          width={
-            percentage > 100
-              ? 100
-              : parseFloat(percentage).toFixed(2)
-          }
+          width={percentage > 100 ? 100 : parseFloat(percentage).toFixed(2)}
           customBarClass={style.progressBar}
           customPercentageClass={classnames(style.percentageIncrease, {
             [style.percentageDecrease]: percentage < 50,
@@ -71,55 +74,80 @@ const Back = (props) => {
   )
 }
 
-const LibraryDetailChartHeader = ({
-  getVideoRef,
-  barChartData,
-  videoUrl,
-  title,
-  socialIcon,
-  cvScore,
-  id,
-  selectedVideoAverage,
-}) => {
-  return (
-    <ThemeContext.Consumer>
-      {({ themeContext: { colors } }) => (
-        <div className="grid-container col-12 mt-48">
-          <div className={classnames('mt-72', style.containerClass)}>
-            <div className={classnames('col-6', style.videoWrapper)}>
-              <Video
-                setRef={getVideoRef}
-                src={videoUrl}
-                title={title}
-                socialIcon={socialIcon}
-                cvScore={cvScore}
-              />
-            </div>
-            <div className={classnames('col-6', style.videoStatsWrapper)}>
-              {selectedVideoAverage &&
-                Object.keys(selectedVideoAverage).map((key, index) => {
-                  return (
-                    <FlipCard
-                      width={320}
-                      height={100}
-                      key={`flipcard-${key}-${index}`}
-                      isEmpty={selectedVideoAverage[key].value === 0}
-                    >
-                      <Front
-                        data={selectedVideoAverage[key]}
-                        title={key}
-                        colors={colors}
-                      />
-                      <Back data={selectedVideoAverage[key]} title={key} />
-                    </FlipCard>
-                  )
-                })}
-            </div>
+class LibraryDetailChartHeader extends React.Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      tooltipIsOpen: false
+    }
+
+    this.callMouseEnter = this.callMouseEnter.bind(this)
+    this.callMouseLeave = this.callMouseLeave.bind(this)
+  }
+
+  callMouseEnter() {
+    this.setState({
+      tooltipIsOpen: true
+    })
+  }
+
+  callMouseLeave() {
+    this.setState({
+      tooltipIsOpen: false
+    })
+  }
+
+  render() {
+    const {
+      getVideoRef,
+      videoUrl,
+      title,
+      socialIcon,
+      cvScore,
+      selectedVideoAverage,
+      themeContext: { colors },
+    } = this.props
+
+    return (
+      <div className="grid-container col-12 mt-48">
+        <div className={classnames('mt-72', style.containerClass)}>
+          <div className={classnames('col-6', style.videoWrapper)}>
+            <Video
+              setRef={getVideoRef}
+              src={videoUrl}
+              title={title}
+              socialIcon={socialIcon}
+              cvScore={cvScore}
+            />
+          </div>
+          <div className={classnames('col-6', style.videoStatsWrapper)}>
+            {selectedVideoAverage &&
+              selectedVideoAverage.map((key, index) => {
+                return (
+                  <FlipCard
+                    noflip={true}
+                    width={320}
+                    height={100}
+                    key={`flipcard-${key.keyName}-${index}`}
+                    isEmpty={key.value === 0}
+                  >
+                    <Front
+                      data={key}
+                      title={key.keyName}
+                      colors={colors}
+                      mouseenter={this.callMouseEnter}
+                      mouseleave={this.callMouseLeave}
+                      tooltipIsOpen={this.state.tooltipIsOpen}
+                    />
+                    <Back data={key} title={key.keyName} />
+                  </FlipCard>
+                )
+              })}
           </div>
         </div>
-      )}
-    </ThemeContext.Consumer>
-  )
+      </div>
+    )
+  }
 }
 
-export default LibraryDetailChartHeader
+export default withTheme(LibraryDetailChartHeader)
