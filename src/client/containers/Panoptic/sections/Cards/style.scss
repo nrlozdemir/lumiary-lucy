@@ -34,7 +34,7 @@
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    width: 40%;
+    width: 50%;
 
     .headline {
       width: 100%;
@@ -199,4 +199,9 @@ $arrowBackground: #fff;
   text-align: center;
   // color: $color-white;
   margin: 0px 10px;
+}
+
+.moduleInfo{
+  font-size: 14px;
+  margin: 0px 0px 2px 8px;
 }
