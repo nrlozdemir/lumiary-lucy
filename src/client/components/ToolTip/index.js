@@ -11,6 +11,8 @@ export default (props) => {
         let className
         if (!!props.largeTooltip) {
           className = 'largeTooltip'
+        } else if (!!props.mediumTooltip) {
+          className = 'mediumTooltip'
         } else if (!!props.smallTooltip) {
           className = 'smallTooltip'
         } else if (!!props.xSmallTooltip) {
