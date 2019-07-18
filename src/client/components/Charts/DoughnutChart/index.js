@@ -73,6 +73,7 @@ const DoughnutChart = (props) => {
     labelPositionRight,
     labelPositionLeft,
     cutoutPercentage,
+    removeTooltip,
     customStyle,
     customDoughnutContainer,
     customChartWrapper,
@@ -156,7 +157,7 @@ const DoughnutChart = (props) => {
                 responsive: false,
                 tooltips: {
                   ...customTooltips,
-                  enabled: true,
+                  enabled: removeTooltip ? false : true,
                 },
                 legend: {
                   display: legend,

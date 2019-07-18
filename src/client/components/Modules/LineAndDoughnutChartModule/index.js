@@ -2,10 +2,8 @@ import React from 'react'
 import cx from 'classnames'
 import Module from 'Components/Module'
 import style from './style.scss'
-import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import { Line } from 'react-chartjs-2'
-import Scrubber from 'Components/Sliders/Scrubber'
 import { withTheme } from 'ThemeContext/withTheme'
 
 const LineAndDoughnutChartModule = ({
@@ -22,7 +20,7 @@ const LineAndDoughnutChartModule = ({
   customCallbackFunc,
   themeContext: { colors },
 }) => {
-  const percentageCol = cx(style.percentageCol)
+  const percentageCol = cx('col-4-no-gutters', style.percentageCol)
 
   const plugins = [
     {
@@ -73,19 +71,19 @@ const LineAndDoughnutChartModule = ({
       title={title}
       action={action}
       filters={filters}
-      isEmpty={isEmpty}
+      isEmpty={false}
       loading={loading}
     >
       <div className="grid-collapse">
-        <div className="col-12-no-gutters">
+        <div className="col-12">
           <div
-            className={`col-8-no-gutters ${cx(style.contentVitalityChart)}`}
+            className={`${cx(style.contentVitalityChart)}`}
             data-legend="Content Vitality Score"
           >
             <Line
               key={Math.random()}
               data={lineChartData}
-              width={760}
+              width={1077}
               height={291}
               plugins={plugins}
               options={{
@@ -127,45 +125,146 @@ const LineAndDoughnutChartModule = ({
               }}
             />
           </div>
-          <div className="col-4-no-gutters d-flex align-items-center justify-content-center">
-            <DoughnutChart
-              width={270}
-              height={270}
-              cutoutPercentage={58}
-              fillText="Total Percentage"
-              dataLabelFunction="insertAfter"
-              dataLabelInsert="%"
-              labelPositionRight
-              data={doughnutData}
+        </div>
+        <div className="row">
+          <div className={percentageCol}>
+            <div
+              className={style.legend}
+              style={{
+                background: colors.labelBackground,
+                color: colors.labelColor,
+                boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+              }}
+            >
+              Live Action
+            </div>
+            <div
+              className={style.divider}
+              style={{
+                background: colors.moduleBorder,
+              }}
             />
+
+            <DoughnutChart
+              width={140}
+              height={140}
+              displayDataLabels={false}
+              cutoutPercentage={80}
+              datasetsBorderWidth={0}
+              removeTooltip
+              addAverage
+              data={{
+                datasets: [
+                  {
+                    borderColor: '#f3f6f9',
+                    data: [10, 90],
+                    backgroundColor: ['#5292e5', '#acb0be'],
+                    hoverBackgroundColor: ['#5292e5', '#acb0be'],
+                  },
+                ],
+                labels: ['a', 'b'],
+              }}
+            />
+            <p className={style.centerText}>
+              90.1 <span>CV Score</span>
+            </p>
+            <p className={style.doughnutChartText}>
+              The average male scores <b>10</b> points <b>below</b> your library
+              average on <b>Facebook</b>
+            </p>
           </div>
         </div>
-        <div className="col-12-no-gutters">
-          <Scrubber horizontal arrows isEmpty={isEmpty}>
-            <div className={style.percentageGraphContainer}>
-              {percentageData &&
-                percentageData.map((chart, idx) => (
-                  <div className={percentageCol} key={`PTPF_percentage-${idx}`}>
-                    <div className={style.chartSectionBadge}>
-                      <span
-                        style={{
-                          background: colors.labelBackground,
-                          color: colors.labelColor,
-                          boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                        }}
-                      >
-                        {chart.key}
-                      </span>
-                    </div>
-                    <PercentageBarGraph
-                      key={Math.random()}
-                      percentage={chart.value}
-                      color={chart.color}
-                    />
-                  </div>
-                ))}
-            </div>
-          </Scrubber>
+        <div className={percentageCol}>
+          <div
+            className={style.legend}
+            style={{
+              background: colors.labelBackground,
+              color: colors.labelColor,
+              boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+            }}
+          >
+            Live Action
+          </div>
+          <div
+            className={style.divider}
+            style={{
+              background: colors.moduleBorder,
+            }}
+          />
+
+          <DoughnutChart
+            width={140}
+            height={140}
+            displayDataLabels={false}
+            cutoutPercentage={80}
+            datasetsBorderWidth={0}
+            removeTooltip
+            addAverage
+            data={{
+              datasets: [
+                {
+                  borderColor: '#f3f6f9',
+                  data: [90.9, 9.1],
+                  backgroundColor: ['#5292e5', '#acb0be'],
+                  hoverBackgroundColor: ['#5292e5', '#acb0be'],
+                },
+              ],
+              labels: ['a', 'b'],
+            }}
+          />
+          <p className={style.centerText}>
+            90.1 <span>CV Score</span>
+          </p>
+          <p className={style.doughnutChartText}>
+            The average male scores <b>10</b> points <b>below</b> your library
+            average on <b>Facebook</b>
+          </p>
+        </div>
+        <div className={percentageCol}>
+          <div
+            className={style.legend}
+            style={{
+              background: colors.labelBackground,
+              color: colors.labelColor,
+              boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+            }}
+          >
+            Live Action
+          </div>
+          <div
+            className={style.divider}
+            style={{
+              background: colors.moduleBorder,
+            }}
+          />
+
+          <DoughnutChart
+            width={140}
+            height={140}
+            displayDataLabels={false}
+            cutoutPercentage={80}
+            datasetsBorderWidth={0}
+            removeTooltip
+            addAverage
+            data={{
+              datasets: [
+                {
+                  borderColor: '#f3f6f9',
+                  data: [10, 90],
+                  backgroundColor: ['#5292e5', '#acb0be'],
+                  hoverBackgroundColor: ['#5292e5', '#acb0be'],
+                },
+              ],
+              labels: ['a', 'b'],
+            }}
+          />
+          <p className={style.centerText}>
+            90.1 <span>CV Score</span>
+          </p>
+          <p className={style.doughnutChartText}>
+            The average male scores <b>10</b> points <b>below</b> your library
+            average on <b>Facebook</b>
+          </p>
         </div>
       </div>
     </Module>
