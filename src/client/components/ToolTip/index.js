@@ -9,8 +9,7 @@ export default (props) => {
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => {
         
-        //const className = !!props.largeTooltip ? "largeTooltip" : "smallTooltip"
-        const className = "smallTooltip"
+        const className = !!props.largeTooltip ? "largeTooltip" : "smallTooltip"
         
         return (
           <ReactTooltip
