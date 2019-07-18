@@ -1,10 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose, bindActionCreators } from 'redux'
-import { createStructuredSelector } from 'reselect'
 import { actions } from 'Reducers/auth'
 import { Field, reduxForm } from 'redux-form'
-import { required } from 'Utils/validate'
 
 import Input from 'Components/Form/Input'
 import AccountCard from 'Components/AccountCard'
@@ -17,9 +15,20 @@ const LoginForm = ({
   themeContext: { colors },
   loginRequest,
   handleSubmit,
+  loggedIn,
+  message,
 }) => {
   return (
-    <AccountCard>
+    <AccountCard
+      status={
+        message
+          ? {
+              message,
+              state: loggedIn ? 'success' : 'error',
+            }
+          : null
+      }
+    >
       <form
         className={style.form}
         onSubmit={handleSubmit((values) => loginRequest(values))}
@@ -63,10 +72,18 @@ const LoginForm = ({
   )
 }
 
+const mapStateToProps = (state) => {
+  const { loggedIn, message } = state.auth
+  return {
+    loggedIn,
+    message,
+  }
+}
+
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
 
 const withConnect = connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )
 

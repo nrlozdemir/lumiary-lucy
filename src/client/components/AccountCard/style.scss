@@ -5,6 +5,7 @@
   position: relative;
 
   .card {
+    position: relative;
     margin: 80px auto;
     width: 588px;
     padding: 56px 102px;
@@ -13,5 +14,33 @@
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.5);
     border: solid 1px $color-dusk-two;
     background-color: $color-dark-grey-blue;
+    overflow: hidden;
+  }
+
+  .message {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 53px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-family: $font-family-ClanOTBold;
+    font-weight: bold;
+    font-size: 16px;
+
+    &.error {
+      background-color: $color-red;
+    }
+
+    &.success {
+      background-color: $color-cool-blue;
+    }
+
+    & + form {
+      margin-top: 53px;
+    }
   }
 }
