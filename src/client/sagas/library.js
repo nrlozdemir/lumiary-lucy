@@ -150,6 +150,7 @@ function* changeFilter() {
   try {
     const filters = yield select(makeSelectVideoFilters())
     const body = getBodyFromFilters(filters)
+    const { brand } = yield select(selectAuthProfile)
 
     const options = {
       limit: 16,
@@ -157,7 +158,7 @@ function* changeFilter() {
       body,
     }
 
-    const payload = yield call(getLibraryDataApi, options)
+    const payload = yield call(getLibraryDataApi, options, brand.uuid)
 
     yield put(actions.clearAndLoadVideos(payload))
   } catch (err) {

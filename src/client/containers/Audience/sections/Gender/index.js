@@ -18,7 +18,6 @@ class GenderSection extends React.Component {
   render() {
     const {
       audienceGenderData: { data, loading, error },
-      infoText,
     } = this.props
 
     const labels = (data && Object.keys(data)) || []
@@ -58,7 +57,6 @@ class GenderSection extends React.Component {
         isEmpty={!loading && isDataSetEmpty(genderData)}
         moduleKey={'Audience/Gender'}
         title="Video Properties Split By Gender"
-        infoText={infoText}
         action={this.callBack}
         filters={[
           {

@@ -33,7 +33,6 @@ class CompareShares extends React.Component {
             placeHolder: 'Date',
           },
         ]}
-        infoText={`The two top graphs compare the dominant color within a video by engagement and platform for the past month. Each graph axis represents a color from the 12-hue color palette. Engagement increases from the center of the wheel to the outer edges via plotted points, showing a propensity range toward particular colors. The bar graphs below show the top three dominant colors for each platform.`}
       />
     )
   }
