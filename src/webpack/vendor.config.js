@@ -22,6 +22,7 @@ module.exports = {
       'react-modal',
       'react-date-range',
       'react-id-swiper',
+      'react-tooltip',
 
       'redux',
       'redux-form',
@@ -49,7 +50,7 @@ module.exports = {
       'chart.js',
       'react-chartjs-2',
       'chartjs-plugin-datalabels',
-      'chartjs-plugin-style'
+      'chartjs-plugin-style',
     ],
   },
 

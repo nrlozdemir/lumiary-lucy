@@ -98,6 +98,7 @@
     "react-slick": "^0.23.2",
     "react-table": "^6.9.2",
     "react-tabs": "^2.3.0",
+    "react-tooltip": "^3.10.0",
     "redux": "^4.0.1",
     "redux-form": "^8.0.0",
     "redux-saga": "^0.16.2",
