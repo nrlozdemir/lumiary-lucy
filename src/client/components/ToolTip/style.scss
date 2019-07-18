@@ -80,11 +80,14 @@
     &.largeTooltip {
       width: 480px !important;
     }
+    &.mediumTooltip {
+      width: 206px !important;
+    }
     &.smallTooltip {
-      width: 206px;
+      width: 168px !important;
     }
     &.xSmallTooltip {
-      width: 93px;
+      width: 93px !important;
     }
     &.allow_hover,
     &.allow_click {
