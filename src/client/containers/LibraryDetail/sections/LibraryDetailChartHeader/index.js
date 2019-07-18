@@ -36,7 +36,7 @@ const Front = (props) => {
               className={classnames('icon icon-Information', style.moduleInfo)}
               data-tip={tooltipText}
             />
-            <ToolTip effect="solid" smallTooltip />
+            <ToolTip effect="solid" mediumTooltip />
           </span>
           <span className={style.rightTitle}>{ucfirst(title + 's')}</span>
         </div>
