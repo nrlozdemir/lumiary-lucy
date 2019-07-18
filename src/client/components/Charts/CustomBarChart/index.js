@@ -2,6 +2,7 @@ import React from 'react'
 import classnames from 'classnames'
 import styles from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
+import ToolTip from 'Components/ToolTip'
 
 /*
 Example Usage:
@@ -48,6 +49,7 @@ class CustomBarChart extends React.Component {
       barStyle,
       barSelectedStyle,
       difference,
+      text,
     } = this.props
     const zeroFill = parseInt(options.zeroFill)
     const statMax = Object.values(data).reduce((prev, next) => {
@@ -65,31 +67,45 @@ class CustomBarChart extends React.Component {
                   ? element.score + zeroFill
                   : element.score
               const isSelected = element.label === selected
-              let heightPx = Math.ceil(Math.abs((elementScore * options.maxHeight) / statMax.score))
-              
-              //if height is 0, we reassign 1 to height bcoz of ux experience. 
+              let heightPx = Math.ceil(
+                Math.abs((elementScore * options.maxHeight) / statMax.score)
+              )
+
+              //if height is 0, we reassign 1 to height bcoz of ux experience.
               //empty area doesn't seem good.
               const height = heightPx || 1
 
               return (
-                <div
-                  key={index}
-                  data-label={element.label.substring(
-                    0,
-                    options.labelCharLength
+                <React.Fragment key={index}>
+                  <div
+                    key={index}
+                    data-label={element.label.substring(
+                      0,
+                      options.labelCharLength
+                    )}
+                    className={classnames(barStyle, {
+                      [barSelectedStyle]: isSelected,
+                      [styles.increase]: difference > 0,
+                      [styles.decrease]: difference < 0,
+                      [styles.noChange]: difference === 0,
+                    })}
+                    style={{
+                      height: (height !== Infinity && `${height}`) || '100%',
+                      width: options.width,
+                      background: duskBackground,
+                    }}
+                    data-tip={text}
+                    data-for={`panoptic-flipcards-day-${index}`}
+                  />
+                  {!!isSelected && (
+                    <ToolTip
+                      key={`panoptic-flipcards-day-${index}`}
+                      effect="solid"
+                      smallTooltip
+                      id={`panoptic-flipcards-day-${index}`}
+                    />
                   )}
-                  className={classnames(barStyle, {
-                    [barSelectedStyle]: isSelected,
-                    [styles.increase]: difference > 0,
-                    [styles.decrease]: difference < 0,
-                    [styles.noChange]: difference === 0,
-                  })}
-                  style={{
-                    height: (height !== Infinity && `${height}`) || '100%',
-                    width: options.width,
-                    background: duskBackground,
-                  }}
-                />
+                </React.Fragment>
               )
             })}
         </div>
