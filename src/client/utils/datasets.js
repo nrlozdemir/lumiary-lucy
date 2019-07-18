@@ -18,6 +18,7 @@ import {
   isNumber,
   isFinite,
   isInteger,
+  sortBy,
 } from 'lodash'
 
 /**
@@ -369,9 +370,7 @@ const isDataSetEmpty = (data) => {
   if (!!data && !!data.datasets && !!data.datasets.length) {
     return data.datasets.every((dataset) =>
       !!dataset.data && !!dataset.data.length
-        ? dataset.data.every(
-            (val) => val === 0 || val === undefined || val === null
-          )
+        ? dataset.data.every((val) => val === 0 || val === undefined)
         : true
     )
   } else {
@@ -462,19 +461,40 @@ const parseAverage = (payload) => {
       if (key.includes('LibraryAverage')) {
         acc[keyName] = {
           ...acc[keyName],
-          average: parseFloat(payload[key]).toFixed(0),
+          average: percentageBeautifier(payload[key]),
         }
       }
       if (key.includes('LibraryMax')) {
         acc[keyName] = {
           ...acc[keyName],
-          max: parseFloat(payload[key]).toFixed(0),
+          max: percentageBeautifier(payload[key]),
         }
       }
     }
 
     return acc
   }, {})
+
+  const getOrder = (keyName) => {
+    let order = 0
+    switch (keyName) {
+      case 'view':
+        order = 1
+        break
+      case 'like':
+        order = 2
+        break
+      case 'comment':
+        order = 3
+        break
+      case 'share':
+        order = 4
+        break
+      default:
+        order = 0
+    }
+    return order
+  }
 
   Object.keys(payload.video).forEach((payloadRow) => {
     const item = payloadRow
@@ -485,28 +505,37 @@ const parseAverage = (payload) => {
     if (item.includes('diffFromLibrary')) {
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
-        diff: parseFloat(payload.video[item]).toFixed(2),
+        diff: percentageBeautifier(payload.video[item]),
       }
     }
     if (item.includes('value')) {
       keyName = keyName.slice(0, keyName.length - 1)
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
-        value: parseFloat(payload.video[item]).toFixed(0),
+        value: percentageBeautifier(payload.video[item]),
       }
     }
     if (item.includes('percentile')) {
       keyName = keyName.slice(0, keyName.length - 1)
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
-        percentile: parseFloat(
+        percentile: percentageBeautifier(
           payload.video[`cvScores.library_${item.replace('s.', '_')}`]
-        ).toFixed(0),
+        ),
       }
+    }
+    calculateAverage[keyName] = {
+      ...calculateAverage[keyName],
+      keyName: keyName,
+      order: getOrder(keyName),
     }
   })
 
-  return calculateAverage
+  const returnData = Object.values(calculateAverage).sort((a, b) => {
+    return a.order > b.order;
+  });
+
+  return returnData
 }
 
 /* Converts the api responses from /metric & /brand/{brandUuid}/count

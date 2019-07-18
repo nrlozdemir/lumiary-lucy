@@ -1,7 +1,7 @@
 import React from 'react'
 import { Radar } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
-import { metricSuffix } from 'Utils'
+import { metricSuffix, customChartToolTip } from 'Utils'
 
 const plugins = [
   {
@@ -121,28 +121,19 @@ const RadarChart = (props) => {
         layout: {
           padding: 40,
         },
-        tooltips: {
-          backgroundColor: '#fff',
-          cornerRadius: 6,
-          titleFontColor: '#000',
-          mode: 'point',
-          titleFontFamily: 'ClanOTBold',
-          bodyFontColor: '#000',
-          yAlign: 'bottom',
-          xAlign: 'center',
-          displayColors: false,
+        tooltips: customChartToolTip(themes, {
           callbacks: {
             title: () => '',
             label: function(tooltipItem, data) {
-              return data.labels[tooltipItem['index']].name
-            },
-            afterLabel: function(tooltipItem, data) {
+              const count = data && data.labels && data.labels[tooltipItem['index']] && data.labels[tooltipItem['index']].count || 0
+              const metric = data && data.datasets && data.datasets[0] && data.datasets[0].metric || ''
+              const name = data && data.labels && data.labels[tooltipItem['index']] && data.labels[tooltipItem['index']].name 
               return `${metricSuffix(
-                data.labels[tooltipItem['index']].count
-              )} ${data.datasets[0].metric}`
+                count
+              ) || 0} ${metric || ''} ${!!name && `| ${name}`}`
             },
           },
-        },
+        }),
         plugins: {
           datalabels: false,
         },

@@ -2,7 +2,7 @@ import React from 'react'
 import { Bar, Chart } from 'react-chartjs-2'
 import { barDataOptions } from './options'
 import { withTheme } from 'ThemeContext/withTheme'
-import { metricSuffix } from 'Utils'
+import { metricSuffix, customChartToolTip } from 'Utils'
 import { percentageManipulation } from 'Utils/datasets'
 
 const emptyData = {
@@ -149,6 +149,16 @@ const StackedBarChart = (props) => {
       width={width}
       options={{
         ...barDataOptions,
+        tooltips: customChartToolTip(themes, {
+          callbacks: {
+            title: () => '',
+            label: function(tooltipItem, data) {
+              const count = data && data.datasets && data.datasets[tooltipItem['datasetIndex']] && data.datasets[tooltipItem['datasetIndex']].data[tooltipItem['index']] || ''
+              const name = data && data.datasets && data.datasets[tooltipItem['datasetIndex']] && data.datasets[tooltipItem['datasetIndex']].label || ''
+              return `${count || 0}% ${!!name && `| ${name}`}`
+            },
+          },
+        }),
         chartArea: {
           backgroundColor: themes.chartBackground,
           barSpacing,

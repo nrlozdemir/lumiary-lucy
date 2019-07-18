@@ -4,6 +4,7 @@ import classnames from 'classnames'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import { isDataSetEmpty } from 'Utils/datasets'
+import { customChartToolTip } from 'Utils'
 
 import Labels from 'Components/Charts/Labels'
 
@@ -82,6 +83,7 @@ const DoughnutChart = (props) => {
   const themes = props.themeContext.colors
 
   let plugins = []
+	
   if (fillText) {
     const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
 
@@ -154,10 +156,7 @@ const DoughnutChart = (props) => {
               plugins={plugins}
               options={{
                 responsive: false,
-                tooltips: {
-                  ...customTooltips,
-                  enabled: true,
-                },
+                tooltips: customChartToolTip(themes),
                 legend: {
                   display: legend,
                   labels: {

@@ -27,7 +27,7 @@ class FlipCard extends React.Component {
   }
 
   render() {
-    const { children, width, height, loading, isEmpty } = this.props
+    const { children, width, height, loading, isEmpty, noflip } = this.props
     const {
       textColor,
       moduleBackground,
@@ -41,7 +41,7 @@ class FlipCard extends React.Component {
     }
 
     const containerClassName = classnames(
-      { [styles.flipContainer]: !this.props.isEmpty },
+      { [styles.flipContainer]: !this.props.isEmpty && !noflip },
       'col-3 ml-0'
     )
 
