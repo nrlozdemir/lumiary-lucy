@@ -10,11 +10,12 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 import ToolTip from 'Components/ToolTip'
 
 const Front = (props) => {
+  console.log(props)
   const { data, colors, title } = props
   //let percentage = (100 * data.value) / data.max
   let percentage = parseInt(data.percentile) || 0
   const text = data.diff > 0 ? 'more' : 'less'
-  const tooltipText = `This video is receiving ${percentage}% ${text} ${title} than your library average`
+  const tooltipText = `This video is receiving ${percentage}% ${text} ${title}s than your library average of ${metricSuffix(data.average)}`
 
   return (
     <div className={style.frontContainer}>
