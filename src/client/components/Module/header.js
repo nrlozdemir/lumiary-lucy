@@ -28,8 +28,9 @@ const HeaderModule = ({
           data-tip="Learn More"
           onClick={() => setModalShow(true)}
           style={{ color: themes.textColor }}
+          data-for={`module-${moduleKey}`}
         />
-        <ToolTip effect="solid" xSmallTooltip />
+        <ToolTip effect="solid" xSmallTooltip id={`module-${moduleKey}`} />
         {modalShow && (
           <InformationModal
             width={840}
