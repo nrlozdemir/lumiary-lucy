@@ -33,11 +33,15 @@ class AgeSlider extends React.PureComponent {
       audienceAgeSliderData: { data },
     } = this.props
 
+    const { params } = this.state
+
     const {
       audienceAgeSliderData: { data: prevData },
     } = prevProps
 
-    if (!isEqual(data, prevData)) {
+    const { params: prevParams } = prevState
+
+    if (!isEqual(data, prevData) || !isEqual(params, prevParams)) {
       this.updateVideos(data)
     }
   }
