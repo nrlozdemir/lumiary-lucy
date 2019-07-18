@@ -66,8 +66,7 @@
     top: -999em;
     visibility: hidden;
     z-index: 999;
-    width: 206px;
-    
+    width: 300px;
     font-family: $font-family-ClanOT;
     font-size: 12px;
     font-weight: bold;
@@ -78,13 +77,21 @@
     text-align: center;
     color: #ffffff;
 
+    /*
+    &.largeTooltip {
+      width: 480px !important;
+    }
+    */
+    &.smallTooltip {
+      width: 206px;
+    }
     &.allow_hover,
     &.allow_click {
-      pointer-events:auto;
+      pointer-events: auto;
     }
     &:before,
     &:after {
-      content: "";
+      content: '';
       width: 0;
       height: 0;
       position: absolute;
@@ -105,7 +112,7 @@
       box-shadow: 0 1px 2px 0 $light_tooltipShadowColor;
       @include type($light_tooltipBackgroundColor);
     }
-    // Place
+
     &.place-top {
       margin-top: -10px;
       &:before {
