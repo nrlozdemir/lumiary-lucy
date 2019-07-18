@@ -41,9 +41,10 @@ const replaceBoldString = (str) => {
 }
 
 const textEdit = (text, item) => {
-  text = text.replace('{value}', item.value)
-  text = text.replace('{title}', item.title)
-  text = text.replace('{percentage}', item.percentage)
+  text = item.value && text.replace('{value}', item.value)
+  text = item.title && text.replace('{title}', item.title)
+  text = item.percentage && text.replace('{percentage}', item.percentage)
+  text = item.difference && text.replace('{difference}', item.difference)
   text = replaceBoldElement(text)
 
   return text
