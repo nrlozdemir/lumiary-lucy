@@ -10,7 +10,6 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 import ToolTip from 'Components/ToolTip'
 
 const Front = (props) => {
-  console.log(props)
   const { data, colors, title } = props
   //let percentage = (100 * data.value) / data.max
   let percentage = parseInt(data.percentile) || 0
