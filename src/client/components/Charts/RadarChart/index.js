@@ -121,7 +121,19 @@ const RadarChart = (props) => {
         layout: {
           padding: 40,
         },
-        tooltips: customChartToolTip(themes),
+        tooltips: customChartToolTip(themes, {
+          callbacks: {
+            title: () => '',
+            label: function(tooltipItem, data) {
+              const count = data && data.labels && data.labels[tooltipItem['index']] && data.labels[tooltipItem['index']].count || 0
+              const metric = data && data.datasets && data.datasets[0] && data.datasets[0].metric || ''
+              const name = data && data.labels && data.labels[tooltipItem['index']] && data.labels[tooltipItem['index']].name 
+              return `${metricSuffix(
+                count
+              ) || 0} ${metric || ''} ${!!name && `| ${name}`}`
+            },
+          },
+        }),
         plugins: {
           datalabels: false,
         },

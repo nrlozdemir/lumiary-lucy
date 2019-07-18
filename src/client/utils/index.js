@@ -410,18 +410,13 @@ return {
   xPadding: 8,
   yPadding: 12,
   bodyFontStyle: 'bold',
-  yAlign: 'bottom',
-  xAlign: 'center',
   displayColors: false,
   callbacks: {
     title: () => '',
     label: function(tooltipItem, data) {
-      const count = data && data.labels && data.labels[tooltipItem['index']] && data.labels[tooltipItem['index']].count || 0
-      const metric = data && data.datasets && data.datasets[0] && data.datasets[0].metric || ''
-      const name = data && data.labels && data.labels[tooltipItem['index']] && data.labels[tooltipItem['index']].name 
-      return `${metricSuffix(
-        count
-      ) || 0} ${metric || ''} ${!!name && `| ${name}`}`
+      const count = data && data.datasets && data.datasets[0] && data.datasets[0].data[tooltipItem['index']] || ''
+      const name = data && data.labels && data.labels[tooltipItem['index']]
+      return `${count || 0}% ${!!name && `| ${name}`}`
     },
   },
   ...customOptions
