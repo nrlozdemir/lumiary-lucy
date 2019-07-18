@@ -14,7 +14,9 @@ const Front = (props) => {
   //let percentage = (100 * data.value) / data.max
   let percentage = parseInt(data.percentile) || 0
   const text = data.diff > 0 ? 'more' : 'less'
-  const tooltipText = `This video is receiving ${percentage}% ${text} ${title}s than your library average of ${metricSuffix(data.average)}`
+  const tooltipText = `This video is receiving ${percentage}% ${text} ${title}s than your library average of ${metricSuffix(
+    data.average
+  )}`
 
   return (
     <div className={style.frontContainer}>
@@ -34,7 +36,7 @@ const Front = (props) => {
               className={classnames('icon icon-Information', style.moduleInfo)}
               data-tip={tooltipText}
             />
-            <ToolTip effect="solid" default={true} />
+            <ToolTip effect="solid" smallTooltip />
           </span>
           <span className={style.rightTitle}>{ucfirst(title + 's')}</span>
         </div>

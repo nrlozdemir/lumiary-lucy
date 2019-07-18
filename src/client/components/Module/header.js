@@ -25,13 +25,11 @@ const HeaderModule = ({
         <h1>{title}</h1>
         <i
           className={classnames('icon icon-Information', style.moduleInfo)}
-          onMouseEnter={() => changeInfoStatus()}
-          onMouseLeave={() => changeInfoStatus()}
+          data-tip="Learn More"
           onClick={() => setModalShow(true)}
           style={{ color: themes.textColor }}
-        >
-          <ToolTip show={infoShow}>Learn More</ToolTip>
-        </i>
+        />
+        <ToolTip effect="solid" xSmallTooltip />
         {modalShow && (
           <InformationModal
             width={840}
