@@ -261,12 +261,57 @@ function* getFlipCardsData() {
   try {
     const { brand } = yield select(selectAuthProfile)
 
+    /*
     const metrics = yield call(
       getDataFromApi,
       undefined,
       buildApiUrl('/metric', { brandUuid: brand.uuid, platform: 'all' }),
       'GET'
     )
+    */
+
+   const metrics = {
+    "like": {
+      "Thursday": 0,
+      "Wednesday": 41043,
+      "changeOverPrevious": -10.85,
+      "Tuesday": 45496,
+      "Monday": 47215,
+      "Sunday": 11617967,
+      "Saturday": 1264740,
+      "Friday": 3084831
+    },
+    "view": {
+      "Thursday": 0,
+      "Wednesday": 3041920,
+      "changeOverPrevious": -9.01,
+      "Tuesday": 3315988,
+      "Monday": 1214,
+      "Sunday": 225930744,
+      "Saturday": 26120999,
+      "Friday": 11628533
+    },
+    "comment": {
+      "Thursday": 0,
+      "Wednesday": 51,
+      "changeOverPrevious": 31.37,
+      "Tuesday": 35,
+      "Monday": 7467,
+      "Sunday": 812943,
+      "Saturday": 118265,
+      "Friday": 296141
+    },
+    "share": {
+      "Thursday": 0,
+      "Wednesday": 19,
+      "changeOverPrevious": 26.32,
+      "Tuesday": 14,
+      "Monday": 11093,
+      "Sunday": 2891312,
+      "Saturday": 409780,
+      "Friday": 735050
+    }
+  }
 
     const payloads = Object.assign(
       {},
