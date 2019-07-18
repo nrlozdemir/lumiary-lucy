@@ -1,9 +1,10 @@
 import React from 'react'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { actions, makeSelectSelectFilters } from 'Reducers/selectFilters'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
+import { makeSelectGlobalSection } from 'Reducers/app'
 import _ from 'lodash'
 import cx from 'classnames'
 import style from './style.scss'
@@ -17,6 +18,7 @@ export class Module extends React.Component {
     super(props)
     this.state = {
       infoShow: false,
+      modalShow: false,
     }
   }
 
@@ -45,8 +47,15 @@ export class Module extends React.Component {
     })
   }
 
+  setModalShow = (status) => {
+    this.setState({
+      modalShow: status,
+    })
+  }
+
   render() {
     const {
+      moduleKey,
       children,
       references,
       bodyClass,
@@ -54,10 +63,9 @@ export class Module extends React.Component {
       containerClass,
       loading,
       customEmptyClasses,
-      infoText,
     } = this.props
 
-    const { infoShow } = this.state
+    const { infoShow, modalShow } = this.state
 
     const moduleContainer = cx(
       'shadow-1 grid-container col-12',
@@ -91,9 +99,10 @@ export class Module extends React.Component {
               <div className={style.moduleContainerHeader}>
                 <HeaderModule
                   {...this.props}
-                  infoText={infoText}
                   changeInfoStatus={this.changeInfoStatus}
                   infoShow={infoShow}
+                  setModalShow={this.setModalShow}
+                  modalShow={modalShow}
                   themes={colors}
                 />
               </div>
@@ -131,6 +140,7 @@ export class Module extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   selectFilters: makeSelectSelectFilters(),
+  sections: makeSelectGlobalSection(),
 })
 
 Module.defaultProps = {
@@ -147,7 +157,9 @@ Module.propTypes = {
   customEmptyClasses: PropTypes.string,
 }
 
-export default connect(
+const withConnect = connect(
   mapStateToProps,
-  {}
-)(Module)
+  null
+)
+
+export default compose(withConnect)(Module)

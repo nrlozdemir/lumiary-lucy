@@ -86,3 +86,7 @@ export const moduleNames = [
   'PerformanceComparisonModule',
   'VideoReleasesBarChartModule',
 ]
+
+export const moduleIds = {
+  'Panoptic/Top-Performing-Formats-This-Week-By-CV-Score': '456456456',
+}

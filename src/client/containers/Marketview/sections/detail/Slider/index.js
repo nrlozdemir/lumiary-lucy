@@ -74,7 +74,6 @@ class Slider extends React.Component {
       moduleKey,
       filters,
       loading,
-      infoText,
     } = this.props
 
     return (
@@ -88,7 +87,6 @@ class Slider extends React.Component {
           title={title}
           filters={filters}
           loading={loading}
-          infoText={infoText}
         />
       </div>
     )

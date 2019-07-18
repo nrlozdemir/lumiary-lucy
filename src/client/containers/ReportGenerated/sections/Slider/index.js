@@ -25,7 +25,6 @@ class Slider extends React.Component {
         selectedVideo={selectedVideo}
         changeSelectedVideo={this.changeSelectedVideo}
         loading={loading}
-        infoText={`Null`}
       />
     )
   }
