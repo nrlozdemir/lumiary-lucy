@@ -83,6 +83,7 @@ const DoughnutChart = (props) => {
   const themes = props.themeContext.colors
 
   let plugins = []
+	
   if (fillText) {
     const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
 
