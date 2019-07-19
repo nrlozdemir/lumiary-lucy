@@ -7,8 +7,9 @@ import {
   makeSelectMarketviewCompetitorView,
 } from 'Reducers/marketview'
 import BarChartModule from 'Components/Modules/BarChartModule'
+import { withTheme } from 'ThemeContext/withTheme'
 
-import { randomKey } from 'Utils'
+import { randomKey, customChartToolTip, metricSuffix } from 'Utils'
 
 import { isDataSetEmpty, getMinMaxFromDatasets } from 'Utils/datasets'
 
@@ -20,6 +21,7 @@ class TotalCompetitorCard extends React.Component {
   render() {
     const {
       totalCompetitorViewsData: { data, loading },
+      themeContext: { colors },
     } = this.props
 
     const isEmpty = isDataSetEmpty(data)
@@ -38,6 +40,19 @@ class TotalCompetitorCard extends React.Component {
       stepSize,
     }
 
+    const customChartOptions = {
+      tooltips: customChartToolTip(colors, {
+        callbacks: {
+          title: () => '',
+          label: function(tooltipItem, data) {
+            const count = data && data.datasets && data.datasets[tooltipItem['datasetIndex']] && data.datasets[tooltipItem['datasetIndex']].data[tooltipItem['index']] || ''
+            const name = data && data.datasets && data.datasets[tooltipItem['datasetIndex']] && data.datasets[tooltipItem['datasetIndex']].label || ''
+            return `${count ? metricSuffix(count) : 0} Views ${!!name && `| ${name}`}`
+          },
+        },
+      }),
+    }
+
     return (
       <BarChartModule
         moduleKey={randomKey(10)}
@@ -47,6 +62,7 @@ class TotalCompetitorCard extends React.Component {
         isEmpty={isEmpty}
         titleLabels={(hasDatasets && data.datasets.map((d) => d.label)) || []}
         tickOptions={chartTickOptions}
+        customChartOptions={customChartOptions}
         loading={loading}
       />
     )
@@ -64,4 +80,4 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(TotalCompetitorCard)
+export default withTheme(compose(withConnect)(TotalCompetitorCard))
