@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Bar } from 'react-chartjs-2'
 import cx from 'classnames'
 import style from './style.scss'
-import { randomKey } from 'Utils'
+import { randomKey, customChartToolTip } from 'Utils'
 import { withTheme } from 'ThemeContext/withTheme'
 
 import { options, wrapperBarOptions } from './chartOptions'
@@ -124,21 +124,18 @@ const VideoReleasesBarChartModule = (props) => {
 
   const barChartOptions = {
     ...options,
-    tooltips: {
-      ...options.tooltips,
+    tooltips: customChartToolTip(colors, {
       callbacks: {
-        title: function(tooltipItem, data) {
-          const value = Math.abs(tooltipItem[0].yLabel)
-          if (tooltipItem[0].yLabel < 0) {
-            return `${~~(value / 1000)}${value >= 1000 ? 'k' : ''} Engagement`
+        title: () => '',
+        label: function(tooltipItem) {
+          const value = Math.abs(tooltipItem.yLabel)
+          if (tooltipItem.yLabel < 0) {
+            return `${~~(value / 1000)}${value >= 1000 ? 'k' : ''} Likes`
           }
           return `${value / videoNormalizer} Videos`
         },
-        label: function() {
-          return null
-        },
       },
-    },
+    }),
     scales: {
       xAxes: [
         {
