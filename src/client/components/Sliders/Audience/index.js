@@ -8,6 +8,8 @@ import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
 import Swiper from 'react-id-swiper'
 import SwiperJS from 'swiper/dist/js/swiper.js'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import RouterLoading from 'Components/RouterLoading'
+import { floatCvScore } from 'Utils'
 
 class AudienceSlider extends React.Component {
   constructor(props) {
@@ -15,6 +17,7 @@ class AudienceSlider extends React.Component {
     this.state = {
       refThumb: null,
     }
+    this.refSlider = React.createRef()
   }
 
   componentDidMount() {
@@ -57,7 +60,7 @@ class AudienceSlider extends React.Component {
   }
 
   render() {
-    const { items, changeVideo } = this.props
+    const { items, changeVideo, loading } = this.props
     const { refThumb } = this.state
 
     const settings = {
@@ -132,27 +135,47 @@ class AudienceSlider extends React.Component {
                 >
                   {items.map((item, i) => (
                     <div className="item" key={i}>
-                      <AssetLayer
-                        containerNoBorder
-                        leftSocialIcon={item.socialMedia}
-                        centerText={item.secondTitle}
-                        title={item.title}
-                        width={634}
-                        height="100%"
-                        rightValue={item.cvScore}
-                      >
-                        <img src={item.image} />
-                        <PercentageBarGraph
-                          key={Math.random()}
-                          percentage={item.cvScore}
-                          color="green"
-                          disableLabels
-                          width={80}
-                          height={20}
-                          barWidth={2}
-                          barSpaceWidth={1}
-                        />
-                      </AssetLayer>
+                      {item.loading ? (
+                        !loading ? (
+                          <RouterLoading key={i} />
+                        ) : null
+                      ) : (
+                        <AssetLayer
+                          containerNoBorder
+                          leftSocialIcon={item.socialMedia}
+                          //centerText={item.secondTitle}
+                          title={
+                            `${(item.title &&
+                              `${item.title.substring(0, 32)} `) ||
+                              ''}${item.secondTitle || ''}` || ''
+                          }
+                          width={634}
+                          height="100%"
+                          rightValue={floatCvScore(item.cvScore) || 0.0}
+                        >
+                          {!!item.image ? (
+                            <video
+                              key={`video-${item.image}${i}`}
+                              src={item.image}
+                              controls
+                            />
+                          ) : (
+                            <div className={style.videoEmpty}>
+                              No Data Available
+                            </div>
+                          )}
+                          <PercentageBarGraph
+                            key={Math.random()}
+                            percentage={item.cvScore}
+                            color="green"
+                            disableLabels
+                            width={80}
+                            height={20}
+                            barWidth={2}
+                            barSpaceWidth={1}
+                          />
+                        </AssetLayer>
+                      )}
                     </div>
                   ))}
                 </Swiper>

@@ -21,7 +21,6 @@ const LineAndDoughnutChartModule = ({
   percentageData,
   customCallbackFunc,
   themeContext: { colors },
-  infoText,
 }) => {
   const percentageCol = cx(style.percentageCol)
 
@@ -60,7 +59,7 @@ const LineAndDoughnutChartModule = ({
           ctx.moveTo(x, topY)
           ctx.lineTo(x, bottomY)
           ctx.lineWidth = 5
-          ctx.strokeStyle = '#fff'
+          ctx.strokeStyle = '#000'
           ctx.stroke()
           ctx.restore()
         }
@@ -76,11 +75,13 @@ const LineAndDoughnutChartModule = ({
       filters={filters}
       isEmpty={isEmpty}
       loading={loading}
-      infoText={infoText}
     >
       <div className="grid-collapse">
         <div className="col-12-no-gutters">
-          <div className="col-8-no-gutters">
+          <div
+            className={`col-8-no-gutters ${cx(style.contentVitalityChart)}`}
+            data-legend="Content Vitality Score"
+          >
             <Line
               key={Math.random()}
               data={lineChartData}
@@ -91,7 +92,7 @@ const LineAndDoughnutChartModule = ({
                 ...lineChartOptions,
                 customCallbackFunc: customCallbackFunc,
                 chartArea: {
-                  backgroundColor: colors.chartBackground,
+                  backgroundColor: colors.lineChartBackgroundColor,
                 },
                 scales: {
                   xAxes: [
@@ -103,7 +104,8 @@ const LineAndDoughnutChartModule = ({
                       },
                       gridLines: {
                         ...lineChartOptions.scales.xAxes[0].gridLines,
-                        color: colors.chartStadiumBarBorder,
+                        color: colors.lineChartGridColor,
+                        zeroLineColor: colors.lineChartGridColor,
                       },
                     },
                   ],
@@ -116,8 +118,8 @@ const LineAndDoughnutChartModule = ({
                       },
                       gridLines: {
                         ...lineChartOptions.scales.yAxes[0].gridLines,
-                        color: colors.chartStadiumBarBorder,
-                        zeroLineColor: colors.chartStadiumBarBorder,
+                        color: colors.lineChartGridColor,
+                        zeroLineColor: colors.lineChartGridColor,
                       },
                     },
                   ],

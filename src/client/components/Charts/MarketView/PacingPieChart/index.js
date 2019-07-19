@@ -19,6 +19,11 @@ const PacingPieChart = ({ data }) => {
           layout: {
             padding: 0,
           },
+          elements: {
+            arc: {
+              borderWidth: 2.2
+            },
+          }
         }}
         data={data}
       />

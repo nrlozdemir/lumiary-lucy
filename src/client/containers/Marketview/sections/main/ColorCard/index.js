@@ -6,7 +6,7 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewBubbleChart } from 'Reducers/marketview'
 import { Link } from 'react-router-dom'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
-import { socialIconSelector } from 'Utils'
+import { socialIconSelector, metricSuffix } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import { isEmpty } from 'lodash'
@@ -45,15 +45,10 @@ class ColorCard extends Component {
       bubbleChartData: { data, loading, error },
     } = this.props
 
-    const isDataEmpty =
-      (!loading &&
-        (!data ||
-          !!data & !data.length ||
-          (!!data && !!data.length && data.every((obj) => obj.value === 0)))) ||
-      isEmpty(data)
+    const isDataEmpty = (!loading && !data) || isEmpty(data)
 
     const totalChartValue =
-      data.reduce((total, { value }) => total + value, 0);
+      !isDataEmpty && data.reduce((total, { value }) => total + value, 0)
 
     return (
       <ThemeContext.Consumer>
@@ -63,6 +58,7 @@ class ColorCard extends Component {
             style={{
               backgroundColor: colors.modalBackground,
               color: colors.textColor,
+              boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
             }}
           >
             {(loading || (isDataEmpty && !loading)) && (
@@ -91,16 +87,18 @@ class ColorCard extends Component {
             <div className={style.bubbleChart}>
               {!!data && !!data.length && totalChartValue ? (
                 <BubbleChart
-                  maximumIterationCount={1000}
-                  size={[totalChartValue * 3.2, totalChartValue * 2.4]}
+                  maximumIterationCount={100000}
+                  size={[totalChartValue * 1.7, totalChartValue * 2]}
                   options={{
-                    toolTipWidth: totalChartValue * 1.2,
-                    toolTipHeight: totalChartValue * 0.4,
-                    visualWidth: totalChartValue * 0.2,
-                    visualHeight: totalChartValue * 0.2,
-                    toolTipRadius: totalChartValue * 0.1,
+                    strokeWidth: totalChartValue * 0.025,
+                    gap: totalChartValue / 180,
+                    toolTipWidth: totalChartValue * 0.7,
+                    toolTipHeight: totalChartValue * 0.3,
+                    visualWidth: totalChartValue * 0.16,
+                    visualHeight: totalChartValue * 0.16,
+                    toolTipRadius: totalChartValue * 0.06,
                     toolTipGap: totalChartValue * 0.1,
-                    toolTipArrowWidth: totalChartValue * 0.1,
+                    toolTipArrowWidth: totalChartValue * 0.07,
                     toolTipArrowHeight: totalChartValue * 0.05,
                   }}
                 >
@@ -108,55 +106,65 @@ class ColorCard extends Component {
                     <Bubble
                       key={'bubble-' + i}
                       // radius={(parseInt(bubble.value) / 100) * 0.0015 + 15}
-                      radius={bubble.value || totalChartValue * 0.1}
+                      radius={bubble.value}
                       fill={colors.bodyBackground}
-                      stroke={bubble.color}
+                      stroke={bubbleColors[bubble.color]}
                     >
                       <Visual>
                         <span
                           className={
-                            socialIconSelector(bubble.name) +
+                            socialIconSelector(bubble.name, true) +
                             ' ' +
                             style.bubbleVisual
                           }
-                          style={{ fontSize: totalChartValue * 0.2 }}
+                          style={{
+                            fontSize: totalChartValue * 0.07,
+                            background: colors.textColor,
+                            color: colors.moduleBackgroundHover,
+                          }}
                         />
                       </Visual>
-                      <ToolTip>
+                      <ToolTip
+                        style={{
+                          background: colors.tooltipBackground,
+                          color: colors.tooltipRadarChartTextColor,
+                        }}
+                      >
                         <div
                           className={style.bubbleTooltip}
-                          style={{ fontSize: totalChartValue * 0.1 }}
+                          style={{
+                            fontSize: totalChartValue * 0.07,
+                          }}
                         >
                           {bubble.name}
                         </div>
                         <div
                           className={style.bubbleTooltip}
-                          style={{ fontSize: totalChartValue * 0.1 }}
+                          style={{ fontSize: totalChartValue * 0.07 }}
                         >
-                          {bubble.value / 1000}
-                          {bubble.value < 1000 ? '' : 'k'} views
+                          {metricSuffix(bubble.oldValue)}
                         </div>
                       </ToolTip>
                     </Bubble>
                   ))}
                 </BubbleChart>
-              ): null}
+              ) : null}
             </div>
-            <div className={style.colors}>
-              <style>{`.${style.hasTriangle}:before {border-color: ${
-                colors.textColor
-              } transparent transparent transparent;}`}</style>
-              {Object.keys(bubbleColors).map((colorKey, i) => {
-                const network = data.find((pf) => pf.color === colorKey)
-                return (
-                  <span
-                    key={i}
-                    style={{ backgroundColor: bubbleColors[colorKey] }}
-                    className={network && style.hasTriangle}
-                  />
-                )
-              })}
-            </div>
+            {!isDataEmpty && (
+              <div className={style.colors}>
+                <style>{`.${style.hasTriangle}:before {border-color: ${colors.textColor} transparent transparent transparent;}`}</style>
+                {Object.keys(bubbleColors).map((colorKey, i) => {
+                  const network = data.find((pf) => pf.color === colorKey)
+                  return (
+                    <span
+                      key={i}
+                      style={{ backgroundColor: bubbleColors[colorKey] }}
+                      className={network && style.hasTriangle}
+                    />
+                  )
+                })}
+              </div>
+            )}
             <div className={style.marketViewCardDescription}>
               Based on the number of shares for competitors across all platforms
             </div>

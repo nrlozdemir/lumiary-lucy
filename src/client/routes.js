@@ -1,6 +1,11 @@
 import React, { Component } from 'react'
 import { Switch, Route, withRouter } from 'react-router-dom'
 
+import { compose, bindActionCreators } from 'redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { actions, makeSelectGlobalSection } from 'Reducers/app'
+
 import RouterLoading from 'Components/RouterLoading'
 import DynamicImport from 'Containers/DynamicImport'
 
@@ -43,14 +48,23 @@ const routes = [
   {
     path: '/quickview/:platform/:metric/:dateRange',
     component: 'Quickview',
+    navigation: {
+      type: 'dynamicActive', // if have dynamic route, need to this for active border, but both of component name must be same
+    },
   },
   {
     path: '/quickview/:platform/:metric',
     component: 'Quickview',
+    navigation: {
+      type: 'dynamicActive',
+    },
   },
   {
     path: '/quickview/:platform',
     component: 'Quickview',
+    navigation: {
+      type: 'dynamicActive',
+    },
   },
   {
     path: '/panoptic',
@@ -66,6 +80,11 @@ const routes = [
     path: '/audience',
     exact: true,
     component: 'Audience',
+    navigation: {
+      level: 1,
+      order: 2,
+      title: 'Audience',
+    },
   },
   {
     path: '/marketview',
@@ -79,6 +98,7 @@ const routes = [
   },
   {
     path: '/marketview/:detail',
+    backToTitle: 'Back To Overview',
     exact: true,
     component: 'Marketview',
     routes: [
@@ -166,7 +186,7 @@ const routes = [
   {
     path: '/sso',
     exact: true,
-    component: 'SSO'
+    component: 'SSO',
   },
   {
     path: '*',
@@ -198,6 +218,24 @@ const RouteWithSubRoutes = (route) => (
 )
 
 class Routes extends React.Component {
+  componentDidMount() {
+    const { getSectionExplanationsRequest } = this.props
+
+    const sectionsStore = JSON.parse(window.localStorage.getItem('sections'))
+
+    if (!sectionsStore || !sectionsStore.data) {
+      getSectionExplanationsRequest()
+    }
+  }
+
+  componentDidUpdate(prevProps) {
+    const { sections } = this.props
+
+    if (prevProps.sections !== sections) {
+      window.localStorage.setItem('sections', JSON.stringify(sections))
+    }
+  }
+
   render() {
     return (
       <Switch>
@@ -211,4 +249,15 @@ class Routes extends React.Component {
 
 Routes.propTypes = {}
 
-export default withRouter(Routes)
+const mapStateToProps = createStructuredSelector({
+  sections: makeSelectGlobalSection(),
+})
+
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(withConnect)(withRouter(Routes))

@@ -16,9 +16,16 @@ const PacingCardModule = ({
   filters,
   legend,
   loading = false,
-  infoText,
 }) => {
   const { horizontalStackedBarData = {}, stadiumData } = data
+
+  for (const _data of (horizontalStackedBarData &&
+    horizontalStackedBarData.datasets) ||
+    []) {
+    if (!_data.hoverBackgroundColor) {
+      delete _data.hoverBackgroundColor
+    }
+  }
 
   const stadiumValues =
     stadiumData &&
@@ -36,7 +43,6 @@ const PacingCardModule = ({
       filters={filters}
       legend={legend}
       loading={loading}
-      infoText={infoText}
     >
       <div className={style.pacingCardInner}>
         <MultipleNoDataModule>

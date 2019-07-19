@@ -10,10 +10,8 @@ import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import style from '../style.scss'
 
 import {
-  selectOptionsBrand,
-  selectOptionsSocial,
-  selectOptionsEngagement,
   selectOptionsDateRange,
+  selectOptionsPlatformEngagement,
 } from '../options'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
@@ -42,27 +40,14 @@ const ReportsForm = (props) => {
                 />
               </div>
               <div className={style.selectionArea}>
-                <p className={style.label}>Social Platform</p>
+                <p className={style.label}>Engagement by Platform</p>
                 <Field
                   component={Select}
-                  options={selectOptionsSocial}
-                  id="social"
-                  name="social"
-                  placeholder="Social Platform"
-                  label="Social Platform"
-                  validate={required}
-                  isReportDropdown
-                />
-              </div>
-              <div className={style.selectionArea}>
-                <p className={style.label}>Engagement</p>
-                <Field
-                  component={Select}
-                  options={selectOptionsEngagement}
-                  id="engagement"
-                  name="engagement"
+                  options={selectOptionsPlatformEngagement}
+                  id="engagamentByPlatform"
+                  name="engagamentByPlatform"
                   placeholder="Select One"
-                  label="Engagement"
+                  label="Engagement by Platform"
                   validate={required}
                   isReportDropdown
                 />

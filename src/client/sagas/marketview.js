@@ -5,31 +5,19 @@ import _ from 'lodash'
 import { types, actions } from 'Reducers/marketview'
 import { selectAuthProfile } from 'Reducers/auth'
 import querystring from 'querystring'
-
-import marketviewCompetitorVideosData from 'Api/mocks/marketviewCompetitorVideos.json'
-import marketviewCompetitorTopVideosData from 'Api/mocks/marketviewCompetitorTopVideosMock.json'
-import marketviewSimilarPropertiesData from 'Api/mocks/marketviewSimilarProperties.json'
-import marketviewBubbleChartData from 'Api/mocks/marketviewBubbleChartMock.json'
-import marketviewPacingChartData from 'Api/mocks/marketviewPacingChartMock.json'
-import marketviewFormatChartData from 'Api/mocks/marketviewFormatChartMock.json'
-import marketviewTotalViewsData from 'Api/mocks/marketviewTotalViewsMock.json'
-import marketviewTotalCompetitorViewsData from 'Api/mocks/marketviewTotalCompetitorViewsMock.json'
-import marketviewTimeMockData from 'Api/mocks/marketviewTimeMock.json'
-import marketviewTopPerformingProperties from 'Api/mocks/marketviewPlatformTopPerformingProperty.json'
-import marketviewTopPerformingPropertiesCompetitors from 'Api/mocks/marketviewPlatformTopPerformingPropertyCompetitors.json'
-
 import {
-  getMaximumValueIndexFromArray,
   ucfirst,
   getLabelWithSuffix,
   getDateBucketFromRange,
   getBrandAndCompetitors,
   getNValuesOfObject,
+  normalizationBubbleMapping,
 } from 'Utils'
 
 import {
   convertDataIntoDatasets,
   convertMultiRequestDataIntoDatasets,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { dayOfWeek, chartColors } from 'Utils/globals'
@@ -57,52 +45,17 @@ function* getCompetitorVideosApi({ payload }) {
   return response
 }
 
-function getBubbleChartApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewBubbleChartData)
-}
-
-function getPacingChartApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewPacingChartData)
-}
-
-function getFormatChartApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewFormatChartData)
-}
-
-function getTotalViewsApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewTotalViewsData)
-}
-
-function getTotalCompetitorViewsApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewTotalCompetitorViewsData)
-}
-
 function getMarketviewDaysApi() {
   //this will use ajax function in utils/api when real data is provided
   return axios.get('/').then((res) => marketviewTimeMockData)
 }
 
-function getGetTopPerformingPropertiesApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => marketviewTopPerformingProperties)
-}
-
-function getGetTopPerformingPropertiesByCompetitorsApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios
-    .get('/')
-    .then((res) => marketviewTopPerformingPropertiesCompetitors)
-}
-
 function* getCompetitorVideosMarketview(params) {
   try {
     const payload = yield call(getCompetitorVideosApi, params)
-    yield put(actions.getCompetitorVideosSuccess(payload))
+    yield put(
+      actions.getCompetitorVideosSuccess(percentageManipulation(payload))
+    )
   } catch (error) {
     yield put(actions.getCompetitorVideosFailure({ error }))
   }
@@ -146,16 +99,17 @@ function* getCompetitorTopVideosMarketview(payload) {
 
     yield put(
       actions.getCompetitorTopVideosSuccess(
-        convertMultiRequestDataIntoDatasets(
-          {
-            ...response,
-          },
-          options
+        percentageManipulation(
+          convertMultiRequestDataIntoDatasets(
+            {
+              ...response,
+            },
+            options
+          )
         )
       )
     )
   } catch (error) {
-    console.log('saga getCompetitorTopVideosFailure error', error)
     yield put(actions.getCompetitorTopVideosFailure(error))
   }
 }
@@ -196,19 +150,20 @@ function* getPlatformTopVideosMarketview({
 
     yield put(
       actions.getPlatformTopVideosSuccess(
-        convertMultiRequestDataIntoDatasets(
-          {
-            ...response,
-          },
-          {
-            ...options,
-            property: [property],
-          }
+        percentageManipulation(
+          convertMultiRequestDataIntoDatasets(
+            {
+              ...response,
+            },
+            {
+              ...options,
+              property: [property],
+            }
+          )
         )
       )
     )
   } catch (error) {
-    console.log('saga getPlatformTopVideosFailure error', error)
     yield put(actions.getPlatformTopVideosFailure(error))
   }
 }
@@ -226,9 +181,7 @@ function* getSimilarProperties({ data: { dateRange, container } }) {
       competitors,
     }
 
-    const url = `/brand/${
-      brand.uuid
-    }/properties?metric=shares&daterange=${dateRange}`
+    const url = `/brand/${brand.uuid}/properties?metric=shares&daterange=${dateRange}`
     //${!!competitors ? '&allcompetitors=true' : ''}`
 
     const payload = yield call(getDataFromApi, options, url, 'GET')
@@ -264,7 +217,7 @@ function* getSimilarProperties({ data: { dateRange, container } }) {
 
     const val = highestBuckets.map((value, idx) => ({
       doughnutChartValues: convertDataIntoDatasets(
-        payload,
+        percentageManipulation(payload),
         { property: [value.highestProperty] },
         {
           singleDataset: true,
@@ -277,7 +230,6 @@ function* getSimilarProperties({ data: { dateRange, container } }) {
     yield delay(2000)
     yield put(actions.getSimilarPropertiesSuccess(val))
   } catch (error) {
-    console.log('error == ', error)
     yield put(actions.getSimilarPropertiesFailure(error))
   }
 }
@@ -293,7 +245,7 @@ function* getBubbleChartData() {
 
     const options = {
       competitors,
-      metric: 'shares',
+      metric: 'views',
       property: 'color',
       daterange: 'month',
     }
@@ -327,11 +279,38 @@ function* getBubbleChartData() {
         )
       )
 
-      yield put(actions.getBubleChartSuccess(bubbleData))
+      // you can handle like this data
+      // bubbleData = [
+      //   {
+      //     name: 'YouTube',
+      //     value: 100001,
+      //     color: 'blue-purple',
+      //   },
+      //   {
+      //     name: 'Facebook',
+      //     value: 0,
+      //     color: 'red',
+      //   },
+      //   {
+      //     name: 'Twitter',
+      //     value: 0,
+      //     color: 'blue-green',
+      //   },
+      //   {
+      //     name: 'Instagram',
+      //     value: 1000001,
+      //     color: 'yellow-green',
+      //   },
+      // ]
+
+      const normalizedData = normalizationBubbleMapping(bubbleData, 55, 100)
+
+      yield put(actions.getBubleChartSuccess(normalizedData))
     } else {
       throw 'Error fetching MarketView/BubbleChartData'
     }
   } catch (error) {
+    console.log('error', error)
     yield put(actions.getBubleChartFailure(error))
   }
 }
@@ -358,14 +337,16 @@ function* getPacingChartData() {
       payload,
       { property: ['pacing'] },
       {
-        customBorderColor: '#373F5B',
+        customBorderColor: '#fff',
         singleDataset: true,
         noBrandKeys: true,
         customValueKey: 'proportionOfLibrary',
       }
     )
 
-    yield put(actions.getPacingChartSuccess(pacingChartData))
+    yield put(
+      actions.getPacingChartSuccess(percentageManipulation(pacingChartData))
+    )
   } catch (error) {
     console.log(error)
     yield put(actions.getPacingChartFailure(error))
@@ -389,7 +370,12 @@ function* getFormatChartData() {
     }
 
     // video is still being pulled from mock
-    const { video } = yield call(getFormatChartApi)
+    const video = {
+      videoUrl:
+        'https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/12-years-ago-today-Kobe-dropped-81.mp4',
+      poster:
+        'https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/12-years-ago-today-Kobe-dropped-81.jpg',
+    }
 
     const response = yield call(getDataFromApi, options, '/report')
 
@@ -404,9 +390,12 @@ function* getFormatChartData() {
 
           Object.keys(formatObj).forEach((formatKey) => {
             const currentKey = formatObj[formatKey]
-            const currentCount = Object.keys(currentKey).reduce((accumulator, day) => {
-              return accumulator + currentKey[day]
-            }, 0)
+            const currentCount = Object.keys(currentKey).reduce(
+              (accumulator, day) => {
+                return accumulator + currentKey[day]
+              },
+              0
+            )
 
             if (!!all[formatKey]) {
               all[formatKey] = all[formatKey] + currentCount
@@ -419,7 +408,11 @@ function* getFormatChartData() {
         {}
       )
 
-      const slicedObj = getNValuesOfObject({ obj: formatCountsObj, n: 4, sortOrder: 'desc' })
+      const slicedObj = getNValuesOfObject({
+        obj: formatCountsObj,
+        n: 4,
+        sortOrder: 'desc',
+      })
       const formatCountsArr = Object.keys(slicedObj).map((formatKey) => ({
         name: formatKey,
         count: formatCountsObj[formatKey],
@@ -428,7 +421,7 @@ function* getFormatChartData() {
       yield put(
         actions.getFormatChartSuccess({
           currentDay,
-          data: formatCountsArr,
+          data: percentageManipulation(formatCountsArr),
           video,
         })
       )
@@ -465,41 +458,55 @@ function* getTotalViewsData({ data }) {
 
     const dateBucket = getDateBucketFromRange(dateRange)
 
-    const [barData, doughnutData] = yield all([
-      call(getDataFromApi, undefined, `${url}&datebucket=${dateBucket}`, 'GET'),
-      call(getDataFromApi, undefined, `${url}&datebucket=none`, 'GET'),
-    ])
-
-    const convertedBarData =
-      dateBucket === 'none'
-        ? {}
-        : convertDataIntoDatasets(
-            barData,
-            { ...options, dateBucket },
-            {
-              isMetric: true,
-            }
-          )
-
-    const convertedDoughnutData = convertDataIntoDatasets(
-      doughnutData,
-      { ...options, dateBucket: 'none' },
-      {
-        hoverBG: true,
-        singleDataset: true,
-        useBrandLabels: true,
-        isMetric: true,
-      }
+    const barData = yield call(
+      getDataFromApi,
+      undefined,
+      `${url}&datebucket=${dateBucket}`,
+      'GET'
     )
 
-    yield put(
-      actions.getTotalViewsSuccess({
-        barData: convertedBarData,
-        doughnutData: convertedDoughnutData,
-      })
-    )
+    if (!!barData) {
+      const convertedBarData =
+        dateBucket === 'none'
+          ? {}
+          : convertDataIntoDatasets(
+              barData,
+              { ...options, dateBucket },
+              {
+                isMetric: true,
+              }
+            )
+      const covertDataForDoughnut = Object.keys(barData).reduce((acc, key) => {
+        acc[key] = {
+          [metric]: {
+            percent: Math.max(...Object.values(barData[key][metric].percents)),
+          },
+        }
+        return acc
+      }, {})
+
+      const convertedDoughnutData = convertDataIntoDatasets(
+        covertDataForDoughnut,
+        { ...options },
+        {
+          hoverBG: true,
+          singleDataset: true,
+          useBrandLabels: true,
+          isMetric: true,
+        }
+      )
+
+      yield put(
+        actions.getTotalViewsSuccess({
+          barData: percentageManipulation(convertedBarData),
+          doughnutData: percentageManipulation(convertedDoughnutData),
+        })
+      )
+    } else {
+      throw new Error('Get Total Views Error')
+    }
   } catch (error) {
-    console.log(error)
+    console.log('error', error)
     yield put(actions.getTotalViewsFailure(error))
   }
 }
@@ -521,23 +528,16 @@ function* getTotalCompetitorViewsData() {
     if (!!payload) {
       yield put(
         actions.getTotalCompetitorViewsSuccess(
-          convertDataIntoDatasets(payload, options, {
-            customKeys: Object.keys(payload.data),
-          })
+          percentageManipulation(
+            convertDataIntoDatasets(payload, options, {
+              customKeys: Object.keys(payload.data),
+            })
+          )
         )
       )
     }
   } catch (error) {
     yield put(actions.getTotalCompetitorViewsFailure(error))
-  }
-}
-
-function* getmarketviewTimeMockData() {
-  try {
-    const payload = yield call(getMarketviewDaysApi)
-    yield put(actions.getMarketviewDetailTimeSuccess(payload))
-  } catch (error) {
-    yield put(actions.getMarketviewDetailTimeFailure(error))
   }
 }
 
@@ -569,6 +569,8 @@ function* getTopPerformingPropertiesData({
       }
       return acc
     }, {})
+
+    response = percentageManipulation(response)
 
     yield put(
       actions.getTopPerformingPropertiesSuccess(
@@ -633,7 +635,7 @@ function* getTopPerformingPropertiesByCompetitorsData({
 
         yield put(
           actions.getTopPerformingPropertiesByCompetitorsSuccess({
-            datasets: convertedDatasets,
+            datasets: percentageManipulation(convertedDatasets),
             labels: brandLabels,
           })
         )
@@ -642,7 +644,6 @@ function* getTopPerformingPropertiesByCompetitorsData({
       throw new Error('Get Top Performing Property Error')
     }
   } catch (error) {
-    console.log('error', error)
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))
   }
 }
@@ -669,10 +670,10 @@ function* getTopPerformingPropertiesByTimeData({
     }
 
     const data = yield call(getDataFromApi, options, '/report')
-    
+
     yield put(
       actions.getTopPerformingTimeSuccess(
-        convertDataIntoDatasets(data, options, {
+        convertDataIntoDatasets(percentageManipulation(data), options, {
           singleDataset: false,
         })
       )
@@ -707,10 +708,7 @@ export default [
     types.GET_MARKETVIEW_TOTALCOMPETITORVIEWS_REQUEST,
     getTotalCompetitorViewsData
   ),
-  takeLatest(
-    types.GET_MARKETVIEW_DETAIL_TIME_REQUEST,
-    getmarketviewTimeMockData
-  ),
+
   takeLatest(
     types.GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_REQUEST,
     getTopPerformingPropertiesData

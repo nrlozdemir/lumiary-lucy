@@ -6,9 +6,6 @@ import { actions, types } from 'Reducers/generatedReport'
 import { actions as reportsActions } from 'Reducers/reports'
 import querystring from 'querystring'
 
-import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
-import reportsMockData from 'Api/mocks/reports.json'
-
 import {
   getDateBucketFromRange,
   getBrandAndCompetitors,
@@ -20,19 +17,11 @@ import {
   convertMultiRequestDataIntoDatasets,
   convertVideoEngagementData,
   convertColorTempToDatasets,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 import _ from 'lodash'
-
-function getGeneratedReportApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => generatedReportMockData)
-}
-
-function getReportsApi() {
-  return axios.get('/').then((res) => reportsMockData)
-}
 
 function* saveReport({ data }) {
   try {
@@ -104,20 +93,6 @@ function* saveReport({ data }) {
   }
 }
 
-function* getReport({ data: { id } }) {
-  try {
-    let { reports, compareReports } = yield call(getReportsApi)
-
-    const report = [...reports, ...compareReports].find(
-      (report) => report.id === id
-    )
-
-    yield put(actions.getReportSuccess(report))
-  } catch (err) {
-    yield put(actions.getReportFailure(err))
-  }
-}
-
 function* getTopPerformingVideos({ data: { report = {} } }) {
   try {
     const {
@@ -141,7 +116,11 @@ function* getTopPerformingVideos({ data: { report = {} } }) {
       )
 
       if (!!response && !!response.length) {
-        yield put(actions.getTopPerformingVideosSuccess(response))
+        yield put(
+          actions.getTopPerformingVideosSuccess(
+            percentageManipulation(response)
+          )
+        )
       } else {
         yield put(actions.getTopPerformingVideosSuccess([]))
       }
@@ -177,7 +156,7 @@ function* getVideoReleasesBarChart({ data: { report } }) {
     if (!!response) {
       yield put(
         actions.getVideoReleasesBarChartSuccess(
-          convertVideoEngagementData(response, metric)
+          percentageManipulation(convertVideoEngagementData(response, metric))
         )
       )
     } else {
@@ -212,14 +191,15 @@ function* getColorTempData({
     } = convertColorTempToDatasets(response, colorTemperature)
 
     yield put(
-      actions.getColorTempDataSuccess({
-        labels,
-        platforms,
-        data: colorTempData,
-      })
+      percentageManipulation(
+        actions.getColorTempDataSuccess({
+          labels,
+          platforms,
+          data: colorTempData,
+        })
+      )
     )
   } catch (err) {
-    console.log(err)
     yield put(actions.getColorTempDataFailure(err))
   }
 }
@@ -252,17 +232,22 @@ function* getFilteringSectionData({ data: { property, report } }) {
             dateBucket,
           })
         : { data: {} }
+
     yield put(
       actions.getFilteringSectionDataSuccess({
-        doughnutData: convertDataIntoDatasets(doughnutData, options, {
-          singleDataset: true,
-        }),
+        doughnutData: percentageManipulation(
+          convertDataIntoDatasets(doughnutData, options, {
+            singleDataset: true,
+          })
+        ),
         stackedChartData:
           (!_.isEmpty(stackedChartData.data) &&
-            convertDataIntoDatasets(
-              stackedChartData,
-              { ...options, dateBucket },
-              { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+            percentageManipulation(
+              convertDataIntoDatasets(
+                stackedChartData,
+                { ...options, dateBucket },
+                { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+              )
             )) ||
           {},
         property: 'duration',
@@ -311,18 +296,18 @@ function* getPacingCardData({ data: { report } }) {
 
     yield put(
       actions.getPacingCardDataSuccess({
-        stadiumData: convertDataIntoDatasets(stadiumData, options),
-        horizontalStackedBarData: convertDataIntoDatasets(
-          horizontalStackedBarData,
-          {
+        stadiumData: percentageManipulation(
+          convertDataIntoDatasets(stadiumData, options)
+        ),
+        horizontalStackedBarData: percentageManipulation(
+          convertDataIntoDatasets(horizontalStackedBarData, {
             ...options,
             proportionOf: 'format',
-          }
+          })
         ),
       })
     )
   } catch (err) {
-    console.log(err)
     yield put(actions.getPacingCardDataFailure(err))
   }
 }
@@ -345,10 +330,10 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
       brands: [...filteredCompetitors],
     }
 
-    if(property === 'format') {
+    if (property === 'format') {
       options.limit = 4
     }
-    
+
     const [facebook, instagram, twitter, youtube] = yield all([
       call(getDataFromApi, { ...options, platform: 'facebook' }),
       call(getDataFromApi, { ...options, platform: 'instagram' }),
@@ -358,14 +343,16 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
 
     yield put(
       actions.getCompetitorTopVideosSuccess(
-        convertMultiRequestDataIntoDatasets(
-          {
-            facebook,
-            instagram,
-            twitter,
-            youtube,
-          },
-          options
+        percentageManipulation(
+          convertMultiRequestDataIntoDatasets(
+            {
+              facebook,
+              instagram,
+              twitter,
+              youtube,
+            },
+            options
+          )
         )
       )
     )
@@ -375,7 +362,6 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
 }
 
 export default [
-  takeLatest(types.GET_REPORT_REQUEST, getReport),
   takeLatest(types.SAVE_REPORT_REQUEST, saveReport),
   takeLatest(types.GET_PACING_CARD_DATA_REQUEST, getPacingCardData),
   takeLatest(types.GET_COMPETITOR_TOP_VIDEOS_REQUEST, getCompetitorTopVideos),

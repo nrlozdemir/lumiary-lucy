@@ -11,7 +11,15 @@ import {
   getTimeBucket,
   getLabelWithSuffix,
 } from 'Utils'
-import { isEmpty } from 'lodash'
+import {
+  isEmpty,
+  isObject,
+  isArray,
+  isNumber,
+  isFinite,
+  isInteger,
+  sortBy,
+} from 'lodash'
 
 /**
  * Convert data to chart js structure
@@ -237,19 +245,19 @@ const radarChartCalculate = (data) => {
   if (data && !!data.length) {
     colorsData = data
     colorsData.map((el, i) => {
-      el.total = el.datas.labels
+      el.total = el.data.labels
         .map((a, k) => a)
         .reduce((prev, next) => prev + parseFloat(next.count), 0)
 
       el.progress = []
 
-      el.datas.datasets[0].backgroundColor = 'rgba(255, 255, 255, 0.3)'
-      el.datas.datasets[0].borderColor = 'transparent'
-      el.datas.datasets[0].pointBackgroundColor = '#ffffff'
-      el.datas.datasets[0].pointBorderColor = '#ffffff'
-      el.datas.datasets[0].data = []
+      el.data.datasets[0].backgroundColor = 'rgba(255, 255, 255, 0.3)'
+      el.data.datasets[0].borderColor = 'transparent'
+      el.data.datasets[0].pointBackgroundColor = '#ffffff'
+      el.data.datasets[0].pointBorderColor = '#ffffff'
+      el.data.datasets[0].data = []
 
-      el.datas.labels
+      el.data.labels
         .map((sub, k) => sub)
         .sort((a, b) =>
           parseFloat(a.count) < parseFloat(b.count)
@@ -263,24 +271,26 @@ const radarChartCalculate = (data) => {
           el.progress.push({
             leftTitle: f.name,
             color: strToColor(f.name),
-            rightTitle: `${metricSuffix(f.count)} Shares`,
+            rightTitle: `${metricSuffix(f.count)} ${ucfirst(
+              el.data.datasets[0].metric
+            )}`,
             value: ((f.count / el.total) * 100).toFixed(0),
           })
         })
 
-      el.datas.labels.map((sub, k) => {
-        data[i].datas.labels[k].color = strToColor(sub.name)
-        data[i].datas.labels[k].selected = !!el.progress.find(
+      el.data.labels.map((sub, k) => {
+        data[i].data.labels[k].color = strToColor(sub.name)
+        data[i].data.labels[k].selected = !!el.progress.find(
           (selected, i) => selected.color === strToColor(sub.name)
         )
-        data[i].datas.datasets[0].data.push(sub.count)
+        data[i].data.datasets[0].data.push(sub.count)
       })
     })
   }
   return colorsData
 }
 
-const compareSharesData = (payload) => {
+const compareSharesData = (payload, options) => {
   const isArray = Array.isArray(payload)
   const data = isArray ? payload : Object.keys(payload.data)
 
@@ -290,16 +300,16 @@ const compareSharesData = (payload) => {
     const keyName = Object.keys(item)[0]
 
     const labelsObj = { ...item[keyName] }
-    
+
     delete labelsObj.subtotal
 
     const labels = Object.entries(labelsObj)
 
-    const type = (isArray ? item.platform : value) || keyName
+    const type = (isArray ? value.platform : value) || keyName
 
     return {
       type: ucfirst(type),
-      datas: {
+      data: {
         labels: labels.map((color) => ({
           name: color[0]
             .split('-')
@@ -309,7 +319,8 @@ const compareSharesData = (payload) => {
         })),
         datasets: [
           {
-            label: ucfirst(type),
+            label: ucfirst(brand),
+            metric: options.metric,
           },
         ],
       },
@@ -450,19 +461,40 @@ const parseAverage = (payload) => {
       if (key.includes('LibraryAverage')) {
         acc[keyName] = {
           ...acc[keyName],
-          average: parseFloat(payload[key]).toFixed(0),
+          average: percentageBeautifier(payload[key]),
         }
       }
       if (key.includes('LibraryMax')) {
         acc[keyName] = {
           ...acc[keyName],
-          max: parseFloat(payload[key]).toFixed(0),
+          max: percentageBeautifier(payload[key]),
         }
       }
     }
 
     return acc
   }, {})
+
+  const getOrder = (keyName) => {
+    let order = 0
+    switch (keyName) {
+      case 'view':
+        order = 1
+        break
+      case 'like':
+        order = 2
+        break
+      case 'comment':
+        order = 3
+        break
+      case 'share':
+        order = 4
+        break
+      default:
+        order = 0
+    }
+    return order
+  }
 
   Object.keys(payload.video).forEach((payloadRow) => {
     const item = payloadRow
@@ -473,28 +505,37 @@ const parseAverage = (payload) => {
     if (item.includes('diffFromLibrary')) {
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
-        diff: parseFloat(payload.video[item]).toFixed(2),
+        diff: percentageBeautifier(payload.video[item]),
       }
     }
     if (item.includes('value')) {
       keyName = keyName.slice(0, keyName.length - 1)
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
-        value: parseFloat(payload.video[item]).toFixed(0),
+        value: percentageBeautifier(payload.video[item]),
       }
     }
     if (item.includes('percentile')) {
       keyName = keyName.slice(0, keyName.length - 1)
       calculateAverage[keyName] = {
         ...calculateAverage[keyName],
-        percentile: parseFloat(
+        percentile: percentageBeautifier(
           payload.video[`cvScores.library_${item.replace('s.', '_')}`]
-        ).toFixed(0),
+        ),
       }
+    }
+    calculateAverage[keyName] = {
+      ...calculateAverage[keyName],
+      keyName: keyName,
+      order: getOrder(keyName),
     }
   })
 
-  return calculateAverage
+  const returnData = Object.values(calculateAverage).sort((a, b) => {
+    return a.order > b.order;
+  });
+
+  return returnData
 }
 
 /* Converts the api responses from /metric & /brand/{brandUuid}/count
@@ -662,7 +703,89 @@ const convertNumberArrIntoPercentages = (arr = []) => {
   return arr.map((n) => parseFloat(((n / sum) * 100).toFixed(2)))
 }
 
+const percentageBeautifier = (value, precision) => {
+  if (isInteger(value) || value === 0) {
+    return value
+  }
+
+  const multiplier = Math.pow(10, precision || 1)
+  value = Math.round(value * multiplier) / multiplier
+
+  if (value.toString().substr(-1, 1) == 0) {
+    value = value.toString().replace('.0', '')
+  }
+
+  return value
+}
+
+const percentageManipulation = (bucket) => {
+  if (isObject(bucket)) {
+    Object.keys(bucket).map((el, i) => {
+      if (isNumber(bucket[el]) && isFinite(bucket[el])) {
+        bucket[el] = percentageBeautifier(bucket[el])
+      } else if (isArray(bucket[el])) {
+        bucket[el].forEach((item, index) => {
+          if (isNumber(bucket[el][index])) {
+            bucket[el][index] = percentageBeautifier(item)
+          } else {
+            bucket[el][index] = percentageManipulation(bucket[el][index])
+          }
+        })
+      } else if (isObject(bucket[el])) {
+        Object.keys(bucket[el]).map((key, k) => {
+          bucket[el][key] = percentageManipulation(bucket[el][key])
+        })
+      }
+    })
+  } else if (isArray(bucket)) {
+    bucket.forEach((item, index) => {
+      if (isNumber(bucket[index]) && isFinite(bucket[el])) {
+        bucket[index] = percentageBeautifier(item)
+      } else if (isArray(bucket[index])) {
+        bucket[index].forEach((arrayItem, arrayIndex) => {
+          if (isNumber(bucket[index][arrayIndex])) {
+            bucket[index][arrayIndex] = percentageBeautifier(arrayItem)
+          } else {
+            bucket[index][arrayIndex] = percentageManipulation(
+              bucket[index][arrayIndex]
+            )
+          }
+        })
+      } else if (isObject(bucket[index])) {
+        Object.keys(bucket[index]).map((key, k) => {
+          bucket[index][key] = percentageManipulation(bucket[index][key])
+        })
+      }
+    })
+  }
+
+  return bucket
+}
+
+/*
+ returns the chartYAxisMax, chartYAxisStepSize from the api  
+ */
+
+const getCVScoreChartAttributes = (data) => {
+  const maxVideoPercent =
+    (!!data &&
+      Object.keys(data).reduce((accumulator, key) => {
+        const maxPercentInSet = Math.max(...data[key].videoPercents)
+        return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
+      }, 0)) ||
+    0
+
+  const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
+  const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
+
+  return {
+    chartYAxisMax,
+    chartYAxisStepSize,
+  }
+}
+
 export {
+  getCVScoreChartAttributes,
   convertDataIntoDatasets,
   chartCombineDataset,
   radarChartCalculate,
@@ -675,4 +798,5 @@ export {
   getMinMaxFromDatasets,
   convertNumberArrIntoPercentages,
   convertIntoLibAndIndustryDoughnut,
+  percentageManipulation,
 }

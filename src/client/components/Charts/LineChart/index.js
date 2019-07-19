@@ -32,7 +32,10 @@ function combineChartData(data, type = null) {
 class LineChart extends React.Component {
   constructor(props) {
     super(props)
-    this.state = {}
+    this.state = {
+      chartWidth: 1140,
+      chartHeight: 285,
+    }
   }
 
   datasetKeyProvider() {
@@ -41,9 +44,9 @@ class LineChart extends React.Component {
 
   render() {
     const themes = this.props.themeContext.colors
+
+    const { customLineOptions } = this.props
     const defaultProps = {
-      width: 1200,
-      height: 300,
       options: {
         responsive: false,
         plugins: {
@@ -53,16 +56,9 @@ class LineChart extends React.Component {
           display: false,
         },
         tooltips: {
-          xAlign: 'center',
-          yAlign: 'bottom',
-          backgroundColor: '#fff',
-          titleFontColor: '#21243B',
-          bodyFontColor: '#21243B',
-          footerFontColor: '#21243B',
-          xPadding: 14,
-          yPadding: 14,
-          cornerRadius: 10,
+          enabled: false,
         },
+
         scales: {
           xAxes: [
             {
@@ -74,6 +70,7 @@ class LineChart extends React.Component {
                 drawTicks: false,
               },
               ticks: {
+                display: this.props.tickUnvisible ? false : true,
                 fontColor: themes.textColor,
                 fontSize: 12,
                 fontFamily: 'ClanOTNews',
@@ -113,7 +110,6 @@ class LineChart extends React.Component {
     let props = fromJS(defaultProps)
       .mergeDeep(this.props)
       .toJS()
-
     let plugins = []
 
     if (props.backgroundColor || themes.chartBackground) {
@@ -121,7 +117,6 @@ class LineChart extends React.Component {
         beforeDraw: (chart, easing) => {
           let ctx = chart.chart.ctx
           let chartArea = chart.chartArea
-
           ctx.save()
           ctx.fillStyle = props.backgroundColor || themes.chartBackground
           ctx.fillRect(
@@ -133,6 +128,40 @@ class LineChart extends React.Component {
           ctx.restore()
         },
       })
+    }
+    if (props.customLine) {
+      plugins.push({
+        afterDraw: (chart, easing) => {
+          let ctx = chart.chart.ctx
+          let chartArea = chart.chartArea
+          if (chart.options.average) {
+            ctx.fillStyle = '#505050'
+            ctx.fillRect(
+              ((chartArea.right - chartArea.left) / 100) *
+                chart.options.average +
+                48,
+              5,
+              4,
+              chartArea.bottom - chartArea.top
+            )
+          }
+        },
+      })
+    }
+    if (props.shadow) {
+      plugins.push(
+        {
+          beforeDatasetDraw: function({ ctx }, { meta }) {
+            ctx.shadowBlur = 10
+            ctx.shadowColor = meta.$filler.el._model.borderColor
+          },
+        },
+        {
+          afterDatasetDraw: function(chart) {
+            chart.ctx.shadowBlur = 0
+          },
+        }
+      )
     }
 
     if (props.xAxesFlatten) {
@@ -156,11 +185,22 @@ class LineChart extends React.Component {
         },
       }
     }
-
+    let maximumDatainDatasets
+    if (props.dynamicPercentage) {
+      const v =
+        props.dataSet &&
+        props.dataSet.datasets &&
+        props.dataSet.datasets.map((dataset) => {
+          return dataset.data
+        })
+      maximumDatainDatasets = v && Math.max(...[...v[0], ...v[1]])
+    }
     if (props.yAxesPercentage) {
       props.options.scales.yAxes[0].ticks = {
         ...props.options.scales.yAxes[0].ticks,
-        max: 100,
+        max: maximumDatainDatasets
+          ? maximumDatainDatasets + maximumDatainDatasets * 0.3
+          : 100,
         callback: (value, index, values) => {
           return addPercentage(value)
         },
@@ -257,13 +297,25 @@ class LineChart extends React.Component {
       }
     }
 
+    let combinedData = combineChartData(props.dataSet, props.chartType)
+    if (customLineOptions) {
+      combinedData.datasets =
+        !!combinedData.datasets &&
+        combinedData.datasets.map((item, index) => {
+          return { ...item, ...customLineOptions[index] }
+        })
+    }
+
     return (
       <React.Fragment>
         <Line
+          id="chartjs-customline"
           key={Math.random()}
-          data={combineChartData(props.dataSet, props.chartType)}
+          data={combinedData}
           plugins={plugins}
           datasetKeyProvider={this.datasetKeyProvider}
+          height={this.state.chartHeight}
+          width={this.state.chartWidth}
           {...props}
         />
       </React.Fragment>

@@ -65,7 +65,6 @@ class PanopticFilteringSection extends Component {
         ]}
         isEmpty={hasNoData}
         loading={loading}
-        infoText={`The graph on the left shows the distribution of engagement by video property. The graph on the right shows this distribution over time. Using the drop-downs, you can adjust the video property, engagement/platform and time range.`}
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
@@ -91,7 +90,7 @@ class PanopticFilteringSection extends Component {
           <div className={style.stackedChart}>
             <StackedBarChart
               barData={!loading ? stackedChartData : null}
-              barSpacing={2}
+              barSpacing={4}
             />
           </div>
         </div>

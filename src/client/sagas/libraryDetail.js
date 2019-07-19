@@ -1,17 +1,13 @@
 import { takeLatest, call, put, select } from 'redux-saga/effects'
-import axios from 'axios'
-import { ajax } from 'Utils/api'
+
 import _ from 'lodash'
 
 import {
   types,
   actions,
   makeSelectInfoShowSection,
-  makeSelectDoughnutFilters,
-  selectShotInfoData,
 } from 'Reducers/libraryDetail'
-import mock from 'Api/mocks/libraryMock.json'
-import { findIdDetail, getDataFromApi, buildApiUrl } from 'Utils/api'
+import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import { getMaximumValueIndexFromArray } from 'Utils'
 
@@ -21,27 +17,10 @@ import {
   convertColorTempToDatasets,
   parseAverage,
   convertNumberArrIntoPercentages,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { selectAuthProfile } from 'Reducers/auth'
-
-function getBarChartApi({ LibraryDetailId }) {
-  //this will use ajax function in utils/api when real data is provided
-  return axios
-    .get('/')
-    .then((res) => findIdDetail(mock, LibraryDetailId, 'HeaderBarChartMock'))
-}
-
-function* getBarChart({ payload: { LibraryDetailId } }) {
-  try {
-    const payload = yield call(getBarChartApi, {
-      LibraryDetailId,
-    })
-    yield put(actions.getBarChartSuccess(payload))
-  } catch (error) {
-    yield put(actions.getBarChartFailure({ error }))
-  }
-}
 
 function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
   try {
@@ -127,7 +106,7 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
       }
     })
 
-    yield put(actions.getDoughnutChartSuccess(val))
+    yield put(actions.getDoughnutChartSuccess(percentageManipulation(val)))
   } catch (error) {
     yield put(actions.getDoughnutChartFailure({ error }))
   }
@@ -157,7 +136,7 @@ function* getColorTemperatureData({
 
       yield put({
         type: types.GET_COLOR_TEMP_SUCCESS,
-        payload: convertedData,
+        payload: percentageManipulation(convertedData),
       })
     } else {
       throw 'Error fetching Library/Detail ColorTemperature'
@@ -177,7 +156,7 @@ function* getShotByShot(videoId) {
       `/brand/${brand.uuid}/video/${videoId.payload}/shots`,
       'GET'
     )
-    yield put(actions.getShotByShotSuccess(payload))
+    yield put(actions.getShotByShotSuccess(percentageManipulation(payload)))
   } catch (error) {
     yield put(actions.getShotByShotFailure({ error }))
   }
@@ -192,7 +171,7 @@ function* getShotInfoRequest({ payload }) {
 
       const payload = yield call(getDataFromApi, undefined, url, 'GET')
 
-      yield put(actions.getShotInfoSuccess(payload))
+      yield put(actions.getShotInfoSuccess(percentageManipulation(payload)))
     } else {
       throw new Error('Library Detail getShotInfoRequest Error')
     }
@@ -212,7 +191,9 @@ function* getSelectedVideo({ payload }) {
       'GET'
     )
 
-    yield put(actions.getSelectedVideoSuccess(response.video))
+    yield put(
+      actions.getSelectedVideoSuccess(percentageManipulation(response.video))
+    )
   } catch (error) {
     yield put(actions.getSelectedVideoFailure({ error }))
   }
@@ -256,10 +237,12 @@ function* getDoughnutSectionInfoData({ payload }) {
         chartData: libraryChartData,
         maxKey: libraryMaxKey,
         maxValue: libraryMaxValue,
-      } = convertIntoLibAndIndustryDoughnut(
-        libraryMetricPercents,
-        property,
-        '#2FD7C4'
+      } = percentageManipulation(
+        convertIntoLibAndIndustryDoughnut(
+          libraryMetricPercents,
+          property,
+          '#2FD7C4'
+        )
       )
 
       const {
@@ -267,17 +250,23 @@ function* getDoughnutSectionInfoData({ payload }) {
         chartData: industryChartData,
         maxKey: industryMaxKey,
         maxValue: industryMaxValue,
-      } = convertIntoLibAndIndustryDoughnut(
-        industryMetricPercents,
-        property,
-        '#8562f3'
+      } = percentageManipulation(
+        convertIntoLibAndIndustryDoughnut(
+          industryMetricPercents,
+          property,
+          '#8562f3'
+        )
       )
 
-      const libraryPercentages = convertNumberArrIntoPercentages(
-        Object.values(libraryMetricDateSums[libraryMaxKeyLabel])
+      const libraryPercentages = percentageManipulation(
+        convertNumberArrIntoPercentages(
+          Object.values(libraryMetricDateSums[libraryMaxKeyLabel])
+        )
       )
-      const industryPercentages = convertNumberArrIntoPercentages(
-        Object.values(industryMetricDateSums[industryMaxKeyLabel])
+      const industryPercentages = percentageManipulation(
+        convertNumberArrIntoPercentages(
+          Object.values(industryMetricDateSums[industryMaxKeyLabel])
+        )
       )
 
       const lineChartData = {
@@ -330,7 +319,11 @@ function* getVideoAverage({ id }) {
       requestType: 'GET',
     })
 
-    yield put(actions.getSelectedVideoAverageSuccess(parseAverage(payload)))
+    yield put(
+      actions.getSelectedVideoAverageSuccess(
+        percentageManipulation(parseAverage(payload))
+      )
+    )
   } catch (error) {
     yield put(actions.getSelectedVideoAverageFailure({ error }))
   }
@@ -371,7 +364,7 @@ function* getRadarChartRequest(ids) {
       }
     })
 
-    yield put(actions.getRadarChartSuccess(values))
+    yield put(actions.getRadarChartSuccess(percentageManipulation(values)))
   } catch (error) {
     yield put(actions.getRadarChartFailure({ error }))
   }
@@ -382,17 +375,16 @@ function* getPeopleRequest(ids) {
     const url = `/brand/${ids.payload.brandUuid}/video/${
       ids.payload.videoUuid
     }/shots/${ids.payload.shotId}/demographics`
-    
+
     const payload = yield call(getDataFromApi, { url: url, requestType: 'GET' })
 
-    yield put(actions.getPeopleSuccess(payload))
+    yield put(actions.getPeopleSuccess(percentageManipulation(payload)))
   } catch (error) {
     yield put(actions.getPeopleFailure({ error }))
   }
 }
 
 export default [
-  takeLatest(types.GET_BAR_CHART_REQUEST, getBarChart),
   takeLatest(types.GET_DOUGHNUT_CHART_REQUEST, getDoughnutChart),
   takeLatest(types.GET_COLOR_TEMP_REQUEST, getColorTemperatureData),
   takeLatest(types.GET_SHOT_BY_SHOT_REQUEST, getShotByShot),

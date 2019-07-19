@@ -3,36 +3,45 @@ import PropTypes from 'prop-types'
 import ModuleSelectFilters from 'Components/ModuleSelectFilters'
 import style from './style.scss'
 import ToolTip from 'Components/ToolTip'
+import InformationModal from 'Components/Modal/Information'
 import classnames from 'classnames'
+import { moduleIds } from 'Utils/globals'
 
 const HeaderModule = ({
-  key,
   title,
-  subTitle,
   legend,
   filters,
   moduleKey,
   changeInfoStatus,
   infoShow,
-  infoText,
+  setModalShow,
+  modalShow,
   themes,
+  sections: { data, loading },
 }) => {
   return (
     <React.Fragment>
       <div className={style.headerTitle}>
         <h1>{title}</h1>
-        {/* <h2>{subTitle}</h2> */}
-        {infoText && <i
+        <i
           className={classnames('icon icon-Information', style.moduleInfo)}
-          onMouseEnter={() => changeInfoStatus()}
-          onMouseLeave={() => changeInfoStatus()}
+          data-tip="Learn More"
+          onClick={() => setModalShow(true)}
           style={{ color: themes.textColor }}
-        >
-          <ToolTip show={infoShow}>
-            {infoText ||
-              'This explains what this graph means and answers any questions a usermay potentially have.'}
-          </ToolTip>
-        </i>}
+        />
+        <ToolTip effect="solid" xSmallTooltip />
+        {modalShow && (
+          <InformationModal
+            width={840}
+            isOpen={modalShow}
+            closeTimeoutMS={300}
+            onRequestClose={() => setModalShow(false)}
+            options={{
+              data: data && data[moduleIds[moduleKey]],
+              loading,
+            }}
+          />
+        )}
       </div>
       {!!legend && <div className={style.headerLegend}>{legend}</div>}
       {filters && filters.length ? (
@@ -51,6 +60,7 @@ const HeaderModule = ({
                     filter.type === 'propertyEngagement') &&
                   'custom-select combine-select'
                 }
+                inModuleFilter
               />
             )
           })}

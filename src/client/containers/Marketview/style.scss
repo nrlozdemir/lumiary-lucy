@@ -1,13 +1,15 @@
 .mainCardContainer {
-  display: flex;
-  justify-content: space-between;
-  padding: 0 8px;
   margin-top: 72px;
+  .mainCardContainerInner {
+    margin: 0 -12px;
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
 .marketViewCard {
   position: relative;
-  box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
+  // box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   background-color: $color-dark-grey-blue;
   padding: 40px 20px 0;
   font-family: $font-family-ClanOTNews;
@@ -16,7 +18,7 @@
   display: flex;
   flex-direction: column;
   min-height: 766px;
-  
+
   .marketViewCardTitle {
     font-family: $font-family-primary;
     font-size: 32px;
@@ -106,7 +108,7 @@
     align-items: center;
     font-size: 24px;
     font-weight: bold;
-    z-index: 999;
+    z-index: 99;
   }
 }
 
@@ -201,6 +203,13 @@
   height: 110px;
   margin: 0px auto;
   overflow: hidden;
+  &.dark{
+    box-shadow: 0 4px 16px 0 $dark_videoCardShadow;
+  }
+
+  &.light{
+    box-shadow: 0 4px 16px 0 $light_videoCardShadow;
+  }
 }
 
 .card {
@@ -271,6 +280,7 @@
 
 .bubbleChart {
   position: relative;
+  margin-top: -70px;
   margin-bottom: 50px;
 }
 
@@ -282,6 +292,8 @@
   top: 0;
   width: 100%;
   height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
   &:before {
     display: inline-flex;
     position: absolute;
@@ -289,7 +301,8 @@
     height: 100%;
     justify-content: center;
     align-items: center;
-    font-size: inherit;
+    color: inherit;
+    // font-size: 170px;
   }
 }
 
@@ -323,7 +336,7 @@
   display: block;
   margin: 40px 0 56px;
   text-align: center;
-	white-space: nowrap;
+  white-space: nowrap;
 
   span {
     background-color: $color-dusk;

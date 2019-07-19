@@ -10,7 +10,6 @@ class TopVideosCard extends React.Component {
   render() {
     const {
       data: { data, loading },
-      infoText,
     } = this.props
 
     return (
@@ -21,7 +20,7 @@ class TopVideosCard extends React.Component {
         moduleKey="Reports/TopVideosCardModule"
         title="Top Videos Over Time By All Platforms"
         action={this.callBack}
-        infoText={infoText}
+        xGridDisplay
         filters={[
           {
             type: 'property',

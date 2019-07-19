@@ -3,6 +3,12 @@
   position: relative;
 }
 
+.sliderWrapper {
+  padding-left: 0px !important;
+  padding-right: 0px !important;
+  padding-bottom: 0px !important;
+}
+
 .headerLabel {
   p {
     font-size: 14px;
@@ -41,22 +47,15 @@
 }
 
 .bubbleVisual {
-  position: relative;
-  display: inline-block;
+  display: inline-flex;
   position: absolute;
   left: 0;
   top: 0;
   width: 100%;
   height: 100%;
-  &:before {
-    display: inline-flex;
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    justify-content: center;
-    align-items: center;
-    font-size: 50px;
-  }
+  font-size: 24px;
+  align-items: center;
+  justify-content: center;
 }
 
 .bubbleTooltip {
@@ -200,10 +199,17 @@
     flex-direction: column;
     justify-content: space-evenly;
     margin: 0 16px 0px 0px;
+    width: 100%;
+    max-width: max-content;
+    
     .legend {
       font-family: $font-family-ClanOTBold;
       font-size: 14px;
       text-align: right;
     }
   }
+}
+
+.performanceEmpty {
+  height: calc(100% - 225px);
 }

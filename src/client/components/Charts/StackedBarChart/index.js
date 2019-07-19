@@ -2,14 +2,21 @@ import React from 'react'
 import { Bar, Chart } from 'react-chartjs-2'
 import { barDataOptions } from './options'
 import { withTheme } from 'ThemeContext/withTheme'
-import { metricSuffix } from 'Utils'
+import { metricSuffix, customChartToolTip } from 'Utils'
+import { percentageManipulation } from 'Utils/datasets'
 
 const emptyData = {
   datasets: [],
 }
 
+const rectProto = Chart.elements.Rectangle.prototype.draw
+
 Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
   draw() {
+    if (this._chart.config.type !== 'bar') {
+      return rectProto.apply(this, arguments)
+    }
+
     const { ctx } = this._chart
     const vm = this._view
     const strokeColor =
@@ -111,6 +118,7 @@ const StackedBarChart = (props) => {
     width = 500,
     barSpacing,
     datalabels = false,
+    xGridDisplay,
   } = props
   const themes = props.themeContext.colors
   return (
@@ -132,7 +140,7 @@ const StackedBarChart = (props) => {
                     (accumulator, currentValue) => accumulator + currentValue
                   )
 
-                  return parseFloat((value / (totalValue / 100)).toFixed(2))
+                  return percentageManipulation(value / (totalValue / 100))
                 }),
               }
             })) ||
@@ -141,6 +149,16 @@ const StackedBarChart = (props) => {
       width={width}
       options={{
         ...barDataOptions,
+        tooltips: customChartToolTip(themes, {
+          callbacks: {
+            title: () => '',
+            label: function(tooltipItem, data) {
+              const count = data && data.datasets && data.datasets[tooltipItem['datasetIndex']] && data.datasets[tooltipItem['datasetIndex']].data[tooltipItem['index']] || ''
+              const name = data && data.datasets && data.datasets[tooltipItem['datasetIndex']] && data.datasets[tooltipItem['datasetIndex']].label || ''
+              return `${count || 0}% ${!!name && `| ${name}`}`
+            },
+          },
+        }),
         chartArea: {
           backgroundColor: themes.chartBackground,
           barSpacing,
@@ -184,6 +202,7 @@ const StackedBarChart = (props) => {
               gridLines: {
                 ...barDataOptions.scales.xAxes[0].gridLines,
                 color: themes.chartStadiumBarBorder,
+                display: xGridDisplay || false,
               },
             },
           ],

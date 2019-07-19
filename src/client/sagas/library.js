@@ -1,24 +1,18 @@
 import qs from 'qs'
-import axios from 'axios'
 import { ajax } from 'Utils/api'
-import { sortVideos } from 'Utils/sort-videos'
-import libraryMockData from 'Api/mocks/libraryMock.json'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { types, actions, makeSelectVideoFilters } from 'Reducers/library'
-import { userUuid } from 'Utils/globals'
+import { selectAuthProfile } from 'Reducers/auth'
+
+import { percentageManipulation } from 'Utils/datasets'
 
 const RESOURCE = '/brand'
 
-function getLibraryApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => libraryMockData)
-}
-
-function getLibraryDataApi(vals) {
+function getLibraryDataApi(vals, brand_id) {
   const { limit, page, body = {} } = vals
 
   return ajax({
-    url: `${RESOURCE}/${userUuid}?limit=${limit}&page=${page}`,
+    url: `${RESOURCE}/${brand_id}?limit=${limit}&page=${page}`,
     method: 'POST',
     params: qs.stringify(body),
   }).then((response) => {
@@ -32,6 +26,7 @@ function getLibraryDataApi(vals) {
 function* getVideos(values) {
   const page = values && values.payload && values.payload.page
   try {
+    const { brand } = yield select(selectAuthProfile)
     const filters = yield select(makeSelectVideoFilters())
     const body = getBodyFromFilters(filters)
 
@@ -40,9 +35,12 @@ function* getVideos(values) {
       page: page || 1,
       body,
     }
-    const payload = yield call(getLibraryDataApi, options)
-    yield put(actions.loadVideosSuccess(payload))
+    
+    const payload = yield call(getLibraryDataApi, options, brand.uuid)
+
+    yield put(actions.loadVideosSuccess(percentageManipulation(payload)))
   } catch (err) {
+    console.log(err)
     yield put(actions.loadVideosError(err))
   }
 }
@@ -77,7 +75,7 @@ function getBodyFromFilters(filters = {}) {
           accumulator['platforms'] = []
         }
 
-        if(thisFilter) {
+        if (thisFilter) {
           accumulator['platforms'].push(filter.toLowerCase())
         }
         break
@@ -138,9 +136,10 @@ function getBodyFromFilters(filters = {}) {
         if (!accumulator['colors']) {
           accumulator['colors'] = []
         }
-        accumulator['colors'].push(thisFilter.name.toLowerCase().replace(/ /g, '-'))
+        accumulator['colors'].push(
+          thisFilter.name.toLowerCase().replace(/ /g, '-')
+        )
         break
-
     }
 
     return accumulator
@@ -151,6 +150,7 @@ function* changeFilter() {
   try {
     const filters = yield select(makeSelectVideoFilters())
     const body = getBodyFromFilters(filters)
+    const { brand } = yield select(selectAuthProfile)
 
     const options = {
       limit: 16,
@@ -158,7 +158,7 @@ function* changeFilter() {
       body,
     }
 
-    const payload = yield call(getLibraryDataApi, options)
+    const payload = yield call(getLibraryDataApi, options, brand.uuid)
 
     yield put(actions.clearAndLoadVideos(payload))
   } catch (err) {

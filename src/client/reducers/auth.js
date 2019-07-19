@@ -1,5 +1,6 @@
 import jwtDecode from 'jwt-decode'
 import { createSelector } from 'reselect'
+import { getBrandAndCompetitorsFromProfileObject } from 'Utils'
 
 export const types = {
   LOGIN_REQUEST: 'AUTH/LOGIN_REQUEST',
@@ -17,8 +18,9 @@ export const actions = {
     email,
     password,
   }),
-  loginSsoRequest: data => ({
-     type: types.LOGIN_SSO_REQUEST, payload: data
+  loginSsoRequest: (data) => ({
+    type: types.LOGIN_SSO_REQUEST,
+    payload: data,
   }),
 }
 
@@ -37,7 +39,8 @@ export const initialState = {
     brand: {
       name: 'Bleacher Report',
       uuid: 'd65aa957-d094-4cf3-8d37-dafe50e752ea',
-      profileImg: 'https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png',
+      avatar:
+        'https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png',
       competitors: [
         {
           name: 'Barstool Sports',
@@ -48,9 +51,9 @@ export const initialState = {
           uuid: '40002bf1-c2d3-41cb-8d85-77f5533d7b45',
         },
         {
-          name: 'Players\' Tribune',
+          name: "Players' Tribune",
           uuid: '7a5d6636-a49a-41ab-9d28-a47933fa5f04',
-        }
+        },
       ],
     },
   },
@@ -74,7 +77,10 @@ const reducer = (state = initialState, action) => {
 
       return {
         ...state,
-        profile,
+        profile: {
+          ...profile,
+          brand: getBrandAndCompetitorsFromProfileObject(profile),
+        },
         token: token,
         refresh: refresh,
         expiry: expiry,

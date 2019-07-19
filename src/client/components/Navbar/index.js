@@ -39,18 +39,16 @@ const BackTo = (props) => {
     title = ''
 
   if (typeof props != 'undefined' && props[1] != null) {
-    title = props[1]
+    title = 'Back To ' + ucfirst(props[1])
     link = '/' + props[1]
   } else {
-    title = 'overview'
+    title = 'Back To Overview'
     link = '/'
   }
 
   if (props && props.title) {
     title = ucfirst(props.title)
   }
-
-  title = 'Back to ' + ucfirst(title)
 
   return (
     <div className={style.backTo}>
@@ -70,17 +68,26 @@ const Logo = ({ themes }) => (
   </div>
 )
 
-export const NavLinkComponent = props => (
-  <NavLink {...props} isActive={(match, location) => {
-    if (props.to === location.pathname) {
-      return true
-    }
-    if (location.pathname === '/' && props.to === '/library') {
-      return true
-    }
-    return false
-  }}/>
-)
+export const NavLinkComponent = (props) => {
+  const { forceActiveChildren, ...rest } = props
+  return (
+    <NavLink
+      {...rest}
+      isActive={(match, location) => {
+        if (forceActiveChildren && forceActiveChildren === rest.children) {
+          return true
+        }
+        if (rest.to === location.pathname) {
+          return true
+        }
+        if (location.pathname === '/' && rest.to === '/library') {
+          return true
+        }
+        return false
+      }}
+    />
+  )
+}
 
 const Default = (props) => {
   const { textColor, moduleBackground } = props.themes
@@ -96,13 +103,13 @@ const Default = (props) => {
         : 0
     )
     .map((el, i) => {
-
       return (
         <NavLinkComponent
           key={i}
           to={el.path}
           activeClassName={style.activeLink}
           style={{ color: textColor }}
+          forceActiveChildren={props.forceActiveChildren}
         >
           {el.navigation.title}
         </NavLinkComponent>
@@ -119,7 +126,7 @@ const SelectedNavLink = (props) => {
           <span>Save Report</span>
           <Switch
             id={'saveReport'}
-            switchOn={props.swicthControl}
+            switchOn={props.switchControl}
             controlSwitch={() => props.switchChange(props.category)}
           />
         </div>
@@ -133,8 +140,8 @@ const NavTitle = (props) => {
     match,
     libraryDetail: { selectedVideo },
   } = props
-  if (selectedVideo && selectedVideo.title) {
-    return <div>{ucfirst(selectedVideo.title)}</div>
+  if (selectedVideo) {
+    return <div className={style.headerTitle}>Library</div>
   }
   return null
 }
@@ -172,6 +179,28 @@ const Selector = (props) => {
   const state = props && props.state
   const actions = props && props.actions
 
+  const navigationForcePathMatch = Object.values(navigation).filter(
+    (r) =>
+      r.path == props.match.path &&
+      r.navigation &&
+      r.navigation.type &&
+      r.navigation.type == 'dynamicActive'
+  )
+
+  if (navigationForcePathMatch && navigationForcePathMatch.length) {
+    console.log('navigationForcePathMatch', navigationForcePathMatch)
+    return {
+      leftSide: <Logo themes={props.themes} />,
+      navigation: (
+        <Default
+          {...navigation}
+          forceActiveChildren={navigationForcePathMatch[0].component}
+          themes={props.themes}
+        />
+      ),
+    }
+  }
+
   const navigationPathMatch = Object.values(navigation).filter(
     (r) =>
       r.path == props.match.path &&
@@ -198,9 +227,10 @@ const Selector = (props) => {
     if (from !== null) {
       title = props.match.params[from].replace('-', ' ')
     }
-    if (navigationPathMatch[0].navigation.backToTitle) {
-      backToTitle = navigationPathMatch[0].navigation.backToTitle
-    }
+
+    backToTitle =
+      !!navigationPathMatch[0].navigation.backToTitle &&
+      navigationPathMatch[0].navigation.backToTitle
 
     return {
       leftSide: <BackTo {...url} title={backToTitle} themes={props.themes} />,
@@ -209,14 +239,18 @@ const Selector = (props) => {
           title={title}
           load={loadComponent}
           category={category}
-          swicthControl={state.swicthControl}
+          switchControl={state.switchControl}
           switchChange={actions.switchChange}
         />
       ),
     }
   } else if (navigationSubRoutes) {
+    let backToTitle
+    backToTitle =
+      !!navigationSubRoutes.backToTitle && navigationSubRoutes.backToTitle
+
     return {
-      leftSide: <BackTo {...url} themes={props.themes} />,
+      leftSide: <BackTo {...url} title={backToTitle} themes={props.themes} />,
       navigation: (
         <SubNavigation {...navigationSubRoutes.routes} themes={props.themes} />
       ),
@@ -230,7 +264,9 @@ const Selector = (props) => {
     }
   } else if (url[1] == 'library' && url[2] && url[2].match(/(\d+)/gm)) {
     return {
-      leftSide: <BackTo {...url} themes={props.themes} />,
+      leftSide: (
+        <BackTo {...url} title="Back To Overview" themes={props.themes} />
+      ),
       navigation: <NavTitle {...props} />,
     }
   } else {
@@ -245,7 +281,7 @@ const Template = (props) => {
   const templateSelector = Selector(props)
   const { profile = {} } = props
   const { brand = {} } = profile
-  const { profileImg } = brand
+  const { avatar } = brand
   const { textColor, moduleBackground, moduleShadow } = props.themes
   return (
     <header
@@ -260,7 +296,7 @@ const Template = (props) => {
         <div className={linksClass}>{templateSelector['navigation']}</div>
         <div className={profileClass}>
           <div className="float-right">
-            <Dropdown profileImg={profileImg} />
+            <Dropdown avatar={avatar} />
 
             {/*<span>Bleacher Report</span>*/}
           </div>
@@ -274,10 +310,12 @@ const Template = (props) => {
 class Navbar extends React.Component {
   constructor(props) {
     super(props)
-    const {location: { search }} = props
+    const {
+      location: { search },
+    } = props
     const urlParams = getLocationParams(search)
     this.state = {
-      swicthControl: !!urlParams && urlParams.saved === 'true' ,
+      switchControl: !!urlParams && urlParams.saved === 'true',
     }
   }
 
@@ -290,26 +328,24 @@ class Navbar extends React.Component {
       createdReportControls: { uuid, isSaved },
       predefinedReportValues: { data: predefinedReportValues },
       push,
-      location: { search }
+      location: { search },
     } = this.props
     const urlParams = getLocationParams(search)
 
     if (category === 'Brands Insights' && brandInsightValue) {
-      this.setState({
-        swicthControl: !isSaved,
-      }, () => {
-        const {
-          date,
-          engagement,
-          title,
-          social,
-          brand
-        } = urlParams
-        window.history.pushState('',
-        '',
-        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${!isSaved}`
-        )
-      })
+      this.setState(
+        {
+          switchControl: !isSaved,
+        },
+        () => {
+          const { date, engagement, title, social, brand } = urlParams
+          window.history.pushState(
+            '',
+            '',
+            `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${!isSaved}`
+          )
+        }
+      )
       if (isSaved) {
         return loadDeleteReport(uuid)
       }
@@ -318,20 +354,19 @@ class Navbar extends React.Component {
         category,
       })
     } else if (category === 'Compare Brands' && comparebrandValues) {
-      this.setState({
-        swicthControl: !isSaved,
-      },() => {
-        const {
-          title,
-          brand_one_uuid,
-          brand_two_uuid,
-        } = urlParams
-        window.history.pushState(
-          '',
-          '',
-          `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${!isSaved}`
+      this.setState(
+        {
+          switchControl: !isSaved,
+        },
+        () => {
+          const { title, brand_one_uuid, brand_two_uuid } = urlParams
+          window.history.pushState(
+            '',
+            '',
+            `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${!isSaved}`
           )
-      })
+        }
+      )
       if (isSaved) {
         return loadDeleteReport(uuid)
       }
@@ -348,7 +383,10 @@ class Navbar extends React.Component {
   }
 
   componentDidUpdate() {
-    const { createdReportControls: { uuid }, location: { search, pathname } } = this.props
+    const {
+      createdReportControls: { uuid },
+      location: { search, pathname },
+    } = this.props
     const urlParams = getLocationParams(search)
     const {
       title,
@@ -358,30 +396,34 @@ class Navbar extends React.Component {
       engagement,
       social,
       brand,
-      saved
+      saved,
     } = urlParams
-    const { swicthControl } = this.state
-    if(uuid) {
-      if(pathname === '/reports/brand-insight') {
-        window.history.pushState('',
-        '',
-        `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${swicthControl}&report_uuid=${uuid}`
-        )
-      }else if(pathname === '/reports/compare-brands') {
+    const { switchControl } = this.state
+    if (uuid) {
+      if (pathname === '/reports/brand-insight') {
         window.history.pushState(
           '',
           '',
-          `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${swicthControl}&report_uuid=${uuid}`
+          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${switchControl}&report_uuid=${uuid}`
+        )
+      } else if (pathname === '/reports/compare-brands') {
+        window.history.pushState(
+          '',
+          '',
+          `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&saved=${switchControl}&report_uuid=${uuid}`
         )
       }
     }
   }
 
   componentDidMount() {
-    const { createdReportControls: { uuid }, location: { search } } = this.props
+    const {
+      createdReportControls: { uuid },
+      location: { search },
+    } = this.props
     const urlParams = getLocationParams(search)
-    const { report_uuid  } = urlParams
-    if(!uuid && report_uuid) {
+    const { report_uuid } = urlParams
+    if (!uuid && report_uuid) {
       this.props.createdReportControl({
         isSaved: !!urlParams && urlParams.saved === 'true',
         uuid: report_uuid,
@@ -421,7 +463,7 @@ const mapDispatchToProps = (dispatch) => {
         ...generatedReportActions,
       },
       dispatch
-    )
+    ),
   }
 }
 
@@ -433,6 +475,6 @@ const withConnect = connect(
 const composedComponent = compose(
   withConnect,
   withTheme
-)(Navbar) 
+)(Navbar)
 
 export default withRouter(composedComponent)

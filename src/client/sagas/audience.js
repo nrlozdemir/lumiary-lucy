@@ -5,128 +5,211 @@ import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 import { selectAuthProfile } from 'Reducers/auth'
 
-import { getDataFromApi } from 'Utils/api'
+import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
-import { radarChartCalculate, compareSharesData } from 'Utils/datasets'
+import {
+  radarChartCalculate,
+  compareSharesData,
+  percentageManipulation,
+} from 'Utils/datasets'
 
 import _ from 'lodash'
 
-function getAudienceDataApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => audienceMockData)
-}
+function* getAudienceContentVitalityScoreData({ payload = {} }) {
+  const { platform, metric, dateRange } = payload
 
-function updateAudiencePerformanceApi({ min, max }) {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => updateAudiencePer(min, max))
-}
-
-function* getAudienceContentVitalityScoreData() {
   try {
-    const payload = yield call(getAudienceDataApi)
-    let shuffleData = payload.lineStackedChartData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getAudienceContentVitalityScoreDataSuccess(shuffleData))
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/cvscores`, {
+        metric,
+        platform,
+        daterange: dateRange,
+      }),
+      'GET'
+    )
+
+    if (!!response && !!Object.keys(response).length) {
+      yield put(
+        actions.getAudienceContentVitalityScoreDataSuccess(
+          percentageManipulation(response)
+        )
+      )
+    } else {
+      throw new Error('Audience/getAudienceContentVitalityScoreData Error')
+    }
   } catch (err) {
     yield put(actions.getAudienceContentVitalityScoreDataError(err))
   }
 }
 
-function* getAudiencePerformanceData() {
+function* getAudiencePerformanceData({ payload = {} }) {
+  const { platform, metric, property, dateRange, min = 0, max = 100 } = payload
+
   try {
-    const payload = yield call(getAudienceDataApi)
-    const shuffleData = payload.performance
-    shuffleData.bubblesBoth = _.shuffle(shuffleData.bubblesBoth)
-    shuffleData.bubblesFemales = _.shuffle(shuffleData.bubblesFemales)
-    shuffleData.bubblesMales = _.shuffle(shuffleData.bubblesMales)
-    yield put(actions.getAudiencePerformanceDataSuccess(shuffleData))
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/performance`, {
+        metric,
+        platform,
+        property,
+        ageMin: min,
+        ageMax: max,
+        daterange: dateRange,
+      }),
+      'GET'
+    )
+
+    if (!!response) {
+      const updatedResponse = Object.keys(response).reduce((newData, key) => {
+        newData[key] = Object.keys(response[key]).map((v) => ({
+          visual: v,
+          toolTip: response[key][v],
+        }))
+        return newData
+      }, {})
+
+      yield put(
+        actions.getAudiencePerformanceDataSuccess(
+          percentageManipulation(updatedResponse)
+        )
+      )
+    } else {
+      throw new Error('Audience/getAudiencePerformanceData Error')
+    }
   } catch (err) {
     yield put(actions.getAudiencePerformanceDataError(err))
   }
 }
 
-function* updateAudiencePerformance({ payload: { min, max } }) {
-  try {
-    const payload = yield call(updateAudiencePerformanceApi, { min, max })
-    yield put(actions.updateAudiencePerformanceSuccess(payload))
-  } catch (err) {
-    yield put(actions.updateAudiencePerformanceError(err))
-  }
-}
+function* getAudienceAgeSliderData({ payload = {} }) {
+  const { metric, dateRange, ages = [] } = payload
 
-function* getAudienceAgeSliderData() {
+  const fallBack = ages.map((a) => ({ age: a, loading: false, image: null }))
+
   try {
-    const payload = yield call(getAudienceDataApi)
-    const randomImage = (image) => {
-      return image.replace(
-        /image=(\d+)/g,
-        'image=' + Math.floor(Math.random(1) * Math.floor(30))
+    const { brand } = yield select(selectAuthProfile)
+
+    if (!!ages.length) {
+      const response = yield call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl(`/audience/${brand.uuid}/popular`, {
+          metric,
+          ages,
+          daterange: dateRange,
+        }),
+        'GET'
+      )
+
+      yield put(
+        actions.getAudienceAgeSliderDataSuccess(
+          percentageManipulation(response)
+        )
       )
     }
-    const data = payload.ageSlider
-    data.map((element) => (element.image = randomImage(element.image)))
-    yield put(actions.getAudienceAgeSliderDataSuccess(data))
   } catch (err) {
+    yield put(
+      actions.getAudienceAgeSliderDataSuccess(percentageManipulation(fallBack))
+    )
     yield put(actions.getAudienceAgeSliderDataError(err))
   }
 }
 
-function* getAudienceGenderData() {
+function* getAudienceGenderData({ payload = {} }) {
+  const { property, metric, dateRange } = payload
+
   try {
-    const payload = yield call(getAudienceDataApi)
-    const shuffleData = payload.genderData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getAudienceGenderDataSuccess(shuffleData))
+    const { brand } = yield select(selectAuthProfile)
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/properties`, {
+        metric,
+        property,
+        daterange: dateRange,
+      }),
+      'GET'
+    )
+
+    yield put(
+      actions.getAudienceGenderDataSuccess(percentageManipulation(response))
+    )
   } catch (err) {
     yield put(actions.getAudienceGenderDataError(err))
   }
 }
 
-function* getAudienceColorTemperatureData() {
+// function* getAudienceColorTemperatureData() {
+//   try {
+//     const payload = yield call(getAudienceDataApi)
+//     let shuffleData = payload.colorTempData
+//     shuffleData = shuffleData.map((data) => {
+//       data.data.map((item) => {
+//         item.x = _.random(-50, 50)
+//         item.y = _.random(-50, 50)
+//       })
+//       return data
+//     })
+
+//     const topTexts = ['Happy', 'Energetic', 'Natural']
+
+//     const bottomTexts = ['Sad', 'Calm', 'Synthetic']
+
+//     const leftTexts = ['Cool', 'Cool', 'Cool']
+
+//     const rightTexts = ['Warm', 'Warm', 'Warm']
+
+//     shuffleData = shuffleData.map((data, i) => {
+//       data.topText = topTexts[i]
+//       data.bottomText = bottomTexts[i]
+//       data.leftText = leftTexts[i]
+//       data.rightText = rightTexts[i]
+//       data.data.map((item, i) => {
+//         item.color = i === 0 ? '#5292e5' : '#2fd7c4'
+//       })
+//       return data
+//     })
+//     yield put(
+//       actions.getAudienceColorTemperatureDataSuccess(
+//         percentageManipulation(shuffleData)
+//       )
+//     )
+//   } catch (err) {
+//     yield put(actions.getAudienceColorTemperatureDataError(err))
+//   }
+// }
+
+function* getAudienceChangeOverTimeData({ payload = {} }) {
+  const { property, platform, metric, dateRange } = payload
+
   try {
-    const payload = yield call(getAudienceDataApi)
-    let shuffleData = payload.colorTempData
-    shuffleData = shuffleData.map((data) => {
-      data.data.map((item) => {
-        item.x = _.random(-50, 50)
-        item.y = _.random(-50, 50)
-      })
-      return data
-    })
+    const { brand } = yield select(selectAuthProfile)
 
-    const topTexts = ['Happy', 'Energetic', 'Natural']
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/change`, {
+        metric,
+        property,
+        platform,
+        daterange: dateRange,
+      }),
+      'GET'
+    )
 
-    const bottomTexts = ['Sad', 'Calm', 'Synthetic']
-
-    const leftTexts = ['Cool', 'Cool', 'Cool']
-
-    const rightTexts = ['Warm', 'Warm', 'Warm']
-
-    shuffleData = shuffleData.map((data, i) => {
-      data.topText = topTexts[i]
-      data.bottomText = bottomTexts[i]
-      data.leftText = leftTexts[i]
-      data.rightText = rightTexts[i]
-      data.data.map((item, i) => {
-        item.color = i === 0 ? '#5292e5' : '#2fd7c4'
-      })
-      return data
-    })
-    yield put(actions.getAudienceColorTemperatureDataSuccess(shuffleData))
-  } catch (err) {
-    yield put(actions.getAudienceColorTemperatureDataError(err))
-  }
-}
-
-function* getAudienceChangeOverTimeData() {
-  try {
-    const payload = yield call(getAudienceDataApi)
-    let shuffleData = payload.lineChartData
-    shuffleData.datasets[0].data = _.shuffle(shuffleData.datasets[0].data)
-    shuffleData.datasets[1].data = _.shuffle(shuffleData.datasets[1].data)
-    yield put(actions.getAudienceChangeOverTimeDataSuccess(shuffleData))
+    yield put(
+      actions.getAudienceChangeOverTimeDataSuccess(
+        percentageManipulation(response)
+      )
+    )
   } catch (err) {
     yield put(actions.getAudienceChangeOverTimeDataError(err))
   }
@@ -135,33 +218,24 @@ function* getAudienceChangeOverTimeData() {
 function* getAudienceDominantColorData({ data: { dateRange, metric } }) {
   try {
     const { brand } = yield select(selectAuthProfile)
+
     const parameters = {
-      url: '/report',
-      dateRange,
       metric,
-      property: ['color'],
-      dateBucket: 'none',
-      brands: [brand.uuid],
+      daterange: dateRange,
     }
 
-    // TODO: We need to change platform when gender data comes.
-    // platform is wrong parameter. they are here to work request
-    const payload = yield all([
-      call(getDataFromApi, {
-        ...parameters,
-        platform: 'facebook',
-        // gender: 'male',
-      }),
-      call(getDataFromApi, {
-        ...parameters,
-        platform: 'youtube',
-        // gender: 'female',
-      }),
-    ])
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/audience/${brand.uuid}/dominantcolor`, parameters),
+      'GET'
+    )
 
     yield put(
       actions.getAudienceDominantColorDataSuccess(
-        radarChartCalculate(compareSharesData(payload))
+        percentageManipulation(
+          radarChartCalculate(compareSharesData({ data: response }, parameters))
+        )
       )
     )
   } catch (err) {
@@ -176,13 +250,12 @@ export default [
     getAudienceContentVitalityScoreData
   ),
   takeLatest(types.GET_AUDIENCE_PERFORMANCE_DATA, getAudiencePerformanceData),
-  takeLatest(types.UPDATE_AUDIENCE_PERFORMANCE, updateAudiencePerformance),
   takeLatest(types.GET_AUDIENCE_AGE_SLIDER_DATA, getAudienceAgeSliderData),
   takeLatest(types.GET_AUDIENCE_GENDER_DATA, getAudienceGenderData),
-  takeLatest(
-    types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA,
-    getAudienceColorTemperatureData
-  ),
+  // takeLatest(
+  //   types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA,
+  //   getAudienceColorTemperatureData
+  // ),
   takeLatest(
     types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA,
     getAudienceChangeOverTimeData

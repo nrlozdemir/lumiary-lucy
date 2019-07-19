@@ -19,26 +19,41 @@ const RadarChartModule = ({
   rightTitle,
   loading = false,
   infoText,
+  width = 460,
+  height = 460,
 }) => {
-  let checkData =
-    !data || !data.length || (data.length && (!data[0] || !data[1]))
-      ? emptyData
-      : data
-
   const isEmpty =
-    !data || !data.length || (data.length && (!data[0] || !data[1]))
+    !data ||
+    !data.length ||
+    ((data.length && (!data[0] || !data[1])) ||
+      (data.length &&
+        (!!data[0] && !!data[1] && !data[0].total && !data[1].total)))
+
+  let checkData = isEmpty ? emptyData : data
 
   const leftIsEmpty =
     !isEmpty &&
     !loading &&
-    (!!data[0] && !!data[0].datas) &&
-    isDataSetEmpty(data[0].datas)
+    (!!data[0] && !!data[0].data) &&
+    isDataSetEmpty(data[0].data)
 
   const rightIsEmpty =
     !isEmpty &&
     !loading &&
-    (!!data[1] && !!data[1].datas) &&
-    isDataSetEmpty(data[1].datas)
+    (!!data[1] && !!data[1].data) &&
+    isDataSetEmpty(data[1].data)
+
+  const leftProgressHasData =
+    !!checkData &&
+    !!checkData[0] &&
+    !!checkData[0].progress &&
+    !!checkData[0].progress.length
+
+  const rightProgressHasData =
+    !!checkData &&
+    !!checkData[1] &&
+    !!checkData[1].progress &&
+    !!checkData[1].progress.length
 
   const leftOpacity = leftIsEmpty ? 0.25 : 1
   const rightOpacity = rightIsEmpty ? 0.25 : 1
@@ -54,7 +69,6 @@ const RadarChartModule = ({
           legend={legend}
           isEmpty={isEmpty}
           loading={loading}
-          infoText={infoText}
         >
           <div
             className={style.radarChartContainer}
@@ -65,79 +79,81 @@ const RadarChartModule = ({
                 {leftIsEmpty && (
                   <div className={style.emptyData}>No Data Available</div>
                 )}
-                <div style={{ opacity: leftOpacity }}>
-                  <RadarChart data={checkData[0].datas} />
+                <div
+                  style={{ opacity: leftOpacity, width: width, height: height }}
+                >
+                  <RadarChart data={checkData[0].data} />
                 </div>
               </div>
               <div className={style.chartPos}>
                 {rightIsEmpty && (
                   <div className={style.emptyData}>No Data Available</div>
                 )}
-                <div style={{ opacity: rightOpacity }}>
-                  <RadarChart data={checkData[1].datas} />
+                <div
+                  style={{
+                    opacity: rightOpacity,
+                    width: width,
+                    height: height,
+                  }}
+                >
+                  <RadarChart data={checkData[1].data} />
                 </div>
               </div>
             </div>
             <div className={'mt-32 ' + style.labelContainer}>
-              <div
-                className={style.label}
-                style={{
-                  background: colors.labelBackground,
-                  color: colors.labelColor,
-                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                  opacity: leftOpacity,
-                }}
-              >
-                <span>
-                  {leftTitle
-                    ? leftTitle
-                    : !!checkData && !!checkData[0] && checkData[0].type}
-                </span>
-              </div>
-              <p>
-                Top{' '}
-                {!!checkData &&
-                  !!checkData[0] &&
-                  !!checkData[0].progress &&
-                  checkData[0].progress.length}{' '}
-                Dominant Colors
-              </p>
-              <div
-                className={style.label}
-                style={{
-                  background: colors.labelBackground,
-                  color: colors.labelColor,
-                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                  opacity: rightOpacity,
-                }}
-              >
-                <span>
-                  {rightTitle
-                    ? rightTitle
-                    : !!checkData && !!checkData[1] && checkData[1].type}
-                </span>
-              </div>
+              {leftProgressHasData && (
+                <div
+                  className={style.label}
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                    opacity: leftOpacity,
+                  }}
+                >
+                  <span>
+                    {leftTitle
+                      ? leftTitle
+                      : !!checkData && !!checkData[0] && checkData[0].type}
+                  </span>
+                </div>
+              )}
+              {(leftProgressHasData || rightProgressHasData) && (
+                <p>{`Top ${
+                  leftProgressHasData
+                    ? checkData[0].progress.length
+                    : checkData[1].progress.length
+                } Dominant Colors`}</p>
+              )}
+              {rightProgressHasData && (
+                <div
+                  className={style.label}
+                  style={{
+                    background: colors.labelBackground,
+                    color: colors.labelColor,
+                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                    opacity: rightOpacity,
+                  }}
+                >
+                  <span>
+                    {rightTitle
+                      ? rightTitle
+                      : !!checkData && !!checkData[1] && checkData[1].type}
+                  </span>
+                </div>
+              )}
             </div>
             <div className={style.groupProgressBar}>
-              <div
-                className={style.progressInner}
-                style={{ opacity: leftOpacity }}
-              >
-                <Progress
-                  progress={
-                    !!checkData &&
-                    !!checkData[0] &&
-                    !!checkData[0].progress &&
-                    checkData[0].progress
-                  }
-                  reverse={true}
-                />
-              </div>
+              {leftProgressHasData && (
+                <div
+                  className={style.progressInner}
+                  style={{ opacity: leftOpacity }}
+                >
+                  <Progress progress={checkData[0].progress} reverse={true} />
+                </div>
+              )}
               <div className={style.progressCountArea}>
-                {!!checkData &&
-                  !!checkData[0] &&
-                  !!checkData[0].progress &&
-                  checkData[0].progress.length &&
+                {(leftProgressHasData &&
                   checkData[0].progress.map((item, index) => {
                     return (
                       <span
@@ -151,21 +167,17 @@ const RadarChartModule = ({
                         {index + 1}
                       </span>
                     )
-                  })}
+                  })) ||
+                  null}
               </div>
-              <div
-                className={style.progressInner}
-                style={{ opacity: rightOpacity }}
-              >
-                <Progress
-                  progress={
-                    !!checkData &&
-                    !!checkData[1] &&
-                    !!checkData[1].progress &&
-                    checkData[1].progress
-                  }
-                />
-              </div>
+              {rightProgressHasData && (
+                <div
+                  className={style.progressInner}
+                  style={{ opacity: rightOpacity }}
+                >
+                  <Progress progress={checkData[1].progress} />
+                </div>
+              )}
             </div>
           </div>
         </Module>

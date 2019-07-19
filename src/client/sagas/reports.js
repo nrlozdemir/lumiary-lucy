@@ -2,44 +2,20 @@ import { all, takeLatest, call, put, select } from 'redux-saga/effects'
 import axios from 'axios'
 import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
-import generatedReportMockData from 'Api/mocks/generatedReportMock.json'
-import reportsDataMockData from 'Api/mocks/reportsMock.json'
-import reportsMockData from 'Api/mocks/reports.json'
-import querystring from 'querystring'
 
-import {
-  randomKey,
-  getBrandAndCompetitors,
-  getFilteredCompetitors,
-} from 'Utils'
+import querystring from 'querystring'
 
 import {
   convertDataIntoDatasets,
   radarChartCalculate,
   compareSharesData,
+  percentageManipulation,
 } from 'Utils/datasets'
-
-import { compareBrandChartColors } from 'Utils/globals'
 
 import { getDataFromApi } from 'Utils/api'
 import { selectAuthProfile } from 'Reducers/auth'
 
-function getGeneratedReportApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => generatedReportMockData)
-}
-
-function getReportsApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => reportsMockData)
-}
-
-function getReportsMockApi() {
-  //this will use ajax function in utils/api when real data is provided
-  return axios.get('/').then((res) => reportsDataMockData)
-}
-
-function* getReports() {
+function* getReports({ payload: { value: filterValue } = {} }) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
@@ -52,17 +28,28 @@ function* getReports() {
     if (!!response) {
       const compare =
         !!response.compare &&
-        !!response.compare.length &&
         response.compare.map((item) => {
           return { ...item, category: 'Compare Brands' }
         })
       const insights =
         !!response.insights &&
-        !!response.insights.length &&
         response.insights.map((item) => {
           return { ...item, category: 'Brands Insights' }
         })
-      yield put(actions.loadReportsSuccess([...compare, ...insights]))
+      let values
+
+      switch (filterValue) {
+        case 'insights':
+          values = insights
+          break
+        case 'compare':
+          values = compare
+          break
+        default:
+          values = [...compare, ...insights]
+      }
+
+      yield put(actions.loadReportsSuccess(values))
     }
   } catch (err) {
     console.log('err', err)
@@ -70,27 +57,26 @@ function* getReports() {
   }
 }
 
-function* getMoreReports() {
-  try {
-    const payload = yield call(getReportsApi)
-    payload.reportsData.map((item) => (item.id = randomKey(4)))
-    yield put(actions.loadMoreReportsSuccess(payload.reportsData))
-  } catch (err) {
-    yield put(actions.loadMoreReportsError(err))
-  }
-}
-
 function* brandInsightSubmit({ payload: { params, onlySave } }) {
   try {
     const {
-      brand: { value: brand },
-      social: { value: social },
-      engagement: { value: engagement },
-      date: { value: date },
       title,
+      engagamentByPlatform,
+      social: socialParam,
+      engagement: engagementParam,
+      brand: { value: brand },
+      date: { value: date },
     } = params
 
-    const saved = params && params.saved && params.saved.value ? params.saved.value : false
+    const [socialSplit, engagementSplit] = engagamentByPlatform
+      ? engagamentByPlatform.value.split('|')
+      : [null, null]
+
+    let social = socialSplit ? socialSplit : socialParam.value
+    let engagement = engagementSplit ? engagementSplit : engagementParam.value
+
+    const saved =
+      params && params.saved && params.saved.value ? params.saved.value : false
     const report_uuid = params && params.report_uuid
 
     const parameters = {
@@ -100,14 +86,16 @@ function* brandInsightSubmit({ payload: { params, onlySave } }) {
       engagement,
       date,
       title,
-      saved
+      saved,
     }
 
     yield put(actions.brandInsightFormSubmitSuccess(parameters))
     if (!!onlySave) {
       yield put(
         push(
-          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${saved}${report_uuid ? `&report_uuid=${report_uuid}` :''}`
+          `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&saved=${saved}${
+            report_uuid ? `&report_uuid=${report_uuid}` : ''
+          }`
         )
       )
     }
@@ -240,7 +228,7 @@ function* getContentVitalityScoreData({ payload = {} }) {
   try {
     const payload = yield call(
       getDataFromApi,
-      {},
+      undefined,
       `/report/compare/brands?${querystring.stringify({
         brands: brands,
         property: 'cvScore',
@@ -251,9 +239,12 @@ function* getContentVitalityScoreData({ payload = {} }) {
       'GET'
     )
 
-    yield put(actions.getContentVitalityScoreDataSuccess(payload))
+    yield put(
+      actions.getContentVitalityScoreDataSuccess(
+        percentageManipulation(payload)
+      )
+    )
   } catch (err) {
-    console.log(err)
     yield put(actions.getContentVitalityScoreDataError(err))
   }
 }
@@ -285,9 +276,13 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
       yield put(
         actions.getVideoComparisonDataSuccess({
           legend,
-          ...convertDataIntoDatasets(payload, parameters, {
-            compareBrands: true,
-          }),
+          ...convertDataIntoDatasets(
+            percentageManipulation(payload),
+            parameters,
+            {
+              compareBrands: true,
+            }
+          ),
         })
       )
     } else {
@@ -316,10 +311,10 @@ function* getPerformanceComparisonData({
       platform: 'all',
     }
 
-    if(property === 'format') {
+    if (property === 'format') {
       options.limit = 4
     }
-    
+
     const payload = yield call(getDataFromApi, parameters, '/report')
 
     if (!!payload && !!payload.data) {
@@ -330,9 +325,13 @@ function* getPerformanceComparisonData({
       yield put(
         actions.getPerformanceComparisonDataSuccess({
           legend,
-          ...convertDataIntoDatasets(payload, parameters, {
-            compareBrands: true,
-          }),
+          ...convertDataIntoDatasets(
+            percentageManipulation(payload),
+            parameters,
+            {
+              compareBrands: true,
+            }
+          ),
         })
       )
     } else {
@@ -377,7 +376,9 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
 
       yield put(
         actions.getColorComparisonDataSuccess(
-          radarChartCalculate(compareSharesData(payload))
+          radarChartCalculate(
+            compareSharesData(percentageManipulation(payload), parameters)
+          )
         )
       )
     } else {
@@ -391,7 +392,6 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
 
 export default [
   takeLatest(types.LOAD_REPORTS, getReports),
-  takeLatest(types.LOAD_MORE_REPORTS, getMoreReports),
   takeLatest(types.BRAND_INSIGHT_REQUEST, brandInsightSubmit),
   takeLatest(types.COMPARE_BRAND_REQUEST, compareBrandSubmit),
   takeLatest(types.PREDEFINED_REPORT_REQUEST, predefinedReportRequest),

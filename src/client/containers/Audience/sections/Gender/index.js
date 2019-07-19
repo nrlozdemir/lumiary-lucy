@@ -6,6 +6,8 @@ import { actions, makeSelectAudienceGender } from 'Reducers/audience'
 import Module from 'Components/Module'
 import HorizontalBarChart from 'Components/Charts/HorizontalBarChart'
 import { barChartOptions } from './options'
+import { isDataSetEmpty } from 'Utils/datasets'
+
 import style from '../../style.scss'
 
 class GenderSection extends React.Component {
@@ -16,30 +18,45 @@ class GenderSection extends React.Component {
   render() {
     const {
       audienceGenderData: { data, loading, error },
-      infoText,
     } = this.props
+
+    const labels = (data && Object.keys(data)) || []
 
     let genderData = []
 
-    if (data && data.datasets && genderData) {
-      genderData = data
-      data.datasets.map((el, i) => {
-        genderData.datasets[i].borderWidth = 1
-        genderData.datasets[i].label = 'Dataset 1'
-        genderData.datasets[i].borderColor = '#5292E5'
-        genderData.datasets[i].backgroundColor = '#5292E5'
-        if (i === 1) {
-          genderData.datasets[i].label = 'Dataset 2'
-          genderData.datasets[i].borderColor = '#2FD7C4'
-          genderData.datasets[i].backgroundColor = '#2FD7C4'
-        }
-      })
+    if (!!labels.length) {
+      genderData = labels.reduce(
+        (datasets, label) => {
+          const { male, female } = data[label]
+          datasets[0].data.push(Math.round(male * 100))
+          datasets[1].data.push(Math.round(female * 100))
+          return datasets
+        },
+        [
+          {
+            data: [],
+          },
+          { data: [] },
+        ]
+      )
+
+      genderData = {
+        datasets: genderData.map((el, i) => ({
+          ...el,
+          borderWidth: 1,
+          label: `Dataset ${i}`,
+          borderColor: i === 1 ? '#2FD7C4' : '#5292E5',
+          backgroundColor: i === 1 ? '#2FD7C4' : '#5292E5',
+        })),
+      }
     }
+
     return (
       <Module
+        loading={loading}
+        isEmpty={!loading && isDataSetEmpty(genderData)}
         moduleKey={'Audience/Gender'}
         title="Video Properties Split By Gender"
-        infoText={infoText}
         action={this.callBack}
         filters={[
           {
@@ -74,25 +91,37 @@ class GenderSection extends React.Component {
         }
       >
         <div className={style.audienceContainer}>
-          {data && data.datasets && (
-            <div className={style.container}>
-              <div className={style.legends}>
-                <div className={style.legend}>Fast</div>
-                <div className={style.legend}>Medium</div>
-                <div className={style.legend}>Slow</div>
-                <div className={style.legend}>Slowest</div>
-              </div>
-              <HorizontalBarChart
-                data={data.datasets[0]}
-                reverse
-                grids={['100%', '50%', '0%']}
-              />
-              <HorizontalBarChart
-                data={data.datasets[1]}
-                grids={['0%', '50%', '100%']}
-              />
+          <div className={style.container}>
+            <div className={style.legends}>
+              {!loading &&
+                labels.map((label, idx) => (
+                  <div key={`label_${label}-${idx}`} className={style.legend}>
+                    {label}
+                  </div>
+                ))}
             </div>
-          )}
+            {!loading && genderData && genderData.datasets && (
+              <React.Fragment>
+                <HorizontalBarChart
+                  data={
+                    !loading && !!genderData.datasets[0]
+                      ? genderData.datasets[0]
+                      : []
+                  }
+                  reverse
+                  grids={['100%', '50%', '0%']}
+                />
+                <HorizontalBarChart
+                  data={
+                    !loading && !!genderData.datasets[1]
+                      ? genderData.datasets[1]
+                      : []
+                  }
+                  grids={['0%', '50%', '100%']}
+                />
+              </React.Fragment>
+            )}
+          </div>
         </div>
       </Module>
     )

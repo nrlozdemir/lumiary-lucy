@@ -12,6 +12,7 @@ import {
   makeSelectDoughnutData,
 } from 'Reducers/libraryDetail'
 import RouterLoading from 'Components/RouterLoading'
+import { secondsToHHMMSS } from 'Utils'
 import Info from './Info'
 
 class LibraryDetailDoughnutChart extends React.Component {
@@ -28,21 +29,21 @@ class LibraryDetailDoughnutChart extends React.Component {
       doughnutData: { data: nextData, loading: nextLoading },
     } = nextProps
 
-
     return (
       !isEqual(JSON.stringify(data), JSON.stringify(nextData)) ||
       !isEqual(JSON.stringify(infoData), JSON.stringify(nextInfoData)) ||
       loading !== nextLoading ||
-      (!!showInfo || !!nextShowInfo) 
+      (!!showInfo || !!nextShowInfo)
     )
   }
 
   render() {
     const {
-      doughnutData: { data: doughnutData, loading: doughnutLoading },
       showInfo,
       videoId,
+      videoDuration,
       infoData: { loading: doughnutInfoLoading },
+      doughnutData: { data: doughnutData, loading: doughnutLoading },
     } = this.props
 
     const sectionToShow = (!!showInfo && showInfo.title) || false
@@ -75,8 +76,13 @@ class LibraryDetailDoughnutChart extends React.Component {
                       title,
                       videoId,
                       identifier: key,
+                      duration:
+                        title === 'Duration'
+                          ? secondsToHHMMSS(videoDuration)
+                          : null,
                       maxLabel: label,
                     }
+
                     return (
                       <React.Fragment key={i}>
                         {!sectionToShow && (
@@ -87,10 +93,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                           />
                         )}
                         {!!sectionToShow && sectionToShow === title && (
-                          <Info
-                            {...cardProps}
-                            loading={doughnutInfoLoading}
-                          />
+                          <Info {...cardProps} loading={doughnutInfoLoading} />
                         )}
                       </React.Fragment>
                     )

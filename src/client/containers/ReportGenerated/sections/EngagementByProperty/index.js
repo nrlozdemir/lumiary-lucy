@@ -35,7 +35,6 @@ class EngagementByProperty extends Component {
         loading,
         error,
       },
-      infoText,
     } = this.props
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
 
@@ -61,7 +60,6 @@ class EngagementByProperty extends Component {
         ]}
         isEmpty={hasNoData}
         loading={loading}
-        infoText={infoText}
       >
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
@@ -85,7 +83,7 @@ class EngagementByProperty extends Component {
             />
           </div>
           <div className={style.stackedChart}>
-            <StackedBarChart barData={stackedChartData} barSpacing={2} />
+            <StackedBarChart barData={stackedChartData} barSpacing={4} />
           </div>
         </div>
       </Module>

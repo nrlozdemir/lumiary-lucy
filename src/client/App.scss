@@ -2,7 +2,7 @@
   @import './scss/_misc/misc';
 
   .customRangeSlider {
-    margin-bottom: 40px;
+    margin-bottom: 30px;
     .rc-slider-step {
       span:first-child {
         display: none;
@@ -27,8 +27,15 @@
     background: #e8ecf0;
   }
 
-  .ReactModal__Body--open {
-    overflow: hidden;
+  .ReactModal__Overlay--after-open {
+    overflow: auto;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+
+    .ReactModal__Content {
+      overflow: visible !important;
+    }
   }
 
   .QuickviewVideoCard {
@@ -185,7 +192,7 @@
   .audienceThumbSlider {
     width: calc(100% - 230px);
     height: 110px;
-    margin: 40px auto;
+    margin: 40px auto 30px;
 
     .item {
       box-sizing: border-box;
@@ -193,7 +200,7 @@
       color: $color-dusk;
       font-family: $font-family-primary;
       font-size: 40px;
-      padding: 2px 15px;
+      // padding: 2px 15px;
       display: flex;
       justify-content: center;
       align-items: center;

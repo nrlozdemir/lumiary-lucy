@@ -50,14 +50,14 @@ const getLabelWithSuffix = (label, property) => {
 
 const splitCamelCaseToString = (s) => ucfirst(s.split(/(?=[A-Z])/).join(' '))
 
-function socialIconSelector(key) {
+function socialIconSelector(key, isSquare) {
   if (!key) return
   const keyToLowerCase = key.toLowerCase()
   const socialIcons = {
-    facebook: 'icon-Facebook-Bubble',
-    twitter: 'icon-Twitter-Bubble',
-    instagram: 'icon-Instagram-Bubble',
-    youtube: 'icon-YouTube-Bubble',
+    facebook: !isSquare ? 'icon-Facebook-Bubble' : 'icon-facebook-square',
+    twitter: !isSquare ? 'icon-Twitter-Bubble' : 'icon-twitter-square',
+    instagram: !isSquare ? 'icon-Instagram-Bubble' : 'icon-instagram-square',
+    youtube: !isSquare ? 'icon-YouTube-Bubble' : 'icon-youtube-square',
   }
 
   return socialIcons[keyToLowerCase]
@@ -127,7 +127,7 @@ const metricSuffix = (number) => {
   if (number >= 1e3) {
     const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
     const unitname = ['k', 'm', 'B', 'T'][Math.floor(unit / 3) - 1]
-    return (number / ('1e' + unit)).toFixed(0) + unitname
+    return (number / ('1e' + unit)).toFixed(1) + unitname
   }
 
   return number
@@ -253,6 +253,17 @@ const selectFiltersToType = (selectValues = {}) => {
   }, {})
 }
 
+export const getCvScoreColor = (val = 0) => {
+  switch (true) {
+    case val > 50 && val < 75:
+      return '#8562f3'
+    case val > 75 && val < 100:
+      return '#2fd7c4'
+    default:
+      return '#5292e5'
+  }
+}
+
 const getLocationParams = (value) => {
   const urlSplit = value.replace('?', '').split('&')
 
@@ -266,45 +277,150 @@ const getLocationParams = (value) => {
 //can sort and get the top n values of flat array of objects
 const getNValuesOfObject = ({ obj = {}, n, sortOrder = '' }) => {
   const keys = Object.keys(obj)
-  if(!keys.length) {
+  if (!keys.length) {
     return obj
-  } 
-    let newObj = {}
-    let newArr = keys.map(i => ({ key: i, value: obj[i] }))
-    
-    if(sortOrder) {
-      let sortCallBack = null
+  }
+  let newObj = {}
+  let newArr = keys.map((i) => ({ key: i, value: obj[i] }))
 
-      switch(sortOrder) {
-        case 'asc':
-          sortCallBack = (a, b) => a[1] - b[1]
-          break
-        case 'desc':
-          sortCallBack = (a, b) => b[1] - a[1]
-          break
-        default:
-          sortCallBack = null
-      }
+  if (sortOrder) {
+    let sortCallBack = null
 
-      if(sortCallBack) {
-        const sortable = []
-        for (const key in obj) {
-          sortable.push([key, obj[key]])
-        }
-        sortable.sort(sortCallBack)
-        newArr = sortable.map((item) => {
-            return { key: item[0], value: item[1] }
-          })
-        
+    switch (sortOrder) {
+      case 'asc':
+        sortCallBack = (a, b) => a[1] - b[1]
+        break
+      case 'desc':
+        sortCallBack = (a, b) => b[1] - a[1]
+        break
+      default:
+        sortCallBack = null
+    }
+
+    if (sortCallBack) {
+      const sortable = []
+      for (const key in obj) {
+        sortable.push([key, obj[key]])
       }
+      sortable.sort(sortCallBack)
+      newArr = sortable.map((item) => {
+        return { key: item[0], value: item[1] }
+      })
     }
-    if(!!n && n > 0 && n < newArr.length) {
-      newArr = newArr.slice(0, n)
+  }
+  if (!!n && n > 0 && n < newArr.length) {
+    newArr = newArr.slice(0, n)
+  }
+  newArr.forEach((item) => {
+    newObj = { ...newObj, [item.key]: item.value }
+  })
+  return newObj
+}
+
+const valuesIsEqual = (num, equal) => num.every((o) => o === equal)
+
+const normalizationBubbleMapping = (arr, tMin, tMax) => {
+  if (!arr.length || !tMin || !tMax) return {}
+  const numbers = arr.map((a) => a.value)
+
+  if (valuesIsEqual(numbers, 0) || (!numbers && !numbers.length)) return {}
+  const allNumberSame = valuesIsEqual(numbers, numbers[0])
+  const [min, max] = [Math.min(...numbers), Math.max(...numbers)]
+  const [rMin, rMax] = [
+    allNumberSame ? 1 : !min ? 1 : min,
+    allNumberSame ? numbers[0] : max,
+  ]
+
+  return numbers.map((m, i) => {
+    const value = (((!m ? 1 : m) - rMin) / (rMax - rMin)) * (tMax - tMin) + tMin
+    return {
+      name: arr[i].name,
+      color: arr[i].color,
+      value: value === tMin ? (tMin * 6) / 8 : value,
+      oldValue: arr[i].value,
     }
-    newArr.forEach(item => {
-      newObj = { ...newObj, [item.key]: item.value }
-    })
-    return newObj
+  })
+}
+
+//convert hex color to rgb color
+const hexToRgb = (hex) => {
+  const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex)
+  return result
+    ? {
+        r: parseInt(result[1], 16),
+        g: parseInt(result[2], 16),
+        b: parseInt(result[3], 16),
+      }
+    : null
+}
+
+/*
+  Convert seconds to hh:mm:ss
+  hh, wont show if not available, mm always shows
+ */
+const secondsToHHMMSS = (s = 0) => {
+  if (!!s) {
+    const date = new Date(s * 1000)
+    const hh = date.getUTCHours()
+    const mm = date.getUTCMinutes()
+    const ss = date.getSeconds()
+
+    return `${!!hh ? `${hh < 10 ? '0' : ''}${hh}:` : ''}${
+      mm < 10 ? '0' : ''
+    }${mm}:${ss < 10 ? '0' : ''}${ss}`
+  } else {
+    return '00:00:00'
+  }
+}
+
+/*
+  Used to pull the brand and competiitors from SSO success payload, which contains { profile: { buyer: { brands }}}
+ */
+const getBrandAndCompetitorsFromProfileObject = (profile, brand_id) => {
+  const { buyer = {} } = profile
+  const { brands = [] } = buyer
+
+  let response = {}
+
+  if (!!brands.length) {
+    const foundBrand = brands.find((b) =>
+      brand_id ? b.uuid === brand_id : !!b.is_lumiere
+    )
+
+    if (!!foundBrand) {
+      if (!foundBrand.competitors) {
+        foundBrand.competitors = []
+      }
+      response = foundBrand
+    }
+  }
+
+  return response
+}
+
+const customChartToolTip = (themes, customOptions = {}) => {
+return {
+  backgroundColor: themes.tooltipBackground,
+  cornerRadius: 6,
+  titleFontColor: themes.chartTooltipColor,
+  titleFontStyle: 'bold',
+  mode: 'point',
+  titleFontFamily: 'ClanOTBold',
+  bodyFontColor: themes.chartTooltipColor,
+  xPadding: 8,
+  yPadding: 12,
+  bodyFontStyle: 'bold',
+  displayColors: false,
+  callbacks: {
+    title: () => '',
+    label: function(tooltipItem, data) {
+      const count = data && data.datasets && data.datasets[0] && data.datasets[0].data[tooltipItem['index']] || ''
+      const name = data && data.labels && data.labels[tooltipItem['index']]
+      return `${count || 0}% ${!!name && `| ${name}`}`
+    },
+  },
+  ...customOptions
+}
 }
 
 export {
@@ -330,4 +446,9 @@ export {
   getLocationParams,
   splitCamelCaseToString,
   getNValuesOfObject,
+  normalizationBubbleMapping,
+  hexToRgb,
+  secondsToHHMMSS,
+  getBrandAndCompetitorsFromProfileObject,
+  customChartToolTip
 }

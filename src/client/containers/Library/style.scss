@@ -1,5 +1,5 @@
 .videoContainer {
-  margin: 50px 0px;
+  margin: 56px 0px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
@@ -18,7 +18,7 @@
   overflow-y: auto;
   width: 439px;
   z-index: 1000;
-  right: -426px; // 2px for shadow
+  right: -442px;
   top: 0;
 
   &.fixed {
@@ -98,15 +98,19 @@
 
 .cancel {
   cursor: pointer;
-  margin: 32px 0;
+  margin: 32px 0 62px;
   font-family: $font-family-ClanOT;
   font-size: 14px;
   font-weight: bold;
-  color: $color-white;
 }
 
 .sidebarApplyButton {
   border: 1px solid $color-cool-grey !important;
+}
+
+.formChange {
+  font-weight: bold !important;
+  border-color:#2fd7c4 !important;
 }
 
 .loadButton {
@@ -118,3 +122,7 @@
   height: min-content;
 }
 
+.sidebarSelectContainer {
+  position: relative;
+  z-index: 10;
+}

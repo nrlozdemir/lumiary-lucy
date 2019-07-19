@@ -4,10 +4,6 @@ import { createSelector } from 'reselect'
 export const types = {
   SET_GENERATED_SELECTED_VIDEO: 'GeneratedReport/SET_GENERATED_SELECTED_VIDEO',
 
-  GET_REPORT_REQUEST: 'GeneratedReport/GET_REPORT_REQUEST',
-  GET_REPORT_SUCCESS: 'GeneratedReport/GET_REPORT_SUCCESS',
-  GET_REPORT_FAILURE: 'GeneratedReport/GET_REPORT_FAILURE',
-
   SAVE_REPORT_REQUEST: 'GeneratedReport/SAVE_REPORT_REQUEST',
   SAVE_REPORT_SUCCESS: 'GeneratedReport/SAVE_REPORT_SUCCESS',
   SAVE_REPORT_FAILURE: 'GeneratedReport/SAVE_REPORT_FAILURE',
@@ -52,19 +48,6 @@ export const actions = {
   setSelectedVideo: (payload) => ({
     type: types.SET_GENERATED_SELECTED_VIDEO,
     payload,
-  }),
-
-  getReportRequest: (data) => ({
-    type: types.GET_REPORT_REQUEST,
-    data,
-  }),
-  getReportSuccess: (payload) => ({
-    type: types.GET_REPORT_SUCCESS,
-    payload,
-  }),
-  getReportFailure: (error) => ({
-    type: types.GET_REPORT_FAILURE,
-    error,
   }),
 
   saveReportRequest: (data) => ({
@@ -161,12 +144,6 @@ export const actions = {
 export const initialState = fromJS({
   selectedVideo: null,
 
-  report: {
-    data: null,
-    loading: true,
-    error: null,
-  },
-
   pacingChartData: {
     data: null,
     loading: true,
@@ -222,18 +199,6 @@ const generatedReportsReducer = (state = initialState, action) => {
         fromJS(action.payload)
       )
 
-    case types.GET_REPORT_REQUEST:
-      return state.setIn(['report', 'loading'], fromJS(true))
-
-    case types.GET_REPORT_SUCCESS:
-      return state
-        .setIn(['report', 'data'], fromJS(action.payload))
-        .setIn(['report', 'loading'], fromJS(false))
-    case types.GET_REPORT_FAILURE:
-      return state
-        .setIn(['report', 'error'], fromJS(action.error))
-        .setIn(['report', 'loading'], fromJS(false))
-
     case types.SAVE_REPORT_REQUEST:
       return state.setIn(['report', 'loading'], fromJS(true))
 
@@ -264,6 +229,7 @@ const generatedReportsReducer = (state = initialState, action) => {
 
     case types.GET_PACING_CARD_DATA_FAILURE:
       return state
+        .setIn(['pacingChartData', 'data'], fromJS(null))
         .setIn(['pacingChartData', 'error'], fromJS(action.error))
         .setIn(['pacingChartData', 'loading'], fromJS(false))
 
@@ -276,6 +242,7 @@ const generatedReportsReducer = (state = initialState, action) => {
         .setIn(['competitorTopVideos', 'loading'], fromJS(false))
     case types.GET_COMPETITOR_TOP_VIDEOS_FAILURE:
       return state
+        .setIn(['competitorTopVideos', 'data'], fromJS({}))
         .setIn(['competitorTopVideos', 'error'], fromJS(action.error))
         .setIn(['competitorTopVideos', 'loading'], fromJS(false))
 
@@ -293,6 +260,7 @@ const generatedReportsReducer = (state = initialState, action) => {
 
     case types.GET_TOP_PERFORMING_VIDEOS_FAILURE:
       return state
+        .setIn(['topPerformingVideos', 'data'], fromJS(null))
         .setIn(['topPerformingVideos', 'error'], fromJS(action.error))
         .setIn(['topPerformingVideos', 'loading'], fromJS(false))
 
@@ -306,6 +274,7 @@ const generatedReportsReducer = (state = initialState, action) => {
 
     case types.GET_VIDEO_RELEASES_BAR_CHART_FAILURE:
       return state
+        .setIn(['videoReleasesBarChart', 'data'], fromJS([]))
         .setIn(['videoReleasesBarChart', 'error'], fromJS(action.error))
         .setIn(['videoReleasesBarChart', 'loading'], fromJS(false))
 
@@ -340,6 +309,7 @@ const generatedReportsReducer = (state = initialState, action) => {
 
     case types.GET_FILTERING_SECTION_DATA_FAILURE:
       return state
+        .setIn(['filteringSectionData', 'data'], fromJS({}))
         .setIn(['filteringSectionData', 'error'], fromJS(action.error))
         .setIn(['filteringSectionData', 'loading'], fromJS(false))
 
@@ -347,14 +317,6 @@ const generatedReportsReducer = (state = initialState, action) => {
       return state
   }
 }
-
-export const selectReport = (state) => state.GeneratedReport.get('report')
-
-export const makeSelectReport = () =>
-  createSelector(
-    selectReport,
-    (substate) => substate.toJS()
-  )
 
 export const selectPacingChartData = (state) =>
   state.GeneratedReport.get('pacingChartData')

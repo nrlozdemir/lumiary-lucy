@@ -8,10 +8,6 @@ import { fromJS } from 'immutable'
 import { createSelector } from 'reselect'
 
 export const types = {
-  GET_DATA: 'Panoptic/GET_DATA',
-  GET_DATA_SUCCESS: 'Panoptic/GET_DATA_SUCCESS',
-  GET_DATA_ERROR: 'Panoptic/GET_DATA_ERROR',
-
   GET_VIDEO_RELEASES_DATA: 'Panoptic/GET_VIDEO_RELEASES_DATA',
   GET_VIDEO_RELEASES_DATA_SUCCESS: 'Panoptic/GET_VIDEO_RELEASES_DATA_SUCCESS',
   GET_VIDEO_RELEASES_DATA_ERROR: 'Panoptic/GET_VIDEO_RELEASES_DATA_ERROR',
@@ -46,10 +42,6 @@ export const types = {
 }
 
 export const actions = {
-  getData: () => ({ type: types.GET_DATA }),
-  getDataSuccess: (payload) => ({ type: types.GET_DATA_SUCCESS, payload }),
-  getDataError: (error) => ({ type: types.GET_DATA_ERROR, error }),
-
   getVideoReleasesData: (data) => ({
     type: types.GET_VIDEO_RELEASES_DATA,
     data,
@@ -192,19 +184,6 @@ const panopticReducer = (state = initialState, action) => {
   const { payload } = action
 
   switch (action.type) {
-    case types.GET_DATA:
-      return state.set('loading', fromJS(true))
-
-    case types.GET_DATA_SUCCESS:
-      return state
-        .set('data', fromJS(action.payload))
-        .set('loading', fromJS(false))
-
-    case types.GET_DATA_ERROR:
-      return state
-        .set('error', fromJS(action.error))
-        .set('loading', fromJS(false))
-
     case types.GET_VIDEO_RELEASES_DATA:
       return state.setIn(['videoReleasesData', 'loading'], fromJS(true))
 
@@ -215,6 +194,7 @@ const panopticReducer = (state = initialState, action) => {
 
     case types.GET_VIDEO_RELEASES_DATA_ERROR:
       return state
+        .setIn(['videoReleasesData', 'data'], fromJS([]))
         .setIn(['videoReleasesData', 'error'], fromJS(action.error))
         .setIn(['videoReleasesData', 'loading'], fromJS(false))
 
@@ -249,6 +229,7 @@ const panopticReducer = (state = initialState, action) => {
 
     case types.GET_FILTERING_SECTION_DATA_ERROR:
       return state
+        .setIn(['filteringSectionData', 'data'], fromJS({}))
         .setIn(['filteringSectionData', 'error'], fromJS(action.error))
         .setIn(['filteringSectionData', 'loading'], fromJS(false))
 
@@ -270,6 +251,7 @@ const panopticReducer = (state = initialState, action) => {
 
     case types.GET_PACING_CARD_DATA_ERROR:
       return state
+        .setIn(['pacingChartData', 'data'], fromJS({}))
         .setIn(['pacingChartData', 'error'], fromJS(action.error))
         .setIn(['pacingChartData', 'loading'], fromJS(false))
 
@@ -296,6 +278,7 @@ const panopticReducer = (state = initialState, action) => {
 
     case types.GET_FLIPCARDS_DATA_ERROR:
       return state
+        .setIn(['flipCardsData', 'data'], fromJS({}))
         .setIn(['flipCardsData', 'error'], fromJS(action.error))
         .setIn(['flipCardsData', 'loading'], fromJS(false))
 
@@ -309,6 +292,7 @@ const panopticReducer = (state = initialState, action) => {
 
     case types.GET_TOP_PERFORMING_FORMAT_DATA_ERROR:
       return state
+        .setIn(['topPerformingFormatData', 'data'], fromJS({}))
         .setIn(['topPerformingFormatData', 'error'], fromJS(action.error))
         .setIn(['topPerformingFormatData', 'loading'], fromJS(false))
 

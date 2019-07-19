@@ -30,6 +30,7 @@ class Reports extends Component {
     super(props)
     this.state = {
       modalIsOpen: false,
+      savedReportsFilter: null,
       selectedReportCardKey: null,
       reportCardsData: [
         {
@@ -47,8 +48,8 @@ class Reports extends Component {
         },
         {
           key: 'predefined-reports',
-					icon: `${staticUrl}lucy-assets/predefined-reports-icon.png`,
-					iconLight: `${staticUrl}lucy-assets/light-predefined-reports-icon.png`,
+          icon: `${staticUrl}lucy-assets/predefined-reports-icon.png`,
+          iconLight: `${staticUrl}lucy-assets/light-predefined-reports-icon.png`,
           title: 'Predefined Reports',
           text: 'Access unique, relevant and invaluable customized data',
         },
@@ -132,7 +133,7 @@ class Reports extends Component {
 
   onRowClick = (state, rowInfo, column, instance) => {
     return {
-      onClick: e => {
+      onClick: (e) => {
         const {
           original: {
             date_range: date,
@@ -143,26 +144,36 @@ class Reports extends Component {
             brand_one_uuid,
             brand_two_uuid,
             category,
-            uuid
-          }
+            uuid,
+          },
         } = rowInfo
 
-          const { push } = this.props
-            if(category === 'Brands Insights') {
-              push(
-                `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&report_uuid=${uuid}&saved=true`
-              )
-            }else if(category === 'Compare Brands') {
-              push(
-                `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&report_uuid=${uuid}&saved=true`
-              )
-            }
+        const { push } = this.props
+        if (category === 'Brands Insights') {
+          push(
+            `/reports/brand-insight?date=${date}&engagement=${engagement}&title=${title}&social=${social}&brand=${brand}&report_uuid=${uuid}&saved=true`
+          )
+        } else if (category === 'Compare Brands') {
+          push(
+            `/reports/compare-brands?title=${title}&brand_one_uuid=${brand_one_uuid}&brand_two_uuid=${brand_two_uuid}&report_uuid=${uuid}&saved=true`
+          )
         }
+      },
     }
-}
+  }
+
+  onFilterChange = (value) => {
+    this.setState({ savedReportsFilter: value })
+    this.props.loadReports(value)
+  }
 
   render() {
-    const { modalIsOpen, reportCardsData, selectedReportCardKey } = this.state
+    const {
+      modalIsOpen,
+      reportCardsData,
+      selectedReportCardKey,
+      savedReportsFilter,
+    } = this.state
 
     const {
       reports: { data, loading, error },
@@ -198,7 +209,15 @@ class Reports extends Component {
 
               .${style.deleteWrapper} div:after{
                 border-color: ${colors.tablePopoverBackground} transparent transparent transparent;
-              }
+							}
+
+							.ReactTable .rt-thead .rt-th.-sort-asc div,
+							.ReactTable .rt-thead .rt-td.-sort-asc div,
+							.ReactTable .rt-thead .rt-th.-sort-desc div,
+							.ReactTable .rt-thead .rt-td.-sort-desc div{
+								font-weight: bold;
+								border-bottom: 1px solid ${colors.labelColor};
+							}
             `}
             </style>
             <div className={style.reportsContainer}>
@@ -243,6 +262,8 @@ class Reports extends Component {
                       name="SelectReports"
                       placeholder="All Reports"
                       label="Select a report"
+                      value={savedReportsFilter}
+                      onChange={this.onFilterChange}
                     />
                   </div>
                 </div>
@@ -351,7 +372,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => {
   return {
     push: (url) => dispatch(push(url)),
-    ...bindActionCreators(actions, dispatch)
+    ...bindActionCreators(actions, dispatch),
   }
 }
 

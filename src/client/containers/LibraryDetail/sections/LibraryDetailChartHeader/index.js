@@ -7,11 +7,16 @@ import ProgressBar from 'Components/ProgressBar'
 import { ucfirst, metricSuffix } from 'Utils'
 import { textEdit } from 'Utils/text'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import ToolTip from 'Components/ToolTip'
 
 const Front = (props) => {
   const { data, colors, title } = props
   //let percentage = (100 * data.value) / data.max
-  let percentage = parseInt(data.percentile) || 0 
+  let percentage = parseInt(data.percentile) || 0
+  const text = data.diff > 0 ? 'more' : 'less'
+  const tooltipText = `This video is receiving ${percentage}% ${text} ${title}s than your library average of ${metricSuffix(
+    data.average
+  )}`
 
   return (
     <div className={style.frontContainer}>
@@ -26,16 +31,17 @@ const Front = (props) => {
         )}
         <div className={style.progressText}>
           <span className={style.leftTitle}>
-            {ucfirst(title)}
+            {metricSuffix(data.value)}{' '}
+            <i
+              className={classnames('icon icon-Information', style.moduleInfo)}
+              data-tip={tooltipText}
+            />
+            <ToolTip effect="solid" smallTooltip />
           </span>
-          <span className={style.rightTitle}>{metricSuffix(data.value)}</span>
+          <span className={style.rightTitle}>{ucfirst(title + 's')}</span>
         </div>
         <ProgressBar
-          width={
-            percentage > 100
-              ? 100
-              : parseFloat(percentage).toFixed(2)
-          }
+          width={percentage > 100 ? 100 : parseFloat(percentage).toFixed(2)}
           customBarClass={style.progressBar}
           customPercentageClass={classnames(style.percentageIncrease, {
             [style.percentageDecrease]: percentage < 50,
@@ -52,26 +58,8 @@ const Front = (props) => {
   )
 }
 
-const Back = (props) => {
-  const { data, title } = props
-  const text = data.diff > 0 ? 'more' : 'less'
-  return (
-    <p className={style.backText}>
-      {textEdit(
-        `This video is receiving <b>{percentage}% ${text}</b> {title} than your library average`,
-        {
-          percentage:
-            data.diff < 0
-              ? parseInt(data.diff.toString().substr(1))
-              : data.diff, // removed 'minus' first character
-          title,
-        }
-      )}
-    </p>
-  )
-}
-
 const LibraryDetailChartHeader = ({
+  getVideoRef,
   barChartData,
   videoUrl,
   title,
@@ -87,6 +75,7 @@ const LibraryDetailChartHeader = ({
           <div className={classnames('mt-72', style.containerClass)}>
             <div className={classnames('col-6', style.videoWrapper)}>
               <Video
+                setRef={getVideoRef}
                 src={videoUrl}
                 title={title}
                 socialIcon={socialIcon}
@@ -95,20 +84,17 @@ const LibraryDetailChartHeader = ({
             </div>
             <div className={classnames('col-6', style.videoStatsWrapper)}>
               {selectedVideoAverage &&
-                Object.keys(selectedVideoAverage).map((key, index) => {
+                selectedVideoAverage.map((key, index) => {
                   return (
                     <FlipCard
+                      noflip={true}
                       width={320}
                       height={100}
-                      key={`flipcard-${key}-${index}`}
-                      isEmpty={selectedVideoAverage[key].value === 0}
+                      key={`flipcard-${key.keyName}-${index}`}
+                      isEmpty={key.value === 0}
                     >
-                      <Front
-                        data={selectedVideoAverage[key]}
-                        title={key}
-                        colors={colors}
-                      />
-                      <Back data={selectedVideoAverage[key]} title={key} />
+                      <Front data={key} title={key.keyName} colors={colors} />
+                      <div />
                     </FlipCard>
                   )
                 })}

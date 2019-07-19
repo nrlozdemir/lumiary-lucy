@@ -1,9 +1,6 @@
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
-import axios from 'axios'
 import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
-
-import panopticMockData from 'Api/mocks/panopticMock.json'
 
 import { getDateBucketFromRange } from 'Utils'
 
@@ -13,16 +10,13 @@ import {
   compareSharesData,
   convertColorTempToDatasets,
   convertVideoEngagementData,
+  percentageManipulation,
 } from 'Utils/datasets'
 
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import _ from 'lodash'
-import { dayOfWeek, chartColors } from 'Utils/globals'
-
-function getMockPanopticDataApi() {
-  return axios.get('/').then((res) => panopticMockData)
-}
+import { dayOfWeek } from 'Utils/globals'
 
 function* getVideoReleasesData({ data }) {
   try {
@@ -47,14 +41,13 @@ function* getVideoReleasesData({ data }) {
     if (!!response) {
       yield put(
         actions.getVideoReleasesDataSuccess(
-          convertVideoEngagementData(response, metric)
+          percentageManipulation(convertVideoEngagementData(response, metric))
         )
       )
     } else {
       throw new Error('Panoptic Error getVideoReleasesData')
     }
   } catch (err) {
-    console.log(err)
     yield put(actions.getVideoReleasesDataError(err))
   }
 }
@@ -82,11 +75,10 @@ function* getColorTemperatureData({ data }) {
       actions.getColorTemperatureDataSuccess({
         labels,
         platforms,
-        data: colorTempData,
+        data: percentageManipulation(colorTempData),
       })
     )
   } catch (err) {
-    console.log(err)
     yield put(actions.getColorTemperatureDataError(err))
   }
 }
@@ -132,18 +124,21 @@ function* getFilteringSectionData({ data }) {
     ) {
       yield put(
         actions.getFilteringSectionDataSuccess({
-          doughnutData: convertDataIntoDatasets(doughnutData, options, {
-            singleDataset: true,
-          }),
+          doughnutData: convertDataIntoDatasets(
+            percentageManipulation(doughnutData),
+            options,
+            {
+              singleDataset: true,
+            }
+          ),
           stackedChartData:
             (!_.isEmpty(stackedChartData.data) &&
               convertDataIntoDatasets(
-                stackedChartData,
+                percentageManipulation(stackedChartData),
                 { ...options, dateBucket },
                 { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
               )) ||
             {},
-
           property,
         })
       )
@@ -202,7 +197,9 @@ function* getPacingCardData({ data }) {
     ) {
       yield put(
         actions.getPacingCardDataSuccess({
-          stadiumData: convertDataIntoDatasets(stadiumData, options),
+          stadiumData: percentageManipulation(
+            convertDataIntoDatasets(stadiumData, options)
+          ),
           horizontalStackedBarData: convertDataIntoDatasets(
             horizontalStackedBarData,
             {
@@ -250,21 +247,13 @@ function* getCompareSharesData({ data: { dateRange } }) {
 
     yield put(
       actions.getCompareSharesDataSuccess(
-        radarChartCalculate(compareSharesData(payload))
+        percentageManipulation(
+          radarChartCalculate(compareSharesData(payload, parameters))
+        )
       )
     )
   } catch (err) {
-    console.log('err', err)
     yield put(actions.getCompareSharesDataError(err))
-  }
-}
-
-function* getData() {
-  try {
-    const payload = yield call(getMockPanopticDataApi)
-    yield put(actions.getDataSuccess(payload))
-  } catch (err) {
-    yield put(actions.getDataError(err))
   }
 }
 
@@ -291,7 +280,7 @@ function* getFlipCardsData() {
         },
       }))
     )
-    yield put(actions.getFlipCardsDataSuccess(payloads))
+    yield put(actions.getFlipCardsDataSuccess(percentageManipulation(payloads)))
   } catch (err) {
     console.log(err)
     yield put(actions.getFlipCardsDataError(err))
@@ -323,15 +312,15 @@ function* getTopPerformingFormatData({ data = {} }) {
     ])
 
     if (!!dataWithDateBuckets.data && !!dataWithoutDateBuckets.data) {
-      const lineChartData = convertDataIntoDatasets(
-        dataWithDateBuckets,
-        dateBucketedOptions
+      const lineChartData = percentageManipulation(
+        convertDataIntoDatasets(dataWithDateBuckets, dateBucketedOptions)
       )
 
-      const doughnutData = convertDataIntoDatasets(
-        dataWithoutDateBuckets,
-        options,
-        { singleDataset: true, hoverBG: true }
+      const doughnutData = percentageManipulation(
+        convertDataIntoDatasets(dataWithoutDateBuckets, options, {
+          singleDataset: true,
+          hoverBG: true,
+        })
       )
 
       yield put(
@@ -355,7 +344,6 @@ function* getTopPerformingFormatData({ data = {} }) {
 }
 
 export default [
-  takeLatest(types.GET_DATA, getData),
   takeLatest(types.GET_VIDEO_RELEASES_DATA, getVideoReleasesData),
   takeLatest(types.GET_COLOR_TEMPERATURE_DATA, getColorTemperatureData),
   takeLatest(types.GET_FILTERING_SECTION_DATA, getFilteringSectionData),

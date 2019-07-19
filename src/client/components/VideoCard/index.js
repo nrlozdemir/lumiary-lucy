@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import classnames from 'classnames'
 import style from './style.scss'
-import { socialIconSelector, floatCvScore } from 'Utils'
+import { socialIconSelector, floatCvScore, getCvScoreColor } from 'Utils'
 import { Link } from 'react-router-dom'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import { ThemeContext } from 'ThemeContext/themeContext'
@@ -97,27 +97,24 @@ export class VideoCard extends PureComponent {
     )
 
     const videoUrl = `${mediaUrl}/lumiere/${brandId}/${video.uuid}.mp4`
+    const cvScore = video['cvScores.value']
+    const cvScoreColor = getCvScoreColor(cvScore)
 
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <div
-            className={classnames(
-              style.cardContainer,
-              {
-                [style.rightVideoContainer]: index > 0 && (index + 1) % 4 === 0,
-              }
-            )}
-            style={{
-              boxShadow: `0 2px 6px 0 colors.videoCardShadow`,
-            }}
+            className={classnames(style.cardContainer, {
+              [style.rightVideoContainer]: index > 0 && (index + 1) % 4 === 0,
+              [colors.themeType === 'dark' ? style.dark : style.light]: true,
+            })}
           >
             <div
               className={style.cardInner}
               onMouseEnter={() => this.videoMouseEnterPlay()}
               onMouseLeave={() => this.videoMouseLeavePlay()}
             >
-              {video['cvScores.value'] && (
+              {cvScore && (
                 <div
                   className={style.cardCornerInfo}
                   style={{
@@ -125,11 +122,11 @@ export class VideoCard extends PureComponent {
                     color: colors.labelColor,
                   }}
                 >
-                  <span>{floatCvScore(video['cvScores.value'])}</span>
+                  <span>{floatCvScore(cvScore)}</span>
                   <PercentageBarGraph
                     key={Math.random()}
-                    percentage={video['cvScores.value']}
-                    color="green"
+                    percentage={cvScore}
+                    color={cvScoreColor}
                     disableLabels
                     width={60}
                     height={15}
@@ -146,7 +143,13 @@ export class VideoCard extends PureComponent {
                   }}
                 >
                   <Link to={`/library/build-report/${video.uuid}`}>
-                    <video key={video.uuid} ref={this.video} loop muted controls={false}>
+                    <video
+                      key={video.uuid}
+                      ref={this.video}
+                      loop
+                      muted
+                      controls={false}
+                    >
                       <source src={videoUrl} type="video/mp4" />
                     </video>
                   </Link>
@@ -155,6 +158,7 @@ export class VideoCard extends PureComponent {
                     style={{
                       width: `${(this.state.width * 100) /
                         this.state.duration}%`,
+                      background: colors.videoProgressBar,
                     }}
                   />
                 </div>
@@ -184,7 +188,7 @@ export class VideoCard extends PureComponent {
                       color: colors.labelColor,
                     }}
                   >
-                    View Video Report
+                    View Video Details
                     <div className={style.icon}>
                       <RightArrowCircle />
                     </div>

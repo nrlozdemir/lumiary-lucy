@@ -10,31 +10,45 @@ import {
 import { ThemeContext } from 'ThemeContext/themeContext'
 import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'
 import { makeSelectAuthProfile } from 'Reducers/auth'
+import { getCVScoreChartAttributes } from 'Utils/datasets'
 
 class ContentVitalityScore extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getAudienceContentVitalityScoreData(data)
   }
+
   render() {
     const {
       audienceContentVitalityScoreData: { data, loading, error },
-      authProfile = {},
     } = this.props
+
+    const { chartYAxisMax, chartYAxisStepSize } = getCVScoreChartAttributes(
+      data
+    )
 
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <ContentVitalityScoreModule
+            loading={loading}
+            dataKeys={{
+              leftKey: 'male',
+              leftLabel: 'Male Audience',
+              rightKey: 'female',
+              rightLabel: 'Female Audience',
+              middleKey: 'difference',
+              middleLabel: 'Percent Difference',
+            }}
             data={data}
+            chartYAxisMax={chartYAxisMax}
             moduleKey={'Audience/ContentVitalityScore'}
-            title="Content Vitality Score by Videos Produced Comparison"
+            title="Content Vitality Score By Videos Produced Comparison"
             action={this.callBack}
-            authProfile={authProfile}
             filters={[
               {
-                type: 'platform',
+                type: 'platformEngagement',
                 selectKey: 'ACOT-ads',
-                placeHolder: 'Platforms',
+                placeHolder: 'Engagement by Platform',
               },
               {
                 type: 'dateRange',
@@ -55,13 +69,15 @@ class ContentVitalityScore extends React.Component {
                       callback: function(value, index, values) {
                         if (value === 0) {
                           return value + ' '
-                        } else if (value === 250) {
+                        } else if (value === chartYAxisMax) {
                           return value
                         } else {
                           return ''
                         }
                       },
+                      stepSize: chartYAxisStepSize,
                       fontColor: colors.textColor,
+                      max: chartYAxisMax,
                     },
                     gridLines: {
                       color: colors.chartStadiumBarBorder,
@@ -89,7 +105,6 @@ class ContentVitalityScore extends React.Component {
 
 const mapStateToProps = createStructuredSelector({
   audienceContentVitalityScoreData: makeSelectAudienceContentVitalityScore(),
-  authProfile: makeSelectAuthProfile(),
 })
 
 const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)

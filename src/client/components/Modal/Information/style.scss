@@ -1,0 +1,97 @@
+.iconWrapper {
+  position: absolute;
+  right: -48px;
+  top: 0;
+  cursor: pointer;
+  z-index: 10;
+
+  span {
+    font-size: 32px;
+  }
+}
+.modalContainer {
+  position: relative;
+  padding: 24px;
+  font-size: 14px;
+}
+
+.modalContent {
+  padding: 32px 40px;
+  opacity: 0.95;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+}
+
+.button {
+  margin: 0;
+  padding: 7px 16px !important;
+  font-family: $font-family-ClanOTBold;
+  span {
+    font-size: 12px !important;
+  }
+}
+
+.item {
+  display: flex;
+  flex-flow: row wrap;
+  align-items: center;
+
+  &:not(:last-child) {
+    margin-bottom: 80px;
+  }
+
+  &:last-child {
+    margin-bottom: 40px;
+  }
+
+  .header {
+    flex: 1 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-bottom: 16px;
+    border-bottom: 1px solid #c6c9d7;
+    margin-bottom: 40px;
+
+    .title {
+      font-family: $font-family-ClanOTBold;
+    }
+  }
+
+  .image {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-right: 20px;
+    box-sizing: border-box;
+    img,
+    video {
+      width: 100%;
+      box-shadow: 0 2px 6px 0 #acb0be;
+    }
+  }
+  .content {
+    flex: 0 0 50%;
+    max-width: 50%;
+    padding-left: 20px;
+    box-sizing: border-box;
+    font-size: 14px;
+    line-height: 24px;
+    font-family: $font-family-ClanOTNews;
+    color: #505050;
+    b {
+      border-bottom: 2px solid #2fd7c4;
+      font-family: $font-family-ClanOTBold;
+    }
+  }
+}
+
+.empty {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 200px;
+  font-size: 24px;
+  font-weight: bold;
+}

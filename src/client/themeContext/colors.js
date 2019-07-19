@@ -58,15 +58,17 @@ const dark = {
   videoCardColor: '#ffffff',
   videoCardShadow: 'rgba(0, 0, 0, 0.5)',
   videoBorder: '#545b79',
-  videoRightPercentageBackground: 'rgb(33, 36, 59, 0.8)',
+  videoRightPercentageBackground: 'rgba(32, 41, 82, 0.8)',
 
   // Sidebar
   filterHeader: '#ffffff',
+  filterText: '#fff',
   socialCheckboxBackground: '#21243b',
   socialColor: '#545b79',
   socialActiveBackground: '#ffffff',
   rangeSliderTick: '#ffffff',
   trackColor: '#21243b',
+  filterHeaderText: '#202952',
 
   // modal values
   modalBackground: '#373f5b',
@@ -86,16 +88,22 @@ const dark = {
   // custom selectbox values
 
   // input values
-  inputControlBackground: '#373f5b',
+  inputControlBackground: '#21243B',
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#545b79',
   inputColor: '#545B79',
-  inputActiveColor: '#505050',
+  inputDropdownColor: '#545b79',
+  inputActiveColor: '#fff',
   inputOptionBackground: '#545B79',
-  inputOptionFocusBackground: '#21243B',
+  inputOptionFocusBackground: '#545B79',
   inputOptionSelectedBackground: '#ffffff',
   inputPlaceholderColor: '#545b79',
   // input values
+
+  // search input colors
+  searchInputColor: '#fff',
+  searchInputActiveColor: '#fff',
+  searchInputPlaceholderColor: '#fff',
 
   // table values
   tableHeaderBackground: '#545b79',
@@ -113,6 +121,7 @@ const dark = {
   tooltipTextColor: '#373f5b',
   tooltipBackground: '#ffffff',
   tooltipRadarChartTextColor: '#23294b',
+  chartTooltipColor: '#21243b',
   // tooltip values
 
   // radius icon values
@@ -132,7 +141,9 @@ const dark = {
   // radar chart values
   chartPointBackgroundColor: '#ffffff',
   chartPointBorderColor: '#ffffff',
-  chartBackgroundColor: 'rgba(255, 255, 255, 0.4)',
+  chartBackgroundColor: 'rgba(172, 176, 190, 0.4)',
+  chartTickColor: 'rgba(255, 255, 255, 0.4)',
+  chartAngleLineColor: 'rgba(90, 99, 134, 0.3)',
   // radar chart values
 
   // shot by shot slider values
@@ -161,6 +172,26 @@ const dark = {
   dotTrackBackgroundColor: '#21243b',
   dotThumbBackgroundColor: '#ffffff',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
+
+  // panoptic line chart
+  lineChartGridColor: '#545b79',
+  lineChartBackgroundColor: '#21243b',
+
+  // color chart
+  lineBackgroundColor: 'rgba(0, 0, 0, 0.5)',
+  colorChartShadowColor: 'rgba(0, 0, 0, 0.5)',
+
+  // video hover progress bar
+  videoProgressBar: '#fff',
+
+  // chart zero line
+  chartZeroLineColor: '#505050',
+  // Asset Layer
+  assetLayerBorderColor: '#545b79',
+  assetLayerShadowColor: 'rgba(0, 0, 0, 0.5)',
+
+  // Information Modal
+  informationModalBackgroundColor: '#acb0be',
 }
 
 const light = {
@@ -225,12 +256,14 @@ const light = {
   videoRightPercentageBackground: 'rgba(255, 255, 255, 0.8)',
 
   // Sidebar
-  filterHeader: '#e8ecf0',
+  filterHeader: '#505050',
+  filterText: '#505050',
   socialCheckboxBackground: '#e8ecf0',
   socialColor: '#c6c9d7',
   socialActiveBackground: '#505050',
   rangeSliderTick: '#505050',
   trackColor: '#e8ecf0',
+  filterHeaderText: '#fff',
 
   // modal values
   modalBackground: '#f3f6f9',
@@ -254,6 +287,7 @@ const light = {
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#c6c9d7',
   inputColor: '#000',
+  inputDropdownColor: '#ffffff',
   inputActiveColor: '#505050',
   inputOptionBackground: '#ffffff',
   inputOptionFocusBackground: '#f3f6f9',
@@ -261,6 +295,11 @@ const light = {
   inputPlaceholderColor: '#c6c9d7',
 
   // input values
+
+  // search input colors
+  searchInputColor: '#000',
+  searchInputActiveColor: '#505050',
+  searchInputPlaceholderColor: '#c6c9d7',
 
   // table values
   tableHeaderBackground: '#ffffff',
@@ -278,6 +317,7 @@ const light = {
   tooltipTextColor: '#f3f6f9',
   tooltipBackground: '#505050',
   tooltipRadarChartTextColor: '#fff',
+  chartTooltipColor: '#fff',
   // tooltip values
 
   // radius icon values
@@ -298,6 +338,8 @@ const light = {
   chartPointBackgroundColor: '#505050',
   chartPointBorderColor: '#505050',
   chartBackgroundColor: 'rgba(172, 176, 190, 0.4)',
+  chartTickColor: 'rgba(80, 80, 80, 0.4)',
+  chartAngleLineColor: 'rgba(90, 99, 134, 0.3)',
   // radar chart values
 
   // shot by shot slider values
@@ -326,6 +368,26 @@ const light = {
   dotTrackBackgroundColor: '#e8ecf0',
   dotThumbBackgroundColor: '#2fd7c4',
   dotThumbShadowColor: 'rgba(0, 0, 0, 0.5)',
+
+  // panoptic line chart
+  lineChartGridColor: '#c6c9d7',
+  lineChartBackgroundColor: '#e8ecf0',
+
+  // color chart
+  lineBackgroundColor: '#bebebe',
+  colorChartShadowColor: '#bebebe',
+
+  // video hover progress bar
+  videoProgressBar: '#2fd7c4',
+
+  // chart zero line
+  chartZeroLineColor: '#505050',
+  // Asset Layer
+  assetLayerBorderColor: '#c6c9d7',
+  assetLayerShadowColor: '#bebebe',
+
+  // Information Modal
+  informationModalBackgroundColor: '#505050',
 }
 
 const themes = {
