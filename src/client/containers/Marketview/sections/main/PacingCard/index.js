@@ -30,7 +30,7 @@ class PacingCard extends Component {
     const isDataEmpty =
       (!loading && isDataSetEmpty(dataToUpdate)) || isEmpty(dataToUpdate)
 
-    const data = !isDataEmpty
+    const data = !isDataEmpty && !loading 
       ? {
           ...dataToUpdate,
           datasets: [

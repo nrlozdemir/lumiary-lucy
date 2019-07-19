@@ -85,7 +85,7 @@ class ColorCard extends Component {
               </span>
             </div>
             <div className={style.bubbleChart}>
-              {!!data && !!data.length && totalChartValue ? (
+              {!!data && !loading && !!data.length && totalChartValue ? (
                 <BubbleChart
                   maximumIterationCount={100000}
                   size={[totalChartValue * 1.7, totalChartValue * 2]}
@@ -150,7 +150,7 @@ class ColorCard extends Component {
                 </BubbleChart>
               ) : null}
             </div>
-            {!isDataEmpty && (
+            {!isDataEmpty && !loading && (
               <div className={style.colors}>
                 <style>{`.${style.hasTriangle}:before {border-color: ${colors.textColor} transparent transparent transparent;}`}</style>
                 {Object.keys(bubbleColors).map((colorKey, i) => {
