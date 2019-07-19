@@ -1,4 +1,5 @@
 const createDataset = (value) => {
+  value = parseInt(value) || 0
   if (value <= 30) {
     return [
       16, 18, 20, 22,

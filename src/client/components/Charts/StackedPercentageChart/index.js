@@ -1,5 +1,5 @@
 import React from 'react'
-import { helpers, /* elements, */ defaults } from 'chart.js'
+import { helpers, defaults } from 'chart.js'
 import { Line, Chart } from 'react-chartjs-2'
 import { randomKey } from 'Utils'
 import { chartCombineDataset } from 'Utils/datasets'
@@ -26,7 +26,7 @@ class StackedPercentageChart extends React.Component {
     const valueOrDefault = helpers.valueOrDefault
 
     Chart.helpers.extend(Chart.elements.Line.prototype, {
-      draw: function () {
+      draw: function() {
         const me = this
         const vm = me._view
         const ctx = me._chart.ctx
@@ -122,18 +122,32 @@ class StackedPercentageChart extends React.Component {
             purple: ['#8562f3', '#9576f5', '#8562f3'],
             darkgrey: ['#505050', '#505050', '#505050'],
             white: ['#ffffff', '#ffffff', '#ffffff'],
+            '#2FD7C4': ['#2FD7C4', '#2FD7C4', '#2FD7C4'],
+            '#8562F3': ['#8562F3', '#8562F3', '#8562F3'],
+            '#5292E5': ['#5292E5', '#5292E5', '#5292E5'],
+            '#ACB0BE': ['#ACB0BE', '#ACB0BE', '#ACB0BE'],
+            '#545b79': ['#545b79', '#545b79', '#545b79'],
+            '#ff556f': ['#ff556f', '#ff556f', '#ff556f'],
+            '#3edcca': ['#3edcca', '#3edcca', '#3edcca'],
+            '#229a78': ['#229a78', '#229a78', '#229a78'],
+            '#fff20d': ['#fff20d', '#fff20d', '#fff20d'],
+            '#9576f5': ['#9576f5', '#9576f5', '#9576f5'],
+            '#ffacb9': ['#ffacb9', '#ffacb9', '#ffacb9'],
+            '#eb7919': ['#eb7919', '#eb7919', '#eb7919'],
           }
 
           let gradient = ctx.createLinearGradient(0, 0, 180, 800)
           let cs = 0
-          for (let g = 0; g <= 1; g += 0.5) {
-            gradient.addColorStop(
-              g,
-              (!!colors[config.options.color] &&
-                colors[config.options.color][cs]) || [config.options.color]
-            )
-            cs++
+          if (!!config.options.color && !!colors[config.options.color]) {
+            for (let g = 0; g <= 1; g += 0.5) {
+              gradient.addColorStop(g, colors[config.options.color][cs])
+              cs++
+            }
+          } else {
+            gradient.addColorStop(0, colors['darkgrey'][0])
+            gradient.addColorStop(1, colors['darkgrey'][1])
           }
+
           const tickColor = config.options.tickColor
             ? config.options.tickColor
             : themes.topValueColor
@@ -143,7 +157,6 @@ class StackedPercentageChart extends React.Component {
           const findYMaxValue = Object.values(lines).reduce((p, n) =>
             p.currentVLine.y > n.currentVLine.y ? n : p
           )
-
           const findYMaxIndex =
             findYMaxValue &&
             Object.values(lines).findIndex(
@@ -256,29 +269,17 @@ class StackedPercentageChart extends React.Component {
           ctx.save()
 
           const topValueRightPosition =
-            (!!findYMaxValue &&
-              !!findYMaxValue.currentVLine &&
-              !!findYMaxValue.currentVLine.x &&
-              (barWidth === 1
-                ? findYMaxValue.currentVLine.x - barWidth
-                : findYMaxValue.currentVLine.x - barWidth + 0.5)) ||
-            0
+            barWidth === 1
+              ? findYMaxValue.currentVLine.x - barWidth
+              : findYMaxValue.currentVLine.x - barWidth + 0.5
 
           ctx.beginPath()
           ctx.restore()
           ctx.moveTo(
             topValueRightPosition,
-            height + !!findYMaxValue &&
-            !!findYMaxValue.currentVLine &&
-            findYMaxValue.currentVLine.y
+            height + findYMaxValue.currentVLine.y
           )
-          ctx.lineTo(
-            topValueRightPosition,
-            (!!findYMaxValue &&
-              !!findYMaxValue.currentVLine &&
-              findYMaxValue.currentVLine.y) ||
-            0
-          )
+          ctx.lineTo(topValueRightPosition, findYMaxValue.currentVLine.y)
           ctx.lineWidth = barWidth
           ctx.strokeStyle = tickColor
           ctx.stroke()
