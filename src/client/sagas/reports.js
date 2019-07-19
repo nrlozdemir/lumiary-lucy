@@ -312,7 +312,7 @@ function* getPerformanceComparisonData({
     }
 
     if (property === 'format') {
-      options.limit = 4
+      parameters.limit = 4
     }
 
     const payload = yield call(getDataFromApi, parameters, '/report')
