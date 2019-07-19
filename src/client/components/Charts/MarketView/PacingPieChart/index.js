@@ -5,7 +5,7 @@ import { customChartToolTip } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 const PacingPieChart = ({ data = {} }) => {
-  const { labels, datasets } = data
+  const { datasets = [] } = data
 
   return (
     <ThemeContext.Consumer>
