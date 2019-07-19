@@ -118,7 +118,7 @@ const Front = (props) => {
                 <div className={styles.circle}>
                   <i className={statArrowClassName} />
                 </div>
-                <p className={styles.label}>{statDifference}%</p>
+                <p className={styles.label}>{metricSuffix(statDifference)}%</p>
               </div>
             </div>
             <CustomBarChart
