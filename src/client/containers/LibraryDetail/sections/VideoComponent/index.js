@@ -82,7 +82,6 @@ class Video extends Component {
           truncateTitle
         >
           <video
-            key={`video_${src}${title}`}
             ref={this.video}
             className={styles.video}
             src={src}
