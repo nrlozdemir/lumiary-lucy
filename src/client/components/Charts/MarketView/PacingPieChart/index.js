@@ -30,6 +30,7 @@ const PacingPieChart = ({ data = {} }) => {
                   borderWidth: 2.2,
                 },
               },
+              borderColor: colors.modalBackground,
             }}
             data={data}
           />
