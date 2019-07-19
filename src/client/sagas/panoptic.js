@@ -2,7 +2,7 @@ import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
 
-import { getDateBucketFromRange } from 'Utils'
+import { getDateBucketFromRange, normalize } from 'Utils'
 
 import {
   convertDataIntoDatasets,
@@ -16,7 +16,6 @@ import {
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import _ from 'lodash'
-import { dayOfWeek } from 'Utils/globals'
 
 function* getVideoReleasesData({ data }) {
   try {
@@ -268,19 +267,37 @@ function* getFlipCardsData() {
       'GET'
     )
 
-    const payloads = Object.assign(
-      {},
-      ...Object.keys(metrics).map((metric) => ({
-        [metric]: {
-          percentage: metrics[metric].changeOverPrevious || 0,
-          data: dayOfWeek.map((day) => metrics[metric][day]),
-          isEmpty: dayOfWeek.every((day) =>
-            metrics[metric][day] === 0 ? true : false
-          ),
-        },
-      }))
-    )
-    yield put(actions.getFlipCardsDataSuccess(percentageManipulation(payloads)))
+    if (!!metrics && !!Object.keys(metrics).length) {
+      const payloads = Object.assign(
+        {},
+        ...Object.keys(metrics).map((metric) => {
+          const dayOfWeek = Object.keys(metrics[metric]).filter(
+            (key) => key !== 'changeOverPrevious'
+          )
+
+          const data = dayOfWeek.map((day) => metrics[metric][day]).reverse()
+
+          const normalized = data.map((v) =>
+            normalize(v, Math.min(...data), Math.max(...data), 0, 100)
+          )
+
+          return {
+            [metric]: {
+              percentage: metrics[metric].changeOverPrevious || 0,
+              data: normalized,
+              isEmpty: dayOfWeek.every((day) =>
+                metrics[metric][day] === 0 ? true : false
+              ),
+            },
+          }
+        })
+      )
+      yield put(
+        actions.getFlipCardsDataSuccess(percentageManipulation(payloads))
+      )
+    } else {
+      throw new Error('Panoptic getFlipCardsDataError')
+    }
   } catch (err) {
     console.log(err)
     yield put(actions.getFlipCardsDataError(err))

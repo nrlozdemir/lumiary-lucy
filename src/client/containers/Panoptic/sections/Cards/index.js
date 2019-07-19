@@ -143,8 +143,9 @@ class Cards extends React.Component {
     const {
       flipCardsData: { data, loading },
     } = this.props
-    const wholeSegmentsWithOrder = ['view', 'like', 'comment', 'share']
 
+    const wholeSegmentsWithOrder = ['view', 'like', 'comment', 'share']
+    
     return (
       <div className="grid-container col-12 mt-72 mb-72">
         <div className={styles.flipWrapper}>

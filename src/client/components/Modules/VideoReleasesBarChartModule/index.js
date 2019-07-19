@@ -109,15 +109,20 @@ const VideoReleasesBarChartModule = (props) => {
 
   const normalizedData =
     (!!data &&
+      !loading &&
       !!data.length &&
       data.map((data) => ({
         ...data,
         datasets: [
           {
             ...data.datasets[0],
-            data: data.datasets[0].data.map((v) => v * videoNormalizer),
+            data: data.datasets[0].data.map((v) =>
+              Math.round(v * videoNormalizer)
+            ),
           },
-          { ...data.datasets[1] },
+          {
+            ...data.datasets[1],
+          },
         ],
       }))) ||
     []
@@ -132,7 +137,7 @@ const VideoReleasesBarChartModule = (props) => {
           if (tooltipItem.yLabel < 0) {
             return `${~~(value / 1000)}${value >= 1000 ? 'k' : ''} Likes`
           }
-          return `${value / videoNormalizer} Videos`
+          return `${Math.round(value / videoNormalizer)} Videos`
         },
       },
     }),
@@ -216,7 +221,9 @@ const VideoReleasesBarChartModule = (props) => {
                               ? `${~~val}${Math.abs(value) >= 1000 ? 'k' : ''}`
                               : ''
                           }
-                          return val2 === maxSteps.vids ? `${val2}v` : ''
+                          return Math.round(val2) === maxSteps.vids
+                            ? `${maxSteps.vids}v`
+                            : ''
                         },
                       },
                       gridLines: {
