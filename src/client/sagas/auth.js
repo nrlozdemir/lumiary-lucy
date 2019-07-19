@@ -59,8 +59,8 @@ export function* validateSso({ payload }) {
   }
 }
 
-export function* updatePassword({ payload }) {
-  return console.log('payload', payload)
+export function* updatePassword({ password, confirmPassword }) {
+  return console.log('payload', password, confirmPassword)
   try {
     const response = yield call(ajax, {
       method: 'post',
@@ -68,12 +68,11 @@ export function* updatePassword({ payload }) {
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
       },
-      params: qs.stringify({ sso: payload }),
     })
     if (response) {
       yield put({
         type: types.UPDATE_PASSWORD_SUCCESS,
-        payload: { message: 'password upda' },
+        payload: { message: 'password update' },
       })
     }
   } catch (e) {
@@ -82,8 +81,31 @@ export function* updatePassword({ payload }) {
   }
 }
 
+export function* forgotPassword({ email }) {
+  return console.log('payload', email)
+  try {
+    const response = yield call(ajax, {
+      method: 'post',
+      url: buildQApiUrl('/auth/forgot-password'),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+    })
+    if (response) {
+      yield put({
+        type: types.FORGOT_PASSWORD_SUCCESS,
+        payload: { message: 'forgot password' },
+      })
+    }
+  } catch (e) {
+    console.log(e)
+    yield put({ type: types.FORGOT_PASSWORD_ERROR, payload: e.message })
+  }
+}
+
 export default [
   takeLatest(types.LOGIN_REQUEST, authorize),
   takeLatest(types.LOGIN_SSO_REQUEST, validateSso),
   takeLatest(types.UPDATE_PASSWORD_REQUEST, updatePassword),
+  takeLatest(types.FORGOT_PASSWORD_REQUEST, forgotPassword),
 ]

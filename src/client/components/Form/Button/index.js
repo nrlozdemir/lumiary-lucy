@@ -7,6 +7,7 @@ import { withTheme } from 'ThemeContext/withTheme'
 
 /* eslint-disable react/prefer-stateless-function */
 const Button = (props) => {
+  console.log('props', props)
   const {
     themeContext: { colors },
   } = props
