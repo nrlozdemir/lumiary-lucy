@@ -99,7 +99,7 @@ class TopPerformingProperty extends React.Component {
 
     const min = 0
 
-    const stepSize = !!max && ~~(max / 4)
+    const stepSize = !!max && (max / 4)
 
     const chartTickOptions = {
       min,
