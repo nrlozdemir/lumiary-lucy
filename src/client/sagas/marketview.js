@@ -177,14 +177,13 @@ function* getSimilarProperties({ data: { dateRange, container } }) {
       !!brand.competitors.length &&
       brand.competitors.map((c) => c.uuid)
 
-    const options = {
+    const url = buildApiUrl(`/brand/${brand.uuid}/properties`, {
       competitors,
-    }
+      metric: 'shares',
+      daterange: dateRange,
+    })
 
-    const url = `/brand/${brand.uuid}/properties?metric=shares&daterange=${dateRange}`
-    //${!!competitors ? '&allcompetitors=true' : ''}`
-
-    const payload = yield call(getDataFromApi, options, url, 'GET')
+    const payload = yield call(getDataFromApi, undefined, url, 'GET')
 
     let parsedNewPayload, highestBuckets
     if (!!payload && !!payload.propertyBucketsRanked) {
@@ -318,20 +317,20 @@ function* getBubbleChartData() {
 function* getPacingChartData() {
   try {
     const { brand } = yield select(selectAuthProfile)
+    const metric = 'shares'
 
     const competitors =
       !!brand.competitors &&
       !!brand.competitors.length &&
       brand.competitors.map((c) => c.uuid)
 
-    const options = {
+    const url = buildApiUrl(`/brand/${brand.uuid}/properties`, {
+      metric,
       competitors,
-    }
+      daterange: 'month',
+    })
 
-    const url = `/brand/${brand.uuid}/properties?metric=shares&daterange=month`
-    //${!!competitors ? '&allcompetitors=true' : ''}`
-
-    const payload = yield call(getDataFromApi, options, url, 'GET')
+    const payload = yield call(getDataFromApi, undefined, url, 'GET')
 
     const pacingChartData = convertDataIntoDatasets(
       payload,

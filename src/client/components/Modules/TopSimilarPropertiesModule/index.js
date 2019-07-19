@@ -20,6 +20,8 @@ const WrapperModule = ({ children, style, className }) => {
 const TopSimilarProperties = (props) => {
   const { data, title, filters, action, moduleKey, isLoading, isError } = props
   
+  console.log('data', data)
+  
   return (
     <Module
       title={title}
