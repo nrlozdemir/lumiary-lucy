@@ -86,24 +86,32 @@ class FormatCard extends Component {
                 </span>
               </div>
             )}
-            <div
-              className={classnames(style.videoContainer, {
-                [colors.themeType === 'dark' ? style.dark : style.light]: true,
-              })}
-            >
-              {video && (
-                <SingleVideoCard
-                  video={video}
-                  muted={false}
-                  options={{ size: 'auto', barColor: 'transparent' }}
-                />
-              )}
-            </div>
+            {!loading && (
+              <React.Fragment>
+                <div
+                  className={classnames(style.videoContainer, {
+                    [colors.themeType === 'dark'
+                      ? style.dark
+                      : style.light]: true,
+                  })}
+                >
+                  {video && (
+                    <SingleVideoCard
+                      video={video}
+                      muted={false}
+                      options={{ size: 'auto', barColor: 'transparent' }}
+                    />
+                  )}
+                </div>
 
-            <div className={style.marketViewCardChartTitle}>Live Action</div>
-
+                <div className={style.marketViewCardChartTitle}>
+                  Live Action
+                </div>
+              </React.Fragment>
+            )}
             <div className={formatStyles.formatItems}>
               {data &&
+                !loading &&
                 data.map((item, i) => (
                   <div key={i} className={formatStyles.formatItem}>
                     <div className={formatStyles.formatItemIcon}>
