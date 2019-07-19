@@ -16,7 +16,6 @@ import {
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import _ from 'lodash'
-import { dayOfWeek } from 'Utils/globals'
 
 function* getVideoReleasesData({ data }) {
   try {
@@ -268,19 +267,31 @@ function* getFlipCardsData() {
       'GET'
     )
 
-    const payloads = Object.assign(
-      {},
-      ...Object.keys(metrics).map((metric) => ({
-        [metric]: {
-          percentage: metrics[metric].changeOverPrevious || 0,
-          data: dayOfWeek.map((day) => metrics[metric][day]),
-          isEmpty: dayOfWeek.every((day) =>
-            metrics[metric][day] === 0 ? true : false
-          ),
-        },
-      }))
-    )
-    yield put(actions.getFlipCardsDataSuccess(percentageManipulation(payloads)))
+    if (!!metrics && !!Object.keys(metrics).length) {
+      const payloads = Object.assign(
+        {},
+        ...Object.keys(metrics).map((metric) => {
+          const dayOfWeek = Object.keys(metrics[metric]).filter(
+            (key) => key !== 'changeOverPrevious'
+          )
+
+          return {
+            [metric]: {
+              percentage: metrics[metric].changeOverPrevious || 0,
+              data: dayOfWeek.map((day) => metrics[metric][day]).reverse(),
+              isEmpty: dayOfWeek.every((day) =>
+                metrics[metric][day] === 0 ? true : false
+              ),
+            },
+          }
+        })
+      )
+      yield put(
+        actions.getFlipCardsDataSuccess(percentageManipulation(payloads))
+      )
+    } else {
+      throw new Error('Panoptic getFlipCardsDataError')
+    }
   } catch (err) {
     console.log(err)
     yield put(actions.getFlipCardsDataError(err))
