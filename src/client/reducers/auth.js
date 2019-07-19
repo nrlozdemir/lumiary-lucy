@@ -19,6 +19,10 @@ export const types = {
   FORGOT_PASSWORD_REQUEST: 'AUTH/FORGOT_PASSWORD_REQUEST',
   FORGOT_PASSWORD_SUCCESS: 'AUTH/FORGOT_PASSWORD_SUCCESS',
   FORGOT_PASSWORD_ERROR: 'AUTH/FORGOT_PASSWORD_ERROR',
+
+  COMPETITORS_REQUEST: 'AUTH/COMPETITORS_REQUEST',
+  COMPETITORS_SUCCESS: 'AUTH/COMPETITORS_SUCCESS',
+  COMPETITORS_ERROR: 'AUTH/COMPETITORS_ERROR',
 }
 
 export const actions = {
@@ -41,6 +45,9 @@ export const actions = {
   forgotPasswordRequest: ({ email }) => ({
     type: types.FORGOT_PASSWORD_REQUEST,
     email,
+  }),
+  getCompetitors: () => ({
+    type: types.COMPETITORS_REQUEST,
   }),
 }
 
@@ -92,6 +99,12 @@ export const initialState = fromJS({
     success: null,
     loading: null,
     password: null,
+  },
+  competitors: {
+    data: [],
+    message: null,
+    success: null,
+    loading: null,
   },
 })
 
@@ -156,6 +169,24 @@ const reducer = (state = initialState, action) => {
         .setIn(['forgotPassword', 'success'], fromJS(false))
         .setIn(['forgotPassword', 'message'], fromJS(payload.message))
 
+    case types.COMPETITORS_REQUEST:
+      return state
+        .setIn(['competitors', 'loading'], fromJS(true))
+        .setIn(['competitors', 'password'], fromJS(action.password))
+
+    case types.COMPETITORS_SUCCESS:
+      return state
+        .setIn(['competitors', 'loading'], fromJS(false))
+        .setIn(['competitors', 'success'], fromJS(true))
+        .setIn(['competitors', 'message'], fromJS(payload.message))
+        .setIn(['competitors', 'data'], fromJS(payload.data))
+
+    case types.COMPETITORS_ERROR:
+      return state
+        .setIn(['competitors', 'loading'], fromJS(false))
+        .setIn(['competitors', 'success'], fromJS(false))
+        .setIn(['competitors', 'message'], fromJS(payload.message))
+
     case types.LOGIN_SSO_SUCCESS: {
       const { token, refresh, profile } = action.payload
       const expiry = parseInt(jwtDecode(token).exp + '000')
@@ -206,7 +237,15 @@ const selectForgotPassword = (state) => state.auth.get('forgotPassword')
 
 export const makeSelectForgotPassword = () =>
   createSelector(
-    selectUpdatePassword,
+    selectForgotPassword,
+    (substate) => substate.toJS()
+  )
+
+const selectCompetitors = (state) => state.auth.get('competitors')
+
+export const makeSelectCompetitors = () =>
+  createSelector(
+    selectCompetitors,
     (substate) => substate.toJS()
   )
 
