@@ -2,7 +2,7 @@ import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
 
-import { getDateBucketFromRange } from 'Utils'
+import { getDateBucketFromRange, normalize } from 'Utils'
 
 import {
   convertDataIntoDatasets,
@@ -275,10 +275,16 @@ function* getFlipCardsData() {
             (key) => key !== 'changeOverPrevious'
           )
 
+          const data = dayOfWeek.map((day) => metrics[metric][day]).reverse()
+
+          const normalized = data.map((v) =>
+            normalize(v, Math.min(...data), Math.max(...data), 0, 100)
+          )
+
           return {
             [metric]: {
               percentage: metrics[metric].changeOverPrevious || 0,
-              data: dayOfWeek.map((day) => metrics[metric][day]).reverse(),
+              data: normalized,
               isEmpty: dayOfWeek.every((day) =>
                 metrics[metric][day] === 0 ? true : false
               ),
