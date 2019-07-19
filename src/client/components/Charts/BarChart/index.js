@@ -9,11 +9,13 @@ const BarChart = (props) => {
     height = 290,
     width = 200,
     tickOptions = {},
+    customChartOptions = {},
     themeContext: { colors },
   } = props
 
   const chartOptions = {
     ...barDurationOptions,
+    ...customChartOptions,
     chartArea: {
       backgroundColor: colors.chartBackground,
     },

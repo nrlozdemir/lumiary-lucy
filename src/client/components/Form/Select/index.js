@@ -144,7 +144,7 @@ const Select = (props) => {
         '&:hover': {
           borderColor: 'none',
         },
-        ...(inModuleFilter ? { width: 64 + maxLenght * 7.5 } : {}),
+        ...(inModuleFilter ? { width: 76 + maxLenght * 8.9 } : {}),
         color: isFocused
           ? themes.inputActiveColor
           : hasValue

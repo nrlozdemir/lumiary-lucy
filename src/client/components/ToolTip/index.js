@@ -2,31 +2,31 @@ import React from 'react'
 import classnames from 'classnames'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import ReactTooltip from 'react-tooltip'
 
-export default ({ show = false, onClick = () => {}, children }) => {
+export default (props) => {
   return (
     <ThemeContext.Consumer>
-      {({ themeContext: { colors } }) => (
-        <div
-          className={classnames(style.toolTip, show && style.show)}
-          style={{
-            color: colors.tooltipTextColor,
-            background: colors.tooltipBackground,
-          }}
-          onClick={onClick}
-        >
-          <span
-            className={style.toolTipTick}
-            style={{
-              border: `6px solid ${colors.tooltipBackground}`,
-              borderColor: `transparent transparent ${
-                colors.tooltipBackground
-              } ${colors.tooltipBackground}`,
-            }}
+      {({ themeContext: { colors } }) => {
+        let className
+        if (!!props.largeTooltip) {
+          className = 'largeTooltip'
+        } else if (!!props.mediumTooltip) {
+          className = 'mediumTooltip'
+        } else if (!!props.smallTooltip) {
+          className = 'smallTooltip'
+        } else if (!!props.xSmallTooltip) {
+          className = 'xSmallTooltip'
+        }
+
+        return (
+          <ReactTooltip
+            {...props}
+            type={colors.themeType}
+            className={className}
           />
-          {children}
-        </div>
-      )}
+        )
+      }}
     </ThemeContext.Consumer>
   )
 }

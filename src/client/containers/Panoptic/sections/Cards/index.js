@@ -9,17 +9,19 @@ import CustomBarChart from 'Components/Charts/CustomBarChart'
 import styles from './style.scss'
 import { ucfirst, metricSuffix } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import ToolTip from 'Components/ToolTip'
 
 const getWeekDays = (locale) => {
   let days = []
   let currentDate = new Date()
-  
-  for(let i = 0; i < 7; i++)
-  {       
-    days.push(currentDate.toLocaleDateString(locale, { 
-      weekday: 'long' 
-    }))
-    currentDate.setDate(currentDate.getDate() - 1)      
+
+  for (let i = 0; i < 7; i++) {
+    days.push(
+      currentDate.toLocaleDateString(locale, {
+        weekday: 'long',
+      })
+    )
+    currentDate.setDate(currentDate.getDate() - 1)
   }
   return days
 }
@@ -41,24 +43,21 @@ function parseData(props) {
   const previousDayScore = statSelectedPrev[0].score
   const statDifference = data.percentage
 
-  let statArrowClassName, statClassName, backText
+  let statArrowClassName, statClassName, tooltipText
 
   if (data.percentage == 0) {
+    const titleLowerCase = title.charAt(0).toLowerCase() + title.slice(1)
     statArrowClassName = classnames(styles.arrow, styles.arrowRight)
     statClassName = classnames(styles.stats, styles.noChange)
-    backText = `${title} didn't changed today from yesterday`
+    tooltipText = `No change in ${titleLowerCase} in the last 24 hours`
   } else if (data.percentage > 0) {
     statArrowClassName = classnames(styles.arrow, styles.arrowUp)
     statClassName = classnames(styles.stats, styles.increase)
-    backText = `${title} increased ${
-      data.percentage
-    }% today from yesterday, from ${metricSuffix(previousDayScore)} to ${metricSuffix(todayScore)}`
+    tooltipText = `${title} increased ${data.percentage}% from yesterday`
   } else if (data.percentage < 0) {
     statArrowClassName = classnames(styles.arrow, styles.arrowDown)
     statClassName = classnames(styles.stats, styles.decrease)
-    backText = `${title} decreased ${
-      data.percentage
-    }% today from yesterday, from ${metricSuffix(previousDayScore)} to ${metricSuffix(todayScore)}`
+    tooltipText = `${title} decreased ${data.percentage}% from yesterday`
   }
 
   return {
@@ -66,7 +65,7 @@ function parseData(props) {
     statArrowClassName,
     selected,
     statDifference,
-    backText,
+    tooltipText,
     stats,
   }
 }
@@ -80,6 +79,7 @@ const Front = (props) => {
     statDifferenceValue,
     selected,
     statDifference,
+    tooltipText,
   } = parseData(props)
 
   return (
@@ -96,7 +96,24 @@ const Front = (props) => {
           )}
           <div className={statClassName}>
             <div className={styles.content}>
-              <p className={styles.headline}>{title}</p>
+              <div className={styles.headline}>
+                <span>{title}</span>
+                <React.Fragment>
+                  <i
+                    className={classnames(
+                      'icon icon-Information',
+                      styles.moduleInfo
+                    )}
+                    data-tip={tooltipText}
+                    data-for={`panoptic-flipcards-${title}`}
+                  />
+                  <ToolTip
+                    effect="solid"
+                    smallTooltip
+                    id={`panoptic-flipcards-${title}`}
+                  />
+                </React.Fragment>
+              </div>
               <div className={styles.changes}>
                 <div className={styles.circle}>
                   <i className={statArrowClassName} />
@@ -108,17 +125,13 @@ const Front = (props) => {
               data={stats}
               selected={selected}
               difference={statDifference}
+              text={tooltipText}
             />
           </div>
         </div>
       )}
     </ThemeContext.Consumer>
   )
-}
-
-const Back = (props) => {
-  const { backText } = parseData(props)
-  return <p className={styles.backText}>{backText}</p>
 }
 
 class Cards extends React.Component {
@@ -137,6 +150,7 @@ class Cards extends React.Component {
         <div className={styles.flipWrapper}>
           {wholeSegmentsWithOrder.map((item, idx) => (
             <FlipCard
+              noflip
               key={`flipCard_${idx}`}
               width={282}
               height={114}
@@ -144,17 +158,9 @@ class Cards extends React.Component {
               loading={loading}
             >
               {data && data[item] && (
-                <Front
-                  data={data[item]}
-                  title={`${ucfirst(item)}s`}
-                />
+                <Front data={data[item]} title={`${ucfirst(item)}s`} />
               )}
-              {data && data[item] && (
-                <Back
-                  data={data[item]}
-                  title={`${ucfirst(item)}s`}
-                />
-              )}
+              <div />
             </FlipCard>
           ))}
         </div>
