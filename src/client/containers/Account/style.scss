@@ -53,47 +53,45 @@
   }
 
   .link {
-    display: block;
-    width: 100%;
     color: #fff;
     font-family: $font-family-ClanOTBold;
     font-weight: bold;
     font-size: 14px;
-    text-align: center;
-    margin: 40px 0;
+    margin-bottom: 40px;
     text-decoration: none;
   }
 
   .input {
     display: block;
     margin-bottom: 24px;
+    position: relative;
 
     input {
       width: 100%;
       background-color: #21243b;
-      color: $color-dusk-two;
+      color: #ffffff;
       border: 1px solid $color-dusk-two;
 
       &:valid {
         border-color: #fff;
       }
     }
+    p {
+      position: absolute;
+      right: 10px;
+      font-family: $font-family-ClanOTNews;
+      font-size: 14px;
+      color: #ffffff;
+      line-height: 40px;
+      top: 0;
+      cursor: pointer;
+    }
   }
 
-  .button {
-    border: 1px solid $color-cool-grey;
-    color: $color-cool-grey;
-    background-color: transparent;
-    padding: 11px 24px;
-    border-radius: 8px;
-    outline: none;
-    text-decoration: none;
-    font-family: $font-family-ClanOTBold;
-    font-size: 14px;
-
-    &:hover {
-      border-color: $color-cool-blue;
-      color: #fff;
-    }
+  .submitArea {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 40px;
   }
 }
