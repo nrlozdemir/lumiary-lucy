@@ -278,6 +278,14 @@ const Selector = (props) => {
 }
 
 const Template = (props) => {
+  const navigation = props && props.routeConfig
+  if (
+    Object.values(navigation).find(
+      (r) => r.path == props.match.path && r.navbarOff
+    )
+  ) {
+    return null
+  }
   const templateSelector = Selector(props)
   const { profile = {} } = props
   const { brand = {} } = profile
