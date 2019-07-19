@@ -15,6 +15,10 @@ export const types = {
   UPDATE_PASSWORD_REQUEST: 'AUTH/UPDATE_PASSWORD_REQUEST',
   UPDATE_PASSWORD_SUCCESS: 'AUTH/UPDATE_PASSWORD_SUCCESS',
   UPDATE_PASSWORD_ERROR: 'AUTH/UPDATE_PASSWORD_ERROR',
+
+  FORGOT_PASSWORD_REQUEST: 'AUTH/FORGOT_PASSWORD_REQUEST',
+  FORGOT_PASSWORD_SUCCESS: 'AUTH/FORGOT_PASSWORD_SUCCESS',
+  FORGOT_PASSWORD_ERROR: 'AUTH/FORGOT_PASSWORD_ERROR',
 }
 
 export const actions = {
@@ -33,6 +37,10 @@ export const actions = {
       password,
       confirmPassword,
     },
+  }),
+  forgotPasswordRequest: ({ email }) => ({
+    type: types.FORGOT_PASSWORD_REQUEST,
+    email,
   }),
 }
 
@@ -78,6 +86,12 @@ export const initialState = fromJS({
     loading: null,
     password: null,
     confirmPassword: null,
+  },
+  forgotPassword: {
+    message: null,
+    success: null,
+    loading: null,
+    password: null,
   },
 })
 
@@ -125,6 +139,23 @@ const reducer = (state = initialState, action) => {
         .setIn(['passwordUpdate', 'success'], fromJS(false))
         .setIn(['passwordUpdate', 'message'], fromJS(payload.message))
 
+    case types.FORGOT_PASSWORD_REQUEST:
+      return state
+        .setIn(['forgotPassword', 'loading'], fromJS(true))
+        .setIn(['forgotPassword', 'password'], fromJS(action.password))
+
+    case types.FORGOT_PASSWORD_SUCCESS:
+      return state
+        .setIn(['forgotPassword', 'loading'], fromJS(false))
+        .setIn(['forgotPassword', 'success'], fromJS(true))
+        .setIn(['forgotPassword', 'message'], fromJS(payload.message))
+
+    case types.FORGOT_PASSWORD_ERROR:
+      return state
+        .setIn(['forgotPassword', 'loading'], fromJS(false))
+        .setIn(['forgotPassword', 'success'], fromJS(false))
+        .setIn(['forgotPassword', 'message'], fromJS(payload.message))
+
     case types.LOGIN_SSO_SUCCESS: {
       const { token, refresh, profile } = action.payload
       const expiry = parseInt(jwtDecode(token).exp + '000')
@@ -166,6 +197,14 @@ export const makeSelectAuthProfile = () =>
 const selectUpdatePassword = (state) => state.auth.get('passwordUpdate')
 
 export const makeSelectUpdatePassword = () =>
+  createSelector(
+    selectUpdatePassword,
+    (substate) => substate.toJS()
+  )
+
+const selectForgotPassword = (state) => state.auth.get('forgotPassword')
+
+export const makeSelectForgotPassword = () =>
   createSelector(
     selectUpdatePassword,
     (substate) => substate.toJS()

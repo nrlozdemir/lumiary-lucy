@@ -88,6 +88,18 @@
     }
   }
 
+  .forgotPasswordLink {
+    color: #fff;
+    font-family: $font-family-ClanOTBold;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 40px;
+    text-decoration: none;
+    .active {
+      color: #2fd7c4;
+    }
+  }
+
   .submitArea {
     display: flex;
     flex-direction: column;
