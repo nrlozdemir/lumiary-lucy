@@ -9,6 +9,7 @@ import { isDataSetEmpty } from 'Utils/datasets'
 const BarChartModule = ({
   barData,
   tickOptions,
+  customChartOptions = {},
   title,
   titleLabels,
   references,
@@ -67,6 +68,7 @@ const BarChartModule = ({
         <BarChart
           barDurationData={barData}
           tickOptions={chartTickOptions}
+          customChartOptions={customChartOptions}
           width={width}
           height={height}
         />
