@@ -25,16 +25,19 @@ export const actions = {
 }
 
 export const initialState = {
-  // messages: [],
-  // errors: [],
-  // token: false,
-  // refresh: false,
-  // refreshing: false,
-  // expiry: false,
+  token: false,
+  refresh: false,
+  refreshing: false,
+  expiry: false,
+
+  message: null,
+  error: null,
+
   requesting: false,
   successful: false,
   loginError: null,
   loggedIn: false,
+
   profile: {
     brand: {
       name: 'Bleacher Report',
@@ -65,12 +68,29 @@ const reducer = (state = initialState, action) => {
   switch (action.type) {
     case types.LOGIN_REQUEST:
       return {
+        ...state,
         requesting: true,
-        successful: false,
+        loggedIn: false,
         loginError: null,
+        message: null,
       }
 
     case types.LOGIN_SUCCESS:
+      return {
+        ...state,
+        requesting: false,
+        loggedIn: true,
+        message: payload.message,
+      }
+
+    case types.LOGIN_ERROR:
+      return {
+        ...state,
+        requesting: false,
+        loggedIn: false,
+        message: payload.message,
+      }
+
     case types.LOGIN_SSO_SUCCESS:
       const { token, refresh, profile } = action.payload
       const expiry = parseInt(jwtDecode(token).exp + '000')

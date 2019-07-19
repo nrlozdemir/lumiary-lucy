@@ -1,9 +1,96 @@
-import React, { Component } from 'react'
+import React from 'react'
+import { connect } from 'react-redux'
+import { compose, bindActionCreators } from 'redux'
+import { actions } from 'Reducers/auth'
+import { Field, reduxForm } from 'redux-form'
 
-class Login extends Component {
-  render() {
-    return <div>Login</div>
+import Input from 'Components/Form/Input'
+import AccountCard from 'Components/AccountCard'
+
+import style from '../style.scss'
+
+import { withTheme } from 'ThemeContext/withTheme'
+
+const LoginForm = ({
+  themeContext: { colors },
+  loginRequest,
+  handleSubmit,
+  loggedIn,
+  message,
+}) => {
+  return (
+    <AccountCard
+      status={
+        message
+          ? {
+              message,
+              state: loggedIn ? 'success' : 'error',
+            }
+          : null
+      }
+    >
+      <form
+        className={style.form}
+        onSubmit={handleSubmit((values) => loginRequest(values))}
+      >
+        <div className={style.info}>
+          <div className={style.image}>
+            <img src="https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png" />
+          </div>
+          <h1>Sign into your account</h1>
+        </div>
+
+        <div className={style.input}>
+          <Field
+            component={Input}
+            id="email"
+            name="email"
+            placeholder="Enter email..."
+            required={true}
+          />
+        </div>
+
+        <div className={style.input}>
+          <Field
+            component={Input}
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter password..."
+            required={true}
+          />
+        </div>
+        <div className="text-center">
+          <a className={style.link} href="/account/forgot-password">
+            Forgot Password?
+          </a>
+
+          <button className={style.button}>Sign In</button>
+        </div>
+      </form>
+    </AccountCard>
+  )
+}
+
+const mapStateToProps = (state) => {
+  const { loggedIn, message } = state.auth
+  return {
+    loggedIn,
+    message,
   }
 }
 
-export default Login
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
+
+export default compose(
+  reduxForm({
+    form: 'LoginForm',
+  }),
+  withConnect,
+  withTheme
+)(LoginForm)

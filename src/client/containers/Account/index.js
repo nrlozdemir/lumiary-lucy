@@ -40,34 +40,21 @@ class Account extends Component {
       'oauth',
     ]
     return (
-      <div className="grid-container col-12">
-        <ul className={style.list}>
-          {list.map((item, index) => (
-            <li
-              key={index}
-              onClick={() => this.props.history.push(`/account/${item}`)}
-              style={{ color: colors.textColor }}
-            >
-              {item}
-            </li>
-          ))}
-        </ul>
-        <Switch>
-          <Route path="/account/login" exact component={Login} />
-          <Route
-            path="/account/change-password"
-            exact
-            component={ChangePassword}
-          />
-          <Route path="/account/competitors" exact component={Competitors} />
-          <Route
-            path="/account/forgot-password"
-            exact
-            component={ForgotPassword}
-          />
-          <Route path="/account/oauth" exact component={Oauth} />
-        </Switch>
-      </div>
+      <Switch>
+        <Route path="/account/login" exact component={Login} />
+        <Route
+          path="/account/change-password"
+          exact
+          component={ChangePassword}
+        />
+        <Route path="/account/competitors" exact component={Competitors} />
+        <Route
+          path="/account/forgot-password"
+          exact
+          component={ForgotPassword}
+        />
+        <Route path="/account/oauth" exact component={Oauth} />
+      </Switch>
     )
   }
 }

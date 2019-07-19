@@ -28,11 +28,12 @@ $colors: (
   dark-six: #21243b,
   dark-grey-blue: #373f5b,
   cool-grey: #acb0be,
-  cool-blue: #2FD7C4,
+  cool-blue: #2fd7c4,
   lighter-purple: #8562f3,
   darker-purple: #6644cf,
-  coral-pink: #5292E5,
+  coral-pink: #5292e5,
   dark-blue-grey: #202952,
+  red: #f36262,
 );
 $color-black: #000;
 $color-white: #fff;
@@ -44,11 +45,12 @@ $color-dark-five: #21243b;
 $color-dark-six: #21243b;
 $color-dark-grey-blue: #373f5b;
 $color-cool-grey: #acb0be;
-$color-cool-blue: #2FD7C4;
+$color-cool-blue: #2fd7c4;
 $color-lighter-purple: #8562f3;
 $color-darker-purple: #6644cf;
-$color-coral-pink: #5292E5;
+$color-coral-pink: #5292e5;
 $color-dark-blue-grey: #202952;
+$color-red: #f36262;
 
 //these values comes from webpack
 $xsmall-breakpoint: 320;
@@ -115,13 +117,13 @@ $max-grid-size: 1200px;
 
 // global values
 $dark_themeType: dark;
-$dark_bodyBackground: #21243B;
+$dark_bodyBackground: #21243b;
 $dark_moduleBackground: #373f5b;
 $dark_moduleBackgroundHover: #545b79;
 $dark_moduleShadow: rgba(0, 0, 0, 0.5);
 $dark_moduleBorder: #545b79;
 $dark_duskBackground: #545b79;
-$dark_searchColor: #21243B;
+$dark_searchColor: #21243b;
 $dark_placeholderColor: #ffffff;
 $dark_textColor: #ffffff;
 $dark_searchOptionsColor: #545b79;
@@ -131,7 +133,7 @@ $dark_moduleBackgroundOpacity: rgba(55, 63, 91, 0.7);
 // global values
 
 // selectbox
-$dark_selectBackground: #21243B;
+$dark_selectBackground: #21243b;
 $dark_selectBorder: #545b79;
 // selectbox
 
@@ -200,13 +202,13 @@ $dark_customSelectColor: #ffffff;
 // custom selectbox values
 
 // input values
-$dark_inputControlBackground: #21243B;
+$dark_inputControlBackground: #21243b;
 $dark_inputControlBorder: #acb0be;
 $dark_inputControlSelectedBorder: #545b79;
-$dark_inputColor: #545B79;
+$dark_inputColor: #545b79;
 $dark_inputActiveColor: #ffffff;
-$dark_inputOptionBackground: #545B79;
-$dark_inputOptionFocusBackground: #21243B;
+$dark_inputOptionBackground: #545b79;
+$dark_inputOptionFocusBackground: #21243b;
 $dark_inputOptionSelectedBackground: #ffffff;
 // input values
 
