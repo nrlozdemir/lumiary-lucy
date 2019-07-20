@@ -76,7 +76,6 @@ const Front = (props) => {
     stats,
     statClassName,
     statArrowClassName,
-    statDifferenceValue,
     selected,
     statDifference,
     tooltipText,
@@ -118,7 +117,12 @@ const Front = (props) => {
                 <div className={styles.circle}>
                   <i className={statArrowClassName} />
                 </div>
-                <p className={styles.label}>{metricSuffix(statDifference)}%</p>
+                <p className={styles.label}>
+                  {`${statDifference < 0 ? '-' : ''}${metricSuffix(
+                    Math.abs(statDifference)
+                  )}`}
+                  %
+                </p>
               </div>
             </div>
             <CustomBarChart
@@ -145,7 +149,7 @@ class Cards extends React.Component {
     } = this.props
 
     const wholeSegmentsWithOrder = ['view', 'like', 'comment', 'share']
-    
+
     return (
       <div className="grid-container col-12 mt-72 mb-72">
         <div className={styles.flipWrapper}>
