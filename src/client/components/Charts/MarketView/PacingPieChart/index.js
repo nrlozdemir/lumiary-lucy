@@ -19,7 +19,13 @@ const PacingPieChart = ({ data = {} }) => {
                 callbacks: {
                   title: () => '',
                   label: function(tooltipItem, data) {
-                    return data && data.datasets && data.datasets[0] && data.datasets[0].data[tooltipItem['index']] || ''
+                    return (
+                      (data &&
+                        data.datasets &&
+                        data.datasets[0] &&
+                        data.datasets[0].data[tooltipItem['index']]) ||
+                      ''
+                    )
                   },
                 },
               }),
