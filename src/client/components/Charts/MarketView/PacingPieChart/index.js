@@ -15,6 +15,14 @@ const PacingPieChart = ({ data = {} }) => {
             height={240}
             width={240}
             options={{
+              tooltips: customChartToolTip(colors, {
+                callbacks: {
+                  title: () => '',
+                  label: function(tooltipItem, data) {
+                    return data && data.datasets && data.datasets[0] && data.datasets[0].data[tooltipItem['index']] || ''
+                  },
+                },
+              }),
               responsive: false,
               legend: {
                 display: false,
