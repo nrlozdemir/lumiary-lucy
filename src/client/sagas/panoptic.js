@@ -180,7 +180,7 @@ function* getPacingCardData({ data }) {
       getDataFromApi,
       {
         ...options,
-        proportionOf: 'format',
+        proportionOf: 'duration',
         limit: 4,
       },
       '/report'
