@@ -265,6 +265,7 @@ const panopticReducer = (state = initialState, action) => {
 
     case types.GET_COMPARE_SHARES_DATA_ERROR:
       return state
+        .setIn(['compareSharesData', 'data'], fromJS(undefined))
         .setIn(['compareSharesData', 'error'], fromJS(action.error))
         .setIn(['compareSharesData', 'loading'], fromJS(false))
 

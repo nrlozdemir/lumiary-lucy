@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, makeSelectLibrary } from 'Reducers/library'
 import VideoCardList from 'Components/VideoCardList'
+import { ThemeContext } from 'ThemeContext/themeContext'
 import style from '../../style.scss'
 
 class VideoSection extends React.Component {
@@ -13,7 +14,7 @@ class VideoSection extends React.Component {
       library: { data },
       getVideos,
     } = this.props
-    
+
     if (!!data && !!data.videos && !data.videos.length) {
       getVideos()
     }
@@ -22,13 +23,25 @@ class VideoSection extends React.Component {
   render() {
     const {
       profile: { brand },
-      library: { data },
+      library: { data, loading },
     } = this.props
 
     return (
-      <div className={style.videoContainer}>
-        <VideoCardList data={data.videos} brandId={brand.uuid} />
-      </div>
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <div className={style.videoContainer}>
+            <VideoCardList data={data.videos} brandId={brand.uuid} />
+            {!loading && !data.videos.length && (
+              <div
+                className={style.videoContainer_noContent}
+                style={{ color: colors.textColor }}
+              >
+                No Data Available
+              </div>
+            )}
+          </div>
+        )}
+      </ThemeContext.Consumer>
     )
   }
 }

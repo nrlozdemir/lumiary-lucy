@@ -75,15 +75,16 @@ export const actions = {
     type: types.LOAD_REPORTS_SUCCESS,
     payload,
   }),
-  loadReportsError: (error) => ({ type: types.LOAD_MORE_REPORTS, error }),
+  loadReportsError: (error) => ({ type: types.LOAD_REPORTS_ERROR, error }),
 
   // LOAD MORE REPORTS
-  loadMoreReports: () => ({ type: types.LOAD_MORE_REPORTS }),
+  //loadMoreReports: () => ({ type: types.LOAD_MORE_REPORTS }),
+  loadMoreReports: () => ({ type: types.LOAD_REPORTS }),
   loadMoreReportsSuccess: (payload) => ({
     type: types.LOAD_MORE_REPORTS_SUCCESS,
     payload,
   }),
-  loadMoreReportsError: (error) => ({ type: types.LOAD_MORE_REPORTS, error }),
+  loadMoreReportsError: (error) => ({ type: types.LOAD_MORE_REPORTS_ERROR, error }),
 
   // DELETE A REPORT
   loadDeleteReport: (id, isGetAllReports) => ({
@@ -328,6 +329,7 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.BRAND_INSIGHT_REQUEST_ERROR:
       return state
+        .setIn(['brandInsightValues', 'data'], fromJS(null))
         .setIn(['brandInsightValues', 'error'], fromJS(action.error))
         .setIn(['brandInsightValues', 'loading'], fromJS(false))
 
@@ -344,6 +346,7 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.COMPARE_BRAND_REQUEST_ERROR:
       return state
+        .setIn(['comparebrandValues', 'data'], fromJS(null))
         .setIn(['comparebrandValues', 'error'], fromJS(action.error))
         .setIn(['comparebrandValues', 'loading'], fromJS(false))
     case types.CREATED_REPORT_CONTROL:
@@ -364,6 +367,7 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.PREDEFINED_REPORT_REQUEST_ERROR:
       return state
+        .setIn(['predefinedReportValues', 'data'], fromJS(null))
         .setIn(['predefinedReportValues', 'error'], fromJS(action.error))
         .setIn(['predefinedReportValues', 'loading'], fromJS(false))
 
@@ -409,6 +413,7 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.LOAD_VIDEO_COMPARISON_DATA_ERROR:
       return state
+        .setIn(['videoComparisonData', 'data'], fromJS(null))
         .setIn(['videoComparisonData', 'error'], fromJS(action.error))
         .setIn(['videoComparisonData', 'loading'], fromJS(false))
     /** END video comparison data */
@@ -424,6 +429,7 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.GET_CONTENT_VITALITY_SCORE_DATA_ERROR:
       return state
+        .setIn(['contentVitalityScoreData', 'data'], fromJS([]))
         .setIn(['contentVitalityScoreData', 'error'], fromJS(action.error))
         .setIn(['contentVitalityScoreData', 'loading'], fromJS(false))
     /** END content vitality score data */
@@ -439,6 +445,7 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.LOAD_PERFORMANCE_COMPARISON_DATA_ERROR:
       return state
+        .setIn(['performanceComparisonData', 'data'], fromJS(null))
         .setIn(['performanceComparisonData', 'error'], fromJS(action.error))
         .setIn(['performanceComparisonData', 'loading'], fromJS(false))
     /** END load performance comparison data */
@@ -454,6 +461,7 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.LOAD_COLOR_COMPARISON_DATA_ERROR:
       return state
+        .setIn(['colorComparisonData', 'data'], fromJS(undefined))
         .setIn(['colorComparisonData', 'error'], fromJS(action.error))
         .setIn(['colorComparisonData', 'loading'], fromJS(false))
     /** END load color comparison data */
