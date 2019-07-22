@@ -93,8 +93,6 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
         ]
       }, [])
 
-      console.log(highestBuckets, highestBucketsOrdered, vals)
-
       yield put(actions.getDoughnutChartSuccess(vals))
     } else {
       throw new Error('Library/Detail Error getDoughnutChart')
