@@ -25,7 +25,7 @@ function* getVideoReleasesData({ data }) {
     const options = {
       metric,
       platform,
-      property: 'format',
+      property: 'duration',
       daterange: dateRange,
       dateBucket: 'dayOfWeek'
     }
