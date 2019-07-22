@@ -75,6 +75,20 @@
     height: 460px;
   }
 
+  &_empty {
+    @extend .radialChartsContainer_loading;
+
+    p {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-family: $font-family-ClanOTBold;
+      font-size: 24px;
+      margin: auto;
+    }
+  }
+
   .doughnutTabs {
     border: none;
     margin-block-start: 0;

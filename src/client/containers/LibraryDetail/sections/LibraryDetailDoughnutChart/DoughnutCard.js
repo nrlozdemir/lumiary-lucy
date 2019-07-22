@@ -21,7 +21,7 @@ class DoughnutCard extends React.Component {
       chartData,
       videoId,
     } = this.props
-
+    
     let backgroundColor = chartData && chartData.datasets
       ? chartData.datasets[0].backgroundColor
       : []

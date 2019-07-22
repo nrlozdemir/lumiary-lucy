@@ -804,28 +804,50 @@ const getCVScoreChartAttributes = (data) => {
     percentage: {bool}
     *
     hoverBg: {bool}
-    * 
+    *
+    borderColor: {string}
+    *
+    backgroundColors: {array}
+    *
+    max: {object}
+    *
   }
  */
 const convertPropertiesIntoDatasets = (data, options = {}) => {
-  const { type, property, metric, percentage, hoverBg = true } = options
+  const {
+    max,
+    type,
+    property,
+    metric,
+    percentage,
+    hoverBg = true,
+    borderColor,
+    backgroundColors,
+  } = options
+
+  const dataType = type === 'library' ? 'myLibrary' : 'market'
 
   const bucket =
-    !!data && !!data[type] && !!data[type][property]
-      ? data[type][property]
+    !!data && !!data[dataType] && !!data[dataType][property]
+      ? data[dataType][property]
       : null
 
   if (!type || !property || !data || !bucket || !metric) {
+    // console.log('type', type)
+    // console.log('property', property)
+    // console.log('data', data)
+    // console.log('bucket', bucket)
+    // console.log('metric', metric)
     return {}
   }
 
   return bucket.reduce(
     (data, bucketItem, idx) => {
       const { datasets, labels } = data
-      const { bucket } = bucketItem
+      const { bucket, library_proportion } = bucketItem
 
       const dataVal = percentage
-        ? Math.round(parseFloat(bucketItem.library_proportion) * 100)
+        ? Math.round(parseFloat(library_proportion) * 100)
         : parseInt(bucketItem[metric]) || 0
 
       const color = chartColors[idx]
@@ -834,16 +856,18 @@ const convertPropertiesIntoDatasets = (data, options = {}) => {
         labels: [...labels, bucket],
         datasets: [
           {
-            borderColor: color,
+            borderColor: borderColor ? borderColor : color,
             label: expectedNames[options.property],
             data: [
               ...(!!datasets[0] && !!datasets[0].data ? datasets[0].data : []),
               dataVal,
             ],
-            backgroundColor: [
-              ...(datasets[0] ? datasets[0].backgroundColor : []),
-              color,
-            ],
+            backgroundColor: backgroundColors
+              ? backgroundColors
+              : [
+                  ...(datasets[0] ? datasets[0].backgroundColor : []),
+                  max ? (max === bucket ? '#2FD7C4' : '#FFFFFF') : color,
+                ],
             hoverBackgroundColor: hoverBg
               ? [
                   ...(datasets[0] ? datasets[0].hoverBackgroundColor : []),

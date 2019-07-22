@@ -10,6 +10,7 @@ import {
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import { getMaximumValueIndexFromArray } from 'Utils'
+import { expectedNames } from 'Utils/globals'
 
 import {
   convertIntoLibAndIndustryDoughnut,
@@ -18,96 +19,75 @@ import {
   parseAverage,
   convertNumberArrIntoPercentages,
   percentageManipulation,
+  convertPropertiesIntoDatasets,
 } from 'Utils/datasets'
 
 import { selectAuthProfile } from 'Reducers/auth'
 
 function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
   try {
-    const expectedValues = [
-      { key: 'frameRate', title: 'Frame Rate' },
-      { key: 'pacing', title: 'Pacing' },
-      { key: 'duration', title: 'Duration' },
-      { key: 'aspectRatio', title: 'Aspect Ratio' },
-    ]
     const { brand } = yield select(selectAuthProfile)
 
-    const parameters = {
-      brands: [brand.uuid],
-      dateRange: '3months',
-      metric: 'views',
-      platform: 'all',
-      dateBucket: 'none',
-      display: 'percentage',
-      dateBucket: 'none',
-    }
-    const response = yield call(
-      getDataFromApi,
-      {
-        ...parameters,
-        property: expectedValues.map(({ key }) => key),
-      },
-      '/report'
-    )
+    const metric = 'views'
 
-    const payloads = Object.entries(response.data[brand.name]).map(
-      ([key, value]) => ({
-        platform: 'All',
-        data: {
-          [brand.name]: {
-            [key]: value,
-          },
-        },
-      })
-    )
+    const competitors =
+      !!brand.competitors &&
+      !!brand.competitors.length &&
+      brand.competitors.map((c) => c.uuid)
 
-    const createCustomBackground = (data) => {
-      return Object.values(data).map((item, idx) => {
-        if (Object.values(data).includes(100)) {
-          return '#2FD7C4'
-        }
-        return idx === getMaximumValueIndexFromArray(data)
-          ? '#2FD7C4'
-          : themeColors.textColor
-      })
-    }
-
-    const val = expectedValues.map((payload, idx) => {
-      const chartValues = convertDataIntoDatasets(
-        payloads[idx],
-        {
-          ...parameters,
-          property: [payload.key],
-        },
-        {
-          singleDataset: true,
-          backgroundColor: createCustomBackground(
-            payloads[idx].data[Object.keys(payloads[idx].data)[0]][payload.key]
-          ),
-        }
-      )
-
-      const entries = payloads[idx].data[brand.name][payload.key]
-      const [[maxDataKey, maxDataValue]] = Object.entries(entries).sort(
-        ([, v1], [, v2]) => (v1 > v2 ? -1 : 1)
-      )
-      const maxDataIndex = Object.keys(entries).findIndex(
-        (key) => key === maxDataKey
-      )
-
-      return {
-        ...payload,
-        doughnutChartValues: chartValues,
-        max: {
-          label: chartValues.labels[maxDataIndex],
-          percentage: maxDataValue,
-        },
-        data: payloads[idx],
-      }
+    const url = buildApiUrl(`/brand/${brand.uuid}/properties`, {
+      metric,
+      top: 20,
+      competitors,
+      daterange: '3months',
     })
 
-    yield put(actions.getDoughnutChartSuccess(percentageManipulation(val)))
+    const response = yield call(getDataFromApi, undefined, url, 'GET')
+
+    if (!!response && !!response.myLibrary && !!response.propertiesRanked) {
+      const highestBuckets = _.slice(
+        _.orderBy(
+          response.propertiesRanked,
+          (item) => (!!item[metric] ? item[metric] : 0),
+          ['desc']
+        ),
+        0,
+        4
+      )
+
+      const vals = highestBuckets.reduce((acc, bucketItem, idx) => {
+        const { bucket, property, library_proportion } = bucketItem
+
+        const max = {
+          label: bucket,
+          percentage: Math.round(parseFloat(library_proportion) * 100),
+        }
+
+        return [
+          ...acc,
+          {
+            max,
+            key: property,
+            title: expectedNames[property],
+            doughnutChartValues: convertPropertiesIntoDatasets(response, {
+              metric,
+              property,
+              type: 'library',
+              hoverBg: false,
+              percentage: true,
+              borderColor: '#ACB0BE',
+              max: bucket,
+            }),
+          },
+        ]
+      }, [])
+
+      yield put(actions.getDoughnutChartSuccess(vals))
+    } else {
+      throw new Error('Library/Detail Error getDoughnutChart')
+    }
   } catch (error) {
+    console.log(error)
     yield put(actions.getDoughnutChartFailure({ error }))
   }
 }
