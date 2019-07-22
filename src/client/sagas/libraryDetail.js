@@ -44,10 +44,21 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
 
     const response = yield call(getDataFromApi, undefined, url, 'GET')
 
-    if (!!response && !!response.myLibrary && !!response.propertiesRanked) {
-      const highestBuckets = _.slice(
+    if (!!response && !!response.myLibrary) {
+      const highestBuckets = Object.keys(response.myLibrary).reduce(
+        (acc, key) => {
+          const dataVals = response.myLibrary[key]
+          const max = dataVals.reduce((prev, current) =>
+            parseInt(prev[metric]) > parseInt(current[metric]) ? prev : current
+          )
+          return [...acc, { property: key, ...max }]
+        },
+        []
+      )
+
+      const highestBucketsOrdered = _.slice(
         _.orderBy(
-          response.propertiesRanked,
+          highestBuckets,
           (item) => (!!item[metric] ? item[metric] : 0),
           ['desc']
         ),
@@ -55,7 +66,7 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
         4
       )
 
-      const vals = highestBuckets.reduce((acc, bucketItem, idx) => {
+      const vals = highestBucketsOrdered.reduce((acc, bucketItem, idx) => {
         const { bucket, property, library_proportion } = bucketItem
 
         const max = {
