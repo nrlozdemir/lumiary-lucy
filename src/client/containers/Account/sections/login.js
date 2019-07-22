@@ -66,7 +66,7 @@ class LoginForm extends Component {
       themeContext: { colors },
       loginRequest,
       handleSubmit,
-      auth: { loggedIn, message },
+      auth: { loggedIn, message, loading },
       dirty,
       submitting,
       pristine,
@@ -83,6 +83,7 @@ class LoginForm extends Component {
               }
             : validationError
         }
+        loading={loading}
       >
         <form
           className={style.form}

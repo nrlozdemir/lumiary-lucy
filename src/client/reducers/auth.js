@@ -23,6 +23,10 @@ export const types = {
   COMPETITORS_REQUEST: 'AUTH/COMPETITORS_REQUEST',
   COMPETITORS_SUCCESS: 'AUTH/COMPETITORS_SUCCESS',
   COMPETITORS_ERROR: 'AUTH/COMPETITORS_ERROR',
+
+  CONNECT_OAUTH_REQUEST: 'AUTH/CONNECT_OAUTH_REQUEST',
+  CONNECT_OAUTH_SUCCESS: 'AUTH/CONNECT_OAUTH_SUCCESS',
+  CONNECT_OAUTH_ERROR: 'AUTH/CONNECT_OAUTH_ERROR',
 }
 
 export const actions = {
@@ -48,6 +52,10 @@ export const actions = {
   }),
   getCompetitors: () => ({
     type: types.COMPETITORS_REQUEST,
+  }),
+  connectOAuthRequest: (payload) => ({
+    type: types.CONNECT_OAUTH_REQUEST,
+    payload,
   }),
 }
 
@@ -105,6 +113,29 @@ export const initialState = fromJS({
     message: null,
     success: null,
     loading: null,
+  },
+  OAuth: {
+    connects: {
+      facebook: {
+        name: 'Facebook',
+        connected: false,
+      },
+      instagram: {
+        name: 'Instagram',
+        connected: false,
+      },
+      twitter: {
+        name: 'Twitter',
+        connected: false,
+      },
+      youtube: {
+        name: 'Youtube',
+        connected: false,
+      },
+    },
+    message: null,
+    loading: null,
+    success: null,
   },
 })
 
@@ -187,6 +218,25 @@ const reducer = (state = initialState, action) => {
         .setIn(['competitors', 'success'], fromJS(false))
         .setIn(['competitors', 'message'], fromJS(payload.message))
 
+    case types.CONNECT_OAUTH_REQUEST:
+      return state.setIn(['OAuth', 'loading'], fromJS(true))
+
+    case types.CONNECT_OAUTH_SUCCESS:
+      return state
+        .setIn(['OAuth', 'loading'], fromJS(false))
+        .setIn(['OAuth', 'success'], fromJS(true))
+        .setIn(['OAuth', 'message'], fromJS(payload.message))
+        .setIn(
+          ['OAuth', 'connects', payload.response.name, 'connected'],
+          fromJS(payload.response)
+        )
+
+    case types.CONNECT_OAUTH_ERROR:
+      return state
+        .setIn(['OAuth', 'loading'], fromJS(false))
+        .setIn(['OAuth', 'success'], fromJS(false))
+        .setIn(['OAuth', 'message'], fromJS(payload.message))
+
     case types.LOGIN_SSO_SUCCESS: {
       const { token, refresh, profile } = action.payload
       const expiry = parseInt(jwtDecode(token).exp + '000')
@@ -246,6 +296,14 @@ const selectCompetitors = (state) => state.auth.get('competitors')
 export const makeSelectCompetitors = () =>
   createSelector(
     selectCompetitors,
+    (substate) => substate.toJS()
+  )
+
+const selectOAuth = (state) => state.auth.get('OAuth')
+
+export const makeSelectOAuth = () =>
+  createSelector(
+    selectOAuth,
     (substate) => substate.toJS()
   )
 
