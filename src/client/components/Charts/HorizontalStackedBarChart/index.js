@@ -1,6 +1,7 @@
 import React from 'react'
 import { HorizontalBar } from 'react-chartjs-2'
 import { customChartToolTip } from 'Utils'
+import { percentageManipulation } from 'Utils/datasets'
 import { withTheme } from 'ThemeContext/withTheme'
 
 const plugins = [
@@ -64,7 +65,7 @@ const HorizontalStackedBarChart = (props) => {
                   data.datasets[datasetIndex].data[tooltipItem['index']]) ||
                 ''
               const name = data && values && values[datasetIndex].title || ''
-              return `${count || 0}% ${!!name && `| ${name}`}`
+              return `${percentageManipulation(count) || 0}% ${!!name && `| ${name}`}`
             },
           },
         }),
