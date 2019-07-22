@@ -790,7 +790,67 @@ const getCVScoreChartAttributes = (data) => {
   }
 }
 
+/*
+  Converts responses from `/brand/{brandUuid}/properties` into a dataset
+  @param data {obj} straight response from the request
+  @param options - {
+    type: 'market' || 'library'
+    property: 'aspectRatio' || duration' || 'format' || 'frameRate' || 'pacing' || 'resolution',
+    metric: 'shares' || 'views' || 'likes' || 'comments'
+  }
+ */
+const convertPropertiesIntoDatasets = (data, options = {}) => {
+  const { type, property, metric } = options
+
+  const bucket =
+    !!data && !!data[type] && !!data[type][property]
+      ? data[type][property]
+      : null
+
+  if (!type || !property || !data || !bucket || !metric) {
+    return {}
+  }
+
+  return bucket.reduce(
+    (data, bucketItem, idx) => {
+      const { datasets, labels } = data
+      const { bucket } = bucketItem
+
+      const metricVal = bucketItem[metric] || 0
+
+      const color = chartColors[idx]
+
+      return {
+        labels: [...labels, bucket],
+        datasets: [
+          {
+            borderColor: color,
+            label: expectedNames[options.property],
+            data: [
+              ...(!!datasets[0] && !!datasets[0].data ? datasets[0].data : []),
+              metricVal,
+            ],
+            backgroundColor: [
+              ...(datasets[0] ? datasets[0].backgroundColor : []),
+              color,
+            ],
+            hoverBackgroundColor: [
+              ...(datasets[0] ? datasets[0].hoverBackgroundColor : []),
+              color,
+            ],
+          },
+        ],
+      }
+    },
+    {
+      labels: [],
+      datasets: [],
+    }
+  )
+}
+
 export {
+  convertPropertiesIntoDatasets,
   getCVScoreChartAttributes,
   convertDataIntoDatasets,
   chartCombineDataset,
