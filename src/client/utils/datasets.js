@@ -372,7 +372,9 @@ const isDataSetEmpty = (data) => {
   if (!!data && !!data.datasets && !!data.datasets.length) {
     return data.datasets.every((dataset) =>
       !!dataset.data && !!dataset.data.length
-        ? dataset.data.every((val) => val === 0 || val === undefined)
+        ? dataset.data.every(
+            (val) => val === 0 || val === undefined || val === null
+          )
         : true
     )
   } else {
