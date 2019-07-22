@@ -45,22 +45,9 @@ class TotalCompetitorCard extends React.Component {
         callbacks: {
           title: () => '',
           label: function(tooltipItem, data) {
-            const count =
-              (data &&
-                data.datasets &&
-                data.datasets[tooltipItem['datasetIndex']] &&
-                data.datasets[tooltipItem['datasetIndex']].data[
-                  tooltipItem['index']
-                ]) ||
-              ''
-            const name =
-              (data &&
-                data.datasets &&
-                data.datasets[tooltipItem['datasetIndex']] &&
-                data.datasets[tooltipItem['datasetIndex']].label) ||
-              ''
-            return `${count ? metricSuffix(count) : 0} Views ${!!name &&
-              `| ${name}`}`
+            const count = data && data.datasets && data.datasets[tooltipItem['datasetIndex']] && data.datasets[tooltipItem['datasetIndex']].data[tooltipItem['index']] || ''
+            const name = data && data.datasets && data.datasets[tooltipItem['datasetIndex']] && data.datasets[tooltipItem['datasetIndex']].label || ''
+            return `${count ? metricSuffix(count) : 0} Views ${!!name && `| ${name}`}`
           },
         },
       }),
