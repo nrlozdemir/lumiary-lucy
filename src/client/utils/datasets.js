@@ -757,6 +757,8 @@ const percentageManipulation = (bucket) => {
         })
       }
     })
+  } else if (isNumber(bucket) && isFinite(bucket)) {
+    return percentageBeautifier(bucket)
   }
 
   return bucket
