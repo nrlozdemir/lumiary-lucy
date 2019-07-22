@@ -3,28 +3,17 @@ import style from './style.scss'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import { metricSuffix } from 'Utils'
 const DoughnutCard = ({ data, index, colors, isEmpty }) => {
-  let customData = {
-    ...data,
-    datasets: [
-      {
-        ...data.datasets[0],
-        data: data.datasets[0].data.map((item) =>
-          !!item.proportionOfLibrary ? Math.round(item.proportionOfLibrary) : 0
-        ),
-      },
-    ],
-  }
 
-  const dataset = customData.datasets[0]
+  const dataset = data.datasets[0]
 
   const topItemIndex = dataset.data.indexOf(Math.max(...dataset.data))
 
   const topProportion = dataset.data[topItemIndex] || ''
 
   const topItemLabel =
-    (!!customData.labels && customData.labels[topItemIndex]) || ''
+    (!!data.labels && data.labels[topItemIndex]) || ''
 
-  customData.datasets[0].backgroundColor = customData.datasets[0].backgroundColor.map(
+  data.datasets[0].backgroundColor = data.datasets[0].backgroundColor.map(
     (item, idx) => {
       return idx === topItemIndex ? '#2FD7C4' : colors.textColor
     }
@@ -84,7 +73,7 @@ const DoughnutCard = ({ data, index, colors, isEmpty }) => {
                     },
                   },
                 }}
-                data={customData}
+                data={data}
               />
               <p>
                 <span className={style.textBold}>{topProportion}% </span>

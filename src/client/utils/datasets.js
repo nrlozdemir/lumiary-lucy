@@ -794,13 +794,21 @@ const getCVScoreChartAttributes = (data) => {
   Converts responses from `/brand/{brandUuid}/properties` into a dataset
   @param data {obj} straight response from the request
   @param options - {
-    type: 'market' || 'library'
-    property: 'aspectRatio' || duration' || 'format' || 'frameRate' || 'pacing' || 'resolution',
-    metric: 'shares' || 'views' || 'likes' || 'comments'
+    *
+    type: {string} 'market' || 'library'
+    *
+    property: {string} 'aspectRatio' || duration' || 'format' || 'frameRate' || 'pacing' || 'resolution',
+    *
+    metric: {string} 'shares' || 'views' || 'likes' || 'comments'
+    *
+    percentage: {bool}
+    *
+    hoverBg: {bool}
+    * 
   }
  */
 const convertPropertiesIntoDatasets = (data, options = {}) => {
-  const { type, property, metric } = options
+  const { type, property, metric, percentage, hoverBg = true } = options
 
   const bucket =
     !!data && !!data[type] && !!data[type][property]
@@ -816,7 +824,9 @@ const convertPropertiesIntoDatasets = (data, options = {}) => {
       const { datasets, labels } = data
       const { bucket } = bucketItem
 
-      const metricVal = bucketItem[metric] || 0
+      const dataVal = percentage
+        ? Math.round(parseFloat(bucketItem.library_proportion) * 100)
+        : parseInt(bucketItem[metric]) || 0
 
       const color = chartColors[idx]
 
@@ -828,16 +838,18 @@ const convertPropertiesIntoDatasets = (data, options = {}) => {
             label: expectedNames[options.property],
             data: [
               ...(!!datasets[0] && !!datasets[0].data ? datasets[0].data : []),
-              metricVal,
+              dataVal,
             ],
             backgroundColor: [
               ...(datasets[0] ? datasets[0].backgroundColor : []),
               color,
             ],
-            hoverBackgroundColor: [
-              ...(datasets[0] ? datasets[0].hoverBackgroundColor : []),
-              color,
-            ],
+            hoverBackgroundColor: hoverBg
+              ? [
+                  ...(datasets[0] ? datasets[0].hoverBackgroundColor : []),
+                  color,
+                ]
+              : [],
           },
         ],
       }

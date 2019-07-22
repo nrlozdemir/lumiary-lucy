@@ -172,6 +172,7 @@ function* getPlatformTopVideosMarketview({
 function* getSimilarProperties({ data: { dateRange, container } }) {
   try {
     const { brand } = yield select(selectAuthProfile)
+    const metric = 'shares'
 
     const competitors =
       !!brand.competitors &&
@@ -179,57 +180,59 @@ function* getSimilarProperties({ data: { dateRange, container } }) {
       brand.competitors.map((c) => c.uuid)
 
     const url = buildApiUrl(`/brand/${brand.uuid}/properties`, {
+      metric,
+      top: 20,
       competitors,
-      metric: 'shares',
       daterange: dateRange,
     })
 
-    const payload = yield call(getDataFromApi, undefined, url, 'GET')
+    const response = yield call(getDataFromApi, undefined, url, 'GET')
 
-    let parsedNewPayload, highestBuckets
-    if (!!payload && !!payload.propertyBucketsRanked) {
-      highestBuckets = _.slice(
+    if (!!response && !!response.market && !!response.propertiesRanked) {
+      const highestBuckets = _.slice(
         _.orderBy(
-          payload.propertyBucketsRanked,
-          (item) => {
-            return item.numberOfMetric
-          },
+          response.propertiesRanked,
+          (item) => (!!item[metric] ? item[metric] : 0),
           ['desc']
         ),
         0,
         3
       )
+
+      if (
+        container === 'competitor' &&
+        !!highestBuckets &&
+        !!highestBuckets.length
+      ) {
+        yield put({
+          type: types.SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY,
+          payload:
+            !!highestBuckets[0] && !!highestBuckets[0].property
+              ? highestBuckets[0].property
+              : null,
+        })
+      }
+
+      const val =
+        (!!highestBuckets &&
+          !!highestBuckets.length &&
+          highestBuckets.map((value, idx) => ({
+            doughnutChartValues: convertPropertiesIntoDatasets(response, {
+              metric,
+              type: 'market',
+              hoverBg: false,
+              percentage: true,
+              property: value.property,
+            }),
+          }))) ||
+        []
+
+      yield put(actions.getSimilarPropertiesSuccess(val))
+    } else {
+      throw new Error('Marketview/detail getSimilarProperties error')
     }
-
-    if (
-      container === 'competitor' &&
-      !!highestBuckets &&
-      !!highestBuckets.length
-    ) {
-      yield put({
-        type: types.SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY,
-        payload:
-          !!highestBuckets[0] && !!highestBuckets[0].highestProperty
-            ? highestBuckets[0].highestProperty
-            : null,
-      })
-    }
-
-    const val = highestBuckets.map((value, idx) => ({
-      doughnutChartValues: convertDataIntoDatasets(
-        percentageManipulation(payload),
-        { property: [value.highestProperty] },
-        {
-          singleDataset: true,
-          noBrandKeys: true,
-          customValueKeyGetAll: true,
-        }
-      ),
-    }))
-
-    yield delay(2000)
-    yield put(actions.getSimilarPropertiesSuccess(val))
   } catch (error) {
+    console.log(error)
     yield put(actions.getSimilarPropertiesFailure(error))
   }
 }
