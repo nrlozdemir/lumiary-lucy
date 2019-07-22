@@ -223,7 +223,7 @@ const libraryDetailReducer = (state = initialState, action) => {
 
     case types.GET_DOUGHNUT_CHART_FAILURE:
       return state
-        .setIn(['doughnutData', 'data'], fromJS(action.payload))
+        .setIn(['doughnutData', 'data'], fromJS(undefined))
         .setIn(['doughnutData', 'loading'], fromJS(false))
 
     case types.GET_COLOR_TEMP_REQUEST:

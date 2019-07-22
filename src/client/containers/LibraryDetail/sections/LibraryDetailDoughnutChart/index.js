@@ -60,45 +60,53 @@ class LibraryDetailDoughnutChart extends React.Component {
             }}
           >
             <div className={style.radialChartsContainer}>
-              {!!doughnutData &&
-                !doughnutLoading &&
-                doughnutData.map(
-                  (
-                    {
-                      key,
-                      title,
-                      doughnutChartValues,
-                      max: { label, percentage },
-                    },
-                    i
-                  ) => {
-                    const cardProps = {
-                      title,
-                      videoId,
-                      identifier: key,
-                      duration:
-                        title === 'Duration'
-                          ? secondsToHHMMSS(videoDuration)
-                          : null,
-                      maxLabel: label,
-                    }
+              {!doughnutLoading &&
+                (!!doughnutData && !!doughnutData.length ? (
+                  doughnutData.map(
+                    (
+                      {
+                        key,
+                        title,
+                        doughnutChartValues,
+                        max: { label, percentage },
+                      },
+                      i
+                    ) => {
+                      const cardProps = {
+                        title,
+                        videoId,
+                        identifier: key,
+                        duration:
+                          title === 'Duration'
+                            ? secondsToHHMMSS(videoDuration)
+                            : null,
+                        maxLabel: label,
+                      }
 
-                    return (
-                      <React.Fragment key={i}>
-                        {!sectionToShow && (
-                          <DoughnutCard
-                            chartData={doughnutChartValues}
-                            maxPercentage={percentage}
-                            {...cardProps}
-                          />
-                        )}
-                        {!!sectionToShow && sectionToShow === title && (
-                          <Info {...cardProps} loading={doughnutInfoLoading} />
-                        )}
-                      </React.Fragment>
-                    )
-                  }
-                )}
+                      return (
+                        <React.Fragment key={i}>
+                          {!sectionToShow && (
+                            <DoughnutCard
+                              chartData={doughnutChartValues}
+                              maxPercentage={percentage}
+                              {...cardProps}
+                            />
+                          )}
+                          {!!sectionToShow && sectionToShow === title && (
+                            <Info
+                              {...cardProps}
+                              loading={doughnutInfoLoading}
+                            />
+                          )}
+                        </React.Fragment>
+                      )
+                    }
+                  )
+                ) : (
+                  <div className={style.radialChartsContainer_empty}>
+                    <p>No Data Available</p>
+                  </div>
+                ))}
               {doughnutLoading && (
                 <div className={style.radialChartsContainer_loading}>
                   <RouterLoading />
