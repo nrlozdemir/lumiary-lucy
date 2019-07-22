@@ -2,6 +2,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
+import { withTheme } from 'ThemeContext/withTheme'
 import {
   actions,
   makeSelectMarketviewTopProperty,
@@ -11,7 +12,7 @@ import {
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 
 import BarChartModule from 'Components/Modules/BarChartModule'
-import { splitCamelCaseToString, selectFiltersToType } from 'Utils'
+import { splitCamelCaseToString, selectFiltersToType, customChartToolTip, metricSuffix } from 'Utils'
 import { getMinMaxFromDatasets, getTopNValues } from 'Utils/datasets'
 import { isEqual } from 'lodash'
 
@@ -78,6 +79,7 @@ class TopPerformingProperty extends React.Component {
       moduleKey,
       container,
       topProperty,
+      themeContext: { colors },
       topPerformingPropertiesByCompetitorsData: {
         data: compTopData,
         loading: compTopLoading,
@@ -115,6 +117,32 @@ class TopPerformingProperty extends React.Component {
       },
     }
 
+    const customChartOptions = {
+      tooltips: customChartToolTip(colors, {
+        callbacks: {
+          title: () => '',
+          label: function(tooltipItem, data) {
+            const count =
+              (data &&
+                data.datasets &&
+                data.datasets[tooltipItem['datasetIndex']] &&
+                data.datasets[tooltipItem['datasetIndex']].data[
+                  tooltipItem['index']
+                ]) ||
+              ''
+            const name =
+              (data &&
+                data.datasets &&
+                data.datasets[tooltipItem['datasetIndex']] &&
+                data.datasets[tooltipItem['datasetIndex']].label) ||
+              ''
+            return `${count ? metricSuffix(count) : 0} ${!!name &&
+              `| ${name}`}`
+          },
+        },
+      }),
+    }
+
     ;((chartData && chartData.datasets) || []).forEach((set, index) => {
       set.backgroundColor = LEGEND_COLOR_ORDER[index]
     })
@@ -145,6 +173,7 @@ class TopPerformingProperty extends React.Component {
         }
         barData={loading ? {} : chartData}
         tickOptions={chartTickOptions}
+        customChartOptions={customChartOptions}
         height={50}
         action={this.callback}
         filters={filters}
@@ -169,4 +198,4 @@ const withConnect = connect(
   mapDispatchToProps
 )
 
-export default compose(withConnect)(TopPerformingProperty)
+export default withTheme(compose(withConnect)(TopPerformingProperty))
