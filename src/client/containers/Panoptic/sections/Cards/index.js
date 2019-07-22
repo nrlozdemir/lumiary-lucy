@@ -123,6 +123,7 @@ const Front = (props) => {
                   )}`}
                   %
                 </p>
+
               </div>
             </div>
             <CustomBarChart
