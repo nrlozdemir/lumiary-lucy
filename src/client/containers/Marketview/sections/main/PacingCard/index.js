@@ -24,26 +24,10 @@ class PacingCard extends Component {
 
   render() {
     const {
-      pacingChartData: { data: dataToUpdate, loading, error },
+      pacingChartData: { data, loading, error },
     } = this.props
 
-    const isDataEmpty =
-      (!loading && isDataSetEmpty(dataToUpdate)) || isEmpty(dataToUpdate)
-
-    const data =
-      !isDataEmpty && !loading
-        ? {
-            ...dataToUpdate,
-            datasets: [
-              {
-                ...dataToUpdate.datasets[0],
-                data: dataToUpdate.datasets[0].data.map((v) =>
-                  !!v ? (!!v.value ? v.value : 0) : 0
-                ),
-              },
-            ],
-          }
-        : {}
+    const isDataEmpty = (!loading && isDataSetEmpty(data)) || isEmpty(data)
 
     return (
       <ThemeContext.Consumer>
@@ -80,7 +64,9 @@ class PacingCard extends Component {
               </span>
             </div>
 
-            {!isDataEmpty && <PacingPieChart data={data} colors={colors} />}
+            {!isDataEmpty && !loading && (
+              <PacingPieChart data={data} colors={colors} />
+            )}
             {!loading && (
               <div className={style.marketViewCardChartTitle}>Medium Paced</div>
             )}
@@ -91,7 +77,8 @@ class PacingCard extends Component {
                 style.colorList
               )}
             >
-              {!!data &&
+              {!loading &&
+                !!data &&
                 !!data.labels &&
                 data.labels.map((label, idx) => (
                   <div

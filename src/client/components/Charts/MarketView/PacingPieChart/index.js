@@ -28,12 +28,20 @@ const PacingPieChart = ({ data = {} }) => {
               tooltips: customChartToolTip(colors, {
                 callbacks: {
                   title: function(tooltipItem, data) {
-                    const name = data && data.labels && data.labels[tooltipItem[0]['index']]
+                    const name =
+                      data &&
+                      data.labels &&
+                      data.labels[tooltipItem[0]['index']]
                     return `${!!name && name}`
                   },
                   label: function(tooltipItem, data) {
-                    const count = data && data.datasets && data.datasets[0] && data.datasets[0].data[tooltipItem['index']] || ''
-                    return `${metricSuffix(count) || 0} Likes`
+                    const count =
+                      (data &&
+                        data.datasets &&
+                        data.datasets[0] &&
+                        data.datasets[0].data[tooltipItem['index']]) ||
+                      ''
+                    return `${metricSuffix(parseInt(count) || 0)} Shares`
                   },
                 },
                 titleAlign: 'center',

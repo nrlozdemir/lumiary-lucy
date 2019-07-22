@@ -18,6 +18,7 @@ import {
   convertDataIntoDatasets,
   convertMultiRequestDataIntoDatasets,
   percentageManipulation,
+  convertPropertiesIntoDatasets,
 } from 'Utils/datasets'
 
 import { dayOfWeek, chartColors } from 'Utils/globals'
@@ -325,27 +326,27 @@ function* getPacingChartData() {
       brand.competitors.map((c) => c.uuid)
 
     const url = buildApiUrl(`/brand/${brand.uuid}/properties`, {
+      top: 20,
       metric,
       competitors,
       daterange: 'month',
     })
 
-    const payload = yield call(getDataFromApi, undefined, url, 'GET')
+    const response = yield call(getDataFromApi, undefined, url, 'GET')
 
-    const pacingChartData = convertDataIntoDatasets(
-      payload,
-      { property: ['pacing'] },
-      {
-        customBorderColor: '#fff',
-        singleDataset: true,
-        noBrandKeys: true,
-        customValueKey: 'proportionOfLibrary',
-      }
-    )
+    if (!!response && !!response.market && !!response.market.pacing) {
+      const pacingChartData = convertPropertiesIntoDatasets(response, {
+        metric,
+        type: 'market',
+        property: 'pacing',
+      })
 
-    yield put(
-      actions.getPacingChartSuccess(percentageManipulation(pacingChartData))
-    )
+      yield put(
+        actions.getPacingChartSuccess(percentageManipulation(pacingChartData))
+      )
+    } else {
+      throw new Error('Marketview getPacingChartData Error')
+    }
   } catch (error) {
     console.log(error)
     yield put(actions.getPacingChartFailure(error))
