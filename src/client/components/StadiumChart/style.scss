@@ -8,17 +8,21 @@
 }
 
 .stadiumCharTooltip {
+  font-family: $font-family-ClanOT;
+  font-size: 12px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: 1.67;
+  letter-spacing: normal;
+  text-align: center;
   display: none;
   position: fixed;
   z-index: 2;
-  font-family: Helvetica;
-  background: #ffffff;
-  color: black;
-  padding: 8px 16px;
-  -webkit-border-radius: 4px;
-  -moz-border-radius: 4px;
-  border-radius: 4px;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+  padding: 8px 12px;
+  -webkit-border-radius: 8px;
+  -moz-border-radius: 8px;
+  border-radius: 8px;
   &:after {
     content: '';
     position: absolute;
@@ -27,12 +31,31 @@
     left: calc(50%);
     top: calc(100% - 2px);
     box-sizing: border-box;
-    border: 10px solid black;
-    border-color: transparent transparent #ffffff #ffffff;
     -webkit-transform-origin: 0 0;
     transform-origin: 0 0;
     -webkit-transform: rotate(-45deg) translate(-50%, -50%);
     transform: rotate(-45deg) translate(-50%, -50%);
-    box-shadow: -2px 2px 2px -1px rgba(0, 0, 0, 0.5);
+  }
+  &.dark {
+    color: $dark_tooltipColor;
+    box-shadow: 0 1px 2px 0 $dark_tooltipShadowColor;
+    background-color: $dark_tooltipBackgroundColor;
+
+    &:after {
+      border: 7px solid $dark_tooltipBackgroundColor;
+      border-color: transparent transparent $dark_tooltipBackgroundColor
+        $dark_tooltipBackgroundColor;
+    }
+  }
+  &.light {
+    color: $light_tooltipTextColor;
+    box-shadow: 0 1px 2px 0 $light_tooltipShadowColor;
+    background-color: $light_tooltipBackgroundColor;
+
+    &:after {
+      border: 7px solid $light_tooltipBackgroundColor;
+      border-color: transparent transparent $light_tooltipBackgroundColor
+        $light_tooltipBackgroundColor;
+    }
   }
 }

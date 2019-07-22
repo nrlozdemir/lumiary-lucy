@@ -34,6 +34,8 @@ const PacingCardModule = ({
       value: item.data[idx] || 0,
       color: item.backgroundColor,
     }))
+  
+  const horizontalBarChartValues = { ...stadiumValues }
 
   return (
     <Module
@@ -50,6 +52,7 @@ const PacingCardModule = ({
             width={500}
             height={340}
             barData={horizontalStackedBarData}
+            values={horizontalBarChartValues}
             options={barChartOptions}
             datasetsIsEmpty={isDataSetEmpty(horizontalStackedBarData)}
           />

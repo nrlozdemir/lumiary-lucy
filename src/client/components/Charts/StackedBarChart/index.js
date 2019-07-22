@@ -140,7 +140,7 @@ const StackedBarChart = (props) => {
                     (accumulator, currentValue) => accumulator + currentValue
                   )
 
-                  return percentageManipulation(value / (totalValue / 100))
+                  return percentageManipulation(Math.round(value / (totalValue / 100)))
                 }),
               }
             })) ||

@@ -10,6 +10,7 @@ import {
   makeSelectInfoModalData,
 } from 'Reducers/libraryDetail'
 import { isEqual } from 'lodash'
+import { customChartToolTip } from 'Utils'
 
 class LineChartSection extends React.Component {
   shouldComponentUpdate(nextProps) {
@@ -37,10 +38,7 @@ class LineChartSection extends React.Component {
                 xAxesStepSize={1}
                 yAxesStepSize={25}
                 options={{
-                  tooltips: {
-                    xPadding: 10,
-                    yPadding: 16,
-                    cornerRadius: 3,
+                  tooltips: customChartToolTip(colors, {
                     callbacks: {
                       ...(!!modalData && !!sectionData
                         ? {
@@ -53,7 +51,9 @@ class LineChartSection extends React.Component {
                               } else {
                                 return `${
                                   data.datasets[datasetIndex].data[index]
-                                }% of your library is shot in ${sectionData.label}`
+                                }% of your library is shot in ${
+                                  sectionData.label
+                                }`
                               }
                             },
                             label: function(tooltipItem, data) {
@@ -62,7 +62,7 @@ class LineChartSection extends React.Component {
                           }
                         : {}),
                     },
-                  },
+                  }),
                 }}
               />
             </div>

@@ -4,6 +4,16 @@ import style from './style.scss'
 import { customChartToolTip } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
+function metricSuffix(number) {
+  if (number >= 1e3) {
+    const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
+    const unitname = ['k', 'm', 'B', 'T'][Math.floor(unit / 3) - 1]
+    return (number / ('1e' + unit)).toFixed(0) + unitname
+  }
+
+  return number
+}
+
 const PacingPieChart = ({ data = {} }) => {
   const { datasets = [] } = data
 
@@ -15,6 +25,23 @@ const PacingPieChart = ({ data = {} }) => {
             height={240}
             width={240}
             options={{
+              tooltips: customChartToolTip(colors, {
+                callbacks: {
+                  title: function(tooltipItem, data) {
+                    const name = data && data.labels && data.labels[tooltipItem[0]['index']]
+                    return `${!!name && name}`
+                  },
+                  label: function(tooltipItem, data) {
+                    const count = data && data.datasets && data.datasets[0] && data.datasets[0].data[tooltipItem['index']] || ''
+                    return `${metricSuffix(count) || 0} Likes`
+                  },
+                },
+                titleAlign: 'center',
+                footerAlign: 'center',
+                bodyAlign: 'center',
+                xPadding: 12,
+                yPadding: 12,
+              }),
               responsive: false,
               legend: {
                 display: false,
