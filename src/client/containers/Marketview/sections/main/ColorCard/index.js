@@ -61,6 +61,13 @@ class ColorCard extends Component {
               boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
             }}
           >
+          <style>
+            {`
+              .${style.bubbleChart} div>svg>g>g>rect,polygon{
+                fill: ${colors.tooltipBackground} !important;
+              }
+            `}
+          </style>
             {(loading || (isDataEmpty && !loading)) && (
               <div
                 className={style.marketViewCardEmpty}
@@ -134,13 +141,17 @@ class ColorCard extends Component {
                           className={style.bubbleTooltip}
                           style={{
                             fontSize: totalChartValue * 0.07,
+                            color: colors.chartTooltipColor
                           }}
                         >
                           {bubble.name}
                         </div>
                         <div
                           className={style.bubbleTooltip}
-                          style={{ fontSize: totalChartValue * 0.07 }}
+                          style={{ 
+                            fontSize: totalChartValue * 0.07,
+                            color: colors.chartTooltipColor
+                          }}
                         >
                           {metricSuffix(bubble.oldValue)}
                         </div>
