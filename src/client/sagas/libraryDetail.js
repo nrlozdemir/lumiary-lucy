@@ -9,7 +9,7 @@ import {
 } from 'Reducers/libraryDetail'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
-import { getMaximumValueIndexFromArray } from 'Utils'
+import { getMaximumValueIndexFromArray, getLabelWithSuffix } from 'Utils'
 import { expectedNames } from 'Utils/globals'
 
 import {
@@ -59,7 +59,7 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
         const { bucket, property, library_proportion } = bucketItem
 
         const max = {
-          label: bucket,
+          label: getLabelWithSuffix(bucket, property),
           percentage: Math.round(parseFloat(library_proportion) * 100),
         }
 
