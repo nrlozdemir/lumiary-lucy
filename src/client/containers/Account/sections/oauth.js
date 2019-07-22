@@ -12,7 +12,7 @@ import style from '../style.scss'
 
 import { withTheme } from 'ThemeContext/withTheme'
 
-class ForgotPassword extends Component {
+class OAuth extends Component {
   state = {
     validationError: null,
   }
@@ -101,4 +101,4 @@ const withConnect = connect(
 export default compose(
   withConnect,
   withTheme
-)(ForgotPassword)
+)(OAuth)
