@@ -66,24 +66,29 @@ class EngagementByProperty extends Component {
             <DoughnutChart
               width={270}
               height={270}
-              data={doughnutData}
+              data={!loading ? doughnutData : {}}
               cutoutPercentage={58}
               fillText={isDoughnutEmpty ? 'No Data' : 'Total Percentage'}
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
               labelPositionRight
               labelsData={
-                !!doughnutData &&
-                !!doughnutData.labels &&
-                doughnutData.labels.map((label, idx) => ({
-                  data: label,
-                  color: chartColors[idx],
-                }))
+                (!loading &&
+                  !!doughnutData &&
+                  !!doughnutData.labels &&
+                  doughnutData.labels.map((label, idx) => ({
+                    data: label,
+                    color: chartColors[idx],
+                  }))) ||
+                []
               }
             />
           </div>
           <div className={style.stackedChart}>
-            <StackedBarChart barData={stackedChartData} barSpacing={4} />
+            <StackedBarChart
+              barData={(!loading && stackedChartData) || {}}
+              barSpacing={4}
+            />
           </div>
         </div>
       </Module>

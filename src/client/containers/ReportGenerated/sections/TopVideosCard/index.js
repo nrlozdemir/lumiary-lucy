@@ -15,7 +15,7 @@ class TopVideosCard extends React.Component {
     return (
       <TopVideosCardModule
         loading={loading}
-        chartData={data}
+        chartData={!loading ? data : {}}
         height={150}
         moduleKey="Reports/TopVideosCardModule"
         title="Top Videos Over Time By All Platforms"
