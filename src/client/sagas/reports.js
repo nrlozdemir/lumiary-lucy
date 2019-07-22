@@ -259,7 +259,7 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
     const parameters = {
       dateRange,
       metric: 'views',
-      property: ['format'],
+      property: ['duration'],
       dateBucket: 'none',
       brands: [...report.brands],
       platform: 'all',

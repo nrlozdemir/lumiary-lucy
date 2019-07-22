@@ -87,7 +87,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
       ? getTimeBucket(getValueinObject)
       : null
 
-  if (getValueinObject.subtotal) delete getValueinObject.subtotal
+  if (!!getValueinObject && getValueinObject.hasOwnProperty('subtotal')) {
+    delete getValueinObject.subtotal
+  }
 
   // If time bucket was  selected, it will change labels to time labels
   // defined within a data object from the api response
@@ -532,8 +534,8 @@ const parseAverage = (payload) => {
   })
 
   const returnData = Object.values(calculateAverage).sort((a, b) => {
-    return a.order > b.order;
-  });
+    return a.order > b.order
+  })
 
   return returnData
 }
@@ -765,7 +767,7 @@ const percentageManipulation = (bucket) => {
 }
 
 /*
- returns the chartYAxisMax, chartYAxisStepSize from the api  
+ returns the chartYAxisMax, chartYAxisStepSize from the api
  */
 
 const getCVScoreChartAttributes = (data) => {
