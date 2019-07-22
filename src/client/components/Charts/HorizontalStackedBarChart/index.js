@@ -63,7 +63,7 @@ const HorizontalStackedBarChart = (props) => {
                   data.datasets[datasetIndex] &&
                   data.datasets[datasetIndex].data[tooltipItem['index']]) ||
                 ''
-              const name = data && values && values[datasetIndex].title
+              const name = data && values && values[datasetIndex].title || ''
               return `${count || 0}% ${!!name && `| ${name}`}`
             },
           },
