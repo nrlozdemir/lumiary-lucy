@@ -153,6 +153,7 @@ const LineAndDoughnutChartModule = ({
               datasetsBorderWidth={0}
               removeTooltip
               addAverage
+              layoutPadding={7}
               data={{
                 datasets: [
                   {
@@ -199,6 +200,7 @@ const LineAndDoughnutChartModule = ({
             cutoutPercentage={80}
             datasetsBorderWidth={0}
             removeTooltip
+            layoutPadding={7}
             addAverage
             data={{
               datasets: [
@@ -245,6 +247,7 @@ const LineAndDoughnutChartModule = ({
             cutoutPercentage={80}
             datasetsBorderWidth={0}
             removeTooltip
+            layoutPadding={7}
             addAverage
             data={{
               datasets: [

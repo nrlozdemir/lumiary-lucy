@@ -8,6 +8,7 @@ import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import { isDataSetEmpty } from 'Utils/datasets'
+import { roundRect } from 'Utils/ui'
 
 const percentageCol = cx('col-4-no-gutters', style.percentageCol)
 
@@ -96,29 +97,6 @@ const ContentVitalityScoreModule = ({
         }
       )) ||
     {}
-
-  const roundRect = (ctx, x, y, width, height) => {
-    const radius = 5
-    ctx.beginPath()
-    // ctx.shadowColor = 'rgba(0, 0, 0, 0.15)'
-    // ctx.shadowBlur = 3
-    // ctx.shadowOffsetX = 1
-    // ctx.shadowOffsetY = 2
-    ctx.moveTo(x + radius, y)
-    ctx.lineTo(x + width - radius, y)
-    ctx.quadraticCurveTo(x + width, y, x + width, y + radius)
-    ctx.lineTo(x + width, y + height - radius)
-    ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height)
-    ctx.lineTo(x + radius, y + height)
-    ctx.quadraticCurveTo(x, y + height, x, y + height - radius)
-    ctx.lineTo(x, y + radius)
-    ctx.quadraticCurveTo(x, y, x + radius, y)
-    ctx.closePath()
-    ctx.fill()
-    // ctx.shadowBlur = 0
-    // ctx.shadowOffsetX = 0
-    // ctx.shadowOffsetY = 0
-  }
 
   const newDatasets = {
     labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
@@ -273,7 +251,14 @@ const ContentVitalityScoreModule = ({
                           ? maxObject._model.x + 20
                           : maxObject._model.x - rectWidth - 20
                       const rectY = maxObject._model.y - rectHeight / 2
-                      roundRect(chart.ctx, rectX, rectY, rectWidth, rectHeight)
+                      roundRect(
+                        chart.ctx,
+                        rectX,
+                        rectY,
+                        rectWidth,
+                        rectHeight,
+                        5
+                      )
                       chart.ctx.font = '12px ClanOT'
                       chart.ctx.textAlign = 'center'
                       chart.ctx.textBaseline = 'middle'
