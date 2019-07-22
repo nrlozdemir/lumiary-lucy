@@ -69,10 +69,11 @@ class ForgotPassword extends Component {
           message
             ? {
                 message,
-                state: loggedIn ? 'success' : 'error',
+                state: success ? 'success' : 'error',
               }
             : validationError
         }
+        loading={loading}
       >
         <form
           className={style.form}

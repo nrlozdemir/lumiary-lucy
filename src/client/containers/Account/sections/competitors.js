@@ -28,11 +28,12 @@ class Competitors extends Component {
         status={
           message
             ? {
-                success,
-                state: loggedIn ? 'success' : 'error',
+                message,
+                state: success ? 'success' : 'error',
               }
             : null
         }
+        loading={loading}
       >
         <div className={style.info}>
           <div className={style.image}>

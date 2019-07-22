@@ -47,6 +47,16 @@
     font-stretch: condensed;
     margin-top: 24px;
   }
+
+  p {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 26px;
+    color: $color-cool-grey;
+    text-align: center;
+    font-family: $font-family-ClanOTNews;
+    padding: 0 30px;
+  }
 }
 .info {
   display: flex;
@@ -184,6 +194,84 @@
         font-weight: bold;
         list-style: none;
       }
+    }
+  }
+}
+
+.oauth {
+  width: 100%;
+
+  .connect {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 72px;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 0 24px;
+
+    background-color: $color-dark-five;
+    border: 1px solid $color-dusk-two;
+
+    span {
+      font-size: 14px;
+      color: #ffffff;
+      font-family: $font-family-ClanOTBold;
+      font-weight: bold;
+      text-decoration: underline;
+      margin-left: 24px;
+    }
+
+    &:before {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $color-dark-five;
+      background-color: #ffffff;
+      border-radius: 50%;
+      font-size: 12px;
+    }
+
+    &:after {
+      content: '\e920';
+      /* use !important to prevent issues with browser extensions that change fonts */
+      font-family: 'icomoon' !important;
+      speak: none;
+      font-style: normal;
+      font-weight: normal;
+      font-variant: normal;
+      text-transform: none;
+      line-height: 1;
+      /* Better Font Rendering =========== */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+
+      position: absolute;
+      right: 24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 9px;
+      color: #ffffff;
+      background-color: $color-dusk-two;
+    }
+
+    &.connected {
+      &:after {
+        background-color: $color-cool-blue;
+        color: $color-dark-five;
+      }
+    }
+
+    &:not(:last-child) {
+      border-bottom: none;
     }
   }
 }

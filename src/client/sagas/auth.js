@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { types } from 'Reducers/auth'
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
+import { delay } from 'redux-saga'
 import { ajax, buildQApiUrl } from 'Utils/api'
 import { push } from 'connected-react-router'
 
@@ -131,10 +132,34 @@ export function* getCompetitors() {
   console.log('getting competitors', data)
 }
 
+export function* connectOAuth({ payload }) {
+  try {
+    const response = {}
+
+    yield delay(2000)
+    if (response) {
+      yield put({
+        type: types.CONNECT_OAUTH_SUCCESS,
+        payload: {
+          message: `Connected to ${payload}`,
+          response: {
+            ...response,
+            name: payload,
+          },
+        },
+      })
+    }
+  } catch (e) {
+    console.log(e)
+    yield put({ type: types.CONNECT_OAUTH_ERROR, payload: e.message })
+  }
+}
+
 export default [
   takeLatest(types.LOGIN_REQUEST, authorize),
   takeLatest(types.LOGIN_SSO_REQUEST, validateSso),
   takeLatest(types.UPDATE_PASSWORD_REQUEST, updatePassword),
   takeLatest(types.FORGOT_PASSWORD_REQUEST, forgotPassword),
   takeLatest(types.COMPETITORS_REQUEST, getCompetitors),
+  takeLatest(types.CONNECT_OAUTH_REQUEST, connectOAuth),
 ]

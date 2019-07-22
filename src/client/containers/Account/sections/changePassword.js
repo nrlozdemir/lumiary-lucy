@@ -97,6 +97,7 @@ class ChangePassword extends Component {
               }
             : this.state.validationError
         }
+        loading={loading}
       >
         <form
           className={style.form}
