@@ -123,7 +123,6 @@ const Front = (props) => {
                   )}`}
                   %
                 </p>
-
               </div>
             </div>
             <CustomBarChart
@@ -152,25 +151,39 @@ class Cards extends React.Component {
     const wholeSegmentsWithOrder = ['view', 'like', 'comment', 'share']
 
     return (
-      <div className="grid-container col-12 mt-72 mb-72">
-        <div className={styles.flipWrapper}>
-          {wholeSegmentsWithOrder.map((item, idx) => (
-            <FlipCard
-              noflip
-              key={`flipCard_${idx}`}
-              width={282}
-              height={114}
-              isEmpty={data && data[item] && data[item].isEmpty}
-              loading={loading}
-            >
-              {data && data[item] && (
-                <Front data={data[item]} title={`${ucfirst(item)}s`} />
-              )}
-              <div />
-            </FlipCard>
-          ))}
-        </div>
-      </div>
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <div className="grid-container col-12 mt-72 mb-72">
+            <div className={styles.flipWrapper}>
+              {wholeSegmentsWithOrder.map((item, idx) => (
+                <FlipCard
+                  noflip
+                  key={`flipCard_${idx}`}
+                  width={282}
+                  height={114}
+                  isEmpty={data && data[item] && data[item].isEmpty}
+                  loading={loading}
+                >
+                  {!loading &&
+                    (data && data[item] ? (
+                      <Front data={data[item]} title={`${ucfirst(item)}s`} />
+                    ) : (
+                      <div
+                        className={styles.noContent}
+                        style={{
+                          backgroundColor: colors.moduleBackgroundOpacity,
+                        }}
+                      >
+                        <p>No Data Available</p>
+                      </div>
+                    ))}
+                  <div />
+                </FlipCard>
+              ))}
+            </div>
+          </div>
+        )}
+      </ThemeContext.Consumer>
     )
   }
 }

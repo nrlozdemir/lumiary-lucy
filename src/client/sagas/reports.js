@@ -50,6 +50,8 @@ function* getReports({ payload: { value: filterValue } = {} }) {
       }
 
       yield put(actions.loadReportsSuccess(values))
+    } else {
+      throw new Error('Error loading Reports')
     }
   } catch (err) {
     console.log('err', err)
@@ -212,6 +214,8 @@ function* getPredefinedReports() {
         type: types.GET_PREDEFINED_REPORTS_REQUEST_SUCCESS,
         payload: response,
       })
+    } else {
+      throw new Error('Error getting predefined reports')
     }
   } catch (err) {
     console.log(err)

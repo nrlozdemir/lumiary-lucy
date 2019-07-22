@@ -3,6 +3,16 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+
+  &_noContent {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    margin: 64px auto;
+    font-family: $font-family-primary;
+    font-size: 21px;
+  }
 }
 
 .sidebar {
@@ -110,7 +120,7 @@
 
 .formChange {
   font-weight: bold !important;
-  border-color:#2fd7c4 !important;
+  border-color: #2fd7c4 !important;
 }
 
 .loadButton {

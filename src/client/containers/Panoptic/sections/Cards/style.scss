@@ -6,20 +6,21 @@
 
 .frontContainer {
   position: relative;
-  .noContent {
-    border-radius: 8px;
-    position: absolute;
-    width: 100%;
+}
+
+.noContent {
+  border-radius: 8px;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  z-index: 999;
+  p {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     height: 100%;
-    z-index: 999;
-    p {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      font-family: $font-family-primary;
-      font-size: 21px;
-    }
+    font-family: $font-family-primary;
+    font-size: 21px;
   }
 }
 
@@ -201,7 +202,7 @@ $arrowBackground: #fff;
   margin: 0px 10px;
 }
 
-.moduleInfo{
+.moduleInfo {
   font-size: 14px;
   margin: 0px 0px 2px 8px;
 }
