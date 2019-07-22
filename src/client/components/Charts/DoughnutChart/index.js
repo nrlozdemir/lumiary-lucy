@@ -83,7 +83,7 @@ const DoughnutChart = (props) => {
   const themes = props.themeContext.colors
 
   let plugins = []
-	
+
   if (fillText) {
     const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
 
@@ -111,7 +111,39 @@ const DoughnutChart = (props) => {
     return null
   }
 
+  const dataLimit = 5
+
   let newData = { ...data }
+
+  // If more than 5 datapoints, take the first 4, and bucket the rest
+  if (
+    !!newData.labels &&
+    !!newData.labels.length &&
+    newData.labels.length > dataLimit
+  ) {
+    newData = {
+      labels: [...newData.labels.slice(0, dataLimit - 1), 'Other'],
+      datasets: [
+        {
+          ...newData.datasets[0],
+          data: newData.datasets[0].data
+            .slice(0, dataLimit - 1)
+            .reduce((acc, val, idx) => {
+              let totalToAdd
+              if (idx === dataLimit - 2) {
+                const total = acc.reduce((a, b) => a + b, 0)
+                totalToAdd = Math.round(100 - total - val)
+              }
+              const result = [...acc, val]
+              if (totalToAdd) {
+                result.push(totalToAdd)
+              }
+              return result
+            }, []),
+        },
+      ],
+    }
+  }
 
   return (
     <React.Fragment>
