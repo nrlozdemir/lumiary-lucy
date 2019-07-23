@@ -48,47 +48,16 @@ class TopPerformingFormat extends React.Component {
       profile,
       topPerformingFormatData: {
         data,
-        data: { doughnutData = {}, percentageData = {}, lineChartData = {} },
+        data: { lineChartData = {}, average = 0, properties = {}, platform },
         loading,
         error,
       },
     } = this.props
 
-    const formatObj =
-      !!profile &&
-      !!profile.brand &&
-      !!percentageData &&
-      !!percentageData.data &&
-      !!percentageData.data[profile.brand.name] &&
-      percentageData.data[profile.brand.name].format
-
-    const convertedPercentageData =
-      (!!formatObj &&
-        Object.keys(formatObj).map((key, idx) => ({
-          key,
-          color: chartColors[idx],
-          value: formatObj[key],
-        }))) ||
-      []
-
     const isLineChartEmpty = isDataSetEmpty(lineChartData)
 
-    const isDoughnutEmpty = isDataSetEmpty(doughnutData)
-
-    const isPercentagesEmpty =
-      !convertedPercentageData.length ||
-      convertedPercentageData.every((d) => d.value === 0)
-
     const hasNoData =
-      !loading &&
-      ((!!lineChartData &&
-        isLineChartEmpty &&
-        !!doughnutData &&
-        isDoughnutEmpty &&
-        !!percentageData &&
-        isPercentagesEmpty) ||
-        isEmpty(data))
-
+      !loading && ((!!lineChartData && isLineChartEmpty) || isEmpty(data))
     return (
       <LineAndDoughnutChartModule
         moduleKey="Panoptic/Top-Performing-Formats-This-Week-By-CV-Score"
@@ -99,13 +68,14 @@ class TopPerformingFormat extends React.Component {
         customCallbackFunc={this.customCallbackFunc}
         filters={[
           {
-            type: 'platform',
-            selectKey: 'PTPF-420blazeit',
-            placeHolder: 'Platforms',
+            type: 'platformEngagement',
+            selectKey: 'PVR-asd',
+            placeHolder: 'Engagement by Platform',
           },
         ]}
-        percentageData={convertedPercentageData}
-        doughnutData={doughnutData}
+        platform={platform}
+        properties={properties}
+        average={average}
         isEmpty={hasNoData}
         loading={loading}
       />

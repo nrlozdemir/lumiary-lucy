@@ -9,58 +9,14 @@ import { customChartToolTip } from 'Utils'
 import Labels from 'Components/Charts/Labels'
 import { roundRect } from 'Utils/ui'
 
-const propTypes = {}
-const defaultProps = {
-  legend: false,
-  layoutPadding: 0,
-
-  datasetsBorderWidth: 5,
-  datasetsBorderColor: '#373F5B',
-  datasetsHoverBorderColor: '#373F5B',
-
-  defaultFontFamily: 'ClanOTBold',
-  defaultFontSize: '14',
-  defaultFontWeight: '700',
-
-  fillTextColor: '#ffffff',
-  fillTextFontFamily: 'ClanOTBold',
-  fillTextFontSize: '14px',
-
-  displayDataLabels: true,
-  dataLabelColor: '#ffffff',
-  dataLabelFontFamily: 'ClanOTBold',
-  dataLabelFontSize: 12,
-  dataLabelFontWeight: 'bold',
-
-  legendLabelsFontColor: '#ffffff',
-  legendLabelsFontFamily: 'ClanOTBold',
-  legendLabelsFontSize: 12,
-}
-
-const dataLabelPlugins = (value, func, item) => {
-  if (func == 'insertAfter') {
-    return value + '' + item
-  } else if (func == 'insertBefore') {
-    return item + '' + value
-  }
-  return value
-}
-
 class DoughnutChart extends React.Component {
   componentDidMount() {
     const ctx = this.canvas && this.canvas.getContext('2d')
-    const average = 980
     if (ctx) {
-      console.log(ctx)
-      // const radius = 53
-      // const center_x = 60
-      // const center_y = 60
-      // const angle = average - 90
-      // const x = center_x + radius * Math.cos((angle * Math.PI) / 180)
-      // const y = center_y + radius * Math.sin((angle * Math.PI) / 180)
-      // ctx.rotate((45 * Math.PI) / 180)
-      // ctx.rotate((angle * Math.PI) / 180)
-
+      ctx.fillStyle = '#fff'
+      ctx.shadowOffsetY = 1
+      ctx.shadowColor = '#bebebe'
+      ctx.shadowBlur = 4
       roundRect(ctx, 55, 0, 10, 22, 5)
       ctx.save()
     }
@@ -100,6 +56,7 @@ class DoughnutChart extends React.Component {
       customDoughnutContainer,
       customChartWrapper,
       customTooltips,
+      average,
     } = this.props
 
     const themes = this.props.themeContext.colors
@@ -165,6 +122,7 @@ class DoughnutChart extends React.Component {
         ],
       }
     }
+
     return (
       <React.Fragment>
         <div
@@ -214,11 +172,7 @@ class DoughnutChart extends React.Component {
                   plugins={plugins}
                   options={{
                     responsive: false,
-                    events: [],
-                    tooltips: {
-                      ...customChartToolTip(themes),
-                      enabled: removeTooltip ? false : true,
-                    },
+                    tooltips: customChartToolTip(themes),
                     legend: {
                       display: legend,
                       labels: {
@@ -260,12 +214,18 @@ class DoughnutChart extends React.Component {
                     cutoutPercentage: cutoutPercentage,
                   }}
                 />
-                <canvas
-                  width="120"
-                  height="120"
-                  className={style.ciclePin}
-                  ref={(c) => (this.canvas = c)}
-                />
+                {average && (
+                  <canvas
+                    width="120"
+                    height="120"
+                    className={style.ciclePin}
+                    ref={(c) => (this.canvas = c)}
+                    style={{
+                      transform: `translate(-50%, 0) rotate(${(average / 100) *
+                        360}deg)`,
+                    }}
+                  />
+                )}
               </React.Fragment>
             )}
           </div>

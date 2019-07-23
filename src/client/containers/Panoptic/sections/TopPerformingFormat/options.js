@@ -10,10 +10,9 @@ export const lineChartOptions = {
     display: false,
   },
 
-  events: ['click'],
   tooltips: {
     intersect: false,
-    enabled: false,
+    enabled: true,
   },
 
   scales: {
@@ -27,7 +26,6 @@ export const lineChartOptions = {
           drawBorder: true,
           drawTicks: false,
         },
-        barPercentage: 0.05,
 
         ticks: {
           display: true,
@@ -58,7 +56,7 @@ export const lineChartOptions = {
           stepSize: 25,
           beginAtZero: true,
           padding: 15,
-
+          max: 100,
           callback: function(value, index, values) {
             if (value === 0 || value === 100) {
               return value
