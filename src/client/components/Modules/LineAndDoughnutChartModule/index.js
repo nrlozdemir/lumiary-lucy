@@ -51,10 +51,21 @@ const LineAndDoughnutChartModule = ({
     },
   ]
   const manipulatedProperties = percentageManipulation(properties)
+  let sortableManipulatedProperties = []
+  for (let property in manipulatedProperties) {
+    sortableManipulatedProperties.push([
+      { ...manipulatedProperties[property], name: property },
+    ])
+  }
+  const sortedProperties = sortableManipulatedProperties.sort((a, b) => {
+    return b[0].score.value - a[0].score.value
+  })
+  console.log(sortedProperties)
 
   const { chartYAxisMax, chartYAxisStepSize } = getCVScoreChartAttributes(
     lineChartData.datasets
   )
+
   return (
     <Module
       moduleKey={moduleKey}
@@ -154,8 +165,8 @@ const LineAndDoughnutChartModule = ({
         </div>
 
         <div className={container}>
-          {Object.keys(manipulatedProperties) &&
-            Object.keys(manipulatedProperties).map((property, idx) => {
+          {sortedProperties &&
+            sortedProperties.map((property, idx) => {
               if (idx > 2) {
                 return null
               }
@@ -169,7 +180,7 @@ const LineAndDoughnutChartModule = ({
                       boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                     }}
                   >
-                    {property}
+                    {property[0].name}
                   </div>
                   <div
                     className={style.divider}
@@ -192,8 +203,8 @@ const LineAndDoughnutChartModule = ({
                         {
                           borderColor: '#f3f6f9',
                           data: [
-                            manipulatedProperties[property].score.value,
-                            100 - manipulatedProperties[property].score.value,
+                            property[0].score.value,
+                            100 - property[0].score.value,
                           ],
                           backgroundColor: [chartColors[idx], '#acb0be'],
                           hoverBackgroundColor: [chartColors[idx], '#acb0be'],
@@ -215,7 +226,7 @@ const LineAndDoughnutChartModule = ({
                           color: colors.labelColor,
                         }}
                       >
-                        {manipulatedProperties[property].score.value}{' '}
+                        {property[0].score.value}{' '}
                       </span>
                       <span
                         className={style.littleText}
@@ -223,9 +234,7 @@ const LineAndDoughnutChartModule = ({
                           color: colors.labelColor,
                         }}
                       >
-                        Score (
-                        {manipulatedProperties[property].score.date.slice(0, 3)}
-                        )
+                        Score ({property[0].score.date.slice(0, 3)})
                       </span>
                     </div>
                   </div>
@@ -236,8 +245,8 @@ const LineAndDoughnutChartModule = ({
                       color: colors.labelColor,
                     }}
                   >
-                    <b>{manipulatedProperties[property].libraryPercent}</b> of
-                    your library is shot in <b>{property}</b>
+                    <b>{property[0].libraryPercent}</b> of your library is shot
+                    in <b>{property[0].name}</b>
                   </p>
                 </div>
               )

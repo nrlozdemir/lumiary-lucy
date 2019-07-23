@@ -8,7 +8,41 @@ import { customChartToolTip } from 'Utils'
 
 import Labels from 'Components/Charts/Labels'
 import { roundRect } from 'Utils/ui'
+const propTypes = {}
+const defaultProps = {
+  legend: false,
+  layoutPadding: 0,
 
+  datasetsBorderWidth: 5,
+  datasetsBorderColor: '#373F5B',
+  datasetsHoverBorderColor: '#373F5B',
+
+  defaultFontFamily: 'ClanOTBold',
+  defaultFontSize: '14',
+  defaultFontWeight: '700',
+
+  fillTextColor: '#ffffff',
+  fillTextFontFamily: 'ClanOTBold',
+  fillTextFontSize: '14px',
+
+  displayDataLabels: true,
+  dataLabelColor: '#ffffff',
+  dataLabelFontFamily: 'ClanOTBold',
+  dataLabelFontSize: 12,
+  dataLabelFontWeight: 'bold',
+
+  legendLabelsFontColor: '#ffffff',
+  legendLabelsFontFamily: 'ClanOTBold',
+  legendLabelsFontSize: 12,
+}
+const dataLabelPlugins = (value, func, item) => {
+  if (func == 'insertAfter') {
+    return value + '' + item
+  } else if (func == 'insertBefore') {
+    return item + '' + value
+  }
+  return value
+}
 class DoughnutChart extends React.Component {
   componentDidMount() {
     const ctx = this.canvas && this.canvas.getContext('2d')
