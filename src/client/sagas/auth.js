@@ -3,6 +3,7 @@ import { types } from 'Reducers/auth'
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import { ajax, buildQApiUrl } from 'Utils/api'
+import authMockData from 'Api/mocks/authMock.json'
 import { push } from 'connected-react-router'
 
 const VALIDATE_SSO = '/auth/sso/validate'
@@ -10,6 +11,10 @@ const VALIDATE_SSO = '/auth/sso/validate'
 const VALID_LOGIN = {
   email: 'lumiary@quickframe.com',
   password: 'lucylucy',
+}
+
+function getAuthDataApi(name) {
+  return axios.get('/').then((res) => authMockData[name])
 }
 
 function loginApi({ email, password }) {
