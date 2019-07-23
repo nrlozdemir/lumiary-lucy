@@ -10,10 +10,9 @@ export const lineChartOptions = {
     display: false,
   },
 
-  events: ['click'],
   tooltips: {
     intersect: false,
-    enabled: false,
+    enabled: true,
   },
 
   scales: {
@@ -21,21 +20,21 @@ export const lineChartOptions = {
       {
         gridLines: {
           display: true,
-          color: '#373f5b',
+          color: ['#fff', '#000'],
           offsetGridLines: false,
           lineWidth: 1,
           drawBorder: true,
           drawTicks: false,
         },
-        barPercentage: 0.05,
 
         ticks: {
           display: true,
-          fontColor: '#fff',
+          fontColor: ['#fff', '#000'],
+          fontFamily: 'ClanOT',
           fontSize: 12,
           stepSize: 1,
           padding: 15,
-          beginAtZero: true,
+          beginAtZero: false,
           callback: function(value, index, values) {
             return value
           },
@@ -58,7 +57,7 @@ export const lineChartOptions = {
           stepSize: 25,
           beginAtZero: true,
           padding: 15,
-
+          max: 100,
           callback: function(value, index, values) {
             if (value === 0 || value === 100) {
               return value
