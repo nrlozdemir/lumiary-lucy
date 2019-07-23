@@ -398,29 +398,35 @@ const getBrandAndCompetitorsFromProfileObject = (profile, brand_id) => {
   return response
 }
 
-const customChartToolTip = (themes, customOptions = {}) => {
-return {
-  backgroundColor: themes.tooltipBackground,
-  cornerRadius: 6,
-  titleFontColor: themes.chartTooltipColor,
-  titleFontStyle: 'bold',
-  mode: 'point',
-  titleFontFamily: 'ClanOTBold',
-  bodyFontColor: themes.chartTooltipColor,
-  xPadding: 8,
-  yPadding: 12,
-  bodyFontStyle: 'bold',
-  displayColors: false,
-  callbacks: {
-    title: () => '',
-    label: function(tooltipItem, data) {
-      const count = data && data.datasets && data.datasets[0] && data.datasets[0].data[tooltipItem['index']] || ''
-      const name = data && data.labels && data.labels[tooltipItem['index']]
-      return `${count || 0}% ${!!name && `| ${name}`}`
+const customChartToolTip = (themes, customOptions = {}, forceData) => {
+  return {
+    backgroundColor: themes.tooltipBackground,
+    cornerRadius: 6,
+    titleFontColor: themes.chartTooltipColor,
+    titleFontStyle: 'bold',
+    mode: 'point',
+    titleFontFamily: 'ClanOTBold',
+    bodyFontColor: themes.chartTooltipColor,
+    xPadding: 8,
+    yPadding: 12,
+    bodyFontStyle: 'bold',
+    displayColors: false,
+    callbacks: {
+      title: () => '',
+      label: function(tooltipItem, data) {
+        const datas = forceData || data
+        const count =
+          (datas &&
+            datas.datasets &&
+            datas.datasets[0] &&
+            datas.datasets[0].data[tooltipItem['index']]) ||
+          ''
+        const name = datas && datas.labels && datas.labels[tooltipItem['index']]
+        return `${count || 0}% ${!!name && `| ${name}`}`
+      },
     },
-  },
-  ...customOptions
-}
+    ...customOptions,
+  }
 }
 
 export {
@@ -450,5 +456,5 @@ export {
   hexToRgb,
   secondsToHHMMSS,
   getBrandAndCompetitorsFromProfileObject,
-  customChartToolTip
+  customChartToolTip,
 }
