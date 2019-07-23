@@ -325,7 +325,22 @@ function* getTopPerformingFormatData({ data = {} }) {
       `/brand/${brand.uuid}/topcv`,
       'GET'
     )
-    console.log(moment().weekday())
+    const currentDayIndex = moment().weekday() + 1
+    const pastdays = dayOfWeek.slice(0, currentDayIndex)
+    const lastWeek = dayOfWeek.slice(currentDayIndex)
+    const days = [...lastWeek, ...pastdays].map(
+      (day, idx) =>
+        `${
+          6 - idx == 0
+            ? 'Today'
+            : 6 - idx === 1
+            ? 'Yesterday'
+            : moment()
+                .subtract(6 - idx, 'd')
+                .format('MM/DD/YY')
+        } (${day.toUpperCase().slice(0, 3)})`
+    )
+
     if (payload) {
       const doughnutData = percentageManipulation(payload)
       const properties = ['Fast', 'Medium', 'Slow', 'Slowest']
@@ -339,7 +354,7 @@ function* getTopPerformingFormatData({ data = {} }) {
         data: dayOfWeek.map((day) => doughnutData.dates[day][property]),
       }))
       const lineChartData = {
-        labels: dayOfWeek,
+        labels: days,
         datasets: datasets,
       }
 

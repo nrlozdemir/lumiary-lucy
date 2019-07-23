@@ -20,7 +20,7 @@ export const lineChartOptions = {
       {
         gridLines: {
           display: true,
-          color: '#373f5b',
+          color: ['#fff', '#000'],
           offsetGridLines: false,
           lineWidth: 1,
           drawBorder: true,
@@ -29,11 +29,12 @@ export const lineChartOptions = {
 
         ticks: {
           display: true,
-          fontColor: '#fff',
+          fontColor: ['#fff', '#000'],
+          fontFamily: 'ClanOT',
           fontSize: 12,
           stepSize: 1,
           padding: 15,
-          beginAtZero: true,
+          beginAtZero: false,
           callback: function(value, index, values) {
             return value
           },
