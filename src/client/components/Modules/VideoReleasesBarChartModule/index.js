@@ -243,31 +243,48 @@ const VideoReleasesBarChartModule = (props) => {
           <div className={style.groupChartsWrapper}>
             {!!normalizedData &&
               !!normalizedData.length &&
-              normalizedData.map((chartData, idx) => (
-                <div className="col-3" key={`xxx666xxx-${idx}`}>
-                  <div className={style.chartSection}>
-                    <Bar
-                      key={`vrbcmc-${idx}`}
-                      data={chartData}
-                      options={barChartOptions}
-                      datasetKeyProvider={datasetKeyProvider}
-                    />
-                  </div>
-                  <div className={style.chartSectionBadge}>
-                    {!!chartData.label && (
-                      <span
-                        style={{
-                          background: colors.labelBackground,
-                          color: colors.labelColor,
-                          boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+              normalizedData.map((chartData, idx) => {
+                return (
+                  <div className="col-3" key={`xxx666xxx-${idx}`}>
+                    <div className={style.chartSection}>
+                      <Bar
+                        key={`vrbcmc-${idx}`}
+                        data={chartData}
+                        options={{
+                          ...barChartOptions,
+                          scales: {
+                            ...barChartOptions.scales,
+                            yAxes: [
+                              {
+                                ...options.scales.yAxes[0],
+                                ticks: {
+                                  ...options.scales.yAxes[0].ticks,
+                                  stepSize: maxSteps.engagement / 2 !== 0
+                                  ? chartData.maxEngagement > maxSteps.engagement / 2 ? maxSteps.engagement / 2 : maxSteps.engagement
+                                  : 50000,
+                                },
+                              },
+                            ],
+                          }
                         }}
-                      >
-                        {chartData.label}
-                      </span>
-                    )}
+                        datasetKeyProvider={datasetKeyProvider}
+                      />
+                    </div>
+                    <div className={style.chartSectionBadge}>
+                      {!!chartData.label && (
+                        <span
+                          style={{
+                            background: colors.labelBackground,
+                            color: colors.labelColor,
+                            boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                          }}
+                        >
+                          {chartData.label}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+              )})}
           </div>
         </div>
       </div>
