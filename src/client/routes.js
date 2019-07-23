@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
-import { Switch, Route, withRouter } from 'react-router-dom'
+import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
 
 import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { actions, makeSelectGlobalSection } from 'Reducers/app'
+import { actions as appActions, makeSelectGlobalSection } from 'Reducers/app'
+import {
+  actions as authActions,
+  makeSelectAuthUser,
+  makeSelectAuthProfile,
+} from 'Reducers/auth'
 
 import RouterLoading from 'Components/RouterLoading'
 import DynamicImport from 'Containers/DynamicImport'
+import PrivateRoute from 'Components/PrivateRoute'
 
 const routes = [
   {
@@ -193,12 +199,14 @@ const routes = [
     exact: true,
     component: 'Account',
     navbarOff: true,
+    notPrivateRoute: true,
   },
   {
     path: '/account/change-password',
     exact: true,
     component: 'Account',
     navbarOff: true,
+    notPrivateRoute: true,
   },
   {
     path: '/account/competitors',
@@ -211,6 +219,7 @@ const routes = [
     exact: true,
     component: 'Account',
     navbarOff: true,
+    notPrivateRoute: true,
   },
   {
     path: '/account/oauth',
@@ -225,53 +234,102 @@ const routes = [
   },
 ]
 
-const RouteWithSubRoutes = (route) => (
-  <Route
-    path={route.path}
-    exact={route.exact}
-    component={(props) => (
-      <DynamicImport
-        removeNavbar={route.removeNavbar}
-        load={() => import(`./containers/${route.component}`)}
-        match={props.match}
-        routeConfig={routes}
-      >
-        {(Component) =>
-          Component === null ? (
-            <RouterLoading />
-          ) : (
-            <Component {...props} match={props.match} />
-          )
-        }
-      </DynamicImport>
-    )}
-  />
-)
+const RouteWithSubRoutes = (route) => {
+  const body = (props) => (
+    <DynamicImport
+      removeNavbar={route.removeNavbar}
+      load={() => import(`./containers/${route.component}`)}
+      match={props.match}
+      routeConfig={routes}
+    >
+      {(Component) =>
+        Component === null ? (
+          <RouterLoading />
+        ) : (
+          <Component {...props} match={props.match} />
+        )
+      }
+    </DynamicImport>
+  )
+
+  return route.notPrivateRoute ? (
+    route.user && route.user.token ? (
+      <Redirect
+        to={{
+          pathname: '/',
+        }}
+      />
+    ) : (
+      <Route
+        path={route.path}
+        exact={route.exact}
+        component={(props) => body(props)}
+      />
+    )
+  ) : (
+    <PrivateRoute
+      path={route.path}
+      exact={route.exact}
+      user={route.user}
+      profile={route.profile}
+      component={(props) => body(props)}
+    />
+  )
+}
 
 class Routes extends React.Component {
   componentDidMount() {
-    const { getSectionExplanationsRequest } = this.props
+    const {
+      user,
+      getProfileRequest,
+      getSectionExplanationsRequest,
+    } = this.props
 
+    const profileStore = JSON.parse(window.localStorage.getItem('profile'))
     const sectionsStore = JSON.parse(window.localStorage.getItem('sections'))
 
-    if (!sectionsStore || !sectionsStore.data) {
-      getSectionExplanationsRequest()
+    if (user && user.token) {
+      if (!sectionsStore || !sectionsStore.data) {
+        getSectionExplanationsRequest()
+      }
+
+      if (!profileStore) {
+        getProfileRequest({ userId: user.id, token: user.token })
+      }
     }
   }
 
   componentDidUpdate(prevProps) {
-    const { sections } = this.props
+    const { user, profile, sections } = this.props
+
+    if (prevProps.user && prevProps.user.token !== user.token) {
+      window.location.reload()
+    }
 
     if (prevProps.sections !== sections) {
       window.localStorage.setItem('sections', JSON.stringify(sections))
     }
+
+    if (prevProps.user !== user) {
+      window.localStorage.setItem('user', JSON.stringify(user))
+    }
+
+    if (prevProps.profile !== profile) {
+      window.localStorage.setItem('profile', JSON.stringify(profile))
+    }
   }
 
   render() {
+    const { user, profile } = this.props
     return (
       <Switch>
         {routes.map((route, i) => (
-          <RouteWithSubRoutes key={i} {...route} />
+          <RouteWithSubRoutes
+            key={i}
+            {...route}
+            user={user}
+            profile={profile}
+          />
         ))}
       </Switch>
     )
@@ -282,9 +340,12 @@ Routes.propTypes = {}
 
 const mapStateToProps = createStructuredSelector({
   sections: makeSelectGlobalSection(),
+  user: makeSelectAuthUser(),
+  profile: makeSelectAuthProfile(),
 })
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ ...appActions, ...authActions }, dispatch)
 
 const withConnect = connect(
   mapStateToProps,

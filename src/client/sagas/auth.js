@@ -2,9 +2,9 @@ import qs from 'qs'
 import { types } from 'Reducers/auth'
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
+import axios from 'axios'
 import { ajax, buildQApiUrl } from 'Utils/api'
 import authMockData from 'Api/mocks/authMock.json'
-import { push } from 'connected-react-router'
 
 const VALIDATE_SSO = '/auth/sso/validate'
 
@@ -13,29 +13,32 @@ const VALID_LOGIN = {
   password: 'lucylucy',
 }
 
-function getAuthDataApi(name) {
-  return axios.get('/').then((res) => authMockData[name])
-}
+function getAuthDataApi(name, data) {
+  return axios.get('/').then((res) => {
+    if (name === 'login') {
+      return data.email === VALID_LOGIN.email &&
+        data.password === VALID_LOGIN.password
+        ? {
+            status: 'success',
+            message: 'logged-in',
+            token: authMockData.user.token,
+            id: authMockData.user.id,
+          }
+        : {
+            status: 'error',
+            message: 'Invalid Email/Password Combination',
+          }
+    }
 
-function loginApi({ email, password }) {
-  return email === VALID_LOGIN.email && password === VALID_LOGIN.password
-    ? {
-        status: 'success',
-        message: 'logged-in',
-        token: 24234223,
-      }
-    : {
-        status: 'error',
-        message: 'Invalid Email/Password Combination',
-      }
+    return authMockData[name]
+  })
 }
 
 export function* authorize({ email, password }) {
   try {
-    const payload = yield call(loginApi, { email, password })
+    const payload = yield call(getAuthDataApi, 'login', { email, password })
 
     if (payload.status === 'success') {
-      console.log('payload', payload)
       yield put({ type: types.LOGIN_SUCCESS, payload })
     } else {
       yield put({ type: types.LOGIN_ERROR, payload: payload })
@@ -43,6 +46,17 @@ export function* authorize({ email, password }) {
   } catch (e) {
     console.log(e)
     yield put({ type: types.LOGIN_ERROR, payload: e.message })
+  }
+}
+
+export function* getProfile({ userId, token }) {
+  try {
+    const payload = yield call(getAuthDataApi, 'profile')
+
+    yield put({ type: types.GET_PROFILE_SUCCESS, payload })
+  } catch (e) {
+    console.log(e)
+    yield put({ type: types.GET_PROFILE_ERROR, payload: e.message })
   }
 }
 
@@ -167,4 +181,5 @@ export default [
   takeLatest(types.FORGOT_PASSWORD_REQUEST, forgotPassword),
   takeLatest(types.COMPETITORS_REQUEST, getCompetitors),
   takeLatest(types.CONNECT_OAUTH_REQUEST, connectOAuth),
+  takeLatest(types.GET_PROFILE_REQUEST, getProfile),
 ]

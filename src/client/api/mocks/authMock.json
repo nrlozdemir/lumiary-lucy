@@ -1,7 +1,9 @@
 {
-  "token": "nk234k23j4k242j",
   "user": {
     "id": "1344554634534",
+    "token": "nk234k23j4k242j"
+  },
+  "profile": {
     "name": "John Wick",
     "avatar": "https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png",
     "brand": {
