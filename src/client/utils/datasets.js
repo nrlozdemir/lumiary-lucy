@@ -776,7 +776,10 @@ const getCVScoreChartAttributes = (data) => {
   const maxVideoPercent =
     (!!data &&
       Object.keys(data).reduce((accumulator, key) => {
-        const maxPercentInSet = Math.max(...data[key].videoPercents)
+        const videoPercents = data[key].videoPercents
+        const maxPercentInSet = Math.max(
+          videoPercents ? videoPercents : data[key]
+        )
         return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
       }, 0)) ||
     0
