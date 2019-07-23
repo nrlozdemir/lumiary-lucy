@@ -178,9 +178,11 @@ class DoughnutChart extends React.Component {
                           !!newData &&
                           !!newData.datasets &&
                           !!newData.datasets[0]
-                            ? newData.datasets[0].data.map((value) =>
-                                parseFloat(value)
-                              )
+                            ? newData.datasets[0].data.map((value) => {
+                                const val = parseFloat(value)
+                                if (val <= 5) return null
+                                return val
+                              })
                             : [],
                         backgroundColor:
                           newData && newData.datasets
@@ -198,9 +200,13 @@ class DoughnutChart extends React.Component {
                   plugins={plugins}
                   options={{
                     responsive: false,
-                    tooltips: {
-                      enabled: false,
-                    },
+                    tooltips: customChartToolTip(
+                      themes,
+                      {
+                        mode: 'dataset',
+                      },
+                      newData
+                    ),
                     legend: {
                       display: legend,
                       labels: {
