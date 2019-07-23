@@ -61,7 +61,7 @@ class TopPerformingFormat extends React.Component {
     return (
       <LineAndDoughnutChartModule
         moduleKey="Panoptic/Top-Performing-Formats-This-Week-By-CV-Score"
-        title="Top Performing Formats This Week By CV Score"
+        title="Top Performing Pacing This Week By CV Score"
         action={this.callBack}
         lineChartData={lineChartData}
         lineChartOptions={lineChartOptions}
