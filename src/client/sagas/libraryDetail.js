@@ -20,7 +20,7 @@ import {
   percentageManipulation,
 } from 'Utils/datasets'
 
-import { selectAuthProfile } from 'Reducers/auth'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 
 function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
   try {
@@ -30,7 +30,7 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
       { key: 'duration', title: 'Duration' },
       { key: 'aspectRatio', title: 'Aspect Ratio' },
     ]
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const parameters = {
       brands: [brand.uuid],
@@ -116,7 +116,7 @@ function* getColorTemperatureData({
   payload: { videoId, daterange = 'week' },
 }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const options = {
       daterange,
@@ -148,7 +148,7 @@ function* getColorTemperatureData({
 
 function* getShotByShot(videoId) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const payload = yield call(
       getDataFromApi,
@@ -209,7 +209,7 @@ function* getDoughnutSectionInfoData({ payload }) {
 
     const infoData = yield select(makeSelectInfoShowSection)
 
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     if (!!brand && !!videoId && !!dateRange && !!metric && !!infoData) {
       const {
@@ -313,7 +313,7 @@ function* getDoughnutSectionInfoData({ payload }) {
 }
 function* getVideoAverage({ id }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
     const payload = yield call(getDataFromApi, {
       url: `/brand/${brand.uuid}/video/${id}/metrics`,
       requestType: 'GET',
