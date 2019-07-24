@@ -13,11 +13,11 @@ class Panoptic extends React.Component {
     return (
       <React.Fragment>
         <Cards />
-        {/* <TopPerformingFormat />
+        <TopPerformingFormat />
         <VideoReleasesBarChart />
         <FilteringSection />
         <PacingCard />
-        <CompareShares /> */}
+        <CompareShares />
       </React.Fragment>
     )
   }
