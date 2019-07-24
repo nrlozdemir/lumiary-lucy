@@ -60,10 +60,18 @@ const LineAndDoughnutChartModule = ({
   const sortedProperties = sortableManipulatedProperties.sort((a, b) => {
     return b[0].score.value - a[0].score.value
   })
-  console.log(sortedProperties)
 
+  const { datasets:lineChartDataSets = [] } = lineChartData
   const { chartYAxisMax, chartYAxisStepSize } = getCVScoreChartAttributes(
-    lineChartData.datasets
+    lineChartDataSets,
+    lineChartDataSets.reduce((accumulator, dataset) => {
+      dataset.data.forEach((item) => {
+        if(item > accumulator) {
+          accumulator = item
+        }
+      })
+      return accumulator
+    }, 0)
   )
 
   return (
@@ -109,7 +117,7 @@ const LineAndDoughnutChartModule = ({
                             lineChartData.datasets[datasetIndex].label) ||
                           ''
                         return `${percentageManipulation(count) ||
-                          0}% ${!!name && `| ${name}`}`
+                          0} Score ${!!name && `| ${name}`}`
                       },
                     },
                   }),
@@ -171,7 +179,7 @@ const LineAndDoughnutChartModule = ({
                 return null
               }
               return (
-                <div className={percentageCol}>
+                <div className={percentageCol} key={idx}>
                   <div
                     className={style.legend}
                     style={{
@@ -245,7 +253,7 @@ const LineAndDoughnutChartModule = ({
                       color: colors.labelColor,
                     }}
                   >
-                    <b>{property[0].libraryPercent}</b> of your library is shot
+                    <b>{property[0].libraryPercent}%</b> of your library is shot
                     in <b>{property[0].name}</b>
                   </p>
                 </div>

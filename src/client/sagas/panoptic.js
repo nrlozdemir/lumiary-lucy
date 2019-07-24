@@ -322,8 +322,8 @@ function* getTopPerformingFormatData({ data = {} }) {
 
     const payload = yield call(
       getDataFromApi,
-      options,
-      `/brand/${brand.uuid}/topcv`,
+      undefined,
+      buildApiUrl(`/brand/${brand.uuid}/topcv`, options),
       'GET'
     )
     const currentDayIndex = moment().weekday() + 1
@@ -343,20 +343,67 @@ function* getTopPerformingFormatData({ data = {} }) {
     )
 
     if (payload) {
-      const doughnutData = percentageManipulation(payload)
-      const properties = ['Fast', 'Medium', 'Slow', 'Slowest']
-      const datasets = properties.map((property, idx) => ({
-        label: property,
-        fill: false,
-        lineTension: 0.1,
-        backgroundColor: chartColors[idx],
-        borderColor: chartColors[idx],
-        hoverBackgroundColor: chartColors[idx],
-        data: dayOfWeek.map((day) => doughnutData.dates[day][property]),
-      }))
+      console.log(payload)
+      // const doughnutData = percentageManipulation(payload)
+      // const properties = ['Fast', 'Medium', 'Slow', 'Slowest']
+      // const datasets = properties.map((property, idx) => ({
+      //   label: property,
+      //   fill: false,
+      //   lineTension: 0.1,
+      //   backgroundColor: chartColors[idx],
+      //   borderColor: chartColors[idx],
+      //   hoverBackgroundColor: chartColors[idx],
+      //   data: dayOfWeek.map((day) => doughnutData.dates[day][property]),
+      // }))
+      // const lineChartData = {
+      //   labels: days,
+      //   datasets: datasets,
+      // }
+
+      const weekdayOrder = []
+      const propertyBuckets = {}
+      for(let i = 0; i < 7; i++) {
+        const weekday = moment().subtract(i, 'days').format('dddd')
+        const weekdayShort = moment().subtract(i, 'days').format('ddd')
+        const weekdayDate = moment().subtract(i, 'days').format('M/D/YY')
+        const label = (i === 0) 
+          ? `Today (${weekdayShort})`
+          : (i === 1) 
+            ? `Yesterday (${weekdayShort})`
+            : `${weekdayDate} (${weekdayShort})`
+
+        weekdayOrder.unshift({
+          weekday,
+          data: payload.dates[weekday],
+          label,
+        })
+
+        Object.keys(payload.dates[weekday]).forEach((propertyBucket, idx) => {
+          if(!propertyBuckets[propertyBucket]) {
+            propertyBuckets[propertyBucket] = {
+              label: propertyBucket,
+              fill: false,
+              lineTension: 0.1,
+              backgroundColor: chartColors[idx],
+              borderColor: chartColors[idx],
+              hoverBackgroundColor: chartColors[idx],
+              data: []
+            }
+          }
+
+          const propertyBucketValue = payload.dates[weekday][propertyBucket]
+          propertyBuckets[propertyBucket].data.unshift(propertyBucketValue)
+        })
+
+      }
+
       const lineChartData = {
-        labels: days,
-        datasets: datasets,
+        labels: weekdayOrder.map((item) => {
+          return item.label
+        }),
+        datasets: Object.keys(propertyBuckets).map((propertyBucket) => {
+          return propertyBuckets[propertyBucket]
+        })
       }
 
       yield put(
