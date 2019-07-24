@@ -275,6 +275,7 @@ const panopticReducer = (state = initialState, action) => {
     case types.GET_FLIPCARDS_DATA_SUCCESS:
       return state
         .setIn(['flipCardsData', 'data'], fromJS(action.payload))
+        .setIn(['flipCardsData', 'originalData'], fromJS(action.payload))
         .setIn(['flipCardsData', 'loading'], fromJS(false))
 
     case types.GET_FLIPCARDS_DATA_ERROR:
