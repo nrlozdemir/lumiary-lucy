@@ -44,20 +44,21 @@ function parseData(props) {
   const statDifference = data.percentage
 
   let statArrowClassName, statClassName, tooltipText
-
+  
   if (data.percentage == 0) {
     const titleLowerCase = title.charAt(0).toLowerCase() + title.slice(1)
     statArrowClassName = classnames(styles.arrow, styles.arrowRight)
     statClassName = classnames(styles.stats, styles.noChange)
     tooltipText = `No change in ${titleLowerCase} in the last 24 hours`
-  } else if (data.percentage > 0) {
-    statArrowClassName = classnames(styles.arrow, styles.arrowUp)
-    statClassName = classnames(styles.stats, styles.increase)
-    tooltipText = `${title} increased ${data.percentage}% from yesterday`
-  } else if (data.percentage < 0) {
-    statArrowClassName = classnames(styles.arrow, styles.arrowDown)
-    statClassName = classnames(styles.stats, styles.decrease)
-    tooltipText = `${title} decreased ${data.percentage}% from yesterday`
+  } else {
+    const changeWording = (data.percentage > 0) ? 'increased' : 'decreased'
+    const arrowStyle = (data.percentage > 0) ? styles.arrowUp : styles.arrowDown
+    const statStyle = (data.percentage > 0) ? styles.increase : styles.decrease
+    const formattedPercent = parseInt(data.percentage).toFixed(1).toLocaleString()
+
+    statArrowClassName = classnames(styles.arrow, arrowStyle)
+    statClassName = classnames(styles.stats, statStyle)
+    tooltipText = `${title} ${changeWording} ${formattedPercent}% from yesterday`
   }
 
   return {
@@ -71,7 +72,7 @@ function parseData(props) {
 }
 
 const Front = (props) => {
-  const { title, data } = props
+  const { title, data, originalData = {}, metric = '' } = props
   const {
     stats,
     statClassName,
@@ -126,6 +127,8 @@ const Front = (props) => {
               </div>
             </div>
             <CustomBarChart
+              metric={metric}
+              originalData={originalData}
               data={stats}
               selected={selected}
               difference={statDifference}
@@ -145,7 +148,7 @@ class Cards extends React.Component {
 
   render() {
     const {
-      flipCardsData: { data, loading },
+      flipCardsData: { data, loading, originalData = {} },
     } = this.props
 
     const wholeSegmentsWithOrder = ['view', 'like', 'comment', 'share']
@@ -166,7 +169,7 @@ class Cards extends React.Component {
                 >
                   {!loading &&
                     (data && data[item] ? (
-                      <Front data={data[item]} title={`${ucfirst(item)}s`} />
+                      <Front metric={item} originalData={originalData[item]} data={data[item]} title={`${ucfirst(item)}s`} />
                     ) : (
                       <div
                         className={styles.noContent}
