@@ -117,11 +117,16 @@ const VideoReleasesBarChartModule = (props) => {
           {
             ...data.datasets[0],
             data: data.datasets[0].data.map((v) =>
-              Math.round(v * videoNormalizer)
+              //if all data array are 0, chart js has some problems, so making the data
+              //0.000001 and this is fixed.(this data does not seen in chart)
+              Math.round(v * videoNormalizer) || 0.000001
             ),
           },
           {
             ...data.datasets[1],
+            //if all data array are 0, chart js has some problems, so making the data
+            //0.000001 and this is fixed.(this data does not seen in chart)
+            data: data.datasets[1].data.map(e => e || -0.000001)
           },
         ],
       }))) ||
@@ -259,9 +264,7 @@ const VideoReleasesBarChartModule = (props) => {
                                 ...options.scales.yAxes[0],
                                 ticks: {
                                   ...options.scales.yAxes[0].ticks,
-                                  stepSize: maxSteps.engagement / 2 !== 0
-                                  ? chartData.maxEngagement > maxSteps.engagement / 2 ? maxSteps.engagement / 2 : maxSteps.engagement
-                                  : 50000,
+                                  stepSize: maxSteps.engagement
                                 },
                               },
                             ],
