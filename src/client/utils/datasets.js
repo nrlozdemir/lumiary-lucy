@@ -728,12 +728,7 @@ const percentageBeautifier = (value, precision) => {
   }
 
   const multiplier = Math.pow(10, precision || 1)
-  const x = value
-  value = parseFloat(value).toFixed(2)
-
-  const multiplier = Math.pow(100, precision || 1)
   value = Math.round(value * multiplier) / multiplier
-  value = parseFloat(value).toFixed(1)
 
   if (value.toString().substr(-1, 1) == 0) {
     value = value.toString().replace('.0', '')
