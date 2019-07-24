@@ -709,7 +709,8 @@ const convertNumberArrIntoPercentages = (arr = []) => {
 
 const percentageBeautifier = (value, precision) => {
   /*
-  all numbers converted to decimals: 
+  // all numbers converted to decimals
+  // except 0 
   if (value === 0) {
     return value
   }
