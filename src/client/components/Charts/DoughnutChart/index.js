@@ -4,7 +4,7 @@ import classnames from 'classnames'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import { isDataSetEmpty } from 'Utils/datasets'
-import { customChartToolTip } from 'Utils'
+import { ucfirst } from 'Utils'
 import ToolTip from 'Components/ToolTip'
 
 import Labels from 'Components/Charts/Labels'
@@ -80,6 +80,7 @@ class DoughnutChart extends React.Component {
       customChartWrapper,
       customTooltips,
       average,
+      cvScoreData,
     } = this.props
 
     const themes = this.props.themeContext.colors
@@ -178,7 +179,7 @@ class DoughnutChart extends React.Component {
                           !!newData.datasets &&
                           !!newData.datasets[0]
                             ? newData.datasets[0].data.map((value) =>
-                                parseFloat(value).toFixed(0)
+                                parseFloat(value)
                               )
                             : [],
                         backgroundColor:
@@ -197,7 +198,9 @@ class DoughnutChart extends React.Component {
                   plugins={plugins}
                   options={{
                     responsive: false,
-                    tooltips: customChartToolTip(themes),
+                    tooltips: {
+                      enabled: false,
+                    },
                     legend: {
                       display: legend,
                       labels: {
@@ -250,8 +253,11 @@ class DoughnutChart extends React.Component {
                     >
                       <div className={style.circleWrapper}>
                         <div 
-                          className={style.circleTick}
-                          data-tip="Hi guys" 
+                          className={classnames(style.circleTick, {
+                            [style.dark] : themes.themeType === 'dark',
+                            [style.light] : themes.themeType === 'light',
+                          })}
+                          data-tip={`${ucfirst(cvScoreData.platform)} Average | ${average}`}
                           data-for={`panoptic-cvScore-${tooltipKey}`}
                         ></div>
                       </div>
@@ -259,7 +265,7 @@ class DoughnutChart extends React.Component {
                     <ToolTip
                       effect="solid"
                       place="right"
-                      xSmallTooltip
+                      smallTooltip
                       id={`panoptic-cvScore-${tooltipKey}`}
                     />
                   </React.Fragment>
