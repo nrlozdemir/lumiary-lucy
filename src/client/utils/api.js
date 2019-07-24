@@ -2,6 +2,7 @@ import axios from 'axios'
 import { API_ROOT, API_VERSION, QAPI_ROOT, QAPI_VERSION, } from 'Utils/globals'
 import qs from 'qs'
 
+
 export function getDataFromApi(parameters = {}, url, type) {
   return ajax({
     url: url || parameters.url,
