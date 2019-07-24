@@ -222,6 +222,7 @@ class DoughnutChart extends React.Component {
                       datalabels: {
                         display: displayDataLabels,
                         formatter: (value) => {
+                          if (!value) return
                           if (dataLabelFunction) {
                             return dataLabelPlugins(
                               value,
