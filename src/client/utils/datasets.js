@@ -708,10 +708,36 @@ const convertNumberArrIntoPercentages = (arr = []) => {
 }
 
 const percentageBeautifier = (value, precision) => {
+  /*
+  all numbers converted to decimals: 
+  if (value === 0) {
+    return value
+  }
   value = parseFloat(value).toFixed(2)
   const multiplier = Math.pow(100, precision || 1)
   value = Math.round(value * multiplier) / multiplier
   value = parseFloat(value).toFixed(1)
+  return value
+  */
+
+  // all numbers converted to decimal with one 10th place
+  // it's excepting 0 and integers 
+  if (isInteger(value) || value === 0) {
+    return value
+  }
+
+  const multiplier = Math.pow(10, precision || 1)
+  const x = value
+  value = parseFloat(value).toFixed(2)
+
+  const multiplier = Math.pow(100, precision || 1)
+  value = Math.round(value * multiplier) / multiplier
+  value = parseFloat(value).toFixed(1)
+
+  if (value.toString().substr(-1, 1) == 0) {
+    value = value.toString().replace('.0', '')
+  }
+
   return value
 }
 
