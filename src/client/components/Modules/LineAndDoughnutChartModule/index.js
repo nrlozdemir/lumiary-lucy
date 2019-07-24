@@ -21,6 +21,7 @@ const LineAndDoughnutChartModule = ({
   filters,
   isEmpty,
   loading = false,
+  platform,
   properties,
   average,
   themeContext: { colors },
@@ -205,6 +206,9 @@ const LineAndDoughnutChartModule = ({
                     datasetsBorderWidth={0}
                     removeTooltip
                     average={average}
+                    cvScoreData={{
+                      platform: platform
+                    }}
                     layoutPadding={7}
                     data={{
                       datasets: [
