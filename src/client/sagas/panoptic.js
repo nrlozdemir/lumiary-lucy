@@ -320,90 +320,12 @@ function* getTopPerformingFormatData({ data = {} }) {
       //limit: 4,
     }
 
-    /*const payload = yield call(
+    const payload = yield call(
       getDataFromApi,
       undefined,
       buildApiUrl(`/brand/${brand.uuid}/topcv`, options),
       'GET'
-    )*/
-    const payload = {
-      "platformAverage": "56.8",
-      "properties": {
-        "Fast": {
-          "score": {
-            "value": 92.2874671340929,
-            "date": "Monday"
-          },
-          "libraryPercent": "5.2"
-        },
-        "Medium": {
-          "score": {
-            "value": 78.7028921998247,
-            "date": "Sunday"
-          },
-          "libraryPercent": "22.4"
-        },
-        "Slow": {
-          "score": {
-            "value": 89.0446976336547,
-            "date": "Sunday"
-          },
-          "libraryPercent": "32.8"
-        },
-        "Slowest": {
-          "score": {
-            "value": 95.3549517966696,
-            "date": "Tuesday"
-          },
-          "libraryPercent": "39.7"
-        }
-      },
-      "dates": {
-        "Wednesday": {
-          "Fast": 0,
-          "Medium": 3.638941398865785,
-          "Slow": 27.158105366079567,
-          "Slowest": 3.49716446124764
-        },
-        "Tuesday": {
-          "Fast": 0,
-          "Medium": 53.900087642418896,
-          "Slow": 72.31960268770085,
-          "Slowest": 82.4496056091148
-        },
-        "Monday": {
-          "Fast": 92.2874671340929,
-          "Medium": 60.0934852468595,
-          "Slow": 70.46450482033305,
-          "Slowest": 75.4250657318142
-        },
-        "Sunday": {
-          "Fast": 64.5048203330412,
-          "Medium": 75.54776511831724,
-          "Slow": 78.67367806018113,
-          "Slowest": 80.95968448729184
-        },
-        "Saturday": {
-          "Fast": 0,
-          "Medium": 50.920245398773,
-          "Slow": 66.52059596844873,
-          "Slowest": 62.91264972246565
-        },
-        "Friday": {
-          "Fast": 0,
-          "Medium": 0,
-          "Slow": 0,
-          "Slowest": 0
-        },
-        "Thursday": {
-          "Fast": 13.2882882882883,
-          "Medium": 6.012818111116786,
-          "Slow": 0,
-          "Slowest": 3.9067422810333965
-        }
-      }
-    }
-
+    )
 
     const currentDayIndex = moment().weekday() + 1
     const pastdays = dayOfWeek.slice(0, currentDayIndex)
