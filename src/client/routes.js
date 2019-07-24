@@ -184,6 +184,11 @@ const routes = [
     },
   },
   {
+    path: '/glossary',
+    exact: true,
+    component: 'Glossary',
+  },
+  {
     path: '/sso',
     exact: true,
     component: 'SSO',
