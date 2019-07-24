@@ -319,7 +319,7 @@ function* getTopPerformingFormatData({ data = {} }) {
       daterange: 'week',
       //limit: 4,
     }
-
+    
     const payload = yield call(
       getDataFromApi,
       undefined,
