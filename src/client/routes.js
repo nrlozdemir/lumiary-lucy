@@ -184,6 +184,16 @@ const routes = [
     },
   },
   {
+    path: '/glossary/:letter/:term',
+    exact: true,
+    component: 'Glossary',
+  },
+  {
+    path: '/glossary/:letter',
+    exact: true,
+    component: 'Glossary',
+  },
+  {
     path: '/glossary',
     exact: true,
     component: 'Glossary',
