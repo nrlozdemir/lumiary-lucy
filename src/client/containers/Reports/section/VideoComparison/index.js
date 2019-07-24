@@ -41,7 +41,7 @@ class VideoComparison extends React.Component {
     return (
       <Module
         moduleKey={'Reports/VideoComparison'}
-        title="Video Format Distribution Comparison"
+        title="Video Duration Distribution Comparison"
         action={this.callBack}
         isEmpty={isDataSetEmpty(data)}
         filters={[

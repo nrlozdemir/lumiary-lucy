@@ -64,8 +64,12 @@ class PacingCard extends Component {
               </span>
             </div>
 
-            {!isDataEmpty && <PacingPieChart data={data} />}
-            <div className={style.marketViewCardChartTitle}>Medium Paced</div>
+            {!isDataEmpty && !loading && (
+              <PacingPieChart data={data} colors={colors} />
+            )}
+            {!loading && (
+              <div className={style.marketViewCardChartTitle}>Medium Paced</div>
+            )}
             <div
               className={classnames(
                 style.colorListSmall,
@@ -73,7 +77,8 @@ class PacingCard extends Component {
                 style.colorList
               )}
             >
-              {!!data &&
+              {!loading &&
+                !!data &&
                 !!data.labels &&
                 data.labels.map((label, idx) => (
                   <div

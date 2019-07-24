@@ -18,6 +18,7 @@ import {
   convertDataIntoDatasets,
   convertMultiRequestDataIntoDatasets,
   percentageManipulation,
+  convertPropertiesIntoDatasets,
 } from 'Utils/datasets'
 
 import { dayOfWeek, chartColors } from 'Utils/globals'
@@ -171,65 +172,67 @@ function* getPlatformTopVideosMarketview({
 function* getSimilarProperties({ data: { dateRange, container } }) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
+    const metric = 'shares'
 
     const competitors =
       !!brand.competitors &&
       !!brand.competitors.length &&
       brand.competitors.map((c) => c.uuid)
 
-    const options = {
+    const url = buildApiUrl(`/brand/${brand.uuid}/properties`, {
+      metric,
+      top: 20,
       competitors,
-    }
+      daterange: dateRange,
+    })
 
-    const url = `/brand/${brand.uuid}/properties?metric=shares&daterange=${dateRange}`
-    //${!!competitors ? '&allcompetitors=true' : ''}`
+    const response = yield call(getDataFromApi, undefined, url, 'GET')
 
-    const payload = yield call(getDataFromApi, options, url, 'GET')
-
-    let parsedNewPayload, highestBuckets
-    if (!!payload && !!payload.propertyBucketsRanked) {
-      highestBuckets = _.slice(
+    if (!!response && !!response.market && !!response.propertiesRanked) {
+      const highestBuckets = _.slice(
         _.orderBy(
-          payload.propertyBucketsRanked,
-          (item) => {
-            return item.numberOfMetric
-          },
+          response.propertiesRanked,
+          (item) => (!!item[metric] ? item[metric] : 0),
           ['desc']
         ),
         0,
         3
       )
+
+      if (
+        container === 'competitor' &&
+        !!highestBuckets &&
+        !!highestBuckets.length
+      ) {
+        yield put({
+          type: types.SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY,
+          payload:
+            !!highestBuckets[0] && !!highestBuckets[0].property
+              ? highestBuckets[0].property
+              : null,
+        })
+      }
+
+      const val =
+        (!!highestBuckets &&
+          !!highestBuckets.length &&
+          highestBuckets.map((value, idx) => ({
+            doughnutChartValues: convertPropertiesIntoDatasets(response, {
+              metric,
+              type: 'market',
+              hoverBg: false,
+              percentage: true,
+              property: value.property,
+            }),
+          }))) ||
+        []
+
+      yield put(actions.getSimilarPropertiesSuccess(val))
+    } else {
+      throw new Error('Marketview/detail getSimilarProperties error')
     }
-
-    if (
-      container === 'competitor' &&
-      !!highestBuckets &&
-      !!highestBuckets.length
-    ) {
-      yield put({
-        type: types.SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY,
-        payload:
-          !!highestBuckets[0] && !!highestBuckets[0].highestProperty
-            ? highestBuckets[0].highestProperty
-            : null,
-      })
-    }
-
-    const val = highestBuckets.map((value, idx) => ({
-      doughnutChartValues: convertDataIntoDatasets(
-        percentageManipulation(payload),
-        { property: [value.highestProperty] },
-        {
-          singleDataset: true,
-          noBrandKeys: true,
-          customValueKeyGetAll: true,
-        }
-      ),
-    }))
-
-    yield delay(2000)
-    yield put(actions.getSimilarPropertiesSuccess(val))
   } catch (error) {
+    console.log(error)
     yield put(actions.getSimilarPropertiesFailure(error))
   }
 }
@@ -318,35 +321,35 @@ function* getBubbleChartData() {
 function* getPacingChartData() {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
+    const metric = 'shares'
 
     const competitors =
       !!brand.competitors &&
       !!brand.competitors.length &&
       brand.competitors.map((c) => c.uuid)
 
-    const options = {
+    const url = buildApiUrl(`/brand/${brand.uuid}/properties`, {
+      top: 20,
+      metric,
       competitors,
+      daterange: 'month',
+    })
+
+    const response = yield call(getDataFromApi, undefined, url, 'GET')
+
+    if (!!response && !!response.market && !!response.market.pacing) {
+      const pacingChartData = convertPropertiesIntoDatasets(response, {
+        metric,
+        type: 'market',
+        property: 'pacing',
+      })
+
+      yield put(
+        actions.getPacingChartSuccess(percentageManipulation(pacingChartData))
+      )
+    } else {
+      throw new Error('Marketview getPacingChartData Error')
     }
-
-    const url = `/brand/${brand.uuid}/properties?metric=shares&daterange=month`
-    //${!!competitors ? '&allcompetitors=true' : ''}`
-
-    const payload = yield call(getDataFromApi, options, url, 'GET')
-
-    const pacingChartData = convertDataIntoDatasets(
-      payload,
-      { property: ['pacing'] },
-      {
-        customBorderColor: '#fff',
-        singleDataset: true,
-        noBrandKeys: true,
-        customValueKey: 'proportionOfLibrary',
-      }
-    )
-
-    yield put(
-      actions.getPacingChartSuccess(percentageManipulation(pacingChartData))
-    )
   } catch (error) {
     console.log(error)
     yield put(actions.getPacingChartFailure(error))

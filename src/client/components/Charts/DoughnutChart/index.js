@@ -7,7 +7,7 @@ import { isDataSetEmpty } from 'Utils/datasets'
 import { customChartToolTip } from 'Utils'
 
 import Labels from 'Components/Charts/Labels'
-
+import { roundRect } from 'Utils/ui'
 const propTypes = {}
 const defaultProps = {
   legend: false,
@@ -35,7 +35,6 @@ const defaultProps = {
   legendLabelsFontFamily: 'ClanOTBold',
   legendLabelsFontSize: 12,
 }
-
 const dataLabelPlugins = (value, func, item) => {
   if (func == 'insertAfter') {
     return value + '' + item
@@ -44,177 +43,241 @@ const dataLabelPlugins = (value, func, item) => {
   }
   return value
 }
+class DoughnutChart extends React.Component {
+  componentDidMount() {
+    const ctx = this.canvas && this.canvas.getContext('2d')
+    if (ctx) {
+      ctx.fillStyle = '#fff'
+      ctx.shadowOffsetY = 1
+      ctx.shadowColor = '#bebebe'
+      ctx.shadowBlur = 4
+      roundRect(ctx, 55, 0, 10, 22, 5)
+      ctx.save()
+    }
+  }
 
-const DoughnutChart = (props) => {
-  const {
-    width,
-    height,
-    data,
-    datasetsBorderWidth,
-    datasetsBorderColor,
-    datasetsHoverBorderColor,
-    legend,
-    layoutPadding,
-    fillTextColor,
-    fillTextFontSize,
-    fillTextFontFamily,
-    fillText,
-    displayDataLabels,
-    dataLabelFunction,
-    dataLabelInsert,
-    dataLabelColor,
-    dataLabelFontFamily,
-    dataLabelFontSize,
-    dataLabelFontWeight,
-    legendLabelsFontColor,
-    legendLabelsFontSize,
-    legendLabelsFontFamily,
-    labelsData,
-    labelPositionBottom,
-    labelPositionRight,
-    labelPositionLeft,
-    cutoutPercentage,
-    customStyle,
-    customDoughnutContainer,
-    customChartWrapper,
-    customTooltips,
-  } = props
+  render() {
+    const {
+      width,
+      height,
+      data,
+      datasetsBorderWidth,
+      datasetsBorderColor,
+      datasetsHoverBorderColor,
+      legend,
+      layoutPadding,
+      fillTextColor,
+      fillTextFontSize,
+      fillTextFontFamily,
+      fillText,
+      displayDataLabels,
+      dataLabelFunction,
+      dataLabelInsert,
+      dataLabelColor,
+      dataLabelFontFamily,
+      dataLabelFontSize,
+      dataLabelFontWeight,
+      legendLabelsFontColor,
+      legendLabelsFontSize,
+      legendLabelsFontFamily,
+      labelsData,
+      labelPositionBottom,
+      labelPositionRight,
+      labelPositionLeft,
+      cutoutPercentage,
+      removeTooltip,
+      customStyle,
+      customDoughnutContainer,
+      customChartWrapper,
+      customTooltips,
+      average,
+    } = this.props
 
-  const themes = props.themeContext.colors
+    const themes = this.props.themeContext.colors
 
-  let plugins = []
-	
-  if (fillText) {
-    const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
+    let plugins = []
+    if (fillText) {
+      const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
 
-    plugins = [
-      {
-        beforeDraw: function(chart) {
-          const ctx = chart.chart.ctx
-          const customFillText = textToUse.replace(/^\s+|\s+$/g, '')
+      plugins = [
+        {
+          beforeDraw: function(chart) {
+            const ctx = chart.chart.ctx
+            const customFillText = textToUse.replace(/^\s+|\s+$/g, '')
 
-          ctx.restore()
-          ctx.textAlign = 'center'
-          ctx.textBaseline = 'middle'
-          ctx.fillStyle = themes.textColor
-          ctx.font = fillTextFontSize + ' ' + fillTextFontFamily
+            ctx.restore()
+            ctx.textAlign = 'center'
+            ctx.textBaseline = 'middle'
+            ctx.fillStyle = themes.textColor
+            ctx.font = fillTextFontSize + ' ' + fillTextFontFamily
 
-          ctx.fillText(customFillText, width / 2, height / 2)
+            ctx.fillText(customFillText, width / 2, height / 2)
 
-          ctx.save()
+            ctx.save()
+          },
         },
-      },
-    ]
-  }
+      ]
+    }
 
-  if (!data) {
-    return null
-  }
+    if (!data) {
+      return null
+    }
 
-  let newData = { ...data }
+    const dataLimit = 5
 
-  return (
-    <React.Fragment>
-      <div
-        className={classnames(style.doughnutContainer, customDoughnutContainer)}
-        style={customStyle}
-      >
-        {labelPositionLeft && labelsData && (
-          <div className={style.labelContainer}>
-            <Labels data={labelsData} />
+    let newData = { ...data }
+
+    // If more than 5 datapoints, take the first 4, and bucket the rest
+    if (
+      !!newData.labels &&
+      !!newData.labels.length &&
+      newData.labels.length > dataLimit
+    ) {
+      newData = {
+        labels: [...newData.labels.slice(0, dataLimit - 1), 'Other'],
+        datasets: [
+          {
+            ...newData.datasets[0],
+            data: newData.datasets[0].data
+              .slice(0, dataLimit - 1)
+              .reduce((acc, val, idx) => {
+                let totalToAdd
+                if (idx === dataLimit - 2) {
+                  const total = acc.reduce((a, b) => a + b, 0)
+                  totalToAdd = Math.round(100 - total - val)
+                }
+                const result = [...acc, val]
+                if (totalToAdd) {
+                  result.push(totalToAdd)
+                }
+                return result
+              }, []),
+          },
+        ],
+      }
+    }
+
+    return (
+      <React.Fragment>
+        <div
+          className={classnames(
+            style.doughnutContainer,
+            customDoughnutContainer
+          )}
+          style={customStyle}
+        >
+          {labelPositionLeft && labelsData && (
+            <div className={style.labelContainer}>
+              <Labels data={labelsData} />
+            </div>
+          )}
+          <div className={classnames(style.chartWrapper, customChartWrapper)}>
+            {newData && (
+              <React.Fragment>
+                <Doughnut
+                  key={Math.random()}
+                  width={width}
+                  height={height}
+                  data={{
+                    labels: newData.labels,
+                    datasets: [
+                      {
+                        data:
+                          !!newData &&
+                          !!newData.datasets &&
+                          !!newData.datasets[0]
+                            ? newData.datasets[0].data.map((value) =>
+                                parseFloat(value).toFixed(0)
+                              )
+                            : [],
+                        backgroundColor:
+                          newData && newData.datasets
+                            ? newData.datasets[0].backgroundColor
+                            : null,
+                        borderColor: themes.moduleBackground,
+                        hoverBorderColor: themes.moduleBackground,
+                        hoverBackgroundColor:
+                          data && newData.datasets
+                            ? newData.datasets[0].hoverBackgroundColor
+                            : null,
+                      },
+                    ],
+                  }}
+                  plugins={plugins}
+                  options={{
+                    responsive: false,
+                    tooltips: customChartToolTip(themes),
+                    legend: {
+                      display: legend,
+                      labels: {
+                        fontColor: legendLabelsFontColor,
+                        fontSize: legendLabelsFontSize,
+                        fontFamily: legendLabelsFontFamily,
+                      },
+                    },
+                    layout: {
+                      padding: layoutPadding,
+                    },
+                    plugins: {
+                      datalabels: {
+                        display: displayDataLabels,
+                        formatter: (value) => {
+                          if (dataLabelFunction) {
+                            return dataLabelPlugins(
+                              value,
+                              dataLabelFunction,
+                              dataLabelInsert
+                            )
+                          }
+                          return value
+                        },
+                        color: dataLabelColor,
+                        font: {
+                          family: dataLabelFontFamily,
+                          weight: dataLabelFontWeight,
+                          size: dataLabelFontSize,
+                        },
+                      },
+                    },
+                    elements: {
+                      arc: {
+                        borderWidth: datasetsBorderWidth,
+                        hoverBorderColor: datasetsHoverBorderColor,
+                      },
+                    },
+                    cutoutPercentage: cutoutPercentage,
+                  }}
+                />
+                {average && (
+                  <canvas
+                    width="120"
+                    height="120"
+                    className={style.ciclePin}
+                    ref={(c) => (this.canvas = c)}
+                    style={{
+                      transform: `translate(-50%, 0) rotate(${(average / 100) *
+                        360}deg)`,
+                    }}
+                  />
+                )}
+              </React.Fragment>
+            )}
           </div>
-        )}
-        <div className={classnames(style.chartWrapper, customChartWrapper)}>
-          {newData && (
-            <Doughnut
-              key={Math.random()}
-              width={width}
-              height={height}
-              data={{
-                labels: newData.labels,
-                datasets: [
-                  {
-                    data:
-                      !!newData && !!newData.datasets && !!newData.datasets[0]
-                        ? newData.datasets[0].data.map((value) =>
-                            parseFloat(value).toFixed(0)
-                          )
-                        : [],
-                    backgroundColor:
-                      newData && newData.datasets
-                        ? newData.datasets[0].backgroundColor
-                        : null,
-                    borderColor: themes.moduleBackground,
-                    hoverBorderColor: themes.moduleBackground,
-                    hoverBackgroundColor:
-                      data && newData.datasets
-                        ? newData.datasets[0].hoverBackgroundColor
-                        : null,
-                  },
-                ],
-              }}
-              plugins={plugins}
-              options={{
-                responsive: false,
-                tooltips: customChartToolTip(themes),
-                legend: {
-                  display: legend,
-                  labels: {
-                    fontColor: legendLabelsFontColor,
-                    fontSize: legendLabelsFontSize,
-                    fontFamily: legendLabelsFontFamily,
-                  },
-                },
-                layout: {
-                  padding: layoutPadding,
-                },
-                plugins: {
-                  datalabels: {
-                    display: displayDataLabels,
-                    formatter: (value) => {
-                      if (dataLabelFunction) {
-                        return dataLabelPlugins(
-                          value,
-                          dataLabelFunction,
-                          dataLabelInsert
-                        )
-                      }
-                      return value
-                    },
-                    color: dataLabelColor,
-                    font: {
-                      family: dataLabelFontFamily,
-                      weight: dataLabelFontWeight,
-                      size: dataLabelFontSize,
-                    },
-                  },
-                },
-                elements: {
-                  arc: {
-                    borderWidth: datasetsBorderWidth,
-                    hoverBorderColor: datasetsHoverBorderColor,
-                  },
-                },
-                cutoutPercentage: cutoutPercentage,
-              }}
-            />
+          {labelPositionRight && labelsData && (
+            <div className={style.labelContainer}>
+              <Labels data={labelsData} />
+            </div>
           )}
         </div>
-        {labelPositionRight && labelsData && (
+        {labelPositionBottom && labelsData && (
           <div className={style.labelContainer}>
             <Labels data={labelsData} />
           </div>
         )}
-      </div>
-      {labelPositionBottom && labelsData && (
-        <div className={style.labelContainer}>
-          <Labels data={labelsData} />
-        </div>
-      )}
-    </React.Fragment>
-  )
+      </React.Fragment>
+    )
+  }
 }
-
 DoughnutChart.propTypes = propTypes
 DoughnutChart.defaultProps = defaultProps
 

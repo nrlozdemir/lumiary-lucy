@@ -26,7 +26,7 @@ const TopSimilarProperties = (props) => {
       filters={filters}
       moduleKey={moduleKey}
       action={action}
-      isEmpty={!isLoading && isError}
+      isEmpty={(!isLoading && !!isError) || false}
     >
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (

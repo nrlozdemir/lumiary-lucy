@@ -1,6 +1,7 @@
 import React from 'react'
 import { shadeHexColor } from 'Utils'
 import style from './style.scss'
+import classnames from 'classnames'
 import { withTheme } from 'ThemeContext/withTheme'
 
 class Stadium extends React.Component {
@@ -29,7 +30,7 @@ class Stadium extends React.Component {
         event.target.attributes['stroke'].value
 
       if (value && title && id === 'BAR') {
-        this.tooltip.current.innerText = value + '% ' + title
+        this.tooltip.current.innerText = value + '% | ' + title
         this.tooltip.current.style.display = 'block'
       }
     })
@@ -97,7 +98,10 @@ class Stadium extends React.Component {
     let svgH =
       infoSpaceHBorder + l * (2 * (borderWidth + otherSpace)) + 2 * borderWidth
 
-    const themes = themeContext.colors
+    const {
+      colors,
+      colors: { themeType },
+    } = themeContext
 
     return (
       <React.Fragment>
@@ -155,9 +159,9 @@ class Stadium extends React.Component {
                   {/**/}
                   <rect
                     id="BORDER"
-                    stroke={themes.chartStadiumBarBorder}
+                    stroke={colors.chartStadiumBarBorder}
                     strokeWidth={border}
-                    fill={themes.chartStadiumBarBackground}
+                    fill={colors.chartStadiumBarBackground}
                     x={x + index * borderWidth - (borderWidth + border) / 2}
                     y={y + index * borderWidth - (borderWidth + border) / 2}
                     width={w + borderWidth + border}
@@ -184,7 +188,7 @@ class Stadium extends React.Component {
 
                   <rect
                     id="ANGLE"
-                    stroke={themes.chartStadiumBarBackground}
+                    stroke={colors.chartStadiumBarBackground}
                     strokeWidth={angelBorder}
                     style={{
                       transition: `stroke-dasharray ${animationSpeed}s linear`,
@@ -205,8 +209,8 @@ class Stadium extends React.Component {
                     <React.Fragment>
                       <rect
                         id="Rectangle"
-                        stroke={themes.chartStadiumBarBorder}
-                        fill={themes.chartStadiumCenterBackground}
+                        stroke={colors.chartStadiumBarBorder}
+                        fill={colors.chartStadiumCenterBackground}
                         strokeWidth={border}
                         x={legendPos}
                         y={legendPos}
@@ -219,7 +223,7 @@ class Stadium extends React.Component {
                         id="Total-Percentage"
                         fontFamily="ClanOTBold"
                         fontSize="12"
-                        fill={themes.textColor}
+                        fill={colors.textColor}
                         ref={this.text}
                       >
                         <tspan
@@ -245,7 +249,13 @@ class Stadium extends React.Component {
             })}
           </g>
         </svg>
-        <div className={style.stadiumCharTooltip} ref={this.tooltip} />
+        <div
+          className={classnames(style.stadiumCharTooltip, {
+            [style.light]: themeType === 'light',
+            [style.dark]: themeType === 'dark',
+          })}
+          ref={this.tooltip}
+        />
       </React.Fragment>
     )
   }

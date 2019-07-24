@@ -2,11 +2,15 @@ import React from 'react'
 import cx from 'classnames'
 import Module from 'Components/Module'
 import style from './style.scss'
-import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import { Line } from 'react-chartjs-2'
-import Scrubber from 'Components/Sliders/Scrubber'
 import { withTheme } from 'ThemeContext/withTheme'
+import { chartColors } from 'Utils/globals'
+import { customChartToolTip } from 'Utils'
+import {
+  percentageManipulation,
+  getCVScoreChartAttributes,
+} from 'Utils/datasets'
 
 const LineAndDoughnutChartModule = ({
   moduleKey,
@@ -17,13 +21,12 @@ const LineAndDoughnutChartModule = ({
   filters,
   isEmpty,
   loading = false,
-  doughnutData,
-  percentageData,
-  customCallbackFunc,
+  properties,
+  average,
   themeContext: { colors },
 }) => {
-  const percentageCol = cx(style.percentageCol)
-
+  const percentageCol = cx('col-4-no-gutters', style.percentageCol)
+  const container = cx('grid-container', style.container)
   const plugins = [
     {
       beforeDraw: function(chart, easing) {
@@ -45,27 +48,23 @@ const LineAndDoughnutChartModule = ({
           ctx.restore()
         }
       },
-      beforeDatasetsDraw: function(chart) {
-        if (chart.tooltip._active && chart.tooltip._active.length) {
-          var activePoint = chart.tooltip._active[0],
-            ctx = chart.ctx,
-            x = activePoint.tooltipPosition().x,
-            topY = chart.scales['y-axis-0'].top,
-            bottomY = chart.scales['y-axis-0'].bottom
-          // chart.config.options.customCallbackFunc()
-          // draw line
-          ctx.save()
-          ctx.beginPath()
-          ctx.moveTo(x, topY)
-          ctx.lineTo(x, bottomY)
-          ctx.lineWidth = 5
-          ctx.strokeStyle = '#000'
-          ctx.stroke()
-          ctx.restore()
-        }
-      },
     },
   ]
+  const manipulatedProperties = percentageManipulation(properties)
+  let sortableManipulatedProperties = []
+  for (let property in manipulatedProperties) {
+    sortableManipulatedProperties.push([
+      { ...manipulatedProperties[property], name: property },
+    ])
+  }
+  const sortedProperties = sortableManipulatedProperties.sort((a, b) => {
+    return b[0].score.value - a[0].score.value
+  })
+  console.log(sortedProperties)
+
+  const { chartYAxisMax, chartYAxisStepSize } = getCVScoreChartAttributes(
+    lineChartData.datasets
+  )
 
   return (
     <Module
@@ -73,99 +72,185 @@ const LineAndDoughnutChartModule = ({
       title={title}
       action={action}
       filters={filters}
-      isEmpty={isEmpty}
+      isEmpty={false}
       loading={loading}
     >
       <div className="grid-collapse">
-        <div className="col-12-no-gutters">
-          <div
-            className={`col-8-no-gutters ${cx(style.contentVitalityChart)}`}
-            data-legend="Content Vitality Score"
-          >
-            <Line
-              key={Math.random()}
-              data={lineChartData}
-              width={760}
-              height={291}
-              plugins={plugins}
-              options={{
-                ...lineChartOptions,
-                customCallbackFunc: customCallbackFunc,
-                chartArea: {
-                  backgroundColor: colors.lineChartBackgroundColor,
-                },
-                scales: {
-                  xAxes: [
-                    {
-                      ...lineChartOptions.scales.xAxes[0],
-                      ticks: {
-                        ...lineChartOptions.scales.xAxes[0].ticks,
-                        fontColor: colors.labelColor,
-                      },
-                      gridLines: {
-                        ...lineChartOptions.scales.xAxes[0].gridLines,
-                        color: colors.lineChartGridColor,
-                        zeroLineColor: colors.lineChartGridColor,
-                      },
-                    },
-                  ],
-                  yAxes: [
-                    {
-                      ...lineChartOptions.scales.yAxes[0],
-                      ticks: {
-                        ...lineChartOptions.scales.yAxes[0].ticks,
-                        fontColor: colors.labelColor,
-                      },
-                      gridLines: {
-                        ...lineChartOptions.scales.yAxes[0].gridLines,
-                        color: colors.lineChartGridColor,
-                        zeroLineColor: colors.lineChartGridColor,
+        <div className="grid-container">
+          <div className="col-12-no-gutters">
+            <div
+              className={`${cx(style.contentVitalityChart)}`}
+              data-legend="Content Vitality Score"
+            >
+              <Line
+                key={Math.random()}
+                data={lineChartData}
+                width={1120}
+                height={291}
+                plugins={plugins}
+                options={{
+                  ...lineChartOptions,
+                  tooltips: customChartToolTip(colors, {
+                    callbacks: {
+                      title: () => '',
+                      label: function(tooltipItem, data) {
+                        const { datasetIndex } = tooltipItem
+                        const count =
+                          (data &&
+                            data.datasets &&
+                            data.datasets[datasetIndex] &&
+                            data.datasets[datasetIndex].data[
+                              tooltipItem['index']
+                            ]) ||
+                          ''
+                        const name =
+                          (data &&
+                            lineChartData &&
+                            lineChartData.datasets[datasetIndex].label) ||
+                          ''
+                        return `${percentageManipulation(count) ||
+                          0}% ${!!name && `| ${name}`}`
                       },
                     },
-                  ],
-                },
-              }}
-            />
-          </div>
-          <div className="col-4-no-gutters d-flex align-items-center justify-content-center">
-            <DoughnutChart
-              width={270}
-              height={270}
-              cutoutPercentage={58}
-              fillText="Total Percentage"
-              dataLabelFunction="insertAfter"
-              dataLabelInsert="%"
-              labelPositionRight
-              data={doughnutData}
-            />
+                  }),
+                  chartArea: {
+                    backgroundColor: colors.lineChartBackgroundColor,
+                  },
+                  scales: {
+                    xAxes: [
+                      {
+                        ...lineChartOptions.scales.xAxes[0],
+                        ticks: {
+                          ...lineChartOptions.scales.xAxes[0].ticks,
+                          fontColor: colors.labelColor,
+                        },
+                        gridLines: {
+                          ...lineChartOptions.scales.xAxes[0].gridLines,
+                          color: colors.lineChartGridColor,
+                          zeroLineColor: colors.lineChartGridColor,
+                        },
+                      },
+                    ],
+                    yAxes: [
+                      {
+                        ...lineChartOptions.scales.yAxes[0],
+
+                        ticks: {
+                          ...lineChartOptions.scales.yAxes[0].ticks,
+                          callback: function(value, index, values) {
+                            if (value === 0) {
+                              return value + ' '
+                            } else if (value === chartYAxisMax) {
+                              return value
+                            } else {
+                              return ''
+                            }
+                          },
+                          stepSize: chartYAxisStepSize,
+                          fontColor: colors.textColor,
+                          max: chartYAxisMax,
+                        },
+                        gridLines: {
+                          ...lineChartOptions.scales.yAxes[0].gridLines,
+                          color: colors.lineChartGridColor,
+                          zeroLineColor: colors.lineChartGridColor,
+                        },
+                      },
+                    ],
+                  },
+                }}
+              />
+            </div>
           </div>
         </div>
-        <div className="col-12-no-gutters">
-          <Scrubber horizontal arrows isEmpty={isEmpty}>
-            <div className={style.percentageGraphContainer}>
-              {percentageData &&
-                percentageData.map((chart, idx) => (
-                  <div className={percentageCol} key={`PTPF_percentage-${idx}`}>
-                    <div className={style.chartSectionBadge}>
+
+        <div className={container}>
+          {sortedProperties &&
+            sortedProperties.map((property, idx) => {
+              if (idx > 2) {
+                return null
+              }
+              return (
+                <div className={percentageCol}>
+                  <div
+                    className={style.legend}
+                    style={{
+                      background: colors.labelBackground,
+                      color: colors.labelColor,
+                      boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                    }}
+                  >
+                    {property[0].name}
+                  </div>
+                  <div
+                    className={style.divider}
+                    style={{
+                      background: colors.moduleBorder,
+                    }}
+                  />
+
+                  <DoughnutChart
+                    width={140}
+                    height={140}
+                    displayDataLabels={false}
+                    cutoutPercentage={80}
+                    datasetsBorderWidth={0}
+                    removeTooltip
+                    average={average}
+                    layoutPadding={7}
+                    data={{
+                      datasets: [
+                        {
+                          borderColor: '#f3f6f9',
+                          data: [
+                            property[0].score.value,
+                            100 - property[0].score.value,
+                          ],
+                          backgroundColor: [chartColors[idx], '#acb0be'],
+                          hoverBackgroundColor: [chartColors[idx], '#acb0be'],
+                        },
+                      ],
+                      labels: ['a', 'b'],
+                    }}
+                  />
+                  <div
+                    className={style.centerText}
+                    style={{
+                      color: colors.labelColor,
+                    }}
+                  >
+                    <div className={style.wrapper}>
                       <span
+                        className={style.bigText}
                         style={{
-                          background: colors.labelBackground,
                           color: colors.labelColor,
-                          boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                         }}
                       >
-                        {chart.key}
+                        {property[0].score.value}{' '}
+                      </span>
+                      <span
+                        className={style.littleText}
+                        style={{
+                          color: colors.labelColor,
+                        }}
+                      >
+                        Score ({property[0].score.date.slice(0, 3)})
                       </span>
                     </div>
-                    <PercentageBarGraph
-                      key={Math.random()}
-                      percentage={chart.value}
-                      color={chart.color}
-                    />
                   </div>
-                ))}
-            </div>
-          </Scrubber>
+
+                  <p
+                    className={style.doughnutChartText}
+                    style={{
+                      color: colors.labelColor,
+                    }}
+                  >
+                    <b>{property[0].libraryPercent}</b> of your library is shot
+                    in <b>{property[0].name}</b>
+                  </p>
+                </div>
+              )
+            })}
         </div>
       </div>
     </Module>

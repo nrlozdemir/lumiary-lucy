@@ -50,6 +50,8 @@ function* getReports({ payload: { value: filterValue } = {} }) {
       }
 
       yield put(actions.loadReportsSuccess(values))
+    } else {
+      throw new Error('Error loading Reports')
     }
   } catch (err) {
     console.log('err', err)
@@ -212,6 +214,8 @@ function* getPredefinedReports() {
         type: types.GET_PREDEFINED_REPORTS_REQUEST_SUCCESS,
         payload: response,
       })
+    } else {
+      throw new Error('Error getting predefined reports')
     }
   } catch (err) {
     console.log(err)
@@ -259,7 +263,7 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
     const parameters = {
       dateRange,
       metric: 'views',
-      property: ['format'],
+      property: ['duration'],
       dateBucket: 'none',
       brands: [...report.brands],
       platform: 'all',
@@ -312,7 +316,7 @@ function* getPerformanceComparisonData({
     }
 
     if (property === 'format') {
-      options.limit = 4
+      parameters.limit = 4
     }
 
     const payload = yield call(getDataFromApi, parameters, '/report')

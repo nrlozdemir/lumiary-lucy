@@ -36,7 +36,7 @@ Run with
 docker-compose up
 ```
 
-Navigate to https://lumiary-local.quickframe.com:4000.
+Navigate to https://lumiary-local.quickframe.com:9000.
 
 If you see the QF logo spinner, you're good to go!
 

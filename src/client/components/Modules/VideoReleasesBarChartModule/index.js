@@ -109,15 +109,25 @@ const VideoReleasesBarChartModule = (props) => {
 
   const normalizedData =
     (!!data &&
+      !loading &&
       !!data.length &&
       data.map((data) => ({
         ...data,
         datasets: [
           {
             ...data.datasets[0],
-            data: data.datasets[0].data.map((v) => v * videoNormalizer),
+            data: data.datasets[0].data.map((v) =>
+              //if all data array are 0, chart js has some problems, so making the data
+              //0.000001 and this is fixed.(this data does not seen in chart)
+              Math.round(v * videoNormalizer) || 0.000001
+            ),
           },
-          { ...data.datasets[1] },
+          {
+            ...data.datasets[1],
+            //if all data array are 0, chart js has some problems, so making the data
+            //0.000001 and this is fixed.(this data does not seen in chart)
+            data: data.datasets[1].data.map(e => e || -0.000001)
+          },
         ],
       }))) ||
     []
@@ -132,7 +142,7 @@ const VideoReleasesBarChartModule = (props) => {
           if (tooltipItem.yLabel < 0) {
             return `${~~(value / 1000)}${value >= 1000 ? 'k' : ''} Likes`
           }
-          return `${value / videoNormalizer} Videos`
+          return `${Math.round(value / videoNormalizer)} Videos`
         },
       },
     }),
@@ -216,7 +226,9 @@ const VideoReleasesBarChartModule = (props) => {
                               ? `${~~val}${Math.abs(value) >= 1000 ? 'k' : ''}`
                               : ''
                           }
-                          return val2 === maxSteps.vids ? `${val2}v` : ''
+                          return Math.round(val2) === maxSteps.vids
+                            ? `${maxSteps.vids}v`
+                            : ''
                         },
                       },
                       gridLines: {
@@ -236,31 +248,46 @@ const VideoReleasesBarChartModule = (props) => {
           <div className={style.groupChartsWrapper}>
             {!!normalizedData &&
               !!normalizedData.length &&
-              normalizedData.map((chartData, idx) => (
-                <div className="col-3" key={`xxx666xxx-${idx}`}>
-                  <div className={style.chartSection}>
-                    <Bar
-                      key={`vrbcmc-${idx}`}
-                      data={chartData}
-                      options={barChartOptions}
-                      datasetKeyProvider={datasetKeyProvider}
-                    />
-                  </div>
-                  <div className={style.chartSectionBadge}>
-                    {!!chartData.label && (
-                      <span
-                        style={{
-                          background: colors.labelBackground,
-                          color: colors.labelColor,
-                          boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+              normalizedData.map((chartData, idx) => {
+                return (
+                  <div className="col-3" key={`xxx666xxx-${idx}`}>
+                    <div className={style.chartSection}>
+                      <Bar
+                        key={`vrbcmc-${idx}`}
+                        data={chartData}
+                        options={{
+                          ...barChartOptions,
+                          scales: {
+                            ...barChartOptions.scales,
+                            yAxes: [
+                              {
+                                ...options.scales.yAxes[0],
+                                ticks: {
+                                  ...options.scales.yAxes[0].ticks,
+                                  stepSize: maxSteps.engagement
+                                },
+                              },
+                            ],
+                          }
                         }}
-                      >
-                        {chartData.label}
-                      </span>
-                    )}
+                        datasetKeyProvider={datasetKeyProvider}
+                      />
+                    </div>
+                    <div className={style.chartSectionBadge}>
+                      {!!chartData.label && (
+                        <span
+                          style={{
+                            background: colors.labelBackground,
+                            color: colors.labelColor,
+                            boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                          }}
+                        >
+                          {chartData.label}
+                        </span>
+                      )}
+                    </div>
                   </div>
-                </div>
-              ))}
+              )})}
           </div>
         </div>
       </div>

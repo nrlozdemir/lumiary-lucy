@@ -1,8 +1,9 @@
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
+import moment from 'moment'
 
-import { getDateBucketFromRange } from 'Utils'
+import { getDateBucketFromRange, normalize } from 'Utils'
 
 import {
   convertDataIntoDatasets,
@@ -16,7 +17,7 @@ import {
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import _ from 'lodash'
-import { dayOfWeek } from 'Utils/globals'
+import { dayOfWeek, chartColors } from 'Utils/globals'
 
 function* getVideoReleasesData({ data }) {
   try {
@@ -26,15 +27,15 @@ function* getVideoReleasesData({ data }) {
     const options = {
       metric,
       platform,
-      property: 'format',
+      property: 'duration',
       daterange: dateRange,
-      limit: 4,
+      dateBucket: 'dayOfWeek',
     }
 
     const response = yield call(
       getDataFromApi,
       undefined,
-      buildApiUrl(`/brand/${brand.uuid}/count`, options),
+      buildApiUrl(`/brand/${brand.uuid}/videovsmetric`, options),
       'GET'
     )
 
@@ -181,7 +182,7 @@ function* getPacingCardData({ data }) {
       getDataFromApi,
       {
         ...options,
-        proportionOf: 'format',
+        proportionOf: 'duration',
         limit: 4,
       },
       '/report'
@@ -268,19 +269,37 @@ function* getFlipCardsData() {
       'GET'
     )
 
-    const payloads = Object.assign(
-      {},
-      ...Object.keys(metrics).map((metric) => ({
-        [metric]: {
-          percentage: metrics[metric].changeOverPrevious || 0,
-          data: dayOfWeek.map((day) => metrics[metric][day]),
-          isEmpty: dayOfWeek.every((day) =>
-            metrics[metric][day] === 0 ? true : false
-          ),
-        },
-      }))
-    )
-    yield put(actions.getFlipCardsDataSuccess(percentageManipulation(payloads)))
+    if (!!metrics && !!Object.keys(metrics).length) {
+      const payloads = Object.assign(
+        {},
+        ...Object.keys(metrics).map((metric) => {
+          const dayOfWeek = Object.keys(metrics[metric]).filter(
+            (key) => key !== 'changeOverPrevious'
+          )
+
+          const data = dayOfWeek.map((day) => metrics[metric][day]).reverse()
+
+          const normalized = data.map((v) =>
+            normalize(v, Math.min(...data), Math.max(...data), 0, 100)
+          )
+
+          return {
+            [metric]: {
+              percentage: metrics[metric].changeOverPrevious || 0,
+              data: normalized,
+              isEmpty: dayOfWeek.every((day) =>
+                metrics[metric][day] === 0 ? true : false
+              ),
+            },
+          }
+        })
+      )
+      yield put(
+        actions.getFlipCardsDataSuccess(percentageManipulation(payloads))
+      )
+    } else {
+      throw new Error('Panoptic getFlipCardsDataError')
+    }
   } catch (err) {
     console.log(err)
     yield put(actions.getFlipCardsDataError(err))
@@ -291,43 +310,60 @@ function* getTopPerformingFormatData({ data = {} }) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
 
-    const { platform = 'all' } = data
-
+    const { platform = 'all', metric = 'views' } = data
     const options = {
       platform,
-      metric: 'cvScore',
-      dateRange: 'week',
-      dateBucket: 'none',
-      display: 'percentage',
-      property: ['format'],
-      brands: [brand.uuid],
+      metric,
+      property: 'pacing',
+      daterange: 'week',
       //limit: 4,
     }
 
-    const dateBucketedOptions = { ...options, dateBucket: 'dayOfWeek' }
+    const payload = yield call(
+      getDataFromApi,
+      options,
+      `/brand/${brand.uuid}/topcv`,
+      'GET'
+    )
+    const currentDayIndex = moment().weekday() + 1
+    const pastdays = dayOfWeek.slice(0, currentDayIndex)
+    const lastWeek = dayOfWeek.slice(currentDayIndex)
+    const days = [...lastWeek, ...pastdays].map(
+      (day, idx) =>
+        `${
+          6 - idx == 0
+            ? 'Today'
+            : 6 - idx === 1
+            ? 'Yesterday'
+            : moment()
+                .subtract(6 - idx, 'd')
+                .format('MM/DD/YY')
+        } (${day.toUpperCase().slice(0, 3)})`
+    )
 
-    const [dataWithDateBuckets, dataWithoutDateBuckets] = yield all([
-      call(getDataFromApi, dateBucketedOptions, '/report'),
-      call(getDataFromApi, options, '/report'),
-    ])
-
-    if (!!dataWithDateBuckets.data && !!dataWithoutDateBuckets.data) {
-      const lineChartData = percentageManipulation(
-        convertDataIntoDatasets(dataWithDateBuckets, dateBucketedOptions)
-      )
-
-      const doughnutData = percentageManipulation(
-        convertDataIntoDatasets(dataWithoutDateBuckets, options, {
-          singleDataset: true,
-          hoverBG: true,
-        })
-      )
+    if (payload) {
+      const doughnutData = percentageManipulation(payload)
+      const properties = ['Fast', 'Medium', 'Slow', 'Slowest']
+      const datasets = properties.map((property, idx) => ({
+        label: property,
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: chartColors[idx],
+        borderColor: chartColors[idx],
+        hoverBackgroundColor: chartColors[idx],
+        data: dayOfWeek.map((day) => doughnutData.dates[day][property]),
+      }))
+      const lineChartData = {
+        labels: days,
+        datasets: datasets,
+      }
 
       yield put(
         actions.getTopPerformingFormatDataSuccess({
-          doughnutData,
           lineChartData,
-          percentageData: dataWithoutDateBuckets,
+          average: payload.platformAverage,
+          properties: payload.properties,
+          platform: platform,
         })
       )
     } else {

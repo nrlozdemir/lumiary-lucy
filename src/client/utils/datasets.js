@@ -87,7 +87,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
       ? getTimeBucket(getValueinObject)
       : null
 
-  if (getValueinObject.subtotal) delete getValueinObject.subtotal
+  if (!!getValueinObject && getValueinObject.hasOwnProperty('subtotal')) {
+    delete getValueinObject.subtotal
+  }
 
   // If time bucket was  selected, it will change labels to time labels
   // defined within a data object from the api response
@@ -370,7 +372,9 @@ const isDataSetEmpty = (data) => {
   if (!!data && !!data.datasets && !!data.datasets.length) {
     return data.datasets.every((dataset) =>
       !!dataset.data && !!dataset.data.length
-        ? dataset.data.every((val) => val === 0 || val === undefined)
+        ? dataset.data.every(
+            (val) => val === 0 || val === undefined || val === null
+          )
         : true
     )
   } else {
@@ -532,8 +536,8 @@ const parseAverage = (payload) => {
   })
 
   const returnData = Object.values(calculateAverage).sort((a, b) => {
-    return a.order > b.order;
-  });
+    return a.order > b.order
+  })
 
   return returnData
 }
@@ -757,20 +761,25 @@ const percentageManipulation = (bucket) => {
         })
       }
     })
+  } else if (isNumber(bucket) && isFinite(bucket)) {
+    return percentageBeautifier(bucket)
   }
 
   return bucket
 }
 
 /*
- returns the chartYAxisMax, chartYAxisStepSize from the api  
+ returns the chartYAxisMax, chartYAxisStepSize from the api
  */
 
 const getCVScoreChartAttributes = (data) => {
   const maxVideoPercent =
     (!!data &&
       Object.keys(data).reduce((accumulator, key) => {
-        const maxPercentInSet = Math.max(...data[key].videoPercents)
+        const videoPercents = data[key].videoPercents
+        const maxPercentInSet = Math.max(
+          videoPercents ? videoPercents : data[key]
+        )
         return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
       }, 0)) ||
     0
@@ -784,7 +793,103 @@ const getCVScoreChartAttributes = (data) => {
   }
 }
 
+/*
+  Converts responses from `/brand/{brandUuid}/properties` into a dataset
+  @param data {obj} straight response from the request
+  @param options - {
+    *
+    type: {string} 'market' || 'library'
+    *
+    property: {string} 'aspectRatio' || duration' || 'format' || 'frameRate' || 'pacing' || 'resolution',
+    *
+    metric: {string} 'shares' || 'views' || 'likes' || 'comments'
+    *
+    percentage: {bool}
+    *
+    hoverBg: {bool}
+    *
+    borderColor: {string}
+    *
+    backgroundColors: {array}
+    *
+    max: {object}
+    *
+  }
+ */
+const convertPropertiesIntoDatasets = (data, options = {}) => {
+  const {
+    max,
+    type,
+    property,
+    metric,
+    percentage,
+    hoverBg = true,
+    borderColor,
+    backgroundColors,
+  } = options
+
+  const dataType = type === 'library' ? 'myLibrary' : 'market'
+
+  const bucket =
+    !!data && !!data[dataType] && !!data[dataType][property]
+      ? data[dataType][property]
+      : null
+
+  if (!type || !property || !data || !bucket || !metric) {
+    // console.log('type', type)
+    // console.log('property', property)
+    // console.log('data', data)
+    // console.log('bucket', bucket)
+    // console.log('metric', metric)
+    return {}
+  }
+
+  return bucket.reduce(
+    (data, bucketItem, idx) => {
+      const { datasets, labels } = data
+      const { bucket, library_proportion } = bucketItem
+
+      const dataVal = percentage
+        ? Math.round(parseFloat(library_proportion) * 100)
+        : parseInt(bucketItem[metric]) || 0
+
+      const color = chartColors[idx]
+
+      return {
+        labels: [...labels, bucket],
+        datasets: [
+          {
+            borderColor: borderColor ? borderColor : color,
+            label: expectedNames[options.property],
+            data: [
+              ...(!!datasets[0] && !!datasets[0].data ? datasets[0].data : []),
+              dataVal,
+            ],
+            backgroundColor: backgroundColors
+              ? backgroundColors
+              : [
+                  ...(datasets[0] ? datasets[0].backgroundColor : []),
+                  max ? (max === bucket ? '#2FD7C4' : '#FFFFFF') : color,
+                ],
+            hoverBackgroundColor: hoverBg
+              ? [
+                  ...(datasets[0] ? datasets[0].hoverBackgroundColor : []),
+                  color,
+                ]
+              : [],
+          },
+        ],
+      }
+    },
+    {
+      labels: [],
+      datasets: [],
+    }
+  )
+}
+
 export {
+  convertPropertiesIntoDatasets,
   getCVScoreChartAttributes,
   convertDataIntoDatasets,
   chartCombineDataset,

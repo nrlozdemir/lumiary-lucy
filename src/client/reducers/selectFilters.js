@@ -177,7 +177,7 @@ export const initialState = fromJS({
         options: [
           { value: 'instagram|views', label: 'Views' },
           { value: 'instagram|likes', label: 'Likes' },
-          { value: 'instagram|shares', label: 'Shares' },
+          //{ value: 'instagram|shares', label: 'Shares' },
           { value: 'instagram|comments', label: 'Comments' },
         ],
       },
@@ -186,8 +186,8 @@ export const initialState = fromJS({
         options: [
           { value: 'youtube|views', label: 'Views' },
           { value: 'youtube|likes', label: 'Likes' },
-          { value: 'youtube|shares', label: 'Shares' },
-          { value: 'youtube|comments', label: 'Comments' },
+          //{ value: 'youtube|shares', label: 'Shares' },
+          //{ value: 'youtube|comments', label: 'Comments' },
         ],
       },
     ],
