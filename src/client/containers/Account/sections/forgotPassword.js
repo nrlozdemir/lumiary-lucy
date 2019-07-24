@@ -74,6 +74,7 @@ class ForgotPassword extends Component {
             : validationError
         }
         loading={loading}
+        colors={colors}
       >
         <form
           className={style.form}
@@ -87,7 +88,7 @@ class ForgotPassword extends Component {
             <div className={style.image}>
               <img src="https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png" />
             </div>
-            <h1>Forgot Password?</h1>
+            <h1 style={colors.account.h1 || {}}>Forgot Password?</h1>
           </div>
 
           <div className={style.input}>
@@ -98,6 +99,7 @@ class ForgotPassword extends Component {
               name="email"
               placeholder="Enter email..."
               required={true}
+              style={colors.account.input || {}}
             />
           </div>
           <div className={style.submitArea}>
@@ -106,7 +108,11 @@ class ForgotPassword extends Component {
               disable={!dirty || submitting || pristine || !isEmpty(errors)}
               buttonText="Send Password Reset Link"
             />
-            <Link className={style.forgotPasswordLink} to={'/account/login'}>
+            <Link
+              className={style.forgotPasswordLink}
+              style={colors.account.link || {}}
+              to={'/account/login'}
+            >
               Go back to <span className={style.active}>Sign In</span>
             </Link>
           </div>

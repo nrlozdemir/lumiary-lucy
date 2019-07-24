@@ -98,6 +98,7 @@ class ChangePassword extends Component {
             : this.state.validationError
         }
         loading={loading}
+        colors={colors}
       >
         <form
           className={style.form}
@@ -111,7 +112,7 @@ class ChangePassword extends Component {
             <div className={style.image}>
               <img src="https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png" />
             </div>
-            <h1>Update your password</h1>
+            <h1 style={colors.account.h1 || {}}>Update your password</h1>
           </div>
 
           <div className={style.input}>
@@ -122,8 +123,14 @@ class ChangePassword extends Component {
               name="password"
               placeholder="Enter new password…"
               required={true}
+              style={colors.account.input || {}}
             />
-            <p onClick={() => this.togglePasswordType('Password')}>show</p>
+            <p
+              style={colors.account.link || {}}
+              onClick={() => this.togglePasswordType('Password')}
+            >
+              show
+            </p>
           </div>
 
           <div className={style.input}>
@@ -134,8 +141,12 @@ class ChangePassword extends Component {
               name="confirmPassword"
               placeholder="Confirm new password…"
               required={true}
+              style={colors.account.input || {}}
             />
-            <p onClick={() => this.togglePasswordType('ConfirmPassword')}>
+            <p
+              style={colors.account.link || {}}
+              onClick={() => this.togglePasswordType('ConfirmPassword')}
+            >
               show
             </p>
           </div>

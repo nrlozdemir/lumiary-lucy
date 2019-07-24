@@ -80,16 +80,6 @@ class Dropdown extends Component {
                 <p className={style.text}>Support</p>
               </li>
               <li>
-                <Link className={style.text} to="/account/competitors">
-                  Competitors
-                </Link>
-              </li>
-              <li>
-                <Link className={style.text} to="/account/oauth">
-                  Socials
-                </Link>
-              </li>
-              <li>
                 <p onClick={() => logout()} className={style.text}>
                   Logout
                 </p>

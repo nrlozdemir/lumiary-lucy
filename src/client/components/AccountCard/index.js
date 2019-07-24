@@ -3,11 +3,11 @@ import styles from './style.scss'
 import cx from 'classnames'
 import RouterLoading from 'Components/RouterLoading'
 
-const AccountCard = ({ status, loading, children }) => {
+const AccountCard = ({ status, loading, colors, children }) => {
   return (
     <React.Fragment>
       <div className={cx(styles.container, { [styles.loading]: loading })}>
-        <div className={styles.card}>
+        <div className={styles.card} style={colors.account.card || {}}>
           {status && (
             <div className={cx(styles.message, styles[status.state])}>
               {status.message}

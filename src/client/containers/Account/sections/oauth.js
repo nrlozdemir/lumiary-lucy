@@ -39,33 +39,44 @@ class OAuth extends Component {
             : validationError
         }
         loading={loading}
+        colors={colors}
       >
         <div className={style.form}>
           <div className={style.info}>
             <div className={style.image}>
               <img src="https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png" />
             </div>
-            <h1>Give us ya informationz</h1>
-            <p>
+            <h1 style={colors.account.h1 || {}}>Give us ya informationz</h1>
+            <p style={colors.account.p || {}}>
               Need a disclaimer if a user does not connect with any social
               accounts, graphs will be blank
             </p>
           </div>
 
-          <div className={style.oauth}>
+          <div className={style.list}>
             {Object.keys(connects).map((connect, key) => (
               <div
-                className={cx(
-                  style.connect,
-                  {
-                    [style.connected]: connects[connect].connected,
-                  },
-                  `icon-${connect}-square`
-                )}
-                onClick={() => this.connectSocial(connect)}
                 key={key}
+                className={cx(style.listItem, {
+                  [style.connected]: connects[connect].connected,
+                })}
+                onClick={() => this.connectSocial(connect)}
+                style={colors.account.list.item || {}}
               >
-                <span>Connect with {connects[connect].name}</span>
+                <span
+                  className={cx(style.listItemIcon, `icon-${connect}-square`)}
+                  style={colors.account.list.icon || {}}
+                />
+                <span
+                  className={style.listItemText}
+                  style={colors.account.list.text || {}}
+                >
+                  Connect with {connects[connect].name}
+                </span>
+                <span
+                  className={cx(style.listItemCheck, `icon-Check`)}
+                  style={colors.account.list.checkIcon || {}}
+                />
               </div>
             ))}
           </div>
