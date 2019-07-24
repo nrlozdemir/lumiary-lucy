@@ -244,22 +244,25 @@ class DoughnutChart extends React.Component {
                 />
                 {average && (
                   <React.Fragment>
-                    <div 
+                    <div
                       className={style.circleContainer}
                       style={{
-                        transform: `translate(-50%, 0) rotate(${(average / 100) *
+                        transform: `translate(-50%, 0) rotate(${(average /
+                          100) *
                           360}deg)`,
                       }}
                     >
                       <div className={style.circleWrapper}>
-                        <div 
+                        <div
                           className={classnames(style.circleTick, {
-                            [style.dark] : themes.themeType === 'dark',
-                            [style.light] : themes.themeType === 'light',
+                            [style.dark]: themes.themeType === 'dark',
+                            [style.light]: themes.themeType === 'light',
                           })}
-                          data-tip={`${ucfirst(cvScoreData.platform)} Average | ${average}`}
+                          data-tip={`${ucfirst(
+                            cvScoreData.platform
+                          )} Average | ${average}`}
                           data-for={`panoptic-cvScore-${tooltipKey}`}
-                        ></div>
+                        />
                       </div>
                     </div>
                     <ToolTip

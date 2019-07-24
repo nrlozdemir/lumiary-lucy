@@ -207,7 +207,7 @@ const LineAndDoughnutChartModule = ({
                     removeTooltip
                     average={average}
                     cvScoreData={{
-                      platform: platform
+                      platform: platform,
                     }}
                     layoutPadding={7}
                     data={{

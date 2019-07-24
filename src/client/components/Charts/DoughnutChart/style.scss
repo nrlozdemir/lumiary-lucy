@@ -27,7 +27,7 @@
   left: 50%;
 }
 
-.circleContainer{
+.circleContainer {
   position: absolute;
   width: 140px;
   height: 140px;
@@ -35,7 +35,7 @@
   z-index: 999;
 }
 
-.circleWrapper{
+.circleWrapper {
   width: 140px;
   height: 140px;
   position: relative;
@@ -43,17 +43,17 @@
   justify-content: center;
 }
 
-.circleTick{
+.circleTick {
   width: 10px;
   height: 24px;
-  border-radius: 5px;  
+  border-radius: 5px;
 
-  &.light{
+  &.light {
     box-shadow: 0 2px 6px 0 $light_tooltipShadowColor;
     background-color: $cvScoreTick_BackgroundColor;
   }
 
-  &.dark{  
+  &.dark {
     box-shadow: 0 2px 6px 0 $dark_tooltipShadowColor;
     background-color: $cvScoreTick_BackgroundColor;
   }
