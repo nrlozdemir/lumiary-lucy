@@ -278,32 +278,40 @@ const RouteWithSubRoutes = (route) => {
 }
 
 class Routes extends React.Component {
-  componentDidMount() {
+  componentDidUpdate(prevProps) {
     const {
       user,
+      profile,
+      sections,
       getProfileRequest,
       getSectionExplanationsRequest,
     } = this.props
 
-    const profileStore = JSON.parse(window.localStorage.getItem('profile'))
-    const sectionsStore = JSON.parse(window.localStorage.getItem('sections'))
+    const profileLStore = window.localStorage.getItem('profile')
+    const sectionsLStore = window.localStorage.getItem('sections')
 
-    if (user && user.token) {
-      if (!sectionsStore || !sectionsStore.data) {
+    const profileStore =
+      profileLStore && profileLStore !== 'null' && profileLStore !== 'undefined'
+        ? JSON.parse(profileLStore)
+        : {}
+    const sectionsStore =
+      sectionsLStore &&
+      sectionsLStore !== 'null' &&
+      sectionsLStore !== 'undefined'
+        ? JSON.parse(sectionsLStore)
+        : {}
+
+    if (prevProps.user && user.token && prevProps.user.token !== user.token) {
+      if (
+        !Object.keys(sectionsStore).length ||
+        (Object.keys(sectionsStore).length && !sectionsStore.data)
+      ) {
         getSectionExplanationsRequest()
       }
 
-      if (!profileStore) {
+      if (!Object.keys(profileStore).length) {
         getProfileRequest({ userId: user.id, token: user.token })
       }
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { user, profile, sections } = this.props
-
-    if (prevProps.user && prevProps.user.token !== user.token) {
-      window.location.reload()
     }
 
     if (prevProps.sections !== sections) {

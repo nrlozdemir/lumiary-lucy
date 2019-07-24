@@ -14,6 +14,7 @@ const Input = (props) => {
     customClass,
     input,
     required,
+    style: customStyle,
     hasError,
     meta: { touched, error, warning },
   } = props
@@ -45,6 +46,7 @@ const Input = (props) => {
               placeholder={placeholder}
               value={value}
               {...(required ? { required: true } : {})}
+              {...(customStyle ? { style: customStyle } : {})}
               {...input}
             />
           </div>

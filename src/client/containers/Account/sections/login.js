@@ -84,6 +84,7 @@ class LoginForm extends Component {
             : validationError
         }
         loading={loading}
+        colors={colors}
       >
         <form
           className={style.form}
@@ -97,7 +98,7 @@ class LoginForm extends Component {
             <div className={style.image}>
               <img src="https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png" />
             </div>
-            <h1>Sign into your account</h1>
+            <h1 style={colors.account.h1 || {}}>Sign into your account</h1>
           </div>
 
           <div className={style.input}>
@@ -108,6 +109,7 @@ class LoginForm extends Component {
               name="email"
               placeholder="Enter email..."
               required={true}
+              style={colors.account.input || {}}
             />
           </div>
 
@@ -119,10 +121,15 @@ class LoginForm extends Component {
               name="password"
               placeholder="Enter password..."
               required={true}
+              style={colors.account.input || {}}
             />
           </div>
           <div className={style.submitArea}>
-            <Link className={style.link} to={'/account/forgot-password'}>
+            <Link
+              className={style.link}
+              style={colors.account.link || {}}
+              to={'/account/forgot-password'}
+            >
               Forgot Password?
             </Link>
             <Button
