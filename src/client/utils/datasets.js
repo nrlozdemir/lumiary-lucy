@@ -722,7 +722,7 @@ const percentageBeautifier = (value, precision) => {
   */
 
   // all numbers converted to decimal with one 10th place
-  // it's excepting 0 and integers 
+  // it's excepting 0 and integers
   if (isInteger(value) || value === 0) {
     return value
   }
