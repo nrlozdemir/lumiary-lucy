@@ -1,6 +1,7 @@
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import { selectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
+import moment from 'moment'
 
 import { getDateBucketFromRange, normalize } from 'Utils'
 
@@ -16,6 +17,7 @@ import {
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import _ from 'lodash'
+import { dayOfWeek, chartColors } from 'Utils/globals'
 
 function* getVideoReleasesData({ data }) {
   try {
@@ -27,7 +29,7 @@ function* getVideoReleasesData({ data }) {
       platform,
       property: 'duration',
       daterange: dateRange,
-      dateBucket: 'dayOfWeek'
+      dateBucket: 'dayOfWeek',
     }
 
     const response = yield call(
@@ -308,43 +310,60 @@ function* getTopPerformingFormatData({ data = {} }) {
   try {
     const { brand } = yield select(selectAuthProfile)
 
-    const { platform = 'all' } = data
-
+    const { platform = 'all', metric = 'views' } = data
     const options = {
       platform,
-      metric: 'cvScore',
-      dateRange: 'week',
-      dateBucket: 'none',
-      display: 'percentage',
-      property: ['format'],
-      brands: [brand.uuid],
+      metric,
+      property: 'pacing',
+      daterange: 'week',
       //limit: 4,
     }
 
-    const dateBucketedOptions = { ...options, dateBucket: 'dayOfWeek' }
+    const payload = yield call(
+      getDataFromApi,
+      options,
+      `/brand/${brand.uuid}/topcv`,
+      'GET'
+    )
+    const currentDayIndex = moment().weekday() + 1
+    const pastdays = dayOfWeek.slice(0, currentDayIndex)
+    const lastWeek = dayOfWeek.slice(currentDayIndex)
+    const days = [...lastWeek, ...pastdays].map(
+      (day, idx) =>
+        `${
+          6 - idx == 0
+            ? 'Today'
+            : 6 - idx === 1
+            ? 'Yesterday'
+            : moment()
+                .subtract(6 - idx, 'd')
+                .format('MM/DD/YY')
+        } (${day.toUpperCase().slice(0, 3)})`
+    )
 
-    const [dataWithDateBuckets, dataWithoutDateBuckets] = yield all([
-      call(getDataFromApi, dateBucketedOptions, '/report'),
-      call(getDataFromApi, options, '/report'),
-    ])
-
-    if (!!dataWithDateBuckets.data && !!dataWithoutDateBuckets.data) {
-      const lineChartData = percentageManipulation(
-        convertDataIntoDatasets(dataWithDateBuckets, dateBucketedOptions)
-      )
-
-      const doughnutData = percentageManipulation(
-        convertDataIntoDatasets(dataWithoutDateBuckets, options, {
-          singleDataset: true,
-          hoverBG: true,
-        })
-      )
+    if (payload) {
+      const doughnutData = percentageManipulation(payload)
+      const properties = ['Fast', 'Medium', 'Slow', 'Slowest']
+      const datasets = properties.map((property, idx) => ({
+        label: property,
+        fill: false,
+        lineTension: 0.1,
+        backgroundColor: chartColors[idx],
+        borderColor: chartColors[idx],
+        hoverBackgroundColor: chartColors[idx],
+        data: dayOfWeek.map((day) => doughnutData.dates[day][property]),
+      }))
+      const lineChartData = {
+        labels: days,
+        datasets: datasets,
+      }
 
       yield put(
         actions.getTopPerformingFormatDataSuccess({
-          doughnutData,
           lineChartData,
-          percentageData: dataWithoutDateBuckets,
+          average: payload.platformAverage,
+          properties: payload.properties,
+          platform: platform,
         })
       )
     } else {
