@@ -1,0 +1,30 @@
+.letterBar {
+  margin: 72px 0;
+  display: flex;
+  justify-content: space-between;
+  border-top: 1px solid $color-cool-grey;
+  border-bottom: 1px solid $color-cool-grey;
+  .letter {
+    width: 45px;
+    font-family: $font-family-ClanOT;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-align: center;
+    color: white;
+    border-left: 1px solid $color-cool-grey;
+    background-color: $color-dark-grey-blue;
+    padding: 21px 12px;
+    text-decoration: none;
+    &:last-child {
+      border-right: 1px solid $color-cool-grey;
+    }
+  }
+  .activeLetter {
+    background-color: #2fd7c4;
+    font-weight: 700;
+  }
+}
