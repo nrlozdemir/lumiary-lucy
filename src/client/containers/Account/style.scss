@@ -1,0 +1,209 @@
+.info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 40px;
+
+  .image {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    border: 1px solid #fff;
+    border-radius: 50%;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      max-height: 100%;
+    }
+  }
+
+  h1 {
+    color: #fff;
+    font-family: $font-family-primary;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 800;
+    font-stretch: condensed;
+    margin-top: 24px;
+  }
+
+  p {
+    margin-top: 16px;
+    font-size: 14px;
+    line-height: 26px;
+    color: $color-cool-grey;
+    text-align: center;
+    font-family: $font-family-ClanOTNews;
+    padding: 0 30px;
+  }
+}
+.info {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 40px;
+
+  .image {
+    position: relative;
+    width: 64px;
+    height: 64px;
+    overflow: hidden;
+    border: 1px solid #fff;
+    border-radius: 50%;
+
+    img {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      transform: translate(-50%, 0);
+      max-height: 100%;
+    }
+  }
+
+  h1 {
+    color: #fff;
+    font-family: $font-family-primary;
+    font-size: 24px;
+    line-height: 30px;
+    font-weight: 800;
+    font-stretch: condensed;
+    margin-top: 24px;
+  }
+}
+
+.form {
+  font-family: $font-family-ClanOT;
+
+  .input {
+    display: block;
+    margin-bottom: 24px;
+    position: relative;
+
+    input {
+      width: 100%;
+
+      &:valid {
+        border-color: #2fd7c4;
+      }
+    }
+    p {
+      position: absolute;
+      right: 10px;
+      font-family: $font-family-ClanOTNews;
+      font-size: 14px;
+      color: #ffffff;
+      line-height: 40px;
+      top: 0;
+      cursor: pointer;
+    }
+  }
+
+  .forgotPasswordLink {
+    color: #fff;
+    font-family: $font-family-ClanOTBold;
+    font-weight: bold;
+    font-size: 14px;
+    margin-top: 40px;
+    text-decoration: none;
+    .active {
+      color: #2fd7c4;
+    }
+  }
+}
+
+.link {
+  color: #fff;
+  font-family: $font-family-ClanOTBold;
+  font-weight: bold;
+  font-size: 14px;
+  margin-bottom: 40px;
+  text-decoration: none;
+}
+
+.submitArea {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 40px;
+}
+
+.list {
+  width: 100%;
+
+  .listItem {
+    position: relative;
+    display: flex;
+    align-items: center;
+    height: 72px;
+    cursor: pointer;
+    box-sizing: border-box;
+    padding: 0 24px;
+
+    background-color: $color-dark-five;
+    border: 1px solid $color-dusk-two;
+
+    .listItemText {
+      font-size: 14px;
+      color: #ffffff;
+      font-family: $font-family-ClanOTBold;
+      font-weight: bold;
+      text-decoration: underline;
+      margin-left: 24px;
+    }
+
+    .listItemTextNoneUnderline {
+      text-decoration: none;
+    }
+
+    .listItemIcon {
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: $color-dark-five;
+      background-color: #ffffff;
+      border-radius: 50%;
+      font-size: 12px;
+      overflow: hidden;
+
+      img {
+        width: 100%;
+        min-height: 100%;
+      }
+    }
+
+    .listItemCheck {
+      position: absolute;
+      right: 24px;
+
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      font-size: 9px;
+      color: #ffffff;
+      background-color: $color-dusk-two;
+    }
+
+    &.connected {
+      .listItemCheck {
+        background-color: $color-cool-blue;
+        color: $color-dark-five;
+      }
+    }
+
+    &:not(:last-child) {
+      border-bottom: none;
+    }
+  }
+}

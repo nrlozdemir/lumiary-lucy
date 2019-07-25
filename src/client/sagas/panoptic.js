@@ -1,5 +1,5 @@
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
-import { selectAuthProfile } from 'Reducers/auth'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
 import moment from 'moment'
 
@@ -21,7 +21,7 @@ import { dayOfWeek, chartColors } from 'Utils/globals'
 
 function* getVideoReleasesData({ data }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
     const { platform, dateRange, metric } = data
 
     const options = {
@@ -57,7 +57,7 @@ function* getColorTemperatureData({ data }) {
   try {
     const { dateRange, colorTemperature } = data
 
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const response = yield call(
       getDataFromApi,
@@ -86,7 +86,7 @@ function* getColorTemperatureData({ data }) {
 
 function* getFilteringSectionData({ data }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const { property, metric, platform, dateRange } = data
 
@@ -162,7 +162,7 @@ function* getFilteringSectionData({ data }) {
 
 function* getPacingCardData({ data }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const { metric, dateRange, platform } = data
 
@@ -223,7 +223,7 @@ function* getPacingCardData({ data }) {
 
 function* getCompareSharesData({ data: { dateRange } }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     // TODO: We need change parameters when to do multiple select filter (Shares on Facebook & YouTube)
     const parameters = {
@@ -260,7 +260,7 @@ function* getCompareSharesData({ data: { dateRange } }) {
 
 function* getFlipCardsData() {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const metrics = yield call(
       getDataFromApi,
@@ -309,7 +309,7 @@ function* getFlipCardsData() {
 
 function* getTopPerformingFormatData({ data = {} }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const { platform = 'all', metric = 'views' } = data
     const options = {

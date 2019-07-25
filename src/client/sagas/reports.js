@@ -13,11 +13,11 @@ import {
 } from 'Utils/datasets'
 
 import { getDataFromApi } from 'Utils/api'
-import { selectAuthProfile } from 'Reducers/auth'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 
 function* getReports({ payload: { value: filterValue } = {} }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const response = yield call(
       getDataFromApi,
@@ -138,7 +138,7 @@ function* compareBrandSubmit({ payload: { params, onlySave } }) {
 
 function* predefinedReportRequest({ payload }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const url = `/brand/${brand.uuid}/predef/${payload}`
 
@@ -154,7 +154,7 @@ function* deleteReport({ payload: { id, isGetAllReports } }) {
   try {
     const {
       brand: { uuid },
-    } = yield select(selectAuthProfile)
+    } = yield select(makeSelectAuthProfile())
 
     const response = yield call(
       getDataFromApi,
@@ -200,7 +200,7 @@ function* getPredefinedReportChartRequest({ payload }) {
 
 function* getPredefinedReports() {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const response = yield call(
       getDataFromApi,
@@ -255,7 +255,7 @@ function* getContentVitalityScoreData({ payload = {} }) {
 
 function* getVideoComparisonData({ data: { dateRange, report } }) {
   try {
-    const profile = yield select(selectAuthProfile)
+    const profile = yield select(makeSelectAuthProfile())
     // const competitors = getBrandAndCompetitors(profile)
 
     // const filteredCompetitors = getFilteredCompetitors(competitors, report)
@@ -301,7 +301,7 @@ function* getPerformanceComparisonData({
   data: { metric, property, report, dateRange = '3months' },
 }) {
   try {
-    const profile = yield select(selectAuthProfile)
+    const profile = yield select(makeSelectAuthProfile())
     // const competitors = getBrandAndCompetitors(profile)
 
     // const filteredCompetitors = getFilteredCompetitors(competitors, report)
@@ -348,7 +348,7 @@ function* getPerformanceComparisonData({
 
 function* getColorComparisonData({ data: { metric, dateRange, report } }) {
   try {
-    const profile = yield select(selectAuthProfile)
+    const profile = yield select(makeSelectAuthProfile())
     // const competitors = getBrandAndCompetitors(profile)
 
     // const filteredCompetitors = getFilteredCompetitors(competitors, report)
