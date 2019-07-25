@@ -17,7 +17,7 @@ class SidaBar extends Component {
         <input className={style.searchInput} placeholder="Search glossary..."/>
       </div>
       <div className={style.sideBarMenu}>
-        {content[letter].map((menu, i) => (
+        {content[letter] && content[letter].map((menu, i) => (
           <NavLink
             key={i}
             to={`/glossary/${letter}/${menu.term.toLowerCase()}`}
