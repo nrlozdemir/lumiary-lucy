@@ -6,6 +6,7 @@ import { withTheme } from 'ThemeContext/withTheme'
 import { isDataSetEmpty } from 'Utils/datasets'
 import { ucfirst } from 'Utils'
 import ToolTip from 'Components/ToolTip'
+import { customChartToolTip } from 'Utils'
 
 import Labels from 'Components/Charts/Labels'
 import { roundRect } from 'Utils/ui'
