@@ -1,17 +1,1897 @@
 {
-  "sectionExplanations": {
-    "456456456": [
+  "glossary": {
+    "title": "Default Glossary",
+    "description": null,
+    "terms": {
+      "0-9": [
+        {
+          "slug": "43",
+          "uuid": "fc2b2d3e-e916-417e-813f-7d7cf5fd26d3",
+          "term": "4:3",
+          "text": "",
+          "tags": [
+            {
+              "slug": "aspect-ratio",
+              "name": "Aspect Ratio"
+            }
+          ]
+        },
+        {
+          "slug": "45",
+          "uuid": "387b94b7-b444-4fac-86d4-39fb223af8ed",
+          "term": "4:5",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/27942.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "aspect-ratio",
+              "name": "Aspect Ratio"
+            }
+          ]
+        },
+        {
+          "slug": "11",
+          "uuid": "994dea83-8f9b-4d59-b0b4-2788e5163c28",
+          "term": "1:1",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/23477.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "aspect-ratio",
+              "name": "Aspect Ratio"
+            }
+          ]
+        },
+        {
+          "slug": "169",
+          "uuid": "8c8b5fc9-c39f-44a0-acbf-b5de8dabb979",
+          "term": "16:9",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/23902.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "aspect-ratio",
+              "name": "Aspect Ratio"
+            }
+          ]
+        },
+        {
+          "slug": "360",
+          "uuid": "393d8991-3b1a-4329-86cf-c2adb30fa2c9",
+          "term": "360",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/12554.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        }
+      ],
+      "a": [
+        {
+          "slug": "audience-most-popular-videos-by-age-engagement-and-date",
+          "uuid": "e40208c9-9d82-4645-9ae4-c8f87b45186e",
+          "term": "Audience - Most Popular Videos By Age, Engagement, and Date:",
+          "text": "<p>This module provides a summary of the most popular videos for each age across platforms.  Using the dropdown menus, you can select the audience, property, and time frame.  Using the side scrolling function, you can toggle between videos for each age.  On each video screen, the video’s respective platform, metric amount, and <a target=\"_blank\" href=\"/glossary/c/cv-score\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">CV score</a> are shown at the bottom of the player. </p><br/>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "audience",
+              "name": "Audience"
+            }
+          ]
+        },
+        {
+          "slug": "animation",
+          "uuid": "a07cda04-ac90-424d-9599-30630879e34b",
+          "term": "Animation",
+          "text": "<p>The technique of photographing successive drawings or positions of puppets or models to create an illusion of movement when the movie is shown as a sequence</p><br/><video controls=\"\" src=\"https://media.quickframe.com/video/video/24981.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "aspect-ratio",
+          "uuid": "1ce03989-6a16-4a76-a19f-feae912482a1",
+          "term": "Aspect Ratio",
+          "text": "<p>The ratio of the width to the height of an image or screen.  This is one of the properties that Lumiere measures in comparison with the metrics of a video.</p><br/><ul style=\"list-style:unset;padding-left:20px\"><li><a target=\"_blank\" href=\"%2Fglossary%2F0-9%2F1%3A1\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">1:1</a></li><li><a target=\"_blank\" href=\"%2Fglossary%2F0-9%2F4%3A3\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">4:3</a></li></ul><ul style=\"list-style:unset;padding-left:20px\"><li><a target=\"_blank\" href=\"%2Fglossary%2F0-9%2F16%3A9\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">16:9</a></li></ul><ul style=\"list-style:unset;padding-left:20px\"><li><a target=\"_blank\" href=\"%2Fglossary%2F0-9%2F4%3A5\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">4:5</a></li></ul><br/>",
+          "tags": [
+            {
+              "slug": "aspect-ratio",
+              "name": "Aspect Ratio"
+            },
+            {
+              "slug": "property",
+              "name": "Property"
+            }
+          ]
+        },
+        {
+          "slug": "audience-dominant-color-performance-by-gender",
+          "uuid": "ce310cdf-87d6-42ed-8de8-3e4058b9fd54",
+          "term": "Audience - Dominant Color Performance By Gender",
+          "text": "<p>This module shows the dominant color for videos as they relate to engagement performance for a specific audience.  The two histograms compare the dominant color within a video by engagement and audience for the past month. Each graph axis represents a color from the 12-hue color palette. Engagement increases from the center of the wheel to the outer edges via plotted points, showing a propensity range toward particular colors. The bar charts below show the top three dominant colors for each platform.   Dominant color is measured by breaking down each frame of a specific video, and comparing the dominant color for each frame using numerical values.  After comparing the color breakdown by frame, Lumiere then determines the dominant, or most prevalent color present in the video.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "audience",
+              "name": "Audience"
+            }
+          ]
+        },
+        {
+          "slug": "audience-content-vitality-score-based-on-audience",
+          "uuid": "a8ce746d-6ec6-4b3f-92ec-2689b9afc0cd",
+          "term": "Audience - Content Vitality Score Based on Audience",
+          "text": "<p>This module gives an overview of performance for your male and female audiences based on the Lumiere score associated with a specific metric, and compares this with the average Lumiere score for a specified platform.  The curve in the graph for the male and female audiences are formulated using the range of score points for all videos within your library, and amount of videos associated with each.   The peak of each curve represents the highest cluster of videos.  The score associated with this cluster represents the overall Lumiere score for each audience.  Underneath the graph, the numerical Lumiere score for each audience is represented, along with the percent difference between the two.   The grey bar on the edge of each audience circle represents the average Lumiere score for the selected platform.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "audience",
+              "name": "Audience"
+            }
+          ]
+        },
+        {
+          "slug": "audience-age",
+          "uuid": "eb42eb33-8025-4634-b9ed-c652ee867275",
+          "term": "Audience Age",
+          "text": "<p>The specific age of an audience.  The audience age is referenced on the <a target=\"_blank\" href=\"/glossary/a/audience\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Audience page</a> in the <a target=\"_blank\" href=\"/glossary/a/audience-most-popular-videos-by-age-engagement-and-date\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Most Popular Videos By Age, Engagement, and Date Module</a>.</p>",
+          "tags": [
+            {
+              "slug": "audience",
+              "name": "Audience"
+            },
+            {
+              "slug": "property",
+              "name": "Property"
+            }
+          ]
+        },
+        {
+          "slug": "audience",
+          "uuid": "75b95c95-361f-4fe4-9781-6b24cf5fdb33",
+          "term": "Audience",
+          "text": "<p><p>The Audience page represents performance data through the lens of different audience segments based on age and gender.  When these characteristics are analyzed against metrics, properties, and time frame, this page represents how different programming strategies correspond and/or affected by different Lumiere properties. </p><br/><p><strong style=\"font-weight:bold\">Modules</strong></p><ul style=\"list-style:unset;padding-left:20px\"><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/a/audience-content-vitality-score-based-on-audience\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Content Vitality Score Based on Audience</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/a/audience-performance-by-age-gender-and-date\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Performance By Age, Gender, and Date</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/a/audience-most-popular-videos-by-age-engagement-and-date\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Most Popular Videos By Age, Engagement, and Date</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/a/audience-video-properties-split-by-gender\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Video Properties Split By Gender</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/a/audience-change-over-time-by-property\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Change Over Time By Property</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/a/audience-dominant-color-performance-by-gender\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Dominant Color Performance By Gender</strong></a><strong style=\"font-weight:bold\"></strong></li></ul><br/></p>",
+          "tags": [
+            {
+              "slug": "audience",
+              "name": "Audience"
+            },
+            {
+              "slug": "page",
+              "name": "Page"
+            }
+          ]
+        },
+        {
+          "slug": "audience-gender",
+          "uuid": "9e38468d-bed5-44a9-a2c7-cb8ad87eb2b4",
+          "term": "Audience Gender",
+          "text": "<p>The specific gender of an audience</p>",
+          "tags": [
+            {
+              "slug": "audience",
+              "name": "Audience"
+            }
+          ]
+        },
+        {
+          "slug": "audience-performance-by-age-gender-and-date",
+          "uuid": "6a91380f-b197-4f90-8e48-7806e293f928",
+          "term": "Audience - Performance By Age, Gender, and Date",
+          "text": "<p>This module compares a video’s performance with a specified platform, property, and time frame.  Using the dropdown menus to make selections for metric, platform, property, and time frame, as well as the interactive age slider to define the age range, the module will show how engagement is affected for the male and female audience, in addition to a combined audience.  The size of the circles reflects the relative amount of engagement - larger circles mean more engagement in relation to a specific property for the audience, and vice versa.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "audience",
+              "name": "Audience"
+            }
+          ]
+        },
+        {
+          "slug": "audience-video-properties-split-by-gender",
+          "uuid": "fc5ee0a6-0b27-47e4-8cb8-cb33b2f3e1b1",
+          "term": "Audience - Video Properties Split By Gender",
+          "text": "<p>This graph compares the Lumiere video properties, and how they relate to engagement for male and female audiences.  Using the dropdown menu, you can select a specific property, metric, and time frame.  For each property, the y-axis populates with options related to that specific property.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "audience",
+              "name": "Audience"
+            }
+          ]
+        },
+        {
+          "slug": "audience-change-over-time-by-property",
+          "uuid": "6631d0ab-d360-48e9-b3e1-52577fee5b4e",
+          "term": "Audience - Change Over Time By Property",
+          "text": "<p>This graph compares the Lumiere video properties, and how they relate to engagement for male and female audiences, but showing the change across a specific time period.  Using the dropdown,  you can choose property, metric, and time frame.  Based on the time frame selected, the x-axis will adjust to the appropriate labels.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "audience",
+              "name": "Audience"
+            }
+          ]
+        }
+      ],
+      "b": [
+        {
+          "slug": "brand-insights",
+          "uuid": "507876ab-a326-4abf-9979-dfee2dc20ed2",
+          "term": "Brand Insights",
+          "text": "<p>This is a subsection of Reports that gives clients access to reports that provide detailed engagement insights about competitor brands.  </p><br/><p><strong style=\"font-weight:bold\">Modules</strong></p><ul style=\"list-style:unset;padding-left:20px\"><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/b/brand-insights-top-performing-videos\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Performing Videos</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/b/brand-insights-video-releases-vs-engagement\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Video Releases vs. Engagement</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/b/brand-insights-top-videos-over-time-for-eachplatform\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Videos Over Time For Each Platform</strong></a></li><li><a target=\"_blank\" href=\"/glossary/b/brand-insights-top-videos-over-time-for-eachplatform\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\"></strong></a><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/b/brand-insights-pacing-for-duration-by-performance\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Pacing For Duration By Performance</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/b/brand-insights-video-property-composition\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Video Property Composition</strong></a><strong style=\"font-weight:bold\"></strong></li></ul><br/>",
+          "tags": [
+            {
+              "slug": "brand-insights",
+              "name": "Brand Insights"
+            },
+            {
+              "slug": "page",
+              "name": "Page"
+            }
+          ]
+        },
+        {
+          "slug": "brand-insights-top-performing-videos",
+          "uuid": "53b47e16-0099-49cb-889a-95e141be6a87",
+          "term": "Brand Insights - Top Performing Videos",
+          "text": "<p>This module shows the top performing videos for a brand as it relates to platform, metric, and time frame.  Underneath the videos, there are three modules that provide insights about a video’s duration, pacing, and dominant color, showing how each relates to their respective industry’s videos on a whole.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "brand-insights",
+              "name": "Brand Insights"
+            }
+          ]
+        },
+        {
+          "slug": "brand-insights-top-videos-over-time-for-each-platform",
+          "uuid": "09648c69-84ac-47f7-8b5f-44d286d86ec2",
+          "term": "Brand Insights - Top Videos Over Time For Each Platform",
+          "text": "<p>This chart shows a breakdown of the top performing videos on each platform by property.  Using the dropdown, you can select which property to analyze, and the chart will populate options for that property along the x axis.   Each column shows the proportion of the selected brand videos for each platform that fall within a specific property option.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "brand-insights",
+              "name": "Brand Insights"
+            }
+          ]
+        },
+        {
+          "slug": "brand-insights-video-releases-vs-engagement",
+          "uuid": "2faad443-134d-4ef2-8547-96ada8dcfd80",
+          "term": "Brand Insights - Video Releases vs. Engagement",
+          "text": "<p>This graph measures the total number of video releases within a brand’s video library against engagement across a specific time period.   The aggregate amount for video releases and engagement across the selected time period is first determined, then respective percentages are assigned to corresponding days, weeks, and months - these are shown using the split vertical bars.   The graph shows the top performing video durations from the brand’s library, with a maximum of four durations being shown at any given time.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "brand-insights",
+              "name": "Brand Insights"
+            }
+          ]
+        },
+        {
+          "slug": "brand-insights-pacing-for-duration-by-performance",
+          "uuid": "6302794e-1193-450a-8505-fb700a78de93",
+          "term": "Brand Insights - Pacing For Duration By Performance",
+          "text": "<p>This graph compares the performance of videos within a brand’s library with each video’s <a target=\"_blank\" href=\"/glossary/p/pacing\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">pacing</a> and <a target=\"_blank\" href=\"/glossary/d/duration\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">duration</a>.  Using the dropdown menu, you have the ability to change both platform and metric for the information showing in this module.  The graph on the left reflects the video durations that have the highest engagement on a respective platform.  Within each duration, a column shows the breakdown of how many of those videos are of a specific pacing.  The chart on the right is comparing all videos within the brand’s library, and breaking down the proportional total amount by associated pacing for each video.</p><br/>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "brand-insights",
+              "name": "Brand Insights"
+            }
+          ]
+        },
+        {
+          "slug": "brand-insights-video-property-composition",
+          "uuid": "173a6cc1-34b1-4ca9-a0f2-90f4c4c5becb",
+          "term": "Brand Insights - Video Property Composition",
+          "text": "<p>This module provides insights into the types of videos that are created within a brand’s video library and the breakdown by property for each video.  The chart on the left shows the total percentage of the video library, broken down by specific property option.  The chart on the right provides information as to the monthly proportional amount of videos that were created within the selected property type.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "brand-insights",
+              "name": "Brand Insights"
+            }
+          ]
+        }
+      ],
+      "c": [
+        {
+          "slug": "content-vitality-score",
+          "uuid": "55371881-d85f-42a4-8cbe-3edc10ffd7c3",
+          "term": "Content Vitality Score",
+          "text": "<p>See <a target=\"_blank\" href=\"/glossary/l/lumiere-score\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Lumiere Score</a></p>",
+          "tags": []
+        },
+        {
+          "slug": "cinemagraph",
+          "uuid": "1e0260aa-8772-4d94-aa26-12f739643784",
+          "term": "Cinemagraph",
+          "text": "<p>Still photographs in which a minor and repeated movement occurs, forming a video clip. Cinemagraphs are usually published as animated GIFs or in other video formats, and can give the illusion of watching an animation.</p>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "cinemagraph",
+          "uuid": "0db69259-7842-48d2-90ae-40dd84286a7a",
+          "term": "Cinemagraph",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/27214.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "color-reference-chart",
+          "uuid": "5b65e353-648f-47f6-99de-2a78608c3606",
+          "term": "Color Reference Chart",
+          "text": "<p>Lumiere uses hue to group colors that it detects in a video into an even division of the color wheel.  A bucket represents a 30-degree arc on the color wheel, and these buckets roughly correspond to hues that represent specific colors, as listed below. </p><br/><ul style=\"list-style:unset;padding-left:20px\"><li>#CC2226: Red</li><li>#DD501D: Red-Orange</li><li>#EB7919: Orange</li><li>#F8B90B: Orange-Yellow</li><li>#FFF20D: Yellow</li><li>#AAC923: Yellow-Green</li><li>#13862B: Green</li><li>#229A78: Green-Blue</li><li>#3178B0: Blue</li><li>#79609B: Blue-Purple</li><li>#923683: Purple</li><li>#B83057: Purple-Red</li></ul><br/>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            }
+          ]
+        },
+        {
+          "slug": "compare-brands",
+          "uuid": "62912c52-7b9a-413d-8a91-60bc882a99ea",
+          "term": "Compare Brands",
+          "text": "<p>This is a subsection of the Reports page where clients can build reports that give them the ability to compare two brands in order to understand what is driving the performance of each brand’s videos.</p>",
+          "tags": [
+            {
+              "slug": "page",
+              "name": "Page"
+            }
+          ]
+        },
+        {
+          "slug": "comments",
+          "uuid": "c5ecd42c-5d16-4989-aa5b-ef81891eddac",
+          "term": "Comments",
+          "text": "<p>Written responses to a post on a social media platform.</p>",
+          "tags": [
+            {
+              "slug": "metric",
+              "name": "Metric"
+            }
+          ]
+        },
+        {
+          "slug": "cv-score",
+          "uuid": "2ab16663-c3bf-427d-a499-707eb075f0e3",
+          "term": "CV Score",
+          "text": "<p>See <a target=\"_blank\" href=\"/glossary/c/content-vitality-score\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Content Vitality Score</a></p>",
+          "tags": []
+        }
+      ],
+      "d": [
+        {
+          "slug": "dominant-color",
+          "uuid": "936281aa-0e34-431b-bf27-8533770e80c9",
+          "term": "Dominant Color",
+          "text": "<p>Represents the most readily apparent color within a video.  Dominant color is measured by breaking down each frame of a specific video, and comparing the dominant color for each frame.  By comparing the color breakdown by frame, the platform defines the dominant color as the most recurring color within the entire video.</p>",
+          "tags": [
+            {
+              "slug": "property",
+              "name": "Property"
+            }
+          ]
+        },
+        {
+          "slug": "drone",
+          "uuid": "1c43d14f-1c02-42eb-8295-47c4d20e28c2",
+          "term": "Drone",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/22762.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "duration",
+          "uuid": "55feb7dd-fbf9-41cb-afe7-0099c2929e7a",
+          "term": "Duration",
+          "text": "<p>The time that it takes to play a video in its entirety.  This is one of the properties that Lumiere measures in comparison with the metrics of a video.</p>",
+          "tags": [
+            {
+              "slug": "property",
+              "name": "Property"
+            }
+          ]
+        }
+      ],
+      "e": [
+        {
+          "slug": "event-coverage",
+          "uuid": "54a94c80-4e40-42f3-a210-60aa6d205ed3",
+          "term": "Event Coverage",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/21607.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "engagement",
+          "uuid": "1837f677-cf62-499f-8005-00994ba0b87b",
+          "term": "Engagement",
+          "text": "<p>Social media engagement is an umbrella term for the public shares, likes, views, and comments for a video. Engagement is a common metric for evaluating social media performance.</p>",
+          "tags": [
+            {
+              "slug": "metric",
+              "name": "Metric"
+            }
+          ]
+        },
+        {
+          "slug": "explainer",
+          "uuid": "afa6c582-0826-46f5-9dff-fae5dcc2621e",
+          "term": "Explainer",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/26512.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        }
+      ],
+      "f": [
+        {
+          "slug": "format",
+          "uuid": "5bd10b52-0ac8-4f7d-a575-b19751c0742a",
+          "term": "Format",
+          "text": "<p>the style in which the video is created (example: animation, user generated live action). This is one of the properties that Lumiere measures in comparison with the metrics of a video.</p>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            },
+            {
+              "slug": "property",
+              "name": "Property"
+            }
+          ]
+        },
+        {
+          "slug": "frame-rate",
+          "uuid": "a855da29-61e1-451f-96c7-125adb29aaf6",
+          "term": "Frame Rate",
+          "text": "<p>Frequency (rate) at which consecutive images called frames appear on a display. </p><br/><ul style=\"list-style:unset;padding-left:20px\"><li><strong style=\"font-weight:bold\">24 fps </strong></li><li><strong style=\"font-weight:bold\">30 fps</strong></li><li><strong style=\"font-weight:bold\">50 fps</strong></li></ul><br/>",
+          "tags": [
+            {
+              "slug": "property",
+              "name": "Property"
+            }
+          ]
+        },
+        {
+          "slug": "frames-per-second",
+          "uuid": "6f66aac3-6455-4c48-84f8-4e49a30b7e0b",
+          "term": "Frames Per Second",
+          "text": "<p>This is the frequency (rate) at which consecutive images called frames appear on a display.</p>",
+          "tags": [
+            {
+              "slug": "property",
+              "name": "Property"
+            }
+          ]
+        }
+      ],
+      "g": [
+        {
+          "slug": "gopro",
+          "uuid": "865ec73e-0bc5-4dc0-8aa9-8d5dbacf4435",
+          "term": "GoPro",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/5975.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "gif",
+          "uuid": "a94c3e2f-38fb-4bcf-b759-450344354cb9",
+          "term": "GIF",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/26493.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        }
+      ],
+      "h": [
+        {
+          "slug": "hands-only",
+          "uuid": "c457de14-c740-4c4e-bc04-44f4376ae1be",
+          "term": "Hands Only",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/14497.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "highlight",
+          "uuid": "ca93eb92-c25c-4129-95bf-a865ff067583",
+          "term": "Highlight",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/18893.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        }
+      ],
+      "i": [
+        {
+          "slug": "instructional",
+          "uuid": "7b9d17c5-6ef6-4116-a86d-c500225da6dc",
+          "term": "Instructional",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/5429.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "interactive-age-selector",
+          "uuid": "ee3eb597-ec03-4633-9aff-69eba2c18bac",
+          "term": "Interactive Age Selector",
+          "text": "<p>The tool allows you to select the lower and upper bounds of a specific age range to analyze in the <a target=\"_blank\" href=\"/glossary/a/audience-performance-by-age-gender-and-date\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Performance By Age, Gender, and Date module</a> on the <a target=\"_blank\" href=\"/glossary/a/audience\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Audience page</a>.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "audience",
+              "name": "Audience"
+            }
+          ]
+        },
+        {
+          "slug": "interview",
+          "uuid": "ea1966e4-2acc-47ed-ad7d-da78fb2c7766",
+          "term": "Interview",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/22746.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        }
+      ],
+      "j": [],
+      "k": [],
+      "l": [
+        {
+          "slug": "library",
+          "uuid": "4da99830-cb0d-42d2-aa97-a359117aa776",
+          "term": "Library",
+          "text": "<p>The central location for all of your brand’s videos.  The Library page allows you to filter by performance metric, platform, and property.  The page is updated as new videos are posted on all platforms that Lumiere has been given access.</p>",
+          "tags": [
+            {
+              "slug": "library",
+              "name": "Library"
+            },
+            {
+              "slug": "page",
+              "name": "Page"
+            }
+          ]
+        },
+        {
+          "slug": "likes",
+          "uuid": "47b2fa11-4fa6-482c-8555-3faf5b92976a",
+          "term": "Likes",
+          "text": "<p>A Like is an action that can be made by a Facebook or Instagram user. Instead of writing a comment or sharing a post, a user can click the Like button as a quick way to show approval.</p>",
+          "tags": [
+            {
+              "slug": "metric",
+              "name": "Metric"
+            }
+          ]
+        },
+        {
+          "slug": "library-detail-page",
+          "uuid": "eb1556c8-4c6f-40a0-8a18-f3bbbaf6da84",
+          "term": "Library Detail Page",
+          "text": "<p>This page provides more detail about a specific video within your library, analyzing how it compares against other videos, as well as providing an opportunity to gain more insights with a shot by shot breakdown of the video.  For each video selected from the main Library Page, the number of likes, views, comments and shares for a video are listed in the upper right hand corner, next to the video player.  In the property module underneath, the video’s frame rate, pacing, duration and format is compared with other options for each property within your video library.   For each circle graph in this module, the property option corresponding to the selected video is highlighted in blue, and scrolling over each of the quadrants reveals their correlating property option.  The shot by shot module breaks down a video frame by frame, providing information on the people, objects, and dominant color within each frame.</p>",
+          "tags": [
+            {
+              "slug": "library",
+              "name": "Library"
+            },
+            {
+              "slug": "page",
+              "name": "Page"
+            }
+          ]
+        },
+        {
+          "slug": "lumiere-score",
+          "uuid": "41d267ac-87bd-4a8b-b47b-e2c5072b7918",
+          "term": "Lumiere Score",
+          "text": "<p>The Lumiere Score aggregates multiple basic engagement metrics of a video (likes, views, etc) into an overall, human interpretable, video health score per metric.   The calculation of this score takes the raw number in relation to a specific metric for a video, and divides it by the number of total followers on a given platform.  Using this calculation, the values are plotted, and assigned to corresponding percentiles.  This process, when applied to your video data, creates a comprehensive view of the relationships between videos and their relative engagement on a given platform and vertical.</p>",
+          "tags": []
+        },
+        {
+          "slug": "luminosity",
+          "uuid": "df71edd6-6dbd-4fd7-9a84-fa793de0fa8b",
+          "term": "Luminosity",
+          "text": "<p>Quality of something that gives off light or shines with reflected light.</p>",
+          "tags": []
+        }
+      ],
+      "m": [
+        {
+          "slug": "marketview-top-performing-videos-by-platform",
+          "uuid": "f16b4eb9-38ee-45bd-9671-81ce6a49b824",
+          "term": "Marketview - Top Performing Videos By Platform",
+          "text": "<p>This module analyzes all competitor videos and shows their top performing videos by platform.  To customize the videos shown based on metrics, platform, and time frame, you can use the dropdown menus to make a selection.  Using the side buttons, you have the ability to toggle between videos.  For each video, more information regarding the video’s duration, pacing and dominant color is provided, including insights in regards to how each property compares with industry statistics overall.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-format",
+          "uuid": "1503bee9-b3eb-40ed-a98e-832df3ef0363",
+          "term": "Marketview - Format",
+          "text": "<p>An overview of the top formats associated with the highest degree of performance for the past week.  The number of videos created</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-top-similar-properties-of-top-videos",
+          "uuid": "e28f5f6d-cc8e-4824-af6f-58e0b2b8c501",
+          "term": "Marketview - Top Similar Properties Of Top Videos",
+          "text": "<p>This module provides an overview of how video duration, pacing, and dominant color compare across the spectrum of videos outside of your library.  Each column provides options for each property, with the green bar indicating the degree of prevalence for each option amongst your competitor's videos. Using the dropdown menu, you can change the time frame to analyze the past week, month, and 3 months.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-top-performing-day-videos",
+          "uuid": "cfa83e14-bd40-4beb-9302-05dbd99082bb",
+          "term": "Marketview - Top Performing Day Videos",
+          "text": "<p>Using this module in Marketview, you can see which of your competitors videos are the top performing ones for a specific day of the week, organizing the information by metric, platform, and time frame.  Using the days listed on the top of the page, you can select which day’s information you want to see.  With the dropdown menus, you can select both metric, platform, and time frame.  Hovering over each video will cause the video to start playing, and you can toggle which video you are viewing using the side arrows.  Beneath each video, an analysis for duration, pacing, and dominant color for each video is provided, along with insights about how each video compares with industry trends.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-pacing",
+          "uuid": "3ba5645e-cb4c-4f3a-a5b5-28a2a8b2d1f4",
+          "term": "Marketview - Pacing",
+          "text": "<p>An overview of the pace associated with the top engagement metric for videos outside of your library for the past month.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "module",
+          "uuid": "85ac0bce-64cf-4d75-a393-41bc77cce254",
+          "term": "Module",
+          "text": "<p>A standardized container for a set of components which contain data. While the data within each module is self-contained, it usually relates to other elements either within a page or in other sections of the site. The number of modules varies between pages, with some including up to six modules.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            }
+          ]
+        },
+        {
+          "slug": "marketview",
+          "uuid": "12d67226-d07c-4d24-bf07-f51c9083a240",
+          "term": "Marketview",
+          "text": "<p>Marketview is an overarching visualization of the performance associated with videos outside of your video library.  In Marketview, information on industry specific videos, including performance and how it relates to properties and specific platforms across various time frames, is provided for analysis and insight. </p><br/><p><strong style=\"font-weight:bold\">Main Page</strong></p><ul style=\"list-style:unset;padding-left:20px\"><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-color\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Color</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-pacing\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Pacing</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-format\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Format</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-total-metric-for-platform-in-the-past-timeframe\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Total Metric For Platform In The Past Time Frame</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-total-competitor-views-by-duration\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Total Competitor Views By Duration</strong></a><strong style=\"font-weight:bold\"></strong></li></ul><br/><p><strong style=\"font-weight:bold\">Platform Metrics</strong></p><ul style=\"list-style:unset;padding-left:20px\"><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-top-performing-videos-by-platform\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Performing Videos By Platform</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-top-videos-over-time-by-platform\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Videos Over Time By Platform</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-top-similiar-properties-of-top-videos\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Similar Properties Of Top Videos</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-top-performing-property-across-platforms\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Performing Property Across Platforms</strong></a><strong style=\"font-weight:bold\"></strong></li></ul><br/><p><strong style=\"font-weight:bold\">Competitor Metric</strong></p><ul style=\"list-style:unset;padding-left:20px\"><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-top-performing-competitor-videos\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Performing Competitor Videos</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-top-videos-over-time-by-competitor\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Videos Over Time By Competitor</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-top-similiar-properties-of-top-videos\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Similar Properties Of Top Videos</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-top-performing-property-across-all-competitors\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Performing Property Across All Competitors</strong></a><strong style=\"font-weight:bold\"></strong></li></ul><br/><p><strong style=\"font-weight:bold\">Time Metrics</strong></p><ul style=\"list-style:unset;padding-left:20px\"><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-top-performing-day-videos\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Performing Day Videos</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-top-similiar-properties-of-top-videos\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Similar Properties of Top Videos</strong></a><strong style=\"font-weight:bold\"></strong></li><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/m/marketview-top-performing-property-across-all-days-of-the-week\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Performing Property Across All Days Of The Week</strong></a><strong style=\"font-weight:bold\"></strong></li></ul><br/>",
+          "tags": [
+            {
+              "slug": "page",
+              "name": "Page"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-total-competitor-views-by-duration",
+          "uuid": "c65721ed-9879-4885-9c30-067255b9a59f",
+          "term": "Marketview - Total Competitor Views By Duration",
+          "text": "<p>This module compares the amount of views for each of your competitors' videos, with the specific duration of the videos that each have posted across all platforms.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-top-performing-property-across-all-days-of-the-week",
+          "uuid": "08b9713b-e09b-42f8-b875-78c57e46246a",
+          "term": "Marketview - Top Performing Property Across All Days Of The Week",
+          "text": "<p>This module provides a view into the video libraries of all your competitors combined, showing the overall breakdown of properties.  Using the dropdown menu to make a selection, the legend will update with options for each property.  The chart will populate with relevant information for the combined video libraries of all your competitors.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-top-performing-competitor-videos",
+          "uuid": "afa61638-7096-4aba-a9af-ab5f457c877e",
+          "term": "Marketview - Top Performing Competitor Videos",
+          "text": "<p>This module provides an overall summary of the top competitor videos.  You can customize the selection using the drop down menus to select a specific metric, platform, as well as time frame.  Using the side buttons, you have the ability to toggle between videos.  For each video, more information regarding the video’s duration, pacing and dominant color is provided, including insights in regards to how each property compares with industry statistics overall.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-total-metric-for-platform-in-the-past-time-frame",
+          "uuid": "f08410b3-84ba-4cd3-895b-0d923942b7af",
+          "term": "Marketview - Total Metric For Platform In The Past Time Frame",
+          "text": "<p>This module gives an overview of metric percentage your chosen competitors have received for all the videos they have posted across all platforms for a specific time frame.  The graph on the left gives a percentile breakdown per metric and time frame for each competitor, while the chart on the right takes the overall count for a specific metric, and assigns a respective percentage to each competitor.   Using the dropdown menu, you can select which metric, platform, and time frame to analyze.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-top-videos-over-time-by-platform",
+          "uuid": "95b488bd-ccbd-4676-977c-5e296c9b21b6",
+          "term": "Marketview - Top Videos Over Time By Platform",
+          "text": "<p>Using this chart, you can analyze how the top videos your competitors are releasing per platform compare against a specific property, metric, and time frame.  Using the dropdown menus to customize your selection, you can see how each brand’s videos compare in regards to performance across platforms.  The legend underneath the graph will have a color assigned to each platform that will correlate to the columns in the chart.  The x axis for the chart will update with relevant options for each chosen property.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-color",
+          "uuid": "adb49f29-856a-4c0b-9955-fa137c587bff",
+          "term": "Marketview - Color",
+          "text": "<p> An overview of the dominant color associated with the top engagement metric for videos on each platform for the past 3 months.  The outline of each circle represents the color associated with the greatest degree of performance for a specific platform, while the size of each circle represents the proportional amount of engagement performance in comparison with the other platformss</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-top-performing-property-across-all-competitors",
+          "uuid": "a809f3aa-22b7-4d1b-90d3-0392169dc0a3",
+          "term": "Marketview - Top Performing Property Across All Competitors",
+          "text": "<p>Using this module, you can see, based on property, how the videos your competitors are releasing across all social platforms are performing based on engagement.  Using the dropdown menu to make a selection, the legend will update with options for each property.  The chart will populate with relevant information for each brand’s video library.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-top-videos-over-time-by-competitor",
+          "uuid": "4804c620-2fe0-43f9-8af0-83654127ce5e",
+          "term": "Marketview - Top Videos Over Time By Competitor",
+          "text": "<p>Using this chart, you can analyze how the top videos your competitors are releasing overall compare against a specific property, metric, and time frame.  Using the dropdown menus to customize your selection, you can see how each brand’s videos compare in regards to performance across platforms.  The legend underneath the graph will have a color assigned to each your listed competitors that will correlate to the columns in the chart.  The x axis for the chart will update with relevant options for each chosen property.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        },
+        {
+          "slug": "marketview-top-performing-property-across-platforms",
+          "uuid": "b7aee02f-2ce6-46f6-b565-afc42ce06c74",
+          "term": "Marketview - Top Performing Property Across Platforms",
+          "text": "<p>Using this module, you can see how each property affects engagements across platforms for videos outside of your library.  Using the dropdown menu to make a selection, the legend will update with options for each property.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "marketview",
+              "name": "Marketview"
+            }
+          ]
+        }
+      ],
+      "n": [],
+      "o": [
+        {
+          "slug": "overview-top-performing-pacing-this-week-by-content-vitality-score",
+          "uuid": "760bf82d-d177-4767-9eea-cfad26a9e449",
+          "term": "Overview - Top Performing Pacing This Week By Content Vitality Score",
+          "text": "<p>This chart compares the types of video pacing within your library by the Content Vitality (CV) Score, showing the top three scoring video pacing according to a specified day in the week on a selected platform.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "overview",
+              "name": "Overview"
+            }
+          ]
+        },
+        {
+          "slug": "overview",
+          "uuid": "6e09e00f-cbf1-4295-b81c-1cff828cda1e",
+          "term": "Overview",
+          "text": "<p>This is designed to be a summary page of your brand’s Lumiere data, providing an overview of the performance of all corresponding properties and metrics across various times, frames and platforms. </p><br/><p><strong style=\"font-weight:bold\">Modules</strong></p><ul style=\"list-style:unset;padding-left:20px\"><li><strong style=\"font-weight:bold\"></strong><a target=\"_blank\" href=\"/glossary/o/overview-top-performing-pacing-this-week-by-content-vitality-score\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\"><strong style=\"font-weight:bold\">Top Performing Pacing This Week By Content Vitality Score</strong></a><strong style=\"font-weight:bold\"></strong></li><li><a target=\"_blank\" href=\"/glossary/o/overview-video-releases-vs-engagement\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Video Releases vs. Engagement</a></li><li><a target=\"_blank\" href=\"/glossary/o/overview-engagement-by-property-over-time\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Engagement By Property Over Time</a></li><li><a target=\"_blank\" href=\"/glossary/o/overview-pacing-for-each-duration-by-performance\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Pacing For Each Duration By Performance</a></li><li><a target=\"_blank\" href=\"/glossary/o/overview-dominant-color-on-facebook-and-youtube\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Dominant Color On Facebook and Youtube</a></li></ul><br/>",
+          "tags": [
+            {
+              "slug": "overview",
+              "name": "Overview"
+            },
+            {
+              "slug": "page",
+              "name": "Page"
+            }
+          ]
+        },
+        {
+          "slug": "overview-dominant-color-on-facebook-and-youtube",
+          "uuid": "0b308c61-1f40-4b48-a837-c0fb2f77099c",
+          "term": "Overview - Dominant Color On Facebook and Youtube",
+          "text": "<p>The two top graphs compare the dominant color within a video by engagement and platform for the past month. Each graph axis represents a color from the 12-hue color palette. Engagement increases from the center of the wheel to the outer edges via plotted points, showing a propensity range toward particular colors. The bar graphs below show the top three dominant colors for each platform.   Dominant color is measured by breaking down each frame of a specific video, and comparing the dominant color for each frame.  By comparing the color breakdown by frame, Lumiere then determines the dominant color present in each video.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "overview",
+              "name": "Overview"
+            }
+          ]
+        },
+        {
+          "slug": "overview-engagement-by-property-over-time",
+          "uuid": "9b6d8a5a-8d57-4407-a0f6-4305292caaa7",
+          "term": "Overview - Engagement By Property Over Time",
+          "text": "<p>This graph compares the engagement metrics of videos within your library to various Lumiere properties associated with each video.   The graph on the left shows the distribution of engagement by video property. The graph on the right shows this distribution over time. Using the drop-downs, you can adjust the video property, engagement/platform and time range.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "overview",
+              "name": "Overview"
+            }
+          ]
+        },
+        {
+          "slug": "overview-video-releases-vs-engagement",
+          "uuid": "0ead0023-21b2-4423-9643-e671e4ff7a2e",
+          "term": "Overview - Video Releases vs. Engagement",
+          "text": "<p>This graph measures the total number of video releases in your library against engagement across a specific time period.   The aggregate amount for video releases and engagement across the selected time period is first determined, then respective percentages are assigned to corresponding days, weeks, and months - these are shown using the split vertical bars.  The graph will show the top performing video durations from your library, with a maximum of four durations being shown at any given time.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "overview",
+              "name": "Overview"
+            }
+          ]
+        },
+        {
+          "slug": "object-tracking",
+          "uuid": "79401568-4cd4-45bb-b31c-bba1b5e332e5",
+          "term": "Object Tracking",
+          "text": "<p>This is a feature that is part of the <a target=\"_blank\" href=\"/glossary/s/shot-by-shot\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Shot By Shot</a> Module in the <a target=\"_blank\" href=\"/glossary/l/library-detail\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Library Detail Page</a>.  This feature tracks all objects that are present within a frame of a video.</p>",
+          "tags": []
+        },
+        {
+          "slug": "overview-pacing-for-each-duration-by-performance",
+          "uuid": "4dec1045-f968-4d0d-9e90-6f75a5f6583b",
+          "term": "Overview - Pacing For Each Duration By Performance",
+          "text": "<p>This graph compares the performance of videos within your library with each video’s <a target=\"_blank\" href=\"/glossary/p/pacing\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">pacing</a> and <a target=\"_blank\" href=\"/glossary/d/duration\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">duration</a>.  Using the dropdown menu, you have the ability to change both the platform and metric being analyzed.  The graph on the left shows the video durations that have the highest engagement on a respective platform.  Within each duration bucket, the column shows a breakdown of how many of those videos are of a specific pacing.  The chart on the right shows the proportional amount for each type of pacing for all videos within your library.</p>",
+          "tags": [
+            {
+              "slug": "module",
+              "name": "Module"
+            },
+            {
+              "slug": "overview",
+              "name": "Overview"
+            }
+          ]
+        }
+      ],
+      "p": [
+        {
+          "slug": "parallax",
+          "uuid": "de47670b-d573-49e0-9994-af5f21b20708",
+          "term": "Parallax",
+          "text": "<video controls=\"\" src=\"x\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "pacing",
+          "uuid": "a5bfd47c-ecb3-43b6-9204-3a4a3fa89a7a",
+          "term": "Pacing",
+          "text": "<p>Pacing is a measure of the average shot length of all shots in a video.   This is one of the properties that Lumiere measures in comparison with the metrics of a video. </p><br/><ul style=\"list-style:unset;padding-left:20px\"><li><strong style=\"font-weight:bold\">Slowest</strong></li><li><strong style=\"font-weight:bold\">Slow</strong></li><li><strong style=\"font-weight:bold\">Medium</strong></li><li><strong style=\"font-weight:bold\">Fast</strong></li></ul><br/>",
+          "tags": [
+            {
+              "slug": "property",
+              "name": "Property"
+            }
+          ]
+        },
+        {
+          "slug": "platform",
+          "uuid": "29420346-db1a-4a97-b35d-e50ea20898f7",
+          "term": "Platform",
+          "text": "<p>A media platform is a service, site, or method that delivers media to an audience. It's functions are to deliver, but also sometimes to allow for feedback, discussion, or sharing. Examples of platforms in media include Facebook and Youtube.</p>",
+          "tags": []
+        },
+        {
+          "slug": "professional-live-action",
+          "uuid": "caea2745-bec3-4503-98d4-f545540c54f6",
+          "term": "Professional (Live Action)",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/25547.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "performance",
+          "uuid": "ecc2506b-88f9-4476-b858-be68d7498059",
+          "term": "Performance",
+          "text": "<p>Perforance is the  the measurement of a key indicators/metrics on a video (ex. Views, shares, likes, comments).</p>",
+          "tags": []
+        },
+        {
+          "slug": "professional-live-action-animation",
+          "uuid": "59e5eca0-771e-44ca-b3c1-8d5ed5e00faf",
+          "term": "Professional (Live Action + Animation)",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/20087.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "photograph",
+          "uuid": "50249441-6fc2-41cd-a433-b4e4103c0916",
+          "term": "Photograph",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/21607.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "professional-animation",
+          "uuid": "4a102392-4b2c-4cb9-91e8-55e5af9518d7",
+          "term": "Professional (Animation)",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/24981.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "property",
+          "uuid": "f5d1e987-72c9-4ddb-a8f5-86630509c908",
+          "term": "Property",
+          "text": "<p>An aspect of a video that contributes to the performance of metrics associated with the video.  </p><br/><ul style=\"list-style:unset;padding-left:20px\"><li><a target=\"_blank\" href=\"/glossary/a/aspect-ratio\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Aspect Ratio</a></li><li><a target=\"_blank\" href=\"/glossary/d/dominant-color\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Dominant Color</a></li><li><a target=\"_blank\" href=\"/glossary/d/duration\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Duration</a></li><li><a target=\"_blank\" href=\"/glossary/f/format\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Format</a> </li><li><a target=\"_blank\" href=\"/glossary/p/pacing\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Pacing</a></li><li><a target=\"_blank\" href=\"/glossary/r/resolution\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Resolution</a></li><br/></ul><br/>",
+          "tags": [
+            {
+              "slug": "property",
+              "name": "Property"
+            }
+          ]
+        },
+        {
+          "slug": "predefined-reports",
+          "uuid": "069cbd91-4b7d-4df9-b775-12e065e29244",
+          "term": "Predefined Reports",
+          "text": "<p> This is a subsection of the <a target=\"_blank\" href=\"/glossary/r/reports\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Reports page</a> that gives clients access to unique and customized learnings about their videos’ performance on an industry level. </p>",
+          "tags": [
+            {
+              "slug": "page",
+              "name": "Page"
+            },
+            {
+              "slug": "reports",
+              "name": "Reports"
+            }
+          ]
+        },
+        {
+          "slug": "product-explainer",
+          "uuid": "edba5b77-7c13-4bad-8001-694b348f7fc8",
+          "term": "Product Explainer",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/28061.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        }
+      ],
+      "q": [
+        {
+          "slug": "quickview",
+          "uuid": "bf677ed6-f2b7-4b88-a34e-1d5f3d95343a",
+          "term": "Quickview",
+          "text": "<p>Quickview provides a quick comparison of the Lumiere properties between two individual videos.  The videos being compared represent the best performing and worst performing video for a certain metric and platform.  For each video, the following properties are listed (aspect ratio, duration, format, frame rate, pacing, resolution, and color).  Quickview is a helpful tool to quickly summarize and distinguish significance about how videos differ or are similar to one another.</p>",
+          "tags": [
+            {
+              "slug": "quickview",
+              "name": "Quickview"
+            }
+          ]
+        }
+      ],
+      "r": [
+        {
+          "slug": "resolution",
+          "uuid": "31d89254-7d4d-4bae-846f-b61f4dbe125b",
+          "term": "Resolution",
+          "text": "<p>Video resolution in a display refers to the number of distinct pixels that could be displayed in each dimension. It is usually quoted as width× height; for an example: \"1024 × 768\". In this example 1024 indicates the width and 768 indicates the height that the display could be resolved in pixels. This is one of the properties that Lumiere measures in comparison with the metrics of a video.</p><br/><ul style=\"list-style:unset;padding-left:20px\"><li><strong style=\"font-weight:bold\">4K</strong></li><li><strong style=\"font-weight:bold\">1080p</strong></li><li><strong style=\"font-weight:bold\">720p</strong></li><li><strong style=\"font-weight:bold\">480p</strong></li><li><strong style=\"font-weight:bold\">360p</strong></li></ul><br/>",
+          "tags": [
+            {
+              "slug": "property",
+              "name": "Property"
+            }
+          ]
+        },
+        {
+          "slug": "reports",
+          "uuid": "bcae56bb-0ee6-47a7-93a4-8bd1227e2090",
+          "term": "Reports",
+          "text": "<p> This is where clients can request a report summary of a specific set of video metrics and properties, related to both their own library and their competitors.  There are three different types of reports that can be requested:</p><br/><ul style=\"list-style:unset;padding-left:20px\"><li><strong style=\"font-weight:bold\">Brand Insights</strong>: Clients can access reports that provide detailed engagement insights about their competitor brands.</li></ul><ul style=\"list-style:unset;padding-left:20px\"><li><strong style=\"font-weight:bold\">Compare Brands</strong>: Clients can access reports that compare two brands to understand what is driving the performance of their videos. </li><li><strong style=\"font-weight:bold\">Predefined Reports</strong>: Clients can access unique and customized learnings about their videos’ performance on an industry level. </li><br/></ul><br/>",
+          "tags": [
+            {
+              "slug": "page",
+              "name": "Page"
+            },
+            {
+              "slug": "reports",
+              "name": "Reports"
+            }
+          ]
+        }
+      ],
+      "s": [
+        {
+          "slug": "shares",
+          "uuid": "0a6665ea-a516-4513-ba2a-359f46fa8b5b",
+          "term": "Shares",
+          "text": "<p>Shares are an organic form of promotion generated by the public.  This describes when social media users broadcast web content on a social network to their connections, groups, or specific individuals.</p>",
+          "tags": [
+            {
+              "slug": "metric",
+              "name": "Metric"
+            }
+          ]
+        },
+        {
+          "slug": "shot",
+          "uuid": "0a978464-ea5f-410e-862a-cae34a226724",
+          "term": "Shot",
+          "text": "<p>A series of frames that run for an uninterrupted period of time.</p>",
+          "tags": []
+        },
+        {
+          "slug": "save-report",
+          "uuid": "69182ff8-367d-48b2-a830-b2fbb02033ba",
+          "term": "Save Report",
+          "text": "<p>This switch is available in the <a target=\"_blank\" href=\"/glossary/r/reports\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Reports</a> section of Lumiere and gives you the ability to save all reports you have generated to access at a later date.</p>",
+          "tags": []
+        },
+        {
+          "slug": "stop-motion",
+          "uuid": "13b79a63-a03b-4bc2-9acc-be13beec15dc",
+          "term": "Stop Motion",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/24238.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "stop-motion",
+          "uuid": "2838f7ed-a6ae-4733-bd2f-59cc1e191d7e",
+          "term": "Stop Motion",
+          "text": "<p>A cinematographic technique whereby the camera is repeatedly stopped and started, for example to give animated figures the impression of movement.</p>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "shot-by-shot",
+          "uuid": "6432d6de-249d-4254-85cd-33c4c3b133ff",
+          "term": "Shot By Shot",
+          "text": "<p>This module in the library detail page provides a breakdown of people, objects, and the color within each frame of a video.  Shot By Shot is a helpful tool to analyze the fundamental elements within each video, and how they progress throughout the duration of the video.</p>",
+          "tags": [
+            {
+              "slug": "library",
+              "name": "Library"
+            },
+            {
+              "slug": "module",
+              "name": "Module"
+            }
+          ]
+        }
+      ],
+      "t": [
+        {
+          "slug": "testimonial",
+          "uuid": "e31eddc2-b0aa-485b-809f-ef58c0ed9f31",
+          "term": "Testimonial",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/27483.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "talent-age",
+          "uuid": "aedf166e-390b-45ae-bc47-b773402a0d85",
+          "term": "Talent Age",
+          "text": "<p>The associated age for each person in a video.  Lumiere shows this information for each shot of a video through the Shot By Shot analysis module, located in the Library Detail View.</p>",
+          "tags": []
+        },
+        {
+          "slug": "tutorial-includes-diy-and-recipe",
+          "uuid": "da375a67-67f9-411d-9b7b-9fb2f2191be6",
+          "term": "Tutorial (includes DIY & Recipe)",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/19304.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "timecode",
+          "uuid": "1a68e9bb-1c89-4f82-ace2-f784f224d8f2",
+          "term": "Timecode",
+          "text": "<p>Timecode is a time or code assigned to a specific frame or a specific point in a video. Essentially, a timecode is like a timestamp in a video.</p>",
+          "tags": []
+        },
+        {
+          "slug": "talent-gender",
+          "uuid": "8ba20262-feca-4d31-bc49-5286033a341e",
+          "term": "Talent Gender",
+          "text": "<p>The sex of the talent in the video.  Lumiere shows this information for each shot of a video through the <a target=\"_blank\" href=\"/glossary/s/shot-by-shot\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Shot By Shot</a> analysis module, located in the <a target=\"_blank\" href=\"/glossary/l/library-detail\" style=\"color:black;text-decoration:underline;font-weight:bold;text-decoration-color:#2fd7c4\">Library Detail</a> View.</p>",
+          "tags": []
+        },
+        {
+          "slug": "top-down",
+          "uuid": "789d0fdd-9167-40a7-b4cc-e419c65d57b5",
+          "term": "Top Down",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/26494.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        }
+      ],
+      "u": [
+        {
+          "slug": "user-generated-live-action",
+          "uuid": "216501b9-8f94-4df8-b1e0-9a5b49bb5767",
+          "term": "User Generated (Live Action)",
+          "text": "",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        },
+        {
+          "slug": "unboxing",
+          "uuid": "eb0b67ad-8312-45be-bdcf-bb53401c9fb0",
+          "term": "Unboxing",
+          "text": "<video controls=\"\" src=\"https://media.quickframe.com/video/video/26843.mp4\" style=\"width:100%;object-fit:contain\"></video><br/>",
+          "tags": [
+            {
+              "slug": "format",
+              "name": "Format"
+            }
+          ]
+        }
+      ],
+      "v": [
+        {
+          "slug": "video-releases",
+          "uuid": "253e2127-e87d-4272-9fbb-dd0f5587ab6d",
+          "term": "Video Releases",
+          "text": "<p>This refers to the number of videos that a brand has posted on its social media platforms.</p>",
+          "tags": []
+        },
+        {
+          "slug": "views",
+          "uuid": "7656a6c1-4832-4509-b725-d5be985f7d62",
+          "term": "Views",
+          "text": "<p>The total number of people who watched your video(s).</p>",
+          "tags": [
+            {
+              "slug": "metric",
+              "name": "Metric"
+            }
+          ]
+        }
+      ],
+      "w": [],
+      "x": [],
+      "y": [],
+      "z": []
+    },
+    "modules": [
       {
-        "title": "Top Performing Formats This Week By CV Score",
-        "type": "image",
-        "asset": "https://s3.amazonaws.com/quickframe-media-staging/lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/753c831c-635a-435e-be24-e5d88f1b9165/6/515.jpg",
-        "content": "Lorem ipsum dolor sit amet, consectetur alios adipiscing elit, sed do eiusmod tempor makon incididunt ut <b>Pacing</b> et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud bein oidel exercitation ullamco nisi ut <b>Live Action</b> aliquip ex ea commodo consequat mafoni alta semos."
+        "slug": "dominant-color-performance-by-gender",
+        "title": "Dominant Color Performance By Gender",
+        "identifier": "Audience/DominantColor",
+        "description": null,
+        "module": {
+          "uuid": "0565eb1b-4a89-4c29-8d73-376d05748f42",
+          "terms": [
+            {
+              "slug": "audience-dominant-color-performance-by-gender",
+              "uuid": "ce310cdf-87d6-42ed-8de8-3e4058b9fd54",
+              "term": "Audience - Dominant Color Performance By Gender"
+            }
+          ]
+        }
       },
       {
-        "title": "Live Action (Format)",
-        "type": "image",
-        "asset": "https://s3.amazonaws.com/quickframe-media-staging/lumiere/d65aa957-d094-4cf3-8d37-dafe50e752ea/753c831c-635a-435e-be24-e5d88f1b9165/6/515.jpg",
-        "content": "Lorem ipsum dolor sit amet, consectetur alios adipiscing elit, sed do eiusmod tempor makon incididunt ut Pacing et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud bein oidel exercitation ullamco nisi ut Live Action aliquip ex ea commodo consequat mafoni alta semos."
+        "slug": "top-performing-day-videos",
+        "title": "Top Performing Day Videos",
+        "identifier": "MarketView/Time/Slider",
+        "description": null,
+        "module": {
+          "uuid": "91184e83-1658-4b41-8198-7fb0d4361f0c",
+          "terms": [
+            {
+              "slug": "marketview-top-performing-day-videos",
+              "uuid": "cfa83e14-bd40-4beb-9302-05dbd99082bb",
+              "term": "Marketview - Top Performing Day Videos"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "top-videos-over-time-by-platform",
+        "title": "Top Videos Over Time By Platform",
+        "identifier": "MarketView/Platform/TopVideosOverTime",
+        "description": null,
+        "module": {
+          "uuid": "83187f15-a6cf-4bb8-b80e-f451c595693c",
+          "terms": [
+            {
+              "slug": "marketview-top-videos-over-time-by-platform",
+              "uuid": "95b488bd-ccbd-4676-977c-5e296c9b21b6",
+              "term": "Marketview - Top Videos Over Time By Platform"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "pacing-for-each-duration-by-performance",
+        "title": "Pacing For Each Duration by Performance",
+        "identifier": "Panoptic/PacingCard",
+        "description": null,
+        "module": {
+          "uuid": "edca1b93-a814-4c11-b110-9fec45186168",
+          "terms": [
+            {
+              "slug": "overview-pacing-for-each-duration-by-performance",
+              "uuid": "4dec1045-f968-4d0d-9e90-6f75a5f6583b",
+              "term": "Overview - Pacing For Each Duration By Performance"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "video-releases-vs-engagement",
+        "title": "Video Releases vs Engagement",
+        "identifier": "BrandInsights/VideoReleasesBarChart",
+        "description": null,
+        "module": {
+          "uuid": "5e703261-880e-4fe5-9507-0eeb68dae18d",
+          "terms": [
+            {
+              "slug": "brand-insights-video-releases-vs-engagement",
+              "uuid": "2faad443-134d-4ef2-8547-96ada8dcfd80",
+              "term": "Brand Insights - Video Releases vs. Engagement"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "pacing-for-each-format-by-performance",
+        "title": "Pacing For Each Format by Performance",
+        "identifier": "BrandInsights/PacingCard",
+        "description": null,
+        "module": {
+          "uuid": "680b7ecb-b1bd-4665-b170-39446bb0b6d1",
+          "terms": [
+            {
+              "slug": "brand-insights-pacing-for-duration-by-performance",
+              "uuid": "6302794e-1193-450a-8505-fb700a78de93",
+              "term": "Brand Insights - Pacing For Duration By Performance"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "top-performing-competitor-videos",
+        "title": "Top Performing Competitor Videos",
+        "identifier": "MarketView/Competitor/Slider",
+        "description": null,
+        "module": {
+          "uuid": "231e8763-5832-4027-bb0d-54f95932caea",
+          "terms": [
+            {
+              "slug": "marketview-top-performing-competitor-videos",
+              "uuid": "afa61638-7096-4aba-a9af-ab5f457c877e",
+              "term": "Marketview - Top Performing Competitor Videos"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "performance-by-age-gender-and-date",
+        "title": "Performance By Age, Gender and Date",
+        "identifier": "Audience/Performance",
+        "description": null,
+        "module": {
+          "uuid": "1c48a9a2-7b0f-4dae-960e-290d529306f7",
+          "terms": [
+            {
+              "slug": "audience-performance-by-age-gender-and-date",
+              "uuid": "6a91380f-b197-4f90-8e48-7806e293f928",
+              "term": "Audience - Performance By Age, Gender, and Date"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "top-performing-videos-by-platform",
+        "title": "Top Performing Videos By Platform",
+        "identifier": "MarketView/Platform/Slider",
+        "description": null,
+        "module": {
+          "uuid": "619c8a2d-d1bd-45d8-b38a-c64ee308c75b",
+          "terms": [
+            {
+              "slug": "marketview-top-performing-videos-by-platform",
+              "uuid": "f16b4eb9-38ee-45bd-9671-81ce6a49b824",
+              "term": "Marketview - Top Performing Videos By Platform"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "total-competitor-views-by-duration",
+        "title": "Total Competitor Views By Duration",
+        "identifier": "MarketView/TotalCompetitorViewByDuration",
+        "description": null,
+        "module": {
+          "uuid": "0da51bf0-72f9-4b33-96ec-2f9fe21fa756",
+          "terms": [
+            {
+              "slug": "marketview-total-competitor-views-by-duration",
+              "uuid": "c65721ed-9879-4885-9c30-067255b9a59f",
+              "term": "Marketview - Total Competitor Views By Duration"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "change-over-time-by-property",
+        "title": "Change Over Time By Property",
+        "identifier": "Audience/ChangeOverTime",
+        "description": null,
+        "module": {
+          "uuid": "75758d6a-3957-4503-b518-40ef5ea827b4",
+          "terms": [
+            {
+              "slug": "audience-change-over-time-by-property",
+              "uuid": "6631d0ab-d360-48e9-b3e1-52577fee5b4e",
+              "term": "Audience - Change Over Time By Property"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "video-properties-split-by-gender",
+        "title": "Video Properties Split By Gender",
+        "identifier": "Audience/Gender",
+        "description": null,
+        "module": {
+          "uuid": "da8b5f4d-8021-4ac9-9b86-e543c427eef5",
+          "terms": [
+            {
+              "slug": "audience-video-properties-split-by-gender",
+              "uuid": "fc5ee0a6-0b27-47e4-8cb8-cb33b2f3e1b1",
+              "term": "Audience - Video Properties Split By Gender"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "top-performing-pacing-this-week-by-cv-score",
+        "title": "Top Performing Pacing This Week By CV Score",
+        "identifier": "Panoptic/TopPerformingPacingThisWeekByCVScore",
+        "description": null,
+        "module": {
+          "uuid": "6bdc828d-7a31-46c8-af66-1122d6bcfe47",
+          "terms": [
+            {
+              "slug": "overview-top-performing-pacing-this-week-by-content-vitality-score",
+              "uuid": "760bf82d-d177-4767-9eea-cfad26a9e449",
+              "term": "Overview - Top Performing Pacing This Week By Content Vitality Score"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "video-library-color-comparison",
+        "title": "Video Library Color Comparison",
+        "identifier": "Reports/ColorComparison",
+        "description": null,
+        "module": {
+          "uuid": "153c95f7-56a9-42e7-a0ec-da64045539aa",
+          "terms": []
+        }
+      },
+      {
+        "slug": "most-popular-videos-by-age-engagement-and-date",
+        "title": "Most Popular Videos By Age, Engagement and Date",
+        "identifier": "Audience/AgeSlider",
+        "description": null,
+        "module": {
+          "uuid": "09cd9f71-0c52-45cc-a14a-edaaf444ce7c",
+          "terms": []
+        }
+      },
+      {
+        "slug": "content-vitality-score-by-videos-produced-comparison",
+        "title": "Content Vitality Score By Videos Produced Comparison",
+        "identifier": "Reports/ContentVitalityScore",
+        "description": null,
+        "module": {
+          "uuid": "76c05791-004e-4ceb-9bc9-90c12688ffa2",
+          "terms": []
+        }
+      },
+      {
+        "slug": "top-performing-videos",
+        "title": "Top Performing Videos",
+        "identifier": "BrandInsights/TopPerformingVideos",
+        "description": null,
+        "module": {
+          "uuid": "9877a6b2-848b-466b-b0d4-7a1e644b2861",
+          "terms": [
+            {
+              "slug": "brand-insights-top-videos-over-time-for-each-platform",
+              "uuid": "09648c69-84ac-47f7-8b5f-44d286d86ec2",
+              "term": "Brand Insights - Top Videos Over Time For Each Platform"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "engagement-by-property-over-time",
+        "title": "Engagement By Property Over Time",
+        "identifier": "BrandInsights/FilteringSection",
+        "description": null,
+        "module": {
+          "uuid": "1c87eafd-7e2f-4374-84d0-f11f494a1762",
+          "terms": [
+            {
+              "slug": "brand-insights-video-property-composition",
+              "uuid": "173a6cc1-34b1-4ca9-a0f2-90f4c4c5becb",
+              "term": "Brand Insights - Video Property Composition"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "top-performing-property-across-all-platforms",
+        "title": "Top Performing Property Across All Platforms",
+        "identifier": "MarketView/Platform/TopPerformingProperty",
+        "description": null,
+        "module": {
+          "uuid": "076cdc64-f403-48ee-bb9f-2d3d51511c16",
+          "terms": [
+            {
+              "slug": "marketview-top-performing-property-across-platforms",
+              "uuid": "b7aee02f-2ce6-46f6-b565-afc42ce06c74",
+              "term": "Marketview - Top Performing Property Across Platforms"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "top-performing-property-across-all-days",
+        "title": "Top Performing Property Across All Days",
+        "identifier": "MarketView/Time/TopVideosCard",
+        "description": null,
+        "module": {
+          "uuid": "f46d2cd3-1fc8-4bbd-9933-e487e31eb435",
+          "terms": [
+            {
+              "slug": "marketview-top-performing-day-videos",
+              "uuid": "cfa83e14-bd40-4beb-9302-05dbd99082bb",
+              "term": "Marketview - Top Performing Day Videos"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "video-releases-vs-engagement",
+        "title": "Video Releases vs Engagement",
+        "identifier": "Panoptic/VideoReleasesBarChartModule",
+        "description": null,
+        "module": {
+          "uuid": "cc6ce5b3-3e6e-4e6c-9a7c-762716ce0878",
+          "terms": [
+            {
+              "slug": "overview-video-releases-vs-engagement",
+              "uuid": "0ead0023-21b2-4423-9643-e671e4ff7a2e",
+              "term": "Overview - Video Releases vs. Engagement"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "video-duration-distribution-comparison",
+        "title": "Video Duration Distribution Comparison",
+        "identifier": "Reports/VideoComparison",
+        "description": null,
+        "module": {
+          "uuid": "6922b1f6-913f-4489-ae9d-a2cec6991b08",
+          "terms": []
+        }
+      },
+      {
+        "slug": "total-metric-for-platform",
+        "title": "Total Metric For Platform",
+        "identifier": "Marketview/TotalMetricForPlatform",
+        "description": null,
+        "module": {
+          "uuid": "55913d8f-f2e0-4262-8246-a50a5074b584",
+          "terms": [
+            {
+              "slug": "marketview-total-metric-for-platform-in-the-past-time-frame",
+              "uuid": "f08410b3-84ba-4cd3-895b-0d923942b7af",
+              "term": "Marketview - Total Metric For Platform In The Past Time Frame"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "dominant-color-on-facebook-and-youtube-by-views",
+        "title": "Dominant Color On Facebook and YouTube By Views",
+        "identifier": "Panoptic/DominantColor",
+        "description": null,
+        "module": {
+          "uuid": "db2bd8fc-c3ec-4647-aabc-f32404027810",
+          "terms": [
+            {
+              "slug": "overview-dominant-color-on-facebook-and-youtube",
+              "uuid": "0b308c61-1f40-4b48-a837-c0fb2f77099c",
+              "term": "Overview - Dominant Color On Facebook and Youtube"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "engagement-by-property-over-time",
+        "title": "Engagement By Property Over Time",
+        "identifier": "Panoptic/FilteringSection",
+        "description": null,
+        "module": {
+          "uuid": "f4576d05-35d6-4f33-87a8-16d247f6a06b",
+          "terms": [
+            {
+              "slug": "overview-engagement-by-property-over-time",
+              "uuid": "9b6d8a5a-8d57-4407-a0f6-4305292caaa7",
+              "term": "Overview - Engagement By Property Over Time"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "content-vitality-score-by-videos-produced-comparison",
+        "title": "Content Vitality Score By Videos Produced Comparison",
+        "identifier": "Audience/ContentVitalityScore",
+        "description": null,
+        "module": {
+          "uuid": "9e89edc5-b240-4db9-b101-5d242d424114",
+          "terms": [
+            {
+              "slug": "audience-content-vitality-score-based-on-audience",
+              "uuid": "a8ce746d-6ec6-4b3f-92ec-2689b9afc0cd",
+              "term": "Audience - Content Vitality Score Based on Audience"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "property-performance-comparison",
+        "title": "Property Performance Comparison",
+        "identifier": "Reports/PerformanceComparison",
+        "description": null,
+        "module": {
+          "uuid": "33188e2e-9aa9-4af6-b393-d5f34da95053",
+          "terms": []
+        }
+      },
+      {
+        "slug": "top-videos-over-time-by-competitor",
+        "title": "Top Videos Over Time By Competitor",
+        "identifier": "MarketView/Competitor/TopVideosOverTime",
+        "description": null,
+        "module": {
+          "uuid": "640adf5c-0c02-402e-bf9e-f6abb7377829",
+          "terms": [
+            {
+              "slug": "marketview-top-videos-over-time-by-competitor",
+              "uuid": "4804c620-2fe0-43f9-8af0-83654127ce5e",
+              "term": "Marketview - Top Videos Over Time By Competitor"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "",
+        "title": "",
+        "identifier": "MarketView/Competitor/TopPerformingProperty",
+        "description": null,
+        "module": {
+          "uuid": "7b945174-fd57-4491-9a0e-a54b6b543f0a",
+          "terms": [
+            {
+              "slug": "marketview-top-performing-property-across-all-competitors",
+              "uuid": "a809f3aa-22b7-4d1b-90d3-0392169dc0a3",
+              "term": "Marketview - Top Performing Property Across All Competitors"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "similar-properties-of-top-videos",
+        "title": "Similar Properties Of Top Videos",
+        "identifier": "MarketView/Competitor/TopSimilarProperties",
+        "description": null,
+        "module": {
+          "uuid": "02e9765d-113e-496c-8733-89a063dd4f4a",
+          "terms": [
+            {
+              "slug": "marketview-top-similar-properties-of-top-videos",
+              "uuid": "e28f5f6d-cc8e-4824-af6f-58e0b2b8c501",
+              "term": "Marketview - Top Similar Properties Of Top Videos"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "similar-properties-of-top-videos",
+        "title": "Similar Properties Of Top Videos",
+        "identifier": "MarketView/Time/SimilarProperties",
+        "description": null,
+        "module": {
+          "uuid": "3280ee4f-034a-41b9-bb8c-4d664b910aca",
+          "terms": [
+            {
+              "slug": "marketview-top-similar-properties-of-top-videos",
+              "uuid": "e28f5f6d-cc8e-4824-af6f-58e0b2b8c501",
+              "term": "Marketview - Top Similar Properties Of Top Videos"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "similar-properties-of-top-videos",
+        "title": "Similar Properties Of Top Videos",
+        "identifier": "MarketView/Platform/TopSimilarProperties",
+        "description": null,
+        "module": {
+          "uuid": "841c6ba3-c8e6-45a4-b216-a06bbae9b2fb",
+          "terms": [
+            {
+              "slug": "marketview-top-similar-properties-of-top-videos",
+              "uuid": "e28f5f6d-cc8e-4824-af6f-58e0b2b8c501",
+              "term": "Marketview - Top Similar Properties Of Top Videos"
+            }
+          ]
+        }
+      },
+      {
+        "slug": "top-videos-over-time-by-all-platforms",
+        "title": "Top Videos Over Time By All Platforms",
+        "identifier": "BrandInsights/TopVideosCard",
+        "description": null,
+        "module": {
+          "uuid": "586dd508-304f-4ab9-8c35-053625ae055b",
+          "terms": [
+            {
+              "slug": "brand-insights-top-performing-videos",
+              "uuid": "53b47e16-0099-49cb-889a-95e141be6a87",
+              "term": "Brand Insights - Top Performing Videos"
+            }
+          ]
+        }
       }
     ]
   }
