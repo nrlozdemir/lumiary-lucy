@@ -43,7 +43,7 @@ class LetterBar extends Component {
     return (
       <div className={cx(style.letterBar)}>
         <NavLink
-          to={`/glossary/`}
+          to={`/glossary`}
           className={cx(style.letter)}
           activeClassName={cx(style.activeLetter)}
         >
