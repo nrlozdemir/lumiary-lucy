@@ -17,7 +17,7 @@ class TopVideosCard extends React.Component {
         loading={loading}
         chartData={!loading ? data : {}}
         height={150}
-        moduleKey="Reports/TopVideosCardModule"
+        moduleKey="BrandInsights/TopVideosCard"
         title="Top Videos Over Time By All Platforms"
         action={this.callBack}
         xGridDisplay
