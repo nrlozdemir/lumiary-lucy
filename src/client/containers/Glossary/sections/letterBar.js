@@ -8,7 +8,6 @@ class LetterBar extends Component {
     super(props)
     this.state = {
       letters: [
-        'all',
         'a',
         'b',
         'c',
@@ -43,6 +42,13 @@ class LetterBar extends Component {
     const { letters } = this.state
     return (
       <div className={cx(style.letterBar)}>
+        <NavLink
+          to={`/glossary/`}
+          className={cx(style.letter)}
+          activeClassName={cx(style.activeLetter)}
+        >
+          All
+        </NavLink>
         {letters.map((letter) => (
           <NavLink
             to={`/glossary/${letter}`}
