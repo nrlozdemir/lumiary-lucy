@@ -43,8 +43,9 @@ class LetterBar extends Component {
     const { letters } = this.state
     return (
       <div className={cx(style.letterBar)}>
-        {letters.map((letter) => (
+        {letters.map((letter, i) => (
           <NavLink
+            key={i}
             to={`/glossary/${letter}`}
             className={cx(style.letter)}
             activeClassName={cx(style.activeLetter)}

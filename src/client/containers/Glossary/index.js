@@ -14,7 +14,7 @@ class Glossary extends Component {
       <div className="grid-container col-12">
         <LetterBar />
         <div className={style.glossaryBodyContainer}>
-          <SideBar />
+          <SideBar urlInfo={{ match, history }}/>
           <MainContentArea />
         </div>
       </div>
