@@ -2,7 +2,7 @@ import { takeLatest, call, put, select } from 'redux-saga/effects'
 import querystring from 'querystring'
 
 import { types } from 'Reducers/quickview'
-import { selectAuthProfile } from 'Reducers/auth'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 import { getDataFromApi } from 'Utils/api'
 
 import { percentageManipulation } from 'Utils/datasets'
@@ -194,7 +194,7 @@ function* getQuickviewItemsSaga({ payload }) {
     const { platform = 'facebook', data = {} } = payload
     const { metric = 'views', dateRange = 'week' } = data
 
-    const profile = yield select(selectAuthProfile)
+    const profile = yield select(makeSelectAuthProfile())
     const { brand = {} } = profile
     const { uuid, competitors = [] } = brand
 
