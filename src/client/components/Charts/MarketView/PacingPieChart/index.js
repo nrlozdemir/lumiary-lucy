@@ -52,7 +52,7 @@ const PacingPieChart = ({ data = {} }) => {
                 bodyFontFamily: 'ClanOT',
                 titleFontFamily: 'ClanOT',
                 bodyFontColor: colors.chartTooltipColor,
-                xPadding: 8,
+                xPadding: 12,
                 yPadding: 12,
                 bodyFontStyle: 'normal',
                 displayColors: false,
