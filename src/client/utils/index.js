@@ -399,28 +399,64 @@ const getBrandAndCompetitorsFromProfileObject = (profile, brand_id) => {
 }
 
 const customChartToolTip = (themes, customOptions = {}) => {
-return {
-  backgroundColor: themes.tooltipBackground,
-  cornerRadius: 6,
-  titleFontColor: themes.chartTooltipColor,
-  titleFontStyle: 'bold',
-  mode: 'point',
-  titleFontFamily: 'ClanOTBold',
-  bodyFontColor: themes.chartTooltipColor,
-  xPadding: 8,
-  yPadding: 12,
-  bodyFontStyle: 'bold',
-  displayColors: false,
-  callbacks: {
-    title: () => '',
-    label: function(tooltipItem, data) {
-      const count = data && data.datasets && data.datasets[0] && data.datasets[0].data[tooltipItem['index']] || ''
-      const name = data && data.labels && data.labels[tooltipItem['index']]
-      return `${count || 0}% ${!!name && `| ${name}`}`
+  return {
+    backgroundColor: themes.tooltipBackground,
+    cornerRadius: 6,
+    titleFontColor: themes.chartTooltipColor,
+    titleFontStyle: 'bold',
+    mode: 'point',
+    titleFontFamily: 'ClanOTBold',
+    bodyFontColor: themes.chartTooltipColor,
+    xPadding: 8,
+    yPadding: 12,
+    bodyFontStyle: 'bold',
+    displayColors: false,
+    callbacks: {
+      title: () => '',
+      label: function(tooltipItem, data) {
+        const count =
+          (data &&
+            data.datasets &&
+            data.datasets[0] &&
+            data.datasets[0].data[tooltipItem['index']]) ||
+          ''
+        const name = data && data.labels && data.labels[tooltipItem['index']]
+        return `${count || 0}% ${!!name && `| ${name}`}`
+      },
     },
-  },
-  ...customOptions
+    ...customOptions,
+  }
 }
+
+const getModuleTerms = (key, data) => {
+  const {
+    glossary: { terms },
+  } = data
+  const moduleObject =
+    data &&
+    data.glossary &&
+    data.glossary.modules &&
+    data.glossary.modules.find((module) => module.identifier === key)
+  const termsUuids =
+    moduleObject &&
+    moduleObject.module &&
+    moduleObject.module.terms &&
+    moduleObject.module.terms.map((term) => term.uuid)
+  return Object.keys(terms)
+    .map((term) => {
+      const item = terms[term].find(
+        (item) => termsUuids && termsUuids.includes(item.uuid)
+      )
+      if (item) {
+        return {
+          ...item,
+          letter: term,
+        }
+      }
+    })
+    .filter(function(element) {
+      return element !== undefined
+    })
 }
 
 export {
@@ -450,5 +486,6 @@ export {
   hexToRgb,
   secondsToHHMMSS,
   getBrandAndCompetitorsFromProfileObject,
-  customChartToolTip
+  customChartToolTip,
+  getModuleTerms,
 }

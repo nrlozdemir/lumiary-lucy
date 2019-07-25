@@ -4,7 +4,7 @@ import Modal from 'react-modal'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import XCircle from 'Components/Icons/XCircle'
-import Button from 'Components/Form/Button'
+import { Link } from 'react-router-dom'
 import RouterLoading from 'Components/RouterLoading'
 
 const InformationModal = ({
@@ -28,7 +28,7 @@ const InformationModal = ({
       backgroundColor: 'rgba(172, 176, 190, 0.8)',
     },
   }
-
+  console.log(data)
   return (
     <Modal
       onAfterOpen={onAfterOpen}
@@ -49,26 +49,25 @@ const InformationModal = ({
         }}
       >
         <div className={style.modalContent}>
-          {data ? (
+          {data.length ? (
             data.map((item, key) => (
               <div key={key} className={style.item}>
                 <div className={style.header}>
-                  <div className={style.title}>{item.title}</div>
-                  <Button
-                    buttonText="View in Glossary"
-                    customClass={style.button}
-                  />
-                </div>
-                <div className={style.image}>
-                  {item.type === 'image' ? (
-                    <img src={item.asset} />
-                  ) : (
-                    <video src={item.asset} controls />
-                  )}
+                  <div className={style.title}>{item.term}</div>
+                  <Link
+                    to={`/glossary/${item.letter}/${item.slug}`}
+                    className={style.button}
+                    style={{
+                      backgroundColor: themes.moduleBackground,
+                      color: themes.labelColor,
+                    }}
+                  >
+                    View in Glossary
+                  </Link>
                 </div>
                 <div
                   className={style.content}
-                  dangerouslySetInnerHTML={{ __html: item.content }}
+                  dangerouslySetInnerHTML={{ __html: item.text }}
                 />
               </div>
             ))

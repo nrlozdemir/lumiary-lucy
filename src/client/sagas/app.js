@@ -3,14 +3,14 @@ import axios from 'axios'
 import appMockData from 'Api/mocks/appMock.json'
 import { actions, types } from 'Reducers/app'
 
-function getGlobalDataApi(name) {
-  return axios.get('/').then((res) => appMockData[name])
+function getGlobalDataApi() {
+  return axios.get('/').then((res) => appMockData)
 }
 
 function* getSectionExplanations() {
   try {
-    const response = yield call(getGlobalDataApi, 'sectionExplanations')
-
+    const response = yield call(getGlobalDataApi)
+    console.log(response)
     yield put(actions.getSectionExplanationsSuccess(response))
     return false
   } catch (err) {
