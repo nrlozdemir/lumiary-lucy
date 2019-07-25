@@ -41,7 +41,7 @@ class TotalViewsChart extends React.Component {
       ((!!doughnutData && isDoughnutEmpty && !!barData && isBarChartEmpty) ||
         isEmpty(data))
 
-    const moduleKey = 'Marketview/StackedBarChart'
+    const moduleKey = 'Marketview/TotalMetricForPlatform'
     const selects = selectFiltersToType(
       selectFilters.values && selectFilters.values[moduleKey]
     )

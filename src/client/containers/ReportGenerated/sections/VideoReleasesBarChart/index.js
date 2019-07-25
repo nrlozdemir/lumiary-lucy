@@ -24,7 +24,7 @@ class VideoReleasesBarChart extends React.Component {
     return (
       <VideoReleasesBarChartModule
         data={data}
-        moduleKey={'ReportGenerated/VideoReleasesBarChartModule'}
+        moduleKey={'BrandInsights/VideoReleasesBarChart'}
         title="Video Releases vs Engagement"
         legend={[
           { label: 'Videos', color: 'cool-blue' },

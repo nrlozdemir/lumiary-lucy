@@ -48,7 +48,7 @@ class EngagementByProperty extends Component {
 
     return (
       <Module
-        moduleKey={'Reports/FilteringSection'}
+        moduleKey={'BrandInsights/FilteringSection'}
         title="Engagement By Property Over Time"
         action={this.callBack}
         filters={[

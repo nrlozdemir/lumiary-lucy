@@ -708,6 +708,21 @@ const convertNumberArrIntoPercentages = (arr = []) => {
 }
 
 const percentageBeautifier = (value, precision) => {
+  /*
+  // all numbers converted to decimals
+  // except 0 
+  if (value === 0) {
+    return value
+  }
+  value = parseFloat(value).toFixed(2)
+  const multiplier = Math.pow(100, precision || 1)
+  value = Math.round(value * multiplier) / multiplier
+  value = parseFloat(value).toFixed(1)
+  return value
+  */
+
+  // all numbers converted to decimal with one 10th place
+  // it's excepting 0 and integers
   if (isInteger(value) || value === 0) {
     return value
   }
@@ -772,21 +787,39 @@ const percentageManipulation = (bucket) => {
  returns the chartYAxisMax, chartYAxisStepSize from the api
  */
 
-const getCVScoreChartAttributes = (data) => {
-  const maxVideoPercent =
-    (!!data &&
-      Object.keys(data).reduce((accumulator, key) => {
-        const videoPercents = data[key].videoPercents
-        const maxPercentInSet = Math.max(
-          videoPercents ? videoPercents : data[key]
-        )
-        return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
-      }, 0)) ||
-    0
+const getCVScoreChartAttributes = (data, maxPercent) => {
+  maxPercent = (maxPercent !== undefined) 
+    ? maxPercent 
+    : (!!data &&
+        Object.keys(data).reduce((accumulator, key) => {
+          const videoPercents = data[key].videoPercents
+          const maxPercentInSet = Math.max(
+            videoPercents ? videoPercents : data[key]
+          )
+          return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
+        }, 0)) || 0
 
-  const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
-  const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
+  
+  // const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
+  // const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
 
+  const chartYAxisMax = maxPercent < 50 
+  ? maxPercent < 33 
+    ? maxPercent < 25 
+      ? maxPercent < 20 
+        ? maxPercent < 15 
+          ? 15 
+          : 20
+        : 25 
+      : 33 
+    : 50 
+  : 100
+  const chartYAxisStepSize = chartYAxisMax / 4
+console.log({
+  data,
+  chartYAxisMax,
+  chartYAxisStepSize,
+})
   return {
     chartYAxisMax,
     chartYAxisStepSize,
