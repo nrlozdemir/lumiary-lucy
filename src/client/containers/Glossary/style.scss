@@ -28,3 +28,15 @@
     font-weight: 700;
   }
 }
+
+.glossaryBodyContainer {
+  display: flex;
+
+  .glossarySidebar {
+    width: calc(30% - 40px);
+    margin-right: 40px;
+  }
+  .glossaryMain {
+    width: 70%;
+  }
+}
