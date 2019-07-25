@@ -6,55 +6,9 @@ import { capitalize } from 'Utils/text'
 import style from '../style.scss'
 
 class SidaBar extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-      menus: [
-        'aamplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-        'Amplitude',
-      ]
-    }
-  }
   render() {
     const { colors } = this.props.themeContext
-    const { menus } = this.state
-    const { urlInfo: { match = {}, history = {} } } = this.props
+    const { letter, content } = this.props
 
     return (
     <div className={style.glossarySidebar}>
@@ -63,19 +17,14 @@ class SidaBar extends Component {
         <input className={style.searchInput} placeholder="Search glossary..."/>
       </div>
       <div className={style.sideBarMenu}>
-        {menus.map((menu, i) => (
+        {content[letter].map((menu, i) => (
           <NavLink
             key={i}
-            to={`/glossary/${menu.toLowerCase()}`}
+            to={`/glossary/${letter}/${menu.term.toLowerCase()}`}
             className={style.menuLink}
             activeClassName={style.active}
-            isActive={() => {
-                console.log('i : ', i ,'match : ', match.params.term.toLowerCase())
-                console.log('location : ', location)
-                match && match.params && match.params.term && match.params.term.toLowerCase() === menu.toLowerCase()
-            }}
           >
-            <span className={style.menuText}>{capitalize(menu)}</span>
+            <span className={style.menuText}>{capitalize(menu.term)}</span>
           </NavLink>
         ))}
       </div>

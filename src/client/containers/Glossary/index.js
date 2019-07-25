@@ -344,7 +344,7 @@ class Glossary extends Component {
       <div className="grid-container col-12">
         <LetterBar content={letters} />
         <div className={style.glossaryBodyContainer}>
-          <SideBar />
+          <SideBar letter={letter} content={letters} term={term}/>
           <MainContentArea content={letters[letter]} term={term} />
         </div>
       </div>
