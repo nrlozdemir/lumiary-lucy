@@ -41,9 +41,15 @@
     font-size: 14px;
     width: calc(30% - 40px);
     margin-right: 40px;
+    height: calc(100vh - 100px);
+    display: flex;
+    flex-direction: column;
+
     .inputContainer {
       background-color: $color-dark-grey-blue;
       padding: 23px 32px;
+      display: flex;
+      align-items: center;
       .searchIcon {
         margin-right: 8px;
       }
@@ -66,9 +72,9 @@
 
     .sideBarMenu {
       background-color: $color-dusk-two;
-      height: 824px;
       overflow-y: auto;
       padding: 24px 32px;
+      height: 100%;
       .menuLink {
         color: #fff;
         display: block;
@@ -109,5 +115,81 @@
   }
   .glossaryMain {
     width: 70%;
+    padding: 48px 56px;
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 72px;
+    height: fit-content;
+
+    .mainContentArea {
+      .mainContentHeader {
+        font-family: $font-family-primary;
+        font-size: 48px;
+        font-weight: 900;
+        font-style: normal;
+        font-stretch: condensed;
+        line-height: normal;
+        letter-spacing: normal;
+        text-align: center;
+        display: flex;
+        margin-bottom: -36px;
+      }
+
+      .mainContentItem {
+        padding-top: 72px;
+        padding-bottom: 72px;
+        border-bottom: 1px solid #acb0be;
+
+        &:last-child {
+          border: none;
+        }
+        &:first-child {
+          padding-top: 0;
+        }
+
+        .mainContentItemTerm {
+          font-family: $font-family-ClanOTBold;
+          font-size: 18px;
+          margin-bottom: 24px;
+        }
+        .mainContentItemTags {
+          padding: 0;
+          margin: 0;
+          display: flex;
+          list-style-type: none;
+          .mainContentItemTag {
+            font-family: $font-family-ClanOTNews;
+            font-size: 14px;
+            padding: 5px 9px;
+            border-right-style: solid;
+            border-right-width: 2px;
+            &:first-child {
+              padding-left: 0;
+            }
+            &:last-child {
+              border: none;
+              padding-right: 0;
+            }
+          }
+        }
+        .mainContentItemContent {
+          margin-top: 30px;
+          p {
+            line-height: 26px;
+            font-family: $font-family-ClanOTNews;
+            font-size: 14px;
+          }
+        }
+      }
+    }
   }
+}
+
+.empty {
+  font-family: $font-family-ClanOT;
+  display: flex;
+  margin: 72px 0 36px;
+  width: 100%;
+  font-size: 24px;
+  font-weight: bold;
 }

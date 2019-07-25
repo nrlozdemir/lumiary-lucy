@@ -16,10 +16,14 @@ class Glossary extends Component {
               uuid: '123321',
               term: 'Animation',
               description: 'Animation',
-              text: '<p>hi</p>',
+              text:
+                '<p>Nullam quis risus eget urna mollis ornare vel eu leo. Brand Insights non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Vestibulum id ligula porta felis euismod semper. Maecenas faucibus mollis interdum. Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Curabitur blandit tempus porttitor. Donec sed odio dui.  Curabitur blandit tempus porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna.</p>',
               tags: [
                 {
-                  name: 'title',
+                  name: 'Property',
+                },
+                {
+                  name: 'Metric',
                 },
               ],
             },
@@ -27,10 +31,11 @@ class Glossary extends Component {
               uuid: '123321',
               term: 'Ascpect Ratio',
               description: 'Ascpect Ratio',
-              text: '<p>hi</p>',
+              text:
+                '<p>Nullam quis risus eget urna mollis ornare vel eu leo. Brand Insights non mi porta gravida at eget metus. Vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor. Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Vestibulum id ligula porta felis euismod semper. Maecenas faucibus mollis interdum. Donec sed odio dui. Nulla vitae elit libero, a pharetra augue. Curabitur blandit tempus porttitor. Donec sed odio dui.  Curabitur blandit tempus porttitor. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Maecenas sed diam eget risus varius blandit sit amet non magna.</p>',
               tags: [
                 {
-                  name: 'title',
+                  name: 'format',
                 },
               ],
             },
@@ -345,7 +350,11 @@ class Glossary extends Component {
         <Letterbar content={letters} />
         <div className={style.glossaryBodyContainer}>
           <Sidebar letter={letter} content={letters} term={term} />
-          <MainContentArea content={letters[letter]} term={term} />
+          <MainContentArea
+            content={letters[letter]}
+            term={term}
+            letter={letter}
+          />
         </div>
       </div>
     )

@@ -29,10 +29,11 @@ class LetterBar extends Component {
         >
           All
         </NavLink>
-        {Object.keys(content).map((letter) => {
+        {Object.keys(content).map((letter, index) => {
           if (!!content[letter].length) {
             return (
               <NavLink
+                key={`letters-${index}`}
                 to={`/glossary/${letter}`}
                 className={cx(style.letter)}
                 activeClassName={cx(style.activeLetter)}

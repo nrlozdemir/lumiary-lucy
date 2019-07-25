@@ -4,7 +4,8 @@ import classnames from 'classnames'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import { isDataSetEmpty } from 'Utils/datasets'
-import { customChartToolTip } from 'Utils'
+import { ucfirst } from 'Utils'
+import ToolTip from 'Components/ToolTip'
 
 import Labels from 'Components/Charts/Labels'
 import { roundRect } from 'Utils/ui'
@@ -44,18 +45,6 @@ const dataLabelPlugins = (value, func, item) => {
   return value
 }
 class DoughnutChart extends React.Component {
-  componentDidMount() {
-    const ctx = this.canvas && this.canvas.getContext('2d')
-    if (ctx) {
-      ctx.fillStyle = '#fff'
-      ctx.shadowOffsetY = 1
-      ctx.shadowColor = '#bebebe'
-      ctx.shadowBlur = 4
-      roundRect(ctx, 55, 0, 10, 22, 5)
-      ctx.save()
-    }
-  }
-
   render() {
     const {
       width,
@@ -91,6 +80,7 @@ class DoughnutChart extends React.Component {
       customChartWrapper,
       customTooltips,
       average,
+      cvScoreData,
     } = this.props
 
     const themes = this.props.themeContext.colors
@@ -157,6 +147,8 @@ class DoughnutChart extends React.Component {
       }
     }
 
+    const tooltipKey = Math.random()
+
     return (
       <React.Fragment>
         <div
@@ -187,7 +179,7 @@ class DoughnutChart extends React.Component {
                           !!newData.datasets &&
                           !!newData.datasets[0]
                             ? newData.datasets[0].data.map((value) =>
-                                parseFloat(value).toFixed(0)
+                                parseFloat(value)
                               )
                             : [],
                         backgroundColor:
@@ -206,7 +198,9 @@ class DoughnutChart extends React.Component {
                   plugins={plugins}
                   options={{
                     responsive: false,
-                    tooltips: customChartToolTip(themes),
+                    tooltips: {
+                      enabled: false,
+                    },
                     legend: {
                       display: legend,
                       labels: {
@@ -249,16 +243,35 @@ class DoughnutChart extends React.Component {
                   }}
                 />
                 {average && (
-                  <canvas
-                    width="120"
-                    height="120"
-                    className={style.ciclePin}
-                    ref={(c) => (this.canvas = c)}
-                    style={{
-                      transform: `translate(-50%, 0) rotate(${(average / 100) *
-                        360}deg)`,
-                    }}
-                  />
+                  <React.Fragment>
+                    <div
+                      className={style.circleContainer}
+                      style={{
+                        transform: `translate(-50%, 0) rotate(${(average /
+                          100) *
+                          360}deg)`,
+                      }}
+                    >
+                      <div className={style.circleWrapper}>
+                        <div
+                          className={classnames(style.circleTick, {
+                            [style.dark]: themes.themeType === 'dark',
+                            [style.light]: themes.themeType === 'light',
+                          })}
+                          data-tip={`${ucfirst(
+                            cvScoreData.platform
+                          )} Average | ${average}`}
+                          data-for={`panoptic-cvScore-${tooltipKey}`}
+                        />
+                      </div>
+                    </div>
+                    <ToolTip
+                      effect="solid"
+                      place="right"
+                      smallTooltip
+                      id={`panoptic-cvScore-${tooltipKey}`}
+                    />
+                  </React.Fragment>
                 )}
               </React.Fragment>
             )}

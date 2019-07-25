@@ -44,7 +44,7 @@ export const defaultFilters = {
   colorTemperature: 'happy-sad',
   dateRange: 'week',
   propertyEngagement: 'pacing|views',
-  platformEngagement: 'facebook|views',
+  platformEngagement: 'all|views',
 }
 
 export const initialState = fromJS({
