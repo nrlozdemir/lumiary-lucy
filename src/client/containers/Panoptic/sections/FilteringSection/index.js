@@ -40,7 +40,9 @@ class PanopticFilteringSection extends Component {
         !!stackedChartData &&
         isStackedChartEmpty) ||
         isEmpty(data))
-
+    
+    const { labels = []} = stackedChartData || {}
+    
     return (
       <Module
         moduleKey={'Panoptic/FilteringSection'}
@@ -89,7 +91,12 @@ class PanopticFilteringSection extends Component {
           </div>
           <div className={style.stackedChart}>
             <StackedBarChart
-              barData={!loading ? stackedChartData : null}
+              barData={!loading ? {
+                ...stackedChartData,
+                labels: labels.map((item) => {
+                  return item[0]
+                })
+              } : null}
               barSpacing={4}
             />
           </div>
