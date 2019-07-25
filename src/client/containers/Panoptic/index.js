@@ -15,9 +15,9 @@ class Panoptic extends React.Component {
         <Cards />
         <TopPerformingFormat />
         <VideoReleasesBarChart />
-        {/* <FilteringSection />
+        <FilteringSection />
         <PacingCard />
-        <CompareShares /> */}
+        <CompareShares />
       </React.Fragment>
     )
   }
