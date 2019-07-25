@@ -20,7 +20,7 @@ class Slider extends React.Component {
     return (
       <SliderModule
         data={data || []}
-        moduleKey={'Reports/TopPerformingVideos'}
+        moduleKey={'BrandInsights/TopPerformingVideos'}
         title="Top Performing Videos"
         selectedVideo={selectedVideo}
         changeSelectedVideo={this.changeSelectedVideo}
