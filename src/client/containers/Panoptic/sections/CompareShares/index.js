@@ -20,7 +20,7 @@ class CompareShares extends React.Component {
     return (
       <RadarChartModule
         data={data}
-        moduleKey={'Panoptic/compareShares'}
+        moduleKey={'Panoptic/DominantColor'}
         leftTitle="Facebook"
         rightTitle="YouTube"
         title="Dominant Color On Facebook and YouTube By Views"

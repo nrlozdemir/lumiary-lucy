@@ -73,7 +73,7 @@ export class Platform extends React.Component {
           container="platform"
         />
         <TopSimilarProperties
-          moduleKey="MarketView/Platform/TopSimilarPropertiesModule"
+          moduleKey="MarketView/Platform/TopSimilarProperties"
           title="Similar Properties Of Top Videos"
           action={this.getSimilarProperties}
           presentWithDoughnut
