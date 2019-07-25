@@ -39,10 +39,60 @@ function* getVideoReleasesData({ data }) {
       'GET'
     )
 
+    // console.log(JSON.stringify(percentageManipulation(convertVideoEngagementData(response, metric)), null, 4))
+    console.log(response)
+    console.log(metric)
+
+    const propertyMap = Object.keys(response).reduce((accumulator, key) => {
+      if(!accumulator[key]) {
+        accumulator[key] = {
+          maxVideo: 0,
+          maxEngagement: 0,
+          label: key,
+          labels: [],
+          datasets: [
+            {
+              data: [],
+              label: 'Videos',
+              backgroundColor: '#2FD7C4',
+              display: false
+            },
+            {
+              data: [],
+              label: 'Engagement',
+              backgroundColor: '#5292E5',
+            },
+          ],
+        }
+      }
+
+      const videos = response[key]
+      const engagement = response[key][metric]
+
+      for(let i = 0; i < 7; i++) {
+        const weekday = moment().subtract(i, 'days').format('dddd')
+        const weekdayShort = moment().subtract(i, 'days').format('dd')[0]
+
+        if(videos[weekday] > accumulator[key].maxVideo) {
+          accumulator[key].maxVideo = videos[weekday]
+        }
+
+        if(engagement[weekday] > accumulator[key].maxEngagement) {
+          accumulator[key].maxEngagement = engagement[weekday]
+        }
+
+        accumulator[key].labels.unshift(weekdayShort)
+        accumulator[key].datasets[0].data.unshift(videos[weekday])
+        accumulator[key].datasets[1].data.unshift((engagement[weekday] === 0 ? 0 : engagement[weekday] * -1))
+      }
+  
+      return accumulator
+    }, {})
+
     if (!!response) {
       yield put(
         actions.getVideoReleasesDataSuccess(
-          percentageManipulation(convertVideoEngagementData(response, metric))
+          Object.values(propertyMap).reverse()
         )
       )
     } else {

@@ -815,11 +815,7 @@ const getCVScoreChartAttributes = (data, maxPercent) => {
     : 50 
   : 100
   const chartYAxisStepSize = chartYAxisMax / 4
-console.log({
-  data,
-  chartYAxisMax,
-  chartYAxisStepSize,
-})
+
   return {
     chartYAxisMax,
     chartYAxisStepSize,
