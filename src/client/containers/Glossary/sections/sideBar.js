@@ -13,7 +13,12 @@ class Sidebar extends Component {
       themeContext: { colors },
     } = this.props
     return (
-      <div className={style.glossarySidebar}>
+      <div
+        className={style.glossarySidebar}
+        style={{
+          boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
+        }}
+      >
         <div
           className={style.inputContainer}
           style={{

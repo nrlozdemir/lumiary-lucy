@@ -91,7 +91,6 @@ class MainContentArea extends Component {
                   </div>
                 ))
               )}
-          }
         </div>
       </div>
     )

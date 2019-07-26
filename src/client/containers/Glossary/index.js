@@ -34,7 +34,7 @@ class Glossary extends Component {
         case '/glossary/p/properties':
           menuName = 'Properties'
           break
-        case '/glossary/p/formats':
+        case '/glossary/f/formats':
           menuName = 'Formats'
           break
         case '/glossary/p/pages':

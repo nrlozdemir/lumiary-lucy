@@ -36,14 +36,19 @@
   display: flex;
 
   .glossarySidebar {
-    box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
     font-family: $font-family-ClanOTNews;
     font-size: 14px;
     width: calc(30% - 40px);
     margin-right: 40px;
-    height: calc(100vh - 100px);
+    height: calc(100vh - 330px);
     display: flex;
     flex-direction: column;
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -ms-sticky;
+    position: -o-sticky;
+    position: sticky;
+    top: 20px;
 
     .inputContainer {
       background-color: $color-dark-grey-blue;

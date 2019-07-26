@@ -153,6 +153,55 @@
   }
 }
 
+.glossaryBorder {
+  display: flex;
+  align-items: center;
+  a {
+    padding: 5px 36px;
+    margin: 0;
+    font-size: 14px;
+    text-decoration: none;
+    position: relative;
+    font-family: $font-family-ClanOTNews;
+    border-right: 2px solid;
+    &:last-child {
+      border: none;
+    }
+  }
+
+  .activeLink {
+    color: $color-white;
+    font-size: 14px;
+    font-family: $font-family-ClanOTBold;
+    font-weight: 700;
+
+    &:before {
+      content: '';
+      width: calc(100% - 72px);
+      height: 4px;
+      position: absolute;
+      bottom: -28px;
+      background-color: $color-cool-blue;
+    }
+  }
+}
+
+.glossaryHeader {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  .headerTitle {
+    display: flex;
+    flex: 3;
+    justify-content: center;
+  }
+  .glossaryLinks {
+    display: flex;
+    align-items: center;
+  }
+}
+
 .headerTitle {
   font-size: 14px;
   font-weight: bold;
