@@ -49,7 +49,14 @@ class ReportGenerated extends React.Component {
           acc[curr] = { value: urlParams[curr] }
           return acc
         }, {})
-      brandInsightFormSubmit({ ...parsedData, title: urlParams.title, report_uuid: urlParams.report_uuid }, true)
+      brandInsightFormSubmit(
+        {
+          ...parsedData,
+          title: urlParams.title,
+          report_uuid: urlParams.report_uuid,
+        },
+        true
+      )
     }
   }
 

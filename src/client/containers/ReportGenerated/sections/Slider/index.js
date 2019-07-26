@@ -1,8 +1,20 @@
 import React from 'react'
 import SliderModule from 'Components/Modules/SliderModule'
 import RouterLoading from 'Components/RouterLoading'
+import { isEmpty, isEqual } from 'lodash'
 
 class Slider extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    const {
+      data: { data },
+    } = this.props
+    const {
+      data: { data: nextData },
+    } = nextProps
+
+    return data && !isEqual(JSON.stringify(data), JSON.stringify(nextData))
+  }
+
   componentDidMount() {
     const { action, report } = this.props
     action({ report })

@@ -145,19 +145,19 @@ export const initialState = fromJS({
   selectedVideo: null,
 
   pacingChartData: {
-    data: null,
+    data: {},
     loading: true,
     error: null,
   },
 
   topVideosCard: {
-    data: null,
+    data: {},
     loading: true,
     error: null,
   },
 
   topPerformingVideos: {
-    data: null,
+    data: {},
     loading: true,
     error: null,
     selectedVideo: null,
