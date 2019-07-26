@@ -271,8 +271,7 @@ function* getPacingCardData({ data: { report } }) {
   try {
     const profile = yield select(makeSelectAuthProfile())
     const competitors = getBrandAndCompetitors(profile)
-
-    const filteredCompetitors = getFilteredCompetitors(competitors, report)
+    const { brand } = report
 
     const options = {
       metric: report.engagement,
@@ -281,32 +280,57 @@ function* getPacingCardData({ data: { report } }) {
       property: ['pacing'],
       dateBucket: 'none',
       display: 'percentage',
-      url: '/report',
-      brands: [...filteredCompetitors],
+      brands: [brand],
     }
 
     const [stadiumData, horizontalStackedBarData] = yield all([
-      call(getDataFromApi, options),
-      call(getDataFromApi, {
-        ...options,
-        proportionOf: 'format',
-        limit: 4,
-      }),
+      call(getDataFromApi, options, '/report'),
+      call(
+        getDataFromApi,
+        {
+          ...options,
+          proportionOf: 'format',
+          limit: 4,
+        },
+        '/report'
+      ),
     ])
 
-    yield put(
-      actions.getPacingCardDataSuccess({
-        stadiumData: percentageManipulation(
-          convertDataIntoDatasets(stadiumData, options)
-        ),
-        horizontalStackedBarData: percentageManipulation(
-          convertDataIntoDatasets(horizontalStackedBarData, {
-            ...options,
-            proportionOf: 'format',
-          })
-        ),
-      })
-    )
+    const brandName =
+      (!!stadiumData &&
+        !!stadiumData.data &&
+        !!Object.keys(stadiumData.data).length &&
+        Object.keys(stadiumData.data)[0]) ||
+      null
+
+    if (
+      !!brandName &&
+      !!stadiumData.data &&
+      !!stadiumData.data[brandName] &&
+      !!stadiumData.data[brandName].pacing &&
+      !!horizontalStackedBarData.data &&
+      !!horizontalStackedBarData.data[brandName] &&
+      !!horizontalStackedBarData.data[brandName].pacing
+    ) {
+      yield put(
+        actions.getPacingCardDataSuccess({
+          stadiumData: percentageManipulation(
+            convertDataIntoDatasets(stadiumData, options)
+          ),
+          horizontalStackedBarDataOriginal:
+            horizontalStackedBarData.data[brandName].pacing,
+          horizontalStackedBarData: convertDataIntoDatasets(
+            horizontalStackedBarData,
+            {
+              ...options,
+              proportionOf: 'format',
+            }
+          ),
+        })
+      )
+    } else {
+      throw new Error('Error fetching Pacing Card data')
+    }
   } catch (err) {
     yield put(actions.getPacingCardDataFailure(err))
   }
