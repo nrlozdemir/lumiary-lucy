@@ -40,12 +40,11 @@ function* getVideoReleasesData({ data }) {
     )
 
     // console.log(JSON.stringify(percentageManipulation(convertVideoEngagementData(response, metric)), null, 4))
-    console.log(response)
-    console.log(metric)
 
     const propertyMap = Object.keys(response).reduce((accumulator, key) => {
       if(!accumulator[key]) {
         accumulator[key] = {
+          metric,
           maxVideo: 0,
           maxEngagement: 0,
           label: key,
@@ -395,7 +394,6 @@ function* getTopPerformingFormatData({ data = {} }) {
     )
 
     if (payload) {
-      console.log(payload)
       // const doughnutData = percentageManipulation(payload)
       // const properties = ['Fast', 'Medium', 'Slow', 'Slowest']
       // const datasets = properties.map((property, idx) => ({
