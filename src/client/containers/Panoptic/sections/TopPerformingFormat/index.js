@@ -57,7 +57,9 @@ class TopPerformingFormat extends React.Component {
     const isLineChartEmpty = isDataSetEmpty(lineChartData)
 
     const hasNoData =
-      !loading && ((!!lineChartData && isLineChartEmpty) || isEmpty(data))
+      !loading &&
+      ((!!lineChartData && isLineChartEmpty) || isEmpty(data)) &&
+      isEmpty(properties)
 
     return (
       <LineAndDoughnutChartModule

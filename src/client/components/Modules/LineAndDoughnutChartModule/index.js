@@ -81,7 +81,7 @@ const LineAndDoughnutChartModule = ({
       title={title}
       action={action}
       filters={filters}
-      isEmpty={false}
+      isEmpty={isEmpty}
       loading={loading}
     >
       <div className="grid-collapse">
