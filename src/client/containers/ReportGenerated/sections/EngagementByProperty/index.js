@@ -12,13 +12,16 @@ import { isEmpty, isEqual } from 'lodash'
 class EngagementByProperty extends Component {
   shouldComponentUpdate(nextProps) {
     const {
-      data: { data },
+      data: { data, loading },
     } = this.props
     const {
-      data: { data: nextData },
+      data: { data: nextData, loading: nextLoading },
     } = nextProps
 
-    return data && !isEqual(JSON.stringify(data), JSON.stringify(nextData))
+    return (
+      (data && !isEqual(JSON.stringify(data), JSON.stringify(nextData))) ||
+      loading !== nextLoading
+    )
   }
 
   callBack = (data) => {
