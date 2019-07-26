@@ -16,6 +16,7 @@ class Glossary extends Component {
       match: {
         params: { letter, term },
       },
+      location: { pathname },
       history,
       content: {
         data: {
@@ -26,16 +27,30 @@ class Glossary extends Component {
     if (!letters) {
       return null
     }
+
+    let menuName
+    if (term) {
+      switch (pathname) {
+        case '/glossary/p/properties':
+          menuName = 'Properties'
+          break
+        case '/glossary/p/formats':
+          menuName = 'Formats'
+          break
+        case '/glossary/p/pages':
+          menuName = 'Pages'
+          break
+        default:
+          menuName = null
+      }
+    }
+
     return (
       <div className="grid-container col-12">
         <Letterbar content={letters} />
         <div className={style.glossaryBodyContainer}>
           <Sidebar letter={letter} content={letters} term={term} />
-          <MainContentArea
-            content={letters[letter]}
-            term={term}
-            letter={letter}
-          />
+          <MainContentArea content={letters} menu={menuName} letter={letter} />
         </div>
       </div>
     )

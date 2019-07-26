@@ -5,10 +5,9 @@ import { capitalize } from 'Utils/text'
 
 class MainContentArea extends Component {
   render() {
-    const { content, term, letter } = this.props
+    const { content, menu, letter } = this.props
     const { colors } = this.props.themeContext
     console.log('Main content area page props: ', this.props)
-
     return (
       <div
         className={style.glossaryMain}
@@ -19,50 +18,80 @@ class MainContentArea extends Component {
         }}
       >
         <div className={style.mainContentArea}>
-          {(!!term || !!letter) && (
+          {(!!menu || !!letter) && (
             <div className={style.mainContentHeader}>
-              {capitalize(term ? term : letter)}
+              {capitalize(menu ? menu : letter)}
             </div>
           )}
-
-          {!!content ? (
-            !!content.length &&
-            content.map((item, index) => {
-              return (
-                <div
-                  className={style.mainContentItem}
-                  key={`mainContentItem-${index}`}
-                >
-                  {!!item.term && (
-                    <h3 className={style.mainContentItemTerm}>{item.term}</h3>
-                  )}
-                  {!!item.tags && !!item.tags.length && (
-                    <ul className={style.mainContentItemTags}>
-                      {item.tags.map((tag, idx) => (
-                        <li
-                          key={`tags-${idx}`}
-                          style={{
-                            borderColor: `${colors.moduleBorder}`,
-                          }}
-                          className={style.mainContentItemTag}
-                        >
-                          {tag.name}
-                        </li>
-                      ))}
-                    </ul>
-                  )}
-                  {!!item.text && (
-                    <div
-                      className={style.mainContentItemContent}
-                      dangerouslySetInnerHTML={{ __html: item.text }}
-                    />
-                  )}
-                </div>
-              )
-            })
-          ) : (
-            <div className={style.empty}>No Data Available</div>
-          )}
+          {letter
+            ? content[letter] &&
+              content[letter].map((item, index) => {
+                return (
+                  <div
+                    className={style.mainContentItem}
+                    key={`mainContentItem-${index}`}
+                  >
+                    {!!item.term && (
+                      <h3 className={style.mainContentItemTerm}>{item.term}</h3>
+                    )}
+                    {!!item.tags && !!item.tags.length && (
+                      <ul className={style.mainContentItemTags}>
+                        {item.tags.map((tag, idx) => (
+                          <li
+                            key={`tags-${idx}`}
+                            style={{
+                              borderColor: `${colors.moduleBorder}`,
+                            }}
+                            className={style.mainContentItemTag}
+                          >
+                            {tag.name}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {!!item.text && (
+                      <div
+                        className={style.mainContentItemContent}
+                        dangerouslySetInnerHTML={{ __html: item.text }}
+                      />
+                    )}
+                  </div>
+                )
+              })
+            : Object.keys(content).map((key) =>
+                content[key].map((item, index) => (
+                  <div
+                    className={style.mainContentItem}
+                    key={`mainContentItem-${index}`}
+                  >
+                    {!!item.term && (
+                      <h3 className={style.mainContentItemTerm}>{item.term}</h3>
+                    )}
+                    {!!item.tags && !!item.tags.length && (
+                      <ul className={style.mainContentItemTags}>
+                        {item.tags.map((tag, idx) => (
+                          <li
+                            key={`tags-${idx}`}
+                            style={{
+                              borderColor: `${colors.moduleBorder}`,
+                            }}
+                            className={style.mainContentItemTag}
+                          >
+                            {tag.name}
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                    {!!item.text && (
+                      <div
+                        className={style.mainContentItemContent}
+                        dangerouslySetInnerHTML={{ __html: item.text }}
+                      />
+                    )}
+                  </div>
+                ))
+              )}
+          }
         </div>
       </div>
     )
