@@ -428,6 +428,7 @@ function* getTopPerformingFormatData({ data = {} }) {
           label,
         })
 
+        const nonGreyChartColors = ["#2FD7C4", "#8562F3", "#5292E5", "#ff556f"]
         Object.keys(payload.dates[weekday]).forEach((propertyBucket, idx) => {
           if(!propertyBuckets[propertyBucket]) {
             propertyBuckets[propertyBucket] = {
