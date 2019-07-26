@@ -68,19 +68,24 @@ const HorizontalStackedBarChart = (props) => {
   }, {})
 
   const bucketLabels =
-    !!horizontalStackedBarDataOriginal &&
-    !!horizontalStackedBarDataOriginal[0] &&
-    Object.keys(Object.values(horizontalStackedBarDataOriginal)[0]) || []
+    (!!horizontalStackedBarDataOriginal &&
+      !!horizontalStackedBarDataOriginal[0] &&
+      Object.keys(Object.values(horizontalStackedBarDataOriginal)[0])) ||
+    []
 
   const labels = Object.keys(horizontalStackedBarDataOriginal).sort()
-  
+
   const datasets = labels.map((label, i) => {
     const thisBucketLabel = bucketLabels[i]
 
     return {
       label,
-      backgroundColor: stadiumValuesMapped[thisBucketLabel].color,
-      borderColor: stadiumValuesMapped[thisBucketLabel].color,
+      backgroundColor:
+        !!stadiumValuesMapped[thisBucketLabel] &&
+        stadiumValuesMapped[thisBucketLabel].color,
+      borderColor:
+        !!stadiumValuesMapped[thisBucketLabel] &&
+        stadiumValuesMapped[thisBucketLabel].color,
       borderWidth: 1,
       data: labels.map((label) => {
         return horizontalStackedBarDataOriginal[label][thisBucketLabel]
