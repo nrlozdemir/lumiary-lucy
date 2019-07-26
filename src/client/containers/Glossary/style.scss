@@ -5,7 +5,7 @@
   border-top: 1px solid;
   border-bottom: 1px solid;
   .letter {
-    width: 45px;
+    flex: 1;
     font-family: $font-family-ClanOT;
     font-size: 14px;
     font-weight: normal;
@@ -16,7 +16,7 @@
     text-align: center;
     color: white;
     border-left: 1px solid;
-    padding: 21px 12px;
+    padding: 21px 0;
     text-decoration: none;
     &:last-child {
       border-right: 1px solid;

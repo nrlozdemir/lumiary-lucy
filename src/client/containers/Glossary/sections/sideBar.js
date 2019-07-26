@@ -12,7 +12,6 @@ class Sidebar extends Component {
       content,
       themeContext: { colors },
     } = this.props
-
     return (
       <div className={style.glossarySidebar}>
         <div
@@ -43,21 +42,42 @@ class Sidebar extends Component {
             color: colors.labelColor,
           }}
         >
-          {content[letter] &&
-            content[letter].map((menu, i) => (
-              <NavLink
-                key={i}
-                to={`/glossary/${letter}/${menu.term.toLowerCase()}`}
-                className={style.menuLink}
-                activeClassName={style.active}
-                style={{
-                  backgroundColor: colors.sidebarBackgroundColor,
-                  color: colors.labelColor,
-                }}
-              >
-                <span className={style.menuText}>{capitalize(menu.term)}</span>
-              </NavLink>
-            ))}
+          {letter
+            ? content[letter] &&
+              content[letter].map((menu, i) => (
+                <NavLink
+                  key={i}
+                  to={`/glossary/${letter}/${menu.slug}`}
+                  className={style.menuLink}
+                  activeClassName={style.active}
+                  style={{
+                    backgroundColor: colors.sidebarBackgroundColor,
+                    color: colors.labelColor,
+                  }}
+                >
+                  <span className={style.menuText}>
+                    {capitalize(menu.term)}
+                  </span>
+                </NavLink>
+              ))
+            : Object.keys(content).map((item) =>
+                content[item].map((term, i) => (
+                  <NavLink
+                    key={i}
+                    to={`/glossary/${item}/${term.slug}`}
+                    className={style.menuLink}
+                    activeClassName={style.active}
+                    style={{
+                      backgroundColor: colors.sidebarBackgroundColor,
+                      color: colors.labelColor,
+                    }}
+                  >
+                    <span className={style.menuText}>
+                      {capitalize(term.term)}
+                    </span>
+                  </NavLink>
+                ))
+              )}
         </div>
       </div>
     )
