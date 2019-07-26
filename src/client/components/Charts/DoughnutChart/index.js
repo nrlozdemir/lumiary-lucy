@@ -39,9 +39,9 @@ const defaultProps = {
 }
 const dataLabelPlugins = (value, func, item) => {
   if (func == 'insertAfter') {
-    return (value > 0 ? value + '' + item : '')
+    return value > 0 ? value + '' + item : ''
   } else if (func == 'insertBefore') {
-    return (value > 0 ? item + '' + value : '')
+    return value > 0 ? item + '' + value : ''
   }
   return value
 }
