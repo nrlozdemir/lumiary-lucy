@@ -251,6 +251,7 @@ function* getPacingCardData({ data }) {
           stadiumData: percentageManipulation(
             convertDataIntoDatasets(stadiumData, options)
           ),
+          horizontalStackedBarDataOriginal: horizontalStackedBarData.data[brand.name].pacing,
           horizontalStackedBarData: convertDataIntoDatasets(
             horizontalStackedBarData,
             {
