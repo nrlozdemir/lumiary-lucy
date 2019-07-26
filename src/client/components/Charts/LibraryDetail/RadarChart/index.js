@@ -1,7 +1,6 @@
 import React from 'react'
 import { Radar, Chart } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
-import { metricSuffix } from 'Utils'
 
 function openTooltip(chart, easing, datasetIndex, pointIndex){
   if (chart.tooltip._active == undefined)
@@ -17,32 +16,6 @@ function openTooltip(chart, easing, datasetIndex, pointIndex){
   
   activeElements.push(requestedElem)
   chart.tooltip._active = activeElements
-  chart.tooltip.update(true)
-  chart.draw()
-}
-
-function closeTooltip(chart, datasetIndex, pointIndex){
-  let activeElements = chart.tooltip._active
-  
-  if (activeElements == undefined || activeElements.length == 0) {
-    return
-  }
-
-  let requestedElem = chart.getDatasetMeta(datasetIndex).data[pointIndex]
-
-  for (let i = 0; i < activeElements.length; i++) {
-    if (requestedElem._index == activeElements[i]._index) {
-      activeElements.splice(i, 1)
-      break
-    }
-  }
-  chart.tooltip._active = activeElements
-  chart.tooltip.update(true)
-  chart.draw()
-}
-
-function closeAllTooltips(chart){
-  chart.tooltip._active = []
   chart.tooltip.update(true)
   chart.draw()
 }
@@ -94,33 +67,6 @@ const plugins = [
       })
 
       ctx.save()
-
-      // circles mouse on event
-      ctx.canvas.addEventListener('mousemove', (e) => {
-        Object.values(tooltipArea).map((p, i) => {
-          if (p.x > e.offsetX - 12 
-            && p.x < e.offsetX + 12 
-            && p.y > e.offsetY - 12 
-            && p.y < e.offsetY + 12
-          ) {
-            chart.options.tooltips.enabled = true
-            openTooltip(chart, easing, 0, p.index)
-          } else {
-            chart.options.tooltips.enabled = false
-            ctx.restore()
-            if (chart.tooltip._active.length > 0) {
-              //chart.options.tooltips.enabled = false
-            }
-          }
-        })
-      })
-
-      ctx.canvas.addEventListener('mouseout', (e) => {
-        chart.options.tooltips.enabled = false
-        if (chart.tooltip._active.length > 0) {
-          //closeAllTooltips(chart)
-        }
-      })
     },
   },
 ]
@@ -135,8 +81,6 @@ Chart.Tooltip.positioners.custom = function(e, p) {
     y: tooltipArea[e[0]._index].y
   }
 }
-
-
 
 const RadarChart = (props) => {
   const { data, width = 400, height = 400 } = props
@@ -175,6 +119,40 @@ const RadarChart = (props) => {
         elements: {
           line: {
             tension: 0
+          }
+        },
+        hover: {
+          mode: 'dataset',
+          intersect: false,
+          onHover: (a, c) => {
+            const {
+              offsetX,
+              offsetY,
+            } = a
+
+            const max = Math.min.apply(
+              Math,
+              c.map(function(o) {
+                return o._model.y
+              })
+            )
+
+            const maxObject = c.find((o) => o._model.y === max)
+
+            const chart = maxObject && maxObject._chart
+
+            !!chart && Object.values(tooltipArea).map((p, i) => {
+              if (p.x > offsetX - 12 
+                && p.x < offsetX + 12 
+                && p.y > offsetY - 12 
+                && p.y < offsetY + 12
+              ) {
+                chart.options.tooltips.enabled = true
+                openTooltip(chart, null, 0, p.index)
+              } else {
+                chart.options.tooltips.enabled = false
+              }
+            })
           }
         },
         responsive: false,
