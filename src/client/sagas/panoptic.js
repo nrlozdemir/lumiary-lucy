@@ -335,7 +335,7 @@ function* getFlipCardsData() {
           )
 
           return {
-            [metric]: {
+            [metric.substring(0, metric.length - 1)]: {
               percentage: metrics[metric].changeOverPrevious || 0,
               data: normalized,
               originalData: data,
