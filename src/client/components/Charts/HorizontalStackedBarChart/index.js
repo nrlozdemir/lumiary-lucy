@@ -69,7 +69,6 @@ const HorizontalStackedBarChart = (props) => {
 
   const bucketLabels =
     (!!horizontalStackedBarDataOriginal &&
-      !!horizontalStackedBarDataOriginal[0] &&
       Object.keys(Object.values(horizontalStackedBarDataOriginal)[0])) ||
     []
 
