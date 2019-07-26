@@ -56,11 +56,11 @@ const PacingCardModule = ({
             horizontalStackedBarDataOriginal={horizontalStackedBarDataOriginal}
             values={horizontalBarChartValues}
             options={barChartOptions}
-            datasetsIsEmpty={isDataSetEmpty(horizontalStackedBarData)}
+            datasetsIsEmpty={!loading && isDataSetEmpty(horizontalStackedBarData)}
           />
           <StadiumChart
             data={stadiumValues}
-            datasetsIsEmpty={isDataSetEmpty(stadiumData)}
+            datasetsIsEmpty={!loading && isDataSetEmpty(stadiumData)}
           />
         </MultipleNoDataModule>
       </div>
