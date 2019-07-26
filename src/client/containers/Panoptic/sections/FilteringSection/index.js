@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
+import moment from 'moment'
+
 import { actions, makeSelectPanopticFilteringSection } from 'Reducers/panoptic'
 import Module from 'Components/Module'
 import { isDataSetEmpty } from 'Utils/datasets'
@@ -29,6 +31,8 @@ class PanopticFilteringSection extends Component {
         error,
       },
     } = this.props
+
+    console.log(this.props)
 
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
     const isStackedChartEmpty = isDataSetEmpty(stackedChartData)
@@ -94,7 +98,22 @@ class PanopticFilteringSection extends Component {
               barData={!loading ? {
                 ...stackedChartData,
                 labels: labels.map((item) => {
-                  return item[0]
+                  switch(labels.length) {
+                    case 7:
+                      // weekdays
+                      return moment().day(item).format("dd")
+                    break;
+
+                    case 4:
+                      // weeks
+                      return item
+                    break;
+
+                    case 3:
+                      // months
+                      return moment().month(item).format("MMM")
+                    break;
+                  }
                 })
               } : null}
               barSpacing={4}
