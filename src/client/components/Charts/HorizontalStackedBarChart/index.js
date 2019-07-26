@@ -42,11 +42,19 @@ const plugins = [
 ]
 
 const HorizontalStackedBarChart = (props) => {
-  const { barData = {}, options, width, height, values, horizontalStackedBarDataOriginal = {}, stadiumValues } = props
+  const {
+    barData = {},
+    options,
+    width,
+    height,
+    values,
+    horizontalStackedBarDataOriginal = {},
+    stadiumValues,
+  } = props
   const { colors } = props.themeContext
 
-  const { datasets:barDatasets = [] } = barData
-  if(barDatasets.length === 0) {
+  const { datasets: barDatasets = [] } = barData
+  if (barDatasets.length === 0) {
     return null
   }
   const originalBarData = barDatasets.reduce((accumulator, item) => {
@@ -59,8 +67,13 @@ const HorizontalStackedBarChart = (props) => {
     return accumulator
   }, {})
 
-  const bucketLabels = Object.keys(Object.values(horizontalStackedBarDataOriginal)[0])
+  const bucketLabels =
+    !!horizontalStackedBarDataOriginal &&
+    !!horizontalStackedBarDataOriginal[0] &&
+    Object.keys(Object.values(horizontalStackedBarDataOriginal)[0]) || []
+
   const labels = Object.keys(horizontalStackedBarDataOriginal).sort()
+  
   const datasets = labels.map((label, i) => {
     const thisBucketLabel = bucketLabels[i]
 
@@ -71,7 +84,7 @@ const HorizontalStackedBarChart = (props) => {
       borderWidth: 1,
       data: labels.map((label) => {
         return horizontalStackedBarDataOriginal[label][thisBucketLabel]
-      })
+      }),
     }
   })
 
@@ -97,8 +110,9 @@ const HorizontalStackedBarChart = (props) => {
                   data.datasets[datasetIndex] &&
                   data.datasets[datasetIndex].data[tooltipItem['index']]) ||
                 ''
-              const name = data && values && values[datasetIndex].title || ''
-              return `${percentageManipulation(count) || 0}% ${!!name && `| ${name}`}`
+              const name = (data && values && values[datasetIndex].title) || ''
+              return `${percentageManipulation(count) || 0}% ${!!name &&
+                `| ${name}`}`
             },
           },
         }),

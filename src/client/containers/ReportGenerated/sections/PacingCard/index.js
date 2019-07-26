@@ -10,13 +10,16 @@ import { isEmpty, isEqual } from 'lodash'
 class PacingCard extends React.Component {
   shouldComponentUpdate(nextProps) {
     const {
-      data: { data },
+      data: { data, loading },
     } = this.props
     const {
-      data: { data: nextData },
+      data: { data: nextData, loading: nextLoading },
     } = nextProps
 
-    return data && !isEqual(data, nextData)
+    return (
+      (data && !isEqual(JSON.stringify(data), JSON.stringify(nextData))) ||
+      loading !== nextLoading
+    )
   }
 
   componentDidMount() {
