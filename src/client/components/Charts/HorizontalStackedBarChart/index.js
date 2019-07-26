@@ -42,13 +42,46 @@ const plugins = [
 ]
 
 const HorizontalStackedBarChart = (props) => {
-  const { barData, options, width, height, values } = props
+  const { barData = {}, options, width, height, values, horizontalStackedBarDataOriginal = {}, stadiumValues } = props
   const { colors } = props.themeContext
+
+  const { datasets:barDatasets = [] } = barData
+  if(barDatasets.length === 0) {
+    return null
+  }
+  const originalBarData = barDatasets.reduce((accumulator, item) => {
+    accumulator[item.label] = item
+    return accumulator
+  }, {})
+
+  const stadiumValuesMapped = stadiumValues.reduce((accumulator, item) => {
+    accumulator[item.title] = item
+    return accumulator
+  }, {})
+
+  const bucketLabels = Object.keys(Object.values(horizontalStackedBarDataOriginal)[0])
+  const labels = Object.keys(horizontalStackedBarDataOriginal).sort()
+  const datasets = labels.map((label, i) => {
+    const thisBucketLabel = bucketLabels[i]
+
+    return {
+      label,
+      backgroundColor: stadiumValuesMapped[thisBucketLabel].color,
+      borderColor: stadiumValuesMapped[thisBucketLabel].color,
+      borderWidth: 1,
+      data: labels.map((label) => {
+        return horizontalStackedBarDataOriginal[label][thisBucketLabel]
+      })
+    }
+  })
 
   return (
     <HorizontalBar
       key={Math.random()}
-      data={barData}
+      data={{
+        datasets,
+        labels,
+      }}
       width={width}
       height={height}
       options={{

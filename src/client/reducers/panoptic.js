@@ -237,7 +237,7 @@ const panopticReducer = (state = initialState, action) => {
       return state.setIn(['pacingChartData', 'loading'], fromJS(true))
 
     case types.GET_PACING_CARD_DATA_SUCCESS:
-      const { stadiumData, horizontalStackedBarData } = payload
+      const { stadiumData, horizontalStackedBarData, horizontalStackedBarDataOriginal } = payload
 
       return state
         .setIn(
@@ -245,6 +245,7 @@ const panopticReducer = (state = initialState, action) => {
           fromJS({
             stadiumData,
             horizontalStackedBarData,
+            horizontalStackedBarDataOriginal
           })
         )
         .setIn(['pacingChartData', 'loading'], fromJS(false))
