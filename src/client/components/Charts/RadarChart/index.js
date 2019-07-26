@@ -108,9 +108,60 @@ const RadarChart = (props) => {
     maxTicksStepLimit = max
   }
 
+  const { labels = [] } = parsedData
+  const colorOrder = {
+    'Red': {},
+    'Orange-Red': {},
+    'Orange': {},
+    'Yellow-Orange': {},
+    'Yellow': {},
+    'Yellow-Green': {},
+    'Green': {},
+    'Blue-Green': {},
+    'Blue': {},
+    'Blue-Purple': {},
+    'Purple': {},
+    'Red-Purple': {},
+  }
+
+  labels.forEach((label) => {
+    if(colorOrder[label.name]) {
+      colorOrder[label.name] = label
+    }
+  })
+
+  const useAllVals = true
+  const thisData = Object.keys(colorOrder).reduce((accumulator, key) => {
+    let count = colorOrder[key].count || 0
+    if(count !== 0 || useAllVals) {
+      accumulator.dataKeys.push(key)
+      accumulator.dataValues.push(count)
+    }
+
+    return accumulator
+  }, {
+    dataKeys: [],
+    dataValues: []
+  })
+
+  const theData = (labels.length === 0) 
+    ? {}
+    : {
+      datasets:   [
+        {
+          ...parsedData.datasets[0],
+          data: thisData.dataValues
+        }
+      ],
+      labels: thisData.dataKeys.map((color) => {
+        return colorOrder[color]
+      })
+    }
+
+
   return (
     <Radar
-      data={parsedData}
+      data={theData}
       plugins={plugins}
       options={{
         responsive: true,
