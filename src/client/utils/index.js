@@ -389,7 +389,9 @@ const getBrandAndCompetitorsFromProfileObject = (profile, brand_id) => {
 
     if (!!foundBrand) {
       if (!foundBrand.competitors) {
-        foundBrand.competitors = []
+        foundBrand.competitors = foundBrand.related
+          ? foundBrand.related
+          : []
       }
       response = foundBrand
     }

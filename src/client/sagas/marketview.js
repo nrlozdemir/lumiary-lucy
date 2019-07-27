@@ -526,13 +526,15 @@ function* getTotalCompetitorViewsData() {
       property: ['duration'],
       brands: [...competitors],
     }
-    const payload = yield call(getDataFromApi, { ...options }, '/report')
 
+    const payload = yield call(getDataFromApi, { ...options }, '/report')
+    
     if (!!payload) {
       yield put(
         actions.getTotalCompetitorViewsSuccess(
           percentageManipulation(
             convertDataIntoDatasets(payload, options, {
+              useBrands: true,
               customKeys: Object.keys(payload.data),
             })
           )
