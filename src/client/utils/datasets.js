@@ -43,6 +43,7 @@ import {
     customKeys: array,
     customValueKey: string - custom key of data object (value default)
     compareBrands: bool - should be true if being used in compareBrands
+    useBrands: bool - map through brandKeys instead of values
   }
   *
  */
@@ -51,6 +52,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   const {
     hoverBG,
     isMetric,
+    useBrands,
     borderWidth,
     noBrandKeys,
     singleDataset,
@@ -172,6 +174,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     labels
 
   datasetsFromValues = preparedDatasets || datasetsFromValues
+
+  getValueinObject = useBrands ? brands : getValueinObject
+
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
