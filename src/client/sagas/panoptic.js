@@ -286,14 +286,28 @@ function* getCompareSharesData({ data: { dateRange } }) {
     }
 
     const payload = yield all([
-      call(getDataFromApi, {
-        ...parameters,
-        platform: 'facebook',
-      }),
-      call(getDataFromApi, {
-        ...parameters,
-        platform: 'youtube',
-      }),
+      call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl('/color', { 
+          brandUuid: brand.uuid, 
+          platform: 'facebook',
+          daterange: 'month',
+          metric: 'views',
+        }),
+        'GET'
+      ),
+      call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl('/color', { 
+          brandUuid: brand.uuid, 
+          platform: 'youtube',
+          daterange: 'month',
+          metric: 'views',
+        }),
+        'GET'
+      ),
     ])
 
     yield put(
