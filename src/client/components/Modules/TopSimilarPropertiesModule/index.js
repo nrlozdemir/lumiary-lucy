@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Module from 'Components/Module'
-import DoughnutCard from 'Components/DoughnutCard'
+import ProgressBarCard from 'Components/ProgressBarCard'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import classnames from 'classnames'
 import style from './style.scss'
@@ -18,8 +18,32 @@ const WrapperModule = ({ children, style, className }) => {
 }
 
 const TopSimilarProperties = (props) => {
-  const { data, title, filters, action, moduleKey, isLoading, isError } = props
+  const { data = {}, title, action, moduleKey, isLoading, isError, container } = props
   
+  const filters = [
+    {
+      type: 'dateRange',
+      selectKey: 'dateRangeOption',
+      placeHolder: 'Date',
+    }
+  ]
+
+  if(container === 'platform') {
+    filters.unshift({
+      type: 'platform',
+      selectKey: 'RCVS-ads',
+      placeHolder: 'Platforms',
+    })
+  }
+
+  const allDataPresent = Object.keys(data).reduce((accumulator, key) => {
+    if(Object.keys(data[key]).length === 0) {
+      accumulator = false
+    }
+
+    return accumulator
+  }, true)
+
   return (
     <Module
       title={title}
@@ -31,12 +55,18 @@ const TopSimilarProperties = (props) => {
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <div className={style.container}>
-            {isLoading ? (
+            {isLoading 
+            ? (
               <RouterLoading />
-            ) : (
+            ) 
+            : (!allDataPresent) 
+            ? (
+              <div className={style.empty}>No Data Available</div>
+            )
+            : (
               <MultipleNoDataModule>
-                {!!data && !!data.length
-                  ? data.map((sectionItem, i) => {
+                {!!data && !!Object.keys(data).length && allDataPresent
+                  ? Object.keys(data).map((sectionItem, i) => {
                       const moduleContainer = classnames({
                         [style.similarContainer]: i !== 0,
                       })
@@ -56,12 +86,9 @@ const TopSimilarProperties = (props) => {
                           key={`TopSimilarProperties_${i}`}
                           datasetsIsEmpty={isEmpty}
                         >
-                          <DoughnutCard
-                            data={sectionItem.doughnutChartValues}
-                            key={i}
-                            index={i}
-                            colors={colors}
-                            isEmpty={isEmpty}
+                          <ProgressBarCard 
+                            titleSlug={sectionItem}
+                            items={data[sectionItem]}
                           />
                         </WrapperModule>
                       )

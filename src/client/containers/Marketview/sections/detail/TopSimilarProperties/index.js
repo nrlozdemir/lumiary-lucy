@@ -26,10 +26,12 @@ class TopSimilarProperties extends React.Component {
       title,
       moduleKey,
       filters,
+      container,
     } = this.props
 
     return (
       <TopSimilarPropertiesModule
+        container={container}
         moduleKey={moduleKey}
         title={title}
         data={data}
