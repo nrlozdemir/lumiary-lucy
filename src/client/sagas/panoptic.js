@@ -292,7 +292,7 @@ function* getCompareSharesData({ data: { dateRange } }) {
         buildApiUrl('/color', { 
           brandUuid: brand.uuid, 
           platform: 'facebook',
-          daterange: 'month',
+          daterange: dateRange,
           metric: 'views',
         }),
         'GET'
@@ -303,7 +303,7 @@ function* getCompareSharesData({ data: { dateRange } }) {
         buildApiUrl('/color', { 
           brandUuid: brand.uuid, 
           platform: 'youtube',
-          daterange: 'month',
+          daterange: dateRange,
           metric: 'views',
         }),
         'GET'

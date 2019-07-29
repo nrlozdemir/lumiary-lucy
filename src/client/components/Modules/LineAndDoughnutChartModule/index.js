@@ -59,8 +59,8 @@ const LineAndDoughnutChartModule = ({
     ])
   }
   const sortedProperties = sortableManipulatedProperties.sort((a, b) => {
-    const bValue = (b[0].score.value === 'N/A') ? 0 : b[0].score.value
-    const aValue = (a[0].score.value === 'N/A') ? 0 : a[0].score.value
+    const bValue = b[0].score.value === 'N/A' ? 0 : b[0].score.value
+    const aValue = a[0].score.value === 'N/A' ? 0 : a[0].score.value
     return bValue - aValue
   })
 
@@ -70,12 +70,12 @@ const LineAndDoughnutChartModule = ({
     return accumulator
   }, {})
 
-  const { datasets:lineChartDataSets = [] } = lineChartData
+  const { datasets: lineChartDataSets = [] } = lineChartData
   const { chartYAxisMax, chartYAxisStepSize } = getCVScoreChartAttributes(
     lineChartDataSets,
     lineChartDataSets.reduce((accumulator, dataset) => {
       dataset.data.forEach((item) => {
-        if(item > accumulator) {
+        if (item > accumulator) {
           accumulator = item
         }
       })
@@ -223,11 +223,22 @@ const LineAndDoughnutChartModule = ({
                         {
                           borderColor: '#f3f6f9',
                           data: [
-                            (property[0].score.value === 'N/A' ? 0 : property[0].score.value),
-                            100 - (property[0].score.value === 'N/A' ? 0 : property[0].score.value),
+                            property[0].score.value === 'N/A'
+                              ? 0
+                              : Math.floor(property[0].score.value),
+                            100 -
+                              (property[0].score.value === 'N/A'
+                                ? 0
+                                : Math.floor(property[0].score.value)),
                           ],
-                          backgroundColor: [datasetMap[property[0].name].backgroundColor, '#acb0be'],
-                          hoverBackgroundColor: [datasetMap[property[0].name].backgroundColor, '#acb0be'],
+                          backgroundColor: [
+                            datasetMap[property[0].name].backgroundColor,
+                            '#acb0be',
+                          ],
+                          hoverBackgroundColor: [
+                            datasetMap[property[0].name].backgroundColor,
+                            '#acb0be',
+                          ],
                         },
                       ],
                       labels: ['a', 'b'],
@@ -254,7 +265,8 @@ const LineAndDoughnutChartModule = ({
                           color: colors.labelColor,
                         }}
                       >
-                        {property[0].score.value !== 'N/A' && `Score (${property[0].score.date.slice(0, 3)})`}
+                        {property[0].score.value !== 'N/A' &&
+                          `Score (${property[0].score.date.slice(0, 3)})`}
                       </span>
                     </div>
                   </div>

@@ -50,22 +50,31 @@ function parseData(props) {
 
   // Decrease = Original Number - New Number
   // % Decrease = Decrease ÷ Original Number × 100
-  const today = (originalData.originalData[originalData.originalData.length - 1] === 0) ? 1 : originalData.originalData[originalData.originalData.length - 1]
-  const yesterday = (originalData.originalData[originalData.originalData.length - 2] === 0) ? 1 : originalData.originalData[originalData.originalData.length - 2]
-  const statDifference = (today > yesterday) 
-    ? ((today - yesterday) / yesterday) * 100
-    : ((yesterday - today) / today) * -100
-  
+  const today =
+    originalData.originalData[originalData.originalData.length - 1] === 0
+      ? 1
+      : originalData.originalData[originalData.originalData.length - 1]
+  const yesterday =
+    originalData.originalData[originalData.originalData.length - 2] === 0
+      ? 1
+      : originalData.originalData[originalData.originalData.length - 2]
+  const statDifference =
+    today > yesterday
+      ? ((today - yesterday) / yesterday) * 100
+      : ((yesterday - today) / today) * -100
+
   if (statDifference == 0) {
     const titleLowerCase = title.charAt(0).toLowerCase() + title.slice(1)
     statArrowClassName = classnames(styles.arrow, styles.arrowRight)
     statClassName = classnames(styles.stats, styles.noChange)
     tooltipText = `No change in ${titleLowerCase} in the last 24 hours`
   } else {
-    const changeWording = (statDifference > 0) ? 'increased' : 'decreased'
-    const arrowStyle = (statDifference > 0) ? styles.arrowUp : styles.arrowDown
-    const statStyle = (statDifference > 0) ? styles.increase : styles.decrease
-    const formattedPercent = parseInt(statDifference).toFixed(1).toLocaleString()
+    const changeWording = statDifference > 0 ? 'increased' : 'decreased'
+    const arrowStyle = statDifference > 0 ? styles.arrowUp : styles.arrowDown
+    const statStyle = statDifference > 0 ? styles.increase : styles.decrease
+    const formattedPercent = parseInt(statDifference)
+      .toFixed(1)
+      .toLocaleString()
 
     statArrowClassName = classnames(styles.arrow, arrowStyle)
     statClassName = classnames(styles.stats, statStyle)
@@ -180,7 +189,12 @@ class Cards extends React.Component {
                 >
                   {!loading &&
                     (data && data[item] ? (
-                      <Front metric={item} originalData={originalData[item]} data={data[item]} title={`${ucfirst(item)}s`} />
+                      <Front
+                        metric={item}
+                        originalData={originalData[item]}
+                        data={data[item]}
+                        title={`${ucfirst(item)}s`}
+                      />
                     ) : (
                       <div
                         className={styles.noContent}
