@@ -419,9 +419,9 @@ class LibraryDetailShotByShot extends React.Component {
                       shotMargin={5}
                       minShotWidth={24}
                       maxShotWidth={148}
-                      shotHeight={160}
+                      shotHeight={148}
                       shotHoverWidth={160}
-                      shotHoverHeight={160}
+                      shotHoverHeight={176}
                       viewportWidth={1118}
                       viewportHeight={230}
                       viewportBackgroundColor={'transparent'}
