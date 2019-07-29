@@ -142,7 +142,7 @@ function* getVideoReleasesBarChart({ data: { report } }) {
       metric,
       platform,
       daterange,
-      property: 'format',
+      property: 'duration',
       limit: 4,
     }
 
@@ -289,7 +289,7 @@ function* getPacingCardData({ data: { report } }) {
         getDataFromApi,
         {
           ...options,
-          proportionOf: 'format',
+          proportionOf: 'duration',
           limit: 4,
         },
         '/report'
