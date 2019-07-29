@@ -31,9 +31,8 @@ function* getQuickviewItemsApi({
       'formats.value': formatsValue = '',
       'formats.bucket_name': formatsBucketName = '',
       'formats.industry_percent': formatsIndustryPercent = '',
-      'colors.value': colorsValue = '',
-      'colors.bucket_name': colorsBucketName = '',
-      'colors.industry_percent': colorsIndustryPercent = '',
+      'dominantColor.bucket': colorsBucketName = '',
+      'dominantColor.industry_percent': colorsIndustryPercent = '',
       'aspectRatios.value': aspectRatiosValue = '',
       'aspectRatios.bucket_name': aspectRatiosBucketName = '',
       'aspectRatios.industry_percent': aspectRatiosIndustryPercent = '',
@@ -89,7 +88,7 @@ function* getQuickviewItemsApi({
           value:
             colorsBucketName.charAt(0).toUpperCase() +
             colorsBucketName.slice(1),
-          percentage: colorsIndustryPercent,
+          percentage: (colorsIndustryPercent * 100).toFixed(1),
           text: `<b>{percentage}%</b> of ${performingText}industry videos have a <b>{title}</b> of <b>{value}</b>`,
         },
         {
