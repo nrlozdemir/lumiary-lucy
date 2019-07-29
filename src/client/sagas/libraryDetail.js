@@ -309,10 +309,12 @@ function* getDoughnutSectionInfoData({ payload }) {
 function* getVideoAverage({ id }) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
-    const payload = yield call(getDataFromApi, {
-      url: `/brand/${brand.uuid}/video/${id}/metrics`,
-      requestType: 'GET',
-    })
+    const payload = yield call(
+      getDataFromApi,
+      undefined,
+      `/brand/${brand.uuid}/video/${id}/metrics`,
+      'GET'
+    )
 
     yield put(
       actions.getSelectedVideoAverageSuccess(
