@@ -230,7 +230,7 @@ function* getContentVitalityScoreData({ payload = {} }) {
   const { dateRange, platform, report = {} } = payload
   const { brands = [] } = report
   try {
-    const payload = yield call(
+    const response = yield call(
       getDataFromApi,
       undefined,
       `/report/compare/brands?${querystring.stringify({
@@ -245,10 +245,11 @@ function* getContentVitalityScoreData({ payload = {} }) {
 
     yield put(
       actions.getContentVitalityScoreDataSuccess(
-        percentageManipulation(payload)
+        percentageManipulation({ data: response, platform})
       )
     )
   } catch (err) {
+    console.log(err)
     yield put(actions.getContentVitalityScoreDataError(err))
   }
 }

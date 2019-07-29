@@ -26,6 +26,7 @@
   flex-direction: column;
   align-items: center;
   display: flex;
+  min-height: 339px;
 
   .legend {
     border-radius: 17px;
@@ -41,10 +42,65 @@
 
   .divider {
     width: 1px;
-    height: 120px;
+    height: 100%;
     background-color: #c6c9d7;
     position: absolute;
     right: -1px;
-    transform: translate(0, 50%);
   }
+}
+
+.doughnutChartText {
+  width: 239px;
+  height: 78px;
+  margin-top: 32px;
+  font-family: $font-family-ClanOTNews;
+  font-size: 14px;
+  line-height: 1.86;
+  text-align: center;
+  color: #505050;
+}
+
+.centerText {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 94%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  .wrapper {
+    width: 75px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .bigText {
+      font-size: 15px;
+      font-family: Futura;
+      font-size: 24px;
+      font-weight: 800;
+      text-align: center;
+    }
+    .littleText {
+      font-family: ClanOT;
+      font-size: 12px;
+      font-weight: normal;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: normal;
+      letter-spacing: normal;
+      text-align: center;
+      color: #505050;
+    }
+  }
+}
+.emptyData {
+  position: absolute;
+  height: 100%;
+  display: flex;
+  text-align: center;
+  align-items: center;
+  font-weight: bold;
 }

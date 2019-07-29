@@ -84,7 +84,10 @@ export const actions = {
     type: types.LOAD_MORE_REPORTS_SUCCESS,
     payload,
   }),
-  loadMoreReportsError: (error) => ({ type: types.LOAD_MORE_REPORTS_ERROR, error }),
+  loadMoreReportsError: (error) => ({
+    type: types.LOAD_MORE_REPORTS_ERROR,
+    error,
+  }),
 
   // DELETE A REPORT
   loadDeleteReport: (id, isGetAllReports) => ({
@@ -218,7 +221,9 @@ export const initialState = fromJS({
     loading: false,
   },
   contentVitalityScoreData: {
-    data: [],
+    data: {
+      data: {},
+    },
     error: false,
     loading: false,
   },
@@ -429,7 +434,7 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.GET_CONTENT_VITALITY_SCORE_DATA_ERROR:
       return state
-        .setIn(['contentVitalityScoreData', 'data'], fromJS([]))
+        .setIn(['contentVitalityScoreData', 'data'], fromJS({ data: {} }))
         .setIn(['contentVitalityScoreData', 'error'], fromJS(action.error))
         .setIn(['contentVitalityScoreData', 'loading'], fromJS(false))
     /** END content vitality score data */
