@@ -62,12 +62,12 @@ const LineAndDoughnutChartModule = ({
     return b[0].score.value - a[0].score.value
   })
 
-  const { datasets:lineChartDataSets = [] } = lineChartData
+  const { datasets: lineChartDataSets = [] } = lineChartData
   const { chartYAxisMax, chartYAxisStepSize } = getCVScoreChartAttributes(
     lineChartDataSets,
     lineChartDataSets.reduce((accumulator, dataset) => {
       dataset.data.forEach((item) => {
-        if(item > accumulator) {
+        if (item > accumulator) {
           accumulator = item
         }
       })
@@ -176,6 +176,17 @@ const LineAndDoughnutChartModule = ({
         <div className={container}>
           {sortedProperties &&
             sortedProperties.map((property, idx) => {
+              console.log(
+                'Doughnut Sorted Properties:',
+                Math.floor(property[0].score.value),
+                100 - Math.floor(property[0].score.value)
+              )
+
+              console.log("Property | Average | Platform:")
+              console.log(property)
+              console.log(average)
+              console.log(platform)
+
               if (idx > 2) {
                 return null
               }
@@ -215,8 +226,8 @@ const LineAndDoughnutChartModule = ({
                         {
                           borderColor: '#f3f6f9',
                           data: [
-                            property[0].score.value,
-                            100 - property[0].score.value,
+                            Math.floor(property[0].score.value),
+                            100 - Math.floor(property[0].score.value),
                           ],
                           backgroundColor: [chartColors[idx], '#acb0be'],
                           hoverBackgroundColor: [chartColors[idx], '#acb0be'],

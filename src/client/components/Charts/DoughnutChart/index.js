@@ -186,8 +186,8 @@ class DoughnutChart extends React.Component {
                           newData && newData.datasets
                             ? newData.datasets[0].backgroundColor
                             : null,
-                        borderColor: themes.moduleBackground,
-                        hoverBorderColor: themes.moduleBackground,
+                        borderColor: datasetsBorderColor || themes.moduleBackground,
+                        hoverBorderColor: datasetsHoverBorderColor || themes.moduleBackground,
                         hoverBackgroundColor:
                           data && newData.datasets
                             ? newData.datasets[0].hoverBackgroundColor
