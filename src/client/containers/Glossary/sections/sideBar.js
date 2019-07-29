@@ -13,6 +13,7 @@ class Sidebar extends Component {
       contents: []
     }
     this.menuRef = []
+    this.sideBarRef = React.createRef()
   }
   scrollToElement() {
     const { term } = this.props
@@ -20,7 +21,7 @@ class Sidebar extends Component {
 
     if(!!term && !!selectedElem) {
       const topPos = selectedElem.offsetTop
-      document.getElementById('glossarySideBarMenuContent').scrollTop = topPos - 10
+      this.sideBarRef.scrollTop = topPos - 10
     }
   }
   componentDidUpdate() {
@@ -122,6 +123,7 @@ class Sidebar extends Component {
         </div>
         <div
           id='glossarySideBarMenuContent'
+          ref={e => this.sideBarRef = e}
           className={style.sideBarMenu}
           style={{
             backgroundColor: colors.sidebarBackgroundColor,

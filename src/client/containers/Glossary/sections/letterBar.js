@@ -51,6 +51,7 @@ class LetterBar extends Component {
           } else {
             return (
               <span
+                key={`letters-${index}`}
                 className={cx(style.letter, style.deactiveLetter)}
                 style={{
                   backgroundColor: colors.deactiveLetter,
