@@ -171,33 +171,43 @@ function* getPlatformTopVideosMarketview({
 
 function* getSimilarProperties(params = {}) {
   try {
-    const { data: { dateRange, container, platform } } = params
+    const {
+      data: { dateRange, container, platform },
+    } = params
     const { brand } = yield select(makeSelectAuthProfile())
     const { uuid, competitors = [] } = brand
-    
-    if(!uuid) {
-      throw new Error('Marketview/detail getSimilarProperties error, no brand uuid defined')
+
+    if (!uuid) {
+      throw new Error(
+        'Marketview/detail getSimilarProperties error, no brand uuid defined'
+      )
     }
 
     let requestBody
-    switch(container) {
+    switch (container) {
       case 'competitor':
-        if(competitors.length === 0) {
-          throw new Error('Marketview/detail getSimilarProperties error, no competitors provided')
+        if (competitors.length === 0) {
+          throw new Error(
+            'Marketview/detail getSimilarProperties error, no competitors provided'
+          )
         }
-          
+
+        const mappedCompetitors = competitors.map((c) => ({ uuid: c.uuid }))
+
         requestBody = {
           properties: ['duration', 'pacing', 'dominantColorShots'],
           daterange: dateRange,
           platforms: ['all'],
           percentile: 80,
-          competitors: JSON.stringify(competitors),
+          competitors: JSON.stringify(mappedCompetitors),
         }
-      break;
-      
+        break
+
       case 'platform':
-        if(!platform) {
-          throw new Error('Marketview/detail getSimilarProperties error, no platform provided')
+        if (!platform) {
+          throw new Error(
+            'Marketview/detail getSimilarProperties error, no platform provided'
+          )
         }
 
         requestBody = {
@@ -206,8 +216,8 @@ function* getSimilarProperties(params = {}) {
           platforms: [platform],
           percentile: 80,
         }
-      break;
-      
+        break
+
       case 'time':
         requestBody = {
           properties: ['duration', 'pacing', 'dominantColorShots'],
@@ -215,11 +225,13 @@ function* getSimilarProperties(params = {}) {
           platforms: ['all'],
           percentile: 80,
         }
-      break;
+        break
     }
 
-    if(!requestBody) {
-      throw new Error('Marketview/detail getSimilarProperties error, could not determine requestBody')
+    if (!requestBody) {
+      throw new Error(
+        'Marketview/detail getSimilarProperties error, could not determine requestBody'
+      )
     }
 
     const response = yield call(
@@ -229,12 +241,20 @@ function* getSimilarProperties(params = {}) {
       'GET'
     )
 
-    if(!response) {
-      throw new Error('Marketview/detail getSimilarProperties error, invalid server response')
+    if (!response) {
+      throw new Error(
+        'Marketview/detail getSimilarProperties error, invalid server response'
+      )
     }
 
-    if(!response.duration || !response.pacing || !response.dominantColorShots) {
-      throw new Error('Marketview/detail getSimilarProperties error, response body missing keys needed to render')
+    if (
+      !response.duration ||
+      !response.pacing ||
+      !response.dominantColorShots
+    ) {
+      throw new Error(
+        'Marketview/detail getSimilarProperties error, response body missing keys needed to render'
+      )
     }
 
     yield put(actions.getSimilarPropertiesSuccess(response))
@@ -535,7 +555,7 @@ function* getTotalCompetitorViewsData() {
     }
 
     const payload = yield call(getDataFromApi, { ...options }, '/report')
-    
+
     if (!!payload) {
       yield put(
         actions.getTotalCompetitorViewsSuccess(
