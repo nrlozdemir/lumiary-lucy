@@ -50,7 +50,7 @@ class Glossary extends Component {
         <Letterbar content={letters} />
         <div className={style.glossaryBodyContainer}>
           <Sidebar letter={letter} content={letters} term={term} />
-          <MainContentArea content={letters} menu={menuName} letter={letter} />
+          <MainContentArea content={letters} menu={menuName} letter={letter} term={term} />
         </div>
       </div>
     )
