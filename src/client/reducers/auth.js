@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode'
 import { fromJS } from 'immutable'
 import { createSelector } from 'reselect'
-import { getBrandAndCompetitorsFromProfileObject } from 'Utils'
+import { getProfileObjectWithBrand } from 'Utils'
 import { push } from 'connected-react-router'
 
 export const types = {
@@ -260,15 +260,20 @@ const reducer = (state = initialState, action) => {
         .setIn(['OAuth', 'success'], fromJS(false))
         .setIn(['OAuth', 'message'], fromJS(payload.message))
 
+    case types.LOGIN_SSO_REQUEST:
+      return state
+        .set('requesting', fromJS(true))
+        .set('loggedIn', fromJS(false))
+        .set('loginError', fromJS(null))
+        .set('message', fromJS(null))
+        .set('profile', fromJS(null))
+
     case types.LOGIN_SSO_SUCCESS: {
       const { token, refresh, profile } = action.payload
       const expiry = parseInt(jwtDecode(token).exp + '000')
 
       return state
-        .setIn(
-          ['profile', 'brand'],
-          fromJS(getBrandAndCompetitorsFromProfileObject(profile))
-        )
+        .setIn(['profile'], fromJS(getProfileObjectWithBrand(profile)))
         .setIn(['user', 'token'], fromJS(token))
         .setIn(['user', 'refresh'], fromJS(refresh))
         .setIn(['user', 'expiry'], fromJS(expiry))
