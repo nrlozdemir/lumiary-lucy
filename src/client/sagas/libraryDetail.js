@@ -48,8 +48,12 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
       const highestBuckets = Object.keys(response.myLibrary).reduce(
         (acc, key) => {
           const dataVals = response.myLibrary[key]
-          const max = dataVals.reduce((prev, current) =>
-            parseInt(prev[metric]) > parseInt(current[metric]) ? prev : current
+          const max = dataVals.reduce(
+            (prev, current) =>
+              parseInt(prev[metric]) > parseInt(current[metric])
+                ? prev
+                : current,
+            0
           )
           return [...acc, { property: key, ...max }]
         },
