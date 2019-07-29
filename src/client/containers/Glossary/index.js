@@ -5,8 +5,8 @@ import { compose } from 'redux'
 import { createStructuredSelector } from 'reselect'
 
 import style from './style.scss'
-import Sidebar from './sections/sidebar'
-import Letterbar from './sections/letterbar'
+import Sidebar from './sections/sideBar'
+import Letterbar from './sections/letterBar'
 import MainContentArea from './sections/mainContentArea'
 import { makeSelectGlobalSection } from 'Reducers/app'
 
