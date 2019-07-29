@@ -4,12 +4,37 @@ import style from '../style.scss'
 import { capitalize } from 'Utils/text'
 
 class MainContentArea extends Component {
+  constructor(props) {
+    super(props)
+    this.contentRef = []
+  }
+  scrollToElement() {
+    const { term } = this.props
+    const selectedElem = this.contentRef[`content-${term}`]
+    
+    if(!!term && !!selectedElem) {
+      let topPos = selectedElem.offsetTop
+
+      //calculate the letter bar height
+      const letterBarElement = document.getElementById('glossaryLetterBar')
+      if(letterBarElement && letterBarElement.clientHeight) {
+        topPos += letterBarElement.clientHeight
+      }
+      window.scrollTo(0, topPos)
+    }
+  }
+  componentDidMount() {
+    this.scrollToElement()
+  }
+  componentDidUpdate() {
+    this.scrollToElement()
+  }
   render() {
     const { content, menu, letter } = this.props
     const { colors } = this.props.themeContext
-    console.log('Main content area page props: ', this.props)
     return (
       <div
+        id='glossaryMain'
         className={style.glossaryMain}
         style={{
           background: colors.moduleBackground,
@@ -28,6 +53,8 @@ class MainContentArea extends Component {
               content[letter].map((item, index) => {
                 return (
                   <div
+                    id={`content-${item.slug}`}
+                    ref={contentRef => this.contentRef[`content-${item.slug}`] = contentRef}
                     className={style.mainContentItem}
                     key={`mainContentItem-${index}`}
                   >
@@ -61,6 +88,7 @@ class MainContentArea extends Component {
             : Object.keys(content).map((key) =>
                 content[key].map((item, index) => (
                   <div
+                    id={`content-${item.slug}`}
                     className={style.mainContentItem}
                     key={`mainContentItem-${index}`}
                   >
