@@ -184,17 +184,6 @@ const LineAndDoughnutChartModule = ({
         <div className={container}>
           {sortedProperties &&
             sortedProperties.map((property, idx) => {
-              console.log(
-                'Doughnut Sorted Properties:',
-                Math.floor(property[0].score.value),
-                100 - Math.floor(property[0].score.value)
-              )
-
-              console.log('Property | Average | Platform:')
-              console.log(property)
-              console.log(average)
-              console.log(platform)
-
               if (idx > 2) {
                 return null
               }
