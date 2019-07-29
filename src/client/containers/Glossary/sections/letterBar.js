@@ -13,6 +13,7 @@ class LetterBar extends Component {
     } = this.props
     return (
       <div
+        id='glossaryLetterBar'
         className={cx(style.letterBar)}
         style={{
           borderColor: colors.letterBorder,

@@ -12,6 +12,19 @@ class Sidebar extends Component {
       searchTerm : '',
       contents: []
     }
+    this.menuRef = []
+  }
+  scrollToElement() {
+    const { term } = this.props
+    const selectedElem = this.menuRef[`sidebar-${term}`]
+
+    if(!!term && !!selectedElem) {
+      const topPos = selectedElem.offsetTop
+      document.getElementById('glossarySideBarMenuContent').scrollTop = topPos - 10
+    }
+  }
+  componentDidUpdate() {
+    this.scrollToElement()
   }
   componentDidMount() {
     const {
@@ -33,18 +46,19 @@ class Sidebar extends Component {
     this.setState({
       contents: newContentArray
     })
+    this.scrollToElement()
   }
   onInputTermChange(e) {
     this.setState({
       searchTerm: e.target.value
     })
   }
-  renderNavLink(menu, i) {
+  renderNavLink(menu) {
     const {
       themeContext: { colors },
     } = this.props
     return <NavLink
-      key={i}
+      id={`sidebar-${menu.slug}`}
       to={`/glossary/${menu.letter}/${menu.slug}`}
       className={style.menuLink}
       activeClassName={style.active}
@@ -107,6 +121,7 @@ class Sidebar extends Component {
           />
         </div>
         <div
+          id='glossarySideBarMenuContent'
           className={style.sideBarMenu}
           style={{
             backgroundColor: colors.sidebarBackgroundColor,
@@ -114,7 +129,9 @@ class Sidebar extends Component {
           }}
         >
           {filteredContents.map((menu, i) => (
-            this.renderNavLink(menu, i)
+            <div key={i} ref={menuRef => this.menuRef[`sidebar-${menu.slug}`] = menuRef}>
+              {this.renderNavLink(menu)}
+            </div>
           ))}
         </div>
       </div>
