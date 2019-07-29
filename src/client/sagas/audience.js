@@ -35,7 +35,7 @@ function* getAudienceContentVitalityScoreData({ payload = {} }) {
     if (!!response && !!Object.keys(response).length) {
       yield put(
         actions.getAudienceContentVitalityScoreDataSuccess(
-          percentageManipulation(response)
+          percentageManipulation({ data: response, platform })
         )
       )
     } else {

@@ -11,28 +11,40 @@ class ContentVitalityScore extends React.Component {
 
   shouldComponentUpdate(nextProps) {
     const {
-      data: { data, loading },
+      data: {
+        data: { data, platform },
+        loading,
+      },
     } = this.props
 
     const {
-      data: { data: nextData, loading: nextLoading },
+      data: {
+        data: { data: nextData, platform: nextPlatform },
+        loading: nextLoading,
+      },
     } = nextProps
 
     return (
-      JSON.stringify(data) !== JSON.stringify(data) || loading !== nextLoading
+      JSON.stringify(data) !== JSON.stringify(nextData) ||
+      loading !== nextLoading ||
+      platform !== nextPlatform
     )
   }
 
   render() {
     const {
-      data: { data, loading, error },
+      data: {
+        data: { data, platform, average = '0' },
+        loading,
+        error,
+      },
       authProfile = {},
     } = this.props
 
     const { chartYAxisMax, chartYAxisStepSize } = getCVScoreChartAttributes(
       data
-    ) 
-    
+    )
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -61,6 +73,8 @@ class ContentVitalityScore extends React.Component {
             xAxesFlatten
             flattenFirstSpace={1}
             flattenLastSpace={5}
+            platform={platform}
+            average={average}
             options={{
               scales: {
                 yAxes: [

@@ -141,7 +141,9 @@ export const actions = {
 export const initialState = fromJS({
   data: {},
   audienceContentVitalityScoreData: {
-    data: [],
+    data: {
+      data: {},
+    },
     loading: false,
     error: null,
   },
@@ -197,7 +199,7 @@ const audienceReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR:
       return state
-        .setIn(['audienceContentVitalityScoreData', 'data'], fromJS([]))
+        .setIn(['contentVitalityScoreData', 'data'], fromJS({ data: {} }))
         .setIn(
           ['audienceContentVitalityScoreData', 'error'],
           fromJS(action.error)
