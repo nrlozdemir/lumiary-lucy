@@ -1,5 +1,5 @@
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
-import { selectAuthProfile } from 'Reducers/auth'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
 import moment from 'moment'
 
@@ -21,7 +21,7 @@ import { dayOfWeek, chartColors } from 'Utils/globals'
 
 function* getVideoReleasesData({ data }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
     const { platform, dateRange, metric } = data
 
     const options = {
@@ -39,10 +39,59 @@ function* getVideoReleasesData({ data }) {
       'GET'
     )
 
+    // console.log(JSON.stringify(percentageManipulation(convertVideoEngagementData(response, metric)), null, 4))
+
+    const propertyMap = Object.keys(response).reduce((accumulator, key) => {
+      if(!accumulator[key]) {
+        accumulator[key] = {
+          metric,
+          maxVideo: 0,
+          maxEngagement: 0,
+          label: key,
+          labels: [],
+          datasets: [
+            {
+              data: [],
+              label: 'Videos',
+              backgroundColor: '#2FD7C4',
+              display: false
+            },
+            {
+              data: [],
+              label: 'Engagement',
+              backgroundColor: '#5292E5',
+            },
+          ],
+        }
+      }
+
+      const videos = response[key]
+      const engagement = response[key][metric]
+
+      for(let i = 0; i < 7; i++) {
+        const weekday = moment().subtract(i, 'days').format('dddd')
+        const weekdayShort = moment().subtract(i, 'days').format('dd')[0]
+
+        if(videos[weekday] > accumulator[key].maxVideo) {
+          accumulator[key].maxVideo = videos[weekday]
+        }
+
+        if(engagement[weekday] > accumulator[key].maxEngagement) {
+          accumulator[key].maxEngagement = engagement[weekday]
+        }
+
+        accumulator[key].labels.unshift(weekdayShort)
+        accumulator[key].datasets[0].data.unshift(videos[weekday])
+        accumulator[key].datasets[1].data.unshift((engagement[weekday] === 0 ? 0 : engagement[weekday] * -1))
+      }
+  
+      return accumulator
+    }, {})
+
     if (!!response) {
       yield put(
         actions.getVideoReleasesDataSuccess(
-          percentageManipulation(convertVideoEngagementData(response, metric))
+          Object.values(propertyMap).reverse()
         )
       )
     } else {
@@ -57,7 +106,7 @@ function* getColorTemperatureData({ data }) {
   try {
     const { dateRange, colorTemperature } = data
 
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const response = yield call(
       getDataFromApi,
@@ -86,7 +135,7 @@ function* getColorTemperatureData({ data }) {
 
 function* getFilteringSectionData({ data }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const { property, metric, platform, dateRange } = data
 
@@ -162,7 +211,7 @@ function* getFilteringSectionData({ data }) {
 
 function* getPacingCardData({ data }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const { metric, dateRange, platform } = data
 
@@ -201,6 +250,7 @@ function* getPacingCardData({ data }) {
           stadiumData: percentageManipulation(
             convertDataIntoDatasets(stadiumData, options)
           ),
+          horizontalStackedBarDataOriginal: horizontalStackedBarData.data[brand.name].pacing,
           horizontalStackedBarData: convertDataIntoDatasets(
             horizontalStackedBarData,
             {
@@ -223,7 +273,7 @@ function* getPacingCardData({ data }) {
 
 function* getCompareSharesData({ data: { dateRange } }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     // TODO: We need change parameters when to do multiple select filter (Shares on Facebook & YouTube)
     const parameters = {
@@ -236,14 +286,28 @@ function* getCompareSharesData({ data: { dateRange } }) {
     }
 
     const payload = yield all([
-      call(getDataFromApi, {
-        ...parameters,
-        platform: 'facebook',
-      }),
-      call(getDataFromApi, {
-        ...parameters,
-        platform: 'youtube',
-      }),
+      call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl('/color', { 
+          brandUuid: brand.uuid, 
+          platform: 'facebook',
+          daterange: 'month',
+          metric: 'views',
+        }),
+        'GET'
+      ),
+      call(
+        getDataFromApi,
+        undefined,
+        buildApiUrl('/color', { 
+          brandUuid: brand.uuid, 
+          platform: 'youtube',
+          daterange: 'month',
+          metric: 'views',
+        }),
+        'GET'
+      ),
     ])
 
     yield put(
@@ -260,7 +324,7 @@ function* getCompareSharesData({ data: { dateRange } }) {
 
 function* getFlipCardsData() {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const metrics = yield call(
       getDataFromApi,
@@ -284,7 +348,7 @@ function* getFlipCardsData() {
           )
 
           return {
-            [metric]: {
+            [metric.substring(0, metric.length - 1)]: {
               percentage: metrics[metric].changeOverPrevious || 0,
               data: normalized,
               originalData: data,
@@ -309,7 +373,7 @@ function* getFlipCardsData() {
 
 function* getTopPerformingFormatData({ data = {} }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const { platform = 'all', metric = 'views' } = data
     const options = {
@@ -344,7 +408,6 @@ function* getTopPerformingFormatData({ data = {} }) {
     )
 
     if (payload) {
-      console.log(payload)
       // const doughnutData = percentageManipulation(payload)
       // const properties = ['Fast', 'Medium', 'Slow', 'Slowest']
       // const datasets = properties.map((property, idx) => ({
@@ -379,6 +442,7 @@ function* getTopPerformingFormatData({ data = {} }) {
           label,
         })
 
+        const nonGreyChartColors = ["#2FD7C4", "#8562F3", "#5292E5", "#ff556f"]
         Object.keys(payload.dates[weekday]).forEach((propertyBucket, idx) => {
           if(!propertyBuckets[propertyBucket]) {
             propertyBuckets[propertyBucket] = {

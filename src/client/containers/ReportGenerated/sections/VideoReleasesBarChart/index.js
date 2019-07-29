@@ -1,8 +1,23 @@
 import React from 'react'
 import VideoReleasesBarChartModule from 'Components/Modules/VideoReleasesBarChartModule'
 import { isDataSetEmpty } from 'Utils/datasets'
+import { isEmpty, isEqual } from 'lodash'
 
 class VideoReleasesBarChart extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    const {
+      data: { data, loading },
+    } = this.props
+    const {
+      data: { data: nextData, loading: nextLoading },
+    } = nextProps
+
+    return (
+      (data && !isEqual(JSON.stringify(data), JSON.stringify(nextData))) ||
+      loading !== nextLoading
+    )
+  }
+
   componentDidMount() {
     const { action, report } = this.props
     action({ report })

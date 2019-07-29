@@ -3,7 +3,7 @@ import axios from 'axios'
 import { actions, types } from 'Reducers/audience'
 import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
-import { selectAuthProfile } from 'Reducers/auth'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
@@ -19,7 +19,7 @@ function* getAudienceContentVitalityScoreData({ payload = {} }) {
   const { platform, metric, dateRange } = payload
 
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const response = yield call(
       getDataFromApi,
@@ -50,7 +50,7 @@ function* getAudiencePerformanceData({ payload = {} }) {
   const { platform, metric, property, dateRange, min = 0, max = 100 } = payload
 
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const response = yield call(
       getDataFromApi,
@@ -94,7 +94,7 @@ function* getAudienceAgeSliderData({ payload = {} }) {
   const fallBack = ages.map((a) => ({ age: a, loading: false, image: null }))
 
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     if (!!ages.length) {
       const response = yield call(
@@ -126,7 +126,7 @@ function* getAudienceGenderData({ payload = {} }) {
   const { property, metric, dateRange } = payload
 
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const response = yield call(
       getDataFromApi,
@@ -191,7 +191,7 @@ function* getAudienceChangeOverTimeData({ payload = {} }) {
   const { property, platform, metric, dateRange } = payload
 
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const response = yield call(
       getDataFromApi,
@@ -217,7 +217,7 @@ function* getAudienceChangeOverTimeData({ payload = {} }) {
 
 function* getAudienceDominantColorData({ data: { dateRange, metric } }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const parameters = {
       metric,

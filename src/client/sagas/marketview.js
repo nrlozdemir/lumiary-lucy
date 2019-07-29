@@ -3,7 +3,7 @@ import { takeLatest, call, put, all, select } from 'redux-saga/effects'
 import axios from 'axios'
 import _ from 'lodash'
 import { types, actions } from 'Reducers/marketview'
-import { selectAuthProfile } from 'Reducers/auth'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 import querystring from 'querystring'
 import {
   ucfirst,
@@ -67,7 +67,7 @@ function* getCompetitorTopVideosMarketview(payload) {
     data: { property, metric, dateRange },
   } = payload
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const competitors =
       !!brand.competitors &&
@@ -119,7 +119,7 @@ function* getPlatformTopVideosMarketview({
   data: { property, metric, dateRange },
 }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     let options = {
       metric,
@@ -171,7 +171,7 @@ function* getPlatformTopVideosMarketview({
 
 function* getSimilarProperties({ data: { dateRange, container } }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
     const metric = 'shares'
 
     const competitors =
@@ -239,7 +239,7 @@ function* getSimilarProperties({ data: { dateRange, container } }) {
 
 function* getBubbleChartData() {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const competitors =
       !!brand.competitors &&
@@ -320,7 +320,7 @@ function* getBubbleChartData() {
 
 function* getPacingChartData() {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
     const metric = 'shares'
 
     const competitors =
@@ -358,7 +358,7 @@ function* getPacingChartData() {
 
 function* getFormatChartData() {
   try {
-    const profile = yield select(selectAuthProfile)
+    const profile = yield select(makeSelectAuthProfile())
     const competitors = getBrandAndCompetitors(profile)
 
     const options = {
@@ -441,7 +441,7 @@ function* getTotalViewsData({ data }) {
   try {
     const { metric, dateRange, platform } = data
 
-    const profile = yield select(selectAuthProfile)
+    const profile = yield select(makeSelectAuthProfile())
     const competitors = getBrandAndCompetitors(profile)
 
     const url = buildApiUrl(`/metric/totals`, {
@@ -516,7 +516,7 @@ function* getTotalViewsData({ data }) {
 
 function* getTotalCompetitorViewsData() {
   try {
-    const profile = yield select(selectAuthProfile)
+    const profile = yield select(makeSelectAuthProfile())
     const competitors = getBrandAndCompetitors(profile)
     const options = {
       metric: 'views',
@@ -526,13 +526,15 @@ function* getTotalCompetitorViewsData() {
       property: ['duration'],
       brands: [...competitors],
     }
-    const payload = yield call(getDataFromApi, { ...options }, '/report')
 
+    const payload = yield call(getDataFromApi, { ...options }, '/report')
+    
     if (!!payload) {
       yield put(
         actions.getTotalCompetitorViewsSuccess(
           percentageManipulation(
             convertDataIntoDatasets(payload, options, {
+              useBrands: true,
               customKeys: Object.keys(payload.data),
             })
           )
@@ -548,7 +550,7 @@ function* getTopPerformingPropertiesData({
   payload: { property, metric, dateRange },
 }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const options = {
       metric,
@@ -596,7 +598,7 @@ function* getTopPerformingPropertiesByCompetitorsData({
   payload: { dateRange = 'week', property },
 }) {
   try {
-    const profile = yield select(selectAuthProfile)
+    const profile = yield select(makeSelectAuthProfile())
     const competitors = getBrandAndCompetitors(profile)
 
     if (!!property) {
@@ -655,7 +657,7 @@ function* getTopPerformingPropertiesByTimeData({
   payload: { property, dateRange },
 }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const dateBucket = getDateBucketFromRange(dateRange)
 

@@ -145,19 +145,19 @@ export const initialState = fromJS({
   selectedVideo: null,
 
   pacingChartData: {
-    data: null,
+    data: {},
     loading: true,
     error: null,
   },
 
   topVideosCard: {
-    data: null,
+    data: {},
     loading: true,
     error: null,
   },
 
   topPerformingVideos: {
-    data: null,
+    data: {},
     loading: true,
     error: null,
     selectedVideo: null,
@@ -229,7 +229,7 @@ const generatedReportsReducer = (state = initialState, action) => {
 
     case types.GET_PACING_CARD_DATA_FAILURE:
       return state
-        .setIn(['pacingChartData', 'data'], fromJS(null))
+        .setIn(['pacingChartData', 'data'], fromJS({}))
         .setIn(['pacingChartData', 'error'], fromJS(action.error))
         .setIn(['pacingChartData', 'loading'], fromJS(false))
 

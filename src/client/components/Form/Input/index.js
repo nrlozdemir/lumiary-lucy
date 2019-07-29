@@ -5,12 +5,20 @@ import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 /* eslint-disable react/prefer-stateless-function */
-const Input = ({ error, value, label, placeholder, customClass, input }) => {
-  // inputBackground
-  // inputBorder
-  // inputActiveBorder
-  // inputColor
-  // inputPlaceholderColor
+const Input = (props) => {
+  const {
+    value,
+    type,
+    label,
+    placeholder,
+    customClass,
+    input,
+    required,
+    style: customStyle,
+    hasError,
+    meta: { touched, error, warning },
+  } = props
+
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => {
@@ -33,9 +41,12 @@ const Input = ({ error, value, label, placeholder, customClass, input }) => {
             ) : null}
             <input
               id={label}
+              type={type || 'text'}
               className={cx}
               placeholder={placeholder}
               value={value}
+              {...(required ? { required: true } : {})}
+              {...(customStyle ? { style: customStyle } : {})}
               {...input}
             />
           </div>

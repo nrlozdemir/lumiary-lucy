@@ -29,32 +29,43 @@ const getWeekDays = (locale) => {
 const days = getWeekDays('en-US').reverse()
 
 function parseData(props) {
-  const { data, title } = props
+  const { data, title, originalData } = props
   const stats = data.data.map((el, i) => ({ label: days[i], score: el }))
   const selected = days[days.length - 1]
-  const selectedPrev = days[days.length - 2]
-  const statSelected = Object.values(stats).filter(
-    (day) => stats && day.label === selected
-  )
-  const statSelectedPrev = Object.values(stats).filter(
-    (day) => stats && day.label === selectedPrev
-  )
-  const todayScore = statSelected[0].score
-  const previousDayScore = statSelectedPrev[0].score
-  const statDifference = data.percentage
+  // const selectedPrev = days[days.length - 2]
+  // const statSelected = Object.values(stats).filter(
+  //   (day) => stats && day.label === selected
+  // )
+  // const statSelectedPrev = Object.values(stats).filter(
+  //   (day) => stats && day.label === selectedPrev
+  // )
+  // const todayScore = statSelected[0].score
+  // const previousDayScore = statSelectedPrev[0].score
+  // const statDifference = data.percentage
 
   let statArrowClassName, statClassName, tooltipText
+
+  // Increase = New Number - Original Number
+  // % increase = Increase ÷ Original Number × 100
+
+  // Decrease = Original Number - New Number
+  // % Decrease = Decrease ÷ Original Number × 100
+  const today = (originalData.originalData[originalData.originalData.length - 1] === 0) ? 1 : originalData.originalData[originalData.originalData.length - 1]
+  const yesterday = (originalData.originalData[originalData.originalData.length - 2] === 0) ? 1 : originalData.originalData[originalData.originalData.length - 2]
+  const statDifference = (today > yesterday) 
+    ? ((today - yesterday) / yesterday) * 100
+    : ((yesterday - today) / today) * -100
   
-  if (data.percentage == 0) {
+  if (statDifference == 0) {
     const titleLowerCase = title.charAt(0).toLowerCase() + title.slice(1)
     statArrowClassName = classnames(styles.arrow, styles.arrowRight)
     statClassName = classnames(styles.stats, styles.noChange)
     tooltipText = `No change in ${titleLowerCase} in the last 24 hours`
   } else {
-    const changeWording = (data.percentage > 0) ? 'increased' : 'decreased'
-    const arrowStyle = (data.percentage > 0) ? styles.arrowUp : styles.arrowDown
-    const statStyle = (data.percentage > 0) ? styles.increase : styles.decrease
-    const formattedPercent = parseInt(data.percentage).toFixed(1).toLocaleString()
+    const changeWording = (statDifference > 0) ? 'increased' : 'decreased'
+    const arrowStyle = (statDifference > 0) ? styles.arrowUp : styles.arrowDown
+    const statStyle = (statDifference > 0) ? styles.increase : styles.decrease
+    const formattedPercent = parseInt(statDifference).toFixed(1).toLocaleString()
 
     statArrowClassName = classnames(styles.arrow, arrowStyle)
     statClassName = classnames(styles.stats, statStyle)

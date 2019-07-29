@@ -1,11 +1,23 @@
 import React from 'react'
 import ColorTemperatureModule from 'Components/Modules/ColorTemperatureModule'
+import { isEmpty, isEqual } from 'lodash'
 
 import style from './style.scss'
 
 import { platforms } from './options'
 
 class ColorTemperature extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    const {
+      data: { data },
+    } = this.props
+    const {
+      data: { data: nextData },
+    } = nextProps
+
+    return data && !isEqual(JSON.stringify(data), JSON.stringify(nextData))
+  }
+
   callBack = (data) => {
     const { action, report } = this.props
     action({ ...data, report })

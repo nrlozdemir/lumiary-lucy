@@ -2,7 +2,7 @@ import qs from 'qs'
 import { ajax } from 'Utils/api'
 import { takeLatest, call, put, select } from 'redux-saga/effects'
 import { types, actions, makeSelectVideoFilters } from 'Reducers/library'
-import { selectAuthProfile } from 'Reducers/auth'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 
 import { percentageManipulation } from 'Utils/datasets'
 
@@ -26,7 +26,7 @@ function getLibraryDataApi(vals, brand_id) {
 function* getVideos(values) {
   const page = values && values.payload && values.payload.page
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
     const filters = yield select(makeSelectVideoFilters())
     const body = getBodyFromFilters(filters)
 
@@ -35,7 +35,7 @@ function* getVideos(values) {
       page: page || 1,
       body,
     }
-    
+
     const payload = yield call(getLibraryDataApi, options, brand.uuid)
 
     yield put(actions.loadVideosSuccess(percentageManipulation(payload)))
@@ -150,7 +150,7 @@ function* changeFilter() {
   try {
     const filters = yield select(makeSelectVideoFilters())
     const body = getBodyFromFilters(filters)
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const options = {
       limit: 16,
