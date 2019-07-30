@@ -460,7 +460,14 @@ const getModuleTerms = (key, data) => {
     })
 }
 
+const sortObject = (o = {}, reverse = false) => {
+  const sortedKeys = Object.keys(o).sort()
+  const keysToUse = reverse ? sortedKeys.reverse() : sortedKeys
+  return keysToUse.reduce((r, k) => ((r[k] = o[k]), r), {})
+}
+
 export {
+  sortObject,
   randomKey,
   socialIconSelector,
   toSlug,
