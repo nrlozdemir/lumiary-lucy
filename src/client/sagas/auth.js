@@ -1,9 +1,11 @@
 import qs from 'qs'
 import { types } from 'Reducers/auth'
+import { actions } from 'Reducers/app'
+
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import axios from 'axios'
-import { ajax, buildQApiUrl } from 'Utils/api'
+import { ajax, buildQApiUrl, getDataFromApi } from 'Utils/api'
 import authMockData from 'Api/mocks/authMock.json'
 
 const VALIDATE_SSO = '/auth/sso/validate'
@@ -39,6 +41,13 @@ export function* authorize({ email, password }) {
     const payload = yield call(getAuthDataApi, 'login', { email, password })
 
     if (payload.status === 'success') {
+      const response = yield call(
+        getDataFromApi,
+        {},
+        buildQApiUrl(`/glossary/26e8b71a-b1df-4542-8784-99e7b6a7b795`),
+        'GET'
+      )
+      yield put(actions.getSectionExplanationsSuccess(response))
       yield put({ type: types.LOGIN_SUCCESS, payload })
     } else {
       yield put({ type: types.LOGIN_ERROR, payload: payload })
