@@ -331,11 +331,11 @@ class Routes extends React.Component {
         !Object.keys(sectionsStore).length ||
         (Object.keys(sectionsStore).length && !sectionsStore.data)
       ) {
-        getSectionExplanationsRequest()
+        !!profile && getSectionExplanationsRequest()
       }
 
       if (!Object.keys(profileStore).length && !profile) {
-        getProfileRequest({ userId: user.id, token: user.token })
+        getProfileRequest({ token: user.token })
       }
     }
 

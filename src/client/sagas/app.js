@@ -2,19 +2,25 @@ import { call, put, takeEvery } from 'redux-saga/effects'
 
 import { actions, types } from 'Reducers/app'
 import { buildQApiUrl, getDataFromApi } from 'Utils/api'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 
 function* getSectionExplanations() {
   try {
-    const response = yield call(
-      getDataFromApi,
-      {},
-      buildQApiUrl(`/glossary/26e8b71a-b1df-4542-8784-99e7b6a7b795`),
-      'GET'
-    )
+    const { brand } = yield select(makeSelectAuthProfile())
+
+    if (!!brand && !!brand.uuid) {
+      const response = yield call(
+        getDataFromApi,
+        {},
+        buildQApiUrl(`/glossary/${brand.uuid}`),
+        'GET'
+      )
+    }
+
     yield put(actions.getSectionExplanationsSuccess(response))
   } catch (err) {
     console.error('err', err)
-    yield put(actions.getSectionExplasnationsFailure(err))
+    yield put(actions.getSectionExplanationsFailure(err))
   }
 }
 
