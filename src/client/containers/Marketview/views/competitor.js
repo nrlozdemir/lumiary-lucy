@@ -87,9 +87,9 @@ export class Competitor extends React.Component {
           moduleKey="MarketView/Competitor/TopPerformingProperty"
           filters={[
             {
-              type: 'dateRange',
-              selectKey: 'dateRange',
-              placeHolder: 'dateRange',
+              type: 'property',
+              selectKey: 'sakdlfjlasdjf-property',
+              placeHolder: 'Property',
             },
           ]}
           container="competitor"
