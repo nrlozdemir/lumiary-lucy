@@ -18,6 +18,7 @@ import {
 } from 'Reducers/reports'
 
 import { actions as generatedReportActions } from 'Reducers/generatedReport'
+import { actions as authActions } from 'Reducers/auth'
 
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
@@ -334,8 +335,16 @@ const Selector = (props) => {
 }
 
 const Template = (props) => {
+  const navigation = props && props.routeConfig
+  if (
+    Object.values(navigation).find(
+      (r) => r.path == props.match.path && r.navbarOff
+    )
+  ) {
+    return null
+  }
   const templateSelector = Selector(props)
-  const { profile = {} } = props
+  const { profile = {}, logoutRequest } = props
   const { brand = {} } = profile
   const { avatar } = brand
   const { textColor, moduleBackground, moduleShadow } = props.themes
@@ -350,13 +359,13 @@ const Template = (props) => {
       <div className={containerClass}>
         {templateSelector['leftSide']}
         <div className={linksClass}>{templateSelector['navigation']}</div>
-        {templateSelector['removeDropdown'] ? null : (
-          <div className={profileClass}>
-            <div className="float-right">
-              <Dropdown avatar={avatar} />
-            </div>
+        <div className={profileClass}>
+          <div className="float-right">
+            <Dropdown avatar={avatar} logout={logoutRequest} />
+
+            {/*<span>Bleacher Report</span>*/}
           </div>
-        )}
+        </div>
       </div>
     </header>
   )
@@ -517,6 +526,7 @@ const mapDispatchToProps = (dispatch) => {
       {
         ...reportsActions,
         ...generatedReportActions,
+        ...authActions,
       },
       dispatch
     ),

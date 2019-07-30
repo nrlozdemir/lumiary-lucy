@@ -197,6 +197,43 @@ const dark = {
   letterBorder: '#acb0be',
   deactiveLetter: '#21243b',
   sidebarBackgroundColor: '#545b79',
+  // Account Pages
+  account: {
+    h1: {
+      color: '#ffffff',
+    },
+    p: {
+      color: '#ffffff',
+    },
+    link: {
+      color: '#ffffff',
+    },
+    card: {
+      borderColor: '#545b79',
+      backgroundColor: '#373f5b',
+      boxShadow: '0 5px 10px 0 rgba(0, 0, 0, 0.5)',
+    },
+    input: {
+      backgroundColor: '#21243b',
+      color: '#fff',
+    },
+    list: {
+      item: {
+        borderColor: '#545b79',
+        backgroundColor: '#21243b',
+      },
+      icon: {
+        backgroundColor: '#ffffff',
+        color: '#21243b',
+      },
+      text: {
+        color: '#ffffff',
+      },
+      checkIcon: {
+        backgroundColor: '#acb0be',
+      },
+    },
+  },
 }
 
 const light = {
@@ -398,6 +435,42 @@ const light = {
   letterBorder: '#c6c9d7',
   deactiveLetter: '#e8ecf0',
   sidebarBackgroundColor: '#f3f6f9',
+  // Account Pages
+  account: {
+    h1: {
+      color: '#505050',
+    },
+    p: {
+      color: '#acb0be',
+    },
+    link: {
+      color: '#505050',
+    },
+    card: {
+      borderColor: '#acb0be',
+      backgroundColor: '#f3f6f9',
+      boxShadow: '0 5px 10px 0 #bebebe',
+    },
+    input: {
+      backgroundColor: '#e8ecf0',
+    },
+    list: {
+      item: {
+        borderColor: '#acb0be',
+        backgroundColor: '#e8ecf0',
+      },
+      icon: {
+        backgroundColor: '#505050',
+        color: '#ffffff',
+      },
+      text: {
+        color: '#505050',
+      },
+      checkIcon: {
+        backgroundColor: '#acb0be',
+      },
+    },
+  },
 }
 
 const themes = {

@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import isEmpty from 'lodash/isEmpty'
 import qs from 'qs'
-
+import { push } from 'connected-react-router'
 
 import { actions } from 'Reducers/auth'
 
@@ -17,17 +17,18 @@ import { actions } from 'Reducers/auth'
 // Components
 
 class SSO extends React.PureComponent {
-
   componentDidMount() {
-   const {location, loginSsoRequest} = this.props
+    const { location, loginSsoRequest } = this.props
+    const { push } = this.props
 
-   const { sso }  = qs.parse(location.search, {
-    ignoreQueryPrefix: true
-  })
- 
+    const { sso } = qs.parse(location.search, {
+      ignoreQueryPrefix: true,
+    })
+
     if (sso) {
       loginSsoRequest(sso)
-    } 
+      push('/library')
+    }
   }
 
   render() {
@@ -50,6 +51,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => ({
+  push: (url) => dispatch(push(url)),
   ...bindActionCreators({ ...actions }, dispatch),
 })
 

@@ -84,6 +84,7 @@ const VideoReleasesBarChartModule = (props) => {
 
   if (!data) return false
 
+  const metric = (data[0]) ? data[0].metric || 'engagement' : 'engagement'
   const maxSteps =
     !!data &&
     !!data.length &&
@@ -140,7 +141,7 @@ const VideoReleasesBarChartModule = (props) => {
         label: function(tooltipItem) {
           const value = Math.abs(tooltipItem.yLabel)
           if (tooltipItem.yLabel < 0) {
-            return `${~~(value / 1000)}${value >= 1000 ? 'k' : ''} Likes`
+            return `${~~(value / 1000)}${value >= 1000 ? 'k' : ''} ${metric.charAt(0).toUpperCase() + metric.slice(1)}`
           }
           return `${Math.round(value / videoNormalizer)} Videos`
         },

@@ -17,7 +17,7 @@ const PacingCardModule = ({
   legend,
   loading = false,
 }) => {
-  const { horizontalStackedBarData = {}, stadiumData } = data
+  const { horizontalStackedBarData = {}, stadiumData, horizontalStackedBarDataOriginal = {} } = data
 
   for (const _data of (horizontalStackedBarData &&
     horizontalStackedBarData.datasets) ||
@@ -52,13 +52,15 @@ const PacingCardModule = ({
             width={500}
             height={340}
             barData={horizontalStackedBarData}
+            stadiumValues={stadiumValues}
+            horizontalStackedBarDataOriginal={horizontalStackedBarDataOriginal}
             values={horizontalBarChartValues}
             options={barChartOptions}
-            datasetsIsEmpty={isDataSetEmpty(horizontalStackedBarData)}
+            datasetsIsEmpty={!loading && isDataSetEmpty(horizontalStackedBarData)}
           />
           <StadiumChart
             data={stadiumValues}
-            datasetsIsEmpty={isDataSetEmpty(stadiumData)}
+            datasetsIsEmpty={!loading && isDataSetEmpty(stadiumData)}
           />
         </MultipleNoDataModule>
       </div>

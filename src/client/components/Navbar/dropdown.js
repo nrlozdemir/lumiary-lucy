@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { Link } from 'react-router-dom'
 import style from './style.scss'
 import classnames from 'classnames'
 import { withTheme } from 'ThemeContext/withTheme'
@@ -38,7 +39,7 @@ class Dropdown extends Component {
 
   render() {
     const { switchOn } = this.state
-    const { avatar } = this.props
+    const { avatar, logout } = this.props
     const { status, colors } = this.props.themeContext
     const imageClass = classnames('circleImage ' + style.profileImage)
 
@@ -77,6 +78,11 @@ class Dropdown extends Component {
               </li>
               <li>
                 <p className={style.text}>Support</p>
+              </li>
+              <li>
+                <p onClick={() => logout()} className={style.text}>
+                  Logout
+                </p>
               </li>
             </ul>
           </div>

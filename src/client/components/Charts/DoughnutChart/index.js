@@ -6,6 +6,7 @@ import { withTheme } from 'ThemeContext/withTheme'
 import { isDataSetEmpty } from 'Utils/datasets'
 import { ucfirst } from 'Utils'
 import ToolTip from 'Components/ToolTip'
+import { customChartToolTip } from 'Utils'
 
 import Labels from 'Components/Charts/Labels'
 import { roundRect } from 'Utils/ui'
@@ -38,9 +39,9 @@ const defaultProps = {
 }
 const dataLabelPlugins = (value, func, item) => {
   if (func == 'insertAfter') {
-    return value + '' + item
+    return value > 0 ? value + '' + item : ''
   } else if (func == 'insertBefore') {
-    return item + '' + value
+    return value > 0 ? item + '' + value : ''
   }
   return value
 }
@@ -178,9 +179,11 @@ class DoughnutChart extends React.Component {
                           !!newData &&
                           !!newData.datasets &&
                           !!newData.datasets[0]
-                            ? newData.datasets[0].data.map((value) =>
-                                parseFloat(value)
-                              )
+                            ? newData.datasets[0].data.map((value) => {
+                                const val = parseFloat(value)
+                                if (val <= 5) return null
+                                return val
+                              })
                             : [],
                         backgroundColor:
                           newData && newData.datasets
@@ -198,9 +201,13 @@ class DoughnutChart extends React.Component {
                   plugins={plugins}
                   options={{
                     responsive: false,
-                    tooltips: {
-                      enabled: false,
-                    },
+                    tooltips: customChartToolTip(
+                      themes,
+                      {
+                        mode: 'dataset',
+                      },
+                      newData
+                    ),
                     legend: {
                       display: legend,
                       labels: {
@@ -216,6 +223,7 @@ class DoughnutChart extends React.Component {
                       datalabels: {
                         display: displayDataLabels,
                         formatter: (value) => {
+                          if (!value) return
                           if (dataLabelFunction) {
                             return dataLabelPlugins(
                               value,

@@ -57,13 +57,16 @@ class TopPerformingFormat extends React.Component {
     const isLineChartEmpty = isDataSetEmpty(lineChartData)
 
     const hasNoData =
-      !loading && ((!!lineChartData && isLineChartEmpty) || isEmpty(data))
+      !loading &&
+      ((!!lineChartData && isLineChartEmpty) || isEmpty(data)) &&
+      isEmpty(properties)
+
     return (
       <LineAndDoughnutChartModule
         moduleKey="Panoptic/TopPerformingPacingThisWeekByCVScore"
         title="Top Performing Pacing This Week By CV Score"
         action={this.callBack}
-        lineChartData={lineChartData}
+        lineChartData={!loading ? lineChartData : {}}
         lineChartOptions={lineChartOptions}
         customCallbackFunc={this.customCallbackFunc}
         filters={[
@@ -74,7 +77,7 @@ class TopPerformingFormat extends React.Component {
           },
         ]}
         platform={platform}
-        properties={properties}
+        properties={!loading ? properties : {}}
         average={average}
         isEmpty={hasNoData}
         loading={loading}

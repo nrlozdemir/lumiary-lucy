@@ -49,8 +49,8 @@ class MainContentArea extends Component {
             </div>
           )}
           {letter
-            ? content[letter] &&
-              content[letter].map((item, index) => {
+            ? 
+            [...(menu ? content : content[letter])].map((item, index) => {
                 return (
                   <div
                     id={`content-${item.slug}`}

@@ -29,28 +29,43 @@ class Glossary extends Component {
     }
 
     let menuName
+    let contents
+
+    const newContentArray = []
+    Object.keys(letters).forEach(letter => {
+      letters[letter].forEach(item => {
+          newContentArray.push({ ...item, letter })
+      })
+    })
     if (term) {
       switch (pathname) {
         case '/glossary/p/properties':
           menuName = 'Properties'
+           contents = newContentArray.filter((item) => item.tags.map(tag => tag.slug).includes('property'))
           break
         case '/glossary/f/formats':
           menuName = 'Formats'
+          contents = newContentArray.filter((item) => item.tags.map(tag => tag.slug).includes('format'))
+
           break
         case '/glossary/p/pages':
           menuName = 'Pages'
+          contents = newContentArray.filter((item) => item.tags.map(tag => tag.slug).includes('page'))
+
           break
         default:
           menuName = null
+          contents = letters
       }
     }
+
 
     return (
       <div className="grid-container col-12">
         <Letterbar content={letters} />
         <div className={style.glossaryBodyContainer}>
-          <Sidebar letter={letter} content={letters} term={term} />
-          <MainContentArea content={letters} menu={menuName} letter={letter} term={term} />
+          <Sidebar letter={letter} content={letters} term={term} menuContent={menuName && contents} />
+          <MainContentArea content={contents || letters} menu={menuName} letter={letter} term={term} />
         </div>
       </div>
     )

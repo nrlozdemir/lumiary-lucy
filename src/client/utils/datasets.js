@@ -43,6 +43,7 @@ import {
     customKeys: array,
     customValueKey: string - custom key of data object (value default)
     compareBrands: bool - should be true if being used in compareBrands
+    useBrands: bool - map through brandKeys instead of values
   }
   *
  */
@@ -51,6 +52,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   const {
     hoverBG,
     isMetric,
+    useBrands,
     borderWidth,
     noBrandKeys,
     singleDataset,
@@ -172,6 +174,9 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     labels
 
   datasetsFromValues = preparedDatasets || datasetsFromValues
+
+  getValueinObject = useBrands ? brands : getValueinObject
+
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
@@ -710,7 +715,7 @@ const convertNumberArrIntoPercentages = (arr = []) => {
 const percentageBeautifier = (value, precision) => {
   /*
   // all numbers converted to decimals
-  // except 0 
+  // except 0
   if (value === 0) {
     return value
   }
@@ -788,38 +793,36 @@ const percentageManipulation = (bucket) => {
  */
 
 const getCVScoreChartAttributes = (data, maxPercent) => {
-  maxPercent = (maxPercent !== undefined) 
-    ? maxPercent 
-    : (!!data &&
-        Object.keys(data).reduce((accumulator, key) => {
-          const videoPercents = data[key].videoPercents
-          const maxPercentInSet = Math.max(
-            videoPercents ? videoPercents : data[key]
-          )
-          return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
-        }, 0)) || 0
+  maxPercent =
+    maxPercent !== undefined
+      ? maxPercent
+      : (!!data &&
+          Object.keys(data).reduce((accumulator, key) => {
+            const videoPercents = data[key].videoPercents
+            const maxPercentInSet = Math.max(
+              videoPercents ? videoPercents : data[key]
+            )
+            return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
+          }, 0)) ||
+        0
 
-  
   // const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
   // const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
 
-  const chartYAxisMax = maxPercent < 50 
-  ? maxPercent < 33 
-    ? maxPercent < 25 
-      ? maxPercent < 20 
-        ? maxPercent < 15 
-          ? 15 
-          : 20
-        : 25 
-      : 33 
-    : 50 
-  : 100
+  const chartYAxisMax =
+    maxPercent < 50
+      ? maxPercent < 33
+        ? maxPercent < 25
+          ? maxPercent < 20
+            ? maxPercent < 15
+              ? 15
+              : 20
+            : 25
+          : 33
+        : 50
+      : 100
   const chartYAxisStepSize = chartYAxisMax / 4
-console.log({
-  data,
-  chartYAxisMax,
-  chartYAxisStepSize,
-})
+
   return {
     chartYAxisMax,
     chartYAxisStepSize,

@@ -12,6 +12,7 @@ import style from 'Containers/Marketview/style.scss'
 import formatStyles from './style.scss'
 import RouterLoading from 'Components/RouterLoading'
 import { isEmpty } from 'lodash'
+import { metricSuffix } from 'Utils'
 
 class FormatCard extends Component {
   componentDidMount() {
@@ -118,7 +119,7 @@ class FormatCard extends Component {
                       <span className={this.iconClass(i)} />
                     </div>
                     <div className={formatStyles.formatItemText}>
-                      <span>{item.count}</span>
+                      <span>{metricSuffix(item.count)}</span>
                       <span>{item.name}</span>
                       <span>Categories</span>
                     </div>
