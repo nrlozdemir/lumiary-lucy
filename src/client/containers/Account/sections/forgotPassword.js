@@ -85,9 +85,6 @@ class ForgotPassword extends Component {
           }
         >
           <div className={style.info}>
-            <div className={style.image}>
-              <img src="https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png" />
-            </div>
             <h1 style={colors.account.h1 || {}}>Forgot Password?</h1>
           </div>
 
