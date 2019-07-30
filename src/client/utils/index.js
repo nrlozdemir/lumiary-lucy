@@ -389,7 +389,7 @@ const getBrandAndCompetitorsFromProfileObject = (profile, brand_id) => {
 
     if (!!foundBrand) {
       if (!foundBrand.competitors) {
-        foundBrand.competitors = []
+        foundBrand.competitors = foundBrand.related ? foundBrand.related : []
       }
       response = foundBrand
     }
@@ -398,7 +398,7 @@ const getBrandAndCompetitorsFromProfileObject = (profile, brand_id) => {
   return response
 }
 
-const customChartToolTip = (themes, customOptions = {}) => {
+const customChartToolTip = (themes, customOptions = {}, forceData) => {
   return {
     backgroundColor: themes.tooltipBackground,
     cornerRadius: 6,
@@ -414,13 +414,14 @@ const customChartToolTip = (themes, customOptions = {}) => {
     callbacks: {
       title: () => '',
       label: function(tooltipItem, data) {
+        const datas = forceData || data
         const count =
-          (data &&
-            data.datasets &&
-            data.datasets[0] &&
-            data.datasets[0].data[tooltipItem['index']]) ||
+          (datas &&
+            datas.datasets &&
+            datas.datasets[0] &&
+            datas.datasets[0].data[tooltipItem['index']]) ||
           ''
-        const name = data && data.labels && data.labels[tooltipItem['index']]
+        const name = datas && datas.labels && datas.labels[tooltipItem['index']]
         return `${count || 0}% ${!!name && `| ${name}`}`
       },
     },

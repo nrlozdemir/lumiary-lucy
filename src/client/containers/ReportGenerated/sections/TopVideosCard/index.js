@@ -1,7 +1,22 @@
 import React from 'react'
 import TopVideosCardModule from 'Components/Modules/TopVideosCardModule'
+import { isEmpty, isEqual } from 'lodash'
 
 class TopVideosCard extends React.Component {
+  shouldComponentUpdate(nextProps) {
+    const {
+      data: { data, loading },
+    } = this.props
+    const {
+      data: { data: nextData, loading: nextLoading },
+    } = nextProps
+
+    return (
+      (data && !isEqual(JSON.stringify(data), JSON.stringify(nextData))) ||
+      loading !== nextLoading
+    )
+  }
+
   callBack = (data) => {
     const { action, report } = this.props
     action({ ...data, report })

@@ -10,21 +10,23 @@ import { chartColors } from 'Utils/globals'
 import { isEmpty, isEqual } from 'lodash'
 
 class EngagementByProperty extends Component {
-  callBack = (data) => {
-    const { action, report } = this.props
-    action({ ...data, report })
-  }
-
   shouldComponentUpdate(nextProps) {
+    const {
+      data: { data, loading },
+    } = this.props
     const {
       data: { data: nextData, loading: nextLoading },
     } = nextProps
 
-    const {
-      data: { data, loading },
-    } = this.props
+    return (
+      (data && !isEqual(JSON.stringify(data), JSON.stringify(nextData))) ||
+      loading !== nextLoading
+    )
+  }
 
-    return !isEqual(nextData, data) || loading !== nextLoading
+  callBack = (data) => {
+    const { action, report } = this.props
+    action({ ...data, report })
   }
 
   render() {

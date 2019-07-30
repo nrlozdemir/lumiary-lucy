@@ -1,7 +1,7 @@
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import { push } from 'connected-react-router'
 import axios from 'axios'
-import { selectAuthProfile } from 'Reducers/auth'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/generatedReport'
 import { actions as reportsActions } from 'Reducers/reports'
 import querystring from 'querystring'
@@ -28,7 +28,7 @@ function* saveReport({ data }) {
     const { category } = data
     const {
       brand: { uuid },
-    } = yield select(selectAuthProfile)
+    } = yield select(makeSelectAuthProfile())
     if (category === 'Brands Insights') {
       const { brands, social, engagement, date, title, brand } = data
 
@@ -136,7 +136,7 @@ function* getTopPerformingVideos({ data: { report = {} } }) {
 function* getVideoReleasesBarChart({ data: { report } }) {
   try {
     const { engagement: metric, date: daterange, social: platform } = report
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const options = {
       metric,
@@ -175,7 +175,7 @@ function* getColorTempData({
   },
 }) {
   try {
-    const { brand } = yield select(selectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     const response = yield call(
       getDataFromApi,
@@ -206,7 +206,7 @@ function* getColorTempData({
 
 function* getFilteringSectionData({ data: { property, report } }) {
   try {
-    const profile = yield select(selectAuthProfile)
+    const profile = yield select(makeSelectAuthProfile())
     const competitors = getBrandAndCompetitors(profile)
 
     const filteredCompetitors = getFilteredCompetitors(competitors, report)
@@ -269,10 +269,9 @@ function* getFilteringSectionData({ data: { property, report } }) {
 
 function* getPacingCardData({ data: { report } }) {
   try {
-    const profile = yield select(selectAuthProfile)
+    const profile = yield select(makeSelectAuthProfile())
     const competitors = getBrandAndCompetitors(profile)
-
-    const filteredCompetitors = getFilteredCompetitors(competitors, report)
+    const { brand } = report
 
     const options = {
       metric: report.engagement,
@@ -281,32 +280,57 @@ function* getPacingCardData({ data: { report } }) {
       property: ['pacing'],
       dateBucket: 'none',
       display: 'percentage',
-      url: '/report',
-      brands: [...filteredCompetitors],
+      brands: [brand],
     }
 
     const [stadiumData, horizontalStackedBarData] = yield all([
-      call(getDataFromApi, options),
-      call(getDataFromApi, {
-        ...options,
-        proportionOf: 'format',
-        limit: 4,
-      }),
+      call(getDataFromApi, options, '/report'),
+      call(
+        getDataFromApi,
+        {
+          ...options,
+          proportionOf: 'format',
+          limit: 4,
+        },
+        '/report'
+      ),
     ])
 
-    yield put(
-      actions.getPacingCardDataSuccess({
-        stadiumData: percentageManipulation(
-          convertDataIntoDatasets(stadiumData, options)
-        ),
-        horizontalStackedBarData: percentageManipulation(
-          convertDataIntoDatasets(horizontalStackedBarData, {
-            ...options,
-            proportionOf: 'format',
-          })
-        ),
-      })
-    )
+    const brandName =
+      (!!stadiumData &&
+        !!stadiumData.data &&
+        !!Object.keys(stadiumData.data).length &&
+        Object.keys(stadiumData.data)[0]) ||
+      null
+
+    if (
+      !!brandName &&
+      !!stadiumData.data &&
+      !!stadiumData.data[brandName] &&
+      !!stadiumData.data[brandName].pacing &&
+      !!horizontalStackedBarData.data &&
+      !!horizontalStackedBarData.data[brandName] &&
+      !!horizontalStackedBarData.data[brandName].pacing
+    ) {
+      yield put(
+        actions.getPacingCardDataSuccess({
+          stadiumData: percentageManipulation(
+            convertDataIntoDatasets(stadiumData, options)
+          ),
+          horizontalStackedBarDataOriginal:
+            horizontalStackedBarData.data[brandName].pacing,
+          horizontalStackedBarData: convertDataIntoDatasets(
+            horizontalStackedBarData,
+            {
+              ...options,
+              proportionOf: 'format',
+            }
+          ),
+        })
+      )
+    } else {
+      throw new Error('Error fetching Pacing Card data')
+    }
   } catch (err) {
     yield put(actions.getPacingCardDataFailure(err))
   }
@@ -314,7 +338,7 @@ function* getPacingCardData({ data: { report } }) {
 
 function* getCompetitorTopVideos({ data: { property, report } }) {
   try {
-    const profile = yield select(selectAuthProfile)
+    const profile = yield select(makeSelectAuthProfile())
     const competitors = getBrandAndCompetitors(profile)
 
     const filteredCompetitors = getFilteredCompetitors(competitors, report)
