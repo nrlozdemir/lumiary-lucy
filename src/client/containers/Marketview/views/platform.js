@@ -74,9 +74,8 @@ export class Platform extends React.Component {
         />
         <TopSimilarProperties
           moduleKey="MarketView/Platform/TopSimilarProperties"
-          title="Similar Properties Of Top Videos"
+          title="Top Similar Properties Of Top Videos"
           action={this.getSimilarProperties}
-          presentWithDoughnut
           filters={[
             {
               type: 'dateRange',

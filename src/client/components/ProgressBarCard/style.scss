@@ -1,0 +1,74 @@
+.cardTitle{
+  height: 40px;
+  font-size: 32px;
+  font-weight: 800;
+  font-style: normal;
+  font-family: Futura;
+  font-stretch: condensed;
+  line-height: normal;
+  letter-spacing: normal;
+  text-align: center;
+  margin-bottom: 26px;
+}
+
+.sectionBadge {
+  margin: 0px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-transform: capitalize;
+  
+  span {
+    font-weight: bold;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    border-radius: 50px;
+    font-size: 14px;
+    padding: 10px 24px;
+    line-height: 14px;
+  }
+}
+
+.progressItem{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 32px;
+
+  .progressBar {
+    width: 250px;
+    margin-left: 0px;
+    background-color: $color-dark-five;
+    border-radius: 10px;
+  
+    &--dark {
+      background: rgb(33, 36, 59) !important;
+    }
+    &--light {
+      background: rgb(232, 236, 240) !important;
+    }
+  }
+  
+  .percentageBlue {
+    border-radius: 10px;
+    height: 10px;
+    background-color: $color-cool-blue;
+    -webkit-transition: width 0.5s, height 0.5s;
+    transition: width 0.5s, height 0.5s;
+  }
+  
+  .progressText{
+    width: 250px;
+    display: flex;
+    margin-bottom: 8px;
+    font-size: 14px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    text-transform: capitalize;
+    .rightTitle{
+      margin-left: auto;
+    }
+  }
+}

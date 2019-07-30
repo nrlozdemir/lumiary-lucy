@@ -376,7 +376,7 @@ const secondsToHHMMSS = (s = 0) => {
 /*
   Used to pull the brand and competiitors from SSO success payload, which contains { profile: { buyer: { brands }}}
  */
-const getBrandAndCompetitorsFromProfileObject = (profile, brand_id) => {
+const getProfileObjectWithBrand = (profile, brand_id) => {
   const { buyer = {} } = profile
   const { brands = [] } = buyer
 
@@ -391,7 +391,7 @@ const getBrandAndCompetitorsFromProfileObject = (profile, brand_id) => {
       if (!foundBrand.competitors) {
         foundBrand.competitors = foundBrand.related ? foundBrand.related : []
       }
-      response = foundBrand
+      response = { ...profile, brand: foundBrand }
     }
   }
 
@@ -486,7 +486,7 @@ export {
   normalizationBubbleMapping,
   hexToRgb,
   secondsToHHMMSS,
-  getBrandAndCompetitorsFromProfileObject,
+  getProfileObjectWithBrand,
   customChartToolTip,
   getModuleTerms,
 }

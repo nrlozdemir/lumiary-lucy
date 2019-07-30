@@ -9,6 +9,8 @@ import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import { isDataSetEmpty } from 'Utils/datasets'
 import { roundRect } from 'Utils/ui'
+import DoughnutChart from 'Components/Charts/DoughnutChart'
+import { ucfirst } from 'Utils'
 
 const percentageCol = cx('col-4-no-gutters', style.percentageCol)
 
@@ -28,6 +30,8 @@ const ContentVitalityScoreModule = ({
   options,
   loading = false,
   chartYAxisMax = 100,
+  platform,
+  average,
   dataKeys: {
     leftLabel,
     rightLabel,
@@ -36,6 +40,7 @@ const ContentVitalityScoreModule = ({
     rightKey,
     middleKey,
   },
+  audience = false,
 }) => {
   const formattedData =
     (!!data &&
@@ -50,7 +55,7 @@ const ContentVitalityScoreModule = ({
                   ? middleLabel
                   : middleKey
                   ? middleKey
-                  : 'Average',
+                  : 'Percent Difference',
               }
               break
 
@@ -69,7 +74,7 @@ const ContentVitalityScoreModule = ({
               break
 
             default:
-              if (dataKey === authProfile.brand.uuid) {
+              if (!!authProfile.brand && dataKey === authProfile.brand.uuid) {
                 accumulator.leftDataset = {
                   ...data[dataKey],
                   name: authProfile.brand.name,
@@ -91,9 +96,9 @@ const ContentVitalityScoreModule = ({
           return accumulator
         },
         {
-          leftDataset: null,
-          middleDataset: null,
-          rightDataset: null,
+          leftDataset: {},
+          middleDataset: {},
+          rightDataset: {},
         }
       )) ||
     {}
@@ -115,20 +120,8 @@ const ContentVitalityScoreModule = ({
       },
     ],
   }
-  
-  // const newDatasets = {
-  //   labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
-  //   datasets: [
-  //     {
-  //       data:
-  //         (formattedData.brand_2 && formattedData.brand_2.videoPercents) || [],
-  //     },
-  //     {
-  //       data:
-  //         (formattedData.brand_1 && formattedData.brand_1.videoPercents) || [],
-  //     },
-  //   ],
-  // }
+
+  const names = Object.values(formattedData).map((ds) => ds.name || 'N/A')
 
   return (
     <ThemeContext.Consumer>
@@ -264,9 +257,14 @@ const ContentVitalityScoreModule = ({
                       chart.ctx.textBaseline = 'middle'
                       chart.ctx.fillStyle = '#fff'
 
-                      const text = `The average ${
-                        maxObject._datasetIndex ? 'female' : 'male'
-                      } scores 10\n points above your library\n average on facebook!`
+                      const text = audience
+                        ? `The average ${
+                            maxObject._datasetIndex ? 'female' : 'male'
+                          } scores 10\n points above your library\n average on facebook!`
+                        : `${ucfirst(platform)}${
+                            platform === 'all' ? ' Platforms' : ''
+                          } Average | ${average}`
+
                       const lines = text.split('\n')
 
                       for (let i = 0; i < lines.length; i++)
@@ -305,136 +303,121 @@ const ContentVitalityScoreModule = ({
             </div>
 
             <div className="row">
-              <div className={percentageCol}>
-                <div
-                  className={style.legend}
-                  style={{
-                    background: colors.labelBackground,
-                    color: colors.labelColor,
-                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                  }}
-                >
-                  {formattedData.leftDataset &&
-                    `${formattedData.leftDataset.name}`}
-                </div>
-                {formattedData.leftDataset && (
-                  <div
-                    className={style.divider}
-                    style={{
-                      background: colors.moduleBorder,
-                    }}
-                  />
-                )}
-                {formattedData.leftDataset && (
-                  <PercentageBarGraph
-                    key={Math.random()}
-                    percentage={formattedData.leftDataset.averageCvScore || 0}
-                    color="blue"
-                    percentageDataSet={{
-                      datasets: [
-                        {
-                          data: formattedData.leftDataset.videoPercents,
-                        },
-                      ],
-                    }}
-                    options={{
-                      scales: {
-                        yAxes: [
-                          {
-                            ticks: {
-                              max: chartYAxisMax,
-                            },
-                          },
-                        ],
-                      },
-                    }}
-                  />
-                )}
-              </div>
-              <div className={percentageCol}>
-                <div
-                  className={style.legend}
-                  style={{
-                    background: colors.labelBackground,
-                    color: colors.labelColor,
-                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                  }}
-                >
-                  {formattedData.middleDataset &&
-                    `${formattedData.middleDataset.name}`}
-                </div>
-                {formattedData.middleDataset && (
-                  <div
-                    className={style.divider}
-                    style={{
-                      background: colors.moduleBorder,
-                    }}
-                  />
-                )}
-                {formattedData.middleDataset && (
-                  <PercentageBarGraph
-                    key={Math.random()}
-                    percentage={formattedData.middleDataset.averageCvScore || 0}
-                    color="grey"
-                    percentageDataSet={{
-                      datasets: [
-                        {
-                          data: formattedData.middleDataset.videoPercents,
-                        },
-                      ],
-                    }}
-                    options={{
-                      scales: {
-                        yAxes: [
-                          {
-                            ticks: {
-                              max: chartYAxisMax,
-                            },
-                          },
-                        ],
-                      },
-                    }}
-                  />
-                )}
-              </div>
-              <div className={percentageCol}>
-                <div
-                  className={style.legend}
-                  style={{
-                    background: colors.labelBackground,
-                    color: colors.labelColor,
-                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                  }}
-                >
-                  {formattedData.rightDataset &&
-                    `${formattedData.rightDataset.name}`}
-                </div>
-                {formattedData.rightDataset && (
-                  <PercentageBarGraph
-                    key={Math.random()}
-                    percentage={formattedData.rightDataset.averageCvScore || 0}
-                    color="green"
-                    percentageDataSet={{
-                      datasets: [
-                        {
-                          data: formattedData.rightDataset.videoPercents,
-                        },
-                      ],
-                    }}
-                    options={{
-                      scales: {
-                        yAxes: [
-                          {
-                            ticks: {
-                              max: chartYAxisMax,
-                            },
-                          },
-                        ],
-                      },
-                    }}
-                  />
-                )}
-              </div>
+              {!loading && Object.keys(formattedData).map((key, idx) => {
+                const { averageCvScore } = formattedData[key]
+
+                const cvScore =
+                  averageCvScore === 'NaN' || !averageCvScore
+                    ? 0
+                    : Math.floor(parseInt(averageCvScore))
+
+                const bgColor =
+                  idx === 0 ? '#5292e5' : idx === 1 ? '##8562f3' : '#2fd7c4'
+
+                return (
+                  <div className={percentageCol} key={idx}>
+                    <div
+                      className={style.legend}
+                      style={{
+                        background: colors.labelBackground,
+                        color: colors.labelColor,
+                        boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                      }}
+                    >
+                      {names[idx]}
+                    </div>
+                    {idx !== 2 && (
+                      <div
+                        className={style.divider}
+                        style={{
+                          background: colors.moduleBorder,
+                        }}
+                      />
+                    )}
+                    {cvScore === 0 ? (
+                      <div className={style.emptyData}>No Data Available</div>
+                    ) : (
+                      <React.Fragment>
+                        <DoughnutChart
+                          width={140}
+                          height={140}
+                          displayDataLabels={false}
+                          cutoutPercentage={80}
+                          datasetsBorderWidth={0}
+                          removeTooltip
+                          average={idx === 1 ? null : average}
+                          cvScoreData={{
+                            platform,
+                          }}
+                          layoutPadding={7}
+                          data={{
+                            datasets: [
+                              {
+                                borderColor: '#f3f6f9',
+                                data: [cvScore, 100 - cvScore],
+                                backgroundColor: [bgColor, '#acb0be'],
+                                hoverBackgroundColor: [bgColor, '#acb0be'],
+                              },
+                            ],
+                          }}
+                        />
+                        <div
+                          className={style.centerText}
+                          style={{
+                            color: colors.labelColor,
+                          }}
+                        >
+                          <div className={style.wrapper}>
+                            <span
+                              className={style.bigText}
+                              style={{
+                                color: colors.labelColor,
+                              }}
+                            >
+                              {`${cvScore}${idx === 1 ? '%' : ''}`}
+                            </span>
+                            <span
+                              className={style.littleText}
+                              style={{
+                                color: colors.labelColor,
+                              }}
+                            >
+                              {idx === 1 ? 'Difference' : 'CV Score'}
+                            </span>
+                          </div>
+                        </div>
+
+                        <p
+                          className={style.doughnutChartText}
+                          style={{
+                            color: colors.labelColor,
+                          }}
+                        >
+                          {idx === 1 ? (
+                            <span>
+                              The difference between{' '}
+                              {audience ? 'male' : names[0]}{' '}
+                              {audience ? '' : 'videos'} and{' '}
+                              {audience ? 'female' : names[2]}{' '}
+                              {audience ? '' : 'video'} scores is{' '}
+                              <b>{cvScore}%</b>
+                            </span>
+                          ) : (
+                            <span>
+                              The average {names[0]} video scores <b>{10}</b>{' '}
+                              points <b>{idx === 0 ? 'above' : 'below'}</b> your
+                              library average on{' '}
+                              {`${ucfirst(platform)}${
+                                platform === 'all' ? ' Platforms' : ''
+                              }`}
+                            </span>
+                          )}
+                        </p>
+                      </React.Fragment>
+                    )}
+                  </div>
+                )
+              })}
             </div>
           </div>
         </Module>

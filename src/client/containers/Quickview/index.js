@@ -36,7 +36,7 @@ export class Main extends React.PureComponent {
             type: 'metric',
             selectKey: 'QV-facebook-metric',
             placeHolder: 'Facebook',
-					}
+          },
         },
         {
           name: 'instagram',
@@ -44,12 +44,12 @@ export class Main extends React.PureComponent {
             type: 'metric',
             selectKey: 'QV-instagram-metric',
             placeHolder: 'Instagram',
-					},
-					customOptions: [
-						{ value: 'views', label: 'Views' },
-						{ value: 'likes', label: 'Likes' },
-						{ value: 'comments', label: 'Comments' },
-					]
+          },
+          customOptions: [
+            { value: 'views', label: 'Views' },
+            { value: 'likes', label: 'Likes' },
+            { value: 'comments', label: 'Comments' },
+          ],
         },
         {
           name: 'twitter',
@@ -65,12 +65,12 @@ export class Main extends React.PureComponent {
             type: 'metric',
             selectKey: 'QV-youtube-metric',
             placeHolder: 'YouTube',
-					},
-					customOptions: [
-						{ value: 'views', label: 'Views' },
-						{ value: 'likes', label: 'Likes' },
-						{ value: 'comments', label: 'Comments' },
-					]
+          },
+          customOptions: [
+            { value: 'views', label: 'Views' },
+            { value: 'likes', label: 'Likes' },
+            { value: 'comments', label: 'Comments' },
+          ],
         },
       ],
     }
@@ -166,8 +166,8 @@ export class Main extends React.PureComponent {
                           moduleKey={moduleKey}
                           selectKey={platform.filter.selectKey}
                           placeHolder={platform.filter.placeHolder}
-													defaultValue={selectedMetric}
-													customOptions={platform.customOptions}
+                          defaultValue={selectedMetric}
+                          customOptions={platform.customOptions}
                           onChange={(options = {}) => {
                             const { value } = options
 

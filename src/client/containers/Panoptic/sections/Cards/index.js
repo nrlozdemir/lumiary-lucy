@@ -45,7 +45,25 @@ function parseData(props) {
 
   let statArrowClassName, statClassName, tooltipText
 
-  if (data.percentage == 0) {
+  // Increase = New Number - Original Number
+  // % increase = Increase ÷ Original Number × 100
+
+  // Decrease = Original Number - New Number
+  // % Decrease = Decrease ÷ Original Number × 100
+  const today =
+    originalData.originalData[originalData.originalData.length - 1] === 0
+      ? 1
+      : originalData.originalData[originalData.originalData.length - 1]
+  const yesterday =
+    originalData.originalData[originalData.originalData.length - 2] === 0
+      ? 1
+      : originalData.originalData[originalData.originalData.length - 2]
+  const statDifference =
+    today > yesterday
+      ? ((today - yesterday) / yesterday) * 100
+      : ((yesterday - today) / today) * -100
+
+  if (statDifference == 0) {
     const titleLowerCase = title.charAt(0).toLowerCase() + title.slice(1)
     statArrowClassName = classnames(styles.arrow, styles.arrowRight)
     statClassName = classnames(styles.stats, styles.noChange)

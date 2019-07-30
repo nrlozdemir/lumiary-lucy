@@ -225,11 +225,11 @@ const LineAndDoughnutChartModule = ({
                           data: [
                             property[0].score.value === 'N/A'
                               ? 0
-                              : property[0].score.value,
+                              : Math.floor(property[0].score.value),
                             100 -
                               (property[0].score.value === 'N/A'
                                 ? 0
-                                : property[0].score.value),
+                                : Math.floor(property[0].score.value)),
                           ],
                           backgroundColor: [
                             datasetMap[property[0].name].backgroundColor,

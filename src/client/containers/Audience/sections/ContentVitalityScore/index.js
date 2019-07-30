@@ -19,7 +19,11 @@ class ContentVitalityScore extends React.Component {
 
   render() {
     const {
-      audienceContentVitalityScoreData: { data, loading, error },
+      audienceContentVitalityScoreData: {
+        data: { data, platform, average = '0' },
+        loading,
+        error,
+      },
     } = this.props
 
     const { chartYAxisMax, chartYAxisStepSize } = getCVScoreChartAttributes(
@@ -30,15 +34,18 @@ class ContentVitalityScore extends React.Component {
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <ContentVitalityScoreModule
+            audience={true}
             loading={loading}
             dataKeys={{
               leftKey: 'male',
-              leftLabel: 'Male Audience',
+              leftLabel: 'Males',
               rightKey: 'female',
-              rightLabel: 'Female Audience',
+              rightLabel: 'Females',
               middleKey: 'difference',
               middleLabel: 'Percent Difference',
             }}
+            platform={platform}
+            average={average}
             data={data}
             chartYAxisMax={chartYAxisMax}
             moduleKey={'Audience/ContentVitalityScore'}

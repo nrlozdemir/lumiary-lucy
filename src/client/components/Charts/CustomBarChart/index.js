@@ -30,6 +30,7 @@ const defaultProps = {
   options: {
     width: 8,
     maxHeight: 36,
+    minHeight: 5,
     labelCharLength: 1,
     zeroFill: 1,
   },
@@ -70,12 +71,12 @@ class CustomBarChart extends React.Component {
                   : element.score
               const isSelected = element.label === selected
               let heightPx = Math.ceil(
-                Math.abs((elementScore * options.maxHeight) / statMax.score)
+                Math.abs((elementScore * (options.maxHeight - options.minHeight)) / statMax.score)
               )
 
               //if height is 0, we reassign 1 to height bcoz of ux experience.
               //empty area doesn't seem good.
-              const height = heightPx || 1
+              const height = options.minHeight + heightPx
               const ogData =
                 originalData.originalData && originalData.originalData[index]
                   ? originalData.originalData[index].toLocaleString()
