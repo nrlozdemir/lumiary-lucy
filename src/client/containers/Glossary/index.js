@@ -9,6 +9,7 @@ import Sidebar from './sections/sideBar'
 import Letterbar from './sections/letterBar'
 import MainContentArea from './sections/mainContentArea'
 import { makeSelectGlobalSection } from 'Reducers/app'
+import RouterLoading from 'Components/RouterLoading'
 
 class Glossary extends Component {
   render() {
@@ -19,38 +20,54 @@ class Glossary extends Component {
       location: { pathname },
       history,
       content: {
+        loading,
         data: {
           glossary: { terms: letters },
         },
       },
     } = this.props
+
     if (!letters) {
       return null
+    }
+
+    if (loading) {
+      return (
+        <div>
+          <RouterLoading />
+        </div>
+      )
     }
 
     let menuName
     let contents
 
     const newContentArray = []
-    Object.keys(letters).forEach(letter => {
-      letters[letter].forEach(item => {
-          newContentArray.push({ ...item, letter })
+    Object.keys(letters).forEach((letter) => {
+      letters[letter].forEach((item) => {
+        newContentArray.push({ ...item, letter })
       })
     })
     if (term) {
       switch (pathname) {
         case '/glossary/p/properties':
           menuName = 'Properties'
-           contents = newContentArray.filter((item) => item.tags.map(tag => tag.slug).includes('property'))
+          contents = newContentArray.filter((item) =>
+            item.tags.map((tag) => tag.slug).includes('property')
+          )
           break
         case '/glossary/f/formats':
           menuName = 'Formats'
-          contents = newContentArray.filter((item) => item.tags.map(tag => tag.slug).includes('format'))
+          contents = newContentArray.filter((item) =>
+            item.tags.map((tag) => tag.slug).includes('format')
+          )
 
           break
         case '/glossary/p/pages':
           menuName = 'Pages'
-          contents = newContentArray.filter((item) => item.tags.map(tag => tag.slug).includes('page'))
+          contents = newContentArray.filter((item) =>
+            item.tags.map((tag) => tag.slug).includes('page')
+          )
 
           break
         default:
@@ -59,13 +76,22 @@ class Glossary extends Component {
       }
     }
 
-
     return (
       <div className="grid-container col-12">
         <Letterbar content={letters} />
         <div className={style.glossaryBodyContainer}>
-          <Sidebar letter={letter} content={letters} term={term} menuContent={menuName && contents} />
-          <MainContentArea content={contents || letters} menu={menuName} letter={letter} term={term} />
+          <Sidebar
+            letter={letter}
+            content={letters}
+            term={term}
+            menuContent={menuName && contents}
+          />
+          <MainContentArea
+            content={contents || letters}
+            menu={menuName}
+            letter={letter}
+            term={term}
+          />
         </div>
       </div>
     )
