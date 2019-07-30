@@ -174,6 +174,7 @@ const SubNavigation = (props) => {
 }
 
 const Selector = (props) => {
+  const logoutRequest = props && props.logoutRequest
   const orginalUrl = props && props.match.url
   const url = props && props.match.url.split('/')
   const navigation = props && props.routeConfig
@@ -229,7 +230,7 @@ const Selector = (props) => {
             </div>
             <div className={profileClass}>
               <div className="float-right">
-                <Dropdown avatar={avatar} />
+                <Dropdown avatar={avatar} logout={logoutRequest}/>
               </div>
             </div>
           </div>
@@ -348,6 +349,7 @@ const Template = (props) => {
   const { brand = {} } = profile
   const { avatar } = brand
   const { textColor, moduleBackground, moduleShadow } = props.themes
+
   return (
     <header
       style={{

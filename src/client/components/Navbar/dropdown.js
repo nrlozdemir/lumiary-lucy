@@ -87,7 +87,7 @@ class Dropdown extends Component {
                 <p className={style.text}>Support</p>
               </li>
               <li>
-                <p onClick={() => logout()} className={style.text}>
+                <p onClick={logout} className={style.text}>
                   Logout
                 </p>
               </li>
