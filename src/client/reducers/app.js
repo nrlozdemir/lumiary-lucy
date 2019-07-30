@@ -52,7 +52,9 @@ export const initialState = {
   sections: (typeof window === 'object'
     ? JSON.parse(window.localStorage.getItem('sections'))
     : null) || {
-    data: null,
+    data: {
+      glossary: {},
+    },
     loading: false,
   },
   config: {},
