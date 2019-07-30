@@ -5,10 +5,6 @@ import { buildQApiUrl, getDataFromApi } from 'Utils/api'
 
 function* getSectionExplanations() {
   try {
-    // const response = yield call(getGlobalDataApi)
-    // console.log(response)
-    // https://api-local.quickframe.com:8080/v1/
-
     const response = yield call(
       getDataFromApi,
       {},
