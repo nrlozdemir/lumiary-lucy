@@ -176,6 +176,7 @@ const VideoReleasesBarChartModule = (props) => {
     },
   }
 
+  console.log(data, normalizedData)
   return (
     <Module
       moduleKey={moduleKey}
