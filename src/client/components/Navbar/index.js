@@ -359,13 +359,13 @@ const Template = (props) => {
       <div className={containerClass}>
         {templateSelector['leftSide']}
         <div className={linksClass}>{templateSelector['navigation']}</div>
-        <div className={profileClass}>
-          <div className="float-right">
-            <Dropdown avatar={avatar} logout={logoutRequest} />
-
-            {/*<span>Bleacher Report</span>*/}
+        {templateSelector['removeDropdown'] ? null : (
+          <div className={profileClass}>
+            <div className="float-right">
+              <Dropdown avatar={avatar} logout={logoutRequest} />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </header>
   )
