@@ -190,6 +190,21 @@ const routes = [
     },
   },
   {
+    path: '/glossary/:letter/:term',
+    exact: true,
+    component: 'Glossary',
+  },
+  {
+    path: '/glossary/:letter',
+    exact: true,
+    component: 'Glossary',
+  },
+  {
+    path: '/glossary',
+    exact: true,
+    component: 'Glossary',
+  },
+  {
     path: '/sso',
     exact: true,
     component: 'SSO',
@@ -316,11 +331,11 @@ class Routes extends React.Component {
         !Object.keys(sectionsStore).length ||
         (Object.keys(sectionsStore).length && !sectionsStore.data)
       ) {
-        getSectionExplanationsRequest()
+        !!profile && getSectionExplanationsRequest()
       }
 
       if (!Object.keys(profileStore).length && !profile) {
-        getProfileRequest({ userId: user.id, token: user.token })
+        getProfileRequest({ token: user.token })
       }
     }
 

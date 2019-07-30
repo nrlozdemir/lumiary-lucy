@@ -74,13 +74,20 @@ class Dropdown extends Component {
                 />
               </li>
               <li style={{ borderColor: colors.themeControlListBorder }}>
-                <p className={style.text}>Glossary</p>
+                <p className={style.text}>
+                  <Link
+                    to="/glossary"
+                    style={{ color: colors.textColor, margin: 0 }}
+                  >
+                    Glossary
+                  </Link>
+                </p>
               </li>
               <li>
                 <p className={style.text}>Support</p>
               </li>
               <li>
-                <p onClick={() => logout()} className={style.text}>
+                <p onClick={logout} className={style.text}>
                   Logout
                 </p>
               </li>

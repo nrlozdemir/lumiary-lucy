@@ -193,6 +193,10 @@ const dark = {
   // Information Modal
   informationModalBackgroundColor: '#acb0be',
 
+  letterBarBackground: '#373f5b',
+  letterBorder: '#acb0be',
+  deactiveLetter: '#21243b',
+  sidebarBackgroundColor: '#545b79',
   // Account Pages
   account: {
     h1: {
@@ -427,6 +431,10 @@ const light = {
   // Information Modal
   informationModalBackgroundColor: '#505050',
 
+  letterBarBackground: '#ffffff',
+  letterBorder: '#c6c9d7',
+  deactiveLetter: '#e8ecf0',
+  sidebarBackgroundColor: '#f3f6f9',
   // Account Pages
   account: {
     h1: {
