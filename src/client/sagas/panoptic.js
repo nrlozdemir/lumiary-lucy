@@ -42,7 +42,7 @@ function* getVideoReleasesData({ data }) {
     // console.log(JSON.stringify(percentageManipulation(convertVideoEngagementData(response, metric)), null, 4))
 
     const propertyMap = Object.keys(response).reduce((accumulator, key) => {
-      if(!accumulator[key]) {
+      if (!accumulator[key]) {
         accumulator[key] = {
           metric,
           maxVideo: 0,
@@ -54,7 +54,7 @@ function* getVideoReleasesData({ data }) {
               data: [],
               label: 'Videos',
               backgroundColor: '#2FD7C4',
-              display: false
+              display: false,
             },
             {
               data: [],
@@ -68,23 +68,29 @@ function* getVideoReleasesData({ data }) {
       const videos = response[key]
       const engagement = response[key][metric]
 
-      for(let i = 0; i < 7; i++) {
-        const weekday = moment().subtract(i, 'days').format('dddd')
-        const weekdayShort = moment().subtract(i, 'days').format('dd')[0]
+      for (let i = 0; i < 7; i++) {
+        const weekday = moment()
+          .subtract(i, 'days')
+          .format('dddd')
+        const weekdayShort = moment()
+          .subtract(i, 'days')
+          .format('dd')[0]
 
-        if(videos[weekday] > accumulator[key].maxVideo) {
+        if (videos[weekday] > accumulator[key].maxVideo) {
           accumulator[key].maxVideo = videos[weekday]
         }
 
-        if(engagement[weekday] > accumulator[key].maxEngagement) {
+        if (engagement[weekday] > accumulator[key].maxEngagement) {
           accumulator[key].maxEngagement = engagement[weekday]
         }
 
         accumulator[key].labels.unshift(weekdayShort)
         accumulator[key].datasets[0].data.unshift(videos[weekday])
-        accumulator[key].datasets[1].data.unshift((engagement[weekday] === 0 ? 0 : engagement[weekday] * -1))
+        accumulator[key].datasets[1].data.unshift(
+          engagement[weekday] === 0 ? 0 : engagement[weekday] * -1
+        )
       }
-  
+
       return accumulator
     }, {})
 
@@ -250,7 +256,8 @@ function* getPacingCardData({ data }) {
           stadiumData: percentageManipulation(
             convertDataIntoDatasets(stadiumData, options)
           ),
-          horizontalStackedBarDataOriginal: horizontalStackedBarData.data[brand.name].pacing,
+          horizontalStackedBarDataOriginal:
+            horizontalStackedBarData.data[brand.name].pacing,
           horizontalStackedBarData: convertDataIntoDatasets(
             horizontalStackedBarData,
             {
@@ -289,8 +296,8 @@ function* getCompareSharesData({ data: { dateRange } }) {
       call(
         getDataFromApi,
         undefined,
-        buildApiUrl('/color', { 
-          brandUuid: brand.uuid, 
+        buildApiUrl('/color', {
+          brandUuid: brand.uuid,
           platform: 'facebook',
           daterange: dateRange,
           metric: 'views',
@@ -300,8 +307,8 @@ function* getCompareSharesData({ data: { dateRange } }) {
       call(
         getDataFromApi,
         undefined,
-        buildApiUrl('/color', { 
-          brandUuid: brand.uuid, 
+        buildApiUrl('/color', {
+          brandUuid: brand.uuid,
           platform: 'youtube',
           daterange: dateRange,
           metric: 'views',
@@ -426,13 +433,20 @@ function* getTopPerformingFormatData({ data = {} }) {
 
       const weekdayOrder = []
       const propertyBuckets = {}
-      for(let i = 0; i < 7; i++) {
-        const weekday = moment().subtract(i, 'days').format('dddd')
-        const weekdayShort = moment().subtract(i, 'days').format('ddd')
-        const weekdayDate = moment().subtract(i, 'days').format('M/D/YY')
-        const label = (i === 0) 
-          ? `Today (${weekdayShort})`
-          : (i === 1) 
+      for (let i = 0; i < 7; i++) {
+        const weekday = moment()
+          .subtract(i, 'days')
+          .format('dddd')
+        const weekdayShort = moment()
+          .subtract(i, 'days')
+          .format('ddd')
+        const weekdayDate = moment()
+          .subtract(i, 'days')
+          .format('M/D/YY')
+        const label =
+          i === 0
+            ? `Today (${weekdayShort})`
+            : i === 1
             ? `Yesterday (${weekdayShort})`
             : `${weekdayDate} (${weekdayShort})`
 
@@ -442,9 +456,9 @@ function* getTopPerformingFormatData({ data = {} }) {
           label,
         })
 
-        const nonGreyChartColors = ["#2FD7C4", "#8562F3", "#5292E5", "#ff556f"]
+        const nonGreyChartColors = ['#2FD7C4', '#8562F3', '#5292E5', '#ff556f']
         Object.keys(payload.dates[weekday]).forEach((propertyBucket, idx) => {
-          if(!propertyBuckets[propertyBucket]) {
+          if (!propertyBuckets[propertyBucket]) {
             propertyBuckets[propertyBucket] = {
               label: propertyBucket,
               fill: false,
@@ -452,14 +466,13 @@ function* getTopPerformingFormatData({ data = {} }) {
               backgroundColor: chartColors[idx],
               borderColor: chartColors[idx],
               hoverBackgroundColor: chartColors[idx],
-              data: []
+              data: [],
             }
           }
 
           const propertyBucketValue = payload.dates[weekday][propertyBucket]
           propertyBuckets[propertyBucket].data.unshift(propertyBucketValue)
         })
-
       }
 
       const lineChartData = {
@@ -468,7 +481,7 @@ function* getTopPerformingFormatData({ data = {} }) {
         }),
         datasets: Object.keys(propertyBuckets).map((propertyBucket) => {
           return propertyBuckets[propertyBucket]
-        })
+        }),
       }
 
       yield put(

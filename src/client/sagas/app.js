@@ -1,18 +1,23 @@
 import { call, put, takeEvery } from 'redux-saga/effects'
-import axios from 'axios'
-import appMockData from 'Api/mocks/appMock.json'
-import { actions, types } from 'Reducers/app'
 
-function getGlobalDataApi(name) {
-  return axios.get('/').then((res) => appMockData[name])
-}
+import { actions, types } from 'Reducers/app'
+import { buildQApiUrl, getDataFromApi } from 'Utils/api'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 
 function* getSectionExplanations() {
   try {
-    const response = yield call(getGlobalDataApi, 'sectionExplanations')
+    const { brand } = yield select(makeSelectAuthProfile())
+
+    if (!!brand && !!brand.uuid) {
+      const response = yield call(
+        getDataFromApi,
+        {},
+        buildQApiUrl(`/glossary/${brand.uuid}`),
+        'GET'
+      )
+    }
 
     yield put(actions.getSectionExplanationsSuccess(response))
-    return false
   } catch (err) {
     console.error('err', err)
     yield put(actions.getSectionExplanationsFailure(err))
