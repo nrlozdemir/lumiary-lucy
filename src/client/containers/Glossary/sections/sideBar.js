@@ -132,6 +132,7 @@ class Sidebar extends Component {
           }}
         >
           {[...(menuContent || filteredContents)].map((menu, i) => (
+
             <div key={i} ref={menuRef => this.menuRef[`sidebar-${menu.slug}`] = menuRef}>
               {this.renderNavLink(menu)}
             </div>
