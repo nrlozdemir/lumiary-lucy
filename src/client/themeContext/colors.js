@@ -234,6 +234,10 @@ const dark = {
       },
     },
   },
+  //reporst page
+  reportCardsBg:'#545b79',
+  reportCardContentBg: '#373f5b'
+  //reporst page
 }
 
 const light = {
@@ -471,6 +475,10 @@ const light = {
       },
     },
   },
+  //reporst page
+  reportCardsBg:'#ffffff',
+  reportCardContentBg: '#f3f6f9'
+  //reporst page
 }
 
 const themes = {
