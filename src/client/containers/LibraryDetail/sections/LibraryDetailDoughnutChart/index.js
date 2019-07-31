@@ -47,7 +47,7 @@ class LibraryDetailDoughnutChart extends React.Component {
     } = this.props
 
     const sectionToShow = (!!showInfo && showInfo.title) || false
-    
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -81,6 +81,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                             ? secondsToHHMMSS(videoDuration)
                             : null,
                         maxLabel: label,
+                        colors,
                       }
 
                       return (

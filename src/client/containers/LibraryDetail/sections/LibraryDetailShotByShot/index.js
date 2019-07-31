@@ -1,27 +1,27 @@
-import React from 'react'
 import classnames from 'classnames'
-import { compose } from 'redux'
+import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
+import XCircle from 'Components/Icons/XCircle'
+import RouterLoading from 'Components/RouterLoading'
+import Scrubber from 'Components/Sliders/Scrubber'
+import SliderWithScrubber from 'Components/Sliders/SliderWithScrubber'
+import React from 'react'
 import { connect } from 'react-redux'
-import { createStructuredSelector } from 'reselect'
+import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 import {
   actions,
-  selectShotInfoData,
+  makeSelectSelectedVideoID,
   selectColorsData,
   selectPeopleData,
-  makeSelectSelectedVideoID,
+  selectShotInfoData,
 } from 'Reducers/libraryDetail'
-import { Tab, TabList, TabPanel, Tabs } from 'react-tabs'
-import RadarChart from 'Components/Charts/LibraryDetail/RadarChart'
+import { compose } from 'redux'
+import { createStructuredSelector } from 'reselect'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import Scrubber from 'Components/Sliders/Scrubber'
-import XCircle from 'Components/Icons/XCircle'
-import { mediaUrl } from 'Utils/globals'
 import { ucfirst } from 'Utils'
-import SliderWithScrubber from 'Components/Sliders/SliderWithScrubber'
-import style from './style.scss'
-import { makeSelectAuthProfile } from 'Reducers/auth'
-import RouterLoading from 'Components/RouterLoading'
+import { mediaUrl } from 'Utils/globals'
 import ConfidenceImage from './ConfidenceImage'
+import style from './style.scss'
 
 const shotSliderWidth = 504
 
@@ -42,9 +42,8 @@ class LibraryDetailShotByShot extends React.Component {
 
   sliderAction(i) {
     const calculateLeft = i * shotSliderWidth * -1
-    this.setState(
-    {
-      sliderImageLeft: calculateLeft
+    this.setState({
+      sliderImageLeft: calculateLeft,
     })
   }
 
@@ -205,7 +204,7 @@ class LibraryDetailShotByShot extends React.Component {
                           style={{
                             width:
                               Object.values(shots).length * shotSliderWidth,
-                            left: this.state.sliderImageLeft
+                            left: this.state.sliderImageLeft,
                           }}
                         >
                           {shots &&
@@ -285,14 +284,36 @@ class LibraryDetailShotByShot extends React.Component {
                           boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
                         }}
                       >
-                        <TabList className={style.tabList}>
-                          <Tab selectedClassName={style.selectedTab}>
+                        <TabList
+                          className={classnames(style.tabList, {
+                            [style.dark]: colors.themeType === 'dark',
+                            [style.light]: colors.themeType === 'light',
+                          })}
+                        >
+                          <Tab
+                            selectedClassName={classnames(style.selectedTab, {
+                              [style.dark]: colors.themeType === 'dark',
+                              [style.light]: colors.themeType === 'light',
+                            })}
+                          >
                             People
                           </Tab>
-                          <Tab selectedClassName={style.selectedTab}>
+                          <Tab
+                            selectedClassName={classnames(style.selectedTab, {
+                              [style.dark]: colors.themeType === 'dark',
+                              [style.light]: colors.themeType === 'light',
+                            })}
+                          >
                             Objects
                           </Tab>
-                          <Tab selectedClassName={style.selectedTab}>Color</Tab>
+                          <Tab
+                            selectedClassName={classnames(style.selectedTab, {
+                              [style.dark]: colors.themeType === 'dark',
+                              [style.light]: colors.themeType === 'light',
+                            })}
+                          >
+                            Color
+                          </Tab>
                           <div className={style.cancelButton}>
                             <XCircle
                               onClick={() =>
@@ -419,9 +440,9 @@ class LibraryDetailShotByShot extends React.Component {
                       shotMargin={5}
                       minShotWidth={24}
                       maxShotWidth={148}
-                      shotHeight={160}
+                      shotHeight={148}
                       shotHoverWidth={160}
-                      shotHoverHeight={160}
+                      shotHoverHeight={176}
                       viewportWidth={1118}
                       viewportHeight={230}
                       viewportBackgroundColor={'transparent'}
@@ -431,8 +452,12 @@ class LibraryDetailShotByShot extends React.Component {
                         sliderWrapper: style.sliderWrapper,
                         imageWrapper: style.setCenter,
                         image: style.image,
-                        imageHover: style.hover,
+                        imageHover: classnames(style.hover, {
+                          [style.dark]: colors.themeType === 'dark',
+                          [style.light]: colors.themeType === 'light',
+                        }),
                         originalImage: style.originalImage,
+                        firstImageHover: style.firstImageHover,
                       }}
                       customStyle={{
                         originalImageBorderColor: colors.shotByShotBackground,

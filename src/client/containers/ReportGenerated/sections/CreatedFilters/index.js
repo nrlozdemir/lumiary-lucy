@@ -36,7 +36,7 @@ const CreatedFilters = ({ report, brands }) => {
                   key={`bi-filter-${idx}`}
                   className={style.filtersAreaItem}
                   style={{
-                    backgroundColor: colors.moduleBackground,
+                    backgroundColor: colors.reportCardsBg,
                     color: colors.textColor,
                     boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
                     border: `1px solid ${colors.moduleBorder}`,
@@ -45,7 +45,7 @@ const CreatedFilters = ({ report, brands }) => {
                   <p>{item.name}</p>
                   <span
                     style={{
-                      backgroundColor: colors.bodyBackground,
+                      backgroundColor: colors.reportCardContentBg,
                     }}
                   >
                     {ucfirst(
