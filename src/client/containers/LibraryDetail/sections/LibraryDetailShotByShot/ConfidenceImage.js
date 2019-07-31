@@ -24,22 +24,22 @@ class ConfidenceImage extends Component {
 
     return urlError ? null : (
       <div
-        className={cx(style.tabPanelItem, 'grid-container')}
+        className={cx(style.tabPanelItem, style.listObjects, 'grid-container')}
         style={{
           background: colors.shotByShotBackground,
           borderColor: colors.shotByShotBorder,
           marginRight: '16px !important',
         }}
       >
-        <div className="col-5-no-gutters">
+        <div className={style.listImage}>
           <img
             src={imgUrl}
             className={cx(style.imageItem, 'grid-container')}
             onError={this.onError}
           />
         </div>
-        <div className="col-7-no-gutters">
-          <div className="pt-20">
+        <div className={style.listProgress}>
+          <div className={cx(style.progressWrapper, 'pt-20')}>
             <div className={style.progressbarContainer}>
               <div className={style.barOptions}>
                 <p>{label}</p>
