@@ -25,7 +25,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.icon-Glossary:before {
+  content: '\e93a';
+}
+.icon-Logout:before {
+  content: '\e93b';
+}
+.icon-Search:before {
+  content: '\e93c';
+}
+.icon-Support:before {
+  content: '\e93d';
+}
 .icon-Check:before {
   content: '\e920';
   color: #fff;
