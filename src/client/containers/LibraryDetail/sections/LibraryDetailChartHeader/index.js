@@ -57,6 +57,7 @@ const Front = (props) => {
           })}
           tickColor={colors.progressLibraryDetailTickColor}
           progressBarBackgroundColor={colors.progressLibraryDetailBackground}
+          percentageBgColor={percentage < 50 ? colors.progressLibraryDecreaseColor : colors.progressLibraryIncreaseColor}
           progressBarShadowColor={colors.progressLibraryDetailShadow}
         />
         <div className={style.markers}>

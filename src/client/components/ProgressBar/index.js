@@ -17,6 +17,7 @@ const ProgressBar = ({
   width, 
   tickColor, 
   progressBarBackgroundColor,
+  percentageBgColor,
   progressBarShadowColor
  }) => {
   const barClass = classnames(style.progressBar, customBarClass)
@@ -31,7 +32,7 @@ const ProgressBar = ({
         const backgroundColor = progressBarBackgroundColor || colors.progressBackground
         const percentageStyle = { 
             width: `${width}%`, 
-            background: colors.progressColor 
+            background: percentageBgColor || colors.progressColor 
           }
 
         return (

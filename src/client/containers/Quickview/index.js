@@ -390,6 +390,8 @@ export class Main extends React.PureComponent {
                                               [style.percentagePink]: i == 0,
                                             }
                                           )}
+                                          progressBarBackgroundColor={colors.progressQuickviewBg}
+                                          percentageBgColor={colors.progressQuickviewColor}
                                         />
                                         <p className={style.infoText}>
                                           {textEdit(item.text, item)}
