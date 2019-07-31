@@ -94,16 +94,13 @@
   font-size: 14px;
   font-family: $font-family-ClanOT;
   font-weight: bold;
+  cursor: pointer;
 
   .profileImage {
     width: 34px;
     border: 2px solid $color-white;
     vertical-align: middle;
     box-sizing: border-box;
-  }
-
-  span {
-    padding-left: 16px;
   }
 }
 
@@ -130,28 +127,47 @@
   width: 206px;
   border: solid 1px;
 
-  ul {
+  .dropdownList {
     padding: 0;
     margin: 0;
-    li {
+    .dropdownListItem {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 21px 24px;
-      border-bottom: 1px solid #acb0be;
+      border-bottom: 1px solid;
+      cursor: pointer;
       &:last-child {
         border: none;
       }
-      .text,
       a {
+        margin: 0;
+        padding: 21px 24px;
         cursor: pointer;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      p {
+        text-align: left;
+      }
+      a,
+      p {
         font-family: $font-family-ClanOTBold;
         font-size: 14px;
         line-height: 24px;
         text-decoration: none;
+        width: 100%;
+        color: inherit;
       }
       .icon {
+        font-size: 20px;
+        width: 42px;
+        text-align: center;
       }
+    }
+    .switchButton {
+      padding: 21px 24px;
+      cursor: initial !important;
     }
   }
 }
