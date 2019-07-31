@@ -20,45 +20,52 @@ class DoughnutCard extends React.Component {
       toggleInfoSection,
       chartData,
       videoId,
+      colors,
     } = this.props
-    
-    let backgroundColor = chartData && chartData.datasets
-      ? chartData.datasets[0].backgroundColor
-      : []
+    let backgroundColor =
+      chartData && chartData.datasets
+        ? chartData.datasets[0].backgroundColor
+        : []
     const data = chartData && chartData.datasets && chartData.datasets[0].data
     let newData = []
     const primaryColor = '#2FD7C4'
     // const secondaryColor = '#505050'
 
     //reorder colors so that unique color will be the first item
-    backgroundColor = backgroundColor.reduce((accumulator, currentColor, index) => {
-      if(currentColor === primaryColor) {
-        newData = [data[index], ...newData]
-        return [currentColor, ...accumulator]
-      }
-      newData = [ ...newData, data[index] ]
-      return [ ...accumulator, currentColor ]
-    }, [])
+    backgroundColor = backgroundColor.reduce(
+      (accumulator, currentColor, index) => {
+        if (currentColor === primaryColor) {
+          newData = [data[index], ...newData]
+          return [currentColor, ...accumulator]
+        }
+        newData = [...newData, data[index]]
+        return [...accumulator, currentColor]
+      },
+      []
+    )
 
     if (backgroundColor && backgroundColor.length > 2) {
       backgroundColor = backgroundColor.map((color, index) => {
         let opacity = 100
         if (index > 1) {
-          opacity = opacity - ((index - 1) * 15)
+          opacity = opacity - (index - 1) * 15
         }
         opacity = (opacity / 100).toFixed(2)
-        const { r, g, b } = hexToRgb(color)
-        const newColor = `rgba(${r}, ${g}, ${b}, ${opacity})`     
+        const { r, g, b } = hexToRgb(index > 0 ? colors.textColor : color)
+        const newColor = `rgba(${r}, ${g}, ${b}, ${opacity})`
         return newColor
       })
     }
+
     const newChartData = {
       ...chartData,
-      datasets: [{
-        ...chartData.datasets,
-        data: newData,
-        backgroundColor
-      }],
+      datasets: [
+        {
+          ...chartData.datasets,
+          data: newData,
+          backgroundColor,
+        },
+      ],
     }
 
     return (
@@ -92,11 +99,14 @@ class DoughnutCard extends React.Component {
               </div>
               <div className={style.doughnutChartContainer}>
                 <DoughnutChart
-                  width={150}
-                  height={150}
+                  width={200}
+                  height={200}
+                  layoutPadding={20}
                   displayDataLabels={false}
                   cutoutPercentage={50}
                   data={newChartData}
+                  datasetsBorderColor={colors.moduleBackground}
+                  datasetsHoverBorderColor={colors.moduleBackground}
                 />
                 <p>
                   <span className={style.textBold}>{maxPercentage}% </span>

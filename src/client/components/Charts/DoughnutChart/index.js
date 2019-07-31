@@ -85,7 +85,6 @@ class DoughnutChart extends React.Component {
     } = this.props
 
     const themes = this.props.themeContext.colors
-
     let plugins = []
     if (fillText) {
       const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
@@ -148,8 +147,17 @@ class DoughnutChart extends React.Component {
       }
     }
 
-    const tooltipKey = Math.random()
+    // for opacity backgrounds
+    const chartValues =
+      !!newData && !!newData.datasets && !!newData.datasets[0]
+        ? newData.datasets[0].data.map((value) => {
+            const val = parseFloat(value)
+            if (!average && val <= 5) return null
+            return val
+          })
+        : []
 
+    const tooltipKey = Math.random()
     return (
       <React.Fragment>
         <div
@@ -175,19 +183,10 @@ class DoughnutChart extends React.Component {
                     labels: newData.labels,
                     datasets: [
                       {
-                        data:
-                          !!newData &&
-                          !!newData.datasets &&
-                          !!newData.datasets[0]
-                            ? newData.datasets[0].data.map((value) => {
-                                const val = parseFloat(value)
-                                if (!average && val <= 5) return null
-                                return val
-                              })
-                            : [],
+                        data: chartValues,
                         backgroundColor:
                           newData && newData.datasets
-                            ? newData.datasets[0].backgroundColor
+                            ? newData.datasets[0].backgroundColor.slice(0, 5)
                             : null,
                         borderColor:
                           datasetsBorderColor || themes.moduleBackground,
