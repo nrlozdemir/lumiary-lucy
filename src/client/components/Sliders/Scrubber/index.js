@@ -61,11 +61,35 @@ class Scrubber extends React.Component {
   }
 
   renderTrackVertical(props) {
-    return (<div />)
+    const {
+      colors
+    } = this.props.themeContext
+    
+    const inlineStyle = {
+      borderRadius: 6,
+      background: '#505050',
+      width: 12,
+      right: 10,
+      bottom: 48,
+      top: 0,
+    }
+
+    return <div className={styles.trackHorizontal} style={inlineStyle} />
   }
 
   renderThumbVertical(props) {
-    return (<div />)
+    const {
+      colors
+    } = this.props.themeContext
+    
+    const inlineStyle = {
+      borderRadius: 5,
+      background: '#2fd7c4',
+      width: 12,
+      
+    }
+
+    return <div className={styles.trackHorizontal} style={inlineStyle} />
   }
 
   renderTrackHorizontal(props) {
@@ -218,6 +242,8 @@ class Scrubber extends React.Component {
             ref={el => this.scrollbars = el}
             renderTrackHorizontal={ props => <div {...props} className={styles.emptyScrollBar} /> }
             renderThumbHorizontal={ props => <div {...props} className={styles.emptyScrollBar} /> }
+            renderTrackVertical={ () => this.renderTrackVertical(this.props) }
+            renderThumbVertical={ () => this.renderThumbVertical(this.props) }
             style={{ width: width, height: height }}
           >
             {children}
