@@ -284,14 +284,36 @@ class LibraryDetailShotByShot extends React.Component {
                           boxShadow: `0px 2px 6px 0px ${colors.moduleShadow}`,
                         }}
                       >
-                        <TabList className={style.tabList}>
-                          <Tab selectedClassName={style.selectedTab}>
+                        <TabList
+                          className={classnames(style.tabList, {
+                            [style.dark]: colors.themeType === 'dark',
+                            [style.light]: colors.themeType === 'light',
+                          })}
+                        >
+                          <Tab
+                            selectedClassName={classnames(style.selectedTab, {
+                              [style.dark]: colors.themeType === 'dark',
+                              [style.light]: colors.themeType === 'light',
+                            })}
+                          >
                             People
                           </Tab>
-                          <Tab selectedClassName={style.selectedTab}>
+                          <Tab
+                            selectedClassName={classnames(style.selectedTab, {
+                              [style.dark]: colors.themeType === 'dark',
+                              [style.light]: colors.themeType === 'light',
+                            })}
+                          >
                             Objects
                           </Tab>
-                          <Tab selectedClassName={style.selectedTab}>Color</Tab>
+                          <Tab
+                            selectedClassName={classnames(style.selectedTab, {
+                              [style.dark]: colors.themeType === 'dark',
+                              [style.light]: colors.themeType === 'light',
+                            })}
+                          >
+                            Color
+                          </Tab>
                           <div className={style.cancelButton}>
                             <XCircle
                               onClick={() =>
@@ -432,7 +454,7 @@ class LibraryDetailShotByShot extends React.Component {
                         image: style.image,
                         imageHover: classnames(style.hover, {
                           [style.dark]: colors.themeType === 'dark',
-                          [style.light]: colors.themeType === 'light' 
+                          [style.light]: colors.themeType === 'light',
                         }),
                         originalImage: style.originalImage,
                         firstImageHover: style.firstImageHover,
