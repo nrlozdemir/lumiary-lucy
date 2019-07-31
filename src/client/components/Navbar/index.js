@@ -174,11 +174,70 @@ const SubNavigation = (props) => {
 }
 
 const Selector = (props) => {
+  const logoutRequest = props && props.logoutRequest
   const orginalUrl = props && props.match.url
   const url = props && props.match.url.split('/')
   const navigation = props && props.routeConfig
   const state = props && props.state
   const actions = props && props.actions
+
+  if (orginalUrl.includes('/glossary')) {
+    let routesForGlossary = [
+      {
+        name: 'Properties',
+        url: '/glossary/p/properties',
+      },
+      {
+        name: 'Formats',
+        url: '/glossary/f/formats',
+      },
+      {
+        name: 'Pages',
+        url: '/glossary/p/pages',
+      },
+    ]
+    const LinksForGlossary = (props) => {
+      const { textColor, moduleBackground, moduleBorder } = props.themes
+      return routesForGlossary.map((el, i) => (
+        <NavLink
+          key={i}
+          to={el.url}
+          style={{ color: textColor, borderColor: `${moduleBorder}` }}
+          activeClassName={classnames(style.tab, style.activeLink)}
+        >
+          {el.name}
+        </NavLink>
+      ))
+    }
+
+    const { profile = {} } = props
+    const { brand = {} } = profile
+    const { avatar } = brand
+    return {
+      removeDropdown: true,
+      leftSide: <Logo themes={props.themes} />,
+      navigation: (
+        <div className={style.glossaryHeader}>
+          <div
+            className={style.headerTitle}
+            style={{ color: props.themes.textColor }}
+          >
+            Glossary
+          </div>
+          <div className={style.glossaryLinks}>
+            <div className={style.glossaryBorder}>
+              <LinksForGlossary themes={props.themes} />
+            </div>
+            <div className={profileClass}>
+              <div className="float-right">
+                <Dropdown avatar={avatar} logout={logoutRequest}/>
+              </div>
+            </div>
+          </div>
+        </div>
+      ),
+    }
+  }
 
   const navigationForcePathMatch = Object.values(navigation).filter(
     (r) =>
@@ -189,7 +248,6 @@ const Selector = (props) => {
   )
 
   if (navigationForcePathMatch && navigationForcePathMatch.length) {
-    console.log('navigationForcePathMatch', navigationForcePathMatch)
     return {
       leftSide: <Logo themes={props.themes} />,
       navigation: (
@@ -232,7 +290,6 @@ const Selector = (props) => {
     backToTitle =
       !!navigationPathMatch[0].navigation.backToTitle &&
       navigationPathMatch[0].navigation.backToTitle
-
     return {
       leftSide: <BackTo {...url} title={backToTitle} themes={props.themes} />,
       navigation: (
@@ -292,6 +349,7 @@ const Template = (props) => {
   const { brand = {} } = profile
   const { avatar } = brand
   const { textColor, moduleBackground, moduleShadow } = props.themes
+
   return (
     <header
       style={{
@@ -303,13 +361,13 @@ const Template = (props) => {
       <div className={containerClass}>
         {templateSelector['leftSide']}
         <div className={linksClass}>{templateSelector['navigation']}</div>
-        <div className={profileClass}>
-          <div className="float-right">
-            <Dropdown avatar={avatar} logout={logoutRequest} />
-
-            {/*<span>Bleacher Report</span>*/}
+        {templateSelector['removeDropdown'] ? null : (
+          <div className={profileClass}>
+            <div className="float-right">
+              <Dropdown avatar={avatar} logout={logoutRequest} />
+            </div>
           </div>
-        </div>
+        )}
       </div>
     </header>
   )

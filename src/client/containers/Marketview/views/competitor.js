@@ -73,7 +73,7 @@ export class Competitor extends React.Component {
         />
         <TopSimilarProperties
           moduleKey="MarketView/Competitor/TopSimilarProperties"
-          title="Similar Properties Of Top Videos"
+          title="Top Similar Properties Of Top Videos"
           filters={[
             {
               type: 'dateRange',
@@ -87,9 +87,9 @@ export class Competitor extends React.Component {
           moduleKey="MarketView/Competitor/TopPerformingProperty"
           filters={[
             {
-              type: 'dateRange',
-              selectKey: 'dateRange',
-              placeHolder: 'dateRange',
+              type: 'property',
+              selectKey: 'sakdlfjlasdjf-property',
+              placeHolder: 'Property',
             },
           ]}
           container="competitor"

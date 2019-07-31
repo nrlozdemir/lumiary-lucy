@@ -3,7 +3,7 @@ import PropTypes from 'prop-types'
 import { Bar } from 'react-chartjs-2'
 import cx from 'classnames'
 import style from './style.scss'
-import { randomKey, customChartToolTip } from 'Utils'
+import { randomKey, customChartToolTip, metricSuffix } from 'Utils'
 import { withTheme } from 'ThemeContext/withTheme'
 
 import { options, wrapperBarOptions } from './chartOptions'
@@ -84,7 +84,8 @@ const VideoReleasesBarChartModule = (props) => {
 
   if (!data) return false
 
-  const metric = (data[0]) ? data[0].metric || 'engagement' : 'engagement'
+  const metric = data[0] ? data[0].metric || 'engagement' : 'engagement'
+
   const maxSteps =
     !!data &&
     !!data.length &&
@@ -94,9 +95,9 @@ const VideoReleasesBarChartModule = (props) => {
           obj.maxEngagement > max.engagement
             ? obj.maxEngagement
             : max.engagement,
-        vids: obj.maxVideo > max.vids ? obj.maxVideo : max.vids,
+        vids: max.vids,
       }),
-      { vids: 0, engagement: 0 }
+      { vids: 100, engagement: 0 }
     )
 
   const stepSize =
@@ -117,17 +118,18 @@ const VideoReleasesBarChartModule = (props) => {
         datasets: [
           {
             ...data.datasets[0],
-            data: data.datasets[0].data.map((v) =>
-              //if all data array are 0, chart js has some problems, so making the data
-              //0.000001 and this is fixed.(this data does not seen in chart)
-              Math.round(v * videoNormalizer) || 0.000001
+            data: data.datasets[0].data.map(
+              (v) =>
+                //if all data array are 0, chart js has some problems, so making the data
+                //0.000001 and this is fixed.(this data does not seen in chart)
+                Math.round(v * videoNormalizer) || 0.000001
             ),
           },
           {
             ...data.datasets[1],
             //if all data array are 0, chart js has some problems, so making the data
             //0.000001 and this is fixed.(this data does not seen in chart)
-            data: data.datasets[1].data.map(e => e || -0.000001)
+            data: data.datasets[1].data.map((e) => e || -0.000001),
           },
         ],
       }))) ||
@@ -141,9 +143,10 @@ const VideoReleasesBarChartModule = (props) => {
         label: function(tooltipItem) {
           const value = Math.abs(tooltipItem.yLabel)
           if (tooltipItem.yLabel < 0) {
-            return `${~~(value / 1000)}${value >= 1000 ? 'k' : ''} ${metric.charAt(0).toUpperCase() + metric.slice(1)}`
+            return `${metricSuffix(~~value)} ${metric.charAt(0).toUpperCase() +
+              metric.slice(1)}`
           }
-          return `${Math.round(value / videoNormalizer)} Videos`
+          return `${Math.round(value / videoNormalizer)}% Videos`
         },
       },
     }),
@@ -215,21 +218,21 @@ const VideoReleasesBarChartModule = (props) => {
                         ...wrapperBarOptions.scales.yAxes[0].ticks,
                         fontColor: colors.labelColor,
                         stepSize,
+                        max: maxSteps.engagement,
+                        min: -maxSteps.engagement,
                         callback: function(value, index, values) {
                           if (value == 0) {
                             return 0
                           }
-                          const val = Math.abs(value / 1000)
+                          const val = Math.abs(value)
                           const val2 = values[index] / videoNormalizer
 
                           if (value < 0) {
-                            return Math.abs(value) === maxSteps.engagement
-                              ? `${~~val}${Math.abs(value) >= 1000 ? 'k' : ''}`
+                            return val === maxSteps.engagement
+                              ? `${metricSuffix(val)}`
                               : ''
                           }
-                          return Math.round(val2) === maxSteps.vids
-                            ? `${maxSteps.vids}v`
-                            : ''
+                          return Math.round(val2) === 100 ? '100%' : ''
                         },
                       },
                       gridLines: {
@@ -265,11 +268,11 @@ const VideoReleasesBarChartModule = (props) => {
                                 ...options.scales.yAxes[0],
                                 ticks: {
                                   ...options.scales.yAxes[0].ticks,
-                                  stepSize: maxSteps.engagement
+                                  stepSize: maxSteps.engagement,
                                 },
                               },
                             ],
-                          }
+                          },
                         }}
                         datasetKeyProvider={datasetKeyProvider}
                       />
@@ -288,7 +291,8 @@ const VideoReleasesBarChartModule = (props) => {
                       )}
                     </div>
                   </div>
-              )})}
+                )
+              })}
           </div>
         </div>
       </div>

@@ -110,54 +110,57 @@ const RadarChart = (props) => {
 
   const { labels = [] } = parsedData
   const colorOrder = {
-    'Red': {},
+    Red: {},
     'Orange-Red': {},
-    'Orange': {},
+    Orange: {},
     'Yellow-Orange': {},
-    'Yellow': {},
+    Yellow: {},
     'Yellow-Green': {},
-    'Green': {},
+    Green: {},
     'Blue-Green': {},
-    'Blue': {},
+    Blue: {},
     'Blue-Purple': {},
-    'Purple': {},
+    Purple: {},
     'Red-Purple': {},
   }
 
   labels.forEach((label) => {
-    if(colorOrder[label.name]) {
+    if (colorOrder[label.name]) {
       colorOrder[label.name] = label
     }
   })
 
   const useAllVals = true
-  const thisData = Object.keys(colorOrder).reduce((accumulator, key) => {
-    let count = colorOrder[key].count || 0
-    if(count !== 0 || useAllVals) {
-      accumulator.dataKeys.push(key)
-      accumulator.dataValues.push(count)
+  const thisData = Object.keys(colorOrder).reduce(
+    (accumulator, key) => {
+      let count = colorOrder[key].count || 0
+      if (count !== 0 || useAllVals) {
+        accumulator.dataKeys.push(key)
+        accumulator.dataValues.push(count)
+      }
+
+      return accumulator
+    },
+    {
+      dataKeys: [],
+      dataValues: [],
     }
+  )
 
-    return accumulator
-  }, {
-    dataKeys: [],
-    dataValues: []
-  })
-
-  const theData = (labels.length === 0) 
-    ? {}
-    : {
-      datasets:   [
-        {
-          ...parsedData.datasets[0],
-          data: thisData.dataValues
+  const theData =
+    labels.length === 0
+      ? {}
+      : {
+          datasets: [
+            {
+              ...parsedData.datasets[0],
+              data: thisData.dataValues,
+            },
+          ],
+          labels: thisData.dataKeys.map((color) => {
+            return colorOrder[color]
+          }),
         }
-      ],
-      labels: thisData.dataKeys.map((color) => {
-        return colorOrder[color]
-      })
-    }
-
 
   return (
     <Radar
@@ -176,12 +179,25 @@ const RadarChart = (props) => {
           callbacks: {
             title: () => '',
             label: function(tooltipItem, data) {
-              const count = data && data.labels && data.labels[tooltipItem['index']] && data.labels[tooltipItem['index']].count || 0
-              const metric = data && data.datasets && data.datasets[0] && data.datasets[0].metric || ''
-              const name = data && data.labels && data.labels[tooltipItem['index']] && data.labels[tooltipItem['index']].name 
-              return `${metricSuffix(
-                count
-              ) || 0} ${metric || ''} ${!!name && `| ${name}`}`
+              const count =
+                (data &&
+                  data.labels &&
+                  data.labels[tooltipItem['index']] &&
+                  data.labels[tooltipItem['index']].count) ||
+                0
+              const metric =
+                (data &&
+                  data.datasets &&
+                  data.datasets[0] &&
+                  data.datasets[0].metric) ||
+                ''
+              const name =
+                data &&
+                data.labels &&
+                data.labels[tooltipItem['index']] &&
+                data.labels[tooltipItem['index']].name
+              return `${metricSuffix(count) || 0} ${metric || ''} ${!!name &&
+                `| ${name}`}`
             },
           },
         }),

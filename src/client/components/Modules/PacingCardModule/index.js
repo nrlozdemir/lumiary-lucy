@@ -17,7 +17,11 @@ const PacingCardModule = ({
   legend,
   loading = false,
 }) => {
-  const { horizontalStackedBarData = {}, stadiumData, horizontalStackedBarDataOriginal = {} } = data
+  const {
+    horizontalStackedBarData = {},
+    stadiumData,
+    horizontalStackedBarDataOriginal = {},
+  } = data
 
   for (const _data of (horizontalStackedBarData &&
     horizontalStackedBarData.datasets) ||
@@ -34,9 +38,9 @@ const PacingCardModule = ({
       value: item.data[idx] || 0,
       color: item.backgroundColor,
     }))
-  
-  const horizontalBarChartValues = { ...stadiumValues }
 
+  const horizontalBarChartValues = { ...stadiumValues }
+  
   return (
     <Module
       moduleKey={moduleKey}
@@ -56,7 +60,9 @@ const PacingCardModule = ({
             horizontalStackedBarDataOriginal={horizontalStackedBarDataOriginal}
             values={horizontalBarChartValues}
             options={barChartOptions}
-            datasetsIsEmpty={!loading && isDataSetEmpty(horizontalStackedBarData)}
+            datasetsIsEmpty={
+              !loading && isDataSetEmpty(horizontalStackedBarData)
+            }
           />
           <StadiumChart
             data={stadiumValues}

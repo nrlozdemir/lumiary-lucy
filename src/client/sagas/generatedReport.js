@@ -7,6 +7,7 @@ import { actions as reportsActions } from 'Reducers/reports'
 import querystring from 'querystring'
 
 import {
+  sortObject,
   getDateBucketFromRange,
   getBrandAndCompetitors,
   getFilteredCompetitors,
@@ -142,7 +143,7 @@ function* getVideoReleasesBarChart({ data: { report } }) {
       metric,
       platform,
       daterange,
-      property: 'format',
+      property: 'duration',
       limit: 4,
     }
 
@@ -153,10 +154,12 @@ function* getVideoReleasesBarChart({ data: { report } }) {
       'GET'
     )
 
-    if (!!response) {
+    const sortedResponse = sortObject(response)
+
+    if (!!sortedResponse) {
       yield put(
         actions.getVideoReleasesBarChartSuccess(
-          percentageManipulation(convertVideoEngagementData(response, metric))
+          convertVideoEngagementData(sortedResponse, metric)
         )
       )
     } else {
@@ -289,7 +292,7 @@ function* getPacingCardData({ data: { report } }) {
         getDataFromApi,
         {
           ...options,
-          proportionOf: 'format',
+          proportionOf: 'duration',
           limit: 4,
         },
         '/report'

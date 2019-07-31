@@ -20,6 +20,7 @@ import {
   isInteger,
   sortBy,
 } from 'lodash'
+import moment from 'moment'
 
 /**
  * Convert data to chart js structure
@@ -569,48 +570,65 @@ const parseAverage = (payload) => {
  */
 const convertVideoEngagementData = (data, metric = 'views') => {
   if (isEmpty(data)) {
-    return []
+    return {}
   }
 
-  const formats = Object.keys(data)
-
-  const dateBuckets = Object.keys(data[formats[0]][metric])
-
-  return formats.map((fmt) => {
-    const videoCounts = dateBuckets.map((db) =>
-      !!data[fmt] && !!data[fmt][db] ? data[fmt][db] : 0
-    )
-
-    const engagementCounts = dateBuckets.map((db) =>
-      !!data[fmt] && !!data[fmt][metric] && !!data[fmt][metric][db]
-        ? -Math.abs(data[fmt][metric][db])
-        : 0
-    )
-
-    const maxCount = (array) => Math.max.apply(null, array.map(Math.abs))
-
-    return {
-      maxVideo: maxCount(videoCounts),
-      maxEngagement: maxCount(engagementCounts),
-      labels: dateBuckets.map(
-        (db, idx) => `${db[0]}${/\d/.test(db) ? idx : ''}`
-      ),
-      label: fmt,
-      datasets: [
-        {
-          data: videoCounts,
-          label: 'Videos',
-          backgroundColor: '#2FD7C4',
-          display: false,
-        },
-        {
-          data: engagementCounts,
-          label: 'Engagement',
-          backgroundColor: '#5292E5',
-        },
-      ],
+  const propertyMap = Object.keys(data).reduce((accumulator, key) => {
+    if (!accumulator[key]) {
+      accumulator[key] = {
+        metric,
+        maxVideo: 100, // always 100% max
+        maxEngagement: 0,
+        label: key,
+        labels: [],
+        datasets: [
+          {
+            data: [],
+            label: 'Videos',
+            backgroundColor: '#2FD7C4',
+            display: false,
+          },
+          {
+            data: [],
+            label: 'Engagement',
+            backgroundColor: '#5292E5',
+          },
+        ],
+      }
     }
-  })
+
+    const videos = data[key]
+    const engagement = data[key][metric]
+
+    for (let i = 0; i < 7; i++) {
+      const weekday = moment()
+        .subtract(i, 'days')
+        .format('dddd')
+      const weekdayShort = moment()
+        .subtract(i, 'days')
+        .format('dd')[0]
+
+      // if (videos[weekday] > accumulator[key].maxVideo) {
+      //   accumulator[key].maxVideo = videos[weekday]
+      // }
+
+      if (engagement[weekday] > accumulator[key].maxEngagement) {
+        accumulator[key].maxEngagement = engagement[weekday]
+      }
+
+      accumulator[key].labels.unshift(weekdayShort)
+      accumulator[key].datasets[0].data.unshift(
+        Math.round((videos[weekday] / videos.total) * 100)
+      )
+      accumulator[key].datasets[1].data.unshift(
+        engagement[weekday] === 0 ? 0 : engagement[weekday] * -1
+      )
+    }
+
+    return accumulator
+  }, {})
+
+  return Object.values(propertyMap)
 }
 
 const getMinMaxFromDatasets = (datasets = [], initial = 0, type = 'max') => {
@@ -715,7 +733,7 @@ const convertNumberArrIntoPercentages = (arr = []) => {
 const percentageBeautifier = (value, precision) => {
   /*
   // all numbers converted to decimals
-  // except 0 
+  // except 0
   if (value === 0) {
     return value
   }
@@ -793,32 +811,34 @@ const percentageManipulation = (bucket) => {
  */
 
 const getCVScoreChartAttributes = (data, maxPercent) => {
-  maxPercent = (maxPercent !== undefined) 
-    ? maxPercent 
-    : (!!data &&
-        Object.keys(data).reduce((accumulator, key) => {
-          const videoPercents = data[key].videoPercents
-          const maxPercentInSet = Math.max(
-            videoPercents ? videoPercents : data[key]
-          )
-          return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
-        }, 0)) || 0
+  maxPercent =
+    maxPercent !== undefined
+      ? maxPercent
+      : (!!data &&
+          Object.keys(data).reduce((accumulator, key) => {
+            const videoPercents = data[key].videoPercents
+            const maxPercentInSet = Math.max(
+              videoPercents ? videoPercents : data[key]
+            )
+            return maxPercentInSet > accumulator ? maxPercentInSet : accumulator
+          }, 0)) ||
+        0
 
-  
   // const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
   // const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
 
-  const chartYAxisMax = maxPercent < 50 
-  ? maxPercent < 33 
-    ? maxPercent < 25 
-      ? maxPercent < 20 
-        ? maxPercent < 15 
-          ? 15 
-          : 20
-        : 25 
-      : 33 
-    : 50 
-  : 100
+  const chartYAxisMax =
+    maxPercent < 50
+      ? maxPercent < 33
+        ? maxPercent < 25
+          ? maxPercent < 20
+            ? maxPercent < 15
+              ? 15
+              : 20
+            : 25
+          : 33
+        : 50
+      : 100
   const chartYAxisStepSize = chartYAxisMax / 4
 
   return {

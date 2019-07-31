@@ -34,9 +34,9 @@ class PacingCard extends React.Component {
 
     return (
       <PacingCardModule
-        data={!loading ? data : {}}
+        data={!loading ? data || {} : {}}
         moduleKey={'BrandInsights/PacingCard'}
-        title="Pacing For Each Format by Performance"
+        title="Pacing For Each Duration by Performance"
         loading={loading}
       />
     )

@@ -1,9 +1,12 @@
 import qs from 'qs'
 import { types } from 'Reducers/auth'
+import { actions } from 'Reducers/app'
+
 import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
 import axios from 'axios'
-import { ajax, buildQApiUrl } from 'Utils/api'
+import { getProfileObjectWithBrand } from 'Utils'
+import { ajax, buildQApiUrl, getDataFromApi } from 'Utils/api'
 import authMockData from 'Api/mocks/authMock.json'
 
 const VALIDATE_SSO = '/auth/sso/validate'
@@ -21,8 +24,7 @@ function getAuthDataApi(name, data) {
         ? {
             status: 'success',
             message: 'logged-in',
-            token: authMockData.user.token,
-            id: authMockData.user.id,
+            token: authMockData.token,
           }
         : {
             status: 'error',
@@ -30,16 +32,19 @@ function getAuthDataApi(name, data) {
           }
     }
 
-    return authMockData[name]
+    return { profile: authMockData[name] }
   })
 }
 
+// authorize and getProfile should be combined,
+// only login_success/error types should be present
 export function* authorize({ email, password }) {
   try {
     const payload = yield call(getAuthDataApi, 'login', { email, password })
 
     if (payload.status === 'success') {
       yield put({ type: types.LOGIN_SUCCESS, payload })
+      yield call(additionalLoggedInFeatures, payload)
     } else {
       yield put({ type: types.LOGIN_ERROR, payload: payload })
     }
@@ -49,14 +54,49 @@ export function* authorize({ email, password }) {
   }
 }
 
-export function* getProfile({ userId, token }) {
+// authorize and getProfile should be combined,
+// only login_success/error types should be present
+export function* getProfile({ token }) {
   try {
     const payload = yield call(getAuthDataApi, 'profile')
 
-    yield put({ type: types.GET_PROFILE_SUCCESS, payload })
+    if (
+      !!payload.profile &&
+      (!!payload.profile.brand || !!payload.profile.buyer)
+    ) {
+      yield put({ type: types.GET_PROFILE_SUCCESS, payload: payload.profile })
+      yield call(additionalLoggedInFeatures, payload)
+    } else {
+      throw new Error('Get Profile Error')
+    }
   } catch (e) {
     console.log(e)
     yield put({ type: types.GET_PROFILE_ERROR, payload: e.message })
+  }
+}
+
+function* additionalLoggedInFeatures(payload) {
+  if (
+    !!payload.profile &&
+    (!!payload.profile.brand || !!payload.profile.buyer)
+  ) {
+    try {
+      const { brand } = getProfileObjectWithBrand(payload.profile)
+      if (!!brand && !!brand.uuid) {
+        const response = yield call(
+          getDataFromApi,
+          {},
+          buildQApiUrl(`/glossary/${brand.uuid}`),
+          'GET'
+        )
+        yield put(actions.getSectionExplanationsSuccess(response))
+      } else {
+        throw new Error('No Brand Available')
+      }
+    } catch (e) {
+      console.log(e)
+      yield put(actions.getSectionExplanationsFailure(e))
+    }
   }
 }
 
@@ -72,6 +112,7 @@ export function* validateSso({ payload }) {
     })
     if (response.data.token) {
       yield put({ type: types.LOGIN_SSO_SUCCESS, payload: response.data })
+      yield call(additionalLoggedInFeatures, response.data)
     }
   } catch (e) {
     console.log(e)

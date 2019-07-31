@@ -376,7 +376,7 @@ const secondsToHHMMSS = (s = 0) => {
 /*
   Used to pull the brand and competiitors from SSO success payload, which contains { profile: { buyer: { brands }}}
  */
-const getBrandAndCompetitorsFromProfileObject = (profile, brand_id) => {
+const getProfileObjectWithBrand = (profile, brand_id) => {
   const { buyer = {} } = profile
   const { brands = [] } = buyer
 
@@ -389,11 +389,9 @@ const getBrandAndCompetitorsFromProfileObject = (profile, brand_id) => {
 
     if (!!foundBrand) {
       if (!foundBrand.competitors) {
-        foundBrand.competitors = foundBrand.related
-          ? foundBrand.related
-          : []
+        foundBrand.competitors = foundBrand.related ? foundBrand.related : []
       }
-      response = foundBrand
+      response = { ...profile, brand: foundBrand }
     }
   }
 
@@ -431,7 +429,45 @@ const customChartToolTip = (themes, customOptions = {}, forceData) => {
   }
 }
 
+const getModuleTerms = (key, data) => {
+  const {
+    glossary: { terms },
+  } = data
+  const moduleObject =
+    data &&
+    data.glossary &&
+    data.glossary.modules &&
+    data.glossary.modules.find((module) => module.identifier === key)
+  const termsUuids =
+    moduleObject &&
+    moduleObject.module &&
+    moduleObject.module.terms &&
+    moduleObject.module.terms.map((term) => term.uuid)
+  return Object.keys(terms)
+    .map((term) => {
+      const item = terms[term].find(
+        (item) => termsUuids && termsUuids.includes(item.uuid)
+      )
+      if (item) {
+        return {
+          ...item,
+          letter: term,
+        }
+      }
+    })
+    .filter(function(element) {
+      return element !== undefined
+    })
+}
+
+const sortObject = (o = {}, reverse = false) => {
+  const sortedKeys = Object.keys(o).sort()
+  const keysToUse = reverse ? sortedKeys.reverse() : sortedKeys
+  return keysToUse.reduce((r, k) => ((r[k] = o[k]), r), {})
+}
+
 export {
+  sortObject,
   randomKey,
   socialIconSelector,
   toSlug,
@@ -457,6 +493,7 @@ export {
   normalizationBubbleMapping,
   hexToRgb,
   secondsToHHMMSS,
-  getBrandAndCompetitorsFromProfileObject,
+  getProfileObjectWithBrand,
   customChartToolTip,
+  getModuleTerms,
 }

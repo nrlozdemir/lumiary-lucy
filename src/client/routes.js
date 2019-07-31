@@ -190,9 +190,25 @@ const routes = [
     },
   },
   {
+    path: '/glossary/:letter/:term',
+    exact: true,
+    component: 'Glossary',
+  },
+  {
+    path: '/glossary/:letter',
+    exact: true,
+    component: 'Glossary',
+  },
+  {
+    path: '/glossary',
+    exact: true,
+    component: 'Glossary',
+  },
+  {
     path: '/sso',
     exact: true,
     component: 'SSO',
+    navbarOff: true,
   },
   {
     path: '/account/login',
@@ -252,26 +268,34 @@ const RouteWithSubRoutes = (route) => {
     </DynamicImport>
   )
 
-  return route.notPrivateRoute ? (
-    route.user && route.user.token ? (
-      <Redirect
-        to={{
-          pathname: '/',
-        }}
-      />
+  return route.path !== '/sso' ? (
+    route.notPrivateRoute ? (
+      route.user && route.user.token ? (
+        <Redirect
+          to={{
+            pathname: '/',
+          }}
+        />
+      ) : (
+        <Route
+          path={route.path}
+          exact={route.exact}
+          component={(props) => body(props)}
+        />
+      )
     ) : (
-      <Route
+      <PrivateRoute
         path={route.path}
         exact={route.exact}
+        user={route.user}
+        profile={route.profile}
         component={(props) => body(props)}
       />
     )
   ) : (
-    <PrivateRoute
+    <Route
       path={route.path}
       exact={route.exact}
-      user={route.user}
-      profile={route.profile}
       component={(props) => body(props)}
     />
   )
@@ -294,6 +318,7 @@ class Routes extends React.Component {
       profileLStore && profileLStore !== 'null' && profileLStore !== 'undefined'
         ? JSON.parse(profileLStore)
         : {}
+
     const sectionsStore =
       sectionsLStore &&
       sectionsLStore !== 'null' &&
@@ -306,11 +331,11 @@ class Routes extends React.Component {
         !Object.keys(sectionsStore).length ||
         (Object.keys(sectionsStore).length && !sectionsStore.data)
       ) {
-        getSectionExplanationsRequest()
+        !!profile && getSectionExplanationsRequest()
       }
 
-      if (!Object.keys(profileStore).length) {
-        getProfileRequest({ userId: user.id, token: user.token })
+      if (!Object.keys(profileStore).length && !profile) {
+        getProfileRequest({ token: user.token })
       }
     }
 

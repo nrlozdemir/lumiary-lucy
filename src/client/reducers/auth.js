@@ -1,7 +1,7 @@
 import jwtDecode from 'jwt-decode'
 import { fromJS } from 'immutable'
 import { createSelector } from 'reselect'
-import { getBrandAndCompetitorsFromProfileObject } from 'Utils'
+import { getProfileObjectWithBrand } from 'Utils'
 import { push } from 'connected-react-router'
 
 export const types = {
@@ -84,7 +84,6 @@ export const initialState = fromJS({
   user: (typeof window === 'object'
     ? JSON.parse(window.localStorage.getItem('user'))
     : null) || {
-    id: null,
     token: false,
     refresh: false,
     refreshing: false,
@@ -142,13 +141,16 @@ const reducer = (state = initialState, action) => {
   const { payload } = action
 
   switch (action.type) {
+    case types.LOGIN_SSO_REQUEST:
     case types.LOGIN_REQUEST:
       return state
         .set('requesting', fromJS(true))
         .set('loggedIn', fromJS(false))
         .set('loginError', fromJS(null))
         .set('message', fromJS(null))
+        .set('profile', fromJS(null))
 
+    // this should set profile too once the profile/user reducer/sagas are merged
     case types.LOGIN_SUCCESS:
       return state
         .set('requesting', fromJS(false))
@@ -178,12 +180,29 @@ const reducer = (state = initialState, action) => {
         )
         .set('profile', null)
 
-    case types.GET_PROFILE_REQUEST:
+    // no need for this set of reducers, because this logic should be in LOGIN_SUCCESS, similiar to LOGIN_SSO_SUCCESS
     case types.GET_PROFILE_SUCCESS:
-      return state.setIn(['profile'], fromJS(payload))
+      return state.setIn(['profile'], fromJS(getProfileObjectWithBrand(payload)))
 
     case types.GET_PROFILE_ERROR:
       return state.set('message', fromJS(payload))
+    //
+
+    case types.LOGIN_SSO_SUCCESS: {
+      const { token, refresh, profile } = action.payload
+      const expiry = parseInt(jwtDecode(token).exp + '000')
+
+      return state
+        .setIn(['profile'], fromJS(getProfileObjectWithBrand(profile)))
+        .setIn(['user', 'token'], fromJS(token))
+        .setIn(['user', 'refresh'], fromJS(refresh))
+        .setIn(['user', 'expiry'], fromJS(expiry))
+        .set('requesting', fromJS(false))
+        .set('successful', fromJS(true))
+        .set('loggedIn', fromJS(true))
+        .set('refreshing', fromJS(false))
+        .set('loginError', fromJS(null))
+    }
 
     case types.UPDATE_PASSWORD_REQUEST:
       return state
@@ -260,24 +279,6 @@ const reducer = (state = initialState, action) => {
         .setIn(['OAuth', 'success'], fromJS(false))
         .setIn(['OAuth', 'message'], fromJS(payload.message))
 
-    case types.LOGIN_SSO_SUCCESS: {
-      const { token, refresh, profile } = action.payload
-      const expiry = parseInt(jwtDecode(token).exp + '000')
-
-      return state
-        .setIn(
-          ['profile', 'brand'],
-          fromJS(getBrandAndCompetitorsFromProfileObject(profile))
-        )
-        .setIn(['user', 'token'], fromJS(token))
-        .setIn(['user', 'refresh'], fromJS(refresh))
-        .setIn(['user', 'expiry'], fromJS(expiry))
-        .set('requesting', fromJS(false))
-        .set('successful', fromJS(true))
-        .set('loggedIn', fromJS(true))
-        .set('refreshing', fromJS(false))
-        .set('loginError', fromJS(null))
-    }
     default:
       return state
   }

@@ -169,68 +169,95 @@ function* getPlatformTopVideosMarketview({
   }
 }
 
-function* getSimilarProperties({ data: { dateRange, container } }) {
+function* getSimilarProperties(params = {}) {
   try {
+    const {
+      data: { dateRange, container, platform },
+    } = params
     const { brand } = yield select(makeSelectAuthProfile())
-    const metric = 'shares'
+    const { uuid, competitors = [] } = brand
 
-    const competitors =
-      !!brand.competitors &&
-      !!brand.competitors.length &&
-      brand.competitors.map((c) => c.uuid)
-
-    const url = buildApiUrl(`/brand/${brand.uuid}/properties`, {
-      metric,
-      top: 20,
-      competitors,
-      daterange: dateRange,
-    })
-
-    const response = yield call(getDataFromApi, undefined, url, 'GET')
-
-    if (!!response && !!response.market && !!response.propertiesRanked) {
-      const highestBuckets = _.slice(
-        _.orderBy(
-          response.propertiesRanked,
-          (item) => (!!item[metric] ? item[metric] : 0),
-          ['desc']
-        ),
-        0,
-        3
+    if (!uuid) {
+      throw new Error(
+        'Marketview/detail getSimilarProperties error, no brand uuid defined'
       )
-
-      if (
-        container === 'competitor' &&
-        !!highestBuckets &&
-        !!highestBuckets.length
-      ) {
-        yield put({
-          type: types.SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY,
-          payload:
-            !!highestBuckets[0] && !!highestBuckets[0].property
-              ? highestBuckets[0].property
-              : null,
-        })
-      }
-
-      const val =
-        (!!highestBuckets &&
-          !!highestBuckets.length &&
-          highestBuckets.map((value, idx) => ({
-            doughnutChartValues: convertPropertiesIntoDatasets(response, {
-              metric,
-              type: 'market',
-              hoverBg: false,
-              percentage: true,
-              property: value.property,
-            }),
-          }))) ||
-        []
-
-      yield put(actions.getSimilarPropertiesSuccess(val))
-    } else {
-      throw new Error('Marketview/detail getSimilarProperties error')
     }
+
+    let requestBody
+    switch (container) {
+      case 'competitor':
+        if (competitors.length === 0) {
+          throw new Error(
+            'Marketview/detail getSimilarProperties error, no competitors provided'
+          )
+        }
+
+        const mappedCompetitors = competitors.map((c) => ({ uuid: c.uuid }))
+
+        requestBody = {
+          properties: ['duration', 'pacing', 'dominantColorShots'],
+          daterange: dateRange,
+          platforms: ['all'],
+          percentile: 80,
+          competitors: JSON.stringify(mappedCompetitors),
+        }
+        break
+
+      case 'platform':
+        if (!platform) {
+          throw new Error(
+            'Marketview/detail getSimilarProperties error, no platform provided'
+          )
+        }
+
+        requestBody = {
+          properties: ['duration', 'pacing', 'dominantColorShots'],
+          daterange: dateRange,
+          platforms: [platform],
+          percentile: 80,
+        }
+        break
+
+      case 'time':
+        requestBody = {
+          properties: ['duration', 'pacing', 'dominantColorShots'],
+          daterange: dateRange,
+          platforms: ['all'],
+          percentile: 80,
+        }
+        break
+    }
+
+    if (!requestBody) {
+      throw new Error(
+        'Marketview/detail getSimilarProperties error, could not determine requestBody'
+      )
+    }
+
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      `/brand/${uuid}/topvideoproperties?${querystring.stringify(requestBody)}`,
+      'GET'
+    )
+
+    if (!response) {
+      throw new Error(
+        'Marketview/detail getSimilarProperties error, invalid server response'
+      )
+    }
+
+    if (
+      !response.duration ||
+      !response.pacing ||
+      !response.dominantColorShots
+    ) {
+      throw new Error(
+        'Marketview/detail getSimilarProperties error, response body missing keys needed to render'
+      )
+    }
+
+    yield put(actions.getSimilarPropertiesSuccess(response))
   } catch (error) {
     console.log(error)
     yield put(actions.getSimilarPropertiesFailure(error))
@@ -528,7 +555,7 @@ function* getTotalCompetitorViewsData() {
     }
 
     const payload = yield call(getDataFromApi, { ...options }, '/report')
-    
+
     if (!!payload) {
       yield put(
         actions.getTotalCompetitorViewsSuccess(
@@ -595,7 +622,7 @@ function* getTopPerformingPropertiesData({
 }
 
 function* getTopPerformingPropertiesByCompetitorsData({
-  payload: { dateRange = 'week', property },
+  payload: { dateRange = '3months', property },
 }) {
   try {
     const profile = yield select(makeSelectAuthProfile())

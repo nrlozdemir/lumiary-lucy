@@ -60,7 +60,7 @@ class TopPerformingFormat extends React.Component {
       !loading &&
       ((!!lineChartData && isLineChartEmpty) || isEmpty(data)) &&
       isEmpty(properties)
-
+      
     return (
       <LineAndDoughnutChartModule
         moduleKey="Panoptic/TopPerformingPacingThisWeekByCVScore"
