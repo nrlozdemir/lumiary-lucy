@@ -38,9 +38,6 @@ class Competitors extends Component {
         colors={colors}
       >
         <div className={style.info}>
-          <div className={style.image}>
-            <img src="https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png" />
-          </div>
           <h1 style={colors.account.h1 || {}}>Here are ya compeitorz yo</h1>
         </div>
         <div className={style.list}>

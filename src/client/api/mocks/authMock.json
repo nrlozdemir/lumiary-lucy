@@ -1,30 +1,43 @@
 {
-  "user": {
-    "id": "1344554634534",
-    "token": "nk234k23j4k242j"
-  },
+  "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjNhZThkOGJlLTJhYTEtNGZmOS1hZTQ0LTkxOWRhZTZiMzA3MCIsImVtYWlsIjoiZWJveW50b25AYWFwdGl2LmNvbSIsIm5hbWUiOiJFcmljYSBCb3ludG9uIiwiZXhwIjoxNTY0NTA0MzQzLCJpYXQiOjE1NjQ1MDI1NDN9.KZKHNTidmW-7kZNZKlzwtnE5gPoyXCbKYpvBIumiWLE",
+  "refresh": "b496bf85-b2b6-4c48-be93-a0cd82ccb147",
   "profile": {
-    "name": "John Wick",
-    "avatar": "https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png",
-    "brand": {
-      "name": "Bleacher Report",
-      "uuid": "d65aa957-d094-4cf3-8d37-dafe50e752ea",
+    "uuid": "3ae8d8be-2aa1-4ff9-ae44-919dae6b3070",
+    "first_name": "Erica",
+    "last_name": "Boynton",
+    "full_name": "Erica Boynton",
+    "buyer": {
+      "slug": "erica-boynton",
+      "uuid": "08901ffa-691d-44f5-b37c-bedd968769c7",
+      "name": "Erica Boynton",
+      "description": "",
       "avatar": "https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png",
-      "competitors": [
+      "user_uuid": "3ae8d8be-2aa1-4ff9-ae44-919dae6b3070",
+      "brands": [
         {
-          "name": "Barstool Sports",
-          "uuid": "1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6",
-          "cover": "https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png"
-        },
-        {
-          "name": "ESPN",
-          "uuid": "40002bf1-c2d3-41cb-8d85-77f5533d7b45",
-          "cover": "https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png"
-        },
-        {
-          "name": "Players' Tribune",
-          "uuid": "7a5d6636-a49a-41ab-9d28-a47933fa5f04",
-          "cover": "https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png"
+          "name": "Bleacher Report",
+          "uuid": "d65aa957-d094-4cf3-8d37-dafe50e752ea",
+          "description": "Our vision is simple: we want to improve the lives of millions through fitness. Our journey begins with a magical combination of scientifically effective programming, empathetic trainers, and uplifting music.",
+          "is_default": true,
+          "is_lumiere": true,
+          "avatar": "https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png",
+          "related": [
+            {
+              "name": "Barstool Sports",
+              "uuid": "1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6",
+              "cover": "https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png"
+            },
+            {
+              "name": "ESPN",
+              "uuid": "40002bf1-c2d3-41cb-8d85-77f5533d7b45",
+              "cover": "https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png"
+            },
+            {
+              "name": "Players' Tribune",
+              "uuid": "7a5d6636-a49a-41ab-9d28-a47933fa5f04",
+              "cover": "https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png"
+            }
+          ]
         }
       ]
     }

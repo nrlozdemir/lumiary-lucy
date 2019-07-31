@@ -43,9 +43,6 @@ class OAuth extends Component {
       >
         <div className={style.form}>
           <div className={style.info}>
-            <div className={style.image}>
-              <img src="https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png" />
-            </div>
             <h1 style={colors.account.h1 || {}}>Give us ya informationz</h1>
             <p style={colors.account.p || {}}>
               Need a disclaimer if a user does not connect with any social

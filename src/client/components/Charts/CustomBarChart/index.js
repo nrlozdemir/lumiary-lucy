@@ -54,7 +54,6 @@ class CustomBarChart extends React.Component {
       originalData = {},
       metric = '',
     } = this.props
-
     const zeroFill = parseInt(options.zeroFill)
     const statMax = Object.values(data).reduce((prev, next) => {
       return prev.score < next.score ? next : prev
@@ -95,8 +94,6 @@ class CustomBarChart extends React.Component {
                 metricPlural === false
                   ? ''
                   : `On ${dayOfWeek} there were ${ogData} ${metricPlural}`
-
-              console.log(dayText, element.score, heightPx, height, isSelected)
 
               return (
                 <React.Fragment key={index}>

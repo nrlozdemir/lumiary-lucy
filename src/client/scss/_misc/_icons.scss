@@ -1,14 +1,11 @@
 @font-face {
   font-family: 'icomoon';
-  src: url($staticUrl + 'fonts/lumiary/icomoon.eot?e21ori');
-  src: url($staticUrl + 'fonts/lumiary/icomoon.eot?e21ori#iefix')
+  src: url($staticUrl+'fonts/lumiary/icomoon.eot?e21ori');
+  src: url($staticUrl+'fonts/lumiary/icomoon.eot?e21ori#iefix')
       format('embedded-opentype'),
-    url($staticUrl + 'fonts/lumiary/icomoon.ttf?e21ori')
-      format('truetype'),
-    url($staticUrl + 'fonts/lumiary/icomoon.woff?e21ori')
-      format('woff'),
-    url($staticUrl + 'fonts/lumiary/icomoon.svg?e21ori#icomoon')
-      format('svg');
+    url($staticUrl+'fonts/lumiary/icomoon.ttf?e21ori') format('truetype'),
+    url($staticUrl+'fonts/lumiary/icomoon.woff?e21ori') format('woff'),
+    url($staticUrl+'fonts/lumiary/icomoon.svg?e21ori#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -28,7 +25,18 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
+.icon-Glossary:before {
+  content: '\e93a';
+}
+.icon-Logout:before {
+  content: '\e93b';
+}
+.icon-Search:before {
+  content: '\e93c';
+}
+.icon-Support:before {
+  content: '\e93d';
+}
 .icon-Check:before {
   content: '\e920';
   color: #fff;
@@ -160,7 +168,6 @@
 }
 .icon-Search:before {
   content: '\e918';
-  color: #fff;
 }
 .icon-Information:before {
   content: '\e919';

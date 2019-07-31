@@ -622,7 +622,7 @@ function* getTopPerformingPropertiesData({
 }
 
 function* getTopPerformingPropertiesByCompetitorsData({
-  payload: { dateRange = 'week', property },
+  payload: { dateRange = '3months', property },
 }) {
   try {
     const profile = yield select(makeSelectAuthProfile())

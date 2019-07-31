@@ -6,6 +6,7 @@ import ToolTip from 'Components/ToolTip'
 import InformationModal from 'Components/Modal/Information'
 import classnames from 'classnames'
 import { moduleIds } from 'Utils/globals'
+import { getModuleTerms } from 'Utils'
 
 const HeaderModule = ({
   title,
@@ -38,7 +39,7 @@ const HeaderModule = ({
             closeTimeoutMS={300}
             onRequestClose={() => setModalShow(false)}
             options={{
-              data: data && data[moduleIds[moduleKey]],
+              data: getModuleTerms(moduleKey, data),
               loading,
             }}
           />

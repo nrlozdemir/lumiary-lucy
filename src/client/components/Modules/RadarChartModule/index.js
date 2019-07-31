@@ -101,83 +101,101 @@ const RadarChartModule = ({
               </div>
             </div>
             <div className={'mt-32 ' + style.labelContainer}>
-              {leftProgressHasData && (
-                <div
-                  className={style.label}
-                  style={{
-                    background: colors.labelBackground,
-                    color: colors.labelColor,
-                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                    opacity: leftOpacity,
-                  }}
-                >
+              <div
+                className={style.label}
+                style={{
+                  background: colors.labelBackground,
+                  color: colors.labelColor,
+                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  opacity: leftOpacity,
+                }}
+              >
+                {leftProgressHasData || leftTitle ? (
                   <span>
                     {leftTitle
                       ? leftTitle
                       : !!checkData && !!checkData[0] && checkData[0].type}
                   </span>
-                </div>
-              )}
+                ) : (
+                  <span>N/A</span>
+                )}
+              </div>
               {(leftProgressHasData || rightProgressHasData) && (
                 <p>{`Top ${
                   leftProgressHasData
                     ? checkData[0].progress.length
-                    : checkData[1].progress.length
+                    : rightProgressHasData
+                    ? checkData[1].progress.length
+                    : emptyData[0].progress.length
                 } Dominant Colors`}</p>
               )}
-              {rightProgressHasData && (
-                <div
-                  className={style.label}
-                  style={{
-                    background: colors.labelBackground,
-                    color: colors.labelColor,
-                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                    opacity: rightOpacity,
-                  }}
-                >
+              <div
+                className={style.label}
+                style={{
+                  background: colors.labelBackground,
+                  color: colors.labelColor,
+                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                  opacity: rightOpacity,
+                }}
+              >
+                {rightProgressHasData || rightTitle ? (
                   <span>
                     {rightTitle
                       ? rightTitle
                       : !!checkData && !!checkData[1] && checkData[1].type}
                   </span>
-                </div>
-              )}
+                ) : (
+                  <span>N/A</span>
+                )}
+              </div>
             </div>
             <div className={style.groupProgressBar}>
-              {leftProgressHasData && (
-                <div
-                  className={style.progressInner}
-                  style={{ opacity: leftOpacity }}
-                >
-                  <Progress progress={checkData[0].progress} reverse={true} />
-                </div>
-              )}
-              <div className={style.progressCountArea}>
-                {(leftProgressHasData &&
-                  checkData[0].progress.map((item, index) => {
-                    return (
-                      <span
-                        key={`progressbar-${index}`}
-                        className={style.progressCount}
-                        style={{
-                          background: colors.progressCountBackground,
-                          color: colors.textColor,
-                        }}
-                      >
-                        {index + 1}
-                      </span>
-                    )
-                  })) ||
-                  null}
+              <div
+                className={style.progressInner}
+                style={{ opacity: leftOpacity }}
+              >
+                <Progress
+                  progress={
+                    leftProgressHasData
+                      ? checkData[0].progress
+                      : emptyData[0].progress
+                  }
+                  reverse={true}
+                />
               </div>
-              {rightProgressHasData && (
-                <div
-                  className={style.progressInner}
-                  style={{ opacity: rightOpacity }}
-                >
-                  <Progress progress={checkData[1].progress} />
-                </div>
-              )}
+              <div className={style.progressCountArea}>
+                {(leftProgressHasData
+                  ? checkData[0]
+                  : rightProgressHasData
+                  ? checkData[0]
+                  : emptyData[0]
+                ).progress.map((item, index) => {
+                  return (
+                    <span
+                      key={`progressbar-${index}`}
+                      className={style.progressCount}
+                      style={{
+                        background: colors.progressCountBackground,
+                        color: colors.textColor,
+                      }}
+                    >
+                      {index + 1}
+                    </span>
+                  )
+                })}
+              </div>
+              <div
+                className={style.progressInner}
+                style={{ opacity: rightOpacity }}
+              >
+                <Progress
+                  progress={
+                    rightProgressHasData
+                      ? checkData[1].progress
+                      : emptyData[1].progress
+                  }
+                />
+              </div>
             </div>
           </div>
         </Module>

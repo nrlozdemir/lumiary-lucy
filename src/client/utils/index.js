@@ -149,6 +149,7 @@ const strToColor = (str) => {
     'blue-purple': '#79609b',
     purple: '#923683',
     'red-purple': '#b83057',
+    gray: '#808080'
   }
   return color[str]
 }
@@ -429,7 +430,45 @@ const customChartToolTip = (themes, customOptions = {}, forceData) => {
   }
 }
 
+const getModuleTerms = (key, data) => {
+  const {
+    glossary: { terms },
+  } = data
+  const moduleObject =
+    data &&
+    data.glossary &&
+    data.glossary.modules &&
+    data.glossary.modules.find((module) => module.identifier === key)
+  const termsUuids =
+    moduleObject &&
+    moduleObject.module &&
+    moduleObject.module.terms &&
+    moduleObject.module.terms.map((term) => term.uuid)
+  return Object.keys(terms)
+    .map((term) => {
+      const item = terms[term].find(
+        (item) => termsUuids && termsUuids.includes(item.uuid)
+      )
+      if (item) {
+        return {
+          ...item,
+          letter: term,
+        }
+      }
+    })
+    .filter(function(element) {
+      return element !== undefined
+    })
+}
+
+const sortObject = (o = {}, reverse = false) => {
+  const sortedKeys = Object.keys(o).sort()
+  const keysToUse = reverse ? sortedKeys.reverse() : sortedKeys
+  return keysToUse.reduce((r, k) => ((r[k] = o[k]), r), {})
+}
+
 export {
+  sortObject,
   randomKey,
   socialIconSelector,
   toSlug,
@@ -457,4 +496,5 @@ export {
   secondsToHHMMSS,
   getProfileObjectWithBrand,
   customChartToolTip,
+  getModuleTerms,
 }

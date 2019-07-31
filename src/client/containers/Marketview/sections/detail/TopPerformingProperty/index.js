@@ -12,7 +12,12 @@ import {
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 
 import BarChartModule from 'Components/Modules/BarChartModule'
-import { splitCamelCaseToString, selectFiltersToType, customChartToolTip, metricSuffix } from 'Utils'
+import {
+  splitCamelCaseToString,
+  selectFiltersToType,
+  customChartToolTip,
+  metricSuffix,
+} from 'Utils'
 import { getMinMaxFromDatasets, getTopNValues } from 'Utils/datasets'
 import { isEqual } from 'lodash'
 
@@ -28,49 +33,59 @@ const LEGEND_COLOR_ORDER = [
 
 class TopPerformingProperty extends React.Component {
   callback = (data) => {
-    const { container, getTopPerformingPropertiesRequest } = this.props
-
-    if (container === 'platform') {
-      getTopPerformingPropertiesRequest(data)
-    }
-  }
-
-  componentDidUpdate(prevProps) {
-    const { topProperty: prevTopProperty } = prevProps
     const {
-      topProperty,
       container,
-      moduleKey,
-      selectFilters,
+      getTopPerformingPropertiesRequest,
       getTopPerformingPropertiesByCompetitorsRequest,
     } = this.props
 
-    if (
-      container === 'competitor' &&
-      ((!!prevProps.selectFilters &&
-        !!selectFilters &&
-        !isEqual(
-          prevProps.selectFilters.values[prevProps.moduleKey],
-          selectFilters.values[moduleKey]
-        ) &&
-        !!topProperty) ||
-        prevTopProperty !== topProperty)
-    ) {
-      const selectFilterValues = selectFilters.values[moduleKey]
-
-      const valuesToType = selectFiltersToType(selectFilterValues)
-
-      getTopPerformingPropertiesByCompetitorsRequest({
-        ...valuesToType,
-        property: topProperty,
-      })
+    if (container === 'platform') {
+      getTopPerformingPropertiesRequest(data)
+    } else if (container === 'competitor') {
+      getTopPerformingPropertiesByCompetitorsRequest(data)
     }
   }
 
-  componentWillUnmount() {
-    const { container, setCompetitorTopProperty } = this.props
-    container === 'competitor' && setCompetitorTopProperty(null)
-  }
+  /* 
+  This logic assumes that the property is set by the TopSimiliarProperties Module, which currently doesnt do it anymore, but when it does do it, then make it do it again
+  */
+
+  // componentDidUpdate(prevProps) {
+  //   const { topProperty: prevTopProperty } = prevProps
+  //   const {
+  //     topProperty,
+  //     container,
+  //     moduleKey,
+  //     selectFilters,
+  //     getTopPerformingPropertiesByCompetitorsRequest,
+  //   } = this.props
+
+  // if (
+  //   container === 'competitor' &&
+  //   ((!!prevProps.selectFilters &&
+  //     !!selectFilters &&
+  //     !isEqual(
+  //       prevProps.selectFilters.values[prevProps.moduleKey],
+  //       selectFilters.values[moduleKey]
+  //     ) &&
+  //     !!topProperty) ||
+  //     prevTopProperty !== topProperty)
+  // ) {
+  //   const selectFilterValues = selectFilters.values[moduleKey]
+
+  //   const valuesToType = selectFiltersToType(selectFilterValues)
+
+  //   getTopPerformingPropertiesByCompetitorsRequest({
+  //     ...valuesToType,
+  //     property: topProperty,
+  //   })
+  // }
+  //}
+
+  // componentWillUnmount() {
+  //   const { container, setCompetitorTopProperty } = this.props
+  //   container === 'competitor' && setCompetitorTopProperty(null)
+  // }
 
   render() {
     const {
@@ -101,7 +116,7 @@ class TopPerformingProperty extends React.Component {
 
     const min = 0
 
-    const stepSize = !!max && (max / 4)
+    const stepSize = !!max && max / 4
 
     const chartTickOptions = {
       min,
@@ -136,8 +151,7 @@ class TopPerformingProperty extends React.Component {
                 data.datasets[tooltipItem['datasetIndex']] &&
                 data.datasets[tooltipItem['datasetIndex']].label) ||
               ''
-            return `${count ? metricSuffix(count) : 0} ${!!name &&
-              `| ${name}`}`
+            return `${count ? metricSuffix(count) : 0} ${!!name && `| ${name}`}`
           },
         },
       }),

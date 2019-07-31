@@ -9,48 +9,41 @@ const secondToTime = (timeInSeconds) => {
       return ('000' + num).slice(size * -1)
     },
     time = parseFloat(timeInSeconds).toFixed(3),
-    hours = Math.floor(time / 60 / 60),
     minutes = Math.floor(time / 60) % 60,
     seconds = Math.floor(time - minutes * 60)
-    /*milliseconds = time.slice(-3)*/
 
-  return pad(hours, 2) + ':' + pad(minutes, 2) + ':' + pad(seconds, 2) // + ',' + pad(milliseconds, 3)
+  return pad(minutes, 2) + 'm:' + pad(seconds, 2) + 's'
 }
-
-/*
-const timeToSeconds = (timeString) => {
-  let splittedTimeString = timeString.split(':')
-  let seconds = 0
-  let minutes = 1
-
-  while (splittedTimeString.length > 0) {
-    seconds += minutes * parseInt(splittedTimeString.pop(), 10)
-    minutes *= 60
-  }
-
-  return seconds
-}
-*/
 
 class SliderWithScrubber extends React.Component {
   constructor(props) {
     super(props)
+    this.shotImages = []
+    this.shotImagesHover = this.shotImagesHover.bind(this)
   }
-  
+
+  shotImagesHover(i, elements) {
+    if (i === 0) {
+      const { naturalWidth, naturalHeight, width, height } = this.shotImages[i]
+      const left = Math.ceil(width / 10)
+      this.shotImages[i].style.left = `${left}px`
+    }
+  }
+
   render() {
     const {
       name,
-      markers, 
-      shots, 
-      shotMargin, 
-      minShotWidth, 
-      maxShotWidth, 
-      ticks, 
-      viewportWidth, 
-      viewportHeight, 
+      markers,
+      shots,
+      shotMargin,
+      minShotWidth,
+      maxShotWidth,
+      ticks,
+      viewportWidth,
+      viewportHeight,
       viewportBackgroundColor,
-      shotHeight, 
-      shotHoverWidth, 
+      shotHeight,
+      shotHoverWidth,
       shotHoverHeight,
       customClass,
       customStyle,
@@ -59,7 +52,7 @@ class SliderWithScrubber extends React.Component {
       scrubberHeight,
       scrubberDotClassname,
       isEmpty,
-      selectedShot
+      selectedShot,
     } = this.props
 
     /*
@@ -67,7 +60,7 @@ class SliderWithScrubber extends React.Component {
       colors,
     } = this.props.themeContext
     */
-  
+
     let tempMarks = []
     let marks = {}
     let shotsTotalWidth = 0
@@ -76,28 +69,25 @@ class SliderWithScrubber extends React.Component {
     let viewportTempShots = {}
     let viewportTempShotsTotalWidth = {}
     let viewportShots = []
-    const viewportSize = viewportWidth - ((ticks + 1) * shotMargin)
+    const viewportSize = viewportWidth - (ticks + 1) * shotMargin
 
     /*
     const durations = shots.map(
       d => (d.endTime - d.startTime).toFixed(4)
     )
     */
-    const totalDuration = (shots && shots.length > 0) 
-      ? (shots[shots.length - 1].endTime).toFixed(4)
-      : 0
-    const dividedDuration = totalDuration && 
-      (Math.round(totalDuration / (ticks))).toFixed(4)
+    const totalDuration =
+      shots && shots.length > 0 ? shots[shots.length - 1].endTime.toFixed(4) : 0
+    const dividedDuration =
+      totalDuration && Math.round(totalDuration / ticks).toFixed(4)
 
     //create marks
-    if(markers) {
+    if (markers) {
       for (let i = 0; i < ticks - 1; i++) {
         tempMarks.push(secondToTime(i * dividedDuration))
       }
 
-      const lastMarker = totalDuration > 0 
-        ? shots[shots.length - 1].endTime
-        : 0 
+      const lastMarker = totalDuration > 0 ? shots[shots.length - 1].endTime : 0
 
       tempMarks.push(secondToTime(lastMarker))
 
@@ -107,7 +97,7 @@ class SliderWithScrubber extends React.Component {
         if (index === 0) {
           marks[index] = {
             style: {
-              transform: 'translateX(0%)'
+              transform: 'translateX(0%)',
             },
             label: <p className="customDot">{mark}</p>,
             value: mark,
@@ -115,7 +105,7 @@ class SliderWithScrubber extends React.Component {
         } else if (index === 100) {
           marks[index] = {
             style: {
-              transform: 'translateX(-100%)'
+              transform: 'translateX(-100%)',
             },
             label: <p className="customDot">{mark}</p>,
             value: mark,
@@ -139,23 +129,27 @@ class SliderWithScrubber extends React.Component {
         viewportDurations[v] = 0
         viewportLeftOver[v] = 0
       }
-      
+
       shots.map((el, i) => {
         const index = parseInt(Math.floor(i / ticks))
-        el.duration = parseFloat(
-          (el.endTime - el.startTime).toFixed(4)
-        )
+        el.duration = parseFloat((el.endTime - el.startTime).toFixed(4))
         viewportTempShots[index].push(el)
         viewportDurations[index] += el.duration
       })
-      
+
       for (let v = 0; v < totalViewports; v++) {
         Object.values(viewportTempShots[v]).map((el, i) => {
           el.realWidth = parseFloat(
-            ((viewportSize / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
+            (
+              (viewportSize / 100) *
+              ((el.duration * 100) / viewportDurations[v])
+            ).toFixed(4)
           )
           el.width = parseFloat(
-            ((viewportSize / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
+            (
+              (viewportSize / 100) *
+              ((el.duration * 100) / viewportDurations[v])
+            ).toFixed(4)
           )
           el.max = 0
           el.diff = maxShotWidth - el.width
@@ -171,15 +165,18 @@ class SliderWithScrubber extends React.Component {
             el.max = 1
           }
         })
-      
+
         viewportTempShots[v].length === ticks &&
           Object.values(viewportTempShots[v]).map((el, i) => {
             const findDiff = parseFloat(
-              ((viewportLeftOver[v] / 100) * (el.duration * 100 / viewportDurations[v])).toFixed(4)
+              (
+                (viewportLeftOver[v] / 100) *
+                ((el.duration * 100) / viewportDurations[v])
+              ).toFixed(4)
             )
             if (viewportLeftOver[v] > 0) {
               if (el.width + findDiff > maxShotWidth) {
-                el.width = maxShotWidth;
+                el.width = maxShotWidth
                 viewportLeftOver[v] -= maxShotWidth - el.width
               } else {
                 el.width += findDiff
@@ -187,7 +184,7 @@ class SliderWithScrubber extends React.Component {
               }
             } else if (viewportLeftOver[v] < 0) {
               if (el.width - findDiff < minShotWidth) {
-                el.width = minShotWidth;
+                el.width = minShotWidth
                 viewportLeftOver[v] += el.width - minShotWidth
               } else {
                 el.width -= findDiff
@@ -195,7 +192,7 @@ class SliderWithScrubber extends React.Component {
               }
             }
           })
-      
+
         if (viewportTempShots[v].length === ticks) {
           do {
             Object.values(viewportTempShots[v]).map((el, i) => {
@@ -208,126 +205,142 @@ class SliderWithScrubber extends React.Component {
             })
           } while (viewportLeftOver[v] > 0)
         }
-      
-        viewportTempShotsTotalWidth[v] = Object.values(viewportTempShots[v]).reduce(
-          (prev, next) => prev + parseFloat(next.width.toFixed(4)), 0
-        )
-      
+
+        viewportTempShotsTotalWidth[v] = Object.values(
+          viewportTempShots[v]
+        ).reduce((prev, next) => prev + parseFloat(next.width.toFixed(4)), 0)
+
         if (viewportTempShotsTotalWidth[v] > viewportSize) {
-          const findTrimValue = parseFloat((viewportTempShotsTotalWidth[v] - viewportSize).toFixed(4))
-      
-          viewportTempShots[v].length === ticks && Object.values(viewportTempShots[v]).map((el, i) => {
-            if (el.width > Math.floor(el.width) &&
-              el.width - Math.floor(el.width) >= findTrimValue &&
-              viewportTempShotsTotalWidth[v] !== viewportSize
-            ) {
-              el.width -= findTrimValue
-              viewportTempShotsTotalWidth[v] -= findTrimValue
-            }
-          })
+          const findTrimValue = parseFloat(
+            (viewportTempShotsTotalWidth[v] - viewportSize).toFixed(4)
+          )
+
+          viewportTempShots[v].length === ticks &&
+            Object.values(viewportTempShots[v]).map((el, i) => {
+              if (
+                el.width > Math.floor(el.width) &&
+                el.width - Math.floor(el.width) >= findTrimValue &&
+                viewportTempShotsTotalWidth[v] !== viewportSize
+              ) {
+                el.width -= findTrimValue
+                viewportTempShotsTotalWidth[v] -= findTrimValue
+              }
+            })
         } else if (viewportTempShotsTotalWidth[v] < viewportSize) {
-          const findTrimValue = parseFloat((viewportSize - viewportTempShotsTotalWidth[v]).toFixed(4))
-      
-          viewportTempShots[v].length === ticks && Object.values(viewportTempShots[v]).map((el, i) => {
-            if (viewportTempShotsTotalWidth[v] !== viewportSize) {
-              el.width += findTrimValue
-              viewportTempShotsTotalWidth[v] += findTrimValue
-            }
-          })
+          const findTrimValue = parseFloat(
+            (viewportSize - viewportTempShotsTotalWidth[v]).toFixed(4)
+          )
+
+          viewportTempShots[v].length === ticks &&
+            Object.values(viewportTempShots[v]).map((el, i) => {
+              if (viewportTempShotsTotalWidth[v] !== viewportSize) {
+                el.width += findTrimValue
+                viewportTempShotsTotalWidth[v] += findTrimValue
+              }
+            })
         }
-      
+
         Object.values(viewportTempShots[v]).map((el, i) => {
           viewportShots.push(el)
         })
       }
-      
-      viewportShots && viewportShots.map((el, i) => {
-        shotsTotalWidth += el.width + shotMargin
-      })
+
+      viewportShots &&
+        viewportShots.map((el, i) => {
+          shotsTotalWidth += el.width + shotMargin
+        })
     }
 
     return (
       <Scrubber
-      horizontal
-      arrows
-      viewBordered
-      verticalDisabled
-      height={viewportHeight}
-      viewportBackgroundColor={viewportBackgroundColor}
-      width={viewportWidth + 1}
-      marks={!!marks && marks}
-      totalWidth={
-        (isEmpty === true) 
-          ? viewportWidth + 2 
-          : shotsTotalWidth
-      }
-      scrubberIsDot={scrubberIsDot}
-      scrubberWidth={scrubberWidth}
-      scrubberHeight={scrubberHeight}
-      scrubberDotClassname={scrubberDotClassname}
-      isEmpty={isEmpty}
-    >
-      <div 
-        className={customClass.sliderWrapper}
-        style={{
-          left: 0,
-          width: (isEmpty === true) 
-            ? viewportWidth + 2 
-            : (shotsTotalWidth < viewportWidth) 
-              ? (viewportWidth + 2) 
-              : shotsTotalWidth,
-        }}
+        horizontal
+        arrows
+        viewBordered
+        verticalDisabled
+        height={viewportHeight}
+        viewportBackgroundColor={viewportBackgroundColor}
+        width={viewportWidth + 1}
+        marks={!!marks && marks}
+        totalWidth={isEmpty === true ? viewportWidth + 2 : shotsTotalWidth}
+        scrubberIsDot={scrubberIsDot}
+        scrubberWidth={scrubberWidth}
+        scrubberHeight={scrubberHeight}
+        scrubberDotClassname={scrubberDotClassname}
+        isEmpty={isEmpty}
       >
-      
-      {isEmpty !== true 
-        && viewportShots 
-        && viewportShots.map((shot, i) => {
-          const frameShotUrl = (shot.frameUrls && shot.frameUrls[0]) 
-            ? `${mediaUrl}/${shot.frameUrls[0]}`
-            : ''
-          
-          return (<React.Fragment key={`${name}_shots_${i}`}>
-            <div 
-              className={classnames(customClass.image, {
-                [customClass.imageActive]: i === selectedShot,
-              })}
-              onClick={() => { 
-                !!this.props.clickEvent && 
-                this.props.clickEvent(i) 
-              }}
-            >
-              <div
-                style={{
-                  width: `${shot.width.toFixed(2)}px`,
-                  borderColor: customStyle.imageWrapperBorderColor,
-                }}
-                className={customClass.imageWrapper}
-              >
-                <div
-                  className={customClass.originalImage}
-                  style={{
-                    width: `${shot.width.toFixed(2)}px`,
-                    height: `${shotHeight}px`,
-                    backgroundColor: '#ccc',
-                    backgroundImage: `url(${frameShotUrl})`,
-                    backgroundSize: `${shotHoverWidth}px ${shotHoverHeight}px`,
-                    borderColor: customStyle.originalImageBorderColor,
-                  }}
-                />
-              </div>
-              {!scrubberIsDot && (<img
-                src={frameShotUrl}
-                style={{ 
-                  height: `${shotHeight}px`,
-                }}
-                className={customClass.imageHover}
-              />)}
-            </div>
-          </React.Fragment>)
-        }
-        )}
-      </div>
-    </Scrubber>  
+        <div
+          className={customClass.sliderWrapper}
+          style={{
+            left: 0,
+            width:
+              isEmpty === true
+                ? viewportWidth + 2
+                : shotsTotalWidth < viewportWidth
+                ? viewportWidth + 2
+                : shotsTotalWidth,
+          }}
+        >
+          {isEmpty !== true &&
+            viewportShots &&
+            viewportShots.map((shot, i) => {
+              const frameShotUrl =
+                shot.frameUrls && shot.frameUrls[0]
+                  ? `${mediaUrl}/${shot.frameUrls[0]}`
+                  : ''
+
+              return (
+                <React.Fragment key={`${name}_shots_${i}`}>
+                  <div
+                    className={classnames(customClass.image, {
+                      [customClass.imageActive]: i === selectedShot,
+                    })}
+                    onClick={() => {
+                      !!this.props.clickEvent && this.props.clickEvent(i)
+                    }}
+                  >
+                    <div
+                      style={{
+                        width: `${shot.width.toFixed(2)}px`,
+                        borderColor: customStyle.imageWrapperBorderColor,
+                      }}
+                      className={customClass.imageWrapper}
+                    >
+                      <div
+                        className={customClass.originalImage}
+                        style={{
+                          width: `${shot.width.toFixed(2)}px`,
+                          height: `${shotHeight}px`,
+                          backgroundColor: '#ccc',
+                          backgroundImage: `url(${frameShotUrl})`,
+                          backgroundSize: `${shotHoverWidth}px ${shotHoverHeight}px`,
+                          borderColor: customStyle.originalImageBorderColor,
+                        }}
+                      />
+                    </div>
+                    {!scrubberIsDot && (
+                      <img
+                        src={frameShotUrl}
+                        style={{
+                          height: `${shotHeight}px`,
+                        }}
+                        className={classnames(customClass.imageHover, {
+                          [customClass.firstImageHover]: i === -1,
+                        })}
+                        ref={(ref) => {
+                          this.shotImages[i] = ref
+                          return true
+                        }}
+                        onMouseEnter={() =>
+                          this.shotImagesHover(i, viewportShots)
+                        }
+                      />
+                    )}
+                  </div>
+                </React.Fragment>
+              )
+            })}
+        </div>
+      </Scrubber>
     )
   }
 }

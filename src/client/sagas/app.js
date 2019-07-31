@@ -1,18 +1,24 @@
-import { call, put, takeEvery } from 'redux-saga/effects'
-import axios from 'axios'
-import appMockData from 'Api/mocks/appMock.json'
-import { actions, types } from 'Reducers/app'
+import { call, put, takeEvery, select } from 'redux-saga/effects'
 
-function getGlobalDataApi(name) {
-  return axios.get('/').then((res) => appMockData[name])
-}
+import { actions, types } from 'Reducers/app'
+import { buildQApiUrl, getDataFromApi } from 'Utils/api'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 
 function* getSectionExplanations() {
   try {
-    const response = yield call(getGlobalDataApi, 'sectionExplanations')
+    const { brand } = yield select(makeSelectAuthProfile)
 
-    yield put(actions.getSectionExplanationsSuccess(response))
-    return false
+    if (!!brand && !!brand.uuid) {
+      const response = yield call(
+        getDataFromApi,
+        {},
+        buildQApiUrl(`/glossary/${brand.uuid}`),
+        'GET'
+      )
+      yield put(actions.getSectionExplanationsSuccess(response))
+    } else {
+      throw new Error('Glossary Fetch Request Error - No Brand')
+    }
   } catch (err) {
     console.error('err', err)
     yield put(actions.getSectionExplanationsFailure(err))
