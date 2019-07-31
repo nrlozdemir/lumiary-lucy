@@ -73,13 +73,13 @@ const routes = [
     },
   },
   {
-    path: '/panoptic',
+    path: '/overview',
     exact: true,
     component: 'Panoptic',
     navigation: {
       level: 1,
       order: 1,
-      title: 'Panoptic',
+      title: 'Overview',
     },
   },
   {

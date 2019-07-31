@@ -28,7 +28,19 @@ const InformationModal = ({
       backgroundColor: 'rgba(172, 176, 190, 0.8)',
     },
   }
-  console.log(data)
+
+  // term with module tag first
+  const sortedData =
+    !!data && !!data.length
+      ? data.sort((x, y) =>
+          !!x.tags &&
+          !!x.tags.length &&
+          x.tags.some((tag) => tag.name === 'Module')
+            ? -1
+            : 0
+        )
+      : []
+
   return (
     <Modal
       onAfterOpen={onAfterOpen}
@@ -49,8 +61,8 @@ const InformationModal = ({
         }}
       >
         <div className={style.modalContent}>
-          {data.length ? (
-            data.map((item, key) => (
+          {!!sortedData.length ? (
+            sortedData.map((item, key) => (
               <div key={key} className={style.item}>
                 <div className={style.header}>
                   <div className={style.title}>{item.term}</div>
