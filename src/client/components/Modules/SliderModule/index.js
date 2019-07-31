@@ -78,6 +78,8 @@ const SliderModule = (props) => {
                               <ProgressBar
                                 width={value.value}
                                 customBarClass={style.progressBar}
+                                progressBarBackgroundColor={colors.reportsProgressBackground}
+                                percentageBgColor={i === 0 ? colors.reportsLibraryPercentageBg : colors.reportsIndustryPercentageBg}
                                 customPercentageClass={
                                   i % 2
                                     ? style.percentageRed

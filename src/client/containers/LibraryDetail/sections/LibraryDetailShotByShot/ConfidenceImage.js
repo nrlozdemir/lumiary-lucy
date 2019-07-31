@@ -49,6 +49,8 @@ class ConfidenceImage extends Component {
                 width={confidence}
                 customBarClass={style.progressBar}
                 customPercentageClass={style.percentage}
+                progressBarBackgroundColor={colors.progressCountBackground}
+                percentageBgColor={colors.progressColor}
               />
             </div>
           </div>

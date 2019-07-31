@@ -23,12 +23,19 @@ const dark = {
 
   // progressbar values
   progressBackground: '#21243b',
+  reportsProgressBackground: '#545b79',
+  reportsLibraryPercentageBg: '#5292e5',
+  reportsIndustryPercentageBg: '#2fd7c4',
+  progressLibraryIncreaseColor: '#2fd7c4',
+  progressLibraryDecreaseColor: '#5292e5',
   progressColor: '#545b79',
   progressShadow: 'transparent',
   progressCountBackground: '#373f5b',
   progressLibraryDetailBackground: '#545b79',
   progressLibraryDetailShadow: 'rgba(0, 0, 0, 0.5)',
   progressLibraryDetailTickColor: '#ffffff',
+  progressQuickviewBg: '#21243b',
+  progressQuickviewColor: '#2fd7c4',
   // progressbar values
 
   // labels
@@ -265,12 +272,19 @@ const light = {
 
   // progressbar values
   progressBackground: '#ffffff',
+  reportsProgressBackground: '#ffffff',
+  reportsLibraryPercentageBg: '#5292e5',
+  reportsIndustryPercentageBg: '#2fd7c4',
+  progressLibraryIncreaseColor: '#2fd7c4',
+  progressLibraryDecreaseColor: '#5292e5',
   progressColor: '#3dd6c4',
   progressShadow: '#bebebe',
   progressCountBackground: '#ffffff',
   progressLibraryDetailBackground: '#c6c9d7',
   progressLibraryDetailShadow: 'rgba(0, 0, 0, 0.5)',
   progressLibraryDetailTickColor: '#505050',
+  progressQuickviewBg: '#ffffff',
+  progressQuickviewColor: '#2fd7c4',
   // progressbar values
 
   // labels
