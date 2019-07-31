@@ -14,7 +14,6 @@ const nth = function (n){return["st","nd","rd"][((n+90)%100-10)%10-1]||"th"}
 const Front = (props) => {
   const { data, colors, title } = props
   //let percentage = (100 * data.value) / data.max
-  console.log(data)
   const { value, average, percentile } = data
 
   const chartVal = (value / (average * 2) * 100) > 100 ? 99 : (value / (average * 2) * 100)
