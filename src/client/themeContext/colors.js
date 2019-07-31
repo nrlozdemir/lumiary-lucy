@@ -22,8 +22,8 @@ const dark = {
   // selectbox
 
   // progressbar values
-  progressBackground: '#545b79',
-  progressColor: 'transparent',
+  progressBackground: '#21243b',
+  progressColor: '#545b79',
   progressShadow: 'transparent',
   progressCountBackground: '#373f5b',
   progressLibraryDetailBackground: '#545b79',
@@ -91,11 +91,12 @@ const dark = {
   inputControlBackground: '#21243B',
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#545b79',
-  inputColor: '#545B79',
+  inputColor: '#ffffff',
   inputDropdownColor: '#545b79',
-  inputActiveColor: '#fff',
+  inputActiveColor: '#545b79',
+  inputActiveSelectedColor: '#ffffff',
   inputOptionBackground: '#545B79',
-  inputOptionFocusBackground: '#545B79',
+  inputOptionFocusBackground: '#ffffff',
   inputOptionSelectedBackground: '#ffffff',
   inputPlaceholderColor: '#545b79',
   // input values
@@ -234,6 +235,10 @@ const dark = {
       },
     },
   },
+  //reporst page
+  reportCardsBg:'#545b79',
+  reportCardContentBg: '#373f5b'
+  //reporst page
 }
 
 const light = {
@@ -331,6 +336,7 @@ const light = {
   inputColor: '#000',
   inputDropdownColor: '#ffffff',
   inputActiveColor: '#505050',
+  inputActiveSelectedColor: '#505050',
   inputOptionBackground: '#ffffff',
   inputOptionFocusBackground: '#f3f6f9',
   inputOptionSelectedBackground: '#505050',
@@ -471,6 +477,10 @@ const light = {
       },
     },
   },
+  //reporst page
+  reportCardsBg:'#ffffff',
+  reportCardContentBg: '#f3f6f9'
+  //reporst page
 }
 
 const themes = {

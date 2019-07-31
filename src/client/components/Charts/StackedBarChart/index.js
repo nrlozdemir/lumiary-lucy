@@ -140,7 +140,9 @@ const StackedBarChart = (props) => {
                     (accumulator, currentValue) => accumulator + currentValue
                   )
 
-                  return percentageManipulation(Math.round(value / (totalValue / 100)))
+                  return percentageManipulation(
+                    Math.round(value / (totalValue / 100))
+                  )
                 }),
               }
             })) ||
@@ -153,8 +155,20 @@ const StackedBarChart = (props) => {
           callbacks: {
             title: () => '',
             label: function(tooltipItem, data) {
-              const count = data && data.datasets && data.datasets[tooltipItem['datasetIndex']] && data.datasets[tooltipItem['datasetIndex']].data[tooltipItem['index']] || ''
-              const name = data && data.datasets && data.datasets[tooltipItem['datasetIndex']] && data.datasets[tooltipItem['datasetIndex']].label || ''
+              const count =
+                (data &&
+                  data.datasets &&
+                  data.datasets[tooltipItem['datasetIndex']] &&
+                  data.datasets[tooltipItem['datasetIndex']].data[
+                    tooltipItem['index']
+                  ]) ||
+                ''
+              const name =
+                (data &&
+                  data.datasets &&
+                  data.datasets[tooltipItem['datasetIndex']] &&
+                  data.datasets[tooltipItem['datasetIndex']].label) ||
+                ''
               return `${count || 0}% ${!!name && `| ${name}`}`
             },
           },
@@ -169,13 +183,13 @@ const StackedBarChart = (props) => {
                 datalabels: {
                   formatter: (value, { datasetIndex, dataIndex }) => {
                     const ogValue =
-                      !!barData &&
-                      !!barData.datasets &&
-                      !!barData.datasets[datasetIndex] &&
-                      !!barData.datasets[datasetIndex].data &&
-                      !!barData.datasets[datasetIndex].data.length &&
-                      !!barData.datasets[datasetIndex].data[dataIndex]
-                        ? barData.datasets[datasetIndex].data[dataIndex]
+                      !!barData && 
+                      !!barData.datasets && 
+                      !!barData.datasets[datasetIndex] && 
+                      !!barData.datasets[datasetIndex].data && 
+                      !!barData.datasets[datasetIndex].data.length && 
+                      !!barData.datasets[datasetIndex].data[dataIndex] 
+                        ? barData.datasets[datasetIndex].data[dataIndex] 
                         : value
 
                     return metricSuffix(ogValue)

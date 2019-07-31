@@ -230,7 +230,7 @@ const Selector = (props) => {
             </div>
             <div className={profileClass}>
               <div className="float-right">
-                <Dropdown avatar={avatar} logout={logoutRequest}/>
+                <Dropdown avatar={avatar} logout={logoutRequest} />
               </div>
             </div>
           </div>

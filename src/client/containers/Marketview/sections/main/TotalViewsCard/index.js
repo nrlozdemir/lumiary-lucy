@@ -1,22 +1,19 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
+import 'chartjs-plugin-datalabels'
+import { actions, makeSelectMarketviewTotalView } from 'Reducers/marketview'
+import { chartColors } from 'Utils/globals'
+import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectMarketviewTotalView } from 'Reducers/marketview'
-import { makeSelectSelectFilters } from 'Reducers/selectFilters'
-
-import StackedBarChart from 'Components/Charts/StackedBarChart'
-import DoughnutChart from 'Components/Charts/DoughnutChart'
-import 'chartjs-plugin-datalabels'
-import Module from 'Components/Module'
-
-import { selectFiltersToType } from 'Utils'
 import { isDataSetEmpty } from 'Utils/datasets'
-import { chartColors, smallDayOfWeek } from 'Utils/globals'
-
 import { isEmpty } from 'lodash'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
+import { selectFiltersToType } from 'Utils'
+import DoughnutChart from 'Components/Charts/DoughnutChart'
+import Module from 'Components/Module'
+import moment from 'moment'
+import PropTypes from 'prop-types'
+import React from 'react'
+import StackedBarChart from 'Components/Charts/StackedBarChart'
 
 class TotalViewsChart extends React.Component {
   callBack = (data, moduleKey) => {
@@ -52,9 +49,23 @@ class TotalViewsChart extends React.Component {
       (metric) => selects.metric === metric.value
     )
 
-    if (barData) {
-      barData.labels = barData.labels.map((day) => smallDayOfWeek[day])
-    }
+    const { labels = []} = barData || {}
+    const dayNames = moment.weekdays()
+    const monthNames = moment.months()
+    
+    let xAxisType =  'weeks'
+    labels.map((l, i) => {
+      dayNames.forEach((dItem, dIndex) => {
+        if (dItem == l) {
+          xAxisType = 'days'
+        }
+      })
+      monthNames.forEach((mItem, mIndex) => {
+        if (mItem == l) {
+          xAxisType = 'months'
+        }
+      })
+    })
 
     return (
       <Module
@@ -80,7 +91,27 @@ class TotalViewsChart extends React.Component {
       >
         <div className="grid-collapse">
           <div className="col-6">
-            <StackedBarChart barData={loading ? {} : barData} barSpacing={2} />
+            <StackedBarChart
+              barData={!loading ? {
+                ...barData,
+                labels: labels.map((item) => {
+                  switch(xAxisType) {
+                    case 'days':
+                      return moment().day(item).format("dd")
+                    break;
+
+                    case 'weeks':
+                      return item
+                    break;
+
+                    case 'months':
+                      return moment().month(item).format("MMM")
+                    break;
+                  }
+                })
+              } : null}
+              barSpacing={2}
+            />
           </div>
           <div className="col-6">
             <DoughnutChart

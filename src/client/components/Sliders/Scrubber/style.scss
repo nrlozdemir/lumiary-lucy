@@ -1,48 +1,47 @@
-.arrowContainer{
+.arrowContainer {
   position: relative;
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   align-content: center;
 
-  .leftArrows{
-    margin-left: 13px;
+  .leftArrows {
+    margin-right: 4px;
     margin-top: 2px;
   }
 
-  .rightArrows{
-    margin-right: 13px;
+  .rightArrows {
+    margin-left: 4px;
     margin-top: 2px;
   }
 }
 
-.trackHorizontal{
+.trackHorizontal {
   position: absolute;
   cursor: pointer;
 }
 
-.thumbHorizontal{
-
+.thumbHorizontal {
 }
 
-.view{
+.view {
   position: relative;
 }
 
-.viewBordered{
+.viewBordered {
   z-index: 0;
-  margin: 1px 0px 0px 1px
+  margin: 1px 0px 0px 1px;
 }
 
-.overflowYHidden{
+.overflowYHidden {
   overflow: scroll;
   overflow-x: scroll;
   overflow-y: hidden;
 }
 
-.emptyScrollBar{
+.emptyScrollBar {
   position: absolute;
   left: -2000px;
   top: -2000px;
@@ -54,27 +53,27 @@
   margin: 0;
 }
 
-.ticksWrapper{
+.ticksWrapper {
   width: 100%;
   display: block;
 }
 
-.ticks{
+.ticks {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
 }
 
-.tick{
+.tick {
   position: relative;
   font-size: 12px;
   margin-top: 24px;
-  font-family: "ClanOTNews";
+  font-family: 'ClanOTNews';
   cursor: pointer;
-  
-  &:not(:first-child):not(:last-child){
-    &:before{
-      content: "";
+
+  &:not(:first-child):not(:last-child) {
+    &:before {
+      content: '';
       height: 16px;
       background: #ccc;
       width: 1px;
@@ -88,7 +87,7 @@
   }
 }
 
-.thumbDot{
+.thumbDot {
   cursor: pointer;
   width: 16px;
 }

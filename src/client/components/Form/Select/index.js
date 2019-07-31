@@ -180,7 +180,7 @@ const Select = (props) => {
           ? themes.inputDropdownColor
           : isFocused
           ? themes.inputActiveColor
-          : themes.inputActiveColor,
+          : themes.inputActiveSelectedColor,
         cursor: 'pointer',
         border: 'none',
         width: '100%',
@@ -202,9 +202,9 @@ const Select = (props) => {
         maxWidth: '100%',
       }
     },
-    singleValue: (styles) => ({
+    singleValue: (styles, { data, isDisabled, isFocused, isSelected }) => ({
       ...styles,
-      color: themes.inputActiveColor,
+      color: themes.inputColor,
       position: 'unset',
       transform: 'unset',
       maxWidth: '100%',

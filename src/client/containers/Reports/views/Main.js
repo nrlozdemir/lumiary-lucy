@@ -30,7 +30,7 @@ class Reports extends Component {
     super(props)
     this.state = {
       modalIsOpen: false,
-      savedReportsFilter: null,
+      savedReportsFilter: { value: 'all-reports', label: 'All Reports' },
       selectedReportCardKey: null,
       reportCardsData: [
         {
@@ -208,9 +208,7 @@ class Reports extends Component {
               }
 
               .${style.deleteWrapper} div:after{
-                border-color: ${
-                  colors.tablePopoverBackground
-                } transparent transparent transparent;
+                border-color: ${colors.tablePopoverBackground} transparent transparent transparent;
               }
 
               .ReactTable .rt-thead .rt-th.-sort-asc div,
@@ -270,7 +268,7 @@ class Reports extends Component {
                   </div>
                 </div>
                 {loading ? (
-                  <RouterLoading />
+                  <RouterLoading customStyle={{ height: 'auto' }} />
                 ) : (
                   <div className={style.reportsTableBody}>
                     <ReactTable
