@@ -142,7 +142,7 @@ class LibraryDetailShotByShot extends React.Component {
         },
         {
           name: 'Purple',
-          color: '#923683',
+          color: '#923763',
           selected: false,
         },
         {
@@ -326,7 +326,7 @@ class LibraryDetailShotByShot extends React.Component {
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
                           {peopleIsEmpty === false && !peopleLoading && (
-                            <Scrubber vertical width={'100%'} height={368}>
+                            <Scrubber vertical width={'100%'} height={376}>
                               {peopleValues.map((info, i) => {
                                 const { ages, gender, uuid } = info
                                 const imgUrl = `${mediaUrl}/lumiere/${
@@ -365,7 +365,7 @@ class LibraryDetailShotByShot extends React.Component {
                       <TabPanel className={style.tabPanelReset}>
                         <div className={classnames(style.tabPanel, 'mt-16')}>
                           {objectIsEmpty === false && !shotInfoLoading && (
-                            <Scrubber vertical width={'100%'} height={368}>
+                            <Scrubber vertical width={'100%'} height={376}>
                               {shotInfoData.shot.labels.map((info, i) => {
                                 const imgUrl = `${mediaUrl}/lumiere/${
                                   this.props.authProfile.brand.uuid
