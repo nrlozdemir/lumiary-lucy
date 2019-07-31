@@ -44,6 +44,23 @@ class PanopticFilteringSection extends Component {
         isEmpty(data))
     
     const { labels = []} = stackedChartData || {}
+
+    const dayNames = moment.weekdays()
+    const monthNames = moment.months()
+    
+    let xAxisType =  'weeks'
+    labels.map((l, i) => {
+      dayNames.forEach((dItem, dIndex) => {
+        if (dItem == l) {
+          xAxisType = 'days'
+        }
+      })
+      monthNames.forEach((mItem, mIndex) => {
+        if (mItem == l) {
+          xAxisType = 'months'
+        }
+      })
+    })
     
     return (
       <Module
@@ -96,19 +113,16 @@ class PanopticFilteringSection extends Component {
               barData={!loading ? {
                 ...stackedChartData,
                 labels: labels.map((item) => {
-                  switch(labels.length) {
-                    case 7:
-                      // weekdays
+                  switch(xAxisType) {
+                    case 'days':
                       return moment().day(item).format("dd")
                     break;
 
-                    case 4:
-                      // weeks
+                    case 'weeks':
                       return item
                     break;
 
-                    case 3:
-                      // months
+                    case 'months':
                       return moment().month(item).format("MMM")
                     break;
                   }
