@@ -135,7 +135,7 @@ const RadarChart = (props) => {
     let count = colorOrder[key].count || 0
     if(count !== 0 || useAllVals) {
       accumulator.dataKeys.push(key)
-      accumulator.dataValues.push(count)
+      accumulator.dataValues.push(count || 0)
     }
 
     return accumulator
