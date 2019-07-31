@@ -22,8 +22,8 @@ const dark = {
   // selectbox
 
   // progressbar values
-  progressBackground: '#545b79',
-  progressColor: 'transparent',
+  progressBackground: '#21243b',
+  progressColor: '#545b79',
   progressShadow: 'transparent',
   progressCountBackground: '#373f5b',
   progressLibraryDetailBackground: '#545b79',

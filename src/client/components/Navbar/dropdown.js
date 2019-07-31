@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import style from './style.scss'
 import classnames from 'classnames'
 import { withTheme } from 'ThemeContext/withTheme'
+import { staticUrl } from 'Utils/globals'
 
 import Switch from 'Components/Form/Switch'
 
@@ -64,32 +65,55 @@ class Dropdown extends Component {
               color: colors.textColor,
             }}
           >
-            <ul>
-              <li style={{ borderColor: colors.themeControlListBorder }}>
-                <p className={style.text}>Night Mode</p>
+            <ul className={style.dropdownList}>
+              <style>
+                {`
+                  .${style.dropdown} ul li:not(.${style.switchButton}):hover {
+                    background: ${colors.inputOptionSelectedBackground} !important;
+                    color: ${colors.inputDropdownColor} !important;
+                  }
+                  .${style.dropdown} ul li:hover a {
+                    color: ${colors.inputDropdownColor} !important;
+                  }
+                `}
+              </style>
+              <li
+                style={{ borderColor: colors.themeControlListBorder }}
+                className={classnames(
+                  style.switchButton,
+                  style.dropdownListItem
+                )}
+              >
+                <p>Night Mode</p>
                 <Switch
                   id={Math.random()}
                   switchOn={status === 'dark'}
                   controlSwitch={this.controlSwitch}
                 />
               </li>
-              <li style={{ borderColor: colors.themeControlListBorder }}>
-                <p className={style.text}>
-                  <Link
-                    to="/glossary"
-                    style={{ color: colors.textColor, margin: 0 }}
-                  >
-                    Glossary
-                  </Link>
-                </p>
+              <li
+                className={style.dropdownListItem}
+                style={{ borderColor: colors.themeControlListBorder }}
+              >
+                <Link to={`/glossary`} style={{ color: colors.textColor }}>
+                  <p>Glossary</p>
+                  <span className={classnames('icon-Glossary', style.icon)} />
+                </Link>
               </li>
-              <li>
-                <p className={style.text}>Support</p>
+              <li
+                className={style.dropdownListItem}
+                style={{ borderColor: colors.themeControlListBorder }}
+              >
+                <a>
+                  <p>Support</p>
+                  <span className={classnames('icon-Support', style.icon)} />
+                </a>
               </li>
-              <li>
-                <p onClick={logout} className={style.text}>
-                  Logout
-                </p>
+              <li className={style.dropdownListItem}>
+                <a onClick={() => logout()}>
+                  <p>Logout</p>
+                  <span className={classnames('icon-Logout', style.icon)} />
+                </a>
               </li>
             </ul>
           </div>

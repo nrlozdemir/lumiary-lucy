@@ -149,6 +149,7 @@ const strToColor = (str) => {
     'blue-purple': '#79609b',
     purple: '#923683',
     'red-purple': '#b83057',
+    gray: '#808080'
   }
   return color[str]
 }
@@ -460,7 +461,14 @@ const getModuleTerms = (key, data) => {
     })
 }
 
+const sortObject = (o = {}, reverse = false) => {
+  const sortedKeys = Object.keys(o).sort()
+  const keysToUse = reverse ? sortedKeys.reverse() : sortedKeys
+  return keysToUse.reduce((r, k) => ((r[k] = o[k]), r), {})
+}
+
 export {
+  sortObject,
   randomKey,
   socialIconSelector,
   toSlug,
