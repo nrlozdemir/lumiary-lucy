@@ -3,17 +3,17 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   align-content: center;
 
   .leftArrows{
-    margin-left: 13px;
+    margin-right: 4px;
     margin-top: 2px;
   }
 
   .rightArrows{
-    margin-right: 13px;
+    margin-left: 4px;
     margin-top: 2px;
   }
 }
