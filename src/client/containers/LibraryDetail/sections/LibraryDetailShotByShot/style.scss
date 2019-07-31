@@ -696,7 +696,6 @@
 }
 
 .imageItem {
-  width: 238px;
   height: 136px;
 }
 
@@ -803,4 +802,22 @@
 
 .firstImageHover {
   left: 18px;
+}
+
+.listObjects{
+  display: flex;
+  justify-content: space-between;
+  align-items: inherit;
+}
+
+.listImage{
+}
+
+.listProgress{
+  display: flex;
+  width: 100%;
+
+  .progressWrapper{
+    width: 100%;
+  }
 }
