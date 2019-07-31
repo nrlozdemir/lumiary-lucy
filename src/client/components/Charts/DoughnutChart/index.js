@@ -16,8 +16,8 @@ const defaultProps = {
   layoutPadding: 0,
 
   datasetsBorderWidth: 5,
-  datasetsBorderColor: '#373F5B',
-  datasetsHoverBorderColor: '#373F5B',
+  // datasetsBorderColor: '#373F5B',
+  // datasetsHoverBorderColor: '#373F5B',
 
   defaultFontFamily: 'ClanOTBold',
   defaultFontSize: '14',
