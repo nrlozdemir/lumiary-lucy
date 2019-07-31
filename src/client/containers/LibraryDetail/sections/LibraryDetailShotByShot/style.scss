@@ -312,11 +312,11 @@
         display: block;
         position: absolute;
         transform: scale(1.19);
-        &.dark{
+        &.dark {
           box-shadow: 0 10px 20px 0 $dark_shotByShotImageHoverShadow;
           border: solid 1px $dark_shotByShotImageHoverBorder;
         }
-        &.light{
+        &.light {
           box-shadow: 0 10px 20px 0 $light_shotByShotImageHoverShadow;
           border: solid 1px $light_shotByShotImageHoverBorder;
         }
@@ -379,10 +379,16 @@
   // background: $color-dusk;
   margin: 0;
   padding: 27px 40px;
-  color: $color-cool-grey;
   font-family: $font-family-ClanOTNews;
   // box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   font-size: 14px;
+
+  &.light {
+    color: $light_shotByShotTabsTextColor;
+  }
+  &.dark {
+    color: $dark_shotByShotTabsTextColor;
+  }
 
   li {
     padding: 6px 48px 6px 0;
@@ -393,6 +399,13 @@
   color: $light_textColor;
   font-family: $font-family-ClanOT;
   font-weight: bold;
+
+  &.light {
+    color: $light_shotByShotTabsTextActiveColor;
+  }
+  &.dark {
+    color: $dark_shotByShotTabsTextActiveColor;
+  }
 }
 .radarChartContainer {
   margin: 10px auto 0px;
@@ -762,15 +775,15 @@
   justify-content: center;
 }
 
-.shotByShotMask{
+.shotByShotMask {
   margin: 10px 0px;
 }
 
-.sliderWrapper{
+.sliderWrapper {
   height: 206px; //205px?
   padding: 10px 0px;
 }
 
-.firstImageHover{
+.firstImageHover {
   left: 18px;
 }
