@@ -149,6 +149,7 @@ const strToColor = (str) => {
     'blue-purple': '#79609b',
     purple: '#923683',
     'red-purple': '#b83057',
+    gray: '#808080'
   }
   return color[str]
 }

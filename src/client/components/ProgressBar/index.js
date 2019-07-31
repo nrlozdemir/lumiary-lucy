@@ -29,9 +29,7 @@ const ProgressBar = ({
           : `0 1px 2px 0 ${colors.progressShadow}`
         
         const backgroundColor = progressBarBackgroundColor || colors.progressBackground
-        const percentageStyle = customPercentageClass 
-          ? { width: `${width}%` } 
-          : { 
+        const percentageStyle = { 
             width: `${width}%`, 
             background: colors.progressColor 
           }
