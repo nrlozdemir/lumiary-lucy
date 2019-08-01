@@ -91,7 +91,7 @@ class SliderWithScrubber extends React.Component {
         tempMarks.push(secondToTime(i * dividedDuration))
       }
 
-      const lastMarker = totalDuration > 0 ? shots[shots.length - 1].endTime : 0
+      const lastMarker = totalDuration > 0 ? parseFloat(shots[shots.length - 1].endTime) : 0
 
       tempMarks.push(secondToTime(lastMarker))
 
@@ -136,7 +136,7 @@ class SliderWithScrubber extends React.Component {
 
       shots.map((el, i) => {
         const index = parseInt(Math.floor(i / ticks))
-        el.duration = parseFloat((el.endTime - el.startTime).toFixed(4))
+        el.duration = parseFloat((parseFloat(el.endTime) - parseFloat(el.startTime)).toFixed(4))
         viewportTempShots[index].push(el)
         viewportDurations[index] += el.duration
       })
