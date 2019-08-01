@@ -336,7 +336,12 @@ const compareSharesData = (payload, options) => {
   })
 }
 
-const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
+const convertMultiRequestDataIntoDatasets = (
+  payload,
+  options,
+  revert,
+  customOptions = { backgroundColors: [], borderColors: [], borderWidth: null }
+) => {
   const datasetLabels = Object.keys(payload)
   const property = options.property[0]
 
@@ -357,11 +362,27 @@ const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
         return response[!revert ? key : label]
       })
 
+      console.log(customOptions)
+
       return {
         label: ucfirst(label),
-        backgroundColor: chartColors[index],
-        borderColor: chartColors[index],
-        borderWidth: 1,
+        "backgroundColor":
+          (customOptions &&
+            customOptions.backgroundColors &&
+            !!customOptions.backgroundColors[index] &&
+            customOptions.backgroundColors[index]) ||
+          chartColors[index],
+        "borderColor":
+          (customOptions &&
+            customOptions.borderColors &&
+            !!customOptions.borderColors[index] &&
+            customOptions.borderColors[index]) ||
+          chartColors[index],
+        "borderWidth":
+          (customOptions &&
+            !!customOptions.borderWidth &&
+            customOptions.borderWidth) ||
+          1,
         data,
       }
     }
