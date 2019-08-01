@@ -7,7 +7,7 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import DownArrowCircle from 'Components/Icons/DownArrowCircle'
 import { actions } from 'Reducers/libraryDetail'
-import { hexToRgb } from 'Utils'
+import { doughnutChartDataWithOpacity } from 'Utils'
 
 class DoughnutCard extends React.Component {
   render() {
@@ -22,51 +22,7 @@ class DoughnutCard extends React.Component {
       videoId,
       colors,
     } = this.props
-    let backgroundColor =
-      chartData && chartData.datasets
-        ? chartData.datasets[0].backgroundColor
-        : []
-    const data = chartData && chartData.datasets && chartData.datasets[0].data
-    let newData = []
-    const primaryColor = '#2FD7C4'
-    // const secondaryColor = '#505050'
-
-    //reorder colors so that unique color will be the first item
-    backgroundColor = backgroundColor.reduce(
-      (accumulator, currentColor, index) => {
-        if (currentColor === primaryColor) {
-          newData = [data[index], ...newData]
-          return [currentColor, ...accumulator]
-        }
-        newData = [...newData, data[index]]
-        return [...accumulator, currentColor]
-      },
-      []
-    )
-
-    if (backgroundColor && backgroundColor.length > 2) {
-      backgroundColor = backgroundColor.map((color, index) => {
-        let opacity = 100
-        if (index > 1) {
-          opacity = opacity - (index - 1) * 15
-        }
-        opacity = (opacity / 100).toFixed(2)
-        const { r, g, b } = hexToRgb(index > 0 ? colors.textColor : color)
-        const newColor = `rgba(${r}, ${g}, ${b}, ${opacity})`
-        return newColor
-      })
-    }
-
-    const newChartData = {
-      ...chartData,
-      datasets: [
-        {
-          ...chartData.datasets,
-          data: newData,
-          backgroundColor,
-        },
-      ],
-    }
+    const newChartData = doughnutChartDataWithOpacity(chartData, colors)
 
     return (
       <ThemeContext.Consumer>
