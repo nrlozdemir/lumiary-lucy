@@ -362,23 +362,21 @@ const convertMultiRequestDataIntoDatasets = (
         return response[!revert ? key : label]
       })
 
-      console.log(customOptions)
-
       return {
         label: ucfirst(label),
-        "backgroundColor":
+        backgroundColor:
           (customOptions &&
             customOptions.backgroundColors &&
             !!customOptions.backgroundColors[index] &&
             customOptions.backgroundColors[index]) ||
           chartColors[index],
-        "borderColor":
+        borderColor:
           (customOptions &&
             customOptions.borderColors &&
             !!customOptions.borderColors[index] &&
             customOptions.borderColors[index]) ||
           chartColors[index],
-        "borderWidth":
+        borderWidth:
           (customOptions &&
             !!customOptions.borderWidth &&
             customOptions.borderWidth) ||
