@@ -2,6 +2,7 @@ import {
   chartColors,
   expectedNames,
   compareBrandChartColors,
+  CVScoreChartColors,
 } from 'Utils/globals'
 import {
   ucfirst,
@@ -66,6 +67,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     customBorderColor,
     customColors,
     compareBrands,
+    cvScore,
     customKeys: argKeys,
   } = (args && !!args[0] && args[0]) || {}
 
@@ -181,9 +183,10 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
-      const color = compareBrands
+      const color = !!cvScore ? CVScoreChartColors : (compareBrands
         ? compareBrandChartColors[idx]
-        : chartColors[idx]
+        : chartColors[idx]) 
+      
       return singleDataset
         ? // only one dataset is required sometimes
           // ie. doughnut chart in panoptic/engagement
@@ -194,10 +197,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
                 borderColor: customBorderColor || color,
                 label: expectedNames[options.property],
                 data: datasetsFromValues || [0, 0, 0, 0],
-                backgroundColor: backgroundColor || [
-                  ...(datasets[0] ? datasets[0].backgroundColor : []),
-                  color,
-                ],
+                backgroundColor: backgroundColor || [...(datasets[0] ? datasets[0].backgroundColor : []), color,],
                 hoverBackgroundColor: hoverBG
                   ? [
                       ...(datasets[0] ? datasets[0].hoverBackgroundColor : []),
