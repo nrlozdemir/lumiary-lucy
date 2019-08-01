@@ -110,6 +110,9 @@ class TopPerformingProperty extends React.Component {
     if (hasDatasets && chartData.datasets.length > 5) {
       const top5datasets = getTopNValues(chartData.datasets, 5)
       chartData = { ...chartData, datasets: top5datasets }
+
+      console.log(top5datasets)
+      console.log(chartData)
     }
 
     const max = (hasDatasets && getMinMaxFromDatasets(chartData.datasets)) || 0
