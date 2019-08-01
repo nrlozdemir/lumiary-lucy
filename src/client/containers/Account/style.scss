@@ -113,17 +113,35 @@
     text-decoration: none;
     .active {
       color: #2fd7c4;
+      opacity: 0.6;
+      &:hover {
+        opacity: 1;
+      }
     }
   }
 }
 
 .link {
-  color: #fff;
+  cursor: pointer;
   font-family: $font-family-ClanOTBold;
   font-weight: bold;
   font-size: 14px;
   margin-bottom: 40px;
   text-decoration: none;
+}
+
+.linkLight {
+  color: #505050;
+  &:hover {
+    color: #2fd7c4;
+  }
+}
+
+.linkDark {
+  color: #fff;
+  &:hover {
+    color: #2fd7c4;
+  }
 }
 
 .submitArea {
@@ -205,5 +223,11 @@
     &:not(:last-child) {
       border-bottom: none;
     }
+  }
+}
+.button {
+  opacity: 0.7;
+  &:hover {
+    opacity: 1;
   }
 }
