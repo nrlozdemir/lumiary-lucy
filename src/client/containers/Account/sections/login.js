@@ -5,7 +5,7 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAuth } from 'Reducers/auth'
 import { Field, reduxForm, getFormSyncErrors, getFormValues } from 'redux-form'
 import { Link } from 'react-router-dom'
-
+import cx from 'classnames'
 import Input from 'Components/Form/Input'
 import AccountCard from 'Components/AccountCard'
 import Button from 'Components/Form/Button'
@@ -123,13 +123,16 @@ class LoginForm extends Component {
           </div>
           <div className={style.submitArea}>
             <Link
-              className={style.link}
-              style={colors.account.link || {}}
+              className={cx(
+                colors.themeType === 'light' ? style.linkLight : style.linkDark,
+                style.link
+              )}
               to={'/account/forgot-password'}
             >
               Forgot Password?
             </Link>
             <Button
+              customClass={style.button}
               disable={!dirty || submitting || pristine || !isEmpty(errors)}
               buttonText="Sign In"
             />
