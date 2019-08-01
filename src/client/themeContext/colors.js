@@ -244,8 +244,10 @@ const dark = {
   },
   //reporst page
   reportCardsBg:'#545b79',
-  reportCardContentBg: '#373f5b'
-  //reporst page
+  reportCardContentBg: '#373f5b',
+
+  // doughnut circle background color
+  doughnutChartBackgroundColor: '#545b79',
 }
 
 const light = {
@@ -493,8 +495,10 @@ const light = {
   },
   //reporst page
   reportCardsBg:'#ffffff',
-  reportCardContentBg: '#f3f6f9'
-  //reporst page
+  reportCardContentBg: '#f3f6f9',
+
+  // doughnut circle background color
+  doughnutChartBackgroundColor: '#acb0be',
 }
 
 const themes = {
