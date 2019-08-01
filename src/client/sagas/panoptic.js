@@ -415,19 +415,19 @@ function* getTopPerformingFormatData({ data = {} }) {
         })
 
         const nonGreyChartColors = ['#2FD7C4', '#8562F3', '#5292E5', '#ff556f']
+        const customChartColors = ['#2FD7C4', '#8562F3', '#5292E5', '#ffffff']
         Object.keys(payload.dates[weekday]).forEach((propertyBucket, idx) => {
           if (!propertyBuckets[propertyBucket]) {
             propertyBuckets[propertyBucket] = {
               label: propertyBucket,
               fill: false,
               lineTension: 0.1,
-              backgroundColor: chartColors[idx],
-              borderColor: chartColors[idx],
-              hoverBackgroundColor: chartColors[idx],
+              backgroundColor: customChartColors[idx],
+              borderColor: customChartColors[idx],
+              hoverBackgroundColor: customChartColors[idx],
               data: [],
             }
           }
-
           const propertyBucketValue = payload.dates[weekday][propertyBucket]
           propertyBuckets[propertyBucket].data.unshift(propertyBucketValue)
         })
