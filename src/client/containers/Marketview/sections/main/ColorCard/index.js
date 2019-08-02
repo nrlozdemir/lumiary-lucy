@@ -6,7 +6,7 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewBubbleChart } from 'Reducers/marketview'
 import { Link } from 'react-router-dom'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
-import { socialIconSelector, metricSuffix } from 'Utils'
+import { socialIconSelector, metricSuffix, ucfirst } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import { isEmpty } from 'lodash'
@@ -49,6 +49,8 @@ class ColorCard extends Component {
 
     const totalChartValue =
       !isDataEmpty && data.reduce((total, { value }) => total + value, 0)
+
+      const metric = 'views'
 
     return (
       <ThemeContext.Consumer>
@@ -153,7 +155,7 @@ class ColorCard extends Component {
                             color: colors.chartTooltipColor
                           }}
                         >
-                          {metricSuffix(bubble.oldValue)}
+                          {`${metricSuffix(bubble.oldValue)} ${ucfirst(metric)}`}
                         </div>
                       </ToolTip>
                     </Bubble>
@@ -177,7 +179,7 @@ class ColorCard extends Component {
               </div>
             )}
             <div className={style.marketViewCardDescription}>
-              Based on the number of shares for competitors across all platforms
+              {`Based on the number of ${metric} for competitors across all platforms`}
             </div>
             <Link
               to="/marketview/platform"

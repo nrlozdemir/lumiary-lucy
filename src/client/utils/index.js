@@ -407,11 +407,14 @@ const customChartToolTip = (themes, customOptions = {}, forceData) => {
     titleFontStyle: 'bold',
     mode: 'point',
     titleFontFamily: 'ClanOTBold',
+    bodyFontFamily: 'ClanOT',
     bodyFontColor: themes.chartTooltipColor,
     xPadding: 8,
     yPadding: 12,
     bodyFontStyle: 'bold',
     displayColors: false,
+    titleFontSize: 12,
+    bodyFontSize: 12,
     callbacks: {
       title: () => '',
       label: function(tooltipItem, data) {

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Radar } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
-import { metricSuffix, customChartToolTip } from 'Utils'
+import { metricSuffix, customChartToolTip, ucfirst } from 'Utils'
 
 const plugins = [
   {
@@ -197,8 +197,8 @@ const RadarChart = (props) => {
                 data.labels &&
                 data.labels[tooltipItem['index']] &&
                 data.labels[tooltipItem['index']].name
-              return `${metricSuffix(count) || 0} ${metric || ''} ${!!name &&
-                `| ${name}`}`
+              return `${metricSuffix(count) || 0} ${ucfirst(metric) ||
+                ''} ${!!name && `| ${name}`}`
             },
           },
         }),

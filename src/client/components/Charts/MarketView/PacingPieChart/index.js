@@ -25,7 +25,7 @@ const PacingPieChart = ({ data = {} }) => {
             height={240}
             width={240}
             options={{
-              tooltips: {
+              tooltips: customChartToolTip(colors, {
                 callbacks: {
                   title: function(tooltipItem, data) {
                     const name =
@@ -44,24 +44,15 @@ const PacingPieChart = ({ data = {} }) => {
                     return `${metricSuffix(parseInt(count) || 0)} Shares`
                   },
                 },
-                backgroundColor: colors.tooltipBackground,
-                cornerRadius: 6,
-                titleFontColor: colors.chartTooltipColor,
-                titleFontStyle: 'normal',
-                mode: 'point',
-                bodyFontFamily: 'ClanOT',
-                titleFontFamily: 'ClanOT',
-                bodyFontColor: colors.chartTooltipColor,
                 xPadding: 12,
-                yPadding: 12,
-                bodyFontStyle: 'normal',
-                displayColors: false,
+                titleFontFamily: 'ClanOT',
+                bodyFontFamily: 'ClanOT',
                 //titleAlign: 'center',
                 //footerAlign: 'center',
                 //bodyAlign: 'center',
-                xPadding: 12,
-                yPadding: 12,
-              },
+                yAlign: 'top',
+                xAlign: 'center',
+              }),
               responsive: false,
               legend: {
                 display: false,
