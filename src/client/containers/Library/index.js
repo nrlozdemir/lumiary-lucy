@@ -4,7 +4,11 @@ import PropTypes from 'prop-types'
 import { compose } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { actions, makeSelectLibrary } from 'Reducers/library'
+import {
+  actions,
+  makeSelectLibrary,
+  // makeSelectFormValues,
+} from 'Reducers/library'
 import LibraryHeader from './sections/LibraryHeader'
 import Sidebar from './sidebar.js'
 import VideoSection from './sections/VideoSection'
@@ -25,6 +29,14 @@ export class Library extends React.Component {
 
   setSidebarVisible(e) {
     this.setState({ sidebarVisible: e })
+    // if (!e) {
+    //   const { changeFilter, formValues } = this.props
+    //   if (formValues && formValues.sidebar && formValues.sidebar.values) {
+    //     changeFilter({
+    //       ...formValues.sidebar.values,
+    //     })
+    //   }
+    // }
   }
 
   loadMoreVideo = () => {
@@ -55,7 +67,7 @@ export class Library extends React.Component {
 
     const {
       changeFilter,
-      library: { loading },
+      library: { loading, filters },
     } = this.props
 
     const sideBarClass = classNames(style.overlay, {
@@ -95,6 +107,7 @@ export class Library extends React.Component {
               onSubmit={(e) => this.handleSubmit(e)}
               colors={colors}
               changeFilter={changeFilter}
+              filters={filters}
             />
           </React.Fragment>
         )}
@@ -112,6 +125,7 @@ Library.propTypes = {
 
 const mapStateToProps = createStructuredSelector({
   library: makeSelectLibrary(),
+  // formValues: makeSelectFormValues(),
 })
 
 function mapDispatchToProps(dispatch) {

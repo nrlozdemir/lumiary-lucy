@@ -78,11 +78,19 @@ const libraryReducer = (state = initialState, action) => {
 
 export const selectLibraryDomain = (state) => state.Library
 
+// export const selectFormValues = (state) => state.form
+
 export const makeSelectLibrary = () =>
   createSelector(
     selectLibraryDomain,
     (substate) => substate.toJS()
   )
+
+// export const makeSelectFormValues = () =>
+//   createSelector(
+//     selectFormValues,
+//     (substate) => substate
+//   )
 
 export const makeSelectVideoFilters = () =>
   createSelector(

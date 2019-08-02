@@ -21,12 +21,12 @@ class Sidebar extends React.Component {
     this.formChange = this.formChange.bind(this)
   }
 
-  componentDidUpdate(prevProps) {
-    const { sidebarVisible } = this.props
-    if (sidebarVisible !== prevProps.sidebarVisible && !sidebarVisible) {
-      this.resetFormValues()
-    }
-  }
+  // componentDidUpdate(prevProps) {
+  //   const { sidebarVisible } = this.props
+  //   if (sidebarVisible !== prevProps.sidebarVisible && !sidebarVisible) {
+  //     this.resetFormValues()
+  //   }
+  // }
 
   resetFormValues = () => {
     const { reset, changeFilter } = this.props
