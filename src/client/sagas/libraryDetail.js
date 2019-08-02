@@ -207,16 +207,7 @@ function* getDoughnutSectionInfoData({ payload }) {
     const { brand } = yield select(makeSelectAuthProfile())
 
     if (!!brand && !!videoId && !!dateRange && !!metric && !!infoData) {
-      const {
-        libraryMetricPercents,
-        industryMetricPercents,
-        libraryMetricDateSums,
-        industryMetricDateSums,
-        industryDateCounts,
-        videoPropertyAverage,
-        libraryPropertyAverage,
-        metricLibraryPercentChange,
-      } = yield call(
+      const response = yield call(
         getDataFromApi,
         undefined,
         buildApiUrl(`/brand/${brand.uuid}/video/${videoId}/compare`, {
@@ -226,6 +217,18 @@ function* getDoughnutSectionInfoData({ payload }) {
         }),
         'GET'
       )
+      
+
+      const {
+        libraryMetricPercents,
+        industryMetricPercents,
+        libraryMetricDateSums,
+        industryMetricDateSums,
+        industryDateCounts,
+        videoPropertyAverage,
+        libraryPropertyAverage,
+        metricLibraryPercentChange,
+      } = response
 
       const {
         maxKeyLabel: libraryMaxKeyLabel,
@@ -275,6 +278,8 @@ function* getDoughnutSectionInfoData({ payload }) {
           },
         ],
       }
+
+      console.log(lineChartData)
 
       yield put(
         actions.doughnutInfoIndustrySuccess({

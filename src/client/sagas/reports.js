@@ -4,7 +4,7 @@ import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
 
 import querystring from 'querystring'
-
+import { sortObject } from 'Utils'
 import {
   convertDataIntoDatasets,
   radarChartCalculate,
@@ -245,7 +245,7 @@ function* getContentVitalityScoreData({ payload = {} }) {
 
     yield put(
       actions.getContentVitalityScoreDataSuccess(
-        percentageManipulation({ data: response, platform})
+        percentageManipulation({ data: response, platform })
       )
     )
   } catch (err) {
@@ -261,28 +261,42 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
 
     // const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
+    const platform = 'all'
+    const property = 'duration'
+
     const parameters = {
       dateRange,
+      platform,
       metric: 'views',
-      property: ['duration'],
+      property: [property],
       dateBucket: 'none',
       brands: [...report.brands],
-      platform: 'all',
       limit: 4,
+      display: 'percentage',
     }
 
-    const payload = yield call(getDataFromApi, parameters, '/report')
+    const response = yield call(getDataFromApi, parameters, '/report')
 
-    if (!!payload && !!payload.data) {
-      const legend = Object.keys(payload.data).map((b, idx) => ({
+    if (!!response && !!response.data) {
+      const sortedResponse = Object.keys(response.data).reduce(
+        (sorted, key) => {
+          sorted[key] = {}
+          sorted[key][property] = sortObject(response.data[key][property])
+          return sorted
+        },
+        {}
+      )
+
+      const legend = Object.keys(sortedResponse).map((b, idx) => ({
         label: b,
         color: idx === 1 ? 'coral-pink' : 'cool-blue',
       }))
+
       yield put(
         actions.getVideoComparisonDataSuccess({
           legend,
           ...convertDataIntoDatasets(
-            percentageManipulation(payload),
+            percentageManipulation({ data: sortedResponse, platform }),
             parameters,
             {
               compareBrands: true,

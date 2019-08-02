@@ -1,6 +1,7 @@
 import React from 'react'
 import styles from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
+import { isEqual } from 'lodash'
 
 class HorizontalBarChart extends React.Component {
   constructor(props) {
@@ -9,6 +10,18 @@ class HorizontalBarChart extends React.Component {
       bars: props.data && props.data,
     }
   }
+
+  static getDerivedStateFromProps(props, state) {
+    const { data } = props
+    const { bars } = state
+    if (!isEqual(JSON.stringify(data), JSON.stringify(bars))) {
+      return {
+        bars: data,
+      }
+    }
+    return null
+  }
+
   renderBar = (bar) => {
     return (
       <div
@@ -33,6 +46,7 @@ class HorizontalBarChart extends React.Component {
       </div>
     )
   }
+
   render() {
     const { bars } = this.state
     const {

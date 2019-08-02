@@ -30,7 +30,10 @@ class LibraryData extends React.Component {
                   height={180}
                   displayDataLabels={false}
                   cutoutPercentage={50}
-                  data={doughnutChartDataWithOpacity(modalData.libraryChartData, colors)}
+                  data={doughnutChartDataWithOpacity(
+                    modalData.libraryChartData,
+                    colors,
+                  )}
                 />
                 <p className="pt-32">
                   <span className={style.duskRound} />
@@ -45,9 +48,11 @@ class LibraryData extends React.Component {
                 </p>
               </div>
             ) : (
-              <div className={cx(style.emptyData, {
-                [style['emptyData--loading']]: loading
-              })}>
+              <div
+                className={cx(style.emptyData, {
+                  [style['emptyData--loading']]: loading,
+                })}
+              >
                 {!loading ? 'No Data Available' : ''}
               </div>
             )}
