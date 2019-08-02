@@ -19,7 +19,7 @@ import {
   metricSuffix,
 } from 'Utils'
 import { getMinMaxFromDatasets, getTopNValues } from 'Utils/datasets'
-import { isEqual } from 'lodash'
+import { isArray, isNumber, isEqual } from 'lodash'
 
 import style from '../../../style.scss'
 
@@ -112,15 +112,29 @@ class TopPerformingProperty extends React.Component {
       chartData = { ...chartData, datasets: top5datasets }
     }
 
-    const maxUp =
-      (hasDatasets && getMinMaxFromDatasets(chartData.datasets)) || 0
+    let elements = []
+    !!chartData.datasets &&
+      isArray(chartData.datasets) &&
+      chartData.datasets.length > 0 &&
+      chartData.datasets.map((e, i) => {
+        !!e.data &&
+          e.data.map((m, k) => {
+            !!m && isNumber(m) && m > 0 && elements.push(m)
+          })
+      })
+
+    const findMax = !!elements && Math.max(...elements)
+
+    const maxUp = (hasDatasets && findMax) || 0
 
     const divider =
       !!maxUp &&
       Math.pow(10, parseInt(((Math.log(maxUp) * Math.LOG10E + 1) | 0) - 1))
 
     const maxNumberCeil =
-      !!maxUp && !!divider && Math.ceil(parseFloat((maxUp / divider).toFixed(2)))
+      !!maxUp &&
+      !!divider &&
+      Math.ceil(parseFloat((maxUp / divider).toFixed(2)))
 
     const max = !!maxNumberCeil
       ? parseInt(
