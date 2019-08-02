@@ -133,9 +133,6 @@ function* getFilteringSectionData({ data }) {
             options,
             {
               singleDataset: true,
-              cvScore: true,
-              background: '#fff',
-              backgroundColor: '#000',
             }
           ),
           stackedChartData:
