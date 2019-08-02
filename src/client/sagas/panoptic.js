@@ -126,13 +126,6 @@ function* getFilteringSectionData({ data }) {
       !!doughnutData.data[brand.name][property] &&
       stackedChartData.data
     ) {
-      console.log(convertDataIntoDatasets(
-        percentageManipulation(doughnutData),
-        options,
-        {
-          singleDataset: true,
-        }
-      ))
       yield put(
         actions.getFilteringSectionDataSuccess({
           doughnutData: convertDataIntoDatasets(
