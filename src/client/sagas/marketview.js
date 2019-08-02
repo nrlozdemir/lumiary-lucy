@@ -707,7 +707,15 @@ function* getTopPerformingPropertiesByTimeData({
       options.limit = 4
     }
 
-    const data = yield call(getDataFromApi, options, '/report')
+    const data = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/brand/${brand.uuid}/propertyperformance`, {
+        daterange: dateRange,
+        property: property,
+      }),
+      'GET'
+    )
 
     yield put(
       actions.getTopPerformingTimeSuccess(
