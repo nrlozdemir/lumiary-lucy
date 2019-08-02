@@ -77,7 +77,8 @@ class SliderWithScrubber extends React.Component {
     )
     */
     const totalDuration =
-      shots && shots.length > 0 ? shots[shots.length - 1].endTime.toFixed(4) : 0
+      !!shots && !!shots.length ? parseFloat(shots[shots.length - 1].endTime).toFixed(4) : 0
+
     const dividedDuration =
       totalDuration && Math.round(totalDuration / ticks).toFixed(4)
 
