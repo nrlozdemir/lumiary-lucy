@@ -67,7 +67,7 @@ export class Library extends React.Component {
 
     const {
       changeFilter,
-      library: { loading, filters },
+      library: { loading },
     } = this.props
 
     const sideBarClass = classNames(style.overlay, {
@@ -107,7 +107,6 @@ export class Library extends React.Component {
               onSubmit={(e) => this.handleSubmit(e)}
               colors={colors}
               changeFilter={changeFilter}
-              filters={filters}
             />
           </React.Fragment>
         )}
