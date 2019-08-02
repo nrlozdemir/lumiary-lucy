@@ -18,16 +18,37 @@ import { isEmpty } from 'lodash'
 import RouterLoading from 'Components/RouterLoading'
 
 class PacingCard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      metric: 'views',
+    }
+  }
+
   componentDidMount() {
-    this.props.getPacingChartRequest()
+    const { metric } = this.state
+    this.props.getPacingChartRequest({
+      metric
+    })
   }
 
   render() {
+    const { metric } = this.state
     const {
       pacingChartData: { data, loading, error },
     } = this.props
 
     const isDataEmpty = (!loading && isDataSetEmpty(data)) || isEmpty(data)
+    const { datasets = [], labels = [] } = data || {}
+    let maxPacing
+
+    if(datasets[0]) {
+      const { data:dataSet = [] } = datasets[0]
+      const maxIndex = dataSet.indexOf(Math.max(...dataSet))
+      if(labels[maxIndex]) {
+        maxPacing = labels[maxIndex]
+      }
+    }
 
     return (
       <ThemeContext.Consumer>
@@ -68,7 +89,7 @@ class PacingCard extends Component {
               <PacingPieChart data={data} colors={colors} />
             )}
             {!loading && (
-              <div className={style.marketViewCardChartTitle}>Medium Paced</div>
+              <div className={style.marketViewCardChartTitle}>{(!maxPacing) ? `` :`${maxPacing} Paced`}</div>
             )}
             <div
               className={classnames(
@@ -91,7 +112,7 @@ class PacingCard extends Component {
             </div>
 
             <div className={style.marketViewCardDescription}>
-              Based on the number of shares for competitors across all platforms
+              {`Based on the number of ${metric} for competitors across all platforms`}
             </div>
             <Link
               to="/marketview/competitor"

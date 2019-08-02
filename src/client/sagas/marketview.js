@@ -425,10 +425,11 @@ function* getBubbleChartData() {
   }
 }
 
-function* getPacingChartData() {
+function* getPacingChartData({
+  payload: { metric = 'shares' },
+}) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
-    const metric = 'shares'
 
     const competitors =
       !!brand.competitors &&

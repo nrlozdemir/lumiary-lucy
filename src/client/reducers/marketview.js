@@ -151,8 +151,9 @@ export const actions = {
     type: types.GET_MARKETVIEW_BUBBLECHART_FAILURE,
     error,
   }),
-  getPacingChartRequest: () => ({
+  getPacingChartRequest: (payload) => ({
     type: types.GET_MARKETVIEW_PACINGCHART_REQUEST,
+    payload
   }),
   getPacingChartSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_PACINGCHART_SUCCESS,
