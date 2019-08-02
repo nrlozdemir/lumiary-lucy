@@ -78,7 +78,10 @@ function parseData(props) {
 
     statArrowClassName = classnames(styles.arrow, arrowStyle)
     statClassName = classnames(styles.stats, statStyle)
-    tooltipText = `${title} ${changeWording} ${formattedPercent}% from yesterday`
+    {`${statDifference < 0 ? '-' : ''}${metricSuffix(
+      Math.abs(statDifference)
+    )}`}
+    tooltipText = `${title} ${changeWording} ${formattedPercent < 0 ? '-' : ''}${metricSuffix(Math.abs(formattedPercent))}% from yesterday`
   }
 
   return {
