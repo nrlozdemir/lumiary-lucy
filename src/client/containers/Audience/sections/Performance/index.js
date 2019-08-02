@@ -151,16 +151,17 @@ class Performance extends React.Component {
         }, {})) ||
       null
 
+    const isEmpty =
+      !loading &&
+      (_.isEmpty(data) ||
+        (!!data &&
+          Object.values(data).every((valArr) =>
+            valArr.every((v) => !v.toolTip)
+          )))
+
     return (
       <Module
-        isEmpty={
-          !loading &&
-          (_.isEmpty(data) ||
-            (!!data &&
-              Object.values(data).every((valArr) =>
-                valArr.every((v) => !v.toolTip)
-              )))
-        }
+        isEmpty={isEmpty}
         customEmptyClasses={style.performanceEmpty}
         loading={loading}
         moduleKey={'Audience/Performance'}
@@ -373,13 +374,18 @@ class Performance extends React.Component {
           <div className="col-12-gutter-20" style={{ color: colors.textColor }}>
             <style>
               {`
-                  .customTooltip {
-                    color: ${colors.textColor};
-                  }
-                  .customTooltip .rc-slider-tooltip-inner {
-                    color: ${colors.textColor};
-                  }
-                `}
+                .customTooltip {
+                  color: ${colors.textColor};
+                }
+                .customTooltip .rc-slider-tooltip-inner {
+                  color: ${colors.textColor};
+                }
+              `}
+              {(!!isEmpty || !!loading) &&
+                `.customTooltip .rc-slider-tooltip-inner {
+                    display: none;
+                }
+              `}
             </style>
             <RangeWithBadge
               customClass={'customRangeSlider'}
