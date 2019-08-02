@@ -159,6 +159,12 @@ function* getPlatformTopVideosMarketview({
             {
               ...options,
               property: [property],
+            },
+            false,
+            {
+              backgroundColors: ['#5292e5', '#8562f3', '#acb0be', '#2fd7c4'],
+              borderColors: ['#5292e5', '#8562f3', '#acb0be', '#2fd7c4'],
+              borderWidth: 1,
             }
           )
         )

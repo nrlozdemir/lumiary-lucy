@@ -2,6 +2,7 @@ import {
   chartColors,
   expectedNames,
   compareBrandChartColors,
+  CVScoreChartColors,
 } from 'Utils/globals'
 import {
   ucfirst,
@@ -66,6 +67,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     customBorderColor,
     customColors,
     compareBrands,
+    cvScore,
     customKeys: argKeys,
   } = (args && !!args[0] && args[0]) || {}
 
@@ -181,9 +183,10 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
-      const color = compareBrands
+      const color = !!cvScore ? CVScoreChartColors : (compareBrands
         ? compareBrandChartColors[idx]
-        : chartColors[idx]
+        : chartColors[idx]) 
+      
       return singleDataset
         ? // only one dataset is required sometimes
           // ie. doughnut chart in panoptic/engagement
@@ -194,10 +197,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
                 borderColor: customBorderColor || color,
                 label: expectedNames[options.property],
                 data: datasetsFromValues || [0, 0, 0, 0],
-                backgroundColor: backgroundColor || [
-                  ...(datasets[0] ? datasets[0].backgroundColor : []),
-                  color,
-                ],
+                backgroundColor: backgroundColor || [...(datasets[0] ? datasets[0].backgroundColor : []), color,],
                 hoverBackgroundColor: hoverBG
                   ? [
                       ...(datasets[0] ? datasets[0].hoverBackgroundColor : []),
@@ -336,7 +336,12 @@ const compareSharesData = (payload, options) => {
   })
 }
 
-const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
+const convertMultiRequestDataIntoDatasets = (
+  payload,
+  options,
+  revert,
+  customOptions = { backgroundColors: [], borderColors: [], borderWidth: null }
+) => {
   const datasetLabels = Object.keys(payload)
   const property = options.property[0]
 
@@ -359,9 +364,23 @@ const convertMultiRequestDataIntoDatasets = (payload, options, revert) => {
 
       return {
         label: ucfirst(label),
-        backgroundColor: chartColors[index],
-        borderColor: chartColors[index],
-        borderWidth: 1,
+        backgroundColor:
+          (customOptions &&
+            customOptions.backgroundColors &&
+            !!customOptions.backgroundColors[index] &&
+            customOptions.backgroundColors[index]) ||
+          chartColors[index],
+        borderColor:
+          (customOptions &&
+            customOptions.borderColors &&
+            !!customOptions.borderColors[index] &&
+            customOptions.borderColors[index]) ||
+          chartColors[index],
+        borderWidth:
+          (customOptions &&
+            !!customOptions.borderWidth &&
+            customOptions.borderWidth) ||
+          1,
         data,
       }
     }
@@ -715,7 +734,7 @@ const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
         {
           borderColor: '#ACB0BE',
           data: vals.map((val) => (val * 100).toFixed(2)),
-          backgroundColor: keys.map((key) => (key === maxKey ? color : '#fff')),
+          backgroundColor: keys.map((key) => (key === maxKey ? color : '#505050')),
           hoverBackgroundColor: [],
         },
       ],

@@ -25,6 +25,8 @@ export const chartColors = [
 
 export const compareBrandChartColors = ['#2FD7C4', '#5292E5']
 
+export const CVScoreChartColors = ['#fff', '#ccc', '#eee', '#000']
+
 export const weeks = ['Week1', 'Week2', 'Week3', 'Week4']
 export const dayOfWeek = [
   'Sunday',

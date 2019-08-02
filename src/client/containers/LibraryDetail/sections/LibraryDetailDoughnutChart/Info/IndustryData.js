@@ -6,6 +6,7 @@ import style from '../style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import { makeSelectInfoModalData } from 'Reducers/libraryDetail'
+import { doughnutChartDataWithOpacity } from 'Utils'
 import cx from 'classnames'
 
 class IndustryData extends React.Component {
@@ -27,7 +28,7 @@ class IndustryData extends React.Component {
                   height={180}
                   displayDataLabels={false}
                   cutoutPercentage={50}
-                  data={modalData.industryChartData}
+                  data={doughnutChartDataWithOpacity(modalData.industryChartData, colors)}
                 />
                 <p className="w-75 text-center pt-32">
                   <span className={style.purpleRound} />
