@@ -12,7 +12,6 @@ import cx from 'classnames'
 class IndustryData extends React.Component {
   render() {
     const { modalData, loading } = this.props
-
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -28,7 +27,11 @@ class IndustryData extends React.Component {
                   height={180}
                   displayDataLabels={false}
                   cutoutPercentage={50}
-                  data={doughnutChartDataWithOpacity(modalData.industryChartData, colors)}
+                  data={doughnutChartDataWithOpacity(
+                    modalData.industryChartData,
+                    colors,
+                    '#8562f3'
+                  )}
                 />
                 <p className="w-75 text-center pt-32">
                   <span className={style.purpleRound} />
@@ -43,9 +46,11 @@ class IndustryData extends React.Component {
                 </p>
               </div>
             ) : (
-              <div className={cx(style.emptyData, {
-                [style['emptyData--loading']]: loading
-              })}>
+              <div
+                className={cx(style.emptyData, {
+                  [style['emptyData--loading']]: loading,
+                })}
+              >
                 {!loading ? 'No Data Available' : ''}
               </div>
             )}

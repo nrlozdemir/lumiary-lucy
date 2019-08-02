@@ -149,7 +149,7 @@ const strToColor = (str) => {
     'blue-purple': '#79609b',
     purple: '#923683',
     'red-purple': '#b83057',
-    gray: '#808080'
+    gray: '#808080',
   }
   return color[str]
 }
@@ -467,21 +467,23 @@ const sortObject = (o = {}, reverse = false) => {
   return keysToUse.reduce((r, k) => ((r[k] = o[k]), r), {})
 }
 
-const doughnutChartDataWithOpacity = (chartData, colors) => {
+const doughnutChartDataWithOpacity = (
+  chartData,
+  colors,
+  primaryColor = '#2FD7C4'
+) => {
   let backgroundColor =
-    chartData && chartData.datasets
-      ? chartData.datasets[0].backgroundColor
-      : []
+    chartData && chartData.datasets ? chartData.datasets[0].backgroundColor : []
   const data = chartData && chartData.datasets && chartData.datasets[0].data
   let newData = []
-  const primaryColor = '#2FD7C4'
-  // const secondaryColor = '#505050'
+  let primaryIdx = 0
 
   //reorder colors so that unique color will be the first item
   backgroundColor = backgroundColor.reduce(
     (accumulator, currentColor, index) => {
       if (currentColor === primaryColor) {
         newData = [data[index], ...newData]
+        primaryIdx = index
         return [currentColor, ...accumulator]
       }
       newData = [...newData, data[index]]
@@ -503,8 +505,17 @@ const doughnutChartDataWithOpacity = (chartData, colors) => {
     })
   }
 
+  let labels = [...chartData.labels]
+
+  if (!!primaryIdx) {
+    const labelToMove = labels[primaryIdx]
+    labels.splice(primaryIdx, 1)
+    labels = [labelToMove, ...labels]
+  }
+
   return {
     ...chartData,
+    labels,
     datasets: [
       {
         ...chartData.datasets,
@@ -545,5 +556,5 @@ export {
   getProfileObjectWithBrand,
   customChartToolTip,
   getModuleTerms,
-  doughnutChartDataWithOpacity
+  doughnutChartDataWithOpacity,
 }
