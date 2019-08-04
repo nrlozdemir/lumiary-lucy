@@ -230,11 +230,14 @@ function* getContentVitalityScoreData({ payload = {} }) {
   const { dateRange, platform, report = {} } = payload
   const { brands = [] } = report
   try {
+    const { brand } = yield select(makeSelectAuthProfile())
+
     const response = yield call(
       getDataFromApi,
       undefined,
       `/report/compare/brands?${querystring.stringify({
         brands: brands,
+        brandUuid: brand.uuid,
         property: 'cvScore',
         mode: 'sumVideos',
         daterange: dateRange,

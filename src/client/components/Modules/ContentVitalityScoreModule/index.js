@@ -32,6 +32,7 @@ const ContentVitalityScoreModule = ({
   chartYAxisMax = 100,
   platform,
   average,
+  params,
   dataKeys: {
     leftLabel,
     rightLabel,
@@ -42,7 +43,57 @@ const ContentVitalityScoreModule = ({
   },
   audience = false,
 }) => {
-  const formattedData =
+
+  if(!data) {
+    return null
+  }
+
+  let formattedData
+
+  if(data.other) {
+    const temp_formattedData = Object.keys(data.other).reduce((accumulator, key) => {
+      if(key === 'averageCvScore') {
+        return accumulator
+      }
+  
+      const item = {
+        ...data[key],
+        uuid: key
+      }
+  
+      if (!!authProfile.brand && key === authProfile.brand.uuid) {
+        item.name = authProfile.brand.name
+      } else {
+        authProfile.brand.competitors.forEach((competitor) => {
+          if (key === competitor.uuid) {
+            item.name = competitor.name
+          }
+        })
+      }
+  
+      accumulator.push(item)
+  
+      return accumulator
+    }, [])
+  
+    if(temp_formattedData.length !== 2) {
+      return null
+    }
+  
+    formattedData = {
+      leftDataset: temp_formattedData[0],
+      middleDataset: {
+        ...data[middleKey || 'other'],
+        name: middleLabel
+          ? middleLabel
+          : middleKey
+          ? middleKey
+          : 'Percent Difference',
+      },
+      rightDataset: temp_formattedData[1],
+    }
+  } else {
+    formattedData =
     (!!data &&
       Object.keys(data).reduce(
         (accumulator, dataKey) => {
@@ -102,6 +153,8 @@ const ContentVitalityScoreModule = ({
         }
       )) ||
     {}
+  }
+
 
   const newDatasets = {
     labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
@@ -314,6 +367,10 @@ const ContentVitalityScoreModule = ({
                 const bgColor =
                   idx === 0 ? '#5292e5' : idx === 1 ? '##8562f3' : '#2fd7c4'
 
+                const titleText = formattedData[key].name
+                const percentDifference = data.other && data.other[formattedData[key].uuid] ? Math.abs(data.other[formattedData[key].uuid]) : 'N/A'
+                const diffWording = data.other && data.other[formattedData[key].uuid] ? data.other[formattedData[key].uuid] > 0 ? 'below' : 'above' : 'N/A' 
+
                 return (
                   <div className={percentageCol} key={idx}>
                     <div
@@ -404,8 +461,9 @@ const ContentVitalityScoreModule = ({
                             </span>
                           ) : (
                             <span>
-                              The average {names[0]} video scores <b>{10}</b>{' '}
-                              points <b>{idx === 0 ? 'above' : 'below'}</b> your
+                              {}
+                              The average {titleText} video scores <b>{percentDifference}</b>{' '}
+                              points <b>{diffWording}</b> your
                               library average on{' '}
                               {`${ucfirst(platform)}${
                                 platform === 'all' ? ' Platforms' : ''
