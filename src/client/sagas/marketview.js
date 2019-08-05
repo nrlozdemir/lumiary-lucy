@@ -141,13 +141,27 @@ function* getPlatformTopVideosMarketview({
       'GET'
     )
 
+    console.log("response1:", response)
+
+    let reduceAll = [] 
+
     // preliminary to convertMultiRequestDataIntoDatasets structure
-    response = Object.keys(response).reduce((acc, key) => {
-      acc[key] = {
-        data: { [key]: response[key] },
-      }
-      return acc
-    }, {})
+    Object.keys(response).map((o, i) => {
+      console.log(o, i)
+      reduceAll.push({[o] : [response[o]]})
+      /*
+      Facebook 0
+      Twitter 1
+      Instagram 2
+      YouTube 3
+      */
+    })
+
+    reduceAll && console.log(reduceAll)
+
+
+
+
 
     yield put(
       actions.getPlatformTopVideosSuccess(
