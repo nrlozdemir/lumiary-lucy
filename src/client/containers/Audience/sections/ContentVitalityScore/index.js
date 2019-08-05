@@ -20,7 +20,7 @@ class ContentVitalityScore extends React.Component {
   render() {
     const {
       audienceContentVitalityScoreData: {
-        data: { data, platform, average = '0' },
+        data: { data, platform },
         loading,
         error,
       },
@@ -45,7 +45,6 @@ class ContentVitalityScore extends React.Component {
               middleLabel: 'Percent Difference',
             }}
             platform={platform}
-            average={average}
             data={data}
             chartYAxisMax={chartYAxisMax}
             moduleKey={'Audience/ContentVitalityScore'}

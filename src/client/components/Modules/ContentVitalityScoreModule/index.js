@@ -43,43 +43,45 @@ const ContentVitalityScoreModule = ({
   },
   audience = false,
 }) => {
-
-  if(!data) {
+  if (!data) {
     return null
   }
 
   let formattedData
 
-  if(data.other) {
-    const temp_formattedData = Object.keys(data.other).reduce((accumulator, key) => {
-      if(key === 'averageCvScore') {
+  if (data.other) {
+    const temp_formattedData = Object.keys(data.other).reduce(
+      (accumulator, key) => {
+        if (key === 'averageCvScore') {
+          return accumulator
+        }
+
+        const item = {
+          ...data[key],
+          uuid: key,
+        }
+
+        if (!!authProfile.brand && key === authProfile.brand.uuid) {
+          item.name = authProfile.brand.name
+        } else {
+          authProfile.brand.competitors.forEach((competitor) => {
+            if (key === competitor.uuid) {
+              item.name = competitor.name
+            }
+          })
+        }
+
+        accumulator.push(item)
+
         return accumulator
-      }
-  
-      const item = {
-        ...data[key],
-        uuid: key
-      }
-  
-      if (!!authProfile.brand && key === authProfile.brand.uuid) {
-        item.name = authProfile.brand.name
-      } else {
-        authProfile.brand.competitors.forEach((competitor) => {
-          if (key === competitor.uuid) {
-            item.name = competitor.name
-          }
-        })
-      }
-  
-      accumulator.push(item)
-  
-      return accumulator
-    }, [])
-  
-    if(temp_formattedData.length !== 2) {
+      },
+      []
+    )
+
+    if (temp_formattedData.length !== 2) {
       return null
     }
-  
+
     formattedData = {
       leftDataset: temp_formattedData[0],
       middleDataset: {
@@ -94,67 +96,66 @@ const ContentVitalityScoreModule = ({
     }
   } else {
     formattedData =
-    (!!data &&
-      Object.keys(data).reduce(
-        (accumulator, dataKey) => {
-          switch (dataKey) {
-            case middleKey:
-            case 'other':
-              accumulator.middleDataset = {
-                ...data[middleKey || dataKey],
-                name: middleLabel
-                  ? middleLabel
-                  : middleKey
-                  ? middleKey
-                  : 'Percent Difference',
-              }
-              break
-
-            case leftKey:
-              accumulator.leftDataset = {
-                ...data[leftKey],
-                name: leftLabel || leftKey,
-              }
-              break
-
-            case rightKey:
-              accumulator.rightDataset = {
-                ...data[rightKey],
-                name: rightLabel || rightKey,
-              }
-              break
-
-            default:
-              if (!!authProfile.brand && dataKey === authProfile.brand.uuid) {
-                accumulator.leftDataset = {
-                  ...data[dataKey],
-                  name: authProfile.brand.name,
+      (!!data &&
+        Object.keys(data).reduce(
+          (accumulator, dataKey) => {
+            switch (dataKey) {
+              case middleKey:
+              case 'other':
+                accumulator.middleDataset = {
+                  ...data[middleKey || dataKey],
+                  name: middleLabel
+                    ? middleLabel
+                    : middleKey
+                    ? middleKey
+                    : 'Percent Difference',
                 }
-              } else {
-                authProfile.brand.competitors.forEach((competitor) => {
-                  if (dataKey === competitor.uuid) {
-                    accumulator.rightDataset = {
-                      ...data[dataKey],
-                      name: competitor.name,
-                    }
+                break
+
+              case leftKey:
+                accumulator.leftDataset = {
+                  ...data[leftKey],
+                  name: leftLabel || leftKey,
+                }
+                break
+
+              case rightKey:
+                accumulator.rightDataset = {
+                  ...data[rightKey],
+                  name: rightLabel || rightKey,
+                }
+                break
+
+              default:
+                if (!!authProfile.brand && dataKey === authProfile.brand.uuid) {
+                  accumulator.leftDataset = {
+                    ...data[dataKey],
+                    name: authProfile.brand.name,
                   }
-                })
-              }
+                } else {
+                  authProfile.brand.competitors.forEach((competitor) => {
+                    if (dataKey === competitor.uuid) {
+                      accumulator.rightDataset = {
+                        ...data[dataKey],
+                        name: competitor.name,
+                      }
+                    }
+                  })
+                }
 
-              break
+                break
+            }
+
+            return accumulator
+          },
+          {
+            leftDataset: {},
+            middleDataset: {},
+            rightDataset: {},
           }
-
-          return accumulator
-        },
-        {
-          leftDataset: {},
-          middleDataset: {},
-          rightDataset: {},
-        }
-      )) ||
-    {}
+        )) ||
+      {}
   }
-
 
   const newDatasets = {
     labels: [0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100],
@@ -175,6 +176,20 @@ const ContentVitalityScoreModule = ({
   }
 
   const names = Object.values(formattedData).map((ds) => ds.name || 'N/A')
+
+  const allCVScoreAvg = parseFloat(
+    (((!!formattedData.leftDataset &&
+      !!formattedData.leftDataset.averageCvScore &&
+      parseFloat(formattedData.leftDataset.averageCvScore)) ||
+      0) +
+      ((!!formattedData.rightDataset &&
+        !!formattedData.rightDataset.averageCvScore &&
+        parseFloat(formattedData.rightDataset.averageCvScore)) ||
+        0)) /
+      2
+  ).toFixed(1)
+
+  console.log(allCVScoreAvg)
 
   return (
     <ThemeContext.Consumer>
@@ -235,7 +250,7 @@ const ContentVitalityScoreModule = ({
                 customLine
                 options={{
                   ...options,
-                  average: 50,
+                  average: allCVScoreAvg,
                   hover: {
                     mode: 'dataset',
                     intersect: false,
@@ -249,7 +264,10 @@ const ContentVitalityScoreModule = ({
 
                       const maxObject = c.find((o) => o._model.y === max)
 
+                      console.log(a, c, maxObject)
+
                       const chart = maxObject && maxObject._chart
+
                       if (!maxObject) return null
                       const averagePoint =
                         ((chart.chartArea.right - chart.chartArea.left) / 100) *
@@ -316,7 +334,7 @@ const ContentVitalityScoreModule = ({
                           } scores 10\n points above your library\n average on facebook!`
                         : `${ucfirst(platform)}${
                             platform === 'all' ? ' Platforms' : ''
-                          } Average | ${average}`
+                          } Average | ${allCVScoreAvg}`
 
                       const lines = text.split('\n')
 
@@ -356,126 +374,146 @@ const ContentVitalityScoreModule = ({
             </div>
 
             <div className="row">
-              {!loading && Object.keys(formattedData).map((key, idx) => {
-                const { averageCvScore } = formattedData[key]
+              {!loading &&
+                Object.keys(formattedData).map((key, idx) => {
+                  const { averageCvScore } = formattedData[key]
 
-                const cvScore =
-                  averageCvScore === 'NaN' || !averageCvScore
-                    ? 0
-                    : Math.floor(parseInt(averageCvScore))
+                  const cvScore =
+                    averageCvScore === 'NaN' || !averageCvScore
+                      ? 0
+                      : parseFloat(averageCvScore).toFixed(1)
 
-                const bgColor =
-                  idx === 0 ? '#5292e5' : idx === 1 ? '##8562f3' : '#2fd7c4'
+                  const bgColor =
+                    idx === 0 ? '#5292e5' : idx === 1 ? '#8562f3' : '#2fd7c4'
 
-                const titleText = formattedData[key].name
-                const percentDifference = data.other && data.other[formattedData[key].uuid] ? Math.abs(data.other[formattedData[key].uuid]) : 'N/A'
-                const diffWording = data.other && data.other[formattedData[key].uuid] ? data.other[formattedData[key].uuid] > 0 ? 'below' : 'above' : 'N/A' 
+                  const titleText = formattedData[key].name
 
-                return (
-                  <div className={percentageCol} key={idx}>
-                    <div
-                      className={style.legend}
-                      style={{
-                        background: colors.labelBackground,
-                        color: colors.labelColor,
-                        boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                      }}
-                    >
-                      {names[idx]}
-                    </div>
-                    {idx !== 2 && (
+                  const percentDifference =
+                    data.other && data.other[formattedData[key].uuid]
+                      ? Math.abs(data.other[formattedData[key].uuid])
+                      : 'N/A'
+
+                  const diffToAvg = parseFloat(
+                    (parseFloat(cvScore) - parseFloat(allCVScoreAvg)).toFixed(1)
+                  )
+
+                  const diffWording = diffToAvg > 0 ? 'above' : 'below'
+
+                  return (
+                    <div className={percentageCol} key={idx}>
                       <div
-                        className={style.divider}
+                        className={style.legend}
                         style={{
-                          background: colors.moduleBorder,
+                          background: colors.labelBackground,
+                          color: colors.labelColor,
+                          boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                         }}
-                      />
-                    )}
-                    {cvScore === 0 ? (
-                      <div className={style.emptyData}>No Data Available</div>
-                    ) : (
-                      <React.Fragment>
-                        <DoughnutChart
-                          width={140}
-                          height={140}
-                          displayDataLabels={false}
-                          cutoutPercentage={80}
-                          datasetsBorderWidth={0}
-                          removeTooltip
-                          average={idx === 1 ? null : average}
-                          cvScoreData={{
-                            platform,
-                          }}
-                          layoutPadding={7}
-                          data={{
-                            datasets: [
-                              {
-                                borderColor: '#f3f6f9',
-                                data: [cvScore, 100 - cvScore],
-                                backgroundColor: [bgColor, '#acb0be'],
-                                hoverBackgroundColor: [bgColor, '#acb0be'],
-                              },
-                            ],
+                      >
+                        {names[idx]}
+                      </div>
+                      {idx !== 2 && (
+                        <div
+                          className={style.divider}
+                          style={{
+                            background: colors.moduleBorder,
                           }}
                         />
-                        <div
-                          className={style.centerText}
-                          style={{
-                            color: colors.labelColor,
-                          }}
-                        >
-                          <div className={style.wrapper}>
-                            <span
-                              className={style.bigText}
+                      )}
+                      {cvScore === 0 ? (
+                        <div className={style.emptyData}>No Data Available</div>
+                      ) : (
+                        <React.Fragment>
+                          <DoughnutChart
+                            width={140}
+                            height={140}
+                            displayDataLabels={false}
+                            cutoutPercentage={80}
+                            datasetsBorderWidth={0}
+                            removeTooltip
+                            average={idx === 1 ? null : allCVScoreAvg}
+                            cvScoreData={{
+                              platform,
+                            }}
+                            layoutPadding={7}
+                            data={{
+                              datasets: [
+                                {
+                                  borderColor: '#f3f6f9',
+                                  data: [cvScore, 100 - cvScore],
+                                  backgroundColor: [bgColor, '#acb0be'],
+                                  hoverBackgroundColor: [bgColor, '#acb0be'],
+                                },
+                              ],
+                            }}
+                          />
+                          <div
+                            className={style.centerText}
+                            style={{
+                              color: colors.labelColor,
+                            }}
+                          >
+                            <div
+                              className={style.wrapper}
                               style={{
-                                color: colors.labelColor,
+                                ...(idx === 1
+                                  ? {
+                                      backgroundColor:
+                                        colors.percentDifferenceColor,
+                                    }
+                                  : {}),
                               }}
                             >
-                              {`${cvScore}${idx === 1 ? '%' : ''}`}
-                            </span>
-                            <span
-                              className={style.littleText}
-                              style={{
-                                color: colors.labelColor,
-                              }}
-                            >
-                              {idx === 1 ? 'Difference' : 'CV Score'}
-                            </span>
+                              <span
+                                className={style.bigText}
+                                style={{
+                                  color: idx === 1 ? '#fff' : colors.labelColor,
+                                }}
+                              >
+                                {`${cvScore}${idx === 1 ? '%' : ''}`}
+                              </span>
+                              <span
+                                className={style.littleText}
+                                style={{
+                                  color: idx === 1 ? '#fff' : colors.labelColor,
+                                }}
+                              >
+                                {idx === 1 ? 'Difference' : 'CV Score'}
+                              </span>
+                            </div>
                           </div>
-                        </div>
 
-                        <p
-                          className={style.doughnutChartText}
-                          style={{
-                            color: colors.labelColor,
-                          }}
-                        >
-                          {idx === 1 ? (
-                            <span>
-                              The difference between{' '}
-                              {audience ? 'male' : names[0]}{' '}
-                              {audience ? '' : 'videos'} and{' '}
-                              {audience ? 'female' : names[2]}{' '}
-                              {audience ? '' : 'video'} scores is{' '}
-                              <b>{cvScore}%</b>
-                            </span>
-                          ) : (
-                            <span>
-                              {}
-                              The average {titleText} video scores <b>{percentDifference}</b>{' '}
-                              points <b>{diffWording}</b> your
-                              library average on{' '}
-                              {`${ucfirst(platform)}${
-                                platform === 'all' ? ' Platforms' : ''
-                              }`}
-                            </span>
-                          )}
-                        </p>
-                      </React.Fragment>
-                    )}
-                  </div>
-                )
-              })}
+                          <p
+                            className={style.doughnutChartText}
+                            style={{
+                              color: colors.labelColor,
+                            }}
+                          >
+                            {idx === 1 ? (
+                              <span>
+                                The difference between{' '}
+                                {audience ? 'male' : names[0]}{' '}
+                                {audience ? '' : 'videos'} and{' '}
+                                {audience ? 'female' : names[2]}{' '}
+                                {audience ? '' : 'video'} scores is{' '}
+                                <b>{cvScore}%</b>
+                              </span>
+                            ) : (
+                              <span>
+                                {}
+                                The average {titleText} video scores{' '}
+                                <b>{Math.abs(diffToAvg)}</b> points{' '}
+                                <b>{diffWording}</b> your library average on{' '}
+                                {`${ucfirst(platform)}${
+                                  platform === 'all' ? ' Platforms' : ''
+                                }`}
+                              </span>
+                            )}
+                          </p>
+                        </React.Fragment>
+                      )}
+                    </div>
+                  )
+                })}
             </div>
           </div>
         </Module>
