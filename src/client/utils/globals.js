@@ -88,7 +88,11 @@ export const moduleNames = [
   'PerformanceComparisonModule',
   'VideoReleasesBarChartModule',
 ]
-
+export const dateRangeLabels = {
+  'week': 'Past Week',
+  'month': 'Past Month',
+  '3months': 'Past 3 Months'
+}
 export const moduleIds = {
   'Panoptic/Top-Performing-Formats-This-Week-By-CV-Score': '456456456',
 }

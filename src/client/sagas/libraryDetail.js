@@ -39,7 +39,7 @@ function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
       metric,
       top: 20,
       competitors,
-      daterange: '3months',
+      daterange: 'week',
     })
 
     const response = yield call(getDataFromApi, undefined, url, 'GET')
@@ -278,8 +278,6 @@ function* getDoughnutSectionInfoData({ payload }) {
           },
         ],
       }
-
-      console.log(lineChartData)
 
       yield put(
         actions.doughnutInfoIndustrySuccess({

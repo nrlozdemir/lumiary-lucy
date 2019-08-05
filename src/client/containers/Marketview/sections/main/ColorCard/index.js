@@ -10,6 +10,7 @@ import { socialIconSelector, metricSuffix, ucfirst } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import { isEmpty } from 'lodash'
+import { dateRangeLabels } from 'Utils/globals'
 
 import style from 'Containers/Marketview/style.scss'
 import RouterLoading from 'Components/RouterLoading'
@@ -18,6 +19,8 @@ class ColorCard extends Component {
   constructor(props) {
     super(props)
     this.state = {
+      dateRange: '3months',
+      metric: 'views',
       bubbleColors: {
         red: '#cc2226',
         'orange-red': '#dd501d',
@@ -36,11 +39,12 @@ class ColorCard extends Component {
   }
 
   componentDidMount() {
-    this.props.getBubbleChartRequest()
+    const { metric, dateRange } = this.state
+    this.props.getBubbleChartRequest({ metric, dateRange })
   }
 
   render() {
-    const { bubbleColors } = this.state
+    const { bubbleColors, metric, dateRange } = this.state
     const {
       bubbleChartData: { data, loading, error },
     } = this.props
@@ -50,7 +54,7 @@ class ColorCard extends Component {
     const totalChartValue =
       !isDataEmpty && data.reduce((total, { value }) => total + value, 0)
 
-      const metric = 'views'
+    const dateLabel = dateRangeLabels[dateRange]
 
     return (
       <ThemeContext.Consumer>
@@ -63,13 +67,13 @@ class ColorCard extends Component {
               boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
             }}
           >
-          <style>
-            {`
+            <style>
+              {`
               .${style.bubbleChart} div>svg>g>g>rect,polygon{
                 fill: ${colors.tooltipBackground} !important;
               }
             `}
-          </style>
+            </style>
             {(loading || (isDataEmpty && !loading)) && (
               <div
                 className={style.marketViewCardEmpty}
@@ -90,7 +94,7 @@ class ColorCard extends Component {
                   boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                 }}
               >
-                Past Month
+                {dateLabel}
               </span>
             </div>
             <div className={style.bubbleChart}>
@@ -143,19 +147,21 @@ class ColorCard extends Component {
                           className={style.bubbleTooltip}
                           style={{
                             fontSize: totalChartValue * 0.07,
-                            color: colors.chartTooltipColor
+                            color: colors.chartTooltipColor,
                           }}
                         >
                           {bubble.name}
                         </div>
                         <div
                           className={style.bubbleTooltip}
-                          style={{ 
+                          style={{
                             fontSize: totalChartValue * 0.07,
-                            color: colors.chartTooltipColor
+                            color: colors.chartTooltipColor,
                           }}
                         >
-                          {`${metricSuffix(bubble.oldValue)} ${ucfirst(metric)}`}
+                          {`${metricSuffix(bubble.oldValue)} ${ucfirst(
+                            metric
+                          )}`}
                         </div>
                       </ToolTip>
                     </Bubble>
@@ -165,7 +171,9 @@ class ColorCard extends Component {
             </div>
             {!isDataEmpty && !loading && (
               <div className={style.colors}>
-                <style>{`.${style.hasTriangle}:before {border-color: ${colors.textColor} transparent transparent transparent;}`}</style>
+                <style>{`.${style.hasTriangle}:before {border-color: ${
+                  colors.textColor
+                } transparent transparent transparent;}`}</style>
                 {Object.keys(bubbleColors).map((colorKey, i) => {
                   const network = data.find((pf) => pf.color === colorKey)
                   return (
@@ -179,7 +187,7 @@ class ColorCard extends Component {
               </div>
             )}
             <div className={style.marketViewCardDescription}>
-              {`Based on the number of ${metric} for competitors across all platforms`}
+              {`An overview of the dominant color associated with the top number of ${metric} for videos on each platform for the past ${dateLabel.toLowerCase()}.`}
             </div>
             <Link
               to="/marketview/platform"
