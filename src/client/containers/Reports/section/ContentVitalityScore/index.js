@@ -34,7 +34,7 @@ class ContentVitalityScore extends React.Component {
   render() {
     const {
       data: {
-        data: { data, platform, average = '0' },
+        data: { data, platform },
         loading,
         error,
       },
@@ -74,7 +74,6 @@ class ContentVitalityScore extends React.Component {
             flattenFirstSpace={1}
             flattenLastSpace={5}
             platform={platform}
-            average={average}
             options={{
               scales: {
                 yAxes: [
