@@ -189,8 +189,6 @@ const ContentVitalityScoreModule = ({
       2
   ).toFixed(1)
 
-  console.log(allCVScoreAvg)
-
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -213,7 +211,6 @@ const ContentVitalityScoreModule = ({
             >
               <LineChart
                 chartType="lineStackedArea"
-                width={1120}
                 height={295}
                 tickUnvisible
                 backgroundColor={colors.chartBackground}
@@ -250,9 +247,12 @@ const ContentVitalityScoreModule = ({
                 customLine
                 options={{
                   ...options,
+                  responsive: true,
+                  maintainAspectRatio: false,
+                  fullWidth: true,
                   average: allCVScoreAvg,
                   hover: {
-                    mode: 'dataset',
+                    mode: 'nearest',
                     intersect: false,
                     onHover: (a, c) => {
                       const max = Math.min.apply(
@@ -264,17 +264,19 @@ const ContentVitalityScoreModule = ({
 
                       const maxObject = c.find((o) => o._model.y === max)
 
-                      console.log(a, c, maxObject)
-
                       const chart = maxObject && maxObject._chart
 
                       if (!maxObject) return null
+
                       const averagePoint =
                         ((chart.chartArea.right - chart.chartArea.left) / 100) *
                           chart.options.average +
                         48
+
                       chart.ctx.beginPath()
+
                       chart.ctx.setLineDash([8, 5])
+
                       const dashMarginTop = (30 * maxObject._model.y) / 285
 
                       if (averagePoint < maxObject._model.x) {
@@ -300,6 +302,7 @@ const ContentVitalityScoreModule = ({
                         maxObject._model.x,
                         maxObject._model.y - dashMarginTop
                       )
+
                       chart.ctx.lineTo(maxObject._model.x, maxObject._model.y)
                       chart.ctx.strokeStyle = '#505050'
                       chart.ctx.lineWidth = 2
@@ -307,14 +310,32 @@ const ContentVitalityScoreModule = ({
 
                       chart.ctx.lineWidth = 4
                       chart.ctx.fillStyle = '#505050'
-                      const rectWidth = 210
-                      const rectHeight = 90
 
-                      const rectX =
+                      const rectWidth = 200
+                      const rectHeight = 36
+
+                      let rectX =
                         averagePoint < maxObject._model.x
                           ? maxObject._model.x + 20
                           : maxObject._model.x - rectWidth - 20
+
                       const rectY = maxObject._model.y - rectHeight / 2
+
+                      // tooltip on left or right side
+                      // controls tooltip from overflowing
+                      const onRight = rectX < 0
+                      const onLeft = rectX + rectWidth > maxObject._chart.width
+
+                      const overFlowed = onRight || onLeft
+
+                      if (onLeft) {
+                        rectX = maxObject._model.x - rectWidth - 20
+                      }
+
+                      if (onRight) {
+                        rectX = maxObject._model.x + 20
+                      }
+
                       roundRect(
                         chart.ctx,
                         rectX,
@@ -325,7 +346,7 @@ const ContentVitalityScoreModule = ({
                       )
                       chart.ctx.font = '12px ClanOT'
                       chart.ctx.textAlign = 'center'
-                      chart.ctx.textBaseline = 'middle'
+                      chart.ctx.textBaseline = 'bottom'
                       chart.ctx.fillStyle = '#fff'
 
                       const text = audience
@@ -345,12 +366,14 @@ const ContentVitalityScoreModule = ({
                           rectY + i * 20 + 25
                         )
 
-                      if (averagePoint < maxObject._model.x) {
+                      const drawLeftArrow = (chart) => {
                         chart.ctx.beginPath()
                         chart.ctx.lineTo(rectX + 3, rectY + rectHeight / 2 - 13)
                         chart.ctx.lineTo(rectX - 10, rectY + rectHeight / 2)
                         chart.ctx.lineTo(rectX + 3, rectY + rectHeight / 2 + 13)
-                      } else {
+                      }
+
+                      const drawRightArrow = (chart) => {
                         chart.ctx.beginPath()
                         chart.ctx.lineTo(
                           rectX + rectWidth,
@@ -365,6 +388,19 @@ const ContentVitalityScoreModule = ({
                           rectY + rectHeight / 2 + 10
                         )
                       }
+
+                      if (averagePoint < maxObject._model.x && !overFlowed) {
+                        drawLeftArrow(chart)
+                      } else if (overFlowed) {
+                        if (onRight) {
+                          drawLeftArrow(chart)
+                        } else {
+                          drawRightArrow(chart)
+                        }
+                      } else {
+                        drawRightArrow(chart)
+                      }
+
                       chart.ctx.fillStyle = '#505050'
                       chart.ctx.fill()
                     },
