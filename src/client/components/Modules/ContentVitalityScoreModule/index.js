@@ -430,6 +430,7 @@ const ContentVitalityScoreModule = ({
 
                       const lines = text.split('\n')
 
+                      // this draws the dataset average
                       for (let i = 0; i < lines.length; i++)
                         chart.ctx.fillText(
                           lines[i],
@@ -437,6 +438,7 @@ const ContentVitalityScoreModule = ({
                           rectY + i * 20 + 25
                         )
 
+                      // this draws the middle average 
                       chart.ctx.fillText(
                         averageText,
                         averagePoint,

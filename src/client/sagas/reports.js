@@ -232,37 +232,19 @@ function* getContentVitalityScoreData({ payload = {} }) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
 
-    // const response = yield call(
-    //   getDataFromApi,
-    //   undefined,
-    //   `/report/compare/brands?${querystring.stringify({
-    //     brands: brands,
-    //     brandUuid: brand.uuid,
-    //     property: 'cvScore',
-    //     mode: 'sumVideos',
-    //     daterange: dateRange,
-    //     platform: platform,
-    //   })}`,
-    //   'GET'
-    // )
-
-    const response = {
-      'd65aa957-d094-4cf3-8d37-dafe50e752ea': {
-        videoCounts: [0, 46, 117, 183, 165, 161, 165, 157, 150, 136, 79],
-        videoPercents: [0, 3, 9, 13, 12, 12, 12, 12, 11, 10, 6],
-        averageCvScore: '51.0',
-      },
-      '1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6': {
-        videoCounts: [0, 122, 77, 103, 133, 97, 126, 148, 172, 187, 264],
-        videoPercents: [0, 9, 5, 7, 9, 7, 9, 10, 12, 13, 18],
-        averageCvScore: '58.8',
-      },
-      other: {
-        averageCvScore: '14',
-        'd65aa957-d094-4cf3-8d37-dafe50e752ea': '0',
-        '1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6': '-14',
-      },
-    }
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      `/report/compare/brands?${querystring.stringify({
+        brands: brands,
+        brandUuid: brand.uuid,
+        property: 'cvScore',
+        mode: 'sumVideos',
+        daterange: dateRange,
+        platform: platform,
+      })}`,
+      'GET'
+    )
 
     yield put(
       actions.getContentVitalityScoreDataSuccess(
