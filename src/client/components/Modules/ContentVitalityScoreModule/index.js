@@ -236,15 +236,12 @@ const ContentVitalityScoreModule = ({
                       }
                 }
                 removeTooltip={removeTooltip}
-                // removePointRadius={removePointRadius}
-                // xAxesFlatten={xAxesFlatten}
-                // flattenFirstSpace={flattenFirstSpace}
-                // flattenLastSpace={flattenLastSpace}
                 yAxesStepSize={500}
                 yAxesMax={0}
                 yAxesPercentage
                 dynamicPercentage
                 customLine
+                removePointRadius
                 options={{
                   ...options,
                   responsive: true,
@@ -252,9 +249,10 @@ const ContentVitalityScoreModule = ({
                   fullWidth: true,
                   average: allCVScoreAvg,
                   hover: {
-                    mode: 'nearest',
+                    mode: 'dataset',
                     intersect: false,
                     onHover: (a, c) => {
+                      // get data set object
                       const max = Math.min.apply(
                         Math,
                         c.map(function(o) {
@@ -262,48 +260,84 @@ const ContentVitalityScoreModule = ({
                         })
                       )
 
-                      const maxObject = c.find((o) => o._model.y === max)
+                      const maxDataObj = c.find((o) => o._model.y === max)
 
-                      const chart = maxObject && maxObject._chart
+                      const chart = maxDataObj && maxDataObj._chart
 
-                      if (!maxObject) return null
+                      if (!maxDataObj) return null
 
+                      // calculate position of the average point
                       const averagePoint =
                         ((chart.chartArea.right - chart.chartArea.left) / 100) *
                           chart.options.average +
                         48
 
+                      const dataset =
+                        maxDataObj._datasetIndex === 1
+                          ? (!!formattedData.leftDataset &&
+                              formattedData.leftDataset) ||
+                            {}
+                          : (!!formattedData.rightDataset &&
+                              formattedData.rightDataset) ||
+                            {}
+
+                      // calculate position of the average dataset point
+                      const datasetCVScoreAvg =
+                        !!dataset && !!dataset.averageCvScore
+                          ? dataset.averageCvScore
+                          : 0
+
+                      const dataAveragePoint =
+                        ((chart.chartArea.right - chart.chartArea.left) / 100) *
+                          datasetCVScoreAvg +
+                        48
+
+                      const closestDataPointToAvg = c.reduce(
+                        (prev, curr) =>
+                          Math.abs(curr._model.x - dataAveragePoint) <
+                          Math.abs(prev._model.x - dataAveragePoint)
+                            ? curr
+                            : prev,
+                        { _model: { x: 0 } }
+                      )
+
                       chart.ctx.beginPath()
 
                       chart.ctx.setLineDash([8, 5])
 
-                      const dashMarginTop = (30 * maxObject._model.y) / 285
+                      const dashMarginTop =
+                        (30 * closestDataPointToAvg._model.y) / 285
 
-                      if (averagePoint < maxObject._model.x) {
+                      if (averagePoint < closestDataPointToAvg._model.x) {
                         chart.ctx.moveTo(
                           averagePoint,
-                          maxObject._model.y - dashMarginTop
+                          closestDataPointToAvg._model.y - dashMarginTop
                         )
                         chart.ctx.lineTo(
-                          maxObject._model.x,
-                          maxObject._model.y - dashMarginTop
+                          dataAveragePoint,
+                          closestDataPointToAvg._model.y - dashMarginTop
                         )
                       } else {
                         chart.ctx.moveTo(
-                          maxObject._model.x,
-                          maxObject._model.y - dashMarginTop
+                          dataAveragePoint,
+                          closestDataPointToAvg._model.y - dashMarginTop
                         )
                         chart.ctx.lineTo(
                           averagePoint,
-                          maxObject._model.y - dashMarginTop
+                          closestDataPointToAvg._model.y - dashMarginTop
                         )
                       }
+
                       chart.ctx.moveTo(
-                        maxObject._model.x,
-                        maxObject._model.y - dashMarginTop
+                        dataAveragePoint,
+                        closestDataPointToAvg._model.y - dashMarginTop
                       )
 
-                      chart.ctx.lineTo(maxObject._model.x, maxObject._model.y)
+                      chart.ctx.lineTo(
+                        dataAveragePoint,
+                        closestDataPointToAvg._model.y
+                      )
+
                       chart.ctx.strokeStyle = '#505050'
                       chart.ctx.lineWidth = 2
                       chart.ctx.stroke()
@@ -311,31 +345,33 @@ const ContentVitalityScoreModule = ({
                       chart.ctx.lineWidth = 4
                       chart.ctx.fillStyle = '#505050'
 
-                      const rectWidth = 200
-                      const rectHeight = 36
+                      // tooltip on DATASET average
+                      const rectWidth = 210
+                      const rectHeight = 100
 
                       let rectX =
-                        averagePoint < maxObject._model.x
-                          ? maxObject._model.x + 20
-                          : maxObject._model.x - rectWidth - 20
+                        averagePoint < dataAveragePoint
+                          ? dataAveragePoint + 20
+                          : dataAveragePoint - rectWidth - 20
 
-                      const rectY = maxObject._model.y - rectHeight / 2
+                      const rectY =
+                        closestDataPointToAvg._model.y - rectHeight / 2
 
                       // tooltip on left or right side
                       // controls tooltip from overflowing
                       const onRight = rectX < 0
-                      const onLeft = rectX + rectWidth > maxObject._chart.width
+                      const onLeft =
+                        rectX + rectWidth > closestDataPointToAvg._chart.width
 
                       const overFlowed = onRight || onLeft
 
                       if (onLeft) {
-                        rectX = maxObject._model.x - rectWidth - 20
+                        rectX = dataAveragePoint - rectWidth - 20
                       }
 
                       if (onRight) {
-                        rectX = maxObject._model.x + 20
+                        rectX = dataAveragePoint + 20
                       }
-
                       roundRect(
                         chart.ctx,
                         rectX,
@@ -344,18 +380,53 @@ const ContentVitalityScoreModule = ({
                         rectHeight,
                         5
                       )
+
+                      // tooltip on PLATFORM average
+                      const avgRectWidth = 180
+                      const avgRectHeight = 36
+
+                      roundRect(
+                        chart.ctx,
+                        averagePoint - avgRectWidth / 2,
+                        0,
+                        avgRectWidth,
+                        avgRectHeight,
+                        5
+                      )
+
                       chart.ctx.font = '12px ClanOT'
                       chart.ctx.textAlign = 'center'
                       chart.ctx.textBaseline = 'bottom'
                       chart.ctx.fillStyle = '#fff'
 
+                      const diffToAvg = parseFloat(
+                        (
+                          parseFloat(datasetCVScoreAvg) -
+                          parseFloat(allCVScoreAvg)
+                        ).toFixed(1)
+                      )
+
+                      const diffWording = diffToAvg > 0 ? 'above' : 'below'
+
+                      const titleText = !!dataset.name ? dataset.name : 'N/A'
+
                       const text = audience
                         ? `The average ${
-                            maxObject._datasetIndex ? 'female' : 'male'
-                          } scores 10\n points above your library\n average on facebook!`
-                        : `${ucfirst(platform)}${
-                            platform === 'all' ? ' Platforms' : ''
-                          } Average | ${allCVScoreAvg}`
+                            closestDataPointToAvg._datasetIndex
+                              ? 'female'
+                              : 'male'
+                          } scores ${Math.abs(
+                            diffToAvg
+                          )}\n points above your library\n average on facebook!`
+                        : `The average ${titleText}\n video scores ${Math.abs(
+                            diffToAvg
+                          )} points\n ${diffWording} your library\n average on ${ucfirst(
+                            platform
+                          )}${platform === 'all' ? ' Platforms' : ''}`
+
+                      const averageText = `${ucfirst(platform)}${
+                        platform === 'all' ? ' Platforms' : ''
+                      } Average | ${allCVScoreAvg}`
 
                       const lines = text.split('\n')
 
@@ -365,6 +436,12 @@ const ContentVitalityScoreModule = ({
                           rectX + rectWidth / 2,
                           rectY + i * 20 + 25
                         )
+
+                      chart.ctx.fillText(
+                        averageText,
+                        averagePoint,
+                        avgRectHeight / 2 + 7
+                      )
 
                       const drawLeftArrow = (chart) => {
                         chart.ctx.beginPath()
@@ -389,7 +466,10 @@ const ContentVitalityScoreModule = ({
                         )
                       }
 
-                      if (averagePoint < maxObject._model.x && !overFlowed) {
+                      if (
+                        averagePoint < closestDataPointToAvg._model.x &&
+                        !overFlowed
+                      ) {
                         drawLeftArrow(chart)
                       } else if (overFlowed) {
                         if (onRight) {
@@ -535,7 +615,6 @@ const ContentVitalityScoreModule = ({
                               </span>
                             ) : (
                               <span>
-                                {}
                                 The average {titleText} video scores{' '}
                                 <b>{Math.abs(diffToAvg)}</b> points{' '}
                                 <b>{diffWording}</b> your library average on{' '}

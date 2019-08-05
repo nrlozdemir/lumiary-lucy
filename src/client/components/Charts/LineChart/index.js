@@ -56,7 +56,7 @@ class LineChart extends React.Component {
           display: false,
         },
         tooltips: {
-          enabled: false,
+          enabled: true,
         },
 
         scales: {
@@ -246,6 +246,7 @@ class LineChart extends React.Component {
         ...props.options.elements,
         point: {
           radius: 0,
+          hoverRadius: 0,
         },
       }
     }
