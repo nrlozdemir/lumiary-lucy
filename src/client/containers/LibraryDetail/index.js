@@ -32,7 +32,7 @@ export class LibraryDetail extends React.Component {
       match,
       getDoughnutChartRequest,
       // getColorTempRequest,
-      getShotByShotRequest,
+      // getShotByShotRequest,
       getSelectedVideo,
       getSelectedVideoAverage,
       themeContext: { colors },
@@ -47,7 +47,7 @@ export class LibraryDetail extends React.Component {
         themeColors: colors,
       })
       // getColorTempRequest(match.params.videoId)
-      getShotByShotRequest(match.params.videoId)
+      // getShotByShotRequest(match.params.videoId)
     }
   }
 
@@ -57,7 +57,7 @@ export class LibraryDetail extends React.Component {
       match,
       getDoughnutChartRequest,
       // getColorTempRequest,
-      getShotByShotRequest,
+      // getShotByShotRequest,
       themeContext: { colors },
       profile: { brand },
     } = this.props
@@ -74,7 +74,7 @@ export class LibraryDetail extends React.Component {
       getSelectedVideo({ brandUuid: brand.uuid, videoId: match.params.videoId })
       getSelectedVideoAverage(match.params.videoId)
       // getColorTempRequest({ videoId: match.params.videoId })
-      getShotByShotRequest(match.params.videoId)
+      // getShotByShotRequest(match.params.videoId)
     }
   }
 
@@ -86,7 +86,7 @@ export class LibraryDetail extends React.Component {
     const {
       profile: { brand },
       libraryDetail: {
-        shotByShotData: { data: shotByShotData, loading: shotByShotLoading },
+        //shotByShotData: { data: shotByShotData, loading: shotByShotLoading },
         selectedVideo,
         selectedVideoAverage,
       },
@@ -109,6 +109,9 @@ export class LibraryDetail extends React.Component {
           videoId={videoId}
           videoDuration={this.video && this.video.duration}
         />
+        <div style={{height:70}}></div>
+        {
+        /*
         <LibraryDetailShotByShot
           shots={
             (!!shotByShotData &&
@@ -118,6 +121,8 @@ export class LibraryDetail extends React.Component {
           }
           loading={shotByShotLoading}
         />
+        */
+        }
       </React.Fragment>
     )
   }
@@ -130,7 +135,7 @@ LibraryDetail.propTypes = {
   getBarChartRequest: PropTypes.func,
   getDoughnutChartRequest: PropTypes.func,
   // getColorTempRequest: PropTypes.func,
-  getShotByShotRequest: PropTypes.func,
+  //getShotByShotRequest: PropTypes.func,
 }
 
 const mapStateToProps = createStructuredSelector({
@@ -148,7 +153,7 @@ function mapDispatchToProps(dispatch) {
     getDoughnutChartRequest: (id) =>
       dispatch(actions.getDoughnutChartRequest(id)),
     // getColorTempRequest: (id) => dispatch(actions.getColorTempRequest(id)),
-    getShotByShotRequest: (id) => dispatch(actions.getShotByShotRequest(id)),
+    //getShotByShotRequest: (id) => dispatch(actions.getShotByShotRequest(id)),
   }
 }
 
