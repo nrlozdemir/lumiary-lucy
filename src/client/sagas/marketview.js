@@ -23,6 +23,7 @@ import {
 
 import { dayOfWeek, chartColors } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
+import { isNumber } from 'util'
 
 function* getCompetitorVideosApi({ payload }) {
   const requestObject = {
@@ -141,34 +142,93 @@ function* getPlatformTopVideosMarketview({
       'GET'
     )
 
-    console.log("response1:", response)
-
-    let reduceAll = [] 
-
     // preliminary to convertMultiRequestDataIntoDatasets structure
-    Object.keys(response).map((o, i) => {
-      console.log(o, i)
-      reduceAll.push({[o] : [response[o]]})
-      /*
-      Facebook 0
-      Twitter 1
-      Instagram 2
-      YouTube 3
-      */
-    })
+    let returnData
+    returnData = Object.keys(response).reduce((acc, key) => {
+      acc[key] = {
+        data: { [key]: response[key] },
+      }
+      return acc
+    }, {})
 
-    reduceAll && console.log(reduceAll)
+    if (
+      !!response &&
+      !!property &&
+      !!Object.keys(response) &&
+      !!Object.keys(response)[0] &&
+      !!response[Object.keys(response)[0]][property] &&
+      !!Object.values(response[Object.keys(response)[0]][property]).length &&
+      Object.values(response[Object.keys(response)[0]][property]).length > 4
+    ) {
+      let sumAll = {}
+      let cumulative = {}
+      returnData = {}
 
+      Object.keys(response).map((i, x) => {
+        !!response[i] &&
+          Object.keys(response[i]).map((j, y) => {
+            !!response[i][j] &&
+              Object.keys(response[i][j]).map((k, z) => {
+                if (!sumAll[k]) {
+                  sumAll[k] = 0
+                }
+                sumAll[k] += !!response[i][j][k] && response[i][j][k]
+              })
+          })
+      })
 
+      !!sumAll &&
+        Object.keys(sumAll).map((el, i) => {
+          cumulative[i] = {
+            key: el,
+            value: sumAll[el],
+          }
+        })
 
+      const cumulativeTopValues =
+        !!cumulative &&
+        Object.values(cumulative)
+          .sort((a, b) => (b.value > a.value ? 1 : -1))
+          .filter((el, i) => {
+            if (i < 4) {
+              return el
+            }
+          })
 
+      !!cumulativeTopValues &&
+        cumulativeTopValues.map((el, i) => {
+          Object.keys(response).map((i, x) => {
+            !!response[i] &&
+              Object.keys(response[i]).map((j, y) => {
+                !!response[i][j] &&
+                  Object.keys(response[i][j]).map((k, z) => {
+                    if (k == el.key) {
+                      if (!returnData[i]) {
+                        returnData[i] = {}
+                      }
+                      if (!returnData[i]['data']) {
+                        returnData[i]['data'] = {}
+                      }
+                      if (!returnData[i]['data'][i]) {
+                        returnData[i]['data'][i] = {}
+                      }
+                      if (!returnData[i]['data'][i][j]) {
+                        returnData[i]['data'][i][j] = {}
+                      }
+                      returnData[i]['data'][i][j][k] = response[i][j][k]
+                    }
+                  })
+              })
+          })
+        })
+    }
 
     yield put(
       actions.getPlatformTopVideosSuccess(
         percentageManipulation(
           convertMultiRequestDataIntoDatasets(
             {
-              ...response,
+              ...returnData,
             },
             {
               ...options,
