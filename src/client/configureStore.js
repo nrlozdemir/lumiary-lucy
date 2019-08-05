@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga'
 import { routerMiddleware } from 'connected-react-router'
 
 import rootReducer from 'Reducers/rootReducer'
-import rootSaga from 'Sagas/rootSaga'
+import sagaManager from 'Sagas/sagaManager'
 import history from './history'
 
 const composeEnhancers =
@@ -27,18 +27,13 @@ const store = function configureStore() {
     applyMiddleware(routerMiddleware(history))
   )
   const store = createStore(rootReducer(history), enhancer)
-  let sagaTask = sagaMiddleware.run(rootSaga)
+
+  sagaManager.startSagas(sagaMiddleware)
 
   if (module.hot) {
-    module.hot.accept('./reducers/rootReducer', () => {
-      const nextRootReducer = require('Reducers/rootReducer')
-      store.replaceReducer(nextRootReducer)
-    })
-    module.hot.accept('./sagas/rootSaga', () => {
-      sagaTask.cancel()
-      sagaTask.done.then(() => {
-        sagaTask = sagaMiddleware.run(require('Sagas/rootSaga'))
-      })
+    module.hot.accept('./sagas/sagaManager', () => {
+      sagaManager.cancelSagas(store)
+      require('Sagas/sagaManager').default.startSagas(sagaMiddleware)
     })
   }
 
