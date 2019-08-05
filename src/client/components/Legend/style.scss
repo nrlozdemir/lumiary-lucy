@@ -1,9 +1,9 @@
-.legend{
+.legend {
   display: flex;
   align-items: center;
 
-  & + .legend{
-    margin-left: 32px;
+  & + .legend {
+    margin-left: 16px;
   }
 
   p {
@@ -17,15 +17,12 @@
     display: inline-flex;
     border-radius: 100%;
     vertical-align: middle;
-		margin-right: 10px;
+    margin-right: 10px;
 
-		@each $name, $value in $colors {
-			&.dot-#{$name} {
-				background: $value;
-			}
-		}
+    @each $name, $value in $colors {
+      &.dot-#{$name} {
+        background: $value;
+      }
+    }
   }
 }
-
-
-
