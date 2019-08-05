@@ -278,7 +278,19 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
       display: 'percentage',
     }
 
-    const response = yield call(getDataFromApi, parameters, '/report')
+    console.log(property)
+    const response = yield call(
+      getDataFromApi, 
+      undefined, 
+      `/report/compare/brands/property?${querystring.stringify({
+        brands: [...report.brands],
+        dateRange,
+        platform,
+        metric: 'views',
+        property,
+      })}`, 
+      'GET'
+    )
 
     if (!!response && !!response.data) {
       const sortedResponse = Object.keys(response.data).reduce(
@@ -311,6 +323,7 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
       throw new Error('Compare Brands getVideoComparisonDataError')
     }
   } catch (err) {
+    console.log(err)
     yield put(actions.getVideoComparisonDataError(err))
   }
 }
