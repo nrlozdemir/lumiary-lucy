@@ -140,8 +140,9 @@ export const actions = {
     type: types.GET_MARKETVIEW_SIMILAR_PROPERTIES_FAILURE,
     error,
   }),
-  getBubbleChartRequest: () => ({
+  getBubbleChartRequest: (payload) => ({
     type: types.GET_MARKETVIEW_BUBBLECHART_REQUEST,
+    payload,
   }),
   getBubleChartSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_BUBBLECHART_SUCCESS,
@@ -151,8 +152,9 @@ export const actions = {
     type: types.GET_MARKETVIEW_BUBBLECHART_FAILURE,
     error,
   }),
-  getPacingChartRequest: () => ({
+  getPacingChartRequest: (payload) => ({
     type: types.GET_MARKETVIEW_PACINGCHART_REQUEST,
+    payload,
   }),
   getPacingChartSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_PACINGCHART_SUCCESS,
@@ -162,8 +164,9 @@ export const actions = {
     type: types.GET_MARKETVIEW_PACINGCHART_FAILURE,
     error,
   }),
-  getFormatChartRequest: () => ({
+  getFormatChartRequest: (payload) => ({
     type: types.GET_MARKETVIEW_FORMATCHART_REQUEST,
+    payload,
   }),
   getFormatChartSuccess: (payload) => ({
     type: types.GET_MARKETVIEW_FORMATCHART_SUCCESS,

@@ -344,7 +344,9 @@ function* getSimilarProperties(params = {}) {
   }
 }
 
-function* getBubbleChartData() {
+function* getBubbleChartData({
+  payload: { metric = 'views', dateRange = '3months' },
+}) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
 
@@ -354,10 +356,10 @@ function* getBubbleChartData() {
       brand.competitors.map((c) => c.uuid)
 
     const options = {
+      metric,
       competitors,
-      metric: 'views',
       property: 'color',
-      daterange: 'month',
+      daterange: dateRange,
     }
 
     const response = yield call(
@@ -425,10 +427,11 @@ function* getBubbleChartData() {
   }
 }
 
-function* getPacingChartData() {
+function* getPacingChartData({
+  payload: { metric = 'views', dateRange = 'month' },
+}) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
-    const metric = 'shares'
 
     const competitors =
       !!brand.competitors &&
@@ -438,8 +441,8 @@ function* getPacingChartData() {
     const url = buildApiUrl(`/brand/${brand.uuid}/properties`, {
       top: 20,
       metric,
+      dateRange,
       competitors,
-      daterange: 'month',
     })
 
     const response = yield call(getDataFromApi, undefined, url, 'GET')
@@ -463,20 +466,24 @@ function* getPacingChartData() {
   }
 }
 
-function* getFormatChartData() {
+function* getFormatChartData({
+  payload: { metric = 'views', dateRange = 'week' },
+}) {
   try {
     const profile = yield select(makeSelectAuthProfile())
     const competitors = getBrandAndCompetitors(profile)
 
+    const dateBucket = getDateBucketFromRange(dateRange)
+
     const options = {
-      metric: 'shares',
-      dateRange: '3months',
+      metric,
+      limit: 4,
+      dateRange,
+      dateBucket,
       property: ['format'],
-      dateBucket: 'dayOfWeek',
       display: 'none',
       platform: 'all',
       brands: [...competitors],
-      limit: 4,
     }
 
     // video is still being pulled from mock
