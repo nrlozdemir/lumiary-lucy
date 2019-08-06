@@ -197,7 +197,7 @@ const RadarChart = (props) => {
                 data.labels &&
                 data.labels[tooltipItem['index']] &&
                 data.labels[tooltipItem['index']].name
-              return `${metricSuffix(count) || 0} ${ucfirst(metric) ||
+              return `${metricSuffix(count) || 0}% ${ucfirst(metric) ||
                 ''} ${!!name && `| ${name}`}`
             },
           },

@@ -5,7 +5,7 @@ import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
-import { getDataFromApi, buildApiUrl } from 'Utils/api'
+import { getDataFromApi, buildApiUrl, getColorPercents } from 'Utils/api'
 
 import {
   radarChartCalculate,
@@ -231,10 +231,12 @@ function* getAudienceDominantColorData({ data: { dateRange, metric } }) {
       'GET'
     )
 
+    const formattedResponse = getColorPercents(response)
+
     yield put(
       actions.getAudienceDominantColorDataSuccess(
         percentageManipulation(
-          radarChartCalculate(compareSharesData({ data: response }, parameters))
+          radarChartCalculate(compareSharesData({ data: formattedResponse }, parameters))
         )
       )
     )
