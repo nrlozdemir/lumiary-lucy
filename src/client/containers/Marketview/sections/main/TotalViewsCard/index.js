@@ -20,6 +20,33 @@ class TotalViewsChart extends React.Component {
     this.props.getTotalViewsRequest(data)
   }
 
+  normalizeData(chartData = {}) {
+    if(chartData.datasets && chartData.datasets.length) { 
+      const datasets = chartData.datasets
+      //find the factor
+      const sum = datasets[0].data.reduce((accumulator, current) => { 
+        return accumulator + current
+       },0)
+       const factor = Math.round((100 / sum) *1e2 ) / 1e2
+
+      //change the data related to highest value as percentages
+      const newData = {
+        ...chartData,
+        datasets: datasets.map((dataset)=> {
+          return {
+            ...dataset,
+            oldData: [...dataset.data],
+            data: dataset.data.map((data) => {
+              return Math.round((factor * data) * 1e2 ) / 1e2 //toFixed(2) returns the type to string. So we use this method
+            })
+          }
+        })
+      }
+      return newData
+    }
+    return chartData
+  }
+
   render() {
     const {
       selectFilters,
@@ -66,6 +93,7 @@ class TotalViewsChart extends React.Component {
         }
       })
     })
+    const normalizedData = this.normalizeData(doughnutData)
 
     return (
       <Module
@@ -117,7 +145,7 @@ class TotalViewsChart extends React.Component {
             <DoughnutChart
               width={270}
               height={270}
-              data={loading ? {} : doughnutData}
+              data={loading ? {} : normalizedData}
               cutoutPercentage={58}
               fillText="Total Percentage"
               dataLabelFunction="insertAfter"
