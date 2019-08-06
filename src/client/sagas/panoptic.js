@@ -2,6 +2,7 @@ import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
 import moment from 'moment'
+import querystring from 'querystring'
 
 import { getDateBucketFromRange, normalize, sortObject } from 'Utils'
 
@@ -100,7 +101,7 @@ function* getFilteringSectionData({ data }) {
       dateBucket: 'none',
       display: 'percentage',
       property: [property],
-      url: '/report',
+      url: '/report/reporter',
       brands: [brand.uuid],
     }
 
@@ -108,16 +109,26 @@ function* getFilteringSectionData({ data }) {
       options.limit = 4
     }
 
-    const doughnutData = yield call(getDataFromApi, options)
+    const doughnutData = yield call(
+      getDataFromApi,
+      undefined,
+      `${options.url}?${querystring.stringify(options)}`,
+      'GET'
+    )
 
     const dateBucket = getDateBucketFromRange(dateRange)
 
     const stackedChartData =
       dateBucket !== 'none'
-        ? yield call(getDataFromApi, {
-            ...options,
-            dateBucket,
-          })
+        ? yield call(
+            getDataFromApi,
+            undefined,
+            `${options.url}?${querystring.stringify({
+              ...options,
+              dateBucket,
+            })}`,
+            'GET'
+          )
         : { data: {} }
 
     if (
@@ -150,6 +161,7 @@ function* getFilteringSectionData({ data }) {
       throw 'Error fetching FilteringSection data'
     }
   } catch (err) {
+    console.log(err)
     yield put(
       // empty data
       actions.getFilteringSectionDataSuccess({
