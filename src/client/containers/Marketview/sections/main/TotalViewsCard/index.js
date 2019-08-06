@@ -4,7 +4,7 @@ import { chartColors } from 'Utils/globals'
 import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { isDataSetEmpty } from 'Utils/datasets'
+import { isDataSetEmpty, percentageManipulation } from 'Utils/datasets'
 import { isEmpty } from 'lodash'
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 import { selectFiltersToType } from 'Utils'
@@ -18,6 +18,34 @@ import StackedBarChart from 'Components/Charts/StackedBarChart'
 class TotalViewsChart extends React.Component {
   callBack = (data, moduleKey) => {
     this.props.getTotalViewsRequest(data)
+  }
+
+  normalizeData(chartData = {}) {
+    if(chartData.datasets && chartData.datasets.length) { 
+      const datasets = chartData.datasets
+      //find the factor
+      const sum = datasets[0].data.reduce((accumulator, current) => { 
+        return accumulator + current
+       },0)
+       const factor = 100 / sum
+
+      //change the data related to highest value as percentages
+      const newData = {
+        ...chartData,
+        datasets: datasets.map((dataset)=> {
+          return {
+            ...dataset,
+            oldData: [...dataset.data],
+            data: dataset.data.map((data) => {
+              const percentage = factor * data
+              return percentageManipulation(percentage)
+            })
+          }
+        })
+      }
+      return newData
+    }
+    return chartData
   }
 
   render() {
@@ -66,6 +94,7 @@ class TotalViewsChart extends React.Component {
         }
       })
     })
+    const normalizedData = this.normalizeData(doughnutData)
 
     return (
       <Module
@@ -117,7 +146,7 @@ class TotalViewsChart extends React.Component {
             <DoughnutChart
               width={270}
               height={270}
-              data={loading ? {} : doughnutData}
+              data={loading ? {} : normalizedData}
               cutoutPercentage={58}
               fillText="Total Percentage"
               dataLabelFunction="insertAfter"

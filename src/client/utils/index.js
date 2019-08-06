@@ -48,6 +48,27 @@ const getLabelWithSuffix = (label, property) => {
   return `${label} ${suffix}`
 }
 
+const getPropLabel = (label, prop) => {
+  let suffix
+
+  switch (prop) {
+    case 'duration':
+      suffix = 's'
+      break
+    case 'aspectRatio':
+      suffix = ' Aspect Ratio'
+      break
+    case 'pacing':
+      suffix = ' Pacing'
+      break
+    case 'resolution':
+      suffix = ' Resolution'
+    default:
+      suffix = ''
+  }
+  return `${label}${suffix}`
+}
+
 const splitCamelCaseToString = (s) => ucfirst(s.split(/(?=[A-Z])/).join(' '))
 
 function socialIconSelector(key, isSquare) {
@@ -128,6 +149,46 @@ const metricSuffix = (number) => {
     const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
     const unitname = ['k', 'm', 'B', 'T'][Math.floor(unit / 3) - 1]
     return (number / ('1e' + unit)).toFixed(1) + unitname
+  }
+
+  return number
+}
+
+const numberFormatter = (number, digits = 1, ext = true) => {
+  number = parseInt(number)
+
+  if (number < 1e3) {
+    return number
+  }
+
+  const multiples = [
+    { m: 1e3, e: 'k' },
+    { m: 1e6, e: 'm' },
+    { m: 1e9, e: 'B' },
+    { m: 1e12, e: 'T' },
+    { m: 1e15, e: 'P' },
+    { m: 1e18, e: 'E' },
+  ]
+
+  const regex = /\.0+$|(\.[0-9]*[1-9])0+$/
+
+  let i
+  for (i = multiples.length - 1; i > 0; i--) {
+    if (number >= multiples[i].m) {
+      break
+    }
+  }
+
+  number = (number / multiples[i].m).toFixed(digits).replace(regex, '$1')
+
+  if (number.toString().substr(-1, 1) == 0) {
+    number = number.toString().replace('.0', '')
+  }
+
+  if (!!ext && ext === true) {
+    number = number + multiples[i].e
+  } else {
+    number = parseFloat(number)
   }
 
   return number
@@ -611,10 +672,33 @@ const getColorPercents = (input, audience = false) => {
       }, {})
     })    
   }
+}
 
+/*
+  Takes an object like {1:1: "1", 4:3: "5", 16:9: "376", 4:5: "141"},
+  and converts it into percents
+ */
+const convertObjectIntoPercents = (obj = {}) => {
+  const vals = Object.values(obj)
+
+  if (!!vals.length) {
+    const total = vals.reduce((acc, curr) => (acc += parseFloat(curr)), 0)
+    const percentageObj = Object.keys(obj).reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: !!total ? Math.round(parseFloat(obj[key] / total) * 100) : 0,
+      }),
+      {}
+    )
+    return percentageObj
+  } else {
+    return obj
+  }
 }
 
 export {
+  getPropLabel,
+  convertObjectIntoPercents,
   sortObject,
   randomKey,
   socialIconSelector,
@@ -622,6 +706,7 @@ export {
   searchTermInText,
   shadeHexColor,
   metricSuffix,
+  numberFormatter,
   strToColor,
   getMaximumValueIndexFromArray,
   ucfirst,

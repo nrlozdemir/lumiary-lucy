@@ -2,12 +2,13 @@
   display: flex;
   align-content: center;
   justify-content: center;
-
+  
   .chartWrapper {
     width: 300px;
     display: flex;
     justify-content: center;
     align-items: center;
+    z-index: 1;
   }
 }
 

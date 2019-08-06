@@ -183,13 +183,13 @@ const StackedBarChart = (props) => {
                 datalabels: {
                   formatter: (value, { datasetIndex, dataIndex }) => {
                     const ogValue =
-                      !!barData && 
-                      !!barData.datasets && 
-                      !!barData.datasets[datasetIndex] && 
-                      !!barData.datasets[datasetIndex].data && 
-                      !!barData.datasets[datasetIndex].data.length && 
-                      !!barData.datasets[datasetIndex].data[dataIndex] 
-                        ? barData.datasets[datasetIndex].data[dataIndex] 
+                      !!barData &&
+                      !!barData.datasets &&
+                      !!barData.datasets[datasetIndex] &&
+                      !!barData.datasets[datasetIndex].data &&
+                      !!barData.datasets[datasetIndex].data.length &&
+                      !!barData.datasets[datasetIndex].data[dataIndex]
+                        ? barData.datasets[datasetIndex].data[dataIndex]
                         : value
 
                     return metricSuffix(ogValue)
@@ -212,6 +212,7 @@ const StackedBarChart = (props) => {
               ticks: {
                 ...barDataOptions.scales.xAxes[0].ticks,
                 fontColor: themes.textColor,
+                padding: 17,
               },
               gridLines: {
                 ...barDataOptions.scales.xAxes[0].gridLines,

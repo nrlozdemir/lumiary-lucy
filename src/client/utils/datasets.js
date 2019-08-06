@@ -183,10 +183,12 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
       const { datasets } = data
-      const color = !!cvScore ? CVScoreChartColors : (compareBrands
+      const color = !!cvScore
+        ? CVScoreChartColors
+        : compareBrands
         ? compareBrandChartColors[idx]
-        : chartColors[idx]) 
-      
+        : chartColors[idx]
+
       return singleDataset
         ? // only one dataset is required sometimes
           // ie. doughnut chart in panoptic/engagement
@@ -197,7 +199,10 @@ const convertDataIntoDatasets = (values, options, ...args) => {
                 borderColor: customBorderColor || color,
                 label: expectedNames[options.property],
                 data: datasetsFromValues || [0, 0, 0, 0],
-                backgroundColor: backgroundColor || [...(datasets[0] ? datasets[0].backgroundColor : []), color,],
+                backgroundColor: backgroundColor || [
+                  ...(datasets[0] ? datasets[0].backgroundColor : []),
+                  color,
+                ],
                 hoverBackgroundColor: hoverBG
                   ? [
                       ...(datasets[0] ? datasets[0].hoverBackgroundColor : []),
@@ -592,7 +597,28 @@ const convertVideoEngagementData = (data, metric = 'views') => {
     return {}
   }
 
-  const propertyMap = Object.keys(data).reduce((accumulator, key) => {
+  const labels = ['0-15', '16-30', '31-60', '60+']
+  const emptyData = {
+    Tuesday: 0,
+    Monday: 0,
+    Sunday: 0,
+    Saturday: 0,
+    Friday: 0,
+    Thursday: 0,
+    Wednesday: 0,
+    total: 0,
+    [metric]: {
+      Tuesday: 0,
+      Monday: 0,
+      Sunday: 0,
+      Saturday: 0,
+      Friday: 0,
+      Thursday: 0,
+      Wednesday: 0,
+    },
+  }
+
+  const propertyMap = labels.reduce((accumulator, key) => {
     if (!accumulator[key]) {
       accumulator[key] = {
         metric,
@@ -616,8 +642,8 @@ const convertVideoEngagementData = (data, metric = 'views') => {
       }
     }
 
-    const videos = data[key]
-    const engagement = data[key][metric]
+    const videos = data[key] || emptyData
+    const engagement = videos[metric]
 
     for (let i = 0; i < 7; i++) {
       const weekday = moment()
@@ -733,7 +759,9 @@ const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
         {
           borderColor: '#ACB0BE',
           data: vals.map((val) => (val * 100).toFixed(2)),
-          backgroundColor: keys.map((key) => (key === maxKey ? color : '#505050')),
+          backgroundColor: keys.map((key) =>
+            key === maxKey ? color : '#505050'
+          ),
           hoverBackgroundColor: [],
         },
       ],

@@ -42,8 +42,10 @@ class BasedOnShares extends React.Component {
                 data={{
                   topTitle,
                   pointerData: modalData.videoPropertyAverage,
+                  realVideoPropertyAverage: modalData.realVideoPropertyAverage,
                   bottomText: 'of your library is shot in',
                   avg: modalData.libraryPropertyAverage,
+                  realLibraryPropertyAverage: modalData.realLibraryPropertyAverage,
                   percent: modalData.propertyLibraryPercentChange,
                   fps: sectionData.label,
                 }}
