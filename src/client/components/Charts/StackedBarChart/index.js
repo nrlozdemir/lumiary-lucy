@@ -212,6 +212,7 @@ const StackedBarChart = (props) => {
               ticks: {
                 ...barDataOptions.scales.xAxes[0].ticks,
                 fontColor: themes.textColor,
+                padding: 17,
               },
               gridLines: {
                 ...barDataOptions.scales.xAxes[0].gridLines,
