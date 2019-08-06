@@ -24,7 +24,7 @@ class DoughnutCard extends React.Component {
     } = this.props
 
     const newChartData = doughnutChartDataWithOpacity(chartData, colors)
-    
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -51,7 +51,7 @@ class DoughnutCard extends React.Component {
                 }}
               >
                 <p className="font-secondary-second font-size-12 text-center">
-                  {!!duration && duration !== '00:00' ? duration : maxLabel}
+                  {!!duration && duration !== '00:00:00' ? duration : maxLabel}
                 </p>
               </div>
               <div className={style.doughnutChartContainer}>
