@@ -5,7 +5,8 @@ import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
-import { getDataFromApi, buildApiUrl, getColorPercents } from 'Utils/api'
+import { getColorPercents } from 'Utils'
+import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import {
   radarChartCalculate,
@@ -231,7 +232,7 @@ function* getAudienceDominantColorData({ data: { dateRange, metric } }) {
       'GET'
     )
 
-    const formattedResponse = getColorPercents(response)
+    const formattedResponse = getColorPercents(response, true)
 
     yield put(
       actions.getAudienceDominantColorDataSuccess(
