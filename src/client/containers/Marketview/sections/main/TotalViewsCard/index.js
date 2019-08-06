@@ -4,7 +4,7 @@ import { chartColors } from 'Utils/globals'
 import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { isDataSetEmpty } from 'Utils/datasets'
+import { isDataSetEmpty, percentageManipulation } from 'Utils/datasets'
 import { isEmpty } from 'lodash'
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 import { selectFiltersToType } from 'Utils'
@@ -27,7 +27,7 @@ class TotalViewsChart extends React.Component {
       const sum = datasets[0].data.reduce((accumulator, current) => { 
         return accumulator + current
        },0)
-       const factor = Math.round((100 / sum) *1e1 ) / 1e1
+       const factor = 100 / sum
 
       //change the data related to highest value as percentages
       const newData = {
@@ -37,7 +37,8 @@ class TotalViewsChart extends React.Component {
             ...dataset,
             oldData: [...dataset.data],
             data: dataset.data.map((data) => {
-              return Math.round((factor * data) * 1e1 ) / 1e1 //toFixed(2) returns the type to string. So we use this method
+              const percentage = factor * data
+              return percentageManipulation(percentage)
             })
           }
         })
