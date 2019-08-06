@@ -158,21 +158,21 @@ const numberFormatter = (number, digits = 1, ext = true) => {
     }
   }
 
-  let returnData = (number / multiples[i].m)
+  number = (number / multiples[i].m)
     .toFixed(digits)
     .replace(regex, '$1')
 
-  if (returnData.toString().substr(-1, 1) == 0) {
-    returnData = returnData.toString().replace('.0', '')
+  if (number.toString().substr(-1, 1) == 0) {
+    number = number.toString().replace('.0', '')
   }
 
   if (!!ext && ext === true) {
-    returnData = returnData + multiples[i].e
+    number = number + multiples[i].e
   } else {
-    returnData = parseFloat(returnData)
+    number = parseFloat(number)
   }
 
-  return returnData
+  return number
 }
 
 const strToColor = (str) => {
