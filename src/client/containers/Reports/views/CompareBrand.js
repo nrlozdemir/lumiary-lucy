@@ -12,9 +12,7 @@ import {
   makeSelectReportsPredefinedReportValues,
 } from 'Reducers/reports'
 
-import {
-  actions as generatedReportActions,
-} from 'Reducers/generatedReport'
+import { actions as generatedReportActions } from 'Reducers/generatedReport'
 
 import { getLocationParams } from 'Utils'
 
@@ -49,7 +47,6 @@ class CompareBrand extends React.Component {
           [urlParams.brand_two_uuid]: true,
           title: urlParams.title,
           saved: urlParams.saved,
-          report_uuid: urlParams.report_uuid
         },
         true
       )
