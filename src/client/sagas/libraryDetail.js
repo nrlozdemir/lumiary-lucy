@@ -40,8 +40,6 @@ function* getDoughnutChart({ payload: { LibraryDetailId, videoId } }) {
       'GET'
     )
 
-    console.log(response)
-
     if (!!response) {
       // endpoint only sends back these props,
       // and sometimes that shit is null, so just get up to 4 props that are not null

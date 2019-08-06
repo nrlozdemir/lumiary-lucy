@@ -48,6 +48,27 @@ const getLabelWithSuffix = (label, property) => {
   return `${label} ${suffix}`
 }
 
+const getPropLabel = (label, prop) => {
+  let suffix
+
+  switch (prop) {
+    case 'duration':
+      suffix = 's'
+      break
+    case 'aspectRatio':
+      suffix = ' Aspect Ratio'
+      break
+    case 'pacing':
+      suffix = ' Pacing'
+      break
+    case 'resolution':
+      suffix = ' Resolution'
+    default:
+      suffix = ''
+  }
+  return `${label}${suffix}`
+}
+
 const splitCamelCaseToString = (s) => ucfirst(s.split(/(?=[A-Z])/).join(' '))
 
 function socialIconSelector(key, isSquare) {
@@ -581,7 +602,7 @@ const convertObjectIntoPercents = (obj = {}) => {
     const percentageObj = Object.keys(obj).reduce(
       (acc, key) => ({
         ...acc,
-        [key]: Math.round(parseFloat((obj[key]) / total) * 100),
+        [key]: Math.round(parseFloat(obj[key] / total) * 100),
       }),
       {}
     )
@@ -592,6 +613,7 @@ const convertObjectIntoPercents = (obj = {}) => {
 }
 
 export {
+  getPropLabel,
   convertObjectIntoPercents,
   sortObject,
   randomKey,
