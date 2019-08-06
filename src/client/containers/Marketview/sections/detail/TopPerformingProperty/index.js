@@ -87,6 +87,36 @@ class TopPerformingProperty extends React.Component {
   //   container === 'competitor' && setCompetitorTopProperty(null)
   // }
 
+  normalizeData(chartData = {}) {
+    if(chartData.datasets && chartData.datasets.length) { 
+      const datasets = chartData.datasets
+      //find the highest data
+      let flattenedArr = []
+      datasets.forEach((dataset) => {
+        flattenedArr = [...flattenedArr, ...dataset.data]
+      })
+      const highestValue = flattenedArr.reduce((accumulator, current) => {
+        return current > accumulator ? current : accumulator
+      }, 0)
+
+      //change the data related to highest value as percentages
+      const newData = {
+        ...chartData,
+        datasets: datasets.map((dataset)=> {
+          return {
+            ...dataset,
+            oldData: [...dataset.data],
+            data: dataset.data.map((data) => {
+              return Math.round( (data * 100 / highestValue) * 1e2 ) / 1e2 //toFixed(2) returns the type to string. So we use this method
+            })
+          }
+        })
+      }
+      return newData
+    }
+    return chartData
+  }
+
   render() {
     const {
       title,
@@ -103,61 +133,59 @@ class TopPerformingProperty extends React.Component {
     } = this.props
 
     let chartData = container === 'competitor' ? compTopData : topData
-
+    
     const hasDatasets =
-      !!chartData && !!chartData.datasets && !!chartData.datasets.length
-
+    !!chartData && !!chartData.datasets && !!chartData.datasets.length
+    
     if (hasDatasets && chartData.datasets.length > 5) {
       const top5datasets = getTopNValues(chartData.datasets, 5)
       chartData = { ...chartData, datasets: top5datasets }
     }
+    chartData = this.normalizeData(chartData)
+    
+    //uncommenting these logic since we will show percentages.
 
-    let elements = []
-    !!chartData.datasets &&
-      isArray(chartData.datasets) &&
-      chartData.datasets.length > 0 &&
-      chartData.datasets.map((e, i) => {
-        !!e.data &&
-          e.data.map((m, k) => {
-            !!m && isNumber(m) && m > 0 && elements.push(m)
-          })
-      })
+    // let elements = []
+    // !!chartData.datasets &&
+    // isArray(chartData.datasets) &&
+    // chartData.datasets.length > 0 &&
+    // chartData.datasets.map((e, i) => {
+    //   !!e.data &&
+    //   e.data.map((m, k) => {
+    //     !!m && isNumber(m) && m > 0 && elements.push(m)
+    //   })
+    // })
+    
+    // const findMax = !!elements && Math.max(...elements)
 
-    const findMax = !!elements && Math.max(...elements)
+    // const maxUp = (hasDatasets && findMax) || 0
 
-    const maxUp = (hasDatasets && findMax) || 0
+    // const divider =
+    //   !!maxUp &&
+    //   Math.pow(10, parseInt(((Math.log(maxUp) * Math.LOG10E + 1) | 0) - 1))
 
-    const divider =
-      !!maxUp &&
-      Math.pow(10, parseInt(((Math.log(maxUp) * Math.LOG10E + 1) | 0) - 1))
+    // const maxNumberCeil =
+    //   !!maxUp &&
+    //   !!divider &&
+    //   Math.ceil(parseFloat((maxUp / divider).toFixed(2)))
 
-    const maxNumberCeil =
-      !!maxUp &&
-      !!divider &&
-      Math.ceil(parseFloat((maxUp / divider).toFixed(2)))
-
-    const max = !!maxNumberCeil
-      ? parseInt(
-          (maxNumberCeil % 2 === 0 ? maxNumberCeil : maxNumberCeil + 1) *
-            divider
-        )
-      : maxUp
+    // const max = !!maxNumberCeil
+    //   ? parseInt(
+    //       (maxNumberCeil % 2 === 0 ? maxNumberCeil : maxNumberCeil + 1) *
+    //         divider
+    //     )
+    //   : maxUp
 
     const min = 0
-
-    const stepSize = !!max && max / 4
+    const stepSize = 25
+    const max = 100
 
     const chartTickOptions = {
       min,
       max,
       stepSize,
       callback(value) {
-        if (value < 1000) {
-          return value
-        } else if (value < 1000000) {
-          return `${Math.round(value / 1000)}k`
-        }
-        return `${Math.round((value * 100) / 1000000) / 100}m`
+        return `${value}%`
       },
     }
 
@@ -197,7 +225,6 @@ class TopPerformingProperty extends React.Component {
         text: item.label,
         color: item.backgroundColor,
       }))
-
     const loading = compTopLoading || topLoading
 
     return (
