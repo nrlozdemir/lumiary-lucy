@@ -8,6 +8,8 @@ import DoughnutChart from 'Components/Charts/DoughnutChart'
 import DownArrowCircle from 'Components/Icons/DownArrowCircle'
 import { actions } from 'Reducers/libraryDetail'
 import { doughnutChartDataWithOpacity, getPropLabel } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
+import cx from 'classnames'
 
 class DoughnutCard extends React.Component {
   render() {
@@ -24,6 +26,8 @@ class DoughnutCard extends React.Component {
     } = this.props
 
     const newChartData = doughnutChartDataWithOpacity(chartData, colors)
+
+    const isEmpty = isDataSetEmpty(chartData)
 
     return (
       <ThemeContext.Consumer>
@@ -65,6 +69,11 @@ class DoughnutCard extends React.Component {
                   datasetsBorderColor={colors.moduleBackground}
                   datasetsHoverBorderColor={colors.moduleBackground}
                 />
+                {isEmpty && (
+                  <div className={cx(style.textBold, style.emptyDoughnut)}>
+                    No Data Available
+                  </div>
+                )}
                 <p>
                   <span className={style.textBold}>{maxPercentage}% </span>
                   of your library
