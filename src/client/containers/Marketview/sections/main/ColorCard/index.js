@@ -187,7 +187,7 @@ class ColorCard extends Component {
               </div>
             )}
             <div className={style.marketViewCardDescription}>
-              {`An overview of the dominant color associated with the top number of ${metric} for videos on each platform for the past ${dateLabel.toLowerCase()}.`}
+              {`An overview of the dominant color associated with the top number of ${metric} for videos on each platform for the ${dateLabel.toLowerCase()}.`}
             </div>
             <Link
               to="/marketview/platform"
