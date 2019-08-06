@@ -56,6 +56,7 @@ const Front = (props) => {
             [style.percentageDecrease]: percentage < 50,
           })}
           tickColor={colors.progressLibraryDetailTickColor}
+          tickTooltipValue={`${metricSuffix(average)} | Average`}
           progressBarBackgroundColor={colors.progressLibraryDetailBackground}
           percentageBgColor={percentage < 50 ? colors.progressLibraryDecreaseColor : colors.progressLibraryIncreaseColor}
           progressBarShadowColor={colors.progressLibraryDetailShadow}
