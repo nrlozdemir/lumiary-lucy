@@ -3,7 +3,7 @@ import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
 import moment from 'moment'
 
-import { getDateBucketFromRange, normalize, sortObject } from 'Utils'
+import { getDateBucketFromRange, normalize, sortObject, getColorPercents } from 'Utils'
 
 import {
   convertDataIntoDatasets,
@@ -265,10 +265,12 @@ function* getCompareSharesData({ data: { dateRange } }) {
       ),
     ])
 
+    const formattedPayload = getColorPercents(payload)
+
     yield put(
       actions.getCompareSharesDataSuccess(
         percentageManipulation(
-          radarChartCalculate(compareSharesData(payload, parameters))
+          radarChartCalculate(compareSharesData(formattedPayload, parameters))
         )
       )
     )

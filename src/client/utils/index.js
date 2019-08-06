@@ -529,6 +529,91 @@ const doughnutChartDataWithOpacity = (
   }
 }
 
+const getColorPercents = (input, audience = false) => {
+  const orderedColors = [
+    'Red',
+    'Orange-Red',
+    'Orange',
+    'Yellow-Orange',
+    'Yellow',
+    'Yellow-Green',
+    'Green',
+    'Blue-Green',
+    'Blue',
+    'Blue-Purple',
+    'Purple',
+    'Red-Purple',
+  ]
+
+  if(audience) {
+    return Object.keys(input).reduce((accumulator, gender) => {
+      accumulator[gender] = {}
+
+      Object.keys(input[gender]).forEach((property) => {
+        if(property === 'color') {
+          accumulator[gender][property] = {}
+          let sum = 0
+          orderedColors.forEach((color) => {
+            sum += (input[gender][property][color.toLowerCase()] || 0)
+          })
+
+          orderedColors.forEach((color) => {
+            const thisNum = input[gender][property][color.toLowerCase()] || 0
+            const percentage = thisNum / sum
+            const formattedPercentage = (isNaN(parseInt((percentage * 100).toFixed(0)))) ? 0 : parseInt((percentage * 100).toFixed(0))
+            accumulator[gender][property][color.toLowerCase()] = formattedPercentage
+          })                
+        } else {
+          accumulator[gender][property] = input[gender][property]
+        }
+      })
+
+      return accumulator
+    }, {})
+  } else {
+    return input.map((inputItem) => {
+      return Object.keys(inputItem).reduce((accumulator, key) => {
+        
+        switch(key) {
+          case 'data':
+            accumulator[key] = {}
+
+            Object.keys(inputItem[key]).forEach((brandName) => {
+              accumulator[key][brandName] = {}
+
+              Object.keys(inputItem[key][brandName]).forEach((property) => {
+                if(property === 'color') {
+                  accumulator[key][brandName][property] = {}
+                  let sum = 0
+                  orderedColors.forEach((color) => {
+                    sum += (inputItem[key][brandName][property][color.toLowerCase()] || 0)
+                  })
+
+                  orderedColors.forEach((color) => {
+                    const thisNum = inputItem[key][brandName][property][color.toLowerCase()] || 0
+                    const percentage = thisNum / sum
+                    const formattedPercentage = (isNaN(parseInt((percentage * 100).toFixed(0)))) ? 0 : parseInt((percentage * 100).toFixed(0))
+                    accumulator[key][brandName][property][color.toLowerCase()] = formattedPercentage
+                  })                
+                } else {
+                  accumulator[key][brandName][property] = inputItem[key][brandName][property]
+                }
+              })
+            })
+          break;
+
+          case 'platform':
+            accumulator[key] = inputItem[key]
+          break;        
+        }
+
+        return accumulator
+      }, {})
+    })    
+  }
+
+}
+
 export {
   sortObject,
   randomKey,
@@ -560,4 +645,5 @@ export {
   customChartToolTip,
   getModuleTerms,
   doughnutChartDataWithOpacity,
+  getColorPercents,
 }
