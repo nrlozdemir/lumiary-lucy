@@ -7,7 +7,7 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import DownArrowCircle from 'Components/Icons/DownArrowCircle'
 import { actions } from 'Reducers/libraryDetail'
-import { doughnutChartDataWithOpacity } from 'Utils'
+import { doughnutChartDataWithOpacity, getPropLabel } from 'Utils'
 
 class DoughnutCard extends React.Component {
   render() {
@@ -22,8 +22,9 @@ class DoughnutCard extends React.Component {
       videoId,
       colors,
     } = this.props
-    const newChartData = doughnutChartDataWithOpacity(chartData, colors)
 
+    const newChartData = doughnutChartDataWithOpacity(chartData, colors)
+    
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -50,7 +51,7 @@ class DoughnutCard extends React.Component {
                 }}
               >
                 <p className="font-secondary-second font-size-12 text-center">
-                  {!!duration ? duration : maxLabel}
+                  {!!duration && duration !== '00:00' ? duration : maxLabel}
                 </p>
               </div>
               <div className={style.doughnutChartContainer}>
@@ -68,7 +69,10 @@ class DoughnutCard extends React.Component {
                   <span className={style.textBold}>{maxPercentage}% </span>
                   of your library
                   <br /> is shot in
-                  <span className={style.textBold}> {maxLabel}</span>
+                  <span className={style.textBold}>
+                    {' '}
+                    {getPropLabel(maxLabel, identifier)}
+                  </span>
                 </p>
               </div>
             </div>
