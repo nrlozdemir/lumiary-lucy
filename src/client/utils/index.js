@@ -602,7 +602,7 @@ const convertObjectIntoPercents = (obj = {}) => {
     const percentageObj = Object.keys(obj).reduce(
       (acc, key) => ({
         ...acc,
-        [key]: Math.round(parseFloat(obj[key] / total) * 100),
+        [key]: !!total ? Math.round(parseFloat(obj[key] / total) * 100) : 0,
       }),
       {}
     )
