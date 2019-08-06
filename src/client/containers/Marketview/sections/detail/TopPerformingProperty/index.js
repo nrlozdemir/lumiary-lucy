@@ -18,7 +18,7 @@ import {
   customChartToolTip,
   metricSuffix,
 } from 'Utils'
-import { getMinMaxFromDatasets, getTopNValues } from 'Utils/datasets'
+import { getMinMaxFromDatasets, getTopNValues, percentageManipulation } from 'Utils/datasets'
 import { isArray, isNumber, isEqual } from 'lodash'
 
 import style from '../../../style.scss'
@@ -107,7 +107,7 @@ class TopPerformingProperty extends React.Component {
             ...dataset,
             oldData: [...dataset.data],
             data: dataset.data.map((data) => {
-              return Math.round( (data * 100 / highestValue) * 1e2 ) / 1e2 //toFixed(2) returns the type to string. So we use this method
+              return percentageManipulation(data * 100 / highestValue)
             })
           }
         })
