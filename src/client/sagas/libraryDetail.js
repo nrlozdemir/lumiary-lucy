@@ -9,7 +9,11 @@ import {
 } from 'Reducers/libraryDetail'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
-import { getMaximumValueIndexFromArray, getLabelWithSuffix } from 'Utils'
+import {
+  getMaximumValueIndexFromArray,
+  getLabelWithSuffix,
+  numberFormatter,
+} from 'Utils'
 import { expectedNames } from 'Utils/globals'
 
 import {
@@ -217,7 +221,6 @@ function* getDoughnutSectionInfoData({ payload }) {
         }),
         'GET'
       )
-      
 
       const {
         libraryMetricPercents,
@@ -288,16 +291,14 @@ function* getDoughnutSectionInfoData({ payload }) {
           industryMaxKey,
           industryMaxValue,
           lineChartData,
-          videoPropertyAverage: Math.floor(
-            videoPropertyAverage >= 1000
-              ? videoPropertyAverage / 1000
-              : videoPropertyAverage
+          videoPropertyAverage: numberFormatter(videoPropertyAverage, 0, false),
+          realVideoPropertyAverage: videoPropertyAverage,
+          libraryPropertyAverage: numberFormatter(
+            libraryPropertyAverage,
+            0,
+            false
           ),
-          libraryPropertyAverage: Math.floor(
-            libraryPropertyAverage >= 1000
-              ? libraryPropertyAverage / 1000
-              : libraryPropertyAverage
-          ),
+          realLibraryPropertyAverage: libraryPropertyAverage,
           propertyLibraryPercentChange: Math.floor(
             metricLibraryPercentChange * 100
           ),
