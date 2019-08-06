@@ -158,9 +158,7 @@ const numberFormatter = (number, digits = 1, ext = true) => {
     }
   }
 
-  number = (number / multiples[i].m)
-    .toFixed(digits)
-    .replace(regex, '$1')
+  number = (number / multiples[i].m).toFixed(digits).replace(regex, '$1')
 
   if (number.toString().substr(-1, 1) == 0) {
     number = number.toString().replace('.0', '')
@@ -571,7 +569,30 @@ const doughnutChartDataWithOpacity = (
   }
 }
 
+/*
+  Takes an object like {1:1: "1", 4:3: "5", 16:9: "376", 4:5: "141"},
+  and converts it into percents
+ */
+const convertObjectIntoPercents = (obj = {}) => {
+  const vals = Object.values(obj)
+
+  if (!!vals.length) {
+    const total = vals.reduce((acc, curr) => (acc += parseFloat(curr)), 0)
+    const percentageObj = Object.keys(obj).reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: Math.round(parseFloat((obj[key]) / total) * 100),
+      }),
+      {}
+    )
+    return percentageObj
+  } else {
+    return obj
+  }
+}
+
 export {
+  convertObjectIntoPercents,
   sortObject,
   randomKey,
   socialIconSelector,
