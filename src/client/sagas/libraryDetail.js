@@ -33,12 +33,12 @@ function* getDoughnutChart({ payload: { LibraryDetailId, videoId } }) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
 
-    const response = yield call(
-      getDataFromApi,
-      undefined,
+    const url = buildApiUrl(
       `/brand/${brand.uuid}/video/${videoId}/properties`,
-      'GET'
+      { daterange: 'week' }
     )
+
+    const response = yield call(getDataFromApi, undefined, url, 'GET')
 
     if (!!response) {
       // endpoint only sends back these props,
