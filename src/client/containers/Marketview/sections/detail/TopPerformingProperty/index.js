@@ -143,7 +143,7 @@ class TopPerformingProperty extends React.Component {
     }
     chartData = this.normalizeData(chartData)
     
-    //uncommenting these logic since we will show percentages.
+    //commenting these logic since we will show percentages.
 
     // let elements = []
     // !!chartData.datasets &&
