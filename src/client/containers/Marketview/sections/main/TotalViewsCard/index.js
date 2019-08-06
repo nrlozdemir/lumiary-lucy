@@ -27,7 +27,7 @@ class TotalViewsChart extends React.Component {
       const sum = datasets[0].data.reduce((accumulator, current) => { 
         return accumulator + current
        },0)
-       const factor = Math.round((100 / sum) *1e2 ) / 1e2
+       const factor = Math.round((100 / sum) *1e1 ) / 1e1
 
       //change the data related to highest value as percentages
       const newData = {
@@ -37,7 +37,7 @@ class TotalViewsChart extends React.Component {
             ...dataset,
             oldData: [...dataset.data],
             data: dataset.data.map((data) => {
-              return Math.round((factor * data) * 1e2 ) / 1e2 //toFixed(2) returns the type to string. So we use this method
+              return Math.round((factor * data) * 1e1 ) / 1e1 //toFixed(2) returns the type to string. So we use this method
             })
           }
         })
