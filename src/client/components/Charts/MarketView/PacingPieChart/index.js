@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pie } from 'react-chartjs-2'
 import style from './style.scss'
-import { customChartToolTip } from 'Utils'
+import { customChartToolTip, ucfirst } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 function metricSuffix(number) {
@@ -14,7 +14,7 @@ function metricSuffix(number) {
   return number
 }
 
-const PacingPieChart = ({ data = {} }) => {
+const PacingPieChart = ({ data = {}, metric }) => {
   const { datasets = [] } = data
 
   return (
@@ -41,7 +41,7 @@ const PacingPieChart = ({ data = {} }) => {
                         data.datasets[0] &&
                         data.datasets[0].data[tooltipItem['index']]) ||
                       ''
-                    return `${metricSuffix(parseInt(count) || 0)} Shares`
+                    return `${metricSuffix(parseInt(count) || 0)} ${ucfirst(metric)}`
                   },
                 },
                 xPadding: 12,

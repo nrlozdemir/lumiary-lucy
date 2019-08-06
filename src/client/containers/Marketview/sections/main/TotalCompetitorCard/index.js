@@ -68,7 +68,7 @@ class TotalCompetitorCard extends React.Component {
     
     return (
       <BarChartModule
-        moduleKey={'Marketview/TotalCompetitorViewsByDuration'}
+        moduleKey={'MarketView/TotalCompetitorViewsByDuration'}
         barData={!loading ? data : {}}
         title="Total Competitor Views By Duration"
         height={55}

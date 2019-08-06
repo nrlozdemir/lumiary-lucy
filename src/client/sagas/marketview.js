@@ -21,7 +21,7 @@ import {
   convertPropertiesIntoDatasets,
 } from 'Utils/datasets'
 
-import { dayOfWeek, chartColors } from 'Utils/globals'
+import { dayOfWeek, chartColors, formatToS3Examples } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 import { isNumber } from 'util'
 
@@ -486,14 +486,6 @@ function* getFormatChartData({
       brands: [...competitors],
     }
 
-    // video is still being pulled from mock
-    const video = {
-      videoUrl:
-        'https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/12-years-ago-today-Kobe-dropped-81.mp4',
-      poster:
-        'https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/12-years-ago-today-Kobe-dropped-81.jpg',
-    }
-
     const response = yield call(getDataFromApi, options, '/report')
 
     // reduce reponse into array of categories and their count
@@ -535,10 +527,20 @@ function* getFormatChartData({
         count: formatCountsObj[formatKey],
       }))
 
+      // order formats
+      const vals = percentageManipulation(formatCountsArr).sort(
+        (a, b) => b.count - a.count 
+      )
+
+      // pull vid from highest bucket
+      const video = {
+        videoUrl: formatToS3Examples[vals[0].name]
+      }
+
       yield put(
         actions.getFormatChartSuccess({
           currentDay,
-          data: percentageManipulation(formatCountsArr),
+          data: vals,
           video,
         })
       )
