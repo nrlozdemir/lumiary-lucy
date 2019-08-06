@@ -35,7 +35,6 @@ export class LibraryDetail extends React.Component {
       // getShotByShotRequest,
       getSelectedVideo,
       getSelectedVideoAverage,
-      themeContext: { colors },
       profile: { brand },
     } = this.props
 
@@ -43,8 +42,8 @@ export class LibraryDetail extends React.Component {
       getSelectedVideo({ brandUuid: brand.uuid, videoId: match.params.videoId })
       getSelectedVideoAverage(match.params.videoId)
       getDoughnutChartRequest({
+        videoId: match.params.videoId,
         LibraryDetailId: match.params.videoId,
-        themeColors: colors,
       })
       // getColorTempRequest(match.params.videoId)
       // getShotByShotRequest(match.params.videoId)
@@ -109,9 +108,8 @@ export class LibraryDetail extends React.Component {
           videoId={videoId}
           videoDuration={this.video && this.video.duration}
         />
-        <div style={{height:70}}></div>
-        {
-        /*
+        <div style={{ height: 70 }} />
+        {/*
         <LibraryDetailShotByShot
           shots={
             (!!shotByShotData &&
@@ -121,8 +119,7 @@ export class LibraryDetail extends React.Component {
           }
           loading={shotByShotLoading}
         />
-        */
-        }
+        */}
       </React.Fragment>
     )
   }

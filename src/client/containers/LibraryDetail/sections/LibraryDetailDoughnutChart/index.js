@@ -48,6 +48,8 @@ class LibraryDetailDoughnutChart extends React.Component {
 
     const sectionToShow = (!!showInfo && showInfo.title) || false
 
+    console.log('doughnutData', doughnutData)
+    
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
