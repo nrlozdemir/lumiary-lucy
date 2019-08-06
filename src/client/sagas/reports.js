@@ -4,7 +4,7 @@ import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
 
 import querystring from 'querystring'
-import { sortObject } from 'Utils'
+import { sortObject, getColorPercents } from 'Utils'
 import {
   convertDataIntoDatasets,
   radarChartCalculate,
@@ -383,7 +383,7 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
     // const competitors = getBrandAndCompetitors(profile)
 
     // const filteredCompetitors = getFilteredCompetitors(competitors, report)
-
+console.log('getColorComparisonData')
     const parameters = {
       dateRange,
       metric,
@@ -394,7 +394,7 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
 
     if (!!report && !!report.brands && !!report.brands.length) {
       // faster to split it up
-      const [brand1, brand2] = yield all([
+      const colorPaylod = yield all([
         call(
           getDataFromApi,
           { ...parameters, brands: report.brands[0] },
@@ -406,6 +406,8 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
           '/report'
         ),
       ])
+
+      const [brand1, brand2] = getColorPercents(colorPaylod)
 
       const payload = { data: { ...brand1.data, ...brand2.data } }
 

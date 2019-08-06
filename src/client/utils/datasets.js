@@ -284,7 +284,7 @@ const radarChartCalculate = (data) => {
           el.progress.push({
             leftTitle: f.name,
             color: strToColor(f.name),
-            rightTitle: `${metricSuffix(f.count)} ${ucfirst(
+            rightTitle: `${metricSuffix(f.count)}% ${ucfirst(
               el.data.datasets[0].metric
             )}`,
             value: ((f.count / el.total) * 100).toFixed(0),
