@@ -9,23 +9,31 @@ import { textEdit } from 'Utils/text'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import ToolTip from 'Components/ToolTip'
 
-const nth = function (n){return["st","nd","rd"][((n+90)%100-10)%10-1]||"th"}
+const nth = function(n) {
+  return ['st', 'nd', 'rd'][((((n + 90) % 100) - 10) % 10) - 1] || 'th'
+}
 
 const Front = (props) => {
   const { data, colors, title } = props
   //let percentage = (100 * data.value) / data.max
   const { value, average, percentile } = data
 
-  const chartVal = (value / (average * 2) * 100) > 100 ? 99 : (value / (average * 2) * 100)
-  
-  const difference = ((average - value) / ( (average + value)/2 ) * 100).toFixed(1)
+  const chartVal =
+    (value / (average * 2)) * 100 > 100 ? 99 : (value / (average * 2)) * 100
+
+  const difference = (
+    ((average - value) / ((average + value) / 2)) *
+    100
+  ).toFixed(1)
 
   let percentage = parseInt(data.percentile) || 0
   const text = data.diff > 0 ? 'more' : 'less'
   // const tooltipText = `This video is receiving ${percentage}% ${text} ${title}s than your library average of ${metricSuffix(
   //   data.average
   // )}`
-  const tooltipText = `This video is in the top ${parseInt(percentile)}${nth(parseInt(percentile))} percentile of your library's ${title}s`
+  const tooltipText = `This video is in the top ${parseInt(percentile)}${nth(
+    parseInt(percentile)
+  )} percentile of your library's ${title}s`
 
   return (
     <div className={style.frontContainer}>
@@ -58,7 +66,11 @@ const Front = (props) => {
           tickColor={colors.progressLibraryDetailTickColor}
           tickTooltipValue={`${metricSuffix(average)} | Average`}
           progressBarBackgroundColor={colors.progressLibraryDetailBackground}
-          percentageBgColor={percentage < 50 ? colors.progressLibraryDecreaseColor : colors.progressLibraryIncreaseColor}
+          percentageBgColor={
+            percentage < 50
+              ? colors.progressLibraryDecreaseColor
+              : colors.progressLibraryIncreaseColor
+          }
           progressBarShadowColor={colors.progressLibraryDetailShadow}
         />
         <div className={style.markers}>
