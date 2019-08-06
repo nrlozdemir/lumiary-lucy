@@ -133,6 +133,48 @@ const metricSuffix = (number) => {
   return number
 }
 
+const numberFormatter = (number, digits = 1, ext = true) => {
+  number = parseInt(number)
+
+  if (number < 1e3) {
+    return number
+  }
+
+  const multiples = [
+    { m: 1e3, e: 'k' },
+    { m: 1e6, e: 'm' },
+    { m: 1e9, e: 'B' },
+    { m: 1e12, e: 'T' },
+    { m: 1e15, e: 'P' },
+    { m: 1e18, e: 'E' },
+  ]
+
+  const regex = /\.0+$|(\.[0-9]*[1-9])0+$/
+
+  let i
+  for (i = multiples.length - 1; i > 0; i--) {
+    if (number >= multiples[i].m) {
+      break
+    }
+  }
+
+  number = (number / multiples[i].m)
+    .toFixed(digits)
+    .replace(regex, '$1')
+
+  if (number.toString().substr(-1, 1) == 0) {
+    number = number.toString().replace('.0', '')
+  }
+
+  if (!!ext && ext === true) {
+    number = number + multiples[i].e
+  } else {
+    number = parseFloat(number)
+  }
+
+  return number
+}
+
 const strToColor = (str) => {
   str = str.toLowerCase().replace(/\s/g, '')
 
@@ -537,6 +579,7 @@ export {
   searchTermInText,
   shadeHexColor,
   metricSuffix,
+  numberFormatter,
   strToColor,
   getMaximumValueIndexFromArray,
   ucfirst,
