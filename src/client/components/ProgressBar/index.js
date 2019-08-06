@@ -9,6 +9,7 @@ import classnames from 'classnames'
 import PropTypes from 'prop-types'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import ToolTip from 'Components/ToolTip'
 
 /* eslint-disable react/prefer-stateless-function */
 const ProgressBar = ({ 
@@ -18,7 +19,8 @@ const ProgressBar = ({
   tickColor, 
   progressBarBackgroundColor,
   percentageBgColor,
-  progressBarShadowColor
+  progressBarShadowColor,
+  tickTooltipValue,
  }) => {
   const barClass = classnames(style.progressBar, customBarClass)
   const percentageClass = classnames(customPercentageClass)
@@ -34,6 +36,8 @@ const ProgressBar = ({
             width: `${width}%`, 
             background: percentageBgColor || colors.progressColor 
           }
+        
+        const tooltipId = '_' + Math.random().toString(36).substr(2, 9)
 
         return (
           <div
@@ -44,10 +48,19 @@ const ProgressBar = ({
             }}
           >
             {tickColor && (
-              <div 
+              <React.Fragment>
+                <div 
                 className={style.tick}
                 style={{ background: tickColor }}
-              />
+                data-tip={!!tickTooltipValue && tickTooltipValue}
+                data-for={`progress-tooltip${tooltipId}`}
+                />
+                {!!tickTooltipValue && <ToolTip
+                  effect="solid"
+                  smallTooltip
+                  id={`progress-tooltip${tooltipId}`}
+                />}
+              </React.Fragment>
             )}
             <div
               className={percentageClass}
