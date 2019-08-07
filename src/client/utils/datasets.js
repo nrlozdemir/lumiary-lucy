@@ -1004,4 +1004,5 @@ export {
   convertNumberArrIntoPercentages,
   convertIntoLibAndIndustryDoughnut,
   percentageManipulation,
+  percentageBeautifier,
 }

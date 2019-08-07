@@ -2,7 +2,7 @@ import React from 'react'
 import { Radar } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
 import { metricSuffix, customChartToolTip, ucfirst } from 'Utils'
-
+import { percentageBeautifier } from 'Utils/datasets'
 const plugins = [
   {
     beforeDraw: function(chart, easing) {
@@ -221,7 +221,7 @@ const RadarChart = (props) => {
           ticks: {
             stepSize,
             callback: function(value) {
-              return metricSuffix(value)
+              return percentageBeautifier(value) + '%'
             },
             backdropColor: 'transparent',
             fontSize: 10,
