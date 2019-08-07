@@ -11,6 +11,7 @@ import style from './style.scss'
 import classnames from 'classnames'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import { isDataSetEmpty } from 'Utils/datasets'
+import { formatToSmallText } from 'Utils/globals'
 
 const barPlugins = [
   {
@@ -86,6 +87,7 @@ const BarAndDoughnutChartModule = ({
   stackedChartData,
   loading = false,
 }) => {
+  console.log(stackedChartData, formatToSmallText)
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -109,7 +111,24 @@ const BarAndDoughnutChartModule = ({
                   barData={!loading ? stackedChartData : null}
                   datalabels={barCustoms.datalabels}
                   barSpacing={4}
+                  hideLabels={barCustoms.hideLabels}
+                  {...barCustoms}
                 />
+                {barCustoms.hideLabels && (
+                  <div className={style.labels}>
+                    {stackedChartData.labels &&
+                      stackedChartData.labels.map((label) => {
+                        return formatToSmallText[label.trim()] ? (
+                          <div className={style.label} data-text={label.trim()}>
+                            {formatToSmallText[label.trim()]}{' '}
+                            <i className="icon icon-Information" />
+                          </div>
+                        ) : (
+                          <div className={style.label}>{label}</div>
+                        )
+                      })}
+                  </div>
+                )}
               </div>
             )}
             {doughnutData && (

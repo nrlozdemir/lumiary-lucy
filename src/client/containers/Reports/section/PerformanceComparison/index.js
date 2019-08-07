@@ -90,6 +90,7 @@ class PerformanceComparison extends React.Component {
           dataLabelFunction: 'insertAfter',
           dataLabelInsert: '%',
           datalabels: true,
+          hideLabels: true,
         }}
         doughnutCustoms={{
           width: 280,
