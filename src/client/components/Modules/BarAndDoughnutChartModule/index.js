@@ -87,7 +87,6 @@ const BarAndDoughnutChartModule = ({
   stackedChartData,
   loading = false,
 }) => {
-  console.log(stackedChartData, formatToSmallText)
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
