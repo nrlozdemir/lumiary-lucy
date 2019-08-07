@@ -136,46 +136,46 @@ const VideoReleasesBarChartModule = (props) => {
       }))) ||
     []
 
-    const barChartOptions = {
-      ...options,
-      tooltips: customChartToolTip(colors, {
-        callbacks: {
-          title: () => '',
-          label: function(tooltipItem) {
-            const value = Math.abs(tooltipItem.yLabel)
-            if (tooltipItem.yLabel < 0) {
-              return `${metricSuffix(~~value)} ${metric.charAt(0).toUpperCase() +
-                metric.slice(1)}`
-            }
-            return `${Math.round(value / videoNormalizer)}% Videos`
+  const barChartOptions = {
+    ...options,
+    tooltips: customChartToolTip(colors, {
+      callbacks: {
+        title: () => '',
+        label: function (tooltipItem) {
+          const value = Math.abs(tooltipItem.yLabel)
+          if (tooltipItem.yLabel < 0) {
+            return `${metricSuffix(~~value)} ${metric.charAt(0).toUpperCase() +
+              metric.slice(1)}`
+          }
+          return `${Math.round(value / videoNormalizer)}% Videos`
+        },
+      },
+    }),
+    scales: {
+      xAxes: [
+        {
+          ...options.scales.xAxes[0],
+          ticks: {
+            ...options.scales.xAxes[0].ticks,
+            fontColor: colors.textColor,
+          },
+          gridLines: {
+            ...options.scales.xAxes[0].gridLines,
+            color: colors.chartStadiumBarBorder,
           },
         },
-      }),
-      scales: {
-        xAxes: [
-          {
-            ...options.scales.xAxes[0],
-            ticks: {
-              ...options.scales.xAxes[0].ticks,
-              fontColor: colors.textColor,
-            },
-            gridLines: {
-              ...options.scales.xAxes[0].gridLines,
-              color: colors.chartStadiumBarBorder,
-            },
+      ],
+      yAxes: [
+        {
+          ...options.scales.yAxes[0],
+          ticks: {
+            ...options.scales.yAxes[0].ticks,
+            stepSize,
           },
-        ],
-        yAxes: [
-          {
-            ...options.scales.yAxes[0],
-            ticks: {
-              ...options.scales.yAxes[0].ticks,
-              stepSize,
-            },
-          },
-        ],
-      },
-    }
+        },
+      ],
+    },
+  }
 
   return (
     <Module
