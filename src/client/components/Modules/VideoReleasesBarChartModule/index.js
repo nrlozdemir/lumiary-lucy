@@ -249,7 +249,6 @@ const VideoReleasesBarChartModule = (props) => {
               plugins={plugins}
             />
           </div>
-
           <div className={style.groupChartsWrapper}>
             {!!normalizedData &&
               !!normalizedData.length &&
