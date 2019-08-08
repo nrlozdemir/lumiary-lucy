@@ -243,9 +243,14 @@ const dark = {
     },
   },
   //reporst page
-  reportCardsBg:'#545b79',
-  reportCardContentBg: '#373f5b'
-  //reporst page
+  reportCardsBg: '#545b79',
+  reportCardContentBg: '#373f5b',
+
+  // doughnut circle background color
+  doughnutChartBackgroundColor: '#545b79',
+
+  // cv score percent difference
+  percentDifferenceColor: '#21243b',
 }
 
 const light = {
@@ -492,9 +497,14 @@ const light = {
     },
   },
   //reporst page
-  reportCardsBg:'#ffffff',
-  reportCardContentBg: '#f3f6f9'
-  //reporst page
+  reportCardsBg: '#ffffff',
+  reportCardContentBg: '#f3f6f9',
+
+  // doughnut circle background color
+  doughnutChartBackgroundColor: '#acb0be',
+
+  // cv score percent difference
+  percentDifferenceColor: '#505050',
 }
 
 const themes = {

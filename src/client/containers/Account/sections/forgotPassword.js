@@ -5,6 +5,7 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectForgotPassword } from 'Reducers/auth'
 import { Field, reduxForm, getFormSyncErrors } from 'redux-form'
 import { Link } from 'react-router-dom'
+import cx from 'classnames'
 
 import Input from 'Components/Form/Input'
 import AccountCard from 'Components/AccountCard'
@@ -101,15 +102,11 @@ class ForgotPassword extends Component {
           </div>
           <div className={style.submitArea}>
             <Button
-              customClass={style.buttonStyle}
+              customClass={cx(style.buttonStyle, style.button)}
               disable={!dirty || submitting || pristine || !isEmpty(errors)}
               buttonText="Send Password Reset Link"
             />
-            <Link
-              className={style.forgotPasswordLink}
-              style={colors.account.link || {}}
-              to={'/account/login'}
-            >
+            <Link className={style.forgotPasswordLink} to={'/account/login'}>
               Go back to <span className={style.active}>Sign In</span>
             </Link>
           </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pie } from 'react-chartjs-2'
 import style from './style.scss'
-import { customChartToolTip } from 'Utils'
+import { customChartToolTip, ucfirst } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
 
 function metricSuffix(number) {
@@ -14,7 +14,7 @@ function metricSuffix(number) {
   return number
 }
 
-const PacingPieChart = ({ data = {} }) => {
+const PacingPieChart = ({ data = {}, metric }) => {
   const { datasets = [] } = data
 
   return (
@@ -25,7 +25,7 @@ const PacingPieChart = ({ data = {} }) => {
             height={240}
             width={240}
             options={{
-              tooltips: {
+              tooltips: customChartToolTip(colors, {
                 callbacks: {
                   title: function(tooltipItem, data) {
                     const name =
@@ -41,27 +41,18 @@ const PacingPieChart = ({ data = {} }) => {
                         data.datasets[0] &&
                         data.datasets[0].data[tooltipItem['index']]) ||
                       ''
-                    return `${metricSuffix(parseInt(count) || 0)} Shares`
+                    return `${metricSuffix(parseInt(count) || 0)} ${ucfirst(metric)}`
                   },
                 },
-                backgroundColor: colors.tooltipBackground,
-                cornerRadius: 6,
-                titleFontColor: colors.chartTooltipColor,
-                titleFontStyle: 'normal',
-                mode: 'point',
-                bodyFontFamily: 'ClanOT',
-                titleFontFamily: 'ClanOT',
-                bodyFontColor: colors.chartTooltipColor,
                 xPadding: 12,
-                yPadding: 12,
-                bodyFontStyle: 'normal',
-                displayColors: false,
+                titleFontFamily: 'ClanOT',
+                bodyFontFamily: 'ClanOT',
                 //titleAlign: 'center',
                 //footerAlign: 'center',
                 //bodyAlign: 'center',
-                xPadding: 12,
-                yPadding: 12,
-              },
+                yAlign: 'top',
+                xAlign: 'center',
+              }),
               responsive: false,
               legend: {
                 display: false,

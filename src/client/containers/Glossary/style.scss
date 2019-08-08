@@ -179,6 +179,8 @@
           }
         }
         .mainContentItemContent {
+          display: flex;
+          flex-direction: column;
           margin-top: 30px;
           p {
             line-height: 26px;

@@ -9,7 +9,12 @@ import {
 } from 'Reducers/libraryDetail'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
-import { getMaximumValueIndexFromArray, getLabelWithSuffix } from 'Utils'
+import {
+  getMaximumValueIndexFromArray,
+  getLabelWithSuffix,
+  numberFormatter,
+  convertObjectIntoPercents,
+} from 'Utils'
 import { expectedNames } from 'Utils/globals'
 
 import {
@@ -24,77 +29,94 @@ import {
 
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
-function* getDoughnutChart({ payload: { LibraryDetailId, themeColors } }) {
+function* getDoughnutChart({ payload: { LibraryDetailId, videoId } }) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
 
-    const metric = 'views'
-
-    const competitors =
-      !!brand.competitors &&
-      !!brand.competitors.length &&
-      brand.competitors.map((c) => c.uuid)
-
-    const url = buildApiUrl(`/brand/${brand.uuid}/properties`, {
-      metric,
-      top: 20,
-      competitors,
-      daterange: '3months',
-    })
+    const url = buildApiUrl(
+      `/brand/${brand.uuid}/video/${videoId}/properties`,
+      { daterange: 'week' }
+    )
 
     const response = yield call(getDataFromApi, undefined, url, 'GET')
 
-    if (!!response && !!response.myLibrary) {
-      const highestBuckets = Object.keys(response.myLibrary).reduce(
-        (acc, key) => {
-          const dataVals = response.myLibrary[key]
-          const max = dataVals.reduce(
-            (prev, current) =>
-              parseInt(prev[metric]) > parseInt(current[metric])
-                ? prev
-                : current,
-            0
-          )
-          return [...acc, { property: key, ...max }]
-        },
-        []
-      )
+    if (!!response) {
+      // endpoint only sends back these props,
+      // and sometimes that shit is null, so just get up to 4 props that are not null
+      const possibleProps = [
+        'aspectRatio',
+        'duration',
+        'format',
+        'frameRate',
+        'pacing',
+        'resolution',
+      ]
 
-      const highestBucketsOrdered = _.slice(
-        _.orderBy(
-          highestBuckets,
-          (item) => (!!item[metric] ? item[metric] : 0),
-          ['desc']
-        ),
-        0,
-        4
-      )
+      const confirmedProps = possibleProps
+        .filter((prop) => !!response[`${prop}ThisVideoBucket`])
+        .slice(0, 4)
 
-      const vals = highestBucketsOrdered.reduce((acc, bucketItem, idx) => {
-        const { bucket, property, library_proportion } = bucketItem
+      const vals = confirmedProps.reduce((acc, prop) => {
+        const responseKeys =
+          !!response[prop] && !!Object.keys(response[prop]).length
+            ? Object.keys(response[prop])
+            : null
 
-        const max = {
-          label: getLabelWithSuffix(bucket, property),
-          percentage: Math.round(parseFloat(library_proportion) * 100),
+        if (responseKeys) {
+          const dataset = responseKeys.reduce((propVals, propKey) => {
+            if (!propKey.includes('libraryProportion')) {
+              const propBucket = propKey.split('.')[0]
+              return {
+                ...propVals,
+                [propBucket]: response[prop][propKey],
+              }
+            }
+            return propVals
+          }, {})
+
+          const datasetPercentages = convertObjectIntoPercents(dataset)
+          const datasetKeys = Object.keys(datasetPercentages)
+          const label = response[`${prop}ThisVideoBucket`]
+          const title = expectedNames[prop]
+
+          const max = {
+            label: prop === 'frameRate' ? `${label} FPS` : label,
+            percentage: datasetPercentages[label],
+          }
+
+          return [
+            ...acc,
+            {
+              max,
+              title,
+              key: prop,
+              doughnutChartValues: {
+                labels: datasetKeys,
+                datasets: [
+                  datasetKeys.reduce(
+                    (acc, key) => ({
+                      ...acc,
+                      data: [...acc.data, datasetPercentages[key]],
+                      backgroundColor: [
+                        ...acc.backgroundColor,
+                        key == label ? '#2FD7C4' : '#FFFFFF',
+                      ],
+                    }),
+                    {
+                      data: [],
+                      backgroundColor: [],
+                      label: title,
+                      borderColor: '#ACB0BE',
+                      hoverBackgroundColor: [],
+                    }
+                  ),
+                ],
+              },
+            },
+          ]
+        } else {
+          return acc
         }
-
-        return [
-          ...acc,
-          {
-            max,
-            key: property,
-            title: expectedNames[property],
-            doughnutChartValues: convertPropertiesIntoDatasets(response, {
-              metric,
-              property,
-              type: 'library',
-              hoverBg: false,
-              percentage: true,
-              borderColor: '#ACB0BE',
-              max: bucket,
-            }),
-          },
-        ]
       }, [])
 
       yield put(actions.getDoughnutChartSuccess(vals))
@@ -207,16 +229,7 @@ function* getDoughnutSectionInfoData({ payload }) {
     const { brand } = yield select(makeSelectAuthProfile())
 
     if (!!brand && !!videoId && !!dateRange && !!metric && !!infoData) {
-      const {
-        libraryMetricPercents,
-        industryMetricPercents,
-        libraryMetricDateSums,
-        industryMetricDateSums,
-        industryDateCounts,
-        videoPropertyAverage,
-        libraryPropertyAverage,
-        metricLibraryPercentChange,
-      } = yield call(
+      const response = yield call(
         getDataFromApi,
         undefined,
         buildApiUrl(`/brand/${brand.uuid}/video/${videoId}/compare`, {
@@ -226,6 +239,17 @@ function* getDoughnutSectionInfoData({ payload }) {
         }),
         'GET'
       )
+
+      const {
+        libraryMetricPercents,
+        industryMetricPercents,
+        libraryMetricDateSums,
+        industryMetricDateSums,
+        industryDateCounts,
+        videoPropertyAverage,
+        libraryPropertyAverage,
+        metricLibraryPercentChange,
+      } = response
 
       const {
         maxKeyLabel: libraryMaxKeyLabel,
@@ -285,16 +309,14 @@ function* getDoughnutSectionInfoData({ payload }) {
           industryMaxKey,
           industryMaxValue,
           lineChartData,
-          videoPropertyAverage: Math.floor(
-            videoPropertyAverage >= 1000
-              ? videoPropertyAverage / 1000
-              : videoPropertyAverage
+          videoPropertyAverage: numberFormatter(videoPropertyAverage, 0, false),
+          realVideoPropertyAverage: videoPropertyAverage,
+          libraryPropertyAverage: numberFormatter(
+            libraryPropertyAverage,
+            0,
+            false
           ),
-          libraryPropertyAverage: Math.floor(
-            libraryPropertyAverage >= 1000
-              ? libraryPropertyAverage / 1000
-              : libraryPropertyAverage
-          ),
+          realLibraryPropertyAverage: libraryPropertyAverage,
           propertyLibraryPercentChange: Math.floor(
             metricLibraryPercentChange * 100
           ),

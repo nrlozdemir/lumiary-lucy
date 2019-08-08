@@ -39,6 +39,7 @@ class LineChartSection extends React.Component {
                 yAxesStepSize={25}
                 options={{
                   tooltips: customChartToolTip(colors, {
+                    enabled: true,
                     callbacks: {
                       ...(!!modalData && !!sectionData
                         ? {

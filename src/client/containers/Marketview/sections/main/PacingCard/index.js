@@ -12,22 +12,48 @@ import style from 'Containers/Marketview/style.scss'
 import PacingPieChart from 'Components/Charts/MarketView/PacingPieChart'
 import classnames from 'classnames'
 
+import { dateRangeLabels } from 'Utils/globals'
 import { isDataSetEmpty } from 'Utils/datasets'
 import { pacingCard_DatasetOptions } from './options'
 import { isEmpty } from 'lodash'
 import RouterLoading from 'Components/RouterLoading'
 
 class PacingCard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      dateRange: '3months',
+      metric: 'views',
+    }
+  }
+
   componentDidMount() {
-    this.props.getPacingChartRequest()
+    const { metric, dateRange } = this.state
+    this.props.getPacingChartRequest({
+      metric,
+      dateRange,
+    })
   }
 
   render() {
+    const { metric, dateRange } = this.state
     const {
       pacingChartData: { data, loading, error },
     } = this.props
 
     const isDataEmpty = (!loading && isDataSetEmpty(data)) || isEmpty(data)
+    const { datasets = [], labels = [] } = data || {}
+    let maxPacing
+
+    if (datasets[0]) {
+      const { data: dataSet = [] } = datasets[0]
+      const maxIndex = dataSet.indexOf(Math.max(...dataSet))
+      if (labels[maxIndex]) {
+        maxPacing = labels[maxIndex]
+      }
+    }
+
+    const dateLabel = dateRangeLabels[dateRange]
 
     return (
       <ThemeContext.Consumer>
@@ -60,15 +86,17 @@ class PacingCard extends Component {
                   boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                 }}
               >
-                Past Month
+                {dateLabel}
               </span>
             </div>
 
             {!isDataEmpty && !loading && (
-              <PacingPieChart data={data} colors={colors} />
+              <PacingPieChart data={data} colors={colors} metric={metric}/>
             )}
             {!loading && (
-              <div className={style.marketViewCardChartTitle}>Medium Paced</div>
+              <div className={style.marketViewCardChartTitle}>
+                {!maxPacing ? `` : `${maxPacing} Paced`}
+              </div>
             )}
             <div
               className={classnames(
@@ -91,7 +119,7 @@ class PacingCard extends Component {
             </div>
 
             <div className={style.marketViewCardDescription}>
-              Based on the number of shares for competitors across all platforms
+              {`The top performing video pacing associated with the highest number of ${metric} for videos outside of your library in the ${dateLabel.toLowerCase()}.`}
             </div>
             <Link
               to="/marketview/competitor"

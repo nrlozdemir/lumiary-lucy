@@ -2,8 +2,9 @@ import { call, put, takeLatest, all, select } from 'redux-saga/effects'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, types } from 'Reducers/panoptic'
 import moment from 'moment'
+import querystring from 'querystring'
 
-import { getDateBucketFromRange, normalize, sortObject } from 'Utils'
+import { getDateBucketFromRange, normalize, sortObject, getColorPercents } from 'Utils'
 
 import {
   convertDataIntoDatasets,
@@ -100,7 +101,7 @@ function* getFilteringSectionData({ data }) {
       dateBucket: 'none',
       display: 'percentage',
       property: [property],
-      url: '/report',
+      url: '/report/reporter',
       brands: [brand.uuid],
     }
 
@@ -108,16 +109,26 @@ function* getFilteringSectionData({ data }) {
       options.limit = 4
     }
 
-    const doughnutData = yield call(getDataFromApi, options)
+    const doughnutData = yield call(
+      getDataFromApi,
+      undefined,
+      `${options.url}?${querystring.stringify(options)}`,
+      'GET'
+    )
 
     const dateBucket = getDateBucketFromRange(dateRange)
 
     const stackedChartData =
       dateBucket !== 'none'
-        ? yield call(getDataFromApi, {
-            ...options,
-            dateBucket,
-          })
+        ? yield call(
+            getDataFromApi,
+            undefined,
+            `${options.url}?${querystring.stringify({
+              ...options,
+              dateBucket,
+            })}`,
+            'GET'
+          )
         : { data: {} }
 
     if (
@@ -150,6 +161,7 @@ function* getFilteringSectionData({ data }) {
       throw 'Error fetching FilteringSection data'
     }
   } catch (err) {
+    console.log(err)
     yield put(
       // empty data
       actions.getFilteringSectionDataSuccess({
@@ -265,10 +277,12 @@ function* getCompareSharesData({ data: { dateRange } }) {
       ),
     ])
 
+    const formattedPayload = getColorPercents(payload)
+
     yield put(
       actions.getCompareSharesDataSuccess(
         percentageManipulation(
-          radarChartCalculate(compareSharesData(payload, parameters))
+          radarChartCalculate(compareSharesData(formattedPayload, parameters))
         )
       )
     )
@@ -405,19 +419,19 @@ function* getTopPerformingFormatData({ data = {} }) {
         })
 
         const nonGreyChartColors = ['#2FD7C4', '#8562F3', '#5292E5', '#ff556f']
+        const customChartColors = ['#2FD7C4', '#8562F3', '#5292E5', '#ffffff']
         Object.keys(payload.dates[weekday]).forEach((propertyBucket, idx) => {
           if (!propertyBuckets[propertyBucket]) {
             propertyBuckets[propertyBucket] = {
               label: propertyBucket,
               fill: false,
               lineTension: 0.1,
-              backgroundColor: chartColors[idx],
-              borderColor: chartColors[idx],
-              hoverBackgroundColor: chartColors[idx],
+              backgroundColor: customChartColors[idx],
+              borderColor: customChartColors[idx],
+              hoverBackgroundColor: customChartColors[idx],
               data: [],
             }
           }
-
           const propertyBucketValue = payload.dates[weekday][propertyBucket]
           propertyBuckets[propertyBucket].data.unshift(propertyBucketValue)
         })

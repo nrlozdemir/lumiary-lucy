@@ -61,6 +61,8 @@
     }
   }
   .content {
+    display: flex;
+    flex-direction: column;
     font-family: $font-family-ClanOTNews;
     p {
       font-size: 14px;

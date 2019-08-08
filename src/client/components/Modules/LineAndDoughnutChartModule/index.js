@@ -233,11 +233,11 @@ const LineAndDoughnutChartModule = ({
                           ],
                           backgroundColor: [
                             datasetMap[property[0].name].backgroundColor,
-                            '#acb0be',
+                            colors.doughnutChartBackgroundColor,
                           ],
                           hoverBackgroundColor: [
                             datasetMap[property[0].name].backgroundColor,
-                            '#acb0be',
+                            colors.doughnutChartBackgroundColor,
                           ],
                         },
                       ],

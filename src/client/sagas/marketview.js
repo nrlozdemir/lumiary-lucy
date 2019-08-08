@@ -21,8 +21,9 @@ import {
   convertPropertiesIntoDatasets,
 } from 'Utils/datasets'
 
-import { dayOfWeek, chartColors } from 'Utils/globals'
+import { dayOfWeek, chartColors, formatToS3Examples } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
+import { isNumber } from 'util'
 
 function* getCompetitorVideosApi({ payload }) {
   const requestObject = {
@@ -142,19 +143,92 @@ function* getPlatformTopVideosMarketview({
     )
 
     // preliminary to convertMultiRequestDataIntoDatasets structure
-    response = Object.keys(response).reduce((acc, key) => {
+    let returnData
+    returnData = Object.keys(response).reduce((acc, key) => {
       acc[key] = {
         data: { [key]: response[key] },
       }
       return acc
     }, {})
 
+    if (
+      !!response &&
+      !!property &&
+      !!Object.keys(response) &&
+      !!Object.keys(response)[0] &&
+      !!response[Object.keys(response)[0]][property] &&
+      !!Object.values(response[Object.keys(response)[0]][property]).length &&
+      Object.values(response[Object.keys(response)[0]][property]).length > 4
+    ) {
+      let sumAll = {}
+      let cumulative = {}
+      returnData = {}
+
+      Object.keys(response).map((i, x) => {
+        !!response[i] &&
+          Object.keys(response[i]).map((j, y) => {
+            !!response[i][j] &&
+              Object.keys(response[i][j]).map((k, z) => {
+                if (!sumAll[k]) {
+                  sumAll[k] = 0
+                }
+                sumAll[k] += !!response[i][j][k] && response[i][j][k]
+              })
+          })
+      })
+
+      !!sumAll &&
+        Object.keys(sumAll).map((el, i) => {
+          cumulative[i] = {
+            key: el,
+            value: sumAll[el],
+          }
+        })
+
+      const cumulativeTopValues =
+        !!cumulative &&
+        Object.values(cumulative)
+          .sort((a, b) => (b.value > a.value ? 1 : -1))
+          .filter((el, i) => {
+            if (i < 4) {
+              return el
+            }
+          })
+
+      !!cumulativeTopValues &&
+        cumulativeTopValues.map((el, i) => {
+          Object.keys(response).map((i, x) => {
+            !!response[i] &&
+              Object.keys(response[i]).map((j, y) => {
+                !!response[i][j] &&
+                  Object.keys(response[i][j]).map((k, z) => {
+                    if (k == el.key) {
+                      if (!returnData[i]) {
+                        returnData[i] = {}
+                      }
+                      if (!returnData[i]['data']) {
+                        returnData[i]['data'] = {}
+                      }
+                      if (!returnData[i]['data'][i]) {
+                        returnData[i]['data'][i] = {}
+                      }
+                      if (!returnData[i]['data'][i][j]) {
+                        returnData[i]['data'][i][j] = {}
+                      }
+                      returnData[i]['data'][i][j][k] = response[i][j][k]
+                    }
+                  })
+              })
+          })
+        })
+    }
+
     yield put(
       actions.getPlatformTopVideosSuccess(
         percentageManipulation(
           convertMultiRequestDataIntoDatasets(
             {
-              ...response,
+              ...returnData,
             },
             {
               ...options,
@@ -270,7 +344,9 @@ function* getSimilarProperties(params = {}) {
   }
 }
 
-function* getBubbleChartData() {
+function* getBubbleChartData({
+  payload: { metric = 'views', dateRange = '3months' },
+}) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
 
@@ -280,10 +356,10 @@ function* getBubbleChartData() {
       brand.competitors.map((c) => c.uuid)
 
     const options = {
+      metric,
       competitors,
-      metric: 'views',
       property: 'color',
-      daterange: 'month',
+      daterange: dateRange,
     }
 
     const response = yield call(
@@ -351,10 +427,11 @@ function* getBubbleChartData() {
   }
 }
 
-function* getPacingChartData() {
+function* getPacingChartData({
+  payload: { metric = 'views', dateRange = 'month' },
+}) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
-    const metric = 'shares'
 
     const competitors =
       !!brand.competitors &&
@@ -364,8 +441,8 @@ function* getPacingChartData() {
     const url = buildApiUrl(`/brand/${brand.uuid}/properties`, {
       top: 20,
       metric,
+      dateRange,
       competitors,
-      daterange: 'month',
     })
 
     const response = yield call(getDataFromApi, undefined, url, 'GET')
@@ -389,28 +466,24 @@ function* getPacingChartData() {
   }
 }
 
-function* getFormatChartData() {
+function* getFormatChartData({
+  payload: { metric = 'views', dateRange = 'week' },
+}) {
   try {
     const profile = yield select(makeSelectAuthProfile())
     const competitors = getBrandAndCompetitors(profile)
 
+    const dateBucket = getDateBucketFromRange(dateRange)
+
     const options = {
-      metric: 'shares',
-      dateRange: '3months',
+      metric,
+      limit: 4,
+      dateRange,
+      dateBucket,
       property: ['format'],
-      dateBucket: 'dayOfWeek',
       display: 'none',
       platform: 'all',
       brands: [...competitors],
-      limit: 4,
-    }
-
-    // video is still being pulled from mock
-    const video = {
-      videoUrl:
-        'https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/12-years-ago-today-Kobe-dropped-81.mp4',
-      poster:
-        'https://s3.amazonaws.com/quickframe-media-qa/lumiere/Demo/thumb/12-years-ago-today-Kobe-dropped-81.jpg',
     }
 
     const response = yield call(getDataFromApi, options, '/report')
@@ -454,10 +527,20 @@ function* getFormatChartData() {
         count: formatCountsObj[formatKey],
       }))
 
+      // order formats
+      const vals = percentageManipulation(formatCountsArr).sort(
+        (a, b) => b.count - a.count 
+      )
+
+      // pull vid from highest bucket
+      const video = {
+        videoUrl: formatToS3Examples[vals[0].name]
+      }
+
       yield put(
         actions.getFormatChartSuccess({
           currentDay,
-          data: percentageManipulation(formatCountsArr),
+          data: vals,
           video,
         })
       )
@@ -707,7 +790,15 @@ function* getTopPerformingPropertiesByTimeData({
       options.limit = 4
     }
 
-    const data = yield call(getDataFromApi, options, '/report')
+    const data = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/brand/${brand.uuid}/propertyperformance`, {
+        daterange: dateRange,
+        property: property,
+      }),
+      'GET'
+    )
 
     yield put(
       actions.getTopPerformingTimeSuccess(

@@ -28,6 +28,7 @@ export const options = {
         gridLines: {
           display: false,
           tickMarkLength: 15,
+          drawBorder: false,
         },
         ticks: {
           fontSize: 12,

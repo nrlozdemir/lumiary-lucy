@@ -323,7 +323,7 @@ const Selector = (props) => {
   } else if (url[1] == 'library' && url[2] && url[2].match(/(\d+)/gm)) {
     return {
       leftSide: (
-        <BackTo {...url} title="Back To Overview" themes={props.themes} />
+        <BackTo {...url} title="Back To Library" themes={props.themes} />
       ),
       navigation: <NavTitle {...props} />,
     }

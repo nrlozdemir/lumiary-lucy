@@ -48,6 +48,27 @@ const getLabelWithSuffix = (label, property) => {
   return `${label} ${suffix}`
 }
 
+const getPropLabel = (label, prop) => {
+  let suffix
+
+  switch (prop) {
+    case 'duration':
+      suffix = 's'
+      break
+    case 'aspectRatio':
+      suffix = ' Aspect Ratio'
+      break
+    case 'pacing':
+      suffix = ' Pacing'
+      break
+    case 'resolution':
+      suffix = ' Resolution'
+    default:
+      suffix = ''
+  }
+  return `${label}${suffix}`
+}
+
 const splitCamelCaseToString = (s) => ucfirst(s.split(/(?=[A-Z])/).join(' '))
 
 function socialIconSelector(key, isSquare) {
@@ -133,6 +154,46 @@ const metricSuffix = (number) => {
   return number
 }
 
+const numberFormatter = (number, digits = 1, ext = true) => {
+  number = parseInt(number)
+
+  if (number < 1e3) {
+    return number
+  }
+
+  const multiples = [
+    { m: 1e3, e: 'k' },
+    { m: 1e6, e: 'm' },
+    { m: 1e9, e: 'B' },
+    { m: 1e12, e: 'T' },
+    { m: 1e15, e: 'P' },
+    { m: 1e18, e: 'E' },
+  ]
+
+  const regex = /\.0+$|(\.[0-9]*[1-9])0+$/
+
+  let i
+  for (i = multiples.length - 1; i > 0; i--) {
+    if (number >= multiples[i].m) {
+      break
+    }
+  }
+
+  number = (number / multiples[i].m).toFixed(digits).replace(regex, '$1')
+
+  if (number.toString().substr(-1, 1) == 0) {
+    number = number.toString().replace('.0', '')
+  }
+
+  if (!!ext && ext === true) {
+    number = number + multiples[i].e
+  } else {
+    number = parseFloat(number)
+  }
+
+  return number
+}
+
 const strToColor = (str) => {
   str = str.toLowerCase().replace(/\s/g, '')
 
@@ -149,7 +210,7 @@ const strToColor = (str) => {
     'blue-purple': '#79609b',
     purple: '#923683',
     'red-purple': '#b83057',
-    gray: '#808080'
+    gray: '#808080',
   }
   return color[str]
 }
@@ -407,11 +468,14 @@ const customChartToolTip = (themes, customOptions = {}, forceData) => {
     titleFontStyle: 'bold',
     mode: 'point',
     titleFontFamily: 'ClanOTBold',
+    bodyFontFamily: 'ClanOT',
     bodyFontColor: themes.chartTooltipColor,
     xPadding: 8,
     yPadding: 12,
     bodyFontStyle: 'bold',
     displayColors: false,
+    titleFontSize: 12,
+    bodyFontSize: 12,
     callbacks: {
       title: () => '',
       label: function(tooltipItem, data) {
@@ -432,7 +496,7 @@ const customChartToolTip = (themes, customOptions = {}, forceData) => {
 
 const getModuleTerms = (key, data) => {
   const {
-    glossary: { terms },
+    glossary: { terms = {} },
   } = data
   const moduleObject =
     data &&
@@ -467,7 +531,174 @@ const sortObject = (o = {}, reverse = false) => {
   return keysToUse.reduce((r, k) => ((r[k] = o[k]), r), {})
 }
 
+const doughnutChartDataWithOpacity = (
+  chartData,
+  colors,
+  primaryColor = '#2FD7C4'
+) => {
+  let backgroundColor =
+    chartData && chartData.datasets ? chartData.datasets[0].backgroundColor : []
+  const data = chartData && chartData.datasets && chartData.datasets[0].data
+  let newData = []
+  let primaryIdx = 0
+
+  //reorder colors so that unique color will be the first item
+  backgroundColor = backgroundColor.reduce(
+    (accumulator, currentColor, index) => {
+      if (currentColor === primaryColor) {
+        newData = [data[index], ...newData]
+        primaryIdx = index
+        return [currentColor, ...accumulator]
+      }
+      newData = [...newData, data[index]]
+      return [...accumulator, currentColor]
+    },
+    []
+  )
+
+  if (backgroundColor && backgroundColor.length > 2) {
+    backgroundColor = backgroundColor.map((color, index) => {
+      let opacity = 100
+      if (index > 1) {
+        opacity = opacity - (index - 1) * 15
+      }
+      opacity = (opacity / 100).toFixed(2)
+      const { r, g, b } = hexToRgb(index > 0 ? colors.textColor : color)
+      const newColor = `rgba(${r}, ${g}, ${b}, ${opacity})`
+      return newColor
+    })
+  }
+
+  let labels = [...chartData.labels]
+
+  if (!!primaryIdx) {
+    const labelToMove = labels[primaryIdx]
+    labels.splice(primaryIdx, 1)
+    labels = [labelToMove, ...labels]
+  }
+
+  return {
+    ...chartData,
+    labels,
+    datasets: [
+      {
+        ...chartData.datasets,
+        data: newData,
+        backgroundColor,
+      },
+    ],
+  }
+}
+
+const getColorPercents = (input, audience = false) => {
+  const orderedColors = [
+    'Red',
+    'Orange-Red',
+    'Orange',
+    'Yellow-Orange',
+    'Yellow',
+    'Yellow-Green',
+    'Green',
+    'Blue-Green',
+    'Blue',
+    'Blue-Purple',
+    'Purple',
+    'Red-Purple',
+  ]
+
+  if(audience) {
+    return Object.keys(input).reduce((accumulator, gender) => {
+      accumulator[gender] = {}
+
+      Object.keys(input[gender]).forEach((property) => {
+        if(property === 'color') {
+          accumulator[gender][property] = {}
+          let sum = 0
+          orderedColors.forEach((color) => {
+            sum += (input[gender][property][color.toLowerCase()] || 0)
+          })
+
+          orderedColors.forEach((color) => {
+            const thisNum = input[gender][property][color.toLowerCase()] || 0
+            const percentage = thisNum / sum
+            const formattedPercentage = (isNaN(parseInt((percentage * 100).toFixed(0)))) ? 0 : parseInt((percentage * 100).toFixed(0))
+            accumulator[gender][property][color.toLowerCase()] = formattedPercentage
+          })                
+        } else {
+          accumulator[gender][property] = input[gender][property]
+        }
+      })
+
+      return accumulator
+    }, {})
+  } else {
+    return input.map((inputItem) => {
+      return Object.keys(inputItem).reduce((accumulator, key) => {
+        
+        switch(key) {
+          case 'data':
+            accumulator[key] = {}
+
+            Object.keys(inputItem[key]).forEach((brandName) => {
+              accumulator[key][brandName] = {}
+
+              Object.keys(inputItem[key][brandName]).forEach((property) => {
+                if(property === 'color') {
+                  accumulator[key][brandName][property] = {}
+                  let sum = 0
+                  orderedColors.forEach((color) => {
+                    sum += (inputItem[key][brandName][property][color.toLowerCase()] || 0)
+                  })
+
+                  orderedColors.forEach((color) => {
+                    const thisNum = inputItem[key][brandName][property][color.toLowerCase()] || 0
+                    const percentage = thisNum / sum
+                    const formattedPercentage = (isNaN(parseInt((percentage * 100).toFixed(0)))) ? 0 : parseInt((percentage * 100).toFixed(0))
+                    accumulator[key][brandName][property][color.toLowerCase()] = formattedPercentage
+                  })                
+                } else {
+                  accumulator[key][brandName][property] = inputItem[key][brandName][property]
+                }
+              })
+            })
+          break;
+
+          case 'platform':
+            accumulator[key] = inputItem[key]
+          break;        
+        }
+
+        return accumulator
+      }, {})
+    })    
+  }
+}
+
+/*
+  Takes an object like {1:1: "1", 4:3: "5", 16:9: "376", 4:5: "141"},
+  and converts it into percents
+ */
+const convertObjectIntoPercents = (obj = {}) => {
+  const vals = Object.values(obj)
+
+  if (!!vals.length) {
+    const total = vals.reduce((acc, curr) => (acc += parseFloat(curr)), 0)
+    const percentageObj = Object.keys(obj).reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: !!total ? Math.round(parseFloat(obj[key] / total) * 100) : 0,
+      }),
+      {}
+    )
+    return percentageObj
+  } else {
+    return obj
+  }
+}
+
 export {
+  getPropLabel,
+  convertObjectIntoPercents,
   sortObject,
   randomKey,
   socialIconSelector,
@@ -475,6 +706,7 @@ export {
   searchTermInText,
   shadeHexColor,
   metricSuffix,
+  numberFormatter,
   strToColor,
   getMaximumValueIndexFromArray,
   ucfirst,
@@ -497,4 +729,6 @@ export {
   getProfileObjectWithBrand,
   customChartToolTip,
   getModuleTerms,
+  doughnutChartDataWithOpacity,
+  getColorPercents,
 }

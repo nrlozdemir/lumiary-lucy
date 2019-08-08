@@ -149,6 +149,7 @@ class ChangePassword extends Component {
           </div>
           <div className={style.submitArea}>
             <Button
+              customClass={style.buttonStyle}
               disable={!dirty || submitting || pristine || !isEmpty(errors)}
               buttonText="Continue"
             />

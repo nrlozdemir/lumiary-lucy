@@ -7,7 +7,9 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import DownArrowCircle from 'Components/Icons/DownArrowCircle'
 import { actions } from 'Reducers/libraryDetail'
-import { hexToRgb } from 'Utils'
+import { doughnutChartDataWithOpacity, getPropLabel } from 'Utils'
+import { isDataSetEmpty } from 'Utils/datasets'
+import cx from 'classnames'
 
 class DoughnutCard extends React.Component {
   render() {
@@ -22,51 +24,10 @@ class DoughnutCard extends React.Component {
       videoId,
       colors,
     } = this.props
-    let backgroundColor =
-      chartData && chartData.datasets
-        ? chartData.datasets[0].backgroundColor
-        : []
-    const data = chartData && chartData.datasets && chartData.datasets[0].data
-    let newData = []
-    const primaryColor = '#2FD7C4'
-    // const secondaryColor = '#505050'
 
-    //reorder colors so that unique color will be the first item
-    backgroundColor = backgroundColor.reduce(
-      (accumulator, currentColor, index) => {
-        if (currentColor === primaryColor) {
-          newData = [data[index], ...newData]
-          return [currentColor, ...accumulator]
-        }
-        newData = [...newData, data[index]]
-        return [...accumulator, currentColor]
-      },
-      []
-    )
+    const newChartData = doughnutChartDataWithOpacity(chartData, colors)
 
-    if (backgroundColor && backgroundColor.length > 2) {
-      backgroundColor = backgroundColor.map((color, index) => {
-        let opacity = 100
-        if (index > 1) {
-          opacity = opacity - (index - 1) * 15
-        }
-        opacity = (opacity / 100).toFixed(2)
-        const { r, g, b } = hexToRgb(index > 0 ? colors.textColor : color)
-        const newColor = `rgba(${r}, ${g}, ${b}, ${opacity})`
-        return newColor
-      })
-    }
-
-    const newChartData = {
-      ...chartData,
-      datasets: [
-        {
-          ...chartData.datasets,
-          data: newData,
-          backgroundColor,
-        },
-      ],
-    }
+    const isEmpty = isDataSetEmpty(chartData)
 
     return (
       <ThemeContext.Consumer>
@@ -94,7 +55,7 @@ class DoughnutCard extends React.Component {
                 }}
               >
                 <p className="font-secondary-second font-size-12 text-center">
-                  {!!duration ? duration : maxLabel}
+                  {!!duration && duration !== '00:00:00' ? duration : maxLabel}
                 </p>
               </div>
               <div className={style.doughnutChartContainer}>
@@ -108,11 +69,19 @@ class DoughnutCard extends React.Component {
                   datasetsBorderColor={colors.moduleBackground}
                   datasetsHoverBorderColor={colors.moduleBackground}
                 />
+                {isEmpty && (
+                  <div className={cx(style.textBold, style.emptyDoughnut)}>
+                    No Data Available
+                  </div>
+                )}
                 <p>
                   <span className={style.textBold}>{maxPercentage}% </span>
                   of your library
                   <br /> is shot in
-                  <span className={style.textBold}> {maxLabel}</span>
+                  <span className={style.textBold}>
+                    {' '}
+                    {getPropLabel(maxLabel, identifier)}
+                  </span>
                 </p>
               </div>
             </div>

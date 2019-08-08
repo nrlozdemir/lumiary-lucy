@@ -25,6 +25,8 @@ export const chartColors = [
 
 export const compareBrandChartColors = ['#2FD7C4', '#5292E5']
 
+export const CVScoreChartColors = ['#fff', '#ccc', '#eee', '#000']
+
 export const weeks = ['Week1', 'Week2', 'Week3', 'Week4']
 export const dayOfWeek = [
   'Sunday',
@@ -86,7 +88,38 @@ export const moduleNames = [
   'PerformanceComparisonModule',
   'VideoReleasesBarChartModule',
 ]
-
+export const dateRangeLabels = {
+  week: 'Past Week',
+  month: 'Past Month',
+  '3months': 'Past 3 Months',
+}
 export const moduleIds = {
   'Panoptic/Top-Performing-Formats-This-Week-By-CV-Score': '456456456',
+}
+export const formatToS3Examples = {
+  'User Generated (Animation)': null,
+  'User Generated (Live Action)': `${mediaUrl}/asset/formats/User+Generated+(Live+Action).mp4`,
+  'Professional (Live Action)': `${mediaUrl}/asset/formats/Professional+(Live+Action).mp4`,
+  'Professional (Animation)': `${mediaUrl}/asset/formats/Professional+(Animation).mp4`,
+  'Professional (Live Action + Animation)': `${mediaUrl}/asset/formats/Professional+(Live+Action+%2B+Animation).mp4`,
+  GIF: `${mediaUrl}/asset/formats/GIF.mp4`,
+  Cinemagraph: `${mediaUrl}/asset/formats/Cinemagraph.mp4`,
+  'Stop Motion': `${mediaUrl}/asset/formats/Stop+Motion.mp4`,
+  Photograph: `${mediaUrl}/asset/formats/Photograph.mp4`,
+  'Event Coverage': `${mediaUrl}/asset/formats/Event+Coverage.mp4`,
+  Interview: `${mediaUrl}/asset/formats/Interview.mp4`,
+  Highlight: `${mediaUrl}/asset/formats/Highlight.mp4`,
+  Instructional: `${mediaUrl}/asset/formats/Instructional.mp4`,
+  Drone: `${mediaUrl}/asset/formats/Drone.mp4`,
+  GoPro: `${mediaUrl}/asset/formats/GoPro.mp4`,
+  'Top Down': `${mediaUrl}/asset/formats/Top+Down.mp4`,
+  'Hands Only': `${mediaUrl}/asset/formats/Hands+Only.mp4`,
+  Unboxing: `${mediaUrl}/asset/formats/Unboxing.mp4`,
+  '360': null,
+  'Tutorial (includes DIY & Recipe)': `${mediaUrl}/asset/formats/Tutorial+(includes+DIY+%26+Recipe).mp4`,
+  Explainer: `${mediaUrl}/asset/formats/`,
+  Testimonial: `${mediaUrl}/asset/formats/Testimonial.mp4`,
+  'Product Explainer': `${mediaUrl}/asset/formats/Product+Explainer.mp4`,
+  'Virtual Reality': `${mediaUrl}/asset/formats/Virtual+Reality.mp4`,
+  Parallax: `${mediaUrl}/asset/formats/Parallax.mp4`,
 }

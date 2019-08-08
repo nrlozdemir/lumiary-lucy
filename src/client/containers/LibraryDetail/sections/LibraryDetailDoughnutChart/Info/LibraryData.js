@@ -5,6 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import style from '../style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
+import { doughnutChartDataWithOpacity } from 'Utils'
 import {
   makeSelectInfoShowSection,
   makeSelectInfoModalData,
@@ -14,7 +15,6 @@ import cx from 'classnames'
 class LibraryData extends React.Component {
   render() {
     const { modalData, loading } = this.props
-    
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -30,7 +30,10 @@ class LibraryData extends React.Component {
                   height={180}
                   displayDataLabels={false}
                   cutoutPercentage={50}
-                  data={modalData.libraryChartData}
+                  data={doughnutChartDataWithOpacity(
+                    modalData.libraryChartData,
+                    colors,
+                  )}
                 />
                 <p className="pt-32">
                   <span className={style.duskRound} />
@@ -45,9 +48,11 @@ class LibraryData extends React.Component {
                 </p>
               </div>
             ) : (
-              <div className={cx(style.emptyData, {
-                [style['emptyData--loading']]: loading
-              })}>
+              <div
+                className={cx(style.emptyData, {
+                  [style['emptyData--loading']]: loading,
+                })}
+              >
                 {!loading ? 'No Data Available' : ''}
               </div>
             )}

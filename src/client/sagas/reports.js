@@ -4,7 +4,7 @@ import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
 
 import querystring from 'querystring'
-
+import { sortObject, getColorPercents } from 'Utils'
 import {
   convertDataIntoDatasets,
   radarChartCalculate,
@@ -230,11 +230,14 @@ function* getContentVitalityScoreData({ payload = {} }) {
   const { dateRange, platform, report = {} } = payload
   const { brands = [] } = report
   try {
+    const { brand } = yield select(makeSelectAuthProfile())
+
     const response = yield call(
       getDataFromApi,
       undefined,
       `/report/compare/brands?${querystring.stringify({
         brands: brands,
+        brandUuid: brand.uuid,
         property: 'cvScore',
         mode: 'sumVideos',
         daterange: dateRange,
@@ -245,7 +248,7 @@ function* getContentVitalityScoreData({ payload = {} }) {
 
     yield put(
       actions.getContentVitalityScoreDataSuccess(
-        percentageManipulation({ data: response, platform})
+        percentageManipulation({ data: response, platform })
       )
     )
   } catch (err) {
@@ -261,28 +264,54 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
 
     // const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
+    const platform = 'all'
+    const property = 'duration'
+
     const parameters = {
       dateRange,
+      platform,
       metric: 'views',
-      property: ['duration'],
+      property: [property],
       dateBucket: 'none',
       brands: [...report.brands],
-      platform: 'all',
       limit: 4,
+      display: 'percentage',
     }
 
-    const payload = yield call(getDataFromApi, parameters, '/report')
+    console.log(property)
+    const response = yield call(
+      getDataFromApi, 
+      undefined, 
+      `/report/compare/brands/property?${querystring.stringify({
+        brands: [...report.brands],
+        dateRange,
+        platform,
+        metric: 'views',
+        property,
+      })}`, 
+      'GET'
+    )
 
-    if (!!payload && !!payload.data) {
-      const legend = Object.keys(payload.data).map((b, idx) => ({
+    if (!!response && !!response.data) {
+      const sortedResponse = Object.keys(response.data).reduce(
+        (sorted, key) => {
+          sorted[key] = {}
+          sorted[key][property] = sortObject(response.data[key][property])
+          return sorted
+        },
+        {}
+      )
+
+      const legend = Object.keys(sortedResponse).map((b, idx) => ({
         label: b,
         color: idx === 1 ? 'coral-pink' : 'cool-blue',
       }))
+
       yield put(
         actions.getVideoComparisonDataSuccess({
           legend,
           ...convertDataIntoDatasets(
-            percentageManipulation(payload),
+            percentageManipulation({ data: sortedResponse, platform }),
             parameters,
             {
               compareBrands: true,
@@ -294,6 +323,7 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
       throw new Error('Compare Brands getVideoComparisonDataError')
     }
   } catch (err) {
+    console.log(err)
     yield put(actions.getVideoComparisonDataError(err))
   }
 }
@@ -353,7 +383,7 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
     // const competitors = getBrandAndCompetitors(profile)
 
     // const filteredCompetitors = getFilteredCompetitors(competitors, report)
-
+console.log('getColorComparisonData')
     const parameters = {
       dateRange,
       metric,
@@ -364,7 +394,7 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
 
     if (!!report && !!report.brands && !!report.brands.length) {
       // faster to split it up
-      const [brand1, brand2] = yield all([
+      const colorPaylod = yield all([
         call(
           getDataFromApi,
           { ...parameters, brands: report.brands[0] },
@@ -376,6 +406,8 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
           '/report'
         ),
       ])
+
+      const [brand1, brand2] = getColorPercents(colorPaylod)
 
       const payload = { data: { ...brand1.data, ...brand2.data } }
 

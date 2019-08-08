@@ -75,7 +75,7 @@ class Competitors extends Component {
           >
             Request or remove a competitor
           </Link>
-          <Button buttonText="Continue" />
+          <Button buttonText="Continue" customClass={style.button} />
         </div>
       </AccountCard>
     )

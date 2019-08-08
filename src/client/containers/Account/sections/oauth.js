@@ -80,7 +80,7 @@ class OAuth extends Component {
 
           <div className={style.submitArea}>
             <Button
-              customClass={style.buttonStyle}
+              customClass={cx(style.buttonStyle, style.button)}
               disable={
                 !Object.keys(connects).filter(
                   (connect) => connects[connect].connected

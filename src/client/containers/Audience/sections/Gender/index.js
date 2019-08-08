@@ -7,8 +7,31 @@ import Module from 'Components/Module'
 import HorizontalBarChart from 'Components/Charts/HorizontalBarChart'
 import { barChartOptions } from './options'
 import { isDataSetEmpty } from 'Utils/datasets'
+import Legend from 'Components/Legend'
 
 import style from '../../style.scss'
+
+const renderLegend = (legend) => {
+  if (!!legend && !legend.length) {
+    return null
+  }
+
+  return (
+    <div className={style.headerLabel}>
+      <div className={'d-flex align-items-center justify-content-center'}>
+        {!!legend &&
+          !!legend.length &&
+          legend.map((item, idx) => (
+            <Legend
+              key={`colorTempLegend_${idx}`}
+              color={item.color}
+              label={item.label}
+            />
+          ))}
+      </div>
+    </div>
+  )
+}
 
 class GenderSection extends React.Component {
   callBack = (data, moduleKey) => {
@@ -75,20 +98,10 @@ class GenderSection extends React.Component {
             placeHolder: 'Date',
           },
         ]}
-        legend={
-          <div className={style.headerLabel}>
-            <div className="d-flex align-items-center justify-content-center">
-              <div className="d-flex align-items-center mr-32">
-                <span className={style.redRound} />
-                <p>Male</p>
-              </div>
-              <div className="d-flex align-items-center mr-32">
-                <span className={style.duskRound} />
-                <p>Female</p>
-              </div>
-            </div>
-          </div>
-        }
+        legend={renderLegend([
+          { label: 'Male', color: 'coral-pink' },
+          { label: 'Female', color: 'cool-blue' },
+        ])}
       >
         <div className={style.audienceContainer}>
           <div className={style.container}>

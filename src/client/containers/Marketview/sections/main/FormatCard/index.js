@@ -13,10 +13,20 @@ import formatStyles from './style.scss'
 import RouterLoading from 'Components/RouterLoading'
 import { isEmpty } from 'lodash'
 import { metricSuffix } from 'Utils'
+import { dateRangeLabels } from 'Utils/globals'
 
 class FormatCard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      dateRange: '3months',
+      metric: 'views',
+    }
+  }
+
   componentDidMount() {
-    this.props.getFormatChartRequest()
+    const { metric, dateRange } = this.state
+    this.props.getFormatChartRequest({ metric, dateRange })
   }
 
   iconClass(name) {
@@ -39,6 +49,7 @@ class FormatCard extends Component {
   }
 
   render() {
+    const { metric, dateRange } = this.state
     const {
       formatChartData: { data, video, currentDay, loading },
     } = this.props
@@ -50,6 +61,10 @@ class FormatCard extends Component {
         data.every((d) => d.count === 0)) ||
       isEmpty(data)
 
+    const dateLabel = dateRangeLabels[dateRange]
+
+    const formatLabel = !isDataEmpty && !!data[0] && data[0].name 
+       
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -74,7 +89,7 @@ class FormatCard extends Component {
               Performance Over Time
             </div>
 
-            {!!currentDay && (
+            {true && ( //!!currentDay && (
               <div className={style.chartSectionBadge}>
                 <span
                   style={{
@@ -83,7 +98,7 @@ class FormatCard extends Component {
                     boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                   }}
                 >
-                  On {currentDay}s
+                  {dateLabel}
                 </span>
               </div>
             )}
@@ -106,7 +121,7 @@ class FormatCard extends Component {
                 </div>
 
                 <div className={style.marketViewCardChartTitle}>
-                  Live Action
+                  {formatLabel}
                 </div>
               </React.Fragment>
             )}
@@ -116,10 +131,9 @@ class FormatCard extends Component {
                 data.map((item, i) => (
                   <div key={i} className={formatStyles.formatItem}>
                     <div className={formatStyles.formatItemIcon}>
-                      <span className={this.iconClass(i)} />
+                      <span>{metricSuffix(item.count)}</span>
                     </div>
                     <div className={formatStyles.formatItemText}>
-                      <span>{metricSuffix(item.count)}</span>
                       <span>{item.name}</span>
                       <span>Categories</span>
                     </div>
@@ -128,7 +142,7 @@ class FormatCard extends Component {
             </div>
 
             <div className={style.marketViewCardDescription}>
-              Based on the number of shares for competitors across all platforms
+              {`A summary of the top formats associated with the highest number of ${metric} for the ${dateLabel.toLowerCase()}.`}
             </div>
             <Link
               to="/marketview/time"
