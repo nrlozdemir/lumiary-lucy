@@ -85,44 +85,51 @@ const RadarChart = (props) => {
         const margin = (chart.chartArea.bottom - chart.chartArea.top) / 10
         chart.chart.ctx.fillStyle = props.themeContext.colors.chartTickColor
         chart.chart.ctx.font = '10px ClanOT'
-        chart.chart.ctx.fillText(
-          `0`,
-          chart.scale.xCenter - 3,
-          chart.scale.yCenter + 3
-        )
+        // chart.chart.ctx.fillText(
+        //   `0`,
+        //   chart.scale.xCenter - 3,
+        //   chart.scale.yCenter + 3
+        // )
+        // top ticks
         chart.scale.ticksAsNumbers.map((tick, i) => {
           if (i > 0) {
             chart.chart.ctx.fillText(
               `${tick.toFixed(0)}%`,
-              chart.scale.xCenter - (`${tick.toFixed(0)}%`.length * 6) / 2,
-              chart.scale.yCenter - margin * i + 10
+              chart.scale.xCenter - (`${tick.toFixed(0)}%`.length - 8) / 2,
+              chart.scale.yCenter - margin * i - i * (i > 2 ? 7 : 8)
             )
           }
         })
+
+        // bottom ticks
         chart.scale.ticksAsNumbers.map((tick, i) => {
           if (i > 0) {
             chart.chart.ctx.fillText(
               `${tick.toFixed(0)}%`,
-              chart.scale.xCenter - (`${tick.toFixed(0)}%`.length * 6) / 2,
-              chart.scale.yCenter + margin * i - 5
+              chart.scale.xCenter - (`${tick.toFixed(0)}%`.length - 8) / 2,
+              chart.scale.yCenter + margin * i + i * (i > 2 ? 4 : 2)
             )
           }
         })
+
+        // right ticks
         chart.scale.ticksAsNumbers.map((tick, i) => {
           if (i > 0) {
             chart.chart.ctx.fillText(
               `${tick.toFixed(0)}%`,
-              chart.scale.xCenter + margin * i - 15,
-              chart.scale.yCenter + 5
+              chart.scale.xCenter + margin * i + i * 6,
+              chart.scale.yCenter - 4
             )
           }
         })
+
+        // left ticks
         chart.scale.ticksAsNumbers.map((tick, i) => {
           if (i > 0) {
             chart.chart.ctx.fillText(
               `${tick.toFixed(0)}%`,
-              chart.scale.xCenter - margin * i - 5,
-              chart.scale.yCenter + 3
+              chart.scale.xCenter - margin * i - i * 6,
+              chart.scale.yCenter - 4
             )
           }
         })
@@ -207,6 +214,8 @@ const RadarChart = (props) => {
           }),
         }
 
+  console.log(theData, maxTicksStepLimit)
+
   return (
     <Radar
       key={`radar-${Math.floor(Math.random() * 1000)}`}
@@ -219,7 +228,7 @@ const RadarChart = (props) => {
           display: false,
         },
         layout: {
-          padding: 10,
+          padding: 35,
         },
         tooltips: customChartToolTip(themes, {
           callbacks: {
@@ -274,10 +283,9 @@ const RadarChart = (props) => {
             fontSize: 10,
             fontFamily: 'ClanOTNews',
             fontColor: themes.chartTickColor,
-            // display: true,
             maxTicksLimit: 5,
             min: 0,
-            max: maxTicksStepLimit,
+            max: hasData ? maxTicksStepLimit : 0,
             beginAtZero: true,
           },
           angleLines: {
