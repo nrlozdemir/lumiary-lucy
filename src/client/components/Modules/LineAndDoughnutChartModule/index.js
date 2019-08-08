@@ -53,8 +53,8 @@ const LineAndDoughnutChartModule = ({
       beforeDatasetsDraw: function(chart, options) {
         chart.ctx.shadowColor = '#bebebe'
         chart.ctx.shadowBlur = 4
-        chart.ctx.shadowOffsetX = 1
-        chart.ctx.shadowOffsetY = 1
+        chart.ctx.shadowOffsetX = 2
+        chart.ctx.shadowOffsetY = 2
       },
       afterDatasetsDraw: function(chart, options) {
         chart.ctx.shadowColor = 'transparent'
