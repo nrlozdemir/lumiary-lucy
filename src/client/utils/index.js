@@ -494,10 +494,8 @@ const customChartToolTip = (themes, customOptions = {}, forceData) => {
   }
 }
 
-const getModuleTerms = (key, data) => {
-  const {
-    glossary: { terms = {} },
-  } = data
+const getModuleTerms = (key, data = {}) => {
+  const terms = data.glossary && data.glossary.terms || {}
   const moduleObject =
     data &&
     data.glossary &&

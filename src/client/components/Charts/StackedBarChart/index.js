@@ -120,8 +120,11 @@ const StackedBarChart = (props) => {
     datalabels = false,
     xGridDisplay,
     hideLabels = false,
+    metricTitle = false,
   } = props
+
   const themes = props.themeContext.colors
+
   return (
     <Bar
       key={Math.random()}
@@ -154,7 +157,15 @@ const StackedBarChart = (props) => {
         ...barDataOptions,
         tooltips: customChartToolTip(themes, {
           callbacks: {
-            title: () => '',
+            title: (tooltipItem, data) => {
+              return (
+                metricTitle !== false &&
+                !!tooltipItem &&
+                !!tooltipItem[0] &&
+                !!metricTitle[tooltipItem[0]['index']] &&
+                metricTitle[tooltipItem[0]['index']]
+              )
+            },
             label: function(tooltipItem, data) {
               const count =
                 (data &&

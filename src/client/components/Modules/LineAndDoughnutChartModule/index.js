@@ -3,7 +3,8 @@ import cx from 'classnames'
 import Module from 'Components/Module'
 import style from './style.scss'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
-import { Line } from 'react-chartjs-2'
+import { helpers, defaults } from 'chart.js'
+import { Line, Chart } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
 import { chartColors } from 'Utils/globals'
 import { customChartToolTip } from 'Utils'
@@ -49,6 +50,16 @@ const LineAndDoughnutChartModule = ({
           ctx.restore()
         }
       },
+      beforeDatasetsDraw: function(chart, options) {
+        chart.ctx.shadowColor = colors.lineChartShadowColor
+        chart.ctx.shadowBlur = 6
+        chart.ctx.shadowOffsetX = 2
+        chart.ctx.shadowOffsetY = 2
+      },
+      afterDatasetsDraw: function(chart, options) {
+        chart.ctx.shadowColor = 'transparent'
+        chart.ctx.shadowBlur = 0
+      },
     },
   ]
   const manipulatedProperties = percentageManipulation(properties)
@@ -83,6 +94,38 @@ const LineAndDoughnutChartModule = ({
     }, 0)
   )
 
+  let manipulateData = !!lineChartData && lineChartData
+
+  !!manipulateData &&
+    Object.keys(manipulateData).map((el, i) => {
+      if (el === 'datasets') {
+        Object.values(manipulateData[el]).map((d, k) => {
+          manipulateData[el][k] = {
+            ...d,
+
+            borderWidth: 4,
+            pointBackgroundColor:
+              colors.themeType === 'dark' &&
+              d.backgroundColor.substr(0, 4) === '#fff'
+                ? '#acb0be'
+                : d.backgroundColor,
+            pointHoverBackgroundColor:
+              colors.themeType === 'dark' &&
+              d.backgroundColor.substr(0, 4) === '#fff'
+                ? '#acb0be'
+                : d.backgroundColor,
+            pointBorderColor: colors.lineChartPointBorderColor,
+            pointHoverBorderColor: colors.lineChartPointHoverBorderColor,
+            pointBorderWidth: 1,
+            pointHoverBorderWidth: 1,
+            pointRadius: 5.4,
+            pointHitRadius: 5.4,
+            pointHoverRadius: 5.4,
+          }
+        })
+      }
+    })
+
   return (
     <Module
       moduleKey={moduleKey}
@@ -101,7 +144,7 @@ const LineAndDoughnutChartModule = ({
             >
               <Line
                 key={Math.random()}
-                data={lineChartData}
+                data={manipulateData}
                 width={1120}
                 height={291}
                 plugins={plugins}
@@ -156,9 +199,9 @@ const LineAndDoughnutChartModule = ({
                           ...lineChartOptions.scales.yAxes[0].ticks,
                           callback: function(value, index, values) {
                             if (value === 0) {
-                              return value + ' '
+                              return value + '%'
                             } else if (value === chartYAxisMax) {
-                              return value
+                              return value + '%'
                             } else {
                               return ''
                             }
