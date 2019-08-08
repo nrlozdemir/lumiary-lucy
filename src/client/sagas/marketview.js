@@ -15,6 +15,8 @@ import {
 } from 'Utils'
 
 import {
+  convertNestedDurationsIntoLabels,
+  convertDurationLabels,
   convertDataIntoDatasets,
   convertMultiRequestDataIntoDatasets,
   percentageManipulation,
@@ -91,26 +93,49 @@ function* getCompetitorTopVideosMarketview(payload) {
 
     let response = yield call(getDataFromApi, options, '/report')
 
-    // preliminary to convertMultiRequestDataIntoDatasets structure
-    response = Object.keys(response.data).reduce((acc, key) => {
-      acc[key] = {
-        data: { [key]: response.data[key] },
-      }
-      return acc
-    }, {})
+    if (
+      !!response &&
+      !!response.data &&
+      !!Object.keys(response.data).length &&
+      !!Object.keys(response.data).every(
+        (key) => !!response.data[key][property]
+      )
+    ) {
+      // preliminary to convertMultiRequestDataIntoDatasets structure
+      response = Object.keys(response.data).reduce((acc, key) => {
+        acc[key] = {
+          data: {
+            [key]:
+              property === 'duration'
+                ? {
+                    duration: convertDurationLabels(
+                      response.data[key][property],
+                      property
+                    ),
+                  }
+                : response.data[key],
+          },
+        }
+        return acc
+      }, {})
 
-    yield put(
-      actions.getCompetitorTopVideosSuccess(
-        percentageManipulation(
-          convertMultiRequestDataIntoDatasets(
-            {
-              ...response,
-            },
-            options
+      yield put(
+        actions.getCompetitorTopVideosSuccess(
+          percentageManipulation(
+            convertMultiRequestDataIntoDatasets(
+              {
+                ...response,
+              },
+              options
+            )
           )
         )
       )
-    )
+    } else {
+      throw new Error(
+        'Marketview/Competitors Top Videos Over Time By Competitor Error'
+      )
+    }
   } catch (error) {
     yield put(actions.getCompetitorTopVideosFailure(error))
   }
@@ -125,7 +150,7 @@ function* getPlatformTopVideosMarketview({
     let options = {
       metric,
       dateRange,
-      property: property,
+      property,
       dateBucket: 'none',
       display: 'percentage',
       brandUuid: brand.uuid,
@@ -141,6 +166,11 @@ function* getPlatformTopVideosMarketview({
       buildApiUrl(`/brand/${brand.uuid}/platforms`, options),
       'GET'
     )
+
+    // add duration labels
+    if (property === 'duration') {
+      response = convertNestedDurationsIntoLabels(response)
+    }
 
     // preliminary to convertMultiRequestDataIntoDatasets structure
     let returnData
@@ -256,6 +286,7 @@ function* getPlatformTopVideosMarketview({
       )
     )
   } catch (error) {
+    console.log(error)
     yield put(actions.getPlatformTopVideosFailure(error))
   }
 }
@@ -348,7 +379,12 @@ function* getSimilarProperties(params = {}) {
       )
     }
 
-    yield put(actions.getSimilarPropertiesSuccess(response))
+    const convertedResponse = {
+      ...response,
+      duration: convertDurationLabels(response.duration, 'duration'),
+    }
+
+    yield put(actions.getSimilarPropertiesSuccess(convertedResponse))
   } catch (error) {
     console.log(error)
     yield put(actions.getSimilarPropertiesFailure(error))
@@ -681,8 +717,8 @@ function* getTopPerformingPropertiesData({
 
     const options = {
       metric,
+      property,
       dateRange: '3months',
-      property: property,
       dateBucket: 'none',
       brandUuid: brand.uuid,
     }
@@ -693,6 +729,11 @@ function* getTopPerformingPropertiesData({
       buildApiUrl(`/brand/${brand.uuid}/platforms`, options),
       'GET'
     )
+
+    // add duration labels
+    if (property === 'duration') {
+      response = convertNestedDurationsIntoLabels(response)
+    }
 
     // preliminary to convertMultiRequestDataIntoDatasets structure
     response = Object.keys(response).reduce((acc, key) => {
