@@ -214,8 +214,6 @@ const RadarChart = (props) => {
           }),
         }
 
-  console.log(theData, maxTicksStepLimit)
-
   return (
     <Radar
       key={`radar-${Math.floor(Math.random() * 1000)}`}

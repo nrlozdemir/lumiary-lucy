@@ -9,6 +9,7 @@ import { getColorPercents } from 'Utils'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import {
+  convertDurationLabels,
   radarChartCalculate,
   compareSharesData,
   percentageManipulation,
@@ -32,7 +33,7 @@ function* getAudienceContentVitalityScoreData({ payload = {} }) {
       }),
       'GET'
     )
-    
+
     if (!!response && !!Object.keys(response).length) {
       yield put(
         actions.getAudienceContentVitalityScoreDataSuccess(
@@ -141,9 +142,12 @@ function* getAudienceGenderData({ payload = {} }) {
     )
 
     yield put(
-      actions.getAudienceGenderDataSuccess(percentageManipulation(response))
+      actions.getAudienceGenderDataSuccess(
+        percentageManipulation(convertDurationLabels(response, property))
+      )
     )
   } catch (err) {
+    console.log(err)
     yield put(actions.getAudienceGenderDataError(err))
   }
 }
@@ -237,7 +241,9 @@ function* getAudienceDominantColorData({ data: { dateRange, metric } }) {
     yield put(
       actions.getAudienceDominantColorDataSuccess(
         percentageManipulation(
-          radarChartCalculate(compareSharesData({ data: formattedResponse }, parameters))
+          radarChartCalculate(
+            compareSharesData({ data: formattedResponse }, parameters)
+          )
         )
       )
     )

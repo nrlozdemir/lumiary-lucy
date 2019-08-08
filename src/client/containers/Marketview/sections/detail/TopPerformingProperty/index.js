@@ -18,7 +18,11 @@ import {
   customChartToolTip,
   metricSuffix,
 } from 'Utils'
-import { getMinMaxFromDatasets, getTopNValues, percentageManipulation } from 'Utils/datasets'
+import {
+  getMinMaxFromDatasets,
+  getTopNValues,
+  percentageManipulation,
+} from 'Utils/datasets'
 import { isArray, isNumber, isEqual } from 'lodash'
 
 import style from '../../../style.scss'
@@ -32,6 +36,14 @@ const LEGEND_COLOR_ORDER = [
 ]
 
 class TopPerformingProperty extends React.Component {
+  constructor() {
+    super()
+
+    this.state = {
+      topProperty: '',
+    }
+  }
+
   callback = (data) => {
     const {
       container,
@@ -42,6 +54,8 @@ class TopPerformingProperty extends React.Component {
     if (container === 'platform') {
       getTopPerformingPropertiesRequest(data)
     } else if (container === 'competitor') {
+      const { property = '' } = data
+      this.setState({ topProperty: property })
       getTopPerformingPropertiesByCompetitorsRequest(data)
     }
   }
@@ -88,7 +102,7 @@ class TopPerformingProperty extends React.Component {
   // }
 
   normalizeData(chartData = {}) {
-    if(chartData.datasets && chartData.datasets.length) { 
+    if (chartData.datasets && chartData.datasets.length) {
       const datasets = chartData.datasets
       //find the highest data
       let flattenedArr = []
@@ -102,15 +116,15 @@ class TopPerformingProperty extends React.Component {
       //change the data related to highest value as percentages
       const newData = {
         ...chartData,
-        datasets: datasets.map((dataset)=> {
+        datasets: datasets.map((dataset) => {
           return {
             ...dataset,
             oldData: [...dataset.data],
             data: dataset.data.map((data) => {
-              return percentageManipulation(data * 100 / highestValue)
-            })
+              return percentageManipulation((data * 100) / highestValue)
+            }),
           }
-        })
+        }),
       }
       return newData
     }
@@ -118,12 +132,12 @@ class TopPerformingProperty extends React.Component {
   }
 
   render() {
+    const { topProperty } = this.state
     const {
       title,
       filters,
       moduleKey,
       container,
-      topProperty,
       themeContext: { colors },
       topPerformingPropertiesByCompetitorsData: {
         data: compTopData,
@@ -133,16 +147,16 @@ class TopPerformingProperty extends React.Component {
     } = this.props
 
     let chartData = container === 'competitor' ? compTopData : topData
-    
+
     const hasDatasets =
-    !!chartData && !!chartData.datasets && !!chartData.datasets.length
-    
+      !!chartData && !!chartData.datasets && !!chartData.datasets.length
+
     if (hasDatasets && chartData.datasets.length > 5) {
       const top5datasets = getTopNValues(chartData.datasets, 5)
       chartData = { ...chartData, datasets: top5datasets }
     }
     chartData = this.normalizeData(chartData)
-    
+
     //commenting these logic since we will show percentages.
 
     // let elements = []
@@ -155,7 +169,7 @@ class TopPerformingProperty extends React.Component {
     //     !!m && isNumber(m) && m > 0 && elements.push(m)
     //   })
     // })
-    
+
     // const findMax = !!elements && Math.max(...elements)
 
     // const maxUp = (hasDatasets && findMax) || 0
@@ -257,7 +271,7 @@ class TopPerformingProperty extends React.Component {
 const mapStateToProps = createStructuredSelector({
   topPerformingPropertiesByCompetitorsData: selectMarketviewTopPerformingPropertiesByCompetitorsDataView(),
   topPerformingPropertiesData: selectMarketviewTopPerformingPropertiesDataView(),
-  topProperty: makeSelectMarketviewTopProperty(),
+  //topProperty: makeSelectMarketviewTopProperty(),
   selectFilters: makeSelectSelectFilters(),
 })
 

@@ -14,6 +14,8 @@ import {
 } from 'Utils'
 
 import {
+  convertDurationLabels,
+  convertNestedDurationsIntoLabels,
   convertDataIntoDatasets,
   convertMultiRequestDataIntoDatasets,
   convertVideoEngagementData,
@@ -139,11 +141,13 @@ function* getVideoReleasesBarChart({ data: { report } }) {
     const { engagement: metric, date: daterange, social: platform } = report
     const { brand } = yield select(makeSelectAuthProfile())
 
+    const property = 'duration'
+
     const options = {
       metric,
       platform,
       daterange,
-      property: 'duration',
+      property,
       limit: 4,
     }
 
@@ -236,6 +240,12 @@ function* getFilteringSectionData({ data: { property, report } }) {
           })
         : { data: {} }
 
+    if (property === 'duration') {
+      stackedChartData.data = convertNestedDurationsIntoLabels(
+        stackedChartData.data
+      )
+    }
+
     yield put(
       actions.getFilteringSectionDataSuccess({
         doughnutData: percentageManipulation(
@@ -276,11 +286,13 @@ function* getPacingCardData({ data: { report } }) {
     const competitors = getBrandAndCompetitors(profile)
     const { brand } = report
 
+    const property = 'pacing'
+
     const options = {
       metric: report.engagement,
       platform: report.social,
       dateRange: report.date,
-      property: ['pacing'],
+      property: [property],
       dateBucket: 'none',
       display: 'percentage',
       brands: [brand],
@@ -310,18 +322,34 @@ function* getPacingCardData({ data: { report } }) {
       !!brandName &&
       !!stadiumData.data &&
       !!stadiumData.data[brandName] &&
-      !!stadiumData.data[brandName].pacing &&
+      !!stadiumData.data[brandName][property] &&
       !!horizontalStackedBarData.data &&
       !!horizontalStackedBarData.data[brandName] &&
-      !!horizontalStackedBarData.data[brandName].pacing
+      !!horizontalStackedBarData.data[brandName][property]
     ) {
+      horizontalStackedBarData.data = Object.keys(
+        horizontalStackedBarData.data
+      ).reduce(
+        (acc, key) => ({
+          ...acc,
+          [key]: {
+            [property]: convertDurationLabels(
+              horizontalStackedBarData.data[key][property],
+              'duration',
+              true
+            ),
+          },
+        }),
+        {}
+      )
+
       yield put(
         actions.getPacingCardDataSuccess({
           stadiumData: percentageManipulation(
             convertDataIntoDatasets(stadiumData, options)
           ),
           horizontalStackedBarDataOriginal:
-            horizontalStackedBarData.data[brandName].pacing,
+            horizontalStackedBarData.data[brandName][property],
           horizontalStackedBarData: convertDataIntoDatasets(
             horizontalStackedBarData,
             {
@@ -335,6 +363,7 @@ function* getPacingCardData({ data: { report } }) {
       throw new Error('Error fetching Pacing Card data')
     }
   } catch (err) {
+    console.log(err)
     yield put(actions.getPacingCardDataFailure(err))
   }
 }
@@ -346,6 +375,8 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
 
     const filteredCompetitors = getFilteredCompetitors(competitors, report)
 
+    const url = '/report'
+
     const options = {
       metric: report.engagement,
       platform: report.social,
@@ -353,7 +384,6 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
       property: [property],
       dateBucket: 'none',
       display: 'percentage',
-      url: '/report',
       brands: [...filteredCompetitors],
     }
 
@@ -362,24 +392,36 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
     }
 
     const [facebook, instagram, twitter, youtube] = yield all([
-      call(getDataFromApi, { ...options, platform: 'facebook' }),
-      call(getDataFromApi, { ...options, platform: 'instagram' }),
-      call(getDataFromApi, { ...options, platform: 'twitter' }),
-      call(getDataFromApi, { ...options, platform: 'youtube' }),
+      call(getDataFromApi, { ...options, platform: 'facebook' }, url),
+      call(getDataFromApi, { ...options, platform: 'instagram' }, url),
+      call(getDataFromApi, { ...options, platform: 'twitter' }, url),
+      call(getDataFromApi, { ...options, platform: 'youtube' }, url),
     ])
+
+    let response = {
+      facebook,
+      instagram,
+      twitter,
+      youtube,
+    }
+
+    if (property === 'duration') {
+      response = Object.keys(response).reduce(
+        (acc, key) => ({
+          ...acc,
+          [key]: {
+            ...response[key],
+            data: convertNestedDurationsIntoLabels(response[key].data),
+          },
+        }),
+        {}
+      )
+    }
 
     yield put(
       actions.getCompetitorTopVideosSuccess(
         percentageManipulation(
-          convertMultiRequestDataIntoDatasets(
-            {
-              facebook,
-              instagram,
-              twitter,
-              youtube,
-            },
-            options
-          )
+          convertMultiRequestDataIntoDatasets(response, options)
         )
       )
     )
