@@ -121,8 +121,9 @@ const StackedBarChart = (props) => {
     xGridDisplay,
     metricTitle = false,
   } = props
+
   const themes = props.themeContext.colors
-  console.log('metricTitle', metricTitle)
+
   return (
     <Bar
       key={Math.random()}
