@@ -83,6 +83,38 @@ const LineAndDoughnutChartModule = ({
     }, 0)
   )
 
+  let manipulateData = !!lineChartData && lineChartData
+
+  !!manipulateData &&
+    Object.keys(manipulateData).map((el, i) => {
+      if (el === 'datasets') {
+        Object.values(manipulateData[el]).map((d, k) => {
+          manipulateData[el][k] = {
+            ...d,
+
+            borderWidth: 4,
+            pointBackgroundColor:
+              colors.themeType === 'dark' &&
+              d.backgroundColor.substr(0, 4) === '#fff'
+                ? '#acb0be'
+                : d.backgroundColor,
+            pointHoverBackgroundColor:
+              colors.themeType === 'dark' &&
+              d.backgroundColor.substr(0, 4) === '#fff'
+                ? '#acb0be'
+                : d.backgroundColor,
+            pointBorderColor: colors.lineChartPointBorderColor,
+            pointHoverBorderColor: colors.lineChartPointHoverBorderColor,
+            pointBorderWidth: 1,
+            pointHoverBorderWidth: 1,
+            pointRadius: 5.4,
+            pointHitRadius: 5.4,
+            pointHoverRadius: 5.4,
+          }
+        })
+      }
+    })
+
   return (
     <Module
       moduleKey={moduleKey}
@@ -101,7 +133,7 @@ const LineAndDoughnutChartModule = ({
             >
               <Line
                 key={Math.random()}
-                data={lineChartData}
+                data={manipulateData}
                 width={1120}
                 height={291}
                 plugins={plugins}
