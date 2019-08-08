@@ -52,7 +52,7 @@ const LineAndDoughnutChartModule = ({
       },
       beforeDatasetsDraw: function(chart, options) {
         chart.ctx.shadowColor = '#bebebe'
-        chart.ctx.shadowBlur = 4
+        chart.ctx.shadowBlur = 6
         chart.ctx.shadowOffsetX = 2
         chart.ctx.shadowOffsetY = 2
       },
