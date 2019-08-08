@@ -852,6 +852,10 @@ function* getTopPerformingPropertiesByTimeData({
       'GET'
     )
 
+    if (property === 'duration') {
+      data.data = convertNestedDurationsIntoLabels(data.data)
+    }
+
     yield put(
       actions.getTopPerformingTimeSuccess(
         convertDataIntoDatasets(percentageManipulation(data), options, {
