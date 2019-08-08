@@ -223,6 +223,13 @@ function* getPlatformTopVideosMarketview({
         })
     }
 
+    const indexColors = {
+      facebook: '#2fd7c4',
+      instagram: '#8562f3',
+      twitter: '#5292e5',
+      youtube: '#acb0be',
+    }
+
     yield put(
       actions.getPlatformTopVideosSuccess(
         percentageManipulation(
@@ -236,8 +243,12 @@ function* getPlatformTopVideosMarketview({
             },
             false,
             {
-              backgroundColors: ['#5292e5', '#8562f3', '#acb0be', '#2fd7c4'],
-              borderColors: ['#5292e5', '#8562f3', '#acb0be', '#2fd7c4'],
+              backgroundColors: Object.keys(returnData).map((e, i) => {
+                return indexColors[e.toLowerCase()]
+              }),
+              borderColors: Object.keys(returnData).map((e, i) => {
+                return indexColors[e.toLowerCase()]
+              }),
               borderWidth: 1,
             }
           )
@@ -529,12 +540,12 @@ function* getFormatChartData({
 
       // order formats
       const vals = percentageManipulation(formatCountsArr).sort(
-        (a, b) => b.count - a.count 
+        (a, b) => b.count - a.count
       )
 
       // pull vid from highest bucket
       const video = {
-        videoUrl: formatToS3Examples[vals[0].name]
+        videoUrl: formatToS3Examples[vals[0].name],
       }
 
       yield put(
