@@ -251,6 +251,10 @@ const dark = {
 
   // cv score percent difference
   percentDifferenceColor: '#21243b',
+
+  // global lineChart
+  lineChartPointBorderColor: '#fff',
+  lineChartPointHoverBorderColor: '#fff',
 }
 
 const light = {
@@ -505,6 +509,10 @@ const light = {
 
   // cv score percent difference
   percentDifferenceColor: '#505050',
+
+  // global lineChart
+  lineChartPointBorderColor: '#505050',
+  lineChartPointHoverBorderColor: '#505050',
 }
 
 const themes = {
