@@ -51,15 +51,15 @@ const LineAndDoughnutChartModule = ({
         }
       },
       beforeDatasetsDraw: function(chart, options) {
-        chart.ctx.shadowColor = '#ccc';
-        chart.ctx.shadowBlur = 4;
-        chart.ctx.shadowOffsetX = 1;
-        chart.ctx.shadowOffsetY = 1;
+        chart.ctx.shadowColor = '#ccc'
+        chart.ctx.shadowBlur = 4
+        chart.ctx.shadowOffsetX = 1
+        chart.ctx.shadowOffsetY = 1
       },
       afterDatasetsDraw: function(chart, options) {
-        chart.ctx.shadowColor = 'transparent';
-        chart.ctx.shadowBlur = 0;
-      }
+        chart.ctx.shadowColor = 'transparent'
+        chart.ctx.shadowBlur = 0
+      },
     },
   ]
   const manipulatedProperties = percentageManipulation(properties)
