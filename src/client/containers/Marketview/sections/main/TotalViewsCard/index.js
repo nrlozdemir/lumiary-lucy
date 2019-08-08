@@ -94,6 +94,39 @@ class TotalViewsChart extends React.Component {
         }
       })
     })
+
+    const shortLabels = labels.map((item) => {
+      switch(xAxisType) {
+        case 'days':
+          return moment().day(item).format("dd")
+        break;
+
+        case 'weeks':
+          return item
+        break;
+
+        case 'months':
+          return moment().month(item).format("MMM")
+        break;
+      }
+    })
+
+    const longLabels = labels.map((item) => {
+      switch(xAxisType) {
+        case 'days':
+          return moment().day(item).format("dddd")
+        break;
+
+        case 'weeks':
+          return item
+        break;
+
+        case 'months':
+          return moment().month(item).format("MMMM")
+        break;
+      }
+    })
+
     const normalizedData = this.normalizeData(doughnutData)
 
     return (
@@ -121,23 +154,10 @@ class TotalViewsChart extends React.Component {
         <div className="grid-collapse">
           <div className="col-6">
             <StackedBarChart
+              metricTitle={longLabels}
               barData={!loading ? {
                 ...barData,
-                labels: labels.map((item) => {
-                  switch(xAxisType) {
-                    case 'days':
-                      return moment().day(item).format("dd")
-                    break;
-
-                    case 'weeks':
-                      return item
-                    break;
-
-                    case 'months':
-                      return moment().month(item).format("MMM")
-                    break;
-                  }
-                })
+                labels: shortLabels
               } : null}
               barSpacing={2}
             />
