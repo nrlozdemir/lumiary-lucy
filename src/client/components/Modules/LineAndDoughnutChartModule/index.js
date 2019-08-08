@@ -3,7 +3,8 @@ import cx from 'classnames'
 import Module from 'Components/Module'
 import style from './style.scss'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
-import { Line } from 'react-chartjs-2'
+import { helpers, defaults } from 'chart.js'
+import { Line, Chart } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
 import { chartColors } from 'Utils/globals'
 import { customChartToolTip } from 'Utils'
@@ -49,6 +50,16 @@ const LineAndDoughnutChartModule = ({
           ctx.restore()
         }
       },
+      beforeDatasetsDraw: function(chart, options) {
+        chart.ctx.shadowColor = '#ccc';
+        chart.ctx.shadowBlur = 4;
+        chart.ctx.shadowOffsetX = 1;
+        chart.ctx.shadowOffsetY = 1;
+      },
+      afterDatasetsDraw: function(chart, options) {
+        chart.ctx.shadowColor = 'transparent';
+        chart.ctx.shadowBlur = 0;
+      }
     },
   ]
   const manipulatedProperties = percentageManipulation(properties)
