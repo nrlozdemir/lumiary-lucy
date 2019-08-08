@@ -852,17 +852,23 @@ function* getTopPerformingPropertiesByTimeData({
       'GET'
     )
 
-    if (property === 'duration') {
-      data.data = convertNestedDurationsIntoLabels(data.data)
-    }
+    if (!!data && !!data.data) {
+      if (property === 'duration') {
+        data.data = convertNestedDurationsIntoLabels(data.data)
+      }
 
-    yield put(
-      actions.getTopPerformingTimeSuccess(
-        convertDataIntoDatasets(percentageManipulation(data), options, {
-          singleDataset: false,
-        })
+      yield put(
+        actions.getTopPerformingTimeSuccess(
+          convertDataIntoDatasets(percentageManipulation(data), options, {
+            singleDataset: false,
+          })
+        )
       )
-    )
+    } else {
+      throw new Error(
+        'Marketview/Time getTopPerformingPropertiesByTimeData Error'
+      )
+    }
   } catch (error) {
     yield put(actions.getTopPerformingTimeFailure(error))
   }
