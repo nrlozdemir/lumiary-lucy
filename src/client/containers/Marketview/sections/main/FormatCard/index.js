@@ -63,6 +63,8 @@ class FormatCard extends Component {
 
     const dateLabel = dateRangeLabels[dateRange]
 
+    const formatLabel = !isDataEmpty && !!data[0] && data[0].name 
+       
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -119,7 +121,7 @@ class FormatCard extends Component {
                 </div>
 
                 <div className={style.marketViewCardChartTitle}>
-                  Live Action
+                  {formatLabel}
                 </div>
               </React.Fragment>
             )}

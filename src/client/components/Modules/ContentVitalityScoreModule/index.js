@@ -298,7 +298,7 @@ const ContentVitalityScoreModule = ({
                           Math.abs(prev._model.x - dataAveragePoint)
                             ? curr
                             : prev,
-                        { _model: { x: 0 } }
+                        { _model: { x: 0, y: 0 } }
                       )
 
                       chart.ctx.beginPath()

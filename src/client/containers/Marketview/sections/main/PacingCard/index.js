@@ -91,7 +91,7 @@ class PacingCard extends Component {
             </div>
 
             {!isDataEmpty && !loading && (
-              <PacingPieChart data={data} colors={colors} />
+              <PacingPieChart data={data} colors={colors} metric={metric}/>
             )}
             {!loading && (
               <div className={style.marketViewCardChartTitle}>

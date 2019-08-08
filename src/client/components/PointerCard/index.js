@@ -1,13 +1,14 @@
 import React from 'react'
 import style from './style.scss'
 import cn from 'classnames'
+import { numberFormatter } from 'Utils'
 
 class PointerCard extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
       pointerData: 0,
-      pointerTextVal: null
+      pointerTextVal: null,
     }
   }
 
@@ -38,13 +39,13 @@ class PointerCard extends React.Component {
 
   resetPointer = (target) => {
     let to = target
-    const { data: { avg = 0 } } = this.props
+    const {
+      data: { avg = 0 },
+    } = this.props
 
     //if the target is too low or too high,
     //set the pointer 0 or 180 degree
-    to = target < 0 
-        ? 0 
-        : target > avg * 2 ? avg * 2 : target 
+    to = target < 0 ? 0 : target > avg * 2 ? avg * 2 : target
 
     this.interval = setInterval(() => {
       this.setState(
@@ -55,7 +56,9 @@ class PointerCard extends React.Component {
           const { pointerData: current } = this.state
 
           if (current === to) {
-            this.setState({ pointerTextVal: target < 0 || target > avg * 2 ? target : null })
+            this.setState({
+              pointerTextVal: target < 0 || target > avg * 2 ? target : null,
+            })
             clearInterval(this.interval)
           }
         }
@@ -76,7 +79,7 @@ class PointerCard extends React.Component {
         <div className={style.pointerContainer}>
           <div className={style.pointerWrapper}>
             <p className={style.pointerHeadText}>
-              Avg: {`${data.avg}${data.avg >= 1000 ? 'k' : ''}`}
+              Avg: {numberFormatter(data.realLibraryPropertyAverage, 0, true)}
             </p>
             <svg
               width="188px"
@@ -244,7 +247,7 @@ class PointerCard extends React.Component {
                         background: colors.moduleBackground,
                       }}
                     >
-                      {`${pointerTextVal || pointerData}${pointerData >= 1000 ? 'k' : ''}`}
+                      {numberFormatter(data.realVideoPropertyAverage, 0, true)}
                     </span>
                     <svg height="22" width="55">
                       <line

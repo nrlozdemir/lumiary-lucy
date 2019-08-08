@@ -3,10 +3,11 @@ import PropTypes from 'prop-types'
 import { Bar } from 'react-chartjs-2'
 import cx from 'classnames'
 import style from './style.scss'
-import { randomKey, customChartToolTip, metricSuffix } from 'Utils'
+import { customChartToolTip, randomKey, metricSuffix } from 'Utils'
 import { withTheme } from 'ThemeContext/withTheme'
 
 import { options, wrapperBarOptions } from './chartOptions'
+import BarItem from './BarItem'
 
 import Legend from 'Components/Legend'
 
@@ -140,7 +141,7 @@ const VideoReleasesBarChartModule = (props) => {
     tooltips: customChartToolTip(colors, {
       callbacks: {
         title: () => '',
-        label: function(tooltipItem) {
+        label: function (tooltipItem) {
           const value = Math.abs(tooltipItem.yLabel)
           if (tooltipItem.yLabel < 0) {
             return `${metricSuffix(~~value)} ${metric.charAt(0).toUpperCase() +
@@ -248,49 +249,21 @@ const VideoReleasesBarChartModule = (props) => {
               plugins={plugins}
             />
           </div>
-
           <div className={style.groupChartsWrapper}>
             {!!normalizedData &&
               !!normalizedData.length &&
               normalizedData.map((chartData, idx) => {
                 return (
-                  <div className="col-3" key={`xxx666xxx-${idx}`}>
-                    <div className={style.chartSection}>
-                      <Bar
-                        key={`vrbcmc-${idx}`}
-                        data={chartData}
-                        options={{
-                          ...barChartOptions,
-                          scales: {
-                            ...barChartOptions.scales,
-                            yAxes: [
-                              {
-                                ...options.scales.yAxes[0],
-                                ticks: {
-                                  ...options.scales.yAxes[0].ticks,
-                                  stepSize: maxSteps.engagement,
-                                },
-                              },
-                            ],
-                          },
-                        }}
-                        datasetKeyProvider={datasetKeyProvider}
-                      />
-                    </div>
-                    <div className={style.chartSectionBadge}>
-                      {!!chartData.label && (
-                        <span
-                          style={{
-                            background: colors.labelBackground,
-                            color: colors.labelColor,
-                            boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                          }}
-                        >
-                          {chartData.label}
-                        </span>
-                      )}
-                    </div>
-                  </div>
+                  <BarItem 
+                    key={`vrbcmc-${idx}`}
+                    chartData={chartData}
+                    barChartOptions={barChartOptions}
+                    options={options}
+                    datasetKeyProvider={datasetKeyProvider}
+                    maxSteps={maxSteps}
+                    stepSize={stepSize}
+                    colors={colors}
+                  />
                 )
               })}
           </div>
