@@ -77,13 +77,18 @@ const AsyncSearch = (props) => {
       styles,
       { data, isDisabled, isFocused, isSelected }
     ) => ({
-      ...styles,
-      backgroundColor: colors.searchOptionsColor,
-      color: isSelected
-        ? colors.searchInputColor
-        : isFocused
-        ? colors.searchInputActiveColor
-        : colors.searchInputColor,
+      display: 'none'
+      //commenting these lines since we dont use autocomplete
+      //if we switch to autocomplete or decide that defaul dropdown should be occur, 
+      //just uncomment these lines
+      
+      // ...styles,
+      // backgroundColor: colors.searchOptionsColor,
+      // color: isSelected
+      //   ? colors.searchInputColor
+      //   : isFocused
+      //   ? colors.searchInputActiveColor
+      //   : colors.searchInputColor,
     }),
     input: (styles, { data, isDisabled, isFocused, isSelected }) => ({
       ...styles,
