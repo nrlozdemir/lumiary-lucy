@@ -48,3 +48,34 @@
 .doughnutChartContainer {
   margin: 0 !important;
 }
+
+.labels {
+  display: flex;
+  padding-left: 53px;
+
+  .label {
+    position: relative;
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+    text-align: center;
+    margin-top: 10px;
+
+    font-size: 12px;
+    font-family: $font-family-ClanOTNews;
+
+    &:before {
+      content: attr(data-text);
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+      white-space: nowrap;
+      display: none;
+    }
+
+    &:hover:before {
+      display: block;
+    }
+  }
+}

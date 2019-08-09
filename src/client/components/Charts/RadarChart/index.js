@@ -2,90 +2,141 @@ import React from 'react'
 import { Radar } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
 import { metricSuffix, customChartToolTip, ucfirst } from 'Utils'
-
-const plugins = [
-  {
-    beforeDraw: function(chart, easing) {
-      // Run function when before draw chart
-      let ctx = chart.chart.ctx
-      let chartArea = chart.chartArea
-      chart.config.data.datasets.forEach(function(dataset, i) {
-        const meta = chart.controller.getDatasetMeta(i)
-        meta.data.forEach(function(bar, index) {
-          if (
-            !!chart.config.data.labels &&
-            !!chart.config.data.labels.length &&
-            !!!!chart.config.data.labels[index]
-          ) {
-            const color = chart.config.data.labels[index].color
-            const selected = chart.config.data.labels[index].selected
-            const pointLabelPosition = bar._scale.getPointPosition(
-              index,
-              bar._scale.getDistanceFromCenterForValue(bar._scale.max) +
-                (selected ? 36 : 30)
-            )
-
-            ctx.beginPath()
-            // draw a circle at that point
-            ctx.arc(
-              pointLabelPosition.x,
-              pointLabelPosition.y,
-              selected ? 14 : 8,
-              0,
-              2 * Math.PI,
-              false
-            )
-
-            if (selected) {
-              ctx.lineWidth = 1
-              ctx.shadowBlur = 4
-              ctx.shadowOffsetY = 2
-              ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'
-              ctx.strokeStyle = chart.options.scale.pointLabels
-              ctx.stroke()
-              ctx.shadowBlur = 0
-              ctx.shadowOffsetY = 0
-            }
-
-            ctx.fillStyle = color
-            ctx.fill()
-            ctx.closePath()
-          }
-        })
-      })
-    },
-    beforeDatasetsDraw: function(chart) {
-      // Run function when before apply the datasets draw chart
-      let ctx = chart.chart.ctx
-      let chartArea = chart.chartArea
-      chart.config.data.datasets.forEach(function(dataset, i) {
-        const meta = chart.controller.getDatasetMeta(i)
-        meta.data.forEach(function(bar, index) {
-          if (
-            !!chart.config.data.labels &&
-            !!chart.config.data.labels.length &&
-            !!!!chart.config.data.labels[index]
-          ) {
-            const pointPosition = bar._scale.getPointPosition(
-              index,
-              bar._scale.getDistanceFromCenterForValue(bar._scale.max) + 13
-            )
-            ctx.beginPath()
-            ctx.moveTo(pointPosition.x, pointPosition.y)
-            ctx.lineTo(chart.scale.xCenter, chart.scale.yCenter)
-            ctx.lineWidth = 1
-            ctx.strokeStyle = chart.options.scale.angleLines.customColor
-            ctx.stroke()
-            ctx.closePath()
-          }
-        })
-      })
-    },
-  },
-]
+import { percentageBeautifier } from 'Utils/datasets'
 
 const RadarChart = (props) => {
-  const { data } = props
+  const plugins = [
+    {
+      beforeDraw: function(chart, easing) {
+        // Run function when before draw chart
+        let ctx = chart.chart.ctx
+        let chartArea = chart.chartArea
+        chart.config.data.datasets.forEach(function(dataset, i) {
+          const meta = chart.controller.getDatasetMeta(i)
+          meta.data.forEach(function(bar, index) {
+            if (
+              !!chart.config.data.labels &&
+              !!chart.config.data.labels.length &&
+              !!!!chart.config.data.labels[index]
+            ) {
+              const color = chart.config.data.labels[index].color
+              const selected = chart.config.data.labels[index].selected
+              const pointLabelPosition = bar._scale.getPointPosition(
+                index,
+                bar._scale.getDistanceFromCenterForValue(bar._scale.max) +
+                  (selected ? 36 : 30)
+              )
+
+              ctx.beginPath()
+              // draw a circle at that point
+              ctx.arc(
+                pointLabelPosition.x,
+                pointLabelPosition.y,
+                selected ? 14 : 8,
+                0,
+                2 * Math.PI,
+                false
+              )
+
+              if (selected) {
+                ctx.lineWidth = 1
+                ctx.shadowBlur = 4
+                ctx.shadowOffsetY = 2
+                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'
+                ctx.strokeStyle = chart.options.scale.pointLabels
+                ctx.stroke()
+                ctx.shadowBlur = 0
+                ctx.shadowOffsetY = 0
+              }
+
+              ctx.fillStyle = color
+              ctx.fill()
+              ctx.closePath()
+            }
+          })
+        })
+      },
+      beforeDatasetsDraw: function(chart) {
+        // Run function when before apply the datasets draw chart
+        let ctx = chart.chart.ctx
+        let chartArea = chart.chartArea
+        chart.config.data.datasets.forEach(function(dataset, i) {
+          const meta = chart.controller.getDatasetMeta(i)
+          meta.data.forEach(function(bar, index) {
+            if (
+              !!chart.config.data.labels &&
+              !!chart.config.data.labels.length &&
+              !!!!chart.config.data.labels[index]
+            ) {
+              const pointPosition = bar._scale.getPointPosition(
+                index,
+                bar._scale.getDistanceFromCenterForValue(bar._scale.max) + 13
+              )
+              ctx.beginPath()
+              ctx.moveTo(pointPosition.x, pointPosition.y)
+              ctx.lineTo(chart.scale.xCenter, chart.scale.yCenter)
+              ctx.lineWidth = 1
+              ctx.strokeStyle = chart.options.scale.angleLines.customColor
+              ctx.stroke()
+              ctx.closePath()
+            }
+          })
+        })
+        const margin = (chart.chartArea.bottom - chart.chartArea.top) / 10
+        chart.chart.ctx.fillStyle = props.themeContext.colors.chartTickColor
+        chart.chart.ctx.font = '10px ClanOT'
+        // chart.chart.ctx.fillText(
+        //   `0`,
+        //   chart.scale.xCenter - 3,
+        //   chart.scale.yCenter + 3
+        // )
+        // top ticks
+        chart.scale.ticksAsNumbers.map((tick, i) => {
+          if (i > 0) {
+            chart.chart.ctx.fillText(
+              `${tick.toFixed(0)}%`,
+              chart.scale.xCenter - (`${tick.toFixed(0)}%`.length - 8) / 2,
+              chart.scale.yCenter - margin * i - i * (i > 2 ? 7 : 8)
+            )
+          }
+        })
+
+        // bottom ticks
+        chart.scale.ticksAsNumbers.map((tick, i) => {
+          if (i > 0) {
+            chart.chart.ctx.fillText(
+              `${tick.toFixed(0)}%`,
+              chart.scale.xCenter - (`${tick.toFixed(0)}%`.length - 8) / 2,
+              chart.scale.yCenter + margin * i + i * (i > 2 ? 4 : 2)
+            )
+          }
+        })
+
+        // right ticks
+        chart.scale.ticksAsNumbers.map((tick, i) => {
+          if (i > 0) {
+            chart.chart.ctx.fillText(
+              `${tick.toFixed(0)}%`,
+              chart.scale.xCenter + margin * i + i * 6,
+              chart.scale.yCenter - 4
+            )
+          }
+        })
+
+        // left ticks
+        chart.scale.ticksAsNumbers.map((tick, i) => {
+          if (i > 0) {
+            chart.chart.ctx.fillText(
+              `${tick.toFixed(0)}%`,
+              chart.scale.xCenter - margin * i - i * 6,
+              chart.scale.yCenter - 4
+            )
+          }
+        })
+      },
+    },
+  ]
+  const { data, key } = props
   const themes = props.themeContext.colors
   let parsedData = data || {}
   let maxTicksStepLimit = 100000
@@ -165,6 +216,7 @@ const RadarChart = (props) => {
 
   return (
     <Radar
+      key={`radar-${Math.floor(Math.random() * 1000)}`}
       data={theData}
       plugins={plugins}
       options={{
@@ -174,7 +226,7 @@ const RadarChart = (props) => {
           display: false,
         },
         layout: {
-          padding: 40,
+          padding: 35,
         },
         tooltips: customChartToolTip(themes, {
           callbacks: {
@@ -205,6 +257,7 @@ const RadarChart = (props) => {
         plugins: {
           datalabels: false,
         },
+
         scale: {
           gridLines: {
             display: true,
@@ -219,18 +272,18 @@ const RadarChart = (props) => {
             borderColor: themes.textColor,
           },
           ticks: {
+            display: false,
             stepSize,
             callback: function(value) {
-              return metricSuffix(value)
+              return percentageBeautifier(value) + '%'
             },
             backdropColor: 'transparent',
             fontSize: 10,
             fontFamily: 'ClanOTNews',
             fontColor: themes.chartTickColor,
-            display: true,
             maxTicksLimit: 5,
             min: 0,
-            max: maxTicksStepLimit,
+            max: hasData ? maxTicksStepLimit : 0,
             beginAtZero: true,
           },
           angleLines: {

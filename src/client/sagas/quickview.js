@@ -4,6 +4,7 @@ import querystring from 'querystring'
 import { types } from 'Reducers/quickview'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import { getDataFromApi } from 'Utils/api'
+import { getPropLabel } from 'Utils'
 
 import { percentageManipulation } from 'Utils/datasets'
 
@@ -64,7 +65,7 @@ function* getQuickviewItemsApi({
         {
           slug: 'duration',
           title: 'Duration',
-          value: durationsBucketName,
+          value: getPropLabel(durationsBucketName, 'duration'),
           percentage: durationsIndustryPercent,
           text: `<b>{percentage}%</b> of ${performingText}industry videos are <b>{value} sec</b> in length`,
         },
