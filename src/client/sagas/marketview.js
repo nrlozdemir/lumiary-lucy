@@ -61,6 +61,7 @@ function* getCompetitorVideosMarketview(params) {
       actions.getCompetitorVideosSuccess(percentageManipulation(payload))
     )
   } catch (error) {
+    console.log(error)
     yield put(actions.getCompetitorVideosFailure({ error }))
   }
 }
@@ -137,6 +138,7 @@ function* getCompetitorTopVideosMarketview(payload) {
       )
     }
   } catch (error) {
+    console.log(error)
     yield put(actions.getCompetitorTopVideosFailure(error))
   }
 }
@@ -705,6 +707,7 @@ function* getTotalCompetitorViewsData() {
       )
     }
   } catch (error) {
+    console.log(error)
     yield put(actions.getTotalCompetitorViewsFailure(error))
   }
 }
@@ -817,6 +820,7 @@ function* getTopPerformingPropertiesByCompetitorsData({
       throw new Error('Get Top Performing Property Error')
     }
   } catch (error) {
+    console.log(error)
     yield put(actions.getTopPerformingPropertiesByCompetitorsFailure(error))
   }
 }

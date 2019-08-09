@@ -159,6 +159,7 @@ function* getColorTemperatureData({
       throw 'Error fetching Library/Detail ColorTemperature'
     }
   } catch (err) {
+    console.log(err)
     yield put(actions.getColorTempFailure(err))
   }
 }
@@ -174,8 +175,9 @@ function* getShotByShot(videoId) {
       'GET'
     )
     yield put(actions.getShotByShotSuccess(percentageManipulation(payload)))
-  } catch (error) {
-    yield put(actions.getShotByShotFailure({ error }))
+  } catch (err) {
+    console.log(err)
+    yield put(actions.getShotByShotFailure({ err }))
   }
 }
 
@@ -344,6 +346,7 @@ function* getVideoAverage({ id }) {
       )
     )
   } catch (error) {
+    console.log(error)
     yield put(actions.getSelectedVideoAverageFailure({ error }))
   }
 }
@@ -385,6 +388,7 @@ function* getRadarChartRequest(ids) {
 
     yield put(actions.getRadarChartSuccess(percentageManipulation(values)))
   } catch (error) {
+    console.log(error)
     yield put(actions.getRadarChartFailure({ error }))
   }
 }
@@ -399,6 +403,7 @@ function* getPeopleRequest(ids) {
 
     yield put(actions.getPeopleSuccess(percentageManipulation(payload)))
   } catch (error) {
+    console.log(error)
     yield put(actions.getPeopleFailure({ error }))
   }
 }
