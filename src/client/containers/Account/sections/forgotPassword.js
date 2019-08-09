@@ -107,7 +107,8 @@ class ForgotPassword extends Component {
               buttonText="Send Password Reset Link"
             />
             <Link className={style.forgotPasswordLink} to={'/account/login'}>
-              Go back to <span className={style.active}>Sign In</span>
+              <span style={colors.account.forgotPasswordLink || {}}>Go back to </span>
+              <span className={style.active}>Sign In</span>
             </Link>
           </div>
         </form>
