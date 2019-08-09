@@ -12,6 +12,7 @@ import {
 } from 'Utils'
 
 import {
+  convertNestedDurationsIntoLabels,
   convertDataIntoDatasets,
   radarChartCalculate,
   compareSharesData,
@@ -146,6 +147,12 @@ function* getFilteringSectionData({ data }) {
       !!doughnutData.data[brand.name][property] &&
       stackedChartData.data
     ) {
+      if (property === 'duration') {
+        stackedChartData.data = convertNestedDurationsIntoLabels(
+          stackedChartData.data
+        )
+      }
+
       yield put(
         actions.getFilteringSectionDataSuccess({
           doughnutData: convertDataIntoDatasets(
