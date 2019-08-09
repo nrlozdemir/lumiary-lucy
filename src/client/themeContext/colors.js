@@ -216,6 +216,9 @@ const dark = {
     link: {
       color: '#ffffff',
     },
+    forgotPasswordLink: {
+      color: '#fff'
+    },
     card: {
       borderColor: '#545b79',
       backgroundColor: '#373f5b',
@@ -474,6 +477,9 @@ const light = {
     },
     link: {
       color: '#505050',
+    },
+    forgotPasswordLink: {
+      color: '#505050'
     },
     card: {
       borderColor: '#acb0be',
