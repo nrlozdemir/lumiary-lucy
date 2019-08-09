@@ -274,6 +274,7 @@ function* getQuickviewItemsSaga({ payload }) {
       })
     }
   } catch (error) {
+    console.log(error)
     yield put({
       type: types.GET_QUICKVIEW_ITEMS_FAILURE,
       error,

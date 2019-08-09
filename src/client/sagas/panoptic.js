@@ -92,6 +92,7 @@ function* getColorTemperatureData({ data }) {
       })
     )
   } catch (err) {
+    console.log(err)
     yield put(actions.getColorTemperatureDataError(err))
   }
 }
@@ -313,6 +314,7 @@ function* getCompareSharesData({ data: { dateRange } }) {
       )
     )
   } catch (err) {
+    console.log(err)
     yield put(actions.getCompareSharesDataError(err))
   }
 }

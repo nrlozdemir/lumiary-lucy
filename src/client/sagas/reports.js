@@ -373,6 +373,7 @@ function* getPerformanceComparisonData({
       throw new Error('Compare Brands getPerformanceComparisonDataError')
     }
   } catch (err) {
+    console.log(err)
     yield put(actions.getPerformanceComparisonDataError(err))
   }
 }

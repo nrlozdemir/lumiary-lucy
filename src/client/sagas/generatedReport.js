@@ -207,6 +207,7 @@ function* getColorTempData({
       )
     )
   } catch (err) {
+    console.log(err)
     yield put(actions.getColorTempDataFailure(err))
   }
 }
@@ -267,6 +268,7 @@ function* getFilteringSectionData({ data: { property, report } }) {
       })
     )
   } catch (err) {
+    console.log(err)
     yield put(
       // empty data
       actions.getFilteringSectionDataSuccess({
@@ -425,8 +427,9 @@ function* getCompetitorTopVideos({ data: { property, report } }) {
         )
       )
     )
-  } catch (error) {
-    yield put(actions.getCompetitorTopVideosFailure(error))
+  } catch (err) {
+    console.log(err)
+    yield put(actions.getCompetitorTopVideosFailure(err))
   }
 }
 

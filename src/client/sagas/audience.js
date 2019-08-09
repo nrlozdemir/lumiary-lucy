@@ -44,6 +44,7 @@ function* getAudienceContentVitalityScoreData({ payload = {} }) {
       throw new Error('Audience/getAudienceContentVitalityScoreData Error')
     }
   } catch (err) {
+    console.log(err)
     yield put(actions.getAudienceContentVitalityScoreDataError(err))
   }
 }
@@ -92,6 +93,7 @@ function* getAudiencePerformanceData({ payload = {} }) {
       throw new Error('Audience/getAudiencePerformanceData Error')
     }
   } catch (err) {
+    console.log(err)
     yield put(actions.getAudiencePerformanceDataError(err))
   }
 }
@@ -123,6 +125,7 @@ function* getAudienceAgeSliderData({ payload = {} }) {
       )
     }
   } catch (err) {
+    console.log(err)
     yield put(
       actions.getAudienceAgeSliderDataSuccess(percentageManipulation(fallBack))
     )
@@ -222,6 +225,7 @@ function* getAudienceChangeOverTimeData({ payload = {} }) {
       )
     )
   } catch (err) {
+    console.log(err)
     yield put(actions.getAudienceChangeOverTimeDataError(err))
   }
 }
