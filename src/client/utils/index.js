@@ -514,18 +514,20 @@ const getModuleTerms = (key, data = {}) => {
     moduleObject.module &&
     moduleObject.module.terms &&
     moduleObject.module.terms.map((term) => term.uuid)
+
   return Object.keys(terms)
-    .map((term) => {
-      const item = terms[term].find(
-        (item) => termsUuids && termsUuids.includes(item.uuid)
+    .reduce((acc, letter) => {
+      const matchingItems = terms[letter].filter(
+        (item) => !!item && !!item.uuid && termsUuids.includes(item.uuid)
       )
-      if (item) {
-        return {
-          ...item,
-          letter: term,
-        }
+
+      if (!!matchingItems.length) {
+        const items = matchingItems.map((i) => ({ ...i, letter }))
+
+        return [...acc, ...items]
       }
-    })
+      return acc
+    }, [])
     .filter(function(element) {
       return element !== undefined
     })
