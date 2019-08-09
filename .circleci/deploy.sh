@@ -9,9 +9,28 @@ if [ "${CIRCLE_BRANCH}" != "qa" ] && [ "${CIRCLE_BRANCH}" != "staging" ] && [ "$
     exit;
 fi
 
+function get_parameter {
+    parameter=$1
+    aws ssm get-parameter --with-decryption --name /${CIRCLE_BRANCH}/$SERVICE_NAME/${parameter} | jq -r .Parameter.Value
+}
+
+function get_env_parameter {
+    parameter=$1
+    aws ssm get-parameter --with-decryption --name /${CIRCLE_BRANCH}/${parameter} | jq -r .Parameter.Value
+}
+
 sudo apt-get -y update
 sudo apt-get -y install python python-pip python-dev python-setuptools curl
 sudo pip install --upgrade awscli
+
+
+echo "⚙ Getting webpack parameters..."
+export AWS_S3_MEDIA_BUCKET=$(get_parameter aws_s3_media_bucket)
+export REDIS_HOST=$(get_env_parameter lumiere/redis_host)
+export API_ROOT=$(get_env_parameter azazzle/app_url)
+export API_VERSION=$(get_env_parameter azazzle/api_version)
+export QAPI_ROOT=$(get_env_parameter api_url)
+export QAPI_VERSION=$(get_env_parameter api_version)
 
 echo "🛠 Building static files..."
 npm run build:$CIRCLE_BRANCH
