@@ -69,6 +69,12 @@ function* getAudiencePerformanceData({ payload = {} }) {
     )
 
     if (!!response) {
+      if(property === 'duration') {
+        Object.keys(response).forEach(key => {
+          response[key] = convertDurationLabels(response[key], property, true)
+        })
+      }
+
       const updatedResponse = Object.keys(response).reduce((newData, key) => {
         newData[key] = Object.keys(response[key]).map((v) => ({
           visual: v,
