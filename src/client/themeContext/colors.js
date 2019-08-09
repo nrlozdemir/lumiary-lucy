@@ -216,6 +216,9 @@ const dark = {
     link: {
       color: '#ffffff',
     },
+    forgotPasswordLink: {
+      color: '#fff'
+    },
     card: {
       borderColor: '#545b79',
       backgroundColor: '#373f5b',
@@ -255,6 +258,9 @@ const dark = {
   // global lineChart
   lineChartPointBorderColor: '#fff',
   lineChartPointHoverBorderColor: '#fff',
+
+  //glossary
+  glossaryLinkColor: '#fff'
 }
 
 const light = {
@@ -475,6 +481,9 @@ const light = {
     link: {
       color: '#505050',
     },
+    forgotPasswordLink: {
+      color: '#505050'
+    },
     card: {
       borderColor: '#acb0be',
       backgroundColor: '#f3f6f9',
@@ -513,6 +522,9 @@ const light = {
   // global lineChart
   lineChartPointBorderColor: '#505050',
   lineChartPointHoverBorderColor: '#505050',
+
+  //glossary
+  glossaryLinkColor: '#505050'
 }
 
 const themes = {

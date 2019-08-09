@@ -42,6 +42,13 @@ class MainContentArea extends Component {
           boxShadow: `0 2px 6px 0 ${colors.moduleShadow}`,
         }}
       >
+        <style>
+          {`
+            .${style.mainContentItemContent} a {
+              color: ${colors.glossaryLinkColor} !important;
+            }
+          `}
+        </style>
         <div className={style.mainContentArea}>
           {(!!menu || !!letter) && (
             <div className={style.mainContentHeader}>
