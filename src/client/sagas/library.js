@@ -162,6 +162,7 @@ function* changeFilter() {
 
     yield put(actions.clearAndLoadVideos(payload))
   } catch (err) {
+    console.log(err)
     yield put(actions.loadVideosError(err))
   }
 }

@@ -35,6 +35,10 @@ const getTimeBucket = (value) => {
 const getLabelWithSuffix = (label, property) => {
   let suffix
 
+  if (!label) {
+    return ''
+  }
+
   switch (property) {
     case 'duration':
       suffix = 'seconds'
@@ -51,6 +55,10 @@ const getLabelWithSuffix = (label, property) => {
 const getPropLabel = (label, prop) => {
   let suffix
 
+  if (!label) {
+    return ''
+  }
+
   switch (prop) {
     case 'duration':
       suffix = 's'
@@ -66,7 +74,7 @@ const getPropLabel = (label, prop) => {
     default:
       suffix = ''
   }
-  return `${label}${suffix}`
+  return label === '60+' && prop === 'duration' ? '60s+' : `${label}${suffix}`
 }
 
 const splitCamelCaseToString = (s) => ucfirst(s.split(/(?=[A-Z])/).join(' '))
@@ -495,7 +503,7 @@ const customChartToolTip = (themes, customOptions = {}, forceData) => {
 }
 
 const getModuleTerms = (key, data = {}) => {
-  const terms = data.glossary && data.glossary.terms || {}
+  const terms = (data.glossary && data.glossary.terms) || {}
   const moduleObject =
     data &&
     data.glossary &&
@@ -506,18 +514,20 @@ const getModuleTerms = (key, data = {}) => {
     moduleObject.module &&
     moduleObject.module.terms &&
     moduleObject.module.terms.map((term) => term.uuid)
+
   return Object.keys(terms)
-    .map((term) => {
-      const item = terms[term].find(
-        (item) => termsUuids && termsUuids.includes(item.uuid)
+    .reduce((acc, letter) => {
+      const matchingItems = terms[letter].filter(
+        (item) => !!item && !!item.uuid && termsUuids.includes(item.uuid)
       )
-      if (item) {
-        return {
-          ...item,
-          letter: term,
-        }
+
+      if (!!matchingItems.length) {
+        const items = matchingItems.map((i) => ({ ...i, letter }))
+
+        return [...acc, ...items]
       }
-    })
+      return acc
+    }, [])
     .filter(function(element) {
       return element !== undefined
     })
@@ -604,24 +614,30 @@ const getColorPercents = (input, audience = false) => {
     'Red-Purple',
   ]
 
-  if(audience) {
+  if (audience) {
     return Object.keys(input).reduce((accumulator, gender) => {
       accumulator[gender] = {}
 
       Object.keys(input[gender]).forEach((property) => {
-        if(property === 'color') {
+        if (property === 'color') {
           accumulator[gender][property] = {}
           let sum = 0
           orderedColors.forEach((color) => {
-            sum += (input[gender][property][color.toLowerCase()] || 0)
+            sum += input[gender][property][color.toLowerCase()] || 0
           })
 
           orderedColors.forEach((color) => {
             const thisNum = input[gender][property][color.toLowerCase()] || 0
             const percentage = thisNum / sum
-            const formattedPercentage = (isNaN(parseInt((percentage * 100).toFixed(0)))) ? 0 : parseInt((percentage * 100).toFixed(0))
-            accumulator[gender][property][color.toLowerCase()] = formattedPercentage
-          })                
+            const formattedPercentage = isNaN(
+              parseInt((percentage * 100).toFixed(0))
+            )
+              ? 0
+              : parseInt((percentage * 100).toFixed(0))
+            accumulator[gender][property][
+              color.toLowerCase()
+            ] = formattedPercentage
+          })
         } else {
           accumulator[gender][property] = input[gender][property]
         }
@@ -632,8 +648,7 @@ const getColorPercents = (input, audience = false) => {
   } else {
     return input.map((inputItem) => {
       return Object.keys(inputItem).reduce((accumulator, key) => {
-        
-        switch(key) {
+        switch (key) {
           case 'data':
             accumulator[key] = {}
 
@@ -641,34 +656,47 @@ const getColorPercents = (input, audience = false) => {
               accumulator[key][brandName] = {}
 
               Object.keys(inputItem[key][brandName]).forEach((property) => {
-                if(property === 'color') {
+                if (property === 'color') {
                   accumulator[key][brandName][property] = {}
                   let sum = 0
                   orderedColors.forEach((color) => {
-                    sum += (inputItem[key][brandName][property][color.toLowerCase()] || 0)
+                    sum +=
+                      inputItem[key][brandName][property][
+                        color.toLowerCase()
+                      ] || 0
                   })
 
                   orderedColors.forEach((color) => {
-                    const thisNum = inputItem[key][brandName][property][color.toLowerCase()] || 0
+                    const thisNum =
+                      inputItem[key][brandName][property][
+                        color.toLowerCase()
+                      ] || 0
                     const percentage = thisNum / sum
-                    const formattedPercentage = (isNaN(parseInt((percentage * 100).toFixed(0)))) ? 0 : parseInt((percentage * 100).toFixed(0))
-                    accumulator[key][brandName][property][color.toLowerCase()] = formattedPercentage
-                  })                
+                    const formattedPercentage = isNaN(
+                      parseInt((percentage * 100).toFixed(0))
+                    )
+                      ? 0
+                      : parseInt((percentage * 100).toFixed(0))
+                    accumulator[key][brandName][property][
+                      color.toLowerCase()
+                    ] = formattedPercentage
+                  })
                 } else {
-                  accumulator[key][brandName][property] = inputItem[key][brandName][property]
+                  accumulator[key][brandName][property] =
+                    inputItem[key][brandName][property]
                 }
               })
             })
-          break;
+            break
 
           case 'platform':
             accumulator[key] = inputItem[key]
-          break;        
+            break
         }
 
         return accumulator
       }, {})
-    })    
+    })
   }
 }
 

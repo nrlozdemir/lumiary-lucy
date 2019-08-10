@@ -10,6 +10,7 @@ import {
   strToColor,
   normalize,
   getTimeBucket,
+  getPropLabel,
   getLabelWithSuffix,
 } from 'Utils'
 import {
@@ -597,7 +598,13 @@ const convertVideoEngagementData = (data, metric = 'views') => {
     return {}
   }
 
-  const labels = ['0-15', '16-30', '31-60', '60+']
+  const objectKeys = Object.keys(data)
+
+  const durationLabels = ['0-15', '16-30', '31-60', '60+']
+
+  const labels =
+    objectKeys.includes(...durationLabels) ? durationLabels : objectKeys
+
   const emptyData = {
     Tuesday: 0,
     Monday: 0,
@@ -624,7 +631,8 @@ const convertVideoEngagementData = (data, metric = 'views') => {
         metric,
         maxVideo: 100, // always 100% max
         maxEngagement: 0,
-        label: key,
+        label:
+          labels === durationLabels ? getLabelWithSuffix(key, 'duration') : key,
         labels: [],
         datasets: [
           {
@@ -988,7 +996,61 @@ const convertPropertiesIntoDatasets = (data, options = {}) => {
   )
 }
 
+/*
+ @ response { object } - { 0-15, 16-30, 30-60, 60+ }
+ @ prop {string} - property
+ @ oneChar {bool} - prefix with 'seconds' or 's'
+ */
+
+const convertDurationLabels = (response = {}, prop = null, oneChar = false) => {
+  return prop === 'duration'
+    ? Object.keys(response).reduce((acc, key) => {
+        const label = oneChar
+          ? getPropLabel(key, prop)
+          : getLabelWithSuffix(key, prop)
+
+        return key !== 'subtotal'
+          ? {
+              ...acc,
+              [label]: response[key],
+            }
+          : acc
+      }, {})
+    : response
+}
+
+/* 
+ input: { Facebook: { duration: { 0-15 } } } 
+ output: { Facebook: { duration: { 0-15s | 0-15 seconds {oneChar} } } }
+ */
+
+const convertNestedDurationsIntoLabels = (response, oneChar = false) => {
+  const property = 'duration'
+  if (
+    !!response &&
+    !!Object.keys(response).length &&
+    Object.keys(response).every((key) => !!response[key][property])
+  ) {
+    return Object.keys(response).reduce(
+      (acc, key) => ({
+        ...acc,
+        [key]: {
+          [property]: convertDurationLabels(
+            response[key][property],
+            property,
+            oneChar
+          ),
+        },
+      }),
+      {}
+    )
+  }
+  return response
+}
+
 export {
+  convertNestedDurationsIntoLabels,
+  convertDurationLabels,
   convertPropertiesIntoDatasets,
   getCVScoreChartAttributes,
   convertDataIntoDatasets,

@@ -4,15 +4,22 @@ import { actions, types } from 'Reducers/panoptic'
 import moment from 'moment'
 import querystring from 'querystring'
 
-import { getDateBucketFromRange, normalize, sortObject, getColorPercents } from 'Utils'
+import {
+  getDateBucketFromRange,
+  normalize,
+  sortObject,
+  getColorPercents,
+} from 'Utils'
 
 import {
+  convertNestedDurationsIntoLabels,
   convertDataIntoDatasets,
   radarChartCalculate,
   compareSharesData,
   convertColorTempToDatasets,
   convertVideoEngagementData,
   percentageManipulation,
+  convertDurationLabels,
 } from 'Utils/datasets'
 
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
@@ -25,10 +32,12 @@ function* getVideoReleasesData({ data }) {
     const { brand } = yield select(makeSelectAuthProfile())
     const { platform, dateRange, metric } = data
 
+    const property = 'duration'
+
     const options = {
       metric,
       platform,
-      property: 'duration',
+      property,
       daterange: dateRange,
       dateBucket: 'dayOfWeek',
     }
@@ -84,6 +93,7 @@ function* getColorTemperatureData({ data }) {
       })
     )
   } catch (err) {
+    console.log(err)
     yield put(actions.getColorTemperatureDataError(err))
   }
 }
@@ -137,6 +147,12 @@ function* getFilteringSectionData({ data }) {
       !!doughnutData.data[brand.name][property] &&
       stackedChartData.data
     ) {
+      if (property === 'duration') {
+        stackedChartData.data = convertNestedDurationsIntoLabels(
+          stackedChartData.data
+        )
+      }
+
       yield put(
         actions.getFilteringSectionDataSuccess({
           doughnutData: convertDataIntoDatasets(
@@ -181,11 +197,13 @@ function* getPacingCardData({ data }) {
 
     const { metric, dateRange, platform } = data
 
+    const property = 'pacing'
+
     const options = {
       metric,
       dateRange,
       platform,
-      property: ['pacing'],
+      property: [property],
       dateBucket: 'none',
       display: 'percentage',
       brands: [brand.uuid],
@@ -206,18 +224,34 @@ function* getPacingCardData({ data }) {
     if (
       !!stadiumData.data &&
       !!stadiumData.data[brand.name] &&
-      !!stadiumData.data[brand.name].pacing &&
+      !!stadiumData.data[brand.name][property] &&
       !!horizontalStackedBarData.data &&
       !!horizontalStackedBarData.data[brand.name] &&
-      !!horizontalStackedBarData.data[brand.name].pacing
+      !!horizontalStackedBarData.data[brand.name][property]
     ) {
+      horizontalStackedBarData.data = Object.keys(
+        horizontalStackedBarData.data
+      ).reduce(
+        (acc, key) => ({
+          ...acc,
+          [key]: {
+            [property]: convertDurationLabels(
+              horizontalStackedBarData.data[key][property],
+              'duration',
+              true
+            ),
+          },
+        }),
+        {}
+      )
+
       yield put(
         actions.getPacingCardDataSuccess({
           stadiumData: percentageManipulation(
             convertDataIntoDatasets(stadiumData, options)
           ),
           horizontalStackedBarDataOriginal:
-            horizontalStackedBarData.data[brand.name].pacing,
+            horizontalStackedBarData.data[brand.name][property],
           horizontalStackedBarData: convertDataIntoDatasets(
             horizontalStackedBarData,
             {
@@ -287,6 +321,7 @@ function* getCompareSharesData({ data: { dateRange } }) {
       )
     )
   } catch (err) {
+    console.log(err)
     yield put(actions.getCompareSharesDataError(err))
   }
 }

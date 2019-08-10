@@ -9,6 +9,7 @@ import { getColorPercents } from 'Utils'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import {
+  convertDurationLabels,
   radarChartCalculate,
   compareSharesData,
   percentageManipulation,
@@ -32,7 +33,7 @@ function* getAudienceContentVitalityScoreData({ payload = {} }) {
       }),
       'GET'
     )
-    
+
     if (!!response && !!Object.keys(response).length) {
       yield put(
         actions.getAudienceContentVitalityScoreDataSuccess(
@@ -43,6 +44,7 @@ function* getAudienceContentVitalityScoreData({ payload = {} }) {
       throw new Error('Audience/getAudienceContentVitalityScoreData Error')
     }
   } catch (err) {
+    console.log(err)
     yield put(actions.getAudienceContentVitalityScoreDataError(err))
   }
 }
@@ -68,6 +70,12 @@ function* getAudiencePerformanceData({ payload = {} }) {
     )
 
     if (!!response) {
+      if(property === 'duration') {
+        Object.keys(response).forEach(key => {
+          response[key] = convertDurationLabels(response[key], property, true)
+        })
+      }
+
       const updatedResponse = Object.keys(response).reduce((newData, key) => {
         newData[key] = Object.keys(response[key]).map((v) => ({
           visual: v,
@@ -85,6 +93,7 @@ function* getAudiencePerformanceData({ payload = {} }) {
       throw new Error('Audience/getAudiencePerformanceData Error')
     }
   } catch (err) {
+    console.log(err)
     yield put(actions.getAudiencePerformanceDataError(err))
   }
 }
@@ -116,6 +125,7 @@ function* getAudienceAgeSliderData({ payload = {} }) {
       )
     }
   } catch (err) {
+    console.log(err)
     yield put(
       actions.getAudienceAgeSliderDataSuccess(percentageManipulation(fallBack))
     )
@@ -141,9 +151,12 @@ function* getAudienceGenderData({ payload = {} }) {
     )
 
     yield put(
-      actions.getAudienceGenderDataSuccess(percentageManipulation(response))
+      actions.getAudienceGenderDataSuccess(
+        percentageManipulation(convertDurationLabels(response, property))
+      )
     )
   } catch (err) {
+    console.log(err)
     yield put(actions.getAudienceGenderDataError(err))
   }
 }
@@ -212,6 +225,7 @@ function* getAudienceChangeOverTimeData({ payload = {} }) {
       )
     )
   } catch (err) {
+    console.log(err)
     yield put(actions.getAudienceChangeOverTimeDataError(err))
   }
 }
@@ -237,7 +251,9 @@ function* getAudienceDominantColorData({ data: { dateRange, metric } }) {
     yield put(
       actions.getAudienceDominantColorDataSuccess(
         percentageManipulation(
-          radarChartCalculate(compareSharesData({ data: formattedResponse }, parameters))
+          radarChartCalculate(
+            compareSharesData({ data: formattedResponse }, parameters)
+          )
         )
       )
     )
