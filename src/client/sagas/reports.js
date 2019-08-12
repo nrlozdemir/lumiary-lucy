@@ -278,7 +278,6 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
       display: 'percentage',
     }
 
-    console.log(property)
     const response = yield call(
       getDataFromApi, 
       undefined, 
@@ -384,7 +383,6 @@ function* getColorComparisonData({ data: { metric, dateRange, report } }) {
     // const competitors = getBrandAndCompetitors(profile)
 
     // const filteredCompetitors = getFilteredCompetitors(competitors, report)
-console.log('getColorComparisonData')
     const parameters = {
       dateRange,
       metric,
