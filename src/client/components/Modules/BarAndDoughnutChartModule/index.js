@@ -116,14 +116,20 @@ const BarAndDoughnutChartModule = ({
                 {barCustoms.hideLabels && (
                   <div className={style.labels}>
                     {stackedChartData.labels &&
-                      stackedChartData.labels.map((label) => {
+                      stackedChartData.labels.map((label, idx) => {
                         return formatToSmallText[label.trim()] ? (
-                          <div className={style.label} data-text={label.trim()}>
+                          <div
+                            className={style.label}
+                            data-text={label.trim()}
+                            key={idx}
+                          >
                             {formatToSmallText[label.trim()]}{' '}
                             <i className="icon icon-Information" />
                           </div>
                         ) : (
-                          <div className={style.label}>{label}</div>
+                          <div className={style.label} key={idx}>
+                            {label}
+                          </div>
                         )
                       })}
                   </div>
