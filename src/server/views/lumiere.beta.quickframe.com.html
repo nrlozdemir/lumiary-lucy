@@ -1,0 +1,321 @@
+<html>
+  <head>
+    <title data-react-helmet="true"></title>
+    <style type="text/css">
+      body {
+        opacity: 0;
+        color: #505050;
+        background: #e8ecf0;
+      }
+    </style>
+    <script type="text/javascript">
+      document.addEventListener('DOMContentLoaded', function(event) {
+        document.body.style.opacity = 1
+      })
+    </script>
+    <script type="text/javascript">
+      ;(function() {
+        var s = document.createElement('script')
+        s.type = 'text/javascript'
+        s.async = true
+        s.src =
+          '//api.usersnap.com/load/41e4c49f-3d83-47ab-87a1-d9a9b3bf4606.js'
+        var x = document.getElementsByTagName('script')[0]
+        x.parentNode.insertBefore(s, x)
+      })()
+    </script>
+
+    <link
+      rel="stylesheet"
+      href="//s3.amazonaws.com/quickframe-static/bundles/bundle.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      charset="UTF-8"
+      async="true"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      async="true"
+      href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+    />
+    <link
+      rel="stylesheet"
+      type="text/css"
+      charset="UTF-8"
+      async="true"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.4.6/css/swiper.min.css"
+    />
+  </head>
+
+  <body>
+    <div id="app"></div>
+
+    <script type="text/javascript">
+      window.__INITIAL_STATE__ = {
+        router: {
+          location: { pathname: '/', search: '', hash: '', key: '5l3s9n' },
+          action: 'POP',
+        },
+        app: {
+          config: {},
+          breakpoints: null,
+          isLoading: false,
+          isMobile: false,
+          location: { success: false, location: null },
+          locationCurrent: null,
+          locationHistory: [],
+          metadata: {
+            title: 'Lumiary',
+            meta: [
+              { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
+              {
+                name: 'viewport',
+                content:
+                  'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0',
+              },
+              { name: 'description', content: 'Quickframe Lumiary' },
+            ],
+            script: [
+              {
+                type: 'application/ld+json',
+                innerHTML: '{ "@context": "http://schema.org" }',
+              },
+            ],
+          },
+          position: { success: false, latitude: false, longitude: false },
+        },
+        auth: {
+          requesting: false,
+          successful: false,
+          loginError: null,
+          loggedIn: false,
+          profile: {
+            brand: {
+              name: 'bleacherreport',
+              uuid: 'd65aa957-d094-4cf3-8d37-dafe50e752ea',
+              competitors: [
+                {
+                  name: 'barstoolsports',
+                  uuid: '1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6',
+                },
+              ],
+            },
+          },
+        },
+        Library: { videos: [], filters: {}, error: false, loading: false },
+        Quickview: {
+          quickviewItems: [],
+          selectedPlatform: { id: null, platformsValues: [] },
+          error: false,
+          loading: false,
+        },
+        Marketview: {
+          selectedVideo: null,
+          competitorTopVideos: null,
+          totalCompetitorViewsData: {},
+          error: false,
+          topPerformingPropertiesByCompetitorsData: null,
+          formatChartData: [],
+          topPerformingPropertiesData: null,
+          totalViewsData: {},
+          pacingChartData: [],
+          videos: null,
+          loading: false,
+          bubbleChartData: [],
+          similarProperties: null,
+          marketviewDetailTime: null,
+        },
+        Panoptic: {
+          flipCardsData: { data: {}, loading: false, error: null },
+          colorTempData: { data: [], loading: false, error: null },
+          compareSharesData: { data: [], loading: false, error: null },
+          filteringSectionData: { data: {}, loading: false, error: null },
+          error: false,
+          data: {},
+          videoReleasesData: { data: {}, loading: false, error: null },
+          topPerformingFormatData: { data: [], loading: false, error: null },
+          pacingChartData: { data: {}, loading: false, error: null },
+          loading: false,
+        },
+        LibraryDetail: {
+          barChartData: null,
+          doughnutLineChartData: null,
+          colorTempData: { data: [], loading: false, error: null },
+          shotByShotData: null,
+          error: false,
+          loading: false,
+        },
+        Reports: {
+          reports: { data: [], error: false, loading: false },
+          brandInsightValues: { data: [], error: false, loading: false },
+          contentVitalityScoreData: { data: [], error: false, loading: false },
+          comparebrandValues: { data: [], error: false, loading: false },
+          predefinedReportValues: { data: [], error: false, loading: false },
+          videoComparisonData: { data: [], error: false, loading: false },
+          performanceComparisonData: { data: {}, error: false, loading: false },
+          colorComparisonData: { data: [], error: false, loading: false },
+        },
+        GeneratedReport: {
+          data: {},
+          error: false,
+          loading: false,
+          selectedVideo: null,
+        },
+        form: {},
+        Audience: {
+          audienceContentVitalityScoreData: {
+            data: [],
+            loading: false,
+            error: null,
+          },
+          audienceAgeSliderData: { data: [], loading: false, error: null },
+          error: false,
+          audienceDominantColorData: { data: {}, loading: false, error: null },
+          data: {},
+          audienceGenderData: { data: [], loading: false, error: null },
+          audiencePerformanceData: { data: {}, loading: false, error: null },
+          loading: false,
+          audienceColorTemperatureData: {
+            data: [],
+            loading: false,
+            error: null,
+          },
+          audienceChangeOverTimeData: { data: [], loading: false, error: null },
+        },
+        SelectFilters: {
+          options: {
+            audienceGender: [
+              { value: 'male', label: 'Male' },
+              { value: 'female', label: 'Female' },
+              { value: 'both', label: 'Both' },
+            ],
+            resolution: [
+              { value: '4K', label: '4K' },
+              { value: '1080p', label: '1080p' },
+              { value: '720p', label: '720p' },
+              { value: '480p', label: '480p' },
+              { value: '360p', label: '360p' },
+            ],
+            talentGender: [
+              { value: 'male', label: 'Male' },
+              { value: 'female', label: 'Female' },
+              { value: 'both', label: 'Both' },
+            ],
+            frameRate: [
+              { value: '24', label: '24 Fps' },
+              { value: '30', label: '30 Fps' },
+              { value: '50', label: '50 Fps' },
+            ],
+            dateRange: [
+              { value: '24hours', label: 'Today' },
+              { value: 'week', label: 'Past Week' },
+              { value: 'month', label: 'Past Month' },
+              { value: '3months', label: 'Past 3 Months' },
+              { value: 'custom', label: 'Custom' },
+            ],
+            metric: [
+              { value: 'views', label: 'Views' },
+              { value: 'likes', label: 'Likes' },
+              { value: 'shares', label: 'Shares' },
+              { value: 'comments', label: 'Comments' },
+            ],
+            pacing: [
+              { value: 'fast', label: 'Fast' },
+              { value: 'medium', label: 'Medium' },
+              { value: 'slow', label: 'Slow' },
+              { value: 'slowest', label: 'Slowest' },
+            ],
+            videoFormat: [
+              { value: 'liveAction', label: 'Live Action' },
+              { value: 'cinemagraph', label: 'Cinemagraph' },
+              { value: 'stopMotion', label: 'Stop Motion' },
+              { value: 'animation', label: 'Animation' },
+            ],
+            talentAge: [
+              { value: '10-', label: '10 and under' },
+              { value: '11-17', label: '11-17 yrs' },
+              { value: '18-20', label: '18-20 yrs' },
+              { value: '21-24', label: '21-24 yrs' },
+              { value: '25-34', label: '25-34 yrs' },
+              { value: '35-64', label: '35-64 yrs' },
+              { value: '65+', label: '65 and over' },
+            ],
+            platform: [
+              { value: 'all', label: 'All Platforms' },
+              { value: 'facebook', label: 'Facebook' },
+              { value: 'twitter', label: 'Twitter' },
+              { value: 'instagram', label: 'Instagram' },
+              { value: 'youtube', label: 'YouTube' },
+            ],
+            aspectRatio: [
+              { value: '16:9', label: '16:9' },
+              { value: '1:1', label: '1:1' },
+              { value: '4:3', label: '4:3' },
+              { value: '9:16', label: '9:16' },
+            ],
+            duration: [
+              { value: '0-15', label: '0-15 sec' },
+              { value: '16-30', label: '16-30 sec' },
+              { value: '31-60', label: '31-60 sec' },
+              { value: '61', label: '61+' },
+            ],
+            property: [
+              { value: 'aspectRatio', label: 'Aspect Ratio' },
+              { value: 'duration', label: 'Duration' },
+              { value: 'format', label: 'Format' },
+              { value: 'frameRate', label: 'Frame Rate' },
+              { value: 'pacing', label: 'Pacing' },
+              { value: 'resolution', label: 'Resolution' },
+            ],
+            audienceAge: [
+              { value: '10-', label: '10 and under' },
+              { value: '11-17', label: '11-17 yrs' },
+              { value: '18-20', label: '18-20 yrs' },
+              { value: '21-24', label: '21-24 yrs' },
+              { value: '25-34', label: '25-34 yrs' },
+              { value: '35-64', label: '35-64 yrs' },
+              { value: '65+', label: '65 and over' },
+            ],
+            colorTempature: [
+              { value: 'happy-sad', label: 'Happy / Sad' },
+              { value: 'energetic-calm', label: 'Energetic / Calm' },
+              { value: 'cool-warm', label: 'Cool / Warm' },
+              { value: 'natural-saynthetic', label: 'Natural / Synthetic' },
+            ],
+          },
+          values: {},
+          defaults: {
+            audienceGender: 'male',
+            resolution: '4K',
+            talentGender: 'male',
+            frameRate: '24',
+            dateRange: '24hours',
+            metric: 'views',
+            pacing: 'fast',
+            videoFormat: 'liveAction',
+            talentAge: '10-',
+            platform: 'all',
+            aspectRatio: '16:9',
+            duration: '0-15',
+            property: 'aspectRatio',
+            audienceAge: '10-',
+            colorTempature: 'happy-sad',
+          },
+        },
+      }
+    </script>
+
+    <script
+      type="text/javascript"
+      src="//s3.amazonaws.com/quickframe-static/bundles/vendor.e7667429368556cde8ae.js"
+    ></script>
+    <script
+      type="text/javascript"
+      src="//s3.amazonaws.com/quickframe-static/bundles/main.808ff3b3794e706ae43e.js"
+    ></script>
+  </body>
+</html>
