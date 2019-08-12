@@ -6,7 +6,7 @@ import { makeSelectAuthProfile } from 'Reducers/auth'
 
 function* getSectionExplanations() {
   try {
-    const { brand } = yield select(makeSelectAuthProfile)
+    const { brand } = yield select(makeSelectAuthProfile())
 
     if (!!brand && !!brand.uuid) {
       const response = yield call(

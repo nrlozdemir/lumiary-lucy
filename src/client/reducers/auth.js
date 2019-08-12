@@ -14,10 +14,8 @@ export const types = {
   LOGIN_SSO_ERROR: 'AUTH/LOGIN_SSO:ERROR',
 
   LOGOUT_REQUEST: 'AUTH/LOGOUT_REQUEST',
-
-  GET_PROFILE_REQUEST: 'AUTH/GET_PROFILE_REQUEST',
-  GET_PROFILE_SUCCESS: 'AUTH/GET_PROFILE_SUCCESS',
-  GET_PROFILE_ERROR: 'AUTH/GET_PROFILE_ERROR',
+  LOGOUT_ERROR: 'AUTH/LOGOUT_ERROR',
+  LOGOUT_SUCCESS: 'AUTH/LOGOUT_SUCCESS',
 
   UPDATE_PASSWORD_REQUEST: 'AUTH/UPDATE_PASSWORD_REQUEST',
   UPDATE_PASSWORD_SUCCESS: 'AUTH/UPDATE_PASSWORD_SUCCESS',
@@ -27,13 +25,15 @@ export const types = {
   FORGOT_PASSWORD_SUCCESS: 'AUTH/FORGOT_PASSWORD_SUCCESS',
   FORGOT_PASSWORD_ERROR: 'AUTH/FORGOT_PASSWORD_ERROR',
 
-  COMPETITORS_REQUEST: 'AUTH/COMPETITORS_REQUEST',
-  COMPETITORS_SUCCESS: 'AUTH/COMPETITORS_SUCCESS',
-  COMPETITORS_ERROR: 'AUTH/COMPETITORS_ERROR',
-
   CONNECT_OAUTH_REQUEST: 'AUTH/CONNECT_OAUTH_REQUEST',
   CONNECT_OAUTH_SUCCESS: 'AUTH/CONNECT_OAUTH_SUCCESS',
   CONNECT_OAUTH_ERROR: 'AUTH/CONNECT_OAUTH_ERROR',
+
+  TOKEN_EXPIRED: 'AUTH/TOKEN_EXPIRED',
+  TOKEN_REFRESHED: 'AUTH/TOKEN_REFRESHED',
+  TOKEN_REFRESHING: 'AUTH/TOKEN_REFRESHING',
+
+  TOKEN_LOGIN_REQUEST: 'AUTH/TOKEN_LOGIN_REQUEST',
 }
 
 export const actions = {
@@ -43,9 +43,8 @@ export const actions = {
     password,
   }),
   logoutRequest: () => ({ type: types.LOGOUT_REQUEST }),
-  getProfileRequest: ({ userId, token }) => ({
-    type: types.GET_PROFILE_REQUEST,
-    userId,
+  tokenLoginRequest: ({ email, token }) => ({
+    type: types.TOKEN_LOGIN_REQUEST,
     token,
   }),
   loginSsoRequest: (data) => ({
@@ -79,7 +78,6 @@ export const initialState = fromJS({
   requesting: false,
   successful: false,
   loginError: null,
-  loggedIn: false,
 
   user: (typeof window === 'object'
     ? JSON.parse(window.localStorage.getItem('user'))
@@ -88,6 +86,7 @@ export const initialState = fromJS({
     refresh: false,
     refreshing: false,
     expiry: false,
+    loggedIn: false,
   },
   profile:
     (typeof window === 'object'
@@ -105,12 +104,6 @@ export const initialState = fromJS({
     success: null,
     loading: null,
     password: null,
-  },
-  competitors: {
-    data: [],
-    message: null,
-    success: null,
-    loading: null,
   },
   OAuth: {
     connects: {
@@ -141,31 +134,44 @@ const reducer = (state = initialState, action) => {
   const { payload } = action
 
   switch (action.type) {
+    case types.TOKEN_LOGIN_REQUEST:
     case types.LOGIN_SSO_REQUEST:
     case types.LOGIN_REQUEST:
       return state
         .set('requesting', fromJS(true))
-        .set('loggedIn', fromJS(false))
         .set('loginError', fromJS(null))
         .set('message', fromJS(null))
         .set('profile', fromJS(null))
-
-    // this should set profile too once the profile/user reducer/sagas are merged
-    case types.LOGIN_SUCCESS:
-      return state
-        .set('requesting', fromJS(false))
-        .set('loggedIn', fromJS(true))
-        .set('message', fromJS(payload.message))
-        .setIn(['user', 'id'], fromJS(payload.id))
-        .setIn(['user', 'token'], fromJS(payload.token))
+        .setIn(['user', 'loggedIn'], fromJS(false))
 
     case types.LOGIN_ERROR:
       return state
         .set('requesting', fromJS(false))
-        .set('loggedIn', fromJS(false))
-        .set('message', fromJS(payload.message))
+        .set('message', fromJS(payload))
+        .setIn(['user', 'loggedIn'], fromJS(false))
 
-    case types.LOGOUT_REQUEST:
+    case types.TOKEN_REFRESHING:
+      return state.set('refreshing', fromJS(false))
+
+    case types.TOKEN_REFRESHED:
+    case types.LOGIN_SUCCESS:
+    case types.LOGIN_SSO_SUCCESS: {
+      const { token, refresh, profile } = action.payload
+      const expiry = parseInt(jwtDecode(token).exp + '000')
+
+      return state
+        .setIn(['profile'], fromJS(getProfileObjectWithBrand(profile)))
+        .setIn(['user', 'token'], fromJS(token))
+        .setIn(['user', 'refresh'], fromJS(refresh))
+        .setIn(['user', 'expiry'], fromJS(expiry))
+        .setIn(['user', 'loggedIn'], fromJS(true))
+        .set('requesting', fromJS(false))
+        .set('successful', fromJS(true))
+        .set('refreshing', fromJS(false))
+        .set('loginError', fromJS(null))
+    }
+
+    case types.LOGOUT_SUCCESS:
       push('/account/login')
       return state
         .set(
@@ -179,30 +185,6 @@ const reducer = (state = initialState, action) => {
           })
         )
         .set('profile', null)
-
-    // no need for this set of reducers, because this logic should be in LOGIN_SUCCESS, similiar to LOGIN_SSO_SUCCESS
-    case types.GET_PROFILE_SUCCESS:
-      return state.setIn(['profile'], fromJS(getProfileObjectWithBrand(payload)))
-
-    case types.GET_PROFILE_ERROR:
-      return state.set('message', fromJS(payload))
-    //
-
-    case types.LOGIN_SSO_SUCCESS: {
-      const { token, refresh, profile } = action.payload
-      const expiry = parseInt(jwtDecode(token).exp + '000')
-
-      return state
-        .setIn(['profile'], fromJS(getProfileObjectWithBrand(profile)))
-        .setIn(['user', 'token'], fromJS(token))
-        .setIn(['user', 'refresh'], fromJS(refresh))
-        .setIn(['user', 'expiry'], fromJS(expiry))
-        .set('requesting', fromJS(false))
-        .set('successful', fromJS(true))
-        .set('loggedIn', fromJS(true))
-        .set('refreshing', fromJS(false))
-        .set('loginError', fromJS(null))
-    }
 
     case types.UPDATE_PASSWORD_REQUEST:
       return state
@@ -242,24 +224,6 @@ const reducer = (state = initialState, action) => {
         .setIn(['forgotPassword', 'success'], fromJS(false))
         .setIn(['forgotPassword', 'message'], fromJS(payload.message))
 
-    case types.COMPETITORS_REQUEST:
-      return state
-        .setIn(['competitors', 'loading'], fromJS(true))
-        .setIn(['competitors', 'password'], fromJS(action.password))
-
-    case types.COMPETITORS_SUCCESS:
-      return state
-        .setIn(['competitors', 'loading'], fromJS(false))
-        .setIn(['competitors', 'success'], fromJS(true))
-        .setIn(['competitors', 'message'], fromJS(payload.message))
-        .setIn(['competitors', 'data'], fromJS(payload.data))
-
-    case types.COMPETITORS_ERROR:
-      return state
-        .setIn(['competitors', 'loading'], fromJS(false))
-        .setIn(['competitors', 'success'], fromJS(false))
-        .setIn(['competitors', 'message'], fromJS(payload.message))
-
     case types.CONNECT_OAUTH_REQUEST:
       return state.setIn(['OAuth', 'loading'], fromJS(true))
 
@@ -291,6 +255,7 @@ export const makeSelectAuth = () =>
     selectAuthDomain,
     (substate) => substate.toJS()
   )
+
 const selectAuthUser = (state) => state.auth.get('user')
 
 export const makeSelectAuthUser = () =>
@@ -326,14 +291,6 @@ const selectForgotPassword = (state) => state.auth.get('forgotPassword')
 export const makeSelectForgotPassword = () =>
   createSelector(
     selectForgotPassword,
-    (substate) => substate.toJS()
-  )
-
-const selectCompetitors = (state) => state.auth.get('competitors')
-
-export const makeSelectCompetitors = () =>
-  createSelector(
-    selectCompetitors,
     (substate) => substate.toJS()
   )
 
