@@ -73,6 +73,7 @@ class LoginForm extends Component {
       errors,
     } = this.props
     const { validationError } = this.state
+    
     return (
       <AccountCard
         status={

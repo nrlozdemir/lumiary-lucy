@@ -145,7 +145,7 @@ const reducer = (state = initialState, action) => {
       return state
         .set('requesting', fromJS(false))
         .set('loggedIn', fromJS(false))
-        .set('message', fromJS(payload.message))
+        .set('message', fromJS(payload))
 
     case types.LOGOUT_REQUEST:
       push('/account/login')

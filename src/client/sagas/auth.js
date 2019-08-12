@@ -33,14 +33,18 @@ export function* authorize({ email, password }) {
     const payload = yield call(loginApi, email, password)
 
     if (!payload.message && !!payload.profile) {
-        yield put({ type: types.LOGIN_SUCCESS, payload })
-        yield call(additionalLoggedInFeatures, payload)
+      yield put({ type: types.LOGIN_SUCCESS, payload })
+      yield call(additionalLoggedInFeatures, payload)
     } else {
       yield put({ type: types.LOGIN_ERROR, payload: payload.message })
     }
   } catch (e) {
-    console.log(e)
-    yield put({ type: types.LOGIN_ERROR, payload: e.message })
+    console.log('Login Error', e)
+    const errorMessage =
+      e.response && e.response.data && e.response.data.message
+        ? e.response.data.message
+        : e.message
+    yield put({ type: types.LOGIN_ERROR, payload: errorMessage })
   }
 }
 
