@@ -214,7 +214,12 @@ const libraryDetailReducer = (state = initialState, action) => {
         .set('loading', fromJS(false))
 
     case types.GET_DOUGHNUT_CHART_REQUEST:
-      return state.setIn(['doughnutData', 'loading'], fromJS(true))
+      return state
+        .setIn(['doughnutData', 'loading'], fromJS(true))
+        .setIn(
+          ['doughnutData', 'data'],
+          fromJS(initialState.toJS().doughnutData.data)
+        )
 
     case types.GET_DOUGHNUT_CHART_SUCCESS:
       return state
@@ -223,11 +228,19 @@ const libraryDetailReducer = (state = initialState, action) => {
 
     case types.GET_DOUGHNUT_CHART_FAILURE:
       return state
-        .setIn(['doughnutData', 'data'], fromJS(undefined))
+        .setIn(
+          ['doughnutData', 'data'],
+          fromJS(initialState.toJS().doughnutData.data)
+        )
         .setIn(['doughnutData', 'loading'], fromJS(false))
 
     case types.GET_COLOR_TEMP_REQUEST:
-      return state.setIn(['colorTempData', 'loading'], fromJS(true))
+      return state
+        .setIn(['colorTempData', 'loading'], fromJS(true))
+        .setIn(
+          ['colorTempData', 'data'],
+          fromJS(initialState.toJS().colorTempData.data)
+        )
 
     case types.GET_COLOR_TEMP_SUCCESS:
       return state
@@ -236,11 +249,21 @@ const libraryDetailReducer = (state = initialState, action) => {
 
     case types.GET_COLOR_TEMP_FAILURE:
       return state
+        .setIn(
+          ['colorTempData', 'data'],
+          fromJS(initialState.toJS().colorTempData.data)
+        )
+
         .setIn(['colorTempData', 'error'], fromJS(action.error))
         .setIn(['colorTempData', 'loading'], fromJS(false))
 
     case types.GET_SHOT_BY_SHOT_REQUEST:
-      return state.setIn(['shotByShotData', 'loading'], fromJS(true))
+      return state
+        .setIn(['shotByShotData', 'loading'], fromJS(true))
+        .setIn(
+          ['shotByShotData', 'data'],
+          fromJS(initialState.toJS().shotByShotData.data)
+        )
 
     case types.GET_SHOT_BY_SHOT_SUCCESS:
       return state
@@ -249,6 +272,10 @@ const libraryDetailReducer = (state = initialState, action) => {
 
     case types.GET_SHOT_BY_SHOT_FAILURE:
       return state
+        .setIn(
+          ['shotByShotData', 'data'],
+          fromJS(initialState.toJS().shotByShotData.data)
+        )
         .setIn(['shotByShotData', 'error'], fromJS(action.error))
         .setIn(['shotByShotData', 'loading'], fromJS(false))
 
@@ -269,18 +296,32 @@ const libraryDetailReducer = (state = initialState, action) => {
         .setIn(['infoData', 'loading'], fromJS(false))
 
     case types.GET_SHOT_INFO_REQUEST:
-      return state.setIn(['shotInfoData', 'loading'], fromJS(true))
+      return state
+        .setIn(['shotInfoData', 'loading'], fromJS(true))
+        .setIn(
+          ['shotInfoData', 'data'],
+          fromJS(initialState.toJS().shotInfoData.data)
+        )
     case types.GET_SHOT_INFO_SUCCESS:
       return state
         .setIn(['shotInfoData', 'data'], fromJS(action.payload))
         .setIn(['shotInfoData', 'loading'], fromJS(false))
     case types.GET_SHOT_INFO_FAILURE:
       return state
+        .setIn(
+          ['shotInfoData', 'data'],
+          fromJS(initialState.toJS().shotInfoData.data)
+        )
         .setIn(['shotInfoData', 'error'], fromJS(action.error))
         .setIn(['shotInfoData', 'loading'], fromJS(false))
 
     case types.GET_RADAR_CHART_REQUEST:
-      return state.setIn(['radarChartData', 'loading'], fromJS(true))
+      return state
+        .setIn(['radarChartData', 'loading'], fromJS(true))
+        .setIn(
+          ['radarChartData', 'data'],
+          fromJS(initialState.toJS().radarChartData.data)
+        )
     case types.GET_RADAR_CHART_SUCCESS:
       return state
         .setIn(['radarChartData', 'data'], fromJS(action.payload))
@@ -289,9 +330,18 @@ const libraryDetailReducer = (state = initialState, action) => {
       return state
         .setIn(['radarChartData', 'error'], fromJS(action.error))
         .setIn(['radarChartData', 'loading'], fromJS(false))
+        .setIn(
+          ['radarChartData', 'data'],
+          fromJS(initialState.toJS().radarChartData.data)
+        )
 
     case types.GET_PEOPLE_REQUEST:
-      return state.setIn(['peopleData', 'loading'], fromJS(true))
+      return state
+        .setIn(['peopleData', 'loading'], fromJS(true))
+        .setIn(
+          ['peopleData', 'data'],
+          fromJS(initialState.toJS().peopleData.data)
+        )
 
     case types.GET_PEOPLE_SUCCESS:
       return state
@@ -299,6 +349,10 @@ const libraryDetailReducer = (state = initialState, action) => {
         .setIn(['peopleData', 'loading'], fromJS(false))
     case types.GET_PEOPLE_FAILURE:
       return state
+        .setIn(
+          ['peopleData', 'data'],
+          fromJS(initialState.toJS().peopleData.data)
+        )
         .setIn(['peopleData', 'error'], fromJS(action.error))
         .setIn(['peopleData', 'loading'], fromJS(false))
 

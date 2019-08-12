@@ -142,7 +142,7 @@ class Performance extends React.Component {
     const minVal = getMinMax(data, 'min')
 
     const normalizedData =
-      (!!data &&
+      (!!data && !loading &&
         Object.keys(data).reduce((acc, key) => {
           acc[key] = data[key].map((val) => ({
             toolTip: normalize(val.toolTip, minVal, maxVal, 0, 1000000),
@@ -158,7 +158,7 @@ class Performance extends React.Component {
           Object.values(data).every((valArr) =>
             valArr.every((v) => !v.toolTip)
           )))
-
+      
     return (
       <Module
         isEmpty={isEmpty}

@@ -184,10 +184,12 @@ export const initialState = fromJS({
 const audienceReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA:
-      return state.setIn(
-        ['audienceContentVitalityScoreData', 'loading'],
-        fromJS(true)
-      )
+      return state
+        .setIn(['audienceContentVitalityScoreData', 'loading'], fromJS(true))
+        .setIn(
+          ['audienceContentVitalityScoreData', 'data'],
+          fromJS(initialState.toJS().audienceContentVitalityScoreData.data)
+        )
 
     case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_SUCCESS:
       return state
@@ -199,7 +201,10 @@ const audienceReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA_ERROR:
       return state
-        .setIn(['contentVitalityScoreData', 'data'], fromJS({ data: {} }))
+        .setIn(
+          ['audienceContentVitalityScoreData', 'data'],
+          fromJS(initialState.toJS().audienceContentVitalityScoreData.data)
+        )
         .setIn(
           ['audienceContentVitalityScoreData', 'error'],
           fromJS(action.error)
@@ -207,7 +212,12 @@ const audienceReducer = (state = initialState, action) => {
         .setIn(['audienceContentVitalityScoreData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_PERFORMANCE_DATA:
-      return state.setIn(['audiencePerformanceData', 'loading'], fromJS(true))
+      return state
+        .setIn(['audiencePerformanceData', 'loading'], fromJS(true))
+        .setIn(
+          ['audiencePerformanceData', 'data'],
+          fromJS(initialState.toJS().audiencePerformanceData.data)
+        )
 
     case types.GET_AUDIENCE_PERFORMANCE_DATA_SUCCESS:
       return state
@@ -216,15 +226,23 @@ const audienceReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_PERFORMANCE_DATA_ERROR:
       return state
-        .setIn(['audiencePerformanceData', 'data'], fromJS({}))
+        .setIn(
+          ['audiencePerformanceData', 'data'],
+          fromJS(initialState.toJS().audiencePerformanceData.data)
+        )
         .setIn(['audiencePerformanceData', 'error'], fromJS(action.error))
         .setIn(['audiencePerformanceData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_AGE_SLIDER_DATA:
-      return state.setIn(
-        ['audienceAgeSliderData', 'loading'],
-        fromJS(action.payload.loading ? true : false)
-      )
+      return state
+        .setIn(
+          ['audienceAgeSliderData', 'loading'],
+          fromJS(action.payload.loading ? true : false)
+        )
+        .setIn(
+          ['audienceAgeSliderData', 'data'],
+          fromJS(initialState.toJS().audienceAgeSliderData.data)
+        )
 
     case types.GET_AUDIENCE_AGE_SLIDER_DATA_SUCCESS:
       return state
@@ -235,9 +253,18 @@ const audienceReducer = (state = initialState, action) => {
       return state
         .setIn(['audienceAgeSliderData', 'error'], fromJS(action.error))
         .setIn(['audienceAgeSliderData', 'loading'], fromJS(false))
+        .setIn(
+          ['audienceAgeSliderData', 'data'],
+          fromJS(initialState.toJS().audienceAgeSliderData.data)
+        )
 
     case types.GET_AUDIENCE_GENDER_DATA:
-      return state.setIn(['audienceGenderData', 'loading'], fromJS(true))
+      return state
+        .setIn(['audienceGenderData', 'loading'], fromJS(true))
+        .setIn(
+          ['audienceGenderData', 'data'],
+          fromJS(initialState.toJS().audienceGenderData.data)
+        )
 
     case types.GET_AUDIENCE_GENDER_DATA_SUCCESS:
       return state
@@ -246,15 +273,20 @@ const audienceReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_GENDER_DATA_ERROR:
       return state
-        .setIn(['audienceGenderData', 'data'], fromJS({}))
+        .setIn(
+          ['audienceGenderData', 'data'],
+          fromJS(initialState.toJS().audienceGenderData.data)
+        )
         .setIn(['audienceGenderData', 'error'], fromJS(action.error))
         .setIn(['audienceGenderData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA:
-      return state.setIn(
-        ['audienceColorTemperatureData', 'loading'],
-        fromJS(true)
-      )
+      return state
+        .setIn(['audienceColorTemperatureData', 'loading'], fromJS(true))
+        .setIn(
+          ['audienceColorTemperatureData', 'data'],
+          fromJS(initialState.toJS().audienceColorTemperatureData.data)
+        )
 
     case types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA_SUCCESS:
       return state
@@ -263,14 +295,20 @@ const audienceReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_COLOR_TEMPERATURE_DATA_ERROR:
       return state
+        .setIn(
+          ['audienceColorTemperatureData', 'data'],
+          fromJS(initialState.toJS().audienceColorTemperatureData.data)
+        )
         .setIn(['audienceColorTemperatureData', 'error'], fromJS(action.error))
         .setIn(['audienceColorTemperatureData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA:
-      return state.setIn(
-        ['audienceChangeOverTimeData', 'loading'],
-        fromJS(true)
-      )
+      return state
+        .setIn(['audienceChangeOverTimeData', 'loading'], fromJS(true))
+        .setIn(
+          ['audienceChangeOverTimeData', 'data'],
+          fromJS(initialState.toJS().audienceChangeOverTimeData.data)
+        )
 
     case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_SUCCESS:
       return state
@@ -279,12 +317,20 @@ const audienceReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_CHANGE_OVER_TIME_DATA_ERROR:
       return state
-        .setIn(['audienceChangeOverTimeData', 'data'], fromJS([]))
+        .setIn(
+          ['audienceChangeOverTimeData', 'data'],
+          fromJS(initialState.toJS().audienceChangeOverTimeData.data)
+        )
         .setIn(['audienceChangeOverTimeData', 'error'], fromJS(action.error))
         .setIn(['audienceChangeOverTimeData', 'loading'], fromJS(false))
 
     case types.GET_AUDIENCE_DOMINANT_COLOR_DATA:
-      return state.setIn(['audienceDominantColorData', 'loading'], fromJS(true))
+      return state
+        .setIn(['audienceDominantColorData', 'loading'], fromJS(true))
+        .setIn(
+          ['audienceDominantColorData', 'data'],
+          fromJS(initialState.toJS().audienceDominantColorData.data)
+        )
 
     case types.GET_AUDIENCE_DOMINANT_COLOR_DATA_SUCCESS:
       return state
@@ -293,7 +339,10 @@ const audienceReducer = (state = initialState, action) => {
 
     case types.GET_AUDIENCE_DOMINANT_COLOR_DATA_ERROR:
       return state
-        .setIn(['audienceDominantColorData', 'data'], fromJS({}))
+        .setIn(
+          ['audienceDominantColorData', 'data'],
+          fromJS(initialState.toJS().audienceDominantColorData.data)
+        )
         .setIn(['audienceDominantColorData', 'error'], fromJS(action.error))
         .setIn(['audienceDominantColorData', 'loading'], fromJS(false))
 

@@ -325,7 +325,12 @@ const reportsReducer = (state = initialState, action) => {
 
     /** START submit brand insight form */
     case types.BRAND_INSIGHT_REQUEST:
-      return state.setIn(['brandInsightValues', 'loading'], fromJS(true))
+      return state
+        .setIn(['brandInsightValues', 'loading'], fromJS(true))
+        .setIn(
+          ['brandInsightValues', 'data'],
+          fromJS(initialState.toJS().brandInsightValues.data)
+        )
 
     case types.BRAND_INSIGHT_REQUEST_SUCCESS: {
       return state
@@ -334,7 +339,10 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.BRAND_INSIGHT_REQUEST_ERROR:
       return state
-        .setIn(['brandInsightValues', 'data'], fromJS(null))
+        .setIn(
+          ['brandInsightValues', 'data'],
+          fromJS(initialState.toJS().brandInsightValues.data)
+        )
         .setIn(['brandInsightValues', 'error'], fromJS(action.error))
         .setIn(['brandInsightValues', 'loading'], fromJS(false))
 
@@ -342,7 +350,12 @@ const reportsReducer = (state = initialState, action) => {
 
     /** START submit brand insight form */
     case types.COMPARE_BRAND_REQUEST:
-      return state.setIn(['comparebrandValues', 'loading'], fromJS(true))
+      return state
+        .setIn(['comparebrandValues', 'loading'], fromJS(true))
+        .setIn(
+          ['comparebrandValues', 'data'],
+          fromJS(initialState.toJS().comparebrandValues.data)
+        )
 
     case types.COMPARE_BRAND_REQUEST_SUCCESS: {
       return state
@@ -351,7 +364,10 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.COMPARE_BRAND_REQUEST_ERROR:
       return state
-        .setIn(['comparebrandValues', 'data'], fromJS(null))
+        .setIn(
+          ['comparebrandValues', 'data'],
+          fromJS(initialState.toJS().comparebrandValues.data)
+        )
         .setIn(['comparebrandValues', 'error'], fromJS(action.error))
         .setIn(['comparebrandValues', 'loading'], fromJS(false))
     case types.CREATED_REPORT_CONTROL:
@@ -363,7 +379,12 @@ const reportsReducer = (state = initialState, action) => {
 
     /** START Predefined Report form */
     case types.PREDEFINED_REPORT_REQUEST:
-      return state.setIn(['predefinedReportValues', 'loading'], fromJS(true))
+      return state
+        .setIn(['predefinedReportValues', 'loading'], fromJS(true))
+        .setIn(
+          ['predefinedReportValues', 'data'],
+          fromJS(initialState.toJS().predefinedReportValues.data)
+        )
 
     case types.PREDEFINED_REPORT_REQUEST_SUCCESS: {
       return state
@@ -372,7 +393,10 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.PREDEFINED_REPORT_REQUEST_ERROR:
       return state
-        .setIn(['predefinedReportValues', 'data'], fromJS(null))
+        .setIn(
+          ['predefinedReportValues', 'data'],
+          fromJS(initialState.toJS().predefinedReportValues.data)
+        )
         .setIn(['predefinedReportValues', 'error'], fromJS(action.error))
         .setIn(['predefinedReportValues', 'loading'], fromJS(false))
 
@@ -394,7 +418,12 @@ const reportsReducer = (state = initialState, action) => {
       return state
 
     case types.GET_PREDEFINED_REPORTS_REQUEST:
-      return state.setIn(['predefinedReports', 'loading'], fromJS(true))
+      return state
+        .setIn(['predefinedReports', 'loading'], fromJS(true))
+        .setIn(
+          ['predefinedReports', 'data'],
+          fromJS(initialState.toJS().predefinedReports.data)
+        )
 
     case types.GET_PREDEFINED_REPORTS_REQUEST_SUCCESS:
       return state
@@ -403,13 +432,22 @@ const reportsReducer = (state = initialState, action) => {
 
     case types.GET_PREDEFINED_REPORTS_REQUEST_ERROR:
       return state
+        .setIn(
+          ['predefinedReports', 'data'],
+          fromJS(initialState.toJS().predefinedReports.data)
+        )
         .setIn(['predefinedReports', 'error'], fromJS(action.error))
         .setIn(['predefinedReports', 'loading'], fromJS(false))
     /** END Predefined Report form */
 
     /** START video comparison data */
     case types.LOAD_VIDEO_COMPARISON_DATA:
-      return state.setIn(['videoComparisonData', 'loading'], fromJS(true))
+      return state
+        .setIn(['videoComparisonData', 'loading'], fromJS(true))
+        .setIn(
+          ['videoComparisonData', 'data'],
+          fromJS(initialState.toJS().videoComparisonData.data)
+        )
 
     case types.LOAD_VIDEO_COMPARISON_DATA_SUCCESS: {
       return state
@@ -418,14 +456,22 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.LOAD_VIDEO_COMPARISON_DATA_ERROR:
       return state
-        .setIn(['videoComparisonData', 'data'], fromJS(null))
+        .setIn(
+          ['videoComparisonData', 'data'],
+          fromJS(initialState.toJS().videoComparisonData.data)
+        )
         .setIn(['videoComparisonData', 'error'], fromJS(action.error))
         .setIn(['videoComparisonData', 'loading'], fromJS(false))
     /** END video comparison data */
 
     /** START content vitality score data */
     case types.GET_CONTENT_VITALITY_SCORE_DATA:
-      return state.setIn(['contentVitalityScoreData', 'loading'], fromJS(true))
+      return state
+        .setIn(['contentVitalityScoreData', 'loading'], fromJS(true))
+        .setIn(
+          ['contentVitalityScoreData', 'data'],
+          fromJS(initialState.toJS().contentVitalityScoreData.data)
+        )
 
     case types.GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS: {
       return state
@@ -434,14 +480,22 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.GET_CONTENT_VITALITY_SCORE_DATA_ERROR:
       return state
-        .setIn(['contentVitalityScoreData', 'data'], fromJS({ data: {} }))
+        .setIn(
+          ['contentVitalityScoreData', 'data'],
+          fromJS(initialState.toJS().contentVitalityScoreData.data)
+        )
         .setIn(['contentVitalityScoreData', 'error'], fromJS(action.error))
         .setIn(['contentVitalityScoreData', 'loading'], fromJS(false))
     /** END content vitality score data */
 
     /** START load performance comparison data */
     case types.LOAD_PERFORMANCE_COMPARISON_DATA:
-      return state.setIn(['performanceComparisonData', 'loading'], fromJS(true))
+      return state
+        .setIn(['performanceComparisonData', 'loading'], fromJS(true))
+        .setIn(
+          ['performanceComparisonData', 'data'],
+          fromJS(initialState.toJS().performanceComparisonData.data)
+        )
 
     case types.LOAD_PERFORMANCE_COMPARISON_DATA_SUCCESS: {
       return state
@@ -450,14 +504,22 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.LOAD_PERFORMANCE_COMPARISON_DATA_ERROR:
       return state
-        .setIn(['performanceComparisonData', 'data'], fromJS(null))
+        .setIn(
+          ['performanceComparisonData', 'data'],
+          fromJS(initialState.toJS().performanceComparisonData.data)
+        )
         .setIn(['performanceComparisonData', 'error'], fromJS(action.error))
         .setIn(['performanceComparisonData', 'loading'], fromJS(false))
     /** END load performance comparison data */
 
     /** START load color comparison data */
     case types.LOAD_COLOR_COMPARISON_DATA:
-      return state.setIn(['colorComparisonData', 'loading'], fromJS(true))
+      return state
+        .setIn(['colorComparisonData', 'loading'], fromJS(true))
+        .setIn(
+          ['colorComparisonData', 'data'],
+          fromJS(initialState.toJS().colorComparisonData.data)
+        )
 
     case types.LOAD_COLOR_COMPARISON_DATA_SUCCESS: {
       return state
@@ -466,7 +528,10 @@ const reportsReducer = (state = initialState, action) => {
     }
     case types.LOAD_COLOR_COMPARISON_DATA_ERROR:
       return state
-        .setIn(['colorComparisonData', 'data'], fromJS(undefined))
+        .setIn(
+          ['colorComparisonData', 'data'],
+          fromJS(initialState.toJS().colorComparisonData.data)
+        )
         .setIn(['colorComparisonData', 'error'], fromJS(action.error))
         .setIn(['colorComparisonData', 'loading'], fromJS(false))
     /** END load color comparison data */
