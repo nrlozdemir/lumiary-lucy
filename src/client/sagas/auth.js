@@ -1,9 +1,5 @@
 import qs from 'qs'
-import {
-  types,
-  makeSelectAuthUser,
-  makeSelectAuthLoggedIn,
-} from 'Reducers/auth'
+import { types, makeSelectAuthUser } from 'Reducers/auth'
 import { actions } from 'Reducers/app'
 
 import {
@@ -113,6 +109,8 @@ export function* tokenFlow(refresh) {
       const { expiry: userExpiry, refresh } = yield select(makeSelectAuthUser())
       let expiry = userExpiry - parseInt(Date.now())
 
+      console.log(expiry, 'expury')
+
       if (expiry <= 0) {
         expiry = 1
       }
@@ -176,6 +174,7 @@ export function* tokenAuthorize({ token }) {
 export function* loggedInFlow() {
   try {
     const { token, refresh } = yield select(makeSelectAuthUser())
+    console.log('loggedin flow')
     const tokenTask = yield fork(tokenFlow, refresh)
     yield take(types.LOGOUT_REQUEST)
     yield call(logoutFlow, yield select(makeSelectAuthUser()))
@@ -297,7 +296,7 @@ export function* connectOAuth({ payload }) {
 
 export function* initiateTokenRefresh() {
   try {
-    const loggedIn = yield select(makeSelectAuthLoggedIn())
+    const { loggedIn } = yield select(makeSelectAuthUser())
     if (loggedIn) {
       yield call(loggedInFlow)
     }

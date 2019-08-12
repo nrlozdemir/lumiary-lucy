@@ -78,7 +78,6 @@ export const initialState = fromJS({
   requesting: false,
   successful: false,
   loginError: null,
-  loggedIn: false,
 
   user: (typeof window === 'object'
     ? JSON.parse(window.localStorage.getItem('user'))
@@ -87,6 +86,7 @@ export const initialState = fromJS({
     refresh: false,
     refreshing: false,
     expiry: false,
+    loggedIn: false,
   },
   profile:
     (typeof window === 'object'
@@ -139,16 +139,16 @@ const reducer = (state = initialState, action) => {
     case types.LOGIN_REQUEST:
       return state
         .set('requesting', fromJS(true))
-        .set('loggedIn', fromJS(false))
         .set('loginError', fromJS(null))
         .set('message', fromJS(null))
         .set('profile', fromJS(null))
+        .setIn(['user', 'loggedIn'], fromJS(false))
 
     case types.LOGIN_ERROR:
       return state
         .set('requesting', fromJS(false))
-        .set('loggedIn', fromJS(false))
         .set('message', fromJS(payload))
+        .setIn(['user', 'loggedIn'], fromJS(false))
 
     case types.TOKEN_REFRESHING:
       return state.set('refreshing', fromJS(false))
@@ -164,9 +164,9 @@ const reducer = (state = initialState, action) => {
         .setIn(['user', 'token'], fromJS(token))
         .setIn(['user', 'refresh'], fromJS(refresh))
         .setIn(['user', 'expiry'], fromJS(expiry))
+        .setIn(['user', 'loggedIn'], fromJS(true))
         .set('requesting', fromJS(false))
         .set('successful', fromJS(true))
-        .set('loggedIn', fromJS(true))
         .set('refreshing', fromJS(false))
         .set('loginError', fromJS(null))
     }
@@ -276,12 +276,6 @@ export const makeSelectAuthProfile = () =>
 
       return substate
     }
-  )
-
-export const makeSelectAuthLoggedIn = () =>
-  createSelector(
-    selectAuthDomain,
-    (substate) => substate.toJS().loggedIn
   )
 
 const selectUpdatePassword = (state) => state.auth.get('passwordUpdate')

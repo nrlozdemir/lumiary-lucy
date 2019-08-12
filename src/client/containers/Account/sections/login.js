@@ -66,14 +66,18 @@ class LoginForm extends Component {
       themeContext: { colors },
       loginRequest,
       handleSubmit,
-      auth: { loggedIn, message, loading },
+      auth: {
+        user: { loggedIn },
+        message,
+        loading,
+      },
       dirty,
       submitting,
       pristine,
       errors,
     } = this.props
     const { validationError } = this.state
-    
+
     return (
       <AccountCard
         status={
