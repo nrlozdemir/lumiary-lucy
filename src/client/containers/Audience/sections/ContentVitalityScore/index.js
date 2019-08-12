@@ -45,7 +45,7 @@ class ContentVitalityScore extends React.Component {
               middleLabel: 'Percent Difference',
             }}
             platform={platform}
-            data={data}
+            data={!loading ? data : {}}
             chartYAxisMax={chartYAxisMax}
             moduleKey={'Audience/ContentVitalityScore'}
             title="Content Vitality Score By Videos Produced Comparison"

@@ -185,8 +185,12 @@ const panopticReducer = (state = initialState, action) => {
 
   switch (action.type) {
     case types.GET_VIDEO_RELEASES_DATA:
-      return state.setIn(['videoReleasesData', 'loading'], fromJS(true))
-
+      return state
+        .setIn(['videoReleasesData', 'loading'], fromJS(true))
+        .setIn(
+          ['videoReleasesData', 'data'],
+          fromJS(initialState.toJS().videoReleasesData.data)
+        )
     case types.GET_VIDEO_RELEASES_DATA_SUCCESS:
       return state
         .setIn(['videoReleasesData', 'data'], fromJS(action.payload))
@@ -199,7 +203,12 @@ const panopticReducer = (state = initialState, action) => {
         .setIn(['videoReleasesData', 'loading'], fromJS(false))
 
     case types.GET_COLOR_TEMPERATURE_DATA:
-      return state.setIn(['colorTempData', 'loading'], fromJS(true))
+      return state
+        .setIn(['colorTempData', 'loading'], fromJS(true))
+        .setIn(
+          ['colorTempData', 'data'],
+          fromJS(initialState.toJS().colorTempData.data)
+        )
 
     case types.GET_COLOR_TEMPERATURE_DATA_SUCCESS:
       return state
@@ -212,7 +221,12 @@ const panopticReducer = (state = initialState, action) => {
         .setIn(['colorTempData', 'loading'], fromJS(false))
 
     case types.GET_FILTERING_SECTION_DATA:
-      return state.setIn(['filteringSectionData', 'loading'], fromJS(true))
+      return state
+        .setIn(['filteringSectionData', 'loading'], fromJS(true))
+        .setIn(
+          ['filteringSectionData', 'data'],
+          fromJS(initialState.toJS().filteringSectionData.data)
+        )
 
     case types.GET_FILTERING_SECTION_DATA_SUCCESS:
       const { doughnutData, stackedChartData } = payload
@@ -234,10 +248,19 @@ const panopticReducer = (state = initialState, action) => {
         .setIn(['filteringSectionData', 'loading'], fromJS(false))
 
     case types.GET_PACING_CARD_DATA:
-      return state.setIn(['pacingChartData', 'loading'], fromJS(true))
+      return state
+        .setIn(['pacingChartData', 'loading'], fromJS(true))
+        .setIn(
+          ['pacingChartData', 'data'],
+          fromJS(initialState.toJS().pacingChartData.data)
+        )
 
     case types.GET_PACING_CARD_DATA_SUCCESS:
-      const { stadiumData, horizontalStackedBarData, horizontalStackedBarDataOriginal } = payload
+      const {
+        stadiumData,
+        horizontalStackedBarData,
+        horizontalStackedBarDataOriginal,
+      } = payload
 
       return state
         .setIn(
@@ -245,7 +268,7 @@ const panopticReducer = (state = initialState, action) => {
           fromJS({
             stadiumData,
             horizontalStackedBarData,
-            horizontalStackedBarDataOriginal
+            horizontalStackedBarDataOriginal,
           })
         )
         .setIn(['pacingChartData', 'loading'], fromJS(false))
@@ -257,7 +280,12 @@ const panopticReducer = (state = initialState, action) => {
         .setIn(['pacingChartData', 'loading'], fromJS(false))
 
     case types.GET_COMPARE_SHARES_DATA:
-      return state.setIn(['compareSharesData', 'loading'], fromJS(true))
+      return state
+        .setIn(['compareSharesData', 'loading'], fromJS(true))
+        .setIn(
+          ['compareSharesData', 'data'],
+          fromJS(initialState.toJS().compareSharesData.data)
+        )
 
     case types.GET_COMPARE_SHARES_DATA_SUCCESS:
       return state
@@ -271,7 +299,12 @@ const panopticReducer = (state = initialState, action) => {
         .setIn(['compareSharesData', 'loading'], fromJS(false))
 
     case types.GET_FLIPCARDS_DATA:
-      return state.setIn(['flipCardsData', 'loading'], fromJS(true))
+      return state
+        .setIn(['flipCardsData', 'loading'], fromJS(true))
+        .setIn(
+          ['flipCardsData', 'data'],
+          fromJS(initialState.toJS().flipCardsData.data)
+        )
 
     case types.GET_FLIPCARDS_DATA_SUCCESS:
       return state
@@ -286,7 +319,12 @@ const panopticReducer = (state = initialState, action) => {
         .setIn(['flipCardsData', 'loading'], fromJS(false))
 
     case types.GET_TOP_PERFORMING_FORMAT_DATA:
-      return state.setIn(['topPerformingFormatData', 'loading'], fromJS(true))
+      return state
+        .setIn(['topPerformingFormatData', 'loading'], fromJS(true))
+        .setIn(
+          ['topPerformingFormatData', 'data'],
+          fromJS(initialState.toJS().topPerformingFormatData.data)
+        )
 
     case types.GET_TOP_PERFORMING_FORMAT_DATA_SUCCESS:
       return state
