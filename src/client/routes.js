@@ -325,14 +325,14 @@ class Routes extends React.Component {
         ? JSON.parse(sectionsLStore)
         : {}
 
-    if (prevProps.user && user.token && prevProps.user.token !== user.token) {
-      if (
-        !Object.keys(sectionsStore).length ||
-        (Object.keys(sectionsStore).length && !sectionsStore.data)
-      ) {
-        !!profile && getSectionExplanationsRequest()
-      }
-    }
+    // if (prevProps.user && user.token && prevProps.user.token !== user.token) {
+    //   if (
+    //     !Object.keys(sectionsStore).length ||
+    //     (Object.keys(sectionsStore).length && !sectionsStore.data)
+    //   ) {
+    //     !!profile && getSectionExplanationsRequest()
+    //   }
+    // }
 
     if (prevProps.sections !== sections) {
       window.localStorage.setItem('sections', JSON.stringify(sections))

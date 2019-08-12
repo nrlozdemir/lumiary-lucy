@@ -14,6 +14,8 @@ export const types = {
   LOGIN_SSO_ERROR: 'AUTH/LOGIN_SSO:ERROR',
 
   LOGOUT_REQUEST: 'AUTH/LOGOUT_REQUEST',
+  LOGOUT_ERROR: 'AUTH/LOGOUT_ERROR',
+  LOGOUT_SUCCESS: 'AUTH/LOGOUT_SUCCESS',
 
   UPDATE_PASSWORD_REQUEST: 'AUTH/UPDATE_PASSWORD_REQUEST',
   UPDATE_PASSWORD_SUCCESS: 'AUTH/UPDATE_PASSWORD_SUCCESS',
@@ -132,6 +134,7 @@ const reducer = (state = initialState, action) => {
   const { payload } = action
 
   switch (action.type) {
+    case types.TOKEN_LOGIN_REQUEST:
     case types.LOGIN_SSO_REQUEST:
     case types.LOGIN_REQUEST:
       return state
@@ -147,21 +150,10 @@ const reducer = (state = initialState, action) => {
         .set('loggedIn', fromJS(false))
         .set('message', fromJS(payload))
 
-    case types.LOGOUT_REQUEST:
-      push('/account/login')
-      return state
-        .set(
-          'user',
-          fromJS({
-            id: null,
-            token: false,
-            refresh: false,
-            refreshing: false,
-            expiry: false,
-          })
-        )
-        .set('profile', null)
+    case types.TOKEN_REFRESHING:
+      return state.set('refreshing', fromJS(false))
 
+    case types.TOKEN_REFRESHED:
     case types.LOGIN_SUCCESS:
     case types.LOGIN_SSO_SUCCESS: {
       const { token, refresh, profile } = action.payload
@@ -178,6 +170,21 @@ const reducer = (state = initialState, action) => {
         .set('refreshing', fromJS(false))
         .set('loginError', fromJS(null))
     }
+
+    case types.LOGOUT_SUCCESS:
+      push('/account/login')
+      return state
+        .set(
+          'user',
+          fromJS({
+            id: null,
+            token: false,
+            refresh: false,
+            refreshing: false,
+            expiry: false,
+          })
+        )
+        .set('profile', null)
 
     case types.UPDATE_PASSWORD_REQUEST:
       return state
@@ -248,6 +255,7 @@ export const makeSelectAuth = () =>
     selectAuthDomain,
     (substate) => substate.toJS()
   )
+
 const selectAuthUser = (state) => state.auth.get('user')
 
 export const makeSelectAuthUser = () =>
@@ -268,6 +276,12 @@ export const makeSelectAuthProfile = () =>
 
       return substate
     }
+  )
+
+export const makeSelectAuthLoggedIn = () =>
+  createSelector(
+    selectAuthDomain,
+    (substate) => substate.toJS().loggedIn
   )
 
 const selectUpdatePassword = (state) => state.auth.get('passwordUpdate')
