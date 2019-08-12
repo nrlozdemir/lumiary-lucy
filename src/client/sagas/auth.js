@@ -109,8 +109,6 @@ export function* tokenFlow(refresh) {
       const { expiry: userExpiry, refresh } = yield select(makeSelectAuthUser())
       let expiry = userExpiry - parseInt(Date.now())
 
-      console.log(expiry, 'expury')
-
       if (expiry <= 0) {
         expiry = 1
       }
@@ -174,7 +172,6 @@ export function* tokenAuthorize({ token }) {
 export function* loggedInFlow() {
   try {
     const { token, refresh } = yield select(makeSelectAuthUser())
-    console.log('loggedin flow')
     const tokenTask = yield fork(tokenFlow, refresh)
     yield take(types.LOGOUT_REQUEST)
     yield call(logoutFlow, yield select(makeSelectAuthUser()))
