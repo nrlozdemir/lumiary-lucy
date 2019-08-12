@@ -15,10 +15,6 @@ export const types = {
 
   LOGOUT_REQUEST: 'AUTH/LOGOUT_REQUEST',
 
-  GET_PROFILE_REQUEST: 'AUTH/GET_PROFILE_REQUEST',
-  GET_PROFILE_SUCCESS: 'AUTH/GET_PROFILE_SUCCESS',
-  GET_PROFILE_ERROR: 'AUTH/GET_PROFILE_ERROR',
-
   UPDATE_PASSWORD_REQUEST: 'AUTH/UPDATE_PASSWORD_REQUEST',
   UPDATE_PASSWORD_SUCCESS: 'AUTH/UPDATE_PASSWORD_SUCCESS',
   UPDATE_PASSWORD_ERROR: 'AUTH/UPDATE_PASSWORD_ERROR',
@@ -27,13 +23,15 @@ export const types = {
   FORGOT_PASSWORD_SUCCESS: 'AUTH/FORGOT_PASSWORD_SUCCESS',
   FORGOT_PASSWORD_ERROR: 'AUTH/FORGOT_PASSWORD_ERROR',
 
-  COMPETITORS_REQUEST: 'AUTH/COMPETITORS_REQUEST',
-  COMPETITORS_SUCCESS: 'AUTH/COMPETITORS_SUCCESS',
-  COMPETITORS_ERROR: 'AUTH/COMPETITORS_ERROR',
-
   CONNECT_OAUTH_REQUEST: 'AUTH/CONNECT_OAUTH_REQUEST',
   CONNECT_OAUTH_SUCCESS: 'AUTH/CONNECT_OAUTH_SUCCESS',
   CONNECT_OAUTH_ERROR: 'AUTH/CONNECT_OAUTH_ERROR',
+
+  TOKEN_EXPIRED: 'AUTH/TOKEN_EXPIRED',
+  TOKEN_REFRESHED: 'AUTH/TOKEN_REFRESHED',
+  TOKEN_REFRESHING: 'AUTH/TOKEN_REFRESHING',
+
+  TOKEN_LOGIN_REQUEST: 'AUTH/TOKEN_LOGIN_REQUEST',
 }
 
 export const actions = {
@@ -43,9 +41,8 @@ export const actions = {
     password,
   }),
   logoutRequest: () => ({ type: types.LOGOUT_REQUEST }),
-  getProfileRequest: ({ userId, token }) => ({
-    type: types.GET_PROFILE_REQUEST,
-    userId,
+  tokenLoginRequest: ({ email, token }) => ({
+    type: types.TOKEN_LOGIN_REQUEST,
     token,
   }),
   loginSsoRequest: (data) => ({
@@ -106,12 +103,6 @@ export const initialState = fromJS({
     loading: null,
     password: null,
   },
-  competitors: {
-    data: [],
-    message: null,
-    success: null,
-    loading: null,
-  },
   OAuth: {
     connects: {
       facebook: {
@@ -150,15 +141,6 @@ const reducer = (state = initialState, action) => {
         .set('message', fromJS(null))
         .set('profile', fromJS(null))
 
-    // this should set profile too once the profile/user reducer/sagas are merged
-    case types.LOGIN_SUCCESS:
-      return state
-        .set('requesting', fromJS(false))
-        .set('loggedIn', fromJS(true))
-        .set('message', fromJS(payload.message))
-        .setIn(['user', 'id'], fromJS(payload.id))
-        .setIn(['user', 'token'], fromJS(payload.token))
-
     case types.LOGIN_ERROR:
       return state
         .set('requesting', fromJS(false))
@@ -180,14 +162,7 @@ const reducer = (state = initialState, action) => {
         )
         .set('profile', null)
 
-    // no need for this set of reducers, because this logic should be in LOGIN_SUCCESS, similiar to LOGIN_SSO_SUCCESS
-    case types.GET_PROFILE_SUCCESS:
-      return state.setIn(['profile'], fromJS(getProfileObjectWithBrand(payload)))
-
-    case types.GET_PROFILE_ERROR:
-      return state.set('message', fromJS(payload))
-    //
-
+    case types.LOGIN_SUCCESS:
     case types.LOGIN_SSO_SUCCESS: {
       const { token, refresh, profile } = action.payload
       const expiry = parseInt(jwtDecode(token).exp + '000')
@@ -241,24 +216,6 @@ const reducer = (state = initialState, action) => {
         .setIn(['forgotPassword', 'loading'], fromJS(false))
         .setIn(['forgotPassword', 'success'], fromJS(false))
         .setIn(['forgotPassword', 'message'], fromJS(payload.message))
-
-    case types.COMPETITORS_REQUEST:
-      return state
-        .setIn(['competitors', 'loading'], fromJS(true))
-        .setIn(['competitors', 'password'], fromJS(action.password))
-
-    case types.COMPETITORS_SUCCESS:
-      return state
-        .setIn(['competitors', 'loading'], fromJS(false))
-        .setIn(['competitors', 'success'], fromJS(true))
-        .setIn(['competitors', 'message'], fromJS(payload.message))
-        .setIn(['competitors', 'data'], fromJS(payload.data))
-
-    case types.COMPETITORS_ERROR:
-      return state
-        .setIn(['competitors', 'loading'], fromJS(false))
-        .setIn(['competitors', 'success'], fromJS(false))
-        .setIn(['competitors', 'message'], fromJS(payload.message))
 
     case types.CONNECT_OAUTH_REQUEST:
       return state.setIn(['OAuth', 'loading'], fromJS(true))
@@ -326,14 +283,6 @@ const selectForgotPassword = (state) => state.auth.get('forgotPassword')
 export const makeSelectForgotPassword = () =>
   createSelector(
     selectForgotPassword,
-    (substate) => substate.toJS()
-  )
-
-const selectCompetitors = (state) => state.auth.get('competitors')
-
-export const makeSelectCompetitors = () =>
-  createSelector(
-    selectCompetitors,
     (substate) => substate.toJS()
   )
 

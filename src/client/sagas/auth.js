@@ -10,68 +10,37 @@ import { ajax, buildQApiUrl, getDataFromApi } from 'Utils/api'
 import authMockData from 'Api/mocks/authMock.json'
 
 const VALIDATE_SSO = '/auth/sso/validate'
+const LOGIN_URL = '/auth/login'
 
-const VALID_LOGIN = {
-  email: 'lumiary@quickframe.com',
-  password: 'lucylucy',
-}
-
-function getAuthDataApi(name, data) {
-  return axios.get('/').then((res) => {
-    if (name === 'login') {
-      return data.email === VALID_LOGIN.email &&
-        data.password === VALID_LOGIN.password
-        ? {
-            status: 'success',
-            message: 'logged-in',
-            token: authMockData.token,
-          }
-        : {
-            status: 'error',
-            message: 'Invalid Email/Password Combination',
-          }
+function loginApi(email, password) {
+  return ajax({
+    url: buildQApiUrl(LOGIN_URL),
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+    },
+    params: qs.stringify({ email, password }),
+  }).then((response) => {
+    if (response.error) {
+      throw response.error
     }
-
-    return { profile: authMockData[name] }
+    return response.data
   })
 }
 
-// authorize and getProfile should be combined,
-// only login_success/error types should be present
 export function* authorize({ email, password }) {
   try {
-    const payload = yield call(getAuthDataApi, 'login', { email, password })
+    const payload = yield call(loginApi, email, password)
 
-    if (payload.status === 'success') {
-      yield put({ type: types.LOGIN_SUCCESS, payload })
-      yield call(additionalLoggedInFeatures, payload)
+    if (!payload.message && !!payload.profile) {
+        yield put({ type: types.LOGIN_SUCCESS, payload })
+        yield call(additionalLoggedInFeatures, payload)
     } else {
-      yield put({ type: types.LOGIN_ERROR, payload: payload })
+      yield put({ type: types.LOGIN_ERROR, payload: payload.message })
     }
   } catch (e) {
     console.log(e)
     yield put({ type: types.LOGIN_ERROR, payload: e.message })
-  }
-}
-
-// authorize and getProfile should be combined,
-// only login_success/error types should be present
-export function* getProfile({ token }) {
-  try {
-    const payload = yield call(getAuthDataApi, 'profile')
-
-    if (
-      !!payload.profile &&
-      (!!payload.profile.brand || !!payload.profile.buyer)
-    ) {
-      yield put({ type: types.GET_PROFILE_SUCCESS, payload: payload.profile })
-      yield call(additionalLoggedInFeatures, payload)
-    } else {
-      throw new Error('Get Profile Error')
-    }
-  } catch (e) {
-    console.log(e)
-    yield put({ type: types.GET_PROFILE_ERROR, payload: e.message })
   }
 }
 
@@ -164,34 +133,6 @@ export function* forgotPassword({ email }) {
   }
 }
 
-export function* getCompetitors() {
-  const data = [
-    {
-      name: 'Barstool Sports',
-      uuid: '1cc05ce9-d9a3-4be0-b564-d02fbdcd87a6',
-      cover:
-        'https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png',
-    },
-    {
-      name: 'ESPN',
-      uuid: '40002bf1-c2d3-41cb-8d85-77f5533d7b45',
-      cover:
-        'https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png',
-    },
-    {
-      name: "Players' Tribune",
-      uuid: '7a5d6636-a49a-41ab-9d28-a47933fa5f04',
-      cover:
-        'https://s3.amazonaws.com/quickframe-media/group/logo/bleacher-report-logo.png',
-    },
-  ]
-  yield put({
-    type: types.COMPETITORS_SUCCESS,
-    payload: { data },
-  })
-  console.log('getting competitors', data)
-}
-
 export function* connectOAuth({ payload }) {
   try {
     const response = {}
@@ -220,7 +161,5 @@ export default [
   takeLatest(types.LOGIN_SSO_REQUEST, validateSso),
   takeLatest(types.UPDATE_PASSWORD_REQUEST, updatePassword),
   takeLatest(types.FORGOT_PASSWORD_REQUEST, forgotPassword),
-  takeLatest(types.COMPETITORS_REQUEST, getCompetitors),
   takeLatest(types.CONNECT_OAUTH_REQUEST, connectOAuth),
-  takeLatest(types.GET_PROFILE_REQUEST, getProfile),
 ]

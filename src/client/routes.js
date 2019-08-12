@@ -307,7 +307,6 @@ class Routes extends React.Component {
       user,
       profile,
       sections,
-      getProfileRequest,
       getSectionExplanationsRequest,
     } = this.props
 
@@ -332,10 +331,6 @@ class Routes extends React.Component {
         (Object.keys(sectionsStore).length && !sectionsStore.data)
       ) {
         !!profile && getSectionExplanationsRequest()
-      }
-
-      if (!Object.keys(profileStore).length && !profile) {
-        getProfileRequest({ token: user.token })
       }
     }
 
