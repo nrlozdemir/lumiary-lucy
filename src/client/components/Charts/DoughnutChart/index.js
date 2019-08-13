@@ -205,7 +205,7 @@ class DoughnutChart extends React.Component {
                     tooltips: customChartToolTip(
                       themes,
                       {
-                        mode: 'dataset',
+                        mode: 'nearest',
                       },
                       newData
                     ),
