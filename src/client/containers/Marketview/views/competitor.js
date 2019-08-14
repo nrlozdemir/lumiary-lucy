@@ -95,6 +95,7 @@ export class Competitor extends React.Component {
           container="competitor"
         />
       </React.Fragment>
+    )
 
     // return (
     //   <React.Fragment>
