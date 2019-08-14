@@ -7,6 +7,8 @@
 
 import { fromJS } from 'immutable'
 import { createSelector } from 'reselect'
+import { dayOfWeek } from 'Utils/globals'
+import moment from 'moment'
 
 export const types = {
   CHANGE_FILTER: 'SELECT_FILTER/CHANGE_FILTER',
@@ -45,6 +47,7 @@ export const defaultFilters = {
   dateRange: 'week',
   propertyEngagement: 'pacing|views',
   platformEngagement: 'all|views',
+  onDay: moment().format('dddd').toLowerCase()
 }
 
 export const initialState = fromJS({
@@ -247,6 +250,7 @@ export const initialState = fromJS({
         ],
       },
     ],
+    onDay: dayOfWeek.map((d) => ({ label: `On ${d}`, value: d.toLowerCase() })),
   },
   values: {},
   defaults: defaultFilters,
