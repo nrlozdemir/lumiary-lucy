@@ -14,6 +14,8 @@ export const types = {
   CHANGE_FILTER: 'SELECT_FILTER/CHANGE_FILTER',
   REMOVE_FILTER: 'SELECT_FILTER/REMOVE_FILTER',
   REMOVE_ALL_FILTER: 'SELECT_FILTER/REMOVE_ALL_FILTER',
+
+  SET_BRAND_OPTIONS: 'SELECT_FILTER/SET_BRAND_OPTIONS',
 }
 export const actions = {
   changeFilter: (payload) => ({
@@ -27,6 +29,11 @@ export const actions = {
   removeAllFilters: () => ({
     type: types.REMOVE_ALL_FILTER,
   }),
+
+  setBrandFilters: (payload) => ({
+    type: types.SET_BRAND_OPTIONS,
+    payload
+  })
 }
 
 export const defaultFilters = {
@@ -51,6 +58,7 @@ export const defaultFilters = {
     .format('dddd')
     .toLowerCase(),
   doublePlatform: 'facebook-instagram',
+  brands: '',
 }
 
 export const initialState = fromJS({
@@ -270,19 +278,31 @@ export const initialState = fromJS({
       ],
       []
     ),
+    brands: []
   },
   values: {},
   defaults: defaultFilters,
 })
 
 const selectFiltersReducer = (state = initialState, action) => {
+  const { payload } = action
   switch (action.type) {
     case types.CHANGE_FILTER:
-      return state.mergeDeepIn(['values'], fromJS(action.payload))
+      return state.mergeDeepIn(['values'], fromJS(payload))
     case types.REMOVE_FILTER:
-      return state.deleteIn(['values', fromJS(action.payload)])
+      return state.deleteIn(['values', fromJS(payload)])
     case types.REMOVE_ALL_FILTER:
       return state.set('values', fromJS({}))
+    case types.SET_BRAND_OPTIONS:
+      return state
+        .setIn(
+          ['options', 'brands'],
+          fromJS(payload.brands)
+        )
+        .setIn(
+          ['defaults', 'brands'],
+          fromJS(payload.defaultBrand)
+        )
     default:
       return state
   }

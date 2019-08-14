@@ -4,15 +4,16 @@ import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import Select from 'Components/Form/Select'
 import { createStructuredSelector } from 'reselect'
+import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, makeSelectSelectFilters } from 'Reducers/selectFilters'
 
 /**
  * Represents a Select Filters.
  *
  * (Types are:  engagement, platform, aspectRatio, resolution,
- * 		frameRate, duration, pacing, videoFormat, property,
- * 		audienceAge, audienceGender, talentAge, talentGender,
- * 		colorTemperature, dateRange
+ *    frameRate, duration, pacing, videoFormat, property,
+ *    audienceAge, audienceGender, talentAge, talentGender,
+ *    colorTemperature, dateRange
  *
  * @constructor
  * @param {selectKey} selectKey - The Uniqe Key of the Select.
@@ -24,7 +25,34 @@ import { actions, makeSelectSelectFilters } from 'Reducers/selectFilters'
  */
 class ModuleSelectFilters extends React.Component {
   componentDidMount() {
+    const {
+      type,
+      profile,
+      setBrandFilters,
+      selectFilters: { options },
+    } = this.props
+
     this.onChange(undefined)
+
+    if (
+      type === 'brands' &&
+      !!profile &&
+      !!profile.brand &&
+      !!profile.brand.competitors &&
+      !!options &&
+      !!options.brands &&
+      profile.brand.competitors.length !== options.brands.length
+    ) {
+      if (!!profile.brand.competitors.length) {
+        const brandOpts = profile.brand.competitors.map((b) => ({
+          value: b.uuid,
+          label: b.name,
+        }))
+        setBrandFilters({ brands: brandOpts, defaultBrand: brandOpts[0].value })
+      } else {
+        setBrandFilters({ brands: [], defaultBrand: '' })
+      }
+    }
   }
 
   onChange = (val) => {
@@ -62,11 +90,13 @@ class ModuleSelectFilters extends React.Component {
       themes,
       isActive,
       onChange,
-			inModuleFilter,
-			customOptions
-		} = this.props
+      inModuleFilter,
+      customOptions,
+    } = this.props
 
-		const options = customOptions ? {...defaultOptions, [type]: customOptions} : defaultOptions;
+    const options = customOptions
+      ? { ...defaultOptions, [type]: customOptions }
+      : defaultOptions
 
     const selectedOption =
       values && values[moduleKey] && values[moduleKey][selectKey]
@@ -126,12 +156,13 @@ ModuleSelectFilters.propTypes = {
   dispatch: PropTypes.func,
   moduleKey: PropTypes.string.isRequired,
   defaultValue: PropTypes.any,
-	isActive: PropTypes.bool,
-	customOptions: PropTypes.arrayOf(PropTypes.object)
+  isActive: PropTypes.bool,
+  customOptions: PropTypes.arrayOf(PropTypes.object),
 }
 
 const mapStateToProps = createStructuredSelector({
   selectFilters: makeSelectSelectFilters(),
+  profile: makeSelectAuthProfile(),
 })
 
 function mapDispatchToProps(dispatch) {
@@ -139,6 +170,7 @@ function mapDispatchToProps(dispatch) {
     changeFilter: (e) => dispatch(actions.changeFilter(e)),
     removeFilter: (e) => dispatch(actions.removeFilter(e)),
     removeAllFilters: () => dispatch(actions.removeAllFilters()),
+    setBrandFilters: (e) => dispatch(actions.setBrandFilters(e)),
   }
 }
 
