@@ -152,6 +152,7 @@ const Select = (props) => {
           : isReportDropdown
           ? themes.moduleBorder
           : themes.inputActiveColor,
+        width: 'max-content'
       }
     },
     input: (styles, { data, isDisabled, isFocused, isSelected }) => {
