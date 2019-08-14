@@ -43,10 +43,9 @@ class OAuth extends Component {
       >
         <div className={style.form}>
           <div className={style.info}>
-            <h1 style={colors.account.h1 || {}}>Give us ya informationz</h1>
+            <h1 style={colors.account.h1 || {}}>Client Platform Access</h1>
             <p style={colors.account.p || {}}>
-              Need a disclaimer if a user does not connect with any social
-              accounts, graphs will be blank
+              It is recommended to connect all your brand's social platforms to your Lumiere dashboard to ensure full access to all insights provided.
             </p>
           </div>
 
@@ -72,7 +71,6 @@ class OAuth extends Component {
                 </span>
                 <span
                   className={cx(style.listItemCheck, `icon-Check`)}
-                  style={colors.account.list.checkIcon || {}}
                 />
               </div>
             ))}
