@@ -123,7 +123,12 @@ export const formatToS3Examples = {
   'Virtual Reality': `${mediaUrl}/asset/formats/Virtual+Reality.mp4`,
   Parallax: `${mediaUrl}/asset/formats/Parallax.mp4`,
 }
-
+export const platforms = {
+  facebook: 'Facebook',
+  twitter: 'Twitter',
+  instagram: 'Instagram',
+  youtube: 'YouTube',
+}
 export const formatToSmallText = {
   'User Generated (Animation)': 'UGCA',
   'User Generated (Live Action)': 'UGCLA',

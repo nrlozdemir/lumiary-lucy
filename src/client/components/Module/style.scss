@@ -59,6 +59,7 @@
     }
     .headerFilters {
       display: flex;
+      flex-direction: column; //delete
       justify-content: flex-end;
       position: relative;
       z-index: 12;

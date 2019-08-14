@@ -7,7 +7,7 @@
 
 import { fromJS } from 'immutable'
 import { createSelector } from 'reselect'
-import { dayOfWeek } from 'Utils/globals'
+import { dayOfWeek, platforms } from 'Utils/globals'
 import moment from 'moment'
 
 export const types = {
@@ -47,7 +47,10 @@ export const defaultFilters = {
   dateRange: 'week',
   propertyEngagement: 'pacing|views',
   platformEngagement: 'all|views',
-  onDay: moment().format('dddd').toLowerCase()
+  onDay: moment()
+    .format('dddd')
+    .toLowerCase(),
+  doublePlatform: 'facebook-instagram',
 }
 
 export const initialState = fromJS({
@@ -251,6 +254,22 @@ export const initialState = fromJS({
       },
     ],
     onDay: dayOfWeek.map((d) => ({ label: `On ${d}`, value: d.toLowerCase() })),
+    doublePlatform: Object.keys(platforms).reduce(
+      (all, pf) => [
+        ...all,
+        ...Object.keys(platforms)
+          .map((pf2) =>
+            pf2 === pf
+              ? null
+              : {
+                  value: `${pf}-${pf2}`,
+                  label: `${platforms[pf]} and ${platforms[pf2]}`,
+                }
+          )
+          .filter((v) => !!v),
+      ],
+      []
+    ),
   },
   values: {},
   defaults: defaultFilters,
