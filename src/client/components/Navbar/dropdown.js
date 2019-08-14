@@ -104,10 +104,10 @@ class Dropdown extends Component {
                 className={style.dropdownListItem}
                 style={{ borderColor: colors.themeControlListBorder }}
               >
-                <a>
-                  <p>Support</p>
-                  <span className={classnames('icon-Support', style.icon)} />
-                </a>
+                <Link to={`/account/oauth`} style={{ color: colors.textColor }}>
+                  <p>Account</p>
+                  <span className={classnames('icon-Information', style.icon)} />
+                </Link>
               </li>
               <li className={style.dropdownListItem}>
                 <a onClick={() => logout()}>

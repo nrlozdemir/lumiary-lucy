@@ -268,8 +268,9 @@ export function* forgotPassword({ email }) {
   }
 }
 
-export function* connectOAuth({ payload }) {
+export function* connectOAuth({ payload:platform }) {
   try {
+    const { token:bearerToken } = yield select(makeSelectAuthUser())
     const { brand } = yield select(makeSelectAuthProfile())
     const { uuid:brandUuid } = brand
 
@@ -277,9 +278,14 @@ export function* connectOAuth({ payload }) {
       throw new Error('Could not determine brand uuids')
     }
 
+    if(!bearerToken) {
+      throw new Error('No bearer token provided')
+    }
+
     const oAuth = new oAuthHelper({
-      platform: payload,
+      platform,
       brandUuid,
+      bearerToken,
     })
 
     yield oAuth.fetchLibrary()
@@ -298,10 +304,12 @@ export function* connectOAuth({ payload }) {
       yield put({
         type: types.CONNECT_OAUTH_SUCCESS,
         payload: {
-          message: `Connected to ${payload}`,
+          brandUuid,
+          platform,
+          message: `Connected to ${platform}`,
           response: {
             ...response,
-            name: payload,
+            name: platform,
           },
         },
       })

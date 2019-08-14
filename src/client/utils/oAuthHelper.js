@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { buildQApiUrl, buildApiUrl } from 'Utils/api'
+import { ajax, buildQApiUrl, buildApiUrl } from 'Utils/api'
 
 const { 
   INSTAGRAM_CLIENT_ID = 'INSTAGRAM_CLIENT_ID',
@@ -25,9 +25,17 @@ const {
 } = process.env
 
 export default class oAuthHelper {
-  constructor ({ platform, brandUuid }) {
+  constructor ({ platform, brandUuid, bearerToken }) {
     if(!platform) {
       throw new Error(`A platform must be declared`)
+    }
+
+    if(!brandUuid) {
+      throw new Error(`brandUuid must be declared`)
+    }
+
+    if(!bearerToken) {
+      throw new Error(`bearerToken must be declared`)
     }
 
     this.libraries = {
@@ -37,6 +45,7 @@ export default class oAuthHelper {
   
     this.platform = platform
     this.brandUuid = brandUuid
+    this.bearerToken = bearerToken
   }
 
   fetchLibrary() {
@@ -93,17 +102,17 @@ export default class oAuthHelper {
     return new Promise((resolve, reject) => {
       const { brandUuid, platform } = this
 
-      axios({
+      ajax({
         method: 'PATCH',
-        url: buildQApiUrl(`/brand/${brandUuid}`),
-        data: {
+        url: buildQApiUrl(`/brands/${brandUuid}`),
+        token: this.bearerToken,
+        params: {
           [`oauth_${platform}`]: true
         },
       })
-
       .then(function (response) {
-        if(!response.data || !response.data.success) {
-          throw new Error('passthru failure, see azazzle logs')
+        if(!response.data || !response.data.brand || response.data.brand !== brandUuid) {
+          throw new Error('passthru failure, see qapi logs')
         }
 
         return resolve(response.data)

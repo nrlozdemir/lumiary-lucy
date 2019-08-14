@@ -3,7 +3,8 @@ import cx from 'classnames'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
-import { actions, makeSelectOAuth } from 'Reducers/auth'
+import { actions, makeSelectOAuth, makeSelectAuthProfile } from 'Reducers/auth'
+import { push } from 'connected-react-router'
 
 import AccountCard from 'Components/AccountCard'
 import Button from 'Components/Form/Button'
@@ -25,6 +26,8 @@ class OAuth extends Component {
     const {
       themeContext: { colors },
       OAuth: { connects, success, message, loading },
+      push,
+      profile,
     } = this.props
     const { validationError } = this.state
 
@@ -54,7 +57,7 @@ class OAuth extends Component {
               <div
                 key={key}
                 className={cx(style.listItem, {
-                  [style.connected]: connects[connect].connected,
+                  [style.connected]: profile.brand[`oauth_${connect}`],
                 })}
                 onClick={() => this.connectSocial(connect)}
                 style={colors.account.list.item || {}}
@@ -78,11 +81,14 @@ class OAuth extends Component {
 
           <div className={style.submitArea}>
             <Button
+              onClick={() => {
+                push('/library')
+              }}            
               customClass={cx(style.buttonStyle, style.button)}
               disable={
-                !Object.keys(connects).filter(
-                  (connect) => connects[connect].connected
-                ).length
+                !Object.keys(connects).find(
+                  (connect) => profile.brand[`oauth_${connect}`]
+                )
               }
               buttonText="Complete Onboarding"
             />
@@ -94,10 +100,16 @@ class OAuth extends Component {
 }
 
 const mapStateToProps = createStructuredSelector({
+  profile: makeSelectAuthProfile(),
   OAuth: makeSelectOAuth(),
 })
 
-const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    ...bindActionCreators(actions, dispatch),
+    push: (url) => dispatch(push(url)),
+  }
+}
 
 const withConnect = connect(
   mapStateToProps,
