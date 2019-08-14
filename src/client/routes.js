@@ -345,6 +345,8 @@ class Routes extends React.Component {
     if (prevProps.profile !== profile) {
       window.localStorage.setItem('profile', JSON.stringify(profile))
     }
+
+
   }
 
   render() {
@@ -373,7 +375,10 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ ...appActions, ...authActions }, dispatch)
+  bindActionCreators(
+    { ...appActions, ...authActions },
+    dispatch
+  )
 
 const withConnect = connect(
   mapStateToProps,
