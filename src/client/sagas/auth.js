@@ -289,7 +289,9 @@ export function* connectOAuth({ payload }) {
     const { success } = response
 
     if(success) {
-      yield oAuth.sendOauthValidated()
+      yield oAuth.sendOauthValidated().catch((err) => {
+        console.log(err)
+      })
     }
 
     if (success) {

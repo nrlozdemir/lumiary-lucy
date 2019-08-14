@@ -91,34 +91,28 @@ export default class oAuthHelper {
 
   sendOauthValidated() {
     return new Promise((resolve, reject) => {
-      console.log(this.platform)
-      console.log(this.brandUuid)
-      console.log(buildQApiUrl(`/brand/oauth`))
-      return resolve(true)
+      const { brandUuid, platform } = this
 
-      // patch qAPI
-      // update the brand store instead of the OAuth store
+      axios({
+        method: 'PATCH',
+        url: buildQApiUrl(`/brand/${brandUuid}`),
+        data: {
+          [`oauth_${platform}`]: true
+        },
+      })
 
-      // axios({
-      //   method: 'PATCH',
-      //   url: buildQApiUrl(`/brand/${brandUuid}`),
-      //   data: {
-      //     [`oauth_${platform}`]: true
-      //   },
-      // })
+      .then(function (response) {
+        if(!response.data || !response.data.success) {
+          throw new Error('passthru failure, see azazzle logs')
+        }
 
-      // .then(function (response) {
-      //   if(!response.data || !response.data.success) {
-      //     throw new Error('passthru failure, see azazzle logs')
-      //   }
+        return resolve(response.data)
+      })
+      .catch(function (error) {
+        console.log(error)
 
-      //   return resolve(response.data)
-      // })
-      // .catch(function (error) {
-      //   console.log(error)
-
-      //   return reject(error)
-      // });
+        return reject(error)
+      });
     })
   }
 
