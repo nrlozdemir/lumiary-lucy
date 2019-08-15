@@ -164,13 +164,23 @@ class TotalViewsChart extends React.Component {
           </div>
           <div className="col-6">
             <DoughnutChart
-              width={270}
-              height={270}
+              width={290}
+              height={290}
               data={loading ? {} : normalizedData}
               cutoutPercentage={58}
               fillText="Total Percentage"
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
+              datasetsBorderWidth={0}
+              tooltipMode="nearest"
+              slicePiecesWidth={0.7}
+              datasetOptions={{
+                shadowOffsetX: 2,
+                shadowOffsetY: 1.5,
+                shadowBlur: 4,
+                hoverShadowBlur: 4,
+              }}
+              layoutPadding={8}
               labelPositionLeft
               labelsData={
                 loading
