@@ -23,19 +23,28 @@ export class Module extends React.Component {
   }
 
   componentDidUpdate(prevProps) {
-    const { action, selectFilters, moduleKey } = this.props
+    const {
+      action,
+      moduleKey,
+      selectFilters,
+      selectFilters: { defaults },
+    } = this.props
+
     if (
       !!action &&
-      !!prevProps.selectFilters &&
-      !!selectFilters &&
-      !_.isEqual(
-        prevProps.selectFilters.values[prevProps.moduleKey],
-        selectFilters.values[moduleKey]
-      )
+      (!!prevProps.selectFilters &&
+        !!selectFilters &&
+        !_.isEqual(
+          prevProps.selectFilters.values[prevProps.moduleKey],
+          selectFilters.values[moduleKey]
+        ))
     ) {
       const selectFilterValues = selectFilters.values[moduleKey]
 
-      const valuesToType = selectFiltersToType(selectFilterValues)
+      const valuesToType = selectFiltersToType(
+        selectFilterValues,
+        defaults.brand
+      )
 
       action(valuesToType, moduleKey)
     }

@@ -293,8 +293,7 @@ const floatCvScore = (val) => Number.parseFloat(val).toFixed(1)
  reduce selectFilter values
  into { type: value } map which is easily read by azazzle
 */
-const selectFiltersToType = (selectValues = {}) => {
-  console.log('asd', selectValues)
+const selectFiltersToType = (selectValues = {}, defaultBrand = '') => {
   return Object.keys(selectValues).reduce((values, key) => {
     const filterValue = selectValues[key]
     const filterType = filterValue.type
@@ -321,7 +320,11 @@ const selectFiltersToType = (selectValues = {}) => {
         : defaultFilters[filterType].split('-')
     }
 
-    if (!filterType.includes('double')) {
+    if (filterType === 'brand') {
+      values[filterType] = values[filterType] = !!filterValue.value
+        ? filterValue.value.value.split('-')
+        : defaultBrand
+    } else if (!filterType.includes('double')) {
       values[filterType] = !!filterValue.value
         ? !!filterValue.value.value && !!filterValue.value.value.startDate
           ? [filterValue.value.value.startDate, filterValue.value.value.endDate]
