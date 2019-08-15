@@ -2,26 +2,25 @@ import axios from 'axios'
 import { ajax, buildQApiUrl, buildApiUrl } from 'Utils/api'
 
 const { 
-  INSTAGRAM_CLIENT_ID = 'INSTAGRAM_CLIENT_ID',
-  INSTAGRAM_REDIRECT_URI = 'INSTAGRAM_REDIRECT_URI',
-  INSTAGRAM_RESPONSE_TYPE = 'INSTAGRAM_RESPONSE_TYPE',
+  INSTAGRAM_CLIENT_ID,
+  INSTAGRAM_REDIRECT_URI,
+  INSTAGRAM_RESPONSE_TYPE,
 
-  GOOGLE_CLIENT_ID = '410840184484-9ljsun49l3ue4l99sl41u2k4lipleb2o.apps.googleusercontent.com',
-  GOOGLE_API_KEY = 'AIzaSyCG2hOoLzZfV-163zq73nxuZpwWuoxobkE',
-  GOOGLE_SCOPE = 'https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly https://www.googleapis.com/auth/adwords',
-  GOOGLE_DISCOVERY_DOCS = [
-    'https://www.googleapis.com/discovery/v1/apis/youtubeAnalytics/v1/rest'
-  ],
+  GOOGLE_CLIENT_ID,
+  GOOGLE_API_KEY,
 
-  FACEBOOK_APP_ID = 'FACEBOOK_APP_ID',
+  GOOGLE_SCOPE,
+  GOOGLE_DISCOVERY_DOCS,
 
-  TWITTER_OAUTH_NONCE = 'K7ny27JTpKVsTgdyLdDfmQQWVLERj2zAK5BslRsqyw',
-  TWITTER_OAUTH_CALLBACK = 'http%3A%2F%2Fmyapp.com%3A3005%2Ftwitter%2Fprocess_callback',
-  TWITTER_OAUTH_SIGNATURE_METHOD = 'HMAC-SHA1',
-  TWITTER_OAUTH_TIMESTAMP = '1300228849',
-  TWITTER_OAUTH_CONSUMER_KEY = 'OqEqJeafRSF11jBMStrZz',
-  TWITTER_OAUTH_SIGNATURE = 'Pc%2BMLdv028fxCErFyi8KXFM%2BddU%3D',
-  TWITTER_OAUTH_VERSION = '1.0',
+  FACEBOOK_APP_ID,
+
+  TWITTER_OAUTH_NONCE,
+  TWITTER_OAUTH_CALLBACK,
+  TWITTER_OAUTH_SIGNATURE_METHOD,
+  TWITTER_OAUTH_TIMESTAMP,
+  TWITTER_OAUTH_CONSUMER_KEY,
+  TWITTER_OAUTH_SIGNATURE,
+  TWITTER_OAUTH_VERSION,
 } = process.env
 
 export default class oAuthHelper {
@@ -175,7 +174,7 @@ export default class oAuthHelper {
           gapi.load('client:auth2', () => {
             gapi.client.init({
               'apiKey': GOOGLE_API_KEY,
-              'discoveryDocs': GOOGLE_DISCOVERY_DOCS,
+              'discoveryDocs': JSON.parse(GOOGLE_DISCOVERY_DOCS),
               'clientId': GOOGLE_CLIENT_ID,
               'scope': GOOGLE_SCOPE
             })
