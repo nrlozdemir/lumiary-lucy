@@ -47,7 +47,22 @@ module.exports = {
         API_VERSION: JSON.stringify(process.env.API_VERSION),
         QAPI_ROOT: JSON.stringify(process.env.QAPI_ROOT),
         QAPI_VERSION: JSON.stringify(process.env.QAPI_VERSION),
-				BREAKPOINTS: breakpoints
+				BREAKPOINTS: breakpoints,
+        INSTAGRAM_CLIENT_ID: JSON.stringify(process.env.INSTAGRAM_CLIENT_ID),
+        INSTAGRAM_REDIRECT_URI: JSON.stringify(process.env.INSTAGRAM_REDIRECT_URI),
+        INSTAGRAM_RESPONSE_TYPE: JSON.stringify(process.env.INSTAGRAM_RESPONSE_TYPE),
+        GOOGLE_CLIENT_ID: JSON.stringify(process.env.GOOGLE_CLIENT_ID),
+        GOOGLE_API_KEY: JSON.stringify(process.env.GOOGLE_API_KEY),
+        GOOGLE_SCOPE: JSON.stringify(process.env.GOOGLE_SCOPE),
+        GOOGLE_DISCOVERY_DOCS: JSON.stringify(process.env.GOOGLE_DISCOVERY_DOCS),
+        FACEBOOK_APP_ID: JSON.stringify(process.env.FACEBOOK_APP_ID),
+        TWITTER_OAUTH_NONCE: JSON.stringify(process.env.TWITTER_OAUTH_NONCE),
+        TWITTER_OAUTH_CALLBACK: JSON.stringify(process.env.TWITTER_OAUTH_CALLBACK),
+        TWITTER_OAUTH_SIGNATURE_METHOD: JSON.stringify(process.env.TWITTER_OAUTH_SIGNATURE_METHOD),
+        TWITTER_OAUTH_TIMESTAMP: JSON.stringify(process.env.TWITTER_OAUTH_TIMESTAMP),
+        TWITTER_OAUTH_CONSUMER_KEY: JSON.stringify(process.env.TWITTER_OAUTH_CONSUMER_KEY),
+        TWITTER_OAUTH_SIGNATURE: JSON.stringify(process.env.TWITTER_OAUTH_SIGNATURE),
+        TWITTER_OAUTH_VERSION: JSON.stringify(process.env.TWITTER_OAUTH_VERSION),
 			}
 		}),
 

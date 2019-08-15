@@ -86,7 +86,7 @@ class FormatCard extends Component {
             )}
             <div className={style.marketViewCardTitle}>Format</div>
             <div className={style.marketViewCardSubTitle}>
-              Performance Over Time
+              Format breakdown by time
             </div>
 
             {true && ( //!!currentDay && (

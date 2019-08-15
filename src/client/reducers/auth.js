@@ -225,16 +225,17 @@ const reducer = (state = initialState, action) => {
         .setIn(['forgotPassword', 'message'], fromJS(payload.message))
 
     case types.CONNECT_OAUTH_REQUEST:
-      return state.setIn(['OAuth', 'loading'], fromJS(true))
+      return state.setIn(['OAuth', 'loading'], fromJS(false))
 
     case types.CONNECT_OAUTH_SUCCESS:
+      console.log(payload)
       return state
         .setIn(['OAuth', 'loading'], fromJS(false))
         .setIn(['OAuth', 'success'], fromJS(true))
         .setIn(['OAuth', 'message'], fromJS(payload.message))
         .setIn(
-          ['OAuth', 'connects', payload.response.name, 'connected'],
-          fromJS(payload.response)
+          ['profile', 'brand', `oauth_${payload.platform}`],
+          fromJS(true)
         )
 
     case types.CONNECT_OAUTH_ERROR:
