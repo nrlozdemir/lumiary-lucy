@@ -33,7 +33,7 @@ class LibraryData extends React.Component {
                   cutoutPercentage={50}    
                   datasetsBorderWidth={0}
                   tooltipMode="nearest"
-                  slicePiecesWidth={0.7}
+                  slicePiecesWidth={1}
                   datasetOptions={{
                     shadowOffsetX: 2,
                     shadowOffsetY: 1.5,
