@@ -86,6 +86,12 @@ export const types = {
     'Marketview/GET_MARKETVIEW_TOP_PERFORMING_PROPERTIES_BY_COMPETITORS_FAILURE',
   SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY:
     'Marketview/SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY',
+
+  GET_CONTENT_VITALITY_SCORE_DATA: 'Marketview/GET_CONTENT_VITALITY_SCORE_DATA',
+  GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS:
+    'Marketview/GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS',
+  GET_CONTENT_VITALITY_SCORE_DATA_ERROR:
+    'Marketview/GET_CONTENT_VITALITY_SCORE_DATA_ERROR',
 }
 export const actions = {
   getCompetitorVideosRequest: (payload) => ({
@@ -241,6 +247,19 @@ export const actions = {
     type: types.SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY,
     payload,
   }),
+
+  getContentVitalityScoreData: (payload) => ({
+    type: types.GET_CONTENT_VITALITY_SCORE_DATA,
+    payload,
+  }),
+  getContentVitalityScoreDataSuccess: (payload) => ({
+    type: types.GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS,
+    payload,
+  }),
+  getContentVitalityScoreDataError: (error) => ({
+    type: types.GET_CONTENT_VITALITY_SCORE_DATA_ERROR,
+    error,
+  }),
 }
 
 export const initialState = fromJS({
@@ -307,6 +326,13 @@ export const initialState = fromJS({
     error: null,
   },
   topProperty: null,
+  contentVitalityScoreData: {
+    data: {
+      data: {},
+    },
+    error: false,
+    loading: false,
+  },
 })
 
 const marketviewReducer = (state = initialState, action) => {
@@ -599,6 +625,29 @@ const marketviewReducer = (state = initialState, action) => {
     case types.SET_MARKETVIEW_COMPETITOR_TOP_PROPERTY:
       return state.set('topProperty', fromJS(action.payload))
 
+    /** START content vitality score data */
+    case types.GET_CONTENT_VITALITY_SCORE_DATA:
+      return state
+        .setIn(['contentVitalityScoreData', 'loading'], fromJS(true))
+        .setIn(
+          ['contentVitalityScoreData', 'data'],
+          fromJS(initialState.toJS().contentVitalityScoreData.data)
+        )
+
+    case types.GET_CONTENT_VITALITY_SCORE_DATA_SUCCESS: {
+      return state
+        .setIn(['contentVitalityScoreData', 'data'], fromJS(action.payload))
+        .setIn(['contentVitalityScoreData', 'loading'], fromJS(false))
+    }
+    case types.GET_CONTENT_VITALITY_SCORE_DATA_ERROR:
+      return state
+        .setIn(
+          ['contentVitalityScoreData', 'data'],
+          fromJS(initialState.toJS().contentVitalityScoreData.data)
+        )
+        .setIn(['contentVitalityScoreData', 'error'], fromJS(action.error))
+        .setIn(['contentVitalityScoreData', 'loading'], fromJS(false))
+    /** END content vitality score data */
     default:
       return state
   }
@@ -639,6 +688,9 @@ const selectMarketviewTopPerformingPropertiesDataDomain = (state) =>
 
 const selectMarketviewTopPerformingDataDomain = (state) =>
   state.Marketview.get('topPerformingDataForTime')
+
+const selectMarketviewContentVitalityScoreDomain = (state) =>
+  state.Marketview.get('contentVitalityScoreData')
 
 export const selectMarketviewDomain = (state) => state.Marketview
 
@@ -733,6 +785,12 @@ export const selectMarketviewTopPerformingDataView = () =>
 export const selectMarketviewPlatformTopVideosView = () =>
   createSelector(
     selectMarketviewPlatformTopVideosDomain,
+    (substate) => substate.toJS()
+  )
+
+export const makeSelectMarketviewContentVitalityScore = () =>
+  createSelector(
+    selectMarketviewContentVitalityScoreDomain,
     (substate) => substate.toJS()
   )
 

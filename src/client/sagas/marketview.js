@@ -878,6 +878,36 @@ function* getTopPerformingPropertiesByTimeData({
   }
 }
 
+function* getContentVitalityScoreData({ payload = {} }) {
+  try {
+    console.log('getContentVitalityScoreData', payload)
+    // const { brand } = yield select(makeSelectAuthProfile())
+
+    // const response = yield call(
+    //   getDataFromApi,
+    //   undefined,
+    //   `/report/compare/brands?${querystring.stringify({
+    //     brands: brands,
+    //     brandUuid: brand.uuid,
+    //     property: 'cvScore',
+    //     mode: 'sumVideos',
+    //     daterange: dateRange,
+    //     platform: platform,
+    //   })}`,
+    //   'GET'
+    // )
+
+    // yield put(
+    //   actions.getContentVitalityScoreDataSuccess(
+    //     percentageManipulation({ data: response, platform })
+    //   )
+    // )
+  } catch (err) {
+    console.log(err)
+    yield put(actions.getContentVitalityScoreDataError(err))
+  }
+}
+
 export default [
   takeLatest(
     types.GET_MARKETVIEW_COMPETITOR_TOP_VIDEOS_REQUEST,
@@ -915,5 +945,9 @@ export default [
   takeLatest(
     types.GET_MARKETVIEW_DETAIL_PEFORMING_TIME_REQUEST,
     getTopPerformingPropertiesByTimeData
+  ),
+  takeLatest(
+    types.GET_CONTENT_VITALITY_SCORE_DATA,
+    getContentVitalityScoreData
   ),
 ]
