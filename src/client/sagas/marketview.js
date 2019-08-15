@@ -883,21 +883,32 @@ function* getContentVitalityScoreData({ payload = {} }) {
     onDay,
     platform,
     dateRange,
+    container,
     brand: compareBrand,
     property = 'cvScore',
   } = payload
 
   try {
-    const { brand } = yield select(makeSelectAuthProfile())
+    const profile = yield select(makeSelectAuthProfile())
+    const competitors = getBrandAndCompetitors(profile)
+
+    const { brand } = profile
+
+    let brands = [brand.uuid, ...(!!compareBrand ? [compareBrand] : [])]
+
+    // platform and time views will consist of all competitors
+    if (container === 'platform' || container === 'time') {
+      brands = competitors
+    }
 
     console.log('getContentVitalityScoreData request', {
       onDay,
+      brands,
       property,
       platform,
       mode: 'sumVideos',
       daterange: dateRange,
       brandUuid: brand.uuid,
-      brands: [compareBrand],
     })
 
     // const response = yield call(
