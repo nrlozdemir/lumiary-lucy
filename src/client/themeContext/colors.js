@@ -261,7 +261,10 @@ const dark = {
   lineChartShadowColor: '#333',
 
   //glossary
-  glossaryLinkColor: '#fff'
+  glossaryLinkColor: '#fff',
+
+  //marketview
+  marketviewCardHeaderBorder: '#545b79',
 }
 
 const light = {
@@ -526,7 +529,10 @@ const light = {
   lineChartShadowColor: '#ddd',
 
   //glossary
-  glossaryLinkColor: '#505050'
+  glossaryLinkColor: '#505050',
+
+  //marketview
+  marketviewCardHeaderBorder: '#c6c9d7',
 }
 
 const themes = {

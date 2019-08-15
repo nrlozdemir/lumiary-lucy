@@ -84,24 +84,27 @@ class FormatCard extends Component {
                 {loading ? <RouterLoading /> : 'No Data Available'}
               </div>
             )}
-            <div className={style.marketViewCardTitle}>Format</div>
-            <div className={style.marketViewCardSubTitle}>
-              Performance Over Time
+            <div className={style.marketViewCardHeader} style={{ borderColor: colors.marketviewCardHeaderBorder }}>
+              <div className={style.marketViewCardTitle}>Time</div>
+              {true && ( //!!currentDay && (
+                <div className={style.chartSectionBadge}>
+                  <span
+                    style={{
+                      color: colors.labelColor,
+                    }}
+                  >
+                    <Link
+                      to="/marketview/time"
+                    >
+                      View Time Metrics
+                    </Link>
+                  </span>
+                </div>
+              )}
             </div>
-
-            {true && ( //!!currentDay && (
-              <div className={style.chartSectionBadge}>
-                <span
-                  style={{
-                    background: colors.labelBackground,
-                    color: colors.labelColor,
-                    boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                  }}
-                >
-                  {dateLabel}
-                </span>
-              </div>
-            )}
+            <div className={style.marketViewCardSubTitle}>
+              Format breakdown by time
+            </div>
             {!loading && (
               <React.Fragment>
                 <div
@@ -144,19 +147,6 @@ class FormatCard extends Component {
             <div className={style.marketViewCardDescription}>
               {`A summary of the top formats associated with the highest number of ${metric} for the ${dateLabel.toLowerCase()}.`}
             </div>
-            <Link
-              to="/marketview/time"
-              className={style.marketViewCardLink}
-              style={{
-                backgroundColor: colors.moduleBorder,
-                color: colors.textColor,
-              }}
-            >
-              View Time Metrics
-              <div className={style.icon}>
-                <RightArrowCircle />
-              </div>
-            </Link>
           </div>
         )}
       </ThemeContext.Consumer>

@@ -74,20 +74,24 @@ class PacingCard extends Component {
                 {loading ? <RouterLoading /> : 'No Data Available'}
               </div>
             )}
-            <div className={style.marketViewCardTitle}>Pacing</div>
-            <div className={style.marketViewCardSubTitle}>
-              Top Competitor Similarities
+            <div className={style.marketViewCardHeader} style={{ borderColor: colors.marketviewCardHeaderBorder }}>
+              <div className={style.marketViewCardTitle}>Competitor</div>
+              <div className={style.chartSectionBadge}>
+                <span
+                  style={{
+                    color: colors.labelColor,
+                  }}
+                >
+                  <Link
+                    to="/marketview/competitor"
+                  >
+                    View Competitor Metrics
+                  </Link>                  
+                </span>
+              </div>
             </div>
-            <div className={style.chartSectionBadge}>
-              <span
-                style={{
-                  background: colors.labelBackground,
-                  color: colors.labelColor,
-                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                }}
-              >
-                {dateLabel}
-              </span>
+            <div className={style.marketViewCardSubTitle}>
+              Pacing breakdown by competitor
             </div>
 
             {!isDataEmpty && !loading && (
@@ -121,19 +125,6 @@ class PacingCard extends Component {
             <div className={style.marketViewCardDescription}>
               {`The top performing video pacing associated with the highest number of ${metric} for videos outside of your library in the ${dateLabel.toLowerCase()}.`}
             </div>
-            <Link
-              to="/marketview/competitor"
-              className={style.marketViewCardLink}
-              style={{
-                backgroundColor: colors.moduleBorder,
-                color: colors.textColor,
-              }}
-            >
-              View Competitor Metrics
-              <div className={style.icon}>
-                <RightArrowCircle />
-              </div>
-            </Link>
           </div>
         )}
       </ThemeContext.Consumer>
