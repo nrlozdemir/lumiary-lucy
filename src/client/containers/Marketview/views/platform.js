@@ -129,7 +129,7 @@ export class Platform extends React.Component {
               placeHolder: 'Date',
             },
           ]}
-          container="competitor"
+          container="platform"
         />
       </React.Fragment>
     )

@@ -109,7 +109,7 @@ export class Time extends React.Component {
               placeHolder: 'Date',
             },
           ]}
-          container="competitor"
+          container="time"
         />
       </React.Fragment>
     )
