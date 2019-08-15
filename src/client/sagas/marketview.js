@@ -902,13 +902,13 @@ function* getContentVitalityScoreData({ payload = {} }) {
     }
 
     const params = {
-      onDay,
       brands,
       property,
       platform,
       mode: 'sumVideos',
       daterange: dateRange,
       brandUuid: brand.uuid,
+      ...(onDay ? { onDay } : {}),
     }
 
     console.log('getContentVitalityScoreData request', params)
