@@ -217,7 +217,7 @@ const dark = {
       color: '#ffffff',
     },
     forgotPasswordLink: {
-      color: '#fff'
+      color: '#fff',
     },
     card: {
       borderColor: '#545b79',
@@ -249,8 +249,9 @@ const dark = {
   reportCardsBg: '#545b79',
   reportCardContentBg: '#373f5b',
 
-  // doughnut circle background color
+  // doughnut chart
   doughnutChartBackgroundColor: '#545b79',
+  doughnutChartShadowColor: 'rgba(0, 0, 0, 0.5)',
 
   // cv score percent difference
   percentDifferenceColor: '#21243b',
@@ -261,7 +262,7 @@ const dark = {
   lineChartShadowColor: '#333',
 
   //glossary
-  glossaryLinkColor: '#fff'
+  glossaryLinkColor: '#fff',
 }
 
 const light = {
@@ -483,7 +484,7 @@ const light = {
       color: '#505050',
     },
     forgotPasswordLink: {
-      color: '#505050'
+      color: '#505050',
     },
     card: {
       borderColor: '#acb0be',
@@ -514,8 +515,9 @@ const light = {
   reportCardsBg: '#ffffff',
   reportCardContentBg: '#f3f6f9',
 
-  // doughnut circle background color
+  // doughnut chart
   doughnutChartBackgroundColor: '#acb0be',
+  doughnutChartShadowColor: '#bebebe',
 
   // cv score percent difference
   percentDifferenceColor: '#505050',
@@ -526,7 +528,7 @@ const light = {
   lineChartShadowColor: '#ddd',
 
   //glossary
-  glossaryLinkColor: '#505050'
+  glossaryLinkColor: '#505050',
 }
 
 const themes = {
