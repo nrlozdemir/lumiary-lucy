@@ -894,6 +894,8 @@ function* getContentVitalityScoreData({ payload = {} }) {
 
     const { brand } = profile
 
+    console.log('asdsd', compareBrand)
+
     let brands = [brand.uuid, ...(!!compareBrand ? [compareBrand] : [])]
 
     // platform and time views will consist of all competitors

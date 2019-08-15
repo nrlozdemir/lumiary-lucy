@@ -322,7 +322,7 @@ const selectFiltersToType = (selectValues = {}, defaultBrand = '') => {
 
     if (filterType === 'brand') {
       values[filterType] = values[filterType] = !!filterValue.value
-        ? filterValue.value.value.split('-')
+        ? filterValue.value.value
         : defaultBrand
     } else if (!filterType.includes('double')) {
       values[filterType] = !!filterValue.value
