@@ -283,7 +283,7 @@ class DoughnutChart extends React.Component {
                   }}
                   plugins={plugins}
                   options={{
-                    responsive: false,
+                    responsive: false
                     tooltips:
                       !average &&
                       customChartToolTip(
