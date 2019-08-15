@@ -255,6 +255,11 @@ const LineAndDoughnutChartModule = ({
                     displayDataLabels={false}
                     cutoutPercentage={80}
                     datasetsBorderWidth={0}
+                    datasetOptions={{
+                      shadowOffsetX: 0.5,
+                      shadowOffsetY: 0.5,
+                      shadowBlur: 4,
+                    }}
                     removeTooltip
                     average={average}
                     cvScoreData={{
