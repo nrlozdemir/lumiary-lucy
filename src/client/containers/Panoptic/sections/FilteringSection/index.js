@@ -42,13 +42,13 @@ class PanopticFilteringSection extends Component {
         !!stackedChartData &&
         isStackedChartEmpty) ||
         isEmpty(data))
-    
-    const { labels = []} = stackedChartData || {}
+
+    const { labels = [] } = stackedChartData || {}
 
     const dayNames = moment.weekdays()
     const monthNames = moment.months()
-    
-    let xAxisType =  'weeks'
+
+    let xAxisType = 'weeks'
     labels.map((l, i) => {
       dayNames.forEach((dItem, dIndex) => {
         if (dItem == l) {
@@ -61,7 +61,7 @@ class PanopticFilteringSection extends Component {
         }
       })
     })
-    
+
     return (
       <Module
         moduleKey={'Panoptic/FilteringSection'}
@@ -98,6 +98,16 @@ class PanopticFilteringSection extends Component {
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
               labelPositionRight
+              datasetsBorderWidth={0}
+              tooltipMode="nearest"
+              slicePiecesWidth={0.7}
+              datasetOptions={{
+                shadowOffsetX: 2,
+                shadowOffsetY: 1.5,
+                shadowBlur: 4,
+                hoverShadowBlur: 4,
+              }}
+              layoutPadding={8}
               labelsData={
                 !!doughnutData &&
                 !!doughnutData.labels &&
@@ -110,24 +120,32 @@ class PanopticFilteringSection extends Component {
           </div>
           <div className={style.stackedChart}>
             <StackedBarChart
-              barData={!loading ? {
-                ...stackedChartData,
-                labels: labels.map((item) => {
-                  switch(xAxisType) {
-                    case 'days':
-                      return moment().day(item).format("dd")
-                    break;
+              barData={
+                !loading
+                  ? {
+                      ...stackedChartData,
+                      labels: labels.map((item) => {
+                        switch (xAxisType) {
+                          case 'days':
+                            return moment()
+                              .day(item)
+                              .format('dd')
+                            break
 
-                    case 'weeks':
-                      return item
-                    break;
+                          case 'weeks':
+                            return item
+                            break
 
-                    case 'months':
-                      return moment().month(item).format("MMM")
-                    break;
-                  }
-                })
-              } : null}
+                          case 'months':
+                            return moment()
+                              .month(item)
+                              .format('MMM')
+                            break
+                        }
+                      }),
+                    }
+                  : null
+              }
               barSpacing={4}
             />
           </div>
