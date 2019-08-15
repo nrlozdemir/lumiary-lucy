@@ -30,7 +30,7 @@ class IndustryData extends React.Component {
                   cutoutPercentage={50}    
                   datasetsBorderWidth={0}
                   tooltipMode="nearest"
-                  slicePiecesWidth={1}
+                  slicePiecesWidth={0.4}
                   datasetOptions={{
                     shadowOffsetX: 2,
                     shadowOffsetY: 1.5,
