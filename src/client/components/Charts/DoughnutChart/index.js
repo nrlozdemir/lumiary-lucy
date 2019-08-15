@@ -230,14 +230,23 @@ class DoughnutChart extends React.Component {
       }
     }
 
-    const tooltipData = {
-      labels: tooltipLabels,
-      datasets: [
-        {
-          ...newData.datasets[0],
-          data: chartValues,
-        },
-      ],
+    let tooltipData = {}
+
+    if (
+      !!newData &&
+      !!newData.datasets &&
+      !!newData.datasets[0] &&
+      !!chartValues
+    ) {
+      tooltipData = {
+        labels: tooltipLabels,
+        datasets: [
+          {
+            ...newData.datasets[0],
+            data: chartValues,
+          },
+        ],
+      }
     }
 
     /*
