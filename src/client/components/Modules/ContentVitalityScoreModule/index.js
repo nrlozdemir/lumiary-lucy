@@ -31,8 +31,6 @@ const ContentVitalityScoreModule = ({
   loading = false,
   chartYAxisMax = 100,
   platform,
-  average,
-  params,
   dataKeys: {
     leftLabel,
     rightLabel,

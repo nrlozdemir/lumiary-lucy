@@ -879,9 +879,26 @@ function* getTopPerformingPropertiesByTimeData({
 }
 
 function* getContentVitalityScoreData({ payload = {} }) {
+  const {
+    onDay,
+    platform,
+    dateRange,
+    brand: compareBrand,
+    property = 'cvScore',
+  } = payload
+
   try {
-    console.log('getContentVitalityScoreData', payload)
-    // const { brand } = yield select(makeSelectAuthProfile())
+    const { brand } = yield select(makeSelectAuthProfile())
+
+    console.log('getContentVitalityScoreData request', {
+      onDay,
+      property,
+      platform,
+      mode: 'sumVideos',
+      daterange: dateRange,
+      brandUuid: brand.uuid,
+      brands: [compareBrand],
+    })
 
     // const response = yield call(
     //   getDataFromApi,

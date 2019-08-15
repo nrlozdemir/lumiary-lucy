@@ -105,24 +105,19 @@ export class Competitor extends React.Component {
           title="CV Score By Videos Produced Comparison"
           filters={[
             {
-              type: 'onDay',
-              selectKey: 'MVCompetitor-onDay',
-              placeHolder: 'Day',
-            },
-            {
               type: 'brand',
               selectKey: 'MVCompetitor-brand',
               placeHolder: 'Brand',
             },
             {
+              type: 'platform',
+              selectKey: 'MVCompetitor-platform',
+              placeHolder: 'Platform',
+            },
+            {
               type: 'dateRange',
               selectKey: 'MVCompetitor-dateRange',
               placeHolder: 'Date',
-            },
-            {
-              type: 'doublePlatform',
-              selectKey: 'MVCompetitor-doublePlatform',
-              placeHolder: 'Platforms',
             },
           ]}
           container="competitor"
