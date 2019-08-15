@@ -60,14 +60,23 @@ class DoughnutCard extends React.Component {
               </div>
               <div className={style.doughnutChartContainer}>
                 <DoughnutChart
-                  width={200}
-                  height={200}
-                  layoutPadding={20}
+                  width={210}
+                  height={210}
+                  layoutPadding={28}
                   displayDataLabels={false}
                   cutoutPercentage={50}
                   data={newChartData}
                   datasetsBorderColor={colors.moduleBackground}
                   datasetsHoverBorderColor={colors.moduleBackground}
+                  datasetsBorderWidth={0}
+                  tooltipMode="nearest"
+                  slicePiecesWidth={0.8}
+                  datasetOptions={{
+                    shadowOffsetX: 2,
+                    shadowOffsetY: 1.5,
+                    shadowBlur: 4,
+                    hoverShadowBlur: 4,
+                  }}
                 />
                 {isEmpty && (
                   <div className={cx(style.textBold, style.emptyDoughnut)}>

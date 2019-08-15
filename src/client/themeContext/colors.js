@@ -263,6 +263,9 @@ const dark = {
 
   //glossary
   glossaryLinkColor: '#fff',
+
+  //marketview
+  marketviewCardHeaderBorder: '#545b79',
 }
 
 const light = {
@@ -529,6 +532,9 @@ const light = {
 
   //glossary
   glossaryLinkColor: '#505050',
+
+  //marketview
+  marketviewCardHeaderBorder: '#c6c9d7',
 }
 
 const themes = {
