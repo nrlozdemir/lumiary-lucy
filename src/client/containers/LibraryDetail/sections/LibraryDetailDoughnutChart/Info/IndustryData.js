@@ -23,10 +23,20 @@ class IndustryData extends React.Component {
             {modalData && modalData.industryChartData ? (
               <div className={style.doughnutChartContainer}>
                 <DoughnutChart
-                  width={180}
-                  height={180}
+                  width={188}
+                  height={188}
+                  layoutPadding={8}
                   displayDataLabels={false}
-                  cutoutPercentage={50}
+                  cutoutPercentage={50}    
+                  datasetsBorderWidth={0}
+                  tooltipMode="nearest"
+                  slicePiecesWidth={1}
+                  datasetOptions={{
+                    shadowOffsetX: 2,
+                    shadowOffsetY: 1.5,
+                    shadowBlur: 4,
+                    hoverShadowBlur: 4,
+                  }}
                   data={doughnutChartDataWithOpacity(
                     modalData.industryChartData,
                     colors,
