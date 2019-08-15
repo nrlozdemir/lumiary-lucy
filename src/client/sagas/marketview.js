@@ -894,8 +894,6 @@ function* getContentVitalityScoreData({ payload = {} }) {
 
     const { brand } = profile
 
-    console.log('asdsd', compareBrand)
-
     let brands = [brand.uuid, ...(!!compareBrand ? [compareBrand] : [])]
 
     // platform and time views will consist of all competitors
@@ -903,7 +901,7 @@ function* getContentVitalityScoreData({ payload = {} }) {
       brands = competitors
     }
 
-    console.log('getContentVitalityScoreData request', {
+    const params = {
       onDay,
       brands,
       property,
@@ -911,27 +909,22 @@ function* getContentVitalityScoreData({ payload = {} }) {
       mode: 'sumVideos',
       daterange: dateRange,
       brandUuid: brand.uuid,
-    })
+    }
 
-    // const response = yield call(
-    //   getDataFromApi,
-    //   undefined,
-    //   `/report/compare/brands?${querystring.stringify({
-    //     brands: brands,
-    //     brandUuid: brand.uuid,
-    //     property: 'cvScore',
-    //     mode: 'sumVideos',
-    //     daterange: dateRange,
-    //     platform: platform,
-    //   })}`,
-    //   'GET'
-    // )
+    console.log('getContentVitalityScoreData request', params)
 
-    // yield put(
-    //   actions.getContentVitalityScoreDataSuccess(
-    //     percentageManipulation({ data: response, platform })
-    //   )
-    // )
+    const response = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl('/report/compare/brands', params),
+      'GET'
+    )
+
+    yield put(
+      actions.getContentVitalityScoreDataSuccess(
+        percentageManipulation({ data: response, platform })
+      )
+    )
   } catch (err) {
     console.log(err)
     yield put(actions.getContentVitalityScoreDataError(err))
