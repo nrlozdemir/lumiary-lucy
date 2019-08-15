@@ -82,20 +82,24 @@ class ColorCard extends Component {
                 {loading ? <RouterLoading /> : 'No Data Available'}
               </div>
             )}
-            <div className={style.marketViewCardTitle}>Color</div>
+            <div className={style.marketViewCardHeader} style={{ borderColor: colors.marketviewCardHeaderBorder }}>
+              <div className={style.marketViewCardTitle}>Platform</div>
+              <div className={style.chartSectionBadge}>
+                <span
+                  style={{
+                    color: colors.labelColor,
+                  }}
+                >
+                  <Link
+                    to="/marketview/platform"
+                  >
+                    View Platform Metrics
+                  </Link>                  
+                </span>
+              </div>
+            </div>
             <div className={style.marketViewCardSubTitle}>
               Color breakdown by platform
-            </div>
-            <div className={style.chartSectionBadge}>
-              <span
-                style={{
-                  background: colors.labelBackground,
-                  color: colors.labelColor,
-                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                }}
-              >
-                {dateLabel}
-              </span>
             </div>
             <div className={style.bubbleChart}>
               {!!data && !loading && !!data.length && totalChartValue ? (
@@ -189,19 +193,6 @@ class ColorCard extends Component {
             <div className={style.marketViewCardDescription}>
               {`An overview of the dominant colors associated with the top number of ${metric} on each platform for the ${dateLabel.toLowerCase()}.`}
             </div>
-            <Link
-              to="/marketview/platform"
-              className={style.marketViewCardLink}
-              style={{
-                backgroundColor: colors.moduleBorder,
-                color: colors.textColor,
-              }}
-            >
-              View Platform Metrics
-              <div className={style.icon}>
-                <RightArrowCircle />
-              </div>
-            </Link>
           </div>
         )}
       </ThemeContext.Consumer>
