@@ -58,7 +58,7 @@ export const defaultFilters = {
     .format('dddd')
     .toLowerCase(),
   doublePlatform: 'facebook-instagram',
-  brands: '',
+  brand: '',
 }
 
 export const initialState = fromJS({
@@ -278,7 +278,7 @@ export const initialState = fromJS({
       ],
       []
     ),
-    brands: []
+    brand: []
   },
   values: {},
   defaults: defaultFilters,
@@ -296,11 +296,11 @@ const selectFiltersReducer = (state = initialState, action) => {
     case types.SET_BRAND_OPTIONS:
       return state
         .setIn(
-          ['options', 'brands'],
+          ['options', 'brand'],
           fromJS(payload.brands)
         )
         .setIn(
-          ['defaults', 'brands'],
+          ['defaults', 'brand'],
           fromJS(payload.defaultBrand)
         )
     default:

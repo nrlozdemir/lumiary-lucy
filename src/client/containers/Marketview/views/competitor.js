@@ -110,9 +110,9 @@ export class Competitor extends React.Component {
               placeHolder: 'Day',
             },
             {
-              type: 'brands',
-              selectKey: 'MVCompetitor-brands',
-              placeHolder: 'Brands',
+              type: 'brand',
+              selectKey: 'MVCompetitor-brand',
+              placeHolder: 'Brand',
             },
             {
               type: 'dateRange',
