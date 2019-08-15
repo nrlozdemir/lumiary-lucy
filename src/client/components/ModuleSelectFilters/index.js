@@ -34,6 +34,7 @@ class ModuleSelectFilters extends React.Component {
 
     this.onChange(undefined)
 
+    // fetches competitors and adds them to dropdown options for `brands` type
     if (
       type === 'brands' &&
       !!profile &&

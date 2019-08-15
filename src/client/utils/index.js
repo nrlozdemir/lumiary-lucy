@@ -294,6 +294,7 @@ const floatCvScore = (val) => Number.parseFloat(val).toFixed(1)
  into { type: value } map which is easily read by azazzle
 */
 const selectFiltersToType = (selectValues = {}) => {
+  console.log('asd', selectValues)
   return Object.keys(selectValues).reduce((values, key) => {
     const filterValue = selectValues[key]
     const filterType = filterValue.type
@@ -313,11 +314,20 @@ const selectFiltersToType = (selectValues = {}) => {
       return values
     }
 
-    values[filterType] = !!filterValue.value
-      ? !!filterValue.value.value && !!filterValue.value.value.startDate
-        ? [filterValue.value.value.startDate, filterValue.value.value.endDate]
-        : filterValue.value.value
-      : defaultFilters[filterType]
+    if (filterType.includes('double')) {
+      const whichValueKey = filterType.split('double')[1].toLowerCase()
+      values[whichValueKey] = values[whichValueKey] = !!filterValue.value
+        ? filterValue.value.value.split('-')
+        : defaultFilters[filterType].split('-')
+    }
+
+    if (!filterType.includes('double')) {
+      values[filterType] = !!filterValue.value
+        ? !!filterValue.value.value && !!filterValue.value.value.startDate
+          ? [filterValue.value.value.startDate, filterValue.value.value.endDate]
+          : filterValue.value.value
+        : defaultFilters[filterType]
+    }
 
     return values
   }, {})
