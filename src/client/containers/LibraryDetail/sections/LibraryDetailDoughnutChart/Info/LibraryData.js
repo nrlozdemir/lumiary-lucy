@@ -26,10 +26,20 @@ class LibraryData extends React.Component {
             {modalData && modalData.libraryChartData ? (
               <div className={style.doughnutChartContainer}>
                 <DoughnutChart
-                  width={180}
-                  height={180}
+                  width={190}
+                  height={190}
+                  layoutPadding={8}
                   displayDataLabels={false}
-                  cutoutPercentage={50}
+                  cutoutPercentage={50}    
+                  datasetsBorderWidth={0}
+                  tooltipMode="nearest"
+                  slicePiecesWidth={1}
+                  datasetOptions={{
+                    shadowOffsetX: 2,
+                    shadowOffsetY: 1.5,
+                    shadowBlur: 4,
+                    hoverShadowBlur: 4,
+                  }}
                   data={doughnutChartDataWithOpacity(
                     modalData.libraryChartData,
                     colors,
