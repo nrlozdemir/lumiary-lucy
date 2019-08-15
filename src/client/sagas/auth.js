@@ -1,5 +1,5 @@
 import qs from 'qs'
-import { types, makeSelectAuthUser } from 'Reducers/auth'
+import { types, makeSelectAuthUser, makeSelectAuthProfile } from 'Reducers/auth'
 import { actions } from 'Reducers/app'
 
 import {
@@ -13,9 +13,9 @@ import {
   cancel,
 } from 'redux-saga/effects'
 import { delay } from 'redux-saga'
-import axios from 'axios'
 import { getProfileObjectWithBrand } from 'Utils'
-import { ajax, buildQApiUrl, getDataFromApi } from 'Utils/api'
+import { ajax, buildQApiUrl, getDataFromApi, buildApiUrl } from 'Utils/api'
+import oAuthHelper from 'Utils/oAuthHelper'
 import authMockData from 'Api/mocks/authMock.json'
 
 const VALIDATE_SSO = '/auth/sso/validate'
@@ -268,19 +268,48 @@ export function* forgotPassword({ email }) {
   }
 }
 
-export function* connectOAuth({ payload }) {
+export function* connectOAuth({ payload:platform }) {
   try {
-    const response = {}
+    const { token:bearerToken } = yield select(makeSelectAuthUser())
+    const { brand } = yield select(makeSelectAuthProfile())
+    const { uuid:brandUuid } = brand
 
-    yield delay(2000)
-    if (response) {
+    if(!brandUuid) {
+      throw new Error('Could not determine brand uuids')
+    }
+
+    if(!bearerToken) {
+      throw new Error('No bearer token provided')
+    }
+
+    const oAuth = new oAuthHelper({
+      platform,
+      brandUuid,
+      bearerToken,
+    })
+
+    yield oAuth.fetchLibrary()
+
+    const token = yield oAuth.getAuthToken()
+    const response = yield oAuth.sendAuthData({ token })
+    const { success } = response
+
+    if(success) {
+      yield oAuth.sendOauthValidated().catch((err) => {
+        console.log(err)
+      })
+    }
+
+    if (success) {
       yield put({
         type: types.CONNECT_OAUTH_SUCCESS,
         payload: {
-          message: `Connected to ${payload}`,
+          brandUuid,
+          platform,
+          message: `Connected to ${platform}`,
           response: {
             ...response,
-            name: payload,
+            name: platform,
           },
         },
       })

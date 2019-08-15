@@ -123,7 +123,7 @@ class PacingCard extends Component {
             </div>
 
             <div className={style.marketViewCardDescription}>
-              {`The top performing video pacing associated with the highest number of ${metric} for videos outside of your library in the ${dateLabel.toLowerCase()}.`}
+              {`The top-performing video pacing associated with the highest number of ${metric} outside of your library in the ${dateLabel.toLowerCase()}.`}
             </div>
           </div>
         )}
