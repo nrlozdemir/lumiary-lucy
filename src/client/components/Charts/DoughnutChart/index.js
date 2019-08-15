@@ -120,6 +120,9 @@ class DoughnutChart extends React.Component {
 
     // If more than 5 datapoints, take the first 4, and bucket the rest
     if (
+      !!newData &&
+      !!newData.datasets &&
+      !!newData.datasets[0] &&
       !!newData.labels &&
       !!newData.labels.length &&
       newData.labels.length > dataLimit
