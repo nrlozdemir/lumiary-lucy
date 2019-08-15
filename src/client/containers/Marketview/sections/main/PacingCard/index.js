@@ -76,7 +76,7 @@ class PacingCard extends Component {
             )}
             <div className={style.marketViewCardTitle}>Pacing</div>
             <div className={style.marketViewCardSubTitle}>
-              Top Competitor Similarities
+              Pacing breakdown by competitor
             </div>
             <div className={style.chartSectionBadge}>
               <span
@@ -119,7 +119,7 @@ class PacingCard extends Component {
             </div>
 
             <div className={style.marketViewCardDescription}>
-              {`The top performing video pacing associated with the highest number of ${metric} for videos outside of your library in the ${dateLabel.toLowerCase()}.`}
+              {`The top-performing video pacing associated with the highest number of ${metric} outside of your library in the ${dateLabel.toLowerCase()}.`}
             </div>
             <Link
               to="/marketview/competitor"

@@ -84,7 +84,7 @@ class ColorCard extends Component {
             )}
             <div className={style.marketViewCardTitle}>Color</div>
             <div className={style.marketViewCardSubTitle}>
-              Top Performing Platform
+              Color breakdown by platform
             </div>
             <div className={style.chartSectionBadge}>
               <span
@@ -187,7 +187,7 @@ class ColorCard extends Component {
               </div>
             )}
             <div className={style.marketViewCardDescription}>
-              {`An overview of the dominant color associated with the top number of ${metric} for videos on each platform for the ${dateLabel.toLowerCase()}.`}
+              {`An overview of the dominant colors associated with the top number of ${metric} on each platform for the ${dateLabel.toLowerCase()}.`}
             </div>
             <Link
               to="/marketview/platform"
