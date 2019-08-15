@@ -70,7 +70,7 @@ class DoughnutCard extends React.Component {
                   datasetsHoverBorderColor={colors.moduleBackground}
                   datasetsBorderWidth={0}
                   tooltipMode="nearest"
-                  slicePiecesWidth={0.7}
+                  slicePiecesWidth={0.8}
                   datasetOptions={{
                     shadowOffsetX: 2,
                     shadowOffsetY: 1.5,
