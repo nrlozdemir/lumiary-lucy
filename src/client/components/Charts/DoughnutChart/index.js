@@ -159,11 +159,11 @@ class DoughnutChart extends React.Component {
         : []
 
     let chartBackgroundColors =
-      newData && newData.datasets
+      !!newData && !!newData.datasets && !!newData.datasets[0]
         ? newData.datasets[0].backgroundColor.slice(0, 5)
         : null
     let chartHoverBackgroundColors =
-      data && newData.datasets
+      !!newData && !!newData.datasets && !!newData.datasets[0]
         ? newData.datasets[0].backgroundColor.slice(0, 5)
         : null
 
