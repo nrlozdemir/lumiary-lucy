@@ -36,13 +36,13 @@ class ModuleSelectFilters extends React.Component {
 
     // fetches competitors and adds them to dropdown options for `brands` type
     if (
-      type === 'brands' &&
+      type === 'brand' &&
       !!profile &&
       !!profile.brand &&
       !!profile.brand.competitors &&
       !!options &&
-      !!options.brands &&
-      profile.brand.competitors.length !== options.brands.length
+      !!options.brand &&
+      profile.brand.competitors.length !== options.brand.length
     ) {
       if (!!profile.brand.competitors.length) {
         const brandOpts = profile.brand.competitors.map((b) => ({
