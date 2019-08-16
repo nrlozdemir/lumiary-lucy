@@ -74,6 +74,14 @@ class EngagementByProperty extends Component {
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
               labelPositionRight
+							datasetsBorderWidth={0}
+							slicePiecesWidth={0.4}
+							datasetOptions={{
+								shadowOffsetX: 0.5,
+								shadowOffsetY: 0.5,
+								shadowBlur: 4,
+							}}
+							layoutPadding={7}
               labelsData={
                 (!loading &&
                   !!doughnutData &&
