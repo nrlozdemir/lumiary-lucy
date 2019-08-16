@@ -438,7 +438,7 @@ const ContentVitalityScoreModule = ({
                           rectY + i * 20 + 25
                         )
 
-                      // this draws the middle average 
+                      // this draws the middle average
                       chart.ctx.fillText(
                         averageText,
                         averagePoint,
@@ -547,6 +547,13 @@ const ContentVitalityScoreModule = ({
                             displayDataLabels={false}
                             cutoutPercentage={80}
                             datasetsBorderWidth={0}
+                            slicePiecesWidth={0}
+                            datasetOptions={{
+                              shadowOffsetX: 0.5,
+                              shadowOffsetY: 0.5,
+                              shadowBlur: 4,
+                            }}
+                            layoutPadding={7}
                             removeTooltip
                             average={idx === 1 ? null : allCVScoreAvg}
                             cvScoreData={{
@@ -562,6 +569,7 @@ const ContentVitalityScoreModule = ({
                                   hoverBackgroundColor: [bgColor, '#acb0be'],
                                 },
                               ],
+                              labels: ['a', 'b'],
                             }}
                           />
                           <div
