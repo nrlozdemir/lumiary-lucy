@@ -130,8 +130,8 @@ export class VideoCard extends PureComponent {
                     disableLabels
                     width={60}
                     height={15}
-                    barWidth={2}
-                    barSpaceWidth={1}
+                    barWidth={1.5}
+                    barSpaceWidth={1.5}
                   />
                 </div>
               )}

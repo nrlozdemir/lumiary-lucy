@@ -96,8 +96,8 @@ class Video extends Component {
               disableLabels
               width={80}
               height={20}
-              barWidth={2}
-              barSpaceWidth={1}
+              barWidth={1.5}
+              barSpaceWidth={1.5}
             />
           </div>
         </AssetLayer>
