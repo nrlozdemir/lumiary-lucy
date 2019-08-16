@@ -225,9 +225,19 @@
     }
   }
 }
+
 .button {
   opacity: 0.7;
+
   &:hover {
     opacity: 1;
   }
+}
+
+.skipButton {
+  @extend .button;
+  cursor: pointer;
+  border: none;
+  margin: 24px 0 0;
+  font-size: 14px;
 }

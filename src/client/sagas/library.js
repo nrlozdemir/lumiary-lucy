@@ -36,9 +36,13 @@ function* getVideos(values) {
       body,
     }
 
-    const payload = yield call(getLibraryDataApi, options, brand.uuid)
+    const response = yield call(getLibraryDataApi, options, brand.uuid)
 
-    yield put(actions.loadVideosSuccess(percentageManipulation(payload)))
+    if (!response.error) {
+      yield put(actions.loadVideosSuccess(percentageManipulation(response)))
+    } else {
+      throw new Error('Library failed to fetch videos')
+    }
   } catch (err) {
     console.log(err)
     yield put(actions.loadVideosError(err))

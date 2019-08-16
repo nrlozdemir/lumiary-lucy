@@ -1,6 +1,7 @@
 import qs from 'qs'
 import { types, makeSelectAuthUser, makeSelectAuthProfile } from 'Reducers/auth'
 import { actions } from 'Reducers/app'
+import { push } from 'connected-react-router'
 
 import {
   call,
@@ -268,17 +269,17 @@ export function* forgotPassword({ email }) {
   }
 }
 
-export function* connectOAuth({ payload:platform }) {
+export function* connectOAuth({ payload: platform }) {
   try {
-    const { token:bearerToken } = yield select(makeSelectAuthUser())
+    const { token: bearerToken } = yield select(makeSelectAuthUser())
     const { brand } = yield select(makeSelectAuthProfile())
-    const { uuid:brandUuid } = brand
+    const { uuid: brandUuid } = brand
 
-    if(!brandUuid) {
+    if (!brandUuid) {
       throw new Error('Could not determine brand uuids')
     }
 
-    if(!bearerToken) {
+    if (!bearerToken) {
       throw new Error('No bearer token provided')
     }
 
@@ -294,7 +295,7 @@ export function* connectOAuth({ payload:platform }) {
     const response = yield oAuth.sendAuthData({ token })
     const { success } = response
 
-    if(success) {
+    if (success) {
       yield oAuth.sendOauthValidated().catch((err) => {
         console.log(err)
       })
@@ -331,6 +332,41 @@ export function* initiateTokenRefresh() {
   }
 }
 
+export function* updateOnboarding({ payload }) {
+  try {
+    const { token } = yield select(makeSelectAuthUser())
+    const { brand } = yield select(makeSelectAuthProfile())
+    const { uuid: brandUuid } = brand
+
+    if (!brandUuid) {
+      throw new Error('Could not determine brand uuids')
+    }
+
+    if (!token) {
+      throw new Error('No bearer token provided')
+    }
+
+    const response = yield call(ajax, {
+      token,
+      method: 'PATCH',
+      url: buildQApiUrl(`/brands/${brandUuid}`),
+      params: {
+        has_onboarded: payload,
+      },
+    })
+
+    if (!response.data || !response.data.brand) {
+      throw new Error('Brand Update error')
+    } else {
+      yield put({ type: types.UPDATE_HAS_ONBOARDED_SUCCESS, payload })
+      yield put(push('/library'))
+    }
+  } catch (e) {
+    console.log(e)
+    yield put({ type: types.UPDATE_HAS_ONBOARDED_ERROR, payload: e.message })
+  }
+}
+
 export default [
   fork(initiateTokenRefresh),
   takeLatest(types.LOGIN_REQUEST, authorize),
@@ -338,4 +374,5 @@ export default [
   takeLatest(types.UPDATE_PASSWORD_REQUEST, updatePassword),
   takeLatest(types.FORGOT_PASSWORD_REQUEST, forgotPassword),
   takeLatest(types.CONNECT_OAUTH_REQUEST, connectOAuth),
+  takeLatest(types.UPDATE_HAS_ONBOARDED, updateOnboarding),
 ]
