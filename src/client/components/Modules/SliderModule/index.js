@@ -24,7 +24,7 @@ const SliderModule = (props) => {
     !!selectedVideo && !!selectedVideo.options && !loading
       ? selectedVideo.options
       : [...Array(3).keys()]
-
+      
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
