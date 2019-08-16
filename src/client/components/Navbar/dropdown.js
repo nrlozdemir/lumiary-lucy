@@ -50,6 +50,9 @@ class Dropdown extends Component {
           src={avatar || `https://picsum.photos/id/836/30/30`}
           className={imageClass}
           onClick={this.showMenu}
+          style={{
+            borderColor: colors.topValueColor,
+          }}
         />
 
         {this.state.showMenu ? (
@@ -69,7 +72,9 @@ class Dropdown extends Component {
               <style>
                 {`
                   .${style.dropdown} ul li:not(.${style.switchButton}):hover {
-                    background: ${colors.inputOptionSelectedBackground} !important;
+                    background: ${
+                      colors.inputOptionSelectedBackground
+                    } !important;
                     color: ${colors.inputDropdownColor} !important;
                   }
                   .${style.dropdown} ul li:hover a {

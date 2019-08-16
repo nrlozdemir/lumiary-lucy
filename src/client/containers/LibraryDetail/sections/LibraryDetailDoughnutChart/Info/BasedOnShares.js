@@ -14,7 +14,14 @@ import cx from 'classnames'
 
 class BasedOnShares extends React.Component {
   render() {
-    const { modalData, sectionData, title, filters, moduleKey, loading } = this.props
+    const {
+      modalData,
+      sectionData,
+      title,
+      filters,
+      moduleKey,
+      loading,
+    } = this.props
 
     const filterTitle =
       (!!filters &&
@@ -45,7 +52,8 @@ class BasedOnShares extends React.Component {
                   realVideoPropertyAverage: modalData.realVideoPropertyAverage,
                   bottomText: 'of your library is shot in',
                   avg: modalData.libraryPropertyAverage,
-                  realLibraryPropertyAverage: modalData.realLibraryPropertyAverage,
+                  realLibraryPropertyAverage:
+                    modalData.realLibraryPropertyAverage,
                   percent: modalData.propertyLibraryPercentChange,
                   fps: sectionData.label,
                 }}
@@ -53,7 +61,7 @@ class BasedOnShares extends React.Component {
               />
             ) : (
               <React.Fragment>
-                <h1 className={style.panelHeader}>{topTitle}</h1>
+                <h4 className={style.panelHeader}>{topTitle}</h4>
                 <div
                   className={cx(style.emptyData, {
                     [style['emptyData--loading']]: loading,

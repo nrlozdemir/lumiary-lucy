@@ -295,8 +295,8 @@ export class Main extends React.PureComponent {
                                         percentage={cvScore}
                                         width={80}
                                         height={20}
-                                        barWidth={2}
-                                        barSpaceWidth={1}
+                                        barWidth={1.5}
+                                        barSpaceWidth={1.5}
                                         disableLabels
                                         color={
                                           colors.themeType === 'dark'

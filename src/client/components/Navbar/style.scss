@@ -1,9 +1,9 @@
 .container {
-  padding: 23px 40px;
   font-family: $font-family-ClanOTNews;
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 80px;
 }
 
 .logo {
@@ -49,6 +49,7 @@
   justify-content: center;
   position: relative;
   z-index: 2;
+  height: 100%;
 
   a {
     margin: 0 36px;
@@ -57,6 +58,9 @@
     text-decoration: none;
     position: relative;
     font-family: $font-family-ClanOTNews;
+    display: flex;
+    align-items: center;
+    height: 100%;
   }
 
   .activeLink {
@@ -75,7 +79,7 @@
       width: 100%;
       height: 4px;
       position: absolute;
-      bottom: -33px;
+      bottom: 0;
       background-color: $color-cool-blue;
     }
   }
@@ -98,7 +102,7 @@
 
   .profileImage {
     width: 34px;
-    border: 2px solid $color-white;
+    border: 1px solid $color-white;
     vertical-align: middle;
     box-sizing: border-box;
   }

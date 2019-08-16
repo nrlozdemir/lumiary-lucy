@@ -75,12 +75,19 @@
 }
 
 .radialChartsContainer {
+  width: 100%;
+  display: flex;
   margin-top: 72px;
+
+  [class*='radialChartsContainer'] {
+    margin-top: 0;
+  }
 
   &_loading {
     display: flex;
     align-items: center;
-    height: 460px;
+		height: 460px;
+		width: 100%;
   }
 
   &_empty {
@@ -105,12 +112,12 @@
   }
 
   .radialChart {
-    transition: 500ms;
+    //transition: 500ms;
     text-align: center;
     width: calc(25% - 41px);
     float: left;
-    margin: 24px 0;
-    padding: 30px 20px;
+    margin: 56px 0;
+    padding: 0px 20px;
     border-left: 1px solid $color-dusk;
     list-style: none;
     position: relative;
@@ -119,11 +126,12 @@
       font-family: $font-family-primary;
       font-size: 32px;
       font-weight: 800;
+      line-height: 40px;
     }
     .subtitle {
       padding: 8px 24px;
       display: inline-flex;
-      margin-top: 24px;
+      margin-top: 26px;
       position: relative;
       border-radius: 17px;
       // box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
@@ -169,7 +177,7 @@
           height: 16px;
           width: 16px;
           position: absolute;
-          left: 0px;
+          left: 7px;
           top: 37px;
         }
       }
@@ -185,12 +193,11 @@
       display: none;
       align-items: center;
       justify-content: center;
-      position: absolute;
-      bottom: -65px;
-      left: -10px;
-      right: -10px;
-      width: calc(100% + 20px);
-      padding: 13px 0;
+      position: relative;
+      bottom: -56px;
+      left: -30px;
+      width: calc(100% + 60px);
+      height: 56px;
       background-color: rgba(255, 255, 255, 0.9);
       font-family: $font-family-ClanOT;
       font-size: 14px;
@@ -223,17 +230,14 @@
     }
     &:hover {
       // transform: scaleX(1.10) scaleY(1.22);
+      margin: 28px 0;
       z-index: 1;
-      .cardInner {
-        margin-top: -25px;
-      }
       .doughnutChartContainerHover {
         position: absolute;
         left: -10px;
         right: -10px;
-        top: -35px;
-        bottom: -35px;
-        height: calc(100% + 100px);
+        top: -56px;
+        bottom: -56px;
         width: calc(100% + 20px);
       }
       .doughnutChartFooter {
@@ -266,7 +270,7 @@
         display: inline-block;
         cursor: pointer;
         span {
-          font-size: 30px;
+          font-size: 32px;
           display: inline-block;
         }
         .iconTitle {
@@ -631,4 +635,14 @@
 
 .chartLoading {
   opacity: 0.25;
+}
+
+.pageTitle {
+  margin-top: 72px;
+	margin-bottom: -8px;
+	line-height: 24px;
+  font-size: 18px;
+  color: #505050;
+  font-family: $font-family-ClanOT;
+  font-weight: bold;
 }

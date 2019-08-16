@@ -34,6 +34,14 @@
   &.fixed {
     overflow: hidden;
   }
+
+  [class*='react-select__control'] {
+    width: 100%;
+  }
+
+  [class*='buttonText'] {
+    font-weight: bold;
+  }
 }
 
 .sidebarMain {

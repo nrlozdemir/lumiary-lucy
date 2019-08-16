@@ -90,7 +90,7 @@ export class LibraryDetail extends React.Component {
         selectedVideoAverage,
       },
       match: {
-        params: { videoId },
+        params: { videoId, platform },
       },
     } = this.props
 
@@ -100,7 +100,7 @@ export class LibraryDetail extends React.Component {
           selectedVideoAverage={selectedVideoAverage}
           videoUrl={`${mediaUrl}/lumiere/${brand.uuid}/${videoId}.mp4`}
           title={selectedVideo && selectedVideo.title}
-          socialIcon={selectedVideo && selectedVideo.socialIcon}
+          socialIcon={(selectedVideo && selectedVideo.socialIcon) || platform}
           cvScore={selectedVideo && selectedVideo['cvScores.value']}
           getVideoRef={this.getVideoRef}
         />

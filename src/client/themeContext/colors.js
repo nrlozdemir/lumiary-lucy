@@ -260,6 +260,7 @@ const dark = {
   lineChartPointBorderColor: '#fff',
   lineChartPointHoverBorderColor: '#fff',
   lineChartShadowColor: '#333',
+  lineChartShadowColorDark: '#000',
 
   //glossary
   glossaryLinkColor: '#fff',
@@ -301,7 +302,7 @@ const light = {
   progressShadow: '#bebebe',
   progressCountBackground: '#ffffff',
   progressLibraryDetailBackground: '#c6c9d7',
-  progressLibraryDetailShadow: 'rgba(0, 0, 0, 0.5)',
+  progressLibraryDetailShadow: '#bebebe',
   progressLibraryDetailTickColor: '#505050',
   progressQuickviewBg: '#ffffff',
   progressQuickviewColor: '#2fd7c4',
@@ -529,6 +530,7 @@ const light = {
   lineChartPointBorderColor: '#505050',
   lineChartPointHoverBorderColor: '#505050',
   lineChartShadowColor: '#ddd',
+  lineChartShadowColorDark: '#a3a3a3',
 
   //glossary
   glossaryLinkColor: '#505050',
