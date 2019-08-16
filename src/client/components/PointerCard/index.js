@@ -72,7 +72,7 @@ class PointerCard extends React.Component {
 
     return (
       <div className={style.radialChart}>
-        {style.topTitle && <h1 className={style.topTitle}>{data.topTitle}</h1>}
+        {style.topTitle && <h4 className={style.topTitle}>{data.topTitle}</h4>}
         <p className="font-secondary-first font-size-14 text-bold">
           {data.basedOn}
         </p>
