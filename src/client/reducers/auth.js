@@ -34,6 +34,10 @@ export const types = {
   TOKEN_REFRESHING: 'AUTH/TOKEN_REFRESHING',
 
   TOKEN_LOGIN_REQUEST: 'AUTH/TOKEN_LOGIN_REQUEST',
+
+  UPDATE_HAS_ONBOARDED: 'AUTH/UPDATE_HAS_ONBOARDED:REQUEST',
+  UPDATE_HAS_ONBOARDED_SUCCESS: 'AUTH/UPDATE_HAS_ONBOARDED:SUCCESS',
+  UPDATE_HAS_ONBOARDED_ERROR: 'AUTH/UPDATE_HAS_ONBOARDED:ERROR',
 }
 
 export const actions = {
@@ -67,6 +71,10 @@ export const actions = {
   }),
   connectOAuthRequest: (payload) => ({
     type: types.CONNECT_OAUTH_REQUEST,
+    payload,
+  }),
+  updateHasOnboarded: (payload) => ({
+    type: types.UPDATE_HAS_ONBOARDED,
     payload,
   }),
 }
@@ -235,13 +243,25 @@ const reducer = (state = initialState, action) => {
         .setIn(['OAuth', 'success'], fromJS(true))
         .setIn(['OAuth', 'message'], fromJS(payload.message))
         .setIn(['profile', 'brand', `oauth_${payload.platform}`], fromJS(true))
-        .setIn(['profile', 'brand', 'has_onboarded'], fromJS(true))
 
     case types.CONNECT_OAUTH_ERROR:
       return state
         .setIn(['OAuth', 'loading'], fromJS(false))
         .setIn(['OAuth', 'success'], fromJS(false))
         .setIn(['OAuth', 'message'], fromJS(payload.message))
+
+    case types.UPDATE_HAS_ONBOARDED_SUCCESS:
+      return state.setIn(['profile', 'brand', 'has_onboarded'], fromJS(payload))
+
+    case types.UPDATE_HAS_ONBOARDED_ERROR:
+      return state.setIn(
+        ['profile', 'brand', 'has_onboarded'],
+        fromJS(
+          state.profile && state.profile.brand
+            ? state.profile.brand.has_onboarded
+            : false
+        )
+      )
 
     default:
       return state

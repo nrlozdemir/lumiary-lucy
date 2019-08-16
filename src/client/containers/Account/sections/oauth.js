@@ -24,12 +24,17 @@ class OAuth extends Component {
 
   render() {
     const {
-      themeContext: { colors },
-      OAuth: { connects, success, message, loading },
       push,
       profile,
+      updateHasOnboarded,
+      themeContext: { colors },
+      OAuth: { connects, success, message, loading },
     } = this.props
+
     const { validationError } = this.state
+
+    const hasOnboarded =
+      !!profile && !!profile.brand && profile.brand.has_onboarded
 
     return (
       <AccountCard
@@ -48,7 +53,9 @@ class OAuth extends Component {
           <div className={style.info}>
             <h1 style={colors.account.h1 || {}}>Client Platform Access</h1>
             <p style={colors.account.p || {}}>
-              It is recommended to connect all your brand's social platforms to your Lumiere dashboard to ensure full access to all insights provided.
+              It is recommended to connect all your brand's social platforms to
+              your Lumiere dashboard to ensure full access to all insights
+              provided.
             </p>
           </div>
 
@@ -72,9 +79,7 @@ class OAuth extends Component {
                 >
                   Connect with {connects[connect].name}
                 </span>
-                <span
-                  className={cx(style.listItemCheck, `icon-Check`)}
-                />
+                <span className={cx(style.listItemCheck, `icon-Check`)} />
               </div>
             ))}
           </div>
@@ -83,7 +88,7 @@ class OAuth extends Component {
             <Button
               onClick={() => {
                 push('/library')
-              }}            
+              }}
               customClass={cx(style.buttonStyle, style.button)}
               disable={
                 !Object.keys(connects).find(
@@ -92,6 +97,15 @@ class OAuth extends Component {
               }
               buttonText="Complete Onboarding"
             />
+
+            <div
+              onClick={() =>
+                hasOnboarded ? push('/library/') : updateHasOnboarded(true)
+              }
+              className={style.skipButton}
+            >
+              Skip
+            </div>
           </div>
         </div>
       </AccountCard>
