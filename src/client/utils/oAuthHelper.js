@@ -1,4 +1,5 @@
 import axios from 'axios'
+import querystring from 'querystring'
 import { ajax, buildQApiUrl, buildApiUrl } from 'Utils/api'
 
 const { 
@@ -13,14 +14,6 @@ const {
   GOOGLE_DISCOVERY_DOCS,
 
   FACEBOOK_APP_ID,
-
-  TWITTER_OAUTH_NONCE,
-  TWITTER_OAUTH_CALLBACK,
-  TWITTER_OAUTH_SIGNATURE_METHOD,
-  TWITTER_OAUTH_TIMESTAMP,
-  TWITTER_OAUTH_CONSUMER_KEY,
-  TWITTER_OAUTH_SIGNATURE,
-  TWITTER_OAUTH_VERSION,
 } = process.env
 
 export default class oAuthHelper {
@@ -111,8 +104,8 @@ export default class oAuthHelper {
         },
       })
       .then(function (response) {
-        if(!response.data || !response.data.brand || response.data.brand !== brandUuid) {
-          throw new Error('passthru failure, see qapi logs')
+        if(!response.data || !response.data.brand || response.data.brand.uuid !== brandUuid) {
+          throw new Error('brand patch failure, see qapi logs')
         }
 
         return resolve(response.data)
@@ -129,40 +122,60 @@ export default class oAuthHelper {
     switch(this.platform) {
       case 'twitter':
         // https://developer.twitter.com/en/docs/basics/authentication/overview/3-legged-oauth
-        axios({
-          method: 'POST',
-          url: buildApiUrl(`/oauth/twitter`),
-          data: {
-            oauth_nonce: TWITTER_OAUTH_NONCE,
-            oauth_callback: TWITTER_OAUTH_CALLBACK,
-            oauth_signature_method: TWITTER_OAUTH_SIGNATURE_METHOD,
-            oauth_timestamp: TWITTER_OAUTH_TIMESTAMP,
-            oauth_consumer_key: TWITTER_OAUTH_CONSUMER_KEY,
-            oauth_signature: TWITTER_OAUTH_SIGNATURE,
-            oauth_version: TWITTER_OAUTH_VERSION,
-          },
+        return new Promise((resolve, reject) => {
+          axios({
+            method: 'POST',
+            url: buildApiUrl(`/oauth/twitter`),
+            data: {},
+          })
+          .then(function (response) {
+            if(!response || !response.data) {
+              throw new Error('unable to obtain Twitter OAuth URL')
+            }
+
+            const { oauth_token } = querystring.parse(response.data)
+
+            if(!oauth_token) {
+              throw new Error('unable to derive oauth_token from azazzle response')
+            }
+
+            const oauthToken = `https://api.twitter.com/oauth/authorize?oauth_token=${oauth_token}`
+
+            return resolve(oauthToken);
+          })
+          .catch(function (error) {
+            return reject(error);
+          });
         })
-        .then(function (response) {
-          console.log(response.data);
-        })
-        .catch(function (error) {
-          console.log(error);
-        });
       break;
 
       case 'facebook':
         // https://developers.facebook.com/docs/javascript
-        FB.init({
-          appId: FACEBOOK_APP_ID,
-          cookie: true,
-          xfbml: true,
-          version: 'v4.0'
-        })
+        return new Promise((resolve, reject) => {
+          try {
+            FB.init({
+              appId: FACEBOOK_APP_ID,
+              cookie: false,
+              xfbml: true,
+              version: 'v4.0'
+            })
 
-        FB.getLoginStatus(function(response) {
-          console.log(response)
+            FB.login((response) => {
+              if (response.authResponse) {
+                return resolve(response.authResponse)
+              } else {
+                throw new Error('User cancelled login or did not fully authorize.')
+              }
+
+            }, {
+              scope: 'ads_read,manage_pages,pages_show_list,read_insights'
+            })
+
+          } catch (error) {
+            console.log(error)
+            return reject(error)
+          }
         })
-      break;
 
       case 'instagram':
         // https://www.instagram.com/developer/authentication/

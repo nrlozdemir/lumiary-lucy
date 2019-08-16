@@ -292,6 +292,10 @@ export function* connectOAuth({ payload: platform }) {
     yield oAuth.fetchLibrary()
 
     const token = yield oAuth.getAuthToken()
+    console.log(token)
+    if(platform === 'twitter') {
+      return
+    }
     const response = yield oAuth.sendAuthData({ token })
     const { success } = response
 
