@@ -326,11 +326,11 @@ const selectFiltersToType = (selectValues = {}) => {
 export const getCvScoreColor = (val = 0) => {
   switch (true) {
     case val > 50 && val < 75:
-      return '#8562f3'
+      return '#8562F3'
     case val > 75 && val < 100:
-      return '#2fd7c4'
+      return '#2FD7C4'
     default:
-      return '#5292e5'
+      return '#5292E5'
   }
 }
 

@@ -19,14 +19,24 @@ class IndustryData extends React.Component {
             className={style.panelChart}
             style={{ borderColor: colors.moduleBorder }}
           >
-            <h1 className={style.panelHeader}>Industry Data</h1>
+            <h4 className={style.panelHeader}>Industry Data</h4>
             {modalData && modalData.industryChartData ? (
               <div className={style.doughnutChartContainer}>
                 <DoughnutChart
-                  width={180}
-                  height={180}
+                  width={188}
+                  height={188}
+                  layoutPadding={8}
                   displayDataLabels={false}
-                  cutoutPercentage={50}
+                  cutoutPercentage={60}
+                  datasetsBorderWidth={0}
+                  tooltipMode="nearest"
+                  slicePiecesWidth={0.4}
+                  datasetOptions={{
+                    shadowOffsetX: 2,
+                    shadowOffsetY: 1.5,
+                    shadowBlur: 4,
+                    hoverShadowBlur: 4,
+                  }}
                   data={doughnutChartDataWithOpacity(
                     modalData.industryChartData,
                     colors,
