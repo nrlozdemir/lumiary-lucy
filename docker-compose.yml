@@ -47,7 +47,7 @@ services:
       GOOGLE_API_KEY: 'AIzaSyCG2hOoLzZfV-163zq73nxuZpwWuoxobkE'
       GOOGLE_SCOPE: 'https://www.googleapis.com/auth/yt-analytics.readonly https://www.googleapis.com/auth/yt-analytics-monetary.readonly https://www.googleapis.com/auth/adwords'
       GOOGLE_DISCOVERY_DOCS: '["https://www.googleapis.com/discovery/v1/apis/youtubeAnalytics/v1/rest"]'
-      FACEBOOK_APP_ID: 'FACEBOOK_APP_ID'
+      FACEBOOK_APP_ID: '464723590731154'
       TWITTER_OAUTH_NONCE: 'K7ny27JTpKVsTgdyLdDfmQQWVLERj2zAK5BslRsqyw'
       TWITTER_OAUTH_CALLBACK: 'http%3A%2F%2Fmyapp.com%3A3005%2Ftwitter%2Fprocess_callback'
       TWITTER_OAUTH_SIGNATURE_METHOD: 'HMAC-SHA1'
