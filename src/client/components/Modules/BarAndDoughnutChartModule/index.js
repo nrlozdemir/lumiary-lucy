@@ -139,6 +139,8 @@ const BarAndDoughnutChartModule = ({
             {doughnutData && (
               <div className={style.chartContainer}>
                 <DoughnutChart
+                  width={248}
+                  height={248}
                   customDoughnutContainer={style.doughnutChartContainer}
                   key={Math.random()}
                   data={!loading ? doughnutData : {}}
@@ -155,6 +157,15 @@ const BarAndDoughnutChartModule = ({
                     marginLeft: reverse ? 0 : 56,
                     marginRight: reverse ? 56 : 0,
                   }}
+                  datasetsBorderWidth={0}
+                  slicePiecesWidth={0.4}
+                  datasetOptions={{
+                    shadowOffsetX: 0.5,
+                    shadowOffsetY: 0.5,
+                    shadowBlur: 4,
+                  }}
+                  tooltipMode="nearest"
+                  layoutPadding={8}
                 />
               </div>
             )}
