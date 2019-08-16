@@ -142,7 +142,9 @@ export class VideoCard extends PureComponent {
                     border: `1px solid ${colors.videoBorder}`,
                   }}
                 >
-                  <Link to={`/library/build-report/${video.uuid}`}>
+                  <Link
+                    to={`/library/build-report/${video.uuid}/${video.platform}`}
+                  >
                     <video
                       key={video.uuid}
                       ref={this.video}
@@ -182,7 +184,7 @@ export class VideoCard extends PureComponent {
                     <span className={style.title}>{video.title}</span>
                   </div>
                   <Link
-                    to={`/library/build-report/${video.uuid}`}
+                    to={`/library/build-report/${video.uuid}/${video.platform}`}
                     className={style.cardLink}
                     style={{
                       color: colors.labelColor,

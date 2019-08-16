@@ -32,12 +32,12 @@ const routes = [
     },
   },
   {
-    path: '/library/build-report/:videoId',
+    path: '/library/build-report/:videoId/:platform',
     exact: true,
     component: 'BuildReport',
   },
   {
-    path: '/library/:videoId',
+    path: '/library/:videoId/:platform',
     exact: true,
     component: 'LibraryDetail',
   },
@@ -345,8 +345,6 @@ class Routes extends React.Component {
     if (prevProps.profile !== profile) {
       window.localStorage.setItem('profile', JSON.stringify(profile))
     }
-
-
   }
 
   render() {
@@ -375,10 +373,7 @@ const mapStateToProps = createStructuredSelector({
 })
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators(
-    { ...appActions, ...authActions },
-    dispatch
-  )
+  bindActionCreators({ ...appActions, ...authActions }, dispatch)
 
 const withConnect = connect(
   mapStateToProps,

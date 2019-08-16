@@ -22,15 +22,15 @@ class LibraryData extends React.Component {
             className={style.panelChart}
             style={{ borderColor: colors.moduleBorder }}
           >
-            <h1 className={style.panelHeader}>Library Data</h1>
+            <h4 className={style.panelHeader}>Library Data</h4>
             {modalData && modalData.libraryChartData ? (
               <div className={style.doughnutChartContainer}>
                 <DoughnutChart
-                  width={190}
-                  height={190}
-                  layoutPadding={8}
+                  width={180}
+                  height={180}
+                  layoutPadding={0}
                   displayDataLabels={false}
-                  cutoutPercentage={50}    
+                  cutoutPercentage={60}
                   datasetsBorderWidth={0}
                   tooltipMode="nearest"
                   slicePiecesWidth={1}
@@ -42,7 +42,7 @@ class LibraryData extends React.Component {
                   }}
                   data={doughnutChartDataWithOpacity(
                     modalData.libraryChartData,
-                    colors,
+                    colors
                   )}
                 />
                 <p className="pt-32">

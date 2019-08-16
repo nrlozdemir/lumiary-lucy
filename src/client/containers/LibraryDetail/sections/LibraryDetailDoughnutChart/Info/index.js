@@ -47,6 +47,9 @@ const Info = ({ videoId, title, loading, ...rest }) => (
               />
               <IndustryData loading={loading} />
             </div>
+            <h4 class={style.pageTitle}>
+              Library vs Industry Property Comparison
+            </h4>
             <LineChart />
           </React.Fragment>
           {loading && (

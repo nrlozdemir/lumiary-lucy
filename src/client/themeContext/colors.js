@@ -302,7 +302,7 @@ const light = {
   progressShadow: '#bebebe',
   progressCountBackground: '#ffffff',
   progressLibraryDetailBackground: '#c6c9d7',
-  progressLibraryDetailShadow: 'rgba(0, 0, 0, 0.5)',
+  progressLibraryDetailShadow: '#bebebe',
   progressLibraryDetailTickColor: '#505050',
   progressQuickviewBg: '#ffffff',
   progressQuickviewColor: '#2fd7c4',
