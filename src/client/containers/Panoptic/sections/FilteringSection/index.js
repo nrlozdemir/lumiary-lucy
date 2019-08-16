@@ -100,7 +100,7 @@ class PanopticFilteringSection extends Component {
               labelPositionRight
               datasetsBorderWidth={0}
               tooltipMode="nearest"
-              slicePiecesWidth={0.7}
+              slicePiecesWidth={0.3}
               datasetOptions={{
                 shadowOffsetX: 2,
                 shadowOffsetY: 1.5,
