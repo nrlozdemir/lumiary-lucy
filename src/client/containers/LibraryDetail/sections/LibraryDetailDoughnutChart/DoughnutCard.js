@@ -60,9 +60,9 @@ class DoughnutCard extends React.Component {
               </div>
               <div className={style.doughnutChartContainer}>
                 <DoughnutChart
-                  width={124}
-                  height={124}
-                  layoutPadding={0}
+                  width={132}
+                  height={132}
+                  layoutPadding={8}
                   displayDataLabels={false}
                   cutoutPercentage={60}
                   data={newChartData}
@@ -70,7 +70,7 @@ class DoughnutCard extends React.Component {
                   datasetsHoverBorderColor={colors.moduleBackground}
                   datasetsBorderWidth={0}
                   tooltipMode="nearest"
-                  slicePiecesWidth={0.8}
+                  slicePiecesWidth={0.4}
                   datasetOptions={{
                     shadowOffsetX: 2,
                     shadowOffsetY: 1.5,
