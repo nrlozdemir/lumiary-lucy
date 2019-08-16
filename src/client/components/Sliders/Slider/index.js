@@ -1,4 +1,9 @@
 import React from 'react'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import { compose } from 'redux'
+import { makeSelectAuthProfile } from 'Reducers/auth'
+
 import classnames from 'classnames'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
@@ -14,6 +19,7 @@ class MarketViewSlider extends React.Component {
     super(props)
     this.videoRef = []
   }
+
   renderNextButton = () => {
     return (
       <RightArrowCircleFlat
@@ -34,7 +40,7 @@ class MarketViewSlider extends React.Component {
 
   handleMouseOutPlay = (i) => {
     const activeIndex = this.refSlider.activeIndex
-    if(activeIndex === i) {
+    if (activeIndex === i) {
       this.videoRef[i].pause()
       this.videoRef[i].currentTime = 0
     }
@@ -85,22 +91,22 @@ class MarketViewSlider extends React.Component {
                 style.icon
               )
 
-            return (
-              <div
-                key={i}
-                onClick={() => this.refSlider && this.refSlider.slideTo(i)}
-                className={i === 0 ? 'active' : ''}
-              >
-                <div className={style.videoContainer}>
-                  <video src={item.image} />
+              return (
+                <div
+                  key={i}
+                  onClick={() => this.refSlider && this.refSlider.slideTo(i)}
+                  className={i === 0 ? 'active' : ''}
+                >
+                  <div className={style.videoContainer}>
+                    <video src={item.image} />
+                  </div>
+                  <span>
+                    <i className={socialIcon} />
+                    {item.socialMedia}
+                  </span>
                 </div>
-                <span>
-                  <i className={socialIcon} />
-                  {item.socialMedia}
-                </span>
-              </div>
-            )
-          })}
+              )
+            })}
         </div>
       )
     },
@@ -136,7 +142,11 @@ class MarketViewSlider extends React.Component {
   }
 
   render() {
-    const { items } = this.props
+    const { items, profile } = this.props
+
+    const competitors =
+      !!profile && !!profile.brand ? profile.brand.competitors : []
+
     return (
       <div className={style.section}>
         <div className="marketViewSlider">
@@ -145,45 +155,59 @@ class MarketViewSlider extends React.Component {
             {...this.settings}
           >
             {items &&
-              items.map((item, i) => (
-                <div 
-                  className="item" 
-                  key={i}
-                  onMouseEnter={() => this.handleMouseOverPlay(i)}
-                  onMouseLeave={() => this.handleMouseOutPlay(i)}
-                >
-                  <AssetLayer
-                    containerNoBorder
-                    leftSocialIcon={item.socialMedia}
-                    centerText={item.secondTitle}
-                    title={`${item.title.substring(0, 20)}...`}
-                    width={634}
-                    height="100%"
-                    rightValue={item.cvScore}
+              items.map((item, i) => {
+                const parsedUrl = item.image.split('/')
+
+                const brand = parsedUrl.reduce((result, maybeUuid) => {
+                  const foundBrand = competitors.find(
+                    (c) => c.uuid === maybeUuid
+                  )
+                  return !!foundBrand ? foundBrand : result
+                }, null)
+
+                const title = brand
+                  ? brand.name
+                  : `${item.title.substring(0, 20)}...`
+
+                return (
+                  <div
+                    className="item"
+                    key={i}
+                    onMouseEnter={() => this.handleMouseOverPlay(i)}
+                    onMouseLeave={() => this.handleMouseOutPlay(i)}
                   >
-                    <video 
-                      className={style.fullVideo} 
-                      src={item.image}
-                      ref={videoRef => this.videoRef[i] = videoRef}
-                      loop
-                      muted
-                      controls={false}  
-                    />
-                    <div className={style.percentageWrapper}>
-                      <PercentageBarGraph
-                        key={Math.random()}
-                        percentage={item.cvScore}
-                        width={80}
-                        height={20}
-                        barWidth={1.5}
-                        barSpaceWidth={1.5}
-                        disableLabels
-                        color="green"
+                    <AssetLayer
+                      containerNoBorder
+                      leftSocialIcon={item.socialMedia}
+                      centerText={item.secondTitle}
+                      title={title}
+                      width={634}height = '100%'
+                      rightValue={item.cvScore}
+                    >
+                      <video
+                        className={style.fullVideo}
+                        src={item.image}
+                        ref={(videoRef) => (this.videoRef[i] = videoRef)}
+                        loop
+                        muted
+                        controls={false}
                       />
-                    </div>
-                  </AssetLayer>
-                </div>
-              ))}
+                      <div className={style.percentageWrapper}>
+                        <PercentageBarGraph
+                          key={Math.random()}
+                          percentage={item.cvScore}
+                          width={80}
+                          height={20}
+                          barWidth={1.5}
+                          barSpaceWidth={1.5}
+                          disableLabels
+                          color="green"
+                        />
+                      </div>
+                    </AssetLayer>
+                  </div>
+                )
+              })}
           </Swiper>
           <div className="swiper-pagination" />
         </div>
@@ -192,4 +216,13 @@ class MarketViewSlider extends React.Component {
   }
 }
 
-export default MarketViewSlider
+const mapStateToProps = createStructuredSelector({
+  profile: makeSelectAuthProfile(),
+})
+
+const withConnect = connect(
+  mapStateToProps,
+  null
+)
+
+export default compose(withConnect)(MarketViewSlider)
