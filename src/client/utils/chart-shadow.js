@@ -601,13 +601,13 @@
       me.data.datasets,
       function(dataset, datasetIndex) {
         var meta = me.getDatasetMeta(datasetIndex)
-        var type = dataset.type || me.config.type
+        var type = !!me && dataset.type || me.config.type
 
-        if (meta.type && meta.type !== type) {
+        if (!!me && meta.type && meta.type !== type) {
           me.destroyDatasetMeta(datasetIndex)
           meta = me.getDatasetMeta(datasetIndex)
         }
-        meta.type = type
+        meta.type = !!type && type
 
         if (meta.controller) {
           meta.controller.updateIndex(datasetIndex)
