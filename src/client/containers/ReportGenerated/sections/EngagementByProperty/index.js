@@ -66,22 +66,22 @@ class EngagementByProperty extends Component {
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
             <DoughnutChart
-              width={270}
-              height={270}
+              width={278}
+              height={278}
               data={!loading ? doughnutData : {}}
               cutoutPercentage={58}
               fillText={isDoughnutEmpty ? 'No Data' : 'Total Percentage'}
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
               labelPositionRight
-							datasetsBorderWidth={0}
-							slicePiecesWidth={0.4}
-							datasetOptions={{
-								shadowOffsetX: 0.5,
-								shadowOffsetY: 0.5,
-								shadowBlur: 4,
-							}}
-							layoutPadding={7}
+              datasetsBorderWidth={0}
+              slicePiecesWidth={0.4}
+              datasetOptions={{
+                shadowOffsetX: 0.5,
+                shadowOffsetY: 0.5,
+                shadowBlur: 4,
+              }}
+              layoutPadding={8}
               labelsData={
                 (!loading &&
                   !!doughnutData &&
