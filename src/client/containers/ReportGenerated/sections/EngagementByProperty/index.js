@@ -81,6 +81,7 @@ class EngagementByProperty extends Component {
                 shadowOffsetY: 0.5,
                 shadowBlur: 4,
               }}
+							tooltipMode="nearest"
               layoutPadding={8}
               labelsData={
                 (!loading &&
