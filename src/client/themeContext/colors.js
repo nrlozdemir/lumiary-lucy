@@ -259,7 +259,7 @@ const dark = {
   // global lineChart
   lineChartPointBorderColor: '#fff',
   lineChartPointHoverBorderColor: '#fff',
-  lineChartShadowColor: '#333',
+  lineChartShadowColor: '#a3a3a3',
 
   //glossary
   glossaryLinkColor: '#fff',
