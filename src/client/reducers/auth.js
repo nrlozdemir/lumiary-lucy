@@ -185,6 +185,7 @@ const reducer = (state = initialState, action) => {
           })
         )
         .set('profile', null)
+        .set('OAuth', fromJS(initialState.toJS().OAuth))
 
     case types.UPDATE_PASSWORD_REQUEST:
       return state
@@ -233,10 +234,8 @@ const reducer = (state = initialState, action) => {
         .setIn(['OAuth', 'loading'], fromJS(false))
         .setIn(['OAuth', 'success'], fromJS(true))
         .setIn(['OAuth', 'message'], fromJS(payload.message))
-        .setIn(
-          ['profile', 'brand', `oauth_${payload.platform}`],
-          fromJS(true)
-        )
+        .setIn(['profile', 'brand', `oauth_${payload.platform}`], fromJS(true))
+        .setIn(['profile', 'brand', 'has_onboarded'], fromJS(true))
 
     case types.CONNECT_OAUTH_ERROR:
       return state

@@ -106,7 +106,8 @@ export default class oAuthHelper {
         url: buildQApiUrl(`/brands/${brandUuid}`),
         token: this.bearerToken,
         params: {
-          [`oauth_${platform}`]: true
+          [`oauth_${platform}`]: true,
+          has_onboarded: true,
         },
       })
       .then(function (response) {
