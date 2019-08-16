@@ -214,7 +214,7 @@ const RadarChart = (props) => {
           }),
         }
 
-  console.log(theData, maxTicksStepLimit)
+  //console.log(theData, maxTicksStepLimit)
 
   return (
     <Radar
