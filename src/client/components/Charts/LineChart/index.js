@@ -4,7 +4,6 @@ import { randomKey } from 'Utils'
 import { chartCombineDataset } from 'Utils/datasets'
 import { fromJS } from 'immutable'
 import { lineOptions, lineStackedAreaOptions } from './defaultOptions'
-
 import { withTheme } from 'ThemeContext/withTheme'
 
 function metricSuffix(number) {
@@ -21,7 +20,10 @@ function addPercentage(number) {
   return number + '%'
 }
 
-function combineChartData(data, type = null) {
+function combineChartData(data, type = null, customOptions = null) {
+  if (!!customOptions) {
+    return chartCombineDataset(data, customOptions)
+  }
   if (type === null || type === 'line') {
     return chartCombineDataset(data, lineOptions)
   } else if (type === 'lineStackedArea') {
@@ -129,6 +131,7 @@ class LineChart extends React.Component {
         },
       })
     }
+
     if (props.customLine) {
       plugins.push({
         afterDraw: (chart, easing) => {
@@ -148,16 +151,23 @@ class LineChart extends React.Component {
         },
       })
     }
-    if (props.shadow) {
+
+    if (props.shadow && !!props.shadow.color) {
       plugins.push(
         {
-          beforeDatasetDraw: function({ ctx }, { meta }) {
-            ctx.shadowBlur = 10
-            ctx.shadowColor = meta.$filler.el._model.borderColor
+          beforeDatasetsDraw: function(chart, options) {
+            chart.ctx.shadowColor = props.shadow.color
+            chart.ctx.shadowBlur =
+              (!!props.shadow.blur && props.shadow.blur) || 6
+            chart.ctx.shadowOffsetX =
+              (!!props.shadow.offsetX && props.shadow.offsetX) || 2
+            chart.ctx.shadowOffsetY =
+              (!!props.shadow.offsetY && props.shadow.offsetY) || 2
           },
         },
         {
-          afterDatasetDraw: function(chart) {
+          afterDatasetsDraw: function(chart, options) {
+            chart.ctx.shadowColor = 'transparent'
             chart.ctx.shadowBlur = 0
           },
         }
@@ -185,6 +195,7 @@ class LineChart extends React.Component {
         },
       }
     }
+
     let maximumDatainDatasets
     if (props.dynamicPercentage) {
       const v =
@@ -195,6 +206,7 @@ class LineChart extends React.Component {
         })
       maximumDatainDatasets = v && Math.max(...[...v[0], ...v[1]])
     }
+
     if (props.yAxesPercentage) {
       props.options.scales.yAxes[0].ticks = {
         ...props.options.scales.yAxes[0].ticks,
@@ -298,7 +310,13 @@ class LineChart extends React.Component {
       }
     }
 
-    let combinedData = combineChartData(props.dataSet, props.chartType)
+    const customOptions =
+      (!!props.customLineOptions && props.customLineOptions) || null
+    let combinedData = combineChartData(
+      props.dataSet,
+      props.chartType,
+      customOptions
+    )
     if (customLineOptions) {
       combinedData.datasets =
         !!combinedData.datasets &&
