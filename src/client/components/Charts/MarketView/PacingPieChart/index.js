@@ -3,6 +3,7 @@ import { Pie } from 'react-chartjs-2'
 import style from './style.scss'
 import { customChartToolTip, ucfirst } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
+import 'Utils/chart-shadow'
 
 function metricSuffix(number) {
   if (number >= 1e3) {
@@ -22,8 +23,8 @@ const PacingPieChart = ({ data = {}, metric }) => {
       {({ themeContext: { colors } }) => (
         <div className={style.pieChartContainer}>
           <Pie
-            height={240}
-            width={240}
+            height={220}
+            width={220}
             options={{
               tooltips: customChartToolTip(colors, {
                 callbacks: {
@@ -61,11 +62,11 @@ const PacingPieChart = ({ data = {}, metric }) => {
                 datalabels: false,
               },
               layout: {
-                padding: 0,
+                padding: 8,
               },
               elements: {
                 arc: {
-                  borderWidth: 2.2,
+                  borderWidth: 0.8,
                 },
               },
             }}
@@ -75,6 +76,12 @@ const PacingPieChart = ({ data = {}, metric }) => {
                 {
                   ...datasets[0],
                   borderColor: colors.modalBackground,
+                  hoverBorderColor: colors.modalBackground,
+                  shadowOffsetX: 0.4,
+                  shadowOffsetY: 0.4,
+                  shadowBlur: 4,
+                  shadowColor: colors.doughnutChartShadowColor,
+                  hoverShadowColor: colors.doughnutChartShadowColor,
                 },
               ],
             }}

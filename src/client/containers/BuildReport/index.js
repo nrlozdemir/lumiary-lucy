@@ -41,12 +41,12 @@ export class BuildReport extends React.Component {
     const { percentage, timerRef } = this.state
     const {
       match: {
-        params: { videoId },
+        params: { videoId, platform },
       },
     } = this.props
     if (percentage > 99) {
       clearInterval(timerRef)
-      return <Redirect to={`/library/${videoId}`} />
+      return <Redirect to={`/library/${videoId}/${platform}`} />
     }
 
     return (
