@@ -268,7 +268,19 @@ const RouteWithSubRoutes = (route) => {
     </DynamicImport>
   )
 
-  return route.path !== '/sso' ? (
+  return route.profile &&
+    route.profile.brand &&
+    !route.profile.brand.has_onboarded ? (
+    route.path === '/account/oauth' ? (
+      <Route
+        path={route.path}
+        exact={route.exact}
+        component={(props) => body(props)}
+      />
+    ) : (
+      <Redirect to={{ pathname: '/account/oauth' }} />
+    )
+  ) : route.path !== '/sso' ? (
     route.notPrivateRoute ? (
       route.user && route.user.token ? (
         <Redirect
