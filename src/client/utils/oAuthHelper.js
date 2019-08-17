@@ -177,8 +177,6 @@ export default class oAuthHelper {
             const oauthToken = `https://api.twitter.com/oauth/authorize?oauth_token=${oauth_token}`
 
             window.location = oauthToken
-
-            // return resolve(oauthToken);
           })
           .catch(function (error) {
             return reject(error);
