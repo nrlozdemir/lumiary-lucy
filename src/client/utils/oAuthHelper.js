@@ -64,12 +64,15 @@ export default class oAuthHelper {
   }
 
   sendAuthData(data = {}) {
+    const { brandUuid, platform } = this
+
     return new Promise((resolve, reject) => {
       axios({
         method: 'POST',
         url: buildApiUrl(`/oauth/passthru`),
         data: {
-          platform: this.platform,
+          platform,
+          brandUuid,
           data: {
             ...data
           }
@@ -118,6 +121,38 @@ export default class oAuthHelper {
     })
   }
 
+  verifyToken({ 
+    oauth_token,
+    oauth_verifier
+  }) {
+    return new Promise((resolve, reject) => {
+      if(!oauth_token || !oauth_verifier) {
+        return reject(new Error('oauth_token and oauth_verifier are required to verify the twitter oauth token'))
+      }
+
+      axios({
+        method: 'POST',
+        url: buildApiUrl(`/oauth/twitter_callback`),
+        data: {
+          oauth_token,
+          oauth_verifier
+        },
+      })
+      .then((response) => {
+        if(!response || !response.data) {
+          throw new Error('response data not provided')
+        }
+
+        return resolve(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+        return reject(error)
+      })
+
+    })
+  }
+
   getAuthToken() {
     switch(this.platform) {
       case 'twitter':
@@ -141,7 +176,9 @@ export default class oAuthHelper {
 
             const oauthToken = `https://api.twitter.com/oauth/authorize?oauth_token=${oauth_token}`
 
-            return resolve(oauthToken);
+            window.location = oauthToken
+
+            // return resolve(oauthToken);
           })
           .catch(function (error) {
             return reject(error);
