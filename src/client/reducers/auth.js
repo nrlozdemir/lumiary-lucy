@@ -38,6 +38,8 @@ export const types = {
   UPDATE_HAS_ONBOARDED: 'AUTH/UPDATE_HAS_ONBOARDED:REQUEST',
   UPDATE_HAS_ONBOARDED_SUCCESS: 'AUTH/UPDATE_HAS_ONBOARDED:SUCCESS',
   UPDATE_HAS_ONBOARDED_ERROR: 'AUTH/UPDATE_HAS_ONBOARDED:ERROR',
+
+  VERIFY_TWITTER_OAUTH_TOKEN: 'AUTH/VERIFY_TWITTER_OAUTH_TOKEN',
 }
 
 export const actions = {
@@ -77,6 +79,10 @@ export const actions = {
     type: types.UPDATE_HAS_ONBOARDED,
     payload,
   }),
+  verifyTwitterOAuthToken: (payload) => ({
+    type: types.VERIFY_TWITTER_OAUTH_TOKEN,
+    payload
+  })
 }
 
 export const initialState = fromJS({
@@ -237,7 +243,6 @@ const reducer = (state = initialState, action) => {
       return state.setIn(['OAuth', 'loading'], fromJS(false))
 
     case types.CONNECT_OAUTH_SUCCESS:
-      console.log(payload)
       return state
         .setIn(['OAuth', 'loading'], fromJS(false))
         .setIn(['OAuth', 'success'], fromJS(true))

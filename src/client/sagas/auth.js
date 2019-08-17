@@ -1,7 +1,7 @@
 import qs from 'qs'
 import { types, makeSelectAuthUser, makeSelectAuthProfile } from 'Reducers/auth'
 import { actions } from 'Reducers/app'
-import { push } from 'connected-react-router'
+import { push, replace } from 'connected-react-router'
 
 import {
   call,
@@ -269,6 +269,58 @@ export function* forgotPassword({ email }) {
   }
 }
 
+export function* verifyTwitterOAuthToken({ payload }) {
+  try {
+    const { oauth_token, oauth_verifier } = payload
+    const { token: bearerToken } = yield select(makeSelectAuthUser())
+    const { brand } = yield select(makeSelectAuthProfile())
+    const { uuid: brandUuid } = brand
+    const platform = 'twitter'
+
+    if(!oauth_token || !oauth_verifier ) {
+      throw new Error('oauth_token and oauth_verifier are required to verify the twitter oauth token')
+    }
+
+    const oAuth = new oAuthHelper({
+      platform,
+      brandUuid,
+      bearerToken,
+    })
+
+    const token = yield oAuth.verifyToken({ 
+      oauth_token,
+      oauth_verifier
+    })
+
+    const response = yield oAuth.sendAuthData({ token })
+    const { success } = response
+
+    if (success) {
+      yield oAuth.sendOauthValidated().catch((err) => {
+        console.log(err)
+      })
+    }
+
+    if (success) {
+      yield put(replace('/account/oauth'))
+      yield put({
+        type: types.CONNECT_OAUTH_SUCCESS,
+        payload: {
+          brandUuid,
+          platform,
+          message: `Connected to ${platform}`,
+          response: {
+            ...response,
+            name: platform,
+          },
+        },
+      })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export function* connectOAuth({ payload: platform }) {
   try {
     const { token: bearerToken } = yield select(makeSelectAuthUser())
@@ -292,11 +344,9 @@ export function* connectOAuth({ payload: platform }) {
     yield oAuth.fetchLibrary()
 
     const token = yield oAuth.getAuthToken()
-    console.log(token)
-    if(platform === 'twitter') {
-      return
-    }
+
     const response = yield oAuth.sendAuthData({ token })
+    console.log('response', response)
     const { success } = response
 
     if (success) {
@@ -378,5 +428,6 @@ export default [
   takeLatest(types.UPDATE_PASSWORD_REQUEST, updatePassword),
   takeLatest(types.FORGOT_PASSWORD_REQUEST, forgotPassword),
   takeLatest(types.CONNECT_OAUTH_REQUEST, connectOAuth),
+  takeLatest(types.VERIFY_TWITTER_OAUTH_TOKEN, verifyTwitterOAuthToken),
   takeLatest(types.UPDATE_HAS_ONBOARDED, updateOnboarding),
 ]

@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import cx from 'classnames'
+import querystring from 'querystring'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
@@ -16,6 +17,27 @@ import { withTheme } from 'ThemeContext/withTheme'
 class OAuth extends Component {
   state = {
     validationError: null,
+  }
+
+  componentDidMount() {
+    const { location = {}, verifyTwitterOAuthToken } = this.props
+    let { search } = location
+
+    if(search) {
+      if(search.charAt(0) === '?') {
+        search = search.substr(1);
+      }
+
+      const { oauth_token, oauth_verifier } = querystring.parse(search)
+
+      if(oauth_token && oauth_verifier) {
+        verifyTwitterOAuthToken({
+          oauth_token,
+          oauth_verifier
+        })
+      }
+    }
+    
   }
 
   connectSocial(name) {
