@@ -215,7 +215,7 @@ export default class oAuthHelper {
       case 'instagram':
         // https://www.instagram.com/developer/authentication/
         
-        window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=25d5d010688646299e9990578044d055-ID&redirect_uri=${encodeURIComponent(`https://lumiary-local.quickframe.com:9000/account/oauth`)}&response_type=code`
+        window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=25d5d010688646299e9990578044d055&redirect_uri=${encodeURIComponent(`https://lumiary-local.quickframe.com:9000/account/oauth`)}&response_type=code`
       break;
 
       case 'youtube':
