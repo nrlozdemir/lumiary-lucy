@@ -292,6 +292,8 @@ export function* verifyTwitterOAuthToken({ payload }) {
       oauth_verifier
     })
 
+    console.log(token)
+
     const response = yield oAuth.sendAuthData({ token })
     const { success } = response
 
