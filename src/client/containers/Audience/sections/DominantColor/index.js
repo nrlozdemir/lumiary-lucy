@@ -7,16 +7,19 @@ import RadarChartModule from 'Components/Modules/RadarChartModule'
 
 class DominantColor extends React.Component {
   callBack = (data, moduleKey) => {
-    this.props.getAudienceDominantColorData(data)
+    const { type, getAudienceDominantColorData } = this.props
+    getAudienceDominantColorData({ ...data, type })
   }
 
   render() {
     const {
+      type,
       audienceDominantColorData: { data, loading, error },
     } = this.props
 
     return (
       <RadarChartModule
+        actionOnProp={type}
         loading={loading}
         leftTitle="Male"
         rightTitle="Female"

@@ -60,13 +60,14 @@ class AgeSlider extends React.PureComponent {
   }
 
   callBack = (data, moduleKey) => {
-    const { getAudienceAgeSliderData } = this.props
+    const { getAudienceAgeSliderData, type } = this.props
 
     this.setState({ videosArr: defaultAgeRange, params: data }, () => {
       const { prevAges } = this.state
 
       getAudienceAgeSliderData({
         ...data,
+        type,
         loading: true,
         ages: prevAges,
       })
@@ -99,11 +100,13 @@ class AgeSlider extends React.PureComponent {
     const { videosArr } = this.state
 
     const {
+      type,
       audienceAgeSliderData: { data, loading, error },
     } = this.props
 
     return (
       <Module
+        actionOnProp={type}
         loading={loading}
         moduleKey={'Audience/AgeSlider'}
         title="Most Popular Videos By Age, Engagement and Date"

@@ -35,11 +35,13 @@ const renderLegend = (legend) => {
 
 class GenderSection extends React.Component {
   callBack = (data, moduleKey) => {
-    this.props.getAudienceGenderData(data)
+    const { type, getAudienceGenderData } = this.props
+    getAudienceGenderData({ ...data, type })
   }
 
   render() {
     const {
+      type,
       audienceGenderData: { data, loading, error },
     } = this.props
 
@@ -76,6 +78,7 @@ class GenderSection extends React.Component {
 
     return (
       <Module
+        actionOnProp={type}        
         loading={loading}
         isEmpty={!loading && isDataSetEmpty(genderData)}
         moduleKey={'Audience/Gender'}

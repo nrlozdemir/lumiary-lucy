@@ -8,11 +8,13 @@ import chartStyle from './style.scss'
 
 class ColorTemperature extends React.Component {
   callBack = (data) => {
-    this.props.getAudienceColorTemperatureData(data)
+    const { type, getAudienceColorTemperatureData } = this.props
+    getAudienceColorTemperatureData({ ...data, type })
   }
 
   render() {
     const {
+      type,
       audienceColorTemperatureData: { data, loading, error },
     } = this.props
 

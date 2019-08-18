@@ -11,14 +11,20 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 import ContentVitalityScoreModule from 'Components/Modules/ContentVitalityScoreModule'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import { getCVScoreChartAttributes } from 'Utils/datasets'
+//import { AudienceContext } from '../../index'
 
 class ContentVitalityScore extends React.Component {
+  //static contextType = AudienceContext //React 16.6
+
   callBack = (data, moduleKey) => {
-    this.props.getAudienceContentVitalityScoreData(data)
+    const { type, getAudienceContentVitalityScoreData } = this.props
+    //const type = this.context //React 16.6
+    getAudienceContentVitalityScoreData({ ...data, type })
   }
 
   render() {
     const {
+      type,
       audienceContentVitalityScoreData: {
         data: { data, platform },
         loading,
@@ -34,6 +40,7 @@ class ContentVitalityScore extends React.Component {
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
           <ContentVitalityScoreModule
+            actionOnProp={type}
             audience={true}
             loading={loading}
             dataKeys={{

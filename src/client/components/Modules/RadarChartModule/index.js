@@ -21,6 +21,7 @@ const RadarChartModule = ({
   infoText,
   width = 460,
   height = 460,
+  actionOnProp,
 }) => {
   const isEmpty =
     !data ||
@@ -62,6 +63,7 @@ const RadarChartModule = ({
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
         <Module
+          actionOnProp={actionOnProp}
           moduleKey={moduleKey}
           title={title}
           action={action}

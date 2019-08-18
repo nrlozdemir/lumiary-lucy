@@ -18,7 +18,7 @@ import {
 import _ from 'lodash'
 
 function* getAudienceContentVitalityScoreData({ payload = {} }) {
-  const { platform, metric, dateRange } = payload
+  const { platform, metric, dateRange, type } = payload
 
   try {
     const { brand } = yield select(makeSelectAuthProfile())
@@ -27,6 +27,7 @@ function* getAudienceContentVitalityScoreData({ payload = {} }) {
       getDataFromApi,
       undefined,
       buildApiUrl(`/audience/${brand.uuid}/cvscores`, {
+        paid: type === 'paid',
         metric,
         platform,
         daterange: dateRange,
@@ -50,7 +51,15 @@ function* getAudienceContentVitalityScoreData({ payload = {} }) {
 }
 
 function* getAudiencePerformanceData({ payload = {} }) {
-  const { platform, metric, property, dateRange, min = 0, max = 100 } = payload
+  const {
+    platform,
+    metric,
+    property,
+    dateRange,
+    min = 0,
+    max = 100,
+    type,
+  } = payload
 
   try {
     const { brand } = yield select(makeSelectAuthProfile())
@@ -64,14 +73,15 @@ function* getAudiencePerformanceData({ payload = {} }) {
         property,
         ageMin: min,
         ageMax: max,
+        paid: type === 'paid',
         daterange: dateRange,
       }),
       'GET'
     )
 
     if (!!response) {
-      if(property === 'duration') {
-        Object.keys(response).forEach(key => {
+      if (property === 'duration') {
+        Object.keys(response).forEach((key) => {
           response[key] = convertDurationLabels(response[key], property, true)
         })
       }
@@ -99,7 +109,7 @@ function* getAudiencePerformanceData({ payload = {} }) {
 }
 
 function* getAudienceAgeSliderData({ payload = {} }) {
-  const { metric, dateRange, ages = [] } = payload
+  const { metric, dateRange, ages = [], type } = payload
 
   const fallBack = ages.map((a) => ({ age: a, loading: false, image: null }))
 
@@ -114,6 +124,7 @@ function* getAudienceAgeSliderData({ payload = {} }) {
           metric,
           ages,
           daterange: dateRange,
+          paid: type === 'paid',
         }),
         'GET'
       )
@@ -134,7 +145,7 @@ function* getAudienceAgeSliderData({ payload = {} }) {
 }
 
 function* getAudienceGenderData({ payload = {} }) {
-  const { property, metric, dateRange } = payload
+  const { property, metric, dateRange, type } = payload
 
   try {
     const { brand } = yield select(makeSelectAuthProfile())
@@ -145,6 +156,7 @@ function* getAudienceGenderData({ payload = {} }) {
       buildApiUrl(`/audience/${brand.uuid}/properties`, {
         metric,
         property,
+        paid: type === 'paid',
         daterange: dateRange,
       }),
       'GET'
@@ -202,7 +214,7 @@ function* getAudienceGenderData({ payload = {} }) {
 // }
 
 function* getAudienceChangeOverTimeData({ payload = {} }) {
-  const { property, platform, metric, dateRange } = payload
+  const { property, platform, metric, dateRange, type } = payload
 
   try {
     const { brand } = yield select(makeSelectAuthProfile())
@@ -214,6 +226,7 @@ function* getAudienceChangeOverTimeData({ payload = {} }) {
         metric,
         property,
         platform,
+        paid: type === 'paid',
         daterange: dateRange,
       }),
       'GET'
@@ -230,13 +243,14 @@ function* getAudienceChangeOverTimeData({ payload = {} }) {
   }
 }
 
-function* getAudienceDominantColorData({ data: { dateRange, metric } }) {
+function* getAudienceDominantColorData({ data: { dateRange, metric, type } }) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
 
     const parameters = {
       metric,
       daterange: dateRange,
+      paid: type === 'paid',
     }
 
     const response = yield call(

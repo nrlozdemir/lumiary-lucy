@@ -48,18 +48,21 @@ class Performance extends React.Component {
 
   updateSlider(val) {
     const { params } = this.state
-    this.props.getAudiencePerformanceData({
+    const { type, getAudiencePerformanceData } = this.props
+    getAudiencePerformanceData({
       min: val[0],
       max: val[1],
       ...params,
+      type,
     })
   }
 
   callBack = (data, moduleKey) => {
+    const { type, getAudiencePerformanceData } = this.props
     this.setState({
       params: data,
     })
-    this.props.getAudiencePerformanceData(data)
+    getAudiencePerformanceData({ ...data, type })
   }
 
   render() {
@@ -69,6 +72,7 @@ class Performance extends React.Component {
     } = this.state
 
     const {
+      type,
       audiencePerformanceData: {
         data: { both, female, male },
         data,
@@ -142,7 +146,8 @@ class Performance extends React.Component {
     const minVal = getMinMax(data, 'min')
 
     const normalizedData =
-      (!!data && !loading &&
+      (!!data &&
+        !loading &&
         Object.keys(data).reduce((acc, key) => {
           acc[key] = data[key].map((val) => ({
             toolTip: normalize(val.toolTip, minVal, maxVal, 0, 1000000),
@@ -158,9 +163,10 @@ class Performance extends React.Component {
           Object.values(data).every((valArr) =>
             valArr.every((v) => !v.toolTip)
           )))
-      
+
     return (
       <Module
+        actionOnProp={type}
         isEmpty={isEmpty}
         customEmptyClasses={style.performanceEmpty}
         loading={loading}

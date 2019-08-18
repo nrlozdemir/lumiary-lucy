@@ -26,18 +26,20 @@ export class Module extends React.Component {
     const {
       action,
       moduleKey,
+      actionOnProp,
       selectFilters,
       selectFilters: { defaults },
     } = this.props
 
     if (
-      !!action &&
-      (!!prevProps.selectFilters &&
-        !!selectFilters &&
-        !_.isEqual(
-          prevProps.selectFilters.values[prevProps.moduleKey],
-          selectFilters.values[moduleKey]
-        ))
+      (!!action &&
+        (!!prevProps.selectFilters &&
+          !!selectFilters &&
+          !_.isEqual(
+            prevProps.selectFilters.values[prevProps.moduleKey],
+            selectFilters.values[moduleKey]
+          ))) ||
+      !_.isEqual(actionOnProp, prevProps.actionOnProp)
     ) {
       const selectFilterValues = selectFilters.values[moduleKey]
 
@@ -164,6 +166,11 @@ Module.propTypes = {
   containerClass: PropTypes.string,
   isEmpty: PropTypes.bool,
   customEmptyClasses: PropTypes.string,
+  /* 
+  sometimes we want the callback on a certain prop change 
+  and not just on filter change
+  */
+  actionOnProp: PropTypes.any,
 }
 
 const withConnect = connect(
