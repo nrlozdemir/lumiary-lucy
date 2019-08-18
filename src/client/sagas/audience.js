@@ -109,7 +109,7 @@ function* getAudiencePerformanceData({ payload = {} }) {
 }
 
 function* getAudienceAgeSliderData({ payload = {} }) {
-  const { metric, dateRange, ages = [], type } = payload
+  const { metric, dateRange, ages = [], type, platform } = payload
 
   const fallBack = ages.map((a) => ({ age: a, loading: false, image: null }))
 
@@ -121,19 +121,24 @@ function* getAudienceAgeSliderData({ payload = {} }) {
         getDataFromApi,
         undefined,
         buildApiUrl(`/audience/${brand.uuid}/popular`, {
-          metric,
           ages,
+          metric,
+          platform,
           daterange: dateRange,
           paid: type === 'paid',
         }),
         'GET'
       )
 
-      yield put(
-        actions.getAudienceAgeSliderDataSuccess(
-          percentageManipulation(response)
+      if (!!response) {
+        yield put(
+          actions.getAudienceAgeSliderDataSuccess(
+            percentageManipulation(response)
+          )
         )
-      )
+      } else {
+        throw new Error('Audience/getAudienceAgeSliderData Error')
+      }
     }
   } catch (err) {
     console.log(err)
@@ -145,7 +150,7 @@ function* getAudienceAgeSliderData({ payload = {} }) {
 }
 
 function* getAudienceGenderData({ payload = {} }) {
-  const { property, metric, dateRange, type } = payload
+  const { property, metric, dateRange, type, platform } = payload
 
   try {
     const { brand } = yield select(makeSelectAuthProfile())
@@ -155,6 +160,7 @@ function* getAudienceGenderData({ payload = {} }) {
       undefined,
       buildApiUrl(`/audience/${brand.uuid}/properties`, {
         metric,
+        platform,
         property,
         paid: type === 'paid',
         daterange: dateRange,
@@ -243,12 +249,15 @@ function* getAudienceChangeOverTimeData({ payload = {} }) {
   }
 }
 
-function* getAudienceDominantColorData({ data: { dateRange, metric, type } }) {
+function* getAudienceDominantColorData({
+  data: { dateRange, metric, type, platform },
+}) {
   try {
     const { brand } = yield select(makeSelectAuthProfile())
 
     const parameters = {
       metric,
+      platform,
       daterange: dateRange,
       paid: type === 'paid',
     }

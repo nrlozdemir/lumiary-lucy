@@ -28,11 +28,12 @@ class ModuleSelectFilters extends React.Component {
     const {
       type,
       profile,
+      defaultValue,
       setBrandFilters,
       selectFilters: { options },
     } = this.props
 
-    this.onChange(undefined)
+    this.onChange(defaultValue && defaultValue.value ? defaultValue : undefined)
 
     // fetches competitors and adds them to dropdown options for `brands` type
     if (
@@ -57,7 +58,13 @@ class ModuleSelectFilters extends React.Component {
   }
 
   onChange = (val) => {
-    const { selectKey, type, moduleKey, onChange = () => {} } = this.props
+    const {
+      selectKey,
+      type,
+      moduleKey,
+      changeFilter,
+      onChange = () => {},
+    } = this.props
     const filterObj = {
       [moduleKey]: {
         [selectKey]: {
@@ -66,7 +73,7 @@ class ModuleSelectFilters extends React.Component {
         },
       },
     }
-    this.props.changeFilter(filterObj)
+    changeFilter(filterObj)
     onChange(val)
   }
 
@@ -96,7 +103,10 @@ class ModuleSelectFilters extends React.Component {
     } = this.props
 
     const options = customOptions
-      ? { ...defaultOptions, [type]: customOptions }
+      ? {
+          //...defaultOptions,
+          [type]: customOptions,
+        }
       : defaultOptions
 
     const selectedOption =

@@ -44,7 +44,7 @@ class Audience extends React.PureComponent {
       //<AudienceContext.Provider value={type}>
       <div className={style.audienceContainer}>
         {this.renderAudienceToggle()}
-        <ContentVitalityScore type={type} />
+        {/*<ContentVitalityScore type={type} />*/}
         <Performance type={type} />
         <AgeSlider type={type} />
         <GenderSection type={type} />

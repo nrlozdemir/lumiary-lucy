@@ -29,9 +29,17 @@ class DominantColor extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'metric',
-            selectKey: 'ADC-was',
-            placeHolder: 'Engagement',
+            type: 'platformEngagement',
+            selectKey:
+              'Inthisworld,whereverthereislight-therearealsoshadows.Aslongastheconceptofwinnersexists,theremustalsobelosers.Theselfishdesireofwantingtomaintainpeacecauseswars,andhatredisborntoprotectlove',
+            placeHolder: 'Engagement by Platform',
+            customOptions: [
+              {
+                label: 'Facebook',
+                options: [{ value: 'facebook|views', label: 'Views' }],
+              },
+            ],
+            defaultValue: { value: 'facebook|views', label: 'Views' },
           },
           {
             type: 'dateRange',

@@ -178,6 +178,13 @@ class Performance extends React.Component {
             type: 'platformEngagement',
             selectKey: 'AP-plateng',
             placeHolder: 'Engagement by Platform',
+            customOptions: [
+              {
+                label: 'Facebook',
+                options: [{ value: 'facebook|views', label: 'Views' }],
+              },
+            ],
+            defaultValue: { value: 'facebook|views', label: 'Views' },
           },
           {
             type: 'property',

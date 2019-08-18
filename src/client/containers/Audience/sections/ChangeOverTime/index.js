@@ -98,6 +98,13 @@ class ChangeOverTime extends React.Component {
             type: 'platformEngagement',
             selectKey: 'ACOT-plateng',
             placeHolder: 'Engagement by Platform',
+            customOptions: [
+              {
+                label: 'Facebook',
+                options: [{ value: 'facebook|views', label: 'Views' }],
+              },
+            ],
+            defaultValue: { value: 'facebook|views', label: 'Views' },
           },
           {
             type: 'dateRange',

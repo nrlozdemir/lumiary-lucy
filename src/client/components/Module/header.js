@@ -62,6 +62,7 @@ const HeaderModule = ({
                     filter.type === 'propertyEngagement') &&
                   'custom-select combine-select'
                 }
+                customOptions={filter.customOptions}
                 inModuleFilter
               />
             )

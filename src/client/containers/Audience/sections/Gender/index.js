@@ -78,7 +78,7 @@ class GenderSection extends React.Component {
 
     return (
       <Module
-        actionOnProp={type}        
+        actionOnProp={type}
         loading={loading}
         isEmpty={!loading && isDataSetEmpty(genderData)}
         moduleKey={'Audience/Gender'}
@@ -91,9 +91,16 @@ class GenderSection extends React.Component {
             placeHolder: 'Resolution',
           },
           {
-            type: 'metric',
-            selectKey: 'AG-ads',
-            placeHolder: 'Engagement',
+            type: 'platformEngagement',
+            selectKey: 'AG-kms',
+            placeHolder: 'Engagement by Platform',
+            customOptions: [
+              {
+                label: 'Facebook',
+                options: [{ value: 'facebook|views', label: 'Views' }],
+              },
+            ],
+            defaultValue: { value: 'facebook|views', label: 'Views' },
           },
           {
             type: 'dateRange',

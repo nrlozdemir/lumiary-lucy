@@ -62,6 +62,13 @@ class ContentVitalityScore extends React.Component {
                 type: 'platformEngagement',
                 selectKey: 'ACOT-ads',
                 placeHolder: 'Engagement by Platform',
+                customOptions: [
+                  {
+                    label: 'Facebook',
+                    options: [{ value: 'facebook|views', label: 'Views' }],
+                  },
+                ],
+                defaultValue: { value: 'facebook|views', label: 'Views' },
               },
               {
                 type: 'dateRange',
