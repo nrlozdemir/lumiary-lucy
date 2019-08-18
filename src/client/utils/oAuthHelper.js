@@ -121,6 +121,44 @@ export default class oAuthHelper {
     })
   }
 
+  requestAccessToken({
+    code
+  }) {
+    return new Promise((resolve, reject) => {
+      if(!code) {
+        return reject(new Error('code is required to get the instagram oauth token'))
+      }
+
+      const bodyFormData = new FormData();
+      bodyFormData.set('client_id', '25d5d010688646299e9990578044d055');
+      bodyFormData.set('client_secret', 'd9164aa10b2a48baa99a2d260821d444');
+      bodyFormData.set('grant_type', 'authorization_code');
+      bodyFormData.set('redirect_uri', 'https://lumiary-local.quickframe.com:9000/account/oauth');
+      bodyFormData.set('code', code);
+
+      axios({
+        method: 'POST',
+        url: `https://api.instagram.com/oauth/access_token`,
+        data: bodyFormData,
+        headers: {
+          'content-type': 'multipart/form-data'
+        },
+      })
+      .then((response) => {
+        if(!response || !response.data) {
+          throw new Error('response data not provided')
+        }
+
+        return resolve(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+        return reject(error)
+      })
+
+    })
+  }
+
   verifyToken({ 
     oauth_token,
     oauth_verifier
@@ -214,8 +252,13 @@ export default class oAuthHelper {
 
       case 'instagram':
         // https://www.instagram.com/developer/authentication/
-        
-        window.location.href = `https://api.instagram.com/oauth/authorize/?client_id=25d5d010688646299e9990578044d055&redirect_uri=${encodeURIComponent(`https://lumiary-local.quickframe.com:9000/account/oauth`)}&response_type=code`
+        return new Promise((resolve, reject) => {
+          try {
+            window.location = `https://api.instagram.com/oauth/authorize/?client_id=25d5d010688646299e9990578044d055&redirect_uri=${encodeURIComponent(`https://lumiary-local.quickframe.com:9000/account/oauth`)}&response_type=code`            
+          } catch (error) {
+            return reject(error)
+          }
+        })
       break;
 
       case 'youtube':

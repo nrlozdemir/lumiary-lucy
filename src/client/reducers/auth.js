@@ -40,6 +40,7 @@ export const types = {
   UPDATE_HAS_ONBOARDED_ERROR: 'AUTH/UPDATE_HAS_ONBOARDED:ERROR',
 
   VERIFY_TWITTER_OAUTH_TOKEN: 'AUTH/VERIFY_TWITTER_OAUTH_TOKEN',
+  GET_INSTAGRAM_OAUTH_TOKEN: 'AUTH/GET_INSTAGRAM_OAUTH_TOKEN',
 }
 
 export const actions = {
@@ -82,7 +83,11 @@ export const actions = {
   verifyTwitterOAuthToken: (payload) => ({
     type: types.VERIFY_TWITTER_OAUTH_TOKEN,
     payload
-  })
+  }),
+  getInstagramOAuthToken: (payload) => ({
+    type: types.GET_INSTAGRAM_OAUTH_TOKEN,
+    payload
+  }),
 }
 
 export const initialState = fromJS({

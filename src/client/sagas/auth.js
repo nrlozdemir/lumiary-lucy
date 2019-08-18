@@ -269,6 +269,59 @@ export function* forgotPassword({ email }) {
   }
 }
 
+export function* getInstagramOAuthToken({ payload }) {
+  try {
+    const { code } = payload
+    const { token: bearerToken } = yield select(makeSelectAuthUser())
+    const { brand } = yield select(makeSelectAuthProfile())
+    const { uuid: brandUuid } = brand
+    const platform = 'instagram'
+
+    if(!code) {
+      return reject(new Error('code is required to get the instagram oauth token'))
+    }
+
+    const oAuth = new oAuthHelper({
+      platform,
+      brandUuid,
+      bearerToken,
+    })
+
+    const token = yield oAuth.requestAccessToken({ 
+      code,
+    })
+
+    console.log('token', token)
+
+    const response = yield oAuth.sendAuthData({ token })
+    const { success } = response
+
+    if (success) {
+      yield oAuth.sendOauthValidated().catch((err) => {
+        console.log(err)
+      })
+    }
+
+    if (success) {
+      yield put(replace('/account/oauth'))
+      yield put({
+        type: types.CONNECT_OAUTH_SUCCESS,
+        payload: {
+          brandUuid,
+          platform,
+          message: `Connected to ${platform}`,
+          response: {
+            ...response,
+            name: platform,
+          },
+        },
+      })
+    }
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 export function* verifyTwitterOAuthToken({ payload }) {
   try {
     const { oauth_token, oauth_verifier } = payload
@@ -346,6 +399,8 @@ export function* connectOAuth({ payload: platform }) {
     yield oAuth.fetchLibrary()
 
     const token = yield oAuth.getAuthToken()
+
+    console.log(token)
 
     const response = yield oAuth.sendAuthData({ token })
     const { success } = response
@@ -430,5 +485,6 @@ export default [
   takeLatest(types.FORGOT_PASSWORD_REQUEST, forgotPassword),
   takeLatest(types.CONNECT_OAUTH_REQUEST, connectOAuth),
   takeLatest(types.VERIFY_TWITTER_OAUTH_TOKEN, verifyTwitterOAuthToken),
+  takeLatest(types.GET_INSTAGRAM_OAUTH_TOKEN, getInstagramOAuthToken),
   takeLatest(types.UPDATE_HAS_ONBOARDED, updateOnboarding),
 ]
