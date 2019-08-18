@@ -5,6 +5,8 @@ import ChangeOverTime from './sections/ChangeOverTime'
 import GenderSection from './sections/Gender'
 import AgeSlider from './sections/AgeSlider'
 import ContentVitalityScore from './sections/ContentVitalityScore'
+import { ThemeContext } from 'ThemeContext/themeContext'
+import cx from 'classnames'
 
 import style from './style.scss'
 
@@ -27,11 +29,44 @@ class Audience extends React.PureComponent {
     }))
   }
 
-  renderAudienceToggle = () => {
+  renderAudienceToggle = (colors) => {
+    const { type } = this.state
+
     return (
-      <button className={style.audienceToggle} onClick={this.toggleType}>
-        fuckinkillme
-      </button>
+      <div>
+        <label
+          className={style.audienceToggle}
+          style={{ border: `1px solid ${colors.audienceToggleBorder}` }}
+        >
+          <input type="checkbox" onClick={this.toggleType} />
+          <span
+            className={style.audienceToggle_slider}
+            style={{ backgroundColor: colors.audienceToggleBGColor }}
+          >
+            <p
+              style={{
+                borderRight: `1px solid ${colors.audienceToggleBorder}`,
+                color:
+                  type === 'organic'
+                    ? colors.audienceToggleActiveTextColor
+                    : colors.audienceToggleInactiveTextColor,
+              }}
+            >
+              Organic
+            </p>
+            <p
+              style={{
+                color:
+                  type === 'paid'
+                    ? colors.audienceToggleActiveTextColor
+                    : colors.audienceToggleInactiveTextColor,
+              }}
+            >
+              Paid
+            </p>
+          </span>
+        </label>
+      </div>
     )
   }
 
@@ -39,19 +74,27 @@ class Audience extends React.PureComponent {
     const { type } = this.state
 
     return (
-      // context here is useless until react gets updated to 16.6
-      // i just didnt want to write type={type} 4 every child
-      //<AudienceContext.Provider value={type}>
-      <div className={style.audienceContainer}>
-        {this.renderAudienceToggle()}
-        {/*<ContentVitalityScore type={type} />*/}
-        <Performance type={type} />
-        <AgeSlider type={type} />
-        <GenderSection type={type} />
-        <ChangeOverTime type={type} />
-        <DominantColor type={type} />
-      </div>
-      //</AudienceContext.Provider>
+      <ThemeContext.Consumer>
+        {({ themeContext: { colors } }) => (
+          <React.Fragment>
+            <div
+              className={cx(
+                'grid-container',
+                'col-12',
+                style.audienceToggle_container
+              )}
+            >
+              {this.renderAudienceToggle(colors)}
+            </div>
+            {/*<ContentVitalityScore type={type} />*/}
+            <Performance type={type} />
+            <AgeSlider type={type} />
+            <GenderSection type={type} />
+            <ChangeOverTime type={type} />
+            <DominantColor type={type} />
+          </React.Fragment>
+        )}
+      </ThemeContext.Consumer>
     )
   }
 }

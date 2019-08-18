@@ -130,10 +130,14 @@ function* getAudienceAgeSliderData({ payload = {} }) {
         'GET'
       )
 
-      if (!!response) {
+      if (!!response && !!response.length) {
+        const responseNullChecked = response.map((obj, idx) =>
+          _.isEmpty(obj) ? { age: ages[idx], loading: false, image: null } : obj
+        )
+        
         yield put(
           actions.getAudienceAgeSliderDataSuccess(
-            percentageManipulation(response)
+            percentageManipulation(responseNullChecked)
           )
         )
       } else {

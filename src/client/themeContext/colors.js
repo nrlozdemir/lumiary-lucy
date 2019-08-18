@@ -267,6 +267,12 @@ const dark = {
 
   //marketview
   marketviewCardHeaderBorder: '#545b79',
+
+  //audience toggle
+  audienceToggleBorder: '#545b79',
+  audienceToggleActiveTextColor: '#fff',
+  audienceToggleInactiveTextColor: '#acb0be',
+  audienceToggleBGColor: '#21243b',
 }
 
 const light = {
@@ -537,6 +543,12 @@ const light = {
 
   //marketview
   marketviewCardHeaderBorder: '#c6c9d7',
+
+  //audience toggle
+  audienceToggleBorder: '#c6c9d7',
+  audienceToggleActiveTextColor: '#fff',
+  audienceToggleInactiveTextColor: '#acb0be',
+  audienceToggleBGColor: '#e8ecf0',
 }
 
 const themes = {
