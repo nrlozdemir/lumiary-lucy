@@ -39,6 +39,7 @@ const ContentVitalityScoreModule = ({
     rightKey,
     middleKey,
   },
+  actionOnProp,
   audience = false,
 }) => {
   if (!data) {
@@ -198,6 +199,7 @@ const ContentVitalityScoreModule = ({
           legend={legend}
           loading={loading}
           isEmpty={!loading && isDataSetEmpty(newDatasets)}
+          actionOnProp={actionOnProp}
         >
           <div
             className="col-12-no-gutters"

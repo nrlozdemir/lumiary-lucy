@@ -35,11 +35,13 @@ const renderLegend = (legend) => {
 
 class GenderSection extends React.Component {
   callBack = (data, moduleKey) => {
-    this.props.getAudienceGenderData(data)
+    const { type, getAudienceGenderData } = this.props
+    getAudienceGenderData({ ...data, type })
   }
 
   render() {
     const {
+      type,
       audienceGenderData: { data, loading, error },
     } = this.props
 
@@ -76,6 +78,7 @@ class GenderSection extends React.Component {
 
     return (
       <Module
+        actionOnProp={type}
         loading={loading}
         isEmpty={!loading && isDataSetEmpty(genderData)}
         moduleKey={'Audience/Gender'}
@@ -88,9 +91,16 @@ class GenderSection extends React.Component {
             placeHolder: 'Resolution',
           },
           {
-            type: 'metric',
-            selectKey: 'AG-ads',
-            placeHolder: 'Engagement',
+            type: 'platformEngagement',
+            selectKey: 'AG-kms',
+            placeHolder: 'Engagement by Platform',
+            customOptions: [
+              {
+                label: 'Facebook',
+                options: [{ value: 'facebook|views', label: 'Views' }],
+              },
+            ],
+            defaultValue: { value: 'facebook|views', label: 'Views' },
           },
           {
             type: 'dateRange',

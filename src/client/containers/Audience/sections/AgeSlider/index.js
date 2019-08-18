@@ -60,13 +60,14 @@ class AgeSlider extends React.PureComponent {
   }
 
   callBack = (data, moduleKey) => {
-    const { getAudienceAgeSliderData } = this.props
+    const { getAudienceAgeSliderData, type } = this.props
 
     this.setState({ videosArr: defaultAgeRange, params: data }, () => {
       const { prevAges } = this.state
 
       getAudienceAgeSliderData({
         ...data,
+        type,
         loading: true,
         ages: prevAges,
       })
@@ -74,7 +75,7 @@ class AgeSlider extends React.PureComponent {
   }
 
   onChangeSlider = ({ age }) => {
-    const { getAudienceAgeSliderData } = this.props
+    const { getAudienceAgeSliderData, type } = this.props
     const { params, videosArr } = this.state
 
     let agesToFetch = age > 1 ? [age - 1, age, age + 1] : [age, age + 1]
@@ -90,6 +91,7 @@ class AgeSlider extends React.PureComponent {
       !!agesToFetch.length &&
       getAudienceAgeSliderData({
         ...params,
+        type,
         loading: false,
         ages: agesToFetch,
       })
@@ -99,20 +101,29 @@ class AgeSlider extends React.PureComponent {
     const { videosArr } = this.state
 
     const {
+      type,
       audienceAgeSliderData: { data, loading, error },
     } = this.props
 
     return (
       <Module
+        actionOnProp={type}
         loading={loading}
         moduleKey={'Audience/AgeSlider'}
         title="Most Popular Videos By Age, Engagement and Date"
         action={this.callBack}
         filters={[
           {
-            type: 'metric',
-            selectKey: 'engagementOption',
-            placeHolder: 'Engagement',
+            type: 'platformEngagement',
+            selectKey: 'AP-ageeskude',
+            placeHolder: 'Engagement by Platform',
+            customOptions: [
+              {
+                label: 'Facebook',
+                options: [{ value: 'facebook|views', label: 'Views' }],
+              },
+            ],
+            defaultValue: { value: 'facebook|views', label: 'Views' },
           },
           {
             type: 'dateRange',

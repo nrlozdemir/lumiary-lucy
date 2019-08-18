@@ -97,7 +97,7 @@ const Select = (props) => {
 
   let args = props.input ? props.input : props
   let { name, onChange, value } = args
-
+  
   let labels = options.map(({ label, options: labelOptions }) => {
     if (labelOptions) {
       return labelOptions.map((o) => `${label} on ${o.label}`.length)

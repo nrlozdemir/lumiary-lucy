@@ -20,7 +20,11 @@ class OAuth extends Component {
   }
 
   componentDidMount() {
-    const { location = {}, verifyTwitterOAuthToken } = this.props
+    const { 
+      location = {}, 
+      verifyTwitterOAuthToken = () => {}, 
+      getInstagramOAuthToken = () => {} 
+    } = this.props
     let { search } = location
 
     if(search) {
@@ -28,12 +32,16 @@ class OAuth extends Component {
         search = search.substr(1);
       }
 
-      const { oauth_token, oauth_verifier } = querystring.parse(search)
+      const { oauth_token, oauth_verifier, code } = querystring.parse(search)
 
       if(oauth_token && oauth_verifier) {
         verifyTwitterOAuthToken({
           oauth_token,
           oauth_verifier
+        })
+      } else if(code) {
+        getInstagramOAuthToken({
+          code,
         })
       }
     }

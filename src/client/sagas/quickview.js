@@ -5,6 +5,7 @@ import { types } from 'Reducers/quickview'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import { getDataFromApi } from 'Utils/api'
 import { getPropLabel } from 'Utils'
+import { isEmpty } from 'lodash'
 
 import { percentageManipulation } from 'Utils/datasets'
 
@@ -211,15 +212,19 @@ function* getQuickviewItemsSaga({ payload }) {
         competitors,
       })
 
-      yield put({
-        type: types.GET_QUICKVIEW_ITEMS_SUCCESS,
-        payload: {
-          platformsValues: percentageManipulation(response[platform]),
-          differencesValues: percentageManipulation(
-            response.differences[platform]
-          ),
-        },
-      })
+      if (!isEmpty(response.differences)) {
+        yield put({
+          type: types.GET_QUICKVIEW_ITEMS_SUCCESS,
+          payload: {
+            platformsValues: percentageManipulation(response[platform]),
+            differencesValues: percentageManipulation(
+              response.differences[platform]
+            ),
+          },
+        })
+      } else {
+        throw new Error('Quickview Error')
+      }
     } catch (error) {
       const response = {
         differences: {

@@ -34,11 +34,13 @@ const renderLegend = (legend) => {
 
 class ChangeOverTime extends React.Component {
   callBack = (data, moduleKey) => {
-    this.props.getAudienceChangeOverTimeData(data)
+    const { type, getAudienceChangeOverTimeData } = this.props
+    getAudienceChangeOverTimeData({ ...data, type })
   }
 
   render() {
     const {
+      type,
       audienceChangeOverTimeData: { data: dataToConvert, loading, error },
     } = this.props
 
@@ -80,6 +82,7 @@ class ChangeOverTime extends React.Component {
 
     return (
       <Module
+        actionOnProp={type}
         loading={loading}
         isEmpty={!loading && isDataSetEmpty(data)}
         moduleKey={'Audience/ChangeOverTime'}
@@ -95,6 +98,13 @@ class ChangeOverTime extends React.Component {
             type: 'platformEngagement',
             selectKey: 'ACOT-plateng',
             placeHolder: 'Engagement by Platform',
+            customOptions: [
+              {
+                label: 'Facebook',
+                options: [{ value: 'facebook|views', label: 'Views' }],
+              },
+            ],
+            defaultValue: { value: 'facebook|views', label: 'Views' },
           },
           {
             type: 'dateRange',
