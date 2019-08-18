@@ -158,7 +158,6 @@ export default class oAuthHelper {
 
     })
   }
-
   verifyToken({ 
     oauth_token,
     oauth_verifier

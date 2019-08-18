@@ -400,8 +400,6 @@ export function* connectOAuth({ payload: platform }) {
 
     const token = yield oAuth.getAuthToken()
 
-    console.log(token)
-
     const response = yield oAuth.sendAuthData({ token })
     const { success } = response
 
