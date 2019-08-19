@@ -180,7 +180,12 @@ class DoughnutChart extends React.Component {
         }
       })
 
-    if (slicePiecesWidth !== false && !!chartValues && !!chartValuesTemp && chartValuesTemp.length > 1) {
+    if (
+      slicePiecesWidth !== false &&
+      !!chartValues &&
+      !!chartValuesTemp &&
+      chartValuesTemp.length > 1
+    ) {
       const totalValues = chartValues.reduce((a, b) => a + b, 0)
       // if there is a difference e.g(0.1, 0.15), we're going to use it in slices
       const difference =
