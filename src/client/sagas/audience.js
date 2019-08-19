@@ -224,7 +224,7 @@ function* getAudienceGenderData({ payload = {} }) {
 // }
 
 function* getAudienceChangeOverTimeData({ payload = {} }) {
-  const { property, platform, metric, dateRange, type } = payload
+  const { property, platform, metric, dateRange, type, bucketName } = payload
 
   try {
     const { brand } = yield select(makeSelectAuthProfile())
@@ -236,6 +236,7 @@ function* getAudienceChangeOverTimeData({ payload = {} }) {
         metric,
         property,
         platform,
+        bucketName: encodeURIComponent(bucketName),
         paid: type === 'paid',
         daterange: dateRange,
       }),

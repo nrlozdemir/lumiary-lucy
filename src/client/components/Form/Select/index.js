@@ -3,6 +3,8 @@ import PropTypes from 'prop-types'
 import classNames from 'classnames'
 import ReactSelect, { components } from 'react-select'
 import style from './styles.scss'
+import { platforms } from 'Utils/globals'
+
 import { withTheme } from 'ThemeContext/withTheme'
 
 const DropdownIndicator = (props) => {
@@ -67,10 +69,13 @@ class SingleValue extends React.Component {
     let label = children
 
     if (data.value && data.value.includes('|')) {
-      const platform = options.find((option) =>
+      const subLabel = options.find((option) =>
         option.options.some((o) => o.value === data.value)
       ).label
-      label = `${data.label} on ${platform}`
+
+      const isPlatform = Object.keys(platforms).includes(subLabel.toLowerCase())
+
+      label = `${isPlatform ? data.label : subLabel} ${isPlatform ? 'on' : '-'} ${isPlatform ? subLabel : data.label}`
     }
 
     return (

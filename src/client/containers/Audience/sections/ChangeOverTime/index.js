@@ -90,9 +90,9 @@ class ChangeOverTime extends React.Component {
         action={this.callBack}
         filters={[
           {
-            type: 'property',
+            type: 'propertyWithBuckets',
             selectKey: 'ACOT-blablablatralala',
-            placeHolder: 'Resolution',
+            placeHolder: 'Property',
           },
           {
             type: 'platformEngagement',
