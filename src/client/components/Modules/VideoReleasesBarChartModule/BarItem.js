@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
+import classnames from 'classnames'
 import { Bar } from 'react-chartjs-2'
-
-import { customChartToolTip, metricSuffix } from 'Utils'
 import style from './style.scss'
 
 class BarItem extends Component {
@@ -39,7 +38,12 @@ class BarItem extends Component {
             datasetKeyProvider={datasetKeyProvider}
           />
         </div>
-        <div className={style.chartSectionBadge}>
+        <div
+          className={classnames(style.chartSectionBadge, {
+            [style.dark]: colors.themeType === 'dark',
+            [style.light]: colors.themeType === 'light',
+          })}
+        >
           {!!chartData.label && (
             <span
               style={{
