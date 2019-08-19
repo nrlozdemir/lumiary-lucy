@@ -240,7 +240,8 @@ const LineAndDoughnutChartModule = ({
                       boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                     }}
                   >
-                    {property[0].name}
+                    <div className={style.colorBubble} style={{backgroundColor: datasetMap[property[0].name].backgroundColor}}></div>
+                    <div className={style.legendText}>{property[0].name}</div>
                   </div>
                   <div
                     className={style.divider}
