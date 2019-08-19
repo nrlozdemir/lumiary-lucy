@@ -51,22 +51,26 @@
 }
 
 .label {
-  // margin-top: 30px;
-  display: flex;
-  justify-content: center;
-  // margin-bottom: 40px;
-  font-family: $font-family-ClanOTBold;
   border-radius: 17px;
-  background-color: $color-dusk;
-  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+	background-color: #fff;
+	color: #505050;
+	font-family: $font-family-ClanOTBold;
+	font-size: 14px;
+	padding: 8px 24px;
+	margin: 15px 0 40px;
+	text-align: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 
-  span {
-    display: flex;
-    align-items: center;
-    font-size: 14px;
-    height: 34px;
-    padding: 0 25px;
-  }
+	&.dark{
+		background-color: #545b79;
+		color: #fff;
+		box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+	}
+	&.light{
+		box-shadow: 0 1px 2px 0 #bebebe;
+	}
 }
 
 .progressBarArea {
