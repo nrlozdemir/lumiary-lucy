@@ -4,17 +4,27 @@ import { ajax, buildQApiUrl, buildApiUrl } from 'Utils/api'
 
 const { 
   INSTAGRAM_CLIENT_ID,
+  INSTAGRAM_CLIENT_SECRET,
   INSTAGRAM_REDIRECT_URI,
   INSTAGRAM_RESPONSE_TYPE,
+  INSTAGRAM_GRANT_TYPE,
 
   GOOGLE_CLIENT_ID,
   GOOGLE_API_KEY,
-
   GOOGLE_SCOPE,
   GOOGLE_DISCOVERY_DOCS,
 
   FACEBOOK_APP_ID,
+  FACEBOOK_SCOPES,
 } = process.env
+
+const testEnv = (envString, envValue) => {
+  if(!envValue) {
+    throw new Error(`The env variable ${envString} is not set`)
+  }
+
+  return true
+}
 
 export default class oAuthHelper {
   constructor ({ platform, brandUuid, bearerToken }) {
@@ -124,16 +134,25 @@ export default class oAuthHelper {
   requestAccessToken({
     code
   }) {
+    console.log(process.env)
+
     return new Promise((resolve, reject) => {
       if(!code) {
         return reject(new Error('code is required to get the instagram oauth token'))
       }
 
+      const WINDOW_LOCATION_ORIGIN = window.location.origin
+      testEnv('WINDOW_LOCATION_ORIGIN', WINDOW_LOCATION_ORIGIN)
+      testEnv('INSTAGRAM_CLIENT_ID', INSTAGRAM_CLIENT_ID)
+      testEnv('INSTAGRAM_CLIENT_SECRET', INSTAGRAM_CLIENT_SECRET)
+      testEnv('INSTAGRAM_GRANT_TYPE', INSTAGRAM_GRANT_TYPE)
+      testEnv('INSTAGRAM_REDIRECT_URI', INSTAGRAM_REDIRECT_URI)
+
       const bodyFormData = new FormData();
-      bodyFormData.set('client_id', '25d5d010688646299e9990578044d055');
-      bodyFormData.set('client_secret', 'd9164aa10b2a48baa99a2d260821d444');
-      bodyFormData.set('grant_type', 'authorization_code');
-      bodyFormData.set('redirect_uri', 'https://lumiary-local.quickframe.com:9000/account/oauth');
+      bodyFormData.set('client_id', INSTAGRAM_CLIENT_ID);
+      bodyFormData.set('client_secret', INSTAGRAM_CLIENT_SECRET);
+      bodyFormData.set('grant_type', INSTAGRAM_GRANT_TYPE);
+      bodyFormData.set('redirect_uri', `${WINDOW_LOCATION_ORIGIN}${INSTAGRAM_REDIRECT_URI}`);
       bodyFormData.set('code', code);
 
       axios({
@@ -158,6 +177,7 @@ export default class oAuthHelper {
 
     })
   }
+
   verifyToken({ 
     oauth_token,
     oauth_verifier
@@ -191,6 +211,7 @@ export default class oAuthHelper {
   }
 
   getAuthToken() {
+    console.log(process.env)
     switch(this.platform) {
       case 'twitter':
         // https://developer.twitter.com/en/docs/basics/authentication/overview/3-legged-oauth
@@ -225,6 +246,9 @@ export default class oAuthHelper {
         // https://developers.facebook.com/docs/javascript
         return new Promise((resolve, reject) => {
           try {
+            testEnv('FACEBOOK_APP_ID', FACEBOOK_APP_ID)
+            testEnv('FACEBOOK_SCOPES', FACEBOOK_SCOPES)
+
             FB.init({
               appId: FACEBOOK_APP_ID,
               cookie: false,
@@ -240,7 +264,7 @@ export default class oAuthHelper {
               }
 
             }, {
-              scope: 'ads_read,manage_pages,pages_show_list,read_insights'
+              scope: FACEBOOK_SCOPES
             })
 
           } catch (error) {
@@ -252,8 +276,14 @@ export default class oAuthHelper {
       case 'instagram':
         // https://www.instagram.com/developer/authentication/
         return new Promise((resolve, reject) => {
+          const WINDOW_LOCATION_ORIGIN = window.location.origin
+          testEnv('WINDOW_LOCATION_ORIGIN', WINDOW_LOCATION_ORIGIN)
+          testEnv('INSTAGRAM_CLIENT_ID', INSTAGRAM_CLIENT_ID)
+          testEnv('INSTAGRAM_REDIRECT_URI', INSTAGRAM_REDIRECT_URI)
+          testEnv('INSTAGRAM_RESPONSE_TYPE', INSTAGRAM_RESPONSE_TYPE)
+
           try {
-            window.location = `https://api.instagram.com/oauth/authorize/?client_id=25d5d010688646299e9990578044d055&redirect_uri=${encodeURIComponent(`https://lumiary-local.quickframe.com:9000/account/oauth`)}&response_type=code`            
+            window.location = `https://api.instagram.com/oauth/authorize/?client_id=${INSTAGRAM_CLIENT_ID}&redirect_uri=${encodeURIComponent(`${WINDOW_LOCATION_ORIGIN}${INSTAGRAM_REDIRECT_URI}`)}&response_type=${INSTAGRAM_RESPONSE_TYPE}`            
           } catch (error) {
             return reject(error)
           }
@@ -263,6 +293,11 @@ export default class oAuthHelper {
       case 'youtube':
         // https://developers.google.com/youtube/v3/guides/auth/client-side-web-apps
         return new Promise((resolve, reject) => {
+          testEnv('GOOGLE_API_KEY', GOOGLE_API_KEY)
+          testEnv('GOOGLE_DISCOVERY_DOCS', GOOGLE_DISCOVERY_DOCS)
+          testEnv('GOOGLE_CLIENT_ID', GOOGLE_CLIENT_ID)
+          testEnv('GOOGLE_SCOPE', GOOGLE_SCOPE)
+
           gapi.load('client:auth2', () => {
             gapi.client.init({
               'apiKey': GOOGLE_API_KEY,
