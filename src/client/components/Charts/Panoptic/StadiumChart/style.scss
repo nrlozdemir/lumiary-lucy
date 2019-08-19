@@ -16,9 +16,12 @@ $min-height: 110;
   .colorListItem {
     display: flex;
     align-items: center;
-    margin: 25px 0;
+    margin:0px 0px 47px 0px;
     font-size: 14px;
-    font-family: $font-family-ClanOTNews;
+		font-family: $font-family-ClanOTNews;
+		&:last-child{
+			margin-bottom: 0px;
+		}
 
     .round {
       width: 16px;
@@ -26,7 +29,7 @@ $min-height: 110;
       display: inline-flex;
       border-radius: 100%;
       vertical-align: middle;
-      margin-right: 10px;
+      margin-right: 8px;
     }
     .infoText {
       font-family: $font-family-ClanOTNews;

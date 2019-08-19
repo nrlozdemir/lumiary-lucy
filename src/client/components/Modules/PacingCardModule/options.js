@@ -1,4 +1,5 @@
 export const barChartOptions = {
+	responsive: false,
   legend: {
     display: false,
   },
