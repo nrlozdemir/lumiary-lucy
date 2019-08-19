@@ -3,15 +3,13 @@ import style from './style.scss'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import { metricSuffix } from 'Utils'
 const DoughnutCard = ({ data, index, colors, isEmpty }) => {
-
   const dataset = data.datasets[0]
 
   const topItemIndex = dataset.data.indexOf(Math.max(...dataset.data))
 
   const topProportion = dataset.data[topItemIndex] || ''
 
-  const topItemLabel =
-    (!!data.labels && data.labels[topItemIndex]) || ''
+  const topItemLabel = (!!data.labels && data.labels[topItemIndex]) || ''
 
   data.datasets[0].backgroundColor = data.datasets[0].backgroundColor.map(
     (item, idx) => {
