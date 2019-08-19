@@ -7,6 +7,7 @@ import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import emptyData from './emptyData.json'
 import { isDataSetEmpty } from 'Utils/datasets'
+import cx from 'classnames'
 
 const RadarChartModule = ({
   data,
@@ -104,22 +105,22 @@ const RadarChartModule = ({
             </div>
             <div className={'mt-32 ' + style.labelContainer}>
               <div
-                className={style.label}
+								className={cx(style.label, {
+									[style.dark]: colors.themeType === 'dark',
+									[style.light]: colors.themeType === 'light',
+								})}
                 style={{
-                  background: colors.labelBackground,
-                  color: colors.labelColor,
-                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                   opacity: leftOpacity,
                 }}
               >
                 {leftProgressHasData || leftTitle ? (
-                  <span>
+                  <React.Fragment>
                     {leftTitle
                       ? leftTitle
                       : !!checkData && !!checkData[0] && checkData[0].type}
-                  </span>
+                  </React.Fragment>
                 ) : (
-                  <span>N/A</span>
+                  <React.Fragment>N/A</React.Fragment>
                 )}
               </div>
               {(leftProgressHasData || rightProgressHasData) && (
@@ -132,22 +133,22 @@ const RadarChartModule = ({
                 } Dominant Colors`}</p>
               )}
               <div
-                className={style.label}
+								className={cx(style.label, {
+									[style.dark]: colors.themeType === 'dark',
+									[style.light]: colors.themeType === 'light',
+								})}
                 style={{
-                  background: colors.labelBackground,
-                  color: colors.labelColor,
-                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                   opacity: rightOpacity,
                 }}
               >
                 {rightProgressHasData || rightTitle ? (
-                  <span>
+                  <React.Fragment>
                     {rightTitle
                       ? rightTitle
                       : !!checkData && !!checkData[1] && checkData[1].type}
-                  </span>
+                  </React.Fragment>
                 ) : (
-                  <span>N/A</span>
+                  <React.Fragment>N/A</React.Fragment>
                 )}
               </div>
             </div>
