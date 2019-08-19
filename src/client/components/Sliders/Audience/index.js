@@ -112,9 +112,11 @@ class AudienceSlider extends React.Component {
           <div className={style.section}>
             <style>
               {`
-                .swiper-slide-thumb-active p {
-                  background-color: ${colors.bodyBackground};
+                .swiper-slide p {
                   border: 1px solid ${colors.ageSliderBorder};
+                  background-color: ${colors.bodyBackground};
+                }
+                .swiper-slide-thumb-active p {
                   span {
                     color: ${colors.textColor}
                   }

@@ -9,12 +9,22 @@ import style from 'Containers/Audience/style.scss'
 import { isEqual, find, debounce } from 'lodash'
 
 // 12 - 65
-const defaultAgeRange = Array.from(Array(54).keys(), (n) => n + 12).map(
-  (a) => ({
-    age: a,
-    loading: true,
-  })
-)
+// const defaultAgeRanges = Array.from(Array(54).keys(), (n) => n + 12).map(
+//   (a) => ({
+//     age: a,
+//     loading: true,
+//   })
+// )
+
+const defaultAgeRanges = [
+  '13-17',
+  '18-24',
+  '25-34',
+  '34-44',
+  '45-54',
+  '55-64',
+  '65+',
+].map((range) => ({ age: range, loading: true }))
 
 class AgeSlider extends React.PureComponent {
   constructor(props) {
@@ -22,7 +32,7 @@ class AgeSlider extends React.PureComponent {
     this.state = {
       prevAges: [],
       params: null,
-      videosArr: defaultAgeRange,
+      videosArr: defaultAgeRanges,
     }
 
     this.onChangeSlider = debounce(this.onChangeSlider, 100)
@@ -62,7 +72,7 @@ class AgeSlider extends React.PureComponent {
   callBack = (data, moduleKey) => {
     const { getAudienceAgeSliderData, type } = this.props
 
-    this.setState({ videosArr: defaultAgeRange, params: data }, () => {
+    this.setState({ videosArr: defaultAgeRanges, params: data }, () => {
       const { prevAges } = this.state
 
       getAudienceAgeSliderData({
@@ -78,7 +88,23 @@ class AgeSlider extends React.PureComponent {
     const { getAudienceAgeSliderData, type } = this.props
     const { params, videosArr } = this.state
 
-    let agesToFetch = age > 1 ? [age - 1, age, age + 1] : [age, age + 1]
+    const currentAgeIdx = defaultAgeRanges.findIndex((r) => r.age === age)
+
+    let agesToFetch =
+      currentAgeIdx > 1
+        ? [
+            defaultAgeRanges[currentAgeIdx - 1].age,
+            age,
+            ...(defaultAgeRanges[currentAgeIdx + 1]
+              ? [defaultAgeRanges[currentAgeIdx + 1].age]
+              : []),
+          ]
+        : [
+            age,
+            ...(defaultAgeRanges[currentAgeIdx + 1]
+              ? [defaultAgeRanges[currentAgeIdx + 1].age]
+              : []),
+          ]
 
     agesToFetch = agesToFetch.filter((a) => {
       const storedAge = find(videosArr, ['age', a])
