@@ -1,12 +1,20 @@
 .labels {
-  padding: 24px 0;
+  margin-bottom: 47px;
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
+
+  &:last-child {
+    margin-bottom: 0px;
+  }
 }
 
 .round {
   width: 16px;
   height: 16px;
   border-radius: 100%;
-  margin-right: 5px;
+  margin-right: 8px;
 }
 
 .secondsText {
