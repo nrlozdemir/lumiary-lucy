@@ -40,7 +40,7 @@ const PacingCardModule = ({
     }))
 
   const horizontalBarChartValues = { ...stadiumValues }
-  
+
   return (
     <Module
       moduleKey={moduleKey}
@@ -54,7 +54,7 @@ const PacingCardModule = ({
         <MultipleNoDataModule>
           <HorizontalStackedBarChart
             width={500}
-            height={340}
+            height={360}
             barData={horizontalStackedBarData}
             stadiumValues={stadiumValues}
             horizontalStackedBarDataOriginal={horizontalStackedBarDataOriginal}
