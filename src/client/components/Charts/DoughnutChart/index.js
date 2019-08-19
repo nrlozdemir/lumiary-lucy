@@ -274,7 +274,11 @@ class DoughnutChart extends React.Component {
               <Labels data={labelsData} />
             </div>
           )}
-          <div className={classnames(style.chartWrapper, customChartWrapper)}>
+          <div
+            className={classnames(style.chartWrapper, customChartWrapper, {
+              [style.displayFlex]: !!average,
+            })}
+          >
             {newData && (
               <React.Fragment>
                 <Doughnut
