@@ -8,11 +8,15 @@
   }
 }
 
+.displayFlex {
+  display: flex;
+}
+
 .labelContainer {
   display: flex;
   flex-direction: column;
-	justify-content: center;
-	align-items: flex-start;
+  justify-content: center;
+  align-items: flex-start;
   margin-left: 72px;
 }
 
