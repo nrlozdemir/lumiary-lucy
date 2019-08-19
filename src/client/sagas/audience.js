@@ -121,7 +121,7 @@ function* getAudienceAgeSliderData({ payload = {} }) {
         getDataFromApi,
         undefined,
         buildApiUrl(`/audience/${brand.uuid}/popular`, {
-          ages,
+          ages: ages.map((a) => encodeURIComponent(a)),
           metric,
           platform,
           daterange: dateRange,
@@ -134,7 +134,7 @@ function* getAudienceAgeSliderData({ payload = {} }) {
         const responseNullChecked = response.map((obj, idx) =>
           _.isEmpty(obj) ? { age: ages[idx], loading: false, image: null } : obj
         )
-        
+
         yield put(
           actions.getAudienceAgeSliderDataSuccess(
             percentageManipulation(responseNullChecked)

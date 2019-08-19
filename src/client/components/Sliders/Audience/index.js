@@ -116,15 +116,15 @@ class AudienceSlider extends React.Component {
                   border: 1px solid ${colors.ageSliderBorder};
                   background-color: ${colors.bodyBackground};
                 }
+                .swiper-slide p:after {
+                  color: ${colors.textColor}
+                }
                 .swiper-slide-thumb-active p {
                   span {
                     color: ${colors.textColor}
                   }
                 }
 
-                .swiper-slide-thumb-active p:after {
-                  color: ${colors.textColor}
-                }
               `}
             </style>
             {refThumb && (

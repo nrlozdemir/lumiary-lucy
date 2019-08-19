@@ -197,6 +197,7 @@
     :global {
       .swiper-container {
         height: 100%;
+        overflow: visible;
 
         .swiper-wrapper {
           transform: translate3d(0, 0px, 0px) !important;
@@ -266,7 +267,6 @@
           top: 0;
           font-family: $font-family-ClanOTNews;
           transition: 300ms;
-          color: white;
         }
       }
 
@@ -278,19 +278,6 @@
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
         position: absolute;
         left: 0;
-        top: 50%;
-        transform: translateY(-50%);
-        margin-top: -10px;
-      }
-
-      &:last-child:after {
-        content: '';
-        width: 1px;
-        background-color: $color-dusk;
-        height: 24px;
-        box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
-        position: absolute;
-        right: 0;
         top: 50%;
         transform: translateY(-50%);
         margin-top: -10px;
