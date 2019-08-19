@@ -233,14 +233,28 @@ const LineAndDoughnutChartModule = ({
               return (
                 <div className={percentageCol} key={idx}>
                   <div
-                    className={style.legend}
+                    className={cx(style.legend, {
+                      [style.dark]: colors.themeType === 'dark',
+                      [style.light]: colors.themeType === 'light',
+                    })}
                     style={{
                       background: colors.labelBackground,
                       color: colors.labelColor,
                       boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
                     }}
                   >
-                    <div className={style.colorBubble} style={{backgroundColor: datasetMap[property[0].name].backgroundColor}}></div>
+                    <div
+                      className={style.colorBubble}
+                      style={{
+                        backgroundColor:
+                          datasetMap[property[0].name].backgroundColor.substr(
+                            0,
+                            4
+                          ) === '#fff'
+                            ? '#acb0be'
+                            : datasetMap[property[0].name].backgroundColor,
+                      }}
+                    />
                     <div className={style.legendText}>{property[0].name}</div>
                   </div>
                   <div
