@@ -149,12 +149,13 @@ function* getVideoReleasesBarChart({ data: { report } }) {
       daterange,
       property,
       limit: 4,
+      dateBucket: 'dayOfWeek'
     }
 
     const response = yield call(
       getDataFromApi,
       undefined,
-      buildApiUrl(`/brand/${brand.uuid}/count`, options),
+      buildApiUrl(`/brand/${brand.uuid}/videovsmetric`, options),
       'GET'
     )
 
