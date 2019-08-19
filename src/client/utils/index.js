@@ -647,14 +647,17 @@ const getColorPercents = (input, audience = false) => {
       Object.keys(input[gender]).forEach((property) => {
         if (property === 'color') {
           accumulator[gender][property] = {}
+
           let sum = 0
+
           orderedColors.forEach((color) => {
-            sum += input[gender][property][color.toLowerCase()] || 0
+            sum += parseInt(input[gender][property][color.toLowerCase()]) || 0
           })
 
           orderedColors.forEach((color) => {
             const thisNum = input[gender][property][color.toLowerCase()] || 0
             const percentage = thisNum / sum
+
             const formattedPercentage = isNaN(
               parseInt((percentage * 100).toFixed(0))
             )
