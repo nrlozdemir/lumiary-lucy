@@ -90,8 +90,8 @@ class PanopticFilteringSection extends Component {
         <div className={style.filteringSectionContainer}>
           <div className={style.radialAndStackChartWrapper}>
             <DoughnutChart
-              width={270}
-              height={270}
+              width={288}
+              height={288}
               data={!loading ? doughnutData : null}
               cutoutPercentage={58}
               fillText="Total Percentage"
