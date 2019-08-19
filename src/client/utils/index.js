@@ -318,13 +318,26 @@ const selectFiltersToType = (selectValues = {}, defaultBrand = '') => {
       values[whichValueKey] = values[whichValueKey] = !!filterValue.value
         ? filterValue.value.value.split('-')
         : defaultFilters[filterType].split('-')
+      return values
+    }
+
+    if (filterType === 'propertyWithBuckets') {
+      const whichValueKey = 'property'
+
+      values[whichValueKey] = values[whichValueKey] = !!filterValue.value
+        ? filterValue.value.value.split('|')[0]
+        : defaultFilters[filterType].split('|')[0]
+      values.bucketName = !!filterValue.value
+        ? filterValue.value.value.split('|')[1]
+        : defaultFilters[filterType].split('|')[1]
+      return values
     }
 
     if (filterType === 'brand') {
       values[filterType] = values[filterType] = !!filterValue.value
         ? filterValue.value.value
         : defaultBrand
-    } else if (!filterType.includes('double')) {
+    } else {
       values[filterType] = !!filterValue.value
         ? !!filterValue.value.value && !!filterValue.value.value.startDate
           ? [filterValue.value.value.startDate, filterValue.value.value.endDate]

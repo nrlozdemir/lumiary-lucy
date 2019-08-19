@@ -7,7 +7,13 @@
 
 import { fromJS } from 'immutable'
 import { createSelector } from 'reselect'
-import { dayOfWeek, platforms } from 'Utils/globals'
+import { getLabelWithSuffix } from 'Utils' // why the FUCK is this shit undefined
+import {
+  dayOfWeek,
+  platforms,
+  propertyBuckets,
+  expectedNames,
+} from 'Utils/globals'
 import moment from 'moment'
 
 export const types = {
@@ -32,8 +38,8 @@ export const actions = {
 
   setBrandFilters: (payload) => ({
     type: types.SET_BRAND_OPTIONS,
-    payload
-  })
+    payload,
+  }),
 }
 
 export const defaultFilters = {
@@ -59,6 +65,7 @@ export const defaultFilters = {
     .toLowerCase(),
   doublePlatform: 'facebook-instagram',
   brand: '',
+  propertyWithBuckets: 'pacing|slow',
 }
 
 export const initialState = fromJS({
@@ -278,7 +285,19 @@ export const initialState = fromJS({
       ],
       []
     ),
-    brand: []
+    brand: [],
+    propertyWithBuckets: Object.keys(propertyBuckets).map((prop) => ({
+      label: expectedNames[prop],
+      options: propertyBuckets[prop].map((bucketName) => ({
+        value: `${prop}|${bucketName.toLowerCase()}`,
+        label:
+          prop === 'duration'
+            ? `${bucketName} seconds`
+            : prop === 'frameRate'
+            ? `${bucketName} FPS`
+            : bucketName,
+      })),
+    })),
   },
   values: {},
   defaults: defaultFilters,
@@ -295,14 +314,8 @@ const selectFiltersReducer = (state = initialState, action) => {
       return state.set('values', fromJS({}))
     case types.SET_BRAND_OPTIONS:
       return state
-        .setIn(
-          ['options', 'brand'],
-          fromJS(payload.brands)
-        )
-        .setIn(
-          ['defaults', 'brand'],
-          fromJS(payload.defaultBrand)
-        )
+        .setIn(['options', 'brand'], fromJS(payload.brands))
+        .setIn(['defaults', 'brand'], fromJS(payload.defaultBrand))
     default:
       return state
   }

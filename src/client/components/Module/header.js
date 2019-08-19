@@ -59,7 +59,8 @@ const HeaderModule = ({
                 defaultValue={filter.defaultValue}
                 selectClasses={
                   (filter.type === 'platformEngagement' ||
-                    filter.type === 'propertyEngagement') &&
+                    filter.type === 'propertyEngagement' ||
+                    filter.type === 'propertyWithBuckets') &&
                   'custom-select combine-select'
                 }
                 customOptions={filter.customOptions}
