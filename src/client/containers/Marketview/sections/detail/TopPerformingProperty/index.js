@@ -112,7 +112,6 @@ class TopPerformingProperty extends React.Component {
           highestValuesArr[index] += dataset.data[index]
         })
       })
-      console.log('highest vlue arr :', highestValuesArr)
 
       //change the data related to highest value as percentages
       const newData = {
@@ -242,7 +241,6 @@ class TopPerformingProperty extends React.Component {
         color: item.backgroundColor,
       }))
     const loading = compTopLoading || topLoading
-    console.log('chart data : ', chartData)
 
     return (
       <BarChartModule
