@@ -106,7 +106,7 @@ function* getAudiencePerformanceData({ payload = {} }) {
           response[key] = convertDurationLabels(response[key], property, true)
         })
       }
-      console.log('response parsed', response)
+
       let updatedResponse = Object.keys(response).reduce((newData, key) => {
         newData[key] = Object.keys(response[key]).map((v) => ({
           visual: v,
@@ -118,6 +118,7 @@ function* getAudiencePerformanceData({ payload = {} }) {
         return newData
       }, {})
 
+      // normalization datas for bubble can calculate the size.
       updatedResponse = Object.keys(updatedResponse).reduce((newData, key) => {
         newData[key] = normalizationBubbleMapping(
           updatedResponse[key],
