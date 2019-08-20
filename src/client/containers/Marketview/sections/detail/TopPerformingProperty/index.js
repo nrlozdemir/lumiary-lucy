@@ -16,10 +16,8 @@ import {
   splitCamelCaseToString,
   selectFiltersToType,
   customChartToolTip,
-  metricSuffix,
 } from 'Utils'
 import {
-  getMinMaxFromDatasets,
   getTopNValues,
   percentageManipulation,
 } from 'Utils/datasets'
