@@ -218,7 +218,6 @@
       justify-content: center;
       align-items: center;
       cursor: pointer;
-      opacity: 0.5;
 
       p {
         position: relative;
@@ -234,6 +233,7 @@
         transition: 300ms;
         box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
         border-width: 1px;
+        opacity: 0.5;
 
         span {
           position: absolute;
@@ -273,18 +273,25 @@
       &:before {
         content: '';
         width: 1px;
-        background-color: $color-dusk;
         height: 24px;
         box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
         position: absolute;
-        left: 0;
-        top: 50%;
+        left: -19px;
+        top: 58%;
         transform: translateY(-50%);
         margin-top: -10px;
       }
 
       &.swiper-slide-thumb-active {
-        opacity: 1;
+        p {
+          opacity: 1;
+        }
+      }
+
+      &:nth-of-type(1) {
+        &:before {
+          display: none;
+        }
       }
     }
   }
