@@ -60,7 +60,7 @@ class TopPerformingFormat extends React.Component {
       !loading &&
       ((!!lineChartData && isLineChartEmpty) || isEmpty(data)) &&
       isEmpty(properties)
-      
+
     return (
       <LineAndDoughnutChartModule
         moduleKey="Panoptic/TopPerformingPacingThisWeekByCVScore"
@@ -74,6 +74,8 @@ class TopPerformingFormat extends React.Component {
             type: 'platformEngagement',
             selectKey: 'PVR-asd',
             placeHolder: 'Engagement by Platform',
+            removeAllPlatform: true,
+            defaultValue: { value: 'facebook|views', label: 'Views' },
           },
         ]}
         platform={platform}

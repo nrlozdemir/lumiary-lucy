@@ -53,6 +53,7 @@ const HeaderModule = ({
               <ModuleSelectFilters
                 key={index}
                 type={filter.type}
+                removeAllPlatform={filter.removeAllPlatform}
                 moduleKey={moduleKey}
                 selectKey={filter.selectKey}
                 placeHolder={filter.placeHolder}

@@ -163,6 +163,7 @@ export class Main extends React.PureComponent {
                         <ModuleSelectFilters
                           isActive={isSelected}
                           type={platform.filter.type}
+                          removeAllPlatform={platform.filter.removeAllPlatform}
                           moduleKey={moduleKey}
                           selectKey={platform.filter.selectKey}
                           placeHolder={platform.filter.placeHolder}
@@ -390,8 +391,12 @@ export class Main extends React.PureComponent {
                                               [style.percentagePink]: i == 0,
                                             }
                                           )}
-                                          progressBarBackgroundColor={colors.progressQuickviewBg}
-                                          percentageBgColor={colors.progressQuickviewColor}
+                                          progressBarBackgroundColor={
+                                            colors.progressQuickviewBg
+                                          }
+                                          percentageBgColor={
+                                            colors.progressQuickviewColor
+                                          }
                                         />
                                         <p className={style.infoText}>
                                           {textEdit(item.text, item)}
