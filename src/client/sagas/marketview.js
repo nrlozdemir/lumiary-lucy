@@ -464,7 +464,12 @@ function* getBubbleChartData({
       //   },
       // ]
 
-      const normalizedData = normalizationBubbleMapping(bubbleData, 55, 100)
+      const normalizedData = normalizationBubbleMapping(
+        bubbleData,
+        50,
+        70,
+        'marketview'
+      )
 
       yield put(actions.getBubleChartSuccess(normalizedData))
     } else {

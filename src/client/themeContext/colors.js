@@ -273,6 +273,14 @@ const dark = {
   audienceToggleActiveTextColor: '#fff',
   audienceToggleInactiveTextColor: '#acb0be',
   audienceToggleBGColor: '#21243b',
+
+  //audience toggle
+  audienceBubbleText: '#ffffff',
+  audienceBubbleBackground: '#21243b',
+  audienceBubbleTooltipText: '#21243b',
+  audienceBubbleTooltipSeparator: 'rgba(172, 176, 190, 0.5)',
+  audienceBubbleTooltipBackground: '#ffffff',
+  audienceBubbleTooltipShadow: 'rgba(0 0 0, 0.5)',
 }
 
 const light = {
@@ -549,6 +557,14 @@ const light = {
   audienceToggleActiveTextColor: '#fff',
   audienceToggleInactiveTextColor: '#acb0be',
   audienceToggleBGColor: '#e8ecf0',
+
+  //audience toggle
+  audienceBubbleText: '#505050',
+  audienceBubbleBackground: '#ffffff',
+  audienceBubbleTooltipText: '#ffffff',
+  audienceBubbleTooltipSeparator: 'rgba(172, 176, 190, 0.5)',
+  audienceBubbleTooltipBackground: '#505050',
+  audienceBubbleTooltipShadow: '#bebebe',
 }
 
 const themes = {

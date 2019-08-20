@@ -415,7 +415,7 @@ const getNValuesOfObject = ({ obj = {}, n, sortOrder = '' }) => {
 
 const valuesIsEqual = (num, equal) => num.every((o) => o === equal)
 
-const normalizationBubbleMapping = (arr, tMin, tMax) => {
+const normalizationBubbleMapping = (arr, tMin, tMax, type = 'marketview') => {
   if (!arr.length || !tMin || !tMax) return {}
   const numbers = arr.map((a) => a.value)
 
@@ -429,11 +429,25 @@ const normalizationBubbleMapping = (arr, tMin, tMax) => {
 
   return numbers.map((m, i) => {
     const value = (((!m ? 1 : m) - rMin) / (rMax - rMin)) * (tMax - tMin) + tMin
-    return {
-      name: arr[i].name,
-      color: arr[i].color,
-      value: value === tMin ? (tMin * 6) / 8 : value,
-      oldValue: arr[i].value,
+    if (type === 'marketview') {
+      return {
+        name: arr[i].name,
+        color: arr[i].color,
+        value: value === tMin ? (tMin * 6) / 8 : value,
+        oldValue: arr[i].value,
+      }
+    }
+    if (type === 'audience') {
+      console.log('numbers', numbers)
+      const total = numbers.reduce((total, num) => total + num, 0)
+      console.log('total', total)
+      return {
+        ...arr[i],
+        percentage: (arr[i].value * 100) / total,
+        visual: arr[i].visual,
+        value: value === tMin ? (tMin * 6) / 8 : value,
+        oldValue: arr[i].value,
+      }
     }
   })
 }

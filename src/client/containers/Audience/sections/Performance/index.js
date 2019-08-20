@@ -11,28 +11,13 @@ import { socialIconSelector, metricSuffix, normalize } from 'Utils'
 import _ from 'lodash'
 import style from 'Containers/Audience/style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
+import MultipleNoDataModule from 'Components/MultipleNoDataModule'
 
-const getMinMax = (data, type = 'min') => {
-  const min = type === 'min'
+const WrapperModule = ({ children, style, className }) => {
   return (
-    (!!data &&
-      Object.keys(data).reduce((result, key) => {
-        const dataMaxMin = data[key].reduce(
-          (dataVal, dataKey) =>
-            (min
-            ? dataKey.toolTip < dataVal
-            : dataKey.toolTip > dataVal)
-              ? dataKey.toolTip
-              : dataVal,
-          0
-        )
-        return (min
-        ? dataMaxMin < result
-        : dataMaxMin > result)
-          ? dataMaxMin
-          : result
-      }, 0)) ||
-    0
+    <div className={className} style={style}>
+      {children}
+    </div>
   )
 }
 
@@ -88,9 +73,7 @@ class Performance extends React.Component {
         height: '10px',
         borderStyle: 'solid',
         borderWidth: '20px 10px 0 10px',
-        borderColor: `${
-          colors.textColor
-        }   transparent transparent transparent`,
+        borderColor: `${colors.textColor}   transparent transparent transparent`,
         borderRadius: 0,
         backgroundColor: 'transparent',
         boxShadow: 'none',
@@ -104,9 +87,7 @@ class Performance extends React.Component {
         height: '10px',
         borderStyle: 'solid',
         borderWidth: '20px 10px 0 10px',
-        borderColor: `${
-          colors.textColor
-        }   transparent transparent transparent`,
+        borderColor: `${colors.textColor}   transparent transparent transparent`,
         backgroundColor: 'transparent',
         borderRadius: 0,
         boxShadow: 'none',
@@ -141,28 +122,13 @@ class Performance extends React.Component {
       display: 'none',
     }
 
-    const maxVal = getMinMax(data, 'max')
-
-    const minVal = getMinMax(data, 'min')
-
-    const normalizedData =
-      (!!data &&
-        !loading &&
-        Object.keys(data).reduce((acc, key) => {
-          acc[key] = data[key].map((val) => ({
-            toolTip: normalize(val.toolTip, minVal, maxVal, 0, 1000000),
-          }))
-          return acc
-        }, {})) ||
-      null
-
     const isEmpty =
       !loading &&
       (_.isEmpty(data) ||
         (!!data &&
-          Object.values(data).every((valArr) =>
-            valArr.every((v) => !v.toolTip)
-          )))
+          Object.values(data).every((valArr) => {
+            return Object.keys(valArr).length && valArr.every((v) => !v.value)
+          })))
 
     return (
       <Module
@@ -205,50 +171,87 @@ class Performance extends React.Component {
           )}
         >
           <div className="col-12-no-gutters">
-            <div className={'col-4'}>
-              <div className={style.bubbleCont}>
+            <MultipleNoDataModule>
+              <WrapperModule
+                datasetsIsEmpty={!!male && !Object.keys(male).length}
+              >
                 <BubbleChart
-                  maximumIterationCount={1000}
-                  size={[800, 600]}
-                  fromPercentages={true}
+                  size={[340, 400]}
                   options={{
-                    toolTipWidth: 200,
-                    toolTipHeight: 75,
+                    maximumIterationCount: 1000,
+                    toolTipBackground: colors.audienceBubbleTooltipBackground,
+                    toolTipArrowBackground:
+                      colors.audienceBubbleTooltipBackground,
+                    toolTipArrowShadow: colors.audienceBubbleTooltipShadow,
+                    strokeWidth: 6,
+                    gap: 1,
+                    visualFontSize: 14,
+                    toolTipFontSize: 10,
                     visualWidth: 100,
                     visualHeight: 50,
+                    toolTipWidth: 150,
+                    toolTipHeight: 140,
+                    firstCircleTimesX: 1,
+                    firstCircleTimesY: 1,
                   }}
+                  firstAngle={30}
                 >
                   {!!male &&
+                    Object.keys(male).length &&
                     male.map((bubble, i) => (
-                      <Bubble
-                        key={'bubble-' + i}
-                        radius={
-                          parseInt(
-                            ((!!normalizedData &&
-                              !!normalizedData['male'] &&
-                              normalizedData['male'][i].toolTip) ||
-                              0) / 100
-                          ) *
-                            0.0015 +
-                          10
-                        }
-                        fill={colors.bodyBackground}
-                        stroke="#5292E5"
-                      >
-                        <Visual>
-                          <span className={style.bubbleVisual}>
-                            {bubble.visual}
-                          </span>
-                        </Visual>
-                        <ToolTip>
-                          <div className={style.bubbleTooltip}>
-                            {bubble.visual}
-                          </div>
-                          <div className={style.bubbleTooltip}>
-                            {`${metricSuffix(bubble.toolTip)} ${metric}`}
-                          </div>
-                        </ToolTip>
-                      </Bubble>
+                      <div key={i}>
+                        <Bubble
+                          key={'bubble-' + i}
+                          radius={bubble.value}
+                          fill={colors.bodyBackground}
+                          stroke="#5292E5"
+                        >
+                          <Visual
+                            style={{
+                              background: colors.audienceBubbleBackground,
+                            }}
+                          >
+                            <span
+                              className={style.bubbleVisual}
+                              style={{
+                                fontSize: 13,
+                                color: colors.audienceBubbleText,
+                              }}
+                            >
+                              {bubble.visual}
+                            </span>
+                          </Visual>
+                          <ToolTip>
+                            <div className={style.bubbleTooltip}>
+                              <div
+                                className={style.header}
+                                style={{
+                                  color: colors.audienceBubbleTooltipText,
+                                  // audienceBubbleTooltipSeparator
+                                }}
+                              >
+                                {`${bubble.percentage}% | ${bubble.visual} ${bubble.property}`}
+                              </div>
+                              <div
+                                style={{
+                                  width: '100%',
+                                  height: '1px',
+                                  background:
+                                    colors.audienceBubbleTooltipSeparator,
+                                }}
+                              />
+                              <div
+                                className={style.body}
+                                style={{
+                                  color: colors.audienceBubbleTooltipText,
+                                }}
+                              >
+                                {`${bubble.percentage}% of males ${bubble.min}-${bubble.max} prefer videos that are ${bubble.visual} paced`}
+                              </div>
+                            </div>
+                          </ToolTip>
+                        </Bubble>
+                      </div>
                     ))}
                 </BubbleChart>
                 <div className={style.chartSectionBadge}>
@@ -262,52 +265,89 @@ class Performance extends React.Component {
                     Males
                   </span>
                 </div>
-              </div>
-            </div>
-            <div className={'col-4'}>
-              <div className={style.bubbleCont}>
+              </WrapperModule>
+              <WrapperModule
+                style={{
+                  borderLeft: `1px solid ${colors.moduleBorder}`,
+                  borderRight: `1px solid ${colors.moduleBorder}`,
+                }}
+                datasetsIsEmpty={!!female && !Object.keys(female).length}
+              >
                 <BubbleChart
-                  maximumIterationCount={1000}
-                  size={[800, 600]}
-                  fromPercentages={true}
+                  size={[340, 400]}
                   options={{
-                    toolTipWidth: 200,
-                    toolTipHeight: 75,
+                    maximumIterationCount: 1000,
+                    toolTipBackground: colors.audienceBubbleTooltipBackground,
+                    toolTipArrowBackground:
+                      colors.audienceBubbleTooltipBackground,
+                    toolTipArrowShadow: colors.audienceBubbleTooltipShadow,
+                    strokeWidth: 6,
+                    gap: 1,
                     visualWidth: 100,
                     visualHeight: 50,
+                    toolTipWidth: 150,
+                    toolTipHeight: 140,
+                    firstCircleTimesX: 1,
+                    firstCircleTimesY: 1,
                   }}
+                  firstAngle={30}
                 >
                   {!!female &&
+                    Object.keys(female).length &&
                     female.map((bubble, i) => (
-                      <Bubble
-                        key={'bubble-' + i}
-                        radius={
-                          parseInt(
-                            ((!!normalizedData &&
-                              !!normalizedData['female'] &&
-                              normalizedData['female'][i].toolTip) ||
-                              0) / 100
-                          ) *
-                            0.0015 +
-                          10
-                        }
-                        fill={colors.bodyBackground}
-                        stroke="#2FD7C4"
-                      >
-                        <Visual>
-                          <span className={style.bubbleVisual}>
-                            {bubble.visual}
-                          </span>
-                        </Visual>
-                        <ToolTip>
-                          <div className={style.bubbleTooltip}>
-                            {bubble.visual}
-                          </div>
-                          <div className={style.bubbleTooltip}>
-                            {`${metricSuffix(bubble.toolTip)} ${metric}`}
-                          </div>
-                        </ToolTip>
-                      </Bubble>
+                      <div key={i}>
+                        <Bubble
+                          key={'bubble-' + i}
+                          radius={bubble.value}
+                          fill={colors.bodyBackground}
+                          stroke="#2FD7C4"
+                        >
+                          <Visual
+                            style={{
+                              background: colors.audienceBubbleBackground,
+                            }}
+                          >
+                            <span
+                              className={style.bubbleVisual}
+                              style={{
+                                fontSize: 13,
+                                color: colors.audienceBubbleText,
+                              }}
+                            >
+                              {bubble.visual}
+                            </span>
+                          </Visual>
+                          <ToolTip>
+                            <div className={style.bubbleTooltip}>
+                              <div
+                                className={style.header}
+                                style={{
+                                  color: colors.audienceBubbleTooltipText,
+                                  // audienceBubbleTooltipSeparator
+                                }}
+                              >
+                                {`${bubble.percentage}% | ${bubble.visual} ${bubble.property}`}
+                              </div>
+                              <div
+                                style={{
+                                  width: '100%',
+                                  height: '1px',
+                                  background:
+                                    colors.audienceBubbleTooltipSeparator,
+                                }}
+                              />
+                              <div
+                                className={style.body}
+                                style={{
+                                  color: colors.audienceBubbleTooltipText,
+                                }}
+                              >
+                                {`${bubble.percentage}% of females ${bubble.min}-${bubble.max} prefer videos that are ${bubble.visual} paced`}
+                              </div>
+                            </div>
+                          </ToolTip>
+                        </Bubble>
+                      </div>
                     ))}
                 </BubbleChart>
                 <div className={style.chartSectionBadge}>
@@ -321,52 +361,89 @@ class Performance extends React.Component {
                     Females
                   </span>
                 </div>
-              </div>
-            </div>
-            <div className={'col-4'}>
-              <div className={style.bubbleCont}>
+              </WrapperModule>
+              <WrapperModule
+                datasetsIsEmpty={!!both && !Object.keys(both).length}
+              >
                 <BubbleChart
-                  maximumIterationCount={1000}
-                  size={[800, 600]}
-                  fromPercentages={true}
+                  size={[340, 400]}
                   options={{
-                    toolTipWidth: 200,
-                    toolTipHeight: 75,
+                    maximumIterationCount: 1000,
+                    toolTipBackground: colors.audienceBubbleTooltipBackground,
+                    toolTipArrowBackground:
+                      colors.audienceBubbleTooltipBackground,
+                    toolTipArrowShadow: colors.audienceBubbleTooltipShadow,
+                    strokeWidth: 6,
+                    gap: 1,
                     visualWidth: 100,
                     visualHeight: 50,
+                    toolTipWidth: 150,
+                    toolTipHeight: 140,
+                    firstCircleTimesX: 1,
+                    firstCircleTimesY: 1,
                   }}
+                  firstAngle={30}
                 >
                   {!!both &&
+                    Object.keys(both).length &&
                     both.map((bubble, i) => (
-                      <Bubble
-                        key={'bubble-' + i}
-                        radius={
-                          parseInt(
-                            ((!!normalizedData &&
-                              !!normalizedData['both'] &&
-                              normalizedData['both'][i].toolTip) ||
-                              0) / 100
-                          ) *
-                            0.0015 +
-                          10
-                        }
-                        fill={colors.bodyBackground}
-                        stroke="#8562F3"
-                      >
-                        <Visual>
-                          <span className={style.bubbleVisual}>
-                            {bubble.visual}
-                          </span>
-                        </Visual>
-                        <ToolTip>
-                          <div className={style.bubbleTooltip}>
-                            {bubble.visual}
-                          </div>
-                          <div className={style.bubbleTooltip}>
-                            {`${metricSuffix(bubble.toolTip)} ${metric}`}
-                          </div>
-                        </ToolTip>
-                      </Bubble>
+                      <div key={i}>
+                        <Bubble
+                          key={'bubble-' + i}
+                          radius={bubble.value}
+                          fill={colors.bodyBackground}
+                          stroke="#8562F3"
+                        >
+                          <Visual
+                            style={{
+                              background: colors.audienceBubbleBackground,
+                            }}
+                          >
+                            <span
+                              className={style.bubbleVisual}
+                              style={{
+                                fontSize: 13,
+                                color: colors.audienceBubbleText,
+                              }}
+                            >
+                              {bubble.visual}
+                            </span>
+                          </Visual>
+                          <ToolTip
+                            style={{
+                              color: colors.tooltipRadarChartTextColor,
+                            }}
+                          >
+                            <div className={style.bubbleTooltip}>
+                              <div
+                                className={style.header}
+                                style={{
+                                  color: colors.audienceBubbleTooltipText,
+                                  // audienceBubbleTooltipSeparator
+                                }}
+                              >
+                                {`${bubble.percentage}% | ${bubble.visual} ${bubble.property}`}
+                              </div>
+                              <div
+                                style={{
+                                  width: '100%',
+                                  height: '1px',
+                                  background:
+                                    colors.audienceBubbleTooltipSeparator,
+                                }}
+                              />
+                              <div
+                                className={style.body}
+                                style={{
+                                  color: colors.audienceBubbleTooltipText,
+                                }}
+                              >
+                                {`${bubble.percentage}% of both ${bubble.min}-${bubble.max} prefer videos that are ${bubble.visual} paced`}
+                              </div>
+                            </div>
+                          </ToolTip>
+                        </Bubble>
+                      </div>
                     ))}
                 </BubbleChart>
                 <div className={style.chartSectionBadge}>
@@ -380,8 +457,8 @@ class Performance extends React.Component {
                     Both
                   </span>
                 </div>
-              </div>
-            </div>
+              </WrapperModule>
+            </MultipleNoDataModule>
           </div>
 
           <div className="col-12-gutter-20" style={{ color: colors.textColor }}>
