@@ -104,71 +104,75 @@ class ColorCard extends Component {
             <div className={style.bubbleChart}>
               {!!data && !loading && !!data.length && totalChartValue ? (
                 <BubbleChart
-                  maximumIterationCount={100000}
-                  size={[totalChartValue * 1.7, totalChartValue * 2]}
+                  size={[340, 400]}
                   options={{
-                    strokeWidth: totalChartValue * 0.025,
-                    gap: totalChartValue / 180,
-                    toolTipWidth: totalChartValue * 0.7,
-                    toolTipHeight: totalChartValue * 0.3,
-                    visualWidth: totalChartValue * 0.16,
-                    visualHeight: totalChartValue * 0.16,
-                    toolTipRadius: totalChartValue * 0.06,
-                    toolTipGap: totalChartValue * 0.1,
-                    toolTipArrowWidth: totalChartValue * 0.07,
-                    toolTipArrowHeight: totalChartValue * 0.05,
+                    maximumIterationCount: 1000,
+                    toolTipBackground: "#505050",
+                    toolTipArrowBackground: "#505050",
+                    toolTipArrowShadow: "rgba(0,0,0,.5)",
+                    strokeWidth: 6,
+                    gap: 1,
+                    visualFontSize: 14,
+                    toolTipFontSize: 10,
+                    visualWidth: 32,
+                    visualHeight: 32,
+                    firstCircleTimesX: 1,
+                    firstCircleTimesY: 1
                   }}
+                  firstAngle={40}
                 >
                   {data.map((bubble, i) => (
-                    <Bubble
-                      key={'bubble-' + i}
-                      // radius={(parseInt(bubble.value) / 100) * 0.0015 + 15}
-                      radius={bubble.value}
-                      fill={colors.bodyBackground}
-                      stroke={bubbleColors[bubble.color]}
-                    >
-                      <Visual>
-                        <span
-                          className={
-                            socialIconSelector(bubble.name, true) +
-                            ' ' +
-                            style.bubbleVisual
-                          }
-                          style={{
-                            fontSize: totalChartValue * 0.07,
-                            background: colors.textColor,
-                            color: colors.moduleBackgroundHover,
-                          }}
-                        />
-                      </Visual>
-                      <ToolTip
-                        style={{
-                          background: colors.tooltipBackground,
-                          color: colors.tooltipRadarChartTextColor,
-                        }}
+                    <div key={i}>
+                      <Bubble
+                        key={'bubble-' + i}
+                        // radius={(parseInt(bubble.value) / 100) * 0.0015 + 15}
+                        radius={bubble.value}
+                        fill={colors.bodyBackground}
+                        stroke={bubbleColors[bubble.color]}
                       >
-                        <div
-                          className={style.bubbleTooltip}
+                        <Visual>
+                          <span
+                            className={
+                              socialIconSelector(bubble.name, true) +
+                              ' ' +
+                              style.bubbleVisual
+                            }
+                            style={{
+                              fontSize: 13,
+                              background: colors.textColor,
+                              color: colors.moduleBackgroundHover,
+                            }}
+                          />
+                        </Visual>
+                        <ToolTip
                           style={{
-                            fontSize: totalChartValue * 0.07,
-                            color: colors.chartTooltipColor,
+                            background: colors.tooltipBackground,
+                            color: colors.tooltipRadarChartTextColor,
                           }}
                         >
-                          {bubble.name}
-                        </div>
-                        <div
-                          className={style.bubbleTooltip}
-                          style={{
-                            fontSize: totalChartValue * 0.07,
-                            color: colors.chartTooltipColor,
-                          }}
-                        >
-                          {`${metricSuffix(bubble.oldValue)} ${ucfirst(
-                            metric
-                          )}`}
-                        </div>
-                      </ToolTip>
-                    </Bubble>
+                          <div
+                            className={style.bubbleTooltip}
+                            style={{
+                              fontSize: 13,
+                              color: colors.chartTooltipColor,
+                            }}
+                          >
+                            {bubble.name}
+                          </div>
+                          <div
+                            className={style.bubbleTooltip}
+                            style={{
+                              fontSize: 13,
+                              color: colors.chartTooltipColor,
+                            }}
+                          >
+                            {`${metricSuffix(bubble.oldValue)} ${ucfirst(
+                              metric
+                            )}`}
+                          </div>
+                        </ToolTip>
+                      </Bubble>
+                    </div>
                   ))}
                 </BubbleChart>
               ) : null}

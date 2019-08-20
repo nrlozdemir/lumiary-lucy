@@ -5,7 +5,7 @@ import audienceMockData from 'Api/mocks/audienceMock.json'
 import updateAudiencePer from 'Api/updateAudiencePerformance'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
-import { getColorPercents } from 'Utils'
+import { getColorPercents, normalizationBubbleMapping } from 'Utils'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 
 import {
@@ -79,18 +79,52 @@ function* getAudiencePerformanceData({ payload = {} }) {
       'GET'
     )
 
+    // const response = {
+    //   male: {
+    //     Medium: 401000,
+    //     Slow: 100000,
+    //     Slowest: 2000,
+    //     Fast: 18500000,
+    //   },
+    //   female: {
+    //     Medium: 4801000,
+    //     Slow: 400000,
+    //     Slowest: 1000,
+    //     Fast: 500000,
+    //   },
+    //   both: {
+    //     Medium: 1000,
+    //     Slow: 4340000,
+    //     Slowest: 112000,
+    //     Fast: 30000,
+    //   },
+    // }
+
     if (!!response) {
       if (property === 'duration') {
         Object.keys(response).forEach((key) => {
           response[key] = convertDurationLabels(response[key], property, true)
         })
       }
-
-      const updatedResponse = Object.keys(response).reduce((newData, key) => {
+      console.log('response parsed', response)
+      let updatedResponse = Object.keys(response).reduce((newData, key) => {
         newData[key] = Object.keys(response[key]).map((v) => ({
           visual: v,
-          toolTip: response[key][v],
+          value: response[key][v],
+          min,
+          max,
+          property,
         }))
+        return newData
+      }, {})
+
+      updatedResponse = Object.keys(updatedResponse).reduce((newData, key) => {
+        newData[key] = normalizationBubbleMapping(
+          updatedResponse[key],
+          50,
+          70,
+          'audience'
+        )
         return newData
       }, {})
 
