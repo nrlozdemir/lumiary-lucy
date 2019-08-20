@@ -161,7 +161,6 @@ const reducer = (state = initialState, action) => {
         .set('loginError', fromJS(null))
         .set('message', fromJS(null))
         .set('profile', fromJS(null))
-        .setIn(['user', 'loggedIn'], fromJS(false))
 
     case types.LOGIN_ERROR:
       return state
@@ -201,6 +200,7 @@ const reducer = (state = initialState, action) => {
             refresh: false,
             refreshing: false,
             expiry: false,
+            loggedIn: false,
           })
         )
         .set('profile', null)

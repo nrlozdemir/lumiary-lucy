@@ -191,16 +191,25 @@ function* additionalLoggedInFeatures(payload) {
 
     const { brand } = getProfileObjectWithBrand(payload.profile)
 
-    if (!!brand && !!brand.uuid) {
-      const response = yield call(
-        getDataFromApi,
-        {},
-        buildQApiUrl(`/glossary/${brand.uuid}`),
-        'GET'
+    try {
+      if (!!brand && !!brand.uuid) {
+        const response = yield call(
+          getDataFromApi,
+          {},
+          buildQApiUrl(`/glossary/${brand.uuid}`),
+          'GET'
+        )
+        yield put(actions.getSectionExplanationsSuccess(response))
+      } else {
+        throw new Error('Glossary not found')
+      }
+    } catch (e) {
+      console.log(e)
+      yield put(
+        actions.getSectionExplanationsFailure(
+          `Glossary for Brand ${brand.name} Not Found Available`
+        )
       )
-      yield put(actions.getSectionExplanationsSuccess(response))
-    } else {
-      yield put(actions.getSectionExplanationsFailure('No Brand Available'))
     }
   }
 }
@@ -277,8 +286,10 @@ export function* getInstagramOAuthToken({ payload }) {
     const { uuid: brandUuid } = brand
     const platform = 'instagram'
 
-    if(!code) {
-      return reject(new Error('code is required to get the instagram oauth token'))
+    if (!code) {
+      return reject(
+        new Error('code is required to get the instagram oauth token')
+      )
     }
 
     const oAuth = new oAuthHelper({
@@ -287,7 +298,7 @@ export function* getInstagramOAuthToken({ payload }) {
       bearerToken,
     })
 
-    const token = yield oAuth.requestAccessToken({ 
+    const token = yield oAuth.requestAccessToken({
       code,
     })
 
@@ -330,8 +341,10 @@ export function* verifyTwitterOAuthToken({ payload }) {
     const { uuid: brandUuid } = brand
     const platform = 'twitter'
 
-    if(!oauth_token || !oauth_verifier ) {
-      throw new Error('oauth_token and oauth_verifier are required to verify the twitter oauth token')
+    if (!oauth_token || !oauth_verifier) {
+      throw new Error(
+        'oauth_token and oauth_verifier are required to verify the twitter oauth token'
+      )
     }
 
     const oAuth = new oAuthHelper({
@@ -340,9 +353,9 @@ export function* verifyTwitterOAuthToken({ payload }) {
       bearerToken,
     })
 
-    const token = yield oAuth.verifyToken({ 
+    const token = yield oAuth.verifyToken({
       oauth_token,
-      oauth_verifier
+      oauth_verifier,
     })
 
     console.log(token)
