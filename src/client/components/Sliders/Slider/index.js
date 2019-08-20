@@ -145,7 +145,12 @@ class MarketViewSlider extends React.Component {
     const { items, profile } = this.props
 
     const competitors =
-      !!profile && !!profile.brand ? profile.brand.competitors : []
+      !!profile && !!profile.brand
+        ? [
+            { uuid: profile.brand.uuid, name: profile.brand.name },
+            ...profile.brand.competitors,
+          ]
+        : []
 
     return (
       <div className={style.section}>
@@ -181,7 +186,8 @@ class MarketViewSlider extends React.Component {
                       leftSocialIcon={item.socialMedia}
                       centerText={item.secondTitle}
                       title={title}
-                      width={634}height = '100%'
+                      width={634}
+                      height="100%"
                       rightValue={item.cvScore}
                     >
                       <video
