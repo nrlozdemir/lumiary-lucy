@@ -453,6 +453,7 @@ function* getTopPerformingFormatData({ data = {} }) {
           label,
         })
 
+        const customChartColors = ['#2FD7C4', '#8562F3', '#5292E5', '#ffffff']
         const customChartColorSelector = {
           fast: '#8562f3',
           slow: '#2fd7c4',
@@ -467,11 +468,17 @@ function* getTopPerformingFormatData({ data = {} }) {
               fill: false,
               lineTension: 0.1,
               backgroundColor:
-                customChartColorSelector[propertyBucket.toLowerCase()],
+                (!!customChartColorSelector[propertyBucket.toLowerCase()] &&
+                  customChartColorSelector[propertyBucket.toLowerCase()]) ||
+                customChartColors[idx],
               borderColor:
-                customChartColorSelector[propertyBucket.toLowerCase()],
+                (!!customChartColorSelector[propertyBucket.toLowerCase()] &&
+                  customChartColorSelector[propertyBucket.toLowerCase()]) ||
+                customChartColors[idx],
               hoverBackgroundColor:
-                customChartColorSelector[propertyBucket.toLowerCase()],
+                (!!customChartColorSelector[propertyBucket.toLowerCase()] &&
+                  customChartColorSelector[propertyBucket.toLowerCase()]) ||
+                customChartColors[idx],
               data: [],
             }
           }
