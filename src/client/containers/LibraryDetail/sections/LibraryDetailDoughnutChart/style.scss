@@ -134,14 +134,19 @@
       margin-top: 26px;
       position: relative;
       border-radius: 17px;
-      // box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-      // background-color: $color-dusk;
-      p {
-        line-height: 18px;
-        font-family: $font-family-ClanOT;
-        font-size: 14px;
-        font-weight: bold;
-      }
+			line-height: 18px;
+      font-family: $font-family-ClanOTBold;
+			font-size: 14px;
+			&.dark{
+				box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+				color: #fff;
+				background-color: #545b79;
+			}
+			&.light{
+				color: #505050;
+				box-shadow: 0 1px 2px 0 #bebebe;
+				background-color: #fff;
+			}
     }
     h1 {
       position: relative;
