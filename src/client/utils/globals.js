@@ -23,7 +23,7 @@ export const chartColors = [
   '#eb7919',
 ]
 
-export const compareBrandChartColors = ['#2FD7C4', '#5292E5']
+export const compareBrandChartColors = ['#5292E5', '#2FD7C4']
 
 export const CVScoreChartColors = ['#fff', '#ccc', '#eee', '#000']
 

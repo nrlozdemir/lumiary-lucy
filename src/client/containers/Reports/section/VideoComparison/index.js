@@ -33,7 +33,7 @@ class VideoComparison extends React.Component {
     const { action, report } = this.props
     action({ ...data, report })
   }
-  
+
   render() {
     const {
       data: { data, loading, error },

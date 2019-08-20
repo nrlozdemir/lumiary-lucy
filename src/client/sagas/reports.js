@@ -279,15 +279,15 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
     }
 
     const response = yield call(
-      getDataFromApi, 
-      undefined, 
+      getDataFromApi,
+      undefined,
       `/report/compare/brands/property?${querystring.stringify({
         brands: [...report.brands],
         dateRange,
         platform,
         metric: 'views',
         property,
-      })}`, 
+      })}`,
       'GET'
     )
 
@@ -303,7 +303,7 @@ function* getVideoComparisonData({ data: { dateRange, report } }) {
 
       const legend = Object.keys(sortedResponse).map((b, idx) => ({
         label: b,
-        color: idx === 1 ? 'coral-pink' : 'cool-blue',
+        color: idx === 1 ? 'cool-blue' : 'coral-pink',
       }))
 
       yield put(
@@ -354,7 +354,7 @@ function* getPerformanceComparisonData({
     if (!!payload && !!payload.data) {
       const legend = Object.keys(payload.data).map((b, idx) => ({
         label: b,
-        color: idx === 1 ? 'coral-pink' : 'cool-blue',
+        color: idx === 1 ? 'cool-blue' : 'coral-pink',
       }))
       yield put(
         actions.getPerformanceComparisonDataSuccess({
