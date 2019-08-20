@@ -30,14 +30,46 @@
 
   .legend {
     border-radius: 17px;
-    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-    background-color: $color-dusk;
-    color: #ffffff;
     font-family: $font-family-ClanOTBold;
     font-size: 14px;
-    padding: 8px 28px;
+    padding: 8px 24px;
     margin: 15px 0 40px;
-    text-align: center;
+		text-align: center;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		&.dark{
+			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+			color: #fff;
+			background-color: #545b79;
+		}
+
+		&.light{
+			color: #505050;
+			box-shadow: 0 1px 2px 0 #bebebe;
+			background-color: #fff;
+		}
+
+		.colorBubble{
+			width: 14px;
+			height: 14px;
+			border-radius: 14px;
+			margin-right: 8px;
+		}
+
+		&.dark{
+			.colorBubble{
+				border: 1px solid #fff;
+			}
+		}
+
+		&.light{
+			box-shadow: 0 1px 2px 0 #bebebe;
+			.colorBubble{
+				border: 1px solid #505050;
+			}
+		}
   }
 
   .divider {

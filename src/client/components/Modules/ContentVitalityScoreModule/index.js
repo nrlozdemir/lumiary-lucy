@@ -520,14 +520,24 @@ const ContentVitalityScoreModule = ({
                   return (
                     <div className={percentageCol} key={idx}>
                       <div
-                        className={style.legend}
-                        style={{
-                          background: colors.labelBackground,
-                          color: colors.labelColor,
-                          boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                        }}
+												className={cx(style.legend, {
+													[style.dark]: colors.themeType === 'dark',
+													[style.light]: colors.themeType === 'light',
+												})}
                       >
-                        {names[idx]}
+												{idx !== 1 && (<div
+													className={style.colorBubble}
+													style={{
+														backgroundColor:
+														bgColor.substr(
+																0,
+																4
+															) === '#fff'
+																? '#acb0be'
+																: bgColor,
+													}}
+												/>)}
+												<div>{names[idx]}</div>
                       </div>
                       {idx !== 2 && (
                         <div
