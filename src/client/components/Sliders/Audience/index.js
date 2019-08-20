@@ -116,6 +116,7 @@ class AudienceSlider extends React.Component {
                   border: 1px solid ${colors.ageSliderBorder};
                   background-color: ${colors.bodyBackground};
                 }
+                .
                 .swiper-slide p:after {
                   color: ${colors.textColor}
                 }
@@ -124,7 +125,10 @@ class AudienceSlider extends React.Component {
                     color: ${colors.textColor}
                   }
                 }
-
+                .swiper-slide:before {
+                  background-color: ${colors.selectBorder};
+                  opacity: 1 !important;
+                }
               `}
             </style>
             {refThumb && (
