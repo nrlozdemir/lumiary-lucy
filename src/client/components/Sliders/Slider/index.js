@@ -122,7 +122,7 @@ class MarketViewSlider extends React.Component {
           item.classList.remove('active')
         }
 
-        if (bullets && this.refSlider && this.refSlider.activeIndex) {
+        if (bullets && this.refSlider && !isNaN(this.refSlider.activeIndex)) {
           bullets[this.refSlider.activeIndex].classList.add('active')
         }
         // Force rendering needed to update disabled state of prev and next buttons
