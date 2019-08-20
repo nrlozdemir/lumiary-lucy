@@ -100,14 +100,20 @@ class ModuleSelectFilters extends React.Component {
       onChange,
       inModuleFilter,
       customOptions,
+      removeAllPlatform,
     } = this.props
 
-    const options = customOptions
-      ? {
-          //...defaultOptions,
-          [type]: customOptions,
-        }
-      : defaultOptions
+    if (!defaultOptions && !type) {
+      return false
+    }
+
+    const options = (customOptions || defaultOptions[type]).filter((option) => {
+      if (removeAllPlatform && option.label === 'All Platforms') {
+        return false
+      }
+
+      return !!option
+    })
 
     const selectedOption =
       values && values[moduleKey] && values[moduleKey][selectKey]
@@ -115,7 +121,7 @@ class ModuleSelectFilters extends React.Component {
     const _defaultValue = defaultValue || defaults[type]
 
     const findEngagementOptions = () => {
-      return options[type].reduce((acc, curr) => {
+      return options.reduce((acc, curr) => {
         curr.options.find((item) => {
           if (item.value === _defaultValue) {
             acc = item
@@ -129,12 +135,11 @@ class ModuleSelectFilters extends React.Component {
       selectedOption && selectedOption.value
         ? selectedOption.value
         : options &&
-          options[type] &&
-          !!options[type].length &&
-          !!options[type][0].options &&
-          !!options[type][0].options.length
+          !!options.length &&
+          !!options[0].options &&
+          !!options[0].options.length
         ? findEngagementOptions()
-        : options[type].find(({ value: v }) => v === _defaultValue)
+        : options.find(({ value: v }) => v === _defaultValue)
 
     const onChangeFunc = onChange ? onChange : this.onChange
 
@@ -150,7 +155,7 @@ class ModuleSelectFilters extends React.Component {
               : ''
           }
           onChange={(option) => onChangeFunc(option)}
-          options={options[type]}
+          options={options}
           isActive={isActive}
           inModuleFilter={inModuleFilter}
         />
