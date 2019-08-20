@@ -26,11 +26,25 @@ const defaultAgeRanges = [
   '65+',
 ].map((range) => ({ age: range, loading: true }))
 
+const getAgesToFetch = (age) => {
+  const idx = defaultAgeRanges.findIndex((r) => r.age === age)
+  return idx > 1
+    ? [
+        defaultAgeRanges[idx - 1].age,
+        age,
+        ...(defaultAgeRanges[idx + 1] ? [defaultAgeRanges[idx + 1].age] : []),
+      ]
+    : [
+        age,
+        ...(defaultAgeRanges[idx + 1] ? [defaultAgeRanges[idx + 1].age] : []),
+      ]
+}
+
 class AgeSlider extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
-      prevAges: [],
+      currentAge: [],
       params: null,
       videosArr: defaultAgeRanges,
     }
@@ -73,13 +87,15 @@ class AgeSlider extends React.PureComponent {
     const { getAudienceAgeSliderData, type } = this.props
 
     this.setState({ videosArr: defaultAgeRanges, params: data }, () => {
-      const { prevAges } = this.state
+      const { currentAge } = this.state
+
+      const agesToFetch = getAgesToFetch(currentAge)
 
       getAudienceAgeSliderData({
         ...data,
         type,
         loading: true,
-        ages: prevAges,
+        ages: agesToFetch,
       })
     })
   }
@@ -88,30 +104,14 @@ class AgeSlider extends React.PureComponent {
     const { getAudienceAgeSliderData, type } = this.props
     const { params, videosArr } = this.state
 
-    const currentAgeIdx = defaultAgeRanges.findIndex((r) => r.age === age)
-
-    let agesToFetch =
-      currentAgeIdx > 1
-        ? [
-            defaultAgeRanges[currentAgeIdx - 1].age,
-            age,
-            ...(defaultAgeRanges[currentAgeIdx + 1]
-              ? [defaultAgeRanges[currentAgeIdx + 1].age]
-              : []),
-          ]
-        : [
-            age,
-            ...(defaultAgeRanges[currentAgeIdx + 1]
-              ? [defaultAgeRanges[currentAgeIdx + 1].age]
-              : []),
-          ]
+    let agesToFetch = getAgesToFetch(age)
 
     agesToFetch = agesToFetch.filter((a) => {
       const storedAge = find(videosArr, ['age', a])
       return !!storedAge && !!storedAge.loading
     })
 
-    this.setState({ prevAges: agesToFetch })
+    this.setState({ currentAge: age })
 
     params &&
       !!agesToFetch.length &&
