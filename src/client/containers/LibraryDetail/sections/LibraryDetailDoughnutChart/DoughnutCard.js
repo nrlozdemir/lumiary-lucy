@@ -47,16 +47,12 @@ class DoughnutCard extends React.Component {
             <div className={style.cardInner}>
               <h1 className={style.cardTitle}>{title}</h1>
               <div
-                className={style.subtitle}
-                style={{
-                  background: colors.labelBackground,
-                  color: colors.labelColor,
-                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                }}
+                className={cx(style.subtitle, {
+                  [style.dark]: colors.themeType === 'dark',
+                  [style.light]: colors.themeType === 'light',
+                })}
               >
-                <p className="font-secondary-second font-size-12 text-center">
-                  {!!duration && duration !== '00:00:00' ? duration : maxLabel}
-                </p>
+                {!!duration && duration !== '00:00:00' ? duration : maxLabel}
               </div>
               <div className={style.doughnutChartContainer}>
                 <DoughnutChart
