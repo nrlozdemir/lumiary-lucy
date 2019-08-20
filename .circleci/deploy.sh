@@ -31,6 +31,18 @@ export API_ROOT=$(get_env_parameter azazzle/app_url)
 export API_VERSION=$(get_env_parameter azazzle/api_version)
 export QAPI_ROOT=$(get_env_parameter api_url)
 export QAPI_VERSION=$(get_env_parameter api_version)
+export INSTAGRAM_CLIENT_ID=$(get_parameter INSTAGRAM_CLIENT_ID)
+export INSTAGRAM_CLIENT_SECRET=$(get_parameter INSTAGRAM_CLIENT_SECRET)
+export INSTAGRAM_RESPONSE_TYPE=$(get_parameter INSTAGRAM_RESPONSE_TYPE)
+export INSTAGRAM_REDIRECT_URI=$(get_parameter INSTAGRAM_REDIRECT_URI)
+export INSTAGRAM_GRANT_TYPE=$(get_parameter INSTAGRAM_GRANT_TYPE)
+export GOOGLE_CLIENT_ID=$(get_parameter GOOGLE_CLIENT_ID)
+export GOOGLE_API_KEY=$(get_parameter GOOGLE_API_KEY)
+export GOOGLE_SCOPE=$(get_parameter GOOGLE_SCOPE)
+export GOOGLE_DISCOVERY_DOCS=$(get_parameter GOOGLE_DISCOVERY_DOCS)
+export FACEBOOK_APP_ID=$(get_parameter FACEBOOK_APP_ID)
+export FACEBOOK_SCOPES=$(get_parameter FACEBOOK_SCOPES)
+
 
 echo "🛠 Building static files..."
 npm run build:$CIRCLE_BRANCH
