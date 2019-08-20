@@ -222,7 +222,7 @@ class TopPerformingProperty extends React.Component {
                 data.datasets[tooltipItem['datasetIndex']] &&
                 data.datasets[tooltipItem['datasetIndex']].label) ||
               ''
-            return `${count ? metricSuffix(count) : 0} ${!!name && `| ${name}`}`
+            return `${count ? metricSuffix(count) : 0}% ${!!name && `| ${name}`}`
           },
         },
       }),
