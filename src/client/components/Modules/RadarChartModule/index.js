@@ -105,10 +105,10 @@ const RadarChartModule = ({
             </div>
             <div className={'mt-32 ' + style.labelContainer}>
               <div
-								className={cx(style.label, {
-									[style.dark]: colors.themeType === 'dark',
-									[style.light]: colors.themeType === 'light',
-								})}
+                className={cx(style.label, {
+                  [style.dark]: colors.themeType === 'dark',
+                  [style.light]: colors.themeType === 'light',
+                })}
                 style={{
                   opacity: leftOpacity,
                 }}
@@ -133,10 +133,10 @@ const RadarChartModule = ({
                 } Dominant Colors`}</p>
               )}
               <div
-								className={cx(style.label, {
-									[style.dark]: colors.themeType === 'dark',
-									[style.light]: colors.themeType === 'light',
-								})}
+                className={cx(style.label, {
+                  [style.dark]: colors.themeType === 'dark',
+                  [style.light]: colors.themeType === 'light',
+                })}
                 style={{
                   opacity: rightOpacity,
                 }}
