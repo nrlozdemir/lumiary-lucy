@@ -28,7 +28,7 @@ const defaultAgeRanges = [
 
 const getAgesToFetch = (age) => {
   const idx = defaultAgeRanges.findIndex((r) => r.age === age)
-  return idx > 1
+  return idx >= 1
     ? [
         defaultAgeRanges[idx - 1].age,
         age,
