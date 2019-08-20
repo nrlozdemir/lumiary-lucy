@@ -103,15 +103,16 @@ class TopPerformingProperty extends React.Component {
 
   normalizeData(chartData = {}) {
     if (chartData.datasets && chartData.datasets.length) {
-      const datasets = chartData.datasets
-      //find the highest data
-      let flattenedArr = []
-      datasets.forEach((dataset) => {
-        flattenedArr = [...flattenedArr, ...dataset.data]
+      const {datasets, labels} = chartData
+      //find the highest value for each group
+      let highestValuesArr = []
+      labels.forEach((item, index) => {
+        highestValuesArr[index] = 0
+        datasets.forEach((dataset) => {
+          highestValuesArr[index] += dataset.data[index]
+        })
       })
-      const highestValue = flattenedArr.reduce((accumulator, current) => {
-        return current > accumulator ? current : accumulator
-      }, 0)
+      console.log('highest vlue arr :', highestValuesArr)
 
       //change the data related to highest value as percentages
       const newData = {
@@ -120,7 +121,8 @@ class TopPerformingProperty extends React.Component {
           return {
             ...dataset,
             oldData: [...dataset.data],
-            data: dataset.data.map((data) => {
+            data: dataset.data.map((data, i) => {
+              const highestValue = highestValuesArr[i]
               return percentageManipulation((data * 100) / highestValue)
             }),
           }
@@ -240,6 +242,7 @@ class TopPerformingProperty extends React.Component {
         color: item.backgroundColor,
       }))
     const loading = compTopLoading || topLoading
+    console.log('chart data : ', chartData)
 
     return (
       <BarChartModule
