@@ -182,7 +182,7 @@ class Performance extends React.Component {
                     toolTipBackground: colors.audienceBubbleTooltipBackground,
                     toolTipArrowBackground:
                       colors.audienceBubbleTooltipBackground,
-                    toolTipArrowShadow: colors.audienceBubbleTooltipShadow,
+                    toolTipArrowShadow: colors.audienceBubbleTooltipBackground,
                     strokeWidth: 6,
                     gap: 1,
                     visualFontSize: 14,
@@ -280,7 +280,7 @@ class Performance extends React.Component {
                     toolTipBackground: colors.audienceBubbleTooltipBackground,
                     toolTipArrowBackground:
                       colors.audienceBubbleTooltipBackground,
-                    toolTipArrowShadow: colors.audienceBubbleTooltipShadow,
+                    toolTipArrowShadow: colors.audienceBubbleTooltipBackground,
                     strokeWidth: 6,
                     gap: 1,
                     visualWidth: 100,
@@ -372,7 +372,7 @@ class Performance extends React.Component {
                     toolTipBackground: colors.audienceBubbleTooltipBackground,
                     toolTipArrowBackground:
                       colors.audienceBubbleTooltipBackground,
-                    toolTipArrowShadow: colors.audienceBubbleTooltipShadow,
+                    toolTipArrowShadow: colors.audienceBubbleTooltipBackground,
                     strokeWidth: 6,
                     gap: 1,
                     visualWidth: 100,
