@@ -19,7 +19,7 @@ class PacingCard extends React.Component {
       <PacingCardModule
         data={!loading ? data : {}}
         moduleKey={'Panoptic/PacingCard'}
-        title="Pacing For Each Duration by Performance"
+        title="Pacing For Duration By Performance"
         action={this.callBack}
         loading={loading}
         filters={[
