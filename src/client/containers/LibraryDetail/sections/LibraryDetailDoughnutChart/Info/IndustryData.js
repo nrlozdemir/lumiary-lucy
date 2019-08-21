@@ -23,7 +23,7 @@ class IndustryData extends React.Component {
             {modalData && modalData.industryChartData ? (
               <div className={style.doughnutChartContainer}>
                 <DoughnutChart
-                  width={188}
+                  width={300}
                   height={188}
                   layoutPadding={8}
                   displayDataLabels={false}
