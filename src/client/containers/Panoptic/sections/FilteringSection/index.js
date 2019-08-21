@@ -98,9 +98,8 @@ class PanopticFilteringSection extends Component {
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
               labelPositionRight
-              datasetsBorderWidth={0}
+              datasetsBorderWidth={1.4}
               tooltipMode="nearest"
-              slicePiecesWidth={0.3}
               datasetOptions={{
                 shadowOffsetX: 2,
                 shadowOffsetY: 1.5,
