@@ -26,6 +26,7 @@ class MarketViewSlider extends React.Component {
     speed: 300,
     autoplay: false,
     keyboard: false,
+    touchRatio: 0, // disabled draggable
     slideToClickedSlide: true,
     renderPagination: (props) => {
       const { items } = this.props
