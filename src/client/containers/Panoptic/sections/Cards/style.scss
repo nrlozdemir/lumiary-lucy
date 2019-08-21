@@ -45,6 +45,9 @@
       font-weight: bold;
       // color: $color-white;
       margin: 0px 0px 0px 0px;
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
     }
 
     .changes {
@@ -204,5 +207,5 @@ $arrowBackground: #fff;
 
 .moduleInfo {
   font-size: 14px;
-  margin: 0px 0px 2px 8px;
+  margin: 0px 0px 0px 8px;
 }
