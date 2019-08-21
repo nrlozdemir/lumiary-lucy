@@ -85,6 +85,7 @@ class DoughnutChart extends React.Component {
       cvScoreData,
       slicePiecesWidth = false,
       datasetOptions = {},
+      removeTooltip = false,
     } = this.props
 
     const themes = this.props.themeContext.colors
@@ -307,6 +308,7 @@ class DoughnutChart extends React.Component {
                     responsive: false,
                     tooltips:
                       !average &&
+                      !removeTooltip &&
                       customChartToolTip(
                         themes,
                         {
