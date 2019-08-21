@@ -84,7 +84,7 @@ class PerformanceComparison extends React.Component {
         reverse={false}
         barCustoms={{
           width: 720,
-          height: 340,
+          height: 291,
           cutoutPercentage: 58,
           fillText: 'Total Percentage',
           dataLabelFunction: 'insertAfter',
@@ -93,8 +93,8 @@ class PerformanceComparison extends React.Component {
           hideLabels: true,
         }}
         doughnutCustoms={{
-          width: 280,
-          height: 280,
+          width: 288,
+          height: 288,
           cutoutPercentage: 58,
           fillText: 'Total Percentage',
           dataLabelFunction: 'insertAfter',
