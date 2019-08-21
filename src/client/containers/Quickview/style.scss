@@ -415,13 +415,13 @@
             .percentageBlue {
               border-radius: 10px;
               height: 10px;
-              background-color: $color-cool-blue;
+              background-color: $color-cool-blue !important;
               -webkit-transition: width 0.5s, height 0.5s;
               transition: width 0.5s, height 0.5s;
             }
 
             .percentagePink {
-              background-color: $color-coral-pink;
+              background-color: $color-coral-pink !important;
             }
 
             .progressText {

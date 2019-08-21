@@ -1,11 +1,12 @@
 import React from 'react'
-import classnames from 'classnames'
+import cx from 'classnames'
 import { socialIconSelector } from 'Utils'
 import { withTheme } from 'ThemeContext/withTheme'
 import styles from './style.scss'
 
 const AssetLayer = (props) => {
   const {
+    isActive,
     containerClassName,
     contentClassName,
     barOpacityClassName,
@@ -21,14 +22,14 @@ const AssetLayer = (props) => {
     truncateTitle,
   } = props
 
-  const socialIcon = classnames(socialIconSelector(leftSocialIcon), styles.icon)
+  const socialIcon = cx(socialIconSelector(leftSocialIcon), styles.icon)
 
   const themes = props.themeContext.colors
 
   return (
     <React.Fragment>
       <div
-        className={classnames(containerClassName, {
+        className={cx(styles.container, 'col-3 ml-0', {
           [styles.noBorder]: containerNoBorder,
         })}
         style={{
@@ -39,12 +40,23 @@ const AssetLayer = (props) => {
           color: themes.textColor,
         }}
       >
-        <div className={contentClassName}>{children && children[0]}</div>
+        <div className={cx(styles.content, contentClassName)}>
+          {children && children[0]}
+        </div>
+
         <div
-          className={barOpacityClassName}
-          style={{ background: themes.moduleBackgroundWithOpacity }}
+          className={cx(styles.barOpacity, barOpacityClassName, {
+            [styles['barOpacity--notActive']]: !isActive,
+          })}
+          style={{
+            background: themes.moduleBackgroundWithOpacity,
+          }}
         />
-        <div className={barClassName}>
+        <div
+          className={cx(styles.bar, barClassName, {
+            [styles['bar--notActive']]: !isActive,
+          })}
+        >
           <div className={styles.barTitle}>
             {socialIcon && <span className={socialIcon} />}
             {truncateTitle ? (
@@ -71,11 +83,12 @@ const AssetLayer = (props) => {
 }
 
 AssetLayer.defaultProps = {
+  isActive: true,
   containerNoBorder: false,
-  containerClassName: classnames(styles.container, 'col-3 ml-0'),
-  contentClassName: styles.content,
-  barOpacityClassName: styles.barOpacity,
-  barClassName: styles.bar,
+  containerClassName: '',
+  contentClassName: '',
+  barOpacityClassName: '',
+  barClassName: '',
   width: '100%',
   height: 'auto',
 }

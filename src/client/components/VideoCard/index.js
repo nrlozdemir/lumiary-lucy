@@ -78,7 +78,6 @@ export class VideoCard extends PureComponent {
       index,
     } = this.props
 
-    const { itCanPlay } = this.state
     const cardContainerClass = classnames(
       style.cardContainer,
       {
