@@ -49,7 +49,7 @@ const LineAndDoughnutChartModule = ({
         }
       },
       beforeDatasetsDraw: function(chart, options) {
-        chart.ctx.shadowColor = colors.lineChartShadowColor
+        chart.ctx.shadowColor = colors.lineChartShadowColorDark
         chart.ctx.shadowBlur = 2
         chart.ctx.shadowOffsetX = 1
         chart.ctx.shadowOffsetY = 1.2
