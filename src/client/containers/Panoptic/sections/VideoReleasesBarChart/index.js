@@ -29,7 +29,7 @@ class VideoReleasesBarChart extends Component {
       <VideoReleasesBarChartModule
         data={data}
         moduleKey={'Panoptic/VideoReleasesBarChartModule'}
-        title="Video Releases vs Engagement"
+        title="Video Releases vs. Engagement"
         action={this.callBack}
         filters={[
           {
