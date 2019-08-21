@@ -21,10 +21,10 @@ class TotalViewsChart extends React.Component {
   }
 
   normalizeData(chartData = {}) {
-    if(chartData.datasets && chartData.datasets.length) { 
+    if(chartData.datasets && chartData.datasets.length) {
       const datasets = chartData.datasets
       //find the factor
-      const sum = datasets[0].data.reduce((accumulator, current) => { 
+      const sum = datasets[0].data.reduce((accumulator, current) => {
         return accumulator + current
        },0)
        const factor = 100 / sum
@@ -80,7 +80,7 @@ class TotalViewsChart extends React.Component {
     const { labels = []} = barData || {}
     const dayNames = moment.weekdays()
     const monthNames = moment.months()
-    
+
     let xAxisType =  'weeks'
     labels.map((l, i) => {
       dayNames.forEach((dItem, dIndex) => {
@@ -164,16 +164,15 @@ class TotalViewsChart extends React.Component {
           </div>
           <div className="col-6">
             <DoughnutChart
-              width={290}
-              height={290}
+              width={288}
+              height={288}
               data={loading ? {} : normalizedData}
               cutoutPercentage={58}
               fillText="Total Percentage"
               dataLabelFunction="insertAfter"
               dataLabelInsert="%"
-              datasetsBorderWidth={0}
+              datasetsBorderWidth={1.4}
               tooltipMode="nearest"
-              slicePiecesWidth={0.6}
               datasetOptions={{
                 shadowOffsetX: 2,
                 shadowOffsetY: 1.5,
