@@ -42,7 +42,7 @@ const AssetLayer = (props) => {
         <div className={contentClassName}>{children && children[0]}</div>
         <div
           className={barOpacityClassName}
-          style={{ background: themes.moduleBackground }}
+          style={{ background: themes.moduleBackgroundWithOpacity }}
         />
         <div className={barClassName}>
           <div className={styles.barTitle}>

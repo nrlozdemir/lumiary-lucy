@@ -24,7 +24,7 @@ const SliderModule = (props) => {
     !!selectedVideo && !!selectedVideo.options && !loading
       ? selectedVideo.options
       : [...Array(3).keys()]
-      
+
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => (
@@ -78,8 +78,14 @@ const SliderModule = (props) => {
                               <ProgressBar
                                 width={value.value}
                                 customBarClass={style.progressBar}
-                                progressBarBackgroundColor={colors.reportsProgressBackground}
-                                percentageBgColor={i === 0 ? colors.reportsLibraryPercentageBg : colors.reportsIndustryPercentageBg}
+                                progressBarBackgroundColor={
+                                  colors.reportsProgressBackground
+                                }
+                                percentageBgColor={
+                                  i === 0
+                                    ? colors.reportsLibraryPercentageBg
+                                    : colors.reportsIndustryPercentageBg
+                                }
                                 customPercentageClass={
                                   i % 2
                                     ? style.percentageRed
