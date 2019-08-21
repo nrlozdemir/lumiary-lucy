@@ -30,7 +30,7 @@ export const lineChartOptions = {
         ticks: {
           display: true,
           fontColor: ['#fff', '#000'],
-          fontFamily: 'ClanOT',
+          fontFamily: 'ClanOTNews',
           fontSize: 12,
           stepSize: 1,
           padding: 15,
@@ -53,6 +53,7 @@ export const lineChartOptions = {
         },
         ticks: {
           fontColor: '#fff',
+          fontFamily: 'ClanOTNews',
           fontSize: 12,
           stepSize: 25,
           beginAtZero: true,
