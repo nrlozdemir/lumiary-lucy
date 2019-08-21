@@ -557,13 +557,6 @@ const getModuleTerms = (key, data = {}) => {
       moduleObject.module.terms.map((term) => term.uuid)) ||
     []
 
-  console.log(
-    key,
-    data.glossary.modules.map((m) => m.identifier).sort(),
-    moduleObject,
-    termsUuids
-  )
-
   return Object.keys(terms)
     .reduce((acc, letter) => {
       const matchingItems = terms[letter].filter(
