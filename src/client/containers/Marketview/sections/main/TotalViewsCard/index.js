@@ -21,27 +21,27 @@ class TotalViewsChart extends React.Component {
   }
 
   normalizeData(chartData = {}) {
-    if(chartData.datasets && chartData.datasets.length) {
+    if (chartData.datasets && chartData.datasets.length) {
       const datasets = chartData.datasets
       //find the factor
       const sum = datasets[0].data.reduce((accumulator, current) => {
         return accumulator + current
-       },0)
-       const factor = 100 / sum
+      }, 0)
+      const factor = 100 / sum
 
       //change the data related to highest value as percentages
       const newData = {
         ...chartData,
-        datasets: datasets.map((dataset)=> {
+        datasets: datasets.map((dataset) => {
           return {
             ...dataset,
             oldData: [...dataset.data],
             data: dataset.data.map((data) => {
               const percentage = factor * data
               return percentageManipulation(percentage)
-            })
+            }),
           }
-        })
+        }),
       }
       return newData
     }
@@ -77,11 +77,11 @@ class TotalViewsChart extends React.Component {
       (metric) => selects.metric === metric.value
     )
 
-    const { labels = []} = barData || {}
+    const { labels = [] } = barData || {}
     const dayNames = moment.weekdays()
     const monthNames = moment.months()
 
-    let xAxisType =  'weeks'
+    let xAxisType = 'weeks'
     labels.map((l, i) => {
       dayNames.forEach((dItem, dIndex) => {
         if (dItem == l) {
@@ -96,34 +96,42 @@ class TotalViewsChart extends React.Component {
     })
 
     const shortLabels = labels.map((item) => {
-      switch(xAxisType) {
+      switch (xAxisType) {
         case 'days':
-          return moment().day(item).format("dd")
-        break;
+          return moment()
+            .day(item)
+            .format('dd')
+          break
 
         case 'weeks':
           return item
-        break;
+          break
 
         case 'months':
-          return moment().month(item).format("MMM")
-        break;
+          return moment()
+            .month(item)
+            .format('MMM')
+          break
       }
     })
 
     const longLabels = labels.map((item) => {
-      switch(xAxisType) {
+      switch (xAxisType) {
         case 'days':
-          return moment().day(item).format("dddd")
-        break;
+          return moment()
+            .day(item)
+            .format('dddd')
+          break
 
         case 'weeks':
           return item
-        break;
+          break
 
         case 'months':
-          return moment().month(item).format("MMMM")
-        break;
+          return moment()
+            .month(item)
+            .format('MMMM')
+          break
       }
     })
 
@@ -155,10 +163,14 @@ class TotalViewsChart extends React.Component {
           <div className="col-6">
             <StackedBarChart
               metricTitle={longLabels}
-              barData={!loading ? {
-                ...barData,
-                labels: shortLabels
-              } : null}
+              barData={
+                !loading
+                  ? {
+                      ...barData,
+                      labels: shortLabels,
+                    }
+                  : null
+              }
               barSpacing={2}
             />
           </div>
