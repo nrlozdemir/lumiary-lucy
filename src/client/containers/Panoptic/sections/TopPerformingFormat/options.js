@@ -57,7 +57,7 @@ export const lineChartOptions = {
           fontSize: 12,
           stepSize: 25,
           beginAtZero: true,
-          padding: 15,
+          padding: 16,
           max: 100,
           callback: function(value, index, values) {
             if (value === 0 || value === 100) {
