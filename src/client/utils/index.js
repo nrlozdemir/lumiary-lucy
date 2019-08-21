@@ -549,11 +549,20 @@ const getModuleTerms = (key, data = {}) => {
     data.glossary &&
     data.glossary.modules &&
     data.glossary.modules.find((module) => module.identifier === key)
+
   const termsUuids =
-    moduleObject &&
-    moduleObject.module &&
-    moduleObject.module.terms &&
-    moduleObject.module.terms.map((term) => term.uuid)
+    (moduleObject &&
+      moduleObject.module &&
+      moduleObject.module.terms &&
+      moduleObject.module.terms.map((term) => term.uuid)) ||
+    []
+
+  console.log(
+    key,
+    data.glossary.modules.map((m) => m.identifier).sort(),
+    moduleObject,
+    termsUuids
+  )
 
   return Object.keys(terms)
     .reduce((acc, letter) => {
