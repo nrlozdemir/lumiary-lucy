@@ -177,6 +177,11 @@
       top: 0;
       left: 0;
       object-fit: cover;
+      background-color: black;
+
+      &:hover {
+        object-fit: contain;
+      }
     }
   }
 

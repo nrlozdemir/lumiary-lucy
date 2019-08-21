@@ -18,6 +18,10 @@ class MarketViewSlider extends React.Component {
   constructor(props) {
     super(props)
     this.videoRef = []
+
+    this.state = {
+      currentIdx: null,
+    }
   }
 
   renderNextButton = () => {
@@ -126,6 +130,11 @@ class MarketViewSlider extends React.Component {
         if (bullets && this.refSlider && !isNaN(this.refSlider.activeIndex)) {
           bullets[this.refSlider.activeIndex].classList.add('active')
         }
+
+        this.setState({
+          currentIdx: this.refSlider.activeIndex,
+        })
+
         // Force rendering needed to update disabled state of prev and next buttons
         this.forceUpdate()
 
@@ -143,6 +152,7 @@ class MarketViewSlider extends React.Component {
   }
 
   render() {
+    const { currentIdx } = this.state
     const { items, profile } = this.props
 
     const competitors =
@@ -183,6 +193,7 @@ class MarketViewSlider extends React.Component {
                     onMouseLeave={() => this.handleMouseOutPlay(i)}
                   >
                     <AssetLayer
+                      isActive={i === currentIdx}
                       containerNoBorder
                       leftSocialIcon={item.socialMedia}
                       centerText={item.secondTitle}
