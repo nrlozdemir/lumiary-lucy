@@ -70,7 +70,8 @@
 
   &:before {
     content: attr(data-legend);
-    top: 50%;
+		top: 50%;
+		left: 15px;
   }
 }
 .doughnutChartText {
