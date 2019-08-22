@@ -122,7 +122,10 @@ const LineAndDoughnutChartModule = ({
           }
         })
       }
-    })
+		})
+
+	const xAxisFontColors = colors.lineChartYAxisColor
+	console.log(lineChartOptions.scales.xAxes[0])
 
   return (
     <Module
@@ -180,7 +183,8 @@ const LineAndDoughnutChartModule = ({
                         ...lineChartOptions.scales.xAxes[0],
                         ticks: {
                           ...lineChartOptions.scales.xAxes[0].ticks,
-                          fontColor: colors.labelColor,
+													fontColor: xAxisFontColors,
+													padding: 22
                         },
                         gridLines: {
                           ...lineChartOptions.scales.xAxes[0].gridLines,
