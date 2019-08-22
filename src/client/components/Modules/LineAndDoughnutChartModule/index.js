@@ -135,20 +135,20 @@ const LineAndDoughnutChartModule = ({
       }
 		})
 
-	console.log(lineChartOptions)
+	// console.log(lineChartOptions)
 
-  console.log(
-    moduleKey,
-    title,
-    action,
-    lineChartData,
-    lineChartOptions,
-    filters,
-    isEmpty,
-    platform,
-    properties,
-    average
-  )
+ //  console.log(
+ //    moduleKey,
+ //    title,
+ //    action,
+ //    lineChartData,
+ //    lineChartOptions,
+ //    filters,
+ //    isEmpty,
+ //    platform,
+ //    properties,
+ //    average
+ //  )
 
   return (
     <Module
