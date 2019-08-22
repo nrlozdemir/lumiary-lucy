@@ -29,7 +29,8 @@ const LineAndDoughnutChartModule = ({
   const container = cx('grid-container', style.container)
   const plugins = [
     {
-      beforeDraw: function(chart, easing) {
+			/*
+			beforeDraw: function(chart, easing) {
         if (
           chart.config.options.chartArea &&
           chart.config.options.chartArea.backgroundColor
@@ -48,6 +49,7 @@ const LineAndDoughnutChartModule = ({
           ctx.restore()
         }
       },
+			*/
       beforeDatasetsDraw: function(chart, options) {
         chart.ctx.shadowColor = colors.lineChartShadowColorDark
         chart.ctx.shadowBlur = 2
@@ -124,8 +126,7 @@ const LineAndDoughnutChartModule = ({
       }
 		})
 
-	const xAxisFontColors = colors.lineChartYAxisColor
-	console.log(lineChartOptions.scales.xAxes[0])
+	console.log(lineChartOptions)
 
   return (
     <Module
@@ -146,11 +147,20 @@ const LineAndDoughnutChartModule = ({
               <Line
                 key={Math.random()}
                 data={manipulateData}
-                width={1120}
+                width={1180}
                 height={291}
                 plugins={plugins}
                 options={{
-                  ...lineChartOptions,
+									...lineChartOptions,
+									responsive: false,
+									layout: {
+										padding: {
+											left: 0,
+											right: 0,
+											top: 0,
+											bottom: 0,
+										},
+									},
                   tooltips: customChartToolTip(colors, {
                     callbacks: {
                       title: () => '',
@@ -183,8 +193,17 @@ const LineAndDoughnutChartModule = ({
                         ...lineChartOptions.scales.xAxes[0],
                         ticks: {
                           ...lineChartOptions.scales.xAxes[0].ticks,
-													fontColor: xAxisFontColors,
-													padding: 22
+													fontColor: colors.lineChartXAxisColor,
+													padding: 22,
+													callback: function(value, index, values) {
+                            if (index === 0) {
+                              return ' '.repeat(21) + '1' + value
+                            } else if (index === values.length - 1) {
+                              return value + ' '.repeat(18)
+                            } else {
+															return value
+														}
+                          },
                         },
                         gridLines: {
                           ...lineChartOptions.scales.xAxes[0].gridLines,
