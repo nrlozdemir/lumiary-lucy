@@ -13,8 +13,7 @@
     .navItem_btn {
       position: relative;
       height: 56px;
-      width: 20%;
-      max-width: 200px;
+      width: 200px;
       min-width: 150px;
       &:hover {
         cursor: pointer;
@@ -46,6 +45,7 @@
         [class*='react-select__control'] {
           height: 100%;
           background-color: transparent;
+          width: 100%;
         }
       }
 
