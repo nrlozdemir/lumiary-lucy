@@ -197,7 +197,7 @@ const LineAndDoughnutChartModule = ({
                           ...lineChartOptions.scales.yAxes[0].ticks,
                           callback: function(value, index, values) {
                             if (value === 0) {
-                              return value + '%'
+                              return value + ' '.repeat(2)
                             } else if (value === chartYAxisMax) {
                               return value + '%'
                             } else {
