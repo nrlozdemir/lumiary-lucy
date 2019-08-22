@@ -442,10 +442,10 @@ function* getTopPerformingFormatData({ data = {} }) {
           .format('M/D/YY')
         const label =
           i === 0
-            ? `Today (${weekdayShort})`
+            ? `Today (${weekdayShort.toUpperCase()})`
             : i === 1
-            ? `Yesterday (${weekdayShort})`
-            : `${weekdayDate} (${weekdayShort})`
+            ? `Yesterday (${weekdayShort.toUpperCase()})`
+            : `${weekdayDate} (${weekdayShort.toUpperCase()})`
 
         weekdayOrder.unshift({
           weekday,
