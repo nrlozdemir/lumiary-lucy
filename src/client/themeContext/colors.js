@@ -282,6 +282,11 @@ const dark = {
   audienceBubbleTooltipSeparator: 'rgba(172, 176, 190, 0.5)',
   audienceBubbleTooltipBackground: '#ffffff',
   audienceBubbleTooltipShadow: 'rgba(0 0 0, 0.5)',
+
+  //video releases bar chart
+  barChartborderColor: '#545b79',
+  barChartZerolineColor: '#fff',
+  barChartZerolineShadowColor: '#21243b',
 }
 
 const light = {
@@ -567,6 +572,11 @@ const light = {
   audienceBubbleTooltipSeparator: 'rgba(172, 176, 190, 0.5)',
   audienceBubbleTooltipBackground: '#505050',
   audienceBubbleTooltipShadow: '#bebebe',
+
+  //video releases bar chart
+  barChartborderColor: '#c6c9d7',
+  barChartZerolineColor: '#c6c9d7',
+  barChartZerolineShadowColor: '#e8ecf0',
 }
 
 const themes = {

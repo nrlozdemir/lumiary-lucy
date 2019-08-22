@@ -35,12 +35,22 @@
 
     &:after {
       content: '';
-      background-color: $color-dusk;
       height: 276px;
       position: absolute;
       width: 1px;
-      top: 1;
-      right: -26;
+      top: 1px;
+      right: -26px;
+    }
+
+    &.dark {
+      &:after {
+        background-color: $color-dusk;
+      }
+    }
+    &.light {
+      &:after {
+        background-color: #c6c9d7;
+      }
     }
   }
   .chartSectionBadge {
