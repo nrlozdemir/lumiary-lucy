@@ -5,7 +5,6 @@ import PacingCard from './sections/PacingCard'
 import CompareShares from './sections/CompareShares'
 import Cards from './sections/Cards'
 import TopPerformingFormat from './sections/TopPerformingFormat'
-import style from './style.scss'
 
 /* eslint-disable react/prefer-stateless-function */
 class Panoptic extends React.Component {

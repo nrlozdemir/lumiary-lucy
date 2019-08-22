@@ -4,7 +4,6 @@ import { routerMiddleware } from 'connected-react-router'
 
 import rootReducer from 'Reducers/rootReducer'
 import sagaManager from 'Sagas/sagaManager'
-import history from './history'
 
 const composeEnhancers =
   process.env.NODE_ENV === 'production'
@@ -21,23 +20,21 @@ const sagaMiddleware = createSagaMiddleware({
     : {}),
 })
 
-const store = function configureStore() {
-  const enhancer = composeEnhancers(
+const store = createStore(
+  rootReducer,
+  composeEnhancers(
     applyMiddleware(sagaMiddleware),
     applyMiddleware(routerMiddleware(history))
   )
-  const store = createStore(rootReducer(history), enhancer)
+)
 
-  sagaManager.startSagas(sagaMiddleware)
+sagaManager.startSagas(sagaMiddleware)
 
-  if (module.hot) {
-    module.hot.accept('./sagas/sagaManager', () => {
-      sagaManager.cancelSagas(store)
-      require('Sagas/sagaManager').default.startSagas(sagaMiddleware)
-    })
-  }
-
-  return store
+if (module.hot) {
+  module.hot.accept('./sagas/sagaManager', () => {
+    sagaManager.cancelSagas(store)
+    require('Sagas/sagaManager').default.startSagas(sagaMiddleware)
+  })
 }
 
-export default store()
+export default store

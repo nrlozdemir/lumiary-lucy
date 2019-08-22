@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import classnames from 'classnames'
 import { Bar } from 'react-chartjs-2'
+import { withTheme } from 'ThemeContext/withTheme'
 import style from './style.scss'
 
 class BarItem extends Component {
@@ -11,12 +12,17 @@ class BarItem extends Component {
       datasetKeyProvider,
       maxSteps,
       barChartOptions,
-      colors,
+      themeContext: { colors },
     } = this.props
 
     return (
       <div className="col-3">
-        <div className={style.chartSection}>
+        <div
+          className={classnames(style.chartSection, {
+            [style.dark]: colors.themeType === 'dark',
+            [style.light]: colors.themeType === 'light',
+          })}
+        >
           <Bar
             data={chartData}
             key={Math.random()}
@@ -29,7 +35,27 @@ class BarItem extends Component {
                     ...options.scales.yAxes[0],
                     ticks: {
                       ...options.scales.yAxes[0].ticks,
+                      fontColor: colors.textColor,
+                      fontSize: 12,
                       stepSize: maxSteps.engagement,
+                    },
+                    gridLines: {
+                      ...options.scales.xAxes[0].gridLines,
+                    },
+                  },
+                ],
+                xAxes: [
+                  {
+                    barPercentage: 1,
+                    categoryPercentage: 1,
+                    ...options.scales.xAxes[0],
+                    ticks: {
+                      ...options.scales.xAxes[0].ticks,
+                      fontColor: colors.textColor,
+                      fontSize: 12,
+                    },
+                    gridLines: {
+                      ...options.scales.xAxes[0].gridLines,
                     },
                   },
                 ],
@@ -61,4 +87,4 @@ class BarItem extends Component {
   }
 }
 
-export default BarItem
+export default withTheme(BarItem)

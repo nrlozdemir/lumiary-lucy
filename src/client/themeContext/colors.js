@@ -262,6 +262,7 @@ const dark = {
   lineChartPointHoverBorderColor: '#fff',
   lineChartShadowColor: '#333',
   lineChartShadowColorDark: '#000',
+	lineChartXAxisColor: '#fff',
 
   //glossary
   glossaryLinkColor: '#fff',
@@ -282,6 +283,11 @@ const dark = {
   audienceBubbleTooltipSeparator: 'rgba(172, 176, 190, 0.5)',
   audienceBubbleTooltipBackground: '#ffffff',
   audienceBubbleTooltipShadow: 'rgba(0 0 0, 0.5)',
+
+  //video releases bar chart
+  barChartborderColor: '#545b79',
+  barChartZerolineColor: '#fff',
+  barChartZerolineShadowColor: '#21243b',
 }
 
 const light = {
@@ -546,7 +552,8 @@ const light = {
   lineChartPointBorderColor: '#505050',
   lineChartPointHoverBorderColor: '#505050',
   lineChartShadowColor: '#ddd',
-  lineChartShadowColorDark: '#a3a3a3',
+	lineChartShadowColorDark: '#a3a3a3',
+	lineChartXAxisColor: 'rgb(80, 80, 80, 0.5)',
 
   //glossary
   glossaryLinkColor: '#505050',
@@ -567,6 +574,11 @@ const light = {
   audienceBubbleTooltipSeparator: 'rgba(172, 176, 190, 0.5)',
   audienceBubbleTooltipBackground: '#505050',
   audienceBubbleTooltipShadow: '#bebebe',
+
+  //video releases bar chart
+  barChartborderColor: '#c6c9d7',
+  barChartZerolineColor: '#c6c9d7',
+  barChartZerolineShadowColor: '#e8ecf0',
 }
 
 const themes = {

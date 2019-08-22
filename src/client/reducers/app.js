@@ -49,12 +49,11 @@ export const actions = {
 }
 
 export const initialState = {
-  sections: (typeof window === 'object'
-    ? JSON.parse(window.localStorage.getItem('sections'))
-    : null) || {
-    data: {
-      glossary: {},
-    },
+  sections: {
+    data:
+      typeof window === 'object'
+        ? JSON.parse(window.localStorage.getItem('sections'))
+        : null,
     loading: false,
   },
   config: {},

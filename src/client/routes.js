@@ -4,7 +4,6 @@ import { Switch, Route, withRouter, Redirect } from 'react-router-dom'
 import { compose, bindActionCreators } from 'redux'
 import { connect } from 'react-redux'
 import { createStructuredSelector } from 'reselect'
-import { actions as appActions, makeSelectGlobalSection } from 'Reducers/app'
 import {
   actions as authActions,
   makeSelectAuthUser,
@@ -346,9 +345,9 @@ class Routes extends React.Component {
     //   }
     // }
 
-    if (prevProps.sections !== sections) {
-      window.localStorage.setItem('sections', JSON.stringify(sections))
-    }
+    // if (prevProps.sections !== sections) {
+    //   window.localStorage.setItem('sections', JSON.stringify(sections))
+    // }
 
     if (prevProps.user !== user) {
       window.localStorage.setItem('user', JSON.stringify(user))
@@ -379,13 +378,12 @@ class Routes extends React.Component {
 Routes.propTypes = {}
 
 const mapStateToProps = createStructuredSelector({
-  sections: makeSelectGlobalSection(),
   user: makeSelectAuthUser(),
   profile: makeSelectAuthProfile(),
 })
 
 const mapDispatchToProps = (dispatch) =>
-  bindActionCreators({ ...appActions, ...authActions }, dispatch)
+  bindActionCreators({ ...authActions }, dispatch)
 
 const withConnect = connect(
   mapStateToProps,
