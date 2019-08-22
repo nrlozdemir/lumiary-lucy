@@ -4,7 +4,7 @@
   box-sizing: border-box;
   flex-direction: column;
   align-items: center;
-	display: flex;
+  display: flex;
 
   .legend {
     border-radius: 17px;
@@ -15,31 +15,29 @@
     padding: 8px 24px;
     margin: 15px 0 40px;
     text-align: center;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-		.colorBubble{
-			width: 14px;
-			height: 14px;
-			border-radius: 14px;
-			margin-right: 8px;
-		}
+    .colorBubble {
+      width: 14px;
+      height: 14px;
+      border-radius: 14px;
+      margin-right: 8px;
+    }
 
-		&.dark{
-			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+    &.dark {
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
 
-			.colorBubble{
-				border: 1px solid #fff;
-			}
-		}
+      .colorBubble {
+        border: 1px solid #fff;
+      }
+    }
 
-		&.light{
-			box-shadow: 0 1px 2px 0 #bebebe;
-		}
+    &.light {
+      box-shadow: 0 1px 2px 0 #bebebe;
+    }
   }
-
-
 
   .divider {
     width: 1px;
@@ -89,18 +87,24 @@
   line-height: 1.86;
   text-align: center;
   color: #505050;
+  &.average {
+    width: 236px;
+    height: 104px;
+  }
 }
 .centerText {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
-  height: 94%;
+  height: 88%;
   display: flex;
   align-items: center;
   justify-content: center;
   .wrapper {
-    width: 75px;
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
     text-align: center;
     display: flex;
     justify-content: center;
@@ -113,8 +117,16 @@
       font-weight: 800;
       text-align: center;
     }
+    .averageText {
+      &.dark {
+        color: #fff;
+      }
+      &.light {
+        color: #fff;
+      }
+    }
     .littleText {
-      font-family: ClanOT;
+      font-family: $font-family-ClanOT;
       font-size: 12px;
       font-weight: normal;
       font-style: normal;
@@ -133,5 +145,22 @@
     .divider {
       display: none;
     }
+  }
+  margin-bottom: 16px;
+}
+.sortText {
+  height: 23px;
+  font-family: $font-family-ClanOT;
+  font-size: 18px;
+  font-weight: bold;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  &.dark {
+    color: #fff;
+  }
+  &.light {
+    color: #505050;
   }
 }

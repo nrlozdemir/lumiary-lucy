@@ -141,7 +141,7 @@ const VideoReleasesBarChartModule = (props) => {
     tooltips: customChartToolTip(colors, {
       callbacks: {
         title: () => '',
-        label: function (tooltipItem) {
+        label: function(tooltipItem) {
           const value = Math.abs(tooltipItem.yLabel)
           if (tooltipItem.yLabel < 0) {
             return `${metricSuffix(~~value)} ${metric.charAt(0).toUpperCase() +
@@ -210,6 +210,12 @@ const VideoReleasesBarChartModule = (props) => {
                   xAxes: [
                     {
                       ...wrapperBarOptions.scales.xAxes[0],
+                      gridLines: {
+                        ...wrapperBarOptions.scales.xAxes[0].gridLines,
+                        zeroLineColor: colors.barChartZerolineColor,
+                        zeroLineWidth: 0.7,
+                        color: colors.barChartborderColor,
+                      },
                     },
                   ],
                   yAxes: [
@@ -223,7 +229,7 @@ const VideoReleasesBarChartModule = (props) => {
                         min: -maxSteps.engagement,
                         callback: function(value, index, values) {
                           if (value == 0) {
-                            return 0
+                            return 0 + ' '.repeat(2)
                           }
                           const val = Math.abs(value)
                           const val2 = values[index] / videoNormalizer
@@ -238,8 +244,8 @@ const VideoReleasesBarChartModule = (props) => {
                       },
                       gridLines: {
                         ...wrapperBarOptions.scales.yAxes[0].gridLines,
-                        color: colors.chartStadiumBarBorder,
-                        zeroLineColor: colors.chartZeroLineColor,
+                        zeroLineColor: colors.barChartZerolineColor,
+                        color: colors.barChartborderColor,
                       },
                     },
                   ],
@@ -254,7 +260,7 @@ const VideoReleasesBarChartModule = (props) => {
               !!normalizedData.length &&
               normalizedData.map((chartData, idx) => {
                 return (
-                  <BarItem 
+                  <BarItem
                     key={`vrbcmc-${idx}`}
                     chartData={chartData}
                     barChartOptions={barChartOptions}
@@ -262,7 +268,6 @@ const VideoReleasesBarChartModule = (props) => {
                     datasetKeyProvider={datasetKeyProvider}
                     maxSteps={maxSteps}
                     stepSize={stepSize}
-                    colors={colors}
                   />
                 )
               })}

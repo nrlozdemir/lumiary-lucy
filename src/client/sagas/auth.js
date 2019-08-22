@@ -54,6 +54,7 @@ function logoutApi(refresh) {
     if (response.error) {
       throw response.error
     }
+    window.localStorage.setItem('sections', null)
     return response.data
   })
 }
@@ -199,6 +200,7 @@ function* additionalLoggedInFeatures(payload) {
           buildQApiUrl(`/glossary/${brand.uuid}`),
           'GET'
         )
+        window.localStorage.setItem('sections', JSON.stringify(response))
         yield put(actions.getSectionExplanationsSuccess(response))
       } else {
         throw new Error('Glossary not found')

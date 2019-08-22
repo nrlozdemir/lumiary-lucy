@@ -25,7 +25,7 @@ const HeaderModule = ({
       <div className={style.headerTitle}>
         <h1>{title}</h1>
         <i
-          className={classnames('icon icon-Information', style.moduleInfo)}
+          className={classnames('icon icon-Glossary', style.moduleInfo)}
           data-tip="Learn More"
           onClick={() => setModalShow(true)}
           style={{ color: themes.textColor }}
