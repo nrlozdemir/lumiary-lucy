@@ -49,7 +49,7 @@
     }
     &.light {
       &:after {
-        background-color: #c6c9d7;
+        background-color: $light_moduleBorder;
       }
     }
   }
