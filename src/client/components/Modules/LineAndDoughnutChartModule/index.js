@@ -195,7 +195,7 @@ const LineAndDoughnutChartModule = ({
 													padding: 22,
 													callback: function(value, index, values) {
                             if (index === 0) {
-                              return ' '.repeat(21) + '1' + value
+                              return ' '.repeat(21) + value
                             } else if (index === values.length - 1) {
                               return value + ' '.repeat(18)
                             } else {
