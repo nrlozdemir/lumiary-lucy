@@ -3,13 +3,24 @@ import cx from 'classnames'
 import Module from 'Components/Module'
 import style from './style.scss'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
-import { Line} from 'react-chartjs-2'
+import { Line } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
-import { customChartToolTip } from 'Utils'
+import moment from 'moment'
+import { customChartToolTip, ucfirst } from 'Utils'
 import {
   percentageManipulation,
   getCVScoreChartAttributes,
 } from 'Utils/datasets'
+
+const sortCircles = (index) => {
+  const text = {
+    0: '1st',
+    1: '2nd',
+    2: '3rd',
+    3: '4th',
+  }
+  return text[index]
+}
 
 const LineAndDoughnutChartModule = ({
   moduleKey,
@@ -29,7 +40,7 @@ const LineAndDoughnutChartModule = ({
   const container = cx('grid-container', style.container)
   const plugins = [
     {
-			beforeDraw: function(chart, easing) {
+      beforeDraw: function(chart, easing) {
         if (
           chart.config.options.chartArea &&
           chart.config.options.chartArea.backgroundColor
@@ -122,9 +133,20 @@ const LineAndDoughnutChartModule = ({
           }
         })
       }
-		})
+    })
 
-	console.log(lineChartOptions)
+  console.log(
+    moduleKey,
+    title,
+    action,
+    lineChartData,
+    lineChartOptions,
+    filters,
+    isEmpty,
+    platform,
+    properties,
+    average
+  )
 
   return (
     <Module
@@ -149,16 +171,16 @@ const LineAndDoughnutChartModule = ({
                 height={291}
                 plugins={plugins}
                 options={{
-									...lineChartOptions,
-									responsive: false,
-									layout: {
-										padding: {
-											left: 0,
-											right: 0,
-											top: 0,
-											bottom: 0,
-										},
-									},
+                  ...lineChartOptions,
+                  responsive: false,
+                  layout: {
+                    padding: {
+                      left: 0,
+                      right: 0,
+                      top: 0,
+                      bottom: 0,
+                    },
+                  },
                   tooltips: customChartToolTip(colors, {
                     callbacks: {
                       title: () => '',
@@ -191,16 +213,16 @@ const LineAndDoughnutChartModule = ({
                         ...lineChartOptions.scales.xAxes[0],
                         ticks: {
                           ...lineChartOptions.scales.xAxes[0].ticks,
-													fontColor: colors.lineChartXAxisColor,
-													padding: 22,
-													callback: function(value, index, values) {
+                          fontColor: colors.lineChartXAxisColor,
+                          padding: 22,
+                          callback: function(value, index, values) {
                             if (index === 0) {
                               return ' '.repeat(21) + value
                             } else if (index === values.length - 1) {
                               return value + ' '.repeat(18)
                             } else {
-															return value
-														}
+                              return value
+                            }
                           },
                         },
                         gridLines: {
@@ -242,7 +264,6 @@ const LineAndDoughnutChartModule = ({
             </div>
           </div>
         </div>
-
         <div className={container}>
           {sortedProperties &&
             sortedProperties.map((property, idx) => {
@@ -282,7 +303,6 @@ const LineAndDoughnutChartModule = ({
                       background: colors.moduleBorder,
                     }}
                   />
-
                   <DoughnutChart
                     width={140}
                     height={140}
@@ -352,7 +372,6 @@ const LineAndDoughnutChartModule = ({
                       </span>
                     </div>
                   </div>
-
                   <p
                     className={style.doughnutChartText}
                     style={{
@@ -360,11 +379,130 @@ const LineAndDoughnutChartModule = ({
                     }}
                   >
                     <b>{property[0].libraryPercent}%</b> of your library is shot
-                    in <b>{property[0].name}</b>
+                    in <b>{property[0].name}</b> Pacing
+                  </p>
+                  <p
+                    className={cx(style.sortText, {
+                      [style.dark]: colors.themeType === 'dark',
+                      [style.light]: colors.themeType === 'light',
+                    })}
+                  >
+                    {sortCircles(idx)}
                   </p>
                 </div>
               )
             })}
+
+          {!loading && (
+            <div className={percentageCol} key={3}>
+              <div
+                className={cx(style.legend, {
+                  [style.dark]: colors.themeType === 'dark',
+                  [style.light]: colors.themeType === 'light',
+                })}
+                style={{
+                  background: colors.labelBackground,
+                  color: colors.labelColor,
+                  boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
+                }}
+              >
+                <div
+                  className={style.colorBubble}
+                  style={{ backgroundColor: '#acb0be' }}
+                />
+                <div className={style.legendText}>
+                  {!!platform && ucfirst(platform)} Average
+                </div>
+              </div>
+              <div
+                className={style.divider}
+                style={{
+                  background: colors.moduleBorder,
+                }}
+              />
+              <DoughnutChart
+                width={140}
+                height={140}
+                displayDataLabels={false}
+                cutoutPercentage={80}
+                datasetsBorderWidth={0}
+                datasetOptions={{
+                  shadowOffsetX: 0.5,
+                  shadowOffsetY: 0.5,
+                  shadowBlur: 4,
+                }}
+                removeTooltip
+                average={null}
+                cvScoreData={{
+                  platform: platform,
+                }}
+                layoutPadding={7}
+                data={{
+                  datasets: [
+                    {
+                      borderColor: '#f3f6f9',
+                      data: [average, 100 - average],
+                      backgroundColor:
+                        colors.themeType === 'light'
+                          ? ['#fff', '#acb0be']
+                          : ['#acb0be', '#545b79'],
+                      hoverBackgroundColor:
+                        colors.themeType === 'light'
+                          ? ['#fff', '#acb0be']
+                          : ['#acb0be', '#545b79'],
+                    },
+                  ],
+                  labels: ['a', 'b'],
+                }}
+              />
+              <div
+                className={style.centerText}
+                style={{
+                  color: colors.labelColor,
+                }}
+              >
+                <div
+                  className={style.wrapper}
+                  style={{
+                    backgroundColor: colors.percentDifferenceColor,
+                  }}
+                >
+                  <span
+                    className={cx(style.bigText, style.averageText, {
+                      [style.dark]: colors.themeType === 'dark',
+                      [style.light]: colors.themeType === 'light',
+                    })}
+                  >
+                    {average}
+                  </span>
+                  <span
+                    className={cx(style.littleText, style.averageText, {
+                      [style.dark]: colors.themeType === 'dark',
+                      [style.light]: colors.themeType === 'light',
+                    })}
+                  >
+                    Score (
+                    {ucfirst(
+                      moment()
+                        .format('dddd')
+                        .slice(0, 3)
+                    )}
+                    )
+                  </span>
+                </div>
+              </div>
+              <p
+                className={cx(style.doughnutChartText, style.average)}
+                style={{
+                  color: colors.labelColor,
+                }}
+              >
+                Your avg views per {!!platform && ucfirst(platform)} video over
+                the past week is <b>11.2k</b> which is higher than{' '}
+                <b>{!!average && average}%</b> of the Facebook market this week
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </Module>
