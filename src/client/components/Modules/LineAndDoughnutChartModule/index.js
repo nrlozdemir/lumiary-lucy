@@ -40,7 +40,7 @@ const LineAndDoughnutChartModule = ({
   const container = cx('grid-container', style.container)
   const plugins = [
     {
-			beforeDraw: function(chart, easing) {
+      beforeDraw: function(chart, easing) {
         if (
           chart.config.options.chartArea &&
           chart.config.options.chartArea.backgroundColor
@@ -133,22 +133,22 @@ const LineAndDoughnutChartModule = ({
           }
         })
       }
-		})
+    })
 
-	// console.log(lineChartOptions)
+  // console.log(lineChartOptions)
 
- //  console.log(
- //    moduleKey,
- //    title,
- //    action,
- //    lineChartData,
- //    lineChartOptions,
- //    filters,
- //    isEmpty,
- //    platform,
- //    properties,
- //    average
- //  )
+  //  console.log(
+  //    moduleKey,
+  //    title,
+  //    action,
+  //    lineChartData,
+  //    lineChartOptions,
+  //    filters,
+  //    isEmpty,
+  //    platform,
+  //    properties,
+  //    average
+  //  )
 
   return (
     <Module
@@ -173,16 +173,16 @@ const LineAndDoughnutChartModule = ({
                 height={291}
                 plugins={plugins}
                 options={{
-									...lineChartOptions,
-									responsive: false,
-									layout: {
-										padding: {
-											left: 0,
-											right: 0,
-											top: 0,
-											bottom: 0,
-										},
-									},
+                  ...lineChartOptions,
+                  responsive: false,
+                  layout: {
+                    padding: {
+                      left: 0,
+                      right: 0,
+                      top: 0,
+                      bottom: 0,
+                    },
+                  },
                   tooltips: customChartToolTip(colors, {
                     callbacks: {
                       title: () => '',
@@ -215,16 +215,16 @@ const LineAndDoughnutChartModule = ({
                         ...lineChartOptions.scales.xAxes[0],
                         ticks: {
                           ...lineChartOptions.scales.xAxes[0].ticks,
-													fontColor: colors.lineChartXAxisColor,
-													padding: 22,
-													callback: function(value, index, values) {
+                          fontColor: colors.lineChartXAxisColor,
+                          padding: 22,
+                          callback: function(value, index, values) {
                             if (index === 0) {
                               return ' '.repeat(21) + value
                             } else if (index === values.length - 1) {
                               return value + ' '.repeat(18)
                             } else {
-															return value
-														}
+                              return value
+                            }
                           },
                         },
                         gridLines: {
@@ -493,16 +493,18 @@ const LineAndDoughnutChartModule = ({
                   </span>
                 </div>
               </div>
-              <p
-                className={cx(style.doughnutChartText, style.average)}
-                style={{
-                  color: colors.labelColor,
-                }}
-              >
-                Your avg views per {!!platform && ucfirst(platform)} video over
-                the past week is <b>11.2k</b> which is higher than{' '}
-                <b>{!!average && average}%</b> of the Facebook market this week
-              </p>
+                <p
+                  className={cx(style.doughnutChartText, style.average)}
+                  style={{
+                    color: colors.labelColor,
+                  }}
+                >
+                  Your avg views per {!!platform && ucfirst(platform)} video
+                  over the past week is <b>11.2k</b> which is higher than{' '}
+                  <b>{!!average && average}%</b> of the Facebook market this
+                  week
+                </p>
+              )}
             </div>
           )}
         </div>
