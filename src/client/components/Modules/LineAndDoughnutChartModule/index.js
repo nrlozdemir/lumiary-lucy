@@ -29,7 +29,6 @@ const LineAndDoughnutChartModule = ({
   const container = cx('grid-container', style.container)
   const plugins = [
     {
-			/*
 			beforeDraw: function(chart, easing) {
         if (
           chart.config.options.chartArea &&
@@ -49,7 +48,6 @@ const LineAndDoughnutChartModule = ({
           ctx.restore()
         }
       },
-			*/
       beforeDatasetsDraw: function(chart, options) {
         chart.ctx.shadowColor = colors.lineChartShadowColorDark
         chart.ctx.shadowBlur = 2
@@ -147,7 +145,7 @@ const LineAndDoughnutChartModule = ({
               <Line
                 key={Math.random()}
                 data={manipulateData}
-                width={1180}
+                width={1230}
                 height={291}
                 plugins={plugins}
                 options={{
