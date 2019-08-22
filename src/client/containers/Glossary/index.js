@@ -11,6 +11,10 @@ import MainContentArea from './sections/mainContentArea'
 import { makeSelectGlobalSection } from 'Reducers/app'
 import RouterLoading from 'Components/RouterLoading'
 
+const EmptyState = () => (
+  <div className={style.emptyState}>No Glossary Found</div>
+)
+
 class Glossary extends Component {
   render() {
     const {
@@ -19,17 +23,8 @@ class Glossary extends Component {
       },
       location: { pathname },
       history,
-      content: {
-        loading,
-        data: {
-          glossary: { terms: letters },
-        },
-      },
+      content: { loading, data = {} },
     } = this.props
-
-    if (!letters) {
-      return null
-    }
 
     if (loading) {
       return (
@@ -37,6 +32,16 @@ class Glossary extends Component {
           <RouterLoading />
         </div>
       )
+    }
+
+    if (!data) {
+      return <EmptyState />
+    }
+
+    const { terms: letters } = data
+
+    if (!letters) {
+      return <EmptyState />
     }
 
     let menuName

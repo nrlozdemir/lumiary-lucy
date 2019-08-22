@@ -87,7 +87,7 @@ class Audience extends React.PureComponent {
               {this.renderAudienceToggle(colors)}
             </div>
             {/*<ContentVitalityScore type={type} />*/}
-            {/*<Performance type={type} />*/}
+            <Performance type={type} />
             <AgeSlider type={type} />
             <GenderSection type={type} />
             <ChangeOverTime type={type} />
