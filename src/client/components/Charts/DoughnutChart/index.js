@@ -86,6 +86,7 @@ class DoughnutChart extends React.Component {
       slicePiecesWidth = false,
       datasetOptions = {},
       removeTooltip = false,
+      showAllData = false
     } = this.props
 
     const themes = this.props.themeContext.colors
@@ -151,13 +152,13 @@ class DoughnutChart extends React.Component {
         ],
       }
     }
-
+    
     // for opacity backgrounds
     let chartValues =
       !!newData && !!newData.datasets && !!newData.datasets[0]
         ? newData.datasets[0].data.map((value) => {
             const val = parseFloat(value)
-            if (!average && val <= 5) return null
+            if (!average && val <= 5 && !showAllData) return null
             return val
           })
         : []
