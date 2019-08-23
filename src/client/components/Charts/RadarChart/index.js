@@ -8,9 +8,7 @@ const RadarChart = (props) => {
   const plugins = [
     {
       beforeDraw: function(chart, easing) {
-        // Run function when before draw chart
         let ctx = chart.chart.ctx
-        let chartArea = chart.chartArea
         chart.config.data.datasets.forEach(function(dataset, i) {
           const meta = chart.controller.getDatasetMeta(i)
           meta.data.forEach(function(bar, index) {
@@ -59,7 +57,6 @@ const RadarChart = (props) => {
       beforeDatasetsDraw: function(chart) {
         // Run function when before apply the datasets draw chart
         let ctx = chart.chart.ctx
-        let chartArea = chart.chartArea
         chart.config.data.datasets.forEach(function(dataset, i) {
           const meta = chart.controller.getDatasetMeta(i)
           meta.data.forEach(function(bar, index) {
@@ -90,24 +87,14 @@ const RadarChart = (props) => {
         //   chart.scale.xCenter - 3,
         //   chart.scale.yCenter + 3
         // )
+
         // top ticks
         chart.scale.ticksAsNumbers.map((tick, i) => {
           if (i > 0) {
             chart.chart.ctx.fillText(
               `${tick.toFixed(0)}%`,
-              chart.scale.xCenter - (`${tick.toFixed(0)}%`.length - 8) / 2,
-              chart.scale.yCenter - margin * i - i * (i > 2 ? 7 : 8)
-            )
-          }
-        })
-
-        // bottom ticks
-        chart.scale.ticksAsNumbers.map((tick, i) => {
-          if (i > 0) {
-            chart.chart.ctx.fillText(
-              `${tick.toFixed(0)}%`,
-              chart.scale.xCenter - (`${tick.toFixed(0)}%`.length - 8) / 2,
-              chart.scale.yCenter + margin * i + i * (i > 2 ? 4 : 2)
+              chart.scale.xCenter - 7,
+              chart.scale.yCenter - margin * i + 4
             )
           }
         })
@@ -117,8 +104,19 @@ const RadarChart = (props) => {
           if (i > 0) {
             chart.chart.ctx.fillText(
               `${tick.toFixed(0)}%`,
-              chart.scale.xCenter + margin * i + i * 6,
-              chart.scale.yCenter - 4
+              chart.scale.xCenter + margin * i - 10,
+              chart.scale.yCenter + 4
+            )
+          }
+        })
+
+        // bottom ticks
+        chart.scale.ticksAsNumbers.map((tick, i) => {
+          if (i > 0) {
+            chart.chart.ctx.fillText(
+              `${tick.toFixed(0)}%`,
+              chart.scale.xCenter - 7,
+              chart.scale.yCenter + margin * i + 4
             )
           }
         })
@@ -128,8 +126,8 @@ const RadarChart = (props) => {
           if (i > 0) {
             chart.chart.ctx.fillText(
               `${tick.toFixed(0)}%`,
-              chart.scale.xCenter - margin * i - i * 6,
-              chart.scale.yCenter - 4
+              chart.scale.xCenter - margin * i - 10,
+              chart.scale.yCenter + 4
             )
           }
         })
@@ -153,9 +151,7 @@ const RadarChart = (props) => {
     parsedData.datasets[0].pointBorderWidth = 4
 
     const max = Math.max(...parsedData.datasets[0].data)
-
     stepSize = max / 4
-
     maxTicksStepLimit = max
   }
 
@@ -190,7 +186,6 @@ const RadarChart = (props) => {
         accumulator.dataKeys.push(key)
         accumulator.dataValues.push(count || 0)
       }
-
       return accumulator
     },
     {
@@ -214,17 +209,15 @@ const RadarChart = (props) => {
           }),
         }
 
-  //console.log(theData, maxTicksStepLimit)
-
   return (
     <Radar
-			key={`radar-${Math.floor(Math.random() * 1000)}`}
-			width={width}
-			height={height}
+      key={`radar-${Math.floor(Math.random() * 1000)}`}
+      width={width}
+      height={height}
       data={theData}
       plugins={plugins}
       options={{
-        responsive: true,
+        responsive: false,
         maintainAspectRatio: false,
         legend: {
           display: false,
@@ -261,7 +254,6 @@ const RadarChart = (props) => {
         plugins: {
           datalabels: false,
         },
-
         scale: {
           gridLines: {
             display: true,

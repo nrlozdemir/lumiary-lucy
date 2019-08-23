@@ -47,10 +47,10 @@
   display: flex;
   &:last-child {
     justify-content: end;
-	}
-	margin: 0px;
-	padding: 0px;
-	overflow: hidden;
+  }
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
 }
 
 .label {
@@ -229,15 +229,15 @@
   }
 }
 
-.radarChartContainer{
-	.groupChart{
-		.chartPos{
-			&:first-child{
-				margin-left: -30px;
-			}
-			&:last-child{
-				margin-right:-30px;
-			}
-		}
-	}
+.radarChartContainer {
+  .groupChart {
+    .chartPos {
+      &:first-child {
+        margin-left: -18px;
+      }
+      &:last-child {
+        margin-right: -18px;
+      }
+    }
+  }
 }
