@@ -23,6 +23,7 @@ class DoughnutCard extends React.Component {
       chartData,
       videoId,
       colors,
+      showAllData = false
     } = this.props
 
     const newChartData = doughnutChartDataWithOpacity(chartData, colors)
@@ -56,6 +57,7 @@ class DoughnutCard extends React.Component {
               </div>
               <div className={style.doughnutChartContainer}>
                 <DoughnutChart
+                  showAllData={showAllData}
                   width={132}
                   height={132}
                   layoutPadding={8}

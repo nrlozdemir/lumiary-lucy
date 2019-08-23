@@ -88,6 +88,7 @@ class LibraryDetailDoughnutChart extends React.Component {
                         <React.Fragment key={i}>
                           {!sectionToShow && (
                             <DoughnutCard
+                              showAllData
                               chartData={doughnutChartValues}
                               maxPercentage={percentage}
                               {...cardProps}
