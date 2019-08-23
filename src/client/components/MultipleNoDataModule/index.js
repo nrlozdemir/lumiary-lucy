@@ -2,15 +2,21 @@ import React from 'react'
 import cx from 'classnames'
 import style from './style.scss'
 
-const MultipleNoDataModule = ({ children }) => {
+const MultipleNoDataModule = ({ children, disabledNoContainerBody }) => {
   return (
-    <div className={style.noDataContainer}>
+    <div
+      className={cx(style.noDataContainer, {
+        [style.customize]: !!disabledNoContainerBody,
+      })}
+    >
       {!!children &&
         children.map((child, index) => {
           const childStyle = (!!child.props.style && child.props.style) || {}
           return (
             <div
-              className={style.noDataContainerBody}
+              className={cx(style.noDataContainerBody, {
+                [style.customize]: !!disabledNoContainerBody,
+              })}
               style={childStyle}
               key={`nodata_${index}`}
             >
