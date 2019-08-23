@@ -246,7 +246,15 @@ export class Main extends React.PureComponent {
                           videoUrl,
                           poster,
                         } = el.video
-
+                        let sortedElInfos = []
+                        el.infos.forEach(info => {
+                          if(!info.value) {
+                            sortedElInfos.push(info)
+                          }else {
+                            sortedElInfos.unshift(info)
+                          }
+                        });
+                        
                         return (
                           <div key={i} className={style.cardBlock}>
                             {/* HEADER */}
@@ -316,7 +324,7 @@ export class Main extends React.PureComponent {
                                     i === 0 && dummyData !== true,
                                 })}
                               >
-                                {el.infos.map((item, index) => {
+                                {sortedElInfos.map((item, index) => {
                                   const hasDifference =
                                     ['duration', 'pacing'].indexOf(
                                       item.title.toLowerCase()
