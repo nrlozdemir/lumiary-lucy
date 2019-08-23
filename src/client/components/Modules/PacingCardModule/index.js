@@ -53,7 +53,7 @@ const PacingCardModule = ({
       <div className={style.pacingCardInner}>
         <MultipleNoDataModule>
           <HorizontalStackedBarChart
-            width={484}
+            width={497}
             height={360}
             barData={horizontalStackedBarData}
             stadiumValues={stadiumValues}
@@ -63,10 +63,16 @@ const PacingCardModule = ({
             datasetsIsEmpty={
               !loading && isDataSetEmpty(horizontalStackedBarData)
             }
+            style={{
+              marginLeft: -5,
+            }}
           />
           <StadiumChart
             data={stadiumValues}
             datasetsIsEmpty={!loading && isDataSetEmpty(stadiumData)}
+            style={{
+              marginRight: -30,
+            }}
           />
         </MultipleNoDataModule>
       </div>
