@@ -2,7 +2,10 @@ import React from 'react'
 import cx from 'classnames'
 import style from './style.scss'
 
-const MultipleNoDataModule = ({ children, disabledNoContainerBody }) => {
+const MultipleNoDataModule = ({
+  children,
+  disabledNoContainerBody = false,
+}) => {
   return (
     <div
       className={cx(style.noDataContainer, {
