@@ -25,7 +25,7 @@ export const barChartOptions = {
           fontSize: 12,
           padding: 15,
         },
-        barThickness: 30,
+        barThickness: 40,
         stacked: true,
       },
     ],

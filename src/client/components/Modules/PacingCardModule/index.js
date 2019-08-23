@@ -53,7 +53,7 @@ const PacingCardModule = ({
       <div className={style.pacingCardInner}>
         <MultipleNoDataModule>
           <HorizontalStackedBarChart
-            width={500}
+            width={484}
             height={360}
             barData={horizontalStackedBarData}
             stadiumValues={stadiumValues}
