@@ -20,8 +20,8 @@ const RadarChartModule = ({
   rightTitle,
   loading = false,
   infoText,
-  width = 460,
-  height = 460,
+  width = 540,
+  height = 540,
   actionOnProp,
 }) => {
   const isEmpty =

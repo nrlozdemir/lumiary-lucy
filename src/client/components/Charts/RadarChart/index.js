@@ -136,7 +136,7 @@ const RadarChart = (props) => {
       },
     },
   ]
-  const { data, key } = props
+  const { data, key, width, height } = props
   const themes = props.themeContext.colors
   let parsedData = data || {}
   let maxTicksStepLimit = 100000
@@ -218,7 +218,9 @@ const RadarChart = (props) => {
 
   return (
     <Radar
-      key={`radar-${Math.floor(Math.random() * 1000)}`}
+			key={`radar-${Math.floor(Math.random() * 1000)}`}
+			width={width}
+			height={height}
       data={theData}
       plugins={plugins}
       options={{
