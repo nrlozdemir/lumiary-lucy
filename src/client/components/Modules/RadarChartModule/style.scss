@@ -205,3 +205,23 @@
   font-size: 24px;
   font-weight: bold;
 }
+
+.progressInner {
+  &:first-child {
+    .progressBarArea {
+      .progressText {
+        .leftTitle {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row-reverse;
+
+          .dot {
+            margin-left: 10px;
+            margin-right: 0px;
+          }
+        }
+      }
+    }
+  }
+}
