@@ -131,6 +131,15 @@ const HorizontalStackedBarChart = (props) => {
               ticks: {
                 ...options.scales.xAxes[0].ticks,
                 fontColor: colors.textColor,
+                callback: (value, index, values) => {
+                  if (index === 0) {
+                    return ' '.repeat(3) + value + '%'
+                  }
+                  if (index === values.length - 1) {
+                    return value + '%' + ' '.repeat(7)
+                  }
+                  return value + '%'
+                },
               },
               gridLines: {
                 ...options.scales.xAxes[0].gridLines,
