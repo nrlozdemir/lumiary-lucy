@@ -13,7 +13,11 @@ const CreatedFilters = ({ report, brands }) => {
     },
     {
       name: 'Platform',
-      filteredName: report.social,
+      filteredName: !!report.social
+        ? report.social === 'all'
+          ? report.social + ' Platforms'
+          : report.social
+        : '',
     },
     {
       name: 'Engagement',
@@ -21,7 +25,7 @@ const CreatedFilters = ({ report, brands }) => {
     },
     {
       name: 'Date Range',
-      filteredName: report.date,
+      filteredName: report.date === '3months' ? '3 Months' : report.date,
     },
   ]
 
@@ -48,13 +52,7 @@ const CreatedFilters = ({ report, brands }) => {
                       backgroundColor: colors.reportCardContentBg,
                     }}
                   >
-                    {ucfirst(
-                      item && !!item.filteredName
-                        ? item.filteredName === 'all'
-                          ? item.filteredName + ' Platforms'
-                          : item.filteredName
-                        : ''
-                    )}
+                    {ucfirst(!!item.filteredName && item.filteredName)}
                   </span>
                 </div>
               )
