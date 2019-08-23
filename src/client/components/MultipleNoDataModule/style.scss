@@ -1,11 +1,17 @@
 .noDataContainer {
   display: flex;
   align-items: center;
-  justify-content: space-around;
-  width: 100%;
+	width: 100%;
+	justify-content: space-around;
+	&.customize{
+		justify-content: space-between;
+	}
   .noDataContainerBody {
     position: relative;
     width: 100%;
+		&.customize{
+			width: inherit;
+		}
     .noDataText {
       display: flex;
       justify-content: center;
