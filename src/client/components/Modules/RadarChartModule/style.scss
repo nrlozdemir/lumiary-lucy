@@ -38,7 +38,7 @@
   align-items: center;
   justify-content: space-between;
   // padding: 0 20px;
-  max-width: 1000px;
+  max-width: 1052px;
   margin: 30px auto;
 }
 
@@ -48,6 +48,9 @@
   &:last-child {
     justify-content: end;
   }
+  margin: 0px;
+  padding: 0px;
+  overflow: hidden;
 }
 
 .label {
@@ -204,4 +207,37 @@
   align-items: center;
   font-size: 24px;
   font-weight: bold;
+}
+
+.progressInner {
+  &:first-child {
+    .progressBarArea {
+      .progressText {
+        .leftTitle {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-direction: row-reverse;
+
+          .dot {
+            margin-left: 10px;
+            margin-right: 0px;
+          }
+        }
+      }
+    }
+  }
+}
+
+.radarChartContainer {
+  .groupChart {
+    .chartPos {
+      &:first-child {
+        margin-left: -18px;
+      }
+      &:last-child {
+        margin-right: -18px;
+      }
+    }
+  }
 }

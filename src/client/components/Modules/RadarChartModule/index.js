@@ -20,8 +20,8 @@ const RadarChartModule = ({
   rightTitle,
   loading = false,
   infoText,
-  width = 460,
-  height = 460,
+  width = 540,
+  height = 540,
   actionOnProp,
 }) => {
   const isEmpty =
@@ -85,7 +85,11 @@ const RadarChartModule = ({
                 <div
                   style={{ opacity: leftOpacity, width: width, height: height }}
                 >
-                  <RadarChart data={checkData[0].data} />
+                  <RadarChart
+                    data={checkData[0].data}
+                    width={width}
+                    height={height}
+                  />
                 </div>
               </div>
               <div className={style.chartPos}>
@@ -99,7 +103,11 @@ const RadarChartModule = ({
                     height: height,
                   }}
                 >
-                  <RadarChart data={checkData[1].data} />
+                  <RadarChart
+                    data={checkData[1].data}
+                    width={width}
+                    height={height}
+                  />
                 </div>
               </div>
             </div>

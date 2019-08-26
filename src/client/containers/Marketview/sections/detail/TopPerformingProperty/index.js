@@ -17,10 +17,7 @@ import {
   selectFiltersToType,
   customChartToolTip,
 } from 'Utils'
-import {
-  getTopNValues,
-  percentageManipulation,
-} from 'Utils/datasets'
+import { getTopNValues, percentageManipulation } from 'Utils/datasets'
 import { isArray, isNumber, isEqual } from 'lodash'
 
 import style from '../../../style.scss'
@@ -48,17 +45,16 @@ class TopPerformingProperty extends React.Component {
       getTopPerformingPropertiesRequest,
       getTopPerformingPropertiesByCompetitorsRequest,
     } = this.props
-
+    const { property = '' } = data
+    this.setState({ topProperty: property })
     if (container === 'platform') {
       getTopPerformingPropertiesRequest(data)
     } else if (container === 'competitor') {
-      const { property = '' } = data
-      this.setState({ topProperty: property })
       getTopPerformingPropertiesByCompetitorsRequest(data)
     }
   }
 
-  /* 
+  /*
   This logic assumes that the property is set by the TopSimiliarProperties Module, which currently doesnt do it anymore, but when it does do it, then make it do it again
   */
 
@@ -101,7 +97,7 @@ class TopPerformingProperty extends React.Component {
 
   normalizeData(chartData = {}) {
     if (chartData.datasets && chartData.datasets.length) {
-      const {datasets, labels} = chartData
+      const { datasets, labels } = chartData
       //find the highest value for each group
       let highestValuesArr = []
       labels.forEach((item, index) => {
@@ -246,9 +242,11 @@ class TopPerformingProperty extends React.Component {
         title={
           title
             ? title
-            : `Top Performing Property, ${
+            : `Top Performing ${
                 topProperty ? `${splitCamelCaseToString(topProperty)},` : ''
-              } Across All Competitors`
+              } Across All ${
+                container === 'competitor' ? 'Competitors' : 'Platforms'
+              }`
         }
         containerClass={
           container === 'competitor' &&

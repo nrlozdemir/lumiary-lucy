@@ -91,7 +91,7 @@ export class Platform extends React.Component {
         />
         <TopPerformingProperty
           moduleKey="MarketView/Platform/TopPerformingProperty"
-          title="Top Performing Property Across All Platforms"
+          // title="Top Performing Property Across All Platforms"
           filters={[
             {
               type: 'metric',

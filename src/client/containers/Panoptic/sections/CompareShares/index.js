@@ -28,6 +28,11 @@ class CompareShares extends React.Component {
         loading={loading}
         filters={[
           {
+            type: 'metric',
+            selectKey: 'PCS-engagement',
+            placeHolder: 'Engagement',
+          },
+          {
             type: 'dateRange',
             selectKey: 'PCS-wds',
             placeHolder: 'Date',
