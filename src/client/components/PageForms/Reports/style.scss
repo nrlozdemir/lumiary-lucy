@@ -8,6 +8,10 @@
     width: 100%;
   }
 
+  [class*='react-select__control'] {
+    width: 100%;
+  }
+
   .label {
     height: 15px;
     font-family: $font-family-ClanOT;
