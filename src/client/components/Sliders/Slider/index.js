@@ -9,150 +9,106 @@ import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import style from './style.scss'
 import { socialIconSelector } from 'Utils'
-import Swiper from 'react-id-swiper'
-import SwiperJS from 'swiper/dist/js/swiper.js'
+import Slider from 'react-slick'
 import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
 import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
+
+function RenderNextButton({ onClick }) {
+  return (
+    <RightArrowCircleFlat
+      className={style.nextButton}
+      size={32}
+      onClick={onClick}
+    />
+  )
+}
+
+function RenderPrevButton({ onClick }) {
+  return (
+    <LeftArrowCircleFlat
+      className={style.prevButton}
+      size={32}
+      onClick={onClick}
+    />
+  )
+}
+
+class SliderItem extends React.Component {
+  handleMouseOverPlay = () => {
+    console.log('this.props.isActive', this.props.isActive)
+    this.props.isActive && this.videoRef.play()
+  }
+
+  handleMouseOutPlay = () => {
+    if (this.props.isActive) {
+      this.videoRef.pause()
+      this.videoRef.currentTime = 0
+    }
+  }
+
+  render() {
+    const { item, index, isActive, title } = this.props
+    return (
+      <div
+        style={{ width: 634 }}
+        className="item"
+        onMouseEnter={() => this.handleMouseOverPlay()}
+        onMouseLeave={() => this.handleMouseOutPlay()}
+      >
+        <AssetLayer
+          isActive={isActive}
+          containerNoBorder
+          leftSocialIcon={item.socialMedia}
+          centerText={item.secondTitle}
+          title={title}
+          width={634}
+          height="100%"
+          rightValue={item.cvScore}
+        >
+          <video
+            className={style.fullVideo}
+            src={item.image}
+            ref={(videoRef) => (this.videoRef = videoRef)}
+            loop
+            muted
+            controls={false}
+          />
+          <div className={style.percentageWrapper}>
+            <PercentageBarGraph
+              percentage={item.cvScore}
+              width={80}
+              height={20}
+              barWidth={1.5}
+              barSpaceWidth={1.5}
+              disableLabels
+              color="green"
+            />
+          </div>
+        </AssetLayer>
+      </div>
+    )
+  }
+}
 
 class MarketViewSlider extends React.Component {
   constructor(props) {
     super(props)
-    this.videoRef = []
-
     this.state = {
       currentIdx: null,
     }
   }
 
-  renderNextButton = () => {
-    return (
-      <RightArrowCircleFlat
-        className={classnames(
-          style.nextButton,
-          this.refSlider && this.refSlider.isEnd ? style.disabled : ''
-        )}
-        size={32}
-        onClick={() => this.refSlider && this.refSlider.slideNext()}
-      />
-    )
-  }
-
-  handleMouseOverPlay = (i) => {
-    const activeIndex = this.refSlider.activeIndex
-    activeIndex === i && this.videoRef[i].play()
-  }
-
-  handleMouseOutPlay = (i) => {
-    const activeIndex = this.refSlider.activeIndex
-    if (activeIndex === i) {
-      this.videoRef[i].pause()
-      this.videoRef[i].currentTime = 0
-    }
-  }
-
-  renderPrevButton = () => {
-    return (
-      <LeftArrowCircleFlat
-        className={classnames(
-          style.prevButton,
-          this.refSlider && this.refSlider.isBeginning ? style.disabled : ''
-        )}
-        size={32}
-        onClick={() => this.refSlider && this.refSlider.slidePrev()}
-      />
-    )
-  }
-
-  settings = {
-    modules: [SwiperJS.Pagination],
-    shouldSwiperUpdate: true,
-    navigation: {
-      nextEl: '.swiper-button-next',
-      prevEl: '.swiper-button-prev',
-    },
-    pagination: {
-      el: '.swiper-pagination',
-      type: 'bullet',
-      clickable: true,
-    },
-    slidesPerView: 'auto',
-    spaceBetween: 40,
-    centeredSlides: true,
-    speed: 300,
-    autoplay: false,
-    keyboard: false,
-    touchRatio: 0, // disabled draggable
-    slideToClickedSlide: true,
-    renderPagination: (props) => {
-      const { items } = this.props
-
-      return (
-        <div className={classnames(style.pagination, 'pagination')}>
-          {!!items &&
-            !!items.length &&
-            items.map((item, i) => {
-              const socialIcon = classnames(
-                socialIconSelector(item.socialMedia),
-                style.icon
-              )
-
-              return (
-                <div
-                  key={i}
-                  onClick={() => this.refSlider && this.refSlider.slideTo(i)}
-                  className={i === 0 ? 'active' : ''}
-                >
-                  <div className={style.videoContainer}>
-                    <video src={item.image} />
-                  </div>
-                  <span>
-                    <i className={socialIcon} />
-                    {item.socialMedia}
-                  </span>
-                </div>
-              )
-            })}
-        </div>
-      )
-    },
-    on: {
-      slideChange: () => {
-        const { changeVideo, items } = this.props
-
-        const bullets =
-          this.refSlider &&
-          this.refSlider.$el[0].querySelector('.pagination').children
-
-        for (const item of [...bullets]) {
-          item.classList.remove('active')
-        }
-
-        if (bullets && this.refSlider && !isNaN(this.refSlider.activeIndex)) {
-          bullets[this.refSlider.activeIndex].classList.add('active')
-        }
-
-        this.setState({
-          currentIdx: this.refSlider.activeIndex,
-        })
-
-        // Force rendering needed to update disabled state of prev and next buttons
-        this.forceUpdate()
-
-        this.refSlider && changeVideo(items[this.refSlider.activeIndex])
-      },
-    },
-    renderNextButton: this.renderNextButton,
-    renderPrevButton: this.renderPrevButton,
-  }
-
   componentDidMount() {
     const findSlide =
       this.props.items && Math.floor(parseInt(this.props.items.length) / 2)
-    this.props.items && this.refSlider && this.refSlider.slideTo(findSlide, 1)
+    this.setState({
+      currentIdx: findSlide,
+    })
+    this.props.items && this.refSlider && this.refSlider.slickGoTo(findSlide, 1)
   }
 
   render() {
-    const { currentIdx } = this.state
+    const { currentIdx, createRef } = this.state
     const { items, profile } = this.props
 
     const competitors =
@@ -163,13 +119,55 @@ class MarketViewSlider extends React.Component {
           ]
         : []
 
+    const settings = {
+      customPaging: function(i) {
+        return (
+          <a>
+            <div className={i === 0 ? 'active' : ''}>
+              <div className={style.videoContainer}>
+                <video src={items[i].image} />
+              </div>
+              <span>
+                <i
+                  className={classnames(
+                    socialIconSelector(items[i].socialMedia),
+                    style.icon
+                  )}
+                />
+                {items[i].socialMedia}
+              </span>
+            </div>
+          </a>
+        )
+      },
+      dots: true,
+      dotsClass: style.pagination,
+      className: 'center',
+      centerMode: true,
+      infinite: true,
+      slidesToScroll: 1,
+      slidesToShow: 1,
+      variableWidth: true,
+      draggable: false,
+      speed: 200,
+      nextArrow: <RenderNextButton />,
+      prevArrow: <RenderPrevButton />,
+      // beforeChange: (oldIndex, newIndex) =>
+      //   this.setState({ currentIdx: newIndex }),
+      afterChange: (current) => this.setState({ currentIdx: current }),
+    }
+
     return (
       <div className={style.section}>
-        <div className="marketViewSlider">
-          <Swiper
-            ref={(node) => node && (this.refSlider = node.swiper)}
-            {...this.settings}
-          >
+        <style>
+          {`
+            .${style.pagination} > li.slick-active {
+              opacity: 1 !important;
+            }
+          `}
+        </style>
+        <div className="marketViewSlickSlider">
+          <Slider ref={(node) => node && (this.refSlider = node)} {...settings}>
             {items &&
               items.map((item, i) => {
                 const parsedUrl = item.image.split('/')
@@ -186,48 +184,16 @@ class MarketViewSlider extends React.Component {
                   : `${item.title.substring(0, 20)}...`
 
                 return (
-                  <div
-                    className="item"
+                  <SliderItem
+                    item={item}
                     key={i}
-                    onMouseEnter={() => this.handleMouseOverPlay(i)}
-                    onMouseLeave={() => this.handleMouseOutPlay(i)}
-                  >
-                    <AssetLayer
-                      isActive={i === currentIdx}
-                      containerNoBorder
-                      leftSocialIcon={item.socialMedia}
-                      centerText={item.secondTitle}
-                      title={title}
-                      width={634}
-                      height="100%"
-                      rightValue={item.cvScore}
-                    >
-                      <video
-                        className={style.fullVideo}
-                        src={item.image}
-                        ref={(videoRef) => (this.videoRef[i] = videoRef)}
-                        loop
-                        muted
-                        controls={false}
-                      />
-                      <div className={style.percentageWrapper}>
-                        <PercentageBarGraph
-                          key={Math.random()}
-                          percentage={item.cvScore}
-                          width={80}
-                          height={20}
-                          barWidth={1.5}
-                          barSpaceWidth={1.5}
-                          disableLabels
-                          color="green"
-                        />
-                      </div>
-                    </AssetLayer>
-                  </div>
+                    index={i}
+                    isActive={currentIdx === i}
+                    title={title}
+                  />
                 )
               })}
-          </Swiper>
-          <div className="swiper-pagination" />
+          </Slider>
         </div>
       </div>
     )
