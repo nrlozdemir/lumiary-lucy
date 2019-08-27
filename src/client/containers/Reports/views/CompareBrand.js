@@ -53,11 +53,20 @@ class CompareBrand extends React.Component {
     }
   }
 
-  componenWillUnmount() {
-    this.props.createdReportControl({
+  componentWillUnmount() {
+    const {
+      createdReportControl,
+      compareBrandFormClear,
+      comparebrandValues: { data: comparebrandValues },
+    } = this.props
+    if (!comparebrandValues) {
+      return null
+    }
+    createdReportControl({
       isSaved: false,
       uuid: null,
     })
+    compareBrandFormClear()
   }
 
   render() {

@@ -39,6 +39,7 @@ class ReportGenerated extends React.Component {
     const {
       location: { search },
       brandInsightFormSubmit,
+      brandInsightFormClear,
       brandInsightValues: { data: brandInsightValues },
     } = this.props
     if (!brandInsightValues) {
@@ -60,11 +61,20 @@ class ReportGenerated extends React.Component {
     }
   }
 
-  componenWillUnmount() {
-    this.props.createdReportControl({
+  componentWillUnmount() {
+    const {
+      createdReportControl,
+      brandInsightFormClear,
+      brandInsightValues: { data: brandInsightValues },
+    } = this.props
+    if (!brandInsightValues) {
+      return null
+    }
+    createdReportControl({
       isSaved: false,
       uuid: null,
     })
+    brandInsightFormClear()
   }
 
   render() {
