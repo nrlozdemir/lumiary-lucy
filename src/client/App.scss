@@ -310,6 +310,18 @@
       display: flex;
     }
 
+    .slick-active.slick-current {
+      .item {
+        opacity: 1;
+        margin: 0px;
+        height: 346px;
+
+        img {
+          box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+
     .item {
       width: 634px;
       position: relative;

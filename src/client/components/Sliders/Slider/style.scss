@@ -14,13 +14,17 @@
   margin-right: auto;
   margin-top: 38px;
 
-  > div {
+  > li {
     display: inline-block;
     width: 104px;
     height: 78px;
     opacity: 0.5;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
+
+    &.slick-active {
+      opacity: 1 !important;
+    }
 
     &:not(:last-child) {
       margin-right: 28px;
