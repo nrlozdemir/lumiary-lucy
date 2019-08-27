@@ -23,10 +23,12 @@ export const types = {
   BRAND_INSIGHT_REQUEST: 'Reports/BRAND_INSIGHT_REQUEST',
   BRAND_INSIGHT_REQUEST_SUCCESS: 'Reports/BRAND_INSIGHT_REQUEST_SUCCESS',
   BRAND_INSIGHT_REQUEST_ERROR: 'Reports/BRAND_INSIGHT_REQUEST_ERROR',
+  BRAND_INSIGHT_CLEAR: 'Reports/BRAND_INSIGHT_CLEAR',
 
   COMPARE_BRAND_REQUEST: 'Reports/COMPARE_BRAND_REQUEST',
   COMPARE_BRAND_REQUEST_SUCCESS: 'Reports/COMPARE_BRAND_REQUEST_SUCCESS',
   COMPARE_BRAND_REQUEST_ERROR: 'Reports/COMPARE_BRAND_REQUEST_ERROR',
+  COMPARE_BRAND_CLEAR: 'Reports/COMPARE_BRAND_CLEAR',
   CREATED_REPORT_CONTROL: 'Reports/CREATED_REPORT_CONTROL',
 
   PREDEFINED_REPORT_REQUEST: 'Reports/PREDEFINED_REPORT_REQUEST',
@@ -116,6 +118,9 @@ export const actions = {
     type: types.BRAND_INSIGHT_REQUEST_ERROR,
     error,
   }),
+  brandInsightFormClear: () => ({
+    type: types.BRAND_INSIGHT_CLEAR,
+  }),
   compareBrandFormSubmit: (params, onlySave = false) => {
     return {
       type: types.COMPARE_BRAND_REQUEST,
@@ -128,6 +133,10 @@ export const actions = {
   }),
   compareBrandFormSubmitError: (error) => ({
     type: types.COMPARE_BRAND_REQUEST_ERROR,
+    error,
+  }),
+  compareBrandFormClear: (error) => ({
+    type: types.COMPARE_BRAND_CLEAR,
     error,
   }),
   createdReportControl: (payload) => ({
@@ -345,6 +354,11 @@ const reportsReducer = (state = initialState, action) => {
         )
         .setIn(['brandInsightValues', 'error'], fromJS(action.error))
         .setIn(['brandInsightValues', 'loading'], fromJS(false))
+    case types.BRAND_INSIGHT_CLEAR:
+      return state.setIn(
+        ['brandInsightValues', 'data'],
+        fromJS(initialState.toJS().brandInsightValues.data)
+      )
 
     /** END submit brand insight form */
 
@@ -370,6 +384,12 @@ const reportsReducer = (state = initialState, action) => {
         )
         .setIn(['comparebrandValues', 'error'], fromJS(action.error))
         .setIn(['comparebrandValues', 'loading'], fromJS(false))
+    case types.COMPARE_BRAND_CLEAR:
+      return state.setIn(
+        ['comparebrandValues', 'data'],
+        fromJS(initialState.toJS().comparebrandValues.data)
+      )
+
     case types.CREATED_REPORT_CONTROL:
       return state
         .setIn(['createdReportControls', 'isSaved'], action.payload.isSaved)
