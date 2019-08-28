@@ -35,7 +35,6 @@ function RenderPrevButton({ onClick }) {
 
 class SliderItem extends React.Component {
   handleMouseOverPlay = () => {
-    console.log('this.props.isActive', this.props.isActive)
     this.props.isActive && this.videoRef.play()
   }
 
@@ -107,6 +106,18 @@ class MarketViewSlider extends React.Component {
     this.props.items && this.refSlider && this.refSlider.slickGoTo(findSlide, 1)
   }
 
+  getBrandName = (competitors, item, limit) => {
+    const parsedUrl = item.image.split('/')
+
+    const brand = parsedUrl.reduce((result, maybeUuid) => {
+      const foundBrand = competitors.find((c) => c.uuid === maybeUuid)
+      return !!foundBrand ? foundBrand : result
+    }, null)
+
+    const title = brand ? brand.name : item.title
+    return title.length >= limit ? `${title.substring(0, limit)}...` : title
+  }
+
   render() {
     const { currentIdx, createRef } = this.state
     const { items, profile } = this.props
@@ -119,8 +130,11 @@ class MarketViewSlider extends React.Component {
           ]
         : []
 
+    const _getBrandName = this.getBrandName
     const settings = {
       customPaging: function(i) {
+        const title = _getBrandName(competitors, items[i], 8)
+
         return (
           <a>
             <div className={i === 0 ? 'active' : ''}>
@@ -128,13 +142,8 @@ class MarketViewSlider extends React.Component {
                 <video src={items[i].image} />
               </div>
               <span>
-                <i
-                  className={classnames(
-                    socialIconSelector(items[i].socialMedia),
-                    style.icon
-                  )}
-                />
-                {items[i].socialMedia}
+                <i className={socialIconSelector(items[i].socialMedia)} />
+                {title}
               </span>
             </div>
           </a>
@@ -163,6 +172,8 @@ class MarketViewSlider extends React.Component {
           {`
             .${style.pagination} > li.slick-active {
               opacity: 1 !important;
+              font-family: "ClanOTBold";
+              font-weight: bold;
             }
           `}
         </style>
@@ -170,18 +181,7 @@ class MarketViewSlider extends React.Component {
           <Slider ref={(node) => node && (this.refSlider = node)} {...settings}>
             {items &&
               items.map((item, i) => {
-                const parsedUrl = item.image.split('/')
-
-                const brand = parsedUrl.reduce((result, maybeUuid) => {
-                  const foundBrand = competitors.find(
-                    (c) => c.uuid === maybeUuid
-                  )
-                  return !!foundBrand ? foundBrand : result
-                }, null)
-
-                const title = brand
-                  ? brand.name
-                  : `${item.title.substring(0, 20)}...`
+                const title = this.getBrandName(competitors, item, 20)
 
                 return (
                   <SliderItem
