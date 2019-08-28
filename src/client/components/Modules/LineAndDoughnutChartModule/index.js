@@ -40,7 +40,7 @@ const LineAndDoughnutChartModule = ({
   const container = cx('grid-container', style.container)
   const plugins = [
     {
-			beforeDraw: function(chart, easing) {
+      beforeDraw: function(chart, easing) {
         if (
           chart.config.options.chartArea &&
           chart.config.options.chartArea.backgroundColor
@@ -115,12 +115,12 @@ const LineAndDoughnutChartModule = ({
             borderWidth: 4,
             pointBackgroundColor:
               colors.themeType === 'dark' &&
-              d.backgroundColor.substr(0, 4) === '#fff'
+                d.backgroundColor.substr(0, 4) === '#fff'
                 ? '#acb0be'
                 : d.backgroundColor,
             pointHoverBackgroundColor:
               colors.themeType === 'dark' &&
-              d.backgroundColor.substr(0, 4) === '#fff'
+                d.backgroundColor.substr(0, 4) === '#fff'
                 ? '#acb0be'
                 : d.backgroundColor,
             pointBorderColor: colors.lineChartPointBorderColor,
@@ -133,22 +133,22 @@ const LineAndDoughnutChartModule = ({
           }
         })
       }
-		})
+    })
 
-	// console.log(lineChartOptions)
+  // console.log(lineChartOptions)
 
- //  console.log(
- //    moduleKey,
- //    title,
- //    action,
- //    lineChartData,
- //    lineChartOptions,
- //    filters,
- //    isEmpty,
- //    platform,
- //    properties,
- //    average
- //  )
+  //  console.log(
+  //    moduleKey,
+  //    title,
+  //    action,
+  //    lineChartData,
+  //    lineChartOptions,
+  //    filters,
+  //    isEmpty,
+  //    platform,
+  //    properties,
+  //    average
+  //  )
 
   return (
     <Module
@@ -162,118 +162,121 @@ const LineAndDoughnutChartModule = ({
       <div className="grid-collapse">
         <div className="grid-container">
           <div className="col-12-no-gutters">
-            <div
-              className={`${cx(style.contentVitalityChart)}`}
-              data-legend="Content Vitality Score"
-            >
-              <Line
-                key={Math.random()}
-                data={manipulateData}
-                width={1230}
-                height={291}
-                plugins={plugins}
-                options={{
-									...lineChartOptions,
-									responsive: false,
-									layout: {
-										padding: {
-											left: 0,
-											right: 0,
-											top: 0,
-											bottom: 0,
-										},
-									},
-                  tooltips: customChartToolTip(colors, {
-                    callbacks: {
-                      title: () => '',
-                      label: function(tooltipItem, data) {
-                        const { datasetIndex } = tooltipItem
-                        const count =
-                          (data &&
-                            data.datasets &&
-                            data.datasets[datasetIndex] &&
-                            data.datasets[datasetIndex].data[
-                              tooltipItem['index']
-                            ]) ||
-                          ''
-                        const name =
-                          (data &&
-                            lineChartData &&
-                            lineChartData.datasets[datasetIndex].label) ||
-                          ''
-                        return `${percentageManipulation(count) ||
-                          0} Score ${!!name && `| ${name}`}`
+            <div className={style.vitalityChartContainer}>
+              <div
+                className={`${cx(style.contentVitalityChart)}`}
+                data-legend="Content Vitality Score"
+              >
+                <Line
+                  key={Math.random()}
+                  data={manipulateData}
+                  width={1230}
+                  height={291}
+                  plugins={plugins}
+                  options={{
+                    ...lineChartOptions,
+                    responsive: false,
+                    layout: {
+                      padding: {
+                        left: 30,
+                        right: 70,
+                        top: 0,
+                        bottom: 0,
                       },
                     },
-                  }),
-                  chartArea: {
-                    backgroundColor: colors.lineChartBackgroundColor,
-                  },
-                  scales: {
-                    xAxes: [
-                      {
-                        ...lineChartOptions.scales.xAxes[0],
-                        ticks: {
-                          ...lineChartOptions.scales.xAxes[0].ticks,
-													fontColor: colors.lineChartXAxisColor,
-													padding: 22,
-													callback: function(value, index, values) {
-                            if (index === 0) {
-                              return ' '.repeat(21) + value
-                            } else if (index === values.length - 1) {
-                              return value + ' '.repeat(18)
-                            } else {
-															return value
-														}
-                          },
-                        },
-                        gridLines: {
-                          ...lineChartOptions.scales.xAxes[0].gridLines,
-                          color: colors.lineChartGridColor,
-                          zeroLineColor: colors.lineChartGridColor,
+                    tooltips: customChartToolTip(colors, {
+                      callbacks: {
+                        title: () => '',
+                        label: function(tooltipItem, data) {
+                          const { datasetIndex } = tooltipItem
+                          const count =
+                            (data &&
+                              data.datasets &&
+                              data.datasets[datasetIndex] &&
+                              data.datasets[datasetIndex].data[
+                              tooltipItem['index']
+                              ]) ||
+                            ''
+                          const name =
+                            (data &&
+                              lineChartData &&
+                              lineChartData.datasets[datasetIndex].label) ||
+                            ''
+                          return `${percentageManipulation(count) ||
+                            0} Score ${!!name && `| ${name}`}`
                         },
                       },
-                    ],
-                    yAxes: [
-                      {
-                        ...lineChartOptions.scales.yAxes[0],
+                    }),
+                    chartArea: {
+                      backgroundColor: colors.lineChartBackgroundColor,
+                    },
+                    scales: {
+                      xAxes: [
+                        {
+                          ...lineChartOptions.scales.xAxes[0],
+                          ticks: {
+                            ...lineChartOptions.scales.xAxes[0].ticks,
+                            fontColor: 'transparent',
+                            padding: 22,
+                            display: false,
+                            callback: function(value, index, values) {
+                              if (index === 0) {
+                                return ' '.repeat(21) + value
+                              } else if (index === values.length - 1) {
+                                return value + ' '.repeat(18)
+                              } else {
+                                return value
+                              }
+                            },
+                          },
+                          gridLines: {
+                            ...lineChartOptions.scales.xAxes[0].gridLines,
+                            color: colors.lineChartGridColor,
+                            zeroLineColor: colors.lineChartGridColor,
+                          },
+                        },
+                      ],
+                      yAxes: [
+                        {
+                          ...lineChartOptions.scales.yAxes[0],
 
-                        ticks: {
-                          ...lineChartOptions.scales.yAxes[0].ticks,
-                          callback: function(value, index, values) {
-                            if (value === 0) {
-                              return value + ' '.repeat(2)
-                            } else if (value === chartYAxisMax) {
-                              return value + '%'
-                            } else {
-                              return ''
-                            }
+                          ticks: {
+                            ...lineChartOptions.scales.yAxes[0].ticks,
+                            callback: function(value, index, values) {
+                              if (value === 0) {
+                                return value + ' '.repeat(2)
+                              } else if (value === chartYAxisMax) {
+                                return value + '%'
+                              } else {
+                                return ''
+                              }
+                            },
+                            stepSize: chartYAxisStepSize,
+                            fontColor: colors.textColor,
+                            max: chartYAxisMax,
                           },
-                          stepSize: chartYAxisStepSize,
-                          fontColor: colors.textColor,
-                          max: chartYAxisMax,
+                          gridLines: {
+                            ...lineChartOptions.scales.yAxes[0].gridLines,
+                            color: colors.lineChartGridColor,
+                            zeroLineColor: colors.lineChartGridColor,
+                          },
                         },
-                        gridLines: {
-                          ...lineChartOptions.scales.yAxes[0].gridLines,
-                          color: colors.lineChartGridColor,
-                          zeroLineColor: colors.lineChartGridColor,
-                        },
-                      },
-                    ],
-                  },
-                }}
-              />
-            </div>
-            <div className={style.customXTicks}>
-              {manipulateData && !!manipulateData.labels && manipulateData.labels.map((label,i) => {
-                return(
-                <div className={cx({ [style.tickItem]: i < manipulateData.labels.length - 1 })} key={i}>
-                  <div className={style.textContainer}>
-                    <span>{label}</span>
-                  </div>
+                      ],
+                    },
+                  }}
+                />
+                <div className={style.customXTicks}>
+                  {manipulateData && !!manipulateData.labels && manipulateData.labels.map((label, i) => {
+                    return (
+                      <div className={cx({ [style.tickItem]: i < manipulateData.labels.length - 1 })} key={i}>
+                        <div className={style.textContainer}>
+                          <span>{label}</span>
+                        </div>
+                      </div>
+                    )
+                  })}
                 </div>
-                )
-              })}
+              </div>
             </div>
           </div>
         </div>
@@ -342,9 +345,9 @@ const LineAndDoughnutChartModule = ({
                               ? 0
                               : Math.floor(property[0].score.value),
                             100 -
-                              (property[0].score.value === 'N/A'
-                                ? 0
-                                : Math.floor(property[0].score.value)),
+                            (property[0].score.value === 'N/A'
+                              ? 0
+                              : Math.floor(property[0].score.value)),
                           ],
                           backgroundColor: [
                             datasetMap[property[0].name].backgroundColor,
