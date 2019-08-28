@@ -24,7 +24,6 @@ export class Platform extends React.Component {
               type: 'platformEngagement',
               selectKey: 'mwplttpaap-plateng',
               placeHolder: 'Engagement by Platform',
-              removeAllPlatform: true,
               defaultValue: { value: 'facebook|views', label: 'Views' },
             },
             {
