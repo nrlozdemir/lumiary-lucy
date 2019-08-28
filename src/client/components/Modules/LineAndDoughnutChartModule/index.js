@@ -264,6 +264,17 @@ const LineAndDoughnutChartModule = ({
                 }}
               />
             </div>
+            <div className={style.customXTicks}>
+              {manipulateData && !!manipulateData.labels && manipulateData.labels.map((label,i) => {
+                return(
+                <div className={cx({ [style.tickItem]: i < manipulateData.labels.length - 1 })} key={i}>
+                  <div className={style.textContainer}>
+                    <span>{label}</span>
+                  </div>
+                </div>
+                )
+              })}
+            </div>
           </div>
         </div>
         <div className={container}>
