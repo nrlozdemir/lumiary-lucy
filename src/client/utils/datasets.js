@@ -602,8 +602,9 @@ const convertVideoEngagementData = (data, metric = 'views') => {
 
   const durationLabels = ['0-15', '16-30', '31-60', '60+']
 
-  const labels =
-    objectKeys.includes(...durationLabels) ? durationLabels : objectKeys
+  const labels = objectKeys.includes(...durationLabels)
+    ? durationLabels
+    : objectKeys
 
   const emptyData = {
     Tuesday: 0,
@@ -1048,6 +1049,19 @@ const convertNestedDurationsIntoLabels = (response, oneChar = false) => {
   return response
 }
 
+const getStepsConsistently = (max) => {
+  const lengthOfMax = `${max}`.length
+  const digitOfRounding = `1${'0'.repeat(lengthOfMax - 2)}`
+
+  if (max <= 1000) {
+    return Math.ceil(~~(max / 4) / 100) * 100
+  }
+
+  return (
+    Math.ceil(~~(max / 4) / Number(digitOfRounding)) * Number(digitOfRounding)
+  )
+}
+
 export {
   convertNestedDurationsIntoLabels,
   convertDurationLabels,
@@ -1067,4 +1081,5 @@ export {
   convertIntoLibAndIndustryDoughnut,
   percentageManipulation,
   percentageBeautifier,
+  getStepsConsistently,
 }
