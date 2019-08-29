@@ -26,7 +26,7 @@ class MainContentArea extends Component {
         topPos += letterBarElement.clientHeight
       }
 
-      window.scroll({ top: topPos, left: 0, behavior: 'smooth' })
+      window.scrollTo(0, topPos)
     }
   }
 
