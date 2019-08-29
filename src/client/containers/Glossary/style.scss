@@ -40,7 +40,7 @@
     font-size: 14px;
     width: calc(30% - 40px);
     margin-right: 40px;
-    height: calc(100vh - 330px);
+    height: 60vh;
     display: flex;
     flex-direction: column;
     position: -webkit-sticky;
@@ -212,6 +212,11 @@
                 bottom: -8px;
               }
             }
+          }
+
+          video {
+            height: 400px;
+            background-color: black;
           }
         }
       }
