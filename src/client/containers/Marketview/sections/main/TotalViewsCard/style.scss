@@ -8,10 +8,14 @@
 .fitLabelContainer {
   height: 288px;
   min-width: 200px;
-  margin-top: 6px;
-  margin-left: 72px;
+  margin-top: 8px;
+  margin-left: 50px;
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
   flex-direction: column;
+}
+
+.right {
+  margin-top: -2px;
 }
