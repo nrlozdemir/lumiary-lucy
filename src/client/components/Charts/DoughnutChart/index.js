@@ -74,9 +74,11 @@ class DoughnutChart extends React.Component {
       legendLabelsFontSize,
       legendLabelsFontFamily,
       labelsData,
+      labelContainerClassname = false,
       labelPositionBottom,
       labelPositionRight,
       labelPositionLeft,
+      removeLabelMargin = false,
       cutoutPercentage,
       customStyle,
       customDoughnutContainer,
@@ -86,7 +88,7 @@ class DoughnutChart extends React.Component {
       slicePiecesWidth = false,
       datasetOptions = {},
       removeTooltip = false,
-      showAllData = false
+      showAllData = false,
     } = this.props
 
     const themes = this.props.themeContext.colors
@@ -152,7 +154,7 @@ class DoughnutChart extends React.Component {
         ],
       }
     }
-    
+
     // for opacity backgrounds
     let chartValues =
       !!newData && !!newData.datasets && !!newData.datasets[0]
@@ -272,8 +274,15 @@ class DoughnutChart extends React.Component {
           style={customStyle}
         >
           {labelPositionLeft && labelsData && (
-            <div className={style.labelContainer}>
-              <Labels data={labelsData} />
+            <div
+              className={classnames(style.labelContainer, {
+                [`${labelContainerClassname}`]: !!labelContainerClassname,
+              })}
+            >
+              <Labels
+                data={labelsData}
+                removeMargin={!!removeLabelMargin ? true : false}
+              />
             </div>
           )}
           <div
@@ -424,14 +433,28 @@ class DoughnutChart extends React.Component {
             )}
           </div>
           {labelPositionRight && labelsData && (
-            <div className={style.labelContainer}>
-              <Labels data={labelsData} />
+            <div
+              className={classnames(style.labelContainer, {
+                [`${labelContainerClassname}`]: !!labelContainerClassname,
+              })}
+            >
+              <Labels
+                data={labelsData}
+                removeMargin={!!removeLabelMargin ? true : false}
+              />
             </div>
           )}
         </div>
         {labelPositionBottom && labelsData && (
-          <div className={style.labelContainer}>
-            <Labels data={labelsData} />
+          <div
+            className={classnames(style.labelContainer, {
+              [`${labelContainerClassname}`]: !!labelContainerClassname,
+            })}
+          >
+            <Labels
+              data={labelsData}
+              removeMargin={!!removeLabelMargin ? true : false}
+            />
           </div>
         )}
       </React.Fragment>
