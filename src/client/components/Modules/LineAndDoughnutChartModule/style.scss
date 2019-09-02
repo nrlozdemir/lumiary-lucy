@@ -8,9 +8,12 @@
 
   .legend {
     border-radius: 17px;
-    background-color: $color-dusk;
-    color: #ffffff;
-    font-family: $font-family-ClanOTBold;
+    font-family: $font-family-ClanOT;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
     font-size: 14px;
     padding: 8px 24px;
     margin: 15px 0 40px;
@@ -54,7 +57,7 @@
   display: flex;
 }
 
-.vitalityChartContainer{
+.vitalityChartContainer {
   position: relative;
   .contentVitalityChart {
     position: relative;
@@ -68,7 +71,7 @@
       transform: rotateZ(-90deg) translateX(-40%);
       transform-origin: 0 0;
     }
-  
+
     &:before {
       content: attr(data-legend);
       top: 50%;
@@ -168,7 +171,7 @@
     color: #505050;
   }
 }
-.customXTicks{
+.customXTicks {
   font-family: $font-family-ClanOTNews;
   font-size: 12px;
   display: flex;
@@ -176,25 +179,25 @@
   margin: 16px 70px 0 80px;
   position: relative;
 
-  .tickItem{
+  .tickItem {
     width: 16.6666666667%;
   }
-  .textContainer{
+  .textContainer {
     position: relative;
     width: max-content;
 
     span {
       display: block;
       margin-left: -50%;
-      opacity: .5;
+      opacity: 0.5;
     }
   }
 
-  >div {
-    &:last-of-type{
+  > div {
+    &:last-of-type {
       position: absolute;
       right: 0;
-      .textContainer{
+      .textContainer {
         span {
           font-weight: bold;
           margin-left: 0;
@@ -203,9 +206,9 @@
       }
     }
   }
-  >div {
-    &:first-of-type{
-      .textContainer{
+  > div {
+    &:first-of-type {
+      .textContainer {
         span {
           margin-left: 0;
         }
