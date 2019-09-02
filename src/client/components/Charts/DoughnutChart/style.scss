@@ -17,8 +17,19 @@
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-	margin-left: 72px;
-	min-width: 200px;
+  margin-left: 72px;
+  min-width: 200px;
+}
+
+.fitLabelContainer {
+  height: 288px;
+  min-width: 200px;
+  margin-top: 6px;
+  margin-left: 72px;
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  flex-direction: column;
 }
 
 .ciclePin {
