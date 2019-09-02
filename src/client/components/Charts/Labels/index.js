@@ -1,7 +1,7 @@
-import React from "react"
+import React from 'react'
 //import PropTypes from "prop-types"
-import classnames from "classnames"
-import style from "./style.scss"
+import classnames from 'classnames'
+import style from './style.scss'
 
 const propTypes = {}
 const defaultProps = {}
@@ -13,16 +13,21 @@ export default class Labels extends React.Component {
   }
 
   render() {
-    const { data } = this.props
+    const { data, removeMargin } = this.props
+
+    console.log('label props', this.props)
 
     return (
       <React.Fragment>
         {data.map((roundData, index) => (
           <div
             className={classnames(
-              "d-flex",
-              "align-items-center",
-              style.labels
+              'd-flex',
+              'align-items-center',
+              style.labels,
+              {
+                [style.removeMargin]: !!removeMargin && removeMargin === true,
+              }
             )}
             key={index}
           >
