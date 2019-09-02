@@ -14,6 +14,7 @@ import moment from 'moment'
 import PropTypes from 'prop-types'
 import React from 'react'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
+import style from './style.scss'
 
 class TotalViewsChart extends React.Component {
   callBack = (data, moduleKey) => {
@@ -193,6 +194,8 @@ class TotalViewsChart extends React.Component {
               }}
               layoutPadding={8}
               labelPositionLeft
+              labelContainerClassname={style.fitLabelContainer}
+              removeLabelMargin={true}
               labelsData={
                 loading
                   ? []
