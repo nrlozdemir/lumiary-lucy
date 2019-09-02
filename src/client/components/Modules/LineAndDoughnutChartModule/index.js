@@ -301,11 +301,6 @@ const LineAndDoughnutChartModule = ({
                       [style.dark]: colors.themeType === 'dark',
                       [style.light]: colors.themeType === 'light',
                     })}
-                    style={{
-                      background: colors.labelBackground,
-                      color: colors.labelColor,
-                      boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                    }}
                   >
                     <div
                       className={style.colorBubble}
