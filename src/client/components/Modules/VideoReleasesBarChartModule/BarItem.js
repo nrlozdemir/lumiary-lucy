@@ -77,6 +77,7 @@ class BarItem extends Component {
                 color: colors.labelColor,
                 boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
               }}
+              className={style.label}
             >
               {chartData.label}
             </span>
