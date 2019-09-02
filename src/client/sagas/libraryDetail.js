@@ -80,7 +80,7 @@ function* getDoughnutChart({ payload: { LibraryDetailId, videoId } }) {
           const title = expectedNames[prop]
 
           const max = {
-            label: prop === 'frameRate' ? `${label} FPS` : label,
+            label: prop === 'frameRate' ? `${label} fps` : label,
             percentage: datasetPercentages[label],
           }
 
