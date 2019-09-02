@@ -74,9 +74,11 @@ class DoughnutChart extends React.Component {
       legendLabelsFontSize,
       legendLabelsFontFamily,
       labelsData,
+      labelContainerClassname = false,
       labelPositionBottom,
       labelPositionRight,
       labelPositionLeft,
+      removeLabelMargin = false,
       cutoutPercentage,
       customStyle,
       customDoughnutContainer,
@@ -272,8 +274,15 @@ class DoughnutChart extends React.Component {
           style={customStyle}
         >
           {labelPositionLeft && labelsData && (
-            <div className={style.labelContainer}>
-              <Labels data={labelsData} />
+            <div
+              className={classnames(style.labelContainer, {
+                [`${labelContainerClassname}`]: !!labelContainerClassname,
+              })}
+            >
+              <Labels
+                data={labelsData}
+                removeMargin={!!removeLabelMargin ? true : false}
+              />
             </div>
           )}
           <div
@@ -424,14 +433,28 @@ class DoughnutChart extends React.Component {
             )}
           </div>
           {labelPositionRight && labelsData && (
-            <div className={style.labelContainer}>
-              <Labels data={labelsData} />
+            <div
+              className={classnames(style.labelContainer, {
+                [`${labelContainerClassname}`]: !!labelContainerClassname,
+              })}
+            >
+              <Labels
+                data={labelsData}
+                removeMargin={!!removeLabelMargin ? true : false}
+              />
             </div>
           )}
         </div>
         {labelPositionBottom && labelsData && (
-          <div className={style.labelContainer}>
-            <Labels data={labelsData} />
+          <div
+            className={classnames(style.labelContainer, {
+              [`${labelContainerClassname}`]: !!labelContainerClassname,
+            })}
+          >
+            <Labels
+              data={labelsData}
+              removeMargin={!!removeLabelMargin ? true : false}
+            />
           </div>
         )}
       </React.Fragment>
