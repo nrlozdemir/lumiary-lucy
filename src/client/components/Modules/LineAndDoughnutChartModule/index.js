@@ -115,12 +115,12 @@ const LineAndDoughnutChartModule = ({
             borderWidth: 4,
             pointBackgroundColor:
               colors.themeType === 'dark' &&
-                d.backgroundColor.substr(0, 4) === '#fff'
+              d.backgroundColor.substr(0, 4) === '#fff'
                 ? '#acb0be'
                 : d.backgroundColor,
             pointHoverBackgroundColor:
               colors.themeType === 'dark' &&
-                d.backgroundColor.substr(0, 4) === '#fff'
+              d.backgroundColor.substr(0, 4) === '#fff'
                 ? '#acb0be'
                 : d.backgroundColor,
             pointBorderColor: colors.lineChartPointBorderColor,
@@ -194,7 +194,7 @@ const LineAndDoughnutChartModule = ({
                               data.datasets &&
                               data.datasets[datasetIndex] &&
                               data.datasets[datasetIndex].data[
-                              tooltipItem['index']
+                                tooltipItem['index']
                               ]) ||
                             ''
                           const name =
@@ -266,15 +266,23 @@ const LineAndDoughnutChartModule = ({
                   }}
                 />
                 <div className={style.customXTicks}>
-                  {manipulateData && !!manipulateData.labels && manipulateData.labels.map((label, i) => {
-                    return (
-                      <div className={cx({ [style.tickItem]: i < manipulateData.labels.length - 1 })} key={i}>
-                        <div className={style.textContainer}>
-                          <span>{label}</span>
+                  {manipulateData &&
+                    !!manipulateData.labels &&
+                    manipulateData.labels.map((label, i) => {
+                      return (
+                        <div
+                          className={cx({
+                            [style.tickItem]:
+                              i < manipulateData.labels.length - 1,
+                          })}
+                          key={i}
+                        >
+                          <div className={style.textContainer}>
+                            <span>{label}</span>
+                          </div>
                         </div>
-                      </div>
-                    )
-                  })}
+                      )
+                    })}
                 </div>
               </div>
             </div>
@@ -293,11 +301,6 @@ const LineAndDoughnutChartModule = ({
                       [style.dark]: colors.themeType === 'dark',
                       [style.light]: colors.themeType === 'light',
                     })}
-                    style={{
-                      background: colors.labelBackground,
-                      color: colors.labelColor,
-                      boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                    }}
                   >
                     <div
                       className={style.colorBubble}
@@ -345,9 +348,9 @@ const LineAndDoughnutChartModule = ({
                               ? 0
                               : Math.floor(property[0].score.value),
                             100 -
-                            (property[0].score.value === 'N/A'
-                              ? 0
-                              : Math.floor(property[0].score.value)),
+                              (property[0].score.value === 'N/A'
+                                ? 0
+                                : Math.floor(property[0].score.value)),
                           ],
                           backgroundColor: [
                             datasetMap[property[0].name].backgroundColor,
