@@ -75,7 +75,6 @@
       transform: rotateZ(-90deg) translateX(-40%);
       transform-origin: 0 0;
     }
-
     &:before {
       content: attr(data-legend);
       top: 50%;
