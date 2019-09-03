@@ -33,7 +33,7 @@ class Glossary extends Component {
         </div>
       )
     }
-
+    
     if (!data) {
       return <EmptyState />
     }
