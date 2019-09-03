@@ -130,6 +130,41 @@ export class Main extends React.PureComponent {
       platformsValues &&
       platformsValues[1].infos.length == 1
 
+      console.log('quickview --> platform values : ', platformsValues)
+    let firstInfosArr = []
+    let secondInfosArr = []
+    let firtsInfosEmptys = []
+    let secondInfosEmptys = []
+    let sortedPlatformValues = []
+    //if the same keys are empty in both array, we push this datas to the bottom
+    if(!!platformsValues.length) {
+      platformsValues[0].infos.forEach(item => {
+        const secondArrayTwinItem = platformsValues[1].infos.find(value => value.slug === item.slug)
+        if(!item.value && !secondArrayTwinItem.value) {
+          firtsInfosEmptys = [...firtsInfosEmptys, item]
+          secondInfosEmptys = [...secondInfosEmptys, secondArrayTwinItem]
+        }else {
+          firstInfosArr = [...firstInfosArr, item]
+          secondInfosArr = [...secondInfosArr, secondArrayTwinItem]
+        }
+        // console.log('firstInfosArr', firstInfosArr)
+        // console.log('secondInfosArr', secondInfosArr)
+        // console.log('firstInfosEmptys', firtsInfosEmptys)
+        // console.log('secondInfosEmptys', secondInfosEmptys)
+      })
+      sortedPlatformValues = [
+        {
+        ...platformsValues[0],
+        infos: [...firstInfosArr, ...firtsInfosEmptys]
+        },
+        {
+        ...platformsValues[1],
+        infos: [...secondInfosArr, ...secondInfosEmptys]
+        }
+    ]
+    }
+  console.log('sorted values : ', sortedPlatformValues)
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -237,8 +272,8 @@ export class Main extends React.PureComponent {
                     })}
                     // style={{ background: colors.bodyBackground }}
                   >
-                    {platformsValues &&
-                      platformsValues.map((el, i) => {
+                    {sortedPlatformValues &&
+                      sortedPlatformValues.map((el, i) => {
                         const {
                           cvScore,
                           socialIcon,
@@ -246,14 +281,6 @@ export class Main extends React.PureComponent {
                           videoUrl,
                           poster,
                         } = el.video
-                        let sortedElInfos = []
-                        el.infos.forEach(info => {
-                          if(!info.value) {
-                            sortedElInfos.push(info)
-                          }else {
-                            sortedElInfos.unshift(info)
-                          }
-                        });
                         
                         return (
                           <div key={i} className={style.cardBlock}>
@@ -324,7 +351,7 @@ export class Main extends React.PureComponent {
                                     i === 0 && dummyData !== true,
                                 })}
                               >
-                                {sortedElInfos.map((item, index) => {
+                                {el.infos.map((item, index) => {
                                   const hasDifference =
                                     ['duration', 'pacing'].indexOf(
                                       item.title.toLowerCase()
