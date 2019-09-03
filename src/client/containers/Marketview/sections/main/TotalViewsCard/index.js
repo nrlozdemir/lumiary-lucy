@@ -176,37 +176,39 @@ class TotalViewsChart extends React.Component {
             />
           </div>
           <div className="col-6">
-            <DoughnutChart
-              width={288}
-              height={288}
-              data={loading ? {} : normalizedData}
-              cutoutPercentage={58}
-              fillText="Total Percentage"
-              dataLabelFunction="insertAfter"
-              dataLabelInsert="%"
-              datasetsBorderWidth={1.4}
-              tooltipMode="nearest"
-              datasetOptions={{
-                shadowOffsetX: 2,
-                shadowOffsetY: 1.5,
-                shadowBlur: 4,
-                hoverShadowBlur: 4,
-              }}
-              layoutPadding={8}
-              labelPositionLeft
-              labelContainerClassname={style.fitLabelContainer}
-              removeLabelMargin={true}
-              labelsData={
-                loading
-                  ? []
-                  : (!!doughnutData &&
-                      doughnutData.labels.map((label, idx) => ({
-                        data: label,
-                        color: chartColors[idx],
-                      }))) ||
-                    []
-              }
-            />
+            <div className={style.right}>
+              <DoughnutChart
+                width={304}
+                height={304}
+                data={loading ? {} : normalizedData}
+                cutoutPercentage={58}
+                fillText="Total Percentage"
+                dataLabelFunction="insertAfter"
+                dataLabelInsert="%"
+                datasetsBorderWidth={1.4}
+                tooltipMode="nearest"
+                datasetOptions={{
+                  shadowOffsetX: 2,
+                  shadowOffsetY: 1.5,
+                  shadowBlur: 4,
+                  hoverShadowBlur: 4,
+                }}
+                layoutPadding={8}
+                labelPositionLeft
+                labelContainerClassname={style.fitLabelContainer}
+                removeLabelMargin={true}
+                labelsData={
+                  loading
+                    ? []
+                    : (!!doughnutData &&
+                        doughnutData.labels.map((label, idx) => ({
+                          data: label,
+                          color: chartColors[idx],
+                        }))) ||
+                      []
+                }
+              />
+            </div>
           </div>
         </div>
       </Module>

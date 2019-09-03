@@ -25,7 +25,7 @@ const defaultProps = {
   defaultFontSize: '14',
   defaultFontWeight: '700',
 
-  fillTextFontFamily: 'ClanOTBold',
+  fillTextFontFamily: 'ClanOT',
   fillTextFontSize: '12px',
 
   displayDataLabels: true,
@@ -106,7 +106,7 @@ class DoughnutChart extends React.Component {
             ctx.textAlign = 'center'
             ctx.textBaseline = 'middle'
             ctx.fillStyle = fillTextColor || themes.textColor
-            ctx.font = fillTextFontSize + ' ' + fillTextFontFamily
+            ctx.font = 'bold ' + fillTextFontSize + ' ' + fillTextFontFamily
             ctx.fillText(customFillText, width / 2, height / 2)
             ctx.save()
           },

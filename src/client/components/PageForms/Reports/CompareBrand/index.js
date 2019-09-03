@@ -58,7 +58,7 @@ class CompareBrand extends React.PureComponent {
                     component={Input}
                     id="title"
                     name="title"
-                    placeholder="Show this to steve…"
+                    placeholder="Brand X vs Brand Y..."
                     validate={required}
                   />
                 </div>

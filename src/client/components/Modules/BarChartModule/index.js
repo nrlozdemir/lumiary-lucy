@@ -5,6 +5,7 @@ import BarChart from 'Components/Charts/BarChart'
 import Module from 'Components/Module'
 import style from './style.scss'
 import { isDataSetEmpty } from 'Utils/datasets'
+import { numberFormatter } from 'Utils/index'
 
 const BarChartModule = ({
   barData,
@@ -23,16 +24,7 @@ const BarChartModule = ({
 }) => {
   const chartTickOptions = {
     callback(value) {
-      if (value >= 1e9) {
-        return (value / 1e9).toFixed(0).replace(/\.0$/, '') + 'g'
-      }
-      if (value >= 1e6) {
-        return (value / 1e6).toFixed(0).replace(/\.0$/, '') + 'm'
-      }
-      if (value >= 1e3) {
-        return (value / 1e3).toFixed(0).replace(/\.0$/, '') + 'k'
-      }
-      return value
+      return numberFormatter(value)
     },
     ...tickOptions,
   }
