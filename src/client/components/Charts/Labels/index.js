@@ -15,7 +15,7 @@ export default class Labels extends React.Component {
   render() {
     const { data, removeMargin } = this.props
 
-    console.log('label props', this.props)
+    // console.log('label props', this.props)
 
     return (
       <React.Fragment>
