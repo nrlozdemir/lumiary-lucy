@@ -80,9 +80,9 @@ class MainContentArea extends Component {
     const { content, menu, letter } = this.props
     const { colors } = this.props.themeContext
 
-    ;(letter ? (menu ? content : content[letter]) : content).sort((a, b) =>
-      a.slug > b.slug ? 1 : a.slug < b.slug ? -1 : 0
-    )
+    // ;(letter ? (menu ? content : content[letter]) : content).sort((a, b) =>
+    //   a.slug > b.slug ? 1 : a.slug < b.slug ? -1 : 0
+    // )    
 
     return (
       <div
