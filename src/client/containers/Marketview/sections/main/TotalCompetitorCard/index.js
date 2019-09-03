@@ -11,7 +11,11 @@ import { withTheme } from 'ThemeContext/withTheme'
 
 import { randomKey, customChartToolTip, metricSuffix } from 'Utils'
 
-import { isDataSetEmpty, getMinMaxFromDatasets } from 'Utils/datasets'
+import {
+  isDataSetEmpty,
+  getMinMaxFromDatasets,
+  getStepsConsistently,
+} from 'Utils/datasets'
 
 class TotalCompetitorCard extends React.Component {
   componentDidMount() {
@@ -32,7 +36,7 @@ class TotalCompetitorCard extends React.Component {
 
     const min = 0
 
-    const stepSize = !!max && ~~(max / 4)
+    const stepSize = !!max && getStepsConsistently(max)
 
     const chartTickOptions = {
       min,
@@ -65,7 +69,7 @@ class TotalCompetitorCard extends React.Component {
         },
       }),
     }
-    
+
     return (
       <BarChartModule
         moduleKey={'MarketView/TotalCompetitorViewsByDuration'}

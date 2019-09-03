@@ -183,6 +183,9 @@ const LineAndDoughnutChartModule = ({
                         top: 0,
                         bottom: 0,
                       },
+                    }),
+                    chartArea: {
+                      backgroundColor: colors.lineChartBackgroundColor,
                     },
                     tooltips: customChartToolTip(colors, {
                       callbacks: {
@@ -194,7 +197,7 @@ const LineAndDoughnutChartModule = ({
                               data.datasets &&
                               data.datasets[datasetIndex] &&
                               data.datasets[datasetIndex].data[
-                              tooltipItem['index']
+                                tooltipItem['index']
                               ]) ||
                             ''
                           const name =
@@ -266,15 +269,23 @@ const LineAndDoughnutChartModule = ({
                   }}
                 />
                 <div className={style.customXTicks}>
-                  {manipulateData && !!manipulateData.labels && manipulateData.labels.map((label, i) => {
-                    return (
-                      <div className={cx({ [style.tickItem]: i < manipulateData.labels.length - 1 })} key={i}>
-                        <div className={style.textContainer}>
-                          <span>{label}</span>
+                  {manipulateData &&
+                    !!manipulateData.labels &&
+                    manipulateData.labels.map((label, i) => {
+                      return (
+                        <div
+                          className={cx({
+                            [style.tickItem]:
+                              i < manipulateData.labels.length - 1,
+                          })}
+                          key={i}
+                        >
+                          <div className={style.textContainer}>
+                            <span>{label}</span>
+                          </div>
                         </div>
-                      </div>
-                    )
-                  })}
+                      )
+                    })}
                 </div>
               </div>
             </div>
@@ -293,11 +304,6 @@ const LineAndDoughnutChartModule = ({
                       [style.dark]: colors.themeType === 'dark',
                       [style.light]: colors.themeType === 'light',
                     })}
-                    style={{
-                      background: colors.labelBackground,
-                      color: colors.labelColor,
-                      boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                    }}
                   >
                     <div
                       className={style.colorBubble}

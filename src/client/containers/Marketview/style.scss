@@ -33,9 +33,14 @@
 
   .marketViewCardSubTitle {
     font-family: $font-family-ClanOTNews;
-    font-size: 14px;
     text-align: center;
-    margin: 40px 0;
+		margin: 40px 0;
+		font-size: 18px;
+		font-weight: normal;
+		font-style: normal;
+		font-stretch: normal;
+		line-height: normal;
+		letter-spacing: normal;
   }
 
   .marketViewCardChartTitle {

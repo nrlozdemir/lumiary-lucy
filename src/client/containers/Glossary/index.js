@@ -38,7 +38,9 @@ class Glossary extends Component {
       return <EmptyState />
     }
 
-    const { glossary : { terms: letters } } = data
+    const {
+      glossary: { terms: letters },
+    } = data
 
     if (!letters) {
       return <EmptyState />

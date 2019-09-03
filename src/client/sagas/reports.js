@@ -4,7 +4,7 @@ import { push } from 'connected-react-router'
 import { types, actions } from 'Reducers/reports'
 
 import querystring from 'querystring'
-import { sortObject, getColorPercents } from 'Utils'
+import { sortObject, getColorPercents, ucfirst } from 'Utils'
 import {
   convertDataIntoDatasets,
   radarChartCalculate,
@@ -48,6 +48,11 @@ function* getReports({ payload: { value: filterValue } = {} }) {
         default:
           values = [...compare, ...insights]
       }
+
+      Object.values(values).map((el, i) => {
+        el.platform = ucfirst(el.platform)
+        el.date_range = el.date_range === '3months' ? '3 months' : el.date_range
+      })
 
       yield put(actions.loadReportsSuccess(values))
     } else {
