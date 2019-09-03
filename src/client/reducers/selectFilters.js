@@ -268,7 +268,7 @@ export const initialState = fromJS({
         ],
       },
     ],
-    onDay: dayOfWeek.map((d) => ({ label: `On ${d}`, value: d.toLowerCase() })),
+    onDay: dayOfWeek.map((d) => ({ label: `On ${d}'s`, value: d.toLowerCase() })),
     doublePlatform: Object.keys(platforms).reduce(
       (all, pf) => [
         ...all,
