@@ -130,7 +130,6 @@ export class Main extends React.PureComponent {
       platformsValues &&
       platformsValues[1].infos.length == 1
 
-      console.log('quickview --> platform values : ', platformsValues)
     let firstInfosArr = []
     let secondInfosArr = []
     let firtsInfosEmptys = []
@@ -147,10 +146,6 @@ export class Main extends React.PureComponent {
           firstInfosArr = [...firstInfosArr, item]
           secondInfosArr = [...secondInfosArr, secondArrayTwinItem]
         }
-        // console.log('firstInfosArr', firstInfosArr)
-        // console.log('secondInfosArr', secondInfosArr)
-        // console.log('firstInfosEmptys', firtsInfosEmptys)
-        // console.log('secondInfosEmptys', secondInfosEmptys)
       })
       sortedPlatformValues = [
         {
@@ -163,7 +158,6 @@ export class Main extends React.PureComponent {
         }
     ]
     }
-  console.log('sorted values : ', sortedPlatformValues)
 
     return (
       <ThemeContext.Consumer>
