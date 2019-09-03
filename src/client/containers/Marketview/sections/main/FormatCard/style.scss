@@ -47,6 +47,11 @@
     }
     .formatItemText {
       margin-top: 20px;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
       span {
         display: block;
         text-align: center;
