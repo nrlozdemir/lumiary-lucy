@@ -1,8 +1,10 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router-dom'
-import { compose } from 'redux'
+import { compose, bindActionCreators } from 'redux'
 import { createStructuredSelector } from 'reselect'
+import { ThemeContext } from 'ThemeContext/themeContext'
+import { actions } from 'Reducers/app'
 
 import style from './style.scss'
 import Sidebar from './sections/sideBar'
@@ -12,10 +14,34 @@ import { makeSelectGlobalSection } from 'Reducers/app'
 import RouterLoading from 'Components/RouterLoading'
 
 const EmptyState = () => (
-  <div className={style.emptyState}>No Glossary Found</div>
+  <ThemeContext.Consumer>
+    {({ themeContext: { colors } }) => (
+      <div
+        className={style.emptyState}
+        style={colors.themeType === 'dark' ? { color: 'white' } : {}}
+      >
+        No Glossary Found
+      </div>
+    )}
+  </ThemeContext.Consumer>
 )
 
 class Glossary extends Component {
+  componentDidMount() {
+    const {
+      content: { data },
+      getSectionExplanationsRequest,
+    } = this.props
+
+    if (typeof window === 'object') {
+      if (!window.localStorage.getItem('sections') || !data) {
+        getSectionExplanationsRequest()
+      }
+    } else {
+      getSectionExplanationsRequest()
+    }
+  }
+
   render() {
     const {
       match: {
@@ -33,7 +59,7 @@ class Glossary extends Component {
         </div>
       )
     }
-    
+
     if (!data) {
       return <EmptyState />
     }
@@ -109,7 +135,12 @@ const mapStateToProps = createStructuredSelector({
   content: makeSelectGlobalSection(),
 })
 
-const withConnect = connect(mapStateToProps)
+const mapDispatchToProps = (dispatch) => bindActionCreators(actions, dispatch)
+
+const withConnect = connect(
+  mapStateToProps,
+  mapDispatchToProps
+)
 
 export default compose(
   withConnect,
