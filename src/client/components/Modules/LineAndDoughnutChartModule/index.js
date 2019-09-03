@@ -115,12 +115,12 @@ const LineAndDoughnutChartModule = ({
             borderWidth: 4,
             pointBackgroundColor:
               colors.themeType === 'dark' &&
-                d.backgroundColor.substr(0, 4) === '#fff'
+              d.backgroundColor.substr(0, 4) === '#fff'
                 ? '#acb0be'
                 : d.backgroundColor,
             pointHoverBackgroundColor:
               colors.themeType === 'dark' &&
-                d.backgroundColor.substr(0, 4) === '#fff'
+              d.backgroundColor.substr(0, 4) === '#fff'
                 ? '#acb0be'
                 : d.backgroundColor,
             pointBorderColor: colors.lineChartPointBorderColor,
@@ -183,7 +183,7 @@ const LineAndDoughnutChartModule = ({
                         top: 0,
                         bottom: 0,
                       },
-                    }),
+                    },
                     chartArea: {
                       backgroundColor: colors.lineChartBackgroundColor,
                     },
@@ -351,9 +351,9 @@ const LineAndDoughnutChartModule = ({
                               ? 0
                               : Math.floor(property[0].score.value),
                             100 -
-                            (property[0].score.value === 'N/A'
-                              ? 0
-                              : Math.floor(property[0].score.value)),
+                              (property[0].score.value === 'N/A'
+                                ? 0
+                                : Math.floor(property[0].score.value)),
                           ],
                           backgroundColor: [
                             datasetMap[property[0].name].backgroundColor,
