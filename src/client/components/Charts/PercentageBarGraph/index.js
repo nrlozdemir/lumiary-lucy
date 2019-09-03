@@ -22,7 +22,11 @@ const createDataset = (percentage) => {
   )
 
   const currentIndexAfterArray = [
-    ...Array(makeLength - maxCurrentIndex - 1),
+    ...Array(
+      makeLength - maxCurrentIndex - 1 >= 0
+        ? makeLength - maxCurrentIndex - 1
+        : 0
+    ),
   ].map((v, i, arr) => {
     const stepSize = (range.end - range.start) / arr.length
 
