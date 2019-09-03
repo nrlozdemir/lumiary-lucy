@@ -11,7 +11,7 @@ import Reports from './reports'
 import GeneratedReport from './generatedReport'
 import Audience from './audience'
 import app from './app'
-import auth from './auth'
+import auth, { types } from './auth'
 import SelectFilters from './selectFilters'
 import history from '../history'
 import store from '../configureStore'
@@ -33,7 +33,7 @@ const appReducer = combineReducers({
 })
 
 const rootReducer = (state, action) => {
-  if (action.type === 'AUTH/LOGOUT_SUCCESS') {
+  if (action.type === types.LOGOUT_SUCCESS) {
     state = undefined
   }
   return appReducer(state, action)
