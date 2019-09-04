@@ -59,7 +59,7 @@ const Button = (props) => {
       disabled={props.disable}
       onClick={props.onClick}
       style={{
-        color: colors.labelColor,
+        color: props.textColor || colors.labelColor,
         backgroundColor: colors.moduleBackground,
       }}
     >
@@ -75,6 +75,7 @@ Button.propTypes = {
   iconRight: PropTypes.string,
   customClass: PropTypes.string,
   onClick: PropTypes.func,
+  textColor: PropTypes.string,
   to: PropTypes.string,
 }
 

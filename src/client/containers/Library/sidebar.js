@@ -270,6 +270,7 @@ class Sidebar extends React.Component {
                   onClick={() =>
                     formChange === true && setSidebarVisible(false)
                   }
+                  textColor={!formChange ? colors.customSelectActiveBorder : colors.searchInputActiveColor}
                   buttonText="Apply Filters"
                 />
               </div>
