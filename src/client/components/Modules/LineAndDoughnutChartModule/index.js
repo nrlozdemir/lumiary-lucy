@@ -185,10 +185,7 @@ const LineAndDoughnutChartModule = ({
                         bottom: 0,
                       },
                     },
-                    tooltips: {
-                      enabled: false,
-                      custom: modifyTooltip,
-                    },
+                    tooltips: modifyTooltip(),
                     chartArea: {
                       backgroundColor: colors.lineChartBackgroundColor,
                     },
