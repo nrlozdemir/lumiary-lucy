@@ -11,7 +11,7 @@ import {
   percentageManipulation,
   getCVScoreChartAttributes,
 } from 'Utils/datasets'
-import {modifyTooltip} from 'Utils/tooltip'
+import { modifyTooltip } from 'Utils/tooltip'
 
 const sortCircles = (index) => {
   const text = {
