@@ -23,8 +23,8 @@ const PacingPieChart = ({ data = {}, metric }) => {
       {({ themeContext: { colors } }) => (
         <div className={style.pieChartContainer}>
           <Pie
-            height={220}
-            width={220}
+            height={216}
+            width={216}
             options={{
               tooltips: customChartToolTip(colors, {
                 callbacks: {

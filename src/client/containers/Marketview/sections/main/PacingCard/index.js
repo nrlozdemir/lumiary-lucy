@@ -74,7 +74,10 @@ class PacingCard extends Component {
                 {loading ? <RouterLoading /> : 'No Data Available'}
               </div>
             )}
-            <div className={style.marketViewCardHeader} style={{ borderColor: colors.marketviewCardHeaderBorder }}>
+            <div
+              className={style.marketViewCardHeader}
+              style={{ borderColor: colors.marketviewCardHeaderBorder }}
+            >
               <div className={style.marketViewCardTitle}>Competitor</div>
               <div className={style.chartSectionBadge}>
                 <span
@@ -82,20 +85,21 @@ class PacingCard extends Component {
                     color: colors.labelColor,
                   }}
                 >
-                  <Link
-                    to="/marketview/competitor"
-                  >
+                  <Link to="/marketview/competitor">
                     View Competitor Metrics
-                  </Link>                  
+                  </Link>
                 </span>
               </div>
             </div>
-            <div className={style.marketViewCardSubTitle}>
+            <div
+              className={style.marketViewCardSubTitle}
+              style={{ marginBottom: '60px' }}
+            >
               Pacing breakdown by competitor
             </div>
 
             {!isDataEmpty && !loading && (
-              <PacingPieChart data={data} colors={colors} metric={metric}/>
+              <PacingPieChart data={data} colors={colors} metric={metric} />
             )}
             {!loading && (
               <div className={style.marketViewCardChartTitle}>
