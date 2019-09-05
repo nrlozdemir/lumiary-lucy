@@ -19,22 +19,10 @@ import CVScoresComparison from '../sections/detail/CVScoresComparison'
 
 /* eslint-disable react/prefer-stateless-function */
 export class Time extends React.Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      activeDay: 'monday',
-    }
-  }
-
-  changeActiveDay(day) {
-    this.setState({ activeDay: day })
-  }
 
   render() {
     const today = moment().format('dddd')
     const selectDayKey = 'Mwplt-onDay'
-    const { activeDay } = this.state
     const { selectFilters = {} } = this.props
     const { values = {} } = selectFilters
     const { ['MarketView/Time/Slider'] : dateValue = {} } = values
@@ -44,16 +32,15 @@ export class Time extends React.Component {
     const currentDay = selectedDayValue || today
     return (
       <React.Fragment>
-        <DaySelection
+        {/* <DaySelection
           onDayChange={(day) => this.changeActiveDay(day)}
           activeDay={activeDay}
-        />
+        /> */}
         <Slider
           moduleKey="MarketView/Time/Slider"
           title={`Top Performing ${
             currentDay.charAt(0)
             .toUpperCase()}${currentDay.slice(1)} Videos`}
-          activeDay={activeDay}
           filters={[
             {
               type: 'metric',
@@ -76,8 +63,12 @@ export class Time extends React.Component {
         <TopSimilarProperties
           moduleKey="MarketView/Time/SimilarProperties"
           title="Top Similar Properties Of Top Videos"
-          activeDay={activeDay}
           filters={[
+            {
+              type: 'onDay',
+              selectKey: 'tpsmlr-onDay',
+              placeHolder: 'onDay',
+            },
             {
               type: 'dateRange',
               selectKey: 'dateRange',
