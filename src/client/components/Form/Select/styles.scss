@@ -49,7 +49,7 @@
 }
 .active {
   &:before {
-    color: $color-white !important;
+    color: $color-white;
   }
 }
 .focus {
