@@ -81,6 +81,11 @@ export class Platform extends React.Component {
           action={this.getSimilarProperties}
           filters={[
             {
+              type: 'platform',
+              selectKey: 'RCVS-ads',
+              placeHolder: 'Platforms',
+            },
+            {
               type: 'dateRange',
               selectKey: 'dateRange',
               placeHolder: 'dateRange',
