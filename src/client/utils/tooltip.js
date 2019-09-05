@@ -47,15 +47,15 @@ const modifyTooltip = function(props) {
           !!tooltipModel.dataPoints &&
           !!tooltipModel.dataPoints[0] &&
           tooltipModel.dataPoints[0].hasOwnProperty('datasetIndex') &&
-          tooltipModel.dataPoints[0].datasetIndex) << 0
+          tooltipModel.dataPoints[0].datasetIndex) | 0
 
       const index =
         (!!tooltipModel &&
           !!tooltipModel.dataPoints &&
           !!tooltipModel.dataPoints[0] &&
           tooltipModel.dataPoints[0].hasOwnProperty('index') &&
-          tooltipModel.dataPoints[0].index) << 0
-      console.log('++', index, datasetIndex)
+          tooltipModel.dataPoints[0].index) | 0
+
       const label =
         !!props.data &&
         !!props.data.datasets &&
@@ -71,11 +71,42 @@ const modifyTooltip = function(props) {
       const value =
         !!props.data &&
         !!props.data.datasets &&
-        !!datasetIndex &&
+        !isNaN(datasetIndex) &&
+        !isNaN(index) &&
         !!props.data.datasets[datasetIndex] &&
         !!props.data.datasets[datasetIndex].data &&
         !!props.data.datasets[datasetIndex].data[index] &&
         props.data.datasets[datasetIndex].data[index]
+
+      const previousIndex =
+        index === 0
+          ? !!props.data &&
+            !!props.data.datasets &&
+            !isNaN(datasetIndex) &&
+            !isNaN(index) &&
+            !!props.data.datasets[datasetIndex] &&
+            !!props.data.datasets[datasetIndex].data &&
+            Object.values(props.data.datasets[datasetIndex].data).length - 1
+          : index - 1
+
+      const previousValue =
+        !!props.data &&
+        !!props.data.datasets &&
+        !isNaN(datasetIndex) &&
+        !isNaN(index) &&
+        !isNaN(previousIndex) &&
+        !!props.data.datasets[datasetIndex] &&
+        !!props.data.datasets[datasetIndex].data &&
+        !!props.data.datasets[datasetIndex].data[previousIndex] &&
+        props.data.datasets[datasetIndex].data[previousIndex] | 0
+
+      const diff = value - previousValue
+
+      console.log("datasetIndex:", datasetIndex)
+      console.log("index:", index)
+      console.log('previousIndex: ', previousIndex)
+      console.log('previousValue: ', previousValue)
+      console.log('diff: ', diff)
 
       const defaults = {
         maxWidth: 240,
