@@ -5,6 +5,11 @@
  */
 
 import React from 'react'
+import { compose } from 'redux'
+import { connect } from 'react-redux'
+import { createStructuredSelector } from 'reselect'
+import moment from 'moment'
+import { makeSelectSelectFilters } from 'Reducers/selectFilters'
 
 import DaySelection from 'Containers/Marketview/sections/detail/DaySelection'
 import Slider from '../sections/detail/Slider'
@@ -27,7 +32,16 @@ export class Time extends React.Component {
   }
 
   render() {
+    const today = moment().format('dddd')
+    const selectDayKey = 'Mwplt-onDay'
     const { activeDay } = this.state
+    const { selectFilters = {} } = this.props
+    const { values = {} } = selectFilters
+    const { ['MarketView/Time/Slider'] : dateValue = {} } = values
+    const { [selectDayKey] : selectedDayKey = {} } = dateValue
+    const { value : selectedDay = '' } = selectedDayKey
+    const { value : selectedDayValue = '' } = selectedDay
+    const currentDay = selectedDayValue || today
     return (
       <React.Fragment>
         <DaySelection
@@ -36,15 +50,20 @@ export class Time extends React.Component {
         />
         <Slider
           moduleKey="MarketView/Time/Slider"
-          title={`Top Performing ${activeDay
-            .charAt(0)
-            .toUpperCase()}${activeDay.slice(1)} Videos`}
+          title={`Top Performing ${
+            currentDay.charAt(0)
+            .toUpperCase()}${currentDay.slice(1)} Videos`}
           activeDay={activeDay}
           filters={[
             {
               type: 'metric',
               selectKey: 'Mwplt-metric',
               placeHolder: 'metric',
+            },
+            {
+              type: 'onDay',
+              selectKey: selectDayKey,
+              placeHolder: 'onDay',
             },
             {
               type: 'dateRange',
@@ -116,6 +135,15 @@ export class Time extends React.Component {
   }
 }
 
+const mapStateToProps = createStructuredSelector({
+  selectFilters: makeSelectSelectFilters(),
+})
+
+const withConnect = connect(
+  mapStateToProps,
+  null
+)
+
 Time.propTypes = {}
 
-export default Time
+export default compose(withConnect)(Time)
