@@ -18,23 +18,7 @@ const WrapperModule = ({ children, style, className }) => {
 }
 
 const TopSimilarProperties = (props) => {
-  const { data = {}, title, action, moduleKey, isLoading, isError, container } = props
-  
-  const filters = [
-    {
-      type: 'dateRange',
-      selectKey: 'dateRangeOption',
-      placeHolder: 'Date',
-    }
-  ]
-
-  if(container === 'platform') {
-    filters.unshift({
-      type: 'platform',
-      selectKey: 'RCVS-ads',
-      placeHolder: 'Platforms',
-    })
-  }
+  const { data = {}, title, action, moduleKey, isLoading, isError, filters } = props
 
   const allDataPresent = Object.keys(data).reduce((accumulator, key) => {
     if(Object.keys(data[key]).length === 0) {

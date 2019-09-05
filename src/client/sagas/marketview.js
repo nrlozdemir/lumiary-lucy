@@ -28,9 +28,10 @@ import { getDataFromApi, buildApiUrl } from 'Utils/api'
 import { isNumber } from 'util'
 
 function* getCompetitorVideosApi({ payload }) {
-  const requestObject = {
-    ...payload,
-    activeDay: payload.onDay || ''
+
+  let requestObject = { ...payload }
+  if(!!payload.onDay) {
+    requestObject = { ...requestObject, activeDay: payload.onDay}
   }
 
   if (payload.competitors) {
@@ -297,7 +298,7 @@ function* getPlatformTopVideosMarketview({
 function* getSimilarProperties(params = {}) {
   try {
     const {
-      data: { dateRange, container, platform },
+      data: { dateRange, container, platform, onDay },
     } = params
     const { brand } = yield select(makeSelectAuthProfile())
     const { uuid, competitors = [] } = brand
@@ -349,6 +350,7 @@ function* getSimilarProperties(params = {}) {
           daterange: dateRange,
           platforms: ['all'],
           percentile: 80,
+          activeDay: onDay || ''
         }
         break
     }
