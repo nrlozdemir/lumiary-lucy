@@ -40,15 +40,13 @@ const LineChartTemplate = function(props) {
 }
 
 const modifyTooltip = function(props) {
-  console.log('modify tooltip props: ', props)
+  //console.log('modify tooltip props: ', props)
   const { options = {} } = props
   return {
     enabled: false,
     custom: function(tooltipModel) {
       //console.log('tooltipModel', tooltipModel)
-      if (!!tooltipModel.dataPoints) {
-        console.log(tooltipModel.dataPoints[0])
-      }
+      // !!tooltipModel.dataPoints && console.log(tooltipModel.dataPoints[0])
 
       const datasetIndex =
         (!!tooltipModel &&
