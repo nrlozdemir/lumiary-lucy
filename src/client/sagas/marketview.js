@@ -30,6 +30,7 @@ import { isNumber } from 'util'
 function* getCompetitorVideosApi({ payload }) {
   const requestObject = {
     ...payload,
+    activeDay: payload.onDay || ''
   }
 
   if (payload.competitors) {
