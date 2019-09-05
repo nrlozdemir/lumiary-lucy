@@ -451,7 +451,7 @@ function* getTopPerformingFormatData({ data = {} }) {
           weekday,
           data: payload.dates[weekday],
           label,
-        })
+				})
 
         const customChartColors = ['#2FD7C4', '#8562F3', '#5292E5', '#ffffff']
         const customChartColorSelector = {
@@ -493,7 +493,10 @@ function* getTopPerformingFormatData({ data = {} }) {
         }),
         datasets: Object.keys(propertyBuckets).map((propertyBucket) => {
           return propertyBuckets[propertyBucket]
-        }),
+				}),
+				labelsLong: weekdayOrder.map((item) => {
+          return item.weekday
+        })
       }
 
       yield put(
