@@ -11,6 +11,7 @@ import {
   percentageManipulation,
   getCVScoreChartAttributes,
 } from 'Utils/datasets'
+import { modifyTooltip } from 'Utils/tooltip'
 
 const sortCircles = (index) => {
   const text = {
@@ -150,6 +151,11 @@ const LineAndDoughnutChartModule = ({
   //    average
   //  )
 
+  //console.log("platform :", platform)
+  //console.log("properties :", properties)
+  //console.log("average :", average)
+  //console.log("manipulateData :", manipulateData)
+
   return (
     <Module
       moduleKey={moduleKey}
@@ -184,28 +190,35 @@ const LineAndDoughnutChartModule = ({
                         bottom: 0,
                       },
                     },
-                    tooltips: customChartToolTip(colors, {
-                      callbacks: {
-                        title: () => '',
-                        label: function(tooltipItem, data) {
-                          const { datasetIndex } = tooltipItem
-                          const count =
-                            (data &&
-                              data.datasets &&
-                              data.datasets[datasetIndex] &&
-                              data.datasets[datasetIndex].data[
-                                tooltipItem['index']
-                              ]) ||
-                            ''
-                          const name =
-                            (data &&
-                              lineChartData &&
-                              lineChartData.datasets[datasetIndex].label) ||
-                            ''
-                          return `${percentageManipulation(count) ||
-                            0} Score ${!!name && `| ${name}`}`
-                        },
-                      },
+                    // tooltips: customChartToolTip(colors, {
+                    //   callbacks: {
+                    //     title: () => '',
+                    //     label: function(tooltipItem, data) {
+                    //       const { datasetIndex } = tooltipItem
+                    //       const count =
+                    //         (data &&
+                    //           data.datasets &&
+                    //           data.datasets[datasetIndex] &&
+                    //           data.datasets[datasetIndex].data[
+                    //             tooltipItem['index']
+                    //           ]) ||
+                    //         ''
+                    //       const name =
+                    //         (data &&
+                    //           lineChartData &&
+                    //           lineChartData.datasets[datasetIndex].label) ||
+                    //         ''
+                    //       return `${percentageManipulation(count) ||
+                    //         0} Score ${!!name && `| ${name}`}`
+                    //     },
+                    //   },
+                    // }),
+                    tooltips: modifyTooltip({
+                      template: 'LineChartTemplate',
+                      data: manipulateData,
+                      platform: platform,
+                      properties: properties,
+                      average: average,
                     }),
                     chartArea: {
                       backgroundColor: colors.lineChartBackgroundColor,
