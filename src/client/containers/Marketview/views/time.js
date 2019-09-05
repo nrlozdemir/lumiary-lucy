@@ -82,14 +82,14 @@ export class Time extends React.Component {
           title="Top Performing Property Across All Days Of The"
           filters={[
             {
+              type: 'onDay',
+              selectKey: 'tpvdsovrtm-onDay',
+              placeHolder: 'onDay',
+            },
+            {
               type: 'property',
               selectKey: 'property',
               placeHolder: 'property',
-            },
-            {
-              type: 'dateRange',
-              selectKey: 'Mwvlt-date',
-              placeHolder: 'Date',
             },
           ]}
           container="time"

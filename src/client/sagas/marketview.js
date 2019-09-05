@@ -834,8 +834,9 @@ function* getTopPerformingPropertiesByCompetitorsData({
 }
 
 function* getTopPerformingPropertiesByTimeData({
-  payload: { property, dateRange },
+  payload: { property, dateRange = 'week', onDay },
 }) {
+  const activeDay = onDay || ''
   try {
     const { brand } = yield select(makeSelectAuthProfile())
 
@@ -844,6 +845,7 @@ function* getTopPerformingPropertiesByTimeData({
     const options = {
       dateRange,
       dateBucket,
+      activeDay,
       metric: 'views',
       property: [property],
       display: 'percentage',
@@ -860,6 +862,7 @@ function* getTopPerformingPropertiesByTimeData({
       buildApiUrl(`/brand/${brand.uuid}/propertyperformance`, {
         daterange: dateRange,
         property: property,
+        activeDay
       }),
       'GET'
     )
