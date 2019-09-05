@@ -1,8 +1,83 @@
-const modifyTooltip = function() {
+import { percentageBeautifier } from 'Utils/datasets'
+
+const LineChartTemplate = function(props) {
+  let titleStyle = 'margin: 16px 16px 8px 16px;'
+  titleStyle += 'font-family: ClanOT;'
+  titleStyle += 'font-size: 14px;'
+  titleStyle += 'font-weight: bold;'
+  titleStyle += 'font-style: normal;'
+  titleStyle += 'font-stretch: normal;'
+  titleStyle += 'line-height: 1.43;'
+  titleStyle += 'letter-spacing: normal;'
+  titleStyle += 'color: #fff;'
+
+  let bodyStyle = 'margin: 8px 16px 16px 16px;'
+  bodyStyle += 'padding-top: 8px;'
+  bodyStyle += 'border-top: 1px solid #e8ecf0;'
+  bodyStyle += 'font-family: ClanOT;'
+  bodyStyle += 'font-size: 12px;'
+  bodyStyle += 'font-weight: bold;'
+  bodyStyle += 'font-style: normal;'
+  bodyStyle += 'font-stretch: normal;'
+  bodyStyle += 'line-height: 1.67;'
+  bodyStyle += 'letter-spacing: normal;'
+  bodyStyle += 'color: #fff;'
+
+  let el = ''
+  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += `${percentageBeautifier(props.value)} Score  |  ${props.label} Pacing`
+  el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
+  el += `On ${props.labelLong}, your CV score<br> D by E% from the<br> previous day.`
+  el += '</div>'
+
+  return el
+}
+
+const modifyTooltip = function(props) {
+  console.log('modify tooltip props: ', props)
   return {
     enabled: false,
     custom: function(tooltipModel) {
-      console.dir(this)
+      //console.log('tooltipModel', tooltipModel)
+      if (!!tooltipModel.dataPoints) {
+        console.log(tooltipModel.dataPoints[0])
+      }
+
+      const datasetIndex =
+        (!!tooltipModel &&
+          !!tooltipModel.dataPoints &&
+          !!tooltipModel.dataPoints[0] &&
+          !!tooltipModel.dataPoints[0].datasetIndex &&
+          tooltipModel.dataPoints[0].datasetIndex) << 0
+
+      const index =
+        (!!tooltipModel &&
+          !!tooltipModel.dataPoints &&
+          !!tooltipModel.dataPoints[0] &&
+          !!tooltipModel.dataPoints[0].index &&
+          tooltipModel.dataPoints[0].index) << 0
+
+      const label =
+        !!props.data &&
+        !!props.data.datasets &&
+        !!datasetIndex &&
+        props.data.datasets[datasetIndex].label
+
+      const labelLong =
+        !!props.data &&
+        !!props.data.labelsLong &&
+        !!datasetIndex &&
+        props.data.labelsLong[index]
+
+      const value =
+        !!props.data &&
+        !!props.data.datasets &&
+        !!datasetIndex &&
+        !!props.data.datasets[datasetIndex] &&
+        !!props.data.datasets[datasetIndex].data &&
+        !!props.data.datasets[datasetIndex].data[index] &&
+        props.data.datasets[datasetIndex].data[index]
+
       const defaults = {
         maxWidth: 240,
         headerFontSize: 14,
@@ -65,8 +140,10 @@ const modifyTooltip = function() {
       if (tooltipModel.body) {
         const titleLines = tooltipModel.title || []
         const bodyLines = tooltipModel.body.map(getBody)
-
         let innerHtml = '<div class="chartjs-tooltip-title">'
+
+        //console.log('titleLines:', titleLines)
+        //console.log('bodyLines:', bodyLines)
 
         titleLines.forEach(function(title) {
           innerHtml +=
@@ -79,6 +156,7 @@ const modifyTooltip = function() {
             title +
             '</p>'
         })
+
         innerHtml += '</div><div class="chartjs-tooltip-body">'
 
         bodyLines.forEach(function(body, i) {
@@ -92,22 +170,29 @@ const modifyTooltip = function() {
             body +
             '</p>'
         })
+
         innerHtml += '</div>'
 
         tooltipEl.innerHTML = innerHtml
+
+        const templates = {
+          LineChartTemplate: LineChartTemplate({ label: label, value: value, labelLong: labelLong }),
+        }
+
+        tooltipEl.innerHTML = templates[props.template]
       }
 
       // `this` will be the overall tooltip
       const position = this._chart.canvas.getBoundingClientRect()
 
-      console.log('==>', position, tooltipModel)
+      // console.log('==>', position, tooltipModel)
 
       // Display, position, and set styles for font
       tooltipEl.style.opacity = 1
       tooltipEl.style.position = 'absolute'
       tooltipEl.style.backgroundColor = defaults.background // 'rgb(226, 54, 54)'
 
-      tooltipEl.style.padding = '10px'
+      tooltipEl.style.padding = '0px'
       tooltipEl.style.borderRadius = '5px'
       tooltipEl.style.pointerEvents = 'none'
 
@@ -120,6 +205,7 @@ const modifyTooltip = function() {
         tooltipModel.caretX -
         defaults.caretWidth
 
+      /*
       console.log(
         '!!!',
         position.right,
@@ -127,6 +213,7 @@ const modifyTooltip = function() {
         tooltipModel.caretX,
         defaults.caretWidth
       )
+      */
 
       let caretTop =
         position.top +
@@ -156,13 +243,13 @@ const modifyTooltip = function() {
           window.pageXOffset >
         caretLeft
       ) {
-        console.log('left')
+        // console.log('left')
         tooptipLeft = tooptipLeft + tooltipEl.clientWidth / 3
       }
 
       // caret positon calculate for right side
       if (position.width - (70 + defaults.tolerance) < tooltipModel.caretX) {
-        console.log('right')
+        // console.log('right')
         tooptipLeft = tooptipLeft - tooltipEl.clientWidth / 3
       }
 

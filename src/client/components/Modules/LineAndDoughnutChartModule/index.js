@@ -149,7 +149,13 @@ const LineAndDoughnutChartModule = ({
   //    platform,
   //    properties,
   //    average
-  //  )
+	//  )
+
+
+	//console.log("platform :", platform)
+	//console.log("properties :", properties)
+	//console.log("average :", average)
+	//console.log("manipulateData :", manipulateData)
 
   return (
     <Module
@@ -185,7 +191,13 @@ const LineAndDoughnutChartModule = ({
                         bottom: 0,
                       },
                     },
-                    tooltips: modifyTooltip(),
+                    tooltips: modifyTooltip({
+											template: 'LineChartTemplate',
+											data: manipulateData,
+											platform: platform,
+											properties: properties,
+											average: average
+										}),
                     chartArea: {
                       backgroundColor: colors.lineChartBackgroundColor,
                     },
