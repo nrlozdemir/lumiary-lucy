@@ -9,7 +9,6 @@ const LineChartTemplate = function(props) {
   titleStyle += 'font-stretch: normal;'
   titleStyle += 'line-height: 1.43;'
   titleStyle += 'letter-spacing: normal;'
-  titleStyle += 'color: #fff;'
 
   let bodyStyle = 'margin: 8px 16px 16px 16px;'
   bodyStyle += 'padding-top: 8px;'
@@ -21,7 +20,6 @@ const LineChartTemplate = function(props) {
   bodyStyle += 'font-stretch: normal;'
   bodyStyle += 'line-height: 1.67;'
   bodyStyle += 'letter-spacing: normal;'
-  bodyStyle += 'color: #fff;'
 
   let el = ''
   el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
@@ -35,6 +33,7 @@ const LineChartTemplate = function(props) {
 
 const modifyTooltip = function(props) {
   console.log('modify tooltip props: ', props)
+  const { options = {} } = props
   return {
     enabled: false,
     custom: function(tooltipModel) {
@@ -83,18 +82,19 @@ const modifyTooltip = function(props) {
         headerFontSize: 14,
         bodyFontSize: 12,
         fontFamily: 'ClanOTBold',
-        background: '#505050',
-        textColor: '#ffffff',
+        background: options.background || '#505050',
+        textColor: options.textColor || '#ffffff',
 
         // caret styles
         caretWidth: 8,
         caretHeight: 8,
         caretPadding: 10,
-        caretColor: '#505050',
+        caretColor: options.caretColor || '#505050',
 
         // tolerance 'px' inside for tooltip position
         tolerance: 60,
       }
+      console.log('defaults', defaults)
 
       // Tooltip Element
       let tooltipEl = document.getElementById('chartjs-tooltip')
@@ -119,6 +119,8 @@ const modifyTooltip = function(props) {
       if (tooltipModel.opacity === 0) {
         tooltipEl.style.opacity = 0
         caretEl.style.opacity = 0
+        tooltipEl.style.display = 'none'
+        caretEl.style.display = 'none'
         return
       }
 
@@ -194,14 +196,17 @@ const modifyTooltip = function(props) {
       // Display, position, and set styles for font
       tooltipEl.style.opacity = 1
       tooltipEl.style.position = 'absolute'
-      tooltipEl.style.backgroundColor = defaults.background // 'rgb(226, 54, 54)'
+      tooltipEl.style.backgroundColor = defaults.background
+      tooltipEl.style.color = defaults.textColor
 
       tooltipEl.style.padding = '0px'
       tooltipEl.style.borderRadius = '5px'
       tooltipEl.style.pointerEvents = 'none'
+      tooltipEl.style.display = 'block'
 
       // Caret Styling
       caretEl.style.opacity = 1
+      caretEl.style.display = 'block'
 
       let caretLeft =
         position.left +
@@ -282,7 +287,6 @@ const modifyTooltip = function(props) {
       tooltipEl.style.left = tooptipLeft + 'px'
 
       tooltipEl.style.top = tooltipTop + 'px'
-      tooltipEl.style.color = '#ffffff'
       tooltipEl.style.textAlign = 'center'
 
       let caretStyles = arrowDown

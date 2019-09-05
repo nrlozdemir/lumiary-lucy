@@ -219,6 +219,11 @@ const LineAndDoughnutChartModule = ({
                       platform: platform,
                       properties: properties,
                       average: average,
+                      options: {
+                        background: colors.tooltipBackground,
+                        textColor: colors.tooltipTextColor,
+                        caretColor: colors.tooltipBackground,
+                      },
                     }),
                     chartArea: {
                       backgroundColor: colors.lineChartBackgroundColor,
