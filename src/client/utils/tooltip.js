@@ -25,7 +25,15 @@ const LineChartTemplate = function(props) {
   el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
   el += `${percentageBeautifier(props.value)} Score  |  ${props.label} Pacing`
   el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
-  el += `On ${props.labelLong}, your CV score<br> D by E% from the<br> previous day.`
+
+  el += `On ${props.labelLong}, your CV score <br> `
+  if (!isNaN(props.difference) && props.difference > 0) {
+    el += `increased by ${props.difference}% from the <br> previous day.`
+  } else if (!isNaN(props.difference) && props.difference < 0) {
+    el += `decreased by ${props.difference}% from the <br> previous day.`
+  } else {
+    el += `did not change from the <br> previous day.`
+  }
   el += '</div>'
 
   return el
@@ -47,14 +55,16 @@ const modifyTooltip = function(props) {
           !!tooltipModel.dataPoints &&
           !!tooltipModel.dataPoints[0] &&
           tooltipModel.dataPoints[0].hasOwnProperty('datasetIndex') &&
-          tooltipModel.dataPoints[0].datasetIndex) | 0
+          tooltipModel.dataPoints[0].datasetIndex) ||
+        0
 
       const index =
         (!!tooltipModel &&
           !!tooltipModel.dataPoints &&
           !!tooltipModel.dataPoints[0] &&
           tooltipModel.dataPoints[0].hasOwnProperty('index') &&
-          tooltipModel.dataPoints[0].index) | 0
+          tooltipModel.dataPoints[0].index) ||
+        0
 
       const label =
         !!props.data &&
@@ -90,23 +100,29 @@ const modifyTooltip = function(props) {
           : index - 1
 
       const previousValue =
-        !!props.data &&
-        !!props.data.datasets &&
-        !isNaN(datasetIndex) &&
-        !isNaN(index) &&
-        !isNaN(previousIndex) &&
-        !!props.data.datasets[datasetIndex] &&
-        !!props.data.datasets[datasetIndex].data &&
-        !!props.data.datasets[datasetIndex].data[previousIndex] &&
-        props.data.datasets[datasetIndex].data[previousIndex] | 0
+        (!!props.data &&
+          !!props.data.datasets &&
+          !isNaN(datasetIndex) &&
+          !isNaN(index) &&
+          !isNaN(previousIndex) &&
+          !!props.data.datasets[datasetIndex] &&
+          !!props.data.datasets[datasetIndex].data &&
+          !!props.data.datasets[datasetIndex].data[previousIndex] &&
+          props.data.datasets[datasetIndex].data[previousIndex]) ||
+        0
 
-      const diff = value - previousValue
+      const difference =
+        !isNaN(value) &&
+        !isNaN(previousValue) &&
+        percentageBeautifier(value - previousValue)
 
-      console.log("datasetIndex:", datasetIndex)
-      console.log("index:", index)
+      /*
+      console.log('datasetIndex:', datasetIndex)
+      console.log('index:', index)
       console.log('previousIndex: ', previousIndex)
       console.log('previousValue: ', previousValue)
-      console.log('diff: ', diff)
+      console.log('diff: ', difference)
+      */
 
       const defaults = {
         maxWidth: 240,
@@ -125,7 +141,7 @@ const modifyTooltip = function(props) {
         // tolerance 'px' inside for tooltip position
         tolerance: 60,
       }
-      console.log('defaults', defaults)
+      //console.log('defaults', defaults)
 
       // Tooltip Element
       let tooltipEl = document.getElementById('chartjs-tooltip')
@@ -213,6 +229,7 @@ const modifyTooltip = function(props) {
             label: label,
             value: value,
             labelLong: labelLong,
+            difference: difference,
           }),
         }
 
