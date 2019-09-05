@@ -66,7 +66,7 @@ const modifyTooltip = function(props) {
       const labelLong =
         !!props.data &&
         !!props.data.labelsLong &&
-        !!datasetIndex &&
+        !!index &&
         props.data.labelsLong[index]
 
       const value =
