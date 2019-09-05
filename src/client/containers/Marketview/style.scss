@@ -11,15 +11,18 @@
   position: relative;
   // box-shadow: 0 2px 6px 0 rgba(0, 0, 0, 0.5);
   background-color: $color-dark-grey-blue;
-  padding: 40px 20px 0;
+  padding: 40px 20px 58px;
   font-family: $font-family-ClanOTNews;
   width: calc(33% - 24px);
   margin: 0 12px;
   display: flex;
   flex-direction: column;
   min-height: 766px;
+  justify-content: space-between;
+  box-sizing: border-box;
+  height: 820px;
 
-  .marketViewCardHeader{
+  .marketViewCardHeader {
     border-bottom-width: 1px;
     border-bottom-style: solid;
     margin: 0 -20px;
@@ -34,20 +37,20 @@
   .marketViewCardSubTitle {
     font-family: $font-family-ClanOTNews;
     text-align: center;
-		margin: 40px 0;
-		font-size: 18px;
-		font-weight: normal;
-		font-style: normal;
-		font-stretch: normal;
-		line-height: normal;
-		letter-spacing: normal;
+    margin: 40px 0;
+    font-size: 18px;
+    font-weight: normal;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
   }
 
   .marketViewCardChartTitle {
     font-family: $font-family-primary;
     font-size: 24px;
     text-align: center;
-    margin-top: 30px;
+    margin-top: 32px;
   }
 
   .marketViewCardLink {
@@ -80,7 +83,9 @@
     line-height: 26px;
     text-align: center;
     width: 95%;
-    margin: auto auto 40px;
+    // margin: auto auto 40px;
+    // margin: 0 auto 58px;
+    margin: 0 auto;
   }
 
   .pieChartContainer {
@@ -152,7 +157,8 @@
 .colors {
   display: flex;
   justify-content: center;
-  margin-bottom: 21px;
+  // margin-bottom: 21px;
+  margin-bottom: 32px;
 
   span {
     display: inline-block;
@@ -214,11 +220,11 @@
   height: 110px;
   margin: 0px auto;
   overflow: hidden;
-  &.dark{
+  &.dark {
     box-shadow: 0 4px 16px 0 $dark_videoCardShadow;
   }
 
-  &.light{
+  &.light {
     box-shadow: 0 4px 16px 0 $light_videoCardShadow;
   }
 }
@@ -292,7 +298,8 @@
 .bubbleChart {
   position: relative;
   margin-top: -70px;
-  margin-bottom: 50px;
+  // margin-bottom: 50px;
+  height: 100%;
 }
 
 .bubbleVisual {
@@ -345,7 +352,8 @@
 }
 .chartSectionBadge {
   display: block;
-  margin: 30px 0 40px;
+  // margin: 30px 0 40px;
+  margin: 33px 0 51px;
   text-align: center;
   white-space: nowrap;
 
@@ -358,7 +366,7 @@
     font-weight: bold;
     padding: 11px 24px;
 
-    a{
+    a {
       color: inherit;
       text-decoration: none;
     }

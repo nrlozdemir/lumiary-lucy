@@ -108,7 +108,7 @@ class TopVideosOverTime extends React.Component {
         moduleKey={moduleKey}
         title={
           title +
-          (container === 'time' ? ' ' + (selectValue || 'Past Week') : '')
+          (container === 'time' ? ' ' + (selectValue || 'Week') : '')
         }
         action={this.callback}
         filters={filters}

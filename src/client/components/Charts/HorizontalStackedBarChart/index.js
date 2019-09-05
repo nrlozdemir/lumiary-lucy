@@ -81,18 +81,44 @@ const HorizontalStackedBarChart = (props) => {
     return {
       label,
       backgroundColor:
-        !!stadiumValuesMapped[thisBucketLabel] &&
-        stadiumValuesMapped[thisBucketLabel].color,
+      !!stadiumValuesMapped[thisBucketLabel] &&
+      stadiumValuesMapped[thisBucketLabel].color,
       borderColor:
-        !!stadiumValuesMapped[thisBucketLabel] &&
-        stadiumValuesMapped[thisBucketLabel].color,
-      borderWidth: 1,
+        colors.chartBackground &&
+        colors.chartBackground,
+      borderWidth: 2,
+      //here we set border right for eact item in a row but exept only last one
+      //the calculation below is for, we should prevent setting border if we have 
+      //just one data and it will be last item at the same time
+      borderWidth: function(data) {
+        if(data.datasetIndex !== data.dataset.data.length - 1) {
+          const filteredArr = reorderDatasetByLabel[data.dataIndex].filter((item, index) => index !== data.datasetIndex)
+          const isOnlyOneData = filteredArr.every(item => item === 0)
+          if(!isOnlyOneData) {
+            return {
+              right: 2
+            }
+          }
+        }
+      },
+      // borderSkipped: 'left',
       data: labels.map((label) => {
         return horizontalStackedBarDataOriginal[label][thisBucketLabel]
       }),
     }
   })
-
+  let reorderDatasetByLabel = []
+  if(datasets && !!datasets.length){
+    datasets.forEach(item => {
+      item.data.forEach((data, i) => {
+        if(!reorderDatasetByLabel[i]) {
+          reorderDatasetByLabel.push([])
+        }
+        reorderDatasetByLabel[i].push(data)
+      })
+    })
+  }
+  
   return (
     <HorizontalBar
       key={Math.random()}
