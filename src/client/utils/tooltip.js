@@ -275,9 +275,9 @@ const modifyTooltip = function(props) {
 
         const templates = {
           LineChartTemplate: LineChartTemplate({
-            label: !!label && label || '',
-            value: !!value && value || 0,
-            labelLong: !!labelLong && labelLong || '',
+            label: (!!label && label) || '',
+            value: (!!value && value) || 0,
+            labelLong: (!!labelLong && labelLong) || '',
             difference: !!difference && difference | 0,
           }),
         }
