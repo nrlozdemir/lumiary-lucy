@@ -23,14 +23,17 @@ class PanopticFilteringSection extends Component {
   }
 
   render() {
+
     const {
       filteringSectionData: {
         data,
         data: { doughnutData, stackedChartData },
         loading,
-        error,
+				error,
       },
-    } = this.props
+		} = this.props
+
+		console.log("this.props", this.props)
 
     const isDoughnutEmpty = isDataSetEmpty(doughnutData)
     const isStackedChartEmpty = isDataSetEmpty(stackedChartData)
@@ -147,6 +150,7 @@ class PanopticFilteringSection extends Component {
                   : null
               }
               barSpacing={4}
+							tooltipType='extended'
             />
           </div>
         </div>
