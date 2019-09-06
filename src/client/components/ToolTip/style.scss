@@ -77,6 +77,14 @@
     text-align: center;
     color: #ffffff;
 
+    &.removePadding {
+      padding: 0px;
+    }
+
+    &.CircleChart {
+      width: auto !important;
+    }
+
     &.largeTooltip {
       width: 480px !important;
     }

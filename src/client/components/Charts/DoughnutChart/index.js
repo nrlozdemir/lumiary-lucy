@@ -89,6 +89,10 @@ class DoughnutChart extends React.Component {
       datasetOptions = {},
       removeTooltip = false,
       showAllData = false,
+      tooltipCaretPosition = false,
+      tooltipTemplate = false,
+      currentDayIndex = false,
+      weekdayOrder = false,
     } = this.props
 
     const themes = this.props.themeContext.colors
@@ -423,9 +427,30 @@ class DoughnutChart extends React.Component {
                     </div>
                     <ToolTip
                       effect="solid"
-                      place="right"
+                      place={
+                        (!!tooltipCaretPosition &&
+                          ((tooltipCaretPosition == 'left'
+                            ? 'right'
+                            : 'left') ||
+                            (tooltipCaretPosition == 'right'
+                              ? 'left'
+                              : 'left'))) ||
+                        'left'
+                      }
                       smallTooltip
                       id={`panoptic-cvScore-${tooltipKey}`}
+                      template={(!!tooltipTemplate && tooltipTemplate) || false}
+                      tooltipProps={{
+                        value: average,
+                        labelLong:
+                          !!weekdayOrder &&
+                          !!currentDayIndex &&
+                          !!weekdayOrder[currentDayIndex] &&
+                          !!weekdayOrder[currentDayIndex].weekday &&
+                          weekdayOrder[currentDayIndex].weekday,
+                        average: average,
+                        platform: ucfirst(cvScoreData.platform),
+                      }}
                     />
                   </React.Fragment>
                 )}

@@ -429,6 +429,7 @@ function* getTopPerformingFormatData({ data = {} }) {
       // }
 
       const weekdayOrder = []
+
       const propertyBuckets = {}
       for (let i = 0; i < 7; i++) {
         const weekday = moment()
@@ -494,6 +495,11 @@ function* getTopPerformingFormatData({ data = {} }) {
         datasets: Object.keys(propertyBuckets).map((propertyBucket) => {
           return propertyBuckets[propertyBucket]
         }),
+        labelsLong: weekdayOrder.map((item) => {
+          return item.weekday
+        }),
+        currentDayIndex: currentDayIndex,
+        weekdayOrder: weekdayOrder,
       }
 
       yield put(
