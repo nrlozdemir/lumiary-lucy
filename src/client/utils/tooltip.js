@@ -131,7 +131,7 @@ const DoughnutChartTemplate = function(props) {
 }
 
 const VerticalStackedBarChartTemplate = function(props) {
-  console.log('VerticalStackedBarChartTemplate props', props)
+  // console.log('VerticalStackedBarChartTemplate props', props)
   let titleStyle = 'margin: 16px 16px 8px 16px;'
   titleStyle += 'font-family: ClanOT;'
   titleStyle += 'font-size: 14px;'
