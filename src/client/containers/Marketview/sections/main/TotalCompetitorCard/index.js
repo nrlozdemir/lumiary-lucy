@@ -22,6 +22,18 @@ class TotalCompetitorCard extends React.Component {
     this.props.getTotalCompetitorViewsRequest()
   }
 
+  // _getNGreatest(dataSet, n) {
+  //   function sumData(datum) {
+  //     return datum.reduce((a, b) => a + b)
+  //   }
+
+  //   const sortedData = [...dataSet].sort(
+  //     (datumA, datumB) => sumData(datumB.data) - sumData(datumA.data)
+  //   )
+
+  //   return sortedData.slice(0, n)
+  // }
+
   render() {
     const {
       totalCompetitorViewsData: { data, loading },
@@ -29,6 +41,10 @@ class TotalCompetitorCard extends React.Component {
     } = this.props
 
     const isEmpty = isDataSetEmpty(data)
+
+    //Second argument denotes how many elements you want to display. If you want all elements in dataset, omit second argument
+    // const sortedDataSet =
+    //   !!data.datasets && this._getNGreatest(data.datasets, 5)
 
     const hasDatasets = !!data && !!data.datasets && !!data.datasets.length
 

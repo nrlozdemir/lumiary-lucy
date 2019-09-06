@@ -26,12 +26,12 @@ import {
 import { dayOfWeek, chartColors, formatToS3Examples } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 import { isNumber } from 'util'
+import { merge } from 'lodash'
 
 function* getCompetitorVideosApi({ payload }) {
-
   let requestObject = { ...payload }
-  if(!!payload.onDay) {
-    requestObject = { ...requestObject, activeDay: payload.onDay}
+  if (!!payload.onDay) {
+    requestObject = { ...requestObject, activeDay: payload.onDay }
   }
 
   if (payload.competitors) {
@@ -350,7 +350,7 @@ function* getSimilarProperties(params = {}) {
           daterange: dateRange,
           platforms: ['all'],
           percentile: 80,
-          activeDay: onDay || ''
+          activeDay: onDay || '',
         }
         break
     }
@@ -687,6 +687,18 @@ function* getTotalViewsData({ data }) {
   }
 }
 
+function _getNGreatest(dataSet, n) {
+  function sumData(datum) {
+    return datum.reduce((a, b) => a + b)
+  }
+
+  const sortedData = [...dataSet].sort(
+    (datumA, datumB) => sumData(datumB.data) - sumData(datumA.data)
+  )
+
+  return sortedData.slice(0, n)
+}
+
 function* getTotalCompetitorViewsData() {
   try {
     const profile = yield select(makeSelectAuthProfile())
@@ -703,16 +715,26 @@ function* getTotalCompetitorViewsData() {
     const payload = yield call(getDataFromApi, { ...options }, '/report')
 
     if (!!payload) {
-      yield put(
-        actions.getTotalCompetitorViewsSuccess(
-          percentageManipulation(
-            convertDataIntoDatasets(payload, options, {
-              useBrands: true,
-              customKeys: Object.keys(payload.data),
-            })
-          )
+      const formattedData = actions.getTotalCompetitorViewsSuccess(
+        percentageManipulation(
+          convertDataIntoDatasets(payload, options, {
+            useBrands: true,
+            customKeys: Object.keys(payload.data),
+          })
         )
       )
+
+      const sortedDataSet = _getNGreatest(formattedData.payload.datasets, 5)
+
+      const newFormattedData = {
+        type: formattedData.type,
+        payload: {
+          datasets: [...sortedDataSet],
+          labels: [...formattedData.payload.labels],
+        },
+      }
+      
+      yield put(newFormattedData)
     }
   } catch (error) {
     console.log(error)
@@ -862,7 +884,7 @@ function* getTopPerformingPropertiesByTimeData({
       buildApiUrl(`/brand/${brand.uuid}/propertyperformance`, {
         daterange: dateRange,
         property: property,
-        activeDay
+        activeDay,
       }),
       'GET'
     )
