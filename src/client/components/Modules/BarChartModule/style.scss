@@ -57,6 +57,13 @@
     .colorListItem {
       margin: 0 15px;
     }
+
+    &.minimizedLabels {
+      .colorListItem {
+        font-size: 13px;
+        margin: 0 10px;
+      }
+    }
   }
 
   &.colorListSmall {
