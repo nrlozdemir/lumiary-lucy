@@ -91,7 +91,7 @@ const CircleChartTemplate = (props) => {
 }
 
 const DoughnutChartTemplate = function(props) {
-  console.log('DoughnutChartTemplate props', props)
+  //console.log('DoughnutChartTemplate props', props)
   let titleStyle = 'margin: 16px 16px 8px 16px;'
   titleStyle += 'font-family: ClanOT;'
   titleStyle += 'font-size: 14px;'
@@ -123,15 +123,15 @@ const DoughnutChartTemplate = function(props) {
     'aeiou'.indexOf(props.label[0].toLowerCase()) !== -1 &&
     'an') ||
     'a'}<br> `
-  el += `${!!props.label &&
-    props.label.toLowerCase()} of ${!!props.itemLabel && props.itemLabel}`
+  el += `${!!props.label && props.label.toLowerCase()} of ${!!props.itemLabel &&
+    props.itemLabel}`
   el += '</div>'
 
   return el
 }
 
 const modifyTooltip = function(props) {
-  console.log('modify tooltip props: ', props)
+  //console.log('modify tooltip props: ', props)
   const { options = {} } = props
   return {
     enabled: false,
@@ -211,12 +211,14 @@ const modifyTooltip = function(props) {
         !isNaN(index) &&
         props.data.labels[index]
 
+      /*
       console.log('datasetIndex:', datasetIndex)
       console.log('index:', index)
       console.log('previousIndex: ', previousIndex)
       console.log('previousValue: ', previousValue)
       console.log('diff: ', difference)
       console.log('itemLabel: ', itemLabel)
+      */
 
       const defaults = {
         maxWidth: 240,
@@ -292,6 +294,7 @@ const modifyTooltip = function(props) {
         //console.log('titleLines:', titleLines)
         //console.log('bodyLines:', bodyLines)
 
+        /*
         titleLines.forEach(function(title) {
           innerHtml +=
             '<p style="font-size:' +
@@ -321,6 +324,7 @@ const modifyTooltip = function(props) {
         innerHtml += '</div>'
 
         tooltipEl.innerHTML = innerHtml
+        */
 
         const templates = {
           LineChartTemplate: LineChartTemplate({
