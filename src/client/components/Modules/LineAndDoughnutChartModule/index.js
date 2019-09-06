@@ -136,6 +136,8 @@ const LineAndDoughnutChartModule = ({
       }
     })
 
+  console.log('manipulateData:', manipulateData)
+
   return (
     <Module
       moduleKey={moduleKey}
@@ -341,6 +343,16 @@ const LineAndDoughnutChartModule = ({
                     }}
                     tooltipCaretPosition={idx <= 2 ? 'left' : 'right'}
                     tooltipTemplate="CircleChart"
+                    currentDayIndex={
+                      !!manipulateData &&
+                      !!manipulateData.currentDayIndex &&
+                      manipulateData.currentDayIndex
+                    }
+                    weekdayOrder={
+                      !!manipulateData &&
+                      !!manipulateData.weekdayOrder &&
+                      manipulateData.weekdayOrder
+                    }
                   />
                   <div
                     className={style.centerText}

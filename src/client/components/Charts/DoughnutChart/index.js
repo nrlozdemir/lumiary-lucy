@@ -91,6 +91,8 @@ class DoughnutChart extends React.Component {
       showAllData = false,
       tooltipCaretPosition = false,
       tooltipTemplate = false,
+      currentDayIndex = false,
+      weekdayOrder = false,
     } = this.props
 
     const themes = this.props.themeContext.colors
@@ -439,10 +441,15 @@ class DoughnutChart extends React.Component {
                       id={`panoptic-cvScore-${tooltipKey}`}
                       template={(!!tooltipTemplate && tooltipTemplate) || false}
                       tooltipProps={{
-                        value: 51,
-                        labelLong: 'Friday',
-                        average: 78,
-                        platform: 'Facebook',
+                        value: average,
+                        labelLong:
+                          !!weekdayOrder &&
+                          !!currentDayIndex &&
+                          !!weekdayOrder[currentDayIndex] &&
+                          !!weekdayOrder[currentDayIndex].weekday &&
+                          weekdayOrder[currentDayIndex].weekday,
+                        average: average,
+                        platform: ucfirst(cvScoreData.platform),
                       }}
                     />
                   </React.Fragment>
