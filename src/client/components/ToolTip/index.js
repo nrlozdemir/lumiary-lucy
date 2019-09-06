@@ -8,7 +8,7 @@ import { CircleChartTemplate } from 'Utils/tooltip'
 export default (props) => {
   console.log('props.template: ', props.template)
   const tooltipComponents = {
-    CicleChart: CircleChartTemplate,
+    CircleChart: CircleChartTemplate,
   }
 
   const TooltipTemplate = tooltipComponents[props.template]
@@ -38,9 +38,7 @@ export default (props) => {
               [`${props.template}`]: !!props.template,
             })}
           >
-            {!!props.template && (
-              <CircleChartTemplate {...props.tooltipProps} />
-            )}
+            {!!props.template && <TooltipTemplate {...props.tooltipProps} />}
           </ReactTooltip>
         )
       }}
