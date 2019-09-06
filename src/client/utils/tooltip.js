@@ -1,3 +1,4 @@
+import React from 'react'
 import { percentageBeautifier } from 'Utils/datasets'
 
 const LineChartTemplate = function(props) {
@@ -37,6 +38,56 @@ const LineChartTemplate = function(props) {
   el += '</div>'
 
   return el
+}
+
+const CircleChartTemplate = (props) => {
+  const titleStyle = {
+    margin: '16px 16px 8px 16px',
+    fontFamily: 'ClanOT',
+    fontSize: '14px',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    fontStretch: 'normal',
+    lineHeight: '1.43',
+    letterSpacing: 'normal',
+  }
+
+  const bodyStyle = {
+    margin: '8px 16px 16px 16px',
+    fontFamily: 'ClanOT',
+    fontSize: '12px',
+    fontWeight: 'bold',
+    fontStyle: 'normal',
+    fontStretch: 'normal',
+    lineHeight: '1.67',
+    letterSpacing: 'normal',
+    paddingTop: '8px',
+    borderTop: '1px solid #e8ecf0',
+  }
+
+  const pStyle = {
+    margin: '0px',
+    padding: '0px',
+    fontFamily: 'ClanOT',
+    fontSize: '12px',
+    lineHeight: '1.67',
+  }
+
+  return (
+    <React.Fragment>
+      <div className="chartjs-tooltip-title" style={titleStyle}>
+        {percentageBeautifier(props.value)} Score{'  '}|{'  '}
+        {props.platform} Average
+      </div>
+      <div style={bodyStyle} className="chartjs-tooltip-body">
+        <p style={pStyle}>
+          On {props.labelLong}, your average {props.platform}
+        </p>
+        <p style={pStyle}>video had a {props.average} content vitality</p>
+        <p style={pStyle}>score</p>
+      </div>
+    </React.Fragment>
+  )
 }
 
 const modifyTooltip = function(props) {
@@ -246,7 +297,7 @@ const modifyTooltip = function(props) {
       tooltipEl.style.color = defaults.textColor
 
       tooltipEl.style.padding = '0px'
-      tooltipEl.style.borderRadius = '5px'
+      tooltipEl.style.borderRadius = '8px'
       tooltipEl.style.pointerEvents = 'none'
       tooltipEl.style.display = 'block'
 
@@ -351,4 +402,4 @@ const modifyTooltip = function(props) {
   }
 }
 
-export { modifyTooltip }
+export { modifyTooltip, CircleChartTemplate }
