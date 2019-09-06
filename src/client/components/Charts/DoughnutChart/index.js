@@ -90,6 +90,7 @@ class DoughnutChart extends React.Component {
       removeTooltip = false,
       showAllData = false,
       tooltipCaretPosition = false,
+      tooltipTemplate = false,
     } = this.props
 
     const themes = this.props.themeContext.colors
@@ -436,6 +437,13 @@ class DoughnutChart extends React.Component {
                       }
                       smallTooltip
                       id={`panoptic-cvScore-${tooltipKey}`}
+                      template={(!!tooltipTemplate && tooltipTemplate) || false}
+                      tooltipProps={{
+                        value: 51,
+                        labelLong: 'Friday',
+                        average: 78,
+                        platform: 'Facebook',
+                      }}
                     />
                   </React.Fragment>
                 )}
