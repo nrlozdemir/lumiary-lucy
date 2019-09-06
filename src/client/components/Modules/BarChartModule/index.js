@@ -51,7 +51,10 @@ const BarChartModule = ({
             className={classnames(
               style.colorListHorizontal,
               style.colorList,
-              style.floatRight
+              style.floatRight,
+              {
+                [style.minimizedLabels]: titleLabels && titleLabels.length > 4
+              }
             )}
           >
             {titleLabels.map((title, index) => (
