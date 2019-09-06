@@ -229,21 +229,30 @@ const Select = (props) => {
   }
 
   return (
-    <ReactSelect
-      components={{ DropdownIndicator, Group, SingleValue }}
-      id={id}
-      className={selectClass}
-      classNamePrefix="react-select"
-      clearable={false}
-      name={name}
-      onChange={!!props.input ? reduxFormOnChange : onChange}
-      options={options}
-      searchable={false}
-      placeholder={placeholder}
-      multi={multiple}
-      styles={colourStyles}
-      {...(value ? { value } : { value: null })}
-    />
+    <React.Fragment>
+      <style>
+        {`
+        .${style.active}::before {
+          color: ${props.themeContext.colors.textColor} !important;
+        }
+      `}
+      </style>
+      <ReactSelect
+        components={{ DropdownIndicator, Group, SingleValue }}
+        id={id}
+        className={selectClass}
+        classNamePrefix="react-select"
+        clearable={false}
+        name={name}
+        onChange={!!props.input ? reduxFormOnChange : onChange}
+        options={options}
+        searchable={false}
+        placeholder={placeholder}
+        multi={multiple}
+        styles={colourStyles}
+        {...(value ? { value } : { value: null })}
+      />
+    </React.Fragment>
   )
 }
 
