@@ -339,9 +339,8 @@ const LineAndDoughnutChartModule = ({
                       ],
                       labels: ['a', 'b'],
                     }}
-                    tooltipCaretPosition={
-                      idx <= 2 ? 'left' : 'right'
-                    }
+                    tooltipCaretPosition={idx <= 2 ? 'left' : 'right'}
+                    tooltipTemplate="CircleChart"
                   />
                   <div
                     className={style.centerText}
