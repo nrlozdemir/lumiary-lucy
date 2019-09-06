@@ -151,7 +151,7 @@ function* getFilteringSectionData({ data }) {
         stackedChartData.data = convertNestedDurationsIntoLabels(
           stackedChartData.data
         )
-      }
+			}
 
       yield put(
         actions.getFilteringSectionDataSuccess({
@@ -165,9 +165,15 @@ function* getFilteringSectionData({ data }) {
           stackedChartData:
             (!_.isEmpty(stackedChartData.data) &&
               convertDataIntoDatasets(
-                percentageManipulation(stackedChartData),
+                percentageManipulation({
+									...stackedChartData,
+									property: property,
+									platform: platform,
+								}),
                 { ...options, dateBucket },
-                { borderWidth: { top: 3, right: 0, bottom: 0, left: 0 } }
+                {
+									borderWidth: { top: 3, right: 0, bottom: 0, left: 0 },
+								}
               )) ||
             {},
           property,

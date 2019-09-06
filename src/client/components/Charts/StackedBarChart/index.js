@@ -4,6 +4,7 @@ import { barDataOptions } from './options'
 import { withTheme } from 'ThemeContext/withTheme'
 import { metricSuffix, customChartToolTip } from 'Utils'
 import { percentageManipulation } from 'Utils/datasets'
+import { modifyTooltip } from 'Utils/tooltip'
 
 const emptyData = {
   datasets: [],
@@ -121,9 +122,12 @@ const StackedBarChart = (props) => {
     xGridDisplay,
     hideLabels = false,
     metricTitle = false,
+    tooltipType = 'basic',
   } = props
 
-  const themes = props.themeContext.colors
+	const themes = props.themeContext.colors
+
+	console.log("barData: ", barData)
 
   return (
     <Bar
@@ -155,36 +159,50 @@ const StackedBarChart = (props) => {
       width={width}
       options={{
         ...barDataOptions,
-        tooltips: customChartToolTip(themes, {
-          callbacks: {
-            title: (tooltipItem, data) => {
-              return (
-                metricTitle !== false &&
-                !!tooltipItem &&
-                !!tooltipItem[0] &&
-                !!metricTitle[tooltipItem[0]['index']] &&
-                metricTitle[tooltipItem[0]['index']]
-              )
-            },
-            label: function(tooltipItem, data) {
-              const count =
-                (data &&
-                  data.datasets &&
-                  data.datasets[tooltipItem['datasetIndex']] &&
-                  data.datasets[tooltipItem['datasetIndex']].data[
-                    tooltipItem['index']
-                  ]) ||
-                ''
-              const name =
-                (data &&
-                  data.datasets &&
-                  data.datasets[tooltipItem['datasetIndex']] &&
-                  data.datasets[tooltipItem['datasetIndex']].label) ||
-                ''
-              return `${count || 0}% ${!!name && `| ${name}`}`
-            },
-          },
-        }),
+        tooltips:
+          ((!!tooltipType &&
+            (tooltipType === 'basic' &&
+              customChartToolTip(themes, {
+                callbacks: {
+                  title: (tooltipItem, data) => {
+                    return (
+                      metricTitle !== false &&
+                      !!tooltipItem &&
+                      !!tooltipItem[0] &&
+                      !!metricTitle[tooltipItem[0]['index']] &&
+                      metricTitle[tooltipItem[0]['index']]
+                    )
+                  },
+                  label: function(tooltipItem, data) {
+                    const count =
+                      (data &&
+                        data.datasets &&
+                        data.datasets[tooltipItem['datasetIndex']] &&
+                        data.datasets[tooltipItem['datasetIndex']].data[
+                          tooltipItem['index']
+                        ]) ||
+                      ''
+                    const name =
+                      (data &&
+                        data.datasets &&
+                        data.datasets[tooltipItem['datasetIndex']] &&
+                        data.datasets[tooltipItem['datasetIndex']].label) ||
+                      ''
+                    return `${count || 0}% ${!!name && `| ${name}`}`
+                  },
+                },
+              }))) ||
+            (tooltipType === 'extended' &&
+              modifyTooltip({
+                template: 'VerticalStackedBarChartTemplate',
+                data: barData,
+                options: {
+                  background: themes.tooltipBackground,
+                  textColor: themes.tooltipTextColor,
+                  caretColor: themes.tooltipBackground,
+                },
+              }))),
+
         chartArea: {
           backgroundColor: themes.chartBackground,
           barSpacing,
