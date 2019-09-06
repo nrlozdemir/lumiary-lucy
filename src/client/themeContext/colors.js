@@ -127,7 +127,7 @@ const dark = {
   // table values
 
   // tooltip values
-  tooltipTextColor: '#373f5b',
+  tooltipTextColor: '#21243b',
   tooltipBackground: '#ffffff',
   tooltipRadarChartTextColor: '#23294b',
   chartTooltipColor: '#21243b',
@@ -262,7 +262,7 @@ const dark = {
   lineChartPointHoverBorderColor: '#fff',
   lineChartShadowColor: '#333',
   lineChartShadowColorDark: '#000',
-	lineChartXAxisColor: '#fff',
+  lineChartXAxisColor: '#fff',
 
   //glossary
   glossaryLinkColor: '#fff',
@@ -419,7 +419,7 @@ const light = {
   // table values
 
   // tooltip values
-  tooltipTextColor: '#f3f6f9',
+  tooltipTextColor: '#ffffff',
   tooltipBackground: '#505050',
   tooltipRadarChartTextColor: '#fff',
   chartTooltipColor: '#fff',
@@ -552,8 +552,8 @@ const light = {
   lineChartPointBorderColor: '#505050',
   lineChartPointHoverBorderColor: '#505050',
   lineChartShadowColor: '#ddd',
-	lineChartShadowColorDark: '#a3a3a3',
-	lineChartXAxisColor: 'rgb(80, 80, 80, 0.5)',
+  lineChartShadowColorDark: '#a3a3a3',
+  lineChartXAxisColor: 'rgb(80, 80, 80, 0.5)',
 
   //glossary
   glossaryLinkColor: '#505050',

@@ -11,6 +11,7 @@ import {
   percentageManipulation,
   getCVScoreChartAttributes,
 } from 'Utils/datasets'
+import { modifyTooltip } from 'Utils/tooltip'
 
 const sortCircles = (index) => {
   const text = {
@@ -135,21 +136,6 @@ const LineAndDoughnutChartModule = ({
       }
     })
 
-  // console.log(lineChartOptions)
-
-  //  console.log(
-  //    moduleKey,
-  //    title,
-  //    action,
-  //    lineChartData,
-  //    lineChartOptions,
-  //    filters,
-  //    isEmpty,
-  //    platform,
-  //    properties,
-  //    average
-  //  )
-
   return (
     <Module
       moduleKey={moduleKey}
@@ -184,30 +170,16 @@ const LineAndDoughnutChartModule = ({
                         bottom: 0,
                       },
                     },
-                    chartArea: {
-                      backgroundColor: colors.lineChartBackgroundColor,
-                    },
-                    tooltips: customChartToolTip(colors, {
-                      callbacks: {
-                        title: () => '',
-                        label: function(tooltipItem, data) {
-                          const { datasetIndex } = tooltipItem
-                          const count =
-                            (data &&
-                              data.datasets &&
-                              data.datasets[datasetIndex] &&
-                              data.datasets[datasetIndex].data[
-                                tooltipItem['index']
-                              ]) ||
-                            ''
-                          const name =
-                            (data &&
-                              lineChartData &&
-                              lineChartData.datasets[datasetIndex].label) ||
-                            ''
-                          return `${percentageManipulation(count) ||
-                            0} Score ${!!name && `| ${name}`}`
-                        },
+                    tooltips: modifyTooltip({
+                      template: 'LineChartTemplate',
+                      data: manipulateData,
+                      platform: platform,
+                      properties: properties,
+                      average: average,
+                      options: {
+                        background: colors.tooltipBackground,
+                        textColor: colors.tooltipTextColor,
+                        caretColor: colors.tooltipBackground,
                       },
                     }),
                     chartArea: {
@@ -367,6 +339,18 @@ const LineAndDoughnutChartModule = ({
                       ],
                       labels: ['a', 'b'],
                     }}
+                    tooltipCaretPosition={idx <= 2 ? 'left' : 'right'}
+                    tooltipTemplate="CircleChart"
+                    currentDayIndex={
+                      !!manipulateData &&
+                      !!manipulateData.currentDayIndex &&
+                      manipulateData.currentDayIndex
+                    }
+                    weekdayOrder={
+                      !!manipulateData &&
+                      !!manipulateData.weekdayOrder &&
+                      manipulateData.weekdayOrder
+                    }
                   />
                   <div
                     className={style.centerText}
