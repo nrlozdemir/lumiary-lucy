@@ -124,7 +124,7 @@ const DoughnutChartTemplate = function(props) {
     'an') ||
     'a'}<br> `
   el += `${!!props.label &&
-    props.label.toLowerCase()} of <br> ${!!props.itemLabel && props.itemLabel}`
+    props.label.toLowerCase()} of ${!!props.itemLabel && props.itemLabel}`
   el += '</div>'
 
   return el
