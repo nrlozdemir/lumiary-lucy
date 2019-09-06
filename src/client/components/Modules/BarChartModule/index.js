@@ -50,7 +50,7 @@ const BarChartModule = ({
             )}
           >
             {titleLabels.map((title, index) => (
-              <div key={index} className={style.colorListItem}>
+              <div key={index} id={`${title}`} className={style.colorListItem}>
                 {title}
               </div>
             ))}
