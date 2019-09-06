@@ -89,6 +89,7 @@ class DoughnutChart extends React.Component {
       datasetOptions = {},
       removeTooltip = false,
       showAllData = false,
+      tooltipCaretPosition = false,
     } = this.props
 
     const themes = this.props.themeContext.colors
@@ -423,7 +424,16 @@ class DoughnutChart extends React.Component {
                     </div>
                     <ToolTip
                       effect="solid"
-                      place="right"
+                      place={
+                        (!!tooltipCaretPosition &&
+                          ((tooltipCaretPosition == 'left'
+                            ? 'right'
+                            : 'left') ||
+                            (tooltipCaretPosition == 'right'
+                              ? 'left'
+                              : 'left'))) ||
+                        'left'
+                      }
                       smallTooltip
                       id={`panoptic-cvScore-${tooltipKey}`}
                     />

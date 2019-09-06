@@ -136,26 +136,6 @@ const LineAndDoughnutChartModule = ({
       }
     })
 
-  // console.log(lineChartOptions)
-
-  //  console.log(
-  //    moduleKey,
-  //    title,
-  //    action,
-  //    lineChartData,
-  //    lineChartOptions,
-  //    filters,
-  //    isEmpty,
-  //    platform,
-  //    properties,
-  //    average
-  //  )
-
-  //console.log("platform :", platform)
-  //console.log("properties :", properties)
-  //console.log("average :", average)
-  //console.log("manipulateData :", manipulateData)
-
   return (
     <Module
       moduleKey={moduleKey}
@@ -190,29 +170,6 @@ const LineAndDoughnutChartModule = ({
                         bottom: 0,
                       },
                     },
-                    // tooltips: customChartToolTip(colors, {
-                    //   callbacks: {
-                    //     title: () => '',
-                    //     label: function(tooltipItem, data) {
-                    //       const { datasetIndex } = tooltipItem
-                    //       const count =
-                    //         (data &&
-                    //           data.datasets &&
-                    //           data.datasets[datasetIndex] &&
-                    //           data.datasets[datasetIndex].data[
-                    //             tooltipItem['index']
-                    //           ]) ||
-                    //         ''
-                    //       const name =
-                    //         (data &&
-                    //           lineChartData &&
-                    //           lineChartData.datasets[datasetIndex].label) ||
-                    //         ''
-                    //       return `${percentageManipulation(count) ||
-                    //         0} Score ${!!name && `| ${name}`}`
-                    //     },
-                    //   },
-                    // }),
                     tooltips: modifyTooltip({
                       template: 'LineChartTemplate',
                       data: manipulateData,
@@ -382,6 +339,9 @@ const LineAndDoughnutChartModule = ({
                       ],
                       labels: ['a', 'b'],
                     }}
+                    tooltipCaretPosition={
+                      idx <= 2 ? 'left' : 'right'
+                    }
                   />
                   <div
                     className={style.centerText}
