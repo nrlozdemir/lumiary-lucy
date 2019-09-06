@@ -131,7 +131,7 @@ const DoughnutChartTemplate = function(props) {
 }
 
 const VerticalStackedBarChartTemplate = function(props) {
-  //console.log('DoughnutChartTemplate props', props)
+  console.log('VerticalStackedBarChartTemplate props', props)
   let titleStyle = 'margin: 16px 16px 8px 16px;'
   titleStyle += 'font-family: ClanOT;'
   titleStyle += 'font-size: 14px;'
@@ -159,12 +159,13 @@ const VerticalStackedBarChartTemplate = function(props) {
   el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
 
   el += `${percentageBeautifier(props.value)}% of your library<br> `
-  el += `represents video with ${(!!props.label &&
-    'aeiou'.indexOf(props.label[0].toLowerCase()) !== -1 &&
+  el += `represents video with ${(!!props.propertyValue &&
+    'aeiou'.indexOf(props.propertyValue[0].toLowerCase()) !== -1 &&
     'an') ||
     'a'}<br> `
-  el += `${!!props.label && props.label.toLowerCase()} of ${!!props.label &&
-    props.itemLabel}`
+  el += `${!!props.propertyValue &&
+    props.propertyValue.toLowerCase()} of ${!!props.label &&
+    props.label.toLowerCase()}`
   el += '</div>'
 
   return el
@@ -250,6 +251,9 @@ const modifyTooltip = function(props) {
         !!props.data.labels &&
         !isNaN(index) &&
         props.data.labels[index]
+
+      const propertyValue =
+        !!props.data && !!props.data.property && props.data.property
 
       /*
       console.log('datasetIndex:', datasetIndex)
@@ -382,6 +386,7 @@ const modifyTooltip = function(props) {
             labelLong: (!!labelLong && labelLong) || '',
             difference: !!difference && difference | 0,
             itemLabel: (!!itemLabel && itemLabel) || '',
+            propertyValue: (!!propertyValue && propertyValue) || '',
           }),
         }
 
