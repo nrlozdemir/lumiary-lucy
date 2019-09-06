@@ -90,8 +90,48 @@ const CircleChartTemplate = (props) => {
   )
 }
 
+const DoughnutChartTemplate = function(props) {
+  console.log('DoughnutChartTemplate props', props)
+  let titleStyle = 'margin: 16px 16px 8px 16px;'
+  titleStyle += 'font-family: ClanOT;'
+  titleStyle += 'font-size: 14px;'
+  titleStyle += 'font-weight: bold;'
+  titleStyle += 'font-style: normal;'
+  titleStyle += 'font-stretch: normal;'
+  titleStyle += 'line-height: 1.43;'
+  titleStyle += 'letter-spacing: normal;'
+
+  let bodyStyle = 'margin: 8px 16px 16px 16px;'
+  bodyStyle += 'padding-top: 8px;'
+  bodyStyle += 'border-top: 1px solid #e8ecf0;'
+  bodyStyle += 'font-family: ClanOT;'
+  bodyStyle += 'font-size: 12px;'
+  bodyStyle += 'font-weight: bold;'
+  bodyStyle += 'font-style: normal;'
+  bodyStyle += 'font-stretch: normal;'
+  bodyStyle += 'line-height: 1.67;'
+  bodyStyle += 'letter-spacing: normal;'
+
+  let el = ''
+  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += `${percentageBeautifier(props.value)}%  |  ${!!props.itemLabel &&
+    props.itemLabel}`
+  el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
+
+  el += `${percentageBeautifier(props.value)}% of your library<br> `
+  el += `represents video with ${(!!props.label &&
+    'aeiou'.indexOf(props.label[0].toLowerCase()) !== -1 &&
+    'an') ||
+    'a'}<br> `
+  el += `${!!props.label &&
+    props.label.toLowerCase()} of <br> ${!!props.itemLabel && props.itemLabel}`
+  el += '</div>'
+
+  return el
+}
+
 const modifyTooltip = function(props) {
-  //console.log('modify tooltip props: ', props)
+  console.log('modify tooltip props: ', props)
   const { options = {} } = props
   return {
     enabled: false,
@@ -165,13 +205,18 @@ const modifyTooltip = function(props) {
         !isNaN(previousValue) &&
         percentageBeautifier(value - previousValue)
 
-      /*
+      const itemLabel =
+        !!props.data &&
+        !!props.data.labels &&
+        !isNaN(index) &&
+        props.data.labels[index]
+
       console.log('datasetIndex:', datasetIndex)
       console.log('index:', index)
       console.log('previousIndex: ', previousIndex)
       console.log('previousValue: ', previousValue)
       console.log('diff: ', difference)
-      */
+      console.log('itemLabel: ', itemLabel)
 
       const defaults = {
         maxWidth: 240,
@@ -279,6 +324,13 @@ const modifyTooltip = function(props) {
             value: (!!value && value) || 0,
             labelLong: (!!labelLong && labelLong) || '',
             difference: !!difference && difference | 0,
+          }),
+          DoughnutChartTemplate: DoughnutChartTemplate({
+            label: (!!label && label) || '',
+            value: (!!value && value) || 0,
+            labelLong: (!!labelLong && labelLong) || '',
+            difference: !!difference && difference | 0,
+            itemLabel: (!!itemLabel && itemLabel) || '',
           }),
         }
 
@@ -393,6 +445,7 @@ const modifyTooltip = function(props) {
       caretStyles.width = 0
       caretStyles.height = 0
       caretStyles.position = 'absolute'
+      caretStyles.zIndex = 1000
 
       for (let i in caretStyles) {
         caretEl.style[i] = caretStyles[i]
@@ -402,4 +455,4 @@ const modifyTooltip = function(props) {
   }
 }
 
-export { modifyTooltip, CircleChartTemplate }
+export { modifyTooltip, CircleChartTemplate, DoughnutChartTemplate }
