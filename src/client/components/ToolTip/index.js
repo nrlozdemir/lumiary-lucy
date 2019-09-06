@@ -6,7 +6,6 @@ import ReactTooltip from 'react-tooltip'
 import { CircleChartTemplate } from 'Utils/tooltip'
 
 export default (props) => {
-  console.log('props.template: ', props.template)
   const tooltipComponents = {
     CircleChart: CircleChartTemplate,
   }

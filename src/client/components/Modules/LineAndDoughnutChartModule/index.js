@@ -136,8 +136,6 @@ const LineAndDoughnutChartModule = ({
       }
     })
 
-  console.log('manipulateData:', manipulateData)
-
   return (
     <Module
       moduleKey={moduleKey}
