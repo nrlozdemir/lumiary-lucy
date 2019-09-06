@@ -21,19 +21,19 @@
     }
 
     &:nth-child(1):before {
-      background-color: #2FD7C4;
+      background-color: #2fd7c4;
     }
 
     &:nth-child(2):before {
-      background-color: #8562F3;
+      background-color: #8562f3;
     }
 
     &:nth-child(3):before {
-      background-color: #5292E5;
+      background-color: #5292e5;
     }
 
     &:nth-child(4):before {
-      background-color: #ACB0BE;
+      background-color: #acb0be;
     }
 
     &:nth-child(5):before {
@@ -41,6 +41,30 @@
     }
 
     &:nth-child(6):before {
+      background-color: #ff556f;
+    }
+
+    [id='Bleacher Report']:before {
+      background-color: #2fd7c4;
+    }
+
+    [id='Barstool Sports']:before {
+      background-color: #8562f3;
+    }
+
+    [id='Complex']:before {
+      background-color: #5292e5;
+    }
+
+    [id='Fox Sports']:before {
+      background-color: #acb0be;
+    }
+
+    [id="The Players' Tribune"]:before {
+      background-color: #5a6386;
+    }
+
+    [id='ESPN']:before {
       background-color: #ff556f;
     }
   }
