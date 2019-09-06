@@ -123,11 +123,10 @@ const StackedBarChart = (props) => {
     hideLabels = false,
     metricTitle = false,
     tooltipType = 'basic',
+    property = false,
   } = props
 
-	const themes = props.themeContext.colors
-
-	console.log("barData: ", barData)
+  const themes = props.themeContext.colors
 
   return (
     <Bar
@@ -160,7 +159,7 @@ const StackedBarChart = (props) => {
       options={{
         ...barDataOptions,
         tooltips:
-          ((!!tooltipType &&
+          (!!tooltipType &&
             (tooltipType === 'basic' &&
               customChartToolTip(themes, {
                 callbacks: {
@@ -192,16 +191,19 @@ const StackedBarChart = (props) => {
                   },
                 },
               }))) ||
-            (tooltipType === 'extended' &&
-              modifyTooltip({
-                template: 'VerticalStackedBarChartTemplate',
-                data: barData,
-                options: {
-                  background: themes.tooltipBackground,
-                  textColor: themes.tooltipTextColor,
-                  caretColor: themes.tooltipBackground,
-                },
-              }))),
+          (tooltipType === 'extended' &&
+            modifyTooltip({
+              template: 'VerticalStackedBarChartTemplate',
+              data: {
+                ...barData,
+                property: property,
+              },
+              options: {
+                background: themes.tooltipBackground,
+                textColor: themes.tooltipTextColor,
+                caretColor: themes.tooltipBackground,
+              },
+            })),
 
         chartArea: {
           backgroundColor: themes.chartBackground,
