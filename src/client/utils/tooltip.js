@@ -2,31 +2,74 @@ import React from 'react'
 import { percentageBeautifier } from 'Utils/datasets'
 import { metricSuffix, ucfirst } from 'Utils'
 
+const getGlobalStyle = (custom = { title: {}, body: {} }) => {
+  const title = {
+    fontFamily: 'ClanOT',
+    fontSize: '',
+    fontWeight: '',
+    fontStyle: '',
+    fontStretch: '',
+    lineHeight: '',
+    letterSpacing: '',
+    margin: '',
+    ...custom.title,
+  }
+
+  const body = {
+    fontFamily: '',
+    fontSize: '',
+    fontWeight: '',
+    fontStyle: '',
+    fontStretch: '',
+    lineHeight: '',
+    letterSpacing: '',
+    margin: '',
+    paddingTop: '',
+    borderTop: '',
+    ...custom.body,
+  }
+
+  let titleStyle, bodyStyle
+  Object.values(title).map((s, i) => {
+    titleStyle += `${i}: ${s};`
+  })
+
+  Object.values(body).map((s, i) => {
+    bodyStyle += `${i}: ${s};`
+  })
+
+  return {
+    titleStyle: !!titleStyle && titleStyle,
+    bodyStyle: !!bodyStyle && bodyStyle,
+  }
+}
+
+let globalTitleStyle = 'margin: 16px 16px 8px 16px;'
+globalTitleStyle += 'font-family: ClanOT;'
+globalTitleStyle += 'font-size: 14px;'
+globalTitleStyle += 'font-weight: bold;'
+globalTitleStyle += 'font-style: normal;'
+globalTitleStyle += 'font-stretch: normal;'
+globalTitleStyle += 'line-height: 1.43;'
+globalTitleStyle += 'letter-spacing: normal;'
+
+let globalBodyStyle = 'margin: 8px 16px 16px 16px;'
+globalBodyStyle += 'padding-top: 8px;'
+globalBodyStyle += 'border-top: 1px solid #e8ecf0;'
+globalBodyStyle += 'font-family: ClanOT;'
+globalBodyStyle += 'font-size: 12px;'
+globalBodyStyle += 'font-weight: bold;'
+globalBodyStyle += 'font-style: normal;'
+globalBodyStyle += 'font-stretch: normal;'
+globalBodyStyle += 'line-height: 1.67;'
+globalBodyStyle += 'letter-spacing: normal;'
+
 const LineChartTemplate = function(props) {
-  let titleStyle = 'margin: 16px 16px 8px 16px;'
-  titleStyle += 'font-family: ClanOT;'
-  titleStyle += 'font-size: 14px;'
-  titleStyle += 'font-weight: bold;'
-  titleStyle += 'font-style: normal;'
-  titleStyle += 'font-stretch: normal;'
-  titleStyle += 'line-height: 1.43;'
-  titleStyle += 'letter-spacing: normal;'
-
-  let bodyStyle = 'margin: 8px 16px 16px 16px;'
-  bodyStyle += 'padding-top: 8px;'
-  bodyStyle += 'border-top: 1px solid #e8ecf0;'
-  bodyStyle += 'font-family: ClanOT;'
-  bodyStyle += 'font-size: 12px;'
-  bodyStyle += 'font-weight: bold;'
-  bodyStyle += 'font-style: normal;'
-  bodyStyle += 'font-stretch: normal;'
-  bodyStyle += 'line-height: 1.67;'
-  bodyStyle += 'letter-spacing: normal;'
-
   let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += '<div class="chartjs-tooltip-title" style="' + globalTitleStyle + '">'
   el += `${percentageBeautifier(props.value)} Score  |  ${props.label} Pacing`
-  el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
+  el +=
+    '</div><div style="' + globalBodyStyle + '" class="chartjs-tooltip-body">'
   el += `On ${props.labelLong}, your CV score <br> `
   if (!isNaN(props.difference) && props.difference > 0) {
     el += `increased by ${props.difference}% from the <br> previous day.`
@@ -41,17 +84,17 @@ const LineChartTemplate = function(props) {
 }
 
 const VideoReleasesBarChartTemplate = function(props) {
-  let titleStyle = 'margin: 8px 16px;'
-  titleStyle += 'font-family: ClanOT;'
-  titleStyle += 'font-size: 14px;'
-  titleStyle += 'font-weight: bold;'
-  titleStyle += 'font-style: normal;'
-  titleStyle += 'font-stretch: normal;'
-  titleStyle += 'line-height: 1.43;'
-  titleStyle += 'letter-spacing: normal;'
+  let globalTitleStyle = 'margin: 8px 16px;'
+  globalTitleStyle += 'font-family: ClanOT;'
+  globalTitleStyle += 'font-size: 14px;'
+  globalTitleStyle += 'font-weight: bold;'
+  globalTitleStyle += 'font-style: normal;'
+  globalTitleStyle += 'font-stretch: normal;'
+  globalTitleStyle += 'line-height: 1.43;'
+  globalTitleStyle += 'letter-spacing: normal;'
 
   let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += '<div class="chartjs-tooltip-title" style="' + globalTitleStyle + '">'
   el += `${props.value}`
   el += '</div>'
   el += '</div>'
@@ -60,7 +103,7 @@ const VideoReleasesBarChartTemplate = function(props) {
 }
 
 const CircleChartTemplate = (props) => {
-  const titleStyle = {
+  const globalTitleStyle = {
     margin: '16px 16px 8px 16px',
     fontFamily: 'ClanOT',
     fontSize: '14px',
@@ -71,7 +114,7 @@ const CircleChartTemplate = (props) => {
     letterSpacing: 'normal',
   }
 
-  const bodyStyle = {
+  const globalBodyStyle = {
     margin: '8px 16px 16px 16px',
     fontFamily: 'ClanOT',
     fontSize: '12px',
@@ -94,11 +137,11 @@ const CircleChartTemplate = (props) => {
 
   return (
     <React.Fragment>
-      <div className="chartjs-tooltip-title" style={titleStyle}>
+      <div className="chartjs-tooltip-title" style={globalTitleStyle}>
         {percentageBeautifier(props.value)} Score{'  '}|{'  '}
         {props.platform} Average
       </div>
-      <div style={bodyStyle} className="chartjs-tooltip-body">
+      <div style={globalBodyStyle} className="chartjs-tooltip-body">
         <p style={pStyle}>
           On {props.labelLong}, your average {props.platform}
         </p>
@@ -111,31 +154,32 @@ const CircleChartTemplate = (props) => {
 
 const DoughnutChartTemplate = function(props) {
   //console.log('DoughnutChartTemplate props', props)
-  let titleStyle = 'margin: 16px 16px 8px 16px;'
-  titleStyle += 'font-family: ClanOT;'
-  titleStyle += 'font-size: 14px;'
-  titleStyle += 'font-weight: bold;'
-  titleStyle += 'font-style: normal;'
-  titleStyle += 'font-stretch: normal;'
-  titleStyle += 'line-height: 1.43;'
-  titleStyle += 'letter-spacing: normal;'
+  let globalTitleStyle = 'margin: 16px 16px 8px 16px;'
+  globalTitleStyle += 'font-family: ClanOT;'
+  globalTitleStyle += 'font-size: 14px;'
+  globalTitleStyle += 'font-weight: bold;'
+  globalTitleStyle += 'font-style: normal;'
+  globalTitleStyle += 'font-stretch: normal;'
+  globalTitleStyle += 'line-height: 1.43;'
+  globalTitleStyle += 'letter-spacing: normal;'
 
-  let bodyStyle = 'margin: 8px 16px 16px 16px;'
-  bodyStyle += 'padding-top: 8px;'
-  bodyStyle += 'border-top: 1px solid #e8ecf0;'
-  bodyStyle += 'font-family: ClanOT;'
-  bodyStyle += 'font-size: 12px;'
-  bodyStyle += 'font-weight: bold;'
-  bodyStyle += 'font-style: normal;'
-  bodyStyle += 'font-stretch: normal;'
-  bodyStyle += 'line-height: 1.67;'
-  bodyStyle += 'letter-spacing: normal;'
+  let globalBodyStyle = 'margin: 8px 16px 16px 16px;'
+  globalBodyStyle += 'padding-top: 8px;'
+  globalBodyStyle += 'border-top: 1px solid #e8ecf0;'
+  globalBodyStyle += 'font-family: ClanOT;'
+  globalBodyStyle += 'font-size: 12px;'
+  globalBodyStyle += 'font-weight: bold;'
+  globalBodyStyle += 'font-style: normal;'
+  globalBodyStyle += 'font-stretch: normal;'
+  globalBodyStyle += 'line-height: 1.67;'
+  globalBodyStyle += 'letter-spacing: normal;'
 
   let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += '<div class="chartjs-tooltip-title" style="' + globalTitleStyle + '">'
   el += `${percentageBeautifier(props.value)}%  |  ${!!props.itemLabel &&
     props.itemLabel}`
-  el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
+  el +=
+    '</div><div style="' + globalBodyStyle + '" class="chartjs-tooltip-body">'
   el += `${percentageBeautifier(props.value)}% of your library<br> `
   el += `represents video with ${(!!props.label &&
     'aeiou'.indexOf(props.label[0].toLowerCase()) !== -1 &&
@@ -150,31 +194,32 @@ const DoughnutChartTemplate = function(props) {
 
 const VerticalStackedBarChartTemplate = function(props) {
   // console.log('VerticalStackedBarChartTemplate props', props)
-  let titleStyle = 'margin: 16px 16px 8px 16px;'
-  titleStyle += 'font-family: ClanOT;'
-  titleStyle += 'font-size: 14px;'
-  titleStyle += 'font-weight: bold;'
-  titleStyle += 'font-style: normal;'
-  titleStyle += 'font-stretch: normal;'
-  titleStyle += 'line-height: 1.43;'
-  titleStyle += 'letter-spacing: normal;'
+  let globalTitleStyle = 'margin: 16px 16px 8px 16px;'
+  globalTitleStyle += 'font-family: ClanOT;'
+  globalTitleStyle += 'font-size: 14px;'
+  globalTitleStyle += 'font-weight: bold;'
+  globalTitleStyle += 'font-style: normal;'
+  globalTitleStyle += 'font-stretch: normal;'
+  globalTitleStyle += 'line-height: 1.43;'
+  globalTitleStyle += 'letter-spacing: normal;'
 
-  let bodyStyle = 'margin: 8px 16px 16px 16px;'
-  bodyStyle += 'padding-top: 8px;'
-  bodyStyle += 'border-top: 1px solid #e8ecf0;'
-  bodyStyle += 'font-family: ClanOT;'
-  bodyStyle += 'font-size: 12px;'
-  bodyStyle += 'font-weight: bold;'
-  bodyStyle += 'font-style: normal;'
-  bodyStyle += 'font-stretch: normal;'
-  bodyStyle += 'line-height: 1.67;'
-  bodyStyle += 'letter-spacing: normal;'
+  let globalBodyStyle = 'margin: 8px 16px 16px 16px;'
+  globalBodyStyle += 'padding-top: 8px;'
+  globalBodyStyle += 'border-top: 1px solid #e8ecf0;'
+  globalBodyStyle += 'font-family: ClanOT;'
+  globalBodyStyle += 'font-size: 12px;'
+  globalBodyStyle += 'font-weight: bold;'
+  globalBodyStyle += 'font-style: normal;'
+  globalBodyStyle += 'font-stretch: normal;'
+  globalBodyStyle += 'line-height: 1.67;'
+  globalBodyStyle += 'letter-spacing: normal;'
 
   let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += '<div class="chartjs-tooltip-title" style="' + globalTitleStyle + '">'
   el += `${percentageBeautifier(props.value)}%  |  ${!!props.label &&
     props.label}`
-  el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
+  el +=
+    '</div><div style="' + globalBodyStyle + '" class="chartjs-tooltip-body">'
   el += `${percentageBeautifier(props.value)}% of your library<br> `
   el += `represents video with ${(!!props.propertyValue &&
     'aeiou'.indexOf(props.propertyValue[0].toLowerCase()) !== -1 &&
@@ -190,31 +235,32 @@ const VerticalStackedBarChartTemplate = function(props) {
 
 const HorizontalStackedBarChartTemplate = function(props) {
   //console.log('HorizontalStackedBarChartTemplate props', props)
-  let titleStyle = 'margin: 16px 16px 8px 16px;'
-  titleStyle += 'font-family: ClanOT;'
-  titleStyle += 'font-size: 14px;'
-  titleStyle += 'font-weight: bold;'
-  titleStyle += 'font-style: normal;'
-  titleStyle += 'font-stretch: normal;'
-  titleStyle += 'line-height: 1.43;'
-  titleStyle += 'letter-spacing: normal;'
+  let globalTitleStyle = 'margin: 16px 16px 8px 16px;'
+  globalTitleStyle += 'font-family: ClanOT;'
+  globalTitleStyle += 'font-size: 14px;'
+  globalTitleStyle += 'font-weight: bold;'
+  globalTitleStyle += 'font-style: normal;'
+  globalTitleStyle += 'font-stretch: normal;'
+  globalTitleStyle += 'line-height: 1.43;'
+  globalTitleStyle += 'letter-spacing: normal;'
 
-  let bodyStyle = 'margin: 8px 16px 16px 16px;'
-  bodyStyle += 'padding-top: 8px;'
-  bodyStyle += 'border-top: 1px solid #e8ecf0;'
-  bodyStyle += 'font-family: ClanOT;'
-  bodyStyle += 'font-size: 12px;'
-  bodyStyle += 'font-weight: bold;'
-  bodyStyle += 'font-style: normal;'
-  bodyStyle += 'font-stretch: normal;'
-  bodyStyle += 'line-height: 1.67;'
-  bodyStyle += 'letter-spacing: normal;'
+  let globalBodyStyle = 'margin: 8px 16px 16px 16px;'
+  globalBodyStyle += 'padding-top: 8px;'
+  globalBodyStyle += 'border-top: 1px solid #e8ecf0;'
+  globalBodyStyle += 'font-family: ClanOT;'
+  globalBodyStyle += 'font-size: 12px;'
+  globalBodyStyle += 'font-weight: bold;'
+  globalBodyStyle += 'font-style: normal;'
+  globalBodyStyle += 'font-stretch: normal;'
+  globalBodyStyle += 'line-height: 1.67;'
+  globalBodyStyle += 'letter-spacing: normal;'
 
   let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += '<div class="chartjs-tooltip-title" style="' + globalTitleStyle + '">'
   el += `${percentageBeautifier(props.value)}%  |  ${!!props.propertyTitle &&
     props.propertyTitle} Pacing`
-  el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
+  el +=
+    '</div><div style="' + globalBodyStyle + '" class="chartjs-tooltip-body">'
   el += `${percentageBeautifier(props.value)}% of your library<br> `
   el += `represents video with a pacing<br> `
   el += `of ${!!props.propertyTitle && props.propertyTitle.toLowerCase()}`
@@ -225,33 +271,34 @@ const HorizontalStackedBarChartTemplate = function(props) {
 
 const RadarChartTemplate = function(props) {
   //console.log('RadarChartTemplate props', props)
-  let titleStyle = 'margin: 16px 16px 8px 16px;'
-  titleStyle += 'font-family: ClanOT;'
-  titleStyle += 'font-size: 14px;'
-  titleStyle += 'font-weight: bold;'
-  titleStyle += 'font-style: normal;'
-  titleStyle += 'font-stretch: normal;'
-  titleStyle += 'line-height: 1.43;'
-  titleStyle += 'letter-spacing: normal;'
+  let globalTitleStyle = 'margin: 16px 16px 8px 16px;'
+  globalTitleStyle += 'font-family: ClanOT;'
+  globalTitleStyle += 'font-size: 14px;'
+  globalTitleStyle += 'font-weight: bold;'
+  globalTitleStyle += 'font-style: normal;'
+  globalTitleStyle += 'font-stretch: normal;'
+  globalTitleStyle += 'line-height: 1.43;'
+  globalTitleStyle += 'letter-spacing: normal;'
 
-  let bodyStyle = 'margin: 8px 16px 16px 16px;'
-  bodyStyle += 'padding-top: 8px;'
-  bodyStyle += 'border-top: 1px solid #e8ecf0;'
-  bodyStyle += 'font-family: ClanOT;'
-  bodyStyle += 'font-size: 12px;'
-  bodyStyle += 'font-weight: bold;'
-  bodyStyle += 'font-style: normal;'
-  bodyStyle += 'font-stretch: normal;'
-  bodyStyle += 'line-height: 1.67;'
-  bodyStyle += 'letter-spacing: normal;'
+  let globalBodyStyle = 'margin: 8px 16px 16px 16px;'
+  globalBodyStyle += 'padding-top: 8px;'
+  globalBodyStyle += 'border-top: 1px solid #e8ecf0;'
+  globalBodyStyle += 'font-family: ClanOT;'
+  globalBodyStyle += 'font-size: 12px;'
+  globalBodyStyle += 'font-weight: bold;'
+  globalBodyStyle += 'font-style: normal;'
+  globalBodyStyle += 'font-stretch: normal;'
+  globalBodyStyle += 'line-height: 1.67;'
+  globalBodyStyle += 'letter-spacing: normal;'
 
   let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += '<div class="chartjs-tooltip-title" style="' + globalTitleStyle + '">'
   el += `${percentageBeautifier(props.value)}% ${!!props.metric &&
     props.metric}  |  ${!!props.itemLabel &&
     !!props.itemLabel.name &&
     ucfirst(props.itemLabel.name)}`
-  el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
+  el +=
+    '</div><div style="' + globalBodyStyle + '" class="chartjs-tooltip-body">'
   el += `On ${!!props.platform && props.platform}, ${percentageBeautifier(
     props.value
   )}% of<br> your library<br> `
