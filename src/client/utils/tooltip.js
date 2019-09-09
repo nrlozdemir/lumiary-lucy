@@ -26,7 +26,6 @@ const LineChartTemplate = function(props) {
   el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
   el += `${percentageBeautifier(props.value)} Score  |  ${props.label} Pacing`
   el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
-
   el += `On ${props.labelLong}, your CV score <br> `
   if (!isNaN(props.difference) && props.difference > 0) {
     el += `increased by ${props.difference}% from the <br> previous day.`
@@ -117,7 +116,6 @@ const DoughnutChartTemplate = function(props) {
   el += `${percentageBeautifier(props.value)}%  |  ${!!props.itemLabel &&
     props.itemLabel}`
   el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
-
   el += `${percentageBeautifier(props.value)}% of your library<br> `
   el += `represents video with ${(!!props.label &&
     'aeiou'.indexOf(props.label[0].toLowerCase()) !== -1 &&
@@ -157,7 +155,6 @@ const VerticalStackedBarChartTemplate = function(props) {
   el += `${percentageBeautifier(props.value)}%  |  ${!!props.label &&
     props.label}`
   el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
-
   el += `${percentageBeautifier(props.value)}% of your library<br> `
   el += `represents video with ${(!!props.propertyValue &&
     'aeiou'.indexOf(props.propertyValue[0].toLowerCase()) !== -1 &&
@@ -195,31 +192,24 @@ const HorizontalStackedBarChartTemplate = function(props) {
 
   let el = ''
   el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
-  el += `${percentageBeautifier(props.value)}%  |  ${!!props.label &&
-    props.label}`
+  el += `${percentageBeautifier(props.value)}%  |  ${!!props.propertyTitle &&
+    props.propertyTitle} Pacing`
   el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
-
   el += `${percentageBeautifier(props.value)}% of your library<br> `
-  el += `represents video with ${(!!props.propertyValue &&
-    'aeiou'.indexOf(props.propertyValue[0].toLowerCase()) !== -1 &&
-    'an') ||
-    'a'}<br> `
-  el += `${!!props.propertyValue &&
-    props.propertyValue.toLowerCase()} of ${!!props.label &&
-    props.label.toLowerCase()}`
+  el += `represents video with a pacing<br> `
+  el += `of ${!!props.propertyTitle && props.propertyTitle.toLowerCase()}`
   el += '</div>'
 
   return el
 }
 
 const modifyTooltip = function(props, conf = {}) {
-	//console.log('modify tooltip props: ', props)
+  console.log('modify tooltip props: ', props)
   const { options = {} } = props
   return {
-    ...conf,
     enabled: false,
     custom: function(tooltipModel) {
-      console.log('tooltipModel', tooltipModel)
+      //console.log('tooltipModel', tooltipModel)
       //!!tooltipModel.dataPoints && console.log(tooltipModel.dataPoints[0])
 
       const datasetIndex =
@@ -297,12 +287,23 @@ const modifyTooltip = function(props, conf = {}) {
       const propertyValue =
         !!props.data && !!props.data.property && props.data.property
 
+      const propertyTitle =
+        !!props &&
+        !!props.data &&
+        !!props.data.properties &&
+        !!props.data.properties[datasetIndex] &&
+        props.data.properties[datasetIndex]
+
+      console.log('props:', props)
       console.log('datasetIndex:', datasetIndex)
       console.log('index:', index)
       console.log('previousIndex: ', previousIndex)
+      console.log('value: ', value)
       console.log('previousValue: ', previousValue)
-      console.log('diff: ', difference)
+      console.log('difference: ', difference)
       console.log('itemLabel: ', itemLabel)
+      console.log('propertyValue: ', propertyValue)
+      console.log('propertyTitle: ', propertyTitle)
 
       const defaults = {
         maxWidth: 240,
@@ -370,7 +371,6 @@ const modifyTooltip = function(props, conf = {}) {
       const position = this._chart.canvas.getBoundingClientRect()
 
       // Set Text
-      console.log('hover')
       if (tooltipModel.body) {
         const titleLines = tooltipModel.title || []
         const bodyLines = tooltipModel.body.map(getBody)
@@ -439,6 +439,7 @@ const modifyTooltip = function(props, conf = {}) {
             labelLong: (!!labelLong && labelLong) || '',
             difference: !!difference && difference | 0,
             itemLabel: (!!itemLabel && itemLabel) || '',
+            propertyTitle: (!!propertyTitle && propertyTitle) || '',
           }),
         }
 
@@ -545,6 +546,7 @@ const modifyTooltip = function(props, conf = {}) {
       }
       // caretEl.style = caretStyles
     },
+    ...conf,
   }
 }
 
