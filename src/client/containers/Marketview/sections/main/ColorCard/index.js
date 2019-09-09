@@ -82,7 +82,10 @@ class ColorCard extends Component {
                 {loading ? <RouterLoading /> : 'No Data Available'}
               </div>
             )}
-            <div className={style.marketViewCardHeader} style={{ borderColor: colors.marketviewCardHeaderBorder }}>
+            <div
+              className={style.marketViewCardHeader}
+              style={{ borderColor: colors.marketviewCardHeaderBorder }}
+            >
               <div className={style.marketViewCardTitle}>Platform</div>
               <div className={style.chartSectionBadge}>
                 <span
@@ -90,11 +93,7 @@ class ColorCard extends Component {
                     color: colors.labelColor,
                   }}
                 >
-                  <Link
-                    to="/marketview/platform"
-                  >
-                    View Platform Metrics
-                  </Link>                  
+                  <Link to="/marketview/platform">View Platform Metrics</Link>
                 </span>
               </div>
             </div>
@@ -107,17 +106,17 @@ class ColorCard extends Component {
                   size={[340, 400]}
                   options={{
                     maximumIterationCount: 1000,
-                    toolTipBackground: "#505050",
-                    toolTipArrowBackground: "#505050",
-                    toolTipArrowShadow: "rgba(0,0,0,.5)",
-                    strokeWidth: 6,
+                    toolTipBackground: '#505050',
+                    toolTipArrowBackground: '#505050',
+                    toolTipArrowShadow: 'rgba(0,0,0,.5)',
+                    strokeWidth: 4,
                     gap: 1,
                     visualFontSize: 14,
                     toolTipFontSize: 10,
                     visualWidth: 32,
                     visualHeight: 32,
                     firstCircleTimesX: 1,
-                    firstCircleTimesY: 1
+                    firstCircleTimesY: 1,
                   }}
                   firstAngle={40}
                 >
@@ -179,9 +178,7 @@ class ColorCard extends Component {
             </div>
             {!isDataEmpty && !loading && (
               <div className={style.colors}>
-                <style>{`.${style.hasTriangle}:before {border-color: ${
-                  colors.textColor
-                } transparent transparent transparent;}`}</style>
+                <style>{`.${style.hasTriangle}:before {border-color: ${colors.textColor} transparent transparent transparent;}`}</style>
                 {Object.keys(bubbleColors).map((colorKey, i) => {
                   const network = data.find((pf) => pf.color === colorKey)
                   return (
