@@ -167,7 +167,9 @@ const HorizontalStackedBarChart = (props) => {
                 textColor: colors.tooltipTextColor,
                 caretColor: colors.tooltipBackground,
               },
-            })),
+						}, {
+							mode: 'single',
+					})),
         chartArea: {
           backgroundColor: colors.chartBackground,
         },
