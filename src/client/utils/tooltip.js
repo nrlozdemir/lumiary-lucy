@@ -169,7 +169,7 @@ const VerticalStackedBarChartTemplate = function(props) {
 }
 
 const HorizontalStackedBarChartTemplate = function(props) {
-  console.log('HorizontalStackedBarChartTemplate props', props)
+  //console.log('HorizontalStackedBarChartTemplate props', props)
   let titleStyle = 'margin: 16px 16px 8px 16px;'
   titleStyle += 'font-family: ClanOT;'
   titleStyle += 'font-size: 14px;'
@@ -204,7 +204,7 @@ const HorizontalStackedBarChartTemplate = function(props) {
 }
 
 const modifyTooltip = function(props, conf = {}) {
-  console.log('modify tooltip props: ', props)
+  //console.log('modify tooltip props: ', props)
   const { options = {} } = props
   return {
     enabled: false,
@@ -294,6 +294,7 @@ const modifyTooltip = function(props, conf = {}) {
         !!props.data.properties[datasetIndex] &&
         props.data.properties[datasetIndex]
 
+      /*
       console.log('props:', props)
       console.log('datasetIndex:', datasetIndex)
       console.log('index:', index)
@@ -304,6 +305,7 @@ const modifyTooltip = function(props, conf = {}) {
       console.log('itemLabel: ', itemLabel)
       console.log('propertyValue: ', propertyValue)
       console.log('propertyTitle: ', propertyTitle)
+      */
 
       const defaults = {
         maxWidth: 240,
