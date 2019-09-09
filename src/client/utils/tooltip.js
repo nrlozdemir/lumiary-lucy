@@ -1,6 +1,6 @@
 import React from 'react'
 import { percentageBeautifier } from 'Utils/datasets'
-import { metricSuffix } from 'Utils'
+import { metricSuffix, ucfirst } from 'Utils'
 
 const LineChartTemplate = function(props) {
   let titleStyle = 'margin: 16px 16px 8px 16px;'
@@ -250,7 +250,7 @@ const RadarChartTemplate = function(props) {
   el += `${percentageBeautifier(props.value)}% ${!!props.metric &&
     props.metric}  |  ${!!props.itemLabel &&
     !!props.itemLabel.name &&
-    props.itemLabel.name.toLowerCase()}`
+    ucfirst(props.itemLabel.name)}`
   el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
   el += `On ${!!props.platform && props.platform}, ${percentageBeautifier(
     props.value
