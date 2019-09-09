@@ -223,6 +223,46 @@ const HorizontalStackedBarChartTemplate = function(props) {
   return el
 }
 
+const RadarChartTemplate = function(props) {
+  //console.log('RadarChartTemplate props', props)
+  let titleStyle = 'margin: 16px 16px 8px 16px;'
+  titleStyle += 'font-family: ClanOT;'
+  titleStyle += 'font-size: 14px;'
+  titleStyle += 'font-weight: bold;'
+  titleStyle += 'font-style: normal;'
+  titleStyle += 'font-stretch: normal;'
+  titleStyle += 'line-height: 1.43;'
+  titleStyle += 'letter-spacing: normal;'
+
+  let bodyStyle = 'margin: 8px 16px 16px 16px;'
+  bodyStyle += 'padding-top: 8px;'
+  bodyStyle += 'border-top: 1px solid #e8ecf0;'
+  bodyStyle += 'font-family: ClanOT;'
+  bodyStyle += 'font-size: 12px;'
+  bodyStyle += 'font-weight: bold;'
+  bodyStyle += 'font-style: normal;'
+  bodyStyle += 'font-stretch: normal;'
+  bodyStyle += 'line-height: 1.67;'
+  bodyStyle += 'letter-spacing: normal;'
+
+  let el = ''
+  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += `${percentageBeautifier(props.value)}% ${!!props.metric &&
+    props.metric}  |  ${!!props.itemLabel &&
+    !!props.itemLabel.name &&
+    props.itemLabel.name.toLowerCase()}`
+  el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
+  el += `On ${!!props.platform && props.platform}, ${percentageBeautifier(
+    props.value
+  )}% of<br> your library<br> `
+  el += `represents video<br> that are  ${!!props.itemLabel &&
+    !!props.itemLabel.name &&
+    props.itemLabel.name.toLowerCase()} `
+  el += '</div>'
+
+  return el
+}
+
 const modifyTooltip = function(props, conf = {}) {
   //console.log('modify tooltip props: ', props)
   const { options = {} } = props
@@ -310,9 +350,14 @@ const modifyTooltip = function(props, conf = {}) {
       const propertyTitle =
         !!props &&
         !!props.data &&
+        !isNaN(datasetIndex) &&
         !!props.data.properties &&
         !!props.data.properties[datasetIndex] &&
         props.data.properties[datasetIndex]
+
+      const metric = !!props && !!props.metric && props.metric
+
+      const platform = !!props && !!props.platform && props.platform
 
       /*
       console.log('props:', props)
@@ -325,6 +370,8 @@ const modifyTooltip = function(props, conf = {}) {
       console.log('itemLabel: ', itemLabel)
       console.log('propertyValue: ', propertyValue)
       console.log('propertyTitle: ', propertyTitle)
+      console.log('metric: ', metric)
+      console.log('platform: ', platform)
       */
 
       const defaults = {
@@ -477,6 +524,15 @@ const modifyTooltip = function(props, conf = {}) {
           }),
           VideoReleasesBarChartTemplate: VideoReleasesBarChartTemplate({
             value: value,
+          }),
+          RadarChartTemplate: RadarChartTemplate({
+            label: (!!label && label) || '',
+            value: (!!value && value) || 0,
+            labelLong: (!!labelLong && labelLong) || '',
+            difference: !!difference && difference | 0,
+            itemLabel: (!!itemLabel && itemLabel) || '',
+            metric: (!!metric && metric) || '',
+            platform: (!!platform && platform) || '',
           }),
         }
 
