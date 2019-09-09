@@ -1,6 +1,6 @@
 import React from 'react'
 import { HorizontalBar } from 'react-chartjs-2'
-import { customChartToolTip } from 'Utils'
+import { customChartToolTip, ucfirst } from 'Utils'
 import { percentageManipulation } from 'Utils/datasets'
 import { withTheme } from 'ThemeContext/withTheme'
 import { modifyTooltip } from 'Utils/tooltip'
@@ -54,6 +54,8 @@ const HorizontalStackedBarChart = (props) => {
     tooltipType = false,
   } = props
   const { colors } = props.themeContext
+
+  console.log('component.props', props)
 
   const { datasets: barDatasets = [] } = barData
   if (barDatasets.length === 0) {
@@ -156,20 +158,26 @@ const HorizontalStackedBarChart = (props) => {
                 },
               }))) ||
           (tooltipType === 'extended' &&
-            modifyTooltip({
-              template: 'HorizontalStackedBarChartTemplate',
-              data: {
-                datasets,
-                labels,
+            modifyTooltip(
+              {
+                template: 'HorizontalStackedBarChartTemplate',
+                data: {
+                  datasets,
+                  labels,
+                  properties: stadiumValues.map((value) =>
+                    ucfirst(value.title)
+                  ),
+                },
+                options: {
+                  background: colors.tooltipBackground,
+                  textColor: colors.tooltipTextColor,
+                  caretColor: colors.tooltipBackground,
+                },
               },
-              options: {
-                background: colors.tooltipBackground,
-                textColor: colors.tooltipTextColor,
-                caretColor: colors.tooltipBackground,
-              },
-						}, {
-							mode: 'single',
-					})),
+              {
+                mode: 'single',
+              }
+            )),
         chartArea: {
           backgroundColor: colors.chartBackground,
         },
