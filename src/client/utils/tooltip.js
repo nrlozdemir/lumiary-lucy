@@ -212,10 +212,11 @@ const HorizontalStackedBarChartTemplate = function(props) {
   return el
 }
 
-const modifyTooltip = function(props) {
-  //console.log('modify tooltip props: ', props)
+const modifyTooltip = function(props, conf = {}) {
+	//console.log('modify tooltip props: ', props)
   const { options = {} } = props
   return {
+    ...conf,
     enabled: false,
     custom: function(tooltipModel) {
       console.log('tooltipModel', tooltipModel)
