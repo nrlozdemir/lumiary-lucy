@@ -9,6 +9,31 @@ const RadarChart = (props) => {
     {
       beforeDraw: function(chart, easing) {
         let ctx = chart.chart.ctx
+        if (props.data) {
+          const numberOfSides = props.data.labels.length
+          const size = 202
+          const Xcenter = chart.width / 2
+          const Ycenter = chart.height / 2
+
+          ctx.beginPath()
+          ctx.moveTo(Xcenter + size * Math.cos(0), Ycenter + size * Math.sin(0))
+
+          for (let i = 1; i <= numberOfSides; i += 1) {
+            ctx.lineTo(
+              Xcenter + size * Math.cos((i * 2 * Math.PI) / numberOfSides),
+              Ycenter + size * Math.sin((i * 2 * Math.PI) / numberOfSides)
+            )
+          }
+
+          ctx.strokeStyle = props.themeContext.colors.bodyBackground
+          ctx.lineWidth = 1
+          ctx.shadowBlur = 7
+          ctx.shadowOffsetY = 5
+          ctx.shadowColor = '#000'
+          ctx.stroke()
+          ctx.shadowBlur = 0
+          ctx.shadowOffsetY = 0
+        }
         chart.config.data.datasets.forEach(function(dataset, i) {
           const meta = chart.controller.getDatasetMeta(i)
           meta.data.forEach(function(bar, index) {
@@ -35,12 +60,11 @@ const RadarChart = (props) => {
                 2 * Math.PI,
                 false
               )
-
               if (selected) {
                 ctx.lineWidth = 1
-                ctx.shadowBlur = 4
-                ctx.shadowOffsetY = 2
-                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'
+                ctx.shadowBlur = 5
+                ctx.shadowOffsetY = 3
+                ctx.shadowColor = 'rgba(0, 0, 0, 1)'
                 ctx.strokeStyle = chart.options.scale.pointLabels
                 ctx.stroke()
                 ctx.shadowBlur = 0
@@ -51,6 +75,11 @@ const RadarChart = (props) => {
               ctx.fill()
               ctx.closePath()
             }
+
+            // const asd = chart.scales.scale.ctx
+            // asd.shadowBlur = 4
+            // asd.shadowOffsetY = 2
+            // asd.shadowColor = 'rgba(0, 0, 0, 0.5)'
           })
         })
       },
@@ -273,7 +302,7 @@ const RadarChart = (props) => {
             callback: function(value) {
               return percentageBeautifier(value) + '%'
             },
-            backdropColor: 'transparent',
+            backdropColor: '#000',
             fontSize: 10,
             fontFamily: 'ClanOTNews',
             fontColor: themes.chartTickColor,

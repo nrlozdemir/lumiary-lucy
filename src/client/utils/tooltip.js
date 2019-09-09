@@ -1,5 +1,6 @@
 import React from 'react'
 import { percentageBeautifier } from 'Utils/datasets'
+import { metricSuffix } from 'Utils'
 
 const LineChartTemplate = function(props) {
   let titleStyle = 'margin: 16px 16px 8px 16px;'
@@ -26,7 +27,6 @@ const LineChartTemplate = function(props) {
   el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
   el += `${percentageBeautifier(props.value)} Score  |  ${props.label} Pacing`
   el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
-
   el += `On ${props.labelLong}, your CV score <br> `
   if (!isNaN(props.difference) && props.difference > 0) {
     el += `increased by ${props.difference}% from the <br> previous day.`
@@ -35,6 +35,25 @@ const LineChartTemplate = function(props) {
   } else {
     el += `did not change from the <br> previous day.`
   }
+  el += '</div>'
+
+  return el
+}
+
+const VideoReleasesBarChartTemplate = function(props) {
+  let titleStyle = 'margin: 8px 16px;'
+  titleStyle += 'font-family: ClanOT;'
+  titleStyle += 'font-size: 14px;'
+  titleStyle += 'font-weight: bold;'
+  titleStyle += 'font-style: normal;'
+  titleStyle += 'font-stretch: normal;'
+  titleStyle += 'line-height: 1.43;'
+  titleStyle += 'letter-spacing: normal;'
+
+  let el = ''
+  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += `${props.value}`
+  el += '</div>'
   el += '</div>'
 
   return el
@@ -117,7 +136,6 @@ const DoughnutChartTemplate = function(props) {
   el += `${percentageBeautifier(props.value)}%  |  ${!!props.itemLabel &&
     props.itemLabel}`
   el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
-
   el += `${percentageBeautifier(props.value)}% of your library<br> `
   el += `represents video with ${(!!props.label &&
     'aeiou'.indexOf(props.label[0].toLowerCase()) !== -1 &&
@@ -157,7 +175,6 @@ const VerticalStackedBarChartTemplate = function(props) {
   el += `${percentageBeautifier(props.value)}%  |  ${!!props.label &&
     props.label}`
   el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
-
   el += `${percentageBeautifier(props.value)}% of your library<br> `
   el += `represents video with ${(!!props.propertyValue &&
     'aeiou'.indexOf(props.propertyValue[0].toLowerCase()) !== -1 &&
@@ -171,14 +188,49 @@ const VerticalStackedBarChartTemplate = function(props) {
   return el
 }
 
-const modifyTooltip = function(props) {
+const HorizontalStackedBarChartTemplate = function(props) {
+  //console.log('HorizontalStackedBarChartTemplate props', props)
+  let titleStyle = 'margin: 16px 16px 8px 16px;'
+  titleStyle += 'font-family: ClanOT;'
+  titleStyle += 'font-size: 14px;'
+  titleStyle += 'font-weight: bold;'
+  titleStyle += 'font-style: normal;'
+  titleStyle += 'font-stretch: normal;'
+  titleStyle += 'line-height: 1.43;'
+  titleStyle += 'letter-spacing: normal;'
+
+  let bodyStyle = 'margin: 8px 16px 16px 16px;'
+  bodyStyle += 'padding-top: 8px;'
+  bodyStyle += 'border-top: 1px solid #e8ecf0;'
+  bodyStyle += 'font-family: ClanOT;'
+  bodyStyle += 'font-size: 12px;'
+  bodyStyle += 'font-weight: bold;'
+  bodyStyle += 'font-style: normal;'
+  bodyStyle += 'font-stretch: normal;'
+  bodyStyle += 'line-height: 1.67;'
+  bodyStyle += 'letter-spacing: normal;'
+
+  let el = ''
+  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += `${percentageBeautifier(props.value)}%  |  ${!!props.propertyTitle &&
+    props.propertyTitle} Pacing`
+  el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
+  el += `${percentageBeautifier(props.value)}% of your library<br> `
+  el += `represents video with a pacing<br> `
+  el += `of ${!!props.propertyTitle && props.propertyTitle.toLowerCase()}`
+  el += '</div>'
+
+  return el
+}
+
+const modifyTooltip = function(props, conf = {}) {
   //console.log('modify tooltip props: ', props)
   const { options = {} } = props
   return {
     enabled: false,
     custom: function(tooltipModel) {
       //console.log('tooltipModel', tooltipModel)
-      // !!tooltipModel.dataPoints && console.log(tooltipModel.dataPoints[0])
+      //!!tooltipModel.dataPoints && console.log(tooltipModel.dataPoints[0])
 
       const datasetIndex =
         (!!tooltipModel &&
@@ -255,13 +307,24 @@ const modifyTooltip = function(props) {
       const propertyValue =
         !!props.data && !!props.data.property && props.data.property
 
+      const propertyTitle =
+        !!props &&
+        !!props.data &&
+        !!props.data.properties &&
+        !!props.data.properties[datasetIndex] &&
+        props.data.properties[datasetIndex]
+
       /*
+      console.log('props:', props)
       console.log('datasetIndex:', datasetIndex)
       console.log('index:', index)
       console.log('previousIndex: ', previousIndex)
+      console.log('value: ', value)
       console.log('previousValue: ', previousValue)
-      console.log('diff: ', difference)
+      console.log('difference: ', difference)
       console.log('itemLabel: ', itemLabel)
+      console.log('propertyValue: ', propertyValue)
+      console.log('propertyTitle: ', propertyTitle)
       */
 
       const defaults = {
@@ -370,6 +433,18 @@ const modifyTooltip = function(props) {
         tooltipEl.innerHTML = innerHtml
         */
 
+        if (
+          !!props.template &&
+          props.template === 'VideoReleasesBarChartTemplate'
+        ) {
+          const absValue = Math.abs(value)
+          if ((position.height - 40) / 2 < tooltipModel.caretY) {
+            value = `${metricSuffix(~~absValue)} ${props.metric}`
+          } else {
+            value = `${Math.round(absValue / props.videoNormalizer)}% Videos`
+          }
+        }
+
         const templates = {
           LineChartTemplate: LineChartTemplate({
             label: (!!label && label) || '',
@@ -391,6 +466,17 @@ const modifyTooltip = function(props) {
             difference: !!difference && difference | 0,
             itemLabel: (!!itemLabel && itemLabel) || '',
             propertyValue: (!!propertyValue && propertyValue) || '',
+          }),
+          HorizontalStackedBarChartTemplate: HorizontalStackedBarChartTemplate({
+            label: (!!label && label) || '',
+            value: (!!value && value) || 0,
+            labelLong: (!!labelLong && labelLong) || '',
+            difference: !!difference && difference | 0,
+            itemLabel: (!!itemLabel && itemLabel) || '',
+            propertyTitle: (!!propertyTitle && propertyTitle) || '',
+          }),
+          VideoReleasesBarChartTemplate: VideoReleasesBarChartTemplate({
+            value: value,
           }),
         }
 
@@ -476,6 +562,28 @@ const modifyTooltip = function(props) {
       }
 
       let caretStyles = arrowDown
+      // if Chart is VideoReleasesBarChartTemplate, tooltip and caret position
+      if (
+        !!props.template &&
+        props.template === 'VideoReleasesBarChartTemplate'
+      ) {
+        caretEl.style = {}
+        if ((position.height - 40) / 2 < tooltipModel.caretY) {
+          caretStyles = arrowUp
+          tooltipTop =
+            position.top +
+            window.pageYOffset +
+            tooltipModel.caretY +
+            defaults.caretHeight +
+            defaults.caretPadding
+
+          caretTop =
+            position.top +
+            window.pageYOffset +
+            tooltipModel.caretY +
+            defaults.caretPadding
+        }
+      }
 
       if (
         !!props.template &&
@@ -541,6 +649,7 @@ const modifyTooltip = function(props) {
       }
       // caretEl.style = caretStyles
     },
+    ...conf,
   }
 }
 
