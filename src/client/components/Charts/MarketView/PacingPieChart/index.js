@@ -68,7 +68,7 @@ const PacingPieChart = ({ data = {}, metric }) => {
               },
               elements: {
                 arc: {
-                  borderWidth: 0.8,
+                  borderWidth: 2,
                 },
               },
             }}
