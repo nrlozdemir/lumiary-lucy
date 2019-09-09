@@ -67,6 +67,7 @@ const PacingCardModule = ({
               marginLeft: -5,
               width: '45%',
             }}
+            tooltipType="extended"
           />
           <StadiumChart
             data={stadiumValues}
