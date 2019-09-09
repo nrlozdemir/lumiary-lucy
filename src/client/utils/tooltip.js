@@ -127,7 +127,7 @@ const modifyTooltip = function(props) {
         !isNaN(index) &&
         props.data.labelsLong[index]
 
-      const value =
+      let value =
         !!props.data &&
         !!props.data.datasets &&
         !isNaN(datasetIndex) &&
@@ -189,6 +189,7 @@ const modifyTooltip = function(props) {
 
         // tolerance 'px' inside for tooltip position
         tolerance: 60,
+        position: options.position || false,
       }
       //console.log('defaults', defaults)
 
@@ -233,6 +234,9 @@ const modifyTooltip = function(props) {
       function getBody(bodyItem) {
         return bodyItem.lines
       }
+
+      // `this` will be the overall tooltip
+      const position = this._chart.canvas.getBoundingClientRect()
 
       // Set Text
       if (tooltipModel.body) {
@@ -285,11 +289,6 @@ const modifyTooltip = function(props) {
         tooltipEl.innerHTML = templates[props.template]
       }
 
-      // `this` will be the overall tooltip
-      const position = this._chart.canvas.getBoundingClientRect()
-
-      // console.log('==>', position, tooltipModel)
-
       // Display, position, and set styles for font
       tooltipEl.style.opacity = 1
       tooltipEl.style.position = 'absolute'
@@ -301,25 +300,11 @@ const modifyTooltip = function(props) {
       tooltipEl.style.pointerEvents = 'none'
       tooltipEl.style.display = 'block'
 
-      // Caret Styling
-      caretEl.style.opacity = 1
-      caretEl.style.display = 'block'
-
       let caretLeft =
         position.left +
         window.pageXOffset +
         tooltipModel.caretX -
         defaults.caretWidth
-
-      /*
-      console.log(
-        '!!!',
-        position.right,
-        window.pageXOffset,
-        tooltipModel.caretX,
-        defaults.caretWidth
-      )
-      */
 
       let caretTop =
         position.top +
@@ -341,22 +326,23 @@ const modifyTooltip = function(props) {
         tooltipEl.clientHeight -
         (defaults.caretHeight + defaults.caretPadding)
 
-      // caret positon calculate for left side
-      if (
-        position.left +
-        defaults.tolerance +
-        70 + // leftPadding for legend infromations
-          window.pageXOffset >
-        caretLeft
-      ) {
-        // console.log('left')
-        tooptipLeft = tooptipLeft + tooltipEl.clientWidth / 3
-      }
+      if (defaults.position === 'auto') {
+        caretEl.style = {}
+        // caret positon calculate for left side
+        if (
+          position.left +
+          defaults.tolerance +
+          70 + // leftPadding for legend infromations
+            window.pageXOffset >
+          caretLeft
+        ) {
+          tooptipLeft = tooptipLeft + tooltipEl.clientWidth / 3
+        }
 
-      // caret positon calculate for right side
-      if (position.width - (70 + defaults.tolerance) < tooltipModel.caretX) {
-        // console.log('right')
-        tooptipLeft = tooptipLeft - tooltipEl.clientWidth / 3
+        // caret positon calculate for right side
+        if (position.width - (70 + defaults.tolerance) < tooltipModel.caretX) {
+          tooptipLeft = tooptipLeft - tooltipEl.clientWidth / 3
+        }
       }
 
       let arrowUp = {
@@ -381,13 +367,16 @@ const modifyTooltip = function(props) {
         borderLeft: `${defaults.caretHeight}px solid ${defaults.caretColor}`,
       }
 
-      tooltipEl.style.left = tooptipLeft + 'px'
+      let caretStyles = arrowDown
 
+      tooltipEl.style.left = tooptipLeft + 'px'
       tooltipEl.style.top = tooltipTop + 'px'
       tooltipEl.style.textAlign = 'center'
 
-      let caretStyles = arrowDown
-
+      // Caret Styling
+      caretEl.style.opacity = 1
+      caretEl.style.display = 'block'
+      caretEl.style.zIndex = 1000
       caretStyles.left = caretLeft + 'px'
       caretStyles.top = caretTop + 'px'
       caretStyles.width = 0
