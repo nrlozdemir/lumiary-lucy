@@ -1,4 +1,5 @@
 import React from 'react'
+import cx from 'classnames';
 import style from './style.scss'
 // import PropTypes from 'prop-types';
 import { Field } from 'redux-form'
@@ -36,9 +37,10 @@ class ColorRadioBoxes extends React.Component {
           style={{ backgroundColor: props.colors.bodyBackground }}
         >
           <div
-            className={style.colorRadius}
+            className={cx(style.colorRadius, { [style.isInputSet]: !!props.input.value.color })}
             style={{ backgroundColor: props.input.value.color }}
           />
+          {console.log(props.input.value.color)}
           <p
             className={style.colorName}
             style={{ color: props.colors.searchOptionsColor }}
