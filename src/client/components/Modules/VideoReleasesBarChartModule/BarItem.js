@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import { Bar } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
 import style from './style.scss'
+import { modifyTooltip } from 'Utils/tooltip'
 
 class BarItem extends Component {
   render() {
@@ -12,6 +13,8 @@ class BarItem extends Component {
       datasetKeyProvider,
       maxSteps,
       barChartOptions,
+      videoNormalizer,
+      metric,
       themeContext: { colors },
     } = this.props
 
@@ -28,6 +31,19 @@ class BarItem extends Component {
             key={Math.random()}
             options={{
               ...barChartOptions,
+
+              tooltips: modifyTooltip({
+                template: 'VideoReleasesBarChartTemplate',
+                data: chartData,
+                options: {
+                  background: colors.tooltipBackground,
+                  textColor: colors.tooltipTextColor,
+                  caretColor: colors.tooltipBackground,
+                },
+                videoNormalizer,
+                metric,
+              }),
+
               scales: {
                 ...barChartOptions.scales,
                 yAxes: [

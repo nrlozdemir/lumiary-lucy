@@ -1,5 +1,6 @@
 import React from 'react'
 import { percentageBeautifier } from 'Utils/datasets'
+import { metricSuffix } from 'Utils'
 
 const LineChartTemplate = function(props) {
   let titleStyle = 'margin: 16px 16px 8px 16px;'
@@ -35,6 +36,25 @@ const LineChartTemplate = function(props) {
   } else {
     el += `did not change from the <br> previous day.`
   }
+  el += '</div>'
+
+  return el
+}
+
+const VideoReleasesBarChartTemplate = function(props) {
+  let titleStyle = 'margin: 8px 16px;'
+  titleStyle += 'font-family: ClanOT;'
+  titleStyle += 'font-size: 14px;'
+  titleStyle += 'font-weight: bold;'
+  titleStyle += 'font-style: normal;'
+  titleStyle += 'font-stretch: normal;'
+  titleStyle += 'line-height: 1.43;'
+  titleStyle += 'letter-spacing: normal;'
+
+  let el = ''
+  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += `${props.value}`
+  el += '</div>'
   el += '</div>'
 
   return el
@@ -277,12 +297,27 @@ const modifyTooltip = function(props) {
 
         tooltipEl.innerHTML = innerHtml
 
+        if (
+          !!props.template &&
+          props.template === 'VideoReleasesBarChartTemplate'
+        ) {
+          const absValue = Math.abs(value)
+          if ((position.height - 40) / 2 < tooltipModel.caretY) {
+            value = `${metricSuffix(~~absValue)} ${props.metric}`
+          } else {
+            value = `${Math.round(absValue / props.videoNormalizer)}% Videos`
+          }
+        }
+
         const templates = {
           LineChartTemplate: LineChartTemplate({
             label: (!!label && label) || '',
             value: (!!value && value) || 0,
             labelLong: (!!labelLong && labelLong) || '',
             difference: !!difference && difference | 0,
+          }),
+          VideoReleasesBarChartTemplate: VideoReleasesBarChartTemplate({
+            value: value,
           }),
         }
 
@@ -368,6 +403,28 @@ const modifyTooltip = function(props) {
       }
 
       let caretStyles = arrowDown
+      // if Chart is VideoReleasesBarChartTemplate, tooltip and caret position
+      if (
+        !!props.template &&
+        props.template === 'VideoReleasesBarChartTemplate'
+      ) {
+        caretEl.style = {}
+        if ((position.height - 40) / 2 < tooltipModel.caretY) {
+          caretStyles = arrowUp
+          tooltipTop =
+            position.top +
+            window.pageYOffset +
+            tooltipModel.caretY +
+            defaults.caretHeight +
+            defaults.caretPadding
+
+          caretTop =
+            position.top +
+            window.pageYOffset +
+            tooltipModel.caretY +
+            defaults.caretPadding
+        }
+      }
 
       tooltipEl.style.left = tooptipLeft + 'px'
       tooltipEl.style.top = tooltipTop + 'px'
