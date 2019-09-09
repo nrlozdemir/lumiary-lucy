@@ -27,9 +27,9 @@ const RadarChart = (props) => {
 
           ctx.strokeStyle = props.themeContext.colors.bodyBackground
           ctx.lineWidth = 1
-          ctx.shadowBlur = 10
-          ctx.shadowOffsetY = 4
-          ctx.shadowColor = 'rgba(0, 0, 0, 1)'
+          ctx.shadowBlur = 7
+          ctx.shadowOffsetY = 5
+          ctx.shadowColor = '#000'
           ctx.stroke()
           ctx.shadowBlur = 0
           ctx.shadowOffsetY = 0
@@ -62,9 +62,9 @@ const RadarChart = (props) => {
               )
               if (selected) {
                 ctx.lineWidth = 1
-                ctx.shadowBlur = 4
-                ctx.shadowOffsetY = 2
-                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'
+                ctx.shadowBlur = 5
+                ctx.shadowOffsetY = 3
+                ctx.shadowColor = 'rgba(0, 0, 0, 1)'
                 ctx.strokeStyle = chart.options.scale.pointLabels
                 ctx.stroke()
                 ctx.shadowBlur = 0
