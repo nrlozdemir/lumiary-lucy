@@ -3,6 +3,7 @@ import { Radar } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
 import { metricSuffix, customChartToolTip, ucfirst } from 'Utils'
 import { percentageBeautifier } from 'Utils/datasets'
+import { modifyTooltip } from 'Utils/tooltip'
 
 const RadarChart = (props) => {
   const plugins = [
@@ -163,7 +164,14 @@ const RadarChart = (props) => {
       },
     },
   ]
-  const { data, key, width, height } = props
+  const {
+    data,
+    key,
+    width,
+    height,
+    tooltipType = false,
+    platform = false,
+  } = props
   const themes = props.themeContext.colors
   let parsedData = data || {}
   let maxTicksStepLimit = 100000
@@ -254,32 +262,57 @@ const RadarChart = (props) => {
         layout: {
           padding: 35,
         },
-        tooltips: customChartToolTip(themes, {
-          callbacks: {
-            title: () => '',
-            label: function(tooltipItem, data) {
-              const count =
-                (data &&
-                  data.labels &&
-                  data.labels[tooltipItem['index']] &&
-                  data.labels[tooltipItem['index']].count) ||
-                0
-              const metric =
-                (data &&
-                  data.datasets &&
-                  data.datasets[0] &&
-                  data.datasets[0].metric) ||
-                ''
-              const name =
-                data &&
-                data.labels &&
-                data.labels[tooltipItem['index']] &&
-                data.labels[tooltipItem['index']].name
-              return `${metricSuffix(count) || 0}% ${ucfirst(metric) ||
-                ''} ${!!name && `| ${name}`}`
-            },
-          },
-        }),
+        tooltips:
+          (!!tooltipType &&
+            (tooltipType === 'basic' &&
+              customChartToolTip(themes, {
+                callbacks: {
+                  title: () => '',
+                  label: function(tooltipItem, data) {
+                    const count =
+                      (data &&
+                        data.labels &&
+                        data.labels[tooltipItem['index']] &&
+                        data.labels[tooltipItem['index']].count) ||
+                      0
+                    const metric =
+                      (data &&
+                        data.datasets &&
+                        data.datasets[0] &&
+                        data.datasets[0].metric) ||
+                      ''
+                    const name =
+                      data &&
+                      data.labels &&
+                      data.labels[tooltipItem['index']] &&
+                      data.labels[tooltipItem['index']].name
+                    return `${metricSuffix(count) || 0}% ${ucfirst(metric) ||
+                      ''} ${!!name && `| ${name}`}`
+                  },
+                },
+              }))) ||
+          (tooltipType === 'extended' &&
+            modifyTooltip(
+              {
+                template: 'RadarChartTemplate',
+                data: theData,
+                metric:
+                  (data &&
+                    data.datasets &&
+                    data.datasets[0] &&
+                    ucfirst(data.datasets[0].metric)) ||
+                  '',
+                platform: !!platform && platform,
+                options: {
+                  background: themes.tooltipBackground,
+                  textColor: themes.tooltipTextColor,
+                  caretColor: themes.tooltipBackground,
+                },
+              },
+              {
+                mode: 'single',
+              }
+            )),
         plugins: {
           datalabels: false,
         },
