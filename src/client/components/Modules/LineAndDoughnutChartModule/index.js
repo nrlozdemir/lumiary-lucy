@@ -180,6 +180,7 @@ const LineAndDoughnutChartModule = ({
                         background: colors.tooltipBackground,
                         textColor: colors.tooltipTextColor,
                         caretColor: colors.tooltipBackground,
+                        position: 'auto',
                       },
                     }),
                     chartArea: {
