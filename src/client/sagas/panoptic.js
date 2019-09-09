@@ -388,61 +388,12 @@ function* getTopPerformingFormatData({ data = {} }) {
       //limit: 4,
     }
 
-    // const payload = yield call(
-    //   getDataFromApi,
-    //   undefined,
-    //   buildApiUrl(`/brand/${brand.uuid}/topcv`, options),
-    //   'GET'
-    // )
-
-    const payload = {
-      platformAverage: '22.3',
-      properties: {},
-      dates: {
-        Monday: {
-          Fast: 10,
-          Medium: 20,
-          Slow: 30,
-          Slowest: 40,
-        },
-        Sunday: {
-          Fast: 40,
-          Medium: 30,
-          Slow: 20,
-          Slowest: 10,
-        },
-        Saturday: {
-          Fast: 80,
-          Medium: 60,
-          Slow: 40,
-          Slowest: 20,
-        },
-        Friday: {
-          Fast: 40,
-          Medium: 60,
-          Slow: 50,
-          Slowest: 10,
-        },
-        Thursday: {
-          Fast: 20,
-          Medium: 40,
-          Slow: 50,
-          Slowest: 60,
-        },
-        Wednesday: {
-          Fast: 50,
-          Medium: 10,
-          Slow: 70,
-          Slowest: 40,
-        },
-        Tuesday: {
-          Fast: 10,
-          Medium: 80,
-          Slow: 20,
-          Slowest: 30,
-        },
-      },
-    }
+    const payload = yield call(
+      getDataFromApi,
+      undefined,
+      buildApiUrl(`/brand/${brand.uuid}/topcv`, options),
+      'GET'
+    )
 
     const currentDayIndex = moment().weekday() + 1
     const pastdays = dayOfWeek.slice(0, currentDayIndex)
