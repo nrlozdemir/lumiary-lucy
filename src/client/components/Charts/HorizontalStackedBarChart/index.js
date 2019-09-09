@@ -3,6 +3,7 @@ import { HorizontalBar } from 'react-chartjs-2'
 import { customChartToolTip } from 'Utils'
 import { percentageManipulation } from 'Utils/datasets'
 import { withTheme } from 'ThemeContext/withTheme'
+import { modifyTooltip } from 'Utils/tooltip'
 
 const plugins = [
   {
@@ -50,6 +51,7 @@ const HorizontalStackedBarChart = (props) => {
     values,
     horizontalStackedBarDataOriginal = {},
     stadiumValues,
+    tooltipType = false,
   } = props
   const { colors } = props.themeContext
 
@@ -81,22 +83,22 @@ const HorizontalStackedBarChart = (props) => {
     return {
       label,
       backgroundColor:
-      !!stadiumValuesMapped[thisBucketLabel] &&
-      stadiumValuesMapped[thisBucketLabel].color,
-      borderColor:
-        colors.chartBackground &&
-        colors.chartBackground,
+        !!stadiumValuesMapped[thisBucketLabel] &&
+        stadiumValuesMapped[thisBucketLabel].color,
+      borderColor: colors.chartBackground && colors.chartBackground,
       borderWidth: 2,
       //here we set border right for eact item in a row but exept only last one
-      //the calculation below is for, we should prevent setting border if we have 
+      //the calculation below is for, we should prevent setting border if we have
       //just one data and it will be last item at the same time
       borderWidth: function(data) {
-        if(data.datasetIndex !== data.dataset.data.length - 1) {
-          const filteredArr = reorderDatasetByLabel[data.dataIndex].filter((item, index) => index !== data.datasetIndex)
-          const isOnlyOneData = filteredArr.every(item => item === 0)
-          if(!isOnlyOneData) {
+        if (data.datasetIndex !== data.dataset.data.length - 1) {
+          const filteredArr = reorderDatasetByLabel[data.dataIndex].filter(
+            (item, index) => index !== data.datasetIndex
+          )
+          const isOnlyOneData = filteredArr.every((item) => item === 0)
+          if (!isOnlyOneData) {
             return {
-              right: 2
+              right: 2,
             }
           }
         }
@@ -108,17 +110,17 @@ const HorizontalStackedBarChart = (props) => {
     }
   })
   let reorderDatasetByLabel = []
-  if(datasets && !!datasets.length){
-    datasets.forEach(item => {
+  if (datasets && !!datasets.length) {
+    datasets.forEach((item) => {
       item.data.forEach((data, i) => {
-        if(!reorderDatasetByLabel[i]) {
+        if (!reorderDatasetByLabel[i]) {
           reorderDatasetByLabel.push([])
         }
         reorderDatasetByLabel[i].push(data)
       })
     })
   }
-  
+
   return (
     <HorizontalBar
       key={Math.random()}
@@ -130,23 +132,42 @@ const HorizontalStackedBarChart = (props) => {
       height={height}
       options={{
         ...options,
-        tooltips: customChartToolTip(colors, {
-          callbacks: {
-            title: () => '',
-            label: function(tooltipItem, data) {
-              const { datasetIndex } = tooltipItem
-              const count =
-                (data &&
-                  data.datasets &&
-                  data.datasets[datasetIndex] &&
-                  data.datasets[datasetIndex].data[tooltipItem['index']]) ||
-                ''
-              const name = (data && values && values[datasetIndex].title) || ''
-              return `${percentageManipulation(count) || 0}% ${!!name &&
-                `| ${name}`}`
-            },
-          },
-        }),
+        tooltips:
+          (!!tooltipType &&
+            (tooltipType === 'basic' &&
+              customChartToolTip(colors, {
+                callbacks: {
+                  title: () => '',
+                  label: function(tooltipItem, data) {
+                    const { datasetIndex } = tooltipItem
+                    const count =
+                      (data &&
+                        data.datasets &&
+                        data.datasets[datasetIndex] &&
+                        data.datasets[datasetIndex].data[
+                          tooltipItem['index']
+                        ]) ||
+                      ''
+                    const name =
+                      (data && values && values[datasetIndex].title) || ''
+                    return `${percentageManipulation(count) || 0}% ${!!name &&
+                      `| ${name}`}`
+                  },
+                },
+              }))) ||
+          (tooltipType === 'extended' &&
+            modifyTooltip({
+              template: 'HorizontalStackedBarChartTemplate',
+              data: {
+                datasets,
+                labels,
+              },
+              options: {
+                background: colors.tooltipBackground,
+                textColor: colors.tooltipTextColor,
+                caretColor: colors.tooltipBackground,
+              },
+            })),
         chartArea: {
           backgroundColor: colors.chartBackground,
         },

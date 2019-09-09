@@ -171,14 +171,55 @@ const VerticalStackedBarChartTemplate = function(props) {
   return el
 }
 
+const HorizontalStackedBarChartTemplate = function(props) {
+  console.log('HorizontalStackedBarChartTemplate props', props)
+  let titleStyle = 'margin: 16px 16px 8px 16px;'
+  titleStyle += 'font-family: ClanOT;'
+  titleStyle += 'font-size: 14px;'
+  titleStyle += 'font-weight: bold;'
+  titleStyle += 'font-style: normal;'
+  titleStyle += 'font-stretch: normal;'
+  titleStyle += 'line-height: 1.43;'
+  titleStyle += 'letter-spacing: normal;'
+
+  let bodyStyle = 'margin: 8px 16px 16px 16px;'
+  bodyStyle += 'padding-top: 8px;'
+  bodyStyle += 'border-top: 1px solid #e8ecf0;'
+  bodyStyle += 'font-family: ClanOT;'
+  bodyStyle += 'font-size: 12px;'
+  bodyStyle += 'font-weight: bold;'
+  bodyStyle += 'font-style: normal;'
+  bodyStyle += 'font-stretch: normal;'
+  bodyStyle += 'line-height: 1.67;'
+  bodyStyle += 'letter-spacing: normal;'
+
+  let el = ''
+  el += '<div class="chartjs-tooltip-title" style="' + titleStyle + '">'
+  el += `${percentageBeautifier(props.value)}%  |  ${!!props.label &&
+    props.label}`
+  el += '</div><div style="' + bodyStyle + '" class="chartjs-tooltip-body">'
+
+  el += `${percentageBeautifier(props.value)}% of your library<br> `
+  el += `represents video with ${(!!props.propertyValue &&
+    'aeiou'.indexOf(props.propertyValue[0].toLowerCase()) !== -1 &&
+    'an') ||
+    'a'}<br> `
+  el += `${!!props.propertyValue &&
+    props.propertyValue.toLowerCase()} of ${!!props.label &&
+    props.label.toLowerCase()}`
+  el += '</div>'
+
+  return el
+}
+
 const modifyTooltip = function(props) {
   //console.log('modify tooltip props: ', props)
   const { options = {} } = props
   return {
     enabled: false,
     custom: function(tooltipModel) {
-      //console.log('tooltipModel', tooltipModel)
-      // !!tooltipModel.dataPoints && console.log(tooltipModel.dataPoints[0])
+      console.log('tooltipModel', tooltipModel)
+      //!!tooltipModel.dataPoints && console.log(tooltipModel.dataPoints[0])
 
       const datasetIndex =
         (!!tooltipModel &&
@@ -255,14 +296,12 @@ const modifyTooltip = function(props) {
       const propertyValue =
         !!props.data && !!props.data.property && props.data.property
 
-      /*
       console.log('datasetIndex:', datasetIndex)
       console.log('index:', index)
       console.log('previousIndex: ', previousIndex)
       console.log('previousValue: ', previousValue)
       console.log('diff: ', difference)
       console.log('itemLabel: ', itemLabel)
-      */
 
       const defaults = {
         maxWidth: 240,
@@ -326,6 +365,7 @@ const modifyTooltip = function(props) {
       }
 
       // Set Text
+      console.log('hover')
       if (tooltipModel.body) {
         const titleLines = tooltipModel.title || []
         const bodyLines = tooltipModel.body.map(getBody)
@@ -387,6 +427,13 @@ const modifyTooltip = function(props) {
             difference: !!difference && difference | 0,
             itemLabel: (!!itemLabel && itemLabel) || '',
             propertyValue: (!!propertyValue && propertyValue) || '',
+          }),
+          HorizontalStackedBarChartTemplate: HorizontalStackedBarChartTemplate({
+            label: (!!label && label) || '',
+            value: (!!value && value) || 0,
+            labelLong: (!!labelLong && labelLong) || '',
+            difference: !!difference && difference | 0,
+            itemLabel: (!!itemLabel && itemLabel) || '',
           }),
         }
 
