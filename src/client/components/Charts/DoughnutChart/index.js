@@ -11,6 +11,7 @@ import { customChartToolTip } from 'Utils'
 import 'Utils/chart-shadow'
 import { isNumber, isFinite } from 'lodash'
 import Labels from 'Components/Charts/Labels'
+import { modifyTooltip } from 'Utils/tooltip'
 
 const propTypes = {}
 const defaultProps = {
@@ -89,6 +90,7 @@ class DoughnutChart extends React.Component {
       datasetOptions = {},
       removeTooltip = false,
       showAllData = false,
+      tooltipType = 'basic',
       tooltipCaretPosition = false,
       tooltipTemplate = false,
       currentDayIndex = false,
@@ -323,36 +325,48 @@ class DoughnutChart extends React.Component {
                     tooltips:
                       !average &&
                       !removeTooltip &&
-                      customChartToolTip(
-                        themes,
-                        {
-                          mode: tooltipMode,
-                          filter: (tooltipItem) => {
-                            if (slicePiecesWidth !== false) {
-                              if (
-                                tooltipData['labels'][tooltipItem.index] !==
-                                  false &&
-                                tooltipMode === 'dataset'
-                              ) {
-                                return chartValues
-                              } else if (
-                                tooltipData['labels'][tooltipItem.index] !==
-                                  false &&
-                                tooltipMode === 'nearest'
-                              ) {
-                                return chartValues[tooltipItem.index]
-                              }
-                            } else {
-                              if (tooltipMode === 'dataset') {
-                                return chartValues
-                              } else if (tooltipMode === 'nearest') {
-                                return chartValues[tooltipItem.index]
-                              }
-                            }
-                          },
-                        },
-                        tooltipData
-                      ),
+                      ((!!tooltipType &&
+                        (tooltipType === 'basic' &&
+                          customChartToolTip(
+                            themes,
+                            {
+                              mode: tooltipMode,
+                              filter: (tooltipItem) => {
+                                if (slicePiecesWidth !== false) {
+                                  if (
+                                    tooltipData['labels'][tooltipItem.index] !==
+                                      false &&
+                                    tooltipMode === 'dataset'
+                                  ) {
+                                    return chartValues
+                                  } else if (
+                                    tooltipData['labels'][tooltipItem.index] !==
+                                      false &&
+                                    tooltipMode === 'nearest'
+                                  ) {
+                                    return chartValues[tooltipItem.index]
+                                  }
+                                } else {
+                                  if (tooltipMode === 'dataset') {
+                                    return chartValues
+                                  } else if (tooltipMode === 'nearest') {
+                                    return chartValues[tooltipItem.index]
+                                  }
+                                }
+                              },
+                            },
+                            tooltipData
+                          ))) ||
+                        (tooltipType === 'extended' &&
+                          modifyTooltip({
+                            template: 'DoughnutChartTemplate',
+                            data: newData,
+                            options: {
+                              background: themes.tooltipBackground,
+                              textColor: themes.tooltipTextColor,
+                              caretColor: themes.tooltipBackground,
+                            },
+                          }))),
                     legend: {
                       display: legend,
                       labels: {

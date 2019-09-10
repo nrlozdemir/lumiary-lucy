@@ -25,7 +25,7 @@ const emptyData = [
   },
 ]
 
-const StadiumChart = ({ data = emptyData }) => {
+const StadiumChart = ({ data = emptyData, tooltipType }) => {
   return (
     <div className={style.stadiumContainer}>
       <div className={style.colorList}>
@@ -57,6 +57,7 @@ const StadiumChart = ({ data = emptyData }) => {
         angelBorder={2}
         infoSpaceW={210}
         infoSpaceH={80}
+        tooltipType={tooltipType}
       />
     </div>
   )

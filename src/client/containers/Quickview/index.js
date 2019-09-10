@@ -136,27 +136,29 @@ export class Main extends React.PureComponent {
     let secondInfosEmptys = []
     let sortedPlatformValues = []
     //if the same keys are empty in both array, we push this datas to the bottom
-    if(!!platformsValues.length) {
-      platformsValues[0].infos.forEach(item => {
-        const secondArrayTwinItem = platformsValues[1].infos.find(value => value.slug === item.slug)
-        if(!item.value && !secondArrayTwinItem.value) {
+    if (!!platformsValues.length) {
+      platformsValues[0].infos.forEach((item) => {
+        const secondArrayTwinItem = platformsValues[1].infos.find(
+          (value) => value.slug === item.slug
+        )
+        if (!item.value && !secondArrayTwinItem.value) {
           firtsInfosEmptys = [...firtsInfosEmptys, item]
           secondInfosEmptys = [...secondInfosEmptys, secondArrayTwinItem]
-        }else {
+        } else {
           firstInfosArr = [...firstInfosArr, item]
           secondInfosArr = [...secondInfosArr, secondArrayTwinItem]
         }
       })
       sortedPlatformValues = [
         {
-        ...platformsValues[0],
-        infos: [...firstInfosArr, ...firtsInfosEmptys]
+          ...platformsValues[0],
+          infos: [...firstInfosArr, ...firtsInfosEmptys],
         },
         {
-        ...platformsValues[1],
-        infos: [...secondInfosArr, ...secondInfosEmptys]
-        }
-    ]
+          ...platformsValues[1],
+          infos: [...secondInfosArr, ...secondInfosEmptys],
+        },
+      ]
     }
 
     return (
@@ -275,7 +277,7 @@ export class Main extends React.PureComponent {
                           videoUrl,
                           poster,
                         } = el.video
-                        
+
                         return (
                           <div key={i} className={style.cardBlock}>
                             {/* HEADER */}
@@ -319,12 +321,12 @@ export class Main extends React.PureComponent {
                                     />
                                   </div>
                                   <div className={style.percentageWrapper}>
-                                    {cvScore && parseInt(cvScore) > 0 && (
+                                    {cvScore && parseFloat(cvScore) > 0 && (
                                       <PercentageBarGraph
                                         key={Math.random()}
                                         percentage={cvScore}
                                         width={80}
-                                        height={20}
+                                        height={17}
                                         barWidth={1.5}
                                         barSpaceWidth={1.5}
                                         disableLabels
@@ -333,6 +335,10 @@ export class Main extends React.PureComponent {
                                             ? 'white'
                                             : 'darkgrey'
                                         }
+                                        options={{
+                                          tickColor:
+                                            i == 0 ? '#5292e5' : '#2fd7c4',
+                                        }}
                                       />
                                     )}
                                   </div>
@@ -383,7 +389,7 @@ export class Main extends React.PureComponent {
                                         )}
                                         <p
                                           className={cx(
-                                            'font-secondary-second',
+                                            'font-secondary-first',
                                             style.sectionBadge
                                           )}
                                         >
@@ -396,7 +402,7 @@ export class Main extends React.PureComponent {
                                           {item.value}
                                         </div>
                                         <div className={style.progressText}>
-                                          <span className={style.rightTitle}>
+                                          <span style={{ color: colors.progressQuickviewRightTitle }} className={style.rightTitle}>
                                             {item.percentage}%
                                           </span>
                                         </div>

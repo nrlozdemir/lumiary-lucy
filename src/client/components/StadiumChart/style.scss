@@ -7,6 +7,10 @@
   }
 }
 
+.stadiumChartContainer {
+  position: relative;
+}
+
 .stadiumCharTooltip {
   font-family: $font-family-ClanOT;
   font-size: 12px;
@@ -16,13 +20,13 @@
   line-height: 1.67;
   letter-spacing: normal;
   text-align: center;
-  display: none;
-  position: fixed;
-  z-index: 2;
-  padding: 8px 12px;
+  position: absolute;
+  transform: translate(-50%, -100%);
+  left: 50%;
   -webkit-border-radius: 8px;
   -moz-border-radius: 8px;
   border-radius: 8px;
+  z-index: 100;
   &:after {
     content: '';
     position: absolute;
@@ -35,6 +39,32 @@
     transform-origin: 0 0;
     -webkit-transform: rotate(-45deg) translate(-50%, -50%);
     transform: rotate(-45deg) translate(-50%, -50%);
+  }
+
+  .chartjsTooltipTitle {
+    margin: 16px 16px 8px 16px;
+    font-family: $font-family-ClanOT;
+    font-size: 14px;
+    font-weight: bold;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.43;
+    letter-spacing: normal;
+  }
+
+  .chartjsTooltipBody {
+    margin: 8px 16px 16px 16px;
+    padding-top: 8px;
+    border-top: 1px solid #e8ecf0;
+    p {
+      font-family: $font-family-ClanOT;
+      font-size: 12px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.67;
+      letter-spacing: normal;
+    }
   }
   &.dark {
     color: $dark_tooltipColor;

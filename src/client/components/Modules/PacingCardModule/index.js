@@ -15,6 +15,7 @@ const PacingCardModule = ({
   action,
   filters,
   legend,
+  tooltipType = 'single',
   loading = false,
 }) => {
   const {
@@ -67,10 +68,12 @@ const PacingCardModule = ({
               marginLeft: -5,
               width: '45%',
             }}
+            tooltipType={tooltipType}
           />
           <StadiumChart
             data={stadiumValues}
             datasetsIsEmpty={!loading && isDataSetEmpty(stadiumData)}
+            tooltipType={tooltipType}
             style={{
               marginRight: -30,
             }}

@@ -1,4 +1,4 @@
-.cardTitle{
+.cardTitle {
   height: 40px;
   font-size: 32px;
   font-weight: 800;
@@ -17,7 +17,7 @@
   align-items: center;
   justify-content: center;
   text-transform: capitalize;
-  
+
   span {
     font-weight: bold;
     box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
@@ -28,7 +28,7 @@
   }
 }
 
-.progressItem{
+.progressItem {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -39,15 +39,15 @@
     margin-left: 0px;
     background-color: $color-dark-five;
     border-radius: 10px;
-  
+
     &--dark {
-      background: rgb(33, 36, 59) !important;
+      background: #545b79 !important;
     }
     &--light {
       background: rgb(232, 236, 240) !important;
     }
   }
-  
+
   .percentageBlue {
     border-radius: 10px;
     height: 10px;
@@ -55,8 +55,8 @@
     -webkit-transition: width 0.5s, height 0.5s;
     transition: width 0.5s, height 0.5s;
   }
-  
-  .progressText{
+
+  .progressText {
     width: 250px;
     display: flex;
     margin-bottom: 8px;
@@ -67,7 +67,8 @@
     line-height: normal;
     letter-spacing: normal;
     text-transform: capitalize;
-    .rightTitle{
+    font-family: $font-family-ClanOTNews;
+    .rightTitle {
       margin-left: auto;
     }
   }
