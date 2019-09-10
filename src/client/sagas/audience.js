@@ -209,7 +209,8 @@ function* getAudienceGenderData({ payload = {} }) {
 
     yield put(
       actions.getAudienceGenderDataSuccess(
-        percentageManipulation(convertDurationLabels(response, property))
+        //percentageManipulation(convertDurationLabels(response, property))
+        percentageManipulation(response)
       )
     )
   } catch (err) {
