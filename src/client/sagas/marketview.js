@@ -428,12 +428,14 @@ function* getBubbleChartData({
       !!response.Instagram &&
       !!response.YouTube
     ) {
+      const filteredColors = ['achromatic']
+
       // convert response into array of { name, value, color }
       const bubbleData = Object.keys(response).map((pf) =>
         Object.keys(response[pf].color).reduce(
           (val, colorKey) => {
             const colorMetric = response[pf].color[colorKey]
-            if (colorMetric > val.value) {
+            if (!filteredColors.includes(colorKey) && colorMetric > val.value) {
               val.value = colorMetric
               val.color = colorKey
             }
@@ -733,7 +735,7 @@ function* getTotalCompetitorViewsData() {
           labels: [...formattedData.payload.labels],
         },
       }
-      
+
       yield put(newFormattedData)
     }
   } catch (error) {
