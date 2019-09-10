@@ -402,18 +402,6 @@ const modifyTooltip = function(props, conf = {}) {
           }
         }
 
-        if (
-          !!props.template &&
-          props.template === 'VideoReleasesBarChartTemplate'
-        ) {
-          const absValue = Math.abs(value)
-          if ((position.height - 40) / 2 < tooltipModel.caretY) {
-            value = `${metricSuffix(~~absValue)} ${props.metric}`
-          } else {
-            value = `${Math.round(absValue / props.videoNormalizer)}% Videos`
-          }
-        }
-
         const templates = {
           LineChartTemplate: LineChartTemplate({
             label: (!!label && label) || '',
