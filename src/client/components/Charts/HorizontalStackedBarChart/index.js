@@ -55,8 +55,6 @@ const HorizontalStackedBarChart = (props) => {
   } = props
   const { colors } = props.themeContext
 
-  console.log('component.props', props)
-
   const { datasets: barDatasets = [] } = barData
   if (barDatasets.length === 0) {
     return null
