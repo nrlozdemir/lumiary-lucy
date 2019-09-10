@@ -28,7 +28,7 @@ const getTitleFromSlug = (slug) => {
 
 /* eslint-disable react/prefer-stateless-function */
 const ProgressBarCard = (params = {}) => {
-  const { titleSlug = '', items = {}, color } = params
+  const { titleSlug = '', items = {}, color, bgColor } = params
 
   if (titleSlug === '' || Object.keys(items).length === 0) {
     return null
@@ -79,6 +79,7 @@ const ProgressBarCard = (params = {}) => {
                         ]]: true,
                       })}
                       percentageBgColor={color}
+                      progressBarBackgroundColor={bgColor}
                       customPercentageClass={cx(style.percentageBlue)}
                     />
                   </div>

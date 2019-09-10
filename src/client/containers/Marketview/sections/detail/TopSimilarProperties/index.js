@@ -41,6 +41,7 @@ class TopSimilarProperties extends React.Component {
         isError={error}
         isLoading={loading}
         color="#2fd7c4"
+        bgColor="#545b79"
       />
     )
   }
