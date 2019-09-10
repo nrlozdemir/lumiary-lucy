@@ -59,7 +59,9 @@ const ProgressBarCard = (params = {}) => {
           <div>
             <h3 className={style.cardTitle}>{title}</h3>
             <p className={style.sectionBadge}>
-              <span>{topBucket}</span>
+              <span style={{ backgroundColor: colors.duskBackground }}>
+                {topBucket}
+              </span>
             </p>
             <div>
               {sortedItems.map((item, idx) => {

@@ -89,6 +89,12 @@ const RadarChartModule = ({
                     data={checkData[0].data}
                     width={width}
                     height={height}
+                    tooltipType="extended"
+                    platform={
+                      leftTitle
+                        ? leftTitle
+                        : !!checkData && !!checkData[0] && checkData[0].type
+                    }
                   />
                 </div>
               </div>
@@ -107,6 +113,12 @@ const RadarChartModule = ({
                     data={checkData[1].data}
                     width={width}
                     height={height}
+                    tooltipType="extended"
+                    platform={
+                      rightTitle
+                        ? rightTitle
+                        : !!checkData && !!checkData[1] && checkData[1].type
+                    }
                   />
                 </div>
               </div>

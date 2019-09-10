@@ -390,7 +390,7 @@ const light = {
   inputControlBackground: '#f3f6f9',
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#c6c9d7',
-  inputColor: '#000',
+  inputColor: '#505050',
   inputDropdownColor: '#ffffff',
   inputActiveColor: '#505050',
   inputActiveSelectedColor: '#505050',
@@ -402,7 +402,7 @@ const light = {
   // input values
 
   // search input colors
-  searchInputColor: '#000',
+  searchInputColor: '#505050',
   searchInputActiveColor: '#505050',
   searchInputPlaceholderColor: '#c6c9d7',
 
