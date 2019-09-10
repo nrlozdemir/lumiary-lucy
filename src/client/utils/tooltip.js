@@ -390,45 +390,6 @@ const modifyTooltip = function(props, conf = {}) {
 
       // Set Text
       if (tooltipModel.body) {
-        /*
-        const titleLines = tooltipModel.title || []
-        const bodyLines = tooltipModel.body.map(getBody)
-        let innerHtml = '<div class="chartjs-tooltip-title">'
-
-        console.log('titleLines:', titleLines)
-        console.log('bodyLines:', bodyLines)
-
-        titleLines.forEach(function(title) {
-          innerHtml +=
-            '<p style="font-size:' +
-            defaults.headerFontSize +
-            '; font-family:' +
-            defaults.fontFamily +
-            ';' +
-            '">' +
-            title +
-            '</p>'
-        })
-
-        innerHtml += '</div><div class="chartjs-tooltip-body">'
-
-        bodyLines.forEach(function(body, i) {
-          innerHtml +=
-            '<p style="font-size:' +
-            defaults.bodyFontSize +
-            '; font-family:' +
-            defaults.fontFamily +
-            ';' +
-            '">' +
-            body +
-            '</p>'
-        })
-
-        innerHtml += '</div>'
-
-        tooltipEl.innerHTML = innerHtml
-        */
-
         if (
           !!props.template &&
           props.template === 'VideoReleasesBarChartTemplate'
