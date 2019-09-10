@@ -14,13 +14,13 @@ import ProgressBar from 'Components/ProgressBar'
 const maxProgressBars = 4
 
 const getTitleFromSlug = (slug) => {
-  switch(slug) {
+  switch (slug) {
     case 'duration':
       return 'Duration'
 
     case 'pacing':
       return 'Pacing'
-  
+
     case 'dominantColorShots':
       return 'Dominant Color'
   }
@@ -28,9 +28,9 @@ const getTitleFromSlug = (slug) => {
 
 /* eslint-disable react/prefer-stateless-function */
 const ProgressBarCard = (params = {}) => {
-  const { titleSlug = '', items = {} } = params
+  const { titleSlug = '', items = {}, color } = params
 
-  if(titleSlug === '' || Object.keys(items).length === 0) {
+  if (titleSlug === '' || Object.keys(items).length === 0) {
     return null
   }
 
@@ -42,14 +42,14 @@ const ProgressBarCard = (params = {}) => {
     .map((key) => {
       return {
         title: key,
-        value: items[key]
+        value: items[key],
       }
     })
     .slice(0, maxProgressBars)
-  const topBucket = (sortedItems[0]) && sortedItems[0].title || ''
+  const topBucket = (sortedItems[0] && sortedItems[0].title) || ''
 
-  if(!topBucket || sortedItems.length === 0) {
-    return null 
+  if (!topBucket || sortedItems.length === 0) {
+    return null
   }
 
   return (
@@ -66,30 +66,20 @@ const ProgressBarCard = (params = {}) => {
                 return (
                   <div className={style.progressItem} key={idx}>
                     <p className={style.progressText}>
-                      <span className={style.leftTitle}>
-                        {item.title}
-                      </span>
-                      <span className={style.rightTitle}>
-                        {item.value}%
-                      </span>
+                      <span className={style.leftTitle}>{item.title}</span>
+                      <span className={style.rightTitle}>{item.value}%</span>
                     </p>
                     <ProgressBar
                       width={item.value}
-                      customBarClass={cx(
-                        style.progressBar,
-                        {
-                          [style[
-                            `progressBar--${
-                              colors.themeType === 'dark'
-                                ? 'dark'
-                                : 'light'
-                            }`
-                          ]]: true,
-                        }
-                      )}
-                      customPercentageClass={cx(
-                        style.percentageBlue,
-                      )}
+                      customBarClass={cx(style.progressBar, {
+                        [style[
+                          `progressBar--${
+                            colors.themeType === 'dark' ? 'dark' : 'light'
+                          }`
+                        ]]: true,
+                      })}
+                      percentageBgColor={color}
+                      customPercentageClass={cx(style.percentageBlue)}
                     />
                   </div>
                 )
