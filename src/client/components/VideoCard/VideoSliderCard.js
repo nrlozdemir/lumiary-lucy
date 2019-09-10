@@ -19,19 +19,21 @@ class VideoSliderCard extends React.Component {
   }
 
   render() {
-    const { item, index, isActive, title } = this.props
+    const { item, index, isActive, title, containerClass } = this.props
     return (
       <div
+        className={containerClass}
         onMouseEnter={() => this.handleMouseOverPlay()}
         onMouseLeave={() => this.handleMouseOutPlay()}
       >
         <AssetLayer
-          isActive={isActive}containerNoBorder
+          isActive={isActive}
+          containerNoBorder
           leftSocialIcon={item.socialMedia}
           centerText={item.secondTitle}
           title={title}
           width={634}
-          height='100%'
+          height="100%"
           rightValue={floatCvScore(item.cvScore) || 0.0}
         >
           {!!item.video || !!item.image ? (
@@ -66,6 +68,7 @@ class VideoSliderCard extends React.Component {
 
 VideoSliderCard.defaultProps = {
   isActive: false,
+  containerClass: '',
   title: '',
 }
 
@@ -74,6 +77,7 @@ VideoSliderCard.propTypes = {
   index: PropTypes.number,
   isActive: PropTypes.bool,
   title: PropTypes.string,
+  containerClass: PropTypes.string,
 }
 
 export default VideoSliderCard
