@@ -12,6 +12,7 @@ import { socialIconSelector } from 'Utils'
 import Slider from 'react-slick'
 import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
 import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
+import VideoSliderCard from 'Components/VideoCard/VideoSliderCard'
 
 function RenderNextButton({ onClick }) {
   return (
@@ -31,62 +32,6 @@ function RenderPrevButton({ onClick }) {
       onClick={onClick}
     />
   )
-}
-
-class SliderItem extends React.Component {
-  handleMouseOverPlay = () => {
-    this.props.isActive && this.videoRef.play()
-  }
-
-  handleMouseOutPlay = () => {
-    if (this.props.isActive) {
-      this.videoRef.pause()
-      this.videoRef.currentTime = 0
-    }
-  }
-
-  render() {
-    const { item, index, isActive, title } = this.props
-    return (
-      <div
-        style={{ width: 634 }}
-        className="item"
-        onMouseEnter={() => this.handleMouseOverPlay()}
-        onMouseLeave={() => this.handleMouseOutPlay()}
-      >
-        <AssetLayer
-          isActive={isActive}
-          containerNoBorder
-          leftSocialIcon={item.socialMedia}
-          centerText={item.secondTitle}
-          title={title}
-          width={634}
-          height="100%"
-          rightValue={item.cvScore}
-        >
-          <video
-            className={style.fullVideo}
-            src={item.image}
-            ref={(videoRef) => (this.videoRef = videoRef)}
-            loop
-            muted
-            controls={false}
-          />
-          <div className={style.percentageWrapper}>
-            <PercentageBarGraph
-              percentage={item.cvScore}
-              width={80}
-              height={20}
-              barWidth={1.5}
-              barSpaceWidth={1.5}
-              disableLabels
-              color="green"
-            />
-          </div>
-        </AssetLayer>
-      </div>
-    )
-  }
 }
 
 class MarketViewSlider extends React.Component {
@@ -184,7 +129,7 @@ class MarketViewSlider extends React.Component {
                 const title = this.getBrandName(competitors, item, 20)
 
                 return (
-                  <SliderItem
+                  <VideoSliderCard
                     item={item}
                     key={i}
                     index={i}
