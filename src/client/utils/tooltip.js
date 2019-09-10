@@ -158,33 +158,14 @@ const DoughnutChartTemplate = function(props) {
 }
 
 const VerticalStackedBarChartTemplate = function(props) {
-  // console.log('VerticalStackedBarChartTemplate props', props)
-  let globalTitleStyle = 'margin: 16px 16px 8px 16px;'
-  globalTitleStyle += 'font-family: ClanOT;'
-  globalTitleStyle += 'font-size: 14px;'
-  globalTitleStyle += 'font-weight: bold;'
-  globalTitleStyle += 'font-style: normal;'
-  globalTitleStyle += 'font-stretch: normal;'
-  globalTitleStyle += 'line-height: 1.43;'
-  globalTitleStyle += 'letter-spacing: normal;'
-
-  let globalBodyStyle = 'margin: 8px 16px 16px 16px;'
-  globalBodyStyle += 'padding-top: 8px;'
-  globalBodyStyle += 'border-top: 1px solid #e8ecf0;'
-  globalBodyStyle += 'font-family: ClanOT;'
-  globalBodyStyle += 'font-size: 12px;'
-  globalBodyStyle += 'font-weight: bold;'
-  globalBodyStyle += 'font-style: normal;'
-  globalBodyStyle += 'font-stretch: normal;'
-  globalBodyStyle += 'line-height: 1.67;'
-  globalBodyStyle += 'letter-spacing: normal;'
+  const style = getGlobalStyle()
 
   let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + globalTitleStyle + '">'
+  el += '<div class="chartjs-tooltip-title" style="' + style.title + '">'
   el += `${percentageBeautifier(props.value)}%  |  ${!!props.label &&
     props.label}`
   el +=
-    '</div><div style="' + globalBodyStyle + '" class="chartjs-tooltip-body">'
+    '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
   el += `${percentageBeautifier(props.value)}% of your library<br> `
   el += `represents video with ${(!!props.propertyValue &&
     'aeiou'.indexOf(props.propertyValue[0].toLowerCase()) !== -1 &&
