@@ -65,7 +65,7 @@ class MarketViewSlider extends React.Component {
 
   render() {
     const { currentIdx, createRef } = this.state
-    const { items, profile } = this.props
+    const { items, profile, changeVideo } = this.props
 
     const competitors =
       !!profile && !!profile.brand
@@ -108,7 +108,11 @@ class MarketViewSlider extends React.Component {
       prevArrow: <RenderPrevButton />,
       // beforeChange: (oldIndex, newIndex) =>
       //   this.setState({ currentIdx: newIndex }),
-      afterChange: (current) => this.setState({ currentIdx: current }),
+      afterChange: (current) => {
+        this.setState({ currentIdx: current }, () =>
+          changeVideo(items[this.state.currentIdx])
+        )
+      },
     }
 
     return (
