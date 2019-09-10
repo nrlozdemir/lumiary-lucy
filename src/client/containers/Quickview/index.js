@@ -389,7 +389,7 @@ export class Main extends React.PureComponent {
                                         )}
                                         <p
                                           className={cx(
-                                            'font-secondary-second',
+                                            'font-secondary-first',
                                             style.sectionBadge
                                           )}
                                         >
