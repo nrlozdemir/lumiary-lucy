@@ -40,7 +40,10 @@ class Slider extends React.Component {
     }
 
     if (container === 'competitor') {
-      requestBody.competitors = competitors
+      requestBody.competitors =
+        !!competitors && !!competitors.length
+          ? competitors.map((c) => ({ uuid: c.uuid }))
+          : []
     }
 
     this.setState({
