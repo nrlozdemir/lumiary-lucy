@@ -37,6 +37,7 @@ const dark = {
   progressLibraryDetailTickColor: '#ffffff',
   progressQuickviewBg: '#21243b',
   progressQuickviewColor: '#2fd7c4',
+  progressQuickviewRightTitle: '#fff',
   // progressbar values
 
   // labels
@@ -328,6 +329,7 @@ const light = {
   progressLibraryDetailTickColor: '#505050',
   progressQuickviewBg: '#ffffff',
   progressQuickviewColor: '#2fd7c4',
+  progressQuickviewRightTitle: '#505050',
   // progressbar values
 
   // labels

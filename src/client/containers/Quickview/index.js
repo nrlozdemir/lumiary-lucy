@@ -402,7 +402,7 @@ export class Main extends React.PureComponent {
                                           {item.value}
                                         </div>
                                         <div className={style.progressText}>
-                                          <span className={style.rightTitle}>
+                                          <span style={{ color: colors.progressQuickviewRightTitle }} className={style.rightTitle}>
                                             {item.percentage}%
                                           </span>
                                         </div>
