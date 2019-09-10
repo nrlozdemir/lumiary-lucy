@@ -4,7 +4,7 @@ import { createStructuredSelector } from 'reselect'
 import { compose } from 'redux'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
-import classnames from 'classnames'
+import cx from 'classnames'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import style from './style.scss'
@@ -130,6 +130,7 @@ class MarketViewSlider extends React.Component {
 
                 return (
                   <VideoSliderCard
+                    containerClass={cx('item', { width: 634 })}
                     item={item}
                     key={i}
                     index={i}
