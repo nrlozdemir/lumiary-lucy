@@ -585,6 +585,50 @@ const modifyTooltip = function(props, conf = {}) {
         }
       }
 
+      if (
+        !!props.template &&
+        props.template === 'VerticalStackedBarChartTemplate'
+      ) {
+        let barDataModel
+        if (tooltipModel.dataPoints) {
+          const { index, datasetIndex } = tooltipModel.dataPoints[0]
+          const meta = this._chartInstance.getDatasetMeta(datasetIndex)
+          barDataModel = meta.data[index]._model
+          barDataModel.centerPoint = meta.data[index].getCenterPoint()
+        }
+        if (barDataModel) {
+          caretStyles = arrowRight
+
+          caretLeft =
+            position.left +
+            window.pageXOffset +
+            barDataModel.centerPoint.x -
+            defaults.caretPadding -
+            barDataModel.width / 2
+
+          caretTop =
+            position.top +
+            window.pageYOffset +
+            barDataModel.centerPoint.y -
+            defaults.caretHeight / 2
+
+          tooltipTop =
+            position.top +
+            window.pageYOffset +
+            barDataModel.centerPoint.y -
+            tooltipEl.clientHeight / 2
+
+          tooptipLeft =
+            position.left +
+            window.pageXOffset +
+            1 +
+            barDataModel.centerPoint.x -
+            barDataModel.width / 2 -
+            tooltipEl.clientWidth -
+            defaults.caretPadding
+        }
+      }
+
       tooltipEl.style.left = tooptipLeft + 'px'
       tooltipEl.style.top = tooltipTop + 'px'
       tooltipEl.style.textAlign = 'center'
