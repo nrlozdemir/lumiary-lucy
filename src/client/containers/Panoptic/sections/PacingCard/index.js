@@ -22,6 +22,7 @@ class PacingCard extends React.Component {
         title="Pacing For Duration By Performance"
         action={this.callBack}
         loading={loading}
+        tooltipType="extended"
         filters={[
           {
             type: 'platformEngagement',

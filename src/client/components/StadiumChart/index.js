@@ -8,7 +8,6 @@ class Stadium extends React.Component {
   constructor(props) {
     super(props)
     this.stadium = React.createRef()
-    this.tooltip = React.createRef()
     this.text = React.createRef()
     this.currentBar = null
     this.state = {
@@ -16,45 +15,14 @@ class Stadium extends React.Component {
         width: 0,
         height: 0,
       },
+      tooltipShow: false,
+      title: null,
+      value: null,
+      top: 0,
     }
   }
 
   componentDidMount() {
-    let color, id
-    this.stadium.current.addEventListener('mouseover', (event) => {
-      let value = event.target.dataset.value
-      let title = event.target.dataset.title
-      id = event.target.id
-      color =
-        event.target.attributes['stroke'] &&
-        event.target.attributes['stroke'].value
-
-      if (value && title && id === 'BAR') {
-        this.tooltip.current.innerText = value + '% | ' + title
-        this.tooltip.current.style.display = 'block'
-      }
-    })
-
-    this.stadium.current.addEventListener('mousemove', (event) => {
-      const { clientX, clientY } = event
-      const { top } = this.tooltip.current.getBoundingClientRect()
-      this.tooltip.current.style.top = event.clientY - 50 + 'px'
-      this.tooltip.current.style.left =
-        event.clientX - this.tooltip.current.clientWidth / 2 + 'px'
-      if (event.target.attributes['stroke'] && id === 'BAR') {
-        event.target.attributes['stroke'].value = shadeHexColor(color, 0.12)
-      }
-    })
-
-    this.stadium.current.addEventListener('mouseout', (event) => {
-      this.tooltip.current.innerHTML = ''
-      this.tooltip.current.style.display = 'none'
-      if (event.target.attributes['stroke']) {
-        event.target.attributes['stroke'].value = color
-      }
-      color = null
-    })
-
     const { width, height } = this.text.current.getBoundingClientRect()
     this.setState({
       text: {
@@ -62,12 +30,6 @@ class Stadium extends React.Component {
         height: height,
       },
     })
-  }
-
-  componentWillUnmount() {
-    this.stadium.current.removeEventListener('mouseover', null)
-    this.stadium.current.removeEventListener('mousemove', null)
-    this.stadium.current.removeEventListener('mouseout', null)
   }
 
   render() {
@@ -104,7 +66,7 @@ class Stadium extends React.Component {
     } = themeContext
 
     return (
-      <React.Fragment>
+      <div className={style.stadiumChartContainer}>
         <svg width={svgW} height={svgH} viewBox={`0 0 ${svgW} ${svgH}`}>
           <g
             className={style.stadiumChart}
@@ -173,6 +135,22 @@ class Stadium extends React.Component {
                     id="BAR"
                     data-value={item.value}
                     data-title={item.title}
+                    onMouseOver={() => {
+                      this.setState({
+                        tooltipShow: true,
+                        value: item.value,
+                        title: item.title,
+                        top: x + index * borderWidth - 23,
+                      })
+                    }}
+                    onMouseOut={() => {
+                      this.setState({
+                        tooltipShow: false,
+                        value: null,
+                        title: null,
+                        top: 0,
+                      })
+                    }}
                     stroke={item.color}
                     style={{
                       transition: `stroke-dasharray ${animationSpeed}s linear`,
@@ -249,14 +227,25 @@ class Stadium extends React.Component {
             })}
           </g>
         </svg>
-        <div
-          className={classnames(style.stadiumCharTooltip, {
-            [style.light]: themeType === 'light',
-            [style.dark]: themeType === 'dark',
-          })}
-          ref={this.tooltip}
-        />
-      </React.Fragment>
+        {this.state.tooltipShow && this.props.tooltipType === 'extended' && (
+          <div
+            style={{ top: this.state.top }}
+            className={classnames(style.stadiumCharTooltip, {
+              [style.light]: themeType === 'light',
+              [style.dark]: themeType === 'dark',
+            })}
+          >
+            <div className={style.chartjsTooltipTitle}>
+              {this.state.value}% | {this.state.title} Pacing
+            </div>
+            <div className={style.chartjsTooltipBody}>
+              <p>{this.state.value}% of your library</p>
+              <p>represents video with a</p>
+              <p>pacing of {this.state.title}.</p>
+            </div>
+          </div>
+        )}
+      </div>
     )
   }
 }
