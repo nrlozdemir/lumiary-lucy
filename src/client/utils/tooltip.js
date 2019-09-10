@@ -2,7 +2,7 @@ import React from 'react'
 import { percentageBeautifier } from 'Utils/datasets'
 import { metricSuffix, ucfirst } from 'Utils'
 
-const getGlobalStyle = (custom = { title: {}, body: {} }) => {
+const getGlobalStyle = (custom = { title: {}, body: {} }, domStyle = false) => {
   const title = {
     'font-family': 'ClanOT',
     'font-size': '14px',
@@ -11,7 +11,7 @@ const getGlobalStyle = (custom = { title: {}, body: {} }) => {
     'font-weight': 'bold',
     'letter-spacing': 'normal',
     'line-height': '1.43',
-    'margin': '16px 16px 8px 16px',
+    margin: '16px 16px 8px 16px',
     ...custom.title,
   }
 
@@ -23,20 +23,49 @@ const getGlobalStyle = (custom = { title: {}, body: {} }) => {
     'font-weight': 'bold',
     'letter-spacing': 'normal',
     'line-height': '1.67',
-    'margin': '8px 16px 16px 16px',
+    margin: '8px 16px 16px 16px',
     'padding-top': '8px',
     'border-top': '1px solid #e8ecf0',
     ...custom.body,
   }
 
-  let titleStyle = ''
+  let titleStyle
+  let bodyStyle
+
+  if (domStyle === true) {
+    titleStyle = {}
+    bodyStyle = {}
+  } else {
+    titleStyle = ''
+    bodyStyle = ''
+  }
+
   Object.keys(title).map((s, i) => {
-    titleStyle += `${s}:${title[s]};`
+    const value = title[s]
+    if (domStyle === false) {
+      titleStyle += `${s}:${value};`
+    } else {
+      const pos = s.split('-')
+      if (!!pos) {
+        s = `${pos[0]}${ucfirst(pos[1])}`
+        s = s.replace('-', '')
+      }
+      titleStyle[s] = value
+    }
   })
 
-  let bodyStyle = ''
   Object.keys(body).map((s, i) => {
-    bodyStyle += `${s}:${body[s]};`
+    const value = body[s]
+    if (domStyle === false) {
+      bodyStyle += `${s}:${value};`
+    } else {
+      const pos = s.split('-')
+      if (!!pos) {
+        s = `${pos[0]}${ucfirst(pos[1])}`
+        s = s.replace('-', '')
+      }
+      titleStyle[s] = value
+    }
   })
 
   return {
@@ -51,8 +80,7 @@ const LineChartTemplate = function(props) {
   let el = ''
   el += '<div class="chartjs-tooltip-title" style="' + style.title + '">'
   el += `${percentageBeautifier(props.value)} Score  |  ${props.label} Pacing`
-  el +=
-    '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
+  el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
   el += `On ${props.labelLong}, your CV score <br> `
   if (!isNaN(props.difference) && props.difference > 0) {
     el += `increased by ${props.difference}% from the <br> previous day.`
@@ -67,19 +95,10 @@ const LineChartTemplate = function(props) {
 }
 
 const VideoReleasesBarChartTemplate = function(props) {
-  const style = getGlobalStyle()
-  console.log(style)
-  let globalTitleStyle = 'margin: 8px 16px;'
-  globalTitleStyle += 'font-family: ClanOT;'
-  globalTitleStyle += 'font-size: 14px;'
-  globalTitleStyle += 'font-weight: bold;'
-  globalTitleStyle += 'font-style: normal;'
-  globalTitleStyle += 'font-stretch: normal;'
-  globalTitleStyle += 'line-height: 1.43;'
-  globalTitleStyle += 'letter-spacing: normal;'
+  const style = getGlobalStyle({ title: { margin: '8px 16px' } })
 
   let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + globalTitleStyle + '">'
+  el += '<div class="chartjs-tooltip-title" style="' + style.title + '">'
   el += `${props.value}`
   el += '</div>'
   el += '</div>'
@@ -88,29 +107,7 @@ const VideoReleasesBarChartTemplate = function(props) {
 }
 
 const CircleChartTemplate = (props) => {
-  const globalTitleStyle = {
-    margin: '16px 16px 8px 16px',
-    fontFamily: 'ClanOT',
-    fontSize: '14px',
-    fontWeight: 'bold',
-    fontStyle: 'normal',
-    fontStretch: 'normal',
-    lineHeight: '1.43',
-    letterSpacing: 'normal',
-  }
-
-  const globalBodyStyle = {
-    margin: '8px 16px 16px 16px',
-    fontFamily: 'ClanOT',
-    fontSize: '12px',
-    fontWeight: 'bold',
-    fontStyle: 'normal',
-    fontStretch: 'normal',
-    lineHeight: '1.67',
-    letterSpacing: 'normal',
-    paddingTop: '8px',
-    borderTop: '1px solid #e8ecf0',
-  }
+  const style = getGlobalStyle({}, true)
 
   const pStyle = {
     margin: '0px',
@@ -122,11 +119,11 @@ const CircleChartTemplate = (props) => {
 
   return (
     <React.Fragment>
-      <div className="chartjs-tooltip-title" style={globalTitleStyle}>
+      <div className="chartjs-tooltip-title" style={style.title}>
         {percentageBeautifier(props.value)} Score{'  '}|{'  '}
         {props.platform} Average
       </div>
-      <div style={globalBodyStyle} className="chartjs-tooltip-body">
+      <div className="chartjs-tooltip-body" style={style.body}>
         <p style={pStyle}>
           On {props.labelLong}, your average {props.platform}
         </p>
@@ -164,8 +161,7 @@ const VerticalStackedBarChartTemplate = function(props) {
   el += '<div class="chartjs-tooltip-title" style="' + style.title + '">'
   el += `${percentageBeautifier(props.value)}%  |  ${!!props.label &&
     props.label}`
-  el +=
-    '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
+  el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
   el += `${percentageBeautifier(props.value)}% of your library<br> `
   el += `represents video with ${(!!props.propertyValue &&
     'aeiou'.indexOf(props.propertyValue[0].toLowerCase()) !== -1 &&
@@ -186,8 +182,7 @@ const HorizontalStackedBarChartTemplate = function(props) {
   el += '<div class="chartjs-tooltip-title" style="' + style.title + '">'
   el += `${percentageBeautifier(props.value)}%  |  ${!!props.propertyTitle &&
     props.propertyTitle} Pacing`
-  el +=
-    '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
+  el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
   el += `${percentageBeautifier(props.value)}% of your library<br> `
   el += `represents video with a pacing<br> `
   el += `of ${!!props.propertyTitle && props.propertyTitle.toLowerCase()}`
@@ -205,8 +200,7 @@ const RadarChartTemplate = function(props) {
     props.metric}  |  ${!!props.itemLabel &&
     !!props.itemLabel.name &&
     ucfirst(props.itemLabel.name)}`
-  el +=
-    '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
+  el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
   el += `On ${!!props.platform && props.platform}, ${percentageBeautifier(
     props.value
   )}% of<br> your library<br> `
@@ -396,14 +390,14 @@ const modifyTooltip = function(props, conf = {}) {
 
       // Set Text
       if (tooltipModel.body) {
+        /*
         const titleLines = tooltipModel.title || []
         const bodyLines = tooltipModel.body.map(getBody)
         let innerHtml = '<div class="chartjs-tooltip-title">'
 
-        //console.log('titleLines:', titleLines)
-        //console.log('bodyLines:', bodyLines)
+        console.log('titleLines:', titleLines)
+        console.log('bodyLines:', bodyLines)
 
-        /*
         titleLines.forEach(function(title) {
           innerHtml +=
             '<p style="font-size:' +
@@ -620,10 +614,4 @@ const modifyTooltip = function(props, conf = {}) {
   }
 }
 
-export {
-  modifyTooltip,
-  LineChartTemplate,
-  CircleChartTemplate,
-  DoughnutChartTemplate,
-  VerticalStackedBarChartTemplate,
-}
+export { modifyTooltip, CircleChartTemplate }
