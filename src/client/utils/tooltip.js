@@ -4,67 +4,68 @@ import { metricSuffix, ucfirst } from 'Utils'
 
 const getGlobalStyle = (custom = { title: {}, body: {} }) => {
   const title = {
-    fontFamily: 'ClanOT',
-    fontSize: '',
-    fontWeight: '',
-    fontStyle: '',
-    fontStretch: '',
-    lineHeight: '',
-    letterSpacing: '',
-    margin: '',
+    'font-family': 'ClanOT',
+    'font-size': '14px',
+    'font-style': 'normal',
+    'font-stretch': 'normal',
+    'font-weight': 'bold',
+    'letter-spacing': 'normal',
+    'line-height': '1.43',
+    margin: '16px 16px 8px 16px',
     ...custom.title,
   }
 
   const body = {
-    fontFamily: '',
-    fontSize: '',
-    fontWeight: '',
-    fontStyle: '',
-    fontStretch: '',
-    lineHeight: '',
-    letterSpacing: '',
-    margin: '',
-    paddingTop: '',
-    borderTop: '',
+    'font-family': 'ClanOT',
+    'font-size': '12px',
+    'font-style': 'normal',
+    'font-stretch': 'normal',
+    'font-weight': 'bold',
+    'letter-spacing': 'normal',
+    'line-height': '1.67',
+    margin: '8px 16px 16px 16px',
+    'padding-top': '8px',
+    'border-top': '1px solid #e8ecf0',
     ...custom.body,
   }
 
-  let titleStyle, bodyStyle
-  Object.values(title).map((s, i) => {
-    titleStyle += `${i}: ${s};`
+  let titleStyle = ''
+  Object.keys(title).map((s, i) => {
+    titleStyle += `${s}:${title[s]};`
   })
 
-  Object.values(body).map((s, i) => {
-    bodyStyle += `${i}: ${s};`
+  let bodyStyle = ''
+  Object.keys(body).map((s, i) => {
+    bodyStyle += `${s}:${body[s]};`
   })
 
   return {
-    titleStyle: !!titleStyle && titleStyle,
-    bodyStyle: !!bodyStyle && bodyStyle,
+    title: !!titleStyle && titleStyle,
+    body: !!bodyStyle && bodyStyle,
   }
 }
 
-let globalTitleStyle = 'margin: 16px 16px 8px 16px;'
-globalTitleStyle += 'font-family: ClanOT;'
-globalTitleStyle += 'font-size: 14px;'
-globalTitleStyle += 'font-weight: bold;'
-globalTitleStyle += 'font-style: normal;'
-globalTitleStyle += 'font-stretch: normal;'
-globalTitleStyle += 'line-height: 1.43;'
-globalTitleStyle += 'letter-spacing: normal;'
-
-let globalBodyStyle = 'margin: 8px 16px 16px 16px;'
-globalBodyStyle += 'padding-top: 8px;'
-globalBodyStyle += 'border-top: 1px solid #e8ecf0;'
-globalBodyStyle += 'font-family: ClanOT;'
-globalBodyStyle += 'font-size: 12px;'
-globalBodyStyle += 'font-weight: bold;'
-globalBodyStyle += 'font-style: normal;'
-globalBodyStyle += 'font-stretch: normal;'
-globalBodyStyle += 'line-height: 1.67;'
-globalBodyStyle += 'letter-spacing: normal;'
-
 const LineChartTemplate = function(props) {
+  let globalTitleStyle = 'margin: 16px 16px 8px 16px;'
+  globalTitleStyle += 'font-family: ClanOT;'
+  globalTitleStyle += 'font-size: 14px;'
+  globalTitleStyle += 'font-weight: bold;'
+  globalTitleStyle += 'font-style: normal;'
+  globalTitleStyle += 'font-stretch: normal;'
+  globalTitleStyle += 'line-height: 1.43;'
+  globalTitleStyle += 'letter-spacing: normal;'
+
+  let globalBodyStyle = 'margin: 8px 16px 16px 16px;'
+  globalBodyStyle += 'padding-top: 8px;'
+  globalBodyStyle += 'border-top: 1px solid #e8ecf0;'
+  globalBodyStyle += 'font-family: ClanOT;'
+  globalBodyStyle += 'font-size: 12px;'
+  globalBodyStyle += 'font-weight: bold;'
+  globalBodyStyle += 'font-style: normal;'
+  globalBodyStyle += 'font-stretch: normal;'
+  globalBodyStyle += 'line-height: 1.67;'
+  globalBodyStyle += 'letter-spacing: normal;'
+
   let el = ''
   el += '<div class="chartjs-tooltip-title" style="' + globalTitleStyle + '">'
   el += `${percentageBeautifier(props.value)} Score  |  ${props.label} Pacing`
@@ -84,6 +85,8 @@ const LineChartTemplate = function(props) {
 }
 
 const VideoReleasesBarChartTemplate = function(props) {
+  const style = getGlobalStyle()
+  console.log(style)
   let globalTitleStyle = 'margin: 8px 16px;'
   globalTitleStyle += 'font-family: ClanOT;'
   globalTitleStyle += 'font-size: 14px;'
@@ -153,33 +156,13 @@ const CircleChartTemplate = (props) => {
 }
 
 const DoughnutChartTemplate = function(props) {
-  //console.log('DoughnutChartTemplate props', props)
-  let globalTitleStyle = 'margin: 16px 16px 8px 16px;'
-  globalTitleStyle += 'font-family: ClanOT;'
-  globalTitleStyle += 'font-size: 14px;'
-  globalTitleStyle += 'font-weight: bold;'
-  globalTitleStyle += 'font-style: normal;'
-  globalTitleStyle += 'font-stretch: normal;'
-  globalTitleStyle += 'line-height: 1.43;'
-  globalTitleStyle += 'letter-spacing: normal;'
-
-  let globalBodyStyle = 'margin: 8px 16px 16px 16px;'
-  globalBodyStyle += 'padding-top: 8px;'
-  globalBodyStyle += 'border-top: 1px solid #e8ecf0;'
-  globalBodyStyle += 'font-family: ClanOT;'
-  globalBodyStyle += 'font-size: 12px;'
-  globalBodyStyle += 'font-weight: bold;'
-  globalBodyStyle += 'font-style: normal;'
-  globalBodyStyle += 'font-stretch: normal;'
-  globalBodyStyle += 'line-height: 1.67;'
-  globalBodyStyle += 'letter-spacing: normal;'
+  const style = getGlobalStyle()
 
   let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + globalTitleStyle + '">'
+  el += '<div class="chartjs-tooltip-title" style="' + style.title + '">'
   el += `${percentageBeautifier(props.value)}%  |  ${!!props.itemLabel &&
     props.itemLabel}`
-  el +=
-    '</div><div style="' + globalBodyStyle + '" class="chartjs-tooltip-body">'
+  el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
   el += `${percentageBeautifier(props.value)}% of your library<br> `
   el += `represents video with ${(!!props.label &&
     'aeiou'.indexOf(props.label[0].toLowerCase()) !== -1 &&
