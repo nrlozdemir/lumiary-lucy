@@ -42,19 +42,19 @@ class GenderSection extends React.Component {
   render() {
     const {
       type,
-      audienceGenderData: { data, loading, error },
-    } = this.props
+      audienceGenderData: { data, data: { dataset }, loading, error },
+		} = this.props
 
-    const labels = (data && Object.keys(data)) || []
+    const labels = (data.dataset && Object.keys(data.dataset)) || []
 
     let genderData = []
 
     if (!!labels.length) {
       genderData = labels.reduce(
         (datasets, label) => {
-          const { male, female } = data[label]
+          const { male, female } = data.dataset[label]
           datasets[0].data.push(Math.round(male * 100))
-          datasets[1].data.push(Math.round(female * 100))
+					datasets[1].data.push(Math.round(female * 100))
           return datasets
         },
         [
@@ -69,7 +69,7 @@ class GenderSection extends React.Component {
         datasets: genderData.map((el, i) => ({
           ...el,
           borderWidth: 1,
-          label: `Dataset ${i}`,
+          label: labels[0], // data is not enough, so we don't know how to handle labels.
           borderColor: i === 1 ? '#2FD7C4' : '#5292E5',
           backgroundColor: i === 1 ? '#2FD7C4' : '#5292E5',
         })),
@@ -132,7 +132,9 @@ class GenderSection extends React.Component {
                       : []
                   }
                   reverse
-                  grids={['100%', '50%', '0%']}
+									grids={['100%', '50%', '0%']}
+									tooltipType='extended'
+									gender='Male'
                 />
                 <HorizontalBarChart
                   data={
@@ -141,6 +143,8 @@ class GenderSection extends React.Component {
                       : []
                   }
                   grids={['0%', '50%', '100%']}
+									tooltipType='extended'
+									gender='Female'
                 />
               </React.Fragment>
             )}

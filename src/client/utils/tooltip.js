@@ -64,7 +64,7 @@ const getGlobalStyle = (custom = { title: {}, body: {} }, domStyle = false) => {
         s = `${pos[0]}${ucfirst(pos[1])}`
         s = s.replace('-', '')
       }
-      titleStyle[s] = value
+      bodyStyle[s] = value
     }
   })
 
@@ -210,6 +210,33 @@ const RadarChartTemplate = function(props) {
   el += '</div>'
 
   return el
+}
+
+const HorizontalBarChartTemplate = function(props) {
+  const style = getGlobalStyle({}, true)
+
+  const pStyle = {
+    margin: '0px',
+    padding: '0px',
+    fontFamily: 'ClanOT',
+    fontSize: '12px',
+    lineHeight: '1.67',
+  }
+
+  return (
+    <React.Fragment>
+      <div className="chartjs-tooltip-title" style={style.title}>
+        {percentageBeautifier(props.value)}%{'  '}{props.property} {props.metric}
+      </div>
+      <div className="chartjs-tooltip-body" style={style.body}>
+        <p style={pStyle}>
+				{percentageBeautifier(props.value)}% of {props.gender} prefer
+        </p>
+        <p style={pStyle}>videos that are {props.property}</p>
+        <p style={pStyle}>{props.metric}</p>
+      </div>
+    </React.Fragment>
+  )
 }
 
 const modifyTooltip = function(props, conf = {}) {
@@ -444,6 +471,15 @@ const modifyTooltip = function(props, conf = {}) {
             metric: (!!metric && metric) || '',
             platform: (!!platform && platform) || '',
           }),
+          HorizontalBarChartTemplate: HorizontalBarChartTemplate({
+            label: (!!label && label) || '',
+            value: (!!value && value) || 0,
+            labelLong: (!!labelLong && labelLong) || '',
+            difference: !!difference && difference | 0,
+            itemLabel: (!!itemLabel && itemLabel) || '',
+            metric: (!!metric && metric) || '',
+            platform: (!!platform && platform) || '',
+          }),
         }
 
         tooltipEl.innerHTML = templates[props.template]
@@ -619,4 +655,4 @@ const modifyTooltip = function(props, conf = {}) {
   }
 }
 
-export { modifyTooltip, CircleChartTemplate }
+export { modifyTooltip, CircleChartTemplate, HorizontalBarChartTemplate }

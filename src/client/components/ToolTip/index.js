@@ -3,14 +3,17 @@ import classnames from 'classnames'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import ReactTooltip from 'react-tooltip'
-import { CircleChartTemplate } from 'Utils/tooltip'
+import { CircleChartTemplate, HorizontalBarChartTemplate } from 'Utils/tooltip'
 
 export default (props) => {
   const tooltipComponents = {
     CircleChart: CircleChartTemplate,
+    HorizontalBarChart: HorizontalBarChartTemplate,
   }
 
-  const TooltipTemplate = tooltipComponents[props.template]
+	const TooltipTemplate = tooltipComponents[props.template]
+
+	//console.log("tooltip component props", props)
 
   return (
     <ThemeContext.Consumer>
