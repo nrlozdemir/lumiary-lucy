@@ -4,6 +4,9 @@
   .deleteWrapper {
     position: relative;
     outline: 0;
+    font-family: $font-family-ClanOTBold;
+    font-weight: bold;
+
     div {
       background-color: #fff;
       color: #000;
@@ -62,6 +65,11 @@
       cursor: pointer;
       font-size: 16px;
     }
+
+    a {
+      font-family: $font-family-ClanOT !important;
+      font-weight: normal !important;
+    }
   }
 
   .reportsTableContainer {
@@ -79,6 +87,7 @@
       p {
         font-size: 14px;
         font-family: $font-family-ClanOTBold;
+        font-weight: bold;
       }
       .inputWrapper {
         width: 200px;
