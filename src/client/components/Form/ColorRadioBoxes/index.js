@@ -40,10 +40,9 @@ class ColorRadioBoxes extends React.Component {
             className={cx(style.colorRadius, { [style.isInputSet]: !!props.input.value.color })}
             style={{ backgroundColor: props.input.value.color }}
           />
-          {console.log(props.input.value.color)}
           <p
             className={style.colorName}
-            style={{ color: props.colors.textColor }}
+            style={{ color: props.input.value ? props.colors.textColor : props.colors.selectBorder }}
           >
             {props.input.value ? props.input.value.name : 'Select Color'}
           </p>
