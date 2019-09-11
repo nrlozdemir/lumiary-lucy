@@ -64,7 +64,7 @@ const getGlobalStyle = (custom = { title: {}, body: {} }, domStyle = false) => {
         s = `${pos[0]}${ucfirst(pos[1])}`
         s = s.replace('-', '')
       }
-      titleStyle[s] = value
+      bodyStyle[s] = value
     }
   })
 
