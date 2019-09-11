@@ -1,4 +1,4 @@
-version: "3.4"
+version: '3.4'
 services:
   node:
     container_name: lumiary
@@ -19,8 +19,8 @@ services:
     # command: ["npm", "run", "storybook"]
 
     ports:
-      - "9000:9000"
-      - "9090:9090"
+      - '9000:9000'
+      - '9090:9090'
     volumes:
       - .:/application
       - /application/node_modules
@@ -28,10 +28,10 @@ services:
       PORT: 9000
       NODE_ENV: 'development'
       # API_ROOT: 'https://azazzle-local.quickframe.com:8081'
-      API_ROOT:  'https://azazzle.staging.quickframe.com'
+      API_ROOT: 'https://azazzle.staging.quickframe.com'
       API_VERSION: 'v1'
       MEDIA_URL: 'https://s3.amazonaws.com/quickframe-media-staging/'
-      QAPI_ROOT: 'https://api-local.quickframe.com:8080'
+      QAPI_ROOT: 'https://api.staging.quickframe.com'
       QAPI_VERSION: 'v1'
       STATIC_URL: 'https://s3.amazonaws.com/quickframe-static-dev/'
       AWS_ACCESS_KEY_ID: 'AKIAIILRAYHRCIOFIR4Q'
@@ -54,4 +54,4 @@ services:
   redis:
     image: redis
     ports:
-      - "6381:6379"
+      - '6381:6379'
