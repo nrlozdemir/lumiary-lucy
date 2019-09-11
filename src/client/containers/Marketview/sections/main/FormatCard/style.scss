@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   margin-top: 32px;
+  // margin-top: 47px;
   margin-bottom: 30px;
 
   .formatItem {
@@ -46,7 +47,13 @@
       }
     }
     .formatItemText {
-      margin-top: 20px;
+      // margin-top: 20px;
+      margin-top: 16px;
+      height: 80px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
       span {
         display: block;
         text-align: center;
@@ -54,6 +61,7 @@
         &:nth-child(1) {
           font-family: $font-family-ClanOTBold;
           font-size: 12px;
+          font-weight: bold;
           margin-bottom: 4px;
         }
         &:nth-child(2) {

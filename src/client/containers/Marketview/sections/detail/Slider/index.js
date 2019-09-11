@@ -21,7 +21,7 @@ class Slider extends React.Component {
   }
 
   getCompetitorVideos = (data = {}) => {
-    const { container, activeDay, profile } = this.props
+    const { container, profile } = this.props
     const { brand = {} } = profile
     const { uuid: brandUuid, competitors = [] } = brand
 
@@ -39,12 +39,11 @@ class Slider extends React.Component {
       brandUuid,
     }
 
-    if (activeDay) {
-      requestBody.activeDay = activeDay
-    }
-
     if (container === 'competitor') {
-      requestBody.competitors = competitors
+      requestBody.competitors =
+        !!competitors && !!competitors.length
+          ? competitors.map((c) => ({ uuid: c.uuid }))
+          : []
     }
 
     this.setState({
@@ -52,14 +51,6 @@ class Slider extends React.Component {
     })
 
     this.props.getCompetitorVideosRequest(requestBody)
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps.activeDay !== this.props.activeDay) {
-      this.getCompetitorVideos({
-        ...this.state.lastRequestBody,
-      })
-    }
   }
 
   changeSelectedVideo = (video) => {

@@ -138,19 +138,6 @@ const VideoReleasesBarChartModule = (props) => {
 
   const barChartOptions = {
     ...options,
-    tooltips: customChartToolTip(colors, {
-      callbacks: {
-        title: () => '',
-        label: function(tooltipItem) {
-          const value = Math.abs(tooltipItem.yLabel)
-          if (tooltipItem.yLabel < 0) {
-            return `${metricSuffix(~~value)} ${metric.charAt(0).toUpperCase() +
-              metric.slice(1)}`
-          }
-          return `${Math.round(value / videoNormalizer)}% Videos`
-        },
-      },
-    }),
     scales: {
       xAxes: [
         {
@@ -263,6 +250,8 @@ const VideoReleasesBarChartModule = (props) => {
                   <BarItem
                     key={`vrbcmc-${idx}`}
                     chartData={chartData}
+                    metric={metric.charAt(0).toUpperCase() + metric.slice(1)}
+                    videoNormalizer={videoNormalizer}
                     barChartOptions={barChartOptions}
                     options={options}
                     datasetKeyProvider={datasetKeyProvider}

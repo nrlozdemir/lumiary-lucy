@@ -99,6 +99,7 @@ class PanopticFilteringSection extends Component {
               dataLabelInsert="%"
               labelPositionRight
               datasetsBorderWidth={1.4}
+              tooltipType="extended"
               tooltipMode="nearest"
               datasetOptions={{
                 shadowOffsetX: 2,
@@ -146,6 +147,14 @@ class PanopticFilteringSection extends Component {
                   : null
               }
               barSpacing={4}
+              tooltipType="extended"
+              property={
+                !!doughnutData &&
+                !!doughnutData.datasets &&
+                !!doughnutData.datasets[0] &&
+                !!doughnutData.datasets[0].label &&
+                doughnutData.datasets[0].label
+              }
             />
           </div>
         </div>

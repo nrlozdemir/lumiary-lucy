@@ -26,10 +26,12 @@ import {
 import { dayOfWeek, chartColors, formatToS3Examples } from 'Utils/globals'
 import { getDataFromApi, buildApiUrl } from 'Utils/api'
 import { isNumber } from 'util'
+import { merge } from 'lodash'
 
 function* getCompetitorVideosApi({ payload }) {
-  const requestObject = {
-    ...payload,
+  let requestObject = { ...payload }
+  if (!!payload.onDay) {
+    requestObject = { ...requestObject, activeDay: payload.onDay }
   }
 
   if (payload.competitors) {
@@ -296,7 +298,7 @@ function* getPlatformTopVideosMarketview({
 function* getSimilarProperties(params = {}) {
   try {
     const {
-      data: { dateRange, container, platform },
+      data: { dateRange, container, platform, onDay },
     } = params
     const { brand } = yield select(makeSelectAuthProfile())
     const { uuid, competitors = [] } = brand
@@ -348,6 +350,7 @@ function* getSimilarProperties(params = {}) {
           daterange: dateRange,
           platforms: ['all'],
           percentile: 80,
+          activeDay: onDay || '',
         }
         break
     }
@@ -425,12 +428,14 @@ function* getBubbleChartData({
       !!response.Instagram &&
       !!response.YouTube
     ) {
+      const filteredColors = ['achromatic']
+
       // convert response into array of { name, value, color }
       const bubbleData = Object.keys(response).map((pf) =>
         Object.keys(response[pf].color).reduce(
           (val, colorKey) => {
             const colorMetric = response[pf].color[colorKey]
-            if (colorMetric > val.value) {
+            if (!filteredColors.includes(colorKey) && colorMetric > val.value) {
               val.value = colorMetric
               val.color = colorKey
             }
@@ -684,6 +689,18 @@ function* getTotalViewsData({ data }) {
   }
 }
 
+function _getNGreatest(dataSet, n) {
+  function sumData(datum) {
+    return datum.reduce((a, b) => a + b)
+  }
+
+  const sortedData = [...dataSet].sort(
+    (datumA, datumB) => sumData(datumB.data) - sumData(datumA.data)
+  )
+
+  return sortedData.slice(0, n)
+}
+
 function* getTotalCompetitorViewsData() {
   try {
     const profile = yield select(makeSelectAuthProfile())
@@ -700,16 +717,26 @@ function* getTotalCompetitorViewsData() {
     const payload = yield call(getDataFromApi, { ...options }, '/report')
 
     if (!!payload) {
-      yield put(
-        actions.getTotalCompetitorViewsSuccess(
-          percentageManipulation(
-            convertDataIntoDatasets(payload, options, {
-              useBrands: true,
-              customKeys: Object.keys(payload.data),
-            })
-          )
+      const formattedData = actions.getTotalCompetitorViewsSuccess(
+        percentageManipulation(
+          convertDataIntoDatasets(payload, options, {
+            useBrands: true,
+            customKeys: Object.keys(payload.data),
+          })
         )
       )
+
+      const sortedDataSet = _getNGreatest(formattedData.payload.datasets, 5)
+
+      const newFormattedData = {
+        type: formattedData.type,
+        payload: {
+          datasets: [...sortedDataSet],
+          labels: [...formattedData.payload.labels],
+        },
+      }
+
+      yield put(newFormattedData)
     }
   } catch (error) {
     console.log(error)
@@ -831,8 +858,9 @@ function* getTopPerformingPropertiesByCompetitorsData({
 }
 
 function* getTopPerformingPropertiesByTimeData({
-  payload: { property, dateRange },
+  payload: { property, dateRange = 'week', onDay },
 }) {
+  const activeDay = onDay || ''
   try {
     const { brand } = yield select(makeSelectAuthProfile())
 
@@ -841,6 +869,7 @@ function* getTopPerformingPropertiesByTimeData({
     const options = {
       dateRange,
       dateBucket,
+      activeDay,
       metric: 'views',
       property: [property],
       display: 'percentage',
@@ -857,6 +886,7 @@ function* getTopPerformingPropertiesByTimeData({
       buildApiUrl(`/brand/${brand.uuid}/propertyperformance`, {
         daterange: dateRange,
         property: property,
+        activeDay,
       }),
       'GET'
     )

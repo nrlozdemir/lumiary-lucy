@@ -3,12 +3,38 @@ import { Radar } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
 import { metricSuffix, customChartToolTip, ucfirst } from 'Utils'
 import { percentageBeautifier } from 'Utils/datasets'
+import { modifyTooltip } from 'Utils/tooltip'
 
 const RadarChart = (props) => {
   const plugins = [
     {
       beforeDraw: function(chart, easing) {
         let ctx = chart.chart.ctx
+        if (props.data) {
+          const numberOfSides = props.data.labels.length
+          const size = 202
+          const Xcenter = chart.width / 2
+          const Ycenter = chart.height / 2
+
+          ctx.beginPath()
+          ctx.moveTo(Xcenter + size * Math.cos(0), Ycenter + size * Math.sin(0))
+
+          for (let i = 1; i <= numberOfSides; i += 1) {
+            ctx.lineTo(
+              Xcenter + size * Math.cos((i * 2 * Math.PI) / numberOfSides),
+              Ycenter + size * Math.sin((i * 2 * Math.PI) / numberOfSides)
+            )
+          }
+
+          ctx.strokeStyle = props.themeContext.colors.bodyBackground
+          ctx.lineWidth = 1
+          ctx.shadowBlur = 7
+          ctx.shadowOffsetY = 5
+          ctx.shadowColor = '#000'
+          ctx.stroke()
+          ctx.shadowBlur = 0
+          ctx.shadowOffsetY = 0
+        }
         chart.config.data.datasets.forEach(function(dataset, i) {
           const meta = chart.controller.getDatasetMeta(i)
           meta.data.forEach(function(bar, index) {
@@ -35,12 +61,11 @@ const RadarChart = (props) => {
                 2 * Math.PI,
                 false
               )
-
               if (selected) {
                 ctx.lineWidth = 1
-                ctx.shadowBlur = 4
-                ctx.shadowOffsetY = 2
-                ctx.shadowColor = 'rgba(0, 0, 0, 0.5)'
+                ctx.shadowBlur = 5
+                ctx.shadowOffsetY = 3
+                ctx.shadowColor = 'rgba(0, 0, 0, 1)'
                 ctx.strokeStyle = chart.options.scale.pointLabels
                 ctx.stroke()
                 ctx.shadowBlur = 0
@@ -51,6 +76,11 @@ const RadarChart = (props) => {
               ctx.fill()
               ctx.closePath()
             }
+
+            // const asd = chart.scales.scale.ctx
+            // asd.shadowBlur = 4
+            // asd.shadowOffsetY = 2
+            // asd.shadowColor = 'rgba(0, 0, 0, 0.5)'
           })
         })
       },
@@ -134,7 +164,14 @@ const RadarChart = (props) => {
       },
     },
   ]
-  const { data, key, width, height } = props
+  const {
+    data,
+    key,
+    width,
+    height,
+    tooltipType = false,
+    platform = false,
+  } = props
   const themes = props.themeContext.colors
   let parsedData = data || {}
   let maxTicksStepLimit = 100000
@@ -225,32 +262,57 @@ const RadarChart = (props) => {
         layout: {
           padding: 35,
         },
-        tooltips: customChartToolTip(themes, {
-          callbacks: {
-            title: () => '',
-            label: function(tooltipItem, data) {
-              const count =
-                (data &&
-                  data.labels &&
-                  data.labels[tooltipItem['index']] &&
-                  data.labels[tooltipItem['index']].count) ||
-                0
-              const metric =
-                (data &&
-                  data.datasets &&
-                  data.datasets[0] &&
-                  data.datasets[0].metric) ||
-                ''
-              const name =
-                data &&
-                data.labels &&
-                data.labels[tooltipItem['index']] &&
-                data.labels[tooltipItem['index']].name
-              return `${metricSuffix(count) || 0}% ${ucfirst(metric) ||
-                ''} ${!!name && `| ${name}`}`
-            },
-          },
-        }),
+        tooltips:
+          (!!tooltipType &&
+            (tooltipType === 'basic' &&
+              customChartToolTip(themes, {
+                callbacks: {
+                  title: () => '',
+                  label: function(tooltipItem, data) {
+                    const count =
+                      (data &&
+                        data.labels &&
+                        data.labels[tooltipItem['index']] &&
+                        data.labels[tooltipItem['index']].count) ||
+                      0
+                    const metric =
+                      (data &&
+                        data.datasets &&
+                        data.datasets[0] &&
+                        data.datasets[0].metric) ||
+                      ''
+                    const name =
+                      data &&
+                      data.labels &&
+                      data.labels[tooltipItem['index']] &&
+                      data.labels[tooltipItem['index']].name
+                    return `${metricSuffix(count) || 0}% ${ucfirst(metric) ||
+                      ''} ${!!name && `| ${name}`}`
+                  },
+                },
+              }))) ||
+          (tooltipType === 'extended' &&
+            modifyTooltip(
+              {
+                template: 'RadarChartTemplate',
+                data: theData,
+                metric:
+                  (data &&
+                    data.datasets &&
+                    data.datasets[0] &&
+                    ucfirst(data.datasets[0].metric)) ||
+                  '',
+                platform: !!platform && platform,
+                options: {
+                  background: themes.tooltipBackground,
+                  textColor: themes.tooltipTextColor,
+                  caretColor: themes.tooltipBackground,
+                },
+              },
+              {
+                mode: 'single',
+              }
+            )),
         plugins: {
           datalabels: false,
         },
@@ -273,7 +335,7 @@ const RadarChart = (props) => {
             callback: function(value) {
               return percentageBeautifier(value) + '%'
             },
-            backdropColor: 'transparent',
+            backdropColor: '#000',
             fontSize: 10,
             fontFamily: 'ClanOTNews',
             fontColor: themes.chartTickColor,

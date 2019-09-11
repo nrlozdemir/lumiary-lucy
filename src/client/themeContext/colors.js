@@ -37,6 +37,7 @@ const dark = {
   progressLibraryDetailTickColor: '#ffffff',
   progressQuickviewBg: '#21243b',
   progressQuickviewColor: '#2fd7c4',
+  progressQuickviewRightTitle: '#fff',
   // progressbar values
 
   // labels
@@ -127,7 +128,7 @@ const dark = {
   // table values
 
   // tooltip values
-  tooltipTextColor: '#373f5b',
+  tooltipTextColor: '#21243b',
   tooltipBackground: '#ffffff',
   tooltipRadarChartTextColor: '#23294b',
   chartTooltipColor: '#21243b',
@@ -262,7 +263,7 @@ const dark = {
   lineChartPointHoverBorderColor: '#fff',
   lineChartShadowColor: '#333',
   lineChartShadowColorDark: '#000',
-	lineChartXAxisColor: '#fff',
+  lineChartXAxisColor: '#fff',
 
   //glossary
   glossaryLinkColor: '#fff',
@@ -328,6 +329,7 @@ const light = {
   progressLibraryDetailTickColor: '#505050',
   progressQuickviewBg: '#ffffff',
   progressQuickviewColor: '#2fd7c4',
+  progressQuickviewRightTitle: '#505050',
   // progressbar values
 
   // labels
@@ -390,7 +392,7 @@ const light = {
   inputControlBackground: '#f3f6f9',
   inputControlBorder: '#acb0be',
   inputControlSelectedBorder: '#c6c9d7',
-  inputColor: '#000',
+  inputColor: '#505050',
   inputDropdownColor: '#ffffff',
   inputActiveColor: '#505050',
   inputActiveSelectedColor: '#505050',
@@ -402,7 +404,7 @@ const light = {
   // input values
 
   // search input colors
-  searchInputColor: '#000',
+  searchInputColor: '#505050',
   searchInputActiveColor: '#505050',
   searchInputPlaceholderColor: '#c6c9d7',
 
@@ -419,7 +421,7 @@ const light = {
   // table values
 
   // tooltip values
-  tooltipTextColor: '#f3f6f9',
+  tooltipTextColor: '#ffffff',
   tooltipBackground: '#505050',
   tooltipRadarChartTextColor: '#fff',
   chartTooltipColor: '#fff',
@@ -552,8 +554,8 @@ const light = {
   lineChartPointBorderColor: '#505050',
   lineChartPointHoverBorderColor: '#505050',
   lineChartShadowColor: '#ddd',
-	lineChartShadowColorDark: '#a3a3a3',
-	lineChartXAxisColor: 'rgb(80, 80, 80, 0.5)',
+  lineChartShadowColorDark: '#a3a3a3',
+  lineChartXAxisColor: 'rgb(80, 80, 80, 0.5)',
 
   //glossary
   glossaryLinkColor: '#505050',

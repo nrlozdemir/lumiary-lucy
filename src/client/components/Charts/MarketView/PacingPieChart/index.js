@@ -23,8 +23,8 @@ const PacingPieChart = ({ data = {}, metric }) => {
       {({ themeContext: { colors } }) => (
         <div className={style.pieChartContainer}>
           <Pie
-            height={220}
-            width={220}
+            height={216}
+            width={216}
             options={{
               tooltips: customChartToolTip(colors, {
                 callbacks: {
@@ -42,7 +42,9 @@ const PacingPieChart = ({ data = {}, metric }) => {
                         data.datasets[0] &&
                         data.datasets[0].data[tooltipItem['index']]) ||
                       ''
-                    return `${metricSuffix(parseInt(count) || 0)} ${ucfirst(metric)}`
+                    return `${metricSuffix(parseInt(count) || 0)} ${ucfirst(
+                      metric
+                    )}`
                   },
                 },
                 xPadding: 12,
@@ -51,8 +53,8 @@ const PacingPieChart = ({ data = {}, metric }) => {
                 //titleAlign: 'center',
                 //footerAlign: 'center',
                 //bodyAlign: 'center',
-                yAlign: 'top',
-                xAlign: 'center',
+                //yAlign: 'top',
+                //xAlign: 'center',
               }),
               responsive: false,
               legend: {
@@ -66,7 +68,7 @@ const PacingPieChart = ({ data = {}, metric }) => {
               },
               elements: {
                 arc: {
-                  borderWidth: 0.8,
+                  borderWidth: 2,
                 },
               },
             }}

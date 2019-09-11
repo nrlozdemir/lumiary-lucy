@@ -2,8 +2,39 @@ import React from 'react'
 import style from './style.scss'
 import classnames from 'classnames'
 import StackedPercentageChart from 'Components/Charts/StackedPercentageChart'
-import { createDataset } from './dummyData'
 const { fromJS } = require('immutable')
+
+const createDataset = (percentage) => {
+  const makeLength = 41
+  const maxCurrentIndex = Math.round((makeLength / 100) * percentage)
+  const range = {
+    start: 16,
+    end: 100,
+  }
+
+  const currentIndexBeforeArray = [...Array(maxCurrentIndex)].map(
+    (v, i, arr) => {
+      const stepSize =
+        ((range.end - range.start) / arr.length) * ((1 / arr.length) * i)
+
+      return range.start + i * stepSize
+    }
+  )
+
+  const currentIndexAfterArray = [
+    ...Array(
+      makeLength - maxCurrentIndex - 1 >= 0
+        ? makeLength - maxCurrentIndex - 1
+        : 0
+    ),
+  ].map((v, i, arr) => {
+    const stepSize = (range.end - range.start) / arr.length
+
+    return (range.end - i * stepSize) * ((1 / arr.length) * (arr.length - i))
+  })
+
+  return [...currentIndexBeforeArray, ...currentIndexAfterArray, range.start]
+}
 
 const PercentageBarGraph = ({
   percentage,
@@ -14,20 +45,15 @@ const PercentageBarGraph = ({
   height = 44,
   barWidth = 3,
   barSpaceWidth = 2,
-  percentageDataSet,
   options = {},
 }) => {
   if (!percentage || percentage === 'NaN') return null
 
-  const percentageData = !percentageDataSet
-    ? {
-        datasets: [
-          {
-            data: createDataset(percentage),
-          },
-        ],
-      }
-    : percentageDataSet
+  const percentageData = [
+    {
+      data: createDataset(percentage),
+    },
+  ]
 
   return (
     <div className={style.percentageContainer}>
@@ -45,8 +71,8 @@ const PercentageBarGraph = ({
           barWidth={barWidth}
           barSpaceWidth={barSpaceWidth}
           dataSet={{
-            labels: percentageData.datasets[0].data,
-            datasets: percentageData.datasets,
+            labels: percentageData[0].data,
+            datasets: percentageData,
           }}
           removeTooltip={true}
           removePointRadius={true}

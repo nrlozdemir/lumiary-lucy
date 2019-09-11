@@ -11,6 +11,7 @@ import {
   percentageManipulation,
   getCVScoreChartAttributes,
 } from 'Utils/datasets'
+import { modifyTooltip } from 'Utils/tooltip'
 
 const sortCircles = (index) => {
   const text = {
@@ -115,12 +116,12 @@ const LineAndDoughnutChartModule = ({
             borderWidth: 4,
             pointBackgroundColor:
               colors.themeType === 'dark' &&
-                d.backgroundColor.substr(0, 4) === '#fff'
+              d.backgroundColor.substr(0, 4) === '#fff'
                 ? '#acb0be'
                 : d.backgroundColor,
             pointHoverBackgroundColor:
               colors.themeType === 'dark' &&
-                d.backgroundColor.substr(0, 4) === '#fff'
+              d.backgroundColor.substr(0, 4) === '#fff'
                 ? '#acb0be'
                 : d.backgroundColor,
             pointBorderColor: colors.lineChartPointBorderColor,
@@ -134,21 +135,6 @@ const LineAndDoughnutChartModule = ({
         })
       }
     })
-
-  // console.log(lineChartOptions)
-
-  //  console.log(
-  //    moduleKey,
-  //    title,
-  //    action,
-  //    lineChartData,
-  //    lineChartOptions,
-  //    filters,
-  //    isEmpty,
-  //    platform,
-  //    properties,
-  //    average
-  //  )
 
   return (
     <Module
@@ -184,27 +170,17 @@ const LineAndDoughnutChartModule = ({
                         bottom: 0,
                       },
                     },
-                    tooltips: customChartToolTip(colors, {
-                      callbacks: {
-                        title: () => '',
-                        label: function(tooltipItem, data) {
-                          const { datasetIndex } = tooltipItem
-                          const count =
-                            (data &&
-                              data.datasets &&
-                              data.datasets[datasetIndex] &&
-                              data.datasets[datasetIndex].data[
-                              tooltipItem['index']
-                              ]) ||
-                            ''
-                          const name =
-                            (data &&
-                              lineChartData &&
-                              lineChartData.datasets[datasetIndex].label) ||
-                            ''
-                          return `${percentageManipulation(count) ||
-                            0} Score ${!!name && `| ${name}`}`
-                        },
+                    tooltips: modifyTooltip({
+                      template: 'LineChartTemplate',
+                      data: manipulateData,
+                      platform: platform,
+                      properties: properties,
+                      average: average,
+                      options: {
+                        background: colors.tooltipBackground,
+                        textColor: colors.tooltipTextColor,
+                        caretColor: colors.tooltipBackground,
+                        position: 'auto',
                       },
                     }),
                     chartArea: {
@@ -266,15 +242,23 @@ const LineAndDoughnutChartModule = ({
                   }}
                 />
                 <div className={style.customXTicks}>
-                  {manipulateData && !!manipulateData.labels && manipulateData.labels.map((label, i) => {
-                    return (
-                      <div className={cx({ [style.tickItem]: i < manipulateData.labels.length - 1 })} key={i}>
-                        <div className={style.textContainer}>
-                          <span>{label}</span>
+                  {manipulateData &&
+                    !!manipulateData.labels &&
+                    manipulateData.labels.map((label, i) => {
+                      return (
+                        <div
+                          className={cx({
+                            [style.tickItem]:
+                              i < manipulateData.labels.length - 1,
+                          })}
+                          key={i}
+                        >
+                          <div className={style.textContainer}>
+                            <span>{label}</span>
+                          </div>
                         </div>
-                      </div>
-                    )
-                  })}
+                      )
+                    })}
                 </div>
               </div>
             </div>
@@ -293,11 +277,6 @@ const LineAndDoughnutChartModule = ({
                       [style.dark]: colors.themeType === 'dark',
                       [style.light]: colors.themeType === 'light',
                     })}
-                    style={{
-                      background: colors.labelBackground,
-                      color: colors.labelColor,
-                      boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
-                    }}
                   >
                     <div
                       className={style.colorBubble}
@@ -345,9 +324,9 @@ const LineAndDoughnutChartModule = ({
                               ? 0
                               : Math.floor(property[0].score.value),
                             100 -
-                            (property[0].score.value === 'N/A'
-                              ? 0
-                              : Math.floor(property[0].score.value)),
+                              (property[0].score.value === 'N/A'
+                                ? 0
+                                : Math.floor(property[0].score.value)),
                           ],
                           backgroundColor: [
                             datasetMap[property[0].name].backgroundColor,
@@ -361,6 +340,18 @@ const LineAndDoughnutChartModule = ({
                       ],
                       labels: ['a', 'b'],
                     }}
+                    tooltipCaretPosition={idx <= 2 ? 'left' : 'right'}
+                    tooltipTemplate="CircleChart"
+                    currentDayIndex={
+                      !!manipulateData &&
+                      !!manipulateData.currentDayIndex &&
+                      manipulateData.currentDayIndex
+                    }
+                    weekdayOrder={
+                      !!manipulateData &&
+                      !!manipulateData.weekdayOrder &&
+                      manipulateData.weekdayOrder
+                    }
                   />
                   <div
                     className={style.centerText}

@@ -11,6 +11,7 @@ import { customChartToolTip } from 'Utils'
 import 'Utils/chart-shadow'
 import { isNumber, isFinite } from 'lodash'
 import Labels from 'Components/Charts/Labels'
+import { modifyTooltip } from 'Utils/tooltip'
 
 const propTypes = {}
 const defaultProps = {
@@ -25,7 +26,7 @@ const defaultProps = {
   defaultFontSize: '14',
   defaultFontWeight: '700',
 
-  fillTextFontFamily: 'ClanOTBold',
+  fillTextFontFamily: 'ClanOT',
   fillTextFontSize: '12px',
 
   displayDataLabels: true,
@@ -74,9 +75,11 @@ class DoughnutChart extends React.Component {
       legendLabelsFontSize,
       legendLabelsFontFamily,
       labelsData,
+      labelContainerClassname = false,
       labelPositionBottom,
       labelPositionRight,
       labelPositionLeft,
+      removeLabelMargin = false,
       cutoutPercentage,
       customStyle,
       customDoughnutContainer,
@@ -86,7 +89,12 @@ class DoughnutChart extends React.Component {
       slicePiecesWidth = false,
       datasetOptions = {},
       removeTooltip = false,
-      showAllData = false
+      showAllData = false,
+      tooltipType = 'basic',
+      tooltipCaretPosition = false,
+      tooltipTemplate = false,
+      currentDayIndex = false,
+      weekdayOrder = false,
     } = this.props
 
     const themes = this.props.themeContext.colors
@@ -104,7 +112,7 @@ class DoughnutChart extends React.Component {
             ctx.textAlign = 'center'
             ctx.textBaseline = 'middle'
             ctx.fillStyle = fillTextColor || themes.textColor
-            ctx.font = fillTextFontSize + ' ' + fillTextFontFamily
+            ctx.font = 'bold ' + fillTextFontSize + ' ' + fillTextFontFamily
             ctx.fillText(customFillText, width / 2, height / 2)
             ctx.save()
           },
@@ -152,7 +160,7 @@ class DoughnutChart extends React.Component {
         ],
       }
     }
-    
+
     // for opacity backgrounds
     let chartValues =
       !!newData && !!newData.datasets && !!newData.datasets[0]
@@ -272,8 +280,15 @@ class DoughnutChart extends React.Component {
           style={customStyle}
         >
           {labelPositionLeft && labelsData && (
-            <div className={style.labelContainer}>
-              <Labels data={labelsData} />
+            <div
+              className={classnames(style.labelContainer, {
+                [`${labelContainerClassname}`]: !!labelContainerClassname,
+              })}
+            >
+              <Labels
+                data={labelsData}
+                removeMargin={!!removeLabelMargin ? true : false}
+              />
             </div>
           )}
           <div
@@ -310,36 +325,48 @@ class DoughnutChart extends React.Component {
                     tooltips:
                       !average &&
                       !removeTooltip &&
-                      customChartToolTip(
-                        themes,
-                        {
-                          mode: tooltipMode,
-                          filter: (tooltipItem) => {
-                            if (slicePiecesWidth !== false) {
-                              if (
-                                tooltipData['labels'][tooltipItem.index] !==
-                                  false &&
-                                tooltipMode === 'dataset'
-                              ) {
-                                return chartValues
-                              } else if (
-                                tooltipData['labels'][tooltipItem.index] !==
-                                  false &&
-                                tooltipMode === 'nearest'
-                              ) {
-                                return chartValues[tooltipItem.index]
-                              }
-                            } else {
-                              if (tooltipMode === 'dataset') {
-                                return chartValues
-                              } else if (tooltipMode === 'nearest') {
-                                return chartValues[tooltipItem.index]
-                              }
-                            }
-                          },
-                        },
-                        tooltipData
-                      ),
+                      ((!!tooltipType &&
+                        (tooltipType === 'basic' &&
+                          customChartToolTip(
+                            themes,
+                            {
+                              mode: tooltipMode,
+                              filter: (tooltipItem) => {
+                                if (slicePiecesWidth !== false) {
+                                  if (
+                                    tooltipData['labels'][tooltipItem.index] !==
+                                      false &&
+                                    tooltipMode === 'dataset'
+                                  ) {
+                                    return chartValues
+                                  } else if (
+                                    tooltipData['labels'][tooltipItem.index] !==
+                                      false &&
+                                    tooltipMode === 'nearest'
+                                  ) {
+                                    return chartValues[tooltipItem.index]
+                                  }
+                                } else {
+                                  if (tooltipMode === 'dataset') {
+                                    return chartValues
+                                  } else if (tooltipMode === 'nearest') {
+                                    return chartValues[tooltipItem.index]
+                                  }
+                                }
+                              },
+                            },
+                            tooltipData
+                          ))) ||
+                        (tooltipType === 'extended' &&
+                          modifyTooltip({
+                            template: 'DoughnutChartTemplate',
+                            data: newData,
+                            options: {
+                              background: themes.tooltipBackground,
+                              textColor: themes.tooltipTextColor,
+                              caretColor: themes.tooltipBackground,
+                            },
+                          }))),
                     legend: {
                       display: legend,
                       labels: {
@@ -414,9 +441,30 @@ class DoughnutChart extends React.Component {
                     </div>
                     <ToolTip
                       effect="solid"
-                      place="right"
+                      place={
+                        (!!tooltipCaretPosition &&
+                          ((tooltipCaretPosition == 'left'
+                            ? 'right'
+                            : 'left') ||
+                            (tooltipCaretPosition == 'right'
+                              ? 'left'
+                              : 'left'))) ||
+                        'left'
+                      }
                       smallTooltip
                       id={`panoptic-cvScore-${tooltipKey}`}
+                      template={(!!tooltipTemplate && tooltipTemplate) || false}
+                      tooltipProps={{
+                        value: average,
+                        labelLong:
+                          !!weekdayOrder &&
+                          !!currentDayIndex &&
+                          !!weekdayOrder[currentDayIndex] &&
+                          !!weekdayOrder[currentDayIndex].weekday &&
+                          weekdayOrder[currentDayIndex].weekday,
+                        average: average,
+                        platform: ucfirst(cvScoreData.platform),
+                      }}
                     />
                   </React.Fragment>
                 )}
@@ -424,14 +472,28 @@ class DoughnutChart extends React.Component {
             )}
           </div>
           {labelPositionRight && labelsData && (
-            <div className={style.labelContainer}>
-              <Labels data={labelsData} />
+            <div
+              className={classnames(style.labelContainer, {
+                [`${labelContainerClassname}`]: !!labelContainerClassname,
+              })}
+            >
+              <Labels
+                data={labelsData}
+                removeMargin={!!removeLabelMargin ? true : false}
+              />
             </div>
           )}
         </div>
         {labelPositionBottom && labelsData && (
-          <div className={style.labelContainer}>
-            <Labels data={labelsData} />
+          <div
+            className={classnames(style.labelContainer, {
+              [`${labelContainerClassname}`]: !!labelContainerClassname,
+            })}
+          >
+            <Labels
+              data={labelsData}
+              removeMargin={!!removeLabelMargin ? true : false}
+            />
           </div>
         )}
       </React.Fragment>

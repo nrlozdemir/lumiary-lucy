@@ -3,6 +3,7 @@ import classnames from 'classnames'
 import { Bar } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
 import style from './style.scss'
+import { modifyTooltip } from 'Utils/tooltip'
 
 class BarItem extends Component {
   render() {
@@ -12,9 +13,11 @@ class BarItem extends Component {
       datasetKeyProvider,
       maxSteps,
       barChartOptions,
+      videoNormalizer,
+      metric,
       themeContext: { colors },
     } = this.props
-
+    
     return (
       <div className="col-3">
         <div
@@ -28,6 +31,19 @@ class BarItem extends Component {
             key={Math.random()}
             options={{
               ...barChartOptions,
+
+              tooltips: modifyTooltip({
+                template: 'VideoReleasesBarChartTemplate',
+                data: chartData,
+                options: {
+                  background: colors.tooltipBackground,
+                  textColor: colors.tooltipTextColor,
+                  caretColor: colors.tooltipBackground,
+                },
+                videoNormalizer,
+                metric,
+              }),
+
               scales: {
                 ...barChartOptions.scales,
                 yAxes: [
@@ -77,6 +93,7 @@ class BarItem extends Component {
                 color: colors.labelColor,
                 boxShadow: `0 1px 2px 0 ${colors.labelShadow}`,
               }}
+              className={style.label}
             >
               {chartData.label}
             </span>

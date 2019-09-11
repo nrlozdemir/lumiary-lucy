@@ -28,12 +28,15 @@ const defaultAgeRanges = [
 
 const getAgesToFetch = (age) => {
   const idx = defaultAgeRanges.findIndex((r) => r.age === age)
+
   return idx >= 1
     ? [
         defaultAgeRanges[idx - 1].age,
         age,
         ...(defaultAgeRanges[idx + 1] ? [defaultAgeRanges[idx + 1].age] : []),
       ]
+    : idx === -1
+    ? []
     : [
         age,
         ...(defaultAgeRanges[idx + 1] ? [defaultAgeRanges[idx + 1].age] : []),
@@ -91,12 +94,14 @@ class AgeSlider extends React.PureComponent {
 
       const agesToFetch = getAgesToFetch(currentAge)
 
-      getAudienceAgeSliderData({
-        ...data,
-        type,
-        loading: true,
-        ages: agesToFetch,
-      })
+      if (!!agesToFetch.length) {
+        getAudienceAgeSliderData({
+          ...data,
+          type,
+          loading: true,
+          ages: agesToFetch,
+        })
+      }
     })
   }
 

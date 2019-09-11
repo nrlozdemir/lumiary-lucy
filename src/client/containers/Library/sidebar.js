@@ -267,6 +267,10 @@ class Sidebar extends React.Component {
                   customClass={classnames('mt-48', style.sidebarApplyButton, {
                     [style.formChange]: formChange === true,
                   })}
+                  onClick={() =>
+                    formChange === true && setSidebarVisible(false)
+                  }
+                  textColor={!formChange ? colors.customSelectActiveBorder : colors.searchInputActiveColor}
                   buttonText="Apply Filters"
                 />
               </div>
