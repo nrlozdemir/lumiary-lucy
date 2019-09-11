@@ -6,15 +6,20 @@ import { isEmpty, isEqual } from 'lodash'
 class Slider extends React.Component {
   shouldComponentUpdate(nextProps) {
     const {
-      data: { data, loading },
+      data: { data, loading, selectedVideo },
     } = this.props
     const {
-      data: { data: nextData, loading: nextLoading },
+      data: {
+        data: nextData,
+        loading: nextLoading,
+        selectedVideo: nextSelectedVideo,
+      },
     } = nextProps
 
     return (
       (data && !isEqual(JSON.stringify(data), JSON.stringify(nextData))) ||
-      loading !== nextLoading
+      loading !== nextLoading ||
+      !isEqual(JSON.stringify(selectedVideo), JSON.stringify(nextSelectedVideo))
     )
   }
 

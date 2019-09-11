@@ -96,6 +96,7 @@ class ReportGenerated extends React.Component {
       topPerformingVideos,
       pacingChartData,
       colorTempData,
+      selectedVideo,
       filteringSectionData,
     } = this.props
 
