@@ -9,8 +9,8 @@ checks:
       threshold: 500
 plugins:
   eslint:
-		enabled: true
-		config: ./.eslintrc
+    enabled: true
+    config: ./.eslintrc
   csslint:
     enabled: true
   duplication:
