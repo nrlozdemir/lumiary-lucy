@@ -17,7 +17,7 @@ class BarItem extends Component {
       metric,
       themeContext: { colors },
     } = this.props
-
+    
     return (
       <div className="col-3">
         <div

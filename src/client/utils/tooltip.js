@@ -586,7 +586,6 @@ const modifyTooltip = function(props, conf = {}) {
             defaults.caretPadding
         }
       }
-
       if (
         !!props.template &&
         props.template === 'VerticalStackedBarChartTemplate'
@@ -628,6 +627,48 @@ const modifyTooltip = function(props, conf = {}) {
             barDataModel.width / 2 -
             tooltipEl.clientWidth -
             defaults.caretPadding
+        }
+      }
+
+      if (
+        !!props.template &&
+        props.template === 'HorizontalStackedBarChartTemplate'
+      ) {
+        let barDataModel
+        if (tooltipModel.dataPoints) {
+          const { index, datasetIndex } = tooltipModel.dataPoints[0]
+          const meta = this._chartInstance.getDatasetMeta(datasetIndex)
+          barDataModel = meta.data[index]._model
+          barDataModel.barHeight = meta.data[index]._view.height
+          barDataModel.centerPoint = meta.data[index].getCenterPoint()
+        }
+        if (barDataModel) {
+          caretLeft =
+            position.left +
+            window.pageXOffset +
+            barDataModel.centerPoint.x -
+            defaults.caretWidth
+
+          caretTop =
+            position.top +
+            window.pageYOffset +
+            barDataModel.centerPoint.y -
+            barDataModel.barHeight / 2 -
+            defaults.caretPadding
+
+          tooltipTop =
+            position.top +
+            window.pageYOffset +
+            barDataModel.centerPoint.y -
+            barDataModel.barHeight / 2 -
+            defaults.caretPadding -
+            tooltipEl.clientHeight
+
+          tooptipLeft =
+            position.left +
+            window.pageXOffset +
+            barDataModel.centerPoint.x -
+            tooltipEl.clientWidth / 2
         }
       }
 

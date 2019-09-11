@@ -296,3 +296,20 @@
     color: $color-white;
   }
 }
+
+.fullVideo {
+  width: 100%;
+  height: 100%;
+  background: #000000;
+}
+
+.videoEmpty {
+  display: flex;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  height: 100%;
+  width: 100%;
+}
+
