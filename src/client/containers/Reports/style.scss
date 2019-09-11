@@ -4,6 +4,9 @@
   .deleteWrapper {
     position: relative;
     outline: 0;
+    font-family: $font-family-ClanOTBold;
+    font-weight: bold;
+
     div {
       background-color: #fff;
       color: #000;
@@ -61,6 +64,11 @@
       // color: $color-white;
       cursor: pointer;
       font-size: 16px;
+    }
+
+    a {
+      font-family: $font-family-ClanOT !important;
+      font-weight: normal !important;
     }
   }
 
