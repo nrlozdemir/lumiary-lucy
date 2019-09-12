@@ -146,7 +146,6 @@ class DoughnutChart extends React.Component {
       !!newData.datasets &&
       !!newData.datasets[0] &&
       !!newData.labels &&
-      !!newData.labels.length &&
       newData.labels.length > dataLimit
     ) {
       newData = {
