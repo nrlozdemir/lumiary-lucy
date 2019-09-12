@@ -40,13 +40,12 @@ const defaultProps = {
   legendLabelsFontSize: 12,
 }
 
-const dataLabelPlugins = (value, func, item) => {
+const dataLabelPlugins = (value, func = 'insertBefore', item) => {
+  let term = value > 0 ? item + '' + value : ''
   if (func == 'insertAfter') {
-    return value > 0 ? value + '' + item : ''
-  } else if (func == 'insertBefore') {
-    return value > 0 ? item + '' + value : ''
+    term = value > 0 ? value + '' + item : ''
   }
-  return value
+  return term
 }
 
 class DoughnutChart extends React.Component {
