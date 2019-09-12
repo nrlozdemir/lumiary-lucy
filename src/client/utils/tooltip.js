@@ -554,6 +554,7 @@ const modifyTooltip = function(props, conf = {}) {
         !!props.template &&
         props.template === 'VerticalStackedBarChartTemplate'
       ) {
+        caretEl.style = {}
         let barDataModel
         if (tooltipModel.dataPoints) {
           const { index, datasetIndex } = tooltipModel.dataPoints[0]
@@ -598,6 +599,7 @@ const modifyTooltip = function(props, conf = {}) {
         !!props.template &&
         props.template === 'HorizontalStackedBarChartTemplate'
       ) {
+        caretEl.style = {}
         let barDataModel
         if (tooltipModel.dataPoints) {
           const { index, datasetIndex } = tooltipModel.dataPoints[0]
