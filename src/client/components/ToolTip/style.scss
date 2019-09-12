@@ -71,7 +71,7 @@
     pointer-events: none;
     top: -999em;
     visibility: hidden;
-    z-index: 9999;
+    z-index: 9999 !important;
     width: 300px;
     font-family: $font-family-ClanOT;
     font-size: 12px;

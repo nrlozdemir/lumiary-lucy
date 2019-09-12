@@ -13,8 +13,6 @@ export default (props) => {
 
   const TooltipTemplate = tooltipComponents[props.template]
 
-  console.log('tooltip component props', props)
-
   return (
     <ThemeContext.Consumer>
       {({ themeContext: { colors } }) => {

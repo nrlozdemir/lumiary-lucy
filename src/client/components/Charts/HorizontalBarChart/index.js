@@ -25,7 +25,6 @@ class HorizontalBarChart extends React.Component {
 
   renderBar = (bar, label = false, gender = false, idx = false) => {
     const tooltipKey = Math.random()
-    console.log('render bar : ', bar, label, gender)
     return (
       <React.Fragment>
         <div
@@ -78,8 +77,6 @@ class HorizontalBarChart extends React.Component {
       reverse,
       gender = false,
     } = this.props
-
-    console.log('Horizontal Bar Chart component props', this.props.data)
 
     return (
       <div
