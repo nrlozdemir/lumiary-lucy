@@ -64,6 +64,53 @@ class DoughnutChart extends React.Component {
       </div>
     )
   }
+  generateTooltip = (newData) => {
+    const { tooltipType = 'basic', themeContext = {} } = this.props
+    const { colors : themes = {} } = themeContext
+    
+    return ((!!tooltipType &&
+      (tooltipType === 'basic' &&
+        customChartToolTip(
+          themes,
+          {
+            mode: tooltipMode,
+            filter: (tooltipItem) => {
+              if (slicePiecesWidth !== false) {
+                if (
+                  tooltipData['labels'][tooltipItem.index] !==
+                    false &&
+                  tooltipMode === 'dataset'
+                ) {
+                  return chartValues
+                } else if (
+                  tooltipData['labels'][tooltipItem.index] !==
+                    false &&
+                  tooltipMode === 'nearest'
+                ) {
+                  return chartValues[tooltipItem.index]
+                }
+              } else {
+                if (tooltipMode === 'dataset') {
+                  return chartValues
+                } else if (tooltipMode === 'nearest') {
+                  return chartValues[tooltipItem.index]
+                }
+              }
+            },
+          },
+          tooltipData
+        ))) ||
+      (tooltipType === 'extended' &&
+        modifyTooltip({
+          template: 'DoughnutChartTemplate',
+          data: newData,
+          options: {
+            background: themes.tooltipBackground,
+            textColor: themes.tooltipTextColor,
+            caretColor: themes.tooltipBackground,
+          },
+        })))
+  }
   render() {
     const {
       width,
@@ -102,7 +149,6 @@ class DoughnutChart extends React.Component {
       datasetOptions = {},
       removeTooltip = false,
       showAllData = false,
-      tooltipType = 'basic',
       tooltipCaretPosition = false,
       tooltipTemplate = false,
       currentDayIndex = false,
@@ -322,48 +368,7 @@ class DoughnutChart extends React.Component {
                     tooltips:
                       !average &&
                       !removeTooltip &&
-                      ((!!tooltipType &&
-                        (tooltipType === 'basic' &&
-                          customChartToolTip(
-                            themes,
-                            {
-                              mode: tooltipMode,
-                              filter: (tooltipItem) => {
-                                if (slicePiecesWidth !== false) {
-                                  if (
-                                    tooltipData['labels'][tooltipItem.index] !==
-                                      false &&
-                                    tooltipMode === 'dataset'
-                                  ) {
-                                    return chartValues
-                                  } else if (
-                                    tooltipData['labels'][tooltipItem.index] !==
-                                      false &&
-                                    tooltipMode === 'nearest'
-                                  ) {
-                                    return chartValues[tooltipItem.index]
-                                  }
-                                } else {
-                                  if (tooltipMode === 'dataset') {
-                                    return chartValues
-                                  } else if (tooltipMode === 'nearest') {
-                                    return chartValues[tooltipItem.index]
-                                  }
-                                }
-                              },
-                            },
-                            tooltipData
-                          ))) ||
-                        (tooltipType === 'extended' &&
-                          modifyTooltip({
-                            template: 'DoughnutChartTemplate',
-                            data: newData,
-                            options: {
-                              background: themes.tooltipBackground,
-                              textColor: themes.tooltipTextColor,
-                              caretColor: themes.tooltipBackground,
-                            },
-                          }))),
+                      this.generateTooltip(newData),
                     legend: {
                       display: legend,
                       labels: {
