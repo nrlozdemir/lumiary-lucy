@@ -11,9 +11,9 @@ export default (props) => {
     HorizontalBarChart: HorizontalBarChartTemplate,
   }
 
-	const TooltipTemplate = tooltipComponents[props.template]
+  const TooltipTemplate = tooltipComponents[props.template]
 
-	console.log("tooltip component props", props)
+  console.log('tooltip component props', props)
 
   return (
     <ThemeContext.Consumer>

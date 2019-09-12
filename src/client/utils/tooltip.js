@@ -226,14 +226,19 @@ const HorizontalBarChartTemplate = function(props) {
   return (
     <React.Fragment>
       <div className="chartjs-tooltip-title" style={style.title}>
-        {percentageBeautifier(props.value)}%{'  '}{props.property} {props.metric}
+        {percentageBeautifier(!!props.value && props.value)}%{'  '}
+        {!!props.property && props.property} {!!props.metric && props.metric}
       </div>
       <div className="chartjs-tooltip-body" style={style.body}>
         <p style={pStyle}>
-				{percentageBeautifier(props.value)}% of {props.gender} prefer
+          {percentageBeautifier(!!props.value && props.value)}% of{' '}
+          {!!props.gender && props.gender.toLowerCase()}
+          {`s`} prefer
         </p>
-        <p style={pStyle}>videos that are {props.property}</p>
-        <p style={pStyle}>{props.metric}</p>
+        <p style={pStyle}>
+          videos that are {!!props.property && props.property.toLowerCase()}
+        </p>
+        <p style={pStyle}>{!!props.metric && props.metric.toLowerCase()}</p>
       </div>
     </React.Fragment>
   )

@@ -54,6 +54,12 @@
   }
 }
 :global {
+  .react-select__control {
+    &.react-select__control--menu-is-open {
+      z-index: 100;
+    }
+  }
+
   .__react_component_tooltip {
     border-radius: 8px;
     display: inline-block;
