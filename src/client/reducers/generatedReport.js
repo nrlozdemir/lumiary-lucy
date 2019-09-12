@@ -142,8 +142,6 @@ export const actions = {
   }),
 }
 export const initialState = fromJS({
-  selectedVideo: null,
-
   pacingChartData: {
     data: {},
     loading: true,

@@ -36,7 +36,7 @@ const AssetLayer = (props) => {
           width: width,
           height: height,
           boxShadow: `0 2px 6px 0 ${themes.assetLayerShadowColor}`,
-          border: `1px solid ${themes.assetLayerBorderColor}`,
+          border: `0.9px solid ${themes.assetLayerBorderColor}`,
           color: themes.textColor,
         }}
       >
@@ -56,6 +56,9 @@ const AssetLayer = (props) => {
           className={cx(styles.bar, barClassName, {
             [styles['bar--notActive']]: !isActive,
           })}
+          style={{
+            border: `0.9px solid ${themes.assetLayerShadowColor}`,
+          }}
         >
           <div className={styles.barTitle}>
             {socialIcon && <span className={socialIcon} />}

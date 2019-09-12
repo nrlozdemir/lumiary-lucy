@@ -43,7 +43,7 @@ class ColorRadioBoxes extends React.Component {
           {console.log(props.input.value.color)}
           <p
             className={style.colorName}
-            style={{ color: props.colors.searchOptionsColor }}
+            style={{ color: props.input.value ? props.colors.textColor : props.colors.selectBorder }}
           >
             {props.input.value ? props.input.value.name : 'Select Color'}
           </p>

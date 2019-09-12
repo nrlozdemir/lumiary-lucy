@@ -10,6 +10,7 @@ checks:
 plugins:
   eslint:
     enabled: true
+    config: ./.eslintrc
   csslint:
     enabled: true
   duplication:
