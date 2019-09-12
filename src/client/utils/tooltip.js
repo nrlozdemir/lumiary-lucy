@@ -201,6 +201,38 @@ const RadarChartTemplate = function(props) {
   return el
 }
 
+const HorizontalBarChartTemplate = function(props) {
+  const style = getGlobalStyle({}, true)
+
+  const pStyle = {
+    margin: '0px',
+    padding: '0px',
+    fontFamily: 'ClanOT',
+    fontSize: '12px',
+    lineHeight: '1.67',
+  }
+
+  return (
+    <React.Fragment>
+      <div className="chartjs-tooltip-title" style={style.title}>
+        {percentageBeautifier(!!props.value && props.value)}%{'  '}
+        {!!props.property && props.property} {!!props.metric && props.metric}
+      </div>
+      <div className="chartjs-tooltip-body" style={style.body}>
+        <p style={pStyle}>
+          {percentageBeautifier(!!props.value && props.value)}% of{' '}
+          {!!props.gender && props.gender.toLowerCase()}
+          {`s`} prefer
+        </p>
+        <p style={pStyle}>
+          videos that are {!!props.property && props.property.toLowerCase()}
+        </p>
+        <p style={pStyle}>{!!props.metric && props.metric.toLowerCase()}</p>
+      </div>
+    </React.Fragment>
+  )
+}
+
 const modifyTooltip = function(props, conf = {}) {
   const { options = {} } = props
   return {
@@ -405,6 +437,15 @@ const modifyTooltip = function(props, conf = {}) {
             value: value,
           }),
           RadarChartTemplate: RadarChartTemplate({
+            label: (!!label && label) || '',
+            value: (!!value && value) || 0,
+            labelLong: (!!labelLong && labelLong) || '',
+            difference: !!difference && difference | 0,
+            itemLabel: (!!itemLabel && itemLabel) || '',
+            metric: (!!metric && metric) || '',
+            platform: (!!platform && platform) || '',
+          }),
+          HorizontalBarChartTemplate: HorizontalBarChartTemplate({
             label: (!!label && label) || '',
             value: (!!value && value) || 0,
             labelLong: (!!labelLong && labelLong) || '',
@@ -631,4 +672,4 @@ const modifyTooltip = function(props, conf = {}) {
   }
 }
 
-export { modifyTooltip, CircleChartTemplate }
+export { modifyTooltip, CircleChartTemplate, HorizontalBarChartTemplate }

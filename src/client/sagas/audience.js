@@ -208,10 +208,15 @@ function* getAudienceGenderData({ payload = {} }) {
     )
 
     yield put(
-      actions.getAudienceGenderDataSuccess(
-        //percentageManipulation(convertDurationLabels(response, property))
-        percentageManipulation(response)
-      )
+      actions.getAudienceGenderDataSuccess({
+        dataset: percentageManipulation(
+          convertDurationLabels(response, property)
+        ),
+        tooltipData: {
+          property,
+          platform,
+        },
+      })
     )
   } catch (err) {
     console.log(err)
