@@ -130,6 +130,8 @@ class Performance extends React.Component {
             return Object.keys(valArr).length && valArr.every((v) => !v.value)
           })))
 
+    console.log('male', male)
+
     return (
       <Module
         actionOnProp={type}
@@ -175,85 +177,95 @@ class Performance extends React.Component {
               <WrapperModule
                 datasetsIsEmpty={!!male && !Object.keys(male).length}
               >
-                <BubbleChart
-                  size={[340, 400]}
-                  options={{
-                    maximumIterationCount: 1000,
-                    toolTipBackground: colors.audienceBubbleTooltipBackground,
-                    toolTipArrowBackground:
-                      colors.audienceBubbleTooltipBackground,
-                    toolTipArrowShadow: colors.audienceBubbleTooltipBackground,
-                    strokeWidth: 6,
-                    gap: 1,
-                    visualFontSize: 14,
-                    toolTipFontSize: 10,
-                    visualWidth: 100,
-                    visualHeight: 50,
-                    toolTipWidth: 150,
-                    toolTipHeight: 140,
-                    firstCircleTimesX: 1,
-                    firstCircleTimesY: 1,
+                <div
+                  style={{
+                    width: '390px',
+                    height: '400px',
                   }}
-                  firstAngle={30}
                 >
-                  {!!male &&
-                    Object.keys(male).length &&
-                    male.map((bubble, i) => (
-                      <div key={i}>
-                        <Bubble
-                          key={'bubble-' + i}
-                          radius={bubble.value}
-                          fill={colors.bodyBackground}
-                          stroke="#5292E5"
-                        >
-                          <Visual
-                            style={{
-                              background: colors.audienceBubbleBackground,
-                            }}
+                  <BubbleChart
+                    size={[390, 400]}
+                    options={{
+                      maximumIterationCount: 1000,
+                      toolTipBackground: colors.audienceBubbleTooltipBackground,
+                      toolTipArrowBackground:
+                        colors.audienceBubbleTooltipBackground,
+                      toolTipArrowShadow:
+                        colors.audienceBubbleTooltipBackground,
+                      strokeWidth: 5,
+                      gap: 2,
+                      visualFontSize: 14,
+                      toolTipFontSize: 10,
+                      visualWidth: 55,
+                      visualHeight: 20,
+                      toolTipWidth: 206,
+                      toolTipHeight: 130,
+                      firstCircleTimesX: -0.3,
+                      firstCircleTimesY: -1,
+                      toolTipPositionTop: true,
+                      toolTipDelay: 10,
+                      toolTipRadius: 8,
+                      toolTipArrowWidth: 16,
+                      toolTipArrowHeight: 8,
+                      zIndex: 30,
+                    }}
+                    firstAngle={30}
+                  >
+                    {!!male &&
+                      Object.keys(male).length &&
+                      male.map((bubble, i) => (
+                        <div key={i}>
+                          <Bubble
+                            key={'bubble-' + i}
+                            radius={bubble.value}
+                            fill={colors.bodyBackground}
+                            stroke="#5292E5"
                           >
-                            <span
-                              className={style.bubbleVisual}
+                            <Visual
                               style={{
-                                fontSize: 13,
-                                color: colors.audienceBubbleText,
+                                background: colors.audienceBubbleBackground,
                               }}
                             >
-                              {bubble.visual}
-                            </span>
-                          </Visual>
-                          <ToolTip>
-                            <div className={style.bubbleTooltip}>
-                              <div
-                                className={style.header}
+                              <span
+                                className={style.bubbleVisual}
                                 style={{
-                                  color: colors.audienceBubbleTooltipText,
-                                  // audienceBubbleTooltipSeparator
+                                  fontSize: 13,
+                                  color: colors.audienceBubbleText,
                                 }}
                               >
-                                {`${bubble.percentage}% | ${bubble.visual} ${bubble.property}`}
+                                {bubble.visual}
+                              </span>
+                            </Visual>
+                            <ToolTip style={{ zIndex: 10000 }}>
+                              <div className={style.bubbleTooltip}>
+                                <span
+                                  className={style.header}
+                                  style={{
+                                    color: colors.audienceBubbleTooltipText,
+                                    borderBottom: `1px solid ${colors.audienceBubbleTooltipSeparator}`,
+                                  }}
+                                >
+                                  {`${bubble.percentage}% | ${bubble.visual} ${bubble.property}`}
+                                </span>
+                                <div
+                                  className={style.body}
+                                  style={{
+                                    color: colors.audienceBubbleTooltipText,
+                                  }}
+                                >
+                                  <span>
+                                    {`${bubble.percentage}% of males ${bubble.min}-${bubble.max} `}
+                                    <br /> prefer videos that <br />
+                                    {` are ${bubble.visual} paced`}
+                                  </span>
+                                </div>
                               </div>
-                              <div
-                                style={{
-                                  width: '100%',
-                                  height: '1px',
-                                  background:
-                                    colors.audienceBubbleTooltipSeparator,
-                                }}
-                              />
-                              <div
-                                className={style.body}
-                                style={{
-                                  color: colors.audienceBubbleTooltipText,
-                                }}
-                              >
-                                {`${bubble.percentage}% of males ${bubble.min}-${bubble.max} prefer videos that are ${bubble.visual} paced`}
-                              </div>
-                            </div>
-                          </ToolTip>
-                        </Bubble>
-                      </div>
-                    ))}
-                </BubbleChart>
+                            </ToolTip>
+                          </Bubble>
+                        </div>
+                      ))}
+                  </BubbleChart>
+                </div>
                 <div className={style.chartSectionBadge}>
                   <span
                     style={{
@@ -267,89 +279,99 @@ class Performance extends React.Component {
                 </div>
               </WrapperModule>
               <WrapperModule
-                style={{
-                  borderLeft: `1px solid ${colors.moduleBorder}`,
-                  borderRight: `1px solid ${colors.moduleBorder}`,
-                }}
                 datasetsIsEmpty={!!female && !Object.keys(female).length}
               >
-                <BubbleChart
-                  size={[340, 400]}
-                  options={{
-                    maximumIterationCount: 1000,
-                    toolTipBackground: colors.audienceBubbleTooltipBackground,
-                    toolTipArrowBackground:
-                      colors.audienceBubbleTooltipBackground,
-                    toolTipArrowShadow: colors.audienceBubbleTooltipBackground,
-                    strokeWidth: 6,
-                    gap: 1,
-                    visualWidth: 100,
-                    visualHeight: 50,
-                    toolTipWidth: 150,
-                    toolTipHeight: 140,
-                    firstCircleTimesX: 1,
-                    firstCircleTimesY: 1,
+                <div
+                  style={{
+                    width: '390px',
+                    height: '400px',
+                    borderLeft: `1px solid ${colors.moduleBorder}`,
+                    borderRight: `1px solid ${colors.moduleBorder}`,
                   }}
-                  firstAngle={30}
                 >
-                  {!!female &&
-                    Object.keys(female).length &&
-                    female.map((bubble, i) => (
-                      <div key={i}>
-                        <Bubble
-                          key={'bubble-' + i}
-                          radius={bubble.value}
-                          fill={colors.bodyBackground}
-                          stroke="#2FD7C4"
-                        >
-                          <Visual
-                            style={{
-                              background: colors.audienceBubbleBackground,
-                            }}
+                  <BubbleChart
+                    size={[390, 400]}
+                    options={{
+                      maximumIterationCount: 1000,
+                      toolTipBackground: colors.audienceBubbleTooltipBackground,
+                      toolTipArrowBackground:
+                        colors.audienceBubbleTooltipBackground,
+                      toolTipArrowShadow:
+                        colors.audienceBubbleTooltipBackground,
+                      strokeWidth: 5,
+                      gap: 2,
+                      visualFontSize: 14,
+                      toolTipFontSize: 10,
+                      visualWidth: 55,
+                      visualHeight: 20,
+                      toolTipWidth: 206,
+                      toolTipHeight: 130,
+                      firstCircleTimesX: -0.3,
+                      firstCircleTimesY: -1,
+                      toolTipPositionTop: true,
+                      toolTipDelay: 10,
+                      toolTipRadius: 8,
+                      toolTipArrowWidth: 16,
+                      toolTipArrowHeight: 8,
+                      zIndex: 30,
+                    }}
+                    firstAngle={30}
+                  >
+                    {!!female &&
+                      Object.keys(female).length &&
+                      female.map((bubble, i) => (
+                        <div key={i}>
+                          <Bubble
+                            key={'bubble-' + i}
+                            radius={bubble.value}
+                            fill={colors.bodyBackground}
+                            stroke="#2FD7C4"
                           >
-                            <span
-                              className={style.bubbleVisual}
+                            <Visual
                               style={{
-                                fontSize: 13,
-                                color: colors.audienceBubbleText,
+                                background: colors.audienceBubbleBackground,
                               }}
                             >
-                              {bubble.visual}
-                            </span>
-                          </Visual>
-                          <ToolTip>
-                            <div className={style.bubbleTooltip}>
-                              <div
-                                className={style.header}
+                              <span
+                                className={style.bubbleVisual}
                                 style={{
-                                  color: colors.audienceBubbleTooltipText,
-                                  // audienceBubbleTooltipSeparator
+                                  fontSize: 13,
+                                  color: colors.audienceBubbleText,
                                 }}
                               >
-                                {`${bubble.percentage}% | ${bubble.visual} ${bubble.property}`}
+                                {bubble.visual}
+                              </span>
+                            </Visual>
+                            <ToolTip style={{ zIndex: 10000 }}>
+                              <div className={style.bubbleTooltip}>
+                                <span
+                                  className={style.header}
+                                  style={{
+                                    color: colors.audienceBubbleTooltipText,
+                                    borderBottom: `1px solid ${colors.audienceBubbleTooltipSeparator}`,
+                                  }}
+                                >
+                                  {`${bubble.percentage}% | ${bubble.visual} ${bubble.property}`}
+                                </span>
+                                <div
+                                  className={style.body}
+                                  style={{
+                                    color: colors.audienceBubbleTooltipText,
+                                  }}
+                                >
+                                  <span>
+                                    {`${bubble.percentage}% of females ${bubble.min}-${bubble.max} `}
+                                    <br /> prefer videos that <br />{' '}
+                                    {` are ${bubble.visual} paced`}
+                                  </span>
+                                </div>
                               </div>
-                              <div
-                                style={{
-                                  width: '100%',
-                                  height: '1px',
-                                  background:
-                                    colors.audienceBubbleTooltipSeparator,
-                                }}
-                              />
-                              <div
-                                className={style.body}
-                                style={{
-                                  color: colors.audienceBubbleTooltipText,
-                                }}
-                              >
-                                {`${bubble.percentage}% of females ${bubble.min}-${bubble.max} prefer videos that are ${bubble.visual} paced`}
-                              </div>
-                            </div>
-                          </ToolTip>
-                        </Bubble>
-                      </div>
-                    ))}
-                </BubbleChart>
+                            </ToolTip>
+                          </Bubble>
+                        </div>
+                      ))}
+                  </BubbleChart>
+                </div>
                 <div className={style.chartSectionBadge}>
                   <span
                     style={{
@@ -365,87 +387,95 @@ class Performance extends React.Component {
               <WrapperModule
                 datasetsIsEmpty={!!both && !Object.keys(both).length}
               >
-                <BubbleChart
-                  size={[340, 400]}
-                  options={{
-                    maximumIterationCount: 1000,
-                    toolTipBackground: colors.audienceBubbleTooltipBackground,
-                    toolTipArrowBackground:
-                      colors.audienceBubbleTooltipBackground,
-                    toolTipArrowShadow: colors.audienceBubbleTooltipBackground,
-                    strokeWidth: 6,
-                    gap: 1,
-                    visualWidth: 100,
-                    visualHeight: 50,
-                    toolTipWidth: 150,
-                    toolTipHeight: 140,
-                    firstCircleTimesX: 1,
-                    firstCircleTimesY: 1,
+                <div
+                  style={{
+                    width: '390px',
+                    height: '400px',
                   }}
-                  firstAngle={30}
                 >
-                  {!!both &&
-                    Object.keys(both).length &&
-                    both.map((bubble, i) => (
-                      <div key={i}>
-                        <Bubble
-                          key={'bubble-' + i}
-                          radius={bubble.value}
-                          fill={colors.bodyBackground}
-                          stroke="#8562F3"
-                        >
-                          <Visual
-                            style={{
-                              background: colors.audienceBubbleBackground,
-                            }}
+                  <BubbleChart
+                    size={[390, 400]}
+                    options={{
+                      maximumIterationCount: 1000,
+                      toolTipBackground: colors.audienceBubbleTooltipBackground,
+                      toolTipArrowBackground:
+                        colors.audienceBubbleTooltipBackground,
+                      toolTipArrowShadow:
+                        colors.audienceBubbleTooltipBackground,
+                      strokeWidth: 5,
+                      gap: 2,
+                      visualFontSize: 14,
+                      toolTipFontSize: 10,
+                      visualWidth: 55,
+                      visualHeight: 20,
+                      toolTipWidth: 206,
+                      toolTipHeight: 130,
+                      firstCircleTimesX: -0.3,
+                      firstCircleTimesY: -1,
+                      toolTipPositionTop: true,
+                      toolTipDelay: 10,
+                      toolTipRadius: 8,
+                      toolTipArrowWidth: 16,
+                      toolTipArrowHeight: 8,
+                      zIndex: 30,
+                    }}
+                    firstAngle={30}
+                  >
+                    {!!both &&
+                      Object.keys(both).length &&
+                      both.map((bubble, i) => (
+                        <div key={i}>
+                          <Bubble
+                            key={'bubble-' + i}
+                            radius={bubble.value}
+                            fill={colors.bodyBackground}
+                            stroke="#8562F3"
                           >
-                            <span
-                              className={style.bubbleVisual}
+                            <Visual
                               style={{
-                                fontSize: 13,
-                                color: colors.audienceBubbleText,
+                                background: colors.audienceBubbleBackground,
                               }}
                             >
-                              {bubble.visual}
-                            </span>
-                          </Visual>
-                          <ToolTip
-                            style={{
-                              color: colors.tooltipRadarChartTextColor,
-                            }}
-                          >
-                            <div className={style.bubbleTooltip}>
-                              <div
-                                className={style.header}
+                              <span
+                                className={style.bubbleVisual}
                                 style={{
-                                  color: colors.audienceBubbleTooltipText,
-                                  // audienceBubbleTooltipSeparator
+                                  fontSize: 13,
+                                  color: colors.audienceBubbleText,
                                 }}
                               >
-                                {`${bubble.percentage}% | ${bubble.visual} ${bubble.property}`}
+                                {bubble.visual}
+                              </span>
+                            </Visual>
+                            <ToolTip style={{ zIndex: 10000 }}>
+                              <div className={style.bubbleTooltip}>
+                                <span
+                                  className={style.header}
+                                  style={{
+                                    color: colors.audienceBubbleTooltipText,
+                                    borderBottom: `1px solid ${colors.audienceBubbleTooltipSeparator}`,
+                                  }}
+                                >
+                                  {`${bubble.percentage}% | ${bubble.visual} ${bubble.property}`}
+                                </span>
+                                <div
+                                  className={style.body}
+                                  style={{
+                                    color: colors.audienceBubbleTooltipText,
+                                  }}
+                                >
+                                  <span>
+                                    {`${bubble.percentage}% of both ${bubble.min}-${bubble.max} `}
+                                    <br /> prefer videos that <br />{' '}
+                                    {` are ${bubble.visual} paced`}
+                                  </span>
+                                </div>
                               </div>
-                              <div
-                                style={{
-                                  width: '100%',
-                                  height: '1px',
-                                  background:
-                                    colors.audienceBubbleTooltipSeparator,
-                                }}
-                              />
-                              <div
-                                className={style.body}
-                                style={{
-                                  color: colors.audienceBubbleTooltipText,
-                                }}
-                              >
-                                {`${bubble.percentage}% of both ${bubble.min}-${bubble.max} prefer videos that are ${bubble.visual} paced`}
-                              </div>
-                            </div>
-                          </ToolTip>
-                        </Bubble>
-                      </div>
-                    ))}
-                </BubbleChart>
+                            </ToolTip>
+                          </Bubble>
+                        </div>
+                      ))}
+                  </BubbleChart>
+                </div>
                 <div className={style.chartSectionBadge}>
                   <span
                     style={{

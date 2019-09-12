@@ -122,7 +122,7 @@ function* getAudiencePerformanceData({ payload = {} }) {
       updatedResponse = Object.keys(updatedResponse).reduce((newData, key) => {
         newData[key] = normalizationBubbleMapping(
           updatedResponse[key],
-          50,
+          55,
           70,
           'audience'
         )

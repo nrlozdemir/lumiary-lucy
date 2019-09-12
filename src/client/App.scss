@@ -189,6 +189,12 @@
     }
   }
 
+  .react-select__control {
+    &.react-select__control--menu-is-open {
+      z-index: 100;
+    }
+  }
+
   .audienceThumbSlider {
     width: calc(100% - 230px);
     height: 110px;
