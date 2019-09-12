@@ -66,7 +66,7 @@ const ReportsForm = (props) => {
                 />
               </div>
               <div className={style.selectionArea}>
-                <p className={style.label}>Title</p>
+                <p className={style.label}>Report Title</p>
                 <Field
                   component={Input}
                   options={selectOptionsDateRange}
