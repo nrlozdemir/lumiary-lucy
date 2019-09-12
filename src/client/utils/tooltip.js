@@ -122,6 +122,13 @@ const CircleChartTemplate = (props) => {
   )
 }
 
+const renderRepresentsVideoText = (props = {}, propVal = 'label') => {
+  return `represents video with ${(!!props[propVal] &&
+    'aeiou'.indexOf(props[propVal][0].toLowerCase()) !== -1 &&
+    'an') ||
+    'a'}<br> `
+}
+
 const DoughnutChartTemplate = function(props) {
   const style = getGlobalStyle()
 
@@ -131,14 +138,11 @@ const DoughnutChartTemplate = function(props) {
     props.itemLabel}`
   el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
   el += `${percentageBeautifier(props.value)}% of your library<br> `
-  el += `represents video with ${(!!props.label &&
-    'aeiou'.indexOf(props.label[0].toLowerCase()) !== -1 &&
-    'an') ||
-    'a'}<br> `
+  el += renderRepresentsVideoText(props)
   el += `${!!props.label && props.label.toLowerCase()} of ${!!props.itemLabel &&
     props.itemLabel}`
   el += '</div>'
-
+  
   return el
 }
 
@@ -151,10 +155,7 @@ const VerticalStackedBarChartTemplate = function(props) {
     props.label}`
   el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
   el += `${percentageBeautifier(props.value)}% of your library<br> `
-  el += `represents video with ${(!!props.propertyValue &&
-    'aeiou'.indexOf(props.propertyValue[0].toLowerCase()) !== -1 &&
-    'an') ||
-    'a'}<br> `
+  el += renderRepresentsVideoText(props, 'propertyValue')
   el += `${!!props.propertyValue &&
     props.propertyValue.toLowerCase()} of ${!!props.label &&
     props.label.toLowerCase()}`
