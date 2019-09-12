@@ -170,14 +170,11 @@ class DoughnutChart extends React.Component {
           })
         : []
 
-    let chartBackgroundColors =
-      !!newData && !!newData.datasets && !!newData.datasets[0]
-        ? newData.datasets[0].backgroundColor.slice(0, 5)
-        : null
-    let chartHoverBackgroundColors =
-      !!newData && !!newData.datasets && !!newData.datasets[0]
-        ? newData.datasets[0].backgroundColor.slice(0, 5)
-        : null
+    const bgColor = !!newData && !!newData.datasets && !!newData.datasets[0]
+    ? newData.datasets[0].backgroundColor.slice(0, 5)
+    : null
+    let chartBackgroundColors = bgColor
+    let chartHoverBackgroundColors = bgColor
 
     let chartValuesTemp = []
     let tooltipLabels = !!newData && newData.labels
