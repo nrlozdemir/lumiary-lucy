@@ -139,6 +139,7 @@ class DoughnutChart extends React.Component {
     const dataLimit = 5
 
     let newData = { ...data }
+    const { datasets = [] } = newData
 
     // If more than 5 datapoints, take the first 4, and bucket the rest
     if (
@@ -173,21 +174,22 @@ class DoughnutChart extends React.Component {
     }
 
     // for opacity backgrounds
-    let chartValues =
-      !!newData && !!newData.datasets && !!newData.datasets[0]
-        ? newData.datasets[0].data.map((value) => {
-            const val = parseFloat(value)
-            if (!average && val <= 5 && !showAllData) return null
-            return val
-          })
-        : []
+    let chartValues = []
+    if(datasets[0]) {
+      chartValues = datasets[0].data.map((value) => {
+        let val = parseFloat(value)
+        if (!average && val <= 5 && !showAllData) {
+          val = null
+        }
+        return val
+      })
+    }
 
-    const bgColor = !!newData && !!newData.datasets && !!newData.datasets[0]
-    ? newData.datasets[0].backgroundColor.slice(0, 5)
-    : null
+    const bgColor = !!datasets[0]
+      ? newData.datasets[0].backgroundColor.slice(0, 5)
+      : null
     let chartBackgroundColors = bgColor
     let chartHoverBackgroundColors = bgColor
-
     let chartValuesTemp = []
     let tooltipLabels = !!newData && newData.labels
 
