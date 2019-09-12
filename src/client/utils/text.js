@@ -33,7 +33,7 @@ const replaceBoldElement = (text) => {
 }
 const replaceBoldString = (str) => {
   return str.replace(
-    /(\d+\%)|(\d+\.\d+\%)|Fast|Medium|Slow|Slowest|0-15s|16-30s|31-60s|61+|Live Action|Cinemagraph|Stop Motion|Animation/gi,
+    /(\d+\%)|(\d+\.\d+\%)|Fast|Medium|Slowest|Slow|0-15s|16-30s|31-60s|61+|Live Action|Cinemagraph|Stop Motion|Animation/gi,
     function(x) {
       return '<b>' + x + '</b>'
     }
