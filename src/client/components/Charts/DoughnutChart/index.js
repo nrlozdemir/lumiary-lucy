@@ -111,6 +111,25 @@ class DoughnutChart extends React.Component {
           },
         })))
   }
+  generateLabelFormatter = (value) => {
+    const { slicePiecesWidth = false, dataLabelFunction, dataLabelInsert } = this.props
+    if (!value) return
+    //hide slices label
+    if (
+      !!slicePiecesWidth &&
+      parseFloat(value) === parseFloat(slicePiecesWidth)
+    ) {
+      return ''
+    }
+    if (dataLabelFunction) {
+      return dataLabelPlugins(
+        value,
+        dataLabelFunction,
+        dataLabelInsert
+      )
+    }
+    return value
+  }
   render() {
     const {
       width,
@@ -383,24 +402,7 @@ class DoughnutChart extends React.Component {
                     plugins: {
                       datalabels: {
                         display: displayDataLabels,
-                        formatter: (value) => {
-                          if (!value) return
-                          //hide slices label
-                          if (
-                            slicePiecesWidth !== false &&
-                            parseFloat(value) === parseFloat(slicePiecesWidth)
-                          ) {
-                            return ''
-                          }
-                          if (dataLabelFunction) {
-                            return dataLabelPlugins(
-                              value,
-                              dataLabelFunction,
-                              dataLabelInsert
-                            )
-                          }
-                          return value
-                        },
+                        formatter: this.generateLabelFormatter,
                         color: dataLabelColor,
                         font: {
                           family: dataLabelFontFamily,
