@@ -65,7 +65,7 @@
     pointer-events: none;
     top: -999em;
     visibility: hidden;
-    z-index: 999;
+    z-index: 9999;
     width: 300px;
     font-family: $font-family-ClanOT;
     font-size: 12px;
@@ -79,6 +79,10 @@
 
     &.removePadding {
       padding: 0px;
+    }
+
+    &.HorizontalBarChart {
+      width: auto !important;
     }
 
     &.CircleChart {

@@ -50,6 +50,8 @@ class HorizontalBarChart extends React.Component {
 				</div>
 				<ToolTip
 					effect="solid"
+					place='top'
+					smallTooltip
 					id={`hc-${tooltipKey}`}
 					template='HorizontalBarChart'
 					tooltipProps={{
@@ -59,7 +61,6 @@ class HorizontalBarChart extends React.Component {
 						property: 'Slow',
 						gender: 'male'
 					}}
-
 				/>
 			</React.Fragment>
     )
