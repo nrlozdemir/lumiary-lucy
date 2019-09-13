@@ -7,82 +7,9 @@ import { fromJS } from 'immutable'
 import { percentageGraphOptions } from './defaultOptions'
 import { withTheme } from 'ThemeContext/withTheme'
 
+import { drawLine, drawBackgroundLine, calcLinePoints } from './utils'
+
 const { global: globalDefaults } = defaults
-
-const drawLine = (
-  ctx,
-  lines,
-  findYMaxIndex,
-  barWidth,
-  barSpaceWidth,
-  height,
-  gradient,
-  status
-) => {
-  const indices = Object.values(lines)
-
-  if (status === 'prev') {
-    indices.filter((r, i) => i <= findYMaxIndex).reverse()
-  } else {
-    indices.filter((r, i) => i > findYMaxIndex)
-  }
-
-  let indicesList = {}
-  Object.values(indices).map((el, i) => {
-    indicesList[i] = {
-      currentX: el.currentVLine.x,
-      previousX: el.previousVLine.x,
-      currentY: el.currentVLine.y,
-      previousY: el.previousVLine.y,
-    }
-    return true
-  })
-
-  const indexesPush = (c, el, y) => ({
-    x: c.toFixed(0),
-    y,
-    currentX: el.currentX,
-    currentY: el.currentY,
-    previousX: el.previousX,
-    previousY: el.previousY,
-  })
-
-  let indexes = []
-
-  Object.values(indicesList).map((el, i) => {
-    let aspectRatio =
-      (el.previousY - el.currentY) / (el.currentX - el.previousX)
-
-    ;[...Array(el.currentX - el.previousX)].map((v, i, arr) => {
-      const c = status === 'prev' ? el.currentX - i : el.previousX + i
-
-      indexes.push(
-        indexesPush(
-          c,
-          el,
-          status === 'prev'
-            ? el.currentY + i * aspectRatio
-            : el.previousY - i * aspectRatio
-        )
-      )
-    })
-    return true
-  })
-
-  indexes.map((el, i) => {
-    if (
-      el.x % (barWidth + barSpaceWidth) > barSpaceWidth &&
-      el.x % (barWidth + barSpaceWidth) <= barWidth + barSpaceWidth
-    ) {
-      ctx.moveTo(el.x, height + el.y)
-      ctx.lineTo(el.x, el.y)
-      ctx.lineWidth = 1
-      ctx.strokeStyle = gradient
-      ctx.stroke()
-    }
-    return true
-  })
-}
 
 class StackedPercentageChart extends React.Component {
   constructor(props) {
@@ -199,72 +126,16 @@ class StackedPercentageChart extends React.Component {
     const spanGaps = vm.spanGaps
     const points = _children.slice()
     const globalOptionLineElements = globalDefaults.elements.line
-    let lastDrawnIndex = -1
-    let index, current, previous, currentVM
 
-    if (_loop && points.length) {
-      points.push(points[0])
-    }
-
-    ctx.save()
-
-    ctx.lineCap = vm.borderCapStyle || globalOptionLineElements.borderCapStyle
-
-    if (ctx.setLineDash) {
-      ctx.setLineDash(vm.borderDash || globalOptionLineElements.borderDash)
-    }
-
-    ctx.lineDashOffset = valueOrDefault(
-      vm.borderDashOffset,
-      globalOptionLineElements.borderDashOffset
-    )
-    ctx.lineJoin =
-      vm.borderJoinStyle || globalOptionLineElements.borderJoinStyle
-    ctx.lineWidth = valueOrDefault(
-      vm.borderWidth,
-      globalOptionLineElements.borderWidth
-    )
-    ctx.strokeStyle = vm.borderColor || globalDefaults.defaultColor
+    drawBackgroundLine(ctx, vm, globalOptionLineElements, globalDefaults, valueOrDefault)
 
     ctx.beginPath()
-    lastDrawnIndex = -1
 
-    let lines = {}
+		if (_loop && points.length) {
+      points.push(points[0])
+		}
 
-    for (index = 0; index < points.length; ++index) {
-      current = points[index]
-      previous = helpers.previousItem(points, index)
-      currentVM = current._view
-
-      if (index === 0) {
-        if (!currentVM.skip) {
-          ctx.moveTo(currentVM.x, currentVM.y)
-          lastDrawnIndex = index
-        }
-      } else {
-        previous = lastDrawnIndex === -1 ? previous : points[lastDrawnIndex]
-        if (!currentVM.skip) {
-          if (
-            (lastDrawnIndex !== index - 1 && !spanGaps) ||
-            lastDrawnIndex === -1
-          ) {
-            ctx.moveTo(currentVM.x, currentVM.y)
-          } else {
-            helpers.canvas.lineTo(ctx, previous._view, current._view)
-
-            lines[index] = {
-              previousVLine: {
-                ...previous._view,
-              },
-              currentVLine: {
-                ...current._view,
-              },
-            }
-          }
-          lastDrawnIndex = index
-        }
-      }
-    }
+		const lines = calcLinePoints(ctx, points, helpers, spanGaps);
 
     ctx.save()
     ctx.stroke()

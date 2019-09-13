@@ -9,23 +9,21 @@
     "comma-dangle": ["error", "always-multiline"],
     "quotes": ["error", "single"],
     "arrow-parens": ["error", "always"],
-    "prettier/prettier": [
-      "error",
-    ]
+    "prettier/prettier": ["error"]
   },
   "env": {
     "node": true,
     "mocha": true,
-    "browser": true,
+    "browser": true
   },
   "parserOptions": {
     "ecmaVersion": 8,
-    "sourceType": "module",
+    "sourceType": "module"
   },
   "extends": [
     "airbnb-base",
     "plugin:prettier/recommended",
-    "eslint:recommended",
+    "eslint:recommended"
   ],
   "plugins": ["prettier"]
 }
