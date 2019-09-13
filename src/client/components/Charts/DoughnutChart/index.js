@@ -40,17 +40,173 @@ const defaultProps = {
   legendLabelsFontSize: 12,
 }
 
-const dataLabelPlugins = (value, func, item) => {
+const dataLabelPlugins = (value, func = 'insertBefore', item) => {
+  let term = value > 0 ? item + '' + value : ''
   if (func == 'insertAfter') {
-    return value > 0 ? value + '' + item : ''
-  } else if (func == 'insertBefore') {
-    return value > 0 ? item + '' + value : ''
+    term = value > 0 ? value + '' + item : ''
   }
-  return value
+  return term
 }
 
 class DoughnutChart extends React.Component {
-  render() {
+  renderLabelsData = () => {
+    const { labelContainerClassname = false, labelsData, removeLabelMargin = false } = this.props
+    return (
+      <div
+        className={classnames(style.labelContainer, {
+          [`${labelContainerClassname}`]: !!labelContainerClassname,
+        })}
+      >
+        <Labels
+          data={labelsData}
+          removeMargin={!!removeLabelMargin ? true : false}
+        />
+      </div>
+    )
+  }
+  
+  generateTooltip = (newData, tooltipData = {}, chartValues = []) => {
+    const { tooltipType = 'basic', themeContext = {}, tooltipMode = 'dataset', slicePiecesWidth = false } = this.props
+    const { colors : themes = {} } = themeContext
+    
+    return ((!!tooltipType &&
+      (tooltipType === 'basic' &&
+        customChartToolTip(
+          themes,
+          {
+            mode: tooltipMode,
+            filter: (tooltipItem) => {
+              if (!!slicePiecesWidth) {
+                if (
+                  !!tooltipData['labels'][tooltipItem.index] &&
+                  tooltipMode === 'dataset'
+                ) {
+                  return chartValues
+                } else if (
+                  !!tooltipData['labels'][tooltipItem.index] &&
+                  tooltipMode === 'nearest'
+                ) {
+                  return chartValues[tooltipItem.index]
+                }
+              } else {
+                if (tooltipMode === 'dataset') {
+                  return chartValues
+                } else if (tooltipMode === 'nearest') {
+                  return chartValues[tooltipItem.index]
+                }
+              }
+            },
+          },
+          tooltipData
+        ))) ||
+      (tooltipType === 'extended' &&
+        modifyTooltip({
+          template: 'DoughnutChartTemplate',
+          data: newData,
+          options: {
+            background: themes.tooltipBackground,
+            textColor: themes.tooltipTextColor,
+            caretColor: themes.tooltipBackground,
+          },
+        })))
+  }
+
+  generateLabelFormatter = (value) => {
+    const { slicePiecesWidth = false, dataLabelFunction, dataLabelInsert } = this.props
+    if (!value) return
+    //hide slices label
+    if (
+      !!slicePiecesWidth &&
+      parseFloat(value) === parseFloat(slicePiecesWidth)
+    ) {
+      return ''
+    }
+    if (dataLabelFunction) {
+      return dataLabelPlugins(
+        value,
+        dataLabelFunction,
+        dataLabelInsert
+      )
+    }
+    return value
+  }
+
+  renderAverage = () => {
+    const { 
+      average,
+      themeContext = {},
+      cvScoreData = {},
+      tooltipCaretPosition = false,
+      tooltipTemplate = false,
+      currentDayIndex = false,
+      weekdayOrder = false
+    } = this.props
+    const { colors : themes = {} } = themeContext
+    const tooltipKey = Math.random()
+
+    return (
+      <React.Fragment>
+        <div
+          className={style.circleContainer}
+          style={{
+            transform: `translate(-50%, 0) rotate(${(average /
+              100) *
+              360}deg)`,
+          }}
+        >
+          <div className={style.circleWrapper}>
+            <div
+              className={classnames(style.circleTick, {
+                [style.dark]: themes.themeType === 'dark',
+                [style.light]: themes.themeType === 'light',
+              })}
+              data-tip={`${ucfirst(
+                cvScoreData.platform || ''
+              )} Average | ${average}`}
+              data-for={`panoptic-cvScore-${tooltipKey}`}
+            />
+          </div>
+        </div>
+        <ToolTip
+          effect="solid"
+          place={
+            (!!tooltipCaretPosition &&
+              ((tooltipCaretPosition == 'left'
+                ? 'right'
+                : 'left') ||
+                (tooltipCaretPosition == 'right'
+                  ? 'left'
+                  : 'left'))) ||
+            'left'
+          }
+          smallTooltip
+          id={`panoptic-cvScore-${tooltipKey}`}
+          template={(!!tooltipTemplate && tooltipTemplate) || false}
+          tooltipProps={{
+            value: average,
+            labelLong:
+              !!weekdayOrder &&
+              !!currentDayIndex &&
+              !!weekdayOrder[currentDayIndex] &&
+              !!weekdayOrder[currentDayIndex].weekday &&
+              weekdayOrder[currentDayIndex].weekday,
+            average: average,
+            platform: ucfirst(cvScoreData.platform || ''),
+          }}
+        />
+      </React.Fragment>
+    )
+  }
+
+  generateBgColor = (data) => {
+    const bgColor = 
+      data
+        ? data.backgroundColor.slice(0, 5)
+        : null 
+    return bgColor
+  }
+
+  renderNewData = (newData) => {
     const {
       width,
       height,
@@ -65,8 +221,6 @@ class DoughnutChart extends React.Component {
       fillTextFontFamily,
       fillText,
       displayDataLabels,
-      dataLabelFunction,
-      dataLabelInsert,
       dataLabelColor,
       dataLabelFontFamily,
       dataLabelFontSize,
@@ -74,37 +228,25 @@ class DoughnutChart extends React.Component {
       legendLabelsFontColor,
       legendLabelsFontSize,
       legendLabelsFontFamily,
-      labelsData,
-      labelContainerClassname = false,
-      labelPositionBottom,
-      labelPositionRight,
-      labelPositionLeft,
-      removeLabelMargin = false,
       cutoutPercentage,
-      customStyle,
-      customDoughnutContainer,
-      customChartWrapper,
       average,
-      cvScoreData,
       slicePiecesWidth = false,
       datasetOptions = {},
       removeTooltip = false,
       showAllData = false,
-      tooltipType = 'basic',
-      tooltipCaretPosition = false,
-      tooltipTemplate = false,
-      currentDayIndex = false,
-      weekdayOrder = false,
+      themeContext = {}
     } = this.props
 
-    const themes = this.props.themeContext.colors
+    const { colors: themes = {} } = themeContext
+    const { datasets = [] } = newData
+
     let plugins = []
     if (fillText) {
       const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
 
       plugins = [
         {
-          beforeDraw: function(chart) {
+          beforeDraw: function (chart) {
             const ctx = chart.chart.ctx
             const customFillText = textToUse.replace(/^\s+|\s+$/g, '')
 
@@ -119,67 +261,21 @@ class DoughnutChart extends React.Component {
         },
       ]
     }
-
-    if (!data) {
-      return null
-    }
-
-    const dataLimit = 5
-
-    let newData = { ...data }
-
-    // If more than 5 datapoints, take the first 4, and bucket the rest
-    if (
-      !!newData &&
-      !!newData.datasets &&
-      !!newData.datasets[0] &&
-      !!newData.labels &&
-      !!newData.labels.length &&
-      newData.labels.length > dataLimit
-    ) {
-      newData = {
-        labels: [...newData.labels.slice(0, dataLimit - 1), 'Other'],
-        datasets: [
-          {
-            ...newData.datasets[0],
-            data: newData.datasets[0].data
-              .slice(0, dataLimit - 1)
-              .reduce((acc, val, idx) => {
-                let totalToAdd
-                if (idx === dataLimit - 2) {
-                  const total = acc.reduce((a, b) => a + b, 0)
-                  totalToAdd = Math.round(100 - total - val)
-                }
-                const result = [...acc, val]
-                if (totalToAdd) {
-                  result.push(totalToAdd)
-                }
-                return result
-              }, []),
-          },
-        ],
-      }
-    }
-
     // for opacity backgrounds
-    let chartValues =
-      !!newData && !!newData.datasets && !!newData.datasets[0]
-        ? newData.datasets[0].data.map((value) => {
-            const val = parseFloat(value)
-            if (!average && val <= 5 && !showAllData) return null
-            return val
-          })
-        : []
+    let chartValues = []
+    if (datasets[0]) {
+      chartValues = datasets[0].data.map((value) => {
+        let val = parseFloat(value)
+        if (!average && val <= 5 && !showAllData) {
+          val = null
+        }
+        return val
+      })
+    }
 
-    let chartBackgroundColors =
-      !!newData && !!newData.datasets && !!newData.datasets[0]
-        ? newData.datasets[0].backgroundColor.slice(0, 5)
-        : null
-    let chartHoverBackgroundColors =
-      !!newData && !!newData.datasets && !!newData.datasets[0]
-        ? newData.datasets[0].backgroundColor.slice(0, 5)
-        : null
 
+    let chartBackgroundColors = this.generateBgColor(datasets[0])
+    let chartHoverBackgroundColors = this.generateBgColor(datasets[0])
     let chartValuesTemp = []
     let tooltipLabels = !!newData && newData.labels
 
@@ -189,12 +285,10 @@ class DoughnutChart extends React.Component {
           chartValuesTemp.push(e)
         }
       })
-
+    const isChartValuesTemp = !!chartValuesTemp && chartValuesTemp.length > 1
     if (
-      slicePiecesWidth !== false &&
-      !!chartValues &&
-      !!chartValuesTemp &&
-      chartValuesTemp.length > 1
+      !!slicePiecesWidth &&
+      isChartValuesTemp
     ) {
       const totalValues = chartValues.reduce((a, b) => a + b, 0)
       // if there is a difference e.g(0.1, 0.15), we're going to use it in slices
@@ -248,28 +342,143 @@ class DoughnutChart extends React.Component {
     let tooltipData = {}
 
     if (
-      !!newData &&
-      !!newData.datasets &&
-      !!newData.datasets[0] &&
+      !!datasets[0] &&
       !!chartValues
     ) {
       tooltipData = {
         labels: tooltipLabels,
         datasets: [
           {
-            ...newData.datasets[0],
+            ...datasets[0],
             data: chartValues,
           },
         ],
       }
     }
+    return (
+      <React.Fragment>
+        <Doughnut
+          key={Math.random()}
+          width={width}
+          height={height}
+          data={{
+            labels: newData.labels,
+            datasets: [
+              {
+                ...datasetOptions,
+                shadowColor: themes.doughnutChartShadowColor,
+                hoverShadowColor: themes.doughnutChartShadowColor,
+                data: chartValues,
+                backgroundColor: chartBackgroundColors,
+                borderColor:
+                  datasetsBorderColor || themes.moduleBackground,
+                hoverBorderColor:
+                  datasetsHoverBorderColor || themes.moduleBackground,
+                hoverBackgroundColor: chartHoverBackgroundColors,
+              },
+            ],
+          }}
+          plugins={plugins}
+          options={{
+            responsive: false,
+            tooltips:
+              !average &&
+              !removeTooltip &&
+              this.generateTooltip(newData, tooltipData, chartValues),
+            legend: {
+              display: legend,
+              labels: {
+                fontColor: legendLabelsFontColor,
+                fontSize: legendLabelsFontSize,
+                fontFamily: legendLabelsFontFamily,
+              },
+            },
+            layout: {
+              padding: layoutPadding,
+            },
+            plugins: {
+              datalabels: {
+                display: displayDataLabels,
+                formatter: this.generateLabelFormatter,
+                color: dataLabelColor,
+                font: {
+                  family: dataLabelFontFamily,
+                  weight: dataLabelFontWeight,
+                  size: dataLabelFontSize,
+                },
+              },
+            },
+            elements: {
+              arc: {
+                borderWidth: datasetsBorderWidth,
+                hoverBorderColor: datasetsHoverBorderColor,
+              },
+            },
+            cutoutPercentage: cutoutPercentage,
+          }}
+        />
+        {average && this.renderAverage()}
+      </React.Fragment>
+    )
+  }
 
-    /*
-    tooltipMode: (dataset, nearest)
-    */
-    const tooltipMode = this.props.tooltipMode || 'dataset'
+  reduceNewData = (data, dataLimit = 0) => {
+    return (
+      data
+        .slice(0, dataLimit - 1)
+        .reduce((acc, val, idx) => {
+          let totalToAdd
+          if (idx === dataLimit - 2) {
+            const total = acc.reduce((a, b) => a + b, 0)
+            totalToAdd = Math.round(100 - total - val)
+          }
+          const result = [...acc, val]
+          if (totalToAdd) {
+            result.push(totalToAdd)
+          }
+          return result
+        }, [])
+    )
+  }
 
-    const tooltipKey = Math.random()
+  render() {
+    const {
+      data,
+      labelsData,
+      labelPositionBottom,
+      labelPositionRight,
+      labelPositionLeft,
+      customStyle,
+      customDoughnutContainer,
+      customChartWrapper,
+      average,
+    } = this.props
+
+    if (!data) {
+      return null
+    }
+    
+    const dataLimit = 5
+    let newData = { ...data }
+    const { datasets = [] } = newData
+
+    // If more than 5 datapoints, take the first 4, and bucket the rest
+    if (
+      !!datasets[0] &&
+      !!newData.labels &&
+      newData.labels.length > dataLimit
+    ) {
+      newData = {
+        labels: [...newData.labels.slice(0, dataLimit - 1), 'Other'],
+        datasets: [
+          {
+            ...datasets[0],
+            data: this.reduceNewData(datasets[0].data, dataLimit),
+          },
+        ],
+      }
+    }
+
     return (
       <React.Fragment>
         <div
@@ -279,223 +488,17 @@ class DoughnutChart extends React.Component {
           )}
           style={customStyle}
         >
-          {labelPositionLeft && labelsData && (
-            <div
-              className={classnames(style.labelContainer, {
-                [`${labelContainerClassname}`]: !!labelContainerClassname,
-              })}
-            >
-              <Labels
-                data={labelsData}
-                removeMargin={!!removeLabelMargin ? true : false}
-              />
-            </div>
-          )}
+          {labelPositionLeft && labelsData && this.renderLabelsData()}
           <div
             className={classnames(style.chartWrapper, customChartWrapper, {
               [style.displayFlex]: !!average,
             })}
           >
-            {newData && (
-              <React.Fragment>
-                <Doughnut
-                  key={Math.random()}
-                  width={width}
-                  height={height}
-                  data={{
-                    labels: newData.labels,
-                    datasets: [
-                      {
-                        ...datasetOptions,
-                        shadowColor: themes.doughnutChartShadowColor,
-                        hoverShadowColor: themes.doughnutChartShadowColor,
-                        data: chartValues,
-                        backgroundColor: chartBackgroundColors,
-                        borderColor:
-                          datasetsBorderColor || themes.moduleBackground,
-                        hoverBorderColor:
-                          datasetsHoverBorderColor || themes.moduleBackground,
-                        hoverBackgroundColor: chartHoverBackgroundColors,
-                      },
-                    ],
-                  }}
-                  plugins={plugins}
-                  options={{
-                    responsive: false,
-                    tooltips:
-                      !average &&
-                      !removeTooltip &&
-                      ((!!tooltipType &&
-                        (tooltipType === 'basic' &&
-                          customChartToolTip(
-                            themes,
-                            {
-                              mode: tooltipMode,
-                              filter: (tooltipItem) => {
-                                if (slicePiecesWidth !== false) {
-                                  if (
-                                    tooltipData['labels'][tooltipItem.index] !==
-                                      false &&
-                                    tooltipMode === 'dataset'
-                                  ) {
-                                    return chartValues
-                                  } else if (
-                                    tooltipData['labels'][tooltipItem.index] !==
-                                      false &&
-                                    tooltipMode === 'nearest'
-                                  ) {
-                                    return chartValues[tooltipItem.index]
-                                  }
-                                } else {
-                                  if (tooltipMode === 'dataset') {
-                                    return chartValues
-                                  } else if (tooltipMode === 'nearest') {
-                                    return chartValues[tooltipItem.index]
-                                  }
-                                }
-                              },
-                            },
-                            tooltipData
-                          ))) ||
-                        (tooltipType === 'extended' &&
-                          modifyTooltip({
-                            template: 'DoughnutChartTemplate',
-                            data: newData,
-                            options: {
-                              background: themes.tooltipBackground,
-                              textColor: themes.tooltipTextColor,
-                              caretColor: themes.tooltipBackground,
-                            },
-                          }))),
-                    legend: {
-                      display: legend,
-                      labels: {
-                        fontColor: legendLabelsFontColor,
-                        fontSize: legendLabelsFontSize,
-                        fontFamily: legendLabelsFontFamily,
-                      },
-                    },
-                    layout: {
-                      padding: layoutPadding,
-                    },
-                    plugins: {
-                      datalabels: {
-                        display: displayDataLabels,
-                        formatter: (value) => {
-                          if (!value) return
-                          //hide slices label
-                          if (
-                            slicePiecesWidth !== false &&
-                            parseFloat(value) === parseFloat(slicePiecesWidth)
-                          ) {
-                            return ''
-                          }
-                          if (dataLabelFunction) {
-                            return dataLabelPlugins(
-                              value,
-                              dataLabelFunction,
-                              dataLabelInsert
-                            )
-                          }
-                          return value
-                        },
-                        color: dataLabelColor,
-                        font: {
-                          family: dataLabelFontFamily,
-                          weight: dataLabelFontWeight,
-                          size: dataLabelFontSize,
-                        },
-                      },
-                    },
-                    elements: {
-                      arc: {
-                        borderWidth: datasetsBorderWidth,
-                        hoverBorderColor: datasetsHoverBorderColor,
-                      },
-                    },
-                    cutoutPercentage: cutoutPercentage,
-                  }}
-                />
-                {average && (
-                  <React.Fragment>
-                    <div
-                      className={style.circleContainer}
-                      style={{
-                        transform: `translate(-50%, 0) rotate(${(average /
-                          100) *
-                          360}deg)`,
-                      }}
-                    >
-                      <div className={style.circleWrapper}>
-                        <div
-                          className={classnames(style.circleTick, {
-                            [style.dark]: themes.themeType === 'dark',
-                            [style.light]: themes.themeType === 'light',
-                          })}
-                          data-tip={`${ucfirst(
-                            cvScoreData.platform
-                          )} Average | ${average}`}
-                          data-for={`panoptic-cvScore-${tooltipKey}`}
-                        />
-                      </div>
-                    </div>
-                    <ToolTip
-                      effect="solid"
-                      place={
-                        (!!tooltipCaretPosition &&
-                          ((tooltipCaretPosition == 'left'
-                            ? 'right'
-                            : 'left') ||
-                            (tooltipCaretPosition == 'right'
-                              ? 'left'
-                              : 'left'))) ||
-                        'left'
-                      }
-                      smallTooltip
-                      id={`panoptic-cvScore-${tooltipKey}`}
-                      template={(!!tooltipTemplate && tooltipTemplate) || false}
-                      tooltipProps={{
-                        value: average,
-                        labelLong:
-                          !!weekdayOrder &&
-                          !!currentDayIndex &&
-                          !!weekdayOrder[currentDayIndex] &&
-                          !!weekdayOrder[currentDayIndex].weekday &&
-                          weekdayOrder[currentDayIndex].weekday,
-                        average: average,
-                        platform: ucfirst(cvScoreData.platform),
-                      }}
-                    />
-                  </React.Fragment>
-                )}
-              </React.Fragment>
-            )}
+            {newData && this.renderNewData(newData)}
           </div>
-          {labelPositionRight && labelsData && (
-            <div
-              className={classnames(style.labelContainer, {
-                [`${labelContainerClassname}`]: !!labelContainerClassname,
-              })}
-            >
-              <Labels
-                data={labelsData}
-                removeMargin={!!removeLabelMargin ? true : false}
-              />
-            </div>
-          )}
+          {labelPositionRight && labelsData && this.renderLabelsData()}
         </div>
-        {labelPositionBottom && labelsData && (
-          <div
-            className={classnames(style.labelContainer, {
-              [`${labelContainerClassname}`]: !!labelContainerClassname,
-            })}
-          >
-            <Labels
-              data={labelsData}
-              removeMargin={!!removeLabelMargin ? true : false}
-            />
-          </div>
-        )}
+        {labelPositionBottom && labelsData && this.renderLabelsData()}
       </React.Fragment>
     )
   }
