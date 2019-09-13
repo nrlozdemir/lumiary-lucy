@@ -416,6 +416,25 @@ class DoughnutChart extends React.Component {
     )
   }
 
+  reduceNewData = (data, dataLimit = 0) => {
+    return (
+      data
+        .slice(0, dataLimit - 1)
+        .reduce((acc, val, idx) => {
+          let totalToAdd
+          if (idx === dataLimit - 2) {
+            const total = acc.reduce((a, b) => a + b, 0)
+            totalToAdd = Math.round(100 - total - val)
+          }
+          const result = [...acc, val]
+          if (totalToAdd) {
+            result.push(totalToAdd)
+          }
+          return result
+        }, [])
+    )
+  }
+
   render() {
     const {
       data,
@@ -448,20 +467,7 @@ class DoughnutChart extends React.Component {
         datasets: [
           {
             ...datasets[0],
-            data: datasets[0].data
-              .slice(0, dataLimit - 1)
-              .reduce((acc, val, idx) => {
-                let totalToAdd
-                if (idx === dataLimit - 2) {
-                  const total = acc.reduce((a, b) => a + b, 0)
-                  totalToAdd = Math.round(100 - total - val)
-                }
-                const result = [...acc, val]
-                if (totalToAdd) {
-                  result.push(totalToAdd)
-                }
-                return result
-              }, []),
+            data: this.reduceNewData(datasets[0].data, dataLimit),
           },
         ],
       }
