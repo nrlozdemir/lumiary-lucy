@@ -54,6 +54,12 @@
   }
 }
 :global {
+  .react-select__control {
+    &.react-select__control--menu-is-open {
+      z-index: 100;
+    }
+  }
+
   .__react_component_tooltip {
     border-radius: 8px;
     display: inline-block;
@@ -65,7 +71,7 @@
     pointer-events: none;
     top: -999em;
     visibility: hidden;
-    z-index: 999;
+    z-index: 9999 !important;
     width: 300px;
     font-family: $font-family-ClanOT;
     font-size: 12px;
@@ -79,6 +85,10 @@
 
     &.removePadding {
       padding: 0px;
+    }
+
+    &.HorizontalBarChart {
+      width: auto !important;
     }
 
     &.CircleChart {

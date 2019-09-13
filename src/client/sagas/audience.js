@@ -122,7 +122,7 @@ function* getAudiencePerformanceData({ payload = {} }) {
       updatedResponse = Object.keys(updatedResponse).reduce((newData, key) => {
         newData[key] = normalizationBubbleMapping(
           updatedResponse[key],
-          50,
+          55,
           70,
           'audience'
         )
@@ -208,10 +208,15 @@ function* getAudienceGenderData({ payload = {} }) {
     )
 
     yield put(
-      actions.getAudienceGenderDataSuccess(
-        //percentageManipulation(convertDurationLabels(response, property))
-        percentageManipulation(response)
-      )
+      actions.getAudienceGenderDataSuccess({
+        dataset: percentageManipulation(
+          convertDurationLabels(response, property)
+        ),
+        tooltipData: {
+          property,
+          platform,
+        },
+      })
     )
   } catch (err) {
     console.log(err)

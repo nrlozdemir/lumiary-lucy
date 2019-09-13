@@ -44,6 +44,10 @@
   .marketViewSlickSlider {
     max-height: 100%;
 
+    .slick-list {
+      height: 346px;
+    }
+
     .item {
       position: relative;
       opacity: 0.2;
@@ -186,6 +190,12 @@
       li:last-child {
         // display: none;
       }
+    }
+  }
+
+  .react-select__control {
+    &.react-select__control--menu-is-open {
+      z-index: 100;
     }
   }
 

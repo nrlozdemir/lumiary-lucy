@@ -230,7 +230,7 @@ class Reports extends Component {
                 isClosable={true}
                 shouldCloseOnEsc={true}
                 shouldCloseOnOverlayClick={true}
-                title={selectedReportCardKey && selectedReportCardKey.title}
+                title={selectedReportCardKey && `${selectedReportCardKey.title} Report`}
               >
                 {this.renderModalInside()}
               </ReportsModal>

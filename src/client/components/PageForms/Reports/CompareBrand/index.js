@@ -53,7 +53,7 @@ class CompareBrand extends React.PureComponent {
                 </div>
 
                 <div className={style.formGroup}>
-                  <p className={style.label}>Title</p>
+                  <p className={style.label}>Report Title</p>
                   <Field
                     component={Input}
                     id="title"

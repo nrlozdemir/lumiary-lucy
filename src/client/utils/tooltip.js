@@ -2,6 +2,30 @@ import React from 'react'
 import { percentageBeautifier } from 'Utils/datasets'
 import { metricSuffix, ucfirst } from 'Utils'
 
+const generateTitleBodyStyle = (obj = {}, domStyle = false) => {
+  let styleResult
+
+  if (domStyle === true) {
+    styleResult = {}
+  } else {
+    styleResult = ''
+  }
+  Object.keys(obj).map((s, i) => {
+    const value = obj[s]
+    if (domStyle === false) {
+      styleResult += `${s}:${value};`
+    } else {
+      const pos = s.split('-')
+      if (!!pos) {
+        s = `${pos[0]}${ucfirst(pos[1])}`
+        s = s.replace('-', '')
+      }
+      styleResult[s] = value
+    }
+  })
+  return styleResult
+}
+
 const getGlobalStyle = (custom = { title: {}, body: {} }, domStyle = false) => {
   const title = {
     'font-family': 'ClanOT',
@@ -29,44 +53,8 @@ const getGlobalStyle = (custom = { title: {}, body: {} }, domStyle = false) => {
     ...custom.body,
   }
 
-  let titleStyle
-  let bodyStyle
-
-  if (domStyle === true) {
-    titleStyle = {}
-    bodyStyle = {}
-  } else {
-    titleStyle = ''
-    bodyStyle = ''
-  }
-
-  Object.keys(title).map((s, i) => {
-    const value = title[s]
-    if (domStyle === false) {
-      titleStyle += `${s}:${value};`
-    } else {
-      const pos = s.split('-')
-      if (!!pos) {
-        s = `${pos[0]}${ucfirst(pos[1])}`
-        s = s.replace('-', '')
-      }
-      titleStyle[s] = value
-    }
-  })
-
-  Object.keys(body).map((s, i) => {
-    const value = body[s]
-    if (domStyle === false) {
-      bodyStyle += `${s}:${value};`
-    } else {
-      const pos = s.split('-')
-      if (!!pos) {
-        s = `${pos[0]}${ucfirst(pos[1])}`
-        s = s.replace('-', '')
-      }
-      bodyStyle[s] = value
-    }
-  })
+  const titleStyle = generateTitleBodyStyle(title, domStyle)
+  const bodyStyle = generateTitleBodyStyle(body, domStyle)
 
   return {
     title: !!titleStyle && titleStyle,
@@ -134,6 +122,13 @@ const CircleChartTemplate = (props) => {
   )
 }
 
+const renderRepresentsVideoText = (props = {}, propVal = 'label') => {
+  return `represents video with ${(!!props[propVal] &&
+    'aeiou'.indexOf(props[propVal][0].toLowerCase()) !== -1 &&
+    'an') ||
+    'a'}<br> `
+}
+
 const DoughnutChartTemplate = function(props) {
   const style = getGlobalStyle()
 
@@ -143,14 +138,11 @@ const DoughnutChartTemplate = function(props) {
     props.itemLabel}`
   el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
   el += `${percentageBeautifier(props.value)}% of your library<br> `
-  el += `represents video with ${(!!props.label &&
-    'aeiou'.indexOf(props.label[0].toLowerCase()) !== -1 &&
-    'an') ||
-    'a'}<br> `
+  el += renderRepresentsVideoText(props)
   el += `${!!props.label && props.label.toLowerCase()} of ${!!props.itemLabel &&
     props.itemLabel}`
   el += '</div>'
-
+  
   return el
 }
 
@@ -163,10 +155,7 @@ const VerticalStackedBarChartTemplate = function(props) {
     props.label}`
   el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
   el += `${percentageBeautifier(props.value)}% of your library<br> `
-  el += `represents video with ${(!!props.propertyValue &&
-    'aeiou'.indexOf(props.propertyValue[0].toLowerCase()) !== -1 &&
-    'an') ||
-    'a'}<br> `
+  el += renderRepresentsVideoText(props, 'propertyValue')
   el += `${!!props.propertyValue &&
     props.propertyValue.toLowerCase()} of ${!!props.label &&
     props.label.toLowerCase()}`
@@ -212,14 +201,43 @@ const RadarChartTemplate = function(props) {
   return el
 }
 
+const HorizontalBarChartTemplate = function(props) {
+  const style = getGlobalStyle({}, true)
+
+  const pStyle = {
+    margin: '0px',
+    padding: '0px',
+    fontFamily: 'ClanOT',
+    fontSize: '12px',
+    lineHeight: '1.67',
+  }
+
+  return (
+    <React.Fragment>
+      <div className="chartjs-tooltip-title" style={style.title}>
+        {percentageBeautifier(!!props.value && props.value)}%{'  '}
+        {!!props.property && props.property} {!!props.metric && props.metric}
+      </div>
+      <div className="chartjs-tooltip-body" style={style.body}>
+        <p style={pStyle}>
+          {percentageBeautifier(!!props.value && props.value)}% of{' '}
+          {!!props.gender && props.gender.toLowerCase()}
+          {`s`} prefer
+        </p>
+        <p style={pStyle}>
+          videos that are {!!props.property && props.property.toLowerCase()}
+        </p>
+        <p style={pStyle}>{!!props.metric && props.metric.toLowerCase()}</p>
+      </div>
+    </React.Fragment>
+  )
+}
+
 const modifyTooltip = function(props, conf = {}) {
-  //console.log('modify tooltip props: ', props)
   const { options = {} } = props
   return {
     enabled: false,
     custom: function(tooltipModel) {
-      //console.log('tooltipModel', tooltipModel)
-      //!!tooltipModel.dataPoints && console.log(tooltipModel.dataPoints[0])
 
       const datasetIndex =
         (!!tooltipModel &&
@@ -305,23 +323,7 @@ const modifyTooltip = function(props, conf = {}) {
         props.data.properties[datasetIndex]
 
       const metric = !!props && !!props.metric && props.metric
-
       const platform = !!props && !!props.platform && props.platform
-
-      /*
-      console.log('props:', props)
-      console.log('datasetIndex:', datasetIndex)
-      console.log('index:', index)
-      console.log('previousIndex: ', previousIndex)
-      console.log('value: ', value)
-      console.log('previousValue: ', previousValue)
-      console.log('difference: ', difference)
-      console.log('itemLabel: ', itemLabel)
-      console.log('propertyValue: ', propertyValue)
-      console.log('propertyTitle: ', propertyTitle)
-      console.log('metric: ', metric)
-      console.log('platform: ', platform)
-      */
 
       const defaults = {
         maxWidth: 240,
@@ -341,7 +343,6 @@ const modifyTooltip = function(props, conf = {}) {
         tolerance: 60,
         position: options.position || false,
       }
-      //console.log('defaults', defaults)
 
       // Tooltip Element
       let tooltipEl = document.getElementById('chartjs-tooltip')
@@ -436,6 +437,15 @@ const modifyTooltip = function(props, conf = {}) {
             value: value,
           }),
           RadarChartTemplate: RadarChartTemplate({
+            label: (!!label && label) || '',
+            value: (!!value && value) || 0,
+            labelLong: (!!labelLong && labelLong) || '',
+            difference: !!difference && difference | 0,
+            itemLabel: (!!itemLabel && itemLabel) || '',
+            metric: (!!metric && metric) || '',
+            platform: (!!platform && platform) || '',
+          }),
+          HorizontalBarChartTemplate: HorizontalBarChartTemplate({
             label: (!!label && label) || '',
             value: (!!value && value) || 0,
             labelLong: (!!labelLong && labelLong) || '',
@@ -554,6 +564,7 @@ const modifyTooltip = function(props, conf = {}) {
         !!props.template &&
         props.template === 'VerticalStackedBarChartTemplate'
       ) {
+        caretEl.style = {}
         let barDataModel
         if (tooltipModel.dataPoints) {
           const { index, datasetIndex } = tooltipModel.dataPoints[0]
@@ -598,6 +609,7 @@ const modifyTooltip = function(props, conf = {}) {
         !!props.template &&
         props.template === 'HorizontalStackedBarChartTemplate'
       ) {
+        caretEl.style = {}
         let barDataModel
         if (tooltipModel.dataPoints) {
           const { index, datasetIndex } = tooltipModel.dataPoints[0]
@@ -660,4 +672,4 @@ const modifyTooltip = function(props, conf = {}) {
   }
 }
 
-export { modifyTooltip, CircleChartTemplate }
+export { modifyTooltip, CircleChartTemplate, HorizontalBarChartTemplate }
