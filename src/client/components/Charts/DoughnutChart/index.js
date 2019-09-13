@@ -64,6 +64,7 @@ class DoughnutChart extends React.Component {
       </div>
     )
   }
+  
   generateTooltip = (newData, tooltipData = {}, chartValues = []) => {
     const { tooltipType = 'basic', themeContext = {}, tooltipMode = 'dataset', slicePiecesWidth = false } = this.props
     const { colors : themes = {} } = themeContext
@@ -109,6 +110,7 @@ class DoughnutChart extends React.Component {
           },
         })))
   }
+
   generateLabelFormatter = (value) => {
     const { slicePiecesWidth = false, dataLabelFunction, dataLabelInsert } = this.props
     if (!value) return
@@ -128,6 +130,74 @@ class DoughnutChart extends React.Component {
     }
     return value
   }
+
+  renderAverage = () => {
+    const { 
+      average,
+      themeContext = {},
+      cvScoreData = {},
+      tooltipCaretPosition = false,
+      tooltipTemplate = false,
+      currentDayIndex = false,
+      weekdayOrder = false
+    } = this.props
+    const { colors : themes = {} } = themeContext
+    const tooltipKey = Math.random()
+
+    return (
+      <React.Fragment>
+        <div
+          className={style.circleContainer}
+          style={{
+            transform: `translate(-50%, 0) rotate(${(average /
+              100) *
+              360}deg)`,
+          }}
+        >
+          <div className={style.circleWrapper}>
+            <div
+              className={classnames(style.circleTick, {
+                [style.dark]: themes.themeType === 'dark',
+                [style.light]: themes.themeType === 'light',
+              })}
+              data-tip={`${ucfirst(
+                cvScoreData.platform || ''
+              )} Average | ${average}`}
+              data-for={`panoptic-cvScore-${tooltipKey}`}
+            />
+          </div>
+        </div>
+        <ToolTip
+          effect="solid"
+          place={
+            (!!tooltipCaretPosition &&
+              ((tooltipCaretPosition == 'left'
+                ? 'right'
+                : 'left') ||
+                (tooltipCaretPosition == 'right'
+                  ? 'left'
+                  : 'left'))) ||
+            'left'
+          }
+          smallTooltip
+          id={`panoptic-cvScore-${tooltipKey}`}
+          template={(!!tooltipTemplate && tooltipTemplate) || false}
+          tooltipProps={{
+            value: average,
+            labelLong:
+              !!weekdayOrder &&
+              !!currentDayIndex &&
+              !!weekdayOrder[currentDayIndex] &&
+              !!weekdayOrder[currentDayIndex].weekday &&
+              weekdayOrder[currentDayIndex].weekday,
+            average: average,
+            platform: ucfirst(cvScoreData.platform || ''),
+          }}
+        />
+      </React.Fragment>
+    )
+  }
+
   render() {
     const {
       width,
@@ -159,17 +229,11 @@ class DoughnutChart extends React.Component {
       customDoughnutContainer,
       customChartWrapper,
       average,
-      cvScoreData = {},
       slicePiecesWidth = false,
       datasetOptions = {},
       removeTooltip = false,
       showAllData = false,
-      tooltipCaretPosition = false,
-      tooltipTemplate = false,
-      currentDayIndex = false,
-      weekdayOrder = false,
     } = this.props
-    console.log('average :', average)
 
     const themes = this.props.themeContext.colors
     let plugins = []
@@ -334,12 +398,6 @@ class DoughnutChart extends React.Component {
       }
     }
 
-    /*
-    tooltipMode: (dataset, nearest)
-    */
-    const tooltipMode = this.props.tooltipMode || 'dataset'
-
-    const tooltipKey = Math.random()
     return (
       <React.Fragment>
         <div
@@ -417,58 +475,7 @@ class DoughnutChart extends React.Component {
                     cutoutPercentage: cutoutPercentage,
                   }}
                 />
-                {average && (
-                  <React.Fragment>
-                    <div
-                      className={style.circleContainer}
-                      style={{
-                        transform: `translate(-50%, 0) rotate(${(average /
-                          100) *
-                          360}deg)`,
-                      }}
-                    >
-                      <div className={style.circleWrapper}>
-                        <div
-                          className={classnames(style.circleTick, {
-                            [style.dark]: themes.themeType === 'dark',
-                            [style.light]: themes.themeType === 'light',
-                          })}
-                          data-tip={`${ucfirst(
-                            cvScoreData.platform || ''
-                          )} Average | ${average}`}
-                          data-for={`panoptic-cvScore-${tooltipKey}`}
-                        />
-                      </div>
-                    </div>
-                    <ToolTip
-                      effect="solid"
-                      place={
-                        (!!tooltipCaretPosition &&
-                          ((tooltipCaretPosition == 'left'
-                            ? 'right'
-                            : 'left') ||
-                            (tooltipCaretPosition == 'right'
-                              ? 'left'
-                              : 'left'))) ||
-                        'left'
-                      }
-                      smallTooltip
-                      id={`panoptic-cvScore-${tooltipKey}`}
-                      template={(!!tooltipTemplate && tooltipTemplate) || false}
-                      tooltipProps={{
-                        value: average,
-                        labelLong:
-                          !!weekdayOrder &&
-                          !!currentDayIndex &&
-                          !!weekdayOrder[currentDayIndex] &&
-                          !!weekdayOrder[currentDayIndex].weekday &&
-                          weekdayOrder[currentDayIndex].weekday,
-                        average: average,
-                        platform: ucfirst(cvScoreData.platform || ''),
-                      }}
-                    />
-                  </React.Fragment>
-                )}
+                {average && this.renderAverage()}
               </React.Fragment>
             )}
           </div>
