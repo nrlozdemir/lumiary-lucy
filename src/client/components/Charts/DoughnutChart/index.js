@@ -198,6 +198,14 @@ class DoughnutChart extends React.Component {
     )
   }
 
+  generateBgColor = (data) => {
+    const bgColor = 
+      data
+        ? data.backgroundColor.slice(0, 5)
+        : null 
+    return bgColor
+  }
+
   renderNewData = (newData) => {
     const {
       width,
@@ -265,11 +273,9 @@ class DoughnutChart extends React.Component {
       })
     }
 
-    const bgColor = !!datasets[0]
-      ? datasets[0].backgroundColor.slice(0, 5)
-      : null
-    let chartBackgroundColors = bgColor
-    let chartHoverBackgroundColors = bgColor
+
+    let chartBackgroundColors = this.generateBgColor(datasets[0])
+    let chartHoverBackgroundColors = this.generateBgColor(datasets[0])
     let chartValuesTemp = []
     let tooltipLabels = !!newData && newData.labels
 
