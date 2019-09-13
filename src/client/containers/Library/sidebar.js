@@ -107,7 +107,9 @@ class Sidebar extends React.Component {
       frameRate: [
         { value: '24', label: '24 Fps' },
         { value: '30', label: '30 Fps' },
+        { value: '40', label: '40 Fps' },
         { value: '50', label: '50 Fps' },
+        { value: '60', label: '60 Fps' },
       ],
       aspectRatio: [
         { value: '16:9', label: '16:9' },
@@ -269,7 +271,11 @@ class Sidebar extends React.Component {
                   onClick={() =>
                     formChange === true && setSidebarVisible(false)
                   }
-                  textColor={!formChange ? colors.customSelectActiveBorder : colors.searchInputActiveColor}
+                  textColor={
+                    !formChange
+                      ? colors.customSelectActiveBorder
+                      : colors.searchInputActiveColor
+                  }
                   buttonText="Apply Filters"
                 />
               </div>
