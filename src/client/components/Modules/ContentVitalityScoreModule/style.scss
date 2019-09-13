@@ -8,14 +8,19 @@
   position: absolute;
   z-index: 200;
   left: 14px;
-  top: calc(50% + 70px);
+  top: calc(100%);
   transform: rotate(-90deg);
   transform-origin: top left;
-  font-family: $font-family-ClanOT;
-  // color: #fff;
-  font-size: 14px;
+  font-family: $font-family-ClanOTNews;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
   height: 20px;
-  width: 150px;
+  width: 295px;
+  text-align: center;
 }
 
 .percentageCol {
