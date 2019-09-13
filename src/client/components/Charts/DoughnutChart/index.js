@@ -159,7 +159,7 @@ class DoughnutChart extends React.Component {
       customDoughnutContainer,
       customChartWrapper,
       average,
-      cvScoreData,
+      cvScoreData = {},
       slicePiecesWidth = false,
       datasetOptions = {},
       removeTooltip = false,
@@ -434,7 +434,7 @@ class DoughnutChart extends React.Component {
                             [style.light]: themes.themeType === 'light',
                           })}
                           data-tip={`${ucfirst(
-                            cvScoreData.platform
+                            cvScoreData.platform || ''
                           )} Average | ${average}`}
                           data-for={`panoptic-cvScore-${tooltipKey}`}
                         />
@@ -464,7 +464,7 @@ class DoughnutChart extends React.Component {
                           !!weekdayOrder[currentDayIndex].weekday &&
                           weekdayOrder[currentDayIndex].weekday,
                         average: average,
-                        platform: ucfirst(cvScoreData.platform),
+                        platform: ucfirst(cvScoreData.platform || ''),
                       }}
                     />
                   </React.Fragment>
