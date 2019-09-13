@@ -77,14 +77,12 @@ class DoughnutChart extends React.Component {
             filter: (tooltipItem) => {
               if (!!slicePiecesWidth) {
                 if (
-                  tooltipData['labels'][tooltipItem.index] !==
-                    false &&
+                  !!tooltipData['labels'][tooltipItem.index] &&
                   tooltipMode === 'dataset'
                 ) {
                   return chartValues
                 } else if (
-                  tooltipData['labels'][tooltipItem.index] !==
-                    false &&
+                  !!tooltipData['labels'][tooltipItem.index] &&
                   tooltipMode === 'nearest'
                 ) {
                   return chartValues[tooltipItem.index]
