@@ -27,8 +27,8 @@ services:
     environment:
       PORT: 9000
       NODE_ENV: 'development'
-      # API_ROOT: 'https://azazzle-local.quickframe.com:8081'
-      API_ROOT: 'https://azazzle.staging.quickframe.com'
+      API_ROOT: 'https://azazzle-local.quickframe.com:8081'
+      # API_ROOT: 'https://azazzle.staging.quickframe.com'
       API_VERSION: 'v1'
       MEDIA_URL: 'https://s3.amazonaws.com/quickframe-media-staging/'
       QAPI_ROOT: 'https://api-local.quickframe.com:8080'

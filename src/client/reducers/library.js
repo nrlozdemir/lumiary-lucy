@@ -69,6 +69,7 @@ const libraryReducer = (state = initialState, action) => {
     case types.CHANGE_FILTER:
       return state
         .set('loading', fromJS(true))
+        .setIn(['data'], fromJS(initialState.toJS().data))
         .set('filters', fromJS(action.payload))
 
     default:
