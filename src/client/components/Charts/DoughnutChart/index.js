@@ -198,7 +198,7 @@ class DoughnutChart extends React.Component {
     )
   }
 
-  render() {
+  renderNewData = (newData) => {
     const {
       width,
       height,
@@ -220,29 +220,25 @@ class DoughnutChart extends React.Component {
       legendLabelsFontColor,
       legendLabelsFontSize,
       legendLabelsFontFamily,
-      labelsData,
-      labelPositionBottom,
-      labelPositionRight,
-      labelPositionLeft,
       cutoutPercentage,
-      customStyle,
-      customDoughnutContainer,
-      customChartWrapper,
       average,
       slicePiecesWidth = false,
       datasetOptions = {},
       removeTooltip = false,
       showAllData = false,
+      themeContext = {}
     } = this.props
 
-    const themes = this.props.themeContext.colors
+    const { colors: themes = {} } = themeContext
+    const { datasets = [] } = newData
+
     let plugins = []
     if (fillText) {
       const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
 
       plugins = [
         {
-          beforeDraw: function(chart) {
+          beforeDraw: function (chart) {
             const ctx = chart.chart.ctx
             const customFillText = textToUse.replace(/^\s+|\s+$/g, '')
 
@@ -257,51 +253,9 @@ class DoughnutChart extends React.Component {
         },
       ]
     }
-
-    if (!data) {
-      return null
-    }
-
-    const dataLimit = 5
-
-    let newData = { ...data }
-    const { datasets = [] } = newData
-
-    // If more than 5 datapoints, take the first 4, and bucket the rest
-    if (
-      !!newData &&
-      !!newData.datasets &&
-      !!newData.datasets[0] &&
-      !!newData.labels &&
-      newData.labels.length > dataLimit
-    ) {
-      newData = {
-        labels: [...newData.labels.slice(0, dataLimit - 1), 'Other'],
-        datasets: [
-          {
-            ...newData.datasets[0],
-            data: newData.datasets[0].data
-              .slice(0, dataLimit - 1)
-              .reduce((acc, val, idx) => {
-                let totalToAdd
-                if (idx === dataLimit - 2) {
-                  const total = acc.reduce((a, b) => a + b, 0)
-                  totalToAdd = Math.round(100 - total - val)
-                }
-                const result = [...acc, val]
-                if (totalToAdd) {
-                  result.push(totalToAdd)
-                }
-                return result
-              }, []),
-          },
-        ],
-      }
-    }
-
     // for opacity backgrounds
     let chartValues = []
-    if(datasets[0]) {
+    if (datasets[0]) {
       chartValues = datasets[0].data.map((value) => {
         let val = parseFloat(value)
         if (!average && val <= 5 && !showAllData) {
@@ -312,7 +266,7 @@ class DoughnutChart extends React.Component {
     }
 
     const bgColor = !!datasets[0]
-      ? newData.datasets[0].backgroundColor.slice(0, 5)
+      ? datasets[0].backgroundColor.slice(0, 5)
       : null
     let chartBackgroundColors = bgColor
     let chartHoverBackgroundColors = bgColor
@@ -382,17 +336,132 @@ class DoughnutChart extends React.Component {
     let tooltipData = {}
 
     if (
-      !!newData &&
-      !!newData.datasets &&
-      !!newData.datasets[0] &&
+      !!datasets[0] &&
       !!chartValues
     ) {
       tooltipData = {
         labels: tooltipLabels,
         datasets: [
           {
-            ...newData.datasets[0],
+            ...datasets[0],
             data: chartValues,
+          },
+        ],
+      }
+    }
+    return (
+      <React.Fragment>
+        <Doughnut
+          key={Math.random()}
+          width={width}
+          height={height}
+          data={{
+            labels: newData.labels,
+            datasets: [
+              {
+                ...datasetOptions,
+                shadowColor: themes.doughnutChartShadowColor,
+                hoverShadowColor: themes.doughnutChartShadowColor,
+                data: chartValues,
+                backgroundColor: chartBackgroundColors,
+                borderColor:
+                  datasetsBorderColor || themes.moduleBackground,
+                hoverBorderColor:
+                  datasetsHoverBorderColor || themes.moduleBackground,
+                hoverBackgroundColor: chartHoverBackgroundColors,
+              },
+            ],
+          }}
+          plugins={plugins}
+          options={{
+            responsive: false,
+            tooltips:
+              !average &&
+              !removeTooltip &&
+              this.generateTooltip(newData, tooltipData, chartValues),
+            legend: {
+              display: legend,
+              labels: {
+                fontColor: legendLabelsFontColor,
+                fontSize: legendLabelsFontSize,
+                fontFamily: legendLabelsFontFamily,
+              },
+            },
+            layout: {
+              padding: layoutPadding,
+            },
+            plugins: {
+              datalabels: {
+                display: displayDataLabels,
+                formatter: this.generateLabelFormatter,
+                color: dataLabelColor,
+                font: {
+                  family: dataLabelFontFamily,
+                  weight: dataLabelFontWeight,
+                  size: dataLabelFontSize,
+                },
+              },
+            },
+            elements: {
+              arc: {
+                borderWidth: datasetsBorderWidth,
+                hoverBorderColor: datasetsHoverBorderColor,
+              },
+            },
+            cutoutPercentage: cutoutPercentage,
+          }}
+        />
+        {average && this.renderAverage()}
+      </React.Fragment>
+    )
+  }
+
+  render() {
+    const {
+      data,
+      labelsData,
+      labelPositionBottom,
+      labelPositionRight,
+      labelPositionLeft,
+      customStyle,
+      customDoughnutContainer,
+      customChartWrapper,
+      average,
+    } = this.props
+
+    if (!data) {
+      return null
+    }
+    
+    const dataLimit = 5
+    let newData = { ...data }
+    const { datasets = [] } = newData
+
+    // If more than 5 datapoints, take the first 4, and bucket the rest
+    if (
+      !!datasets[0] &&
+      !!newData.labels &&
+      newData.labels.length > dataLimit
+    ) {
+      newData = {
+        labels: [...newData.labels.slice(0, dataLimit - 1), 'Other'],
+        datasets: [
+          {
+            ...datasets[0],
+            data: datasets[0].data
+              .slice(0, dataLimit - 1)
+              .reduce((acc, val, idx) => {
+                let totalToAdd
+                if (idx === dataLimit - 2) {
+                  const total = acc.reduce((a, b) => a + b, 0)
+                  totalToAdd = Math.round(100 - total - val)
+                }
+                const result = [...acc, val]
+                if (totalToAdd) {
+                  result.push(totalToAdd)
+                }
+                return result
+              }, []),
           },
         ],
       }
@@ -413,71 +482,7 @@ class DoughnutChart extends React.Component {
               [style.displayFlex]: !!average,
             })}
           >
-            {newData && (
-              <React.Fragment>
-                <Doughnut
-                  key={Math.random()}
-                  width={width}
-                  height={height}
-                  data={{
-                    labels: newData.labels,
-                    datasets: [
-                      {
-                        ...datasetOptions,
-                        shadowColor: themes.doughnutChartShadowColor,
-                        hoverShadowColor: themes.doughnutChartShadowColor,
-                        data: chartValues,
-                        backgroundColor: chartBackgroundColors,
-                        borderColor:
-                          datasetsBorderColor || themes.moduleBackground,
-                        hoverBorderColor:
-                          datasetsHoverBorderColor || themes.moduleBackground,
-                        hoverBackgroundColor: chartHoverBackgroundColors,
-                      },
-                    ],
-                  }}
-                  plugins={plugins}
-                  options={{
-                    responsive: false,
-                    tooltips:
-                      !average &&
-                      !removeTooltip &&
-                      this.generateTooltip(newData, tooltipData, chartValues),
-                    legend: {
-                      display: legend,
-                      labels: {
-                        fontColor: legendLabelsFontColor,
-                        fontSize: legendLabelsFontSize,
-                        fontFamily: legendLabelsFontFamily,
-                      },
-                    },
-                    layout: {
-                      padding: layoutPadding,
-                    },
-                    plugins: {
-                      datalabels: {
-                        display: displayDataLabels,
-                        formatter: this.generateLabelFormatter,
-                        color: dataLabelColor,
-                        font: {
-                          family: dataLabelFontFamily,
-                          weight: dataLabelFontWeight,
-                          size: dataLabelFontSize,
-                        },
-                      },
-                    },
-                    elements: {
-                      arc: {
-                        borderWidth: datasetsBorderWidth,
-                        hoverBorderColor: datasetsHoverBorderColor,
-                      },
-                    },
-                    cutoutPercentage: cutoutPercentage,
-                  }}
-                />
-                {average && this.renderAverage()}
-              </React.Fragment>
-            )}
+            {newData && this.renderNewData(newData)}
           </div>
           {labelPositionRight && labelsData && this.renderLabelsData()}
         </div>
