@@ -2,6 +2,7 @@ import React from 'react'
 import styles from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import { isEqual } from 'lodash'
+import ToolTip from 'Components/ToolTip'
 
 class HorizontalBarChart extends React.Component {
   constructor(props) {
@@ -22,28 +23,49 @@ class HorizontalBarChart extends React.Component {
     return null
   }
 
-  renderBar = (bar) => {
+  renderBar = (bar, label = false, gender = false, idx = false) => {
+    const tooltipKey = Math.random()
     return (
-      <div
-        className={styles.bar}
-        style={{
-          backgroundColor: this.state.bars.backgroundColor,
-          width: `${bar}%`,
-          boxShadow: ` 0 2px 4px 0 ${
-            this.props.themeContext.colors.barChartShadow
-          }`,
-        }}
-      >
+      <React.Fragment>
         <div
-          style={
-            this.props.reverse
-              ? { right: 'calc(100% + 10px)' }
-              : { left: 'calc(100% + 10px)' }
-          }
+          className={styles.bar}
+          style={{
+            backgroundColor: this.state.bars.backgroundColor,
+            width: `${bar}%`,
+            boxShadow: ` 0 2px 4px 0 ${this.props.themeContext.colors.barChartShadow}`,
+          }}
+          data-tip={'Tooltip Text'}
+          data-for={`hc-${tooltipKey}`}
         >
-          {bar}%
+          <div
+            style={
+              this.props.reverse
+                ? { right: 'calc(100% + 10px)' }
+                : { left: 'calc(100% + 10px)' }
+            }
+          ></div>
         </div>
-      </div>
+        <ToolTip
+          effect="solid"
+          place="top"
+          smallTooltip
+          id={`hc-${tooltipKey}`}
+          template="HorizontalBarChart"
+          tooltipProps={{
+            value: !!bar && bar,
+            label: '',
+            metric: 'Pacing',
+            property:
+              (!!label &&
+                Array.isArray(label) &&
+                !!label[idx] &&
+                !!label[idx] != '' &&
+                label[idx]) ||
+              (!!label && label),
+            gender: !!gender && gender,
+          }}
+        />
+      </React.Fragment>
     )
   }
 
@@ -53,7 +75,9 @@ class HorizontalBarChart extends React.Component {
       themeContext: { colors },
       grids,
       reverse,
+      gender = false,
     } = this.props
+
     return (
       <div
         className={styles.barWrapper}
@@ -73,7 +97,14 @@ class HorizontalBarChart extends React.Component {
             !!bars.data &&
             !!bars.data.length &&
             bars.data.map((bar, idx) => (
-              <React.Fragment key={idx}>{this.renderBar(bar)}</React.Fragment>
+              <React.Fragment key={idx}>
+                {this.renderBar(
+                  bar,
+                  !!bars.label && bars.label,
+                  !!gender && gender,
+                  idx
+                )}
+              </React.Fragment>
             ))}
         </div>
         <div className={styles.grids}>

@@ -75,7 +75,9 @@ class SingleValue extends React.Component {
 
       const isPlatform = Object.keys(platforms).includes(subLabel.toLowerCase())
 
-      label = `${isPlatform ? data.label : subLabel} ${isPlatform ? 'on' : '-'} ${isPlatform ? subLabel : data.label}`
+      label = `${isPlatform ? data.label : subLabel} ${
+        isPlatform ? 'on' : '-'
+      } ${isPlatform ? subLabel : data.label}`
     }
 
     return (
@@ -102,7 +104,7 @@ const Select = (props) => {
 
   let args = props.input ? props.input : props
   let { name, onChange, value } = args
-  
+
   let labels = options.map(({ label, options: labelOptions }) => {
     if (labelOptions) {
       return labelOptions.map((o) => `${label} on ${o.label}`.length)
@@ -157,7 +159,7 @@ const Select = (props) => {
           : isReportDropdown
           ? themes.moduleBorder
           : themes.inputActiveColor,
-        width: 'max-content'
+        width: 'max-content',
       }
     },
     input: (styles, { data, isDisabled, isFocused, isSelected }) => {
