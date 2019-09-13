@@ -99,9 +99,9 @@ class Sidebar extends React.Component {
         { value: '65+', label: '65 and over' },
       ],
       videoFormat: [
-        { value: 'liveAction', label: 'Live Action' },
+        { value: 'live action', label: 'Live Action' },
         { value: 'cinemagraph', label: 'Cinemagraph' },
-        { value: 'stopMotion', label: 'Stop Motion' },
+        { value: 'stop motion', label: 'Stop Motion' },
         { value: 'animation', label: 'Animation' },
       ],
       frameRate: [
