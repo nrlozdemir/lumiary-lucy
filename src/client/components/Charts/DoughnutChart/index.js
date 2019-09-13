@@ -145,8 +145,6 @@ class DoughnutChart extends React.Component {
       fillTextFontFamily,
       fillText,
       displayDataLabels,
-      dataLabelFunction,
-      dataLabelInsert,
       dataLabelColor,
       dataLabelFontFamily,
       dataLabelFontSize,
