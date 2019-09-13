@@ -84,7 +84,6 @@ class Sidebar extends React.Component {
         { value: 'mostLikedVideos', label: 'Most Liked Videos' },
         { value: 'mostSharedVideos', label: 'Most Shared Videos' },
         { value: 'mostCommentedVideos', label: 'Most Commented Videos' },
-        { value: 'orderByCvScore', label: 'CvScore' },
       ],
       audienceGender: [
         { value: 'male', label: 'Male' },
