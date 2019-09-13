@@ -64,8 +64,8 @@ class DoughnutChart extends React.Component {
       </div>
     )
   }
-  generateTooltip = (newData) => {
-    const { tooltipType = 'basic', themeContext = {} } = this.props
+  generateTooltip = (newData, tooltipData = {}, chartValues = []) => {
+    const { tooltipType = 'basic', themeContext = {}, tooltipMode = 'dataset', slicePiecesWidth = false } = this.props
     const { colors : themes = {} } = themeContext
     
     return ((!!tooltipType &&
@@ -75,7 +75,7 @@ class DoughnutChart extends React.Component {
           {
             mode: tooltipMode,
             filter: (tooltipItem) => {
-              if (slicePiecesWidth !== false) {
+              if (!!slicePiecesWidth) {
                 if (
                   tooltipData['labels'][tooltipItem.index] !==
                     false &&
@@ -173,6 +173,7 @@ class DoughnutChart extends React.Component {
       currentDayIndex = false,
       weekdayOrder = false,
     } = this.props
+    console.log('average :', average)
 
     const themes = this.props.themeContext.colors
     let plugins = []
@@ -387,7 +388,7 @@ class DoughnutChart extends React.Component {
                     tooltips:
                       !average &&
                       !removeTooltip &&
-                      this.generateTooltip(newData),
+                      this.generateTooltip(newData, tooltipData, chartValues),
                     legend: {
                       display: legend,
                       labels: {
