@@ -60,7 +60,7 @@ class LineChartSection extends React.Component {
                   tooltips: customChartToolTip(colors, {
                     enabled: true,
                     callbacks: {
-                      ...(!!sectionData
+                      ...(!!modalData && !!sectionData
                         ? {
                             title: function(tooltipItem, data) {
                               const { datasetIndex, index } = tooltipItem[0]
