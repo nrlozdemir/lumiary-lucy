@@ -206,7 +206,7 @@ const ContentVitalityScoreModule = ({
             style={{ colors: colors.textColor }}
           >
             <div
-              data-vertical-title="Number Of Videos"
+              data-vertical-title="Number Of Videos Viewed"
               className={style.vitalityContainer}
             >
               <LineChart
@@ -520,24 +520,23 @@ const ContentVitalityScoreModule = ({
                   return (
                     <div className={percentageCol} key={idx}>
                       <div
-												className={cx(style.legend, {
-													[style.dark]: colors.themeType === 'dark',
-													[style.light]: colors.themeType === 'light',
-												})}
+                        className={cx(style.legend, {
+                          [style.dark]: colors.themeType === 'dark',
+                          [style.light]: colors.themeType === 'light',
+                        })}
                       >
-												{idx !== 1 && (<div
-													className={style.colorBubble}
-													style={{
-														backgroundColor:
-														bgColor.substr(
-																0,
-																4
-															) === '#fff'
-																? '#acb0be'
-																: bgColor,
-													}}
-												/>)}
-												<div>{names[idx]}</div>
+                        {idx !== 1 && (
+                          <div
+                            className={style.colorBubble}
+                            style={{
+                              backgroundColor:
+                                bgColor.substr(0, 4) === '#fff'
+                                  ? '#acb0be'
+                                  : bgColor,
+                            }}
+                          />
+                        )}
+                        <div>{names[idx]}</div>
                       </div>
                       {idx !== 2 && (
                         <div

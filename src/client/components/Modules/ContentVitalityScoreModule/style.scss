@@ -7,16 +7,19 @@
   content: attr(data-vertical-title);
   position: absolute;
   z-index: 200;
-  left: 14px;
-  top: calc(50% + 70px);
+  left: 26px;
+  top: calc(100%);
   transform: rotate(-90deg);
   transform-origin: top left;
-  font-family: $font-family-ClanOT;
-  // color: #fff;
-  font-size: 14px;
-  text-transform: uppercase;
-  height: 20px;
-  width: 150px;
+  font-family: $font-family-ClanOTNews;
+  font-size: 12px;
+  font-weight: normal;
+  font-style: normal;
+  font-stretch: normal;
+  line-height: normal;
+  letter-spacing: normal;
+  width: 295px;
+  text-align: center;
 }
 
 .percentageCol {
@@ -34,42 +37,42 @@
     font-size: 14px;
     padding: 8px 24px;
     margin: 15px 0 40px;
-		text-align: center;
-		display: flex;
-		align-items: center;
-		justify-content: center;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 
-		&.dark{
-			box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
-			color: #fff;
-			background-color: #545b79;
-		}
+    &.dark {
+      box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+      color: #fff;
+      background-color: #545b79;
+    }
 
-		&.light{
-			color: #505050;
-			box-shadow: 0 1px 2px 0 #bebebe;
-			background-color: #fff;
-		}
+    &.light {
+      color: #505050;
+      box-shadow: 0 1px 2px 0 #bebebe;
+      background-color: #fff;
+    }
 
-		.colorBubble{
-			width: 14px;
-			height: 14px;
-			border-radius: 14px;
-			margin-right: 8px;
-		}
+    .colorBubble {
+      width: 14px;
+      height: 14px;
+      border-radius: 14px;
+      margin-right: 8px;
+    }
 
-		&.dark{
-			.colorBubble{
-				border: 1px solid #fff;
-			}
-		}
+    &.dark {
+      .colorBubble {
+        border: 1px solid #fff;
+      }
+    }
 
-		&.light{
-			box-shadow: 0 1px 2px 0 #bebebe;
-			.colorBubble{
-				border: 1px solid #505050;
-			}
-		}
+    &.light {
+      box-shadow: 0 1px 2px 0 #bebebe;
+      .colorBubble {
+        border: 1px solid #505050;
+      }
+    }
   }
 
   .divider {
