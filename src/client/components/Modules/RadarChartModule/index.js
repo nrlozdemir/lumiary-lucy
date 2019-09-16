@@ -83,7 +83,11 @@ const RadarChartModule = ({
                   <div className={style.emptyData}>No Data Available</div>
                 )}
                 <div
-                  style={{ opacity: leftOpacity, width: width, height: height }}
+                  style={{ 
+                    opacity: leftOpacity,
+                    width: width,
+                    height: height
+                  }}
                 >
                   <RadarChart
                     data={checkData[0].data}
