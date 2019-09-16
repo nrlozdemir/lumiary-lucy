@@ -131,7 +131,7 @@ const RadarChartModule = ({
                 checkData,
                 isEmpty: leftIsEmpty,
                 side: 'left',
-                title,
+                title: leftTitle,
                 width,
                 height
               })}
@@ -139,7 +139,7 @@ const RadarChartModule = ({
                 checkData,
                 isEmpty: rightIsEmpty,
                 side: 'right',
-                title,
+                title: rightTitle,
                 width,
                 height
               })}
@@ -162,25 +162,14 @@ const RadarChartModule = ({
                     : emptyData[0].progress.length
                 } Dominant Colors`}</p>
               )}
-              <div
-                className={cx(style.label, {
-                  [style.dark]: colors.themeType === 'dark',
-                  [style.light]: colors.themeType === 'light',
-                })}
-                style={{
-                  opacity: rightOpacity,
-                }}
-              >
-                {rightProgressHasData || rightTitle ? (
-                  <React.Fragment>
-                    {rightTitle
-                      ? rightTitle
-                      : !!checkData && !!checkData[1] && checkData[1].type}
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>N/A</React.Fragment>
-                )}
-              </div>
+              {renderLabels({
+                checkData,
+                progressHasData: rightProgressHasData,
+                side: 'right',
+                isEmpty: rightIsEmpty,
+                colors,
+                title: rightTitle
+              })}
             </div>
             <div className={style.groupProgressBar}>
               <div
