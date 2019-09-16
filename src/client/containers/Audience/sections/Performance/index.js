@@ -12,7 +12,6 @@ import style from 'Containers/Audience/style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import MultipleNoDataModule from 'Components/MultipleNoDataModule'
 import { handleStyle, trackStyle, railStyle, dotStyle } from './style'
-import marks from './marks'
 
 const WrapperModule = ({ children, style, className }) => {
   return (
@@ -47,6 +46,48 @@ const moduleFilters = [
   },
 ]
 
+const RangeWithBadgeComponent = ({
+  themeType,
+  handleStyle,
+  trackStyle,
+  railStyle,
+  dotStyle,
+  parentCallback,
+}) => {
+  return (
+    <RangeWithBadge
+      customClass={classnames('customRangeSlider', {
+        dark: themeType === 'dark',
+        light: themeType === 'light',
+      })}
+      minValue={0}
+      maxValue={100}
+      input={{ onChange: (val) => parentCallback(val) }}
+      handleStyle={handleStyle}
+      trackStyle={trackStyle}
+      railStyle={railStyle}
+      min={0}
+      max={100}
+      tipProps={{
+        visible: true,
+        overlayClassName: classnames('customTooltip', {
+          dark: themeType === 'dark',
+          light: themeType === 'light',
+        }),
+        overlayStyle: {
+          background: 'none',
+          border: 'none',
+          boxShadow: 'none',
+        },
+        arrowContent: '',
+      }}
+      dotStyle={dotStyle}
+      step={1}
+      dots={true}
+    />
+  )
+}
+
 class Performance extends React.Component {
   constructor(props) {
     super(props)
@@ -55,6 +96,7 @@ class Performance extends React.Component {
       params: {},
     }
     this.updateSlider = _.debounce(this.updateSlider, 250)
+    this.callBack = this.callBack.bind(this)
   }
 
   updateSlider(val) {
@@ -68,7 +110,7 @@ class Performance extends React.Component {
     })
   }
 
-  callBack = (data, moduleKey) => {
+  callBack(data) {
     const { type, getAudiencePerformanceData } = this.props
     this.setState({
       params: data,
@@ -209,9 +251,17 @@ class Performance extends React.Component {
                                           }}
                                         >
                                           <span>
-                                            {bubble.percentage}% of {!!titles && !!titles[k] && titles[k].toLowerCase()}{`s`}{` `}
-                                            {bubble.min}-{bubble.max}{` `}<br />
-                                            prefer videos that{` `}<br />
+                                            {bubble.percentage}% of{' '}
+                                            {!!titles &&
+                                              !!titles[k] &&
+                                              titles[k].toLowerCase()}
+                                            {`s`}
+                                            {` `}
+                                            {bubble.min}-{bubble.max}
+                                            {` `}
+                                            <br />
+                                            prefer videos that{` `}
+                                            <br />
                                             {`are ${bubble.visual} paced`}
                                           </span>
                                         </div>
@@ -242,52 +292,18 @@ class Performance extends React.Component {
           </div>
 
           <div className="col-12-gutter-20" style={{ color: colors.textColor }}>
-            <style>
-              {`
-                .customTooltip {
-                  color: ${colors.textColor};
-                }
-                .customTooltip .rc-slider-tooltip-inner {
-                  color: ${colors.textColor};
-                }
-              `}
-              {(!!isEmpty || !!loading) &&
-                `.customTooltip .rc-slider-tooltip-inner {
-                    display: none;
-                }
-              `}
-            </style>
-            <RangeWithBadge
-              customClass={classnames('customRangeSlider', {
-                dark: colors.themeType === 'dark',
-                light: colors.themeType === 'light',
-              })}
-              minValue={0}
-              maxValue={100}
-              input={{ onChange: (val) => this.updateSlider(val) }}
-              handleStyle={handleStyle}
-              trackStyle={trackStyle}
-              railStyle={railStyle}
-              min={0}
-              max={100}
-              tipProps={{
-                visible: true,
-                overlayClassName: classnames('customTooltip', {
-                  dark: colors.themeType === 'dark',
-                  light: colors.themeType === 'light',
-                }),
-                overlayStyle: {
-                  background: 'none',
-                  border: 'none',
-                  boxShadow: 'none',
-                },
-                arrowContent: '',
-              }}
-              dotStyle={dotStyle}
-              step={1}
-              dots={true}
-              marks={marks}
-            />
+            {!!handleStyle && !!trackStyle && !!railStyle && !!dotStyle && (
+              <RangeWithBadgeComponent
+                themeType={colors.themeType}
+                handleStyle={handleStyle}
+                trackStyle={trackStyle}
+                railStyle={railStyle}
+                dotStyle={dotStyle}
+                parentCallback={function(val) {
+                  return callBack(val)
+                }}
+              />
+            )}
           </div>
         </div>
       </Module>
