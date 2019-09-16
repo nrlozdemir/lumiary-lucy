@@ -6,6 +6,8 @@ import { fromJS } from 'immutable'
 import { lineOptions, lineStackedAreaOptions } from './defaultOptions'
 import { withTheme } from 'ThemeContext/withTheme'
 
+import { beforeDraw, afterDraw, datasetsDraw } from './utils'
+
 function metricSuffix(number) {
   if (number >= 1e3) {
     const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
@@ -14,10 +16,6 @@ function metricSuffix(number) {
   }
 
   return number
-}
-
-function addPercentage(number) {
-  return number + '%'
 }
 
 function combineChartData(data, type = null, customOptions = null) {
@@ -34,21 +32,11 @@ function combineChartData(data, type = null, customOptions = null) {
 class LineChart extends React.Component {
   constructor(props) {
     super(props)
+
+    const themes = this.props.themeContext.colors
     this.state = {
       chartWidth: 1140,
       chartHeight: 285,
-    }
-  }
-
-  datasetKeyProvider() {
-    return randomKey(5)
-  }
-
-  render() {
-    const themes = this.props.themeContext.colors
-
-    const { customLineOptions } = this.props
-    const defaultProps = {
       options: {
         responsive: false,
         plugins: {
@@ -108,94 +96,41 @@ class LineChart extends React.Component {
         },
       },
     }
+  }
 
-    let props = fromJS(defaultProps)
-      .mergeDeep(this.props)
-      .toJS()
-    let plugins = []
-
-    if (props.backgroundColor || themes.chartBackground) {
-      plugins.push({
-        beforeDraw: (chart, easing) => {
-          let ctx = chart.chart.ctx
-          let chartArea = chart.chartArea
-          ctx.save()
-          ctx.fillStyle = props.backgroundColor || themes.chartBackground
-          ctx.fillRect(
-            chartArea.left,
-            chartArea.top,
-            chartArea.right - chartArea.left,
-            chartArea.bottom - chartArea.top
-          )
-          ctx.restore()
-        },
-      })
-    }
-
-    if (props.customLine) {
-      plugins.push({
-        afterDraw: (chart, easing) => {
-          let ctx = chart.chart.ctx
-          let chartArea = chart.chartArea
-          if (chart.options.average) {
-            ctx.fillStyle = '#505050'
-            ctx.fillRect(
-              ((chartArea.right - chartArea.left) / 100) *
-                chart.options.average +
-                48,
-              5,
-              4,
-              chartArea.bottom - chartArea.top
-            )
-          }
-        },
-      })
-    }
-
-    if (props.shadow && !!props.shadow.color) {
-      plugins.push(
-        {
-          beforeDatasetsDraw: function(chart, options) {
-            chart.ctx.shadowColor = props.shadow.color
-            chart.ctx.shadowBlur =
-              (!!props.shadow.blur && props.shadow.blur) || 6
-            chart.ctx.shadowOffsetX =
-              (!!props.shadow.offsetX && props.shadow.offsetX) || 2
-            chart.ctx.shadowOffsetY =
-              (!!props.shadow.offsetY && props.shadow.offsetY) || 2
-          },
-        },
-        {
-          afterDatasetsDraw: function(chart, options) {
-            chart.ctx.shadowColor = 'transparent'
-            chart.ctx.shadowBlur = 0
-          },
-        }
-      )
-    }
-
-    if (props.xAxesFlatten) {
-      props.options.scales.xAxes[0].ticks = {
-        ...props.options.scales.xAxes[0].ticks,
-        callback: (value, index, values) => {
-          if (props.xAxesFlatten) {
-            let space = props.flattenSpace || 11
-            if (value.length === 1) {
-              space = props.flattenSpace || 2
-            }
-            if (index === 0) {
-              return ' '.repeat(props.flattenFirstSpace || space) + value
-            }
-            if (index === values.length - 1) {
-              return value + ' '.repeat(props.flattenLastSpace || space)
-            }
-            return value
-          }
-          return value
-        },
+  mergeObjData(key, value, control = null) {
+    if (control || (control === 'onlyValue' && value)) {
+      return {
+        [key]: value,
       }
     }
+    return {}
+  }
 
+  xAxesCallback(props, value, index, values) {
+    let space = props.flattenSpace || 11
+    if (value.length === 1) {
+      space = props.flattenSpace || 2
+    }
+    if (index === 0) {
+      return ' '.repeat(props.flattenFirstSpace || space) + value
+    }
+    if (index === values.length - 1) {
+      return value + ' '.repeat(props.flattenLastSpace || space)
+    }
+    return value
+  }
+
+  yAxesCallback(props, value) {
+    if (props.yAxesPercentage) {
+      return value + '%'
+    }
+    if (props.yAxesAbbreviate) {
+      return metricSuffix(value)
+    }
+  }
+
+  yAxesMax(props) {
     let maximumDatainDatasets
     if (props.dynamicPercentage) {
       const v =
@@ -208,107 +143,117 @@ class LineChart extends React.Component {
     }
 
     if (props.yAxesPercentage) {
-      props.options.scales.yAxes[0].ticks = {
-        ...props.options.scales.yAxes[0].ticks,
-        max: maximumDatainDatasets
-          ? maximumDatainDatasets + maximumDatainDatasets * 0.3
-          : 100,
-        callback: (value, index, values) => {
-          return addPercentage(value)
+      return maximumDatainDatasets
+        ? maximumDatainDatasets + maximumDatainDatasets * 0.3
+        : 100
+    }
+
+    return props.yAxesMax
+  }
+
+  chartDraw(props) {
+    const {
+      themeContext: { colors: themes },
+    } = props
+
+    return {
+      ...props,
+      plugins: [
+        ...beforeDraw([props.backgroundColor, themes.chartBackground]),
+        ...afterDraw(props.customLine),
+        ...datasetsDraw(props.shadow),
+      ].filter((obj) => !!obj),
+      options: {
+        ...props.options,
+        scales: {
+          ...props.options.scales,
+          xAxes: [
+            {
+              ...props.options.scales.xAxes[0],
+              ticks: {
+                ...props.options.scales.xAxes[0].ticks,
+                ...this.mergeObjData('fontSize', props.ticksFontSize, 'value'),
+                ...this.mergeObjData('stepSize', props.xAxesStepSize, 'value'),
+                ...this.mergeObjData(
+                  'fontWeight',
+                  'bold',
+                  props.xAxesTicksFontBold
+                ),
+                ...this.mergeObjData(
+                  'callback',
+                  (value, index, values) =>
+                    this.xAxesCallback(props, value, index, values),
+                  props.xAxesFlatten
+                ),
+              },
+            },
+          ],
+          yAxes: [
+            {
+              ...props.options.scales.yAxes[0],
+              ticks: {
+                ...props.options.scales.yAxes[0].ticks,
+                ...this.mergeObjData('fontSize', props.ticksFontSize, 'value'),
+                ...this.mergeObjData('stepSize', props.yAxesStepSize, 'value'),
+                ...this.mergeObjData('max', this.yAxesMax(props), 'value'),
+                ...this.mergeObjData(
+                  'fontWeight',
+                  'bold',
+                  props.yAxesTicksFontBold
+                ),
+                ...this.mergeObjData(
+                  'callback',
+                  (value) => this.yAxesCallback(props, value),
+                  props.xAxesFlatten
+                ),
+              },
+            },
+          ],
         },
-      }
-    }
-
-    if (props.yAxesAbbreviate) {
-      props.options.scales.yAxes[0].ticks = {
-        ...props.options.scales.yAxes[0].ticks,
-        callback: (value, index, values) => {
-          return metricSuffix(value)
+        tooltips: {
+          ...props.options.tooltips,
+          ...this.mergeObjData('enabled', false, props.removeTooltip),
+          ...this.mergeObjData(
+            'callbacks',
+            {
+              title: (tooltipItem, data) => {
+                const { datasetIndex, index } = tooltipItem[0]
+                return (
+                  metricSuffix(data.datasets[datasetIndex].data[index]) +
+                  ' ' +
+                  props.customTooltipText
+                )
+              },
+              label: (tooltipItem, data) => {
+                return null
+              },
+            },
+            props.customTooltipText
+          ),
         },
-      }
-    }
-
-    if (props.customTooltipText) {
-      props.options.tooltips = {
-        ...props.options.tooltips,
-        callbacks: {
-          title: (tooltipItem, data) => {
-            const { datasetIndex, index } = tooltipItem[0]
-            return (
-              metricSuffix(data.datasets[datasetIndex].data[index]) +
-              ' ' +
-              props.customTooltipText
-            )
-          },
-          label: (tooltipItem, data) => {
-            return null
-          },
+        elements: {
+          ...props.options.elements,
+          ...this.mergeObjData(
+            'point',
+            {
+              radius: 0,
+              hoverRadius: 0,
+            },
+            props.removePointRadius
+          ),
         },
-      }
+      },
     }
+  }
 
-    if (props.removeTooltip) {
-      props.options.tooltips = {
-        enabled: false,
-      }
-    }
+  render() {
+    const { options } = this.state
 
-    if (props.removePointRadius) {
-      props.options.elements = {
-        ...props.options.elements,
-        point: {
-          radius: 0,
-          hoverRadius: 0,
-        },
-      }
-    }
-
-    if (props.ticksFontSize) {
-      props.options.scales.xAxes[0].ticks = {
-        ...props.options.scales.xAxes[0].ticks,
-        fontSize: props.ticksFontSize,
-      }
-
-      props.options.scales.yAxes[0].ticks = {
-        ...props.options.scales.yAxes[0].ticks,
-        fontSize: props.ticksFontSize,
-      }
-    }
-
-    if (props.xAxesStepSize) {
-      props.options.scales.xAxes[0].ticks = {
-        ...props.options.scales.xAxes[0].ticks,
-        stepSize: props.xAxesStepSize,
-      }
-    }
-
-    if (props.yAxesStepSize) {
-      props.options.scales.yAxes[0].ticks = {
-        ...props.options.scales.yAxes[0].ticks,
-        stepSize: props.yAxesStepSize,
-      }
-    }
-
-    if (props.yAxesMax) {
-      props.options.scales.yAxes[0].ticks = {
-        ...props.options.scales.yAxes[0].ticks,
-        max: props.yAxesMax,
-      }
-    }
-
-    if (props.xAxesTicksFontBold) {
-      props.options.scales.xAxes[0].ticks = {
-        ...props.options.scales.xAxes[0].ticks,
-        fontWeight: 'bold',
-      }
-    }
-
-    if (props.yAxesTicksFontBold) {
-      props.options.scales.yAxes[0].ticks = {
-        ...props.options.scales.yAxes[0].ticks,
-        fontWeight: 'bold',
-      }
-    }
+    const props = this.chartDraw(
+      fromJS({ options })
+        .mergeDeep(this.props)
+        .toJS()
+    )
 
     const customOptions =
       (!!props.customLineOptions && props.customLineOptions) || null
@@ -317,27 +262,24 @@ class LineChart extends React.Component {
       props.chartType,
       customOptions
     )
-    if (customLineOptions) {
+    if (props.customLineOptions) {
       combinedData.datasets =
         !!combinedData.datasets &&
         combinedData.datasets.map((item, index) => {
-          return { ...item, ...customLineOptions[index] }
+          return { ...item, ...props.customLineOptions[index] }
         })
     }
 
     return (
-      <React.Fragment>
-        <Line
-          id="chartjs-customline"
-          key={Math.random()}
-          data={combinedData}
-          plugins={plugins}
-          datasetKeyProvider={this.datasetKeyProvider}
-          height={this.state.chartHeight}
-          width={this.state.chartWidth}
-          {...props}
-        />
-      </React.Fragment>
+      <Line
+        id="chartjs-customline"
+        key={Math.random()}
+        data={combinedData}
+        datasetKeyProvider={() => randomKey(5)}
+        height={this.state.chartHeight}
+        width={this.state.chartWidth}
+        {...props}
+      />
     )
   }
 }
