@@ -23,28 +23,28 @@ const WrapperModule = ({ children, style, className }) => {
 }
 
 const moduleFilters = [
-	{
-		type: 'platformEngagement',
-		selectKey: 'AP-plateng',
-		placeHolder: 'Engagement by Platform',
-		customOptions: [
-			{
-				label: 'Facebook',
-				options: [{ value: 'facebook|views', label: 'Views' }],
-			},
-		],
-		defaultValue: { value: 'facebook|views', label: 'Views' },
-	},
-	{
-		type: 'property',
-		selectKey: 'AP-asd',
-		placeHolder: 'Resolution',
-	},
-	{
-		type: 'dateRange',
-		selectKey: 'AP-wds',
-		placeHolder: 'Date',
-	},
+  {
+    type: 'platformEngagement',
+    selectKey: 'AP-plateng',
+    placeHolder: 'Engagement by Platform',
+    customOptions: [
+      {
+        label: 'Facebook',
+        options: [{ value: 'facebook|views', label: 'Views' }],
+      },
+    ],
+    defaultValue: { value: 'facebook|views', label: 'Views' },
+  },
+  {
+    type: 'property',
+    selectKey: 'AP-asd',
+    placeHolder: 'Resolution',
+  },
+  {
+    type: 'dateRange',
+    selectKey: 'AP-wds',
+    placeHolder: 'Date',
+  },
 ]
 
 class Performance extends React.Component {
@@ -102,28 +102,28 @@ class Performance extends React.Component {
     handleStyle[1].borderColor = `${colors.textColor} transparent transparent transparent`
     railStyle.backgroundColor = colors.bodyBackground
 
-		const bubbleChartOptions = !!colors && {
-			maximumIterationCount: 1000,
-			toolTipBackground: colors.audienceBubbleTooltipBackground,
-			toolTipArrowBackground: colors.audienceBubbleTooltipBackground,
-			toolTipArrowShadow: colors.audienceBubbleTooltipBackground,
-			strokeWidth: 5,
-			gap: 2,
-			visualFontSize: 14,
-			toolTipFontSize: 10,
-			visualWidth: 55,
-			visualHeight: 20,
-			toolTipWidth: 206,
-			toolTipHeight: 130,
-			firstCircleTimesX: -0.3,
-			firstCircleTimesY: -1,
-			toolTipPositionTop: true,
-			toolTipDelay: 10,
-			toolTipRadius: 8,
-			toolTipArrowWidth: 16,
-			toolTipArrowHeight: 8,
-			zIndex: 30,
-		}
+    const bubbleChartOptions = !!colors && {
+      maximumIterationCount: 1000,
+      toolTipBackground: colors.audienceBubbleTooltipBackground,
+      toolTipArrowBackground: colors.audienceBubbleTooltipBackground,
+      toolTipArrowShadow: colors.audienceBubbleTooltipBackground,
+      strokeWidth: 5,
+      gap: 2,
+      visualFontSize: 14,
+      toolTipFontSize: 10,
+      visualWidth: 55,
+      visualHeight: 20,
+      toolTipWidth: 206,
+      toolTipHeight: 130,
+      firstCircleTimesX: -0.3,
+      firstCircleTimesY: -1,
+      toolTipPositionTop: true,
+      toolTipDelay: 10,
+      toolTipRadius: 8,
+      toolTipArrowWidth: 16,
+      toolTipArrowHeight: 8,
+      zIndex: 30,
+    }
 
     return (
       <Module
@@ -148,7 +148,7 @@ class Performance extends React.Component {
                 Object.values(data).map((el, k) => {
                   return (
                     <WrapperModule
-											key={`wrapper-module-${k}`}
+                      key={`wrapper-module-${k}`}
                       datasetsIsEmpty={!!el && !Object.keys(el).length}
                     >
                       <div
@@ -210,8 +210,8 @@ class Performance extends React.Component {
                                         >
                                           <span>
                                             {bubble.percentage}% of {!!titles && !!titles[k] && titles[k].toLowerCase()}{`s`}{` `}
-																						{bubble.min}-{bubble.max}{` `}<br />
-																						prefer videos that{` `}<br />
+                                            {bubble.min}-{bubble.max}{` `}<br />
+                                            prefer videos that{` `}<br />
                                             {`are ${bubble.visual} paced`}
                                           </span>
                                         </div>
