@@ -9,6 +9,34 @@ import emptyData from './emptyData.json'
 import { isDataSetEmpty } from 'Utils/datasets'
 import cx from 'classnames'
 
+const renderLeftRightSections = ({checkData, isEmpty, side, title, width, height}) => {
+  const opacity = isEmpty ? 0.25 : 1
+  const data = side === 'left' ? checkData[0] : checkData[1]
+
+  return (
+    <div className={style.chartPos}>
+      {isEmpty && (
+        <div className={style.emptyData}>No Data Available</div>
+      )}
+      <div
+        style={{
+          opacity,
+          width: width,
+          height: height
+        }}
+      >
+        <RadarChart
+          data={data.data}
+          width={width}
+          height={height}
+          tooltipType="extended"
+          platform={title || data.type}
+        />
+      </div>
+    </div>
+  )
+}
+
 const RadarChartModule = ({
   data,
   moduleKey,
@@ -19,7 +47,6 @@ const RadarChartModule = ({
   leftTitle,
   rightTitle,
   loading = false,
-  infoText,
   width = 540,
   height = 540,
   actionOnProp,
@@ -78,54 +105,22 @@ const RadarChartModule = ({
             style={{ color: colors.textColor }}
           >
             <div className={style.groupChart}>
-              <div className={style.chartPos}>
-                {leftIsEmpty && (
-                  <div className={style.emptyData}>No Data Available</div>
-                )}
-                <div
-                  style={{ 
-                    opacity: leftOpacity,
-                    width: width,
-                    height: height
-                  }}
-                >
-                  <RadarChart
-                    data={checkData[0].data}
-                    width={width}
-                    height={height}
-                    tooltipType="extended"
-                    platform={
-                      leftTitle
-                        ? leftTitle
-                        : !!checkData && !!checkData[0] && checkData[0].type
-                    }
-                  />
-                </div>
-              </div>
-              <div className={style.chartPos}>
-                {rightIsEmpty && (
-                  <div className={style.emptyData}>No Data Available</div>
-                )}
-                <div
-                  style={{
-                    opacity: rightOpacity,
-                    width: width,
-                    height: height,
-                  }}
-                >
-                  <RadarChart
-                    data={checkData[1].data}
-                    width={width}
-                    height={height}
-                    tooltipType="extended"
-                    platform={
-                      rightTitle
-                        ? rightTitle
-                        : !!checkData && !!checkData[1] && checkData[1].type
-                    }
-                  />
-                </div>
-              </div>
+              {renderLeftRightSections({
+                checkData,
+                isEmpty: leftIsEmpty,
+                side: 'left',
+                title,
+                width,
+                height
+              })}
+              {renderLeftRightSections({
+                checkData,
+                isEmpty: rightIsEmpty,
+                side: 'right',
+                title,
+                width,
+                height
+              })}
             </div>
             <div className={'mt-32 ' + style.labelContainer}>
               <div
