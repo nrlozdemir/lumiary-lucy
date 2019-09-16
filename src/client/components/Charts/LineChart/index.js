@@ -156,7 +156,7 @@ class LineChart extends React.Component {
       themeContext: { colors: themes },
     } = props
 
-    const data = {
+    return {
       ...props,
       plugins: [
         ...beforeDraw([props.backgroundColor, themes.chartBackground]),
@@ -244,8 +244,6 @@ class LineChart extends React.Component {
         },
       },
     }
-
-    return data
   }
 
   render() {
