@@ -1,101 +1,96 @@
 import React from 'react'
 import { percentageBeautifier } from 'Utils/datasets'
 import { metricSuffix, ucfirst } from 'Utils'
+import ReactDOM from 'react-dom'
 
-const generateTitleBodyStyle = (obj = {}, domStyle = false) => {
-  let styleResult
-
-  if (domStyle === true) {
-    styleResult = {}
-  } else {
-    styleResult = ''
-  }
-  Object.keys(obj).map((s, i) => {
-    const value = obj[s]
-    if (domStyle === false) {
-      styleResult += `${s}:${value};`
-    } else {
-      const pos = s.split('-')
-      if (!!pos) {
-        s = `${pos[0]}${ucfirst(pos[1])}`
-        s = s.replace('-', '')
-      }
-      styleResult[s] = value
-    }
-  })
-  return styleResult
-}
-
-const getGlobalStyle = (custom = { title: {}, body: {} }, domStyle = false) => {
+const getGlobalStyle = (custom = { title: {}, body: {} }) => {
   const title = {
-    'font-family': 'ClanOT',
-    'font-size': '14px',
-    'font-style': 'normal',
-    'font-stretch': 'normal',
-    'font-weight': 'bold',
-    'letter-spacing': 'normal',
-    'line-height': '1.43',
+    fontFamily: 'ClanOT',
+    fontSize: '14px',
+    fontStyle: 'normal',
+    fontStretch: 'normal',
+    fontWeight: 'bold',
+    letterSpacing: 'normal',
+    lineHeight: '1.43',
     margin: '16px 16px 8px 16px',
     ...custom.title,
   }
 
   const body = {
-    'font-family': 'ClanOT',
-    'font-size': '12px',
-    'font-style': 'normal',
-    'font-stretch': 'normal',
-    'font-weight': 'bold',
-    'letter-spacing': 'normal',
-    'line-height': '1.67',
+    fontFamily: 'ClanOT',
+    fontSize: '12px',
+    fontStyle: 'normal',
+    fontStretch: 'normal',
+    fontWeight: 'bold',
+    letterSpacing: 'normal',
+    lineHeight: '1.67',
     margin: '8px 16px 16px 16px',
-    'padding-top': '8px',
-    'border-top': '1px solid #e8ecf0',
+    paddingTop: '8px',
+    borderTop: '1px solid #e8ecf0',
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column',
     ...custom.body,
   }
 
-  const titleStyle = generateTitleBodyStyle(title, domStyle)
-  const bodyStyle = generateTitleBodyStyle(body, domStyle)
-
   return {
-    title: !!titleStyle && titleStyle,
-    body: !!bodyStyle && bodyStyle,
+    title: title,
+    body: body,
   }
 }
 
 const LineChartTemplate = function(props) {
   const style = getGlobalStyle()
-
-  let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + style.title + '">'
-  el += `${percentageBeautifier(props.value)} Score  |  ${props.label} Pacing`
-  el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
-  el += `On ${props.labelLong}, your CV score <br> `
-  if (!isNaN(props.difference) && props.difference > 0) {
-    el += `increased by ${props.difference}% from the <br> previous day.`
-  } else if (!isNaN(props.difference) && props.difference < 0) {
-    el += `decreased by ${props.difference}% from the <br> previous day.`
-  } else {
-    el += `did not change from the <br> previous day.`
-  }
-  el += '</div>'
-
-  return el
+  return (
+    <div>
+      <div className="chartjs-tooltip-title" style={style.title}>
+        {!!props.multiData &&
+          !!props.multiData.length &&
+          props.multiData.map((data, i) => {
+            return (
+              <React.Fragment key={i}>
+                <span>
+                  {`${percentageBeautifier(
+                    props.data.datasets[data.datasetIndex].data[data.index]
+                  )} Score  |  ${
+                    props.data.datasets[data.datasetIndex].label
+                  } Pacing`}
+                </span>
+                {i !== props.multiData.length - 1 && <br />}
+              </React.Fragment>
+            )
+          })}
+        {!props.multiData &&
+          `${percentageBeautifier(props.value)} Score  |  ${
+            props.label
+          } Pacing`}
+      </div>
+      <div className="chartjs-tooltip-body" style={style.body}>
+        <span>{`On ${props.labelLong}, your CV score`}</span>
+        {!isNaN(props.difference) && props.difference > 0 ? (
+          <span>{`increased by ${props.difference}% from the `}</span>
+        ) : !isNaN(props.difference) && props.difference < 0 ? (
+          <span>{`decreased by ${props.difference}% from the `}</span>
+        ) : (
+          <span>did not change from the</span>
+        )}
+        <span>previous day</span>
+      </div>
+    </div>
+  )
 }
 
 const VideoReleasesBarChartTemplate = function(props) {
   const style = getGlobalStyle({ title: { margin: '8px 16px' } })
-
-  let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + style.title + '">'
-  el += `${props.value}`
-  el += '</div>'
-  el += '</div>'
-
-  return el
+  return (
+    <div className="chartjs-tooltip-title" style={style.title}>
+      {!!props.value && props.value}
+    </div>
+  )
 }
 
 const CircleChartTemplate = (props) => {
-  const style = getGlobalStyle({}, true)
+  const style = getGlobalStyle()
 
   const pStyle = {
     margin: '0px',
@@ -106,7 +101,7 @@ const CircleChartTemplate = (props) => {
   }
 
   return (
-    <React.Fragment>
+    <div>
       <div className="chartjs-tooltip-title" style={style.title}>
         {percentageBeautifier(props.value)} Score{'  '}|{'  '}
         {props.platform} Average
@@ -118,7 +113,7 @@ const CircleChartTemplate = (props) => {
         <p style={pStyle}>video had a {props.average} content vitality</p>
         <p style={pStyle}>score</p>
       </div>
-    </React.Fragment>
+    </div>
   )
 }
 
@@ -126,83 +121,119 @@ const renderRepresentsVideoText = (props = {}, propVal = 'label') => {
   return `represents video with ${(!!props[propVal] &&
     'aeiou'.indexOf(props[propVal][0].toLowerCase()) !== -1 &&
     'an') ||
-    'a'}<br> `
+    'a'}`
 }
 
 const DoughnutChartTemplate = function(props) {
   const style = getGlobalStyle()
 
-  let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + style.title + '">'
-  el += `${percentageBeautifier(props.value)}%  |  ${!!props.itemLabel &&
-    props.itemLabel}`
-  el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
-  el += `${percentageBeautifier(props.value)}% of your library<br> `
-  el += renderRepresentsVideoText(props)
-  el += `${!!props.label && props.label.toLowerCase()} of ${!!props.itemLabel &&
-    props.itemLabel}`
-  el += '</div>'
-  
-  return el
+  return (
+    <div>
+      <div className="chartjs-tooltip-title" style={style.title}>
+        {`${percentageBeautifier(props.value)}%  |  ${!!props.itemLabel &&
+          props.itemLabel}`}
+      </div>
+      <div className="chartjs-tooltip-body" style={style.body}>
+        <span>{`${percentageBeautifier(props.value)}% of your library`}</span>
+        <span>{renderRepresentsVideoText(props)}</span>
+        <span>{`${!!props.label &&
+          props.label.toLowerCase()} of ${!!props.itemLabel &&
+          props.itemLabel}`}</span>
+      </div>
+    </div>
+  )
 }
 
 const VerticalStackedBarChartTemplate = function(props) {
   const style = getGlobalStyle()
 
-  let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + style.title + '">'
-  el += `${percentageBeautifier(props.value)}%  |  ${!!props.label &&
-    props.label}`
-  el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
-  el += `${percentageBeautifier(props.value)}% of your library<br> `
-  el += renderRepresentsVideoText(props, 'propertyValue')
-  el += `${!!props.propertyValue &&
-    props.propertyValue.toLowerCase()} of ${!!props.label &&
-    props.label.toLowerCase()}`
-  el += '</div>'
-
-  return el
+  return (
+    <div>
+      <div className="chartjs-tooltip-title" style={style.title}>
+        {`${percentageBeautifier(props.value)}%  |  ${!!props.label &&
+          props.label}`}
+      </div>
+      <div className="chartjs-tooltip-body" style={style.body}>
+        <span>{`${percentageBeautifier(props.value)}% of your library`}</span>
+        <span>{renderRepresentsVideoText(props, 'propertyValue')}</span>
+        <span>{`${!!props.propertyValue &&
+          props.propertyValue.toLowerCase()} of ${!!props.label &&
+          props.label.toLowerCase()}`}</span>
+      </div>
+    </div>
+  )
 }
 
 const HorizontalStackedBarChartTemplate = function(props) {
   const style = getGlobalStyle()
 
-  let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + style.title + '">'
-  el += `${percentageBeautifier(props.value)}%  |  ${!!props.propertyTitle &&
-    props.propertyTitle} Pacing`
-  el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
-  el += `${percentageBeautifier(props.value)}% of your library<br> `
-  el += `represents video with a pacing<br> `
-  el += `of ${!!props.propertyTitle && props.propertyTitle.toLowerCase()}`
-  el += '</div>'
-
-  return el
+  return (
+    <div>
+      <div className="chartjs-tooltip-title" style={style.title}>
+        {`${percentageBeautifier(props.value)}%  |  ${!!props.propertyTitle &&
+          props.propertyTitle} Pacing`}
+      </div>
+      <div className="chartjs-tooltip-body" style={style.body}>
+        <span>{`${percentageBeautifier(props.value)}% of your library`}</span>
+        <span>represents video with a pacing</span>
+        <span>{`of ${!!props.propertyTitle &&
+          props.propertyTitle.toLowerCase()}`}</span>
+      </div>
+    </div>
+  )
 }
 
-const RadarChartTemplate = function(props) {
+const RadarChartTemplate = (props) => {
   const style = getGlobalStyle()
 
-  let el = ''
-  el += '<div class="chartjs-tooltip-title" style="' + style.title + '">'
-  el += `${percentageBeautifier(props.value)}% ${!!props.metric &&
-    props.metric}  |  ${!!props.itemLabel &&
-    !!props.itemLabel.name &&
-    ucfirst(props.itemLabel.name)}`
-  el += '</div><div class="chartjs-tooltip-body" style="' + style.body + '">'
-  el += `On ${!!props.platform && props.platform}, ${percentageBeautifier(
-    props.value
-  )}% of<br> your library<br> `
-  el += `represents video<br> that are  ${!!props.itemLabel &&
-    !!props.itemLabel.name &&
-    props.itemLabel.name.toLowerCase()} `
-  el += '</div>'
-
-  return el
+  return (
+    <div>
+      <div className="chartjs-tooltip-title" style={style.title}>
+        {!!props.multiData &&
+          !!props.multiData.length &&
+          props.multiData.map((data, i) => {
+            return (
+              <React.Fragment key={i}>
+                <span>
+                  {`${percentageBeautifier(
+                    props.data.labels[data.index].count
+                  )}% ${!!props.metric && props.metric}  |  ${ucfirst(
+                    props.data.labels[data.index].name
+                  )}`}
+                </span>
+                {i !== props.multiData.length - 1 && <br />}
+              </React.Fragment>
+            )
+          })}
+        {!props.multiData &&
+          `${percentageBeautifier(props.value)}% ${!!props.metric &&
+            props.metric}  |  ${!!props.itemLabel &&
+            !!props.itemLabel.name &&
+            ucfirst(props.itemLabel.name)}`}
+      </div>
+      <div className="chartjs-tooltip-body" style={style.body}>
+        <span>
+          {`On ${!!props.platform && props.platform}, ${percentageBeautifier(
+            props.value
+          )}% of`}
+        </span>
+        <span>your library</span>
+        <span>represents video</span>
+        <span>
+          {`
+            that are
+            ${!!props.itemLabel &&
+              !!props.itemLabel.name &&
+              props.itemLabel.name}
+          `}
+        </span>
+      </div>
+    </div>
+  )
 }
 
 const HorizontalBarChartTemplate = function(props) {
-  const style = getGlobalStyle({}, true)
+  const style = getGlobalStyle()
 
   const pStyle = {
     margin: '0px',
@@ -238,7 +269,6 @@ const modifyTooltip = function(props, conf = {}) {
   return {
     enabled: false,
     custom: function(tooltipModel) {
-
       const datasetIndex =
         (!!tooltipModel &&
           !!tooltipModel.dataPoints &&
@@ -325,6 +355,12 @@ const modifyTooltip = function(props, conf = {}) {
       const metric = !!props && !!props.metric && props.metric
       const platform = !!props && !!props.platform && props.platform
 
+      const dataPoints =
+        !!tooltipModel.dataPoints &&
+        !!tooltipModel.dataPoints.length &&
+        tooltipModel.dataPoints.length > 1 &&
+        tooltipModel.dataPoints
+
       const defaults = {
         maxWidth: 240,
         headerFontSize: 14,
@@ -367,11 +403,12 @@ const modifyTooltip = function(props, conf = {}) {
       if (tooltipModel.opacity === 0) {
         tooltipEl.style.opacity = 0
         caretEl.style.opacity = 0
-        tooltipEl.style.display = 'none'
-        caretEl.style.display = 'none'
+        // tooltipEl.style.display = 'none'
+        // caretEl.style.display = 'none'
         return
       }
 
+      tooltipEl.style.transition = 'opacity 0.2s'
       tooltipEl.style.zIndex = 1000
 
       // Set caret Position
@@ -404,59 +441,71 @@ const modifyTooltip = function(props, conf = {}) {
         }
 
         const templates = {
-          LineChartTemplate: LineChartTemplate({
-            label: (!!label && label) || '',
-            value: (!!value && value) || 0,
-            labelLong: (!!labelLong && labelLong) || '',
-            difference: !!difference && difference | 0,
-          }),
-          DoughnutChartTemplate: DoughnutChartTemplate({
-            label: (!!label && label) || '',
-            value: (!!value && value) || 0,
-            labelLong: (!!labelLong && labelLong) || '',
-            difference: !!difference && difference | 0,
-            itemLabel: (!!itemLabel && itemLabel) || '',
-          }),
-          VerticalStackedBarChartTemplate: VerticalStackedBarChartTemplate({
-            label: (!!label && label) || '',
-            value: (!!value && value) || 0,
-            labelLong: (!!labelLong && labelLong) || '',
-            difference: !!difference && difference | 0,
-            itemLabel: (!!itemLabel && itemLabel) || '',
-            propertyValue: (!!propertyValue && propertyValue) || '',
-          }),
-          HorizontalStackedBarChartTemplate: HorizontalStackedBarChartTemplate({
-            label: (!!label && label) || '',
-            value: (!!value && value) || 0,
-            labelLong: (!!labelLong && labelLong) || '',
-            difference: !!difference && difference | 0,
-            itemLabel: (!!itemLabel && itemLabel) || '',
-            propertyTitle: (!!propertyTitle && propertyTitle) || '',
-          }),
-          VideoReleasesBarChartTemplate: VideoReleasesBarChartTemplate({
-            value: value,
-          }),
-          RadarChartTemplate: RadarChartTemplate({
-            label: (!!label && label) || '',
-            value: (!!value && value) || 0,
-            labelLong: (!!labelLong && labelLong) || '',
-            difference: !!difference && difference | 0,
-            itemLabel: (!!itemLabel && itemLabel) || '',
-            metric: (!!metric && metric) || '',
-            platform: (!!platform && platform) || '',
-          }),
-          HorizontalBarChartTemplate: HorizontalBarChartTemplate({
-            label: (!!label && label) || '',
-            value: (!!value && value) || 0,
-            labelLong: (!!labelLong && labelLong) || '',
-            difference: !!difference && difference | 0,
-            itemLabel: (!!itemLabel && itemLabel) || '',
-            metric: (!!metric && metric) || '',
-            platform: (!!platform && platform) || '',
-          }),
+          LineChartTemplate: () =>
+            LineChartTemplate({
+              data: props.data,
+              multiData: dataPoints,
+              label: (!!label && label) || '',
+              value: (!!value && value) || 0,
+              labelLong: (!!labelLong && labelLong) || '',
+              difference: !!difference && difference | 0,
+            }),
+          DoughnutChartTemplate: () =>
+            DoughnutChartTemplate({
+              label: (!!label && label) || '',
+              value: (!!value && value) || 0,
+              labelLong: (!!labelLong && labelLong) || '',
+              difference: !!difference && difference | 0,
+              itemLabel: (!!itemLabel && itemLabel) || '',
+            }),
+          VerticalStackedBarChartTemplate: () =>
+            VerticalStackedBarChartTemplate({
+              label: (!!label && label) || '',
+              value: (!!value && value) || 0,
+              labelLong: (!!labelLong && labelLong) || '',
+              difference: !!difference && difference | 0,
+              itemLabel: (!!itemLabel && itemLabel) || '',
+              propertyValue: (!!propertyValue && propertyValue) || '',
+            }),
+          HorizontalStackedBarChartTemplate: () =>
+            HorizontalStackedBarChartTemplate({
+              label: (!!label && label) || '',
+              value: (!!value && value) || 0,
+              labelLong: (!!labelLong && labelLong) || '',
+              difference: !!difference && difference | 0,
+              itemLabel: (!!itemLabel && itemLabel) || '',
+              propertyTitle: (!!propertyTitle && propertyTitle) || '',
+            }),
+          VideoReleasesBarChartTemplate: () =>
+            VideoReleasesBarChartTemplate({
+              value: value,
+            }),
+          RadarChartTemplate: () =>
+            RadarChartTemplate({
+              data: props.data,
+              multiData: dataPoints,
+              label: (!!label && label) || '',
+              value: (!!value && value) || 0,
+              labelLong: (!!labelLong && labelLong) || '',
+              difference: !!difference && difference | 0,
+              itemLabel: (!!itemLabel && itemLabel) || '',
+              metric: (!!metric && metric) || '',
+              platform: (!!platform && platform) || '',
+            }),
+          HorizontalBarChartTemplate: () =>
+            HorizontalBarChartTemplate({
+              label: (!!label && label) || '',
+              value: (!!value && value) || 0,
+              labelLong: (!!labelLong && labelLong) || '',
+              difference: !!difference && difference | 0,
+              itemLabel: (!!itemLabel && itemLabel) || '',
+              metric: (!!metric && metric) || '',
+              platform: (!!platform && platform) || '',
+            }),
         }
 
-        tooltipEl.innerHTML = templates[props.template]
+        const Template = templates[props.template]
+        ReactDOM.render(<Template />, tooltipEl)
       }
 
       // Display, position, and set styles for font
@@ -497,7 +546,6 @@ const modifyTooltip = function(props, conf = {}) {
         (defaults.caretHeight + defaults.caretPadding)
 
       if (defaults.position === 'auto') {
-        caretEl.style = {}
         // caret positon calculate for left side
         if (
           position.left +
@@ -543,7 +591,6 @@ const modifyTooltip = function(props, conf = {}) {
         !!props.template &&
         props.template === 'VideoReleasesBarChartTemplate'
       ) {
-        caretEl.style = {}
         if ((position.height - 40) / 2 < tooltipModel.caretY) {
           caretStyles = arrowUp
           tooltipTop =
@@ -564,7 +611,6 @@ const modifyTooltip = function(props, conf = {}) {
         !!props.template &&
         props.template === 'VerticalStackedBarChartTemplate'
       ) {
-        caretEl.style = {}
         let barDataModel
         if (tooltipModel.dataPoints) {
           const { index, datasetIndex } = tooltipModel.dataPoints[0]
@@ -609,7 +655,6 @@ const modifyTooltip = function(props, conf = {}) {
         !!props.template &&
         props.template === 'HorizontalStackedBarChartTemplate'
       ) {
-        caretEl.style = {}
         let barDataModel
         if (tooltipModel.dataPoints) {
           const { index, datasetIndex } = tooltipModel.dataPoints[0]
@@ -648,11 +693,13 @@ const modifyTooltip = function(props, conf = {}) {
         }
       }
 
+      caretEl.style = {}
       tooltipEl.style.left = tooptipLeft + 'px'
       tooltipEl.style.top = tooltipTop + 'px'
       tooltipEl.style.textAlign = 'center'
 
       // Caret Styling
+      caretEl.style.transition = 'opacity 0.2s'
       caretEl.style.opacity = 1
       caretEl.style.display = 'block'
       caretEl.style.zIndex = 1000

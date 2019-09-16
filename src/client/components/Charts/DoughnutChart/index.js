@@ -490,7 +490,8 @@ class DoughnutChart extends React.Component {
         >
           {labelPositionLeft && labelsData && this.renderLabelsData()}
           <div
-            className={classnames(style.chartWrapper, customChartWrapper, {
+            className={classnames(customChartWrapper, {
+              [style.averageStyle]: !average,
               [style.displayFlex]: !!average,
             })}
           >
