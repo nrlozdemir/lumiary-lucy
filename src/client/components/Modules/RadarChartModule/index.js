@@ -9,7 +9,7 @@ import emptyData from './emptyData.json'
 import { isDataSetEmpty } from 'Utils/datasets'
 import cx from 'classnames'
 
-const renderLeftRightSections = ({checkData, isEmpty, side, title, width, height}) => {
+const renderLeftRightSections = ({checkData = [], isEmpty, side = 'left', title, width, height}) => {
   const opacity = isEmpty ? 0.25 : 1
   const data = side === 'left' ? checkData[0] : checkData[1]
 
@@ -33,6 +33,28 @@ const renderLeftRightSections = ({checkData, isEmpty, side, title, width, height
           platform={title || data.type}
         />
       </div>
+    </div>
+  )
+}
+
+const renderLabels = ({ checkData, progressHasData = false, side = 'left', isEmpty, title, colors = {} }) => {
+  const opacity = isEmpty ? 0.25 : 1
+  const data = side === 'left' ? checkData[0] : checkData[1]
+  return (
+    <div
+      className={cx(style.label, {
+        [style.dark]: colors.themeType === 'dark',
+        [style.light]: colors.themeType === 'light',
+      })}
+      style={{ opacity }}
+    >
+      {progressHasData || title ? (
+        <React.Fragment>
+          {title || data.type}
+        </React.Fragment>
+      ) : (
+          <React.Fragment>N/A</React.Fragment>
+        )}
     </div>
   )
 }
@@ -123,25 +145,14 @@ const RadarChartModule = ({
               })}
             </div>
             <div className={'mt-32 ' + style.labelContainer}>
-              <div
-                className={cx(style.label, {
-                  [style.dark]: colors.themeType === 'dark',
-                  [style.light]: colors.themeType === 'light',
-                })}
-                style={{
-                  opacity: leftOpacity,
-                }}
-              >
-                {leftProgressHasData || leftTitle ? (
-                  <React.Fragment>
-                    {leftTitle
-                      ? leftTitle
-                      : !!checkData && !!checkData[0] && checkData[0].type}
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>N/A</React.Fragment>
-                )}
-              </div>
+              {renderLabels({
+                checkData,
+                progressHasData: leftProgressHasData,
+                side: 'left',
+                isEmpty: leftIsEmpty,
+                colors,
+                title: leftTitle
+              })}
               {(leftProgressHasData || rightProgressHasData) && (
                 <p>{`Top ${
                   leftProgressHasData
