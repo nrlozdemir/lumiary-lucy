@@ -62,3 +62,23 @@ export const tooltips = (props, theData) => {
         }
       ))
 }
+
+export const generateThisData = (colorOrder) => {
+  const useAllVals = true
+
+  const thisData = Object.keys(colorOrder).reduce((accumulator, key) => {
+    let count = colorOrder[key].count || 0
+    if (count !== 0 || useAllVals) {
+      accumulator.dataKeys.push(key)
+      accumulator.dataValues.push(count || 0)
+    }
+    return accumulator
+  },
+    {
+      dataKeys: [],
+      dataValues: [],
+    }
+  )
+
+  return thisData
+}
