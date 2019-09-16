@@ -60,7 +60,7 @@ const renderLabels = ({ checkData, progressHasData = false, side = 'left', isEmp
 }
 
 const RadarChartModule = ({
-  data,
+  data = [],
   moduleKey,
   title,
   action,
@@ -73,13 +73,10 @@ const RadarChartModule = ({
   height = 540,
   actionOnProp,
 }) => {
-  const isEmpty =
-    !data ||
-    !data.length ||
-    ((data.length && (!data[0] || !data[1])) ||
-      (data.length &&
-        (!!data[0] && !!data[1] && !data[0].total && !data[1].total)))
-
+  const [data1 = {}, data2 = {}] = data
+  const { total : total1 = false } = data1
+  const { total: total2 = false } = data2
+  const isEmpty = !(total1 && total2)
   let checkData = isEmpty ? emptyData : data
 
   const leftIsEmpty =
