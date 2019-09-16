@@ -308,10 +308,10 @@ const RadarChart = (props) => {
                   textColor: themes.tooltipTextColor,
                   caretColor: themes.tooltipBackground,
                 },
-              },
-              {
-                mode: 'single',
               }
+              // {
+              //   mode: 'single',
+              // }
             )),
         plugins: {
           datalabels: false,
