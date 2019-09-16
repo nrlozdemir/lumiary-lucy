@@ -31,7 +31,7 @@ services:
       API_ROOT: 'https://azazzle.staging.quickframe.com'
       API_VERSION: 'v1'
       MEDIA_URL: 'https://s3.amazonaws.com/quickframe-media-staging/'
-      QAPI_ROOT: 'https://api-local.quickframe.com:8080'
+      QAPI_ROOT: 'https://api.staging.quickframe.com'
       QAPI_VERSION: 'v1'
       STATIC_URL: 'https://s3.amazonaws.com/quickframe-static-dev/'
       AWS_ACCESS_KEY_ID: 'AKIAIILRAYHRCIOFIR4Q'

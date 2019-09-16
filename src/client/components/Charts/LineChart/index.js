@@ -99,7 +99,7 @@ class LineChart extends React.Component {
   }
 
   mergeObjData(key, value, control = null) {
-    if (control || (control === null && value)) {
+    if (control || (control === 'onlyValue' && value)) {
       return {
         [key]: value,
       }
@@ -172,8 +172,16 @@ class LineChart extends React.Component {
               ...props.options.scales.xAxes[0],
               ticks: {
                 ...props.options.scales.xAxes[0].ticks,
-                ...this.mergeObjData('fontSize', props.ticksFontSize),
-                ...this.mergeObjData('stepSize', props.xAxesStepSize),
+                ...this.mergeObjData(
+                  'fontSize',
+                  props.ticksFontSize,
+                  'onlyValue'
+                ),
+                ...this.mergeObjData(
+                  'stepSize',
+                  props.xAxesStepSize,
+                  'onlyValue'
+                ),
                 ...this.mergeObjData(
                   'fontWeight',
                   'bold',
@@ -193,9 +201,17 @@ class LineChart extends React.Component {
               ...props.options.scales.yAxes[0],
               ticks: {
                 ...props.options.scales.yAxes[0].ticks,
-                ...this.mergeObjData('fontSize', props.ticksFontSize),
-                ...this.mergeObjData('stepSize', props.yAxesStepSize),
-                ...this.mergeObjData('max', this.yAxesMax(props)),
+                ...this.mergeObjData(
+                  'fontSize',
+                  props.ticksFontSize,
+                  'onlyValue'
+                ),
+                ...this.mergeObjData(
+                  'stepSize',
+                  props.yAxesStepSize,
+                  'onlyValue'
+                ),
+                ...this.mergeObjData('max', this.yAxesMax(props), 'onlyValue'),
                 ...this.mergeObjData(
                   'fontWeight',
                   'bold',
