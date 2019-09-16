@@ -1,20 +1,16 @@
 import React from 'react'
 import { Radar } from 'react-chartjs-2'
 import { withTheme } from 'ThemeContext/withTheme'
-import { metricSuffix, customChartToolTip, ucfirst } from 'Utils'
 import { percentageBeautifier } from 'Utils/datasets'
-import { modifyTooltip } from 'Utils/tooltip'
 import { generatePlugins } from './plugins'
+import { tooltips } from './utils'
 
 const RadarChart = (props) => {
   const plugins = generatePlugins(props)
   const {
     data,
-    key,
     width,
     height,
-    tooltipType = false,
-    platform = false,
   } = props
   const themes = props.themeContext.colors
   let parsedData = data || {}
@@ -106,57 +102,7 @@ const RadarChart = (props) => {
         layout: {
           padding: 35,
         },
-        tooltips:
-          (!!tooltipType &&
-            (tooltipType === 'basic' &&
-              customChartToolTip(themes, {
-                callbacks: {
-                  title: () => '',
-                  label: function(tooltipItem, data) {
-                    const count =
-                      (data &&
-                        data.labels &&
-                        data.labels[tooltipItem['index']] &&
-                        data.labels[tooltipItem['index']].count) ||
-                      0
-                    const metric =
-                      (data &&
-                        data.datasets &&
-                        data.datasets[0] &&
-                        data.datasets[0].metric) ||
-                      ''
-                    const name =
-                      data &&
-                      data.labels &&
-                      data.labels[tooltipItem['index']] &&
-                      data.labels[tooltipItem['index']].name
-                    return `${metricSuffix(count) || 0}% ${ucfirst(metric) ||
-                      ''} ${!!name && `| ${name}`}`
-                  },
-                },
-              }))) ||
-          (tooltipType === 'extended' &&
-            modifyTooltip(
-              {
-                template: 'RadarChartTemplate',
-                data: theData,
-                metric:
-                  (data &&
-                    data.datasets &&
-                    data.datasets[0] &&
-                    ucfirst(data.datasets[0].metric)) ||
-                  '',
-                platform: !!platform && platform,
-                options: {
-                  background: themes.tooltipBackground,
-                  textColor: themes.tooltipTextColor,
-                  caretColor: themes.tooltipBackground,
-                },
-              },
-              {
-                mode: 'single',
-              }
-            )),
+        tooltips: tooltips(props, theData),
         plugins: {
           datalabels: false,
         },
