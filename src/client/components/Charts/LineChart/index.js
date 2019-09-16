@@ -172,16 +172,8 @@ class LineChart extends React.Component {
               ...props.options.scales.xAxes[0],
               ticks: {
                 ...props.options.scales.xAxes[0].ticks,
-                ...this.mergeObjData(
-                  'fontSize',
-                  props.ticksFontSize,
-                  'onlyValue'
-                ),
-                ...this.mergeObjData(
-                  'stepSize',
-                  props.xAxesStepSize,
-                  'onlyValue'
-                ),
+                ...this.mergeObjData('fontSize', props.ticksFontSize, 'value'),
+                ...this.mergeObjData('stepSize', props.xAxesStepSize, 'value'),
                 ...this.mergeObjData(
                   'fontWeight',
                   'bold',
@@ -201,17 +193,9 @@ class LineChart extends React.Component {
               ...props.options.scales.yAxes[0],
               ticks: {
                 ...props.options.scales.yAxes[0].ticks,
-                ...this.mergeObjData(
-                  'fontSize',
-                  props.ticksFontSize,
-                  'onlyValue'
-                ),
-                ...this.mergeObjData(
-                  'stepSize',
-                  props.yAxesStepSize,
-                  'onlyValue'
-                ),
-                ...this.mergeObjData('max', this.yAxesMax(props), 'onlyValue'),
+                ...this.mergeObjData('fontSize', props.ticksFontSize, 'value'),
+                ...this.mergeObjData('stepSize', props.yAxesStepSize, 'value'),
+                ...this.mergeObjData('max', this.yAxesMax(props), 'value'),
                 ...this.mergeObjData(
                   'fontWeight',
                   'bold',
