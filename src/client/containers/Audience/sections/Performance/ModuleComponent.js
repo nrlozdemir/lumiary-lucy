@@ -7,6 +7,7 @@ import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
 import { RangeWithBadgeComponent } from './RangeWithBadgeComponent'
 import { handleStyle, trackStyle, railStyle, dotStyle } from './style'
 import style from 'Containers/Audience/style.scss'
+import moduleStyle from './style.scss'
 
 const WrapperModule = ({ children, style, className }) => {
   return (
@@ -121,12 +122,7 @@ const ModuleComponent = ({
                     key={`wrapper-module-${k}`}
                     datasetsIsEmpty={!!el && !Object.keys(el).length}
                   >
-                    <div
-                      style={{
-                        width: '390px',
-                        height: '400px',
-                      }}
-                    >
+                    <div className={moduleStyle.moduleContainer}>
                       <BubbleChart
                         size={[390, 400]}
                         options={bubbleChartOptions}
@@ -150,9 +146,11 @@ const ModuleComponent = ({
                                     }}
                                   >
                                     <span
-                                      className={style.bubbleVisual}
+                                      className={classnames(
+                                        style.bubbleVisual,
+                                        moduleStyle.bubbleVisual
+                                      )}
                                       style={{
-                                        fontSize: 13,
                                         color: colors.audienceBubbleText,
                                       }}
                                     >
