@@ -7,7 +7,13 @@ import { compose, bindActionCreators } from 'redux'
 import { push } from 'connected-react-router'
 import { actions, makeSelectQuickview } from 'Reducers/quickview'
 import { makeSelectSelectFilters } from 'Reducers/selectFilters'
-import { toSlug, socialIconSelector, selectFiltersToType } from 'Utils'
+import { makeSelectGlobalSection } from 'Reducers/app'
+import {
+  toSlug,
+  socialIconSelector,
+  selectFiltersToType,
+  getModuleTerms,
+} from 'Utils'
 import cx from 'classnames'
 import AssetLayer from 'Components/AssetLayer'
 import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
@@ -20,6 +26,7 @@ import style from './style.scss'
 import RouterLoading from 'Components/RouterLoading'
 import ToolTip from 'Components/ToolTip'
 import { Up, Down } from 'Components/Icons/Thumbs'
+import InformationModal from 'Components/Modal/Information'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -29,6 +36,7 @@ export class Main extends React.PureComponent {
   constructor(props) {
     super(props)
     this.state = {
+      modalShow: false,
       platforms: [
         {
           name: 'facebook',
@@ -110,8 +118,12 @@ export class Main extends React.PureComponent {
     })
   }
 
+  setModalShow = (modalShow) => {
+    this.setState({ modalShow })
+  }
+
   render() {
-    const { platforms } = this.state
+    const { platforms, modalShow } = this.state
     const {
       match,
       quickview: {
@@ -120,6 +132,7 @@ export class Main extends React.PureComponent {
       },
       push,
       infoText,
+      sections: { data },
     } = this.props
 
     const selectedPlatform = match.params.platform || 'facebook'
@@ -287,20 +300,34 @@ export class Main extends React.PureComponent {
                                   ? 'Underperforming Video'
                                   : 'Overperforming Video'}
 
-                                {infoText && (
-                                  <i
-                                    className={cx(
-                                      'icon icon-Information',
-                                      style.moduleInfo
-                                    )}
-                                    onMouseEnter={() => changeInfoStatus()}
-                                    onMouseLeave={() => changeInfoStatus()}
-                                    style={{ color: themes.textColor }}
-                                  >
-                                    <ToolTip show={infoShow}>
-                                      {infoText}
-                                    </ToolTip>
-                                  </i>
+                                <i
+                                  className={cx(
+                                    'icon icon-Information',
+                                    style.moduleInfo
+                                  )}
+                                  data-tip="Learn More"
+                                  onClick={() => this.setModalShow(true)}
+                                  style={{ color: colors.textColor }}
+                                  data-for={`module-${moduleKey}`}
+                                />
+                                <ToolTip
+                                  effect="solid"
+                                  xSmallTooltip
+                                  id={`module-${moduleKey}`}
+                                />
+                                {modalShow && (
+                                  <InformationModal
+                                    width={840}
+                                    isOpen={modalShow}
+                                    closeTimeoutMS={300}
+                                    onRequestClose={() =>
+                                      this.setModalShow(false)
+                                    }
+                                    options={{
+                                      data: getModuleTerms(moduleKey, data),
+                                      loading,
+                                    }}
+                                  />
                                 )}
                               </h1>
                               {i === 0 ? <Down /> : <Up />}
@@ -402,7 +429,13 @@ export class Main extends React.PureComponent {
                                           {item.value}
                                         </div>
                                         <div className={style.progressText}>
-                                          <span style={{ color: colors.progressQuickviewRightTitle }} className={style.rightTitle}>
+                                          <span
+                                            style={{
+                                              color:
+                                                colors.progressQuickviewRightTitle,
+                                            }}
+                                            className={style.rightTitle}
+                                          >
                                             {item.percentage}%
                                           </span>
                                         </div>
@@ -464,6 +497,7 @@ Main.propTypes = {
 const mapStateToProps = createStructuredSelector({
   selectFilters: makeSelectSelectFilters(),
   quickview: makeSelectQuickview(),
+  sections: makeSelectGlobalSection(),
 })
 
 const mapDispatchToProps = (dispatch) => {
