@@ -147,7 +147,15 @@ class HorizontalStackedBarChart extends React.Component {
     }
   }
 
-  createDatasets(label, i, colors, stadiumValuesMapped, bucketLabels, labels) {
+  createDatasets(
+    label,
+    i,
+    colors,
+    stadiumValuesMapped,
+    bucketLabels,
+    labels,
+    reorderDatasetByLabel = []
+  ) {
     const { horizontalStackedBarDataOriginal = {} } = this.props
 
     const thisBucketLabel = bucketLabels[i]
@@ -163,7 +171,10 @@ class HorizontalStackedBarChart extends React.Component {
       //the calculation below is for, we should prevent setting border if we have
       //just one data and it will be last item at the same time
       borderWidth: function(data) {
-        if (data.datasetIndex !== data.dataset.data.length - 1) {
+        if (
+          data.datasetIndex !== data.dataset.data.length - 1 &&
+          reorderDatasetByLabel[data.dataIndex]
+        ) {
           const filteredArr = reorderDatasetByLabel[data.dataIndex].filter(
             (item, index) => index !== data.datasetIndex
           )
@@ -209,7 +220,8 @@ class HorizontalStackedBarChart extends React.Component {
         colors,
         stadiumValuesMapped,
         bucketLabels,
-        labels
+        labels,
+        reorderDatasetByLabel
       )
     })
     let reorderDatasetByLabel = []
