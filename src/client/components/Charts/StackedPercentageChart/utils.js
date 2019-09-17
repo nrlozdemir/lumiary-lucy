@@ -42,7 +42,7 @@ export const drawLine = (
     let aspectRatio =
       (el.previousY - el.currentY) / (el.currentX - el.previousX)
 
-    ;[...Array(el.currentX - el.previousX)].map((v, i, arr) => {
+    ;[...Array(Math.round(el.currentX - el.previousX))].map((v, i, arr) => {
       const c = status === 'prev' ? el.currentX - i : el.previousX + i
 
       indexes.push(

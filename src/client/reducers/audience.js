@@ -173,7 +173,7 @@ export const initialState = fromJS({
     error: null,
   },
   audienceDominantColorData: {
-    data: {},
+    data: undefined,
     loading: false,
     error: null,
   },

@@ -7,31 +7,9 @@ import Module from 'Components/Module'
 import HorizontalBarChart from 'Components/Charts/HorizontalBarChart'
 import { barChartOptions } from './options'
 import { isDataSetEmpty } from 'Utils/datasets'
-import Legend from 'Components/Legend'
+import renderLegend from 'Components/Legend/render'
 
 import style from '../../style.scss'
-
-const renderLegend = (legend) => {
-  if (!!legend && !legend.length) {
-    return null
-  }
-
-  return (
-    <div className={style.headerLabel}>
-      <div className={'d-flex align-items-center justify-content-center'}>
-        {!!legend &&
-          !!legend.length &&
-          legend.map((item, idx) => (
-            <Legend
-              key={`colorTempLegend_${idx}`}
-              color={item.color}
-              label={item.label}
-            />
-          ))}
-      </div>
-    </div>
-  )
-}
 
 class GenderSection extends React.Component {
   callBack = (data, moduleKey) => {

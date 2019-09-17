@@ -77,11 +77,6 @@ class ModuleSelectFilters extends React.Component {
     onChange(val)
   }
 
-  removeFilterValue = () => {
-    const { selectKey } = this.props
-    this.props.removeFilter(selectKey)
-  }
-
   componentWillUnmount() {
     this.props.removeAllFilters()
   }
@@ -184,7 +179,6 @@ const mapStateToProps = createStructuredSelector({
 function mapDispatchToProps(dispatch) {
   return {
     changeFilter: (e) => dispatch(actions.changeFilter(e)),
-    removeFilter: (e) => dispatch(actions.removeFilter(e)),
     removeAllFilters: () => dispatch(actions.removeAllFilters()),
     setBrandFilters: (e) => dispatch(actions.setBrandFilters(e)),
   }

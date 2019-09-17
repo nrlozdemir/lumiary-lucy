@@ -8,29 +8,7 @@ import LineChart from 'Components/Charts/LineChart'
 import { isDataSetEmpty } from 'Utils/datasets'
 import style from 'Containers/Audience/style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import Legend from 'Components/Legend'
-
-const renderLegend = (legend) => {
-  if (!!legend && !legend.length) {
-    return null
-  }
-
-  return (
-    <div className={style.headerLabel}>
-      <div className={'d-flex align-items-center justify-content-center'}>
-        {!!legend &&
-          !!legend.length &&
-          legend.map((item, idx) => (
-            <Legend
-              key={`colorTempLegend_${idx}`}
-              color={item.color}
-              label={item.label}
-            />
-          ))}
-      </div>
-    </div>
-  )
-}
+import renderLegend from 'Components/Legend/render'
 
 class ChangeOverTime extends React.Component {
   callBack = (data, moduleKey) => {
