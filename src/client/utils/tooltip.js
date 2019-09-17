@@ -264,6 +264,30 @@ const HorizontalBarChartTemplate = function(props) {
   )
 }
 
+const MarketviewVerticalStackedBarChartTemplate = function(props) {
+  const style = getGlobalStyle()
+
+  return (
+    <div>
+      <div className="chartjs-tooltip-title" style={style.title}>
+        {`${!!props.value &&
+          percentageBeautifier(props.value)}%  |  ${!!props.label &&
+          props.label}`}
+      </div>
+      <div className="chartjs-tooltip-body" style={style.body}>
+        <span>{!!props.label && props.label} received </span>
+        <span>
+          {!!props.value && percentageBeautifier(props.value)}% of all{' '}
+          {!!props.metricValue && props.metricValue} on
+        </span>
+        <span>
+          {!!props.platformLabel && props.platformLabel.toLowerCase()}.
+        </span>
+      </div>
+    </div>
+  )
+}
+
 const modifyTooltip = function(props, conf = {}) {
   const { options = {} } = props
   return {
@@ -354,6 +378,31 @@ const modifyTooltip = function(props, conf = {}) {
 
       const metric = !!props && !!props.metric && props.metric
       const platform = !!props && !!props.platform && props.platform
+
+      const metricValue =
+        !!props &&
+        !!props.data &&
+        !!props.data.metric &&
+        !!props.data.metric.value &&
+        props.data.metric.value
+      const platformValue =
+        !!props &&
+        !!props.data &&
+        !!props.data.platform &&
+        !!props.data.platform.value &&
+        props.data.platform.value
+      const metricLabel =
+        !!props &&
+        !!props.data &&
+        !!props.data.metric &&
+        !!props.data.metric.label &&
+        props.data.metric.label
+      const platformLabel =
+        !!props &&
+        !!props.data &&
+        !!props.data.platform &&
+        !!props.data.platform.label &&
+        props.data.platform.label
 
       const dataPoints =
         !!tooltipModel.dataPoints &&
@@ -502,6 +551,21 @@ const modifyTooltip = function(props, conf = {}) {
               metric: (!!metric && metric) || '',
               platform: (!!platform && platform) || '',
             }),
+          MarketviewVerticalStackedBarChartTemplate: () =>
+            MarketviewVerticalStackedBarChartTemplate({
+              label: (!!label && label) || '',
+              value: (!!value && value) || 0,
+              labelLong: (!!labelLong && labelLong) || '',
+              difference: !!difference && difference | 0,
+              itemLabel: (!!itemLabel && itemLabel) || '',
+              propertyValue: (!!propertyValue && propertyValue) || '',
+              metric: (!!metric && metric) || '',
+              platform: (!!platform && platform) || '',
+              metricValue: !!metricValue && metricValue,
+              platformValue: !!platformValue && platformValue,
+              metricLabel: !!metricLabel && metricLabel,
+              platformLabel: !!platformLabel && platformLabel,
+            }),
         }
 
         const Template = templates[props.template]
@@ -609,7 +673,8 @@ const modifyTooltip = function(props, conf = {}) {
       }
       if (
         !!props.template &&
-        props.template === 'VerticalStackedBarChartTemplate'
+        (props.template === 'VerticalStackedBarChartTemplate' ||
+          props.template === 'MarketviewVerticalStackedBarChartTemplate')
       ) {
         let barDataModel
         if (tooltipModel.dataPoints) {
