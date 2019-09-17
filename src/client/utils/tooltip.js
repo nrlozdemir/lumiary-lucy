@@ -281,7 +281,7 @@ const MarketviewVerticalStackedBarChartTemplate = function(props) {
           {!!props.metricValue && props.metricValue} on
         </span>
         <span>
-          {!!props.platformLabel && props.platformLabel.toLowerCase()}.
+          {!!props.platformLabel && props.platformLabel}.
         </span>
       </div>
     </div>
