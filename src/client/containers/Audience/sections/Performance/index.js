@@ -5,6 +5,7 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudiencePerformance } from 'Reducers/audience'
 import _ from 'lodash'
 import { withTheme } from 'ThemeContext/withTheme'
+import { ModuleComponent } from './ModuleComponent'
 
 class Performance extends React.Component {
   constructor(props) {
@@ -37,26 +38,12 @@ class Performance extends React.Component {
   }
 
   render() {
-    const {
-      audiencePerformanceData: { data, loading, error },
-      themeContext: { colors },
-    } = this.props
-
     return (
       <ModuleComponent
-        isEmpty={
-          !loading &&
-          (_.isEmpty(data) ||
-            (!!data &&
-              Object.values(data).every((valArr) => {
-                return (
-                  Object.keys(valArr).length && valArr.every((v) => !v.value)
-                )
-              })))
-        }
         props={this.props}
         state={this.state}
-        colors={colors}
+        moduleCallback={this.callBack}
+        parentUpdateSlider={(val) => this.updateSlider(val)}
       />
     )
   }

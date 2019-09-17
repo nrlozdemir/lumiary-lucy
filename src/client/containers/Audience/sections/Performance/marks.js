@@ -1,5 +1,3 @@
-import React from 'react'
-
 export const marks = {
   0: <div className="custom-dot">0</div>,
   10: <div className="custom-dot">10</div>,

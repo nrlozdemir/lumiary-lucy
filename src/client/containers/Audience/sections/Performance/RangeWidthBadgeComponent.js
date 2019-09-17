@@ -1,6 +1,7 @@
 import React from 'react'
-import RangeWithBadge from 'Components/Form/RangeWithBadge'
 import classnames from 'classnames'
+import _ from 'lodash'
+import RangeWithBadge from 'Components/Form/RangeWithBadge'
 
 const RangeWithBadgeComponent = ({
   themeType,
