@@ -9,7 +9,7 @@ import { withTheme } from 'ThemeContext/withTheme'
 import { options, wrapperBarOptions } from './chartOptions'
 import BarItem from './BarItem'
 
-import Legend from 'Components/Legend'
+import renderLegend from 'Components/Legend/render'
 
 const barChartContainer = cx(style.panopticBarChart)
 const barContainerClass = cx(style.barChartContainer)
@@ -39,32 +39,6 @@ const plugins = [
     },
   },
 ]
-
-const renderLegend = (legend, legendEnd) => {
-  if (!!legend && !legend.length) {
-    return null
-  }
-
-  return (
-    <div className={style.headerLabel}>
-      <div
-        className={`d-flex align-items-center ${
-          legendEnd ? 'justify-content-end' : 'justify-content-center'
-        }`}
-      >
-        {!!legend &&
-          !!legend.length &&
-          legend.map((item, idx) => (
-            <Legend
-              key={`BarChartLegend_${idx}`}
-              color={item.color}
-              label={item.label}
-            />
-          ))}
-      </div>
-    </div>
-  )
-}
 
 const VideoReleasesBarChartModule = (props) => {
   const datasetKeyProvider = () => {
