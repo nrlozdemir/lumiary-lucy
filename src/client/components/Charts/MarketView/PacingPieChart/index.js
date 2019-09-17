@@ -1,7 +1,7 @@
 import React from 'react'
 import { Pie } from 'react-chartjs-2'
 import style from './style.scss'
-import { customChartToolTip, ucfirst } from 'Utils'
+import { modifyTooltip } from 'Utils/tooltip'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import 'Utils/chart-shadow'
 
@@ -26,35 +26,15 @@ const PacingPieChart = ({ data = {}, metric }) => {
             height={216}
             width={216}
             options={{
-              tooltips: customChartToolTip(colors, {
-                callbacks: {
-                  title: function(tooltipItem, data) {
-                    const name =
-                      data &&
-                      data.labels &&
-                      data.labels[tooltipItem[0]['index']]
-                    return `${!!name && name}`
-                  },
-                  label: function(tooltipItem, data) {
-                    const count =
-                      (data &&
-                        data.datasets &&
-                        data.datasets[0] &&
-                        data.datasets[0].data[tooltipItem['index']]) ||
-                      ''
-                    return `${metricSuffix(parseInt(count) || 0)} ${ucfirst(
-                      metric
-                    )}`
-                  },
+              tooltips: modifyTooltip({
+                template: 'MarketviewDoughnutChartTemplate',
+                data,
+                metric: metric,
+                options: {
+                  background: colors.tooltipBackground,
+                  textColor: colors.tooltipTextColor,
+                  caretColor: colors.tooltipBackground,
                 },
-                xPadding: 12,
-                titleFontFamily: 'ClanOT',
-                bodyFontFamily: 'ClanOT',
-                //titleAlign: 'center',
-                //footerAlign: 'center',
-                //bodyAlign: 'center',
-                //yAlign: 'top',
-                //xAlign: 'center',
               }),
               responsive: false,
               legend: {

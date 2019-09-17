@@ -26,7 +26,7 @@ const getGlobalStyle = (custom = { title: {}, body: {} }) => {
     lineHeight: '1.67',
     margin: '8px 16px 16px 16px',
     paddingTop: '8px',
-    borderTop: '1px solid #e8ecf0',
+    borderTop: '1px solid rgba(172, 176, 190, 0.5)',
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
@@ -259,6 +259,30 @@ const HorizontalBarChartTemplate = function(props) {
           videos that are {!!props.property && props.property.toLowerCase()}
         </p>
         <p style={pStyle}>{!!props.metric && props.metric.toLowerCase()}</p>
+      </div>
+    </React.Fragment>
+  )
+}
+
+const MarketviewDoughnutChartTemplate = function(props) {
+  const style = getGlobalStyle()
+
+  return (
+    <React.Fragment>
+      <div className="chartjs-tooltip-title" style={style.title}>
+        <span>
+          {metricSuffix(props.value)} {ucfirst(props.metric)} |{' '}
+          {props.itemLabel} {props.label}
+        </span>
+      </div>
+      <div className="chartjs-tooltip-body" style={style.body}>
+        <span>Competitor videos that are</span>
+        <span>
+          shot in {props.itemLabel} {props.label} received
+        </span>
+        <span>
+          {metricSuffix(props.value)} {ucfirst(props.metric)}.
+        </span>
       </div>
     </React.Fragment>
   )
@@ -501,6 +525,14 @@ const modifyTooltip = function(props, conf = {}) {
               itemLabel: (!!itemLabel && itemLabel) || '',
               metric: (!!metric && metric) || '',
               platform: (!!platform && platform) || '',
+            }),
+
+          MarketviewDoughnutChartTemplate: () =>
+            MarketviewDoughnutChartTemplate({
+              label: (!!label && label) || '',
+              value: (!!value && value) || 0,
+              itemLabel: (!!itemLabel && itemLabel) || '',
+              metric: (!!metric && metric) || '',
             }),
         }
 
