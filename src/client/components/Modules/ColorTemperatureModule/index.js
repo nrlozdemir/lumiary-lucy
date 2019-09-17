@@ -4,32 +4,10 @@ import PropTypes from 'prop-types'
 import Module from 'Components/Module'
 import ColorTemperatureChart from 'Components/Charts/ColorTemperatureChart'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import Legend from 'Components/Legend'
+import renderLegend from 'Components/Legend/render'
 
 import cx from 'classnames'
 import style from './styles.scss'
-
-const renderLegend = (legend) => {
-  if (!!legend && !legend.length) {
-    return null
-  }
-
-  return (
-    <div className={style.headerLabel}>
-      <div className={'d-flex align-items-center justify-content-center'}>
-        {!!legend &&
-          !!legend.length &&
-          legend.map((item, idx) => (
-            <Legend
-              key={`colorTempLegend_${idx}`}
-              color={item.color}
-              label={item.label}
-            />
-          ))}
-      </div>
-    </div>
-  )
-}
 
 const ColorTemperatureModule = ({
   data,
