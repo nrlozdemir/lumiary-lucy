@@ -735,16 +735,19 @@ export const getTopNValues = (datasets = [], n = 5) => {
 }
 
 // @param - Vals {object} key/value pair of label/oercentage
-const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
+const convertIntoLibAndIndustryDoughnut = (obj = {}, property, color = '') => {
   const result = {
     maxKey: null,
     maxValue: null,
     chartData: null,
   }
 
-  const keys = (!!obj && Object.keys(obj)) || []
+  let vals = []
+  const keys = Object.keys(obj)
 
-  const vals = (!!keys.length && Object.values(obj)) || []
+  if(!!keys.length) {
+    vals = Object.values(obj)
+  }
 
   if (!!vals.length) {
     const { maxKey, maxVal } = keys.reduce(
@@ -759,6 +762,7 @@ const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
       },
       { maxKey: null, maxVal: 0 }
     )
+    const backgroundColor = keys.map(key => key === maxKey ? color : '#505050')
     result.maxKeyLabel = maxKey
     result.maxKey = getLabelWithSuffix(maxKey, property)
     result.maxValue = maxVal
@@ -768,9 +772,7 @@ const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
         {
           borderColor: '#ACB0BE',
           data: vals.map((val) => (val * 100).toFixed(2)),
-          backgroundColor: keys.map((key) =>
-            key === maxKey ? color : '#505050'
-          ),
+          backgroundColor,
           hoverBackgroundColor: [],
         },
       ],
