@@ -132,9 +132,9 @@ const ModuleComponent = ({
                           Object.keys(el).length &&
                           el.map((bubble, i) => {
                             return (
-                              <div key={k}>
+                              <div key={`bubble-wrapper-${i}-${k}`}>
                                 <Bubble
-                                  key={'bubble-' + k}
+                                  key={`bubble-chart-${i}-${k}`}
                                   radius={bubble.value}
                                   fill={colors.bodyBackground}
                                   stroke="#5292E5"
