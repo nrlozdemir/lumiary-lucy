@@ -346,8 +346,9 @@ const convertMultiRequestDataIntoDatasets = (
   payload,
   options,
   revert,
-  customOptions = { backgroundColors: [], borderColors: [], borderWidth: null }
+  customOptions = {}
 ) => {
+  const { backgroundColors = [], borderColors = [], borderWidth = 1 } = customOptions
   const datasetLabels = Object.keys(payload)
   const property = options.property[0]
 
@@ -358,35 +359,28 @@ const convertMultiRequestDataIntoDatasets = (
     firstPayload[firstPayloadBrand][property]
   ).filter((key) => key !== 'subtotal')
 
-  const datasets = (!revert ? datasetLabels : firstPayloadLabels).map(
+  const mappingLabels = !revert ? datasetLabels : firstPayloadLabels
+  const datasets = (mappingLabels).map(
     (label, index) => {
-      const data = (!revert ? firstPayloadLabels : datasetLabels).map((key) => {
+      const mappingData = !revert ? firstPayloadLabels : datasetLabels
+      const data = (mappingData).map((key) => {
         const currentLabel = payload[!revert ? label : key].data
+        console.log('current label : ', currentLabel)
         const brand = Object.keys(currentLabel)[0]
         const response = currentLabel[brand][property]
 
+        console.log('ressss : ', response[!revert ? key : label])
         return response[!revert ? key : label]
       })
 
+      const backgroundColor = backgroundColors[index] || chartColors[index]
+      const borderColor = borderColors[index] || chartColors[index]
+
       return {
         label: ucfirst(label),
-        backgroundColor:
-          (customOptions &&
-            customOptions.backgroundColors &&
-            !!customOptions.backgroundColors[index] &&
-            customOptions.backgroundColors[index]) ||
-          chartColors[index],
-        borderColor:
-          (customOptions &&
-            customOptions.borderColors &&
-            !!customOptions.borderColors[index] &&
-            customOptions.borderColors[index]) ||
-          chartColors[index],
-        borderWidth:
-          (customOptions &&
-            !!customOptions.borderWidth &&
-            customOptions.borderWidth) ||
-          1,
+        backgroundColor,
+        borderColor,
+        borderWidth,
         data,
       }
     }
