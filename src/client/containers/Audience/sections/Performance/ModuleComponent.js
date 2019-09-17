@@ -183,7 +183,9 @@ const ModuleComponent = ({
                                           {!!titles &&
                                             !!titles[k] &&
                                             titles[k].toLowerCase()}
-                                          {`${!!k && k < 2 && 's'} ${bubble.min}-${bubble.max} `}
+                                          {`${!!k && k < 2 && 's'} ${
+                                            bubble.min
+                                          }-${bubble.max} `}
                                           <br />
                                           prefer videos that{` `}
                                           <br />
@@ -227,6 +229,8 @@ const ModuleComponent = ({
               parentCallback={(val) => {
                 parentUpdateSlider(val)
               }}
+              isEmpty={isEmpty}
+              loading={loading}
             />
           )}
         </div>

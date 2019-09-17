@@ -10,6 +10,8 @@ const RangeWithBadgeComponent = ({
   railStyle,
   dotStyle,
   parentCallback,
+  isEmpty,
+  loading,
 }) => {
   return (
     <RangeWithBadge
@@ -27,9 +29,10 @@ const RangeWithBadgeComponent = ({
       max={100}
       tipProps={{
         visible: true,
-        overlayClassName: classnames('customTooltip', {
+        overlayClassName: classnames('customTooltip', 'performanceRangeTooltip', {
           dark: themeType === 'dark',
           light: themeType === 'light',
+          none: !!isEmpty || !!loading,
         }),
         overlayStyle: {
           background: 'none',
