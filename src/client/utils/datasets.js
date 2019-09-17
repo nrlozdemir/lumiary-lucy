@@ -400,7 +400,8 @@ const convertMultiRequestDataIntoDatasets = (
 }
 
 const isDataSetEmpty = (data = {}) => {
-  const { datasets = [] } = data
+  console.log('data : ', data)
+  const { datasets = [] } = { ...data }
   if(!datasets.length) {
     return true
   }
