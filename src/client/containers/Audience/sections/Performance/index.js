@@ -203,7 +203,7 @@ class Performance extends React.Component {
                       firstCircleTimesX: -0.3,
                       firstCircleTimesY: -1,
                       toolTipPositionTop: true,
-                      toolTipDelay: 10,
+                      toolTipDelay: 100,
                       toolTipRadius: 8,
                       toolTipArrowWidth: 16,
                       toolTipArrowHeight: 8,
