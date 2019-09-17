@@ -181,9 +181,8 @@ const ModuleComponent = ({
                                           {!!titles &&
                                             !!titles[k] &&
                                             titles[k].toLowerCase()}
-                                          {`${!!k && k < 2 && 's'} ${
-                                            bubble.min
-                                          }-${bubble.max} `}
+                                          {k < 2 && `s`}
+                                          {` ${bubble.min}-${bubble.max} `}
                                           <br />
                                           prefer videos that{` `}
                                           <br />
