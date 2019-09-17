@@ -1004,20 +1004,22 @@ const convertPropertiesIntoDatasets = (data, options = {}) => {
  */
 
 const convertDurationLabels = (response = {}, prop = null, oneChar = false) => {
-  return prop === 'duration'
-    ? Object.keys(response).reduce((acc, key) => {
-        const label = oneChar
-          ? getPropLabel(key, prop)
-          : getLabelWithSuffix(key, prop)
+  if(prop === 'duration') {
+    return response
+  }
+  
+  return Object.keys(response).reduce((acc, key) => {
+      const label = oneChar
+        ? getPropLabel(key, prop)
+        : getLabelWithSuffix(key, prop)
 
-        return key !== 'subtotal'
-          ? {
-              ...acc,
-              [label]: response[key],
-            }
-          : acc
-      }, {})
-    : response
+      return key !== 'subtotal'
+        ? {
+            ...acc,
+            [label]: response[key],
+          }
+        : acc
+    }, {})
 }
 
 /* 
