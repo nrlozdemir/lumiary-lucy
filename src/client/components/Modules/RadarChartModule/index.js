@@ -9,8 +9,58 @@ import emptyData from './emptyData.json'
 import { isDataSetEmpty } from 'Utils/datasets'
 import cx from 'classnames'
 
+const renderLeftRightSections = ({checkData = [], isEmpty, side = 'left', title, width, height}) => {
+  const opacity = isEmpty ? 0.25 : 1
+  const data = side === 'left' ? checkData[0] : checkData[1]
+
+  return (
+    <div className={style.chartPos}>
+      {isEmpty && (
+        <div className={style.emptyData}>No Data Available</div>
+      )}
+      <div
+        style={{
+          opacity,
+          width: width,
+          height: height
+        }}
+      >
+        <RadarChart
+          data={data.data}
+          width={width}
+          height={height}
+          tooltipType="extended"
+          platform={title || data.type}
+        />
+      </div>
+    </div>
+  )
+}
+
+const renderLabels = ({ checkData, progressHasData = false, side = 'left', isEmpty, title, colors = {} }) => {
+  const opacity = isEmpty ? 0.25 : 1
+  const data = side === 'left' ? checkData[0] : checkData[1]
+  return (
+    <div
+      className={cx(style.label, {
+        [style.dark]: colors.themeType === 'dark',
+        [style.light]: colors.themeType === 'light',
+      })}
+      style={{ opacity }}
+    >
+      {progressHasData || title ? (
+        <React.Fragment>
+          {title || data.type}
+        </React.Fragment>
+      ) : (
+          <React.Fragment>N/A</React.Fragment>
+        )}
+    </div>
+  )
+}
+
 const RadarChartModule = ({
-  data,
+  data = [],
   moduleKey,
   title,
   action,
@@ -19,18 +69,14 @@ const RadarChartModule = ({
   leftTitle,
   rightTitle,
   loading = false,
-  infoText,
   width = 540,
   height = 540,
   actionOnProp,
 }) => {
-  const isEmpty =
-    !data ||
-    !data.length ||
-    ((data.length && (!data[0] || !data[1])) ||
-      (data.length &&
-        (!!data[0] && !!data[1] && !data[0].total && !data[1].total)))
-
+  const [data1 = {}, data2 = {}] = data
+  const { total : total1 = false } = data1
+  const { total: total2 = false } = data2
+  const isEmpty = !(total1 && total2)
   let checkData = isEmpty ? emptyData : data
 
   const leftIsEmpty =
@@ -78,71 +124,32 @@ const RadarChartModule = ({
             style={{ color: colors.textColor }}
           >
             <div className={style.groupChart}>
-              <div className={style.chartPos}>
-                {leftIsEmpty && (
-                  <div className={style.emptyData}>No Data Available</div>
-                )}
-                <div
-                  style={{ opacity: leftOpacity, width: width, height: height }}
-                >
-                  <RadarChart
-                    data={checkData[0].data}
-                    width={width}
-                    height={height}
-                    tooltipType="extended"
-                    platform={
-                      leftTitle
-                        ? leftTitle
-                        : !!checkData && !!checkData[0] && checkData[0].type
-                    }
-                  />
-                </div>
-              </div>
-              <div className={style.chartPos}>
-                {rightIsEmpty && (
-                  <div className={style.emptyData}>No Data Available</div>
-                )}
-                <div
-                  style={{
-                    opacity: rightOpacity,
-                    width: width,
-                    height: height,
-                  }}
-                >
-                  <RadarChart
-                    data={checkData[1].data}
-                    width={width}
-                    height={height}
-                    tooltipType="extended"
-                    platform={
-                      rightTitle
-                        ? rightTitle
-                        : !!checkData && !!checkData[1] && checkData[1].type
-                    }
-                  />
-                </div>
-              </div>
+              {renderLeftRightSections({
+                checkData,
+                isEmpty: leftIsEmpty,
+                side: 'left',
+                title: leftTitle,
+                width,
+                height
+              })}
+              {renderLeftRightSections({
+                checkData,
+                isEmpty: rightIsEmpty,
+                side: 'right',
+                title: rightTitle,
+                width,
+                height
+              })}
             </div>
             <div className={'mt-32 ' + style.labelContainer}>
-              <div
-                className={cx(style.label, {
-                  [style.dark]: colors.themeType === 'dark',
-                  [style.light]: colors.themeType === 'light',
-                })}
-                style={{
-                  opacity: leftOpacity,
-                }}
-              >
-                {leftProgressHasData || leftTitle ? (
-                  <React.Fragment>
-                    {leftTitle
-                      ? leftTitle
-                      : !!checkData && !!checkData[0] && checkData[0].type}
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>N/A</React.Fragment>
-                )}
-              </div>
+              {renderLabels({
+                checkData,
+                progressHasData: leftProgressHasData,
+                side: 'left',
+                isEmpty: leftIsEmpty,
+                colors,
+                title: leftTitle
+              })}
               {(leftProgressHasData || rightProgressHasData) && (
                 <p>{`Top ${
                   leftProgressHasData
@@ -152,25 +159,14 @@ const RadarChartModule = ({
                     : emptyData[0].progress.length
                 } Dominant Colors`}</p>
               )}
-              <div
-                className={cx(style.label, {
-                  [style.dark]: colors.themeType === 'dark',
-                  [style.light]: colors.themeType === 'light',
-                })}
-                style={{
-                  opacity: rightOpacity,
-                }}
-              >
-                {rightProgressHasData || rightTitle ? (
-                  <React.Fragment>
-                    {rightTitle
-                      ? rightTitle
-                      : !!checkData && !!checkData[1] && checkData[1].type}
-                  </React.Fragment>
-                ) : (
-                  <React.Fragment>N/A</React.Fragment>
-                )}
-              </div>
+              {renderLabels({
+                checkData,
+                progressHasData: rightProgressHasData,
+                side: 'right',
+                isEmpty: rightIsEmpty,
+                colors,
+                title: rightTitle
+              })}
             </div>
             <div className={style.groupProgressBar}>
               <div

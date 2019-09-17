@@ -65,15 +65,9 @@ class LineChartSection extends React.Component {
                             title: function(tooltipItem, data) {
                               const { datasetIndex, index } = tooltipItem[0]
                               if (datasetIndex === 1) {
-                                return `${
-                                  data.datasets[datasetIndex].data[index]
-                                }% of industry is shot in ${sectionData.label}`
+                                return `${data.datasets[datasetIndex].data[index]}% of industry is shot in ${sectionData.label}`
                               } else {
-                                return `${
-                                  data.datasets[datasetIndex].data[index]
-                                }% of your library is shot in ${
-                                  sectionData.label
-                                }`
+                                return `${data.datasets[datasetIndex].data[index]}% of your library is shot in ${sectionData.label}`
                               }
                             },
                             label: function(tooltipItem, data) {
