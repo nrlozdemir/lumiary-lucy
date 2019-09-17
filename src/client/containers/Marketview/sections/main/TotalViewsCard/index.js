@@ -173,6 +173,10 @@ class TotalViewsChart extends React.Component {
                   : null
               }
               barSpacing={2}
+              tooltipType="extended"
+              tooltipTemplate="MarketviewVerticalStackedBarChartTemplate"
+              platform={!!platform && platform}
+              metric={!!metric && metric}
             />
           </div>
           <div className="col-6">

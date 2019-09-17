@@ -5,7 +5,7 @@ import Module from 'Components/Module'
 import StackedBarChart from 'Components/Charts/StackedBarChart'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
 import 'chartjs-plugin-datalabels'
-import Legend from 'Components/Legend'
+import renderLegend from 'Components/Legend/render'
 
 import style from './style.scss'
 import classnames from 'classnames'
@@ -49,28 +49,6 @@ const barPlugins = [
     },
   },
 ]
-
-const renderLegend = (legend) => {
-  if (!!legend && !legend.length) {
-    return null
-  }
-
-  return (
-    <div className={style.headerLabel}>
-      <div className={'d-flex align-items-center justify-content-center'}>
-        {!!legend &&
-          !!legend.length &&
-          legend.map((item, idx) => (
-            <Legend
-              key={`colorTempLegend_${idx}`}
-              color={item.color}
-              label={item.label}
-            />
-          ))}
-      </div>
-    </div>
-  )
-}
 
 const BarAndDoughnutChartModule = ({
   moduleKey,

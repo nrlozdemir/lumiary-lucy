@@ -18,7 +18,6 @@ import moment from 'moment'
 
 export const types = {
   CHANGE_FILTER: 'SELECT_FILTER/CHANGE_FILTER',
-  REMOVE_FILTER: 'SELECT_FILTER/REMOVE_FILTER',
   REMOVE_ALL_FILTER: 'SELECT_FILTER/REMOVE_ALL_FILTER',
 
   SET_BRAND_OPTIONS: 'SELECT_FILTER/SET_BRAND_OPTIONS',
@@ -26,10 +25,6 @@ export const types = {
 export const actions = {
   changeFilter: (payload) => ({
     type: types.CHANGE_FILTER,
-    payload,
-  }),
-  removeFilter: (payload) => ({
-    type: types.REMOVE_FILTER,
     payload,
   }),
   removeAllFilters: () => ({
@@ -308,8 +303,6 @@ const selectFiltersReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.CHANGE_FILTER:
       return state.mergeDeepIn(['values'], fromJS(payload))
-    case types.REMOVE_FILTER:
-      return state.deleteIn(['values', fromJS(payload)])
     case types.REMOVE_ALL_FILTER:
       return state.set('values', fromJS({}))
     case types.SET_BRAND_OPTIONS:
