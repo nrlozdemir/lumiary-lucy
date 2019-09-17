@@ -22,6 +22,37 @@
   box-sizing: border-box;
   height: 820px;
 
+  .bubbleTooltip {
+    font-family: $font-family-ClanOT;
+    margin: 0 10px;
+    text-align: center;
+
+    .header {
+      font-size: 14px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.43;
+      letter-spacing: normal;
+      text-align: center;
+      margin-top: 8px;
+      padding-bottom: 8px;
+      text-transform: capitalize;
+      display: inline-block;
+    }
+
+    .body {
+      font-size: 12px;
+      font-weight: bold;
+      font-style: normal;
+      font-stretch: normal;
+      line-height: 1.67;
+      letter-spacing: normal;
+      text-align: center;
+      margin: 8px 0;
+    }
+  }
+
   .marketViewCardHeader {
     border-bottom-width: 1px;
     border-bottom-style: solid;
@@ -321,19 +352,6 @@
     align-items: center;
     color: inherit;
     // font-size: 170px;
-  }
-}
-
-.bubbleTooltip {
-  font-family: $font-family-ClanOT;
-  text-align: center;
-  font-size: 18px;
-  line-height: 1.6;
-  color: black;
-  font-weight: bold;
-
-  &:first-child {
-    text-transform: capitalize;
   }
 }
 
