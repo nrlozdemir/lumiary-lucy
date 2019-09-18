@@ -48,16 +48,16 @@ export function sortVideos(videos, filters) {
   if (OrderedBy) {
     let orderBy;
     switch (OrderedBy.value) {
-      case 'mostViewedVideos':
+      case 'filterMostViewed':
         orderBy = 'viewCount';
         break;
-      case 'mostLikedVideos':
+      case 'filterMostLiked':
         orderBy = 'likeCount';
         break;
-      case 'mostSharedVideos':
+      case 'filterMostShared':
         orderBy = 'shareCount';
         break;
-      case 'mostCommentedVideos':
+      case 'filterMostCommented':
         orderBy = 'commentCount';
         break;
     }

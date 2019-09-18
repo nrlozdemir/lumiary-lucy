@@ -97,19 +97,19 @@ function getBodyFromFilters(filters = {}) {
         }
 
         switch (thisFilter.value) {
-          case 'mostLikedVideos':
+          case 'filterMostLiked':
             accumulator['orderBy'].push(['like', 'desc'])
             break
 
-          case 'mostViewedVideos':
+          case 'filterMostViewed':
             accumulator['orderBy'].push(['view', 'desc'])
             break
 
-          case 'mostSharedVideos':
+          case 'filterMostShared':
             accumulator['orderBy'].push(['share', 'desc'])
             break
 
-          case 'mostCommentedVideos':
+          case 'filterMostCommented':
             accumulator['orderBy'].push(['comment', 'desc'])
             break
         }
