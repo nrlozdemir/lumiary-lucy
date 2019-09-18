@@ -47,7 +47,7 @@ const Info = ({ videoId, title, loading, ...rest }) => (
               />
               <IndustryData loading={loading} />
             </div>
-            <h4 class={style.pageTitle}>
+            <h4 className={style.pageTitle}>
               Library vs Industry Property Comparison
             </h4>
             <LineChart />

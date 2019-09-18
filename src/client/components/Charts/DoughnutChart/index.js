@@ -12,6 +12,7 @@ import 'Utils/chart-shadow'
 import { isNumber, isFinite } from 'lodash'
 import Labels from 'Components/Charts/Labels'
 import { modifyTooltip } from 'Utils/tooltip'
+import { beforeDrawFunc } from 'Utils/chart-plugins'
 
 const propTypes = {}
 const defaultProps = {
@@ -50,7 +51,11 @@ const dataLabelPlugins = (value, func = 'insertBefore', item) => {
 
 class DoughnutChart extends React.Component {
   renderLabelsData = () => {
-    const { labelContainerClassname = false, labelsData, removeLabelMargin = false } = this.props
+    const {
+      labelContainerClassname = false,
+      labelsData,
+      removeLabelMargin = false,
+    } = this.props
     return (
       <div
         className={classnames(style.labelContainer, {
@@ -64,41 +69,47 @@ class DoughnutChart extends React.Component {
       </div>
     )
   }
-  
+
   generateTooltip = (newData, tooltipData = {}, chartValues = []) => {
-    const { tooltipType = 'basic', themeContext = {}, tooltipMode = 'dataset', slicePiecesWidth = false } = this.props
-    const { colors : themes = {} } = themeContext
-    
-    return ((!!tooltipType &&
-      (tooltipType === 'basic' &&
-        customChartToolTip(
-          themes,
-          {
-            mode: tooltipMode,
-            filter: (tooltipItem) => {
-              if (!!slicePiecesWidth) {
-                if (
-                  !!tooltipData['labels'][tooltipItem.index] &&
-                  tooltipMode === 'dataset'
-                ) {
-                  return chartValues
-                } else if (
-                  !!tooltipData['labels'][tooltipItem.index] &&
-                  tooltipMode === 'nearest'
-                ) {
-                  return chartValues[tooltipItem.index]
+    const {
+      tooltipType = 'basic',
+      themeContext = {},
+      tooltipMode = 'dataset',
+      slicePiecesWidth = false,
+    } = this.props
+    const { colors: themes = {} } = themeContext
+
+    return (
+      (!!tooltipType &&
+        (tooltipType === 'basic' &&
+          customChartToolTip(
+            themes,
+            {
+              mode: tooltipMode,
+              filter: (tooltipItem) => {
+                if (!!slicePiecesWidth) {
+                  if (
+                    !!tooltipData['labels'][tooltipItem.index] &&
+                    tooltipMode === 'dataset'
+                  ) {
+                    return chartValues
+                  } else if (
+                    !!tooltipData['labels'][tooltipItem.index] &&
+                    tooltipMode === 'nearest'
+                  ) {
+                    return chartValues[tooltipItem.index]
+                  }
+                } else {
+                  if (tooltipMode === 'dataset') {
+                    return chartValues
+                  } else if (tooltipMode === 'nearest') {
+                    return chartValues[tooltipItem.index]
+                  }
                 }
-              } else {
-                if (tooltipMode === 'dataset') {
-                  return chartValues
-                } else if (tooltipMode === 'nearest') {
-                  return chartValues[tooltipItem.index]
-                }
-              }
+              },
             },
-          },
-          tooltipData
-        ))) ||
+            tooltipData
+          ))) ||
       (tooltipType === 'extended' &&
         modifyTooltip({
           template: 'DoughnutChartTemplate',
@@ -108,11 +119,16 @@ class DoughnutChart extends React.Component {
             textColor: themes.tooltipTextColor,
             caretColor: themes.tooltipBackground,
           },
-        })))
+        }))
+    )
   }
 
   generateLabelFormatter = (value) => {
-    const { slicePiecesWidth = false, dataLabelFunction, dataLabelInsert } = this.props
+    const {
+      slicePiecesWidth = false,
+      dataLabelFunction,
+      dataLabelInsert,
+    } = this.props
     if (!value) return
     //hide slices label
     if (
@@ -122,26 +138,22 @@ class DoughnutChart extends React.Component {
       return ''
     }
     if (dataLabelFunction) {
-      return dataLabelPlugins(
-        value,
-        dataLabelFunction,
-        dataLabelInsert
-      )
+      return dataLabelPlugins(value, dataLabelFunction, dataLabelInsert)
     }
     return value
   }
 
   renderAverage = () => {
-    const { 
+    const {
       average,
       themeContext = {},
       cvScoreData = {},
       tooltipCaretPosition = false,
       tooltipTemplate = false,
       currentDayIndex = false,
-      weekdayOrder = false
+      weekdayOrder = false,
     } = this.props
-    const { colors : themes = {} } = themeContext
+    const { colors: themes = {} } = themeContext
     const tooltipKey = Math.random()
 
     return (
@@ -149,9 +161,7 @@ class DoughnutChart extends React.Component {
         <div
           className={style.circleContainer}
           style={{
-            transform: `translate(-50%, 0) rotate(${(average /
-              100) *
-              360}deg)`,
+            transform: `translate(-50%, 0) rotate(${(average / 100) * 360}deg)`,
           }}
         >
           <div className={style.circleWrapper}>
@@ -171,12 +181,8 @@ class DoughnutChart extends React.Component {
           effect="solid"
           place={
             (!!tooltipCaretPosition &&
-              ((tooltipCaretPosition == 'left'
-                ? 'right'
-                : 'left') ||
-                (tooltipCaretPosition == 'right'
-                  ? 'left'
-                  : 'left'))) ||
+              ((tooltipCaretPosition == 'left' ? 'right' : 'left') ||
+                (tooltipCaretPosition == 'right' ? 'left' : 'left'))) ||
             'left'
           }
           smallTooltip
@@ -199,10 +205,7 @@ class DoughnutChart extends React.Component {
   }
 
   generateBgColor = (data) => {
-    const bgColor = 
-      data
-        ? data.backgroundColor.slice(0, 5)
-        : null 
+    const bgColor = data ? data.backgroundColor.slice(0, 5) : null
     return bgColor
   }
 
@@ -234,33 +237,14 @@ class DoughnutChart extends React.Component {
       datasetOptions = {},
       removeTooltip = false,
       showAllData = false,
-      themeContext = {}
+      themeContext = {},
     } = this.props
 
     const { colors: themes = {} } = themeContext
     const { datasets = [] } = newData
 
-    let plugins = []
-    if (fillText) {
-      const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
+    const textToUse = fillText && isDataSetEmpty(data) ? 'No Data' : fillText
 
-      plugins = [
-        {
-          beforeDraw: function (chart) {
-            const ctx = chart.chart.ctx
-            const customFillText = textToUse.replace(/^\s+|\s+$/g, '')
-
-            ctx.restore()
-            ctx.textAlign = 'center'
-            ctx.textBaseline = 'middle'
-            ctx.fillStyle = fillTextColor || themes.textColor
-            ctx.font = 'bold ' + fillTextFontSize + ' ' + fillTextFontFamily
-            ctx.fillText(customFillText, width / 2, height / 2)
-            ctx.save()
-          },
-        },
-      ]
-    }
     // for opacity backgrounds
     let chartValues = []
     if (datasets[0]) {
@@ -272,7 +256,6 @@ class DoughnutChart extends React.Component {
         return val
       })
     }
-
 
     let chartBackgroundColors = this.generateBgColor(datasets[0])
     let chartHoverBackgroundColors = this.generateBgColor(datasets[0])
@@ -286,10 +269,7 @@ class DoughnutChart extends React.Component {
         }
       })
     const isChartValuesTemp = !!chartValuesTemp && chartValuesTemp.length > 1
-    if (
-      !!slicePiecesWidth &&
-      isChartValuesTemp
-    ) {
+    if (!!slicePiecesWidth && isChartValuesTemp) {
       const totalValues = chartValues.reduce((a, b) => a + b, 0)
       // if there is a difference e.g(0.1, 0.15), we're going to use it in slices
       const difference =
@@ -341,10 +321,7 @@ class DoughnutChart extends React.Component {
 
     let tooltipData = {}
 
-    if (
-      !!datasets[0] &&
-      !!chartValues
-    ) {
+    if (!!datasets[0] && !!chartValues) {
       tooltipData = {
         labels: tooltipLabels,
         datasets: [
@@ -370,15 +347,30 @@ class DoughnutChart extends React.Component {
                 hoverShadowColor: themes.doughnutChartShadowColor,
                 data: chartValues,
                 backgroundColor: chartBackgroundColors,
-                borderColor:
-                  datasetsBorderColor || themes.moduleBackground,
+                borderColor: datasetsBorderColor || themes.moduleBackground,
                 hoverBorderColor:
                   datasetsHoverBorderColor || themes.moduleBackground,
                 hoverBackgroundColor: chartHoverBackgroundColors,
               },
             ],
           }}
-          plugins={plugins}
+          plugins={[
+            ...(fillText
+              ? [
+                  beforeDrawFunc({
+                    createMiddleText: {
+                      textToUse,
+                      textColor: themes.textColor,
+                      fillTextColor,
+                      fillTextFontSize,
+                      fillTextFontFamily,
+                      width,
+                      height,
+                    },
+                  }),
+                ]
+              : []),
+          ]}
           options={{
             responsive: false,
             tooltips:
@@ -423,22 +415,18 @@ class DoughnutChart extends React.Component {
   }
 
   reduceNewData = (data, dataLimit = 0) => {
-    return (
-      data
-        .slice(0, dataLimit - 1)
-        .reduce((acc, val, idx) => {
-          let totalToAdd
-          if (idx === dataLimit - 2) {
-            const total = acc.reduce((a, b) => a + b, 0)
-            totalToAdd = Math.round(100 - total - val)
-          }
-          const result = [...acc, val]
-          if (totalToAdd) {
-            result.push(totalToAdd)
-          }
-          return result
-        }, [])
-    )
+    return data.slice(0, dataLimit - 1).reduce((acc, val, idx) => {
+      let totalToAdd
+      if (idx === dataLimit - 2) {
+        const total = acc.reduce((a, b) => a + b, 0)
+        totalToAdd = Math.round(100 - total - val)
+      }
+      const result = [...acc, val]
+      if (totalToAdd) {
+        result.push(totalToAdd)
+      }
+      return result
+    }, [])
   }
 
   render() {
@@ -457,7 +445,7 @@ class DoughnutChart extends React.Component {
     if (!data) {
       return null
     }
-    
+
     const dataLimit = 5
     let newData = { ...data }
     const { datasets = [] } = newData

@@ -5,6 +5,7 @@ import { withTheme } from 'ThemeContext/withTheme'
 import { metricSuffix, customChartToolTip } from 'Utils'
 import { percentageManipulation } from 'Utils/datasets'
 import { modifyTooltip } from 'Utils/tooltip'
+import { beforeDrawFunc } from 'Utils/chart-plugins'
 
 const emptyData = {
   datasets: [],
@@ -74,43 +75,6 @@ Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
     ctx.fill()
   },
 })
-
-const plugins = [
-  {
-    beforeDraw: function(chart, easing) {
-      let ctx = chart.chart.ctx
-      let chartArea = chart.chartArea
-      if (
-        chart.config.options.chartArea &&
-        chart.config.options.chartArea.backgroundColor
-      ) {
-        ctx.save()
-        ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-        ctx.fillRect(
-          chartArea.left,
-          chartArea.top,
-          chartArea.right - chartArea.left,
-          chartArea.bottom - chartArea.top
-        )
-        ctx.restore()
-      }
-
-      let configX = chart.config.options.scales.xAxes
-      //Save the rendering context state
-      ctx.save()
-      ctx.strokeStyle = configX[0].gridLines.color
-      ctx.lineWidth = configX[0].gridLines.lineWidth
-
-      ctx.beginPath()
-      ctx.moveTo(chart.chartArea.right, chart.chartArea.top)
-      ctx.lineTo(chart.chartArea.right, chart.chartArea.bottom)
-      ctx.stroke()
-
-      //Restore the rendering context state
-      ctx.restore()
-    },
-  },
-]
 
 const StackedBarChart = (props) => {
   const {
@@ -275,7 +239,12 @@ const StackedBarChart = (props) => {
           ],
         },
       }}
-      plugins={plugins}
+      plugins={[
+        beforeDrawFunc({
+          createBackground: true,
+          strokeStyle: true,
+        }),
+      ]}
       height={height}
     />
   )

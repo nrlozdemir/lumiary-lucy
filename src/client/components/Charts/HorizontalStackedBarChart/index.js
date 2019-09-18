@@ -4,43 +4,11 @@ import { customChartToolTip, ucfirst } from 'Utils'
 import { percentageManipulation } from 'Utils/datasets'
 import { withTheme } from 'ThemeContext/withTheme'
 import { modifyTooltip } from 'Utils/tooltip'
+import { beforeDrawFunc } from 'Utils/chart-plugins'
 import get from 'lodash/get'
 class HorizontalStackedBarChart extends React.Component {
   constructor(props) {
     super(props)
-  }
-
-  beforeDraw(chart) {
-    if (
-      chart.config.options.chartArea &&
-      chart.config.options.chartArea.backgroundColor
-    ) {
-      var ctx = chart.chart.ctx
-      var chartArea = chart.chartArea
-
-      ctx.save()
-      ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-      ctx.fillRect(
-        chartArea.left,
-        chartArea.top,
-        chartArea.right - chartArea.left,
-        chartArea.bottom - chartArea.top
-      )
-      ctx.restore()
-    }
-    let configX = chart.config.options.scales.xAxes
-    //Save the rendering context state
-    ctx.save()
-    ctx.strokeStyle = configX[0].gridLines.color
-    ctx.lineWidth = configX[0].gridLines.lineWidth
-
-    ctx.beginPath()
-    ctx.moveTo(chart.chartArea.left, chart.chartArea.top)
-    ctx.lineTo(chart.chartArea.right, chart.chartArea.top)
-    ctx.stroke()
-
-    //Restore the rendering context state
-    ctx.restore()
   }
 
   getTooltips({ datasets, labels }) {
@@ -269,7 +237,12 @@ class HorizontalStackedBarChart extends React.Component {
         width={width}
         height={height}
         options={options}
-        plugins={[{ beforeDraw: this.beforeDraw }]}
+        plugins={[
+          beforeDrawFunc({
+            createBackground: true,
+            strokeStyle: true,
+          }),
+        ]}
       />
     )
   }
