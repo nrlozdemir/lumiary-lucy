@@ -15,84 +15,6 @@
   }
 }
 
-.sidebar {
-  -moz-transition: all 0.4s ease;
-  -o-transition: all 0.4s ease;
-  -webkit-transition: all 0.4s ease;
-  transition: all 0.4s ease;
-  background: $color-dusk;
-  box-shadow: -1px 0 2px 0 rgba(0, 0, 0, 0.5);
-  height: 100%;
-  position: fixed;
-  overflow-x: hidden;
-  overflow-y: auto;
-  width: 439px;
-  z-index: 1000;
-  right: -442px;
-  top: 0;
-
-  &.fixed {
-    overflow: hidden;
-  }
-
-  [class*='react-select__control'] {
-    width: 100%;
-  }
-
-  [class*='buttonText'] {
-    font-weight: bold;
-  }
-}
-
-.sidebarMain {
-  position: relative;
-  height: 100%;
-  width: 100%;
-
-  &.fixed {
-    display: flex;
-  }
-}
-
-.sidebarDurationRange {
-  width: 100%;
-}
-
-.sidebarHeader {
-  position: relative;
-  width: 100%;
-  .text {
-    padding: 0 32px;
-    line-height: 80px;
-    font-family: $font-family-ClanOT;
-    font-weight: bold;
-    font-size: 14px;
-    span {
-      cursor: pointer;
-    }
-  }
-
-  &.fixed {
-    position: absolute;
-    left: 0px;
-    top: 0px;
-    z-index: 11;
-  }
-}
-
-.sidebarVisible {
-  right: 0;
-}
-
-.sidebarContent {
-  &.fixed {
-    width: 100%;
-    height: calc(100% - 80px);
-    overflow-x: hidden;
-    overflow-y: auto;
-  }
-}
-
 .overlay {
   position: fixed;
   display: none;
@@ -114,23 +36,6 @@
   display: block;
 }
 
-.cancel {
-  cursor: pointer;
-  margin: 32px 0 62px;
-  font-family: $font-family-ClanOT;
-  font-size: 14px;
-  font-weight: bold;
-}
-
-.sidebarApplyButton {
-  border: 1px solid $color-cool-grey !important;
-}
-
-.formChange {
-  font-weight: bold !important;
-  border-color: #2fd7c4 !important;
-}
-
 .loadButton {
   display: block;
   margin: 0 auto;
@@ -138,9 +43,4 @@
 
 .libraryLoading {
   height: min-content;
-}
-
-.sidebarSelectContainer {
-  position: relative;
-  z-index: 10;
 }
