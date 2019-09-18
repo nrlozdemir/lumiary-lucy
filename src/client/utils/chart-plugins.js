@@ -60,15 +60,9 @@ export const beforeDrawFunc = (options = {}) => {
 
   return {
     beforeDraw: function(chart) {
-      if (createBackground) {
-        createBackgroundFunc(chart)
-      }
-      if (strokeStyle) {
-        strokeStyleFunc(chart)
-      }
-      if (createMiddleText) {
-        createMiddleTextFunc(chart, createMiddleText)
-      }
+      createBackground && createBackgroundFunc(chart)
+      strokeStyle && strokeStyleFunc(chart)
+      createMiddleText && createMiddleTextFunc(chart, createMiddleText)
     },
   }
 }
