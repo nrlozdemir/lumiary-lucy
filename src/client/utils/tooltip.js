@@ -13,7 +13,7 @@ const getGlobalStyle = (custom = { title: {}, body: {} }) => {
     letterSpacing: 'normal',
     lineHeight: '1.43',
     margin: '16px 16px 8px 16px',
-    ...custom.title
+    ...custom.title,
   }
 
   const body = {
@@ -30,12 +30,12 @@ const getGlobalStyle = (custom = { title: {}, body: {} }) => {
     display: 'flex',
     alignItems: 'center',
     flexDirection: 'column',
-    ...custom.body
+    ...custom.body,
   }
 
   return {
     title: title,
-    body: body
+    body: body,
   }
 }
 
@@ -89,7 +89,7 @@ const VideoReleasesBarChartTemplate = function(props) {
   )
 }
 
-const CircleChartTemplate = props => {
+const CircleChartTemplate = (props) => {
   const style = getGlobalStyle()
 
   const pStyle = {
@@ -97,7 +97,7 @@ const CircleChartTemplate = props => {
     padding: '0px',
     fontFamily: 'ClanOT',
     fontSize: '12px',
-    lineHeight: '1.67'
+    lineHeight: '1.67',
   }
 
   return (
@@ -183,7 +183,7 @@ const HorizontalStackedBarChartTemplate = function(props) {
   )
 }
 
-const RadarChartTemplate = props => {
+const RadarChartTemplate = (props) => {
   const style = getGlobalStyle()
 
   return (
@@ -240,7 +240,7 @@ const HorizontalBarChartTemplate = function(props) {
     padding: '0px',
     fontFamily: 'ClanOT',
     fontSize: '12px',
-    lineHeight: '1.67'
+    lineHeight: '1.67',
   }
 
   return (
@@ -264,7 +264,7 @@ const HorizontalBarChartTemplate = function(props) {
   )
 }
 
-const MarketviewDoughnutChartTemplate = function(props) {
+const MarketviewPieChartTemplate = function(props) {
   const style = getGlobalStyle()
 
   return (
@@ -310,8 +310,32 @@ const MarketviewVerticalStackedBarChartTemplate = function(props) {
   )
 }
 
+const MarketviewDoughnutChartTemplate = function(props) {
+  const style = getGlobalStyle()
+
+  return (
+    <div>
+      <div className="chartjs-tooltip-title" style={style.title}>
+        {`${percentageBeautifier(props.value)}%  |  ${!!props.itemLabel &&
+          props.itemLabel}`}
+      </div>
+      <div className="chartjs-tooltip-body" style={style.body}>
+        <span>{!!props.itemLabel && props.itemLabel} capture</span>
+        <span>
+          {!!props.value && percentageBeautifier(props.value)}% of all{' '}
+          {!!props.metric && !!props.metric.value && props.metric.value} on
+        </span>
+        <span>
+          {!!props.platform && !!props.platform.label && props.platform.label}.
+        </span>
+      </div>
+    </div>
+  )
+}
+
 const modifyTooltip = function(props, conf = {}) {
   const { options = {} } = props
+
   return {
     enabled: false,
     custom: function(tooltipModel) {
@@ -448,7 +472,7 @@ const modifyTooltip = function(props, conf = {}) {
 
         // tolerance 'px' inside for tooltip position
         tolerance: 60,
-        position: options.position || false
+        position: options.position || false,
       }
 
       // Tooltip Element
@@ -519,7 +543,7 @@ const modifyTooltip = function(props, conf = {}) {
               label: (!!label && label) || '',
               value: (!!value && value) || 0,
               labelLong: (!!labelLong && labelLong) || '',
-              difference: !!difference && difference | 0
+              difference: !!difference && difference | 0,
             }),
           DoughnutChartTemplate: () =>
             DoughnutChartTemplate({
@@ -527,7 +551,7 @@ const modifyTooltip = function(props, conf = {}) {
               value: (!!value && value) || 0,
               labelLong: (!!labelLong && labelLong) || '',
               difference: !!difference && difference | 0,
-              itemLabel: (!!itemLabel && itemLabel) || ''
+              itemLabel: (!!itemLabel && itemLabel) || '',
             }),
           VerticalStackedBarChartTemplate: () =>
             VerticalStackedBarChartTemplate({
@@ -536,7 +560,7 @@ const modifyTooltip = function(props, conf = {}) {
               labelLong: (!!labelLong && labelLong) || '',
               difference: !!difference && difference | 0,
               itemLabel: (!!itemLabel && itemLabel) || '',
-              propertyValue: (!!propertyValue && propertyValue) || ''
+              propertyValue: (!!propertyValue && propertyValue) || '',
             }),
           HorizontalStackedBarChartTemplate: () =>
             HorizontalStackedBarChartTemplate({
@@ -545,11 +569,11 @@ const modifyTooltip = function(props, conf = {}) {
               labelLong: (!!labelLong && labelLong) || '',
               difference: !!difference && difference | 0,
               itemLabel: (!!itemLabel && itemLabel) || '',
-              propertyTitle: (!!propertyTitle && propertyTitle) || ''
+              propertyTitle: (!!propertyTitle && propertyTitle) || '',
             }),
           VideoReleasesBarChartTemplate: () =>
             VideoReleasesBarChartTemplate({
-              value: value
+              value: value,
             }),
           RadarChartTemplate: () =>
             RadarChartTemplate({
@@ -561,7 +585,7 @@ const modifyTooltip = function(props, conf = {}) {
               difference: !!difference && difference | 0,
               itemLabel: (!!itemLabel && itemLabel) || '',
               metric: (!!metric && metric) || '',
-              platform: (!!platform && platform) || ''
+              platform: (!!platform && platform) || '',
             }),
           HorizontalBarChartTemplate: () =>
             HorizontalBarChartTemplate({
@@ -571,15 +595,15 @@ const modifyTooltip = function(props, conf = {}) {
               difference: !!difference && difference | 0,
               itemLabel: (!!itemLabel && itemLabel) || '',
               metric: (!!metric && metric) || '',
-              platform: (!!platform && platform) || ''
+              platform: (!!platform && platform) || '',
             }),
 
-          MarketviewDoughnutChartTemplate: () =>
-            MarketviewDoughnutChartTemplate({
+          MarketviewPieChartTemplate: () =>
+            MarketviewPieChartTemplate({
               label: (!!label && label) || '',
               value: (!!value && value) || 0,
               itemLabel: (!!itemLabel && itemLabel) || '',
-              metric: (!!metric && metric) || ''
+              metric: (!!metric && metric) || '',
             }),
           MarketviewVerticalStackedBarChartTemplate: () =>
             MarketviewVerticalStackedBarChartTemplate({
@@ -594,8 +618,24 @@ const modifyTooltip = function(props, conf = {}) {
               metricValue: !!metricValue && metricValue,
               platformValue: !!platformValue && platformValue,
               metricLabel: !!metricLabel && metricLabel,
-              platformLabel: !!platformLabel && platformLabel
-            })
+              platformLabel: !!platformLabel && platformLabel,
+            }),
+
+          MarketviewDoughnutChartTemplate: () =>
+            MarketviewDoughnutChartTemplate({
+              label: (!!label && label) || '',
+              value: (!!value && value) || 0,
+              labelLong: (!!labelLong && labelLong) || '',
+              difference: !!difference && difference | 0,
+              itemLabel: (!!itemLabel && itemLabel) || '',
+              propertyValue: (!!propertyValue && propertyValue) || '',
+              metric: (!!metric && metric) || '',
+              platform: (!!platform && platform) || '',
+              metricValue: !!metricValue && metricValue,
+              platformValue: !!platformValue && platformValue,
+              metricLabel: !!metricLabel && metricLabel,
+              platformLabel: !!platformLabel && platformLabel,
+            }),
         }
 
         const Template = templates[props.template]
@@ -660,23 +700,23 @@ const modifyTooltip = function(props, conf = {}) {
       let arrowUp = {
         borderLeft: `${defaults.caretWidth}px solid transparent`,
         borderRight: `${defaults.caretWidth}px solid transparent`,
-        borderBottom: `${defaults.caretHeight}px solid ${defaults.caretColor}`
+        borderBottom: `${defaults.caretHeight}px solid ${defaults.caretColor}`,
       }
       let arrowDown = {
         borderLeft: `${defaults.caretWidth}px solid transparent`,
         borderRight: `${defaults.caretWidth}px solid transparent`,
-        borderTop: `${defaults.caretHeight}px solid ${defaults.caretColor}`
+        borderTop: `${defaults.caretHeight}px solid ${defaults.caretColor}`,
       }
 
       let arrowLeft = {
         borderTop: `${defaults.caretWidth}px solid transparent`,
         borderBottom: `${defaults.caretWidth}px solid transparent`,
-        borderRight: `${defaults.caretHeight}px solid ${defaults.caretColor}`
+        borderRight: `${defaults.caretHeight}px solid ${defaults.caretColor}`,
       }
       let arrowRight = {
         borderTop: `${defaults.caretWidth}px solid transparent`,
         borderBottom: `${defaults.caretWidth}px solid transparent`,
-        borderLeft: `${defaults.caretHeight}px solid ${defaults.caretColor}`
+        borderLeft: `${defaults.caretHeight}px solid ${defaults.caretColor}`,
       }
 
       let caretStyles = arrowDown
@@ -810,7 +850,7 @@ const modifyTooltip = function(props, conf = {}) {
       }
       // caretEl.style = caretStyles
     },
-    ...conf
+    ...conf,
   }
 }
 
