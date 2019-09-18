@@ -1,5 +1,4 @@
 import React from 'react'
-import { helpers, defaults } from 'chart.js'
 import { Doughnut, Chart } from 'react-chartjs-2'
 import classnames from 'classnames'
 import style from './style.scss'
