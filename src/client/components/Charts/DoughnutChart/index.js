@@ -68,7 +68,14 @@ class DoughnutChart extends React.Component {
     )
   }
 
-  generateTooltip = (newData, tooltipData = {}, chartValues = []) => {
+  generateTooltip = (
+    newData,
+    tooltipData = {},
+    chartValues = [],
+    tooltipTemplate = false,
+    platform = false,
+    metric = false
+  ) => {
     const {
       tooltipType = 'basic',
       themeContext = {},
@@ -110,13 +117,16 @@ class DoughnutChart extends React.Component {
           ))) ||
       (tooltipType === 'extended' &&
         modifyTooltip({
-          template: 'DoughnutChartTemplate',
+          template:
+            (!!tooltipTemplate && tooltipTemplate) || 'DoughnutChartTemplate',
           data: newData,
           options: {
             background: themes.tooltipBackground,
             textColor: themes.tooltipTextColor,
             caretColor: themes.tooltipBackground,
           },
+          platform: platform,
+          metric: metric,
         }))
     )
   }
@@ -236,6 +246,9 @@ class DoughnutChart extends React.Component {
       removeTooltip = false,
       showAllData = false,
       themeContext = {},
+      tooltipTemplate = false,
+      platform = false,
+      metric = false,
     } = this.props
 
     const { colors: themes = {} } = themeContext
@@ -377,7 +390,14 @@ class DoughnutChart extends React.Component {
             tooltips:
               !average &&
               !removeTooltip &&
-              this.generateTooltip(newData, tooltipData, chartValues),
+              this.generateTooltip(
+                newData,
+                tooltipData,
+                chartValues,
+                tooltipTemplate,
+                platform,
+                metric
+              ),
             legend: {
               display: legend,
               labels: {
@@ -441,6 +461,9 @@ class DoughnutChart extends React.Component {
       customDoughnutContainer,
       customChartWrapper,
       average,
+      tooltipTemplate = false,
+      platform = false,
+      metric = false,
     } = this.props
 
     if (!data) {

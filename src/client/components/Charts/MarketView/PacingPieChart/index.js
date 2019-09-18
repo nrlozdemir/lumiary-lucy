@@ -5,16 +5,6 @@ import { modifyTooltip } from 'Utils/tooltip'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import 'Utils/chart-shadow'
 
-function metricSuffix(number) {
-  if (number >= 1e3) {
-    const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
-    const unitname = ['k', 'm', 'B', 'T'][Math.floor(unit / 3) - 1]
-    return (number / ('1e' + unit)).toFixed(0) + unitname
-  }
-
-  return number
-}
-
 const PacingPieChart = ({ data = {}, metric }) => {
   const { datasets = [] } = data
 
@@ -27,7 +17,7 @@ const PacingPieChart = ({ data = {}, metric }) => {
             width={216}
             options={{
               tooltips: modifyTooltip({
-                template: 'MarketviewDoughnutChartTemplate',
+                template: 'MarketviewPieChartTemplate',
                 data,
                 metric: metric,
                 options: {
