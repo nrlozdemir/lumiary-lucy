@@ -190,6 +190,10 @@ class TotalViewsChart extends React.Component {
                 dataLabelFunction="insertAfter"
                 dataLabelInsert="%"
                 datasetsBorderWidth={1.4}
+                tooltipType="extended"
+                tooltipTemplate="MarketviewDoughnutChartTemplate"
+                platform={!!platform && platform}
+                metric={!!metric && metric}
                 tooltipMode="nearest"
                 datasetOptions={{
                   shadowOffsetX: 2,
