@@ -10,7 +10,7 @@ import {
   // makeSelectFormValues,
 } from 'Reducers/library'
 import LibraryHeader from './sections/LibraryHeader'
-import Sidebar from './sidebar.js'
+import Sidebar from './sections/Sidebar'
 import VideoSection from './sections/VideoSection'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
