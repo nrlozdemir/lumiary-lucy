@@ -5,7 +5,7 @@ import { createStructuredSelector } from 'reselect'
 import style from './style.scss'
 import { ThemeContext } from 'ThemeContext/themeContext'
 import DoughnutChart from 'Components/Charts/DoughnutChart'
-import DownArrowCircle from 'Components/Icons/DownArrowCircle'
+import ArrowCircle from 'Components/Icons/ArrowCircle'
 import { actions } from 'Reducers/libraryDetail'
 import { doughnutChartDataWithOpacity, getPropLabel } from 'Utils'
 import { isDataSetEmpty } from 'Utils/datasets'
@@ -23,7 +23,7 @@ class DoughnutCard extends React.Component {
       chartData,
       videoId,
       colors,
-      showAllData = false
+      showAllData = false,
     } = this.props
 
     const newChartData = doughnutChartDataWithOpacity(chartData, colors)
@@ -106,7 +106,7 @@ class DoughnutCard extends React.Component {
               }}
             >
               View Metrics
-              <DownArrowCircle className={style.icon} size={24} />
+              <ArrowCircle className={style.icon} size={24} direction="down" />
             </a>
           </div>
         )}

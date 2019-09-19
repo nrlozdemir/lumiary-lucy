@@ -8,7 +8,7 @@ import { ThemeContext } from 'ThemeContext/themeContext'
 
 import { mediaUrl } from 'Utils/globals'
 
-import RightArrowCircle from 'Components/Icons/RightArrowCircle'
+import ArrowCircle from 'Components/Icons/ArrowCircle'
 
 let hoverInReady
 
@@ -191,7 +191,7 @@ export class VideoCard extends PureComponent {
                   >
                     View Video Details
                     <div className={style.icon}>
-                      <RightArrowCircle />
+                      <ArrowCircle direction="right" />
                     </div>
                   </Link>
                 </div>

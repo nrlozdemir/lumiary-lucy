@@ -5,7 +5,7 @@ import cx from 'classnames'
 import { compose } from 'redux'
 import style from '../style.scss'
 import SelectBox from '../../../Form/CustomCheckbox'
-import RightArrowCircle from 'Components/Icons/RightArrowCircle'
+import ArrowCircle from 'Components/Icons/ArrowCircle'
 import { randomKey } from 'Utils'
 import { push } from 'connected-react-router'
 
@@ -21,18 +21,16 @@ class PredefinedReport extends Component {
       formData: { values },
     } = this.props
 
-    return (
-      !!values &&
-      Object.keys(values).some((key) => !!values[key])
-    )
+    return !!values && Object.keys(values).some((key) => !!values[key])
   }
 
   goToReport = (values) => {
     const { push } = this.props
 
-    const reportUuid = !!values && Object.keys(values).filter((key) => !!values[key]) || []
+    const reportUuid =
+      (!!values && Object.keys(values).filter((key) => !!values[key])) || []
 
-    if(!!reportUuid.length) {
+    if (!!reportUuid.length) {
       push(`/reports/predefined-reports/${reportUuid[0]}`)
     }
   }
@@ -92,7 +90,7 @@ class PredefinedReport extends Component {
                     >
                       Generate Report
                       <div className={style.icon}>
-                        <RightArrowCircle />
+                        <ArrowCircle direction="right" />
                       </div>
                     </button>
                   </React.Fragment>

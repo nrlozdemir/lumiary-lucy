@@ -27,7 +27,7 @@ import { ucfirst, getLocationParams } from 'Utils'
 import style from './style.scss'
 import { withTheme } from 'ThemeContext/withTheme'
 import Dropdown from './dropdown'
-import LeftArrowCircle from 'Components/Icons/LeftArrowCircle'
+import ArrowCircle from 'Components/Icons/ArrowCircle'
 // import PropTypes from 'prop-types';
 
 const containerClass = classnames('grid-container ' + style.container)
@@ -54,7 +54,7 @@ const BackTo = (props) => {
   return (
     <div className={style.backTo}>
       <Link to={link} style={{ color: textColor }}>
-        <LeftArrowCircle />
+        <ArrowCircle direction="left" />
         <span className={style.text}>{title}</span>
       </Link>
     </div>

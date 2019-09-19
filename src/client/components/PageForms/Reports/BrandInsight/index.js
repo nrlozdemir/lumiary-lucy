@@ -5,7 +5,7 @@ import Input from 'Components/Form/Input'
 import cx from 'classnames'
 import { compose } from 'redux'
 import { required } from 'Utils/validate'
-import RightArrowCircle from 'Components/Icons/RightArrowCircle'
+import ArrowCircle from 'Components/Icons/ArrowCircle'
 
 import style from '../style.scss'
 
@@ -89,7 +89,7 @@ const ReportsForm = (props) => {
               >
                 Generate Report
                 <div className={style.icon}>
-                  <RightArrowCircle />
+                  <ArrowCircle direction="right" />
                 </div>
               </button>
             </div>

@@ -5,31 +5,20 @@ import { compose } from 'redux'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 
 import cx from 'classnames'
-import AssetLayer from 'Components/AssetLayer'
-import PercentageBarGraph from 'Components/Charts/PercentageBarGraph'
 import style from './style.scss'
 import { socialIconSelector } from 'Utils'
 import Slider from 'react-slick'
-import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
-import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
+import ArrowCircle from 'Components/Icons/ArrowCircle'
 import VideoSliderCard from 'Components/VideoCard/VideoSliderCard'
 
-function RenderNextButton({ onClick }) {
+function RenderButton({ onClick, direction }) {
   return (
-    <RightArrowCircleFlat
+    <ArrowCircle
       className={style.nextButton}
       size={32}
       onClick={onClick}
-    />
-  )
-}
-
-function RenderPrevButton({ onClick }) {
-  return (
-    <LeftArrowCircleFlat
-      className={style.prevButton}
-      size={32}
-      onClick={onClick}
+      direction={direction}
+      flatIcon={true}
     />
   )
 }
@@ -104,8 +93,8 @@ class MarketViewSlider extends React.Component {
       variableWidth: true,
       draggable: false,
       speed: 200,
-      nextArrow: <RenderNextButton />,
-      prevArrow: <RenderPrevButton />,
+      nextArrow: <RenderButton direction="right" />,
+      prevArrow: <RenderButton direction="left" />,
       // beforeChange: (oldIndex, newIndex) =>
       //   this.setState({ currentIdx: newIndex }),
       afterChange: (current) => {
