@@ -15,11 +15,11 @@ const OrderedByComponent = ({ props }) => {
   return (
     <div className="w-100 mt-48">
       <Select
+        placeholder="Select One"
         id="OrderedBy"
         name="OrderedBy"
-        placeholder="Select One"
-        options={!!selectOptions && selectOptions.orderByOptions}
         label="Ordered By"
+        options={!!selectOptions && selectOptions.orderByOptions}
         {...props}
       />
     </div>
@@ -57,8 +57,8 @@ const AgeGenderComponent = ({ props = false }) => {
           options={!!selectOptions && selectOptions.audienceGender}
           id="Gender"
           name="Gender"
-          label="Audience Gender"
           placeholder="Select One"
+          label="Audience Gender"
           {...props}
         />
       </div>
@@ -70,12 +70,12 @@ const DurationComponent = ({ props = false }) => {
   return (
     <div className="w-100 mt-48">
       <Field
-        id="Duration"
-        name="Duration"
         component={Range}
         minValue={0}
         maxValue={60}
         customClass={style.sidebarDurationRange}
+        id="Duration"
+        name="Duration"
         {...props}
       />
     </div>
@@ -95,10 +95,10 @@ const VideoFormatComponent = ({ props }) => {
     <div className="w-100 mt-48">
       <Select
         id="VideoFormat"
-        name="VideoFormat"
-        placeholder="Select One"
         options={!!selectOptions && selectOptions.videoFormat}
+        name="VideoFormat"
         label="Video Format"
+        placeholder="Select One"
         {...props}
       />
     </div>
@@ -109,10 +109,10 @@ const AspectRatioComponent = ({ props }) => {
   return (
     <div className="w-100 mt-48">
       <Select
-        id="AspectRatio"
-        name="AspectRatio"
-        placeholder="Select One"
         options={!!selectOptions && selectOptions.aspectRatio}
+        id="AspectRatio"
+        placeholder="Select One"
+        name="AspectRatio"
         label="Aspect Ratio"
         {...props}
       />
@@ -124,10 +124,10 @@ const FramesPerSecondComponent = ({ props }) => {
   return (
     <div className="w-100 mt-48">
       <Select
-        id="FramesPerSecond"
         name="FramesPerSecond"
-        placeholder="Select One"
         options={!!selectOptions && selectOptions.frameRate}
+        id="FramesPerSecond"
+        placeholder="Select One"
         label="Frame Rate"
         {...props}
       />
@@ -139,11 +139,11 @@ const ResolutionComponent = ({ props }) => {
   return (
     <div className="w-100 mt-48">
       <Select
+        label="Resolution"
+        options={!!selectOptions && selectOptions.resolution}
         id="Resolution"
         name="Resolution"
         placeholder="Select One"
-        options={!!selectOptions && selectOptions.resolution}
-        label="Resolution"
         {...props}
       />
     </div>
@@ -154,10 +154,10 @@ const PacingComponent = ({ props }) => {
   return (
     <div className="w-100 mt-48">
       <Select
-        id="Pacing"
-        name="Pacing"
         placeholder="Select One"
         options={!!selectOptions && selectOptions.pacing}
+        id="Pacing"
+        name="Pacing"
         label="Pacing"
         {...props}
       />

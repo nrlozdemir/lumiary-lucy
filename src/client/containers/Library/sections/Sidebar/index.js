@@ -17,18 +17,56 @@ import {
 } from './components'
 import style from './style.scss'
 
-const FormWrapper = (props) => {
-	console.log("props", props)
-  const {
-		children,
-    colors,
-    fixedHeader,
-    handleSubmit,
-    sidebarVisible,
-		setSidebarVisible,
-		formChange,
-  } = props
+const ResetButton = (props) => {
+  return (
+    <span
+      className="float-right color-cool-blue"
+      /* onClick={this.resetFormValues} */
+    >
+      Reset
+    </span>
+  )
+}
 
+const FilterVideos = ({ colors }) => {
+  return (
+    <span
+      className="float-left"
+      style={{
+        color: colors.filterHeaderText,
+      }}
+    >
+      Filter Videos
+    </span>
+  )
+}
+
+const SidebarHeader = ({ colors, fixedHeader }) => {
+  return (
+    <div
+      className={classnames(style.sidebarHeader, {
+        [style.fixed]: fixedHeader,
+      })}
+      style={{ backgroundColor: colors.filterHeader }}
+    >
+      <p className={style.text}>
+        <FilterVideos colors={colors} />
+        <ResetButton />
+      </p>
+      <div className="clearFix" />
+    </div>
+  )
+}
+
+const FormWrapper = ({
+  children,
+  colors,
+  fixedHeader,
+  handleSubmit,
+  sidebarVisible,
+  setSidebarVisible,
+  formChange,
+}) => {
   return (
     <form /* onSubmit={(e) => handleSubmit(e)} */>
       <div
@@ -43,30 +81,7 @@ const FormWrapper = (props) => {
             [style.fixed]: fixedHeader,
           })}
         >
-          <div
-            className={classnames(style.sidebarHeader, {
-              [style.fixed]: fixedHeader,
-            })}
-            style={{ backgroundColor: colors.filterHeader }}
-          >
-            <p className={style.text}>
-              <span
-                className="float-left"
-                style={{
-                  color: colors.filterHeaderText,
-                }}
-              >
-                Filter Videos
-              </span>
-              <span
-                className="float-right color-cool-blue"
-                /* onClick={this.resetFormValues} */
-              >
-                Reset
-              </span>
-            </p>
-            <div className="clearFix" />
-          </div>
+          <SidebarHeader colors={colors} fixedHeader={fixedHeader} />
           <div
             className={classnames(style.sidebarContent, 'ph-32', {
               [style.fixed]: fixedHeader,
@@ -127,7 +142,10 @@ class Sidebar extends React.Component {
             <FramesPerSecondComponent />
             <ResolutionComponent />
             <PacingComponent />
-            <ButtonsComponent formChange={this.state.formChange} colors={this.props.colors} />
+            <ButtonsComponent
+              formChange={this.state.formChange}
+              colors={this.props.colors}
+            />
           </React.Fragment>
         )}
       </FormWrapper>
