@@ -327,6 +327,29 @@ const MarketviewDoughnutChartTemplate = function(props) {
         </span>
         <span>
           {!!props.platform && !!props.platform.label && props.platform.label}.
+          {metricSuffix(props.normalData)} {ucfirst(props.metric)} |{' '}
+          {props.label}
+        </span>
+      </div>
+    </div>
+  )
+}
+
+const MarketviewCompetitorBarChartTemplate = function(props) {
+  const style = getGlobalStyle()
+
+  return (
+    <div>
+      <div className="chartjs-tooltip-title" style={style.title}>
+        {`${percentageBeautifier(props.value)}%  |  ${!!props.itemLabel &&
+          props.itemLabel}`}
+      </div>
+      <div className="chartjs-tooltip-body" style={style.body}>
+        <span>
+          For {props.itemLabel} videos, {props.label}
+        </span>
+        <span>
+          received {props.value}% of all {props.metric}.
         </span>
       </div>
     </div>
@@ -635,6 +658,15 @@ const modifyTooltip = function(props, conf = {}) {
               platformValue: !!platformValue && platformValue,
               metricLabel: !!metricLabel && metricLabel,
               platformLabel: !!platformLabel && platformLabel,
+            }),
+          MarketviewCompetitorBarChartTemplate: () =>
+            MarketviewCompetitorBarChartTemplate({
+              label: (!!label && label) || '',
+              value: (!!value && value) || 0,
+              difference: !!difference && difference | 0,
+              itemLabel: (!!itemLabel && itemLabel) || '',
+              normalData: props.data.datasets[datasetIndex].normalData[index],
+              metric: (!!metric && metric) || '',
             }),
         }
 

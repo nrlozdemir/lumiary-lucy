@@ -471,7 +471,7 @@ function* getBubbleChartData({
 
       const normalizedData = normalizationBubbleMapping(
         bubbleData,
-        50,
+        55,
         70,
         'marketview'
       )
