@@ -45,9 +45,10 @@
 
 .chartPos {
   position: relative;
-  display: flex;
   &:last-child {
-    justify-content: end;
+    canvas {
+      float: right;
+    }
   }
   margin: 0px;
   padding: 0px;

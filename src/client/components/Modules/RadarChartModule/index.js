@@ -27,8 +27,8 @@ const renderLeftRightSections = ({checkData = [], isEmpty, side = 'left', title,
       >
         <RadarChart
           data={data.data}
-          width={width}
-          height={height}
+          width={width-45}
+          height={height-45}
           tooltipType="extended"
           platform={title || data.type}
         />

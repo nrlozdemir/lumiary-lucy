@@ -5,7 +5,7 @@ export const generatePlugins = (props) => {
         let ctx = chart.chart.ctx
         if (props.data) {
           const numberOfSides = props.data.labels.length
-          const size = 202
+          const size = chart.width / 2 - 35
           const Xcenter = chart.width / 2
           const Ycenter = chart.height / 2
 
