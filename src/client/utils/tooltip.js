@@ -327,8 +327,6 @@ const MarketviewDoughnutChartTemplate = function(props) {
         </span>
         <span>
           {!!props.platform && !!props.platform.label && props.platform.label}.
-          {metricSuffix(props.normalData)} {ucfirst(props.metric)} |{' '}
-          {props.label}
         </span>
       </div>
     </div>
