@@ -106,17 +106,24 @@ class ColorCard extends Component {
                   size={[340, 400]}
                   options={{
                     maximumIterationCount: 1000,
-                    toolTipBackground: '#505050',
-                    toolTipArrowBackground: '#505050',
-                    toolTipArrowShadow: 'rgba(0,0,0,.5)',
-                    strokeWidth: 4,
+                    toolTipBackground: colors.audienceBubbleTooltipBackground,
+                    toolTipArrowBackground:
+                      colors.audienceBubbleTooltipBackground,
+                    toolTipArrowShadow: colors.audienceBubbleTooltipBackground,
+                    strokeWidth: 5,
                     gap: 1,
                     visualFontSize: 14,
                     toolTipFontSize: 10,
                     visualWidth: 32,
                     visualHeight: 32,
-                    firstCircleTimesX: 1,
-                    firstCircleTimesY: 1,
+                    toolTipWidth: 206,
+                    toolTipHeight: 136,
+                    toolTipPositionTop: true,
+                    toolTipDelay: 100,
+                    toolTipRadius: 8,
+                    toolTipArrowWidth: 16,
+                    toolTipArrowHeight: 8,
+                    zIndex: 30,
                   }}
                   firstAngle={40}
                 >
@@ -143,31 +150,33 @@ class ColorCard extends Component {
                             }}
                           />
                         </Visual>
-                        <ToolTip
-                          style={{
-                            background: colors.tooltipBackground,
-                            color: colors.tooltipRadarChartTextColor,
-                          }}
-                        >
-                          <div
-                            className={style.bubbleTooltip}
-                            style={{
-                              fontSize: 13,
-                              color: colors.chartTooltipColor,
-                            }}
-                          >
-                            {bubble.name}
-                          </div>
-                          <div
-                            className={style.bubbleTooltip}
-                            style={{
-                              fontSize: 13,
-                              color: colors.chartTooltipColor,
-                            }}
-                          >
-                            {`${metricSuffix(bubble.oldValue)} ${ucfirst(
-                              metric
-                            )}`}
+                        <ToolTip>
+                          <div className={style.bubbleTooltip}>
+                            <span
+                              className={style.header}
+                              style={{
+                                color: colors.audienceBubbleTooltipText,
+                                borderBottom: `1px solid ${colors.audienceBubbleTooltipSeparator}`,
+                              }}
+                            >
+                              {`${metricSuffix(bubble.oldValue)} ${ucfirst(
+                                metric
+                              )} | ${bubble.name}`}
+                            </span>
+                            <div
+                              className={style.body}
+                              style={{
+                                color: colors.audienceBubbleTooltipText,
+                              }}
+                            >
+                              <span>
+                                {`On ${bubble.name}, videos that`}
+                                <br /> have a dominant color of <br />
+                                {`${bubble.color} received ${metricSuffix(
+                                  bubble.oldValue
+                                )} ${ucfirst(metric)}`}
+                              </span>
+                            </div>
                           </div>
                         </ToolTip>
                       </Bubble>

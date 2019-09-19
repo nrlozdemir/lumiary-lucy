@@ -84,7 +84,6 @@ class Sidebar extends React.Component {
         { value: 'mostLikedVideos', label: 'Most Liked Videos' },
         { value: 'mostSharedVideos', label: 'Most Shared Videos' },
         { value: 'mostCommentedVideos', label: 'Most Commented Videos' },
-        { value: 'orderByCvScore', label: 'CvScore' },
       ],
       audienceGender: [
         { value: 'male', label: 'Male' },
@@ -100,15 +99,17 @@ class Sidebar extends React.Component {
         { value: '65+', label: '65 and over' },
       ],
       videoFormat: [
-        { value: 'liveAction', label: 'Live Action' },
+        { value: 'live action', label: 'Live Action' },
         { value: 'cinemagraph', label: 'Cinemagraph' },
-        { value: 'stopMotion', label: 'Stop Motion' },
+        { value: 'stop motion', label: 'Stop Motion' },
         { value: 'animation', label: 'Animation' },
       ],
       frameRate: [
         { value: '24', label: '24 Fps' },
         { value: '30', label: '30 Fps' },
+        { value: '40', label: '40 Fps' },
         { value: '50', label: '50 Fps' },
+        { value: '60', label: '60 Fps' },
       ],
       aspectRatio: [
         { value: '16:9', label: '16:9' },
@@ -270,7 +271,11 @@ class Sidebar extends React.Component {
                   onClick={() =>
                     formChange === true && setSidebarVisible(false)
                   }
-                  textColor={!formChange ? colors.customSelectActiveBorder : colors.searchInputActiveColor}
+                  textColor={
+                    !formChange
+                      ? colors.customSelectActiveBorder
+                      : colors.searchInputActiveColor
+                  }
                   buttonText="Apply Filters"
                 />
               </div>

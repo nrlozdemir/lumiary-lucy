@@ -284,3 +284,29 @@
     transform: translateX(95px);
   }
 }
+
+:global {
+  .performanceRangeTooltip {
+    &.dark {
+      color: #ffffff;
+
+      .rc-slider-tooltip-inner {
+        color: #ffffff;
+      }
+    }
+
+    &.light {
+      color: #505050;
+
+      .rc-slider-tooltip-inner {
+        color: #505050;
+      }
+    }
+
+    &.none {
+      .rc-slider-tooltip-inner {
+        display: none;
+      }
+    }
+  }
+}

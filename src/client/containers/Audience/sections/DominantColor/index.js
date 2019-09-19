@@ -23,7 +23,7 @@ class DominantColor extends React.Component {
         loading={loading}
         leftTitle="Male"
         rightTitle="Female"
-        data={loading ? {} : data}
+        data={loading ? [] : data}
         moduleKey={'Audience/DominantColor'}
         title="Dominant Color Performance By Gender"
         action={this.callBack}

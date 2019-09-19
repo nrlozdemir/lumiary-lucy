@@ -1,5 +1,4 @@
 import React from 'react'
-import { helpers, defaults } from 'chart.js'
 import { Doughnut, Chart } from 'react-chartjs-2'
 import classnames from 'classnames'
 import style from './style.scss'
@@ -50,7 +49,11 @@ const dataLabelPlugins = (value, func = 'insertBefore', item) => {
 
 class DoughnutChart extends React.Component {
   renderLabelsData = () => {
-    const { labelContainerClassname = false, labelsData, removeLabelMargin = false } = this.props
+    const {
+      labelContainerClassname = false,
+      labelsData,
+      removeLabelMargin = false,
+    } = this.props
     return (
       <div
         className={classnames(style.labelContainer, {
@@ -64,55 +67,76 @@ class DoughnutChart extends React.Component {
       </div>
     )
   }
-  
-  generateTooltip = (newData, tooltipData = {}, chartValues = []) => {
-    const { tooltipType = 'basic', themeContext = {}, tooltipMode = 'dataset', slicePiecesWidth = false } = this.props
-    const { colors : themes = {} } = themeContext
-    
-    return ((!!tooltipType &&
-      (tooltipType === 'basic' &&
-        customChartToolTip(
-          themes,
-          {
-            mode: tooltipMode,
-            filter: (tooltipItem) => {
-              if (!!slicePiecesWidth) {
-                if (
-                  !!tooltipData['labels'][tooltipItem.index] &&
-                  tooltipMode === 'dataset'
-                ) {
-                  return chartValues
-                } else if (
-                  !!tooltipData['labels'][tooltipItem.index] &&
-                  tooltipMode === 'nearest'
-                ) {
-                  return chartValues[tooltipItem.index]
+
+  generateTooltip = (
+    newData,
+    tooltipData = {},
+    chartValues = [],
+    tooltipTemplate = false,
+    platform = false,
+    metric = false
+  ) => {
+    const {
+      tooltipType = 'basic',
+      themeContext = {},
+      tooltipMode = 'dataset',
+      slicePiecesWidth = false,
+    } = this.props
+    const { colors: themes = {} } = themeContext
+
+    return (
+      (!!tooltipType &&
+        (tooltipType === 'basic' &&
+          customChartToolTip(
+            themes,
+            {
+              mode: tooltipMode,
+              filter: (tooltipItem) => {
+                if (!!slicePiecesWidth) {
+                  if (
+                    !!tooltipData['labels'][tooltipItem.index] &&
+                    tooltipMode === 'dataset'
+                  ) {
+                    return chartValues
+                  } else if (
+                    !!tooltipData['labels'][tooltipItem.index] &&
+                    tooltipMode === 'nearest'
+                  ) {
+                    return chartValues[tooltipItem.index]
+                  }
+                } else {
+                  if (tooltipMode === 'dataset') {
+                    return chartValues
+                  } else if (tooltipMode === 'nearest') {
+                    return chartValues[tooltipItem.index]
+                  }
                 }
-              } else {
-                if (tooltipMode === 'dataset') {
-                  return chartValues
-                } else if (tooltipMode === 'nearest') {
-                  return chartValues[tooltipItem.index]
-                }
-              }
+              },
             },
-          },
-          tooltipData
-        ))) ||
+            tooltipData
+          ))) ||
       (tooltipType === 'extended' &&
         modifyTooltip({
-          template: 'DoughnutChartTemplate',
+          template:
+            (!!tooltipTemplate && tooltipTemplate) || 'DoughnutChartTemplate',
           data: newData,
           options: {
             background: themes.tooltipBackground,
             textColor: themes.tooltipTextColor,
             caretColor: themes.tooltipBackground,
           },
-        })))
+          platform: platform,
+          metric: metric,
+        }))
+    )
   }
 
   generateLabelFormatter = (value) => {
-    const { slicePiecesWidth = false, dataLabelFunction, dataLabelInsert } = this.props
+    const {
+      slicePiecesWidth = false,
+      dataLabelFunction,
+      dataLabelInsert,
+    } = this.props
     if (!value) return
     //hide slices label
     if (
@@ -122,26 +146,22 @@ class DoughnutChart extends React.Component {
       return ''
     }
     if (dataLabelFunction) {
-      return dataLabelPlugins(
-        value,
-        dataLabelFunction,
-        dataLabelInsert
-      )
+      return dataLabelPlugins(value, dataLabelFunction, dataLabelInsert)
     }
     return value
   }
 
   renderAverage = () => {
-    const { 
+    const {
       average,
       themeContext = {},
       cvScoreData = {},
       tooltipCaretPosition = false,
       tooltipTemplate = false,
       currentDayIndex = false,
-      weekdayOrder = false
+      weekdayOrder = false,
     } = this.props
-    const { colors : themes = {} } = themeContext
+    const { colors: themes = {} } = themeContext
     const tooltipKey = Math.random()
 
     return (
@@ -149,9 +169,7 @@ class DoughnutChart extends React.Component {
         <div
           className={style.circleContainer}
           style={{
-            transform: `translate(-50%, 0) rotate(${(average /
-              100) *
-              360}deg)`,
+            transform: `translate(-50%, 0) rotate(${(average / 100) * 360}deg)`,
           }}
         >
           <div className={style.circleWrapper}>
@@ -171,12 +189,8 @@ class DoughnutChart extends React.Component {
           effect="solid"
           place={
             (!!tooltipCaretPosition &&
-              ((tooltipCaretPosition == 'left'
-                ? 'right'
-                : 'left') ||
-                (tooltipCaretPosition == 'right'
-                  ? 'left'
-                  : 'left'))) ||
+              ((tooltipCaretPosition == 'left' ? 'right' : 'left') ||
+                (tooltipCaretPosition == 'right' ? 'left' : 'left'))) ||
             'left'
           }
           smallTooltip
@@ -199,10 +213,7 @@ class DoughnutChart extends React.Component {
   }
 
   generateBgColor = (data) => {
-    const bgColor = 
-      data
-        ? data.backgroundColor.slice(0, 5)
-        : null 
+    const bgColor = data ? data.backgroundColor.slice(0, 5) : null
     return bgColor
   }
 
@@ -234,7 +245,10 @@ class DoughnutChart extends React.Component {
       datasetOptions = {},
       removeTooltip = false,
       showAllData = false,
-      themeContext = {}
+      themeContext = {},
+      tooltipTemplate = false,
+      platform = false,
+      metric = false,
     } = this.props
 
     const { colors: themes = {} } = themeContext
@@ -246,7 +260,7 @@ class DoughnutChart extends React.Component {
 
       plugins = [
         {
-          beforeDraw: function (chart) {
+          beforeDraw: function(chart) {
             const ctx = chart.chart.ctx
             const customFillText = textToUse.replace(/^\s+|\s+$/g, '')
 
@@ -273,7 +287,6 @@ class DoughnutChart extends React.Component {
       })
     }
 
-
     let chartBackgroundColors = this.generateBgColor(datasets[0])
     let chartHoverBackgroundColors = this.generateBgColor(datasets[0])
     let chartValuesTemp = []
@@ -286,10 +299,7 @@ class DoughnutChart extends React.Component {
         }
       })
     const isChartValuesTemp = !!chartValuesTemp && chartValuesTemp.length > 1
-    if (
-      !!slicePiecesWidth &&
-      isChartValuesTemp
-    ) {
+    if (!!slicePiecesWidth && isChartValuesTemp) {
       const totalValues = chartValues.reduce((a, b) => a + b, 0)
       // if there is a difference e.g(0.1, 0.15), we're going to use it in slices
       const difference =
@@ -341,10 +351,7 @@ class DoughnutChart extends React.Component {
 
     let tooltipData = {}
 
-    if (
-      !!datasets[0] &&
-      !!chartValues
-    ) {
+    if (!!datasets[0] && !!chartValues) {
       tooltipData = {
         labels: tooltipLabels,
         datasets: [
@@ -370,8 +377,7 @@ class DoughnutChart extends React.Component {
                 hoverShadowColor: themes.doughnutChartShadowColor,
                 data: chartValues,
                 backgroundColor: chartBackgroundColors,
-                borderColor:
-                  datasetsBorderColor || themes.moduleBackground,
+                borderColor: datasetsBorderColor || themes.moduleBackground,
                 hoverBorderColor:
                   datasetsHoverBorderColor || themes.moduleBackground,
                 hoverBackgroundColor: chartHoverBackgroundColors,
@@ -384,7 +390,14 @@ class DoughnutChart extends React.Component {
             tooltips:
               !average &&
               !removeTooltip &&
-              this.generateTooltip(newData, tooltipData, chartValues),
+              this.generateTooltip(
+                newData,
+                tooltipData,
+                chartValues,
+                tooltipTemplate,
+                platform,
+                metric
+              ),
             legend: {
               display: legend,
               labels: {
@@ -423,22 +436,18 @@ class DoughnutChart extends React.Component {
   }
 
   reduceNewData = (data, dataLimit = 0) => {
-    return (
-      data
-        .slice(0, dataLimit - 1)
-        .reduce((acc, val, idx) => {
-          let totalToAdd
-          if (idx === dataLimit - 2) {
-            const total = acc.reduce((a, b) => a + b, 0)
-            totalToAdd = Math.round(100 - total - val)
-          }
-          const result = [...acc, val]
-          if (totalToAdd) {
-            result.push(totalToAdd)
-          }
-          return result
-        }, [])
-    )
+    return data.slice(0, dataLimit - 1).reduce((acc, val, idx) => {
+      let totalToAdd
+      if (idx === dataLimit - 2) {
+        const total = acc.reduce((a, b) => a + b, 0)
+        totalToAdd = Math.round(100 - total - val)
+      }
+      const result = [...acc, val]
+      if (totalToAdd) {
+        result.push(totalToAdd)
+      }
+      return result
+    }, [])
   }
 
   render() {
@@ -452,12 +461,15 @@ class DoughnutChart extends React.Component {
       customDoughnutContainer,
       customChartWrapper,
       average,
+      tooltipTemplate = false,
+      platform = false,
+      metric = false,
     } = this.props
 
     if (!data) {
       return null
     }
-    
+
     const dataLimit = 5
     let newData = { ...data }
     const { datasets = [] } = newData

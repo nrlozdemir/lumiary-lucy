@@ -96,7 +96,7 @@ export class VideoCard extends PureComponent {
     )
 
     const videoUrl = `${mediaUrl}/lumiere/${brandId}/${video.uuid}.mp4`
-    const cvScore = video['cvScores.value']
+    const cvScore = video['percentile']
     const cvScoreColor = getCvScoreColor(cvScore)
 
     return (
