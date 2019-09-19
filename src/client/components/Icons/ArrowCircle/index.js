@@ -21,6 +21,7 @@ export default class ArrowCircleIconComponent extends React.Component {
 
     return (
       <span
+        {...this.props}
         className={cx(`icon-${iconName}-Arrow-Circle`, this.props.className)}
       >
         <span
