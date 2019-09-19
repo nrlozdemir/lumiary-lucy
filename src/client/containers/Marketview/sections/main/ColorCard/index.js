@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
 import { socialIconSelector, metricSuffix, ucfirst } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import { isEmpty } from 'lodash'
 import { dateRangeLabels } from 'Utils/globals'
 

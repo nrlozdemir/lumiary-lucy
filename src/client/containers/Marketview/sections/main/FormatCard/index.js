@@ -6,7 +6,6 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewFormatCard } from 'Reducers/marketview'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import SingleVideoCard from 'Components/SingleVideoCard'
 import style from 'Containers/Marketview/style.scss'
 import formatStyles from './style.scss'
@@ -63,8 +62,8 @@ class FormatCard extends Component {
 
     const dateLabel = dateRangeLabels[dateRange]
 
-    const formatLabel = !isDataEmpty && !!data[0] && data[0].name 
-       
+    const formatLabel = !isDataEmpty && !!data[0] && data[0].name
+
     return (
       <ThemeContext.Consumer>
         {({ themeContext: { colors } }) => (
@@ -84,7 +83,10 @@ class FormatCard extends Component {
                 {loading ? <RouterLoading /> : 'No Data Available'}
               </div>
             )}
-            <div className={style.marketViewCardHeader} style={{ borderColor: colors.marketviewCardHeaderBorder }}>
+            <div
+              className={style.marketViewCardHeader}
+              style={{ borderColor: colors.marketviewCardHeaderBorder }}
+            >
               <div className={style.marketViewCardTitle}>Time</div>
               {true && ( //!!currentDay && (
                 <div className={style.chartSectionBadge}>
@@ -93,11 +95,7 @@ class FormatCard extends Component {
                       color: colors.labelColor,
                     }}
                   >
-                    <Link
-                      to="/marketview/time"
-                    >
-                      View Time Metrics
-                    </Link>
+                    <Link to="/marketview/time">View Time Metrics</Link>
                   </span>
                 </div>
               )}

@@ -6,7 +6,6 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectMarketviewPacingChart } from 'Reducers/marketview'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 
 import style from 'Containers/Marketview/style.scss'
 import PacingPieChart from 'Components/Charts/MarketView/PacingPieChart'
