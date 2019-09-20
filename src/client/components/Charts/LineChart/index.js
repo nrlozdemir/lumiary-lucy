@@ -5,18 +5,8 @@ import { chartCombineDataset } from 'Utils/datasets'
 import { fromJS } from 'immutable'
 import { lineOptions, lineStackedAreaOptions } from './defaultOptions'
 import { withTheme } from 'ThemeContext/withTheme'
-
+import { metricSuffix } from 'Utils'
 import { beforeDraw, afterDraw, datasetsDraw } from './utils'
-
-function metricSuffix(number) {
-  if (number >= 1e3) {
-    const unit = Math.floor((number.toFixed(0).length - 1) / 3) * 3
-    const unitname = ['k', 'm', 'B', 'T'][Math.floor(unit / 3) - 1]
-    return (number / ('1e' + unit)).toFixed(0) + unitname
-  }
-
-  return number
-}
 
 function combineChartData(data, type = null, customOptions = null) {
   if (!!customOptions) {
