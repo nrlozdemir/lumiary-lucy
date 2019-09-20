@@ -135,11 +135,10 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     datasetsFromValues = brandObjects.map((brand, idx) => {
       const brandProp = Object.keys(brand)[0]
       const brandDataObj = brandObjects[idx][brandProp]
-      if (isMetric) {
-        return brandDataObj
-      } else {
+      if (!isMetric) {
         return Object.keys(brand[brandProp]).map((key) => brandDataObj[key])
       }
+      return brandDataObj
     })
     singleLevelJSON = false
     getValueinObject = brands
