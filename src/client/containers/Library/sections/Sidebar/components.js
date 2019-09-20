@@ -13,10 +13,10 @@ const OrderedByComponent = (props) => {
   return (
     <div className="w-100 mt-48">
       <Select
-        placeholder="Select One"
         id="OrderedBy"
         name="OrderedBy"
         label="Ordered By"
+        placeholder="Select One"
         options={!!selectOptions && selectOptions.orderByOptions}
         onChange={!!props.formChange && props.formChange}
       />
@@ -33,33 +33,41 @@ const SocialCheckBoxesComponent = ({ colors, formChange }) => {
   )
 }
 
+const AgeRangeComponent = (props) => {
+  return (
+    <div className={classnames('w-50 ml-0 pr-8', style.sidebarSelectContainer)}>
+      <Select
+        id="AgeRange"
+        name="AgeRange"
+        label="Audience Age"
+        placeholder="Select One"
+        options={!!selectOptions && selectOptions.audienceAge}
+        onChange={!!props.formChange && props.formChange}
+      />
+    </div>
+  )
+}
+
+const GenderComponent = (props) => {
+  return (
+    <div className={classnames('w-50 ml-0 pl-8', style.sidebarSelectContainer)}>
+      <Select
+        id="Gender"
+        name="Gender"
+        label="Audience Gender"
+        placeholder="Select One"
+        options={!!selectOptions && selectOptions.audienceGender}
+        onChange={!!props.formChange && props.formChange}
+      />
+    </div>
+  )
+}
+
 const AgeGenderComponent = (props) => {
   return (
     <div className="w-100 d-flex justify-space-between mt-48">
-      <div
-        className={classnames('w-50 ml-0 pr-8', style.sidebarSelectContainer)}
-      >
-        <Select
-          label="Audience Age"
-          name="AgeRange"
-          id="AgeRange"
-          placeholder="Select One"
-          options={!!selectOptions && selectOptions.audienceAge}
-          onChange={!!props.formChange && props.formChange}
-        />
-      </div>
-      <div
-        className={classnames('w-50 ml-0 pl-8', style.sidebarSelectContainer)}
-      >
-        <Select
-          options={!!selectOptions && selectOptions.audienceGender}
-          id="Gender"
-          name="Gender"
-          placeholder="Select One"
-          label="Audience Gender"
-          onChange={!!props.formChange && props.formChange}
-        />
-      </div>
+      <AgeRangeComponent formChange={props.formChange} />
+      <GenderComponent formChange={props.formChange} />
     </div>
   )
 }
@@ -68,12 +76,12 @@ const DurationComponent = ({ props = false }) => {
   return (
     <div className="w-100 mt-48">
       <Field
+        id="Duration"
+        name="Duration"
         component={Range}
         minValue={0}
         maxValue={60}
         customClass={style.sidebarDurationRange}
-        id="Duration"
-        name="Duration"
       />
     </div>
   )
@@ -95,10 +103,10 @@ const VideoFormatComponent = (props) => {
     <div className="w-100 mt-48">
       <Select
         id="VideoFormat"
-        options={!!selectOptions && selectOptions.videoFormat}
         name="VideoFormat"
         label="Video Format"
         placeholder="Select One"
+        options={!!selectOptions && selectOptions.videoFormat}
         onChange={!!props.formChange && props.formChange}
       />
     </div>
@@ -109,11 +117,11 @@ const AspectRatioComponent = (props) => {
   return (
     <div className="w-100 mt-48">
       <Select
-        options={!!selectOptions && selectOptions.aspectRatio}
         id="AspectRatio"
-        placeholder="Select One"
         name="AspectRatio"
         label="Aspect Ratio"
+        placeholder="Select One"
+        options={!!selectOptions && selectOptions.aspectRatio}
         onChange={!!props.formChange && props.formChange}
       />
     </div>
@@ -124,11 +132,11 @@ const FramesPerSecondComponent = (props) => {
   return (
     <div className="w-100 mt-48">
       <Select
-        name="FramesPerSecond"
-        options={!!selectOptions && selectOptions.frameRate}
         id="FramesPerSecond"
-        placeholder="Select One"
+        name="FramesPerSecond"
         label="Frame Rate"
+        placeholder="Select One"
+        options={!!selectOptions && selectOptions.frameRate}
         onChange={!!props.formChange && props.formChange}
       />
     </div>
@@ -139,11 +147,11 @@ const ResolutionComponent = (props) => {
   return (
     <div className="w-100 mt-48">
       <Select
-        label="Resolution"
-        options={!!selectOptions && selectOptions.resolution}
         id="Resolution"
         name="Resolution"
+        label="Resolution"
         placeholder="Select One"
+        options={!!selectOptions && selectOptions.resolution}
         onChange={!!props.formChange && props.formChange}
       />
     </div>
@@ -154,12 +162,12 @@ const PacingComponent = (props) => {
   return (
     <div className="w-100 mt-48">
       <Select
-        placeholder="Select One"
-        label="Pacing"
-        options={!!selectOptions && selectOptions.pacing}
         id="Pacing"
-        onChange={!!props.formChange && props.formChange}
         name="Pacing"
+        label="Pacing"
+        placeholder="Select One"
+        options={!!selectOptions && selectOptions.pacing}
+        onChange={!!props.formChange && props.formChange}
       />
     </div>
   )
