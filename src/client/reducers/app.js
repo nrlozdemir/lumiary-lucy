@@ -51,7 +51,7 @@ export const actions = {
 export const initialState = {
   sections: {
     data:
-      typeof window === 'object'
+      typeof window === 'object' && window.localStorage
         ? JSON.parse(window.localStorage.getItem('sections'))
         : null,
     loading: false,
@@ -97,7 +97,7 @@ export const initialState = {
   },
 }
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   const { data, message, payload } = action
 
   switch (action.type) {
