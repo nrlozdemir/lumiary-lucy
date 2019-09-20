@@ -365,11 +365,9 @@ const convertMultiRequestDataIntoDatasets = (
       const mappingData = !revert ? firstPayloadLabels : datasetLabels
       const data = (mappingData).map((key) => {
         const currentLabel = payload[!revert ? label : key].data
-        console.log('current label : ', currentLabel)
         const brand = Object.keys(currentLabel)[0]
         const response = currentLabel[brand][property]
 
-        console.log('ressss : ', response[!revert ? key : label])
         return response[!revert ? key : label]
       })
 
@@ -677,23 +675,25 @@ const convertVideoEngagementData = (data, metric = 'views') => {
 }
 
 const getMinMaxFromDatasets = (datasets = [], initial = 0, type = 'max') => {
-  return !!datasets.length
-    ? datasets.reduce((result, dataset) => {
-        const { data } = dataset
+  let output = 0
+  if (!!datasets.length) {
+    output = datasets.reduce((result, dataset) => {
+      const { data = [] } = dataset
 
-        if (!!data && !!data.length) {
-          const dataSetResult =
-            type === 'max' ? Math.max(...data) : Math.min(...data)
+      if (!!data.length) {
+        const dataSetResult =
+          type === 'max' ? Math.max(...data) : Math.min(...data)
 
-          if (
-            type === 'max' ? dataSetResult > result : dataSetResult < result
-          ) {
-            result = dataSetResult
-          }
+        if (
+          type === 'max' ? dataSetResult > result : dataSetResult < result
+        ) {
+          result = dataSetResult
         }
-        return result
-      }, initial)
-    : 0
+      }
+      return result
+    }, initial)
+  }
+  return output
 }
 
 //gets top n values by category of datasets.
@@ -938,11 +938,6 @@ const convertPropertiesIntoDatasets = (data, options = {}) => {
       : null
 
   if (!type || !property || !data || !bucket || !metric) {
-    // console.log('type', type)
-    // console.log('property', property)
-    // console.log('data', data)
-    // console.log('bucket', bucket)
-    // console.log('metric', metric)
     return {}
   }
 
