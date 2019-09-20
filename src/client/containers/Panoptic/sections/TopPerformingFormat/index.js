@@ -5,12 +5,11 @@ import { createStructuredSelector } from 'reselect'
 import { compose, bindActionCreators } from 'redux'
 import { makeSelectAuthProfile } from 'Reducers/auth'
 import { actions, makeSelectTopPerformingFormat } from 'Reducers/panoptic'
-import { chartCombineDataset, isDataSetEmpty } from 'Utils/datasets'
+import { isDataSetEmpty } from 'Utils/datasets'
 
 import LineAndDoughnutChartModule from 'Components/Modules/LineAndDoughnutChartModule'
-import { lineChartData_DatasetOptions, lineChartOptions } from './options'
+import { lineChartOptions } from './options'
 import { isEmpty } from 'lodash'
-import { chartColors } from 'Utils/globals'
 
 class TopPerformingFormat extends React.Component {
   callBack = (data, moduleKey) => {
@@ -19,38 +18,12 @@ class TopPerformingFormat extends React.Component {
 
   customCallbackFunc = () => console.log('Success')
 
-  combineChartData = (lineData) => {
-    return chartCombineDataset(lineData, lineChartData_DatasetOptions, {
-      beforeDraw: function(chart, easing) {
-        if (
-          chart.config.options.chartArea &&
-          chart.config.options.chartArea.backgroundColor
-        ) {
-          const ctx = chart.chart.ctx
-          const chartArea = chart.chartArea
-
-          ctx.save()
-          ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-          ctx.fillRect(
-            chartArea.left,
-            chartArea.top,
-            chartArea.right - chartArea.left,
-            chartArea.bottom - chartArea.top
-          )
-          ctx.restore()
-        }
-      },
-    })
-  }
-
   render() {
     const {
-      profile,
       topPerformingFormatData: {
         data,
         data: { lineChartData = {}, average = 0, properties = {}, platform },
         loading,
-        error,
       },
     } = this.props
 

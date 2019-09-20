@@ -4,41 +4,17 @@ import { Bar } from 'react-chartjs-2'
 import cx from 'classnames'
 import style from './style.scss'
 import { customChartToolTip, randomKey, metricSuffix } from 'Utils'
+import { beforeDrawFunc } from 'Utils/chart-plugins'
+import renderLegend from 'Components/Legend/render'
 import { withTheme } from 'ThemeContext/withTheme'
 
 import { options, wrapperBarOptions } from './chartOptions'
 import BarItem from './BarItem'
 
-import renderLegend from 'Components/Legend/render'
-
 const barChartContainer = cx(style.panopticBarChart)
 const barContainerClass = cx(style.barChartContainer)
 
 import Module from 'Components/Module'
-
-const plugins = [
-  {
-    beforeDraw: function(chart, easing) {
-      if (
-        chart.config.options.chartArea &&
-        chart.config.options.chartArea.backgroundColor
-      ) {
-        var ctx = chart.chart.ctx
-        var chartArea = chart.chartArea
-
-        ctx.save()
-        ctx.fillStyle = chart.config.options.chartArea.backgroundColor
-        ctx.fillRect(
-          chartArea.left,
-          chartArea.top,
-          chartArea.right - chartArea.left,
-          chartArea.bottom - chartArea.top
-        )
-        ctx.restore()
-      }
-    },
-  },
-]
 
 const VideoReleasesBarChartModule = (props) => {
   const datasetKeyProvider = () => {
@@ -213,7 +189,11 @@ const VideoReleasesBarChartModule = (props) => {
                 },
               }}
               datasetKeyProvider={datasetKeyProvider}
-              plugins={plugins}
+              plugins={[
+                beforeDrawFunc({
+                  createBackground: true,
+                }),
+              ]}
             />
           </div>
           <div className={style.groupChartsWrapper}>

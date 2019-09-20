@@ -11,6 +11,7 @@ import 'Utils/chart-shadow'
 import { isNumber, isFinite } from 'lodash'
 import Labels from 'Components/Charts/Labels'
 import { modifyTooltip } from 'Utils/tooltip'
+import { beforeDrawFunc } from 'Utils/chart-plugins'
 
 const propTypes = {}
 const defaultProps = {
@@ -254,27 +255,8 @@ class DoughnutChart extends React.Component {
     const { colors: themes = {} } = themeContext
     const { datasets = [] } = newData
 
-    let plugins = []
-    if (fillText) {
-      const textToUse = isDataSetEmpty(data) ? 'No Data' : fillText
+    const textToUse = fillText && isDataSetEmpty(data) ? 'No Data' : fillText
 
-      plugins = [
-        {
-          beforeDraw: function(chart) {
-            const ctx = chart.chart.ctx
-            const customFillText = textToUse.replace(/^\s+|\s+$/g, '')
-
-            ctx.restore()
-            ctx.textAlign = 'center'
-            ctx.textBaseline = 'middle'
-            ctx.fillStyle = fillTextColor || themes.textColor
-            ctx.font = 'bold ' + fillTextFontSize + ' ' + fillTextFontFamily
-            ctx.fillText(customFillText, width / 2, height / 2)
-            ctx.save()
-          },
-        },
-      ]
-    }
     // for opacity backgrounds
     let chartValues = []
     if (datasets[0]) {
@@ -384,7 +366,23 @@ class DoughnutChart extends React.Component {
               },
             ],
           }}
-          plugins={plugins}
+          plugins={[
+            ...(fillText
+              ? [
+                  beforeDrawFunc({
+                    createMiddleText: {
+                      textToUse,
+                      textColor: themes.textColor,
+                      fillTextColor,
+                      fillTextFontSize,
+                      fillTextFontFamily,
+                      width,
+                      height,
+                    },
+                  }),
+                ]
+              : []),
+          ]}
           options={{
             responsive: false,
             tooltips:
