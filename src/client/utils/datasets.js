@@ -872,27 +872,34 @@ const getCVScoreChartAttributes = (data, maxPercent) => {
           }, 0)) ||
         0
 
-  // const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
-  // const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
-
-  const chartYAxisMax =
-    maxPercent < 50
-      ? maxPercent < 33
-        ? maxPercent < 25
-          ? maxPercent < 20
-            ? maxPercent < 15
-              ? 15
-              : 20
-            : 25
-          : 33
-        : 50
-      : 100
+  let chartYAxisMax
+  switch (true) {
+    case maxPercent > 50:
+      chartYAxisMax = 100
+      break
+    case maxPercent < 50 && maxPercent > 33:
+      chartYAxisMax = 50
+      break
+    case maxPercent < 33 && maxPercent > 25:
+      chartYAxisMax = 33
+      break
+    case maxPercent < 25 && maxPercent > 20:
+      chartYAxisMax = 25
+      break
+    case maxPercent < 20 && maxPercent > 15:
+      chartYAxisMax = 20
+      break
+    case maxPercent < 15:
+      chartYAxisMax = 15
+      break
+  }
   const chartYAxisStepSize = chartYAxisMax / 4
-
-  return {
+  const result = {
     chartYAxisMax,
     chartYAxisStepSize,
   }
+  
+  return result
 }
 
 /*
