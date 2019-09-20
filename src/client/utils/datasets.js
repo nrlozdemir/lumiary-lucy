@@ -73,7 +73,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   } = (args && !!args[0] && args[0]) || {}
 
   let labels
-  let datasetsFromValues
+  let datasetsFromValues = preparedDatasets
   let singleLevelJSON
   let customKeys = argKeys
   let getValueinObject
@@ -176,8 +176,6 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   labels =
     (preparedLabels ? preparedLabels : useBrandLabels ? brands : labels) ||
     labels
-
-  datasetsFromValues = preparedDatasets || datasetsFromValues
 
   getValueinObject = useBrands ? brands : getValueinObject
 
