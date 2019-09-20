@@ -1,6 +1,12 @@
 import expect from 'expect'
 import { fromJS } from 'immutable'
-import reducer, { types, actions, initialState } from 'Reducers/library'
+import reducer, {
+  types,
+  actions,
+  initialState,
+  makeSelectLibrary,
+  makeSelectVideoFilters,
+} from 'Reducers/library'
 
 describe('Select Filter Reducer', () => {
   describe('Actions', () => {
@@ -34,25 +40,6 @@ describe('Select Filter Reducer', () => {
             thumbNail:
               'lumiere/be685302-e755-488b-b0a5-f9a1d81f3d37/1e86cad9-90fa-40e7-886f-5f42507240f3/0/0.jpg',
           },
-          {
-            id: 160348,
-            uuid: '4524f61b-220f-4eda-b144-c29baf3e4829',
-            title:
-              'If you’re in need of a dose of inspiration today, look no further. You are amazing @left.foot.lauren ! Everyone here at #teamaaptiv is cheering you on🎉 👏🏼\n•••••••••••••••••••••••••••••••••••••••••••\n“Hey Team Aaptiv! I wanted to share this accomplishment with you all. I had surgery on April 30th to amputate my left leg below knee due to a tumor in my foot (synovial sarcoma). After a summer of chemotherapy, prosthetic training, and Aaptiv meditations and stretches, I took my first unassisted steps on Monday☺️ I can’t wait to fully walk, and then run, and hop back on the elliptical!”',
-            fileName:
-              'be685302-e755-488b-b0a5-f9a1d81f3d37/instagram/4524f61b-220f-4eda-b144-c29baf3e4829/69619187_150174536086871_4296589540685141834_n.mp4',
-            platform: 'instagram',
-            percentile: 66.7,
-            duration: '0-15',
-            pacing: 'Slow',
-            date: '2019-09-18T08:17:00.092Z',
-            aspect_ratio: '1:1',
-            frameRate: 30,
-            resolution: '720p',
-            formats: null,
-            thumbNail:
-              'lumiere/be685302-e755-488b-b0a5-f9a1d81f3d37/4524f61b-220f-4eda-b144-c29baf3e4829/0/0.jpg',
-          },
         ],
         pagination: {
           page: '1',
@@ -66,7 +53,33 @@ describe('Select Filter Reducer', () => {
       expect(actions.loadVideosSuccess(payload)).toEqual(expectedAction)
     })
     it('should create an action to remove all filter data', () => {
-      const payload = {}
+      const payload = {
+        videos: [
+          {
+            id: 151812,
+            uuid: '1e86cad9-90fa-40e7-886f-5f42507240f3',
+            title:
+              'Top notch training clearly runs in the family 👯 @jaimemcfaden’s favorite sidekick took over the teaching duties to lead a fun, family-friendly workout right in the comfort of their backyard. Who else has a little Aaptiv-trainer-in-training on their hands? #TeamAaptiv',
+            fileName:
+              'be685302-e755-488b-b0a5-f9a1d81f3d37/instagram/1e86cad9-90fa-40e7-886f-5f42507240f3/69840873_159689261755479_7979282726732081754_n.mp4',
+            platform: 'instagram',
+            percentile: 39,
+            duration: '31-60',
+            pacing: 'Slowest',
+            date: '2019-09-18T08:17:00.092Z',
+            aspect_ratio: '1:1',
+            frameRate: 30,
+            resolution: '720p',
+            formats: null,
+            thumbNail:
+              'lumiere/be685302-e755-488b-b0a5-f9a1d81f3d37/1e86cad9-90fa-40e7-886f-5f42507240f3/0/0.jpg',
+          },
+        ],
+        pagination: {
+          page: '1',
+          limit: '16',
+        },
+      }
       const expectedAction = {
         type: types.CLEAN_AND_LOAD_VIDEOS,
         payload,
@@ -90,7 +103,12 @@ describe('Select Filter Reducer', () => {
       expect(actions.setSelectedVideo(payload)).toEqual(expectedAction)
     })
     it('should create an action to remove all filter data', () => {
-      const payload = {}
+      const payload = {
+        OrderedBy: {
+          value: 'mostLikedVideos',
+          label: 'Most Liked Videos',
+        },
+      }
       const expectedAction = {
         type: types.CHANGE_FILTER,
         payload,
@@ -98,7 +116,102 @@ describe('Select Filter Reducer', () => {
       expect(actions.changeFilter(payload)).toEqual(expectedAction)
     })
 
-    describe('Reducer', () => {})
+    describe('Reducer', () => {
+      it('should return the initial state', () => {
+        expect(reducer(undefined, {})).toEqual(initialState)
+      })
+      it('should handle LOAD_VIDEOS', () => {
+        const action = {
+          type: types.LOAD_VIDEOS,
+        }
+        const expectedState = fromJS({
+          ...initialState.toJS(),
+          loading: true,
+        })
+        expect(reducer(undefined, action)).toEqual(expectedState)
+      })
+      it('should handle LOAD_VIDEO_SUCCESS and CLEAN_AND_LOAD_VIDEOS', () => {
+        const payload = {
+          videos: [
+            {
+              id: 151812,
+              uuid: '1e86cad9-90fa-40e7-886f-5f42507240f3',
+              title:
+                'Top notch training clearly runs in the family 👯 @jaimemcfaden’s favorite sidekick took over the teaching duties to lead a fun, family-friendly workout right in the comfort of their backyard. Who else has a little Aaptiv-trainer-in-training on their hands? #TeamAaptiv',
+              fileName:
+                'be685302-e755-488b-b0a5-f9a1d81f3d37/instagram/1e86cad9-90fa-40e7-886f-5f42507240f3/69840873_159689261755479_7979282726732081754_n.mp4',
+              platform: 'instagram',
+              percentile: 39.3,
+              duration: '31-60',
+              pacing: 'Slowest',
+              date: '2019-09-20T08:21:00.132Z',
+              aspect_ratio: '1:1',
+              frameRate: 30,
+              resolution: '720p',
+              formats: null,
+              thumbNail:
+                'lumiere/be685302-e755-488b-b0a5-f9a1d81f3d37/1e86cad9-90fa-40e7-886f-5f42507240f3/0/0.jpg',
+            },
+          ],
+          pagination: {
+            page: '1',
+            limit: '16',
+          },
+        }
+
+        const action = {
+          type: types.LOAD_VIDEOS_SUCCESS,
+          payload,
+        }
+
+        const anotherAction = {
+          type: types.CLEAN_AND_LOAD_VIDEOS,
+          payload,
+        }
+
+        const expectedResult = fromJS({
+          ...initialState.toJS(),
+          data: {
+            ...initialState.toJS().data,
+            ...payload,
+          },
+        })
+
+        expect(reducer(undefined, action)).toEqual(expectedResult)
+        expect(reducer(undefined, anotherAction)).toEqual(expectedResult)
+      })
+      it('should handle LOAD_VIDEOS_ERROR', () => {
+        const error = { error: 'message' }
+        const action = {
+          type: types.LOAD_VIDEOS_ERROR,
+          error,
+        }
+        const expectedState = fromJS({
+          ...initialState.toJS(),
+          error: error,
+          loading: false,
+        })
+        expect(reducer(undefined, action)).toEqual(expectedState)
+      })
+      it('should handle CHANGE_FILTER', () => {
+        const payload = {
+          OrderedBy: {
+            value: 'mostLikedVideos',
+            label: 'Most Liked Videos',
+          },
+        }
+        const action = {
+          type: types.CHANGE_FILTER,
+          payload,
+        }
+        const expectedState = fromJS({
+          ...initialState.toJS(),
+          filters: { ...payload },
+          loading: true,
+        })
+        expect(reducer(undefined, action)).toEqual(expectedState)
+      })
+    })
     // it('should handle SET_BRAND_OPTIONS', () => {
     //   const payload = {
     //     brands: [
@@ -139,11 +252,15 @@ describe('Select Filter Reducer', () => {
     //   })
     //   expect(reducer(undefined, action)).toEqual(expectedState)
     // })
-    // describe('Selector', () => {
-    //   it('should return the initial state', () => {
-    //     const selected = makeSelectSelectFilters().resultFunc(initialState)
-    //     expect(selected).toEqual(initialState.toJS())
-    //   })
-    // })
+    describe('Selector', () => {
+      it('should return the initial state', () => {
+        const selected = makeSelectLibrary().resultFunc(initialState)
+        expect(selected).toEqual(initialState.toJS())
+      })
+      it('should return the filter state', () => {
+        const selected = makeSelectVideoFilters().resultFunc(initialState)
+        expect(selected).toEqual(initialState.toJS().filters)
+      })
+    })
   })
 })
