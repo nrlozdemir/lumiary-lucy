@@ -6,7 +6,7 @@ import { compose } from 'redux'
 import style from '../style.scss'
 import { required } from 'Utils/validate'
 import SelectBox from '../../../Form/CustomCheckbox'
-import RightArrowCircle from 'Components/Icons/RightArrowCircle'
+import ArrowCircle from 'Components/Icons/ArrowCircle'
 
 import { ThemeContext } from 'ThemeContext/themeContext'
 
@@ -75,7 +75,7 @@ class CompareBrand extends React.PureComponent {
                 >
                   Generate Report
                   <div className={style.icon}>
-                    <RightArrowCircle />
+                    <ArrowCircle direction="right" />
                   </div>
                 </button>
               </div>

@@ -17,15 +17,24 @@ export const types = {
   CHANGE_FILTER: 'Library/CHANGE_FILTER',
 }
 export const actions = {
-  loadVideos: (payload) => ({ type: types.LOAD_VIDEOS, payload }),
-  loadVideosSuccess: (payload) => ({
-    type: types.LOAD_VIDEOS_SUCCESS,
-    payload,
-  }),
-  clearAndLoadVideos: (payload) => ({
-    type: types.CLEAN_AND_LOAD_VIDEOS,
-    payload,
-  }),
+  loadVideos: (payload) => {
+    console.log(payload)
+    return { type: types.LOAD_VIDEOS, payload }
+  },
+  loadVideosSuccess: (payload) => {
+    console.log(payload)
+    return {
+      type: types.LOAD_VIDEOS_SUCCESS,
+      payload,
+    }
+  },
+  clearAndLoadVideos: (payload) => {
+    console.log(payload)
+    return {
+      type: types.CLEAN_AND_LOAD_VIDEOS,
+      payload,
+    }
+  },
   loadVideosError: (error) => ({ type: types.LOAD_VIDEOS_ERROR, error }),
   setSelectedVideo: (payload) => ({ type: types.SET_SELECTED_VIDEO, payload }),
   changeFilter: (payload) => ({ type: types.CHANGE_FILTER, payload }),

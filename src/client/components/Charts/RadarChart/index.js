@@ -84,9 +84,6 @@ const RadarChart = (props) => {
         legend: {
           display: false,
         },
-        layout: {
-          padding: 35,
-        },
         tooltips: tooltips(props, theData),
         plugins: {
           datalabels: false,

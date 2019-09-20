@@ -1,8 +1,7 @@
 import React from 'react'
 import classnames from 'classnames'
 import style from './style.scss'
-import RightArrowCircleFlat from 'Components/Icons/RightArrowCircleFlat'
-import LeftArrowCircleFlat from 'Components/Icons/LeftArrowCircleFlat'
+import ArrowCircle from 'Components/Icons/ArrowCircle'
 import Swiper from 'react-id-swiper'
 import SwiperJS from 'swiper/dist/js/swiper.js'
 import { ThemeContext } from 'ThemeContext/themeContext'
@@ -33,26 +32,30 @@ class AudienceSlider extends React.Component {
 
   renderNextButton = () => {
     return (
-      <RightArrowCircleFlat
+      <ArrowCircle
         className={classnames(
           style.nextButton,
           this.refSlider && this.refSlider.isEnd ? style.disabled : ''
         )}
         size={32}
         onClick={() => this.refSlider.slideNext()}
+        direction="right"
+        flatIcon={true}
       />
     )
   }
 
   renderPrevButton = () => {
     return (
-      <LeftArrowCircleFlat
+      <ArrowCircle
         className={classnames(
           style.prevButton,
           this.refSlider && this.refSlider.isBeginning ? style.disabled : ''
         )}
         size={32}
         onClick={() => this.refSlider.slidePrev()}
+        direction="left"
+        flatIcon={true}
       />
     )
   }

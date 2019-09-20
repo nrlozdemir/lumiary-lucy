@@ -8,7 +8,6 @@ import { Link } from 'react-router-dom'
 import { BubbleChart, Bubble, Visual, ToolTip } from '@saypr/bubble-chart/react'
 import { socialIconSelector, metricSuffix, ucfirst } from 'Utils'
 import { ThemeContext } from 'ThemeContext/themeContext'
-import RightArrowCircle from 'Components/Icons/RightArrowCircle'
 import { isEmpty } from 'lodash'
 import { dateRangeLabels } from 'Utils/globals'
 
@@ -102,87 +101,97 @@ class ColorCard extends Component {
             </div>
             <div className={style.bubbleChart}>
               {!!data && !loading && !!data.length && totalChartValue ? (
-                <BubbleChart
-                  size={[340, 400]}
-                  options={{
-                    maximumIterationCount: 1000,
-                    toolTipBackground: colors.audienceBubbleTooltipBackground,
-                    toolTipArrowBackground:
-                      colors.audienceBubbleTooltipBackground,
-                    toolTipArrowShadow: colors.audienceBubbleTooltipBackground,
-                    strokeWidth: 5,
-                    gap: 1,
-                    visualFontSize: 14,
-                    toolTipFontSize: 10,
-                    visualWidth: 32,
-                    visualHeight: 32,
-                    toolTipWidth: 206,
-                    toolTipHeight: 136,
-                    toolTipPositionTop: true,
-                    toolTipDelay: 100,
-                    toolTipRadius: 8,
-                    toolTipArrowWidth: 16,
-                    toolTipArrowHeight: 8,
-                    zIndex: 30,
+                <div
+                  style={{
+                    width: 370,
+                    height: 430,
                   }}
-                  firstAngle={40}
                 >
-                  {data.map((bubble, i) => (
-                    <div key={i}>
-                      <Bubble
-                        key={'bubble-' + i}
-                        // radius={(parseInt(bubble.value) / 100) * 0.0015 + 15}
-                        radius={bubble.value}
-                        fill={colors.bodyBackground}
-                        stroke={bubbleColors[bubble.color]}
-                      >
-                        <Visual>
-                          <span
-                            className={
-                              socialIconSelector(bubble.name, true) +
-                              ' ' +
-                              style.bubbleVisual
-                            }
-                            style={{
-                              fontSize: 13,
-                              background: colors.textColor,
-                              color: colors.moduleBackgroundHover,
-                            }}
-                          />
-                        </Visual>
-                        <ToolTip>
-                          <div className={style.bubbleTooltip}>
+                  <BubbleChart
+                    size={[370, 430]}
+                    options={{
+                      maximumIterationCount: 1000,
+                      toolTipBackground: colors.audienceBubbleTooltipBackground,
+                      toolTipArrowBackground:
+                        colors.audienceBubbleTooltipBackground,
+                      toolTipArrowShadow:
+                        colors.audienceBubbleTooltipBackground,
+                      strokeWidth: 5,
+                      gap: 1,
+                      visualFontSize: 14,
+                      toolTipFontSize: 10,
+                      visualWidth: 32,
+                      visualHeight: 32,
+                      toolTipWidth: 206,
+                      toolTipHeight: 136,
+                      toolTipPositionTop: true,
+                      toolTipDelay: 100,
+                      toolTipRadius: 8,
+                      toolTipArrowWidth: 16,
+                      toolTipArrowHeight: 8,
+                      zIndex: 30,
+                      firstCircleTimesX: 0.4,
+                      firstCircleTimesY: 0.4,
+                    }}
+                    firstAngle={10}
+                  >
+                    {data.map((bubble, i) => (
+                      <div key={i}>
+                        <Bubble
+                          key={'bubble-' + i}
+                          // radius={(parseInt(bubble.value) / 100) * 0.0015 + 15}
+                          radius={bubble.value}
+                          fill={colors.bodyBackground}
+                          stroke={bubbleColors[bubble.color]}
+                        >
+                          <Visual>
                             <span
-                              className={style.header}
+                              className={
+                                socialIconSelector(bubble.name, true) +
+                                ' ' +
+                                style.bubbleVisual
+                              }
                               style={{
-                                color: colors.audienceBubbleTooltipText,
-                                borderBottom: `1px solid ${colors.audienceBubbleTooltipSeparator}`,
+                                fontSize: 13,
+                                background: colors.textColor,
+                                color: colors.moduleBackgroundHover,
                               }}
-                            >
-                              {`${metricSuffix(bubble.oldValue)} ${ucfirst(
-                                metric
-                              )} | ${bubble.name}`}
-                            </span>
-                            <div
-                              className={style.body}
-                              style={{
-                                color: colors.audienceBubbleTooltipText,
-                              }}
-                            >
-                              <span>
-                                {`On ${bubble.name}, videos that`}
-                                <br /> have a dominant color of <br />
-                                {`${bubble.color} received ${metricSuffix(
-                                  bubble.oldValue
-                                )} ${ucfirst(metric)}`}
+                            />
+                          </Visual>
+                          <ToolTip>
+                            <div className={style.bubbleTooltip}>
+                              <span
+                                className={style.header}
+                                style={{
+                                  color: colors.audienceBubbleTooltipText,
+                                  borderBottom: `1px solid ${colors.audienceBubbleTooltipSeparator}`,
+                                }}
+                              >
+                                {`${metricSuffix(bubble.oldValue)} ${ucfirst(
+                                  metric
+                                )} | ${bubble.name}`}
                               </span>
+                              <div
+                                className={style.body}
+                                style={{
+                                  color: colors.audienceBubbleTooltipText,
+                                }}
+                              >
+                                <span>
+                                  {`On ${bubble.name}, videos that`}
+                                  <br /> have a dominant color of <br />
+                                  {`${bubble.color} received ${metricSuffix(
+                                    bubble.oldValue
+                                  )} ${ucfirst(metric)}`}
+                                </span>
+                              </div>
                             </div>
-                          </div>
-                        </ToolTip>
-                      </Bubble>
-                    </div>
-                  ))}
-                </BubbleChart>
+                          </ToolTip>
+                        </Bubble>
+                      </div>
+                    ))}
+                  </BubbleChart>
+                </div>
               ) : null}
             </div>
             {!isDataEmpty && !loading && (
