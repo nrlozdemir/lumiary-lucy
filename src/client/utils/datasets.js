@@ -484,30 +484,11 @@ const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
 }
 
 const parseAverage = (payload) => {
-  console.log('=============== parse average ================')
-  console.log('payload : ', payload)
   let calculateAverage = Object.keys(payload).reduce((acc, key) => {
-    const keyName = key !== 'video' && key.substr(0, key.indexOf('.'))
-    const keyIncludesLibraryAverage = key.includes('LibraryAverage')
     const keyIncludesLibraryMax = key.includes('LibraryMax')
-    let objKeyValue = 'average'
-    if(keyIncludesLibraryMax) {
-      objKeyValue = 'max'
-    }
-    console.log('acc :',acc)
-    console.log('keyname :',keyName)
-    if(keyName) {
-      console.log('key : ', key)
-      // if (keyIncludesLibraryAverage) {
-      //   return {
-      //     ...acc,
-      //     [keyName]: {
-      //       ...acc[keyName],
-      //       average: percentageBeautifier(payload[key]), 
-      //     }
-          
-      //   }
-      // }
+    const objKeyValue = keyIncludesLibraryMax ? 'max' : 'average'
+    if(key !== 'video') {
+      const keyName = key.substr(0, key.indexOf('.'))
       return {
         ...acc,
         [keyName]: {
@@ -516,7 +497,6 @@ const parseAverage = (payload) => {
         }
       }
     }
-
 
     return acc
   }, {})
