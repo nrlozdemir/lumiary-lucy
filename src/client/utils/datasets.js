@@ -169,9 +169,6 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     )
   }
 
-  // Object.keys(
-  //  brandObjects[0][Object.keys(brandObjects[0])]
-  // ).map((value) => brandObjects.map((brand) => brand.duration[value]))
   // You can pass prepared labels or datasets in args
   labels = (preparedLabels || useBrandLabels ? brands : labels)
   getValueinObject = useBrands ? brands : getValueinObject
