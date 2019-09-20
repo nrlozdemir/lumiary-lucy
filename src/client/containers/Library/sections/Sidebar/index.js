@@ -21,7 +21,7 @@ const ResetButton = (props) => {
   return (
     <span
       className="float-right color-cool-blue"
-      /* onClick={this.resetFormValues} */
+      onClick={props.resetFormValues}
     >
       Reset
     </span>
@@ -41,7 +41,7 @@ const FilterVideos = ({ colors }) => {
   )
 }
 
-const SidebarHeader = ({ colors, fixedHeader }) => {
+const SidebarHeader = ({ colors, fixedHeader, resetFormValues }) => {
   return (
     <div
       className={classnames(style.sidebarHeader, {
@@ -51,7 +51,7 @@ const SidebarHeader = ({ colors, fixedHeader }) => {
     >
       <p className={style.text}>
         <FilterVideos colors={colors} />
-        <ResetButton />
+        <ResetButton resetFormValues={resetFormValues} />
       </p>
       <div className="clearFix" />
     </div>
@@ -64,11 +64,10 @@ const FormWrapper = ({
   fixedHeader,
   handleSubmit,
   sidebarVisible,
-  setSidebarVisible,
-  formChange,
+  resetFormValues,
 }) => {
   return (
-    <form /* onSubmit={(e) => handleSubmit(e)} */>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <div
         className={classnames(style.sidebar, {
           [style.sidebarVisible]: sidebarVisible,
@@ -81,7 +80,11 @@ const FormWrapper = ({
             [style.fixed]: fixedHeader,
           })}
         >
-          <SidebarHeader colors={colors} fixedHeader={fixedHeader} />
+          <SidebarHeader
+            colors={colors}
+            fixedHeader={fixedHeader}
+            resetFormValues={resetFormValues}
+          />
           <div
             className={classnames(style.sidebarContent, 'ph-32', {
               [style.fixed]: fixedHeader,
@@ -128,24 +131,27 @@ class Sidebar extends React.Component {
   }
 
   render() {
+    const nestedProps = {
+      formChangeState: this.state.formChange,
+      formChange: this.formChanged,
+      resetFormValues: this.resetFormValues,
+      ...this.props,
+    }
     return (
-      <FormWrapper formChange={this.state.formChange} {...this.props}>
+      <FormWrapper {...nestedProps}>
         {!!this.props.colors && (
           <React.Fragment>
-            <OrderedByComponent />
-            <SocialCheckBoxesComponent colors={this.props.colors} />
-            <AgeGenderComponent />
-            <DurationComponent />
-            <ColorRadioBoxesComponent colors={this.props.colors} />
-            <VideoFormatComponent />
-            <AspectRatioComponent />
-            <FramesPerSecondComponent />
-            <ResolutionComponent />
-            <PacingComponent />
-            <ButtonsComponent
-              formChange={this.state.formChange}
-              colors={this.props.colors}
-            />
+            <OrderedByComponent {...nestedProps} />
+            <SocialCheckBoxesComponent {...nestedProps} />
+            <AgeGenderComponent {...nestedProps} />
+            <DurationComponent {...nestedProps} />
+            <ColorRadioBoxesComponent {...nestedProps} />
+            <VideoFormatComponent {...nestedProps} />
+            <AspectRatioComponent {...nestedProps} />
+            <FramesPerSecondComponent {...nestedProps} />
+            <ResolutionComponent {...nestedProps} />
+            <PacingComponent {...nestedProps} />
+            <ButtonsComponent {...nestedProps} />
           </React.Fragment>
         )}
       </FormWrapper>

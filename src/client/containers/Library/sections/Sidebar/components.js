@@ -4,14 +4,12 @@ import SocialCheckBoxes from 'Components/Form/SocialCheckBoxes/'
 import { selectOptions } from './options'
 import classnames from 'classnames'
 import Range from 'Components/Form/Range'
-import { Field, reduxForm } from 'redux-form'
+import { Field } from 'redux-form'
 import ColorRadioBoxes from 'Components/Form/ColorRadioBoxes/index'
-
 import Button from 'Components/Form/Button'
-
 import style from './style.scss'
 
-const OrderedByComponent = ({ props }) => {
+const OrderedByComponent = (props) => {
   return (
     <div className="w-100 mt-48">
       <Select
@@ -20,22 +18,22 @@ const OrderedByComponent = ({ props }) => {
         name="OrderedBy"
         label="Ordered By"
         options={!!selectOptions && selectOptions.orderByOptions}
-        {...props}
+        onChange={!!props.formChange && props.formChange}
       />
     </div>
   )
 }
-const SocialCheckBoxesComponent = ({ colors, props = false }) => {
+const SocialCheckBoxesComponent = ({ colors, formChange }) => {
   return (
     !!colors && (
       <div className="w-100 mt-48">
-        <SocialCheckBoxes colors={colors} {...props} />
+        <SocialCheckBoxes colors={colors} clickEvent={formChange} />
       </div>
     )
   )
 }
 
-const AgeGenderComponent = ({ props = false }) => {
+const AgeGenderComponent = (props) => {
   return (
     <div className="w-100 d-flex justify-space-between mt-48">
       <div
@@ -47,7 +45,7 @@ const AgeGenderComponent = ({ props = false }) => {
           id="AgeRange"
           placeholder="Select One"
           options={!!selectOptions && selectOptions.audienceAge}
-          {...props}
+          onChange={!!props.formChange && props.formChange}
         />
       </div>
       <div
@@ -59,7 +57,7 @@ const AgeGenderComponent = ({ props = false }) => {
           name="Gender"
           placeholder="Select One"
           label="Audience Gender"
-          {...props}
+          onChange={!!props.formChange && props.formChange}
         />
       </div>
     </div>
@@ -76,21 +74,23 @@ const DurationComponent = ({ props = false }) => {
         customClass={style.sidebarDurationRange}
         id="Duration"
         name="Duration"
-        {...props}
       />
     </div>
   )
 }
 
-const ColorRadioBoxesComponent = ({ colors, props = false }) => {
+const ColorRadioBoxesComponent = ({ colors, formChange }) => {
   return (
     <div className="w-100 mt-48">
-      <ColorRadioBoxes colors={!!colors && colors} {...props} />
+      <ColorRadioBoxes
+        colors={!!colors && colors}
+        clickEvent={!!formChange && formChange}
+      />
     </div>
   )
 }
 
-const VideoFormatComponent = ({ props }) => {
+const VideoFormatComponent = (props) => {
   return (
     <div className="w-100 mt-48">
       <Select
@@ -99,13 +99,13 @@ const VideoFormatComponent = ({ props }) => {
         name="VideoFormat"
         label="Video Format"
         placeholder="Select One"
-        {...props}
+        onChange={!!props.formChange && props.formChange}
       />
     </div>
   )
 }
 
-const AspectRatioComponent = ({ props }) => {
+const AspectRatioComponent = (props) => {
   return (
     <div className="w-100 mt-48">
       <Select
@@ -114,13 +114,13 @@ const AspectRatioComponent = ({ props }) => {
         placeholder="Select One"
         name="AspectRatio"
         label="Aspect Ratio"
-        {...props}
+        onChange={!!props.formChange && props.formChange}
       />
     </div>
   )
 }
 
-const FramesPerSecondComponent = ({ props }) => {
+const FramesPerSecondComponent = (props) => {
   return (
     <div className="w-100 mt-48">
       <Select
@@ -129,13 +129,13 @@ const FramesPerSecondComponent = ({ props }) => {
         id="FramesPerSecond"
         placeholder="Select One"
         label="Frame Rate"
-        {...props}
+        onChange={!!props.formChange && props.formChange}
       />
     </div>
   )
 }
 
-const ResolutionComponent = ({ props }) => {
+const ResolutionComponent = (props) => {
   return (
     <div className="w-100 mt-48">
       <Select
@@ -144,48 +144,48 @@ const ResolutionComponent = ({ props }) => {
         id="Resolution"
         name="Resolution"
         placeholder="Select One"
-        {...props}
+        onChange={!!props.formChange && props.formChange}
       />
     </div>
   )
 }
 
-const PacingComponent = ({ props }) => {
+const PacingComponent = (props) => {
   return (
     <div className="w-100 mt-48">
       <Select
         placeholder="Select One"
+        label="Pacing"
         options={!!selectOptions && selectOptions.pacing}
         id="Pacing"
+        onChange={!!props.formChange && props.formChange}
         name="Pacing"
-        label="Pacing"
-        {...props}
       />
     </div>
   )
 }
 
-const ButtonsComponent = ({ props, colors }) => {
+const ButtonsComponent = ({ formChangeState, colors, setSidebarVisible }) => {
   return (
     <React.Fragment>
       <div className="w-100 d-flex align-items-center justify-content-center">
         <Button
           customClass={classnames('mt-48', style.sidebarApplyButton, {
-            [style.formChange]: !!props && !!props.formChange && props.formChange === true,
+            [style.formChange]: !!formChangeState && formChangeState === true,
           })}
-          /*onClick={() => formChange === true && setSidebarVisible(false)}
+          onClick={() => formChangeState === true && setSidebarVisible(false)}
           textColor={
-            !formChange
+            !formChangeState
               ? colors.customSelectActiveBorder
               : colors.searchInputActiveColor
-          }*/
+          }
           buttonText="Apply Filters"
         />
       </div>
       <div className="w-100 d-flex align-items-center justify-content-center">
         <span
           className={style.cancel}
-          /*onClick={() => setSidebarVisible(false)}*/
+          onClick={() => setSidebarVisible(false)}
           style={{
             color: colors.filterText,
           }}
