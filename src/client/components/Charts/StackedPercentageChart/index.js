@@ -7,7 +7,7 @@ import { fromJS } from 'immutable'
 import { percentageGraphOptions } from './defaultOptions'
 import { withTheme } from 'ThemeContext/withTheme'
 
-import { drawLine, drawBackgroundLine, calcLinePoints } from './utils'
+import { drawLine, drawBackgroundLine } from './utils'
 
 class StackedPercentageChart extends React.Component {
   constructor(props) {
@@ -108,20 +108,9 @@ class StackedPercentageChart extends React.Component {
     }
   }
 
-  chartDraw({
-    vm,
-    ctx,
-    height,
-    config,
-    _loop,
-    _children,
-    colors,
-    themeContext,
-    percentageGraph,
-  }) {
+  chartDraw({ vm, ctx, _loop, _children }) {
     const valueOrDefault = helpers.valueOrDefault
 
-    const spanGaps = vm.spanGaps
     const points = _children.slice()
     const globalOptionLineElements = {}
     const globalDefaults = {}
@@ -140,112 +129,28 @@ class StackedPercentageChart extends React.Component {
       points.push(points[0])
     }
 
-    const lines = calcLinePoints(ctx, points, helpers, spanGaps)
-
     ctx.save()
     ctx.stroke()
-
-    if (config.options.chartType === 'percentageGraph') {
-      const themes = themeContext.colors
-      percentageGraph({
-        ctx,
-        height,
-        config,
-        colors,
-        themes,
-        lines,
-      })
-    }
-  }
-
-  percentageGraph({ ctx, height, config, colors, themes, lines }) {
-    const {
-      barWidth = 3,
-      barSpaceWidth = 2,
-      color,
-      tickColor = themes.topValueColor,
-    } = config.options
-
-    let gradient = ctx.createLinearGradient(0, 0, 180, 800)
-    if (!!color && !!colors[color]) {
-      ;[...Array(3)].map((v, i) => {
-        gradient.addColorStop(i * 0.5, colors[color][i])
-      })
-    } else {
-      gradient.addColorStop(0, colors['darkgrey'][0])
-      gradient.addColorStop(1, colors['darkgrey'][1])
-    }
-
-    ctx.restore()
-    const findYMaxValue = Object.values(lines).reduce((p, n) =>
-      p.currentVLine.y > n.currentVLine.y ? n : p
-    )
-    const findYMaxIndex = Object.values(lines).findIndex(
-      (l) => l.currentVLine.y === findYMaxValue.currentVLine.y
-    )
-
-    ctx.beginPath()
-    drawLine(
-      ctx,
-      lines,
-      findYMaxIndex,
-      barWidth,
-      barSpaceWidth,
-      height,
-      gradient,
-      'prev'
-    )
-
-    drawLine(
-      ctx,
-      lines,
-      findYMaxIndex,
-      barWidth,
-      barSpaceWidth,
-      height,
-      gradient,
-      'next'
-    )
-    ctx.save()
-
-    const topValueRightPosition = findYMaxValue.currentVLine.x - barWidth
-    ctx.beginPath()
-    ctx.restore()
-    ctx.moveTo(topValueRightPosition, height + findYMaxValue.currentVLine.y)
-    ctx.lineTo(topValueRightPosition, findYMaxValue.currentVLine.y)
-    ctx.lineWidth = barWidth
-    ctx.strokeStyle = tickColor
-    ctx.stroke()
-    ctx.save()
   }
 
   render() {
-    const { themeContext } = this.props
-    const { options, colors } = this.state
-
-    if (!themeContext) return null
+    const { options } = this.state
 
     const chartDraw = this.chartDraw
-    const percentageGraph = this.percentageGraph
     Chart.helpers.extend(Chart.elements.Line.prototype, {
       draw: function() {
         const {
           _view: vm,
-          _chart: { ctx, height, config },
+          _chart: { ctx },
           _loop,
           _children,
         } = this
 
-        return chartDraw({
+        chartDraw({
           vm,
           ctx,
-          height,
-          config,
           _loop,
           _children,
-          colors,
-          themeContext,
-          percentageGraph,
         })
       },
     })
@@ -253,12 +158,6 @@ class StackedPercentageChart extends React.Component {
     let props = fromJS(options)
       .mergeDeep(this.props)
       .toJS()
-
-    if (props.chartType === 'percentageGraph') {
-      props.options.chartType = props.chartType
-      props.options.barWidth = props.barWidth
-      props.options.barSpaceWidth = props.barSpaceWidth
-    }
 
     if (!props.dataSet) return null
     return (

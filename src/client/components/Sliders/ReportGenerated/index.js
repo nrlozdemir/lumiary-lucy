@@ -103,10 +103,9 @@ class MarketViewSlider extends React.Component {
                       percentage={item.cvScore}
                       width={80}
                       height={20}
-                      barWidth={1.5}
-                      barSpaceWidth={1.5}
                       disableLabels
                       color="green"
+                      id={`slider-item-${i}`}
                     />
                   </div>
                 </AssetLayer>

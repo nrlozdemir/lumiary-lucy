@@ -98,33 +98,3 @@ export const drawBackgroundLine = (
   )
   ctx.strokeStyle = vm.borderColor || globalDefaults.defaultColor
 }
-
-export const calcLinePoints = (ctx, points, helpers, spanGaps) => {
-  const l = points.reduce((object, current, index) => {
-    const { skip, x, y } = current._view
-    const previous = helpers.previousItem(points, index)
-
-    if (index === 0 && !skip) {
-      ctx.moveTo(x, y)
-      return object
-    } else if (!skip && !spanGaps) {
-      ctx.moveTo(x, y)
-    } else {
-      helpers.canvas.lineTo(ctx, previous._view, current._view)
-    }
-
-    object[index] = {
-      previousVLine: {
-        ...previous._view,
-      },
-      currentVLine: {
-        ...current._view,
-      },
-    }
-    return object
-  }, {})
-
-  delete l[points.length - 1]
-
-  return l
-}
