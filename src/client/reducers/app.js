@@ -51,8 +51,10 @@ export const actions = {
 export const initialState = {
   sections: {
     data:
-      typeof window === 'object' && window.localStorage
-        ? JSON.parse(window.localStorage.getItem('sections'))
+      typeof window === 'object'
+        ? window.localStorage
+          ? JSON.parse(window.localStorage.getItem('sections'))
+          : null
         : null,
     loading: false,
   },

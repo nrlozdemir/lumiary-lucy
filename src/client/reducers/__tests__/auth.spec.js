@@ -4,10 +4,10 @@ import {
   actions,
   audienceReducer,
   initialState,
-} from 'Reducers/audience'
+} from 'Reducers/auth'
 import { actionTester } from './utils'
 
-describe('Audience Reducer', () => {
+describe('Auth Reducer', () => {
   describe('Actions', () => {
     actionTester(actions)
   })

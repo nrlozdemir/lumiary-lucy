@@ -121,12 +121,10 @@ export const actions = {
   brandInsightFormClear: () => ({
     type: types.BRAND_INSIGHT_CLEAR,
   }),
-  compareBrandFormSubmit: (params, onlySave = false) => {
-    return {
-      type: types.COMPARE_BRAND_REQUEST,
-      payload: { params, onlySave },
-    }
-  },
+  compareBrandFormSubmit: (params, onlySave = false) => ({
+    type: types.COMPARE_BRAND_REQUEST,
+    payload: { params, onlySave },
+  }),
   compareBrandFormSubmitSuccess: (payload) => ({
     type: types.COMPARE_BRAND_REQUEST_SUCCESS,
     payload,
@@ -273,7 +271,7 @@ export const initialState = fromJS({
   },
 })
 
-const reportsReducer = (state = initialState, action) => {
+export const reportsReducer = (state = initialState, action) => {
   switch (action.type) {
     /** START load reports */
     case types.LOAD_REPORTS:

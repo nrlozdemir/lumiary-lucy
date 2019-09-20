@@ -82,11 +82,11 @@ export const actions = {
   }),
   verifyTwitterOAuthToken: (payload) => ({
     type: types.VERIFY_TWITTER_OAUTH_TOKEN,
-    payload
+    payload,
   }),
   getInstagramOAuthToken: (payload) => ({
     type: types.GET_INSTAGRAM_OAUTH_TOKEN,
-    payload
+    payload,
   }),
 }
 
@@ -99,7 +99,9 @@ export const initialState = fromJS({
   loginError: null,
 
   user: (typeof window === 'object'
-    ? JSON.parse(window.localStorage.getItem('user'))
+    ? window.localStorage
+      ? JSON.parse(window.localStorage.getItem('user'))
+      : null
     : null) || {
     token: false,
     refresh: false,
@@ -109,7 +111,9 @@ export const initialState = fromJS({
   },
   profile:
     (typeof window === 'object'
-      ? JSON.parse(window.localStorage.getItem('profile'))
+      ? window.localStorage
+        ? JSON.parse(window.localStorage.getItem('profile'))
+        : null
       : null) || null,
   passwordUpdate: {
     message: null,
@@ -149,7 +153,7 @@ export const initialState = fromJS({
   },
 })
 
-const reducer = (state = initialState, action) => {
+export const reducer = (state = initialState, action) => {
   const { payload } = action
 
   switch (action.type) {

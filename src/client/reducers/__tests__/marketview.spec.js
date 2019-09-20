@@ -2,12 +2,12 @@ import expect from 'expect'
 import {
   types,
   actions,
-  audienceReducer,
+  marketviewReducer,
   initialState,
-} from 'Reducers/audience'
+} from 'Reducers/marketview'
 import { actionTester } from './utils'
 
-describe('Audience Reducer', () => {
+describe('MarketView Reducer', () => {
   describe('Actions', () => {
     actionTester(actions)
   })
