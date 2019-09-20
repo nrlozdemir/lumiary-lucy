@@ -138,23 +138,21 @@ class Sidebar extends React.Component {
       ...this.props,
     }
     return (
-      <FormWrapper {...nestedProps}>
-        {!!this.props.colors && (
-          <React.Fragment>
-            <OrderedByComponent {...nestedProps} />
-            <SocialCheckBoxesComponent {...nestedProps} />
-            <AgeGenderComponent {...nestedProps} />
-            <DurationComponent {...nestedProps} />
-            <ColorRadioBoxesComponent {...nestedProps} />
-            <VideoFormatComponent {...nestedProps} />
-            <AspectRatioComponent {...nestedProps} />
-            <FramesPerSecondComponent {...nestedProps} />
-            <ResolutionComponent {...nestedProps} />
-            <PacingComponent {...nestedProps} />
-            <ButtonsComponent {...nestedProps} />
-          </React.Fragment>
-        )}
-      </FormWrapper>
+      !!nestedProps && (
+        <FormWrapper {...nestedProps}>
+          <OrderedByComponent {...nestedProps} />
+          <SocialCheckBoxesComponent {...nestedProps} />
+          <AgeGenderComponent {...nestedProps} />
+          <DurationComponent {...nestedProps} />
+          <ColorRadioBoxesComponent {...nestedProps} />
+          <VideoFormatComponent {...nestedProps} />
+          <AspectRatioComponent {...nestedProps} />
+          <FramesPerSecondComponent {...nestedProps} />
+          <ResolutionComponent {...nestedProps} />
+          <PacingComponent {...nestedProps} />
+          <ButtonsComponent {...nestedProps} />
+        </FormWrapper>
+      )
     )
   }
 }
