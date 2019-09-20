@@ -3,6 +3,7 @@
 --require ignore-styles
 --require src/tests/setup.js
 --recursive
-./src/client/**/*.spec.js
-./src/client/**/**/*.spec.js
+#./src/client/**/*.spec.js
+#./src/client/**/**/*.spec.js
+./src/client/**/**/audience.spec.js
 

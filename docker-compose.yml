@@ -11,7 +11,7 @@ services:
     # Run tests:
     # command: ["npm", "run", "test" ]
     # command: ["npm", "run", "test:local" ]
-    # command: ["npm", "run", "test:watch" ]
+    command: ["npm", "run", "test:watch" ]
     # command: ["npm", "run", "test:coverage"]
     # command: ["npm", "run", "test:snapshot"]
 
