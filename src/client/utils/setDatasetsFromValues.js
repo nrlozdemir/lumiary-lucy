@@ -9,10 +9,6 @@ export const mapBrands = (values) => {
 
 export const setValueinObject = (noBrandKeys, values = {}, brandObjects, options = {}) => {
   const { property } = options
-  console.log('noBrandKeys : ', noBrandKeys)
-  console.log('values : ', values)
-  console.log('options : ', options)
-  console.log('brandObjects : ', brandObjects)
   return noBrandKeys
   ? values[property[0]]
   : brandObjects[0][property[0]]
@@ -45,7 +41,6 @@ export const getProportionValues = ({
   let datasetsData = datasetsFromValues
   let labelsData = labels
   let singleLevelJSONData = singleLevelJSON
-  console.log('options 2 : ', options)
 
   if (options.proportionOf) {
     datasetsData = Object.keys(getValueinObject).map((key) =>
@@ -150,38 +145,26 @@ export const setDatasetsFromValues = ({
   customValueKey,
   customValueKeyGetAll
 }) => {
-  console.log('=====================setdatasetsfromvalues======================== start')
   let getValueinObject
   let datasetsFromValues = preparedDatasets
   let labels
   let customKeys = argKeys
   let singleLevelJSON = false
 
-  console.log('ismetric : ', isMetric)
   const brands = mapBrands(values)
-  console.log('brands : ', brands)
-
   const brandObjects = mapBrandObjects(brands, values)
-  console.log('brand objects: ', brandObjects)
-
   getValueinObject = setValueinObject(noBrandKeys, values, brandObjects, options)
-  console.log('get value in object: ', getValueinObject)
-
   const timeBucket = returnTimeBucket(options, getValueinObject)
-  console.log('timebucket : ', timeBucket)
   
   if (!!getValueinObject && getValueinObject.hasOwnProperty('subtotal')) {
     delete getValueinObject.subtotal
   }
-  console.log('getValueinObject : ', getValueinObject)
   // If time bucket was  selected, it will change labels to time labels
   // defined within a data object from the api response
   if (timeBucket) {
     datasetsFromValues = mapValueinObjWithTimeBucket(getValueinObject, timeBucket)
     labels = timeBucket
   }
-  console.log('datasets from values 1: ', datasetsFromValues)
-  console.log('options sss : ', options)
   // If proportionOf was  selected, it will change labels to time labels and it will set up datasets according to selected proportionOf
   const getProportionValuesData = getProportionValues({
     getValueinObject,
@@ -194,10 +177,6 @@ export const setDatasetsFromValues = ({
   datasetsFromValues = getProportionValuesData.datasetsData
   labels = getProportionValuesData.labelsData
   singleLevelJSON = getProportionValuesData.singleLevelJSONData
-  console.log('datasets from values 2: ', datasetsFromValues)
-
-
-  console.log('datasets from values 3: ', datasetsFromValues)
 
   const brandsWithKeys = checkBrandsWithKeys({
     brands,
@@ -212,8 +191,6 @@ export const setDatasetsFromValues = ({
   getValueinObject = brandsWithKeys.getValueinObjectData
   singleLevelJSON = brandsWithKeys.singleLevelJSONData
 
-  console.log('datasets from values 4: ', datasetsFromValues)
-
   // metric data comes with sum and percent
   const dataIfIsMetric = isMetricMapsData({
     datasetsFromValues,
@@ -224,7 +201,6 @@ export const setDatasetsFromValues = ({
   })
   datasetsFromValues = dataIfIsMetric.datasetsData
   customKeys = dataIfIsMetric.customKeysData
-  console.log('datasets from values 5: ', datasetsFromValues)
   // if dataset values type of object, get value in the object
   if (
     datasetsFromValues &&
@@ -239,7 +215,6 @@ export const setDatasetsFromValues = ({
         : d.value || 0
     )
   }
-  console.log('datasets from values 6: ', datasetsFromValues)
   // You can pass prepared labels or datasets in arg
   labels = getLabelsCondition({
     preparedLabels,
@@ -259,7 +234,4 @@ export const setDatasetsFromValues = ({
     brands
   }
   return result
-  console.log('labels : ', labels)
-  console.log('get value in obj : ', getValueinObject)
-  console.log('=====================setdatasetsfromvalues======================== end')
 }
