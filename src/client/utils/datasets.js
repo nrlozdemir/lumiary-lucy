@@ -9,7 +9,6 @@ import {
   metricSuffix,
   strToColor,
   normalize,
-  getTimeBucket,
   getPropLabel,
   getLabelWithSuffix,
 } from 'Utils'
