@@ -6,6 +6,8 @@ import style from '../style.scss'
 class SvgChart extends React.Component {
   constructor(props) {
     super(props)
+
+    const { percentage, width, height } = this.props
     this.state = {
       options: {
         xMin: 0,
@@ -13,13 +15,19 @@ class SvgChart extends React.Component {
         yMin: 0,
         yMax: 40,
         line: {
-          smoothing: 0.25,
-          flattening: 1.5,
+          smoothing: 0.15,
+          flattening: 0.5,
         },
-        percentage: this.props.percentage,
+        percentage,
       },
       dataset: {
-        values: [[0, 5], [this.props.percentage, 35], [100, 5]],
+        values: [
+          [0, 5],
+          ...(percentage < 25 ? [] : [[percentage - 20, 20]]),
+          [percentage, 35],
+          ...(percentage > 75 ? [] : [[percentage + 20, 20]]),
+          [100, 5],
+        ],
       },
       lib: {
         map(value, inMin, inMax, outMin, outMax) {
@@ -40,8 +48,8 @@ class SvgChart extends React.Component {
         },
       },
       svg: {
-        w: this.props.width || 250,
-        h: this.props.height || 40,
+        w: width || 250,
+        h: height || 40,
       },
     }
   }
