@@ -61,6 +61,8 @@ const setDatasetsFromValues = ({
   useBrandLabels,
   useBrands,
   argKeys,
+  customValueKey,
+  customValueKeyGetAll
 }) => {
   console.log('=====================setdatasetsfromvalues======================== start')
   let getValueinObject
@@ -335,7 +337,10 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     preparedLabels,
     preparedDatasets,
     useBrandLabels,
-    argKeys
+    argKeys,
+    customValueKey,
+    customValueKeyGetAll,
+    useBrands
   })
   return Object.keys(getValueinObject).reduce(
     (data, key, idx) => {
