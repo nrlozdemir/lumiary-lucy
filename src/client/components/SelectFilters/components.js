@@ -17,7 +17,6 @@ const SelectResolutionShow = ({
   resolution,
   handleChange,
 }) => {
-  console.log('handleChange: ', handleChange)
   return (
     !!selectResolutionShow &&
     !!handleChange && (

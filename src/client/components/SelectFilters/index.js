@@ -22,7 +22,6 @@ class SelectFilters extends Component {
       handleChange: this.handleChange,
       ...this.props,
     }
-    console.log('nestedProps: ', nestedProps)
 
     return (
       <React.Fragment>
