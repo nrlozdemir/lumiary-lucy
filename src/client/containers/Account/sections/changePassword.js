@@ -76,17 +76,59 @@ class ChangePassword extends Component {
     }
   }
 
+  getPasswordFieldComponent = (type) => {
+    const types = {
+      confirmPassword: {
+        id: 'confirmPassword',
+        name: 'confirmPassword',
+        passwordToggleArgument: 'ConfirmPassword',
+        placeholder: 'Confirm new password…',
+        inputType: this.state.showConfirmPassword ? 'text' : 'password',
+      },
+      password: {
+        id: 'password',
+        name: 'password',
+        passwordToggleArgument: 'Password',
+        placeholder: 'Enter new password…',
+        inputType: this.state.showPassword ? 'text' : 'password',
+      },
+    }
+
+    return (
+      <div className={style.input}>
+        <Field
+          component={Input}
+          type={types[type].inputType}
+          id={types[type].id}
+          name={types[type].name}
+          placeholder={types[type].placeholder}
+          required={true}
+          style={this.props.themeContext.colors.account.input || {}}
+        />
+        <p
+          style={colors.account.link || {}}
+          onClick={() => this.togglePasswordType(passwordToggleArgument)}
+        >
+          show
+        </p>
+      </div>
+    )
+  }
+
+  isFormSubmittable = () => {
+    const { dirty, submitting, pristine, errors } = this.props
+
+    return !dirty || submitting || pristine || !isEmpty(errors)
+  }
+
   render() {
     const {
       themeContext: { colors },
       updatePassword,
       handleSubmit,
       passwordUpdate: { message, success, loading },
-      dirty,
-      submitting,
-      pristine,
-      errors,
     } = this.props
+
     return (
       <AccountCard
         status={
@@ -103,7 +145,7 @@ class ChangePassword extends Component {
         <form
           className={style.form}
           onSubmit={
-            !dirty || submitting || pristine || !isEmpty(errors)
+            this.isFormSubmittable()
               ? undefined
               : handleSubmit((values) => updatePassword(values))
           }
@@ -112,45 +154,14 @@ class ChangePassword extends Component {
             <h1 style={colors.account.h1 || {}}>Update your password</h1>
           </div>
 
-          <div className={style.input}>
-            <Field
-              component={Input}
-              type={this.state.showPassword ? 'text' : 'password'}
-              id="password"
-              name="password"
-              placeholder="Enter new password…"
-              required={true}
-              style={colors.account.input || {}}
-            />
-            <p
-              style={colors.account.link || {}}
-              onClick={() => this.togglePasswordType('Password')}
-            >
-              show
-            </p>
-          </div>
+          {this.getPasswordFieldComponent('password')}
 
-          <div className={style.input}>
-            <Field
-              component={Input}
-              type={this.state.showConfirmPassword ? 'text' : 'password'}
-              id="confirmPassword"
-              name="confirmPassword"
-              placeholder="Confirm new password…"
-              required={true}
-              style={colors.account.input || {}}
-            />
-            <p
-              style={colors.account.link || {}}
-              onClick={() => this.togglePasswordType('ConfirmPassword')}
-            >
-              show
-            </p>
-          </div>
+          {this.getPasswordFieldComponent('confirmPassword')}
+
           <div className={style.submitArea}>
             <Button
               customClass={style.buttonStyle}
-              disable={!dirty || submitting || pristine || !isEmpty(errors)}
+              disable={this.isFormSubmittable()}
               buttonText="Continue"
             />
           </div>
