@@ -1,93 +1,93 @@
-.arrowContainer {
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-items: center;
-  align-content: center;
+// .arrowContainer {
+//   position: relative;
+//   display: flex;
+//   flex-direction: row;
+//   flex-wrap: nowrap;
+//   justify-content: center;
+//   align-items: center;
+//   align-content: center;
 
-  .leftArrows {
-    margin-right: 4px;
-    margin-top: 2px;
-  }
+//   .leftArrows {
+//     margin-right: 4px;
+//     margin-top: 2px;
+//   }
 
-  .rightArrows {
-    margin-left: 4px;
-    margin-top: 2px;
-  }
-}
+//   .rightArrows {
+//     margin-left: 4px;
+//     margin-top: 2px;
+//   }
+// }
 
-.trackHorizontal {
-  position: absolute;
-  cursor: pointer;
-}
+// .trackHorizontal {
+//   position: absolute;
+//   cursor: pointer;
+// }
 
-.thumbHorizontal {
-}
+// .thumbHorizontal {
+// }
 
-.view {
-  position: relative;
-}
+// .view {
+//   position: relative;
+// }
 
-.viewBordered {
-  z-index: 0;
-  margin: 1px 0px 0px 1px;
-}
+// .viewBordered {
+//   z-index: 0;
+//   margin: 1px 0px 0px 1px;
+// }
 
-.overflowYHidden {
-  overflow: scroll;
-  overflow-x: scroll;
-  overflow-y: hidden;
-}
+// .overflowYHidden {
+//   overflow: scroll;
+//   overflow-x: scroll;
+//   overflow-y: hidden;
+// }
 
-.emptyScrollBar {
-  position: absolute;
-  left: -2000px;
-  top: -2000px;
-  display: none;
-  width: 0;
-  height: 0;
-  border: 0;
-  padding: 0;
-  margin: 0;
-}
+// .emptyScrollBar {
+//   position: absolute;
+//   left: -2000px;
+//   top: -2000px;
+//   display: none;
+//   width: 0;
+//   height: 0;
+//   border: 0;
+//   padding: 0;
+//   margin: 0;
+// }
 
-.ticksWrapper {
-  width: 100%;
-  display: block;
-}
+// .ticksWrapper {
+//   width: 100%;
+//   display: block;
+// }
 
-.ticks {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
+// .ticks {
+//   display: flex;
+//   justify-content: space-between;
+//   align-items: flex-start;
+// }
 
-.tick {
-  position: relative;
-  font-size: 12px;
-  margin-top: 24px;
-  font-family: 'ClanOTNews';
-  cursor: pointer;
+// .tick {
+//   position: relative;
+//   font-size: 12px;
+//   margin-top: 24px;
+//   font-family: 'ClanOTNews';
+//   cursor: pointer;
 
-  &:not(:first-child):not(:last-child) {
-    &:before {
-      content: '';
-      height: 16px;
-      background: #ccc;
-      width: 1px;
-      font-size: 0px;
-      position: absolute;
-      top: -43px;
-      left: 50%;
-      text-align: center;
-      z-index: 2;
-    }
-  }
-}
+//   &:not(:first-child):not(:last-child) {
+//     &:before {
+//       content: '';
+//       height: 16px;
+//       background: #ccc;
+//       width: 1px;
+//       font-size: 0px;
+//       position: absolute;
+//       top: -43px;
+//       left: 50%;
+//       text-align: center;
+//       z-index: 2;
+//     }
+//   }
+// }
 
-.thumbDot {
-  cursor: pointer;
-  width: 16px;
-}
+// .thumbDot {
+//   cursor: pointer;
+//   width: 16px;
+// }
