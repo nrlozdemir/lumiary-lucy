@@ -282,13 +282,9 @@ export class Main extends React.PureComponent {
                     percentage={cvScore}
                     width={80}
                     height={17}
-                    barWidth={1.5}
-                    barSpaceWidth={1.5}
                     disableLabels
-                    color={colors.themeType === 'dark' ? 'white' : 'darkgrey'}
-                    options={{
-                      tickColor: i == 0 ? '#5292e5' : '#2fd7c4',
-                    }}
+                    color={i == 0 ? '#5292e5' : '#2fd7c4'}
+                    id={`quickview-${i}`}
                   />
                 )}
               </div>

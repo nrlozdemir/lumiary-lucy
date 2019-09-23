@@ -73,7 +73,6 @@ export class VideoCard extends PureComponent {
       video,
       options = options || {},
       muted = true,
-      id,
       brandId,
       index,
     } = this.props
@@ -129,8 +128,7 @@ export class VideoCard extends PureComponent {
                     disableLabels
                     width={60}
                     height={15}
-                    barWidth={1.5}
-                    barSpaceWidth={1.5}
+                    id={`video-card-${index}`}
                   />
                 </div>
               )}
