@@ -180,7 +180,7 @@ export const initialState = fromJS({
   error: false,
 })
 
-const panopticReducer = (state = initialState, action) => {
+export const panopticReducer = (state = initialState, action) => {
   const { payload } = action
 
   switch (action.type) {

@@ -335,7 +335,7 @@ export const initialState = fromJS({
   },
 })
 
-const marketviewReducer = (state = initialState, action) => {
+export const marketviewReducer = (state = initialState, action) => {
   const { type, payload } = action
 
   switch (type) {

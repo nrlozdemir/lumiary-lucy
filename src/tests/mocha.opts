@@ -5,4 +5,5 @@
 --recursive
 ./src/client/**/*.spec.js
 ./src/client/**/**/*.spec.js
+#./src/client/**/**/audience.spec.js
 

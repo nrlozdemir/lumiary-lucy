@@ -73,7 +73,7 @@ const convertDataIntoDatasets = (values, options, ...args) => {
   } = (args && !!args[0] && args[0]) || {}
 
   let labels
-  let datasetsFromValues
+  let datasetsFromValues = preparedDatasets
   let singleLevelJSON
   let customKeys = argKeys
   let getValueinObject
@@ -135,11 +135,10 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     datasetsFromValues = brandObjects.map((brand, idx) => {
       const brandProp = Object.keys(brand)[0]
       const brandDataObj = brandObjects[idx][brandProp]
-      if (isMetric) {
-        return brandDataObj
-      } else {
+      if (!isMetric) {
         return Object.keys(brand[brandProp]).map((key) => brandDataObj[key])
       }
+      return brandDataObj
     })
     singleLevelJSON = false
     getValueinObject = brands
@@ -169,16 +168,8 @@ const convertDataIntoDatasets = (values, options, ...args) => {
     )
   }
 
-  // Object.keys(
-  //  brandObjects[0][Object.keys(brandObjects[0])]
-  // ).map((value) => brandObjects.map((brand) => brand.duration[value]))
   // You can pass prepared labels or datasets in args
-  labels =
-    (preparedLabels ? preparedLabels : useBrandLabels ? brands : labels) ||
-    labels
-
-  datasetsFromValues = preparedDatasets || datasetsFromValues
-
+  labels = (preparedLabels || useBrandLabels ? brands : labels)
   getValueinObject = useBrands ? brands : getValueinObject
 
   return Object.keys(getValueinObject).reduce(
@@ -346,8 +337,9 @@ const convertMultiRequestDataIntoDatasets = (
   payload,
   options,
   revert,
-  customOptions = { backgroundColors: [], borderColors: [], borderWidth: null }
+  customOptions = {}
 ) => {
+  const { backgroundColors = [], borderColors = [], borderWidth = 1 } = customOptions
   const datasetLabels = Object.keys(payload)
   const property = options.property[0]
 
@@ -358,9 +350,11 @@ const convertMultiRequestDataIntoDatasets = (
     firstPayload[firstPayloadBrand][property]
   ).filter((key) => key !== 'subtotal')
 
-  const datasets = (!revert ? datasetLabels : firstPayloadLabels).map(
+  const mappingLabels = !revert ? datasetLabels : firstPayloadLabels
+  const datasets = (mappingLabels).map(
     (label, index) => {
-      const data = (!revert ? firstPayloadLabels : datasetLabels).map((key) => {
+      const mappingData = !revert ? firstPayloadLabels : datasetLabels
+      const data = (mappingData).map((key) => {
         const currentLabel = payload[!revert ? label : key].data
         const brand = Object.keys(currentLabel)[0]
         const response = currentLabel[brand][property]
@@ -368,25 +362,14 @@ const convertMultiRequestDataIntoDatasets = (
         return response[!revert ? key : label]
       })
 
+      const backgroundColor = backgroundColors[index] || chartColors[index]
+      const borderColor = borderColors[index] || chartColors[index]
+
       return {
         label: ucfirst(label),
-        backgroundColor:
-          (customOptions &&
-            customOptions.backgroundColors &&
-            !!customOptions.backgroundColors[index] &&
-            customOptions.backgroundColors[index]) ||
-          chartColors[index],
-        borderColor:
-          (customOptions &&
-            customOptions.borderColors &&
-            !!customOptions.borderColors[index] &&
-            customOptions.borderColors[index]) ||
-          chartColors[index],
-        borderWidth:
-          (customOptions &&
-            !!customOptions.borderWidth &&
-            customOptions.borderWidth) ||
-          1,
+        backgroundColor,
+        borderColor,
+        borderWidth,
         data,
       }
     }
@@ -399,18 +382,18 @@ const convertMultiRequestDataIntoDatasets = (
   }
 }
 
-const isDataSetEmpty = (data) => {
-  if (!!data && !!data.datasets && !!data.datasets.length) {
-    return data.datasets.every((dataset) =>
-      !!dataset.data && !!dataset.data.length
-        ? dataset.data.every(
-            (val) => val === 0 || val === undefined || val === null
-          )
-        : true
-    )
-  } else {
+const isDataSetEmpty = (data = {}) => {
+  const { datasets = [] } = { ...data }
+  if(!datasets.length) {
     return true
   }
+  return data.datasets.every((dataset) =>
+    !!dataset.data && !!dataset.data.length
+      ? dataset.data.every(
+          (val) => val === 0 || val === undefined || val === null
+        )
+      : true
+  )
 }
 
 /*
@@ -491,18 +474,15 @@ const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
 
 const parseAverage = (payload) => {
   let calculateAverage = Object.keys(payload).reduce((acc, key) => {
-    const keyName = key !== 'video' && key.substr(0, key.indexOf('.'))
-    if (keyName) {
-      if (key.includes('LibraryAverage')) {
-        acc[keyName] = {
+    const keyIncludesLibraryMax = key.includes('LibraryMax')
+    const objKeyValue = keyIncludesLibraryMax ? 'max' : 'average'
+    if(key !== 'video') {
+      const keyName = key.substr(0, key.indexOf('.'))
+      return {
+        ...acc,
+        [keyName]: {
           ...acc[keyName],
-          average: percentageBeautifier(payload[key]),
-        }
-      }
-      if (key.includes('LibraryMax')) {
-        acc[keyName] = {
-          ...acc[keyName],
-          max: percentageBeautifier(payload[key]),
+          [objKeyValue]: percentageBeautifier(payload[key]),          
         }
       }
     }
@@ -686,23 +666,25 @@ const convertVideoEngagementData = (data, metric = 'views') => {
 }
 
 const getMinMaxFromDatasets = (datasets = [], initial = 0, type = 'max') => {
-  return !!datasets.length
-    ? datasets.reduce((result, dataset) => {
-        const { data } = dataset
+  let output = 0
+  if (!!datasets.length) {
+    output = datasets.reduce((result, dataset) => {
+      const { data = [] } = dataset
 
-        if (!!data && !!data.length) {
-          const dataSetResult =
-            type === 'max' ? Math.max(...data) : Math.min(...data)
+      if (!!data.length) {
+        const dataSetResult =
+          type === 'max' ? Math.max(...data) : Math.min(...data)
 
-          if (
-            type === 'max' ? dataSetResult > result : dataSetResult < result
-          ) {
-            result = dataSetResult
-          }
+        if (
+          type === 'max' ? dataSetResult > result : dataSetResult < result
+        ) {
+          result = dataSetResult
         }
-        return result
-      }, initial)
-    : 0
+      }
+      return result
+    }, initial)
+  }
+  return output
 }
 
 //gets top n values by category of datasets.
@@ -735,16 +717,19 @@ export const getTopNValues = (datasets = [], n = 5) => {
 }
 
 // @param - Vals {object} key/value pair of label/oercentage
-const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
+const convertIntoLibAndIndustryDoughnut = (obj = {}, property, color = '') => {
   const result = {
     maxKey: null,
     maxValue: null,
     chartData: null,
   }
 
-  const keys = (!!obj && Object.keys(obj)) || []
+  let vals = []
+  const keys = Object.keys(obj)
 
-  const vals = (!!keys.length && Object.values(obj)) || []
+  if(!!keys.length) {
+    vals = Object.values(obj)
+  }
 
   if (!!vals.length) {
     const { maxKey, maxVal } = keys.reduce(
@@ -759,6 +744,7 @@ const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
       },
       { maxKey: null, maxVal: 0 }
     )
+    const backgroundColor = keys.map(key => key === maxKey ? color : '#505050')
     result.maxKeyLabel = maxKey
     result.maxKey = getLabelWithSuffix(maxKey, property)
     result.maxValue = maxVal
@@ -768,9 +754,7 @@ const convertIntoLibAndIndustryDoughnut = (obj, property, color = '') => {
         {
           borderColor: '#ACB0BE',
           data: vals.map((val) => (val * 100).toFixed(2)),
-          backgroundColor: keys.map((key) =>
-            key === maxKey ? color : '#505050'
-          ),
+          backgroundColor,
           hoverBackgroundColor: [],
         },
       ],
@@ -879,27 +863,34 @@ const getCVScoreChartAttributes = (data, maxPercent) => {
           }, 0)) ||
         0
 
-  // const chartYAxisMax = maxVideoPercent > 50 ? 100 : 50
-  // const chartYAxisStepSize = maxVideoPercent > 50 ? 25 : 12.5
-
-  const chartYAxisMax =
-    maxPercent < 50
-      ? maxPercent < 33
-        ? maxPercent < 25
-          ? maxPercent < 20
-            ? maxPercent < 15
-              ? 15
-              : 20
-            : 25
-          : 33
-        : 50
-      : 100
+  let chartYAxisMax
+  switch (true) {
+    case maxPercent > 50:
+      chartYAxisMax = 100
+      break
+    case maxPercent < 50 && maxPercent > 33:
+      chartYAxisMax = 50
+      break
+    case maxPercent < 33 && maxPercent > 25:
+      chartYAxisMax = 33
+      break
+    case maxPercent < 25 && maxPercent > 20:
+      chartYAxisMax = 25
+      break
+    case maxPercent < 20 && maxPercent > 15:
+      chartYAxisMax = 20
+      break
+    case maxPercent < 15:
+      chartYAxisMax = 15
+      break
+  }
   const chartYAxisStepSize = chartYAxisMax / 4
-
-  return {
+  const result = {
     chartYAxisMax,
     chartYAxisStepSize,
   }
+  
+  return result
 }
 
 /*
@@ -945,11 +936,6 @@ const convertPropertiesIntoDatasets = (data, options = {}) => {
       : null
 
   if (!type || !property || !data || !bucket || !metric) {
-    // console.log('type', type)
-    // console.log('property', property)
-    // console.log('data', data)
-    // console.log('bucket', bucket)
-    // console.log('metric', metric)
     return {}
   }
 
@@ -1004,20 +990,22 @@ const convertPropertiesIntoDatasets = (data, options = {}) => {
  */
 
 const convertDurationLabels = (response = {}, prop = null, oneChar = false) => {
-  return prop === 'duration'
-    ? Object.keys(response).reduce((acc, key) => {
-        const label = oneChar
-          ? getPropLabel(key, prop)
-          : getLabelWithSuffix(key, prop)
+  if(prop === 'duration') {
+    return response
+  }
+  
+  return Object.keys(response).reduce((acc, key) => {
+      const label = oneChar
+        ? getPropLabel(key, prop)
+        : getLabelWithSuffix(key, prop)
 
-        return key !== 'subtotal'
-          ? {
-              ...acc,
-              [label]: response[key],
-            }
-          : acc
-      }, {})
-    : response
+      return key !== 'subtotal'
+        ? {
+            ...acc,
+            [label]: response[key],
+          }
+        : acc
+    }, {})
 }
 
 /* 

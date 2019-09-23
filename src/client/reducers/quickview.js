@@ -30,7 +30,7 @@ export const initialState = fromJS({
   loading: false,
 })
 
-const quickviewReducer = (state = initialState, action) => {
+export const quickviewReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_QUICKVIEW_ITEMS_REQUEST:
       return state.set('loading', fromJS(true))

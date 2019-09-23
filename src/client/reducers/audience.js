@@ -181,7 +181,7 @@ export const initialState = fromJS({
   error: false,
 })
 
-const audienceReducer = (state = initialState, action) => {
+export const audienceReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_AUDIENCE_CONTENT_VITALITY_SCORE_DATA:
       return state

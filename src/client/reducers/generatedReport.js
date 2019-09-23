@@ -189,7 +189,7 @@ export const initialState = fromJS({
   },
 })
 
-const generatedReportsReducer = (state = initialState, action) => {
+export const generatedReportsReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.SET_GENERATED_SELECTED_VIDEO:
       return state.setIn(

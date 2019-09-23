@@ -188,7 +188,7 @@ export const initialState = fromJS({
   },
 })
 
-const libraryDetailReducer = (state = initialState, action) => {
+export const libraryDetailReducer = (state = initialState, action) => {
   switch (action.type) {
     case types.GET_SELECTED_VIDEO_REQUEST:
       return state.set('loading', fromJS(true))
