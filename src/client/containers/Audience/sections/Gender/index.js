@@ -5,7 +5,7 @@ import { compose, bindActionCreators } from 'redux'
 import { actions, makeSelectAudienceGender } from 'Reducers/audience'
 import Module from 'Components/Module'
 import HorizontalBarChart from 'Components/Charts/HorizontalBarChart'
-import { barChartOptions } from './options'
+import { barChartOptions } from './chartOptions'
 import { isDataSetEmpty } from 'Utils/datasets'
 import renderLegend from 'Components/Legend/render'
 
