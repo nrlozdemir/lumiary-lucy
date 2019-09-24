@@ -99,7 +99,6 @@ const convertDataIntoDatasets = (values, options, ...args) => {
         : compareBrands
         ? compareBrandChartColors[idx]
         : chartColors[idx]
-
       return singleDataset
         ? // only one dataset is required sometimes
           // ie. doughnut chart in panoptic/engagement
