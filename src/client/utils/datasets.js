@@ -251,25 +251,17 @@ const compareSharesData = (payload, options) => {
   })
 }
 
-const convertMultiRequestDataIntoDatasets = (
-  payload,
-  options,
+const mapMultirequestLabels = ({
   revert,
-  customOptions = {}
-) => {
+  datasetLabels,
+  firstPayloadLabels,
+  payload,
+  property,
+  customOptions
+}) => {
   const { backgroundColors = [], borderColors = [], borderWidth = 1 } = customOptions
-  const datasetLabels = Object.keys(payload)
-  const property = options.property[0]
-
-  // get first payload for labels
-  const firstPayload = payload[datasetLabels[0]].data
-  const firstPayloadBrand = Object.keys(firstPayload)[0]
-  const firstPayloadLabels = Object.keys(
-    firstPayload[firstPayloadBrand][property]
-  ).filter((key) => key !== 'subtotal')
-
   const mappingLabels = !revert ? datasetLabels : firstPayloadLabels
-  const datasets = (mappingLabels).map(
+  return (mappingLabels).map(
     (label, index) => {
       const mappingData = !revert ? firstPayloadLabels : datasetLabels
       const data = (mappingData).map((key) => {
@@ -292,6 +284,32 @@ const convertMultiRequestDataIntoDatasets = (
       }
     }
   )
+}
+
+const convertMultiRequestDataIntoDatasets = (
+  payload,
+  options,
+  revert,
+  customOptions = {}
+) => {
+  const datasetLabels = Object.keys(payload)
+  const property = options.property[0]
+
+  // get first payload for labels
+  const firstPayload = payload[datasetLabels[0]].data
+  const firstPayloadBrand = Object.keys(firstPayload)[0]
+  const firstPayloadLabels = Object.keys(
+    firstPayload[firstPayloadBrand][property]
+  ).filter((key) => key !== 'subtotal')
+
+  const datasets = mapMultirequestLabels({
+    revert,
+    datasetLabels,
+    firstPayloadLabels,
+    payload,
+    property,
+    customOptions
+  })
   return {
     labels: !revert
       ? firstPayloadLabels.map((key) => ucfirst(key))
