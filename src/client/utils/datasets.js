@@ -391,45 +391,8 @@ const convertColorTempToDatasets = (values = {}, sentiment = 'happy-sad') => {
   }
 }
 
-const parseAverage = (payload) => {
-  let calculateAverage = Object.keys(payload).reduce((acc, key) => {
-    const keyIncludesLibraryMax = key.includes('LibraryMax')
-    const objKeyValue = keyIncludesLibraryMax ? 'max' : 'average'
-    if(key !== 'video') {
-      const keyName = key.substr(0, key.indexOf('.'))
-      return {
-        ...acc,
-        [keyName]: {
-          ...acc[keyName],
-          [objKeyValue]: percentageBeautifier(payload[key]),          
-        }
-      }
-    }
-
-    return acc
-  }, {})
-
-  const getOrder = (keyName) => {
-    let order = 0
-    switch (keyName) {
-      case 'view':
-        order = 1
-        break
-      case 'like':
-        order = 2
-        break
-      case 'comment':
-        order = 3
-        break
-      case 'share':
-        order = 4
-        break
-      default:
-        order = 0
-    }
-    return order
-  }
-
+export const calculateAverageVideoMap = (payload, calculateAverageData) => {
+  let calculateAverage = calculateAverageData
   Object.keys(payload.video).forEach((payloadRow) => {
     const item = payloadRow
       .replace('cvScores.library_', '')
@@ -464,6 +427,49 @@ const parseAverage = (payload) => {
       order: getOrder(keyName),
     }
   })
+  return calculateAverage
+}
+
+const getOrder = (keyName) => {
+  let order = 0
+  switch (keyName) {
+    case 'view':
+      order = 1
+      break
+    case 'like':
+      order = 2
+      break
+    case 'comment':
+      order = 3
+      break
+    case 'share':
+      order = 4
+      break
+    default:
+      order = 0
+  }
+  return order
+}
+
+const parseAverage = (payload) => {
+  let calculateAverage = Object.keys(payload).reduce((acc, key) => {
+    const keyIncludesLibraryMax = key.includes('LibraryMax')
+    const objKeyValue = keyIncludesLibraryMax ? 'max' : 'average'
+    if(key !== 'video') {
+      const keyName = key.substr(0, key.indexOf('.'))
+      return {
+        ...acc,
+        [keyName]: {
+          ...acc[keyName],
+          [objKeyValue]: percentageBeautifier(payload[key]),          
+        }
+      }
+    }
+
+    return acc
+  }, {})
+
+  calculateAverage = calculateAverageVideoMap(payload, calculateAverage)
 
   const returnData = Object.values(calculateAverage).sort((a, b) => {
     return a.order > b.order
