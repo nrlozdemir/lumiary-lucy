@@ -719,23 +719,17 @@ const percentageBeautifier = (value, precision) => {
 }
 
 const mapBucketObjectArray = (item) => {
-  console.log('el : ', item)
   if (isNumber(item) && isFinite(item)) {
-    console.log('bucket el is number and finite : ', item)
     item = percentageBeautifier(item)
   } else if (isArray(item)) {
-    console.log('bucket el is array : ', item)
     item.forEach((arrayItem, index) => {
       if (isNumber(item[index])) {
-        console.log('bucket el index is number')
         item[index] = percentageBeautifier(arrayItem)
       } else {
-        console.log('bucket el index is not number')
         item[index] = percentageManipulation(item[index])
       }
     })
   } else if (isObject(item)) {
-    console.log('bucket el is object :', item)
     Object.keys(item).map((key, k) => {
       item[key] = percentageManipulation(item[key])
     })
@@ -744,63 +738,15 @@ const mapBucketObjectArray = (item) => {
 }
 
 const percentageManipulation = (bucket) => {
-  console.log('====================percentage man start==================')
   if (isObject(bucket)) {
-    console.log('bucket is object : ', bucket)
     Object.keys(bucket).map((el, i) => {
-      // console.log('el : ', el)
-      // if (isNumber(bucket[el]) && isFinite(bucket[el])) {
-      //   console.log('bucket el is number and finite : ', bucket[el])
-      //   bucket[el] = percentageBeautifier(bucket[el])
-      // } else if (isArray(bucket[el])) {
-      //   console.log('bucket el is array : ', bucket[el])
-      //   bucket[el].forEach((item, index) => {
-      //     if (isNumber(bucket[el][index])) {
-      //       console.log('bucket el index is number')
-      //       bucket[el][index] = percentageBeautifier(item)
-      //     } else {
-      //       console.log('bucket el index is not number')
-      //       bucket[el][index] = percentageManipulation(bucket[el][index])
-      //     }
-      //   })
-      // } else if (isObject(bucket[el])) {
-      //   console.log('bucket el is object :', bucket[el])
-      //   Object.keys(bucket[el]).map((key, k) => {
-      //     bucket[el][key] = percentageManipulation(bucket[el][key])
-      //   })
-      // }
       bucket[el] = mapBucketObjectArray(bucket[el])
     })
   } else if (isArray(bucket)) {
-    console.log('bucket is array : ', bucket)
     bucket.forEach((item, index) => {
-      // console.log('item : ', item)
-      // if (isNumber(bucket[index]) && isFinite(bucket[index])) {
-      //   console.log('bucket el is number and finite : ', bucket[index])
-      //   bucket[index] = percentageBeautifier(item)
-      // } else if (isArray(bucket[index])) {
-      //   console.log('bucket index is array : ', bucket[index])
-      //   bucket[index].forEach((arrayItem, arrayIndex) => {
-      //     if (isNumber(bucket[index][arrayIndex])) {
-      //       console.log('bucket index arrayIndex is number : ', bucket[index][arrayIndex])
-      //       bucket[index][arrayIndex] = percentageBeautifier(arrayItem)
-      //     } else {
-      //       console.log('bucket index arrayIndex is not number : ')
-      //       bucket[index][arrayIndex] = percentageManipulation(
-      //         bucket[index][arrayIndex]
-      //       )
-      //     }
-      //   })
-      // } else if (isObject(bucket[index])) {
-      //   console.log('bucket index is obj : ', bucket[index])
-      //   Object.keys(bucket[index]).map((key, k) => {
-      //     bucket[index][key] = percentageManipulation(bucket[index][key])
-      //   })
-      // }
       bucket[index] = mapBucketObjectArray(bucket[index])
     })
   } else if (isNumber(bucket) && isFinite(bucket)) {
-    console.log('bucket is number : ', bucket)
     return percentageBeautifier(bucket)
   }
 
