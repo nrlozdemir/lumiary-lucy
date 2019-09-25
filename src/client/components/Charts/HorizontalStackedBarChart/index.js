@@ -135,26 +135,6 @@ class HorizontalStackedBarChart extends React.Component {
         stadiumValuesMapped[thisBucketLabel].color,
       borderColor: colors.chartBackground && colors.chartBackground,
       borderWidth: 2,
-      //here we set border right for eact item in a row but exept only last one
-      //the calculation below is for, we should prevent setting border if we have
-      //just one data and it will be last item at the same time
-      borderWidth: function(data) {
-        if (
-          data.datasetIndex !== data.dataset.data.length - 1 &&
-          reorderDatasetByLabel[data.dataIndex]
-        ) {
-          const filteredArr = reorderDatasetByLabel[data.dataIndex].filter(
-            (item, index) => index !== data.datasetIndex
-          )
-          const isOnlyOneData = filteredArr.every((item) => item === 0)
-          if (!isOnlyOneData) {
-            return {
-              right: 2,
-            }
-          }
-        }
-      },
-      // borderSkipped: 'left',
       data: labels.map((label) => {
         return horizontalStackedBarDataOriginal[label][thisBucketLabel]
       }),
