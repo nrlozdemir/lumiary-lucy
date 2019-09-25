@@ -515,19 +515,7 @@ const parseAverage = (payload) => {
     maxEngagement: {int}
   }]
  */
-const convertVideoEngagementData = (data, metric = 'views') => {
-  if (isEmpty(data)) {
-    return {}
-  }
-
-  const objectKeys = Object.keys(data)
-
-  const durationLabels = ['0-15', '16-30', '31-60', '60+']
-
-  const labels = objectKeys.includes(...durationLabels)
-    ? durationLabels
-    : objectKeys
-
+const mapProperty = ({ data, labels, metric, durationLabels }) => {
   const emptyData = {
     Tuesday: 0,
     Monday: 0,
@@ -548,14 +536,14 @@ const convertVideoEngagementData = (data, metric = 'views') => {
     },
   }
 
-  const propertyMap = labels.reduce((accumulator, key) => {
+  return labels.reduce((accumulator, key) => {
+    const label = labels === durationLabels ? getLabelWithSuffix(key, 'duration') : key
     if (!accumulator[key]) {
       accumulator[key] = {
         metric,
         maxVideo: 100, // always 100% max
         maxEngagement: 0,
-        label:
-          labels === durationLabels ? getLabelWithSuffix(key, 'duration') : key,
+        label,
         labels: [],
         datasets: [
           {
@@ -603,6 +591,42 @@ const convertVideoEngagementData = (data, metric = 'views') => {
 
     return accumulator
   }, {})
+}
+
+const convertVideoEngagementData = (data, metric = 'views') => {
+  if (isEmpty(data)) {
+    return {}
+  }
+
+  const objectKeys = Object.keys(data)
+
+  const durationLabels = ['0-15', '16-30', '31-60', '60+']
+
+  const labels = objectKeys.includes(...durationLabels)
+    ? durationLabels
+    : objectKeys
+
+  const emptyData = {
+    Tuesday: 0,
+    Monday: 0,
+    Sunday: 0,
+    Saturday: 0,
+    Friday: 0,
+    Thursday: 0,
+    Wednesday: 0,
+    total: 0,
+    [metric]: {
+      Tuesday: 0,
+      Monday: 0,
+      Sunday: 0,
+      Saturday: 0,
+      Friday: 0,
+      Thursday: 0,
+      Wednesday: 0,
+    },
+  }
+
+  const propertyMap = mapProperty({ data, labels, metric, durationLabels })
 
   return Object.values(propertyMap)
 }
