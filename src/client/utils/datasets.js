@@ -606,26 +606,6 @@ const convertVideoEngagementData = (data, metric = 'views') => {
     ? durationLabels
     : objectKeys
 
-  const emptyData = {
-    Tuesday: 0,
-    Monday: 0,
-    Sunday: 0,
-    Saturday: 0,
-    Friday: 0,
-    Thursday: 0,
-    Wednesday: 0,
-    total: 0,
-    [metric]: {
-      Tuesday: 0,
-      Monday: 0,
-      Sunday: 0,
-      Saturday: 0,
-      Friday: 0,
-      Thursday: 0,
-      Wednesday: 0,
-    },
-  }
-
   const propertyMap = mapProperty({ data, labels, metric, durationLabels })
 
   return Object.values(propertyMap)
